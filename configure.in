@@ -73,7 +73,7 @@ MICO_VERS=`(. $mico_prefix/lib/mico-setup.sh ; echo $MICOVERSION)`
 # has MICO older than 2.0.5. 
 
 if test $MICO_VERS = 2.0.5 ; then
-  MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lXt"
+  MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lmicocoss$MICO_VERS -lXt"
 else
   MICO_LIBS="-lmico$MICO_VERS -lmicogtk$MICO_VERS"
   AC_DEFINE(HAVE_MICO_ORB_RUN)
