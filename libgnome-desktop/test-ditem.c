@@ -9,12 +9,15 @@ static void G_GNUC_UNUSED
 boot_ditem (Bonobo_ConfigDatabase db)
 {
 	BonoboArg *arg;
+	CORBA_Environment ev;
 
 	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
 	bonobo_pbclient_set_value (db, "/Desktop Entry", arg, NULL);
 	bonobo_arg_release (arg);
 
-	Bonobo_ConfigDatabase_sync (db, NULL);
+	CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_sync (db, &ev);
+	CORBA_exception_free (&ev);
 }
 
 static void G_GNUC_UNUSED
@@ -52,12 +55,12 @@ main (int argc, char **argv)
 	g_assert (db != NULL);
 	g_assert (default_db != NULL);
 
-	boot_ditem (default_db);
+	// boot_ditem (default_db);
 
 	test_ditem (db);
 
         CORBA_exception_init (&ev);
-	Bonobo_ConfigDatabase_addDatabase (db, default_db, "", "/gnome-ditem/", &ev);
+	Bonobo_ConfigDatabase_addDatabase (db, default_db, "/gnome-ditem/", &ev);
 	g_assert (!BONOBO_EX (&ev));
 
 	dirlist = Bonobo_ConfigDatabase_getDirs (db, "", &ev);
@@ -90,13 +93,13 @@ main (int argc, char **argv)
 		printf ("type is %d - %s (%s)\n", type->kind, type->name, type->repo_id);
 
         CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_long, &ev);
+	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_CORBA_long, &ev);
 	if (value)
 		printf ("got value as long %d\n", BONOBO_ARG_GET_LONG (value));
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_string, &ev);
+	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_CORBA_string, &ev);
 	if (value)
 		printf ("got value as string %s\n", BONOBO_ARG_GET_STRING (value));
         CORBA_exception_free (&ev);
@@ -127,7 +130,7 @@ main (int argc, char **argv)
 	}
         CORBA_exception_init (&ev);
 
-	value = bonobo_arg_new (TC_long);
+	value = bonobo_arg_new (TC_CORBA_long);
 	BONOBO_ARG_SET_LONG (value, 5);
 	
 	Bonobo_ConfigDatabase_setValue (db, "/test", value, &ev);
@@ -150,7 +153,7 @@ main (int argc, char **argv)
 	Bonobo_ConfigDatabase_setValue (db, "/storagetype", value, &ev);
 	g_assert (!BONOBO_EX (&ev));
 
-	value = bonobo_arg_new (TC_string);
+	value = bonobo_arg_new (TC_CORBA_string);
 	BONOBO_ARG_SET_STRING (value, "a simple test");
 	Bonobo_ConfigDatabase_setValue (db, "a/b/c/d", value, &ev);
 	g_assert (!BONOBO_EX (&ev));
@@ -158,7 +161,7 @@ main (int argc, char **argv)
 	Bonobo_ConfigDatabase_removeDir (db, "/", &ev);
 	g_assert (!BONOBO_EX (&ev));
 
-	value = bonobo_arg_new (TC_long);
+	value = bonobo_arg_new (TC_CORBA_long);
 	BONOBO_ARG_SET_LONG (value, 5);
 	
 	Bonobo_ConfigDatabase_setValue (db, "/test", value, &ev);
