@@ -107,6 +107,7 @@ static gchar *contributors[] = {
 	"Dave Glowacki",
 	"Scott Goehring",
 	"Randy Gordon",
+	"Ted Gould",
 	"Kenny Graunke",
 	"Jamin Philip Gray",
 	"Dov Grobgeld",
