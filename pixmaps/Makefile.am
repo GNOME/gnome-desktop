@@ -51,6 +51,7 @@ BITMAPS     = \
 	gnome-networktool.png			\
 	gnome-note.png				\
 	gnome-qeye.png				\
+	gnome-squeak.png            \
 	gnome-talk.png				\
 	gnome-term-linux.png			\
 	gnome-term-linux2.png			\
@@ -90,7 +91,7 @@ BITMAPS     = \
 	gnome-ccwindowmanager.png \
 	gnome-cckeyboard-bell.png	\
 	gnome-cckeyboard.png	\
-	gnome-squeak.png
+	gnome-ccperiph.png      
 
 TILES     = \
 	tile-normal-up.png			\
