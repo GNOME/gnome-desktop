@@ -73,16 +73,16 @@ Panel libraries and header files for creating GNOME panels.
 %setup -q
 
 %build
-%configure --quiet --sysconfdir=/etc --localstatedir=/var/lib
+%configure --quiet --disable-gtkhtml-help --sysconfdir=/etc --localstatedir=/var/lib
 CFLAGS="$RPM_OPT_FLAGS" make
 
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
 make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT/etc install >install.log 2>&1
-if [ -d $RPM_BUILD_ROOT%{_prefix}/bin ] ; then
- strip `file $RPM_BUILD_ROOT%{_prefix}/bin/* | grep ELF | cut -d':' -f 1`
-fi
+#if [ -d $RPM_BUILD_ROOT%{_prefix}/bin ] ; then
+# strip `file $RPM_BUILD_ROOT%{_prefix}/bin/* | grep ELF | cut -d':' -f 1`
+#fi
 if [ -d $RPM_BUILD_ROOT/usr/man ]; then
   find $RPM_BUILD_ROOT/usr/man -type f -exec gzip -9f {} \;
 fi
