@@ -3,6 +3,7 @@ pixmapdir = $(datadir)/pixmaps
 BITMAPS     = \
 	UNIX-small.xpm				\
 	UNIX-transparent.xpm			\
+	UNIX.xpm				\
 	arrowup.xpm				\
 	gnome-balsa-small.xpm			\
 	gnome-balsa-transparent.xpm		\
@@ -50,6 +51,8 @@ BITMAPS     = \
 	gnome-word-small.xpm			\
 	gnome-word-transparent.xpm		\
 	gnome-word.xpm				\
+	gnome-unknown.xpm			\
+	gnome-term-night.xpm			\
 	launcher-program.xpm			\
 	monitor.xpm				\
 	netscape3-small.xpm			\
