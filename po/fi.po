@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1998-12-16 05:59-0500\n"
+"POT-Creation-Date: 1998-12-22 11:08-0500\n"
 "Content-Type: text/plain; charset=\n"
 "Date: 1998-04-27 21:34:19+0300\n"
 "From: Ville Hautamäki <villeh@cs.joensuu.fi>\n"
@@ -18,21 +18,23 @@ msgstr ""
 "gsm/main.c gsm/save-session.c help-browser/gnome-help-browser.c "
 "help-browser/window.c\n"
 
-#: applets/asclock/asclock.c:144 help-browser/window.c:158
+#: applets/asclock/asclock.c:144
 msgid "About"
 msgstr "Tiedot"
 
 #: applets/asclock/asclock.c:151 applets/clockmail/clockmail.c:428
-#: applets/diskusage/diskusage.c:710 applets/drivemount/drivemount.c:455
-#: applets/fish/fish.c:452 applets/gen_util/clock.c:268
-#: applets/gen_util/mailcheck.c:686 applets/gen_util/printer.c:404
-#: applets/icewm-pager/wmpager_applet.c:90
+#: applets/cpuload/cpuload.c:220 applets/diskusage/diskusage.c:710
+#: applets/drivemount/drivemount.c:455
+#: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:452
+#: applets/gen_util/clock.c:268 applets/gen_util/mailcheck.c:686
+#: applets/gen_util/printer.c:404 applets/gnome-pager/gnomepager_applet.c:1411
+#: applets/gticker/gticker.c:64 applets/icewm-pager/wmpager_applet.c:90
 #: applets/mini-commander/mini-commander_applet.c:135
 #: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
 #: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
 #: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:410 panel/launcher.c:266
-#: panel/menu.c:2231
+#: applets/webcontrol/webcontrol.c:314 help-browser/window.c:139
+#: panel/drawer.c:417 panel/launcher.c:266 panel/menu.c:2758
 msgid "Properties..."
 msgstr "Asetukset..."
 
@@ -44,96 +46,16 @@ msgstr "Afterstep-kelloikkuna"
 msgid "Who said NeXT is dead?"
 msgstr "Kuka sanoi, että NeXT on kuollut?"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
 #. ---
 #: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
-#: applets/diskusage/properties.c:322 applets/drivemount/properties.c:204
-#: applets/fvwm-pager/properties.c:246
-#: applets/mini-commander/preferences.c:616
+#: applets/cpuload/properties.c:216 applets/diskusage/properties.c:322
+#: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
+#: applets/gticker/properties.c:328 applets/mini-commander/preferences.c:616
 #: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
 #: applets/multiload/properties-mem.c:283
 #: applets/multiload/properties-swap.c:233 applets/netload/properties.c:276
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:876
-#: panel/panel_config_global.c:293
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:874
+#: panel/panel_config_global.c:300
 msgid "General"
 msgstr "Yleistä"
 
@@ -227,7 +149,7 @@ msgstr "APM-BIOSin versio:"
 msgid "Battery Status:"
 msgstr "Akun tilanne:"
 
-#: applets/batmon/batmon.c:405 help-browser/window.c:144
+#: applets/batmon/batmon.c:405 applets/gnome-pager/gnomepager_applet.c:2251
 msgid "Close"
 msgstr "Sulje"
 
@@ -235,7 +157,8 @@ msgstr "Sulje"
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr ""
 
-#: applets/battery/battery.c:395 applets/gen_util/clock.c:241
+#: applets/battery/battery.c:395 applets/cpuload/cpuload.c:202
+#: applets/freshapp/freshapp.c:38 applets/gen_util/clock.c:241
 #: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
 #: applets/netload/netload.c:320
 msgid "Can't create applet!\n"
@@ -253,8 +176,9 @@ msgstr "Akkumittarin asetukset"
 msgid "General Properties"
 msgstr "Yleiset asetukset"
 
-#: applets/battery/properties.c:45 applets/diskusage/properties.c:213
-#: applets/fvwm-pager/properties.c:178 applets/multiload/properties-cpu.c:141
+#: applets/battery/properties.c:45 applets/cpuload/properties.c:138
+#: applets/diskusage/properties.c:213 applets/fvwm-pager/properties.c:178
+#: applets/multiload/properties-cpu.c:141
 #: applets/multiload/properties-mem.c:192
 #: applets/multiload/properties-swap.c:143 applets/netload/properties.c:141
 msgid "Applet Height"
@@ -318,12 +242,14 @@ msgstr "APM on poissa päältä! Akun tietoja ei voida lukea."
 
 #: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
 #: applets/clockmail/clockmail.c:435 applets/dialer/dialer.c:162
-#: applets/drivemount/drivemount.c:461 applets/fifteen/fifteen.c:309
+#: applets/drivemount/drivemount.c:461
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:444 applets/gen_util/mailcheck.c:693
-#: applets/icewm-pager/wmpager_applet.c:82
-#: applets/modemlights/modemlights.c:725 applets/netload/netload.c:338
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
-#: panel/menu.c:1717
+#: applets/gkb/gkb.c:239 applets/gnome-pager/gnomepager_applet.c:1405
+#: applets/gticker/gticker.c:70 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:166 applets/modemlights/modemlights.c:725
+#: applets/netload/netload.c:338 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:306 panel/menu.c:1914
 msgid "About..."
 msgstr "Tietoja..."
 
@@ -373,12 +299,13 @@ msgstr ""
 "Gnome-paneelisovellus epätavallisten, näppäimistöltä puuttuvien merkkien "
 "valitsemiseksi. Julkaistu GNU GPL -lisenssillä"
 
-#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:29 applets/gticker/gticker.c:232
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:32
+#: applets/clockmail/clockmail.c:32 applets/gticker/gticker.c:235
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr ""
 
@@ -386,7 +313,8 @@ msgstr ""
 msgid "Clock and Mail Notify Applet"
 msgstr "Kello ja postin tulo -ikkuna"
 
-#: applets/clockmail/clockmail.c:36 applets/slashapp/slashapp.c:573
+#: applets/clockmail/clockmail.c:36 applets/gticker/gticker.c:237
+#: applets/jbc/jbc.c:71 applets/slashapp/slashapp.c:573
 msgid "(C) 1998"
 msgstr ""
 
@@ -458,6 +386,33 @@ msgstr "Teematiedosto (hakemisto):"
 msgid "Theme"
 msgstr "Teema"
 
+#: applets/cpuload/properties.c:126 applets/multiload/properties-cpu.c:133
+msgid "User Load"
+msgstr "Käyttäjät"
+
+#: applets/cpuload/properties.c:132 applets/multiload/properties-cpu.c:137
+msgid "System Load"
+msgstr "Systeemi"
+
+#: applets/cpuload/properties.c:144 applets/diskusage/properties.c:219
+#: applets/fvwm-pager/properties.c:184 applets/multiload/properties-cpu.c:149
+#: applets/multiload/properties-mem.c:200
+#: applets/multiload/properties-swap.c:151 applets/netload/properties.c:147
+#: panel/swallow.c:243
+msgid "Width"
+msgstr "Leveys"
+
+#: applets/cpuload/properties.c:159 applets/diskusage/properties.c:240
+#: applets/multiload/properties-cpu.c:169
+#: applets/multiload/properties-mem.c:220
+#: applets/multiload/properties-swap.c:171 applets/netload/properties.c:170
+msgid "Update Frequency"
+msgstr "Päivitystiheys"
+
+#: applets/cpuload/properties.c:213 applets/multiload/properties-cpu.c:228
+msgid "CPULoad Settings"
+msgstr "CPUlastin asetukset"
+
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
 msgstr "PPP-soittaja sovelle"
@@ -485,20 +440,6 @@ msgstr "Tekstin väri"
 #: applets/diskusage/properties.c:206
 msgid "Backgroundcolor"
 msgstr "Taustaväri"
-
-#: applets/diskusage/properties.c:219 applets/fvwm-pager/properties.c:184
-#: applets/multiload/properties-cpu.c:149
-#: applets/multiload/properties-mem.c:200
-#: applets/multiload/properties-swap.c:151 applets/netload/properties.c:147
-#: panel/swallow.c:243
-msgid "Width"
-msgstr "Leveys"
-
-#: applets/diskusage/properties.c:240 applets/multiload/properties-cpu.c:169
-#: applets/multiload/properties-mem.c:220
-#: applets/multiload/properties-swap.c:171 applets/netload/properties.c:170
-msgid "Update Frequency"
-msgstr "Päivitystiheys"
 
 #: applets/diskusage/properties.c:312
 msgid "Diskusage Settings"
@@ -576,6 +517,20 @@ msgstr "Mounttauspiste:"
 msgid "Use automount friendly status test"
 msgstr "Käytä automount-yhteensopivaa tilankokeilua"
 
+#: applets/esd-manager/esdmanager_applet.c:29
+#, fuzzy
+msgid "Esound MAnager Applet"
+msgstr "Pöydänsiirtoikkuna"
+
+#: applets/esd-manager/esdmanager_applet.c:29
+#: applets/gnome-pager/gnomepager_applet.c:105
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:31
+msgid "This does nothing useful"
+msgstr ""
+
 #: applets/fifteen/fifteen.c:36
 msgid "You win!"
 msgstr "Voitat!"
@@ -631,9 +586,9 @@ msgstr "Sinun GNOME-kalasi nimi:"
 msgid "The Animation Filename:"
 msgstr "Animaatiotiedosto"
 
-#: applets/fish/fish.c:218 gnome-terminal/gnome-terminal.c:992
-#: panel/menu.c:2173 panel/panel-util.c:180 panel/panel-util.c:218
-#: panel/panel-util.c:255 panel/panel_config.c:716 panel/swallow.c:233
+#: applets/fish/fish.c:218 gnome-terminal/gnome-terminal.c:990
+#: panel/menu.c:2700 panel/panel-util.c:180 panel/panel-util.c:218
+#: panel/panel-util.c:255 panel/panel_config.c:727 panel/swallow.c:233
 msgid "Browse"
 msgstr "Selaa"
 
@@ -689,6 +644,7 @@ msgid "About\t"
 msgstr "Tiedot\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:402 gmenu/gmenu.c:95
+#: help-browser/window.c:139
 msgid "Properties"
 msgstr "Asetukset"
 
@@ -700,17 +656,13 @@ msgstr "Aktiivisen ikkunan väri"
 msgid "Inactive Window Color"
 msgstr "Passiivisten ikkunoiden väri"
 
-#: applets/fvwm-pager/properties.c:141
+#: applets/fvwm-pager/properties.c:141 applets/fvwm-pager/properties.c:170
 msgid "Active Desktop Color"
 msgstr "Aktiivisen työpöydän väri"
 
 #: applets/fvwm-pager/properties.c:145 applets/fvwm-pager/properties.c:174
 msgid "Inactive Desktop Color"
 msgstr "Passiivisen työpöydän väri"
-
-#: applets/fvwm-pager/properties.c:170
-msgid "Active Dekstop Color"
-msgstr "Aktiivisen työpöydän väri"
 
 #: applets/fvwm-pager/properties.c:242
 #, fuzzy
@@ -841,6 +793,283 @@ msgstr "Tulostuskomento:"
 msgid "Printer"
 msgstr "Tulostin"
 
+#: applets/gkb/gkb.c:176
+#, fuzzy
+msgid "The GNOME KB Applet"
+msgstr "GNOME-kala -ikkuna"
+
+#: applets/gkb/gkb.c:176
+msgid "0.99"
+msgstr ""
+
+#: applets/gkb/gkb.c:177
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr ""
+
+#: applets/gkb/gkb.c:179
+#, fuzzy
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS.So long, and thanks for all the fish."
+msgstr ""
+"Tätä ikkunaa käytetään näppäimistökarttojen vaihtamiseen. Ei enempää. Se "
+"käyttää setxkbmap-ohjelmaa."
+
+#: applets/gkb/gkb.c:188
+msgid "gkb.xpm"
+msgstr ""
+
+#: applets/gkb/properties.c:107
+#, fuzzy
+msgid "Icon Selection"
+msgstr "Ikonin valinta"
+
+#: applets/gkb/properties.c:223
+#, fuzzy
+msgid "GKB settings"
+msgstr "Asetukset"
+
+#: applets/gkb/properties.c:254 applets/gkb/properties.c:273
+msgid ""
+"Couldn't\n"
+"load\n"
+"icon"
+msgstr "Ikonia ei löytynyt"
+
+#: applets/gkb/properties.c:287
+msgid "Xkb"
+msgstr ""
+
+#: applets/gkb/properties.c:293
+msgid "Xmodmap"
+msgstr ""
+
+#: applets/gkb/properties.c:308 panel/menu.c:2713
+msgid "Menu"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:105
+#: applets/icewm-pager/wmpager_applet.c:217
+msgid "Desktop Pager Applet"
+msgstr "Pöydänsiirtoikkuna"
+
+#: applets/gnome-pager/gnomepager_applet.c:107
+msgid "Pager for a GNOME compliant Window Manager"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:310
+#, fuzzy
+msgid "Gnome Pager Settings"
+msgstr "Levynkäytön asetukset"
+
+#: applets/gnome-pager/gnomepager_applet.c:314
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
+msgid "Display"
+msgstr "Näyttö"
+
+#: applets/gnome-pager/gnomepager_applet.c:315
+msgid "Show all tasks on all desktops"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:323
+#, fuzzy
+msgid "Show tasks"
+msgstr "Näytä osasto"
+
+#: applets/gnome-pager/gnomepager_applet.c:331
+#, fuzzy
+msgid "Show pager"
+msgstr "Näytä osasto"
+
+#: applets/gnome-pager/gnomepager_applet.c:339
+msgid "Use small pagers"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:347
+#, fuzzy
+msgid "Show icons in tasks"
+msgstr "Näytä aihekuvat"
+
+#: applets/gnome-pager/gnomepager_applet.c:361
+msgid "Maximum width of horizontal task list"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:374
+msgid "Number of rows of horizontal tasks"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:387
+msgid "Number of vertical columns of tasks"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:400
+msgid "Number rows of pagers"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:1327
+#, fuzzy
+msgid "Gnome Pager Error"
+msgstr "Gnome ohjeselain"
+
+#: applets/gnome-pager/gnomepager_applet.c:1328
+msgid ""
+"You are not running a GNOME Compliant Window Manager.\n"
+"Please run a GNOME Compliant Window Manager.\n"
+"For Example:\n"
+"Enlightenment (DR-0.15)\n"
+"Then start this applet again.\n"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:1655
+msgid "Sticky"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:2227
+#, fuzzy
+msgid "Show / Hide"
+msgstr "Näytä osasto"
+
+#: applets/gnome-pager/gnomepager_applet.c:2239
+msgid "Shade / Unshade"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:2263
+msgid "Nuke"
+msgstr ""
+
+#: applets/gticker/gticker.c:56
+#, fuzzy
+msgid "Loading headlines..."
+msgstr "Lataan otsikkoja........."
+
+#: applets/gticker/gticker.c:75
+#, fuzzy
+msgid "Show Article Listing"
+msgstr "Näytä artikkelilista"
+
+#: applets/gticker/gticker.c:80
+#, fuzzy
+msgid "Refresh Articles"
+msgstr "Piirrä uudestaan"
+
+#: applets/gticker/gticker.c:234 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr ""
+
+#: applets/gticker/gticker.c:237
+msgid "GTicker"
+msgstr ""
+
+#: applets/gticker/gticker.c:238
+msgid "Ticker for the GNOME Project\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:251
+msgid "GTicker Article List"
+msgstr ""
+
+#: applets/gticker/gticker.c:356 applets/slashapp/slashapp.c:152
+#, fuzzy
+msgid "No articles"
+msgstr "Ei sähköpostia."
+
+#: applets/gticker/gticker.c:413 applets/slashapp/slashapp.c:255
+#: gmenu/gmenu.c:229
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "luon käyttäjän hakemistoa: %s\n"
+
+#: applets/gticker/gticker.c:416
+#, fuzzy, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
+msgstr "mahdotonta luoda käyttäjän hakemistoa: %s\n"
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+#, fuzzy
+msgid "Articles"
+msgstr "Artikkelit"
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr "Näytä aihekuvat"
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr "Näytä osasto"
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Näytä lisätietoja (Aika, Tekijä, Kommenttien määrä)"
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "Artikkelien välinen viive (10 = 1 sekunti):"
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(Nämä asetukset tulevat voimaan vasta virkistyksen jälkeen)"
+
+#: applets/gticker/properties.c:231 applets/slashapp/properties.c:249
+#, fuzzy
+msgid "Browser"
+msgstr " Selaa... "
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+#, fuzzy
+msgid "Open new window"
+msgstr "Avaa uusi selainikkuna"
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr "Tikkeritieto (ei vielä)"
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:116
+msgid "Url:"
+msgstr ""
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr "Artikkelitiedosto:"
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr "Kuvaserverin Url:"
+
+#: applets/gticker/properties.c:312
+msgid "Image path:"
+msgstr "Kuvapolku:"
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1069
+msgid "Scrolling"
+msgstr "Vieritys"
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr "Pehmeä vieritys"
+
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr "Pehmeä kirjasinlaji"
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Nopeus"
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr "Viive tekstiä wrapatessa"
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "Rivien välinen vieritysnopeus (pehmeä vieritys):"
+
 #. FIXME: This should check to make sure icewm (or equiv) is running.
 #. Not sure if it is working though...
 #: applets/icewm-pager/wmpager_applet.c:53
@@ -850,10 +1079,6 @@ msgstr ""
 "Käyttääksesi tätä ikkunaa sinulla täytää olla window manager, jossa on "
 "XA_-laajennus.\n"
 
-#: applets/icewm-pager/wmpager_applet.c:217
-msgid "Desktop Pager Applet"
-msgstr "Pöydänsiirtoikkuna"
-
 #: applets/icewm-pager/wmpager_applet.c:218
 msgid "Copyright (C)1998 M.Watson"
 msgstr ""
@@ -862,17 +1087,22 @@ msgstr ""
 msgid "Failed to retrieve workspace property."
 msgstr "Työpöytää ei voitu hakea"
 
-#: applets/mini-commander/mini-commander_applet.c:125
-msgid "Mini-Commander"
+#: applets/jbc/jbc.c:66
+msgid "Jon Anhold <jon@snoopy.net>"
 msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:142
-#, fuzzy
-msgid "Help & About..."
-msgstr "Tietoja..."
+#: applets/jbc/jbc.c:67
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:146
-msgid "ready..."
+#: applets/jbc/jbc.c:70
+msgid "Jon's Binary Clock"
+msgstr ""
+
+#: applets/jbc/jbc.c:73
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
 msgstr ""
 
 #: applets/mini-commander/about.c:33
@@ -926,6 +1156,19 @@ msgstr ""
 
 #: applets/mini-commander/message.c:103
 msgid "%d. %b"
+msgstr ""
+
+#: applets/mini-commander/mini-commander_applet.c:125
+msgid "Mini-Commander"
+msgstr ""
+
+#: applets/mini-commander/mini-commander_applet.c:142
+#, fuzzy
+msgid "Help & About..."
+msgstr "Tietoja..."
+
+#: applets/mini-commander/mini-commander_applet.c:146
+msgid "ready..."
 msgstr ""
 
 #: applets/mini-commander/preferences.c:91
@@ -993,7 +1236,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/preferences.c:538
-#: gnome-terminal/gnome-terminal.c:1024
+#: gnome-terminal/gnome-terminal.c:1022
 msgid "Colors"
 msgstr "Värit"
 
@@ -1103,18 +1346,6 @@ msgstr "Käytä DPMS:ää"
 msgid "Advanced"
 msgstr "Edistynyt"
 
-#: applets/multiload/properties-cpu.c:133
-msgid "User Load"
-msgstr "Käyttäjät"
-
-#: applets/multiload/properties-cpu.c:137
-msgid "System Load"
-msgstr "Systeemi"
-
-#: applets/multiload/properties-cpu.c:228
-msgid "CPULoad Settings"
-msgstr "CPUlastin asetukset"
-
 #: applets/multiload/properties-mem.c:167
 msgid "Used Memory"
 msgstr "Käytetty muisti"
@@ -1198,82 +1429,9 @@ msgstr "Verkonkuormitusmittarin asetukset"
 msgid "Device"
 msgstr "Laite"
 
-#: applets/slashapp/properties.c:199
-#, fuzzy
-msgid "Articles"
-msgstr "Artikkelit"
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr "Näytä aihekuvat"
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr "Näytä osasto"
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr "Näytä lisätietoja (Aika, Tekijä, Kommenttien määrä)"
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr "Artikkelien välinen viive (10 = 1 sekunti):"
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr "(Nämä asetukset tulevat voimaan vasta virkistyksen jälkeen)"
-
-#: applets/slashapp/properties.c:249
-#, fuzzy
-msgid "Browser"
-msgstr " Selaa... "
-
-#: applets/slashapp/properties.c:258
-#, fuzzy
-msgid "Open new window"
-msgstr "Avaa uusi selainikkuna"
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1071
-msgid "Scrolling"
-msgstr "Vieritys"
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr "Pehmeä vieritys"
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr "Pehmeä kirjasinlaji"
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr "Nopeus"
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr "Viive tekstiä wrapatessa"
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr "Rivien välinen vieritysnopeus (pehmeä vieritys):"
-
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "Näyttö"
-
-#: applets/slashapp/slashapp.c:152
-#, fuzzy
-msgid "No articles"
-msgstr "Ei sähköpostia."
-
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr "Slashapp artikkelilista"
-
-#: applets/slashapp/slashapp.c:255 gmenu/gmenu.c:229
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "luon käyttäjän hakemistoa: %s\n"
 
 #: applets/slashapp/slashapp.c:258 gmenu/gmenu.c:232
 #, c-format
@@ -1283,10 +1441,6 @@ msgstr "mahdotonta luoda käyttäjän hakemistoa: %s\n"
 #: applets/slashapp/slashapp.c:532
 msgid "No articles found"
 msgstr "Artikkeleita ei löydy"
-
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr ""
 
 #: applets/slashapp/slashapp.c:567
 msgid "Craig Small <csmall@small.dropbear.co.uk>"
@@ -1333,11 +1487,6 @@ msgstr ""
 "Tämä ikkuna lähettää getURL-komentoja netscapelle. Jatkossa aiomme tukea "
 "myös muita selaimia."
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:116
-msgid "Url:"
-msgstr ""
-
 #: applets/webcontrol/webcontrol.c:119
 #, fuzzy
 msgid "Clear"
@@ -1362,6 +1511,452 @@ msgstr "Näytä \"Uusi ikkuna\"-optio"
 #: applets/webcontrol/webcontrol.c:230
 msgid "Look"
 msgstr "Katso"
+
+#: desktop-properties/app-background.c:15
+msgid "Background Properties"
+msgstr "Tausta-asetukset"
+
+#: desktop-properties/app-bell.c:11
+msgid "Bell Properties"
+msgstr "Kellon asetukset"
+
+#: desktop-properties/app-keyboard.c:11
+msgid "Keyboard Properties"
+msgstr "Näppäimistöasetukset"
+
+#: desktop-properties/app-mouse.c:11
+msgid "Mouse Properties"
+msgstr "Hiiren asetukset"
+
+#: desktop-properties/app-ui.c:32
+msgid "Gnome Look and Feel Properties"
+msgstr "Gnomen käyttöliittymäasetukset"
+
+#: desktop-properties/args.c:8 desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr "Palauta edelliset asetukset ja poistu"
+
+#: desktop-properties/property-background.c:494 panel/panel_config.c:704
+msgid "Color"
+msgstr "Väri"
+
+#: desktop-properties/property-background.c:518
+msgid "Flat"
+msgstr "Tasainen"
+
+#: desktop-properties/property-background.c:524
+msgid "Gradient"
+msgstr "Liukusävy"
+
+#: desktop-properties/property-background.c:539 panel/panel_config.c:547
+msgid "Vertical"
+msgstr "Pysty"
+
+#. Horizontal
+#: desktop-properties/property-background.c:545 panel/panel_config.c:534
+msgid "Horizontal"
+msgstr "Vaaka"
+
+#: desktop-properties/property-background.c:690
+msgid "Wallpaper Selection"
+msgstr "Taustakuvan valinta"
+
+#: desktop-properties/property-background.c:729
+msgid "Wallpaper"
+msgstr "Taustakuva"
+
+#: desktop-properties/property-background.c:732
+msgid " Browse... "
+msgstr " Selaa... "
+
+#: desktop-properties/property-background.c:737
+msgid "none"
+msgstr "ei mitään"
+
+#: desktop-properties/property-background.c:781
+msgid "Scaled"
+msgstr "Suurennos"
+
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr "Suurennos (säilytä kuvan suhteet)"
+
+#: desktop-properties/property-background.c:801
+msgid "Centered"
+msgstr "Keskellä"
+
+#: desktop-properties/property-background.c:812
+msgid "Tiled"
+msgstr "Vierekkäin"
+
+#: desktop-properties/property-background.c:1006
+msgid " Background "
+msgstr " Tausta "
+
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr "Asettaa taustan annettuun arvoon"
+
+#: desktop-properties/property-background.c:1059
+#: desktop-properties/property-background.c:1060
+#: gnome-terminal/gnome-terminal.c:1764 gnome-terminal/gnome-terminal.c:1767
+msgid "COLOR"
+msgstr ""
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr "Antaa taustan värin"
+
+#: desktop-properties/property-background.c:1060
+msgid "Specifies end background color for gradient"
+msgstr "Antaa taustan loppuvärin liukusävylle"
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr ""
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Gradientin suunta: pysty vai vaaka"
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr "Tasavärinen tausta"
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr "Liukusävyinen tausta"
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "Taustakuva: vierekkäin, suurennettu vai suhteet pitäen"
+
+#: desktop-properties/property-bell.c:123
+msgid "Sound"
+msgstr "Ääni"
+
+#: desktop-properties/property-bell.c:142
+msgid "Volume"
+msgstr "Voimakkuus"
+
+#: desktop-properties/property-bell.c:163
+msgid "Pitch"
+msgstr "Korkeus"
+
+#: desktop-properties/property-bell.c:184
+msgid "Duration"
+msgstr "Kesto"
+
+#: desktop-properties/property-bell.c:214
+msgid "Test"
+msgstr "Kokeile"
+
+#: desktop-properties/property-bell.c:228
+msgid "Bell"
+msgstr "Piippaus"
+
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr "Näppäimen toisto"
+
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "Toista näppäimet"
+
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Toistonopeus"
+
+#: desktop-properties/property-keyboard.c:207
+msgid "Repeat delay"
+msgstr "Toistoviive"
+
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "Näppäinten naksaus"
+
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Naksaus näppäimenpainalluksella"
+
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "Naksauksen äänenvoimakkuus"
+
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr "Näppäimistö"
+
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:215
+msgid "Mouse buttons"
+msgstr "Hiiren napit"
+
+#: desktop-properties/property-mouse.c:224
+msgid "Left handed"
+msgstr "Vasenkätinen"
+
+#: desktop-properties/property-mouse.c:226
+msgid "Right handed"
+msgstr "Oikeakätinen"
+
+#. Mouse motion
+#: desktop-properties/property-mouse.c:243
+msgid "Mouse motion"
+msgstr "Hiiren liike"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Acceleration"
+msgstr "Kiihdytys"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Fast"
+msgstr "Nopea"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Slow"
+msgstr "Hidas"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Threshold"
+msgstr "Rajapiste"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Large"
+msgstr "Suuri"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Small"
+msgstr "Pieni"
+
+#: desktop-properties/property-mouse.c:274
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: desktop-properties/property-ui.c:55
+msgid "Default Gtk setting [FIXME - Describe this better]"
+msgstr "Gtk:n oletusasetukset"
+
+#: desktop-properties/property-ui.c:56
+msgid "Spread buttons out"
+msgstr "Levitä napit"
+
+#: desktop-properties/property-ui.c:57
+msgid "Put buttons on edges"
+msgstr "Laita napit reunoille"
+
+#: desktop-properties/property-ui.c:58
+msgid "Left-justify buttons"
+msgstr "Laita napit vasempaan laitaan"
+
+#: desktop-properties/property-ui.c:59
+msgid "Right-justify buttons"
+msgstr "Laita napit oikeaan laitaan"
+
+#: desktop-properties/property-ui.c:65
+msgid "Let window manager decide"
+msgstr "Anna window managerin päättää"
+
+#: desktop-properties/property-ui.c:66
+msgid "Center of the screen"
+msgstr "Näytön keskipiste"
+
+#: desktop-properties/property-ui.c:67
+msgid "At the mouse pointer"
+msgstr "Hiiren kohdalla"
+
+#: desktop-properties/property-ui.c:73
+msgid "Dialogs are like other windows"
+msgstr "Dialogit ovat kuten muut ikkunat"
+
+#: desktop-properties/property-ui.c:74
+msgid "Dialogs are treated specially by window manager"
+msgstr "Window manager käsittelee dialogeja erikoisesti"
+
+#: desktop-properties/property-ui.c:81
+msgid "Notebook"
+msgstr "Muistikirja"
+
+#: desktop-properties/property-ui.c:82
+msgid "Toplevel"
+msgstr "Pääikkuna"
+
+#: desktop-properties/property-ui.c:83
+msgid "Modal"
+msgstr "Modaalinen ikkuna"
+
+#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:763
+#: panel/panel_config.c:308
+msgid "Left"
+msgstr "Vasen"
+
+#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:764
+#: panel/panel_config.c:319
+msgid "Right"
+msgstr "Oikea"
+
+#. Top Position
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:286
+msgid "Top"
+msgstr "Yläreuna"
+
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:297
+msgid "Bottom"
+msgstr "Alin"
+
+#: desktop-properties/property-ui.c:194
+msgid "Dialog buttons"
+msgstr "Dialoginapit"
+
+#: desktop-properties/property-ui.c:199
+msgid "Dialog position"
+msgstr "Dialogin paikka"
+
+#: desktop-properties/property-ui.c:204
+msgid "Dialog hints"
+msgstr "Dialogin vihjeet"
+
+#: desktop-properties/property-ui.c:211
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Käytä statusbaria dialogin sijaan jos mahdollista"
+
+#: desktop-properties/property-ui.c:221
+msgid "Place dialogs over application window when possible"
+msgstr "Laita dialogit sovelluksen päälle jos mahdollista"
+
+#: desktop-properties/property-ui.c:232
+msgid "Dialogs"
+msgstr "Dialogit"
+
+#: desktop-properties/property-ui.c:238
+msgid "Menubars are detachable"
+msgstr "Menut ovat irrotettavia"
+
+#: desktop-properties/property-ui.c:247
+#, fuzzy
+msgid "Menubars have relieved border"
+msgstr "Työkalupakin napeissa on reuna"
+
+#: desktop-properties/property-ui.c:256
+msgid "Toolbars are detachable"
+msgstr "Työkalupakit ovat irroitettavia"
+
+#: desktop-properties/property-ui.c:265
+msgid "Toolbar buttons have relieved border"
+msgstr "Työkalupakin napeissa on reuna"
+
+#: desktop-properties/property-ui.c:274
+#, fuzzy
+msgid "Toolbars have flat look"
+msgstr "Työkalupakit ovat irroitettavia"
+
+#: desktop-properties/property-ui.c:283
+#, fuzzy
+msgid "Toolbars have line separators"
+msgstr "Työkalupakin napeissa on reuna"
+
+#: desktop-properties/property-ui.c:292
+#, fuzzy
+msgid "Toolbars have text labels"
+msgstr "Työkalupakit ovat irroitettavia"
+
+#: desktop-properties/property-ui.c:301
+msgid "Statusbar is interactive when possible"
+msgstr "Tilarivi on vuorovaikutteinen jos mahdollista"
+
+#: desktop-properties/property-ui.c:310
+#, fuzzy
+msgid "Dialog buttons have icons"
+msgstr "Dialoginapeilla on ikonit"
+
+#: desktop-properties/property-ui.c:319
+msgid "Menu items have icons"
+msgstr "Menuissa on ikoneita"
+
+#: desktop-properties/property-ui.c:328
+msgid "Application"
+msgstr "Sovellus"
+
+#: desktop-properties/property-ui.c:333
+msgid "Default MDI mode"
+msgstr "Oletusarvoinen MDI-moodi"
+
+#: desktop-properties/property-ui.c:338
+msgid "MDI notebook tab position"
+msgstr "MDI-muistikirjan asema"
+
+#: desktop-properties/property-ui.c:344
+msgid "MDI"
+msgstr ""
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
 
 #: gmenu/dialogs.c:39
 msgid "File exists."
@@ -1447,11 +2042,11 @@ msgstr ""
 msgid "Save Changes?"
 msgstr "Talletetaanko muutokset?"
 
-#: gmenu/dialogs.c:402
+#: gmenu/dialogs.c:403
 msgid "Overwrite existing file?"
 msgstr "Tiedosto on olemassa, kirjoitanko sen päälle?"
 
-#: gmenu/dialogs.c:408
+#: gmenu/dialogs.c:412
 msgid "Save file?"
 msgstr "Talleta tiedosto?"
 
@@ -1493,12 +2088,12 @@ msgstr "Järjestä Kansio _Rekursiivisesti"
 
 #. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
 #. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1185
+#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1183
 #, fuzzy
 msgid "_About..."
 msgstr "_Tietoja..."
 
-#: gmenu/gmenu.c:74
+#: gmenu/gmenu.c:74 help-browser/window.c:182
 #, fuzzy
 msgid "_File"
 msgstr "_Tiedosto"
@@ -1507,7 +2102,7 @@ msgstr "_Tiedosto"
 msgid "_Sort"
 msgstr "_Järjestä"
 
-#: gmenu/gmenu.c:78
+#: gmenu/gmenu.c:78 help-browser/window.c:184
 #, fuzzy
 msgid "_Help"
 msgstr "_Ohje"
@@ -1585,7 +2180,7 @@ msgid "GNOME"
 msgstr ""
 
 #. system's menu tree
-#: gmenu/tree.c:543 panel/menu.c:1506 panel/menu.c:1543 panel/menu.c:1765
+#: gmenu/tree.c:543
 msgid "System Menus"
 msgstr "Systeemimenut"
 
@@ -1594,7 +2189,7 @@ msgid "Top of system menus"
 msgstr "Systeemimenujen yläraja"
 
 #. user's menu tree
-#: gmenu/tree.c:560 panel/menu.c:1526 panel/menu.c:1553 panel/menu.c:1776
+#: gmenu/tree.c:560
 msgid "User Menus"
 msgstr "Käyttäjämenut"
 
@@ -1610,18 +2205,18 @@ msgstr "GNOME-pääte"
 msgid "The GNOME terminal emulation program."
 msgstr "Gnomen pääte-emulaattoriohjelma"
 
-#: gnome-terminal/gnome-terminal.c:420 gnome-terminal/gnome-terminal.c:915
-#: gnome-terminal/gnome-terminal.c:925
+#: gnome-terminal/gnome-terminal.c:416 gnome-terminal/gnome-terminal.c:913
+#: gnome-terminal/gnome-terminal.c:923
 #, fuzzy
 msgid "Default"
 msgstr "Oletukset"
 
-#: gnome-terminal/gnome-terminal.c:421
+#: gnome-terminal/gnome-terminal.c:417
 #, fuzzy
 msgid "Config"
 msgstr "Muuta asetuksia"
 
-#: gnome-terminal/gnome-terminal.c:587
+#: gnome-terminal/gnome-terminal.c:584
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1630,241 +2225,224 @@ msgstr ""
 "Olet vaihtanut tämän ikkunan luokan. Haluatko\n"
 "muuttaa tätä ikkunaa uuden luokan oletuksia vastaavaksi?"
 
-#: gnome-terminal/gnome-terminal.c:750
+#: gnome-terminal/gnome-terminal.c:747
 msgid "Linux console"
 msgstr "Linux-konsoli"
 
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:748
 msgid "Color Xterm"
 msgstr "Väri-Xterm"
 
-#: gnome-terminal/gnome-terminal.c:752
+#: gnome-terminal/gnome-terminal.c:749
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:754
 msgid "White on black"
 msgstr "Valkoinen mustalla"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:755
 msgid "Black on white"
 msgstr "Musta valkoisella"
 
-#: gnome-terminal/gnome-terminal.c:759
+#: gnome-terminal/gnome-terminal.c:756
 msgid "Green on black"
 msgstr "Vihreä mustalla"
 
-#: gnome-terminal/gnome-terminal.c:760
+#: gnome-terminal/gnome-terminal.c:757
 msgid "Black on light yellow"
 msgstr "Musta keltaisella"
 
-#: gnome-terminal/gnome-terminal.c:761
+#: gnome-terminal/gnome-terminal.c:758
 msgid "Custom colors"
 msgstr "Omat värit"
 
-#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:297
-msgid "Left"
-msgstr "Vasen"
-
-#: gnome-terminal/gnome-terminal.c:767 panel/panel_config.c:308
-msgid "Right"
-msgstr "Oikea"
-
-#: gnome-terminal/gnome-terminal.c:768
+#: gnome-terminal/gnome-terminal.c:765
 msgid "Hidden"
 msgstr "Piilotettu"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:879
+#: gnome-terminal/gnome-terminal.c:877
 msgid "Font:"
 msgstr "Kirjasinlaji:"
 
-#: gnome-terminal/gnome-terminal.c:899
+#: gnome-terminal/gnome-terminal.c:897
 #, fuzzy
 msgid "Browse..."
 msgstr " Selaa... "
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:907
+#: gnome-terminal/gnome-terminal.c:905
 msgid "Terminal Class"
 msgstr "Päätteen luokka"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:935
+#: gnome-terminal/gnome-terminal.c:933
 msgid "Blinking cursor"
 msgstr "Vilkkuva kursori"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:944
+#: gnome-terminal/gnome-terminal.c:942
 msgid "Hide menu bar"
 msgstr "Piilota menupalkki"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:953
+#: gnome-terminal/gnome-terminal.c:951
 msgid "Silence Terminal bell"
 msgstr "Hiljennä kello"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:962
+#: gnome-terminal/gnome-terminal.c:960
 msgid "Swap DEL/Backspace"
 msgstr "Vaihta DEL/Backspace"
 
-#: gnome-terminal/gnome-terminal.c:976
+#: gnome-terminal/gnome-terminal.c:974
 #, fuzzy
 msgid "Image"
 msgstr "Kuvatiedosto"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:980
+#: gnome-terminal/gnome-terminal.c:978
 #, fuzzy
 msgid "Background pixmap"
 msgstr " Taustakuva "
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:989
+#: gnome-terminal/gnome-terminal.c:987
 #, fuzzy
 msgid "Pixmap file:"
 msgstr "Postitiedosto:"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1004
+#: gnome-terminal/gnome-terminal.c:1002
 msgid "Transparent"
 msgstr "Läpinäkyvä"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1013
+#: gnome-terminal/gnome-terminal.c:1011
 msgid "Background should be shaded (slow)"
 msgstr "Varjostettu tausta (hidas)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1027
+#: gnome-terminal/gnome-terminal.c:1025
 msgid "Color palette:"
 msgstr "Paletti:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1037
+#: gnome-terminal/gnome-terminal.c:1035
 msgid "Foreground color:"
 msgstr "Kirjoituksen väri:"
 
-#: gnome-terminal/gnome-terminal.c:1046
+#: gnome-terminal/gnome-terminal.c:1044
 msgid "Background color:"
 msgstr "Taustan väri:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1058
+#: gnome-terminal/gnome-terminal.c:1056
 msgid "Colors:"
 msgstr "Värit:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1074
+#: gnome-terminal/gnome-terminal.c:1072
 msgid "Scrollbar position"
 msgstr "Vierittimen asema"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1085
+#: gnome-terminal/gnome-terminal.c:1083
 msgid "Scrollback lines"
 msgstr "Vierityspuskurin rivimäärä"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1097
+#: gnome-terminal/gnome-terminal.c:1095
 msgid "Scroll on keystroke"
 msgstr "Vieritä näppäiltäessä"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1106
+#: gnome-terminal/gnome-terminal.c:1104
 msgid "Scroll on output"
 msgstr "Vieritä uuden tekstin kanssa"
 
-#: gnome-terminal/gnome-terminal.c:1135
+#: gnome-terminal/gnome-terminal.c:1133
 msgid "Color selector"
 msgstr "Värinvalitsin"
 
-#: gnome-terminal/gnome-terminal.c:1181
+#: gnome-terminal/gnome-terminal.c:1179
 msgid "_Hide menubar"
 msgstr "_Piilota valikkopalkki"
 
-#: gnome-terminal/gnome-terminal.c:1182
+#: gnome-terminal/gnome-terminal.c:1180
 msgid "_Show menubar"
 msgstr "_Näytä valikkopalkki"
 
-#: gnome-terminal/gnome-terminal.c:1195
+#: gnome-terminal/gnome-terminal.c:1193
 msgid "Terminal"
 msgstr "Pääte"
 
-#: gnome-terminal/gnome-terminal.c:1196 help-browser/window.c:184
-#: help-browser/window.c:209
+#: gnome-terminal/gnome-terminal.c:1194 help-browser/window.c:209
 msgid "Help"
 msgstr "Ohje"
 
-#: gnome-terminal/gnome-terminal.c:1767
+#: gnome-terminal/gnome-terminal.c:1746
 msgid "Terminal class name"
 msgstr "Päätteen luokan nimi"
 
-#: gnome-terminal/gnome-terminal.c:1767
+#: gnome-terminal/gnome-terminal.c:1746
 msgid "CLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1749
 msgid "Specifies font name"
 msgstr "Määrittelee kirjasinlajin nimen"
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1749
 msgid "FONT"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1773
+#: gnome-terminal/gnome-terminal.c:1752
 msgid "Do not start up shells as logins shells"
 msgstr "Älä käynnistä shellejä login-shelleinä"
 
-#: gnome-terminal/gnome-terminal.c:1776
+#: gnome-terminal/gnome-terminal.c:1755
 msgid "Start up shells as logins shells"
 msgstr "Käynnistä shellit login-shelleinä"
 
-#: gnome-terminal/gnome-terminal.c:1779
+#: gnome-terminal/gnome-terminal.c:1758
 msgid "Specifies the geometry for the main window"
 msgstr "Määrittelee pääikkunan sijainnin ja koon"
 
-#: gnome-terminal/gnome-terminal.c:1779 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1758 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1782
+#: gnome-terminal/gnome-terminal.c:1761
 msgid "Execute this program instead of a shell"
 msgstr "Suorita tämä ohjelma shellin sijaan"
 
-#: gnome-terminal/gnome-terminal.c:1782
+#: gnome-terminal/gnome-terminal.c:1761
 msgid "COMMAND"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1785
+#: gnome-terminal/gnome-terminal.c:1764
 msgid "Foreground color"
 msgstr "Kirjoituksen väri"
 
-#: gnome-terminal/gnome-terminal.c:1785 gnome-terminal/gnome-terminal.c:1788
-msgid "COLOR"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:1788 panel/panel_config.c:742
+#: gnome-terminal/gnome-terminal.c:1767 panel/panel_config.c:753
 msgid "Background color"
 msgstr "Taustan väri"
 
-#: gnome-terminal/gnome-terminal.c:1791 panel/main.c:74
-msgid "ID"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:1794
+#: gnome-terminal/gnome-terminal.c:1770
 msgid "Update utmp/wtmp entries"
 msgstr "Päivitä utmp/wtmp -merkinnät"
 
-#: gnome-terminal/gnome-terminal.c:1794
+#: gnome-terminal/gnome-terminal.c:1770
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1797
+#: gnome-terminal/gnome-terminal.c:1773
 msgid "Do not update utmp/wtmp entries"
 msgstr "Älä päivitä utmp/wtmp -merkintöjä"
 
-#: gnome-terminal/gnome-terminal.c:1797
+#: gnome-terminal/gnome-terminal.c:1773
 msgid "NOUTMP"
 msgstr ""
 
@@ -1945,7 +2523,7 @@ msgstr ""
 msgid "Debug level"
 msgstr "Vianmääritystaso"
 
-#: help-browser/gnome-help-browser.c:348 help-browser/window.c:701
+#: help-browser/gnome-help-browser.c:348 help-browser/window.c:691
 msgid "Gnome Help Browser"
 msgstr "Gnome ohjeselain"
 
@@ -2044,7 +2622,7 @@ msgid "Games"
 msgstr "Pelit"
 
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:566
+#: panel/panel_config_global.c:576
 msgid "Miscellaneous"
 msgstr "Muut"
 
@@ -2150,7 +2728,8 @@ msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Tuntematon sisältömääre</BODY>"
 
 #: help-browser/window.c:129
-msgid "New window"
+#, fuzzy
+msgid "_New window"
 msgstr "Uusi ikkuna"
 
 #: help-browser/window.c:129
@@ -2158,23 +2737,26 @@ msgid "Open new browser window"
 msgstr "Avaa uusi selainikkuna"
 
 #: help-browser/window.c:134
-msgid "Add Bookmark"
+#, fuzzy
+msgid "_Add Bookmark"
 msgstr "Lisää kirjanmerkki"
 
 #: help-browser/window.c:134
 msgid "Add bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: help-browser/window.c:139
-msgid "Configure"
-msgstr "Muuta asetuksia"
+#: help-browser/window.c:144
+#, fuzzy
+msgid "_Close"
+msgstr "Sulje"
 
 #: help-browser/window.c:144
 msgid "Close window"
 msgstr "Sulje ikkuna"
 
 #: help-browser/window.c:149
-msgid "Exit"
+#, fuzzy
+msgid "E_xit"
 msgstr "Sulje"
 
 #: help-browser/window.c:149
@@ -2182,11 +2764,17 @@ msgid "Exit all windows"
 msgstr "Sulje kaikki ikkunat"
 
 #: help-browser/window.c:158
+#, fuzzy
+msgid "_About"
+msgstr "Tiedot"
+
+#: help-browser/window.c:158
 msgid "Info about this program"
 msgstr "Tiedot tästä ohjelmasta"
 
-#: help-browser/window.c:169 help-browser/window.c:204
-msgid "History"
+#: help-browser/window.c:169
+#, fuzzy
+msgid "_History"
 msgstr "Historia"
 
 #: help-browser/window.c:169 help-browser/window.c:204
@@ -2194,19 +2782,17 @@ msgid "Show History Window"
 msgstr "Näytä historiaikkuna"
 
 #: help-browser/window.c:174
-msgid "Bookmarks"
+#, fuzzy
+msgid "_Bookmarks"
 msgstr "Kirjanmerkit"
 
 #: help-browser/window.c:174 help-browser/window.c:206
 msgid "Show Bookmarks Window"
 msgstr "Näytä kirjanmerkki-ikkuna"
 
-#: help-browser/window.c:182
-msgid "File"
-msgstr "Tiedosto"
-
 #: help-browser/window.c:183
-msgid "Window"
+#, fuzzy
+msgid "_Window"
 msgstr "Ikkuna"
 
 #: help-browser/window.c:191
@@ -2237,6 +2823,10 @@ msgstr "Hakemisto"
 msgid "Show Documentation Index"
 msgstr "Näytä dokumentaatiohakemisto"
 
+#: help-browser/window.c:204
+msgid "History"
+msgstr "Historia"
+
 #: help-browser/window.c:206
 msgid "BMarks"
 msgstr "Merkit"
@@ -2245,7 +2835,7 @@ msgstr "Merkit"
 msgid "Help on Help"
 msgstr "Ohjeen ohje"
 
-#: help-browser/window.c:823
+#: help-browser/window.c:813
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2253,19 +2843,19 @@ msgid ""
 "%s"
 msgstr ""
 
-#: help-browser/window.c:826
+#: help-browser/window.c:816
 msgid "Ok"
 msgstr ""
 
-#: panel/applet.c:268
+#: panel/applet.c:267
 msgid "???"
 msgstr ""
 
-#: panel/applet.c:295
+#: panel/applet.c:294
 msgid "Remove from panel"
 msgstr "Poista paneelista"
 
-#: panel/applet.c:302
+#: panel/applet.c:301
 msgid "Move applet"
 msgstr "Siirrä appletti"
 
@@ -2285,16 +2875,19 @@ msgstr "Appletin ulkonäkö"
 msgid "Drawer handle"
 msgstr "Vetolaatikon kahva"
 
-#: panel/drawer.c:137
+#. we store this in w for later use!, so don't use w as temp from now
+#. on
+#: panel/drawer.c:139
 #, fuzzy
-msgid "Disable hidebutton"
+msgid "Enable hidebutton"
 msgstr "Estä piilotusnappi"
 
-#: panel/drawer.c:147
-msgid "Disable hidebutton arrow"
+#: panel/drawer.c:149
+#, fuzzy
+msgid "Enable hidebutton arrow"
 msgstr "Älä näytä nappienpiilotusnuolta"
 
-#: panel/drawer.c:162 panel/menu.c:1474
+#: panel/drawer.c:169
 msgid "Drawer"
 msgstr "Laatikko"
 
@@ -2310,7 +2903,9 @@ msgstr "Käynnistimen asetukset"
 msgid "Create launcher applet"
 msgstr "Luo käynnistinappletti"
 
-#: panel/logout.c:26 panel/menu.c:1584 panel/menu.c:1741
+#. Logout frame
+#: panel/logout.c:26 panel/menu.c:1658 panel/menu.c:1938
+#: panel/panel_config_global.c:488
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
@@ -2318,11 +2913,15 @@ msgstr "Kirjaudu ulos"
 msgid "Discard session"
 msgstr "Hylkää istunto"
 
-#: panel/menu.c:83
+#: panel/main.c:74
+msgid "ID"
+msgstr ""
+
+#: panel/menu.c:86
 msgid "The GNOME Panel"
 msgstr "GNOME-paneeli"
 
-#: panel/menu.c:86
+#: panel/menu.c:89
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -2331,382 +2930,400 @@ msgstr ""
 "applettien nielaisemisesta, maailmanrauhasta ja satunnaisista X:n "
 "kaatumisista."
 
-#: panel/menu.c:326 panel/menu.c:361
+#: panel/menu.c:329 panel/menu.c:364
 #, fuzzy
 msgid "Desktop entry properties"
 msgstr "Pöydän syöttöasetukset"
 
-#: panel/menu.c:425
+#: panel/menu.c:428
 msgid "Add this launcher to panel"
 msgstr "Lisää tämä käynnistin paneeliin"
 
-#: panel/menu.c:433
+#: panel/menu.c:436
 msgid "Add this as drawer to panel"
 msgstr "Lisää tämä vetolaatikkona paneeliin"
 
-#: panel/menu.c:441
+#: panel/menu.c:444
 msgid "Add this as menu to panel"
 msgstr "Lisää tämä menu paneeliin"
 
-#: panel/menu.c:462
+#: panel/menu.c:465
 msgid "Properties ..."
 msgstr "Asetukset..."
 
-#: panel/menu.c:640 panel/menu.c:711
+#: panel/menu.c:643 panel/menu.c:714
 msgid "..."
 msgstr ""
 
-#: panel/menu.c:862
+#: panel/menu.c:865
 msgid "Can't get goad_id from desktop entry!"
 msgstr ""
 
-#: panel/menu.c:1418
+#: panel/menu.c:1428
 msgid "Applets"
 msgstr "Appletit"
 
-#: panel/menu.c:1481 panel/panel_config.c:868
-msgid "Edge Panel"
+#: panel/menu.c:1555 panel/panel_config.c:879
+#, fuzzy
+msgid "Edge panel"
 msgstr "Reunapaneeli"
 
-#: panel/menu.c:1488 panel/panel_config.c:874
-msgid "Corner Panel"
+#: panel/menu.c:1562 panel/panel_config.c:885
+#, fuzzy
+msgid "Corner panel"
 msgstr "Nurkkapaneeli"
 
-#: panel/menu.c:1569
+#: panel/menu.c:1580 panel/menu.c:1617 panel/menu.c:2273
+#, fuzzy
+msgid "System menus"
+msgstr "Systeemimenut"
+
+#: panel/menu.c:1600 panel/menu.c:1627 panel/menu.c:2283
+#, fuzzy
+msgid "User menus"
+msgstr "Käyttäjämenut"
+
+#: panel/menu.c:1643
 msgid "Remove this panel"
 msgstr "Poista tämä paneeli"
 
-#: panel/menu.c:1614
+#: panel/menu.c:1783
 msgid "Add applet"
 msgstr "Lisää appletti"
 
-#: panel/menu.c:1623
+#: panel/menu.c:1792
 msgid "Add new panel"
 msgstr "Lisää paneeli"
 
-#: panel/menu.c:1631
+#: panel/menu.c:1800
+#, fuzzy
+msgid "Convert to corner panel"
+msgstr "Nurkkapaneeli"
+
+#: panel/menu.c:1808
+#, fuzzy
+msgid "Convert to edge panel"
+msgstr "Nurkkapaneeli"
+
+#: panel/menu.c:1820
 msgid "Add main menu"
 msgstr "Lisää päävalikko"
 
-#: panel/menu.c:1638
+#: panel/menu.c:1827
+#, fuzzy
+msgid "Add drawer"
+msgstr "Laatikko"
+
+#: panel/menu.c:1835
 msgid "Add log out button"
 msgstr "Lisää POISTU-nappi"
 
-#: panel/menu.c:1646
+#: panel/menu.c:1843
 msgid "Add swallowed app"
 msgstr "Nielaise ohjelma"
 
-#: panel/menu.c:1652
+#: panel/menu.c:1849
 msgid "Add new launcher"
 msgstr "Lisää uusi käynnistin"
 
-#: panel/menu.c:1663
+#: panel/menu.c:1860
 msgid "This panel properties..."
 msgstr "Tämän paneelin asetukset..."
 
-#: panel/menu.c:1673
+#: panel/menu.c:1870
 msgid "Global properties..."
 msgstr "Yleiset asetukset..."
 
-#: panel/menu.c:1701
+#: panel/menu.c:1898
 msgid "Panel"
 msgstr "Paneeli"
 
-#: panel/menu.c:1708
+#: panel/menu.c:1905
 msgid "Lock screen"
 msgstr "Lukitse näyttö"
 
-#: panel/menu.c:1729
+#: panel/menu.c:1926
 #, fuzzy
 msgid "About GNOME..."
 msgstr "Tietoja..."
 
-#: panel/menu.c:1991
+#: panel/menu.c:2192
+msgid "RedHat menu"
+msgstr ""
+
+#: panel/menu.c:2303
+msgid "RedHat menus"
+msgstr ""
+
+#: panel/menu.c:2518
 msgid "Can't open directory, using main menu!"
 msgstr ""
 
-#: panel/menu.c:2085
+#: panel/menu.c:2612
 msgid "Menu properties"
 msgstr ""
 
-#: panel/menu.c:2092
-msgid "Menu Type"
-msgstr ""
+#: panel/menu.c:2619
+#, fuzzy
+msgid "Menu type"
+msgstr "Menupolku"
 
-#: panel/menu.c:2099 panel/menu.c:2119
-msgid "Main Menu"
-msgstr ""
+#: panel/menu.c:2626 panel/menu.c:2646
+#, fuzzy
+msgid "Main menu"
+msgstr "Lisää päävalikko"
 
-#: panel/menu.c:2110 panel/menu.c:2160
-msgid "Normal Menu"
-msgstr ""
+#: panel/menu.c:2637 panel/menu.c:2687
+#, fuzzy
+msgid "Normal menu"
+msgstr "Normaali"
 
-#: panel/menu.c:2129
+#: panel/menu.c:2656
 msgid "Both System and User menus on the same menu"
 msgstr ""
 
-#: panel/menu.c:2141
+#: panel/menu.c:2668
 msgid "System on the main menu, User menu as a submenu"
 msgstr ""
 
-#: panel/menu.c:2152
+#: panel/menu.c:2679
 msgid "User on the main menu, System menu as a submenu"
 msgstr ""
 
-#: panel/menu.c:2170
+#: panel/menu.c:2697
 msgid "Menu path"
 msgstr "Menupolku"
 
-#: panel/menu.c:2186
-msgid "Menu"
-msgstr ""
-
 #. Position frame
-#: panel/panel_config.c:262 panel/panel_config.c:439
+#: panel/panel_config.c:273 panel/panel_config.c:445
 msgid "Position"
 msgstr "Sijainti"
 
-#. Top Position
-#: panel/panel_config.c:275
-msgid "Top"
-msgstr "Yläreuna"
-
-#: panel/panel_config.c:286
-msgid "Bottom"
-msgstr "Alin"
-
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:336
-msgid "Minimize Options"
+#: panel/panel_config.c:347
+#, fuzzy
+msgid "Minimize options"
 msgstr "Piilotusasetukset"
 
-#. Stay Put
-#: panel/panel_config.c:347
-msgid "Explicitly Hide"
-msgstr "Piilota käskettäessä"
-
-#: panel/panel_config.c:360
-msgid "Auto Hide"
+#. Auto-hide
+#: panel/panel_config.c:358
+#, fuzzy
+msgid "Auto hide"
 msgstr "Piilota automaattisesti"
 
-#. Hidebuttons disable
-#: panel/panel_config.c:371 panel/panel_config.c:564
+#. Hidebuttons enable
+#: panel/panel_config.c:369 panel/panel_config.c:570
 #, fuzzy
-msgid "Disable hidebuttons"
+msgid "Enable hidebuttons"
 msgstr "Dialoginapit"
 
-#. Arrow disable
-#: panel/panel_config.c:382 panel/panel_config.c:575
+#. Arrow enable
+#: panel/panel_config.c:380 panel/panel_config.c:581
 #, fuzzy
-msgid "Disable hidebutton arrows"
+msgid "Enable hidebutton arrows"
 msgstr "Poista nappienpiilotusnuolet"
 
 #. North East Position
-#: panel/panel_config.c:452
-msgid "North East"
+#: panel/panel_config.c:458
+#, fuzzy
+msgid "North east"
 msgstr "Koillinen"
 
-#: panel/panel_config.c:463
-msgid "South West"
+#: panel/panel_config.c:469
+#, fuzzy
+msgid "South west"
 msgstr "Lounas"
 
-#: panel/panel_config.c:474
-msgid "North West"
+#: panel/panel_config.c:480
+#, fuzzy
+msgid "North west"
 msgstr "Luode"
 
-#: panel/panel_config.c:485
-msgid "South East"
-msgstr "Kaakko"
+#: panel/panel_config.c:491
+#, fuzzy
+msgid "South east"
+msgstr "Lounas"
 
 #. Orientation frame
-#: panel/panel_config.c:517
+#: panel/panel_config.c:523
 msgid "Orientation"
 msgstr "Suunta"
 
-#. Horizontal
-#: panel/panel_config.c:528
-msgid "Horizontal"
-msgstr "Vaaka"
-
-#: panel/panel_config.c:541
-msgid "Vertical"
-msgstr "Pysty"
-
 #. Hidebuttons frame
-#: panel/panel_config.c:552
-msgid "Hidebutton Options"
+#: panel/panel_config.c:558
+#, fuzzy
+msgid "Hidebutton options"
 msgstr "Piilonappioptiot"
 
 #. selector frame
-#: panel/panel_config.c:667 panel/panel_config.c:887
+#: panel/panel_config.c:678 panel/panel_config.c:898
 msgid "Background"
 msgstr "Tausta"
 
 #. standard background
-#: panel/panel_config.c:677
+#: panel/panel_config.c:688
 msgid "Standard"
 msgstr "Normaali"
 
-#: panel/panel_config.c:685
+#: panel/panel_config.c:696
 msgid "Pixmap"
 msgstr "Kuva"
 
-#: panel/panel_config.c:693
-msgid "Color"
-msgstr "Väri"
-
 #. image frame
-#: panel/panel_config.c:699
+#: panel/panel_config.c:710
 msgid "Image file"
 msgstr "Kuvatiedosto"
 
-#: panel/panel_config.c:728
+#: panel/panel_config.c:739
 msgid "Scale image to fit panel"
 msgstr "Skaalaa kuva sopimaan paneeliin"
 
-#: panel/panel_config.c:857
+#: panel/panel_config.c:868
 msgid "Panel properties"
 msgstr "Paneelin ominaisuudet"
 
-#. Animation disable
+#. Animation enable
 #: panel/panel_config_global.c:195
-msgid "Disable animations"
+#, fuzzy
+msgid "Enable animations"
 msgstr "Estä animaatios"
 
 #. AutoHide Animation step_size scale frame
 #: panel/panel_config_global.c:203
-msgid "Auto-Hide Animation Speed"
+#, fuzzy
+msgid "Auto-hide animation speed"
 msgstr "Autopiilotus: Animaationopeus"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:212
-msgid "Explicit-Hide Animation Speed"
+#: panel/panel_config_global.c:214
+#, fuzzy
+msgid "Explicit-hide animation speed"
 msgstr "Täysi Piilotus: Animaationopeus"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/panel_config_global.c:221
-msgid "Drawer Animation Speed"
+#: panel/panel_config_global.c:225
+#, fuzzy
+msgid "Drawer animation speed"
 msgstr "Laatikon animaationopeus"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:230
-msgid "Auto-Hide Minimize Delay (ms)"
+#: panel/panel_config_global.c:236
+#, fuzzy
+msgid "Auto-hide minimize delay (ms)"
 msgstr "Autopiilotus: Minimoi viive (ms)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:237
-msgid "Auto-Hide Minimized Size (pixels)"
+#: panel/panel_config_global.c:243
+#, fuzzy
+msgid "Auto-hide minimized size (pixels)"
 msgstr "Autopiilotus: Minimoi koko (pikseleitä)"
 
 #. Enable tiles frame
-#: panel/panel_config_global.c:304 panel/panel_config_global.c:331
+#: panel/panel_config_global.c:311 panel/panel_config_global.c:339
 #, fuzzy
 msgid "Tiles enabled"
 msgstr "Kuvat aktivoitu"
 
 #. Image frame
-#: panel/panel_config_global.c:341
+#: panel/panel_config_global.c:349
 #, fuzzy
 msgid "Image files"
 msgstr "Kuvatiedostot"
 
-#: panel/panel_config_global.c:354
+#: panel/panel_config_global.c:362
 msgid "Tile filename (up)"
 msgstr "Kuvatietosto (ylös)"
 
-#: panel/panel_config_global.c:358
+#: panel/panel_config_global.c:366
 msgid "Tile filename (down)"
 msgstr "Kuvatietosto (alas)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:365
+#: panel/panel_config_global.c:373
 msgid "Border width (tile only)"
 msgstr "Reunanleveys (vain kuva)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:373
+#: panel/panel_config_global.c:381
 msgid "Depth (displacement when pressed)"
 msgstr "Syvyys (siirtymä painettuna)"
 
 #. Tooltips frame
-#: panel/panel_config_global.c:395
+#: panel/panel_config_global.c:403
 msgid "Tooltips"
 msgstr "Vinkit"
 
 #. Tooltips enable
-#: panel/panel_config_global.c:406
+#: panel/panel_config_global.c:414
 msgid "Tooltips enabled"
 msgstr "Vinkit aktivoitu"
 
 #. Menu frame
-#: panel/panel_config_global.c:416
+#: panel/panel_config_global.c:424
 msgid "Menus"
 msgstr "Valikot"
 
 #. Small Icons
-#: panel/panel_config_global.c:427
+#: panel/panel_config_global.c:435
 msgid "Show small icons"
 msgstr "Näytä pienet ikonit"
 
 #. Dot Buttons
-#: panel/panel_config_global.c:437
+#: panel/panel_config_global.c:445
 #, fuzzy
 msgid "Show ... buttons"
 msgstr "Näytä ... napit"
 
 #. Movement frame
-#: panel/panel_config_global.c:447
+#: panel/panel_config_global.c:455
 msgid "Movement"
 msgstr "Liike"
 
 #. Switched
-#: panel/panel_config_global.c:458
+#: panel/panel_config_global.c:466
 msgid "Switched movement"
 msgstr "Vaihdettu liike"
 
-#: panel/panel_config_global.c:470
+#: panel/panel_config_global.c:478
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "Vapaa liike (ei häiritse muita ikkunoita)"
 
-#. Logout frame
-#: panel/panel_config_global.c:480
-msgid "Log Out"
-msgstr "Poistuminen"
-
 #. Prompt before log out
-#: panel/panel_config_global.c:491
+#: panel/panel_config_global.c:499
 msgid "Prompt before logout"
 msgstr "Kysy ennen poistumista"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:501
-msgid "Applet Padding"
+#: panel/panel_config_global.c:509
+#, fuzzy
+msgid "Applet padding"
 msgstr "Ikkunoiden väli"
 
-#: panel/panel_config_global.c:517
+#: panel/panel_config_global.c:525
 #, fuzzy
 msgid "Launcher icon"
 msgstr "Aja -ikoni"
 
-#: panel/panel_config_global.c:518
+#: panel/panel_config_global.c:526
 #, fuzzy
 msgid "Drawer icon"
 msgstr "Vetolaatikkoikoni"
 
-#: panel/panel_config_global.c:519
+#: panel/panel_config_global.c:527
 msgid "Menu icon"
 msgstr "Menuikoni"
 
-#: panel/panel_config_global.c:540
-msgid "Global Panel Configuration"
+#: panel/panel_config_global.c:548
+#, fuzzy
+msgid "Global panel configuration"
 msgstr "Yleiset paneeliasetukset"
 
-#: panel/panel_config_global.c:548
+#: panel/panel_config_global.c:556
 #, fuzzy
 msgid "Animation"
 msgstr "Sovellus"
 
-#: panel/panel_config_global.c:553
+#: panel/panel_config_global.c:562
 #, fuzzy
 msgid "General icon settings"
 msgstr "Yleiset asetukset"
@@ -2736,281 +3353,23 @@ msgstr "Komento (ei välttämätön)"
 msgid "Height"
 msgstr "Korkeus"
 
-#, fuzzy
-#~ msgid "The GNOME KB Applet"
-#~ msgstr "GNOME-kala -ikkuna"
+#~ msgid "Active Dekstop Color"
+#~ msgstr "Aktiivisen työpöydän väri"
 
-#, fuzzy
-#~ msgid ""
-#~ "This applet used to switch between keyboard maps. No more. It uses "
-#~ "setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
-#~ "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-#~ "to CVS."
-#~ msgstr ""
-#~ "Tätä ikkunaa käytetään näppäimistökarttojen vaihtamiseen. Ei enempää. Se "
-#~ "käyttää setxkbmap-ohjelmaa."
+#~ msgid "Configure"
+#~ msgstr "Muuta asetuksia"
 
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Ikonin valinta"
+#~ msgid "File"
+#~ msgstr "Tiedosto"
 
-#, fuzzy
-#~ msgid "GKB settings"
-#~ msgstr "Asetukset"
+#~ msgid "Explicitly Hide"
+#~ msgstr "Piilota käskettäessä"
 
-#~ msgid ""
-#~ "Couldn't\n"
-#~ "load\n"
-#~ "icon"
-#~ msgstr "Ikonia ei löytynyt"
+#~ msgid "South East"
+#~ msgstr "Kaakko"
 
-#~ msgid "Background Properties"
-#~ msgstr "Tausta-asetukset"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Kellon asetukset"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Näppäimistöasetukset"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Hiiren asetukset"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Gnomen käyttöliittymäasetukset"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Palauta edelliset asetukset ja poistu"
-
-#~ msgid "Flat"
-#~ msgstr "Tasainen"
-
-#~ msgid "Gradient"
-#~ msgstr "Liukusävy"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Taustakuvan valinta"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Taustakuva"
-
-#~ msgid " Browse... "
-#~ msgstr " Selaa... "
-
-#~ msgid "none"
-#~ msgstr "ei mitään"
-
-#~ msgid "Scaled"
-#~ msgstr "Suurennos"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Suurennos (säilytä kuvan suhteet)"
-
-#~ msgid "Centered"
-#~ msgstr "Keskellä"
-
-#~ msgid "Tiled"
-#~ msgstr "Vierekkäin"
-
-#~ msgid " Background "
-#~ msgstr " Tausta "
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Asettaa taustan annettuun arvoon"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Antaa taustan värin"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Antaa taustan loppuvärin liukusävylle"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Gradientin suunta: pysty vai vaaka"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Tasavärinen tausta"
-
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Liukusävyinen tausta"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Taustakuva: vierekkäin, suurennettu vai suhteet pitäen"
-
-#~ msgid "Sound"
-#~ msgstr "Ääni"
-
-#~ msgid "Volume"
-#~ msgstr "Voimakkuus"
-
-#~ msgid "Pitch"
-#~ msgstr "Korkeus"
-
-#~ msgid "Duration"
-#~ msgstr "Kesto"
-
-#~ msgid "Test"
-#~ msgstr "Kokeile"
-
-#~ msgid "Bell"
-#~ msgstr "Piippaus"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Näppäimen toisto"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Toista näppäimet"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Toistonopeus"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Toistoviive"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Näppäinten naksaus"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Naksaus näppäimenpainalluksella"
-
-#~ msgid "Click volume"
-#~ msgstr "Naksauksen äänenvoimakkuus"
-
-#~ msgid "Keyboard"
-#~ msgstr "Näppäimistö"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Hiiren napit"
-
-#~ msgid "Left handed"
-#~ msgstr "Vasenkätinen"
-
-#~ msgid "Right handed"
-#~ msgstr "Oikeakätinen"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Hiiren liike"
-
-#~ msgid "Acceleration"
-#~ msgstr "Kiihdytys"
-
-#~ msgid "Fast"
-#~ msgstr "Nopea"
-
-#~ msgid "Slow"
-#~ msgstr "Hidas"
-
-#~ msgid "Threshold"
-#~ msgstr "Rajapiste"
-
-#~ msgid "Large"
-#~ msgstr "Suuri"
-
-#~ msgid "Small"
-#~ msgstr "Pieni"
-
-#~ msgid "Mouse"
-#~ msgstr "Hiiri"
-
-#~ msgid "Default Gtk setting [FIXME - Describe this better]"
-#~ msgstr "Gtk:n oletusasetukset"
-
-#~ msgid "Spread buttons out"
-#~ msgstr "Levitä napit"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Laita napit reunoille"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Laita napit vasempaan laitaan"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Laita napit oikeaan laitaan"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "Anna window managerin päättää"
-
-#~ msgid "Center of the screen"
-#~ msgstr "Näytön keskipiste"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Hiiren kohdalla"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Dialogit ovat kuten muut ikkunat"
-
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Window manager käsittelee dialogeja erikoisesti"
-
-#~ msgid "Notebook"
-#~ msgstr "Muistikirja"
-
-#~ msgid "Toplevel"
-#~ msgstr "Pääikkuna"
-
-#~ msgid "Modal"
-#~ msgstr "Modaalinen ikkuna"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Dialoginapit"
-
-#~ msgid "Dialog position"
-#~ msgstr "Dialogin paikka"
-
-#~ msgid "Dialog hints"
-#~ msgstr "Dialogin vihjeet"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Käytä statusbaria dialogin sijaan jos mahdollista"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Laita dialogit sovelluksen päälle jos mahdollista"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialogit"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Menut ovat irrotettavia"
-
-#, fuzzy
-#~ msgid "Menubars have relieved border"
-#~ msgstr "Työkalupakin napeissa on reuna"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Työkalupakit ovat irroitettavia"
-
-#~ msgid "Toolbar buttons have relieved border"
-#~ msgstr "Työkalupakin napeissa on reuna"
-
-#, fuzzy
-#~ msgid "Toolbars have flat look"
-#~ msgstr "Työkalupakit ovat irroitettavia"
-
-#, fuzzy
-#~ msgid "Toolbars have line separators"
-#~ msgstr "Työkalupakin napeissa on reuna"
-
-#, fuzzy
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Työkalupakit ovat irroitettavia"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "Tilarivi on vuorovaikutteinen jos mahdollista"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialoginapeilla on ikonit"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Menuissa on ikoneita"
-
-#~ msgid "Application"
-#~ msgstr "Sovellus"
-
-#~ msgid "Default MDI mode"
-#~ msgstr "Oletusarvoinen MDI-moodi"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "MDI-muistikirjan asema"
+#~ msgid "Log Out"
+#~ msgstr "Poistuminen"
 
 #~ msgid "Settings"
 #~ msgstr "Asetukset"
@@ -3029,9 +3388,6 @@ msgstr "Korkeus"
 
 #~ msgid "Priority"
 #~ msgstr "Tärkeysjärjestys"
-
-#~ msgid "Normal"
-#~ msgstr "Normaali"
 
 #~ msgid "Low"
 #~ msgstr "Alhainen"
@@ -3071,18 +3427,6 @@ msgstr "Korkeus"
 
 #~ msgid " Preview "
 #~ msgstr " Esikatselu "
-
-#~ msgid "Ticker Information (unimplemented)"
-#~ msgstr "Tikkeritieto (ei vielä)"
-
-#~ msgid "Article index file:"
-#~ msgstr "Artikkelitiedosto:"
-
-#~ msgid "Image Server Url:"
-#~ msgstr "Kuvaserverin Url:"
-
-#~ msgid "Image path:"
-#~ msgstr "Kuvapolku:"
 
 #, fuzzy
 #~ msgid "Repeat Delay"
