@@ -732,7 +732,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_label_set_mnemonic_widget (GTK_LABEL(label),
 	                               dee->_priv->translations);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
-					     GTK_SHADOW_NONE);
+					     GTK_SHADOW_IN);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
