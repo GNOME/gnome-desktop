@@ -53,6 +53,7 @@
 #include <popt.h>
 
 #include <libgnomevfs/gnome-vfs-mime.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
 
 struct _GnomeDesktopItem {
         GHashTable *name; /* key is language, value is translated string */
@@ -1293,15 +1294,7 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 		const char **argv = g_alloca((argc + 1) * sizeof(char *));
 
 		for(i=0,li=uri_list; li; i++, li=li->next) {
-			char *p = gnome_uri_extract_filename(li->data);
-			if(p) {
-				char *s = g_alloca(strlen(p)+1);
-				strcpy(s, p);
-				g_free(p);
-				argv[i] = s;
-			} else {
-				argv[i] = li->data;
-			}
+			argv[i] = li->data;
 		}
 		argv[i] = NULL;
 		return gnome_desktop_item_launch(item, argc, argv);
@@ -1310,11 +1303,7 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 	/* figure out if we have any urls in the dropped files,
 	   this also builds a list of all the files */
 	for(li=uri_list; li; li=li->next) {
-		char *p = gnome_uri_extract_filename(li->data);
-		if(p)
-			file_list = g_list_prepend(file_list, p);
-		else
-			any_urls = TRUE;
+		file_list = g_list_prepend(file_list, g_strdup (li->data));
 	}
 	if(file_list)
 		file_list = g_list_reverse(file_list);
