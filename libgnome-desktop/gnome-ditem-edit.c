@@ -30,16 +30,14 @@
 #include <string.h>
 #include "gnome-ditem-edit.h"
 
-#ifdef NEED_GNOMESUPPORT_H
-# include "gnomesupport.h"
-#endif
 #include <libgnome/gnome-i18n.h>
 
-#include "gnome-stock.h"
 #include "gnome-uidefs.h"
 #include "gnome-pixmap.h"
 #include "gnome-icon-entry.h"
 #include "libgnomeuiP.h"
+
+#include <bonobo/bonobo-win.h>
 
 struct _GnomeDItemEditPrivate {
 	/* use the accessors or just use new_notebook */
@@ -1430,11 +1428,11 @@ main(int argc, char * argv[])
 
         gnome_init ("testing ditem edit", NULL, argc, argv, 0, 0);
 
-        app = gnome_app_new("testing ditem edit", "Testing");
+        app = bonobo_window_new("testing ditem edit", "Testing");
 
         notebook = gtk_notebook_new();
 
-        gnome_app_set_contents(GNOME_APP(app), notebook);
+        bonobo_window_set_contents(BONOBO_WINDOW(app), notebook);
 
         dee = gnome_ditem_edit_new(GTK_NOTEBOOK(notebook));
 
