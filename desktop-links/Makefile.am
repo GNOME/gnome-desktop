@@ -145,7 +145,7 @@ EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(Settings_DATA) $(noinst_DATA) $(directory_in_files) \
 	$(Directory_files) $(Order_files) $(Root_DATA) $(Settings_Order_files) \
 	$(desktop_in_files) $(gnew_DATA)
-	
+
 install-data-local: $(Directory_files)
 	$(mkinstalldirs) $(DESTDIR)$(Applicationsdir)
 	$(mkinstalldirs) $(DESTDIR)$(Graphicsdir)
@@ -160,13 +160,13 @@ install-data-local: $(Directory_files)
 
 	$(INSTALL_DATA) $(srcdir)/Root.order $(DESTDIR)$(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Settings.order $(DESTDIR)$(Settingsdir)/.order
-	$(INSTALL_DATA) $(srcdir)/Root.directory $(DESTDIR)$(Rootdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Applications.directory $(DESTDIR)$(Applicationsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Utilities.directory $(DESTDIR)$(Utilitiesdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Multimedia.directory $(DESTDIR)$(Multimediadir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internetdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Settings.directory $(DESTDIR)$(Settingsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Development.directory $(DESTDIR)$(Developmentdir)/.directory
+	$(INSTALL_DATA) Root.directory $(DESTDIR)$(Rootdir)/.directory
+	$(INSTALL_DATA) Applications.directory $(DESTDIR)$(Applicationsdir)/.directory
+	$(INSTALL_DATA) Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
+	$(INSTALL_DATA) System.directory $(DESTDIR)$(Systemdir)/.directory
+	$(INSTALL_DATA) Utilities.directory $(DESTDIR)$(Utilitiesdir)/.directory
+	$(INSTALL_DATA) Multimedia.directory $(DESTDIR)$(Multimediadir)/.directory
+	$(INSTALL_DATA) Internet.directory $(DESTDIR)$(Internetdir)/.directory
+	$(INSTALL_DATA) Games.directory $(DESTDIR)$(Gamesdir)/.directory
+	$(INSTALL_DATA) Settings.directory $(DESTDIR)$(Settingsdir)/.directory
+	$(INSTALL_DATA) Development.directory $(DESTDIR)$(Developmentdir)/.directory
