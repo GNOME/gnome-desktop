@@ -57,49 +57,49 @@ typedef enum {
 GnomeDesktopItem *      gnome_desktop_item_new               (void);
 GnomeDesktopItem *      gnome_desktop_item_new_from_file     (const char                 *file,
 							      GnomeDesktopItemLoadFlags   flags);
-GnomeDesktopItem *      gnome_desktop_item_copy              (const GnomeDesktopItem     *item);
+GnomeDesktopItem *      gnome_desktop_item_copy              (GnomeDesktopItem           *item);
 
 /* if under is NULL save in original location */
 gboolean                gnome_desktop_item_save              (GnomeDesktopItem           *item,
 							      const char                 *under);
 GnomeDesktopItem *      gnome_desktop_item_ref               (GnomeDesktopItem           *item);
 void                    gnome_desktop_item_unref             (GnomeDesktopItem           *item);
-int                     gnome_desktop_item_launch            (const GnomeDesktopItem     *item,
+int                     gnome_desktop_item_launch            (GnomeDesktopItem           *item,
 							      int                         argc,
 							      const char                **argv);
 
 /* A list of files or urls dropped onto an icon, the proper (Url or File
    exec is run you can pass directly the output of 
    gnome_uri_list_extract_filenames */
-int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktopItem     *item,
+int                     gnome_desktop_item_drop_uri_list     (GnomeDesktopItem           *item,
 							      GList                      *uri_list);
 
-gboolean                gnome_desktop_item_exists            (const GnomeDesktopItem     *item);
-GnomeDesktopItemFlags   gnome_desktop_item_get_flags         (const GnomeDesktopItem     *item);
-char *                  gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
-GNOME_Desktop_EntryType gnome_desktop_item_get_type          (const GnomeDesktopItem     *item);
-gchar *                 gnome_desktop_item_get_command       (const GnomeDesktopItem     *item);
-gchar *                 gnome_desktop_item_get_tryexec       (const GnomeDesktopItem     *item);
-gchar *                 gnome_desktop_item_get_icon_path     (const GnomeDesktopItem     *item);
+gboolean                gnome_desktop_item_exists            (GnomeDesktopItem           *item);
+GnomeDesktopItemFlags   gnome_desktop_item_get_flags         (GnomeDesktopItem           *item);
+char *                  gnome_desktop_item_get_location      (GnomeDesktopItem           *item);
+GNOME_Desktop_EntryType gnome_desktop_item_get_type          (GnomeDesktopItem           *item);
+gchar *                 gnome_desktop_item_get_command       (GnomeDesktopItem           *item);
+gchar *                 gnome_desktop_item_get_tryexec       (GnomeDesktopItem           *item);
+gchar *                 gnome_desktop_item_get_icon_path     (GnomeDesktopItem           *item);
 
 /* Note: you want to search each language in the user's search path */
-gchar *                 gnome_desktop_item_get_name          (const GnomeDesktopItem     *item,
+gchar *                 gnome_desktop_item_get_name          (GnomeDesktopItem           *item,
 							      const char                 *language);
-gchar *                 gnome_desktop_item_get_comment       (const GnomeDesktopItem     *item,
+gchar *                 gnome_desktop_item_get_comment       (GnomeDesktopItem           *item,
 							      const char                 *language);
 
-gchar *                 gnome_desktop_item_get_local_name    (const GnomeDesktopItem     *item);
-gchar *                 gnome_desktop_item_get_local_comment (const GnomeDesktopItem     *item);
+gchar *                 gnome_desktop_item_get_local_name    (GnomeDesktopItem           *item);
+gchar *                 gnome_desktop_item_get_local_comment (GnomeDesktopItem           *item);
 
-BonoboArg *             gnome_desktop_item_get_attribute     (const GnomeDesktopItem     *item,
+BonoboArg *             gnome_desktop_item_get_attribute     (GnomeDesktopItem           *item,
 							      const char                 *attr_name);
-GSList *                gnome_desktop_item_get_order         (const GnomeDesktopItem     *item);
+GSList *                gnome_desktop_item_get_order         (GnomeDesktopItem           *item);
 GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (GnomeDesktopItem           *item);
 
 
 /* Free the return value but not the contained strings */
-GSList *                gnome_desktop_item_get_languages     (const GnomeDesktopItem     *item);
-GSList *                gnome_desktop_item_get_attributes    (const GnomeDesktopItem     *item);
+GSList *                gnome_desktop_item_get_languages     (GnomeDesktopItem           *item);
+GSList *                gnome_desktop_item_get_attributes    (GnomeDesktopItem           *item);
 
 /* the _clear_name clears the name for all languages */
 void                    gnome_desktop_item_clear_name        (GnomeDesktopItem           *item);

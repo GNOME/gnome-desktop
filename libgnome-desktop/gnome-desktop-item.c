@@ -57,6 +57,7 @@
 #include <libgnomevfs/gnome-vfs-uri.h>
 
 #include "bonobo-config-ditem.h"
+#include "gnome-desktop-i18n.h"
 
 #define PATH_SEP '/'
 #define PATH_SEP_STR "/"
@@ -66,7 +67,14 @@ struct _GnomeDesktopItem {
 
 	Bonobo_ConfigDatabase db;
 	GNOME_Desktop_Entry *entry;
+	GHashTable *name, *comment, *attributes;
+
+	/* `modified' means that the ditem has been modified since the last save. */
 	gboolean modified;
+
+	/* `dirty' means that the `entry' has changed and thus the hash tables
+	 * must be updated. */
+	gboolean dirty;
 
         char *location;
 
@@ -103,7 +111,7 @@ gnome_desktop_item_new(void)
  * Returns: The new copy 
  */
 GnomeDesktopItem *
-gnome_desktop_item_copy (const GnomeDesktopItem *item)
+gnome_desktop_item_copy (GnomeDesktopItem *item)
 {
         GnomeDesktopItem *retval;
 
@@ -117,6 +125,53 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
         retval->location = g_strdup (item->location);
 
         return retval;
+}
+
+static void
+ditem_update (GnomeDesktopItem *ditem)
+{
+	gulong i;
+
+	if (!ditem->dirty)
+		return;
+
+	if (ditem->name)
+		g_hash_table_destroy (ditem->name);
+	ditem->name = g_hash_table_new_full (g_str_hash, g_str_equal,
+					     (GDestroyNotify) g_free,
+					     (GDestroyNotify) NULL);
+
+	if (ditem->comment)
+		g_hash_table_destroy (ditem->comment);
+	ditem->comment = g_hash_table_new_full (g_str_hash, g_str_equal,
+						(GDestroyNotify) g_free,
+						(GDestroyNotify) NULL);
+
+	if (ditem->attributes)
+		g_hash_table_destroy (ditem->attributes);
+	ditem->attributes = g_hash_table_new_full (g_str_hash, g_str_equal,
+						   (GDestroyNotify) g_free,
+						   (GDestroyNotify) NULL);
+
+	for (i = 0; i < ditem->entry->Name._length; i++) {
+		GNOME_LocalizedString *current = &ditem->entry->Name._buffer [i];
+
+		g_hash_table_insert (ditem->name, g_strdup (current->locale), current);
+	}
+
+	for (i = 0; i < ditem->entry->Comment._length; i++) {
+		GNOME_LocalizedString *current = &ditem->entry->Comment._buffer [i];
+
+		g_hash_table_insert (ditem->comment, g_strdup (current->locale), current);
+	}
+
+	for (i = 0; i < ditem->entry->Attributes._length; i++) {
+		Bonobo_Pair *current = &ditem->entry->Attributes._buffer [i];
+
+		g_hash_table_insert (ditem->comment, g_strdup (current->name), current);
+	}
+
+	ditem->dirty = FALSE;
 }
 
 static GnomeDesktopItem *
@@ -145,8 +200,11 @@ ditem_load (const char *data_file,
 	retval = gnome_desktop_item_new ();
 	retval->db = db;
 	retval->entry = any->_value;
+	retval->dirty = TRUE;
 
         retval->item_flags = item_flags;
+
+	ditem_update (retval);
 
 	if ((flags & GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS) && (retval->entry->TryExec[0] != '\0')) {
 		char *tryme = gnome_is_program_in_path (retval->entry->TryExec);
@@ -266,8 +324,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	CORBA_Environment ev;
 	BonoboArg *arg;
 
-        g_return_val_if_fail(item, FALSE);
-        g_return_val_if_fail(item->location, FALSE);
+        g_return_val_if_fail (item, FALSE);
+        g_return_val_if_fail (item->location, FALSE);
 
 	/* first we setup the new location if we need to */
 	if (under) {
@@ -398,7 +456,7 @@ replace_percentsign(int argc, char **argv, const char *ps,
 /* the appargv, will get modified but not freed, the replacekdefiles
    tells us to replace the %f %u and %F for kde files with nothing */
 static int
-ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], int argc, const char *argv[], gboolean replacekdefiles)
+ditem_execute(GnomeDesktopItem *item, int appargc, const char *appargv[], int argc, const char *argv[], gboolean replacekdefiles)
 {
         char **real_argv;
         int real_argc;
@@ -407,7 +465,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 	int term_argc = 0;
 	GSList *tofree = NULL;
 
-        g_return_val_if_fail(item, -1);
+        g_return_val_if_fail (item, -1);
 
         if(!argv)
                 argc = 0;
@@ -514,14 +572,14 @@ strip_the_amp(char *exec)
  * entry.
  */
 int
-gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **argv)
+gnome_desktop_item_launch (GnomeDesktopItem *item, int argc, const char **argv)
 {
 	const char **temp_argv = NULL;
 	int temp_argc = 0;
 	char *the_exec;
 	int ret;
 
-        g_return_val_if_fail(item, -1);
+        g_return_val_if_fail (item, -1);
 
 	/* This is a URL, so launch it as a url */
 	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
@@ -577,7 +635,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
 
 /* replace %s, %f, %u or %F in exec with file and run */
 static int G_GNUC_UNUSED
-ditem_exec_single_file (const GnomeDesktopItem *item, const char *exec, char *file)
+ditem_exec_single_file (GnomeDesktopItem *item, const char *exec, char *file)
 {
 	const char **temp_argv = NULL;
 	int temp_argc = 0;
@@ -585,7 +643,7 @@ ditem_exec_single_file (const GnomeDesktopItem *item, const char *exec, char *fi
 	GSList *tofree = NULL;
 	int ret;
 
-        g_return_val_if_fail(item, -1);
+        g_return_val_if_fail (item, -1);
 	if(!exec) {
 		g_warning(_("No exec field for this drop"));
 		return -1;
@@ -666,7 +724,7 @@ stripstreq(const char *s1, const char *s2)
 /* replace %s, %f, %u or %F in exec with files and run, the trick here is
    that we will only replace %? in case it is a complete argument */
 static int G_GNUC_UNUSED
-ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
+ditem_exec_multiple_files (GnomeDesktopItem *item, const char *exec,
 			   GList *files)
 {
 	const char **temp_argv = NULL;
@@ -678,7 +736,7 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 	int i,j;
 	gboolean replaced = FALSE;
 
-        g_return_val_if_fail(item, -1);
+        g_return_val_if_fail (item, -1);
 	if(!exec) {
 		g_warning(_("No exec field for this drop"));
 		return -1;
@@ -770,7 +828,7 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 /*FIXME: perhaps we should be able to handle mixed url/file lists better
   rather then treating it as a list of urls */
 int
-gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
+gnome_desktop_item_drop_uri_list (GnomeDesktopItem *item,
 				  GList *uri_list)
 {
 	GList *li;
@@ -836,9 +894,9 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
  * Returns: A boolean, %TRUE if it exists, %FALSE otherwise.
  */
 gboolean
-gnome_desktop_item_exists (const GnomeDesktopItem *item)
+gnome_desktop_item_exists (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, FALSE);
+        g_return_val_if_fail (item, FALSE);
 
 	if(item->entry->TryExec[0] != '\0') {
                 char *tryme;
@@ -896,9 +954,9 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
  * Returns: The flags associated with the specified 'item'
  */
 GnomeDesktopItemFlags
-gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
+gnome_desktop_item_get_flags (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, 0);
+        g_return_val_if_fail (item, 0);
 
         return item->item_flags;
 }
@@ -917,9 +975,9 @@ gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
  * memory remains owned by the GnomeDesktopItem and should not be freed.
  */
 GNOME_Desktop_EntryType
-gnome_desktop_item_get_type (const GnomeDesktopItem *item)
+gnome_desktop_item_get_type (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, GNOME_Desktop_ENTRY_TYPE_UNKNOWN);
+        g_return_val_if_fail (item, GNOME_Desktop_ENTRY_TYPE_UNKNOWN);
 
         return item->entry->Type;
 }
@@ -937,9 +995,9 @@ gnome_desktop_item_get_type (const GnomeDesktopItem *item)
  * Returns: The command associated with the specified 'item'.
  */
 gchar *
-gnome_desktop_item_get_command (const GnomeDesktopItem *item)
+gnome_desktop_item_get_command (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
         return g_strdup (item->entry->Exec);
 }
@@ -951,9 +1009,9 @@ gnome_desktop_item_get_command (const GnomeDesktopItem *item)
  * Returns: The TryExec field associated with the specified 'item'.
  */
 gchar *
-gnome_desktop_item_get_tryexec (const GnomeDesktopItem *item)
+gnome_desktop_item_get_tryexec (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
 	if (item->entry->TryExec [0] == '\0')
 		return NULL;
@@ -968,37 +1026,15 @@ gnome_desktop_item_get_tryexec (const GnomeDesktopItem *item)
  * Returns: The icon filename associated with the specified 'item'.
  */
 gchar *
-gnome_desktop_item_get_icon_path (const GnomeDesktopItem *item)
+gnome_desktop_item_get_icon_path (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
         return g_strdup (item->entry->Icon);
 }
 
-static GNOME_LocalizedString *
-find_localized_string (GNOME_LocalizedStringList *list, const char *language)
-{
-	gulong i;
-
-	if (!language)
-		language = "C";
-
-	for (i = 0; i < list->_length; i++) {
-		GNOME_LocalizedString *current;
-
-		current = &list->_buffer [i];
-
-		if ((current->locale == NULL) && !strcmp (language, "C"))
-			return current;
-		else if ((current->locale != NULL) && !strcmp (current->locale, language))
-			return current;
-	}
-
-	return NULL;
-}
-
-static gboolean
-set_localized_string (GNOME_LocalizedStringList *list, const gchar *language, const gchar *text)
+static void
+insert_localized_string (GNOME_LocalizedStringList *list, const gchar *language, const gchar *text)
 {
 	GNOME_LocalizedString *cur_val, *last_val;
 	gulong length, i;
@@ -1010,32 +1046,8 @@ set_localized_string (GNOME_LocalizedStringList *list, const gchar *language, co
 	if (list->_maximum == 0)
 		list->_maximum = length;
 
-	cur_val = find_localized_string (list, language);
-	if (cur_val) {
-		if (text) {
-			CORBA_free (cur_val->text);
-			cur_val->text = CORBA_string_dup (text);
-		} else if (length > 0) {
-			/* If length == 0, the list is already empty. */
-			last_val = &list->_buffer [length-1];
-			if (cur_val != last_val) {
-				/* Order doesn't matter. So if this isn't already
-				 * the last element in the list, swap them. */
-				*cur_val = *last_val;
-				cur_val = last_val;
-			}
-
-			/* Free it and shorten the list by one. */
-			CORBA_free (cur_val->locale);
-			CORBA_free (cur_val->text);
-			cur_val->locale = cur_val->text = NULL;
-			list->_length--;
-		}
-		return TRUE;
-	}
-
 	if (!text)
-		return FALSE;
+		return;
 
 	length++;
 	if (length >= list->_maximum) {
@@ -1060,29 +1072,10 @@ set_localized_string (GNOME_LocalizedStringList *list, const gchar *language, co
 	cur_val = &list->_buffer [length-1];
 	cur_val->locale = CORBA_string_dup (language);
 	cur_val->text = CORBA_string_dup (text);
-
-	return TRUE;
 }
 
-static Bonobo_Pair *
-find_attribute (Bonobo_PropertySet *list, const char *name)
-{
-	gulong i;
-
-	for (i = 0; i < list->_length; i++) {
-		Bonobo_Pair *current;
-
-		current = &list->_buffer [i];
-
-		if (!strcmp (current->name, name))
-			return current;
-	}
-
-	return NULL;
-}
-
-static gboolean
-set_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *value)
+static void
+insert_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *value)
 {
 	Bonobo_Pair *cur_val, *last_val;
 	gulong length, i;
@@ -1092,30 +1085,8 @@ set_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *val
 	if (list->_maximum == 0)
 		list->_maximum = length;
 
-	cur_val = find_attribute (list, name);
-	if (cur_val) {
-		if (value) {
-			CORBA_any__copy (&cur_val->value, value);
-		} else if (length > 0) {
-			/* If length == 0, the list is already empty. */
-			last_val = &list->_buffer [length-1];
-			if (cur_val != last_val) {
-				/* Order doesn't matter. So if this isn't already
-				 * the last element in the list, swap them. */
-				*cur_val = *last_val;
-				cur_val = last_val;
-			}
-
-			/* Free it and shorten the list by one. */
-			CORBA_free (cur_val->name);
-			cur_val->name = NULL;
-			list->_length--;
-		}
-		return TRUE;
-	}
-
 	if (!value)
-		return FALSE;
+		return;
 
 	length++;
 	if (length >= list->_maximum) {
@@ -1140,8 +1111,6 @@ set_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *val
 	cur_val = &list->_buffer [length-1];
 	cur_val->name = CORBA_string_dup (name);
 	CORBA_any__copy (&cur_val->value, value);
-
-	return TRUE;
 }
 
 
@@ -1156,13 +1125,15 @@ set_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *val
  *          the GnomeDesktopItem and should not be freed.
  * */
 gchar *
-gnome_desktop_item_get_name (const GnomeDesktopItem *item, const char *language)
+gnome_desktop_item_get_name (GnomeDesktopItem *item, const char *language)
 {
 	GNOME_LocalizedString *string;
 
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
-	string = find_localized_string (&item->entry->Name, language);
+	ditem_update (item);
+
+	string = g_hash_table_lookup (item->name, language ? language : "C");
 	if (string)
 		return g_strdup (string->text);
 
@@ -1180,13 +1151,15 @@ gnome_desktop_item_get_name (const GnomeDesktopItem *item, const char *language)
  *
  */
 gchar *
-gnome_desktop_item_get_comment (const GnomeDesktopItem *item, const char *language)
+gnome_desktop_item_get_comment (GnomeDesktopItem *item, const char *language)
 {
 	GNOME_LocalizedString *string;
 
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
-	string = find_localized_string (&item->entry->Comment, language);
+	ditem_update (item);
+
+	string = g_hash_table_lookup (item->comment, language ? language : "C");
 	if (string)
 		return g_strdup (string->text);
 
@@ -1204,28 +1177,26 @@ gnome_desktop_item_get_comment (const GnomeDesktopItem *item, const char *langua
  * */
 
 gchar *
-gnome_desktop_item_get_local_name (const GnomeDesktopItem *item)
+gnome_desktop_item_get_local_name (GnomeDesktopItem *item)
 {
-	gchar *locale, *name, *p;
+	gchar *name, *p;
+	GList *list, *c;
 
-	g_return_val_if_fail(item, NULL);
+	g_return_val_if_fail (item, NULL);
 
-	locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-	name = gnome_desktop_item_get_name (item, locale);
-	if (name || !locale) {
-		g_free (locale);
-		return name;
-	}
+	list = gnome_desktop_i18n_get_language_list ("LC_MESSAGES");
 
-	p = strchr (locale, '_');
-	if (p) {
-		*p = '\0';
+	for (c = list; c; c = c->next) {
+		const gchar *locale = c->data;
+
 		name = gnome_desktop_item_get_name (item, locale);
+		if (name) {
+			g_list_free (list);
+			return name;
+		}
 	}
 
-	g_free (locale);
-
-	return name;
+	return NULL;
 }
 
 /**
@@ -1237,28 +1208,26 @@ gnome_desktop_item_get_local_name (const GnomeDesktopItem *item)
  *          necessary. If no comment exists then NULL is returned.
  * */
 gchar *
-gnome_desktop_item_get_local_comment (const GnomeDesktopItem *item)
+gnome_desktop_item_get_local_comment (GnomeDesktopItem *item)
 {
-	gchar *locale, *comment, *p;
+	gchar *comment;
+	GList *list, *c;
 
-	g_return_val_if_fail(item, NULL);
+	g_return_val_if_fail (item, NULL);
 
-	locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-	comment = gnome_desktop_item_get_comment (item, locale);
-	if (comment || !locale) {
-		g_free (locale);
-		return comment;
-	}
+	list = gnome_desktop_i18n_get_language_list ("LC_MESSAGES");
 
-	p = strchr (locale, '_');
-	if (p) {
-		*p = '\0';
+	for (c = list; c; c = c->next) {
+		const gchar *locale = c->data;
+
 		comment = gnome_desktop_item_get_comment (item, locale);
+		if (comment) {
+			g_list_free (list);
+			return comment;
+		}
 	}
 
-	g_free (locale);
-
-	return comment;
+	return NULL;
 }
 
 
@@ -1278,14 +1247,16 @@ gnome_desktop_item_get_local_comment (const GnomeDesktopItem *item)
  *
  */
 BonoboArg *
-gnome_desktop_item_get_attribute (const GnomeDesktopItem *item, const char *attr_name)
+gnome_desktop_item_get_attribute (GnomeDesktopItem *item, const char *attr_name)
 {
 	Bonobo_Pair *pair;
 
-        g_return_val_if_fail(item, NULL);
-        g_return_val_if_fail(attr_name, NULL);
+        g_return_val_if_fail (item, NULL);
+        g_return_val_if_fail (attr_name, NULL);
 
-	pair = find_attribute (&item->entry->Attributes, attr_name);
+	ditem_update (item);
+
+	pair = g_hash_table_lookup (item->attributes, attr_name);
 	if (pair)
 		return bonobo_arg_copy (&pair->value);
 
@@ -1305,12 +1276,12 @@ gnome_desktop_item_get_attribute (const GnomeDesktopItem *item, const char *attr
  *
  */
 GSList *
-gnome_desktop_item_get_order (const GnomeDesktopItem *item)
+gnome_desktop_item_get_order (GnomeDesktopItem *item)
 {
 	gulong i;
 	GSList *retval = NULL;
 
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
 	for (i = 0; i < item->entry->SortOrder._length; i++) {
 		const gchar *text = item->entry->SortOrder._buffer [i];
@@ -1352,12 +1323,12 @@ ditem_add_key_test(gpointer key, gpointer value, gpointer user_data)
  *
  */
 GSList *
-gnome_desktop_item_get_languages(const GnomeDesktopItem *item)
+gnome_desktop_item_get_languages(GnomeDesktopItem *item)
 {
         GSList *retval = NULL;
 	gulong i;
 
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
 	for (i = 0; i < item->entry->Name._length; i++) {
 		GNOME_LocalizedString *current;
@@ -1394,12 +1365,12 @@ gnome_desktop_item_get_languages(const GnomeDesktopItem *item)
  *
  */
 GSList *
-gnome_desktop_item_get_attributes (const GnomeDesktopItem *item)
+gnome_desktop_item_get_attributes (GnomeDesktopItem *item)
 {
         GSList *retval = NULL;
 	gulong i;
 
-        g_return_val_if_fail(item, NULL);
+        g_return_val_if_fail (item, NULL);
 
 	for (i = 0; i < item->entry->Attributes._length; i++) {
 		Bonobo_Pair *pair = &item->entry->Attributes._buffer [i];
@@ -1425,8 +1396,8 @@ gnome_desktop_item_get_file_status (GnomeDesktopItem *item)
         struct stat sbuf;
         GnomeDesktopItemStatus retval;
 
-        g_return_val_if_fail(item, GNOME_DESKTOP_ITEM_DISAPPEARED);
-        g_return_val_if_fail(item->location, GNOME_DESKTOP_ITEM_DISAPPEARED);
+        g_return_val_if_fail (item, GNOME_DESKTOP_ITEM_DISAPPEARED);
+        g_return_val_if_fail (item->location, GNOME_DESKTOP_ITEM_DISAPPEARED);
 
         if(stat(item->location, &sbuf) != 0)
                 return GNOME_DESKTOP_ITEM_DISAPPEARED;
@@ -1446,7 +1417,7 @@ gnome_desktop_item_get_file_status (GnomeDesktopItem *item)
  *
  */
 char *
-gnome_desktop_item_get_location (const GnomeDesktopItem *item)
+gnome_desktop_item_get_location (GnomeDesktopItem *item)
 {
         return g_strdup (item->location);
 }
@@ -1488,11 +1459,20 @@ gnome_desktop_item_clear_name(GnomeDesktopItem *item)
 void
 gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const char *name)
 {
-	gboolean modified;
+	GNOME_LocalizedString *string;
 
-	modified = set_localized_string (&item->entry->Name, language, name);
-	if (modified)
-		item->modified = TRUE;
+	ditem_update (item);
+	item->modified = TRUE;
+
+	string = g_hash_table_lookup (item->name, language ? language : "C");
+	if (string) {
+		CORBA_free (string->text);
+		string->text = CORBA_string_dup (name);
+		return;
+	}
+
+	insert_localized_string (&item->entry->Name, language, name);
+	item->dirty = TRUE;
 }
 
 /**
@@ -1512,7 +1492,7 @@ gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const
 void
 gnome_desktop_item_set_type (GnomeDesktopItem *item, GNOME_Desktop_EntryType type)
 {
-        g_return_if_fail(item);
+        g_return_if_fail (item);
 
 	item->entry->Type = type;
 	item->modified = TRUE;
@@ -1535,7 +1515,7 @@ gnome_desktop_item_set_type (GnomeDesktopItem *item, GNOME_Desktop_EntryType typ
 void
 gnome_desktop_item_set_command (GnomeDesktopItem *item, const char *command)
 {
-        g_return_if_fail(item);
+        g_return_if_fail (item);
 
 	CORBA_free(item->entry->Exec);
 	item->entry->Exec = CORBA_string_dup(command);
@@ -1551,7 +1531,7 @@ gnome_desktop_item_set_command (GnomeDesktopItem *item, const char *command)
 void
 gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path)
 {
-        g_return_if_fail(item);
+        g_return_if_fail (item);
 
 	CORBA_free (item->entry->Icon);
 	item->entry->Icon = CORBA_string_dup (icon_path);
@@ -1593,11 +1573,20 @@ gnome_desktop_item_clear_comment(GnomeDesktopItem *item)
 void
 gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, const char *comment)
 {
-	gboolean modified;
+	GNOME_LocalizedString *string;
 
-	modified = set_localized_string (&item->entry->Comment, language, comment);
-	if (modified)
-		item->modified = TRUE;
+	ditem_update (item);
+	item->modified = TRUE;
+
+	string = g_hash_table_lookup (item->comment, language ? language : "C");
+	if (string) {
+		CORBA_free (string->text);
+		string->text = CORBA_string_dup (comment);
+		return;
+	}
+
+	insert_localized_string (&item->entry->Comment, language, comment);
+	item->dirty = TRUE;
 }
 
 /**
@@ -1615,11 +1604,19 @@ gnome_desktop_item_set_attribute (GnomeDesktopItem *item,
 				  const char *attr_name,
 				  const BonoboArg *attr_value)
 {
-	gboolean modified;
+	Bonobo_Pair *this;
 
-	modified = set_attribute (&item->entry->Attributes, attr_name, attr_value);
-	if (modified)
-		item->modified = TRUE;
+	ditem_update (item);
+	item->modified = TRUE;
+
+	this = g_hash_table_lookup (item->attributes, attr_name);
+	if (this) {
+		CORBA_any__copy (&this->value, attr_value);
+		return;
+	}
+
+	insert_attribute (&item->entry->Attributes, attr_name, attr_value);
+	item->dirty = TRUE;
 }
 
 /**
@@ -1639,8 +1636,8 @@ gnome_desktop_item_set_order (GnomeDesktopItem *item, GSList *order)
 	GSList *li;
 	gulong length, i;
 
-        g_return_if_fail(item);
-        g_return_if_fail(item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY);
+        g_return_if_fail (item);
+        g_return_if_fail (item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY);
 
 	length = g_slist_length (order);
 	if (item->entry->SortOrder._release)
@@ -1669,7 +1666,7 @@ gnome_desktop_item_set_order (GnomeDesktopItem *item, GSList *order)
 void
 gnome_desktop_item_set_flags (GnomeDesktopItem *item, GnomeDesktopItemFlags flags)
 {
-        g_return_if_fail(item);
+        g_return_if_fail (item);
 
         item->item_flags = flags;
 }

@@ -1,5 +1,13 @@
 2001-08-20  Martin Baulig  <baulig@suse.de>
 
+	* gnome-desktop-item.c (GnomeDesktopItem): Added `name', `comment'
+	and `attributes' hash tables; copy all the CORBA sequences into these
+	hash tables to make the lookup faster.
+
+	* gnome-desktop-item.h: Make all `GnomeDesktopItem *'s non-const.
+
+2001-08-20  Martin Baulig  <baulig@suse.de>
+
 	* gnome-desktop-i18n.[ch]: New files. This is a mixture of the old
 	gnome-libs/libgnome/gnome-i18n.c and gettext-0.10.38/intl/localealias.c.
 
