@@ -739,10 +739,11 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 		 * to the name of the file if possible, or "Unknown"
 		 * (not to be translated "C" is supposed to be english) */
 		char *name;
-		name = g_basename(item->location);
+		name = g_path_get_basename(item->location);
 		if(!name)
-			name = "Unknown";
+			name = g_strdup("Unknown");
 		gnome_config_set_string("Name", name);
+		g_free(name);
 	}
 
         if(item->comment)
