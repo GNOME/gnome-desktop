@@ -4,6 +4,7 @@ SUBDIRS =			\
 	gnome-desktop 		\
 	gnome-terminal	 	\
 	gnome-about 		\
+	desktop-links		\
 	gsm 			\
 	panel 			\
 	libpanel-applet		\
