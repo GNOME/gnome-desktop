@@ -17,6 +17,7 @@ static gchar *contributors[] = {
 	"Seth Alves",
 	"Shawn T. Amundson",
 	"Erik Andersen",
+	"Marius Andreiana",
 	"Jon Anhold",
 	N_("Timur I. Bakeyev"),
 	/* if your encoding allows it, use aacute (U00E1) 
