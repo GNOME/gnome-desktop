@@ -25,13 +25,4 @@ Directory_in_files = \
 Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
-Desktop_in_files = \
-	Xemacs.desktop		\
-	Emacs.desktop		\
-	xterm.desktop		\
-	Netscape.desktop
-
-Desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
-
-EXTRA_DIST = $(Desktop_in_files) $(Directory_DATA) $(Order_DATA)
+EXTRA_DIST = $(Directory_DATA) $(Order_DATA)
