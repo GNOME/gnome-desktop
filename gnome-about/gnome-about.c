@@ -444,12 +444,15 @@ init_version_strings (void)
 	about = xmlParseFile (gnome_program_locate_file (
 			      NULL, GNOME_FILE_DOMAIN_DATADIR,
 			      "gnome-about/gnome-version.xml", TRUE, NULL) );
-	if (!about)
+	if (!about) {
+		gnome_version_string = g_strdup ("");
 		return;
+	}
 
 	node = about->children;
 	
 	if (g_ascii_strcasecmp (node->name, "gnome-version")) {
+		gnome_version_string = g_strdup ("");
 		xmlFreeDoc (about);
 		return;
 	}
