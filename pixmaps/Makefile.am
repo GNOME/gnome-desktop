@@ -57,7 +57,6 @@ pixmap_DATA =					\
 	gnome-workspace.png			\
 	kterm.xpm				\
 	vnterm.xpm				\
-	launcher-program.png			\
 	monitor.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
