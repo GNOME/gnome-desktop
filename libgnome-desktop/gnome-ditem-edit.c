@@ -36,7 +36,6 @@
 #include <libgnome/gnome-i18n.h>
 
 #include "gnome-stock.h"
-#include "gnome-dialog.h"
 #include "gnome-uidefs.h"
 #include "gnome-pixmap.h"
 #include "gnome-icon-entry.h"
