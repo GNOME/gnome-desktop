@@ -101,6 +101,7 @@ static gchar *contributors[] = {
 	"Christopher R. Gabriel",
 	"Mark Galassi",
 	"Tony Gale",
+	"Carlos Garnacho Parro",
 	"Jeff Garzik",
 	N_("The Mysterious GEGL"),
 	"Tim Gerla",
