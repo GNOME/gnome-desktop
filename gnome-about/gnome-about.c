@@ -31,7 +31,7 @@ static int          font_descent;
 static int          font_ascent;
 static int          fast_fwd = 0;
 static char        *gnome_version_string = NULL;
-static char        *gnome_vendor_string = NULL;
+static char        *gnome_distro_string = NULL;
 static char        *gnome_build_date_string = NULL;
 static char        *gnome_intro_message = NULL;
 
@@ -439,7 +439,7 @@ init_version_strings (void)
 	char       *platform = NULL;
 	char       *minor = NULL;
 	char       *micro = NULL;
-	char       *vendor = NULL;
+	char       *distro = NULL;
 
 	about = xmlParseFile (gnome_program_locate_file (
 			      NULL, GNOME_FILE_DOMAIN_DATADIR,
@@ -469,8 +469,8 @@ init_version_strings (void)
 			minor = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "micro") && value && value [0])
 			micro = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "vendor") && value && value [0])
-			gnome_vendor_string = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "distributor") && value 
+			&& value [0]) gnome_distro_string = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "date") && value && value [0])
 			gnome_build_date_string = g_strdup (value);
 		
@@ -483,18 +483,18 @@ init_version_strings (void)
 		gnome_version_string = g_strdup ("");
 
 	if (!gnome_version_string && !minor)
-		gnome_version_string = g_strconcat (platform, vendor, NULL);
+		gnome_version_string = g_strconcat (platform, distro, NULL);
 
 	if (!gnome_version_string && !micro)
-		gnome_version_string = g_strconcat (platform, ".", minor, vendor, NULL);
+		gnome_version_string = g_strconcat (platform, ".", minor, distro, NULL);
 
 	if (!gnome_version_string)
-		gnome_version_string = g_strconcat (platform, ".", minor, ".", micro, vendor, NULL);
+		gnome_version_string = g_strconcat (platform, ".", minor, ".", micro, distro, NULL);
 
 	g_free (platform);
 	g_free (minor);
 	g_free (micro);
-	g_free (vendor);
+	g_free (distro);
 }
 
 static char *
@@ -814,7 +814,7 @@ main (gint argc, gchar *argv[])
 	PangoFontMetrics *metrics;
 	int               max_width;
 	char             *title;
-	char             *vendor_string = NULL;
+	char             *distro_string = NULL;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -827,23 +827,23 @@ main (gint argc, gchar *argv[])
 	init_version_strings ();
 	g_assert (gnome_version_string);
 
-	if (gnome_vendor_string && gnome_build_date_string)
-		vendor_string = g_strdup_printf (" (%s - %s)",
-						 gnome_vendor_string,
+	if (gnome_distro_string && gnome_build_date_string)
+		distro_string = g_strdup_printf (" (%s - %s)",
+						 gnome_distro_string,
 						 gnome_build_date_string);
 
-	else if (gnome_vendor_string && !gnome_build_date_string)
-		vendor_string = g_strdup_printf (" (%s)", gnome_vendor_string);
+	else if (gnome_distro_string && !gnome_build_date_string)
+		distro_string = g_strdup_printf (" (%s)", gnome_distro_string);
 
 	title = g_strdup_printf (_("About GNOME%s%s%s"),
 				 gnome_version_string[0] ? " " : "" ,
 				 gnome_version_string,
-				 vendor_string ? vendor_string : "");
+				 distro_string ? distro_string : "");
 	window = gtk_dialog_new_with_buttons (title, NULL, 0,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,	
 				   	      NULL);
 	g_free (title);
-	g_free (vendor_string);
+	g_free (distro_string);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_OK);
 
@@ -992,7 +992,7 @@ main (gint argc, gchar *argv[])
 	gtk_main ();
 
 	g_free (gnome_version_string);
-	g_free (gnome_vendor_string);
+	g_free (gnome_distro_string);
 	g_free (gnome_build_date_string);
 	g_free (gnome_intro_message);
 
