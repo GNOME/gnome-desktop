@@ -1748,7 +1748,6 @@ ditem_execute (const GnomeDesktopItem *item,
 					      CurrentTime);
 		
 		envp = make_spawn_environment_for_sn_context (sn_context, envp);
-		g_strfreev (free_me);
 		free_me = envp;		
 	} else {
 		sn_context = NULL;
@@ -1757,7 +1756,8 @@ ditem_execute (const GnomeDesktopItem *item,
 
 	if (screen) {
 		envp = egg_make_spawn_environment_for_screen (screen, envp);
-		g_strfreev (free_me);
+		if (free_me)
+			g_strfreev (free_me);
 		free_me = envp;
 	}
 	
