@@ -45,7 +45,6 @@
 #include "gnome-ditem.h"
 #include "gnome-util.h"
 #include "gnome-exec.h"
-#include "gnome-i18nP.h"
 #include "gnome-url.h"
 #include <locale.h>
 #include <popt.h>
