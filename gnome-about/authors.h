@@ -9,6 +9,7 @@ typedef struct {
 static author authors[] = {
 	{ N_("GNOME was brought to you by"), "" },
 	{ "", "" },
+	{ "Martin Baulig", "<martin@home-of-linux.org" },
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
 	{ "Jonathan Blandford", "<jrb@redhat.com>" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },	
