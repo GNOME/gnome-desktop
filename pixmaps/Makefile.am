@@ -69,7 +69,10 @@ BITMAPS     = \
 	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
-	panel-menu-main.png
+	panel-menu-main.png		\
+	apple-green.png			\
+	apple-red.png
+
 
 TILES     = \
 	tile-normal-up.png			\
