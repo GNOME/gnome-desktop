@@ -58,6 +58,7 @@ BITMAPS     = \
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
+	gnome-util.png              \
 	gnome-word.png				\
 	kterm.xpm				\
 	vnterm.xpm				\
