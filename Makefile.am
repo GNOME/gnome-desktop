@@ -14,7 +14,7 @@ SUBDIRS = intl po macros \
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
 #	$(sometimes_built_SUBDIRS)
 
-EXTRA_DIST = gnome-core.spec
+EXTRA_DIST = gnome-core.spec.in
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
 @MAINT@include macros/macros.dep
