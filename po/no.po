@@ -5,27 +5,30 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.30\n"
-"POT-Creation-Date: 1998-10-02 00:33+0200\n"
-"PO-Revision-Date: 1998-10-10 16:32+0100\n"
+"POT-Creation-Date: 1998-10-24 22:18+0200\n"
+"PO-Revision-Date: 1998-10-24 16:32+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: applets/asclock/asclock.c:143 help-browser/window.c:156
+#: applets/asclock/asclock.c:143 applets/fvwm-pager/fvwm-pager.c:199
+#: help-browser/window.c:158
 msgid "About"
 msgstr "Om"
 
 #: applets/asclock/asclock.c:150 applets/clockmail/clockmail.c:428
 #: applets/cpuload/cpuload.c:221 applets/diskusage/diskusage.c:710
-#: applets/drivemount/drivemount.c:418 applets/fish/fish.c:458
-#: applets/gen_util/clock.c:258 applets/gen_util/mailcheck.c:587
-#: applets/gen_util/printer.c:388 applets/icewm-pager/wmpager_applet.c:93
+#: applets/drivemount/drivemount.c:455 applets/fish/fish.c:458
+#: applets/gen_util/clock.c:258 applets/gen_util/mailcheck.c:682
+#: applets/gen_util/printer.c:399 applets/gkb/gkb.c:174
+#: applets/icewm-pager/wmpager_applet.c:93
 #: applets/modemlights/modemlights.c:716 applets/multiload/cpuload.c:240
 #: applets/multiload/memload.c:279 applets/multiload/swapload.c:240
-#: applets/netload/netload.c:345 applets/webcontrol/webcontrol.c:317
-#: panel/drawer.c:364 panel/launcher.c:255 panel/menu.c:2062
+#: applets/netload/netload.c:345 applets/slashapp/slashapp.c:565
+#: applets/webcontrol/webcontrol.c:317 panel/drawer.c:365 panel/launcher.c:265
+#: panel/menu.c:2234
 msgid "Properties..."
 msgstr "Egenskaper ..."
 
@@ -37,14 +40,15 @@ msgstr "Afterstep klokkeapplet"
 msgid "Who said NeXT is dead?"
 msgstr "Hvem sa at NeXT er død?"
 
-#. General frame
+#. ---
 #: applets/asclock/dialogs.c:104 applets/clockmail/properties.c:368
 #: applets/cpuload/properties.c:200 applets/diskusage/properties.c:316
-#: applets/drivemount/properties.c:185 applets/modemlights/properties.c:196
-#: applets/multiload/properties-cpu.c:220
+#: applets/drivemount/properties.c:203 applets/fvwm-pager/properties.c:246
+#: applets/modemlights/properties.c:196 applets/multiload/properties-cpu.c:220
 #: applets/multiload/properties-mem.c:248
 #: applets/multiload/properties-swap.c:220 applets/netload/properties.c:252
-#: gnome-terminal/gnome-terminal.c:730 panel/panel_config_global.c:294
+#: applets/slashapp/properties.c:328 gnome-terminal/gnome-terminal.c:739
+#: panel/panel_config_global.c:294
 msgid "General"
 msgstr "Generelt"
 
@@ -138,7 +142,7 @@ msgstr "APM BIOS versjon:"
 msgid "Battery Status:"
 msgstr "Batteristatus:"
 
-#: applets/batmon/batmon.c:406 help-browser/window.c:142
+#: applets/batmon/batmon.c:406 help-browser/window.c:144
 msgid "Close"
 msgstr "Lukk"
 
@@ -147,8 +151,9 @@ msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Intern feil: ugyldig modus i battery_set_mode"
 
 #: applets/battery/battery.c:398 applets/cpuload/cpuload.c:203
-#: applets/fish/fish.c:433 applets/gen_util/clock.c:231
-#: applets/gen_util/mailcheck.c:565 applets/gen_util/printer.c:363
+#: applets/fish/fish.c:433 applets/freshapp/freshapp.c:39
+#: applets/gen_util/clock.c:231 applets/gen_util/mailcheck.c:649
+#: applets/gen_util/printer.c:374 applets/gkb/gkb.c:136
 #: applets/netload/netload.c:320
 msgid "Can't create applet!\n"
 msgstr "Kan ikke opprette applet!\n"
@@ -166,7 +171,8 @@ msgid "General Properties"
 msgstr "Generelle egenskaper"
 
 #: applets/battery/properties.c:45 applets/cpuload/properties.c:125
-#: applets/diskusage/properties.c:213 applets/multiload/properties-cpu.c:136
+#: applets/diskusage/properties.c:213 applets/fvwm-pager/properties.c:178
+#: applets/multiload/properties-cpu.c:136
 #: applets/multiload/properties-mem.c:163
 #: applets/multiload/properties-swap.c:136 applets/netload/properties.c:129
 msgid "Applet Height"
@@ -230,12 +236,14 @@ msgstr "APM er slått av! Kan ikke lese informasjon om batterilading."
 
 #. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
 #. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#: applets/bussign/bussign.c:71 applets/clockmail/clockmail.c:435
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:424
-#: applets/fifteen/fifteen.c:305 applets/fish/fish.c:450
-#: applets/gen_util/mailcheck.c:594 applets/icewm-pager/wmpager_applet.c:85
+#: applets/bussign/bussign.c:71 applets/charpick/charpick.c:336
+#: applets/clockmail/clockmail.c:435 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:461 applets/fifteen/fifteen.c:305
+#: applets/fish/fish.c:450 applets/gen_util/mailcheck.c:689
+#: applets/gkb/gkb.c:168 applets/icewm-pager/wmpager_applet.c:85
 #: applets/modemlights/modemlights.c:722 applets/netload/netload.c:338
-#: applets/webcontrol/webcontrol.c:309 gmenu/gmenu.c:63 panel/menu.c:1543
+#: applets/slashapp/slashapp.c:571 applets/webcontrol/webcontrol.c:309
+#: gmenu/gmenu.c:63 panel/menu.c:1715
 msgid "About..."
 msgstr "Om..."
 
@@ -247,7 +255,7 @@ msgstr "Gjenoppfrisk bilde"
 msgid "The Bus Sign Applet"
 msgstr "The Bus Sign Applet"
 
-#: applets/bussign/bussign.c:241 applets/gen_util/mailcheck.c:528
+#: applets/bussign/bussign.c:241 applets/gen_util/mailcheck.c:609
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 the Free Software Foundation"
 
@@ -265,7 +273,25 @@ msgstr ""
 "\n"
 "http://people.netscape.com/mtoy/sign/index.html"
 
-#: applets/clockmail/clockmail.c:29
+#: applets/charpick/charpick.c:203
+msgid "Character Picker"
+msgstr "Tegnvelger
+
+#: applets/charpick/charpick.c:204
+msgid "0.02"
+msgstr "0.02
+
+#: applets/charpick/charpick.c:205
+msgid "Copyright (C) 1998"
+msgstr "Copyright (C) 1998"
+
+#: applets/charpick/charpick.c:207
+msgid ""
+"Gnome Panel applet for selecting strange characters that are not on my "
+"keyboard. Released under GNU General Public Licence."
+msgstr ""
+
+#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:499
 #, c-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
@@ -278,7 +304,7 @@ msgstr "John Ellis <johne@bellatlantic.net>"
 msgid "Clock and Mail Notify Applet"
 msgstr "Klokke- og postnotifiseringsapplet"
 
-#: applets/clockmail/clockmail.c:36
+#: applets/clockmail/clockmail.c:36 applets/slashapp/slashapp.c:508
 msgid "(C) 1998"
 msgstr "(C) 1998"
 
@@ -361,7 +387,7 @@ msgid "System Load"
 msgstr "Systemlast"
 
 #: applets/cpuload/properties.c:131 applets/diskusage/properties.c:219
-#: applets/multiload/properties-cpu.c:144
+#: applets/fvwm-pager/properties.c:184 applets/multiload/properties-cpu.c:144
 #: applets/multiload/properties-mem.c:171
 #: applets/multiload/properties-swap.c:144 applets/netload/properties.c:135
 msgid "Width"
@@ -410,11 +436,11 @@ msgstr "Bakgrunnsfarge"
 msgid "Diskusage Settings"
 msgstr "Innstillinger for diskbruk"
 
-#: applets/drivemount/drivemount.c:50
+#: applets/drivemount/drivemount.c:51
 msgid "Drive Mount Applet"
 msgstr "Diskmonteringsapplet"
 
-#: applets/drivemount/drivemount.c:53
+#: applets/drivemount/drivemount.c:54
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
@@ -422,19 +448,19 @@ msgstr ""
 "Utgitt under GNU general public license.\n"
 "Monterer og avmonterer disker.."
 
-#: applets/drivemount/drivemount.c:89
+#: applets/drivemount/drivemount.c:127
 msgid " mounted"
 msgstr " montert"
 
-#: applets/drivemount/drivemount.c:94
+#: applets/drivemount/drivemount.c:132
 msgid " not mounted"
 msgstr " ikke montert"
 
-#: applets/drivemount/drivemount.c:166
+#: applets/drivemount/drivemount.c:202
 msgid "\" reported:\n"
 msgstr "\" rapportert:\n"
 
-#: applets/drivemount/drivemount.c:168
+#: applets/drivemount/drivemount.c:204
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -442,41 +468,45 @@ msgstr ""
 "Diskmonteringskommandoen feilet.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:431
+#: applets/drivemount/drivemount.c:468
 msgid "Eject"
 msgstr "Løs ut"
 
-#: applets/drivemount/properties.c:122
+#: applets/drivemount/properties.c:134
 msgid "Drive Mount Settings"
 msgstr "Instillinger for Diskmontering"
 
-#: applets/drivemount/properties.c:130
+#: applets/drivemount/properties.c:142
 msgid "Update in seconds:"
 msgstr "Oppdatering i sekunder:"
 
-#: applets/drivemount/properties.c:141
+#: applets/drivemount/properties.c:153
 msgid "Icon:"
 msgstr "Ikon:"
 
-#: applets/drivemount/properties.c:148
+#: applets/drivemount/properties.c:160
 msgid "Floppy"
 msgstr "Diskett"
 
-#: applets/drivemount/properties.c:152
+#: applets/drivemount/properties.c:164
 msgid "Cdrom"
 msgstr "Cdrom"
 
-#: applets/drivemount/properties.c:156
+#: applets/drivemount/properties.c:168
 msgid "Zip Drive"
 msgstr "Zip-disk"
 
-#: applets/drivemount/properties.c:160
+#: applets/drivemount/properties.c:172
 msgid "Hard Disk"
 msgstr "Harddisk"
 
-#: applets/drivemount/properties.c:173
+#: applets/drivemount/properties.c:185
 msgid "Mount point:"
 msgstr "Monteringspunkt:"
+
+#: applets/drivemount/properties.c:197
+msgid "Use automount friendly status test"
+msgstr ""
 
 #: applets/fifteen/fifteen.c:35
 msgid "You win!"
@@ -499,8 +529,8 @@ msgid ""
 "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
 "Guaranteed to be a productivity buster."
 msgstr ""
-"Sam Lloyds favorittspill, nå til alles begeistring tilgjengelig i Panelet."
-"Garantert ødeleggende for produktiviteten."
+"Sam Lloyds favorittspill, nå til alles begeistring tilgjengelig i "
+"Panelet.Garantert ødeleggende for produktiviteten."
 
 #: applets/fifteen/fifteen.c:288
 msgid "Can't create fifteen applet!"
@@ -533,8 +563,8 @@ msgstr "Navnet på din Gnome fisk:"
 msgid "The Animation Filename:"
 msgstr "Filnavn for animasjonen:"
 
-#: applets/fish/fish.c:217 panel/menu.c:2006 panel/panel-util.c:187
-#: panel/panel_config.c:730 panel/swallow.c:183
+#: applets/fish/fish.c:217 panel/menu.c:2178 panel/panel-util.c:187
+#: panel/panel_config.c:730 panel/swallow.c:191
 msgid "Browse"
 msgstr "Se på"
 
@@ -567,8 +597,49 @@ msgid ""
 msgstr ""
 "Denne appleten har totalt ingen nytte. Den bare okkuperer diskplass og "
 "kompileringstid, og om lastet tar den også opp dyrebar plass i panelet og "
-"minne. Hvis noen blir tatt i å bruke denne appleten, burde vedkommende straks "
-"sendes til psykisk evaluering."
+"minne. Hvis noen blir tatt i å bruke denne appleten, burde vedkommende "
+"straks sendes til psykisk evaluering."
+
+#: applets/fvwm-pager/fvwm-pager.c:101
+msgid "Fvwm Pager Applet"
+msgstr "Applet for valg av viruelt skjermområde"
+
+#: applets/fvwm-pager/fvwm-pager.c:103
+msgid "Copyright (C) 1998 M. Lausch"
+msgstr "Copyright (C) 1998 M. Lausch"
+
+#: applets/fvwm-pager/fvwm-pager.c:205 gmenu/gmenu.c:90
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: applets/fvwm-pager/fvwm-pager.c:213
+#, c-format
+msgid "Desk %d"
+msgstr "Skrivebord %d"
+
+#: applets/fvwm-pager/properties.c:133 applets/fvwm-pager/properties.c:162
+msgid "Active Window Color"
+msgstr "Farge på aktivt vindu"
+
+#: applets/fvwm-pager/properties.c:137 applets/fvwm-pager/properties.c:166
+msgid "Inactive Window Color"
+msgstr "Farge på inaktivt vindu"
+
+#: applets/fvwm-pager/properties.c:141
+msgid "Active Desktop Color"
+msgstr "Farge på aktivt skrivebord"
+
+#: applets/fvwm-pager/properties.c:145 applets/fvwm-pager/properties.c:174
+msgid "Inactive Desktop Color"
+msgstr "Farge på inaktivt skrivebord"
+
+#: applets/fvwm-pager/properties.c:170
+msgid "Active Dekstop Color"
+msgstr "Farger på aktivt skrivebord"
+
+#: applets/fvwm-pager/properties.c:242
+msgid "Fvwm Pager Settings"
+msgstr "Innstillinger for valg av virtuelt skjermområde"
 
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
@@ -617,43 +688,55 @@ msgstr "12 timer"
 msgid "24 hour"
 msgstr "24 timer"
 
-#: applets/gen_util/mailcheck.c:229
+#: applets/gen_util/mailcheck.c:245
 msgid "You have new mail."
 msgstr "Du har ny post."
 
-#: applets/gen_util/mailcheck.c:231
+#: applets/gen_util/mailcheck.c:247
 msgid "You have mail."
 msgstr "Du har post."
 
-#: applets/gen_util/mailcheck.c:233
+#: applets/gen_util/mailcheck.c:249
 msgid "No mail."
 msgstr "Ingen post."
 
-#: applets/gen_util/mailcheck.c:446
-msgid "Notification"
-msgstr "Melding"
+#: applets/gen_util/mailcheck.c:501
+msgid "Execute"
+msgstr "Utfør"
 
-#: applets/gen_util/mailcheck.c:463
+#: applets/gen_util/mailcheck.c:513
+msgid "before each update"
+msgstr "før hver oppdatering"
+
+#: applets/gen_util/mailcheck.c:521
+msgid "Check for mail every"
+msgstr "Sjekk om det er post hver"
+
+#: applets/gen_util/mailcheck.c:532
+msgid "s"
+msgstr "s"
+
+#: applets/gen_util/mailcheck.c:540
 msgid "Select animation"
 msgstr "Velg animasjon"
 
-#: applets/gen_util/mailcheck.c:486
+#: applets/gen_util/mailcheck.c:563
 msgid "Mail check properties"
 msgstr "Egenskaper for postsjekking"
 
-#: applets/gen_util/mailcheck.c:491
+#: applets/gen_util/mailcheck.c:568
 msgid "Mail check"
 msgstr "Postsjekk"
 
-#: applets/gen_util/mailcheck.c:527
+#: applets/gen_util/mailcheck.c:608
 msgid "Mail check Applet"
 msgstr "Postsjekk-applet"
 
-#: applets/gen_util/mailcheck.c:530
+#: applets/gen_util/mailcheck.c:611
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Postsjekking gir deg beskjed når du har ny post i postkassen"
 
-#: applets/gen_util/mailcheck.c:575
+#: applets/gen_util/mailcheck.c:670
 msgid "Text only"
 msgstr "Bare tekst"
 
@@ -669,21 +752,72 @@ msgstr "Start i postsjekkingsmodus"
 msgid "Start in printer mode"
 msgstr "Start i skrivermodus"
 
-#: applets/gen_util/printer.c:326
+#: applets/gen_util/printer.c:337
 msgid "Printer properties"
 msgstr "Egenskaper for skrivere"
 
-#: applets/gen_util/printer.c:334
+#: applets/gen_util/printer.c:345
 msgid "Printer name:"
 msgstr "Skrivernavn:"
 
-#: applets/gen_util/printer.c:338
+#: applets/gen_util/printer.c:349
 msgid "Print command:"
 msgstr "Skriverkommando:"
 
-#: applets/gen_util/printer.c:344
+#: applets/gen_util/printer.c:355
 msgid "Printer"
 msgstr "Skriver"
+
+#: applets/gkb/gkb.c:93
+#, fuzzy
+msgid "The GNOME KB Applet"
+msgstr "GNOME KB-applet"
+
+#: applets/gkb/gkb.c:93
+msgid "0.28"
+msgstr "0.28"
+
+#: applets/gkb/gkb.c:94
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr "(C) 1998 LSC - Linux Supporting Center"
+
+#: applets/gkb/gkb.c:96
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS."
+msgstr ""
+"Denne appleten brukes til å bytte mellom tastaturmappinger. Ingenting mer. "
+"Den bruker setxkbmap. Webstedet for denne appleten flyttet midlertidig til "
+"URL'en http://lsc.kva.hu/gkb. Vær vennlig å send en e-post med flagget "
+"ditt, så vil jeg legge det til i CVS."
+
+#: applets/gkb/gkb.c:104
+msgid "gkb.xpm"
+msgstr "gkb.xpm"
+
+#: applets/gkb/properties.c:93
+msgid "Icon Selection"
+msgstr "Ikonvalg"
+
+#: applets/gkb/properties.c:188
+msgid "GKB settings"
+msgstr "Instillinger for GKB"
+
+#: applets/gkb/properties.c:217 applets/gkb/properties.c:234
+msgid ""
+"Couldn't\n"
+"load\n"
+"icon"
+msgstr ""
+"Kunne ikke\n"
+"laste\n"
+"ikonet"
+
+#: applets/gkb/properties.c:244 panel/menu.c:2189
+msgid "Menu"
+msgstr "Meny"
 
 #. FIXME: This should check to make sure icewm (or equiv) is running.
 #. Not sure if it is working though...
@@ -704,6 +838,10 @@ msgstr "Copyright (C)1998 M.Watson"
 #: applets/icewm-pager/wmpager_applet.c:277
 msgid "Failed to retrieve workspace property."
 msgstr "Klarte ikke å innhente egenskaper for arbeidsområde."
+
+#: applets/mixer/mixer.c:576
+msgid "Run gmix..."
+msgstr "Kjør gmix..."
 
 #: applets/modemlights/modemlights.c:91
 msgid "Modem Lights Applet"
@@ -832,13 +970,14 @@ msgstr "Gnome nettverkslast applet"
 #: applets/netload/netload.c:297
 msgid ""
 "This applet is released under the terms and conditions of the GNU Public "
-"Licence. This applet shows the load on a network device. It requires the "
+"Licence.This applet shows the load on a network device. It requires the "
 "/proc/net/ip_acct interface to be present and set up correctly for the "
 "device."
 msgstr ""
-"Denn appleten er utgitt under vilkårenet og betingelsene gitt i GNU Public "
-"Licence. Denne appleten viser belastningen på en nettverksenhet. Den krever at"
-"/proc/net/ip_acct grensesnittet er tilgjengelig, og riktig satt opp for enheten."
+"Denne appleten er utgitt under vilkårene og betingelsene gitt i GNU Public "
+"Licence. Denne appleten viser belastningen på en nettverksenhet. Den krever "
+"at/proc/net/ip_acct grensesnittet er tilgjengelig, og riktig satt opp for "
+"enheten."
 
 #: applets/netload/properties.c:119
 msgid "Network Traffic"
@@ -868,6 +1007,142 @@ msgstr "Innstillinger for nettlast"
 msgid "Device"
 msgstr "Enhet"
 
+#: applets/slashapp/properties.c:184
+msgid "Articles"
+msgstr "Artikler"
+
+#: applets/slashapp/properties.c:193
+msgid "Show topic images"
+msgstr "Vis emnebilder"
+
+#: applets/slashapp/properties.c:199
+msgid "Show department"
+msgstr "Vis avdeling"
+
+#: applets/slashapp/properties.c:205
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Vis ekstra informasjon (Tid, forfatter, kommentarer)"
+
+#: applets/slashapp/properties.c:215
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "Pause mellom artikler (10 = 1 sek):"
+
+#: applets/slashapp/properties.c:227
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(Disse innstillingene trer ikke i kraft uten en gjenoppfrisking)"
+
+#: applets/slashapp/properties.c:231
+msgid "Browser"
+msgstr "Leser"
+
+#: applets/slashapp/properties.c:240
+msgid "Open new window"
+msgstr "Åpne nytt vindu"
+
+#. -- not implemented yet --
+#: applets/slashapp/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr "Tikkerinformasjon (uimplementert)"
+
+#. create the widget we are going to put on the applet
+#: applets/slashapp/properties.c:261 applets/webcontrol/webcontrol.c:119
+msgid "Url:"
+msgstr "Url:"
+
+#: applets/slashapp/properties.c:278
+msgid "Article index file:"
+msgstr "Artikkelindeksfil:"
+
+#: applets/slashapp/properties.c:295
+msgid "Image Server Url:"
+msgstr "Bildetjener Url:"
+
+#: applets/slashapp/properties.c:312
+msgid "Image path:"
+msgstr "Bildesti:"
+
+#: applets/slashapp/properties.c:337 gnome-terminal/gnome-terminal.c:852
+msgid "Scrolling"
+msgstr "Rullende"
+
+#: applets/slashapp/properties.c:346
+msgid "Smooth scroll"
+msgstr "Jevn rulling"
+
+#: applets/slashapp/properties.c:352
+msgid "Smooth type"
+msgstr "Jevn skriving"
+
+#: applets/slashapp/properties.c:358
+msgid "Speed"
+msgstr "Fart"
+
+#: applets/slashapp/properties.c:371
+msgid "Delay when wrapping text:"
+msgstr "Pause under tekstbryting:"
+
+#: applets/slashapp/properties.c:387
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "Rullefart mellom linjer (jevn rulling):"
+
+#: applets/slashapp/properties.c:399
+msgid "Display"
+msgstr "Vis"
+
+#: applets/slashapp/slashapp.c:108
+msgid "No articles"
+msgstr "Ingen artikler"
+
+#: applets/slashapp/slashapp.c:125
+msgid "Slashapp article list"
+msgstr "Slashapp artikkelliste"
+
+#: applets/slashapp/slashapp.c:209 gmenu/gmenu.c:186
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "oppretter brukerkatalog: %s\n"
+
+#: applets/slashapp/slashapp.c:212 gmenu/gmenu.c:189
+#, c-format
+msgid "unable to create user directory: %s\n"
+msgstr "kunne ikke opprette brukerkatalogen: %s\n"
+
+#: applets/slashapp/slashapp.c:468
+msgid "No articles found"
+msgstr "Ingen artikler funnet"
+
+#: applets/slashapp/slashapp.c:502
+msgid "Justin Maurer <mike911@clark.net>"
+msgstr "Justin Maurer <mike911@clark.net>"
+
+#: applets/slashapp/slashapp.c:503
+msgid "Craig Small <csmall@small.dropbear.co.uk>"
+msgstr "Craig Small <csmall@small.dropbear.co.uk>"
+
+#: applets/slashapp/slashapp.c:504
+msgid "John Ellis <johne@bellatlantic.net> - Display engine"
+msgstr "John Ellis <johne@bellatlantic.net> - Visningsmotor"
+
+#: applets/slashapp/slashapp.c:507
+msgid "SlashApp"
+msgstr "SlashApp"
+
+#: applets/slashapp/slashapp.c:510
+msgid "A ticker to display Slashdot headlines\n"
+msgstr "En ??? til å vise overskrifter fra Slashdot\n"
+
+#: applets/slashapp/slashapp.c:556
+msgid "Loading headlines........"
+msgstr "Laster overskrifter........"
+
+#: applets/slashapp/slashapp.c:576
+msgid "Show article listing"
+msgstr "Vis artikkelliste"
+
+#: applets/slashapp/slashapp.c:581
+msgid "Refresh articles"
+msgstr "Gjenoppfrisk artikler"
+
 #: applets/webcontrol/webcontrol.c:56
 msgid "Garrett Smith <gsmith@serv.net>"
 msgstr "Garrett Smith <gsmith@serv.net>"
@@ -881,13 +1156,8 @@ msgid ""
 "This applet currently sends getURL commands to netscape throught the -remote "
 "interface.  Hopefully later more webrowsers will be supported."
 msgstr ""
-"Denne appleten sender getURL kommandoer til Netscape gjennom -remotegrensesnittet "
-"Forhåpentligvis vil den støtte flere browsere senere."
-
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:119
-msgid "Url:"
-msgstr "Url:"
+"Denne appleten sender getURL kommandoer til Netscape gjennom "
+"-remotegrensesnittet Forhåpentligvis vil den støtte flere browsere senere."
 
 #: applets/webcontrol/webcontrol.c:122
 msgid "Clear"
@@ -917,6 +1187,46 @@ msgstr "Se"
 msgid "readfd writefd"
 msgstr "readfd writefd"
 
+#. Auto repeat
+#: capplets/keyboard-properties/keyboard-properties.c:200
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr "Auto-repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:211
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "Slå på auto-repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:221
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Repeteringsintervall"
+
+#: capplets/keyboard-properties/keyboard-properties.c:224
+msgid "Repeat Delay"
+msgstr "Ventetid før repetering"
+
+#. Keyboard click
+#: capplets/keyboard-properties/keyboard-properties.c:226
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "Tastatur-klikk"
+
+#: capplets/keyboard-properties/keyboard-properties.c:237
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Klikk ved tastetrykk"
+
+#: capplets/keyboard-properties/keyboard-properties.c:247
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "Klikkvolum"
+
+#: capplets/keyboard-properties/keyboard-properties.c:254
+msgid "Test settings"
+msgstr "Testinnstillinger"
+
 #. Mouse buttons
 #: capplets/mouse-properties/mouse-properties.c:225
 #: desktop-properties/property-mouse.c:215
@@ -934,83 +1244,124 @@ msgid "Right handed"
 msgstr "Høyrehendt"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:260
+#: capplets/mouse-properties/mouse-properties.c:262
 #: desktop-properties/property-mouse.c:243
 msgid "Mouse motion"
 msgstr "Musbevegelse"
 
-#: capplets/mouse-properties/mouse-properties.c:272
+#: capplets/mouse-properties/mouse-properties.c:274
 #: desktop-properties/property-mouse.c:255
 msgid "Acceleration"
 msgstr "Aksellerasjon"
 
-#: capplets/mouse-properties/mouse-properties.c:272
+#: capplets/mouse-properties/mouse-properties.c:274
 #: desktop-properties/property-mouse.c:255
 msgid "Fast"
 msgstr "Fort"
 
-#: capplets/mouse-properties/mouse-properties.c:272
+#: capplets/mouse-properties/mouse-properties.c:274
 #: desktop-properties/property-mouse.c:255
 msgid "Slow"
 msgstr "Sakte"
 
-#: capplets/mouse-properties/mouse-properties.c:284
+#: capplets/mouse-properties/mouse-properties.c:286
 #: desktop-properties/property-mouse.c:267
 msgid "Threshold"
 msgstr "Terskel"
 
-#: capplets/mouse-properties/mouse-properties.c:284
+#: capplets/mouse-properties/mouse-properties.c:286
 #: desktop-properties/property-mouse.c:267
 msgid "Large"
 msgstr "Stor"
 
-#: capplets/mouse-properties/mouse-properties.c:284
+#: capplets/mouse-properties/mouse-properties.c:286
 #: desktop-properties/property-mouse.c:267
 msgid "Small"
 msgstr "Liten"
 
-#: control-center/callbacks.c:67
+#: capplets/screensaver-properties/screensaver-dialog.c:50
+msgid "Author:"
+msgstr "Forfatter:"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:60
+msgid "Author: UNKNOWN"
+msgstr "Forfatter: UKJENT"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:76
+#: desktop-properties/property-screensaver.cc:146
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:46
+msgid "Screen Saver"
+msgstr "Skjermsparer"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:59
+msgid "Settings..."
+msgstr "Innstillinger..."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+"Når du trykker på denne knappen kommer det opp en dialogboks som vil "
+"hjelpe deg med å konfigurere den valgte skjermspareren."
+
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:87
+msgid "Screen Saver Settings"
+msgstr "Innstillinger for skjermsparer"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:95
+msgid "Start After "
+msgstr "Start etter "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " minutter.
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prioritet:
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Lav "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normal"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Slå av monitor 
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " minutter etter at skjermspareren har startet."
+
+#: control-center/callbacks.c:68
 msgid "Desktop Manager"
 msgstr "Skrivebordsbehandling"
 
-#: control-center/callbacks.c:70
+#: control-center/callbacks.c:71
 msgid "Desktop Properties manager."
 msgstr "Egenskaper for skrivebord."
 
-#: control-center/capplet-widget.c:150 gnome-terminal/gnome-terminal.c:1465
-#: panel/main.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget.c:150
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id til en capplet -- tildelt av kontrollsenteret"
-
-#: control-center/capplet-widget.c:151
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget.c:151
-msgid "ior of the control-center"
-msgstr "ior til kontrollsenteret"
-
-#: control-center/capplet-widget.c:152
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget.c:152
-msgid "X id of the socket it's plugged into"
-msgstr "X id til kontakten den er plugget inn i"
-
+#. {GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
 #: control-center/main.c:22 gmenu/gmenu.c:46
 msgid "_Quit"
 msgstr "_Avslutt"
 
+#. {GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
 #: control-center/main.c:30
 msgid "_Help with GNOME..."
 msgstr "_Hjelp med GNOME..."
 
-#: control-center/main.c:32 gnome-terminal/gnome-terminal.c:990
+#: control-center/main.c:32 gnome-terminal/gnome-terminal.c:1010
 msgid "_About..."
 msgstr "_Om..."
 
@@ -1113,7 +1464,7 @@ msgstr "Setter bakgrunnen til den spesifiserte verdien"
 
 #: desktop-properties/property-background.c:1059
 #: desktop-properties/property-background.c:1060
-#: gnome-terminal/gnome-terminal.c:1463 gnome-terminal/gnome-terminal.c:1464
+#: gnome-terminal/gnome-terminal.c:1514 gnome-terminal/gnome-terminal.c:1515
 msgid "COLOR"
 msgstr "COLOR"
 
@@ -1166,6 +1517,7 @@ msgid "Duration"
 msgstr "Varighet"
 
 #: desktop-properties/property-bell.c:214
+#: desktop-properties/property-screensaver.cc:250
 msgid "Test"
 msgstr "Test"
 
@@ -1173,35 +1525,9 @@ msgstr "Test"
 msgid "Bell"
 msgstr "Ringeklokke"
 
-#. Auto repeat
-#: desktop-properties/property-keyboard.c:160
-msgid "Auto-repeat"
-msgstr "Auto-repetering"
-
-#: desktop-properties/property-keyboard.c:179
-msgid "Enable auto-repeat"
-msgstr "Slå på auto-repetering"
-
-#: desktop-properties/property-keyboard.c:186
-msgid "Repeat rate"
-msgstr "Repeteringsintervall"
-
 #: desktop-properties/property-keyboard.c:207
 msgid "Repeat delay"
 msgstr "Ventetid før repetering"
-
-#. Keyboard click
-#: desktop-properties/property-keyboard.c:235
-msgid "Keyboard click"
-msgstr "Tastatur-klikk"
-
-#: desktop-properties/property-keyboard.c:254
-msgid "Click on keypress"
-msgstr "Klikk ved tastetrykk"
-
-#: desktop-properties/property-keyboard.c:261
-msgid "Click volume"
-msgstr "Klikkvolum"
 
 #: desktop-properties/property-keyboard.c:291
 msgid "Keyboard"
@@ -1263,12 +1589,12 @@ msgstr "Toppnivå"
 msgid "Modal"
 msgstr "Modulær"
 
-#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:675
+#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:684
 #: panel/panel_config.c:353
 msgid "Left"
 msgstr "Venstre"
 
-#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:676
+#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:685
 #: panel/panel_config.c:364
 msgid "Right"
 msgstr "Høyre"
@@ -1345,6 +1671,146 @@ msgstr "MDI notisblokk tabulator posisjon"
 #: desktop-properties/property-ui.c:308
 msgid "MDI"
 msgstr "MDI"
+
+#: desktop-properties/property-screensaver.cc:148
+msgid "Wait"
+msgstr "Vent"
+
+#: desktop-properties/property-screensaver.cc:149
+msgid "Min"
+msgstr "Min"
+
+#: desktop-properties/property-screensaver.cc:161
+msgid "Requires Password"
+msgstr "Trenger passord"
+
+#: desktop-properties/property-screensaver.cc:170
+msgid "Use DPMS"
+msgstr "Bruk DPMS"
+
+#: desktop-properties/property-screensaver.cc:179
+msgid "Priority"
+msgstr "Prioritet"
+
+#: desktop-properties/property-screensaver.cc:187
+msgid "Normal"
+msgstr "Normal"
+
+#: desktop-properties/property-screensaver.cc:188
+msgid "Low"
+msgstr "Lav"
+
+#: desktop-properties/property-screensaver.cc:234
+msgid "Screensavers"
+msgstr "Skjermsparere"
+
+#: desktop-properties/property-screensaver.cc:246
+msgid "Setup..."
+msgstr "Oppsett..."
+
+#: desktop-properties/property-screensaver.cc:356
+msgid " Screensaver "
+msgstr " Skjermsparer "
+
+#: desktop-properties/xlockmore.cc:156
+msgid "XLockMore Properties"
+msgstr "Egenskaper for XLockMore"
+
+#: desktop-properties/xlockmore.cc:174
+msgid "  OK  "
+msgstr "  OK  "
+
+#: desktop-properties/xlockmore.cc:175
+msgid " Apply "
+msgstr " Bruk "
+
+#: desktop-properties/xlockmore.cc:176
+msgid " Cancel "
+msgstr " Avbryt "
+
+#: desktop-properties/xlockmore.cc:177
+msgid " Defaults "
+msgstr " Forvalg "
+
+#: desktop-properties/xlockmore.cc:178 gnome-terminal/gnome-terminal.c:1019
+#: help-browser/window.c:184 help-browser/window.c:209
+msgid "Help"
+msgstr "Hjelp"
+
+#: desktop-properties/xlockmore.cc:183 desktop-properties/xlockmore.cc:195
+msgid " Mode "
+msgstr " Modus "
+
+#: desktop-properties/xlockmore.cc:184
+msgid " XLockMore "
+msgstr " XLockMore "
+
+#: desktop-properties/xlockmore.cc:193
+msgid " Options "
+msgstr " Valg "
+
+#: desktop-properties/xlockmore.cc:194
+msgid " Preview "
+msgstr " Forhåndsvisning "
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: flagget `%s' er flertydig\n"
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: flagget `--%s' tillater ikke et argument\n"
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: flagget `%c%s' tillater ikke et argument\n"
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: flagget `%s' trenger et argument\n"
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: ugjenkjent flagg `--%s'\n"
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: ugjenkjent flagg `%c%s'\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: ulovlig flagg -- %c\n"
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: ugyldig flagg -- %c\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: flagget trenger et argument -- %c\n"
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: flagget `-W %s' er flertydig\n"
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: flagget `-W %s' tillater ikke et argument\n"
 
 #: gmenu/dialogs.c:39
 msgid "File exists."
@@ -1507,10 +1973,6 @@ msgid "Move selected menu down"
 msgstr "Flutt valgte meny ned et nivå"
 
 #: gmenu/gmenu.c:90
-msgid "Properties"
-msgstr "Egenskaper"
-
-#: gmenu/gmenu.c:90
 msgid "Edit selected menu item properties"
 msgstr "Rediger valgte menyoppførings egenskaper"
 
@@ -1521,16 +1983,6 @@ msgstr "Sorter katalog"
 #: gmenu/gmenu.c:93
 msgid "Sort selected folder"
 msgstr "Sorter valgte kataloger"
-
-#: gmenu/gmenu.c:186
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "oppretter brukerkatalog: %s\n"
-
-#: gmenu/gmenu.c:189
-#, c-format
-msgid "unable to create user directory: %s\n"
-msgstr "kunne ikke opprette brukerkatalogen: %s\n"
 
 #: gmenu/gmenu.c:231 gmenu/gmenu.c:270 gmenu/gmenu.c:327 gmenu/tree.c:505
 msgid "GNOME menu editor"
@@ -1567,7 +2019,7 @@ msgid "GNOME"
 msgstr "GNOME"
 
 #. system's menu tree
-#: gmenu/tree.c:543 panel/menu.c:1331 panel/menu.c:1369 panel/menu.c:1591
+#: gmenu/tree.c:543 panel/menu.c:1503 panel/menu.c:1541 panel/menu.c:1763
 msgid "System Menus"
 msgstr "Systemmenyer"
 
@@ -1576,7 +2028,7 @@ msgid "Top of system menus"
 msgstr "Toppen på systemmenyene"
 
 #. user's menu tree
-#: gmenu/tree.c:560 panel/menu.c:1352 panel/menu.c:1379 panel/menu.c:1602
+#: gmenu/tree.c:560 panel/menu.c:1524 panel/menu.c:1551 panel/menu.c:1774
 msgid "User Menus"
 msgstr "Brukermenyer"
 
@@ -1584,24 +2036,24 @@ msgstr "Brukermenyer"
 msgid "Top of user menus"
 msgstr "Toppen på brukermenyene"
 
-#: gnome-terminal/gnome-terminal.c:104
+#: gnome-terminal/gnome-terminal.c:109
 msgid "GNOME Terminal"
 msgstr "GNOME terminal"
 
-#: gnome-terminal/gnome-terminal.c:107
+#: gnome-terminal/gnome-terminal.c:112
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME terminalemulering"
 
-#: gnome-terminal/gnome-terminal.c:374 gnome-terminal/gnome-terminal.c:759
-#: gnome-terminal/gnome-terminal.c:768
+#: gnome-terminal/gnome-terminal.c:381 gnome-terminal/gnome-terminal.c:768
+#: gnome-terminal/gnome-terminal.c:777
 msgid "Default"
 msgstr "Forvalgt"
 
-#: gnome-terminal/gnome-terminal.c:375
+#: gnome-terminal/gnome-terminal.c:382
 msgid "Config"
 msgstr "Konfigurasjon"
 
-#: gnome-terminal/gnome-terminal.c:520
+#: gnome-terminal/gnome-terminal.c:527
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1611,193 +2063,172 @@ msgstr ""
 " rekonfigurere dette vinduet så det passer med den forvalgte\n"
 "konfigurasjonen til den nye klassen?"
 
-#: gnome-terminal/gnome-terminal.c:659
+#: gnome-terminal/gnome-terminal.c:668
 msgid "Linux console"
 msgstr "Linux konsoll"
 
-#: gnome-terminal/gnome-terminal.c:660
+#: gnome-terminal/gnome-terminal.c:669
 msgid "Color Xterm"
 msgstr "Xterm i farger"
 
-#: gnome-terminal/gnome-terminal.c:661
+#: gnome-terminal/gnome-terminal.c:670
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:666
+#: gnome-terminal/gnome-terminal.c:675
 msgid "White on black"
 msgstr "Hvitt på sort"
 
-#: gnome-terminal/gnome-terminal.c:667
+#: gnome-terminal/gnome-terminal.c:676
 msgid "Black on white"
 msgstr "Sort på hvitt"
 
-#: gnome-terminal/gnome-terminal.c:668
+#: gnome-terminal/gnome-terminal.c:677
 msgid "Green on black"
 msgstr "Grønn på sort"
 
-#: gnome-terminal/gnome-terminal.c:669
+#: gnome-terminal/gnome-terminal.c:678
 msgid "Black on light yellow"
 msgstr "Sort på lys gult"
 
-#: gnome-terminal/gnome-terminal.c:670
+#: gnome-terminal/gnome-terminal.c:679
 msgid "Custom colors"
 msgstr "Egendefinerte farger"
 
-#: gnome-terminal/gnome-terminal.c:677
+#: gnome-terminal/gnome-terminal.c:686
 msgid "Hidden"
 msgstr "Gjemt"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:733
+#: gnome-terminal/gnome-terminal.c:742
 msgid "Font:"
 msgstr "Skrifttype:"
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:760
 msgid "Terminal Class"
 msgstr "Terminalklasse"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:778
+#: gnome-terminal/gnome-terminal.c:787
 msgid "Blinking cursor"
 msgstr "Blinkende markør"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:787
+#: gnome-terminal/gnome-terminal.c:796
 msgid "Hide menu bar"
 msgstr "Gjem menylinjen"
 
-#: gnome-terminal/gnome-terminal.c:797
+#: gnome-terminal/gnome-terminal.c:806
 msgid "Colors"
 msgstr "Farger"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:800
+#: gnome-terminal/gnome-terminal.c:809
 msgid "Color palette:"
 msgstr "Fargepalett:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:809
+#: gnome-terminal/gnome-terminal.c:818
 msgid "Foreground color:"
 msgstr "Forgrunnsfarge:"
 
-#: gnome-terminal/gnome-terminal.c:818
+#: gnome-terminal/gnome-terminal.c:827
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:830
+#: gnome-terminal/gnome-terminal.c:839
 msgid "Colors:"
 msgstr "Farger:"
 
-#: gnome-terminal/gnome-terminal.c:843
-msgid "Scrolling"
-msgstr "Rullende"
-
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:846
+#: gnome-terminal/gnome-terminal.c:855
 msgid "Scrollbar position"
 msgstr "Rullefelt posisjon"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:856
+#: gnome-terminal/gnome-terminal.c:865
 msgid "Scrollback lines"
 msgstr "Antall linjer tilbakerulling"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:868
+#: gnome-terminal/gnome-terminal.c:877
 msgid "Scroll on keystroke"
 msgstr "Rull ned ved tastetrykk"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:877
+#: gnome-terminal/gnome-terminal.c:886
 msgid "Scroll on output"
 msgstr "Rull ned ved output"
 
-#: gnome-terminal/gnome-terminal.c:906
+#: gnome-terminal/gnome-terminal.c:915
 msgid "Color selector"
 msgstr "Fargevelger"
 
-#: gnome-terminal/gnome-terminal.c:979
-msgid "_New terminal"
-msgstr "_Ny terminal"
-
-#: gnome-terminal/gnome-terminal.c:980
-msgid "_Save preferences"
-msgstr "_Lagre preferanser"
-
-#: gnome-terminal/gnome-terminal.c:981
-msgid "_Close terminal"
-msgstr "_Lukk terminal"
-
-#: gnome-terminal/gnome-terminal.c:983
+#: gnome-terminal/gnome-terminal.c:1006
 msgid "_Hide menubar"
 msgstr "_Gjem menylinje"
 
-#: gnome-terminal/gnome-terminal.c:984
-msgid "_Properties..."
-msgstr "_Egenskaper..."
+#: gnome-terminal/gnome-terminal.c:1007
+msgid "_Show menubar"
+msgstr "_Vis menylinje"
 
-#: gnome-terminal/gnome-terminal.c:985
-msgid "C_olor selector..."
-msgstr "Fargevelger..."
-
-#: gnome-terminal/gnome-terminal.c:998
+#: gnome-terminal/gnome-terminal.c:1018
 msgid "Terminal"
 msgstr "Terminal"
 
-#: gnome-terminal/gnome-terminal.c:999 help-browser/window.c:182
-#: help-browser/window.c:207
-msgid "Help"
-msgstr "Hjelp"
-
-#: gnome-terminal/gnome-terminal.c:1457
+#: gnome-terminal/gnome-terminal.c:1508
 msgid "CLASS"
 msgstr "KLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1457
+#: gnome-terminal/gnome-terminal.c:1508
 msgid "Terminal class name"
 msgstr "Navn på terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:1458
+#: gnome-terminal/gnome-terminal.c:1509
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:1458
+#: gnome-terminal/gnome-terminal.c:1509
 msgid "Specifies font name"
 msgstr "Spesifiserer navnet på skrifttypen"
 
-#: gnome-terminal/gnome-terminal.c:1459
+#: gnome-terminal/gnome-terminal.c:1510
 msgid "Do not start up shells as login shells"
 msgstr "Ikke start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1460
+#: gnome-terminal/gnome-terminal.c:1511
 msgid "Start up shells as login shells"
 msgstr "Start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1461
+#: gnome-terminal/gnome-terminal.c:1512
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:1461
+#: gnome-terminal/gnome-terminal.c:1512
 msgid "Specifies the geometry for the main window"
 msgstr "Spesifiserer geometrien for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:1462
+#: gnome-terminal/gnome-terminal.c:1513
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: gnome-terminal/gnome-terminal.c:1462
+#: gnome-terminal/gnome-terminal.c:1513
 msgid "Execute this program instead of a shell"
 msgstr "Kjør dette programmet i stedet for et skall"
 
-#: gnome-terminal/gnome-terminal.c:1463
+#: gnome-terminal/gnome-terminal.c:1514
 msgid "Foreground color"
 msgstr "Forgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:1464 panel/panel_config.c:757
+#: gnome-terminal/gnome-terminal.c:1515 panel/panel_config.c:757
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
+
+#: gnome-terminal/gnome-terminal.c:1516 panel/main.c:46
+msgid "ID"
+msgstr "ID"
 
 #: gsm/main.c:55
 msgid "[SESSION]"
@@ -1884,11 +2315,11 @@ msgstr "Nivå for avlusing (debugging)"
 msgid "[URL]"
 msgstr "[URL]"
 
-#: help-browser/gnome-help-browser.c:340 help-browser/window.c:694
+#: help-browser/gnome-help-browser.c:385 help-browser/window.c:696
 msgid "Gnome Help Browser"
 msgstr "Gnome Hjelp Leser"
 
-#: help-browser/gnome-help-browser.c:343
+#: help-browser/gnome-help-browser.c:388
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
@@ -1896,47 +2327,47 @@ msgstr ""
 "Gnome Hjelp Leser gir lett tilgang til forskjellige typer dokumentasjon på "
 "systemet ditt"
 
-#: help-browser/gnome-help-browser.c:602
+#: help-browser/gnome-help-browser.c:647
 msgid "History size"
 msgstr "Historikkstørrelse"
 
-#: help-browser/gnome-help-browser.c:603
+#: help-browser/gnome-help-browser.c:648
 msgid "History file"
 msgstr "Historikkfil"
 
-#: help-browser/gnome-help-browser.c:604
+#: help-browser/gnome-help-browser.c:649
 msgid "Cache size"
 msgstr "Størrelse på cache"
 
-#: help-browser/gnome-help-browser.c:605
+#: help-browser/gnome-help-browser.c:650
 msgid "Cache file"
 msgstr "Cachefil"
 
-#: help-browser/gnome-help-browser.c:606
+#: help-browser/gnome-help-browser.c:651
 msgid "Bookmark file"
 msgstr "Bokmerkefil"
 
-#: help-browser/gnome-help-browser.c:612
+#: help-browser/gnome-help-browser.c:657
 msgid "Man Path"
 msgstr "Sti til manualsider"
 
-#: help-browser/gnome-help-browser.c:613
+#: help-browser/gnome-help-browser.c:658
 msgid "Info Path"
 msgstr "Sti til infosider"
 
-#: help-browser/gnome-help-browser.c:614
+#: help-browser/gnome-help-browser.c:659
 msgid "GNOME Help Path"
 msgstr "Søkesti for GNOME Hjelp"
 
-#: help-browser/gnome-help-browser.c:689
+#: help-browser/gnome-help-browser.c:734
 msgid "Gnome Help Configure"
 msgstr "Konfigurer Gnome Hjelp"
 
-#: help-browser/gnome-help-browser.c:692
+#: help-browser/gnome-help-browser.c:737
 msgid "History and cache"
 msgstr "Historikk og mellomlagring"
 
-#: help-browser/gnome-help-browser.c:693
+#: help-browser/gnome-help-browser.c:738
 msgid "Paths"
 msgstr "Søkestier"
 
@@ -2107,103 +2538,103 @@ msgstr "<BODY>Kunne ikke laste forhåndsvalgt innholdsfortegnelse</BODY>"
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Ukjent argument for innholdsfortegnelse</BODY>"
 
-#: help-browser/window.c:127
+#: help-browser/window.c:129
 msgid "New window"
 msgstr "Nytt vindu"
 
-#: help-browser/window.c:127
+#: help-browser/window.c:129
 msgid "Open new browser window"
 msgstr "Åpne nytt vindu"
 
-#: help-browser/window.c:132
+#: help-browser/window.c:134
 msgid "Add Bookmark"
 msgstr "Legg til bokmerke"
 
-#: help-browser/window.c:132
+#: help-browser/window.c:134
 msgid "Add bookmark"
 msgstr "Legg til bokmerke"
 
-#: help-browser/window.c:137
+#: help-browser/window.c:139
 msgid "Configure"
 msgstr "Konfigurér"
 
-#: help-browser/window.c:142
+#: help-browser/window.c:144
 msgid "Close window"
 msgstr "Lukk vindu"
 
-#: help-browser/window.c:147
+#: help-browser/window.c:149
 msgid "Exit"
 msgstr "Avslutt"
 
-#: help-browser/window.c:147
+#: help-browser/window.c:149
 msgid "Exit all windows"
 msgstr "Lukk alle vinduer"
 
-#: help-browser/window.c:156
+#: help-browser/window.c:158
 msgid "Info about this program"
 msgstr "Info om dette programmet"
 
-#: help-browser/window.c:167 help-browser/window.c:202
+#: help-browser/window.c:169 help-browser/window.c:204
 msgid "History"
 msgstr "Historikk"
 
-#: help-browser/window.c:167 help-browser/window.c:202
+#: help-browser/window.c:169 help-browser/window.c:204
 msgid "Show History Window"
 msgstr "Vis historikkvinduet"
 
-#: help-browser/window.c:172
+#: help-browser/window.c:174
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
-#: help-browser/window.c:172 help-browser/window.c:204
+#: help-browser/window.c:174 help-browser/window.c:206
 msgid "Show Bookmarks Window"
 msgstr "Vis bokmerkevinduet"
 
-#: help-browser/window.c:180
+#: help-browser/window.c:182
 msgid "File"
 msgstr "Fil"
 
-#: help-browser/window.c:181
+#: help-browser/window.c:183
 msgid "Window"
 msgstr "Vindu"
 
-#: help-browser/window.c:189
+#: help-browser/window.c:191
 msgid "Back"
 msgstr "Tilbake"
 
-#: help-browser/window.c:190
+#: help-browser/window.c:192
 msgid "Go to the previous location in the history list"
 msgstr "Gå til forrige sted i historikklisten"
 
-#: help-browser/window.c:192
+#: help-browser/window.c:194
 msgid "Forward"
 msgstr "Fremover"
 
-#: help-browser/window.c:193
+#: help-browser/window.c:195
 msgid "Go to the next location in the history list"
 msgstr "Gå til neste sted i historikklisten"
 
-#: help-browser/window.c:196
+#: help-browser/window.c:198
 msgid "Reload"
 msgstr "Last på nytt"
 
-#: help-browser/window.c:199
+#: help-browser/window.c:201
 msgid "Index"
 msgstr "Indeks"
 
-#: help-browser/window.c:199
+#: help-browser/window.c:201
 msgid "Show Documentation Index"
 msgstr "Vis indeks for dokumentasjon"
 
-#: help-browser/window.c:204
+#: help-browser/window.c:206
 msgid "BMarks"
 msgstr "BMerker"
 
-#: help-browser/window.c:207
+#: help-browser/window.c:209
 msgid "Help on Help"
 msgstr "Hjelp om Hjelp"
 
-#: help-browser/window.c:814
+#: help-browser/window.c:821
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2214,7 +2645,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: help-browser/window.c:817
+#: help-browser/window.c:824
 msgid "Ok"
 msgstr "Ok"
 
@@ -2242,7 +2673,7 @@ msgstr "Ikon"
 msgid "Applet appearance"
 msgstr "Applet utseende"
 
-#: panel/drawer.c:117 panel/menu.c:1299
+#: panel/drawer.c:117 panel/menu.c:1471
 msgid "Drawer"
 msgstr "Skuff"
 
@@ -2250,15 +2681,15 @@ msgstr "Skuff"
 msgid "App"
 msgstr "Applikasjon"
 
-#: panel/launcher.c:193
+#: panel/launcher.c:203
 msgid "Launcher properties"
 msgstr "Egenskaper for oppstarter"
 
-#: panel/launcher.c:278
+#: panel/launcher.c:288
 msgid "Create launcher applet"
 msgstr "Opprett oppstarts-applet"
 
-#: panel/logout.c:26 panel/menu.c:1410 panel/menu.c:1567
+#: panel/logout.c:26 panel/menu.c:1582 panel/menu.c:1739
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -2298,105 +2729,101 @@ msgstr "Legg til som meny på panelet"
 msgid "Properties ..."
 msgstr "Egenskaper ..."
 
-#: panel/menu.c:563 panel/menu.c:630
+#: panel/menu.c:643 panel/menu.c:714
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:1245
+#: panel/menu.c:1417
 msgid "Applets"
 msgstr "Appleter"
 
-#: panel/menu.c:1306 panel/panel_config.c:878
+#: panel/menu.c:1478 panel/panel_config.c:878
 msgid "Edge Panel"
 msgstr "Kantpanel"
 
-#: panel/menu.c:1313 panel/panel_config.c:884
+#: panel/menu.c:1485 panel/panel_config.c:884
 msgid "Corner Panel"
 msgstr "Hjørnepanel"
 
-#: panel/menu.c:1395
+#: panel/menu.c:1567
 msgid "Remove this panel"
 msgstr "Fjern dette panelet"
 
-#: panel/menu.c:1440
+#: panel/menu.c:1612
 msgid "Add applet"
 msgstr "Legg til applet"
 
-#: panel/menu.c:1449
+#: panel/menu.c:1621
 msgid "Add new panel"
 msgstr "Legg til nytt panel"
 
-#: panel/menu.c:1457
+#: panel/menu.c:1629
 msgid "Add main menu"
 msgstr "Legg til hovedmeny"
 
-#: panel/menu.c:1464
+#: panel/menu.c:1636
 msgid "Add log out button"
 msgstr "Legg til avloggingsknapp"
 
-#: panel/menu.c:1472
+#: panel/menu.c:1644
 msgid "Add swallowed app"
 msgstr "Legg til slukt applikasjon"
 
-#: panel/menu.c:1478
+#: panel/menu.c:1650
 msgid "Add new launcher"
 msgstr "Legg til ny launcher"
 
-#: panel/menu.c:1489
+#: panel/menu.c:1661
 msgid "This panel properties..."
 msgstr "Egenskaper for dette panelet..."
 
-#: panel/menu.c:1499
+#: panel/menu.c:1671
 msgid "Global properties..."
 msgstr "Globale egenskaper..."
 
-#: panel/menu.c:1527
+#: panel/menu.c:1699
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/menu.c:1534
+#: panel/menu.c:1706
 msgid "Lock screen"
 msgstr "Lås skjerm"
 
-#: panel/menu.c:1555
+#: panel/menu.c:1727
 msgid "About GNOME..."
 msgstr "Om GNOME..."
 
-#: panel/menu.c:1918
+#: panel/menu.c:2090
 msgid "Menu properties"
 msgstr "Egenskaper for meny"
 
-#: panel/menu.c:1925
+#: panel/menu.c:2097
 msgid "Menu Type"
 msgstr "Menytype"
 
-#: panel/menu.c:1932 panel/menu.c:1952
+#: panel/menu.c:2104 panel/menu.c:2124
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: panel/menu.c:1943 panel/menu.c:1993
+#: panel/menu.c:2115 panel/menu.c:2165
 msgid "Normal Menu"
 msgstr "Normalmeny"
 
-#: panel/menu.c:1962
+#: panel/menu.c:2134
 msgid "Both System and User menus on the same menu"
 msgstr "Både system- og brukermenyer på samme meny"
 
-#: panel/menu.c:1974
+#: panel/menu.c:2146
 msgid "System on the main menu, User menu as a submenu"
 msgstr "System på hovedmeny, brukermeny som undermeny"
 
-#: panel/menu.c:1985
+#: panel/menu.c:2157
 msgid "User on the main menu, System menu as a submenu"
 msgstr "Bruker på hovedmeny, systemmeny som undermeny"
 
-#: panel/menu.c:2003
+#: panel/menu.c:2175
 msgid "Menu path"
 msgstr "Menysti"
-
-#: panel/menu.c:2017
-msgid "Menu"
-msgstr "Meny"
 
 #. Position frame
 #: panel/panel_config.c:318 panel/panel_config.c:491
@@ -2620,22 +3047,22 @@ msgstr "Virkelig logge ut?"
 msgid "Ask next time"
 msgstr "Spør neste gang"
 
-#: panel/swallow.c:160
+#: panel/swallow.c:168
 msgid "Create swallow applet"
 msgstr "Opprett slukt applikasjon"
 
-#: panel/swallow.c:170
+#: panel/swallow.c:178
 msgid "Title of application to swallow"
 msgstr "Tittel på applikasjonen som skal slukes"
 
-#: panel/swallow.c:181
+#: panel/swallow.c:189
 msgid "Command (optional)"
 msgstr "Kommando (valgfri)"
 
-#: panel/swallow.c:192
+#: panel/swallow.c:200
 msgid "Width (optional)"
 msgstr "Bredde (valgfri)"
 
-#: panel/swallow.c:198
+#: panel/swallow.c:206
 msgid "Height (optional)"
 msgstr "Høyde (valgfri)"
