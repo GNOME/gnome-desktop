@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2\n"
-"POT-Creation-Date: 2000-05-23 05:24-0400\n"
+"POT-Creation-Date: 2000-06-17 23:04+0200\n"
 "PO-Revision-Date: 2000-06-10 10:39+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -29,7 +29,7 @@ msgstr "Titel på applikation som skal sluges"
 msgid "Command (optional)"
 msgstr "Kommando (valgfri)"
 
-#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:916
+#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:407 panel/panel-util.c:101 panel/panel-util.c:142
 #: panel/panel-util.c:183 panel/panel_config.c:1141 panel/swallow.c:202
@@ -45,7 +45,7 @@ msgid "Height"
 msgstr "Højde"
 
 #: applets/desk-guide/deskguide_applet.c:241 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1363
+#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
@@ -351,7 +351,7 @@ msgid "Add new item to this menu"
 msgstr "Tilføj nyt element til denne menu"
 
 #: applets/desk-guide/deskguide_applet.c:235 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1357
+#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
 #: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1254 panel/menu.c:4504
 msgid "Properties..."
@@ -1063,7 +1063,7 @@ msgstr "Brug skjuleknap"
 msgid "Enable hidebutton arrow"
 msgstr "Brug skjuleknapspil"
 
-#: panel/button-widget.c:679
+#: panel/button-widget.c:692
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2521,6 +2521,11 @@ msgstr ""
 msgid "GNOME News Site"
 msgstr "Gnome nyhedsside"
 
+#: gnome-about/gnome-about.c:570
+#, fuzzy
+msgid "http://www.gnome.org/"
+msgstr "http://bugs.gnome.org/"
+
 #: gnome-about/gnome-about.c:571
 msgid "GNOME Main Site"
 msgstr "Gnome hovedside"
@@ -2545,6 +2550,16 @@ msgstr "Alexandre Muñiz"
 #: gnome-about/contributors.h:168
 msgid "Sung-Hyun Nam"
 msgstr "Sung-Hyun Nam"
+
+#. languages that can't display adiaeresis, replace 'ä' with 'ae'
+#: gnome-about/contributors.h:173
+msgid "Martin Norbäck"
+msgstr ""
+
+#. languages that can't display Odiaeresis, replace 'Ö' with 'Oe'
+#: gnome-about/contributors.h:179
+msgid "Tomas Ögren"
+msgstr ""
 
 #: gnome-about/contributors.h:208
 msgid "Kazuhiro Sasayama"
@@ -2908,7 +2923,7 @@ msgid "Kill app"
 msgstr "Dræb app"
 
 #: applets/desk-guide/deskguide_applet.c:248 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1369
+#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
 msgid "About..."
 msgstr "Om..."
@@ -2949,7 +2964,7 @@ msgstr ""
 "Printerappletten lader dig trække og slippe appletter som bliver udskrevet "
 "vha. printerkommando"
 
-#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1274
+#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1295
 #: applets/gen_util/printer.c:421
 msgid "Can't create applet!\n"
 msgstr "Kan ikke oprette applet!\n"
@@ -2959,11 +2974,11 @@ msgstr "Kan ikke oprette applet!\n"
 msgid "Don't know how to activate `%s'\n"
 msgstr "Ved ikke hvordan '%s' aktiveres\n"
 
-#: applets/gen_util/mailcheck.c:200 applets/gen_util/mailcheck.c:960
+#: applets/gen_util/mailcheck.c:200 applets/gen_util/mailcheck.c:972
 msgid "Password:"
 msgstr "Adgangskode:"
 
-#: applets/gen_util/mailcheck.c:257
+#: applets/gen_util/mailcheck.c:259
 msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
@@ -2971,113 +2986,118 @@ msgstr ""
 "En remote-client-error opstod. Remote-polling deaktiveret. Du har måske "
 "brugt forkert tjener/brugernavn/adgangskode?"
 
-#: applets/gen_util/mailcheck.c:448
+#: applets/gen_util/mailcheck.c:452
 msgid "You have new mail."
 msgstr "Der er ny post."
 
-#: applets/gen_util/mailcheck.c:450
+#: applets/gen_util/mailcheck.c:454
 msgid "You have mail."
 msgstr "Der er post."
 
-#: applets/gen_util/mailcheck.c:452
+#: applets/gen_util/mailcheck.c:456
 msgid "No mail."
 msgstr "Ingen post."
 
-#: applets/gen_util/mailcheck.c:861
+#: applets/gen_util/mailcheck.c:873
 msgid "Mailbox resides on:"
 msgstr "Postkassen befinder sig på:"
 
-#: applets/gen_util/mailcheck.c:868
+#: applets/gen_util/mailcheck.c:880
 msgid "Local mailspool"
 msgstr "Lokal postspole"
 
-#: applets/gen_util/mailcheck.c:876
+#: applets/gen_util/mailcheck.c:888
 msgid "Local maildir"
 msgstr "Lokal postmappe"
 
-#: applets/gen_util/mailcheck.c:884
+#: applets/gen_util/mailcheck.c:896
 msgid "Remote POP3-server"
 msgstr "Fremmed POP3-tjener"
 
-#: applets/gen_util/mailcheck.c:892
+#: applets/gen_util/mailcheck.c:904
 msgid "Remote IMAP-server"
 msgstr "Fremmed IMAP-tjener"
 
-#: applets/gen_util/mailcheck.c:912
+#: applets/gen_util/mailcheck.c:924
 msgid "Mail spool file:"
 msgstr "Post-spolefil:"
 
-#: applets/gen_util/mailcheck.c:929
+#: applets/gen_util/mailcheck.c:941
 msgid "Mail server:"
 msgstr "Posttjener:"
 
-#: applets/gen_util/mailcheck.c:946
+#: applets/gen_util/mailcheck.c:958
 msgid "Username:"
 msgstr "Brugernavn:"
 
-#: applets/gen_util/mailcheck.c:991
+#: applets/gen_util/mailcheck.c:1003
 msgid "Execute"
 msgstr "Udfør"
 
-#: applets/gen_util/mailcheck.c:1002
+#: applets/gen_util/mailcheck.c:1014
 msgid "Before each update:"
 msgstr "Før hver opdatering:"
 
-#: applets/gen_util/mailcheck.c:1023
+#: applets/gen_util/mailcheck.c:1035
 msgid "When new mail arrives:"
 msgstr "Når ny post ankommer:"
 
-#: applets/gen_util/mailcheck.c:1042
+#: applets/gen_util/mailcheck.c:1054
 msgid "When clicked:"
 msgstr "Når klikket:"
 
-#: applets/gen_util/mailcheck.c:1065
+#: applets/gen_util/mailcheck.c:1077
 msgid "Check for mail every"
 msgstr "Se efter post hvert"
 
-#: applets/gen_util/mailcheck.c:1078
+#: applets/gen_util/mailcheck.c:1090
 msgid "minutes"
 msgstr ". minut"
 
-#: applets/gen_util/mailcheck.c:1091
+#: applets/gen_util/mailcheck.c:1103
 msgid "seconds"
 msgstr ". sekund"
 
-#: applets/gen_util/mailcheck.c:1095
+#: applets/gen_util/mailcheck.c:1107
 msgid "Play a sound when new mail arrives"
 msgstr "Afspil en lyd når der er ny post"
 
-#: applets/gen_util/mailcheck.c:1106
+#: applets/gen_util/mailcheck.c:1118
 msgid "Select animation"
 msgstr "Vælg animation"
 
-#: applets/gen_util/mailcheck.c:1141
+#: applets/gen_util/mailcheck.c:1153
 msgid "Mail check properties"
 msgstr "Egenskaber for posttjek"
 
-#: applets/gen_util/mailcheck.c:1147
+#: applets/gen_util/mailcheck.c:1159
 msgid "Mail check"
 msgstr "Posttjek"
 
-#: applets/gen_util/mailcheck.c:1150
+#: applets/gen_util/mailcheck.c:1162
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: applets/gen_util/mailcheck.c:1222
+#: applets/gen_util/mailcheck.c:1243
 msgid "Mail check Applet"
 msgstr "Posttjekapplet"
 
-#: applets/gen_util/mailcheck.c:1223
+#: applets/gen_util/mailcheck.c:1244
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 Free Software Fundation"
 
-#: applets/gen_util/mailcheck.c:1225
+#: applets/gen_util/mailcheck.c:1246
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Posttjek giver dig besked når du har modtaget ny post"
 
-#: applets/gen_util/mailcheck.c:1335
+#: applets/gen_util/mailcheck.c:1357
 msgid "Text only"
 msgstr "Kun tekst"
+
+#: applets/gen_util/mailcheck.c:1385
+#, fuzzy
+msgid "Check for mail"
+msgstr "Se efter post hvert"
 
 #: applets/gen_util/clock.c:149
 msgid ""

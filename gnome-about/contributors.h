@@ -170,13 +170,13 @@ static gchar *contributors[] = {
 	"Asger Alstrup Nielsen",
 	"Eric Nielson",
 	/* languages that can't display adiaeresis, replace 'ä' with 'ae' */
-	"Martin Norbäck",
+	N_("Martin Norbäck"),
 	"Eskil Olsen",
 	"Jimmy Olsen",
 	"David Orme",
 	"Karl Anders Oygard",
 	/* languages that can't display Odiaeresis, replace 'Ö' with 'Oe' */
-	"Tomas Ögren",
+	N_("Tomas Ögren"),
 	"Jay Painter",
 	"Cameron Parish",
 	"Conrad Parker",
