@@ -18,6 +18,7 @@ static gchar *contributors[] = {
 	"Shawn T. Amundson",
 	"Erik Andersen",
 	"Jon Anhold",
+	"Shooby Ban"
 	"Martin Baulig",
 	"Tom Bech",
 	"Andreas Beck",
@@ -100,7 +101,6 @@ static gchar *contributors[] = {
 	"Richard Hult",
 	"Andreas Hyden",
 	"Miguel de Icaza",
-	"Szekeres Istvan",
 	"Tim Janik",
 	"Stefan Jeske",
 	"Michael K. Johnson",
@@ -229,6 +229,7 @@ static gchar *contributors[] = {
 	"Ben Stern",
 	"Micah Stetson",
 	"Nathan Carl Summers",
+	"Istvan Szekeres",
 	"Tristan Tarrant",
 	"Anthony Taylor",
 	"Owen Taylor",
