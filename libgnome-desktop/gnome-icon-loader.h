@@ -43,6 +43,8 @@ struct _GnomeIconLoader
 struct _GnomeIconLoaderClass
 {
   GObjectClass parent_class;
+
+  void (* changed)  (GnomeIconLoader *icon_loader);
 };
 
 
@@ -75,7 +77,7 @@ void             gnome_icon_loader_append_search_path    (GnomeIconLoader      *
 							  const char           *path);
 void             gnome_icon_loader_prepend_search_path   (GnomeIconLoader      *loader,
 							  const char           *path);
-void             gnome_icon_loader_set_current_theme     (GnomeIconLoader      *loader,
+void             gnome_icon_loader_set_custom_theme      (GnomeIconLoader      *loader,
 							  const char           *theme_name);
 char *           gnome_icon_loader_lookup_icon           (GnomeIconLoader      *loader,
 							  const char           *icon_name,

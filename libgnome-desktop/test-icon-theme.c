@@ -35,7 +35,7 @@ main (int argc, char *argv[])
   
   loader = gnome_icon_loader_new ();
   
-  gnome_icon_loader_set_current_theme (loader, theme);
+  gnome_icon_loader_set_custom_theme (loader, theme);
 
   if (strcmp (argv[1], "list") == 0)
     {
