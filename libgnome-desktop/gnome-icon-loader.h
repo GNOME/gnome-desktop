@@ -75,6 +75,7 @@ void             gnome_icon_loader_get_search_path       (GnomeIconLoader      *
 							  int                   *n_elements);
 void             gnome_icon_loader_set_allow_svg         (GnomeIconLoader      *loader,
 							  gboolean              allow_svg);
+gboolean         gnome_icon_loader_get_allow_svg         (GnomeIconLoader      *loader);
 void             gnome_icon_loader_append_search_path    (GnomeIconLoader      *loader,
 							  const char           *path);
 void             gnome_icon_loader_prepend_search_path   (GnomeIconLoader      *loader,

@@ -342,6 +342,12 @@ gnome_icon_loader_set_allow_svg (GnomeIconLoader      *loader,
   g_signal_emit (G_OBJECT (loader), signal_changed, 0);
 }
 
+gboolean
+gnome_icon_loader_get_allow_svg (GnomeIconLoader *loader)
+{
+  return loader->priv->allow_svg;
+}
+
 void
 gnome_icon_loader_set_search_path (GnomeIconLoader *loader,
 				   const char *path[],
