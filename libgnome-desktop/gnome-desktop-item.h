@@ -28,8 +28,26 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
-#include <gnome-desktop/GNOME_Desktop.h>
+/* FIXME #include <gnome-desktop/GNOME_Desktop.h>
 #include <bonobo/bonobo-arg.h>
+*/
+
+/* FIXME: */
+   typedef enum
+   {
+      GNOME_Desktop_ENTRY_TYPE_UNKNOWN,
+      GNOME_Desktop_ENTRY_TYPE_APPLICATION,
+      GNOME_Desktop_ENTRY_TYPE_URL,
+      GNOME_Desktop_ENTRY_TYPE_LINK,
+      GNOME_Desktop_ENTRY_TYPE_FSDEVICE,
+      GNOME_Desktop_ENTRY_TYPE_MIMETYPE,
+      GNOME_Desktop_ENTRY_TYPE_DIRECTORY,
+      GNOME_Desktop_ENTRY_TYPE_SERVICE,
+      GNOME_Desktop_ENTRY_TYPE_SERVICETYPE,
+      GNOME_Desktop_ENTRY_TYPE_PANEL_APPLET,
+      GNOME_Desktop_ENTRY_TYPE_SEPARATOR
+   }
+   GNOME_Desktop_EntryType;
 
 G_BEGIN_DECLS
 
@@ -91,8 +109,9 @@ gchar *                 gnome_desktop_item_get_comment       (GnomeDesktopItem  
 gchar *                 gnome_desktop_item_get_local_name    (GnomeDesktopItem           *item);
 gchar *                 gnome_desktop_item_get_local_comment (GnomeDesktopItem           *item);
 
-BonoboArg *             gnome_desktop_item_get_attribute     (GnomeDesktopItem           *item,
-							      const char                 *attr_name);
+/* FIXME: */
+/*BonoboArg *             gnome_desktop_item_get_attribute     (GnomeDesktopItem           *item,
+							      const char                 *attr_name);*/
 GSList *                gnome_desktop_item_get_order         (GnomeDesktopItem           *item);
 GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (GnomeDesktopItem           *item);
 
@@ -117,9 +136,11 @@ void                    gnome_desktop_item_clear_comment     (GnomeDesktopItem  
 void                    gnome_desktop_item_set_comment       (GnomeDesktopItem           *item,
 							      const char                 *language,
 							      const char                 *comment);
+/* FIXME:
 void                    gnome_desktop_item_set_attribute     (GnomeDesktopItem           *item,
 							      const char                 *attr_name,
 							      const BonoboArg            *attr_value);
+							      */
 void                    gnome_desktop_item_set_order         (GnomeDesktopItem           *item,
 							      GSList                     *order);
 void                    gnome_desktop_item_set_flags         (GnomeDesktopItem           *item,

@@ -66,7 +66,7 @@ struct _GnomeDesktopItem {
         int refcount;
 
 	Bonobo_ConfigDatabase db;
-	GNOME_Desktop_Entry *entry;
+	/* FIXME: GNOME_Desktop_Entry *entry; */
 	GHashTable *name, *comment, *attributes;
 
 	/* `modified' means that the ditem has been modified since the last save. */
@@ -153,6 +153,8 @@ ditem_update (GnomeDesktopItem *ditem)
 						   (GDestroyNotify) g_free,
 						   (GDestroyNotify) NULL);
 
+/*FIXME: */
+#if 0
 	for (i = 0; i < ditem->entry->Name._length; i++) {
 		GNOME_LocalizedString *current = &ditem->entry->Name._buffer [i];
 
@@ -170,6 +172,7 @@ ditem_update (GnomeDesktopItem *ditem)
 
 		g_hash_table_insert (ditem->comment, g_strdup (current->name), current);
 	}
+#endif
 
 	ditem->dirty = FALSE;
 }
@@ -180,6 +183,8 @@ ditem_load (const char *data_file,
 	    GnomeDesktopItemFlags item_flags)
 {
         GnomeDesktopItem *retval;
+/*FIXME: */
+#if 0
 	Bonobo_ConfigDatabase db;
 	CORBA_Environment ev;
 	CORBA_any *any;
@@ -232,6 +237,7 @@ ditem_load (const char *data_file,
 
  errout:
         gnome_desktop_item_unref (retval);
+#endif
         return NULL;
 }
 
@@ -250,6 +256,8 @@ GnomeDesktopItem *
 gnome_desktop_item_new_from_file (const char *file,
 				  GnomeDesktopItemLoadFlags flags)
 {
+/* FIXME: */
+#if 0
         GnomeDesktopItem *retval;
         char subfn[PATH_MAX];
         GnomeDesktopItemFlags item_flags;
@@ -315,6 +323,8 @@ gnome_desktop_item_new_from_file (const char *file,
 
  out:
         return retval;
+#endif
+	return NULL;
 }
 
 /**
@@ -331,6 +341,8 @@ gnome_desktop_item_new_from_file (const char *file,
 gboolean
 gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 {
+	/*FIXME: */
+#if 0
 	CORBA_Environment ev;
 	BonoboArg *arg;
 
@@ -395,6 +407,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
         item->mtime = time(NULL);
 
 	return TRUE;
+#endif
+	return FALSE;
 }
 
 /**
@@ -479,6 +493,8 @@ replace_percentsign(int argc, char **argv, const char *ps,
 static int
 ditem_execute(GnomeDesktopItem *item, int appargc, const char *appargv[], int argc, const char *argv[], gboolean replacekdefiles)
 {
+	/*FIXME: */
+#if 0
         char **real_argv;
         int real_argc;
         int i, j, ret;
@@ -550,6 +566,8 @@ ditem_execute(GnomeDesktopItem *item, int appargc, const char *appargv[], int ar
 		g_strfreev(term_argv);
 
 	return ret;
+#endif
+	return -1;
 }
 
 /* strip any trailing &, return FALSE if bad things happen and
@@ -595,6 +613,8 @@ strip_the_amp(char *exec)
 int
 gnome_desktop_item_launch (GnomeDesktopItem *item, int argc, const char **argv)
 {
+	/*FIXME: */
+#if 0
 	const char **temp_argv = NULL;
 	int temp_argc = 0;
 	char *the_exec;
@@ -652,6 +672,8 @@ gnome_desktop_item_launch (GnomeDesktopItem *item, int argc, const char **argv)
 	free(temp_argv);
 
 	return ret;
+#endif
+	return -1;
 }
 
 /* replace %s, %f, %u or %F in exec with file and run */
@@ -852,6 +874,8 @@ int
 gnome_desktop_item_drop_uri_list (GnomeDesktopItem *item,
 				  GList *uri_list)
 {
+	/* FIXME: */
+#if 0
 	GList *li;
 	gboolean G_GNUC_UNUSED any_urls = FALSE;
 	GList *file_list = NULL;
@@ -901,6 +925,8 @@ gnome_desktop_item_drop_uri_list (GnomeDesktopItem *item,
 	}
 
 	return ret;
+#endif
+	return -1;
 }
 
 /**
@@ -917,6 +943,8 @@ gnome_desktop_item_drop_uri_list (GnomeDesktopItem *item,
 gboolean
 gnome_desktop_item_exists (GnomeDesktopItem *item)
 {
+/* FIXME: */
+#if 0
         g_return_val_if_fail (item, FALSE);
 
 	if(item->entry->TryExec[0] != '\0') {
@@ -966,6 +994,8 @@ gnome_desktop_item_exists (GnomeDesktopItem *item)
         }
 
         return TRUE;
+#endif
+	return FALSE;
 }
 
 /**
@@ -1000,7 +1030,8 @@ gnome_desktop_item_get_type (GnomeDesktopItem *item)
 {
         g_return_val_if_fail (item, GNOME_Desktop_ENTRY_TYPE_UNKNOWN);
 
-        return item->entry->Type;
+        /* return item->entry->Type; */
+        /* FIXME: */return GNOME_Desktop_ENTRY_TYPE_UNKNOWN;
 }
 
 /**
@@ -1020,7 +1051,10 @@ gnome_desktop_item_get_command (GnomeDesktopItem *item)
 {
         g_return_val_if_fail (item, NULL);
 
-        return g_strdup (item->entry->Exec);
+	/* FIXME: */
+        /* return g_strdup (item->entry->Exec); */
+	return NULL;
+
 }
 
 /**
@@ -1034,10 +1068,15 @@ gnome_desktop_item_get_tryexec (GnomeDesktopItem *item)
 {
         g_return_val_if_fail (item, NULL);
 
+	/* FIXME: */
+	return NULL;
+
+		/*
 	if (item->entry->TryExec [0] == '\0')
 		return NULL;
 	else
 		return g_strdup (item->entry->TryExec);
+		*/
 }
 
 /**
@@ -1051,9 +1090,16 @@ gnome_desktop_item_get_icon_path (GnomeDesktopItem *item)
 {
         g_return_val_if_fail (item, NULL);
 
+	/* FIXME: */
+	return NULL;
+
+		/*
         return g_strdup (item->entry->Icon);
+	*/
 }
 
+/* FIXME: */
+#if 0
 static void
 insert_localized_string (GNOME_LocalizedStringList *list, const gchar *language, const gchar *text)
 {
@@ -1133,6 +1179,7 @@ insert_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *
 	cur_val->name = CORBA_string_dup (name);
 	CORBA_any__copy (&cur_val->value, value);
 }
+#endif
 
 
 /**
@@ -1148,6 +1195,8 @@ insert_attribute (Bonobo_PropertySet *list, const gchar *name, const BonoboArg *
 gchar *
 gnome_desktop_item_get_name (GnomeDesktopItem *item, const char *language)
 {
+	/* FIXME: */
+	/*
 	GNOME_LocalizedString *string;
 
         g_return_val_if_fail (item, NULL);
@@ -1157,6 +1206,7 @@ gnome_desktop_item_get_name (GnomeDesktopItem *item, const char *language)
 	string = g_hash_table_lookup (item->name, language ? language : "C");
 	if (string)
 		return g_strdup (string->text);
+		*/
 
 	return NULL;
 }
@@ -1174,6 +1224,8 @@ gnome_desktop_item_get_name (GnomeDesktopItem *item, const char *language)
 gchar *
 gnome_desktop_item_get_comment (GnomeDesktopItem *item, const char *language)
 {
+	/* FIXME: */
+	/*
 	GNOME_LocalizedString *string;
 
         g_return_val_if_fail (item, NULL);
@@ -1183,6 +1235,7 @@ gnome_desktop_item_get_comment (GnomeDesktopItem *item, const char *language)
 	string = g_hash_table_lookup (item->comment, language ? language : "C");
 	if (string)
 		return g_strdup (string->text);
+		*/
 
 	return NULL;
 }
@@ -1201,18 +1254,17 @@ gchar *
 gnome_desktop_item_get_local_name (GnomeDesktopItem *item)
 {
 	gchar *name, *p;
-	GList *list, *c;
+	const GList *list, *c;
 
 	g_return_val_if_fail (item, NULL);
 
-	list = gnome_desktop_i18n_get_language_list ("LC_MESSAGES");
+	list = gnome_i18n_get_language_list ("LC_MESSAGES");
 
 	for (c = list; c; c = c->next) {
 		const gchar *locale = c->data;
 
 		name = gnome_desktop_item_get_name (item, locale);
 		if (name) {
-			g_list_free (list);
 			return name;
 		}
 	}
@@ -1232,18 +1284,17 @@ gchar *
 gnome_desktop_item_get_local_comment (GnomeDesktopItem *item)
 {
 	gchar *comment;
-	GList *list, *c;
+	const GList *list, *c;
 
 	g_return_val_if_fail (item, NULL);
 
-	list = gnome_desktop_i18n_get_language_list ("LC_MESSAGES");
+	list = gnome_i18n_get_language_list ("LC_MESSAGES");
 
 	for (c = list; c; c = c->next) {
 		const gchar *locale = c->data;
 
 		comment = gnome_desktop_item_get_comment (item, locale);
 		if (comment) {
-			g_list_free (list);
 			return comment;
 		}
 	}
@@ -1267,6 +1318,8 @@ gnome_desktop_item_get_local_comment (GnomeDesktopItem *item)
  *          should not be freed.
  *
  */
+	/* FIXME: */
+	/*
 BonoboArg *
 gnome_desktop_item_get_attribute (GnomeDesktopItem *item, const char *attr_name)
 {
@@ -1283,6 +1336,7 @@ gnome_desktop_item_get_attribute (GnomeDesktopItem *item, const char *attr_name)
 
 	return NULL;
 }
+		*/
 
 /**
  * gnome_desktop_item_get_order:
@@ -1299,6 +1353,8 @@ gnome_desktop_item_get_attribute (GnomeDesktopItem *item, const char *attr_name)
 GSList *
 gnome_desktop_item_get_order (GnomeDesktopItem *item)
 {
+	/*FIXME: */
+#if 0
 	gulong i;
 	GSList *retval = NULL;
 
@@ -1311,6 +1367,8 @@ gnome_desktop_item_get_order (GnomeDesktopItem *item)
 	}
 
         return g_slist_reverse (retval);
+#endif
+	return NULL;
 }
 
 static void
@@ -1346,6 +1404,8 @@ ditem_add_key_test(gpointer key, gpointer value, gpointer user_data)
 GSList *
 gnome_desktop_item_get_languages(GnomeDesktopItem *item)
 {
+	/* FIXME: */
+#if 0
         GSList *retval = NULL;
 	gulong i;
 
@@ -1372,6 +1432,8 @@ gnome_desktop_item_get_languages(GnomeDesktopItem *item)
 	}
 
         return retval;
+#endif
+	return NULL;
 }
 
 /**
@@ -1388,6 +1450,8 @@ gnome_desktop_item_get_languages(GnomeDesktopItem *item)
 GSList *
 gnome_desktop_item_get_attributes (GnomeDesktopItem *item)
 {
+	/*FIXME: */
+#if 0
         GSList *retval = NULL;
 	gulong i;
 
@@ -1400,6 +1464,8 @@ gnome_desktop_item_get_attributes (GnomeDesktopItem *item)
 	}
 
         return retval;
+#endif
+	return NULL;
 }
 
 /**
@@ -1456,6 +1522,8 @@ gnome_desktop_item_get_location (GnomeDesktopItem *item)
 void
 gnome_desktop_item_clear_name(GnomeDesktopItem *item)
 {
+	/* FIXME: */
+#if 0
 	if (item->entry->Name._release)
 		CORBA_free (item->entry->Name._buffer);
 	item->entry->Name._buffer = NULL;
@@ -1463,6 +1531,7 @@ gnome_desktop_item_clear_name(GnomeDesktopItem *item)
 	item->entry->Name._length = 0;
 	item->entry->Name._maximum = 0;
 	item->modified = TRUE;
+#endif
 }
 
 /**
@@ -1480,6 +1549,8 @@ gnome_desktop_item_clear_name(GnomeDesktopItem *item)
 void
 gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const char *name)
 {
+	/* FIXME: */
+#if 0
 	GNOME_LocalizedString *string;
 
 	ditem_update (item);
@@ -1494,6 +1565,7 @@ gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const
 
 	insert_localized_string (&item->entry->Name, language, name);
 	item->dirty = TRUE;
+#endif
 }
 
 /**
@@ -1515,7 +1587,8 @@ gnome_desktop_item_set_type (GnomeDesktopItem *item, GNOME_Desktop_EntryType typ
 {
         g_return_if_fail (item);
 
-	item->entry->Type = type;
+	/*FIXME: */
+	/* item->entry->Type = type; */
 	item->modified = TRUE;
 }
 
@@ -1538,8 +1611,11 @@ gnome_desktop_item_set_command (GnomeDesktopItem *item, const char *command)
 {
         g_return_if_fail (item);
 
+	/*FIXME: */
+	/*
 	CORBA_free(item->entry->Exec);
 	item->entry->Exec = CORBA_string_dup(command);
+	*/
 	item->modified = TRUE;
 }
 
@@ -1554,8 +1630,11 @@ gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path)
 {
         g_return_if_fail (item);
 
+	/*FIXME: */
+	/*
 	CORBA_free (item->entry->Icon);
 	item->entry->Icon = CORBA_string_dup (icon_path);
+	*/
 	item->modified = TRUE;
 }
 
@@ -1570,6 +1649,8 @@ gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path)
 void
 gnome_desktop_item_clear_comment(GnomeDesktopItem *item)
 {
+	/*FIXME: */
+	/*
 	if (item->entry->Comment._release)
 		CORBA_free (item->entry->Comment._buffer);
 	item->entry->Comment._buffer = NULL;
@@ -1577,6 +1658,7 @@ gnome_desktop_item_clear_comment(GnomeDesktopItem *item)
 	item->entry->Comment._length = 0;
 	item->entry->Comment._maximum = 0;
 	item->modified = TRUE;
+	*/
 }
 
 /**
@@ -1594,6 +1676,8 @@ gnome_desktop_item_clear_comment(GnomeDesktopItem *item)
 void
 gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, const char *comment)
 {
+	/*FIXME: */
+	/*
 	GNOME_LocalizedString *string;
 
 	ditem_update (item);
@@ -1608,6 +1692,7 @@ gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, co
 
 	insert_localized_string (&item->entry->Comment, language, comment);
 	item->dirty = TRUE;
+	*/
 }
 
 /**
@@ -1620,6 +1705,8 @@ gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, co
  * is NULL it removes the attribute completely.
  *
  */
+/* FIXME: */
+/*
 void
 gnome_desktop_item_set_attribute (GnomeDesktopItem *item,
 				  const char *attr_name,
@@ -1639,6 +1726,7 @@ gnome_desktop_item_set_attribute (GnomeDesktopItem *item,
 	insert_attribute (&item->entry->Attributes, attr_name, attr_value);
 	item->dirty = TRUE;
 }
+	*/
 
 /**
  * gnome_desktop_item_set_order:
@@ -1654,6 +1742,8 @@ gnome_desktop_item_set_attribute (GnomeDesktopItem *item,
 void
 gnome_desktop_item_set_order (GnomeDesktopItem *item, GSList *order)
 {
+	/* FIXME: */
+	/*
 	GSList *li;
 	gulong length, i;
 
@@ -1673,6 +1763,7 @@ gnome_desktop_item_set_order (GnomeDesktopItem *item, GSList *order)
 		item->entry->SortOrder._buffer [i] = CORBA_string_dup (li->data);
 		i++;
 	}
+	*/
 }
 
 /**
