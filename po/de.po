@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.1.9cvs\n"
-"POT-Creation-Date: 2000-05-06 06:21+0200\n"
-"PO-Revision-Date: 2000-05-06 06:58+02:00\n"
+"POT-Creation-Date: 2000-05-06 15:29+0200\n"
+"PO-Revision-Date: 2000-05-06 15:33+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: Matthias Warkus <mawa@iname.com>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Höhe"
 
 #: applets/desk-guide/deskguide_applet.c:241 applets/fish/fish.c:831
 #: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1358
-#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:787
+#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:793
 #: gnome-terminal/gnome-terminal.c:1686 gsm/session-properties.c:180
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:290
 #: panel/launcher.c:526 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4451
@@ -225,7 +225,7 @@ msgstr "Startereigenschaften"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: panel/gnome-panel-properties.c:988 panel/gnome-panel-properties.c:1013
+#: panel/gnome-panel-properties.c:989 panel/gnome-panel-properties.c:1014
 #: panel/panel-util.c:619 panel/panel-util.c:676
 msgid "Disabled"
 msgstr "Inaktiv"
@@ -335,7 +335,7 @@ msgstr "Neuen Eintrag zu diesem Menü hinzufügen"
 
 #: applets/desk-guide/deskguide_applet.c:235 applets/fish/fish.c:824
 #: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1352
-#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:781
+#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:787
 #: panel/drawer.c:411 panel/launcher.c:523 panel/menu.c:1190 panel/menu.c:4442
 msgid "Properties..."
 msgstr "Eigenschaften..."
@@ -361,7 +361,7 @@ msgstr "Füge Abreißmenüs hinzu, wenn Abreißmenüs aktiviert werden"
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Erhalte keine goad_id für Desktopeintrag, ignoriere es"
 
-#: panel/gnome-panel-properties.c:506 panel/gnome-panel-properties.c:1298
+#: panel/gnome-panel-properties.c:506 panel/gnome-panel-properties.c:1299
 #: panel/menu-properties.c:423 panel/menu.c:2226 panel/menu.c:2279
 #: panel/menu.c:2281 panel/menu.c:3542 panel/menu.c:4363
 msgid "Menu"
@@ -608,11 +608,11 @@ msgstr "Menüs bearbeiten..."
 msgid "Can't open directory, using main menu!"
 msgstr "Kann Verzeichnis nicht öffnen, benutze Hauptmenü!"
 
-#: panel/gnome-panel-properties.c:713 panel/menu-properties.c:258
+#: panel/gnome-panel-properties.c:714 panel/menu-properties.c:258
 msgid "Off"
 msgstr "Aus"
 
-#: panel/gnome-panel-properties.c:720 panel/menu-properties.c:270
+#: panel/gnome-panel-properties.c:721 panel/menu-properties.c:270
 msgid "In a submenu"
 msgstr "In einem Untermenü"
 
@@ -851,7 +851,7 @@ msgstr "Randbreite (nur Kachel)"
 #. Minimized size scale frame
 #: panel/gnome-panel-properties.c:485
 msgid "Depth (displacement when pressed)"
-msgstr "Tiefe (Hub des Buttons beim Drücken)"
+msgstr "Tiefe (Hub des Knopfes beim Drücken)"
 
 #: panel/gnome-panel-properties.c:504
 msgid "Launcher"
@@ -868,143 +868,144 @@ msgstr "Knopftyp: "
 #. show/hide frame
 #: panel/gnome-panel-properties.c:550
 msgid "Make buttons flush with panel edge"
-msgstr "Buttons bündig mit der Panelkante ausrichten"
+msgstr "Knöpfe bündig mit der Panelkante ausrichten"
 
 #. only show tiles when mouse is over the button
 #: panel/gnome-panel-properties.c:557
 msgid "Show button tiles only when cursor is over the button"
-msgstr "Buttonkacheln nur anzeigen, wenn der Cursor über dem Button steht"
+msgstr "Knopfkacheln nur anzeigen, wenn der Cursor über dem Knopf steht"
 
-#. saturate on mouseovers hack
-#: panel/gnome-panel-properties.c:563
-msgid "Keep saturation low when cursor is not on the button"
-msgstr "Icon dunkler anzeigen, wenn der Cursor nicht darüber steht"
+#. prelight on mouseovers hack (used to be saturation, hence
+#. * the config option name)
+#: panel/gnome-panel-properties.c:564
+msgid "Prelight buttons on mouseover"
+msgstr "Knöpfe unter dem Mauszeiger aufleuchten lassen"
 
 #. Movement frame
-#: panel/gnome-panel-properties.c:618
+#: panel/gnome-panel-properties.c:619
 msgid "Default movement mode"
 msgstr "Standard-Bewegungsmodus"
 
 #. Switched
-#: panel/gnome-panel-properties.c:628
+#: panel/gnome-panel-properties.c:629
 msgid "Switched movement (or use Ctrl)"
 msgstr "Bockspringende Bewegung (oder Ctrl bzw. Strg benutzen)"
 
-#: panel/gnome-panel-properties.c:636
+#: panel/gnome-panel-properties.c:637
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
 msgstr "Freie Bewegung (stört andere Applets nicht) (oder Alt benutzen)"
 
-#: panel/gnome-panel-properties.c:644
+#: panel/gnome-panel-properties.c:645
 msgid "Push movement (or use Shift)"
 msgstr "Schiebende Bewegung (oder Shift bzw. Umschalt benutzen)"
 
-#: panel/gnome-panel-properties.c:649
+#: panel/gnome-panel-properties.c:650
 msgid "Padding"
 msgstr "Polsterung"
 
-#: panel/gnome-panel-properties.c:726
+#: panel/gnome-panel-properties.c:727
 msgid "In the menu"
 msgstr "Im Menü"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:745
+#: panel/gnome-panel-properties.c:746
 msgid "Menus"
 msgstr "Menüdarstellung"
 
 #. Dot Buttons
-#: panel/gnome-panel-properties.c:755
+#: panel/gnome-panel-properties.c:756
 msgid "Show [...] buttons"
 msgstr "Knöpfe mit ... anzeigen"
 
 #. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:761
+#: panel/gnome-panel-properties.c:762
 msgid "Show popup menus outside of panels"
 msgstr "Popup-Menüs außerhalb des Panels anzeigen"
 
 #. Hungry Menus
-#: panel/gnome-panel-properties.c:767
+#: panel/gnome-panel-properties.c:768
 msgid "Keep menus in memory"
 msgstr "Menüs im Speicher halten"
 
 #. large icons
-#: panel/gnome-panel-properties.c:773
+#: panel/gnome-panel-properties.c:774
 msgid "Use large icons"
 msgstr "Große Icons benutzen"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:779
+#: panel/gnome-panel-properties.c:780
 msgid "Global menu"
 msgstr "Globales Menü"
 
-#: panel/gnome-panel-properties.c:897
+#: panel/gnome-panel-properties.c:898
 msgid "Press a key..."
 msgstr "Drücken Sie eine Taste..."
 
 #. Miscellaneous frame
 #: applets/tasklist/tasklist_properties.c:272 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:919
-#: panel/gnome-panel-properties.c:1303
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:920
+#: panel/gnome-panel-properties.c:1304
 msgid "Miscellaneous"
 msgstr "Allgemeines"
 
 #. Tooltips enable
-#: panel/gnome-panel-properties.c:929
+#: panel/gnome-panel-properties.c:930
 msgid "Tooltips enabled"
 msgstr "Minihilfen verwenden"
 
 #. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:935
+#: panel/gnome-panel-properties.c:936
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr "Schublade schließen, wenn ein Starter darin gedrückt wird"
 
 #. Autoraise
-#: panel/gnome-panel-properties.c:941
+#: panel/gnome-panel-properties.c:942
 msgid "Raise panels on mouse-over"
 msgstr "Panels unter Mauszeiger anheben"
 
 #. Keep on bottom
-#: panel/gnome-panel-properties.c:947
+#: panel/gnome-panel-properties.c:948
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr "Panel unter Fenstern halten (nur für GNOME-kompatible Fenstermanager)"
 
 #. Confirm panel removal
-#: panel/gnome-panel-properties.c:953
+#: panel/gnome-panel-properties.c:954
 msgid "Confirm the removal of panels with a dialog"
 msgstr "Das Entfernen eines Panels mit einem Dialog bestätigen lassen"
 
 #. Key Bindings frame
-#: panel/gnome-panel-properties.c:959
+#: panel/gnome-panel-properties.c:960
 msgid "Key Bindings"
 msgstr "Tastenkombinationen"
 
 #. enabled
-#: panel/gnome-panel-properties.c:972
+#: panel/gnome-panel-properties.c:973
 msgid "Enable panel keybindings"
 msgstr "Panel-Tastenkombinationen aktivieren"
 
 #. menu key
-#: panel/gnome-panel-properties.c:979
+#: panel/gnome-panel-properties.c:980
 msgid "Popup menu key"
 msgstr "Taste zum Aufrufen des Menüs"
 
-#: panel/gnome-panel-properties.c:999 panel/gnome-panel-properties.c:1024
+#: panel/gnome-panel-properties.c:1000 panel/gnome-panel-properties.c:1025
 msgid "Grab key..."
 msgstr "Taste erfassen..."
 
 #. run key...
-#: panel/gnome-panel-properties.c:1006
+#: panel/gnome-panel-properties.c:1007
 msgid "Run dialog key"
 msgstr "Taste für `Ausführen'-Dialogfeld"
 
-#: panel/gnome-panel-properties.c:1283
+#: panel/gnome-panel-properties.c:1284
 msgid "Animation"
 msgstr "Animation"
 
-#: panel/gnome-panel-properties.c:1288
+#: panel/gnome-panel-properties.c:1289
 msgid "Buttons"
 msgstr "Knöpfe"
 
-#: panel/gnome-panel-properties.c:1293
+#: panel/gnome-panel-properties.c:1294
 msgid "Panel Objects"
 msgstr "Panelobjekte"
 
@@ -1046,7 +1047,7 @@ msgstr "Versteckknopf an/aus"
 msgid "Enable hidebutton arrow"
 msgstr "Pfeil auf Versteckknopf an/aus"
 
-#: panel/button-widget.c:632
+#: panel/button-widget.c:678
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2685,7 +2686,7 @@ msgstr "Anwendung töten"
 
 #: applets/desk-guide/deskguide_applet.c:248 applets/fish/fish.c:838
 #: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1364
-#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:794
+#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:800
 msgid "About..."
 msgstr "Info..."
 
