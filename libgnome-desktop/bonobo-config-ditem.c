@@ -51,12 +51,6 @@ typedef enum {
 	SET
 } access_type;
 
-typedef struct DirEntry {
-	char *name;
-	char *value;
-	GSList *localized_values;
-} DirEntry;
-
 typedef struct TSecHeader {
 	char *section_name;
 	GSList *keys;
@@ -159,15 +153,13 @@ insert_key_maybe_localized (TSecHeader *section, gchar *key)
 		*a++ = '\0'; *b = '\0'; locale = a;
 		l = g_slist_find_custom (section->keys, key, key_compare_func);
 	}
-	g_message (G_STRLOC ": %p - `%s' - `%s'", l, locale, key);
-
 	de = g_new0 (DirEntry, 1);
 
 	if (l) {
 		DirEntry *parent = (DirEntry *) l->data;
 
 		de->name = g_strdup (locale);
-		parent->localized_values = g_slist_prepend (parent->localized_values, de);
+		parent->subvalues = g_slist_prepend (parent->subvalues, de);
 	} else {
 		de->name = g_strdup (key);
 		section->keys = g_slist_prepend (section->keys, de);
@@ -451,7 +443,7 @@ real_get_value (BonoboConfigDatabase *db,
 	}
 
 	g_message (G_STRLOC ": (%s) - `%s' - `%s' - %p", key, de->name, de->value,
-		   de->localized_values);
+		   de->subvalues);
 
 	tc = Bonobo_ConfigDatabase_getType (BONOBO_OBJREF (db), key, ev);
 	if (BONOBO_EX (ev))
@@ -459,7 +451,7 @@ real_get_value (BonoboConfigDatabase *db,
 
 	CORBA_exception_init (ev);
 
-	value = bonobo_config_ditem_decode_any (de->value, tc, ev);
+	value = bonobo_config_ditem_decode_any (de, tc, ev);
 
 	if (!value)
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);

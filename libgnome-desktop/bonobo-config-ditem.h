@@ -26,6 +26,12 @@ typedef struct _BonoboConfigDItem        BonoboConfigDItem;
 typedef struct _BonoboConfigDItemClass   BonoboConfigDItemClass;
 typedef struct _BonoboConfigDItemPrivate BonoboConfigDItemPrivate;
 
+typedef struct DirEntry {
+	char *name;
+	char *value;
+	GSList *subvalues;
+} DirEntry;
+
 struct _BonoboConfigDItem {
 	BonoboConfigDatabase      base;
 
