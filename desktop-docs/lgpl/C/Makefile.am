@@ -1,6 +1,8 @@
-app = lgpl
+figs =
+docname = lgpl
 lang = C
-omffiles=lgpl-C.omf
-include $(top_srcdir)/app-docs.make
+omffile = lgpl-C.omf
+sgml_ents =
+include $(top_srcdir)/sgmldocs.make
 dist-hook: app-dist-hook
 

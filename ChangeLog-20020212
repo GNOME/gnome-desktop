@@ -1,3 +1,164 @@
+2001-03-22  Dan Mueth  <dan@eazel.com>
+
+	Updating doc build stuff to use sgmldocs.make.  Making sure
+	screenshots are in figures directory.  A few other small
+	doc fixes.
+
+	* applets/desk-guide/help/C/Makefile.am:
+	* applets/desk-guide/help/C/desk-guide.sgml:
+	* applets/desk-guide/help/C/deskguide-fig.png:
+	* applets/desk-guide/help/C/deskguide-properties-advanced-fig.png:
+	* applets/desk-guide/help/C/deskguide-properties-geometry-fig.png:
+	* applets/desk-guide/help/C/deskguide-properties-tasks-fig.png:
+	* applets/desk-guide/help/C/deskguide-properties.png:
+	* applets/desk-guide/help/C/deskguide-tasklist-fig.png:
+	* applets/desk-guide/help/C/figures/deskguide-fig.png:
+	* applets/desk-guide/help/C/figures/deskguide-properties-advanced-f
+	ig.png:
+	* applets/desk-guide/help/C/figures/deskguide-properties-geometry-f
+	ig.png:
+	* applets/desk-guide/help/C/figures/deskguide-properties-tasks-fig.
+	png:
+	* applets/desk-guide/help/C/figures/deskguide-properties.png:
+	* applets/desk-guide/help/C/figures/deskguide-tasklist-fig.png:
+	* applets/desk-guide/help/de/Makefile.am:
+	* applets/desk-guide/help/de/desk-guide.sgml:
+	* applets/desk-guide/help/de/deskguide-fig.png:
+	* applets/desk-guide/help/de/deskguide-properties-advanced-fig.png:
+	* applets/desk-guide/help/de/deskguide-properties-geometry-fig.png:
+	* applets/desk-guide/help/de/deskguide-properties-tasks-fig.png:
+	* applets/desk-guide/help/de/deskguide-properties.png:
+	* applets/desk-guide/help/de/deskguide-tasklist-fig.png:
+	* applets/desk-guide/help/de/figures/deskguide-fig.png:
+	* applets/desk-guide/help/de/figures/deskguide-properties-advanced-
+	fig.png:
+	* applets/desk-guide/help/de/figures/deskguide-properties-geometry-
+	fig.png:
+	* applets/desk-guide/help/de/figures/deskguide-properties-tasks-fig
+	.png:
+	* applets/desk-guide/help/de/figures/deskguide-properties.png:
+	* applets/desk-guide/help/de/figures/deskguide-tasklist-fig.png:
+	* applets/desk-guide/help/es/Makefile.am:
+	* applets/desk-guide/help/es/desk-guide.sgml:
+	* applets/desk-guide/help/es/desk-guide_applet-es.omf:
+	* applets/desk-guide/help/es/figures/deskguide-fig.png:
+	* applets/desk-guide/help/es/figures/deskguide-properties-advanced-
+	fig.png:
+	* applets/desk-guide/help/es/figures/deskguide-properties-geometry-
+	fig.png:
+	* applets/desk-guide/help/es/figures/deskguide-properties-tasks-fig
+	.png:
+	* applets/desk-guide/help/es/figures/deskguide-properties.png:
+	* applets/desk-guide/help/es/figures/deskguide-tasklist-fig.png:
+	* applets/fish/help/C/Makefile.am:
+	* applets/fish/help/C/figures/fish_applet.png:
+	* applets/fish/help/C/figures/fish_settings.png:
+	* applets/fish/help/C/fish.sgml:
+	* applets/fish/help/C/fish_applet.png:
+	* applets/fish/help/C/fish_settings.png:
+	* applets/fish/help/da/Makefile.am:
+	* applets/fish/help/da/figures/fish_applet.png:
+	* applets/fish/help/da/figures/fish_settings.png:
+	* applets/fish/help/da/fish.sgml:
+	* applets/fish/help/da/fish_applet.png:
+	* applets/fish/help/da/fish_settings.png:
+	* applets/fish/help/no/Makefile.am:
+	* applets/fish/help/no/figures/fish_applet.png:
+	* applets/fish/help/no/figures/fish_settings.png:
+	* applets/fish/help/no/fish.sgml:
+	* applets/fish/help/no/fish_applet.png:
+	* applets/fish/help/no/fish_settings.png:
+	* applets/gen_util/help/C/clock/Makefile.am:
+	* applets/gen_util/help/C/clock/clock.sgml:
+	* applets/gen_util/help/C/clock/clock_applet.png:
+	* applets/gen_util/help/C/clock/clock_settings.png:
+	* applets/gen_util/help/C/clock/figures/clock_applet.png:
+	* applets/gen_util/help/C/clock/figures/clock_settings.png:
+	* applets/gen_util/help/C/mailcheck/Makefile.am:
+	* applets/gen_util/help/C/mailcheck/figures/mailcheck-applet.png:
+	* applets/gen_util/help/C/mailcheck/figures/mailcheck-properties-ma
+	ilbox.png:
+	* applets/gen_util/help/C/mailcheck/figures/mailcheck-properties-ma
+	ilcheck.png:
+	* applets/gen_util/help/C/mailcheck/mailcheck-applet.png:
+	* applets/gen_util/help/C/mailcheck/mailcheck-properties-mailbox.pn
+	g:
+	* applets/gen_util/help/C/mailcheck/mailcheck-properties-mailcheck.
+	png:
+	* applets/gen_util/help/C/mailcheck/mailcheck.sgml:
+	* applets/gen_util/help/C/printer/Makefile.am:
+	* applets/gen_util/help/C/printer/figures/printer-fig.png:
+	* applets/gen_util/help/C/printer/figures/printer-properties.png:
+	* applets/gen_util/help/C/printer/printer-fig.png:
+	* applets/gen_util/help/C/printer/printer-properties.png:
+	* applets/gen_util/help/C/printer/printer.sgml:
+	* applets/gen_util/help/da/clock/Makefile.am:
+	* applets/gen_util/help/da/clock/clock.sgml:
+	* applets/gen_util/help/da/clock/clock_applet.png:
+	* applets/gen_util/help/da/clock/clock_settings.png:
+	* applets/gen_util/help/da/clock/figures/clock_applet.png:
+	* applets/gen_util/help/da/clock/figures/clock_settings.png:
+	* applets/gen_util/help/da/mailcheck/Makefile.am:
+	* applets/gen_util/help/da/mailcheck/figures/mailcheck-applet.png:
+	* applets/gen_util/help/da/mailcheck/figures/mailcheck-properties-m
+	ailbox.png:
+	* applets/gen_util/help/da/mailcheck/figures/mailcheck-properties-m
+	ailcheck.png:
+	* applets/gen_util/help/da/mailcheck/mailcheck-applet.png:
+	* applets/gen_util/help/da/mailcheck/mailcheck-properties-mailbox.p
+	ng:
+	* applets/gen_util/help/da/mailcheck/mailcheck-properties-mailcheck
+	.png:
+	* applets/gen_util/help/da/mailcheck/mailcheck.sgml:
+	* applets/gen_util/help/da/printer/Makefile.am:
+	* applets/gen_util/help/da/printer/figures/printer-fig.png:
+	* applets/gen_util/help/da/printer/figures/printer-properties.png:
+	* applets/gen_util/help/da/printer/printer-fig.png:
+	* applets/gen_util/help/da/printer/printer-properties.png:
+	* applets/gen_util/help/da/printer/printer.sgml:
+	* applets/tasklist/help/C/Makefile.am:
+	* applets/tasklist/help/C/figures/tasklist-fig.png:
+	* applets/tasklist/help/C/figures/tasklist-properties-size.png:
+	* applets/tasklist/help/C/figures/tasklist-properties.png:
+	* applets/tasklist/help/C/figures/tasklist-rightclick-fig.png:
+	* applets/tasklist/help/C/tasklist-fig.png:
+	* applets/tasklist/help/C/tasklist-properties-size.png:
+	* applets/tasklist/help/C/tasklist-properties.png:
+	* applets/tasklist/help/C/tasklist-rightclick-fig.png:
+	* applets/tasklist/help/C/tasklist.sgml:
+	* core-docs/fdl/C/Makefile.am:
+	* core-docs/gpl/C/Makefile.am:
+	* core-docs/lgpl/C/Makefile.am:
+	* gnome-terminal/C/Makefile.am:
+	* gnome-terminal/da/gnome-terminal.sgml:
+	* gnome-terminal/de/Makefile.am:
+	* gnome-terminal/es/Makefile.am:
+	* gsm/help/C/Makefile.am:
+	* gsm/help/C/button_remove.png:
+	* gsm/help/C/figures/button_remove.png:
+	* gsm/help/C/figures/session-properties.png:
+	* gsm/help/C/figures/stock_exec.png:
+	* gsm/help/C/figures/stock_help.png:
+	* gsm/help/C/figures/stock_preferences.png:
+	* gsm/help/C/figures/stock_refresh.png:
+	* gsm/help/C/figures/stock_save.png:
+	* gsm/help/C/figures/stock_timer.png:
+	* gsm/help/C/figures/stock_trash.png:
+	* gsm/help/C/session-properties.png:
+	* gsm/help/C/session.sgml:
+	* gsm/help/C/stock_exec.png:
+	* gsm/help/C/stock_help.png:
+	* gsm/help/C/stock_preferences.png:
+	* gsm/help/C/stock_refresh.png:
+	* gsm/help/C/stock_save.png:
+	* gsm/help/C/stock_timer.png:
+	* gsm/help/C/stock_trash.png:
+	* panel/help/C/Makefile.am:
+	* panel/help/de/Makefile.am:
+	* panel/help/it/Makefile.am:
+	* panel/help/ja/Makefile.am:
+	* panel/help/no/Makefile.am:
+
 2001-03-20  Dan Mueth  <dan@eazel.com>
 
 	Update some of the build stuff to the latest state of

@@ -1,6 +1,8 @@
-app = gpl
+figs =
+docname = gpl
 lang = C
-omffiles=gpl-C.omf
-include $(top_srcdir)/app-docs.make
+omffile = gpl-C.omf
+sgml_ents =
+include $(top_srcdir)/sgmldocs.make
 dist-hook: app-dist-hook
 

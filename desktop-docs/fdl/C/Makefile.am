@@ -1,6 +1,8 @@
-app = fdl
+figs =
+docname = fdl
 lang = C
-omffiles=fdl-C.omf
-include $(top_srcdir)/app-docs.make
+omffile = fdl-C.omf
+sgml_ents =
+include $(top_srcdir)/sgmldocs.make
 dist-hook: app-dist-hook
 
