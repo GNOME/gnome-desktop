@@ -1660,6 +1660,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	char **temp_argv = NULL;
 	int temp_argc = 0;
 	char *new_exec, *uris, *temp;
+	char *exec_locale;
 	int launched = 0;
 #ifdef HAVE_STARTUP_NOTIFICATION
 	SnLauncherContext *sn_context;
@@ -1754,10 +1755,11 @@ ditem_execute (const GnomeDesktopItem *item,
 		free_me = envp;
 	}
 	
+	exec_locale = g_filename_from_utf8 (exec, -1, NULL, NULL, NULL);
 	do {
 		added_status = ADDED_NONE;
 		new_exec = expand_string (item,
-					  exec,
+					  exec_locale,
 					  args, &arg_ptr, &added_status);
 
 		if (launched == 0 && added_status == ADDED_NONE && append_uris) {
@@ -1859,6 +1861,7 @@ ditem_execute (const GnomeDesktopItem *item,
 		 arg_ptr != NULL &&
 		 ! launch_only_one);
 
+	g_free (exec_locale);
 #ifdef HAVE_STARTUP_NOTIFICATION
 	if (sn_context != NULL) {
 		if (ret < 0)
