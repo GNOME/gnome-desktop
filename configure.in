@@ -37,7 +37,7 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
-AC_CHECK_HEADERS(dlfcn.h dl.h)
+AC_CHECK_HEADERS(dlfcn.h dl.h syslog.h tcpd.h)
 AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
 AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
 AC_CHECK_FUNCS(dlopen, DL_LIB="",
@@ -81,6 +81,81 @@ dnl gnome-session
 dnl
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
 AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
+
+AC_MSG_CHECKING("whether to use TCP wrappers")
+LIBWRAP_PATH=""
+for I in $LDFLAGS $LIBS -L/usr/lib -L/usr/local/lib; do
+        case "$I" in
+        -L*)
+        THEFILE="`echo $I | sed -e 's,^-L,,'`"
+        echo "From $I, checking in dir $THEFILE for libwrap.a" 1>&5
+        if test -f $THEFILE/libwrap.a; then
+                LIBWRAP_PATH="$THEFILE"
+                echo "Found in $LIBWRAP_PATH" 1>&5
+                break
+        fi
+	        esac
+done
+if test -n "$LIBWRAP_PATH"; then
+        AC_MSG_RESULT(yes)
+else
+        AC_MSG_RESULT(no)
+fi
+
+if test -n "$LIBWRAP_PATH"; then
+        nm $LIBWRAP_PATH/libwrap.* | grep 'T setenv' && LIBWRAP_PATH=""
+        if test -z "$LIBWRAP_PATH"; then
+                echo "*********************************************************"
+                echo " You have a broken TCP wrappers library (setenv included)"
+                echo " Please get the latest TCP wrappers package from your OS"
+                echo " vendor, or recompile TCP wrappers to not include a"
+                echo " setenv() implementation."
+                echo
+                echo "Not using TCP wrappers after all."
+                echo "*********************************************************"
+        fi
+fi
+dnl We need the header files too!
+if test "$ac_cv_header_syslog_h" != yes || test "$ac_cv_header_tcpd_h" != yes; then
+	echo "Resetting $LIBWRAP_PATH because syslog is $ac_cv_header_syslog_h and tcpd is $ac_cv_header_tcpd_h" 1>&5
+	LIBWRAP_PATH=""
+fi
+
+dnl find out if we need -lnsl or whatever
+LIBWRAP_NSL=
+if test -n "$LIBWRAP_PATH"; then
+        AC_MSG_CHECKING(whether -lwrap requires -lnsl)
+        ORIG_LIBS="$LIBS"
+        LIBS="-L$LIBWRAP_PATH -lwrap $LIBS"
+        AC_TRY_LINK([
+extern int hosts_access;
+int allow_severity, deny_severity;
+], [return hosts_access;], ,[
+dnl try with -lnsl
+OLD_LIBS="$LIBS"
+LIBS="$LIBS -lnsl"
+AC_TRY_LINK([
+extern int hosts_access;
+int allow_severity, deny_severity;
+], [return hosts_access;], LIBWRAP_NSL="-lnsl",
+LIBWRAP_PATH="")
+LIBS="$OLD_LIBS"
+])
+        LIBS="$ORIG_LIBS"
+if test -n "$LIB_NSL"; then
+        AC_MSG_RESULT(yes)
+        LIBS="$LIBS $LIB_NSL"
+else
+        AC_MSG_RESULT(no)
+fi
+fi
+LIBWRAP_LIBS=
+if test -n "$LIBWRAP_PATH"; then
+	LIBWRAP_LIBS="-L$LIBWRAP_PATH -lwrap $LIBWRAP_NSL"
+	AC_DEFINE(HAVE_HOSTS_ACCESS)
+fi
+AC_SUBST(LIBWRAP_LIBS)
+
 AC_ARG_WITH(window-manager,
 [  --with-window-manager=NAME
 			   Specify default window manager],[
