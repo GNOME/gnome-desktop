@@ -1309,10 +1309,10 @@ ditem_execute (const GnomeDesktopItem *item,
 	       int appargc,
 	       char *appargv[],
 	       GList *file_list,
-	       gboolean launch_only_one)
+	       gboolean launch_only_one,
+	       GError **error)
 {
         char **real_argv;
-        int real_argc;
         int i, j, ret;
 	char **term_argv = NULL;
 	int term_argc = 0;
@@ -1359,11 +1359,22 @@ ditem_execute (const GnomeDesktopItem *item,
 		}
 
 		real_argv = list_to_vector (vector_list);
-		real_argc = g_slist_length (vector_list);
 		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
 		g_slist_free (vector_list);
 
-		ret = gnome_execute_async (NULL, real_argc, real_argv);
+		if ( ! g_spawn_async (NULL /* working_directory */,
+				      real_argv,
+				      NULL /* envp */,
+				      0 /* flags */,
+				      NULL /* child_setup */,
+				      NULL /* user_data */,
+				      &ret /* child_pid */,
+				      error)) {
+			/* The error was set for us,
+			 * we just can't launch this thingie */
+			ret = -1;
+			break;
+		}
 
 		if (arg_ptr != NULL)
 			arg_ptr = arg_ptr->next;
@@ -1417,15 +1428,15 @@ strip_the_amp (char *exec)
  * This function runs the program listed in the specified 'item',
  * optionally appending additional arguments to its command line.  It uses
  * #g_shell_parse_argv to parse the the exec string into a vector which is
- * then passed to #gnome_execute_async for execution. This can return all
- * the errors from GnomeURL in addition to it's own.  The files are
+ * then passed to #g_spawn_async for execution. This can return all
+ * the errors from GnomeURL, #g_shell_parse_argv and #g_spawn_async,
+ * in addition to it's own.  The files are
  * only added if the entry defines one of the standard % strings in it's
  * Exec field.
  *
- * Returns: The value returned by #gnome_execute_async() upon execution of
- * the specified item or -1 on error.  It may also return a 0 on success
- * if pid is not available, such as in a case where the entry is a URL
- * entry.
+ * Returns: The the pid of the process spawned.  If more then one
+ * process was spawned the last pid is returned.  On error -1
+ * is returned and @error is set.
  */
 int
 gnome_desktop_item_launch (const GnomeDesktopItem *item,
@@ -1439,11 +1450,11 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 	char *the_exec;
 	int ret;
 
-	exec = gnome_desktop_item_get_string (item, "Exec");
+	exec = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_EXEC);
 	/* This is a URL, so launch it as a url */
 	if (item->type == GNOME_DESKTOP_ITEM_TYPE_LINK) {
 		const char *url;
-		url = gnome_desktop_item_get_string (item, "URL");
+		url = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_URL);
 		if (url && url[0] != '\0') {
 			if (gnome_url_show (url, error))
 				return 0;
@@ -1496,16 +1507,14 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		return -1;
 	}
 
-	if ( ! g_shell_parse_argv (exec, &temp_argc, &temp_argv, NULL)) {
-		g_set_error (error,
-			     GNOME_DESKTOP_ITEM_ERROR,
-			     GNOME_DESKTOP_ITEM_ERROR_BAD_EXEC_STRING,
-			     _("Bad command (Exec) to launch"));
+	if ( ! g_shell_parse_argv (exec, &temp_argc, &temp_argv, error)) {
+		/* The error now comes from g_shell_parse_argv */
 		return -1;
 	}
 
 	ret = ditem_execute (item, temp_argc, temp_argv, file_list,
-			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE));
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
+			     error);
 
 	g_strfreev (temp_argv);
 
