@@ -798,7 +798,9 @@ main (gint argc, gchar *argv[])
 {
 	GtkWidget        *window;
 	GtkWidget        *hbox;
+	GtkWidget        *alignment;
 	GtkWidget        *vbox;
+	GtkWidget        *label;
 	GdkPixmap        *logo_pixmap;
 	GdkBitmap        *logo_mask;
 	GtkWidget        *frame;
@@ -940,7 +942,7 @@ main (gint argc, gchar *argv[])
 	hbox = gtk_hbox_new (TRUE, 10);
 
 	gtk_box_pack_start (GTK_BOX (hbox),
-			    gnome_href_new ("http://gnotices.gnome.org/gnome-news/",
+			    gnome_href_new ("http://www.gnomedesktop.org/",
 					    _("GNOME News Site")),
 			    TRUE, FALSE, 0);
 
@@ -956,6 +958,7 @@ main (gint argc, gchar *argv[])
 	
 	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
 
+
 	g_signal_connect (window, "response",
 			  G_CALLBACK (cb_quit), NULL);
 
@@ -970,6 +973,16 @@ main (gint argc, gchar *argv[])
 	g_list_foreach (hrefs, (GFunc) set_tooltip_foreach_link, tooltips);
 	g_list_free (hrefs);
 
+
+	label = gnome_href_new ("http://www.gnu.org/",
+					    _("GNOME is a part of the GNU Project"));
+	gtk_button_set_relief (GTK_BUTTON(label), GTK_RELIEF_NONE);
+	alignment = gtk_alignment_new (0.5, 0.5, 0, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), label);
+	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), alignment);
+    
+	set_tooltip_foreach_link (label, tooltips);
+    
 	make_contributors_logo_accessible (tooltips);
 
 	gtk_widget_show_all (window);
