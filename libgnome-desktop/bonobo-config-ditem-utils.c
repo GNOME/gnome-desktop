@@ -73,8 +73,6 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 
 			if ((length > 0) && (array [length-1][0] == '\0'))
 				length--;
-
-			g_message (G_STRLOC ": %ld", length);
 		}
 
 		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), type, ev);
