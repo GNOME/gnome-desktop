@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.1.10\n"
-"POT-Creation-Date: 2000-05-06 12:31+0200\n"
-"PO-Revision-Date: 2000-05-06 12:32+02:00\n"
+"POT-Creation-Date: 2000-05-07 13:18+0200\n"
+"PO-Revision-Date: 2000-05-07 13:26+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -222,7 +222,7 @@ msgstr "Egenskaper for panelet"
 msgid "Background"
 msgstr "Bakgrunn"
 
-#: panel/gnome-panel-properties.c:988 panel/gnome-panel-properties.c:1013
+#: panel/gnome-panel-properties.c:989 panel/gnome-panel-properties.c:1014
 #: panel/panel-util.c:619 panel/panel-util.c:676
 msgid "Disabled"
 msgstr "Slått av"
@@ -356,7 +356,7 @@ msgstr "Legger til tearoff når disse er slått av"
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Får ikke goad_id for appleten, overser den!"
 
-#: panel/gnome-panel-properties.c:506 panel/gnome-panel-properties.c:1298
+#: panel/gnome-panel-properties.c:506 panel/gnome-panel-properties.c:1299
 #: panel/menu-properties.c:423 panel/menu.c:2226 panel/menu.c:2279
 #: panel/menu.c:2281 panel/menu.c:3542 panel/menu.c:4363
 msgid "Menu"
@@ -387,7 +387,8 @@ msgstr "Menypanel"
 msgid "Cannot find pixmap file %s"
 msgstr "Kunne ikke bildefil %s"
 
-#: panel/menu.c:2683 panel/menu.c:2688 panel/menu.c:4114
+#: panel/foobar-widget.c:546 panel/menu.c:2683 panel/menu.c:2688
+#: panel/menu.c:4114
 msgid "Programs"
 msgstr "Programmer"
 
@@ -579,7 +580,8 @@ msgstr "Lås skjerm"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: panel/menu.c:4084 panel/menu.c:4126 panel/menu.c:4132
+#: panel/foobar-widget.c:558 panel/menu.c:4084 panel/menu.c:4126
+#: panel/menu.c:4132
 msgid "Favorites"
 msgstr "Favoritter"
 
@@ -603,11 +605,11 @@ msgstr "Rediger menyer..."
 msgid "Can't open directory, using main menu!"
 msgstr "Kan ikke åpne katalogen, bruker hovedmenyen!"
 
-#: panel/gnome-panel-properties.c:713 panel/menu-properties.c:258
+#: panel/gnome-panel-properties.c:714 panel/menu-properties.c:258
 msgid "Off"
 msgstr "Av"
 
-#: panel/gnome-panel-properties.c:720 panel/menu-properties.c:270
+#: panel/gnome-panel-properties.c:721 panel/menu-properties.c:270
 msgid "In a submenu"
 msgstr "I en undermeny"
 
@@ -868,138 +870,139 @@ msgstr "La knappene fylle panelet helt til kanten"
 msgid "Show button tiles only when cursor is over the button"
 msgstr "Vis knappeflisene bare når markøren er over knappen"
 
-#. saturate on mouseovers hack
-#: panel/gnome-panel-properties.c:563
-msgid "Keep saturation low when cursor is not on the button"
-msgstr "Hold metningen lav når markøren ikke er på knappen"
+#. prelight on mouseovers hack (used to be saturation, hence
+#. * the config option name)
+#: panel/gnome-panel-properties.c:564
+msgid "Prelight buttons on mouseover"
+msgstr "Gjør knappene lysere når muspekeren beveger seg over dem"
 
 #. Movement frame
-#: panel/gnome-panel-properties.c:618
+#: panel/gnome-panel-properties.c:619
 msgid "Default movement mode"
 msgstr "Standard bevegelsesmodus"
 
 #. Switched
-#: panel/gnome-panel-properties.c:628
+#: panel/gnome-panel-properties.c:629
 msgid "Switched movement (or use Ctrl)"
 msgstr "Byttet bevegelse (eller bruk Ctrl)"
 
-#: panel/gnome-panel-properties.c:636
+#: panel/gnome-panel-properties.c:637
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
 msgstr "Fri bevegelse (forstyrrer ikke andre applets) (eller bruk Alt)"
 
-#: panel/gnome-panel-properties.c:644
+#: panel/gnome-panel-properties.c:645
 msgid "Push movement (or use Shift)"
 msgstr "\"Push\" bevegelse (eller bruk Shift)"
 
-#: panel/gnome-panel-properties.c:649
+#: panel/gnome-panel-properties.c:650
 msgid "Padding"
 msgstr "Fyll"
 
-#: panel/gnome-panel-properties.c:726
+#: panel/gnome-panel-properties.c:727
 msgid "In the menu"
 msgstr "I menyen"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:745
+#: panel/gnome-panel-properties.c:746
 msgid "Menus"
 msgstr "Menyer"
 
 #. Dot Buttons
-#: panel/gnome-panel-properties.c:755
+#: panel/gnome-panel-properties.c:756
 msgid "Show [...] buttons"
 msgstr "Vis [...] knapper"
 
 #. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:761
+#: panel/gnome-panel-properties.c:762
 msgid "Show popup menus outside of panels"
 msgstr "Vis popup-menyer utenfor paneler"
 
 #. Hungry Menus
-#: panel/gnome-panel-properties.c:767
+#: panel/gnome-panel-properties.c:768
 msgid "Keep menus in memory"
 msgstr "Behold menyene i minnet"
 
 #. large icons
-#: panel/gnome-panel-properties.c:773
+#: panel/gnome-panel-properties.c:774
 msgid "Use large icons"
 msgstr "Bruk store ikoner"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:779
+#: panel/gnome-panel-properties.c:780
 msgid "Global menu"
 msgstr "Global meny"
 
-#: panel/gnome-panel-properties.c:897
+#: panel/gnome-panel-properties.c:898
 msgid "Press a key..."
 msgstr "Trykk en tast..."
 
 #. Miscellaneous frame
 #: applets/tasklist/tasklist_properties.c:272 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:919
-#: panel/gnome-panel-properties.c:1303
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:920
+#: panel/gnome-panel-properties.c:1304
 msgid "Miscellaneous"
 msgstr "Forskjellig"
 
 #. Tooltips enable
-#: panel/gnome-panel-properties.c:929
+#: panel/gnome-panel-properties.c:930
 msgid "Tooltips enabled"
 msgstr "Verktøystips på"
 
 #. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:935
+#: panel/gnome-panel-properties.c:936
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr "Lukk skuff hvis en launcher inni den blir trykket ned"
 
 #. Autoraise
-#: panel/gnome-panel-properties.c:941
+#: panel/gnome-panel-properties.c:942
 msgid "Raise panels on mouse-over"
 msgstr "Hev panelet når musen beveger seg over det"
 
 #. Keep on bottom
-#: panel/gnome-panel-properties.c:947
+#: panel/gnome-panel-properties.c:948
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr ""
 "Hold panelet under vinduer (kun for vindusbehandlere som følger GNOMEs "
 "retningslinjer"
 
 #. Confirm panel removal
-#: panel/gnome-panel-properties.c:953
+#: panel/gnome-panel-properties.c:954
 msgid "Confirm the removal of panels with a dialog"
 msgstr "Bekreft fjerning av paneler med en dialog"
 
 #. Key Bindings frame
-#: panel/gnome-panel-properties.c:959
+#: panel/gnome-panel-properties.c:960
 msgid "Key Bindings"
 msgstr "Tastaturbindinger"
 
 #. enabled
-#: panel/gnome-panel-properties.c:972
+#: panel/gnome-panel-properties.c:973
 msgid "Enable panel keybindings"
 msgstr "Slå på tastaturbindinger for panelet"
 
 #. menu key
-#: panel/gnome-panel-properties.c:979
+#: panel/gnome-panel-properties.c:980
 msgid "Popup menu key"
 msgstr "Popup-meny tast"
 
-#: panel/gnome-panel-properties.c:999 panel/gnome-panel-properties.c:1024
+#: panel/gnome-panel-properties.c:1000 panel/gnome-panel-properties.c:1025
 msgid "Grab key..."
 msgstr "Hent tast..."
 
 #. run key...
-#: panel/gnome-panel-properties.c:1006
+#: panel/gnome-panel-properties.c:1007
 msgid "Run dialog key"
 msgstr "Kjør dialog tast"
 
-#: panel/gnome-panel-properties.c:1283
+#: panel/gnome-panel-properties.c:1284
 msgid "Animation"
 msgstr "Animasjon"
 
-#: panel/gnome-panel-properties.c:1288
+#: panel/gnome-panel-properties.c:1289
 msgid "Buttons"
 msgstr "Knapper"
 
-#: panel/gnome-panel-properties.c:1293
+#: panel/gnome-panel-properties.c:1294
 msgid "Panel Objects"
 msgstr "Panelobjekter"
 
@@ -1041,7 +1044,7 @@ msgstr "Slå på skjuling av knapper"
 msgid "Enable hidebutton arrow"
 msgstr "Slå på pil for skjuling av knapper"
 
-#: panel/button-widget.c:632
+#: panel/button-widget.c:678
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -1079,6 +1082,179 @@ msgstr "CORBA unntak"
 #: panel/applet-widget.c:1974
 msgid "Cannot create object"
 msgstr "Kan ikke opprette objekt"
+
+#: panel/foobar-widget.c:151
+msgid ""
+"Cannot execute the gmc-client program,\n"
+"perhaps gmc is not installed"
+msgstr ""
+"Kan ikke kjøre gmc-client programmet,\n"
+"kanskje gmc ikke er installert"
+
+#: panel/foobar-widget.c:161
+msgid ""
+"Cannot execute the gnome calendar,\n"
+"perhaps it's not installed.\n"
+"It is in the gnome-pim package."
+msgstr ""
+"Kan ikke kjøre gnome kalender,\n"
+"kanskje den ikke er installert.\n"
+"Du finner den i gnome-pim pakken."
+
+#: panel/foobar-widget.c:173
+msgid "News (www)"
+msgstr "Nyheter (www)"
+
+#: panel/foobar-widget.c:173
+msgid "http://gnotices.gnome.org/gnome-news/"
+msgstr "http://gnotices.gnome.org/gnome-news/"
+
+#: panel/foobar-widget.c:174
+msgid "FAQ (www)"
+msgstr "OBS (www)"
+
+#: panel/foobar-widget.c:174
+msgid "http://www.gnome.org/gnomefaq/html/"
+msgstr "http://www.gnome.org/gnomefaq/html/"
+
+#: panel/foobar-widget.c:175
+msgid "Mailing Lists (www)"
+msgstr "E-postlister (www)"
+
+#: panel/foobar-widget.c:175
+msgid "http://mail.gnome.org/mailman/listinfo/"
+msgstr "http://mail.gnome.org/mailman/listinfo/"
+
+#: panel/foobar-widget.c:177
+msgid "Software (www)"
+msgstr "Programvare (www)"
+
+#: panel/foobar-widget.c:177
+msgid "http://www.gnome.org/applist/list-martin.phtml"
+msgstr "http://www.gnome.org/applist/list-martin.phtml"
+
+#: panel/foobar-widget.c:178
+msgid "Development (www)"
+msgstr "Utvikling (www)"
+
+#: panel/foobar-widget.c:178
+msgid "http://developer.gnome.org/"
+msgstr "http://developer.gnome.org/"
+
+#: panel/foobar-widget.c:179
+msgid "Bug Tracking System (www)"
+msgstr "Feilrapporteringssystem (www)"
+
+#: panel/foobar-widget.c:179
+msgid "http://bugs.gnome.org/"
+msgstr "http://bugs.gnome.org/"
+
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:193
+msgid "About GNOME"
+msgstr "Om GNOME"
+
+#: panel/foobar-widget.c:223
+msgid "By Name"
+msgstr "Etter navn"
+
+#: panel/foobar-widget.c:224
+msgid "By Type"
+msgstr "Etter type"
+
+#: panel/foobar-widget.c:225
+msgid "By Size"
+msgstr "Etter størrelse"
+
+#: panel/foobar-widget.c:226
+msgid "By Time Last Accessed"
+msgstr "Etter tid for siste aksess"
+
+#: panel/foobar-widget.c:227
+msgid "By Time Last Modified"
+msgstr "Etter tid for siste modifikasjon"
+
+#: panel/foobar-widget.c:228
+msgid "By Time Last Changed"
+msgstr "Etter tid for siste endring"
+
+#: panel/foobar-widget.c:237
+msgid "Arrange Icons"
+msgstr "Arranger ikoner"
+
+#: panel/foobar-widget.c:247
+msgid "Rescan Desktop Directory"
+msgstr "Gjenles skrivebordskatalogen"
+
+#: panel/foobar-widget.c:248
+msgid "Rescan Desktop Devices"
+msgstr "Gjenles skrivebordsenhetene"
+
+#: panel/foobar-widget.c:254
+msgid "Lock Screen"
+msgstr "Lås skjerm"
+
+#: panel/foobar-widget.c:264
+msgid "Log Out"
+msgstr "Logg ut"
+
+#: panel/foobar-widget.c:272
+msgid " Desktop "
+msgstr " Skrivebord "
+
+#: panel/foobar-widget.c:289
+msgid "can't fine real path"
+msgstr "kan ikke finne reell sti"
+
+#: panel/foobar-widget.c:297
+msgid "menu wasn't created"
+msgstr "menyen ble ikke opprettet"
+
+#: panel/foobar-widget.c:338
+msgid "%A %B %d"
+msgstr "%A %B %d"
+
+#: panel/foobar-widget.c:395
+msgid "Today"
+msgstr "I dag"
+
+#: panel/foobar-widget.c:396
+msgid "This Week"
+msgstr "Denne uken"
+
+#: panel/foobar-widget.c:397
+msgid "This Month"
+msgstr "Denne måneden"
+
+#. This format string is used, to display the actual time in
+#. 24 hour format.
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:402
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#: panel/foobar-widget.c:403
+msgid "%H:%M:%S"
+msgstr "%H:%M:%S"
+
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:404
+msgid "%I:%M %p"
+msgstr "%I:%M %p"
+
+#: panel/foobar-widget.c:405
+msgid "%I:%M:%S %p"
+msgstr "%I:%M:%S %p"
+
+#: panel/foobar-widget.c:412
+msgid "Add appointement..."
+msgstr "Legg til avtale..."
+
+#: panel/foobar-widget.c:429
+msgid "Format"
+msgstr "Format"
+
+#: gnome-terminal/gnome-terminal.c:1681 gsm/gsm-client-row.c:59
+#: panel/foobar-widget.c:559
+msgid "Settings"
+msgstr "Innstillinger"
 
 #: help-browser/window.c:151
 msgid "_New Window"
@@ -1202,10 +1378,6 @@ msgstr ""
 "Du har sannsynligvis ikke\n"
 "dette dokumentet installert\n"
 "på ditt system."
-
-#: help-browser/window.c:1084
-msgid "Ok"
-msgstr "Ok"
 
 #: help-browser/visit.c:84
 msgid "<BODY>Could not load default TOC page</BODY>"
@@ -1690,10 +1862,6 @@ msgstr "Søppel"
 #: gsm/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
 msgstr "Forkastes ved avlogging og kan dø."
-
-#: gnome-terminal/gnome-terminal.c:1681 gsm/gsm-client-row.c:59
-msgid "Settings"
-msgstr "Innstillinger"
 
 #: gsm/gsm-client-row.c:60
 msgid "Always started on every login."
@@ -2307,19 +2475,15 @@ msgstr ""
 "Vennligs velg en standard kjørbar editor i gnome-edit cappleten\n"
 "i gnome kontrollsenter"
 
-#: gnome-about/gnome-about.c:462
-msgid "About GNOME"
-msgstr "Om GNOME"
-
-#: gnome-about/gnome-about.c:561
+#: gnome-about/gnome-about.c:564
 msgid "GNOME News Site"
 msgstr "GNOME Nettsted for nyheter"
 
-#: gnome-about/gnome-about.c:566
+#: gnome-about/gnome-about.c:569
 msgid "GNOME Main Site"
 msgstr "GNOME Nettsted"
 
-#: gnome-about/gnome-about.c:571
+#: gnome-about/gnome-about.c:574
 msgid "GNOME Developers' Site"
 msgstr "GNOME Utviklernettsted"
 
@@ -2327,7 +2491,7 @@ msgstr "GNOME Utviklernettsted"
 msgid "GNOME was brought to you by"
 msgstr "GNOME ble gjort tilgjengelig for deg av"
 
-#: gnome-about/contributors.h:248
+#: gnome-about/contributors.h:249
 msgid "... and many more"
 msgstr "... og mange flere"
 
@@ -2850,16 +3014,6 @@ msgid ""
 msgstr ""
 "%I:%M\n"
 "%p"
-
-#: applets/gen_util/clock.c:152
-msgid "%I:%M %p"
-msgstr "%I:%M %p"
-
-#. This format string is used, to display the actual time in
-#. 24 hour format.
-#: applets/gen_util/clock.c:159
-msgid "%H:%M"
-msgstr "%H:%M"
 
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
