@@ -48,7 +48,7 @@ GTK_REQUIRED=2.1.2
 LIBGNOMECANVAS_REQUIRED=2.0.0
 LIBGNOMEUI_REQUIRED=2.1.0
 GNOME_VFS_REQUIRED=2.0.0
-STARTUP_NOTIFICATION_REQUIRED=0.4
+STARTUP_NOTIFICATION_REQUIRED=0.5
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GDK_PIXBUF_REQUIRED)
@@ -63,7 +63,7 @@ if $PKG_CONFIG --atleast-version $STARTUP_NOTIFICATION_REQUIRED libstartup-notif
   with_startup_notification=yes
   STARTUP_NOTIFICATION_PACKAGE=libstartup-notification-1.0
 else
-  echo "Building without libstartup-notification"
+  echo "***** WARNING: Building without libstartup-notification"
   with_startup_notification=no
   STARTUP_NOTIFICATION_PACKAGE=
 fi
