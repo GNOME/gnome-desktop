@@ -1478,7 +1478,8 @@ ditem_execute (const GnomeDesktopItem *item,
                char **envp,
 	       gboolean launch_only_one,
 	       gboolean use_current_dir,
-		 gboolean append_uris,
+	       gboolean append_uris,
+	       gboolean append_paths,
 	       GError **error)
 {
 	char **real_argv;
@@ -1525,6 +1526,16 @@ ditem_execute (const GnomeDesktopItem *item,
 
 		if (launched == 0 && added_status == ADDED_NONE && append_uris) {
 			uris = stringify_uris (args, FALSE, FALSE);
+			temp = g_strconcat (new_exec, " ", uris, NULL);
+			g_free (uris);
+			g_free (new_exec);
+			new_exec = temp;
+			added_status = ADDED_ALL;
+		}
+
+		/* append_uris and append_paths are mutually exlusive */
+		if (launched == 0 && added_status == ADDED_NONE && append_paths) {
+			uris = stringify_files (args, FALSE, FALSE);
 			temp = g_strconcat (new_exec, " ", uris, NULL);
 			g_free (uris);
 			g_free (new_exec);
@@ -1649,7 +1660,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 }
 
 /**
- * gnome_desktop_item_launch_wth_env:
+ * gnome_desktop_item_launch_with_env:
  * @item: A desktop item
  * @file_list:  Files/URIs to launch this item with, can be %NULL
  * @flags: FIXME
@@ -1736,6 +1747,7 @@ gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS),
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_PATHS),
 			     error);
 
 	return ret;

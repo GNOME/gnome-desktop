@@ -118,7 +118,9 @@ typedef enum {
 	/* Append the list of URIs to the command if no Exec
 	 * parameter is specified, instead of launching the 
 	 * app without parameters. */
-	  GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS = 1<<2
+	GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS = 1<<2,
+	/* Same as above but instead append local paths */
+	GNOME_DESKTOP_ITEM_LAUNCH_APPEND_PATHS = 1<<3
 } GnomeDesktopItemLaunchFlags;
 
 typedef enum {
