@@ -224,7 +224,7 @@ setup_option (GnomeDItemEdit *dee,
 		break;
 	}
 
-	if (select && selected)
+	if (select && !selected)
 		add_menuitem (menu, select, _(select), select, &selected);
 
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (dee->_priv->type_option), menu);
