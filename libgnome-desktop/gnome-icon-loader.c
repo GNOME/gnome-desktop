@@ -259,7 +259,7 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
   for (l = priv->themes; l != NULL; l = l->next)
     {
       theme = l->data;
-      if (strcmp (theme->name, theme_name))
+      if (strcmp (theme->name, theme_name) == 0)
 	return;
     }
 
@@ -886,15 +886,13 @@ theme_subdir_load (GnomeIconLoader *loader,
   type = ICON_THEME_DIR_THRESHOLD;
   if (gnome_theme_file_get_string (theme_file, subdir, "Type", &type_string))
     {
-      if (strcmp (type_string, "Fixed"))
+      if (strcmp (type_string, "Fixed") == 0)
 	type = ICON_THEME_DIR_FIXED;
-      else if (strcmp (type_string, "Scalable"))
+      else if (strcmp (type_string, "Scalable") == 0)
 	type = ICON_THEME_DIR_SCALABLE;
-      else if (strcmp (type_string, "Threshold"))
+      else if (strcmp (type_string, "Threshold") == 0)
 	type = ICON_THEME_DIR_THRESHOLD;
-      g_free (type_string);
     }
-
 
   context = 0;
   if (gnome_theme_file_get_string (theme_file, subdir, "Context", &context_string))
