@@ -2,5 +2,5 @@
 
 # 'it' isn't yet ready
 
-SUBDIRS = C es it
+SUBDIRS = C es it uk
 
