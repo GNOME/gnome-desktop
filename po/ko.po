@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.3.1\n"
-"POT-Creation-Date: 2001-04-13 16:40+0200\n"
-"PO-Revision-Date: 2001-03-03 20:40+0900\n"
+"POT-Creation-Date: 2001-04-15 23:06+0900\n"
+"PO-Revision-Date: 2001-04-15 00:01+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,10 @@ msgstr ""
 msgid "Panel to add the launcher to"
 msgstr "실행기를 패널에 추가"
 
+# option argument는 <>로 둘러 싼다.
 #: panel/gnome-panel-add-launcher.c:34 panel/gnome-panel-add-launcher.c:35
 msgid "NUMBER"
-msgstr "숫자"
+msgstr "<숫자>"
 
 #: panel/gnome-panel-add-launcher.c:35
 msgid "Position to add the launcher to"
@@ -28,7 +29,7 @@ msgstr "실행기를 추가할 위치"
 
 #: panel/gnome-panel-add-launcher.c:36
 msgid "The argument is a url to add, not a .desktop file"
-msgstr ".desktop파일이 아니라 url이 추가할 인자입니다"
+msgstr "인자가 .desktop파일이 아니라 추가할 url임을 지정합니다."
 
 #: panel/gnome-panel-add-launcher.c:66
 msgid ""
@@ -278,6 +279,7 @@ msgstr "물고기 %s"
 msgid "%s the GNOME Fish Says:"
 msgstr "그놈 물고기 %s 말하길:"
 
+# (FIXME) 좀 더 다듬을 필요 있음
 #: applets/fish/fish.c:470
 msgid ""
 "Warning:  The command appears to be something actually useful.\n"
@@ -285,6 +287,10 @@ msgid ""
 "We strongly advise you against usage of wanda for anything\n"
 "which would make the applet \"practical\" or useful."
 msgstr ""
+"경고: 이 프로그램의 명령어는 뭔가 쓸만한 프로그램처럼\n"
+"보인다.  하지만 이것은 전혀 쓸모가 없는 애플릿이다.\n"
+"완다를 뭔가 \"실용적\"이거나 유용하게 사용하지 않도록\n"
+"강력하게 조언한다."
 
 #: applets/fish/fish.c:509
 msgid "GNOME Fish Properties"
@@ -360,9 +366,9 @@ msgid ""
 "a psychiatric evaluation."
 msgstr ""
 "이 애플릿은 전혀 아무 쓸모가 없습니다.  디스크 공간과 컴파일 시간을 잡아먹을 "
-"뿐이고, 실행된 경우에는 소중한 패널의 공간과 메모리까지 차지합니다.  만약 "
-"누군가 이 애플릿을 쓰고 있다면, 그 사람은 빨리 정신 감정을 받으러 가야 "
-"할것입니다."
+"뿐이고, 실행된 경우에는 소중한 패널의 공간과 메모리까지 차지합니다.  만약 누"
+"군가 이 애플릿을 쓰고 있다면, 그 사람은 빨리 정신 감정을 받으러 가야 할것입니"
+"다."
 
 #: applets/gen_util/clock.c:188
 msgid ""
@@ -483,9 +489,10 @@ msgstr "시계"
 msgid "Clock Applet"
 msgstr "시계 애플릿"
 
+# 국제 표준.  번역하지 않는다.
 #: applets/gen_util/clock.c:983
 msgid "(c) 1998-2001 the Free Software Foundation"
-msgstr ""
+msgstr "(c) 1998-2001 the Free Software Foundation"
 
 #: applets/gen_util/clock.c:985
 msgid ""
@@ -502,8 +509,8 @@ msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
 msgstr ""
-"원격 클라이언트 오류 발생.  원격 감시를 이제 하지 않습니다.  아마 "
-"서버/사용자명/암호가 틀렸을 것입니다?"
+"원격 클라이언트 오류 발생.  원격 감시를 이제 하지 않습니다.  아마 서버/사용자"
+"명/암호가 틀렸을 것입니다?"
 
 #: applets/gen_util/mailcheck.c:471
 msgid "You have new mail."
@@ -561,7 +568,7 @@ msgstr "사용자명: "
 
 #: applets/gen_util/mailcheck.c:1068
 msgid "Command to run before we check for mail:"
-msgstr ""
+msgstr "메일을 확인하기 전에 실행할 명령어:"
 
 #: applets/gen_util/mailcheck.c:1098
 msgid "Execute"
@@ -615,6 +622,7 @@ msgstr "편지함"
 msgid "Mail check Applet"
 msgstr "편지 확인 애플릿"
 
+# 국제 표준.  번역하지 않는다.
 #: applets/gen_util/mailcheck.c:1343
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 the Free Software Foundation"
@@ -631,10 +639,11 @@ msgstr "글자만 사용"
 msgid "Check for mail"
 msgstr "메일 확인"
 
+# 받침이 있는지 없는지 모르므로 "를(을)"이라고 쓴다.
 #: applets/gen_util/main.c:54 applets/tasklist/tasklist_applet.c:1643
 #, c-format
 msgid "Don't know how to activate `%s'\n"
-msgstr "'%s'를 활성화 하는 방법을 모름\n"
+msgstr "'%s'를(을) 활성화 하는 방법을 모름\n"
 
 #: applets/gen_util/printer.c:120
 msgid "Can't execute printer command"
@@ -660,6 +669,7 @@ msgstr "프린터"
 msgid "Printer Applet"
 msgstr "프린터 애플릿"
 
+# 국제 표준.  번역하지 않는다.
 #: applets/gen_util/printer.c:356
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 the Free Software Foundation"
@@ -670,9 +680,10 @@ msgid ""
 "command"
 msgstr "프린터 애플릿은 끌어온 파일을 쉽게 프린트 명령으로 인쇄 해줍니다"
 
+# 국제 표준.  번역하지 않는다.
 #: applets/tasklist/tasklist_applet.c:1285
 msgid "Copyright (C) 1999 Anders Carlsson"
-msgstr ""
+msgstr "Copyright (C) 1999 Anders Carlsson"
 
 #: applets/tasklist/tasklist_applet.c:1287
 msgid ""
@@ -1113,7 +1124,7 @@ msgstr "그놈은 당신과 "
 
 #: gnome-about/contributors.h:21
 msgid "Timur I. Bakeyev"
-msgstr ""
+msgstr "Timur I. Bakeyev"
 
 #. if your encoding allows it, use aacute (U00E1)
 #. * for the 'a' of 'Ban'
@@ -1123,7 +1134,7 @@ msgstr "Szabolcs 'Shooby' Ban"
 
 #: gnome-about/contributors.h:36
 msgid "Jerome Bolliet"
-msgstr ""
+msgstr "Jerome Bolliet"
 
 #. if your encoding allows it, use eacute (U00E9) for the two
 #. * 'e' of 'Frederic'
@@ -1135,37 +1146,37 @@ msgstr "Frederic Devernay"
 #. * of 'Gergo' and use Eacute (U00C9) for the 'E' of 'Erdi'
 #: gnome-about/contributors.h:75
 msgid "Gergo Erdi"
-msgstr ""
+msgstr "Gergo Erdi"
 
 #: gnome-about/contributors.h:81
 msgid "Raul Perusquia Flores"
-msgstr ""
+msgstr "Raul Perusquia Flores"
 
 #: gnome-about/contributors.h:93
 msgid "The Mysterious GEGL"
-msgstr ""
+msgstr "The Mysterious GEGL"
 
 #: gnome-about/contributors.h:95
 msgid "Bjoern Giesler"
-msgstr ""
+msgstr "Bjoern Giesler"
 
 #: gnome-about/contributors.h:100
 msgid "Dov Grobgeld"
-msgstr ""
+msgstr "Dov Grobgeld"
 
 #: gnome-about/contributors.h:126
 msgid "Helmut Koeberle"
-msgstr ""
+msgstr "Helmut Koeberle"
 
 #: gnome-about/contributors.h:159
 msgid "Matthew Marjanovic"
-msgstr ""
+msgstr "Matthew Marjanovic"
 
 #. If your encodings allows it, use ntilde (U00F1) for the 'n'
 #. * of 'Muniz'
 #: gnome-about/contributors.h:181
 msgid "Alexandre Muniz"
-msgstr ""
+msgstr "Alexandre Muniz"
 
 #. Name in Hangeul is: Ub0a8 Uc131 Ud604
 #: gnome-about/contributors.h:183
@@ -1176,45 +1187,45 @@ msgstr "남성현"
 #. * of 'Norbaeck'
 #: gnome-about/contributors.h:189
 msgid "Martin Norbaeck"
-msgstr ""
+msgstr "Martin Norbaeck"
 
 #. If your encodings allows it, use Odiaeresis (U00D6) for the 'Oe'
 #. * of 'Oegren'
 #: gnome-about/contributors.h:196
 msgid "Tomas Oegren"
-msgstr ""
+msgstr "Tomas Oegren"
 
 #. Name in Japanese is: U7b39 U5c71 U548c U5b8f
 #: gnome-about/contributors.h:226
 msgid "Kazuhiro Sasayama"
-msgstr ""
+msgstr "Kazuhiro Sasayama"
 
 #. If your encodings allows it, use ntilde (U00F1) for the 'n'
 #. * of 'Inigo'
 #: gnome-about/contributors.h:234
 msgid "Inigo Serna"
-msgstr ""
+msgstr "Inigo Serna"
 
 #: gnome-about/contributors.h:238
 msgid "Miroslav Silovic"
-msgstr ""
+msgstr "Miroslav Silovic"
 
 #. not really a person name :) translate its meaning
 #: gnome-about/contributors.h:247
 msgid "The Squeaky Rubber Gnome"
-msgstr ""
+msgstr "The Squeaky Rubber Gnome"
 
 #: gnome-about/contributors.h:253
 msgid "Istvan Szekeres"
-msgstr ""
+msgstr "Istvan Szekeres"
 
 #: gnome-about/contributors.h:264
 msgid "Manish Vachharajani"
-msgstr ""
+msgstr "Manish Vachharajani"
 
 #: gnome-about/contributors.h:265
 msgid "Neil Vachharajani"
-msgstr ""
+msgstr "Neil Vachharajani"
 
 #: gnome-about/contributors.h:272
 msgid "Wanda the GNOME Fish"
@@ -1222,19 +1233,20 @@ msgstr "그놈 물고기 완다"
 
 #: gnome-about/contributors.h:285
 msgid "... and many more"
-msgstr "...에 의해서 만들어 지고 있습니다"
+msgstr "... 그리고 이외에도 많은 사람들"
 
 #: gnome-about/gnome-about.c:465 panel/foobar-widget.c:242
 msgid "About GNOME"
-msgstr "그놈은..."
+msgstr "그놈은"
 
 #: gnome-about/gnome-about.c:566
 msgid "GNOME News Site"
 msgstr "그놈 뉴스 사이트"
 
+# 한국어 사이트가 있다면 그걸 써야 하나?
 #: gnome-about/gnome-about.c:570
 msgid "http://www.gnome.org/"
-msgstr ""
+msgstr "http://www.gnome.org/"
 
 #: gnome-about/gnome-about.c:571
 msgid "GNOME Main Site"
@@ -1296,11 +1308,12 @@ msgstr ""
 msgid "You do not have fortune installed."
 msgstr "운세 프로그램이 설치되지 않았습니다."
 
+# fixed는 13포인트인데. 12포인트를 대신 쓴다.
 #. the fixed font should be a font that is of a fixed
 #. * spacing, such as would be one in a terminal
 #: gnome-hint/gnome-hint.c:404
 msgid "fixed"
-msgstr ""
+msgstr "fixed,-*-dotum-*--12-*-ksc5601.1987-0"
 
 #: gnome-hint/gnome-hint.c:413 gnome-hint/gnome-hint.c:615
 msgid "Fortune"
@@ -1553,6 +1566,7 @@ msgstr "터미널"
 msgid "Terminal class name"
 msgstr "터미널 class 이름"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2605
 msgid "TCLASS"
 msgstr "T클래스"
@@ -1561,9 +1575,10 @@ msgstr "T클래스"
 msgid "Specifies font name"
 msgstr "글꼴 이름 지정"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2608
 msgid "FONT"
-msgstr "글꼴"
+msgstr "<글꼴>"
 
 #: gnome-terminal/gnome-terminal.c:2611
 msgid "Do not start up shells as login shells"
@@ -1577,17 +1592,19 @@ msgstr "로긴쉘로 쉘을 실행한다"
 msgid "Specifies the geometry for the main window"
 msgstr "주 윈도우의 위치,크기 지정"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2617
 msgid "GEOMETRY"
-msgstr "위치"
+msgstr "<위치>"
 
 #: gnome-terminal/gnome-terminal.c:2620
 msgid "Execute this program instead of a shell"
 msgstr "셸 대신에 프로그램을 실행한다"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2620 gnome-terminal/gnome-terminal.c:2623
 msgid "COMMAND"
-msgstr "명령"
+msgstr "<명령>"
 
 #: gnome-terminal/gnome-terminal.c:2623
 msgid "Execute this program the same way as xterm does"
@@ -1597,6 +1614,7 @@ msgstr "Xterm처럼 이 프로그램을 실행한다"
 msgid "Foreground color"
 msgstr "전경색"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2626 gnome-terminal/gnome-terminal.c:2629
 msgid "COLOR"
 msgstr "색상"
@@ -1609,64 +1627,72 @@ msgstr "배경색"
 msgid "Solid background"
 msgstr "꽉 채운 배경"
 
+# 필요없는 번역문.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2632
 msgid "SOLID"
-msgstr ""
+msgstr "SOLID"
 
 #: gnome-terminal/gnome-terminal.c:2635
 #: gnome-terminal/gnome-terminal.glade.h:21
 msgid "Background pixmap"
 msgstr "배경 그림"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2635
 msgid "PIXMAP"
-msgstr ""
+msgstr "<픽스맵>"
 
 #: gnome-terminal/gnome-terminal.c:2639
 #: gnome-terminal/gnome-terminal.glade.h:23
 msgid "Background pixmap scrolls"
 msgstr "배경 픽스맵 스크롤"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2639
 msgid "BGSCROLL"
-msgstr ""
+msgstr "BGSCROLL"
 
 #: gnome-terminal/gnome-terminal.c:2642
 msgid "Background pixmap does not scroll"
 msgstr "배경 픽스맵 스크롤하지 않음"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2642
 msgid "BGNOSCROLL"
-msgstr ""
+msgstr "BGNOSCROLL"
 
 #: gnome-terminal/gnome-terminal.c:2646
 msgid "Shade background"
 msgstr "그늘진 배경"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2646
 msgid "SHADED"
-msgstr ""
+msgstr "SHADED"
 
 #: gnome-terminal/gnome-terminal.c:2649
 msgid "Do not shade background"
 msgstr "그늘지지 않은 배경"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2649
 msgid "NOSHADED"
-msgstr ""
+msgstr "NOSHADED"
 
 #: gnome-terminal/gnome-terminal.c:2652
 msgid "Transparent background"
 msgstr "투명한 배경"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2652
 msgid "TRANSPARENT"
-msgstr ""
+msgstr "TRANSPARENT"
 
 #: gnome-terminal/gnome-terminal.c:2655
 msgid "Update utmp entry"
 msgstr "utmp 항목 갱신"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2655
 msgid "UTMP"
 msgstr "UTMP"
@@ -1675,6 +1701,7 @@ msgstr "UTMP"
 msgid "Do not update utmp entry"
 msgstr "utmp 항목 갱신하지 않음"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2658
 msgid "NOUTMP"
 msgstr "NOUTMP"
@@ -1683,6 +1710,7 @@ msgstr "NOUTMP"
 msgid "Update wtmp entry"
 msgstr "wtmp 항목 갱신"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2661
 msgid "WTMP"
 msgstr "WTMP"
@@ -1691,6 +1719,7 @@ msgstr "WTMP"
 msgid "Do not update wtmp entry"
 msgstr "wtmp 항목 생신하지 않음"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2664
 msgid "NOWTMP"
 msgstr "NOWTMP"
@@ -1699,6 +1728,7 @@ msgstr "NOWTMP"
 msgid "Update lastlog entry"
 msgstr "lastlog 항목 갱신"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2667
 msgid "LASTLOG"
 msgstr "LASTLOG"
@@ -1707,6 +1737,7 @@ msgstr "LASTLOG"
 msgid "Do not update lastlog entry"
 msgstr "lastlog 항목 갱신하지 않음"
 
+# 필요없는 번역.  버그 보고되었음.
 #: gnome-terminal/gnome-terminal.c:2670
 msgid "NOLASTLOG"
 msgstr "NOLASTLOG"
@@ -1715,25 +1746,28 @@ msgstr "NOLASTLOG"
 msgid "Set the window title"
 msgstr "윈도우 제목 정하기"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2673
 msgid "TITLE"
-msgstr "제목"
+msgstr "<제목>"
 
 #: gnome-terminal/gnome-terminal.c:2676
 msgid "Set the window icon"
 msgstr "창 아이콘 정하기"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2676
 msgid "ICON"
-msgstr ""
+msgstr "<아이콘>"
 
 #: gnome-terminal/gnome-terminal.c:2679
 msgid "Set the TERM variable"
 msgstr "TERM 환경변수 설정"
 
+# option argument는 <>로 둘러 싼다.
 #: gnome-terminal/gnome-terminal.c:2679
 msgid "TERMNAME"
-msgstr "터미널 이름"
+msgstr "<터미널 이름>"
 
 #: gnome-terminal/gnome-terminal.c:2682
 msgid "Try to start a TerminalFactory"
@@ -1792,6 +1826,7 @@ msgstr "재시도"
 msgid "Continue"
 msgstr "계속"
 
+# 받침이 있는지 없는지 모르므로 "를(을)"이라고 쓴다.
 #: gsm/gnome-login-check.c:344
 #, c-format
 msgid ""
@@ -1802,7 +1837,7 @@ msgid ""
 msgstr ""
 "%s의 인터넷 주소를 찾을 수 없습니다.\n"
 "이것때문에 그놈이 정상적으로 동작하지 못할 수도 있습니다.\n"
-"%s를 /etc/hosts 파일에 추가함으로서 문제가 해결될\n"
+"%s를(을) /etc/hosts 파일에 추가함으로서 문제가 해결될\n"
 "수도 있습니다."
 
 #: gsm/gnome-login-check.c:370
@@ -2199,9 +2234,8 @@ msgid "Starting GNOME: %s"
 msgstr "그놈 시작중: %s"
 
 #: gsm/splash.c:279
-#, fuzzy
 msgid "Starting GNOME: done"
-msgstr "그놈 시작중: %s"
+msgstr "그놈 시작중: 완료"
 
 #: gsm/splash.c:406
 msgid "GNOME"
@@ -2209,7 +2243,7 @@ msgstr "그놈"
 
 #: gsm/splash.c:407
 msgid "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*"
-msgstr "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*,-*-r-*"
+msgstr "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*,-*-gulim-bold-r-normal-*-*-240-*"
 
 #: gsm/splash.c:417
 msgid "Starting GNOME"
@@ -2217,7 +2251,7 @@ msgstr "그놈 시작중"
 
 #: gsm/splash.c:420
 msgid "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal-*-10-*-*-*-p-*-*-*,*-r-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-10-*-*-*-p-*-*-*,*-gulim-medium-r-normal-*-10-*"
 
 #: gsm/startup-programs.c:283 gsm/startup-programs.c:290
 msgid "Startup Command"
@@ -2264,33 +2298,37 @@ msgstr "삭제"
 msgid "X position of window"
 msgstr "창의 가로 위치"
 
+# option argument는 <>로 둘러 싼다.
 #: help-browser/gnome-help-browser.c:131
 msgid "X"
-msgstr "가로"
+msgstr "<가로>"
 
 #: help-browser/gnome-help-browser.c:132
 msgid "Y position of window"
 msgstr "창의 세로 위치"
 
+# option argument는 <>로 둘러 싼다.
 #: help-browser/gnome-help-browser.c:132 panel/panel_config.c:1023
 msgid "Y"
-msgstr "세로"
+msgstr "<세로>"
 
 #: help-browser/gnome-help-browser.c:133
 msgid "Width of window"
 msgstr "창 폭"
 
+# option argument는 <>로 둘러 싼다.
 #: help-browser/gnome-help-browser.c:133
 msgid "WIDTH"
-msgstr "폭"
+msgstr "<폭>"
 
 #: help-browser/gnome-help-browser.c:134
 msgid "Height of window"
 msgstr "창 높이"
 
+# option argument는 <>로 둘러 싼다.
 #: help-browser/gnome-help-browser.c:134
 msgid "HEIGHT"
-msgstr "높이"
+msgstr "<높이>"
 
 #: help-browser/gnome-help-browser.c:135
 msgid "Debug level"
@@ -2300,6 +2338,7 @@ msgstr "디버그 단계"
 msgid "Gnome Help Browser"
 msgstr "그놈 도움말 프로그램"
 
+# 국제 표준.  번역하지 않는다.
 #: help-browser/gnome-help-browser.c:372
 msgid "Copyright (c) 1998 Red Hat Software, Inc."
 msgstr "Copyright (c) 1998 Red Hat Software, Inc."
@@ -2336,9 +2375,10 @@ msgstr "책갈피 파일"
 msgid "Man Path"
 msgstr "Man 페이지 경로"
 
+# Info는 GNU의 도움말 방식의 하나이므로 "정보"라고 번역하지 않는다.
 #: help-browser/gnome-help-browser.c:643
 msgid "Info Path"
-msgstr "정보 페이지 경로"
+msgstr "인포 페이지 경로"
 
 #: help-browser/gnome-help-browser.c:644
 msgid "GNOME Help Path"
@@ -2389,9 +2429,10 @@ msgstr "<h2>Man 페이지</h2>\n"
 msgid "<body bgcolor=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
 msgstr "<body bgcolor=\"#FFFFFF\"><h1>차례</h1>\n"
 
+# Info는 GNU의 도움말 방식의 하나이므로 "정보"라고 번역하지 않는다.
 #: help-browser/toc2.c:259
 msgid "<h2>Info Pages</h2>\n"
-msgstr "<h2>정보 페이지</h2>\n"
+msgstr "<h2>인포 페이지</h2>\n"
 
 #: help-browser/toc2.c:323
 msgid "<h2>GNOME Help</h2>\n"
@@ -2421,6 +2462,7 @@ msgstr ""
 "<p>\n"
 "<UL>\n"
 
+# Info는 GNU의 도움말 방식의 하나이므로 "정보"라고 번역하지 않는다.
 #: help-browser/toc2.c:496
 msgid ""
 "\n"
@@ -2433,7 +2475,7 @@ msgstr ""
 "\n"
 "<p>\n"
 "<br>\n"
-"<H3>GNU 정보 페이지</H3>\n"
+"<H3>GNU 인포 페이지</H3>\n"
 "<p>\n"
 "<UL>\n"
 
@@ -2504,10 +2546,11 @@ msgstr "manx"
 msgid "Man Pages"
 msgstr "Man 페이지"
 
+# Info는 GNU의 도움말 방식의 하나이므로 "정보"라고 번역하지 않는다.
 #. INFO PAGES
 #: help-browser/toc.c:148
 msgid "Info Pages"
-msgstr "정보 페이지"
+msgstr "인포 페이지"
 
 #. GNOME HELP
 #: help-browser/toc.c:160
@@ -2647,7 +2690,7 @@ msgstr "???"
 
 #: panel/applet.c:471
 msgid "Remove from panel"
-msgstr "패널 지움"
+msgstr "패널에서 지움"
 
 #: panel/applet.c:478
 msgid "Move"
@@ -2663,9 +2706,10 @@ msgstr "임시 파일 %s의 이름을 바꿀 수 없습니다"
 msgid "Panel"
 msgstr "패널"
 
+# 패널에 애플릿을 놓을 공간이 없음을 말한다.
 #: panel/applet.c:762
 msgid "Can't find an empty spot"
-msgstr "비어 있는 점을 찾을수 없슴"
+msgstr "비어 있는 위치가 없음"
 
 #: panel/applet-widget.c:933
 msgid "Cannot activate a panel object"
@@ -2764,7 +2808,7 @@ msgstr "작업 목록"
 
 #: panel/extern.c:455
 msgid "The Battery"
-msgstr "건전지"
+msgstr "배터리"
 
 #: panel/extern.c:458
 #, c-format
@@ -2819,7 +2863,7 @@ msgstr "새소식 (www)"
 
 #: panel/foobar-widget.c:222
 msgid "http://gnotices.gnome.org/gnome-news/"
-msgstr ""
+msgstr "http://gnotices.gnome.org/gnome-news/"
 
 #: panel/foobar-widget.c:223
 msgid "FAQ (www)"
@@ -2827,7 +2871,7 @@ msgstr "FAQ (www)"
 
 #: panel/foobar-widget.c:223
 msgid "http://www.gnome.org/gnomefaq/html/"
-msgstr ""
+msgstr "http://www.gnome.org/gnomefaq/html/"
 
 #: panel/foobar-widget.c:224
 msgid "Mailing Lists (www)"
@@ -2835,7 +2879,7 @@ msgstr "메일링 목록 (www)"
 
 #: panel/foobar-widget.c:224
 msgid "http://mail.gnome.org/mailman/listinfo/"
-msgstr ""
+msgstr "http://mail.gnome.org/mailman/listinfo/"
 
 #: panel/foobar-widget.c:226
 msgid "Software (www)"
@@ -2843,7 +2887,7 @@ msgstr "소프트웨어 (www)"
 
 #: panel/foobar-widget.c:226
 msgid "http://www.gnome.org/applist/list-martin.phtml"
-msgstr ""
+msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
 #: panel/foobar-widget.c:227
 msgid "Development (www)"
@@ -2851,7 +2895,7 @@ msgstr "개발 (www)"
 
 #: panel/foobar-widget.c:227
 msgid "http://developer.gnome.org/"
-msgstr ""
+msgstr "http://developer.gnome.org/"
 
 #: panel/foobar-widget.c:228
 msgid "Bug Tracking System (www)"
@@ -2859,7 +2903,7 @@ msgstr "버그 추적 시스템 (www)"
 
 #: panel/foobar-widget.c:228
 msgid "http://bugs.gnome.org/"
-msgstr ""
+msgstr "http://bugs.gnome.org/"
 
 #: panel/foobar-widget.c:322
 msgid "By Name"
@@ -3327,9 +3371,9 @@ msgid "App"
 msgstr "프로그램"
 
 #: panel/launcher.c:474 panel/launcher.c:665 panel/menu.c:1646
-#, fuzzy, c-format
+#, c-format
 msgid "Help on %s"
-msgstr "도움말에 대한 도움말"
+msgstr "%s에 대한 도움말"
 
 #. watch the enum at the top of the file
 #: panel/launcher.c:530
@@ -3403,17 +3447,18 @@ msgstr "그리고 마지막으로, NI! 라고 말한 기사"
 msgid "The GNOME Panel"
 msgstr "그놈 패널"
 
+# 국제 표준.  번역하지 않음.
 #: panel/menu.c:206
 msgid "(C) 1997-2000 the Free Software Foundation"
-msgstr "(c) 1998-2000 the Free Software Foundation"
+msgstr "(C) 1997-2000 the Free Software Foundation"
 
 #: panel/menu.c:208
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
 msgstr ""
-"이 프로그램은 다른 프로그램을 실행하고, 내부에 작은 애플릿들을 포함하고, "
-"세계 평화와 더불어 X가 무단종료될 경우에 대해 책임이 있습니다."
+"이 프로그램은 다른 프로그램을 실행하고, 내부에 작은 애플릿들을 포함하고, 세"
+"계 평화와 더불어 X가 무단종료될 경우에 대해 책임이 있습니다."
 
 #: panel/menu.c:219
 msgid "End world hunger"
@@ -3450,6 +3495,7 @@ msgstr ".order 파일을 쓸 수 없습니다: %s"
 msgid "Create menu item"
 msgstr "메뉴 항목 만들기"
 
+# 받침이 있는지 없는지 모르므로 "를(을)"이라고 쓴다.
 #: panel/menu.c:881
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
@@ -3474,18 +3520,20 @@ msgstr ""
 ".order 파일을 열 수 없습니다: %s\n"
 "%s"
 
+# 받침이 있는지 없는지 모르므로 "를(을)"이라고 쓴다.
 #: panel/menu.c:936
 #, c-format
 msgid "Could not remove old order file %s: %s\n"
-msgstr "이전 .order 파일 %s를 지울수 없습니다: %s\n"
+msgstr "이전 .order 파일 %s를(을) 지울수 없습니다: %s\n"
 
+# 받침이 있는지 없는지 모르므로 "로(으로)"이라고 쓴다.
 #: panel/menu.c:944
 #, c-format
 msgid ""
 "Could not rename tmp file: %s to %s\n"
 "%s"
 msgstr ""
-"임시 파일의 이름을 바꿀 수 없습니다: %s에서 %s로\n"
+"임시 파일의 이름을 바꿀 수 없습니다: %s에서 %s로(으로)\n"
 "%s"
 
 #: panel/menu.c:964
@@ -3531,7 +3579,7 @@ msgstr "새 항목을 이 메뉴에 추가"
 
 #: panel/menu.c:1910 panel/menu.c:1988
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: panel/menu.c:2139
 msgid "You already have a status dock on the panel. You can only have one"
@@ -4052,9 +4100,10 @@ msgstr "글꼴:"
 msgid "Pick a Font"
 msgstr "글꼴 선택"
 
+# 글꼴 선택창의 sample string, 한글을 어떻게 쓰나?
 #: gnome-terminal/gnome-terminal.glade.h:11
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 가나다라마바사"
 
 #: gnome-terminal/gnome-terminal.glade.h:12
 msgid "Enable bold text"
@@ -4123,7 +4172,7 @@ msgstr "색상 선택"
 
 #: gnome-terminal/gnome-terminal.glade.h:44
 msgid "Color scheme:"
-msgstr "사용할 색상:"
+msgstr "색상 방식:"
 
 #: gnome-terminal/gnome-terminal.glade.h:45
 msgid "Fore/Background Color:"
@@ -4155,11 +4204,11 @@ msgstr "저장 하는 줄:"
 
 #: gnome-terminal/gnome-terminal.glade.h:54
 msgid "Scroll on keystroke"
-msgstr ""
+msgstr "키를 누르면 맨 아래로 스크롤"
 
 #: gnome-terminal/gnome-terminal.glade.h:55
 msgid "Scroll on output"
-msgstr ""
+msgstr "출력이 있으면 맨 아래로 스크롤"
 
 #: gnome-terminal/gnome-terminal.glade.h:56
 msgid "Scrolling"
