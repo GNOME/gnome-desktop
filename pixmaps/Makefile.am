@@ -53,6 +53,7 @@ BITMAPS     = \
 	gnome-modem.png             \
 	gnome-money.png				\
 	gnome-monitor.png           \
+	gnome-multimedia.png        \
 	gnome-networktool.png			\
 	gnome-note.png				\
 	gnome-panel.png				\
