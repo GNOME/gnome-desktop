@@ -1,6 +1,7 @@
 #include <config.h>
 #include <gnome.h>
 #include "gnome-hint.h"
+#include <gconf/gconf-client.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -15,8 +16,8 @@
 #define GH_TEXT_FONT "sans bold 10"
 #define GH_TITLE_FONT "sans bold 20"
 
-#define MINIMUM_WIDTH 340 
-#define MINIMUM_HEIGHT 160
+#define MINIMUM_WIDTH 380 
+#define MINIMUM_HEIGHT 180
 
 #define GH_TITLE_POS_X 10.0
 #define GH_TITLE_POS_Y 10.0
@@ -26,20 +27,17 @@
 #define GH_TEXTVIEW_WIDTH 280.0
 #define GH_TEXTVIEW_HEIGHT 70.0
 
-static void button_clicked(GtkWindow *window, int button, gpointer data);
-
 static int hintnum = 0;
 
 struct _GnomeHintPrivate {
-	char *title;
-	char *hintfile;
+	GConfClient* client;
+	gchar *startupkey;
 
 	GList *hintlist;
 	GList *curhint;
 	
 	GtkWidget *canvas;
-	GtkWidget *textview;
-	GtkWidget *textbuffer;
+	GtkWidget *checkbutton;
 
 	GnomeCanvasItem *background_image;
 	GnomeCanvasItem *logo_image;
@@ -49,13 +47,18 @@ struct _GnomeHintPrivate {
 };
 
 static void gnome_hint_class_init (GnomeHintClass *klass); 
-static void gnome_hint_object_init (GnomeHint *gnome_hint, GnomeHintClass *klass);
+static void gnome_hint_object_init (GnomeHint *gnome_hint,
+		 GnomeHintClass *klass);
 static void gnome_hint_instance_init (GnomeHint *gnome_hint);
-static void gnome_hint_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
-static void gnome_hint_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
-static void gnome_hint_repaint (GtkWidget *widget, GdkDrawable *drawable, GnomeHint *gnome_hint);
+static void gnome_hint_set_property (GObject *object, guint prop_id,
+		 const GValue *value, GParamSpec *pspec);
+static void gnome_hint_get_property (GObject *object, guint prop_id,
+		 GValue *value, GParamSpec *pspec);
+static void gnome_hint_repaint (GtkWidget *widget, GdkDrawable *drawable,
+		 GnomeHint *gnome_hint);
 static void gnome_hint_notify (GObject *object, GParamSpec *pspec);
 static void gnome_hint_finalize (GObject *object);
+static void dialog_button_clicked(GtkWindow *window, int button, gpointer data);static void checkbutton_clicked(GtkWidget *w, gpointer data);
 
 GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GnomeDialog,
 			 gnome_dialog, GNOME_TYPE_DIALOG)
@@ -70,7 +73,6 @@ gnome_hint_class_init (GnomeHintClass *klass) {
   object_class->get_property = gnome_hint_get_property; 
   object_class->notify = gnome_hint_notify;
   object_class->finalize = gnome_hint_finalize;
-
 }
 
 static void
@@ -79,8 +81,6 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   GtkWidget *sw;
 	
   gnome_hint->_priv = g_new (GnomeHintPrivate, 1);
-
-  gtk_window_set_title (GTK_WINDOW (gnome_hint), _("GNOME Hint"));
 
   sw = sw = gtk_scrolled_window_new(NULL,NULL);
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
@@ -91,20 +91,29 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   gnome_hint->_priv->hintlist = NULL;
   gnome_hint->_priv->curhint = NULL;
 
+  gnome_hint->_priv->client = gconf_client_get_default();
+
   gnome_hint->_priv->canvas = gnome_canvas_new();
   gtk_container_add(GTK_CONTAINER(sw),gnome_hint->_priv->canvas);
   gnome_canvas_set_scroll_region(GNOME_CANVAS(gnome_hint->_priv->canvas),
                                  0.0,0.0,MINIMUM_WIDTH,MINIMUM_HEIGHT);
   gtk_widget_set_usize(gnome_hint->_priv->canvas,MINIMUM_WIDTH,MINIMUM_HEIGHT);
 
-  gnome_hint->_priv->textview = gtk_button_new();
+  gnome_hint->_priv->checkbutton = 
+	gtk_check_button_new_with_mnemonic(_("_Show Hints at Startup"));
+	
+  gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(gnome_hint)->vbox),
+	gnome_hint->_priv->checkbutton,TRUE,TRUE,0);
+
+  gtk_signal_connect(GTK_OBJECT(gnome_hint->_priv->checkbutton), "clicked",
+		     GTK_SIGNAL_FUNC(checkbutton_clicked), gnome_hint);
 
   gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_PREV);
   gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_NEXT);
   gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_OK);
 
   gtk_signal_connect(GTK_OBJECT(gnome_hint), "clicked", 
-		     GTK_SIGNAL_FUNC(button_clicked), gnome_hint);
+		     GTK_SIGNAL_FUNC(dialog_button_clicked), gnome_hint);
 }
 
 static void gnome_hint_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) {
@@ -121,9 +130,17 @@ gnome_hint_notify (GObject *object, GParamSpec *pspec) {
 
 static void 
 gnome_hint_finalize (GObject *object) {
+  GList *node;
   GnomeHint *gnome_hint = GNOME_HINT (object);
 
-  /* FIXME: free everything else here */
+  node = gnome_hint->_priv->hintlist;
+
+  while (node){
+	g_free(node->data);
+	node=node->next;
+  }
+
+  g_free(gnome_hint->_priv->startupkey);
 
   g_free (gnome_hint->_priv);
   gnome_hint->_priv = NULL;
@@ -132,7 +149,17 @@ gnome_hint_finalize (GObject *object) {
 }
 
 static void
-button_clicked(GtkWindow *window, int button, gpointer data)
+checkbutton_clicked(GtkWidget *w, gpointer data)
+{
+	GnomeHint *gh = GNOME_HINT(data);
+	
+	gconf_client_set_bool(gh->_priv->client, gh->_priv->startupkey,
+		gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gh->_priv->checkbutton)),NULL);
+	
+}
+
+static void
+dialog_button_clicked(GtkWindow *window, int button, gpointer data)
 {
 	GnomeHint *gh = GNOME_HINT(data);
 
@@ -266,7 +293,8 @@ GtkWidget *
 gnome_hint_new (const gchar *hintfile,
 		const gchar *title,
 		const gchar *background_image,
-		const gchar *logo_image) 
+		const gchar *logo_image,
+		const gchar *startupkey) 
 {
   GnomeHint *gnome_hint;
   GdkPixbuf *im;
@@ -274,6 +302,11 @@ gnome_hint_new (const gchar *hintfile,
   if (!g_file_exists(hintfile)) return NULL;
 
   gnome_hint = g_object_new (GNOME_TYPE_HINT, NULL);
+
+  gnome_hint->_priv->startupkey = g_strdup(startupkey);
+
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gnome_hint->_priv->checkbutton)
+	,gconf_client_get_bool(gnome_hint->_priv->client,startupkey,NULL));
 
   /*Create a canvas item for the background and logo images
     and the title*/
@@ -314,12 +347,13 @@ gnome_hint_new (const gchar *hintfile,
         "text", title,
         NULL);
 
+  gtk_window_set_title (GTK_WINDOW (gnome_hint),title);
+
   /* Now load up the hints into gnome_hint->_priv->hintlist*/
 
   gnome_hint->_priv->hintlist = read_hints_from_file(hintfile,
         gnome_hint->_priv->hintlist);
   pick_random_hint(gnome_hint);
-  printf("# hints = %d\n\n",hintnum);
 
   gnome_hint->_priv->hint_text = gnome_canvas_item_new(
 	gnome_canvas_root(GNOME_CANVAS(gnome_hint->_priv->canvas)),

@@ -2,12 +2,14 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 
 #include "gnome-hint.h"
 
 int main (int argc, char **argv) {
   GtkWidget *gnome_hint;
   GnomeProgram *gnome_hint_program;
+  GConfClient* client;
 
   gchar *hintfile, *backimg, *logoimg;
 
@@ -23,8 +25,12 @@ int main (int argc, char **argv) {
   backimg = g_strdup(argv[2]);
   logoimg = g_strdup(argv[3]);
 
-  gnome_hint = gnome_hint_new (hintfile, "Gnome Test Hints",
-				backimg, logoimg);
+  client = gconf_client_get_default();
+/*  gconf_client_add_dir(client,"/apps/test-hint/",
+	GCONF_CLIENT_PRELOAD_NONE,NULL); */
+
+  gnome_hint = gnome_hint_new (hintfile, "GNOME Test Hints",
+				backimg, logoimg, "/apps/test-hint/startup");
 
   if (!gnome_hint){
 	printf("Bad hintfile\n\n");
