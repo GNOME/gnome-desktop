@@ -18,6 +18,7 @@ static author authors[] = {
 	{ "Jaka Mocnik", "<jaka.mocnik@kiss.uni-lj.si>" },
 	{ "The Squeaky Rubber Gnome", "http://www.gnome.org/squeaky-rubber-gnome.shtml" },
         { "Tomas Ögren", "<stric@ing.umu.se>" },
+	{ "Peter Teichman", "<pat4@acpub.duke.edu>" },
 	{ "", "" },
 	{ N_("... and many more"), "" },
 	{ NULL, NULL }
