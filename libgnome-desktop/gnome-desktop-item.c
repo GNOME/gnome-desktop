@@ -499,7 +499,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 		char *base;
 		/* here we figure out if we're talking about a directory
 		   but have passed the .directory file */
-		base = g_path_basename(file);
+		base = g_path_get_basename(file);
 		if(strcmp(base, ".directory") == 0)
 			item_flags |= GNOME_DESKTOP_ITEM_IS_DIRECTORY;
 		g_free(base);
@@ -679,7 +679,7 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	if(under) {
 		char *old_loc = item->location;
 		char *base;
-		base = g_path_basename(item->location);
+		base = g_path_get_basename(item->location);
 		item->location = g_concat_dir_and_file(under, base);
 		g_free(base);
 		g_free(old_loc);
