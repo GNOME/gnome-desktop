@@ -31,7 +31,7 @@ gint y, y_to_wrap_at;
 gint howmuch=0;
 GdkPixbuf *im;
 GtkWidget *canvas;
-GnomeCanvasItem *image, *image2;
+GnomeCanvasItem *image;
 	
 static gint sparkle_timer = -1;
 static gint scroll_timer = -1;
@@ -465,6 +465,7 @@ main (gint argc, gchar *argv[])
 				   	      NULL);
 
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
+	g_object_set (window, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
 
 	gtk_widget_realize (window);
 
@@ -502,17 +503,8 @@ main (gint argc, gchar *argv[])
 				       "width", (double) gdk_pixbuf_get_width (im),
 				       "height", (double) gdk_pixbuf_get_height (im),
 				       NULL);
-	
-	im = gdk_pixbuf_new_from_xpm_data (magick);
-	image2 = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
-				       gnome_canvas_pixbuf_get_type (),
-				       "pixbuf", im,
-				       "x", 0.0,
-				       "y", 0.0,
-				       "width", (double) gdk_pixbuf_get_width (im),
-				       "height", (double) gdk_pixbuf_get_height (im),
-				       NULL);
-	gnome_canvas_item_lower_to_bottom (image2);
+
+	g_object_unref (im);
 	
 	g_signal_connect (window, "delete_event",
 			  G_CALLBACK (cb_quit), im);
@@ -521,8 +513,6 @@ main (gint argc, gchar *argv[])
 	g_signal_connect (window, "key_press_event",
 			  G_CALLBACK (cb_keypress), NULL);
 
-	g_signal_connect (image, "destroy",
-			  G_CALLBACK (g_object_unref), im);
 	g_signal_connect (image, "event",
 			  G_CALLBACK (cb_clicked), NULL);
 
