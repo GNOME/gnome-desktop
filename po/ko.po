@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.99\n"
-"POT-Creation-Date: 1998-12-24 11:52-0500\n"
+"POT-Creation-Date: 1998-12-30 12:03-0500\n"
 "PO-Revision-Date: 1998-12-23 03:15+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -13,31 +13,341 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/asclock/asclock.c:144
+#: applets/asclock/asclock.c:154
+#: applets/mini-commander/mini-commander_applet.c:154
 msgid "About"
 msgstr "이 프로그램은"
 
-#: applets/asclock/asclock.c:151 applets/clockmail/clockmail.c:428
-#: applets/diskusage/diskusage.c:710 applets/drivemount/drivemount.c:455
-#: applets/fish/fish.c:452 applets/gen_util/clock.c:268
+#: applets/asclock/asclock.c:161 applets/clockmail/clockmail.c:431
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:459
+#: applets/fish/fish.c:510 applets/gen_util/clock.c:268
 #: applets/gen_util/mailcheck.c:686 applets/gen_util/printer.c:404
 #: applets/icewm-pager/wmpager_applet.c:90
-#: applets/mini-commander/mini-commander_applet.c:135
-#: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
-#: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
+#: applets/mini-commander/mini-commander_applet.c:141
+#: applets/modemlights/modemlights.c:722 applets/multiload/cpuload.c:62
+#: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:417 panel/launcher.c:266
-#: panel/menu.c:2898
+#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:415 panel/launcher.c:264
+#: panel/menu.c:2862
 msgid "Properties..."
 msgstr "속성..."
 
-#: applets/asclock/dialogs.c:18
+#: applets/asclock/dialogs.c:23
 msgid "Afterstep Clock Applet"
 msgstr "Afterstep 시계 애플릿"
 
-#: applets/asclock/dialogs.c:21
+#: applets/asclock/dialogs.c:26
 msgid "Who said NeXT is dead?"
 msgstr "누가 NeXT를 죽었다고 하는가?"
+
+#: applets/asclock/dialogs.c:111
+msgid "Timezone"
+msgstr "시간대"
+
+#: applets/batmon/batmon.c:106
+msgid "Can't open /proc/apm; can't get data."
+msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
+
+#: applets/batmon/batmon.c:112
+msgid "Something wrong with /proc/apm; can't get data."
+msgstr "/proc/apm에 문제가 있습니다: 데이터를 가져올 수 없습니다"
+
+#: applets/batmon/batmon.c:155
+msgid "Can't open /dev/apm; can't get data."
+msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
+
+#: applets/batmon/batmon.c:161 applets/battery/read-battery.c:84
+msgid "ioctl failed on /dev/apm."
+msgstr "/dev/apm에 대해 ioctl 실패"
+
+#: applets/batmon/batmon.c:211
+msgid "There is no battery?!?"
+msgstr "배터리가 없습니다?!?"
+
+#: applets/batmon/batmon.c:214
+msgid "High and charging."
+msgstr "높고 충전중."
+
+#: applets/batmon/batmon.c:217
+msgid "High."
+msgstr "높음."
+
+#: applets/batmon/batmon.c:220
+msgid "Low and charging."
+msgstr "낮고 충전중."
+
+#: applets/batmon/batmon.c:223
+msgid "Low."
+msgstr "낮음."
+
+#: applets/batmon/batmon.c:226
+msgid "Critical and charging."
+msgstr "위험하고 충전중."
+
+#: applets/batmon/batmon.c:229
+msgid "Critical!!"
+msgstr "위험함!!"
+
+#: applets/batmon/batmon.c:232
+msgid "Charging."
+msgstr "충전중."
+
+#: applets/batmon/batmon.c:240
+msgid "unknown minutes of battery."
+msgstr "%d분만큼의 배터리"
+
+#: applets/batmon/batmon.c:243
+msgid "unknown minutes of battery (%d%%)"
+msgstr "%d분만큼의 배터리"
+
+#: applets/batmon/batmon.c:249
+#, c-format
+msgid "%d minutes of battery"
+msgstr "%d분만큼의 배터리"
+
+#: applets/batmon/batmon.c:251
+msgid "%d minutes of battery (%d%%)"
+msgstr "%d분만큼의 배터리"
+
+#. would have to be an error
+#: applets/batmon/batmon.c:255
+msgid "More than 100,000,000 minutes of battery life?!?"
+msgstr "100,000,000분 이상만큼의 배터리?!?"
+
+#: applets/batmon/batmon.c:338
+msgid "APM Stats"
+msgstr "APM 정보"
+
+#: applets/batmon/batmon.c:356
+msgid "Linux APM Driver Version:"
+msgstr "리눅스 APM 드라이버 버전:"
+
+#: applets/batmon/batmon.c:368
+msgid "APM BIOS Version:"
+msgstr "APM BIOS 버전"
+
+#: applets/batmon/batmon.c:385
+msgid "Battery Status:"
+msgstr "배터리 상태:"
+
+#: applets/batmon/batmon.c:409
+msgid "Close"
+msgstr "닫기"
+
+#: applets/battery/battery.c:350
+msgid "Internal error: invalid mode in battery_set_mode"
+msgstr "내부 애러: battery_set_mode에 잘못된 모드"
+
+#: applets/battery/battery.c:395 applets/gen_util/clock.c:241
+#: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
+#: applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr "애플릿을 만들 수 없음!\n"
+
+#: applets/battery/battery.c:609
+msgid "Could not allocate space for graph values"
+msgstr "그래프의 값에 대해 충분한 공간을 확보하지 못함"
+
+#: applets/battery/properties.c:34
+msgid "Battery Monitor Settings"
+msgstr "배터리 상태:"
+
+#: applets/battery/properties.c:43
+msgid "General Properties"
+msgstr "패널 속성"
+
+#: applets/battery/properties.c:45 applets/diskusage/properties.c:232
+#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
+msgid "Applet Height"
+msgstr "애플릿 높이"
+
+#: applets/battery/properties.c:55
+msgid "Applet Width"
+msgstr "애플릿 높이"
+
+#: applets/battery/properties.c:65
+msgid "Applet Mode"
+msgstr "애플릿 높이"
+
+#: applets/battery/properties.c:66
+msgid "Graph"
+msgstr "그래프"
+
+#: applets/battery/properties.c:68
+msgid "Readout"
+msgstr "다시 읽기"
+
+#: applets/battery/properties.c:112 applets/battery/properties.c:177
+msgid "AC-On Battery Color:"
+msgstr "AC-On 배터리 색깔:"
+
+#: applets/battery/properties.c:118 applets/battery/properties.c:183
+msgid "AC-Off Battery Color:"
+msgstr "AC-Off 배터리 색깔:"
+
+#: applets/battery/properties.c:124
+msgid "Graph Interval:"
+msgstr "그래프 간격:"
+
+#: applets/battery/properties.c:138
+msgid "Graph Direction:"
+msgstr "그래프 방향:"
+
+#: applets/battery/properties.c:141
+msgid "Left to Right"
+msgstr "왼쪽에서 오른쪽"
+
+#: applets/battery/properties.c:143
+msgid "Right to Left"
+msgstr "오른쪽에서 왼쪽"
+
+#: applets/battery/read-battery.c:21
+msgid ""
+"Cannot open /proc/apm!  Make sure that you built APM support into your "
+"kernel.\n"
+msgstr ""
+"/proc/apm을 열 수 없습니다!  APM support가 커널에 포함되었는지 확인하세요\n"
+
+#: applets/battery/read-battery.c:79
+msgid "Cannot open /dev/apm; can't get data."
+msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
+
+#: applets/battery/read-battery.c:95
+msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM을 사용할 수 없습니다!  배터리 충전 정보를 읽을 수 없습니다."
+
+#: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:438 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:465 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:502 applets/gen_util/mailcheck.c:693
+#: applets/icewm-pager/wmpager_applet.c:82
+#: applets/modemlights/modemlights.c:728 applets/netload/netload.c:338
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
+#: panel/menu.c:1950
+msgid "About..."
+msgstr "이 프로그램은..."
+
+#: applets/bussign/bussign.c:80
+msgid "Refresh Image"
+msgstr "그림 다시 그리기"
+
+#: applets/bussign/bussign.c:241
+msgid "The Bus Sign Applet"
+msgstr "버스 표시 애플릿"
+
+#: applets/bussign/bussign.c:242 applets/gen_util/mailcheck.c:613
+msgid "(c) 1998 the Free Software Foundation"
+msgstr "(c) 1998 the Free Software Foundation"
+
+#: applets/bussign/bussign.c:244
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
+"이 애플릿은 완전히 시간낭비임.  돌아가서 일하시오!\n"
+"\n"
+"표시 부분을 채우려면 다음을 보시오:\n"
+"\n"
+"\"http://people.netscape.com/mtoy/sign/index.html"
+
+#: applets/charpick/charpick.c:203
+msgid "Character Picker"
+msgstr "문자 선택"
+
+#: applets/charpick/charpick.c:204
+msgid "0.02"
+msgstr "0.02"
+
+#: applets/charpick/charpick.c:205
+msgid "Copyright (C) 1998"
+msgstr "Copyright (C) 1998"
+
+#: applets/charpick/charpick.c:207
+msgid ""
+"Gnome Panel applet for selecting strange characters that are not on my "
+"keyboard. Released under GNU General Public Licence."
+msgstr ""
+"내 키보드에 없는 괴상한 글자를 선택하는 GNOME 패널 애플릿.  GNU General "
+"Public License로 release"
+
+#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
+#, c-format
+msgid "%d.%d.%d"
+msgstr "%d.%d.%d"
+
+#: applets/clockmail/clockmail.c:34
+msgid "John Ellis <johne@bellatlantic.net>"
+msgstr "John Ellis <johne@bellatlantic.net>"
+
+#: applets/clockmail/clockmail.c:37
+msgid "Clock and Mail Notify Applet"
+msgstr "시계와 편지 확인 애플릿"
+
+#: applets/clockmail/clockmail.c:38 applets/slashapp/slashapp.c:573
+msgid "(C) 1998"
+msgstr "(C) 1998"
+
+#: applets/clockmail/clockmail.c:40
+msgid ""
+"Released under the GNU general public license.\n"
+"Basic digital clock with date in a tooltip. Optional 12/24 time display. "
+"Mail blinking can be for any unread mail, or only briefly when new mail "
+"arrives."
+msgstr ""
+"GNU General Public License에 의해 release.\n"
+"툴팁 내에 기본적인 디지탈 시계 포함.  12/24 시간을 선택할 수 있음.  편지 "
+"확인은 읽지 않은 모든 편지에 대해서도 가능하고 새로운 메일이 도착했을때만 "
+"간단히 할 수도 있음."
+
+#: applets/clockmail/clockmail.c:110
+msgid " (GMT)"
+msgstr " (UTC)"
+
+#: applets/clockmail/clockmail.c:116
+#, c-format
+msgid " (GMT %+d)"
+msgstr " (UTC %+d)"
+
+#. add default theme
+#: applets/clockmail/properties.c:131
+msgid "None (default)"
+msgstr "없음 (기본)"
+
+#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
+#: applets/mini-commander/preferences.c:395
+msgid "Clock"
+msgstr "시계"
+
+#: applets/clockmail/properties.c:292
+msgid "Display time in 12 hour format (AM/PM)"
+msgstr "12시간 형식으로 표시 (AM/PM)"
+
+#: applets/clockmail/properties.c:302
+msgid "Display time relative to GMT (Greenwich Mean Time):"
+msgstr "UTC에 상대시간으로 표시."
+
+#: applets/clockmail/properties.c:316
+msgid "Mail"
+msgstr "편지"
+
+#: applets/clockmail/properties.c:325
+msgid "Blink when any mail is waiting. (Not just when mail arrives)"
+msgstr "어떤 편지든 있으면 깜박임.  (메일이 도착하는 순간뿐만 아니라)"
+
+#: applets/clockmail/properties.c:336
+msgid "Mail file:"
+msgstr "편지 파일:"
+
+#: applets/clockmail/properties.c:353
+msgid "When new mail is received run:"
+msgstr "새로운 편지가 도착했을 때 실행:"
+
+#: applets/clockmail/properties.c:372
+msgid "Amount of mail to consider mailbox full (Kbytes):"
+msgstr "편지함이 가득 찼다고 생각할 메일의 크기 (킬로바이트)"
 
 #. -- not implemented yet --
 #.
@@ -120,328 +430,14 @@ msgstr "누가 NeXT를 죽었다고 하는가?"
 #.
 #.
 #. ---
-#: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
-#: applets/diskusage/properties.c:322 applets/drivemount/properties.c:204
-#: applets/fvwm-pager/properties.c:246
+#: applets/clockmail/properties.c:385 applets/diskusage/properties.c:341
+#: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
 #: applets/mini-commander/preferences.c:616
-#: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
-#: applets/multiload/properties-mem.c:283
-#: applets/multiload/properties-swap.c:233 applets/netload/properties.c:277
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:874
-#: panel/panel_config_global.c:298
+#: applets/modemlights/properties.c:197 applets/netload/properties.c:277
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:877
+#: panel/panel_config_global.c:297
 msgid "General"
 msgstr "일반"
-
-#: applets/asclock/dialogs.c:111
-msgid "Timezone"
-msgstr "시간대"
-
-#: applets/batmon/batmon.c:106
-msgid "Can't open /proc/apm; can't get data."
-msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
-
-#: applets/batmon/batmon.c:112
-msgid "Something wrong with /proc/apm; can't get data."
-msgstr "/proc/apm에 문제가 있습니다: 데이터를 가져올 수 없습니다"
-
-#: applets/batmon/batmon.c:155
-msgid "Can't open /dev/apm; can't get data."
-msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
-
-#: applets/batmon/batmon.c:161 applets/battery/read-battery.c:84
-msgid "ioctl failed on /dev/apm."
-msgstr "/dev/apm에 대해 ioctl 실패"
-
-#: applets/batmon/batmon.c:211
-msgid "There is no battery?!?"
-msgstr "배터리가 없습니다?!?"
-
-#: applets/batmon/batmon.c:214
-msgid "High and charging."
-msgstr "높고 충전중."
-
-#: applets/batmon/batmon.c:217
-msgid "High."
-msgstr "높음."
-
-#: applets/batmon/batmon.c:220
-msgid "Low and charging."
-msgstr "낮고 충전중."
-
-#: applets/batmon/batmon.c:223
-msgid "Low."
-msgstr "낮음."
-
-#: applets/batmon/batmon.c:226
-msgid "Critical and charging."
-msgstr "위험하고 충전중."
-
-#: applets/batmon/batmon.c:229
-msgid "Critical!!"
-msgstr "위험함!!"
-
-#: applets/batmon/batmon.c:232
-msgid "Charging."
-msgstr "충전중."
-
-#: applets/batmon/batmon.c:240
-msgid "unknown minutes of battery."
-msgstr "%d분만큼의 배터리"
-
-#: applets/batmon/batmon.c:241
-msgid "unknown minutes of battery (%d%%)"
-msgstr "%d분만큼의 배터리"
-
-#: applets/batmon/batmon.c:246
-#, c-format
-msgid "%d minutes of battery"
-msgstr "%d분만큼의 배터리"
-
-#: applets/batmon/batmon.c:247
-msgid "%d minutes of battery (%d%%)"
-msgstr "%d분만큼의 배터리"
-
-#. would have to be an error
-#: applets/batmon/batmon.c:251
-msgid "More than 100,000,000 minutes of battery life?!?"
-msgstr "100,000,000분 이상만큼의 배터리?!?"
-
-#: applets/batmon/batmon.c:334
-msgid "APM Stats"
-msgstr "APM 정보"
-
-#: applets/batmon/batmon.c:352
-msgid "Linux APM Driver Version:"
-msgstr "리눅스 APM 드라이버 버전:"
-
-#: applets/batmon/batmon.c:364
-msgid "APM BIOS Version:"
-msgstr "APM BIOS 버전"
-
-#: applets/batmon/batmon.c:381
-msgid "Battery Status:"
-msgstr "배터리 상태:"
-
-#: applets/batmon/batmon.c:405
-msgid "Close"
-msgstr "닫기"
-
-#: applets/battery/battery.c:350
-msgid "Internal error: invalid mode in battery_set_mode"
-msgstr "내부 애러: battery_set_mode에 잘못된 모드"
-
-#: applets/battery/battery.c:395 applets/gen_util/clock.c:241
-#: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
-#: applets/netload/netload.c:320
-msgid "Can't create applet!\n"
-msgstr "애플릿을 만들 수 없음!\n"
-
-#: applets/battery/battery.c:609
-msgid "Could not allocate space for graph values"
-msgstr "그래프의 값에 대해 충분한 공간을 확보하지 못함"
-
-#: applets/battery/properties.c:34
-msgid "Battery Monitor Settings"
-msgstr "배터리 상태:"
-
-#: applets/battery/properties.c:43
-msgid "General Properties"
-msgstr "패널 속성"
-
-#: applets/battery/properties.c:45 applets/diskusage/properties.c:213
-#: applets/fvwm-pager/properties.c:178 applets/multiload/properties-cpu.c:141
-#: applets/multiload/properties-mem.c:192
-#: applets/multiload/properties-swap.c:143 applets/netload/properties.c:141
-msgid "Applet Height"
-msgstr "애플릿 높이"
-
-#: applets/battery/properties.c:55
-msgid "Applet Width"
-msgstr "애플릿 높이"
-
-#: applets/battery/properties.c:65
-msgid "Applet Mode"
-msgstr "애플릿 높이"
-
-#: applets/battery/properties.c:66
-msgid "Graph"
-msgstr "그래프"
-
-#: applets/battery/properties.c:68
-msgid "Readout"
-msgstr "다시 읽기"
-
-#: applets/battery/properties.c:112 applets/battery/properties.c:177
-msgid "AC-On Battery Color:"
-msgstr "AC-On 배터리 색깔:"
-
-#: applets/battery/properties.c:118 applets/battery/properties.c:183
-msgid "AC-Off Battery Color:"
-msgstr "AC-Off 배터리 색깔:"
-
-#: applets/battery/properties.c:124
-msgid "Graph Interval:"
-msgstr "그래프 간격:"
-
-#: applets/battery/properties.c:138
-msgid "Graph Direction:"
-msgstr "그래프 방향:"
-
-#: applets/battery/properties.c:141
-msgid "Left to Right"
-msgstr "왼쪽에서 오른쪽"
-
-#: applets/battery/properties.c:143
-msgid "Right to Left"
-msgstr "오른쪽에서 왼쪽"
-
-#: applets/battery/read-battery.c:21
-msgid ""
-"Cannot open /proc/apm!  Make sure that you built APM support into your "
-"kernel.\n"
-msgstr ""
-"/proc/apm을 열 수 없습니다!  APM support가 커널에 포함되었는지 확인하세요\n"
-
-#: applets/battery/read-battery.c:79
-msgid "Cannot open /dev/apm; can't get data."
-msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
-
-#: applets/battery/read-battery.c:95
-msgid "APM is disabled!  Cannot read battery charge information."
-msgstr "APM을 사용할 수 없습니다!  배터리 충전 정보를 읽을 수 없습니다."
-
-#: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
-#: applets/clockmail/clockmail.c:435 applets/dialer/dialer.c:162
-#: applets/drivemount/drivemount.c:461 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:444 applets/gen_util/mailcheck.c:693
-#: applets/icewm-pager/wmpager_applet.c:82
-#: applets/modemlights/modemlights.c:725 applets/netload/netload.c:338
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
-#: panel/menu.c:1961
-msgid "About..."
-msgstr "이 프로그램은..."
-
-#: applets/bussign/bussign.c:80
-msgid "Refresh Image"
-msgstr "그림 다시 그리기"
-
-#: applets/bussign/bussign.c:241
-msgid "The Bus Sign Applet"
-msgstr "버스 표시 애플릿"
-
-#: applets/bussign/bussign.c:242 applets/gen_util/mailcheck.c:613
-msgid "(c) 1998 the Free Software Foundation"
-msgstr "(c) 1998 the Free Software Foundation"
-
-#: applets/bussign/bussign.c:244
-msgid ""
-"This applet is a total waste of time. Get back to work!\n"
-"\n"
-"To fill in the sign please see:\n"
-"\n"
-"http://people.netscape.com/mtoy/sign/index.html"
-msgstr ""
-"이 애플릿은 완전히 시간낭비임.  돌아가서 일하시오!\n"
-"\n"
-"표시 부분을 채우려면 다음을 보시오:\n"
-"\n"
-"\"http://people.netscape.com/mtoy/sign/index.html"
-
-#: applets/charpick/charpick.c:203
-msgid "Character Picker"
-msgstr "문자 선택"
-
-#: applets/charpick/charpick.c:204
-msgid "0.02"
-msgstr "0.02"
-
-#: applets/charpick/charpick.c:205
-msgid "Copyright (C) 1998"
-msgstr "Copyright (C) 1998"
-
-#: applets/charpick/charpick.c:207
-msgid ""
-"Gnome Panel applet for selecting strange characters that are not on my "
-"keyboard. Released under GNU General Public Licence."
-msgstr ""
-"내 키보드에 없는 괴상한 글자를 선택하는 GNOME 패널 애플릿.  GNU General "
-"Public License로 release"
-
-#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
-#, c-format
-msgid "%d.%d.%d"
-msgstr "%d.%d.%d"
-
-#: applets/clockmail/clockmail.c:32
-msgid "John Ellis <johne@bellatlantic.net>"
-msgstr "John Ellis <johne@bellatlantic.net>"
-
-#: applets/clockmail/clockmail.c:35
-msgid "Clock and Mail Notify Applet"
-msgstr "시계와 편지 확인 애플릿"
-
-#: applets/clockmail/clockmail.c:36 applets/slashapp/slashapp.c:573
-msgid "(C) 1998"
-msgstr "(C) 1998"
-
-#: applets/clockmail/clockmail.c:38
-msgid ""
-"Released under the GNU general public license.\n"
-"Basic digital clock with date in a tooltip. Optional 12/24 time display. "
-"Mail blinking can be for any unread mail, or only briefly when new mail "
-"arrives."
-msgstr ""
-"GNU General Public License에 의해 release.\n"
-"툴팁 내에 기본적인 디지탈 시계 포함.  12/24 시간을 선택할 수 있음.  편지 "
-"확인은 읽지 않은 모든 편지에 대해서도 가능하고 새로운 메일이 도착했을때만 "
-"간단히 할 수도 있음."
-
-#: applets/clockmail/clockmail.c:108
-msgid " (GMT)"
-msgstr " (UTC)"
-
-#: applets/clockmail/clockmail.c:113
-#, c-format
-msgid " (GMT %+d)"
-msgstr " (UTC %+d)"
-
-#. add default theme
-#: applets/clockmail/properties.c:131
-msgid "None (default)"
-msgstr "없음 (기본)"
-
-#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
-#: applets/mini-commander/preferences.c:395
-msgid "Clock"
-msgstr "시계"
-
-#: applets/clockmail/properties.c:292
-msgid "Display time in 12 hour format (AM/PM)"
-msgstr "12시간 형식으로 표시 (AM/PM)"
-
-#: applets/clockmail/properties.c:302
-msgid "Display time relative to GMT (Greenwich Mean Time):"
-msgstr "UTC에 상대시간으로 표시."
-
-#: applets/clockmail/properties.c:316
-msgid "Mail"
-msgstr "편지"
-
-#: applets/clockmail/properties.c:325
-msgid "Blink when any mail is waiting. (Not just when mail arrives)"
-msgstr "어떤 편지든 있으면 깜박임.  (메일이 도착하는 순간뿐만 아니라)"
-
-#: applets/clockmail/properties.c:336
-msgid "Mail file:"
-msgstr "편지 파일:"
-
-#: applets/clockmail/properties.c:353
-msgid "When new mail is received run:"
-msgstr "새로운 편지가 도착했을 때 실행:"
-
-#: applets/clockmail/properties.c:372
-msgid "Amount of mail to consider mailbox full (Kbytes):"
-msgstr "편지함이 가득 찼다고 생각할 메일의 크기 (킬로바이트)"
 
 #: applets/clockmail/properties.c:403
 msgid "Theme file (directory):"
@@ -459,49 +455,44 @@ msgstr "PPP 걸기 애플릿"
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
 msgstr "케케묵은 PPP 전화 걸기, 어떻게 전에는 아무도 생각을 못했을까?"
 
-#: applets/dialer/dialer.c:87 panel/menu.c:2724
+#: applets/dialer/dialer.c:87 panel/menu.c:2688
 msgid "Off"
 msgstr "끄기"
 
-#: applets/diskusage/properties.c:190
+#: applets/diskusage/properties.c:209
 msgid "Used Diskspace"
 msgstr "사용중인 디스크 공간"
 
-#: applets/diskusage/properties.c:195
+#: applets/diskusage/properties.c:214
 msgid "Free Diskspace"
 msgstr "비어있는 디스크 공간"
 
-#: applets/diskusage/properties.c:200
+#: applets/diskusage/properties.c:219
 msgid "Textcolor"
 msgstr "글자만 사용"
 
-#: applets/diskusage/properties.c:206
+#: applets/diskusage/properties.c:225
 msgid "Backgroundcolor"
 msgstr "배경"
 
-#: applets/diskusage/properties.c:219 applets/fvwm-pager/properties.c:184
-#: applets/multiload/properties-cpu.c:149
-#: applets/multiload/properties-mem.c:200
-#: applets/multiload/properties-swap.c:151 applets/netload/properties.c:147
-#: panel/swallow.c:243
+#: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
+#: applets/netload/properties.c:147 panel/swallow.c:241
 msgid "Width"
 msgstr "폭"
 
-#: applets/diskusage/properties.c:240 applets/multiload/properties-cpu.c:169
-#: applets/multiload/properties-mem.c:220
-#: applets/multiload/properties-swap.c:171 applets/netload/properties.c:170
+#: applets/diskusage/properties.c:259 applets/netload/properties.c:170
 msgid "Update Frequency"
 msgstr "갱신 간격"
 
-#: applets/diskusage/properties.c:312
+#: applets/diskusage/properties.c:331
 msgid "Diskusage Settings"
 msgstr "설정"
 
-#: applets/drivemount/drivemount.c:51
+#: applets/drivemount/drivemount.c:53
 msgid "Drive Mount Applet"
 msgstr "드라이브 마운트 애플릿"
 
-#: applets/drivemount/drivemount.c:54
+#: applets/drivemount/drivemount.c:56
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
@@ -509,19 +500,19 @@ msgstr ""
 "GNU General Public License에 의해 release\n"
 "드라이브를 마운트/언마운트한다.."
 
-#: applets/drivemount/drivemount.c:127
+#: applets/drivemount/drivemount.c:129
 msgid " mounted"
 msgstr " 마운트됨"
 
-#: applets/drivemount/drivemount.c:132
+#: applets/drivemount/drivemount.c:134
 msgid " not mounted"
 msgstr " 마운트되지 않음"
 
-#: applets/drivemount/drivemount.c:202
+#: applets/drivemount/drivemount.c:206
 msgid "\" reported:\n"
 msgstr "\" 보고됨:\n"
 
-#: applets/drivemount/drivemount.c:204
+#: applets/drivemount/drivemount.c:208
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -529,7 +520,7 @@ msgstr ""
 "드라이브 마운트 명령 실패\n"
 "\""
 
-#: applets/drivemount/drivemount.c:468
+#: applets/drivemount/drivemount.c:472
 msgid "Eject"
 msgstr "Eject"
 
@@ -601,56 +592,56 @@ msgstr "fifteen 애플릿을 만들 수 없음!"
 msgid "Scramble pieces"
 msgstr "조각 뒤섞기"
 
-#: applets/fish/fish.c:105 applets/fish/fish.c:376
+#: applets/fish/fish.c:126 applets/fish/fish.c:403
 #: applets/webcontrol/webcontrol.c:54
 #, c-format
 msgid "%s the Fish"
 msgstr "물고기 %s"
 
-#: applets/fish/fish.c:106
+#: applets/fish/fish.c:127
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "GNOME 물고기 %s 말하길:"
 
-#: applets/fish/fish.c:194
+#: applets/fish/fish.c:218
 msgid "GNOME Fish Properties"
 msgstr "GNOME 물고기 속성"
 
-#: applets/fish/fish.c:202
+#: applets/fish/fish.c:226
 msgid "Your GNOME Fish's Name:"
 msgstr "당신의 GNOME 물고기의 이름:"
 
-#: applets/fish/fish.c:216
+#: applets/fish/fish.c:240
 msgid "The Animation Filename:"
 msgstr "애니매이션 파일이름:"
 
-#: applets/fish/fish.c:218 gnome-terminal/gnome-terminal.c:990
-#: panel/menu.c:2840 panel/panel-util.c:181 panel/panel-util.c:219
-#: panel/panel-util.c:256 panel/panel_config.c:727 panel/swallow.c:233
+#: applets/fish/fish.c:242 gnome-terminal/gnome-terminal.c:993
+#: panel/menu.c:2804 panel/panel-util.c:181 panel/panel-util.c:219
+#: panel/panel-util.c:256 panel/panel_config.c:725 panel/swallow.c:231
 msgid "Browse"
 msgstr "찾아보기"
 
-#: applets/fish/fish.c:231
+#: applets/fish/fish.c:255
 msgid "Frames In Animation:"
 msgstr "애니매이션의 프레임 수"
 
-#: applets/fish/fish.c:247
+#: applets/fish/fish.c:271
 msgid "Pause per frame (s):"
 msgstr "각 프레임마다 쉬는시간 (초):"
 
-#: applets/fish/fish.c:261
+#: applets/fish/fish.c:285
 msgid "Fish"
 msgstr "물고기"
 
-#: applets/fish/fish.c:379
+#: applets/fish/fish.c:412
 msgid "(with minor help from George)"
 msgstr "(George의 작은 도움으로)"
 
-#: applets/fish/fish.c:382
+#: applets/fish/fish.c:416
 msgid "The GNOME Fish Applet"
 msgstr "GNOME 물고기 애플릿"
 
-#: applets/fish/fish.c:385
+#: applets/fish/fish.c:419
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -691,17 +682,13 @@ msgstr "Active 윈도우 색깔"
 msgid "Inactive Window Color"
 msgstr "Inactive 윈도우 색깔"
 
-#: applets/fvwm-pager/properties.c:141
+#: applets/fvwm-pager/properties.c:141 applets/fvwm-pager/properties.c:170
 msgid "Active Desktop Color"
 msgstr "Active 데스크탑 색깔"
 
 #: applets/fvwm-pager/properties.c:145 applets/fvwm-pager/properties.c:174
 msgid "Inactive Desktop Color"
 msgstr "Inactive 데스크탑 색깔"
-
-#: applets/fvwm-pager/properties.c:170
-msgid "Active Dekstop Color"
-msgstr "Active 데스크탑 색깔"
 
 #: applets/fvwm-pager/properties.c:242
 msgid "Fvwm Pager Settings"
@@ -836,27 +823,28 @@ msgid ""
 "This applet requires you to run a window manager with the XA_ extensions.\n"
 msgstr "이 애플릿은 XA_ extension이 있는 윈도우 관리자를 실행해야 합니다.\n"
 
-#: applets/icewm-pager/wmpager_applet.c:217
+#: applets/icewm-pager/wmpager_applet.c:218
 msgid "Desktop Pager Applet"
 msgstr "데스크탑 페이저 애플릿"
 
-#: applets/icewm-pager/wmpager_applet.c:218
+#: applets/icewm-pager/wmpager_applet.c:219
 msgid "Copyright (C)1998 M.Watson"
 msgstr "Copyright (C)1998 M.Watson"
 
-#: applets/icewm-pager/wmpager_applet.c:274
+#: applets/icewm-pager/wmpager_applet.c:275
 msgid "Failed to retrieve workspace property."
 msgstr "웍스페이스 속성을 읽어들이는 데 실패."
 
-#: applets/mini-commander/mini-commander_applet.c:125
+#: applets/mini-commander/mini-commander_applet.c:131
 msgid "Mini-Commander"
 msgstr "Mini-Commander"
 
-#: applets/mini-commander/mini-commander_applet.c:142
-msgid "Help & About..."
-msgstr "도움말 & 이 프로그램은..."
+#: applets/mini-commander/mini-commander_applet.c:147
+#: gnome-terminal/gnome-terminal.c:1197 help-browser/window.c:206
+msgid "Help"
+msgstr "도움말"
 
-#: applets/mini-commander/mini-commander_applet.c:146
+#: applets/mini-commander/mini-commander_applet.c:158
 msgid "ready..."
 msgstr "준비..."
 
@@ -970,8 +958,8 @@ msgstr ""
 "보이려면 패널에서 애플릿을 움직여야 함"
 
 #. Color
-#: applets/mini-commander/preferences.c:538
-#: gnome-terminal/gnome-terminal.c:1022
+#: applets/mini-commander/preferences.c:538 applets/multiload/load-graph.c:163
+#: gnome-terminal/gnome-terminal.c:1025
 msgid "Colors"
 msgstr "색상"
 
@@ -1036,7 +1024,7 @@ msgstr ""
 msgid "Do you want to connect?"
 msgstr "연결하겠습니까?"
 
-#: applets/modemlights/modemlights.c:345
+#: applets/modemlights/modemlights.c:346
 msgid "not connected"
 msgstr "연결되어 있지 않음"
 
@@ -1078,48 +1066,82 @@ msgstr "ISDN 사용"
 msgid "Advanced"
 msgstr "고급"
 
-#: applets/multiload/properties-cpu.c:133
-msgid "User Load"
+#: applets/multiload/cpuload.c:47 applets/multiload/main.c:126
+#, fuzzy
+msgid "CPU Load"
 msgstr "사용자 로드"
 
-#: applets/multiload/properties-cpu.c:137
-msgid "System Load"
+#: applets/multiload/load-graph.c:26
+#, fuzzy
+msgid "Load Graph"
+msgstr "그래프"
+
+#: applets/multiload/load-graph.c:151
+#, fuzzy
+msgid "Speed:"
+msgstr "속도"
+
+#: applets/multiload/load-graph.c:151
+#, fuzzy
+msgid "Width:"
+msgstr "폭"
+
+#: applets/multiload/load-graph.c:151
+#, fuzzy
+msgid "Height:"
+msgstr "높이"
+
+#: applets/multiload/main.c:27
+#, fuzzy
+msgid "User"
+msgstr "사용자 로드"
+
+#: applets/multiload/main.c:27
+#, fuzzy
+msgid "Nice"
+msgstr "장치"
+
+#: applets/multiload/main.c:27
+#, fuzzy
+msgid "System"
 msgstr "시스템 로드"
 
-#: applets/multiload/properties-cpu.c:228
-msgid "CPULoad Settings"
-msgstr "CPULoad 설정"
+#: applets/multiload/main.c:27
+#, fuzzy
+msgid "Idle"
+msgstr "색인"
 
-#: applets/multiload/properties-mem.c:167
-msgid "Used Memory"
-msgstr "사용중인 메모리"
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr ""
 
-#: applets/multiload/properties-mem.c:171
-msgid "Shared Memory"
+#: applets/multiload/main.c:31
+#, fuzzy
+msgid "Shared"
 msgstr "공유 메모리"
 
-#: applets/multiload/properties-mem.c:175
-msgid "Buffered Memory"
-msgstr "Buffered 메모리"
+#: applets/multiload/main.c:31
+msgid "Buffers"
+msgstr ""
 
-#: applets/multiload/properties-mem.c:179
-msgid "Cached Memory"
-msgstr "캐쉬 메모리"
-
-#: applets/multiload/properties-mem.c:280
-msgid "MemLoad Settings"
-msgstr "MemLoad 설정"
-
-#: applets/multiload/properties-swap.c:130
-msgid "Used Swap"
-msgstr "사용중인 swap"
-
-#: applets/multiload/properties-swap.c:134
-msgid "Free Swap"
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+#, fuzzy
+msgid "Free"
 msgstr "비어있는 swap"
 
-#: applets/multiload/properties-swap.c:230
-msgid "SwapLoad Settings"
+#: applets/multiload/main.c:35
+#, fuzzy
+msgid "Used"
+msgstr "사용자 로드"
+
+#: applets/multiload/main.c:130 applets/multiload/memload.c:47
+#, fuzzy
+msgid "Memory Load"
+msgstr "사용자 로드"
+
+#: applets/multiload/main.c:134 applets/multiload/swapload.c:47
+#, fuzzy
+msgid "Swap Load"
 msgstr "SwapLoad 설정"
 
 #: applets/netload/netload.c:260
@@ -1205,7 +1227,7 @@ msgstr "브라우저"
 msgid "Open new window"
 msgstr "새로운 창 열기"
 
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1069
+#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1072
 msgid "Scrolling"
 msgstr "스크롤"
 
@@ -1462,7 +1484,7 @@ msgstr "아래 폴더까지 정렬(_R)"
 
 #. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
 #. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1183
+#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1186
 msgid "_About..."
 msgstr "이 프로그램은(_A)..."
 
@@ -1570,24 +1592,24 @@ msgstr "사용자 메뉴"
 msgid "Top of user menus"
 msgstr "사용자 메뉴의 맨 위"
 
-#: gnome-terminal/gnome-terminal.c:135
+#: gnome-terminal/gnome-terminal.c:138
 msgid "GNOME Terminal"
 msgstr "GNOME 터미널"
 
-#: gnome-terminal/gnome-terminal.c:138
+#: gnome-terminal/gnome-terminal.c:141
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME 터미널 프로그램"
 
-#: gnome-terminal/gnome-terminal.c:416 gnome-terminal/gnome-terminal.c:913
-#: gnome-terminal/gnome-terminal.c:923
+#: gnome-terminal/gnome-terminal.c:419 gnome-terminal/gnome-terminal.c:916
+#: gnome-terminal/gnome-terminal.c:926
 msgid "Default"
 msgstr "기본사항"
 
-#: gnome-terminal/gnome-terminal.c:417
+#: gnome-terminal/gnome-terminal.c:420
 msgid "Config"
 msgstr "설정"
 
-#: gnome-terminal/gnome-terminal.c:584
+#: gnome-terminal/gnome-terminal.c:587
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1597,232 +1619,228 @@ msgstr ""
 "이 윈도우를 새로운 class의 기본 설정에\n"
 "맞도록 다시 설정하시겠습니까?"
 
-#: gnome-terminal/gnome-terminal.c:747
+#: gnome-terminal/gnome-terminal.c:750
 msgid "Linux console"
 msgstr "리눅스 콘솔"
 
-#: gnome-terminal/gnome-terminal.c:748
+#: gnome-terminal/gnome-terminal.c:751
 msgid "Color Xterm"
 msgstr "컬러 Xterm"
 
-#: gnome-terminal/gnome-terminal.c:749
+#: gnome-terminal/gnome-terminal.c:752
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:754
+#: gnome-terminal/gnome-terminal.c:757
 msgid "White on black"
 msgstr "검은 배경에 흰글자"
 
-#: gnome-terminal/gnome-terminal.c:755
+#: gnome-terminal/gnome-terminal.c:758
 msgid "Black on white"
 msgstr "흰 배경에 검은 글자"
 
-#: gnome-terminal/gnome-terminal.c:756
+#: gnome-terminal/gnome-terminal.c:759
 msgid "Green on black"
 msgstr "검은 배경에 녹색 글자"
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:760
 msgid "Black on light yellow"
 msgstr "옅은 노란색 배경에 검은 글자"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:761
 msgid "Custom colors"
 msgstr "그 외의 색깔"
 
-#: gnome-terminal/gnome-terminal.c:763 panel/panel_config.c:308
+#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:306
 msgid "Left"
 msgstr "왼쪽"
 
-#: gnome-terminal/gnome-terminal.c:764 panel/panel_config.c:319
+#: gnome-terminal/gnome-terminal.c:767 panel/panel_config.c:317
 msgid "Right"
 msgstr "오른쪽"
 
-#: gnome-terminal/gnome-terminal.c:765
+#: gnome-terminal/gnome-terminal.c:768
 msgid "Hidden"
 msgstr "숨김"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:877
+#: gnome-terminal/gnome-terminal.c:880
 msgid "Font:"
 msgstr "글꼴:"
 
-#: gnome-terminal/gnome-terminal.c:897
+#: gnome-terminal/gnome-terminal.c:900
 msgid "Browse..."
 msgstr " 찾아보기... "
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:905
+#: gnome-terminal/gnome-terminal.c:908
 msgid "Terminal Class"
 msgstr "터미널 class"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:933
+#: gnome-terminal/gnome-terminal.c:936
 msgid "Blinking cursor"
 msgstr "깜빡이는 커서"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:942
+#: gnome-terminal/gnome-terminal.c:945
 msgid "Hide menu bar"
 msgstr "메뉴바 숨기기"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:951
+#: gnome-terminal/gnome-terminal.c:954
 msgid "Silence Terminal bell"
 msgstr "터미널 삑소리 없애기"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:960
+#: gnome-terminal/gnome-terminal.c:963
 msgid "Swap DEL/Backspace"
 msgstr "DEL/Backspace 뒤 바꾸기"
 
-#: gnome-terminal/gnome-terminal.c:974
+#: gnome-terminal/gnome-terminal.c:977
 msgid "Image"
 msgstr "그림"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:978
+#: gnome-terminal/gnome-terminal.c:981
 msgid "Background pixmap"
 msgstr "배경 그림"
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:987
+#: gnome-terminal/gnome-terminal.c:990
 msgid "Pixmap file:"
 msgstr "그림 파일:"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1002
+#: gnome-terminal/gnome-terminal.c:1005
 msgid "Transparent"
 msgstr "투명하게"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1011
+#: gnome-terminal/gnome-terminal.c:1014
 msgid "Background should be shaded (slow)"
 msgstr "배경에 그늘을 지도록 한다 (느려짐)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1025
+#: gnome-terminal/gnome-terminal.c:1028
 msgid "Color palette:"
 msgstr "색깔 파레트:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1035
+#: gnome-terminal/gnome-terminal.c:1038
 msgid "Foreground color:"
 msgstr "전경색:"
 
-#: gnome-terminal/gnome-terminal.c:1044
+#: gnome-terminal/gnome-terminal.c:1047
 msgid "Background color:"
 msgstr "배경색:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1056
+#: gnome-terminal/gnome-terminal.c:1059
 msgid "Colors:"
 msgstr "색깔:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1072
+#: gnome-terminal/gnome-terminal.c:1075
 msgid "Scrollbar position"
 msgstr "스크롤바 위치"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1083
+#: gnome-terminal/gnome-terminal.c:1086
 msgid "Scrollback lines"
 msgstr "스크롤할 수 있는 줄수"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1095
+#: gnome-terminal/gnome-terminal.c:1098
 msgid "Scroll on keystroke"
 msgstr "키입력이 들어올 경우 스크롤"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1104
+#: gnome-terminal/gnome-terminal.c:1107
 msgid "Scroll on output"
 msgstr "출력이 있을 경우 스크롤"
 
-#: gnome-terminal/gnome-terminal.c:1133
+#: gnome-terminal/gnome-terminal.c:1136
 msgid "Color selector"
 msgstr "색깔 선택"
 
-#: gnome-terminal/gnome-terminal.c:1179
+#: gnome-terminal/gnome-terminal.c:1182
 msgid "_Hide menubar"
 msgstr "메뉴바 숨기기(_H)"
 
-#: gnome-terminal/gnome-terminal.c:1180
+#: gnome-terminal/gnome-terminal.c:1183
 msgid "_Show menubar"
 msgstr "메뉴바 보이기(_S)"
 
-#: gnome-terminal/gnome-terminal.c:1193
+#: gnome-terminal/gnome-terminal.c:1196
 msgid "Terminal"
 msgstr "터미널"
 
-#: gnome-terminal/gnome-terminal.c:1194 help-browser/window.c:206
-msgid "Help"
-msgstr "도움말"
-
-#: gnome-terminal/gnome-terminal.c:1746
+#: gnome-terminal/gnome-terminal.c:1787
 msgid "Terminal class name"
 msgstr "터미널 class 이름"
 
-#: gnome-terminal/gnome-terminal.c:1746
+#: gnome-terminal/gnome-terminal.c:1787
 msgid "CLASS"
 msgstr "CLASS"
 
-#: gnome-terminal/gnome-terminal.c:1749
+#: gnome-terminal/gnome-terminal.c:1790
 msgid "Specifies font name"
 msgstr "폰트 이름 지정"
 
-#: gnome-terminal/gnome-terminal.c:1749
+#: gnome-terminal/gnome-terminal.c:1790
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:1752
+#: gnome-terminal/gnome-terminal.c:1793
 msgid "Do not start up shells as logins shells"
 msgstr "로긴셸을 실행하지 않는다"
 
-#: gnome-terminal/gnome-terminal.c:1755
+#: gnome-terminal/gnome-terminal.c:1796
 msgid "Start up shells as logins shells"
 msgstr "로긴셸을 실행한다"
 
-#: gnome-terminal/gnome-terminal.c:1758
+#: gnome-terminal/gnome-terminal.c:1799
 msgid "Specifies the geometry for the main window"
 msgstr "주 윈도우의 위치,크기 지정"
 
-#: gnome-terminal/gnome-terminal.c:1758 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1799 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:1761
+#: gnome-terminal/gnome-terminal.c:1802
 msgid "Execute this program instead of a shell"
 msgstr "셸 대신에 프로그램을 실행한다"
 
-#: gnome-terminal/gnome-terminal.c:1761
+#: gnome-terminal/gnome-terminal.c:1802
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: gnome-terminal/gnome-terminal.c:1764
+#: gnome-terminal/gnome-terminal.c:1805
 msgid "Foreground color"
 msgstr "전경색"
 
-#: gnome-terminal/gnome-terminal.c:1764 gnome-terminal/gnome-terminal.c:1767
+#: gnome-terminal/gnome-terminal.c:1805 gnome-terminal/gnome-terminal.c:1808
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:1767 panel/panel_config.c:753
+#: gnome-terminal/gnome-terminal.c:1808 panel/panel_config.c:751
 msgid "Background color"
 msgstr "배경색"
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1811
 msgid "Update utmp/wtmp entries"
 msgstr "utmp/wtmp 항목 갱신"
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1811
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:1773
+#: gnome-terminal/gnome-terminal.c:1814
 msgid "Do not update utmp/wtmp entries"
 msgstr "utmp/wtmp 항목 생신하지 않음"
 
-#: gnome-terminal/gnome-terminal.c:1773
+#: gnome-terminal/gnome-terminal.c:1814
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
@@ -2004,7 +2022,7 @@ msgid "Games"
 msgstr "게임"
 
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:574
+#: panel/panel_config_global.c:571
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -2249,71 +2267,71 @@ msgstr ""
 msgid "Ok"
 msgstr "확인"
 
-#: panel/applet.c:269
+#: panel/applet.c:271
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:296
+#: panel/applet.c:298
 msgid "Remove from panel"
 msgstr "패널에서 삭제"
 
-#: panel/applet.c:303
+#: panel/applet.c:305
 msgid "Move applet"
 msgstr "애플릿 이동"
 
-#: panel/drawer.c:120
+#: panel/drawer.c:119
 msgid "Tooltip/Name"
 msgstr "툴팁 보여주기"
 
-#: panel/drawer.c:124
+#: panel/drawer.c:123
 msgid "Icon"
 msgstr "아이콘"
 
-#: panel/drawer.c:128
+#: panel/drawer.c:127
 msgid "Applet appearance"
 msgstr "애플릿 겉모습"
 
-#: panel/drawer.c:135
+#: panel/drawer.c:134
 msgid "Drawer handle"
 msgstr "Drawer 관련"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:139
+#: panel/drawer.c:138
 msgid "Enable hidebutton"
 msgstr "버튼 숨기기 나타냄"
 
-#: panel/drawer.c:149
+#: panel/drawer.c:148
 msgid "Enable hidebutton arrow"
 msgstr "버튼 숨기기 화살표 나타냄"
 
-#: panel/drawer.c:169
+#: panel/drawer.c:168
 msgid "Drawer"
 msgstr "Drawer"
 
-#: panel/launcher.c:114
+#: panel/launcher.c:113
 msgid "App"
 msgstr "프로그램"
 
-#: panel/launcher.c:204
+#: panel/launcher.c:202
 msgid "Launcher properties"
 msgstr "Launcher 속성"
 
-#: panel/launcher.c:289
+#: panel/launcher.c:287
 msgid "Create launcher applet"
 msgstr "삼킴 애플릿 만들기"
 
 #. Logout frame
-#: panel/logout.c:26 panel/menu.c:1705 panel/menu.c:1985
-#: panel/panel_config_global.c:486
+#: panel/logout.c:26 panel/menu.c:1694 panel/menu.c:1974
+#: panel/panel_config_global.c:485
 msgid "Log out"
 msgstr "로그아웃"
 
-#: panel/main.c:71
+#: panel/main.c:75
 msgid "Discard session"
 msgstr "세션 버리기"
 
-#: panel/main.c:72
+#: panel/main.c:76
 msgid "ID"
 msgstr "ID"
 
@@ -2329,423 +2347,449 @@ msgstr ""
 "이 프로그램은 다른 프로그램을 실행하고, 내부에 작은 애플릿들을 포함하고, "
 "세계 평화와 더불어 X가 무단종료될 경우에 대해 책임이 있습니다."
 
-#: panel/menu.c:327 panel/menu.c:363
+#: panel/menu.c:327 panel/menu.c:362
 msgid "Desktop entry properties"
 msgstr "데스크탑 항목 속성"
 
-#: panel/menu.c:427
+#: panel/menu.c:426
 msgid "Add this launcher to panel"
 msgstr "launcher를 패널에 추가"
 
-#: panel/menu.c:435
+#: panel/menu.c:434
 msgid "Add this as drawer to panel"
 msgstr "drawer로 패널에 추가"
 
-#: panel/menu.c:443
+#: panel/menu.c:442
 msgid "Add this as menu to panel"
 msgstr "메뉴로 패널에 추가"
 
-#: panel/menu.c:468
+#: panel/menu.c:467
 msgid "Properties ..."
 msgstr "속성..."
 
-#: panel/menu.c:658 panel/menu.c:729
+#: panel/menu.c:657 panel/menu.c:728
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:859
+#: panel/menu.c:858
 msgid "Can't get goad_id from desktop entry!"
 msgstr "데스크탑 항목에서 goad_id를 얻을 수 없음!"
 
-#: panel/menu.c:1178 panel/menu.c:2853
+#: panel/menu.c:1171 panel/menu.c:2817
 msgid "Menu"
 msgstr "메뉴"
 
-#: panel/menu.c:1451
+#: panel/menu.c:1440
 msgid "Applets"
 msgstr "애플릿"
 
-#: panel/menu.c:1578 panel/panel_config.c:879
+#: panel/menu.c:1567 panel/panel_config.c:877
 msgid "Edge panel"
 msgstr "구석 패널"
 
-#: panel/menu.c:1585 panel/panel_config.c:885
+#: panel/menu.c:1574 panel/panel_config.c:883
 msgid "Corner panel"
 msgstr "코너 패널"
 
-#: panel/menu.c:1604 panel/menu.c:1608 panel/menu.c:1651 panel/menu.c:2375
+#: panel/menu.c:1593 panel/menu.c:1597 panel/menu.c:1640 panel/menu.c:2320
 msgid "System menus"
 msgstr "시스템 메뉴"
 
-#: panel/menu.c:1660 panel/menu.c:1662 panel/menu.c:2353 panel/menu.c:2386
-#: panel/menu.c:2389
+#: panel/menu.c:1649 panel/menu.c:1651 panel/menu.c:2297 panel/menu.c:2331
+#: panel/menu.c:2334
 msgid "User menus"
 msgstr "사용자 메뉴"
 
-#: panel/menu.c:1670 panel/menu.c:1672 panel/menu.c:2323 panel/menu.c:2359
-#: panel/menu.c:2401 panel/menu.c:2411
-msgid "RedHat menus"
+#: panel/menu.c:1659 panel/menu.c:1661 panel/menu.c:2267 panel/menu.c:2304
+#: panel/menu.c:2346 panel/menu.c:2356
+#, fuzzy
+msgid "Red Hat menus"
 msgstr "RedHat 메뉴"
 
-#: panel/menu.c:1690
+#: panel/menu.c:1679
 msgid "Remove this panel"
 msgstr "패널에서 삭제"
 
-#: panel/menu.c:1830
+#: panel/menu.c:1819
 msgid "Add applet"
 msgstr "애플릿 추가"
 
-#: panel/menu.c:1839
+#: panel/menu.c:1828
 msgid "Add new panel"
 msgstr "패널에 추가"
 
-#: panel/menu.c:1847
+#: panel/menu.c:1836
 msgid "Convert to corner panel"
 msgstr "코너 패널로 바꾸기"
 
-#: panel/menu.c:1855
+#: panel/menu.c:1844
 msgid "Convert to edge panel"
 msgstr "구석 패널로 바꾸기"
 
-#: panel/menu.c:1867
+#: panel/menu.c:1856
 msgid "Add main menu"
 msgstr "주 메뉴 추가"
 
-#: panel/menu.c:1874
+#: panel/menu.c:1863
 msgid "Add drawer"
 msgstr "Drawer 추가"
 
-#: panel/menu.c:1882
+#: panel/menu.c:1871
 msgid "Add log out button"
 msgstr "로그아웃 버튼 추가"
 
-#: panel/menu.c:1890
+#: panel/menu.c:1879
 msgid "Add swallowed app"
 msgstr "삼킬 프로그램 추가"
 
-#: panel/menu.c:1896
+#: panel/menu.c:1885
 msgid "Add new launcher"
 msgstr "새로운 launcher 추가"
 
-#: panel/menu.c:1907
+#: panel/menu.c:1896
 msgid "This panel properties..."
 msgstr "패널 속성..."
 
-#: panel/menu.c:1917
+#: panel/menu.c:1906
 msgid "Global properties..."
 msgstr "전체 속성..."
 
-#: panel/menu.c:1945
+#: panel/menu.c:1934
 msgid "Panel"
 msgstr "패널"
 
-#: panel/menu.c:1952
+#: panel/menu.c:1941
 msgid "Lock screen"
 msgstr "화면 잠금"
 
-#: panel/menu.c:1973
+#: panel/menu.c:1962
 msgid "About GNOME..."
 msgstr "GNOME은..."
 
-#: panel/menu.c:2606
+#: panel/menu.c:2571
 msgid "Can't open directory, using main menu!"
 msgstr "디렉토리를 열수 없어서, 메인 메뉴를 사용합니다!"
 
-#: panel/menu.c:2736
+#: panel/menu.c:2700
 msgid "In a submenu"
 msgstr "서브메뉴에서"
 
-#: panel/menu.c:2748
+#: panel/menu.c:2712
 msgid "On the main menu"
 msgstr "주 메뉴에서"
 
-#: panel/menu.c:2770
+#: panel/menu.c:2734
 msgid "Menu properties"
 msgstr "메뉴 속성"
 
-#: panel/menu.c:2777
+#: panel/menu.c:2741
 msgid "Menu type"
 msgstr "메뉴 타입"
 
-#: panel/menu.c:2784 panel/menu.c:2804
+#: panel/menu.c:2748 panel/menu.c:2768
 msgid "Main menu"
 msgstr "주 메뉴"
 
-#: panel/menu.c:2795 panel/menu.c:2827
+#: panel/menu.c:2759 panel/menu.c:2791
 msgid "Normal menu"
 msgstr "보통 메뉴"
 
-#: panel/menu.c:2815
+#: panel/menu.c:2779
 msgid "System menu: "
 msgstr "시스템 메뉴:"
 
-#: panel/menu.c:2819
+#: panel/menu.c:2783
 msgid "User menu: "
 msgstr "사용자 메뉴: "
 
-#: panel/menu.c:2823
-msgid "RedHat menu (if found): "
+#: panel/menu.c:2787
+#, fuzzy
+msgid "Red Hat menu (if found): "
 msgstr "레드햇 메뉴 (있다면): "
 
-#: panel/menu.c:2837
+#: panel/menu.c:2801
 msgid "Menu path"
 msgstr "메뉴 경로"
 
 #. Position frame
-#: panel/panel_config.c:273 panel/panel_config.c:445
+#: panel/panel_config.c:271 panel/panel_config.c:443
 msgid "Position"
 msgstr "위치"
 
 #. Top Position
-#: panel/panel_config.c:286
+#: panel/panel_config.c:284
 msgid "Top"
 msgstr "위"
 
-#: panel/panel_config.c:297
+#: panel/panel_config.c:295
 msgid "Bottom"
 msgstr "아래"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:347
+#: panel/panel_config.c:345
 msgid "Minimize options"
 msgstr "최소화 옵션"
 
 #. Auto-hide
-#: panel/panel_config.c:358
+#: panel/panel_config.c:356
 msgid "Auto hide"
 msgstr "자동으로 숨기기"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:369 panel/panel_config.c:570
+#: panel/panel_config.c:367 panel/panel_config.c:568
 msgid "Enable hidebuttons"
 msgstr "숨기는 버튼 나타냄"
 
 #. Arrow enable
-#: panel/panel_config.c:380 panel/panel_config.c:581
+#: panel/panel_config.c:378 panel/panel_config.c:579
 msgid "Enable hidebutton arrows"
 msgstr "버튼 숨기기 화살표 나타냄"
 
 #. North East Position
-#: panel/panel_config.c:458
+#: panel/panel_config.c:456
 msgid "North east"
 msgstr "북동"
 
-#: panel/panel_config.c:469
+#: panel/panel_config.c:467
 msgid "South west"
 msgstr "남서"
 
-#: panel/panel_config.c:480
+#: panel/panel_config.c:478
 msgid "North west"
 msgstr "북서"
 
-#: panel/panel_config.c:491
+#: panel/panel_config.c:489
 msgid "South east"
 msgstr "남동"
 
 #. Orientation frame
-#: panel/panel_config.c:523
+#: panel/panel_config.c:521
 msgid "Orientation"
 msgstr "방향"
 
 #. Horizontal
-#: panel/panel_config.c:534
+#: panel/panel_config.c:532
 msgid "Horizontal"
 msgstr "수평"
 
-#: panel/panel_config.c:547
+#: panel/panel_config.c:545
 msgid "Vertical"
 msgstr "수직"
 
 #. Hidebuttons frame
-#: panel/panel_config.c:558
+#: panel/panel_config.c:556
 msgid "Hidebutton options"
 msgstr "숨김버튼 선택사항"
 
 #. selector frame
-#: panel/panel_config.c:678 panel/panel_config.c:898
+#: panel/panel_config.c:676 panel/panel_config.c:896
 msgid "Background"
 msgstr "배경"
 
 #. standard background
-#: panel/panel_config.c:688
+#: panel/panel_config.c:686
 msgid "Standard"
 msgstr "표준"
 
-#: panel/panel_config.c:696
+#: panel/panel_config.c:694
 msgid "Pixmap"
 msgstr "픽스맵"
 
-#: panel/panel_config.c:704
+#: panel/panel_config.c:702
 msgid "Color"
 msgstr "색상"
 
 #. image frame
-#: panel/panel_config.c:710
+#: panel/panel_config.c:708
 msgid "Image file"
 msgstr "그림 파일"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:737
 msgid "Scale image to fit panel"
 msgstr "패널 크기에 맞게 그림 크기를 조정"
 
-#: panel/panel_config.c:868
+#: panel/panel_config.c:866
 msgid "Panel properties"
 msgstr "패널 속성"
 
 #. Animation enable
-#: panel/panel_config_global.c:193
+#: panel/panel_config_global.c:192
 msgid "Enable animations"
 msgstr "애니메이션 사용하기"
 
 #. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:201
+#: panel/panel_config_global.c:200
 msgid "Auto-hide animation speed"
 msgstr "자동숨기기 애니매이션 속도"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:212
+#: panel/panel_config_global.c:211
 msgid "Explicit-hide animation speed"
 msgstr "수동숨기기 애니매이션 속도"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/panel_config_global.c:223
+#: panel/panel_config_global.c:222
 msgid "Drawer animation speed"
 msgstr "Drawer 애니매이션 속도"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:234
+#: panel/panel_config_global.c:233
 msgid "Auto-hide minimize delay (ms)"
 msgstr "자동숨기기 작아지는 시간 (천분의 일초)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:241
+#: panel/panel_config_global.c:240
 msgid "Auto-hide minimized size (pixels)"
 msgstr "자동숨기기 작아지는 크기 (픽셀)"
 
 #. Enable tiles frame
-#: panel/panel_config_global.c:309 panel/panel_config_global.c:337
+#: panel/panel_config_global.c:308 panel/panel_config_global.c:336
 msgid "Tiles enabled"
 msgstr "타일 사용"
 
 #. Image frame
-#: panel/panel_config_global.c:347
+#: panel/panel_config_global.c:346
 msgid "Image files"
 msgstr "그림 파일"
 
-#: panel/panel_config_global.c:360
+#: panel/panel_config_global.c:359
 msgid "Tile filename (up)"
 msgstr "타일 파일이름 (위)"
 
-#: panel/panel_config_global.c:364
+#: panel/panel_config_global.c:363
 msgid "Tile filename (down)"
 msgstr "타일 파일이름 (아래)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:371
+#: panel/panel_config_global.c:370
 msgid "Border width (tile only)"
 msgstr "경계선 두께 (타일의 경우)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:379
+#: panel/panel_config_global.c:378
 msgid "Depth (displacement when pressed)"
 msgstr "깊이 (눌렀을 때 이동하는 정도)"
 
 #. Tooltips frame
-#: panel/panel_config_global.c:401
+#: panel/panel_config_global.c:400
 msgid "Tooltips"
 msgstr "아이콘 툴팁"
 
 #. Tooltips enable
-#: panel/panel_config_global.c:412
+#: panel/panel_config_global.c:411
 msgid "Tooltips enabled"
 msgstr "툴팁 보여주기"
 
 #. Menu frame
-#: panel/panel_config_global.c:422
+#: panel/panel_config_global.c:421
 msgid "Menus"
 msgstr "메뉴"
 
 #. Small Icons
-#: panel/panel_config_global.c:433
+#: panel/panel_config_global.c:432
 msgid "Show small icons"
 msgstr "작은 아이콘 보여주기"
 
 #. Dot Buttons
-#: panel/panel_config_global.c:443
+#: panel/panel_config_global.c:442
 msgid "Show ... buttons"
 msgstr "보이기 ... 버튼"
 
 #. Movement frame
-#: panel/panel_config_global.c:453
+#: panel/panel_config_global.c:452
 msgid "Movement"
 msgstr "이동"
 
 #. Switched
-#: panel/panel_config_global.c:464
+#: panel/panel_config_global.c:463
 msgid "Switched movement"
 msgstr "바꾸기 이동"
 
-#: panel/panel_config_global.c:476
+#: panel/panel_config_global.c:475
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "자유로운 이동 (다른 애플릿을 고정시켜 둠)"
 
 #. Prompt before log out
-#: panel/panel_config_global.c:497
+#: panel/panel_config_global.c:496
 msgid "Prompt before logout"
 msgstr "로그아웃 전에 물어보기"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:507
+#: panel/panel_config_global.c:506
 msgid "Applet padding"
 msgstr "애플릿 사이의 간격"
 
-#: panel/panel_config_global.c:523
+#: panel/panel_config_global.c:522
 msgid "Launcher icon"
 msgstr "Launcher 아이콘"
 
-#: panel/panel_config_global.c:524
+#: panel/panel_config_global.c:523
 msgid "Drawer icon"
 msgstr "Drawer 아이콘"
 
-#: panel/panel_config_global.c:525
+#: panel/panel_config_global.c:524
 msgid "Menu icon"
 msgstr "메뉴 아이콘"
 
-#: panel/panel_config_global.c:546
+#: panel/panel_config_global.c:543
 msgid "Global panel configuration"
 msgstr "전체 패널 설정"
 
-#: panel/panel_config_global.c:554
+#: panel/panel_config_global.c:551
 msgid "Animation"
 msgstr "애니메이션"
 
-#: panel/panel_config_global.c:560
+#: panel/panel_config_global.c:557
 msgid "General icon settings"
 msgstr "일반 아이콘 설정"
 
-#: panel/session.c:646
+#: panel/session.c:650
 msgid "Really log out?"
 msgstr "정말로 로그아웃하겠습니까?"
 
-#: panel/session.c:660
+#: panel/session.c:665
 msgid "Ask next time"
 msgstr "다음에도 물어보기"
 
-#: panel/swallow.c:210
+#: panel/swallow.c:208
 msgid "Create swallow applet"
 msgstr "삼킴 애플릿 만들기"
 
-#: panel/swallow.c:220
+#: panel/swallow.c:218
 msgid "Title of application to swallow"
 msgstr "삼킬 응용 프로그램의 이름"
 
-#: panel/swallow.c:231
+#: panel/swallow.c:229
 msgid "Command (optional)"
 msgstr "명령 (선택사항)"
 
-#: panel/swallow.c:255
+#: panel/swallow.c:253
 msgid "Height"
 msgstr "높이"
+
+#~ msgid "Active Dekstop Color"
+#~ msgstr "Active 데스크탑 색깔"
+
+#~ msgid "Help & About..."
+#~ msgstr "도움말 & 이 프로그램은..."
+
+#~ msgid "CPULoad Settings"
+#~ msgstr "CPULoad 설정"
+
+#~ msgid "Used Memory"
+#~ msgstr "사용중인 메모리"
+
+#~ msgid "Buffered Memory"
+#~ msgstr "Buffered 메모리"
+
+#~ msgid "Cached Memory"
+#~ msgstr "캐쉬 메모리"
+
+#~ msgid "MemLoad Settings"
+#~ msgstr "MemLoad 설정"
+
+#~ msgid "Used Swap"
+#~ msgstr "사용중인 swap"
 
 #~ msgid "RedHat menu"
 #~ msgstr "RedHat 메뉴"
