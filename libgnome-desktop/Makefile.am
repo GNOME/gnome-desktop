@@ -35,7 +35,8 @@ libgnome_desktop_2_la_LIBADD = \
 	$(GNOME_DESKTOP_LIBS)
 
 libgnome_desktop_2_la_LDFLAGS = \
-	-version-info $(LT_VERSION)
+	-version-info $(LT_VERSION) \
+	-no-undefined
 
 test_ditem_SOURCES = \
 	test-ditem.c

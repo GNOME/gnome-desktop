@@ -1,3 +1,12 @@
+2003-05-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* configure.in: call AC_LIBTOOL_WIN32_DLL which is necessary for
+	building shared library on win32 platform.
+
+	* libgnome-desktop/Makefile.am (libgnome_desktop_2_la_LDFLAGS):
+	add -no-undefined which is necessary for building shared library
+	on some platforms (e.g. Win32 and BeOS).
+
 2003-05-13  Mark McLoughlin  <mark@skynet.ie>
 
 	* pixmaps/Makefile.am:
