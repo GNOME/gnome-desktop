@@ -1,4 +1,5 @@
 pixmapdir = $(datadir)/pixmaps
+tilesdir = $(datadir)/pixmaps/tiles
 
 BITMAPS     = \
 	emacs.png				\
@@ -62,14 +63,18 @@ BITMAPS     = \
 	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
+	panel-menu-main.xpm
+
+TILES     = \
 	tile-normal-up.png			\
 	tile-normal-down.png			\
 	tile-purple-up.png			\
 	tile-purple-down.png			\
 	tile-green-up.png			\
-	tile-green-down.png			\
-	panel-menu-main.xpm
+	tile-green-down.png
 
 pixmap_DATA = $(BITMAPS)
 
-EXTRA_DIST  = $(BITMAPS)
+tiles_DATA = $(TILES)
+
+EXTRA_DIST  = $(BITMAPS) $(TILES)
