@@ -31,7 +31,7 @@ GnomeDesktopItem *gnome_desktop_item_copy (const GnomeDesktopItem *item); /* dee
 void gnome_desktop_item_ref (GnomeDesktopItem *item);
 void gnome_desktop_item_unref (GnomeDesktopItem *item);
 
-void gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **argv);
+int gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **argv);
 
 gboolean gnome_desktop_item_exists (const GnomeDesktopItem *item);
 GnomeDesktopItemFlags gnome_desktop_item_get_flags (const GnomeDesktopItem *item);

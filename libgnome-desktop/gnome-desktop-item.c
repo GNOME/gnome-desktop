@@ -42,7 +42,7 @@ ditem_dump(const GnomeDesktopItem *ditem, int indent_level)
   for(i = 0; i < indent_level; i++)
     g_print(" ");
 
-  g_print("%s (%s)\n", ditem->name?g_hash_table_lookup(ditem->name, "en"):"ZOT", ditem->icon_path);
+  g_print("%s (%s)\n", ditem->name?g_hash_table_lookup(ditem->name, "C"):"ZOT", ditem->icon_path);
   g_slist_foreach(ditem->subitems, (GFunc)ditem_dump, GINT_TO_POINTER(indent_level + 3));
 }
 #endif
@@ -50,7 +50,10 @@ ditem_dump(const GnomeDesktopItem *ditem, int indent_level)
 /**
  * gnome_desktop_item_new:
  *
- * Creates a blank GnomeDesktopItem structure */
+ * Creates a GnomeDesktopItem object. The reference count on the returned value is set to '1'.
+ *
+ * Returns: The new GnomeDesktopItem
+ */
 GnomeDesktopItem *
 gnome_desktop_item_new(void)
 {
@@ -69,6 +72,14 @@ ditem_copy_key_value(gpointer key, gpointer value, gpointer user_data)
   g_hash_table_insert(user_data, g_strdup(key), g_strdup(value));
 }
 
+/**
+ * gnome_desktop_item_copy:
+ * @item: The item to be copied
+ *
+ * Creates a copy of a GnomeDesktopItem
+ *
+ * Returns: The new copy 
+ */
 GnomeDesktopItem *
 gnome_desktop_item_copy (const GnomeDesktopItem *item)
 {
@@ -134,8 +145,15 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
   iter = gnome_config_init_iterator(confpath);
   while((iter = gnome_config_iterator_next(iter, &key, &value)))
     {
+      if(!*key || !*value)
+	{
+	  g_free(key);
+	  g_free(value);
+	  continue;
+	}
+
       if(!strcmp(key, "Name")) {
-	g_hash_table_insert(retval->name, g_strdup("en"), value);
+	g_hash_table_insert(retval->name, g_strdup("C"), value);
       } else if(!strncmp(key, "Name[", 5)) {
 	char *mylang, *ctmp;
 
@@ -146,7 +164,7 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
 	g_hash_table_insert(retval->name, g_strdup(mylang), value);
 	g_free(key);
       } else if(!strcmp(key, "Comment")) {
-	g_hash_table_insert(retval->comment, g_strdup("en"), value);
+	g_hash_table_insert(retval->comment, g_strdup("C"), value);
       } else if(!strncmp(key, "Comment[", strlen("Comment["))) {
 	char *mylang, *ctmp;
 
@@ -188,6 +206,8 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
       && !(retval->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY))
     {
       char *tryme;
+      /* We don't use gnome_desktop_item_exists() here because it is more thorough than the TryExec stuff
+	 which GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS specifies */
 
       if(!retval->exec)
 	goto errout;
@@ -225,8 +245,15 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
   iter = gnome_config_init_iterator(confpath);
   while((iter = gnome_config_iterator_next(iter, &key, &value)))
     {
+      if(!*key || !*value)
+	{
+	  g_free(key);
+	  g_free(value);
+	  continue;
+	}
+
       if(!strcmp(key, "Name")) {
-	g_hash_table_insert(retval->name, g_strdup("en"), value);
+	g_hash_table_insert(retval->name, g_strdup("C"), value);
       } else if(!strncmp(key, "Name[", 5)) {
 	char *mylang, *ctmp;
 
@@ -237,7 +264,7 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
 	g_hash_table_insert(retval->name, g_strdup(mylang), value);
 	g_free(key);
       } else if(!strcmp(key, "Comment")) {
-	g_hash_table_insert(retval->comment, g_strdup("en"), value);
+	g_hash_table_insert(retval->comment, g_strdup("C"), value);
       } else if(!strncmp(key, "Comment[", strlen("Comment["))) {
 	char *mylang, *ctmp;
 
@@ -266,11 +293,8 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
 
 	g_free(key);
 	g_free(value);
-      } else if(*key && *value) {
-	g_hash_table_insert(retval->other_attributes, key, value);
       } else {
-	g_free(key);
-	g_free(value);
+	g_hash_table_insert(retval->other_attributes, key, value);
       }
     }
 
@@ -339,6 +363,17 @@ string_in_array(const char *str, char **array)
   return FALSE;
 }
 
+/**
+ * gnome_desktop_item_new_from_file:
+ * @file: The filename or directory path to load the GnomeDesktopItem from
+ * @flags: Flags to influence the loading process
+ *
+ * This function loads 'file' and turns it into a GnomeDesktopItem.
+ * If 'file' is a directory, it loads all the items under that
+ * directory as subitems of the directory's GnomeDesktopItem.
+ *
+ * Returns: The newly loaded item.
+ */
 GnomeDesktopItem *
 gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags flags)
 {
@@ -482,6 +517,12 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
   return retval;
 }
 
+/**
+ * gnome_desktop_item_ref:
+ * @item: A desktop item
+ *
+ * Increases the reference count of the specified item.
+ */
 void
 gnome_desktop_item_ref (GnomeDesktopItem *item)
 {
@@ -498,6 +539,12 @@ ditem_free_key_value(gpointer key, gpointer value, gpointer user_data)
   return TRUE;
 }
 
+/**
+ * gnome_desktop_item_ref:
+ * @item: A desktop item
+ *
+ * Decreases the reference count of the specified item, and destroys the item if there are no more references left.
+ */
 void
 gnome_desktop_item_unref (GnomeDesktopItem *item)
 {
@@ -538,7 +585,18 @@ gnome_desktop_item_unref (GnomeDesktopItem *item)
   g_free(item);
 }
 
-void
+/**
+ * gnome_desktop_item_launch:
+ * @item: A desktop item
+ * @argc: An optional count of arguments to be added to the arguments defined.
+ * @argv: An optional argument array, of length 'argc', to be appended
+ *        to the command arguments specified in 'item'. Can be NULL.
+ *
+ * This function runs the program listed in the specified 'item', optionally appending additional arguments
+ * to its command line.
+ *
+ * Returns: The value returned by gnome_execute_async() upon execution of the specified item.  */
+int
 gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **argv)
 {
   char **real_argv;
@@ -560,9 +618,15 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
   for(j = 0; j < argc; j++, i++)
     real_argv[i] = (char *)argv[j];
 
-  gnome_execute_async(NULL, real_argc, real_argv);
+  return gnome_execute_async(NULL, real_argc, real_argv);
 }
 
+/**
+ * gnome_desktop_item_exists:
+ * @item: A desktop item
+ *
+ * Returns: Whether the program specified by 'item' is available to run on the system.
+ */
 gboolean
 gnome_desktop_item_exists (const GnomeDesktopItem *item)
 {
@@ -573,13 +637,29 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
       char *tryme;
 
       tryme = g_hash_table_lookup(item->other_attributes, "TryExec");
-      if(tryme && !gnome_is_program_in_path(tryme))
-	return FALSE;
+      if(tryme)
+	{
+	  return gnome_is_program_in_path(tryme);
+	}
+    }
+
+  if(item->exec_length && item->exec)
+    {
+      if(item->exec[0][0] == PATH_SEP)
+	return g_file_exists(item->exec[0]);
+      else
+	return gnome_is_program_in_path(item->exec[0]);
     }
 
   return TRUE;
 }
 
+/**
+ * gnome_desktop_item_get_flags:
+ * @item: A desktop item
+ *
+ * Returns: The flags associated with the specified 'item'
+ */
 GnomeDesktopItemFlags
 gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
 {
@@ -588,6 +668,14 @@ gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
   return item->item_flags;
 }
 
+/**
+ * gnome_desktop_item_get_command:
+ * @item: A desktop item
+ * @argc: An optional pointer through which the number of arguments included in the command will be returned. May be NULL.
+ *
+ * Returns: The command associated with the specified 'item'. The returned memory remains owned by the GnomeDesktopItem
+ *          and should not be freed.
+ */
 const char **
 gnome_desktop_item_get_command (const GnomeDesktopItem *item, int *argc)
 {
@@ -599,6 +687,13 @@ gnome_desktop_item_get_command (const GnomeDesktopItem *item, int *argc)
   return (const char **)item->exec;
 }
 
+/**
+ * gnome_desktop_item_get_icon_path:
+ * @item: A desktop item
+ *
+ * Returns: The icon filename associated with the specified 'item'. The returned memory remains owned by the GnomeDesktopItem
+ *          and should not be freed.
+ */
 const char *
 gnome_desktop_item_get_icon_path (const GnomeDesktopItem *item)
 {
@@ -607,32 +702,62 @@ gnome_desktop_item_get_icon_path (const GnomeDesktopItem *item)
   return item->icon_path;
 }
 
+/**
+ * gnome_desktop_item_get_name:
+ * @item: A desktop item
+ * @language: The language translation for which the name should be returned. If NULL is passed, it defaults to "C".
+ *
+ * Returns: The human-readable name for the specified 'item', in the
+ *          specified 'language'. The returned memory remains owned by
+ *          the GnomeDesktopItem and should not be freed.
+ * */
 const char *
 gnome_desktop_item_get_name (const GnomeDesktopItem *item, const char *language)
 {
   g_return_val_if_fail(item, NULL);
 
   if(item->name)
-    return g_hash_table_lookup(item->name, language);
+    return g_hash_table_lookup(item->name, language?language:"C");
   else
     return NULL;
 }
 
+/**
+ * gnome_desktop_item_get_comment:
+ * @item: A desktop item
+ * @language: The language translation for which the comment should be returned. If NULL is passed, it defaults to "C".
+ *
+ * Returns: The human-readable comment for the specified 'item', in the
+ *          specified 'language'. The returned memory remains owned by
+ *          the GnomeDesktopItem and should not be freed.
+ *
+ */
 const char *
 gnome_desktop_item_get_comment (const GnomeDesktopItem *item, const char *language)
 {
   g_return_val_if_fail(item, NULL);
 
   if(item->comment)
-    return g_hash_table_lookup(item->comment, language);
+    return g_hash_table_lookup(item->comment, language?language:"C");
   else
     return NULL;
 }
 
+/**
+ * gnome_desktop_item_get_attribute:
+ * @item: A desktop item
+ * @attr_name: The language translation for which the comment should be returned.
+ *
+ * Returns: The value of the attribute 'attr_name' on the 'item'. The
+ *          returned memory remains owned by the GnomeDesktopItem and
+ *          should * not be freed.
+ *
+ */
 const char *
 gnome_desktop_item_get_attribute (const GnomeDesktopItem *item, const char *attr_name)
 {
   g_return_val_if_fail(item, NULL);
+  g_return_val_if_fail(attr_name, NULL);
 
   if(item->other_attributes)
     return g_hash_table_lookup(item->other_attributes, attr_name);
@@ -640,6 +765,13 @@ gnome_desktop_item_get_attribute (const GnomeDesktopItem *item, const char *attr
     return NULL;
 }
 
+/**
+ * gnome_desktop_item_get_subitems:
+ * @item: A desktop item
+ *
+ * Returns: A GSList of the items contained under 'item'. The returned value should not be freed.
+ *
+ */
 const GSList *
 gnome_desktop_item_get_subitems (const GnomeDesktopItem *item)
 {
@@ -656,6 +788,15 @@ ditem_add_key(gpointer key, gpointer value, gpointer user_data)
   *list = g_slist_prepend(*list, key);
 }
 
+/**
+ * gnome_desktop_item_get_languages:
+ * @item: A desktop item
+ *
+ * Returns: A GSList of the language name strings for the languages
+ * 'item'. The returned value should be freed, but its contents should
+ * not be.
+ *
+ */
 GSList *
 gnome_desktop_item_get_languages(const GnomeDesktopItem *item)
 {
@@ -671,6 +812,15 @@ gnome_desktop_item_get_languages(const GnomeDesktopItem *item)
   return retval;
 }
 
+/**
+ * gnome_desktop_item_get_attributes:
+ * @item: A desktop item
+ *
+ * Returns: A GSList of the attribute name strings for the attributes of
+ * 'item'. The returned value should be freed, but its contents should
+ * not be.
+ *
+ */
 GSList *
 gnome_desktop_item_get_attributes(const GnomeDesktopItem *item)
 {
@@ -688,6 +838,13 @@ gnome_desktop_item_get_attributes(const GnomeDesktopItem *item)
 
 /******* Set... ******/
 
+/**
+ * gnome_desktop_item_set_name:
+ * @item: A desktop item
+ * @language: The language for which to set the item name
+ * @name: The item's name in the specified 'language'
+ *
+ */
 void
 gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const char *name)
 {
@@ -708,6 +865,12 @@ gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const
   g_free(old_val);
 }
 
+/**
+ * gnome_desktop_item_set_command:
+ * @item: A desktop item
+ * @command: A NULL-terminated array of strings that specifies the command line associated with this item.
+ *
+ */
 void
 gnome_desktop_item_set_command (GnomeDesktopItem *item, const char **command)
 {
@@ -726,6 +889,12 @@ gnome_desktop_item_set_command (GnomeDesktopItem *item, const char **command)
     }
 }
 
+/**
+ * gnome_desktop_item_set_icon_path:
+ * @item: A desktop item
+ * @icon_path: A string specifying the path to the icon file for this item.
+ *
+ */
 void
 gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path)
 {
@@ -738,6 +907,13 @@ gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path)
     item->icon_path = NULL;
 }
 
+/**
+ * gnome_desktop_item_set_comment:
+ * @item: A desktop item
+ * @language: The language for which to set the item comment
+ * @comment: The item's comment in the specified 'language'
+ *
+ */
 void
 gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, const char *comment)
 {
@@ -757,6 +933,13 @@ gnome_desktop_item_set_comment (GnomeDesktopItem *item, const char *language, co
   g_free(old_val);
 }
 
+/**
+ * gnome_desktop_item_set_attribute:
+ * @item: A desktop item
+ * @attr_name: The name of the attribute
+ * @attr_value: The value of the attribute
+ *
+ */
 void
 gnome_desktop_item_set_attribute (GnomeDesktopItem *item, const char *attr_name, const char *attr_value)
 {
@@ -776,10 +959,17 @@ gnome_desktop_item_set_attribute (GnomeDesktopItem *item, const char *attr_name,
   g_free(old_val);
 }
 
+/**
+ * gnome_desktop_item_set_subitems:
+ * @item: A desktop item for a directory
+ * @subitems: A GSList of the items to be listed as children of this item. Ownership the 'subitems' list is transferred
+ *            from the application to the 'item'.
+ */
 void
 gnome_desktop_item_set_subitems (GnomeDesktopItem *item, GSList *subitems)
 {
   g_return_if_fail(item);
+  g_return_if_fail(item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY);
 
   g_slist_foreach(subitems, (GFunc)gnome_desktop_item_ref, NULL);
   g_slist_foreach(item->subitems, (GFunc)gnome_desktop_item_unref, NULL);
@@ -787,6 +977,11 @@ gnome_desktop_item_set_subitems (GnomeDesktopItem *item, GSList *subitems)
   item->subitems = subitems;
 }
 
+/**
+ * gnome_desktop_item_set_flags:
+ * @item: A desktop item
+ * @flags: The flags to be set
+ */
 void
 gnome_desktop_item_set_flags (GnomeDesktopItem *item, GnomeDesktopItemFlags flags)
 {
