@@ -82,7 +82,7 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Utilities.directory $(DESTDIR)$(Utilitiesdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Multimedia.directory $(DESTDIR)$(Multimediaodir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internet)/.directory
+	$(INSTALL_DATA) $(srcdir)/Multimedia.directory $(DESTDIR)$(Multimediadir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internetdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Settings.directory $(DESTDIR)$(Settingsdir)/.directory
