@@ -56,6 +56,10 @@ BITMAPS     = \
 	launcher-program.xpm			\
 	monitor.xpm				\
 	netscape3-small.xpm			\
+	gnome-menu-up.xpm			\
+	gnome-menu-down.xpm			\
+	gnome-menu-left.xpm			\
+	gnome-menu-right.xpm			\
 	panel-arrow-left.xpm			\
 	panel-arrow-right.xpm			\
 	panel-arrow-up.xpm			\
