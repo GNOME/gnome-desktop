@@ -292,7 +292,17 @@ label_new (const char *text)
         GtkWidget *label;
 
         label = gtk_label_new (text);
-        gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+        return label;
+}
+
+static GtkWidget *
+label_new_with_mnemonic (const char *text)
+{
+        GtkWidget *label;
+
+        label = gtk_label_new_with_mnemonic (text);
+        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
         return label;
 }
 
@@ -304,11 +314,11 @@ type_option_changed (GnomeDItemEdit *dee)
 	type = get_type_from_option (dee);
 	if (type != NULL &&
 	    strcmp (type, "Link") == 0 /* URL */)
-		gtk_label_set_text (GTK_LABEL (dee->_priv->exec_label),
-				    _("URL:"));
+		gtk_label_set_text_with_mnemonic (GTK_LABEL (dee->_priv->exec_label),
+				    _("_URL:"));
 	else
-		gtk_label_set_text (GTK_LABEL (dee->_priv->exec_label),
-				    _("Command:"));
+		gtk_label_set_text_with_mnemonic (GTK_LABEL (dee->_priv->exec_label),
+				    _("Co_mmand:"));
 }
 
 static GtkWidget *
@@ -324,15 +334,16 @@ make_easy_page (GnomeDItemEdit *dee)
 	GtkWidget *check_button;
 
         table = gtk_table_new (5, 2, FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-        gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-        gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
+        gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+        gtk_table_set_col_spacings (GTK_TABLE (table), 12);
 
 	/* Name */
-	label = label_new (_("Name:"));
+	label = label_new_with_mnemonic (_("_Name:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
 
 	entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
 
 	g_signal_connect_object (entry, "changed",
@@ -347,10 +358,11 @@ make_easy_page (GnomeDItemEdit *dee)
 	set_relation (dee->_priv->name_entry, GTK_LABEL (label));
 
 	/* Generic Name */
-	label = label_new (_("Generic name:"));
+	label = label_new_with_mnemonic (_("_Generic name:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
 
 	g_signal_connect_object (entry, "changed",
@@ -365,10 +377,11 @@ make_easy_page (GnomeDItemEdit *dee)
 	set_relation (dee->_priv->generic_name_entry, GTK_LABEL (label));
 
 	/* Comment */
-	label = label_new (_("Comment:"));
+	label = label_new_with_mnemonic (_("C_omment:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
 
 	entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 2, 3);
 
 	g_signal_connect_object (entry, "changed",
@@ -378,11 +391,12 @@ make_easy_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->comment_entry, GTK_LABEL (label));
 
-	label = label_new (_("Command:"));
+	label = label_new_with_mnemonic (_("Co_mmand:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
 	dee->_priv->exec_label = label;
 
 	entry = gnome_file_entry_new ("command", _("Browse"));
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 3, 4);
  
 	g_signal_connect_object (entry, "changed",
@@ -392,11 +406,12 @@ make_easy_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->exec_entry, GTK_LABEL (label));
 
-	label = label_new (_("Type:"));
+	label = label_new_with_mnemonic (_("_Type:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 4, 5);
 	dee->_priv->type_label = label;
 
 	dee->_priv->type_option = option = gtk_option_menu_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), option);
 	setup_option (dee, ALL_TYPES, NULL);
 
 	table_attach_entry (GTK_TABLE (table), option, 1, 2, 4, 5);
@@ -410,10 +425,10 @@ make_easy_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->type_option, GTK_LABEL (label));
 
-	label = label_new (_("Icon:"));
+	label = label_new_with_mnemonic (_("_Icon:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 5, 6);
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_BIG);
+	hbox = gtk_hbox_new (FALSE, 12);
 	gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 5, 6,
 			  GTK_EXPAND | GTK_FILL, 0, 0, 0); 
 
@@ -421,6 +436,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	 * handle that !!! */
         icon_entry = gnome_icon_entry_new (
 			"desktop-icon", _("Browse icons"));
+        gtk_label_set_mnemonic_widget (GTK_LABEL(label), icon_entry);
 
         g_signal_connect_swapped (icon_entry, "changed",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
@@ -435,7 +451,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	align = gtk_alignment_new (0.0, 0.5, 0.0, 0.0);
 	gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
 
-        check_button = gtk_check_button_new_with_label (_("Run in Terminal"));
+        check_button = gtk_check_button_new_with_mnemonic (_("Run in t_erminal"));
         g_signal_connect_swapped (check_button, "clicked",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
 
@@ -692,21 +708,21 @@ make_advanced_page (GnomeDItemEdit *dee)
 	GtkWidget *button;
 	GtkWidget *box;
 
-	vbox = gtk_vbox_new (FALSE, 5);
-        gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+	vbox = gtk_vbox_new (FALSE, 6);
+        gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
         table = gtk_table_new (2, 2, FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-        gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-        gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+        gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+        gtk_table_set_col_spacings (GTK_TABLE (table), 12);
 
         gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, 0);
 
-	label = label_new (_("Try this before using:"));
+	label = label_new_with_mnemonic (_("_Try this before using:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
 	dee->_priv->tryexec_label = label;
 
 	entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
 	g_signal_connect_swapped (entry, "changed",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
@@ -714,10 +730,11 @@ make_advanced_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->tryexec_entry, GTK_LABEL (label));
 
-	label = label_new (_("Documentation:"));
+	label = label_new_with_mnemonic (_("_Documentation:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
 	gtk_entry_set_max_length (GTK_ENTRY (entry), 255);        
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
 	g_signal_connect_swapped (entry, "changed",
@@ -726,15 +743,17 @@ make_advanced_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->doc_entry, GTK_LABEL (label));
 
-	label = gtk_label_new (_("Name/Comment translations:"));
+	label = gtk_label_new_with_mnemonic (_("_Name/Comment translations:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
 	dee->_priv->translations = setup_translations_list (dee);
 
 	box = gtk_scrolled_window_new (NULL, NULL);
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label),
+	                               dee->_priv->translations);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
-					     GTK_SHADOW_IN);
+					     GTK_SHADOW_NONE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
@@ -742,7 +761,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_container_add (GTK_CONTAINER (box), dee->_priv->translations);
 	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
 
-	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	box = gtk_hbox_new (FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
 
 	entry = gtk_entry_new ();
@@ -779,7 +798,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	set_tooltip (dee, GTK_WIDGET(entry), _("Comment"));
 	set_relation (dee->_priv->transl_comment_entry, GTK_LABEL (label));
 
-	button = gtk_button_new_with_label (_("Add/Set"));
+	button = gtk_button_new_with_mnemonic (_("_Add/Set"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_add), dee);
@@ -787,7 +806,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	set_tooltip (dee, GTK_WIDGET(button),
 		    _("Add or Set Name/Comment Translations"));
 
-	button = gtk_button_new_with_label (_("Remove"));
+	button = gtk_button_new_with_mnemonic (_("Re_move"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_remove), dee);
