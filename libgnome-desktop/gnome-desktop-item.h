@@ -61,6 +61,7 @@ GType gnome_desktop_item_get_type       (void);
 
 typedef struct _GnomeDesktopItem GnomeDesktopItem;
 
+/* standard */
 #define GNOME_DESKTOP_ITEM_ENCODING	"Encoding" /* string */
 #define GNOME_DESKTOP_ITEM_VERSION	"Version"  /* numeric */
 #define GNOME_DESKTOP_ITEM_NAME		"Name" /* localestring */
@@ -90,6 +91,10 @@ typedef struct _GnomeDesktopItem GnomeDesktopItem;
 #define GNOME_DESKTOP_ITEM_SORT_ORDER	"SortOrder" /* strings */
 #define GNOME_DESKTOP_ITEM_URL		"URL" /* string */
 
+/* The vfolder proposal */
+#define GNOME_DESKTOP_ITEM_CATEGORIES	"Categories" /* string */
+#define GNOME_DESKTOP_ITEM_ONLY_SHOW_IN	"OnlyShowIn" /* string */
+
 typedef enum {
 	/* Use the TryExec field to determine if this should be loaded */
         GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0,
@@ -101,6 +106,11 @@ typedef enum {
 	 * handle one file and we have passed many */
         GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE = 1<<0
 } GnomeDesktopItemLaunchFlags;
+
+typedef enum {
+	/* Don't check the kde directories */
+        GNOME_DESKTOP_ITEM_ICON_NO_KDE = 1<<0
+} GnomeDesktopItemIconFlags;
 
 typedef enum {
 	GNOME_DESKTOP_ITEM_ERROR_NO_FILENAME /* No filename set or given on save */,
@@ -166,6 +176,11 @@ GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktop
  * it and returns %NULL if it can't
  */
 char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item);
+
+char *                  gnome_desktop_item_find_icon         (const char                 *icon,
+							      /* size is only a suggestion */
+							      int                         desired_size,
+							      int                         flags);
 
 
 /*

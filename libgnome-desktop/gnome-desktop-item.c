@@ -1727,6 +1727,16 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 }
 
 static char *kde_icondir = NULL;
+static GSList *hicolor_kde_48 = NULL;
+static GSList *hicolor_kde_32 = NULL;
+static GSList *hicolor_kde_22 = NULL;
+static GSList *hicolor_kde_16 = NULL;
+/* XXX: maybe we don't care about locolor
+static GSList *locolor_kde_48 = NULL;
+static GSList *locolor_kde_32 = NULL;
+static GSList *locolor_kde_22 = NULL;
+static GSList *locolor_kde_16 = NULL;
+*/
 
 static GSList *
 add_dirs (GSList *list, const char *dirname)
@@ -1740,44 +1750,94 @@ add_dirs (GSList *list, const char *dirname)
 
 	while ((dent = readdir (dir)) != NULL) {
 		char *full = g_build_filename (dirname, dent->d_name, NULL);
-		if (g_file_test (full, G_FILE_TEST_IS_DIR))
+		if (g_file_test (full, G_FILE_TEST_IS_DIR)) {
 			list = g_slist_prepend (list, full);
-		else
+			list = add_dirs (list, full);
+		} else {
 			g_free (full);
+		}
 	}
 	closedir (dir);
 
 	return list;
 }
 
-static GSList *
-get_kde_dirs (void)
+static void
+init_kde_dirs (void)
 {
 	GSList *list = NULL;
 	char *dirname;
 
 	if (kde_icondir == NULL)
-		return NULL;
+		return;
 
 	list = g_slist_prepend (list, kde_icondir);
 
-	dirname = g_build_filename (kde_icondir, "hicolor", "48x48", NULL);
-	list = add_dirs (list, dirname);
+#define ADD_DIRS(color,size) \
+	dirname = g_build_filename (kde_icondir, #color,	\
+				    #size "x" #size , NULL);	\
+	color ## _kde_ ## size = add_dirs (NULL, dirname);	\
 	g_free (dirname);
 
-	dirname = g_build_filename (kde_icondir, "hicolor", "32x32", NULL);
-	list = add_dirs (list, dirname);
-	g_free (dirname);
+	ADD_DIRS (hicolor, 48);
+	ADD_DIRS (hicolor, 32);
+	ADD_DIRS (hicolor, 22);
+	ADD_DIRS (hicolor, 16);
 
-	dirname = g_build_filename (kde_icondir, "locolor", "48x48", NULL);
-	list = add_dirs (list, dirname);
-	g_free (dirname);
+/* XXX: maybe we don't care about locolor
+	ADD_DIRS (locolor, 48);
+	ADD_DIRS (locolor, 32);
+	ADD_DIRS (locolor, 22);
+	*/
 
-	dirname = g_build_filename (kde_icondir, "locolor", "32x32", NULL);
-	list = add_dirs (list, dirname);
-	g_free (dirname);
+#undef ADD_DIRS
+}
 
-	return g_slist_reverse (list);
+static GSList *
+get_kde_dirs (int size)
+{
+	GSList *list = NULL;
+
+	if (kde_icondir == NULL)
+		return NULL;
+
+	if (size > 32) {
+		/* 48-inf */
+		list = g_slist_concat (g_slist_copy (hicolor_kde_48),
+				       g_slist_copy (hicolor_kde_32));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_22));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_16));
+	} else if (size > 22) {
+		/* 23-32 */
+		list = g_slist_concat (g_slist_copy (hicolor_kde_32),
+				       g_slist_copy (hicolor_kde_48));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_22));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_16));
+	} else if (size > 16) {
+		/* 17-22 */
+		list = g_slist_concat (g_slist_copy (hicolor_kde_22),
+				       g_slist_copy (hicolor_kde_32));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_48));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_16));
+	} else {
+		/* 1-16 */
+		list = g_slist_concat (g_slist_copy (hicolor_kde_16),
+				       g_slist_copy (hicolor_kde_22));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_32));
+		list = g_slist_concat (list,
+				       g_slist_copy (hicolor_kde_48));
+	}
+
+	list = g_slist_append (list, kde_icondir);
+
+	return list;
 }
 
 /* similar function is in panel/main.c */
@@ -1795,13 +1855,17 @@ find_kde_directory (void)
 		"/kde2",
 		NULL
 	};
+
+	if (kde_icondir != NULL)
+		return;
+
 	if (kdedir != NULL) {
 		kde_icondir = g_build_filename (kdedir, "share", "icons", NULL);
 		return;
 	}
 
 	/* if what configure gave us works use that */
-	if (g_file_test (KDE_MENUDIR, G_FILE_TEST_IS_DIR)) {
+	if (g_file_test (KDE_ICONDIR, G_FILE_TEST_IS_DIR)) {
 		kde_icondir = g_strdup (KDE_ICONDIR);
 		return;
 	}
@@ -1820,6 +1884,86 @@ find_kde_directory (void)
 	/* absolute fallback, these don't exist, but we're out of options
 	   here */
 	kde_icondir = g_strdup (KDE_ICONDIR);
+
+	init_kde_dirs ();
+}
+
+/**
+ * gnome_desktop_item_find_icon:
+ * @icon: icon name, something you'd get out of the Icon key
+ * @desired_size: FIXME
+ * @flags: FIXME
+ *
+ * Description:  This function goes and looks for the icon file.  If the icon
+ * is not an absolute filename, this will look for it in the standard places.
+ * If it can't find the icon, it will return %NULL
+ *
+ * Returns: A newly allocated string
+ */
+char *
+gnome_desktop_item_find_icon (const char *icon,
+			      int flags,
+			      int desired_size)
+{
+	if (icon == NULL) {
+		return NULL;
+	} else if (g_path_is_absolute (icon)) {
+		if (g_file_test (icon, G_FILE_TEST_EXISTS)) {
+			return g_strdup (icon);
+		} else {
+			return NULL;
+		}
+	} else {
+		char *full;
+		GSList *kde_dirs = NULL;
+		GSList *li;
+		const char *exts[] = { ".png", ".xpm", NULL };
+		const char *no_exts[] = { "", NULL };
+		const char **check_exts;
+
+		full = gnome_program_locate_file (NULL,
+						  GNOME_FILE_DOMAIN_PIXMAP,
+						  icon,
+						  TRUE /* only_if_exists */,
+						  NULL /* ret_locations */);
+		if (full == NULL)
+			full = gnome_program_locate_file (NULL,
+							  GNOME_FILE_DOMAIN_APP_PIXMAP,
+							  icon,
+							  TRUE /* only_if_exists */,
+							  NULL /* ret_locations */);
+
+		/* if no kde, then just return now */
+		if (flags & GNOME_DESKTOP_ITEM_ICON_NO_KDE)
+			return full;
+
+		/* If there is an extention don't add any extensions */
+		if (strchr (icon, '.') != NULL) {
+			check_exts = no_exts;
+		} else {
+			check_exts = exts;
+		}
+
+		find_kde_directory ();
+
+		kde_dirs = get_kde_dirs (desired_size);
+
+		for (li = kde_dirs; full == NULL && li != NULL; li = li->next) {
+			int i;
+			for (i = 0; check_exts[i] != NULL; i++) {
+				full = g_strconcat (li->data, G_DIR_SEPARATOR, icon,
+						    check_exts[i], NULL);
+				if ( ! g_file_test (full, G_FILE_TEST_EXISTS)) {
+					g_free (full);
+					full = NULL;
+				}
+			}
+		}
+
+		g_slist_free (kde_dirs);
+
+		return full;
+	}
 }
 
 /**
@@ -1835,66 +1979,18 @@ find_kde_directory (void)
 char *
 gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 {
-/* Similar function is in quick-desktop-reader */
+	/* maybe this function should be deprecated in favour of find icon
+	 * -George */
 	const char *icon;
-	static gboolean checked_kde = FALSE;
 
         g_return_val_if_fail (item != NULL, NULL);
         g_return_val_if_fail (item->refcount > 0, NULL);
 
 	icon = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
 
-	if (icon == NULL) {
-		return NULL;
-	} else if (g_path_is_absolute (icon)) {
-		if (g_file_test (icon, G_FILE_TEST_EXISTS)) {
-			return g_strdup (icon);
-		} else {
-			return NULL;
-		}
-	} else {
-		char *full;
-		char *name = NULL;
-		static GSList *kde_dirs = NULL;
-		GSList *li;
-
-		/* FIXME: no extention, use .png, this is wrong,
-		 * we need to be smarter here */
-		if (strchr (icon, '.') == NULL) {
-			name = g_strconcat (icon, ".png", NULL);
-			icon = name;
-		}
-	       
-		full = gnome_program_locate_file (NULL,
-						  GNOME_FILE_DOMAIN_PIXMAP,
-						  icon,
-						  TRUE /* only_if_exists */,
-						  NULL /* ret_locations */);
-		if (full == NULL)
-			full = gnome_program_locate_file (NULL,
-							  GNOME_FILE_DOMAIN_APP_PIXMAP,
-							  icon,
-							  TRUE /* only_if_exists */,
-							  NULL /* ret_locations */);
-
-		if ( ! checked_kde) {
-			find_kde_directory ();
-			checked_kde = TRUE;
-			kde_dirs = get_kde_dirs ();
-		}
-
-		for (li = kde_dirs; full == NULL && li != NULL; li = li->next) {
-			full = g_build_filename (li->data, icon, NULL);
-			if ( ! g_file_test (full, G_FILE_TEST_EXISTS)) {
-				g_free (full);
-				full = NULL;
-			}
-		}
-
-		g_free (name);
-
-		return full;
-	}
+	return gnome_desktop_item_find_icon (icon,
+					     48 /* desired_size */,
+					     0 /* flags */);
 }
 
 /**
