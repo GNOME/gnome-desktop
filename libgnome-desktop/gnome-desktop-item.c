@@ -39,6 +39,7 @@
 #include "gnome-util.h"
 #include "gnome-config.h"
 #include "gnome-exec.h"
+#include "gnome-i18n.h"
 
 struct _GnomeDesktopItem {
         guchar refcount;
@@ -935,6 +936,78 @@ gnome_desktop_item_get_comment (const GnomeDesktopItem *item, const char *langua
         else
                 return NULL;
 }
+
+/**
+ * gnome_desktop_item_get_local_name:
+ * @item: A desktop item
+ *
+ * Returns: The human-readable name for the specified @item, in
+ *          the user's preferred locale or a fallback if
+ *          necessary. The returned memory remains owned by the
+ *          GnomeDesktopItem and should not be freed. If no
+ *          name is set in any relevant locale, NULL is returned.
+ * */
+
+const char *
+gnome_desktop_item_get_local_name   (const GnomeDesktopItem     *item)
+{
+	g_return_val_if_fail(item, NULL);
+
+	if(item->name) {
+		GList *iter;
+
+		iter = gnome_i18n_get_language_list(NULL);
+
+		while (iter != NULL) {
+			const gchar* name;
+
+			name = g_hash_table_lookup(item->name, iter->data);
+
+			if (name)
+				return name;
+			else
+				iter = g_list_next(iter);
+		}
+		return NULL;
+	} else
+                return NULL;
+}
+
+/**
+ * gnome_desktop_item_get_local_comment:
+ * @item: A desktop item
+ *
+ * Returns: The human-readable comment for the specified @item, in
+ *          the user's preferred locale or a fallback if
+ *          necessary. The returned memory remains owned by the
+ *          GnomeDesktopItem and should not be freed. If no comment
+ *          exists then NULL is returned.
+ * */
+const char *
+gnome_desktop_item_get_local_comment(const GnomeDesktopItem     *item)
+{
+        g_return_val_if_fail(item, NULL);
+
+	if(item->comment) {
+		GList *iter;
+
+		iter = gnome_i18n_get_language_list(NULL);
+
+		while (iter != NULL) {
+			const gchar* comment;
+
+			comment = g_hash_table_lookup(item->comment, iter->data);
+
+			if (comment)
+				return comment;
+			else
+				iter = g_list_next(iter);
+		}
+		return NULL;
+	} else
+                return NULL;
+}
+
 
 /**
  * gnome_desktop_item_get_attribute:

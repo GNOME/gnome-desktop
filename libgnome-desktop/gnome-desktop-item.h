@@ -73,10 +73,16 @@ const char **          gnome_desktop_item_get_command     (const GnomeDesktopIte
                                                            int                        *argc);
 /* argc can be NULL */
 const char *           gnome_desktop_item_get_icon_path   (const GnomeDesktopItem     *item);
+
+/* Note: you want to search each language in the user's search path */
 const char *           gnome_desktop_item_get_name        (const GnomeDesktopItem     *item,
                                                            const char                 *language);
 const char *           gnome_desktop_item_get_comment     (const GnomeDesktopItem     *item,
                                                            const char                 *language);
+
+const char *           gnome_desktop_item_get_local_name   (const GnomeDesktopItem     *item);
+const char *           gnome_desktop_item_get_local_comment(const GnomeDesktopItem     *item);
+
 const char *           gnome_desktop_item_get_attribute   (const GnomeDesktopItem     *item,
                                                            const char                 *attr_name);
 const GSList *         gnome_desktop_item_get_subitems    (const GnomeDesktopItem     *item);
