@@ -335,6 +335,7 @@ display_introduction_message (gpointer data)
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (intro),
 					       gnome_canvas_rich_text_get_type (),
 					       "text", introduction_messages[intro_i],
+						"editable", FALSE,
 					       /* FIXME */
 					       "width", 300.0,
 					       "height", 80.0,
