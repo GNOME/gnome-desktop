@@ -11,6 +11,8 @@ SUBDIRS =			\
 	smproxy 		\
 	pixmaps			\
 	applets			\
+	core-docs		\
+	omf-install		\
 	doc
 
 EXTRA_SUBDIRS =			\
@@ -19,9 +21,7 @@ EXTRA_SUBDIRS =			\
 	 help-browser		\
 	 gmenu			\
 	 gnome-edit		\
-	 gnome-hint		\
-	 core-docs		\
-	 omf-install
+	 gnome-hint		
 
 EXTRA_DIST = \
 	gnome-core.spec.in	\
@@ -29,6 +29,7 @@ EXTRA_DIST = \
 	COPYING-DOCS		\
 	HACKING			\
 	sgmldocs.make		\
+	xmldocs.make		\
 	intltool-extract.in	\
 	intltool-merge.in	\
 	intltool-update.in
