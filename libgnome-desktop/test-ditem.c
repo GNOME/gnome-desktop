@@ -86,16 +86,46 @@ test_ditem (const char *file)
 	g_free (uri);
 }
 
+static void
+launch_item (const char *file)
+{
+	GnomeDesktopItem *ditem;
+	GList *file_list;
+	int ret;
+
+	ditem = gnome_desktop_item_new_from_file (file,
+						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
+						  NULL);
+	if (ditem == NULL) {
+		g_print ("File %s is not an existing ditem\n", file);
+		return;
+
+	}
+
+	file_list = g_list_append (NULL, "file:///bin/sh");
+	file_list = g_list_append (file_list, "foo");
+	file_list = g_list_append (file_list, "bar");
+	file_list = g_list_append (file_list, "http://slashdot.org");
+
+	ret = gnome_desktop_item_launch (ditem, file_list, 0, NULL);
+	g_print ("launch returned: %d\n", ret);
+}
+
 
 int
 main (int argc, char **argv)
 {
 	char *file;
+	gboolean launch = FALSE;
 
-	if (argc != 2) {
+	if (argc < 2 || argc > 3) {
 		fprintf (stderr, "One argument, with name of .desktop file allowed\n");
 		exit (1);
 	}
+
+	if (argc == 3 &&
+	    strcmp (argv[2], "LAUNCH") == 0)
+		launch = TRUE;
 
 	file = g_strdup (argv[1]);
 
@@ -103,7 +133,10 @@ main (int argc, char **argv)
 			    LIBGNOMEUI_MODULE,
 			    argc, argv, NULL);
 
-	test_ditem (file);
+	if (launch)
+		launch_item (file);
+	else
+		test_ditem (file);
 
 	/*
 	test_ditem_edit (file);
