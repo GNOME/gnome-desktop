@@ -7,11 +7,11 @@ SUBDIRS =			\
 	gsm 			\
 	panel 			\
 	smproxy 		\
-	pixmaps
+	pixmaps			\
+	applets
 
 EXTRA_SUBDIRS = \
 	 intl \
-	 applets \
 	 gsm \
 	 smproxy \
 	 desktop-links \
