@@ -328,7 +328,8 @@ main (gint argc, gchar *argv[])
 	GtkWidget *gtkpixmap;
 	GtkWidget *canvas;
 	GdkImlibImage *im;
-
+	GtkWidget *href;
+	
 	gnome_init ("gnome-about","1.0", argc, argv);
 	
 	window = gtk_window_new (GTK_WINDOW_DIALOG);
@@ -393,6 +394,26 @@ main (gint argc, gchar *argv[])
 			    GTK_SIGNAL_FUNC (cb_exposed), NULL);
 	gtk_signal_connect (GTK_OBJECT (area), "configure_event",
 			    GTK_SIGNAL_FUNC (cb_configure), NULL);
+
+	hbox = gtk_hbox_new (TRUE, 10);
+
+	href = gnome_href_new ("http://gnotices.gnome.org/gnome-news/",
+			       _("GNOME News Site"));
+	gtk_box_pack_start (GTK_BOX (hbox), href,
+			    TRUE, FALSE, 0);
+
+	href = gnome_href_new ("http://www.gnome.org/",
+			       _("GNOME Main Site"));
+	gtk_box_pack_start (GTK_BOX (hbox), href,
+			    TRUE, FALSE, 0);
+
+	href = gnome_href_new ("http://developer.gnome.org/",
+			       _("GNOME Developers' Site"));
+	gtk_box_pack_start (GTK_BOX (hbox), href,
+			    TRUE, FALSE, 0);
+	
+	gtk_box_pack_start (GTK_BOX (vbox), hbox,
+			    TRUE, TRUE, 0);
 
 	button_box = gtk_hbutton_box_new ();
 	gtk_box_pack_end (GTK_BOX (vbox), button_box,
