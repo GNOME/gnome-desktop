@@ -2,7 +2,6 @@
 %define ver      	@VERSION@
 %define RELEASE		1
 %define rel      	%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
-%define sysconfdir	/etc
 
 Summary: The core programs for the GNOME GUI desktop environment.
 Name: 		gnome-core
@@ -14,7 +13,6 @@ Source: ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
 BuildRoot: 	/var/tmp/%{name}-%{version}-root
 URL: 		http://www.gnome.org
 Prereq: 	/sbin/install-info
-Docdir: 	%{_prefix}/doc
 
 Requires: 	gnome-libs >= 1.0.50
 Requires: 	ORBit >= 0.5.0
@@ -44,6 +42,10 @@ PreReq: 	/sbin/install-info
 Panel libraries and header files for creating GNOME panels.
 
 %changelog
+* Tue Mar 25 2001 Jens Finke <jens@gnome.org>
+- Make use of predefined rpm macros. 
+- Include gnome-terminal datadir stuff.
+
 * Sat Feb 17 2001 George Lebl <jirka@5z.com>
 - correctly set localstatedir so that all files are installed
 
@@ -76,18 +78,19 @@ Panel libraries and header files for creating GNOME panels.
 %setup -q
 
 %build
-%configure --quiet --disable-gtkhtml-help --sysconfdir=/etc --localstatedir=/var/lib
+%configure --quiet --disable-gtkhtml-help
 CFLAGS="$RPM_OPT_FLAGS" make
 
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT/etc localstatedir=$RPM_BUILD_ROOT/var/lib install >install.log 2>&1
-#if [ -d $RPM_BUILD_ROOT%{_prefix}/bin ] ; then
-# strip `file $RPM_BUILD_ROOT%{_prefix}/bin/* | grep ELF | cut -d':' -f 1`
+%makeinstall > install.log 2>&1
+
+#if [ -d $RPM_BUILD_ROOT%{_bindir} ] ; then
+# strip `file $RPM_BUILD_ROOT%{_bindir}/* | grep ELF | cut -d':' -f 1`
 #fi
-if [ -d $RPM_BUILD_ROOT/usr/man ]; then
-  find $RPM_BUILD_ROOT/usr/man -type f -exec gzip -9f {} \;
+if [ -d $RPM_BUILD_ROOT%{_mandir} ]; then
+  find $RPM_BUILD_ROOT%{_mandir} -type f -exec gzip -9f {} \;
 fi
 if [ -f %{name}.files ] ; then
   rm -f %{name}.files
@@ -112,9 +115,9 @@ function ProcessLang() {
 function ProcessBin() {
   # Gather up all the executable files. Stripping if requested.
   # This will not recurse.
-  if [ -d $RPM_BUILD_ROOT%{_prefix}/bin ] ; then
+  if [ -d $RPM_BUILD_ROOT%{_bindir} ] ; then
     echo "%defattr (0555, bin, bin)" >>%{name}.files
-    find $RPM_BUILD_ROOT%{_prefix}/bin -type f -print | sed "s:^$RPM_BUILD_ROOT::g" >>%{name}.files
+    find $RPM_BUILD_ROOT%{_bindir} -type f -print | sed "s:^$RPM_BUILD_ROOT::g" >>%{name}.files
   fi
 }
 function ProcessLib() {
@@ -159,23 +162,23 @@ function ProcessDir() {
 function BuildFiles() {
   ProcessBin
   ProcessLang 
-  for i in `find $RPM_BUILD_ROOT%{_prefix}/share -maxdepth 1 -type d -print | \
-     sed "s:^$RPM_BUILD_ROOT%{_prefix}/share::g"` ; do
+  for i in `find $RPM_BUILD_ROOT%{_datadir} -maxdepth 1 -type d -print | \
+     sed "s:^$RPM_BUILD_ROOT%{_datadir}::g"` ; do
     echo $i
     case $i in
-     /applets|/control-center|/gnome|/gnome-about|/mc|/panelrc|/pixmaps)
+     /applets|/control-center|/gnome|/gnome-about|/mc|/panelrc|/pixmaps|/gnome-terminal)
 
-         ProcessDir $RPM_BUILD_ROOT%{_prefix}/share$i %{name}.files "0444, bin, bin, 0555"
+         ProcessDir $RPM_BUILD_ROOT%{_datadir}$i %{name}.files "0444, bin, bin, 0555"
          ;;
      *)
          ;;
    esac
   done
-  ProcessDir $RPM_BUILD_ROOT/etc %{name}.files "0444, bin, bin, 0555"
-  ProcessLib $RPM_BUILD_ROOT%{_prefix}/lib runtime %{name}.files
-  ProcessDir $RPM_BUILD_ROOT%{_prefix}/share/idl %{name}-devel.files "0444, bin, bin, 0555"
-  ProcessLib $RPM_BUILD_ROOT%{_prefix}/lib devel %{name}-devel.files
-  ProcessDir $RPM_BUILD_ROOT%{_prefix}/include %{name}-devel.files "0444, bin, bin, 0555"
+  ProcessDir $RPM_BUILD_ROOT%{_sysconfdir} %{name}.files "0444, bin, bin, 0555"
+  ProcessLib $RPM_BUILD_ROOT%{_libdir} runtime %{name}.files
+  ProcessDir $RPM_BUILD_ROOT%{_datadir}/idl %{name}-devel.files "0444, bin, bin, 0555"
+  ProcessLib $RPM_BUILD_ROOT%{_libdir} devel %{name}-devel.files
+  ProcessDir $RPM_BUILD_ROOT%{_includedir} %{name}-devel.files "0444, bin, bin, 0555"
 }
 
 BuildFiles
