@@ -139,6 +139,10 @@ gnome_desktop_item_new (void)
 
         retval->refcount++;
 
+	retval->main_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
+						   (GDestroyNotify) g_free,
+						   (GDestroyNotify) g_free);
+	
 	/* These are guaranteed to be set */
 	gnome_desktop_item_set_string (retval,
 				       GNOME_DESKTOP_ITEM_NAME,
@@ -2301,9 +2305,7 @@ ditem_load (const char *file,
 
 	item = gnome_desktop_item_new ();
 	item->modified = FALSE;
-	item->main_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
-						 (GDestroyNotify) g_free,
-						 (GDestroyNotify) g_free);
+
 	/* Note: location and mtime are filled in by the new_from_file
 	 * function since it has those values */
 
