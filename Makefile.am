@@ -23,7 +23,10 @@ EXTRA_DIST = \
 	gnome-core.spec		\
 	COPYING-DOCS		\
 	applet-docs.make	\
-	app-docs.make
+	app-docs.make		\
+	xml-i18n-extract.in	\
+	xml-i18n-merge.in	\
+	xml-i18n-update.in
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
 @MAINT@include macros/macros.dep
