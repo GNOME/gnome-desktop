@@ -26,6 +26,8 @@ GNOME_INTRO_PICTURES = pix/terminal.gif \
 	pix/panel-basic.gif \
 	pix/panel-menu-select.gif \
 	pix/panel-menu.gif \
+	pix/panel-icons.gif \
+	pix/panel-add-icon.gif \
 	pix/gmix.gif \
 	pix/gtcd.gif \
 	pix/gtop-procs.gif \
