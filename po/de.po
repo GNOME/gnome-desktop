@@ -155,7 +155,7 @@ msgstr "Datum im Applet anzeigen"
 
 #: applets/gen_util/clock.c:537
 msgid "Show date in tooltip"
-msgstr "Datum im Tooltip anzeigen"
+msgstr "Datum in Minihilfe anzeigen"
 
 #: applets/gen_util/clock.c:551
 msgid "Unix time"
@@ -672,7 +672,7 @@ msgstr "Farben"
 #. Color palette
 #: gnome-terminal/gnome-terminal.c:1270
 msgid "Color scheme:"
-msgstr "Farb-Schema:"
+msgstr "Farbschema:"
 
 #. Foreground, background buttons
 #: gnome-terminal/gnome-terminal.c:1280
@@ -902,32 +902,32 @@ msgstr "TERMNAME"
 #: gsm/gnome-login-check.c:65
 #, c-format
 msgid "Looking up internet address for %s"
-msgstr ""
+msgstr "Suche nach Internetadresse für %s"
 
 #: gsm/gnome-login-check.c:69
 msgid "Hide"
-msgstr "Verborgen"
+msgstr "Verbergen"
 
 #: gsm/gnome-login-check.c:216
 msgid "GNOME Login"
-msgstr "GNOME Login"
+msgstr "GNOME-Anmeldung"
 
 #: gsm/gnome-login-check.c:216
 msgid "Login"
-msgstr "Login"
+msgstr "Anmeldung"
 
 #: gsm/gnome-login-check.c:243
 msgid "Start with default programs"
-msgstr "Mit Standard-Programmen starten"
+msgstr "Start mit voreingestellten Programmen"
 
 #: gsm/gnome-login-check.c:247
 msgid "Reset all user settings"
-msgstr "Alle Benutzer-Einstellungen zurücksetzen"
+msgstr "Alle Benutzereinstellungen zurücksetzen"
 
 #: gsm/gnome-login-check.c:258
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
-msgstr "Wirklich alle GNOME-Benutzer-Einstellungen für %s zurücksetzen?"
+msgstr "Wirklich alle Gnome-Benutzereinstellungen für %s zurücksetzen ?"
 
 #: gsm/gnome-login-check.c:291
 #, c-format
@@ -937,10 +937,14 @@ msgid ""
 "It may be possible to correct the problem by adding\n"
 "%s to the file /etc/hosts."
 msgstr ""
+"Konnte die Internetadresse für %s nicht finden.\n"
+"Dies wird verhindern, daß Gnome korrekt arbeitet.\n"
+"Es ist vielleicht möglich, dies durch Hinzufügen\n"
+"von %s zur Datei /etc/hosts zu korrigieren."
 
 #: gsm/gnome-login-check.c:299
 msgid "Try again"
-msgstr "Nochmal versuchen"
+msgstr "Noch einmal versuchen"
 
 #: gsm/gnome-login-check.c:300
 msgid "Continue"
@@ -948,15 +952,16 @@ msgstr "Fortsetzen"
 
 #: gsm/gsm-client-editor.c:98
 msgid "Order: "
-msgstr ""
+msgstr "Abfolge: "
 
 #: gsm/gsm-client-editor.c:108
 msgid "Style: "
-msgstr ""
+msgstr "Stil: "
 
 #: gsm/gsm-client-list.c:30
 msgid "This button sets the start order of the selected programs.\n"
 msgstr ""
+"Dieser Button stellt die Startreihenfolge der gewählten Programme ein.\n"
 
 #: gsm/gsm-client-list.c:31
 msgid ""
@@ -966,6 +971,12 @@ msgid ""
 "Trash programs are discarded on logout and can die;\n"
 "Settings programs are always started on every login."
 msgstr ""
+"Dieser Button stellt den Neustartstil der gewählten Programme ein:\n"
+"Normale Programme werden von der Abmeldung nicht betroffen, können aber "
+"sterben;\n"
+"Neustart-Programme dürfen niemals sterben;\n"
+"Müll-Programme werden bei der Abmeldung weggeworfen und können sterben;\n"
+"Einstellungs-Programme werden bei jeder Anmeldung gestartet."
 
 #: gsm/gsm-client-list.c:36
 msgid ""
@@ -976,18 +987,25 @@ msgid ""
 "Saving programs are saving their session details;\n"
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
+"Dieser Button schlüsselt die unten angegebenen Programmzustände auf:\n"
+"Inaktive Programme warten auf den Start oder sind beendet;\n"
+"Startende Programme brauchen noch Zeit, bis sie gestartet sind;\n"
+"Laufende Programme sind normale Mitglieder der Sitzung;\n"
+"Speichernde Programme speichern ihre Sitzungsdetails;\n"
+"Programme ohne Kontakt haben den Status `Unbekannt'.\n"
 
 #: gsm/gsm-client-list.c:42
 msgid "This column gives the command used to start a program."
 msgstr ""
+"Diese Spalte enthält das Kommando, mit dem das Programm gestartet wurde."
 
 #: gsm/gsm-client-list.c:130
 msgid "Order"
-msgstr ""
+msgstr "Abfolge"
 
 #: gsm/gsm-client-list.c:130
 msgid "Style"
-msgstr ""
+msgstr "Stil"
 
 #: gsm/gsm-client-list.c:130
 msgid "State"
@@ -999,19 +1017,19 @@ msgstr "Programm"
 
 #: gsm/gsm-client-row.c:31
 msgid "Inactive"
-msgstr "Nicht aktiv"
+msgstr "Inaktiv"
 
 #: gsm/gsm-client-row.c:32
 msgid "Waiting to start or already finished."
-msgstr ""
+msgstr "Wartet auf den Start oder ist bereits beendet."
 
 #: gsm/gsm-client-row.c:34
 msgid "Starting"
-msgstr "Starten"
+msgstr "Startet"
 
 #: gsm/gsm-client-row.c:35
 msgid "Started but has not yet reported state."
-msgstr ""
+msgstr "Gestartet, hat aber noch keinen Zustandsbericht abgegeben."
 
 #: gsm/gsm-client-row.c:37
 msgid "Running"
@@ -1019,15 +1037,15 @@ msgstr "Läuft"
 
 #: gsm/gsm-client-row.c:38
 msgid "A normal member of the session."
-msgstr ""
+msgstr "Ein normales Mitglied der Sitzung."
 
 #: gsm/gsm-client-row.c:40
 msgid "Saving"
-msgstr "Speichern"
+msgstr "Speichert"
 
 #: gsm/gsm-client-row.c:41
 msgid "Saving session details."
-msgstr "Sitzungseinstellungen speichern."
+msgstr "Speichere Sitzungsdetails."
 
 #: gsm/gsm-client-row.c:43
 msgid "Unknown"
@@ -1035,7 +1053,7 @@ msgstr "Unbekannt"
 
 #: gsm/gsm-client-row.c:44
 msgid "State not reported within timeout."
-msgstr ""
+msgstr "Hat den Zustand vor dem Abpfiff nicht mehr bekanntgegeben."
 
 #: gsm/gsm-client-row.c:50
 msgid "Normal"
@@ -1043,23 +1061,23 @@ msgstr "Normal"
 
 #: gsm/gsm-client-row.c:51
 msgid "Unaffected by logouts but can die."
-msgstr ""
+msgstr "Von Abmeldungen nicht betroffen, kann aber sterben"
 
 #: gsm/gsm-client-row.c:53
 msgid "Respawn"
-msgstr ""
+msgstr "Neustart"
 
 #: gsm/gsm-client-row.c:54
 msgid "Never allowed to die."
-msgstr ""
+msgstr "Darf nie sterben."
 
 #: gsm/gsm-client-row.c:56
 msgid "Trash"
-msgstr ""
+msgstr "Müll"
 
 #: gsm/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
-msgstr ""
+msgstr "Wird bei der Abmeldung weggeworfen und kann sterben."
 
 #: gsm/gsm-client-row.c:59
 msgid "Settings"
@@ -1067,7 +1085,7 @@ msgstr "Einstellungen"
 
 #: gsm/gsm-client-row.c:60
 msgid "Always started on every login."
-msgstr ""
+msgstr "Wird bei jeder Anmeldung gestartet."
 
 #: gsm/gsm-protocol.c:501
 msgid "Remove Program"
@@ -1083,9 +1101,8 @@ msgstr "Aktuelle Einstellungen speichern"
 
 #: gsm/logout.c:227
 msgid "Ask next time"
-msgstr "Beim nächsten Mal fragen"
+msgstr "Nächstes Mal nachfragen"
 
-# "Vorfall"? -ke-
 #: gsm/logout.c:244
 msgid "Action"
 msgstr "Aktion"
@@ -1096,11 +1113,12 @@ msgstr "Abmelden"
 
 #: gsm/logout.c:255
 msgid "Halt"
-msgstr ""
+msgstr "Herunterfahren"
 
 #: gsm/logout.c:258
 msgid "Reboot"
-msgstr ""
+msgstr "Neustart"
+
 
 #: gsm/main.c:56
 msgid "Start chooser and pick the session"
@@ -1664,9 +1682,11 @@ msgstr ""
 
 #: panel/main.c:212
 msgid ""
-"There was a problem registering the panel with the GOAD server.\n"
+"There was a problem registering the panelwith the GOAD server.\n"
 "The panel will now exit."
 msgstr ""
+"Es gab ein Problem beim Registrieren des Panels beim GOAD-Server.\n"
+"Das Panel verabschiedet sich nun."
 
 #: panel/menu.c:580
 msgid "The GNOME Panel"
@@ -1771,24 +1791,21 @@ msgstr "Applet hinzufügen"
 msgid "Edge panel"
 msgstr "Kantenpanel"
 
-#: panel/menu.c:2352 panel/panel_config.c:1073
-#, fuzzy
+#: panel/menu.c:2337 panel/panel_config.c:1073
 msgid "Aligned panel"
-msgstr "Kantenpanel"
+msgstr "Ausgerichtetes Panel"
 
-#: panel/menu.c:2359 panel/panel_config.c:1079
-#, fuzzy
+#: panel/menu.c:2344 panel/panel_config.c:1079
 msgid "Sliding panel"
-msgstr "Kantenpanel"
+msgstr "Gleitendes Panel"
 
-#: panel/menu.c:2366
-#, fuzzy
-msgid "Floating panel"
-msgstr "Eckpanel"
+#: panel/menu.c:2351
+msgid "Free panel"
+msgstr "Freies Panel"
 
-#: panel/menu.c:2385 panel/menu.c:2390 panel/menu.c:2478 panel/menu.c:3706
+#: panel/menu.c:2370 panel/menu.c:2375 panel/menu.c:2462 panel/menu.c:3683
 msgid "Programs"
-msgstr "Programme:"
+msgstr "Programme"
 
 #: panel/menu.c:2430 panel/menu.c:2434 panel/menu.c:2519 panel/menu.c:3754
 msgid "Debian menus"
@@ -1798,87 +1815,78 @@ msgstr "Debian-Menüs"
 msgid "KDE menus"
 msgstr "KDE-Menüs"
 
-#: panel/menu.c:2486 panel/menu.c:2489 panel/menu.c:3670 panel/menu.c:3720
-#: panel/menu.c:3723
+#: panel/menu.c:2470 panel/menu.c:2473 panel/menu.c:3648 panel/menu.c:3697
+#: panel/menu.c:3700
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: panel/menu.c:2498 panel/menu.c:2502 panel/menu.c:3677 panel/menu.c:3735
-#: panel/menu.c:3738
+#: panel/menu.c:2482 panel/menu.c:2486 panel/menu.c:3655 panel/menu.c:3712
+#: panel/menu.c:3715
 msgid "AnotherLevel menus"
 msgstr "AnotherLevel-Menüs"
 
 #: panel/menu.c:2540
 msgid "Remove this panel"
-msgstr "Entfernen"
+msgstr "Dieses Panel entfernen"
 
-#: panel/menu.c:3028
+#: panel/menu.c:3012
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
-#: panel/menu.c:3031
+#: panel/menu.c:3015
 msgid "Hiding policy"
-msgstr ""
+msgstr "Versteckmethode"
 
-#: panel/menu.c:3034
-#, fuzzy
+#: panel/menu.c:3018
 msgid "Hide buttons"
-msgstr "Versteckknöpfe an/aus"
+msgstr "Versteckknöpfe"
 
-#: panel/menu.c:3037 panel/panel_config.c:1091
+#: panel/menu.c:3021 panel/panel_config.c:1091
 msgid "Size"
 msgstr "Größe"
 
-#: panel/menu.c:3058
-#, fuzzy
+#: panel/menu.c:3042
 msgid "Applet"
-msgstr "Applet hinzufügen"
+msgstr "Applet"
 
-#: panel/menu.c:3079 panel/menu.c:4207 panel/menu.c:4227
+#: panel/menu.c:3062 panel/menu.c:4184 panel/menu.c:4204
 msgid "Main menu"
 msgstr "Hauptmenü"
 
-#: panel/menu.c:3093
-#, fuzzy
+#: panel/menu.c:3075
 msgid "Launcher"
-msgstr "Startericon"
+msgstr "Starter"
+
+#: panel/menu.c:3098
+msgid "Log out button"
+msgstr "Abmeldeknopf"
+
+#: panel/menu.c:3110
+msgid "Lock button"
+msgstr "Sperrknopf"
 
 #: panel/menu.c:3118
-#, fuzzy
-msgid "Log out button"
-msgstr "Abmelde-\"Button\" hinzufügen"
-
-#: panel/menu.c:3131
-#, fuzzy
-msgid "Lock button"
-msgstr "Sperrbutton hinzufügen"
-
-#: panel/menu.c:3139
-#, fuzzy
 msgid "Swallowed app"
-msgstr "Anwendung verschlucken"
+msgstr "Verschluckte Anwendung"
 
-#: panel/menu.c:3155
-#, fuzzy
+#: panel/menu.c:3134
 msgid "Add to panel"
-msgstr "Dies als Menu im Panel hinzufügen"
+msgstr "Zum Panel hinzufügen"
 
-#: panel/menu.c:3167
-#, fuzzy
+#: panel/menu.c:3146
 msgid "Create panel"
-msgstr "Neues Panel erzeugen"
+msgstr "Panel erzeugen"
 
-#: panel/menu.c:3178
 msgid "Properties"
 msgstr "Eigenschaften"
 
-#: panel/menu.c:3188
+#: panel/menu.c:3167
 msgid "Panel..."
 msgstr "Panel..."
 
-#: panel/menu.c:3203
+#: panel/menu.c:3182
 msgid "Global Preferences..."
-msgstr "Globale Konfiguration..."
+msgstr "Globale Eigenschaften..."
 
 #: panel/menu.c:3211
 msgid "Convert to corner panel"
@@ -1892,9 +1900,9 @@ msgstr "In Kantenpanel umwandeln"
 msgid "About GNOME..."
 msgstr "Über GNOME..."
 
-#: panel/menu.c:4005 panel/menu.c:4339
+#: panel/menu.c:3982 panel/menu.c:4316
 msgid "Edit menus..."
-msgstr "Menüs editieren..."
+msgstr "Menüs bearbeiten..."
 
 #: panel/menu.c:4012
 msgid "Can't open directory, using main menu!"
@@ -1924,11 +1932,11 @@ msgstr "Menütyp"
 msgid "Normal menu"
 msgstr "Normales Menü"
 
-#: panel/menu.c:4238
+#: panel/menu.c:4215
 msgid "Programs: "
-msgstr "Programme:"
+msgstr "Programme: "
 
-#: panel/menu.c:4242
+#: panel/menu.c:4219
 msgid "Favorites: "
 msgstr "Favoriten: "
 
@@ -1940,11 +1948,11 @@ msgstr "AnotherLevel-Menü (wenn vorhanden): "
 msgid "KDE menu (if found): "
 msgstr "KDE-Menü (wenn vorhanden): "
 
-#: panel/menu.c:4254
+#: panel/menu.c:4231
 msgid "Debian menu (if found): "
 msgstr "Debian-Menü (wenn vorhanden): "
 
-#: panel/menu.c:4268
+#: panel/menu.c:4245
 msgid "Menu path"
 msgstr "Menüpfad"
 
@@ -1986,31 +1994,31 @@ msgstr "Ausrichtung"
 
 #: panel/panel_config.c:559
 msgid "Left / Top"
-msgstr "Links / Oben"
+msgstr "Links / oben"
 
 #: panel/panel_config.c:572
 msgid "Center"
-msgstr "Zentriert"
+msgstr "Mitte"
 
 #: panel/panel_config.c:585
-msgid "Right / Bottom"
-msgstr "Rechts / Unten"
+msgid "Rightt / Bottom"
+msgstr "Rechts / unten"
 
 #: panel/panel_config.c:639
 msgid "Offset Options"
-msgstr ""
+msgstr "Abstandsoptionen"
 
 #: panel/panel_config.c:648
 msgid "Offset is from left / top"
-msgstr ""
+msgstr "Abstand von links / oben"
 
 #: panel/panel_config.c:659
 msgid "Offset is from right / bottom"
-msgstr ""
+msgstr "Abstand von rechts / unten"
 
 #: panel/panel_config.c:671
 msgid "Offset from screen edge:"
-msgstr ""
+msgstr "Abstand von der Bildschirmkante:"
 
 #. Position frame
 #: panel/panel_config.c:717
@@ -2138,7 +2146,7 @@ msgstr "Randbreite (nur Kachel)"
 #. Minimized size scale frame
 #: panel/panel_config_global.c:384
 msgid "Depth (displacement when pressed)"
-msgstr "Tiefe (Hub des Knopfes beim Drücken)"
+msgstr "Tiefe (Hub des Buttons beim Drücken)"
 
 #. Tooltips frame
 #: panel/panel_config_global.c:406
@@ -2213,17 +2221,17 @@ msgstr "Schublade schließen, wenn ein Starter darin gedrückt wird"
 #. show/hide frame
 #: panel/panel_config_global.c:549
 msgid "Make buttons flush with panel edge"
-msgstr ""
+msgstr "Buttons bündig mit der Panelkante ausrichten"
 
 #. only show tiles when mouse is over the button
 #: panel/panel_config_global.c:559
 msgid "Show button tiles only when cursor is over the button"
-msgstr ""
+msgstr "Buttonkacheln nur anzeigen, wenn der Cursor über dem Button steht"
 
 #. only show tiles when mouse is over the button
 #: panel/panel_config_global.c:568
 msgid "Show hints on panel startup"
-msgstr ""
+msgstr "Tips beim Panelstart anzeigen"
 
 #. Minimize Delay scale frame
 #: panel/panel_config_global.c:578
@@ -2291,17 +2299,16 @@ msgid "Height"
 msgstr "Höhe"
 
 #: panel/hints.c:78
-#, fuzzy
 msgid "Panel hint"
-msgstr "Panelgröße"
+msgstr "Paneltip"
 
 #: panel/hints.c:79
 msgid "Show another hint"
-msgstr ""
+msgstr "Anderen Tip anzeigen"
 
 #: panel/hints.c:97
 msgid "Show this dialog on startup"
-msgstr "Diesen Dialog beim Starten zeigen"
+msgstr "Diesen Dialog beim Start anzeigen"
 
 #. This file is to be #included, so it's not a real .c file
 #. The first hint is  the one shown on first login
@@ -2310,10 +2317,12 @@ msgid ""
 "Click on the foot in the lower left hand\n"
 "corner to start working with GNOME"
 msgstr ""
+"Klicken Sie auf den Fuß in der linken unteren Ecke,\n"
+"um zu beginnen, mit Gnome zu arbeiten"
 
 #: panel/hintsdata.c:5
 msgid "Right click on the panel to get a menu"
-msgstr ""
+msgstr "Klicken Sie rechts auf das Panel, um ein Menü zu öffnen"
 
 #: panel/hintsdata.c:6
 msgid ""
@@ -2321,80 +2330,41 @@ msgid ""
 "then choose 'Add to panel', then 'Applet',\n"
 "then pick an applet from the list"
 msgstr ""
+"Um ein Applet hinzuzufügen, klicken Sie rechts\n"
+"auf ein Panel, wählen Sie \"Zum Panel hinzufügen\",\n"
+"dann \"Applet\" und suchen Sie eines aus"
 
 #: panel/hintsdata.c:9
 msgid ""
 "To manipulate a panel applet, right click\n"
 "anywhere over the applet"
 msgstr ""
+"Um ein Panelapplet zu kontrollieren, klicken\n"
+"Sie irgendwo über dem Applet rechts"
 
 #: panel/hintsdata.c:11
 msgid ""
 "To move a panel applet, click the middle\n"
-"button of your mouse over it. You can also\n"
-"right click on it and choose 'Move applet'"
+"button of your mouse over it"
 msgstr ""
+"Um ein Panelapplet zu bewegen, klicken Sie\n"
+"den mittleren Mausknopf darüber"
 
-#: panel/hintsdata.c:14
+#: panel/hintsdata.c:13
 msgid ""
 "You can drag applets from the applet\n"
 "adding menu onto the panel"
 msgstr ""
+"Sie können Applets aus dem Applet-\n"
+"Hinzufügemenü ins Panel ziehen"
 
-#: panel/hintsdata.c:16
+#: panel/hintsdata.c:15
 msgid ""
 "You can drag icons from the Programs menu\n"
 "onto the desktop or onto the panel to\n"
 "make new icons"
 msgstr ""
+"Sie können Icons aus dem Programme-Menü in\n"
+"den Dekstop oder auf das Panel ziehen, um\n"
+"neue Icons zu erzeugen"
 
-#~ msgid "Disable normal operation by saving into the Trash session"
-#~ msgstr "Normalen Betrieb abschalten durch Speichern in die Trash-Sitzung"
-
-#~ msgid "No Debian menus found!"
-#~ msgstr "Keine Debian-Menüs gefunden!"
-
-#~ msgid "Add applet"
-#~ msgstr "Applet hinzufügen"
-
-#~ msgid "Add main menu"
-#~ msgstr "Hauptmenü hinzufügen"
-
-#~ msgid "Add drawer"
-#~ msgstr "Schublade hinzufügen"
-
-#~ msgid "Add new launcher"
-#~ msgstr "Neuen Starter hinzufügen"
-
-#~ msgid "This panel properties..."
-#~ msgstr "Eigenschaften..."
-
-#~ msgid "System menu: "
-#~ msgstr "Systemmenü:"
-
-#~ msgid "User menu: "
-#~ msgstr "Benutzermenü:"
-
-#~ msgid "Position"
-#~ msgstr "Position"
-
-#~ msgid "North east"
-#~ msgstr "Nordost"
-
-#~ msgid "South west"
-#~ msgstr "Südwest"
-
-#~ msgid "North west"
-#~ msgstr "Nordwest"
-
-#~ msgid "South east"
-#~ msgstr "Südost"
-
-#~ msgid "Orientation"
-#~ msgstr "Ausrichtung"
-
-#~ msgid "Horizontal"
-#~ msgstr "Horizontal"
-
-#~ msgid "Vertical"
-#~ msgstr "Vertikal"
