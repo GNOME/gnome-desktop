@@ -110,6 +110,7 @@ BITMAPS     = \
 	gnome-cckeyboard.png	\
 	gnome-ccperiph.png      \
 	gnome-debian.png	\
+	gnome-suse.png		\
 	gtkvim.png					\
 	gnome-computer.png	
 
