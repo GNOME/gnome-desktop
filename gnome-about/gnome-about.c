@@ -1017,7 +1017,7 @@ create_canvas (void)
 
 	href = href_item_new (root,
 			      _("Contact"),
-			      "http://mail.gnome.org/",
+			      "http://www.gnome.org/contact/",
 			      &current_x, &current_y);
 
 	/* resize */
