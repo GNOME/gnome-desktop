@@ -4,14 +4,12 @@ pixmap_DATA =					\
 	gnome-aorta.png				\
 	gnome-applets.png			\
 	gnome-applications.png      		\
-	gnome-audio2.png			\
 	gnome-calc2.png				\
 	gnome-calc3.png				\
 	gnome-calendar.png			\
 	gnome-color-browser.png			\
 	gnome-color-xterm.png           	\
 	gnome-cromagnon.png			\
-	gnome-devel.png             		\
 	gnome-diskfree.png          		\
 	gnome-favorites.png			\
 	gnome-file-c.png			\
@@ -19,19 +17,15 @@ pixmap_DATA =					\
 	gnome-folder.png			\
 	gnome-gemvt.png				\
 	gnome-gimp.png				\
-	gnome-globe.png				\
 	gnome-gmenu.png				\
 	gnome-gmush.png				\
 	gnome-gnomoku.png			\
-	gnome-graphics.png          		\
-	gnome-help.png				\
 	gnome-home.png				\
 	gnome-html.png				\
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
 	gnome-touristinfo.png       		\
 	gnome-irc.png				\
-	gnome-joystick.png          		\
 	gnome-laptop.png            		\
 	gnome-log.png				\
 	gnome-logo-icon.png			\
@@ -43,14 +37,11 @@ pixmap_DATA =					\
 	gnome-modem.png             		\
 	gnome-money.png				\
 	gnome-monitor.png           		\
-	gnome-multimedia.png        		\
 	gnome-networktool.png			\
 	gnome-news.png				\
 	gnome-note.png				\
 	gnome-qeye.png				\
 	gnome-session.png			\
-	gnome-settings.png          		\
-	gnome-system.png			\
 	gnome-spider.png			\
 	gnome-squeak.png            		\
 	gnome-talk.png				\
@@ -62,7 +53,6 @@ pixmap_DATA =					\
 	gnome-xterm.png				\
 	gnome-term.png				\
 	gnome-tigert.png			\
-	gnome-unknown.png			\
 	gnome-user-interface.png		\
 	gnome-util.png              		\
 	gnome-windows.png			\

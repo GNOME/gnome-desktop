@@ -82,6 +82,7 @@ static gchar *contributors[] = {
 	"Peter Fales",
 	"Joaquim Fellmann",
 	"Jens Finke",
+	"Mark Finlay",
 	"Dave Finton",
 	"Milon Firikis",
 	"John Fleck",
