@@ -36,6 +36,7 @@ BITMAPS     = \
 	gnome-gmenu.png				\
 	gnome-gmush.png				\
 	gnome-gnomine.png			\
+	gnome-gnomoku.png			\
 	gnome-graphics.png          \
 	gnome-gsame.png				\
 	gnome-help.png				\
