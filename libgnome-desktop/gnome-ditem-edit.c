@@ -387,8 +387,8 @@ translations_select_row(GtkCList *cl, int row, int column,
         gtk_clist_get_text(cl,row,1,&name);
         gtk_clist_get_text(cl,row,2,&comment);
 	
-        gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), lang);
-        gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), name);
+        gtk_entry_set_text(gtk_entry(dee->transl_lang_entry), lang);
+        gtk_entry_set_text(gtk_entry(dee->transl_name_entry), name);
         gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), comment);
 }
 
@@ -780,6 +780,11 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
                 gtk_clist_append (GTK_CLIST(dee->translations),(char**)text);
         }
         g_slist_free(i18n_list);
+
+	/* clear the entries for add/remove */
+        gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), "");
+        gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), "");
+        gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), "");
 }
 
 /* Conform ditem to display */
