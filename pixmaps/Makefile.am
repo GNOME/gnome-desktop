@@ -61,6 +61,12 @@ BITMAPS     = \
 	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
+	tile-normal-up.png			\
+	tile-normal-down.png			\
+	tile-purple-up.png			\
+	tile-purple-down.png			\
+	tile-green-up.png			\
+	tile-green-down.png			\
 	panel-menu-main.xpm
 
 pixmap_DATA = $(BITMAPS)
