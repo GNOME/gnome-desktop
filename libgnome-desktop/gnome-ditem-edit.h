@@ -71,7 +71,7 @@ struct _GnomeDItemEditClass {
         void (* name_changed)    (GnomeDItemEdit * gee);
 };
 
-guint             gnome_ditem_edit_get_type     (void);
+guint             gnome_ditem_edit_get_type     (void) G_GNUC_CONST;
 
 /*create a new ditem and get the children using the below functions 
   or use the utility new_notebook below*/
