@@ -28,6 +28,7 @@ static author authors[] = {
 	{ "Ian Peters", "<itp@gnu.org" },
 	{ "The Squeaky Rubber Gnome", "<squeak>" },
 	{ "Owen Taylor", "<otaylor@redhat.com>" },
+	{ "Tim Janik", "<timj@gtk.org>" },
 	{ "Peter Teichman", "<pat4@acpub.duke.edu>" },
 	{ "Arturo Tena", "<arturo@directmail.org>" },
 	{ "Tom Tromey", "<tromey@cygnus.com>" },
