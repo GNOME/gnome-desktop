@@ -63,6 +63,8 @@
 
 #define sure_string(s) ((s)!=NULL?(s):"")
 
+extern char **environ;
+
 struct _GnomeDesktopItem {
 	int refcount;
 
@@ -1395,8 +1397,6 @@ sn_error_trap_pop (SnDisplay *display,
 {
 	gdk_error_trap_pop ();
 }
-
-extern char **environ;
 
 static char **
 make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
