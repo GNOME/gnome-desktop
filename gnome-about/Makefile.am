@@ -13,4 +13,7 @@ LDADD = \
 bin_PROGRAMS = gnome-about
 
 gnome_about_SOURCES =		\
-	gnome-about.c
+	gnome-about.c	\
+	authors.h
+
+EXTRA_DIST = logo.xpm
