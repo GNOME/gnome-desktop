@@ -10,17 +10,19 @@ Version: %ver
 Release: %rel
 Copyright: LGPL
 Group: System Environment/Libraries
-Source: ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
+Source: ftp://ftp.gnome.org/pub/sources/gnome-core/unstable/gnome-core-%{ver}.tar.gz
 BuildRoot: /var/tmp/gnome-core-root
 Obsoletes: gnome
 
-URL: http://www.gnome.org
+URL: http://www.gnome.org/
 Prereq: /sbin/install-info
 Docdir: %{prefix}/doc
 
 Requires: xscreensaver
-Requires: gnome-libs >= 1.0.0
-Requires: ORBit >= 0.4.0
+Requires: control-center >= 1.0.51
+Requires: gnome-libs >= 1.0.53
+Requires: ORBit >= 0.5.0
+Requires: gdk-pixbuf >= 0.3
 
 %description
 GNOME (GNU Network Object Model Environment) is a user-friendly
@@ -37,7 +39,7 @@ need to install gnome-libs-devel.  If you want to use linuxconf with a
 GNOME front end, you'll also need to install the gnome-linuxconf package.
 
 %package devel
-Summary: GNOME core libraries, includes and more.
+Summary: GNOME core libraries, headers and more.
 Group: Development/Libraries
 Requires: gnome-core
 PreReq: /sbin/install-info
@@ -46,6 +48,10 @@ PreReq: /sbin/install-info
 Panel libraries and header files for creating GNOME panels.
 
 %changelog
+
+* 1999-10-30  Jacob Berkman  <jberkman@andrew.cmu.edu>
+	
+- updated for 1.0.53; patch from Ned Rhudy <nrhudy@pabus.com>
 
 * Sun May 23 1999 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
@@ -107,11 +113,12 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/applets
 %{prefix}/share/gnome/apps
 %{prefix}/share/gnome/help
+%{prefix}/share/gnome-about/*
 %{prefix}/share/idl
 %{prefix}/share/mc/templates
 %{prefix}/share/locale/*/*/*
+%{prefix}/share/control-center/*
 %{prefix}/share/pixmaps/*
-%{prefix}/share/xmodmap/*
 %config /etc/*
 %config %{prefix}/share/panelrc
 %config %{prefix}/share/gnome/default.session
