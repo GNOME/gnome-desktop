@@ -38,7 +38,10 @@ Multimedia_DATA = \
 	XMcd.desktop		\
 	xmix.desktop      	\
 	realplayer.desktop	\
-	GXanim.desktop
+	GXanim.desktop		\
+	XMcd.desktop		\
+	realplayer.desktop	\
+	xmix.desktop
 
 
 Utilities_DATA = \
@@ -52,16 +55,24 @@ Utilities_DATA = \
 	lynx.desktop		\
 	xbmbrowser.desktop	\
 	VIM.desktop		\
-	xcolsel.desktop
+	Vim.desktop		\
+	xcolsel.desktop		\
+	FileRunner.desktop
 
 Applications_DATA = \
 	Emacs.desktop		\
 	Vim.desktop		\
 	WordPerfect.desktop	\
-	Bluefish.desktop
+	Bluefish.desktop	\
+	WordPerfect.desktop	\
+	Xemacs.desktop		\
+	XEphem.desktop		\
+	gaspell.desktop
 
 Graphics_DATA = \
-	GIMP.desktop
+	GIMP.desktop		\
+	xv.desktop		\
+	xbmbrowser.desktop
 
 System_DATA = \
 	UNIX.desktop		\
@@ -72,12 +83,18 @@ System_DATA = \
 
 Settings_DATA =	\
 	Imlib_config.desktop	\
+	sawclient.desktop	\
+	sawconfui.desktop	\
 	sawrefresh.desktop	\
-	sawrestart.desktop
+	sawrestart.desktop	\
+	sawtheme.desktop
 
 Internet_DATA = \
 	Netscape.desktop	\
-	Tkrat.desktop
+	Tkrat.desktop	        \
+	TkSETI.desktop		\
+	Tkrat.desktop		\
+	lynx.desktop
 
 Root_DATA = \
 	Gmc.desktop
