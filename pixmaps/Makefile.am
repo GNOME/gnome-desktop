@@ -105,6 +105,7 @@ pixmap_DATA =					\
 	gnome-mouse.png				\
 	gnome-background.png			\
 	panel-menu-main.png			\
+	advanced-directory.png			\
 	apple-green.png				\
 	apple-red.png				\
 	gnome-ccbackground.png			\
