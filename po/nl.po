@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core Cvs-version or something\n"
-"POT-Creation-Date: 2001-11-27 18:10+0000\n"
+"POT-Creation-Date: 2001-11-29 09:25+0000\n"
 "PO-Revision-Date: 2000-12-02 15:05+0100\n"
 "Last-Translator: Almer S. Tigelaar <almer1@dds.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -15,384 +15,1405 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/gnome-panel-add-launcher.c:34
+#: gnome-desktop/gnome-desktop-item.c:272
 #, fuzzy
-msgid "Panel to add the launcher to"
-msgstr "Voeg deze starter toe aan het paneel"
+msgid "No name"
+msgstr "Geen"
 
-#: panel/gnome-panel-add-launcher.c:34 panel/gnome-panel-add-launcher.c:35
-msgid "NUMBER"
+#: gnome-desktop/gnome-desktop-item.c:275
+msgid "UTF-8"
 msgstr ""
 
-#: panel/gnome-panel-add-launcher.c:35
-msgid "Position to add the launcher to"
+#: gnome-desktop/gnome-desktop-item.c:278
+msgid "1.0"
+msgstr "1.0"
+
+#: gnome-desktop/gnome-desktop-item.c:483
+#: gnome-desktop/gnome-desktop-item.c:2626
+#, c-format
+msgid "Error reading file '%s': %s"
 msgstr ""
 
-#: panel/gnome-panel-add-launcher.c:36
-msgid "The argument is a url to add, not a .desktop file"
+#: gnome-desktop/gnome-desktop-item.c:591
+msgid "No filename to save to"
 msgstr ""
 
-#: panel/gnome-panel-add-launcher.c:67
-msgid ""
-"You must supply a single argument with the .desktop file or url to use\n"
+#. FIXME: ue GError
+#. we are not an application so just exit
+#. with an error
+#: gnome-desktop/gnome-desktop-item.c:901
+msgid "Attempting to launch a non-application"
 msgstr ""
 
-#: panel/gnome-panel-add-launcher.c:81
+#. FIXME: use GError
+#: gnome-desktop/gnome-desktop-item.c:1034
+msgid "Trying to execute an item with no 'Exec'"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:1077
+#: gnome-desktop/gnome-desktop-item.c:1170
+msgid "No exec field for this drop"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:1108
+msgid "Nothing to replace with a file in the exec string"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:1221
+msgid "There was no argument to replace with dropped files"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:2638
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:2650
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr ""
+
+#: gnome-desktop/gnome-desktop-item.c:2868
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr ""
+
+#: gnome-desktop/gnome-ditem-edit.c:222
 #, fuzzy
-msgid "No panel found\n"
-msgstr "Geen berichten gevonden"
+msgid "Name:"
+msgstr "Op Naam"
 
-#: panel/gnome-panel-screenshot.c:126
-msgid ""
-"Unable to initialize png structure.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:134
-msgid ""
-"Unable to create png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:141
-msgid ""
-"Unable to set png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:155
-msgid ""
-"Insufficient memory to save the screenshot.\n"
-"Please free up some resources and try again."
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:202
-#, c-format
-msgid "File %s already exists. Overwrite?"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:214 panel/gnome-panel-screenshot.c:700
-#, c-format
-msgid ""
-"Unable to create the file:\n"
-"\"%s\"\n"
-"Please check your permissions of the parent directory"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:475
-msgid "Print Screenshot"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:523
-msgid "Screenshot Print Preview"
-msgstr ""
-
-#. translators: this is the file that gets made up with the screenshot if a specific window is taken
-#: panel/gnome-panel-screenshot.c:549
-#, c-format
-msgid "%s%cScreenshot-%s.png"
-msgstr ""
-
-#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
-#: panel/gnome-panel-screenshot.c:554
-#, c-format
-msgid "%s%cScreenshot.png"
-msgstr ""
-
-#. translators: this is the file that gets made up with the screenshot if a specific window is taken
-#: panel/gnome-panel-screenshot.c:569
-#, c-format
-msgid "%s%cScreenshot-%s-%d.png"
-msgstr ""
-
-#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
-#: panel/gnome-panel-screenshot.c:574
-#, c-format
-msgid "%s%cScreenshot-%d.png"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:720
-#, c-format
-msgid "Not enough room to write file %s"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:1017
-msgid "Grab a window instead of the entire screen"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:1051
-msgid ""
-"Glade file for the screenshot program is missing.\n"
-"Please check your installation of gnome-core"
-msgstr ""
-
-#: panel/gnome-panel-screenshot.c:1073
-msgid "Unable to take a screenshot of the current desktop."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: panel/gnome-panel-screenshot.glade.h:7
+#: gnome-desktop/gnome-ditem-edit.c:235
 #, fuzzy
-msgid "Screenshot"
-msgstr "Schermbeveilingsinstellingen"
+msgid "Comment:"
+msgstr "Gebruikersopdrachten"
 
-#: panel/gnome-panel-screenshot.glade.h:8
-msgid "Preview"
+#: gnome-desktop/gnome-ditem-edit.c:245
+#, fuzzy
+msgid "Command:"
+msgstr "Gebruikersopdrachten"
+
+#: gnome-desktop/gnome-ditem-edit.c:255
+#, fuzzy
+msgid "Type:"
+msgstr "Type"
+
+#: gnome-desktop/gnome-ditem-edit.c:268
+msgid "Icon:"
+msgstr "Pictogram:"
+
+#: gnome-desktop/gnome-ditem-edit.c:278
+#, fuzzy
+msgid "Browse icons"
+msgstr "Toon pictogrammen"
+
+#: gnome-desktop/gnome-ditem-edit.c:291
+#, fuzzy
+msgid "Run in Terminal"
+msgstr "Uitvoeren in terminal"
+
+#: gnome-desktop/gnome-ditem-edit.c:385
+msgid "Try this before using:"
+msgstr ""
+
+#: gnome-desktop/gnome-ditem-edit.c:395
+#, fuzzy
+msgid "Documentation:"
+msgstr "Toon Documentatie-Index"
+
+#: gnome-desktop/gnome-ditem-edit.c:405
+msgid "Name/Comment translations:"
+msgstr ""
+
+#: gnome-desktop/gnome-ditem-edit.c:408
+#, fuzzy
+msgid "Language"
+msgstr "Groot"
+
+#: gnome-desktop/gnome-ditem-edit.c:409
+#, fuzzy
+msgid "Name"
+msgstr "Op Naam"
+
+#: gnome-desktop/gnome-ditem-edit.c:410
+#, fuzzy
+msgid "Comment"
+msgstr "Gebruikersopdrachten"
+
+#: gnome-desktop/gnome-ditem-edit.c:443
+msgid "Add/Set"
+msgstr ""
+
+#: gnome-desktop/gnome-ditem-edit.c:448 gsm/session-properties.c:101
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: gnome-desktop/gnome-ditem-edit.c:489
+#, fuzzy
+msgid "Basic"
+msgstr "Terug"
+
+#: gnome-desktop/gnome-ditem-edit.c:493
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#: gnome-desktop/gnome-hint.c:106
+#, fuzzy
+msgid "_Show Hints at Startup"
+msgstr "Toon hints bij starten van het paneel"
+
+#: gnome-terminal/gnome-terminal.c:288
+msgid "GNOME Terminal"
+msgstr "GNOME Terminal"
+
+#: gnome-terminal/gnome-terminal.c:291
+msgid "The GNOME terminal emulation program."
+msgstr "De GNOME terminal-emulator"
+
+#: gnome-terminal/gnome-terminal.c:704 gnome-terminal/gnome-terminal.c:1263
+#: gnome-terminal/gnome-terminal.c:1273 gnome-terminal/gnome-terminal.c:2473
+msgid "Default"
+msgstr "Standaard"
+
+#: gnome-terminal/gnome-terminal.c:891
+msgid ""
+"You have switched the class of this window. Do you\n"
+" want to reconfigure this window to match the default\n"
+"configuration of the new class?"
+msgstr ""
+"U heeft de klasse van dit venster aangepast. Wilt u\n"
+" het venster herconfigureren zodat het overeenkomt met\n"
+" de standaardconfiguratie van de nieuwe klasse?"
+
+#: gnome-terminal/gnome-terminal.c:1069
+msgid "Linux console"
+msgstr "Linux console"
+
+#: gnome-terminal/gnome-terminal.c:1070
+msgid "Color Xterm"
+msgstr "Kleuren X-Term"
+
+#: gnome-terminal/gnome-terminal.c:1071
+msgid "rxvt"
+msgstr "rxvt"
+
+#: gnome-terminal/gnome-terminal.c:1072
+msgid "Custom"
+msgstr "Aangepast"
+
+#: gnome-terminal/gnome-terminal.c:1077
+msgid "White on black"
+msgstr "Wit op zwart"
+
+#: gnome-terminal/gnome-terminal.c:1078
+msgid "Black on white"
+msgstr "Zwart op wit"
+
+#: gnome-terminal/gnome-terminal.c:1079
+msgid "Green on black"
+msgstr "Groen op zwart"
+
+#: gnome-terminal/gnome-terminal.c:1080
+msgid "Black on light yellow"
+msgstr "Zwart op lichtgeel"
+
+#: gnome-terminal/gnome-terminal.c:1081
+msgid "Custom colors"
+msgstr "Aangepaste kleuren"
+
+#: gnome-terminal/gnome-terminal.c:1086
+msgid "Left"
+msgstr "Links"
+
+#: gnome-terminal/gnome-terminal.c:1087
+msgid "Right"
+msgstr "Rechts"
+
+#: gnome-terminal/gnome-terminal.c:1088
+msgid "Hidden"
+msgstr "Verborgen"
+
+#: gnome-terminal/gnome-terminal.c:1249 panel/gnome-run.c:402
+#: panel/gnome-run.c:639
+msgid "Browse..."
+msgstr "Zoeken..."
+
+#: gnome-terminal/gnome-terminal.c:1503
+msgid "Color selector"
+msgstr "Kleurselector"
+
+#: gnome-terminal/gnome-terminal.c:2104
+#, fuzzy, c-format
+msgid ""
+"There has been an error while trying to log in:\n"
+"\n"
+"%s"
+msgstr ""
+"Er was een fout bij het inloggen.\n"
+"\n"
+"%s"
+
+#: gnome-terminal/gnome-terminal.c:2168 gnome-terminal/gnome-terminal.c:2611
+#, fuzzy
+msgid "Terminal"
+msgstr "GNOME Terminal"
+
+#: gnome-terminal/gnome-terminal.c:2698
+msgid "Terminal class name"
+msgstr "Terminalklasse"
+
+#: gnome-terminal/gnome-terminal.c:2698
+msgid "TCLASS"
+msgstr "TKLASSE"
+
+#: gnome-terminal/gnome-terminal.c:2701
+msgid "Specifies font name"
+msgstr "Geeft lettertype aan"
+
+#: gnome-terminal/gnome-terminal.c:2701
+msgid "FONT"
+msgstr "LETTERTYPE"
+
+#: gnome-terminal/gnome-terminal.c:2704
+msgid "Do not start up shells as login shells"
+msgstr "Start 'shell' niet als 'login shell'"
+
+#: gnome-terminal/gnome-terminal.c:2707
+msgid "Start up shells as login shells"
+msgstr "Start 'shell' als 'login shell'"
+
+#: gnome-terminal/gnome-terminal.c:2710
+msgid "Specifies the geometry for the main window"
+msgstr "Geeft de geometrie van het hoofdvenster"
+
+#: gnome-terminal/gnome-terminal.c:2710
+msgid "GEOMETRY"
+msgstr "GEOMETRIE"
+
+#: gnome-terminal/gnome-terminal.c:2713
+msgid "Execute this program instead of a shell"
+msgstr "In plaats van een shell, voer dit programma uit"
+
+#: gnome-terminal/gnome-terminal.c:2713 gnome-terminal/gnome-terminal.c:2716
+msgid "COMMAND"
+msgstr "OPDRACHT"
+
+#: gnome-terminal/gnome-terminal.c:2716
+msgid "Execute this program the same way as xterm does"
+msgstr "Voer dit programma uit zoals xterm dat doet"
+
+#: gnome-terminal/gnome-terminal.c:2719
+msgid "Foreground color"
+msgstr "Voorgrondkleur"
+
+#: gnome-terminal/gnome-terminal.c:2719 gnome-terminal/gnome-terminal.c:2722
+msgid "COLOR"
+msgstr "KLEUR"
+
+#: gnome-terminal/gnome-terminal.c:2722
+msgid "Background color"
+msgstr "Achtergrondkleur"
+
+#: gnome-terminal/gnome-terminal.c:2725
+#, fuzzy
+msgid "Solid background"
+msgstr "Achtergrond opdrachtregel:"
+
+#: gnome-terminal/gnome-terminal.c:2725
+msgid "SOLID"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2728
+msgid "Background pixmap"
+msgstr "Achtergrondafbeelding"
+
+#: gnome-terminal/gnome-terminal.c:2728
+msgid "PIXMAP"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2731
+msgid "Background pixmap scrolls"
+msgstr "Achtergrondafbeelding schuift"
+
+#: gnome-terminal/gnome-terminal.c:2731
+msgid "BGSCROLL"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2734
+#, fuzzy
+msgid "Background pixmap does not scroll"
+msgstr "Achtergrondafbeelding schuift"
+
+#: gnome-terminal/gnome-terminal.c:2734
+msgid "BGNOSCROLL"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2737
+#, fuzzy
+msgid "Shade background"
+msgstr "Achtergrond opdrachtregel:"
+
+#: gnome-terminal/gnome-terminal.c:2737
+msgid "SHADED"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2740
+#, fuzzy
+msgid "Do not shade background"
+msgstr "Achtergrond opdrachtregel:"
+
+#: gnome-terminal/gnome-terminal.c:2740
+msgid "NOSHADED"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2743
+#, fuzzy
+msgid "Transparent background"
+msgstr "Transparant"
+
+#: gnome-terminal/gnome-terminal.c:2743
+msgid "TRANSPARENT"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2746
+msgid "Update utmp entry"
+msgstr "Ververs utmp gegevens"
+
+#: gnome-terminal/gnome-terminal.c:2746
+msgid "UTMP"
+msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2749
+msgid "Do not update utmp entry"
+msgstr "Ververs utmp gegevens niet"
+
+#: gnome-terminal/gnome-terminal.c:2749
+msgid "NOUTMP"
+msgstr "NOUTMP"
+
+#: gnome-terminal/gnome-terminal.c:2752
+msgid "Update wtmp entry"
+msgstr "Ververs wtmp gegevens"
+
+#: gnome-terminal/gnome-terminal.c:2752
+msgid "WTMP"
+msgstr "WTMP"
+
+#: gnome-terminal/gnome-terminal.c:2755
+msgid "Do not update wtmp entry"
+msgstr "Ververs wtmp gegevens niet"
+
+#: gnome-terminal/gnome-terminal.c:2755
+msgid "NOWTMP"
+msgstr "NOWTMP"
+
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "Update lastlog entry"
+msgstr "Ververs lastlog gegevens"
+
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "LASTLOG"
+msgstr "LASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2761
+msgid "Do not update lastlog entry"
+msgstr "Ververs lastlog gegevens niet"
+
+#: gnome-terminal/gnome-terminal.c:2761
+msgid "NOLASTLOG"
+msgstr "NOLASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2764
+msgid "Set the window title"
+msgstr "Zet de venstertitel"
+
+#: gnome-terminal/gnome-terminal.c:2764
+msgid "TITLE"
+msgstr "TITEL"
+
+#: gnome-terminal/gnome-terminal.c:2767
+#, fuzzy
+msgid "Set the window icon"
+msgstr "Zet de venstertitel"
+
+#: gnome-terminal/gnome-terminal.c:2767
+msgid "ICON"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2770
+msgid "Set the TERM variable"
+msgstr "Zet de TERM variabele"
+
+#: gnome-terminal/gnome-terminal.c:2770
+msgid "TERMNAME"
+msgstr "TERMNAME"
+
+#: gnome-terminal/gnome-terminal.c:2773
+msgid "Try to start a TerminalFactory"
+msgstr "Probeer een TerminalFactory te starten"
+
+#: gnome-terminal/gnome-terminal.c:2776
+msgid "Try to create the terminal with the TerminalFactory"
+msgstr "Probeer de terminal te maken met de TerminalFactory"
+
+#: gnome-terminal/gnome-terminal.c:3007
+msgid "Cannot gnome_program_init ()"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:198
+#, fuzzy
+msgid "Foundry:"
+msgstr " Map"
+
+#: gnome-terminal/gnome-x-font-selector.c:199
+msgid "Family:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:200
+#, fuzzy
+msgid "Weight:"
+msgstr "Hoogte:"
+
+#: gnome-terminal/gnome-x-font-selector.c:201
+#, fuzzy
+msgid "Slant:"
+msgstr "Vlak"
+
+#: gnome-terminal/gnome-x-font-selector.c:202
+#, fuzzy
+msgid "Set Width:"
+msgstr "Appletbreedte"
+
+#: gnome-terminal/gnome-x-font-selector.c:203
+#, fuzzy
+msgid "Add Style:"
+msgstr "Stijl: "
+
+#: gnome-terminal/gnome-x-font-selector.c:204
+#, fuzzy
+msgid "Pixel Size:"
+msgstr "Paneel grootte:"
+
+#: gnome-terminal/gnome-x-font-selector.c:205
+#, fuzzy
+msgid "Point Size:"
+msgstr "Paneel grootte:"
+
+#: gnome-terminal/gnome-x-font-selector.c:206
+msgid "Resolution X:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:207
+msgid "Resolution Y:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:208
+#, fuzzy
+msgid "Spacing:"
+msgstr "Aan het bewaren"
+
+#: gnome-terminal/gnome-x-font-selector.c:209
+#, fuzzy
+msgid "Average Width:"
+msgstr "Appletbreedte"
+
+#: gnome-terminal/gnome-x-font-selector.c:210
+msgid "Charset:"
+msgstr ""
+
+#. Number of internationalized titles here must match number
+#. of NULL initializers above
+#: gnome-terminal/gnome-x-font-selector.c:447
+#, fuzzy
+msgid "Font Property"
+msgstr "WebControl Eigenschappen"
+
+#: gnome-terminal/gnome-x-font-selector.c:448
+msgid "Requested Value"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:449
+msgid "Actual Value"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:482
+#, fuzzy
+msgid "Font"
+msgstr "Lettertype:"
+
+#: gnome-terminal/gnome-x-font-selector.c:492
+#: gnome-terminal/gnome-x-font-selector.c:2170
+#: gnome-terminal/gnome-x-font-selector.c:2400
+msgid "Font:"
+msgstr "Lettertype:"
+
+#: gnome-terminal/gnome-x-font-selector.c:497
+#, fuzzy
+msgid "Font Style:"
+msgstr "Stijl: "
+
+#: gnome-terminal/gnome-x-font-selector.c:502
+#, fuzzy
+msgid "Size:"
+msgstr "Afmetingen"
+
+#: gnome-terminal/gnome-x-font-selector.c:634
+#: gnome-terminal/gnome-x-font-selector.c:858
+#, fuzzy
+msgid "Reset Filter"
+msgstr "Vernieuwen"
+
+#: gnome-terminal/gnome-x-font-selector.c:648
+msgid "Metric:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:652
+#, fuzzy
+msgid "Points"
+msgstr "minuten"
+
+#: gnome-terminal/gnome-x-font-selector.c:659
+msgid "Pixels"
+msgstr ""
+
+#. create the text entry widget
+#: gnome-terminal/gnome-x-font-selector.c:675
+#, fuzzy
+msgid "Preview:"
 msgstr "Voorbeeld"
 
+#: gnome-terminal/gnome-x-font-selector.c:706
+#, fuzzy
+msgid "Font Information"
+msgstr "Thema-informatie"
+
+#: gnome-terminal/gnome-x-font-selector.c:739
+msgid "Requested Font Name:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:750
+msgid "Actual Font Name:"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:761
+#, c-format
+msgid "%i fonts available with a total of %i styles."
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:776
+#, fuzzy
+msgid "Filter"
+msgstr "Bestand"
+
+#: gnome-terminal/gnome-x-font-selector.c:789
+#, fuzzy
+msgid "Font Types:"
+msgstr "Lettertype:"
+
+#: gnome-terminal/gnome-x-font-selector.c:797
+#, fuzzy
+msgid "Bitmap"
+msgstr "Afbeelding"
+
+#: gnome-terminal/gnome-x-font-selector.c:803
+#, fuzzy
+msgid "Scalable"
+msgstr "Geschaald"
+
+#: gnome-terminal/gnome-x-font-selector.c:809
+#, fuzzy
+msgid "Scaled Bitmap"
+msgstr "Geschaald"
+
+#: gnome-terminal/gnome-x-font-selector.c:880
+msgid "*"
+msgstr ""
+
+#. Convert '(nil)' weights to 'regular', since it looks nicer.
+#: gnome-terminal/gnome-x-font-selector.c:1205
+msgid "(nil)"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1205
+msgid "regular"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1210
+#: gnome-terminal/gnome-x-font-selector.c:1962
+msgid "italic"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1211
+#: gnome-terminal/gnome-x-font-selector.c:1963
+#, fuzzy
+msgid "oblique"
+msgstr "Volume"
+
+#: gnome-terminal/gnome-x-font-selector.c:1212
+#: gnome-terminal/gnome-x-font-selector.c:1964
+msgid "reverse italic"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1213
+#: gnome-terminal/gnome-x-font-selector.c:1965
+msgid "reverse oblique"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1214
+#: gnome-terminal/gnome-x-font-selector.c:1966
+msgid "other"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1221
+msgid "[M]"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1222
+msgid "[C]"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1782
+msgid "The selected font is not available."
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1788
+msgid "The selected font is not a valid font."
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1844
+msgid "This is a 2-byte font and may not be displayed correctly."
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1950
+#, fuzzy
+msgid "(unknown)"
+msgstr "Onbekend"
+
+#: gnome-terminal/gnome-x-font-selector.c:1961
+#, fuzzy
+msgid "roman"
+msgstr "manx"
+
+#: gnome-terminal/gnome-x-font-selector.c:1973
+#, fuzzy
+msgid "proportional"
+msgstr "Horizontaal"
+
+#: gnome-terminal/gnome-x-font-selector.c:1974
+msgid "monospaced"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:1975
+msgid "char cell"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:2175
+msgid "Font: (Filter Applied)"
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:2651
+msgid "MAX_FONTS exceeded. Some fonts may be missing."
+msgstr ""
+
+#: gnome-terminal/gnome-x-font-selector.c:3499
+#, fuzzy
+msgid "Font Selection"
+msgstr "Pictogramselectie"
+
+#: gnome-terminal/gnome-x-font-selector.c:3595
+#, fuzzy
+msgid "Select a font"
+msgstr "Kies animatie"
+
+#: gnome-about/gnome-about.c:466 panel/foobar-widget.c:302
+msgid "About GNOME"
+msgstr "Over GNOME"
+
+#: gnome-about/gnome-about.c:567
+msgid "GNOME News Site"
+msgstr "GNOME niewspagina"
+
+#: gnome-about/gnome-about.c:571
+msgid "http://www.gnome.org/"
+msgstr "http://www.gnome.org/"
+
+#: gnome-about/gnome-about.c:572
+msgid "GNOME Main Site"
+msgstr "GNOME webpagina"
+
+#: gnome-about/gnome-about.c:577
+msgid "GNOME Developers' Site"
+msgstr "GNOME ontwikkelingspagina"
+
+#: gnome-about/contributors.h:13
+msgid "GNOME was brought to you by"
+msgstr "GNOME werd u aangeboden door"
+
+#: gnome-about/contributors.h:22
+msgid "Timur I. Bakeyev"
+msgstr ""
+
+#. if your encoding allows it, use aacute (U00E1)
+#. * for the 'a' of 'Ban'
+#: gnome-about/contributors.h:25
+msgid "Szabolcs 'Shooby' Ban"
+msgstr "Szabolcs 'Shooby' Bán"
+
+#: gnome-about/contributors.h:38
+msgid "Jerome Bolliet"
+msgstr ""
+
+#. if your encoding allows it, use eacute (U00E9) for the two
+#. * 'e' of 'Frederic'
+#: gnome-about/contributors.h:64
+msgid "Frederic Devernay"
+msgstr "Frédéric Devernay"
+
+#. if your encoding allows it, use odoubleacute (U0151) for the 'o'
+#. * of 'Gergo' and use Eacute (U00C9) for the 'E' of 'Erdi'
+#: gnome-about/contributors.h:77
+msgid "Gergo Erdi"
+msgstr "Gergo Érdi"
+
+#: gnome-about/contributors.h:84
+msgid "Raul Perusquia Flores"
+msgstr ""
+
+#: gnome-about/contributors.h:96
+msgid "The Mysterious GEGL"
+msgstr "Het Mysterieuse GEGL"
+
+#: gnome-about/contributors.h:98
+msgid "Bjoern Giesler"
+msgstr ""
+
+#: gnome-about/contributors.h:104
+msgid "Dov Grobgeld"
+msgstr ""
+
+#: gnome-about/contributors.h:131
+msgid "Helmut Koeberle"
+msgstr ""
+
+#: gnome-about/contributors.h:165
+msgid "Matthew Marjanovic"
+msgstr ""
+
+#. If your encodings allows it, use ntilde (U00F1) for the 'n'
+#. * of 'Muniz'
+#: gnome-about/contributors.h:188
+msgid "Alexandre Muniz"
+msgstr "Alexandre Muñiz"
+
+#. Name in Hangeul is: Ub0a8 Uc131 Ud604
+#: gnome-about/contributors.h:190
+msgid "Sung-Hyun Nam"
+msgstr "Sung-Hyun Nam"
+
+#. If your encodings allows it, use adiaeresis (U00E4) for the 'ae'
+#. * of 'Norbaeck'
+#: gnome-about/contributors.h:197
+msgid "Martin Norbaeck"
+msgstr "Martin Norbäck"
+
+#. If your encodings allows it, use Odiaeresis (U00D6) for the 'Oe'
+#. * of 'Oegren'
+#: gnome-about/contributors.h:204
+msgid "Tomas Oegren"
+msgstr "Tomas Ögren"
+
+#. If your encoding allows it, use oacute (U00F3) for the 'o'
+#. * of 'Perello' and use iacute (U00ED) for the 'i' of 'Marin'
+#: gnome-about/contributors.h:214
+msgid "Carlos Perello Marin"
+msgstr ""
+
+#. Name in Japanese is: U7b39 U5c71 U548c U5b8f
+#: gnome-about/contributors.h:239
+msgid "Kazuhiro Sasayama"
+msgstr "Kazuhiro Sasayama"
+
+#. If your encodings allows it, use ntilde (U00F1) for the 'n'
+#. * of 'Inigo'
+#: gnome-about/contributors.h:247
+msgid "Inigo Serna"
+msgstr "Iñigo Serna"
+
+#: gnome-about/contributors.h:251
+msgid "Miroslav Silovic"
+msgstr ""
+
+#. not really a person name :) translate its meaning
+#: gnome-about/contributors.h:261
+msgid "The Squeaky Rubber Gnome"
+msgstr "De Piepende Rubbere Gnome"
+
+#: gnome-about/contributors.h:267
+msgid "Istvan Szekeres"
+msgstr ""
+
+#: gnome-about/contributors.h:278
+msgid "Manish Vachharajani"
+msgstr ""
+
+#: gnome-about/contributors.h:279
+msgid "Neil Vachharajani"
+msgstr ""
+
+#: gnome-about/contributors.h:286
+msgid "Wanda the GNOME Fish"
+msgstr "Wanda de GNOME vis"
+
+#: gnome-about/contributors.h:300
+msgid "... and many more"
+msgstr "... en nog vele andere"
+
+#: gsm/gnome-login-check.c:67
+#, c-format
+msgid "Looking up internet address for %s"
+msgstr "Internet adres voor %s wordt opgezocht"
+
+#: gsm/gnome-login-check.c:71
+msgid "Hide"
+msgstr "Verborgen"
+
+#: gsm/gnome-login-check.c:247
+msgid "GNOME Login"
+msgstr "GNOME Login"
+
+#: gsm/gnome-login-check.c:247
+msgid "Login"
+msgstr "Login"
+
+#: gsm/gnome-login-check.c:274
+msgid "Start with default programs"
+msgstr "Start met standaard programma's"
+
+#: gsm/gnome-login-check.c:278
+msgid "Reset all user settings"
+msgstr "Vernieuw alle gebruikersinstellingen"
+
+#: gsm/gnome-login-check.c:289
+#, c-format
+msgid "Really reset all GNOME user settings for %s?"
+msgstr "Wilt u alle GNOME gebruikers instellingen voor %s wissen?"
+
+#: gsm/gnome-login-check.c:321
+#, c-format
+msgid ""
+"The directory /tmp/orbit-%s is not owned\n"
+"by the current user, %s.\n"
+"Please correct the ownership of this directory."
+msgstr ""
+"De map /tmp/orbit-%s behoort niet toe\n"
+"aan de huidige gebruiker %s.\n"
+"Gelieve de eigenaar van deze map aan te passen."
+
+#: gsm/gnome-login-check.c:328 gsm/gnome-login-check.c:353
+msgid "Try again"
+msgstr "Probeer opnieuw"
+
+#: gsm/gnome-login-check.c:329 gsm/gnome-login-check.c:354
+msgid "Continue"
+msgstr "Doorgaan"
+
+#: gsm/gnome-login-check.c:345
+#, c-format
+msgid ""
+"Could not look up internet address for %s.\n"
+"This will prevent GNOME from operating correctly.\n"
+"It may be possible to correct the problem by adding\n"
+"%s to the file /etc/hosts."
+msgstr ""
+"Er kon geen internet adres gevonden worden voor %s.\n"
+"GNOME kan daardoor niet correct functioneren. Het \n"
+"Probleem kan verholpen worden door %s toe te voegen \n"
+"aan het /etc/hosts bestand."
+
+#: gsm/gnome-login-check.c:371
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
+msgstr ""
+"Je versie van libICE heeft een fout die ervoor kan zorgen dat\n"
+"gnome-session niet naar behoren werkt.\n"
+"\n"
+"Als je Solaris gebruikt dan zul je of moeten upgraden naar Solaris\n"
+"patch #108376-16 of je zult libICE.so.6 moeten gebruiken van Solaris 7.\n"
+"Kopiëer het bestand naar /usr/openwin/lib. (Dank gaat naar Andy Reitz\n"
+"voor de informatie over deze fout).\n"
+"\n"
+"Je GNOME sessie zal afgesloten worden na het sluiten van dit dialoogvenster."
+
+#: gsm/gsm-client-editor.c:94
+msgid "Order: "
+msgstr "Volgorde: "
+
+#: gsm/gsm-client-editor.c:104
+msgid "Style: "
+msgstr "Stijl: "
+
+#: gsm/gsm-client-list.c:112
+msgid "Order"
+msgstr "Volgorde"
+
+#: gsm/gsm-client-list.c:112
+msgid "Style"
+msgstr "Stijl"
+
+#: gsm/gsm-client-list.c:112
+msgid "State"
+msgstr "Staat"
+
+#: gsm/gsm-client-list.c:112
+msgid "Program"
+msgstr "Programma"
+
+#: gsm/gsm-client-row.c:31
+msgid "Inactive"
+msgstr "Inactief"
+
+#: gsm/gsm-client-row.c:32
+msgid "Waiting to start or already finished."
+msgstr "Wachten om te starten of reeds afgelopen."
+
+#: gsm/gsm-client-row.c:34
+msgid "Starting"
+msgstr "Aan het starten"
+
+#: gsm/gsm-client-row.c:35
+msgid "Started but has not yet reported state."
+msgstr "Gestart maar heeft nog geen staat gestuurd."
+
+#: gsm/gsm-client-row.c:37
+msgid "Running"
+msgstr "Actief"
+
+#: gsm/gsm-client-row.c:38
+msgid "A normal member of the session."
+msgstr "Een normaal lid van de sessie."
+
+#: gsm/gsm-client-row.c:40
+msgid "Saving"
+msgstr "Aan het bewaren"
+
+#: gsm/gsm-client-row.c:41
+msgid "Saving session details."
+msgstr "Sessie-instellingen aan het bewaren."
+
+#: gsm/gsm-client-row.c:43
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: gsm/gsm-client-row.c:44
+msgid "State not reported within timeout."
+msgstr "Geen staat gestuurd binnen tijdsinterval."
+
+#: gsm/gsm-client-row.c:50 panel/panel_config.c:1421
+msgid "Normal"
+msgstr "Normaal"
+
+#: gsm/gsm-client-row.c:51
+msgid "Unaffected by logouts but can die."
+msgstr "Ongewijzigd bij uitloggen maar kan stoppen."
+
+#: gsm/gsm-client-row.c:53
+msgid "Respawn"
+msgstr "Herstart"
+
+#: gsm/gsm-client-row.c:54
+msgid "Never allowed to die."
+msgstr "Mag niet stoppen."
+
+#: gsm/gsm-client-row.c:56
+msgid "Trash"
+msgstr "Verwijder"
+
+#: gsm/gsm-client-row.c:57
+msgid "Discarded on logout and can die."
+msgstr "Genegeerd bij uitloggen en kan stoppen."
+
+#: gsm/gsm-client-row.c:59 panel/foobar-widget.c:1167
+msgid "Settings"
+msgstr "Instellingen"
+
+#: gsm/gsm-client-row.c:60
+msgid "Always started on every login."
+msgstr "Wordt opgestart bij elke login."
+
+#: gsm/gsm-protocol.c:510
+msgid "Remove Program"
+msgstr "Verwijder programma"
+
+#: gsm/logout.c:199
+msgid "Really log out?"
+msgstr "Weet u zeker dat u wilt uitloggen?"
+
+#: gsm/logout.c:220
+msgid "Save current setup"
+msgstr "Bewaar huidige instellingen"
+
+#: gsm/logout.c:240
+msgid "Action"
+msgstr "Actie"
+
+#: gsm/logout.c:248
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: gsm/logout.c:251
+msgid "Shut Down"
+msgstr ""
+
+#: gsm/logout.c:254
+msgid "Reboot"
+msgstr "Herstarten"
+
+#: gsm/main.c:65
+#, fuzzy
+msgid "Specify a session name to load"
+msgstr "Geeft lettertype aan"
+
+#: gsm/main.c:66
+msgid "Only read saved sessions from the default.session file"
+msgstr "Lees opgeslagen sessies alleen uit het default.session bestand"
+
+#: gsm/main.c:67
+msgid "Millisecond period spent waiting for clients to register (0=forever)"
+msgstr "Maximale wachttijd (ms) voor registratie clients (0=eeuwig)"
+
+#: gsm/main.c:68
+msgid "Millisecond period spent waiting for clients to respond (0=forever)"
+msgstr "Maximale wachttijd (ms) voor reactie van clients (0=eeuwig)"
+
+#: gsm/main.c:69
+msgid "Millisecond period spent waiting for clients to die (0=forever)"
+msgstr "Maximale wachttijd (ms) voor afsterven van clients (0=eeuwig)"
+
+#: gsm/manager.c:400
+msgid "Wait abandoned due to conflict."
+msgstr "Wachten afgebroken vanwege conflict."
+
+#: gsm/manager.c:834
+#, c-format
+msgid "No response to the %s command."
+msgstr "Geen antwoord op opdracht %s."
+
+#: gsm/manager.c:835
+msgid "The program may be slow, stopped or broken."
+msgstr "Het programma is traag, gestopt of disfunctionerend"
+
+#: gsm/manager.c:836
+msgid "You may wait for it to respond or remove it."
+msgstr "U kunt wachten of afbreken"
+
+#: gsm/manager.c:1375
+msgid "Respawn abandoned due to failures."
+msgstr "'Respawn' afgebroken vanwege fouten"
+
+#: gsm/manager.c:1541
+msgid "A session shutdown is in progress."
+msgstr "Een sessie is aan het afsluiten"
+
+#: gsm/save-session.c:43
+msgid "Kill session"
+msgstr "Sessie beëindigen"
+
+#: gsm/save-session.c:44
+msgid "Use dialog boxes"
+msgstr "Gebruik dialoog vensters"
+
+#: gsm/save-session.c:94
+msgid "Could not connect to the session manager"
+msgstr "Kan geen verbinding maken met het sessiebeheer"
+
+#: gsm/save-session.c:109
+msgid "Could not connect to gnome-session"
+msgstr "Kon niet verbinden met gnome-session"
+
+#: gsm/save-session.c:153
+msgid "Your session has been saved"
+msgstr "Uw sessie is opgeslagen"
+
+#: gsm/session-names.c:126
+msgid "The session name cannot be empty"
+msgstr ""
+
+#: gsm/session-names.c:136
+msgid "The session name already exists"
+msgstr ""
+
+#: gsm/session-names.c:170
+msgid "Add a new session"
+msgstr ""
+
+#: gsm/session-names.c:202
+#, fuzzy
+msgid "Edit session name"
+msgstr "Sessie beëindigen"
+
+#. buttons
+#: gsm/session-properties.c:170
+msgid "Try"
+msgstr "Test"
+
+#: gsm/session-properties.c:173
+msgid "Revert"
+msgstr "Herstel"
+
+#: gsm/session-properties.c:176
+msgid "OK"
+msgstr "OK"
+
+#: gsm/session-properties.c:179
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: gsm/session-properties.c:182 panel/drawer.c:515 panel/gnome-run.c:1306
+#: panel/launcher.c:653 panel/logout.c:125 panel/logout.c:210
+#: panel/menu.c:5304 panel/status.c:375 panel/swallow.c:447
+msgid "Help"
+msgstr "Help"
+
+#. app
+#: gsm/session-properties.c:217
+#, fuzzy
+msgid "Session Properties"
+msgstr "Gnome Sessie-eigenschappen"
+
+#: gsm/session-properties.c:272
+msgid "Session"
+msgstr "Sessie"
+
+#. app
+#: gsm/session-properties.c:329
+msgid "Session Chooser"
+msgstr "Sessiekiezer"
+
+#: gsm/session-properties.c:332
+msgid "Start Session"
+msgstr "Start Sessie"
+
+#: gsm/session-properties.c:335
+msgid "Cancel Login"
+msgstr "Inloggen afbreken"
+
+#: gsm/session-properties.c:360
+msgid "Initialize session settings"
+msgstr "Initialiseer sessie-instellingen"
+
 #. frame for options
-#: gsm/session-properties-capplet.c:181 panel/gnome-panel-screenshot.glade.h:9
+#: gsm/session-properties-capplet.c:181
 #, fuzzy
 msgid "Options"
 msgstr "Actie"
 
-#: panel/gnome-panel-screenshot.glade.h:10
-msgid "_Save screenshot to file:"
+#: gsm/session-properties-capplet.c:192
+msgid "Show splash screen on login"
 msgstr ""
 
-#: panel/gnome-panel-screenshot.glade.h:11
+#: gsm/session-properties-capplet.c:199
 #, fuzzy
-msgid "Save screenshot to _desktop"
-msgstr "Bewaar huidige instellingen"
+msgid "Prompt on logout"
+msgstr "Vraag bevestiging bij uitloggen"
 
-#: panel/gnome-panel-screenshot.glade.h:12
-msgid "Save screenshot to _web page (save in ~/public__html)"
+#: gsm/session-properties-capplet.c:206
+msgid "Automatically save changes to session"
 msgstr ""
 
-#: panel/gnome-panel-screenshot.glade.h:13
-msgid "_Print screenshot..."
+#: gsm/session-properties-capplet.c:209
+msgid "Choose Current Session"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:76
-#: applets/tasklist/tasklist_properties.c:385
-msgid "Display"
-msgstr "Afbeelden"
-
-#: applets/desk-guide/deskguide_applet.c:77
-msgid "Layout"
-msgstr "Layout"
-
-#: applets/desk-guide/deskguide_applet.c:79
+#: gsm/session-properties-capplet.c:226
 #, fuzzy
-msgid "Show tasklist arrow"
-msgstr "Schakel taaklijst pijl om"
+msgid "Session Name"
+msgstr "Sessie"
 
-#: applets/desk-guide/deskguide_applet.c:81
-msgid "Switch horizontal/vertical position of tasklist arrow"
+#: gsm/session-properties-capplet.c:247 gsm/session-properties-capplet.c:301
+#, fuzzy
+msgid "Add..."
+msgstr "..."
+
+#: gsm/session-properties-capplet.c:252 gsm/session-properties-capplet.c:306
+#, fuzzy
+msgid "Edit..."
+msgstr "Bewerken"
+
+#: gsm/session-properties-capplet.c:257 gsm/session-properties-capplet.c:311
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: gsm/session-properties-capplet.c:262
+#, fuzzy
+msgid "Session Options"
+msgstr "Gnome Sessie-eigenschappen"
+
+#. Frame for non-session managed startup programs
+#: gsm/session-properties-capplet.c:274
+msgid "Non-session-managed Startup Programs"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:83
-msgid "Only show current desktop in pager"
-msgstr "Toon enkel huidig bureaublad in de pager"
+#: gsm/session-properties-capplet.c:291 gsm/startup-programs.c:299
+msgid "Priority"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:85
-msgid "Raise area grid over tasks"
-msgstr "Toon gebieds raster boven taken"
+#: gsm/session-properties-capplet.c:292
+#, fuzzy
+msgid "Command"
+msgstr "Gebruikersopdrachten"
 
-#: applets/desk-guide/deskguide_applet.c:86
-msgid "Thumb Nails"
-msgstr "Miniaturen"
+#: gsm/session-properties-capplet.c:321
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:88
-msgid "Fill window thumbnails with screen contents"
-msgstr "Vul miniaturen met scherm inhoud"
+#: gsm/session-properties-capplet.c:330
+#, fuzzy
+msgid "Startup Programs"
+msgstr "Voer programma uit"
 
-#: applets/desk-guide/deskguide_applet.c:90
-msgid "Incremental update delay [ms]"
-msgstr "Cumulatieve ververs vertraging [ms]"
+#: gsm/splash.c:55
+#, fuzzy
+msgid "Audio Settings"
+msgstr " Instellingen"
 
-#: applets/desk-guide/deskguide_applet.c:91
-msgid "Tooltips"
-msgstr "Tooltips"
+#: gsm/splash.c:56 gsm/splash.c:57
+#, fuzzy
+msgid "Screensaver"
+msgstr "Schermbeveilingsinstellingen"
 
-#: applets/desk-guide/deskguide_applet.c:93
-msgid "Show Desk-Guide tooltips"
-msgstr "Toon bureau-gids tooltips"
+#: gsm/splash.c:58 gsm/splash.c:59
+msgid "Sawfish Window Manager"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:95
-msgid "Desk-Guide tooltip delay [ms]"
-msgstr "Bureau-gids tooltip vertraging [ms]"
+#: gsm/splash.c:60
+msgid "Enlightenment Window Manager"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:97
-msgid "Show desktop name tooltips"
-msgstr "Toon bureaublad naam tooltips"
+#: gsm/splash.c:61
+#, fuzzy
+msgid "Background Settings"
+msgstr "Achtergrondeigenschappen"
 
-#: applets/desk-guide/deskguide_applet.c:99
-msgid "Desktop name tooltip delay [ms]"
-msgstr "Bureaublad naam tooltip vertraging [ms]"
+#: gsm/splash.c:62
+#, fuzzy
+msgid "Keyboard Bell"
+msgstr "Toetsenbord"
 
-#: applets/desk-guide/deskguide_applet.c:101
-msgid "Tasks"
-msgstr "Taaklijst"
+#: gsm/splash.c:63
+#, fuzzy
+msgid "Mouse Settings"
+msgstr "Geheugenbelasting Eigenschappen"
 
-#: applets/desk-guide/deskguide_applet.c:102
-msgid "Visibility"
-msgstr "Zichtbaarheid"
+#: gsm/splash.c:64
+#, fuzzy
+msgid "Keyboard Settings"
+msgstr "Geheugenbelasting Eigenschappen"
 
-#: applets/desk-guide/deskguide_applet.c:104
-msgid "Show hidden tasks (HIDDEN)"
-msgstr "Toon verborgen taken (HIDDEN)"
+#: gsm/splash.c:65
+#, fuzzy
+msgid "The Panel"
+msgstr "Het GNOME Paneel"
 
-#: applets/desk-guide/deskguide_applet.c:106
-msgid "Show shaded tasks (SHADED)"
-msgstr "Toon shaded taken (SHADED)"
+#: gsm/splash.c:66
+msgid "Session Manager Proxy"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:108
-msgid "Show tasks which hide from window list (SKIP-WINLIST)"
-msgstr "Toon taken verborgen voor vensterlijst (SKIP-WINLIST)"
-
-#: applets/desk-guide/deskguide_applet.c:110
-msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
-msgstr "Toon taken verborgen voor taakbalk (SKIP-TASKBAR)"
-
-#. CONFIG_SECTION (sect_null_1, NULL),
-#: applets/desk-guide/deskguide_applet.c:113
-msgid "Geometry"
-msgstr "Geometrie"
-
-#: applets/desk-guide/deskguide_applet.c:114
-msgid "Horizontal Layout"
-msgstr "Horizontale layout"
-
-#: applets/desk-guide/deskguide_applet.c:116
-msgid "Desktop Height [pixels]"
-msgstr "Bureaublad hoogte [punten]"
-
-#: applets/desk-guide/deskguide_applet.c:118
-msgid "Override desktop height with panel size"
-msgstr "Overschrijf bureaublad hoogte met paneel grootte"
-
-#: applets/desk-guide/deskguide_applet.c:120
-msgid "Divide height by number of vertical areas"
-msgstr "Verdeel hoogte over aantal verticale gebieden"
-
-#: applets/desk-guide/deskguide_applet.c:122
-msgid "Rows of Desktops"
-msgstr "Aantal rijen met bureaubladen"
-
-#: applets/desk-guide/deskguide_applet.c:124
-msgid "Divide height by number of rows"
-msgstr "Verdeel hoogte over aantal rijen"
-
-#: applets/desk-guide/deskguide_applet.c:125
-msgid "Vertical Layout"
-msgstr "Verticale layout"
-
-#: applets/desk-guide/deskguide_applet.c:127
-msgid "Desktop Width [pixels]"
-msgstr "Bureaublad breedte [punten]"
-
-#: applets/desk-guide/deskguide_applet.c:129
-msgid "Override desktop width with panel size"
-msgstr "Overschrijf breedte bureaublad met paneel grootte"
-
-#: applets/desk-guide/deskguide_applet.c:131
-msgid "Divide width by number of horizontal areas"
-msgstr "Verdeel breedte over aantal horizontale gebieden"
-
-#: applets/desk-guide/deskguide_applet.c:133
-msgid "Columns of Desktops"
-msgstr "Aantal kolommen met bureaubladen"
-
-#: applets/desk-guide/deskguide_applet.c:135
-msgid "Divide width by number of columns"
-msgstr "Verdeel breedte over aantal kolommen"
-
-#: applets/desk-guide/deskguide_applet.c:137
-msgid "Advanced"
-msgstr "Geavanceerd"
-
-#: applets/desk-guide/deskguide_applet.c:138
-msgid "Window Manager Workarounds"
+#: gsm/splash.c:67
+#, fuzzy
+msgid "Window Manager"
 msgstr "Window Manager Workarounds"
 
-#: applets/desk-guide/deskguide_applet.c:140
+#: gsm/splash.c:68 panel/menu.c:4618 panel/menu.c:4623 panel/menu.c:4963
+msgid "Desktop"
+msgstr "Bureaublad"
+
+#: gsm/splash.c:69
+#, fuzzy
+msgid "Nautilus"
+msgstr "Geen berichten."
+
+#: gsm/splash.c:287
+#, fuzzy, c-format
+msgid "Starting GNOME: %s"
+msgstr "GNOME aan het starten... %s"
+
+#: gsm/splash.c:289
+#, fuzzy
+msgid "Starting GNOME: done"
+msgstr "GNOME aan het starten... %s"
+
+#: gsm/splash.c:439
+#, fuzzy
+msgid "GNOME"
+msgstr "GNOME Help"
+
+#: gsm/splash.c:440
+#, fuzzy
+msgid "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*"
+msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+
+#: gsm/splash.c:459
+msgid "Starting GNOME"
+msgstr "GNOME aan het starten..."
+
+#: gsm/splash.c:462
+#, fuzzy
+msgid "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-*-*"
+msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
+
+#: gsm/startup-programs.c:283 gsm/startup-programs.c:290
+#, fuzzy
+msgid "Startup Command"
+msgstr "Gebruikersopdrachten"
+
+#: gsm/startup-programs.c:314
 msgid ""
-"Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
 msgstr ""
-"Window manager verplaatst dekoratie\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
 
-#: applets/desk-guide/deskguide_applet.c:143
-msgid ""
-"Window manager changes active area on all desktops\n"
-"(FVWM, Sawfish)"
+#: gsm/startup-programs.c:333
+msgid "The startup command cannot be empty"
 msgstr ""
-"Window manager verandert het aktieve gebied op alle bureaubladen\n"
-"(FVWM, Sawfish)"
 
-#: applets/desk-guide/deskguide_applet.c:146
-msgid ""
-"Window manager expects pager to modify area+desktop properties directly\n"
-"(Enlightenment, FVWM)"
+#: gsm/startup-programs.c:373
+#, fuzzy
+msgid "Add Startup Program"
+msgstr "Voer programma uit"
+
+#: gsm/startup-programs.c:391
+#, fuzzy
+msgid "Edit Startup Program"
+msgstr "Voer programma uit"
+
+#: libpanel-applet/panel-applet.c:290 libpanel-applet/panel-applet.c:307
+#, c-format
+msgid "panel_applet_set_prop: Incomplete '%s' background type received"
 msgstr ""
-"Window manager verwacht dat de pager gebieds- en bureaublad eigenschappen "
-"verandert\n"
-"(Enlightenment, FVWM)"
 
-#: applets/desk-guide/deskguide_applet.c:149
-msgid "Behaviour"
-msgstr "Gedrag"
-
-#: applets/desk-guide/deskguide_applet.c:151
-msgid "Popdown task view automatically"
-msgstr "Popdown taken automatisch bekijken"
-
-#: applets/desk-guide/deskguide_applet.c:173
-msgid "GNOME Desktop Guide (Pager)"
-msgstr "GNOME Bureaublad gids (Pager)"
-
-#: applets/desk-guide/deskguide_applet.c:189
-msgid ""
-"You are not running a GNOME Compliant\n"
-"Window Manager. GNOME support by the \n"
-"window manager is strongly recommended\n"
-"for proper Desk Guide operation."
+#: libpanel-applet/panel-applet.c:321
+msgid "panel_applet_set_prop: Unknown backgound type received"
 msgstr ""
-"U gebruikt geen GNOME-compliant Window Manager, \n"
-"Het is sterk aanbevolen voor de Bureaublad gids\n"
-"dat u een window manager gebruikt die GNOME ondersteunt."
 
-#: applets/desk-guide/deskguide_applet.c:194
-msgid "Desk Guide Alert"
-msgstr "Bureau gids fout"
+#: libpanel-applet/panel-applet.c:348
+msgid "The Applet's containing Panel's orientation"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:239 applets/gen_util/mailcheck.c:1516
-#: applets/gen_util/printer.c:468 applets/tasklist/tasklist_applet.c:1693
-#: panel/drawer.c:513 panel/launcher.c:651 panel/menu.c:1796 panel/menu.c:1878
-#: panel/menu.c:4563 panel/menu.c:5342
-msgid "Properties..."
-msgstr "Eigenschappen..."
+#: libpanel-applet/panel-applet.c:356
+msgid "The Applet's containing Panel's size in pixels"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:245 applets/gen_util/mailcheck.c:1528
-#: applets/gen_util/printer.c:475 applets/tasklist/tasklist_applet.c:1701
-#: gsm/session-properties.c:182 help-browser/window.c:255 panel/drawer.c:515
-#: panel/gnome-run.c:1306 panel/launcher.c:653 panel/logout.c:126
-#: panel/logout.c:211 panel/menu.c:5353 panel/status.c:376 panel/swallow.c:448
-msgid "Help"
-msgstr "Help"
-
-#: applets/desk-guide/deskguide_applet.c:252 applets/gen_util/mailcheck.c:1534
-#: applets/gen_util/printer.c:481 applets/tasklist/tasklist_applet.c:1709
-msgid "About..."
-msgstr "Over..."
-
-#: applets/desk-guide/deskguide_applet.c:641
-msgid "Desk Guide Task View"
-msgstr "Bureau gids taken bekijken"
-
-#: applets/desk-guide/deskguide_applet.c:1096
-msgid "Global"
-msgstr "Algemeen"
-
-#: applets/desk-guide/deskguide_applet.c:1152
-msgid "Desk Guide Settings"
-msgstr "Bureau gids instellingen"
+#: libpanel-applet/panel-applet.c:364
+msgid "The Applet's containing Panel's background color or pixmap"
+msgstr ""
 
 #: applets/fish/fish.c:429 applets/fish/fish.c:823
 #, no-c-format
@@ -424,10 +1445,9 @@ msgstr "De naam van uw GNOME Vis:"
 msgid "The Animation Filename:"
 msgstr "Naam van het animatiebestand:"
 
-#: applets/fish/fish.c:575 applets/gen_util/mailcheck.c:1020
-#: gnome-hint/gnome-hint-properties.c:146 panel/menu-properties.c:591
+#: applets/fish/fish.c:575 panel/menu-properties.c:591
 #: panel/menu-properties.c:629 panel/panel-util.c:211
-#: panel/panel_config.c:1659 panel/swallow.c:287
+#: panel/panel_config.c:1655 panel/swallow.c:286
 msgid "Browse"
 msgstr "Zoeken..."
 
@@ -605,2153 +1625,51 @@ msgstr ""
 "Het klok applet geeft uw paneel een lichtgewicht en eenvoudige weergave van "
 "de datum en tijd"
 
-#: applets/gen_util/mailcheck.c:206 applets/gen_util/mailcheck.c:1064
-msgid "Password:"
-msgstr "Paswoord:"
-
-#: applets/gen_util/mailcheck.c:229
-msgid ""
-"Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
-"wrong server/username/password?"
-msgstr ""
-"Er is een fout met de afstand-client gebeurd. Nazicht op afstand wordt "
-"gedeactiveerd. Misschien is uw server/gebruikersnaam/paswoord verkeerd?"
-
-#: applets/gen_util/mailcheck.c:471
-msgid "You have new mail."
-msgstr "U heeft nieuwe berichten."
-
-#: applets/gen_util/mailcheck.c:473
-msgid "You have mail."
-msgstr "U heeft mail."
-
-#: applets/gen_util/mailcheck.c:477
-#, c-format
-msgid "%d/%d messages"
-msgstr "%d/%d berichten"
-
-#: applets/gen_util/mailcheck.c:479
-#, c-format
-msgid "%d messages"
-msgstr "%d berichten"
-
-#: applets/gen_util/mailcheck.c:483
-msgid "No mail."
-msgstr "Geen mail."
-
-#: applets/gen_util/mailcheck.c:965
-msgid "Mailbox resides on:"
-msgstr "Postbus bevindt zich op:"
-
-#: applets/gen_util/mailcheck.c:972
-msgid "Local mailspool"
-msgstr "Lokale map met e-mail"
-
-#: applets/gen_util/mailcheck.c:980
-msgid "Local maildir"
-msgstr "Lokale e-mail map"
-
-#: applets/gen_util/mailcheck.c:988
-msgid "Remote POP3-server"
-msgstr "POP3-server op afstand"
-
-#: applets/gen_util/mailcheck.c:996
-msgid "Remote IMAP-server"
-msgstr "IMAP-server op afstand"
-
-#: applets/gen_util/mailcheck.c:1016
-msgid "Mail spool file:"
-msgstr "E-mail map bestand:"
-
-#: applets/gen_util/mailcheck.c:1033
-msgid "Mail server:"
-msgstr "Mail server:"
-
-#: applets/gen_util/mailcheck.c:1050
-msgid "Username:"
-msgstr "Gebruikersnaam: "
-
-#: applets/gen_util/mailcheck.c:1082
+#: applets/gen_util/pager.c:228
 #, fuzzy
-msgid "Folder:"
-msgstr " Map"
+msgid "Pager Applet"
+msgstr "Fvwm Bureaubladschakelaar Applet"
 
-#: applets/gen_util/mailcheck.c:1100
-msgid "Command to run before we check for mail:"
-msgstr ""
-
-#: applets/gen_util/mailcheck.c:1130
-msgid "Execute"
-msgstr "Voer uit"
-
-#: applets/gen_util/mailcheck.c:1141
-msgid "Before each update:"
-msgstr "Voor elke update:"
-
-#: applets/gen_util/mailcheck.c:1162
-msgid "When new mail arrives:"
-msgstr "Wanneer nieuwe mail binnenkomt:"
-
-#: applets/gen_util/mailcheck.c:1181
-msgid "When clicked:"
-msgstr "Wanneer ingedrukt."
-
-#: applets/gen_util/mailcheck.c:1204
-msgid "Check for mail every"
-msgstr "Controleer mail elke"
-
-#: applets/gen_util/mailcheck.c:1217
-msgid "minutes"
-msgstr "minuten"
-
-#: applets/gen_util/mailcheck.c:1230
-msgid "seconds"
-msgstr "seconden"
-
-#: applets/gen_util/mailcheck.c:1234
-msgid "Play a sound when new mail arrives"
-msgstr "Maak geluid als er nieuwe berichten zijn"
-
-#: applets/gen_util/mailcheck.c:1245
-msgid "Select animation"
-msgstr "Kies animatie"
-
-#: applets/gen_util/mailcheck.c:1282
-msgid "Mail check properties"
-msgstr "'Mail check' Eigenschappen"
-
-#: applets/gen_util/mailcheck.c:1288
-msgid "Mail check"
-msgstr "Mail check"
-
-#: applets/gen_util/mailcheck.c:1291
-msgid "Mailbox"
-msgstr "Postbus"
-
-#: applets/gen_util/mailcheck.c:1376
-msgid "Mail check Applet"
-msgstr "'Mail check' Applet"
-
-#: applets/gen_util/mailcheck.c:1377
-msgid "(c) 1998-2000 the Free Software Foundation"
+#: applets/gen_util/pager.c:229
+#, fuzzy
+msgid "(c) 2001 the Free Software Foundation"
 msgstr "(c) 1998-2000 the Free Software Foundation"
 
-#: applets/gen_util/mailcheck.c:1379
-#, fuzzy
-msgid "Mail check notifies you when new mail arrives in your mailbox"
-msgstr "'Mail check' waarschuwt u wanneer er nieuwe mail is"
-
-#: applets/gen_util/mailcheck.c:1430 applets/gen_util/printer.c:425
-msgid "Can't create applet!\n"
-msgstr "Applet kan niet gecreëerd worden!\n"
-
-#: applets/gen_util/mailcheck.c:1494
-msgid "Text only"
-msgstr "Alleen tekst"
-
-#: applets/gen_util/mailcheck.c:1522
-msgid "Check for mail"
-msgstr "Controleer op mail"
-
-#: applets/gen_util/printer.c:120
-msgid "Can't execute printer command"
-msgstr "Kan printer commando niet uitvoeren"
-
-#: applets/gen_util/printer.c:308
-msgid "Printer properties"
-msgstr "Printereigenschappen"
-
-#: applets/gen_util/printer.c:317
-msgid "Printer name:"
-msgstr "Printernaam:"
-
-#: applets/gen_util/printer.c:321
-msgid "Print command:"
-msgstr "Afdrukcommando:"
-
-#: applets/gen_util/printer.c:327
-msgid "Printer"
-msgstr "Printer"
-
-#: applets/gen_util/printer.c:355
-msgid "Printer Applet"
-msgstr "Printer Applet"
-
-#: applets/gen_util/printer.c:356
-msgid "(c) 1998 the Free Software Foundation"
-msgstr "(c) 1998 the Free Software Foundation"
-
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/pager.c:230
 msgid ""
-"The printer applet lets you easily drag files to be printed via a print "
-"command"
+"The pager applet shows you a small version of your workspaces that lets you "
+"manage the windows."
 msgstr ""
-"Het printer applet laat je eenvoudig bestanden afdrukken als je ze op het "
-"applet sleept"
 
 #. Translators: Task with no name, should not really happen, so
 #. * this should signal that the panel is confused by this task
 #. * (thus question marks)
-#: applets/tasklist/tasklist_applet.c:135 panel/applet.c:437
-#: panel/foobar-widget.c:838
+#: panel/applet.c:446 panel/foobar-widget.c:838
 msgid "???"
 msgstr "???"
 
-#: applets/tasklist/tasklist_applet.c:1421
-#, fuzzy
-msgid "Copyright (C) 1999 Anders Carlsson"
-msgstr "Copyright (C) 1998 M. Lausch"
-
-#: applets/tasklist/tasklist_applet.c:1423
-msgid ""
-"A tasklist for the GNOME desktop environment.\n"
-"Icons by Tuomas Kuosmanen (tigert@gimp.org)."
-msgstr ""
-
-#: applets/tasklist/tasklist_applet.c:1615
-#, fuzzy
-msgid "Tasklist: Unable to create applet widget"
-msgstr "Creëren van bestand '%s' mislukt\n"
-
-#: applets/tasklist/tasklist_applet.c:1808
-#, c-format
-msgid "Don't know how to activate `%s'\n"
-msgstr "Weet hoe '%s' te starten\n"
-
-#: applets/tasklist/tasklist_menu.c:96 applets/tasklist/tasklist_menu.c:155
-msgid ""
-"Warning! Unsaved changes will be lost!\n"
-"Proceed?"
-msgstr ""
-"Waarschuwing! Niet bewaarde veranderingen gaan verloren!\n"
-"Doorgaan?"
-
-#: applets/tasklist/tasklist_menu.c:258
-msgid "Restore"
-msgstr "Herstellen"
-
-#: applets/tasklist/tasklist_menu.c:258
-msgid "Iconify"
-msgstr "Maak pictogram"
-
-#: applets/tasklist/tasklist_menu.c:264
-msgid "Unshade"
-msgstr "Ontshade"
-
-#: applets/tasklist/tasklist_menu.c:264
-msgid "Shade"
-msgstr "Shade"
-
-#: applets/tasklist/tasklist_menu.c:270
-msgid "Unstick"
-msgstr "Plakken uit"
-
-#: applets/tasklist/tasklist_menu.c:270
-msgid "Stick"
-msgstr "Plakken aan"
-
-#: applets/tasklist/tasklist_menu.c:276 applets/tasklist/tasklist_menu.c:369
-msgid "To desktop"
-msgstr "Naar bureaublad"
-
-#: applets/tasklist/tasklist_menu.c:316
-msgid "Close window"
-msgstr "Venster sluiten"
-
-#: applets/tasklist/tasklist_menu.c:323
-msgid "Kill app"
-msgstr "Vernietig programma"
-
-#. if (iconified window in group)
-#: applets/tasklist/tasklist_menu.c:349
-#, fuzzy
-msgid "Restore All"
-msgstr "Herstellen"
-
-#: applets/tasklist/tasklist_menu.c:352
-#, fuzzy
-msgid "Iconify All"
-msgstr "Maak pictogram"
-
-#: applets/tasklist/tasklist_menu.c:355
-#, fuzzy
-msgid "Unshade All"
-msgstr "Ontshade"
-
-#: applets/tasklist/tasklist_menu.c:358
-#, fuzzy
-msgid "Shade All"
-msgstr "Shade"
-
-#: applets/tasklist/tasklist_menu.c:361
-#, fuzzy
-msgid "Unstick All"
-msgstr "Plakken uit"
-
-#: applets/tasklist/tasklist_menu.c:364
-#, fuzzy
-msgid "Stick All"
-msgstr "Plakken aan"
-
-#: applets/tasklist/tasklist_menu.c:409
-#, fuzzy
-msgid "Close All"
-msgstr "Afsluiten"
-
-#: applets/tasklist/tasklist_menu.c:417
-#, fuzzy
-msgid "Kill All"
-msgstr "Vernietig programma"
-
-#: applets/tasklist/tasklist_properties.c:156
-msgid "Follow panel size"
-msgstr "Volg paneel grootte"
-
-#: applets/tasklist/tasklist_properties.c:165
-msgid "Horizontal"
-msgstr "Horizontaal"
-
-#: applets/tasklist/tasklist_properties.c:175
-#: applets/tasklist/tasklist_properties.c:237
-msgid "Tasklist width:"
-msgstr "Taaklijst breedte:"
-
-#: applets/tasklist/tasklist_properties.c:182
-msgid "Rows of tasks:"
-msgstr "Rijen met taken:"
-
-#: applets/tasklist/tasklist_properties.c:196
-msgid "Default task size:"
-msgstr "Standaard taak grootte"
-
-#: applets/tasklist/tasklist_properties.c:206
-msgid "Tasklist width is fixed"
-msgstr "Taaklijst breedte is vast"
-
-#: applets/tasklist/tasklist_properties.c:211
-msgid "Tasklist width is dynamic"
-msgstr "Taaklijst breedte is dynamisch"
-
-#: applets/tasklist/tasklist_properties.c:216
-#: applets/tasklist/tasklist_properties.c:262
-msgid "Only use empty space"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:222
-msgid "Vertical"
-msgstr "Verticaal"
-
-#: applets/tasklist/tasklist_properties.c:230
-msgid "Tasklist height:"
-msgstr "Taaklijst hoogte:"
-
-#: applets/tasklist/tasklist_properties.c:250
-msgid "Tasklist height is fixed"
-msgstr "Taaklijst hoogte is vast"
-
-#: applets/tasklist/tasklist_properties.c:256
-msgid "Tasklist height is dynamic"
-msgstr "Taaklijst hoogte is dynamisch"
-
-#: applets/tasklist/tasklist_properties.c:268
-#, fuzzy
-msgid "Tasklist width is that of longest title"
-msgstr "Taaklijst breedte is vast"
-
-#: applets/tasklist/tasklist_properties.c:276
-msgid "Size"
-msgstr "Afmetingen"
-
-#: applets/tasklist/tasklist_properties.c:289
-msgid "Which tasks to show"
-msgstr "Welke taken tonen"
-
-#: applets/tasklist/tasklist_properties.c:300
-msgid "Show normal applications"
-msgstr "Toon normale programma's"
-
-#: applets/tasklist/tasklist_properties.c:306
-msgid "Show iconified (minimized) applications"
-msgstr "Toon programma's als pictogram (geminimaliseerd)"
-
-#: applets/tasklist/tasklist_properties.c:313
-msgid "Show normal applications on all desktops"
-msgstr "Toon normale programma's op alle bureaubladen"
-
-#: applets/tasklist/tasklist_properties.c:319
-msgid "Show iconified (minimized) applications on all desktops"
-msgstr "Toon programma's als pictogram (geminimaliseerd) op alle bureaubladen"
-
-#. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:323 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:724
-#: panel/gnome-panel-properties.c:1219 panel/panel_config.c:743
-msgid "Miscellaneous"
-msgstr "Diversen"
-
-#: applets/tasklist/tasklist_properties.c:334
-msgid "Show mini icons"
-msgstr "Toon mini pictogrammen"
-
-#: applets/tasklist/tasklist_properties.c:341
-msgid "Confirm before killing windows"
-msgstr "Bevestig bij vernietigen vensters"
-
-#: applets/tasklist/tasklist_properties.c:348
-msgid "Move iconified tasks to current workspace when restoring"
-msgstr ""
-"Verplaats geminimalizeerde taken naar de huidige werkruimte als ze geopend "
-"worden"
-
-#: applets/tasklist/tasklist_properties.c:355
-msgid "Display tooltips with full task names"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:363
-#, fuzzy
-msgid "Enable task grouping"
-msgstr "Zet gsm debugging aan"
-
-#: applets/tasklist/tasklist_properties.c:371
-msgid "Number of tasks before grouping occurs"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:380
-msgid "Sink tasklist into panel"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:414
-msgid "Tasklist properties"
-msgstr "Taaklijst eigenschappen"
-
-#: gmenu/desktop.c:84
-msgid " Folder"
-msgstr " Map"
-
-#: gmenu/edit.c:307
-msgid "Save"
-msgstr "Bewaren"
-
-#: gmenu/edit.c:325 gsm/session-properties.c:173
-msgid "Revert"
-msgstr "Herstel"
-
-#: gmenu/edit.c:367 gmenu/tree.c:401
-msgid "Favorites (user menus)"
-msgstr "Favorieten (gebruikersmenu's)"
-
-#: gmenu/edit.c:369 gmenu/tree.c:409
-msgid "Programs (system menus)"
-msgstr "Programma's (systeemmenu's)"
-
-#: gmenu/edit.c:371 gmenu/tree.c:427
-msgid "Applets (system menus)"
-msgstr "Applets (systeem menu's)"
-
-#: gmenu/edit.c:374 gmenu/tree.c:418
-msgid "Programs to be merged in (system menus)"
-msgstr "Samen te voegen programma's (systeemmenu's)"
-
-#: gmenu/main.c:53 gmenu/main.c:128
-msgid "_New Submenu..."
-msgstr "_Nieuw Submenu..."
-
-#: gmenu/main.c:54 gmenu/main.c:98 gmenu/main.c:129
-msgid "Create a new submenu"
-msgstr "Maak een nieuw submenu"
-
-#: gmenu/main.c:57 gmenu/main.c:125
-msgid "New _Item..."
-msgstr "Nieuw _Item..."
-
-#: gmenu/main.c:58 gmenu/main.c:126
-msgid "Create a new menu item"
-msgstr "Maak een nieuw menu-item"
-
-#: gmenu/main.c:61 gmenu/main.c:134
-msgid "_Delete..."
-msgstr "Verwij_deren"
-
-#: gmenu/main.c:72
-msgid "_Sort Submenu"
-msgstr "_Sorteer Submenu"
-
-#: gmenu/main.c:76
-msgid "Sort Submenu _Recursive"
-msgstr "Submenu _Recursief Sorteren"
-
-#: gmenu/main.c:90 gmenu/main.c:149
-msgid "_Sort"
-msgstr "Sorteren"
-
-#: gmenu/main.c:98
-msgid "New Submenu"
-msgstr "Nieuw Submenu"
-
-#: gmenu/main.c:102
-msgid "New Item"
-msgstr "Nieuw item"
-
-#: gmenu/main.c:102
-msgid "Create a new item"
-msgstr "Maak een nieuw item"
-
-#: gmenu/main.c:106 gsm/session-properties-capplet.c:257
-#: gsm/session-properties-capplet.c:311
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: gmenu/main.c:106
-msgid "Delete selected menu item"
-msgstr "Verwijder geselecteerd menu-item"
-
-#: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Naar boven"
-
-#: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move selected menu up"
-msgstr "Geselecteerd menu naar boven"
-
-#: gmenu/main.c:113 gmenu/main.c:143
-msgid "Move down"
-msgstr "Naar beneden"
-
-#: gmenu/main.c:113 gmenu/main.c:143
-msgid "Move selected menu down"
-msgstr "Geselecteerd menu naar beneden"
-
-#: gmenu/main.c:117
-msgid "Sort Submenu"
-msgstr "Sorteer Submenu"
-
-#: gmenu/main.c:117
-msgid "Sort selected submenu"
-msgstr "Sorteer geselecteerd submenu"
-
-#: gmenu/main.c:153
-msgid "Sort _Recursive"
-msgstr "_Recursief Sorteren"
-
-#. loading dialog
-#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
-msgid "GNOME menu editor"
-msgstr "GNOME Menu-editor"
-
-#: gmenu/main.c:244
-msgid ""
-"Released under the terms of the GNU Public License.\n"
-"GNOME menu editor."
-msgstr ""
-"Released under the terms of the GNU Public License.\n"
-"GNOME menu editor."
-
-#: gmenu/main.c:288
-msgid "Unable to retrieve GNOME installation directory\n"
-msgstr "Kan GNOME installatiedirectory niet vinden\n"
-
-#: gmenu/order.c:81
-#, c-format
-msgid "Unable to create file: %s\n"
-msgstr "Creëren van bestand '%s' mislukt\n"
-
-#: gmenu/order.c:95
-#, c-format
-msgid "unable to remove .order file: %s\n"
-msgstr ".order bestand kan niet verwijderd worden: %s\n"
-
-#: gmenu/save.c:27 gmenu/save.c:86
-msgid "The menu item must have a name"
-msgstr "Het menu-item moet een naam hebben"
-
-#: gmenu/save.c:33
-msgid "The menu entry must have a filename"
-msgstr "Het menu moet een naam hebben"
-
-#: gmenu/save.c:40
-msgid "Save changes?"
-msgstr "Veranderingen bewaren?"
-
-#: gmenu/save.c:54
-msgid "This change conflicts with an existing menu item"
-msgstr "Deze verandering conflicteert met een bestaand menu item"
-
-#: gmenu/save.c:61
-msgid "Overwrite existing menu entry?"
-msgstr "Overschrijven van bestaand menu?"
-
-#: gmenu/save.c:114
-msgid ""
-"This change conflicts with an existing menu item.\n"
-"No two menu items in a submenu can have the same name."
-msgstr ""
-"Deze verandering conflicteert met een bestaand menu item.\n"
-"Menu items moeten een unieke naam hebben."
-
-#: gmenu/tree.c:382
-msgid "One moment, reading menus..."
-msgstr "Even geduld, menu's worden ingelezen"
-
-#: gmenu/tree.c:402
-msgid "Top of user menus"
-msgstr "Top van gebruikersmenu's"
-
-#: gmenu/tree.c:410
-msgid "Top of system menus"
-msgstr "Top van systeemmenu's"
-
-#: gmenu/tree.c:419
-msgid "Top of system merge menus"
-msgstr "Top van systeem samenvoeg menu's"
-
-#: gmenu/tree.c:428
-msgid "Top of applet menus"
-msgstr "Top van appletmenu's"
-
-#: gmenu/treedel.c:118
-msgid "You can not delete a top level submenu."
-msgstr "U kunt geen submenu van het hoogste niveau wissen."
-
-#: gmenu/treedel.c:130 gmenu/treedel.c:153
-msgid "Delete this menu item?"
-msgstr "Verwijder dit menu-item"
-
-#: gmenu/treedel.c:140
-msgid "Delete empty submenu?"
-msgstr "Verwijderen leeg submenu?"
-
-#: gmenu/treedel.c:146
-msgid "Are you sure you want to delete this submenu and all its contents?"
-msgstr "Weet u zeker dat u dit submenu en zijn inhoud wil verwijderen?"
-
-#: gmenu/treenew.c:35 gmenu/treenew.c:110
-msgid ""
-"You can't add an entry to that submenu.\n"
-"You do not have the proper permissions."
-msgstr ""
-"U kunt niets toevoegen aan die map,\n"
-"want u heeft niet de benodigde rechten."
-
-#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
-msgid "New Folder"
-msgstr "Nieuwe Map"
-
-#: gmenu/treenew.c:63
-msgid "Failed to create directory"
-msgstr "Creëren van bestand mislukt."
-
-#: gmenu/treenew.c:118 gmenu/treenew.c:127
-msgid "untitled.desktop"
-msgstr "untitled.desktop"
-
-#: gmenu/treenew.c:137 gmenu/treenew.c:144
-msgid "untitled"
-msgstr "naamloos"
-
-#: gmenu/utils.c:32
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "Gebruikersdirectory wordt aangemaakt: %s\n"
-
-#: gmenu/utils.c:35
-#, c-format
-msgid "unable to create user directory: %s\n"
-msgstr "Kan gebruikersdirectory '%s' niet aanmaken\n"
-
-#: gnome-about/contributors.h:13
-msgid "GNOME was brought to you by"
-msgstr "GNOME werd u aangeboden door"
-
-#: gnome-about/contributors.h:22
-msgid "Timur I. Bakeyev"
-msgstr ""
-
-#. if your encoding allows it, use aacute (U00E1)
-#. * for the 'a' of 'Ban'
-#: gnome-about/contributors.h:25
-msgid "Szabolcs 'Shooby' Ban"
-msgstr "Szabolcs 'Shooby' Bán"
-
-#: gnome-about/contributors.h:38
-msgid "Jerome Bolliet"
-msgstr ""
-
-#. if your encoding allows it, use eacute (U00E9) for the two
-#. * 'e' of 'Frederic'
-#: gnome-about/contributors.h:64
-msgid "Frederic Devernay"
-msgstr "Frédéric Devernay"
-
-#. if your encoding allows it, use odoubleacute (U0151) for the 'o'
-#. * of 'Gergo' and use Eacute (U00C9) for the 'E' of 'Erdi'
-#: gnome-about/contributors.h:77
-msgid "Gergo Erdi"
-msgstr "Gergo Érdi"
-
-#: gnome-about/contributors.h:84
-msgid "Raul Perusquia Flores"
-msgstr ""
-
-#: gnome-about/contributors.h:96
-msgid "The Mysterious GEGL"
-msgstr "Het Mysterieuse GEGL"
-
-#: gnome-about/contributors.h:98
-msgid "Bjoern Giesler"
-msgstr ""
-
-#: gnome-about/contributors.h:104
-msgid "Dov Grobgeld"
-msgstr ""
-
-#: gnome-about/contributors.h:131
-msgid "Helmut Koeberle"
-msgstr ""
-
-#: gnome-about/contributors.h:165
-msgid "Matthew Marjanovic"
-msgstr ""
-
-#. If your encodings allows it, use ntilde (U00F1) for the 'n'
-#. * of 'Muniz'
-#: gnome-about/contributors.h:188
-msgid "Alexandre Muniz"
-msgstr "Alexandre Muñiz"
-
-#. Name in Hangeul is: Ub0a8 Uc131 Ud604
-#: gnome-about/contributors.h:190
-msgid "Sung-Hyun Nam"
-msgstr "Sung-Hyun Nam"
-
-#. If your encodings allows it, use adiaeresis (U00E4) for the 'ae'
-#. * of 'Norbaeck'
-#: gnome-about/contributors.h:197
-msgid "Martin Norbaeck"
-msgstr "Martin Norbäck"
-
-#. If your encodings allows it, use Odiaeresis (U00D6) for the 'Oe'
-#. * of 'Oegren'
-#: gnome-about/contributors.h:204
-msgid "Tomas Oegren"
-msgstr "Tomas Ögren"
-
-#. If your encoding allows it, use oacute (U00F3) for the 'o'
-#. * of 'Perello' and use iacute (U00ED) for the 'i' of 'Marin'
-#: gnome-about/contributors.h:214
-msgid "Carlos Perello Marin"
-msgstr ""
-
-#. Name in Japanese is: U7b39 U5c71 U548c U5b8f
-#: gnome-about/contributors.h:239
-msgid "Kazuhiro Sasayama"
-msgstr "Kazuhiro Sasayama"
-
-#. If your encodings allows it, use ntilde (U00F1) for the 'n'
-#. * of 'Inigo'
-#: gnome-about/contributors.h:247
-msgid "Inigo Serna"
-msgstr "Iñigo Serna"
-
-#: gnome-about/contributors.h:251
-msgid "Miroslav Silovic"
-msgstr ""
-
-#. not really a person name :) translate its meaning
-#: gnome-about/contributors.h:261
-msgid "The Squeaky Rubber Gnome"
-msgstr "De Piepende Rubbere Gnome"
-
-#: gnome-about/contributors.h:267
-msgid "Istvan Szekeres"
-msgstr ""
-
-#: gnome-about/contributors.h:278
-msgid "Manish Vachharajani"
-msgstr ""
-
-#: gnome-about/contributors.h:279
-msgid "Neil Vachharajani"
-msgstr ""
-
-#: gnome-about/contributors.h:286
-msgid "Wanda the GNOME Fish"
-msgstr "Wanda de GNOME vis"
-
-#: gnome-about/contributors.h:300
-msgid "... and many more"
-msgstr "... en nog vele andere"
-
-#: gnome-about/gnome-about.c:466 panel/foobar-widget.c:302
-msgid "About GNOME"
-msgstr "Over GNOME"
-
-#: gnome-about/gnome-about.c:567
-msgid "GNOME News Site"
-msgstr "GNOME niewspagina"
-
-#: gnome-about/gnome-about.c:571
-msgid "http://www.gnome.org/"
-msgstr "http://www.gnome.org/"
-
-#: gnome-about/gnome-about.c:572
-msgid "GNOME Main Site"
-msgstr "GNOME webpagina"
-
-#: gnome-about/gnome-about.c:577
-msgid "GNOME Developers' Site"
-msgstr "GNOME ontwikkelingspagina"
-
-#: gnome-edit/gnome-edit.c:141 gnome-edit/gnome-edit.c:148
-msgid ""
-"Error during execution of chosen editor.\n"
-"\n"
-"The editor you have chosen is probably either not available,\n"
-"or is not on your current path."
-msgstr ""
-"Fout bij het opstarten van uw gekozen editor.\n"
-"\n"
-"De gekozen editor bestaan niet of staat niet \n"
-"in uw huidig pad."
-
-#: gnome-edit/gnome-edit.c:167
-msgid ""
-"Alternate editor types are not supported by gnome-edit yet.\n"
-"Please choose a standard executable editor in the gnome-edit capplet\n"
-"in the gnome control center."
-msgstr ""
-"Wisselend editor types worden nog niet ondersteund door gnome-edit.\n"
-"Gelieve een standaard editor te kiezen in de gnome-edit capplet\n"
-"in het gnome controle center."
-
-#: gnome-hint/gnome-hint.c:35
-msgid "Start in hint browsing mode"
-msgstr "Start met hint browsing mode"
-
-#: gnome-hint/gnome-hint.c:39
-msgid "Start in motd mode"
-msgstr "Start in motd mode"
-
-#: gnome-hint/gnome-hint.c:43
-msgid "Start in fortune mode"
-msgstr "Start in fortune mode"
-
-#: gnome-hint/gnome-hint.c:47
-msgid "Start in session login mode (used from gsm)"
-msgstr "Start in session login mode (wordt gebruik voor gsm)"
-
-#: gnome-hint/gnome-hint.c:58
-msgid ""
-"Click on the GNOME foot icon to open the\n"
-"Main Menu.  This menu contains all\n"
-"GNOME applications, tools, and commands."
-msgstr ""
-"Klik op het GNOME voet menu op het\n"
-"Hoofd Menu te openen.  Dit menu beval alle\n"
-"GNOME applicaties, tools, en commando's."
-
-#: gnome-hint/gnome-hint.c:273
-msgid "You do not have fortune installed."
-msgstr "Fortune is niet geinstalleerd op uw systeem."
-
-#. the fixed font should be a font that is of a fixed
-#. * spacing, such as would be one in a terminal
-#: gnome-hint/gnome-hint.c:404
-#, fuzzy
-msgid "fixed"
-msgstr "Voorvoegsel %d"
-
-#: gnome-hint/gnome-hint.c:413 gnome-hint/gnome-hint.c:616
-msgid "Fortune"
-msgstr "Fortune"
-
-#: gnome-hint/gnome-hint.c:415 gnome-hint/gnome-hint.c:609
-msgid "Message of The Day"
-msgstr "Bericht van de dag"
-
-#: gnome-hint/gnome-hint.c:417
-#, fuzzy
-msgid "GNOME Hints"
-msgstr "GNOME Login"
-
-#: gnome-hint/gnome-hint.c:425
-msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
-msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
-
-#: gnome-hint/gnome-hint.c:453
-msgid ""
-"You've chosen to disable the startup hint.\n"
-"To re-enable it, choose \"Startup Hint\"\n"
-"in the GNOME Control Center"
-msgstr ""
-"U heeft gekozen om de opstart-tip\n"
-"uit te schakelen. Om hem weer in te schakelen,\n"
-"kiez 'Opstart-tip' in het GNOME Configuratiescherm"
-
-#: gnome-hint/gnome-hint.c:553
-msgid "No message of the day found!"
-msgstr "Geen bericht van de dag gevonden!"
-
-#: gnome-hint/gnome-hint.c:624
-msgid "Gnome hint"
-msgstr "Gnome hint"
-
-#: gnome-hint/gnome-hint.c:649
-msgid "Display this dialog next time"
-msgstr "Geef dit venster de volgende keer weer"
-
-#. add the enable box
-#: gnome-hint/gnome-hint-properties.c:110
-msgid "Enable login hints"
-msgstr "Activeer hints bij het inloggen"
-
-#. add the hint box
-#: gnome-hint/gnome-hint-properties.c:117
-msgid "Display normal hints"
-msgstr "Geef normale hints weer"
-
-#: gnome-hint/gnome-hint-properties.c:126
-msgid "Display fortunes instead of hints"
-msgstr "Geef fortunes weer in plaats van hints"
-
-#: gnome-hint/gnome-hint-properties.c:135
-msgid "Display message of the day instead of hints"
-msgstr "Geef bericht van de dag weer in plaats van hints"
-
-#: gnome-hint/gnome-hint-properties.c:144
-msgid "Message of the day file to use: "
-msgstr "Bericht van de dag bestand: "
-
-#: gnome-terminal/gnome-terminal.c:288
-msgid "GNOME Terminal"
-msgstr "GNOME Terminal"
-
-#: gnome-terminal/gnome-terminal.c:291
-msgid "The GNOME terminal emulation program."
-msgstr "De GNOME terminal-emulator"
-
-#: gnome-terminal/gnome-terminal.c:704 gnome-terminal/gnome-terminal.c:1263
-#: gnome-terminal/gnome-terminal.c:1273 gnome-terminal/gnome-terminal.c:2473
-#: gnome-terminal/gnome-terminal.glade.h:8
-msgid "Default"
-msgstr "Standaard"
-
-#: gnome-terminal/gnome-terminal.c:891
-msgid ""
-"You have switched the class of this window. Do you\n"
-" want to reconfigure this window to match the default\n"
-"configuration of the new class?"
-msgstr ""
-"U heeft de klasse van dit venster aangepast. Wilt u\n"
-" het venster herconfigureren zodat het overeenkomt met\n"
-" de standaardconfiguratie van de nieuwe klasse?"
-
-#: gnome-terminal/gnome-terminal.c:1069
-msgid "Linux console"
-msgstr "Linux console"
-
-#: gnome-terminal/gnome-terminal.c:1070
-msgid "Color Xterm"
-msgstr "Kleuren X-Term"
-
-#: gnome-terminal/gnome-terminal.c:1071
-msgid "rxvt"
-msgstr "rxvt"
-
-#: gnome-terminal/gnome-terminal.c:1072
-msgid "Custom"
-msgstr "Aangepast"
-
-#: gnome-terminal/gnome-terminal.c:1077
-msgid "White on black"
-msgstr "Wit op zwart"
-
-#: gnome-terminal/gnome-terminal.c:1078
-msgid "Black on white"
-msgstr "Zwart op wit"
-
-#: gnome-terminal/gnome-terminal.c:1079
-msgid "Green on black"
-msgstr "Groen op zwart"
-
-#: gnome-terminal/gnome-terminal.c:1080
-msgid "Black on light yellow"
-msgstr "Zwart op lichtgeel"
-
-#: gnome-terminal/gnome-terminal.c:1081
-msgid "Custom colors"
-msgstr "Aangepaste kleuren"
-
-#: gnome-terminal/gnome-terminal.c:1086
-msgid "Left"
-msgstr "Links"
-
-#: gnome-terminal/gnome-terminal.c:1087
-msgid "Right"
-msgstr "Rechts"
-
-#: gnome-terminal/gnome-terminal.c:1088
-msgid "Hidden"
-msgstr "Verborgen"
-
-#: gnome-terminal/gnome-terminal.c:1249 panel/gnome-run.c:402
-#: panel/gnome-run.c:639
-msgid "Browse..."
-msgstr "Zoeken..."
-
-#: gnome-terminal/gnome-terminal.c:1503
-msgid "Color selector"
-msgstr "Kleurselector"
-
-#: gnome-terminal/gnome-terminal.c:2104
-#, fuzzy, c-format
-msgid ""
-"There has been an error while trying to log in:\n"
-"\n"
-"%s"
-msgstr ""
-"Er was een fout bij het inloggen.\n"
-"\n"
-"%s"
-
-#: gnome-terminal/gnome-terminal.c:2168 gnome-terminal/gnome-terminal.c:2611
-#, fuzzy
-msgid "Terminal"
-msgstr "GNOME Terminal"
-
-#: gnome-terminal/gnome-terminal.c:2698
-msgid "Terminal class name"
-msgstr "Terminalklasse"
-
-#: gnome-terminal/gnome-terminal.c:2698
-msgid "TCLASS"
-msgstr "TKLASSE"
-
-#: gnome-terminal/gnome-terminal.c:2701
-msgid "Specifies font name"
-msgstr "Geeft lettertype aan"
-
-#: gnome-terminal/gnome-terminal.c:2701
-msgid "FONT"
-msgstr "LETTERTYPE"
-
-#: gnome-terminal/gnome-terminal.c:2704
-msgid "Do not start up shells as login shells"
-msgstr "Start 'shell' niet als 'login shell'"
-
-#: gnome-terminal/gnome-terminal.c:2707
-msgid "Start up shells as login shells"
-msgstr "Start 'shell' als 'login shell'"
-
-#: gnome-terminal/gnome-terminal.c:2710
-msgid "Specifies the geometry for the main window"
-msgstr "Geeft de geometrie van het hoofdvenster"
-
-#: gnome-terminal/gnome-terminal.c:2710
-msgid "GEOMETRY"
-msgstr "GEOMETRIE"
-
-#: gnome-terminal/gnome-terminal.c:2713
-msgid "Execute this program instead of a shell"
-msgstr "In plaats van een shell, voer dit programma uit"
-
-#: gnome-terminal/gnome-terminal.c:2713 gnome-terminal/gnome-terminal.c:2716
-msgid "COMMAND"
-msgstr "OPDRACHT"
-
-#: gnome-terminal/gnome-terminal.c:2716
-msgid "Execute this program the same way as xterm does"
-msgstr "Voer dit programma uit zoals xterm dat doet"
-
-#: gnome-terminal/gnome-terminal.c:2719
-msgid "Foreground color"
-msgstr "Voorgrondkleur"
-
-#: gnome-terminal/gnome-terminal.c:2719 gnome-terminal/gnome-terminal.c:2722
-msgid "COLOR"
-msgstr "KLEUR"
-
-#: gnome-terminal/gnome-terminal.c:2722
-msgid "Background color"
-msgstr "Achtergrondkleur"
-
-#: gnome-terminal/gnome-terminal.c:2725
-#, fuzzy
-msgid "Solid background"
-msgstr "Achtergrond opdrachtregel:"
-
-#: gnome-terminal/gnome-terminal.c:2725
-msgid "SOLID"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2728
-#: gnome-terminal/gnome-terminal.glade.h:22
-msgid "Background pixmap"
-msgstr "Achtergrondafbeelding"
-
-#: gnome-terminal/gnome-terminal.c:2728
-msgid "PIXMAP"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2731
-#: gnome-terminal/gnome-terminal.glade.h:24
-msgid "Background pixmap scrolls"
-msgstr "Achtergrondafbeelding schuift"
-
-#: gnome-terminal/gnome-terminal.c:2731
-msgid "BGSCROLL"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2734
-#, fuzzy
-msgid "Background pixmap does not scroll"
-msgstr "Achtergrondafbeelding schuift"
-
-#: gnome-terminal/gnome-terminal.c:2734
-msgid "BGNOSCROLL"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2737
-#, fuzzy
-msgid "Shade background"
-msgstr "Achtergrond opdrachtregel:"
-
-#: gnome-terminal/gnome-terminal.c:2737
-msgid "SHADED"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2740
-#, fuzzy
-msgid "Do not shade background"
-msgstr "Achtergrond opdrachtregel:"
-
-#: gnome-terminal/gnome-terminal.c:2740
-msgid "NOSHADED"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2743
-#, fuzzy
-msgid "Transparent background"
-msgstr "Transparant"
-
-#: gnome-terminal/gnome-terminal.c:2743
-msgid "TRANSPARENT"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2746
-msgid "Update utmp entry"
-msgstr "Ververs utmp gegevens"
-
-#: gnome-terminal/gnome-terminal.c:2746
-msgid "UTMP"
-msgstr "UTMP"
-
-#: gnome-terminal/gnome-terminal.c:2749
-msgid "Do not update utmp entry"
-msgstr "Ververs utmp gegevens niet"
-
-#: gnome-terminal/gnome-terminal.c:2749
-msgid "NOUTMP"
-msgstr "NOUTMP"
-
-#: gnome-terminal/gnome-terminal.c:2752
-msgid "Update wtmp entry"
-msgstr "Ververs wtmp gegevens"
-
-#: gnome-terminal/gnome-terminal.c:2752
-msgid "WTMP"
-msgstr "WTMP"
-
-#: gnome-terminal/gnome-terminal.c:2755
-msgid "Do not update wtmp entry"
-msgstr "Ververs wtmp gegevens niet"
-
-#: gnome-terminal/gnome-terminal.c:2755
-msgid "NOWTMP"
-msgstr "NOWTMP"
-
-#: gnome-terminal/gnome-terminal.c:2758
-msgid "Update lastlog entry"
-msgstr "Ververs lastlog gegevens"
-
-#: gnome-terminal/gnome-terminal.c:2758
-msgid "LASTLOG"
-msgstr "LASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2761
-msgid "Do not update lastlog entry"
-msgstr "Ververs lastlog gegevens niet"
-
-#: gnome-terminal/gnome-terminal.c:2761
-msgid "NOLASTLOG"
-msgstr "NOLASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2764
-msgid "Set the window title"
-msgstr "Zet de venstertitel"
-
-#: gnome-terminal/gnome-terminal.c:2764
-msgid "TITLE"
-msgstr "TITEL"
-
-#: gnome-terminal/gnome-terminal.c:2767
-#, fuzzy
-msgid "Set the window icon"
-msgstr "Zet de venstertitel"
-
-#: gnome-terminal/gnome-terminal.c:2767
-msgid "ICON"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2770
-msgid "Set the TERM variable"
-msgstr "Zet de TERM variabele"
-
-#: gnome-terminal/gnome-terminal.c:2770
-msgid "TERMNAME"
-msgstr "TERMNAME"
-
-#: gnome-terminal/gnome-terminal.c:2773
-msgid "Try to start a TerminalFactory"
-msgstr "Probeer een TerminalFactory te starten"
-
-#: gnome-terminal/gnome-terminal.c:2776
-msgid "Try to create the terminal with the TerminalFactory"
-msgstr "Probeer de terminal te maken met de TerminalFactory"
-
-#: gnome-terminal/gnome-terminal.c:3007
-msgid "Cannot gnome_program_init ()"
-msgstr ""
-
-#: gsm/gnome-login-check.c:67
-#, c-format
-msgid "Looking up internet address for %s"
-msgstr "Internet adres voor %s wordt opgezocht"
-
-#: gsm/gnome-login-check.c:71
-msgid "Hide"
-msgstr "Verborgen"
-
-#: gsm/gnome-login-check.c:247
-msgid "GNOME Login"
-msgstr "GNOME Login"
-
-#: gsm/gnome-login-check.c:247
-msgid "Login"
-msgstr "Login"
-
-#: gsm/gnome-login-check.c:274
-msgid "Start with default programs"
-msgstr "Start met standaard programma's"
-
-#: gsm/gnome-login-check.c:278
-msgid "Reset all user settings"
-msgstr "Vernieuw alle gebruikersinstellingen"
-
-#: gsm/gnome-login-check.c:289
-#, c-format
-msgid "Really reset all GNOME user settings for %s?"
-msgstr "Wilt u alle GNOME gebruikers instellingen voor %s wissen?"
-
-#: gsm/gnome-login-check.c:321
-#, c-format
-msgid ""
-"The directory /tmp/orbit-%s is not owned\n"
-"by the current user, %s.\n"
-"Please correct the ownership of this directory."
-msgstr ""
-"De map /tmp/orbit-%s behoort niet toe\n"
-"aan de huidige gebruiker %s.\n"
-"Gelieve de eigenaar van deze map aan te passen."
-
-#: gsm/gnome-login-check.c:328 gsm/gnome-login-check.c:353
-msgid "Try again"
-msgstr "Probeer opnieuw"
-
-#: gsm/gnome-login-check.c:329 gsm/gnome-login-check.c:354
-msgid "Continue"
-msgstr "Doorgaan"
-
-#: gsm/gnome-login-check.c:345
-#, c-format
-msgid ""
-"Could not look up internet address for %s.\n"
-"This will prevent GNOME from operating correctly.\n"
-"It may be possible to correct the problem by adding\n"
-"%s to the file /etc/hosts."
-msgstr ""
-"Er kon geen internet adres gevonden worden voor %s.\n"
-"GNOME kan daardoor niet correct functioneren. Het \n"
-"Probleem kan verholpen worden door %s toe te voegen \n"
-"aan het /etc/hosts bestand."
-
-#: gsm/gnome-login-check.c:371
-msgid ""
-"Your version of libICE has a bug which causes gnome-session\n"
-"to not function correctly.\n"
-"\n"
-"If you are on Solaris, you should either upgrade to Solaris patch\n"
-"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
-"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
-"for information on this bug).\n"
-"\n"
-"Your GNOME session will terminate after closing this dialog."
-msgstr ""
-"Je versie van libICE heeft een fout die ervoor kan zorgen dat\n"
-"gnome-session niet naar behoren werkt.\n"
-"\n"
-"Als je Solaris gebruikt dan zul je of moeten upgraden naar Solaris\n"
-"patch #108376-16 of je zult libICE.so.6 moeten gebruiken van Solaris 7.\n"
-"Kopiëer het bestand naar /usr/openwin/lib. (Dank gaat naar Andy Reitz\n"
-"voor de informatie over deze fout).\n"
-"\n"
-"Je GNOME sessie zal afgesloten worden na het sluiten van dit dialoogvenster."
-
-#: gsm/gsm-client-editor.c:94
-msgid "Order: "
-msgstr "Volgorde: "
-
-#: gsm/gsm-client-editor.c:104
-msgid "Style: "
-msgstr "Stijl: "
-
-#: gsm/gsm-client-list.c:112
-msgid "Order"
-msgstr "Volgorde"
-
-#: gsm/gsm-client-list.c:112
-msgid "Style"
-msgstr "Stijl"
-
-#: gsm/gsm-client-list.c:112
-msgid "State"
-msgstr "Staat"
-
-#: gsm/gsm-client-list.c:112
-msgid "Program"
-msgstr "Programma"
-
-#: gsm/gsm-client-row.c:33
-msgid "Inactive"
-msgstr "Inactief"
-
-#: gsm/gsm-client-row.c:34
-msgid "Waiting to start or already finished."
-msgstr "Wachten om te starten of reeds afgelopen."
-
-#: gsm/gsm-client-row.c:36
-msgid "Starting"
-msgstr "Aan het starten"
-
-#: gsm/gsm-client-row.c:37
-msgid "Started but has not yet reported state."
-msgstr "Gestart maar heeft nog geen staat gestuurd."
-
-#: gsm/gsm-client-row.c:39
-msgid "Running"
-msgstr "Actief"
-
-#: gsm/gsm-client-row.c:40
-msgid "A normal member of the session."
-msgstr "Een normaal lid van de sessie."
-
-#: gsm/gsm-client-row.c:42
-msgid "Saving"
-msgstr "Aan het bewaren"
-
-#: gsm/gsm-client-row.c:43
-msgid "Saving session details."
-msgstr "Sessie-instellingen aan het bewaren."
-
-#: gsm/gsm-client-row.c:45
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: gsm/gsm-client-row.c:46
-msgid "State not reported within timeout."
-msgstr "Geen staat gestuurd binnen tijdsinterval."
-
-#: gsm/gsm-client-row.c:52 panel/panel_config.c:1425
-msgid "Normal"
-msgstr "Normaal"
-
-#: gsm/gsm-client-row.c:53
-msgid "Unaffected by logouts but can die."
-msgstr "Ongewijzigd bij uitloggen maar kan stoppen."
-
-#: gsm/gsm-client-row.c:55
-msgid "Respawn"
-msgstr "Herstart"
-
-#: gsm/gsm-client-row.c:56
-msgid "Never allowed to die."
-msgstr "Mag niet stoppen."
-
-#: gsm/gsm-client-row.c:58
-msgid "Trash"
-msgstr "Verwijder"
-
-#: gsm/gsm-client-row.c:59
-msgid "Discarded on logout and can die."
-msgstr "Genegeerd bij uitloggen en kan stoppen."
-
-#: gsm/gsm-client-row.c:61 panel/foobar-widget.c:1167
-msgid "Settings"
-msgstr "Instellingen"
-
-#: gsm/gsm-client-row.c:62
-msgid "Always started on every login."
-msgstr "Wordt opgestart bij elke login."
-
-#: gsm/gsm-protocol.c:510
-msgid "Remove Program"
-msgstr "Verwijder programma"
-
-#: gsm/logout.c:199
-msgid "Really log out?"
-msgstr "Weet u zeker dat u wilt uitloggen?"
-
-#: gsm/logout.c:220
-msgid "Save current setup"
-msgstr "Bewaar huidige instellingen"
-
-#: gsm/logout.c:240
-msgid "Action"
-msgstr "Actie"
-
-#: gsm/logout.c:248
-msgid "Logout"
-msgstr "Uitloggen"
-
-#: gsm/logout.c:251
-msgid "Shut Down"
-msgstr ""
-
-#: gsm/logout.c:254
-msgid "Reboot"
-msgstr "Herstarten"
-
-#: gsm/main.c:65
-#, fuzzy
-msgid "Specify a session name to load"
-msgstr "Geeft lettertype aan"
-
-#: gsm/main.c:66
-msgid "Only read saved sessions from the default.session file"
-msgstr "Lees opgeslagen sessies alleen uit het default.session bestand"
-
-#: gsm/main.c:67
-msgid "Millisecond period spent waiting for clients to register (0=forever)"
-msgstr "Maximale wachttijd (ms) voor registratie clients (0=eeuwig)"
-
-#: gsm/main.c:68
-msgid "Millisecond period spent waiting for clients to respond (0=forever)"
-msgstr "Maximale wachttijd (ms) voor reactie van clients (0=eeuwig)"
-
-#: gsm/main.c:69
-msgid "Millisecond period spent waiting for clients to die (0=forever)"
-msgstr "Maximale wachttijd (ms) voor afsterven van clients (0=eeuwig)"
-
-#: gsm/manager.c:400
-msgid "Wait abandoned due to conflict."
-msgstr "Wachten afgebroken vanwege conflict."
-
-#: gsm/manager.c:834
-#, c-format
-msgid "No response to the %s command."
-msgstr "Geen antwoord op opdracht %s."
-
-#: gsm/manager.c:835
-msgid "The program may be slow, stopped or broken."
-msgstr "Het programma is traag, gestopt of disfunctionerend"
-
-#: gsm/manager.c:836
-msgid "You may wait for it to respond or remove it."
-msgstr "U kunt wachten of afbreken"
-
-#: gsm/manager.c:1375
-msgid "Respawn abandoned due to failures."
-msgstr "'Respawn' afgebroken vanwege fouten"
-
-#: gsm/manager.c:1541
-msgid "A session shutdown is in progress."
-msgstr "Een sessie is aan het afsluiten"
-
-#: gsm/save-session.c:43
-msgid "Kill session"
-msgstr "Sessie beëindigen"
-
-#: gsm/save-session.c:44
-msgid "Use dialog boxes"
-msgstr "Gebruik dialoog vensters"
-
-#: gsm/save-session.c:94
-msgid "Could not connect to the session manager"
-msgstr "Kan geen verbinding maken met het sessiebeheer"
-
-#: gsm/save-session.c:109
-msgid "Could not connect to gnome-session"
-msgstr "Kon niet verbinden met gnome-session"
-
-#: gsm/save-session.c:153
-msgid "Your session has been saved"
-msgstr "Uw sessie is opgeslagen"
-
-#: gsm/session-names.c:126
-msgid "The session name cannot be empty"
-msgstr ""
-
-#: gsm/session-names.c:136
-msgid "The session name already exists"
-msgstr ""
-
-#: gsm/session-names.c:170
-msgid "Add a new session"
-msgstr ""
-
-#: gsm/session-names.c:202
-#, fuzzy
-msgid "Edit session name"
-msgstr "Sessie beëindigen"
-
-#. Buttons
-#: gsm/session-properties.c:101 help-browser/bookmarks.c:242
-msgid "Remove"
-msgstr "Verwijderen"
-
-#. buttons
-#: gsm/session-properties.c:170
-msgid "Try"
-msgstr "Test"
-
-#: gsm/session-properties.c:176
-msgid "OK"
-msgstr "OK"
-
-#: gsm/session-properties.c:179
-msgid "Cancel"
-msgstr "Annuleren"
-
-#. app
-#: gsm/session-properties.c:217
-#, fuzzy
-msgid "Session Properties"
-msgstr "Gnome Sessie-eigenschappen"
-
-#: gsm/session-properties.c:272
-msgid "Session"
-msgstr "Sessie"
-
-#. app
-#: gsm/session-properties.c:329
-msgid "Session Chooser"
-msgstr "Sessiekiezer"
-
-#: gsm/session-properties.c:332
-msgid "Start Session"
-msgstr "Start Sessie"
-
-#: gsm/session-properties.c:335
-msgid "Cancel Login"
-msgstr "Inloggen afbreken"
-
-#: gsm/session-properties.c:360
-msgid "Initialize session settings"
-msgstr "Initialiseer sessie-instellingen"
-
-#: gsm/session-properties-capplet.c:192
-msgid "Show splash screen on login"
-msgstr ""
-
-#: gsm/session-properties-capplet.c:199
-#, fuzzy
-msgid "Prompt on logout"
-msgstr "Vraag bevestiging bij uitloggen"
-
-#: gsm/session-properties-capplet.c:206
-msgid "Automatically save changes to session"
-msgstr ""
-
-#: gsm/session-properties-capplet.c:209
-msgid "Choose Current Session"
-msgstr ""
-
-#: gsm/session-properties-capplet.c:226
-#, fuzzy
-msgid "Session Name"
-msgstr "Sessie"
-
-#: gsm/session-properties-capplet.c:247 gsm/session-properties-capplet.c:301
-#, fuzzy
-msgid "Add..."
-msgstr "..."
-
-#: gsm/session-properties-capplet.c:252 gsm/session-properties-capplet.c:306
-#, fuzzy
-msgid "Edit..."
-msgstr "Bewerken"
-
-#: gsm/session-properties-capplet.c:262
-#, fuzzy
-msgid "Session Options"
-msgstr "Gnome Sessie-eigenschappen"
-
-#. Frame for non-session managed startup programs
-#: gsm/session-properties-capplet.c:274
-msgid "Non-session-managed Startup Programs"
-msgstr ""
-
-#: gsm/session-properties-capplet.c:291 gsm/startup-programs.c:299
-msgid "Priority"
-msgstr ""
-
-#: gsm/session-properties-capplet.c:292
-#, fuzzy
-msgid "Command"
-msgstr "Gebruikersopdrachten"
-
-#: gsm/session-properties-capplet.c:321
-msgid "Browse Currently Running Programs..."
-msgstr ""
-
-#: gsm/session-properties-capplet.c:330
-#, fuzzy
-msgid "Startup Programs"
-msgstr "Voer programma uit"
-
-#: gsm/splash.c:55
-#, fuzzy
-msgid "Audio Settings"
-msgstr " Instellingen"
-
-#: gsm/splash.c:56 gsm/splash.c:57
-#, fuzzy
-msgid "Screensaver"
-msgstr "Schermbeveilingsinstellingen"
-
-#: gsm/splash.c:58 gsm/splash.c:59
-msgid "Sawfish Window Manager"
-msgstr ""
-
-#: gsm/splash.c:60
-msgid "Enlightenment Window Manager"
-msgstr ""
-
-#: gsm/splash.c:61
-#, fuzzy
-msgid "Background Settings"
-msgstr "Achtergrondeigenschappen"
-
-#: gsm/splash.c:62
-#, fuzzy
-msgid "Keyboard Bell"
-msgstr "Toetsenbord"
-
-#: gsm/splash.c:63
-#, fuzzy
-msgid "Mouse Settings"
-msgstr "Geheugenbelasting Eigenschappen"
-
-#: gsm/splash.c:64
-#, fuzzy
-msgid "Keyboard Settings"
-msgstr "Geheugenbelasting Eigenschappen"
-
-#: gsm/splash.c:65
-#, fuzzy
-msgid "The Panel"
-msgstr "Het GNOME Paneel"
-
-#: gsm/splash.c:66
-msgid "Session Manager Proxy"
-msgstr ""
-
-#: gsm/splash.c:67
-#, fuzzy
-msgid "Window Manager"
-msgstr "Window Manager Workarounds"
-
-#: gsm/splash.c:68 panel/menu.c:4667 panel/menu.c:4672 panel/menu.c:5012
-msgid "Desktop"
-msgstr "Bureaublad"
-
-#: gsm/splash.c:69
-#, fuzzy
-msgid "Nautilus"
-msgstr "Geen berichten."
-
-#: gsm/splash.c:287
-#, fuzzy, c-format
-msgid "Starting GNOME: %s"
-msgstr "GNOME aan het starten... %s"
-
-#: gsm/splash.c:289
-#, fuzzy
-msgid "Starting GNOME: done"
-msgstr "GNOME aan het starten... %s"
-
-#: gsm/splash.c:439
-#, fuzzy
-msgid "GNOME"
-msgstr "GNOME Help"
-
-#: gsm/splash.c:440
-#, fuzzy
-msgid "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*"
-msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
-
-#: gsm/splash.c:459
-msgid "Starting GNOME"
-msgstr "GNOME aan het starten..."
-
-#: gsm/splash.c:462
-#, fuzzy
-msgid "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-*-*"
-msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
-
-#: gsm/startup-programs.c:283 gsm/startup-programs.c:290
-#, fuzzy
-msgid "Startup Command"
-msgstr "Gebruikersopdrachten"
-
-#: gsm/startup-programs.c:314
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-
-#: gsm/startup-programs.c:333
-msgid "The startup command cannot be empty"
-msgstr ""
-
-#: gsm/startup-programs.c:373
-#, fuzzy
-msgid "Add Startup Program"
-msgstr "Voer programma uit"
-
-#: gsm/startup-programs.c:391
-#, fuzzy
-msgid "Edit Startup Program"
-msgstr "Voer programma uit"
-
-#: help-browser/bookmarks.c:221
-msgid "Bookmark"
-msgstr "Bladwijzer"
-
-#: help-browser/bookmarks.c:221
-msgid "Page Title"
-msgstr "Paginatitel"
-
-#: help-browser/bookmarks.c:231
-msgid "Gnome Help Bookmarks"
-msgstr "Gnome Help Bladwijzers"
-
-#: help-browser/gnome-help-browser.c:131
-msgid "X position of window"
-msgstr "X-coördinaat van het venster"
-
-#: help-browser/gnome-help-browser.c:131
-msgid "X"
-msgstr "X"
-
-#: help-browser/gnome-help-browser.c:132
-msgid "Y position of window"
-msgstr "Y-coördinaat van het venster"
-
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:1113
-msgid "Y"
-msgstr "Y"
-
-#: help-browser/gnome-help-browser.c:133
-msgid "Width of window"
-msgstr "Vensterbreedte"
-
-#: help-browser/gnome-help-browser.c:133
-msgid "WIDTH"
-msgstr "BREEDTE"
-
-#: help-browser/gnome-help-browser.c:134
-msgid "Height of window"
-msgstr "Vensterhoogte"
-
-#: help-browser/gnome-help-browser.c:134
-msgid "HEIGHT"
-msgstr "HOOGTE"
-
-#: help-browser/gnome-help-browser.c:135
-msgid "Debug level"
-msgstr "Debugniveau"
-
-#: help-browser/gnome-help-browser.c:371 help-browser/window.c:917
-msgid "Gnome Help Browser"
-msgstr "Gnome Help Browser"
-
-#: help-browser/gnome-help-browser.c:372
-msgid "Copyright (c) 1998 Red Hat Software, Inc."
-msgstr "Copyright (c) 1998 Red Hat Software, Inc."
-
-#: help-browser/gnome-help-browser.c:374
-msgid ""
-"GNOME Help Browser allows easy access to various forms of documentation on "
-"your system"
-msgstr ""
-"GNOME Help Browser stelt u in staat gemakkelijke verschillende soorten "
-"documentatie te benaderen"
-
-#: help-browser/gnome-help-browser.c:633
-msgid "History size"
-msgstr "Historie-grootte"
-
-#: help-browser/gnome-help-browser.c:634
-msgid "History file"
-msgstr "Historie-bestand"
-
-#: help-browser/gnome-help-browser.c:635
-msgid "Cache size"
-msgstr "'Cache'-grootte"
-
-#: help-browser/gnome-help-browser.c:636
-msgid "Cache file"
-msgstr "'Cache'-bestand"
-
-#: help-browser/gnome-help-browser.c:637
-msgid "Bookmark file"
-msgstr "Bladwijzerbestand"
-
-#: help-browser/gnome-help-browser.c:643
-msgid "Man Path"
-msgstr "'Man'-pad"
-
-#: help-browser/gnome-help-browser.c:644
-msgid "Info Path"
-msgstr "'Info'-pad"
-
-#: help-browser/gnome-help-browser.c:645
-msgid "GNOME Help Path"
-msgstr "GNOME Help Pad"
-
-#: help-browser/gnome-help-browser.c:720
-msgid "Gnome Help Configure"
-msgstr "Gnome Help Configuratie"
-
-#: help-browser/gnome-help-browser.c:723
-msgid "History and cache"
-msgstr "Historie en cache"
-
-#: help-browser/gnome-help-browser.c:724
-msgid "Paths"
-msgstr "Paden"
-
-#: help-browser/gnome-helpwin.c:268
-msgid "<body><h2>Error: file not found</h2></body>"
-msgstr "<body><h2><b>Fout</b>: bestand niet gevonden</h2></body>"
-
-#: help-browser/history.c:147 help-browser/history.c:203
-msgid "%b %d, %Y %H:%M"
-msgstr ""
-
-#: help-browser/history.c:260
-msgid "URL"
-msgstr "URL"
-
-#: help-browser/history.c:260
-msgid "Last"
-msgstr "Laatste"
-
-#: help-browser/history.c:260
-msgid "Count"
-msgstr "Aantal"
-
-#: help-browser/history.c:273
-msgid "Gnome Help History"
-msgstr "Gnome Help Historie"
-
-#: help-browser/toc2.c:115
-msgid "<BODY BGCOLOR=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
-msgstr "<BODY BGCOLOR=\"#FFFFFF\"><h1>Inhouds opgave</h1>\n"
-
-#. Man Pages
-#: help-browser/toc2.c:119
-msgid "<h2>Man Pages</h2>\n"
-msgstr "<h2>Man-Pagina's</h2>\n"
-
-#: help-browser/toc2.c:258 help-browser/toc2.c:322
-msgid "<body bgcolor=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
-msgstr "<body bgcolor=\"#FFFFFF\"><h1>Inhouds opgave</h1>\n"
-
-#: help-browser/toc2.c:259
-msgid "<h2>Info Pages</h2>\n"
-msgstr "<h2>Info pagina's</h2>\n"
-
-#: help-browser/toc2.c:323
-msgid "<h2>GNOME Help</h2>\n"
-msgstr "<h2>GNOME Help</h2>\n"
-
-#: help-browser/toc2.c:467
-msgid ""
-"<HTML>\n"
-"<BODY BGCOLOR=\"#ffffff\">\n"
-"<H2>Results of the substring search for the string "
-msgstr ""
-"<HTML>\n"
-"<BODY BGCOLOR=\"#ffffff\">\n"
-"<H2>Resultaat van zoeken naar "
-
-#: help-browser/toc2.c:473
-msgid ""
-"<p>\n"
-"<br>\n"
-"<H3>Manual Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"<p>\n"
-"<br>\n"
-"<H3>Man-pagina's</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:496
-msgid ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNU Info Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNU Info-Pagina's</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:520
-msgid ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNOME Help Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNOME Help Pagina's</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:542
-msgid "<br><B>No matches found</B>\n"
-msgstr "<br><b>Niets gevonden</b>\n"
-
-#: help-browser/toc-man.c:19 help-browser/toc2-man.c:21
-msgid "User Commands"
-msgstr "Gebruikersopdrachten"
-
-#: help-browser/toc-man.c:20 help-browser/toc2-man.c:22
-msgid "System Calls"
-msgstr "Systeemfuncties"
-
-#: help-browser/toc-man.c:21 help-browser/toc2-man.c:23
-msgid "Library Functions"
-msgstr "Bibliotheekfuncties"
-
-#: help-browser/toc-man.c:22 help-browser/toc2-man.c:24
-msgid "Special Files"
-msgstr "Speciale bestanden"
-
-#: help-browser/toc-man.c:23 help-browser/toc2-man.c:25
-msgid "File Formats"
-msgstr "Bestandsformaten"
-
-#: help-browser/toc-man.c:24 help-browser/toc2-man.c:26
-msgid "Games"
-msgstr "Spelletjes"
-
-#: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
-msgid "Administration"
-msgstr "Systeembeheer"
-
-#: help-browser/toc-man.c:27 help-browser/toc2-man.c:29
-msgid "man9"
-msgstr "man9"
-
-#: help-browser/toc-man.c:28 help-browser/toc2-man.c:30
-msgid "mann"
-msgstr "mann"
-
-#: help-browser/toc-man.c:29 help-browser/toc2-man.c:31
-msgid "manx"
-msgstr "manx"
-
-#. Add one new item for each type
-#. This really should iterate through the toc_config list
-#. MAN PAGES
-#: help-browser/toc.c:136
-msgid "Man Pages"
-msgstr "'man'-pagina's"
-
-#. INFO PAGES
-#: help-browser/toc.c:148
-msgid "Info Pages"
-msgstr "'Info'-pagina's "
-
-#. GNOME HELP
-#: help-browser/toc.c:160
-msgid "GNOME Help"
-msgstr "GNOME Help"
-
-#: help-browser/visit.c:84
-msgid "<BODY>Could not load default TOC page</BODY>"
-msgstr "<body>Laden van standaard-inhoudsopgavepagina mislukt</body>"
-
-#: help-browser/visit.c:102
-msgid "<BODY>Unknown TOC argument</BODY>"
-msgstr "<body>Onbekend inhoudsopgave-argument</body>"
-
-#: help-browser/window.c:151
-msgid "_New Window"
-msgstr "_Nieuw venster"
-
-#: help-browser/window.c:152
-msgid "Open new browser window"
-msgstr "Open nieuw browservenster"
-
-#: help-browser/window.c:158
-msgid "_Add Bookmark"
-msgstr "Toevoegen bladwijzer"
-
-#: help-browser/window.c:158
-msgid "Add bookmark"
-msgstr "Toevoegen bladwijzer"
-
-#: help-browser/window.c:173
-msgid "_Back"
-msgstr "Terug"
-
-#: help-browser/window.c:176
-msgid "_Forward"
-msgstr "Volgend"
-
-#: help-browser/window.c:181
-msgid "_Reload"
-msgstr "Verve_rsen"
-
-#: help-browser/window.c:186
-msgid "_Index"
-msgstr "_Index"
-
-#: help-browser/window.c:208
-msgid "_History"
-msgstr "_Historie"
-
-#: help-browser/window.c:208 help-browser/window.c:250
-msgid "Show History Window"
-msgstr "Toon Historievenster"
-
-#: help-browser/window.c:213
-msgid "_Bookmarks"
-msgstr "_Bladwijzers"
-
-#: help-browser/window.c:213 help-browser/window.c:252
-msgid "Show Bookmarks Window"
-msgstr "Toon bladwijzervenster"
-
-#: help-browser/window.c:227
-msgid "_Window"
-msgstr "Venster"
-
-#: help-browser/window.c:228
-msgid "_View"
-msgstr "Beeld"
-
-#: help-browser/window.c:237
-msgid "Back"
-msgstr "Terug"
-
-#: help-browser/window.c:238
-msgid "Go to the previous location in the history list"
-msgstr "Ga naar vorige locatie in de historie"
-
-#: help-browser/window.c:240
-msgid "Forward"
-msgstr "Verder"
-
-#: help-browser/window.c:241
-msgid "Go to the next location in the history list"
-msgstr "Ga naar de volgende lokatie in de historie"
-
-#: help-browser/window.c:244 panel/extern.c:809 panel/swallow.c:114
-msgid "Reload"
-msgstr "Verversen"
-
-#: help-browser/window.c:247
-msgid "Index"
-msgstr "Index"
-
-#: help-browser/window.c:247
-msgid "Show Documentation Index"
-msgstr "Toon Documentatie-Index"
-
-#: help-browser/window.c:250
-msgid "History"
-msgstr "Historie"
-
-#: help-browser/window.c:252
-msgid "BMarks"
-msgstr "Bladwijzers"
-
-#: help-browser/window.c:255
-msgid "Help on Help"
-msgstr "Hulp bij Gnome Help"
-
-#: help-browser/window.c:614
-msgid "Location: "
-msgstr "Locatie: "
-
-#: help-browser/window.c:1085
-#, c-format
-msgid ""
-"Error loading document:\n"
-"\n"
-"%s\n"
-"\n"
-"You probably don't\n"
-"have this documentation\n"
-"installed on your system."
-msgstr ""
-"Fout tijdens laden document:\n"
-"\n"
-"%s\n"
-"\n"
-"Deze documentie is\n"
-"waarschijnlijk niet op\n"
-"uw systeem geinstaleerd."
-
-#: panel/applet.c:478 panel/applet.c:484 panel/menu.c:4638 panel/menu.c:4643
-#: panel/menu.c:5004
+#: panel/applet.c:487 panel/applet.c:493 panel/menu.c:4589 panel/menu.c:4594
+#: panel/menu.c:4955
 msgid "Panel"
 msgstr "Paneel"
 
-#: panel/applet.c:482
+#: panel/applet.c:491
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kon pixmap bestand %s niet openen"
 
-#: panel/applet.c:513
+#: panel/applet.c:522
 msgid "Remove from panel"
 msgstr "Verwijderen van paneel"
 
 #.
 #. * FIXME: should have a "Move" pixmap.
 #.
-#: panel/applet.c:527
+#: panel/applet.c:536
 msgid "Move"
 msgstr "Verplaats"
 
-#: panel/applet.c:796
+#: panel/applet.c:810
 msgid "Can't find an empty spot"
 msgstr "Kan geen lege plaats vinden"
 
@@ -2800,8 +1718,8 @@ msgstr "SuSE Linux"
 msgid "SuSE menus"
 msgstr "SuSE menu's"
 
-#: panel/drawer.c:136 panel/panel_config.c:944 panel/panel_config.c:982
-#: panel/panel_config.c:1056 panel/panel_config.c:1165
+#: panel/drawer.c:136 panel/panel_config.c:940 panel/panel_config.c:978
+#: panel/panel_config.c:1052 panel/panel_config.c:1161
 msgid "Size and Position"
 msgstr "Grootte en positie"
 
@@ -2831,53 +1749,14 @@ msgstr "Toon verbergknop"
 msgid "Enable hidebutton arrow"
 msgstr "Toon pijl op verbergknop"
 
-#: panel/drawer.c:193 panel/drawer.c:338 panel/menu.c:4352
+#: panel/drawer.c:193 panel/drawer.c:338 panel/menu.c:4312
 msgid "Drawer"
 msgstr "Opbergmap"
 
-#: panel/extern.c:785
-msgid "Deskguide (the desktop pager)"
-msgstr "Deskguide (de bureaublad pager)"
-
-#: panel/extern.c:787
-msgid "Tasklist"
-msgstr "Taaklijst"
-
-#: panel/extern.c:789
-msgid "The Battery"
-msgstr "De Batterij"
-
-#: panel/extern.c:797
-#, c-format
-msgid ""
-"%s applet appears to have died unexpectedly.\n"
-"\n"
-"Reload this applet?\n"
-"\n"
-"(If you choose not to reload it at this time you can always add it from\n"
-"the \"Applets\" submenu in the main menu.)"
-msgstr ""
-"Het lijkt erop dat de %s applet onverwachts is gestopt.\n"
-"\n"
-"Deze applet opnieuw starten?\n"
-"\n"
-"(Als je ervoor kiest om de applet op dit moment niet opnieuw te starten dan\n"
-"kun je het nog altijd toevoegen door het \"Applets\" submenu te kiezen in "
-"het hoofdmenu)"
-
-#: panel/extern.c:1114
-#, fuzzy
-msgid "Couldn't register applet."
-msgstr "Applet kan niet toegevoegd worden!"
-
-#: panel/extern.c:1275
-msgid "Whoops! for some reason we can't add to the panel"
-msgstr ""
-"Hola! We kunnen niet toevoegen aan het paneel omwille van een bepaalde reden."
-
-#: panel/extern.c:1402
-msgid "No socket was created"
-msgstr "Er werd geen socket gemaakt"
+#: panel/drawer.c:513 panel/launcher.c:651 panel/menu.c:1795 panel/menu.c:1877
+#: panel/menu.c:4514 panel/menu.c:5293
+msgid "Properties..."
+msgstr "Eigenschappen..."
 
 #: panel/foobar-widget.c:227
 msgid ""
@@ -3047,14 +1926,14 @@ msgstr ""
 msgid "Format"
 msgstr "Formaat"
 
-#: panel/foobar-widget.c:1149 panel/menu.c:3789 panel/menu.c:3797
-#: panel/menu.c:4933
+#: panel/foobar-widget.c:1149 panel/menu.c:3749 panel/menu.c:3757
+#: panel/menu.c:4884
 msgid "Programs"
 msgstr "Programma's"
 
 #. FIXME: add the add to favourites somehow here
-#: panel/foobar-widget.c:1164 panel/menu.c:3930 panel/menu.c:4893
-#: panel/menu.c:4946 panel/menu.c:4953
+#: panel/foobar-widget.c:1164 panel/menu.c:3890 panel/menu.c:4844
+#: panel/menu.c:4897 panel/menu.c:4904
 msgid "Favorites"
 msgstr "Favorieten"
 
@@ -3067,249 +1946,6 @@ msgstr "In het midden van het scherm"
 #, fuzzy
 msgid "Can't execute the screenshot program"
 msgstr "Xscreensaver kan niet uitgevoerd worden"
-
-#: panel/gnome-panel-properties.c:99 panel/menu-properties.c:530
-msgid "Programs: "
-msgstr "Programma's:"
-
-#: panel/gnome-panel-properties.c:100 panel/menu-properties.c:537
-msgid "Favorites: "
-msgstr "Favorieten: "
-
-#: panel/gnome-panel-properties.c:101 panel/menu-properties.c:544
-msgid "Applets: "
-msgstr "Applets: "
-
-#: panel/gnome-panel-properties.c:102
-msgid "Distribution: "
-msgstr "Distributie: "
-
-#: panel/gnome-panel-properties.c:103
-msgid "KDE: "
-msgstr "KDE: "
-
-#: panel/gnome-panel-properties.c:104
-msgid "Panel: "
-msgstr "Paneel: "
-
-#: panel/gnome-panel-properties.c:105
-msgid "Desktop: "
-msgstr "Bureaublad: "
-
-#. Animation enable
-#: panel/gnome-panel-properties.c:280
-msgid "Enable animations"
-msgstr "Animaties inschakelen"
-
-#. Auto and Explicit Hide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:286
-#, fuzzy
-msgid "Panel Animation Settings"
-msgstr "Batterijstatus:"
-
-#. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:297
-#, fuzzy
-msgid "Panel Animation Speed"
-msgstr "Animatiesnelheid"
-
-#. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:303
-#, fuzzy
-msgid "Hide delay (ms)"
-msgstr "Vertraging (ms)"
-
-#. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:309
-#, fuzzy
-msgid "Show delay (ms)"
-msgstr "Vertraging (ms)"
-
-#. Minimized size scale frame
-#: panel/gnome-panel-properties.c:315
-msgid "Size (pixels)"
-msgstr "Grootte (punten)"
-
-#. prelight on mouseovers hack (used to be saturation, hence
-#. * the config option name)
-#: panel/gnome-panel-properties.c:365
-msgid "Prelight buttons on mouseover"
-msgstr "Knoppen verlichten als de muis er overheen beweegt"
-
-#: panel/gnome-panel-properties.c:441 panel/menu-properties.c:392
-msgid "Off"
-msgstr "Uit"
-
-#: panel/gnome-panel-properties.c:448 panel/menu-properties.c:402
-msgid "In a submenu"
-msgstr "In een submenu"
-
-#: panel/gnome-panel-properties.c:454
-msgid "In the menu"
-msgstr "In het menu"
-
-#. Menu frame
-#: panel/gnome-panel-properties.c:473
-msgid "Menus"
-msgstr "Menu's"
-
-#. large icons
-#: panel/gnome-panel-properties.c:483
-msgid "Use large icons"
-msgstr "Gebruik grote pictogrammen"
-
-#. Dot Buttons
-#: panel/gnome-panel-properties.c:490
-msgid "Show [...] buttons"
-msgstr "Toon [...] knoppen"
-
-#. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:496
-msgid "Show popup menus outside of panels"
-msgstr "Toon popup-menu's buiten panelen"
-
-#. Hungry Menus
-#: panel/gnome-panel-properties.c:502
-msgid "Keep menus in memory"
-msgstr "Houd menu's in het geheugen"
-
-#. Merge system menus
-#: panel/gnome-panel-properties.c:509
-msgid "Merge in system menus"
-msgstr "Samenvoegen in systeem menu's"
-
-#. Menu check
-#: panel/gnome-panel-properties.c:516
-msgid ""
-"Automatically re-check menus\n"
-"for newly installed software"
-msgstr ""
-"Automatisch menus controleren op nieuw\n"
-"geinstalleerde software"
-
-#. Menu titles
-#: panel/gnome-panel-properties.c:523
-#, fuzzy
-msgid "Show menu titles"
-msgstr "Toon mini pictogrammen"
-
-#. Menu frame
-#: panel/gnome-panel-properties.c:531
-msgid "Global menu"
-msgstr "Globaal menu"
-
-#: panel/gnome-panel-properties.c:701
-msgid "Press a key..."
-msgstr "Druk een toets..."
-
-#. Tooltips enable
-#: panel/gnome-panel-properties.c:734
-msgid "Tooltips enabled"
-msgstr "Tooltips aanzetten"
-
-#. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:740
-msgid "Close drawer if a launcher inside it is pressed"
-msgstr "Sluit opbergmap als een starter daarin wordt geactiveerd"
-
-#. Autoraise
-#: panel/gnome-panel-properties.c:746
-msgid "Raise panels on mouse-over"
-msgstr "Paneel naar voren als de muis er overheen beweegt"
-
-#. Confirm panel removal
-#: panel/gnome-panel-properties.c:752
-msgid "Confirm the removal of panels with a dialog"
-msgstr "Bevestig het verwijderen van panelen met een dialoogvenster"
-
-#. Collision avoidance
-#: panel/gnome-panel-properties.c:758
-msgid "Try to avoid overlapping panels"
-msgstr "Probeer overlappende panelen te vermijden"
-
-#. Layer frame
-#: panel/gnome-panel-properties.c:764
-#, fuzzy
-msgid "Panel treatment (GNOME compliant window managers only)"
-msgstr ""
-"Houdt paneel onder vensters (alleen GNOME overeenkomstige window managers)"
-
-#. Keep on bottom
-#: panel/gnome-panel-properties.c:774
-#, fuzzy
-msgid "Keep panels below other windows"
-msgstr "Onder andere vensters"
-
-#: panel/gnome-panel-properties.c:781
-#, fuzzy
-msgid "Keep panels on the same level as other windows"
-msgstr "Op het zelfde niveau als andere vensters"
-
-#: panel/gnome-panel-properties.c:788
-#, fuzzy
-msgid "Keep panels above other windows"
-msgstr "Boven andere vensters"
-
-#. Key Bindings frame
-#: panel/gnome-panel-properties.c:794
-msgid "Key Bindings"
-msgstr "Sneltoetsen"
-
-#. enabled
-#: panel/gnome-panel-properties.c:807
-msgid "Enable panel keybindings"
-msgstr "Gebruik paneel sneltoetsen"
-
-#. menu key
-#: panel/gnome-panel-properties.c:814
-msgid "Popup menu key"
-msgstr "Menu sneltoets"
-
-#: panel/gnome-panel-properties.c:825 panel/gnome-panel-properties.c:853
-#: panel/gnome-panel-properties.c:880 panel/gnome-panel-properties.c:907
-#: panel/panel-util.c:655 panel/panel-util.c:712
-msgid "Disabled"
-msgstr "Uitgeschakeld"
-
-#: panel/gnome-panel-properties.c:836 panel/gnome-panel-properties.c:864
-#: panel/gnome-panel-properties.c:891 panel/gnome-panel-properties.c:918
-msgid "Grab key..."
-msgstr "Neem toets..."
-
-#. run key...
-#: panel/gnome-panel-properties.c:844
-msgid "Run dialog key"
-msgstr "Gebruik dialoog toets"
-
-#. screenshot key...
-#: panel/gnome-panel-properties.c:872
-msgid "Take screenshot key"
-msgstr ""
-
-#. window screenshot key...
-#: panel/gnome-panel-properties.c:899
-msgid "Take window screenshot key"
-msgstr ""
-
-#: panel/gnome-panel-properties.c:1204
-msgid "Animation"
-msgstr "Animatie"
-
-#: panel/gnome-panel-properties.c:1209
-msgid "Buttons"
-msgstr "Knoppen"
-
-#: panel/gnome-panel-properties.c:1214 panel/menu-properties.c:607
-#: panel/menu.c:1592 panel/menu.c:3119 panel/menu.c:3195 panel/menu.c:3200
-#: panel/menu.c:4296 panel/menu.c:5083 panel/menu.c:5225 panel/menu.c:5245
-msgid "Menu"
-msgstr "Menu"
-
-#: panel/gnome-panel-properties.c:1270
-msgid ""
-"The system administrator has disallowed modification of the panel "
-"configuration"
-msgstr ""
 
 #: panel/gnome-run.c:248 panel/gnome-run.c:254
 #, c-format
@@ -3391,7 +2027,7 @@ msgstr ""
 msgid "Run Program"
 msgstr "Programma uitvoeren"
 
-#: panel/gnome-run.c:1262 panel/gnome-run.c:1281 panel/menu.c:4988
+#: panel/gnome-run.c:1262 panel/gnome-run.c:1281 panel/menu.c:4939
 msgid "Run..."
 msgstr "Voer uit..."
 
@@ -3428,15 +2064,15 @@ msgstr "Starter eigenschappen"
 msgid "Create launcher applet"
 msgstr "Maak starterapplet"
 
-#: panel/logout.c:82 panel/menu.c:4763
+#: panel/logout.c:81 panel/menu.c:4714
 msgid "Log out"
 msgstr "Uitloggen"
 
-#: panel/logout.c:101
+#: panel/logout.c:100
 msgid "Log out of GNOME"
 msgstr "Uitloggen"
 
-#: panel/logout.c:146 panel/logout.c:165 panel/menu.c:4750
+#: panel/logout.c:145 panel/logout.c:164 panel/menu.c:4701
 msgid "Lock screen"
 msgstr "Beeldscherm vergrendelen"
 
@@ -3451,27 +2087,27 @@ msgstr "Beeldscherm vergrendelen"
 #. <jwz> and "xscreensaver-command -exit ; xscreensaver &"
 #. <jwz> and "xscreensaver-demo"
 #.
-#: panel/logout.c:203
+#: panel/logout.c:202
 msgid "Blank Screen Now"
 msgstr "Schermbeveiliging Nu Activeren"
 
-#: panel/logout.c:204
+#: panel/logout.c:203
 msgid "Lock Screen Now"
 msgstr "Beeldscherm Nu Vergrendelen"
 
-#: panel/logout.c:205
+#: panel/logout.c:204
 msgid "Kill Daemon"
 msgstr "Deamon stoppen"
 
-#: panel/logout.c:206
+#: panel/logout.c:205
 msgid "Restart Daemon"
 msgstr "Deamon herstarten"
 
-#: panel/logout.c:209
+#: panel/logout.c:208
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: panel/main.c:426
+#: panel/main.c:423
 msgid ""
 "This is the GNOME2 panel, it is likely that it will crash,\n"
 "destroy configuration, cause another world war, and most\n"
@@ -3480,45 +2116,25 @@ msgid ""
 "Do you really want to run it?"
 msgstr ""
 
-#: panel/main.c:481 panel/main.c:506
-#, fuzzy
-msgid ""
-"I've detected a panel already running,\n"
-"and will now exit."
-msgstr ""
-"Er is al een een paneel actief.\n"
-"Nog een paneel starten?\n"
-"(Het nieuwe paneel wordt niet herstart.)"
-
-#: panel/main.c:485 panel/main.c:510
-#, fuzzy
-msgid ""
-"There was a problem registering the panel with the bonobo-activation "
-"server.\n"
-"The panel will now exit."
-msgstr ""
-"Het paneel kan zich niet registreren met de GOAD server.\n"
-"Het paneel wordt gestopt."
-
-#: panel/menu.c:249
+#: panel/menu.c:248
 msgid "Many many others ..."
 msgstr "Heel veel andere ..."
 
 #. ... from the Monty Pythons show...
-#: panel/menu.c:251
+#: panel/menu.c:250
 msgid "and finally, The Knights Who Say ... NI!"
 msgstr "and finally, The Knights Who Say ... NI!"
 
-#: panel/menu.c:276
+#: panel/menu.c:275
 msgid "The GNOME Panel"
 msgstr "Het GNOME Paneel"
 
-#: panel/menu.c:277
+#: panel/menu.c:276
 #, fuzzy
 msgid "(C) 1997-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 the Free Software Foundation"
 
-#: panel/menu.c:278
+#: panel/menu.c:277
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -3526,75 +2142,75 @@ msgstr ""
 "Dit programma is verantwoordelijk voor het starten van andere applicaties "
 "het bevatten van applets, de wereldvrede en willekeurige crashes van X."
 
-#: panel/menu.c:294
+#: panel/menu.c:293
 msgid "End world hunger"
 msgstr "Einde wereld honger"
 
-#: panel/menu.c:301
+#: panel/menu.c:300
 msgid ""
 "Running in \"Lockdown\" mode.  This means your system administrator has "
 "prohibited any changes to the panel's configuration to take place."
 msgstr ""
 
-#: panel/menu.c:318
+#: panel/menu.c:317
 msgid "Can't execute 'About GNOME'"
 msgstr "Kan 'Over GNOME' niet uitvoeren"
 
-#: panel/menu.c:339 panel/menu.c:1123 panel/menu.c:1147 panel/menu.c:2300
+#: panel/menu.c:338 panel/menu.c:1122 panel/menu.c:1146
 msgid "Can't load entry"
 msgstr "Kan menuitem niet laden"
 
-#: panel/menu.c:889
+#: panel/menu.c:888
 msgid "Cannot create an item with an empty command"
 msgstr "Kan geen item maken met een lege opdracht"
 
-#: panel/menu.c:922
+#: panel/menu.c:921
 #, c-format
 msgid "Could not get file from path: %s"
 msgstr "Bestand niet gevonden in pad: %s"
 
-#: panel/menu.c:926
+#: panel/menu.c:925
 #, c-format
 msgid "Could not open .order file: %s"
 msgstr "Kan .order bestand '%s' niet openen"
 
-#: panel/menu.c:936
+#: panel/menu.c:935
 #, c-format
 msgid "Could not open file '%s' for writing"
 msgstr "Kan bestand '%s' niet openen om te schrijven"
 
-#: panel/menu.c:963
+#: panel/menu.c:962
 msgid "Create menu item"
 msgstr "Maak een nieuw menu-item"
 
-#: panel/menu.c:1015
+#: panel/menu.c:1014
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
 msgstr "Kan het menu onderdeel %s niet verwijderen: %s\n"
 
-#: panel/menu.c:1022
+#: panel/menu.c:1021
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "Bestand niet gevonden in pad: %s"
 
-#: panel/menu.c:1029
+#: panel/menu.c:1028
 #, c-format
 msgid "Could not get directory name from path: %s"
 msgstr "Kon map naam van pad %s niet vinden."
 
-#: panel/menu.c:1055
+#: panel/menu.c:1054
 #, c-format
 msgid ""
 "Could not open .order file: %s\n"
 "%s"
 msgstr "Kan .order bestand '%s' niet openen%s"
 
-#: panel/menu.c:1077
+#: panel/menu.c:1076
 #, c-format
 msgid "Could not remove old order file %s: %s\n"
 msgstr "Kon order bestand %s: %s niet verwijderen.\n"
 
-#: panel/menu.c:1087
+#: panel/menu.c:1086
 #, c-format
 msgid ""
 "Could not rename tmp file: %s to %s\n"
@@ -3603,7 +2219,7 @@ msgstr ""
 "Kon tmp bestand niet hernoemen van %s naar %s\n"
 "%s"
 
-#: panel/menu.c:1118
+#: panel/menu.c:1117
 #, fuzzy
 msgid "No 'Exec' or 'URL' field in entry"
 msgstr "Geen 'Exec' veld in entry"
@@ -3611,126 +2227,128 @@ msgstr "Geen 'Exec' veld in entry"
 #. flags
 #. error
 #. watch the enum at the top of the file
-#: panel/menu.c:1480 panel/menu.c:1556
+#: panel/menu.c:1479 panel/menu.c:1555
 msgid "Desktop entry properties"
 msgstr "Eigenschappen van bureaublad object"
 
-#: panel/menu.c:1701
+#: panel/menu-properties.c:607 panel/menu.c:1591 panel/menu.c:3079
+#: panel/menu.c:3155 panel/menu.c:3160 panel/menu.c:4256 panel/menu.c:5034
+#: panel/menu.c:5176 panel/menu.c:5196
+msgid "Menu"
+msgstr "Menu"
+
+#: panel/menu.c:1700
 msgid "Add this launcher to panel"
 msgstr "Voeg deze starter toe aan het paneel"
 
-#: panel/menu.c:1704
+#: panel/menu.c:1703
 msgid "Add this applet as a launcher to panel"
 msgstr "Voeg deze applet als starter toe aan het paneel"
 
-#: panel/menu.c:1713 panel/menu.c:1841
+#: panel/menu.c:1712 panel/menu.c:1840
 msgid "Add this to Favorites menu"
 msgstr "Voeg dit toe aan de Favorieten"
 
-#: panel/menu.c:1725
+#: panel/menu.c:1724
 msgid "Remove this item"
 msgstr "Verwijder dit item"
 
-#: panel/menu.c:1742
+#: panel/menu.c:1741
 msgid "Put into run dialog"
 msgstr "Zet in een start dialoog"
 
-#: panel/menu.c:1770
+#: panel/menu.c:1769
 #, fuzzy, c-format
 msgid "Help on %s"
 msgstr "Hulp bij Gnome Help"
 
-#: panel/menu.c:1771
+#: panel/menu.c:1770
 #, fuzzy
 msgid "Application"
 msgstr "Actie"
 
-#: panel/menu.c:1817
+#: panel/menu.c:1816
 #, fuzzy
 msgid "Entire menu"
 msgstr "In het menu"
 
-#: panel/menu.c:1826
+#: panel/menu.c:1825
 msgid "Add this as drawer to panel"
 msgstr "Voeg deze opbergmap toe aan het paneel"
 
-#: panel/menu.c:1834
+#: panel/menu.c:1833
 msgid "Add this as menu to panel"
 msgstr "Voeg dit als menu toe aan het paneel"
 
-#: panel/menu.c:1852
+#: panel/menu.c:1851
 msgid "Add new item to this menu"
 msgstr "Voeg nieuw item toe aan dit menu"
 
-#: panel/menu.c:2264
+#: panel/menu.c:2263
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "Er is al een status venster op het paneel. Er kan maar 1 zijn."
 
-#: panel/menu.c:2309
-msgid "Can't get goad_id from desktop entry!"
-msgstr "'goad_id' van bureaublad object kan niet verkregen worden!"
-
 #. Add to favourites
-#: panel/menu.c:2873
+#: panel/menu.c:2833
 #, fuzzy
 msgid "Add from menu"
 msgstr "Starterpictogram"
 
-#: panel/menu.c:2951
+#: panel/menu.c:2911
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "'goad_id' van bureaublad object kan niet verkregen worden!"
 
-#: panel/menu.c:3200 panel/menu.c:3202
+#: panel/menu.c:3160 panel/menu.c:3162
 msgid " (empty)"
 msgstr " (leeg)"
 
-#: panel/menu.c:3381
+#: panel/menu.c:3341
 #, c-format
 msgid "query returned exception %s\n"
 msgstr ""
 
-#: panel/menu.c:3644 panel/session.c:1480
+#: panel/menu.c:3604 panel/session.c:1332
 #, fuzzy
 msgid "%I:%M:%S %p"
 msgstr "%l:%M:%S %p"
 
-#: panel/menu.c:3653
+#: panel/menu.c:3613
 msgid "You can only have one menu panel at a time."
 msgstr "Je kan maar één menu paneel tegelijkertijd hebben."
 
-#: panel/menu.c:3692 panel/menu.c:3697 panel/menu.c:4538
+#: panel/menu.c:3652 panel/menu.c:3657 panel/menu.c:4489
 msgid "Create panel"
 msgstr "Maak een nieuw paneel"
 
-#: panel/menu.c:3719
+#: panel/menu.c:3679
 msgid "Menu panel"
 msgstr "Menu paneel"
 
-#: panel/menu.c:3726 panel/panel_config.c:1778 panel/panel_config.c:1903
+#: panel/menu.c:3686 panel/panel_config.c:1774 panel/panel_config.c:1899
 msgid "Edge panel"
 msgstr "Randpaneel"
 
-#: panel/menu.c:3733 panel/panel_config.c:1785 panel/panel_config.c:1914
+#: panel/menu.c:3693 panel/panel_config.c:1781 panel/panel_config.c:1910
 msgid "Aligned panel"
 msgstr "Uitgelijnd paneel"
 
-#: panel/menu.c:3740 panel/panel_config.c:1791 panel/panel_config.c:1925
+#: panel/menu.c:3700 panel/panel_config.c:1787 panel/panel_config.c:1921
 msgid "Sliding panel"
 msgstr "Schuivend paneel"
 
-#: panel/menu.c:3747 panel/panel_config.c:1797 panel/panel_config.c:1936
+#: panel/menu.c:3707 panel/panel_config.c:1793 panel/panel_config.c:1932
 msgid "Floating panel"
 msgstr "Zwevend paneel"
 
-#: panel/menu.c:3897 panel/menu.c:3906 panel/menu.c:4833
+#: panel/menu.c:3857 panel/menu.c:3866 panel/menu.c:4784
 msgid "KDE menus"
 msgstr "KDE-menu's"
 
-#: panel/menu.c:4010
+#: panel/menu.c:3970
 msgid "You cannot remove your last panel."
 msgstr "Het laatste paneel kan niet verwijderd worden."
 
-#: panel/menu.c:4023
+#: panel/menu.c:3983
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3738,135 +2356,138 @@ msgstr ""
 "Als u een paneel verwijderd, gaan alle instellingen \n"
 "verloren. Paneel toch verwijderen?"
 
-#: panel/menu.c:4060 panel/menu.c:4065 panel/menu.c:5070 panel/menu.c:5097
-#: panel/menu.c:5241
+#: panel/menu.c:4020 panel/menu.c:4025 panel/menu.c:5021 panel/menu.c:5048
+#: panel/menu.c:5192
 #, fuzzy
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: panel/menu.c:4283
+#: panel/menu.c:4243
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:496 panel/menu-properties.c:517 panel/menu.c:4305
+#: panel/menu-properties.c:496 panel/menu-properties.c:517 panel/menu.c:4265
 msgid "Main menu"
 msgstr "Hoofdmenu"
 
-#: panel/menu.c:4315
+#: panel/menu.c:4275
 msgid "Programs menu"
 msgstr "Programma's menu"
 
-#: panel/menu.c:4324
+#: panel/menu.c:4284
 msgid "Favorites menu"
 msgstr "Favorieten menu"
 
-#: panel/menu.c:4334
+#: panel/menu.c:4294
 msgid "Launcher..."
 msgstr "Starter..."
 
-#: panel/menu.c:4342
+#: panel/menu.c:4302
 #, fuzzy
 msgid "Launcher from menu"
 msgstr "Starterpictogram"
 
-#: panel/menu.c:4362
+#: panel/menu.c:4322
 msgid "Log out button"
 msgstr "Uitlogknop"
 
-#: panel/menu.c:4372
+#: panel/menu.c:4332
 msgid "Lock button"
 msgstr "Vergrendel knop"
 
-#: panel/menu.c:4382
+#: panel/menu.c:4342
 msgid "Run button"
 msgstr "Uitvoer knop"
 
-#: panel/menu.c:4392
+#: panel/menu.c:4352
 msgid "Swallowed app..."
 msgstr "Ingeslikte applicatie..."
 
-#: panel/menu.c:4399
+#: panel/menu.c:4359
 msgid "Status dock"
 msgstr "Status venster"
 
-#: panel/menu.c:4409
-#, fuzzy
-msgid "Test Applet"
-msgstr "Applet"
-
-#: panel/menu.c:4432 panel/menu.c:4437 panel/menu.c:4522
+#: panel/menu.c:4383 panel/menu.c:4388 panel/menu.c:4473
 msgid "Add to panel"
 msgstr "Toevoegen aan paneel"
 
-#: panel/menu.c:4453
+#: panel/menu.c:4404
 msgid "Cannot execute panel global properties"
 msgstr "Kan algemene instellingen paneel niet uitvoeren"
 
-#: panel/menu.c:4493
+#: panel/menu.c:4444
 msgid "Remove this panel..."
 msgstr "Verwijder dit paneel..."
 
-#: panel/menu.c:4495 panel/menu.c:4547
+#: panel/menu.c:4446 panel/menu.c:4498
 msgid "Remove this panel"
 msgstr "Verwijder dit paneel"
 
-#: panel/menu.c:4510
+#: panel/menu.c:4461
 msgid "Cannot launch gmenu!"
 msgstr ""
 
-#: panel/menu.c:4575
+#: panel/menu.c:4526
 msgid "Global Preferences..."
 msgstr "Algemene voorkeuren..."
 
-#: panel/menu-properties.c:208 panel/menu.c:4584 panel/menu.c:5349
+#: panel/menu-properties.c:208 panel/menu.c:4535 panel/menu.c:5300
 msgid "Edit menus..."
 msgstr "Bewerk menu's..."
 
-#: panel/menu.c:4594
+#: panel/menu.c:4545
 msgid "Reread all menus"
 msgstr "Alle menu's herlezen"
 
-#: panel/menu.c:4608
+#: panel/menu.c:4559
 msgid "Panel Manual..."
 msgstr "Paneel Handleiding..."
 
-#: panel/menu.c:4620
+#: panel/menu.c:4571
 msgid "Cannot execute xscreensaver"
 msgstr "Xscreensaver kan niet uitgevoerd worden"
 
-#: panel/menu.c:4701
+#: panel/menu.c:4652
 msgid "About the panel..."
 msgstr "Over het paneel..."
 
-#: panel/menu.c:4715
+#: panel/menu.c:4666
 msgid "About GNOME..."
 msgstr "Over GNOME..."
 
-#: panel/menu.c:4756
+#: panel/menu.c:4707
 msgid "Lock the screen so that you can temporairly leave your computer"
 msgstr ""
 
-#: panel/menu.c:4769
+#: panel/menu.c:4720
 msgid ""
 "Log out of this session to log in as a different user or to shut down your "
 "computer"
 msgstr ""
 
-#: panel/menu.c:4966
+#: panel/menu.c:4917
 msgid "Applets"
 msgstr "Applets"
 
-#: panel/menu.c:4994
+#: panel/menu.c:4945
 msgid "Execute a command line"
 msgstr ""
 
-#: panel/menu.c:5091
+#: panel/menu.c:5042
 msgid "Can't create menu, using main menu!"
 msgstr "Kan menu niet aanmaken, hoofdmenu wordt gebruikt!"
 
 #: panel/menu-properties.c:188
 msgid "Can't open directory, using main menu!"
 msgstr "Directory kan niet geopend worden via het hoofdmenu!"
+
+#: panel/menu-properties.c:392
+msgid "Off"
+msgstr "Uit"
+
+#: panel/menu-properties.c:402
+msgid "In a submenu"
+msgstr "In een submenu"
 
 #: panel/menu-properties.c:414
 msgid "On the main menu"
@@ -3887,6 +2508,18 @@ msgstr "Globaal hoofd menu"
 #: panel/menu-properties.c:509 panel/menu-properties.c:578
 msgid "Normal menu"
 msgstr "Gewoon menu"
+
+#: panel/menu-properties.c:530
+msgid "Programs: "
+msgstr "Programma's:"
+
+#: panel/menu-properties.c:537
+msgid "Favorites: "
+msgstr "Favorieten: "
+
+#: panel/menu-properties.c:544
+msgid "Applets: "
+msgstr "Applets: "
 
 #: panel/menu-properties.c:551
 msgid "Distribution menu (if found): "
@@ -3912,98 +2545,114 @@ msgstr "Menu pad"
 msgid "Use custom icon for panel button"
 msgstr "Gebruik aangepast pictogram voor paneel knoppen"
 
-#: panel/panel.c:935
+#: panel/panel-applet-frame.c:93
+msgid "Cannot register control widget\n"
+msgstr ""
+
+#: panel/panel-applet-frame.c:250
+msgid "Unable to obtain AppletShell interface from control\n"
+msgstr ""
+
+#: panel/panel.c:874
 #, c-format
 msgid "Open URL: %s"
 msgstr "Open URL: %s"
 
 #
-#: panel/panel_config.c:674
+#: panel/panel_config.c:670
 msgid "Hiding"
 msgstr "Verborgen"
 
 #. Auto-hide
-#: panel/panel_config.c:682
+#: panel/panel_config.c:678
 msgid "Enable Auto-hide"
 msgstr "Automatisch verbergen"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:693
+#: panel/panel_config.c:689
 msgid "Show hide buttons"
 msgstr "Toon verberg knoppen"
 
 #. Arrow enable
-#: panel/panel_config.c:704
+#: panel/panel_config.c:700
 msgid "Show arrows on hide button"
 msgstr "Toon pijltjes op verbergknop"
 
-#: panel/panel_config.c:752
+#: panel/panel_config.c:739
+msgid "Miscellaneous"
+msgstr "Diversen"
+
+#: panel/panel_config.c:748
 msgid "Avoid this panel when maximizing windows"
 msgstr ""
 
-#: panel/panel_config.c:766
+#: panel/panel_config.c:762
 #, fuzzy
 msgid "Current screen:"
 msgstr "In het midden van het scherm"
 
-#: panel/panel_config.c:825
+#: panel/panel_config.c:821
 msgid "Panel Position"
 msgstr "Paneel Positie"
 
-#: panel/panel_config.c:1075
+#: panel/panel_config.c:1071
 msgid "Orient panel horizontally"
 msgstr "Plaats paneel horizontaal"
 
-#: panel/panel_config.c:1087
+#: panel/panel_config.c:1083
 msgid "Orient panel vertically"
 msgstr "Plaats het paneel verticaal"
 
-#: panel/panel_config.c:1099
+#: panel/panel_config.c:1095
 msgid "Top left corner's position: X"
 msgstr "Positie Linker bovenkant: X"
 
-#: panel/panel_config.c:1190
+#: panel/panel_config.c:1109
+msgid "Y"
+msgstr "Y"
+
+#: panel/panel_config.c:1186
 msgid "Offset from screen edge:"
 msgstr "Verwijderd van schermrand:"
 
-#: panel/panel_config.c:1265
+#: panel/panel_config.c:1261
 msgid "Panel size:"
 msgstr "Paneel grootte:"
 
-#: panel/panel_config.c:1274
+#: panel/panel_config.c:1270
 #, fuzzy
 msgid "XX Small Tiny (12 pixels)"
 msgstr "Super Mini (12 punten)"
 
-#: panel/panel_config.c:1282
+#: panel/panel_config.c:1278
 #, fuzzy
 msgid "X Small (24 pixels)"
 msgstr "Klein (36 punten)"
 
-#: panel/panel_config.c:1290
+#: panel/panel_config.c:1286
 msgid "Small (36 pixels)"
 msgstr "Klein (36 punten)"
 
-#: panel/panel_config.c:1298
+#: panel/panel_config.c:1294
 #, fuzzy
 msgid "Medium (48 pixels)"
 msgstr "Mini (24 punten)"
 
-#: panel/panel_config.c:1306
+#: panel/panel_config.c:1302
 msgid "Large (64 pixels)"
 msgstr "Groot (64 punten)"
 
-#: panel/panel_config.c:1314
+#: panel/panel_config.c:1310
 #, fuzzy
 msgid "X Large (80 pixels)"
 msgstr "Groot (64 punten)"
 
-#: panel/panel_config.c:1322
+#: panel/panel_config.c:1318
 #, fuzzy
 msgid "XX Large (128 pixels)"
 msgstr "Groot (64 punten)"
 
-#: panel/panel_config.c:1336
+#: panel/panel_config.c:1332
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -4013,75 +2662,99 @@ msgstr ""
 "van het grootste applet, en niet alle applets\n"
 "zullen de zelfde groote hebben."
 
-#: panel/panel_config.c:1401
+#: panel/panel_config.c:1397
 #, fuzzy
 msgid "Panel window level:"
 msgstr "Paneel grootte:"
 
-#: panel/panel_config.c:1409
+#: panel/panel_config.c:1405
 msgid "Default (from global preferences)"
 msgstr ""
 
-#: panel/panel_config.c:1417
+#: panel/panel_config.c:1413
 msgid "Above other windows"
 msgstr "Boven andere vensters"
 
-#: panel/panel_config.c:1433
+#: panel/panel_config.c:1429
 msgid "Below other windows"
 msgstr "Onder andere vensters"
 
-#: panel/panel_config.c:1586
+#: panel/panel_config.c:1582
 msgid "Background Type: "
 msgstr "Achtergrondtype "
 
-#: panel/panel_config.c:1594
+#: panel/panel_config.c:1590
 msgid "Standard"
 msgstr "Standaard"
 
 #. color frame
-#: panel/panel_config.c:1598 panel/panel_config.c:1613
+#: panel/panel_config.c:1594 panel/panel_config.c:1609
 msgid "Color"
 msgstr "Kleur"
 
-#: panel/panel_config.c:1602
+#: panel/panel_config.c:1598
 msgid "Pixmap"
 msgstr "Afbeelding"
 
-#: panel/panel_config.c:1625
+#: panel/panel_config.c:1621
 msgid "Color to use:"
 msgstr "Kleur:"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.glade.h:28 panel/panel_config.c:1647
+#: panel/panel_config.c:1643
 msgid "Image"
 msgstr "Afbeelding"
 
-#: panel/panel_config.c:1673
+#: panel/panel_config.c:1669
 msgid "Don't scale image to fit"
 msgstr "Afbeelding niet schalen om te passen"
 
-#: panel/panel_config.c:1679
+#: panel/panel_config.c:1675
 msgid "Scale image (keep proportions)"
 msgstr "Schaal afbeelding (proportioneel)"
 
-#: panel/panel_config.c:1684
+#: panel/panel_config.c:1680
 msgid "Stretch image (change proportions)"
 msgstr "Verschaal afbeelding (wijzig afmetingen)"
 
-#: panel/panel_config.c:1699
+#: panel/panel_config.c:1695
 msgid "Rotate image for vertical panels"
 msgstr "Afbeelding draaien bij verticaal paneel"
 
 #. main window
-#: panel/panel_config.c:1872
+#: panel/panel_config.c:1868
 msgid "Panel properties"
 msgstr "Paneel eigenschappen"
 
-#: panel/panel_config.c:1955
+#: panel/panel_config.c:1951
 msgid "Background"
 msgstr "Achtergrond"
 
-#: panel/session.c:256
+#: panel/panel-shell.c:51
+#, fuzzy
+msgid ""
+"I've detected a panel already running,\n"
+"and will now exit."
+msgstr ""
+"Er is al een een paneel actief.\n"
+"Nog een paneel starten?\n"
+"(Het nieuwe paneel wordt niet herstart.)"
+
+#: panel/panel-shell.c:55
+#, fuzzy
+msgid ""
+"There was a problem registering the panel with the bonobo-activation "
+"server.\n"
+"The panel will now exit."
+msgstr ""
+"Het paneel kan zich niet registreren met de GOAD server.\n"
+"Het paneel wordt gestopt."
+
+#: panel/panel-util.c:655 panel/panel-util.c:712
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: panel/session.c:242
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -4089,22 +2762,22 @@ msgstr ""
 "Een applet reageert niet op een bewaar aanvraag.\n"
 "Blijft u wachten of wenst u het applet te verwijderen?"
 
-#: panel/session.c:265
+#: panel/session.c:251
 msgid "Remove applet"
 msgstr "Verwijder applet"
 
 #
-#: panel/session.c:268
+#: panel/session.c:254
 msgid "Continue waiting"
 msgstr "Aan het wachten"
 
-#: panel/session.c:277
+#: panel/session.c:263
 msgid "Timed out on sending session save to an applet"
 msgstr ""
 "Een applet reageerde niet binnen de standaard tijd\n"
 "bij het ontvangen van een bewaar sessie signaal."
 
-#: panel/swallow.c:106
+#: panel/swallow.c:105
 msgid ""
 "A swallowed application appears to have died unexpectedly.\n"
 "Attempt to reload it?"
@@ -4112,175 +2785,1279 @@ msgstr ""
 "Het lijkt erop dat een ingeslikte applicatie onverwachts is gestopt.\n"
 "Proberen opnieuw te laden?"
 
-#: panel/swallow.c:254
+#: panel/swallow.c:113
+msgid "Reload"
+msgstr "Verversen"
+
+#: panel/swallow.c:253
 msgid "Create swallow applet"
 msgstr "Maak inslikapplet"
 
-#: panel/swallow.c:275
+#: panel/swallow.c:274
 msgid "Title of application to swallow"
 msgstr "Titel van de in te slikken applicatie"
 
-#: panel/swallow.c:285
+#: panel/swallow.c:284
 msgid "Command (optional)"
 msgstr "Opdrachtregel (optioneel)"
 
-#: panel/swallow.c:296
+#: panel/swallow.c:295
 msgid "Width"
 msgstr "Breedte"
 
-#: panel/swallow.c:309
+#: panel/swallow.c:308
 msgid "Height"
 msgstr "Hoogte"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: gnome-terminal/gnome-terminal.glade.h:7
 #, fuzzy
-msgid "Terminal Class:"
-msgstr "Terminalklasse"
+#~ msgid "Panel to add the launcher to"
+#~ msgstr "Voeg deze starter toe aan het paneel"
 
-#: gnome-terminal/gnome-terminal.glade.h:9
-msgid "Font:"
-msgstr "Lettertype:"
-
-#: gnome-terminal/gnome-terminal.glade.h:10
-msgid "Pick a Font"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.glade.h:11
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.glade.h:12
-msgid "Enable bold text"
-msgstr "Zet vet gedrukte text aan"
-
-#: gnome-terminal/gnome-terminal.glade.h:13
-msgid "Blinking cursor"
-msgstr "Knipperende cursor"
-
-#: gnome-terminal/gnome-terminal.glade.h:14
-msgid "Hide menu bar"
-msgstr "Verberg menubalk"
-
-#: gnome-terminal/gnome-terminal.glade.h:15
 #, fuzzy
-msgid "Silence terminal bell"
-msgstr "Uitzetten terminalbel"
+#~ msgid "No panel found\n"
+#~ msgstr "Geen berichten gevonden"
 
-#: gnome-terminal/gnome-terminal.glade.h:16
 #, fuzzy
-msgid "Swap Delete/Backspace"
-msgstr "Verwissel DEL/Backspace"
+#~ msgid "Screenshot"
+#~ msgstr "Schermbeveilingsinstellingen"
 
-#: gnome-terminal/gnome-terminal.glade.h:17
-msgid "Use --login by default"
-msgstr "Gebruik --login standaard"
-
-#: gnome-terminal/gnome-terminal.glade.h:18
-msgid "Delete generates DEL/^H"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.glade.h:19
 #, fuzzy
-msgid "Select-by-word characters:"
-msgstr "Kies-per-woord karakters"
+#~ msgid "Save screenshot to _desktop"
+#~ msgstr "Bewaar huidige instellingen"
 
-#: gnome-terminal/gnome-terminal.glade.h:20
-msgid "General"
-msgstr "Algemeen"
+#~ msgid "Display"
+#~ msgstr "Afbeelden"
 
-#: gnome-terminal/gnome-terminal.glade.h:21
-msgid "Background type"
-msgstr "Achtergrondtype "
+#~ msgid "Layout"
+#~ msgstr "Layout"
 
-#: gnome-terminal/gnome-terminal.glade.h:23
-msgid "None"
-msgstr "Geen"
-
-#: gnome-terminal/gnome-terminal.glade.h:25
-msgid "Transparent"
-msgstr "Transparant"
-
-#: gnome-terminal/gnome-terminal.glade.h:26
-msgid "Pixmap file:"
-msgstr "Afbeeldingsbestand:"
-
-#: gnome-terminal/gnome-terminal.glade.h:27
-msgid "Background should be shaded"
-msgstr "Achtergrond gearceerd"
-
-#: gnome-terminal/gnome-terminal.glade.h:29
-#: gnome-terminal/gnome-terminal.glade.h:30
-#: gnome-terminal/gnome-terminal.glade.h:31
-#: gnome-terminal/gnome-terminal.glade.h:32
-#: gnome-terminal/gnome-terminal.glade.h:33
-#: gnome-terminal/gnome-terminal.glade.h:34
-#: gnome-terminal/gnome-terminal.glade.h:35
-#: gnome-terminal/gnome-terminal.glade.h:36
-#: gnome-terminal/gnome-terminal.glade.h:37
-#: gnome-terminal/gnome-terminal.glade.h:38
-#: gnome-terminal/gnome-terminal.glade.h:39
-#: gnome-terminal/gnome-terminal.glade.h:40
-#: gnome-terminal/gnome-terminal.glade.h:41
-#: gnome-terminal/gnome-terminal.glade.h:42
-#: gnome-terminal/gnome-terminal.glade.h:43
-#: gnome-terminal/gnome-terminal.glade.h:44
-#: gnome-terminal/gnome-terminal.glade.h:50
-#: gnome-terminal/gnome-terminal.glade.h:51
 #, fuzzy
-msgid "Pick a color"
-msgstr "Klokkleuren"
+#~ msgid "Show tasklist arrow"
+#~ msgstr "Schakel taaklijst pijl om"
 
-#: gnome-terminal/gnome-terminal.glade.h:45
-msgid "Color scheme:"
-msgstr "Kleurenschema:"
+#~ msgid "Only show current desktop in pager"
+#~ msgstr "Toon enkel huidig bureaublad in de pager"
 
-#: gnome-terminal/gnome-terminal.glade.h:46
+#~ msgid "Raise area grid over tasks"
+#~ msgstr "Toon gebieds raster boven taken"
+
+#~ msgid "Thumb Nails"
+#~ msgstr "Miniaturen"
+
+#~ msgid "Fill window thumbnails with screen contents"
+#~ msgstr "Vul miniaturen met scherm inhoud"
+
+#~ msgid "Incremental update delay [ms]"
+#~ msgstr "Cumulatieve ververs vertraging [ms]"
+
+#~ msgid "Tooltips"
+#~ msgstr "Tooltips"
+
+#~ msgid "Show Desk-Guide tooltips"
+#~ msgstr "Toon bureau-gids tooltips"
+
+#~ msgid "Desk-Guide tooltip delay [ms]"
+#~ msgstr "Bureau-gids tooltip vertraging [ms]"
+
+#~ msgid "Show desktop name tooltips"
+#~ msgstr "Toon bureaublad naam tooltips"
+
+#~ msgid "Desktop name tooltip delay [ms]"
+#~ msgstr "Bureaublad naam tooltip vertraging [ms]"
+
+#~ msgid "Tasks"
+#~ msgstr "Taaklijst"
+
+#~ msgid "Visibility"
+#~ msgstr "Zichtbaarheid"
+
+#~ msgid "Show hidden tasks (HIDDEN)"
+#~ msgstr "Toon verborgen taken (HIDDEN)"
+
+#~ msgid "Show shaded tasks (SHADED)"
+#~ msgstr "Toon shaded taken (SHADED)"
+
+#~ msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+#~ msgstr "Toon taken verborgen voor vensterlijst (SKIP-WINLIST)"
+
+#~ msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+#~ msgstr "Toon taken verborgen voor taakbalk (SKIP-TASKBAR)"
+
+#~ msgid "Geometry"
+#~ msgstr "Geometrie"
+
+#~ msgid "Horizontal Layout"
+#~ msgstr "Horizontale layout"
+
+#~ msgid "Desktop Height [pixels]"
+#~ msgstr "Bureaublad hoogte [punten]"
+
+#~ msgid "Override desktop height with panel size"
+#~ msgstr "Overschrijf bureaublad hoogte met paneel grootte"
+
+#~ msgid "Divide height by number of vertical areas"
+#~ msgstr "Verdeel hoogte over aantal verticale gebieden"
+
+#~ msgid "Rows of Desktops"
+#~ msgstr "Aantal rijen met bureaubladen"
+
+#~ msgid "Divide height by number of rows"
+#~ msgstr "Verdeel hoogte over aantal rijen"
+
+#~ msgid "Vertical Layout"
+#~ msgstr "Verticale layout"
+
+#~ msgid "Desktop Width [pixels]"
+#~ msgstr "Bureaublad breedte [punten]"
+
+#~ msgid "Override desktop width with panel size"
+#~ msgstr "Overschrijf breedte bureaublad met paneel grootte"
+
+#~ msgid "Divide width by number of horizontal areas"
+#~ msgstr "Verdeel breedte over aantal horizontale gebieden"
+
+#~ msgid "Columns of Desktops"
+#~ msgstr "Aantal kolommen met bureaubladen"
+
+#~ msgid "Divide width by number of columns"
+#~ msgstr "Verdeel breedte over aantal kolommen"
+
+#~ msgid "Window Manager Workarounds"
+#~ msgstr "Window Manager Workarounds"
+
+#~ msgid ""
+#~ "Window manager moves decoration window instead\n"
+#~ "(AfterStep, Enlightenment, FVWM, IceWM)"
+#~ msgstr ""
+#~ "Window manager verplaatst dekoratie\n"
+#~ "(AfterStep, Enlightenment, FVWM, IceWM)"
+
+#~ msgid ""
+#~ "Window manager changes active area on all desktops\n"
+#~ "(FVWM, Sawfish)"
+#~ msgstr ""
+#~ "Window manager verandert het aktieve gebied op alle bureaubladen\n"
+#~ "(FVWM, Sawfish)"
+
+#~ msgid ""
+#~ "Window manager expects pager to modify area+desktop properties directly\n"
+#~ "(Enlightenment, FVWM)"
+#~ msgstr ""
+#~ "Window manager verwacht dat de pager gebieds- en bureaublad eigenschappen "
+#~ "verandert\n"
+#~ "(Enlightenment, FVWM)"
+
+#~ msgid "Behaviour"
+#~ msgstr "Gedrag"
+
+#~ msgid "Popdown task view automatically"
+#~ msgstr "Popdown taken automatisch bekijken"
+
+#~ msgid "GNOME Desktop Guide (Pager)"
+#~ msgstr "GNOME Bureaublad gids (Pager)"
+
+#~ msgid ""
+#~ "You are not running a GNOME Compliant\n"
+#~ "Window Manager. GNOME support by the \n"
+#~ "window manager is strongly recommended\n"
+#~ "for proper Desk Guide operation."
+#~ msgstr ""
+#~ "U gebruikt geen GNOME-compliant Window Manager, \n"
+#~ "Het is sterk aanbevolen voor de Bureaublad gids\n"
+#~ "dat u een window manager gebruikt die GNOME ondersteunt."
+
+#~ msgid "Desk Guide Alert"
+#~ msgstr "Bureau gids fout"
+
+#~ msgid "About..."
+#~ msgstr "Over..."
+
+#~ msgid "Desk Guide Task View"
+#~ msgstr "Bureau gids taken bekijken"
+
+#~ msgid "Global"
+#~ msgstr "Algemeen"
+
+#~ msgid "Desk Guide Settings"
+#~ msgstr "Bureau gids instellingen"
+
+#~ msgid "Password:"
+#~ msgstr "Paswoord:"
+
+#~ msgid ""
+#~ "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
+#~ "wrong server/username/password?"
+#~ msgstr ""
+#~ "Er is een fout met de afstand-client gebeurd. Nazicht op afstand wordt "
+#~ "gedeactiveerd. Misschien is uw server/gebruikersnaam/paswoord verkeerd?"
+
+#~ msgid "You have new mail."
+#~ msgstr "U heeft nieuwe berichten."
+
+#~ msgid "You have mail."
+#~ msgstr "U heeft mail."
+
+#~ msgid "%d/%d messages"
+#~ msgstr "%d/%d berichten"
+
+#~ msgid "%d messages"
+#~ msgstr "%d berichten"
+
+#~ msgid "No mail."
+#~ msgstr "Geen mail."
+
+#~ msgid "Mailbox resides on:"
+#~ msgstr "Postbus bevindt zich op:"
+
+#~ msgid "Local mailspool"
+#~ msgstr "Lokale map met e-mail"
+
+#~ msgid "Local maildir"
+#~ msgstr "Lokale e-mail map"
+
+#~ msgid "Remote POP3-server"
+#~ msgstr "POP3-server op afstand"
+
+#~ msgid "Remote IMAP-server"
+#~ msgstr "IMAP-server op afstand"
+
+#~ msgid "Mail spool file:"
+#~ msgstr "E-mail map bestand:"
+
+#~ msgid "Mail server:"
+#~ msgstr "Mail server:"
+
+#~ msgid "Username:"
+#~ msgstr "Gebruikersnaam: "
+
+#~ msgid "Execute"
+#~ msgstr "Voer uit"
+
+#~ msgid "Before each update:"
+#~ msgstr "Voor elke update:"
+
+#~ msgid "When new mail arrives:"
+#~ msgstr "Wanneer nieuwe mail binnenkomt:"
+
+#~ msgid "When clicked:"
+#~ msgstr "Wanneer ingedrukt."
+
+#~ msgid "Check for mail every"
+#~ msgstr "Controleer mail elke"
+
+#~ msgid "seconds"
+#~ msgstr "seconden"
+
+#~ msgid "Play a sound when new mail arrives"
+#~ msgstr "Maak geluid als er nieuwe berichten zijn"
+
+#~ msgid "Mail check properties"
+#~ msgstr "'Mail check' Eigenschappen"
+
+#~ msgid "Mail check"
+#~ msgstr "Mail check"
+
+#~ msgid "Mailbox"
+#~ msgstr "Postbus"
+
+#~ msgid "Mail check Applet"
+#~ msgstr "'Mail check' Applet"
+
+#~ msgid "(c) 1998-2000 the Free Software Foundation"
+#~ msgstr "(c) 1998-2000 the Free Software Foundation"
+
 #, fuzzy
-msgid "Fore/Background Color:"
-msgstr "Voor/achtergrond kleur:"
+#~ msgid "Mail check notifies you when new mail arrives in your mailbox"
+#~ msgstr "'Mail check' waarschuwt u wanneer er nieuwe mail is"
 
-#: gnome-terminal/gnome-terminal.glade.h:47
-msgid "Foreground color:"
-msgstr "Voorgrondkleur:"
+#~ msgid "Can't create applet!\n"
+#~ msgstr "Applet kan niet gecreëerd worden!\n"
 
-#: gnome-terminal/gnome-terminal.glade.h:48
-msgid "Background color:"
-msgstr "Achtergrondkleur:"
+#~ msgid "Text only"
+#~ msgstr "Alleen tekst"
 
-#: gnome-terminal/gnome-terminal.glade.h:49
-msgid "Color palette:"
-msgstr "Kleurenpalet:"
+#~ msgid "Check for mail"
+#~ msgstr "Controleer op mail"
 
-#: gnome-terminal/gnome-terminal.glade.h:52
-msgid "Colors"
-msgstr "Kleuren"
+#~ msgid "Can't execute printer command"
+#~ msgstr "Kan printer commando niet uitvoeren"
 
-#: gnome-terminal/gnome-terminal.glade.h:53
+#~ msgid "Printer properties"
+#~ msgstr "Printereigenschappen"
+
+#~ msgid "Printer name:"
+#~ msgstr "Printernaam:"
+
+#~ msgid "Print command:"
+#~ msgstr "Afdrukcommando:"
+
+#~ msgid "Printer"
+#~ msgstr "Printer"
+
+#~ msgid "Printer Applet"
+#~ msgstr "Printer Applet"
+
+#~ msgid "(c) 1998 the Free Software Foundation"
+#~ msgstr "(c) 1998 the Free Software Foundation"
+
+#~ msgid ""
+#~ "The printer applet lets you easily drag files to be printed via a print "
+#~ "command"
+#~ msgstr ""
+#~ "Het printer applet laat je eenvoudig bestanden afdrukken als je ze op het "
+#~ "applet sleept"
+
 #, fuzzy
-msgid "Scrollbar position:"
-msgstr "Schuifbalkpositie"
+#~ msgid "Copyright (C) 1999 Anders Carlsson"
+#~ msgstr "Copyright (C) 1998 M. Lausch"
 
-#: gnome-terminal/gnome-terminal.glade.h:54
 #, fuzzy
-msgid "Scrollback lines:"
-msgstr "Regels in schuifbuffer"
+#~ msgid "Tasklist: Unable to create applet widget"
+#~ msgstr "Creëren van bestand '%s' mislukt\n"
 
-#: gnome-terminal/gnome-terminal.glade.h:55
-msgid "Scroll on keystroke"
-msgstr "Schuiven bij toetsaanslag"
+#~ msgid "Don't know how to activate `%s'\n"
+#~ msgstr "Weet hoe '%s' te starten\n"
 
-#: gnome-terminal/gnome-terminal.glade.h:56
-msgid "Scroll on output"
-msgstr "Schuiven bij uitvoer"
+#~ msgid ""
+#~ "Warning! Unsaved changes will be lost!\n"
+#~ "Proceed?"
+#~ msgstr ""
+#~ "Waarschuwing! Niet bewaarde veranderingen gaan verloren!\n"
+#~ "Doorgaan?"
 
-#: gnome-terminal/gnome-terminal.glade.h:57
-msgid "Scrolling"
-msgstr "Aan het scrollen"
+#~ msgid "Restore"
+#~ msgstr "Herstellen"
+
+#~ msgid "Iconify"
+#~ msgstr "Maak pictogram"
+
+#~ msgid "Unshade"
+#~ msgstr "Ontshade"
+
+#~ msgid "Shade"
+#~ msgstr "Shade"
+
+#~ msgid "Unstick"
+#~ msgstr "Plakken uit"
+
+#~ msgid "Stick"
+#~ msgstr "Plakken aan"
+
+#~ msgid "To desktop"
+#~ msgstr "Naar bureaublad"
+
+#~ msgid "Close window"
+#~ msgstr "Venster sluiten"
+
+#~ msgid "Kill app"
+#~ msgstr "Vernietig programma"
+
+#, fuzzy
+#~ msgid "Restore All"
+#~ msgstr "Herstellen"
+
+#, fuzzy
+#~ msgid "Iconify All"
+#~ msgstr "Maak pictogram"
+
+#, fuzzy
+#~ msgid "Unshade All"
+#~ msgstr "Ontshade"
+
+#, fuzzy
+#~ msgid "Shade All"
+#~ msgstr "Shade"
+
+#, fuzzy
+#~ msgid "Unstick All"
+#~ msgstr "Plakken uit"
+
+#, fuzzy
+#~ msgid "Stick All"
+#~ msgstr "Plakken aan"
+
+#, fuzzy
+#~ msgid "Close All"
+#~ msgstr "Afsluiten"
+
+#, fuzzy
+#~ msgid "Kill All"
+#~ msgstr "Vernietig programma"
+
+#~ msgid "Follow panel size"
+#~ msgstr "Volg paneel grootte"
+
+#~ msgid "Tasklist width:"
+#~ msgstr "Taaklijst breedte:"
+
+#~ msgid "Rows of tasks:"
+#~ msgstr "Rijen met taken:"
+
+#~ msgid "Default task size:"
+#~ msgstr "Standaard taak grootte"
+
+#~ msgid "Tasklist width is fixed"
+#~ msgstr "Taaklijst breedte is vast"
+
+#~ msgid "Tasklist width is dynamic"
+#~ msgstr "Taaklijst breedte is dynamisch"
+
+#~ msgid "Vertical"
+#~ msgstr "Verticaal"
+
+#~ msgid "Tasklist height:"
+#~ msgstr "Taaklijst hoogte:"
+
+#~ msgid "Tasklist height is fixed"
+#~ msgstr "Taaklijst hoogte is vast"
+
+#~ msgid "Tasklist height is dynamic"
+#~ msgstr "Taaklijst hoogte is dynamisch"
+
+#, fuzzy
+#~ msgid "Tasklist width is that of longest title"
+#~ msgstr "Taaklijst breedte is vast"
+
+#~ msgid "Which tasks to show"
+#~ msgstr "Welke taken tonen"
+
+#~ msgid "Show normal applications"
+#~ msgstr "Toon normale programma's"
+
+#~ msgid "Show iconified (minimized) applications"
+#~ msgstr "Toon programma's als pictogram (geminimaliseerd)"
+
+#~ msgid "Show normal applications on all desktops"
+#~ msgstr "Toon normale programma's op alle bureaubladen"
+
+#~ msgid "Show iconified (minimized) applications on all desktops"
+#~ msgstr ""
+#~ "Toon programma's als pictogram (geminimaliseerd) op alle bureaubladen"
+
+#~ msgid "Show mini icons"
+#~ msgstr "Toon mini pictogrammen"
+
+#~ msgid "Confirm before killing windows"
+#~ msgstr "Bevestig bij vernietigen vensters"
+
+#~ msgid "Move iconified tasks to current workspace when restoring"
+#~ msgstr ""
+#~ "Verplaats geminimalizeerde taken naar de huidige werkruimte als ze "
+#~ "geopend worden"
+
+#, fuzzy
+#~ msgid "Enable task grouping"
+#~ msgstr "Zet gsm debugging aan"
+
+#~ msgid "Tasklist properties"
+#~ msgstr "Taaklijst eigenschappen"
+
+#~ msgid " Folder"
+#~ msgstr " Map"
+
+#~ msgid "Save"
+#~ msgstr "Bewaren"
+
+#~ msgid "Favorites (user menus)"
+#~ msgstr "Favorieten (gebruikersmenu's)"
+
+#~ msgid "Programs (system menus)"
+#~ msgstr "Programma's (systeemmenu's)"
+
+#~ msgid "Applets (system menus)"
+#~ msgstr "Applets (systeem menu's)"
+
+#~ msgid "Programs to be merged in (system menus)"
+#~ msgstr "Samen te voegen programma's (systeemmenu's)"
+
+#~ msgid "_New Submenu..."
+#~ msgstr "_Nieuw Submenu..."
+
+#~ msgid "Create a new submenu"
+#~ msgstr "Maak een nieuw submenu"
+
+#~ msgid "New _Item..."
+#~ msgstr "Nieuw _Item..."
+
+#~ msgid "Create a new menu item"
+#~ msgstr "Maak een nieuw menu-item"
+
+#~ msgid "_Delete..."
+#~ msgstr "Verwij_deren"
+
+#~ msgid "_Sort Submenu"
+#~ msgstr "_Sorteer Submenu"
+
+#~ msgid "Sort Submenu _Recursive"
+#~ msgstr "Submenu _Recursief Sorteren"
+
+#~ msgid "_Sort"
+#~ msgstr "Sorteren"
+
+#~ msgid "New Submenu"
+#~ msgstr "Nieuw Submenu"
+
+#~ msgid "New Item"
+#~ msgstr "Nieuw item"
+
+#~ msgid "Create a new item"
+#~ msgstr "Maak een nieuw item"
+
+#~ msgid "Delete selected menu item"
+#~ msgstr "Verwijder geselecteerd menu-item"
+
+#~ msgid "Move up"
+#~ msgstr "Naar boven"
+
+#~ msgid "Move selected menu up"
+#~ msgstr "Geselecteerd menu naar boven"
+
+#~ msgid "Move down"
+#~ msgstr "Naar beneden"
+
+#~ msgid "Move selected menu down"
+#~ msgstr "Geselecteerd menu naar beneden"
+
+#~ msgid "Sort Submenu"
+#~ msgstr "Sorteer Submenu"
+
+#~ msgid "Sort selected submenu"
+#~ msgstr "Sorteer geselecteerd submenu"
+
+#~ msgid "Sort _Recursive"
+#~ msgstr "_Recursief Sorteren"
+
+#~ msgid "GNOME menu editor"
+#~ msgstr "GNOME Menu-editor"
+
+#~ msgid ""
+#~ "Released under the terms of the GNU Public License.\n"
+#~ "GNOME menu editor."
+#~ msgstr ""
+#~ "Released under the terms of the GNU Public License.\n"
+#~ "GNOME menu editor."
+
+#~ msgid "Unable to retrieve GNOME installation directory\n"
+#~ msgstr "Kan GNOME installatiedirectory niet vinden\n"
+
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Creëren van bestand '%s' mislukt\n"
+
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr ".order bestand kan niet verwijderd worden: %s\n"
+
+#~ msgid "The menu item must have a name"
+#~ msgstr "Het menu-item moet een naam hebben"
+
+#~ msgid "The menu entry must have a filename"
+#~ msgstr "Het menu moet een naam hebben"
+
+#~ msgid "Save changes?"
+#~ msgstr "Veranderingen bewaren?"
+
+#~ msgid "This change conflicts with an existing menu item"
+#~ msgstr "Deze verandering conflicteert met een bestaand menu item"
+
+#~ msgid "Overwrite existing menu entry?"
+#~ msgstr "Overschrijven van bestaand menu?"
+
+#~ msgid ""
+#~ "This change conflicts with an existing menu item.\n"
+#~ "No two menu items in a submenu can have the same name."
+#~ msgstr ""
+#~ "Deze verandering conflicteert met een bestaand menu item.\n"
+#~ "Menu items moeten een unieke naam hebben."
+
+#~ msgid "One moment, reading menus..."
+#~ msgstr "Even geduld, menu's worden ingelezen"
+
+#~ msgid "Top of user menus"
+#~ msgstr "Top van gebruikersmenu's"
+
+#~ msgid "Top of system menus"
+#~ msgstr "Top van systeemmenu's"
+
+#~ msgid "Top of system merge menus"
+#~ msgstr "Top van systeem samenvoeg menu's"
+
+#~ msgid "Top of applet menus"
+#~ msgstr "Top van appletmenu's"
+
+#~ msgid "You can not delete a top level submenu."
+#~ msgstr "U kunt geen submenu van het hoogste niveau wissen."
+
+#~ msgid "Delete this menu item?"
+#~ msgstr "Verwijder dit menu-item"
+
+#~ msgid "Delete empty submenu?"
+#~ msgstr "Verwijderen leeg submenu?"
+
+#~ msgid "Are you sure you want to delete this submenu and all its contents?"
+#~ msgstr "Weet u zeker dat u dit submenu en zijn inhoud wil verwijderen?"
+
+#~ msgid ""
+#~ "You can't add an entry to that submenu.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "U kunt niets toevoegen aan die map,\n"
+#~ "want u heeft niet de benodigde rechten."
+
+#~ msgid "New Folder"
+#~ msgstr "Nieuwe Map"
+
+#~ msgid "Failed to create directory"
+#~ msgstr "Creëren van bestand mislukt."
+
+#~ msgid "untitled.desktop"
+#~ msgstr "untitled.desktop"
+
+#~ msgid "untitled"
+#~ msgstr "naamloos"
+
+#~ msgid "creating user directory: %s\n"
+#~ msgstr "Gebruikersdirectory wordt aangemaakt: %s\n"
+
+#~ msgid "unable to create user directory: %s\n"
+#~ msgstr "Kan gebruikersdirectory '%s' niet aanmaken\n"
+
+#~ msgid ""
+#~ "Error during execution of chosen editor.\n"
+#~ "\n"
+#~ "The editor you have chosen is probably either not available,\n"
+#~ "or is not on your current path."
+#~ msgstr ""
+#~ "Fout bij het opstarten van uw gekozen editor.\n"
+#~ "\n"
+#~ "De gekozen editor bestaan niet of staat niet \n"
+#~ "in uw huidig pad."
+
+#~ msgid ""
+#~ "Alternate editor types are not supported by gnome-edit yet.\n"
+#~ "Please choose a standard executable editor in the gnome-edit capplet\n"
+#~ "in the gnome control center."
+#~ msgstr ""
+#~ "Wisselend editor types worden nog niet ondersteund door gnome-edit.\n"
+#~ "Gelieve een standaard editor te kiezen in de gnome-edit capplet\n"
+#~ "in het gnome controle center."
+
+#~ msgid "Start in hint browsing mode"
+#~ msgstr "Start met hint browsing mode"
+
+#~ msgid "Start in motd mode"
+#~ msgstr "Start in motd mode"
+
+#~ msgid "Start in fortune mode"
+#~ msgstr "Start in fortune mode"
+
+#~ msgid "Start in session login mode (used from gsm)"
+#~ msgstr "Start in session login mode (wordt gebruik voor gsm)"
+
+#~ msgid ""
+#~ "Click on the GNOME foot icon to open the\n"
+#~ "Main Menu.  This menu contains all\n"
+#~ "GNOME applications, tools, and commands."
+#~ msgstr ""
+#~ "Klik op het GNOME voet menu op het\n"
+#~ "Hoofd Menu te openen.  Dit menu beval alle\n"
+#~ "GNOME applicaties, tools, en commando's."
+
+#~ msgid "You do not have fortune installed."
+#~ msgstr "Fortune is niet geinstalleerd op uw systeem."
+
+#, fuzzy
+#~ msgid "fixed"
+#~ msgstr "Voorvoegsel %d"
+
+#~ msgid "Fortune"
+#~ msgstr "Fortune"
+
+#~ msgid "Message of The Day"
+#~ msgstr "Bericht van de dag"
+
+#, fuzzy
+#~ msgid "GNOME Hints"
+#~ msgstr "GNOME Login"
+
+#~ msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+#~ msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+
+#~ msgid ""
+#~ "You've chosen to disable the startup hint.\n"
+#~ "To re-enable it, choose \"Startup Hint\"\n"
+#~ "in the GNOME Control Center"
+#~ msgstr ""
+#~ "U heeft gekozen om de opstart-tip\n"
+#~ "uit te schakelen. Om hem weer in te schakelen,\n"
+#~ "kiez 'Opstart-tip' in het GNOME Configuratiescherm"
+
+#~ msgid "No message of the day found!"
+#~ msgstr "Geen bericht van de dag gevonden!"
+
+#~ msgid "Gnome hint"
+#~ msgstr "Gnome hint"
+
+#~ msgid "Display this dialog next time"
+#~ msgstr "Geef dit venster de volgende keer weer"
+
+#~ msgid "Enable login hints"
+#~ msgstr "Activeer hints bij het inloggen"
+
+#~ msgid "Display normal hints"
+#~ msgstr "Geef normale hints weer"
+
+#~ msgid "Display fortunes instead of hints"
+#~ msgstr "Geef fortunes weer in plaats van hints"
+
+#~ msgid "Display message of the day instead of hints"
+#~ msgstr "Geef bericht van de dag weer in plaats van hints"
+
+#~ msgid "Message of the day file to use: "
+#~ msgstr "Bericht van de dag bestand: "
+
+#~ msgid "Bookmark"
+#~ msgstr "Bladwijzer"
+
+#~ msgid "Page Title"
+#~ msgstr "Paginatitel"
+
+#~ msgid "Gnome Help Bookmarks"
+#~ msgstr "Gnome Help Bladwijzers"
+
+#~ msgid "X position of window"
+#~ msgstr "X-coördinaat van het venster"
+
+#~ msgid "X"
+#~ msgstr "X"
+
+#~ msgid "Y position of window"
+#~ msgstr "Y-coördinaat van het venster"
+
+#~ msgid "Width of window"
+#~ msgstr "Vensterbreedte"
+
+#~ msgid "WIDTH"
+#~ msgstr "BREEDTE"
+
+#~ msgid "Height of window"
+#~ msgstr "Vensterhoogte"
+
+#~ msgid "HEIGHT"
+#~ msgstr "HOOGTE"
+
+#~ msgid "Debug level"
+#~ msgstr "Debugniveau"
+
+#~ msgid "Gnome Help Browser"
+#~ msgstr "Gnome Help Browser"
+
+#~ msgid "Copyright (c) 1998 Red Hat Software, Inc."
+#~ msgstr "Copyright (c) 1998 Red Hat Software, Inc."
+
+#~ msgid ""
+#~ "GNOME Help Browser allows easy access to various forms of documentation "
+#~ "on your system"
+#~ msgstr ""
+#~ "GNOME Help Browser stelt u in staat gemakkelijke verschillende soorten "
+#~ "documentatie te benaderen"
+
+#~ msgid "History size"
+#~ msgstr "Historie-grootte"
+
+#~ msgid "History file"
+#~ msgstr "Historie-bestand"
+
+#~ msgid "Cache size"
+#~ msgstr "'Cache'-grootte"
+
+#~ msgid "Cache file"
+#~ msgstr "'Cache'-bestand"
+
+#~ msgid "Bookmark file"
+#~ msgstr "Bladwijzerbestand"
+
+#~ msgid "Man Path"
+#~ msgstr "'Man'-pad"
+
+#~ msgid "Info Path"
+#~ msgstr "'Info'-pad"
+
+#~ msgid "GNOME Help Path"
+#~ msgstr "GNOME Help Pad"
+
+#~ msgid "Gnome Help Configure"
+#~ msgstr "Gnome Help Configuratie"
+
+#~ msgid "History and cache"
+#~ msgstr "Historie en cache"
+
+#~ msgid "Paths"
+#~ msgstr "Paden"
+
+#~ msgid "<body><h2>Error: file not found</h2></body>"
+#~ msgstr "<body><h2><b>Fout</b>: bestand niet gevonden</h2></body>"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "Last"
+#~ msgstr "Laatste"
+
+#~ msgid "Count"
+#~ msgstr "Aantal"
+
+#~ msgid "Gnome Help History"
+#~ msgstr "Gnome Help Historie"
+
+#~ msgid "<BODY BGCOLOR=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
+#~ msgstr "<BODY BGCOLOR=\"#FFFFFF\"><h1>Inhouds opgave</h1>\n"
+
+#~ msgid "<h2>Man Pages</h2>\n"
+#~ msgstr "<h2>Man-Pagina's</h2>\n"
+
+#~ msgid "<body bgcolor=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
+#~ msgstr "<body bgcolor=\"#FFFFFF\"><h1>Inhouds opgave</h1>\n"
+
+#~ msgid "<h2>Info Pages</h2>\n"
+#~ msgstr "<h2>Info pagina's</h2>\n"
+
+#~ msgid "<h2>GNOME Help</h2>\n"
+#~ msgstr "<h2>GNOME Help</h2>\n"
+
+#~ msgid ""
+#~ "<HTML>\n"
+#~ "<BODY BGCOLOR=\"#ffffff\">\n"
+#~ "<H2>Results of the substring search for the string "
+#~ msgstr ""
+#~ "<HTML>\n"
+#~ "<BODY BGCOLOR=\"#ffffff\">\n"
+#~ "<H2>Resultaat van zoeken naar "
+
+#~ msgid ""
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>Manual Pages</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+#~ msgstr ""
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>Man-pagina's</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>GNU Info Pages</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>GNU Info-Pagina's</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>GNOME Help Pages</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<p>\n"
+#~ "<br>\n"
+#~ "<H3>GNOME Help Pagina's</H3>\n"
+#~ "<p>\n"
+#~ "<UL>\n"
+
+#~ msgid "<br><B>No matches found</B>\n"
+#~ msgstr "<br><b>Niets gevonden</b>\n"
+
+#~ msgid "User Commands"
+#~ msgstr "Gebruikersopdrachten"
+
+#~ msgid "System Calls"
+#~ msgstr "Systeemfuncties"
+
+#~ msgid "Library Functions"
+#~ msgstr "Bibliotheekfuncties"
+
+#~ msgid "Special Files"
+#~ msgstr "Speciale bestanden"
+
+#~ msgid "File Formats"
+#~ msgstr "Bestandsformaten"
+
+#~ msgid "Games"
+#~ msgstr "Spelletjes"
+
+#~ msgid "Administration"
+#~ msgstr "Systeembeheer"
+
+#~ msgid "man9"
+#~ msgstr "man9"
+
+#~ msgid "mann"
+#~ msgstr "mann"
+
+#~ msgid "Man Pages"
+#~ msgstr "'man'-pagina's"
+
+#~ msgid "Info Pages"
+#~ msgstr "'Info'-pagina's "
+
+#~ msgid "GNOME Help"
+#~ msgstr "GNOME Help"
+
+#~ msgid "<BODY>Could not load default TOC page</BODY>"
+#~ msgstr "<body>Laden van standaard-inhoudsopgavepagina mislukt</body>"
+
+#~ msgid "<BODY>Unknown TOC argument</BODY>"
+#~ msgstr "<body>Onbekend inhoudsopgave-argument</body>"
+
+#~ msgid "_New Window"
+#~ msgstr "_Nieuw venster"
+
+#~ msgid "Open new browser window"
+#~ msgstr "Open nieuw browservenster"
+
+#~ msgid "_Add Bookmark"
+#~ msgstr "Toevoegen bladwijzer"
+
+#~ msgid "Add bookmark"
+#~ msgstr "Toevoegen bladwijzer"
+
+#~ msgid "_Back"
+#~ msgstr "Terug"
+
+#~ msgid "_Forward"
+#~ msgstr "Volgend"
+
+#~ msgid "_Reload"
+#~ msgstr "Verve_rsen"
+
+#~ msgid "_Index"
+#~ msgstr "_Index"
+
+#~ msgid "_History"
+#~ msgstr "_Historie"
+
+#~ msgid "Show History Window"
+#~ msgstr "Toon Historievenster"
+
+#~ msgid "_Bookmarks"
+#~ msgstr "_Bladwijzers"
+
+#~ msgid "Show Bookmarks Window"
+#~ msgstr "Toon bladwijzervenster"
+
+#~ msgid "_Window"
+#~ msgstr "Venster"
+
+#~ msgid "_View"
+#~ msgstr "Beeld"
+
+#~ msgid "Go to the previous location in the history list"
+#~ msgstr "Ga naar vorige locatie in de historie"
+
+#~ msgid "Forward"
+#~ msgstr "Verder"
+
+#~ msgid "Go to the next location in the history list"
+#~ msgstr "Ga naar de volgende lokatie in de historie"
+
+#~ msgid "Index"
+#~ msgstr "Index"
+
+#~ msgid "History"
+#~ msgstr "Historie"
+
+#~ msgid "BMarks"
+#~ msgstr "Bladwijzers"
+
+#~ msgid "Help on Help"
+#~ msgstr "Hulp bij Gnome Help"
+
+#~ msgid "Location: "
+#~ msgstr "Locatie: "
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You probably don't\n"
+#~ "have this documentation\n"
+#~ "installed on your system."
+#~ msgstr ""
+#~ "Fout tijdens laden document:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Deze documentie is\n"
+#~ "waarschijnlijk niet op\n"
+#~ "uw systeem geinstaleerd."
+
+#~ msgid "Deskguide (the desktop pager)"
+#~ msgstr "Deskguide (de bureaublad pager)"
+
+#~ msgid "Tasklist"
+#~ msgstr "Taaklijst"
+
+#~ msgid "The Battery"
+#~ msgstr "De Batterij"
+
+#~ msgid ""
+#~ "%s applet appears to have died unexpectedly.\n"
+#~ "\n"
+#~ "Reload this applet?\n"
+#~ "\n"
+#~ "(If you choose not to reload it at this time you can always add it from\n"
+#~ "the \"Applets\" submenu in the main menu.)"
+#~ msgstr ""
+#~ "Het lijkt erop dat de %s applet onverwachts is gestopt.\n"
+#~ "\n"
+#~ "Deze applet opnieuw starten?\n"
+#~ "\n"
+#~ "(Als je ervoor kiest om de applet op dit moment niet opnieuw te starten "
+#~ "dan\n"
+#~ "kun je het nog altijd toevoegen door het \"Applets\" submenu te kiezen in "
+#~ "het hoofdmenu)"
+
+#, fuzzy
+#~ msgid "Couldn't register applet."
+#~ msgstr "Applet kan niet toegevoegd worden!"
+
+#~ msgid "Whoops! for some reason we can't add to the panel"
+#~ msgstr ""
+#~ "Hola! We kunnen niet toevoegen aan het paneel omwille van een bepaalde "
+#~ "reden."
+
+#~ msgid "No socket was created"
+#~ msgstr "Er werd geen socket gemaakt"
+
+#~ msgid "Distribution: "
+#~ msgstr "Distributie: "
+
+#~ msgid "KDE: "
+#~ msgstr "KDE: "
+
+#~ msgid "Panel: "
+#~ msgstr "Paneel: "
+
+#~ msgid "Desktop: "
+#~ msgstr "Bureaublad: "
+
+#~ msgid "Enable animations"
+#~ msgstr "Animaties inschakelen"
+
+#, fuzzy
+#~ msgid "Panel Animation Settings"
+#~ msgstr "Batterijstatus:"
+
+#, fuzzy
+#~ msgid "Panel Animation Speed"
+#~ msgstr "Animatiesnelheid"
+
+#, fuzzy
+#~ msgid "Hide delay (ms)"
+#~ msgstr "Vertraging (ms)"
+
+#, fuzzy
+#~ msgid "Show delay (ms)"
+#~ msgstr "Vertraging (ms)"
+
+#~ msgid "Size (pixels)"
+#~ msgstr "Grootte (punten)"
+
+#~ msgid "Prelight buttons on mouseover"
+#~ msgstr "Knoppen verlichten als de muis er overheen beweegt"
+
+#~ msgid "In the menu"
+#~ msgstr "In het menu"
+
+#~ msgid "Menus"
+#~ msgstr "Menu's"
+
+#~ msgid "Use large icons"
+#~ msgstr "Gebruik grote pictogrammen"
+
+#~ msgid "Show [...] buttons"
+#~ msgstr "Toon [...] knoppen"
+
+#~ msgid "Show popup menus outside of panels"
+#~ msgstr "Toon popup-menu's buiten panelen"
+
+#~ msgid "Keep menus in memory"
+#~ msgstr "Houd menu's in het geheugen"
+
+#~ msgid "Merge in system menus"
+#~ msgstr "Samenvoegen in systeem menu's"
+
+#~ msgid ""
+#~ "Automatically re-check menus\n"
+#~ "for newly installed software"
+#~ msgstr ""
+#~ "Automatisch menus controleren op nieuw\n"
+#~ "geinstalleerde software"
+
+#, fuzzy
+#~ msgid "Show menu titles"
+#~ msgstr "Toon mini pictogrammen"
+
+#~ msgid "Global menu"
+#~ msgstr "Globaal menu"
+
+#~ msgid "Press a key..."
+#~ msgstr "Druk een toets..."
+
+#~ msgid "Tooltips enabled"
+#~ msgstr "Tooltips aanzetten"
+
+#~ msgid "Close drawer if a launcher inside it is pressed"
+#~ msgstr "Sluit opbergmap als een starter daarin wordt geactiveerd"
+
+#~ msgid "Raise panels on mouse-over"
+#~ msgstr "Paneel naar voren als de muis er overheen beweegt"
+
+#~ msgid "Confirm the removal of panels with a dialog"
+#~ msgstr "Bevestig het verwijderen van panelen met een dialoogvenster"
+
+#~ msgid "Try to avoid overlapping panels"
+#~ msgstr "Probeer overlappende panelen te vermijden"
+
+#, fuzzy
+#~ msgid "Panel treatment (GNOME compliant window managers only)"
+#~ msgstr ""
+#~ "Houdt paneel onder vensters (alleen GNOME overeenkomstige window managers)"
+
+#, fuzzy
+#~ msgid "Keep panels below other windows"
+#~ msgstr "Onder andere vensters"
+
+#, fuzzy
+#~ msgid "Keep panels on the same level as other windows"
+#~ msgstr "Op het zelfde niveau als andere vensters"
+
+#, fuzzy
+#~ msgid "Keep panels above other windows"
+#~ msgstr "Boven andere vensters"
+
+#~ msgid "Key Bindings"
+#~ msgstr "Sneltoetsen"
+
+#~ msgid "Enable panel keybindings"
+#~ msgstr "Gebruik paneel sneltoetsen"
+
+#~ msgid "Popup menu key"
+#~ msgstr "Menu sneltoets"
+
+#~ msgid "Grab key..."
+#~ msgstr "Neem toets..."
+
+#~ msgid "Run dialog key"
+#~ msgstr "Gebruik dialoog toets"
+
+#~ msgid "Animation"
+#~ msgstr "Animatie"
+
+#~ msgid "Buttons"
+#~ msgstr "Knoppen"
+
+#~ msgid "Can't get goad_id from desktop entry!"
+#~ msgstr "'goad_id' van bureaublad object kan niet verkregen worden!"
+
+#, fuzzy
+#~ msgid "Test Applet"
+#~ msgstr "Applet"
+
+#, fuzzy
+#~ msgid "Terminal Class:"
+#~ msgstr "Terminalklasse"
+
+#~ msgid "Enable bold text"
+#~ msgstr "Zet vet gedrukte text aan"
+
+#~ msgid "Blinking cursor"
+#~ msgstr "Knipperende cursor"
+
+#~ msgid "Hide menu bar"
+#~ msgstr "Verberg menubalk"
+
+#, fuzzy
+#~ msgid "Silence terminal bell"
+#~ msgstr "Uitzetten terminalbel"
+
+#, fuzzy
+#~ msgid "Swap Delete/Backspace"
+#~ msgstr "Verwissel DEL/Backspace"
+
+#~ msgid "Use --login by default"
+#~ msgstr "Gebruik --login standaard"
+
+#, fuzzy
+#~ msgid "Select-by-word characters:"
+#~ msgstr "Kies-per-woord karakters"
+
+#~ msgid "General"
+#~ msgstr "Algemeen"
+
+#~ msgid "Background type"
+#~ msgstr "Achtergrondtype "
+
+#~ msgid "Transparent"
+#~ msgstr "Transparant"
+
+#~ msgid "Pixmap file:"
+#~ msgstr "Afbeeldingsbestand:"
+
+#~ msgid "Background should be shaded"
+#~ msgstr "Achtergrond gearceerd"
+
+#, fuzzy
+#~ msgid "Pick a color"
+#~ msgstr "Klokkleuren"
+
+#~ msgid "Color scheme:"
+#~ msgstr "Kleurenschema:"
+
+#, fuzzy
+#~ msgid "Fore/Background Color:"
+#~ msgstr "Voor/achtergrond kleur:"
+
+#~ msgid "Foreground color:"
+#~ msgstr "Voorgrondkleur:"
+
+#~ msgid "Background color:"
+#~ msgstr "Achtergrondkleur:"
+
+#~ msgid "Color palette:"
+#~ msgstr "Kleurenpalet:"
+
+#~ msgid "Colors"
+#~ msgstr "Kleuren"
+
+#, fuzzy
+#~ msgid "Scrollbar position:"
+#~ msgstr "Schuifbalkpositie"
+
+#, fuzzy
+#~ msgid "Scrollback lines:"
+#~ msgstr "Regels in schuifbuffer"
+
+#~ msgid "Scroll on keystroke"
+#~ msgstr "Schuiven bij toetsaanslag"
+
+#~ msgid "Scroll on output"
+#~ msgstr "Schuiven bij uitvoer"
+
+#~ msgid "Scrolling"
+#~ msgstr "Aan het scrollen"
 
 #~ msgid "Red Hat Linux"
 #~ msgstr "Red Hat Linux"
@@ -4332,17 +4109,11 @@ msgstr "Aan het scrollen"
 #~ msgid "_Reset Terminal"
 #~ msgstr "Terminal Ve_rversen"
 
-#~ msgid "Reset and _Clear"
-#~ msgstr "Vernieuwen"
-
 #~ msgid "_Open in browser"
 #~ msgstr "Open in browser"
 
 #~ msgid "C_olor selector..."
 #~ msgstr "Kleurselect_or"
-
-#~ msgid "File"
-#~ msgstr "Bestand"
 
 #~ msgid "Edit"
 #~ msgstr "Bewerken"
@@ -4519,9 +4290,6 @@ msgstr "Aan het scrollen"
 #~ msgid "Above"
 #~ msgstr "Verplaats"
 
-#~ msgid "Type"
-#~ msgstr "Type"
-
 #~ msgid "Hiding policy"
 #~ msgstr "Verberg beleid"
 
@@ -4625,9 +4393,6 @@ msgstr "Aan het scrollen"
 #~ msgid "System menus"
 #~ msgstr "Systeemmenu's"
 
-#~ msgid "Show icons"
-#~ msgstr "Toon pictogrammen"
-
 #~ msgid "%s: option `%s' is ambiguous\n"
 #~ msgstr "%s: optie '%s' is niet eenduidig\n"
 
@@ -4724,9 +4489,6 @@ msgstr "Aan het scrollen"
 #~ msgid "Tile filename (down)"
 #~ msgstr "Tegelbestand (neerwaarts)"
 
-#~ msgid "Show hints on panel startup"
-#~ msgstr "Toon hints bij starten van het paneel"
-
 #~ msgid "Global panel configuration"
 #~ msgstr "Algemene paneelconfiguratie"
 
@@ -4777,9 +4539,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Display URL label"
 #~ msgstr "Toon URL label"
-
-#~ msgid "WebControl Properties"
-#~ msgstr "WebControl Eigenschappen"
 
 #~ msgid "Launch new window"
 #~ msgstr "Open nieuw venster"
@@ -4936,9 +4695,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Speed:"
 #~ msgstr "Snelheid:"
-
-#~ msgid "Height:"
-#~ msgstr "Hoogte:"
 
 #~ msgid "Load Graph"
 #~ msgstr "Belastingsgrafiek"
@@ -5263,9 +5019,6 @@ msgstr "Aan het scrollen"
 #~ msgid "About\t"
 #~ msgstr "Info\t"
 
-#~ msgid "Fvwm Pager Applet"
-#~ msgstr "Fvwm Bureaubladschakelaar Applet"
-
 #~ msgid "Scramble pieces"
 #~ msgstr "Schudden"
 
@@ -5281,9 +5034,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Copyright (C) The Free Software Foundation"
 #~ msgstr "Copyright (C) The Free Software Foundation"
-
-#~ msgid "1.0"
-#~ msgstr "1.0"
 
 #~ msgid "Fifteen sliding pieces"
 #~ msgstr "Vijftien schuivende stukken"
@@ -5317,9 +5067,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Floppy"
 #~ msgstr "Diskette"
-
-#~ msgid "Icon:"
-#~ msgstr "Pictogram:"
 
 #~ msgid "Update in seconds:"
 #~ msgstr "Verversingstijd in seconden:"
@@ -5511,9 +5258,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Update Interval (seconds):"
 #~ msgstr "Verversingstijd in seconden:"
-
-#~ msgid "Applet Width:"
-#~ msgstr "Appletbreedte"
 
 #~ msgid "Applet Height:"
 #~ msgstr "Applethoogte"
@@ -5795,9 +5539,6 @@ msgstr "Aan het scrollen"
 #~ msgid "Set parameters from saved state and exit"
 #~ msgstr "Herstel parameters en afsluiten"
 
-#~ msgid "Flat"
-#~ msgstr "Vlak"
-
 #~ msgid "Gradient"
 #~ msgstr "Verlopend"
 
@@ -5809,9 +5550,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid " Browse... "
 #~ msgstr " Zoeken..."
-
-#~ msgid "Scaled"
-#~ msgstr "Geschaald"
 
 #~ msgid "Tiled"
 #~ msgstr "Getegeld"
@@ -5847,9 +5585,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Sound"
 #~ msgstr "Geluid"
-
-#~ msgid "Volume"
-#~ msgstr "Volume"
 
 #~ msgid "Pitch"
 #~ msgstr "Toonhoogte"
@@ -5892,9 +5627,6 @@ msgstr "Aan het scrollen"
 
 #~ msgid "Slow"
 #~ msgstr "Traag"
-
-#~ msgid "Large"
-#~ msgstr "Groot"
 
 #~ msgid "Small"
 #~ msgstr "Klein"
@@ -6033,9 +5765,6 @@ msgstr "Aan het scrollen"
 #~ msgid "Help & About..."
 #~ msgstr "Help & Info..."
 
-#~ msgid "Icon Selection"
-#~ msgstr "Pictogramselectie"
-
 #~ msgid "Repeat Delay"
 #~ msgstr "Herhaal vertraging"
 
@@ -6066,9 +5795,6 @@ msgstr "Aan het scrollen"
 #~ msgstr ""
 #~ "Automatisch\n"
 #~ "Voorbeeld"
-
-#~ msgid "Theme Information"
-#~ msgstr "Thema-informatie"
 
 #~ msgid "Can't allocate memory for color\n"
 #~ msgstr "Geen geheugenruimte voor kleur\n"
