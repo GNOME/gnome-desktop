@@ -1,3 +1,29 @@
+2000-11-06  Dan Mueth <d-mueth@uchicago.edu>
+
+        * Nautilus requires that the doc names match the directory names:
+          .../gnome/help/<appname>/<lang>/<appname>.sgml where one would
+          type "gnome-help:<appname>" in Nautilus.  It is currently broken
+          for all applets, since we use
+          .../gnome/help/<name>_applet/<lang>/<name>-applet.sgml.
+          Thus, we have to change all <name>-applet.sgml to
+          <name>_applet.sgml.
+        * First, jrb is renaming the files as described above:
+                applets/gen_util/help/C/clock/clock-applet.sgml
+                applets/gen_util/help/da/clock/clock-applet.sgml
+                applets/desk-guide/help/C/desk-guide-applet.sgml
+                applets/desk-guide/help/de/desk-guide-applet.sgml
+                applets/fish/help/C/fish-applet.sgml
+                applets/fish/help/da/fish-applet.sgml
+                applets/fish/help/no/fish-applet.sgml
+                applets/gen_util/help/de/gen_util-applet.sgml
+                applets/gen_util/help/no/gen_util-applet.sgml
+                applets/gen_util/help/C/mailcheck/mailcheck-applet.sgml
+                applets/gen_util/help/da/mailcheck/mailcheck-applet.sgml
+                applets/gen_util/help/C/printer/printer-applet.sgml
+                applets/gen_util/help/da/printer/printer-applet.sgml
+                applets/tasklist/help/C/tasklist-applet.sgml
+        * applet-docs.make: Change all "-applet" to "_applet"
+
 2000-11-04  Dan Mueth <d-mueth@uchicago.edu>
 
 	* app-docs.make: Have it install $(app).sgml
