@@ -48,7 +48,7 @@ bonobo_moniker_ditem_SOURCES = \
 	bonobo-moniker-ditem.c
 
 bonobo_moniker_ditem_LDADD = \
-	$(GNOME_DESKTOP_LIBS) -ldmalloc
+	$(GNOME_DESKTOP_LIBS)
 
 libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.h		\
@@ -58,7 +58,7 @@ libgnome_desktop_2_la_SOURCES = \
 	$(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_LIBADD = \
-	$(GNOME_DESKTOP_LIBS) -ldmalloc
+	$(GNOME_DESKTOP_LIBS)
 
 test_ditem_SOURCES = \
 	bonobo-config-ditem.c		\
@@ -66,7 +66,7 @@ test_ditem_SOURCES = \
 	test-ditem.c
 
 test_ditem_LDADD = \
-	libgnome-desktop-2.la -ldmalloc
+	libgnome-desktop-2.la
 
 locale_DATA = \
 	locale.alias

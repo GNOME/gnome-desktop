@@ -1449,9 +1449,11 @@ bonobo_config_ditem_new (const char *filename)
 
 	g_return_val_if_fail (filename != NULL, NULL);
 
+#if 0
 	/* Don't remove this g_print, it's to "hard-require" dmalloc so
 	 * that the linker can't optimize it away. */
 	g_print ("You can ignore this number: %d\n", dmalloc_errno);
+#endif
 
 	CORBA_exception_init (&ev);
 
