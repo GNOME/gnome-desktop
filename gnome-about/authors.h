@@ -57,6 +57,7 @@ static author authors[] = {
 	{ "Gus Estrella", "" },
 	{ "David Etherton", "" },
 	{ "Marc Ewing", "" },
+	{ "Gergõ Érdi", "<http://cactus.rulez.org>"},
 	{ "Peter Fales", "" },
 	{ "Dave Finton", "" },
 	{ "Milon Firikis", "" },
@@ -239,7 +240,6 @@ static author authors[] = {
 	{ "Sascha Ziemann", "" },
 	{ "Michael Zucchi", "<zucchi@zedzone.mmc.com.au>" },
 	{ "Jason van Zyl", "" },
-	{ "Gergõ Érdi", "<http://cactus.rulez.org>"},
 	{ "", "" },
 	{ N_("... and many more"), "" },
 	{ NULL, NULL }
