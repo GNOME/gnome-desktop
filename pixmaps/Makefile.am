@@ -50,16 +50,16 @@ BITMAPS     = \
 	launcher-program.png			\
 	monitor.png				\
 	netscape.png				\
-	panel-arrow-down.xpm			\
-	panel-arrow-left.xpm			\
-	panel-arrow-right.xpm			\
-	panel-arrow-up.xpm			\
-	panel-folder.xpm			\
+	panel-arrow-down.png			\
+	panel-arrow-left.png			\
+	panel-arrow-right.png			\
+	panel-arrow-up.png			\
+	panel-folder.png			\
 	panel-drawer.png			\
 	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
-	panel-menu-main.xpm
+	panel-menu-main.png
 
 TILES     = \
 	tile-normal-up.png			\
