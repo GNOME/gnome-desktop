@@ -233,7 +233,7 @@ static gchar *contributors[] = {
 	"Joe Pfeiffer",
 	"Ben Pierce",
 	"Chris Pinkham",
-	"Hasbullah Bin Pit"
+	"Hasbullah Bin Pit",
 	"Germ\xc3\xa1n Poo-Caama\xc3\xb1o",
 	"Dick Porter",
 	"Tero Pulkkinen",
