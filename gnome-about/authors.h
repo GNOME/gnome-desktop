@@ -28,6 +28,7 @@ static author authors[] = {
 	{ "The Squeaky Rubber Gnome", "<squeak>" },
 	{ "Owen Taylor", "<otaylor@redhat.com>" },
 	{ "Peter Teichman", "<pat4@acpub.duke.edu>" },
+	{ "Arturo Tena", "<arturo@directmail.org>" },
 	{ "Tom Tromey", "<tromey@cygnus.com>" },
 	{ "Michael Zucchi", "<zucchi@zedzone.mmc.com.au>" },
 	{ "", "" },
