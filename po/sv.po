@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core\n"
-"POT-Creation-Date: 2001-06-05 22:53+0200\n"
-"PO-Revision-Date: 2001-06-05 23:04+0200\n"
+"POT-Creation-Date: 2001-06-07 00:22+0200\n"
+"PO-Revision-Date: 2001-06-07 00:26+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: panel/gnome-panel-add-launcher.c:34
 msgid "Panel to add the launcher to"
-msgstr "Panel som programknappen skall läggas på"
+msgstr "Panel som programknappen ska läggas till på"
 
 #: panel/gnome-panel-add-launcher.c:34 panel/gnome-panel-add-launcher.c:35
 msgid "NUMBER"
-msgstr "NUMBER"
+msgstr "NUMMER"
 
 #: panel/gnome-panel-add-launcher.c:35
 msgid "Position to add the launcher to"
-msgstr "Position som programknappen ska läggas på"
+msgstr "Position som programknappen ska läggas till på"
 
 #: panel/gnome-panel-add-launcher.c:36
 msgid "The argument is a url to add, not a .desktop file"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "No panel found\n"
 msgstr "Hittade ingen panel\n"
 
-#: panel/gnome-panel-screenshot.c:117
+#: panel/gnome-panel-screenshot.c:126
 msgid ""
 "Unable to initialize png structure.\n"
 "You probably have a bad version of libpng on your system"
@@ -54,15 +54,15 @@ msgstr ""
 "Kan inte initiera png-strukturen.\n"
 "Du har troligtvis en felaktig version av libpng på ditt system"
 
-#: panel/gnome-panel-screenshot.c:125
+#: panel/gnome-panel-screenshot.c:134
 msgid ""
 "Unable to create png info.\n"
 "You probably have a bad version of libpng on your system"
 msgstr ""
 "Kan inte skapa png-information.\n"
-"Di har troligtvis en felaktig version av libpng på ditt system"
+"Du har troligtvis en felaktig version av libpng på ditt system"
 
-#: panel/gnome-panel-screenshot.c:132
+#: panel/gnome-panel-screenshot.c:141
 msgid ""
 "Unable to set png info.\n"
 "You probably have a bad version of libpng on your system"
@@ -70,20 +70,20 @@ msgstr ""
 "Kan inte ställa in png-information.\n"
 "Du har troligtvis en felaktig version av libpng på ditt system"
 
-#: panel/gnome-panel-screenshot.c:146
+#: panel/gnome-panel-screenshot.c:155
 msgid ""
 "Insufficient memory to save the screenshot.\n"
 "Please free up some resources and try again."
 msgstr ""
 "Inte tillräckligt med minne för att spara skärmdumpen.\n"
-"Gör mer resurser lediga och försök igen."
+"Frigör resurser och försök igen."
 
-#: panel/gnome-panel-screenshot.c:190
+#: panel/gnome-panel-screenshot.c:199
 #, c-format
 msgid "File %s already exists. Overwrite?"
 msgstr "Filen %s finns redan. Skriv över?"
 
-#: panel/gnome-panel-screenshot.c:204 panel/gnome-panel-screenshot.c:669
+#: panel/gnome-panel-screenshot.c:213 panel/gnome-panel-screenshot.c:693
 #, c-format
 msgid ""
 "Unable to create the file:\n"
@@ -94,37 +94,48 @@ msgstr ""
 "\"%s\"\n"
 "Kontrollera dina rättigheter till förälderkatalogen"
 
-#: panel/gnome-panel-screenshot.c:464
+#: panel/gnome-panel-screenshot.c:472
 msgid "Print Screenshot"
 msgstr "Skriv ut skärmdump"
 
-#: panel/gnome-panel-screenshot.c:512
+#: panel/gnome-panel-screenshot.c:520
 msgid "Screenshot Print Preview"
 msgstr "FÖrhandsgranska skärmdump"
 
-#. translators: this the file that gets made up with the screenshot
-#: panel/gnome-panel-screenshot.c:536
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:545
+#, c-format
+msgid "%s%cScreenshot-%s.png"
+msgstr "%s%cSkärmdump-%s.png"
+
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:550
 #, c-format
 msgid "%s%cScreenshot.png"
 msgstr "%s%cSkärmdump.png"
 
-#. translators: this the file that gets made up with the
-#. * screenshot
-#: panel/gnome-panel-screenshot.c:548
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:565
+#, c-format
+msgid "%s%cScreenshot-%s-%d.png"
+msgstr "%s%cSkärmdump-%s-%d.png"
+
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:570
 #, c-format
 msgid "%s%cScreenshot-%d.png"
 msgstr "%s%cSkärmdump-%d.png"
 
-#: panel/gnome-panel-screenshot.c:688
+#: panel/gnome-panel-screenshot.c:712
 #, c-format
 msgid "Not enough room to write file %s"
 msgstr "Inte tillräckligt med utrymme för att skriva filen %s"
 
-#: panel/gnome-panel-screenshot.c:888
+#: panel/gnome-panel-screenshot.c:1012
 msgid "Grab a window instead of the entire screen"
 msgstr "Fånga ett fönster istället för hela skärmen"
 
-#: panel/gnome-panel-screenshot.c:916
+#: panel/gnome-panel-screenshot.c:1040
 msgid ""
 "Glade file for the screenshot program is missing.\n"
 "Please check your installation of gnome-core"
@@ -132,7 +143,7 @@ msgstr ""
 "Glade-filen för skärmdumpsprogrammet saknas.\n"
 "Kontrollera din installation av gnome-core"
 
-#: panel/gnome-panel-screenshot.c:933
+#: panel/gnome-panel-screenshot.c:1057
 msgid "Unable to take a screenshot of the current desktop."
 msgstr "Kan inte ta en skärmdump av det aktuella skrivbordet."
 
@@ -164,7 +175,7 @@ msgstr "Spara skärmdumpen till skriv_bordet"
 
 #: panel/gnome-panel-screenshot.glade.h:12
 msgid "Save screenshot to _web page (save in ~/public__html)"
-msgstr "Spara skärmdumpen till _webbsida (spara i ~/public_html)"
+msgstr "Spara skärmdumpen till _webbsida (spara i ~/public__html)"
 
 #: panel/gnome-panel-screenshot.glade.h:13
 msgid "_Print screenshot..."
@@ -245,11 +256,11 @@ msgstr "Visa upprullade fönster (SHADED)"
 
 #: applets/desk-guide/deskguide_applet.c:108
 msgid "Show tasks which hide from window list (SKIP-WINLIST)"
-msgstr "Visa fönster som är dolda från fönsterlistan (SKIP_WINLIST)"
+msgstr "Visa fönster som är dolda från fönsterlistan (SKIP-WINLIST)"
 
 #: applets/desk-guide/deskguide_applet.c:110
 msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
-msgstr "Visa fönster som är dolda från fönsterlistan (SKIP_TASKBAR)"
+msgstr "Visa fönster som är dolda från fönsterlistan (SKIP-TASKBAR)"
 
 #. CONFIG_SECTION (sect_null_1, NULL),
 #: applets/desk-guide/deskguide_applet.c:113
@@ -362,7 +373,7 @@ msgstr ""
 
 #: applets/desk-guide/deskguide_applet.c:193
 msgid "Desk Guide Alert"
-msgstr "Skrivbordsguide-varning"
+msgstr "Skrivbordsguidevarning"
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:944
 #: applets/gen_util/clock.c:582 applets/gen_util/mailcheck.c:1517
@@ -416,11 +427,11 @@ msgid ""
 "We strongly advise you against usage of wanda for anything\n"
 "which would make the applet \"practical\" or useful."
 msgstr ""
-"Varning: Kommando verkar vara nånting användbart.\n"
-"Eftersom detta är ett oanvändbart panelprogram, vill du nog inte göra "
-"detta.\n"
-"Vi rekommenderar inte att man använder Wanda till nånting som skulle vara "
-"praktiskt eller användbart."
+"Varning: Kommandot verkar vara någonting användbart. Eftersom\n"
+"detta är ett oanvändbart panelprogram vill du nog inte göra\n"
+"detta. Vi rekommenderar inte att man använder Wanda till\n"
+"någonting som skulle göra panelprogrammet praktiskt eller\n"
+"användbart."
 
 #: applets/fish/fish.c:509
 msgid "GNOME Fish Properties"
@@ -624,9 +635,7 @@ msgstr "© 1998-2001 Free Software Foundation"
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
-msgstr ""
-"Klockpanelprogrammet ger din panel en lätt och enkel visning av datumet och "
-"tiden"
+msgstr "Klockpanelprogrammet visar lätt och enkelt dag och klockslag"
 
 #: applets/gen_util/mailcheck.c:207 applets/gen_util/mailcheck.c:1065
 msgid "Password:"
@@ -1143,7 +1152,7 @@ msgstr "Sortera _rekursivt"
 #. loading dialog
 #: gmenu/main.c:241 gmenu/main.c:307 gmenu/tree.c:380
 msgid "GNOME menu editor"
-msgstr "GNOME-menyeditor"
+msgstr "GNOME-menyredigerare"
 
 #: gmenu/main.c:244
 msgid ""
@@ -1151,7 +1160,7 @@ msgid ""
 "GNOME menu editor."
 msgstr ""
 "Släppt under villkoren i GNU Public License.\n"
-"GNOME menyeditor."
+"GNOME-menyredigerare."
 
 #: gmenu/main.c:287
 msgid "Unable to retrieve GNOME installation directory\n"
@@ -1301,7 +1310,7 @@ msgstr "Raul Perusquia Flores"
 
 #: gnome-about/contributors.h:94
 msgid "The Mysterious GEGL"
-msgstr "Den mystiska GEGL:en"
+msgstr "Den mystiske GEGL"
 
 #: gnome-about/contributors.h:96
 msgid "Bjoern Giesler"
@@ -1400,7 +1409,7 @@ msgstr "GNOME:s huvudwebbplats"
 
 #: gnome-about/gnome-about.c:576
 msgid "GNOME Developers' Site"
-msgstr "GNOME:S utvecklarwebbplats"
+msgstr "GNOME:s utvecklarwebbplats"
 
 #: gnome-edit/gnome-edit.c:141 gnome-edit/gnome-edit.c:148
 msgid ""
@@ -1409,9 +1418,9 @@ msgid ""
 "The editor you have chosen is probably either not available,\n"
 "or is not on your current path."
 msgstr ""
-"Fel vid körning av vald editor.\n"
+"Fel vid körning av vald redigerare.\n"
 "\n"
-"Editorn du ha valt är troligen inte tillgänglig\n"
+"Redigeraren du ha valt är troligen inte tillgänglig\n"
 "eller så finns den inte i din sökväg."
 
 #: gnome-edit/gnome-edit.c:167
@@ -1420,9 +1429,9 @@ msgid ""
 "Please choose a standard executable editor in the gnome-edit capplet\n"
 "in the gnome control center."
 msgstr ""
-"Alternativa editortyper stöds än så länge inte av gnome-edit.\n"
-"Var vänlig och välj en vanlig körbar editor i gnome-edit-delen av\n"
-"GNOME:s kontrollcenter."
+"Alternativa redigerartyper stöds än så länge inte av gnome-edit.\n"
+"Välj en vanlig körbar redigerare i gnome-edit-delen av GNOME:s\n"
+"kontrollcenter."
 
 #: gnome-hint/gnome-hint.c:35
 msgid "Start in hint browsing mode"
@@ -1788,7 +1797,7 @@ msgstr "Bakgrundsbilden rullar"
 
 #: gnome-terminal/gnome-terminal.c:2660
 msgid "BGSCROLL"
-msgstr "BGSKROLL"
+msgstr "BGRULL"
 
 #: gnome-terminal/gnome-terminal.c:2663
 msgid "Background pixmap does not scroll"
@@ -1796,7 +1805,7 @@ msgstr "Bakgrundsbilden rullar inte"
 
 #: gnome-terminal/gnome-terminal.c:2663
 msgid "BGNOSCROLL"
-msgstr "BGSKROLLAINTE"
+msgstr "BGRULLAINTE"
 
 #: gnome-terminal/gnome-terminal.c:2667
 msgid "Shade background"
@@ -1804,7 +1813,7 @@ msgstr "Skugga bakgrund"
 
 #: gnome-terminal/gnome-terminal.c:2667
 msgid "SHADED"
-msgstr "SKUGGA"
+msgstr "SKUGGAD"
 
 #: gnome-terminal/gnome-terminal.c:2670
 msgid "Do not shade background"
@@ -1812,7 +1821,7 @@ msgstr "Skugga inte bakgrunden"
 
 #: gnome-terminal/gnome-terminal.c:2670
 msgid "NOSHADED"
-msgstr "SKUGGAINTE"
+msgstr "INTESKUGGAD"
 
 #: gnome-terminal/gnome-terminal.c:2673
 msgid "Transparent background"
@@ -1941,7 +1950,7 @@ msgid ""
 msgstr ""
 "Katalogen /tmp/orbit-%s ägs inte av den\n"
 "aktuella användaren %s.\n"
-"Var vänlig och ändra ägare på katalogen."
+"Ändra ägare på katalogen."
 
 #: gsm/gnome-login-check.c:327 gsm/gnome-login-check.c:352
 msgid "Try again"
@@ -1979,7 +1988,7 @@ msgstr ""
 "Din version av libICE har en bugg som gör att gnome-session inte\n"
 "fungerar korrekt.\n"
 "\n"
-"Om ditt system är Solaris bör du antingen uppgradera till Solaris patch\n"
+"Om du kör Solaris bör du antingen uppgradera till Solaris patch\n"
 "#108376-16 eller använda libICE.so.6 från originalversionen av Solaris 7.\n"
 "Kopiera denna fil till /usr/openwin/lib.\n"
 "(Tack till Andy Reitz för information om denna bugg).\n"
@@ -2288,8 +2297,8 @@ msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"Det finns ingen hjälp tillgänglig/installerad för inställningarna. Var\n"
-"vänlig och kontrollera att GNOME Användarguide är installerad på ditt system."
+"Det finns ingen hjälp tillgänglig/installerad för inställningarna.\n"
+"Kontrollera att GNOME Användarguide är installerad på ditt system."
 
 #: gsm/session-properties-capplet.c:450
 msgid "Close"
@@ -2305,11 +2314,11 @@ msgstr "Skärmsläckare"
 
 #: gsm/splash.c:58 gsm/splash.c:59
 msgid "Sawfish Window Manager"
-msgstr "Sawfish fönsterhanterare"
+msgstr "Fönsterhanteraren Sawfish"
 
 #: gsm/splash.c:60
 msgid "Enlightenment Window Manager"
-msgstr "Enlightenment fönsterhanterare"
+msgstr "Fönsterhanteraren Enlightenment"
 
 #: gsm/splash.c:61
 msgid "Background Settings"
@@ -3100,11 +3109,11 @@ msgstr "%H.%M.%S"
 
 #: panel/foobar-widget.c:557
 msgid "%l:%M %p"
-msgstr "%I.%M %p"
+msgstr "%k.%M"
 
 #: panel/foobar-widget.c:558
 msgid "%l:%M:%S %p"
-msgstr "%I.%M.%S %p"
+msgstr "%k.%M.%S"
 
 #: panel/foobar-widget.c:565
 msgid "Add appointement..."
