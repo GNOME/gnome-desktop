@@ -11,6 +11,10 @@ Gamesdir          = $(appsdir)/Games
 Administrationdir = $(appsdir)/Administration
 Productivitydir   = $(appsdir)/Productivity
 
+gnewdir           = $(datadir)/mc/templates
+
+gnew_DATA = GIMP.desktop 
+
 Order_files = \
 	Root.order
 
