@@ -3,7 +3,6 @@ pixmap_DATA =					\
 	gnome-emacs.png				\
 	gnome-aorta.png				\
 	gnome-applets.png			\
-	gnome-applications.png      		\
 	gnome-calc2.png				\
 	gnome-calc3.png				\
 	gnome-calendar.png			\
@@ -11,7 +10,6 @@ pixmap_DATA =					\
 	gnome-color-xterm.png           	\
 	gnome-cromagnon.png			\
 	gnome-diskfree.png          		\
-	gnome-favorites.png			\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
 	gnome-folder.png			\
@@ -33,12 +31,9 @@ pixmap_DATA =					\
 	gnome-logo-large.png			\
 	gnome-mdi.png				\
 	gnome-mnemonic.png			\
-	gnome-monitor.png           		\
-	gnome-networktool.png			\
 	gnome-news.png				\
 	gnome-note.png				\
 	gnome-qeye.png				\
-	gnome-session.png			\
 	gnome-spider.png			\
 	gnome-squeak.png            		\
 	gnome-talk.png				\
@@ -51,7 +46,6 @@ pixmap_DATA =					\
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-user-interface.png		\
-	gnome-util.png              		\
 	gnome-windows.png			\
 	gnome-word.png				\
 	gnome-workspace.png			\
@@ -60,7 +54,6 @@ pixmap_DATA =					\
 	monitor.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
-	advanced-directory.png			\
 	apple-green.png				\
 	apple-red.png				\
 	gnome-ccbackground.png			\
