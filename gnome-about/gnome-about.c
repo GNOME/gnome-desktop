@@ -252,6 +252,45 @@ new_sparkles_timeout (GnomeCanvas* canvas)
 	return TRUE;
 }
 
+static void
+set_tooltip_foreach_link (GtkWidget   *href,
+			  GtkTooltips *tooltips)
+{
+	const char *url;
+	char       *description;
+
+	g_return_if_fail (GTK_IS_WIDGET (href));
+	g_return_if_fail (GTK_IS_TOOLTIPS (tooltips));
+	
+	url = gnome_href_get_url (GNOME_HREF (href));
+	description = g_strconcat (
+			_("Click here to visit the site : "),
+			url, NULL);
+	gtk_tooltips_set_tip (tooltips, href, description, NULL);
+	g_free (description);
+}
+
+static void
+make_contributors_logo_accessible (GtkTooltips *tooltips)
+{
+	AtkObject *aobj;
+	
+	gtk_tooltips_set_tip (tooltips, area,
+			      _("List of GNOME Contributors"), NULL);
+	gtk_tooltips_set_tip (tooltips, canvas,
+			      _("Gnome Logo Image"), NULL);
+
+	aobj = gtk_widget_get_accessible (area);
+
+	/* Check if gail is loaded */
+	if (GTK_IS_ACCESSIBLE (aobj) == FALSE)
+		return;
+
+	atk_object_set_name (aobj, _("Contributors' Names"));
+	aobj = gtk_widget_get_accessible (canvas);
+	atk_object_set_name (aobj, _("Gnome Logo"));
+}
+
 gboolean
 cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
@@ -328,6 +367,14 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 gboolean
 cb_quit (GtkWidget *widget, gpointer data)
 {
+	GtkTooltips *tooltips;
+
+	tooltips = g_object_get_data (G_OBJECT (widget), "tooltips");
+	if (tooltips) {
+		g_object_unref (tooltips);
+		g_object_set_data (G_OBJECT (widget), "tooltips", NULL);
+	}
+
 	if (sparkle_timer != -1)
 		gtk_timeout_remove (sparkle_timer);
 	if (scroll_timer != -1)
@@ -624,6 +671,8 @@ main (gint argc, gchar *argv[])
 	GdkBitmap        *logo_mask;
 	GtkWidget        *frame;
 	GtkWidget        *gtkpixmap;
+	GtkTooltips *tooltips;
+	GList *hrefs;
 	PangoContext     *context;
 	PangoFontMetrics *metrics;
 	int               max_width;
@@ -753,6 +802,17 @@ main (gint argc, gchar *argv[])
 			  G_CALLBACK (cb_quit), NULL);
 
 	scroll_timer = gtk_timeout_add (20, scroll, NULL);
+
+	tooltips = gtk_tooltips_new ();
+	g_object_ref (tooltips);
+	gtk_object_sink (GTK_OBJECT (tooltips));
+	g_object_set_data (G_OBJECT (window), "tooltips", tooltips);
+
+	hrefs = gtk_container_get_children (GTK_CONTAINER (hbox));
+	g_list_foreach (hrefs, (GFunc) set_tooltip_foreach_link, tooltips);
+	g_list_free (hrefs);
+
+	make_contributors_logo_accessible (tooltips);
 
 	gtk_widget_show_all (window);
 	gtk_main ();
