@@ -12,9 +12,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.4.x\n"
-"POT-Creation-Date: 2001-05-31 14:46+0200\n"
-"PO-Revision-Date: 2001-05-24 22:38+0200\n"
-"Last-Translator: Matthias Warkus <mawarkus@gnome.org>\n"
+"POT-Creation-Date: 2001-06-09 19:56+0200\n"
+"PO-Revision-Date: 2001-06-09 20:01+0200\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -47,7 +47,44 @@ msgstr ""
 msgid "No panel found\n"
 msgstr "Kein Panel gefunden\n"
 
-#: panel/gnome-panel-screenshot.c:98
+#: panel/gnome-panel-screenshot.c:126
+msgid ""
+"Unable to initialize png structure.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"PNG-Struktur kann nicht initialisiert werden.\n"
+"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
+
+#: panel/gnome-panel-screenshot.c:134
+msgid ""
+"Unable to create png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"PNG-Information kann nicht erzeugt werden.\n"
+"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
+
+#: panel/gnome-panel-screenshot.c:141
+msgid ""
+"Unable to set png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"PNG-Information kann nicht geschrieben werden.\n"
+"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
+
+#: panel/gnome-panel-screenshot.c:155
+msgid ""
+"Insufficient memory to save the screenshot.\n"
+"Please free up some resources and try again."
+msgstr ""
+"Speicher reicht nicht aus, um den Screenshot zu speichern.\n"
+"Bitte geben Sie Ressourcen frei und versuchen Sie es nochmals."
+
+#: panel/gnome-panel-screenshot.c:199
+#, c-format
+msgid "File %s already exists. Overwrite?"
+msgstr "Die Datei %s ist bereits vorhanden.  Überschreiben?"
+
+#: panel/gnome-panel-screenshot.c:213 panel/gnome-panel-screenshot.c:693
 #, c-format
 msgid ""
 "Unable to create the file:\n"
@@ -58,64 +95,48 @@ msgstr ""
 "\"%s\"\n"
 "Bitte überprüfen Sie die Berechtigungen des Elternverzeichnisses"
 
-#: panel/gnome-panel-screenshot.c:116
-msgid ""
-"Unable to initialize png structure.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"PNG-Struktur kann nicht initialisiert werden.\n"
-"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
-
-#: panel/gnome-panel-screenshot.c:124
-msgid ""
-"Unable to create png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"PNG-Information kann nicht erzeugt werden.\n"
-"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
-
-#: panel/gnome-panel-screenshot.c:131
-msgid ""
-"Unable to set png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"PNG-Information kann nicht geschrieben werden.\n"
-"Wahrscheinlich haben Sie eine falsche Version der libpng auf Ihrem System"
-
-#: panel/gnome-panel-screenshot.c:147
-msgid ""
-"Insufficient memory to save the screenshot.\n"
-"Please free up some resources and try again."
-msgstr ""
-"Speicher reicht nicht aus, um den Screenshot zu speichern.\n"
-"Bitte geben Sie Ressourcen frei und versuchen Sie es nochmals."
-
-#: panel/gnome-panel-screenshot.c:286
+#: panel/gnome-panel-screenshot.c:472
 msgid "Print Screenshot"
 msgstr "Screenshot drucken"
 
-#: panel/gnome-panel-screenshot.c:334
+#: panel/gnome-panel-screenshot.c:520
 msgid "Screenshot Print Preview"
 msgstr "Screenshot-Druckvorschau"
 
-#. translators: this the file that gets made up with the screenshot
-#: panel/gnome-panel-screenshot.c:351
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:545
+#, c-format
+msgid "%s%cScreenshot-%s.png"
+msgstr "%s%cScreenshot-%s.png"
+
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:550
 #, c-format
 msgid "%s%cScreenshot.png"
 msgstr "%s%cScreenshot.png"
 
-#. translators: this the file that gets made up with the
-#. * screenshot
-#: panel/gnome-panel-screenshot.c:363
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:565
+#, c-format
+msgid "%s%cScreenshot-%s-%d.png"
+msgstr "%s%cScreenshot-%s-%d.png"
+
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:570
 #, c-format
 msgid "%s%cScreenshot-%d.png"
 msgstr "%s%cScreenshot-%d.png"
 
-#: panel/gnome-panel-screenshot.c:573
+#: panel/gnome-panel-screenshot.c:712
+#, c-format
+msgid "Not enough room to write file %s"
+msgstr "Nicht genügend Platz, um die Datei %s zu schreiben."
+
+#: panel/gnome-panel-screenshot.c:1012
 msgid "Grab a window instead of the entire screen"
 msgstr "Ein Fenster statt des gesamten Bildschirms aufnehmen"
 
-#: panel/gnome-panel-screenshot.c:601
+#: panel/gnome-panel-screenshot.c:1040
 msgid ""
 "Glade file for the screenshot program is missing.\n"
 "Please check your installation of gnome-core"
@@ -123,7 +144,7 @@ msgstr ""
 "Glade-Datei für das Screenshot-Program fehlt.\n"
 "Bitte überprüfen Sie Ihre gnome-core-Installation"
 
-#: panel/gnome-panel-screenshot.c:618
+#: panel/gnome-panel-screenshot.c:1057
 msgid "Unable to take a screenshot of the current desktop."
 msgstr "Vom aktuellen Desktop kann kein Screenshot gezogen werden."
 
@@ -368,7 +389,7 @@ msgstr "Eigenschaften..."
 #: applets/gen_util/clock.c:603 applets/gen_util/mailcheck.c:1529
 #: applets/gen_util/printer.c:475 applets/tasklist/tasklist_applet.c:1701
 #: gnome-terminal/gnome-terminal.c:1603 gsm/session-properties.c:182
-#: help-browser/window.c:256 panel/drawer.c:492 panel/gnome-run.c:1265
+#: help-browser/window.c:255 panel/drawer.c:492 panel/gnome-run.c:1265
 #: panel/launcher.c:682 panel/logout.c:116 panel/logout.c:198
 #: panel/menu.c:5702 panel/status.c:368 panel/swallow.c:426
 msgid "Help"
@@ -1643,7 +1664,7 @@ msgstr "Den Menübalken ein- oder ausschalten."
 
 #: gnome-terminal/gnome-terminal.c:1546
 msgid "_Secure keyboard"
-msgstr "Tastatur _sichern"
+msgstr "_Sichere Tastatureingabe"
 
 #: gnome-terminal/gnome-terminal.c:1547
 msgid "Toggles whether or not the keyboard is grabbed by the terminal."
@@ -2455,7 +2476,7 @@ msgstr "HÖHE"
 msgid "Debug level"
 msgstr "Diagnosestufe"
 
-#: help-browser/gnome-help-browser.c:371 help-browser/window.c:914
+#: help-browser/gnome-help-browser.c:371 help-browser/window.c:913
 msgid "Gnome Help Browser"
 msgstr "GNOME Hilfe-Browser"
 
@@ -2681,107 +2702,107 @@ msgstr "<BODY>Inhaltsverzeichnis (Vorgabe) konnte nicht geladen werden</BODY>"
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Unbekannter Inhaltsverzeichnis-Parameter</BODY>"
 
-#: help-browser/window.c:152
+#: help-browser/window.c:151
 msgid "_New Window"
 msgstr "_Neues Fenster"
 
-#: help-browser/window.c:153
+#: help-browser/window.c:152
 msgid "Open new browser window"
 msgstr "Neues Browser-Fenster öffnen"
 
-#: help-browser/window.c:159
+#: help-browser/window.c:158
 msgid "_Add Bookmark"
 msgstr "Lesezeichen _hinzufügen"
 
-#: help-browser/window.c:159
+#: help-browser/window.c:158
 msgid "Add bookmark"
 msgstr "Lesezeichen hinzufügen"
 
-#: help-browser/window.c:174
+#: help-browser/window.c:173
 msgid "_Back"
 msgstr "_Zurück"
 
-#: help-browser/window.c:177
+#: help-browser/window.c:176
 msgid "_Forward"
 msgstr "_Vorwärts"
 
-#: help-browser/window.c:182
+#: help-browser/window.c:181
 msgid "_Reload"
 msgstr "Ne_u laden"
 
-#: help-browser/window.c:187
+#: help-browser/window.c:186
 msgid "_Index"
 msgstr "_Index"
 
-#: help-browser/window.c:209
+#: help-browser/window.c:208
 msgid "_History"
 msgstr "_Chronik"
 
-#: help-browser/window.c:209 help-browser/window.c:251
+#: help-browser/window.c:208 help-browser/window.c:250
 msgid "Show History Window"
 msgstr "Chronikfenster zeigen"
 
-#: help-browser/window.c:214
+#: help-browser/window.c:213
 msgid "_Bookmarks"
 msgstr "_Lesezeichen"
 
-#: help-browser/window.c:214 help-browser/window.c:253
+#: help-browser/window.c:213 help-browser/window.c:252
 msgid "Show Bookmarks Window"
 msgstr "Lesezeichen-Fenster zeigen"
 
-#: help-browser/window.c:228
+#: help-browser/window.c:227
 msgid "_Window"
 msgstr "_Fenster"
 
-#: help-browser/window.c:229
+#: help-browser/window.c:228
 msgid "_View"
 msgstr "_Ansicht"
 
-#: help-browser/window.c:238
+#: help-browser/window.c:237
 msgid "Back"
 msgstr "Zurück"
 
-#: help-browser/window.c:239
+#: help-browser/window.c:238
 msgid "Go to the previous location in the history list"
 msgstr "Zum vorherigen Ort in der Chronikliste zurückgehen"
 
-#: help-browser/window.c:241
+#: help-browser/window.c:240
 msgid "Forward"
 msgstr "Weiter"
 
-#: help-browser/window.c:242
+#: help-browser/window.c:241
 msgid "Go to the next location in the history list"
 msgstr "Zum nächsten Ort in der Chronikliste gehen"
 
-#: help-browser/window.c:245 panel/extern.c:469 panel/swallow.c:92
+#: help-browser/window.c:244 panel/extern.c:469 panel/swallow.c:92
 msgid "Reload"
 msgstr "Neuladen"
 
-#: help-browser/window.c:248
+#: help-browser/window.c:247
 msgid "Index"
 msgstr "Index"
 
-#: help-browser/window.c:248
+#: help-browser/window.c:247
 msgid "Show Documentation Index"
 msgstr "Dokumentationsindex zeigen"
 
-#: help-browser/window.c:251
+#: help-browser/window.c:250
 msgid "History"
 msgstr "Chronik"
 
-#: help-browser/window.c:253
+#: help-browser/window.c:252
 msgid "BMarks"
 msgstr "LZeichen"
 
-#: help-browser/window.c:256
+#: help-browser/window.c:255
 msgid "Help on Help"
 msgstr "Hilfe zur Hilfe"
 
-#: help-browser/window.c:612
+#: help-browser/window.c:611
 msgid "Location: "
 msgstr "Ort: "
 
-#: help-browser/window.c:1082
+#: help-browser/window.c:1081
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -3296,7 +3317,7 @@ msgstr "Knöpfe unter dem Mauszeiger aufleuchten lassen"
 #. Fast but low quality scaling (Nearest versus Hyperbolic)
 #: panel/gnome-panel-properties.c:647
 msgid "Fast but low quality scaling of button icons"
-msgstr "Schnelle aber qualitativ schlechte Skalierung der Knopficons"
+msgstr "Schnelle, aber qualitativ schlechte Skalierung der Knopficons"
 
 #. Movement frame
 #: panel/gnome-panel-properties.c:704
@@ -3484,7 +3505,8 @@ msgstr "Panel-Objekte"
 msgid ""
 "The system administrator has disallowed modification of the panel "
 "configuration"
-msgstr "Der Systemadministrator hat die Panelkonfiguration für Änderungen gesperrt"
+msgstr ""
+"Der Systemadministrator hat die Panelkonfiguration für Änderungen gesperrt"
 
 #: panel/gnome-run.c:232
 msgid "Failed to load this program!\n"
@@ -3681,7 +3703,9 @@ msgstr "Ein Ende dem Hunger in der Welt"
 msgid ""
 "Running in \"Lockdown\" mode.  This means your system administrator has "
 "prohibited any changes to the panel's configuration to take place."
-msgstr "Sperrmodus aktiv. Dies bedeutet, dass Ihr Systemadministrator es verboten hat, wirksame Änderungen an der Panelkonfiguration vorzunehmen."
+msgstr ""
+"Sperrmodus aktiv. Dies bedeutet, dass Ihr Systemadministrator es verboten "
+"hat, wirksame Änderungen an der Panelkonfiguration vorzunehmen."
 
 #: panel/menu.c:246
 msgid "Can't execute 'About GNOME'"
