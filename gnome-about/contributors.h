@@ -206,6 +206,9 @@ static gchar *contributors[] = {
 	"Stuart Parmenter",
 	"Havoc Pennington",
 	"Ettore Perazzoli",
+	/* If your encoding allows it, use oacute (U00F3) for the 'o'
+	 * of 'Perello' and use iacute (U00ED) for the 'i' of 'Marin' */
+	N_("Carlos Perello Marin"),
 	"Ian Peters",
 	"Martin Kasper Petersen",
 	"Christof Petig",
