@@ -431,7 +431,7 @@ get_max_width (void)
 	
 	i = 0;
 	while (contributors[i]) {
-		int totalwidth = gdk_string_width (font, contributors[i]);
+		int totalwidth = gdk_string_width (font, _(contributors[i]));
 
 		if (totalwidth > max_width)
 			max_width = totalwidth;
