@@ -1,7 +1,41 @@
-2003-06-03  Dennis Cranston <dennis_cranston at yahoo com>
+Thu Jun  5 21:23:04 2003  Kristian Rietveld  <kris@gtk.org>
 
-	* gnome-about.c: (main) Remove the separator.
-  
+	New GNOME About merge point.
+
+Thu Jun  5 20:58:02 2003  Kristian Rietveld  <kris@gtk.org>
+
+	* gnome-about.c (animate_contributor): change tmpcolor difference to
+	6 (avoids blink of the name in the middle),
+	(animate_contributor), (display_contributors): fix the residue
+	problem by having a white rectangle below the text item, with
+	a bit wider bounding box,
+	(create_canvas): update the links, so you don't get 404s. FIXME:
+	need to update these links when the new website comes online.
+
+Tue Jun  3 17:59:59 2003  Kristian Rietveld  <kris@gtk.org>
+
+	Of course I can get nothing right at once P:
+
+	* gnome-64.gif: added, forgot to add it at first.
+				    
+Sat May 31 22:32:23 2003  Kristian Rietveld  <kris@gtk.org>
+
+	* gnome-about.c: apply patch from Fernando Herrera
+	<fherrera@onirica.com>, for a s/Vendor/Distributor/.
+
+Sat May 31 22:22:12 2003  Kristian Rietveld  <kris@gtk.org>
+
+	Wooo! New GNOME about dialog.
+
+	* gnome-about.c: rewritten.
+
+	* Makefile.am: remove contributors.dat, logo.xpm, added gnome-64.gif
+	and the headers to SUBDIRS.
+
+	* logo.xpm, contributors.dat: removed.
+
+	* gnome-64.gif, headers/Makefile.am, headers/*png: new files.
+
 2003-05-25  Hasbullah Bin Pit  <sebol@ikhlas.com>
 
 	* contributors.h: Add Hasbullah Bin Pit (myself)
