@@ -29,6 +29,7 @@ typedef struct _BonoboConfigDItemPrivate BonoboConfigDItemPrivate;
 typedef struct DirEntry {
 	char *name;
 	char *value;
+	gboolean localestring; /* the value is UTF-8 */
 	GSList *subvalues;
 } DirEntry;
 

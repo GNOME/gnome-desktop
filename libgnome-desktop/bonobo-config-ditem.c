@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdarg.h>
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
@@ -32,13 +33,21 @@ static GObjectClass *parent_class = NULL;
 #define overflow (next == &CharBuffer [STRSIZE-1])
 
 enum {
+	UNKNOWN_ENCODING,
+	UTF8_ENCODING,
+	LEGACY_MIXED_ENCODING
+};
+
+
+enum {
 	FirstBrace,
 	OnSecHeader,
 	IgnoreToEOL,
 	IgnoreToEOLFirst,
 	KeyDef,
 	KeyDefOnKey,
-	KeyValue
+	KeyValue,
+	WideUnicodeChar
 };
 
 struct _BonoboConfigDItemPrivate {
@@ -51,7 +60,7 @@ struct _BonoboConfigDItemPrivate {
 };
 
 static char *
-decode_string_and_dup (char *s)
+decode_ascii_string_and_dup (const char *s)
 {
 	char *p = g_malloc (strlen (s) + 1);
 	char *q = p;
@@ -75,27 +84,28 @@ decode_string_and_dup (char *s)
 		} else
 			*p++ = *s;
 	} while (*s++);
+	*p++ = '\0';
 	return q;
 }
 
 static char *
-escape_string_and_dup (char *s)
+escape_ascii_string_and_dup (const char *s)
 {
-	char *return_value, *p = s;
+	char *return_value, *p;
+	const char *q;
 	int len = 0;
 
 	if(!s)
 		return g_strdup("");
 	
-	while (*p){
+	q = s;
+	while (*q){
 		len++;
-		if (*p == '\n' || *p == '\\' || *p == '\r' || *p == '\0')
+		if (*q == '\n' || *q == '\\' || *q == '\r' || *q == '\0')
 			len++;
-		p++;
+		q++;
 	}
 	return_value = p = (char *) g_malloc (len + 1);
-	if (!return_value)
-		return 0;
 	do {
 		switch (*s){
 		case '\n':
@@ -114,6 +124,92 @@ escape_string_and_dup (char *s)
 			*p++ = *s;
 		}
 	} while (*s++);
+	*p++ = '\0';
+	return return_value;
+}
+
+static char *
+decode_utf8_string_and_dup (const char *s)
+{
+	char *p = g_malloc (strlen (s) + 1);
+	char *q = p;
+	int skip = 0;
+
+	do {
+		if (skip > 0) {
+			skip--;
+			*p++ = *s;
+		} else if (*s == '\\'){
+			switch (*(++s)){
+			case 'n':
+				*p++ = '\n';
+				break;
+			case '\\':
+				*p++ = '\\';
+				break;
+			case 'r':
+				*p++ = '\r';
+				break;
+			default:
+				*p++ = '\\';
+				*p++ = *s;
+			}
+		} else if (g_utf8_skip [(guchar)*s] > 1) {
+			skip = g_utf8_skip [(guchar)*s] - 1;
+			*p++ = *s;
+		} else {
+			*p++ = *s;
+		}
+	} while (*s++);
+	*p++ = '\0';
+	return q;
+}
+
+static char *
+escape_utf8_string_and_dup (const char *s)
+{
+	char *return_value, *p;
+	const char *q;
+	int len = 0;
+	int skip = 0;
+
+	if(!s)
+		return g_strdup("");
+	
+	q = s;
+	while (*q){
+		len++;
+		if (*q == '\n' || *q == '\\' || *q == '\r' || *q == '\0')
+			len++;
+		q = g_utf8_next_char (q);
+	}
+	return_value = p = (char *) g_malloc (len + 1);
+	do {
+		if (skip > 0) {
+			*p++ = *s;
+			skip --;
+		} else {
+			switch (*s){
+			case '\n':
+				*p++ = '\\';
+				*p++ = 'n';
+				break;
+			case '\r':
+				*p++ = '\\';
+				*p++ = 'r';
+				break;
+			case '\\':
+				*p++ = '\\';
+				*p++ = '\\';
+				break;
+			default:
+				if (g_utf8_skip [(guchar)*s] > 1)
+					skip = g_utf8_skip [(guchar)*s] - 1;
+				*p++ = *s;
+			}
+		}
+	} while (*s++);
+	*p++ = '\0';
 	return return_value;
 }
 
@@ -126,31 +222,288 @@ key_compare_func (gconstpointer a, gconstpointer b)
 }
 
 static DirEntry *
-insert_key_maybe_localized (Section *section, gchar *key)
+create_key_maybe_localized (Section *section, const char *key)
+{
+	DirEntry *de = NULL;
+
+	de = g_new0 (DirEntry, 1);
+	de->name = g_strdup (key);
+
+	/* Note here, that some strings are localestrings even if they include
+	 * no language, however, then they are in 'C' locale and thus should fit
+	 * in standard 7bit ASCII which should be valid unicode, SO we just mark
+	 * them as nonlocale string */
+	if (strchr (key, '[') != NULL)
+		de->localestring = TRUE;
+	else
+		de->localestring = FALSE;
+
+	return de;
+}
+
+static gboolean
+check_locale (const char *locale)
+{
+	GIConv cd = g_iconv_open ("UTF-8", locale);
+	if ((GIConv)-1 == cd)
+		return FALSE;
+	g_iconv_close (cd);
+	return TRUE;
+}
+
+static void
+insert_locales (GHashTable *encodings, char *enc, ...)
+{
+	va_list args;
+	char *s;
+
+	va_start (args, enc);
+	for (;;) {
+		s = va_arg (args, char *);
+		if (s == NULL)
+			break;
+		g_hash_table_insert (encodings, s, enc);
+	}
+	va_end (args);
+}
+
+/* make a standard conversion table from the desktop standard spec */
+static GHashTable *
+init_encodings (void)
+{
+	GHashTable *encodings = g_hash_table_new (g_str_hash, g_str_equal);
+
+	insert_locales (encodings, "ARMSCII-8", "by", NULL);
+	insert_locales (encodings, "BIG5", "zh_TW", NULL);
+	insert_locales (encodings, "CP1251", "be", "bg", NULL);
+	if (check_locale ("EUC-CN")) {
+		insert_locales (encodings, "EUC-CN", "zh_CN", NULL);
+	} else {
+		insert_locales (encodings, "GB2312", "zh_CN", NULL);
+	}
+	insert_locales (encodings, "EUC-JP", "ja", NULL);
+	insert_locales (encodings, "EUC-KR", "ko", NULL);
+	/*insert_locales (encodings, "GEORGIAN-ACADEMY", NULL);*/
+	insert_locales (encodings, "GEORGIAN-PS", "ka", NULL);
+	insert_locales (encodings, "ISO-8859-1", "br", "ca", "da", "de", "en", "es", "eu", "fi", "fr", "gl", "it", "nl", "wa", "no", "pt", "pt", "sv", NULL);
+	insert_locales (encodings, "ISO-8859-2", "cs", "hr", "hu", "pl", "ro", "sk", "sl", "sq", "sr", NULL);
+	insert_locales (encodings, "ISO-8859-3", "eo", NULL);
+	insert_locales (encodings, "ISO-8859-5", "mk", "sp", NULL);
+	insert_locales (encodings, "ISO-8859-7", "el", NULL);
+	insert_locales (encodings, "ISO-8859-9", "tr", NULL);
+	insert_locales (encodings, "ISO-8859-13", "lt", "lv", "mi", NULL);
+	insert_locales (encodings, "ISO-8859-14", "ga", "cy", NULL);
+	insert_locales (encodings, "ISO-8859-15", "et", NULL);
+	insert_locales (encodings, "KOI8-R", "ru", NULL);
+	insert_locales (encodings, "KOI8-U", "uk", NULL);
+	if (check_locale ("TCVN-5712")) {
+		insert_locales (encodings, "TCVN-5712", "vi", NULL);
+	} else {
+		insert_locales (encodings, "TCVN", "vi", NULL);
+	}
+	insert_locales (encodings, "TIS-620", "th", NULL);
+	/*insert_locales (encodings, "VISCII", NULL);*/
+
+	return encodings;
+}
+
+static const char *
+get_encoding_from_locale (const char *locale)
+{
+	char lang[3];
+	const char *encoding;
+	static GHashTable *encodings = NULL;
+
+	if (locale == NULL)
+		return NULL;
+
+	/* if locale includes encoding, use it */
+	encoding = strchr (locale, '.');
+	if (encoding != NULL) {
+		return encoding+1;
+	}
+
+	if (encodings == NULL)
+		encodings = init_encodings ();
+
+	/* first try the entire locale (at this point ll_CC) */
+	encoding = g_hash_table_lookup (encodings, locale);
+	if (encoding != NULL)
+		return encoding;
+
+	/* Try just the language */
+	strncpy (lang, locale, 2);
+	lang[2] = '\0';
+	return g_hash_table_lookup (encodings, lang);
+}
+
+static void
+insert_key_maybe_localized (Section *section, DirEntry *key, int encoding, const char *value)
 {
 	gchar *a, *b, *locale = NULL;
 	DirEntry *de = NULL;
 	GSList *l = NULL;
 
-	a = strchr (key, '[');
-	b = strrchr (key, ']');
+	a = strchr (key->name, '[');
+	b = strrchr (key->name, ']');
 	if ((a != NULL) && (b != NULL)) {
 		*a++ = '\0'; *b = '\0'; locale = a;
-		l = g_slist_find_custom (section->root.subvalues, key, key_compare_func);
+		l = g_slist_find_custom (section->root.subvalues, key->name, key_compare_func);
 	}
-	de = g_new0 (DirEntry, 1);
 
-	if (l) {
+	/* if legacy mixed, then convert */
+	if (key->localestring && encoding == LEGACY_MIXED_ENCODING) {
+		const char *char_encoding = get_encoding_from_locale (locale);
+		char *utf8_string;
+		if (char_encoding == NULL) {
+			g_free (key->name);
+			g_free (key);
+			return;
+		}
+		utf8_string = g_convert (value, -1, "UTF-8", char_encoding,
+					NULL, NULL, NULL);
+		if (utf8_string == NULL) {
+			g_free (key->name);
+			g_free (key);
+			return;
+		}
+		key->value = decode_utf8_string_and_dup (utf8_string);
+		g_free (utf8_string);
+	/* if utf8, then validate */
+	} else if (key->localestring && encoding == UTF8_ENCODING) {
+		if ( ! g_utf8_validate (value, -1, NULL)) {
+			/* invalid utf8, ignore this key */
+			g_free (key->name);
+			g_free (key);
+			return;
+		}
+		key->value = decode_utf8_string_and_dup (value);
+	} else {
+		key->value = decode_ascii_string_and_dup (value);
+	}
+
+	if (locale != NULL && l == NULL) {
+		/* Eeek: insert a dummy "C" locale value witht he current value, likely
+		 * the C locale one will come later */
+		DirEntry * dummy = create_key_maybe_localized (section, key->name);
+		section->root.subvalues = g_slist_append (section->root.subvalues, dummy);
+		l = g_slist_find_custom (section->root.subvalues, key->name, key_compare_func);
+	}
+
+	if (l != NULL) {
 		DirEntry *parent = (DirEntry *) l->data;
 
-		de->name = g_strdup (locale);
-		parent->subvalues = g_slist_append (parent->subvalues, de);
+		g_free (key->name);
+		key->name = g_strdup (locale);
+		parent->subvalues = g_slist_append (parent->subvalues, key);
 	} else {
-		de->name = g_strdup (key);
-		section->root.subvalues = g_slist_append (section->root.subvalues, de);
+		/* let's see if this is a duplicate */
+		l = g_slist_find_custom (section->root.subvalues, key->name, key_compare_func);
+		if (l == NULL) {
+			section->root.subvalues = g_slist_append (section->root.subvalues, key);
+		} else {
+			/* copy put this value into the old key */
+			DirEntry *old_de = l->data;
+			g_free (old_de->value);
+			old_de->value = key->value;
+			key->value = NULL;
+			g_free (key->name);
+			g_free (key);
+		}
+	}
+}
+
+static int
+get_encoding (const char *file, FILE *f)
+{
+	int c;
+	gboolean old_kde = FALSE;
+	
+	while ((c = getc_unlocked (f)) != EOF) {
+		/* find starts of lines */
+		if (c == '\n' || c == '\r') {
+			char buf[256];
+			int i = 0;
+			while ((c = getc_unlocked (f)) != EOF) {
+				if (c == '\n' ||
+				    c == '\r' ||
+				    i >= sizeof(buf) - 1)
+					break;
+				buf[i++] = c;
+			}
+			buf[i++] = '\0';
+			if (strcmp ("Encoding=UTF-8", buf) == 0) {
+				return UTF8_ENCODING;
+			} else if (strcmp ("Encoding=Legacy-Mixed", buf) == 0) {
+				return LEGACY_MIXED_ENCODING;
+			} else if (strncmp ("Encoding=", buf,
+					    strlen ("Encoding=")) == 0) {
+				/* According to the spec we're not supposed
+				 * to read a file like this */
+				return UNKNOWN_ENCODING;
+			}
+			if (strcmp ("[KDE Desktop Entry]", buf) == 0) {
+				old_kde = TRUE;
+				/* don't break yet, we still want to support
+				 * Encoding even here */
+			}
+		}
 	}
 
-	return de;
+	if (old_kde)
+		return LEGACY_MIXED_ENCODING;
+
+	/* try to guess by location */
+	if (strstr (file, "gnome/apps/") != NULL) {
+		/* old gnome */
+		return LEGACY_MIXED_ENCODING;
+	}
+
+	/* A dillema, new KDE files are in UTF-8 but have no Encoding
+	 * info, at this time we really can't tell.  The best thing to
+	 * do right now is to just assume UTF-8 I suppose */
+	return UTF8_ENCODING;
+}
+
+static void
+free_direntry (DirEntry *de)
+{
+	if (de != NULL) {
+		g_free (de->name);
+		de->name = NULL;
+		g_free (de->value);
+		de->value = NULL;
+
+		g_slist_foreach (de->subvalues, (GFunc)free_direntry, NULL);
+
+		g_free (de);
+	}
+}
+
+static void
+free_section (Section *section)
+{
+	if (section != NULL) {
+		g_free (section->name);
+		section->name = NULL;
+
+		g_slist_foreach (section->root.subvalues, (GFunc)free_direntry, NULL);
+
+		g_free (section);
+	}
+}
+
+static void
+free_directory (Directory *dir)
+{
+	if (dir != NULL) {
+		g_free (dir->path);
+		dir->path = NULL;
+
+		g_slist_foreach (dir->sections, (GFunc)free_section, NULL);
+
+		g_free (dir);
+	}
 }
 
 static Directory *
@@ -164,16 +517,33 @@ load (const char *file)
 	char CharBuffer [STRSIZE];
 	char *next = "";		/* Not needed */
 	int c;
+	int utf8_chars_to_go = 0;
+	int encoding;
+	Section *main_section = NULL;
+	gboolean got_encoding = FALSE;
+	gboolean got_version = FALSE;
 	
 	if ((f = fopen (file, "r"))==NULL)
 		return NULL;
+
+	encoding = get_encoding (file, f);
+	if (encoding == UNKNOWN_ENCODING) {
+		fclose (f);
+		/* spec says, don't read this file */
+		return NULL;
+	}
+
+	/* Rewind since get_encoding goes through the file */
+	rewind (f);
 
 	dir = g_new0 (Directory, 1);
 	dir->path = g_strdup (file);
 	
 	state = FirstBrace;
 	while ((c = getc_unlocked (f)) != EOF){
-		if (c == '\r')		/* Ignore Carriage Return */
+		if ( ! WideUnicodeChar &&
+		    c == '\r')		/* Ignore Carriage Return,
+					   unless in a wide unicode char */
 			continue;
 		
 		switch (state){
@@ -182,6 +552,12 @@ load (const char *file)
 			if (c == ']' || overflow){
 				*next = '\0';
 				next = CharBuffer;
+				if (strcmp (CharBuffer, "KDE Desktop Entry") == 0) {
+					strcpy (CharBuffer, "Desktop Entry");
+					main_section = section;
+				} else if (strcmp (CharBuffer, "Desktop Entry") == 0) {
+					main_section = section;
+				}
 				section->name = g_strdup (CharBuffer);
 				state = IgnoreToEOL;
 			} else
@@ -234,7 +610,7 @@ load (const char *file)
 			if (c == '=' || overflow){
 				*next = '\0';
 
-				Key = insert_key_maybe_localized (section, CharBuffer);
+				Key = create_key_maybe_localized (section, CharBuffer);
 				state = KeyValue;
 				next = CharBuffer;
 			} else {
@@ -246,11 +622,34 @@ load (const char *file)
 		case KeyValue:
 			if (overflow || c == '\n'){
 				*next = '\0';
-				Key->value = decode_string_and_dup (CharBuffer);
+				/* we always store everything in UTF-8 */
+				if (section == main_section &&
+				    strcmp (Key->name, "Encoding") == 0) {
+					strcpy (CharBuffer, "UTF-8");
+					got_encoding = TRUE;
+				} else if (section == main_section &&
+					   strcmp (Key->name, "Version") == 0) {
+					got_version = TRUE;
+				}
+
+				insert_key_maybe_localized (section, Key, encoding, CharBuffer);
 				state = c == '\n' ? KeyDef : IgnoreToEOL;
 				next = CharBuffer;
-			} else
+			} else {
+				if (g_utf8_skip[c] > 1) {
+					state = WideUnicodeChar;
+					utf8_chars_to_go = g_utf8_skip[c] - 1;
+				}
 				*next++ = c;
+			}
+			break;
+
+		case WideUnicodeChar:
+			utf8_chars_to_go--;
+			if (utf8_chars_to_go <= 0) {
+				state = KeyValue;
+			}
+			*next++ = c;
 			break;
 	    
 		} /* switch */
@@ -258,9 +657,34 @@ load (const char *file)
 	} /* while ((c = getc_unlocked (f)) != EOF) */
 	if (c == EOF && state == KeyValue){
 		*next = '\0';
-		Key->value = decode_string_and_dup (CharBuffer);
+		/* we always store everything in UTF-8 */
+		if (section == main_section &&
+		    strcmp (Key->name, "Encoding") == 0) {
+			strcpy (CharBuffer, "UTF-8");
+			got_encoding = TRUE;
+		} else if (section == main_section &&
+			   strcmp (Key->name, "Version") == 0) {
+			got_version = TRUE;
+		}
+		insert_key_maybe_localized (section, Key, encoding, CharBuffer);
 	}
 	fclose (f);
+
+	if (main_section == NULL) {
+		free_directory (dir);
+		return NULL;
+	}
+
+	if ( ! got_encoding) {
+		/* We store everything in UTF-8 so reflect that fact */
+		Key = create_key_maybe_localized (main_section, "Encoding");
+		insert_key_maybe_localized (main_section, Key, encoding, "UTF-8");
+	}
+	if ( ! got_version) {
+		/* this is the version that we follow, so write it down */
+		Key = create_key_maybe_localized (main_section, "Version");
+		insert_key_maybe_localized (main_section, Key, encoding, "0.9.2");
+	}
 
 	return dir;
 }
@@ -274,9 +698,16 @@ dump_subkeys (FILE *f, DirEntry *de)
 		DirEntry *subentry = c->data;
 
 		if (subentry->value) {
-			gchar *t = escape_string_and_dup (subentry->value);
+			gchar *t;
+
+			if (subentry->localestring)
+				t = escape_utf8_string_and_dup (subentry->value);
+			else
+				t = escape_ascii_string_and_dup (subentry->value);
 
 			fprintf (f, "%s[%s]=%s\n", de->name, subentry->name, t);
+
+			g_free (t);
 		}
 	}
 }
@@ -285,9 +716,16 @@ static void
 dump_key (FILE *f, DirEntry *de)
 {
 	if (de->value) {
-		gchar *t = escape_string_and_dup (de->value);
+		gchar *t;
 
-		fprintf (f, "%s=%s\n", de->name, de->value);
+		if (de->localestring)
+			t = escape_utf8_string_and_dup (de->value);
+		else
+			t = escape_ascii_string_and_dup (de->value);
+
+		fprintf (f, "%s=%s\n", de->name, t);
+
+		g_free (t);
 	}
 
 	if (de->subvalues)
@@ -736,10 +1174,14 @@ bonobo_config_ditem_finalize (GObject *object)
       
 	CORBA_exception_free (&ev);
 
-	if (ditem->_priv) {
+	if (ditem->_priv != NULL) {
+
+		free_directory (ditem->_priv->dir);
+		ditem->_priv->dir = NULL;
 
 		if (ditem->_priv->es)
 			bonobo_object_unref (BONOBO_OBJECT (ditem->_priv->es));
+		ditem->_priv->es = CORBA_OBJECT_NIL;
 
 	}
 
@@ -785,6 +1227,7 @@ bonobo_config_ditem_new (const char *filename)
 	Bonobo_ConfigDatabase  db;
 	CORBA_Environment      ev;
 	char                  *real_name;
+	Directory             *dir;
 
 	g_return_val_if_fail (filename != NULL, NULL);
 
@@ -808,20 +1251,23 @@ bonobo_config_ditem_new (const char *filename)
 		return bonobo_object_dup_ref (db, NULL);
 	}
 
+	dir = load (real_name);
+	if (dir == NULL) {
+		g_free (real_name);
+		return CORBA_OBJECT_NIL;
+	}
+
 	if (!(ditem = g_object_new (BONOBO_CONFIG_DITEM_TYPE, NULL))) {
+		free_directory (dir);
 		g_free (real_name);
 		return CORBA_OBJECT_NIL;
 	}
 
 	ditem->filename = real_name;
+	ditem->_priv->dir = dir;
 
 	BONOBO_CONFIG_DATABASE (ditem)->writeable = TRUE;
 
-	ditem->_priv->dir = load (ditem->filename);
-	if (!ditem->_priv->dir) {
-		ditem->_priv->dir = g_new0 (Directory, 1);
-		ditem->_priv->dir->path = g_strdup (ditem->filename);
-	}
 		       
 	ditem->_priv->es = bonobo_event_source_new ();
 
