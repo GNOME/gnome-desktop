@@ -1,20 +1,16 @@
-# Note that this is NOT a relocatable package
-%define ver      	@VERSION@
-%define RELEASE		1
-%define rel      	%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 %define localstatedir   /var/lib
 
 Summary:         The core programs for the GNOME GUI desktop environment.
 Name: 		 gnome-core
-Version: 	 %ver
-Release: 	 %rel
-Copyright: 	 LGPL
+Version: 	 @VERSION@
+Release: 	 1
+License: 	 LGPL
 Group: 		 System Environment/Base
-Source:          ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
+Source:          ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{version}.tar.gz
 BuildRoot: 	 /var/tmp/%{name}-%{version}-root
 URL: 		 http://www.gnome.org
-Prereq: 	 /sbin/install-info
-Requires:        gtk+ >= @GTK_REQUIRED@, gdk-pixbuf >= @GDK_PIXBUF_REQUIRED@
+Requires:        gtk+ >= @GTK_REQUIRED@
+Requires:        gdk-pixbuf >= @GDK_PIXBUF_REQUIRED@
 Requires:        libglade >= @LIBGLADE_REQUIRED@, libxml
 Requires:        gnome-libs >= @GNOME_LIBS_REQUIRED@
 Requires:        ORBit >= @ORBIT_REQUIRED@
@@ -45,8 +41,7 @@ GNOME front end, you'll also need to install the gnome-linuxconf package.
 %package devel
 Summary:        GNOME core libraries, includes, and more.
 Group: 		Development/Libraries
-Requires: 	gnome-core
-PreReq: 	/sbin/install-info
+Requires: 	%name = %version
 
 %description devel
 Panel libraries and header files for creating GNOME panels.
@@ -115,6 +110,12 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
 
 %changelog
+* Mon Aug  6 2001 Gregory Leblanc <gleblanc@linuxweasel.com>
+- removed unnecessary %defines
+- reformatted the header slightly
+- made the devel package require the main package properly
+- replaced copyright with license
+
 * Thu Apr 02 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
 - Fixed %files section to include some directories as well as their contents.
 - Updated to do the scrollkeeper ditty.
