@@ -76,7 +76,9 @@ BITMAPS     = \
 	gnome-ccthemes.png		\
 	gnome-ccdialog.png	\
 	gnome-ccscreensaver.png	\
-	gnome-ccwindowmanager.png
+	gnome-ccwindowmanager.png \
+	gnome-cckeyboard-bell.png	\
+	gnome-cckeyboard.png
 
 
 TILES     = \
