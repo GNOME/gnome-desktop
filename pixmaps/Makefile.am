@@ -9,6 +9,7 @@ BITMAPS     = \
 	gnome-calendar.png			\
 	gnome-cromagnon.png			\
 	gnome-default.png			\
+	gnome-ee.png				\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
 	gnome-folder.png			\
