@@ -59,6 +59,10 @@ Panel libraries and header files for creating GNOME panels.
 
 - Integrate into gnome-core CVS source tree
 
+* Sun May 23 1999 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+
+- default.session is now on %{prefix}/share/gnome instead of %{prefix}/share 
+
 %prep
 %setup
 
@@ -109,7 +113,6 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/xmodmap/*
 %{prefix}/etc/*
 %config %{prefix}/share/panelrc
-%config %{prefix}/share/default.session
 
 %files devel
 %defattr(-, root, root)
