@@ -15,6 +15,7 @@ static author authors[] = {
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
 	{ "Kenneth Christiánsen", "<kenneth@ripen.dk>" },
 	{ "Alan Cox", "" },
+	{ "Karl Eichwalder", "<ke@suse.de>" },
 	{ "Tim Gerla", "<timg@means.net>" },
 	{ "Bertrand Guiheneuf", "<Bertrand.Guiheneuf@aful.org>" },
 	{ "James Henstridge", "<james@daa.com.au>" },
