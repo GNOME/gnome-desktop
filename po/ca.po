@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-08-18 14:13+0200\n"
+"POT-Creation-Date: 2000-10-21 12:11+0200\n"
 "PO-Revision-Date: 2000-08-17 17:25+0200\n"
 "Last-Translator: Quico Llach <quico@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -206,25 +206,25 @@ msgid "Desk Guide Alert"
 msgstr "Avís de la Guia de l'Escriptori"
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
-#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
-#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4550
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:790
+#: panel/drawer.c:415 panel/launcher.c:610 panel/menu.c:1637 panel/menu.c:4980
 msgid "Properties..."
 msgstr "Propietats..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
-#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1403
+#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:796
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
-#: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
-#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4559
-#: panel/status.c:367 panel/swallow.c:369
+#: help-browser/window.c:255 panel/drawer.c:418 panel/gnome-run.c:316
+#: panel/launcher.c:613 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4989
+#: panel/status.c:366 panel/swallow.c:381
 msgid "Help"
 msgstr "Ajuda"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
-#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1409
+#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:803
 msgid "About..."
 msgstr "Quant a..."
 
@@ -262,10 +262,10 @@ msgstr "Nom del vostre Peix de GNOME:"
 msgid "The Animation Filename:"
 msgstr "Nom del fitxer de l'animació:"
 
-#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
+#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
-#: panel/menu-properties.c:396 panel/panel-util.c:101 panel/panel-util.c:142
-#: panel/panel-util.c:183 panel/panel_config.c:1141 panel/swallow.c:202
+#: panel/menu-properties.c:526 panel/menu-properties.c:564
+#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:212
 msgid "Browse"
 msgstr "Navega"
 
@@ -325,13 +325,14 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:417
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:442
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:415
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:440
+#: panel/foobar-widget.c:743
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -360,57 +361,65 @@ msgstr "%a, %d de %b"
 msgid "%A, %B %d"
 msgstr "%A, %d de %B"
 
-#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1295
+#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1307
 #: applets/gen_util/printer.c:421
 msgid "Can't create applet!\n"
 msgstr "No puc crear l'applet!\n"
 
-#: applets/gen_util/clock.c:523
+#. Do NOT translate the clock/hourformat part.  What you
+#. * should change is the 12.  If your country code should use
+#. * 12 hour format by default, leave it at 12, otherwise use 24
+#. * for 24 hour format.  Those are the only two supported
+#: applets/gen_util/clock.c:349
+msgid "clock/hourformat=12"
+msgstr ""
+
+#: applets/gen_util/clock.c:552
 msgid "Clock properties"
 msgstr "Propietats del Rellotge"
 
-#: applets/gen_util/clock.c:529
+#: applets/gen_util/clock.c:558
 msgid "Time Format"
 msgstr "Format de l'hora"
 
-#: applets/gen_util/clock.c:541
+#: applets/gen_util/clock.c:570
 msgid "12 hour"
 msgstr "12 hores"
 
-#: applets/gen_util/clock.c:550
+#: applets/gen_util/clock.c:579
 msgid "24 hour"
 msgstr "24 hores"
 
-#: applets/gen_util/clock.c:585
+#: applets/gen_util/clock.c:614
 msgid "Show date in applet"
 msgstr "Mostra la data en l'applet"
 
-#: applets/gen_util/clock.c:599
+#: applets/gen_util/clock.c:628
 msgid "Show date in tooltip"
 msgstr "Mostra la data en el suggeriment"
 
-#: applets/gen_util/clock.c:613
+#: applets/gen_util/clock.c:642
 msgid "Use GMT"
 msgstr "Utilitza GMT"
 
 # La u de «Unix» és semiconsonant, no? iv
-#: applets/gen_util/clock.c:627
+#: applets/gen_util/clock.c:656
 msgid "Unix time"
 msgstr "Hora de Unix"
 
-#: applets/gen_util/clock.c:656
+#: applets/gen_util/clock.c:685
 msgid "Clock"
 msgstr "Rellotge"
 
-#: applets/gen_util/clock.c:702
+#: applets/gen_util/clock.c:731
 msgid "Clock Applet"
 msgstr "Applet Clock"
 
-#: applets/gen_util/clock.c:703 applets/gen_util/printer.c:354
+#: applets/gen_util/clock.c:732 applets/gen_util/printer.c:354
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 the Free Software Foundation"
 
-#: applets/gen_util/clock.c:705
+#: applets/gen_util/clock.c:734
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -418,11 +427,11 @@ msgstr ""
 "L'applet del rellotge dona al vostre panel una lleugera i senzilla "
 "visualització de la data i hora"
 
-#: applets/gen_util/mailcheck.c:200 applets/gen_util/mailcheck.c:972
+#: applets/gen_util/mailcheck.c:201 applets/gen_util/mailcheck.c:984
 msgid "Password:"
 msgstr "Contrasenya:"
 
-#: applets/gen_util/mailcheck.c:259
+#: applets/gen_util/mailcheck.c:260
 msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
@@ -430,115 +439,125 @@ msgstr ""
 "S'ha produït un error en el client remot. S'ha desactivat la votació remota. "
 "Potser heu utilitzat un servidor/nom d'usuari/contrasenya incorrecta?"
 
-#: applets/gen_util/mailcheck.c:452
+#: applets/gen_util/mailcheck.c:456
 msgid "You have new mail."
 msgstr "Teniu correu nou."
 
-#: applets/gen_util/mailcheck.c:454
+#: applets/gen_util/mailcheck.c:458
 msgid "You have mail."
 msgstr "Teniu correu."
 
-#: applets/gen_util/mailcheck.c:456
+#: applets/gen_util/mailcheck.c:462
+#, c-format
+msgid "%d/%d messages"
+msgstr ""
+
+#: applets/gen_util/mailcheck.c:464
+#, c-format
+msgid "%d messages"
+msgstr ""
+
+#: applets/gen_util/mailcheck.c:468
 msgid "No mail."
 msgstr "No teniu correu."
 
-#: applets/gen_util/mailcheck.c:873
+#: applets/gen_util/mailcheck.c:885
 msgid "Mailbox resides on:"
 msgstr "La bústia és a:"
 
-#: applets/gen_util/mailcheck.c:880
+#: applets/gen_util/mailcheck.c:892
 msgid "Local mailspool"
 msgstr "Spool de correu local"
 
-#: applets/gen_util/mailcheck.c:888
+#: applets/gen_util/mailcheck.c:900
 msgid "Local maildir"
 msgstr "Directori de correu local"
 
-#: applets/gen_util/mailcheck.c:896
+#: applets/gen_util/mailcheck.c:908
 msgid "Remote POP3-server"
 msgstr "Servidor POP3 remot"
 
-#: applets/gen_util/mailcheck.c:904
+#: applets/gen_util/mailcheck.c:916
 msgid "Remote IMAP-server"
 msgstr "Servidor IMAP remot"
 
-#: applets/gen_util/mailcheck.c:924
+#: applets/gen_util/mailcheck.c:936
 msgid "Mail spool file:"
 msgstr "Fitxer de correu spool:"
 
-#: applets/gen_util/mailcheck.c:941
+#: applets/gen_util/mailcheck.c:953
 msgid "Mail server:"
 msgstr "Servidor de correu:"
 
-#: applets/gen_util/mailcheck.c:958
+#: applets/gen_util/mailcheck.c:970
 msgid "Username:"
 msgstr "Nom d'usuari: "
 
-#: applets/gen_util/mailcheck.c:1003
+#: applets/gen_util/mailcheck.c:1015
 msgid "Execute"
 msgstr "Executa"
 
-#: applets/gen_util/mailcheck.c:1014
+#: applets/gen_util/mailcheck.c:1026
 msgid "Before each update:"
 msgstr "Abans de cada actualització:"
 
-#: applets/gen_util/mailcheck.c:1035
+#: applets/gen_util/mailcheck.c:1047
 msgid "When new mail arrives:"
 msgstr "Quan arribi correu nou:"
 
-#: applets/gen_util/mailcheck.c:1054
+#: applets/gen_util/mailcheck.c:1066
 msgid "When clicked:"
 msgstr "En fer-hi clic:"
 
-#: applets/gen_util/mailcheck.c:1077
+#: applets/gen_util/mailcheck.c:1089
 msgid "Check for mail every"
 msgstr "Comprova si hi ha correu cada"
 
-#: applets/gen_util/mailcheck.c:1090
+#: applets/gen_util/mailcheck.c:1102
 msgid "minutes"
 msgstr "minuts"
 
-#: applets/gen_util/mailcheck.c:1103
+#: applets/gen_util/mailcheck.c:1115
 msgid "seconds"
 msgstr "segons"
 
-#: applets/gen_util/mailcheck.c:1107
+#: applets/gen_util/mailcheck.c:1119
 msgid "Play a sound when new mail arrives"
 msgstr "Reprodueix un so quan arribi correu nou"
 
-#: applets/gen_util/mailcheck.c:1118
+#: applets/gen_util/mailcheck.c:1130
 msgid "Select animation"
 msgstr "Seleccioneu una animació"
 
-#: applets/gen_util/mailcheck.c:1153
+#: applets/gen_util/mailcheck.c:1165
 msgid "Mail check properties"
 msgstr "Propietats del comprovador de correu"
 
-#: applets/gen_util/mailcheck.c:1159
+#: applets/gen_util/mailcheck.c:1171
 msgid "Mail check"
 msgstr "Comprovador de correu"
 
-#: applets/gen_util/mailcheck.c:1162
+#: applets/gen_util/mailcheck.c:1174
 msgid "Mailbox"
 msgstr "Bústia"
 
-#: applets/gen_util/mailcheck.c:1243
+#: applets/gen_util/mailcheck.c:1255
 msgid "Mail check Applet"
 msgstr "Applet de comprovació de correu"
 
-#: applets/gen_util/mailcheck.c:1244
+#: applets/gen_util/mailcheck.c:1256
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 the Free Software Foundation"
 
-#: applets/gen_util/mailcheck.c:1246
+#: applets/gen_util/mailcheck.c:1258
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "El comprovador de correu us avisa quan hi ha correu nou a la bústia"
 
-#: applets/gen_util/mailcheck.c:1357
+#: applets/gen_util/mailcheck.c:1369
 msgid "Text only"
 msgstr "Només text"
 
-#: applets/gen_util/mailcheck.c:1385
+#: applets/gen_util/mailcheck.c:1397
 msgid "Check for mail"
 msgstr "Comprova si hi ha correu"
 
@@ -627,7 +646,7 @@ msgstr "Elimina l'aplicació"
 msgid "Follow panel size"
 msgstr "Segueix la mida del quadre"
 
-#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3602
+#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3994
 msgid "Horizontal"
 msgstr "Horitzontal"
 
@@ -652,7 +671,7 @@ msgstr "L'amplada de la llista de tasques és fixa"
 msgid "Tasklist width is dynamic"
 msgstr "L'amplada de la llista de tasques és dinàmica"
 
-#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3603
+#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3995
 msgid "Vertical"
 msgstr "Vertical"
 
@@ -668,7 +687,7 @@ msgstr "L'alçada de la llista de tasques és fixa"
 msgid "Tasklist height is dynamic"
 msgstr "L'alçada de la llista de tasques és dinàmica"
 
-#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3632
+#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:4026
 msgid "Size"
 msgstr "Mida"
 
@@ -694,8 +713,8 @@ msgstr "Mostra les tasques iconificades (minimitzades) de tots els escriptoris"
 
 #. Miscellaneous frame
 #: applets/tasklist/tasklist_properties.c:272 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:947
-#: panel/gnome-panel-properties.c:1335
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:1000
+#: panel/gnome-panel-properties.c:1417
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
@@ -716,31 +735,32 @@ msgstr ""
 msgid "Tasklist properties"
 msgstr "Propietats de la llista de tasques"
 
-#: gmenu/desktop.c:80
+#: gmenu/desktop.c:84
 msgid " Folder"
 msgstr " Carpeta"
 
-#: gmenu/edit.c:327
+#: gmenu/edit.c:305
 msgid "Save"
 msgstr "Desa"
 
-#: gmenu/edit.c:345 gsm/session-properties.c:173
+#: gmenu/edit.c:323 gsm/session-properties.c:173 panel/launcher.c:493
+#: panel/menu.c:1274 panel/menu.c:1384
 msgid "Revert"
 msgstr "Desfés"
 
-#: gmenu/edit.c:385 gmenu/tree.c:410
+#: gmenu/edit.c:362 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "Predilectes (menús d'usuari)"
 
-#: gmenu/edit.c:389 gmenu/tree.c:418
+#: gmenu/edit.c:364 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "Programes (menús de sistema)"
 
-#: gmenu/edit.c:393 gmenu/tree.c:436
+#: gmenu/edit.c:366 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "Applets (menús de sistema)"
 
-#: gmenu/edit.c:397 gmenu/tree.c:427
+#: gmenu/edit.c:368 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "Programes per fusionar a (menús de sistema)"
 
@@ -827,11 +847,11 @@ msgid "Sort _Recursive"
 msgstr "Ordena _recursivament"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:389
+#: gmenu/main.c:241 gmenu/main.c:296 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "Editor de Menús de GNOME"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -839,21 +859,21 @@ msgstr ""
 "Lliurat sota els termes de la Llicència Pública de la GNU.\n"
 "Editor de Menús de GNOME."
 
-#: gmenu/main.c:285
+#: gmenu/main.c:282
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "No puc accedir al directori d'instal·lació de GNOME\n"
 
-#: gmenu/order.c:78
+#: gmenu/order.c:81
 #, c-format
 msgid "Unable to create file: %s\n"
 msgstr "No puc crear el fitxer: %s\n"
 
-#: gmenu/order.c:96
+#: gmenu/order.c:95
 #, c-format
 msgid "unable to remove .order file: %s\n"
 msgstr "no puc eliminar el fitxer .order: %s\n"
 
-#: gmenu/save.c:27 gmenu/save.c:85
+#: gmenu/save.c:27 gmenu/save.c:86
 msgid "The menu item must have a name"
 msgstr "L'ítem del menú ha de tenir un nom"
 
@@ -873,7 +893,7 @@ msgstr "Aquest canvi provoca un conflicte amb un ítem de menú que ja existeix"
 msgid "Overwrite existing menu entry?"
 msgstr "Voleu sobreescriure l'entrada de menú existent?"
 
-#: gmenu/save.c:113
+#: gmenu/save.c:114
 msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
@@ -881,23 +901,23 @@ msgstr ""
 "Aquest canvi provoca un conflicte amb un ítem de menú que ja existeix.\n"
 "Dos ítems de menú en un submenú no poden tenir el mateix nom."
 
-#: gmenu/tree.c:391
+#: gmenu/tree.c:382
 msgid "One moment, reading menus..."
 msgstr "Un moment, estic llegint els menús..."
 
-#: gmenu/tree.c:411
+#: gmenu/tree.c:402
 msgid "Top of user menus"
 msgstr "Capdamunt dels menús d'usuari"
 
-#: gmenu/tree.c:419
+#: gmenu/tree.c:410
 msgid "Top of system menus"
 msgstr "Capdamunt dels menús de sistema"
 
-#: gmenu/tree.c:428
+#: gmenu/tree.c:419
 msgid "Top of system merge menus"
 msgstr "Part superior dels menús de fusió del sistema"
 
-#: gmenu/tree.c:437
+#: gmenu/tree.c:428
 msgid "Top of applet menus"
 msgstr "Capdamunt dels menús dels applets"
 
@@ -939,16 +959,16 @@ msgstr "No he pogut crear el directori"
 msgid "untitled.desktop"
 msgstr "sensetítol.escriptori"
 
-#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:605
+#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:720
 msgid "untitled"
 msgstr "sense títol"
 
-#: gmenu/utils.c:28
+#: gmenu/utils.c:29
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "estic creant el directori d'usuari: %s\n"
 
-#: gmenu/utils.c:31
+#: gmenu/utils.c:32
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "no puc crear el directori d'usuari: %s\n"
@@ -957,56 +977,56 @@ msgstr "no puc crear el directori d'usuari: %s\n"
 msgid "GNOME was brought to you by"
 msgstr "GNOME us ha estat portat per"
 
-#: gnome-about/contributors.h:66
+#: gnome-about/contributors.h:67
 msgid "Gergõ Érdi"
 msgstr "Gergõ Érdi"
 
-#: gnome-about/contributors.h:83
+#: gnome-about/contributors.h:84
 msgid "The Mysterious GEGL"
 msgstr "El misteriós GEGL"
 
 #. for languages that can't display ntilde, replace 'ñ' with 'n'
-#: gnome-about/contributors.h:167
+#: gnome-about/contributors.h:168
 msgid "Alexandre Muñiz"
 msgstr "Alexandre Muñiz"
 
-#: gnome-about/contributors.h:168
+#: gnome-about/contributors.h:169
 msgid "Sung-Hyun Nam"
 msgstr "Sung-Hyun Nam"
 
 #. languages that can't display adiaeresis, replace 'ä' with 'ae'
-#: gnome-about/contributors.h:173
+#: gnome-about/contributors.h:174
 msgid "Martin Norbäck"
 msgstr "Martin Norbäck"
 
 #. languages that can't display Odiaeresis, replace 'Ö' with 'Oe'
-#: gnome-about/contributors.h:179
+#: gnome-about/contributors.h:180
 msgid "Tomas Ögren"
 msgstr "Tomas Ögren"
 
-#: gnome-about/contributors.h:208
+#: gnome-about/contributors.h:209
 msgid "Kazuhiro Sasayama"
 msgstr "Kazuhiro Sasayama"
 
 #. for languages that can't display ntilde, replace 'ñ' with 'n'
-#: gnome-about/contributors.h:215
+#: gnome-about/contributors.h:216
 msgid "Iñigo Serna"
 msgstr "Iñigo Serna"
 
 #. not really a person name :)
-#: gnome-about/contributors.h:228
+#: gnome-about/contributors.h:229
 msgid "The Squeaky Rubber Gnome"
 msgstr "The Squeaky Rubber Gnome"
 
-#: gnome-about/contributors.h:253
+#: gnome-about/contributors.h:254
 msgid "Wanda the GNOME Fish"
 msgstr "Wanda el peix de GNOME"
 
-#: gnome-about/contributors.h:266
+#: gnome-about/contributors.h:267
 msgid "... and many more"
 msgstr "... i molts altres"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:193
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:208
 msgid "About GNOME"
 msgstr "Quant a GNOME..."
 
@@ -1108,7 +1128,7 @@ msgstr "Consell de GNOME"
 msgid "Display this dialog next time"
 msgstr "Mostra aquest diàleg la propera vegada"
 
-#: gnome-hint/gnome-hint-properties.c:58
+#: gnome-hint/gnome-hint-properties.c:57
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -1117,7 +1137,7 @@ msgstr ""
 "assegureu-vos\n"
 "que teniu la Guia d'Usuari de GNOME instal·lada en el sistema."
 
-#: gnome-hint/gnome-hint-properties.c:60
+#: gnome-hint/gnome-hint-properties.c:59
 msgid "Close"
 msgstr "Tanca"
 
@@ -1237,8 +1257,8 @@ msgstr "General"
 msgid "Font:"
 msgstr "Font:"
 
-#: gnome-terminal/gnome-terminal.c:1149 panel/gnome-run.c:163
-#: panel/gnome-run.c:236
+#: gnome-terminal/gnome-terminal.c:1149 panel/gnome-run.c:168
+#: panel/gnome-run.c:241
 msgid "Browse..."
 msgstr "Navega..."
 
@@ -1283,15 +1303,15 @@ msgid "Select-by-word characters"
 msgstr "Caràcters seleccionats per paraules"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1129
+#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1201
 msgid "Image"
 msgstr "Imatge"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3638
+#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:4032
 msgid "Background type"
 msgstr "Tipus de fons"
 
-#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3597
+#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3989
 msgid "None"
 msgstr "Cap"
 
@@ -1428,7 +1448,7 @@ msgid "Edit"
 msgstr "Edició"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:576
+#: panel/foobar-widget.c:798
 msgid "Settings"
 msgstr "Propietats"
 
@@ -1922,7 +1942,7 @@ msgstr "X"
 msgid "Y position of window"
 msgstr "Posició Y de la finestra"
 
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:765
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:787
 msgid "Y"
 msgstr "Y"
 
@@ -1946,15 +1966,15 @@ msgstr "ALÇADA"
 msgid "Debug level"
 msgstr "Nivell de depuració"
 
-#: help-browser/gnome-help-browser.c:365 help-browser/window.c:913
+#: help-browser/gnome-help-browser.c:371 help-browser/window.c:913
 msgid "Gnome Help Browser"
 msgstr "Navegador d'Ajuda de GNOME"
 
-#: help-browser/gnome-help-browser.c:366
+#: help-browser/gnome-help-browser.c:372
 msgid "Copyright (c) 1998 Red Hat Software, Inc."
 msgstr "Copyright (c) 1998 Red Hat Software, Inc."
 
-#: help-browser/gnome-help-browser.c:368
+#: help-browser/gnome-help-browser.c:374
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
@@ -1962,48 +1982,48 @@ msgstr ""
 "El Navegador d'Ajuda de GNOME permet un accés fàcil a diverses formes de "
 "documentació en el vostre sistema"
 
-#: help-browser/gnome-help-browser.c:626
+#: help-browser/gnome-help-browser.c:632
 msgid "History size"
 msgstr "Mida de l'historial"
 
-#: help-browser/gnome-help-browser.c:627
+#: help-browser/gnome-help-browser.c:633
 msgid "History file"
 msgstr "Fitxer de l'historial"
 
 # I cache es pronuncia «caix» (monosíl·laba) iv
-#: help-browser/gnome-help-browser.c:628
+#: help-browser/gnome-help-browser.c:634
 msgid "Cache size"
 msgstr "Mida de la memòria cau"
 
-#: help-browser/gnome-help-browser.c:629
+#: help-browser/gnome-help-browser.c:635
 msgid "Cache file"
 msgstr "Fitxer de la memòria cau"
 
-#: help-browser/gnome-help-browser.c:630
+#: help-browser/gnome-help-browser.c:636
 msgid "Bookmark file"
 msgstr "Fitxer de preferits"
 
-#: help-browser/gnome-help-browser.c:636
+#: help-browser/gnome-help-browser.c:642
 msgid "Man Path"
 msgstr "Camí dels manuals"
 
-#: help-browser/gnome-help-browser.c:637
+#: help-browser/gnome-help-browser.c:643
 msgid "Info Path"
 msgstr "Camí de la informació"
 
-#: help-browser/gnome-help-browser.c:638
+#: help-browser/gnome-help-browser.c:644
 msgid "GNOME Help Path"
 msgstr "Camí de l'Ajuda de GNOME"
 
-#: help-browser/gnome-help-browser.c:713
+#: help-browser/gnome-help-browser.c:719
 msgid "Gnome Help Configure"
 msgstr "Configura l'Ajuda de GNOME"
 
-#: help-browser/gnome-help-browser.c:716
+#: help-browser/gnome-help-browser.c:722
 msgid "History and cache"
 msgstr "Historial i memòria cau"
 
-#: help-browser/gnome-help-browser.c:717
+#: help-browser/gnome-help-browser.c:723
 msgid "Paths"
 msgstr "Camins"
 
@@ -2295,56 +2315,56 @@ msgstr ""
 "documentació instal·lada\n"
 "al vostre sistema."
 
-#: panel/applet.c:403
+#: panel/applet.c:406
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:443
+#: panel/applet.c:446
 msgid "Remove from panel"
 msgstr "Elimina del quadre"
 
-#: panel/applet.c:450
+#: panel/applet.c:453
 msgid "Move"
 msgstr "Moure"
 
-#: panel/applet.c:462 panel/menu.c:2768
+#: panel/applet.c:465 panel/menu.c:3155
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "No puc trobar el fitxer de mapa de píxels %s"
 
-#: panel/applet.c:463 panel/applet.c:469 panel/menu.c:2994 panel/menu.c:2999
-#: panel/menu.c:4006 panel/menu.c:4011 panel/menu.c:4329
+#: panel/applet.c:466 panel/applet.c:472 panel/menu.c:3380 panel/menu.c:3385
+#: panel/menu.c:4394 panel/menu.c:4399 panel/menu.c:4719
 msgid "Panel"
 msgstr "Quadre"
 
-#: panel/applet.c:689
+#: panel/applet.c:738
 msgid "Can't find an empty spot"
 msgstr "No puc trobar cap forat lliure"
 
-#: panel/applet-widget.c:912
+#: panel/applet-widget.c:928
 msgid "Cannot activate a panel object"
 msgstr "No puc activar un objecte del quadre"
 
-#: panel/applet-widget.c:1014
+#: panel/applet-widget.c:1030
 msgid "Cannot start CORBA"
 msgstr "No puc inicar CORBA"
 
-#: panel/applet-widget.c:1176 panel/applet-widget.c:1277
-#: panel/applet-widget.c:1347 panel/applet-widget.c:1376
-#: panel/applet-widget.c:1403 panel/applet-widget.c:1439
-#: panel/applet-widget.c:1572
+#: panel/applet-widget.c:1192 panel/applet-widget.c:1295
+#: panel/applet-widget.c:1365 panel/applet-widget.c:1394
+#: panel/applet-widget.c:1421 panel/applet-widget.c:1457
+#: panel/applet-widget.c:1590
 msgid "CORBA Exception"
 msgstr "Excepció a CORBA"
 
-#: panel/applet-widget.c:1974
+#: panel/applet-widget.c:1992
 msgid "Cannot create object"
 msgstr "No puc crear l'objecte"
 
-#: panel/applet-widget.c:1979
+#: panel/applet-widget.c:1997
 msgid "Object created is not AppletWidget"
 msgstr "L'objecte creat no és un AppletWidget"
 
-#: panel/button-widget.c:692
+#: panel/button-widget.c:706
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2375,50 +2395,50 @@ msgstr "SuSE Linux"
 msgid "SuSE menus"
 msgstr "Menús del SuSE"
 
-#: panel/drawer.c:112
+#: panel/drawer.c:111
 msgid "Tooltip/Name"
 msgstr "Indicador de funció/Nom"
 
-#: panel/drawer.c:116
+#: panel/drawer.c:117 panel/menu-properties.c:547 panel/menu-properties.c:582
 msgid "Icon"
 msgstr "Icona"
 
-#: panel/drawer.c:120
+#: panel/drawer.c:123
 msgid "Applet appearance"
 msgstr "Aparença de l'applet"
 
-#: panel/drawer.c:127
+#: panel/drawer.c:130
 msgid "Drawer handle"
 msgstr "Nansa del calaix"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:132
+#: panel/drawer.c:135
 msgid "Enable hidebutton"
 msgstr "Habilita el botó d'amagar"
 
-#: panel/drawer.c:141
+#: panel/drawer.c:144
 msgid "Enable hidebutton arrow"
 msgstr "Habilita la fletxa del botó d'amagar"
 
-#: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:521
-#: panel/menu.c:3719
+#: panel/drawer.c:162 panel/drawer.c:274 panel/gnome-panel-properties.c:556
+#: panel/menu.c:4113
 msgid "Drawer"
 msgstr "Calaix"
 
-#: panel/extern.c:443
+#: panel/extern.c:469
 msgid "Couldn't add applet"
 msgstr "No puc afegir l'applet!"
 
-#: panel/extern.c:499
+#: panel/extern.c:526
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Ep! per alguna raó no el puc afegir al quadre"
 
-#: panel/extern.c:572
+#: panel/extern.c:600
 msgid "No socket was created"
 msgstr "No s'ha creat el connector"
 
-#: panel/foobar-widget.c:151
+#: panel/foobar-widget.c:165
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2426,7 +2446,7 @@ msgstr ""
 "No puc executar el programa gmc-client\n"
 "potser no teniu instal·lat gmc"
 
-#: panel/foobar-widget.c:161
+#: panel/foobar-widget.c:175
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2436,436 +2456,450 @@ msgstr ""
 "potser no el teniu instal·lat.\n"
 "Està en el paquet gnome-pim."
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:188
 msgid "News (www)"
 msgstr "Notícies (www)"
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:188
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome/gnome-news"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:189
 msgid "FAQ (www)"
 msgstr "PMF (www)"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:189
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:190
 msgid "Mailing Lists (www)"
 msgstr "Llistes de correu (www)"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:190
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:192
 msgid "Software (www)"
 msgstr "Programari (www)"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:192
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:193
 msgid "Development (www)"
 msgstr "Desenvolupament (www)"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:193
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:194
 msgid "Bug Tracking System (www)"
 msgstr "Sistema de seguiment d'errades (www)"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:194
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:223
+#: panel/foobar-widget.c:239
 msgid "By Name"
 msgstr "Per nom"
 
-#: panel/foobar-widget.c:224
+#: panel/foobar-widget.c:240
 msgid "By Type"
 msgstr "Per tipus"
 
-#: panel/foobar-widget.c:225
+#: panel/foobar-widget.c:241
 msgid "By Size"
 msgstr "Per mida"
 
-#: panel/foobar-widget.c:226
+#: panel/foobar-widget.c:242
 msgid "By Time Last Accessed"
 msgstr "Pel darrer accés"
 
-#: panel/foobar-widget.c:227
+#: panel/foobar-widget.c:243
 msgid "By Time Last Modified"
 msgstr "Per la darrera modificació"
 
-#: panel/foobar-widget.c:228
+#: panel/foobar-widget.c:244
 msgid "By Time Last Changed"
 msgstr "Pel darrer canvi"
 
-#: panel/foobar-widget.c:237
+#: panel/foobar-widget.c:253
 msgid "Arrange Icons"
 msgstr "Endreça les icones"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:263
 msgid "Rescan Desktop Directory"
 msgstr "Rellegeix el directori de l'escriptori"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:264
 msgid "Rescan Desktop Devices"
 msgstr "Rellegeix els dispositius de l'escriptori"
 
-#: panel/foobar-widget.c:254
+#: panel/foobar-widget.c:270
 msgid "Lock Screen"
 msgstr "Bloqueja la pantalla"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:280
 msgid "Log Out"
 msgstr "Surt"
 
-#: panel/foobar-widget.c:272
+#: panel/foobar-widget.c:288
 msgid " Desktop "
 msgstr "Escriptori "
 
-#: panel/foobar-widget.c:289
+#: panel/foobar-widget.c:305
 msgid "can't fine real path"
 msgstr "no puc trobar el camí autèntic"
 
-#: panel/foobar-widget.c:297
+#: panel/foobar-widget.c:313
 msgid "menu wasn't created"
 msgstr "No s'ha creat el menú"
 
-#: panel/foobar-widget.c:340
+#: panel/foobar-widget.c:355
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:408
+#: panel/foobar-widget.c:433
 msgid "Today"
 msgstr "Avui"
 
-#: panel/foobar-widget.c:409
+#: panel/foobar-widget.c:434
 msgid "This Week"
 msgstr "Aquesta setmana"
 
-#: panel/foobar-widget.c:410
+#: panel/foobar-widget.c:435
 msgid "This Month"
 msgstr "Aquest mes"
 
-#: panel/foobar-widget.c:416
+#: panel/foobar-widget.c:441
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:418
+#: panel/foobar-widget.c:443
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:425
+#: panel/foobar-widget.c:450
 msgid "Add appointement..."
 msgstr "Afegeix una cita..."
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:467
 msgid "Format"
 msgstr "Format"
 
-#: panel/foobar-widget.c:559 panel/menu.c:2790 panel/menu.c:2795
-#: panel/menu.c:4233
+#: panel/foobar-widget.c:781 panel/menu.c:3177 panel/menu.c:3182
+#: panel/menu.c:4624
 msgid "Programs"
 msgstr "Programes"
 
-#: panel/foobar-widget.c:573 panel/menu.c:4206 panel/menu.c:4245
-#: panel/menu.c:4251
+#: panel/foobar-widget.c:795 panel/menu.c:4596 panel/menu.c:4636
+#: panel/menu.c:4642
 msgid "Favorites"
 msgstr "Predilectes"
 
-#: panel/gnome-panel-properties.c:110 panel/menu-properties.c:355
+#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:464
 msgid "Programs: "
 msgstr "Programes: "
 
-#: panel/gnome-panel-properties.c:111 panel/menu-properties.c:359
+#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:471
 msgid "Favorites: "
 msgstr "Predilectes: "
 
-#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:363
+#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:478
 msgid "Applets: "
 msgstr "Applets: "
 
-#: panel/gnome-panel-properties.c:113
+#: panel/gnome-panel-properties.c:115
 msgid "Distribution: "
 msgstr "Distribució: "
 
-#: panel/gnome-panel-properties.c:114
+#: panel/gnome-panel-properties.c:116
 msgid "KDE: "
 msgstr "KDE: "
 
-#: panel/gnome-panel-properties.c:115
+#: panel/gnome-panel-properties.c:117
 msgid "Panel: "
 msgstr "Quadre: "
 
-#: panel/gnome-panel-properties.c:116
+#: panel/gnome-panel-properties.c:118
 msgid "Desktop: "
 msgstr "Escriptori: "
 
 #. Animation enable
-#: panel/gnome-panel-properties.c:275
+#: panel/gnome-panel-properties.c:304
 msgid "Enable animations"
 msgstr "Habilita les animacions"
 
-#: panel/gnome-panel-properties.c:280
+#: panel/gnome-panel-properties.c:309
 msgid "Constant speed animations"
 msgstr "Animacions a velocitat constant"
 
 #. AutoHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:286
+#: panel/gnome-panel-properties.c:315
 msgid "Animation speed"
 msgstr "Velocitat de l'animació"
 
-#: panel/gnome-panel-properties.c:296 panel/gnome-panel-properties.c:314
-#: panel/menu.c:3590
+#: panel/gnome-panel-properties.c:325 panel/gnome-panel-properties.c:343
+#: panel/menu.c:3982
 msgid "Auto hide"
 msgstr "Amagar automàticament"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:303 panel/menu.c:3589
+#: panel/gnome-panel-properties.c:332 panel/menu.c:3981
 msgid "Explicit hide"
 msgstr "Amagar explícitament"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:309
+#: panel/gnome-panel-properties.c:338
 msgid "Drawer sliding"
 msgstr "Lliscament del calaix"
 
 #. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:325
+#: panel/gnome-panel-properties.c:354
 msgid "Delay (ms)"
 msgstr "Retard (ms)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:331
+#: panel/gnome-panel-properties.c:360
 msgid "Size (pixels)"
 msgstr "Mida (píxels)"
 
-#: panel/gnome-panel-properties.c:436
+#: panel/gnome-panel-properties.c:471
 msgid "Launcher icon"
 msgstr "Icona del llançador"
 
-#: panel/gnome-panel-properties.c:437
+#: panel/gnome-panel-properties.c:472
 msgid "Drawer icon"
 msgstr "Icona del calaix"
 
-#: panel/gnome-panel-properties.c:438
+#: panel/gnome-panel-properties.c:473
 msgid "Menu icon"
 msgstr "Icona del menú"
 
-#: panel/gnome-panel-properties.c:439
+#: panel/gnome-panel-properties.c:474
 msgid "Special icon"
 msgstr "Icona especial"
 
 #. toggle button
-#: panel/gnome-panel-properties.c:451
+#: panel/gnome-panel-properties.c:486
 msgid "Tiles enabled"
 msgstr "Mosaics habilitats"
 
-#: panel/gnome-panel-properties.c:466
+#: panel/gnome-panel-properties.c:501
 msgid "Normal tile"
 msgstr "Mosaic normal"
 
-#: panel/gnome-panel-properties.c:479
+#: panel/gnome-panel-properties.c:514
 msgid "Clicked tile"
 msgstr "Mosaic clicat"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:495
+#: panel/gnome-panel-properties.c:530
 msgid "Border width (tile only)"
 msgstr "Amplada del contorn (només els mosaics)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:501
+#: panel/gnome-panel-properties.c:536
 msgid "Depth (displacement when pressed)"
 msgstr "Profunditat (desplaçament quan és premut)"
 
-#: panel/gnome-panel-properties.c:520
+#: panel/gnome-panel-properties.c:555
 msgid "Launcher"
 msgstr "Llançador"
 
-#: panel/gnome-panel-properties.c:522 panel/gnome-panel-properties.c:1330
-#: panel/menu-properties.c:412 panel/menu.c:2314 panel/menu.c:2380
-#: panel/menu.c:2382 panel/menu.c:3667 panel/menu.c:4471
+#: panel/gnome-panel-properties.c:557 panel/gnome-panel-properties.c:1412
+#: panel/menu-properties.c:542 panel/menu.c:1417 panel/menu.c:2671
+#: panel/menu.c:2739 panel/menu.c:2744 panel/menu.c:4061 panel/menu.c:4894
 msgid "Menu"
 msgstr "Menú"
 
-#: panel/gnome-panel-properties.c:523
+#: panel/gnome-panel-properties.c:558
 msgid "Special"
 msgstr "Especial"
 
-#: panel/gnome-panel-properties.c:533
+#: panel/gnome-panel-properties.c:568
 msgid "Button type: "
 msgstr "Tipus de botó: "
 
 #. show/hide frame
-#: panel/gnome-panel-properties.c:566
+#: panel/gnome-panel-properties.c:601
 msgid "Make buttons flush with panel edge"
 msgstr "Fes que els botons s'enrasin amb la vora del quadre"
 
 #. only show tiles when mouse is over the button
-#: panel/gnome-panel-properties.c:573
+#: panel/gnome-panel-properties.c:608
 msgid "Show button tiles only when cursor is over the button"
 msgstr ""
 "Mostra els mosaics dels botons només quan el cursor sigui sobre el botó"
 
 #. prelight on mouseovers hack (used to be saturation, hence
 #. * the config option name)
-#: panel/gnome-panel-properties.c:580
+#: panel/gnome-panel-properties.c:615
 msgid "Prelight buttons on mouseover"
 msgstr "Il·lumina els botons si ha el ratolí al damunt"
 
+#. Fast but low quality scaling (Nearest versus Hyperbolic)
+#: panel/gnome-panel-properties.c:621
+msgid "Fast but low quality scaling of button icons"
+msgstr ""
+
 #. Movement frame
-#: panel/gnome-panel-properties.c:635
+#: panel/gnome-panel-properties.c:678
 msgid "Default movement mode"
 msgstr "Mode de moviment per defecte"
 
 #. Switched
-#: panel/gnome-panel-properties.c:645
+#: panel/gnome-panel-properties.c:688
 msgid "Switched movement (or use Ctrl)"
 msgstr "Moviment intercanviat (o utilitza Ctrl)"
 
-#: panel/gnome-panel-properties.c:653
+#: panel/gnome-panel-properties.c:696
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
 msgstr "Moviment lliure (no destorba altres applets) (o utilitza Alt)"
 
-#: panel/gnome-panel-properties.c:661
+#: panel/gnome-panel-properties.c:704
 msgid "Push movement (or use Shift)"
 msgstr "Moviment de premuda (o utilitza Shift)"
 
-#: panel/gnome-panel-properties.c:666
-msgid "Padding"
-msgstr "Separació"
+#: panel/gnome-panel-properties.c:709
+msgid "Padding between applets"
+msgstr ""
+
+#: panel/gnome-panel-properties.c:714
+msgid "Padding between applets and panel border"
+msgstr ""
 
 # Solució de compromís! Ha de valdre per totes dues. iv
-#: panel/gnome-panel-properties.c:734 panel/menu-properties.c:251
+#: panel/gnome-panel-properties.c:782 panel/menu-properties.c:324
 msgid "Off"
 msgstr "Desconnectat"
 
-#: panel/gnome-panel-properties.c:741 panel/menu-properties.c:263
+#: panel/gnome-panel-properties.c:789 panel/menu-properties.c:334
 msgid "In a submenu"
 msgstr "A un submenú"
 
-#: panel/gnome-panel-properties.c:747
+#: panel/gnome-panel-properties.c:795
 msgid "In the menu"
 msgstr "Al menú"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:766
+#: panel/gnome-panel-properties.c:814
 msgid "Menus"
 msgstr "Menús"
 
 #. large icons
-#: panel/gnome-panel-properties.c:776
+#: panel/gnome-panel-properties.c:824
 msgid "Use large icons"
 msgstr "Utilitza icones grans"
 
 #. Dot Buttons
-#: panel/gnome-panel-properties.c:782
+#: panel/gnome-panel-properties.c:830
 msgid "Show [...] buttons"
 msgstr "Mostra els botons [...]"
 
 #. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:788
+#: panel/gnome-panel-properties.c:836
 msgid "Show popup menus outside of panels"
 msgstr "Mostra els menús emergents fora dels quadres"
 
 #. Hungry Menus
-#: panel/gnome-panel-properties.c:794
+#: panel/gnome-panel-properties.c:842
 msgid "Keep menus in memory"
 msgstr "Manté els menús en memòria"
 
 #. Merge system menus
-#: panel/gnome-panel-properties.c:800
+#: panel/gnome-panel-properties.c:848
 msgid "Merge in system menus"
 msgstr "Fusiona als menús de sistema"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:807
+#: panel/gnome-panel-properties.c:855
 msgid "Global menu"
 msgstr "Menú global"
 
-#: panel/gnome-panel-properties.c:925
+#: panel/gnome-panel-properties.c:978
 msgid "Press a key..."
 msgstr "Prem una tecla..."
 
 #. Tooltips enable
-#: panel/gnome-panel-properties.c:957
+#: panel/gnome-panel-properties.c:1010
 msgid "Tooltips enabled"
 msgstr "Suggeriments habilitats"
 
 #. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:963
+#: panel/gnome-panel-properties.c:1016
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr "Tanca el calaix si un llançador de dins és premut"
 
 #. Autoraise
-#: panel/gnome-panel-properties.c:969
+#: panel/gnome-panel-properties.c:1022
 msgid "Raise panels on mouse-over"
 msgstr "Aixeca els quadres si ha el ratolí al damunt"
 
 #. Keep on bottom
-#: panel/gnome-panel-properties.c:975
+#: panel/gnome-panel-properties.c:1028
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr ""
 "Manté el quadre per sota de les finestres (només en gestors conformes amb "
 "GNOME)"
 
 #. Confirm panel removal
-#: panel/gnome-panel-properties.c:981
+#: panel/gnome-panel-properties.c:1034
 msgid "Confirm the removal of panels with a dialog"
 msgstr "Confirma l'eliminació de quadres amb un diàleg"
 
+#. Collision avoidance
+#: panel/gnome-panel-properties.c:1040
+msgid "Try to avoid overlapping panels"
+msgstr ""
+
 #. Key Bindings frame
-#: panel/gnome-panel-properties.c:987
+#: panel/gnome-panel-properties.c:1046
 msgid "Key Bindings"
 msgstr "Tecles vinculades"
 
 #. enabled
-#: panel/gnome-panel-properties.c:1000
+#: panel/gnome-panel-properties.c:1059
 msgid "Enable panel keybindings"
 msgstr "Habilita les tecles vinculades del quadre"
 
 #. menu key
-#: panel/gnome-panel-properties.c:1007
+#: panel/gnome-panel-properties.c:1066
 msgid "Popup menu key"
 msgstr "Tecla de menú desplegable"
 
-#: panel/gnome-panel-properties.c:1016 panel/gnome-panel-properties.c:1041
-#: panel/panel-util.c:621 panel/panel-util.c:678
+#: panel/gnome-panel-properties.c:1075 panel/gnome-panel-properties.c:1100
+#: panel/panel-util.c:554 panel/panel-util.c:611
 msgid "Disabled"
 msgstr "Deshabilitat"
 
-#: panel/gnome-panel-properties.c:1027 panel/gnome-panel-properties.c:1052
+#: panel/gnome-panel-properties.c:1086 panel/gnome-panel-properties.c:1111
 msgid "Grab key..."
 msgstr "Graba la tecla..."
 
 #. run key...
-#: panel/gnome-panel-properties.c:1034
+#: panel/gnome-panel-properties.c:1093
 msgid "Run dialog key"
 msgstr "Tecla del diàleg d'executar"
 
-#: panel/gnome-panel-properties.c:1315
+#: panel/gnome-panel-properties.c:1397
 msgid "Animation"
 msgstr "Animació"
 
-#: panel/gnome-panel-properties.c:1320
+#: panel/gnome-panel-properties.c:1402
 msgid "Buttons"
 msgstr "Botons"
 
-#: panel/gnome-panel-properties.c:1325
+#: panel/gnome-panel-properties.c:1407
 msgid "Panel Objects"
 msgstr "Propietats del quadre"
 
-#: panel/gnome-run.c:70
+#: panel/gnome-run.c:75
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2874,7 +2908,7 @@ msgstr ""
 "No he pogut executar la comanda:\n"
 "%s"
 
-#: panel/gnome-run.c:126
+#: panel/gnome-run.c:131
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2885,43 +2919,44 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: panel/gnome-run.c:200
+#: panel/gnome-run.c:205
 msgid "Run Program"
 msgstr "Executa el programa"
 
-#: panel/gnome-run.c:209
+#: panel/gnome-run.c:214
 msgid "Run"
 msgstr "Executa"
 
-#: panel/gnome-run.c:245
+#: panel/gnome-run.c:250
 msgid "Run in terminal"
 msgstr "Executa en un terminal"
 
-#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4315
+#: panel/gnome-run.c:291 panel/gnome-run.c:293 panel/menu.c:4705
 msgid "Run..."
 msgstr "Executa..."
 
-#: panel/launcher.c:49
+#: panel/launcher.c:56
 msgid "This launch icon does not specify a program to run"
 msgstr "Aquesta icona no especifica cap programa per executar"
 
-#: panel/launcher.c:76 panel/menu.c:1724
+#: panel/launcher.c:83 panel/menu.c:2073
 msgid "Can't get goad_id from desktop entry!"
 msgstr "No puc obtenir el goad_id de l'entrada de l'escriptori!"
 
-#: panel/launcher.c:313
+#: panel/launcher.c:341
 msgid "App"
 msgstr "Aplicació"
 
-#: panel/launcher.c:432
+#. watch the enum at the top of the file
+#: panel/launcher.c:491
 msgid "Launcher properties"
 msgstr "Propietats del llançador"
 
-#: panel/launcher.c:572
+#: panel/launcher.c:658
 msgid "Create launcher applet"
 msgstr "Crea un applet llançador"
 
-#: panel/logout.c:47 panel/menu.c:4148
+#: panel/logout.c:47 panel/menu.c:4536
 msgid "Log out"
 msgstr "Surt"
 
@@ -2929,7 +2964,7 @@ msgstr "Surt"
 msgid "Log out of GNOME"
 msgstr "Surt de GNOME"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4136
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4524
 msgid "Lock screen"
 msgstr "Bloqueja la pantalla"
 
@@ -2953,7 +2988,7 @@ msgstr "Reinicia el dimoni"
 msgid "Preferences"
 msgstr "Preferències"
 
-#: panel/main.c:208
+#: panel/main.c:207
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -2963,7 +2998,7 @@ msgstr ""
 "Inicio un altre quadre?\n"
 "(El nou quadre no serà tornat a iniciar)."
 
-#: panel/main.c:219
+#: panel/main.c:218
 msgid ""
 "There was a problem registering the panel with the GOAD server.\n"
 "The panel will now exit."
@@ -2971,20 +3006,20 @@ msgstr ""
 "S'ha produït un problema al registrar el quadre en el servidor GOAD.\n"
 "El quadre sortirà ara mateix."
 
-#: panel/menu.c:124
+#: panel/menu.c:171
 msgid "Many many others ..."
 msgstr "Molts, molts altres..."
 
 #. ... from the Monty Pythons show...
-#: panel/menu.c:126
+#: panel/menu.c:173
 msgid "and finally, The Knights Who Say ... NI!"
 msgstr "i finalment, els cavallers que diuen ... NI!"
 
-#: panel/menu.c:146
+#: panel/menu.c:193
 msgid "The GNOME Panel"
 msgstr "El quadre de GNOME"
 
-#: panel/menu.c:149
+#: panel/menu.c:196
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -2993,177 +3028,198 @@ msgstr ""
 "applets petits a ell mateix, de la pau al món, i d'alguna petada aleatòria "
 "del X."
 
-#: panel/menu.c:160
+#: panel/menu.c:207
 msgid "End world hunger"
 msgstr "Aturar la fam al món"
 
-#: panel/menu.c:173
+#: panel/menu.c:220
 msgid "Can't execute 'About GNOME'"
 msgstr "No puc executar 'Quant a GNOME'"
 
-#: panel/menu.c:184 panel/menu.c:781 panel/menu.c:1716
+#: panel/menu.c:231 panel/menu.c:933 panel/menu.c:2065
 msgid "Can't load entry"
 msgstr "No puc carregar l'entrada"
 
-#: panel/menu.c:201
-msgid "Can't execute copy (cp)"
-msgstr "No puc executar la comanda de còpia (cp)"
-
-#: panel/menu.c:599
+#: panel/menu.c:713
 msgid "Cannot create an item with an empty command"
 msgstr "No puc crear un ítem sense comanda"
 
-#: panel/menu.c:635
+#: panel/menu.c:747
 #, c-format
 msgid "Could not get file from path: %s"
 msgstr "No he pogut aconseguir el fitxer del camí: %s"
 
-#: panel/menu.c:639 panel/menu.c:741
+#: panel/menu.c:751
 #, c-format
 msgid "Could not open .order file: %s"
 msgstr "No he pogut obrir el fitxer .order: %s"
 
-#: panel/menu.c:646
+#: panel/menu.c:759
 #, c-format
 msgid "Could not open file '%s' for writing"
 msgstr "No he pogut obrir el fitxer %s amb permís d'escritura"
 
-#: panel/menu.c:666
+#: panel/menu.c:778
 msgid "Create menu item"
 msgstr "Crea un ítem de menú"
 
-#: panel/menu.c:713
+#: panel/menu.c:850
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
 msgstr "No puc eliminar l'ítem de menú %s: %s\n"
 
-#: panel/menu.c:720
+#: panel/menu.c:857
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "No puc aconseguir el nom del fitxer del camí: %s"
 
-#: panel/menu.c:760
-#, c-format
-msgid "Could not rename tmp file %s"
+#: panel/menu.c:864
+#, fuzzy, c-format
+msgid "Could not get directory name from path: %s"
+msgstr "No puc aconseguir el nom del fitxer del camí: %s"
+
+#: panel/menu.c:882
+#, fuzzy, c-format
+msgid ""
+"Could not open .order file: %s\n"
+"%s"
+msgstr "No he pogut obrir el fitxer .order: %s"
+
+#: panel/menu.c:902
+#, fuzzy, c-format
+msgid "Could not remove old order file %s: %s\n"
+msgstr "No he pogut obrir el fitxer .order: %s"
+
+#: panel/menu.c:910
+#, fuzzy, c-format
+msgid ""
+"Could not rename tmp file: %s to %s\n"
+"%s"
 msgstr "No puc canviar el nom del fitxer temporal %s"
 
-#: panel/menu.c:778
+#: panel/menu.c:929
 msgid "No 'Exec' field in entry"
 msgstr "No hi ha un camp 'Exec' en l'entrada"
 
-#: panel/menu.c:1002 panel/menu.c:1055
+#. watch the enum at the top of the file
+#: panel/menu.c:1272 panel/menu.c:1382
 msgid "Desktop entry properties"
 msgstr "Propietats de l'entrada de l'escriptori"
 
-#: panel/menu.c:1146
+#: panel/menu.c:1514
 msgid "Add this launcher to panel"
 msgstr "Afegeix aquest llançador al quadre"
 
-#: panel/menu.c:1149
+#: panel/menu.c:1517
 msgid "Add this applet as a launcher to panel"
 msgstr "Afegeix aquest applet com a llançador al quadre"
 
-#: panel/menu.c:1159 panel/menu.c:1224
+#: panel/menu.c:1527 panel/menu.c:1592
 msgid "Add this to Favorites menu"
 msgstr "Afegeix això al menú de predilectes"
 
-#: panel/menu.c:1172
+#: panel/menu.c:1540
 msgid "Remove this item"
 msgstr "Suprimeix aquest ítem"
 
-#: panel/menu.c:1190
+#: panel/menu.c:1558
 msgid "Put into run dialog"
 msgstr "Posa en el diàleg d'executar"
 
-#: panel/menu.c:1207
+#: panel/menu.c:1575
 msgid "Add this as drawer to panel"
 msgstr "Afegeix això com a calaix al quadre"
 
-#: panel/menu.c:1216
+#: panel/menu.c:1584
 msgid "Add this as menu to panel"
 msgstr "Afegeix això com a menú al quadre"
 
-#: panel/menu.c:1236
+#: panel/menu.c:1604
 msgid "Add new item to this menu"
 msgstr "Afegeix un nou ítem a aquest menú"
 
-#: panel/menu.c:1470 panel/menu.c:1546
+#: panel/menu.c:1817 panel/menu.c:1893
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:1695
+#: panel/menu.c:2044
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "Ja teniu un moll de status al quadre. Només en podeu tenir un"
 
 # FIXEU_ME   tearoff->  menú desenganxable? línia de punts? menú arrossegable?
 # Mireu el manual del quadre en l'apartat de menus
-#: panel/menu.c:2034
+#: panel/menu.c:2388
 msgid "Adding tearoff when tearoffs are disabled"
 msgstr ""
 "S'està afegint una línia de punts tot i que està deshabilitada la capacitat "
 "de desenganxar el menú per la línia"
 
-#: panel/menu.c:2183
+#: panel/menu.c:2538
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "No puc obtenir el goad_id per l'applet, l'ignoro"
 
-#: panel/menu.c:2382
+#: panel/menu.c:2744 panel/menu.c:2746
 msgid " (empty)"
 msgstr " (buit)"
 
-#: panel/menu.c:2467 panel/menu.c:4263
+#: panel/menu.c:2848 panel/menu.c:4654
 msgid "Applets"
 msgstr "Applets"
 
-#: panel/menu.c:2644
+#. Don't translate the first part of this string
+#: panel/menu.c:3022 panel/session.c:1232 panel/session.c:1426
+msgid "/panel/Config/clock_format=%I:%M:%S %p"
+msgstr ""
+
+#: panel/menu.c:3031
 msgid "You can only have one menu panel at a time."
 msgstr "Només podeu tenir un quadre de menú a la vegada."
 
-#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3903
+#: panel/menu.c:3068 panel/menu.c:3073 panel/menu.c:4296
 msgid "Create panel"
 msgstr "Crea un quadre"
 
-#: panel/menu.c:2713
+#: panel/menu.c:3100
 msgid "Menu panel"
 msgstr "Quadre de menú"
 
-#: panel/menu.c:2721 panel/menu.c:3581 panel/panel_config.c:1259
-#: panel/panel_config.c:1354
+#: panel/menu.c:3108 panel/menu.c:3973 panel/panel_config.c:1330
+#: panel/panel_config.c:1446
 msgid "Edge panel"
 msgstr "Quadre a un costat"
 
-#: panel/menu.c:2729 panel/menu.c:3582 panel/panel_config.c:1266
-#: panel/panel_config.c:1364
+#: panel/menu.c:3116 panel/menu.c:3974 panel/panel_config.c:1337
+#: panel/panel_config.c:1456
 msgid "Aligned panel"
 msgstr "Quadre alineat"
 
-#: panel/menu.c:2737 panel/menu.c:3583 panel/panel_config.c:1272
-#: panel/panel_config.c:1374
+#: panel/menu.c:3124 panel/menu.c:3975 panel/panel_config.c:1343
+#: panel/panel_config.c:1466
 msgid "Sliding panel"
 msgstr "Quadre lliscant"
 
-#: panel/menu.c:2745 panel/menu.c:3584 panel/panel_config.c:1278
-#: panel/panel_config.c:1384
+#: panel/menu.c:3132 panel/menu.c:3976 panel/panel_config.c:1349
+#: panel/panel_config.c:1476
 msgid "Floating panel"
 msgstr "Quadre flotant"
 
-#: panel/menu.c:2804 panel/menu.c:2807
+#: panel/menu.c:3191 panel/menu.c:3194
 msgid "No system menus found!"
 msgstr "No he trobat cap menu de sistema!"
 
-#: panel/menu.c:2822
+#: panel/menu.c:3209
 msgid "Can't create the user menu directory"
 msgstr "No puc crear el directori del menú d'usuari"
 
-#: panel/menu.c:2886 panel/menu.c:2892 panel/menu.c:4304
+#: panel/menu.c:3272 panel/menu.c:3278 panel/menu.c:4694
 msgid "KDE menus"
 msgstr "Menús de KDE"
 
-#: panel/menu.c:2945
+#: panel/menu.c:3331
 msgid "You cannot remove your last panel."
 msgstr "No podeu suprimir el vostre últim quadre."
 
-#: panel/menu.c:2955
+#: panel/menu.c:3341
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3171,252 +3227,276 @@ msgstr ""
 "Quan es suprimeix un quadre, el quadre i la configuració\n"
 "dels seus applets es perden. Voleu suprimir aquest quadre?"
 
-#: panel/menu.c:3595
+#: panel/menu.c:3987
 msgid "With pixmap arrow"
 msgstr "Amb una fletxa de mapa de píxels"
 
-#: panel/menu.c:3596
+#: panel/menu.c:3988
 msgid "Without pixmap"
 msgstr "Sense fletxa"
 
-#: panel/menu.c:3608 panel/panel_config.c:903
+#: panel/menu.c:4000 panel/panel_config.c:925
+#, fuzzy
+msgid "Ultra Tiny (12 pixels)"
+msgstr "Diminut (24 píxels)"
+
+#: panel/menu.c:4001 panel/panel_config.c:933
 msgid "Tiny (24 pixels)"
 msgstr "Diminut (24 píxels)"
 
-#: panel/menu.c:3609 panel/panel_config.c:911
+#: panel/menu.c:4002 panel/panel_config.c:941
 msgid "Small (36 pixels)"
 msgstr "Petit (36 píxels)"
 
-#: panel/menu.c:3610 panel/panel_config.c:919
+#: panel/menu.c:4003 panel/panel_config.c:949
 msgid "Standard (48 pixels)"
 msgstr "Estàndard (48 píxels)"
 
-#: panel/menu.c:3611 panel/panel_config.c:927
+#: panel/menu.c:4004 panel/panel_config.c:957
 msgid "Large (64 pixels)"
 msgstr "Gran (64 píxels)"
 
-#: panel/menu.c:3612 panel/panel_config.c:935
+#: panel/menu.c:4005 panel/panel_config.c:965
 msgid "Huge (80 pixels)"
 msgstr "Enorme (80 píxels)"
 
-#: panel/menu.c:3617 panel/panel_config.c:1083
+#: panel/menu.c:4006 panel/panel_config.c:973
+#, fuzzy
+msgid "Ridiculous (128 pixels)"
+msgstr "Diminut (24 píxels)"
+
+#: panel/menu.c:4011 panel/panel_config.c:1148
 msgid "Standard"
 msgstr "Estàndard"
 
 #. color frame
-#: panel/menu.c:3618 panel/panel_config.c:1087 panel/panel_config.c:1102
+#: panel/menu.c:4012 panel/panel_config.c:1152 panel/panel_config.c:1167
 msgid "Color"
 msgstr "Color"
 
-#: panel/menu.c:3619 panel/panel_config.c:1091
+#: panel/menu.c:4013 panel/panel_config.c:1156
 msgid "Pixmap"
 msgstr "Mapa de píxels"
 
-#: panel/menu.c:3623
+#: panel/menu.c:4017
 msgid "Type"
 msgstr "Tipus"
 
-#: panel/menu.c:3626
+#: panel/menu.c:4020
 msgid "Hiding policy"
 msgstr "Política d'ocultació"
 
-#: panel/menu.c:3629
+#: panel/menu.c:4023
 msgid "Hide buttons"
 msgstr "Botons d'amagar"
 
-#: panel/menu.c:3635
+#: panel/menu.c:4029
 msgid "Orientation"
 msgstr "Orientació"
 
-#: panel/menu.c:3656
+#: panel/menu.c:4050
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:323 panel/menu-properties.c:344 panel/menu.c:3677
+#: panel/menu-properties.c:428 panel/menu-properties.c:450 panel/menu.c:4071
 msgid "Main menu"
 msgstr "Menú principal"
 
-#: panel/menu.c:3688
+#: panel/menu.c:4082
 msgid "Programs menu"
 msgstr "Menú de programes"
 
-#: panel/menu.c:3698
+#: panel/menu.c:4092
 msgid "Favorites menu"
 msgstr "Menú de predilectes"
 
-#: panel/menu.c:3709
+#: panel/menu.c:4103
 msgid "Launcher..."
 msgstr "Llançador..."
 
-#: panel/menu.c:3730
+#: panel/menu.c:4124
 msgid "Log out button"
 msgstr "Botó de sortida"
 
-#: panel/menu.c:3741
+#: panel/menu.c:4135
 msgid "Lock button"
 msgstr "Botó de bloqueig"
 
-#: panel/menu.c:3752
+#: panel/menu.c:4146
 msgid "Run button"
 msgstr "Botó de executar"
 
-#: panel/menu.c:3764
+#: panel/menu.c:4158
 msgid "Swallowed app..."
 msgstr "Aplicació incorporada..."
 
-#: panel/menu.c:3772
+#: panel/menu.c:4166
 msgid "Status dock"
 msgstr "Moll de status"
 
-#: panel/menu.c:3796 panel/menu.c:3801 panel/menu.c:3879
+#: panel/menu.c:4190 panel/menu.c:4195 panel/menu.c:4272
 msgid "Add to panel"
 msgstr "Afegeix al quadre"
 
-#: panel/menu.c:3816
+#: panel/menu.c:4210
 msgid "Cannot execute panel global properties"
 msgstr "No puc executar les propietats globals del quadre"
 
-#: panel/menu.c:3856
+#: panel/menu.c:4250
 msgid "Remove this panel..."
 msgstr "Elimina aquest quadre..."
 
-#: panel/menu.c:3858 panel/menu.c:3914
+#: panel/menu.c:4252 panel/menu.c:4307
 msgid "Remove this panel"
 msgstr "Elimina aquest quadre"
 
-#: panel/menu.c:3931
+#: panel/menu.c:4324
 msgid "Properties"
 msgstr "Propietats"
 
-#: panel/menu.c:3942
+#: panel/menu.c:4335
 msgid "All properties..."
 msgstr "Totes les propietats..."
 
-#: panel/menu.c:3958
+#: panel/menu.c:4351
 msgid "Global Preferences..."
 msgstr "Preferències globals..."
 
 # v1.2.1 és així, comprovat
-#: panel/menu.c:3972
+#: panel/menu.c:4365
 msgid "Panel Manual..."
 msgstr "Manual del quadre..."
 
-#: panel/menu.c:3983
+#: panel/menu.c:4376
 msgid "Cannot execute xscreensaver"
 msgstr "No puc executar xscreensaver"
 
-#: panel/menu.c:4035 panel/menu.c:4040 panel/menu.c:4338
+#: panel/menu.c:4423 panel/menu.c:4428 panel/menu.c:4728
 msgid "Desktop"
 msgstr "Escriptori"
 
-#: panel/menu.c:4077
+#: panel/menu.c:4465
 msgid "About the panel..."
 msgstr "Quant al quadre..."
 
-#: panel/menu.c:4093
+#: panel/menu.c:4481
 msgid "About GNOME..."
 msgstr "Quant a GNOME..."
 
 # De veres aquesta gent parla així? iv
-#: panel/menu.c:4394
+#: panel/menu.c:4794
 msgid "Can't create menu, using main menu!"
 msgstr "No puc crear el menú, empraré el menú principal!"
 
-#: panel/menu-properties.c:126 panel/menu.c:4555
+#: panel/menu-properties.c:137 panel/menu.c:4985
 msgid "Edit menus..."
 msgstr "Edita els menús..."
 
 # De veres aquesta gent parla així? iv
-#: panel/menu-properties.c:133
+#: panel/menu-properties.c:144
 msgid "Can't open directory, using main menu!"
 msgstr "No puc obrir el directori, empraré el menú principal!"
 
-#: panel/menu-properties.c:275
+#: panel/menu-properties.c:346
 msgid "On the main menu"
 msgstr "Al menú principal"
 
-#: panel/menu-properties.c:309
+#: panel/menu-properties.c:383 panel/menu-properties.c:400
 msgid "Menu properties"
 msgstr "Propietats del menú"
 
-#: panel/menu-properties.c:316
+#: panel/menu-properties.c:407
 msgid "Menu type"
 msgstr "Tipus de menú"
 
-#: panel/menu-properties.c:335 panel/menu-properties.c:383
+#: panel/menu-properties.c:414
+#, fuzzy
+msgid "Global main menu"
+msgstr "Menú global"
+
+#: panel/menu-properties.c:442 panel/menu-properties.c:512
 msgid "Normal menu"
 msgstr "Menú normal"
 
-#: panel/menu-properties.c:367
+#: panel/menu-properties.c:485
 msgid "Distribution menu (if found): "
 msgstr "Menú de la distribució (si es troba): "
 
-#: panel/menu-properties.c:371
+#: panel/menu-properties.c:492
 msgid "KDE menu (if found): "
 msgstr "Menú del KDE (si es troba): "
 
-#: panel/menu-properties.c:375
+#: panel/menu-properties.c:499
 msgid "Panel menu: "
 msgstr "Menú del quadre: "
 
-#: panel/menu-properties.c:379
+#: panel/menu-properties.c:506
 msgid "Desktop menu: "
 msgstr "Menú de l'escriptori: "
 
-#: panel/menu-properties.c:393
+#: panel/menu-properties.c:523
 msgid "Menu path"
 msgstr "Camí del menú"
 
-#: panel/panel_config.c:427
+#: panel/menu-properties.c:554
+msgid "Use custom icon for panel button"
+msgstr ""
+
+#: panel/panel.c:861
+#, c-format
+msgid "Open URL: %s"
+msgstr ""
+
+#: panel/panel_config.c:443
 msgid "Hiding"
 msgstr "Ocultació"
 
 #. Auto-hide
-#: panel/panel_config.c:435
+#: panel/panel_config.c:451
 msgid "Enable Auto-hide"
 msgstr "Habilita l'amagada automàtica"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:445
+#: panel/panel_config.c:461
 msgid "Show hide buttons"
 msgstr "Mostra els botons d'amagar"
 
 #. Arrow enable
-#: panel/panel_config.c:455
+#: panel/panel_config.c:471
 msgid "Show arrows on hide button"
 msgstr "Mostra fletxes al botó d'amagar"
 
-#: panel/panel_config.c:506
+#: panel/panel_config.c:528
 msgid "Panel Position"
 msgstr "Posició del quadre"
 
-#: panel/panel_config.c:625 panel/panel_config.c:652 panel/panel_config.c:712
-#: panel/panel_config.c:810
+#: panel/panel_config.c:647 panel/panel_config.c:674 panel/panel_config.c:734
+#: panel/panel_config.c:832
 msgid "Size and Position"
 msgstr "Mida i posició"
 
-#: panel/panel_config.c:727
+#: panel/panel_config.c:749
 msgid "Orient panel horizontally"
 msgstr "Orienta el quadre horitzontalment"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:761
 msgid "Orient panel vertically"
 msgstr "Orienta el quadre verticalment"
 
-#: panel/panel_config.c:751
+#: panel/panel_config.c:773
 msgid "Top left corner's position: X"
 msgstr "Posició del capdamunt de la cantonada esquerra: X"
 
-#: panel/panel_config.c:822
+#: panel/panel_config.c:844
 msgid "Offset from screen edge:"
 msgstr "Offset del límit de la pantalla:"
 
 # I cache es pronuncia «caix» (monosíl·laba) iv
-#: panel/panel_config.c:894
+#: panel/panel_config.c:916
 msgid "Panel size:"
 msgstr "Mida del panel:"
 
-#: panel/panel_config.c:949
+#: panel/panel_config.c:987
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3425,39 +3505,40 @@ msgstr ""
 "Nota: El quadre agafarà la mida de l'applet més gran,\n"
 "i no tots els applets obeixen aquestes mides."
 
-#: panel/panel_config.c:1075
+#: panel/panel_config.c:1140
 msgid "Background Type: "
 msgstr "Tipus de fons:"
 
-#: panel/panel_config.c:1114
+#: panel/panel_config.c:1179
 msgid "Color to use:"
 msgstr "Color a emprar:"
 
-#: panel/panel_config.c:1155
+#: panel/panel_config.c:1227
 msgid "Don't scale image to fit"
 msgstr "No escalis la imatge per ajustar-la"
 
-#: panel/panel_config.c:1161
+#: panel/panel_config.c:1233
 msgid "Scale image (keep proportions)"
 msgstr "Escala la imatge (manté les proporcions)"
 
-#: panel/panel_config.c:1166
+#: panel/panel_config.c:1238
 msgid "Stretch image (change proportions)"
 msgstr "Estira la imatge (canvia les proporcions)"
 
-#: panel/panel_config.c:1181
+#: panel/panel_config.c:1253
 msgid "Rotate image for vertical panels"
 msgstr "Gira la imatge en els quadres verticals"
 
-#: panel/panel_config.c:1344
+#. main window
+#: panel/panel_config.c:1418
 msgid "Panel properties"
 msgstr "Propietats del quadre"
 
-#: panel/panel_config.c:1402
+#: panel/panel_config.c:1494
 msgid "Background"
 msgstr "Fons"
 
-#: panel/session.c:220
+#: panel/session.c:252
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -3465,38 +3546,44 @@ msgstr ""
 "Un applet no respon a una petició de desar.\n"
 "Elimino l'applet o continuo esperant?"
 
-#: panel/session.c:231
+#: panel/session.c:263
 msgid "Remove applet"
 msgstr "Elimina l'applet"
 
-#: panel/session.c:234
+#: panel/session.c:266
 msgid "Continue waiting"
 msgstr "Continua esperant"
 
-#: panel/session.c:243
+#: panel/session.c:275
 msgid "Timed out on sending session save to an applet"
 msgstr ""
 "S'ha esgotat el temps per enviar a un applet una ordre de desar la sessió"
 
-#: panel/swallow.c:174
+#: panel/swallow.c:184
 msgid "Create swallow applet"
 msgstr "Crea un applet incorporat"
 
-#: panel/swallow.c:190
+#: panel/swallow.c:200
 msgid "Title of application to swallow"
 msgstr "Títol de l'aplicació per incorporar"
 
-#: panel/swallow.c:200
+#: panel/swallow.c:210
 msgid "Command (optional)"
 msgstr "Comanda (opcional)"
 
-#: panel/swallow.c:211
+#: panel/swallow.c:221
 msgid "Width"
 msgstr "Amplada"
 
-#: panel/swallow.c:224
+#: panel/swallow.c:234
 msgid "Height"
 msgstr "Alçada"
+
+#~ msgid "Padding"
+#~ msgstr "Separació"
+
+#~ msgid "Can't execute copy (cp)"
+#~ msgstr "No puc executar la comanda de còpia (cp)"
 
 #~ msgid "Drawing"
 #~ msgstr "Dibuix"
