@@ -61,17 +61,17 @@ INSTOBJEXT = @INSTOBJEXT@
 .c.o:
 	$(COMPILE) $<
 
-%.pox: %.po $(srcdir)/$(PACKAGE).pot update-po
+%.pox: %.po $(srcdir)/$(PACKAGE).pot
 	$(MSGMERGE) $< $(srcdir)/$(PACKAGE).pot -o $*.pox
 
-%.mo: %.po update-po
+%.mo: %.po
 	$(MSGFMT) -o $@ $<
 
-%.gmo: %.po update-po
+%.gmo: %.po
 	file=$(srcdir)/`echo $* | sed 's,.*/,,'`.gmo \
 	  && rm -f $$file && $(GMSGFMT) -o $$file $<
 
-%.cat: %.po update-po
+%.cat: %.po
 	sed -f ../intl/po2msg.sed < $< > $*.msg \
 	  && rm -f $@ && $(GENCAT) $@ $*.msg
 
