@@ -183,10 +183,20 @@ ditem_load (const char *data_file,
 	Bonobo_ConfigDatabase db;
 	CORBA_Environment ev;
 	CORBA_any *any;
+	gchar *moniker;
 
-	db = bonobo_config_ditem_new (data_file);
-	if (db == CORBA_OBJECT_NIL)
+	moniker = g_strdup_printf ("ditem:%s", data_file);
+
+	CORBA_exception_init (&ev);
+	db = bonobo_get_object (moniker, "Bonobo/ConfigDatabase", &ev);
+	if (BONOBO_EX (&ev)) {
+		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+		CORBA_exception_free (&ev);
+		g_free (moniker);
 		return NULL;
+	}
+	CORBA_exception_free (&ev);
+	g_free (moniker);
 
 	CORBA_exception_init (&ev);
 	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_Desktop_Entry, &ev);
@@ -330,14 +340,25 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	/* first we setup the new location if we need to */
 	if (under) {
 		Bonobo_ConfigDatabase db;
+		gchar *moniker;
 
 		g_free (item->location);
 		item->location = g_strdup (under);
 		item->modified = TRUE;
 
-		db = bonobo_config_ditem_new (item->location);
-		if (db == CORBA_OBJECT_NIL)
+		moniker = g_strdup_printf ("ditem:%s", item->location);
+
+		CORBA_exception_init (&ev);
+		db = bonobo_get_object (moniker, "Bonobo/ConfigDatabase", &ev);
+		if (BONOBO_EX (&ev)) {
+			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+			CORBA_exception_free (&ev);
+			g_free (moniker);
 			return FALSE;
+		}
+		CORBA_exception_free (&ev);
+
+		g_free (moniker);
 
 		bonobo_object_release_unref (item->db, NULL);
 		item->db = db;

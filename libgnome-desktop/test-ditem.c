@@ -1,5 +1,6 @@
 /* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <libbonobo.h>
+#include <libgnome/gnome-init.h>
 #include <gnome-desktop/GNOME_Desktop.h>
 #include <gnome-desktop/gnome-desktop-item.h>
 #include <locale.h>
@@ -126,8 +127,15 @@ main (int argc, char **argv)
 
 	setlocale (LC_ALL, "");
 
-	if (bonobo_init (&argc, argv) == FALSE)
-		g_error ("Cannot init bonobo");
+#if 0
+	gnome_program_init ("test-ditem", "0.01", &libgnome_module_info,
+			    argc, argv, NULL);
+
+	g_main_iteration (FALSE);
+#else
+	if (!bonobo_init (&argc, argv))
+		g_error ("Can not bonobo_init");
+#endif
 
 	bonobo_activate ();
 

@@ -1,11 +1,11 @@
 <oaf_info>
 
-<oaf_server iid="OAFIID:Bonobo_Moniker_ditem_Factory" type="shlib" location="@MONIKER_LIBDIR@/libmoniker_ditem.so">
+<oaf_server iid="OAFIID:Bonobo_Moniker_ditem_Factory" type="exe" location="@MONIKER_BINDIR@/bonobo-moniker-ditem">
 	<oaf_attribute name="repo_ids" type="stringv">
 		<item value="IDL:GNOME/GenericFactory:1.0"/>
 	</oaf_attribute>
 
-	<oaf_attribute name="name" type="string" value="Ditemuration Moniker factory"/>
+	<oaf_attribute name="name" type="string" value="Desktop Item Moniker factory"/>
 </oaf_server>
 
 <oaf_server iid="OAFIID:Bonobo_Moniker_ditem" type="factory"
@@ -14,141 +14,10 @@
 		<item value="IDL:Bonobo/Moniker:1.0"/>
 		<item value="IDL:Bonobo/Unknown:1.0"/>
 	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="Ditemuration Moniker"/>
+	<oaf_attribute name="name" type="string" value="Desktop Item Moniker"/>
 	<oaf_attribute name="bonobo:moniker" type="stringv">
 		<item value="ditem:"/>
 	</oaf_attribute>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_short" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor short"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_ushort" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor ushort"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_long" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor long"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_ulong" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor ulong"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_float" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor float"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_double" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor double"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_string" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor string"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_boolean" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor boolean"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_enum" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor enum"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_struct" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor struct"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_sequence" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor sequence"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_default" type="factory"
-	location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor default"/>
-</oaf_server>
-
-<oaf_server iid="OAFIID:Bonobo_PropertyEditor_IDL:Bonobo/FileName:1.0" 
-	type="factory" location="OAFIID:Bonobo_Moniker_ditem_Factory">
-	<oaf_attribute name="repo_ids" type="stringv">
-		<item value="IDL:Bonobo/PropertyEditor:1.0"/>
-		<item value="IDL:Bonobo/Control:1.0"/>
-		<item value="IDL:Bonobo/Unknown:1.0"/>
-	</oaf_attribute>
-	<oaf_attribute name="name" type="string" value="PropertyEditor for file
-	names"/>
 </oaf_server>
 
 </oaf_info>

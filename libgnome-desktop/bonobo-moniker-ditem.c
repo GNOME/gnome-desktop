@@ -18,7 +18,7 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-moniker-simple.h>
 #include <bonobo/bonobo-exception.h>
-#include <bonobo/bonobo-shlib-factory.h>
+#include <bonobo/bonobo-generic-factory.h>
 #include <bonobo-config/bonobo-config-utils.h>
 
 #include "bonobo-config-ditem.h"
@@ -102,7 +102,7 @@ bonobo_moniker_ditem_factory (BonoboGenericFactory *this,
 	return NULL;
 }
 
-BONOBO_OAF_SHLIB_FACTORY ("OAFIID:Bonobo_Moniker_ditem_Factory",
-			  "bonobo desktop item moniker",
-			  bonobo_moniker_ditem_factory,
-			  NULL);
+BONOBO_OAF_FACTORY ("OAFIID:Bonobo_Moniker_ditem_Factory",
+		    "bonobo desktop item moniker", VERSION,
+		    bonobo_moniker_ditem_factory,
+		    NULL);

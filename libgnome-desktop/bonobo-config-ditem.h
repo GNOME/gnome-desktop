@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <bonobo-config/bonobo-config-database.h>
 #include <bonobo/bonobo-event-source.h>
+#include <dmalloc.h>
 
 G_BEGIN_DECLS
 
