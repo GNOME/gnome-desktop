@@ -1668,6 +1668,7 @@ ditem_execute (const GnomeDesktopItem *item,
 #ifdef HAVE_STARTUP_NOTIFICATION
 	SnLauncherContext *sn_context;
 	SnDisplay *sn_display;
+	const char *startup_class;
 #endif
 	
 	g_return_val_if_fail (item, -1);
@@ -1704,7 +1705,10 @@ ditem_execute (const GnomeDesktopItem *item,
 	 * to initiate, but why bother)
 	 */
 
-	if (gnome_desktop_item_get_boolean (item, "StartupNotify")) {
+	startup_class = gnome_desktop_item_get_string (item,
+						       "StartupWMClass");
+	if (startup_class ||
+	    gnome_desktop_item_get_boolean (item, "StartupNotify")) {
 		const char *name;
 		const char *icon;
 
@@ -1737,15 +1741,11 @@ ditem_execute (const GnomeDesktopItem *item,
 		if (icon != NULL)
 			sn_launcher_context_set_icon_name (sn_context, icon);
 		
-		sn_launcher_context_set_binary_name (sn_context,
-						     exec);
-
 		sn_launcher_context_set_workspace (sn_context, workspace);
 
-		sn_launcher_context_initiate (sn_context,
-					      g_get_prgname () ? g_get_prgname () : "unknown",
-					      exec,
-					      CurrentTime);
+		if (startup_class != NULL)
+			sn_launcher_context_set_wmclass (sn_context,
+							 startup_class);
 		
 		envp = make_spawn_environment_for_sn_context (sn_context, envp);
 		free_me = envp;		
@@ -1814,6 +1814,28 @@ ditem_execute (const GnomeDesktopItem *item,
 		real_argv = list_to_vector (vector_list);
 		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
 		g_slist_free (vector_list);
+
+#ifdef HAVE_STARTUP_NOTIFICATION
+		if (sn_context != NULL &&
+		    !sn_launcher_context_get_initiated (sn_context)) {
+
+			/* This means that we always use the first real_argv[0]
+			 * we select for the "binary name", but it's probably
+			 * OK to do that. Binary name isn't super-important
+			 * anyway, and we can't initiate twice, and we
+			 * must initiate prior to fork/exec.
+			 */
+			
+			sn_launcher_context_set_binary_name (sn_context,
+							     real_argv[0]);
+			
+			sn_launcher_context_initiate (sn_context,
+						      g_get_prgname () ? g_get_prgname () : "unknown",
+						      real_argv[0],
+						      CurrentTime);
+		}
+#endif
+		
 		
 		if ( ! g_spawn_async (working_dir,
 				      real_argv,
