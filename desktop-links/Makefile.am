@@ -47,13 +47,11 @@ Multimedia_DATA = \
 Utilities_DATA = \
 	Xemacs.desktop		\
 	gaspell.desktop   	\
-	sawtheme.desktop	\
 	FileRunner.desktop	\
 	TkSETI.desktop		\
 	rxvt.desktop		\
 	lynx.desktop		\
 	xbmbrowser.desktop	\
-	VIM.desktop		\
 	Vim.desktop		\
 	xcolsel.desktop		\
 	FileRunner.desktop
@@ -61,8 +59,6 @@ Utilities_DATA = \
 Applications_DATA = \
 	Emacs.desktop		\
 	Vim.desktop		\
-	WordPerfect.desktop	\
-	Bluefish.desktop	\
 	WordPerfect.desktop	\
 	Xemacs.desktop		\
 	XEphem.desktop		\
@@ -81,10 +77,7 @@ System_DATA = \
 	Vnterm.desktop
 
 Settings_DATA =	\
-	Imlib_config.desktop	\
-	sawrefresh.desktop	\
-	sawrestart.desktop	\
-	sawtheme.desktop
+	Imlib_config.desktop
 
 Internet_DATA = \
 	Netscape.desktop	\
