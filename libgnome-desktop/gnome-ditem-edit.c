@@ -658,6 +658,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 
         cs = gnome_desktop_item_get_icon (ditem);
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), cs);
+	g_free (cs);
 
         cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->doc_entry), cs ? cs : "");

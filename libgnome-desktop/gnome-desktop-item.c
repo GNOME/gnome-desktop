@@ -2638,9 +2638,11 @@ get_encoding_from_locale (const char *locale)
 static Encoding
 get_encoding (const char *uri, ReadBuf *rb)
 {
-	int c;
-	char buf[BUFSIZ];
-	gboolean old_kde = FALSE;
+	gboolean     old_kde = FALSE;
+	GnomeVFSURI *tmp_uri;
+	int          c;
+	char         buf [BUFSIZ];
+	char        *path;
 
 	gchar *contents = NULL;
 
@@ -2688,9 +2690,13 @@ get_encoding (const char *uri, ReadBuf *rb)
 	 * do right now is to just assume UTF-8 if the whole file
 	 * validates as utf8 I suppose */
 
-	if (!g_file_get_contents (gnome_vfs_uri_get_path (gnome_vfs_uri_new(uri)), &contents, NULL, NULL)) {
+	tmp_uri = gnome_vfs_uri_new (uri);
+	path = gnome_vfs_uri_get_path (tmp_uri);
+	g_free (tmp_uri);
+
+	if (!g_file_get_contents (path, &contents, NULL, NULL))
 		return ENCODING_LEGACY_MIXED;
-	}
+
 	if (contents == NULL) /* Ooooooops ! */
 		return ENCODING_LEGACY_MIXED;
 
