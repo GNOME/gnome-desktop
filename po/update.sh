@@ -6,5 +6,3 @@ xgettext --default-domain=gnome-core --directory=.. \
 && test ! -f gnome-core.po \
    || ( rm -f ./gnome-core.pot \
     && mv gnome-core.po ./gnome-core.pot )
-
-msgmerge no.po gnome-core.pot >no-new.po
