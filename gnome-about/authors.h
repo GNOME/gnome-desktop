@@ -24,7 +24,6 @@ static author authors[] = {
 	{ "Federico Mena-Quintero", "<federico@gimp.org>" },
 	{ "Jaka Mocnik", "<jaka.mocnik@kiss.uni-lj.si>" },
         { "Tomas Ögren", "<stric@ing.umu.se>" },
-        { "Tomas Ögren", "<stric@ing.umu.se>" },
 	{ "Ian Peters", "<itp@gnu.org" },
 	{ "The Squeaky Rubber Gnome", "<squeak>" },
 	{ "Owen Taylor", "<otaylor@redhat.com>" },
