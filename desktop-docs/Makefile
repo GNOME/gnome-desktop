@@ -15,7 +15,9 @@
 # must be extra_dist.  Also, in the future we should distribute the
 # HTML files so that people without DocBook can still use the docs.
 
-# This is ugly and quickly copied from the gtt approach
+# This is ugly and quickly copied from the gtt approach because I need
+# to get the help files properly installed and the Red Hat 5.1 freeze
+# is today (1998 May 4)
 
 
 SHELL = /bin/sh
@@ -257,12 +259,11 @@ maintainer-clean
 
 install-data-local:
 	$(mkinstalldirs) $(gnome_intro_helpdir)
-	$(mkinstalldirs) $(gnome_intro_helpdir)/gnome-intro
-	$(mkinstalldirs) $(gnome_intro_helpdir)/gnome-intro/pix
+	$(mkinstalldirs) $(gnome_intro_helpdir)/pix
 	$(INSTALL_DATA) $(srcdir)/topic.dat $(gnome_intro_helpdir)/topic.dat
 	$(INSTALL_DATA) $(srcdir)/gnome-intro.html $(gnome_intro_helpdir)/index.html
-	$(INSTALL_DATA) $(GNOME_INTRO_HTML_FILES) $(gnome_intro_helpdir)/gnome-intro
-	$(INSTALL_DATA) $(GNOME_INTRO_PICTURES) $(gnome_intro_helpdir)/gnome-intro/pix
+	$(INSTALL_DATA) $(GNOME_INTRO_HTML_FILES) $(gnome_intro_helpdir)
+	$(INSTALL_DATA) $(GNOME_INTRO_PICTURES) $(gnome_intro_helpdir)/pix
 
 manual-html: gnome-intro/book01.html
 	cp gnome-intro/book01.html gnome-intro.html
@@ -286,6 +287,7 @@ gnome-intro/book01.html: gnome-intro.sgml
 	db2html gnome-intro.sgml
 	mkdir gnome-intro/pix
 	cp pix/*.gif gnome-intro/pix
+	if [ -f gnome-intro
 #gnome-intro.ps: gnome-intro.dvi
 #	dvips gnome-intro.dvi
 #gnome-intro.rtf: gnome-intro.sgml
