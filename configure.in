@@ -85,13 +85,6 @@ AC_CHECK_FUNC(inet_aton,,[AC_CHECK_LIB(resolv,inet_aton,RES_LIBS="-lresolv")])
 AC_SUBST(RES_LIBS)
 LIBS="$oLIBS"
 
-dnl gnome-terminal
-UTIL_LIB=""
-AC_CHECK_FUNCS(forkpty, AC_DEFINE(HAVE_FORKPTY),
-[AC_CHECK_LIB(util, forkpty, [AC_DEFINE(HAVE_FORKPTY)
-                              UTIL_LIB='-lutil'])])
-AC_SUBST(UTIL_LIB)
-
 AC_CONFIG_SUBDIRS(gemvt)
 
 AC_OUTPUT([

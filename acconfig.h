@@ -12,5 +12,3 @@
 /* Name of default window manager, as string.  */
 #undef WINDOW_MANAGER
 
-/* Define if we have forkpty in libutil.  */
-#undef HAVE_FORKPTY
