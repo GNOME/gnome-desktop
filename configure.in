@@ -163,8 +163,6 @@ AC_ARG_WITH(window-manager,
 [  --with-window-manager=NAME
 			   Specify default window manager],[
     WINDOW_MANAGER="$with_window_manager"], [
-    dnl icewm is the default because it supports session management
-    dnl and other Gnome requirements.
     dnl gnome-wm is a shell script that starts the WM.
     WINDOW_MANAGER=gnome-wm])
 AC_SUBST(WINDOW_MANAGER)
@@ -247,3 +245,25 @@ pixmaps/Makefile
 gsm/Makefile
 smproxy/Makefile
 intl/Makefile])
+
+
+echo ""
+echo " *** IMPORTANT *** "
+echo ""
+echo "This is a development version of gnome-core."
+echo ""
+echo "While we try our best to keep it stable, it may not compile,"
+echo "or the applications may be incomplete/unstable"
+echo ""
+echo "Distributions should *NOT* ship a development package of this gnome-core."
+echo "Do not ship the headers and do not ship the CORBA IDL files in idl/."
+echo "Doing otherwise will do no favors to the community."
+echo ""
+echo " *** You may want to use the stable gnome-core 1.0 instead. ***"
+echo ""
+echo "If you are using this source tree from CVS, please run:"
+echo "	cvs update -r gnome-core-1-0"
+echo "now, or get the latest stable release at:"
+echo " 	ftp://ftp.gnome.org/pub/GNOME/sources/gnome-core/"
+echo ""
+
