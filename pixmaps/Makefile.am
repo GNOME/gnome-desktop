@@ -69,6 +69,8 @@ TILES     = \
 	tile-purple-down.png			\
 	tile-green-up.png			\
 	tile-green-down.png		        \
+	tile-blue-up.png			\
+	tile-blue-down.png		        \
 	tile-coral-up.png			\
 	tile-coral-down.png			\
 	tile-moon-up.png			\
