@@ -1,5 +1,6 @@
 SUBDIRS = intl po macros \
-	 gsm pixmaps desktop-links desktop-properties gemvt help-browser panel
+	 panel applets \
+	 gsm pixmaps desktop-links desktop-properties gemvt help-browser 
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
 @MAINT@include macros/macros.dep
