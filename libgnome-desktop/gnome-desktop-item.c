@@ -480,7 +480,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
         g_return_val_if_fail (file, NULL);
 
 #ifdef DI_DEBUG
-        //  g_print("Loading file %s\n", file);
+        /*  g_print("Loading file %s\n", file); */
 #endif
 
         if (stat(file, &sbuf) != 0)
