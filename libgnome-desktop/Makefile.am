@@ -33,6 +33,9 @@ libgnomeui_desktop_HEADERS = \
 libgnome_desktop_2_la_LIBADD = \
 	$(GNOME_DESKTOP_LIBS)
 
+libgnome_desktop_2_la_LDFLAGS = \
+	-version-info $(LT_VERSION)
+
 test_icon_theme_SOURCES = \
 	test-icon-theme.c
 
