@@ -28,7 +28,6 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
-#include <libgnomebase/gnome-defs.h>
 
 G_BEGIN_DECLS
 
