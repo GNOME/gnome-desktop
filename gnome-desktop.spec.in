@@ -16,7 +16,6 @@ URL: 		 http://www.gnome.org
 Prereq: 	 /sbin/install-info
 Requires:        gtk+ >= @GTK_REQUIRED@, gdk-pixbuf >= @GDK_PIXBUF_REQUIRED@
 Requires:        libglade >= @LIBGLADE_REQUIRED@, libxml
-Requires:        scrollkeeper >= @SCROLLKEEPER_REQUIRED@
 Requires:        gnome-libs >= @GNOME_LIBS_REQUIRED@
 Requires:        ORBit >= @ORBIT_REQUIRED@
 Requires:        control-center >= @CONTROL_CENTER_REQUIRED@
@@ -79,9 +78,13 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} bindir=$RPM_BUILD_ROOT%{_bindir} \
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
-%postun -p /sbin/ldconfig
+%postun
+/sbin/ldconfig
+if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
 %files
 %doc AUTHORS COPYING ChangeLog NEWS README
@@ -93,14 +96,14 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} bindir=$RPM_BUILD_ROOT%{_bindir} \
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_libdir}/*.so.*
-%{_datadir}/applets/*/*
-%{_datadir}/control-center/*/*
-%{_datadir}/gnome/*/*/*/*
+%{_datadir}/applets/*
+%{_datadir}/control-center/*
+%{_datadir}/gnome/*
 %{_datadir}/gnome-about/*
-%{_datadir}/gnome-terminal/*/*
-%{_datadir}/mc/*/*
-%{_datadir}/omf/*/*
-%{_datadir}/pixmaps/*/*
+%{_datadir}/gnome-terminal/*
+%{_datadir}/mc/*
+%{_datadir}/omf/*
+%{_datadir}/pixmaps/*
 
 %files devel
 %{_includedir}/*
@@ -111,6 +114,10 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} bindir=$RPM_BUILD_ROOT%{_bindir} \
 
 
 %changelog
+* Thu Apr 02 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
+- Fixed %files section to include some directories as well as their contents.
+- Updated to do the scrollkeeper ditty.
+
 * Wed Mar 28 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
 - integrate configure.in and gnome-core.spec.in for version numbers of
   dependancies.  This should help to slow bit-rot in this spec file.
