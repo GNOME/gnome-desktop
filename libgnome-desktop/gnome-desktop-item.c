@@ -824,19 +824,16 @@ gnome_desktop_item_unref (GnomeDesktopItem *item)
         g_free(item->location);
 
         if(item->name) {
-                g_hash_table_freeze(item->name);
                 g_hash_table_foreach_remove(item->name, ditem_free_key_value, NULL);
                 g_hash_table_destroy(item->name);
         }
 
         if(item->comment) {
-                g_hash_table_freeze(item->comment);
                 g_hash_table_foreach_remove(item->comment, ditem_free_key_value, NULL);
                 g_hash_table_destroy(item->comment);
         }
 
         if(item->other_attributes) {
-                g_hash_table_freeze(item->other_attributes);
                 g_hash_table_foreach_remove(item->other_attributes, ditem_free_key_value, NULL);
                 g_hash_table_destroy(item->other_attributes);
         }
@@ -1851,7 +1848,6 @@ void
 gnome_desktop_item_clear_name(GnomeDesktopItem *item)
 {
         if(item->name) {
-                g_hash_table_freeze(item->name);
                 g_hash_table_foreach_remove(item->name,
 					    ditem_free_key_value, NULL);
                 g_hash_table_destroy(item->name);
@@ -1989,7 +1985,6 @@ gnome_desktop_item_clear_comment(GnomeDesktopItem *item)
 {
 
         if(item->comment) {
-                g_hash_table_freeze(item->comment);
                 g_hash_table_foreach_remove(item->comment,
 					    ditem_free_key_value, NULL);
                 g_hash_table_destroy(item->comment);
