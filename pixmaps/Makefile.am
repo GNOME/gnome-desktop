@@ -19,6 +19,7 @@ BITMAPS     = \
 	gnome-die4.png				\
 	gnome-die5.png				\
 	gnome-die6.png				\
+	gnome-diskfree.png          \
 	gnome-ee.png				\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
@@ -30,6 +31,7 @@ BITMAPS     = \
 	gnome-gmenu.png				\
 	gnome-gmush.png				\
 	gnome-gnomine.png			\
+	gnome-graphics.png          \
 	gnome-gsame.png				\
 	gnome-help.png				\
 	gnome-html.png				\
