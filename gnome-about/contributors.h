@@ -54,7 +54,7 @@ static gchar *contributors[] = {
 	"Phil Dawes",
 	"Fatih Demir",
 	"Frederic Devernay",
-	"Maurer Dietmar",
+	"Dietmar Maurer",
 	"Feico W. Dillema",
 	"Radek Doulik",
 	"Tom Dyas",
