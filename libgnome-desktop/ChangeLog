@@ -1,5 +1,12 @@
 2002-08-06  Mark McLoughlin  <mark@skynet.ie>
 
+	* gnome-icon-loader.c:
+	(setup_gconf_handler): unref the GConfClient.
+	(remove_gconf_handler): ditto.
+	(gnome_icon_loader_finalize): use remove_gconf_handler.
+
+2002-08-06  Mark McLoughlin  <mark@skynet.ie>
+
 	* Makefile.am: define pixmaps and icons dir.
 
 	* gnome-icon-loader.c:

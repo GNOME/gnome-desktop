@@ -222,22 +222,27 @@ setup_gconf_handler (GnomeIconLoader *loader)
       g_free (priv->current_theme);
       priv->current_theme = theme;
     }
+
+  g_object_unref (client);
 }
 
 static void
 remove_gconf_handler (GnomeIconLoader *loader)
 {
   GnomeIconLoaderPrivate *priv;
+  GConfClient *client;
   
   priv = loader->priv;
 
   g_assert (priv->theme_changed_id != 0);
-  
-  gconf_client_notify_remove (gconf_client_get_default (),
-			      priv->theme_changed_id);
-  priv->theme_changed_id = 0;
-}
 
+  client = gconf_client_get_default ();
+  
+  gconf_client_notify_remove (client, priv->theme_changed_id);
+  priv->theme_changed_id = 0;
+
+  g_object_unref (client);
+}
 
 static void
 gnome_icon_loader_init (GnomeIconLoader *loader)
@@ -305,11 +310,7 @@ gnome_icon_loader_finalize (GObject *object)
   priv->search_path = NULL;
 
   if (priv->theme_changed_id)
-    {
-      gconf_client_notify_remove (gconf_client_get_default (),
-				  priv->theme_changed_id);
-      priv->theme_changed_id = 0;
-    }
+    remove_gconf_handler (loader);
 
   blow_themes (priv);
 
