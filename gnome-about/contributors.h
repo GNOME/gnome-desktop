@@ -108,6 +108,7 @@ static gchar *contributors[] = {
 	"Alan Aspuru Guzik",
 	"Telsa Gwynne",
 	"Fredrik Hallenberg",
+        "Mikael Hallendal",
 	"Lars Hamann",
 	"Michael Hanni",
 	"Raja R Harinath",
