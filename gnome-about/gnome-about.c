@@ -26,7 +26,6 @@ gint     scroll       (gpointer data);
 GtkWidget *area;
 GdkPixmap *pixmap=NULL;
 GdkFont *font=NULL;
-GdkFont *italicfont=NULL;
 gint y, y_to_wrap_at;
 gint howmuch=0;
 GdkPixbuf *im;
@@ -470,14 +469,9 @@ main (gint argc, gchar *argv[])
 
 	gtk_widget_realize (window);
 
-	/* Load the fonts */
-	font = gdk_fontset_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*-r-*");
-	italicfont = gdk_fontset_load("-adobe-helvetica-medium-o-normal--*-120-*-*-*-*-*-*,*-r-*");
-	if (!font)
-		font = gtk_style_get_font (window->style);
-
-	if (!italicfont)
-	        italicfont = gtk_style_get_font (window->style);
+	font = gtk_style_get_font (window->style);
+	if (!font) 
+	    font = gdk_fontset_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*-r-*");
 
 	y_to_wrap_at = -(sizeof(contributors)/sizeof(contributors[0]))*
 	                (font->ascent+font->descent);
