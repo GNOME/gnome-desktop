@@ -61,22 +61,22 @@ EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(Directory_files) $(Order_files) $(Root_DATA)
 
 install-data-local:
-	$(mkinstalldirs) $(Applicationsdir)
-	$(mkinstalldirs) $(Graphicsdir)
-	$(mkinstalldirs) $(Systemdir)
-	$(mkinstalldirs) $(Utilitiesdir)
-	$(mkinstalldirs) $(Audiodir)
-	$(mkinstalldirs) $(Networkdir)
-	$(mkinstalldirs) $(Gamesdir)
-	$(mkinstalldirs) $(Administrationdir)
-	$(mkinstalldirs) $(Productivitydir)
+	$(mkinstalldirs) $(DESTDIR)$(Applicationsdir)
+	$(mkinstalldirs) $(DESTDIR)$(Graphicsdir)
+	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
+	$(mkinstalldirs) $(DESTDIR)$(Utilitiesdir)
+	$(mkinstalldirs) $(DESTDIR)$(Audiodir)
+	$(mkinstalldirs) $(DESTDIR)$(Networkdir)
+	$(mkinstalldirs) $(DESTDIR)$(Gamesdir)
+	$(mkinstalldirs) $(DESTDIR)$(Administrationdir)
+	$(mkinstalldirs) $(DESTDIR)$(Productivitydir)
 	$(INSTALL_DATA) $(srcdir)/Root.order $(Rootdir)/.order
-	$(INSTALL_DATA) $(srcdir)/Applications.directory $(Applicationsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(Graphicsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/System.directory $(Systemdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Utilities.directory $(Utilitiesdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Audio.directory $(Audiodir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Network.directory $(Networkdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Games.directory $(Gamesdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Administration.directory $(Administrationdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/Productivity.directory $(Productivitydir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Applications.directory $(DESTDIR)$(Applicationsdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Utilities.directory $(DESTDIR)$(Utilitiesdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Audio.directory $(DESTDIR)$(Audiodir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Network.directory $(DESTDIR)$(Networkdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Administration.directory $(DESTDIR)$(Administrationdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Productivity.directory $(DESTDIR)$(Productivitydir)/.directory
