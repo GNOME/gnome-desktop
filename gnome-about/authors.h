@@ -19,6 +19,7 @@ static author authors[] = {
 	{ "Tim Gerla", "<timg@means.net>" },
 	{ "Bertrand Guiheneuf", "<Bertrand.Guiheneuf@aful.org>" },
 	{ "James Henstridge", "<james@daa.com.au>" },
+	{ "Richard Hult", "<d4hult@dtek.chalmers.se>" },
 	{ "Miguel de Icaza", "<miguel@gnu.org>" },
 	{ "Tuomas Kuosmanen", "<tigert@gimp.org>" },
 	{ "Birger Langkjer", "<birger.langkjer@image.dk>" },
