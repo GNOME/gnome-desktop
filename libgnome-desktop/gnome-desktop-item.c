@@ -945,6 +945,23 @@ gnome_desktop_item_get_command (const GnomeDesktopItem *item)
 }
 
 /**
+ * gnome_desktop_item_get_command:
+ * @item: A desktop item
+ *
+ * Returns: The TryExec field associated with the specified 'item'.
+ */
+gchar *
+gnome_desktop_item_get_tryexec (const GnomeDesktopItem *item)
+{
+        g_return_val_if_fail(item, NULL);
+
+	if (item->entry->TryExec [0] == '\0')
+		return NULL;
+	else
+		return g_strdup (item->entry->TryExec);
+}
+
+/**
  * gnome_desktop_item_get_icon_path:
  * @item: A desktop item
  *

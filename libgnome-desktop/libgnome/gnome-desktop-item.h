@@ -79,6 +79,7 @@ GnomeDesktopItemFlags   gnome_desktop_item_get_flags         (const GnomeDesktop
 char *                  gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
 GNOME_Desktop_EntryType gnome_desktop_item_get_type          (const GnomeDesktopItem     *item);
 gchar *                 gnome_desktop_item_get_command       (const GnomeDesktopItem     *item);
+gchar *                 gnome_desktop_item_get_tryexec       (const GnomeDesktopItem     *item);
 gchar *                 gnome_desktop_item_get_icon_path     (const GnomeDesktopItem     *item);
 
 /* Note: you want to search each language in the user's search path */
