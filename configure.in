@@ -24,6 +24,8 @@ AM_PROG_LEX
 AC_PROG_YACC
 
 GNOME_X_CHECKS
+GNOME_GHTTP_CHECK
+
 
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
@@ -144,6 +146,10 @@ AC_SUBST(WINDOW_MANAGER)
 
 dnl Check for libgtop
 GNOME_INIT_LIBGTOP
+
+dnl Check for ghttp library
+AM_CONDITIONAL(HAVE_LIBGHTTP, test -n "$GHTTP_LIB")
+AC_SUBST(GHTTP_LIB)
 
 dnl panel/cdplayer
 AC_CANONICAL_HOST
