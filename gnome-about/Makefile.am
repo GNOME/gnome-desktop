@@ -1,4 +1,5 @@
 INCLUDES =		 				\
+	$(WARN_CFLAGS)					\
 	$(GNOME_ABOUT_CFLAGS)				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale\""	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""
