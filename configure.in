@@ -65,8 +65,10 @@ if $PKG_CONFIG --atleast-version $STARTUP_NOTIFICATION_REQUIRED libstartup-notif
 else
   echo "Building without libstartup-notification"
   with_startup_notification=no
+  STARTUP_NOTIFICATION_PACKAGE=
 fi
 
+AC_SUBST(STARTUP_NOTIFICATION_PACKAGE)
 
 dnl pkg-config dependency checks
 
