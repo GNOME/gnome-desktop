@@ -26,6 +26,7 @@ pixmap_DATA =					\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
 	gnome-folder.png			\
+	gnome-foot-large.png			\
 	gnome-gemvt.png				\
 	gnome-gegl.png				\
 	gnome-gegl2.png				\
