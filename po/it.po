@@ -6,545 +6,858 @@ msgstr ""
 "Xgettext-Options: --default-domain=gnome-core --directory=.././. --add-comments --keyword=_ --keyword=N_ --files-from=../././po/POTFILES.in\n"
 "Files: panel/panel.c panel/batmon/batmon.c panel/launcher/launcher.c panel/mailcheck/mailcheck.c panel/menu/main.c desktop-properties/property-background.c desktop-properties/property-screensaver.cc desktop-properties/xlockmore.cc desktop-properties/property-keyboard.c desktop-properties/property-mouse.c\n"
 
-#: applets/batmon/batmon.c:96
-msgid "Can't open /proc/apm; can't get data."
-msgstr "Impossibile aprire /proc/apm; impossibile leggere dati."
+#: applets/gen_util/clock.c:98
+msgid ""
+"%a\n"
+"%b %d"
+msgstr ""
+"%a\n"
+"%b %d"
 
-#: applets/batmon/batmon.c:102
-msgid "Something wrong with /proc/apm; can't get data."
-msgstr "Qualcosa non va in /proc/apm; impossibile leggere dati."
+#. This format string is used, to display the actual day,
+#. when showing a horizontal panel.
+#: applets/gen_util/clock.c:103
+msgid "%a %b %d"
+msgstr "%a %b %d"
 
-#: applets/batmon/batmon.c:150
-msgid "There is no battery?!?"
-msgstr "Non c'è la batteria?!?"
+#. This format string is used, to display the actual time.
+#: applets/gen_util/clock.c:110
+msgid "%I:%M %p"
+msgstr "%I:%M %p"
 
-#: applets/batmon/batmon.c:153
-msgid "High and charging."
-msgstr "Alta in carica."
+#: applets/gen_util/clock.c:113
+msgid "%H:%M"
+msgstr "%H:%M"
 
-#: applets/batmon/batmon.c:156
-msgid "High."
-msgstr "Alta."
-
-#: applets/batmon/batmon.c:159
-msgid "Low and charging."
-msgstr "Bassa in carica."
-
-#: applets/batmon/batmon.c:162
-msgid "Low."
-msgstr "Bassa."
-
-#: applets/batmon/batmon.c:165
-msgid "Critical and charging."
-msgstr "Critica in carica."
-
-#: applets/batmon/batmon.c:168
-msgid "Critical!!"
-msgstr "Critica!!"
-
-#: applets/batmon/batmon.c:171
-msgid "Charging."
-msgstr "In carica."
-
-#: applets/batmon/batmon.c:179
-msgid "%d minutes of battery"
-msgstr "%d minuti di carica"
-
-#: applets/batmon/batmon.c:181
-msgid "More than 100,000,000 minutes of battery life?!?"
-msgstr "Più di 100.000.000 minuti di carica?!?"
-
-#. Begin definition of window
-#: applets/batmon/batmon.c:258
-msgid "APM Stats"
-msgstr "Statistiche APM"
-
-#: applets/batmon/batmon.c:274
-msgid "Linux APM Driver Version:"
-msgstr "Versione Driver APM Linux:"
-
-#: applets/batmon/batmon.c:286
-msgid "APM BIOS Version:"
-msgstr "Versione BIOS APM:"
-
-#: applets/batmon/batmon.c:303
-msgid "Battery Status:"
-msgstr "Stato batteria:"
-
-#: applets/batmon/batmon.c:327 applets/mailcheck/mailcheck.c:462 help-browser/window.c:135 panel/launcher.c:329
-msgid "Close"
-msgstr "Chiudi"
-
-#: applets/mailcheck/mailcheck.c:226
-msgid "You have new mail."
-msgstr "Hai nuova posta."
-
-#: applets/mailcheck/mailcheck.c:228
-msgid "You have mail."
-msgstr "Hai posta."
-
-#: applets/mailcheck/mailcheck.c:230
-msgid "No mail."
-msgstr "Niente posta."
-
-#: applets/mailcheck/mailcheck.c:421
-msgid "Notification"
-msgstr "Notifica"
-
-#: applets/mailcheck/mailcheck.c:438
-msgid "Select animation"
-msgstr "Seleziona animazione"
-
-#: applets/mailcheck/mailcheck.c:457
-msgid "Mail check properties"
-msgstr "Proprietà controllo mail"
-
-#: applets/mailcheck/mailcheck.c:461 panel/launcher.c:338
-msgid "Apply"
-msgstr "Applica"
-
-#: applets/mailcheck/mailcheck.c:557
-msgid "Text only"
-msgstr "Solo testo"
-
-#: applets/mailcheck/mailcheck.c:573
+#: applets/gen_util/clock.c:254 applets/gen_util/mailcheck.c:588 applets/gen_util/printer.c:283
 msgid "Properties"
 msgstr "Proprietà"
 
-#: panel/panel.c:421
+#: applets/gen_util/clock.c:307
+msgid "Clock properties"
+msgstr "Proprietà dell'orologio"
+
+#: applets/gen_util/clock.c:359
+msgid "Clock"
+msgstr "Orologio"
+
+#: applets/gen_util/mailcheck.c:229
+msgid "You have new mail."
+msgstr "Hai nuova posta."
+
+#: applets/gen_util/mailcheck.c:231
+msgid "You have mail."
+msgstr "Hai posta."
+
+#: applets/gen_util/mailcheck.c:233
+msgid "No mail."
+msgstr "Niente posta."
+
+#: applets/gen_util/mailcheck.c:447
+msgid "Notification"
+msgstr "Notifica"
+
+#: applets/gen_util/mailcheck.c:464
+msgid "Select animation"
+msgstr "Seleziona animazione"
+
+#: applets/gen_util/mailcheck.c:487
+msgid "Mail check properties"
+msgstr "Proprietà controllo mail"
+
+#: applets/gen_util/mailcheck.c:492
+msgid "Mail check"
+msgstr "Controllo mail"
+
+#: applets/gen_util/mailcheck.c:528
+msgid "Mail check Applet"
+msgstr "Applet per il controllo mail"
+
+#: applets/bussign/bussign.c:226 applets/gen_util/mailcheck.c:529
+msgid "(c) 1998 the Free Software Foundation"
+msgstr "(c) 1998 the Free Software Foundation"
+
+#: applets/gen_util/mailcheck.c:531
+msgid "Mail check notifies you when new mail is on your mailbox"
+msgstr "Controllo mail ti notifica quando arriva nuova posta nella tua casella"
+
+#: applets/gen_util/mailcheck.c:577
+msgid "Text only"
+msgstr "Solo testo"
+
+#: applets/bussign/bussign.c:86 applets/fish/fish.c:313 applets/gen_util/mailcheck.c:594 applets/netload/netload.c:337 panel/menu.c:585
+msgid "About..."
+msgstr "Informazioni su..."
+
+#: applets/gen_util/main.c:31
+msgid "Start in clock mode"
+msgstr "Inizia in modalità orologio"
+
+#: applets/gen_util/main.c:32
+msgid "Start in mailcheck mode"
+msgstr "Inizia in modalità controllo posta"
+
+#: applets/gen_util/main.c:33
+msgid "Start in printer mode"
+msgstr "Inizia in modalità stampante"
+
+#: applets/gen_util/printer.c:221
+msgid "Printer properties"
+msgstr "Proprietà stampante"
+
+#: applets/gen_util/printer.c:229
+msgid "Printer name:"
+msgstr "Nome stampante:"
+
+#: applets/gen_util/printer.c:233
+msgid "Print command:"
+msgstr "Comando di stampa:"
+
+#: applets/gen_util/printer.c:239
+msgid "Printer"
+msgstr "Stampante"
+
+#: applets/batmon/batmon.c:93
+msgid "Can't open /proc/apm; can't get data."
+msgstr "Impossibile aprire /proc/apm; impossibile leggere dati."
+
+#: applets/batmon/batmon.c:99
+msgid "Something wrong with /proc/apm; can't get data."
+msgstr "Qualcosa non va in /proc/apm; impossibile leggere dati."
+
+#: applets/batmon/batmon.c:147
+msgid "There is no battery?!?"
+msgstr "Non c'è la batteria?!?"
+
+#: applets/batmon/batmon.c:150
+msgid "High and charging."
+msgstr "Alta in carica."
+
+#: applets/batmon/batmon.c:153
+msgid "High."
+msgstr "Alta."
+
+#: applets/batmon/batmon.c:156
+msgid "Low and charging."
+msgstr "Bassa in carica."
+
+#: applets/batmon/batmon.c:159
+msgid "Low."
+msgstr "Bassa."
+
+#: applets/batmon/batmon.c:162
+msgid "Critical and charging."
+msgstr "Critica in carica."
+
+#: applets/batmon/batmon.c:165
+msgid "Critical!!"
+msgstr "Critica!!"
+
+#: applets/batmon/batmon.c:168
+msgid "Charging."
+msgstr "In carica."
+
+#: applets/batmon/batmon.c:176
+msgid "%d minutes of battery"
+msgstr "%d minuti di carica"
+
+#. would have to be an error
+#: applets/batmon/batmon.c:178
+msgid "More than 100,000,000 minutes of battery life?!?"
+msgstr "Più di 100.000.000 minuti di carica?!?"
+
+#: applets/batmon/batmon.c:255
+msgid "APM Stats"
+msgstr "Statistiche APM"
+
+#: applets/batmon/batmon.c:271
+msgid "Linux APM Driver Version:"
+msgstr "Versione Driver APM Linux:"
+
+#: applets/batmon/batmon.c:283
+msgid "APM BIOS Version:"
+msgstr "Versione BIOS APM:"
+
+#: applets/batmon/batmon.c:300
+msgid "Battery Status:"
+msgstr "Stato batteria:"
+
+#: applets/batmon/batmon.c:324 help-browser/window.c:140
+msgid "Close"
+msgstr "Chiudi"
+
+#: applets/bussign/bussign.c:102
+msgid "Refresh Image"
+msgstr "Aggiorna immagine"
+
+#: applets/bussign/bussign.c:225
+msgid "The Bus Sign Applet"
+msgstr "Applet Fermata del bus"
+
+#: applets/bussign/bussign.c:228
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
+"\n"
+"Questa applet è una totale perdita di tempo. Torna a lavorare!\n"
+"\n"
+"Per riempire il cartello della fermata del bus vai a:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+
+#: applets/fish/fish.c:65 applets/fish/fish.c:240
+msgid "%s the Fish"
+msgstr "Il pesce %s"
+
+#: applets/fish/fish.c:66
+msgid "%s the GNOME Fish Says:"
+msgstr "Il pesce % dice:"
+
+#: applets/fish/fish.c:106
+msgid "GNOME Fish Properties"
+msgstr "Proprietà del Pesce GNOME"
+
+#: applets/fish/fish.c:111
+msgid "Your GNOME Fish's Name:"
+msgstr "Il nome del tuo pesce GNOME:"
+
+#: applets/fish/fish.c:124 panel/launcher.c:329
+msgid "Name"
+msgstr "Nome"
+
+#: applets/fish/fish.c:243
+msgid "(with minor help from George)"
+msgstr "(con un po' di aiuto da George)"
+
+#: applets/fish/fish.c:246
+msgid "The GNOME Fish Applet"
+msgstr "L'applet del pesce GNOME"
+
+#: applets/fish/fish.c:249
+msgid "This applet has no use what-so-ever. It only takes up disk space and compilation time, and if loaded it also takes up precious panel space and memory. If anyone is found using this applet, he should be promptly sent for a psychiatric evaluation."
+msgstr "Questo applet non ha alcuna utilità. E' solo uno spreco di spazio su disco e di tempo di compilazione e se caricata occupa spazio sul pannello e memoria. Se qualcuno viene sorpreso a utilizzare questa applet, deve essere immediatamente ricoverato in una clinica psichiatrica."
+
+#: applets/cpuload/cpuload.c:201 applets/fish/fish.c:297 applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr "Impossibile creare applet!\n"
+
+#: applets/cpuload/cpuload.c:218 applets/fish/fish.c:320 applets/netload/netload.c:343 panel/main.c:413
+msgid "Properties..."
+msgstr "Proprietà..."
+
+#: applets/cpuload/properties.c:59 applets/netload/properties.c:61
+msgid "Can't allocate memory for color\n"
+msgstr "Impossibile allocare memoria per il colore\n"
+
+#: applets/cpuload/properties.c:115
+msgid "User Load"
+msgstr "Carico utente"
+
+#: applets/cpuload/properties.c:120
+msgid "System Load"
+msgstr "Carico di sistema"
+
+#: applets/cpuload/properties.c:125 applets/netload/properties.c:129
+msgid "Applet Height"
+msgstr "Altezza dell'applet"
+
+#: applets/cpuload/properties.c:131 applets/netload/properties.c:135
+msgid "Width"
+msgstr "Larghezza"
+
+#: applets/cpuload/properties.c:146 applets/netload/properties.c:150
+msgid "Update Frequency"
+msgstr "Frequenza di aggiornamento"
+
+#: applets/cpuload/properties.c:197
+msgid "CPULoad Settings"
+msgstr "Opzioni per CPULoad"
+
+#: applets/cpuload/properties.c:200 applets/netload/properties.c:252
+msgid "General"
+msgstr "Generiche"
+
+#: applets/netload/netload.c:260
+msgid "Netload Error"
+msgstr "Errore Netload"
+
+#: applets/netload/netload.c:265
+msgid "An error occured in the Netload Applet:"
+msgstr "Un errore è avvenuto nell'applet Netload"
+
+#: applets/netload/netload.c:294
+msgid "The GNOME Network Load Applet"
+msgstr "L'applet GNOME di carico di rete"
+
+#: applets/netload/netload.c:297
+msgid "This applet is released under the terms and conditions of the GNU Public Licence.This applet shows the load on a network device. It requires the /proc/net/ip_acct interface to be present and set up correctly for the device."
+msgstr "Questa applet è rilasciata sotto i termini della licenza GNU. L'applet mostra il carico su un device di rete. E' necessario che l'interfaccia /proc/net/ip_acct sia abilitata e configurata correttamente per il device."
+
+#: applets/netload/properties.c:119
+msgid "Network Traffic"
+msgstr "Traffico di rete"
+
+#: applets/netload/properties.c:124
+msgid "Traffic bars"
+msgstr "Barre di traffico"
+
+#: applets/netload/properties.c:193
+msgid "Device name (like ppp0 or eth0)"
+msgstr "Nome device (tipo ppp0 o eth0)"
+
+#: applets/netload/properties.c:201
+msgid "Vertical spacing of bars (in kilobytes)"
+msgstr "Distanza verticale tra le barre (in k)"
+
+#: applets/netload/properties.c:243
+msgid "properties.c: gnome_property_box_new() failed.\n"
+msgstr "properties.c: gnome_property_box_new() fallita.\n"
+
+#: applets/netload/properties.c:249
+msgid "Network Load Settings"
+msgstr "Opzioni Carico di Rete"
+
+#: applets/netload/properties.c:258
+msgid "Device"
+msgstr "Device"
+
+#: panel/panel.c:390
+msgid "Really log out?"
+msgstr "Vuoi davvero uscire ?"
+
+#: panel/panel.c:398
+msgid "Ask next time"
+msgstr "Chiedi anche la prossima volta"
+
+#: panel/panel.c:538
 msgid "Remove from panel"
 msgstr "Rimuovi dal pannello"
 
-#: panel/panel.c:428
+#: panel/panel.c:546
 msgid "Move applet"
 msgstr "Muovi applet"
 
-#: panel/panel.c:821
+#: panel/panel.c:1001
 msgid "This panel properties..."
 msgstr "Proprietà pannello..."
 
-#: panel/menu.c:426 panel/panel.c:828
+#: panel/menu.c:576 panel/panel.c:1008
 msgid "Global properties..."
 msgstr "Proprietà globali..."
 
-#: panel/panel.c:835
+#: panel/panel.c:1015
 msgid "Add main menu applet"
 msgstr "Aggiungi applet del menu principale"
 
-#: panel/logout.c:47 panel/menu.c:468 panel/panel.c:853
+#: panel/logout.c:24 panel/menu.c:630 panel/panel.c:1033
 msgid "Log out"
 msgstr "Esci"
 
-#: panel/menu.c:388
+#: panel/menu.c:465
+msgid "Create swallow applet"
+msgstr "Crea applet inserita"
+
+#: panel/menu.c:474
+msgid "Title of application to swallow"
+msgstr "Titolo dell'applicazione da inserire"
+
+#: panel/menu.c:527
 msgid "Add to panel"
 msgstr "Aggiungi al pannello"
 
-#: panel/menu.c:393
+#: panel/menu.c:532
 msgid "Add applet"
 msgstr "Aggiungi applet"
 
-#: panel/menu.c:401
+#: panel/menu.c:540
 msgid "Add main menu"
 msgstr "Aggiungi menu principale"
 
-#: panel/menu.c:409
+#: panel/menu.c:547
+msgid "Add log out button"
+msgstr "Aggiungi bottone di uscita"
+
+#: panel/menu.c:555
 msgid "Add drawer"
 msgstr "Aggiungi cassetto"
 
-#: panel/menu.c:416
+#: panel/menu.c:564
 msgid "Add swallowed app"
 msgstr "Aggiungi applicazione inglobata"
 
-#: panel/menu.c:456
+#: panel/menu.c:615
 msgid "Panel"
 msgstr "Pannello"
 
-#: panel/menu.c:463
+#: panel/menu.c:622
 msgid "Lock screen"
 msgstr "Blocca schermo"
 
-#. Position frame
-#: panel/panel_config.c:101
+#: panel/panel_config.c:112
 msgid "Position"
 msgstr "Posizione"
 
 #. Top Position
-#: panel/panel_config.c:111
+#: panel/panel_config.c:122
 msgid "Top"
 msgstr "Alto"
 
-#: panel/panel_config.c:123
+#: panel/panel_config.c:133
 msgid "Bottom"
 msgstr "Basso"
 
-#: panel/panel_config.c:135
+#: panel/panel_config.c:144
 msgid "Left"
 msgstr "Sinistra"
 
-#: panel/panel_config.c:147
+#: panel/panel_config.c:155
 msgid "Right"
 msgstr "Destra"
 
-#: panel/panel_config.c:157
+#. Auto-hide/stayput frame
+#: panel/panel_config.c:164
 msgid "Minimize Options"
 msgstr "Opzioni di riduzione"
 
 #. Stay Put
-#: panel/panel_config.c:167
+#: panel/panel_config.c:174
 msgid "Explicitly Hide"
 msgstr "Nascondi manualmente"
 
-#: panel/panel_config.c:179
+#: panel/panel_config.c:185
 msgid "Auto Hide"
 msgstr "Nascondi automaticamente"
 
-#: panel/panel_config.c:214
+#: panel/panel_config.c:239
 msgid "Image file"
 msgstr "File d'immagine"
 
-#: panel/panel_config.c:219
+#: panel/panel_config.c:247
 msgid "Browse"
 msgstr "Sfoglia"
 
-#: panel/panel_config.c:249
+#: panel/panel_config.c:257
+msgid "Enable Background Image"
+msgstr "Abilita immagine di sfondo"
+
+#: panel/panel_config.c:295
 msgid "Panel Configuration"
 msgstr "Configurazione del Pannello"
 
-#: panel/panel_config.c:255
+#: panel/panel_config.c:303
 msgid "Orientation"
 msgstr "Orientamento"
 
-#: panel/panel_config.c:260
+#: panel/panel_config.c:310
 msgid "Background image"
 msgstr "Immagine di sfondo"
 
+#. Animation disable
+#: panel/panel_config_global.c:127
+msgid "Disable animations"
+msgstr "Disabilita animazioni"
+
 #. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:113
+#: panel/panel_config_global.c:135
 msgid "Auto-Hide Animation Speed"
 msgstr "Velocità di animazione in Nascondi Automatico"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:120
+#: panel/panel_config_global.c:144
 msgid "Explicit-Hide Animation Speed"
 msgstr "Velocità di animazione in Nascondi Manuale"
 
-#: panel/panel_config_global.c:127
+#. DrawerHide Animation step_size scale frame
+#: panel/panel_config_global.c:153
+msgid "Drawer Animation Speed"
+msgstr "Velocità di animazione dei cassetti"
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:162
 msgid "Auto-Hide Minimize Delay (ms)"
 msgstr "Ritardo in Nascondi Automatico (ms)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:134
+#: panel/panel_config_global.c:169
 msgid "Auto-Hide Minimized Size (pixels)"
 msgstr "Dimensione Nascondi Automatico (pixel)"
 
 #. Tooltips frame
-#: panel/panel_config_global.c:156
+#: panel/panel_config_global.c:211
 msgid "Icon Tooltips"
 msgstr "Tooltip icone"
 
 #. Tooltips enable
-#: panel/panel_config_global.c:167
+#: panel/panel_config_global.c:222
 msgid "Tooltips enabled"
 msgstr "Tooltip abilitate"
 
-#: panel/panel_config_global.c:178
+#. Menu frame
+#: panel/panel_config_global.c:232
 msgid "Menus"
 msgstr "Menu"
 
 #. Small Icons
-#: panel/panel_config_global.c:189
+#: panel/panel_config_global.c:243
 msgid "Show small icons"
 msgstr "Mostra icone piccole"
 
-#: panel/panel_config_global.c:232
+#. Movement frame
+#: panel/panel_config_global.c:253
+msgid "Movement"
+msgstr "Movimento"
+
+#. Switched
+#: panel/panel_config_global.c:264
+msgid "Switched movement"
+msgstr "Movimento intelligente"
+
+#: panel/panel_config_global.c:276
+msgid "Free movement (doesn't disturb other applets)"
+msgstr "Movimento libero (non sposta le altre applet)"
+
+#. Logout frame
+#: panel/panel_config_global.c:286
+msgid "Log Out"
+msgstr "Esci"
+
+#. Prompt before log out
+#: panel/panel_config_global.c:297
+msgid "Prompt before logout"
+msgstr "Conferma prima di uscire"
+
+#: panel/panel_config_global.c:329
 msgid "Global Panel Configuration"
 msgstr "Configurazione Globale del Pannello"
 
-#: panel/panel_config_global.c:238
+#: panel/panel_config_global.c:335
 msgid "Animation settings"
 msgstr "Opzioni di Animazione"
 
-#: help-browser/toc-man.c:24 help-browser/toc2-man.c:27 panel/panel_config_global.c:243
+#: help-browser/toc-man.c:24 help-browser/toc2-man.c:27 panel/panel_config_global.c:340
 msgid "Miscellaneous"
 msgstr "Varie"
 
-#: panel/launcher.c:253
+#: panel/launcher.c:268
 msgid "App"
 msgstr "App"
 
-#: panel/launcher.c:301
+#: panel/launcher.c:320
 msgid "Launcher properties"
 msgstr "Proprietà esecutore"
 
-#: panel/launcher.c:312
-msgid "Name"
-msgstr "Nome"
-
-#: panel/launcher.c:313
+#: panel/launcher.c:330
 msgid "Comment"
 msgstr "Commento"
 
-#: panel/launcher.c:314
+#: panel/launcher.c:332
 msgid "Execute"
 msgstr "Esegui"
 
-#: panel/launcher.c:315
+#: panel/launcher.c:334
 msgid "Icon"
 msgstr "Icona"
 
-#: panel/launcher.c:316
+#: panel/launcher.c:335
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: panel/launcher.c:319
+#: panel/launcher.c:338
 msgid "Run inside terminal"
 msgstr "Esegui in un terminale"
 
-#: panel/launcher.c:486
-msgid "Properties ..."
-msgstr "Proprietà..."
-
-#: panel/main.c:83
+#: panel/main.c:102
 msgid "ID"
 msgstr "ID"
 
-#: panel/main.c:83
+#: panel/main.c:102
 msgid "Discard session"
 msgstr "Tralascia sessione"
 
-#: desktop-properties/property-background.c:471
+#: desktop-properties/property-background.c:494
 msgid "Color"
 msgstr "Colore"
 
-#: desktop-properties/property-background.c:495
+#: desktop-properties/property-background.c:518
 msgid "Flat"
 msgstr "Uniforme"
 
-#: desktop-properties/property-background.c:501
+#: desktop-properties/property-background.c:524
 msgid "Gradient"
 msgstr "Sfumato"
 
-#: desktop-properties/property-background.c:516
+#: desktop-properties/property-background.c:539
 msgid "Vertical"
 msgstr "Verticale"
 
-#: desktop-properties/property-background.c:522
+#: desktop-properties/property-background.c:545
 msgid "Horizontal"
 msgstr "Orizzontale"
 
-#: desktop-properties/property-background.c:656
+#: desktop-properties/property-background.c:690
 msgid "Wallpaper Selection"
 msgstr "Selezione immagine sfondo"
 
-#: desktop-properties/property-background.c:695
+#: desktop-properties/property-background.c:729
 msgid "Wallpaper"
 msgstr "Immagine sfondo"
 
-#: desktop-properties/property-background.c:698
+#: desktop-properties/property-background.c:732
 msgid " Browse... "
 msgstr "Sfoglia..."
 
-#: desktop-properties/property-background.c:703
+#: desktop-properties/property-background.c:737
 msgid "none"
 msgstr "nessuna"
 
-#: desktop-properties/property-background.c:747
+#: desktop-properties/property-background.c:781
 msgid "Scaled"
 msgstr "Ridimensiona"
 
-#: desktop-properties/property-background.c:756
-msgid "Scaled (keep ascpect)"
-msgstr "Ridimensiona (mantieni rapporto)"
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr "Ridimensionata (mantieni aspetto)"
 
-#: desktop-properties/property-background.c:767
+#: desktop-properties/property-background.c:801
 msgid "Centered"
 msgstr "Centrata"
 
-#: desktop-properties/property-background.c:778
+#: desktop-properties/property-background.c:812
 msgid "Tiled"
 msgstr "Affiancata"
 
-#: desktop-properties/property-background.c:1019
+#: desktop-properties/property-background.c:1006
 msgid " Background "
 msgstr " Sfondo "
 
-#: desktop-properties/property-screensaver.cc:143
-msgid "Settings"
-msgstr "Opzioni"
-
-#: desktop-properties/property-screensaver.cc:145
-msgid "Wait"
-msgstr "Attendi"
-
-#: desktop-properties/property-screensaver.cc:146
-msgid "Min"
-msgstr "Min"
-
-#: desktop-properties/property-screensaver.cc:158
-msgid "Requires Password"
-msgstr "Richiede password"
-
-#: desktop-properties/property-screensaver.cc:167
-msgid "Use DPMS"
-msgstr "Usa DPMS"
-
-#: desktop-properties/property-screensaver.cc:176
-msgid "Priority"
-msgstr "Priorità"
-
-#: desktop-properties/property-screensaver.cc:184
-msgid "Normal"
-msgstr "Normale"
-
-#: desktop-properties/property-screensaver.cc:185
-msgid "Low"
-msgstr "Bassa"
-
-#: desktop-properties/property-screensaver.cc:231
-msgid "Screensavers"
-msgstr "Salva schermo"
-
-#: desktop-properties/property-screensaver.cc:243
-msgid "Setup..."
-msgstr "Configura..."
-
-#: desktop-properties/property-screensaver.cc:247
-msgid "Test"
-msgstr "Prova"
-
-#: desktop-properties/property-screensaver.cc:348
-msgid " Screensaver "
-msgstr " Salva schermo "
-
-#: desktop-properties/xlockmore.cc:158
-msgid "XLockMore Properties"
-msgstr "Proprietà XLockMore"
-
-#: desktop-properties/xlockmore.cc:176
-msgid "  OK  "
-msgstr "  OK  "
-
-#: desktop-properties/xlockmore.cc:177
-msgid " Apply "
-msgstr " Applica "
-
-#: desktop-properties/xlockmore.cc:178
-msgid " Cancel "
-msgstr " Annulla "
-
-#: desktop-properties/xlockmore.cc:179
-msgid " Defaults "
-msgstr " Valori standard "
-
-#: desktop-properties/xlockmore.cc:180 help-browser/window.c:169 help-browser/window.c:194
-msgid "Help"
-msgstr "Aiuto"
-
-#: desktop-properties/xlockmore.cc:185 desktop-properties/xlockmore.cc:197
-msgid " Mode "
-msgstr " Modo "
-
-#: desktop-properties/xlockmore.cc:186
-msgid " XLockMore "
-msgstr " XLockMore "
-
-#: desktop-properties/xlockmore.cc:195
-msgid " Options "
-msgstr " Opzioni "
-
-#: desktop-properties/xlockmore.cc:196
-msgid " Preview "
-msgstr " Anteprima "
-
-#: desktop-properties/property-keyboard.c:153
-msgid "Speed"
-msgstr "Velocità"
-
-#: desktop-properties/property-keyboard.c:159
-msgid "Auto repeat"
-msgstr "Ripetizione automatica"
-
-#: desktop-properties/property-keyboard.c:171
-msgid "Repeat rate"
-msgstr "Velocità di ripetizione"
-
-#: desktop-properties/property-keyboard.c:185
-msgid "Repeat delay"
-msgstr "Ritardo di ripetizione"
-
-#: desktop-properties/property-keyboard.c:210
-msgid "Click"
-msgstr "Suono"
-
-#: desktop-properties/property-keyboard.c:216
-msgid "Click on keypress"
-msgstr "Suono su pressione tasto"
-
-#: desktop-properties/property-keyboard.c:226
-msgid "Click volume"
-msgstr "Volume suono"
-
-#: desktop-properties/property-keyboard.c:254
-msgid " Keyboard "
-msgstr " Tastiera "
-
-#: desktop-properties/property-mouse.c:184
-msgid "Buttons"
-msgstr "Bottoni"
-
-#: desktop-properties/property-mouse.c:186
-msgid "Left handed"
-msgstr "Mancino"
-
-#: desktop-properties/property-mouse.c:188
-msgid "Right handed"
-msgstr "Destro"
-
-#: desktop-properties/property-mouse.c:208
-msgid "Motion"
-msgstr "Movimento"
-
-#: desktop-properties/property-mouse.c:213
-msgid "Acceleration"
-msgstr "Accelerazione"
-
-#: desktop-properties/property-mouse.c:213
-msgid "Slow"
-msgstr "Lenta"
-
-#: desktop-properties/property-mouse.c:213
-msgid "Fast"
-msgstr "Veloce"
-
-#: desktop-properties/property-mouse.c:219
-msgid "Threshold"
-msgstr "Soglia"
-
-#: desktop-properties/property-mouse.c:219
-msgid "Small"
-msgstr "Bassa"
-
-#: desktop-properties/property-mouse.c:219
-msgid "Large"
-msgstr "Alta"
-
-#: desktop-properties/property-mouse.c:231
-msgid "Mouse"
-msgstr "Mouse"
-
-#: desktop-properties/main.c:31
+#: desktop-properties/property-background.c:1057
 msgid "Set parameters from saved state and exit"
 msgstr "Modifica parametri per stato salvato ed esci"
 
-#: desktop-properties/app-mouse.c:10
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr "IMMAGINE"
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr "Specifica lo sfondo al valore specificato"
+
+#: desktop-properties/property-background.c:1059 desktop-properties/property-background.c:1060
+msgid "COLOR"
+msgstr "COLORE"
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr "Specifica il colore dello sfondo"
+
+#: desktop-properties/property-background.c:1060
+msgid "Specifies end background color for gradient"
+msgstr "Specifica il colore finale per lo sfondo sfumato"
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr "ORIENTAMENTO"
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Orientamento della sfumatura: verticale o orizzontale"
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr "Usa un colore solido per lo sfondo"
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr "Usa un colore sfumato per lo sfondo"
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr "MODALITA'"
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "Mostra immagine di sfondo: affiancata, centrata, ridimensionata o scala"
+
+#: desktop-properties/property-screensaver.cc:146
+msgid "Settings"
+msgstr "Opzioni"
+
+#: desktop-properties/property-screensaver.cc:148
+msgid "Wait"
+msgstr "Attendi"
+
+#: desktop-properties/property-screensaver.cc:149
+msgid "Min"
+msgstr "Min"
+
+#: desktop-properties/property-screensaver.cc:161
+msgid "Requires Password"
+msgstr "Richiede password"
+
+#: desktop-properties/property-screensaver.cc:170
+msgid "Use DPMS"
+msgstr "Usa DPMS"
+
+#: desktop-properties/property-screensaver.cc:179
+msgid "Priority"
+msgstr "Priorità"
+
+#: desktop-properties/property-screensaver.cc:187
+msgid "Normal"
+msgstr "Normale"
+
+#: desktop-properties/property-screensaver.cc:188
+msgid "Low"
+msgstr "Bassa"
+
+#: desktop-properties/property-screensaver.cc:234
+msgid "Screensavers"
+msgstr "Salva schermo"
+
+#: desktop-properties/property-screensaver.cc:246
+msgid "Setup..."
+msgstr "Configura..."
+
+#: desktop-properties/property-screensaver.cc:250
+msgid "Test"
+msgstr "Prova"
+
+#: desktop-properties/property-screensaver.cc:356
+msgid " Screensaver "
+msgstr " Salva schermo "
+
+#: desktop-properties/xlockmore.cc:156
+msgid "XLockMore Properties"
+msgstr "Proprietà XLockMore"
+
+#: desktop-properties/xlockmore.cc:174
+msgid "  OK  "
+msgstr "  OK  "
+
+#: desktop-properties/xlockmore.cc:175
+msgid " Apply "
+msgstr " Applica "
+
+#: desktop-properties/xlockmore.cc:176
+msgid " Cancel "
+msgstr " Annulla "
+
+#: desktop-properties/xlockmore.cc:177
+msgid " Defaults "
+msgstr " Valori standard "
+
+#: desktop-properties/xlockmore.cc:178 help-browser/window.c:174 help-browser/window.c:199
+msgid "Help"
+msgstr "Aiuto"
+
+#: desktop-properties/xlockmore.cc:183 desktop-properties/xlockmore.cc:195
+msgid " Mode "
+msgstr " Modo "
+
+#: desktop-properties/xlockmore.cc:184
+msgid " XLockMore "
+msgstr " XLockMore "
+
+#: desktop-properties/xlockmore.cc:193
+msgid " Options "
+msgstr " Opzioni "
+
+#: desktop-properties/xlockmore.cc:194
+msgid " Preview "
+msgstr " Anteprima "
+
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr "Auto-ripetizione"
+
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "Abilita auto-ripetizione"
+
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Velocità di ripetizione"
+
+#: desktop-properties/property-keyboard.c:207
+msgid "Repeat delay"
+msgstr "Ritardo di ripetizione"
+
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "Suono di tastiera"
+
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Suono su pressione tasto"
+
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "Volume suono"
+
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr "Tastiera"
+
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:201
+msgid "Mouse buttons"
+msgstr "Bottoni del mouse"
+
+#: desktop-properties/property-mouse.c:210
+msgid "Left handed"
+msgstr "Mancino"
+
+#: desktop-properties/property-mouse.c:212
+msgid "Right handed"
+msgstr "Destro"
+
+#: desktop-properties/property-mouse.c:229
+msgid "Mouse motion"
+msgstr "Movimento del mouse"
+
+#: desktop-properties/property-mouse.c:241
+msgid "Acceleration"
+msgstr "Accelerazione"
+
+#: desktop-properties/property-mouse.c:241
+msgid "Fast"
+msgstr "Veloce"
+
+#: desktop-properties/property-mouse.c:241
+msgid "Slow"
+msgstr "Lenta"
+
+#: desktop-properties/property-mouse.c:253
+msgid "Threshold"
+msgstr "Soglia"
+
+#: desktop-properties/property-mouse.c:253
+msgid "Large"
+msgstr "Alta"
+
+#: desktop-properties/property-mouse.c:253
+msgid "Small"
+msgstr "Bassa"
+
+#: desktop-properties/property-mouse.c:260
+msgid "Mouse"
+msgstr "Mouse"
+
+#: desktop-properties/app-mouse.c:11
 msgid "Mouse Properties"
 msgstr "Proprietà del Mouse"
 
-#: desktop-properties/app-keyboard.c:10
+#: desktop-properties/app-keyboard.c:11
 msgid "Keyboard Properties"
 msgstr "Proprietà della Tastiera"
 
-#: desktop-properties/app-background.c:10
+#: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "Proprietà dello Sfondo"
 
@@ -556,196 +869,199 @@ msgstr "[SESSIONE]"
 msgid "Kill session"
 msgstr "Termina sessione"
 
-#: help-browser/gnome-help-browser.c:77
+#: gsm/save-session.c:82
+msgid "save-session: couldn't connect to session manager\n"
+msgstr "save-session: impossibile collegare al gestore di sessione\n"
+
+#: help-browser/gnome-help-browser.c:85
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:77
+#: help-browser/gnome-help-browser.c:85
 msgid "X position of window"
 msgstr "Posizione orizzontale della finestra"
 
-#: help-browser/gnome-help-browser.c:78
+#: help-browser/gnome-help-browser.c:86
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:78
+#: help-browser/gnome-help-browser.c:86
 msgid "Y position of window"
 msgstr "Posizione verticale della finestra"
 
-#: help-browser/gnome-help-browser.c:79
+#: help-browser/gnome-help-browser.c:87
 msgid "WIDTH"
 msgstr "LARGHEZZA"
 
-#: help-browser/gnome-help-browser.c:79
+#: help-browser/gnome-help-browser.c:87
 msgid "Width of window"
 msgstr "Larghezza della finestra"
 
-#: help-browser/gnome-help-browser.c:80
+#: help-browser/gnome-help-browser.c:88
 msgid "HEIGHT"
 msgstr "ALTEZZA"
 
-#: help-browser/gnome-help-browser.c:80
+#: help-browser/gnome-help-browser.c:88
 msgid "Height of window"
 msgstr "Altezza della finestra"
 
-#: help-browser/gnome-help-browser.c:81
+#: help-browser/gnome-help-browser.c:89
 msgid "Debug level"
 msgstr "Livello di debug"
 
-#: help-browser/gnome-help-browser.c:89
+#: help-browser/gnome-help-browser.c:97
 msgid "[URL]"
 msgstr "[URL]"
 
-#: help-browser/gnome-help-browser.c:306
+#: help-browser/gnome-help-browser.c:340
 msgid "Gnome Help Browser"
 msgstr "Help di Gnome"
 
-#: help-browser/gnome-help-browser.c:309
+#: help-browser/gnome-help-browser.c:343
 msgid "GNOME Help Browser allows easy access to various forms of documentation on your system"
 msgstr "L'Help di Gnome permette di accedere facilmente a vari tipi di documentazione sul tuo sistema."
 
-#: help-browser/gnome-help-browser.c:528
+#: help-browser/gnome-help-browser.c:602
 msgid "History size"
 msgstr "Dimensione dello storico"
 
-#: help-browser/gnome-help-browser.c:529
+#: help-browser/gnome-help-browser.c:603
 msgid "History file"
 msgstr "File dello storico"
 
-#: help-browser/gnome-help-browser.c:530
+#: help-browser/gnome-help-browser.c:604
 msgid "Cache size"
 msgstr "Dimensione cache"
 
-#: help-browser/gnome-help-browser.c:531
+#: help-browser/gnome-help-browser.c:605
 msgid "Cache file"
 msgstr "File di cache"
 
-#: help-browser/gnome-help-browser.c:532
+#: help-browser/gnome-help-browser.c:606
 msgid "Bookmark file"
 msgstr "File di bookmark"
 
-#: help-browser/gnome-help-browser.c:538
+#: help-browser/gnome-help-browser.c:612
 msgid "Man Path"
 msgstr "Percorso per pagine man"
 
-#: help-browser/gnome-help-browser.c:539
+#: help-browser/gnome-help-browser.c:613
 msgid "Info Path"
 msgstr "Percorso per pagine info"
 
-#: help-browser/gnome-help-browser.c:540
+#: help-browser/gnome-help-browser.c:614
 msgid "GNOME Help Path"
 msgstr "Percorso per aiuto Gnome"
 
-#. Main Window
-#: help-browser/gnome-help-browser.c:615
+#: help-browser/gnome-help-browser.c:689
 msgid "Gnome Help Configure"
 msgstr "Configurazione aiuto di Gnome"
 
-#: help-browser/gnome-help-browser.c:618
+#: help-browser/gnome-help-browser.c:692
 msgid "History and cache"
 msgstr "Storico e cache"
 
-#: help-browser/gnome-help-browser.c:619
+#: help-browser/gnome-help-browser.c:693
 msgid "Paths"
 msgstr "Percorsi"
 
-#: help-browser/window.c:120
+#: help-browser/window.c:125
 msgid "New window"
 msgstr "Nuova finestra"
 
-#: help-browser/window.c:120
+#: help-browser/window.c:125
 msgid "Open new browser window"
 msgstr "Apri una nuova finestra"
 
-#: help-browser/window.c:125
+#: help-browser/window.c:130
 msgid "Add Bookmark"
 msgstr "Aggiungi bookmark"
 
-#: help-browser/window.c:125
+#: help-browser/window.c:130
 msgid "Add bookmark"
 msgstr "Aggiungi bookmark"
 
-#: help-browser/window.c:130
+#: help-browser/window.c:135
 msgid "Configure"
 msgstr "Configura"
 
-#: help-browser/window.c:135
+#: help-browser/window.c:140
 msgid "Close window"
 msgstr "Chiudi finestra"
 
-#: help-browser/window.c:140
+#: help-browser/window.c:145
 msgid "Exit"
 msgstr "Esci"
 
-#: help-browser/window.c:140
+#: help-browser/window.c:145
 msgid "Exit all windows"
 msgstr "Esci da tutte le finestre"
 
-#: help-browser/window.c:149
+#: help-browser/window.c:154
 msgid "About"
 msgstr "Informazioni su..."
 
-#: help-browser/window.c:149
+#: help-browser/window.c:154
 msgid "Info about this program"
 msgstr "Informazioni su questo programma"
 
-#: help-browser/window.c:159 help-browser/window.c:189
+#: help-browser/window.c:164 help-browser/window.c:194
 msgid "History"
 msgstr "Storico"
 
-#: help-browser/window.c:159 help-browser/window.c:189
+#: help-browser/window.c:164 help-browser/window.c:194
 msgid "Show History Window"
 msgstr "Mostra finestra storico"
 
-#: help-browser/window.c:161
+#: help-browser/window.c:166
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
-#: help-browser/window.c:161 help-browser/window.c:191
+#: help-browser/window.c:166 help-browser/window.c:196
 msgid "Show Bookmarks Window"
 msgstr "Mostra finestra bookmarks"
 
-#: help-browser/window.c:167
+#: help-browser/window.c:172
 msgid "File"
 msgstr "File"
 
-#: help-browser/window.c:168
+#: help-browser/window.c:173
 msgid "Window"
 msgstr "Finestra"
 
-#: help-browser/window.c:176
+#: help-browser/window.c:181
 msgid "Back"
 msgstr "Indietro"
 
-#: help-browser/window.c:177
+#: help-browser/window.c:182
 msgid "Go to the previous location in the history list"
 msgstr "Vai alla posizione precedente nella lista dello storico"
 
-#: help-browser/window.c:179
+#: help-browser/window.c:184
 msgid "Forward"
 msgstr "Avanti"
 
-#: help-browser/window.c:180
+#: help-browser/window.c:185
 msgid "Go to the next location in the history list"
 msgstr "Vai alla posizione successiva nella lista dello storico"
 
-#: help-browser/window.c:183
+#: help-browser/window.c:188
 msgid "Reload"
 msgstr "Ricarica"
 
-#: help-browser/window.c:186
+#: help-browser/window.c:191
 msgid "Index"
 msgstr "Indice"
 
-#: help-browser/window.c:186
+#: help-browser/window.c:191
 msgid "Show Documentation Index"
 msgstr "Mostra indice documentazione"
 
-#: help-browser/window.c:191
+#: help-browser/window.c:196
 msgid "BMarks"
 msgstr "BMarks"
 
-#: help-browser/window.c:194
+#: help-browser/window.c:199
 msgid "Help on Help"
 msgstr "Aiuto sull'aiuto"
 
@@ -848,6 +1164,33 @@ msgstr "<BODY>Impossibile caricare la pagina dei contenuti</BODY>"
 #: help-browser/visit.c:101
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Argomento TOC sconosciuto</BODY>"
+# msgid "Buttons"
+# msgstr "Bottoni"
+# 
+# msgid "Click"
+# msgstr "Suono"
+# 
+# msgid " Keyboard "
+# msgstr " Tastiera "
+# 
+# msgid "Properties ..."
+# msgstr "Proprietà..."
+# 
+# msgid "Scaled (keep ascpect)"
+# msgstr "Ridimensiona (mantieni rapporto)"
+# 
+# msgid "Auto repeat"
+# msgstr "Ripetizione automatica"
+# 
+# msgid "Motion"
+# msgstr "Movimento"
+# 
+# msgid "Apply"
+# msgstr "Applica"
+# 
+# msgid "Speed"
+# msgstr "Velocità"
+# 
 # msgid "Main menu"
 # msgstr "Menù principale"
 # 
