@@ -104,7 +104,7 @@ gnome-intro.html: gnome-intro/gnome-intro.html
 # will have in the gnome-intro directory.  eventually I'll handle this
 # by calling it gnome-intro-prebuilt or something
 gnome-intro/gnome-intro.html: gnome-intro.sgml
-	db2html gnome-intro.sgml
+	-db2html gnome-intro.sgml
 	-mkdir gnome-intro/pix
 	cp pix/*.gif gnome-intro/pix
 	if test -d gnome-intro.junk/CVS; then \
