@@ -454,6 +454,7 @@ main (gint argc, gchar *argv[])
 	int max_width;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
 	gnome_init ("gnome-about","1.0", argc, argv);
