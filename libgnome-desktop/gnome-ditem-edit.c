@@ -307,7 +307,6 @@ type_option_changed (GnomeDItemEdit *dee)
 static GtkWidget *
 make_easy_page (GnomeDItemEdit *dee)
 {
-	GtkWidget *frame;
 	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *entry;
@@ -317,16 +316,10 @@ make_easy_page (GnomeDItemEdit *dee)
 	GtkWidget *icon_entry;
 	GtkWidget *check_button;
 
-        frame = gtk_frame_new (NULL);
-        gtk_container_set_border_width (
-			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
-
         table = gtk_table_new (5, 2, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
         gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
         gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-
-        gtk_container_add (GTK_CONTAINER (frame), table);
 
 	/* Name */
 	label = label_new (_("Name:"));
@@ -442,7 +435,7 @@ make_easy_page (GnomeDItemEdit *dee)
         gtk_container_add (GTK_CONTAINER (align), check_button);
         dee->_priv->terminal_button = check_button;
 
-	return frame;
+	return table;
 }
 
 static GtkTreeIter*
@@ -691,7 +684,6 @@ setup_translations_list (GnomeDItemEdit *dee)
 static GtkWidget *
 make_advanced_page (GnomeDItemEdit *dee)
 {
-	GtkWidget *frame;
 	GtkWidget *vbox;
 	GtkWidget *table;
 	GtkWidget *label;
@@ -699,12 +691,8 @@ make_advanced_page (GnomeDItemEdit *dee)
 	GtkWidget *button;
 	GtkWidget *box;
 
-        frame = gtk_frame_new (NULL);
-        gtk_container_set_border_width (
-			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
-
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-        gtk_container_add (GTK_CONTAINER (frame), vbox);
+	vbox = gtk_vbox_new (FALSE, 5);
+        gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
 
         table = gtk_table_new (2, 2, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
@@ -744,6 +732,11 @@ make_advanced_page (GnomeDItemEdit *dee)
 	dee->_priv->translations = setup_translations_list (dee);
 
 	box = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
+					     GTK_SHADOW_IN);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_size_request (box, 0, 120);
 	gtk_container_add (GTK_CONTAINER (box), dee->_priv->translations);
 	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
@@ -800,7 +793,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	set_tooltip (dee, GTK_WIDGET(button),
 		    _("Remove Name/Comment Translation"));
   
-	return frame;
+	return vbox;
 }
 
 static void
