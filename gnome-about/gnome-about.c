@@ -502,6 +502,43 @@ draw_end ()
 	}
 }
 
+#define NUM_STARS 150
+
+static void
+draw_stars ()
+{
+	static gint starx[NUM_STARS];
+	static gint stary[NUM_STARS];
+	static gint starz[NUM_STARS];
+	static gboolean inited=FALSE;
+
+	gint i=0;
+	gint x=0, y=0;
+
+	if (!inited) {
+		gint depth=0;
+		for (i = 0; i < NUM_STARS; i++) {
+			starx[i] = (random()%50) - 25;
+			stary[i] = (random()%50) - 25;
+			starz[i] = depth;
+			depth+=150/NUM_STARS;
+		}
+		inited=TRUE;
+	}
+
+	for (i = 0; i < NUM_STARS; i++) {
+		x = (((double)starx[i]/(double)starz[i])*625) +
+			area->allocation.width/2;
+		y = (((double)stary[i]/(double)starz[i])*625) +
+			area->allocation.height/2;
+	
+		gdk_draw_point (pixmap, area->style->white_gc, x, y);
+		
+		starz[i]-=1;
+		if (starz[i] < 0 ) starz[i] = 150;
+	}
+}
+
 static gboolean
 scroll (gpointer dummy)
 {
@@ -509,6 +546,8 @@ scroll (gpointer dummy)
 			    TRUE, 0, 0,
 			    area->allocation.width,
 			    area->allocation.height);
+
+	draw_stars ();
 
 	switch (state) {
 	case DRAWING_INTRO:

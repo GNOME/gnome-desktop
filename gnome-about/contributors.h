@@ -37,6 +37,7 @@ static gchar *contributors[] = {
 	"Andreas Bolsch",
 	"Dario Bressanini",
 	"Emmanuel Briot",
+	"Stephen Browne",
 	"Marcus Brubaker",
 	"Christian Bucher",
 	"Dave Camp",
