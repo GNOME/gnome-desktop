@@ -62,7 +62,11 @@ struct _GnomeIconLoaderPrivate
   GList *themes;
   GHashTable *unthemed_icons;
 
-
+  /* Note: The keys of this hashtable are owned by the
+   * themedir and unthemed hashtables.
+   */
+  GHashTable *all_icons;
+  
   /* GConf data: */
   guint theme_changed_id;
 };
@@ -102,7 +106,10 @@ static void   theme_dir_destroy            (IconThemeDir         *dir);
 static char * theme_lookup_icon            (IconTheme            *theme,
 					    const char           *icon_name,
 					    int                   size,
-					    const GnomeIconData **icon_data);
+					    GnomeIconData       **icon_data,
+					    int                  *base_size);
+static gboolean theme_has_icon             (IconTheme            *theme,
+					    const char           *icon_name);
 static void   theme_list_icons             (IconTheme            *theme,
 					    GHashTable           *icons,
 					    GQuark                context);
@@ -281,12 +288,14 @@ blow_themes (GnomeIconLoaderPrivate *priv)
 {
   if (priv->themes_valid)
     {
+      g_hash_table_destroy (priv->all_icons);
       g_list_foreach (priv->themes, (GFunc)theme_destroy, NULL);
       g_list_free (priv->themes);
       g_hash_table_destroy (priv->unthemed_icons);
     }
   priv->themes = NULL;
   priv->unthemed_icons = NULL;
+  priv->all_icons = NULL;
   priv->themes_valid = FALSE;
 }
 
@@ -582,6 +591,8 @@ load_themes (GnomeIconLoader *loader)
   
   priv = loader->priv;
 
+  priv->all_icons = g_hash_table_new (g_str_hash, g_str_equal);
+  
   insert_theme (loader, priv->current_theme);
   priv->themes = g_list_reverse (priv->themes);
   
@@ -626,6 +637,9 @@ load_themes (GnomeIconLoader *loader)
 		g_hash_table_insert (priv->unthemed_icons,
 				     base_name,
 				     abs_file);
+	      
+	      g_hash_table_insert (priv->all_icons,
+				   base_name, NULL);
 	    }
 	}
       g_dir_close (gdir);
@@ -639,7 +653,17 @@ char *
 gnome_icon_loader_lookup_icon (GnomeIconLoader      *loader,
 			       const char           *icon_name,
 			       int                   size,
-			       const GnomeIconData **icon_data)
+			       GnomeIconData       **icon_data)
+{
+  return gnome_icon_loader_lookup_icon_extended (loader, icon_name, size, icon_data, NULL);
+}
+
+char *
+gnome_icon_loader_lookup_icon_extended (GnomeIconLoader      *loader,
+					const char           *icon_name,
+					int                   size,
+					GnomeIconData       **icon_data,
+					int                  *base_size)
 {
   GnomeIconLoaderPrivate *priv;
   GList *l;
@@ -656,7 +680,7 @@ gnome_icon_loader_lookup_icon (GnomeIconLoader      *loader,
   l = priv->themes;
   while (l != NULL)
     {
-      icon = theme_lookup_icon (l->data, icon_name, size, icon_data);
+      icon = theme_lookup_icon (l->data, icon_name, size, icon_data, base_size);
       if (icon)
 	return icon;
       
@@ -665,10 +689,31 @@ gnome_icon_loader_lookup_icon (GnomeIconLoader      *loader,
 
   icon = g_hash_table_lookup (priv->unthemed_icons, icon_name);
   if (icon)
-    return g_strdup (icon);
+    {
+      if (base_size)
+	*base_size = 0;
+
+      return g_strdup (icon);
+    }
 
   return NULL;
 }
+
+gboolean 
+gnome_icon_loader_has_icon (GnomeIconLoader      *loader,
+			    const char           *icon_name)
+{
+  GnomeIconLoaderPrivate *priv;
+  
+  priv = loader->priv;
+  
+  if (!priv->themes_valid)
+    load_themes (loader);
+
+  return g_hash_table_lookup_extended (priv->all_icons,
+				       icon_name, NULL, NULL);
+}
+
 
 static void
 add_key_to_hash (gpointer  key,
@@ -864,7 +909,8 @@ static char *
 theme_lookup_icon (IconTheme *theme,
 		   const char *icon_name,
 		   int size,
-		   const GnomeIconData **icon_data)
+		   GnomeIconData **icon_data,
+		   int *base_size)
 {
   GList *l;
   IconThemeDir *dir, *min_dir;
@@ -887,6 +933,9 @@ theme_lookup_icon (IconTheme *theme,
 
 	    if (icon_data && dir->icon_data != NULL)
 	      *icon_data = g_hash_table_lookup (dir->icon_data, icon_name);
+
+	    if (base_size)
+	      *base_size = dir->size;
 	    
 	    return absolute_file;
 	  }
@@ -923,11 +972,38 @@ theme_lookup_icon (IconTheme *theme,
       if (icon_data && min_dir->icon_data != NULL)
 	*icon_data = g_hash_table_lookup (min_dir->icon_data, icon_name);
 	    
+      if (base_size)
+	*base_size = min_dir->size;
+      
       return absolute_file;
     }
  
   return NULL;
 }
+
+static gboolean
+theme_has_icon (IconTheme *theme,
+		const char *icon_name)
+{
+  GList *l;
+  IconThemeDir *dir;
+  IconSuffix suffix;
+
+  l = theme->dirs;
+  while (l != NULL)
+    {
+      dir = l->data;
+
+      suffix = GPOINTER_TO_INT (g_hash_table_lookup (dir->icons, icon_name));
+      if (suffix != ICON_SUFFIX_NONE)
+	return TRUE;
+      
+      l = l->next;
+    }
+ 
+  return FALSE;
+}
+
 
 static void
 theme_list_icons (IconTheme *theme, GHashTable *icons,
@@ -1011,12 +1087,10 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 	      while (split[i] != NULL)
 		i++;
 
-	      
-	      data->attach_points = g_new0 (GnomeIconDataPoint, i);
-	      data->n_attach_points = i;
+	      data->n_attach_points = MIN (i, GNOME_ICON_DATA_MAX_ATTACH_POINTS);
 
 	      i = 0;
-	      while (split[i] != NULL)
+	      while (split[i] != NULL && i < data->n_attach_points)
 		{
 		  split_point = strchr (split[i], ',');
 		  if (split_point)
@@ -1041,7 +1115,8 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 }
 
 static void
-scan_directory (IconThemeDir *dir, char *full_dir, gboolean allow_svg)
+scan_directory (GnomeIconLoaderPrivate *loader,
+		IconThemeDir *dir, char *full_dir, gboolean allow_svg)
 {
   GDir *gdir;
   const char *name;
@@ -1089,6 +1164,7 @@ scan_directory (IconThemeDir *dir, char *full_dir, gboolean allow_svg)
 	g_hash_table_replace (dir->icons, base_name, GINT_TO_POINTER (suffix));
       else
 	g_free (base_name);
+      g_hash_table_insert (loader->all_icons, base_name, NULL);
     }
   
   g_dir_close (gdir);
@@ -1175,7 +1251,7 @@ theme_subdir_load (GnomeIconLoader *loader,
 	  dir->dir = full_dir;
 	  dir->icon_data = NULL;
 	  
-	  scan_directory (dir, full_dir, loader->priv->allow_svg);
+	  scan_directory (loader->priv, dir, full_dir, loader->priv->allow_svg);
 
 	  theme->dirs = g_list_append (theme->dirs, dir);
 	}

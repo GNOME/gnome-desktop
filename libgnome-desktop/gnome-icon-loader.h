@@ -47,11 +47,12 @@ struct _GnomeIconLoaderClass
   void (* changed)  (GnomeIconLoader *icon_loader);
 };
 
+#define GNOME_ICON_DATA_MAX_ATTACH_POINTS 12
 
 typedef struct
 {
-  int x;
-  int y;
+  guint16 x;
+  guint16 y;
 } GnomeIconDataPoint;
 
 typedef struct
@@ -59,7 +60,7 @@ typedef struct
   gboolean has_embedded_rect;
   int x0, y0, x1, y1;
   
-  GnomeIconDataPoint *attach_points;
+  GnomeIconDataPoint attach_points[GNOME_ICON_DATA_MAX_ATTACH_POINTS];
   int n_attach_points;
 } GnomeIconData;
 
@@ -83,7 +84,15 @@ void             gnome_icon_loader_set_custom_theme      (GnomeIconLoader      *
 char *           gnome_icon_loader_lookup_icon           (GnomeIconLoader      *loader,
 							  const char           *icon_name,
 							  int                   size,
-							  const GnomeIconData **icon_data);
+							  GnomeIconData       **icon_data);
+/* TODO: This extended crap is pretty ugly, but keep it until we move GnomeIconLoader to the final place. */
+char *           gnome_icon_loader_lookup_icon_extended  (GnomeIconLoader      *loader,
+							  const char           *icon_name,
+							  int                   size,
+							  GnomeIconData       **icon_data,
+							  int                  *base_size);
+gboolean         gnome_icon_loader_has_icon              (GnomeIconLoader      *loader,
+							  const char           *icon_name);
 GList *          gnome_icon_loader_list_icons            (GnomeIconLoader      *loader,
 							  const char           *context);
 char *           gnome_icon_loader_get_example_icon_name (GnomeIconLoader      *loader);
