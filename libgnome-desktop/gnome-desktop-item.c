@@ -1748,8 +1748,16 @@ add_dirs (GSList *list, const char *dirname)
 	if (dir == NULL)
 		return list;
 
+	list = g_slist_prepend (list, g_strdup (dirname));
+
 	while ((dent = readdir (dir)) != NULL) {
-		char *full = g_build_filename (dirname, dent->d_name, NULL);
+		char *full;
+
+		/* skip hidden and self/parent references */
+		if (dent->d_name[0] == '.')
+			continue;
+
+		full = g_build_filename (dirname, dent->d_name, NULL);
 		if (g_file_test (full, G_FILE_TEST_IS_DIR)) {
 			list = g_slist_prepend (list, full);
 			list = add_dirs (list, full);
@@ -1765,13 +1773,10 @@ add_dirs (GSList *list, const char *dirname)
 static void
 init_kde_dirs (void)
 {
-	GSList *list = NULL;
 	char *dirname;
 
 	if (kde_icondir == NULL)
 		return;
-
-	list = g_slist_prepend (list, kde_icondir);
 
 #define ADD_DIRS(color,size) \
 	dirname = g_build_filename (kde_icondir, #color,	\
@@ -1845,7 +1850,7 @@ static void
 find_kde_directory (void)
 {
 	int i;
-	const char *kdedir = g_getenv ("KDEDIR");
+	const char *kdedir;
 	char *try_prefixes[] = {
 		"/usr",
 		"/opt/kde",
@@ -1859,14 +1864,18 @@ find_kde_directory (void)
 	if (kde_icondir != NULL)
 		return;
 
+	kdedir = g_getenv ("KDEDIR");
+
 	if (kdedir != NULL) {
 		kde_icondir = g_build_filename (kdedir, "share", "icons", NULL);
+		init_kde_dirs ();
 		return;
 	}
 
 	/* if what configure gave us works use that */
 	if (g_file_test (KDE_ICONDIR, G_FILE_TEST_IS_DIR)) {
 		kde_icondir = g_strdup (KDE_ICONDIR);
+		init_kde_dirs ();
 		return;
 	}
 
@@ -1876,6 +1885,7 @@ find_kde_directory (void)
 		if (g_file_test (try, G_FILE_TEST_IS_DIR)) {
 			g_free (try);
 			kde_icondir = g_build_filename (try_prefixes[i], "share", "icons", NULL);
+			init_kde_dirs ();
 			return;
 		}
 		g_free (try);
@@ -1902,8 +1912,8 @@ find_kde_directory (void)
  */
 char *
 gnome_desktop_item_find_icon (const char *icon,
-			      int flags,
-			      int desired_size)
+			      int desired_size,
+			      int flags)
 {
 	if (icon == NULL) {
 		return NULL;
@@ -1933,8 +1943,9 @@ gnome_desktop_item_find_icon (const char *icon,
 							  TRUE /* only_if_exists */,
 							  NULL /* ret_locations */);
 
-		/* if no kde, then just return now */
-		if (flags & GNOME_DESKTOP_ITEM_ICON_NO_KDE)
+		/* if we found something or no kde, then just return now */
+		if (full != NULL ||
+		    flags & GNOME_DESKTOP_ITEM_ICON_NO_KDE)
 			return full;
 
 		/* If there is an extention don't add any extensions */
@@ -1950,7 +1961,7 @@ gnome_desktop_item_find_icon (const char *icon,
 
 		for (li = kde_dirs; full == NULL && li != NULL; li = li->next) {
 			int i;
-			for (i = 0; check_exts[i] != NULL; i++) {
+			for (i = 0; full == NULL && check_exts[i] != NULL; i++) {
 				full = g_strconcat (li->data, G_DIR_SEPARATOR_S, icon,
 						    check_exts[i], NULL);
 				if ( ! g_file_test (full, G_FILE_TEST_EXISTS)) {
