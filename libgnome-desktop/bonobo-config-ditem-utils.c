@@ -17,7 +17,7 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
-#include <bonobo-conf/bonobo-config-utils.h>
+#include <bonobo-config/bonobo-config-utils.h>
 #include <libgnome/Gnome.h>
 
 #include "bonobo-config-ditem-utils.h"
