@@ -753,8 +753,11 @@ static void
 gnome_ditem_edit_destroy (GtkObject *dee)
 {
         GnomeDItemEdit *de;
+
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
+
+	/* remember, destroy can be run multiple times! */
 
         de = GNOME_DITEM_EDIT(dee);
 
