@@ -13,8 +13,8 @@ Directory_DATA = \
 	Accessories.directory   \
 	Applications.directory	\
 	Graphics.directory	\
+	Home.directory		\
 	System.directory	\
-	Tools.directory		\
 	Multimedia.directory	\
 	Internet.directory	\
 	Games.directory		\
@@ -23,42 +23,11 @@ Directory_DATA = \
 	Settings.directory
 
 Desktop_DATA = \
-	XEphem.desktop		\
-	XMcd.desktop		\
-	xmix.desktop      	\
-	realplayer.desktop	\
-	GXanim.desktop		\
-	XMcd.desktop		\
-	realplayer.desktop	\
-	xmix.desktop		\
 	Xemacs.desktop		\
-	gaspell.desktop   	\
-	FileRunner.desktop	\
-	TkSETI.desktop		\
 	rxvt.desktop		\
-	lynx.desktop		\
-	xbmbrowser.desktop	\
-	Vim.desktop		\
-	xcolsel.desktop		\
-	FileRunner.desktop	\
 	Emacs.desktop		\
-	Vim.desktop		\
-	WordPerfect.desktop	\
-	Xemacs.desktop		\
-	XEphem.desktop		\
-	gaspell.desktop		\
 	GIMP.desktop		\
-	xv.desktop		\
-	xbmbrowser.desktop	\
-	UNIX.desktop		\
 	xterm.desktop		\
-	Eterm.desktop		\
-	Kterm.desktop		\
-	Vnterm.desktop 		\
-	Netscape.desktop	\
-	Tkrat.desktop	        \
-	TkSETI.desktop		\
-	Tkrat.desktop		\
-	lynx.desktop
+	Netscape.desktop
 
 EXTRA_DIST = $(Desktop_DATA) $(Directory_DATA) $(Order_DATA)
