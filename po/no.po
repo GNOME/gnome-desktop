@@ -5,21 +5,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.3\n"
-"POT-Creation-Date: 1999-03-18 01:01+0100\n"
-"PO-Revision-Date: 1999-03-18 01:26+0100\n"
+"POT-Creation-Date: 1999-03-23 00:58+0100\n"
+"PO-Revision-Date: 1999-03-23 01:26+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: applets/asclock/asclock.c:155
+#: applets/asclock/asclock.c:572
 #: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
 msgstr "Om"
 
-#: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:449
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
+#: applets/asclock/asclock.c:579 applets/clockmail/clockmail.c:449
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:485
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
@@ -33,15 +33,119 @@ msgstr "Om"
 msgid "Properties..."
 msgstr "Egenskaper ..."
 
-#: applets/asclock/dialogs.c:22
-msgid "Afterstep Clock Applet"
-msgstr "Afterstep klokkeapplet"
+#: applets/asclock/dialogs.c:17
+msgid "ASClock"
+msgstr "ASKlokke"
 
-#: applets/asclock/dialogs.c:25
+#: applets/asclock/dialogs.c:21
 msgid "Who said NeXT is dead?"
 msgstr "Hvem sa at NeXT er død?"
 
-#: applets/asclock/dialogs.c:112
+#: applets/asclock/dialogs.c:134
+msgid ""
+"Since you are root, would you like to set the system's default timezone?"
+msgstr "Siden du er root, ønsker du å sette systemets standard tiddsone?"
+
+#: applets/asclock/dialogs.c:136
+msgid "My Title"
+msgstr "Min tittel"
+
+#: applets/asclock/dialogs.c:242
+msgid "Blinking Colon:"
+msgstr "Blinkende kolon:"
+
+#. -- not implemented yet --
+#.
+#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
+#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
+#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
+#. gtk_widget_show(frame);
+#.
+#. vbox1 = gtk_vbox_new(FALSE, 1);
+#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
+#. gtk_widget_show(vbox1);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Article index file:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image Server Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image path:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#.
+#. ---
+#: applets/asclock/dialogs.c:277 applets/clockmail/properties.c:388
+#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:210
+#: applets/fvwm-pager/properties.c:246
+#: applets/mini-commander/src/preferences.c:659
+#: applets/modemlights/properties.c:204 applets/netload/properties.c:280
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:933
+#: panel/panel_config_global.c:310
+msgid "General"
+msgstr "Generelt"
+
+#: applets/asclock/dialogs.c:282
 msgid "Timezone"
 msgstr "Tidssone"
 
@@ -162,7 +266,7 @@ msgstr ""
 "under GNU General Puclic License."
 
 #: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:491
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
 #: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1427
@@ -248,96 +352,6 @@ msgstr "Når ny post mottas, kjør:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Postboksen anses som full etter (Kbytes):"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
-#. ---
-#: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
-#: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
-#: applets/mini-commander/src/preferences.c:659
-#: applets/modemlights/properties.c:204 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:933
-#: panel/panel_config_global.c:310
-msgid "General"
-msgstr "Generelt"
-
 #: applets/clockmail/properties.c:406
 msgid "Theme file (directory):"
 msgstr "Temafil (katalog):"
@@ -387,11 +401,11 @@ msgstr "Oppdateringsfrekvens"
 msgid "Diskusage Settings"
 msgstr "Innstillinger for diskbruk"
 
-#: applets/drivemount/drivemount.c:71
+#: applets/drivemount/drivemount.c:77
 msgid "Drive Mount Applet"
 msgstr "Diskmonteringsapplet"
 
-#: applets/drivemount/drivemount.c:74
+#: applets/drivemount/drivemount.c:80
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
@@ -399,19 +413,19 @@ msgstr ""
 "Utgitt under GNU general public license.\n"
 "Monterer og avmonterer disker.."
 
-#: applets/drivemount/drivemount.c:147
+#: applets/drivemount/drivemount.c:153
 msgid " mounted"
 msgstr " montert"
 
-#: applets/drivemount/drivemount.c:152
+#: applets/drivemount/drivemount.c:158
 msgid " not mounted"
 msgstr " ikke montert"
 
-#: applets/drivemount/drivemount.c:224
+#: applets/drivemount/drivemount.c:230
 msgid "\" reported:\n"
 msgstr "\" rapportert:\n"
 
-#: applets/drivemount/drivemount.c:226
+#: applets/drivemount/drivemount.c:232
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -419,7 +433,7 @@ msgstr ""
 "Diskmonteringskommandoen feilet.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:492
+#: applets/drivemount/drivemount.c:499
 msgid "Eject"
 msgstr "Løs ut"
 
@@ -580,7 +594,7 @@ msgstr "Skrivebord %d"
 msgid "About\t"
 msgstr "Om\t"
 
-#: applets/fvwm-pager/fvwm-pager.c:409 gmenu/gmenu.c:114
+#: applets/fvwm-pager/fvwm-pager.c:409
 msgid "Properties"
 msgstr "Egenskaper"
 
@@ -797,7 +811,7 @@ msgstr ""
 
 #: applets/gkb/gkb.c:441
 msgid "gkb.xpm"
-msgstr ""
+msgstr "gkb.xpm"
 
 #: applets/gnome-pager/gnomepager_applet.c:128
 msgid "Desktop Pager Applet"
@@ -999,7 +1013,7 @@ msgid "History"
 msgstr "Historikk"
 
 #: applets/mini-commander/src/mini-commander_applet.c:252
-#: gsm/session-properties.c:145 help-browser/window.c:207
+#: gsm/session-properties.c:170 help-browser/window.c:207
 msgid "Help"
 msgstr "Hjelp"
 
@@ -1347,12 +1361,12 @@ msgstr "Ingen artikler"
 msgid "Slashapp article list"
 msgstr "Slashapp artikkelliste"
 
-#: applets/slashapp/slashapp.c:255 gmenu/utils.c:91
+#: applets/slashapp/slashapp.c:255 gmenu/utils.c:28
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "oppretter brukerkatalog: %s\n"
 
-#: applets/slashapp/slashapp.c:258 gmenu/utils.c:94
+#: applets/slashapp/slashapp.c:258 gmenu/utils.c:31
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "kunne ikke opprette brukerkatalogen: %s\n"
@@ -1442,189 +1456,122 @@ msgstr "Vis \"Åpne nytt vindu\"-valg"
 msgid "Look"
 msgstr "Se"
 
-#: gmenu/desktop.c:80 gmenu/desktop.c:96
-msgid "Submenu: "
-msgstr "Undermeny: "
+#: gmenu/desktop.c:80
+msgid " Folder"
+msgstr " Mappe"
 
-#: gmenu/desktop.c:194
-#, c-format
-msgid "Unable to create file: %s\n"
-msgstr "Kunne ikke opprette filen: %s\n"
-
-#: gmenu/desktop.c:213
-#, c-format
-msgid "unable to remove .order file: %s\n"
-msgstr "kunne ikke fjerne .order-filen: %s\n"
-
-#: gmenu/dialogs.c:38
-msgid "File exists."
-msgstr "Filen eksisterer."
-
-#: gmenu/dialogs.c:46
-msgid "Failed to create file."
-msgstr "Klarte ikke å opprette filen."
-
-#: gmenu/dialogs.c:142 gmenu/dialogs.c:179
-msgid ""
-"You can't add an entry to that submenu.\n"
-"You do not have the proper permissions."
-msgstr ""
-"Du kan ikke legge til noe i denne undermenyen.\n"
-"Du har ikke riktige tilgangsrettigheter."
-
-#: gmenu/dialogs.c:148 gmenu/gmenu.c:97
-msgid "New Submenu"
-msgstr "Ny undermeny"
-
-#: gmenu/dialogs.c:150
-msgid "Create Submenu:"
-msgstr "Opprett undermeny:"
-
-#: gmenu/dialogs.c:233
-msgid "You must select something first."
-msgstr "Du må velge noe først."
-
-#: gmenu/dialogs.c:239
-msgid "You can not delete a top level submenu."
-msgstr "Du kan ikke slette en undermeny på toppnivå."
-
-#: gmenu/dialogs.c:247
-msgid ""
-"You can't delete that file.\n"
-"You do not have the proper permissions."
-msgstr ""
-"Du kan ikke slette denne filen.\n"
-"Du har ikke riktige tilgangsrettigheter."
-
-#: gmenu/dialogs.c:253 gmenu/dialogs.c:273
-msgid "Delete this menu item?"
-msgstr "Slett denne menyoppføringen?"
-
-#: gmenu/dialogs.c:262
-msgid "Delete empty submenu?"
-msgstr "Slett tom undermeny?"
-
-#: gmenu/dialogs.c:267
-msgid "Are you sure you want to delete this submenu and all its contents?"
-msgstr "Er du sikker på at du vil slette denne undermenyen med alt innhold?"
-
-#: gmenu/dialogs.c:368
-msgid ""
-"This change conflicts with an existing menu item.\n"
-"No two menu items in a submenu can have the same name."
-msgstr ""
-"Denne endringen er i konflikt med en eksisterende menyoppføring.\n"
-"To menyoppføringer i samme undermeny kan ikke ha samme navn."
-
-#: gmenu/dnd.c:175
-msgid ""
-"You are not allowed to move that item there.\n"
-"You do not have the proper permissions."
-msgstr ""
-"Du kan ikke flytte dette objektet hit.\n"
-"Du har ikke riktige tilgangsrettigheter."
-
-#: gmenu/edit.c:214
+#: gmenu/edit.c:298
 msgid "Save"
 msgstr "Lagre"
 
-#: gmenu/edit.c:231 gsm/session-properties.c:136
+#: gmenu/edit.c:315 gsm/session-properties.c:161
 msgid "Revert"
 msgstr "Gå tilbake"
 
-#: gmenu/edit.c:249
-msgid "New"
-msgstr "Ny"
+#: gmenu/edit.c:352 panel/menu.c:2118 panel/menu.c:2121 panel/menu.c:2849
+#: panel/menu.c:2890 panel/menu.c:2893
+msgid "User menus"
+msgstr "Brukermenyer"
 
-#: gmenu/gmenu.c:52
+#: gmenu/edit.c:356 panel/menu.c:2036 panel/menu.c:2040 panel/menu.c:2110
+#: panel/menu.c:2876
+msgid "System menus"
+msgstr "Systemmenyer"
+
+#: gmenu/main.c:51 gmenu/main.c:128
 msgid "_New Submenu..."
 msgstr "Ny undermeny..."
 
-#: gmenu/gmenu.c:53 gmenu/gmenu.c:97
+#: gmenu/main.c:52 gmenu/main.c:98 gmenu/main.c:129
 msgid "Create a new submenu"
 msgstr "Opprett en ny undermeny"
 
-#: gmenu/gmenu.c:56
+#: gmenu/main.c:55 gmenu/main.c:125
 msgid "New _Item..."
 msgstr "Ny oppføring..."
 
-#: gmenu/gmenu.c:57
+#: gmenu/main.c:56 gmenu/main.c:126
 msgid "Create a new menu item"
 msgstr "Opprett en ny menyoppføring"
 
-#: gmenu/gmenu.c:60
+#: gmenu/main.c:59 gmenu/main.c:134
 msgid "_Delete..."
 msgstr "Slett..."
 
-#: gmenu/gmenu.c:71
+#: gmenu/main.c:70
 msgid "_Sort Submenu"
 msgstr "Sorter undermeny"
 
-#: gmenu/gmenu.c:74
+#: gmenu/main.c:74
 msgid "Sort Submenu _Recursive"
 msgstr "Sorter undermeny rekursivt"
 
-#: gmenu/gmenu.c:86
+#: gmenu/main.c:87
 msgid "_File"
 msgstr "Fil"
 
-#: gmenu/gmenu.c:88
+#: gmenu/main.c:89 gmenu/main.c:149
 msgid "_Sort"
 msgstr "Sorter"
 
-#: gmenu/gmenu.c:90
+#: gmenu/main.c:91
 msgid "_Help"
 msgstr "Hjelp"
 
-#: gmenu/gmenu.c:100
+#: gmenu/main.c:98
+msgid "New Submenu"
+msgstr "Ny undermeny"
+
+#: gmenu/main.c:102
 msgid "New Item"
 msgstr "Ny oppføring"
 
-#: gmenu/gmenu.c:100
+#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "Opprett en ny oppføring"
 
-#: gmenu/gmenu.c:104
+#: gmenu/main.c:106
 msgid "Delete"
 msgstr "Slett"
 
-#: gmenu/gmenu.c:104
+#: gmenu/main.c:106
 msgid "Delete selected menu item"
 msgstr "Slett valgte menyoppføring"
 
-#: gmenu/gmenu.c:107
+#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move up"
 msgstr "Flytt opp et nivå"
 
-#: gmenu/gmenu.c:107
+#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Flytt valgte meny opp et nivå"
 
-#: gmenu/gmenu.c:109
+#: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
 msgstr "Flytt ned et nivå"
 
-#: gmenu/gmenu.c:109
+#: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move selected menu down"
 msgstr "Flutt valgte meny ned et nivå"
 
-#: gmenu/gmenu.c:114
-msgid "Edit selected menu item properties"
-msgstr "Rediger valgte menyoppførings egenskaper"
-
-#: gmenu/gmenu.c:119
+#: gmenu/main.c:117
 msgid "Sort Submenu"
 msgstr "Sorter undermeny"
 
-#: gmenu/gmenu.c:119
+#: gmenu/main.c:117
 msgid "Sort selected submenu"
 msgstr "Sorter valgte undermeny"
 
-#: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:308 gmenu/tree.c:387
+#: gmenu/main.c:153
+msgid "Sort _Recursive"
+msgstr "Sorter _rekursivt"
+
+#. loading dialog
+#: gmenu/main.c:239 gmenu/main.c:285 gmenu/tree.c:388
 msgid "GNOME menu editor"
 msgstr "GNOME menyredigering"
 
-#: gmenu/gmenu.c:311
+#: gmenu/main.c:242
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -1632,51 +1579,93 @@ msgstr ""
 "Utgitt under betingelsene gitt i GNU Public License.\n"
 "GNOME menyredigering."
 
-#: gmenu/save.c:52
+#: gmenu/save.c:27 gmenu/save.c:85
 msgid "The menu item must have a name"
 msgstr "Menyoppføringen må ha et navn"
 
-#: gmenu/save.c:58
+#: gmenu/save.c:33
 msgid "The menu entry must have a filename"
 msgstr "Menyoppføringen må ha et filnavn"
 
-#: gmenu/save.c:66
+#: gmenu/save.c:40
 msgid "Save changes?"
 msgstr "Lagre endringene?"
 
-#: gmenu/save.c:83
+#: gmenu/save.c:54
 msgid "This change conflicts with an existing menu item"
 msgstr "Denne endringen er i konflikt med en eksisterende menyoppføring"
 
-#: gmenu/save.c:89
+#: gmenu/save.c:61
 msgid "Overwrite existing menu entry?"
 msgstr "Overskriv eksisterende menyoppføring?"
 
-#: gmenu/tree.c:389
+#: gmenu/save.c:111
+msgid ""
+"This change conflicts with an existing menu item.\n"
+"No two menu items in a submenu can have the same name."
+msgstr ""
+"Denne endringen er i konflikt med en eksisterende menyoppføring.\n"
+"To menyoppføringer i samme undermeny kan ikke ha samme navn."
+
+#: gmenu/tree.c:390
 msgid "One moment, reading menus..."
 msgstr "Et øyeblikk, leser menyene..."
 
-#: gmenu/tree.c:418
-msgid "GNOME"
-msgstr "GNOME"
-
-#. system's menu tree
-#: gmenu/tree.c:427
-msgid "System Menus"
-msgstr "Systemmenyer"
-
-#: gmenu/tree.c:437
-msgid "Top of system menus"
-msgstr "Toppen på systemmenyene"
-
-#. user's menu tree
-#: gmenu/tree.c:445
+#: gmenu/tree.c:409
 msgid "User Menus"
 msgstr "Brukermenyer"
 
-#: gmenu/tree.c:455
+#: gmenu/tree.c:410
 msgid "Top of user menus"
 msgstr "Toppen på brukermenyene"
+
+#: gmenu/tree.c:417
+msgid "System Menus"
+msgstr "Systemmenyer"
+
+#: gmenu/tree.c:418
+msgid "Top of system menus"
+msgstr "Toppen på systemmenyene"
+
+#: gmenu/treedel.c:116
+msgid "You can not delete a top level submenu."
+msgstr "Du kan ikke slette en undermeny på toppnivå."
+
+#: gmenu/treedel.c:128 gmenu/treedel.c:151
+msgid "Delete this menu item?"
+msgstr "Slett denne menyoppføringen?"
+
+#: gmenu/treedel.c:138
+msgid "Delete empty submenu?"
+msgstr "Slett tom undermeny?"
+
+#: gmenu/treedel.c:144
+msgid "Are you sure you want to delete this submenu and all its contents?"
+msgstr "Er du sikker på at du vil slette denne undermenyen med alt innhold?"
+
+#: gmenu/treenew.c:35 gmenu/treenew.c:110
+msgid ""
+"You can't add an entry to that submenu.\n"
+"You do not have the proper permissions."
+msgstr ""
+"Du kan ikke legge til noe i denne undermenyen.\n"
+"Du har ikke riktige tilgangsrettigheter."
+
+#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
+msgid "New Folder"
+msgstr "Ny mappe"
+
+#: gmenu/treenew.c:63
+msgid "Failed to create directory"
+msgstr "Klarte ikke å opprette katalogen"
+
+#: gmenu/treenew.c:118 gmenu/treenew.c:127
+msgid "untitled.desktop"
+msgstr "uten_navn.desktop"
+
+#: gmenu/treenew.c:137 gmenu/treenew.c:144
+msgid "untitled"
+msgstr "uten_navn"
 
 #: gnome-terminal/gnome-terminal.c:161
 msgid "GNOME Terminal"
@@ -1687,7 +1676,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "GNOME terminalemulator program."
 
 #: gnome-terminal/gnome-terminal.c:461 gnome-terminal/gnome-terminal.c:972
-#: gnome-terminal/gnome-terminal.c:982 gnome-terminal/gnome-terminal.c:1823
+#: gnome-terminal/gnome-terminal.c:982 gnome-terminal/gnome-terminal.c:1850
 msgid "Default"
 msgstr "Forvalgt"
 
@@ -1856,142 +1845,181 @@ msgstr "Rull ned ved output"
 msgid "Color selector"
 msgstr "Fargevelger"
 
-#: gnome-terminal/gnome-terminal.c:1297 gnome-terminal/gnome-terminal.c:1307
-#: gnome-terminal/gnome-terminal.c:1314
+#: gnome-terminal/gnome-terminal.c:1312 gnome-terminal/gnome-terminal.c:1322
+#: gnome-terminal/gnome-terminal.c:1333
 msgid "_New terminal"
 msgstr "Ny terminal"
 
-#: gnome-terminal/gnome-terminal.c:1297 gnome-terminal/gnome-terminal.c:1307
-#: gnome-terminal/gnome-terminal.c:1314
+#: gnome-terminal/gnome-terminal.c:1312 gnome-terminal/gnome-terminal.c:1322
+#: gnome-terminal/gnome-terminal.c:1333
 msgid "Creates a new terminal window"
 msgstr "Oppretter et nytt terminalvindu"
 
-#: gnome-terminal/gnome-terminal.c:1299 gnome-terminal/gnome-terminal.c:1309
+#: gnome-terminal/gnome-terminal.c:1314 gnome-terminal/gnome-terminal.c:1324
 msgid "_Hide menubar"
 msgstr "Gjem menylinje"
 
-#: gnome-terminal/gnome-terminal.c:1301
+#: gnome-terminal/gnome-terminal.c:1316
 msgid "_Close terminal"
 msgstr "Lukk terminal"
 
-#: gnome-terminal/gnome-terminal.c:1316
+#: gnome-terminal/gnome-terminal.c:1326 gnome-terminal/gnome-terminal.c:1337
+#: gnome-terminal/gnome-terminal.c:1357
+msgid "_Reset Terminal"
+msgstr "_Resett terminal"
+
+#: gnome-terminal/gnome-terminal.c:1327 gnome-terminal/gnome-terminal.c:1338
+#: gnome-terminal/gnome-terminal.c:1358
+msgid "Reset and _Clear"
+msgstr "Resett og _blank ut"
+
+#: gnome-terminal/gnome-terminal.c:1335
 msgid "_Show menubar"
-msgstr "Vis menylinje"
+msgstr "Vi_s menylinje"
 
-#: gnome-terminal/gnome-terminal.c:1333
+#: gnome-terminal/gnome-terminal.c:1360
 msgid "C_olor selector..."
-msgstr "Fargevelger..."
+msgstr "F_argevelger..."
 
-#: gnome-terminal/gnome-terminal.c:1961
+#: gnome-terminal/gnome-terminal.c:1988
 msgid "Terminal class name"
 msgstr "Navn på terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:1961
-msgid "CLASS"
-msgstr "KLASSE"
+#: gnome-terminal/gnome-terminal.c:1988
+msgid "TCLASS"
+msgstr "TKLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1964
+#: gnome-terminal/gnome-terminal.c:1991
 msgid "Specifies font name"
 msgstr "Spesifiserer navnet på skrifttypen"
 
-#: gnome-terminal/gnome-terminal.c:1964
+#: gnome-terminal/gnome-terminal.c:1991
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:1967
+#: gnome-terminal/gnome-terminal.c:1994
 msgid "Do not start up shells as logins shells"
 msgstr "Ikke start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1970
+#: gnome-terminal/gnome-terminal.c:1997
 msgid "Start up shells as logins shells"
 msgstr "Start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1973
+#: gnome-terminal/gnome-terminal.c:2000
 msgid "Specifies the geometry for the main window"
 msgstr "Spesifiserer geometrien for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:1973
+#: gnome-terminal/gnome-terminal.c:2000
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:1976
+#: gnome-terminal/gnome-terminal.c:2003
 msgid "Execute this program instead of a shell"
 msgstr "Kjør dette programmet i stedet for et skall"
 
-#: gnome-terminal/gnome-terminal.c:1976
+#: gnome-terminal/gnome-terminal.c:2003
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: gnome-terminal/gnome-terminal.c:1979
+#: gnome-terminal/gnome-terminal.c:2006
 msgid "Foreground color"
 msgstr "Forgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:1979 gnome-terminal/gnome-terminal.c:1982
+#: gnome-terminal/gnome-terminal.c:2006 gnome-terminal/gnome-terminal.c:2009
 msgid "COLOR"
-msgstr "COLOR"
+msgstr "FARGE"
 
-#: gnome-terminal/gnome-terminal.c:1982 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2009 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:1985
+#: gnome-terminal/gnome-terminal.c:2012
 msgid "Update utmp entry"
 msgstr "Oppdater utmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:1985
+#: gnome-terminal/gnome-terminal.c:2012
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:1988
+#: gnome-terminal/gnome-terminal.c:2015
 msgid "Do not update utmp entry"
 msgstr "Ikke oppdater utmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:1988
+#: gnome-terminal/gnome-terminal.c:2015
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:1991
+#: gnome-terminal/gnome-terminal.c:2018
 msgid "Update wtmp entry"
 msgstr "Oppdater wtmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:1991
+#: gnome-terminal/gnome-terminal.c:2018
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:1994
+#: gnome-terminal/gnome-terminal.c:2021
 msgid "Do not update wtmp entry"
 msgstr "Ikke oppdater wtmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:1994
+#: gnome-terminal/gnome-terminal.c:2021
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:1997
+#: gnome-terminal/gnome-terminal.c:2024
 msgid "Set the window title"
 msgstr "Sett vindustittel"
 
-#: gnome-terminal/gnome-terminal.c:1997
+#: gnome-terminal/gnome-terminal.c:2024
 msgid "TITLE"
 msgstr "TITTEL"
 
-#: gsm/main.c:44
+#: gsm/main.c:56
+msgid "Start chooser and pick the session"
+msgstr "Start velgeren og plukk opp sesjonen"
+
+#: gsm/main.c:57
+msgid "Disable normal operation by saving into the Trash session"
+msgstr "Slå av normal operasjon ved å lagre til søppelsesjonen"
+
+#: gsm/main.c:58
+msgid "Only read saved sessions from the default.session file"
+msgstr "Kun skrivebeskyttede sesjoner fra default.session filen"
+
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 "Antall millisekunder ventetid for registrering av klienter (0=uendelig)"
 
-#: gsm/main.c:45
+#: gsm/main.c:60
+msgid "Millisecond period spent waiting for clients to respond (0=forever)"
+msgstr "Antall millisekunder ventetid for at klienter skal svare (0=uendelig)"
+
+#: gsm/main.c:61
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr "Antall millisekunder ventetid for at klienter skal dø (0=uendelig)"
 
-#: gsm/manager.c:358
+#: gsm/manager.c:374
 msgid "Wait abandoned due to conflict."
 msgstr "Venting forlatt pga konflikt."
 
-#: gsm/manager.c:1094
+#: gsm/manager.c:816
+#, c-format
+msgid "No response to the %s command."
+msgstr "Ingen svar på %s kommandoen."
+
+#: gsm/manager.c:817
+msgid "The program may be slow, stopped or broken."
+msgstr "Programmet kan være tregt, stopped eller ødelagt."
+
+#: gsm/manager.c:818
+msgid "You may wait for it to respond or remove it."
+msgstr "Du kan vente på svar eller fjerne det."
+
+#: gsm/manager.c:1345
 msgid "Respawn abandoned due to failures."
 msgstr "Gjenoppstart programmer som er forlatt pga feil."
 
-#: gsm/manager.c:1260
+#: gsm/manager.c:1513
 msgid "A session shutdown is in progress."
 msgstr "Nedstenging av sesjonen er igang."
 
@@ -2003,22 +2031,47 @@ msgstr "Drep sesjon"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: kunne ikke koble til sesjonsbehandler\n"
 
-#: gsm/session-properties.c:102
+#: gsm/session-properties.c:125
 msgid "Program:"
 msgstr "Program:"
 
 #. buttons
-#: gsm/session-properties.c:133
+#: gsm/session-properties.c:158
 msgid "Try"
 msgstr "Prøv"
 
-#: gsm/session-properties.c:139
+#: gsm/session-properties.c:164
 msgid "OK"
 msgstr "OK"
 
-#: gsm/session-properties.c:142
+#: gsm/session-properties.c:167
 msgid "Cancel"
 msgstr "Avbryt"
+
+#: gsm/session-properties.c:258
+msgid "Session"
+msgstr "Sesjon"
+
+#. app
+#: gsm/session-properties.c:312
+msgid "Session Chooser"
+msgstr "Sesjonsvelger"
+
+#: gsm/session-properties.c:315
+msgid "Start Session"
+msgstr "Start sesjon"
+
+#: gsm/session-properties.c:318
+msgid "Cancel Login"
+msgstr "Avbryt innlogging"
+
+#: gsm/session-properties.c:344
+msgid "Initialize session settings"
+msgstr "Initialiser innstillinger for sesjon"
+
+#: gsm/session-properties.c:345
+msgid "Only display warnings."
+msgstr "Vis bare advarsler."
 
 #: help-browser/bookmarks.c:220
 msgid "Bookmark"
@@ -2536,10 +2589,6 @@ msgstr "Kantpanel"
 msgid "Corner panel"
 msgstr "Hjørnepanel"
 
-#: panel/menu.c:2036 panel/menu.c:2040 panel/menu.c:2110 panel/menu.c:2876
-msgid "System menus"
-msgstr "Systemmenyer"
-
 #: panel/menu.c:2083 panel/menu.c:2087 panel/menu.c:2151 panel/menu.c:2924
 msgid "Debian menus"
 msgstr "Debian menyer"
@@ -2547,11 +2596,6 @@ msgstr "Debian menyer"
 #: panel/menu.c:2092
 msgid "No Debian menus found!"
 msgstr "Ingen Debian menyer funnet!"
-
-#: panel/menu.c:2118 panel/menu.c:2121 panel/menu.c:2849 panel/menu.c:2890
-#: panel/menu.c:2893
-msgid "User menus"
-msgstr "Brukermenyer"
 
 #: panel/menu.c:2130 panel/menu.c:2134 panel/menu.c:2856 panel/menu.c:2905
 #: panel/menu.c:2908
@@ -2970,4 +3014,3 @@ msgstr "Kommando (valgfri)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "Høyde"
-
