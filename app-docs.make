@@ -30,7 +30,8 @@ app-dist-hook: index.html
 install-data-am: index.html
 	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/stylesheet-images
 	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/figures
-	-for file in $(srcdir)/$(app)/*.html $(srcdir)/$(app)/*.css; do \
+	-cp $(srcdir)/topic.dat $(DESTDIR)$(helpdir)
+	-for file in $(srcdir)/$(app)/*.html $(srcdir)/$(app)/*.css $(srcdir)/*.png; do \
 	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/$$basefile; \
 	done

@@ -46,6 +46,7 @@ applet-dist-hook: index.html
 
 install-data-am: index.html
 	-$(mkinstalldirs) $(DESTDIR)$(docdir)/stylesheet-images
+	-cp $(srcdir)/topic.dat $(DESTDIR)$(helpdir)
 	-for file in \
 		$(applet)-applet/*.html	\
 		$(applet)-applet/*.css	\

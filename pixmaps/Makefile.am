@@ -5,6 +5,7 @@ BITMAPS     = \
 	gnome-emacs.png				\
 	gnome-aorta.png				\
 	gnome-amusements.png        \
+	gnome-applets.png			\
 	gnome-applications.png      \
 	gnome-audio2.png			\
 	gnome-calc2.png				\
@@ -51,6 +52,7 @@ BITMAPS     = \
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
 	gnome-mailcheck.png         \
+	gnome-mdi.png				\
 	gnome-mnemonic.png			\
 	gnome-modem.png             \
 	gnome-money.png				\
@@ -62,6 +64,7 @@ BITMAPS     = \
 	gnome-panel.png				\
 	gnome-qeye.png				\
 	gnome-run.png				\
+	gnome-session.png			\
 	gnome-settings.png          \
 	gnome-spider.png			\
 	gnome-squeak.png            \
@@ -76,6 +79,7 @@ BITMAPS     = \
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
+	gnome-user-interface.png		\
 	gnome-util.png              \
 	gnome-word.png				\
 	kterm.xpm				\

@@ -44,3 +44,5 @@
 #undef HAVE_ZVT_TERM_RESET
 
 #undef HAVE_HOSTS_ACCESS
+
+#undef HAVE_LIBBZ2
