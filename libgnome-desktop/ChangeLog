@@ -1,3 +1,17 @@
+2002-08-06  Mark McLoughlin  <mark@skynet.ie>
+
+	* Makefile.am: define pixmaps and icons dir.
+
+	* gnome-icon-loader.c:
+	(remove_gconf_handler): remove unused variables.
+	(gnome_icon_loader_init): add pixmaps and icons
+	dir for the prefix we are installed into.
+	(load_themes): don't stat the icons, we don't
+	do that for themed icons anyway. Actually check
+	which format we are favouring, should fix #89245.
+	(suffix_from_name): impl.
+	(scan_directory): use it here.
+
 2002-07-31  Michael Meeks  <michael@michael.home>
 
 	* gnome-desktop-item.c (ditem_save): don't

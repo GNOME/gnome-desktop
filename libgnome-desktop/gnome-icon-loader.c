@@ -113,6 +113,8 @@ static void   theme_subdir_load            (GnomeIconLoader      *loader,
 static void   icon_data_destroy            (GnomeIconData        *data);
 static void   blow_themes                  (GnomeIconLoaderPrivate *priv);
 
+static IconSuffix suffix_from_name         (const char           *name);
+
 
 static guint		 signal_changed = 0;
 
@@ -226,8 +228,6 @@ static void
 remove_gconf_handler (GnomeIconLoader *loader)
 {
   GnomeIconLoaderPrivate *priv;
-  GConfClient *client;
-  char *theme;
   
   priv = loader->priv;
 
@@ -250,15 +250,17 @@ gnome_icon_loader_init (GnomeIconLoader *loader)
 
   priv->custom_theme = FALSE;
   priv->current_theme = g_strdup ("default");
-  priv->search_path = g_new (char *, 3);
+  priv->search_path = g_new (char *, 5);
   
 
   priv->search_path[0] = g_build_filename (g_get_home_dir (),
 					     ".icons",
 					     NULL);
-  priv->search_path[1] = g_strdup ("/usr/share/icons");
-  priv->search_path[2] = g_strdup ("/usr/share/pixmaps");
-  priv->search_path_len = 3;
+  priv->search_path[1] = g_strdup (GNOME_DESKTOP_PIXMAPDIR);
+  priv->search_path[2] = g_strdup (GNOME_DESKTOP_ICONDIR);
+  priv->search_path[3] = g_strdup ("/usr/share/icons");
+  priv->search_path[4] = g_strdup ("/usr/share/pixmaps");
+  priv->search_path_len = 5;
 
   priv->themes_valid = FALSE;
   priv->themes = NULL;
@@ -574,6 +576,8 @@ load_themes (GnomeIconLoader *loader)
   char *dir, *base_name, *dot;
   const char *file;
   char *abs_file;
+  char *old_file;
+  IconSuffix old_suffix, new_suffix;
   
   priv = loader->priv;
 
@@ -598,20 +602,29 @@ load_themes (GnomeIconLoader *loader)
 	      my_g_str_has_suffix (file, ".xpm"))
 	    {
 	      abs_file = g_build_filename (dir, file, NULL);
-	      if (g_file_test (abs_file, G_FILE_TEST_IS_REGULAR))
+
+	      base_name = g_strdup (file);
+		  
+	      dot = strrchr (base_name, '.');
+	      if (dot)
+		*dot = 0;
+
+	      if ((old_file = g_hash_table_lookup (priv->unthemed_icons,
+						   base_name)))
 		{
-		  base_name = g_strdup (file);
-		  
-		  dot = strrchr (base_name, '.');
-		  if (dot)
-		    *dot = 0;
-		  
-		  g_hash_table_replace (priv->unthemed_icons,
-					base_name,
-					abs_file);
+		  old_suffix = suffix_from_name (old_file);
+		  new_suffix = suffix_from_name (file);
+
+		  if (new_suffix > old_suffix)
+		    g_hash_table_replace (priv->unthemed_icons,
+					  base_name,
+					  abs_file);
+
 		}
 	      else
-		g_free (abs_file);
+		g_hash_table_insert (priv->unthemed_icons,
+				     base_name,
+				     abs_file);
 	    }
 	}
       g_dir_close (gdir);
@@ -829,6 +842,23 @@ string_from_suffix (IconSuffix suffix)
   return NULL;
 }
 
+static IconSuffix
+suffix_from_name (const char *name)
+{
+  IconSuffix retval;
+
+  if (my_g_str_has_suffix (name, ".png"))
+    retval = ICON_SUFFIX_PNG;
+  else if (my_g_str_has_suffix (name, ".svg"))
+    retval = ICON_SUFFIX_SVG;
+  else if (my_g_str_has_suffix (name, ".xpm"))
+    retval = ICON_SUFFIX_XPM;
+  else
+    retval = ICON_SUFFIX_NONE;
+
+  return retval;
+}
+
 static char *
 theme_lookup_icon (IconTheme *theme,
 		   const char *icon_name,
@@ -1042,16 +1072,12 @@ scan_directory (IconThemeDir *dir, char *full_dir, gboolean allow_svg)
 	  
 	  continue;
 	}
-      
-      if (my_g_str_has_suffix (name, ".png")) 
-	suffix = ICON_SUFFIX_PNG;
-      else if (allow_svg && my_g_str_has_suffix (name, ".svg")) 
-	suffix = ICON_SUFFIX_SVG;
-      else if (my_g_str_has_suffix (name, ".xpm"))
-	suffix = ICON_SUFFIX_XPM;
-      else
-	continue;
 
+      suffix = suffix_from_name (name);
+      if (suffix == ICON_SUFFIX_NONE ||
+	  (suffix == ICON_SUFFIX_SVG && !allow_svg))
+	continue;
+      
       base_name = g_strdup (name);
       dot = strrchr (base_name, '.');
       *dot = 0;
