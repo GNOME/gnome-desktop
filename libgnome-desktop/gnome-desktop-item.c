@@ -467,15 +467,17 @@ gnome_desktop_item_new_from_uri (const char *uri,
 				 GnomeDesktopItemLoadFlags flags,
 				 GError **error)
 {
-        GnomeDesktopItem *retval;
-        char *subfn, *dir;
-        struct stat sbuf;
-	GnomeVFSFileInfo info;
+	GnomeDesktopItem *retval;
+	char *subfn, *dir;
+	struct stat sbuf;
+	GnomeVFSFileInfo *info;
 	time_t mtime = 0;
 
-        g_return_val_if_fail (uri != NULL, NULL);
+	g_return_val_if_fail (uri != NULL, NULL);
 
-	if (gnome_vfs_get_file_info (uri, &info,
+	info = gnome_vfs_file_info_new ();
+
+	if (gnome_vfs_get_file_info (uri, info,
 				     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
 		g_set_error (error,
 			     /* FIXME: better errors */
@@ -484,43 +486,48 @@ gnome_desktop_item_new_from_uri (const char *uri,
 			     _("Error reading file '%s': %s"),
 			     uri, strerror (errno));
 
+		gnome_vfs_file_info_unref (info);
+
                 return NULL;
 	}
 
-	if (info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-		mtime = info.mtime;
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
+		mtime = info->mtime;
 	else
 		mtime = 0;
 
-	if (info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
-	    info.type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
+	    info->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
                 subfn = g_build_filename (uri, ".directory", NULL);
-		gnome_vfs_file_info_clear (&info);
-		if (gnome_vfs_get_file_info (subfn, &info,
+		gnome_vfs_file_info_clear (info);
+		if (gnome_vfs_get_file_info (subfn, info,
 					     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
+			gnome_vfs_file_info_unref (info);
 			g_free (subfn);
 			return make_fake_directory (uri);
 		}
 
-		if (info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-			mtime = info.mtime;
+		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
+			mtime = info->mtime;
 		else
 			mtime = 0;
 	} else {
                 subfn = g_strdup (uri);
 	}
 
-	gnome_vfs_file_info_clear (&info);
+	gnome_vfs_file_info_clear (info);
 
 	retval = ditem_load (subfn, error);
 
         if (retval == NULL) {
+		gnome_vfs_file_info_unref (info);
 		g_free (subfn);
 		return NULL;
 	}
 
 	if (flags & GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS &&
 	    ! gnome_desktop_item_exists (retval)) {
+		gnome_vfs_file_info_unref (info);
 		gnome_desktop_item_unref (retval);
 		g_free (subfn);
 		return NULL;
@@ -536,6 +543,7 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		g_free (dir);
 	}
 
+	gnome_vfs_file_info_unref (info);
 	g_free (subfn);
 
         return retval;
@@ -1553,16 +1561,22 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 
 	/* This is ugly, but useful internally */
 	if (item->mtime != DONT_UPDATE_MTIME) {
-		GnomeVFSFileInfo info;
-
 		item->mtime = 0;
 
-		if (item->location != NULL &&
-		    gnome_vfs_get_file_info (item->location, &info,
-					     GNOME_VFS_FILE_INFO_DEFAULT) == GNOME_VFS_OK) {
-			if (info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-				item->mtime = info.mtime;
-			gnome_vfs_file_info_clear (&info);
+		if (item->location) {
+			GnomeVFSFileInfo *info;
+			GnomeVFSResult    res;
+
+			info = gnome_vfs_file_info_new ();
+
+			res = gnome_vfs_get_file_info (item->location, info,
+						       GNOME_VFS_FILE_INFO_DEFAULT);
+
+			if (res == GNOME_VFS_OK &&
+			    info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
+				item->mtime = info->mtime;
+
+			gnome_vfs_file_info_unref (info);
 		}
 	}
 
