@@ -91,24 +91,24 @@ bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 
 	switch (type->kind) {
 
-#define SET_BASIC(k,t,v) \
+#define DECODE_BASIC(k,t,v) \
 case CORBA_tk_##k##: \
 	any = bonobo_arg_new (TC_CORBA_##t##); \
 	BONOBO_ARG_SET_GENERAL (any, ##v##, TC_CORBA_##k##, CORBA_##t##, ev); \
 	break;
 
-		SET_BASIC (short,     short,              atoi  (de->value));
-		SET_BASIC (long,      long,               atol  (de->value));
-		SET_BASIC (ushort,    unsigned_short,     atoi  (de->value));
-		SET_BASIC (ulong,     unsigned_long,      atol  (de->value));
-		SET_BASIC (longlong,  long_long,          atoll (de->value));
-		SET_BASIC (float,     float,              atof  (de->value));
-		SET_BASIC (double,    double,             atof  (de->value));
-		SET_BASIC (ulonglong, unsigned_long_long, atoll (de->value));
-		SET_BASIC (char,      char,               de->value [0]);
-		SET_BASIC (octet,     octet,              atoi  (de->value));
+		DECODE_BASIC (short,     short,              atoi  (de->value));
+		DECODE_BASIC (long,      long,               atol  (de->value));
+		DECODE_BASIC (ushort,    unsigned_short,     atoi  (de->value));
+		DECODE_BASIC (ulong,     unsigned_long,      atol  (de->value));
+		DECODE_BASIC (longlong,  long_long,          atoll (de->value));
+		DECODE_BASIC (float,     float,              atof  (de->value));
+		DECODE_BASIC (double,    double,             atof  (de->value));
+		DECODE_BASIC (ulonglong, unsigned_long_long, atoll (de->value));
+		DECODE_BASIC (char,      char,               de->value [0]);
+		DECODE_BASIC (octet,     octet,              atoi  (de->value));
 
-#undef SET_BASIC
+#undef DECODE_BASIC
 
 	case CORBA_tk_boolean:
 		if (!strcmp (de->value, "0") || !strcasecmp (de->value, "false")) {
@@ -347,7 +347,7 @@ case CORBA_tk_##k##: \
 		if (CORBA_TypeCode_equal (type, TC_GNOME_DesktopEntryType, NULL)) {
 			gchar *value, *up;
 
-			up = g_strup (g_strdup (de->value));
+			up = g_strup (g_strdup (de->value ? de->value : "UNKNOWN"));
 			value = g_strdup_printf ("DESKTOP_ENTRY_TYPE_%s", up);
 			DynamicAny_DynEnum_set_as_string (dynenum, value, ev);
 			g_free (value); g_free (up);
@@ -368,3 +368,192 @@ case CORBA_tk_##k##: \
 
 	return any;
 }
+
+static void
+free_dir_entry (DirEntry *de)
+{
+	g_free (de->name);
+	g_free (de->value);
+	g_slist_foreach (de->subvalues, (GFunc) free_dir_entry, NULL);
+	g_slist_free (de->subvalues);
+	g_free (de);
+}
+
+static void
+clear_dir_entry (DirEntry *de)
+{
+	g_free (de->value);
+	de->value = NULL;
+	g_slist_foreach (de->subvalues, (GFunc) free_dir_entry, NULL);
+	g_slist_free (de->subvalues);
+	de->subvalues = NULL;
+}
+
+void
+bonobo_config_ditem_encode_any (BonoboConfigDItem *ditem, DirEntry *de, const gchar *path,
+				const CORBA_any *any, CORBA_Environment *ev)
+{
+	g_return_if_fail (ditem != NULL);
+	g_return_if_fail (BONOBO_IS_CONFIG_DITEM (ditem));
+	g_return_if_fail (any != NULL);
+	g_return_if_fail (de != NULL);
+	g_return_if_fail (ev != NULL);
+
+	switch (any->_type->kind) {
+
+#define ENCODE_BASIC(k,t,f) \
+case CORBA_tk_##k##: \
+	clear_dir_entry (de); \
+	de->value = g_strdup_printf (f, BONOBO_ARG_GET_GENERAL (any, TC_CORBA_##t##, CORBA_##t##, ev)); \
+	break;
+
+		ENCODE_BASIC (short,     short,              "%hd");
+		ENCODE_BASIC (long,      long,               "%d");
+		ENCODE_BASIC (ushort,    unsigned_short,     "%hu");
+		ENCODE_BASIC (ulong,     unsigned_long,      "%u");
+		ENCODE_BASIC (longlong,  long_long,          "%lld");
+		ENCODE_BASIC (float,     float,              "%g");
+		ENCODE_BASIC (double,    double,             "%G");
+		ENCODE_BASIC (ulonglong, unsigned_long_long, "%llu");
+		ENCODE_BASIC (char,      char,               "%c");
+		ENCODE_BASIC (octet,     octet,              "%d");
+
+#undef ENCODE_BASIC
+
+	case CORBA_tk_boolean:
+		clear_dir_entry (de);
+		de->value = g_strdup (BONOBO_ARG_GET_BOOLEAN (any) ? "true" : "false");
+		break;
+
+	case CORBA_tk_string:
+		clear_dir_entry (de);
+		de->value = g_strdup (BONOBO_ARG_GET_STRING (any));
+		break;
+
+	case CORBA_tk_struct: {
+		DynamicAny_DynStruct dynstruct;
+		CORBA_NameValuePairSeq *members;
+		DirEntry *subentry;
+		gulong i, j;
+		GSList *l;
+
+		dynstruct = CORBA_ORB_create_dyn_struct (bonobo_orb (), any->_type, ev);
+
+		DynamicAny_DynAny_from_any (dynstruct, (CORBA_any *) any, ev);
+
+		members = DynamicAny_DynStruct_get_members (dynstruct, ev);
+
+		clear_dir_entry (de);
+
+		for (i = 0; i < members->_length; i++) {
+			CORBA_NameValuePair *pair = &members->_buffer [i];
+
+			if (CORBA_TypeCode_equal (pair->value._type, TC_GNOME_ExtraAttributes, NULL)) {
+				Bonobo_PropertySet *list = pair->value._value;
+
+				for (j = 0; j < list->_length; j++) {
+					subentry = g_new0 (DirEntry, 1);
+					subentry->name = g_strdup (list->_buffer [j].name);
+					bonobo_config_ditem_encode_any (ditem, subentry, path,
+									&list->_buffer [j].value, ev);
+					de->subvalues = g_slist_prepend (de->subvalues, subentry);
+				}
+			} else {
+				subentry = g_new0 (DirEntry, 1);
+				subentry->name = g_strdup (pair->id);
+
+				bonobo_config_ditem_encode_any (ditem, subentry, path, &pair->value, ev);
+
+				de->subvalues = g_slist_prepend (de->subvalues, subentry);
+			}
+		}
+
+		break;
+	}
+
+	case CORBA_tk_enum: {
+		DynamicAny_DynEnum dynenum;
+		gchar *value;
+
+		dynenum = CORBA_ORB_create_dyn_enum (bonobo_orb (), any->_type, ev);
+
+		DynamicAny_DynAny_from_any (dynenum, (CORBA_any *) any, ev);
+
+		value = DynamicAny_DynEnum_get_as_string (dynenum, ev);
+
+		clear_dir_entry (de);
+		if (CORBA_TypeCode_equal (any->_type, TC_GNOME_DesktopEntryType, NULL))
+			de->value = g_strdown (g_strdup (value + 19));
+		else
+			de->value = g_strdup (value);
+
+		CORBA_free (value);
+
+		break;
+	}
+
+	case CORBA_tk_alias: {
+		CORBA_any *new_value;
+		CORBA_TypeCode type;
+
+		type = any->_type->subtypes [0];
+		new_value = bonobo_arg_copy (any);
+		CORBA_Object_release ((CORBA_Object) new_value->_type, NULL);
+		new_value->_type = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object )type, NULL);
+
+		bonobo_config_ditem_encode_any (ditem, de, path, new_value, ev);
+
+		bonobo_arg_release (new_value);
+
+		break;
+	}
+
+	case CORBA_tk_sequence: {
+		DynamicAny_DynSequence dynseq;
+		DynamicAny_DynAny_AnySeq *dynany_anyseq;
+		CORBA_TypeCode type;
+		DirEntry *subentry;
+		gulong i;
+
+		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), any->_type, ev);
+
+		DynamicAny_DynAny_from_any (dynseq, (CORBA_any *) any, ev);
+
+		dynany_anyseq = DynamicAny_DynSequence_get_elements (dynseq, ev);
+
+		type = any->_type->subtypes [0];
+
+		clear_dir_entry (de);
+
+		for (i = 0; i < dynany_anyseq->_length; i++) {
+			if (CORBA_TypeCode_equal (type, TC_GNOME_LocalizedString, NULL)) {
+				GNOME_LocalizedString *localized = dynany_anyseq->_buffer [i]->_value;
+
+				if (localized->locale) {
+					subentry = g_new0 (DirEntry, 1);
+					subentry->name = g_strdup (localized->locale);
+					subentry->value = g_strdup (localized->text);
+					de->subvalues = g_slist_prepend (de->subvalues, subentry);
+				} else
+					de->value = g_strdup (localized->text);
+			} else {
+				subentry = g_new0 (DirEntry, 1);
+
+				bonobo_config_ditem_encode_any (ditem, subentry, path,
+								dynany_anyseq->_buffer [i], ev);
+
+				de->subvalues = g_slist_prepend (de->subvalues, subentry);
+			}
+		}
+
+		break;
+	}
+
+	default:
+		g_message (G_STRLOC ": %d - %s (%s)", any->_type->kind,
+			   any->_type->name, any->_type->repo_id);
+
+		break;
+	}
+}
+

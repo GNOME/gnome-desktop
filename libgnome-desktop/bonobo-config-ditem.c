@@ -661,9 +661,15 @@ real_set_value (BonoboConfigDatabase *db,
 {
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	DirEntry *de;
-	char *name;
 
 	de = lookup_dir_entry (ditem, key, TRUE);
+
+	g_message (G_STRLOC ": |%s| - %p", key, de);
+
+	if (!de)
+		return;
+
+	bonobo_config_ditem_encode_any (ditem, de, key, value, ev);
 
 	ditem->_priv->modified = TRUE;
 

@@ -73,6 +73,14 @@ test_ditem (Bonobo_ConfigDatabase db)
 
 		g_print ("ATTRIBUTE: |%s|\n", attr);
 	}
+
+#if 0
+	gnome_desktop_item_set_name (ditem, "de", "Neu gesetzt!");
+
+	gnome_desktop_item_save (ditem, NULL);
+#endif
+
+	// gnome_desktop_item_save (ditem, "~/work/foo.desktop");
 }
 
 int
@@ -143,26 +151,22 @@ main (int argc, char **argv)
 #endif
 
         CORBA_exception_init (&ev);
-	type = bonobo_pbclient_get_type (db, "/Config/scrollbacklines", &ev);
+	type = bonobo_pbclient_get_type (db, "/Foo/Test", &ev);
 	if (type)
 		printf ("type is %d - %s (%s)\n", type->kind, type->name, type->repo_id);
 
         CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_CORBA_long, &ev);
+	value = bonobo_pbclient_get_value (db, "/Foo/Test", TC_CORBA_long, &ev);
 	if (value) {
 		printf ("got value as long %d\n", BONOBO_ARG_GET_LONG (value));
-		bonobo_pbclient_set_value (db, "/Config/scrollbacklines", value, &ev);
+		BONOBO_ARG_SET_LONG (value, 512);
+		bonobo_pbclient_set_value (db, "/Foo/Test", value, &ev);
 	}
+	bonobo_arg_release (value);
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_sync (db, &ev);
-        CORBA_exception_free (&ev);
-
-        CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_CORBA_string, &ev);
-	if (value)
-		printf ("got value as string %s\n", BONOBO_ARG_GET_STRING (value));
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
