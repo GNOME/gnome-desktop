@@ -1550,7 +1550,7 @@ gnome_desktop_item_get_local_name   (const GnomeDesktopItem     *item)
 	g_return_val_if_fail(item, NULL);
 
 	if(item->name) {
-		GList *iter;
+		const GList *iter;
 
 		iter = gnome_i18n_get_language_list(NULL);
 
@@ -1585,7 +1585,7 @@ gnome_desktop_item_get_local_comment(const GnomeDesktopItem     *item)
         g_return_val_if_fail(item, NULL);
 
 	if(item->comment) {
-		GList *iter;
+		const GList *iter;
 
 		iter = gnome_i18n_get_language_list(NULL);
 
@@ -1656,7 +1656,7 @@ gnome_desktop_item_get_local_attribute (const GnomeDesktopItem *item,
         g_return_val_if_fail(attr_name, NULL);
 
         if(item->other_attributes) {
-		GList *iter;
+		const GList *iter;
 
 		iter = gnome_i18n_get_language_list(NULL);
 
