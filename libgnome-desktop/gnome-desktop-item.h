@@ -27,6 +27,9 @@
 #ifndef GNOME_DITEM_H
 #define GNOME_DITEM_H
 
+#include <glib.h>
+#include <libgnome/gnome-defs.h>
+
 BEGIN_GNOME_DECLS
 
 typedef enum {
