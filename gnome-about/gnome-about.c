@@ -324,7 +324,7 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 		howmuch = 0;
 	}
 
-	return TRUE;
+	return FALSE;
 }
 
 gboolean
