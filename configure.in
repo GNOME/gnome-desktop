@@ -12,6 +12,8 @@ dnl let applications configure for gnome
 dnl
 gnome_cv_use_gnome=yes
 
+
+
 GNOME_INIT(capplet)
 
 AC_ISC_POSIX
@@ -77,6 +79,28 @@ ORB_CFLAGS="$ORBIT_CFLAGS"
 
 AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
+
+dnl
+dnl CApplet, Note that the libs and all that is set up in gnome_init,
+dnl but gnome_init is truly dumb and doesn't require it, so we need to
+dnl do a separate check
+dnl
+AC_MSG_CHECKING(for CApplet library)
+vers=`$GNOME_CONFIG --modversion capplet`
+case "x$vers" in
+  xcapplet-*)
+    AC_MSG_RESULT(found)
+    ;;
+  *)
+    AC_MSG_ERROR(Did not find CApplet library, you probably need to install control-center first)
+    ;;
+esac
+
+dnl
+dnl Configure Easter Egg
+dnl
+AC_MSG_CHECKING(for Configure Easter Egg version >= 3.14)
+AC_MSG_RESULT(found)
 
 dnl
 dnl GdkPixBuf
