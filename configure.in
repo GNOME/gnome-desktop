@@ -60,12 +60,6 @@ for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   fi
 done
 
-dnl
-dnl ORBit checks
-dnl
-GNOME_ORBIT_HOOK([have_orbit=true],[])
-AM_CONDITIONAL(ORBIT_INSTALLED, test x$have_orbit = xtrue)
-
 ORB_LIBS="$ORBIT_LIBS"
 ORB_CFLAGS="$ORBIT_CFLAGS"
 

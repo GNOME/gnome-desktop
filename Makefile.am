@@ -1,10 +1,8 @@
-if ORBIT_INSTALLED
 control_center = control-center
 capplets = capplets
 panel = panel
 applets = applets
 idl = idl
-endif
 
 always_built_SUBDIRS = \
 	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
