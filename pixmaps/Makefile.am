@@ -50,6 +50,7 @@ BITMAPS     = \
 	gnome-mnemonic.png			\
 	gnome-modem.png             \
 	gnome-money.png				\
+	gnome-monitor.png           \
 	gnome-networktool.png			\
 	gnome-note.png				\
 	gnome-panel.png				\
