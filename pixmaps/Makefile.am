@@ -20,7 +20,6 @@ BITMAPS     = \
 	gnome-die5.png				\
 	gnome-die6.png				\
 	gnome-diskfree.png          \
-	gnome-ee.png				\
 	gnome-favorites.png			\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
