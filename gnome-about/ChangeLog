@@ -1,3 +1,9 @@
+Sun Mar 12 09:48:28 2000  George Lebl <jirka@5z.com>
+
+	* gnome-about.c: destroying a gdk_pixbuf with gdk_imlib_destroy_image
+	  was bad ju ju.  fixes bug #7237 we can also return FALSE again from
+	  quit_cb
+
 2000-03-12  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-about.c (cb_quit): Return TRUE instead of FALSE.

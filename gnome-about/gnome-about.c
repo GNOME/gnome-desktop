@@ -238,9 +238,9 @@ new_sparkles_timeout(GnomeCanvas* canvas)
 }
 
 static void
-free_imlib_image (GtkObject *object, gpointer data)
+unref_gdk_pixbuf (GtkObject *object, gpointer data)
 {
-	gdk_imlib_destroy_image (data);
+	gdk_pixbuf_unref (data);
 }
 
 gboolean
@@ -318,8 +318,7 @@ gboolean
 cb_quit (GtkWidget *widget, gpointer data)
 {
 	gtk_main_quit();
-	
-	return TRUE;
+	return FALSE;
 }
 
 gint
@@ -501,7 +500,7 @@ main (gint argc, gchar *argv[])
 				       "height", (double) gdk_pixbuf_get_height (im),
 				       NULL);
 	gtk_signal_connect (GTK_OBJECT (image), "destroy",
-			    GTK_SIGNAL_FUNC (free_imlib_image), im);
+			    GTK_SIGNAL_FUNC (unref_gdk_pixbuf), im);
 	gtk_signal_connect (GTK_OBJECT (image), "event",
 			    GTK_SIGNAL_FUNC (cb_clicked), NULL);
 	gtk_timeout_add (1300, (GtkFunction) new_sparkles_timeout, canvas);
