@@ -463,6 +463,7 @@ main (gint argc, gchar *argv[])
 	window = gtk_dialog_new_with_buttons (_("About GNOME"), NULL, 0,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,	
 				   	      NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_OK);
 
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 	g_object_set (window, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
