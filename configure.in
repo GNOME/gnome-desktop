@@ -166,6 +166,10 @@ then
 	AC_SUBST(FVWM2LIBS)
 fi
 
+dnl esd-manager
+AM_PATH_ESD(,AC_DEFINE(HAVE_LIBESD),
+[AC_MSG_WARN([Warning: no EsounD detected.])])
+	
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
 oLIBS="$LIBS"
