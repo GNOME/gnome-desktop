@@ -318,7 +318,8 @@ gboolean
 cb_quit (GtkWidget *widget, gpointer data)
 {
 	gtk_main_quit();
-	return FALSE;
+	
+	return TRUE;
 }
 
 gint
