@@ -74,6 +74,12 @@ main (int argc, char **argv)
 		printf ("got value as string %s\n", BONOBO_ARG_GET_STRING (value));
         CORBA_exception_free (&ev);
 
+        CORBA_exception_init (&ev);
+	value = bonobo_pbclient_get_value (db, "/Desktop Entry/Name", TC_string, &ev);
+	if (value)
+		printf ("got value as string (%s)\n", BONOBO_ARG_GET_STRING (value));
+        CORBA_exception_free (&ev);
+
 	exit (0);
 
         CORBA_exception_init (&ev);

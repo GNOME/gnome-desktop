@@ -54,6 +54,7 @@ typedef enum {
 typedef struct DirEntry {
 	char *name;
 	char *value;
+	GSList *localized_values;
 } DirEntry;
 
 typedef struct TSecHeader {
@@ -137,6 +138,44 @@ escape_string_and_dup (char *s)
 	return return_value;
 }
 
+static gint
+key_compare_func (gconstpointer a, gconstpointer b)
+{
+	DirEntry *de = (DirEntry *) a;
+
+	return strcmp (de->name, b);
+}
+
+static DirEntry *
+insert_key_maybe_localized (TSecHeader *section, gchar *key)
+{
+	gchar *a, *b, *locale = NULL;
+	DirEntry *de = NULL;
+	GSList *l = NULL;
+
+	a = strchr (key, '[');
+	b = strrchr (key, ']');
+	if ((a != NULL) && (b != NULL)) {
+		*a++ = '\0'; *b = '\0'; locale = a;
+		l = g_slist_find_custom (section->keys, key, key_compare_func);
+	}
+	g_message (G_STRLOC ": %p - `%s' - `%s'", l, locale, key);
+
+	de = g_new0 (DirEntry, 1);
+
+	if (l) {
+		DirEntry *parent = (DirEntry *) l->data;
+
+		de->name = g_strdup (locale);
+		parent->localized_values = g_slist_prepend (parent->localized_values, de);
+	} else {
+		de->name = g_strdup (key);
+		section->keys = g_slist_prepend (section->keys, de);
+	}
+
+	return de;
+}
+
 static TSecHeader *
 load (const char *file)
 {
@@ -217,9 +256,8 @@ load (const char *file)
 	    
 			if (c == '=' || overflow){
 				*next = '\0';
-				Key = g_new0 (DirEntry, 1);
-				Key->name = g_strdup (CharBuffer);
-				SecHeader->keys = g_slist_prepend (SecHeader->keys, Key);
+
+				Key = insert_key_maybe_localized (SecHeader, CharBuffer);
 				state = KeyValue;
 				next = CharBuffer;
 			} else {
@@ -411,6 +449,9 @@ real_get_value (BonoboConfigDatabase *db,
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 		return NULL;
 	}
+
+	g_message (G_STRLOC ": (%s) - `%s' - `%s' - %p", key, de->name, de->value,
+		   de->localized_values);
 
 	tc = Bonobo_ConfigDatabase_getType (BONOBO_OBJREF (db), key, ev);
 	if (BONOBO_EX (ev))
