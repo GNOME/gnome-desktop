@@ -74,6 +74,10 @@ PROGRAMS_PANEL_MIXER=""
 AC_CHECK_HEADERS(linux/soundcard.h,[PROGRAMS_PANEL_MIXER=mixer],[
   AC_CHECK_HEADERS(machine/soundcard.h, [PROGRAMS_PANEL_MIXER=mixer])])
 AC_SUBST(PROGRAMS_PANEL_MIXER)
+
+dnl panel/modemlights
+AC_CHECK_HEADERS(net/ppp_defs.h,[PROGRAMS_PANEL_MODEMLIGHTS=modemlights])
+AC_SUBST(PROGRAMS_PANEL_MODEMLIGHTS)
  
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
