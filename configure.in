@@ -37,6 +37,20 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
+for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
+  if test -f $dir/orbit-idl ; then
+     orbit_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
+     break
+  fi
+done
+AC_CHECK_PROG(ORBIT_CONFIG, orbit-config, orbit-config)
+if [ ! -z "$ORBIT_CONFIG" ]; then
+	ORBIT_LIBS="`orbit-config --libs client server`"
+	ORBIT_CFLAGS="`orbit-config --cflags client server`"
+fi
+AC_SUBST(ORBIT_LIBS)
+AM_CONDITIONAL(ORBIT_INSTALLED, test ! -z "$ORBIT_LIBS")
+
 AC_CHECK_HEADERS(dlfcn.h dl.h)
 AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
 AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
@@ -53,6 +67,7 @@ AC_SUBST(XF86MISC_LIBS)
 dnl MICO - Magic to extract the relevant information from
 dnl        various installed files
 
+if test -z "$ORBIT_LIBS"; then
 AC_MSG_CHECKING(for MICO prefix)
 for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   if test -f $dir/mico-ld ; then
@@ -104,6 +119,10 @@ for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%g` ; do
       ;;
   esac
 done
+else
+MICO_LIBS="$ORBIT_LIBS"
+MICO_VERS=""
+fi
 AC_SUBST(MICO_LIBS)
 AC_SUBST(MICO_VERS)
 
