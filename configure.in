@@ -59,14 +59,12 @@ for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
      break
   fi
 done
-AC_CHECK_PROG(ORBIT_CONFIG, orbit-config, orbit-config)
-if test -n "$ORBIT_CONFIG"; then
-	ORBIT_LIBS="`orbit-config --libs client server`"
-	ORBIT_CFLAGS="`orbit-config --cflags client server`"
-fi
-AC_SUBST(ORBIT_CFLAGS)
-AC_SUBST(ORBIT_LIBS)
-AM_CONDITIONAL(ORBIT_INSTALLED, test -n "$ORBIT_LIBS")
+
+dnl
+dnl ORBit checks
+dnl
+GNOME_ORBIT_HOOK([have_orbit=true],[])
+AM_CONDITIONAL(ORBIT_INSTALLED, test x$have_orbit = xtrue)
 
 ORB_LIBS="$ORBIT_LIBS"
 ORB_CFLAGS="$ORBIT_CFLAGS"
