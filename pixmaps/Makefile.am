@@ -68,7 +68,13 @@ TILES     = \
 	tile-purple-up.png			\
 	tile-purple-down.png			\
 	tile-green-up.png			\
-	tile-green-down.png
+	tile-green-down.png        \
+	tile-coral-up.png			\
+	tile-coral-down.png		\
+	tile-moon-up.png			\
+	tile-moon-down.png		\
+	tile-sand-up.png			\
+	tile-sand-down.png		
 
 pixmap_DATA = $(BITMAPS)
 
