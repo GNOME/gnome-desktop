@@ -8,6 +8,7 @@ BITMAPS     = \
 	gnome-balsa2.png			\
 	gnome-calc2.png				\
 	gnome-calendar.png			\
+	gnome-cardgame.png			\
 	gnome-color-browser.png			\
 	gnome-cromagnon.png			\
 	gnome-default.png			\
