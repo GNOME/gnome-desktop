@@ -47,6 +47,8 @@ struct _GnomeDItemEditPrivate {
 	gboolean ui_dirty; /* TRUE if something got changed, and ditem
 			    * was not yet synced */
 
+	gboolean directory_only; /* always force a directory only entry */
+
 	GtkWidget *child1;
 	GtkWidget *child2;
 
@@ -579,6 +581,10 @@ static void
 gnome_ditem_set_directory_sensitive (GnomeDItemEdit *dee,
 				     gboolean is_directory)
 {
+	/* XXX: hack, evil, and such */
+	if (dee->_priv->directory_only)
+		is_directory = TRUE;
+
 	gtk_widget_set_sensitive (dee->_priv->exec_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->exec_entry, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->type_label, ! is_directory);
@@ -608,7 +614,8 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 	}
 
 	type = gnome_desktop_item_get_entry_type (ditem);
-	if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY) {
+	if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY ||
+	    dee->_priv->directory_only) {
 		gnome_ditem_set_directory_sensitive (dee, TRUE);
 		setup_combo (dee, ONLY_DIRECTORY, NULL);
 	} else {
@@ -992,6 +999,55 @@ gnome_ditem_edit_set_editable (GnomeDItemEdit *dee,
 	/* FIXME: a better way needs to be found */
 	gtk_widget_set_sensitive (dee->_priv->child1, editable);
 	gtk_widget_set_sensitive (dee->_priv->child2, editable);
+}
+
+/* set the string type of the entry */
+void
+gnome_ditem_edit_set_entry_type (GnomeDItemEdit *dee,
+				 const char     *type)
+{
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+
+        gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry),
+			    type ? type : "");
+}
+
+/* force directory only */
+void
+gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
+				     gboolean        directory_only)
+{
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+
+	if (dee->_priv->directory_only != directory_only) {
+		dee->_priv->directory_only = directory_only;
+
+		if (directory_only) {
+			gnome_ditem_set_directory_sensitive (dee, TRUE);
+			gnome_ditem_edit_set_entry_type (dee, "Directory");
+			setup_combo (dee, ONLY_DIRECTORY, NULL);
+		} else if (dee->_priv->ditem != NULL) {
+			GnomeDesktopItemType type;
+			type = gnome_desktop_item_get_entry_type (dee->_priv->ditem);
+			if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY) {
+				gnome_ditem_set_directory_sensitive (dee, TRUE);
+				setup_combo (dee, ONLY_DIRECTORY, NULL);
+			} else {
+				const char *extra = NULL;
+				gnome_ditem_set_directory_sensitive (dee, FALSE);
+				if (type == GNOME_DESKTOP_ITEM_TYPE_OTHER) {
+					extra = gnome_desktop_item_get_string
+						(dee->_priv->ditem, GNOME_DESKTOP_ITEM_TYPE);
+				}
+				setup_combo (dee, ALL_EXCEPT_DIRECTORY, extra);
+			}
+		} else {
+			gnome_ditem_set_directory_sensitive (dee, FALSE);
+			setup_combo (dee, ALL_TYPES, NULL /* extra */);
+		}
+	}
 }
 
 

@@ -1921,6 +1921,31 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 	item->modified = TRUE;
 }
 
+/**
+ * gnome_desktop_item_set_location_file:
+ * @item: A desktop item
+ * @file: A local filename specifying the file location of this particular item.
+ *
+ * Set's the 'location' uri of this item to the given @file.
+ *
+ * Returns:
+ */
+void
+gnome_desktop_item_set_location_file (GnomeDesktopItem *item, const char *file)
+{
+        g_return_if_fail (item != NULL);
+        g_return_if_fail (item->refcount > 0);
+
+	if (file != NULL) {
+		char *uri;
+		uri = gnome_vfs_get_uri_from_local_path (file);
+		gnome_desktop_item_set_location_file (item, uri);
+		g_free (uri);
+	} else {
+		gnome_desktop_item_set_location_file (item, NULL);
+	}
+}
+
 /*
  * Reading/Writing different sections, NULL is the standard section
  */

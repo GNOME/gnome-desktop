@@ -157,6 +157,8 @@ void			gnome_desktop_item_set_entry_type    (GnomeDesktopItem		 *item,
 const char *            gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
 void                    gnome_desktop_item_set_location      (GnomeDesktopItem           *item,
 							      const char                 *location);
+void                    gnome_desktop_item_set_location_file (GnomeDesktopItem           *item,
+							      const char                 *file);
 GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktopItem     *item);
 
 /*

@@ -100,6 +100,14 @@ GnomeDesktopItem *gnome_ditem_edit_get_ditem    (GnomeDItemEdit   *dee);
 gchar *           gnome_ditem_edit_get_icon     (GnomeDItemEdit   *dee);
 gchar *           gnome_ditem_edit_get_name     (GnomeDItemEdit   *dee);
 
+/* set the string type of the entry */
+void              gnome_ditem_edit_set_entry_type (GnomeDItemEdit *dee,
+						   const char     *type);
+
+/* force directory only */
+void              gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
+						       gboolean        directory_only);
+
 /* eeeeeeeeek!, evil api */
 void              gnome_ditem_edit_grab_focus   (GnomeDItemEdit   *dee);
 
