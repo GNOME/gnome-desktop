@@ -417,16 +417,6 @@ lookup_dir_entry (BonoboConfigDItem *ditem,
 	return de;
 }
 
-static CORBA_TypeCode
-real_get_type (BonoboConfigDatabase *db,
-	       const CORBA_char     *key, 
-	       CORBA_Environment    *ev)
-{
-	bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
-
-	return CORBA_OBJECT_NIL;
-}
-
 static CORBA_any *
 real_get_value (BonoboConfigDatabase *db,
 		const CORBA_char     *key, 
@@ -435,6 +425,7 @@ real_get_value (BonoboConfigDatabase *db,
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	DirEntry          *de;
 	CORBA_TypeCode     tc;
+	CORBA_any         *default_value = NULL;
 	CORBA_any         *value = NULL;
 	char              *locale = NULL; 
 				
@@ -449,9 +440,11 @@ real_get_value (BonoboConfigDatabase *db,
 	g_message (G_STRLOC ": (%s) - `%s' - `%s' - %p", key, de->name, de->value,
 		   de->subvalues);
 
-	tc = Bonobo_ConfigDatabase_getType (BONOBO_OBJREF (db), key, ev);
-	if (BONOBO_EX (ev))
-		tc = TC_string;
+	default_value = Bonobo_ConfigDatabase_getDefault (BONOBO_OBJREF (db), key, ev);
+	if (BONOBO_EX (ev) || !default_value)
+		tc = TC_CORBA_string;
+	else
+		tc = default_value->_type;
 
 	CORBA_exception_init (ev);
 
@@ -657,7 +650,6 @@ bonobo_config_ditem_class_init (BonoboConfigDatabaseClass *class)
 
 	cd_class = BONOBO_CONFIG_DATABASE_CLASS (class);
 
-	cd_class->get_type     = real_get_type;
 	cd_class->get_value    = real_get_value;
 	cd_class->get_dirs     = real_get_dirs;
 	cd_class->get_keys     = real_get_keys;
