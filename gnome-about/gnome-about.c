@@ -332,6 +332,9 @@ main (gint argc, gchar *argv[])
 	gnome_init ("gnome-about","1.0", argc, argv);
 	
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
+
 	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 			    GTK_SIGNAL_FUNC (cb_quit), NULL);
 
