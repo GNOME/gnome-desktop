@@ -103,7 +103,8 @@ test_builtin (void)
 	CORBA_exception_free (&ev);
 
 	CORBA_exception_init (&ev);
-	Bonobo_ConfigDatabase_addDatabase (db, parent_db, "", &ev);
+	Bonobo_ConfigDatabase_addDatabase (db, parent_db, "", 
+					   Bonobo_ConfigDatabase_DEFAULT, &ev);
 	g_assert (!BONOBO_EX (&ev));
 	CORBA_exception_free (&ev);
 }
@@ -150,7 +151,8 @@ main (int argc, char **argv)
 	test_ditem (db);
 
         CORBA_exception_init (&ev);
-	Bonobo_ConfigDatabase_addDatabase (db, default_db, "/gnome-ditem/", &ev);
+	Bonobo_ConfigDatabase_addDatabase (db, default_db, "/gnome-ditem/",
+					   Bonobo_ConfigDatabase_DEFAULT, &ev);
 	g_assert (!BONOBO_EX (&ev));
 
 #if 0

@@ -152,7 +152,8 @@ ditem_load (const char *data_file,
 	CORBA_exception_free (&ev);
 
 	CORBA_exception_init (&ev);
-	Bonobo_ConfigDatabase_addDatabase (db, default_db, "", &ev);
+	Bonobo_ConfigDatabase_addDatabase (db, default_db, "",
+					   Bonobo_ConfigDatabase_DEFAULT, &ev);
 	if (BONOBO_EX (&ev)) {
 		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
 		bonobo_object_release_unref (db, NULL);
@@ -321,7 +322,9 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 		CORBA_exception_free (&ev);
 
 		CORBA_exception_init (&ev);
-		Bonobo_ConfigDatabase_addDatabase (db, item->default_db, "", &ev);
+		Bonobo_ConfigDatabase_addDatabase (db, item->default_db, "",
+						   Bonobo_ConfigDatabase_DEFAULT,
+						   &ev);
 		if (BONOBO_EX (&ev)) {
 			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
 			bonobo_object_release_unref (db, NULL);

@@ -66,7 +66,9 @@ ditem_resolve (BonoboMoniker               *moniker,
 	}
 
 	if (pdb != CORBA_OBJECT_NIL) {
-		Bonobo_ConfigDatabase_addDatabase (db, pdb, "",ev);
+		Bonobo_ConfigDatabase_addDatabase (db, pdb, "",
+						   Bonobo_ConfigDatabase_DEFAULT,
+						   ev);
 		
 		if (BONOBO_EX (ev)) {
 			bonobo_object_release_unref (pdb, NULL);
