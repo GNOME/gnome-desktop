@@ -25,6 +25,7 @@
 
 #include <config.h>
 
+#include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -394,43 +395,20 @@ return_iter_nth_row(GtkTreeView  *tree_view,
 }
 
 static void
-set_iter_nth_row (GtkTreeView *tree_view,
-                  GtkTreeIter *iter,
-                  gint        row)
+translations_select_row (GtkTreeSelection *selection,
+			 GnomeDItemEdit   *dee)
 {
-        GtkTreeModel *tree_model;
+        GtkTreeModel *model = NULL;
+        GtkTreeIter   iter;
+        char         *lang;
+        char         *name;
+        char         *comment;
 
-        tree_model = gtk_tree_view_get_model (tree_view);
-        gtk_tree_model_get_iter_root (tree_model, iter);
-        iter = return_iter_nth_row (tree_view, tree_model, iter, 0 , row);
-}
+	 if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
 
-static void
-translations_select_row (GtkTreeView    *cl,
-			 int             row,
-			 int             column,
-			 GdkEvent       *event,
-			 GnomeDItemEdit *dee)
-{
-        char *lang;
-        char *name;
-        char *comment;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        GValue value = {0, };	
-
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));	
-        set_iter_nth_row (cl,&iter,row);
-
-        gtk_tree_model_get_value (model, &iter, 0, &value);
-        lang = g_strdup (g_value_get_string (&value));
-
-        gtk_tree_model_get_value (model, &iter, 1, &value);
-        name = g_strdup (g_value_get_string (&value));
-
-        gtk_tree_model_get_value (model, &iter, 2, &value);
-        comment = g_strdup (g_value_get_string (&value));
-        g_value_unset (&value);
+	gtk_tree_model_get (
+		model, &iter, 0, &lang, 1, &name, 2, &comment, -1);
 
         gtk_entry_set_text(
 		GTK_ENTRY (dee->_priv->transl_lang_entry), lang);
@@ -445,13 +423,11 @@ translations_select_row (GtkTreeView    *cl,
 }
 
 static int 
-count_rows (GtkTreeView *view)
+count_rows (GtkTreeModel *model)
 {
-        int rows = 0;
-        GtkTreeModel *model;
         GtkTreeIter iter;
+        int         rows = 0;
 
-        model = gtk_tree_view_get_model (view);
         gtk_tree_model_get_iter_root (model, &iter);
 
         while (gtk_tree_model_iter_next (model, &iter))
@@ -464,199 +440,217 @@ static void
 translations_add (GtkWidget      *button,
 		  GnomeDItemEdit *dee)
 {
-        int i = 0;
-        int number_of_rows = 0;
-        const char *lang;
-        const char *name;
-        const char *comment;
-        const char *text[3];
-        const GList *language_list;
-        const char *curlang;
-        GtkTreeView *tree;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
+	GtkTreeView  *tree;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	const GList  *langs;
+	const char   *tmp;
+	const char   *name;
+	const char   *comment;
+	char         *lang;
 
-        tree = GTK_TREE_VIEW (dee->_priv->translations);
-        model = gtk_tree_view_get_model (tree);
+	tmp     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
+	name    = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_name_entry));
+	comment = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_comment_entry));
 
-        lang     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
-        name    = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_name_entry));
-        comment = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_comment_entry));
-  
-        g_assert (lang != NULL && name != NULL && comment != NULL);
+	g_assert (tmp != NULL && name != NULL && comment != NULL);
 	
-        lang = g_strstrip (g_strdup (lang));
-	
-        /*we are setting the current language so set the easy page entries*/
-        /*FIXME: do the opposite as well!, but that's not that crucial*/
-        language_list = gnome_i18n_get_language_list("LC_ALL");
-        curlang = language_list ? language_list->data : NULL;
-        if ((curlang && strcmp(curlang,lang)==0) ||
-            ((!curlang || strcmp(curlang,"C")==0) && !*lang)) {
-                gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry),name);
-                gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),comment);
-        }
-        gtk_tree_model_get_iter_root (model, &iter);
-        number_of_rows = count_rows (tree);
-        for (i=0;i <number_of_rows;i++){
-                char *s;
-                GValue value = {0, };
-                gtk_tree_model_get_value (model,&iter,0, &value);
-                s = g_strdup (g_value_get_string (&value));
-                g_value_unset (&value);
+	lang = g_strstrip (g_strdup (tmp));
 
-                if (!strcmp (lang, s)) {
-                        gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-					    1, name,2, comment, -1);
-                        g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
-                        g_free (s);
-                        return;
-                }
+	if (!lang [0]) {
+		g_free (lang);
+		return;
+	}
 
-                gtk_tree_model_iter_next (model, &iter);
-                g_free (s);
-        }
-        text[0]=lang;
-        text[1]=name;
-        text[2]=comment;
-        gtk_list_store_append (GTK_LIST_STORE(model), &iter);
-        gtk_list_store_set (GTK_LIST_STORE(model),&iter, 0, text[0],1,text[1],2,text[2],-1);
-        g_signal_emit(G_OBJECT(dee), ditem_edit_signals[CHANGED], 0);
+	/*
+	 * If we are editing the current language, change the name and
+	 * comment entries on the easy page as well.
+	 */
+	langs = gnome_i18n_get_language_list ("LC_ALL");
+	tmp = langs ? langs->data : NULL;
+	if ((tmp && !strcmp (tmp, lang)) || (!tmp && !strcmp (tmp, "C"))) {
+		gtk_entry_set_text (
+			GTK_ENTRY (dee->_priv->name_entry), name);
+		gtk_entry_set_text (
+			GTK_ENTRY (dee->_priv->comment_entry), comment);
+	}
+
+	tree  = GTK_TREE_VIEW (dee->_priv->translations);
+	model = gtk_tree_view_get_model (tree);
+
+	gtk_tree_model_get_iter_root (model, &iter);
+        do {
+		char *string;
+
+		gtk_tree_model_get (model, &iter, 0, &string, -1);
+
+		if (!strcmp (lang, string)) {
+			gtk_list_store_set (
+				GTK_LIST_STORE (model), &iter,
+				1, name, 2, comment, -1);
+
+			g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+
+			g_free (string);
+			g_free (lang);
+
+			return;
+		}
+
+		g_free (string);
+
+	} while (gtk_tree_model_iter_next (model, &iter));
+
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (
+		GTK_LIST_STORE (model), &iter,
+		0, lang, 1, name, 2, comment, -1);
+
+	g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+
+	g_free (lang);
 }
 
 static void
 translations_remove (GtkWidget      *button,
 		     GnomeDItemEdit *dee)
 {
-        GtkTreeView *view;
+        GtkTreeView      *view;
         GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
+        GtkTreeModel     *model;
+        GtkTreeIter       iter;
 
         view = GTK_TREE_VIEW (dee->_priv->translations);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
 
-        /* gtk_tree_selection_get_selected will return selected node if
-	 * selection is set to GTK_SELECTION_SINGLE
-	 */
-
-        /* just return if nothing selected */
         if (!gtk_tree_selection_get_selected (selection, &model, &iter))
                return;
 
         gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-        g_signal_emit(G_OBJECT(dee), ditem_edit_signals[CHANGED], 0);
+
+        g_signal_emit (G_OBJECT(dee), ditem_edit_signals [CHANGED], 0);
+}
+
+static GtkWidget *
+setup_translations_list (GnomeDItemEdit *dee)
+{
+	GtkCellRenderer   *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeSelection  *selection;
+	GtkListStore      *model;
+	GtkWidget         *tree;
+
+	model = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
+	g_object_unref (model);
+
+	renderer = gtk_cell_renderer_text_new ();	
+
+	column = gtk_tree_view_column_new_with_attributes (
+					_("Language"), renderer,
+					"text", 0, NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+	column = gtk_tree_view_column_new_with_attributes (
+					_("Name"), renderer,
+					"text", 1, NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+	column = gtk_tree_view_column_new_with_attributes (
+					_("Comment"), renderer,
+					"text", 2, NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (tree));
+
+	gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (tree), FALSE);
+
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+
+	g_signal_connect (selection, "changed",
+			  G_CALLBACK (translations_select_row), dee);
+
+	return tree;
 }
  
 static void
 fill_advanced_page (GnomeDItemEdit *dee,
 		    GtkWidget      *page)
 {
-        GtkWidget         *label;
-        GtkWidget         *button;
-        GtkWidget         *box;
-        const char        *transl [3];
-        GtkCellRenderer   *renderer;
-        GtkTreeViewColumn *column;
-	GtkListStore      *model;
+	GtkWidget *label;
+	GtkWidget *entry;
+	GtkWidget *button;
+	GtkWidget *box;
 
-        dee->_priv->tryexec_label = label = label_new(_("Try this before using:"));
-        table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
+	label = label_new (_("Try this before using:"));
+	table_attach_label (GTK_TABLE (page), label, 0, 1, 0, 1);
+	dee->_priv->tryexec_label = label;
 
-        dee->_priv->tryexec_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(page),dee->_priv->tryexec_entry, 1, 2, 0, 1);
-        g_signal_connect_swapped(G_OBJECT(dee->_priv->tryexec_entry), 
-                                  "changed",
-                                  G_CALLBACK(gnome_ditem_edit_changed),
-                                  G_OBJECT(dee));
-
-        label = label_new(_("Documentation:"));
-        table_attach_label(GTK_TABLE(page),label, 0, 1, 1, 2);
-
-        dee->_priv->doc_entry = gtk_entry_new();
-        gtk_entry_set_max_length (GTK_ENTRY(dee->_priv->doc_entry), 255);        
-        table_attach_entry(GTK_TABLE(page),dee->_priv->doc_entry, 1, 2, 1, 2);
-        g_signal_connect_swapped(G_OBJECT(dee->_priv->doc_entry), 
-                                  "changed",
-                                  G_CALLBACK(gnome_ditem_edit_changed),
-                                  G_OBJECT(dee));
-
-        label = gtk_label_new(_("Name/Comment translations:"));
-        table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
-  
-        transl [0] = _("Language");
-        transl [1] = _("Name");
-        transl [2] = _("Comment");
-
-	model = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
-        dee->_priv->translations =
-		gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
-	g_object_unref (model);
-
-        renderer = gtk_cell_renderer_text_new ();	
-
-        column = gtk_tree_view_column_new_with_attributes (transl [0], renderer, NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
-
-        column = gtk_tree_view_column_new_with_attributes (transl [1], renderer, NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
-
-        column = gtk_tree_view_column_new_with_attributes (transl [2], renderer, NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
-
-        gtk_tree_view_columns_autosize (GTK_TREE_VIEW (dee->_priv->translations));
-
-        box = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_set_size_request (box, 0, 120);
-        gtk_container_add (GTK_CONTAINER (box),dee->_priv->translations);
-        table_attach_list (GTK_TABLE (page), box, 0, 2, 5, 6);
-
-        gtk_tree_view_set_headers_clickable (
-		GTK_TREE_VIEW (dee->_priv->translations), FALSE);
-        g_signal_connect (dee->_priv->translations, "select_row",
-			  G_CALLBACK (translations_select_row), dee);
-
-        box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
-        table_attach_entry(GTK_TABLE(page),box, 0, 2, 3, 4);
-  
-        dee->_priv->transl_lang_entry = gtk_entry_new();
-        gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_lang_entry,FALSE,FALSE,0);
-        gtk_widget_set_size_request(dee->_priv->transl_lang_entry,50,0);
-
-        dee->_priv->transl_name_entry = gtk_entry_new();
-        gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_name_entry,TRUE,TRUE,0);
-
-        dee->_priv->transl_comment_entry = gtk_entry_new();
-        gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_comment_entry,TRUE,TRUE,0);
-
-	g_signal_connect_swapped (G_OBJECT (dee->_priv->transl_name_entry), "changed",
-				  G_CALLBACK(gnome_ditem_edit_changed), dee);
-
-	g_signal_connect_swapped (G_OBJECT(dee->_priv->transl_comment_entry), "changed",
+	entry = gtk_entry_new ();
+	table_attach_entry (GTK_TABLE (page), entry, 1, 2, 0, 1);
+	g_signal_connect_swapped (entry, "changed",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
+	dee->_priv->tryexec_entry = entry;
 
-        box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
-        table_attach_entry(GTK_TABLE(page),box, 0, 2, 4, 5);
+	label = label_new (_("Documentation:"));
+	table_attach_label (GTK_TABLE (page), label, 0, 1, 1, 2);
+
+	entry = gtk_entry_new ();
+	gtk_entry_set_max_length (GTK_ENTRY (entry), 255);        
+	table_attach_entry (GTK_TABLE (page), entry, 1, 2, 1, 2);
+	g_signal_connect_swapped (entry, "changed",
+				  G_CALLBACK (gnome_ditem_edit_changed), dee);
+	dee->_priv->doc_entry = entry;
+
+	label = gtk_label_new (_("Name/Comment translations:"));
+	table_attach_label (GTK_TABLE (page), label, 0, 2, 2, 3);
+
+	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	table_attach_entry (GTK_TABLE (page), box, 0, 2, 3, 4);
+
+	entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (entry, 30, -1);
+	dee->_priv->transl_lang_entry = entry;
+
+	entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	dee->_priv->transl_name_entry = entry;
+
+	entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	dee->_priv->transl_comment_entry = entry;
+
+	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	table_attach_entry (GTK_TABLE (page), box, 0, 2, 4, 5);
   
-        button = gtk_button_new_with_label(_("Add/Set"));
-        gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
-        g_signal_connect(G_OBJECT(button),"clicked",
-                           G_CALLBACK(translations_add),
-                           dee);
-        button = gtk_button_new_with_label(_("Remove"));
-        gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
-        g_signal_connect(G_OBJECT(button),"clicked",
-                           G_CALLBACK(translations_remove),
-                           dee);
+	button = gtk_button_new_with_label (_("Add/Set"));
+	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (translations_add), dee);
+
+	button = gtk_button_new_with_label (_("Remove"));
+	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (translations_remove), dee);
+  
+	dee->_priv->translations = setup_translations_list (dee);
+
+	box = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_set_size_request (box, 0, 120);
+	gtk_container_add (GTK_CONTAINER (box), dee->_priv->translations);
+	table_attach_list (GTK_TABLE (page), box, 0, 2, 5, 6);
 }
 
 static GtkWidget *
 make_page (void)
 {
-        GtkWidget * frame, * page;
+        GtkWidget *frame;
+	GtkWidget *page;
 
         frame = gtk_frame_new (NULL);
-        gtk_container_set_border_width (GTK_CONTAINER(frame), GNOME_PAD_SMALL);
+        gtk_container_set_border_width (
+			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
 
         page = gtk_table_new (5, 2, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
@@ -671,31 +665,30 @@ make_page (void)
 static void
 gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
 {
-	GtkWidget *child1, *child2;
-	dee->_priv = g_new0(GnomeDItemEditPrivate, 1);
+	GtkWidget *page;
 
-        child1 = make_page();
-        fill_easy_page (dee, GTK_BIN (child1)->child);
-        gtk_widget_show_all (child1);
+	dee->_priv = g_new0 (GnomeDItemEditPrivate, 1);
 
-        child2 = make_page();
-        fill_advanced_page (dee, GTK_BIN(child2)->child);
-        gtk_widget_show_all (child2);
+        page = make_page ();
+        fill_easy_page (dee, GTK_BIN (page)->child);
+        gtk_widget_show_all (page);
 
-        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
-                                  child1,
+        gtk_notebook_append_page (GTK_NOTEBOOK (dee), page,
 				  gtk_label_new (_("Basic")));
 
-        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
-                                  child2,
+	dee->_priv->child1 = page;
+
+        page = make_page ();
+        fill_advanced_page (dee, GTK_BIN (page)->child);
+        gtk_widget_show_all (page);
+
+        gtk_notebook_append_page (GTK_NOTEBOOK (dee), page,
 				  gtk_label_new (_("Advanced")));
 
-	dee->_priv->child1 = child1;
-	dee->_priv->child2 = child2;
+	dee->_priv->child2 = page;
 
 	/* FIXME: There needs to be a way to edit ALL keys/sections */
 }
-
 
 /**
  * gnome_ditem_edit_new
@@ -829,7 +822,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
                            cs ? cs : "");
 
         tmpstr = gnome_desktop_item_get_icon (ditem);
-	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), cs);
+	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), tmpstr);
 	g_free (tmpstr);
 
         cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
@@ -947,8 +940,8 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	gnome_desktop_item_clear_localestring (ditem,
 					       GNOME_DESKTOP_ITEM_COMMENT);
         view = GTK_TREE_VIEW (dee->_priv->translations);
-        number_of_rows = count_rows (view);	
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
+        number_of_rows = count_rows (model);	
         gtk_tree_model_get_iter_root (model, &iter);
         for (i = 0; i < number_of_rows; i++) {
                 char *lang, *name, *comment;

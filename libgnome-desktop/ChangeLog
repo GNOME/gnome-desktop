@@ -1,3 +1,19 @@
+2002-02-28  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-ditem-edit.c:
+	(set_iter_nth_row): kill.
+	(translations_select_row): connect this to the "changed"
+	signal on the GtkTreeSelection and just use
+	gtk_tree_model_get.
+	(count_rows): pass in the model.
+	(translations_add): clean up a lot and use the treeview
+	correctly.
+	(setup_translations_list): impl helper func.
+	(fill_advanced_page): cleanup. Fix some bugs.
+	(gnome_ditem_edit_sync_display): set the icon entry filename
+	correctly.
+	(gnome_ditem_edit_sync_ditem): upd.
+
 2002-02-27  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: build test-ditem-edit.
