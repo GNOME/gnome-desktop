@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.4.0.4\n"
-"POT-Creation-Date: 2001-06-03 13:52-0700\n"
+"POT-Creation-Date: 2001-06-05 04:53-0700\n"
 "PO-Revision-Date: 2001-05-27 14:47+02:00\n"
 "Last-Translator: George Lebl <jirka@5z.com>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -41,7 +41,44 @@ msgstr "Musíte zadat jeden argument který je .desktop soubor èi url\n"
 msgid "No panel found\n"
 msgstr "®ádný panel nebyl nenalezen\n"
 
-#: panel/gnome-panel-screenshot.c:98
+#: panel/gnome-panel-screenshot.c:117
+msgid ""
+"Unable to initialize png structure.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Nelze inicializovat strukturu png.\n"
+"Máte asi ¹patnou verzi libpng na va¹em systému"
+
+#: panel/gnome-panel-screenshot.c:125
+msgid ""
+"Unable to create png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Nelze vytvoøit png info.\n"
+"Máte asi ¹patnou verzi libpng na va¹em systému"
+
+#: panel/gnome-panel-screenshot.c:132
+msgid ""
+"Unable to set png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Nelze nastavit png info.\n"
+"Máte asi ¹patnou verzi libpng na va¹em systému"
+
+#: panel/gnome-panel-screenshot.c:146
+msgid ""
+"Insufficient memory to save the screenshot.\n"
+"Please free up some resources and try again."
+msgstr ""
+"Nedostatek pamìti na ulo¾ení obrazovky.\n"
+"Prosím uvolnìte nìjaké místo a zkuste znovu."
+
+#: panel/gnome-panel-screenshot.c:190
+#, c-format
+msgid "File %s already exists. Overwrite?"
+msgstr "Soubor %s ji¾ existuje. Pøepsat?"
+
+#: panel/gnome-panel-screenshot.c:204 panel/gnome-panel-screenshot.c:661
 #, c-format
 msgid ""
 "Unable to create the file:\n"
@@ -52,64 +89,37 @@ msgstr ""
 "\"%s\"\n"
 "Prosím zkontrolujte práva na rodièovském adresáøi."
 
-#: panel/gnome-panel-screenshot.c:116
-msgid ""
-"Unable to initialize png structure.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nelze inicializovat strukturu png.\n"
-"Máte asi ¹patnou verzi libpng na va¹em systému"
-
-#: panel/gnome-panel-screenshot.c:124
-msgid ""
-"Unable to create png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nelze vytvoøit png info.\n"
-"Máte asi ¹patnou verzi libpng na va¹em systému"
-
-#: panel/gnome-panel-screenshot.c:131
-msgid ""
-"Unable to set png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nelze nastavit png info.\n"
-"Máte asi ¹patnou verzi libpng na va¹em systému"
-
-#: panel/gnome-panel-screenshot.c:147
-msgid ""
-"Insufficient memory to save the screenshot.\n"
-"Please free up some resources and try again."
-msgstr ""
-"Nedostatek pamìti na ulo¾ení obrazovky.\n"
-"Prosím uvolnìte nìjaké místo a zkuste znovu."
-
-#: panel/gnome-panel-screenshot.c:286
+#: panel/gnome-panel-screenshot.c:463
 msgid "Print Screenshot"
 msgstr "Tisknout zachycenou obrazovku"
 
-#: panel/gnome-panel-screenshot.c:334
+#: panel/gnome-panel-screenshot.c:511
 msgid "Screenshot Print Preview"
 msgstr "Náhled tisku zachycené obrazovky"
 
 #. translators: this the file that gets made up with the screenshot
-#: panel/gnome-panel-screenshot.c:351
+#: panel/gnome-panel-screenshot.c:528
 #, c-format
 msgid "%s%cScreenshot.png"
 msgstr "%s%cObrazovka.png"
 
 #. translators: this the file that gets made up with the
 #. * screenshot
-#: panel/gnome-panel-screenshot.c:363
+#: panel/gnome-panel-screenshot.c:540
 #, c-format
 msgid "%s%cScreenshot-%d.png"
 msgstr "%s%cObrazovka-%d.png"
 
-#: panel/gnome-panel-screenshot.c:573
+#: panel/gnome-panel-screenshot.c:680
+#, c-format
+msgid "Not enough room to write file %s"
+msgstr "Nedostatek místa k vytvoøení %s"
+
+#: panel/gnome-panel-screenshot.c:880
 msgid "Grab a window instead of the entire screen"
 msgstr "Zachytit okno namísto celé obrazovky"
 
-#: panel/gnome-panel-screenshot.c:601
+#: panel/gnome-panel-screenshot.c:908
 msgid ""
 "Glade file for the screenshot program is missing.\n"
 "Please check your installation of gnome-core"
@@ -117,7 +127,7 @@ msgstr ""
 "Soubor glade pro program zachycení obrazovky chybí.\n"
 "Prosím zkontrolujte instalaci gnome-core."
 
-#: panel/gnome-panel-screenshot.c:618
+#: panel/gnome-panel-screenshot.c:925
 msgid "Unable to take a screenshot of the current desktop."
 msgstr "Nelze zachytit aktuální plochu."
 
@@ -4310,9 +4320,7 @@ msgstr "Vybrat písmo"
 
 #: gnome-terminal/gnome-terminal.glade.h:11
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"AaÁáBbCcÈèDdÏïEeÌìÉéFfGgHhIiÍíJjKkLlMmNnÒòOoÓóPpQqRrØøSs©¹Tt«»UuÚúVvWwXxYyÝýZ"
-"z"
+msgstr "AaÁáBbCcÈèDdÏïEeÌìÉéFfGgHhIiÍíJjKkLlMmNnÒòOoÓóPpQqRrØøSs©¹Tt«»UuÚúVvWwXxYyÝýZz"
 
 #: gnome-terminal/gnome-terminal.glade.h:12
 msgid "Enable bold text"
@@ -4759,11 +4767,11 @@ msgstr "Posun"
 #~ msgstr "Url:"
 
 #~ msgid ""
-#~ "This applet currently sends getURL commands to netscape throught the -remote "
-#~ "interface.  Hopefully later more webrowsers will be supported."
+#~ "This applet currently sends getURL commands to netscape throught the -"
+#~ "remote interface.  Hopefully later more webrowsers will be supported."
 #~ msgstr ""
-#~ "Tento aplet pou¾ívá pøíkazy 'getURL' prohlí¾eèe netscape pøes pøepínaè "
-#~ "-remote.\n"
+#~ "Tento aplet pou¾ívá pøíkazy 'getURL' prohlí¾eèe netscape pøes pøepínaè -"
+#~ "remote.\n"
 #~ "Podpora dal¹ích prohlí¾eèù bude pøidána pozdìji."
 
 #~ msgid "The Web Browser Controller"
@@ -4849,11 +4857,12 @@ msgstr "Posun"
 
 #~ msgid ""
 #~ "This applet is released under the terms and conditions of the GNU Public "
-#~ "Licence.This applet shows the load on a network device. It requires the "
-#~ "/proc/net/ip_acct interface to be present and set up correctly for the "
+#~ "Licence.This applet shows the load on a network device. It requires the /"
+#~ "proc/net/ip_acct interface to be present and set up correctly for the "
 #~ "device."
 #~ msgstr ""
-#~ "Tento aplet je ¹íøen pod Obecnou veøejnou licencí GNU. Aplet zobrazuje tok\n"
+#~ "Tento aplet je ¹íøen pod Obecnou veøejnou licencí GNU. Aplet zobrazuje "
+#~ "tok\n"
 #~ "dat pøes sí»ové zaøízení a vy¾aduje soubor /proc/net/ip_acct obsahující \n"
 #~ "informace o daném zaøízení."
 
@@ -4953,12 +4962,12 @@ msgstr "Posun"
 
 #~ msgid ""
 #~ "Released under the GNU general public license.\n"
-#~ "A modem status indicator and dialer.Lights in order from the top or left are "
-#~ "RX and TX"
+#~ "A modem status indicator and dialer.Lights in order from the top or left "
+#~ "are RX and TX"
 #~ msgstr ""
 #~ "Distribuovábo pod Obecnou veøejnou licencí GNU\n"
-#~ "Aplet ukazuje stav modemu a vytáèí pøipojení. Svìtla v poøadí shora a zleva "
-#~ "jsou RX a TX"
+#~ "Aplet ukazuje stav modemu a vytáèí pøipojení. Svìtla v poøadí shora a "
+#~ "zleva jsou RX a TX"
 
 # 'Modemová svìtla' je úmyslnì...
 #~ msgid "Modem Lights Applet"
@@ -4974,7 +4983,8 @@ msgstr "Posun"
 #~ "warning: this version of gmix was compiled with a different version of\n"
 #~ "soundcard.h.\n"
 #~ msgstr ""
-#~ "varování: tato verze programu gmix byla kompilována s jinou verzí souuboru\n"
+#~ "varování: tato verze programu gmix byla kompilována s jinou verzí "
+#~ "souuboru\n"
 #~ "soundcard.h.\n"
 
 #~ msgid "Macros"
@@ -5070,16 +5080,18 @@ msgstr "Posun"
 #~ "clock.\n"
 #~ "\n"
 #~ "This program is free software; you can redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the Free "
-#~ "Software Foundation; either version 2 of the License, or (at your option) "
-#~ "any later version."
+#~ "under the terms of the GNU General Public License as published by the "
+#~ "Free Software Foundation; either version 2 of the License, or (at your "
+#~ "option) any later version."
 #~ msgstr ""
-#~ "Tento aplet GNOME pøidává do panelu mo¾nost pou¾ít pøíkazovou øádku. Nabízí\n"
+#~ "Tento aplet GNOME pøidává do panelu mo¾nost pou¾ít pøíkazovou øádku. "
+#~ "Nabízí\n"
 #~ "doplòování pøíazù, historii, konfigurovatelné makra a volitelnì hodiny.\n"
 #~ "\n"
 #~ "Tento program je volný software; je mo¾né ho distribuovat a/nebo "
 #~ "modifikovat\n"
-#~ "pod ustanoveními Obecné veøejné licence GNU a to buï verze 2 této licence\n"
+#~ "pod ustanoveními Obecné veøejné licence GNU a to buï verze 2 této "
+#~ "licence\n"
 #~ "nebo (podle va¹í volby) jakékoli verze pozdìj¹í."
 
 #~ msgid "Mini-Commander Applet"
@@ -5164,16 +5176,16 @@ msgstr "Posun"
 #~ msgstr "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 
 #~ msgid ""
-#~ "This applet switches between keyboard maps. Not more. It uses setxkbmap, or "
-#~ "xmodmap. The main site of this app moved temporarily to URL "
-#~ "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-#~ "to CVS.So long, and thanks for all the fish.\n"
+#~ "This applet switches between keyboard maps. Not more. It uses setxkbmap, "
+#~ "or xmodmap. The main site of this app moved temporarily to URL http://lsc."
+#~ "kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it to CVS.So "
+#~ "long, and thanks for all the fish.\n"
 #~ "Thanks for Balazs Nagy (Kevin)<julian7@kva.hu> for minor help."
 #~ msgstr ""
-#~ "Tento aplet pøepíná mezi klávesnicemi. Nic víc. Pou¾ívá buï setxkbmap nebo "
-#~ "xmodmap. Hlavní stránka tohoto apletu je doèasnì pøesunuta na "
-#~ "http://lsc.kva.hu/gkb/. Prosím, po¹lete mi vlajku va¹ho státu, pokud ji¾ "
-#~ "není obsa¾ena, ve velikosti 60×40 pixelù, umístím ji do CVS.\n"
+#~ "Tento aplet pøepíná mezi klávesnicemi. Nic víc. Pou¾ívá buï setxkbmap "
+#~ "nebo xmodmap. Hlavní stránka tohoto apletu je doèasnì pøesunuta na http://"
+#~ "lsc.kva.hu/gkb/. Prosím, po¹lete mi vlajku va¹ho státu, pokud ji¾ není "
+#~ "obsa¾ena, ve velikosti 60×40 pixelù, umístím ji do CVS.\n"
 #~ "Podìkování pro Balazse Nagyho (Kevin)<julian7@kva.hu> za malou pomoc."
 
 #~ msgid "(C) 1998-99 LSC - Linux Supporting Center"
@@ -5228,8 +5240,8 @@ msgstr "Posun"
 #~ msgstr "Aplet \"Patnáct\" nelze vytvoøit!"
 
 #~ msgid ""
-#~ "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
-#~ "Guaranteed to be a productivity buster."
+#~ "Sam Lloyd's all-time favorite game, now for your delight in the Gnome "
+#~ "Panel. Guaranteed to be a productivity buster."
 #~ msgstr ""
 #~ "Hra \"Patnáct\" Sama Lloyda, nyní ve va¹em panelu desktopu Gnome. \n"
 #~ "Garantuje sni¾ování produktivity práce."
@@ -5350,7 +5362,8 @@ msgstr "Posun"
 
 #~ msgid "Blink when any mail is waiting. (Not just when mail arrives)"
 #~ msgstr ""
-#~ "Blikat, pokud èeká nìjaká nepøeètená e-po¹ta. Tedy nikoli jen pøi doruèení."
+#~ "Blikat, pokud èeká nìjaká nepøeètená e-po¹ta. Tedy nikoli jen pøi "
+#~ "doruèení."
 
 #~ msgid "When clicked, run:"
 #~ msgstr "Pøi kliku my¹í pustit:"
@@ -5379,7 +5392,8 @@ msgstr "Posun"
 #~ "Distribuováno pod Obecnou veøejnou licencí GNU.\n"
 #~ "Základní aplet digitálních hodin s datem v balónovém tipu. Volitelné "
 #~ "zobrazení\n"
-#~ "12/24 hodin. Blikání mù¾e být pro jakýkoli nepøeètený mail nebo krátce, jen\n"
+#~ "12/24 hodin. Blikání mù¾e být pro jakýkoli nepøeètený mail nebo krátce, "
+#~ "jen\n"
 #~ "kdy¾ pøijde po¹ta."
 
 #~ msgid "(C) 1999"
@@ -5491,8 +5505,8 @@ msgstr "Posun"
 #~ "This applet monitors the charge of your laptop's battery.  Click on it to "
 #~ "change display modes."
 #~ msgstr ""
-#~ "Tento aplet monitoruje stav baterií va¹eho laptopu. Klik na nìj zmìní re¾im "
-#~ "zobrazování."
+#~ "Tento aplet monitoruje stav baterií va¹eho laptopu. Klik na nìj zmìní "
+#~ "re¾im zobrazování."
 
 #~ msgid " (C) 1997-1998 The Free Software Foundation"
 #~ msgstr " (C) 1997-1998 Free Software Foundation"
@@ -5510,8 +5524,8 @@ msgstr "Posun"
 #~ "Error querying battery charge.  Make sure that your kernel was built with "
 #~ "APM support."
 #~ msgstr ""
-#~ "Chyba pøi získání informací o stavu baterií. Ujistìte se, ¾e Vá¹ kernel byl "
-#~ "sestaven s podporou APM."
+#~ "Chyba pøi získání informací o stavu baterií. Ujistìte se, ¾e Vá¹ kernel "
+#~ "byl sestaven s podporou APM."
 
 #~ msgid "Timezone"
 #~ msgstr "Èasová zóna"
