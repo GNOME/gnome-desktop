@@ -217,8 +217,10 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
         label = label_new(_("Type:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
 
-        types = g_list_prepend(types, "Application");
         types = g_list_prepend(types, "Directory");
+        types = g_list_prepend(types, "URL");
+        types = g_list_prepend(types, "PanelApplet");
+        types = g_list_prepend(types, "Application");
         dee->type_combo = gtk_combo_new();
         gtk_combo_set_popdown_strings(GTK_COMBO(dee->type_combo), types);
         g_list_free(types);
@@ -643,7 +645,8 @@ gnome_ditem_edit_destroy (GtkObject *dee)
 	if(de->ditem)
 		gnome_desktop_item_unref(de->ditem);
 
-	/* FIXME: perhaps we should kill the children unless they are
+	/* FIXME: perhaps we should kill the children (the desktop
+	  pages) unless they are
 	   destroyed or being destroyed right now */
 
 	/* this is a weird enough thing right here, does this
@@ -652,6 +655,20 @@ gnome_ditem_edit_destroy (GtkObject *dee)
 
         if (GTK_OBJECT_CLASS(parent_class)->destroy)
                 (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
+}
+
+/* set sensitive for directory/other type of a ditem */
+static void
+gnome_ditem_set_directory_sensitive(GnomeDItemEdit *dee,
+				    gboolean is_directory)
+{
+	gtk_widget_set_sensitive(dee->exec_entry, !is_directory);
+	gtk_widget_set_sensitive(dee->type_combo, !is_directory);
+	gtk_widget_set_sensitive(dee->terminal_button, !is_directory);
+	gtk_widget_set_sensitive(dee->tryexec_entry, !is_directory);
+	gtk_widget_set_sensitive(dee->wmtitles_entry, !is_directory);
+	gtk_widget_set_sensitive(dee->simple_dnd_toggle, !is_directory);
+	gtk_widget_set_sensitive(dee->dndtable, !is_directory);
 }
 
 /* Conform display to ditem */
@@ -664,7 +681,31 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
         
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-        g_return_if_fail(dee != NULL);
+        g_return_if_fail(ditem != NULL);
+
+        cs = gnome_desktop_item_get_type(ditem);
+	if(cs && strcmp(cs,"Directory")==0) {
+		GList *types = NULL;
+		gnome_ditem_set_directory_sensitive(dee, TRUE);
+		types = g_list_prepend(types, "Directory");
+		gtk_combo_set_popdown_strings(GTK_COMBO(dee->type_combo),
+					      types);
+		g_list_free(types);
+	} else {
+		GList *types = NULL;
+		gnome_ditem_set_directory_sensitive(dee, FALSE);
+		types = g_list_prepend(types, "URL");
+		types = g_list_prepend(types, "PanelApplet");
+		types = g_list_prepend(types, "Application");
+		if(cs &&
+		   strcmp(cs,"URL") != 0 &&
+		   strcmp(cs,"PanelApplet") != 0 &&
+		   strcmp(cs,"Application") != 0)
+			types = g_list_prepend(types, (char *)cs);
+		gtk_combo_set_popdown_strings(GTK_COMBO(dee->type_combo),
+					      types);
+		g_list_free(types);
+	}
 
         cs = gnome_desktop_item_get_local_name(ditem);
         gtk_entry_set_text(GTK_ENTRY(dee->name_entry), 
@@ -896,6 +937,8 @@ gnome_ditem_edit_set_ditem(GnomeDItemEdit *dee,
 		gnome_desktop_item_unref(dee->ditem);
 	dee->ditem = ditem;
 
+	gnome_desktop_item_ref(dee->ditem);
+
         gnome_ditem_edit_sync_display(dee, dee->ditem);
 }
 
@@ -940,6 +983,8 @@ gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
 void
 gnome_ditem_edit_clear(GnomeDItemEdit *dee)
 {
+	GList *types = NULL;
+
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
 
@@ -957,6 +1002,18 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), "");
         gtk_clist_clear(GTK_CLIST(dee->translations));
+
+	/* set everything to non-directory type which means any type */
+	gnome_ditem_set_directory_sensitive(dee, FALSE);
+
+	/* put all our possibilities here */
+	types = g_list_prepend(types, "Application");
+	types = g_list_prepend(types, "PanelApplet");
+	types = g_list_prepend(types, "URL");
+	types = g_list_prepend(types, "Directory");
+	gtk_combo_set_popdown_strings(GTK_COMBO(dee->type_combo),
+				      types);
+	g_list_free(types);
 }
 
 static void
