@@ -43,6 +43,7 @@ static author authors[] = {
 	{ "Matthias Clasen", "" },
 	{ "Andrew Clausen", "" },
 	{ "Jeremy Collins", "" },
+	{ "Rusty Conover", "" },
 	{ "Alan Cox", "" },
 	{ "Mark Crichton", "" },
 	{ "Andreas Czechanowski", "" },
