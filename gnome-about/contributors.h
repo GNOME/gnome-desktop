@@ -153,6 +153,7 @@ static gchar *contributors[] = {
 	"Paolo Molaro",
 	"David Mosberger",
 	"Thomas Muldowney",
+	"Alexandre Muñiz",
 	"Sung-Hyun Nam",
 	"Karl Nelson",
 	"Asger Alstrup Nielsen",
