@@ -70,6 +70,7 @@ static gchar *contributors[] = {
 	N_("Gergõ Érdi"),
 	"Peter Fales",
 	"Joaquim Fellmann",
+	"Jens Finke",
 	"Dave Finton",
 	"Milon Firikis",
 	"Raul Perusquia Flores",
