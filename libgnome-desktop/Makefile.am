@@ -1,10 +1,10 @@
 AUTOMAKE_OPTIONS = 1.4
 
-INCLUDES =						\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\"	\
-	-DGNOME_CORE_INTERNAL				\
-	$(WARN_CFLAGS)					\
+INCLUDES =							\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
+	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\"		\
+	-DGNOME_CORE_INTERNAL					\
+	$(WARN_CFLAGS)						\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la

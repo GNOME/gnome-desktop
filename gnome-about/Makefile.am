@@ -1,8 +1,8 @@
-INCLUDES =		 				\
-	$(WARN_CFLAGS)					\
-	$(GNOME_ABOUT_CFLAGS)				\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale\""	\
+INCLUDES =		 					\
+	$(WARN_CFLAGS)						\
+	$(GNOME_ABOUT_CFLAGS)					\
+	$(DISABLE_DEPRECATED_CFLAGS)				\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""
 
 # Flags to make sure we're not using any deprecated functions
