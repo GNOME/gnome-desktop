@@ -397,19 +397,30 @@ static enum {
 } state = DRAWING_INTRO;
 
 static void
-scroll_forward (GtkWidget       *widget,
-		GdkEventButton  *event)
+mouseclick_scroll (GtkWidget       *widget,
+		   GdkEventButton  *event)
 {
 	if (event->button == 1)
 		fast_fwd++;
 }
 
+static void
+mousewheel_scroll (GtkWidget *widget,
+		   GdkEventScroll *event)
+{
+	if (event->direction == GDK_SCROLL_UP)
+		fast_fwd--;
+	else if (event->direction == GDK_SCROLL_DOWN)
+		fast_fwd++;
+}
+
 static gboolean
-keypress_scroll_forward (GtkWidget       *widget,
+keypress_scroll (GtkWidget       *widget,
 		GdkEventKey  *event)
 {
 	if (event->keyval == GDK_space)
 		fast_fwd++;
+		
 	return FALSE;
 }
 
@@ -434,9 +445,9 @@ draw_intro (void)
 
 	gdk_draw_layout (pixmap, area->style->white_gc, x, y, layout);
 
-	if (fast_fwd > 0) {
-		fast_fwd--;
-		state = DRAWING_NAMES;
+	if (fast_fwd  != 0) {
+		state = (fast_fwd > 0) ? DRAWING_NAMES : DRAWING_END;
+		fast_fwd = MAX (0, fast_fwd);
 		x = - layout_width;
 		initial_pause = 50;
 		return;
@@ -469,11 +480,28 @@ draw_names ()
 	if (middle_y == G_MININT)
 		middle_y = area->allocation.height / 2 - font_ascent;
 
-	if (fast_fwd > 0) {
-		fast_fwd--;
-		index++;
+	if (fast_fwd != 0) {
+		(fast_fwd > 0) ? index++ : index--;
+		fast_fwd = 0;
 		coming_y = G_MININT;
 		going_y = middle_y - font_ascent - font_descent;
+		
+		if (index < 0) {
+			index = G_N_ELEMENTS (contributors) - 2;
+			going_y  = G_MININT;
+			state = DRAWING_END;
+			return;
+		}
+		
+		if (index >= G_N_ELEMENTS (contributors) - 2) {
+			index = -1;
+			index = -1;
+			going_y  = G_MININT;
+			middle_y = G_MININT;
+			coming_y = G_MININT;
+			state = DRAWING_END;
+			return;
+		}
 	}
 
 	if (index - 1 >= 0 && going_y != G_MININT) {
@@ -546,10 +574,10 @@ draw_end ()
 			(area->allocation.height - extents.height) / 2,
 			layout);
 
-	if (fast_fwd > 0) {
-		fast_fwd--;
-		state = DRAWING_INTRO;
+	if (fast_fwd != 0) {
+		state = DRAWING_NAMES;
 		pause = 100;
+		return;
 	}
 
 	if (pause-- == 0) {
@@ -773,10 +801,13 @@ main (gint argc, gchar *argv[])
 	gtk_widget_queue_draw (area);
 
 	gtk_widget_add_events (area, GDK_BUTTON_PRESS_MASK);
+	gtk_widget_add_events (area, GDK_KEY_PRESS_MASK);
 	g_signal_connect (area, "button_press_event",
-			  G_CALLBACK (scroll_forward), NULL);
+			  G_CALLBACK (mouseclick_scroll), NULL);
 	g_signal_connect (area, "key_press_event",
-			  G_CALLBACK (keypress_scroll_forward), NULL);			
+			  G_CALLBACK (keypress_scroll), NULL);
+	g_signal_connect (area, "scroll_event",
+			  G_CALLBACK (mousewheel_scroll), NULL);
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);

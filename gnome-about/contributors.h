@@ -301,12 +301,12 @@ static gchar *contributors[] = {
 	"David Winkler",
 	"Jeremy Wise",
 	"Roger Wolff",
+	"Frank Worsley",
 	"James Youngman",
 	"Orest Zborowski",
 	"Sascha Ziemann",
 	"Michael Zucchi",
 	"Jason van Zyl",
-	"Christian F.K. Schaller",
 	"",
 	""
 };
