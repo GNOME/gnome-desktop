@@ -41,6 +41,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
+#include "libgnomeP.h"
 #include "gnome-defs.h"
 #include "gnome-portability.h"
 #include "gnome-ditem.h"
