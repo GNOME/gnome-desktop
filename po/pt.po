@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.2\n"
-"POT-Creation-Date: 1999-03-13 18:31+0000\n"
+"POT-Creation-Date: 1999-03-13 18:38-0500\n"
 "PO-Revision-Date: 1999-03-13 19:10+00:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -17,7 +17,7 @@ msgstr "Acerca"
 #: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:449
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
-#: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:705
+#: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1420
 #: applets/mini-commander/src/mini-commander_applet.c:246
@@ -46,7 +46,7 @@ msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Erro interno: modo inválido em battery_set_mode"
 
 #: applets/battery/battery.c:403 applets/gen_util/clock.c:273
-#: applets/gen_util/mailcheck.c:672 applets/gen_util/printer.c:386
+#: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Não consigo criar applet!\n"
@@ -161,7 +161,7 @@ msgstr ""
 #: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
 #: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
 #: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1414
 #: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
 #: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
@@ -659,61 +659,65 @@ msgstr "Mostrar data"
 msgid "Unix time"
 msgstr "Formato Unix"
 
-#: applets/gen_util/mailcheck.c:249
+#: applets/gen_util/mailcheck.c:267
 msgid "You have new mail."
 msgstr "Tem novo correio."
 
-#: applets/gen_util/mailcheck.c:251
+#: applets/gen_util/mailcheck.c:269
 msgid "You have mail."
 msgstr "Tem correio."
 
-#: applets/gen_util/mailcheck.c:253
+#: applets/gen_util/mailcheck.c:271
 msgid "No mail."
 msgstr "Não tem correio."
 
-#: applets/gen_util/mailcheck.c:511
+#: applets/gen_util/mailcheck.c:557 applets/gen_util/mailcheck.c:578
 msgid "Execute"
 msgstr "Executar"
 
-#: applets/gen_util/mailcheck.c:523
+#: applets/gen_util/mailcheck.c:569
 msgid "before each update"
 msgstr "antes de cada actualização"
 
-#: applets/gen_util/mailcheck.c:531
+#: applets/gen_util/mailcheck.c:591
+msgid "when clicked."
+msgstr ""
+
+#: applets/gen_util/mailcheck.c:600
 msgid "Check for mail every"
 msgstr "Verificar correio cada"
 
-#: applets/gen_util/mailcheck.c:544
+#: applets/gen_util/mailcheck.c:613
 msgid "s"
 msgstr "s"
 
-#: applets/gen_util/mailcheck.c:552
+#: applets/gen_util/mailcheck.c:621
 msgid "Select animation"
 msgstr "Seleccione animação"
 
-#: applets/gen_util/mailcheck.c:580
+#: applets/gen_util/mailcheck.c:649
 msgid "Mail check properties"
 msgstr "Propriedades da verificação de correio"
 
-#: applets/gen_util/mailcheck.c:585
+#: applets/gen_util/mailcheck.c:654
 msgid "Mail check"
 msgstr "Verificação de correio"
 
-#: applets/gen_util/mailcheck.c:631
+#: applets/gen_util/mailcheck.c:704
 msgid "Mail check Applet"
 msgstr "Applet de verificação de correio"
 
-#: applets/gen_util/mailcheck.c:632
+#: applets/gen_util/mailcheck.c:705
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 the Free Software Foundation"
 
-#: applets/gen_util/mailcheck.c:634
+#: applets/gen_util/mailcheck.c:707
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr ""
 "A verificação de correio notifica-o quando chega novo correio à sua caixa de "
 "correio"
 
-#: applets/gen_util/mailcheck.c:693
+#: applets/gen_util/mailcheck.c:772
 msgid "Text only"
 msgstr "Só texto"
 
@@ -782,7 +786,10 @@ msgid ""
 "to CVS.So long, and thanks for all the fish.\n"
 "Thanks for Balazs Nagy (Kevin)<julian7@kva.hu> for minor help."
 msgstr ""
-"Este applet alterna entre tipos de teclados. Usa o setxkbmap ou o xmodmap. O site principal deste applet mudou-se temporariamente para http://lsc.kva.hu/gkb. Por favor, envie-me a sua bandeira (60x40 pixels) para a adicionar ao CVS. ... \n"
+"Este applet alterna entre tipos de teclados. Usa o setxkbmap ou o xmodmap. O "
+"site principal deste applet mudou-se temporariamente para "
+"http://lsc.kva.hu/gkb. Por favor, envie-me a sua bandeira (60x40 pixels) "
+"para a adicionar ao CVS. ... \n"
 "Obrigado a Balazs Nagy (Kevin)<julian7@kva.hu> pela ajuda."
 
 #: applets/gkb/gkb.c:441
@@ -2930,7 +2937,8 @@ msgid ""
 msgstr ""
 "Tem a certeza que apenas deseja terminar o painel?\n"
 "\n"
-"Se necessitar de re-executar o painer após o fechar aqui precisará de escrever panel numa janela de terminal\n"
+"Se necessitar de re-executar o painer após o fechar aqui precisará de "
+"escrever panel numa janela de terminal\n"
 "\n"
 "Carregue em OK para fechar o painel!"
 
