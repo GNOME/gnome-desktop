@@ -10,6 +10,7 @@ static author authors[] = {
 	{ N_("GNOME was brought to you by"), "" },
 	{ "", "" },
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
+	{ "Jonathan Blandford", "<jrb@redhat.com>" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
 	{ "George Lebl", "<jirka@5z.com>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
