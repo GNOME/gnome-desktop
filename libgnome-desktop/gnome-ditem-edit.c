@@ -235,16 +235,6 @@ table_attach_label (GtkTable  *table,
 		GTK_FILL, GTK_FILL, 0, 0);
 }
 
-static void 
-table_attach_list(GtkTable * table, GtkWidget * w,
-		  gint l, gint r, gint t, gint b)
-{
-        gtk_table_attach(table, w, l, r, t, b,
-                         GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-                         GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-                         0, 0);
-}
-
 static GtkWidget *
 label_new (const char *text)
 {
@@ -270,10 +260,11 @@ type_combo_changed (GnomeDItemEdit *dee)
 				    _("Type:"));
 }
 
-static void
-fill_easy_page (GnomeDItemEdit *dee,
-		GtkWidget      *table)
+static GtkWidget *
+make_easy_page (GnomeDItemEdit *dee)
 {
+	GtkWidget *frame;
+	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *entry;
 	GtkWidget *hbox;
@@ -281,6 +272,17 @@ fill_easy_page (GnomeDItemEdit *dee,
 	GtkWidget *combo;
 	GtkWidget *icon_entry;
 	GtkWidget *check_button;
+
+        frame = gtk_frame_new (NULL);
+        gtk_container_set_border_width (
+			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
+
+        table = gtk_table_new (5, 2, FALSE);
+        gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+        gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+        gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+
+        gtk_container_add (GTK_CONTAINER (frame), table);
 
 	/* Name */
 	label = label_new (_("Name:"));
@@ -398,6 +400,7 @@ fill_easy_page (GnomeDItemEdit *dee,
         gtk_container_add (GTK_CONTAINER (align), check_button);
         dee->_priv->terminal_button = check_button;
 
+	return frame;
 }
 
 static GtkTreeIter*
@@ -636,21 +639,37 @@ setup_translations_list (GnomeDItemEdit *dee)
 	return tree;
 }
  
-static void
-fill_advanced_page (GnomeDItemEdit *dee,
-		    GtkWidget      *page)
+static GtkWidget *
+make_advanced_page (GnomeDItemEdit *dee)
 {
+	GtkWidget *frame;
+	GtkWidget *vbox;
+	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *entry;
 	GtkWidget *button;
 	GtkWidget *box;
 
+        frame = gtk_frame_new (NULL);
+        gtk_container_set_border_width (
+			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
+
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_container_add (GTK_CONTAINER (frame), vbox);
+
+        table = gtk_table_new (2, 2, FALSE);
+        gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+        gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+        gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+
+        gtk_box_pack_start (GTK_BOX (vbox), table, TRUE, TRUE, 0);
+
 	label = label_new (_("Try this before using:"));
-	table_attach_label (GTK_TABLE (page), label, 0, 1, 0, 1);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
 	dee->_priv->tryexec_label = label;
 
 	entry = gtk_entry_new ();
-	table_attach_entry (GTK_TABLE (page), entry, 1, 2, 0, 1);
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
 	g_signal_connect_swapped (entry, "changed",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
 	dee->_priv->tryexec_entry = entry;
@@ -658,11 +677,11 @@ fill_advanced_page (GnomeDItemEdit *dee,
 	set_relation (dee->_priv->tryexec_entry, GTK_LABEL (label));
 
 	label = label_new (_("Documentation:"));
-	table_attach_label (GTK_TABLE (page), label, 0, 1, 1, 2);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	entry = gtk_entry_new ();
 	gtk_entry_set_max_length (GTK_ENTRY (entry), 255);        
-	table_attach_entry (GTK_TABLE (page), entry, 1, 2, 1, 2);
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
 	g_signal_connect_swapped (entry, "changed",
 				  G_CALLBACK (gnome_ditem_edit_changed), dee);
 	dee->_priv->doc_entry = entry;
@@ -670,10 +689,18 @@ fill_advanced_page (GnomeDItemEdit *dee,
 	set_relation (dee->_priv->doc_entry, GTK_LABEL (label));
 
 	label = gtk_label_new (_("Name/Comment translations:"));
-	table_attach_label (GTK_TABLE (page), label, 0, 2, 2, 3);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+
+	dee->_priv->translations = setup_translations_list (dee);
+
+	box = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_set_size_request (box, 0, 120);
+	gtk_container_add (GTK_CONTAINER (box), dee->_priv->translations);
+	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
 
 	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	table_attach_entry (GTK_TABLE (page), box, 0, 2, 3, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
@@ -696,7 +723,7 @@ fill_advanced_page (GnomeDItemEdit *dee,
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_generic_name_entry = entry;
 
-	set_tooltip (dee, GTK_WIDGET(entry), _("Generic name"));
+	set_tooltip (dee, GTK_WIDGET (entry), _("Generic name"));
 	set_relation (dee->_priv->transl_generic_name_entry, GTK_LABEL (label));
 
 	/* FIXME: transl_icon_entry, locale specific icons */
@@ -709,8 +736,6 @@ fill_advanced_page (GnomeDItemEdit *dee,
 	set_tooltip (dee, GTK_WIDGET(entry), _("Comment"));
 	set_relation (dee->_priv->transl_comment_entry, GTK_LABEL (label));
 
-	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	table_attach_entry (GTK_TABLE (page), box, 0, 2, 4, 5);
 	button = gtk_button_new_with_label (_("Add/Set"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
@@ -726,33 +751,8 @@ fill_advanced_page (GnomeDItemEdit *dee,
 	set_tooltip (dee, GTK_WIDGET(button),
 		    _("Remove Name/Comment Translation"));
   
-	dee->_priv->translations = setup_translations_list (dee);
-
-	box = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_set_size_request (box, 0, 120);
-	gtk_container_add (GTK_CONTAINER (box), dee->_priv->translations);
-	table_attach_list (GTK_TABLE (page), box, 0, 2, 5, 6);
+	return frame;
 }
-
-static GtkWidget *
-make_page (void)
-{
-        GtkWidget *frame;
-	GtkWidget *page;
-
-        frame = gtk_frame_new (NULL);
-        gtk_container_set_border_width (
-			GTK_CONTAINER (frame), GNOME_PAD_SMALL);
-
-        page = gtk_table_new (5, 2, FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
-        gtk_table_set_row_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);
-        gtk_table_set_col_spacings (GTK_TABLE (page), GNOME_PAD_SMALL);
-
-        gtk_container_add (GTK_CONTAINER (frame), page);
-
-        return frame;
-} 
 
 static void
 gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
@@ -761,8 +761,7 @@ gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
 
 	dee->_priv = g_new0 (GnomeDItemEditPrivate, 1);
 
-        page = make_page ();
-        fill_easy_page (dee, GTK_BIN (page)->child);
+        page = make_easy_page (dee);
         gtk_widget_show_all (page);
 
         gtk_notebook_append_page (GTK_NOTEBOOK (dee), page,
@@ -770,8 +769,7 @@ gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
 
 	dee->_priv->child1 = page;
 
-        page = make_page ();
-        fill_advanced_page (dee, GTK_BIN (page)->child);
+        page = make_advanced_page (dee);
         gtk_widget_show_all (page);
 
         gtk_notebook_append_page (GTK_NOTEBOOK (dee), page,
@@ -859,13 +857,18 @@ gnome_ditem_set_directory_sensitive (GnomeDItemEdit *dee,
 static void
 gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 {
-        GList *i18n_list, *li;
-	GnomeDesktopItemType type;
-        const gchar* cs;
-        char* tmpstr;
-	GnomeDesktopItem *ditem;
-        GtkTreeModel *model; 
-        GtkTreeIter iter;
+	GnomeDesktopItemType  type;
+	GnomeDesktopItem    *ditem;
+        GtkTreeModel        *model; 
+        GtkTreeIter          iter;
+        GList                *i18n_list;
+        GList                *li;
+        const char           *cs;
+        const char           *name;
+        const char           *generic_name;
+        const char           *comment;
+        char                 *tmpstr;
+
         g_return_if_fail (dee != NULL);
         g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
@@ -891,15 +894,20 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 		setup_combo (dee, ALL_EXCEPT_DIRECTORY, extra);
 	}
 
-        cs = gnome_desktop_item_get_localestring
-		(ditem, GNOME_DESKTOP_ITEM_NAME);
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry), 
-                           cs ? cs : "");
+        name = gnome_desktop_item_get_localestring (
+			ditem, GNOME_DESKTOP_ITEM_NAME);
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->name_entry), 
+			    name ? name : "");
 
-        cs = gnome_desktop_item_get_localestring
-		(ditem, GNOME_DESKTOP_ITEM_COMMENT);
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),
-                           cs ? cs : "");
+        generic_name = gnome_desktop_item_get_localestring (
+				ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME);
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->generic_name_entry), 
+			    generic_name ? generic_name : "");
+
+        comment = gnome_desktop_item_get_localestring (
+				ditem, GNOME_DESKTOP_ITEM_COMMENT);
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->comment_entry),
+			    comment ? comment : "");
 
 	if (type == GNOME_DESKTOP_ITEM_TYPE_LINK) {
 		cs = gnome_desktop_item_get_string (ditem,
@@ -1035,6 +1043,8 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	gnome_desktop_item_clear_localestring (
 			ditem, GNOME_DESKTOP_ITEM_NAME);
 	gnome_desktop_item_clear_localestring (
+			ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME);
+	gnome_desktop_item_clear_localestring (
 			ditem, GNOME_DESKTOP_ITEM_COMMENT);
 
 	model = gtk_tree_view_get_model (
@@ -1045,9 +1055,10 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 		char *lang;
 		char *name;
 		char *comment;
+		char *generic_name;
 
 		gtk_tree_model_get (
-			model, &iter, 0, &lang, 1, &name, 2, &comment, -1);
+			model, &iter, 0, &lang, 1, &name, 2, &generic_name, 3, &comment, -1);
 
 		if (!name && !comment) {
 			g_free (lang);
@@ -1061,9 +1072,12 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 		gnome_desktop_item_set_localestring_lang (
 			ditem, GNOME_DESKTOP_ITEM_NAME, lang, name);
 		gnome_desktop_item_set_localestring_lang (
+			ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME, lang, generic_name);
+		gnome_desktop_item_set_localestring_lang (
 			ditem, GNOME_DESKTOP_ITEM_COMMENT, lang, comment);
 		
 		g_free (name);
+		g_free (generic_name);
 		g_free (comment);
 		g_free (lang);
 
@@ -1073,6 +1087,10 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	gnome_desktop_item_set_localestring (
 			ditem, GNOME_DESKTOP_ITEM_NAME,
 			gtk_entry_get_text (GTK_ENTRY(dee->_priv->name_entry)));
+
+	gnome_desktop_item_set_localestring (
+			ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME,
+			gtk_entry_get_text (GTK_ENTRY(dee->_priv->generic_name_entry)));
 
 	gnome_desktop_item_set_localestring (
 			ditem, GNOME_DESKTOP_ITEM_COMMENT,
@@ -1197,6 +1215,7 @@ gnome_ditem_edit_clear (GnomeDItemEdit *dee)
 	dee->_priv->ui_dirty = TRUE;
 
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry), "");
+        gtk_entry_set_text(GTK_ENTRY(dee->_priv->generic_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),"");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), "");  
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), "");
