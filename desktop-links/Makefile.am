@@ -70,7 +70,7 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(Gamesdir)
 	$(mkinstalldirs) $(DESTDIR)$(Administrationdir)
 	$(mkinstalldirs) $(DESTDIR)$(Productivitydir)
-	$(INSTALL_DATA) $(srcdir)/Root.order $(Rootdir)/.order
+	$(INSTALL_DATA) $(srcdir)/Root.order $(DESTDIR)$(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Applications.directory $(DESTDIR)$(Applicationsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
