@@ -1776,8 +1776,6 @@ decode_string_and_dup (const char *s)
 		}
 	} while (*s++);
 
-	*p++ = '\0';
-
 	return q;
 }
 
@@ -1817,7 +1815,6 @@ escape_string_and_dup (const char *s)
 			*p++ = *s;
 		}
 	} while (*s++);
-	*p++ = '\0';
 	return return_value;
 }
 
