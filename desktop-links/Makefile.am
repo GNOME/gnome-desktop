@@ -17,4 +17,4 @@ Directory_in_files =		\
 Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
-EXTRA_DIST = $(Directory_DATA)
+EXTRA_DIST = $(Directory_DATA) $(Directory_in_files)
