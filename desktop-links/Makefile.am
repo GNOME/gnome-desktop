@@ -11,7 +11,8 @@ Directory_in_files =		\
 	Games.directory		\
 	Development.directory   \
 	Office.directory	\
-	Settings.directory
+	Settings.directory	\
+	Other.directory
 
 Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
