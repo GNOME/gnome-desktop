@@ -40,8 +40,9 @@
 
 BEGIN_GNOME_DECLS
 
-typedef struct _GnomeDItemEdit GnomeDItemEdit;
-typedef struct _GnomeDItemEditClass GnomeDItemEditClass;
+typedef struct _GnomeDItemEdit        GnomeDItemEdit;
+typedef struct _GnomeDItemEditPrivate GnomeDItemEditPrivate;
+typedef struct _GnomeDItemEditClass   GnomeDItemEditClass;
 
 #define GNOME_TYPE_DITEM_EDIT            (gnome_ditem_edit_get_type ())
 #define GNOME_DITEM_EDIT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DITEM_EDIT, GnomeDItemEdit))
@@ -53,49 +54,7 @@ struct _GnomeDItemEdit {
         GtkObject object;
   
 	/*< private >*/
-
-	/* use the accessors or just use new_notebook */
-        GtkWidget *child1; /* basic */
-        GtkWidget *child2; /* DND */
-        GtkWidget *child3; /* Advanced */
-
-        /* Remaining fields are private - if you need them, 
-           please add an accessor function. */
-  
-	/* we keep a ditem around, since we can never have absolutely
-	   everything in the display so we load a file, or get a ditem,
-	   sync the display and ref the ditem */
-	GnomeDesktopItem *ditem;
-
-        GtkWidget *name_entry;
-        GtkWidget *comment_entry;
-        GtkWidget *exec_entry;
-        GtkWidget *tryexec_entry;
-        GtkWidget *doc_entry;
-        GtkWidget *wmtitles_entry;
-
-        GtkWidget *simple_dnd_toggle;
-
-        GtkWidget *file_drop_entry;
-        GtkWidget *single_file_drop_toggle;
-
-        GtkWidget *url_drop_entry;
-        GtkWidget *single_url_drop_toggle;
-
-        GtkWidget *type_combo;
-
-        GtkWidget *terminal_button;  
-
-        GtkWidget *icon_entry;
-  
-        GtkWidget *translations;
-        GtkWidget *transl_lang_entry;
-        GtkWidget *transl_name_entry;
-        GtkWidget *transl_comment_entry;
-
-	/* we store this so we can set sensitive the
-	   drag and drop stuff, no point in an accessor */
-        GtkWidget *dndtable;
+	GnomeDItemEditPrivate *_priv;
 };
 
 struct _GnomeDItemEditClass {
