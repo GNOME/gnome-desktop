@@ -29,7 +29,7 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
-#include <gobject/gtype.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
