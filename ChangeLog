@@ -1,3 +1,18 @@
+2004-11-18  Vincent Untz  <vincent@vuntz.net>
+
+	* configure.in: we depend on glib >= 2.5.3
+	* libgnome-desktop/Makefile.am: updated after gnome-desktop-i18n.[ch]
+	removal
+	* libgnome-desktop/gnome-desktop-i18n.[ch]: die!
+	* libgnome-desktop/gnome-desktop-item.c: (lookup_locale): use
+	g_get_language_names instead of deprecated gnome_i18n_get_language_list
+	(gnome_desktop_item_get_attr_locale): ditto
+	(get_language): ditto
+	* libgnome-desktop/gnome-ditem-edit.c: use gi18n.h
+	* libgnome-desktop/gnome-hint.c: (find_lang): updated
+	(get_i18n_string): use g_get_language_names instead of deprecated
+	gnome_i18n_get_language_list
+
 2004-11-16  Mark McLoughlin  <mark@skynet.ie>
 
 	Remove .directory files - they're in gnome-menus now.

@@ -38,7 +38,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-exec.h>
 #include <libgnome/gnome-url.h>
@@ -50,7 +50,6 @@
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <libgnome/gnome-desktop-item.h>
-#include "gnome-desktop-i18n.h"
 
 #ifdef HAVE_STARTUP_NOTIFICATION
 #define SN_API_NOT_YET_FROZEN
@@ -914,16 +913,16 @@ lookup_locale (const GnomeDesktopItem *item, const char *key, const char *locale
 static const char *
 lookup_best_locale (const GnomeDesktopItem *item, const char *key)
 {
-	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
-	while (list != NULL) {
-		const char *ret;
-		const char *locale = list->data;
+	const char * const *langs_pointer;
+	int                 i;
 
-		ret = lookup_locale (item, key, locale);
+	langs_pointer = g_get_language_names ();
+	for (i = 0; langs_pointer[i] != NULL; i++) {
+		const char *ret = NULL;
+
+		ret = lookup_locale (item, key, langs_pointer[i]);
 		if (ret != NULL)
 			return ret;
-
-		list = list->next;
 	}
 
 	return NULL;
@@ -2807,16 +2806,16 @@ const char *
 gnome_desktop_item_get_attr_locale (const GnomeDesktopItem *item,
 				    const char             *attr)
 {
-	const GList *list, *l;
+	const char * const *langs_pointer;
+	int                 i;
 
-	list = gnome_i18n_get_language_list ("LC_MESSAGES");
-	for (l = list; l; l = l->next) {
-		const char *locale = l->data;
+	langs_pointer = g_get_language_names ();
+	for (i = 0; langs_pointer[i] != NULL; i++) {
 		const char *value = NULL;
 
-		value = lookup_locale (item, attr, locale);
+		value = lookup_locale (item, attr, langs_pointer[i]);
 		if (value)
-			return locale;
+			return langs_pointer[i];
 	}
 
 	return NULL;
@@ -2846,14 +2845,15 @@ gnome_desktop_item_get_languages (const GnomeDesktopItem *item,
 static const char *
 get_language (void)
 {
-	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
-	while (list != NULL) {
-		const char *lang = list->data;
+	const char * const *langs_pointer;
+	int                 i;
+
+	langs_pointer = g_get_language_names ();
+	for (i = 0; langs_pointer[i] != NULL; i++) {
 		/* find first without encoding  */
-		if (strchr (lang, '.') == NULL) {
-			return lang; 
+		if (strchr (langs_pointer[i], '.') == NULL) {
+			return langs_pointer[i]; 
 		}
-		list = list->next;
 	}
 	return NULL;
 }

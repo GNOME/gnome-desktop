@@ -28,11 +28,10 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-macros.h>
-#include <libgnome/gnome-i18n.h>
-#include "gnome-desktop-i18n.h"
 
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-icon-entry.h>

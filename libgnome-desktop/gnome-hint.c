@@ -3,7 +3,6 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-hint.h>
 #include <gconf/gconf-client.h>
-#include "gnome-desktop-i18n.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -203,14 +202,16 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
 }
 
 /*find the language, but only look as far as gotlang*/
-static const GList *
-find_lang (const GList *langlist, const GList *gotlang, const char *lang)
+static const char *
+find_lang (const char * const *langs_pointer, const char *gotlang, const char *lang)
 {
-        while (langlist != NULL &&
-               langlist != gotlang) {
-                if (strcmp (langlist->data, lang) == 0)
-                        return langlist;
-                langlist = langlist->next;
+	int i;
+
+	for (i = 0;
+	     langs_pointer[i] != NULL && langs_pointer[i] != gotlang;
+	     i++) {
+                if (strcmp (langs_pointer[i], lang) == 0)
+                        return langs_pointer[i];
         }
         return NULL;
 }
@@ -219,12 +220,12 @@ find_lang (const GList *langlist, const GList *gotlang, const char *lang)
 static char *
 get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
 {
-        const GList *langlist;
         char *current;
         xmlNodePtr cur;
-        const GList *gotlang = NULL; /*the highest language we got*/
+        const char * const *langs_pointer;
+        const char  *gotlang = NULL; /*the highest language we got*/
 
-        langlist = gnome_i18n_get_language_list("LC_ALL");
+        langs_pointer = g_get_language_names ();
 
         current = NULL;
 
@@ -246,7 +247,7 @@ get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
                                 xmlFree (current);
                         current = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
                 } else {
-                        const GList *ll = find_lang (langlist, gotlang, lang);
+                        const char *ll = find_lang (langs_pointer, gotlang, lang);
                         xmlFree (lang);
                         if (ll != NULL) {
                                 if (current != NULL)
@@ -254,7 +255,7 @@ get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
 
                                 current = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
                                 gotlang = ll;
-                                if (ll == langlist) /*we can't get any better then this*/
+                                if (ll == langs_pointer[0]) /*we can't get any better then this*/
                                         break;
                         }
                 }

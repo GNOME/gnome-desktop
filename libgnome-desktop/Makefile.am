@@ -19,9 +19,7 @@ noinst_PROGRAMS = test-ditem test-hint test-ditem-edit
 libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c	\
 	gnome-ditem-edit.c	\
-	gnome-hint.c		\
-	gnome-desktop-i18n.c	\
-	gnome-desktop-i18n.h
+	gnome-hint.c
 
 libgnome_desktop_2_la_LIBADD = \
 	$(GNOME_DESKTOP_LIBS)
