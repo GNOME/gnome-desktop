@@ -15,6 +15,7 @@ static author authors[] = {
 	{ "Anders Carlsson", "<andersca@gnu.org>" },	
 	{ "GEGL", "" },
 	{ "Tim Gerla", "<timg@means.net>" },
+	{ "Bertrand Guiheneuf", "<Bertrand.Guiheneuf@aful.org>" },
 	{ "James Henstridge", "<james@daa.com.au>" },
 	{ "Miguel de Icaza", "<miguel@gnu.org>" },
 	{ "George Lebl", "<jirka@5z.com>" },
