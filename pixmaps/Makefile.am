@@ -37,8 +37,9 @@ BITMAPS     = \
 	gnome-html.png				\
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
-	gnome-info.png              \
+	gnome-touristinfo.png       \
 	gnome-irc.png				\
+	gnome-joystick.png          \
 	gnome-laptop.png            \
 	gnome-lockscreen.png			\
 	gnome-log.png				\
