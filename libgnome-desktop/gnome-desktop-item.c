@@ -391,7 +391,7 @@ ditem_gnome_load (const char *data_file, GnomeDesktopItemLoadFlags flags,
                 FILE *fh;
 		char *dn;
 
-		dn = g_dirname(data_file);
+		dn = g_path_get_dirname(data_file);
                 g_snprintf(confpath, sizeof(confpath), "%s/.order", dn);
 		g_free(dn);
 
@@ -689,7 +689,7 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	if(item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY &&
 	   item->item_format == GNOME_DESKTOP_ITEM_GNOME) {
                 FILE *fh;
-		char *dir = g_dirname(item->location);
+		char *dir = g_path_get_dirname(item->location);
 
                 g_snprintf(fnbuf, sizeof(fnbuf), "%s/.order", dir);
 
