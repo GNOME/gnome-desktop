@@ -130,7 +130,7 @@ setup_key (BonoboConfigDItemKey *key)
 	g_assert (!BONOBO_EX (&ev));
 
 	key->subvalues = g_hash_table_new_full (g_str_hash, g_str_equal,
-						(GDestroyNotify) g_free,
+						(GDestroyNotify) NULL,
 						(GDestroyNotify) free_key);
 
 	switch (real_tc->kind) {
