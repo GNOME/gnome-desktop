@@ -2,7 +2,7 @@ SUBDIRS = \
 	 intl \
 	 po \
 	 idl \
-	 gnome-ditem \
+	 gnome-desktop \
 	 panel
 
 EXTRA_SUBDIRS = \

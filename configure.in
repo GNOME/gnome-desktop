@@ -71,6 +71,10 @@ dnl ================================
   AC_SUBST(PANEL_CFLAGS)
   AC_SUBST(PANEL_LIBS)
 
+  PKG_CHECK_MODULES(GNOME_DESKTOP, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED)
+  AC_SUBST(GNOME_DESKTOP_CFLAGS)
+  AC_SUBST(GNOME_DESKTOP_LIBS)
+
 dnl -----------------------------------------------------------
 
 dnl ================================
@@ -406,7 +410,7 @@ Makefile
 gnome-core.spec
 po/Makefile.in
 panel/Makefile
-gnome-ditem/Makefile
+gnome-desktop/Makefile
 idl/Makefile
 intl/Makefile])
 
