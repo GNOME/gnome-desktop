@@ -124,40 +124,10 @@ if test "$P_MODEMLIGHTS" != "modemlights"; then
   AC_MSG_WARN([*** \`modemlights' applet will not be built ***])
 fi
 
-dnl fvwm-pager
-dnl we need the fvwm sources to build it
-AC_ARG_WITH(fvwm2,
-[  --with-fvwm2=DIRECTORY	top level dir of fvwm2 with libs and includes],
-	[FVWM_PAGER="fvwm-pager"], [FVWM_PAGER=""])
-
-AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
-if test ! -z "$FVWM_PAGER"
+if test "$WINDOW_MANAGER" == "Xfvwm2"
 then
-	for x_dir in /usr/local/src/fvwm2 /usr/local/src/fvwm-2.0.46 /disk/compiles/fvwm-2.0.46 ${with_fvwm2}
-	do
-		AC_MSG_CHECKING("for fvwm include files in ${x_dir}")
-		if test -f "${x_dir}/fvwm/module.h"
-		then
-			AC_MSG_RESULT("found");
-			break;
-		else
-			AC_MSG_RESULT("not found");
-		fi
-	done
-
-	AC_MSG_CHECKING("for fvwm library ${x_dir}/libs/libfvwm2.a")
-	if test -f ${x_dir}/libs/libfvwm2.a
-	then
-		AC_MSG_RESULT("found")
-	else
-		AC_MSG_ERROR(["You have to compile fvwm2 so that we can use the fvwm2 library.\
-		This library is neceassry to compile fvwm-pager"])
-	fi
-
-	FVWM2INCLUDE="-I${x_dir}/"
-	FVWM2LIBS="-L${x_dir}/libs -lfvwm2"
-	AC_SUBST(FVWM2INCLUDE)
-	AC_SUBST(FVWM2LIBS)
+   FVWM_PAGER=yes
+   AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
 fi
 
 dnl esd-manager
