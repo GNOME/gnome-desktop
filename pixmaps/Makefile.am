@@ -11,6 +11,12 @@ BITMAPS     = \
 	gnome-color-browser.png			\
 	gnome-cromagnon.png			\
 	gnome-default.png			\
+	gnome-die1.png				\
+	gnome-die2.png				\
+	gnome-die3.png				\
+	gnome-die4.png				\
+	gnome-die5.png				\
+	gnome-die6.png				\
 	gnome-ee.png				\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
