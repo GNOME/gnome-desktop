@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2002-01-14 09:14+0000\n"
+"POT-Creation-Date: 2001-11-25 02:11+0100\n"
 "PO-Revision-Date: 2001-02-28 18:36+0200\n"
 "Last-Translator: Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -12,919 +12,1248 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gnome-desktop/gnome-desktop-item.c:273
-#, fuzzy
-msgid "No name"
-msgstr "brez"
+#: panel/gnome-panel-add-launcher.c:34
+msgid "Panel to add the launcher to"
+msgstr "Pult, ki naj mu bo dodan zaganjalnik"
 
-#: gnome-desktop/gnome-desktop-item.c:276
-msgid "UTF-8"
+#: panel/gnome-panel-add-launcher.c:34 panel/gnome-panel-add-launcher.c:35
+msgid "NUMBER"
+msgstr "©TEVILKA"
+
+#: panel/gnome-panel-add-launcher.c:35
+msgid "Position to add the launcher to"
+msgstr "Polo¾aj, kamor naj bo dodan zaganjalnik"
+
+#: panel/gnome-panel-add-launcher.c:36
+msgid "The argument is a url to add, not a .desktop file"
+msgstr "Argument je url, ki naj se doda, ne datoteka .desktop"
+
+#: panel/gnome-panel-add-launcher.c:66
+msgid ""
+"You must supply a single argument with the .desktop file or url to use\n"
 msgstr ""
+"Navesti morate en sam argument z datoteko .desktop ali url-jem, ki naj se "
+"uporabi\n"
 
-#: gnome-desktop/gnome-desktop-item.c:279
-msgid "1.0"
+#: panel/gnome-panel-add-launcher.c:80
+msgid "No panel found\n"
+msgstr "Noben pult ni bil najden\n"
+
+#: panel/gnome-panel-screenshot.c:126
+msgid ""
+"Unable to initialize png structure.\n"
+"You probably have a bad version of libpng on your system"
 msgstr ""
+"Nisem mogel inicializirati strukture png.\n"
+"Verjetno imate na sistemu slabo razlièico libpng"
 
-#: gnome-desktop/gnome-desktop-item.c:483
-#: gnome-desktop/gnome-desktop-item.c:3010
+#: panel/gnome-panel-screenshot.c:134
+msgid ""
+"Unable to create png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Nisem mogel ustvariti podatkov o png.\n"
+"Verjetno imate na sistemu slabo razlièico libpng"
+
+#: panel/gnome-panel-screenshot.c:141
+msgid ""
+"Unable to set png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Nisem mogel nastaviti podatkov o png.\n"
+"Verjetno imate na sistemu slabo razlièico libpng"
+
+#: panel/gnome-panel-screenshot.c:155
+msgid ""
+"Insufficient memory to save the screenshot.\n"
+"Please free up some resources and try again."
+msgstr ""
+"Ni dovolj pomnilnika za shranitev zajema zaslona.\n"
+"Prosim sporstite nekaj virov in poskusite znova."
+
+#: panel/gnome-panel-screenshot.c:202
 #, c-format
-msgid "Error reading file '%s': %s"
-msgstr ""
+msgid "File %s already exists. Overwrite?"
+msgstr "Datoteka %s ¾e obstaja. Prepi¹i?"
 
-#: gnome-desktop/gnome-desktop-item.c:584
-msgid "No filename to save to"
-msgstr ""
-
-#: gnome-desktop/gnome-desktop-item.c:1473
-msgid "No URL to launch"
-msgstr ""
-
-#: gnome-desktop/gnome-desktop-item.c:1483
-msgid "Not a launchable item"
-msgstr ""
-
-#: gnome-desktop/gnome-desktop-item.c:1493
-msgid "No command (Exec) to launch"
-msgstr ""
-
-#: gnome-desktop/gnome-desktop-item.c:1506
-msgid "Bad command (Exec) to launch"
-msgstr ""
-
-#: gnome-desktop/gnome-desktop-item.c:3022
+#: panel/gnome-panel-screenshot.c:214 panel/gnome-panel-screenshot.c:699
 #, c-format
-msgid "Unknown encoding of: %s"
+msgid ""
+"Unable to create the file:\n"
+"\"%s\"\n"
+"Please check your permissions of the parent directory"
 msgstr ""
+"Nisem mogel ustvariti datoteke:\n"
+"\"%s\"\n"
+"Prosim preverite dovoljenja star¹evskega imenika"
 
-#: gnome-desktop/gnome-desktop-item.c:3034
+#: panel/gnome-panel-screenshot.c:475
+msgid "Print Screenshot"
+msgstr "Natisni zajem zaslona"
+
+#: panel/gnome-panel-screenshot.c:523
+msgid "Screenshot Print Preview"
+msgstr "Predogled tiskanja zajema zaslona"
+
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:548
 #, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr ""
+msgid "%s%cScreenshot-%s.png"
+msgstr "%s%cZajem_zaslona-%s.png"
 
-#: gnome-desktop/gnome-desktop-item.c:3252
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:553
 #, c-format
-msgid "Error writing file '%s': %s"
+msgid "%s%cScreenshot.png"
+msgstr "%s%cZajem_zaslona.png"
+
+#. translators: this is the file that gets made up with the screenshot if a specific window is taken
+#: panel/gnome-panel-screenshot.c:568
+#, c-format
+msgid "%s%cScreenshot-%s-%d.png"
+msgstr "%s%cZajem_zaslona-%s-%d.png"
+
+#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
+#: panel/gnome-panel-screenshot.c:573
+#, c-format
+msgid "%s%cScreenshot-%d.png"
+msgstr "%s%cZajem_zaslona-%d.png"
+
+#: panel/gnome-panel-screenshot.c:719
+#, c-format
+msgid "Not enough room to write file %s"
+msgstr "Ni dovolj prostora za zapis datoteke %s"
+
+#: panel/gnome-panel-screenshot.c:1016
+msgid "Grab a window instead of the entire screen"
+msgstr "Zajemi okno namesto celotnega zaslona"
+
+#: panel/gnome-panel-screenshot.c:1049
+msgid ""
+"Glade file for the screenshot program is missing.\n"
+"Please check your installation of gnome-core"
 msgstr ""
+"Datoteka glade za program za zajem zaslona manjka.\n"
+"Prosimo preverite va¹o namestitev paketa gnome-core"
 
-#: gnome-desktop/gnome-ditem-edit.c:233
-#, fuzzy
-msgid "URL:"
-msgstr "URL"
+#: panel/gnome-panel-screenshot.c:1071
+msgid "Unable to take a screenshot of the current desktop."
+msgstr "Nisem mogel zajeti slike zaslona trenutnega namizja."
 
-#: gnome-desktop/gnome-ditem-edit.c:236 gnome-desktop/gnome-ditem-edit.c:269
-#, fuzzy
-msgid "Command:"
-msgstr "Ukaz"
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: panel/gnome-panel-screenshot.glade.h:7
+msgid "Screenshot"
+msgstr "Zajem zaslona"
 
-#: gnome-desktop/gnome-ditem-edit.c:246
-#, fuzzy
-msgid "Name:"
-msgstr "Po imenu"
+#: panel/gnome-panel-screenshot.glade.h:8
+msgid "Preview"
+msgstr "Predogled"
 
-#: gnome-desktop/gnome-ditem-edit.c:259
-#, fuzzy
-msgid "Comment:"
-msgstr "Ukaz"
+#. frame for options
+#: gsm/session-properties-capplet.c:181 panel/gnome-panel-screenshot.glade.h:9
+msgid "Options"
+msgstr "Mo¾nosti"
 
-#: gnome-desktop/gnome-ditem-edit.c:278
-#, fuzzy
-msgid "Type:"
-msgstr "Naèin"
+#: panel/gnome-panel-screenshot.glade.h:10
+msgid "_Save screenshot to file:"
+msgstr "_Shrani zajem zaslona v datoteko:"
 
-#: gnome-desktop/gnome-ditem-edit.c:296
-#, fuzzy
-msgid "Icon:"
-msgstr "Ikona"
+#: panel/gnome-panel-screenshot.glade.h:11
+msgid "Save screenshot to _desktop"
+msgstr "Shrani zajem zaslona na _namizje"
 
-#: gnome-desktop/gnome-ditem-edit.c:306
-#, fuzzy
-msgid "Browse icons"
-msgstr "Ikona predala"
+#: panel/gnome-panel-screenshot.glade.h:12
+msgid "Save screenshot to _web page (save in ~/public__html)"
+msgstr "Shrani zajem zaslona na _spletno stran (shrani v ~/public_html"
 
-#: gnome-desktop/gnome-ditem-edit.c:319
-#, fuzzy
-msgid "Run in Terminal"
-msgstr "Po¾eni v terminalu"
+#: panel/gnome-panel-screenshot.glade.h:13
+msgid "_Print screenshot..."
+msgstr "_Natisni zajem zaslona..."
 
-#: gnome-desktop/gnome-ditem-edit.c:413
-msgid "Try this before using:"
-msgstr ""
+#: applets/desk-guide/deskguide_applet.c:76
+#: applets/tasklist/tasklist_properties.c:385
+msgid "Display"
+msgstr "Poka¾i"
 
-#: gnome-desktop/gnome-ditem-edit.c:423
-#, fuzzy
-msgid "Documentation:"
-msgstr "Ka¾i kazalo dokumentacije"
+#: applets/desk-guide/deskguide_applet.c:77
+msgid "Layout"
+msgstr "Postavitev"
 
-#: gnome-desktop/gnome-ditem-edit.c:433
-msgid "Name/Comment translations:"
-msgstr ""
+#: applets/desk-guide/deskguide_applet.c:79
+msgid "Show tasklist arrow"
+msgstr "Ka¾i pu¹èico seznama poslov"
 
-#: gnome-desktop/gnome-ditem-edit.c:436
-msgid "Language"
-msgstr ""
+#: applets/desk-guide/deskguide_applet.c:81
+msgid "Switch horizontal/vertical position of tasklist arrow"
+msgstr "Preklopi med vodoravno in navpièno postavitvijo pu¹èice seznama poslov"
 
-#: gnome-desktop/gnome-ditem-edit.c:437
-#, fuzzy
-msgid "Name"
-msgstr "Po imenu"
+#: applets/desk-guide/deskguide_applet.c:83
+msgid "Only show current desktop in pager"
+msgstr "V vodniku po namizju ka¾i le trenutno namizje"
 
-#: gnome-desktop/gnome-ditem-edit.c:438
-#, fuzzy
-msgid "Comment"
-msgstr "Ukaz"
+#: applets/desk-guide/deskguide_applet.c:85
+msgid "Raise area grid over tasks"
+msgstr "Mre¾a naj bo nad posli"
 
-#: gnome-desktop/gnome-ditem-edit.c:471
-msgid "Add/Set"
-msgstr ""
+#: applets/desk-guide/deskguide_applet.c:86
+msgid "Thumb Nails"
+msgstr "Slièice"
 
-#: gnome-desktop/gnome-ditem-edit.c:476 gsm/session-properties.c:101
-msgid "Remove"
-msgstr "Odstrani"
+#: applets/desk-guide/deskguide_applet.c:88
+msgid "Fill window thumbnails with screen contents"
+msgstr "Slièice naj bodo pomanj¹ane slike delovnih povr¹in"
 
-#: gnome-desktop/gnome-ditem-edit.c:517
-#, fuzzy
-msgid "Basic"
-msgstr "Nazaj"
+#: applets/desk-guide/deskguide_applet.c:90
+msgid "Incremental update delay [ms]"
+msgstr "Premor med postopnim obnavljanjem [ms]"
 
-#: gnome-desktop/gnome-ditem-edit.c:521
+#: applets/desk-guide/deskguide_applet.c:91
+msgid "Tooltips"
+msgstr "Namigi"
+
+#: applets/desk-guide/deskguide_applet.c:93
+msgid "Show Desk-Guide tooltips"
+msgstr "Ka¾i namige Vodnika po namizju"
+
+#: applets/desk-guide/deskguide_applet.c:95
+msgid "Desk-Guide tooltip delay [ms]"
+msgstr "Premor pred prikazom namigov Vodnika po namizju [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:97
+msgid "Show desktop name tooltips"
+msgstr "Ka¾i namige imen namizij"
+
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Desktop name tooltip delay [ms]"
+msgstr "Premor pred prikazom namigov imen namizij [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:101
+msgid "Tasks"
+msgstr "Posli"
+
+#: applets/desk-guide/deskguide_applet.c:102
+msgid "Visibility"
+msgstr "Vidnost"
+
+#: applets/desk-guide/deskguide_applet.c:104
+msgid "Show hidden tasks (HIDDEN)"
+msgstr "Ka¾i skrite posle (HIDDEN)"
+
+#: applets/desk-guide/deskguide_applet.c:106
+msgid "Show shaded tasks (SHADED)"
+msgstr "Ka¾i zasenèene posle (SHADED)"
+
+#: applets/desk-guide/deskguide_applet.c:108
+msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+msgstr "Ka¾i posle, ki se skrivajo pred upravljalnik oken (SKIP-WINLIST)"
+
+#: applets/desk-guide/deskguide_applet.c:110
+msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+msgstr "Ka¾i posle, ki se skrivajo pred seznamom poslov (SKIP-TASKBAR)"
+
+#. CONFIG_SECTION (sect_null_1, NULL),
+#: applets/desk-guide/deskguide_applet.c:113
+msgid "Geometry"
+msgstr "Geometrija"
+
+#: applets/desk-guide/deskguide_applet.c:114
+msgid "Horizontal Layout"
+msgstr "Vodoravna postavitev"
+
+#: applets/desk-guide/deskguide_applet.c:116
+msgid "Desktop Height [pixels]"
+msgstr "Vi¹ina namizja [v pikslih]"
+
+#: applets/desk-guide/deskguide_applet.c:118
+msgid "Override desktop height with panel size"
+msgstr "Obidi vi¹ino namizja z velikostjo pulta"
+
+#: applets/desk-guide/deskguide_applet.c:120
+msgid "Divide height by number of vertical areas"
+msgstr "Deli vi¹ino s ¹tevilom navpiènih obmoèij"
+
+#: applets/desk-guide/deskguide_applet.c:122
+msgid "Rows of Desktops"
+msgstr "©tevilo vrstic namizij"
+
+#: applets/desk-guide/deskguide_applet.c:124
+msgid "Divide height by number of rows"
+msgstr "Deli vi¹ino s ¹tevilom vrstic"
+
+#: applets/desk-guide/deskguide_applet.c:125
+msgid "Vertical Layout"
+msgstr "Navpièna postavitev"
+
+#: applets/desk-guide/deskguide_applet.c:127
+msgid "Desktop Width [pixels]"
+msgstr "©irina namizja [v pikslih]"
+
+#: applets/desk-guide/deskguide_applet.c:129
+msgid "Override desktop width with panel size"
+msgstr "Obidi ¹irino namizja z velikostjo pulta"
+
+#: applets/desk-guide/deskguide_applet.c:131
+msgid "Divide width by number of horizontal areas"
+msgstr "Deli ¹irino s ¹tevilom vodoravnih obmoèij"
+
+#: applets/desk-guide/deskguide_applet.c:133
+msgid "Columns of Desktops"
+msgstr "©tevilo stolpcev namizij"
+
+#: applets/desk-guide/deskguide_applet.c:135
+msgid "Divide width by number of columns"
+msgstr "Deli ¹irino s ¹tevilom stolpcev"
+
+#: applets/desk-guide/deskguide_applet.c:137
 msgid "Advanced"
 msgstr "Napredno"
 
-#: gnome-desktop/gnome-hint.c:107
-msgid "_Show Hints at Startup"
-msgstr ""
+#: applets/desk-guide/deskguide_applet.c:138
+msgid "Window Manager Workarounds"
+msgstr "Popravki k upravljalnikom oken"
 
-#: gnome-terminal/gnome-terminal.c:285
-msgid "GNOME Terminal"
-msgstr "GNOME Terminal"
-
-#: gnome-terminal/gnome-terminal.c:288
-msgid "The GNOME terminal emulation program."
-msgstr "GNOME terminalski emulator."
-
-#: gnome-terminal/gnome-terminal.c:660 gnome-terminal/gnome-terminal.c:1174
-#: gnome-terminal/gnome-terminal.c:1184 gnome-terminal/gnome-terminal.c:2401
-#: gnome-terminal/gnome-terminal.glade.h:10
-msgid "Default"
-msgstr "privzet"
-
-#: gnome-terminal/gnome-terminal.c:846
+#: applets/desk-guide/deskguide_applet.c:140
 msgid ""
-"You have switched the class of this window. Do you\n"
-" want to reconfigure this window to match the default\n"
-"configuration of the new class?"
+"Window manager moves decoration window instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM)"
 msgstr ""
-"Zamenjali ste razred tega okna. Ali ¾elite\n"
-"znova nastaviti to okno, da bo ustrezalo privzetim\n"
-"nastavitvam za nov razred?"
+"Upravljalnik oken premika dekoracijsko okno\n"
+"(AfterStep, Enlightenment, FVWM, IceWM)"
 
-#: gnome-terminal/gnome-terminal.c:997
-msgid "Linux console"
-msgstr "Linux konzola"
-
-#: gnome-terminal/gnome-terminal.c:998
-msgid "Color Xterm"
-msgstr "Barvni Xterm"
-
-#: gnome-terminal/gnome-terminal.c:999
-msgid "rxvt"
-msgstr "rxvt"
-
-#: gnome-terminal/gnome-terminal.c:1000
-msgid "Custom"
-msgstr "Prikrojeno"
-
-#: gnome-terminal/gnome-terminal.c:1005
-msgid "White on black"
-msgstr "Belo na èrnem"
-
-#: gnome-terminal/gnome-terminal.c:1006
-msgid "Black on white"
-msgstr "Èrno na belem"
-
-#: gnome-terminal/gnome-terminal.c:1007
-msgid "Green on black"
-msgstr "Zeleno na èrnem"
-
-#: gnome-terminal/gnome-terminal.c:1008
-msgid "Black on light yellow"
-msgstr "Èrno na svetlo rumenem"
-
-#: gnome-terminal/gnome-terminal.c:1009
-msgid "Custom colors"
-msgstr "Prikroji barve"
-
-#: gnome-terminal/gnome-terminal.c:1014
-msgid "Left"
-msgstr "Levo"
-
-#: gnome-terminal/gnome-terminal.c:1015
-msgid "Right"
-msgstr "Desno"
-
-#: gnome-terminal/gnome-terminal.c:1016
-msgid "Hidden"
-msgstr "Skrito"
-
-#: gnome-terminal/gnome-terminal.c:1415
-msgid "Color selector"
-msgstr "Izbirnik barv"
-
-#: gnome-terminal/gnome-terminal.c:2038
-#, c-format
+#: applets/desk-guide/deskguide_applet.c:143
 msgid ""
-"There has been an error while trying to log in:\n"
-"\n"
-"%s"
+"Window manager changes active area on all desktops\n"
+"(FVWM, Sawfish)"
 msgstr ""
-"Zgodila se je napaka ob poskusu prijave:\n"
-"\n"
-"%s"
-
-#: gnome-terminal/gnome-terminal.c:2102 gnome-terminal/gnome-terminal.c:2538
-msgid "Terminal"
-msgstr "Terminal"
-
-#: gnome-terminal/gnome-terminal.c:2627
-msgid "Terminal class name"
-msgstr "Ime razreda terminala"
-
-#: gnome-terminal/gnome-terminal.c:2627
-msgid "TCLASS"
-msgstr "TRAZRED"
-
-#: gnome-terminal/gnome-terminal.c:2630
-msgid "Specifies font name"
-msgstr "Navaja ime pisave"
-
-#: gnome-terminal/gnome-terminal.c:2630
-msgid "FONT"
-msgstr "PISAVA"
-
-#: gnome-terminal/gnome-terminal.c:2633
-msgid "Do not start up shells as login shells"
-msgstr "Ne po¾eni lupin kot prijavnih lupin"
-
-#: gnome-terminal/gnome-terminal.c:2636
-msgid "Start up shells as login shells"
-msgstr "Po¾eni lupine kot prijavne lupine"
-
-#: gnome-terminal/gnome-terminal.c:2639
-msgid "Specifies the geometry for the main window"
-msgstr "Doloèi geometrijo za glavno okno"
-
-#: gnome-terminal/gnome-terminal.c:2639
-msgid "GEOMETRY"
-msgstr "GEOMETRIJA"
-
-#: gnome-terminal/gnome-terminal.c:2642
-msgid "Execute this program instead of a shell"
-msgstr "Po¾eni ta program namesto lupine"
-
-#: gnome-terminal/gnome-terminal.c:2642 gnome-terminal/gnome-terminal.c:2645
-msgid "COMMAND"
-msgstr "UKAZ"
-
-#: gnome-terminal/gnome-terminal.c:2645
-msgid "Execute this program the same way as xterm does"
-msgstr "Po¾eni program na isti naèin kot bi ga xterm"
-
-#: gnome-terminal/gnome-terminal.c:2648
-msgid "Foreground color"
-msgstr "Barva ospredja"
-
-#: gnome-terminal/gnome-terminal.c:2648 gnome-terminal/gnome-terminal.c:2651
-msgid "COLOR"
-msgstr "BARVA"
-
-#: gnome-terminal/gnome-terminal.c:2651
-msgid "Background color"
-msgstr "Barva ozadja"
-
-#: gnome-terminal/gnome-terminal.c:2654
-msgid "Solid background"
-msgstr "Polno ozadje"
-
-#: gnome-terminal/gnome-terminal.c:2654
-msgid "SOLID"
-msgstr "POLNO"
-
-#: gnome-terminal/gnome-terminal.c:2657
-#: gnome-terminal/gnome-terminal.glade.h:2
-msgid "Background pixmap"
-msgstr "Slika v ozadju"
-
-#: gnome-terminal/gnome-terminal.c:2657
-msgid "PIXMAP"
-msgstr "SLIKA"
-
-#: gnome-terminal/gnome-terminal.c:2660
-#: gnome-terminal/gnome-terminal.glade.h:3
-msgid "Background pixmap scrolls"
-msgstr "Drsnik slike ozadja"
-
-#: gnome-terminal/gnome-terminal.c:2660
-msgid "BGSCROLL"
-msgstr "OZDRSIL"
-
-#: gnome-terminal/gnome-terminal.c:2663
-msgid "Background pixmap does not scroll"
-msgstr "Slika v ozadju ne drsi"
-
-#: gnome-terminal/gnome-terminal.c:2663
-msgid "BGNOSCROLL"
-msgstr "OZNEDRSI"
-
-#: gnome-terminal/gnome-terminal.c:2666
-msgid "Shade background"
-msgstr "Senèeno ozadje"
-
-#: gnome-terminal/gnome-terminal.c:2666
-msgid "SHADED"
-msgstr "SENÈENO"
-
-#: gnome-terminal/gnome-terminal.c:2669
-msgid "Do not shade background"
-msgstr "Ne senèi ozadja"
-
-#: gnome-terminal/gnome-terminal.c:2669
-msgid "NOSHADED"
-msgstr "NISENÈENO"
-
-#: gnome-terminal/gnome-terminal.c:2672
-msgid "Transparent background"
-msgstr "Prosojno ozadje"
-
-#: gnome-terminal/gnome-terminal.c:2672
-msgid "TRANSPARENT"
-msgstr "PROSOJNO"
-
-#: gnome-terminal/gnome-terminal.c:2675
-msgid "Update utmp entry"
-msgstr "Osve¾i utmp vnos"
-
-#: gnome-terminal/gnome-terminal.c:2675
-msgid "UTMP"
-msgstr "UTMP"
-
-#: gnome-terminal/gnome-terminal.c:2678
-msgid "Do not update utmp entry"
-msgstr "Ne osve¾i utmp vnosa"
-
-#: gnome-terminal/gnome-terminal.c:2678
-msgid "NOUTMP"
-msgstr "NEUTMP"
-
-#: gnome-terminal/gnome-terminal.c:2681
-msgid "Update wtmp entry"
-msgstr "Osve¾i wtmp vnos"
-
-#: gnome-terminal/gnome-terminal.c:2681
-msgid "WTMP"
-msgstr "WTMP"
-
-#: gnome-terminal/gnome-terminal.c:2684
-msgid "Do not update wtmp entry"
-msgstr "Ne osve¾i wtmp vnosa"
-
-#: gnome-terminal/gnome-terminal.c:2684
-msgid "NOWTMP"
-msgstr "NEWTMP"
-
-#: gnome-terminal/gnome-terminal.c:2687
-msgid "Update lastlog entry"
-msgstr "Osve¾i lastlog vnos"
-
-#: gnome-terminal/gnome-terminal.c:2687
-msgid "LASTLOG"
-msgstr "LASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2690
-msgid "Do not update lastlog entry"
-msgstr "Ne osve¾i lastlog vnosa"
-
-#: gnome-terminal/gnome-terminal.c:2690
-msgid "NOLASTLOG"
-msgstr "NELASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2693
-msgid "Set the window title"
-msgstr "Nastavi naziv okna"
-
-#: gnome-terminal/gnome-terminal.c:2693
-msgid "TITLE"
-msgstr "NAZIV"
-
-#: gnome-terminal/gnome-terminal.c:2696
-msgid "Set the window icon"
-msgstr "Nastavi ikono okna"
-
-#: gnome-terminal/gnome-terminal.c:2696
-msgid "ICON"
-msgstr "IKONA"
-
-#: gnome-terminal/gnome-terminal.c:2699
-msgid "Set the TERM variable"
-msgstr "Nastavi spremenljivko TERM"
-
-#: gnome-terminal/gnome-terminal.c:2699
-msgid "TERMNAME"
-msgstr "TERMIME"
-
-#: gnome-terminal/gnome-terminal.c:2702
-msgid "Try to start a TerminalFactory"
-msgstr "Poizkusi pognati TerminalFactory"
-
-#: gnome-terminal/gnome-terminal.c:2705
-msgid "Try to create the terminal with the TerminalFactory"
-msgstr "Poizkusi ustvariti terminal s TerminalFactory"
-
-#: gnome-terminal/gnome-terminal.c:2934
-msgid "Cannot gnome_program_init ()"
-msgstr "gnome_program_init() ni uspel"
-
-#.
-#. * Local variables:
-#. * c-basic-offset: 8
-#. * End:
-#.
-#: gnome-terminal/gnome-terminal.glade.h:1
-msgid "Background color:"
-msgstr "Barva ozadja:"
-
-#: gnome-terminal/gnome-terminal.glade.h:4
-msgid "Background should be shaded"
-msgstr "Ozadje naj bo senèeno"
-
-#: gnome-terminal/gnome-terminal.glade.h:5
-msgid "Background type"
-msgstr "Tip ozadja"
-
-#: gnome-terminal/gnome-terminal.glade.h:6
-msgid "Blinking cursor"
-msgstr "Utripanje kazalca"
-
-#: gnome-terminal/gnome-terminal.glade.h:7
-msgid "Color palette:"
-msgstr "Barvna paleta:"
-
-#: gnome-terminal/gnome-terminal.glade.h:8
-msgid "Color scheme:"
-msgstr "Barvna shema:"
-
-#: gnome-terminal/gnome-terminal.glade.h:9
-msgid "Colors"
-msgstr "Barve"
-
-#: gnome-terminal/gnome-terminal.glade.h:11
-msgid "Delete generates DEL/^H"
-msgstr "Tipka zbri¹i generira DEL oziroma ^H"
-
-#: gnome-terminal/gnome-terminal.glade.h:12
-msgid "Enable bold text"
-msgstr "Vkljuèi polkrepko besedilo"
-
-#: gnome-terminal/gnome-terminal.glade.h:13
-#: gnome-terminal/gnome-x-font-selector.c:492
-#: gnome-terminal/gnome-x-font-selector.c:2170
-#: gnome-terminal/gnome-x-font-selector.c:2400
-msgid "Font:"
-msgstr "Pisava:"
-
-#: gnome-terminal/gnome-terminal.glade.h:14
-msgid "Fore/Background Color:"
-msgstr "Barva ospredja/ozadja:"
-
-#: gnome-terminal/gnome-terminal.glade.h:15
-msgid "Foreground color:"
-msgstr "Barva ospredja:"
-
-#: gnome-terminal/gnome-terminal.glade.h:16
-#: panel/gnome-panel-properties.glade.h:11
-msgid "General"
-msgstr "Splo¹no"
-
-#: gnome-terminal/gnome-terminal.glade.h:17
-msgid "Hide menu bar"
-msgstr "Skrij menuje"
-
-#. image frame
-#: gnome-terminal/gnome-terminal.glade.h:18 panel/panel-config.c:1363
-msgid "Image"
-msgstr "Slika"
-
-#: gnome-terminal/gnome-terminal.glade.h:19
-#, fuzzy
-msgid "None"
-msgstr "opravljeno"
-
-#: gnome-terminal/gnome-terminal.glade.h:20
-msgid "Pick a color"
-msgstr "Izberi barvo"
-
-#: gnome-terminal/gnome-terminal.glade.h:21
-msgid "Pixmap file:"
-msgstr "Datoteka slike:"
-
-#: gnome-terminal/gnome-terminal.glade.h:22
-msgid "Scroll on keystroke"
-msgstr "Zdrsni ob pritisku na tipko"
-
-#: gnome-terminal/gnome-terminal.glade.h:23
-msgid "Scroll on output"
-msgstr "Zdrsni ob izpisu"
-
-#: gnome-terminal/gnome-terminal.glade.h:24
-msgid "Scrollback lines:"
-msgstr "©tevilo pomnjenih vrstic:"
-
-#: gnome-terminal/gnome-terminal.glade.h:25
-msgid "Scrollbar position:"
-msgstr "Mesto drsnikov:"
-
-#: gnome-terminal/gnome-terminal.glade.h:26
-msgid "Scrolling"
-msgstr "Drsniki"
-
-#: gnome-terminal/gnome-terminal.glade.h:27
-msgid "Select-by-word characters:"
-msgstr "Znaki za izbiranje-po-besedi:"
-
-#: gnome-terminal/gnome-terminal.glade.h:28
-msgid "Silence terminal bell"
-msgstr "Tihi terminalski zvonec"
-
-#: gnome-terminal/gnome-terminal.glade.h:29
-msgid "Swap Delete/Backspace"
-msgstr "Zamenjaj tipki zbri¹i in povratnico"
-
-#: gnome-terminal/gnome-terminal.glade.h:30
-msgid "Terminal Class:"
-msgstr "Razred terminala:"
-
-#: gnome-terminal/gnome-terminal.glade.h:31
-msgid "Transparent"
-msgstr "Prosojno"
-
-#: gnome-terminal/gnome-terminal.glade.h:32
-msgid "Use --login by default"
-msgstr "Uporabi --login kot privzeto"
-
-#: gnome-terminal/gnome-terminal.xml.h:1
-#, fuzzy
-msgid "C_olor selector"
-msgstr "Izbirnik barv"
-
-#: gnome-terminal/gnome-terminal.xml.h:2
-#, fuzzy
-msgid "Copy _link location"
-msgstr "Program"
-
-#: gnome-terminal/gnome-terminal.xml.h:3
-msgid "Edit"
-msgstr "Uredi"
-
-#: gnome-terminal/gnome-terminal.xml.h:4
-#, fuzzy
-msgid "File"
-msgstr "Datoteka"
-
-#: gnome-terminal/gnome-terminal.xml.h:5
-#, fuzzy
-msgid "GNOME terminal users guide"
-msgstr "GNOME Terminal"
-
-#: gnome-terminal/gnome-terminal.xml.h:6 gsm/session-properties.c:182
-#: panel/drawer.c:516 panel/launcher.c:677 panel/logout.c:127
-#: panel/logout.c:213 panel/menu.c:4052 panel/status.c:372 panel/swallow.c:454
+"Upravljalnik oken spremennja aktivno podorèje na vseh namizjih\n"
+"(FVWM, Sawfish)"
+
+#: applets/desk-guide/deskguide_applet.c:146
+msgid ""
+"Window manager expects pager to modify area+desktop properties directly\n"
+"(Enlightenment, FVWM)"
+msgstr ""
+"Upravljalnik oken prièakuje, da bo pager neposredno spremenil lastnosti "
+"podroèja in namizja\n"
+"(Enlightenment, FVWM)"
+
+#: applets/desk-guide/deskguide_applet.c:149
+msgid "Behaviour"
+msgstr "Obna¹anje"
+
+#: applets/desk-guide/deskguide_applet.c:151
+msgid "Popdown task view automatically"
+msgstr "Samodejno prika¾i pregled poslov"
+
+#: applets/desk-guide/deskguide_applet.c:172
+msgid "GNOME Desktop Guide (Pager)"
+msgstr "GNOME Vodnik po namizju (pager)"
+
+#: applets/desk-guide/deskguide_applet.c:188
+msgid ""
+"You are not running a GNOME Compliant\n"
+"Window Manager. GNOME support by the \n"
+"window manager is strongly recommended\n"
+"for proper Desk Guide operation."
+msgstr ""
+"Trenutno ne teèe GNOME prilagojen\n"
+"upravljalnik oken. GNOME podpora s\n"
+"strani upravljalnika oken je priporoèena\n"
+"za pravilno delovanje vodnika po namizju."
+
+#: applets/desk-guide/deskguide_applet.c:193
+msgid "Desk Guide Alert"
+msgstr "Opozorilo Vodnika po namizju"
+
+#: applets/desk-guide/deskguide_applet.c:238 applets/gen_util/mailcheck.c:1516
+#: applets/gen_util/printer.c:468 applets/tasklist/tasklist_applet.c:1693
+#: panel/drawer.c:513 panel/launcher.c:680 panel/menu.c:1777 panel/menu.c:1857
+#: panel/menu.c:6040
+msgid "Properties..."
+msgstr "Lastnosti..."
+
+#: applets/desk-guide/deskguide_applet.c:244 applets/gen_util/mailcheck.c:1528
+#: applets/gen_util/printer.c:475 applets/tasklist/tasklist_applet.c:1701
+#: gsm/session-properties.c:182 help-browser/window.c:255 panel/drawer.c:515
+#: panel/gnome-run.c:1307 panel/launcher.c:682 panel/logout.c:126
+#: panel/logout.c:211 panel/menu.c:6052 panel/status.c:376 panel/swallow.c:448
 msgid "Help"
 msgstr "Pomoè"
 
-#: gnome-terminal/gnome-terminal.xml.h:7
-#, fuzzy
-msgid "Reset and _clear"
-msgstr "Ponastavi in _bri¹i"
-
-#: gnome-terminal/gnome-terminal.xml.h:8 gsm/gsm-client-row.c:59
-msgid "Settings"
-msgstr "Nastavitve"
-
-#: gnome-terminal/gnome-terminal.xml.h:9
-#, fuzzy
-msgid "_About..."
+#: applets/desk-guide/deskguide_applet.c:251 applets/gen_util/mailcheck.c:1534
+#: applets/gen_util/printer.c:481 applets/tasklist/tasklist_applet.c:1709
+msgid "About..."
 msgstr "O programu..."
 
-#: gnome-terminal/gnome-terminal.xml.h:10
-msgid "_Close terminal"
-msgstr "_Zapri terminal"
+#: applets/desk-guide/deskguide_applet.c:640
+msgid "Desk Guide Task View"
+msgstr "Pregled poslov Vodnika po namizju"
 
-#: gnome-terminal/gnome-terminal.xml.h:11
-msgid "_Copy"
+#: applets/desk-guide/deskguide_applet.c:1095
+msgid "Global"
+msgstr "Globalno"
+
+#: applets/desk-guide/deskguide_applet.c:1151
+msgid "Desk Guide Settings"
+msgstr "Nastavitve Vodnika po namizju"
+
+#: applets/fish/fish.c:429 applets/fish/fish.c:823
+#, no-c-format
+msgid "%s the Fish"
+msgstr "%s Riba"
+
+#: applets/fish/fish.c:430
+#, c-format
+msgid "%s the GNOME Fish Says:"
+msgstr "%s GNOME riba pravi:"
+
+#: applets/fish/fish.c:506
+msgid ""
+"Warning:  The command appears to be something actually useful.\n"
+"Since this is a useless applet, you may not want to do this.\n"
+"We strongly advise you against usage of wanda for anything\n"
+"which would make the applet \"practical\" or useful."
 msgstr ""
+"Opozorilo: Zdi se, da ukaz naredi nekaj uporabnega.\n"
+"Ker je to neuporaben vstavek si morda tega ne ¾elite.\n"
+"Moèno priporoèamo proti uporabi wande za karkoli\n"
+"kar bi lahko naredilo vstavek \"praktiènen\" ali uporaben."
 
-#: gnome-terminal/gnome-terminal.xml.h:12
-msgid "_Hide menubar"
-msgstr "_Skrij menujsko vrstico"
+#: applets/fish/fish.c:549
+msgid "GNOME Fish Properties"
+msgstr "Lastnosti GNOME ribe"
 
-#: gnome-terminal/gnome-terminal.xml.h:13
-msgid "_New terminal"
-msgstr "_Nov terminal"
+#: applets/fish/fish.c:559
+msgid "Your GNOME Fish's Name:"
+msgstr "Ime Va¹e GNOME ribe:"
 
-#: gnome-terminal/gnome-terminal.xml.h:14
-msgid "_Open in browser"
-msgstr "_Odpri v brskalniku"
+#: applets/fish/fish.c:573
+msgid "The Animation Filename:"
+msgstr "Datoteka z animacijo:"
 
-#: gnome-terminal/gnome-terminal.xml.h:15
-#, fuzzy
-msgid "_Paste"
-msgstr "Zadnji"
+#: applets/fish/fish.c:575 applets/gen_util/mailcheck.c:1020
+#: gnome-hint/gnome-hint-properties.c:146 panel/menu-properties.c:610
+#: panel/menu-properties.c:648 panel/panel-util.c:206
+#: panel/panel_config.c:1659 panel/swallow.c:287
+msgid "Browse"
+msgstr "Brskaj"
 
-#: gnome-terminal/gnome-terminal.xml.h:16
-#, fuzzy
-msgid "_Preferences"
-msgstr "Nastavitve"
+#: applets/fish/fish.c:588
+msgid "Command to execute when fish is clicked:"
+msgstr "Ukaz, ki naj se izvr¹i ob kliku na ribo:"
 
-#: gnome-terminal/gnome-terminal.xml.h:17
-#, fuzzy
-msgid "_Reset terminal"
-msgstr "_Ponastavi terminal"
+#: applets/fish/fish.c:602
+msgid "Frames In Animation:"
+msgstr "©tevilo slik v animaciji:"
 
-#: gnome-terminal/gnome-terminal.xml.h:18
-msgid "_Secure keyboard"
-msgstr "_Varna tipkovnica"
+#: applets/fish/fish.c:618
+msgid "Pause per frame (s):"
+msgstr "Premor med slikami (s):"
 
-#: gnome-terminal/gnome-x-font-selector.c:198
-#, fuzzy
-msgid "Foundry:"
+#: applets/fish/fish.c:631
+msgid "Rotate on vertical panels"
+msgstr "Zavrti pri navpiènih pultih"
+
+#: applets/fish/fish.c:640
+msgid "Fish"
+msgstr "Riba"
+
+#: applets/fish/fish.c:712
+msgid ""
+"You do not have fortune installed or you have not specified a program to "
+"run.\n"
+"\n"
+"Please refer to fish properties dialog."
+msgstr ""
+"Programa 'fortune' nimate name¹èenega ali niste navedli programa, ki\n"
+"naj se po¾ene\n"
+"\n"
+"Prosim poglejte lastnosti ribe."
+
+#: applets/fish/fish.c:730
+msgid ""
+"The water needs changing!\n"
+"(Look at today's date)"
+msgstr ""
+"Vodo se mora zamenjati!\n"
+"(Poglejte dana¹nji datum)"
+
+#: applets/fish/fish.c:836
+msgid "(with minor help from George)"
+msgstr "(z manj¹o pomoèjo George-a)"
+
+#: applets/fish/fish.c:853
+msgid "The GNOME Fish Applet"
+msgstr "Vstavek GNOME riba"
+
+#: applets/fish/fish.c:856
+msgid ""
+"This applet has no use what-so-ever. It only takes up disk space and "
+"compilation time, and if loaded it also takes up precious panel space and "
+"memory. If anyone is found using this applet, he should be promptly sent for "
+"a psychiatric evaluation."
+msgstr ""
+"Ta vstavek nima popolnoma nobene uporabnosti. Vse kar poène je zavzemanje "
+"prostora na disku, prevajalnega èasa in, èe je nalo¾en vzame tudi nekaj "
+"prostora na pultu in v pomnilniku. Èe kdo najde kak¹nega uporabnika tega "
+"vstavka, ga je priporoèljivo poslati k psihiatru."
+
+#: applets/gen_util/clock.c:199
+msgid ""
+"%I:%M\n"
+"%p"
+msgstr ""
+"%I:%M\n"
+"%p"
+
+#. This format string is used, to display the actual time in
+#. 12 hour format.
+#: applets/gen_util/clock.c:202 applets/gen_util/clock.c:416
+msgid "%I:%M %p"
+msgstr "%I:%M %p"
+
+#. This format string is used, to display the actual time in
+#. 24 hour format.
+#: applets/gen_util/clock.c:209 applets/gen_util/clock.c:421
+#: panel/foobar-widget.c:648 panel/foobar-widget.c:1113
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#. This format string is used, to display the actual day,
+#. when showing a vertical panel.  For an explanation of
+#. this format string type 'man strftime'.
+#: applets/gen_util/clock.c:221
+msgid ""
+"%a\n"
+"%b %d"
+msgstr ""
+"%a\n"
+"%d %b"
+
+#. This format string is used, to display the actual day,
+#. when showing a horizontal panel.
+#: applets/gen_util/clock.c:226
+msgid "%a %b %d"
+msgstr "%a %d. %b"
+
+#: applets/gen_util/clock.c:239
+msgid "%A, %B %d"
+msgstr "%A, %d. %B"
+
+#: applets/gen_util/clock.c:443
+msgid "%A, %B %d %Y"
+msgstr "%A, %d %B %Y"
+
+#. RFC822 conformant date, likely not different for other
+#. * locales I don't think
+#: applets/gen_util/clock.c:466
+msgid "%a, %d  %b  %Y %H:%M:%S %z"
+msgstr "%a, %b  %d  %Y %H:%M:%S %z"
+
+#. Do NOT translate the clock/hourformat part.  What you
+#. * should change is the 12.  If your country code should use
+#. * 12 hour format by default, leave it at 12, otherwise use 24
+#. * for 24 hour format.  Those are the only two supported
+#: applets/gen_util/clock.c:514
+msgid "clock/hourformat=12"
+msgstr "clock/hourformat=24"
+
+#: applets/gen_util/clock.c:735
+msgid "Clock properties"
+msgstr "Lastnosti ure"
+
+#: applets/gen_util/clock.c:752
+msgid "Time Format"
+msgstr "Oblika Izpisa Èasa"
+
+#: applets/gen_util/clock.c:764
+msgid "12 hour"
+msgstr "12 urna"
+
+#: applets/gen_util/clock.c:772
+msgid "24 hour"
+msgstr "24 urna"
+
+#: applets/gen_util/clock.c:807
+msgid "Show date in applet"
+msgstr "Ka¾i datum v vstavku"
+
+#: applets/gen_util/clock.c:821
+msgid "Show date in tooltip"
+msgstr "Ka¾i datum v namigu"
+
+#: applets/gen_util/clock.c:835
+msgid "Use GMT"
+msgstr "Uporabi GMT"
+
+#: applets/gen_util/clock.c:849
+msgid "Unix time"
+msgstr "Unix èas"
+
+#: applets/gen_util/clock.c:853
+msgid "Internet time"
+msgstr "Internetni èas"
+
+#: applets/gen_util/clock.c:910
+msgid "Clock"
+msgstr "Ura"
+
+#: applets/gen_util/clock.c:976
+msgid "Clock Applet"
+msgstr "Vstavek Ura"
+
+#: applets/gen_util/clock.c:977
+msgid "(c) 1998-2001 the Free Software Foundation"
+msgstr "(c) 1998-2001 Fundacija za prosto programje"
+
+#: applets/gen_util/clock.c:978
+msgid ""
+"The clock applet gives your panel a lightweight and simple display of the "
+"date and time"
+msgstr "Vstavek ura doda pultu enostaven prikazovalnik datuma in ure"
+
+#: applets/gen_util/mailcheck.c:206 applets/gen_util/mailcheck.c:1064
+msgid "Password:"
+msgstr "Geslo:"
+
+#: applets/gen_util/mailcheck.c:229
+msgid ""
+"Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
+"wrong server/username/password?"
+msgstr ""
+"Zgodila se je napaka na oddaljenem odjemalcu. Remote-polling deaktiviran "
+"Morda ste uporabili napaèen stre¾nik/uporabni¹ko ime/geslo?"
+
+#: applets/gen_util/mailcheck.c:471
+msgid "You have new mail."
+msgstr "Ima¹ novo po¹to."
+
+#: applets/gen_util/mailcheck.c:473
+msgid "You have mail."
+msgstr "Ima¹ po¹to."
+
+#: applets/gen_util/mailcheck.c:477
+#, c-format
+msgid "%d/%d messages"
+msgstr "%d/%d sporoèil"
+
+#: applets/gen_util/mailcheck.c:479
+#, c-format
+msgid "%d messages"
+msgstr "%d sporoèil"
+
+#: applets/gen_util/mailcheck.c:483
+msgid "No mail."
+msgstr "Po¹te ni."
+
+#: applets/gen_util/mailcheck.c:965
+msgid "Mailbox resides on:"
+msgstr "Po¹tni nabiralnik se nahaja na:"
+
+#: applets/gen_util/mailcheck.c:972
+msgid "Local mailspool"
+msgstr "Krajevni po¹tni èakalnik"
+
+#: applets/gen_util/mailcheck.c:980
+msgid "Local maildir"
+msgstr "Krajevni imenik za po¹to"
+
+#: applets/gen_util/mailcheck.c:988
+msgid "Remote POP3-server"
+msgstr "Oddaljen POP3-stre¾nik"
+
+#: applets/gen_util/mailcheck.c:996
+msgid "Remote IMAP-server"
+msgstr "Oddaljen IMAP-stre¾nik"
+
+#: applets/gen_util/mailcheck.c:1016
+msgid "Mail spool file:"
+msgstr "Datoteka s èakajoèo po¹to:"
+
+#: applets/gen_util/mailcheck.c:1033
+msgid "Mail server:"
+msgstr "Stre¾nik po¹te:"
+
+#: applets/gen_util/mailcheck.c:1050
+msgid "Username:"
+msgstr "Uporabni¹ko ime:"
+
+#: applets/gen_util/mailcheck.c:1082
+msgid "Folder:"
 msgstr "Mapa:"
 
-#: gnome-terminal/gnome-x-font-selector.c:199
-msgid "Family:"
-msgstr ""
+#: applets/gen_util/mailcheck.c:1100
+msgid "Command to run before we check for mail:"
+msgstr "Ukaz, ki naj se po¾ene, preden pogledamo za po¹to:"
 
-#: gnome-terminal/gnome-x-font-selector.c:200
-#, fuzzy
-msgid "Weight:"
-msgstr "Vi¹ina"
+#: applets/gen_util/mailcheck.c:1130
+msgid "Execute"
+msgstr "Izvedi"
 
-#: gnome-terminal/gnome-x-font-selector.c:201
-msgid "Slant:"
-msgstr ""
+#: applets/gen_util/mailcheck.c:1141
+msgid "Before each update:"
+msgstr "Pred vsako osve¾itvijo:"
 
-#: gnome-terminal/gnome-x-font-selector.c:202
-#, fuzzy
-msgid "Set Width:"
-msgstr "©irina"
+#: applets/gen_util/mailcheck.c:1162
+msgid "When new mail arrives:"
+msgstr "Ko pride nova po¹ta:"
 
-#: gnome-terminal/gnome-x-font-selector.c:203
-#, fuzzy
-msgid "Add Style:"
-msgstr "Slog: "
+#: applets/gen_util/mailcheck.c:1181
+msgid "When clicked:"
+msgstr "Ob kliku:"
 
-#: gnome-terminal/gnome-x-font-selector.c:204
-#, fuzzy
-msgid "Pixel Size:"
-msgstr "Velikost pulta:"
+#: applets/gen_util/mailcheck.c:1204
+msgid "Check for mail every"
+msgstr "Preveri po¹to vsakih"
 
-#: gnome-terminal/gnome-x-font-selector.c:205
-#, fuzzy
-msgid "Point Size:"
-msgstr "Velikost pulta:"
-
-#: gnome-terminal/gnome-x-font-selector.c:206
-msgid "Resolution X:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:207
-msgid "Resolution Y:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:208
-#, fuzzy
-msgid "Spacing:"
-msgstr "Shranjujem"
-
-#: gnome-terminal/gnome-x-font-selector.c:209
-msgid "Average Width:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:210
-msgid "Charset:"
-msgstr ""
-
-#. Number of internationalized titles here must match number
-#. of NULL initializers above
-#: gnome-terminal/gnome-x-font-selector.c:447
-#, fuzzy
-msgid "Font Property"
-msgstr "Lastnosti seje"
-
-#: gnome-terminal/gnome-x-font-selector.c:448
-msgid "Requested Value"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:449
-msgid "Actual Value"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:482
-#, fuzzy
-msgid "Font"
-msgstr "Pisava:"
-
-#: gnome-terminal/gnome-x-font-selector.c:497
-#, fuzzy
-msgid "Font Style:"
-msgstr "Slog: "
-
-#: gnome-terminal/gnome-x-font-selector.c:502
-#, fuzzy
-msgid "Size:"
-msgstr "Velikost"
-
-#: gnome-terminal/gnome-x-font-selector.c:634
-#: gnome-terminal/gnome-x-font-selector.c:858
-#, fuzzy
-msgid "Reset Filter"
-msgstr "Ponastavi in _bri¹i"
-
-#: gnome-terminal/gnome-x-font-selector.c:648
-msgid "Metric:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:652
-#, fuzzy
-msgid "Points"
+#: applets/gen_util/mailcheck.c:1217
+msgid "minutes"
 msgstr "minut"
 
-#: gnome-terminal/gnome-x-font-selector.c:659
-msgid "Pixels"
-msgstr ""
+#: applets/gen_util/mailcheck.c:1230
+msgid "seconds"
+msgstr "sekund"
 
-#. create the text entry widget
-#: gnome-terminal/gnome-x-font-selector.c:675
-#, fuzzy
-msgid "Preview:"
-msgstr "Predogled"
+#: applets/gen_util/mailcheck.c:1234
+msgid "Play a sound when new mail arrives"
+msgstr "Naredi zvok, ko pride nova po¹ta"
 
-#: gnome-terminal/gnome-x-font-selector.c:706
-msgid "Font Information"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:739
-msgid "Requested Font Name:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:750
-msgid "Actual Font Name:"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:761
-#, c-format
-msgid "%i fonts available with a total of %i styles."
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:776
-#, fuzzy
-msgid "Filter"
-msgstr "Datoteka"
-
-#: gnome-terminal/gnome-x-font-selector.c:789
-#, fuzzy
-msgid "Font Types:"
-msgstr "Pisava:"
-
-#: gnome-terminal/gnome-x-font-selector.c:797
-#, fuzzy
-msgid "Bitmap"
-msgstr "raster"
-
-#: gnome-terminal/gnome-x-font-selector.c:803
-msgid "Scalable"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:809
-msgid "Scaled Bitmap"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:880
-msgid "*"
-msgstr ""
-
-#. Convert '(nil)' weights to 'regular', since it looks nicer.
-#: gnome-terminal/gnome-x-font-selector.c:1205
-msgid "(nil)"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1205
-msgid "regular"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1210
-#: gnome-terminal/gnome-x-font-selector.c:1962
-msgid "italic"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1211
-#: gnome-terminal/gnome-x-font-selector.c:1963
-msgid "oblique"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1212
-#: gnome-terminal/gnome-x-font-selector.c:1964
-msgid "reverse italic"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1213
-#: gnome-terminal/gnome-x-font-selector.c:1965
-msgid "reverse oblique"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1214
-#: gnome-terminal/gnome-x-font-selector.c:1966
-msgid "other"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1221
-msgid "[M]"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1222
-msgid "[C]"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1782
-msgid "The selected font is not available."
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1788
-msgid "The selected font is not a valid font."
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1844
-msgid "This is a 2-byte font and may not be displayed correctly."
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1950
-#, fuzzy
-msgid "(unknown)"
-msgstr "Neznan"
-
-#: gnome-terminal/gnome-x-font-selector.c:1961
-#, fuzzy
-msgid "roman"
-msgstr "manx"
-
-#: gnome-terminal/gnome-x-font-selector.c:1973
-#, fuzzy
-msgid "proportional"
-msgstr "Vodoravno"
-
-#: gnome-terminal/gnome-x-font-selector.c:1974
-msgid "monospaced"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:1975
-msgid "char cell"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:2175
-msgid "Font: (Filter Applied)"
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:2651
-msgid "MAX_FONTS exceeded. Some fonts may be missing."
-msgstr ""
-
-#: gnome-terminal/gnome-x-font-selector.c:3499
-#, fuzzy
-msgid "Font Selection"
-msgstr "Kopiraj èas v izbiro"
-
-#: gnome-terminal/gnome-x-font-selector.c:3595
-#, fuzzy
-msgid "Select a font"
+#: applets/gen_util/mailcheck.c:1245
+msgid "Select animation"
 msgstr "Izberi animacijo"
 
-#: gnome-about/gnome-about.c:467
-msgid "About GNOME"
-msgstr "O GNOME"
+#: applets/gen_util/mailcheck.c:1282
+msgid "Mail check properties"
+msgstr "Lastnosti preverjanja po¹te"
 
-#: gnome-about/gnome-about.c:568
-msgid "GNOME News Site"
-msgstr "Stran z novicami GNOME"
+#: applets/gen_util/mailcheck.c:1288
+msgid "Mail check"
+msgstr "Preverjanje po¹te"
 
-#: gnome-about/gnome-about.c:572
-msgid "http://www.gnome.org/"
-msgstr "http://www.gnome.org/"
+#: applets/gen_util/mailcheck.c:1291
+msgid "Mailbox"
+msgstr "Po¹tni nabiralnik"
 
-#: gnome-about/gnome-about.c:573
-msgid "GNOME Main Site"
-msgstr "Glavna stran GNOME"
+#: applets/gen_util/mailcheck.c:1376
+msgid "Mail check Applet"
+msgstr "Vstavek za preverjanje po¹te"
 
-#: gnome-about/gnome-about.c:578
-msgid "GNOME Developers' Site"
-msgstr "Stran razvijalcev GNOME-a"
+#: applets/gen_util/mailcheck.c:1377
+msgid "(c) 1998-2000 the Free Software Foundation"
+msgstr "(c) 1998-2000 Fundacija za prosto programje"
+
+#: applets/gen_util/mailcheck.c:1379
+msgid "Mail check notifies you when new mail arrives in your mailbox"
+msgstr "Preverjalnik po¹te vas obvesti, ko v va¹ nabiralnik prispe nova po¹ta"
+
+#: applets/gen_util/mailcheck.c:1430 applets/gen_util/printer.c:425
+msgid "Can't create applet!\n"
+msgstr "Ne morem ustvariti vstavka!\n"
+
+#: applets/gen_util/mailcheck.c:1494
+msgid "Text only"
+msgstr "Samo besedilo"
+
+#: applets/gen_util/mailcheck.c:1522
+msgid "Check for mail"
+msgstr "Preveri za po¹to"
+
+#: applets/gen_util/printer.c:120
+msgid "Can't execute printer command"
+msgstr "Ne morem izvr¹iti ukaza za tiskanje"
+
+#: applets/gen_util/printer.c:308
+msgid "Printer properties"
+msgstr "Lastnosti tiskalnika"
+
+#: applets/gen_util/printer.c:317
+msgid "Printer name:"
+msgstr "Ime tiskalnika:"
+
+#: applets/gen_util/printer.c:321
+msgid "Print command:"
+msgstr "Ukaz za tiskanje:"
+
+#: applets/gen_util/printer.c:327
+msgid "Printer"
+msgstr "Tiskalnik"
+
+#: applets/gen_util/printer.c:355
+msgid "Printer Applet"
+msgstr "Tiskalni¹ki vstavek"
+
+#: applets/gen_util/printer.c:356
+msgid "(c) 1998 the Free Software Foundation"
+msgstr "(c) 1998 Fundacija za prosto programje"
+
+#: applets/gen_util/printer.c:358
+msgid ""
+"The printer applet lets you easily drag files to be printed via a print "
+"command"
+msgstr ""
+"Tiskalni¹ki vstavek omogoèa enostavno spu¹èanje datotek na tiskalnik skozi "
+"ukaz za tiskanje"
+
+#. Translators: Task with no name, should not really happen, so
+#. * this should signal that the panel is confused by this task
+#. * (thus question marks)
+#: applets/tasklist/tasklist_applet.c:135 panel/applet.c:438
+#: panel/foobar-widget.c:844
+msgid "???"
+msgstr "???"
+
+#: applets/tasklist/tasklist_applet.c:1421
+msgid "Copyright (C) 1999 Anders Carlsson"
+msgstr "Avtorske pravice pridr¾ane (C) 1999 Anders Carlsson"
+
+#: applets/tasklist/tasklist_applet.c:1423
+msgid ""
+"A tasklist for the GNOME desktop environment.\n"
+"Icons by Tuomas Kuosmanen (tigert@gimp.org)."
+msgstr ""
+"Seznam poslov za namizje GNOME.\n"
+"Ikone naredil Tuomas Kuosmanen (tigert@gimp.org)."
+
+#: applets/tasklist/tasklist_applet.c:1615
+msgid "Tasklist: Unable to create applet widget"
+msgstr "Seznam poslov: Ne morem ustvariti gradnika vstavek"
+
+#: applets/tasklist/tasklist_applet.c:1807
+#, c-format
+msgid "Don't know how to activate `%s'\n"
+msgstr "Ne znam aktivirati `%s'\n"
+
+#: applets/tasklist/tasklist_menu.c:96 applets/tasklist/tasklist_menu.c:155
+msgid ""
+"Warning! Unsaved changes will be lost!\n"
+"Proceed?"
+msgstr ""
+"Opozorilo! Spremembe, ki jih niste shranili, bodo izgubljene!\n"
+"Naj nadaljujem?"
+
+#: applets/tasklist/tasklist_menu.c:258
+msgid "Restore"
+msgstr "Obnovi"
+
+#: applets/tasklist/tasklist_menu.c:258
+msgid "Iconify"
+msgstr "Skrèi v ikono"
+
+#: applets/tasklist/tasklist_menu.c:264
+msgid "Unshade"
+msgstr "Odsenèi"
+
+#: applets/tasklist/tasklist_menu.c:264
+msgid "Shade"
+msgstr "Zasenèi"
+
+#: applets/tasklist/tasklist_menu.c:270
+msgid "Unstick"
+msgstr "Odlepi"
+
+#: applets/tasklist/tasklist_menu.c:270
+msgid "Stick"
+msgstr "Prilepi"
+
+#: applets/tasklist/tasklist_menu.c:276 applets/tasklist/tasklist_menu.c:369
+msgid "To desktop"
+msgstr "Na namizje"
+
+#: applets/tasklist/tasklist_menu.c:316
+msgid "Close window"
+msgstr "Zapri okno"
+
+#: applets/tasklist/tasklist_menu.c:323
+msgid "Kill app"
+msgstr "Ubij program"
+
+#. if (iconified window in group)
+#: applets/tasklist/tasklist_menu.c:349
+msgid "Restore All"
+msgstr "Obnovi vse"
+
+#: applets/tasklist/tasklist_menu.c:352
+msgid "Iconify All"
+msgstr "Skrèi vse"
+
+#: applets/tasklist/tasklist_menu.c:355
+msgid "Unshade All"
+msgstr "Odsenèi vse"
+
+#: applets/tasklist/tasklist_menu.c:358
+msgid "Shade All"
+msgstr "Zasenèi vse"
+
+#: applets/tasklist/tasklist_menu.c:361
+msgid "Unstick All"
+msgstr "Odlepi vse"
+
+#: applets/tasklist/tasklist_menu.c:364
+msgid "Stick All"
+msgstr "Prilepi vse"
+
+#: applets/tasklist/tasklist_menu.c:409
+msgid "Close All"
+msgstr "Zapri vse"
+
+#: applets/tasklist/tasklist_menu.c:417
+msgid "Kill All"
+msgstr "Ubij vse"
+
+#: applets/tasklist/tasklist_properties.c:156
+msgid "Follow panel size"
+msgstr "Sledi velikosti pulta"
+
+#: applets/tasklist/tasklist_properties.c:165 panel/menu.c:4886
+msgid "Horizontal"
+msgstr "Vodoravno"
+
+#: applets/tasklist/tasklist_properties.c:175
+#: applets/tasklist/tasklist_properties.c:237
+msgid "Tasklist width:"
+msgstr "©irina seznama poslov:"
+
+#: applets/tasklist/tasklist_properties.c:182
+msgid "Rows of tasks:"
+msgstr "Vrstic poslov:"
+
+#: applets/tasklist/tasklist_properties.c:196
+msgid "Default task size:"
+msgstr "Privzeta velikost posla:"
+
+#: applets/tasklist/tasklist_properties.c:206
+msgid "Tasklist width is fixed"
+msgstr "Stalna ¹irina seznama poslov"
+
+#: applets/tasklist/tasklist_properties.c:211
+msgid "Tasklist width is dynamic"
+msgstr "Dinamièna ¹irina seznama poslov"
+
+#: applets/tasklist/tasklist_properties.c:216
+#: applets/tasklist/tasklist_properties.c:262
+msgid "Only use empty space"
+msgstr "Uporabi le prazen prostor"
+
+#: applets/tasklist/tasklist_properties.c:222 panel/menu.c:4887
+msgid "Vertical"
+msgstr "Navpièno"
+
+#: applets/tasklist/tasklist_properties.c:230
+msgid "Tasklist height:"
+msgstr "Vi¹ina seznama poslov:"
+
+#: applets/tasklist/tasklist_properties.c:250
+msgid "Tasklist height is fixed"
+msgstr "Stalna vi¹ina seznama poslov"
+
+#: applets/tasklist/tasklist_properties.c:256
+msgid "Tasklist height is dynamic"
+msgstr "Dinamièna vi¹ina seznama poslov"
+
+#: applets/tasklist/tasklist_properties.c:268
+msgid "Tasklist width is that of longest title"
+msgstr "©irina seznama poslov je enaka najdalj¹emu imenu"
+
+#: applets/tasklist/tasklist_properties.c:276 panel/menu.c:4935
+msgid "Size"
+msgstr "Velikost"
+
+#: applets/tasklist/tasklist_properties.c:289
+msgid "Which tasks to show"
+msgstr "Katere posle naj ka¾em"
+
+#: applets/tasklist/tasklist_properties.c:300
+msgid "Show normal applications"
+msgstr "Ka¾i obièajne programe"
+
+#: applets/tasklist/tasklist_properties.c:306
+msgid "Show iconified (minimized) applications"
+msgstr "Ka¾i skrèene (pomanj¹ane) programe"
+
+#: applets/tasklist/tasklist_properties.c:313
+msgid "Show normal applications on all desktops"
+msgstr "Ka¾i obièajne programe na vseh namizjih"
+
+#: applets/tasklist/tasklist_properties.c:319
+msgid "Show iconified (minimized) applications on all desktops"
+msgstr "Ka¾i skrèene (pomanj¹ane) programe na vseh namizjih"
+
+#. Miscellaneous frame
+#: applets/tasklist/tasklist_properties.c:323 help-browser/toc-man.c:25
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:724
+#: panel/gnome-panel-properties.c:1219 panel/panel_config.c:743
+msgid "Miscellaneous"
+msgstr "Razno"
+
+#: applets/tasklist/tasklist_properties.c:334
+msgid "Show mini icons"
+msgstr "Ka¾i mini ikone"
+
+#: applets/tasklist/tasklist_properties.c:341
+msgid "Confirm before killing windows"
+msgstr "Zahtevaj potrditev pred ubijanjem oken"
+
+#: applets/tasklist/tasklist_properties.c:348
+msgid "Move iconified tasks to current workspace when restoring"
+msgstr "Ob obnovitvi premakni pomanj¹ana okna na trenutno delovno povr¹ino"
+
+#: applets/tasklist/tasklist_properties.c:355
+msgid "Display tooltips with full task names"
+msgstr "Ka¾i namige s polnimi imeni poslov"
+
+#: applets/tasklist/tasklist_properties.c:363
+msgid "Enable task grouping"
+msgstr "Vkljuèi zdru¾evanje poslov"
+
+#: applets/tasklist/tasklist_properties.c:371
+msgid "Number of tasks before grouping occurs"
+msgstr "©tevilo poslov preden se zaène zdru¾evanje"
+
+#: applets/tasklist/tasklist_properties.c:380
+msgid "Sink tasklist into panel"
+msgstr "Potopi seznam poslov v pult"
+
+#: applets/tasklist/tasklist_properties.c:414
+msgid "Tasklist properties"
+msgstr "Lastnosti seznama poslov"
+
+#: gmenu/desktop.c:84
+msgid " Folder"
+msgstr " Mapa"
+
+#: gmenu/edit.c:307
+msgid "Save"
+msgstr "Shrani"
+
+#: gmenu/edit.c:325 gsm/session-properties.c:173
+msgid "Revert"
+msgstr "Povrni"
+
+#: gmenu/edit.c:367 gmenu/tree.c:401
+msgid "Favorites (user menus)"
+msgstr "Priljubljeni (uporabni¹ki menuji)"
+
+#: gmenu/edit.c:369 gmenu/tree.c:409
+msgid "Programs (system menus)"
+msgstr "Programi (sistemski menuji)"
+
+#: gmenu/edit.c:371 gmenu/tree.c:427
+msgid "Applets (system menus)"
+msgstr "Vstavki (sistemski menuji)"
+
+#: gmenu/edit.c:374 gmenu/tree.c:418
+msgid "Programs to be merged in (system menus)"
+msgstr "Programi naj se zdru¾ijo v (sistemski menuji)"
+
+#: gmenu/main.c:53 gmenu/main.c:128
+msgid "_New Submenu..."
+msgstr "_Nov podmenu..."
+
+#: gmenu/main.c:54 gmenu/main.c:98 gmenu/main.c:129
+msgid "Create a new submenu"
+msgstr "Ustvari uporani¹ki podmenu"
+
+#: gmenu/main.c:57 gmenu/main.c:125
+msgid "New _Item..."
+msgstr "Nov _predmet..."
+
+#: gmenu/main.c:58 gmenu/main.c:126
+msgid "Create a new menu item"
+msgstr "Ustvari nov predmet"
+
+#: gmenu/main.c:61 gmenu/main.c:134
+msgid "_Delete..."
+msgstr "_Zbri¹i..."
+
+#: gmenu/main.c:72
+msgid "_Sort Submenu"
+msgstr "Uredi _podmenu"
+
+#: gmenu/main.c:76
+msgid "Sort Submenu _Recursive"
+msgstr "Uredi podmenu _rekurzivno"
+
+#: gmenu/main.c:90 gmenu/main.c:149
+msgid "_Sort"
+msgstr "_Uredi"
+
+#: gmenu/main.c:98
+msgid "New Submenu"
+msgstr "Nov podmenu"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "Nov predmet"
+
+#: gmenu/main.c:102
+msgid "Create a new item"
+msgstr "Ustvari nov predmet"
+
+#: gmenu/main.c:106 gsm/session-properties-capplet.c:257
+#: gsm/session-properties-capplet.c:311
+msgid "Delete"
+msgstr "Zbri¹i"
+
+#: gmenu/main.c:106
+msgid "Delete selected menu item"
+msgstr "Zbri¹i izbran predmet"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Premakni navzgor"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move selected menu up"
+msgstr "Premakni izbran menu navzgor"
+
+#: gmenu/main.c:113 gmenu/main.c:143
+msgid "Move down"
+msgstr "Premakni navzdol"
+
+#: gmenu/main.c:113 gmenu/main.c:143
+msgid "Move selected menu down"
+msgstr "Premakni izbran menu navzdol"
+
+#: gmenu/main.c:117
+msgid "Sort Submenu"
+msgstr "Uredi podmenu"
+
+#: gmenu/main.c:117
+msgid "Sort selected submenu"
+msgstr "Uredi izbran podmenu"
+
+#: gmenu/main.c:153
+msgid "Sort _Recursive"
+msgstr "Uredi _rekurzivno"
+
+#. loading dialog
+#: gmenu/main.c:241 gmenu/main.c:307 gmenu/tree.c:380
+msgid "GNOME menu editor"
+msgstr "GNOME urejevalnik menujev"
+
+#: gmenu/main.c:244
+msgid ""
+"Released under the terms of the GNU Public License.\n"
+"GNOME menu editor."
+msgstr ""
+"Izdano pod pogoji GNU Javne Licence.\n"
+"GNOME urejevalnik menujev."
+
+#: gmenu/main.c:287
+msgid "Unable to retrieve GNOME installation directory\n"
+msgstr "Ne uspem ugotoviti imenika v katerem je name¹èen GNOME\n"
+
+#: gmenu/order.c:81
+#, c-format
+msgid "Unable to create file: %s\n"
+msgstr "Ne morem ustvariti datoteke: %s\n"
+
+#: gmenu/order.c:95
+#, c-format
+msgid "unable to remove .order file: %s\n"
+msgstr "ne morem odstraniti .order datoteke: %s\n"
+
+#: gmenu/save.c:27 gmenu/save.c:86
+msgid "The menu item must have a name"
+msgstr "Predmet v menuju mora imeti ime"
+
+#: gmenu/save.c:33
+msgid "The menu entry must have a filename"
+msgstr "Predmet v menuju mora imeti datoteko"
+
+#: gmenu/save.c:40
+msgid "Save changes?"
+msgstr "Shrani spremembe?"
+
+#: gmenu/save.c:54
+msgid "This change conflicts with an existing menu item"
+msgstr "Ta sprememba se ne sklada z ¾e obstojeèim predmetom menuja"
+
+#: gmenu/save.c:61
+msgid "Overwrite existing menu entry?"
+msgstr "Prepi¹i obstojeèi predmet v menuju"
+
+#: gmenu/save.c:114
+msgid ""
+"This change conflicts with an existing menu item.\n"
+"No two menu items in a submenu can have the same name."
+msgstr ""
+"Ta sprememba se ne sklada z ¾e obstojeèim predmetom menuja.\n"
+"Nobena predmeta istega podmenuja ne moreta imeti enakega imena."
+
+#: gmenu/tree.c:382
+msgid "One moment, reading menus..."
+msgstr "Trenutek, berem menuje..."
+
+#: gmenu/tree.c:402
+msgid "Top of user menus"
+msgstr "Vrh uporabni¹kih menujev"
+
+#: gmenu/tree.c:410
+msgid "Top of system menus"
+msgstr "Vrh sistemskih menujev"
+
+#: gmenu/tree.c:419
+msgid "Top of system merge menus"
+msgstr "Vrh zdru¾enih sistemskih menujev"
+
+#: gmenu/tree.c:428
+msgid "Top of applet menus"
+msgstr "Vrh menujev vstavkov"
+
+#: gmenu/treedel.c:118
+msgid "You can not delete a top level submenu."
+msgstr "Ne more¹ zbrisati vrhnjega podmenuja."
+
+#: gmenu/treedel.c:130 gmenu/treedel.c:153
+msgid "Delete this menu item?"
+msgstr "Zbri¹i ta menujski predmet"
+
+#: gmenu/treedel.c:140
+msgid "Delete empty submenu?"
+msgstr "Zbri¹i prazni podmenu"
+
+#: gmenu/treedel.c:146
+msgid "Are you sure you want to delete this submenu and all its contents?"
+msgstr "Si preprièan, da ¾eli¹ zbrisati ta podmenu in vso njegovo vsebino?"
+
+#: gmenu/treenew.c:35 gmenu/treenew.c:110
+msgid ""
+"You can't add an entry to that submenu.\n"
+"You do not have the proper permissions."
+msgstr ""
+"Ne morete dodati vnosa v ta podmenu.\n"
+"Nimate ustreznih dovoljenj."
+
+#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
+msgid "New Folder"
+msgstr "Nova mapa"
+
+#: gmenu/treenew.c:63
+msgid "Failed to create directory"
+msgstr "Ustvarjanje imenika je spodletelo"
+
+#: gmenu/treenew.c:118 gmenu/treenew.c:127
+msgid "untitled.desktop"
+msgstr "neimenovan.desktop"
+
+#: gmenu/treenew.c:137 gmenu/treenew.c:144
+msgid "untitled"
+msgstr "neimenovan"
+
+#: gmenu/utils.c:32
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "ustvarjam uporabni¹ki imenik: %s\n"
+
+#: gmenu/utils.c:35
+#, c-format
+msgid "unable to create user directory: %s\n"
+msgstr "ne morem ustvariti uporabni¹kega imenika: %s\n"
 
 #: gnome-about/contributors.h:13
 msgid "GNOME was brought to you by"
@@ -1049,6 +1378,437 @@ msgstr "Wanda - riba GNOME"
 msgid "... and many more"
 msgstr "... in mnogi drugi"
 
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:304
+msgid "About GNOME"
+msgstr "O GNOME"
+
+#: gnome-about/gnome-about.c:566
+msgid "GNOME News Site"
+msgstr "Stran z novicami GNOME"
+
+#: gnome-about/gnome-about.c:570
+msgid "http://www.gnome.org/"
+msgstr "http://www.gnome.org/"
+
+#: gnome-about/gnome-about.c:571
+msgid "GNOME Main Site"
+msgstr "Glavna stran GNOME"
+
+#: gnome-about/gnome-about.c:576
+msgid "GNOME Developers' Site"
+msgstr "Stran razvijalcev GNOME-a"
+
+#: gnome-edit/gnome-edit.c:141 gnome-edit/gnome-edit.c:148
+msgid ""
+"Error during execution of chosen editor.\n"
+"\n"
+"The editor you have chosen is probably either not available,\n"
+"or is not on your current path."
+msgstr ""
+"Napaka med izvajanjem izbranega urejevalnika.\n"
+"\n"
+"Urejevalnik verjetno ni na voljo ali,\n"
+"pa ga ni v trenutni poti."
+
+#: gnome-edit/gnome-edit.c:167
+msgid ""
+"Alternate editor types are not supported by gnome-edit yet.\n"
+"Please choose a standard executable editor in the gnome-edit capplet\n"
+"in the gnome control center."
+msgstr ""
+"Gnome-edit ¹e ne podpira drugih tipov uirejevalnikov.\n"
+"Prosim izberite standarden urejevalnik v gnome-edit vstavku\n"
+"v gnome kontrolnem centru."
+
+#: gnome-hint/gnome-hint.c:35
+msgid "Start in hint browsing mode"
+msgstr "Prièni v naèinu \"brskanje po namigih\""
+
+#: gnome-hint/gnome-hint.c:39
+msgid "Start in motd mode"
+msgstr "Prièni v naèinu \"sporoèilo dneva\""
+
+#: gnome-hint/gnome-hint.c:43
+msgid "Start in fortune mode"
+msgstr "Prièni v naèinu \"fortune\""
+
+#: gnome-hint/gnome-hint.c:47
+msgid "Start in session login mode (used from gsm)"
+msgstr "Prièni v naèinu \"prijava na sejo\" (za gnome upravljalnik sej)"
+
+#: gnome-hint/gnome-hint.c:58
+msgid ""
+"Click on the GNOME foot icon to open the\n"
+"Main Menu.  This menu contains all\n"
+"GNOME applications, tools, and commands."
+msgstr ""
+"Kliknite na ikono nog, ki odpre\n"
+"glavni menu.  Ta menu vsebuje vse\n"
+"programe, orodja in ukaze GNOME."
+
+#: gnome-hint/gnome-hint.c:273
+msgid "You do not have fortune installed."
+msgstr "Programa \"fortune\" nimate name¹èenega."
+
+#. the fixed font should be a font that is of a fixed
+#. * spacing, such as would be one in a terminal
+#: gnome-hint/gnome-hint.c:404
+msgid "fixed"
+msgstr "stalen"
+
+#: gnome-hint/gnome-hint.c:413 gnome-hint/gnome-hint.c:615
+msgid "Fortune"
+msgstr "Fortune"
+
+#: gnome-hint/gnome-hint.c:415 gnome-hint/gnome-hint.c:608
+msgid "Message of The Day"
+msgstr "Sporoèilo dneva"
+
+#: gnome-hint/gnome-hint.c:417
+msgid "GNOME Hints"
+msgstr "Namigi GNOME"
+
+#: gnome-hint/gnome-hint.c:425
+msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-2"
+
+#: gnome-hint/gnome-hint.c:453
+msgid ""
+"You've chosen to disable the startup hint.\n"
+"To re-enable it, choose \"Startup Hint\"\n"
+"in the GNOME Control Center"
+msgstr ""
+"Odloèili ste se izkljuèiti zaèetne namige.\n"
+"Da bi jih znova vkljuèili, izberite \"Zaèetni namig\"\n"
+"v Kontrolnem centru GNOME"
+
+#: gnome-hint/gnome-hint.c:553
+msgid "No message of the day found!"
+msgstr "Nobeno sporoèilo dneva ni bilo najdeno!"
+
+#: gnome-hint/gnome-hint.c:623
+msgid "Gnome hint"
+msgstr "Gnome namig"
+
+#: gnome-hint/gnome-hint.c:648
+msgid "Display this dialog next time"
+msgstr "Prika¾i ta dialog tudi prihodnjiè"
+
+#. add the enable box
+#: gnome-hint/gnome-hint-properties.c:110
+msgid "Enable login hints"
+msgstr "Vkljuèi namige ob prijavi"
+
+#. add the hint box
+#: gnome-hint/gnome-hint-properties.c:117
+msgid "Display normal hints"
+msgstr "Ka¾i obièajne namige"
+
+#: gnome-hint/gnome-hint-properties.c:126
+msgid "Display fortunes instead of hints"
+msgstr "Namesto namigov ka¾i sporoèila 'fortune'"
+
+#: gnome-hint/gnome-hint-properties.c:135
+msgid "Display message of the day instead of hints"
+msgstr "Namesto namigov ka¾i sporoèilo dneva"
+
+#: gnome-hint/gnome-hint-properties.c:144
+msgid "Message of the day file to use: "
+msgstr "Datoteka s sporoèilom dneva: "
+
+#: gnome-terminal/gnome-terminal.c:288
+msgid "GNOME Terminal"
+msgstr "GNOME Terminal"
+
+#: gnome-terminal/gnome-terminal.c:291
+msgid "The GNOME terminal emulation program."
+msgstr "GNOME terminalski emulator."
+
+#: gnome-terminal/gnome-terminal.c:704 gnome-terminal/gnome-terminal.c:1263
+#: gnome-terminal/gnome-terminal.c:1273 gnome-terminal/gnome-terminal.c:2470
+#: gnome-terminal/gnome-terminal.glade.h:8 panel/menu.c:4910
+msgid "Default"
+msgstr "privzet"
+
+#: gnome-terminal/gnome-terminal.c:891
+msgid ""
+"You have switched the class of this window. Do you\n"
+" want to reconfigure this window to match the default\n"
+"configuration of the new class?"
+msgstr ""
+"Zamenjali ste razred tega okna. Ali ¾elite\n"
+"znova nastaviti to okno, da bo ustrezalo privzetim\n"
+"nastavitvam za nov razred?"
+
+#: gnome-terminal/gnome-terminal.c:1069
+msgid "Linux console"
+msgstr "Linux konzola"
+
+#: gnome-terminal/gnome-terminal.c:1070
+msgid "Color Xterm"
+msgstr "Barvni Xterm"
+
+#: gnome-terminal/gnome-terminal.c:1071
+msgid "rxvt"
+msgstr "rxvt"
+
+#: gnome-terminal/gnome-terminal.c:1072
+msgid "Custom"
+msgstr "Prikrojeno"
+
+#: gnome-terminal/gnome-terminal.c:1077
+msgid "White on black"
+msgstr "Belo na èrnem"
+
+#: gnome-terminal/gnome-terminal.c:1078
+msgid "Black on white"
+msgstr "Èrno na belem"
+
+#: gnome-terminal/gnome-terminal.c:1079
+msgid "Green on black"
+msgstr "Zeleno na èrnem"
+
+#: gnome-terminal/gnome-terminal.c:1080
+msgid "Black on light yellow"
+msgstr "Èrno na svetlo rumenem"
+
+#: gnome-terminal/gnome-terminal.c:1081
+msgid "Custom colors"
+msgstr "Prikroji barve"
+
+#: gnome-terminal/gnome-terminal.c:1086
+msgid "Left"
+msgstr "Levo"
+
+#: gnome-terminal/gnome-terminal.c:1087
+msgid "Right"
+msgstr "Desno"
+
+#: gnome-terminal/gnome-terminal.c:1088
+msgid "Hidden"
+msgstr "Skrito"
+
+#: gnome-terminal/gnome-terminal.c:1249 panel/gnome-run.c:402
+#: panel/gnome-run.c:640
+msgid "Browse..."
+msgstr "Brskaj..."
+
+#: gnome-terminal/gnome-terminal.c:1503
+msgid "Color selector"
+msgstr "Izbirnik barv"
+
+#: gnome-terminal/gnome-terminal.c:2101
+msgid ""
+"There has been an error while trying to log in:\n"
+"\n"
+"%s"
+msgstr ""
+"Zgodila se je napaka ob poskusu prijave:\n"
+"\n"
+"%s"
+
+#: gnome-terminal/gnome-terminal.c:2165 gnome-terminal/gnome-terminal.c:2608
+msgid "Terminal"
+msgstr "Terminal"
+
+#: gnome-terminal/gnome-terminal.c:2695
+msgid "Terminal class name"
+msgstr "Ime razreda terminala"
+
+#: gnome-terminal/gnome-terminal.c:2695
+msgid "TCLASS"
+msgstr "TRAZRED"
+
+#: gnome-terminal/gnome-terminal.c:2698
+msgid "Specifies font name"
+msgstr "Navaja ime pisave"
+
+#: gnome-terminal/gnome-terminal.c:2698
+msgid "FONT"
+msgstr "PISAVA"
+
+#: gnome-terminal/gnome-terminal.c:2701
+msgid "Do not start up shells as login shells"
+msgstr "Ne po¾eni lupin kot prijavnih lupin"
+
+#: gnome-terminal/gnome-terminal.c:2704
+msgid "Start up shells as login shells"
+msgstr "Po¾eni lupine kot prijavne lupine"
+
+#: gnome-terminal/gnome-terminal.c:2707
+msgid "Specifies the geometry for the main window"
+msgstr "Doloèi geometrijo za glavno okno"
+
+#: gnome-terminal/gnome-terminal.c:2707
+msgid "GEOMETRY"
+msgstr "GEOMETRIJA"
+
+#: gnome-terminal/gnome-terminal.c:2710
+msgid "Execute this program instead of a shell"
+msgstr "Po¾eni ta program namesto lupine"
+
+#: gnome-terminal/gnome-terminal.c:2710 gnome-terminal/gnome-terminal.c:2713
+msgid "COMMAND"
+msgstr "UKAZ"
+
+#: gnome-terminal/gnome-terminal.c:2713
+msgid "Execute this program the same way as xterm does"
+msgstr "Po¾eni program na isti naèin kot bi ga xterm"
+
+#: gnome-terminal/gnome-terminal.c:2716
+msgid "Foreground color"
+msgstr "Barva ospredja"
+
+#: gnome-terminal/gnome-terminal.c:2716 gnome-terminal/gnome-terminal.c:2719
+msgid "COLOR"
+msgstr "BARVA"
+
+#: gnome-terminal/gnome-terminal.c:2719
+msgid "Background color"
+msgstr "Barva ozadja"
+
+#: gnome-terminal/gnome-terminal.c:2722
+msgid "Solid background"
+msgstr "Polno ozadje"
+
+#: gnome-terminal/gnome-terminal.c:2722
+msgid "SOLID"
+msgstr "POLNO"
+
+#: gnome-terminal/gnome-terminal.c:2725
+#: gnome-terminal/gnome-terminal.glade.h:22
+msgid "Background pixmap"
+msgstr "Slika v ozadju"
+
+#: gnome-terminal/gnome-terminal.c:2725
+msgid "PIXMAP"
+msgstr "SLIKA"
+
+#: gnome-terminal/gnome-terminal.c:2728
+#: gnome-terminal/gnome-terminal.glade.h:24
+msgid "Background pixmap scrolls"
+msgstr "Drsnik slike ozadja"
+
+#: gnome-terminal/gnome-terminal.c:2728
+msgid "BGSCROLL"
+msgstr "OZDRSIL"
+
+#: gnome-terminal/gnome-terminal.c:2731
+msgid "Background pixmap does not scroll"
+msgstr "Slika v ozadju ne drsi"
+
+#: gnome-terminal/gnome-terminal.c:2731
+msgid "BGNOSCROLL"
+msgstr "OZNEDRSI"
+
+#: gnome-terminal/gnome-terminal.c:2734
+msgid "Shade background"
+msgstr "Senèeno ozadje"
+
+#: gnome-terminal/gnome-terminal.c:2734
+msgid "SHADED"
+msgstr "SENÈENO"
+
+#: gnome-terminal/gnome-terminal.c:2737
+msgid "Do not shade background"
+msgstr "Ne senèi ozadja"
+
+#: gnome-terminal/gnome-terminal.c:2737
+msgid "NOSHADED"
+msgstr "NISENÈENO"
+
+#: gnome-terminal/gnome-terminal.c:2740
+msgid "Transparent background"
+msgstr "Prosojno ozadje"
+
+#: gnome-terminal/gnome-terminal.c:2740
+msgid "TRANSPARENT"
+msgstr "PROSOJNO"
+
+#: gnome-terminal/gnome-terminal.c:2743
+msgid "Update utmp entry"
+msgstr "Osve¾i utmp vnos"
+
+#: gnome-terminal/gnome-terminal.c:2743
+msgid "UTMP"
+msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2746
+msgid "Do not update utmp entry"
+msgstr "Ne osve¾i utmp vnosa"
+
+#: gnome-terminal/gnome-terminal.c:2746
+msgid "NOUTMP"
+msgstr "NEUTMP"
+
+#: gnome-terminal/gnome-terminal.c:2749
+msgid "Update wtmp entry"
+msgstr "Osve¾i wtmp vnos"
+
+#: gnome-terminal/gnome-terminal.c:2749
+msgid "WTMP"
+msgstr "WTMP"
+
+#: gnome-terminal/gnome-terminal.c:2752
+msgid "Do not update wtmp entry"
+msgstr "Ne osve¾i wtmp vnosa"
+
+#: gnome-terminal/gnome-terminal.c:2752
+msgid "NOWTMP"
+msgstr "NEWTMP"
+
+#: gnome-terminal/gnome-terminal.c:2755
+msgid "Update lastlog entry"
+msgstr "Osve¾i lastlog vnos"
+
+#: gnome-terminal/gnome-terminal.c:2755
+msgid "LASTLOG"
+msgstr "LASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "Do not update lastlog entry"
+msgstr "Ne osve¾i lastlog vnosa"
+
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "NOLASTLOG"
+msgstr "NELASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2761
+msgid "Set the window title"
+msgstr "Nastavi naziv okna"
+
+#: gnome-terminal/gnome-terminal.c:2761
+msgid "TITLE"
+msgstr "NAZIV"
+
+#: gnome-terminal/gnome-terminal.c:2764
+msgid "Set the window icon"
+msgstr "Nastavi ikono okna"
+
+#: gnome-terminal/gnome-terminal.c:2764
+msgid "ICON"
+msgstr "IKONA"
+
+#: gnome-terminal/gnome-terminal.c:2767
+msgid "Set the TERM variable"
+msgstr "Nastavi spremenljivko TERM"
+
+#: gnome-terminal/gnome-terminal.c:2767
+msgid "TERMNAME"
+msgstr "TERMIME"
+
+#: gnome-terminal/gnome-terminal.c:2770
+msgid "Try to start a TerminalFactory"
+msgstr "Poizkusi pognati TerminalFactory"
+
+#: gnome-terminal/gnome-terminal.c:2773
+msgid "Try to create the terminal with the TerminalFactory"
+msgstr "Poizkusi ustvariti terminal s TerminalFactory"
+
+#: gnome-terminal/gnome-terminal.c:3003
+msgid "Cannot gnome_program_init ()"
+msgstr "gnome_program_init() ni uspel"
+
 #: gsm/gnome-login-check.c:67
 #, c-format
 msgid "Looking up internet address for %s"
@@ -1058,28 +1818,28 @@ msgstr "Poizvedujem za internet naslovom %s"
 msgid "Hide"
 msgstr "Skrij"
 
-#: gsm/gnome-login-check.c:247
+#: gsm/gnome-login-check.c:246
 msgid "GNOME Login"
 msgstr "GNOME prijava"
 
-#: gsm/gnome-login-check.c:247
+#: gsm/gnome-login-check.c:246
 msgid "Login"
 msgstr "Prijava"
 
-#: gsm/gnome-login-check.c:274
+#: gsm/gnome-login-check.c:273
 msgid "Start with default programs"
 msgstr "Zaèni s privzetimi programi"
 
-#: gsm/gnome-login-check.c:278
+#: gsm/gnome-login-check.c:277
 msgid "Reset all user settings"
 msgstr "Ponastavi vse uporabni¹ke nastavitve"
 
-#: gsm/gnome-login-check.c:289
+#: gsm/gnome-login-check.c:288
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "Resnièno ponastavi vse GNOME uporabni¹ke nastavitve za %s?"
 
-#: gsm/gnome-login-check.c:321
+#: gsm/gnome-login-check.c:320
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1090,15 +1850,15 @@ msgstr ""
 "trenutnega uporabnika, %s.\n"
 "Prosim popravi lastni¹tvo imenika."
 
-#: gsm/gnome-login-check.c:328 gsm/gnome-login-check.c:353
+#: gsm/gnome-login-check.c:327 gsm/gnome-login-check.c:352
 msgid "Try again"
 msgstr "Poskusi znova"
 
-#: gsm/gnome-login-check.c:329 gsm/gnome-login-check.c:354
+#: gsm/gnome-login-check.c:328 gsm/gnome-login-check.c:353
 msgid "Continue"
 msgstr "Nadaljuj"
 
-#: gsm/gnome-login-check.c:345
+#: gsm/gnome-login-check.c:344
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1111,7 +1871,7 @@ msgstr ""
 "Ta problem bi se mogoèe odpravil, èe se v datoteko\n"
 "datoteko /etc/hosts doda %s."
 
-#: gsm/gnome-login-check.c:371
+#: gsm/gnome-login-check.c:370
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
@@ -1157,71 +1917,75 @@ msgstr "Stanje"
 msgid "Program"
 msgstr "Program"
 
-#: gsm/gsm-client-row.c:31
+#: gsm/gsm-client-row.c:33
 msgid "Inactive"
 msgstr "Nedejaven"
 
-#: gsm/gsm-client-row.c:32
+#: gsm/gsm-client-row.c:34
 msgid "Waiting to start or already finished."
 msgstr "Èaka na zaèetek ali pa je ¾e konèal."
 
-#: gsm/gsm-client-row.c:34
+#: gsm/gsm-client-row.c:36
 msgid "Starting"
 msgstr "Zaganjam"
 
-#: gsm/gsm-client-row.c:35
+#: gsm/gsm-client-row.c:37
 msgid "Started but has not yet reported state."
 msgstr "Pognan, a ¹e ni sporoèil stanja."
 
-#: gsm/gsm-client-row.c:37
+#: gsm/gsm-client-row.c:39
 msgid "Running"
 msgstr "Teèe"
 
-#: gsm/gsm-client-row.c:38
+#: gsm/gsm-client-row.c:40
 msgid "A normal member of the session."
 msgstr "Obièajen èlan seje."
 
-#: gsm/gsm-client-row.c:40
+#: gsm/gsm-client-row.c:42
 msgid "Saving"
 msgstr "Shranjujem"
 
-#: gsm/gsm-client-row.c:41
+#: gsm/gsm-client-row.c:43
 msgid "Saving session details."
 msgstr "Shranjujem podrobnosti seje."
 
-#: gsm/gsm-client-row.c:43
+#: gsm/gsm-client-row.c:45
 msgid "Unknown"
 msgstr "Neznan"
 
-#: gsm/gsm-client-row.c:44
+#: gsm/gsm-client-row.c:46
 msgid "State not reported within timeout."
 msgstr "Stanje ni bilo sporoèeno znotraj èasovne omejitve."
 
-#: gsm/gsm-client-row.c:50
+#: gsm/gsm-client-row.c:52 panel/menu.c:4912 panel/panel_config.c:1425
 msgid "Normal"
 msgstr "obièajen"
 
-#: gsm/gsm-client-row.c:51
+#: gsm/gsm-client-row.c:53
 msgid "Unaffected by logouts but can die."
 msgstr "Neodvisen od odjave, a lahko umre."
 
-#: gsm/gsm-client-row.c:53
+#: gsm/gsm-client-row.c:55
 msgid "Respawn"
 msgstr "Venomer znova pognan"
 
-#: gsm/gsm-client-row.c:54
+#: gsm/gsm-client-row.c:56
 msgid "Never allowed to die."
 msgstr "Ne sme umreti."
 
-#: gsm/gsm-client-row.c:56
+#: gsm/gsm-client-row.c:58
 msgid "Trash"
 msgstr "Smeti"
 
-#: gsm/gsm-client-row.c:57
+#: gsm/gsm-client-row.c:59
 msgid "Discarded on logout and can die."
 msgstr "Zavr¾e se ob odjavi in lahko umre."
 
-#: gsm/gsm-client-row.c:60
+#: gsm/gsm-client-row.c:61 panel/foobar-widget.c:1173
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: gsm/gsm-client-row.c:62
 msgid "Always started on every login."
 msgstr "Vedno se za¾ene pri vsaki prijavi."
 
@@ -1306,26 +2070,43 @@ msgstr "Ubij sejo"
 msgid "Use dialog boxes"
 msgstr "Uporabi dialoge"
 
-#: gsm/save-session.c:94
+#: gsm/save-session.c:93
 msgid "Could not connect to the session manager"
 msgstr "Ne morem se povezati z upravljalnikom sej"
 
-#: gsm/save-session.c:109
+#: gsm/save-session.c:108
 msgid "Could not connect to gnome-session"
 msgstr "Ne morem se povezati z gnome-session"
 
-#: gsm/save-session.c:153
+#: gsm/save-session.c:152
 msgid "Your session has been saved"
 msgstr "Va¹a seja je bila shranjena"
+
+#: gsm/session-names.c:126
+msgid "The session name cannot be empty"
+msgstr "Ime seje ne sme biti prazno"
+
+#: gsm/session-names.c:136
+msgid "The session name already exists"
+msgstr "Ime seje ¾e obstaja"
+
+#: gsm/session-names.c:170
+msgid "Add a new session"
+msgstr "Dodaj novo sejo"
+
+#: gsm/session-names.c:202
+msgid "Edit session name"
+msgstr "Uredi ime seje"
+
+#. Buttons
+#: gsm/session-properties.c:101 help-browser/bookmarks.c:242
+msgid "Remove"
+msgstr "Odstrani"
 
 #. buttons
 #: gsm/session-properties.c:170
 msgid "Try"
 msgstr "Poskusi"
-
-#: gsm/session-properties.c:173
-msgid "Revert"
-msgstr "Povrni"
 
 #: gsm/session-properties.c:176
 msgid "OK"
@@ -1360,6 +2141,59 @@ msgstr "Preklièi prijavo"
 #: gsm/session-properties.c:360
 msgid "Initialize session settings"
 msgstr "Inicializiraj nastavitve seje"
+
+#: gsm/session-properties-capplet.c:192
+msgid "Show splash screen on login"
+msgstr "Ka¾i zaèetni zaslon ob prijavi"
+
+#: gsm/session-properties-capplet.c:199
+msgid "Prompt on logout"
+msgstr "Vpra¹aj ob odjavi"
+
+#: gsm/session-properties-capplet.c:206
+msgid "Automatically save changes to session"
+msgstr "Samodejno shrani spremembe seje"
+
+#: gsm/session-properties-capplet.c:209
+msgid "Choose Current Session"
+msgstr "Izberi trenutno sejo"
+
+#: gsm/session-properties-capplet.c:226
+msgid "Session Name"
+msgstr "Ime seje"
+
+#: gsm/session-properties-capplet.c:247 gsm/session-properties-capplet.c:301
+msgid "Add..."
+msgstr "Dodaj..."
+
+#: gsm/session-properties-capplet.c:252 gsm/session-properties-capplet.c:306
+msgid "Edit..."
+msgstr "Uredi..."
+
+#: gsm/session-properties-capplet.c:262
+msgid "Session Options"
+msgstr "Mo¾nosti seje"
+
+#. Frame for non-session managed startup programs
+#: gsm/session-properties-capplet.c:274
+msgid "Non-session-managed Startup Programs"
+msgstr "Zaèetni programi, ki niso del seje"
+
+#: gsm/session-properties-capplet.c:291 gsm/startup-programs.c:299
+msgid "Priority"
+msgstr "Prioriteta"
+
+#: gsm/session-properties-capplet.c:292
+msgid "Command"
+msgstr "Ukaz"
+
+#: gsm/session-properties-capplet.c:321
+msgid "Browse Currently Running Programs..."
+msgstr "Brskaj po trenutno pognanih programih..."
+
+#: gsm/session-properties-capplet.c:330
+msgid "Startup Programs"
+msgstr "Programi ob zaèetku"
 
 #: gsm/splash.c:55
 msgid "Audio Settings"
@@ -1405,7 +2239,7 @@ msgstr "Posrednik upravljalnika sej"
 msgid "Window Manager"
 msgstr "Upravljalnik oken"
 
-#: gsm/splash.c:68 panel/menu.c:3713
+#: gsm/splash.c:68 panel/menu.c:5368 panel/menu.c:5373 panel/menu.c:5716
 msgid "Desktop"
 msgstr "Namizje"
 
@@ -1426,550 +2260,597 @@ msgstr "GNOME se zaganja: opravljeno"
 msgid "GNOME"
 msgstr "GNOME"
 
-#: gsm/splash.c:461
+#: gsm/splash.c:440
+msgid "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*"
+msgstr "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-iso8859-2"
+
+#: gsm/splash.c:459
 msgid "Starting GNOME"
 msgstr "GNOME se zaganja"
 
-#: libpanel-applet/panel-applet.c:588
-#, c-format
-msgid "panel_applet_set_prop: Incomplete '%s' background type received"
-msgstr ""
+#: gsm/splash.c:462
+msgid "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-iso8859-2"
 
-#: libpanel-applet/panel-applet.c:609
-#, c-format
-msgid "panel_applet_set_prop: Incomplete '%s' background type received: %s"
-msgstr ""
+#: gsm/startup-programs.c:283 gsm/startup-programs.c:290
+msgid "Startup Command"
+msgstr "Zaèetni ukaz"
 
-#: libpanel-applet/panel-applet.c:619
-#, c-format
-msgid "panel_applet_set_prop: Failed to get pixmap %s"
-msgstr ""
-
-#: libpanel-applet/panel-applet.c:636
-msgid "panel_applet_set_prop: Unknown background type received"
-msgstr ""
-
-#: libpanel-applet/panel-applet.c:663
-msgid "The Applet's containing Panel's orientation"
-msgstr ""
-
-#: libpanel-applet/panel-applet.c:671
-msgid "The Applet's containing Panel's size in pixels"
-msgstr ""
-
-#: libpanel-applet/panel-applet.c:679
-msgid "The Applet's containing Panel's background color or pixmap"
-msgstr ""
-
-#: applets/fish/fish.c:385 applets/fish/fish.c:874
-#, no-c-format
-msgid "%s the Fish"
-msgstr "%s Riba"
-
-#: applets/fish/fish.c:386
-#, c-format
-msgid "%s the GNOME Fish Says:"
-msgstr "%s GNOME riba pravi:"
-
-#: applets/fish/fish.c:476
+#: gsm/startup-programs.c:314
 msgid ""
-"Warning:  The command appears to be something actually useful.\n"
-"Since this is a useless applet, you may not want to do this.\n"
-"We strongly advise you against usage of wanda for anything\n"
-"which would make the applet \"practical\" or useful."
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
 msgstr ""
-"Opozorilo: Zdi se, da ukaz naredi nekaj uporabnega.\n"
-"Ker je to neuporaben vstavek si morda tega ne ¾elite.\n"
-"Moèno priporoèamo proti uporabi wande za karkoli\n"
-"kar bi lahko naredilo vstavek \"praktiènen\" ali uporaben."
-
-#: applets/fish/fish.c:551
-msgid "GNOME Fish Properties"
-msgstr "Lastnosti GNOME ribe"
-
-#: applets/fish/fish.c:561
-msgid "Your GNOME Fish's Name:"
-msgstr "Ime Va¹e GNOME ribe:"
-
-#: applets/fish/fish.c:576
-msgid "The Animation Filename:"
-msgstr "Datoteka z animacijo:"
-
-#: applets/fish/fish.c:578 applets/gen_util/mailcheck.c:1023
-#: panel/menu-properties.c:549 panel/menu-properties.c:587
-#: panel/panel-config.c:1375 panel/panel-util.c:209 panel/swallow.c:284
-msgid "Browse"
-msgstr "Brskaj"
-
-#: applets/fish/fish.c:592
-msgid "Command to execute when fish is clicked:"
-msgstr "Ukaz, ki naj se izvr¹i ob kliku na ribo:"
-
-#: applets/fish/fish.c:607
-msgid "Frames In Animation:"
-msgstr "©tevilo slik v animaciji:"
-
-#: applets/fish/fish.c:623
-msgid "Pause per frame (s):"
-msgstr "Premor med slikami (s):"
-
-#: applets/fish/fish.c:636
-msgid "Rotate on vertical panels"
-msgstr "Zavrti pri navpiènih pultih"
-
-#: applets/fish/fish.c:648
-msgid "Fish"
-msgstr "Riba"
-
-#: applets/fish/fish.c:752
-msgid ""
-"You do not have fortune installed or you have not specified a program to "
-"run.\n"
-"\n"
-"Please refer to fish properties dialog."
-msgstr ""
-"Programa 'fortune' nimate name¹èenega ali niste navedli programa, ki\n"
-"naj se po¾ene\n"
-"\n"
-"Prosim poglejte lastnosti ribe."
-
-#: applets/fish/fish.c:771
-msgid ""
-"The water needs changing!\n"
-"(Look at today's date)"
-msgstr ""
-"Vodo se mora zamenjati!\n"
-"(Poglejte dana¹nji datum)"
-
-#: applets/fish/fish.c:890
-msgid "(with minor help from George)"
-msgstr "(z manj¹o pomoèjo George-a)"
-
-#: applets/fish/fish.c:908
-msgid "The GNOME Fish Applet"
-msgstr "Vstavek GNOME riba"
-
-#: applets/fish/fish.c:911
-msgid ""
-"This applet has no use what-so-ever. It only takes up disk space and "
-"compilation time, and if loaded it also takes up precious panel space and "
-"memory. If anyone is found using this applet, he should be promptly sent for "
-"a psychiatric evaluation."
-msgstr ""
-"Ta vstavek nima popolnoma nobene uporabnosti. Vse kar poène je zavzemanje "
-"prostora na disku, prevajalnega èasa in, èe je nalo¾en vzame tudi nekaj "
-"prostora na pultu in v pomnilniku. Èe kdo najde kak¹nega uporabnika tega "
-"vstavka, ga je priporoèljivo poslati k psihiatru."
-
-#: applets/gen_util/clock.c:199
-msgid ""
-"%I:%M\n"
-"%p"
-msgstr ""
-"%I:%M\n"
-"%p"
-
-#. This format string is used, to display the actual time in
-#. 12 hour format.
-#: applets/gen_util/clock.c:202 applets/gen_util/clock.c:443
-msgid "%I:%M %p"
-msgstr "%I:%M %p"
-
-#. This format string is used, to display the actual time in
-#. 24 hour format.
-#: applets/gen_util/clock.c:209 applets/gen_util/clock.c:448
-#: panel/foobar-widget.c:400 panel/foobar-widget.c:995
-msgid "%H:%M"
-msgstr "%H:%M"
-
-#. This format string is used, to display the actual day,
-#. when showing a vertical panel.  For an explanation of
-#. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:221
-msgid ""
-"%a\n"
-"%b %d"
-msgstr ""
-"%a\n"
-"%d %b"
-
-#. This format string is used, to display the actual day,
-#. when showing a horizontal panel.
-#: applets/gen_util/clock.c:226
-msgid "%a %b %d"
-msgstr "%a %d. %b"
-
-#: applets/gen_util/clock.c:239
-msgid "%A, %B %d"
-msgstr "%A, %d. %B"
-
-#: applets/gen_util/clock.c:470
-msgid "%A, %B %d %Y"
-msgstr "%A, %d %B %Y"
-
-#. RFC822 conformant date, likely not different for other
-#. * locales I don't think
-#: applets/gen_util/clock.c:493
-msgid "%a, %d  %b  %Y %H:%M:%S %z"
-msgstr "%a, %b  %d  %Y %H:%M:%S %z"
-
-#. Do NOT translate the clock/hourformat part.  What you
-#. * should change is the 12.  If your country code should use
-#. * 12 hour format by default, leave it at 12, otherwise use 24
-#. * for 24 hour format.  Those are the only two supported
-#: applets/gen_util/clock.c:543
-msgid "clock/hourformat=12"
-msgstr "clock/hourformat=24"
-
-#: applets/gen_util/clock.c:772
-msgid "Clock properties"
-msgstr "Lastnosti ure"
-
-#: applets/gen_util/clock.c:789
-msgid "Time Format"
-msgstr "Oblika Izpisa Èasa"
-
-#: applets/gen_util/clock.c:801
-msgid "12 hour"
-msgstr "12 urna"
-
-#: applets/gen_util/clock.c:809
-msgid "24 hour"
-msgstr "24 urna"
-
-#: applets/gen_util/clock.c:844
-msgid "Show date in applet"
-msgstr "Ka¾i datum v vstavku"
-
-#: applets/gen_util/clock.c:858
-msgid "Show date in tooltip"
-msgstr "Ka¾i datum v namigu"
-
-#: applets/gen_util/clock.c:872
-msgid "Use GMT"
-msgstr "Uporabi GMT"
-
-#: applets/gen_util/clock.c:886
-msgid "Unix time"
-msgstr "Unix èas"
-
-#: applets/gen_util/clock.c:890
-msgid "Internet time"
-msgstr "Internetni èas"
-
-#: applets/gen_util/clock.c:947
-msgid "Clock"
-msgstr "Ura"
-
-#: applets/gen_util/clock.c:1013
-msgid "Clock Applet"
-msgstr "Vstavek Ura"
-
-#: applets/gen_util/clock.c:1014
-msgid "(c) 1998-2001 the Free Software Foundation"
-msgstr "(c) 1998-2001 Fundacija za prosto programje"
-
-#: applets/gen_util/clock.c:1015
-msgid ""
-"The clock applet gives your panel a lightweight and simple display of the "
-"date and time"
-msgstr "Vstavek ura doda pultu enostaven prikazovalnik datuma in ure"
-
-#: applets/gen_util/mailcheck.c:210 applets/gen_util/mailcheck.c:1067
-msgid "Password:"
-msgstr "Geslo:"
-
-#: applets/gen_util/mailcheck.c:233
-msgid ""
-"Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
-"wrong server/username/password?"
-msgstr ""
-"Zgodila se je napaka na oddaljenem odjemalcu. Remote-polling deaktiviran "
-"Morda ste uporabili napaèen stre¾nik/uporabni¹ko ime/geslo?"
-
-#: applets/gen_util/mailcheck.c:475
-msgid "You have new mail."
-msgstr "Ima¹ novo po¹to."
-
-#: applets/gen_util/mailcheck.c:477
-msgid "You have mail."
-msgstr "Ima¹ po¹to."
-
-#: applets/gen_util/mailcheck.c:481
-#, c-format
-msgid "%d/%d messages"
-msgstr "%d/%d sporoèil"
-
-#: applets/gen_util/mailcheck.c:483
-#, c-format
-msgid "%d messages"
-msgstr "%d sporoèil"
-
-#: applets/gen_util/mailcheck.c:487
-msgid "No mail."
-msgstr "Po¹te ni."
-
-#: applets/gen_util/mailcheck.c:968
-msgid "Mailbox resides on:"
-msgstr "Po¹tni nabiralnik se nahaja na:"
-
-#: applets/gen_util/mailcheck.c:975
-msgid "Local mailspool"
-msgstr "Krajevni po¹tni èakalnik"
-
-#: applets/gen_util/mailcheck.c:983
-msgid "Local maildir"
-msgstr "Krajevni imenik za po¹to"
-
-#: applets/gen_util/mailcheck.c:991
-msgid "Remote POP3-server"
-msgstr "Oddaljen POP3-stre¾nik"
-
-#: applets/gen_util/mailcheck.c:999
-msgid "Remote IMAP-server"
-msgstr "Oddaljen IMAP-stre¾nik"
-
-#: applets/gen_util/mailcheck.c:1019
-msgid "Mail spool file:"
-msgstr "Datoteka s èakajoèo po¹to:"
-
-#: applets/gen_util/mailcheck.c:1036
-msgid "Mail server:"
-msgstr "Stre¾nik po¹te:"
-
-#: applets/gen_util/mailcheck.c:1053
-msgid "Username:"
-msgstr "Uporabni¹ko ime:"
-
-#: applets/gen_util/mailcheck.c:1085
-#, fuzzy
-msgid "Folder:"
-msgstr " Mapa"
-
-#: applets/gen_util/mailcheck.c:1103
-msgid "Command to run before we check for mail:"
-msgstr "Ukaz, ki naj se po¾ene, preden pogledamo za po¹to:"
-
-#: applets/gen_util/mailcheck.c:1133
-msgid "Execute"
-msgstr "Izvedi"
-
-#: applets/gen_util/mailcheck.c:1144
-msgid "Before each update:"
-msgstr "Pred vsako osve¾itvijo:"
-
-#: applets/gen_util/mailcheck.c:1165
-msgid "When new mail arrives:"
-msgstr "Ko pride nova po¹ta:"
-
-#: applets/gen_util/mailcheck.c:1184
-msgid "When clicked:"
-msgstr "Ob kliku:"
-
-#: applets/gen_util/mailcheck.c:1207
-msgid "Check for mail every"
-msgstr "Preveri po¹to vsakih"
-
-#: applets/gen_util/mailcheck.c:1220
-#, fuzzy
-msgid "minutes"
-msgstr "minut"
-
-#: applets/gen_util/mailcheck.c:1233
-msgid "seconds"
-msgstr "sekund"
-
-#: applets/gen_util/mailcheck.c:1237
-msgid "Play a sound when new mail arrives"
-msgstr "Naredi zvok, ko pride nova po¹ta"
-
-#: applets/gen_util/mailcheck.c:1248
-#, fuzzy
-msgid "Select animation"
-msgstr "Vkljuèi animacije"
-
-#: applets/gen_util/mailcheck.c:1287
-msgid "Mail check properties"
-msgstr "Lastnosti preverjanja po¹te"
-
-#: applets/gen_util/mailcheck.c:1293
-msgid "Mail check"
-msgstr "Preverjanje po¹te"
-
-#: applets/gen_util/mailcheck.c:1296
-msgid "Mailbox"
-msgstr "Po¹tni nabiralnik"
-
-#: applets/gen_util/mailcheck.c:1389
-msgid "Mail check Applet"
-msgstr "Vstavek za preverjanje po¹te"
-
-#: applets/gen_util/mailcheck.c:1390
-msgid "(c) 1998-2000 the Free Software Foundation"
-msgstr "(c) 1998-2000 Fundacija za prosto programje"
-
-#: applets/gen_util/mailcheck.c:1391
-msgid "Mail check notifies you when new mail arrives in your mailbox"
-msgstr "Preverjalnik po¹te vas obvesti, ko v va¹ nabiralnik prispe nova po¹ta"
-
-#: applets/gen_util/mailcheck.c:1494
-msgid "Text only"
-msgstr "Samo besedilo"
-
-#: applets/gen_util/pager.c:391
-#, fuzzy
-msgid "Pager Applet"
-msgstr "Tiskalni¹ki vstavek"
-
-#: applets/gen_util/pager.c:392
-#, fuzzy
-msgid "(c) 2001 Red Hat, Inc."
+"Programi z manj¹imi vrednostmi so pognani pred programi z veèjimi. Privzeta "
+"vrednost bi morala ustrezati"
+
+#: gsm/startup-programs.c:333
+msgid "The startup command cannot be empty"
+msgstr "Zagonski ukaz ne more biti prazen"
+
+#: gsm/startup-programs.c:373
+msgid "Add Startup Program"
+msgstr "Dodaj zaèetni program"
+
+#: gsm/startup-programs.c:391
+msgid "Edit Startup Program"
+msgstr "Uredi zaèetni program"
+
+#: help-browser/bookmarks.c:221
+msgid "Bookmark"
+msgstr "Zaznamek"
+
+#: help-browser/bookmarks.c:221
+msgid "Page Title"
+msgstr "Naslov strani"
+
+#: help-browser/bookmarks.c:231
+msgid "Gnome Help Bookmarks"
+msgstr "Zaznamki pomoèi GNOME"
+
+#: help-browser/gnome-help-browser.c:131
+msgid "X position of window"
+msgstr "X pozicija okna"
+
+#: help-browser/gnome-help-browser.c:131
+msgid "X"
+msgstr "X"
+
+#: help-browser/gnome-help-browser.c:132
+msgid "Y position of window"
+msgstr "Y pozicija okna"
+
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:1113
+msgid "Y"
+msgstr "Y"
+
+#: help-browser/gnome-help-browser.c:133
+msgid "Width of window"
+msgstr "©irina okna"
+
+#: help-browser/gnome-help-browser.c:133
+msgid "WIDTH"
+msgstr "©IRINA"
+
+#: help-browser/gnome-help-browser.c:134
+msgid "Height of window"
+msgstr "Vi¹ina okna"
+
+#: help-browser/gnome-help-browser.c:134
+msgid "HEIGHT"
+msgstr "VI©INA"
+
+#: help-browser/gnome-help-browser.c:135
+msgid "Debug level"
+msgstr "Stopnja razhro¹èevanja"
+
+#: help-browser/gnome-help-browser.c:370 help-browser/window.c:917
+msgid "Gnome Help Browser"
+msgstr "Gnome brskalnik pomoèi"
+
+#: help-browser/gnome-help-browser.c:371
+msgid "Copyright (c) 1998 Red Hat Software, Inc."
 msgstr "Avtorske pravice pridr¾ane (c) 1998 Red Hat Software, Inc."
 
-#: applets/gen_util/pager.c:393
+#: help-browser/gnome-help-browser.c:373
 msgid ""
-"The pager applet shows you a small version of your workspaces that lets you "
-"manage the windows."
+"GNOME Help Browser allows easy access to various forms of documentation on "
+"your system"
 msgstr ""
+"GNOME brskalnik po pomoèi omogoèa enostaven dostop do razliènih oblik "
+"dokumentacije na va¹em sistemu"
 
-#: applets/gen_util/tasklist.c:417
-#, fuzzy
-msgid "Tasklist Applet"
-msgstr "Poskusni vstavek"
+#: help-browser/gnome-help-browser.c:632
+msgid "History size"
+msgstr "Velikost zgodovine"
 
-#: applets/gen_util/tasklist.c:418
-msgid "(c) 2001 Red Hat, Inc"
-msgstr ""
+#: help-browser/gnome-help-browser.c:633
+msgid "History file"
+msgstr "Datoteka zgodovine"
 
-#: applets/gen_util/tasklist.c:419
+#: help-browser/gnome-help-browser.c:634
+msgid "Cache size"
+msgstr "Velikost predpomnilnika"
+
+#: help-browser/gnome-help-browser.c:635
+msgid "Cache file"
+msgstr "Datoteka predpomnilnika"
+
+#: help-browser/gnome-help-browser.c:636
+msgid "Bookmark file"
+msgstr "Datoteka z zaznamki"
+
+#: help-browser/gnome-help-browser.c:642
+msgid "Man Path"
+msgstr "Pot do programa man"
+
+#: help-browser/gnome-help-browser.c:643
+msgid "Info Path"
+msgstr "Pot do programa info"
+
+#: help-browser/gnome-help-browser.c:644
+msgid "GNOME Help Path"
+msgstr "Pot do GNOME pomoèi"
+
+#: help-browser/gnome-help-browser.c:719
+msgid "Gnome Help Configure"
+msgstr "Nastavi GNOME pomoè"
+
+#: help-browser/gnome-help-browser.c:722
+msgid "History and cache"
+msgstr "Zgodovina in predpomnilnik"
+
+#: help-browser/gnome-help-browser.c:723
+msgid "Paths"
+msgstr "Poti"
+
+#: help-browser/gnome-helpwin.c:268
+msgid "<body><h2>Error: file not found</h2></body>"
+msgstr "<body><h2>Napaka: datoteka ni bila najdena</h2></body>"
+
+#: help-browser/history.c:147 help-browser/history.c:203
+msgid "%b %d, %Y %H:%M"
+msgstr "%d %b, %Y %H:%M"
+
+#: help-browser/history.c:260
+msgid "URL"
+msgstr "URL"
+
+#: help-browser/history.c:260
+msgid "Last"
+msgstr "Zadnji"
+
+#: help-browser/history.c:260
+msgid "Count"
+msgstr "©tevec"
+
+#: help-browser/history.c:273
+msgid "Gnome Help History"
+msgstr "Gnome zgodovina pomoèi"
+
+#: help-browser/toc2.c:115
+msgid "<BODY BGCOLOR=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
+msgstr "<BODY BGCOLOR=\"#FFFFFF\"><h1>Kazalo vsebine</h1>\n"
+
+#. Man Pages
+#: help-browser/toc2.c:119
+msgid "<h2>Man Pages</h2>\n"
+msgstr "<h2>Man Strani</h2>\n"
+
+#: help-browser/toc2.c:258 help-browser/toc2.c:322
+msgid "<body bgcolor=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
+msgstr "<body bgcolor=\"#FFFFFF\"><h1>Kazalo vsebine</h1>\n"
+
+#: help-browser/toc2.c:259
+msgid "<h2>Info Pages</h2>\n"
+msgstr "<h2>Info strani</h2>\n"
+
+#: help-browser/toc2.c:323
+msgid "<h2>GNOME Help</h2>\n"
+msgstr "<h2>GNOME pomoè</h2>\n"
+
+#: help-browser/toc2.c:467
 msgid ""
-"The tasklist applet shows a list of all visible windows and let you browse "
-"them."
+"<HTML>\n"
+"<BODY BGCOLOR=\"#ffffff\">\n"
+"<H2>Results of the substring search for the string "
 msgstr ""
+"<HTML>\n"
+"<BODY BGCOLOR=\"#ffffff\">\n"
+"<H2>Rezultati iskanja podniza "
 
-#. Translators: Task with no name, should not really happen, so
-#. * this should signal that the panel is confused by this task
-#. * (thus question marks)
-#: panel/applet.c:482 panel/foobar-widget.c:691
-msgid "???"
-msgstr "???"
+#: help-browser/toc2.c:473
+msgid ""
+"<p>\n"
+"<br>\n"
+"<H3>Manual Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"<p>\n"
+"<br>\n"
+"<H3>Priroènikove strani</H3>\n"
+"<p>\n"
+"<UL>\n"
 
-#: panel/applet.c:541 panel/applet.c:547 panel/menu.c:3705
+#: help-browser/toc2.c:496
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNU Info Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNU Info strani</H3>\n"
+"<p>\n"
+"<UL>\n"
+
+#: help-browser/toc2.c:520
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNOME Help Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>Strani z GNOME pomoèjo</H3>\n"
+"<p>\n"
+"<UL>\n"
+
+#: help-browser/toc2.c:542
+msgid "<br><B>No matches found</B>\n"
+msgstr "<br><B>Ni zadetkov</B>\n"
+
+#: help-browser/toc-man.c:19 help-browser/toc2-man.c:21
+msgid "User Commands"
+msgstr "Uporabni¹ki ukazi"
+
+#: help-browser/toc-man.c:20 help-browser/toc2-man.c:22
+msgid "System Calls"
+msgstr "Sistemski klici"
+
+#: help-browser/toc-man.c:21 help-browser/toc2-man.c:23
+msgid "Library Functions"
+msgstr "Funkcije iz knji¾nic"
+
+#: help-browser/toc-man.c:22 help-browser/toc2-man.c:24
+msgid "Special Files"
+msgstr "Posebne datoteke"
+
+#: help-browser/toc-man.c:23 help-browser/toc2-man.c:25
+msgid "File Formats"
+msgstr "Datoteèni formati"
+
+#: help-browser/toc-man.c:24 help-browser/toc2-man.c:26
+msgid "Games"
+msgstr "Igre"
+
+#: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
+msgid "Administration"
+msgstr "Administracija"
+
+#: help-browser/toc-man.c:27 help-browser/toc2-man.c:29
+msgid "man9"
+msgstr "man9"
+
+#: help-browser/toc-man.c:28 help-browser/toc2-man.c:30
+msgid "mann"
+msgstr "mann"
+
+#: help-browser/toc-man.c:29 help-browser/toc2-man.c:31
+msgid "manx"
+msgstr "manx"
+
+#. Add one new item for each type
+#. This really should iterate through the toc_config list
+#. MAN PAGES
+#: help-browser/toc.c:136
+msgid "Man Pages"
+msgstr "Priroènik"
+
+#. INFO PAGES
+#: help-browser/toc.c:148
+msgid "Info Pages"
+msgstr "Info strani"
+
+#. GNOME HELP
+#: help-browser/toc.c:160
+msgid "GNOME Help"
+msgstr "GNOME pomoè"
+
+#: help-browser/visit.c:84
+msgid "<BODY>Could not load default TOC page</BODY>"
+msgstr "<BODY>Ne morem nalo¾iti strani privzetega kazala vsebine</BODY>"
+
+#: help-browser/visit.c:102
+msgid "<BODY>Unknown TOC argument</BODY>"
+msgstr "<BODY>Neznan argument za kazalo<BODY>"
+
+#: help-browser/window.c:151
+msgid "_New Window"
+msgstr "_Novo okno"
+
+#: help-browser/window.c:152
+msgid "Open new browser window"
+msgstr "Odpri novo brskalno okno"
+
+#: help-browser/window.c:158
+msgid "_Add Bookmark"
+msgstr "_Dodaj zaznamek"
+
+#: help-browser/window.c:158
+msgid "Add bookmark"
+msgstr "Dodaj zaznamek"
+
+#: help-browser/window.c:173
+msgid "_Back"
+msgstr "Na_zaj"
+
+#: help-browser/window.c:176
+msgid "_Forward"
+msgstr "Na_prej"
+
+#: help-browser/window.c:181
+msgid "_Reload"
+msgstr "_Znova nalo¾i"
+
+#: help-browser/window.c:186
+msgid "_Index"
+msgstr "_Kazalo"
+
+#: help-browser/window.c:208
+msgid "_History"
+msgstr "Z_godovina"
+
+#: help-browser/window.c:208 help-browser/window.c:250
+msgid "Show History Window"
+msgstr "Poka¾i okno zgodovine"
+
+#: help-browser/window.c:213
+msgid "_Bookmarks"
+msgstr "_Zaznamki"
+
+#: help-browser/window.c:213 help-browser/window.c:252
+msgid "Show Bookmarks Window"
+msgstr "Poka¾i okno zaznamkov"
+
+#: help-browser/window.c:227
+msgid "_Window"
+msgstr "_Okno"
+
+#: help-browser/window.c:228
+msgid "_View"
+msgstr "_Pogled"
+
+#: help-browser/window.c:237
+msgid "Back"
+msgstr "Nazaj"
+
+#: help-browser/window.c:238
+msgid "Go to the previous location in the history list"
+msgstr "Pojdi na prej¹njo lokacijo v seznamu zgodovine"
+
+#: help-browser/window.c:240
+msgid "Forward"
+msgstr "Naprej"
+
+#: help-browser/window.c:241
+msgid "Go to the next location in the history list"
+msgstr "Pojdi na naslednjo lokacijo v seznamu zgodovine"
+
+#: help-browser/window.c:244 panel/extern.c:809 panel/swallow.c:114
+msgid "Reload"
+msgstr "Znova nalo¾i"
+
+#: help-browser/window.c:247
+msgid "Index"
+msgstr "Kazalo"
+
+#: help-browser/window.c:247
+msgid "Show Documentation Index"
+msgstr "Ka¾i kazalo dokumentacije"
+
+#: help-browser/window.c:250
+msgid "History"
+msgstr "Zgodovina"
+
+#: help-browser/window.c:252
+msgid "BMarks"
+msgstr "Zaznamki"
+
+#: help-browser/window.c:255
+msgid "Help on Help"
+msgstr "Pomoè o pomoèi"
+
+#: help-browser/window.c:614
+msgid "Location: "
+msgstr "Lokacija: "
+
+#: help-browser/window.c:1085
+#, c-format
+msgid ""
+"Error loading document:\n"
+"\n"
+"%s\n"
+"\n"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
+"Napaka pri nalaganju dokumenta:\n"
+"\n"
+"%s\n"
+"\n"
+"Te dokumentacije verjetno nimate\n"
+"nalo¾ene na va¹em sistemu."
+
+#: panel/applet.c:479 panel/applet.c:485 panel/menu.c:5339 panel/menu.c:5344
+#: panel/menu.c:5708
 msgid "Panel"
 msgstr "Pult"
 
-#: panel/applet.c:545
+#: panel/applet.c:483
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Ne najdem pixmap datoteke %s"
 
-#: panel/applet.c:577
+#: panel/applet.c:514
 msgid "Remove from panel"
 msgstr "Odstrani s pulta"
 
 #.
 #. * FIXME: should have a "Move" pixmap.
 #.
-#: panel/applet.c:591
+#: panel/applet.c:528
 msgid "Move"
 msgstr "Premakni"
 
-#: panel/applet.c:1126
+#: panel/applet.c:797
 msgid "Can't find an empty spot"
 msgstr "Ne najdem praznega prostora"
 
-#: panel/basep-widget.c:150 panel/basep-widget.c:151
+#: panel/basep-widget.c:147 panel/basep-widget.c:148
 msgid "mode"
 msgstr "naèin"
 
-#: panel/basep-widget.c:158 panel/basep-widget.c:159
+#: panel/basep-widget.c:155 panel/basep-widget.c:156
 msgid "state"
 msgstr "stanje"
 
-#: panel/basep-widget.c:167 panel/basep-widget.c:168
+#: panel/basep-widget.c:164 panel/basep-widget.c:165
+msgid "level"
+msgstr "nivo"
+
+#: panel/basep-widget.c:173 panel/basep-widget.c:174
 msgid "hidebuttons_enabled"
 msgstr "skritigumbi_vkljuèeni"
 
-#: panel/basep-widget.c:175 panel/basep-widget.c:176
+#: panel/basep-widget.c:181 panel/basep-widget.c:182
 msgid "hidebutton_pixmaps_enabled"
 msgstr "skritigumbi_slike_vkljuèeni"
 
-#: panel/basep-widget.c:540
+#: panel/basep-widget.c:991
 msgid "Hide this panel"
 msgstr "Skrij ta pult"
 
-#: panel/basep-widget.c:543
-#, fuzzy
-msgid "Show this panel"
-msgstr "Odstrani ta pult"
-
-#: panel/distribution.c:26
+#: panel/distribution.c:28
 msgid "Debian GNU/Linux"
 msgstr "Debian GNU/Linux"
 
-#: panel/distribution.c:26
+#: panel/distribution.c:28
 msgid "Debian menus"
 msgstr "Menuji Debian"
 
-#: panel/distribution.c:31
+#: panel/distribution.c:33
+msgid "Red Hat Linux"
+msgstr "Red Hat Linux"
+
+#: panel/distribution.c:33
+msgid "Red Hat menus"
+msgstr "Menuji Red Hat"
+
+#: panel/distribution.c:38
 msgid "SuSE Linux"
 msgstr "SuSE Linux"
 
-#: panel/distribution.c:31
+#: panel/distribution.c:38
 msgid "SuSE menus"
 msgstr "Menuji SuSE"
 
-#: panel/distribution.c:36
-#, fuzzy
-msgid "Solaris"
-msgstr "Barve"
-
-#: panel/distribution.c:36
-#, fuzzy
-msgid "CDE Menus"
-msgstr "Menuji KDE"
-
-#: panel/drawer.c:134 panel/panel-config.c:795 panel/panel-config.c:830
-#: panel/panel-config.c:901 panel/panel-config.c:1007
+#: panel/drawer.c:136 panel/panel_config.c:944 panel/panel_config.c:982
+#: panel/panel_config.c:1056 panel/panel_config.c:1165
 msgid "Size and Position"
 msgstr "Velikost in mesto"
 
-#: panel/drawer.c:142
+#: panel/drawer.c:144
 msgid "Tooltip/Name"
 msgstr "Namig/ime"
 
-#: panel/drawer.c:148 panel/menu-properties.c:570 panel/menu-properties.c:604
+#: panel/drawer.c:150 panel/menu-properties.c:631 panel/menu-properties.c:665
 msgid "Icon"
 msgstr "Ikona"
 
-#: panel/drawer.c:154
+#: panel/drawer.c:156
 msgid "Applet appearance"
 msgstr "Videz vstavka"
 
-#: panel/drawer.c:159
+#: panel/drawer.c:161
 msgid "Drawer handle"
 msgstr "Roèica predala"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:164
+#: panel/drawer.c:166
 msgid "Enable hidebutton"
 msgstr "Vkljuèi gumb za skrivanje"
 
-#: panel/drawer.c:173
+#: panel/drawer.c:175
 msgid "Enable hidebutton arrow"
 msgstr "Vkljuèi pu¹èico na gumbu za skrivanje"
 
-#: panel/drawer.c:191 panel/drawer.c:336 panel/menu.c:3229
+#: panel/drawer.c:193 panel/drawer.c:338 panel/menu.c:5040
 msgid "Drawer"
 msgstr "predal"
 
-#: panel/drawer.c:514 panel/launcher.c:675 panel/menu.c:1486 panel/menu.c:1558
-#: panel/menu.c:3386 panel/menu.c:4042
-msgid "Properties..."
-msgstr "Lastnosti..."
+#: panel/extern.c:785
+msgid "Deskguide (the desktop pager)"
+msgstr "Vodnik-po-namizju (namizni pager)"
 
-#: panel/foobar-widget.c:163
+#: panel/extern.c:787
+msgid "Tasklist"
+msgstr "Seznam poslov"
+
+#: panel/extern.c:789
+msgid "The Battery"
+msgstr "Baterija"
+
+#: panel/extern.c:797
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly.\n"
+"\n"
+"Reload this applet?\n"
+"\n"
+"(If you choose not to reload it at this time you can always add it from\n"
+"the \"Applets\" submenu in the main menu.)"
+msgstr ""
+"Zdi se, da je vstavek %s neprièakovano umru.\n"
+"\n"
+"Znova nalo¾i ta vstavek?\n"
+"\n"
+"(Èe se odloèite, da ga tokrat ne boste znova nalo¾ili, ga lahko vedno "
+"dodate\n"
+"v podmenuju \"Vstavki\" v glavnem menuju.)"
+
+#: panel/extern.c:1114
+msgid "Couldn't register applet."
+msgstr "Ne morem registrirati vstavka."
+
+#: panel/extern.c:1275
+msgid "Whoops! for some reason we can't add to the panel"
+msgstr "Opla! zaradi neznanega razloga ne moremo dodati na pult"
+
+#: panel/extern.c:1402
+msgid "No socket was created"
+msgstr "Vtiè ni bil ustvarjen"
+
+#: panel/foobar-widget.c:229
+msgid ""
+"Cannot execute the gmc-client program,\n"
+"perhaps gmc is not installed"
+msgstr ""
+"Ne morem pognati programa gmc-client,\n"
+"morda gmc ni name¹èen"
+
+#: panel/foobar-widget.c:242
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -1979,85 +2860,115 @@ msgstr ""
 "morda ni name¹èen.\n"
 "Najdete ga lahko v gnome-pim paketu."
 
-#: panel/foobar-widget.c:177 panel/menu.c:3689
-msgid "Run..."
-msgstr "Po¾eni..."
+#: panel/foobar-widget.c:257
+msgid "News (www)"
+msgstr "Novice (splet)"
 
-#: panel/foobar-widget.c:180
-msgid "Run applications, if you know the correct command to type in"
-msgstr ""
+#: panel/foobar-widget.c:258
+msgid "http://gnotices.gnome.org/gnome-news/"
+msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:192
-#, fuzzy
-msgid "Lock Display"
-msgstr "Poka¾i"
+#: panel/foobar-widget.c:262
+msgid "FAQ (www)"
+msgstr "FAQ (splet)"
 
-#: panel/foobar-widget.c:196
-msgid "Protect your computer from unauthorized use"
-msgstr ""
+#: panel/foobar-widget.c:263
+msgid "http://www.gnome.org/gnomefaq/html/"
+msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:205
+#: panel/foobar-widget.c:267
+msgid "Mailing Lists (www)"
+msgstr "Dopisni seznami (splet)"
+
+#: panel/foobar-widget.c:268
+msgid "http://mail.gnome.org/mailman/listinfo/"
+msgstr "http://mail.gnome.org/mailman/listinfo/"
+
+#: panel/foobar-widget.c:275
+msgid "Software (www)"
+msgstr "Programje (splet)"
+
+#: panel/foobar-widget.c:276
+msgid "http://www.gnome.org/applist/list-martin.phtml"
+msgstr "http://www.gnome.org/applist/list-martin.phtml"
+
+#: panel/foobar-widget.c:280
+msgid "Development (www)"
+msgstr "Razvoj (splet)"
+
+#: panel/foobar-widget.c:281
+msgid "http://developer.gnome.org/"
+msgstr "http://developer.gnome.org/"
+
+#: panel/foobar-widget.c:285
+msgid "Bug Tracking System (www)"
+msgstr "Sistem sledenja hro¹èem (splet)"
+
+#: panel/foobar-widget.c:286
+msgid "http://bugs.gnome.org/"
+msgstr "http://bugs.gnome.org/"
+
+#: panel/foobar-widget.c:391
+msgid "By Name"
+msgstr "Po imenu"
+
+#: panel/foobar-widget.c:392
+msgid "By Type"
+msgstr "Po vrsti"
+
+#: panel/foobar-widget.c:393
+msgid "By Size"
+msgstr "Po velikosti"
+
+#: panel/foobar-widget.c:394
+msgid "By Time Last Accessed"
+msgstr "Po èasu zadnjega dostopa"
+
+#: panel/foobar-widget.c:395
+msgid "By Time Last Modified"
+msgstr "Po èasu zadnje modifikacije"
+
+#: panel/foobar-widget.c:396
+msgid "By Time Last Changed"
+msgstr "Po èasu zadnje spremembe"
+
+#: panel/foobar-widget.c:406
+msgid "Arrange Icons"
+msgstr "Uredi ikone"
+
+#: panel/foobar-widget.c:419
+msgid "Rescan Desktop Directory"
+msgstr "Osve¾i namizni imenik"
+
+#: panel/foobar-widget.c:422
+msgid "Rescan Desktop Devices"
+msgstr "Osve¾i namizne naprave"
+
+#: panel/foobar-widget.c:431
+msgid "Lock Screen"
+msgstr "Zakleni zaslon"
+
+#: panel/foobar-widget.c:441
 msgid "Log Out"
 msgstr "Odjava"
 
-#: panel/foobar-widget.c:208
-msgid "Quit from the GNOME desktop"
-msgstr ""
+#: panel/foobar-widget.c:449
+msgid " Desktop "
+msgstr " Namizje "
 
-#: panel/foobar-widget.c:215
-#, fuzzy
-msgid "Actions"
-msgstr "Dejanje"
+#: panel/foobar-widget.c:478
+msgid "can't fine real path"
+msgstr "ne morem najti resniène poti"
 
-#: panel/foobar-widget.c:246
+#: panel/foobar-widget.c:495
 msgid "menu wasn't created"
 msgstr "menu ni bil ustvarjen"
 
-#: panel/foobar-widget.c:281
-msgid "Today"
-msgstr "Danes"
-
-#: panel/foobar-widget.c:281
-msgid "View the calendar for today."
-msgstr ""
-
-#: panel/foobar-widget.c:282
-msgid "This Week"
-msgstr "Ta teden"
-
-#: panel/foobar-widget.c:282
-msgid "View the calendar for this week."
-msgstr ""
-
-#: panel/foobar-widget.c:283
-msgid "This Month"
-msgstr "Ta mesec"
-
-#: panel/foobar-widget.c:283
-msgid "View the calendar for this month."
-msgstr ""
-
-#: panel/foobar-widget.c:319
+#: panel/foobar-widget.c:539
 msgid "%A %B %d"
 msgstr "%A %d %B"
 
-#: panel/foobar-widget.c:401
-msgid "%H:%M:%S"
-msgstr "%H:%M:%S"
-
-#: panel/foobar-widget.c:402
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
-
-#: panel/foobar-widget.c:403
-msgid "%l:%M:%S %p"
-msgstr "%l:%M:%S %p"
-
-#: panel/foobar-widget.c:408 panel/panel.c:2544
-msgid "%I:%M:%S %p"
-msgstr "%I:%M:%S %p"
-
-#: panel/foobar-widget.c:446
+#: panel/foobar-widget.c:628
 msgid ""
 "Could not call time-admin\n"
 "Perhaps time-admin is not installed"
@@ -2065,33 +2976,52 @@ msgstr ""
 "Nisem mogel poklicati programa time-admin\n"
 "Morda time-admin ni name¹èen"
 
-#: panel/foobar-widget.c:460
-#, fuzzy
-msgid "Add Appointment..."
+#: panel/foobar-widget.c:641
+msgid "Today"
+msgstr "Danes"
+
+#: panel/foobar-widget.c:642
+msgid "This Week"
+msgstr "Ta teden"
+
+#: panel/foobar-widget.c:643
+msgid "This Month"
+msgstr "Ta mesec"
+
+#: panel/foobar-widget.c:649
+msgid "%H:%M:%S"
+msgstr "%H:%M:%S"
+
+#: panel/foobar-widget.c:650
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: panel/foobar-widget.c:651
+msgid "%l:%M:%S %p"
+msgstr "%l:%M:%S %p"
+
+#: panel/foobar-widget.c:658
+msgid "Add appointement..."
 msgstr "Dodaj zmenek..."
 
-#: panel/foobar-widget.c:469
-#, fuzzy
-msgid "Set Time..."
+#: panel/foobar-widget.c:666
+msgid "Set Time"
 msgstr "Nastavi èas"
 
-#: panel/foobar-widget.c:472
-msgid "Adjust the date and time."
-msgstr ""
-
-#: panel/foobar-widget.c:484
+#: panel/foobar-widget.c:684
 msgid "Format"
 msgstr "Oblika izpisa"
 
-#: panel/foobar-widget.c:773
-msgid "No windows open"
-msgstr ""
+#: panel/foobar-widget.c:1155 panel/menu.c:3834 panel/menu.c:3842
+#: panel/menu.c:5637
+msgid "Programs"
+msgstr "Programi"
 
-#: panel/foobar-widget.c:1036 panel/gnome-run.c:725 panel/menu.c:2783
-#: panel/menu.c:2790
-#, fuzzy
-msgid "Applications"
-msgstr "Program"
+#. FIXME: add the add to favourites somehow here
+#: panel/foobar-widget.c:1170 panel/menu.c:3990 panel/menu.c:5597
+#: panel/menu.c:5650 panel/menu.c:5657
+msgid "Favorites"
+msgstr "Priljubljeni"
 
 #: panel/global-keys.c:290 panel/global-keys.c:318
 msgid "Can't find the screenshot program"
@@ -2101,291 +3031,246 @@ msgstr "Nisem mogel najti programa za zajem zaslona"
 msgid "Can't execute the screenshot program"
 msgstr "Ne morem pognati programa za zajem zaslona'"
 
-#: panel/GNOME_Panel.server.in.h:1
-#, fuzzy
-msgid "GNOME Panel"
-msgstr "Pult namizja GNOME"
+#: panel/gnome-panel-properties.c:99 panel/menu-properties.c:548
+msgid "Programs: "
+msgstr "Programi: "
 
-#: panel/GNOME_Panel.server.in.h:2
-#, fuzzy
-msgid "GNOME Panel Shell"
-msgstr "Glavna stran GNOME"
+#: panel/gnome-panel-properties.c:100 panel/menu-properties.c:555
+msgid "Favorites: "
+msgstr "Priljubljeni: "
 
-#: panel/gnome-panel-properties.c:187
-msgid "Press a key..."
-msgstr "Pritisni tipko..."
+#: panel/gnome-panel-properties.c:101 panel/menu-properties.c:562
+msgid "Applets: "
+msgstr "Vstavki: "
 
-#: panel/gnome-panel-properties.c:404
-#, fuzzy
-msgid ""
-"The system administrator has disallowed\n"
-" modification of the panel configuration"
-msgstr "Sistemski administrator je prepreèil spremembe nastavitve pulta"
+#: panel/gnome-panel-properties.c:102
+msgid "Distribution: "
+msgstr "Distribucija: "
 
-#: panel/gnome-panel-properties.c:418
-#, fuzzy
-msgid "Panel Global Properties"
-msgstr "Lastnosti pulta"
+#: panel/gnome-panel-properties.c:103
+msgid "KDE: "
+msgstr "KDE: "
 
-#: panel/gnome-panel-properties.glade.h:1
-msgid "<Alt>F1"
-msgstr ""
+#: panel/gnome-panel-properties.c:104
+msgid "Panel: "
+msgstr "Pult: "
 
-#: panel/gnome-panel-properties.glade.h:2
-msgid "<Alt>F1F1"
-msgstr ""
+#: panel/gnome-panel-properties.c:105
+msgid "Desktop: "
+msgstr "Namizje: "
 
-#: panel/gnome-panel-properties.glade.h:3
-msgid "<Alt>F2"
-msgstr ""
+#. Animation enable
+#: panel/gnome-panel-properties.c:280
+msgid "Enable animations"
+msgstr "Vkljuèi animacije"
 
-#: panel/gnome-panel-properties.glade.h:4
-msgid "<Control><Alt>m"
-msgstr ""
+#. Auto and Explicit Hide Animation step_size scale frame
+#: panel/gnome-panel-properties.c:286
+msgid "Panel Animation Settings"
+msgstr "Nastavitve animacije pulta"
 
-#: panel/gnome-panel-properties.glade.h:5
-msgid "<Control><Alt>r"
-msgstr ""
-
-#: panel/gnome-panel-properties.glade.h:6
-msgid "Animation"
-msgstr "Animacija"
-
-#: panel/gnome-panel-properties.glade.h:7
-#, fuzzy
-msgid "Animation speed:"
+#. ExplicitHide Animation step_size scale frame
+#: panel/gnome-panel-properties.c:297
+msgid "Panel Animation Speed"
 msgstr "Hitrost animacije pulta"
 
-#: panel/gnome-panel-properties.glade.h:8
-#, fuzzy
-msgid "Automatically re-check menus for newly installed software"
+#. Minimize Delay scale frame
+#: panel/gnome-panel-properties.c:303
+msgid "Hide delay (ms)"
+msgstr "Premor skrivanja(ms)"
+
+#. Minimize Delay scale frame
+#: panel/gnome-panel-properties.c:309
+msgid "Show delay (ms)"
+msgstr "Premor kazanja(ms)"
+
+#. Minimized size scale frame
+#: panel/gnome-panel-properties.c:315
+msgid "Size (pixels)"
+msgstr "Velikost (v pikslih)"
+
+#. prelight on mouseovers hack (used to be saturation, hence
+#. * the config option name)
+#: panel/gnome-panel-properties.c:365
+msgid "Prelight buttons on mouseover"
+msgstr "Osvetli gumbe, ko gre èez njih mi¹"
+
+#: panel/gnome-panel-properties.c:441 panel/menu-properties.c:407
+msgid "Off"
+msgstr "Izklopljeno"
+
+#: panel/gnome-panel-properties.c:448 panel/menu-properties.c:417
+msgid "In a submenu"
+msgstr "V podmenuju"
+
+#: panel/gnome-panel-properties.c:454
+msgid "In the menu"
+msgstr "V menuju"
+
+#. Menu frame
+#: panel/gnome-panel-properties.c:473
+msgid "Menus"
+msgstr "Menuji"
+
+#. large icons
+#: panel/gnome-panel-properties.c:483
+msgid "Use large icons"
+msgstr "Uporabi velike ikone"
+
+#. Dot Buttons
+#: panel/gnome-panel-properties.c:490
+msgid "Show [...] buttons"
+msgstr "Ka¾i [...] gumbe"
+
+#. Off Panel Popup menus
+#: panel/gnome-panel-properties.c:496
+msgid "Show popup menus outside of panels"
+msgstr "Ka¾i vzkliène menuje izven pultov :)"
+
+#. Hungry Menus
+#: panel/gnome-panel-properties.c:502
+msgid "Keep menus in memory"
+msgstr "Hrani menuje v pomnilniku"
+
+#. Merge system menus
+#: panel/gnome-panel-properties.c:509
+msgid "Merge in system menus"
+msgstr "Vkljuèi sistemske menuje"
+
+#. Menu check
+#: panel/gnome-panel-properties.c:516
+msgid ""
+"Automatically re-check menus\n"
+"for newly installed software"
 msgstr ""
 "Samodejno preverjaj menuje\n"
 "za novo name¹èeno programsko opremo"
 
-#: panel/gnome-panel-properties.glade.h:9 panel/panel-util.c:583
-#: panel/panel-util.c:603
-msgid "Disabled"
-msgstr "Izkljuèeno"
+#. Menu titles
+#: panel/gnome-panel-properties.c:523
+msgid "Show menu titles"
+msgstr "Kratki nazivi menujev"
 
-#: panel/gnome-panel-properties.glade.h:10
-#, fuzzy
-msgid "Fast"
-msgstr "Zadnji"
+#. Menu frame
+#: panel/gnome-panel-properties.c:531
+msgid "Global menu"
+msgstr "Globalni menu"
 
-#: panel/gnome-panel-properties.glade.h:12
-msgid "Grab key..."
-msgstr "Preberi tipko..."
+#: panel/gnome-panel-properties.c:701
+msgid "Press a key..."
+msgstr "Pritisni tipko..."
 
-#: panel/gnome-panel-properties.glade.h:13
-msgid "Keep panels above other windows"
-msgstr "Ohrani pulte nad ostalimi okni"
+#. Tooltips enable
+#: panel/gnome-panel-properties.c:734
+msgid "Tooltips enabled"
+msgstr "Vkljuèi namige"
 
-#: panel/gnome-panel-properties.glade.h:14
+#. Drawer/launcher auto close
+#: panel/gnome-panel-properties.c:740
+msgid "Close drawer if a launcher inside it is pressed"
+msgstr "Zapri predal, èe je zaganjalnik v njem pritisnjen"
+
+#. Autoraise
+#: panel/gnome-panel-properties.c:746
+msgid "Raise panels on mouse-over"
+msgstr "Odkrij pulte èe gre èez njih mi¹ka"
+
+#. Confirm panel removal
+#: panel/gnome-panel-properties.c:752
+msgid "Confirm the removal of panels with a dialog"
+msgstr "Potrdi odstranitev pulta z dialogom"
+
+#. Collision avoidance
+#: panel/gnome-panel-properties.c:758
+msgid "Try to avoid overlapping panels"
+msgstr "Poskusi se izogniti prekrivanju pultov"
+
+#. Layer frame
+#: panel/gnome-panel-properties.c:764
+msgid "Panel treatment (GNOME compliant window managers only)"
+msgstr "Ravnanje s pultom (le z GNOME zdru¾ljivi okenski upravljalniki)"
+
+#. Keep on bottom
+#: panel/gnome-panel-properties.c:774
 msgid "Keep panels below other windows"
 msgstr "Pulte ohrani pod drugimi okni"
 
-#: panel/gnome-panel-properties.glade.h:15
-#, fuzzy
-msgid "Keep panels on same level as other windows"
+#: panel/gnome-panel-properties.c:781
+msgid "Keep panels on the same level as other windows"
 msgstr "Pulte ohrani na enakem nivoju kot druga okna"
 
-#: panel/gnome-panel-properties.glade.h:16
-#, fuzzy
-msgid "Key bindings"
+#: panel/gnome-panel-properties.c:788
+msgid "Keep panels above other windows"
+msgstr "Ohrani pulte nad ostalimi okni"
+
+#. Key Bindings frame
+#: panel/gnome-panel-properties.c:794
+msgid "Key Bindings"
 msgstr "Povezave Tipk"
 
-#: panel/gnome-panel-properties.glade.h:17
-#, fuzzy
-msgid "Medium"
-msgstr "Menu"
+#. enabled
+#: panel/gnome-panel-properties.c:807
+msgid "Enable panel keybindings"
+msgstr "Vkljuèi povezave tipk pulta"
 
-#: panel/gnome-panel-properties.glade.h:18 panel/menu-properties.c:565
-#: panel/menu.c:1320 panel/menu.c:2224 panel/menu.c:3182 panel/menu.c:3784
-#: panel/menu.c:3926 panel/menu.c:3946
+#. menu key
+#: panel/gnome-panel-properties.c:814
+msgid "Popup menu key"
+msgstr "Tipka za priklic menuja"
+
+#: panel/gnome-panel-properties.c:825 panel/gnome-panel-properties.c:853
+#: panel/gnome-panel-properties.c:880 panel/gnome-panel-properties.c:907
+#: panel/panel-util.c:650 panel/panel-util.c:707
+msgid "Disabled"
+msgstr "Izkljuèeno"
+
+#: panel/gnome-panel-properties.c:836 panel/gnome-panel-properties.c:864
+#: panel/gnome-panel-properties.c:891 panel/gnome-panel-properties.c:918
+msgid "Grab key..."
+msgstr "Preberi tipko..."
+
+#. run key...
+#: panel/gnome-panel-properties.c:844
+msgid "Run dialog key"
+msgstr "Tipka za zagon programa"
+
+#. screenshot key...
+#: panel/gnome-panel-properties.c:872
+msgid "Take screenshot key"
+msgstr "Tipka za zajem zaslona"
+
+#. window screenshot key...
+#: panel/gnome-panel-properties.c:899
+msgid "Take window screenshot key"
+msgstr "Zipka za zajem okna"
+
+#: panel/gnome-panel-properties.c:1204
+msgid "Animation"
+msgstr "Animacija"
+
+#: panel/gnome-panel-properties.c:1209
+msgid "Buttons"
+msgstr "Gumbi"
+
+#: panel/gnome-panel-properties.c:1214 panel/menu-properties.c:626
+#: panel/menu.c:1571 panel/menu.c:3154 panel/menu.c:3234 panel/menu.c:3239
+#: panel/menu.c:4984 panel/menu.c:5785 panel/menu.c:5923 panel/menu.c:5943
 msgid "Menu"
 msgstr "Menu"
 
-#: panel/gnome-panel-properties.glade.h:19
-#, fuzzy
-msgid "Panel Settings"
-msgstr "Nastavitve animacije pulta"
-
-#: panel/gnome-panel-properties.glade.h:20
-#, fuzzy
-msgid "Popup menu key:"
-msgstr "Tipka za priklic menuja"
-
-#: panel/gnome-panel-properties.glade.h:21
-#, fuzzy
-msgid "Run dialog key:"
-msgstr "Tipka za zagon programa"
-
-#: panel/gnome-panel-properties.glade.h:22
-#, fuzzy
-msgid "Slow"
-msgstr "pod"
-
-#: panel/gnome-panel-properties.glade.h:23
-#, fuzzy
-msgid "_Close drawer if a launcher inside it is pressed"
-msgstr "Zapri predal, èe je zaganjalnik v njem pritisnjen"
-
-#: panel/gnome-panel-properties.glade.h:24
-#, fuzzy
-msgid "_Enable animation"
-msgstr "Vkljuèi animacije"
-
-#: panel/gnome-panel-properties.glade.h:25
-#, fuzzy
-msgid "_Enable key bindings"
-msgstr "Vkljuèi povezave tipk pulta"
-
-#: panel/gnome-panel-properties.glade.h:26
-#, fuzzy
-msgid "_Raise panels on mouse-over"
-msgstr "Odkrij pulte èe gre èez njih mi¹ka"
-
-#: panel/gnome-panel-screenshot.c:126
+#: panel/gnome-panel-properties.c:1269
 msgid ""
-"Unable to initialize png structure.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nisem mogel inicializirati strukture png.\n"
-"Verjetno imate na sistemu slabo razlièico libpng"
+"The system administrator has disallowed modification of the panel "
+"configuration"
+msgstr "Sistemski administrator je prepreèil spremembe nastavitve pulta"
 
-#: panel/gnome-panel-screenshot.c:134
-msgid ""
-"Unable to create png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nisem mogel ustvariti podatkov o png.\n"
-"Verjetno imate na sistemu slabo razlièico libpng"
-
-#: panel/gnome-panel-screenshot.c:141
-msgid ""
-"Unable to set png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Nisem mogel nastaviti podatkov o png.\n"
-"Verjetno imate na sistemu slabo razlièico libpng"
-
-#: panel/gnome-panel-screenshot.c:155
-msgid ""
-"Insufficient memory to save the screenshot.\n"
-"Please free up some resources and try again."
-msgstr ""
-"Ni dovolj pomnilnika za shranitev zajema zaslona.\n"
-"Prosim sporstite nekaj virov in poskusite znova."
-
-#: panel/gnome-panel-screenshot.c:202
-#, c-format
-msgid "File %s already exists. Overwrite?"
-msgstr "Datoteka %s ¾e obstaja. Prepi¹i?"
-
-#: panel/gnome-panel-screenshot.c:214 panel/gnome-panel-screenshot.c:702
-#, c-format
-msgid ""
-"Unable to create the file:\n"
-"\"%s\"\n"
-"Please check your permissions of the parent directory"
-msgstr ""
-"Nisem mogel ustvariti datoteke:\n"
-"\"%s\"\n"
-"Prosim preverite dovoljenja star¹evskega imenika"
-
-#: panel/gnome-panel-screenshot.c:477
-msgid "Print Screenshot"
-msgstr "Natisni zajem zaslona"
-
-#: panel/gnome-panel-screenshot.c:525
-msgid "Screenshot Print Preview"
-msgstr "Predogled tiskanja zajema zaslona"
-
-#. translators: this is the file that gets made up with the screenshot if a specific window is taken
-#: panel/gnome-panel-screenshot.c:551
-#, c-format
-msgid "%s%cScreenshot-%s.png"
-msgstr "%s%cZajem_zaslona-%s.png"
-
-#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
-#: panel/gnome-panel-screenshot.c:556
-#, c-format
-msgid "%s%cScreenshot.png"
-msgstr "%s%cZajem_zaslona.png"
-
-#. translators: this is the file that gets made up with the screenshot if a specific window is taken
-#: panel/gnome-panel-screenshot.c:571
-#, c-format
-msgid "%s%cScreenshot-%s-%d.png"
-msgstr "%s%cZajem_zaslona-%s-%d.png"
-
-#. translators: this is the file that gets made up with the screenshot if the entire screen is taken
-#: panel/gnome-panel-screenshot.c:576
-#, c-format
-msgid "%s%cScreenshot-%d.png"
-msgstr "%s%cZajem_zaslona-%d.png"
-
-#: panel/gnome-panel-screenshot.c:722
-#, c-format
-msgid "Not enough room to write file %s"
-msgstr "Ni dovolj prostora za zapis datoteke %s"
-
-#: panel/gnome-panel-screenshot.c:1019
-msgid "Grab a window instead of the entire screen"
-msgstr "Zajemi okno namesto celotnega zaslona"
-
-#: panel/gnome-panel-screenshot.c:1057
-msgid ""
-"Glade file for the screenshot program is missing.\n"
-"Please check your installation of gnome-core"
-msgstr ""
-"Datoteka glade za program za zajem zaslona manjka.\n"
-"Prosimo preverite va¹o namestitev paketa gnome-core"
-
-#: panel/gnome-panel-screenshot.c:1079
-msgid "Unable to take a screenshot of the current desktop."
-msgstr "Nisem mogel zajeti slike zaslona trenutnega namizja."
-
-#: panel/gnome-panel-screenshot.glade.h:1
-msgid "Options"
-msgstr "Mo¾nosti"
-
-#: panel/gnome-panel-screenshot.glade.h:2
-#, fuzzy
-msgid "Preview"
-msgstr "Predogled"
-
-#: panel/gnome-panel-screenshot.glade.h:3
-msgid "Save screenshot to _desktop"
-msgstr "Shrani zajem zaslona na _namizje"
-
-#: panel/gnome-panel-screenshot.glade.h:4
-msgid "Save screenshot to _web page (save in ~/public__html)"
-msgstr "Shrani zajem zaslona na _spletno stran (shrani v ~/public_html"
-
-#: panel/gnome-panel-screenshot.glade.h:5
-msgid "Screenshot"
-msgstr "Zajem zaslona"
-
-#: panel/gnome-panel-screenshot.glade.h:6
-msgid "_Print screenshot..."
-msgstr "_Natisni zajem zaslona..."
-
-#: panel/gnome-panel-screenshot.glade.h:7
-msgid "_Save screenshot to file:"
-msgstr "_Shrani zajem zaslona v datoteko:"
-
-#: panel/gnome-run.c:263 panel/gnome-run.c:271
-#, c-format
+#: panel/gnome-run.c:248 panel/gnome-run.c:254
 msgid ""
 "Failed to load this program!\n"
 "%s"
-msgstr ""
-"Nalaganje tega programa je spodletelo!\n"
-"%s"
+msgstr "Nalaganje tega programa je spodletelo!\n%s"
 
-#: panel/gnome-run.c:322
+#: panel/gnome-run.c:305
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2394,7 +3279,7 @@ msgstr ""
 "Spodletela je izvedba ukaza:\n"
 "%s"
 
-#: panel/gnome-run.c:376
+#: panel/gnome-run.c:359
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2405,50 +3290,62 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: panel/gnome-run.c:419 panel/gnome-run.c:667
-msgid "Browse..."
-msgstr "Brskaj..."
-
-#: panel/gnome-run.c:676
+#: panel/gnome-run.c:649
 msgid "Run in terminal"
 msgstr "Po¾eni v terminalu"
 
-#: panel/gnome-run.c:887
+#: panel/gnome-run.c:893
 #, c-format
 msgid "Will run '%s'"
 msgstr "Pognal se bo '%s'"
 
-#: panel/gnome-run.c:898 panel/gnome-run.c:901
+#: panel/gnome-run.c:904 panel/gnome-run.c:907
 msgid "No program selected"
 msgstr "Noben program ni izbran"
 
-#: panel/gnome-run.c:1090
+#: panel/gnome-run.c:1011
+msgid "Available Programs"
+msgstr "Programi na voljo"
+
+#: panel/gnome-run.c:1012
+msgid "Description"
+msgstr "Opis"
+
+#: panel/gnome-run.c:1065
+msgid "Add this program to Favorites"
+msgstr "Dodaj ta program med priljubljene"
+
+#: panel/gnome-run.c:1123
 msgid "Hide advanced options"
 msgstr "Skrij naprene mo¾nosti"
 
-#: panel/gnome-run.c:1093
+#: panel/gnome-run.c:1126
 msgid "Hide the advanced controls below this button."
 msgstr "Skrij napredne mo¾nosti pod tem gumbom."
 
-#: panel/gnome-run.c:1102
+#: panel/gnome-run.c:1135
 msgid "Advanced..."
 msgstr "Napredno..."
 
-#: panel/gnome-run.c:1105
+#: panel/gnome-run.c:1138
 msgid ""
 "Allow typing in a command line instead of choosing an application from the "
 "list"
 msgstr "Dovoli pisanje v ukazno vrstico namesto izbiranja programa s seznama"
 
-#: panel/gnome-run.c:1127
+#: panel/gnome-run.c:1161
 msgid "Run Program"
 msgstr "Po¾eni program"
 
-#: panel/launcher.c:73
+#: panel/gnome-run.c:1263 panel/gnome-run.c:1282 panel/menu.c:5692
+msgid "Run..."
+msgstr "Po¾eni..."
+
+#: panel/launcher.c:77
 msgid "This launch icon does not specify a url to show"
 msgstr "Ta zaganjalna ikona ne navaja URLja za prikaz"
 
-#: panel/launcher.c:81
+#: panel/launcher.c:85
 #, c-format
 msgid ""
 "Cannot show %s\n"
@@ -2457,47 +3354,34 @@ msgstr ""
 "Ne morem prikazati %s\n"
 "%s"
 
-#: panel/launcher.c:110 panel/launcher.c:155
-#, c-format
+#: panel/launcher.c:111 panel/launcher.c:156
 msgid ""
 "Cannot launch icon\n"
 "%s"
-msgstr ""
-"Ne morem pognati ikone\n"
-"%s"
+msgstr "Ne morem pognati ikone\n%s"
 
-#: panel/launcher.c:466
-#, c-format
+#: panel/launcher.c:499
 msgid "Help on %s Application"
 msgstr "Pomoè za program %s"
 
 #. watch the enum at the top of the file
-#: panel/launcher.c:543
+#: panel/launcher.c:576
 msgid "Launcher properties"
 msgstr "Lastnosti zaganjalnika"
 
-#: panel/launcher.c:721
+#: panel/launcher.c:726
 msgid "Create launcher applet"
 msgstr "Ustvari zaganjalni vstavek"
 
-#. class
-#: panel/launcher.c:942
-#, c-format
-msgid ""
-"Cannot save launcher to disk, the following error occured:\n"
-"\n"
-"%s"
-msgstr ""
-
-#: panel/logout.c:81 panel/menu.c:3520
+#: panel/logout.c:82 panel/menu.c:5467
 msgid "Log out"
 msgstr "Odjava"
 
-#: panel/logout.c:100
+#: panel/logout.c:101
 msgid "Log out of GNOME"
 msgstr "Odjavi se iz GNOME-a"
 
-#: panel/logout.c:147 panel/logout.c:166 panel/menu.c:3507
+#: panel/logout.c:146 panel/logout.c:165 panel/menu.c:5453
 msgid "Lock screen"
 msgstr "Zakleni zaslon"
 
@@ -2512,27 +3396,27 @@ msgstr "Zakleni zaslon"
 #. <jwz> and "xscreensaver-command -exit ; xscreensaver &"
 #. <jwz> and "xscreensaver-demo"
 #.
-#: panel/logout.c:205
+#: panel/logout.c:203
 msgid "Blank Screen Now"
 msgstr "Takoj izprazni zaslon"
 
-#: panel/logout.c:206
+#: panel/logout.c:204
 msgid "Lock Screen Now"
 msgstr "Takoj zakleni zaslon"
 
-#: panel/logout.c:207
+#: panel/logout.c:205
 msgid "Kill Daemon"
 msgstr "Ubij daemona"
 
-#: panel/logout.c:208
+#: panel/logout.c:206
 msgid "Restart Daemon"
 msgstr "Znova po¾eni daemona"
 
-#: panel/logout.c:211
+#: panel/logout.c:209
 msgid "Preferences"
 msgstr "Nastavitve"
 
-#: panel/main.c:175
+#: panel/main.c:457
 msgid ""
 "This is the GNOME2 panel, it is likely that it will crash,\n"
 "destroy configuration, cause another world war, and most\n"
@@ -2544,31 +3428,43 @@ msgstr ""
 "povzroèil ¹e eno svetovno vojno in najverjetneje preprosto \n"
 "ne bo delal. Uporabite na lastno odgovornost.\n"
 "\n"
-"Ga zares ¾elite pognati?"
+"Ga zares ¾elite pognati?" 
 
-#: panel/main.c:192
-#, fuzzy
-msgid "Specify a profile name to load"
-msgstr "Navedi ime seje, ki naj se nalo¾i"
+#: panel/main.c:511 panel/main.c:536
+msgid ""
+"I've detected a panel already running,\n"
+"and will now exit."
+msgstr ""
+"Zaznal sem ¾e pognan pult,\n"
+"zato bom sedaj zakljuèil."
 
-#: panel/menu.c:259
+#: panel/main.c:515 panel/main.c:540
+msgid ""
+"There was a problem registering the panel with the bonobo-activation "
+"server.\n"
+"The panel will now exit."
+msgstr ""
+"Pult se ni uspel registrirati pri aktivacijskem stre¾niku bonobo.\n"
+"Pult se bo sedaj zaprl."
+
+#: panel/menu.c:248
 msgid "Many many others ..."
 msgstr "Veliko veliko drugih ..."
 
 #. ... from the Monty Pythons show...
-#: panel/menu.c:261
+#: panel/menu.c:250
 msgid "and finally, The Knights Who Say ... NI!"
 msgstr "in konèno, Vitezi, ki reèejo ... NI!"
 
-#: panel/menu.c:285
+#: panel/menu.c:275
 msgid "The GNOME Panel"
 msgstr "Pult namizja GNOME"
 
-#: panel/menu.c:286
+#: panel/menu.c:276
 msgid "(C) 1997-2000 the Free Software Foundation"
 msgstr "(C) 1997-2000 Fundacija za prosto programje"
 
-#: panel/menu.c:287
+#: panel/menu.c:277
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -2576,11 +3472,11 @@ msgstr ""
 "Ta program je zadol¾en za zagon drugih programov, vkljuèevanje manj¹ih "
 "vstavkov vase, svetovni mir in nakljuèna sesutja X-ov."
 
-#: panel/menu.c:303
+#: panel/menu.c:293
 msgid "End world hunger"
 msgstr "Konèaj svetovno lakoto"
 
-#: panel/menu.c:310
+#: panel/menu.c:300
 msgid ""
 "Running in \"Lockdown\" mode.  This means your system administrator has "
 "prohibited any changes to the panel's configuration to take place."
@@ -2588,163 +3484,210 @@ msgstr ""
 "Teèe v \"Zaklenjenem\" naèinu. To pomeni, da je sistemski administrator "
 "prepovedal kakr¹nekoli spremembe v nastavitvah pulta."
 
-#: panel/menu.c:327
+#: panel/menu.c:317
 msgid "Can't execute 'About GNOME'"
 msgstr "Ne morem pognati 'O GNOME'"
 
-#: panel/menu.c:351 panel/menu.c:840 panel/menu.c:873
+#: panel/menu.c:338 panel/menu.c:1099 panel/menu.c:1123 panel/menu.c:2279
 msgid "Can't load entry"
 msgstr "Ne morem nalo¾iti vnosa"
 
-#: panel/menu.c:657
-msgid ""
-"Cannot create the launcher.\n"
-"\n"
-"No command or url specified."
-msgstr ""
+#: panel/menu.c:874
+msgid "Cannot create an item with an empty command"
+msgstr "Nisem mogel ustvariti predmeta s praznim ukazom"
 
-#. class
-#: panel/menu.c:686
+#: panel/menu.c:904
 #, c-format
-msgid ""
-"Cannot save menu item to disk, the following error occured:\n"
-"\n"
-"%s"
-msgstr ""
+msgid "Could not get file from path: %s"
+msgstr "Ne morem dobiti datoteke s poti: %s"
 
-#: panel/menu.c:707
+#: panel/menu.c:908
+#, c-format
+msgid "Could not open .order file: %s"
+msgstr "Nisem mogel odpreti datoteke .order: %s"
+
+#: panel/menu.c:918
+#, c-format
+msgid "Could not open file '%s' for writing"
+msgstr "Nisem mogel odpreti datoteke '%s' za pisanje"
+
+#: panel/menu.c:944
 msgid "Create menu item"
 msgstr "Ustvari predmet menuja"
 
-#: panel/menu.c:756
+#: panel/menu.c:994
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
 msgstr "Nisem mogel odstraniti predmeta menuja %s: %s\n"
 
-#: panel/menu.c:763
+#: panel/menu.c:1001
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "Nisem mogel dobiti imena datoteke iz poti: %s"
 
-#: panel/menu.c:770
+#: panel/menu.c:1008
 #, c-format
 msgid "Could not get directory name from path: %s"
 msgstr "Nisem mogel dobiti imena imenika iz poti: %s"
 
-#: panel/menu.c:835
-msgid "No 'Exec' or 'URL' field in entry"
-msgstr "V vnosu ni polja 'Exec' ali 'URL'"
-
-#: panel/menu.c:862
-#, fuzzy, c-format
+#: panel/menu.c:1032
+#, c-format
 msgid ""
-"Cannot load help on %s.\n"
-"\n"
+"Could not open .order file: %s\n"
 "%s"
 msgstr ""
-"Ne morem prikazati %s\n"
+"Nisem mogel odpreti datoteke \".order\": %s\n"
 "%s"
+
+#: panel/menu.c:1054
+#, c-format
+msgid "Could not remove old order file %s: %s\n"
+msgstr "Nisem mogel odstraniti stare datoteke \"order\" %s: %s\n"
+
+#: panel/menu.c:1064
+#, c-format
+msgid ""
+"Could not rename tmp file: %s to %s\n"
+"%s"
+msgstr ""
+"Nisem mogel preimenovati zaèasne datoteke: %s v %s\n"
+"%s"
+
+#: panel/menu.c:1094
+msgid "No 'Exec' or 'URL' field in entry"
+msgstr "V vnosu ni polja 'Exec' ali 'URL'"
 
 #. flags
 #. error
 #. watch the enum at the top of the file
-#: panel/menu.c:1209 panel/menu.c:1285
+#: panel/menu.c:1459 panel/menu.c:1535
 msgid "Desktop entry properties"
 msgstr "Lastnosti vnosa na namizju"
 
-#: panel/menu.c:1404
+#: panel/menu.c:1680
 msgid "Add this launcher to panel"
 msgstr "Dodaj pultu kot zaganjalnik"
 
-#: panel/menu.c:1407
+#: panel/menu.c:1683
 msgid "Add this applet as a launcher to panel"
 msgstr "Ta vstavek dodaj pultu kot zaganjalnik"
 
-#: panel/menu.c:1415
+#: panel/menu.c:1692 panel/menu.c:1822
+msgid "Add this to Favorites menu"
+msgstr "Dodaj v menu priljubljenih"
+
+#: panel/menu.c:1704
 msgid "Remove this item"
 msgstr "Odstrani ta predmet"
 
-#: panel/menu.c:1432
+#: panel/menu.c:1721
 msgid "Put into run dialog"
 msgstr "Po¾eni z dodatnimi mo¾nostmi"
 
-#: panel/menu.c:1460
+#: panel/menu.c:1750
 #, c-format
 msgid "Help on %s"
 msgstr "Pomoè o %s"
 
-#: panel/menu.c:1461
+#: panel/menu.c:1751
 msgid "Application"
 msgstr "Program"
 
-#: panel/menu.c:1507
+#: panel/menu.c:1798
 msgid "Entire menu"
 msgstr "Celoten menu"
 
-#: panel/menu.c:1516
+#: panel/menu.c:1807
 msgid "Add this as drawer to panel"
 msgstr "Dodaj pultu kot predal"
 
-#: panel/menu.c:1524
+#: panel/menu.c:1815
 msgid "Add this as menu to panel"
 msgstr "Dodaj pultu kot menu"
 
-#: panel/menu.c:1532
+#: panel/menu.c:1833
 msgid "Add new item to this menu"
 msgstr "Dodaj nov predmet temu menuju"
 
-#: panel/menu.c:1824
+#: panel/menu.c:2243
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "Na tem pultu ¾e imate prikazovalnik stanja. Lahko imate le enega"
 
-#: panel/menu.c:2071
+#: panel/menu.c:2288
+msgid "Can't get goad_id from desktop entry!"
+msgstr "Ne morem dobiti goad_id iz vnosa namizja!"
+
+#. Add to favourites
+#: panel/menu.c:2908
+msgid "Add from menu"
+msgstr "Dodaj iz menuja"
+
+#: panel/menu.c:2986
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Ne morem dobiti goad_id za vstavek, ignoriram ga"
 
-#: panel/menu.c:2427
+#: panel/menu.c:3239 panel/menu.c:3241
+msgid " (empty)"
+msgstr " (prazno)"
+
+#: panel/menu.c:3420
 #, c-format
 msgid "query returned exception %s\n"
 msgstr "poizvedba je vrnila izjemo %s\n"
 
-#: panel/menu.c:2689
-#, fuzzy
-msgid "%I: %M: %S: %p"
+#: panel/menu.c:3683 panel/session.c:1553
+msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/menu.c:2695
+#: panel/menu.c:3692
 msgid "You can only have one menu panel at a time."
 msgstr "Lahko imate samo en menujski pult hkrati."
 
-#: panel/menu.c:2726
+#: panel/menu.c:3731 panel/menu.c:3736 panel/menu.c:5226
+msgid "Create panel"
+msgstr "Ustvari pult"
+
+#: panel/menu.c:3758
 msgid "Menu panel"
 msgstr "menujski pult"
 
-#: panel/menu.c:2733 panel/panel-config.c:1494 panel/panel-config.c:1616
+#: panel/menu.c:3765 panel/menu.c:4865 panel/panel_config.c:1778
+#: panel/panel_config.c:1903
 msgid "Edge panel"
 msgstr "robni pult"
 
-#: panel/menu.c:2740 panel/panel-config.c:1501 panel/panel-config.c:1627
+#: panel/menu.c:3772 panel/menu.c:4866 panel/panel_config.c:1785
+#: panel/panel_config.c:1914
 msgid "Aligned panel"
 msgstr "poravnan pult"
 
-#: panel/menu.c:2747 panel/panel-config.c:1507 panel/panel-config.c:1638
+#: panel/menu.c:3779 panel/menu.c:4867 panel/panel_config.c:1791
+#: panel/panel_config.c:1925
 msgid "Sliding panel"
 msgstr "drseè pult"
 
-#: panel/menu.c:2754 panel/panel-config.c:1513 panel/panel-config.c:1649
+#: panel/menu.c:3786 panel/menu.c:4868 panel/panel_config.c:1797
+#: panel/panel_config.c:1936
 msgid "Floating panel"
 msgstr "lebdeè pult"
 
-#. force_image
-#: panel/menu.c:2856 panel/menu.c:2864 panel/menu.c:3580
+#: panel/menu.c:3852 panel/menu.c:3855
+msgid "No system menus found!"
+msgstr "Sistemski menuji niso bili najdeni!"
+
+#: panel/menu.c:3872
+msgid "Can't create the user menu directory"
+msgstr "Ne morem ustvariti uporabni¹kega menu direktorija"
+
+#: panel/menu.c:3959 panel/menu.c:3968 panel/menu.c:5537
 msgid "KDE menus"
 msgstr "Menuji KDE"
 
-#: panel/menu.c:2937
+#: panel/menu.c:4070
 msgid "You cannot remove your last panel."
 msgstr "Ne morete odstraniti va¹ega zadnjega pulta."
 
-#: panel/menu.c:2949
+#: panel/menu.c:4083
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -2752,297 +3695,352 @@ msgstr ""
 "Ko je pult odstranjen so njegove nastavitve in\n"
 "nastavitve njegovih vstavkov izgubljene. Odstranim ta pult?"
 
-#: panel/menu.c:3173
+#: panel/menu.c:4120 panel/menu.c:4125 panel/menu.c:5772 panel/menu.c:5799
+#: panel/menu.c:5939
+msgid "Main Menu"
+msgstr "Glavni menu"
+
+#: panel/menu.c:4873
+msgid "Explicit hide"
+msgstr "skrij na zahtevo"
+
+#: panel/menu.c:4874
+msgid "Auto hide"
+msgstr "samodejno skrij"
+
+#: panel/menu.c:4879
+msgid "With pixmap arrow"
+msgstr "z narisano pu¹èico"
+
+#: panel/menu.c:4880
+msgid "Without pixmap"
+msgstr "brez narisane pu¹èice"
+
+#: gnome-terminal/gnome-terminal.glade.h:23 panel/menu.c:4881
+msgid "None"
+msgstr "brez"
+
+#: panel/menu.c:4892
+msgid "XX Small (12 pixels)"
+msgstr "zelo zelo majhna (12 pikslov)"
+
+#: panel/menu.c:4893 panel/panel_config.c:1282
+msgid "X Small (24 pixels)"
+msgstr "zelo majhna (24 pikslov)"
+
+#: panel/menu.c:4894 panel/panel_config.c:1290
+msgid "Small (36 pixels)"
+msgstr "majhna (36 pikslov)"
+
+#: panel/menu.c:4895 panel/panel_config.c:1298
+msgid "Medium (48 pixels)"
+msgstr "srednja (48 pikslov)"
+
+#: panel/menu.c:4896 panel/panel_config.c:1306
+msgid "Large (64 pixels)"
+msgstr "velika (64 pikslov)"
+
+#: panel/menu.c:4897 panel/panel_config.c:1314
+msgid "X Large (80 pixels)"
+msgstr "zelo velika (80 pikslov)"
+
+#: panel/menu.c:4898 panel/panel_config.c:1322
+msgid "XX Large (128 pixels)"
+msgstr "zelo zelo velika (128 pikslov)"
+
+#: panel/menu.c:4903 panel/panel_config.c:1594
+msgid "Standard"
+msgstr "obièajno"
+
+#. color frame
+#: panel/menu.c:4904 panel/panel_config.c:1598 panel/panel_config.c:1613
+msgid "Color"
+msgstr "barva"
+
+#: panel/menu.c:4905 panel/panel_config.c:1602
+msgid "Pixmap"
+msgstr "raster"
+
+#: panel/menu.c:4911
+msgid "Below"
+msgstr "pod"
+
+#: panel/menu.c:4913
+msgid "Above"
+msgstr "nad"
+
+#: panel/menu.c:4918
+msgid "Avoid on maximize"
+msgstr "Ogibaj se ob razpenjanju"
+
+#: panel/menu.c:4919
+msgid "Don't avoid on maximize"
+msgstr "Se ne ogibaj ob razpenjanju"
+
+#: panel/menu.c:4923
+msgid "Type"
+msgstr "Naèin"
+
+#: panel/menu.c:4927
+msgid "Hiding policy"
+msgstr "Politika skrivanja"
+
+#: panel/menu.c:4931
+msgid "Hide buttons"
+msgstr "Gumbi za skrivanje"
+
+#: panel/menu.c:4939
+msgid "Orientation"
+msgstr "Usmerjenost"
+
+#: gnome-terminal/gnome-terminal.glade.h:21 panel/menu.c:4943
+msgid "Background type"
+msgstr "Tip ozadja"
+
+#: panel/menu.c:4947
+msgid "Level"
+msgstr "Nivo"
+
+#: panel/menu.c:4951
+msgid "Maximize mode"
+msgstr "Razpet naèin"
+
+#: panel/menu.c:4971
 msgid "Applet"
 msgstr "Vstavek"
 
-#: panel/menu-properties.c:459 panel/menu-properties.c:482 panel/menu.c:3191
+#: panel/menu-properties.c:512 panel/menu-properties.c:534 panel/menu.c:4993
 msgid "Main menu"
 msgstr "Glavni menu"
 
-#: panel/menu.c:3201
+#: panel/menu.c:5003
 msgid "Programs menu"
 msgstr "Menu programov"
 
-#: panel/menu.c:3211
+#: panel/menu.c:5012
+msgid "Favorites menu"
+msgstr "Menu priljubljenih"
+
+#: panel/menu.c:5022
 msgid "Launcher..."
 msgstr "Zaganjalnik..."
 
-#: panel/menu.c:3219
+#: panel/menu.c:5030
 msgid "Launcher from menu"
 msgstr "Zaganjalnik iz menuja"
 
-#: panel/menu.c:3239
+#: panel/menu.c:5050
 msgid "Log out button"
 msgstr "Gumb za odjavo"
 
-#: panel/menu.c:3249
+#: panel/menu.c:5060
 msgid "Lock button"
 msgstr "Gumb za zaklepanje"
 
-#: panel/menu.c:3259
+#: panel/menu.c:5070
+msgid "Run button"
+msgstr "Gumb za zagon"
+
+#: panel/menu.c:5080
 msgid "Swallowed app..."
 msgstr "Pogoltnjen program..."
 
-#: panel/menu.c:3266
+#: panel/menu.c:5087
 msgid "Status dock"
 msgstr "Dok stanja"
 
-#: panel/menu.c:3280
-msgid "Cannot execute panel global properties"
-msgstr "Ne morem izvesti pultovih globalnih lastnosti"
+#: panel/menu.c:5097
+msgid "Test Applet"
+msgstr "Poskusni vstavek"
 
-#: panel/menu.c:3320
-msgid "Remove this panel..."
-msgstr "Odstrani ta pult..."
-
-#: panel/menu.c:3322 panel/menu.c:3370
-msgid "Remove this panel"
-msgstr "Odstrani ta pult"
-
-#: panel/menu.c:3337
-#, fuzzy
-msgid "Cannot launch nautilus!"
-msgstr "Ne morem zagnati programa gmenu!"
-
-#: panel/menu.c:3349
+#: panel/menu.c:5120 panel/menu.c:5125 panel/menu.c:5210
 msgid "Add to panel"
 msgstr "Dodaj pultu"
 
-#: panel/menu.c:3361
-msgid "Create panel"
-msgstr "Ustvari pult"
+#: panel/menu.c:5141
+msgid "Cannot execute panel global properties"
+msgstr "Ne morem izvesti pultovih globalnih lastnosti"
 
-#: panel/menu.c:3398
+#: panel/menu.c:5181
+msgid "Remove this panel..."
+msgstr "Odstrani ta pult..."
+
+#: panel/menu.c:5183 panel/menu.c:5235
+msgid "Remove this panel"
+msgstr "Odstrani ta pult"
+
+#: panel/menu.c:5198
+msgid "Cannot launch gmenu!"
+msgstr "Ne morem zagnati programa gmenu!"
+
+#: panel/menu.c:5251
+msgid "Properties"
+msgstr "Lastnosti"
+
+#: panel/menu.c:5261
+msgid "All properties..."
+msgstr "Vse lastnosti..."
+
+#: panel/menu.c:5276
 msgid "Global Preferences..."
 msgstr "Globalne lastnosti..."
 
-#: panel/menu-properties.c:177 panel/menu.c:3407 panel/menu.c:4048
+#: panel/menu-properties.c:223 panel/menu.c:5285 panel/menu.c:6048
 msgid "Edit menus..."
 msgstr "Uredi menuje..."
 
-#: panel/menu.c:3417
+#: panel/menu.c:5295
 msgid "Reread all menus"
 msgstr "Znova preberi vse menuje"
 
-#: panel/menu.c:3431
+#: panel/menu.c:5309
 msgid "Panel Manual..."
 msgstr "Pultov priroènik..."
 
-#: panel/menu.c:3443
+#: panel/menu.c:5321
 msgid "Cannot execute xscreensaver"
 msgstr "Ne morem pognati programa 'xscreensaver'"
 
-#: panel/menu.c:3462
+#: panel/menu.c:5402
 msgid "About the panel..."
 msgstr "O pultu..."
 
-#: panel/menu.c:3476
+#: panel/menu.c:5416
 msgid "About GNOME..."
 msgstr "O GNOME..."
 
-#: panel/menu.c:3513
+#: panel/menu.c:5459
 msgid "Lock the screen so that you can temporairly leave your computer"
 msgstr "Zakleni zaslon tako, da lahko zaèasno zapustite raèunalnik"
 
-#: panel/menu.c:3526
+#: panel/menu.c:5473
 msgid ""
 "Log out of this session to log in as a different user or to shut down your "
 "computer"
 msgstr ""
 "Odjavi se iz seje, da bi se prijavil kot drug upoabnik ali ugasnil raèunalnik"
 
-#: panel/menu.c:3655
-msgid "Programs"
-msgstr "Programi"
-
-#: panel/menu.c:3672
+#: panel/menu.c:5670
 msgid "Applets"
 msgstr "Vstavki"
 
-#: panel/menu.c:3695
+#: panel/menu.c:5698
 msgid "Execute a command line"
 msgstr "Izvedi ukazno vrstico"
 
-#: panel/menu.c:3772 panel/menu.c:3798 panel/menu.c:3942
-msgid "Main Menu"
-msgstr "Glavni menu"
-
-#: panel/menu.c:3792
+#: panel/menu.c:5793
 msgid "Can't create menu, using main menu!"
 msgstr "Ne morem ustvariti menujev, uporabljam glavni menu!"
 
-#: panel/menu-properties.c:157
+#: panel/menu-properties.c:203
 msgid "Can't open directory, using main menu!"
 msgstr "Ne morem odpreti imenika, uporabljam glavni menu!"
 
-#: panel/menu-properties.c:356
-msgid "Off"
-msgstr "Izklopljeno"
-
-#: panel/menu-properties.c:366
-msgid "In a submenu"
-msgstr "V podmenuju"
-
-#: panel/menu-properties.c:378
+#: panel/menu-properties.c:429
 msgid "On the main menu"
 msgstr "v glavnem menuju"
 
-#: panel/menu-properties.c:415
+#: panel/menu-properties.c:466
 msgid "Menu properties"
 msgstr "Lastnosti menuja"
 
-#: panel/menu-properties.c:438
+#: panel/menu-properties.c:491
 msgid "Menu type"
 msgstr "Tip menuja"
 
-#: panel/menu-properties.c:445
+#: panel/menu-properties.c:498
 msgid "Global main menu"
 msgstr "Globalni glavni menu"
 
-#: panel/menu-properties.c:473 panel/menu-properties.c:536
+#: panel/menu-properties.c:526 panel/menu-properties.c:596
 msgid "Normal menu"
 msgstr "Obièajni menu"
 
-#: panel/menu-properties.c:495
-msgid "Programs: "
-msgstr "Programi: "
-
-#: panel/menu-properties.c:502
-msgid "Applets: "
-msgstr "Vstavki: "
-
-#: panel/menu-properties.c:509
+#: panel/menu-properties.c:569
 msgid "Distribution menu (if found): "
 msgstr "Menu distribucije (èe je najden): "
 
-#: panel/menu-properties.c:516
+#: panel/menu-properties.c:576
 msgid "KDE menu (if found): "
 msgstr "KDE menu (èe je najden): "
 
-#: panel/menu-properties.c:523
+#: panel/menu-properties.c:583
 msgid "Panel menu: "
 msgstr "Pultni menu: "
 
-#: panel/menu-properties.c:530
+#: panel/menu-properties.c:590
 msgid "Desktop menu: "
 msgstr "Namizni menu: "
 
-#: panel/menu-properties.c:546
+#: panel/menu-properties.c:607
 msgid "Menu path"
 msgstr "Pot menuja"
 
-#: panel/menu-properties.c:577
+#: panel/menu-properties.c:638
 msgid "Use custom icon for panel button"
 msgstr "Za gumb pulta uporabi prikrojeno ikono"
 
-#: panel/panel-applet-frame.c:164
-msgid "There was a problem loading the applet."
-msgstr ""
-
-#: panel/panel-applet-frame.c:184
-msgid "Cannot register control widget\n"
-msgstr ""
-
-#: panel/panel-applet-frame.c:373
-msgid "Unable to obtain AppletShell interface from control\n"
-msgstr ""
-
-#: panel/panel.c:947
+#: panel/panel.c:935
 #, c-format
 msgid "Open URL: %s"
 msgstr "Odpri URL: %s"
 
-#: panel/panel.c:2569
-msgid ""
-"No panels were found in your configuration.  I will create a menu panel for "
-"you"
-msgstr ""
-
-#: panel/panel-config.c:537
+#: panel/panel_config.c:674
 msgid "Hiding"
 msgstr "Skrivaj"
 
 #. Auto-hide
-#: panel/panel-config.c:545
+#: panel/panel_config.c:682
 msgid "Enable Auto-hide"
 msgstr "Vkljuèi samodejno skrivanje"
 
 #. Hidebuttons enable
-#: panel/panel-config.c:556
+#: panel/panel_config.c:693
 msgid "Show hide buttons"
 msgstr "Ka¾i gumbe za skrivanje"
 
 #. Arrow enable
-#: panel/panel-config.c:567
+#: panel/panel_config.c:704
 msgid "Show arrows on hide button"
 msgstr "Ka¾i pu¹èice na gumbih za skrivanje"
 
-#: panel/panel-config.c:606
-msgid "Miscellaneous"
-msgstr "Razno"
+#: panel/panel_config.c:752
+msgid "Avoid this panel when maximizing windows"
+msgstr "Ob razpetju oken se temu pultu izogni"
 
-#: panel/panel-config.c:617
+#: panel/panel_config.c:766
 msgid "Current screen:"
 msgstr "Trenutni zaslon:"
 
-#: panel/panel-config.c:676
+#: panel/panel_config.c:825
 msgid "Panel Position"
 msgstr "Mesto pulta"
 
-#: panel/panel-config.c:920
+#: panel/panel_config.c:1075
 msgid "Orient panel horizontally"
 msgstr "Postavi pult vodoravno"
 
-#: panel/panel-config.c:932
+#: panel/panel_config.c:1087
 msgid "Orient panel vertically"
 msgstr "Postavi pult navpièno"
 
-#: panel/panel-config.c:944
+#: panel/panel_config.c:1099
 msgid "Top left corner's position: X"
 msgstr "Mesto zgornjega levega vogala: X"
 
-#: panel/panel-config.c:958
-msgid "Y"
-msgstr "Y"
-
-#: panel/panel-config.c:1032
+#: panel/panel_config.c:1190
 msgid "Offset from screen edge:"
 msgstr "Odmik od roba zaslona:"
 
-#: panel/panel-config.c:1104
+#: panel/panel_config.c:1265
 msgid "Panel size:"
 msgstr "Velikost pulta:"
 
-#: panel/panel-config.c:1113
+#: panel/panel_config.c:1274
 msgid "XX Small Tiny (12 pixels)"
 msgstr "zelo zelo tenka (12 pikslov)"
 
-#: panel/panel-config.c:1121
-msgid "X Small (24 pixels)"
-msgstr "zelo majhna (24 pikslov)"
-
-#: panel/panel-config.c:1129
-msgid "Small (36 pixels)"
-msgstr "majhna (36 pikslov)"
-
-#: panel/panel-config.c:1137
-msgid "Medium (48 pixels)"
-msgstr "srednja (48 pikslov)"
-
-#: panel/panel-config.c:1145
-msgid "Large (64 pixels)"
-msgstr "velika (64 pikslov)"
-
-#: panel/panel-config.c:1153
-msgid "X Large (80 pixels)"
-msgstr "zelo velika (80 pikslov)"
-
-#: panel/panel-config.c:1161
-msgid "XX Large (128 pixels)"
-msgstr "zelo zelo velika (128 pikslov)"
-
-#: panel/panel-config.c:1175
+#: panel/panel_config.c:1336
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3052,72 +4050,81 @@ msgstr ""
 "velikost najveèjega vstavka na pultu (nekateri\n"
 "vstavki ne spo¹tujejo tu nastavljenih velikosti)"
 
-#: panel/panel-config.c:1308
+#: panel/panel_config.c:1401
+msgid "Panel window level:"
+msgstr "Nivo oken pulta:"
+
+#: panel/panel_config.c:1409
+msgid "Default (from global preferences)"
+msgstr "Privzeto (iz globalnih nastavitev)"
+
+#: panel/panel_config.c:1417
+msgid "Above other windows"
+msgstr "Nad drugimi okni"
+
+#: panel/panel_config.c:1433
+msgid "Below other windows"
+msgstr "Pod drugimi okni"
+
+#: panel/panel_config.c:1586
 msgid "Background Type: "
 msgstr "Tip ozadja:"
 
-#: panel/panel-config.c:1316
-msgid "Standard"
-msgstr "obièajno"
-
-#. color frame
-#: panel/panel-config.c:1320 panel/panel-config.c:1335
-msgid "Color"
-msgstr "barva"
-
-#: panel/panel-config.c:1324
-msgid "Pixmap"
-msgstr "raster"
-
-#: panel/panel-config.c:1347
+#: panel/panel_config.c:1625
 msgid "Color to use:"
 msgstr "Uporabi barvo:"
 
-#: panel/panel-config.c:1389
+#. image frame
+#: gnome-terminal/gnome-terminal.glade.h:28 panel/panel_config.c:1647
+msgid "Image"
+msgstr "Slika"
+
+#: panel/panel_config.c:1673
 msgid "Don't scale image to fit"
 msgstr "Ne raztegni slike, da bo ustrezala"
 
-#: panel/panel-config.c:1395
+#: panel/panel_config.c:1679
 msgid "Scale image (keep proportions)"
 msgstr "Raztegni sliko (ohrani razmerja)"
 
-#: panel/panel-config.c:1400
+#: panel/panel_config.c:1684
 msgid "Stretch image (change proportions)"
 msgstr "Raztegni sliko (spremeni razmerja)"
 
-#: panel/panel-config.c:1415
+#: panel/panel_config.c:1699
 msgid "Rotate image for vertical panels"
 msgstr "Obrni sliko pri navpiènih pultih"
 
 #. main window
-#: panel/panel-config.c:1585
+#: panel/panel_config.c:1872
 msgid "Panel properties"
 msgstr "Lastnosti pulta"
 
-#: panel/panel-config.c:1668
+#: panel/panel_config.c:1955
 msgid "Background"
 msgstr "Ozadje"
 
-#: panel/panel-shell.c:51
+#: panel/session.c:256
 msgid ""
-"I've detected a panel already running,\n"
-"and will now exit."
+"An applet is not responding to a save request.\n"
+"Remove the applet or continue waiting?"
 msgstr ""
-"Zaznal sem ¾e pognan pult,\n"
-"zato bom sedaj zakljuèil."
+"Vstavek se ne odziva na zahtevo za shranitev.\n"
+"Odstrani vstavek ali nadaljuj s èakanjem?"
 
-#: panel/panel-shell.c:55
-#, fuzzy, c-format
-msgid ""
-"There was a problem registering the panel with the bonobo-activation "
-"server.\n"
-"The error code is: %d\n"
-"The panel will now exit."
-msgstr ""
-"Pult se ni uspel registrirati pri aktivacijskem stre¾niku bonobo.\n"
-"Pult se bo sedaj zaprl."
+#: panel/session.c:265
+msgid "Remove applet"
+msgstr "Odstrani vstavek"
 
-#: panel/swallow.c:107
+#: panel/session.c:268
+msgid "Continue waiting"
+msgstr "Nadaljuj s èakanjem"
+
+#: panel/session.c:277
+msgid "Timed out on sending session save to an applet"
+msgstr "Èas za shranitev seje vstavka je potekel"
+
+#: panel/swallow.c:106
 msgid ""
 "A swallowed application appears to have died unexpectedly.\n"
 "Attempt to reload it?"
@@ -3125,1353 +4132,162 @@ msgstr ""
 "Zdi se, da je pogoltnjen progra neprièakovano umru.\n"
 "Naj ga poskusim znova nalo¾iti?"
 
-#: panel/swallow.c:115
-msgid "Reload"
-msgstr "Znova nalo¾i"
-
 # TEST za tasuhi
 # msgid "Create swallow applet"
 # msgstr "h hribu k hribu z zrtvijo s zrtvijo"
-#: panel/swallow.c:253
+#: panel/swallow.c:254
 msgid "Create swallow applet"
 msgstr "Naredi pogoltnjen vstavek"
 
-#: panel/swallow.c:272
+#: panel/swallow.c:275
 msgid "Title of application to swallow"
 msgstr "Naziv programa za pogoltniti"
 
-#: panel/swallow.c:282
+#: panel/swallow.c:285
 msgid "Command (optional)"
 msgstr "Ukaz (ni obvezno)"
 
-#: panel/swallow.c:293
+#: panel/swallow.c:296
 msgid "Width"
 msgstr "©irina"
 
-#: panel/swallow.c:306
+#: panel/swallow.c:309
 msgid "Height"
 msgstr "Vi¹ina"
 
-#~ msgid "The session name cannot be empty"
-#~ msgstr "Ime seje ne sme biti prazno"
-
-#~ msgid "The session name already exists"
-#~ msgstr "Ime seje ¾e obstaja"
-
-#~ msgid "Add a new session"
-#~ msgstr "Dodaj novo sejo"
-
-#~ msgid "Edit session name"
-#~ msgstr "Uredi ime seje"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Ka¾i zaèetni zaslon ob prijavi"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Vpra¹aj ob odjavi"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Samodejno shrani spremembe seje"
-
-#~ msgid "Choose Current Session"
-#~ msgstr "Izberi trenutno sejo"
-
-#~ msgid "Session Name"
-#~ msgstr "Ime seje"
-
-#~ msgid "Add..."
-#~ msgstr "Dodaj..."
-
-#~ msgid "Edit..."
-#~ msgstr "Uredi..."
-
-#~ msgid "Delete"
-#~ msgstr "Zbri¹i"
-
-#~ msgid "Session Options"
-#~ msgstr "Mo¾nosti seje"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Zaèetni programi, ki niso del seje"
-
-#~ msgid "Priority"
-#~ msgstr "Prioriteta"
-
-#~ msgid "Command"
-#~ msgstr "Ukaz"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Brskaj po trenutno pognanih programih..."
-
-#~ msgid "Startup Programs"
-#~ msgstr "Programi ob zaèetku"
-
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-*-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-240-*-*-p-*-iso8859-2"
-
-#~ msgid "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-8-*-*-*-p-*-iso8859-2"
-
-#~ msgid "Startup Command"
-#~ msgstr "Zaèetni ukaz"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Programi z manj¹imi vrednostmi so pognani pred programi z veèjimi. "
-#~ "Privzeta vrednost bi morala ustrezati"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Zagonski ukaz ne more biti prazen"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Dodaj zaèetni program"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Uredi zaèetni program"
-
-#, fuzzy
-#~ msgid "(c) 2001 the Free Software Foundation"
-#~ msgstr "(c) 1998-2001 Fundacija za prosto programje"
-
-#~ msgid "level"
-#~ msgstr "nivo"
-
-#~ msgid ""
-#~ "Cannot execute the gmc-client program,\n"
-#~ "perhaps gmc is not installed"
-#~ msgstr ""
-#~ "Ne morem pognati programa gmc-client,\n"
-#~ "morda gmc ni name¹èen"
-
-#~ msgid "News (www)"
-#~ msgstr "Novice (splet)"
-
-#~ msgid "http://gnotices.gnome.org/gnome-news/"
-#~ msgstr "http://gnotices.gnome.org/gnome-news/"
-
-#~ msgid "FAQ (www)"
-#~ msgstr "FAQ (splet)"
-
-#~ msgid "http://www.gnome.org/gnomefaq/html/"
-#~ msgstr "http://www.gnome.org/gnomefaq/html/"
-
-#~ msgid "Mailing Lists (www)"
-#~ msgstr "Dopisni seznami (splet)"
-
-#~ msgid "http://mail.gnome.org/mailman/listinfo/"
-#~ msgstr "http://mail.gnome.org/mailman/listinfo/"
-
-#~ msgid "Software (www)"
-#~ msgstr "Programje (splet)"
-
-#~ msgid "http://www.gnome.org/applist/list-martin.phtml"
-#~ msgstr "http://www.gnome.org/applist/list-martin.phtml"
-
-#~ msgid "Development (www)"
-#~ msgstr "Razvoj (splet)"
-
-#~ msgid "http://developer.gnome.org/"
-#~ msgstr "http://developer.gnome.org/"
-
-#~ msgid "Bug Tracking System (www)"
-#~ msgstr "Sistem sledenja hro¹èem (splet)"
-
-#~ msgid "http://bugs.gnome.org/"
-#~ msgstr "http://bugs.gnome.org/"
-
-#~ msgid "By Name"
-#~ msgstr "Po imenu"
-
-#~ msgid "By Type"
-#~ msgstr "Po vrsti"
-
-#~ msgid "By Size"
-#~ msgstr "Po velikosti"
-
-#~ msgid "By Time Last Accessed"
-#~ msgstr "Po èasu zadnjega dostopa"
-
-#~ msgid "By Time Last Modified"
-#~ msgstr "Po èasu zadnje modifikacije"
-
-#~ msgid "By Time Last Changed"
-#~ msgstr "Po èasu zadnje spremembe"
-
-#~ msgid "Arrange Icons"
-#~ msgstr "Uredi ikone"
-
-#~ msgid "Rescan Desktop Directory"
-#~ msgstr "Osve¾i namizni imenik"
-
-#~ msgid "Rescan Desktop Devices"
-#~ msgstr "Osve¾i namizne naprave"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Zakleni zaslon"
-
-#~ msgid " Desktop "
-#~ msgstr " Namizje "
-
-#~ msgid "can't fine real path"
-#~ msgstr "ne morem najti resniène poti"
-
-#~ msgid "Favorites"
-#~ msgstr "Priljubljeni"
-
-#~ msgid "Available Programs"
-#~ msgstr "Programi na voljo"
-
-#~ msgid "Description"
-#~ msgstr "Opis"
-
-#~ msgid "Add this program to Favorites"
-#~ msgstr "Dodaj ta program med priljubljene"
-
-#~ msgid "Cannot create an item with an empty command"
-#~ msgstr "Nisem mogel ustvariti predmeta s praznim ukazom"
-
-#~ msgid "Could not get file from path: %s"
-#~ msgstr "Ne morem dobiti datoteke s poti: %s"
-
-#~ msgid "Could not open .order file: %s"
-#~ msgstr "Nisem mogel odpreti datoteke .order: %s"
-
-#~ msgid "Could not open file '%s' for writing"
-#~ msgstr "Nisem mogel odpreti datoteke '%s' za pisanje"
-
-#~ msgid ""
-#~ "Could not open .order file: %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nisem mogel odpreti datoteke \".order\": %s\n"
-#~ "%s"
-
-#~ msgid "Could not remove old order file %s: %s\n"
-#~ msgstr "Nisem mogel odstraniti stare datoteke \"order\" %s: %s\n"
-
-#~ msgid ""
-#~ "Could not rename tmp file: %s to %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nisem mogel preimenovati zaèasne datoteke: %s v %s\n"
-#~ "%s"
-
-#~ msgid "Add this to Favorites menu"
-#~ msgstr "Dodaj v menu priljubljenih"
-
-#~ msgid "Add from menu"
-#~ msgstr "Dodaj iz menuja"
-
-#~ msgid " (empty)"
-#~ msgstr " (prazno)"
-
-#~ msgid "Favorites menu"
-#~ msgstr "Menu priljubljenih"
-
-#~ msgid "Run button"
-#~ msgstr "Gumb za zagon"
-
-#~ msgid "Favorites: "
-#~ msgstr "Priljubljeni: "
-
-#~ msgid "Avoid this panel when maximizing windows"
-#~ msgstr "Ob razpetju oken se temu pultu izogni"
-
-#~ msgid "Panel window level:"
-#~ msgstr "Nivo oken pulta:"
-
-#~ msgid "Default (from global preferences)"
-#~ msgstr "Privzeto (iz globalnih nastavitev)"
-
-#~ msgid "Above other windows"
-#~ msgstr "Nad drugimi okni"
-
-#~ msgid "Below other windows"
-#~ msgstr "Pod drugimi okni"
-
-#~ msgid ""
-#~ "An applet is not responding to a save request.\n"
-#~ "Remove the applet or continue waiting?"
-#~ msgstr ""
-#~ "Vstavek se ne odziva na zahtevo za shranitev.\n"
-#~ "Odstrani vstavek ali nadaljuj s èakanjem?"
-
-#~ msgid "Remove applet"
-#~ msgstr "Odstrani vstavek"
-
-#~ msgid "Continue waiting"
-#~ msgstr "Nadaljuj s èakanjem"
-
-#~ msgid "Timed out on sending session save to an applet"
-#~ msgstr "Èas za shranitev seje vstavka je potekel"
-
-#~ msgid "Panel to add the launcher to"
-#~ msgstr "Pult, ki naj mu bo dodan zaganjalnik"
-
-#~ msgid "NUMBER"
-#~ msgstr "©TEVILKA"
-
-#~ msgid "Position to add the launcher to"
-#~ msgstr "Polo¾aj, kamor naj bo dodan zaganjalnik"
-
-#~ msgid "The argument is a url to add, not a .desktop file"
-#~ msgstr "Argument je url, ki naj se doda, ne datoteka .desktop"
-
-#~ msgid ""
-#~ "You must supply a single argument with the .desktop file or url to use\n"
-#~ msgstr ""
-#~ "Navesti morate en sam argument z datoteko .desktop ali url-jem, ki naj se "
-#~ "uporabi\n"
-
-#~ msgid "No panel found\n"
-#~ msgstr "Noben pult ni bil najden\n"
-
-#~ msgid "Layout"
-#~ msgstr "Postavitev"
-
-#~ msgid "Show tasklist arrow"
-#~ msgstr "Ka¾i pu¹èico seznama poslov"
-
-#~ msgid "Switch horizontal/vertical position of tasklist arrow"
-#~ msgstr ""
-#~ "Preklopi med vodoravno in navpièno postavitvijo pu¹èice seznama poslov"
-
-#~ msgid "Only show current desktop in pager"
-#~ msgstr "V vodniku po namizju ka¾i le trenutno namizje"
-
-#~ msgid "Raise area grid over tasks"
-#~ msgstr "Mre¾a naj bo nad posli"
-
-#~ msgid "Thumb Nails"
-#~ msgstr "Slièice"
-
-#~ msgid "Fill window thumbnails with screen contents"
-#~ msgstr "Slièice naj bodo pomanj¹ane slike delovnih povr¹in"
-
-#~ msgid "Incremental update delay [ms]"
-#~ msgstr "Premor med postopnim obnavljanjem [ms]"
-
-#~ msgid "Tooltips"
-#~ msgstr "Namigi"
-
-#~ msgid "Show Desk-Guide tooltips"
-#~ msgstr "Ka¾i namige Vodnika po namizju"
-
-#~ msgid "Desk-Guide tooltip delay [ms]"
-#~ msgstr "Premor pred prikazom namigov Vodnika po namizju [ms]"
-
-#~ msgid "Show desktop name tooltips"
-#~ msgstr "Ka¾i namige imen namizij"
-
-#~ msgid "Desktop name tooltip delay [ms]"
-#~ msgstr "Premor pred prikazom namigov imen namizij [ms]"
-
-#~ msgid "Tasks"
-#~ msgstr "Posli"
-
-#~ msgid "Visibility"
-#~ msgstr "Vidnost"
-
-#~ msgid "Show hidden tasks (HIDDEN)"
-#~ msgstr "Ka¾i skrite posle (HIDDEN)"
-
-#~ msgid "Show shaded tasks (SHADED)"
-#~ msgstr "Ka¾i zasenèene posle (SHADED)"
-
-#~ msgid "Show tasks which hide from window list (SKIP-WINLIST)"
-#~ msgstr "Ka¾i posle, ki se skrivajo pred upravljalnik oken (SKIP-WINLIST)"
-
-#~ msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
-#~ msgstr "Ka¾i posle, ki se skrivajo pred seznamom poslov (SKIP-TASKBAR)"
-
-#~ msgid "Geometry"
-#~ msgstr "Geometrija"
-
-#~ msgid "Horizontal Layout"
-#~ msgstr "Vodoravna postavitev"
-
-#~ msgid "Desktop Height [pixels]"
-#~ msgstr "Vi¹ina namizja [v pikslih]"
-
-#~ msgid "Override desktop height with panel size"
-#~ msgstr "Obidi vi¹ino namizja z velikostjo pulta"
-
-#~ msgid "Divide height by number of vertical areas"
-#~ msgstr "Deli vi¹ino s ¹tevilom navpiènih obmoèij"
-
-#~ msgid "Rows of Desktops"
-#~ msgstr "©tevilo vrstic namizij"
-
-#~ msgid "Divide height by number of rows"
-#~ msgstr "Deli vi¹ino s ¹tevilom vrstic"
-
-#~ msgid "Vertical Layout"
-#~ msgstr "Navpièna postavitev"
-
-#~ msgid "Desktop Width [pixels]"
-#~ msgstr "©irina namizja [v pikslih]"
-
-#~ msgid "Override desktop width with panel size"
-#~ msgstr "Obidi ¹irino namizja z velikostjo pulta"
-
-#~ msgid "Divide width by number of horizontal areas"
-#~ msgstr "Deli ¹irino s ¹tevilom vodoravnih obmoèij"
-
-#~ msgid "Columns of Desktops"
-#~ msgstr "©tevilo stolpcev namizij"
-
-#~ msgid "Divide width by number of columns"
-#~ msgstr "Deli ¹irino s ¹tevilom stolpcev"
-
-#~ msgid "Window Manager Workarounds"
-#~ msgstr "Popravki k upravljalnikom oken"
-
-#~ msgid ""
-#~ "Window manager moves decoration window instead\n"
-#~ "(AfterStep, Enlightenment, FVWM, IceWM)"
-#~ msgstr ""
-#~ "Upravljalnik oken premika dekoracijsko okno\n"
-#~ "(AfterStep, Enlightenment, FVWM, IceWM)"
-
-#~ msgid ""
-#~ "Window manager changes active area on all desktops\n"
-#~ "(FVWM, Sawfish)"
-#~ msgstr ""
-#~ "Upravljalnik oken spremennja aktivno podorèje na vseh namizjih\n"
-#~ "(FVWM, Sawfish)"
-
-#~ msgid ""
-#~ "Window manager expects pager to modify area+desktop properties directly\n"
-#~ "(Enlightenment, FVWM)"
-#~ msgstr ""
-#~ "Upravljalnik oken prièakuje, da bo pager neposredno spremenil lastnosti "
-#~ "podroèja in namizja\n"
-#~ "(Enlightenment, FVWM)"
-
-#~ msgid "Behaviour"
-#~ msgstr "Obna¹anje"
-
-#~ msgid "Popdown task view automatically"
-#~ msgstr "Samodejno prika¾i pregled poslov"
-
-#~ msgid "GNOME Desktop Guide (Pager)"
-#~ msgstr "GNOME Vodnik po namizju (pager)"
-
-#~ msgid ""
-#~ "You are not running a GNOME Compliant\n"
-#~ "Window Manager. GNOME support by the \n"
-#~ "window manager is strongly recommended\n"
-#~ "for proper Desk Guide operation."
-#~ msgstr ""
-#~ "Trenutno ne teèe GNOME prilagojen\n"
-#~ "upravljalnik oken. GNOME podpora s\n"
-#~ "strani upravljalnika oken je priporoèena\n"
-#~ "za pravilno delovanje vodnika po namizju."
-
-#~ msgid "Desk Guide Alert"
-#~ msgstr "Opozorilo Vodnika po namizju"
-
-#~ msgid "Desk Guide Task View"
-#~ msgstr "Pregled poslov Vodnika po namizju"
-
-#~ msgid "Global"
-#~ msgstr "Globalno"
-
-#~ msgid "Desk Guide Settings"
-#~ msgstr "Nastavitve Vodnika po namizju"
-
-#~ msgid "Can't create applet!\n"
-#~ msgstr "Ne morem ustvariti vstavka!\n"
-
-#~ msgid "Check for mail"
-#~ msgstr "Preveri za po¹to"
-
-#~ msgid "Can't execute printer command"
-#~ msgstr "Ne morem izvr¹iti ukaza za tiskanje"
-
-#~ msgid "Printer properties"
-#~ msgstr "Lastnosti tiskalnika"
-
-#~ msgid "Printer name:"
-#~ msgstr "Ime tiskalnika:"
-
-#~ msgid "Print command:"
-#~ msgstr "Ukaz za tiskanje:"
-
-#~ msgid "Printer"
-#~ msgstr "Tiskalnik"
-
-#~ msgid "(c) 1998 the Free Software Foundation"
-#~ msgstr "(c) 1998 Fundacija za prosto programje"
-
-#~ msgid ""
-#~ "The printer applet lets you easily drag files to be printed via a print "
-#~ "command"
-#~ msgstr ""
-#~ "Tiskalni¹ki vstavek omogoèa enostavno spu¹èanje datotek na tiskalnik "
-#~ "skozi ukaz za tiskanje"
-
-#~ msgid "Copyright (C) 1999 Anders Carlsson"
-#~ msgstr "Avtorske pravice pridr¾ane (C) 1999 Anders Carlsson"
-
-#~ msgid ""
-#~ "A tasklist for the GNOME desktop environment.\n"
-#~ "Icons by Tuomas Kuosmanen (tigert@gimp.org)."
-#~ msgstr ""
-#~ "Seznam poslov za namizje GNOME.\n"
-#~ "Ikone naredil Tuomas Kuosmanen (tigert@gimp.org)."
-
-#~ msgid "Tasklist: Unable to create applet widget"
-#~ msgstr "Seznam poslov: Ne morem ustvariti gradnika vstavek"
-
-#~ msgid "Don't know how to activate `%s'\n"
-#~ msgstr "Ne znam aktivirati `%s'\n"
-
-#~ msgid ""
-#~ "Warning! Unsaved changes will be lost!\n"
-#~ "Proceed?"
-#~ msgstr ""
-#~ "Opozorilo! Spremembe, ki jih niste shranili, bodo izgubljene!\n"
-#~ "Naj nadaljujem?"
-
-#~ msgid "Restore"
-#~ msgstr "Obnovi"
-
-#~ msgid "Iconify"
-#~ msgstr "Skrèi v ikono"
-
-#~ msgid "Unshade"
-#~ msgstr "Odsenèi"
-
-#~ msgid "Shade"
-#~ msgstr "Zasenèi"
-
-#~ msgid "Unstick"
-#~ msgstr "Odlepi"
-
-#~ msgid "Stick"
-#~ msgstr "Prilepi"
-
-#~ msgid "To desktop"
-#~ msgstr "Na namizje"
-
-#~ msgid "Close window"
-#~ msgstr "Zapri okno"
-
-#~ msgid "Kill app"
-#~ msgstr "Ubij program"
-
-#~ msgid "Restore All"
-#~ msgstr "Obnovi vse"
-
-#~ msgid "Iconify All"
-#~ msgstr "Skrèi vse"
-
-#~ msgid "Unshade All"
-#~ msgstr "Odsenèi vse"
-
-#~ msgid "Shade All"
-#~ msgstr "Zasenèi vse"
-
-#~ msgid "Unstick All"
-#~ msgstr "Odlepi vse"
-
-#~ msgid "Stick All"
-#~ msgstr "Prilepi vse"
-
-#~ msgid "Close All"
-#~ msgstr "Zapri vse"
-
-#~ msgid "Kill All"
-#~ msgstr "Ubij vse"
-
-#~ msgid "Follow panel size"
-#~ msgstr "Sledi velikosti pulta"
-
-#~ msgid "Tasklist width:"
-#~ msgstr "©irina seznama poslov:"
-
-#~ msgid "Rows of tasks:"
-#~ msgstr "Vrstic poslov:"
-
-#~ msgid "Default task size:"
-#~ msgstr "Privzeta velikost posla:"
-
-#~ msgid "Tasklist width is fixed"
-#~ msgstr "Stalna ¹irina seznama poslov"
-
-#~ msgid "Tasklist width is dynamic"
-#~ msgstr "Dinamièna ¹irina seznama poslov"
-
-#~ msgid "Only use empty space"
-#~ msgstr "Uporabi le prazen prostor"
-
-#~ msgid "Vertical"
-#~ msgstr "Navpièno"
-
-#~ msgid "Tasklist height:"
-#~ msgstr "Vi¹ina seznama poslov:"
-
-#~ msgid "Tasklist height is fixed"
-#~ msgstr "Stalna vi¹ina seznama poslov"
-
-#~ msgid "Tasklist height is dynamic"
-#~ msgstr "Dinamièna vi¹ina seznama poslov"
-
-#~ msgid "Tasklist width is that of longest title"
-#~ msgstr "©irina seznama poslov je enaka najdalj¹emu imenu"
-
-#~ msgid "Which tasks to show"
-#~ msgstr "Katere posle naj ka¾em"
-
-#~ msgid "Show normal applications"
-#~ msgstr "Ka¾i obièajne programe"
-
-#~ msgid "Show iconified (minimized) applications"
-#~ msgstr "Ka¾i skrèene (pomanj¹ane) programe"
-
-#~ msgid "Show normal applications on all desktops"
-#~ msgstr "Ka¾i obièajne programe na vseh namizjih"
-
-#~ msgid "Show iconified (minimized) applications on all desktops"
-#~ msgstr "Ka¾i skrèene (pomanj¹ane) programe na vseh namizjih"
-
-#~ msgid "Show mini icons"
-#~ msgstr "Ka¾i mini ikone"
-
-#~ msgid "Confirm before killing windows"
-#~ msgstr "Zahtevaj potrditev pred ubijanjem oken"
-
-#~ msgid "Move iconified tasks to current workspace when restoring"
-#~ msgstr "Ob obnovitvi premakni pomanj¹ana okna na trenutno delovno povr¹ino"
-
-#~ msgid "Display tooltips with full task names"
-#~ msgstr "Ka¾i namige s polnimi imeni poslov"
-
-#~ msgid "Enable task grouping"
-#~ msgstr "Vkljuèi zdru¾evanje poslov"
-
-#~ msgid "Number of tasks before grouping occurs"
-#~ msgstr "©tevilo poslov preden se zaène zdru¾evanje"
-
-#~ msgid "Sink tasklist into panel"
-#~ msgstr "Potopi seznam poslov v pult"
-
-#~ msgid "Tasklist properties"
-#~ msgstr "Lastnosti seznama poslov"
-
-#~ msgid "Save"
-#~ msgstr "Shrani"
-
-#~ msgid "Favorites (user menus)"
-#~ msgstr "Priljubljeni (uporabni¹ki menuji)"
-
-#~ msgid "Programs (system menus)"
-#~ msgstr "Programi (sistemski menuji)"
-
-#~ msgid "Applets (system menus)"
-#~ msgstr "Vstavki (sistemski menuji)"
-
-#~ msgid "Programs to be merged in (system menus)"
-#~ msgstr "Programi naj se zdru¾ijo v (sistemski menuji)"
-
-#~ msgid "_New Submenu..."
-#~ msgstr "_Nov podmenu..."
-
-#~ msgid "Create a new submenu"
-#~ msgstr "Ustvari uporani¹ki podmenu"
-
-#~ msgid "New _Item..."
-#~ msgstr "Nov _predmet..."
-
-#~ msgid "Create a new menu item"
-#~ msgstr "Ustvari nov predmet"
-
-#~ msgid "_Delete..."
-#~ msgstr "_Zbri¹i..."
-
-#~ msgid "_Sort Submenu"
-#~ msgstr "Uredi _podmenu"
-
-#~ msgid "Sort Submenu _Recursive"
-#~ msgstr "Uredi podmenu _rekurzivno"
-
-#~ msgid "_Sort"
-#~ msgstr "_Uredi"
-
-#~ msgid "New Submenu"
-#~ msgstr "Nov podmenu"
-
-#~ msgid "New Item"
-#~ msgstr "Nov predmet"
-
-#~ msgid "Create a new item"
-#~ msgstr "Ustvari nov predmet"
-
-#~ msgid "Delete selected menu item"
-#~ msgstr "Zbri¹i izbran predmet"
-
-#~ msgid "Move up"
-#~ msgstr "Premakni navzgor"
-
-#~ msgid "Move selected menu up"
-#~ msgstr "Premakni izbran menu navzgor"
-
-#~ msgid "Move down"
-#~ msgstr "Premakni navzdol"
-
-#~ msgid "Move selected menu down"
-#~ msgstr "Premakni izbran menu navzdol"
-
-#~ msgid "Sort Submenu"
-#~ msgstr "Uredi podmenu"
-
-#~ msgid "Sort selected submenu"
-#~ msgstr "Uredi izbran podmenu"
-
-#~ msgid "Sort _Recursive"
-#~ msgstr "Uredi _rekurzivno"
-
-#~ msgid "GNOME menu editor"
-#~ msgstr "GNOME urejevalnik menujev"
-
-#~ msgid ""
-#~ "Released under the terms of the GNU Public License.\n"
-#~ "GNOME menu editor."
-#~ msgstr ""
-#~ "Izdano pod pogoji GNU Javne Licence.\n"
-#~ "GNOME urejevalnik menujev."
-
-#~ msgid "Unable to retrieve GNOME installation directory\n"
-#~ msgstr "Ne uspem ugotoviti imenika v katerem je name¹èen GNOME\n"
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Ne morem ustvariti datoteke: %s\n"
-
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "ne morem odstraniti .order datoteke: %s\n"
-
-#~ msgid "The menu item must have a name"
-#~ msgstr "Predmet v menuju mora imeti ime"
-
-#~ msgid "The menu entry must have a filename"
-#~ msgstr "Predmet v menuju mora imeti datoteko"
-
-#~ msgid "Save changes?"
-#~ msgstr "Shrani spremembe?"
-
-#~ msgid "This change conflicts with an existing menu item"
-#~ msgstr "Ta sprememba se ne sklada z ¾e obstojeèim predmetom menuja"
-
-#~ msgid "Overwrite existing menu entry?"
-#~ msgstr "Prepi¹i obstojeèi predmet v menuju"
-
-#~ msgid ""
-#~ "This change conflicts with an existing menu item.\n"
-#~ "No two menu items in a submenu can have the same name."
-#~ msgstr ""
-#~ "Ta sprememba se ne sklada z ¾e obstojeèim predmetom menuja.\n"
-#~ "Nobena predmeta istega podmenuja ne moreta imeti enakega imena."
-
-#~ msgid "One moment, reading menus..."
-#~ msgstr "Trenutek, berem menuje..."
-
-#~ msgid "Top of user menus"
-#~ msgstr "Vrh uporabni¹kih menujev"
-
-#~ msgid "Top of system menus"
-#~ msgstr "Vrh sistemskih menujev"
-
-#~ msgid "Top of system merge menus"
-#~ msgstr "Vrh zdru¾enih sistemskih menujev"
-
-#~ msgid "Top of applet menus"
-#~ msgstr "Vrh menujev vstavkov"
-
-#~ msgid "You can not delete a top level submenu."
-#~ msgstr "Ne more¹ zbrisati vrhnjega podmenuja."
-
-#~ msgid "Delete this menu item?"
-#~ msgstr "Zbri¹i ta menujski predmet"
-
-#~ msgid "Delete empty submenu?"
-#~ msgstr "Zbri¹i prazni podmenu"
-
-#~ msgid "Are you sure you want to delete this submenu and all its contents?"
-#~ msgstr "Si preprièan, da ¾eli¹ zbrisati ta podmenu in vso njegovo vsebino?"
-
-#~ msgid ""
-#~ "You can't add an entry to that submenu.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Ne morete dodati vnosa v ta podmenu.\n"
-#~ "Nimate ustreznih dovoljenj."
-
-#~ msgid "New Folder"
-#~ msgstr "Nova mapa"
-
-#~ msgid "Failed to create directory"
-#~ msgstr "Ustvarjanje imenika je spodletelo"
-
-#~ msgid "untitled.desktop"
-#~ msgstr "neimenovan.desktop"
-
-#~ msgid "untitled"
-#~ msgstr "neimenovan"
-
-#~ msgid "creating user directory: %s\n"
-#~ msgstr "ustvarjam uporabni¹ki imenik: %s\n"
-
-#~ msgid "unable to create user directory: %s\n"
-#~ msgstr "ne morem ustvariti uporabni¹kega imenika: %s\n"
-
-#~ msgid ""
-#~ "Error during execution of chosen editor.\n"
-#~ "\n"
-#~ "The editor you have chosen is probably either not available,\n"
-#~ "or is not on your current path."
-#~ msgstr ""
-#~ "Napaka med izvajanjem izbranega urejevalnika.\n"
-#~ "\n"
-#~ "Urejevalnik verjetno ni na voljo ali,\n"
-#~ "pa ga ni v trenutni poti."
-
-#~ msgid ""
-#~ "Alternate editor types are not supported by gnome-edit yet.\n"
-#~ "Please choose a standard executable editor in the gnome-edit capplet\n"
-#~ "in the gnome control center."
-#~ msgstr ""
-#~ "Gnome-edit ¹e ne podpira drugih tipov uirejevalnikov.\n"
-#~ "Prosim izberite standarden urejevalnik v gnome-edit vstavku\n"
-#~ "v gnome kontrolnem centru."
-
-#~ msgid "Start in hint browsing mode"
-#~ msgstr "Prièni v naèinu \"brskanje po namigih\""
-
-#~ msgid "Start in motd mode"
-#~ msgstr "Prièni v naèinu \"sporoèilo dneva\""
-
-#~ msgid "Start in fortune mode"
-#~ msgstr "Prièni v naèinu \"fortune\""
-
-#~ msgid "Start in session login mode (used from gsm)"
-#~ msgstr "Prièni v naèinu \"prijava na sejo\" (za gnome upravljalnik sej)"
-
-#~ msgid ""
-#~ "Click on the GNOME foot icon to open the\n"
-#~ "Main Menu.  This menu contains all\n"
-#~ "GNOME applications, tools, and commands."
-#~ msgstr ""
-#~ "Kliknite na ikono nog, ki odpre\n"
-#~ "glavni menu.  Ta menu vsebuje vse\n"
-#~ "programe, orodja in ukaze GNOME."
-
-#~ msgid "You do not have fortune installed."
-#~ msgstr "Programa \"fortune\" nimate name¹èenega."
-
-#~ msgid "fixed"
-#~ msgstr "stalen"
-
-#~ msgid "Fortune"
-#~ msgstr "Fortune"
-
-#~ msgid "Message of The Day"
-#~ msgstr "Sporoèilo dneva"
-
-#~ msgid "GNOME Hints"
-#~ msgstr "Namigi GNOME"
-
-#~ msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
-#~ msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-iso8859-2"
-
-#~ msgid ""
-#~ "You've chosen to disable the startup hint.\n"
-#~ "To re-enable it, choose \"Startup Hint\"\n"
-#~ "in the GNOME Control Center"
-#~ msgstr ""
-#~ "Odloèili ste se izkljuèiti zaèetne namige.\n"
-#~ "Da bi jih znova vkljuèili, izberite \"Zaèetni namig\"\n"
-#~ "v Kontrolnem centru GNOME"
-
-#~ msgid "No message of the day found!"
-#~ msgstr "Nobeno sporoèilo dneva ni bilo najdeno!"
-
-#~ msgid "Gnome hint"
-#~ msgstr "Gnome namig"
-
-#~ msgid "Display this dialog next time"
-#~ msgstr "Prika¾i ta dialog tudi prihodnjiè"
-
-#~ msgid "Enable login hints"
-#~ msgstr "Vkljuèi namige ob prijavi"
-
-#~ msgid "Display normal hints"
-#~ msgstr "Ka¾i obièajne namige"
-
-#~ msgid "Display fortunes instead of hints"
-#~ msgstr "Namesto namigov ka¾i sporoèila 'fortune'"
-
-#~ msgid "Display message of the day instead of hints"
-#~ msgstr "Namesto namigov ka¾i sporoèilo dneva"
-
-#~ msgid "Message of the day file to use: "
-#~ msgstr "Datoteka s sporoèilom dneva: "
-
-#~ msgid "Bookmark"
-#~ msgstr "Zaznamek"
-
-#~ msgid "Page Title"
-#~ msgstr "Naslov strani"
-
-#~ msgid "Gnome Help Bookmarks"
-#~ msgstr "Zaznamki pomoèi GNOME"
-
-#~ msgid "X position of window"
-#~ msgstr "X pozicija okna"
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "Y position of window"
-#~ msgstr "Y pozicija okna"
-
-#~ msgid "Width of window"
-#~ msgstr "©irina okna"
-
-#~ msgid "WIDTH"
-#~ msgstr "©IRINA"
-
-#~ msgid "Height of window"
-#~ msgstr "Vi¹ina okna"
-
-#~ msgid "HEIGHT"
-#~ msgstr "VI©INA"
-
-#~ msgid "Debug level"
-#~ msgstr "Stopnja razhro¹èevanja"
-
-#~ msgid "Gnome Help Browser"
-#~ msgstr "Gnome brskalnik pomoèi"
-
-#~ msgid ""
-#~ "GNOME Help Browser allows easy access to various forms of documentation "
-#~ "on your system"
-#~ msgstr ""
-#~ "GNOME brskalnik po pomoèi omogoèa enostaven dostop do razliènih oblik "
-#~ "dokumentacije na va¹em sistemu"
-
-#~ msgid "History size"
-#~ msgstr "Velikost zgodovine"
-
-#~ msgid "History file"
-#~ msgstr "Datoteka zgodovine"
-
-#~ msgid "Cache size"
-#~ msgstr "Velikost predpomnilnika"
-
-#~ msgid "Cache file"
-#~ msgstr "Datoteka predpomnilnika"
-
-#~ msgid "Bookmark file"
-#~ msgstr "Datoteka z zaznamki"
-
-#~ msgid "Man Path"
-#~ msgstr "Pot do programa man"
-
-#~ msgid "Info Path"
-#~ msgstr "Pot do programa info"
-
-#~ msgid "GNOME Help Path"
-#~ msgstr "Pot do GNOME pomoèi"
-
-#~ msgid "Gnome Help Configure"
-#~ msgstr "Nastavi GNOME pomoè"
-
-#~ msgid "History and cache"
-#~ msgstr "Zgodovina in predpomnilnik"
-
-#~ msgid "Paths"
-#~ msgstr "Poti"
-
-#~ msgid "<body><h2>Error: file not found</h2></body>"
-#~ msgstr "<body><h2>Napaka: datoteka ni bila najdena</h2></body>"
-
-#~ msgid "%b %d, %Y %H:%M"
-#~ msgstr "%d %b, %Y %H:%M"
-
-#~ msgid "Count"
-#~ msgstr "©tevec"
-
-#~ msgid "Gnome Help History"
-#~ msgstr "Gnome zgodovina pomoèi"
-
-#~ msgid "<BODY BGCOLOR=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
-#~ msgstr "<BODY BGCOLOR=\"#FFFFFF\"><h1>Kazalo vsebine</h1>\n"
-
-#~ msgid "<h2>Man Pages</h2>\n"
-#~ msgstr "<h2>Man Strani</h2>\n"
-
-#~ msgid "<body bgcolor=\"#FFFFFF\"><h1>Table of Contents</h1>\n"
-#~ msgstr "<body bgcolor=\"#FFFFFF\"><h1>Kazalo vsebine</h1>\n"
-
-#~ msgid "<h2>Info Pages</h2>\n"
-#~ msgstr "<h2>Info strani</h2>\n"
-
-#~ msgid "<h2>GNOME Help</h2>\n"
-#~ msgstr "<h2>GNOME pomoè</h2>\n"
-
-#~ msgid ""
-#~ "<HTML>\n"
-#~ "<BODY BGCOLOR=\"#ffffff\">\n"
-#~ "<H2>Results of the substring search for the string "
-#~ msgstr ""
-#~ "<HTML>\n"
-#~ "<BODY BGCOLOR=\"#ffffff\">\n"
-#~ "<H2>Rezultati iskanja podniza "
-
-#~ msgid ""
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>Manual Pages</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-#~ msgstr ""
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>Priroènikove strani</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>GNU Info Pages</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-#~ msgstr ""
-#~ "\n"
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>GNU Info strani</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>GNOME Help Pages</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-#~ msgstr ""
-#~ "\n"
-#~ "<p>\n"
-#~ "<br>\n"
-#~ "<H3>Strani z GNOME pomoèjo</H3>\n"
-#~ "<p>\n"
-#~ "<UL>\n"
-
-#~ msgid "<br><B>No matches found</B>\n"
-#~ msgstr "<br><B>Ni zadetkov</B>\n"
-
-#~ msgid "User Commands"
-#~ msgstr "Uporabni¹ki ukazi"
-
-#~ msgid "System Calls"
-#~ msgstr "Sistemski klici"
-
-#~ msgid "Library Functions"
-#~ msgstr "Funkcije iz knji¾nic"
-
-#~ msgid "Special Files"
-#~ msgstr "Posebne datoteke"
-
-#~ msgid "File Formats"
-#~ msgstr "Datoteèni formati"
-
-#~ msgid "Games"
-#~ msgstr "Igre"
-
-#~ msgid "Administration"
-#~ msgstr "Administracija"
-
-#~ msgid "man9"
-#~ msgstr "man9"
-
-#~ msgid "mann"
-#~ msgstr "mann"
-
-#~ msgid "Man Pages"
-#~ msgstr "Priroènik"
-
-#~ msgid "Info Pages"
-#~ msgstr "Info strani"
-
-#~ msgid "GNOME Help"
-#~ msgstr "GNOME pomoè"
-
-#~ msgid "<BODY>Could not load default TOC page</BODY>"
-#~ msgstr "<BODY>Ne morem nalo¾iti strani privzetega kazala vsebine</BODY>"
-
-#~ msgid "<BODY>Unknown TOC argument</BODY>"
-#~ msgstr "<BODY>Neznan argument za kazalo<BODY>"
-
-#~ msgid "_New Window"
-#~ msgstr "_Novo okno"
-
-#~ msgid "Open new browser window"
-#~ msgstr "Odpri novo brskalno okno"
-
-#~ msgid "_Add Bookmark"
-#~ msgstr "_Dodaj zaznamek"
-
-#~ msgid "Add bookmark"
-#~ msgstr "Dodaj zaznamek"
-
-#~ msgid "_Back"
-#~ msgstr "Na_zaj"
-
-#~ msgid "_Forward"
-#~ msgstr "Na_prej"
-
-#~ msgid "_Reload"
-#~ msgstr "_Znova nalo¾i"
-
-#~ msgid "_Index"
-#~ msgstr "_Kazalo"
-
-#~ msgid "_History"
-#~ msgstr "Z_godovina"
-
-#~ msgid "Show History Window"
-#~ msgstr "Poka¾i okno zgodovine"
-
-#~ msgid "_Bookmarks"
-#~ msgstr "_Zaznamki"
-
-#~ msgid "Show Bookmarks Window"
-#~ msgstr "Poka¾i okno zaznamkov"
-
-#~ msgid "_Window"
-#~ msgstr "_Okno"
-
-#~ msgid "_View"
-#~ msgstr "_Pogled"
-
-#~ msgid "Go to the previous location in the history list"
-#~ msgstr "Pojdi na prej¹njo lokacijo v seznamu zgodovine"
-
-#~ msgid "Forward"
-#~ msgstr "Naprej"
-
-#~ msgid "Go to the next location in the history list"
-#~ msgstr "Pojdi na naslednjo lokacijo v seznamu zgodovine"
-
-#~ msgid "Index"
-#~ msgstr "Kazalo"
-
-#~ msgid "History"
-#~ msgstr "Zgodovina"
-
-#~ msgid "BMarks"
-#~ msgstr "Zaznamki"
-
-#~ msgid "Help on Help"
-#~ msgstr "Pomoè o pomoèi"
-
-#~ msgid "Location: "
-#~ msgstr "Lokacija: "
-
-#~ msgid ""
-#~ "Error loading document:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "You probably don't\n"
-#~ "have this documentation\n"
-#~ "installed on your system."
-#~ msgstr ""
-#~ "Napaka pri nalaganju dokumenta:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Te dokumentacije verjetno nimate\n"
-#~ "nalo¾ene na va¹em sistemu."
-
-#~ msgid "Deskguide (the desktop pager)"
-#~ msgstr "Vodnik-po-namizju (namizni pager)"
-
-#~ msgid "Tasklist"
-#~ msgstr "Seznam poslov"
-
-#~ msgid "The Battery"
-#~ msgstr "Baterija"
-
-#~ msgid ""
-#~ "%s applet appears to have died unexpectedly.\n"
-#~ "\n"
-#~ "Reload this applet?\n"
-#~ "\n"
-#~ "(If you choose not to reload it at this time you can always add it from\n"
-#~ "the \"Applets\" submenu in the main menu.)"
-#~ msgstr ""
-#~ "Zdi se, da je vstavek %s neprièakovano umru.\n"
-#~ "\n"
-#~ "Znova nalo¾i ta vstavek?\n"
-#~ "\n"
-#~ "(Èe se odloèite, da ga tokrat ne boste znova nalo¾ili, ga lahko vedno "
-#~ "dodate\n"
-#~ "v podmenuju \"Vstavki\" v glavnem menuju.)"
-
-#~ msgid "Couldn't register applet."
-#~ msgstr "Ne morem registrirati vstavka."
-
-#~ msgid "Whoops! for some reason we can't add to the panel"
-#~ msgstr "Opla! zaradi neznanega razloga ne moremo dodati na pult"
-
-#~ msgid "No socket was created"
-#~ msgstr "Vtiè ni bil ustvarjen"
-
-#~ msgid "Distribution: "
-#~ msgstr "Distribucija: "
-
-#~ msgid "KDE: "
-#~ msgstr "KDE: "
-
-#~ msgid "Panel: "
-#~ msgstr "Pult: "
-
-#~ msgid "Desktop: "
-#~ msgstr "Namizje: "
-
-#~ msgid "Hide delay (ms)"
-#~ msgstr "Premor skrivanja(ms)"
-
-#~ msgid "Show delay (ms)"
-#~ msgstr "Premor kazanja(ms)"
-
-#~ msgid "Size (pixels)"
-#~ msgstr "Velikost (v pikslih)"
-
-#~ msgid "Prelight buttons on mouseover"
-#~ msgstr "Osvetli gumbe, ko gre èez njih mi¹"
-
-#~ msgid "In the menu"
-#~ msgstr "V menuju"
-
-#~ msgid "Menus"
-#~ msgstr "Menuji"
-
-#~ msgid "Use large icons"
-#~ msgstr "Uporabi velike ikone"
-
-#~ msgid "Show [...] buttons"
-#~ msgstr "Ka¾i [...] gumbe"
-
-#~ msgid "Show popup menus outside of panels"
-#~ msgstr "Ka¾i vzkliène menuje izven pultov :)"
-
-#~ msgid "Keep menus in memory"
-#~ msgstr "Hrani menuje v pomnilniku"
-
-#~ msgid "Merge in system menus"
-#~ msgstr "Vkljuèi sistemske menuje"
-
-#~ msgid "Show menu titles"
-#~ msgstr "Kratki nazivi menujev"
-
-#~ msgid "Global menu"
-#~ msgstr "Globalni menu"
-
-#~ msgid "Tooltips enabled"
-#~ msgstr "Vkljuèi namige"
-
-#~ msgid "Confirm the removal of panels with a dialog"
-#~ msgstr "Potrdi odstranitev pulta z dialogom"
-
-#~ msgid "Try to avoid overlapping panels"
-#~ msgstr "Poskusi se izogniti prekrivanju pultov"
-
-#~ msgid "Panel treatment (GNOME compliant window managers only)"
-#~ msgstr "Ravnanje s pultom (le z GNOME zdru¾ljivi okenski upravljalniki)"
-
-#~ msgid "Take screenshot key"
-#~ msgstr "Tipka za zajem zaslona"
-
-#~ msgid "Take window screenshot key"
-#~ msgstr "Zipka za zajem okna"
-
-#~ msgid "Buttons"
-#~ msgstr "Gumbi"
-
-#~ msgid "Can't get goad_id from desktop entry!"
-#~ msgstr "Ne morem dobiti goad_id iz vnosa namizja!"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Izberi pisavo"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcÈèDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSs©¹TtUuVvWwXxYyZz®¾"
-
-#~ msgid "Red Hat Linux"
-#~ msgstr "Red Hat Linux"
-
-#~ msgid "Red Hat menus"
-#~ msgstr "Menuji Red Hat"
-
-#~ msgid "No system menus found!"
-#~ msgstr "Sistemski menuji niso bili najdeni!"
-
-#~ msgid "Can't create the user menu directory"
-#~ msgstr "Ne morem ustvariti uporabni¹kega menu direktorija"
-
-#~ msgid "Explicit hide"
-#~ msgstr "skrij na zahtevo"
-
-#~ msgid "Auto hide"
-#~ msgstr "samodejno skrij"
-
-#~ msgid "With pixmap arrow"
-#~ msgstr "z narisano pu¹èico"
-
-#~ msgid "Without pixmap"
-#~ msgstr "brez narisane pu¹èice"
-
-#~ msgid "XX Small (12 pixels)"
-#~ msgstr "zelo zelo majhna (12 pikslov)"
-
-#~ msgid "Above"
-#~ msgstr "nad"
-
-#~ msgid "Avoid on maximize"
-#~ msgstr "Ogibaj se ob razpenjanju"
-
-#~ msgid "Don't avoid on maximize"
-#~ msgstr "Se ne ogibaj ob razpenjanju"
-
-#~ msgid "Hiding policy"
-#~ msgstr "Politika skrivanja"
-
-#~ msgid "Hide buttons"
-#~ msgstr "Gumbi za skrivanje"
-
-#~ msgid "Orientation"
-#~ msgstr "Usmerjenost"
-
-#~ msgid "Level"
-#~ msgstr "Nivo"
-
-#~ msgid "Maximize mode"
-#~ msgstr "Razpet naèin"
-
-#~ msgid "Properties"
-#~ msgstr "Lastnosti"
-
-#~ msgid "All properties..."
-#~ msgstr "Vse lastnosti..."
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: gnome-terminal/gnome-terminal.glade.h:7
+msgid "Terminal Class:"
+msgstr "Razred terminala:"
+
+#: gnome-terminal/gnome-terminal.glade.h:9
+msgid "Font:"
+msgstr "Pisava:"
+
+#: gnome-terminal/gnome-terminal.glade.h:10
+msgid "Pick a Font"
+msgstr "Izberi pisavo"
+
+#: gnome-terminal/gnome-terminal.glade.h:11
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcÈèDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSs©¹TtUuVvWwXxYyZz®¾"
+
+#: gnome-terminal/gnome-terminal.glade.h:12
+msgid "Enable bold text"
+msgstr "Vkljuèi polkrepko besedilo"
+
+#: gnome-terminal/gnome-terminal.glade.h:13
+msgid "Blinking cursor"
+msgstr "Utripanje kazalca"
+
+#: gnome-terminal/gnome-terminal.glade.h:14
+msgid "Hide menu bar"
+msgstr "Skrij menuje"
+
+#: gnome-terminal/gnome-terminal.glade.h:15
+msgid "Silence terminal bell"
+msgstr "Tihi terminalski zvonec"
+
+#: gnome-terminal/gnome-terminal.glade.h:16
+msgid "Swap Delete/Backspace"
+msgstr "Zamenjaj tipki zbri¹i in povratnico"
+
+#: gnome-terminal/gnome-terminal.glade.h:17
+msgid "Use --login by default"
+msgstr "Uporabi --login kot privzeto"
+
+#: gnome-terminal/gnome-terminal.glade.h:18
+msgid "Delete generates DEL/^H"
+msgstr "Tipka zbri¹i generira DEL oziroma ^H"
+
+#: gnome-terminal/gnome-terminal.glade.h:19
+msgid "Select-by-word characters:"
+msgstr "Znaki za izbiranje-po-besedi:"
+
+#: gnome-terminal/gnome-terminal.glade.h:20
+msgid "General"
+msgstr "Splo¹no"
+
+#: gnome-terminal/gnome-terminal.glade.h:25
+msgid "Transparent"
+msgstr "Prosojno"
+
+#: gnome-terminal/gnome-terminal.glade.h:26
+msgid "Pixmap file:"
+msgstr "Datoteka slike:"
+
+#: gnome-terminal/gnome-terminal.glade.h:27
+msgid "Background should be shaded"
+msgstr "Ozadje naj bo senèeno"
+
+#: gnome-terminal/gnome-terminal.glade.h:29
+#: gnome-terminal/gnome-terminal.glade.h:30
+#: gnome-terminal/gnome-terminal.glade.h:31
+#: gnome-terminal/gnome-terminal.glade.h:32
+#: gnome-terminal/gnome-terminal.glade.h:33
+#: gnome-terminal/gnome-terminal.glade.h:34
+#: gnome-terminal/gnome-terminal.glade.h:35
+#: gnome-terminal/gnome-terminal.glade.h:36
+#: gnome-terminal/gnome-terminal.glade.h:37
+#: gnome-terminal/gnome-terminal.glade.h:38
+#: gnome-terminal/gnome-terminal.glade.h:39
+#: gnome-terminal/gnome-terminal.glade.h:40
+#: gnome-terminal/gnome-terminal.glade.h:41
+#: gnome-terminal/gnome-terminal.glade.h:42
+#: gnome-terminal/gnome-terminal.glade.h:43
+#: gnome-terminal/gnome-terminal.glade.h:44
+#: gnome-terminal/gnome-terminal.glade.h:50
+#: gnome-terminal/gnome-terminal.glade.h:51
+msgid "Pick a color"
+msgstr "Izberi barvo"
+
+#: gnome-terminal/gnome-terminal.glade.h:45
+msgid "Color scheme:"
+msgstr "Barvna shema:"
+
+#: gnome-terminal/gnome-terminal.glade.h:46
+msgid "Fore/Background Color:"
+msgstr "Barva ospredja/ozadja:"
+
+#: gnome-terminal/gnome-terminal.glade.h:47
+msgid "Foreground color:"
+msgstr "Barva ospredja:"
+
+#: gnome-terminal/gnome-terminal.glade.h:48
+msgid "Background color:"
+msgstr "Barva ozadja:"
+
+#: gnome-terminal/gnome-terminal.glade.h:49
+msgid "Color palette:"
+msgstr "Barvna paleta:"
+
+#: gnome-terminal/gnome-terminal.glade.h:52
+msgid "Colors"
+msgstr "Barve"
+
+#: gnome-terminal/gnome-terminal.glade.h:53
+msgid "Scrollbar position:"
+msgstr "Mesto drsnikov:"
+
+#: gnome-terminal/gnome-terminal.glade.h:54
+msgid "Scrollback lines:"
+msgstr "©tevilo pomnjenih vrstic:"
+
+#: gnome-terminal/gnome-terminal.glade.h:55
+msgid "Scroll on keystroke"
+msgstr "Zdrsni ob pritisku na tipko"
+
+#: gnome-terminal/gnome-terminal.glade.h:56
+msgid "Scroll on output"
+msgstr "Zdrsni ob izpisu"
+
+#: gnome-terminal/gnome-terminal.glade.h:57
+msgid "Scrolling"
+msgstr "Drsniki"
 
 #~ msgid "Copy time"
 #~ msgstr "Kopiraj uro"
@@ -4489,8 +4305,17 @@ msgstr "Vi¹ina"
 #~ msgid "    Erik Troan (ewt@redhat.com)"
 #~ msgstr "    Erik Troan (ewt@redhat.com)"
 
+#~ msgid "_New terminal"
+#~ msgstr "_Nov terminal"
+
 #~ msgid "Creates a new terminal window"
 #~ msgstr "_Ustvari novo terminalsko okno"
+
+#~ msgid "_Hide menubar"
+#~ msgstr "_Skrij menujsko vrstico"
+
+#~ msgid "_Close terminal"
+#~ msgstr "_Zapri terminal"
 
 #~ msgid "_Show menubar"
 #~ msgstr "_Ka¾i menujsko vrstico"
@@ -4498,11 +4323,29 @@ msgstr "Vi¹ina"
 #~ msgid "Toggles whether or not the menubar is displayed."
 #~ msgstr "Preklopi prikaz menujske vrstice."
 
+#~ msgid "_Secure keyboard"
+#~ msgstr "_Varna tipkovnica"
+
 #~ msgid "Toggles whether or not the keyboard is grabbed by the terminal."
 #~ msgstr "_Preklopi zaplenjenost tipkovnice s strani terminala."
 
+#~ msgid "_Reset Terminal"
+#~ msgstr "_Ponastavi terminal"
+
+#~ msgid "Reset and _Clear"
+#~ msgstr "Ponastavi in _bri¹i"
+
+#~ msgid "_Open in browser"
+#~ msgstr "_Odpri v brskalniku"
+
 #~ msgid "C_olor selector..."
 #~ msgstr "Izbirnik _barv..."
+
+#~ msgid "File"
+#~ msgstr "Datoteka"
+
+#~ msgid "Edit"
+#~ msgstr "Uredi"
 
 #~ msgid "The error was: %s"
 #~ msgstr "Napaka je bila: %s"
@@ -4556,6 +4399,9 @@ msgstr "Vi¹ina"
 
 #~ msgid "Launcher icon"
 #~ msgstr "Ikona zaganjalnika"
+
+#~ msgid "Drawer icon"
+#~ msgstr "Ikona predala"
 
 #~ msgid "Menu icon"
 #~ msgstr "Ikona menuja"
@@ -4644,6 +4490,9 @@ msgstr "Vi¹ina"
 #~ msgid "Halt"
 #~ msgstr "Zaustavitev"
 
+#~ msgid "Copy time to selection"
+#~ msgstr "Kopiraj èas v izbiro"
+
 #~ msgid "Copy date to selection"
 #~ msgstr "Kopiraj èas v izbiro"
 
@@ -4664,6 +4513,9 @@ msgstr "Vi¹ina"
 
 #~ msgid "Keep tasks sorted"
 #~ msgstr "Ohrani posle urejene po abecedi"
+
+#~ msgid "done"
+#~ msgstr "opravljeno"
 
 #~ msgid "Padding"
 #~ msgstr "Polnjenje"
