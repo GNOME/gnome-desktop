@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-01-25 10:06-0500\n"
+"POT-Creation-Date: 1999-01-29 03:24-0500\n"
 "PO-Revision-Date: 1999-01-22 4:18 EST\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -21,7 +21,7 @@ msgstr "О программе"
 #: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:431
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:459
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
-#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:693
+#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:449
 #: applets/gnome-pager/gnomepager_applet.c:1453 applets/gticker/gticker.c:61
 #: applets/icewm-pager/wmpager_applet.c:90
@@ -29,8 +29,8 @@ msgstr "О программе"
 #: applets/modemlights/modemlights.c:727 applets/multiload/cpuload.c:62
 #: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:415 panel/launcher.c:272
-#: panel/menu.c:3308
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:411 panel/launcher.c:274
+#: panel/menu.c:3311
 msgid "Properties..."
 msgstr "Свойства..."
 
@@ -48,15 +48,15 @@ msgstr "Часовой пояс"
 
 #: applets/batmon/batmon.c:106
 msgid "Can't open /proc/apm; can't get data."
-msgstr "Не могу открыть /proc/apm; не могу получить данные."
+msgstr "Невозможно открыть /proc/apm; невозможно получить данные."
 
 #: applets/batmon/batmon.c:112
 msgid "Something wrong with /proc/apm; can't get data."
-msgstr "Что-то не так с /proc/apm; не могу получить данные."
+msgstr "Что-то случилось с /proc/apm; невозможно получить данные."
 
 #: applets/batmon/batmon.c:155
 msgid "Can't open /dev/apm; can't get data."
-msgstr "Не могу открыть /proc/apm; не могу получить данные."
+msgstr "Невозможно открыть /dev/apm; невозможно получить данные."
 
 #: applets/batmon/batmon.c:161 applets/battery/read-battery.c:84
 msgid "ioctl failed on /dev/apm."
@@ -96,20 +96,20 @@ msgstr "Заряжается."
 
 #: applets/batmon/batmon.c:240
 msgid "unknown minutes of battery."
-msgstr "неизвестное время жизни."
+msgstr "неизвестное время жизни батареи."
 
 #: applets/batmon/batmon.c:243
 msgid "unknown minutes of battery (%d%%)"
-msgstr "неизвестное время жизни батареи (%d%%)"
+msgstr "время жизни батареи (%d%%) неизвестно"
 
 #: applets/batmon/batmon.c:249
 #, c-format
 msgid "%d minutes of battery"
-msgstr "осталось %d минут"
+msgstr "осталось %d минут жизни батареи"
 
 #: applets/batmon/batmon.c:251
 msgid "%d minutes of battery (%d%%)"
-msgstr ""
+msgstr "осталось %d минут жизни батареи (%d%%)"
 
 #. would have to be an error
 #: applets/batmon/batmon.c:255
@@ -133,6 +133,7 @@ msgid "Battery Status:"
 msgstr "Состояние батареи:"
 
 #: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2311
+#: panel/launcher.c:39
 msgid "Close"
 msgstr "Закрыть"
 
@@ -141,14 +142,14 @@ msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Внутренняя ошибка: неправильная мода в battery_set_mode"
 
 #: applets/battery/battery.c:395 applets/freshapp/freshapp.c:38
-#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:660
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:672
 #: applets/gen_util/printer.c:386 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
-msgstr "Не могу создать апплет!\n"
+msgstr "Невозможно создать апплет!\n"
 
 #: applets/battery/battery.c:609
 msgid "Could not allocate space for graph values"
-msgstr "Не могу выделить место для данных графика"
+msgstr "Нет места для данных графика"
 
 #: applets/battery/properties.c:37
 msgid "Battery Monitor Settings"
@@ -208,20 +209,22 @@ msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
 msgstr ""
+"Невозможно открыть /proc/apm! Убедитесь что поддержка APM включена в ваше "
+"ядро.\n"
 
 #: applets/battery/read-battery.c:79
 msgid "Cannot open /dev/apm; can't get data."
-msgstr "Не могу открыть /proc/apm; не могу получить данные."
+msgstr "Невозможно открыть /proc/apm; невозможно получить данные."
 
 #: applets/battery/read-battery.c:95
 msgid "APM is disabled!  Cannot read battery charge information."
-msgstr "APM выключен! Не могу считать информацию о батарее."
+msgstr "APM выключен! невозможно считать информацию о батарее."
 
 #: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
 #: applets/clockmail/clockmail.c:438 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:465
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:700
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
 #: applets/gkb/gkb.c:441 applets/gnome-pager/gnomepager_applet.c:1447
 #: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
 #: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:733
@@ -238,7 +241,7 @@ msgstr "Обновить изображение"
 msgid "The Bus Sign Applet"
 msgstr "Апплет \"Автобусное Обьявление\""
 
-#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:620
+#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:632
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
 
@@ -258,11 +261,11 @@ msgstr ""
 
 #: applets/cdplayer/cdplayer.c:318
 msgid "Run gtcd..."
-msgstr ""
+msgstr "Запустить gtcd..."
 
 #: applets/charpick/charpick.c:203
 msgid "Character Picker"
-msgstr ""
+msgstr "Наборщик"
 
 #: applets/charpick/charpick.c:204
 msgid "0.02"
@@ -277,6 +280,8 @@ msgid ""
 "Gnome Panel applet for selecting strange characters that are not on my "
 "keyboard. Released under GNU General Public Licence."
 msgstr ""
+"Апплет для набора странных букв на стандартной клавиатуре."
+"Выпущенн под GNU General Public Licence."
 
 #: applets/clockmail/clockmail.c:29 applets/gticker/gticker.c:230
 #: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
@@ -304,6 +309,9 @@ msgid ""
 "Mail blinking can be for any unread mail, or only briefly when new mail "
 "arrives."
 msgstr ""
+"Выпущенн под GNU General Public Licence.\n"
+"Просые электронные часы с датой в подсказке. Возможны 12 и 24 часовой циклы."
+"Мерцающий конверт сообщяет о наличии/прибытии новой почты."
 
 #: applets/clockmail/clockmail.c:110
 msgid " (GMT)"
@@ -377,9 +385,9 @@ msgstr "Апплет дозвона по PPP"
 
 #: applets/dialer/dialer.c:49
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
-msgstr ""
+msgstr "Апплет для прозванивания к вашему ISP и инициализации PPP соединения."
 
-#: applets/dialer/dialer.c:87 panel/menu.c:3134
+#: applets/dialer/dialer.c:87 panel/menu.c:3137
 msgid "Off"
 msgstr "Выкл"
 
@@ -422,7 +430,7 @@ msgid ""
 "Mounts and Unmounts drives.."
 msgstr ""
 "Released under the GNU general public license.\n"
-"Подсоединяет и отсоедимяет диски.."
+"Подсоединяет и отсоединяет диски.."
 
 #: applets/drivemount/drivemount.c:129
 msgid " mounted"
@@ -487,7 +495,7 @@ msgstr "Совместимая с automount проверка состояния"
 #
 #: applets/esd-manager/esdmanager_applet.c:29
 msgid "Esound MAnager Applet"
-msgstr "Апплет менеджера Esound"
+msgstr "Апплет управления Esound"
 
 #: applets/esd-manager/esdmanager_applet.c:29
 #: applets/gnome-pager/gnomepager_applet.c:106
@@ -536,7 +544,7 @@ msgstr "Рыбка %s"
 #: applets/fish/fish.c:127
 #, c-format
 msgid "%s the GNOME Fish Says:"
-msgstr "Гномья Рыбка %s Говорит:"
+msgstr " Рыбка %s говорит:"
 
 #: applets/fish/fish.c:219
 msgid "GNOME Fish Properties"
@@ -551,7 +559,7 @@ msgid "The Animation Filename:"
 msgstr "Файл с мультипликацией:"
 
 #: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:994
-#: panel/menu.c:3250 panel/panel-util.c:90 panel/panel-util.c:128
+#: panel/menu.c:3253 panel/panel-util.c:90 panel/panel-util.c:128
 #: panel/panel-util.c:165 panel/panel_config.c:725 panel/swallow.c:236
 msgid "Browse"
 msgstr "Обзор"
@@ -583,10 +591,10 @@ msgid ""
 "memory. If anyone is found using this applet, he should be promptly sent for "
 "a psychiatric evaluation."
 msgstr ""
-"Этот апплет не имеет предназначения. Он только есть дисковое пространство и "
-"время при компиляции, и, будучи загруженным, он также занимает место на "
-"панели и в памяти. Если кто-нибудь нашел применение этому апплету, его нужно "
-"отправить на психиатрическое обследование"
+"Совершенно бесполезный апплет. Он только занимает место на диске и "
+"увеличивает время компиляции, а также , будучи загруженным, он занимает "
+"место на панели и в памяти. Если кто-нибудь нашел применение этому апплету, "
+"то его нужно отправить на психиатрическое обследование"
 
 #: applets/fvwm-pager/fvwm-pager.c:154
 msgid "Fvwm Pager Applet"
@@ -662,7 +670,7 @@ msgstr ""
 
 #: applets/gen_util/clock.c:354
 msgid "Clock properties"
-msgstr "Настройки часов"
+msgstr "Настройка часов"
 
 #: applets/gen_util/clock.c:358
 msgid "Time Format"
@@ -681,61 +689,61 @@ msgstr "24 часа"
 msgid "Show date"
 msgstr "Показывать дату"
 
-#: applets/gen_util/mailcheck.c:246
+#: applets/gen_util/mailcheck.c:249
 msgid "You have new mail."
 msgstr "У вас новая почта."
 
-#: applets/gen_util/mailcheck.c:248
+#: applets/gen_util/mailcheck.c:251
 msgid "You have mail."
 msgstr "У вас есть почта."
 
-#: applets/gen_util/mailcheck.c:250
+#: applets/gen_util/mailcheck.c:253
 msgid "No mail."
 msgstr "Нет почты."
 
-#: applets/gen_util/mailcheck.c:502
+#: applets/gen_util/mailcheck.c:511
 msgid "Execute"
 msgstr "Исполнить"
 
-#: applets/gen_util/mailcheck.c:514
+#: applets/gen_util/mailcheck.c:523
 msgid "before each update"
 msgstr "перед каждым обновлением"
 
-#: applets/gen_util/mailcheck.c:522
+#: applets/gen_util/mailcheck.c:531
 msgid "Check for mail every"
 msgstr "Проверять почту каждые"
 
-#: applets/gen_util/mailcheck.c:535
+#: applets/gen_util/mailcheck.c:544
 msgid "s"
 msgstr "сек"
 
-#: applets/gen_util/mailcheck.c:543
+#: applets/gen_util/mailcheck.c:552
 msgid "Select animation"
 msgstr "Выбрать мультипликацию"
 
-#: applets/gen_util/mailcheck.c:570
+#: applets/gen_util/mailcheck.c:580
 msgid "Mail check properties"
-msgstr "Настройки проверки почты"
+msgstr "Настройка проверки почты"
 
-#: applets/gen_util/mailcheck.c:575
+#: applets/gen_util/mailcheck.c:585
 msgid "Mail check"
-msgstr "Проверки почты"
+msgstr "Проверка почты"
 
-#: applets/gen_util/mailcheck.c:619
+#: applets/gen_util/mailcheck.c:631
 msgid "Mail check Applet"
 msgstr "Апплет проверки почты"
 
-#: applets/gen_util/mailcheck.c:622
+#: applets/gen_util/mailcheck.c:634
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Проверка почты сообщает вам о новой почте в вашем почтовом ящике"
 
-#: applets/gen_util/mailcheck.c:681
+#: applets/gen_util/mailcheck.c:693
 msgid "Text only"
 msgstr "Только текст"
 
 #: applets/gen_util/printer.c:346
 msgid "Printer properties"
-msgstr "Настройки принтера"
+msgstr "Настройка принтера"
 
 #: applets/gen_util/printer.c:354
 msgid "Printer name:"
@@ -761,7 +769,7 @@ msgstr "Первый флаг"
 msgid "Flag Two"
 msgstr "Второй флаг"
 
-#: applets/gkb/gkb.c:255 panel/menu.c:1668 panel/menu.c:1728 panel/menu.c:3263
+#: applets/gkb/gkb.c:255 panel/menu.c:1668 panel/menu.c:1728 panel/menu.c:3266
 msgid "Menu"
 msgstr "Меню"
 
@@ -792,15 +800,15 @@ msgstr ""
 #: applets/gnome-pager/gnomepager_applet.c:106
 #: applets/icewm-pager/wmpager_applet.c:218
 msgid "Desktop Pager Applet"
-msgstr "Апплет Навигатора Рабочего Стола"
+msgstr "Оконный пейджер"
 
 #: applets/gnome-pager/gnomepager_applet.c:108
 msgid "Pager for a GNOME compliant Window Manager"
-msgstr "Навигатор для совместимого с GNOME менеджера окон"
+msgstr "Пейджер для совместимого с GNOME диспетчера окон"
 
 #: applets/gnome-pager/gnomepager_applet.c:332
 msgid "Gnome Pager Settings"
-msgstr "Настройки GNOME навигатора"
+msgstr "Настройки GNOME пейджера"
 
 #: applets/gnome-pager/gnomepager_applet.c:336
 #: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
@@ -809,7 +817,7 @@ msgstr "Экран"
 
 #: applets/gnome-pager/gnomepager_applet.c:337
 msgid "Show all tasks on all desktops"
-msgstr ""
+msgstr "Показывать все задачи на всех рабочих столах"
 
 #: applets/gnome-pager/gnomepager_applet.c:345
 msgid "Show tasks"
@@ -817,11 +825,11 @@ msgstr "Показывать задачи"
 
 #: applets/gnome-pager/gnomepager_applet.c:353
 msgid "Show pager"
-msgstr "Показывать навигатор"
+msgstr "Показывать пейджер"
 
 #: applets/gnome-pager/gnomepager_applet.c:361
 msgid "Use small pagers"
-msgstr "Маленькие навигаторы"
+msgstr "Маленькие пейджеры"
 
 #: applets/gnome-pager/gnomepager_applet.c:369
 msgid "Show icons in tasks"
@@ -845,11 +853,11 @@ msgstr "Число колонок задач"
 
 #: applets/gnome-pager/gnomepager_applet.c:431
 msgid "Number rows of pagers"
-msgstr "Число рядов навигаторов"
+msgstr "Число рядов пейджеров"
 
 #: applets/gnome-pager/gnomepager_applet.c:1368
 msgid "Gnome Pager Error"
-msgstr "Ошибка в GNOME навигаторе"
+msgstr "Ошибка в GNOME пейджере"
 
 #: applets/gnome-pager/gnomepager_applet.c:1369
 msgid ""
@@ -859,14 +867,14 @@ msgid ""
 "Enlightenment (DR-0.15)\n"
 "Then start this applet again.\n"
 msgstr ""
-"Ваш менеджер окон не совместим с GNOME.\n"
-"Запустите пожалуйста совместимый с GNOME менеджером окон.\n"
+"Ваш диспетчер окон не совместим с GNOME.\n"
+"Запустите пожалуйста совместимый с GNOME диспетчером окон.\n"
 "Например:\n"
 "Enlightenment (DR-0.15)\n"
 
 #: applets/gnome-pager/gnomepager_applet.c:1700
 msgid "Sticky"
-msgstr "Прилипающий"
+msgstr "На всех"
 
 #: applets/gnome-pager/gnomepager_applet.c:2287
 msgid "Show / Hide"
@@ -874,23 +882,23 @@ msgstr "Показывать / Спрятать"
 
 #: applets/gnome-pager/gnomepager_applet.c:2299
 msgid "Shade / Unshade"
-msgstr "Затеннить / Просветлить"
+msgstr "Свернуть / Развернуть"
 
 #: applets/gnome-pager/gnomepager_applet.c:2323
 msgid "Nuke"
-msgstr ""
+msgstr "Прикончить"
 
 #: applets/gticker/gticker.c:53
 msgid "Loading headlines..."
-msgstr ""
+msgstr "Загружаются заголовки..."
 
 #: applets/gticker/gticker.c:72
 msgid "Show Article Listing"
-msgstr ""
+msgstr "Показать список статей"
 
 #: applets/gticker/gticker.c:77
 msgid "Refresh Articles"
-msgstr "Обновить изображение"
+msgstr "Обновить статьи"
 
 #: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
 msgid "Justin Maurer <justin@openprojects.net>"
@@ -906,16 +914,16 @@ msgstr ""
 
 #: applets/gticker/gticker.c:250
 msgid "GTicker Article List"
-msgstr ""
+msgstr "Список статей GTicker"
 
 #: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
 msgid "No articles"
-msgstr ""
+msgstr "Нет статей"
 
 #: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
 #, c-format
 msgid "creating user directory: %s\n"
-msgstr ""
+msgstr "создаётся каталог пользователя:  %s\n"
 
 #: applets/gticker/gticker.c:415
 #, c-format
@@ -923,40 +931,42 @@ msgid ""
 "unable to create user directory: \n"
 "\t\t\t\t\t    %s\n"
 msgstr ""
+"невозможно создать каталог пользователя: \n"
+"\t\t\t\t\t    %s\n"
 
 #: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
 msgid "Articles"
-msgstr ""
+msgstr "Статьи"
 
 #: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
 msgid "Show topic images"
-msgstr ""
+msgstr "Показывать символы заголовков"
 
 #: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
 msgid "Show department"
-msgstr ""
+msgstr "Показывать подразделение"
 
 #: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
 msgid "Show extra information (Time, Author, Comments)"
-msgstr ""
+msgstr "Показывать дополнительную информацию (время, автор, число комментариев)"
 
 #: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
 msgid "Delay between articles (10 = 1 sec):"
-msgstr ""
+msgstr "Интервал между статьями (10 = 1 сек):"
 
 #: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
 msgid "(These settings do not take effect until a refresh)"
-msgstr ""
+msgstr "(Изменения не возымеют эффект до обновления статей)"
 
 #: applets/gticker/properties.c:231
 #: applets/mini-commander/src/mini-commander_applet.c:184
 #: applets/slashapp/properties.c:249
 msgid "Browser"
-msgstr ""
+msgstr "Web навигатор"
 
 #: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
 msgid "Open new window"
-msgstr ""
+msgstr "Открыть новое окно"
 
 #. -- not implemented yet --
 #: applets/gticker/properties.c:248
@@ -966,15 +976,15 @@ msgstr ""
 #. create the widget we are going to put on the applet
 #: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
 msgid "Url:"
-msgstr ""
+msgstr "URL:"
 
 #: applets/gticker/properties.c:278
 msgid "Article index file:"
-msgstr ""
+msgstr "Файл индексов статей:"
 
 #: applets/gticker/properties.c:295
 msgid "Image Server Url:"
-msgstr ""
+msgstr "URL сервера изображений:"
 
 #: applets/gticker/properties.c:312
 msgid "Image path:"
@@ -983,27 +993,27 @@ msgstr ""
 #: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
 #: gnome-terminal/gnome-terminal.c:1073
 msgid "Scrolling"
-msgstr ""
+msgstr "Прокрутка"
 
 #: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
 msgid "Smooth scroll"
-msgstr ""
+msgstr "Плавная прокрутка"
 
 #: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
 msgid "Smooth type"
-msgstr ""
+msgstr "Медленная печать"
 
 #: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
 msgid "Speed"
-msgstr ""
+msgstr "Скорость"
 
 #: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
 msgid "Delay when wrapping text:"
-msgstr ""
+msgstr "Задержка при переносе строки:"
 
 #: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
 msgid "Scroll speed between lines (Smooth scroll):"
-msgstr ""
+msgstr "Скорость прокрутки (плавная прокрутка):"
 
 #. FIXME: This should check to make sure icewm (or equiv) is running.
 #. Not sure if it is working though...
@@ -1011,6 +1021,7 @@ msgstr ""
 msgid ""
 "This applet requires you to run a window manager with the XA_ extensions.\n"
 msgstr ""
+"Этот апплет требует диспетчера окон с XA_ расширениями.\n"
 
 #: applets/icewm-pager/wmpager_applet.c:219
 msgid "Copyright (C)1998 M.Watson"
@@ -1018,7 +1029,7 @@ msgstr ""
 
 #: applets/icewm-pager/wmpager_applet.c:275
 msgid "Failed to retrieve workspace property."
-msgstr ""
+msgstr "Невозможно получить свойства рабочего пространства."
 
 #: applets/jbc/jbc.c:67
 msgid "Jon Anhold <jon@snoopy.net>"
@@ -1030,17 +1041,19 @@ msgstr ""
 
 #: applets/jbc/jbc.c:71
 msgid "Jon's Binary Clock"
-msgstr ""
+msgstr "Бинарные часы Джона"
 
 #: applets/jbc/jbc.c:74
 msgid ""
 "A binary clock for your panel\n"
 "http://snoopy.net/~jon/jbc/\n"
 msgstr ""
+"Бинарные часы для вашей панели\n"
+"http://snoopy.net/~jon/jbc/\n"
 
 #: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
-msgstr ""
+msgstr "Апплет Mini-Commander"
 
 #: applets/mini-commander/src/cmd_completion.c:67
 #: applets/mini-commander/src/cmd_completion.c:118
@@ -1470,388 +1483,6 @@ msgstr ""
 msgid "Look"
 msgstr ""
 
-#: desktop-properties/app-background.c:15
-msgid "Background Properties"
-msgstr "Свойства фона"
-
-#: desktop-properties/app-bell.c:11
-msgid "Bell Properties"
-msgstr "Свойства звонка"
-
-#: desktop-properties/app-keyboard.c:11
-msgid "Keyboard Properties"
-msgstr "Свойства клавиатуры"
-
-#: desktop-properties/app-mouse.c:11
-msgid "Mouse Properties"
-msgstr "Свойства мыши"
-
-#: desktop-properties/app-ui.c:32
-msgid "Gnome Look and Feel Properties"
-msgstr ""
-
-#: desktop-properties/args.c:8 desktop-properties/property-background.c:1057
-msgid "Set parameters from saved state and exit"
-msgstr ""
-
-#: desktop-properties/property-background.c:494 panel/panel_config.c:702
-msgid "Color"
-msgstr "Цвет"
-
-#: desktop-properties/property-background.c:518
-msgid "Flat"
-msgstr ""
-
-#: desktop-properties/property-background.c:524
-msgid "Gradient"
-msgstr ""
-
-#: desktop-properties/property-background.c:539 panel/panel_config.c:545
-msgid "Vertical"
-msgstr "Вертикальный"
-
-#. Horizontal
-#: desktop-properties/property-background.c:545 panel/panel_config.c:532
-msgid "Horizontal"
-msgstr "Горизонтальный"
-
-#: desktop-properties/property-background.c:690
-msgid "Wallpaper Selection"
-msgstr "Выбор обоев"
-
-#: desktop-properties/property-background.c:729
-msgid "Wallpaper"
-msgstr "Обои"
-
-#: desktop-properties/property-background.c:732
-msgid " Browse... "
-msgstr "Обзор... "
-
-#: desktop-properties/property-background.c:737
-msgid "none"
-msgstr ""
-
-#: desktop-properties/property-background.c:781
-msgid "Scaled"
-msgstr "Растянутый"
-
-#: desktop-properties/property-background.c:790
-msgid "Scaled (keep aspect)"
-msgstr "Растянутый (пропорционально)"
-
-#: desktop-properties/property-background.c:801
-msgid "Centered"
-msgstr "Отцентрованный"
-
-#: desktop-properties/property-background.c:812
-msgid "Tiled"
-msgstr "Кафель"
-
-#: desktop-properties/property-background.c:1006
-msgid " Background "
-msgstr "Фон "
-
-#: desktop-properties/property-background.c:1058
-msgid "IMAGE"
-msgstr ""
-
-#: desktop-properties/property-background.c:1058
-msgid "Sets the wallpaper to the value specified"
-msgstr ""
-
-#: desktop-properties/property-background.c:1059
-#: desktop-properties/property-background.c:1060
-#: gnome-terminal/gnome-terminal.c:1833 gnome-terminal/gnome-terminal.c:1836
-msgid "COLOR"
-msgstr "ЦВЕТ"
-
-#: desktop-properties/property-background.c:1059
-msgid "Specifies the background color"
-msgstr "Задаёт цвет фона"
-
-#: desktop-properties/property-background.c:1060
-msgid "Specifies end background color for gradient"
-msgstr "Задаёт конечный цвет фона в градиентном режиме"
-
-#: desktop-properties/property-background.c:1061
-msgid "ORIENT"
-msgstr ""
-
-#: desktop-properties/property-background.c:1061
-msgid "Gradient orientation: vertical or horizontal"
-msgstr "Ориентация градиента: вертикальная или горизонтальная"
-
-#: desktop-properties/property-background.c:1062
-msgid "Use a solid fill for the background"
-msgstr "Равномерное заполнение фона"
-
-#: desktop-properties/property-background.c:1063
-msgid "Use a gradient fill for the background"
-msgstr "Градиентное заполнение фона"
-
-#: desktop-properties/property-background.c:1064
-msgid "MODE"
-msgstr ""
-
-#: desktop-properties/property-background.c:1064
-msgid "Display wallpaper: tiled, centered, scaled or ratio"
-msgstr ""
-
-#: desktop-properties/property-bell.c:123
-msgid "Sound"
-msgstr "Звук"
-
-#: desktop-properties/property-bell.c:142
-msgid "Volume"
-msgstr "Громкость"
-
-#: desktop-properties/property-bell.c:163
-msgid "Pitch"
-msgstr "Тон"
-
-#: desktop-properties/property-bell.c:184
-msgid "Duration"
-msgstr "Продолжительность"
-
-#: desktop-properties/property-bell.c:214
-msgid "Test"
-msgstr "Проверка"
-
-#: desktop-properties/property-bell.c:228
-msgid "Bell"
-msgstr "Звонок"
-
-#. Auto repeat
-#: desktop-properties/property-keyboard.c:160
-msgid "Auto-repeat"
-msgstr "Авто-повтор"
-
-#: desktop-properties/property-keyboard.c:179
-msgid "Enable auto-repeat"
-msgstr "Разрешть авто-повтор"
-
-#: desktop-properties/property-keyboard.c:186
-msgid "Repeat rate"
-msgstr "Частота повтора"
-
-#: desktop-properties/property-keyboard.c:207
-msgid "Repeat delay"
-msgstr "Задержка повтора"
-
-#. Keyboard click
-#: desktop-properties/property-keyboard.c:235
-msgid "Keyboard click"
-msgstr "Удар по клавише"
-
-#: desktop-properties/property-keyboard.c:254
-msgid "Click on keypress"
-msgstr "Щелчок при нажатии"
-
-#: desktop-properties/property-keyboard.c:261
-msgid "Click volume"
-msgstr "Громкость щелчок"
-
-#: desktop-properties/property-keyboard.c:291
-msgid "Keyboard"
-msgstr "Клавиатура"
-
-#. Mouse buttons
-#: desktop-properties/property-mouse.c:215
-msgid "Mouse buttons"
-msgstr "Кнопки мыши"
-
-#: desktop-properties/property-mouse.c:224
-msgid "Left handed"
-msgstr "Для левши"
-
-#: desktop-properties/property-mouse.c:226
-msgid "Right handed"
-msgstr "Для правши"
-
-#. Mouse motion
-#: desktop-properties/property-mouse.c:243
-msgid "Mouse motion"
-msgstr "Движение мыши"
-
-#: desktop-properties/property-mouse.c:255
-msgid "Acceleration"
-msgstr "Ускорение"
-
-#: desktop-properties/property-mouse.c:255
-msgid "Fast"
-msgstr "Быстро"
-
-#: desktop-properties/property-mouse.c:255
-msgid "Slow"
-msgstr "Медленно"
-
-#: desktop-properties/property-mouse.c:267
-msgid "Threshold"
-msgstr "Порог"
-
-#: desktop-properties/property-mouse.c:267
-msgid "Large"
-msgstr "Высокий"
-
-#: desktop-properties/property-mouse.c:267
-msgid "Small"
-msgstr "Низкий"
-
-#: desktop-properties/property-mouse.c:274
-msgid "Mouse"
-msgstr "Мышь"
-
-#: desktop-properties/property-ui.c:55
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr ""
-
-#: desktop-properties/property-ui.c:56
-msgid "Spread buttons out"
-msgstr ""
-
-#: desktop-properties/property-ui.c:57
-msgid "Put buttons on edges"
-msgstr ""
-
-#: desktop-properties/property-ui.c:58
-msgid "Left-justify buttons"
-msgstr ""
-
-#: desktop-properties/property-ui.c:59
-msgid "Right-justify buttons"
-msgstr ""
-
-#: desktop-properties/property-ui.c:65
-msgid "Let window manager decide"
-msgstr ""
-
-#: desktop-properties/property-ui.c:66
-msgid "Center of the screen"
-msgstr ""
-
-#: desktop-properties/property-ui.c:67
-msgid "At the mouse pointer"
-msgstr ""
-
-#: desktop-properties/property-ui.c:73
-msgid "Dialogs are like other windows"
-msgstr ""
-
-#: desktop-properties/property-ui.c:74
-msgid "Dialogs are treated specially by window manager"
-msgstr ""
-
-#: desktop-properties/property-ui.c:81
-msgid "Notebook"
-msgstr ""
-
-#: desktop-properties/property-ui.c:82
-msgid "Toplevel"
-msgstr ""
-
-#: desktop-properties/property-ui.c:83
-msgid "Modal"
-msgstr ""
-
-#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:765
-#: panel/panel_config.c:306
-msgid "Left"
-msgstr "Слева"
-
-#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:766
-#: panel/panel_config.c:317
-msgid "Right"
-msgstr "Справа"
-
-#. Top Position
-#: desktop-properties/property-ui.c:91 panel/panel_config.c:284
-msgid "Top"
-msgstr "Сверху"
-
-#: desktop-properties/property-ui.c:92 panel/panel_config.c:295
-msgid "Bottom"
-msgstr "Снизу"
-
-#: desktop-properties/property-ui.c:194
-msgid "Dialog buttons"
-msgstr "Кнопки диалога"
-
-#: desktop-properties/property-ui.c:199
-msgid "Dialog position"
-msgstr "Расположение диалога"
-
-#: desktop-properties/property-ui.c:204
-msgid "Dialog hints"
-msgstr ""
-
-#: desktop-properties/property-ui.c:211
-msgid "Use statusbar instead of dialog when possible"
-msgstr ""
-
-#: desktop-properties/property-ui.c:221
-msgid "Place dialogs over application window when possible"
-msgstr ""
-
-#: desktop-properties/property-ui.c:232
-msgid "Dialogs"
-msgstr "Диалоги"
-
-#: desktop-properties/property-ui.c:238
-msgid "Menubars are detachable"
-msgstr ""
-
-#: desktop-properties/property-ui.c:247
-msgid "Menubars have relieved border"
-msgstr ""
-
-#: desktop-properties/property-ui.c:256
-msgid "Toolbars are detachable"
-msgstr ""
-
-#: desktop-properties/property-ui.c:265
-msgid "Toolbar buttons have relieved border"
-msgstr ""
-
-#: desktop-properties/property-ui.c:274
-msgid "Toolbars have flat look"
-msgstr ""
-
-#: desktop-properties/property-ui.c:283
-msgid "Toolbars have line separators"
-msgstr ""
-
-#: desktop-properties/property-ui.c:292
-msgid "Toolbars have text labels"
-msgstr ""
-
-#: desktop-properties/property-ui.c:301
-msgid "Statusbar is interactive when possible"
-msgstr ""
-
-#: desktop-properties/property-ui.c:310
-msgid "Dialog buttons have icons"
-msgstr ""
-
-#: desktop-properties/property-ui.c:319
-msgid "Menu items have icons"
-msgstr "Иконки в меню"
-
-#: desktop-properties/property-ui.c:328
-msgid "Application"
-msgstr "Приложение"
-
-#: desktop-properties/property-ui.c:333
-msgid "Default MDI mode"
-msgstr "Обычный MDI режим"
-
-#: desktop-properties/property-ui.c:338
-msgid "MDI notebook tab position"
-msgstr ""
-
-#: desktop-properties/property-ui.c:344
-msgid "MDI"
-msgstr ""
-
 #: gemvt/getopt.c:669
 #, c-format
 msgid "%s: option `%s' is ambiguous\n"
@@ -2061,11 +1692,11 @@ msgstr ""
 msgid "Sort selected submenu"
 msgstr ""
 
-#: gmenu/gmenu.c:151 gmenu/gmenu.c:231 gmenu/gmenu.c:295 gmenu/tree.c:384
+#: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:300 gmenu/tree.c:384
 msgid "GNOME menu editor"
 msgstr ""
 
-#: gmenu/gmenu.c:298
+#: gmenu/gmenu.c:303
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -2390,18 +2021,18 @@ msgstr ""
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:874
+#: gsm/manager.c:879
 msgid "A session shutdown is in progress."
 msgstr ""
 
-#: gsm/manager.c:1004
+#: gsm/manager.c:1009
 #, c-format
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with program \"%s\"."
 msgstr ""
 
-#: gsm/manager.c:1009
+#: gsm/manager.c:1014
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with an unnamed program."
@@ -2793,45 +2424,49 @@ msgstr "Удалить с панели"
 msgid "Move applet"
 msgstr "Передвинуть апплет"
 
-#: panel/drawer.c:119
+#: panel/drawer.c:117
 msgid "Tooltip/Name"
 msgstr "Подсказка/Имя"
 
-#: panel/drawer.c:123
+#: panel/drawer.c:121
 msgid "Icon"
 msgstr "Иконка"
 
-#: panel/drawer.c:127
+#: panel/drawer.c:125
 msgid "Applet appearance"
 msgstr "Внешний вид апплета"
 
-#: panel/drawer.c:134
+#: panel/drawer.c:132
 msgid "Drawer handle"
 msgstr "Ручка ящика"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:138
+#: panel/drawer.c:136
 msgid "Enable hidebutton"
 msgstr "Разрешить кнопки сокрытия"
 
-#: panel/drawer.c:148
+#: panel/drawer.c:146
 msgid "Enable hidebutton arrow"
 msgstr "Разрешить стрелки на кнопках сокрытия"
 
-#: panel/drawer.c:168
+#: panel/drawer.c:166
 msgid "Drawer"
 msgstr "Ящик"
 
-#: panel/launcher.c:121
+#: panel/launcher.c:39
+msgid "This launch icon does not specify a program to run"
+msgstr ""
+
+#: panel/launcher.c:123
 msgid "App"
 msgstr "Прил."
 
-#: panel/launcher.c:210
+#: panel/launcher.c:212
 msgid "Launcher properties"
 msgstr "Настройки кнопок запуска"
 
-#: panel/launcher.c:295
+#: panel/launcher.c:297
 msgid "Create launcher applet"
 msgstr "Создать кнопку запуска"
 
@@ -2839,7 +2474,7 @@ msgstr "Создать кнопку запуска"
 msgid "Log out"
 msgstr "Завершить Работу"
 
-#: panel/logout.c:37
+#: panel/logout.c:36
 msgid "Log out of GNOME"
 msgstr "Завершить Работу в GNOME"
 
@@ -2989,47 +2624,47 @@ msgstr "Запереть экран"
 msgid "About GNOME..."
 msgstr "О Gnome..."
 
-#: panel/menu.c:3017
+#: panel/menu.c:3020
 msgid "Can't open directory, using main menu!"
 msgstr "Невозможно открыть каталог, используется главное меню"
 
-#: panel/menu.c:3146
+#: panel/menu.c:3149
 msgid "In a submenu"
 msgstr "Во второстепенное меню"
 
-#: panel/menu.c:3158
+#: panel/menu.c:3161
 msgid "On the main menu"
 msgstr "В главное меню"
 
-#: panel/menu.c:3180
+#: panel/menu.c:3183
 msgid "Menu properties"
 msgstr "Настройка меню"
 
-#: panel/menu.c:3187
+#: panel/menu.c:3190
 msgid "Menu type"
 msgstr "Тип меню"
 
-#: panel/menu.c:3194 panel/menu.c:3214
+#: panel/menu.c:3197 panel/menu.c:3217
 msgid "Main menu"
 msgstr "Главное меню"
 
-#: panel/menu.c:3205 panel/menu.c:3237
+#: panel/menu.c:3208 panel/menu.c:3240
 msgid "Normal menu"
 msgstr "Нормальное меню"
 
-#: panel/menu.c:3225
+#: panel/menu.c:3228
 msgid "System menu: "
 msgstr "Системные меню"
 
-#: panel/menu.c:3229
+#: panel/menu.c:3232
 msgid "User menu: "
 msgstr "Пользовательские меню: "
 
-#: panel/menu.c:3233
+#: panel/menu.c:3236
 msgid "Red Hat menu (if found): "
 msgstr "Red Hat меню (если есть): "
 
-#: panel/menu.c:3247
+#: panel/menu.c:3250
 msgid "Menu path"
 msgstr "Путь к меню"
 
@@ -3092,11 +2727,11 @@ msgstr "Ориентация"
 #. Horizontal
 #: panel/panel_config.c:532
 msgid "Horizontal"
-msgstr "Горизонтальный"
+msgstr "Горизонтальн."
 
 #: panel/panel_config.c:545
 msgid "Vertical"
-msgstr "Вертикальный"
+msgstr "Вертикальн."
 
 #. Hidebuttons frame
 #: panel/panel_config.c:556
@@ -3282,13 +2917,13 @@ msgstr "Анимация"
 
 #: panel/panel_config_global.c:587
 msgid "General icon settings"
-msgstr "Общие настройки иконок"
+msgstr "Общая настройка иконок"
 
-#: panel/session.c:662
+#: panel/session.c:666
 msgid "Really log out?"
 msgstr "Вы действительно хотите завершить работу?"
 
-#: panel/session.c:677
+#: panel/session.c:681
 msgid "Ask next time"
 msgstr "Спрашивать в следующий раз"
 
