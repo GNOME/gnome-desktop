@@ -35,8 +35,8 @@
 #define GNOME_DITEM_EDIT_H
 
 #include <gtk/gtk.h>
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-ditem.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-ditem.h>
 
 BEGIN_GNOME_DECLS
 

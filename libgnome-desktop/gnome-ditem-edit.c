@@ -1396,7 +1396,7 @@ gnome_ditem_edit_get_single_url_drop_toggle(GnomeDItemEdit *dee)
 
 #ifdef TEST_DITEM_EDIT
 
-#include "libgnomeui.h"
+#include <libgnomeui.h>
 
 static void
 changed_callback(GnomeDItemEdit *dee, gpointer data)
