@@ -46,6 +46,9 @@ static gchar *contributors[] = {
 	"Chema Celorio",
 	"Damon Chaplin",
 	"Kevin Charter",
+	/* CJK people please use (U5F35) (U570B) (U51A0) to replace
+	 * this name */
+	N_("Abel Cheung"),
 	"Kenneth Rohde Christiansen",
 	"Chad Clark",
 	"Matthias Clasen",
@@ -119,6 +122,9 @@ static gchar *contributors[] = {
 	"Miguel de Icaza",
 	"Tim Janik",
 	"Stefan Jeske",
+	/* Wang is the surname. CJK people, please use (U738B) (U5251)
+	 * to replace this name. */
+	N_("Wang Jian"),
 	"Michael K. Johnson",
 	"Andy Kahn",
 	"Sami Kananoja",
