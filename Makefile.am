@@ -1,1 +1,1 @@
-SUBDIRS = panel gsm  pixmaps po desktop-links dekstop-properties
+SUBDIRS = panel gsm  pixmaps po desktop-links desktop-properties intl

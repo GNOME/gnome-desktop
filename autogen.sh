@@ -76,7 +76,11 @@ fi
 for i in .
 do 
     echo processing $srcdir/$i
-    (cd $srcdir/$i; libtoolize --copy --force; aclocal; automake --gnu; autoheader; autoconf)
+    (cd $srcdir/$i; \
+    libtoolize --copy --force; \
+    if test -d macros; then aclocal -I macros; else aclocal; fi; \
+    automake --add-missing; \
+    automake --gnu; autoheader; autoconf)
 done
 
 echo running $srcdir/configure
