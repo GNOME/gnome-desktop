@@ -91,7 +91,7 @@ manual-all: manual-html manual-ps manual-rtf
 	dvips -o $@ $<
 
 %/%.html: %.sgml
-	db2html $<
+	-db2html $<
 
 %.rtf: %.sgml
 	db2rtf $<
@@ -104,10 +104,10 @@ gnome-intro.html: gnome-intro/gnome-intro.html
 # will have in the gnome-intro directory.  eventually I'll handle this
 # by calling it gnome-intro-prebuilt or something
 gnome-intro/gnome-intro.html: gnome-intro.sgml
-	-db2html gnome-intro.sgml
-	-mkdir gnome-intro/pix
-	cp pix/*.gif gnome-intro/pix
-	if test -d gnome-intro.junk/CVS; then \
+	-(db2html gnome-intro.sgml \
+	&& mkdir gnome-intro/pix \
+	&& cp pix/*.gif gnome-intro/pix \
+	&& if test -d gnome-intro.junk/CVS; then \
 		echo "CVS directory got moved -- moving it back"; \
 		mv gnome-intro.junk/CVS $(srcdir)/gnome-intro/CVS; \
-	else echo "CVS directory did not get moved -- all is OK"; fi
+	else echo "CVS directory did not get moved -- all is OK"; fi )
