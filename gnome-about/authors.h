@@ -198,6 +198,7 @@ static author authors[] = {
 	{ "John Schulien", "" },
 	{ "Iñigo Serna", "" },
 	{ "Shaleh", "" },
+	{ "Joe \"Harold\" Shaw", "joe@helixcode.com" },
 	{ "Alejandro Aguilar Sierra", "" },
 	{ "Miroslav Silovic", "" },
 	{ "Manish Singh", "" },

@@ -2,7 +2,7 @@ pixmapdir = $(datadir)/pixmaps
 tilesdir = $(datadir)/pixmaps/tiles
 
 BITMAPS     = \
-	emacs.png				\
+	gnome-emacs.png				\
 	gnome-aorta.png				\
 	gnome-amusements.png        \
 	gnome-applications.png      \
