@@ -1,3 +1,12 @@
+2001-11-30  Seth Nickell  <snickell@stanford.edu>
+
+	* gnome-desktop-item.c: (get_encoding):
+
+	Return "MIXED_ENCODING" when we aren't sure
+	what the type is, at least for now. Our detection
+	functions also need to be rewritten to use GnomeVFS
+	fully. They assume "uri:/foo" -> "/foo".
+
 2001-11-28  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-hint.h: Inherit from GtkDialog instead of

@@ -2298,10 +2298,10 @@ get_encoding (const char *uri, ReadBuf *rb)
 	 * validates as utf8 I suppose */
 
 	if (!g_file_get_contents (gnome_vfs_uri_get_path (gnome_vfs_uri_new(uri)), &contents, NULL, NULL)) {
-		return ENCODING_UNKNOWN;
+		return ENCODING_LEGACY_MIXED;
 	}
 	if (contents == NULL) /* Ooooooops ! */
-		return ENCODING_UNKNOWN;
+		return ENCODING_LEGACY_MIXED;
 
 	if (g_utf8_validate (contents, -1, NULL)) {
 		g_free (contents);
