@@ -19,14 +19,19 @@ sgml_files = \
 	$(sgml_ents)		\
 	$(applet)_applet.sgml
 
+#Scrollkeeper related stuff
+omf_dir=$(top_srcdir)/omf-install
+
 # automake does not know anything about .sgml files yet -> EXTRA_DIST
-EXTRA_DIST = $(sgml_files) $(doc_DATA)
+EXTRA_DIST = $(sgml_files) $(doc_DATA) $(omffiles)
 
 all: index.html
+	-scrollkeeper-preinstall $(DESTDIR)$(docdir)/$(applet)_applet.sgml $(omffiles) $(omf_dir)/$(omffiles)
+
 
 index.html: $(applet)_applet/index.html
 	-cp $(applet)_applet/index.html .
-
+	
 $(applet)_applet.sgml: $(sgml_ents)
 	-ourdir=`pwd`;	\
 	cd $(srcdir);	\

@@ -15,6 +15,7 @@ SUBDIRS = \
 	 core-docs \
 	 panel \
 	 applets \
+	 omf-install \
 	 idl
 
 EXTRA_DIST = \
