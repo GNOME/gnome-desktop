@@ -1,3 +1,12 @@
+2001-08-21  Martin Baulig  <baulig@suse.de>
+
+	* bonobo-config-ditem.c (get_encoding): If we can't determine the encoding,
+	suck the whole file in and pipe it through g_utf8_validate().
+	(encode_string): Never return NULL, instead use CORBA_string_dup ("").
+	(bonobo_config_ditem_write_key): Deal with GNOME::LocalizedStringList.
+	(bonobo_config_ditem_load): Correctly deal with newlines and wide unicode
+	chars on legacy-mixed encoded files.
+
 2001-08-20  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am, bonobo-config-ditem.c: Disable dmalloc again. Hmm, for the

@@ -594,6 +594,7 @@ get_encoding (const char *file, FILE *f)
 {
 	int c;
 	gboolean old_kde = FALSE;
+	gchar *contents = NULL;
 	
 	while ((c = getc_unlocked (f)) != EOF) {
 		/* find starts of lines */
@@ -638,7 +639,18 @@ get_encoding (const char *file, FILE *f)
 	/* A dillema, new KDE files are in UTF-8 but have no Encoding
 	 * info, at this time we really can't tell.  The best thing to
 	 * do right now is to just assume UTF-8 I suppose */
-	return GNOME_Desktop_ENCODING_UTF8;
+
+	g_file_get_contents (file, &contents, NULL, NULL);
+	if (!contents) /* Ooooooops ! */
+		return GNOME_Desktop_ENCODING_UNKNOWN;
+
+	if (g_utf8_validate (contents, -1, NULL)) {
+		g_free (contents);
+		return GNOME_Desktop_ENCODING_UTF8;
+	} else {
+		g_free (contents);
+		return GNOME_Desktop_ENCODING_LEGACY_MIXED;
+	}
 }
 
 static CORBA_char *
@@ -652,23 +664,24 @@ encode_string (const gchar *value, GNOME_Desktop_Encoding encoding, const gchar 
 		const char *char_encoding = get_encoding_from_locale (locale);
 		char *utf8_string;
 		if (char_encoding == NULL)
-			return NULL;
+			goto errorout;
 		utf8_string = g_convert (value, -1, "UTF-8", char_encoding,
 					NULL, NULL, NULL);
 		if (utf8_string == NULL)
-			return NULL;
+			goto errorout;
 		newvalue = decode_utf8_string_and_dup (utf8_string);
 		g_free (utf8_string);
 	/* if utf8, then validate */
 	} else if (locale && encoding == GNOME_Desktop_ENCODING_UTF8) {
 		if (!g_utf8_validate (value, -1, NULL))
 			/* invalid utf8, ignore this key */
-			return NULL;
+			goto errorout;
 		newvalue = decode_utf8_string_and_dup (value);
 	} else {
 		newvalue = decode_ascii_string_and_dup (value);
 	}
 
+ errorout:
 	retval = CORBA_string_dup (newvalue ? newvalue : "");
 	g_free (newvalue);
 
@@ -705,7 +718,7 @@ bonobo_config_ditem_write_key (BonoboConfigDItemKey *key, GNOME_Desktop_Encoding
 		CORBA_Environment ev;
 		CORBA_any *any;
 
-		g_assert (CORBA_TypeCode_equal (real_tc, TC_GNOME_LocalizedString, NULL));
+		g_assert (CORBA_TypeCode_equal (key->tc, TC_GNOME_LocalizedString, NULL));
 
 		localized.locale = CORBA_string_dup (key->name);
 		localized.text = encode_string (value, encoding, key->name);
@@ -719,6 +732,43 @@ bonobo_config_ditem_write_key (BonoboConfigDItemKey *key, GNOME_Desktop_Encoding
 		g_assert (!BONOBO_EX (&ev));
 
 		key->dirty = TRUE;
+
+		break;
+	}
+
+	case CORBA_tk_sequence: {
+		GNOME_LocalizedString localized;
+		BonoboConfigDItemKey *subkey;
+		CORBA_Environment ev;
+		CORBA_any *any;
+
+		g_assert (CORBA_TypeCode_equal (key->tc, TC_GNOME_LocalizedStringList, NULL));
+
+		localized.locale = CORBA_string_dup ("C");
+		localized.text = encode_string (value, encoding, key->name);
+
+		any = bonobo_arg_new (TC_GNOME_LocalizedString);
+		BONOBO_ARG_SET_GENERAL (any, localized, TC_GNOME_LocalizedString,
+					GNOME_LocalizedString, &ev);
+
+		subkey = g_hash_table_lookup (key->subvalues, "C");
+		if (!subkey) {
+			subkey = g_new0 (BonoboConfigDItemKey, 1);
+			subkey->name = g_strdup ("C");
+			subkey->tc = TC_GNOME_LocalizedString;
+
+			setup_key (subkey);
+
+			g_hash_table_insert (key->subvalues, subkey->name, subkey);
+
+			sync_sequence_members (key);
+		}
+
+		CORBA_exception_init (&ev);
+		DynamicAny_DynAny_from_any (subkey->dyn, any, &ev);
+		g_assert (!BONOBO_EX (&ev));
+
+		subkey->dirty = TRUE;
 
 		break;
 	}
@@ -898,8 +948,8 @@ bonobo_config_ditem_load (const gchar *file)
 	
 	state = FirstBrace;
 	while ((c = getc_unlocked (f)) != EOF){
-		if ( ! WideUnicodeChar &&
-		    c == '\r')		/* Ignore Carriage Return,
+		if ( (state != WideUnicodeChar) &&
+		     c == '\r')		/* Ignore Carriage Return,
 					   unless in a wide unicode char */
 			continue;
 		
@@ -995,7 +1045,7 @@ bonobo_config_ditem_load (const gchar *file)
 				state = c == '\n' ? KeyDef : IgnoreToEOL;
 				next = CharBuffer;
 			} else {
-				if (g_utf8_skip[c] > 1) {
+				if ((encoding == GNOME_Desktop_ENCODING_UTF8) && (g_utf8_skip[c] > 1)) {
 					state = WideUnicodeChar;
 					utf8_chars_to_go = g_utf8_skip[c] - 1;
 				}
