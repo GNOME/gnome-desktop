@@ -22,7 +22,6 @@ static author authors[] = {
 	{ "Martijn van Beers", "" },
 	{ "Frank Belew", "" },
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
-	{ "Frank Belew", "" },
 	{ "Eckehard Berns", "" },
 	{ "Robert Bihlmeyer", "" },
 	{ "Jonathan Blandford", "<jrb@redhat.com>" },
