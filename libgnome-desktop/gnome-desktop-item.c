@@ -399,6 +399,8 @@ make_fake_directory (const char *dir)
 	g_free (file);
 
 	read_sort_order (item, dir);
+
+	return item;
 }
 
 /**
@@ -407,8 +409,6 @@ make_fake_directory (const char *dir)
  * @flags: Flags to influence the loading process
  *
  * This function loads 'file' and turns it into a GnomeDesktopItem.
- * If 'file' is a directory, it loads all the items under that
- * directory as subitems of the directory's GnomeDesktopItem.
  *
  * Returns: The newly loaded item.
  */
@@ -453,12 +453,10 @@ get_dirname (const char *uri)
 
 /**
  * gnome_desktop_item_new_from_uri:
- * @url: GnomeVFSURI to load the GnomeDesktopItem from
+ * @uri: GnomeVFSURI to load the GnomeDesktopItem from
  * @flags: Flags to influence the loading process
  *
- * This function loads 'file' and turns it into a GnomeDesktopItem.
- * If 'file' is a directory, it loads all the items under that
- * directory as subitems of the directory's GnomeDesktopItem.
+ * This function loads 'uri' and turns it into a GnomeDesktopItem.
  *
  * Returns: The newly loaded item.
  */
