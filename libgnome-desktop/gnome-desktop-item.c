@@ -2933,7 +2933,7 @@ gnome_desktop_item_set_strings (GnomeDesktopItem *item,
 	g_return_if_fail (attr != NULL);
 
 	str = g_strjoinv (";", strings);
-	str2 = g_strconcat (str, ";");
+	str2 = g_strconcat (str, ";", NULL);
 	/* FIXME: there's no way to escape semicolons apparently */
 	set (item, attr, str2);
 	g_free (str);
