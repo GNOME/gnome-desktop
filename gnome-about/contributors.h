@@ -177,6 +177,7 @@ static gchar *contributors[] = {
 	"Nick Lopez",
 	"Dirk Lutjens",
 	"Josh MacDonald",
+	"Davyd Madeley",
 	"Paolo Maggi",
 	"Sam Magnuson",
 	"Ian Main",
