@@ -46,7 +46,7 @@
 #include "gnome-util.h"
 #include "gnome-config.h"
 #include "gnome-exec.h"
-#include "gnome-i18n.h"
+#include "gnome-i18nP.h"
 #include "gnome-popt.h"
 #include "gnome-mime.h"
 
