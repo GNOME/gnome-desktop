@@ -1,7 +1,7 @@
 /* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <libbonobo.h>
-#include <libgnome/Gnome.h>
-#include <libgnome/gnome-ditem.h>
+#include <gnome-desktop/GNOME_Desktop.h>
+#include <gnome-desktop/gnome-desktop-item.h>
 #include <locale.h>
 #include <stdlib.h>
 
@@ -13,7 +13,7 @@ boot_ditem (Bonobo_ConfigDatabase db)
 	BonoboArg *arg;
 	CORBA_Environment ev;
 
-	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
+	arg = bonobo_arg_new (TC_GNOME_Desktop_Entry);
 	bonobo_pbclient_set_value (db, "/Desktop Entry", arg, NULL);
 	bonobo_arg_release (arg);
 
@@ -31,7 +31,7 @@ static void G_GNUC_UNUSED
 test_ditem (Bonobo_ConfigDatabase db)
 {
 	GnomeDesktopItem *ditem;
-	GNOME_DesktopEntryType type;
+	GNOME_Desktop_EntryType type;
 	const gchar *text;
 	GSList *list, *c;
 
@@ -133,8 +133,9 @@ main (int argc, char **argv)
 
 	// test_builtin ();
 
-	// db = bonobo_config_ditem_new ("/tmp/test.desktop");
+	db = bonobo_config_ditem_new ("/tmp/test.desktop");
 
+#if 0
         CORBA_exception_init (&ev);
 	db = bonobo_get_object ("ditem:/tmp/test.desktop", "Bonobo/ConfigDatabase", &ev);
 	g_assert (!BONOBO_EX (&ev));
@@ -147,15 +148,16 @@ main (int argc, char **argv)
 
 	g_assert (db != NULL);
 	g_assert (default_db != NULL);
+#endif
 
 	test_ditem (db);
 
+#if 0
         CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_addDatabase (db, default_db, "/gnome-ditem/",
 					   Bonobo_ConfigDatabase_DEFAULT, &ev);
 	g_assert (!BONOBO_EX (&ev));
 
-#if 0
 	dirlist = Bonobo_ConfigDatabase_getDirs (db, "", &ev);
 	g_assert (!BONOBO_EX (&ev));
 
@@ -225,26 +227,44 @@ main (int argc, char **argv)
 	CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Desktop Entry/Name[de]", &ev);
+	if (type)
+		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
 	type = bonobo_pbclient_get_type (db, "/Desktop Entry/URL", &ev);
 	if (type)
 		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+	value = bonobo_pbclient_get_value (db, "/Desktop Entry/Name[de]", TC_GNOME_LocalizedString, &ev);
+	g_message (G_STRLOC ": %p", value);
+	if (value) {
+		GNOME_LocalizedString localized;
+
+		localized = BONOBO_ARG_GET_GENERAL (value, TC_GNOME_LocalizedString, GNOME_LocalizedString, NULL);
+		g_message (G_STRLOC ": |%s| - |%s|", localized.locale, localized.text);
+	}
 	CORBA_exception_free (&ev);
 
 	string = bonobo_pbclient_get_string (db, "/Desktop Entry/URL", NULL);
 	g_message (G_STRLOC ": |%s|", string);
 	bonobo_pbclient_set_string (db, "/Desktop Entry/URL", "http://www.gnome.org/", NULL);
 
+#if 0
 	CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_sync (db, &ev);
 	g_assert (!BONOBO_EX (&ev));
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_DesktopEntry, &ev);
+	value = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_Desktop_Entry, &ev);
 	g_message (G_STRLOC ": %p", value);
 	if (value)
 		printf ("got value as GNOME::DesktopEntry\n");
         CORBA_exception_free (&ev);
+#endif
 
 	exit (0);
 }

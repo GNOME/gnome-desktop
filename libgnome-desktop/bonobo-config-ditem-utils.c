@@ -267,7 +267,7 @@ case CORBA_tk_ ## k:                                                            
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
 
-		length = type->length;
+		length = type->sub_parts;
 
 		members = CORBA_sequence_DynamicAny_NameValuePair__alloc ();
 		members->_length = length;
@@ -287,6 +287,7 @@ case CORBA_tk_ ## k:                                                            
 				GSList *extra_attrs = NULL;
 				gulong extra_length;
 
+#ifdef FIXME
 				l = de->subvalues;
 				while (l) {
 					Bonobo_Pair *pair;
@@ -326,6 +327,7 @@ case CORBA_tk_ ## k:                                                            
 				next_extra_attr_loop:
 					l = l->next;
 				}
+#endif
 
 				extra_length = g_slist_length (extra_attrs);
 				attr_list._buffer = CORBA_sequence_Bonobo_Pair_allocbuf (extra_length);
@@ -403,7 +405,7 @@ case CORBA_tk_ ## k:                                                            
 			gchar *value, *up;
 
 			up = g_strup (g_strdup (de->value ? de->value : "UNKNOWN"));
-			value = g_strdup_printf ("DESKTOP_ENTRY_TYPE_%s", up);
+			value = g_strdup_printf ("ENTRY_TYPE_%s", up);
 			DynamicAny_DynEnum_set_as_string (dynenum, value, ev);
 			g_free (value); g_free (up);
 		} else {

@@ -136,7 +136,7 @@ ditem_load (const char *data_file,
 	CORBA_exception_init (&ev);
 	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_Desktop_Entry, &ev);
 	if (BONOBO_EX (&ev)) {
-		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+		g_warning (G_STRLOC " (%s): %s", data_file, bonobo_exception_get_text (&ev));
 		CORBA_exception_free (&ev);
 		return NULL;
 	}

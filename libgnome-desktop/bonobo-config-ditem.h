@@ -26,25 +26,6 @@ typedef struct _BonoboConfigDItem        BonoboConfigDItem;
 typedef struct _BonoboConfigDItemClass   BonoboConfigDItemClass;
 typedef struct _BonoboConfigDItemPrivate BonoboConfigDItemPrivate;
 
-typedef struct DirEntry {
-	char *name;
-	char *value;
-	gboolean localestring; /* the value is UTF-8 */
-	GSList *subvalues;
-} DirEntry;
-
-typedef struct Section {
-	char *name;
-
-	DirEntry root;
-} Section;
-
-typedef struct Directory {
-	char *path;
-
-	GSList *sections;
-} Directory;
-
 struct _BonoboConfigDItem {
 	BonoboConfigDatabase      base;
 
