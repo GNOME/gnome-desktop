@@ -314,14 +314,19 @@ dnl
 dnl Check for libbz2
 dnl
 oLIBS="$LIBS"
+BZ_LIBS=""
 AC_CHECK_LIB(bz2, bzopen, [
 	AC_DEFINE(HAVE_LIBBZ2)
 	LIBS=$oLIBS
 	BZ_LIBS="-lbz2"
-	AC_SUBST(BZ_LIBS)
-	],[
-	AC_MSG_WARN([Recent enough BZ2 library not found. Help-Browser will not be able to read bzipped man/info pages])
-])
+	], AC_CHECK_LIB(bz2, BZ2_bzopen, [
+	   AC_DEFINE(HAVE_LIBBZ2)
+	   AC_DEFINE(HAVE_LIBBZ2_1_0)
+	   LIBS=$oLIBS
+	   BZ_LIBS="-lbz2"
+	   ], AC_MSG_WARN([Recent enough BZ2 library not found. Help-Browser will not be able to read bzipped man/info pages])
+))
+AC_SUBST(BZ_LIBS)
 
 dnl
 dnl Place to look for KDE menus

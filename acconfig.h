@@ -44,6 +44,7 @@
 #undef HAVE_HOSTS_ACCESS
 
 #undef HAVE_LIBBZ2
+#undef HAVE_LIBBZ2_1_0
 
 #undef GNOME_ICONDIR
 
