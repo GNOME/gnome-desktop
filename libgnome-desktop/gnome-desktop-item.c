@@ -1,5 +1,5 @@
 /* -*- Mode: C; c-set-style: linux indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-/* gnome-ditem.h - GNOME Desktop File Representation 
+/* gnome-desktop-item.c - GNOME Desktop File Representation 
 
    Copyright (C) 1999, 2000 Red Hat Inc.
    All rights reserved.
@@ -41,7 +41,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
-#include <gnome-desktop/gnome-ditem.h>
+#include <gnome-desktop/gnome-desktop-item.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-exec.h>

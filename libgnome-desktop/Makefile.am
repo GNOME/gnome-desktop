@@ -27,8 +27,8 @@ $(CORBA_SRCLIST): $(top_srcdir)/idl/GNOME_Desktop.idl $(ORBIT_IDL)
 BUILT_SOURCES = $(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_SOURCES = \
-	gnome-ditem.h		\
-	gnome-ditem.c		\
+	gnome-desktop-item.h	\
+	gnome-desktop-item.c	\
 	$(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_LIBADD = \
