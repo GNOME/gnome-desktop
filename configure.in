@@ -60,6 +60,17 @@ AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
 
 dnl
+dnl GdkPixBuf
+dnl
+PIXBUF_CFLAGS=`$GNOME_CONFIG --cflags gdk_pixbuf`
+PIXBUF_LIBS=`$GNOME_CONFIG --libs gdk_pixbuf`
+AC_SUBST(PIXBUF_CFLAGS)
+AC_SUBST(PIXBUF_LIBS)
+if test "x$PIXBUF_CFLAGS" = x ; then
+       AC_MSG_ERROR(GdkPixBuf library is required for the panel)
+fi
+
+dnl
 dnl Gnome Terminal
 dnl
 ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
