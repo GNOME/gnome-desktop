@@ -3,6 +3,7 @@ SUBDIRS = \
 	 idl \
 	 gnome-desktop \
 	 gnome-terminal \
+	 gnome-about \
 	 gsm \
 	 panel \
 	 smproxy
@@ -19,7 +20,6 @@ EXTRA_SUBDIRS = \
 	 gmenu \
 	 gnome-edit \
 	 gnome-hint \
-	 gnome-about \
 	 core-docs \
 	 panel \
 	 applets \
