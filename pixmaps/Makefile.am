@@ -48,6 +48,7 @@ BITMAPS     = \
 	gnome-unknown.png			\
 	gnome-word.png				\
 	kterm.xpm				\
+	vnterm.xpm				\
 	launcher-program.png			\
 	monitor.png				\
 	netscape.png				\
