@@ -386,6 +386,19 @@ real_get_keys (BonoboConfigDatabase *db,
 	return key_list;
 }
 
+static CORBA_boolean
+real_has_dir (BonoboConfigDatabase *db,
+	      const CORBA_char     *dir,
+	      CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+
+	if (lookup_dir (ditem->_priv->dir, dir, FALSE))
+		return TRUE;
+
+	return FALSE;
+}
+
 static void
 real_sync (BonoboConfigDatabase *db, 
 	   CORBA_Environment    *ev)
@@ -495,6 +508,7 @@ bonobo_config_ditem_class_init (BonoboConfigDatabaseClass *class)
 
 	cd_class->get_dirs     = real_get_dirs;
 	cd_class->get_keys     = real_get_keys;
+	cd_class->has_dir      = real_has_dir;
 }
 
 static void
