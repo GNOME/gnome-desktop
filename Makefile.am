@@ -21,6 +21,7 @@ SUBDIRS = \
 EXTRA_DIST = \
 	gnome-core.spec.in	\
 	gnome-core.spec		\
+	COPYING-DOCS		\
 	applet-docs.make	\
 	app-docs.make
 
