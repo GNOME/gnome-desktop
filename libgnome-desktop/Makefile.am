@@ -18,6 +18,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-ditem-edit.c	\
 	gnome-hint.c		\
 	gnome-desktop-i18n.c	\
+	gnome-desktop-i18n.h	\
 	$(EGGFILES)
 
 
