@@ -69,13 +69,10 @@ pixmap_DATA =					\
 	apple-red.png				\
 	gnome-ccbackground.png			\
 	gnome-ccdesktop.png     		\
-	gnome-ccthemes.png			\
 	gnome-ccdialog.png			\
 	gnome-ccmime.png    			\
 	gnome-ccscreensaver.png			\
 	gnome-ccwindowmanager.png 		\
-	gnome-cckeyboard-bell.png		\
-	gnome-cckeyboard.png			\
 	gnome-ccperiph.png      		\
 	gnome-debian.png			\
 	gnome-suse.png				\
