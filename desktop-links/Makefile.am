@@ -9,6 +9,9 @@ Audiodir        = $(appsdir)/Audio
 Networkdir      = $(appsdir)/Network
 Gamesdir        = $(appsdir)/Games
 
+Order_files = \
+	Root.order
+
 Directory_files = \
 	Applications.directory \
 	Graphics.directory     \
@@ -47,7 +50,7 @@ Games_DATA =
 
 EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(System_DATA) $(Audio_DATA) $(Network_DATA) $(Games_DATA) \
-	$(Directory_files) $(Root_DATA)
+	$(Directory_files) $(Order_files) $(Root_DATA)
 
 install-data-local:
 	$(mkinstalldirs) $(Applicationsdir)
@@ -57,6 +60,7 @@ install-data-local:
 	$(mkinstalldirs) $(Audiodir)
 	$(mkinstalldirs) $(Networkdir)
 	$(mkinstalldirs) $(Gamesdir)
+	$(INSTALL_DATA) $(srcdir)/Root.order $(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Applications.directory $(Applicationsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(Graphicsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/System.directory $(Systemdir)/.directory
