@@ -1,7 +1,11 @@
 /* -*- Mode: C; c-set-style: linux indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /* gnome-ditem.h - GNOME Desktop File Representation 
 
-   Copyright (C) 1999 Red Hat Inc.
+   Copyright (C) 1999, 2000 Red Hat Inc.
+   All rights reserved.
+
+   This file is part of the Gnome Library.
+
    Developed by Elliot Lee <sopwith@redhat.com>
    
    The Gnome Library is free software; you can redistribute it and/or
@@ -18,6 +22,9 @@
    License along with the Gnome Library; see the file COPYING.LIB.  If not,
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
+/*
+  @NOTATION@
+ */
 
 #include "config.h"
 

@@ -19,6 +19,9 @@
 
    GnomeDItemEdit Developers: Havoc Pennington, based on code by John Ellis
 */
+/*
+  @NOTATION@
+*/
 
 #include <config.h>
 

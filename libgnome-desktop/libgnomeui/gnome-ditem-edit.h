@@ -1,6 +1,7 @@
 /*  -*- Mode: C; c-set-style: linux; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 
    Copyright (C) 1999 Free Software Foundation
+   All rights reserved.
     
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
@@ -18,6 +19,9 @@
    Boston, MA 02111-1307, USA.
 
    GnomeDItemEdit Developers: Havoc Pennington, based on code by John Ellis
+*/
+/*
+  @NOTATION@
 */
 
 /******************** NOTE: this is an object, not a widget.
