@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.3cvs\n"
-"POT-Creation-Date: 2000-11-01 10:16+0900\n"
-"PO-Revision-Date: 2000-11-01 10:20+09:00\n"
+"POT-Creation-Date: 2000-11-11 15:33+0900\n"
+"PO-Revision-Date: 2000-11-11 15:36+09:00\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -744,19 +744,19 @@ msgstr "保存"
 msgid "Revert"
 msgstr "戻す"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "お気に入り(ユーザメニュー)"
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "プログラム(システムメニュー)"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "アプレット(システムメニュー)"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "組み込むプログラム (システムメニュー)"
 
@@ -841,11 +841,11 @@ msgid "Sort _Recursive"
 msgstr "再帰的にソート(_R)"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "GNOMEメニューエディタ"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -853,7 +853,7 @@ msgstr ""
 "GNU一般使用許諾書に基づいてリリースされています。\n"
 "GNOMEメニューエディタ"
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "GNOMEがインストールされたディレクトリに入れません\n"
 
@@ -1661,7 +1661,7 @@ msgstr ""
 "これは、/etc/hosts に %s を追加する事で解決できる\n"
 "場合もあります。"
 
-#: gsm/gnome-login-check.c:367
+#: gsm/gnome-login-check.c:368
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
@@ -1840,11 +1840,11 @@ msgstr "プログラムが遅いか、止まったか壊れたようです。"
 msgid "You may wait for it to respond or remove it."
 msgstr "待つことも出来ますが、取り除くことも出来ます。"
 
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "失敗したものを再実行します。"
 
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "セッションのシャットダウンを実行中です。"
 
@@ -2270,7 +2270,7 @@ msgstr "次へ"
 msgid "Go to the next location in the history list"
 msgstr "履歴リストで一つ進む"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "再読込"
 
@@ -2316,29 +2316,29 @@ msgstr ""
 "おそらくこのドキュメントがシステムに\n"
 "インストールされていません"
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "パネルから取り除く"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "移動"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "画像ファイル %s が見つかりません"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "パネル"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "空いている場所を見つけられません"
 
@@ -2424,15 +2424,38 @@ msgstr "隠蔽ボタンに矢印ボタンを使う"
 msgid "Drawer"
 msgstr "引き出し"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr "デスクガイド (デスクトップページャ)"
+
+#: panel/extern.c:338
+msgid "Tasklist"
+msgstr "タスクリスト"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr "バッテリー"
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectadly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" sbumenu in the mail menu)"
+msgstr ""
+"%s が突然異常終了しました。 このアプレットを再起動しますか?\n"
+"(いま再起動を選択しなくてもメインメニューの「アプレット」から "
+"いつでも追加できます)"
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "アプレットを追加できませんでした。"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "ぐはぁ! なんかパネルを追加できないっす"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "ソケットが作成されませんでした"
 
@@ -3128,7 +3151,7 @@ msgid "Applets"
 msgstr "アプレット"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format= %p %I:%M:%S"
 
@@ -3397,7 +3420,7 @@ msgstr "メニューパス"
 msgid "Use custom icon for panel button"
 msgstr "パネル・ボタンにカスタム・アイコンを使う"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr "URLを開く: %s"
@@ -3577,9 +3600,6 @@ msgstr "高さ"
 
 #~ msgid "Show properties `?' button"
 #~ msgstr "`?'ボタンのプロパティを表示"
-
-#~ msgid "Show desktop pager"
-#~ msgstr "デスクトップページャを表示"
 
 #~ msgid "Cannot lock screen using xscreensaver!"
 #~ msgstr "xscreensaverで画面のロックができません。"
