@@ -6,6 +6,7 @@ SUBDIRS =			\
 	gnome-about 		\
 	gsm 			\
 	panel 			\
+	libpanel-applet		\
 	smproxy 		\
 	pixmaps			\
 	applets			\
