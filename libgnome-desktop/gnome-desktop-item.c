@@ -2172,10 +2172,10 @@ gnome_desktop_item_set_location_file (GnomeDesktopItem *item, const char *file)
 	if (file != NULL) {
 		char *uri;
 		uri = gnome_vfs_get_uri_from_local_path (file);
-		gnome_desktop_item_set_location_file (item, uri);
+		gnome_desktop_item_set_location (item, uri);
 		g_free (uri);
 	} else {
-		gnome_desktop_item_set_location_file (item, NULL);
+		gnome_desktop_item_set_location (item, NULL);
 	}
 }
 
