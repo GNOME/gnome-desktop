@@ -60,7 +60,7 @@ for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   fi
 done
 
-if test ${mico_prefix+set} = set ; then
+if test x${mico_prefix+set} = xset ; then
   AC_MSG_RESULT($mico_prefix)
 else
   AC_MSG_RESULT(not found)
