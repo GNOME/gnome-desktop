@@ -68,6 +68,7 @@ static author authors[] = {
 	{ "Jochen Friedrich", "" },
 	{ "Adam Fritzler", "" },
 	{ "Michael Fulbright", "" },
+	{ "Christopher R. Gabriel",""},
 	{ "Mark Galassi", "" },
 	{ "Tony Gale", "" },
 	{ "Jeff Garzik", "" },
