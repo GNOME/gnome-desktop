@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core-0.20\n"
-"POT-Creation-Date: 1999-09-23 03:39-0500\n"
+"POT-Creation-Date: 1999-09-27 07:00+0200\n"
 "PO-Revision-Date: 1999-09-24 21:00+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -104,7 +104,7 @@ msgstr "Inställningar för klocka"
 #: applets/fvwm-pager/properties.c:247
 #: applets/mini-commander/src/preferences.c:675
 #: applets/modemlights/properties.c:244 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:1054
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:1056
 #: panel/panel_config_global.c:310
 msgid "General"
 msgstr "Allmänt"
@@ -112,7 +112,7 @@ msgstr "Allmänt"
 #. frame for colors
 #: applets/another_clock/another_clock.c:225
 #: applets/mini-commander/src/preferences.c:597
-#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1285
+#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1287
 msgid "Colors"
 msgstr "Färger"
 
@@ -157,7 +157,7 @@ msgstr "Analog klocka, liknande den i CDE-panelen."
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/desk-guide/deskguide_applet.c:192 applets/diskusage/diskusage.c:711
+#: applets/desk-guide/deskguide_applet.c:207 applets/diskusage/diskusage.c:711
 #: applets/drivemount/drivemount.c:512
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
@@ -174,7 +174,7 @@ msgstr "Egenskaper..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/desk-guide/deskguide_applet.c:186 applets/dialer/dialer.c:162
+#: applets/desk-guide/deskguide_applet.c:201 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
@@ -529,29 +529,150 @@ msgstr "Temafil (katalog):"
 msgid "Theme"
 msgstr "Tema"
 
-#: applets/desk-guide/deskguide_applet.c:123
+#. Tooltips frame
+#: applets/desk-guide/deskguide_applet.c:61 panel/panel_config_global.c:408
+msgid "Tooltips"
+msgstr "Verktygstips"
+
+#: applets/desk-guide/deskguide_applet.c:63
+msgid "Enable Desktop Names"
+msgstr "Slå på skrivbordsnamn"
+
+#: applets/desk-guide/deskguide_applet.c:65
+msgid "Desktop Name Popup Delay [ms]"
+msgstr "Fördröjning för skrivbordsnamn [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:67
+msgid "Enable Tooltips"
+msgstr "Slå på verktygstips"
+
+#: applets/desk-guide/deskguide_applet.c:69
+msgid "Tooltips Delay [ms]"
+msgstr "Fördröjning för verktygstips [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:70
+msgid "Layout"
+msgstr "Utseende"
+
+#: applets/desk-guide/deskguide_applet.c:72
+msgid "Switch Arrow"
+msgstr "Byt plats på pilen"
+
+#: applets/desk-guide/deskguide_applet.c:74
+msgid "Show only current Desktop"
+msgstr "Visa bara aktivt skrivbord"
+
+#: applets/desk-guide/deskguide_applet.c:76
+msgid "Show Desktop Pager"
+msgstr "Visa skrivbordsväljaren"
+
+#: applets/desk-guide/deskguide_applet.c:78
+msgid "Tasks"
+msgstr "Program"
+
+#: applets/desk-guide/deskguide_applet.c:79
+msgid "Visibility"
+msgstr "Visa dessa program"
+
+#: applets/desk-guide/deskguide_applet.c:81
+msgid "Show `HIDDEN' Tasks"
+msgstr "Visa program som är \"HIDDEN\""
+
+#: applets/desk-guide/deskguide_applet.c:83
+msgid "Show `SHADED' Tasks"
+msgstr "Visa program som är \"SHADED\" program"
+
+#: applets/desk-guide/deskguide_applet.c:85
+msgid "Show `SKIP-WINLIST' Tasks"
+msgstr "Visa program som är \"SKIP_WINLIST\""
+
+#: applets/desk-guide/deskguide_applet.c:87
+msgid "Show `SKIP-TASKBAR' Tasks"
+msgstr "Visa program som är \"sKIP_TASKBAR\""
+
+#: applets/desk-guide/deskguide_applet.c:88
+msgid "Cosmetics"
+msgstr "Utseende"
+
+#: applets/desk-guide/deskguide_applet.c:90
+msgid "Raise Area Grid Above Tasks"
+msgstr "Höj rutnät för område över program"
+
+#. CONFIG_SECTION ("", NULL),
+#: applets/desk-guide/deskguide_applet.c:93
+#: applets/gnome-pager/gnomepager_applet.c:401
+#: applets/tasklist/tasklist_properties.c:219
+msgid "Geometry"
+msgstr "Geometri"
+
+#: applets/desk-guide/deskguide_applet.c:94
+msgid "Horizontal Layout"
+msgstr "Vågrätt"
+
+#: applets/desk-guide/deskguide_applet.c:96
+msgid "Desktop Height [pixels]"
+msgstr "Skrivbordshöjd [pixel]"
+
+#: applets/desk-guide/deskguide_applet.c:98
+msgid "Divide Height By Number Of Vertical Areas"
+msgstr "Dela höjden med antalet lodräta områden"
+
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Vertical Layout"
+msgstr "Lodrätt"
+
+#: applets/desk-guide/deskguide_applet.c:101
+msgid "Desktop width [pixels]"
+msgstr "Skrivbordsbredd [pixel"
+
+#: applets/desk-guide/deskguide_applet.c:103
+msgid "Divide Width By Number Of Horizontal Areas"
+msgstr "Dela bredden med antal vågräta områden"
+
+#: applets/desk-guide/deskguide_applet.c:105
+msgid "Advanced Options"
+msgstr "Avancerat"
+
+#: applets/desk-guide/deskguide_applet.c:107
+msgid "Draw Desktops Double Buffered"
+msgstr "Rita skrivborden dubbelbuffrade"
+
+#: applets/desk-guide/deskguide_applet.c:108
+msgid "Bug Fixes"
+msgstr "Buggfixar"
+
+#: applets/desk-guide/deskguide_applet.c:110
+msgid ""
+"Window Manager Moves Decoration Window Instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM)"
+msgstr ""
+"Fönsterhanteraren flyttar fönster istället\n"
+"(AfterStep, Enlightenment, FVWM, IceWM)"
+
+#: applets/desk-guide/deskguide_applet.c:140
 msgid "GNOME Desktop Guide (Pager)"
 msgstr "GNOME Skrivbordsguide"
 
-#: applets/desk-guide/deskguide_applet.c:148
+#: applets/desk-guide/deskguide_applet.c:156
 msgid ""
-"You are not running a GNOME Compliant Window Manager.\n"
-"GNOME support by the window\n"
-"manager is a requirement for the Desk Guide to work properly."
+"You are not running a GNOME Compliant\n"
+"Window Manager. GNOME support by the \n"
+"window manager is strongly recommended\n"
+"for proper Desk Guide operation."
 msgstr ""
-"Du kör inte en GNOME-anpassad fönsterhanterare.\n"
-"En fönsterhanterare som stödjer GNOME är ett krav för\n"
-"att Skrivbordsguiden skall fungera."
+"Du kör inte en GNOME-anpassad fönsterhanterare\n"
+"En fönsterhanterare som stödjer GNOME rekommenderas\n"
+"för att Skrivbordsguiden skall fungera korrekt."
 
-#: applets/desk-guide/deskguide_applet.c:154
-msgid "Desk Guide Error"
+#: applets/desk-guide/deskguide_applet.c:161
+msgid "Desk Guide Alert"
 msgstr "Skrivbordsguide-fel"
 
-#: applets/desk-guide/deskguide_applet.c:782
+#: applets/desk-guide/deskguide_applet.c:835
 msgid "Global"
 msgstr "Globalt"
 
-#: applets/desk-guide/deskguide_applet.c:839
+#: applets/desk-guide/deskguide_applet.c:892
 msgid "Desk Guide Settings"
 msgstr "Inställningar för Skrivbordsguiden"
 
@@ -645,7 +766,7 @@ msgstr ""
 msgid "Eject"
 msgstr "Mata ut"
 
-#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1079
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1081
 msgid "Browse..."
 msgstr "Bläddra..."
 
@@ -747,7 +868,7 @@ msgstr "Namnet på din GNOME-fisk:"
 msgid "The Animation Filename:"
 msgstr "Filnamn för animationen:"
 
-#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1220
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1222
 #: panel/menu.c:3550 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
@@ -1110,11 +1231,6 @@ msgstr "Visa all program på alla skrivbord"
 msgid "Show minimized tasks on all desktops"
 msgstr "Visa minimerade program på alla skrivbord"
 
-#: applets/gnome-pager/gnomepager_applet.c:401
-#: applets/tasklist/tasklist_properties.c:219
-msgid "Geometry"
-msgstr "Geometri"
-
 #: applets/gnome-pager/gnomepager_applet.c:410
 msgid "Tasklist always maximum size"
 msgstr "Programlist har alltid maxstorlek"
@@ -1305,7 +1421,7 @@ msgid "History"
 msgstr "Historik"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gnome-terminal/gnome-terminal.c:1585 gsm/session-properties.c:176
+#: gnome-terminal/gnome-terminal.c:1587 gsm/session-properties.c:176
 #: help-browser/window.c:207
 msgid "Help"
 msgstr "Hjälp"
@@ -1647,7 +1763,7 @@ msgstr "(Dessa inställningar används inte förrens en uppdatering har skett)"
 msgid "Open new window"
 msgstr "Öppna ett nytt fönster"
 
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1348
+#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1350
 msgid "Scrolling"
 msgstr "Rullning"
 
@@ -1761,15 +1877,15 @@ msgstr "Ta loss"
 msgid "Stick"
 msgstr "Fäst"
 
-#: applets/tasklist/tasklist_menu.c:201
+#: applets/tasklist/tasklist_menu.c:202
 msgid "To desktop"
 msgstr "Till skrivbord"
 
-#: applets/tasklist/tasklist_menu.c:239
+#: applets/tasklist/tasklist_menu.c:241
 msgid "Close window"
 msgstr "Stäng fönster"
 
-#: applets/tasklist/tasklist_menu.c:246
+#: applets/tasklist/tasklist_menu.c:248
 msgid "Kill app"
 msgstr "Döda program"
 
@@ -2114,20 +2230,20 @@ msgstr "namnlös.desktop"
 msgid "untitled"
 msgstr " namnlös"
 
-#: gnome-terminal/gnome-terminal.c:205
+#: gnome-terminal/gnome-terminal.c:207
 msgid "GNOME Terminal"
 msgstr "GNOME Terminal"
 
-#: gnome-terminal/gnome-terminal.c:208
+#: gnome-terminal/gnome-terminal.c:210
 msgid "The GNOME terminal emulation program."
 msgstr "GNOMEs terminalemuleringsprogram."
 
-#: gnome-terminal/gnome-terminal.c:560 gnome-terminal/gnome-terminal.c:1095
-#: gnome-terminal/gnome-terminal.c:1105 gnome-terminal/gnome-terminal.c:2176
+#: gnome-terminal/gnome-terminal.c:562 gnome-terminal/gnome-terminal.c:1097
+#: gnome-terminal/gnome-terminal.c:1107 gnome-terminal/gnome-terminal.c:2203
 msgid "Default"
 msgstr "Standard"
 
-#: gnome-terminal/gnome-terminal.c:738
+#: gnome-terminal/gnome-terminal.c:740
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -2137,240 +2253,240 @@ msgstr ""
 "fönstret så att det stämmer överens med standardinställingen\n"
 "för den nya klassen?"
 
-#: gnome-terminal/gnome-terminal.c:910
+#: gnome-terminal/gnome-terminal.c:912
 msgid "Linux console"
 msgstr "Linux-konsoll"
 
-#: gnome-terminal/gnome-terminal.c:911
+#: gnome-terminal/gnome-terminal.c:913
 msgid "Color Xterm"
 msgstr "Färg Xterm"
 
-#: gnome-terminal/gnome-terminal.c:912
+#: gnome-terminal/gnome-terminal.c:914
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:913
+#: gnome-terminal/gnome-terminal.c:915
 msgid "Custom"
 msgstr "Anpassad"
 
-#: gnome-terminal/gnome-terminal.c:918
+#: gnome-terminal/gnome-terminal.c:920
 msgid "White on black"
 msgstr "Vitt på svart"
 
-#: gnome-terminal/gnome-terminal.c:919
+#: gnome-terminal/gnome-terminal.c:921
 msgid "Black on white"
 msgstr "Svart på vitt"
 
-#: gnome-terminal/gnome-terminal.c:920
+#: gnome-terminal/gnome-terminal.c:922
 msgid "Green on black"
 msgstr "Grönt på svart"
 
-#: gnome-terminal/gnome-terminal.c:921
+#: gnome-terminal/gnome-terminal.c:923
 msgid "Black on light yellow"
 msgstr "Svart på ljusgult"
 
-#: gnome-terminal/gnome-terminal.c:922
+#: gnome-terminal/gnome-terminal.c:924
 msgid "Custom colors"
 msgstr "Anpassade färger"
 
-#: gnome-terminal/gnome-terminal.c:927 panel/panel_config.c:317
+#: gnome-terminal/gnome-terminal.c:929 panel/panel_config.c:317
 msgid "Left"
 msgstr "Vänster"
 
-#: gnome-terminal/gnome-terminal.c:928 panel/panel_config.c:328
+#: gnome-terminal/gnome-terminal.c:930 panel/panel_config.c:328
 msgid "Right"
 msgstr "Höger"
 
-#: gnome-terminal/gnome-terminal.c:929
+#: gnome-terminal/gnome-terminal.c:931
 msgid "Hidden"
 msgstr "Gömd"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:1057
+#: gnome-terminal/gnome-terminal.c:1059
 msgid "Font:"
 msgstr "Font:"
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:1087
+#: gnome-terminal/gnome-terminal.c:1089
 msgid "Terminal Class"
 msgstr "Terminal-klass"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:1115
+#: gnome-terminal/gnome-terminal.c:1117
 msgid "Blinking cursor"
 msgstr "Blinkande markör"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:1124
+#: gnome-terminal/gnome-terminal.c:1126
 msgid "Hide menu bar"
 msgstr "Göm menylist"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:1133
+#: gnome-terminal/gnome-terminal.c:1135
 msgid "Silence Terminal bell"
 msgstr "Tyst terminalklocka"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:1142
+#: gnome-terminal/gnome-terminal.c:1144
 msgid "Swap DEL/Backspace"
 msgstr "Byt DEL/Backspace"
 
 #. --login by default
-#: gnome-terminal/gnome-terminal.c:1151
+#: gnome-terminal/gnome-terminal.c:1153
 msgid "Use --login by default"
 msgstr "Använd --login som standard"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:1160
+#: gnome-terminal/gnome-terminal.c:1162
 msgid "Select-by-word characters"
 msgstr "Markera ord för ord"
 
-#: gnome-terminal/gnome-terminal.c:1181
+#: gnome-terminal/gnome-terminal.c:1183
 msgid "Image"
 msgstr "Bild"
 
-#: gnome-terminal/gnome-terminal.c:1183
+#: gnome-terminal/gnome-terminal.c:1185
 msgid "Background type"
 msgstr "Bakgrundstyp"
 
-#: gnome-terminal/gnome-terminal.c:1193
+#: gnome-terminal/gnome-terminal.c:1195
 msgid "None"
 msgstr "Ingen"
 
-#: gnome-terminal/gnome-terminal.c:1201
+#: gnome-terminal/gnome-terminal.c:1203
 msgid "Background pixmap"
 msgstr "Bakgrundspixmap"
 
-#: gnome-terminal/gnome-terminal.c:1217
+#: gnome-terminal/gnome-terminal.c:1219
 msgid "Pixmap file:"
 msgstr "Pixmapfil:"
 
-#: gnome-terminal/gnome-terminal.c:1232
+#: gnome-terminal/gnome-terminal.c:1234
 msgid "Background pixmap scrolls"
 msgstr "Bakgrundsbilden rullas"
 
-#: gnome-terminal/gnome-terminal.c:1245
+#: gnome-terminal/gnome-terminal.c:1247
 msgid "Transparent"
 msgstr "Genomskinlig"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1272
+#: gnome-terminal/gnome-terminal.c:1274
 msgid "Background should be shaded"
 msgstr "Bakgrunden skuggas"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1288
+#: gnome-terminal/gnome-terminal.c:1290
 msgid "Color scheme:"
 msgstr "Färgschema:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1298
+#: gnome-terminal/gnome-terminal.c:1300
 msgid "Foreground color:"
 msgstr "Förgrundsfärg:"
 
-#: gnome-terminal/gnome-terminal.c:1306
+#: gnome-terminal/gnome-terminal.c:1308
 msgid "Background color:"
 msgstr "Bakgrundsfärg:"
 
-#: gnome-terminal/gnome-terminal.c:1313
+#: gnome-terminal/gnome-terminal.c:1315
 msgid "Color palette:"
 msgstr "Färgpalett:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1335
+#: gnome-terminal/gnome-terminal.c:1337
 msgid "Fore/Background Colour:"
 msgstr "För- och bakgrundsfärg:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1351
+#: gnome-terminal/gnome-terminal.c:1353
 msgid "Scrollbar position"
 msgstr "Position för rullningslist"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1362
+#: gnome-terminal/gnome-terminal.c:1364
 msgid "Scrollback lines"
 msgstr "Antal rader i scrollbuffer"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1376
+#: gnome-terminal/gnome-terminal.c:1378
 msgid "Scroll on keystroke"
 msgstr "Scrolla vid tangenttryckning"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1385
+#: gnome-terminal/gnome-terminal.c:1387
 msgid "Scroll on output"
 msgstr "Scrolla vid utdata"
 
-#: gnome-terminal/gnome-terminal.c:1420
+#: gnome-terminal/gnome-terminal.c:1422
 msgid "Color selector"
 msgstr "Färgväljare"
 
-#: gnome-terminal/gnome-terminal.c:1507 gnome-terminal/gnome-terminal.c:1524
+#: gnome-terminal/gnome-terminal.c:1509 gnome-terminal/gnome-terminal.c:1526
 msgid "_New terminal"
 msgstr "_Nytt terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1507 gnome-terminal/gnome-terminal.c:1524
+#: gnome-terminal/gnome-terminal.c:1509 gnome-terminal/gnome-terminal.c:1526
 msgid "Creates a new terminal window"
 msgstr "Skapar ett nytt terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1509
+#: gnome-terminal/gnome-terminal.c:1511
 msgid "_Hide menubar"
 msgstr "_Göm menylist"
 
-#: gnome-terminal/gnome-terminal.c:1511
+#: gnome-terminal/gnome-terminal.c:1513
 msgid "_Close terminal"
 msgstr "_Stäng terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1526
+#: gnome-terminal/gnome-terminal.c:1528
 msgid "_Show menubar"
 msgstr "_Visa menylist"
 
-#: gnome-terminal/gnome-terminal.c:1526
+#: gnome-terminal/gnome-terminal.c:1528
 msgid "Toggles whether or not the menubar is displayed."
 msgstr "Ändrar om menylisten visas eller ej."
 
-#: gnome-terminal/gnome-terminal.c:1528
+#: gnome-terminal/gnome-terminal.c:1530
 msgid "_Secure keyboard"
 msgstr "S_äkra tangentbordet"
 
-#: gnome-terminal/gnome-terminal.c:1529
+#: gnome-terminal/gnome-terminal.c:1531
 msgid "Toggles whether or not the keyboard is grabbed by the terminal."
 msgstr "Ändrar om tangentbordet är \"grabbed\" vid terminalen."
 
-#: gnome-terminal/gnome-terminal.c:1532 gnome-terminal/gnome-terminal.c:1561
+#: gnome-terminal/gnome-terminal.c:1534 gnome-terminal/gnome-terminal.c:1563
 msgid "_Reset Terminal"
 msgstr "_Återställ terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1533 gnome-terminal/gnome-terminal.c:1562
+#: gnome-terminal/gnome-terminal.c:1535 gnome-terminal/gnome-terminal.c:1564
 msgid "Reset and _Clear"
 msgstr "Återställ och _rensa"
 
-#: gnome-terminal/gnome-terminal.c:1543
+#: gnome-terminal/gnome-terminal.c:1545
 msgid "_Open in browser"
 msgstr "_Öppna i webläsare"
 
-#: gnome-terminal/gnome-terminal.c:1564
+#: gnome-terminal/gnome-terminal.c:1566
 msgid "C_olor selector..."
 msgstr "_Färgväljare..."
 
-#: gnome-terminal/gnome-terminal.c:1570
+#: gnome-terminal/gnome-terminal.c:1572
 msgid "File"
 msgstr "Arkiv"
 
-#: gnome-terminal/gnome-terminal.c:1575
+#: gnome-terminal/gnome-terminal.c:1577
 msgid "Edit"
 msgstr "Redigera"
 
-#: gnome-terminal/gnome-terminal.c:1580
+#: gnome-terminal/gnome-terminal.c:1582
 msgid "Settings"
 msgstr "Inställningar"
 
-#: gnome-terminal/gnome-terminal.c:1881
+#: gnome-terminal/gnome-terminal.c:1908
 #, c-format
 msgid "The error was: %s"
 msgstr "Felet var: %s"
 
-#: gnome-terminal/gnome-terminal.c:1882
+#: gnome-terminal/gnome-terminal.c:1909
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -2384,7 +2500,7 @@ msgstr ""
 "Var god läs linux/Documentation/Changes för att se hur\n"
 "de sätts upp korrekt."
 
-#: gnome-terminal/gnome-terminal.c:1887
+#: gnome-terminal/gnome-terminal.c:1914
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -2395,109 +2511,133 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2332
+#: gnome-terminal/gnome-terminal.c:2359
 msgid "Terminal class name"
 msgstr "Terminal-klassnamn"
 
-#: gnome-terminal/gnome-terminal.c:2332
+#: gnome-terminal/gnome-terminal.c:2359
 msgid "TCLASS"
 msgstr "TKLASS"
 
-#: gnome-terminal/gnome-terminal.c:2335
+#: gnome-terminal/gnome-terminal.c:2362
 msgid "Specifies font name"
 msgstr "Anger typsnittsnamn"
 
-#: gnome-terminal/gnome-terminal.c:2335
+#: gnome-terminal/gnome-terminal.c:2362
 msgid "FONT"
 msgstr "TYPSNITT"
 
-#: gnome-terminal/gnome-terminal.c:2338
+#: gnome-terminal/gnome-terminal.c:2365
 msgid "Do not start up shells as login shells"
 msgstr "Starta inte skal (shells) som login-shells"
 
-#: gnome-terminal/gnome-terminal.c:2341
+#: gnome-terminal/gnome-terminal.c:2368
 msgid "Start up shells as login shells"
 msgstr "Starta skal (shells) som login-shells"
 
-#: gnome-terminal/gnome-terminal.c:2344
+#: gnome-terminal/gnome-terminal.c:2371
 msgid "Specifies the geometry for the main window"
 msgstr "Anger geometrin för huvudfönstret"
 
-#: gnome-terminal/gnome-terminal.c:2344
+#: gnome-terminal/gnome-terminal.c:2371
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:2347
+#: gnome-terminal/gnome-terminal.c:2374
 msgid "Execute this program instead of a shell"
 msgstr "Kör detta program istället för ett skal"
 
-#: gnome-terminal/gnome-terminal.c:2347 gnome-terminal/gnome-terminal.c:2350
+#: gnome-terminal/gnome-terminal.c:2374 gnome-terminal/gnome-terminal.c:2377
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: gnome-terminal/gnome-terminal.c:2350
+#: gnome-terminal/gnome-terminal.c:2377
 msgid "Execute this program the same way as xterm does"
 msgstr "Kör detta program på samma sätt som xterm gör"
 
-#: gnome-terminal/gnome-terminal.c:2353
+#: gnome-terminal/gnome-terminal.c:2380
 msgid "Foreground color"
 msgstr "Förgrundsfärg"
 
-#: gnome-terminal/gnome-terminal.c:2353 gnome-terminal/gnome-terminal.c:2356
+#: gnome-terminal/gnome-terminal.c:2380 gnome-terminal/gnome-terminal.c:2383
 msgid "COLOR"
 msgstr "FÄRG"
 
-#: gnome-terminal/gnome-terminal.c:2356 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2383 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
-#: gnome-terminal/gnome-terminal.c:2359
+#: gnome-terminal/gnome-terminal.c:2386
 msgid "Update utmp entry"
 msgstr "Uppdatera \"utmp entry\""
 
-#: gnome-terminal/gnome-terminal.c:2359
+#: gnome-terminal/gnome-terminal.c:2386
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2362
+#: gnome-terminal/gnome-terminal.c:2389
 msgid "Do not update utmp entry"
 msgstr "Uppdatera inte \"utmp entry\""
 
-#: gnome-terminal/gnome-terminal.c:2362
+#: gnome-terminal/gnome-terminal.c:2389
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2365
+#: gnome-terminal/gnome-terminal.c:2392
 msgid "Update wtmp entry"
 msgstr "Uppdatera \"wtmp entry\""
 
-#: gnome-terminal/gnome-terminal.c:2365
+#: gnome-terminal/gnome-terminal.c:2392
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2368
+#: gnome-terminal/gnome-terminal.c:2395
 msgid "Do not update wtmp entry"
 msgstr "Uppdatera inte \"wtmp entry\""
 
-#: gnome-terminal/gnome-terminal.c:2368
+#: gnome-terminal/gnome-terminal.c:2395
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2371
+#: gnome-terminal/gnome-terminal.c:2398
 msgid "Set the window title"
 msgstr "Sätt fönstertiteln"
 
-#: gnome-terminal/gnome-terminal.c:2371
+#: gnome-terminal/gnome-terminal.c:2398
 msgid "TITLE"
 msgstr "TITEL"
 
-#: gnome-terminal/gnome-terminal.c:2374
+#: gnome-terminal/gnome-terminal.c:2401
 msgid "Set the TERM variable"
 msgstr "Sätt variabeln TERM"
 
-#: gnome-terminal/gnome-terminal.c:2374
+#: gnome-terminal/gnome-terminal.c:2401
 msgid "TERMNAME"
 msgstr "TERMNAMN"
+
+#: gsm/logout.c:198
+msgid "Really log out?"
+msgstr "Vill du verkligen logga ut?"
+
+#: gsm/logout.c:219
+msgid "Save current setup"
+msgstr "Spara inställning"
+
+#: gsm/logout.c:237
+msgid "Action"
+msgstr "Handling"
+
+#: gsm/logout.c:245
+msgid "Logout"
+msgstr "Logga ut"
+
+#: gsm/logout.c:248
+msgid "Halt"
+msgstr "Stäng av"
+
+#: gsm/logout.c:251
+msgid "Reboot"
+msgstr "Starta om"
 
 #: gsm/main.c:56
 msgid "Start chooser and pick the session"
@@ -3412,11 +3552,6 @@ msgstr "Rambredd (för knappbakgrund)"
 msgid "Depth (displacement when pressed)"
 msgstr "Djup (förflyttning vid nertryckning)"
 
-#. Tooltips frame
-#: panel/panel_config_global.c:408
-msgid "Tooltips"
-msgstr "Verktygstips"
-
 #. Tooltips enable
 #: panel/panel_config_global.c:418
 msgid "Tooltips enabled"
@@ -3465,7 +3600,8 @@ msgstr "Fri rörelse (stör inte andra appletar)"
 #: panel/panel_config_global.c:513
 msgid "Raise panels on mouse-over (non GNOME compliant window managers only)"
 msgstr ""
-"Höj paneler när muspekaren är över dem (för ej GNOME-anpassade fönsterhanterare)"
+"Höj paneler när muspekaren är över dem (för ej GNOME-anpassade "
+"fönsterhanterare)"
 
 #. Keep on bottom
 #: panel/panel_config_global.c:522
