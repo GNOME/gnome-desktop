@@ -298,7 +298,7 @@ cb_clicked (GtkWidget *widget, GdkEvent *event)
 		char *filename;
 			
 		filename = gnome_program_locate_file (
-				NULL, GNOME_FILE_DOMAIN_LIBDIR,
+				NULL, GNOME_FILE_DOMAIN_DATADIR,
 				"gnome-about/contributors.dat", TRUE, NULL);
 		if (filename)
 			gnome_sound_play (filename);
