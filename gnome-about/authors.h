@@ -95,6 +95,7 @@ static author authors[] = {
 	{ "Iain Holmes", "<ih@csd.abdn.ac.uk>" },
 	{ "David Huggins-Daines", "" },
 	{ "Richard Hult", "<d4hult@dtek.chalmers.se>" },
+	{ "Andreas Hydén", "<a.hyden@cyberpoint.se>" },
 	{ "Miguel de Icaza", "<miguel@gnu.org>" },
 	{ "Szekeres Istvan", "" },
 	{ "Tim Janik", "" },
