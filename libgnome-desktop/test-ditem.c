@@ -1,6 +1,7 @@
 /* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <libbonobo.h>
 #include <libgnome/Gnome.h>
+#include <libgnome/gnome-ditem.h>
 
 #include "bonobo-config-ditem.h"
 
@@ -9,12 +10,20 @@ boot_ditem (Bonobo_ConfigDatabase db)
 {
 	BonoboArg *arg;
 
-	arg = bonobo_arg_new (TC_GNOME_LocalizedStringList);
-	bonobo_pbclient_set_value (db, "/Desktop Entry/Name", arg, NULL);
-	bonobo_pbclient_set_value (db, "/Desktop Entry/Comment", arg, NULL);
+	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
+	bonobo_pbclient_set_value (db, "/Desktop Entry", arg, NULL);
 	bonobo_arg_release (arg);
 
 	Bonobo_ConfigDatabase_sync (db, NULL);
+}
+
+static void G_GNUC_UNUSED
+test_ditem (Bonobo_ConfigDatabase db)
+{
+	GnomeDesktopItem *ditem;
+
+	ditem = gnome_desktop_item_new_from_file ("/home/martin/work/test.desktop",
+						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS);
 }
 
 int
@@ -44,6 +53,8 @@ main (int argc, char **argv)
 	g_assert (default_db != NULL);
 
 	boot_ditem (default_db);
+
+	test_ditem (db);
 
         CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_addDatabase (db, default_db, "", "/gnome-ditem/", &ev);
@@ -91,7 +102,14 @@ main (int argc, char **argv)
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Desktop Entry/Comment",
+	value = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_DesktopEntry, &ev);
+	g_message (G_STRLOC ": %p", value);
+	if (value)
+		printf ("got value as string (%s)\n", BONOBO_ARG_GET_STRING (value));
+        CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	value = bonobo_pbclient_get_value (db, "/Desktop Entry",
 					   TC_GNOME_LocalizedStringList, &ev);
 	g_message (G_STRLOC ": %p", value);
 	if (value)
