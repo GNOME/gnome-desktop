@@ -24,6 +24,7 @@
 */
 
 #include <config.h>
+#include "gnome-macros.h"
 
 #include <ctype.h>
 #include <string.h>
@@ -88,18 +89,18 @@ struct _GnomeDItemEditPrivate {
 static void gnome_ditem_edit_class_init   (GnomeDItemEditClass *klass);
 static void gnome_ditem_edit_init         (GnomeDItemEdit      *messagebox);
 
-static void gnome_ditem_edit_destroy      (GtkObject *dee);
-static void gnome_ditem_edit_finalize     (GObject *dee);
+static void gnome_ditem_edit_destroy      (GtkObject           *object);
+static void gnome_ditem_edit_finalize     (GObject             *object);
 
-static void gnome_ditem_edit_sync_display (GnomeDItemEdit * dee,
-					   GnomeDesktopItem * ditem);
+static void gnome_ditem_edit_sync_display (GnomeDItemEdit      *dee,
+					   GnomeDesktopItem    *ditem);
 
-static void gnome_ditem_edit_sync_ditem   (GnomeDItemEdit * dee,
-					   GnomeDesktopItem * ditem);
+static void gnome_ditem_edit_sync_ditem   (GnomeDItemEdit      *dee,
+					   GnomeDesktopItem    *ditem);
 
-static void gnome_ditem_edit_changed      (GnomeDItemEdit * dee);
-static void gnome_ditem_edit_icon_changed (GnomeDItemEdit * dee);
-static void gnome_ditem_edit_name_changed (GnomeDItemEdit * dee);
+static void gnome_ditem_edit_changed      (GnomeDItemEdit      *dee);
+static void gnome_ditem_edit_icon_changed (GnomeDItemEdit      *dee);
+static void gnome_ditem_edit_name_changed (GnomeDItemEdit      *dee);
 
 enum {
         CHANGED,
@@ -110,32 +111,10 @@ enum {
 
 static gint ditem_edit_signals[LAST_SIGNAL] = { 0 };
 
-static GtkObjectClass *parent_class = NULL;
-
-guint
-gnome_ditem_edit_get_type (void)
-{
-        static guint dee_type = 0;
-
-        if (!dee_type)
-        {
-                GtkTypeInfo dee_info =
-                {
-                        "GnomeDItemEdit",
-                        sizeof (GnomeDItemEdit),
-                        sizeof (GnomeDItemEditClass),
-                        (GtkClassInitFunc) gnome_ditem_edit_class_init,
-                        (GtkObjectInitFunc) gnome_ditem_edit_init,
-                        NULL,
-                        NULL,
-			NULL
-                };
-
-                dee_type = gtk_type_unique (gtk_object_get_type (), &dee_info);
-        }
-
-        return dee_type;
-}
+/* The following defines the get_type */
+/* FIXME: this should become a GObject when GObject gets signals !!! */
+GNOME_CLASS_BOILERPLATE (GnomeDItemEdit, gnome_ditem_edit,
+			 GtkObject, gtk_object)
 
 static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
@@ -149,8 +128,6 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         object_class = (GtkObjectClass*) klass;
         gobject_class = (GObjectClass*) klass;
 
-        parent_class = gtk_type_class (gtk_object_get_type ());
-  
         ditem_edit_signals[CHANGED] =
                 gtk_signal_new ("changed",
                                 GTK_RUN_LAST,
@@ -270,10 +247,9 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
         label = label_new(_("Type:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
 
-        types = g_list_prepend(types, "Directory");
-        types = g_list_prepend(types, "URL");
-        types = g_list_prepend(types, "PanelApplet");
-        types = g_list_prepend(types, "Application");
+        types = g_list_prepend (types, "Directory");
+        types = g_list_prepend (types, "URL");
+        types = g_list_prepend (types, "Application");
         dee->_priv->type_combo = gtk_combo_new();
         gtk_combo_set_popdown_strings(GTK_COMBO(dee->_priv->type_combo), types);
         g_list_free(types);
@@ -750,39 +726,38 @@ gnome_ditem_edit_new_notebook (GtkNotebook *notebook)
 }
 
 static void
-gnome_ditem_edit_destroy (GtkObject *dee)
+gnome_ditem_edit_destroy (GtkObject *object)
 {
         GnomeDItemEdit *de;
 
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (object));
 
 	/* remember, destroy can be run multiple times! */
 
-        de = GNOME_DITEM_EDIT(dee);
+        de = GNOME_DITEM_EDIT (object);
 
-	if(de->_priv->ditem)
-		gnome_desktop_item_unref(de->_priv->ditem);
+	if (de->_priv->ditem != NULL)
+		gnome_desktop_item_unref (de->_priv->ditem);
 	de->_priv->ditem = NULL; /* just for sanity */
 
-        if (GTK_OBJECT_CLASS(parent_class)->destroy)
-                (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
-gnome_ditem_edit_finalize (GObject *dee)
+gnome_ditem_edit_finalize (GObject *object)
 {
         GnomeDItemEdit *de;
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
 
-        de = GNOME_DITEM_EDIT(dee);
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (object));
+
+        de = GNOME_DITEM_EDIT (object);
 
 	g_free(de->_priv);
 	de->_priv = NULL;
 
-        if (G_OBJECT_CLASS(parent_class)->finalize)
-                (* (G_OBJECT_CLASS(parent_class)->finalize))(dee);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /* set sensitive for directory/other type of a ditem */
