@@ -157,6 +157,7 @@ static gchar *contributors[] = {
 	"Nick Lopez",
 	"Dirk Lutjens",
 	"Josh MacDonald",
+	"Paolo Maggi",
 	"Sam Magnuson",
 	"Ian Main",
 	"Mandrake",
@@ -193,6 +194,7 @@ static gchar *contributors[] = {
 	"Asger Alstrup Nielsen",
 	"Seth Nickell",
 	"Eric Nielson",
+	"Bastien Nocera",
 	/* If your encodings allows it, use adiaeresis (U00E4) for the 'ae'
 	 * of 'Norbaeck' */
 	N_("Martin Norbaeck"),
