@@ -43,6 +43,8 @@ applet-dist-hook: index.html
 	-cp $(srcdir)/$(applet)_applet/*.png  $(distdir)/$(applet)_applet
 	-cp $(srcdir)/$(applet)_applet/stylesheet-images/*.png \
 		$(distdir)/$(applet)_applet/stylesheet-images
+	-cp $(srcdir)/$(applet)_applet/stylesheet-images/*.gif \
+		$(distdir)/$(applet)_applet/stylesheet-images
 
 install-data-am: index.html
 	-$(mkinstalldirs) $(DESTDIR)$(docdir)/stylesheet-images
@@ -57,6 +59,11 @@ install-data-am: index.html
 	done
 	-for file in \
 		$(applet)_applet/stylesheet-images/*.png; do \
+	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/stylesheet-images/$$basefile; \
+	done
+	-for file in \
+		$(applet)_applet/stylesheet-images/*.gif; do \
 	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/stylesheet-images/$$basefile; \
 	done

@@ -24,6 +24,8 @@ app-dist-hook: index.html
 	-cp $(srcdir)/$(app)/*.css $(distdir)/$(app)
 	-cp $(srcdir)/$(app)/stylesheet-images/*.png \
 		$(distdir)/$(app)/stylesheet-images
+	-cp $(srcdir)/$(app)/stylesheet-images/*.gif \
+		$(distdir)/$(app)/stylesheet-images
 	-cp $(srcdir)/figures/*.png \
 		$(distdir)/figures
 
@@ -41,6 +43,10 @@ install-data-am: index.html
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/figures/$$basefile; \
 	done
 	-for file in $(srcdir)/$(app)/stylesheet-images/*.png; do \
+	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/stylesheet-images/$$basefile; \
+	done
+	-for file in $(srcdir)/$(app)/stylesheet-images/*.gif; do \
 	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/stylesheet-images/$$basefile; \
 	done
