@@ -21,14 +21,15 @@
 #include "bonobo-config-ditem-utils.h"
 
 CORBA_any *
-bonobo_config_ditem_decode_any (const char *value, CORBA_Environment *ev)
+bonobo_config_ditem_decode_any (const char *value, CORBA_TypeCode type, CORBA_Environment *ev)
 {
 	CORBA_any *any = NULL;
 
 	g_return_val_if_fail (value != NULL, NULL);
 	g_return_val_if_fail (ev != NULL, NULL);
 
-	g_message (G_STRLOC ": |%s|", value);
+	g_message (G_STRLOC ": |%s| - %d - %s (%s)\n", value,
+		   type->kind, type->name, type->repo_id);
 
 	any = bonobo_arg_new (TC_string);
 	BONOBO_ARG_SET_STRING (any, value);

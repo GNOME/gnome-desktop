@@ -7,8 +7,10 @@ int
 main (int argc, char **argv)
 {
 	Bonobo_ConfigDatabase db = NULL;
+	Bonobo_ConfigDatabase default_db = NULL;
 	Bonobo_KeyList *dirlist, *keylist;
         CORBA_Environment  ev;
+	CORBA_TypeCode type;
 	CORBA_any *value;
 	guint i, j;
 
@@ -17,18 +19,19 @@ main (int argc, char **argv)
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Cannot init bonobo");
 
-#if 1
 	db = bonobo_config_ditem_new ("~/work/test.desktop");
-#else
+
         CORBA_exception_init (&ev);
-	db = bonobo_get_object ("xmldb:~/work/foo.xml", "Bonobo/ConfigDatabase", &ev);
+	default_db = bonobo_get_object ("xmldb:~/work/foo.xml", "Bonobo/ConfigDatabase", &ev);
 	g_assert (!BONOBO_EX (&ev));
         CORBA_exception_free (&ev);
-#endif
 
 	g_assert (db != NULL);
+	g_assert (default_db != NULL);
 
         CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_addDatabase (db, default_db, "", "/gnome-ditem/", &ev);
+	g_assert (!BONOBO_EX (&ev));
 
 	dirlist = Bonobo_ConfigDatabase_getDirs (db, "", &ev);
 	g_assert (!BONOBO_EX (&ev));
@@ -53,6 +56,11 @@ main (int argc, char **argv)
 	if (keylist)
 		for (j = 0; j < keylist->_length; j++)
 			g_print ("TEST KEY: |%s|\n", keylist->_buffer [j]);
+
+        CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Config/scrollbacklines", &ev);
+	if (type)
+		printf ("type is %d - %s (%s)\n", type->kind, type->name, type->repo_id);
 
         CORBA_exception_init (&ev);
 	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_long, &ev);
