@@ -102,9 +102,9 @@ BITMAPS     = \
 	gnome-cckeyboard-bell.png	\
 	gnome-cckeyboard.png	\
 	gnome-ccperiph.png      \
+	gnome-debian.png	\
 	gtkvim.png					\
-	gnome-computer.png		\
-	debian.png
+	gnome-computer.png	
 
 TILES     = \
 	tile-normal-up.png			\
