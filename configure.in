@@ -57,6 +57,7 @@ AC_MSG_CHECKING(for MICO prefix)
 for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   if test -f $dir/mico-ld ; then
      mico_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
+     break
   fi
 done
 
