@@ -754,7 +754,7 @@ create_date_string (const char *value)
 	if (!strptime (value, "%Y-%m-%d", &tm)) {
 		return NULL;
 	}
-	g_date_set_dmy (date, tm.tm_mday, tm.tm_mon, 1900 + tm.tm_year);
+	g_date_set_dmy (date, tm.tm_mday, 1 + tm.tm_mon, 1900 + tm.tm_year);
 	result = g_new0 (char, 20);
 	g_date_strftime (result, 20, "%x", date);
 	g_date_free (date);
