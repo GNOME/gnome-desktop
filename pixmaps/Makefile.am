@@ -35,6 +35,7 @@ BITMAPS     = \
 	gnome-html.png				\
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
+	gnome-info.png              \
 	gnome-irc.png				\
 	gnome-laptop.png            \
 	gnome-lockscreen.png			\
@@ -82,6 +83,7 @@ BITMAPS     = \
 	gnome-ccdesktop.png     \
 	gnome-ccthemes.png		\
 	gnome-ccdialog.png	\
+	gnome-ccmime.png    \
 	gnome-ccscreensaver.png	\
 	gnome-ccwindowmanager.png \
 	gnome-cckeyboard-bell.png	\
