@@ -967,7 +967,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), tmpstr);
 	g_free (tmpstr);
 
-        cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
+        cs = gnome_desktop_item_get_string (ditem, "X-GNOME-DocPath");
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->doc_entry), cs ? cs : "");
 
         gtk_toggle_button_set_active
