@@ -120,12 +120,11 @@ GnomeDesktopItem *      gnome_desktop_item_ref               (GnomeDesktopItem  
 void                    gnome_desktop_item_unref             (GnomeDesktopItem           *item);
 int                     gnome_desktop_item_launch            (const GnomeDesktopItem     *item,
 							      int                         argc,
-							      const char                **argv,
+							      char                      **argv,
 							      GError                    **error);
 
-/* A list of files or urls dropped onto an icon, the proper (Url or File
-   exec is run you can pass directly the output of 
-   gnome_uri_list_extract_filenames) */
+/* A list of files or urls dropped onto an icon This is the output
+ * of gnome_vfs_uri_list_parse */
 int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktopItem     *item,
 							      GList                      *uri_list,
 							      GError                    **error);

@@ -785,7 +785,7 @@ strip_the_amp (char *exec)
 int
 gnome_desktop_item_launch (const GnomeDesktopItem *item,
 			   int argc,
-			   const char **argv,
+			   char **argv,
 			   GError **error)
 {
 	/*FIXME: */
