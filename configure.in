@@ -1,4 +1,5 @@
 AC_PREREQ(2.52)
+
 AC_INIT(panel)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gnome-core, 1.5.0)
@@ -6,13 +7,7 @@ AM_INIT_AUTOMAKE(gnome-core, 1.5.0)
 AM_MAINTAINER_MODE
 GNOME_COMMON_INIT
 
-
 AM_PROG_XML_I18N_TOOLS
-
-dnl
-dnl let applications configure for gnome
-dnl
-gnome_cv_use_gnome=yes
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -22,8 +17,7 @@ AM_PROG_LIBTOOL
 AM_PROG_LEX
 AC_PROG_YACC
 AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
-
-GNOME_COMPILE_WARNINGS(error)
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 dnl ==========================================================================
 dnl
@@ -31,11 +25,7 @@ dnl Library Dependencies, uses pkg-config to detect correct version, etc
 dnl
 dnl ==========================================================================
 
-
-GNOME_REQUIRE_PKGCONFIG
-
 GNOME_PLATFORM_GNOME_2(yes)
-
 
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
@@ -112,50 +102,20 @@ dnl  ------------------
 dnl | Language Support |---------------------------------------
 dnl  ------------------
 ALL_LINGUAS="az bg ca cs da de el en_GB es et eu fi fr ga gl hu it ja ko lt lv nl nn no pl pt pt_BR ro ru sk sl sp sr sv ta tr uk wa zh_CN zh_TW"
-AM_GNOME2_GETTEXT
-# AM_GNOME_GETTEXT above substs $DATADIRNAME
-# this is the directory where the *.{mo,gmo} files are installed
-gnomelocaledir='${prefix}/share/locale'
-AC_SUBST(gnomelocaledir)
+AM_GLIB_GNU_GETTEXT
 dnl -----------------------------------------------------------
-
 
 dnl  -------------------------------
-dnl | Dynamically Loading Libraries |--------------------------
+dnl | Headers |--------------------------
 dnl  -------------------------------
-AC_CHECK_HEADERS(dlfcn.h dl.h syslog.h tcpd.h)
-AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
-AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
-AC_CHECK_FUNCS(dlopen, DL_LIB="",
-AC_MSG_ERROR(Dynamic linking is not available on this platform.  Some
-apps, like panel, will not run properly.))
-])])
-AC_SUBST(DL_LIB)
+AC_CHECK_HEADERS(syslog.h tcpd.h)
 dnl -----------------------------------------------------------
-
-
-dnl  ----------------------
-dnl | Configure Easter Egg |-----------------------------------
-dnl  ----------------------
-AC_MSG_CHECKING(for Configure Easter Egg version >= 6.38)
-AC_MSG_RESULT(found)
-dnl -----------------------------------------------------------
-
-dnl  --------
-dnl | libpng |-------------------------------------------------
-dnl  --------
-PNG_LIBS=
-AC_CHECK_LIB(png, png_init_io, [
-	     PNG_LIBS="-lpng"],[
-	     AC_MSG_ERROR(libpng is required for gnome-core)],-lm)
-AC_SUBST(PNG_LIBS)
-dnl -----------------------------------------------------------
-
 
 dnl  ---------------
 dnl | gnome-session |------------------------------------------
 dnl  ---------------
 dnl
+
 AC_MSG_CHECKING([Whether libgnomeui was built with session management])
 case "$GNOME_SESSION_LIBS" in
 	*-lSM*)
@@ -170,7 +130,6 @@ if test "$GNOME_HAVE_SM" = no ; then
 	AC_MSG_WARN([Session management support not built into libgnomeui; gnome-session will not be built])
 fi
 AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = yes)
-AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 dnl -----------------------------------------------------------
 
 
@@ -337,18 +296,6 @@ fi
 AC_DEFINE_UNQUOTED(KDE_DOCDIR, "$kde_docdir")
 dnl -----------------------------------------------------------
 
-
-dnl  --------------
-dnl | ScrollKeeper |-------------------------------------------
-dnl  --------------
-AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-if test x$SCROLLKEEPER_CONFIG = xno; then
-  AC_MSG_ERROR(Couldn't find scrollkeeper-config, please install the scrollkeeper packaga)
-fi
-AC_SUBST(SCROLLKEEPER_REQUIRED)
-dnl -----------------------------------------------------------
-
-dnl AC_CONFIG_SUBDIRS(gemvt)
 
 dnl  ---------------
 dnl | gtk-doc stuff |------------------------------------------
