@@ -661,16 +661,16 @@ save_key_val(gpointer key, gpointer value, gpointer user_data)
  * location is used.  It sets the location of this entry to point to the
  * new location.
  *
- * Returns:
+ * Returns: boolean. %TRUE if the file was saved, %FALSE otherwise
  */
-void
+gboolean
 gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 {
-        char fnbuf[PATH_MAX];
+        char fnbuf[PATH_MAX + sizeof("==/KDE Desktop Entry/")];
 
-        g_return_if_fail(item);
-        g_return_if_fail(under);
-        g_return_if_fail(item->location);
+        g_return_val_if_fail(item, FALSE);
+        g_return_val_if_fail(under, FALSE);
+        g_return_val_if_fail(item->location, FALSE);
 
 	/* first we setup the new location if we need to */
 	if(under) {
@@ -698,7 +698,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 			for(li = item->order; li; li = li->next)
 				fprintf(fh, "%s\n", (char *)li->data);
 			fclose(fh);
-		}
+		} else
+			return FALSE;
 	}
 
 	/* clean the file first, do not drop as if we dropped it the old
@@ -771,7 +772,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 
 	/* sync the file onto disk */
 	g_snprintf(fnbuf, sizeof(fnbuf), "=%s=", item->location);
-	gnome_config_sync_file(fnbuf);
+
+	return gnome_config_sync_file(fnbuf);
 }
 
 /**

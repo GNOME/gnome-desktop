@@ -75,7 +75,7 @@ GnomeDesktopItem *     gnome_desktop_item_new_from_file   (const char           
 GnomeDesktopItem *     gnome_desktop_item_copy            (const GnomeDesktopItem     *item);
 
 /* if under is NULL save in original location */
-void                   gnome_desktop_item_save            (GnomeDesktopItem           *item,
+gboolean               gnome_desktop_item_save            (GnomeDesktopItem           *item,
                                                            const char                 *under);
 void                   gnome_desktop_item_ref             (GnomeDesktopItem           *item);
 void                   gnome_desktop_item_unref           (GnomeDesktopItem           *item);
