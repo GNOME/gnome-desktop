@@ -15,11 +15,11 @@ echo ./update.sh da -- created new pot file and updated the da.po file
 elif [ "x$1" = "x--missing" ]; then
 
 echo "Searching for files containing _( ) but missing in POTFILES.in..."
-find ../ -regex '.*\.[c|y|cc|c++|h]' | xargs grep _\( | cut -d: -f1 | uniq | cut -d/ -f2- > POTFILES.in.new
+find ../ -print | egrep '.*\.(c|y|cc|c++|h)' | xargs grep _\( | cut -d: -f1 | uniq | cut -d/ -f2- > POTFILES.in.missing
 
 echo Sorting... comparing...
 sort -d POTFILES.in -o POTFILES.in
-sort -d POTFILES.in.new -o POTFILES.in.missing
+sort -d POTFILES.in.missing -o POTFILES.in.missing
 
 diff POTFILES.in POTFILES.in.missing -u0 | grep '^+' |grep -v '^+++'|grep -v '^@@' > POTFILES.in.missing
 
@@ -48,6 +48,8 @@ xgettext --default-domain=$PACKAGE --directory=.. \
 
 else
 
+if [ -s $1.po ]; then
+
 xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
@@ -62,5 +64,11 @@ mv $1.po $1.po.old && msgmerge $1.po.old $PACKAGE.pot -o $1.po \
 && rm $1.po.old;
 
 msgfmt --statistics $1.po
+
+else
+
+echo Sorry $1.po does not exist!
+
+fi;
 
 fi;
