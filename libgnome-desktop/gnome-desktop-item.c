@@ -2841,13 +2841,14 @@ insert_key (GnomeDesktopItem *item,
 			return;
 		}
 		val = decode_string (value, encoding, locale);
-		g_strchomp (val);
 
 		/* Ignore this key, it's whacked */
 		if (val == NULL) {
 			g_free (locale);
 			return;
 		}
+		
+		g_strchomp (val);
 
 		/* For old KDE entries, we can also split by a comma
 		 * on sort order, so convert to semicolons */
