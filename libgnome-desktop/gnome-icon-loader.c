@@ -53,6 +53,8 @@ struct _GnomeIconLoaderPrivate
   char **search_path;
   int search_path_len;
 
+  gboolean allow_svg;
+  
   gboolean themes_valid;
   /* A list of all the themes needed to look up icons.
    * In search order, without duplicates
@@ -261,6 +263,8 @@ gnome_icon_loader_init (GnomeIconLoader *loader)
   priv->themes_valid = FALSE;
   priv->themes = NULL;
   priv->unthemed_icons = NULL;
+
+  priv->allow_svg = FALSE;
   
   setup_gconf_handler (loader);
 }
@@ -308,6 +312,22 @@ gnome_icon_loader_finalize (GObject *object)
   blow_themes (priv);
 
   g_free (priv);
+}
+
+void
+gnome_icon_loader_set_allow_svg (GnomeIconLoader      *loader,
+				 gboolean              allow_svg)
+{
+  allow_svg = allow_svg != FALSE;
+
+  if (allow_svg == loader->priv->allow_svg)
+    return;
+  
+  loader->priv->allow_svg = allow_svg;
+  
+  blow_themes (loader->priv);
+  
+  g_signal_emit (G_OBJECT (loader), signal_changed, 0);
 }
 
 void
@@ -420,11 +440,13 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
   int i;
   GList *l;
   char **dirs;
+  char **themes;
   GnomeIconLoaderPrivate *priv;
   IconTheme *theme;
   char *path;
   char *contents;
   char *directories;
+  char *inherits;
   GnomeThemeFile *theme_file;
   
   priv = loader->priv;
@@ -502,11 +524,26 @@ insert_theme (GnomeIconLoader *loader, const char *theme_name)
   theme->dirs = g_list_reverse (theme->dirs);
 
   g_free (directories);
-  
-  gnome_theme_file_free (theme_file);
-  
+
   /* Prepend the finished theme */
   priv->themes = g_list_prepend (priv->themes, theme);
+
+  if (gnome_theme_file_get_string (theme_file,
+				   "Icon Theme",
+				   "Inherits",
+				   &inherits))
+    {
+      themes = g_strsplit (inherits, ",", 0);
+
+      for (i = 0; themes[i] != NULL; i++)
+	insert_theme (loader, themes[i]);
+      
+      g_strfreev (themes);
+
+      g_free (inherits);
+    }
+
+  gnome_theme_file_free (theme_file);
 }
 
 static gboolean
@@ -541,7 +578,8 @@ load_themes (GnomeIconLoader *loader)
   priv = loader->priv;
 
   insert_theme (loader, priv->current_theme);
-
+  priv->themes = g_list_reverse (priv->themes);
+  
   priv->unthemed_icons = g_hash_table_new_full (g_str_hash, g_str_equal,
 						g_free, g_free);
 
@@ -556,7 +594,7 @@ load_themes (GnomeIconLoader *loader)
       while ((file = g_dir_read_name (gdir)))
 	{
 	  if (my_g_str_has_suffix (file, ".png") ||
-	      my_g_str_has_suffix (file, ".svg") ||
+	      (priv->allow_svg && my_g_str_has_suffix (file, ".svg")) ||
 	      my_g_str_has_suffix (file, ".xpm"))
 	    {
 	      abs_file = g_build_filename (dir, file, NULL);
@@ -972,7 +1010,7 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 }
 
 static void
-scan_directory (IconThemeDir *dir, char *full_dir)
+scan_directory (IconThemeDir *dir, char *full_dir, gboolean allow_svg)
 {
   GDir *gdir;
   const char *name;
@@ -1007,7 +1045,7 @@ scan_directory (IconThemeDir *dir, char *full_dir)
       
       if (my_g_str_has_suffix (name, ".png")) 
 	suffix = ICON_SUFFIX_PNG;
-      else if (my_g_str_has_suffix (name, ".svg")) 
+      else if (allow_svg && my_g_str_has_suffix (name, ".svg")) 
 	suffix = ICON_SUFFIX_SVG;
       else if (my_g_str_has_suffix (name, ".xpm"))
 	suffix = ICON_SUFFIX_XPM;
@@ -1110,7 +1148,7 @@ theme_subdir_load (GnomeIconLoader *loader,
 	  dir->dir = full_dir;
 	  dir->icon_data = NULL;
 	  
-	  scan_directory (dir, full_dir);
+	  scan_directory (dir, full_dir, loader->priv->allow_svg);
 
 	  theme->dirs = g_list_append (theme->dirs, dir);
 	}

@@ -1,3 +1,24 @@
+2002-05-20  Alex Larsson <alexl@redhat.com>
+
+	* gnome-icon-loader.c: (gnome_icon_loader_init),
+	(gnome_icon_loader_set_allow_svg), (insert_theme), (load_themes),
+	(scan_directory), (theme_subdir_load):
+	* gnome-icon-loader.h:
+	Add flag to control if svg:s are allowed.
+	Implement theme inheritance (oops!)
+
+2002-05-20  Alex Larsson <alexl@redhat.com>
+
+	* gnome-icon-loader.c: 
+	* gnome-icon-loader.h:
+	Read default theme from gconf.
+	Emit new "changed" signal when the icon loader changes.
+	Change set_current_theme to set_custom_theme (overrides
+	the system setting).
+	
+	* test-icon-theme.c: (main):
+	Update to new api
+
 2002-05-16  Alex Larsson <alexl@redhat.com>
 
 	* gnome-icon-loader.h:

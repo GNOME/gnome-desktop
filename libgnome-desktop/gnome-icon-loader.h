@@ -63,7 +63,6 @@ typedef struct
   int n_attach_points;
 } GnomeIconData;
 
-
 GType            gnome_icon_loader_get_type              (void) G_GNUC_CONST;
 
 GnomeIconLoader *gnome_icon_loader_new                   (void);
@@ -73,6 +72,8 @@ void             gnome_icon_loader_set_search_path       (GnomeIconLoader      *
 void             gnome_icon_loader_get_search_path       (GnomeIconLoader      *loader,
 							  char                 **path[],
 							  int                   *n_elements);
+void             gnome_icon_loader_set_allow_svg         (GnomeIconLoader      *loader,
+							  gboolean              allow_svg);
 void             gnome_icon_loader_append_search_path    (GnomeIconLoader      *loader,
 							  const char           *path);
 void             gnome_icon_loader_prepend_search_path   (GnomeIconLoader      *loader,
