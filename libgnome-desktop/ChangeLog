@@ -1,3 +1,12 @@
+2001-12-06  Alexander Larsson  <alla@lysator.liu.se>
+
+	* gnome-desktop-item.c (gnome_desktop_item_new_from_uri):
+	Remove old stat code.
+	(gnome_desktop_item_save): Don't do magic non-abs path stuff
+	to the location, it is supposed to be an uri.
+	(gnome_desktop_item_get_file_status):
+	Use gnome-vfs instead of stat.
+
 Sun Dec  2 13:05:05 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* Makefile.am gnome-desktop.pc.in: Add a pc

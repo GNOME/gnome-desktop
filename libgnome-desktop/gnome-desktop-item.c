@@ -35,7 +35,6 @@
 #include <glib.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <sys/stat.h>
 #include <errno.h>
 #include <unistd.h>
 #include <time.h>
@@ -466,7 +465,6 @@ gnome_desktop_item_new_from_uri (const char *uri,
 {
 	GnomeDesktopItem *retval;
 	char *subfn, *dir;
-	struct stat sbuf;
 	GnomeVFSFileInfo *info;
 	time_t mtime = 0;
 
@@ -533,7 +531,7 @@ gnome_desktop_item_new_from_uri (const char *uri,
 
         retval->mtime = DONT_UPDATE_MTIME;
 	gnome_desktop_item_set_location (retval, subfn);
-        retval->mtime = sbuf.st_mtime;
+        retval->mtime = mtime;
 
 	dir = get_dirname (retval->location);
 	if (dir != NULL) {
@@ -574,15 +572,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item,
 	
 	if (under == NULL)
 		uri = item->location;
-	else {
-		if (g_path_is_absolute (under))
-			uri = under;
-		else  {
-			char *cur = g_get_current_dir ();
-			char *full = g_build_filename (cur, under, NULL);
-			uri = full;
-		}	
-	}
+	else 
+		uri = under;
 
 	if (uri == NULL) {
 		g_set_error (error,
@@ -1467,19 +1458,27 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 {
         struct stat sbuf;
         GnomeDesktopItemStatus retval;
+	GnomeVFSFileInfo *info;
 
         g_return_val_if_fail (item != NULL, GNOME_DESKTOP_ITEM_DISAPPEARED);
         g_return_val_if_fail (item->refcount > 0, GNOME_DESKTOP_ITEM_DISAPPEARED);
 
+	info = gnome_vfs_file_info_new ();
+	
         if (item->location == NULL ||
-	    stat (item->location, &sbuf) != 0)
+	    gnome_vfs_get_file_info (item->location, info,
+				     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
+		gnome_vfs_file_info_unref (info);
                 return GNOME_DESKTOP_ITEM_DISAPPEARED;
+	}
 
-	if (sbuf.st_mtime > item->mtime)
+	retval = GNOME_DESKTOP_ITEM_UNCHANGED;
+	if ((info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME) &&
+	    info->mtime > item->mtime)
 		retval = GNOME_DESKTOP_ITEM_CHANGED;
-	else
-		retval = GNOME_DESKTOP_ITEM_UNCHANGED;
 
+	gnome_vfs_file_info_unref (info);
+	
         return retval;
 }
 
