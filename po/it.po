@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.7\n"
-"POT-Creation-Date: 2000-09-10 03:45+0200\n"
+"POT-Creation-Date: 2000-10-23 15:54-0400\n"
 "PO-Revision-Date: 2000-09-10 03:48+02:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@pluto.linux.it>\n"
 "Language-Team: Italiano <it@li.org>\n"
@@ -204,25 +204,25 @@ msgid "Desk Guide Alert"
 msgstr "Avvertimento di GNOME Desk Guide"
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1379
-#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:792
-#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1348 panel/menu.c:4686
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1392
+#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:790
+#: panel/drawer.c:418 panel/launcher.c:529 panel/menu.c:1350 panel/menu.c:4693
 msgid "Properties..."
 msgstr "Proprietà..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1391
-#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:798
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1404
+#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:796
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
-#: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
-#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4695
+#: help-browser/window.c:255 panel/drawer.c:421 panel/gnome-run.c:311
+#: panel/launcher.c:532 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4702
 #: panel/status.c:366 panel/swallow.c:369
 msgid "Help"
 msgstr "Aiuto"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1397
-#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:805
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1410
+#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:803
 msgid "About..."
 msgstr "Informazioni su..."
 
@@ -260,7 +260,7 @@ msgstr "Il nome del tuo Pesce GNOME:"
 msgid "The Animation Filename:"
 msgstr "File dell'animazione:"
 
-#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
+#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:941
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:498 panel/menu-properties.c:536
 #: panel/panel-util.c:101 panel/panel-util.c:142 panel/panel-util.c:183
@@ -324,13 +324,14 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:418
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:434
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:416
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:432
+#: panel/foobar-widget.c:549
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -355,7 +356,7 @@ msgstr "%a %b %d"
 msgid "%A, %B %d"
 msgstr "%a, %b %d"
 
-#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1295
+#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1308
 #: applets/gen_util/printer.c:421
 msgid "Can't create applet!\n"
 msgstr "Impossibile creare l'applet!\n"
@@ -421,11 +422,11 @@ msgstr ""
 "per\n"
 "visualizzare l'ora corrente"
 
-#: applets/gen_util/mailcheck.c:200 applets/gen_util/mailcheck.c:972
+#: applets/gen_util/mailcheck.c:201 applets/gen_util/mailcheck.c:985
 msgid "Password:"
 msgstr "Password:"
 
-#: applets/gen_util/mailcheck.c:259
+#: applets/gen_util/mailcheck.c:260
 msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
@@ -433,115 +434,125 @@ msgstr ""
 "È avventuo un errore di client remoto. Controllo remoto disattivato.  Forse "
 "il nome del server, il nome dell'utente o la password erano sbagliati?"
 
-#: applets/gen_util/mailcheck.c:452
+#: applets/gen_util/mailcheck.c:456
 msgid "You have new mail."
 msgstr "Hai nuova posta."
 
-#: applets/gen_util/mailcheck.c:454
+#: applets/gen_util/mailcheck.c:458
 msgid "You have mail."
 msgstr "Hai nuova posta."
 
-#: applets/gen_util/mailcheck.c:456
+#: applets/gen_util/mailcheck.c:462
+#, c-format
+msgid "%d/%d messages"
+msgstr ""
+
+#: applets/gen_util/mailcheck.c:464
+#, c-format
+msgid "%d messages"
+msgstr ""
+
+#: applets/gen_util/mailcheck.c:468
 msgid "No mail."
 msgstr "Niente posta."
 
-#: applets/gen_util/mailcheck.c:873
+#: applets/gen_util/mailcheck.c:886
 msgid "Mailbox resides on:"
 msgstr "La mailbox si trova su:"
 
-#: applets/gen_util/mailcheck.c:880
+#: applets/gen_util/mailcheck.c:893
 msgid "Local mailspool"
 msgstr "Posta locale"
 
-#: applets/gen_util/mailcheck.c:888
+#: applets/gen_util/mailcheck.c:901
 msgid "Local maildir"
 msgstr "Cartella di posta locale"
 
-#: applets/gen_util/mailcheck.c:896
+#: applets/gen_util/mailcheck.c:909
 msgid "Remote POP3-server"
 msgstr "Server POP3 remoto"
 
-#: applets/gen_util/mailcheck.c:904
+#: applets/gen_util/mailcheck.c:917
 msgid "Remote IMAP-server"
 msgstr "Server IMAP remoto"
 
-#: applets/gen_util/mailcheck.c:924
+#: applets/gen_util/mailcheck.c:937
 msgid "Mail spool file:"
 msgstr "File dello spooler di posta:"
 
-#: applets/gen_util/mailcheck.c:941
+#: applets/gen_util/mailcheck.c:954
 msgid "Mail server:"
 msgstr "Server di posta:"
 
-#: applets/gen_util/mailcheck.c:958
+#: applets/gen_util/mailcheck.c:971
 msgid "Username:"
 msgstr "Nome utente: "
 
-#: applets/gen_util/mailcheck.c:1003
+#: applets/gen_util/mailcheck.c:1016
 msgid "Execute"
 msgstr "Esegui"
 
-#: applets/gen_util/mailcheck.c:1014
+#: applets/gen_util/mailcheck.c:1027
 msgid "Before each update:"
 msgstr "Prima di ogni aggiornamento:"
 
-#: applets/gen_util/mailcheck.c:1035
+#: applets/gen_util/mailcheck.c:1048
 msgid "When new mail arrives:"
 msgstr "Quando arriva nuova posta:"
 
-#: applets/gen_util/mailcheck.c:1054
+#: applets/gen_util/mailcheck.c:1067
 msgid "When clicked:"
 msgstr "Quando premuto:"
 
-#: applets/gen_util/mailcheck.c:1077
+#: applets/gen_util/mailcheck.c:1090
 msgid "Check for mail every"
 msgstr "Controlla la posta ogni"
 
-#: applets/gen_util/mailcheck.c:1090
+#: applets/gen_util/mailcheck.c:1103
 msgid "minutes"
 msgstr "minuti"
 
-#: applets/gen_util/mailcheck.c:1103
+#: applets/gen_util/mailcheck.c:1116
 msgid "seconds"
 msgstr "secondi"
 
-#: applets/gen_util/mailcheck.c:1107
+#: applets/gen_util/mailcheck.c:1120
 msgid "Play a sound when new mail arrives"
 msgstr "Emetti un suono quando arriva nuova posta"
 
-#: applets/gen_util/mailcheck.c:1118
+#: applets/gen_util/mailcheck.c:1131
 msgid "Select animation"
 msgstr "Seleziona animazione"
 
-#: applets/gen_util/mailcheck.c:1153
+#: applets/gen_util/mailcheck.c:1166
 msgid "Mail check properties"
 msgstr "Proprietà del controllo di posta"
 
-#: applets/gen_util/mailcheck.c:1159
+#: applets/gen_util/mailcheck.c:1172
 msgid "Mail check"
 msgstr "Controllo di posta"
 
-#: applets/gen_util/mailcheck.c:1162
+#: applets/gen_util/mailcheck.c:1175
 msgid "Mailbox"
 msgstr "Casella della posta"
 
-#: applets/gen_util/mailcheck.c:1243
+#: applets/gen_util/mailcheck.c:1256
 msgid "Mail check Applet"
 msgstr "Applet per il controllo della posta"
 
-#: applets/gen_util/mailcheck.c:1244
+#: applets/gen_util/mailcheck.c:1257
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 the Free Software Foundation"
 
-#: applets/gen_util/mailcheck.c:1246
+#: applets/gen_util/mailcheck.c:1259
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Questo programma avverte l'utente quando arriva nuova posta"
 
-#: applets/gen_util/mailcheck.c:1357
+#: applets/gen_util/mailcheck.c:1370
 msgid "Text only"
 msgstr "Solo testo"
 
-#: applets/gen_util/mailcheck.c:1385
+#: applets/gen_util/mailcheck.c:1398
 msgid "Check for mail"
 msgstr "Controlla la posta"
 
@@ -630,7 +641,7 @@ msgstr "Termina applicazione"
 msgid "Follow panel size"
 msgstr "Segui le dimensioni del pannello"
 
-#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3698
+#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3705
 msgid "Horizontal"
 msgstr "Orizzontale"
 
@@ -655,7 +666,7 @@ msgstr "La dimensione della lista task è fissa"
 msgid "Tasklist width is dynamic"
 msgstr "La dimensione della lista task è dinamica"
 
-#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3699
+#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3706
 msgid "Vertical"
 msgstr "Verticale"
 
@@ -671,7 +682,7 @@ msgstr "L'altezza della lista task è fissa"
 msgid "Tasklist height is dynamic"
 msgstr "L'altezza della lista task è dinamica"
 
-#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3730
+#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3737
 msgid "Size"
 msgstr "Dimensione"
 
@@ -697,8 +708,8 @@ msgstr "Mostra applicazioni minimizzate di tutte le scrivanie"
 
 #. Miscellaneous frame
 #: applets/tasklist/tasklist_properties.c:272 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:975
-#: panel/gnome-panel-properties.c:1366
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:986
+#: panel/gnome-panel-properties.c:1379
 msgid "Miscellaneous"
 msgstr "Varie"
 
@@ -718,31 +729,31 @@ msgstr "Muovi i programmi ridotti a icona nel desktop corrente"
 msgid "Tasklist properties"
 msgstr "Proprietà lista task"
 
-#: gmenu/desktop.c:80
+#: gmenu/desktop.c:84
 msgid " Folder"
 msgstr " Cartella"
 
-#: gmenu/edit.c:327
+#: gmenu/edit.c:305
 msgid "Save"
 msgstr "Salva"
 
-#: gmenu/edit.c:345 gsm/session-properties.c:173
+#: gmenu/edit.c:323 gsm/session-properties.c:173
 msgid "Revert"
 msgstr "Ripristina"
 
-#: gmenu/edit.c:385 gmenu/tree.c:410
+#: gmenu/edit.c:362 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "Preferiti (menu utente)"
 
-#: gmenu/edit.c:389 gmenu/tree.c:418
+#: gmenu/edit.c:364 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "Programmi (menu di sistema)"
 
-#: gmenu/edit.c:393 gmenu/tree.c:436
+#: gmenu/edit.c:366 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "Applet (menu di sistema)"
 
-#: gmenu/edit.c:397 gmenu/tree.c:427
+#: gmenu/edit.c:368 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "Programmi da integrare (menu di sistema)"
 
@@ -827,7 +838,7 @@ msgid "Sort _Recursive"
 msgstr "Ordina _Ricorsivamente"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:389
+#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "Editor dei menu"
 
@@ -843,17 +854,17 @@ msgstr ""
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "Impossibile trovare la directory di installazione di GNOME\n"
 
-#: gmenu/order.c:78
+#: gmenu/order.c:81
 #, c-format
 msgid "Unable to create file: %s\n"
 msgstr "Impossibile creare il file: %s\n"
 
-#: gmenu/order.c:96
+#: gmenu/order.c:95
 #, c-format
 msgid "unable to remove .order file: %s\n"
 msgstr "Impossibile rimuovere il file .order: %s\n"
 
-#: gmenu/save.c:27 gmenu/save.c:85
+#: gmenu/save.c:27 gmenu/save.c:86
 msgid "The menu item must have a name"
 msgstr "L'elemento del menu deve avere un nome"
 
@@ -873,7 +884,7 @@ msgstr "Questa modifica è in conflitto con un elemento di menu esistente"
 msgid "Overwrite existing menu entry?"
 msgstr "Sovrascrivere la voce del menu esistente?"
 
-#: gmenu/save.c:113
+#: gmenu/save.c:114
 msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
@@ -881,23 +892,23 @@ msgstr ""
 "Questa modifica è in conflitto con una voce del menu esistente.\n"
 "Due voci in un sottomenu non devono mai avere lo stesso nome."
 
-#: gmenu/tree.c:391
+#: gmenu/tree.c:382
 msgid "One moment, reading menus..."
 msgstr "Attendere prego: lettura dei menu in corso..."
 
-#: gmenu/tree.c:411
+#: gmenu/tree.c:402
 msgid "Top of user menus"
 msgstr "Inizio menu utente"
 
-#: gmenu/tree.c:419
+#: gmenu/tree.c:410
 msgid "Top of system menus"
 msgstr "Inizio menu di sistema"
 
-#: gmenu/tree.c:428
+#: gmenu/tree.c:419
 msgid "Top of system merge menus"
 msgstr "Inizio menu di sistema integrati"
 
-#: gmenu/tree.c:437
+#: gmenu/tree.c:428
 msgid "Top of applet menus"
 msgstr "Inizio menu applet"
 
@@ -942,12 +953,12 @@ msgstr "untitled.desktop"
 msgid "untitled"
 msgstr "senza titolo"
 
-#: gmenu/utils.c:28
+#: gmenu/utils.c:29
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "creazione directory utente: %s\n"
 
-#: gmenu/utils.c:31
+#: gmenu/utils.c:32
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "impossibile creare directory utente: %s\n"
@@ -956,56 +967,56 @@ msgstr "impossibile creare directory utente: %s\n"
 msgid "GNOME was brought to you by"
 msgstr "GNOME é stato creato da"
 
-#: gnome-about/contributors.h:66
+#: gnome-about/contributors.h:67
 msgid "Gergõ Érdi"
 msgstr "Gergõ Érdi"
 
-#: gnome-about/contributors.h:83
+#: gnome-about/contributors.h:84
 msgid "The Mysterious GEGL"
 msgstr "Il Misterioso GEGL"
 
 #. for languages that can't display ntilde, replace 'ñ' with 'n'
-#: gnome-about/contributors.h:167
+#: gnome-about/contributors.h:168
 msgid "Alexandre Muñiz"
 msgstr "Alexandre Muñiz"
 
-#: gnome-about/contributors.h:168
+#: gnome-about/contributors.h:169
 msgid "Sung-Hyun Nam"
 msgstr "Sung-Hyun Nam"
 
 #. languages that can't display adiaeresis, replace 'ä' with 'ae'
-#: gnome-about/contributors.h:173
+#: gnome-about/contributors.h:174
 msgid "Martin Norbäck"
 msgstr "Martin Norbäck"
 
 #. languages that can't display Odiaeresis, replace 'Ö' with 'Oe'
-#: gnome-about/contributors.h:179
+#: gnome-about/contributors.h:180
 msgid "Tomas Ögren"
 msgstr "Tomas Ögren"
 
-#: gnome-about/contributors.h:208
+#: gnome-about/contributors.h:209
 msgid "Kazuhiro Sasayama"
 msgstr "Kazuhiro Sasayama"
 
 #. for languages that can't display ntilde, replace 'ñ' with 'n'
-#: gnome-about/contributors.h:215
+#: gnome-about/contributors.h:216
 msgid "Iñigo Serna"
 msgstr "Iñigo Serna"
 
 #. not really a person name :)
-#: gnome-about/contributors.h:228
+#: gnome-about/contributors.h:229
 msgid "The Squeaky Rubber Gnome"
 msgstr "Lo Gnomo di Gomma"
 
-#: gnome-about/contributors.h:253
+#: gnome-about/contributors.h:254
 msgid "Wanda the GNOME Fish"
 msgstr "Il pesce di GNOME di nome Wanda"
 
-#: gnome-about/contributors.h:266
+#: gnome-about/contributors.h:267
 msgid "... and many more"
 msgstr "... e molti, molti altri."
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:194
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:201
 msgid "About GNOME"
 msgstr "Informazioni su GNOME"
 
@@ -1283,11 +1294,11 @@ msgstr "Caratteri selezione parola"
 msgid "Image"
 msgstr "Immagine"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3736
+#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3743
 msgid "Background type"
 msgstr "Tipo di sfondo"
 
-#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3693
+#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3700
 msgid "None"
 msgstr "Nessuna"
 
@@ -1424,7 +1435,7 @@ msgid "Edit"
 msgstr "Modifica"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:577
+#: panel/foobar-widget.c:604
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -1940,15 +1951,15 @@ msgstr "ALTEZZA"
 msgid "Debug level"
 msgstr "Livello di debug"
 
-#: help-browser/gnome-help-browser.c:365 help-browser/window.c:913
+#: help-browser/gnome-help-browser.c:371 help-browser/window.c:913
 msgid "Gnome Help Browser"
 msgstr "Guida di Gnome"
 
-#: help-browser/gnome-help-browser.c:366
+#: help-browser/gnome-help-browser.c:372
 msgid "Copyright (c) 1998 Red Hat Software, Inc."
 msgstr "Copyright (c) 1998 Red Hat Software, Inc."
 
-#: help-browser/gnome-help-browser.c:368
+#: help-browser/gnome-help-browser.c:374
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
@@ -1956,47 +1967,47 @@ msgstr ""
 "La Guida di GNOME permette di accedere a varie forme di documentazione del "
 "sistema"
 
-#: help-browser/gnome-help-browser.c:626
+#: help-browser/gnome-help-browser.c:632
 msgid "History size"
 msgstr "Dimensione cronologia"
 
-#: help-browser/gnome-help-browser.c:627
+#: help-browser/gnome-help-browser.c:633
 msgid "History file"
 msgstr "File cronologia"
 
-#: help-browser/gnome-help-browser.c:628
+#: help-browser/gnome-help-browser.c:634
 msgid "Cache size"
 msgstr "Dimensione cache"
 
-#: help-browser/gnome-help-browser.c:629
+#: help-browser/gnome-help-browser.c:635
 msgid "Cache file"
 msgstr "File di cache"
 
-#: help-browser/gnome-help-browser.c:630
+#: help-browser/gnome-help-browser.c:636
 msgid "Bookmark file"
 msgstr "File segnalibro"
 
-#: help-browser/gnome-help-browser.c:636
+#: help-browser/gnome-help-browser.c:642
 msgid "Man Path"
 msgstr "Percorso per pagine man"
 
-#: help-browser/gnome-help-browser.c:637
+#: help-browser/gnome-help-browser.c:643
 msgid "Info Path"
 msgstr "Percorso per pagine info"
 
-#: help-browser/gnome-help-browser.c:638
+#: help-browser/gnome-help-browser.c:644
 msgid "GNOME Help Path"
 msgstr "Percorso per la Guida di Gnome"
 
-#: help-browser/gnome-help-browser.c:713
+#: help-browser/gnome-help-browser.c:719
 msgid "Gnome Help Configure"
 msgstr "Configurazione Guida di Gnome"
 
-#: help-browser/gnome-help-browser.c:716
+#: help-browser/gnome-help-browser.c:722
 msgid "History and cache"
 msgstr "Cronologia e cache"
 
-#: help-browser/gnome-help-browser.c:717
+#: help-browser/gnome-help-browser.c:723
 msgid "Paths"
 msgstr "Percorsi"
 
@@ -2297,17 +2308,17 @@ msgstr "Rimuovi dal pannello"
 msgid "Move"
 msgstr "Sposta"
 
-#: panel/applet.c:463 panel/menu.c:2859
+#: panel/applet.c:463 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Impossibile trovare il file immagine %s"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3084 panel/menu.c:3089
-#: panel/menu.c:4104 panel/menu.c:4109 panel/menu.c:4426
+#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Pannello"
 
-#: panel/applet.c:690
+#: panel/applet.c:696
 msgid "Can't find an empty spot"
 msgstr "Impossibile trovare uno spazio libero"
 
@@ -2334,7 +2345,7 @@ msgstr "Impossibile creare l'oggetto"
 msgid "Object created is not AppletWidget"
 msgstr "L'oggetto creato non è un AppletWidget"
 
-#: panel/button-widget.c:688
+#: panel/button-widget.c:701
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2388,8 +2399,8 @@ msgstr "Abilita i pulsanti di minimizzazione"
 msgid "Enable hidebutton arrow"
 msgstr "Abilita le frecce sui pulsanti di minimizzazione"
 
-#: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:549
-#: panel/menu.c:3817
+#: panel/drawer.c:160 panel/drawer.c:278 panel/gnome-panel-properties.c:554
+#: panel/menu.c:3824
 msgid "Drawer"
 msgstr "Cassetto"
 
@@ -2402,11 +2413,11 @@ msgid "Whoops! for some reason we can't add to the panel"
 msgstr ""
 "OOPS!  Per qualche ragione è impossibile aggiungere un elemento al pannello!"
 
-#: panel/extern.c:572
+#: panel/extern.c:573
 msgid "No socket was created"
 msgstr "Nessun socket è stato creato"
 
-#: panel/foobar-widget.c:152
+#: panel/foobar-widget.c:159
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2414,7 +2425,7 @@ msgstr ""
 "Impossibile eseguire il programma gmc-client,\n"
 "probabile che GMC non sia installato"
 
-#: panel/foobar-widget.c:162
+#: panel/foobar-widget.c:169
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2424,430 +2435,435 @@ msgstr ""
 "probabile che non sia installato.\n"
 "Installare il pacchetto gnome-pim."
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:181
 msgid "News (www)"
 msgstr "Novità (www)"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:181
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:182
 msgid "FAQ (www)"
 msgstr "FAQ (www)"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:182
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.it.gnome.org/gnomefaq/index.html"
 
-#: panel/foobar-widget.c:176
+#: panel/foobar-widget.c:183
 msgid "Mailing Lists (www)"
 msgstr "Mailing Lists (www)"
 
-#: panel/foobar-widget.c:176
+#: panel/foobar-widget.c:183
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:185
 msgid "Software (www)"
 msgstr "Software (www)"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:185
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:186
 msgid "Development (www)"
 msgstr "Sviluppo (www)"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:186
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org"
 
-#: panel/foobar-widget.c:180
+#: panel/foobar-widget.c:187
 msgid "Bug Tracking System (www)"
 msgstr "Bug Tracker (www)"
 
-#: panel/foobar-widget.c:180
+#: panel/foobar-widget.c:187
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:224
+#: panel/foobar-widget.c:231
 msgid "By Name"
 msgstr "Per nome"
 
-#: panel/foobar-widget.c:225
+#: panel/foobar-widget.c:232
 msgid "By Type"
 msgstr "Per tipo"
 
-#: panel/foobar-widget.c:226
+#: panel/foobar-widget.c:233
 msgid "By Size"
 msgstr "Per dimensione"
 
-#: panel/foobar-widget.c:227
+#: panel/foobar-widget.c:234
 msgid "By Time Last Accessed"
 msgstr "Per ultimo accesso"
 
-#: panel/foobar-widget.c:228
+#: panel/foobar-widget.c:235
 msgid "By Time Last Modified"
 msgstr "Per data ultima modifica"
 
-#: panel/foobar-widget.c:229
+#: panel/foobar-widget.c:236
 msgid "By Time Last Changed"
 msgstr "Per data ultima modifica"
 
-#: panel/foobar-widget.c:238
+#: panel/foobar-widget.c:245
 msgid "Arrange Icons"
 msgstr "Disponi le icone"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:255
 msgid "Rescan Desktop Directory"
 msgstr "Rileggi directory"
 
-#: panel/foobar-widget.c:249
+#: panel/foobar-widget.c:256
 msgid "Rescan Desktop Devices"
 msgstr "Rileggi periferiche"
 
-#: panel/foobar-widget.c:255
+#: panel/foobar-widget.c:262
 msgid "Lock Screen"
 msgstr "Blocca schermo"
 
-#: panel/foobar-widget.c:265
+#: panel/foobar-widget.c:272
 msgid "Log Out"
 msgstr "Esci"
 
-#: panel/foobar-widget.c:273
+#: panel/foobar-widget.c:280
 msgid " Desktop "
 msgstr "Scrivania "
 
-#: panel/foobar-widget.c:290
+#: panel/foobar-widget.c:297
 msgid "can't fine real path"
 msgstr "impossibile trovare il percorso reale"
 
-#: panel/foobar-widget.c:298
+#: panel/foobar-widget.c:305
 msgid "menu wasn't created"
 msgstr "il menu non è stato creato"
 
-#: panel/foobar-widget.c:341
+#: panel/foobar-widget.c:347
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:409
+#: panel/foobar-widget.c:425
 msgid "Today"
 msgstr "Oggi"
 
-#: panel/foobar-widget.c:410
+#: panel/foobar-widget.c:426
 msgid "This Week"
 msgstr "Questa settimana"
 
-#: panel/foobar-widget.c:411
+#: panel/foobar-widget.c:427
 msgid "This Month"
 msgstr "Questo mese"
 
-#: panel/foobar-widget.c:417
+#: panel/foobar-widget.c:433
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:419
+#: panel/foobar-widget.c:435
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:426
+#: panel/foobar-widget.c:442
 msgid "Add appointement..."
 msgstr "Nuovo appuntamento..."
 
-#: panel/foobar-widget.c:443
+#: panel/foobar-widget.c:459
 msgid "Format"
 msgstr "Formato"
 
-#: panel/foobar-widget.c:560 panel/menu.c:2881 panel/menu.c:2886
-#: panel/menu.c:4331
+#: panel/foobar-widget.c:587 panel/menu.c:2888 panel/menu.c:2893
+#: panel/menu.c:4338
 msgid "Programs"
 msgstr "Programmi"
 
-#: panel/foobar-widget.c:574 panel/menu.c:4303 panel/menu.c:4343
-#: panel/menu.c:4349
+#: panel/foobar-widget.c:601 panel/menu.c:4310 panel/menu.c:4350
+#: panel/menu.c:4356
 msgid "Favorites"
 msgstr "Preferiti"
 
-#: panel/gnome-panel-properties.c:110 panel/menu-properties.c:456
+#: panel/gnome-panel-properties.c:111 panel/menu-properties.c:456
 msgid "Programs: "
 msgstr "Programmi: "
 
-#: panel/gnome-panel-properties.c:111 panel/menu-properties.c:460
+#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:460
 msgid "Favorites: "
 msgstr "Preferiti: "
 
-#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:464
+#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:464
 msgid "Applets: "
 msgstr "Applet: "
 
-#: panel/gnome-panel-properties.c:113
+#: panel/gnome-panel-properties.c:114
 msgid "Distribution: "
 msgstr "Distribuzione: "
 
-#: panel/gnome-panel-properties.c:114
+#: panel/gnome-panel-properties.c:115
 msgid "KDE: "
 msgstr "KDE: "
 
-#: panel/gnome-panel-properties.c:115
+#: panel/gnome-panel-properties.c:116
 msgid "Panel: "
 msgstr "Pannello: "
 
-#: panel/gnome-panel-properties.c:116
+#: panel/gnome-panel-properties.c:117
 msgid "Desktop: "
 msgstr "Scrivania: "
 
 #. Animation enable
-#: panel/gnome-panel-properties.c:301
+#: panel/gnome-panel-properties.c:302
 msgid "Enable animations"
 msgstr "Abilita animazioni"
 
-#: panel/gnome-panel-properties.c:306
+#: panel/gnome-panel-properties.c:307
 msgid "Constant speed animations"
 msgstr "Animazioni a velocità costante"
 
 #. AutoHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:312
+#: panel/gnome-panel-properties.c:313
 msgid "Animation speed"
 msgstr "Velocità di animazione"
 
-#: panel/gnome-panel-properties.c:322 panel/gnome-panel-properties.c:340
-#: panel/menu.c:3686
+#: panel/gnome-panel-properties.c:323 panel/gnome-panel-properties.c:341
+#: panel/menu.c:3693
 msgid "Auto hide"
 msgstr "Minimizza automaticamente"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:329 panel/menu.c:3685
+#: panel/gnome-panel-properties.c:330 panel/menu.c:3692
 msgid "Explicit hide"
 msgstr "Minimizza esplicitamente"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:335
+#: panel/gnome-panel-properties.c:336
 msgid "Drawer sliding"
 msgstr "Cassetti animati"
 
 #. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:351
+#: panel/gnome-panel-properties.c:352
 msgid "Delay (ms)"
 msgstr "Ritardo (ms)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:357
+#: panel/gnome-panel-properties.c:358
 msgid "Size (pixels)"
 msgstr "Dimensione (pixels)"
 
-#: panel/gnome-panel-properties.c:464
+#: panel/gnome-panel-properties.c:469
 msgid "Launcher icon"
 msgstr "Pulsanti di avvio"
 
-#: panel/gnome-panel-properties.c:465
+#: panel/gnome-panel-properties.c:470
 msgid "Drawer icon"
 msgstr "Icone cassetti"
 
-#: panel/gnome-panel-properties.c:466
+#: panel/gnome-panel-properties.c:471
 msgid "Menu icon"
 msgstr "Icone menu"
 
-#: panel/gnome-panel-properties.c:467
+#: panel/gnome-panel-properties.c:472
 msgid "Special icon"
 msgstr "Icone speciali"
 
 #. toggle button
-#: panel/gnome-panel-properties.c:479
+#: panel/gnome-panel-properties.c:484
 msgid "Tiles enabled"
 msgstr "Sfondi abilitati"
 
-#: panel/gnome-panel-properties.c:494
+#: panel/gnome-panel-properties.c:499
 msgid "Normal tile"
 msgstr "Sfondo normale"
 
-#: panel/gnome-panel-properties.c:507
+#: panel/gnome-panel-properties.c:512
 msgid "Clicked tile"
 msgstr "Sfondo premuto"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:523
+#: panel/gnome-panel-properties.c:528
 msgid "Border width (tile only)"
 msgstr "Dimensione del bordo (solo sfondo)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:529
+#: panel/gnome-panel-properties.c:534
 msgid "Depth (displacement when pressed)"
 msgstr "Profondità (spostamento alla pressione)"
 
-#: panel/gnome-panel-properties.c:548
+#: panel/gnome-panel-properties.c:553
 msgid "Launcher"
 msgstr "Pulsanti di avvio"
 
-#: panel/gnome-panel-properties.c:550 panel/gnome-panel-properties.c:1361
-#: panel/menu-properties.c:514 panel/menu.c:2395 panel/menu.c:2462
-#: panel/menu.c:2464 panel/menu.c:3765 panel/menu.c:4601
+#: panel/gnome-panel-properties.c:555 panel/gnome-panel-properties.c:1374
+#: panel/menu-properties.c:514 panel/menu.c:2397 panel/menu.c:2464
+#: panel/menu.c:2466 panel/menu.c:3772 panel/menu.c:4608
 msgid "Menu"
 msgstr "Menu"
 
-#: panel/gnome-panel-properties.c:551
+#: panel/gnome-panel-properties.c:556
 msgid "Special"
 msgstr "Speciale"
 
-#: panel/gnome-panel-properties.c:561
+#: panel/gnome-panel-properties.c:566
 msgid "Button type: "
 msgstr "Tipo di pulsante: "
 
 #. show/hide frame
-#: panel/gnome-panel-properties.c:594
+#: panel/gnome-panel-properties.c:599
 msgid "Make buttons flush with panel edge"
 msgstr "Rendi i pulsanti sensibili al bordo del pannello"
 
 #. only show tiles when mouse is over the button
-#: panel/gnome-panel-properties.c:601
+#: panel/gnome-panel-properties.c:606
 msgid "Show button tiles only when cursor is over the button"
 msgstr "Mostra lo sfondo solo quando il cursore è sopra al pulsante"
 
 #. prelight on mouseovers hack (used to be saturation, hence
 #. * the config option name)
-#: panel/gnome-panel-properties.c:608
+#: panel/gnome-panel-properties.c:613
 msgid "Prelight buttons on mouseover"
 msgstr "Mostra i pannelli quando il cursore si posta su questi"
 
+#. Fast but low quality scaling (Nearest versus Hyperbolic)
+#: panel/gnome-panel-properties.c:619
+msgid "Fast but low quality scaling of button icons"
+msgstr ""
+
 #. Movement frame
-#: panel/gnome-panel-properties.c:663
+#: panel/gnome-panel-properties.c:674
 msgid "Default movement mode"
 msgstr "Modalità default per lo spostamento"
 
 #. Switched
-#: panel/gnome-panel-properties.c:673
+#: panel/gnome-panel-properties.c:684
 msgid "Switched movement (or use Ctrl)"
 msgstr "Movimento intelligente (oppure usare Ctrl)"
 
-#: panel/gnome-panel-properties.c:681
+#: panel/gnome-panel-properties.c:692
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
 msgstr "Movimento libero (non sposta le altre applet) (oppure usare Alt)"
 
-#: panel/gnome-panel-properties.c:689
+#: panel/gnome-panel-properties.c:700
 msgid "Push movement (or use Shift)"
 msgstr "Movimento forzato (oppure usare Shift)"
 
-#: panel/gnome-panel-properties.c:694
+#: panel/gnome-panel-properties.c:705
 msgid "Padding"
 msgstr "Padding"
 
-#: panel/gnome-panel-properties.c:762 panel/menu-properties.c:335
+#: panel/gnome-panel-properties.c:773 panel/menu-properties.c:335
 msgid "Off"
 msgstr "Off"
 
-#: panel/gnome-panel-properties.c:769 panel/menu-properties.c:347
+#: panel/gnome-panel-properties.c:780 panel/menu-properties.c:347
 msgid "In a submenu"
 msgstr "In un sottomenu"
 
-#: panel/gnome-panel-properties.c:775
+#: panel/gnome-panel-properties.c:786
 msgid "In the menu"
 msgstr "Nel menu"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:794
+#: panel/gnome-panel-properties.c:805
 msgid "Menus"
 msgstr "Menu"
 
 #. large icons
-#: panel/gnome-panel-properties.c:804
+#: panel/gnome-panel-properties.c:815
 msgid "Use large icons"
 msgstr "Utilizza icone grandi"
 
 #. Dot Buttons
-#: panel/gnome-panel-properties.c:810
+#: panel/gnome-panel-properties.c:821
 msgid "Show [...] buttons"
 msgstr "Mostra i pulsanti [...]"
 
 #. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:816
+#: panel/gnome-panel-properties.c:827
 msgid "Show popup menus outside of panels"
 msgstr "Mostra i menu popup fuori dai pannelli"
 
 #. Hungry Menus
-#: panel/gnome-panel-properties.c:822
+#: panel/gnome-panel-properties.c:833
 msgid "Keep menus in memory"
 msgstr "Mantieni i menu in memoria"
 
 #. Merge system menus
-#: panel/gnome-panel-properties.c:828
+#: panel/gnome-panel-properties.c:839
 msgid "Merge in system menus"
 msgstr "Integra nel menu di sistema"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:835
+#: panel/gnome-panel-properties.c:846
 msgid "Global menu"
 msgstr "Menu Globale"
 
-#: panel/gnome-panel-properties.c:953
+#: panel/gnome-panel-properties.c:964
 msgid "Press a key..."
 msgstr "Premere un tasto..."
 
 #. Tooltips enable
-#: panel/gnome-panel-properties.c:985
+#: panel/gnome-panel-properties.c:996
 msgid "Tooltips enabled"
 msgstr "Suggerimenti abilitati"
 
 #. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:991
+#: panel/gnome-panel-properties.c:1002
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr "Chiudi il cassetto se un suo pulsante di avvio viene attivato"
 
 #. Autoraise
-#: panel/gnome-panel-properties.c:997
+#: panel/gnome-panel-properties.c:1008
 msgid "Raise panels on mouse-over"
 msgstr "Mostra i pannelli quando il cursore si posta su questi"
 
 #. Keep on bottom
-#: panel/gnome-panel-properties.c:1003
+#: panel/gnome-panel-properties.c:1014
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr ""
 "Mantieni il pannello sotto alle altre finestre (solo per window manager "
 "GNOME-compatibili)"
 
 #. Confirm panel removal
-#: panel/gnome-panel-properties.c:1009
+#: panel/gnome-panel-properties.c:1020
 msgid "Confirm the removal of panels with a dialog"
 msgstr "Conferma la rimozione dei pannelli tramite una finestra di dialogo"
 
 #. Key Bindings frame
-#: panel/gnome-panel-properties.c:1015
+#: panel/gnome-panel-properties.c:1026
 msgid "Key Bindings"
 msgstr "Scorciatoie da tastiera"
 
 #. enabled
-#: panel/gnome-panel-properties.c:1028
+#: panel/gnome-panel-properties.c:1039
 msgid "Enable panel keybindings"
 msgstr "Abilita l'uso della tastiera del pannello"
 
 #. menu key
-#: panel/gnome-panel-properties.c:1035
+#: panel/gnome-panel-properties.c:1046
 msgid "Popup menu key"
 msgstr "Tasto per i menu popup"
 
-#: panel/gnome-panel-properties.c:1044 panel/gnome-panel-properties.c:1069
+#: panel/gnome-panel-properties.c:1055 panel/gnome-panel-properties.c:1080
 #: panel/panel-util.c:621 panel/panel-util.c:678
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: panel/gnome-panel-properties.c:1055 panel/gnome-panel-properties.c:1080
+#: panel/gnome-panel-properties.c:1066 panel/gnome-panel-properties.c:1091
 msgid "Grab key..."
 msgstr "Cattura il tasto..."
 
 #. run key...
-#: panel/gnome-panel-properties.c:1062
+#: panel/gnome-panel-properties.c:1073
 msgid "Run dialog key"
 msgstr "Tasto per avvio programma"
 
-#: panel/gnome-panel-properties.c:1346
+#: panel/gnome-panel-properties.c:1359
 msgid "Animation"
 msgstr "Animazione"
 
-#: panel/gnome-panel-properties.c:1351
+#: panel/gnome-panel-properties.c:1364
 msgid "Buttons"
 msgstr "Pulsanti"
 
-#: panel/gnome-panel-properties.c:1356
+#: panel/gnome-panel-properties.c:1369
 msgid "Panel Objects"
 msgstr "Oggetti del pannello"
 
@@ -2883,7 +2899,7 @@ msgstr "Avvia"
 msgid "Run in terminal"
 msgstr "Esegui in un terminale"
 
-#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4412
+#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4419
 msgid "Run..."
 msgstr "Avvia..."
 
@@ -2891,7 +2907,7 @@ msgstr "Avvia..."
 msgid "This launch icon does not specify a program to run"
 msgstr "Questo pulsante di avvio non specifica il programma da avviare"
 
-#: panel/launcher.c:76 panel/menu.c:1803
+#: panel/launcher.c:76 panel/menu.c:1805
 msgid "Can't get goad_id from desktop entry!"
 msgstr "Impossibile ottenere il goad_id dall'elemento del desktop!"
 
@@ -2903,11 +2919,11 @@ msgstr "App"
 msgid "Launcher properties"
 msgstr "Proprietà pulsante di avvio"
 
-#: panel/launcher.c:572
+#: panel/launcher.c:574
 msgid "Create launcher applet"
 msgstr "Crea applet di avvio"
 
-#: panel/logout.c:47 panel/menu.c:4246
+#: panel/logout.c:47 panel/menu.c:4253
 msgid "Log out"
 msgstr "Esci"
 
@@ -2915,7 +2931,7 @@ msgstr "Esci"
 msgid "Log out of GNOME"
 msgstr "Esci da GNOME"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4234
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4241
 msgid "Lock screen"
 msgstr "Blocca lo schermo"
 
@@ -2988,7 +3004,7 @@ msgstr "Fine alla fame nel mondo"
 msgid "Can't execute 'About GNOME'"
 msgstr "Impossibile eseguire 'About GNOME'"
 
-#: panel/menu.c:181 panel/menu.c:860 panel/menu.c:1795
+#: panel/menu.c:181 panel/menu.c:862 panel/menu.c:1797
 msgid "Can't load entry"
 msgstr "Impossibile caricare elemento."
 
@@ -3001,7 +3017,7 @@ msgstr "Impossibile creare un oggetto privo di un comando valido"
 msgid "Could not get file from path: %s"
 msgstr "Impossibile prelevare il file dal percorso: %s"
 
-#: panel/menu.c:718 panel/menu.c:820
+#: panel/menu.c:718 panel/menu.c:822
 #, c-format
 msgid "Could not open .order file: %s"
 msgstr "Impossibile aprire il file .order: %s"
@@ -3015,136 +3031,141 @@ msgstr "Impossibile aprire il file '%s' in scrittura"
 msgid "Create menu item"
 msgstr "Crea nuova voce nel menu"
 
-#: panel/menu.c:792
+#: panel/menu.c:794
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
 msgstr "Impossibile rimuovere la voce del menu %s: %s\n"
 
-#: panel/menu.c:799
+#: panel/menu.c:801
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "Impossibile preleveare il nome del file dal percorso: %s"
 
-#: panel/menu.c:839
+#: panel/menu.c:841
 #, c-format
 msgid "Could not rename tmp file %s"
 msgstr "Impossibile rinominare il file temporaneo: %s"
 
-#: panel/menu.c:857
+#: panel/menu.c:859
 msgid "No 'Exec' field in entry"
 msgstr "Il campo 'Exec' non esiste"
 
-#: panel/menu.c:1081 panel/menu.c:1134
+#: panel/menu.c:1082 panel/menu.c:1136
 msgid "Desktop entry properties"
 msgstr "Proprietà degli elementi del desktop"
 
-#: panel/menu.c:1225
+#: panel/menu.c:1227
 msgid "Add this launcher to panel"
 msgstr "Aggiungi questo pulsante di avvio al pannello"
 
-#: panel/menu.c:1228
+#: panel/menu.c:1230
 msgid "Add this applet as a launcher to panel"
 msgstr "Aggiungi questa applet come un pulsante di avvio al pannello"
 
-#: panel/menu.c:1238 panel/menu.c:1303
+#: panel/menu.c:1240 panel/menu.c:1305
 msgid "Add this to Favorites menu"
 msgstr "Aggiungi al menu Preferiti"
 
-#: panel/menu.c:1251
+#: panel/menu.c:1253
 msgid "Remove this item"
 msgstr "Rimuovi questo elemento"
 
-#: panel/menu.c:1269
+#: panel/menu.c:1271
 msgid "Put into run dialog"
 msgstr "Inserisce nella finestra di avvio"
 
-#: panel/menu.c:1286
+#: panel/menu.c:1288
 msgid "Add this as drawer to panel"
 msgstr "Aggiungi come cassetto al pannello"
 
-#: panel/menu.c:1295
+#: panel/menu.c:1297
 msgid "Add this as menu to panel"
 msgstr "Aggiungi come menu al pannello"
 
-#: panel/menu.c:1315
+#: panel/menu.c:1317
 msgid "Add new item to this menu"
 msgstr "Aggiungi nuovi elementi a questo pannello"
 
-#: panel/menu.c:1549 panel/menu.c:1625
+#: panel/menu.c:1551 panel/menu.c:1627
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:1774
+#: panel/menu.c:1776
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr ""
 "Una barra di stato é già presente nel pannello.  È possibile avere una sola "
 "barra di stato per volta."
 
-#: panel/menu.c:2113
+#: panel/menu.c:2115
 msgid "Adding tearoff when tearoffs are disabled"
 msgstr "Aggiungi il tearoff quando questi sono disabilitati"
 
-#: panel/menu.c:2262
+#: panel/menu.c:2264
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Impossibile ottenere il goad_id per l'applet, ignorato"
 
-#: panel/menu.c:2464
+#: panel/menu.c:2466
 msgid " (empty)"
 msgstr " (vuoto)"
 
-#: panel/menu.c:2558 panel/menu.c:4361
+#: panel/menu.c:2560 panel/menu.c:4368
 msgid "Applets"
 msgstr "Applet"
 
-#: panel/menu.c:2735
+#. Don't translate the first part of this string
+#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+msgid "/panel/Config/clock_format=%I:%M:%S %p"
+msgstr ""
+
+#: panel/menu.c:2742
 msgid "You can only have one menu panel at a time."
 msgstr "É possibile avere un solo menu del pannello."
 
-#: panel/menu.c:2772 panel/menu.c:2777 panel/menu.c:4001
+#: panel/menu.c:2779 panel/menu.c:2784 panel/menu.c:4008
 msgid "Create panel"
 msgstr "Crea nuovo pannello"
 
-#: panel/menu.c:2804
+#: panel/menu.c:2811
 msgid "Menu panel"
 msgstr "Menu Pannello"
 
-#: panel/menu.c:2812 panel/menu.c:3677 panel/panel_config.c:1287
+#: panel/menu.c:2819 panel/menu.c:3684 panel/panel_config.c:1287
 #: panel/panel_config.c:1382
 msgid "Edge panel"
 msgstr "Pannello laterale"
 
-#: panel/menu.c:2820 panel/menu.c:3678 panel/panel_config.c:1294
+#: panel/menu.c:2827 panel/menu.c:3685 panel/panel_config.c:1294
 #: panel/panel_config.c:1392
 msgid "Aligned panel"
 msgstr "Pannello allineato"
 
-#: panel/menu.c:2828 panel/menu.c:3679 panel/panel_config.c:1300
+#: panel/menu.c:2835 panel/menu.c:3686 panel/panel_config.c:1300
 #: panel/panel_config.c:1402
 msgid "Sliding panel"
 msgstr "Pannello scorrevole"
 
-#: panel/menu.c:2836 panel/menu.c:3680 panel/panel_config.c:1306
+#: panel/menu.c:2843 panel/menu.c:3687 panel/panel_config.c:1306
 #: panel/panel_config.c:1412
 msgid "Floating panel"
 msgstr "Pannello fluttuante"
 
-#: panel/menu.c:2895 panel/menu.c:2898
+#: panel/menu.c:2902 panel/menu.c:2905
 msgid "No system menus found!"
 msgstr "Nessun menu esistente!"
 
-#: panel/menu.c:2913
+#: panel/menu.c:2920
 msgid "Can't create the user menu directory"
 msgstr "Impossibile creare la directory per il menu utente"
 
-#: panel/menu.c:2976 panel/menu.c:2982 panel/menu.c:4401
+#: panel/menu.c:2983 panel/menu.c:2989 panel/menu.c:4408
 msgid "KDE menus"
 msgstr "Menu KDE"
 
-#: panel/menu.c:3035
+#: panel/menu.c:3042
 msgid "You cannot remove your last panel."
 msgstr "Non puoi rimuovere l'ultimo pannello"
 
-#: panel/menu.c:3045
+#: panel/menu.c:3052
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3153,164 +3174,164 @@ msgstr ""
 "delle sue applet vengono perse.\n"
 "Rimuovere questo pannello?"
 
-#: panel/menu.c:3691
+#: panel/menu.c:3698
 msgid "With pixmap arrow"
 msgstr "Con immagine delle freccie"
 
-#: panel/menu.c:3692
+#: panel/menu.c:3699
 msgid "Without pixmap"
 msgstr "Senza immagini"
 
-#: panel/menu.c:3704 panel/panel_config.c:909
+#: panel/menu.c:3711 panel/panel_config.c:909
 msgid "Ultra Tiny (12 pixels)"
 msgstr "Molto Piccolo (12 pixel)"
 
-#: panel/menu.c:3705 panel/panel_config.c:917
+#: panel/menu.c:3712 panel/panel_config.c:917
 msgid "Tiny (24 pixels)"
 msgstr "Piccolo (24 pixel)"
 
-#: panel/menu.c:3706 panel/panel_config.c:925
+#: panel/menu.c:3713 panel/panel_config.c:925
 msgid "Small (36 pixels)"
 msgstr "Medio (36  pixel)"
 
-#: panel/menu.c:3707 panel/panel_config.c:933
+#: panel/menu.c:3714 panel/panel_config.c:933
 msgid "Standard (48 pixels)"
 msgstr "Normale (48 pixel)"
 
-#: panel/menu.c:3708 panel/panel_config.c:941
+#: panel/menu.c:3715 panel/panel_config.c:941
 msgid "Large (64 pixels)"
 msgstr "Grande (64 pixel)"
 
-#: panel/menu.c:3709 panel/panel_config.c:949
+#: panel/menu.c:3716 panel/panel_config.c:949
 msgid "Huge (80 pixels)"
 msgstr "Molto grande (80 pixel)"
 
-#: panel/menu.c:3710 panel/panel_config.c:957
+#: panel/menu.c:3717 panel/panel_config.c:957
 msgid "Ridiculous (128 pixels)"
 msgstr "Ridicolo (128 pixel)"
 
-#: panel/menu.c:3715 panel/panel_config.c:1111
+#: panel/menu.c:3722 panel/panel_config.c:1111
 msgid "Standard"
 msgstr "Standard"
 
 #. color frame
-#: panel/menu.c:3716 panel/panel_config.c:1115 panel/panel_config.c:1130
+#: panel/menu.c:3723 panel/panel_config.c:1115 panel/panel_config.c:1130
 msgid "Color"
 msgstr "Colore"
 
-#: panel/menu.c:3717 panel/panel_config.c:1119
+#: panel/menu.c:3724 panel/panel_config.c:1119
 msgid "Pixmap"
 msgstr "Immagine"
 
-#: panel/menu.c:3721
+#: panel/menu.c:3728
 msgid "Type"
 msgstr "Tipo"
 
-#: panel/menu.c:3724
+#: panel/menu.c:3731
 msgid "Hiding policy"
 msgstr "Modalità di minimizzazione"
 
-#: panel/menu.c:3727
+#: panel/menu.c:3734
 msgid "Hide buttons"
 msgstr "Pulsanti di minimizzazione"
 
-#: panel/menu.c:3733
+#: panel/menu.c:3740
 msgid "Orientation"
 msgstr "Orientamento"
 
-#: panel/menu.c:3754
+#: panel/menu.c:3761
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:421 panel/menu-properties.c:443 panel/menu.c:3775
+#: panel/menu-properties.c:421 panel/menu-properties.c:443 panel/menu.c:3782
 msgid "Main menu"
 msgstr "Menu principale"
 
-#: panel/menu.c:3786
+#: panel/menu.c:3793
 msgid "Programs menu"
 msgstr "Menu programmi"
 
-#: panel/menu.c:3796
+#: panel/menu.c:3803
 msgid "Favorites menu"
 msgstr "Menu Preferiti"
 
-#: panel/menu.c:3807
+#: panel/menu.c:3814
 msgid "Launcher..."
 msgstr "Pulsante di avvio..."
 
-#: panel/menu.c:3828
+#: panel/menu.c:3835
 msgid "Log out button"
 msgstr "Pulsante di uscita"
 
-#: panel/menu.c:3839
+#: panel/menu.c:3846
 msgid "Lock button"
 msgstr "Blocco schermo"
 
-#: panel/menu.c:3850
+#: panel/menu.c:3857
 msgid "Run button"
 msgstr "Pulsante Esegui"
 
-#: panel/menu.c:3862
+#: panel/menu.c:3869
 msgid "Swallowed app..."
 msgstr "Ingloba applicazione..."
 
-#: panel/menu.c:3870
+#: panel/menu.c:3877
 msgid "Status dock"
 msgstr "Barra di stato"
 
-#: panel/menu.c:3894 panel/menu.c:3899 panel/menu.c:3977
+#: panel/menu.c:3901 panel/menu.c:3906 panel/menu.c:3984
 msgid "Add to panel"
 msgstr "Aggiungi al pannello"
 
-#: panel/menu.c:3914
+#: panel/menu.c:3921
 msgid "Cannot execute panel global properties"
 msgstr "Impossibile eseguire proprietà globali del pannello"
 
-#: panel/menu.c:3954
+#: panel/menu.c:3961
 msgid "Remove this panel..."
 msgstr "Rimuovi questo pannello..."
 
-#: panel/menu.c:3956 panel/menu.c:4012
+#: panel/menu.c:3963 panel/menu.c:4019
 msgid "Remove this panel"
 msgstr "Rimuovi questo pannello"
 
-#: panel/menu.c:4029
+#: panel/menu.c:4036
 msgid "Properties"
 msgstr "Proprietà"
 
-#: panel/menu.c:4040
+#: panel/menu.c:4047
 msgid "All properties..."
 msgstr "Proprietà..."
 
-#: panel/menu.c:4056
+#: panel/menu.c:4063
 msgid "Global Preferences..."
 msgstr "Proprietà globali..."
 
-#: panel/menu.c:4070
+#: panel/menu.c:4077
 msgid "Panel Manual..."
 msgstr "Guida del pannello..."
 
-#: panel/menu.c:4081
+#: panel/menu.c:4088
 msgid "Cannot execute xscreensaver"
 msgstr "Impossibile eseguire xscreensaver"
 
-#: panel/menu.c:4133 panel/menu.c:4138 panel/menu.c:4435
+#: panel/menu.c:4140 panel/menu.c:4145 panel/menu.c:4442
 msgid "Desktop"
 msgstr "Scrivania"
 
-#: panel/menu.c:4175
+#: panel/menu.c:4182
 msgid "About the panel..."
 msgstr "Informazioni su..."
 
-#: panel/menu.c:4191
+#: panel/menu.c:4198
 msgid "About GNOME..."
 msgstr "Informazioni su GNOME..."
 
-#: panel/menu.c:4501
+#: panel/menu.c:4508
 msgid "Can't create menu, using main menu!"
 msgstr "Impossibile creare il menu, utilizzo il menu principale!"
 
-#: panel/menu-properties.c:145 panel/menu.c:4691
+#: panel/menu-properties.c:145 panel/menu.c:4698
 msgid "Edit menus..."
 msgstr "Modifica menu.."
 
@@ -3457,7 +3478,7 @@ msgstr "Proprietà pannello"
 msgid "Background"
 msgstr "Sfondo"
 
-#: panel/session.c:238
+#: panel/session.c:245
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -3465,15 +3486,15 @@ msgstr ""
 "L'applet non risponde alla richiesta di salvataggio.\n"
 "Rimuovere l'applet o continuare l'attesa?"
 
-#: panel/session.c:249
+#: panel/session.c:256
 msgid "Remove applet"
 msgstr "Rimuovi applet"
 
-#: panel/session.c:252
+#: panel/session.c:259
 msgid "Continue waiting"
 msgstr "Continua l'attesa"
 
-#: panel/session.c:261
+#: panel/session.c:268
 msgid "Timed out on sending session save to an applet"
 msgstr "Tempo scaduto per la richiesta di salvataggio di sessione alla applet"
 
@@ -3496,6 +3517,14 @@ msgstr "Larghezza"
 #: panel/swallow.c:224
 msgid "Height"
 msgstr "Altezza"
+
+#, fuzzy
+#~ msgid "Application"
+#~ msgstr "Azione"
+
+#, fuzzy
+#~ msgid "PanelApplet"
+#~ msgstr "Applet Stampante"
 
 #~ msgid "Can't execute copy (cp)"
 #~ msgstr "Impossibile eseguire la copia (cp)"
