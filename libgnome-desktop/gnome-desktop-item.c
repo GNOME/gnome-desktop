@@ -1510,7 +1510,7 @@ make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
 	for (i = 0; envp[i]; i++)
 		;
 
-	retval = g_new (char *, i + 1);
+	retval = g_new (char *, i + 2);
 
 	for (i = 0; envp[i]; i++)
 		retval[i] = g_strdup (envp[i]);
