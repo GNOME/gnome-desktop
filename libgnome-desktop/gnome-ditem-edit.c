@@ -221,7 +221,7 @@ setup_option (GnomeDItemEdit *dee,
 			      select, &selected);
 		add_menuitem (menu, "FSDevice", _("FSDevice"),
 			      select, &selected);
-		add_menuitem (menu, "MimeType", _("MimeType"),
+		add_menuitem (menu, "MimeType", _("MIME Type"),
 			      select, &selected);
 		add_menuitem (menu, "Service", _("Service"),
 			      select, &selected);
