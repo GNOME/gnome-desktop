@@ -1,139 +1,44 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1998-12-24 11:52-0500\n"
+"POT-Creation-Date: 1999-01-19 22:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Max Valianskiy <maxcom@vinchi.ru>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: Sergey Panov <sipan@mit.edu>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: applets/asclock/asclock.c:144
+#: applets/asclock/asclock.c:155
+#: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
 msgstr "О программе"
 
-#: applets/asclock/asclock.c:151 applets/clockmail/clockmail.c:428
-#: applets/diskusage/diskusage.c:710 applets/drivemount/drivemount.c:455
-#: applets/fish/fish.c:452 applets/gen_util/clock.c:268
-#: applets/gen_util/mailcheck.c:686 applets/gen_util/printer.c:404
+#: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:431
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:459
+#: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
+#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:693
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:449
+#: applets/gnome-pager/gnomepager_applet.c:1453 applets/gticker/gticker.c:61
 #: applets/icewm-pager/wmpager_applet.c:90
-#: applets/mini-commander/mini-commander_applet.c:135
-#: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
-#: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
-#: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:417 panel/launcher.c:266
-#: panel/menu.c:2898
+#: applets/mini-commander/src/mini-commander_applet.c:246
+#: applets/modemlights/modemlights.c:727 applets/multiload/cpuload.c:62
+#: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
+#: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:415 panel/launcher.c:264
+#: panel/menu.c:3274
 msgid "Properties..."
 msgstr "Настройки..."
 
-#: applets/asclock/dialogs.c:18
+#: applets/asclock/dialogs.c:22
 msgid "Afterstep Clock Applet"
 msgstr "Апплет Часов Afterstep"
 
-#: applets/asclock/dialogs.c:21
+#: applets/asclock/dialogs.c:25
 msgid "Who said NeXT is dead?"
 msgstr "Кто сказал, что NeXT мертв?"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
-#. ---
-#: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
-#: applets/diskusage/properties.c:322 applets/drivemount/properties.c:204
-#: applets/fvwm-pager/properties.c:246
-#: applets/mini-commander/preferences.c:616
-#: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
-#: applets/multiload/properties-mem.c:283
-#: applets/multiload/properties-swap.c:233 applets/netload/properties.c:277
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:874
-#: panel/panel_config_global.c:298
-msgid "General"
-msgstr "Общие"
-
-#: applets/asclock/dialogs.c:111
+#: applets/asclock/dialogs.c:112
 msgid "Timezone"
 msgstr "Часовой пояс"
 
@@ -189,41 +94,41 @@ msgstr "Заряжается."
 msgid "unknown minutes of battery."
 msgstr "неизвестное время жизни."
 
-#: applets/batmon/batmon.c:241
+#: applets/batmon/batmon.c:243
 msgid "unknown minutes of battery (%d%%)"
 msgstr "неизвестное время жизни батареи (%d%%)"
 
-#: applets/batmon/batmon.c:246
+#: applets/batmon/batmon.c:249
 #, c-format
 msgid "%d minutes of battery"
 msgstr "осталось %d минут"
 
-#: applets/batmon/batmon.c:247
+#: applets/batmon/batmon.c:251
 msgid "%d minutes of battery (%d%%)"
 msgstr ""
 
 #. would have to be an error
-#: applets/batmon/batmon.c:251
+#: applets/batmon/batmon.c:255
 msgid "More than 100,000,000 minutes of battery life?!?"
 msgstr "Время жизни больше чем 100.000.000 минут?!?"
 
-#: applets/batmon/batmon.c:334
+#: applets/batmon/batmon.c:338
 msgid "APM Stats"
 msgstr "Информация об APM"
 
-#: applets/batmon/batmon.c:352
+#: applets/batmon/batmon.c:356
 msgid "Linux APM Driver Version:"
 msgstr "Версия Linux APM драйвера:"
 
-#: applets/batmon/batmon.c:364
+#: applets/batmon/batmon.c:368
 msgid "APM BIOS Version:"
 msgstr "Версия APM BIOS:"
 
-#: applets/batmon/batmon.c:381
+#: applets/batmon/batmon.c:385
 msgid "Battery Status:"
 msgstr "Состояние батареи:"
 
-#: applets/batmon/batmon.c:405
+#: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2308
 msgid "Close"
 msgstr "Закрыть"
 
@@ -231,9 +136,9 @@ msgstr "Закрыть"
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Внутренняя ошибка: неправильная мода в battery_set_mode"
 
-#: applets/battery/battery.c:395 applets/gen_util/clock.c:241
-#: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
-#: applets/netload/netload.c:320
+#: applets/battery/battery.c:395 applets/freshapp/freshapp.c:38
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:660
+#: applets/gen_util/printer.c:386 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Не могу создать апплет!\n"
 
@@ -241,58 +146,57 @@ msgstr "Не могу создать апплет!\n"
 msgid "Could not allocate space for graph values"
 msgstr "Не могу выделить место для данных графика"
 
-#: applets/battery/properties.c:34
+#: applets/battery/properties.c:37
 msgid "Battery Monitor Settings"
 msgstr "Настройки монитора батареи"
 
-#: applets/battery/properties.c:43
+#: applets/battery/properties.c:46
 msgid "General Properties"
 msgstr "Общие свойства"
 
-#: applets/battery/properties.c:45 applets/diskusage/properties.c:213
-#: applets/fvwm-pager/properties.c:178 applets/multiload/properties-cpu.c:141
-#: applets/multiload/properties-mem.c:192
-#: applets/multiload/properties-swap.c:143 applets/netload/properties.c:141
+#: applets/battery/properties.c:48 applets/cpuload/properties.c:149
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
 msgid "Applet Height"
 msgstr "Высота апплета"
 
-#: applets/battery/properties.c:55
+#: applets/battery/properties.c:58
 msgid "Applet Width"
 msgstr "Ширина апплета"
 
-#: applets/battery/properties.c:65
+#: applets/battery/properties.c:68
 msgid "Applet Mode"
 msgstr "Режим апплета"
 
-#: applets/battery/properties.c:66
+#: applets/battery/properties.c:69
 msgid "Graph"
 msgstr "График"
 
-#: applets/battery/properties.c:68
+#: applets/battery/properties.c:71
 msgid "Readout"
 msgstr "Считывание"
 
-#: applets/battery/properties.c:112 applets/battery/properties.c:177
+#: applets/battery/properties.c:115 applets/battery/properties.c:180
 msgid "AC-On Battery Color:"
 msgstr "Цвет батареи при включенном AC питании:"
 
-#: applets/battery/properties.c:118 applets/battery/properties.c:183
+#: applets/battery/properties.c:121 applets/battery/properties.c:186
 msgid "AC-Off Battery Color:"
 msgstr "Цвет батареи при выключенном AC питании:"
 
-#: applets/battery/properties.c:124
+#: applets/battery/properties.c:127
 msgid "Graph Interval:"
 msgstr "Шаг графика"
 
-#: applets/battery/properties.c:138
+#: applets/battery/properties.c:141
 msgid "Graph Direction:"
 msgstr "Направление графика"
 
-#: applets/battery/properties.c:141
+#: applets/battery/properties.c:144
 msgid "Left to Right"
 msgstr "Слева на право"
 
-#: applets/battery/properties.c:143
+#: applets/battery/properties.c:146
 msgid "Right to Left"
 msgstr "Справа на лево"
 
@@ -311,13 +215,15 @@ msgid "APM is disabled!  Cannot read battery charge information."
 msgstr "APM выключен! Не могу считать информацию о батарее."
 
 #: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
-#: applets/clockmail/clockmail.c:435 applets/dialer/dialer.c:162
-#: applets/drivemount/drivemount.c:461 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:444 applets/gen_util/mailcheck.c:693
-#: applets/icewm-pager/wmpager_applet.c:82
-#: applets/modemlights/modemlights.c:725 applets/netload/netload.c:338
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
-#: panel/menu.c:1961
+#: applets/clockmail/clockmail.c:438 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:465
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:700
+#: applets/gkb/gkb.c:441 applets/gnome-pager/gnomepager_applet.c:1447
+#: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:733
+#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2316
 msgid "About..."
 msgstr "О программе..."
 
@@ -325,15 +231,15 @@ msgstr "О программе..."
 msgid "Refresh Image"
 msgstr "Обновить изображение"
 
-#: applets/bussign/bussign.c:241
+#: applets/bussign/bussign.c:244
 msgid "The Bus Sign Applet"
 msgstr "Апплет \"Автобусное Обьявление\""
 
-#: applets/bussign/bussign.c:242 applets/gen_util/mailcheck.c:613
+#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:620
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
 
-#: applets/bussign/bussign.c:244
+#: applets/bussign/bussign.c:247
 msgid ""
 "This applet is a total waste of time. Get back to work!\n"
 "\n"
@@ -346,6 +252,10 @@ msgstr ""
 "Чтобы поместить обьявление взгляни на:\n"
 "\n"
 "http://people.netscape.com/mtoy/sign/index.html"
+
+#: applets/cdplayer/cdplayer.c:318
+msgid "Run gtcd..."
+msgstr ""
 
 #: applets/charpick/charpick.c:203
 msgid "Character Picker"
@@ -365,24 +275,26 @@ msgid ""
 "keyboard. Released under GNU General Public Licence."
 msgstr ""
 
-#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:29 applets/gticker/gticker.c:230
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
 
-#: applets/clockmail/clockmail.c:32
+#: applets/clockmail/clockmail.c:34 applets/gticker/gticker.c:234
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:35
+#: applets/clockmail/clockmail.c:37
 msgid "Clock and Mail Notify Applet"
 msgstr "Апплет Часов и Состояния Почты"
 
-#: applets/clockmail/clockmail.c:36 applets/slashapp/slashapp.c:573
+#: applets/clockmail/clockmail.c:38 applets/gticker/gticker.c:236
+#: applets/jbc/jbc.c:72 applets/slashapp/slashapp.c:573
 msgid "(C) 1998"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:38
+#: applets/clockmail/clockmail.c:40
 msgid ""
 "Released under the GNU general public license.\n"
 "Basic digital clock with date in a tooltip. Optional 12/24 time display. "
@@ -390,11 +302,11 @@ msgid ""
 "arrives."
 msgstr ""
 
-#: applets/clockmail/clockmail.c:108
+#: applets/clockmail/clockmail.c:110
 msgid " (GMT)"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:113
+#: applets/clockmail/clockmail.c:116
 #, c-format
 msgid " (GMT %+d)"
 msgstr ""
@@ -404,8 +316,8 @@ msgstr ""
 msgid "None (default)"
 msgstr "Нет (по умолчанию)"
 
-#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
-#: applets/mini-commander/preferences.c:395
+#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:428
+#: applets/mini-commander/src/preferences.c:438
 msgid "Clock"
 msgstr "Часы"
 
@@ -437,6 +349,17 @@ msgstr "Когда приходит новая почта:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Объем почты, при котором почтовый ящик считается полным (Килобайты)"
 
+#. ---
+#: applets/clockmail/properties.c:385 applets/cpuload/properties.c:231
+#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:207
+#: applets/fvwm-pager/properties.c:246 applets/gticker/properties.c:328
+#: applets/mini-commander/src/preferences.c:659
+#: applets/modemlights/properties.c:200 applets/netload/properties.c:280
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:876
+#: panel/panel_config_global.c:297
+msgid "General"
+msgstr "Общие"
+
 #: applets/clockmail/properties.c:403
 msgid "Theme file (directory):"
 msgstr "Файл темы (каталог):"
@@ -444,6 +367,29 @@ msgstr "Файл темы (каталог):"
 #: applets/clockmail/properties.c:431
 msgid "Theme"
 msgstr "Тема"
+
+#: applets/cpuload/properties.c:137
+msgid "User Load"
+msgstr "Пользовательская Загрузка"
+
+#: applets/cpuload/properties.c:143
+msgid "System Load"
+msgstr "Системная Загрузка"
+
+#: applets/cpuload/properties.c:155 applets/diskusage/properties.c:238
+#: applets/fvwm-pager/properties.c:184 applets/netload/properties.c:147
+#: panel/swallow.c:241
+msgid "Width"
+msgstr "Ширина"
+
+#: applets/cpuload/properties.c:170 applets/diskusage/properties.c:259
+#: applets/netload/properties.c:170
+msgid "Update Frequency"
+msgstr "Частота Обновления"
+
+#: applets/cpuload/properties.c:228
+msgid "CPULoad Settings"
+msgstr "Настройки CPULoad"
 
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
@@ -453,49 +399,35 @@ msgstr "Апплет дозвона по PPP"
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
 msgstr ""
 
-#: applets/dialer/dialer.c:87 panel/menu.c:2724
+#: applets/dialer/dialer.c:87 panel/menu.c:3100
 msgid "Off"
 msgstr "Выкл"
 
-#: applets/diskusage/properties.c:190
+#: applets/diskusage/properties.c:209
 msgid "Used Diskspace"
-msgstr ""
+msgstr "Использованная часть диска"
 
-#: applets/diskusage/properties.c:195
+#: applets/diskusage/properties.c:214
 msgid "Free Diskspace"
-msgstr ""
+msgstr "Свободное часть диска"
 
-#: applets/diskusage/properties.c:200
+#: applets/diskusage/properties.c:219
 msgid "Textcolor"
-msgstr ""
+msgstr "Цвет печати"
 
-#: applets/diskusage/properties.c:206
+#: applets/diskusage/properties.c:225
 msgid "Backgroundcolor"
-msgstr ""
+msgstr "Цвет фона"
 
-#: applets/diskusage/properties.c:219 applets/fvwm-pager/properties.c:184
-#: applets/multiload/properties-cpu.c:149
-#: applets/multiload/properties-mem.c:200
-#: applets/multiload/properties-swap.c:151 applets/netload/properties.c:147
-#: panel/swallow.c:243
-msgid "Width"
-msgstr "Ширина"
-
-#: applets/diskusage/properties.c:240 applets/multiload/properties-cpu.c:169
-#: applets/multiload/properties-mem.c:220
-#: applets/multiload/properties-swap.c:171 applets/netload/properties.c:170
-msgid "Update Frequency"
-msgstr "Частота Обновления"
-
-#: applets/diskusage/properties.c:312
+#: applets/diskusage/properties.c:334
 msgid "Diskusage Settings"
 msgstr "Настройки дисков"
 
-#: applets/drivemount/drivemount.c:51
+#: applets/drivemount/drivemount.c:53
 msgid "Drive Mount Applet"
 msgstr "Апплет подсоединения диска"
 
-#: applets/drivemount/drivemount.c:54
+#: applets/drivemount/drivemount.c:56
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
@@ -503,19 +435,19 @@ msgstr ""
 "Released under the GNU general public license.\n"
 "Подсоединяет и отсоедимяет диски.."
 
-#: applets/drivemount/drivemount.c:127
+#: applets/drivemount/drivemount.c:129
 msgid " mounted"
 msgstr " подсоединён"
 
-#: applets/drivemount/drivemount.c:132
+#: applets/drivemount/drivemount.c:134
 msgid " not mounted"
 msgstr " не подсоединён"
 
-#: applets/drivemount/drivemount.c:202
+#: applets/drivemount/drivemount.c:206
 msgid "\" reported:\n"
 msgstr "\" сообщение:\n"
 
-#: applets/drivemount/drivemount.c:204
+#: applets/drivemount/drivemount.c:208
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -523,45 +455,59 @@ msgstr ""
 "Комманда подсоединения диска не прошла.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:468
+#: applets/drivemount/drivemount.c:472
 msgid "Eject"
 msgstr "Извлечь"
 
-#: applets/drivemount/properties.c:134
+#: applets/drivemount/properties.c:137
 msgid "Drive Mount Settings"
 msgstr "Настройки подсоединения диска"
 
-#: applets/drivemount/properties.c:142
+#: applets/drivemount/properties.c:145
 msgid "Update in seconds:"
 msgstr "Период обновления в секундах:"
 
-#: applets/drivemount/properties.c:154
+#: applets/drivemount/properties.c:157
 msgid "Icon:"
 msgstr "Пиктограмма:"
 
-#: applets/drivemount/properties.c:161
+#: applets/drivemount/properties.c:164
 msgid "Floppy"
 msgstr "Гибкий диск"
 
-#: applets/drivemount/properties.c:165
+#: applets/drivemount/properties.c:168
 msgid "Cdrom"
 msgstr ""
 
-#: applets/drivemount/properties.c:169
+#: applets/drivemount/properties.c:172
 msgid "Zip Drive"
 msgstr "Zip диск"
 
-#: applets/drivemount/properties.c:173
+#: applets/drivemount/properties.c:176
 msgid "Hard Disk"
 msgstr "Жёсткий диск"
 
-#: applets/drivemount/properties.c:186
+#: applets/drivemount/properties.c:189
 msgid "Mount point:"
 msgstr "Точка подсоединения:"
 
-#: applets/drivemount/properties.c:198
+#: applets/drivemount/properties.c:201
 msgid "Use automount friendly status test"
 msgstr "Совместимая с automount проверка состояния"
+
+#: applets/esd-manager/esdmanager_applet.c:29
+#
+msgid "Esound MAnager Applet"
+msgstr "Апплет менеджера Esound"
+
+#: applets/esd-manager/esdmanager_applet.c:29
+#: applets/gnome-pager/gnomepager_applet.c:106
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:31
+msgid "This does nothing useful"
+msgstr ""
 
 #: applets/fifteen/fifteen.c:36
 msgid "You win!"
@@ -593,56 +539,55 @@ msgstr "Не могу создать апплет \"Пятнадцать\""
 msgid "Scramble pieces"
 msgstr "Перемешать"
 
-#: applets/fish/fish.c:105 applets/fish/fish.c:376
-#: applets/webcontrol/webcontrol.c:54
+#: applets/fish/fish.c:126 applets/fish/fish.c:407
 #, c-format
 msgid "%s the Fish"
 msgstr "Рыбка %s"
 
-#: applets/fish/fish.c:106
+#: applets/fish/fish.c:127
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "Рыбка %s говорит:"
 
-#: applets/fish/fish.c:194
+#: applets/fish/fish.c:219
 msgid "GNOME Fish Properties"
 msgstr "Свойства рыбки"
 
-#: applets/fish/fish.c:202
+#: applets/fish/fish.c:227
 msgid "Your GNOME Fish's Name:"
 msgstr "Имя вашей рыбки:"
 
-#: applets/fish/fish.c:216
+#: applets/fish/fish.c:241
 msgid "The Animation Filename:"
 msgstr "Файл с мультипликацией:"
 
-#: applets/fish/fish.c:218 gnome-terminal/gnome-terminal.c:990
-#: panel/menu.c:2840 panel/panel-util.c:181 panel/panel-util.c:219
-#: panel/panel-util.c:256 panel/panel_config.c:727 panel/swallow.c:233
+#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:992
+#: panel/menu.c:3216 panel/panel-util.c:90 panel/panel-util.c:128
+#: panel/panel-util.c:165 panel/panel_config.c:725 panel/swallow.c:231
 msgid "Browse"
 msgstr "Обзор"
 
-#: applets/fish/fish.c:231
+#: applets/fish/fish.c:256
 msgid "Frames In Animation:"
 msgstr "Кадров в мультипликации:"
 
-#: applets/fish/fish.c:247
+#: applets/fish/fish.c:272
 msgid "Pause per frame (s):"
 msgstr "Задержка кадра (сек):"
 
-#: applets/fish/fish.c:261
+#: applets/fish/fish.c:286
 msgid "Fish"
 msgstr "Рыбка"
 
-#: applets/fish/fish.c:379
+#: applets/fish/fish.c:416
 msgid "(with minor help from George)"
 msgstr "(с минимальной помощью Георгия)"
 
-#: applets/fish/fish.c:382
+#: applets/fish/fish.c:420
 msgid "The GNOME Fish Applet"
-msgstr "Апплет \"рыбка Гнома\""
+msgstr "GNOME апплет \"рыбка\""
 
-#: applets/fish/fish.c:385
+#: applets/fish/fish.c:423
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -650,24 +595,24 @@ msgid ""
 "a psychiatric evaluation."
 msgstr ""
 
-#: applets/fvwm-pager/fvwm-pager.c:146
+#: applets/fvwm-pager/fvwm-pager.c:154
 msgid "Fvwm Pager Applet"
 msgstr "Апплет навигатора Fvwm"
 
-#: applets/fvwm-pager/fvwm-pager.c:148
+#: applets/fvwm-pager/fvwm-pager.c:156
 msgid "Copyright (C) 1998 M. Lausch"
 msgstr ""
 
-#: applets/fvwm-pager/fvwm-pager.c:305
+#: applets/fvwm-pager/fvwm-pager.c:314
 #, c-format
 msgid "Desk %d"
 msgstr "Стол %d"
 
-#: applets/fvwm-pager/fvwm-pager.c:396
+#: applets/fvwm-pager/fvwm-pager.c:403
 msgid "About\t"
 msgstr "О\t"
 
-#: applets/fvwm-pager/fvwm-pager.c:402 gmenu/gmenu.c:95
+#: applets/fvwm-pager/fvwm-pager.c:409 gmenu/gmenu.c:96
 msgid "Properties"
 msgstr "Настройки"
 
@@ -679,17 +624,13 @@ msgstr "Цвет используемого окна"
 msgid "Inactive Window Color"
 msgstr "Цвет неиспользуемого окна"
 
-#: applets/fvwm-pager/properties.c:141
+#: applets/fvwm-pager/properties.c:141 applets/fvwm-pager/properties.c:170
 msgid "Active Desktop Color"
 msgstr "Цвет используемого рабочего стола"
 
 #: applets/fvwm-pager/properties.c:145 applets/fvwm-pager/properties.c:174
 msgid "Inactive Desktop Color"
 msgstr "Цвет неиспользуемого рабочего стола"
-
-#: applets/fvwm-pager/properties.c:170
-msgid "Active Dekstop Color"
-msgstr "Цвет используемого рабочего стола"
 
 #: applets/fvwm-pager/properties.c:242
 msgid "Fvwm Pager Settings"
@@ -698,7 +639,7 @@ msgstr "Настройки навигатора Fvwm"
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:104
+#: applets/gen_util/clock.c:114
 msgid ""
 "%a\n"
 "%b %d"
@@ -706,50 +647,50 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:109
+#: applets/gen_util/clock.c:119
 msgid "%a %b %d"
 msgstr ""
 
-#: applets/gen_util/clock.c:124
+#: applets/gen_util/clock.c:134
 msgid ""
 "%I:%M\n"
 "%p"
 msgstr ""
 
-#: applets/gen_util/clock.c:127
+#: applets/gen_util/clock.c:137
 msgid "%I:%M %p"
 msgstr ""
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:133 applets/mini-commander/message.c:101
+#: applets/gen_util/clock.c:143 applets/mini-commander/src/message.c:104
 msgid "%H:%M"
 msgstr ""
 
-#: applets/gen_util/clock.c:337
+#: applets/gen_util/clock.c:354
 msgid "Clock properties"
 msgstr "Настройки часов"
 
-#: applets/gen_util/clock.c:341
+#: applets/gen_util/clock.c:358
 msgid "Time Format"
 msgstr "Формат времени"
 
-#: applets/gen_util/clock.c:353
+#: applets/gen_util/clock.c:370
 msgid "12 hour"
 msgstr "12 часов"
 
-#: applets/gen_util/clock.c:362
+#: applets/gen_util/clock.c:379
 msgid "24 hour"
 msgstr "24 часа"
 
 #. show date check box
-#: applets/gen_util/clock.c:393 applets/mini-commander/preferences.c:416
+#: applets/gen_util/clock.c:410 applets/mini-commander/src/preferences.c:459
 msgid "Show date"
 msgstr "Показывать дату"
 
 #: applets/gen_util/mailcheck.c:246
 msgid "You have new mail."
-msgstr "У вас есть новая почта."
+msgstr "У вас новая почта."
 
 #: applets/gen_util/mailcheck.c:248
 msgid "You have mail."
@@ -779,41 +720,298 @@ msgstr "сек"
 msgid "Select animation"
 msgstr "Выбрать мультипликацию"
 
-#: applets/gen_util/mailcheck.c:566
+#: applets/gen_util/mailcheck.c:570
 msgid "Mail check properties"
 msgstr "Настройки проверки почты"
 
-#: applets/gen_util/mailcheck.c:571
+#: applets/gen_util/mailcheck.c:575
 msgid "Mail check"
 msgstr "Проверки почты"
 
-#: applets/gen_util/mailcheck.c:612
+#: applets/gen_util/mailcheck.c:619
 msgid "Mail check Applet"
 msgstr "Апплет проверки почты"
 
-#: applets/gen_util/mailcheck.c:615
+#: applets/gen_util/mailcheck.c:622
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Проверка почты сообщает вам о новой почте в вашем почтовом ящике"
 
-#: applets/gen_util/mailcheck.c:674
+#: applets/gen_util/mailcheck.c:681
 msgid "Text only"
 msgstr "Только текст"
 
-#: applets/gen_util/printer.c:342
+#: applets/gen_util/printer.c:346
 msgid "Printer properties"
 msgstr "Настройки принтера"
 
-#: applets/gen_util/printer.c:350
+#: applets/gen_util/printer.c:354
 msgid "Printer name:"
 msgstr "Имя принтера:"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:358
 msgid "Print command:"
 msgstr "Команда печати:"
 
-#: applets/gen_util/printer.c:360
+#: applets/gen_util/printer.c:364
 msgid "Printer"
 msgstr "Принтер"
+
+#: applets/gkb/gkb.c:157
+msgid "GKB settings"
+msgstr "Настройки GKB"
+
+#: applets/gkb/gkb.c:170
+msgid "Flag One"
+msgstr "Первый флаг"
+
+#: applets/gkb/gkb.c:203
+msgid "Flag Two"
+msgstr "Второй флаг"
+
+#: applets/gkb/gkb.c:255 panel/menu.c:1645 panel/menu.c:1705 panel/menu.c:3229
+msgid "Menu"
+msgstr "Меню"
+
+#: applets/gkb/gkb.c:374
+msgid "The GNOME KB Applet"
+msgstr "GNOME KB апплет"
+
+#: applets/gkb/gkb.c:375
+msgid "0.99.1"
+msgstr ""
+
+#: applets/gkb/gkb.c:376
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr ""
+
+#: applets/gkb/gkb.c:378
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS.So long, and thanks for all the fish."
+msgstr ""
+
+#: applets/gkb/gkb.c:387
+msgid "gkb.xpm"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:106
+#: applets/icewm-pager/wmpager_applet.c:218
+msgid "Desktop Pager Applet"
+msgstr "Апплет Навигатора Рабочего Стола"
+
+#: applets/gnome-pager/gnomepager_applet.c:108
+msgid "Pager for a GNOME compliant Window Manager"
+msgstr "Навигатор для совместимого с GNOME менеджера окон"
+
+#: applets/gnome-pager/gnomepager_applet.c:332
+msgid "Gnome Pager Settings"
+msgstr "Настройки GNOME навигатора"
+
+#: applets/gnome-pager/gnomepager_applet.c:336
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
+msgid "Display"
+msgstr "Экран"
+
+#: applets/gnome-pager/gnomepager_applet.c:337
+msgid "Show all tasks on all desktops"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:345
+msgid "Show tasks"
+msgstr "Показывать задачи"
+
+#: applets/gnome-pager/gnomepager_applet.c:353
+msgid "Show pager"
+msgstr "Показывать навигатор"
+
+#: applets/gnome-pager/gnomepager_applet.c:361
+msgid "Use small pagers"
+msgstr "Маленькие навигаторы"
+
+#: applets/gnome-pager/gnomepager_applet.c:369
+msgid "Show icons in tasks"
+msgstr "Показывать пиктограммы задач"
+
+#: applets/gnome-pager/gnomepager_applet.c:377
+msgid "Show task list button"
+msgstr "Показывать кнопку листа задач"
+
+#: applets/gnome-pager/gnomepager_applet.c:392
+msgid "Maximum width of horizontal task list"
+msgstr "Максимальная ширина листа задач"
+
+#: applets/gnome-pager/gnomepager_applet.c:405
+msgid "Number of rows of horizontal tasks"
+msgstr "Число рядов задач"
+
+#: applets/gnome-pager/gnomepager_applet.c:418
+msgid "Number of vertical columns of tasks"
+msgstr "Число колонок задач"
+
+#: applets/gnome-pager/gnomepager_applet.c:431
+msgid "Number rows of pagers"
+msgstr "Число рядов навигаторов"
+
+#: applets/gnome-pager/gnomepager_applet.c:1368
+msgid "Gnome Pager Error"
+msgstr "Ошибка в GNOME навигаторе"
+
+#: applets/gnome-pager/gnomepager_applet.c:1369
+msgid ""
+"You are not running a GNOME Compliant Window Manager.\n"
+"Please run a GNOME Compliant Window Manager.\n"
+"For Example:\n"
+"Enlightenment (DR-0.15)\n"
+"Then start this applet again.\n"
+msgstr ""
+"Ваш менеджер окон не совместим с GNOME.\n"
+"Запустите пожалуйста совместимый с GNOME менеджером окон.\n"
+"Например:\n"
+"Enlightenment (DR-0.15)\n"
+
+#: applets/gnome-pager/gnomepager_applet.c:1700
+msgid "Sticky"
+msgstr "Прилипающий"
+
+#: applets/gnome-pager/gnomepager_applet.c:2284
+msgid "Show / Hide"
+msgstr "Показывать / Спрятать"
+
+#: applets/gnome-pager/gnomepager_applet.c:2296
+msgid "Shade / Unshade"
+msgstr "Затеннить / Просветлить"
+
+#: applets/gnome-pager/gnomepager_applet.c:2320
+msgid "Nuke"
+msgstr ""
+
+#: applets/gticker/gticker.c:53
+msgid "Loading headlines..."
+msgstr ""
+
+#: applets/gticker/gticker.c:72
+msgid "Show Article Listing"
+msgstr ""
+
+#: applets/gticker/gticker.c:77
+msgid "Refresh Articles"
+msgstr "Обновить изображение"
+
+#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr ""
+
+#: applets/gticker/gticker.c:236
+msgid "GTicker"
+msgstr ""
+
+#: applets/gticker/gticker.c:237
+msgid "Ticker for the GNOME Project\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:250
+msgid "GTicker Article List"
+msgstr ""
+
+#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
+msgid "No articles"
+msgstr ""
+
+#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
+#: gmenu/gmenu.c:230
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:415
+#, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
+msgstr ""
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+msgid "Articles"
+msgstr ""
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr ""
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr ""
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr ""
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr ""
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr ""
+
+#: applets/gticker/properties.c:231
+#: applets/mini-commander/src/mini-commander_applet.c:184
+#: applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr ""
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+msgid "Open new window"
+msgstr ""
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr ""
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr ""
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr ""
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr ""
+
+#: applets/gticker/properties.c:312
+msgid "Image path:"
+msgstr ""
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1071
+msgid "Scrolling"
+msgstr ""
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr ""
+
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr ""
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr ""
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr ""
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr ""
 
 #. FIXME: This should check to make sure icewm (or equiv) is running.
 #. Not sure if it is working though...
@@ -822,138 +1020,168 @@ msgid ""
 "This applet requires you to run a window manager with the XA_ extensions.\n"
 msgstr ""
 
-#: applets/icewm-pager/wmpager_applet.c:217
-msgid "Desktop Pager Applet"
-msgstr ""
-
-#: applets/icewm-pager/wmpager_applet.c:218
+#: applets/icewm-pager/wmpager_applet.c:219
 msgid "Copyright (C)1998 M.Watson"
 msgstr ""
 
-#: applets/icewm-pager/wmpager_applet.c:274
+#: applets/icewm-pager/wmpager_applet.c:275
 msgid "Failed to retrieve workspace property."
 msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:125
-msgid "Mini-Commander"
+#: applets/jbc/jbc.c:67
+msgid "Jon Anhold <jon@snoopy.net>"
 msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:142
-#, fuzzy
-msgid "Help & About..."
-msgstr "О программе..."
+#: applets/jbc/jbc.c:68
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:146
-msgid "ready..."
-msgstr "готова..."
+#: applets/jbc/jbc.c:71
+msgid "Jon's Binary Clock"
+msgstr ""
 
-#: applets/mini-commander/about.c:33
+#: applets/jbc/jbc.c:74
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
+msgstr ""
+
+#: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
 msgstr ""
 
-#: applets/mini-commander/cmd_completion.c:63
-#, fuzzy
-msgid "completing..."
-msgstr "завершение..."
-
-#. showMessage((gchar *) _("exec failed"));
-#. if this line is reached there is really big trouble
-#: applets/mini-commander/cmd_completion.c:73
-#: applets/mini-commander/exec.c:114
-msgid "no /bin/sh"
-msgstr ""
-
-#: applets/mini-commander/cmd_completion.c:89
-msgid "completed"
-msgstr "завершена"
-
-#: applets/mini-commander/cmd_completion.c:92
-#: applets/mini-commander/cmd_completion.c:99
+#: applets/mini-commander/src/cmd_completion.c:67
+#: applets/mini-commander/src/cmd_completion.c:118
 msgid "not unique"
 msgstr "не единственна"
 
-#: applets/mini-commander/cmd_completion.c:94
-#, fuzzy
+#: applets/mini-commander/src/cmd_completion.c:71
+msgid "completing..."
+msgstr "завершение..."
+
+#: applets/mini-commander/src/cmd_completion.c:83
+#: applets/mini-commander/src/exec.c:105
+msgid "no /bin/sh"
+msgstr "нет /bin/sh"
+
+#: applets/mini-commander/src/cmd_completion.c:116
+msgid "completed"
+msgstr "завершена"
+
+#: applets/mini-commander/src/cmd_completion.c:121
 msgid "not found"
-msgstr "не найдена"
+msgstr "не нашел"
+
+#: applets/mini-commander/src/command_line.c:86
+#: applets/mini-commander/src/command_line.c:106
+msgid "end of history list"
+msgstr "копец предистории"
 
 #. enter pressed -> exec command
-#: applets/mini-commander/command_line.c:90 applets/mini-commander/exec.c:100
-#, fuzzy
+#: applets/mini-commander/src/command_line.c:116
+#: applets/mini-commander/src/exec.c:58
 msgid "starting..."
 msgstr "запуск..."
 
-#: applets/mini-commander/exec.c:102
+#: applets/mini-commander/src/command_line.c:236
+msgid "history list empty"
+msgstr "пустая предистория"
+
+#. title
+#: applets/mini-commander/src/command_line.c:254
+msgid "Command history"
+msgstr "Предистория команд"
+
+#. build file select dialog
+#: applets/mini-commander/src/command_line.c:371
+msgid "Start program"
+msgstr "Запустить программу"
+
+#: applets/mini-commander/src/exec.c:60
 msgid "fork error"
 msgstr ""
 
-#: applets/mini-commander/exec.c:128
+#: applets/mini-commander/src/exec.c:92
 msgid "child exited"
 msgstr ""
 
-#: applets/mini-commander/message.c:99
+#: applets/mini-commander/src/message.c:102
 msgid "%H:%M - %d. %b"
 msgstr ""
 
-#: applets/mini-commander/message.c:103
+#: applets/mini-commander/src/message.c:106
 msgid "%d. %b"
 msgstr ""
 
-#: applets/mini-commander/preferences.c:91
-msgid "time & date on"
-msgstr "вкл время и дата"
+#: applets/mini-commander/src/mini-commander_applet.c:86
+msgid "orient. changed"
+msgstr "изм. ориентация"
 
-#: applets/mini-commander/preferences.c:93
-#, fuzzy
+#: applets/mini-commander/src/mini-commander_applet.c:197
+#: help-browser/window.c:201
+msgid "History"
+msgstr "Предистория"
+
+#: applets/mini-commander/src/mini-commander_applet.c:252
+#: help-browser/window.c:206
+msgid "Help"
+msgstr "Помощь"
+
+#: applets/mini-commander/src/mini-commander_applet.c:263
+msgid "ready..."
+msgstr "готова..."
+
+#: applets/mini-commander/src/preferences.c:122
+msgid "time & date on"
+msgstr "вкл время и дату"
+
+#: applets/mini-commander/src/preferences.c:124
 msgid "time on"
 msgstr "вкл время"
 
-#: applets/mini-commander/preferences.c:95
+#: applets/mini-commander/src/preferences.c:126
 msgid "date on"
-msgstr "вкл дата"
+msgstr "вкл дату"
 
-#: applets/mini-commander/preferences.c:97
+#: applets/mini-commander/src/preferences.c:128
 msgid "clock off"
 msgstr "выкл часы"
 
-#: applets/mini-commander/preferences.c:368
+#: applets/mini-commander/src/preferences.c:397
 msgid "saving prefs..."
 msgstr "спасение настроек..."
 
-#: applets/mini-commander/preferences.c:389
-#, fuzzy
+#: applets/mini-commander/src/preferences.c:432
 msgid "Mini-Commander Properties"
-msgstr "Настройки кнопок запуска"
+msgstr "Настройки Mini-Commander"
 
 #. show time check box
-#: applets/mini-commander/preferences.c:403
+#: applets/mini-commander/src/preferences.c:446
 msgid "Show time"
 msgstr "Показать время"
 
 #. Size
-#: applets/mini-commander/preferences.c:428
+#: applets/mini-commander/src/preferences.c:471
 msgid "Size"
 msgstr "Размер"
 
 #. applet width
-#: applets/mini-commander/preferences.c:440
-#, fuzzy
+#: applets/mini-commander/src/preferences.c:483
 msgid "Applet width:"
-msgstr "Ширина апплета"
+msgstr "Ширина апплета:"
 
 #. applet height
-#: applets/mini-commander/preferences.c:469
-#, fuzzy
+#: applets/mini-commander/src/preferences.c:512
 msgid "Applet height:"
-msgstr "Высота апплета"
+msgstr "Высота апплета:"
 
 #. cmd line height
-#: applets/mini-commander/preferences.c:498
+#: applets/mini-commander/src/preferences.c:541
 msgid "Command line height:"
 msgstr "Высота коммандной строки:"
 
 #. hint
-#: applets/mini-commander/preferences.c:527
+#: applets/mini-commander/src/preferences.c:570
 msgid ""
 "\n"
 "Sometimes the applet has to be moved on the panel\n"
@@ -961,40 +1189,35 @@ msgid ""
 msgstr ""
 
 #. Color
-#: applets/mini-commander/preferences.c:538
-#: gnome-terminal/gnome-terminal.c:1022
+#: applets/mini-commander/src/preferences.c:581
+#: applets/multiload/load-graph.c:163 gnome-terminal/gnome-terminal.c:1024
 msgid "Colors"
-msgstr ""
+msgstr "Цвета"
 
 #. fg
-#: applets/mini-commander/preferences.c:548
+#: applets/mini-commander/src/preferences.c:591
 msgid "Command line foreground:"
-msgstr ""
+msgstr "Печать командной строки:"
 
 #. bg
-#: applets/mini-commander/preferences.c:583
+#: applets/mini-commander/src/preferences.c:626
 msgid "Command line background:"
-msgstr ""
-
-#: applets/mini-commander/preferences.c:626
-msgid "Special Prefixes"
-msgstr ""
+msgstr "Фон командной строки:"
 
 #. prefix
-#: applets/mini-commander/preferences.c:645
+#: applets/mini-commander/src/preferences.c:686
 #, c-format
 msgid "Prefix %.2d:"
 msgstr ""
 
 #. command
-#: applets/mini-commander/preferences.c:663
+#: applets/mini-commander/src/preferences.c:704
 #, c-format
-msgid "   Command %.2d:"
+msgid "   Macro %.2d:"
 msgstr ""
 
-#: applets/mini-commander/preferences.c:680
-#, c-format
-msgid "Prefixes %d"
+#: applets/mini-commander/src/preferences.c:723
+msgid "Macros"
 msgstr ""
 
 #: applets/mixer/mixer.c:576
@@ -1012,115 +1235,135 @@ msgid ""
 "RX and TX"
 msgstr ""
 
-#: applets/modemlights/modemlights.c:316
+#: applets/modemlights/modemlights.c:321
 msgid ""
 "You are currently connected.\n"
 "Do you want to disconnect?"
 msgstr ""
 
-#: applets/modemlights/modemlights.c:327
+#: applets/modemlights/modemlights.c:332
 msgid "Do you want to connect?"
 msgstr ""
 
-#: applets/modemlights/modemlights.c:345
+#: applets/modemlights/modemlights.c:351
 msgid "not connected"
 msgstr "нет соединения"
 
-#: applets/modemlights/properties.c:135
+#: applets/modemlights/properties.c:138
 msgid "Modem Lights Settings"
 msgstr ""
 
-#: applets/modemlights/properties.c:143
+#: applets/modemlights/properties.c:146
 msgid "Updates per second"
 msgstr "Обновлений в секунду"
 
-#: applets/modemlights/properties.c:160
+#: applets/modemlights/properties.c:163
 msgid "Connect command:"
 msgstr "Команда соединения"
 
-#: applets/modemlights/properties.c:177
+#: applets/modemlights/properties.c:180
 msgid "Disconnect command:"
 msgstr "Команда развыва соединения:"
 
 #. confirmation checkbox
-#: applets/modemlights/properties.c:190
+#: applets/modemlights/properties.c:193
 msgid "Confirm connection"
 msgstr "Подтверждение соединения"
 
-#: applets/modemlights/properties.c:210
+#: applets/modemlights/properties.c:213
 msgid "Modem lock file:"
 msgstr "Файл блокировки модема:"
 
-#: applets/modemlights/properties.c:227
+#: applets/modemlights/properties.c:230
 msgid "Device:"
 msgstr "Устройство:"
 
 #. ISDN checkbox
-#: applets/modemlights/properties.c:240
+#: applets/modemlights/properties.c:243
 msgid "Use ISDN"
 msgstr "Использовать ISDN"
 
-#: applets/modemlights/properties.c:253
+#: applets/modemlights/properties.c:256
 msgid "Advanced"
 msgstr "Продвинутые"
 
-#: applets/multiload/properties-cpu.c:133
-msgid "User Load"
-msgstr "Пользовательская Загрузка"
+#: applets/multiload/cpuload.c:47 applets/multiload/main.c:126
+msgid "CPU Load"
+msgstr "Занятость процессора"
 
-#: applets/multiload/properties-cpu.c:137
-msgid "System Load"
-msgstr "Системная Загрузка"
+#: applets/multiload/load-graph.c:26
+msgid "Load Graph"
+msgstr "График занятости"
 
-#: applets/multiload/properties-cpu.c:228
-msgid "CPULoad Settings"
-msgstr "Настройки CPULoad"
+#: applets/multiload/load-graph.c:151
+msgid "Speed:"
+msgstr "Скорость:"
 
-#: applets/multiload/properties-mem.c:167
-msgid "Used Memory"
+#: applets/multiload/load-graph.c:151
+msgid "Width:"
+msgstr "Ширина:"
+
+#: applets/multiload/load-graph.c:151
+msgid "Height:"
+msgstr "Высота:"
+
+#: applets/multiload/main.c:27
+msgid "User"
+msgstr "Пользователь"
+
+#: applets/multiload/main.c:27
+msgid "Nice"
 msgstr ""
 
-#: applets/multiload/properties-mem.c:171
-msgid "Shared Memory"
+#: applets/multiload/main.c:27
+msgid "System"
+msgstr "Система"
+
+#: applets/multiload/main.c:27
+msgid "Idle"
+msgstr "Без дела"
+
+#: applets/multiload/main.c:31
+msgid "Other"
 msgstr ""
 
-#: applets/multiload/properties-mem.c:175
-msgid "Buffered Memory"
+#: applets/multiload/main.c:31
+msgid "Shared"
 msgstr ""
 
-#: applets/multiload/properties-mem.c:179
-msgid "Cached Memory"
-msgstr ""
+#: applets/multiload/main.c:31
+msgid "Buffers"
+msgstr "Буфера"
 
-#: applets/multiload/properties-mem.c:280
-msgid "MemLoad Settings"
-msgstr ""
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+msgid "Free"
+msgstr "Свободная"
 
-#: applets/multiload/properties-swap.c:130
-msgid "Used Swap"
-msgstr ""
+#: applets/multiload/main.c:35
+msgid "Used"
+msgstr "Использованная"
 
-#: applets/multiload/properties-swap.c:134
-msgid "Free Swap"
-msgstr ""
+#: applets/multiload/main.c:130 applets/multiload/memload.c:47
+msgid "Memory Load"
+msgstr "Использование памяти"
 
-#: applets/multiload/properties-swap.c:230
-msgid "SwapLoad Settings"
-msgstr ""
+#: applets/multiload/main.c:134 applets/multiload/swapload.c:47
+msgid "Swap Load"
+msgstr "Использование Swap"
 
-#: applets/netload/netload.c:260
+#: applets/netload/netload.c:261
 msgid "Netload Error"
 msgstr ""
 
-#: applets/netload/netload.c:265
+#: applets/netload/netload.c:266
 msgid "An error occured in the Netload Applet:"
 msgstr ""
 
-#: applets/netload/netload.c:294
+#: applets/netload/netload.c:295
 msgid "The GNOME Network Load Applet"
 msgstr ""
 
-#: applets/netload/netload.c:297
+#: applets/netload/netload.c:298
 msgid ""
 "This applet is released under the terms and conditions of the GNU Public "
 "Licence.This applet shows the load on a network device. It requires the "
@@ -1130,106 +1373,37 @@ msgstr ""
 
 #: applets/netload/properties.c:133
 msgid "Network Traffic"
-msgstr ""
+msgstr "Сетевая нагрузка"
 
 #: applets/netload/properties.c:137
 msgid "Traffic bars"
-msgstr ""
+msgstr "Линии уровней нагрузки"
 
 #: applets/netload/properties.c:215
 msgid "Device name (like ppp0 or eth0)"
-msgstr ""
+msgstr "Имя устройства (например ppp0 или eth0)"
 
 #: applets/netload/properties.c:223
 msgid "Vertical spacing of bars (in kilobytes)"
-msgstr ""
+msgstr "Расстояние между уровнями нагрузки (в килобайтах)"
 
-#: applets/netload/properties.c:268
+#: applets/netload/properties.c:271
 msgid "properties.c: gnome_property_box_new() failed.\n"
 msgstr ""
 
-#: applets/netload/properties.c:274
+#: applets/netload/properties.c:277
 msgid "Network Load Settings"
-msgstr ""
+msgstr "Настройки Network Load"
 
-#: applets/netload/properties.c:283
+#: applets/netload/properties.c:286
 msgid "Device"
-msgstr ""
-
-#: applets/slashapp/properties.c:199
-msgid "Articles"
-msgstr ""
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr ""
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr ""
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr ""
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr ""
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr ""
-
-#: applets/slashapp/properties.c:249
-msgid "Browser"
-msgstr ""
-
-#: applets/slashapp/properties.c:258
-msgid "Open new window"
-msgstr ""
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1069
-msgid "Scrolling"
-msgstr ""
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr ""
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr ""
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr ""
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr ""
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr ""
-
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:152
-msgid "No articles"
-msgstr ""
+msgstr "Устройство"
 
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr ""
 
-#: applets/slashapp/slashapp.c:255 gmenu/gmenu.c:229
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:258 gmenu/gmenu.c:232
+#: applets/slashapp/slashapp.c:258 gmenu/gmenu.c:233
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr ""
@@ -1238,12 +1412,8 @@ msgstr ""
 msgid "No articles found"
 msgstr ""
 
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr ""
-
 #: applets/slashapp/slashapp.c:567
-msgid "Craig Small <csmall@small.dropbear.co.uk>"
+msgid "Craig Small <csmall@eye-net.com.au>"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:568
@@ -1284,33 +1454,469 @@ msgid ""
 "interface.  Hopefully later more webrowsers will be supported."
 msgstr ""
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:116
-msgid "Url:"
-msgstr ""
-
-#: applets/webcontrol/webcontrol.c:119
+#: applets/webcontrol/webcontrol.c:120
 msgid "Clear"
 msgstr ""
 
-#: applets/webcontrol/webcontrol.c:135
+#: applets/webcontrol/webcontrol.c:136
 msgid "Launch new window"
 msgstr ""
 
-#: applets/webcontrol/webcontrol.c:203
+#: applets/webcontrol/webcontrol.c:204
 msgid "WebControl Properties"
 msgstr ""
 
-#: applets/webcontrol/webcontrol.c:208
+#: applets/webcontrol/webcontrol.c:209
 msgid "Display URL label"
 msgstr ""
 
-#: applets/webcontrol/webcontrol.c:217
+#: applets/webcontrol/webcontrol.c:218
 msgid "Display \"launch new window\" option"
 msgstr ""
 
-#: applets/webcontrol/webcontrol.c:230
+#: applets/webcontrol/webcontrol.c:231
 msgid "Look"
+msgstr ""
+
+#: desktop-properties/app-background.c:15
+msgid "Background Properties"
+msgstr "Свойства фона"
+
+#: desktop-properties/app-bell.c:11
+msgid "Bell Properties"
+msgstr "Свойства звонка"
+
+#: desktop-properties/app-keyboard.c:11
+msgid "Keyboard Properties"
+msgstr "Свойства клавиатуры"
+
+#: desktop-properties/app-mouse.c:11
+msgid "Mouse Properties"
+msgstr "Свойства мыши"
+
+#: desktop-properties/app-ui.c:32
+msgid "Gnome Look and Feel Properties"
+msgstr ""
+
+#: desktop-properties/args.c:8 desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr ""
+
+#: desktop-properties/property-background.c:494 panel/panel_config.c:702
+msgid "Color"
+msgstr "Цвет"
+
+#: desktop-properties/property-background.c:518
+msgid "Flat"
+msgstr ""
+
+#: desktop-properties/property-background.c:524
+msgid "Gradient"
+msgstr ""
+
+#: desktop-properties/property-background.c:539 panel/panel_config.c:545
+msgid "Vertical"
+msgstr "Вертикальный"
+
+#. Horizontal
+#: desktop-properties/property-background.c:545 panel/panel_config.c:532
+msgid "Horizontal"
+msgstr "Горизонтальный"
+
+#: desktop-properties/property-background.c:690
+msgid "Wallpaper Selection"
+msgstr "Выбор обоев"
+
+#: desktop-properties/property-background.c:729
+msgid "Wallpaper"
+msgstr "Обои"
+
+#: desktop-properties/property-background.c:732
+msgid " Browse... "
+msgstr "Обзор... "
+
+#: desktop-properties/property-background.c:737
+msgid "none"
+msgstr ""
+
+#: desktop-properties/property-background.c:781
+msgid "Scaled"
+msgstr "Растянутый"
+
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr "Растянутый (пропорционально)"
+
+#: desktop-properties/property-background.c:801
+msgid "Centered"
+msgstr "Отцентрованный"
+
+#: desktop-properties/property-background.c:812
+msgid "Tiled"
+msgstr "Кафель"
+
+#: desktop-properties/property-background.c:1006
+msgid " Background "
+msgstr "Фон "
+
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr ""
+
+#: desktop-properties/property-background.c:1059
+#: desktop-properties/property-background.c:1060
+#: gnome-terminal/gnome-terminal.c:1833 gnome-terminal/gnome-terminal.c:1836
+msgid "COLOR"
+msgstr "ЦВЕТ"
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr "Задаёт цвет фона"
+
+#: desktop-properties/property-background.c:1060
+msgid "Specifies end background color for gradient"
+msgstr "Задаёт конечный цвет фона в градиентном режиме"
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr ""
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Ориентация градиента: вертикальная или горизонтальная"
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr "Равномерное заполнение фона"
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr "Градиентное заполнение фона"
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr ""
+
+#: desktop-properties/property-bell.c:123
+msgid "Sound"
+msgstr "Звук"
+
+#: desktop-properties/property-bell.c:142
+msgid "Volume"
+msgstr "Громкость"
+
+#: desktop-properties/property-bell.c:163
+msgid "Pitch"
+msgstr "Тон"
+
+#: desktop-properties/property-bell.c:184
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: desktop-properties/property-bell.c:214
+msgid "Test"
+msgstr "Проверка"
+
+#: desktop-properties/property-bell.c:228
+msgid "Bell"
+msgstr "Звонок"
+
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr "Авто-повтор"
+
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "Разрешть авто-повтор"
+
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Частота повтора"
+
+#: desktop-properties/property-keyboard.c:207
+msgid "Repeat delay"
+msgstr "Задержка повтора"
+
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "Удар по клавише"
+
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Щелчок при нажатии"
+
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "Громкость щелчок"
+
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:215
+msgid "Mouse buttons"
+msgstr "Кнопки мыши"
+
+#: desktop-properties/property-mouse.c:224
+msgid "Left handed"
+msgstr "Для левши"
+
+#: desktop-properties/property-mouse.c:226
+msgid "Right handed"
+msgstr "Для правши"
+
+#. Mouse motion
+#: desktop-properties/property-mouse.c:243
+msgid "Mouse motion"
+msgstr "Движение мыши"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Acceleration"
+msgstr "Ускорение"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Fast"
+msgstr "Быстро"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Slow"
+msgstr "Медленно"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Threshold"
+msgstr "Порог"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Large"
+msgstr "Высокий"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Small"
+msgstr "Низкий"
+
+#: desktop-properties/property-mouse.c:274
+msgid "Mouse"
+msgstr "Мышь"
+
+#: desktop-properties/property-ui.c:55
+msgid "Default Gtk setting [FIXME - Describe this better]"
+msgstr ""
+
+#: desktop-properties/property-ui.c:56
+msgid "Spread buttons out"
+msgstr ""
+
+#: desktop-properties/property-ui.c:57
+msgid "Put buttons on edges"
+msgstr ""
+
+#: desktop-properties/property-ui.c:58
+msgid "Left-justify buttons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:59
+msgid "Right-justify buttons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:65
+msgid "Let window manager decide"
+msgstr ""
+
+#: desktop-properties/property-ui.c:66
+msgid "Center of the screen"
+msgstr ""
+
+#: desktop-properties/property-ui.c:67
+msgid "At the mouse pointer"
+msgstr ""
+
+#: desktop-properties/property-ui.c:73
+msgid "Dialogs are like other windows"
+msgstr ""
+
+#: desktop-properties/property-ui.c:74
+msgid "Dialogs are treated specially by window manager"
+msgstr ""
+
+#: desktop-properties/property-ui.c:81
+msgid "Notebook"
+msgstr ""
+
+#: desktop-properties/property-ui.c:82
+msgid "Toplevel"
+msgstr ""
+
+#: desktop-properties/property-ui.c:83
+msgid "Modal"
+msgstr ""
+
+#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:765
+#: panel/panel_config.c:306
+msgid "Left"
+msgstr "Слева"
+
+#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:766
+#: panel/panel_config.c:317
+msgid "Right"
+msgstr "Справа"
+
+#. Top Position
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:284
+msgid "Top"
+msgstr "Сверху"
+
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:295
+msgid "Bottom"
+msgstr "Снизу"
+
+#: desktop-properties/property-ui.c:194
+msgid "Dialog buttons"
+msgstr "Кнопки диалога"
+
+#: desktop-properties/property-ui.c:199
+msgid "Dialog position"
+msgstr "Расположение диалога"
+
+#: desktop-properties/property-ui.c:204
+msgid "Dialog hints"
+msgstr ""
+
+#: desktop-properties/property-ui.c:211
+msgid "Use statusbar instead of dialog when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:221
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:232
+msgid "Dialogs"
+msgstr "Диалоги"
+
+#: desktop-properties/property-ui.c:238
+msgid "Menubars are detachable"
+msgstr ""
+
+#: desktop-properties/property-ui.c:247
+msgid "Menubars have relieved border"
+msgstr ""
+
+#: desktop-properties/property-ui.c:256
+msgid "Toolbars are detachable"
+msgstr ""
+
+#: desktop-properties/property-ui.c:265
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: desktop-properties/property-ui.c:274
+msgid "Toolbars have flat look"
+msgstr ""
+
+#: desktop-properties/property-ui.c:283
+msgid "Toolbars have line separators"
+msgstr ""
+
+#: desktop-properties/property-ui.c:292
+msgid "Toolbars have text labels"
+msgstr ""
+
+#: desktop-properties/property-ui.c:301
+msgid "Statusbar is interactive when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:310
+msgid "Dialog buttons have icons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:319
+msgid "Menu items have icons"
+msgstr "Пиктограммы в меню"
+
+#: desktop-properties/property-ui.c:328
+msgid "Application"
+msgstr "Приложение"
+
+#: desktop-properties/property-ui.c:333
+msgid "Default MDI mode"
+msgstr "Обычный MDI режим"
+
+#: desktop-properties/property-ui.c:338
+msgid "MDI notebook tab position"
+msgstr ""
+
+#: desktop-properties/property-ui.c:344
+msgid "MDI"
+msgstr ""
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr ""
 
 #: gmenu/dialogs.c:39
@@ -1327,7 +1933,7 @@ msgid ""
 "You do not have the proper permissions."
 msgstr ""
 
-#: gmenu/dialogs.c:128 gmenu/gmenu.c:85
+#: gmenu/dialogs.c:128 gmenu/gmenu.c:86
 msgid "New Folder"
 msgstr ""
 
@@ -1389,11 +1995,11 @@ msgstr ""
 msgid "Save Changes?"
 msgstr ""
 
-#: gmenu/dialogs.c:402
+#: gmenu/dialogs.c:403
 msgid "Overwrite existing file?"
 msgstr ""
 
-#: gmenu/dialogs.c:408
+#: gmenu/dialogs.c:412
 msgid "Save file?"
 msgstr ""
 
@@ -1414,88 +2020,78 @@ msgid "New"
 msgstr ""
 
 #: gmenu/gmenu.c:45
-msgid "New _Folder..."
+msgid "_New Folder..."
 msgstr ""
 
-#: gmenu/gmenu.c:48
+#: gmenu/gmenu.c:46 gmenu/gmenu.c:86
+msgid "Create a new folder"
+msgstr "Создать новую папку"
+
+#: gmenu/gmenu.c:49
 msgid "_Delete..."
 msgstr ""
 
-#: gmenu/gmenu.c:51
-msgid "_Quit"
-msgstr "_Выход"
-
-#: gmenu/gmenu.c:57
+#: gmenu/gmenu.c:60
 msgid "_Sort Folder"
 msgstr ""
 
-#: gmenu/gmenu.c:60
+#: gmenu/gmenu.c:63
 msgid "Sort Folder _Recursive"
 msgstr ""
 
-#. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1183
-msgid "_About..."
-msgstr "_О программе..."
-
-#: gmenu/gmenu.c:74 help-browser/window.c:179
+#: gmenu/gmenu.c:75
 msgid "_File"
-msgstr ""
+msgstr "_Файл"
 
-#: gmenu/gmenu.c:76
+#: gmenu/gmenu.c:77
 msgid "_Sort"
-msgstr ""
+msgstr "_Сортировка"
 
-#: gmenu/gmenu.c:78 help-browser/window.c:181
+#: gmenu/gmenu.c:79
 msgid "_Help"
 msgstr "_Помощь"
 
-#: gmenu/gmenu.c:85
-msgid "Create a new folder"
-msgstr ""
-
-#: gmenu/gmenu.c:87
+#: gmenu/gmenu.c:88
 msgid "Delete"
 msgstr ""
 
-#: gmenu/gmenu.c:87
+#: gmenu/gmenu.c:88
 msgid "Delete selected menu item"
 msgstr ""
 
-#: gmenu/gmenu.c:90
+#: gmenu/gmenu.c:91
 msgid "Move up"
 msgstr ""
 
-#: gmenu/gmenu.c:90
+#: gmenu/gmenu.c:91
 msgid "Move selected menu up"
 msgstr ""
 
-#: gmenu/gmenu.c:92
+#: gmenu/gmenu.c:93
 msgid "Move down"
 msgstr ""
 
-#: gmenu/gmenu.c:92
+#: gmenu/gmenu.c:93
 msgid "Move selected menu down"
 msgstr ""
 
-#: gmenu/gmenu.c:95
+#: gmenu/gmenu.c:96
 msgid "Edit selected menu item properties"
 msgstr ""
 
-#: gmenu/gmenu.c:98
+#: gmenu/gmenu.c:99
 msgid "Sort Folder"
 msgstr ""
 
-#: gmenu/gmenu.c:98
+#: gmenu/gmenu.c:99
 msgid "Sort selected folder"
 msgstr ""
 
-#: gmenu/gmenu.c:274 gmenu/gmenu.c:319 gmenu/gmenu.c:389 gmenu/tree.c:505
+#: gmenu/gmenu.c:275 gmenu/gmenu.c:320 gmenu/gmenu.c:390 gmenu/tree.c:499
 msgid "GNOME menu editor"
 msgstr ""
 
-#: gmenu/gmenu.c:277
+#: gmenu/gmenu.c:278
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -1515,284 +2111,271 @@ msgstr ""
 msgid " Folder"
 msgstr ""
 
-#: gmenu/tree.c:507
+#: gmenu/tree.c:501
 msgid "One moment, reading menus..."
 msgstr ""
 
-#: gmenu/tree.c:535
+#: gmenu/tree.c:529
 msgid "GNOME"
 msgstr ""
 
 #. system's menu tree
-#: gmenu/tree.c:543
+#: gmenu/tree.c:537
 msgid "System Menus"
 msgstr "Системные Меню"
 
-#: gmenu/tree.c:553
+#: gmenu/tree.c:547
 msgid "Top of system menus"
 msgstr "Корень системного меню"
 
 #. user's menu tree
-#: gmenu/tree.c:560
+#: gmenu/tree.c:554
 msgid "User Menus"
 msgstr "Пользовательские Меню"
 
-#: gmenu/tree.c:570
+#: gmenu/tree.c:564
 msgid "Top of user menus"
 msgstr "Корень пользовательского меню"
 
-#: gnome-terminal/gnome-terminal.c:135
+#: gnome-terminal/gnome-terminal.c:136
 msgid "GNOME Terminal"
 msgstr "GNOME Терминал"
 
-#: gnome-terminal/gnome-terminal.c:138
+#: gnome-terminal/gnome-terminal.c:139
 msgid "The GNOME terminal emulation program."
 msgstr "Программа эмуляции терминала GNOME"
 
-#: gnome-terminal/gnome-terminal.c:416 gnome-terminal/gnome-terminal.c:913
-#: gnome-terminal/gnome-terminal.c:923
+#: gnome-terminal/gnome-terminal.c:418 gnome-terminal/gnome-terminal.c:915
+#: gnome-terminal/gnome-terminal.c:925
 msgid "Default"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:417
+#: gnome-terminal/gnome-terminal.c:419
 msgid "Config"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:584
+#: gnome-terminal/gnome-terminal.c:586
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
 "configuration of the new class?"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:747
+#: gnome-terminal/gnome-terminal.c:749
 msgid "Linux console"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:748
+#: gnome-terminal/gnome-terminal.c:750
 msgid "Color Xterm"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:749
+#: gnome-terminal/gnome-terminal.c:751
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:754
+#: gnome-terminal/gnome-terminal.c:756
 msgid "White on black"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:755
+#: gnome-terminal/gnome-terminal.c:757
 msgid "Black on white"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:756
+#: gnome-terminal/gnome-terminal.c:758
 msgid "Green on black"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:759
 msgid "Black on light yellow"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:760
 msgid "Custom colors"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:763 panel/panel_config.c:308
-msgid "Left"
-msgstr "Слева"
-
-#: gnome-terminal/gnome-terminal.c:764 panel/panel_config.c:319
-msgid "Right"
-msgstr "Справа"
-
-#: gnome-terminal/gnome-terminal.c:765
+#: gnome-terminal/gnome-terminal.c:767
 msgid "Hidden"
 msgstr ""
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:877
+#: gnome-terminal/gnome-terminal.c:879
 msgid "Font:"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:897
+#: gnome-terminal/gnome-terminal.c:899
 msgid "Browse..."
 msgstr ""
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:905
+#: gnome-terminal/gnome-terminal.c:907
 msgid "Terminal Class"
 msgstr ""
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:933
+#: gnome-terminal/gnome-terminal.c:935
 msgid "Blinking cursor"
 msgstr ""
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:942
+#: gnome-terminal/gnome-terminal.c:944
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Убрать меню"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:951
+#: gnome-terminal/gnome-terminal.c:953
 msgid "Silence Terminal bell"
-msgstr ""
+msgstr "Выключить звонок терминала"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:960
+#: gnome-terminal/gnome-terminal.c:962
 msgid "Swap DEL/Backspace"
-msgstr ""
+msgstr "Переставить DEL/Backspace"
 
-#: gnome-terminal/gnome-terminal.c:974
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:976
 msgid "Image"
-msgstr "Файл картинки"
+msgstr "Картинка"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:978
+#: gnome-terminal/gnome-terminal.c:980
 msgid "Background pixmap"
-msgstr ""
+msgstr "Фоновая картинка"
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:987
+#: gnome-terminal/gnome-terminal.c:989
 msgid "Pixmap file:"
-msgstr ""
+msgstr "Файл картинки"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1002
+#: gnome-terminal/gnome-terminal.c:1004
 msgid "Transparent"
-msgstr ""
+msgstr "Прозрачный"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1011
+#: gnome-terminal/gnome-terminal.c:1013
 msgid "Background should be shaded (slow)"
-msgstr ""
+msgstr "Фон должен быть затеннён (медленно)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1025
+#: gnome-terminal/gnome-terminal.c:1027
 msgid "Color palette:"
-msgstr ""
+msgstr "Палитра:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1035
+#: gnome-terminal/gnome-terminal.c:1037
 msgid "Foreground color:"
-msgstr ""
+msgstr "Цвет печати:"
 
-#: gnome-terminal/gnome-terminal.c:1044
+#: gnome-terminal/gnome-terminal.c:1046
 msgid "Background color:"
-msgstr ""
+msgstr "Цвет фона:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1056
+#: gnome-terminal/gnome-terminal.c:1058
 msgid "Colors:"
-msgstr ""
+msgstr "Цвета"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1072
+#: gnome-terminal/gnome-terminal.c:1074
 msgid "Scrollbar position"
 msgstr ""
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1083
+#: gnome-terminal/gnome-terminal.c:1085
 msgid "Scrollback lines"
 msgstr ""
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1095
+#: gnome-terminal/gnome-terminal.c:1097
 msgid "Scroll on keystroke"
 msgstr ""
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1104
+#: gnome-terminal/gnome-terminal.c:1106
 msgid "Scroll on output"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1133
+#: gnome-terminal/gnome-terminal.c:1136
 msgid "Color selector"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1179
+#: gnome-terminal/gnome-terminal.c:1182
 msgid "_Hide menubar"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1180
+#: gnome-terminal/gnome-terminal.c:1183
 msgid "_Show menubar"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1193
-msgid "Terminal"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:1194 help-browser/window.c:206
-msgid "Help"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:1746
+#: gnome-terminal/gnome-terminal.c:1815
 msgid "Terminal class name"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1746
+#: gnome-terminal/gnome-terminal.c:1815
 msgid "CLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1749
+#: gnome-terminal/gnome-terminal.c:1818
 msgid "Specifies font name"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1749
+#: gnome-terminal/gnome-terminal.c:1818
 msgid "FONT"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1752
+#: gnome-terminal/gnome-terminal.c:1821
 msgid "Do not start up shells as logins shells"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1755
+#: gnome-terminal/gnome-terminal.c:1824
 msgid "Start up shells as logins shells"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1758
+#: gnome-terminal/gnome-terminal.c:1827
 msgid "Specifies the geometry for the main window"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1758 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1827 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1761
+#: gnome-terminal/gnome-terminal.c:1830
 msgid "Execute this program instead of a shell"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1761
+#: gnome-terminal/gnome-terminal.c:1830
 msgid "COMMAND"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1764
+#: gnome-terminal/gnome-terminal.c:1833
 msgid "Foreground color"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1764 gnome-terminal/gnome-terminal.c:1767
-msgid "COLOR"
-msgstr "ЦВЕТ"
-
-#: gnome-terminal/gnome-terminal.c:1767 panel/panel_config.c:753
+#: gnome-terminal/gnome-terminal.c:1836 panel/panel_config.c:751
 msgid "Background color"
 msgstr "Цвет фона"
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "Update utmp/wtmp entries"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1770
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1773
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "Do not update utmp/wtmp entries"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1773
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "NOUTMP"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1845
+msgid "Set the window title"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1845
+msgid "TITLE"
 msgstr ""
 
 #: gsm/main.c:41
@@ -1815,6 +2398,21 @@ msgstr ""
 msgid "Startup Programs"
 msgstr ""
 
+#. label for the exec entry
+#: gsm/session-properties.c:110
+msgid "Program:"
+msgstr ""
+
+#. add/remove buttons
+#: gsm/session-properties.c:137
+msgid "Add"
+msgstr ""
+
+#. Buttons
+#: gsm/session-properties.c:147 help-browser/bookmarks.c:240
+msgid "Remove"
+msgstr ""
+
 #: gsm/session-properties.c:256
 msgid "Geometry of window"
 msgstr ""
@@ -1829,11 +2427,6 @@ msgstr ""
 
 #: help-browser/bookmarks.c:230
 msgid "Gnome Help Bookmarks"
-msgstr ""
-
-#. Buttons
-#: help-browser/bookmarks.c:240
-msgid "Remove"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:121
@@ -1970,8 +2563,9 @@ msgstr ""
 msgid "Games"
 msgstr ""
 
+#. Miscellaneous frame
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:574
+#: panel/panel_config_global.c:503 panel/panel_config_global.c:600
 msgid "Miscellaneous"
 msgstr "Разное"
 
@@ -2074,73 +2668,38 @@ msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr ""
 
 #: help-browser/window.c:128
-msgid "_New window"
+msgid "_New Window"
 msgstr ""
 
-#: help-browser/window.c:128
+#: help-browser/window.c:129
 msgid "Open new browser window"
 msgstr ""
 
-#: help-browser/window.c:132
+#: help-browser/window.c:135
 msgid "_Add Bookmark"
 msgstr ""
 
-#: help-browser/window.c:132
+#: help-browser/window.c:135
 msgid "Add bookmark"
 msgstr ""
 
-#: help-browser/window.c:137
-#, fuzzy
-msgid "P_references..."
-msgstr "Настройки..."
-
-#: help-browser/window.c:137
-msgid "Preferences"
-msgstr ""
-
-#: help-browser/window.c:141
-msgid "_Close"
-msgstr ""
-
-#: help-browser/window.c:141
-msgid "Close window"
-msgstr ""
-
-#: help-browser/window.c:146
-#, fuzzy
-msgid "E_xit"
-msgstr "_Выход"
-
-#: help-browser/window.c:146
-msgid "Exit all windows"
-msgstr ""
-
-#: help-browser/window.c:155
-#, fuzzy
-msgid "_About"
-msgstr "О программе"
-
-#: help-browser/window.c:155
-msgid "Info about this program"
-msgstr ""
-
-#: help-browser/window.c:166
+#: help-browser/window.c:160
 msgid "_History"
 msgstr ""
 
-#: help-browser/window.c:166 help-browser/window.c:201
+#: help-browser/window.c:160 help-browser/window.c:201
 msgid "Show History Window"
 msgstr ""
 
-#: help-browser/window.c:171
+#: help-browser/window.c:165
 msgid "_Bookmarks"
 msgstr ""
 
-#: help-browser/window.c:171 help-browser/window.c:203
+#: help-browser/window.c:165 help-browser/window.c:203
 msgid "Show Bookmarks Window"
 msgstr ""
 
-#: help-browser/window.c:180
+#: help-browser/window.c:179
 msgid "_Window"
 msgstr ""
 
@@ -2172,10 +2731,6 @@ msgstr ""
 msgid "Show Documentation Index"
 msgstr ""
 
-#: help-browser/window.c:201
-msgid "History"
-msgstr ""
-
 #: help-browser/window.c:203
 msgid "BMarks"
 msgstr ""
@@ -2184,7 +2739,7 @@ msgstr ""
 msgid "Help on Help"
 msgstr ""
 
-#: help-browser/window.c:810
+#: help-browser/window.c:813
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2192,437 +2747,397 @@ msgid ""
 "%s"
 msgstr ""
 
-#: help-browser/window.c:813
+#: help-browser/window.c:816
 msgid "Ok"
 msgstr "Ok"
 
-#: panel/applet.c:269
+#: panel/applet.c:271
 msgid "???"
 msgstr ""
 
-#: panel/applet.c:296
+#: panel/applet.c:298
 msgid "Remove from panel"
 msgstr "Удалить с панели"
 
-#: panel/applet.c:303
+#: panel/applet.c:305
 msgid "Move applet"
 msgstr "Передвинуть апплет"
 
-#: panel/drawer.c:120
+#: panel/drawer.c:119
 msgid "Tooltip/Name"
 msgstr "Подсказка/Имя"
 
-#: panel/drawer.c:124
+#: panel/drawer.c:123
 msgid "Icon"
 msgstr "Пиктограмма"
 
-#: panel/drawer.c:128
+#: panel/drawer.c:127
 msgid "Applet appearance"
 msgstr "Внешний вид апплета"
 
-#: panel/drawer.c:135
+#: panel/drawer.c:134
 msgid "Drawer handle"
 msgstr ""
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:139
-#, fuzzy
+#: panel/drawer.c:138
 msgid "Enable hidebutton"
-msgstr "Убрать кнопки сокрытия"
+msgstr "Разрешить кнопки сокрытия"
 
-#: panel/drawer.c:149
-#, fuzzy
+#: panel/drawer.c:148
 msgid "Enable hidebutton arrow"
-msgstr "Убрать стрелки на кнопках сокрытия"
+msgstr "Разрешить стрелки на кнопках сокрытия"
 
-#: panel/drawer.c:169
+#: panel/drawer.c:168
 msgid "Drawer"
-msgstr ""
+msgstr "Ящичек"
 
-#: panel/launcher.c:114
+#: panel/launcher.c:113
 msgid "App"
-msgstr "Приложение"
+msgstr "Прил."
 
-#: panel/launcher.c:204
+#: panel/launcher.c:202
 msgid "Launcher properties"
 msgstr "Настройки кнопок запуска"
 
-#: panel/launcher.c:289
+#: panel/launcher.c:287
 msgid "Create launcher applet"
 msgstr "Создать кнопку запуска"
 
-#. Logout frame
-#: panel/logout.c:26 panel/menu.c:1705 panel/menu.c:1985
-#: panel/panel_config_global.c:486
+#: panel/logout.c:28 panel/menu.c:2046 panel/menu.c:2340
 msgid "Log out"
 msgstr "Завершить Работу"
 
-#: panel/main.c:71
+#: panel/logout.c:37
+#, fuzzy
+msgid "Log out of GNOME"
+msgstr "Завершить Работу в GNOME"
+
+#: panel/main.c:76
 msgid "Discard session"
 msgstr ""
 
-#: panel/main.c:72
+#: panel/main.c:77
 msgid "ID"
 msgstr ""
 
-#: panel/menu.c:86
+#: panel/menu.c:538
 msgid "The GNOME Panel"
-msgstr "Панель Гнома"
+msgstr "GNOME Панель"
 
-#: panel/menu.c:89
+#: panel/menu.c:541
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
 msgstr ""
-"Эта программа ответственна за запуск других приложений, "
-"встранивание маленьких апплетов в себя, мир на Земле и случайные падения Икс-ов"
+"Эта программа ответственна за запуск других приложений, встранивание "
+"маленьких апплетов в себя, мир на Земле и случайные падения Икс-ов"
 
-#: panel/menu.c:327 panel/menu.c:363
+#: panel/menu.c:564 panel/menu.c:1280
+msgid "Can't load entry"
+msgstr ""
+
+#: panel/menu.c:748 panel/menu.c:780
 msgid "Desktop entry properties"
 msgstr ""
 
-#: panel/menu.c:427
+#: panel/menu.c:846
 msgid "Add this launcher to panel"
 msgstr "Добавить эту кнопку запуска на панель"
 
-#: panel/menu.c:435
-msgid "Add this as drawer to panel"
-msgstr ""
+#: panel/menu.c:853 panel/menu.c:879
+msgid "Add this to personal menu"
+msgstr "Поместить это в персональное меню"
 
-#: panel/menu.c:443
+#: panel/menu.c:864
+msgid "Add this as drawer to panel"
+msgstr "Добавить эту кнопку как ящичек на панель"
+
+#: panel/menu.c:872
 msgid "Add this as menu to panel"
 msgstr "Поместить это меню на панель"
 
-#: panel/menu.c:468
+#: panel/menu.c:907
 msgid "Properties ..."
 msgstr "Настройки ..."
 
-#: panel/menu.c:658 panel/menu.c:729
+#: panel/menu.c:1102 panel/menu.c:1174
 msgid "..."
 msgstr ""
 
-#: panel/menu.c:859
+#: panel/menu.c:1288
 msgid "Can't get goad_id from desktop entry!"
 msgstr "Не могу получить goad_id от desktop entry!"
 
-#: panel/menu.c:1178 panel/menu.c:2853
-msgid "Menu"
-msgstr "Меню"
+#: panel/menu.c:1529
+msgid "Can't get goad_id for applet, ignoring it"
+msgstr "Не могу получить goad_id для апплет, игнорирую"
 
-#: panel/menu.c:1451
+#: panel/menu.c:1785
 msgid "Applets"
 msgstr "Апплеты"
 
-#: panel/menu.c:1578 panel/panel_config.c:879
-#, fuzzy
+#: panel/menu.c:1912 panel/panel_config.c:863
 msgid "Edge panel"
 msgstr "Краевая панель"
 
-#: panel/menu.c:1585 panel/panel_config.c:885
-#, fuzzy
+#: panel/menu.c:1919 panel/panel_config.c:869
 msgid "Corner panel"
 msgstr "Угловая панель"
 
-#: panel/menu.c:1604 panel/menu.c:1608 panel/menu.c:1651 panel/menu.c:2375
-#, fuzzy
+#: panel/menu.c:1938 panel/menu.c:1942 panel/menu.c:1986 panel/menu.c:2733
 msgid "System menus"
 msgstr "Системные меню"
 
-#: panel/menu.c:1660 panel/menu.c:1662 panel/menu.c:2353 panel/menu.c:2386
-#: panel/menu.c:2389
-#, fuzzy
+#: panel/menu.c:1995 panel/menu.c:1997 panel/menu.c:2710 panel/menu.c:2744
+#: panel/menu.c:2747
 msgid "User menus"
 msgstr "Пользовательские меню"
 
-#: panel/menu.c:1670 panel/menu.c:1672 panel/menu.c:2323 panel/menu.c:2359
-#: panel/menu.c:2401 panel/menu.c:2411
-msgid "RedHat menus"
-msgstr "RedHat меню"
+#: panel/menu.c:2005 panel/menu.c:2007 panel/menu.c:2676 panel/menu.c:2717
+#: panel/menu.c:2759 panel/menu.c:2769
+msgid "Red Hat menus"
+msgstr "Red Hat меню"
 
-#: panel/menu.c:1690
+#: panel/menu.c:2031
 msgid "Remove this panel"
 msgstr "Удалить эту панель"
 
-#: panel/menu.c:1830
+#: panel/menu.c:2172
 msgid "Add applet"
 msgstr "Добавить апплет"
 
-#: panel/menu.c:1839
+#: panel/menu.c:2181
 msgid "Add new panel"
 msgstr "Добавить новую панель"
 
-#: panel/menu.c:1847
-#, fuzzy
+#: panel/menu.c:2189
 msgid "Convert to corner panel"
 msgstr "Превратить в угловую панель"
 
-#: panel/menu.c:1855
-#, fuzzy
+#: panel/menu.c:2197
 msgid "Convert to edge panel"
 msgstr "Превратить в краевую панель"
 
-#: panel/menu.c:1867
+#: panel/menu.c:2216
 msgid "Add main menu"
 msgstr "Добавить главное меню"
 
-#: panel/menu.c:1874
-#, fuzzy
+#: panel/menu.c:2223
 msgid "Add drawer"
-msgstr "Добавить апплет"
+msgstr "Добавить ящичек"
 
-#: panel/menu.c:1882
+#: panel/menu.c:2231
 msgid "Add log out button"
 msgstr "Добавить кнопку завершения работы"
 
-#: panel/menu.c:1890
+#: panel/menu.c:2239
 msgid "Add swallowed app"
-msgstr "Добавить проглоченные приложения"
+msgstr "Добавить встроенное приложение"
 
-#: panel/menu.c:1896
+#: panel/menu.c:2245
 msgid "Add new launcher"
 msgstr "Добавить новую кнопку запуска"
 
-#: panel/menu.c:1907
+#: panel/menu.c:2256
 msgid "This panel properties..."
 msgstr "Настройки этой панели..."
 
-#: panel/menu.c:1917
+#: panel/menu.c:2266
 msgid "Global properties..."
 msgstr "Глобальные настройки..."
 
-#: panel/menu.c:1945
+#: panel/menu.c:2300
 msgid "Panel"
 msgstr "Панель"
 
-#: panel/menu.c:1952
+#: panel/menu.c:2307
 msgid "Lock screen"
-msgstr "Заблокировать экран"
+msgstr "Запереть экран"
 
-#: panel/menu.c:1973
+#: panel/menu.c:2328
 msgid "About GNOME..."
 msgstr "О Гноме..."
 
-#: panel/menu.c:2606
+#: panel/menu.c:2983
 msgid "Can't open directory, using main menu!"
 msgstr ""
 
-#: panel/menu.c:2736
+#: panel/menu.c:3112
 msgid "In a submenu"
 msgstr "Во второстепенное меню"
 
-#: panel/menu.c:2748
-#, fuzzy
+#: panel/menu.c:3124
 msgid "On the main menu"
 msgstr "В главное меню"
 
-#: panel/menu.c:2770
+#: panel/menu.c:3146
 msgid "Menu properties"
 msgstr "Настройки меню"
 
-#: panel/menu.c:2777
-#, fuzzy
+#: panel/menu.c:3153
 msgid "Menu type"
 msgstr "Тип меню"
 
-#: panel/menu.c:2784 panel/menu.c:2804
-#, fuzzy
+#: panel/menu.c:3160 panel/menu.c:3180
 msgid "Main menu"
 msgstr "Главное меню"
 
-#: panel/menu.c:2795 panel/menu.c:2827
-#, fuzzy
+#: panel/menu.c:3171 panel/menu.c:3203
 msgid "Normal menu"
 msgstr "Нормальное меню"
 
-#: panel/menu.c:2815
-#, fuzzy
+#: panel/menu.c:3191
 msgid "System menu: "
 msgstr "Системные меню"
 
-#: panel/menu.c:2819
-#, fuzzy
+#: panel/menu.c:3195
 msgid "User menu: "
-msgstr "Пользовательские меню"
+msgstr "Пользовательские меню: "
 
-#: panel/menu.c:2823
-msgid "RedHat menu (if found): "
-msgstr "RedHat меню"
+#: panel/menu.c:3199
+msgid "Red Hat menu (if found): "
+msgstr "Red Hat меню (если есть): "
 
-#: panel/menu.c:2837
+#: panel/menu.c:3213
 msgid "Menu path"
 msgstr "Путь к меню"
 
 #. Position frame
-#: panel/panel_config.c:273 panel/panel_config.c:445
+#: panel/panel_config.c:271 panel/panel_config.c:443
 msgid "Position"
-msgstr "Позиция"
-
-#. Top Position
-#: panel/panel_config.c:286
-msgid "Top"
-msgstr "Сверху"
-
-#: panel/panel_config.c:297
-msgid "Bottom"
-msgstr "Снизу"
+msgstr "Расположение"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:347
-#, fuzzy
+#: panel/panel_config.c:345
 msgid "Minimize options"
 msgstr "Опции минимизации"
 
 #. Auto-hide
-#: panel/panel_config.c:358
-#, fuzzy
+#: panel/panel_config.c:356
 msgid "Auto hide"
 msgstr "Автоматическое сокрытие"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:369 panel/panel_config.c:570
-#, fuzzy
+#: panel/panel_config.c:367 panel/panel_config.c:568
 msgid "Enable hidebuttons"
-msgstr "Убрать кнопки сокрытия"
+msgstr "Кнопки сокрытия"
 
 #. Arrow enable
-#: panel/panel_config.c:380 panel/panel_config.c:581
-#, fuzzy
+#: panel/panel_config.c:378 panel/panel_config.c:579
 msgid "Enable hidebutton arrows"
-msgstr "Убрать стрелки на кнопках сокрытия"
+msgstr "Стрелки на кнопках сокрытия"
 
 #. North East Position
-#: panel/panel_config.c:458
-#, fuzzy
+#: panel/panel_config.c:456
 msgid "North east"
 msgstr "Северо-Восток"
 
-#: panel/panel_config.c:469
-#, fuzzy
+#: panel/panel_config.c:467
 msgid "South west"
 msgstr "Юго-Запад"
 
-#: panel/panel_config.c:480
-#, fuzzy
+#: panel/panel_config.c:478
 msgid "North west"
 msgstr "Северо-Запад"
 
-#: panel/panel_config.c:491
-#, fuzzy
+#: panel/panel_config.c:489
 msgid "South east"
-msgstr "Юго-Запад"
+msgstr "Юго-Восток"
 
 #. Orientation frame
-#: panel/panel_config.c:523
+#: panel/panel_config.c:521
 msgid "Orientation"
 msgstr "Ориентация"
 
-#. Horizontal
-#: panel/panel_config.c:534
-msgid "Horizontal"
-msgstr "Горизонтальный"
-
-#: panel/panel_config.c:547
-msgid "Vertical"
-msgstr "Вертикальный"
-
 #. Hidebuttons frame
-#: panel/panel_config.c:558
+#: panel/panel_config.c:556
 msgid "Hidebutton options"
-msgstr ""
+msgstr "Опции кнопок сокрытия"
 
 #. selector frame
-#: panel/panel_config.c:678 panel/panel_config.c:898
+#: panel/panel_config.c:676 panel/panel_config.c:882
 msgid "Background"
 msgstr "Фон"
 
 #. standard background
-#: panel/panel_config.c:688
+#: panel/panel_config.c:686
 msgid "Standard"
 msgstr "Стандартный"
 
-#: panel/panel_config.c:696
+#: panel/panel_config.c:694
 msgid "Pixmap"
 msgstr "Картинка"
 
-#: panel/panel_config.c:704
-msgid "Color"
-msgstr "Цвет"
-
 #. image frame
-#: panel/panel_config.c:710
+#: panel/panel_config.c:708
 msgid "Image file"
 msgstr "Файл картинки"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:737
 msgid "Scale image to fit panel"
-msgstr "Масштибировать картинку до размеров панели"
+msgstr "Растянуть картинку до размеров панели"
 
-#: panel/panel_config.c:868
+#: panel/panel_config.c:852
 msgid "Panel properties"
 msgstr "Настройки панели"
 
 #. Animation enable
-#: panel/panel_config_global.c:193
-#, fuzzy
+#: panel/panel_config_global.c:192
 msgid "Enable animations"
-msgstr "Запретить анимацию"
+msgstr "Разрешить анимацию"
 
 #. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:201
-#, fuzzy
+#: panel/panel_config_global.c:200
 msgid "Auto-hide animation speed"
 msgstr "Скорость анимации авто-сокрытия"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:212
-#, fuzzy
+#: panel/panel_config_global.c:211
 msgid "Explicit-hide animation speed"
 msgstr "Скороть анимации ручного сокрытия"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/panel_config_global.c:223
-#, fuzzy
+#: panel/panel_config_global.c:222
 msgid "Drawer animation speed"
-msgstr "Запретить анимацию"
+msgstr "Скороть анимации ящичка"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:234
-#, fuzzy
+#: panel/panel_config_global.c:233
 msgid "Auto-hide minimize delay (ms)"
-msgstr "Задержка авто-сокрытия (мкс)"
+msgstr "Задержка авто-сокрытия (мсек)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:241
-#, fuzzy
+#: panel/panel_config_global.c:240
 msgid "Auto-hide minimized size (pixels)"
 msgstr "Размер панели при авто-сокрытии (пикселы)"
 
 #. Enable tiles frame
-#: panel/panel_config_global.c:309 panel/panel_config_global.c:337
+#: panel/panel_config_global.c:308 panel/panel_config_global.c:336
 msgid "Tiles enabled"
-msgstr "В виде кнопки"
+msgstr "Плитки в кнопках"
 
 #. Image frame
-#: panel/panel_config_global.c:347
+#: panel/panel_config_global.c:346
 msgid "Image files"
 msgstr "Файлы картинок"
 
-#: panel/panel_config_global.c:360
+#: panel/panel_config_global.c:359
 msgid "Tile filename (up)"
-msgstr "Картинка на кнопке (не нажатой)"
+msgstr "Плитка на кнопке (не нажатой)"
 
-#: panel/panel_config_global.c:364
+#: panel/panel_config_global.c:363
 msgid "Tile filename (down)"
-msgstr "Картинка на кнопке (нажатой)"
+msgstr "Плитка на кнопке (нажатой)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:371
+#: panel/panel_config_global.c:370
 msgid "Border width (tile only)"
-msgstr "Ширина каймы"
+msgstr "Ширина каймы (плитки)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:379
+#: panel/panel_config_global.c:378
 msgid "Depth (displacement when pressed)"
 msgstr "Глубина (смещение при нажатии)"
 
@@ -2642,219 +3157,103 @@ msgid "Menus"
 msgstr "Меню"
 
 #. Small Icons
-#: panel/panel_config_global.c:433
+#: panel/panel_config_global.c:434
 msgid "Show small icons"
-msgstr "Показывать маленькии иконки"
+msgstr "Показывать маленькии пиктограммы"
 
 #. Dot Buttons
 #: panel/panel_config_global.c:443
 msgid "Show ... buttons"
-msgstr "Показывать кнопки ..."
+msgstr "Показывать ... кнопки"
+
+#. Off Panel Popup menus
+#: panel/panel_config_global.c:452
+msgid "Show popup menus outside of panels"
+msgstr ""
+
+#. Hungry Menus
+#: panel/panel_config_global.c:461
+msgid "Keep menus in memory"
+msgstr ""
 
 #. Movement frame
-#: panel/panel_config_global.c:453
+#: panel/panel_config_global.c:470
 msgid "Movement"
 msgstr "Передвижение"
 
 #. Switched
-#: panel/panel_config_global.c:464
+#: panel/panel_config_global.c:481
 msgid "Switched movement"
 msgstr "Движение с перестановкой других апплетов"
 
-#: panel/panel_config_global.c:476
+#: panel/panel_config_global.c:493
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "Свободное движение (не двигать другие апплеты)"
 
 #. Prompt before log out
-#: panel/panel_config_global.c:497
+#: panel/panel_config_global.c:514
 msgid "Prompt before logout"
 msgstr "Спрашивать подтверждение"
 
-#. Minimize Delay scale frame
-#: panel/panel_config_global.c:507
-#, fuzzy
-msgid "Applet padding"
-msgstr "Отступ между Апплетами"
-
-#: panel/panel_config_global.c:523
-msgid "Launcher icon"
-msgstr "Иконка кнопки запуска"
-
+#. Autoraise
 #: panel/panel_config_global.c:524
-msgid "Drawer icon"
+msgid "Raise panels on mouse-over"
 msgstr ""
 
-#: panel/panel_config_global.c:525
-msgid "Menu icon"
-msgstr "Икнока меню"
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:534
+msgid "Applet padding"
+msgstr "Отступ между апплетами"
 
-#: panel/panel_config_global.c:546
+#: panel/panel_config_global.c:550
+msgid "Launcher icon"
+msgstr "Пиктограмма кнопки запуска"
+
+#: panel/panel_config_global.c:551
+msgid "Drawer icon"
+msgstr "Пиктограмма ящичка"
+
+#: panel/panel_config_global.c:552
+msgid "Menu icon"
+msgstr "Пиктограмма меню"
+
+#: panel/panel_config_global.c:553
+msgid "Logout icon"
+msgstr "Пиктограмма завершения работу"
+
+#: panel/panel_config_global.c:572
 #, fuzzy
 msgid "Global panel configuration"
-msgstr "Глобальные Настройки Панели"
+msgstr "Глобальные настройки панели"
 
-#: panel/panel_config_global.c:554
+#: panel/panel_config_global.c:580
 msgid "Animation"
 msgstr "Анимация"
 
-#: panel/panel_config_global.c:560
+#: panel/panel_config_global.c:586
 msgid "General icon settings"
-msgstr ""
+msgstr "Общие настройки пиктограмм"
 
-#: panel/session.c:646
+#: panel/session.c:662
 msgid "Really log out?"
 msgstr "Вы действительно хотите завершить работу?"
 
-#: panel/session.c:660
+#: panel/session.c:677
 msgid "Ask next time"
 msgstr "Спрашивать в следующий раз"
 
-#: panel/swallow.c:210
+#: panel/swallow.c:208
 msgid "Create swallow applet"
-msgstr ""
+msgstr "Создать встроенный апплет"
 
-#: panel/swallow.c:220
+#: panel/swallow.c:218
 msgid "Title of application to swallow"
-msgstr ""
+msgstr "Имя встраемового приложения"
 
-#: panel/swallow.c:231
+#: panel/swallow.c:229
 msgid "Command (optional)"
-msgstr ""
+msgstr "Команда (необязательна)"
 
-#: panel/swallow.c:255
+#: panel/swallow.c:253
 msgid "Height"
 msgstr "Высота"
-
-#~ msgid "Both System and User menus on the same menu"
-#~ msgstr "Системное и Пользовательское меню в одном"
-
-#~ msgid "System on the main menu, User menu as a submenu"
-#~ msgstr "Системное меню - главное, Пользовательское - подменю"
-
-#~ msgid "User on the main menu, System menu as a submenu"
-#~ msgstr "Пользовательское меню - главное, Системное - подменю"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Ручное сокрытие"
-
-#~ msgid "South East"
-#~ msgstr "Юго-Восток"
-
-#~ msgid "Log Out"
-#~ msgstr "Завершение Работы"
-
-#~ msgid "Flat"
-#~ msgstr "Монотонный"
-
-#~ msgid "Gradient"
-#~ msgstr "Градиент"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Выбор Обоев"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Обои"
-
-#~ msgid " Browse... "
-#~ msgstr " Обзор... "
-
-#~ msgid "none"
-#~ msgstr "нет"
-
-#~ msgid "Scaled"
-#~ msgstr "Растянуть"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Растянуть (сохранять пропорции)"
-
-#~ msgid "Centered"
-#~ msgstr "В центре"
-
-#~ msgid "Tiled"
-#~ msgstr "Мозаика"
-
-#~ msgid " Background "
-#~ msgstr " Обои "
-
-#~ msgid "IMAGE"
-#~ msgstr "КАРТИНКА"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Установить обои в указанное значение"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Указать цвет обоев"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Указать конечный цвет для градиента"
-
-#~ msgid "Sound"
-#~ msgstr "Звук"
-
-#~ msgid "Volume"
-#~ msgstr "Громкость"
-
-#~ msgid "Settings"
-#~ msgstr "Установки"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Установки"
-
-#, fuzzy
-#~ msgid "About:"
-#~ msgstr "О программе"
-
-#~ msgid "Screen Saver"
-#~ msgstr "Хранитель Экрана"
-
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Настройки Хранителя Экрана"
-
-#~ msgid "Start After "
-#~ msgstr "Начинать через "
-
-#~ msgid " Minutes."
-#~ msgstr " Минут."
-
-#~ msgid "Priority:"
-#~ msgstr "Приоритет:"
-
-#~ msgid "Low "
-#~ msgstr "Низкий "
-
-#~ msgid " Normal"
-#~ msgstr " Нормальный"
-
-#~ msgid "Shutdown monitor "
-#~ msgstr "Выключать монитор через "
-
-#~ msgid " minutes after screen saver has started."
-#~ msgstr " минут после начала работы хранителя экрана."
-
-#, fuzzy
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Хранитель Экрана"
-
-#~ msgid "_Help with GNOME..."
-#~ msgstr "_Помощь по GNOME..."
-
-#~ msgid "_Main"
-#~ msgstr "_Главное"
-
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "Передвижение"
-
-#, fuzzy
-#~ msgid " Settings"
-#~ msgstr "Установки"
-
-#~ msgid "CPU load graph"
-#~ msgstr "График загрузки CPU"
-
-#~ msgid "Memory usage graph"
-#~ msgstr "График использования памяти"
-
-#~ msgid "Swap load graph"
-#~ msgstr "График использования подкачки"
