@@ -5,6 +5,7 @@
 gboolean cb_quit      (GtkWidget *widget, gpointer data);
 gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
 gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
+gboolean cb_keypress (GtkWidget *widget, GdkEventKey *event);
 gint     scroll       (gpointer data);
 
 GtkWidget *area;
@@ -12,6 +13,11 @@ GdkPixmap *pixmap=NULL;
 GdkFont *font=NULL;
 GdkFont *italicfont=NULL;
 gint y, y_to_wrap_at;
+gint howmuch=0;
+GdkImlibImage *im;
+GtkWidget *canvas;
+GnomeCanvasItem *image;
+	
 
 
 /* Sparkles */
@@ -195,8 +201,11 @@ sparkle_new (GnomeCanvas *canvas, double x, double y)
 static gint 
 new_sparkles_timeout(GnomeCanvas* canvas)
 {
-
 	static gint which_sparkle = 0;
+
+	if (howmuch >= 5)
+	        return TRUE;
+
 	switch (which_sparkle) {
 	case 0:
 		sparkle_new(canvas,50.0,70.0);
@@ -229,6 +238,60 @@ static void
 free_imlib_image (GtkObject *object, gpointer data)
 {
 	gdk_imlib_destroy_image (data);
+}
+
+gboolean
+cb_keypress (GtkWidget *widget, GdkEventKey *event)
+{
+	if (howmuch >= 5)
+		return FALSE;
+
+	switch (event->keyval) {
+	case GDK_e:
+	case GDK_E:
+		if (howmuch == 4) {
+			howmuch++;
+			im = gdk_imlib_create_image_from_xpm_data (magick);
+			gnome_canvas_item_set (image,
+					       "image", im,
+					       NULL);
+		}
+		else
+			howmuch = 0;
+		break;
+	case GDK_g:
+	case GDK_G:
+		if (howmuch == 0)
+			howmuch++;
+		else
+			howmuch = 0;
+		break;
+	case GDK_m:
+	case GDK_M:
+		if (howmuch == 3)
+			howmuch ++;
+		else
+			howmuch = 0;
+		break;
+	case GDK_n:
+	case GDK_N:
+		if (howmuch == 1)
+			howmuch++;
+		else
+			howmuch = 0;
+		break;
+	case GDK_o:
+	case GDK_O:
+		if (howmuch == 2)
+			howmuch++;
+		else
+			howmuch = 0;
+		break;
+	default:
+		howmuch = 0;
+	}
+	
+	return FALSE;
 }
 
 gboolean
@@ -336,10 +399,7 @@ main (gint argc, gchar *argv[])
 	GdkPixmap *logo_pixmap;
 	GdkBitmap *logo_mask;
 	GtkWidget *frame;
-	GnomeCanvasItem *image;
 	GtkWidget *gtkpixmap;
-	GtkWidget *canvas;
-	GdkImlibImage *im;
 	GtkWidget *href;
 	
 	gnome_init ("gnome-about","1.0", argc, argv);
@@ -349,7 +409,8 @@ main (gint argc, gchar *argv[])
 
 	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 			    GTK_SIGNAL_FUNC (cb_quit), NULL);
-
+	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
+			    GTK_SIGNAL_FUNC (cb_keypress), NULL);
 	gtk_window_set_title (GTK_WINDOW (window), "About GNOME");
 	gtk_widget_realize (window);
 
