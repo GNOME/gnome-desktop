@@ -63,8 +63,22 @@ Panel libraries and header files for creating GNOME panels.
 %setup
 
 %build
-make
+# Needed for snapshot releases.
 
+MYCFLAGS="$RPM_OPT_FLAGS"
+
+if [ ! -f configure ]; then
+  CFLAGS="$MYCFLAGS" ./autogen.sh --prefix=%prefix --localstatedir=/var/lib
+else
+  CFLAGS="$MYCFLAGS" ./configure --prefix=%prefix --localstatedir=/var/lib
+fi
+
+if [ "$SMP" != "" ]; then
+  (make "MAKE=make -k -j $SMP"; exit 0)
+  make
+else
+  make
+fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
