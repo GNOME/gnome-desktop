@@ -332,6 +332,14 @@ if test x$enable_gtk_doc = xauto ; then
   fi
 fi
 
+dnl
+dnl Solaris and other OSes do not have IceListenForWellKnownConnections
+dnl
+oLIBS="$LIBS"
+LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR"
+AC_CHECK_FUNCS(_IceTransNoListen)
+LIBS="$oLIBS"
+
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
@@ -394,8 +402,9 @@ help-browser/help/el/Makefile
 help-browser/help/es/Makefile
 help-browser/help/et/Makefile
 help-browser/help/eu/Makefile
-help-browser/help/fr/Makefile
 help-browser/help/hu/Makefile
+help-browser/help/fr/Makefile
+help-browser/help/gl/Makefile
 help-browser/help/it/Makefile
 help-browser/help/ja/Makefile
 help-browser/help/ko/Makefile
