@@ -44,6 +44,7 @@ BITMAPS     = \
 	gnome-word.png				\
 	launcher-program.xpm			\
 	monitor.xpm				\
+	netscape.png				\
 	panel-arrow-down.xpm			\
 	panel-arrow-left.xpm			\
 	panel-arrow-right.xpm			\
