@@ -12,6 +12,7 @@
 #undef PACKAGE
 #undef VERSION
 
+#undef HAVE_ESD
 #undef HAVE_LIBESD
 
 #undef HAVE_LIBGTOP
