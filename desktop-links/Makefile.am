@@ -54,7 +54,6 @@ Desktop_DATA = \
 	Eterm.desktop		\
 	Kterm.desktop		\
 	Vnterm.desktop 		\
-	Imlib_config.desktop	\
 	Netscape.desktop	\
 	Tkrat.desktop	        \
 	TkSETI.desktop		\
