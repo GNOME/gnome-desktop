@@ -1,7 +1,6 @@
 SUBDIRS = \
 	 intl \
 	 po \
-	 macros \
 	 gsm \
 	 smproxy \
 	 pixmaps \

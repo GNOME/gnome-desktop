@@ -1,3 +1,63 @@
+2001-06-25  Seth Nickell  <snickell@stanford.edu>
+
+	Porting to GNOME2 with a butcher's knife: a massacre in three
+	short acts by Seth Nickell.
+
+	* Makefile.am:
+
+	Stuff.
+	
+	* applets/desk-guide/gwmh.c: (task_delete):
+	* autogen.sh:
+
+	Use gnome-autogen.sh from gnome-common.
+	
+	* configure.in:
+
+	Use pkg-config for getting flags and detecting packages. Also
+	remove references to old GNOME config macros, etc etc.
+	
+	* gmenu/Makefile.am:
+
+	Fix some link flags.
+	
+	* gnome-edit/Makefile.am:
+
+	Fix some link flags.
+	
+	* panel/Makefile.am:
+
+	Fix various explicit references to gnome-config. Also
+	tweak included link and cflags.
+	
+	* panel/applet-widget.c: (marshal_signal_save),
+	(marshal_signal_back), (marshal_signal_position),
+	(applet_widget_class_init), (gnome_panel_applet_corba_init),
+	(applet_factory_new):
+
+	Rewrite marshal functions to use new GClosure stuff. Change
+	miscellanious new warnings and errors that have appeared
+	courtesy of the use of internal/private GTK+ code (and a few
+	actual API changes).
+	
+	* panel/bad-applet.c: (main):
+
+	Fix trivial compile warning dealing with removing const
+	from a Popt.
+	
+	* panel/button-widget.c: (button_widget_class_init):
+	* panel/floating-widget.c: (floating_pos_class_init):
+
+	Don't look directly into the sun, or private GTK+ types.
+	
+	* panel/status-docklet.c: (marshal_signal_build),
+	(status_docklet_class_init):
+	
+	Rewrite marshal functions to use new GClosure stuff. Change
+	miscellanious new warnings and errors that have appeared
+	courtesy of the use of internal/private GTK+ code (and a few
+	actual API changes).
+	
 Tue Jun 05 02:21:42 2001  George Lebl <jirka@5z.com>
 
 	* configure.in, acconfig.h: Optionally check for gnome-print (we
