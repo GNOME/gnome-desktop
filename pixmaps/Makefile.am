@@ -10,6 +10,7 @@ BITMAPS     = \
 	gnome-calendar.png			\
 	gnome-cardgame.png			\
 	gnome-color-browser.png			\
+	gnome-color-xterm.png           \
 	gnome-cromagnon.png			\
 	gnome-die1.png				\
 	gnome-die2.png				\
@@ -74,6 +75,7 @@ BITMAPS     = \
 	apple-green.png			\
 	apple-red.png				\
 	gnome-ccbackground.png	\
+	gnome-ccdesktop.png     \
 	gnome-ccthemes.png		\
 	gnome-ccdialog.png	\
 	gnome-ccscreensaver.png	\
