@@ -98,6 +98,7 @@ typedef enum {
 typedef enum {
 	GNOME_DESKTOP_ITEM_ERROR_NO_FILENAME /* No filename set or given on save */,
 	GNOME_DESKTOP_ITEM_ERROR_UNKNOWN_ENCODING /* Unknown encoding of the file */,
+	GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN /* Cannot open file */
 } GnomeDesktopItemError;
 
 /* Note that functions can also return the G_FILE_ERROR_* errors */
@@ -108,6 +109,9 @@ GQuark gnome_desktop_item_error_quark (void);
 /* Returned item from new*() and copy() methods have a refcount of 1 */
 GnomeDesktopItem *      gnome_desktop_item_new               (void);
 GnomeDesktopItem *      gnome_desktop_item_new_from_file     (const char                 *file,
+							      GnomeDesktopItemLoadFlags   flags,
+							      GError                    **error);
+GnomeDesktopItem *      gnome_desktop_item_new_from_uri      (const char                 *uri,
 							      GnomeDesktopItemLoadFlags   flags,
 							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_copy              (const GnomeDesktopItem     *item);
