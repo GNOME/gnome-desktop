@@ -417,9 +417,9 @@ static void
 translations_add(GtkWidget *button, GnomeDItemEdit *dee)
 {
         int i;
-        char *lang;
-        char *name;
-        char *comment;
+        const char *lang;
+        const char *name;
+        const char *comment;
         const char *text[3];
         const GList *language_list;
         const char *curlang;
@@ -455,7 +455,6 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
                         set_list_width (GTK_WIDGET(cl), text);
                         gtk_signal_emit (GTK_OBJECT(dee),
                                          ditem_edit_signals[CHANGED], NULL);
-                        g_free (lang);
                         return;
                 }
         }
@@ -465,8 +464,6 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         set_list_width(GTK_WIDGET(cl),text);
         gtk_clist_append(cl,(char**)text);
         gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
-  
-        g_free(lang);
 }
 
 static void
@@ -1167,7 +1164,7 @@ gnome_ditem_edit_get_icon(GnomeDItemEdit *dee)
 gchar *
 gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
 {
-        gchar * name;
+        const char * name;
 
         g_return_val_if_fail(dee != NULL, NULL);
         g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
