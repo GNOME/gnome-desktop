@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-02-19 14:33+0100\n"
+"POT-Creation-Date: 1999-02-28 15:26-0600\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -21,14 +21,14 @@ msgstr "A Propos"
 #: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:449
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
-#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:491
-#: applets/gnome-pager/gnomepager_applet.c:1577
+#: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:705
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:504
+#: applets/gnome-pager/gnomepager_applet.c:1408
 #: applets/mini-commander/src/mini-commander_applet.c:246
-#: applets/modemlights/modemlights.c:750 applets/multiload/cpuload.c:62
-#: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
+#: applets/modemlights/modemlights.c:750 applets/multiload/cpuload.c:64
+#: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:372 panel/launcher.c:294
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:371 panel/launcher.c:294
 #: panel/menu.c:3343
 msgid "Properties..."
 msgstr "Propriétés..."
@@ -49,7 +49,7 @@ msgstr "Fuseau Horaire"
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Erreur interne: mode invalide dans batterie_set_mode"
 
-#: applets/battery/battery.c:402 applets/gen_util/clock.c:255
+#: applets/battery/battery.c:402 applets/gen_util/clock.c:273
 #: applets/gen_util/mailcheck.c:672 applets/gen_util/printer.c:386
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
@@ -168,7 +168,7 @@ msgstr ""
 #: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
-#: applets/gkb/gkb.c:483 applets/gnome-pager/gnomepager_applet.c:1571
+#: applets/gkb/gkb.c:496 applets/gnome-pager/gnomepager_applet.c:1402
 #: applets/modemlights/modemlights.c:756 applets/netload/netload.c:339
 #: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
 #: panel/menu.c:2374
@@ -214,7 +214,7 @@ msgstr " (GMT %+d)"
 msgid "None (default)"
 msgstr "Aucun (défaut)"
 
-#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:428
+#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:502
 #: applets/mini-commander/src/preferences.c:438
 msgid "Clock"
 msgstr "Horloge"
@@ -335,7 +335,7 @@ msgstr ""
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
 #: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:891
-#: panel/panel_config_global.c:291
+#: panel/panel_config_global.c:300
 msgid "General"
 msgstr "Général"
 
@@ -598,7 +598,7 @@ msgstr "Paramétres du Pageur Fvwm"
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:114
+#: applets/gen_util/clock.c:126
 msgid ""
 "%a\n"
 "%b %d"
@@ -608,11 +608,11 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:119
+#: applets/gen_util/clock.c:131
 msgid "%a %b %d"
 msgstr "%a %b %d"
 
-#: applets/gen_util/clock.c:134
+#: applets/gen_util/clock.c:154
 msgid ""
 "%I:%M\n"
 "%p"
@@ -620,36 +620,41 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:137
+#: applets/gen_util/clock.c:157
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:143 applets/mini-commander/src/message.c:104
+#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:104
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: applets/gen_util/clock.c:354
+#: applets/gen_util/clock.c:405
 msgid "Clock properties"
 msgstr "Propriétés de l'horloge"
 
-#: applets/gen_util/clock.c:358
+#: applets/gen_util/clock.c:409
 msgid "Time Format"
 msgstr "Format de l'heure"
 
-#: applets/gen_util/clock.c:370
+#: applets/gen_util/clock.c:421
 msgid "12 hour"
 msgstr "12 heures"
 
-#: applets/gen_util/clock.c:379
+#: applets/gen_util/clock.c:430
 msgid "24 hour"
 msgstr "24 heures"
 
 #. show date check box
-#: applets/gen_util/clock.c:410 applets/mini-commander/src/preferences.c:459
+#: applets/gen_util/clock.c:465 applets/mini-commander/src/preferences.c:459
 msgid "Show date"
 msgstr "Afficher la date"
+
+#: applets/gen_util/clock.c:479
+#, fuzzy
+msgid "Unix time"
+msgstr "Demander la prochaine fois"
 
 #: applets/gen_util/mailcheck.c:249
 msgid "You have new mail."
@@ -723,129 +728,135 @@ msgstr "Commande d'impression:"
 msgid "Printer"
 msgstr "Imprimante"
 
-#: applets/gkb/gkb.c:177
+#: applets/gkb/gkb.c:187
 msgid "GKB settings"
 msgstr "Paramétrage de GKB"
 
-#: applets/gkb/gkb.c:190
+#: applets/gkb/gkb.c:200
 msgid "Flag One"
 msgstr "Drapeau 1"
 
-#: applets/gkb/gkb.c:223
+#: applets/gkb/gkb.c:233
 msgid "Flag Two"
 msgstr "Drapeau 2"
 
-#: applets/gkb/gkb.c:252
+#: applets/gkb/gkb.c:262
 msgid "Program"
 msgstr "Programme"
 
-#: applets/gkb/gkb.c:262
+#: applets/gkb/gkb.c:272
 msgid "Xkb"
 msgstr "Xkb"
 
-#: applets/gkb/gkb.c:266
+#: applets/gkb/gkb.c:276
 msgid "Xmodmap"
 msgstr "Xmodmap"
 
-#: applets/gkb/gkb.c:277 panel/menu.c:1673 panel/menu.c:1717 panel/menu.c:1719
+#: applets/gkb/gkb.c:288 panel/menu.c:1673 panel/menu.c:1717 panel/menu.c:1719
 #: panel/menu.c:2959 panel/menu.c:3297
 msgid "Menu"
 msgstr "Menu"
 
-#: applets/gkb/gkb.c:413
+#: applets/gkb/gkb.c:426
 msgid "The GNOME KB Applet"
 msgstr "L'applet GNOME KB"
 
-#: applets/gkb/gkb.c:414
-msgid "1.0pre1"
-msgstr "1.0pre1"
+#: applets/gkb/gkb.c:427
+#, fuzzy
+msgid "1.0.0"
+msgstr "1.0"
 
-#: applets/gkb/gkb.c:415
-msgid "(C) 1998 LSC - Linux Supporting Center"
+#: applets/gkb/gkb.c:428
+#, fuzzy
+msgid "(C) 1998-99 LSC - Linux Supporting Center"
 msgstr "(C) 1998 LSC - Linux Supporting Center"
 
-#: applets/gkb/gkb.c:417
+#: applets/gkb/gkb.c:430
 msgid ""
-"This applet used to switch between keyboard maps. No more. It uses "
-"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"This applet switches between keyboard maps. Not more. It uses setxkbmap, or "
+"xmodmap. The main site of this app moved temporarily to URL "
 "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
 "to CVS.So long, and thanks for all the fish."
 msgstr ""
 
-#: applets/gkb/gkb.c:426
+#: applets/gkb/gkb.c:439
 msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
-#: applets/gnome-pager/gnomepager_applet.c:122
+#: applets/gnome-pager/gnomepager_applet.c:113
 msgid "Desktop Pager Applet"
 msgstr "Applet Pagination du Bureau"
 
-#: applets/gnome-pager/gnomepager_applet.c:122
+#: applets/gnome-pager/gnomepager_applet.c:113
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 
-#: applets/gnome-pager/gnomepager_applet.c:124
+#: applets/gnome-pager/gnomepager_applet.c:115
 msgid "Pager for a GNOME compliant Window Manager"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:363
+#: applets/gnome-pager/gnomepager_applet.c:189
 msgid "Gnome Pager Settings"
 msgstr "Paramétres du Pageur Gnome"
 
-#: applets/gnome-pager/gnomepager_applet.c:367
+#: applets/gnome-pager/gnomepager_applet.c:193
 #: applets/slashapp/properties.c:422
 msgid "Display"
 msgstr "Affichage"
 
-#: applets/gnome-pager/gnomepager_applet.c:368
+#: applets/gnome-pager/gnomepager_applet.c:194
 msgid "Show all tasks on all desktops"
 msgstr "Afficher toutes les tâches sur tous les bureaux"
 
-#: applets/gnome-pager/gnomepager_applet.c:376
+#: applets/gnome-pager/gnomepager_applet.c:202
 msgid "Show tasks"
 msgstr "Afficher les tâches"
 
-#: applets/gnome-pager/gnomepager_applet.c:384
+#: applets/gnome-pager/gnomepager_applet.c:210
 msgid "Show pager"
 msgstr "Afficher le pageur"
 
-#: applets/gnome-pager/gnomepager_applet.c:392
+#: applets/gnome-pager/gnomepager_applet.c:218
 msgid "Use small pagers"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:400
+#: applets/gnome-pager/gnomepager_applet.c:226
 msgid "Show icons in tasks"
 msgstr "Afficher les icones dans les tâches"
 
-#: applets/gnome-pager/gnomepager_applet.c:408
+#: applets/gnome-pager/gnomepager_applet.c:234
 msgid "Show task list button"
 msgstr "Afficher le bouton de la liste des tâches"
 
-#: applets/gnome-pager/gnomepager_applet.c:423
+#: applets/gnome-pager/gnomepager_applet.c:243
+msgid "Tasklist always maximum size"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:259
 msgid "Maximum width of horizontal task list"
 msgstr "Largeur maximale de la liste des tâches horizontale"
 
-#: applets/gnome-pager/gnomepager_applet.c:438
+#: applets/gnome-pager/gnomepager_applet.c:275
 msgid "Maximum width of vertical task list"
 msgstr "Largeur maximale de la liste des tâches horizontale"
 
-#: applets/gnome-pager/gnomepager_applet.c:452
+#: applets/gnome-pager/gnomepager_applet.c:289
 msgid "Number of rows of horizontal tasks"
 msgstr "Nombre de lignes dans la liste des tâches horizontale"
 
-#: applets/gnome-pager/gnomepager_applet.c:465
+#: applets/gnome-pager/gnomepager_applet.c:302
 msgid "Number of vertical columns of tasks"
 msgstr "Nombre de colonnes pour les tâches"
 
-#: applets/gnome-pager/gnomepager_applet.c:478
+#: applets/gnome-pager/gnomepager_applet.c:315
 msgid "Number rows of pagers"
 msgstr "Nombre de lignes de pageurs"
 
-#: applets/gnome-pager/gnomepager_applet.c:1518
+#: applets/gnome-pager/gnomepager_applet.c:1344
 msgid "Gnome Pager Error"
 msgstr "Erreur du Pageur Gnome"
 
-#: applets/gnome-pager/gnomepager_applet.c:1519
+#: applets/gnome-pager/gnomepager_applet.c:1345
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -860,23 +871,27 @@ msgstr ""
 "Enlightenment (DR-0.15)\n"
 "Et essayez de relancer cette applet.\n"
 
-#: applets/gnome-pager/gnomepager_applet.c:2029
+#: applets/gnome-pager/gnomepager_applet.c:1867
 msgid "Sticky"
 msgstr "Collé"
 
-#: applets/gnome-pager/gnomepager_applet.c:2642
+#: applets/gnome-pager/gnomepager_applet.c:1940
+msgid "?"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:2457
 msgid "Show / Hide"
 msgstr "Montrer / Masquer"
 
-#: applets/gnome-pager/gnomepager_applet.c:2654
+#: applets/gnome-pager/gnomepager_applet.c:2469
 msgid "Shade / Unshade"
 msgstr "Ombrer / Désombrer"
 
-#: applets/gnome-pager/gnomepager_applet.c:2666 panel/launcher.c:44
+#: applets/gnome-pager/gnomepager_applet.c:2481 panel/launcher.c:44
 msgid "Close"
 msgstr "Fermer"
 
-#: applets/gnome-pager/gnomepager_applet.c:2678
+#: applets/gnome-pager/gnomepager_applet.c:2493
 msgid "Nuke"
 msgstr "Enlever"
 
@@ -957,12 +972,12 @@ msgid "Browser"
 msgstr "Navigateur"
 
 #: applets/mini-commander/src/mini-commander_applet.c:197
-#: help-browser/window.c:201
+#: help-browser/window.c:202
 msgid "History"
 msgstr "Historique"
 
 #: applets/mini-commander/src/mini-commander_applet.c:252
-#: help-browser/window.c:206
+#: help-browser/window.c:207
 msgid "Help"
 msgstr "Aide"
 
@@ -1032,7 +1047,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1051
+#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1051
 msgid "Colors"
 msgstr "Couleurs"
 
@@ -1139,15 +1154,15 @@ msgstr "Charge CPU"
 msgid "Load Graph"
 msgstr "Graphe de Charge"
 
-#: applets/multiload/load-graph.c:160
-msgid "Refersh interval (ms):"
-msgstr ""
+#: applets/multiload/load-graph.c:180
+msgid "Speed:"
+msgstr "Vitesse:"
 
-#: applets/multiload/load-graph.c:160
+#: applets/multiload/load-graph.c:180
 msgid "Width:"
 msgstr "Largeur:"
 
-#: applets/multiload/load-graph.c:160
+#: applets/multiload/load-graph.c:180
 msgid "Height:"
 msgstr "Hauteur:"
 
@@ -1467,7 +1482,8 @@ msgstr "Voulez-vous vraiment effacer ce sous-menu et sont contenu?"
 msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
-msgstr "Ce changement créé un conflit avec un élément de menu existant.\n"
+msgstr ""
+"Ce changement créé un conflit avec un élément de menu existant.\n"
 "Deux items dans le même sous-menu ne peuvent avoir le même nom."
 
 #: gmenu/dnd.c:175
@@ -1639,7 +1655,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "L'émulateur de terminal Gnome."
 
 #: gnome-terminal/gnome-terminal.c:424 gnome-terminal/gnome-terminal.c:930
-#: gnome-terminal/gnome-terminal.c:940 gnome-terminal/gnome-terminal.c:1740
+#: gnome-terminal/gnome-terminal.c:940 gnome-terminal/gnome-terminal.c:1700
 msgid "Default"
 msgstr "Défaut"
 
@@ -1826,95 +1842,95 @@ msgstr "_Montrer la barre de menu"
 msgid "C_olor selector..."
 msgstr "Sélection de la c_ouleur..."
 
-#: gnome-terminal/gnome-terminal.c:1878
+#: gnome-terminal/gnome-terminal.c:1838
 msgid "Terminal class name"
 msgstr "Classe de terminal"
 
-#: gnome-terminal/gnome-terminal.c:1878
+#: gnome-terminal/gnome-terminal.c:1838
 msgid "CLASS"
 msgstr "CLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1881
+#: gnome-terminal/gnome-terminal.c:1841
 msgid "Specifies font name"
 msgstr "Spécifie le nom de la police"
 
-#: gnome-terminal/gnome-terminal.c:1881
+#: gnome-terminal/gnome-terminal.c:1841
 msgid "FONT"
 msgstr "POLICE"
 
-#: gnome-terminal/gnome-terminal.c:1884
+#: gnome-terminal/gnome-terminal.c:1844
 msgid "Do not start up shells as logins shells"
 msgstr "Ne pas lancer les shells comme shells de login"
 
-#: gnome-terminal/gnome-terminal.c:1887
+#: gnome-terminal/gnome-terminal.c:1847
 msgid "Start up shells as logins shells"
 msgstr "Lancer les shells comme shells de login"
 
-#: gnome-terminal/gnome-terminal.c:1890
+#: gnome-terminal/gnome-terminal.c:1850
 msgid "Specifies the geometry for the main window"
 msgstr "Spécifier la géométrie pour la fenétre principale"
 
-#: gnome-terminal/gnome-terminal.c:1890 gsm/session-properties.c:240
+#: gnome-terminal/gnome-terminal.c:1850 gsm/session-properties.c:240
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: gnome-terminal/gnome-terminal.c:1893
+#: gnome-terminal/gnome-terminal.c:1853
 msgid "Execute this program instead of a shell"
 msgstr "Exécuter ce prorgamme à la place du shell"
 
-#: gnome-terminal/gnome-terminal.c:1893
+#: gnome-terminal/gnome-terminal.c:1853
 msgid "COMMAND"
 msgstr "COMMANDE"
 
-#: gnome-terminal/gnome-terminal.c:1896
+#: gnome-terminal/gnome-terminal.c:1856
 msgid "Foreground color"
 msgstr "Couleur de de l'avant-plan"
 
-#: gnome-terminal/gnome-terminal.c:1896 gnome-terminal/gnome-terminal.c:1899
+#: gnome-terminal/gnome-terminal.c:1856 gnome-terminal/gnome-terminal.c:1859
 msgid "COLOR"
 msgstr "COULEUR"
 
-#: gnome-terminal/gnome-terminal.c:1899 panel/panel_config.c:730
+#: gnome-terminal/gnome-terminal.c:1859 panel/panel_config.c:730
 msgid "Background color"
 msgstr "Couleur de fond"
 
-#: gnome-terminal/gnome-terminal.c:1902
+#: gnome-terminal/gnome-terminal.c:1862
 msgid "Update utmp entry"
 msgstr "Mettre à jour l'entrée dans utmp"
 
-#: gnome-terminal/gnome-terminal.c:1902
+#: gnome-terminal/gnome-terminal.c:1862
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:1905
+#: gnome-terminal/gnome-terminal.c:1865
 msgid "Do not update utmp entry"
 msgstr "Ne pas mettre à jour l'entrée dans utmp"
 
-#: gnome-terminal/gnome-terminal.c:1905
+#: gnome-terminal/gnome-terminal.c:1865
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:1908
+#: gnome-terminal/gnome-terminal.c:1868
 msgid "Update wtmp entry"
 msgstr "Mettre à jour l'entrée dans wtmp"
 
-#: gnome-terminal/gnome-terminal.c:1908
+#: gnome-terminal/gnome-terminal.c:1868
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:1911
+#: gnome-terminal/gnome-terminal.c:1871
 msgid "Do not update wtmp entry"
 msgstr "Ne pas mettre à jour l'entrée dans wtmp"
 
-#: gnome-terminal/gnome-terminal.c:1911
+#: gnome-terminal/gnome-terminal.c:1871
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:1914
+#: gnome-terminal/gnome-terminal.c:1874
 msgid "Set the window title"
 msgstr "Changer le titre de la fenêtre"
 
-#: gnome-terminal/gnome-terminal.c:1914
+#: gnome-terminal/gnome-terminal.c:1874
 msgid "TITLE"
 msgstr "TITRE"
 
@@ -1935,13 +1951,17 @@ msgstr "Une fermeture de session est en cours."
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with program \"%s\"."
-msgstr "Le gestionnaire de session Gnome\na perdu le contact avec le programme \"%s\"."
+msgstr ""
+"Le gestionnaire de session Gnome\n"
+"a perdu le contact avec le programme \"%s\"."
 
 #: gsm/manager.c:1025
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with an unnamed program."
-msgstr "Le gestionnaire de session Gnome\na perdu le contact avec un programme inconnu."
+msgstr ""
+"Le gestionnaire de session Gnome\n"
+"a perdu le contact avec un programme inconnu."
 
 #: gsm/save-session.c:33
 msgid "Kill session"
@@ -2021,7 +2041,7 @@ msgstr "HAUTEUR"
 msgid "Debug level"
 msgstr "Indice de débugage"
 
-#: help-browser/gnome-help-browser.c:336 help-browser/window.c:689
+#: help-browser/gnome-help-browser.c:336 help-browser/window.c:690
 msgid "Gnome Help Browser"
 msgstr "Navigateur d'Aide Gnome"
 
@@ -2127,7 +2147,7 @@ msgstr "Jeux"
 
 #. Miscellaneous frame
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:484 panel/panel_config_global.c:601
+#: panel/panel_config_global.c:493 panel/panel_config_global.c:610
 msgid "Miscellaneous"
 msgstr "Divers"
 
@@ -2249,83 +2269,83 @@ msgstr "<BODY>Impossible de charger l'Index par défaut</BODY>"
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>argument TOC inconnu</BODY>"
 
-#: help-browser/window.c:128
+#: help-browser/window.c:129
 msgid "_New Window"
 msgstr "_Nouvelle Fenêtre"
 
-#: help-browser/window.c:129
+#: help-browser/window.c:130
 msgid "Open new browser window"
 msgstr "Ouvrir une nouvelle fenêtre"
 
-#: help-browser/window.c:135
+#: help-browser/window.c:136
 msgid "_Add Bookmark"
 msgstr "_Ajouter un Signet"
 
-#: help-browser/window.c:135
+#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Ajouter un signet"
 
-#: help-browser/window.c:160
+#: help-browser/window.c:161
 msgid "_History"
 msgstr "_Historique"
 
-#: help-browser/window.c:160 help-browser/window.c:201
+#: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Afficher la fenetre d'Historique"
 
-#: help-browser/window.c:165
+#: help-browser/window.c:166
 msgid "_Bookmarks"
 msgstr "_Signets"
 
-#: help-browser/window.c:165 help-browser/window.c:203
+#: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Afficher la fenêtre des Signets"
 
-#: help-browser/window.c:179
+#: help-browser/window.c:180
 msgid "_Window"
 msgstr "_Fenêtre"
 
-#: help-browser/window.c:188
+#: help-browser/window.c:189
 msgid "Back"
 msgstr "Précédent"
 
-#: help-browser/window.c:189
+#: help-browser/window.c:190
 msgid "Go to the previous location in the history list"
 msgstr "Aller à la page précédente de l'historique"
 
-#: help-browser/window.c:191
+#: help-browser/window.c:192
 msgid "Forward"
 msgstr "Suivant"
 
-#: help-browser/window.c:192
+#: help-browser/window.c:193
 msgid "Go to the next location in the history list"
 msgstr "Aller à la page suivante de l'historique"
 
-#: help-browser/window.c:195
+#: help-browser/window.c:196
 msgid "Reload"
 msgstr "Recharger"
 
-#: help-browser/window.c:198
+#: help-browser/window.c:199
 msgid "Index"
 msgstr "Index"
 
-#: help-browser/window.c:198
+#: help-browser/window.c:199
 msgid "Show Documentation Index"
 msgstr "Afficher l'Index de la Documentation"
 
-#: help-browser/window.c:203
+#: help-browser/window.c:204
 msgid "BMarks"
 msgstr "Signets"
 
-#: help-browser/window.c:206
+#: help-browser/window.c:207
 msgid "Help on Help"
 msgstr "Aide sur l'Aide"
 
-#: help-browser/window.c:449
+#: help-browser/window.c:450
 msgid "Location: "
 msgstr ""
 
-#: help-browser/window.c:814
+#: help-browser/window.c:819
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2336,7 +2356,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: help-browser/window.c:817
+#: help-browser/window.c:822
 msgid "Ok"
 msgstr "Ok"
 
@@ -2700,170 +2720,191 @@ msgid "Panel properties"
 msgstr "Propriétés du panel"
 
 #. Animation enable
-#: panel/panel_config_global.c:192
+#: panel/panel_config_global.c:189
 msgid "Enable animations"
 msgstr "Activer les animations"
 
+#: panel/panel_config_global.c:194
+#, fuzzy
+msgid "Constant speed animations"
+msgstr "Activer les animations"
+
 #. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:199
+#: panel/panel_config_global.c:208
 msgid "Auto-hide animation speed"
 msgstr "Vitesse de l'animation du masquage automatique"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:209
+#: panel/panel_config_global.c:218
 msgid "Explicit-hide animation speed"
 msgstr "Vitesse de l'animation du masquage explicite"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/panel_config_global.c:219
+#: panel/panel_config_global.c:228
 msgid "Drawer animation speed"
 msgstr "Vitesse de l'animation des tiroirs"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:229
+#: panel/panel_config_global.c:238
 msgid "Auto-hide minimize delay (ms)"
 msgstr "Délai avant le masquage automatique (en milisecondes)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:235
+#: panel/panel_config_global.c:244
 msgid "Auto-hide minimized size (pixels)"
 msgstr "Auto-Hide minimized size (pixels)"
 
 #. Enable tiles frame
-#: panel/panel_config_global.c:301 panel/panel_config_global.c:328
+#: panel/panel_config_global.c:310 panel/panel_config_global.c:337
 msgid "Tiles enabled"
 msgstr ""
 
 #. Image frame
-#: panel/panel_config_global.c:337
+#: panel/panel_config_global.c:346
 msgid "Image files"
 msgstr "Fichiers Image"
 
-#: panel/panel_config_global.c:349
+#: panel/panel_config_global.c:358
 msgid "Tile filename (up)"
 msgstr ""
 
-#: panel/panel_config_global.c:353
+#: panel/panel_config_global.c:362
 msgid "Tile filename (down)"
 msgstr ""
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:360
+#: panel/panel_config_global.c:369
 msgid "Border width (tile only)"
 msgstr ""
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:367
+#: panel/panel_config_global.c:376
 msgid "Depth (displacement when pressed)"
 msgstr "Profondeur (déplacement lorsqu'enfoncé)"
 
 #. Tooltips frame
-#: panel/panel_config_global.c:389
+#: panel/panel_config_global.c:398
 msgid "Tooltips"
 msgstr "Bulles d'Aide"
 
 #. Tooltips enable
-#: panel/panel_config_global.c:399
+#: panel/panel_config_global.c:408
 msgid "Tooltips enabled"
 msgstr "Bulles d'Aide activées"
 
 #. Menu frame
-#: panel/panel_config_global.c:408
+#: panel/panel_config_global.c:417
 msgid "Menus"
 msgstr "Menus"
 
 #. Small Icons
-#: panel/panel_config_global.c:418
+#: panel/panel_config_global.c:427
 msgid "Show small icons"
 msgstr "Afficher de petites icones"
 
 #. Dot Buttons
-#: panel/panel_config_global.c:427
+#: panel/panel_config_global.c:436
 msgid "Show ... buttons"
 msgstr "Afficher ... boutons"
 
 #. Off Panel Popup menus
-#: panel/panel_config_global.c:436
+#: panel/panel_config_global.c:445
 msgid "Show popup menus outside of panels"
 msgstr ""
 
 #. Hungry Menus
-#: panel/panel_config_global.c:445
+#: panel/panel_config_global.c:454
 msgid "Keep menus in memory"
 msgstr "Garder les menus en mémoire"
 
 #. Movement frame
-#: panel/panel_config_global.c:454
+#: panel/panel_config_global.c:463
 msgid "Movement"
 msgstr "Mouvement"
 
 #. Switched
-#: panel/panel_config_global.c:464
+#: panel/panel_config_global.c:473
 msgid "Switched movement"
 msgstr ""
 
-#: panel/panel_config_global.c:475
+#: panel/panel_config_global.c:484
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "Mouvement libre (ne dérange pas les autres applets)"
 
 #. Prompt before log out
-#: panel/panel_config_global.c:494
+#: panel/panel_config_global.c:503
 msgid "Prompt before logout"
 msgstr "Demander confirmation avant de clore la session"
 
 #. Autoraise
-#: panel/panel_config_global.c:503
+#: panel/panel_config_global.c:512
 msgid "Raise panels on mouse-over (non GNOME compliant window managers only)"
 msgstr ""
 
 #. Keep on bottom
-#: panel/panel_config_global.c:512
+#: panel/panel_config_global.c:521
 msgid "Keep panel below windows (GNOME compliant window managers only)"
-msgstr "Garder le panel sous les fenêtres (gestionnaires de fenêtres GNOME-compatibles uniquement)"
+msgstr ""
+"Garder le panel sous les fenêtres (gestionnaires de fenêtres "
+"GNOME-compatibles uniquement)"
 
 #. Drawer/launcher auto close
-#: panel/panel_config_global.c:521
+#: panel/panel_config_global.c:530
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr ""
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:530
+#: panel/panel_config_global.c:539
 msgid "Applet padding"
 msgstr "Espacement entre applets"
 
-#: panel/panel_config_global.c:546
+#: panel/panel_config_global.c:555
 msgid "Launcher icon"
 msgstr "Icone du lanceur"
 
-#: panel/panel_config_global.c:547
+#: panel/panel_config_global.c:556
 msgid "Drawer icon"
 msgstr "Icone du tiroir"
 
-#: panel/panel_config_global.c:548
+#: panel/panel_config_global.c:557
 msgid "Menu icon"
 msgstr "Icone du menu"
 
-#: panel/panel_config_global.c:549
+#: panel/panel_config_global.c:558
 msgid "Logout icon"
 msgstr "Icone de fin de session"
 
-#: panel/panel_config_global.c:573
+#: panel/panel_config_global.c:582
 msgid "Global panel configuration"
 msgstr "Configuration globale du panneau"
 
-#: panel/panel_config_global.c:581
+#: panel/panel_config_global.c:590
 msgid "Animation"
 msgstr "Animation"
 
-#: panel/panel_config_global.c:587
+#: panel/panel_config_global.c:596
 msgid "General icon settings"
 msgstr "Propriétés générales des icones"
 
-#: panel/session.c:667
+#: panel/session.c:629
+msgid ""
+"Are you sure you want to just terminate the panel?\n"
+"\n"
+"If you need to restart the panel after terminating it here, you will need to "
+"type panel in a terminal window\n"
+"\n"
+"Press OK to terminate the panel!"
+msgstr ""
+
+#: panel/session.c:690
 msgid "Really log out?"
 msgstr "Voulez-vous vraiment clore la session?"
 
-#: panel/session.c:684
+#: panel/session.c:695
+msgid "Only terminate panel"
+msgstr ""
+
+#: panel/session.c:709
 msgid "Ask next time"
 msgstr "Demander la prochaine fois"
 
@@ -2882,6 +2923,9 @@ msgstr "Commande (optionel)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "Hauteur"
+
+#~ msgid "1.0pre1"
+#~ msgstr "1.0pre1"
 
 #~ msgid "Can't open /proc/apm; can't get data."
 #~ msgstr "Impossible d'ouvrir /proc/apm; ne peut obtenir les informations."
@@ -3028,9 +3072,6 @@ msgstr "Hauteur"
 #~ msgstr ""
 #~ "Une horloge binaire pour votre panel\n"
 #~ "http://snoopy.net/~jon/jbc/\n"
-
-#~ msgid "Speed:"
-#~ msgstr "Vitesse:"
 
 #~ msgid "%s: option `%s' is ambiguous\n"
 #~ msgstr "%s: l'option `%s' est ambigüe\n"

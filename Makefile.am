@@ -4,7 +4,7 @@ idl = idl
 
 always_built_SUBDIRS = \
 	 gsm smproxy pixmaps desktop-links help-browser \
-	 gnome-terminal core-docs gmenu
+	 gnome-terminal core-docs gmenu gnome-edit
 
 sometimes_built_SUBDIRS = panel applets idl
 
