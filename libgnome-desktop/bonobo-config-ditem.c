@@ -19,6 +19,7 @@
 #include <bonobo-config/bonobo-config-utils.h>
 
 #include "bonobo-config-ditem.h"
+#include "bonobo-config-ditem-utils.h"
 
 static GObjectClass *parent_class = NULL;
 
@@ -252,6 +253,35 @@ load (const char *file)
 	return SecHeader;
 }
 
+static TKeys *
+dir_lookup_entry (TSecHeader *dir,
+		  char       *name,
+		  gboolean    create)
+{
+	TKeys *de;
+	
+	for (de = dir->keys; de != NULL; de = de->link)
+		if (!strcmp (de->key_name, name))
+			return de;
+
+#if 0
+	if (create) {
+
+		de = g_new0 (DirEntry, 1);
+		
+		de->dir = dir;
+
+		de->name = g_strdup (name);
+
+		dir->entries = g_slist_prepend (dir->entries, de);
+
+		return de;
+	}
+#endif
+
+	return NULL;
+}
+
 static TSecHeader *
 dir_lookup_subdir (TSecHeader  *dir,
 		   char        *name,
@@ -313,6 +343,64 @@ lookup_dir (TSecHeader *dir,
 	}
 
 	return NULL;
+}
+
+static TKeys *
+lookup_dir_entry (BonoboConfigDItem *ditem,
+		  const char        *key, 
+		  gboolean           create)
+{
+	char       *dir_name;
+	char       *leaf_name;
+	TKeys      *de;
+	TSecHeader *dd;
+
+	if ((dir_name = bonobo_config_dir_name (key))) {
+		dd = lookup_dir (ditem->_priv->dir, dir_name, create);
+		
+		g_free (dir_name);
+
+	} else {
+		dd = ditem->_priv->dir;
+	}
+
+	if (!dd)
+		return NULL;
+
+	if (!(leaf_name = bonobo_config_leaf_name (key)))
+		return NULL;
+
+	de = dir_lookup_entry (dd, leaf_name, create);
+
+	g_free (leaf_name);
+
+	return de;
+}
+
+static CORBA_any *
+real_get_value (BonoboConfigDatabase *db,
+		const CORBA_char     *key, 
+		CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	TKeys             *de;
+	CORBA_any         *value = NULL;
+	char              *locale = NULL; 
+				
+	/* fixme: how to handle locale correctly ? */
+
+	de = lookup_dir_entry (ditem, key, FALSE);
+	if (!de) {
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
+		return NULL;
+	}
+
+	value = bonobo_config_ditem_decode_any (de->value, ev);
+
+	if (!value)
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
+
+	return value;
 }
 
 static Bonobo_KeyList *
@@ -506,6 +594,7 @@ bonobo_config_ditem_class_init (BonoboConfigDatabaseClass *class)
 
 	cd_class = BONOBO_CONFIG_DATABASE_CLASS (class);
 
+	cd_class->get_value    = real_get_value;
 	cd_class->get_dirs     = real_get_dirs;
 	cd_class->get_keys     = real_get_keys;
 	cd_class->has_dir      = real_has_dir;

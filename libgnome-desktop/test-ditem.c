@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <libbonobo.h>
 
 #include "bonobo-config-ditem.h"
@@ -33,15 +34,16 @@ main (int argc, char **argv)
 	g_assert (!BONOBO_EX (&ev));
 
 	if (dirlist) {
-	    for (i = 0; i < dirlist->_length; i++) {
-		g_print ("DIR: |%s|\n", dirlist->_buffer [i]);
+		for (i = 0; i < dirlist->_length; i++) {
+			g_print ("DIR: |%s|\n", dirlist->_buffer [i]);
 
-		keylist = Bonobo_ConfigDatabase_getKeys (db, dirlist->_buffer [i], &ev);
-		g_assert (!BONOBO_EX (&ev));
+			keylist = Bonobo_ConfigDatabase_getKeys (db, dirlist->_buffer [i], &ev);
+			g_assert (!BONOBO_EX (&ev));
 
-		if (keylist)
-		    for (j = 0; j < keylist->_length; j++)
-			g_print ("KEY (%s): |%s|\n", dirlist->_buffer [i], keylist->_buffer [j]);
+			if (keylist)
+				for (j = 0; j < keylist->_length; j++)
+					g_print ("KEY (%s): |%s|\n", dirlist->_buffer [i],
+						 keylist->_buffer [j]);
 	    }
 	}
 
@@ -49,16 +51,23 @@ main (int argc, char **argv)
 	g_assert (!BONOBO_EX (&ev));
 
 	if (keylist)
-	    for (j = 0; j < keylist->_length; j++)
-		g_print ("TEST KEY: |%s|\n", keylist->_buffer [j]);
+		for (j = 0; j < keylist->_length; j++)
+			g_print ("TEST KEY: |%s|\n", keylist->_buffer [j]);
+
+        CORBA_exception_init (&ev);
+	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_long, &ev);
+	if (value)
+		printf ("got value as long %d\n", BONOBO_ARG_GET_LONG (value));
+        CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_string, &ev);
+	if (value)
+		printf ("got value as string %s\n", BONOBO_ARG_GET_STRING (value));
+        CORBA_exception_free (&ev);
 
 	exit (0);
 
-	value = bonobo_pbclient_get_value (db, "/test", TC_long, &ev);
-
-	if (value) {
-		printf ("got value %d\n", BONOBO_ARG_GET_LONG (value));
-	}
         CORBA_exception_init (&ev);
 
 	value = bonobo_pbclient_get_value (db, "/storagetype",
