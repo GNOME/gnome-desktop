@@ -27,8 +27,12 @@ $(CORBA_SRCLIST): $(top_srcdir)/idl/GNOME_Desktop.idl $(ORBIT_IDL)
 BUILT_SOURCES = $(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_SOURCES = \
-	gnome-desktop-item.h	\
-	gnome-desktop-item.c	\
+	gnome-desktop-item.h		\
+	gnome-desktop-item.c		\
+	bonobo-config-ditem.c		\
+	bonobo-config-ditem.h		\
+	bonobo-config-ditem-utils.c	\
+	bonobo-config-ditem-utils.h	\
 	$(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_LIBADD = \

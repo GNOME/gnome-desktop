@@ -56,6 +56,8 @@
 #include <libgnomevfs/gnome-vfs-mime.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
 
+#include "bonobo-config-ditem.h"
+
 #define PATH_SEP '/'
 #define PATH_SEP_STR "/"
 
@@ -63,7 +65,6 @@ struct _GnomeDesktopItem {
         int refcount;
 
 	Bonobo_ConfigDatabase db;
-	Bonobo_ConfigDatabase default_db;
 	GNOME_Desktop_Entry *entry;
 	gboolean modified;
 
@@ -124,47 +125,13 @@ ditem_load (const char *data_file,
 	    GnomeDesktopItemFlags item_flags)
 {
         GnomeDesktopItem *retval;
-	Bonobo_ConfigDatabase db, default_db;
+	Bonobo_ConfigDatabase db;
 	CORBA_Environment ev;
 	CORBA_any *any;
-	gchar *moniker;
 
-	moniker = g_strdup_printf ("xmldb:" GNOME_DESKTOP_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb"
-				   "#ditem:%s", data_file);
-
-	CORBA_exception_init (&ev);
-	db = bonobo_get_object (moniker, "Bonobo/ConfigDatabase", &ev);
-	if (BONOBO_EX (&ev)) {
-		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
-		CORBA_exception_free (&ev);
-		g_free (moniker);
+	db = bonobo_config_ditem_new (data_file);
+	if (db == CORBA_OBJECT_NIL)
 		return NULL;
-	}
-	CORBA_exception_free (&ev);
-	g_free (moniker);
-
-	CORBA_exception_init (&ev);
-	default_db = bonobo_get_object ("xmldb:" GNOME_DESKTOP_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb",
-					"Bonobo/ConfigDatabase", &ev);
-	if (BONOBO_EX (&ev)) {
-		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
-		bonobo_object_release_unref (db, NULL);
-		CORBA_exception_free (&ev);
-		return NULL;
-	}
-	CORBA_exception_free (&ev);
-
-	CORBA_exception_init (&ev);
-	Bonobo_ConfigDatabase_addDatabase (db, default_db, "",
-					   Bonobo_ConfigDatabase_DEFAULT, &ev);
-	if (BONOBO_EX (&ev)) {
-		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
-		bonobo_object_release_unref (db, NULL);
-		bonobo_object_release_unref (default_db, NULL);
-		CORBA_exception_free (&ev);
-		return NULL;
-	}
-	CORBA_exception_free (&ev);
 
 	CORBA_exception_init (&ev);
 	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_Desktop_Entry, &ev);
@@ -177,7 +144,6 @@ ditem_load (const char *data_file,
 
 	retval = gnome_desktop_item_new ();
 	retval->db = db;
-	retval->default_db = default_db;
 	retval->entry = any->_value;
 
         retval->item_flags = item_flags;
@@ -306,35 +272,14 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	/* first we setup the new location if we need to */
 	if (under) {
 		Bonobo_ConfigDatabase db;
-		gchar *moniker;
 
 		g_free (item->location);
 		item->location = g_strdup (under);
 		item->modified = TRUE;
 
-		moniker = g_strdup_printf ("ditem:%s", item->location);
-
-		CORBA_exception_init (&ev);
-		db = bonobo_get_object (moniker, "Bonobo/ConfigDatabase", &ev);
-		if (BONOBO_EX (&ev)) {
-			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
-			CORBA_exception_free (&ev);
-			g_free (moniker);
+		db = bonobo_config_ditem_new (item->location);
+		if (db == CORBA_OBJECT_NIL)
 			return FALSE;
-		}
-		CORBA_exception_free (&ev);
-
-		CORBA_exception_init (&ev);
-		Bonobo_ConfigDatabase_addDatabase (db, item->default_db, "",
-						   Bonobo_ConfigDatabase_DEFAULT,
-						   &ev);
-		if (BONOBO_EX (&ev)) {
-			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
-			bonobo_object_release_unref (db, NULL);
-			CORBA_exception_free (&ev);
-			return FALSE;
-		}
-		CORBA_exception_free (&ev);
 
 		bonobo_object_release_unref (item->db, NULL);
 		item->db = db;

@@ -19,8 +19,8 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo-config/bonobo-config-utils.h>
-#include <libgnome/Gnome.h>
 
+#include "GNOME_Desktop.h"
 #include "bonobo-config-ditem-utils.h"
 
 static gint
@@ -282,8 +282,8 @@ case CORBA_tk_ ## k:                                                            
 			member_name = CORBA_TypeCode_member_name (type, i, ev);
 			member_type = CORBA_TypeCode_member_type (type, i, ev);
 
-			if (CORBA_TypeCode_equal (member_type, TC_GNOME_ExtraAttributes, NULL)) {
-				GNOME_ExtraAttributes attr_list;
+			if (CORBA_TypeCode_equal (member_type, TC_GNOME_Desktop_ExtraAttributes, NULL)) {
+				GNOME_Desktop_ExtraAttributes attr_list;
 				GSList *extra_attrs = NULL;
 				gulong extra_length;
 
@@ -347,9 +347,9 @@ case CORBA_tk_ ## k:                                                            
 
 				members->_buffer [i].id = CORBA_string_dup (member_name);
 
-				subvalue = bonobo_arg_new (TC_GNOME_ExtraAttributes);
-				BONOBO_ARG_SET_GENERAL (subvalue, attr_list, TC_GNOME_ExtraAttributes,
-							GNOME_ExtraAttributes, ev);
+				subvalue = bonobo_arg_new (TC_GNOME_Desktop_ExtraAttributes);
+				BONOBO_ARG_SET_GENERAL (subvalue, attr_list, TC_GNOME_Desktop_ExtraAttributes,
+							GNOME_Desktop_ExtraAttributes, ev);
 				CORBA_any__copy (&members->_buffer [i].value, subvalue);
 
 				continue;
@@ -399,7 +399,7 @@ case CORBA_tk_ ## k:                                                            
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
 
-		if (CORBA_TypeCode_equal (type, TC_GNOME_DesktopEntryType, NULL)) {
+		if (CORBA_TypeCode_equal (type, TC_GNOME_Desktop_EntryType, NULL)) {
 			gchar *value, *up;
 
 			up = g_strup (g_strdup (de->value ? de->value : "UNKNOWN"));
@@ -517,7 +517,7 @@ case CORBA_tk_ ## k:                \
 		for (i = 0; i < members->_length; i++) {
 			DynamicAny_NameValuePair *pair = &members->_buffer [i];
 
-			if (CORBA_TypeCode_equal (pair->value._type, TC_GNOME_ExtraAttributes, NULL)) {
+			if (CORBA_TypeCode_equal (pair->value._type, TC_GNOME_Desktop_ExtraAttributes, NULL)) {
 				Bonobo_PropertySet *list = pair->value._value;
 
 				for (j = 0; j < list->_length; j++) {
@@ -565,7 +565,7 @@ case CORBA_tk_ ## k:                \
 		value = DynamicAny_DynEnum_get_as_string (dynenum, ev);
 
 		clear_dir_entry (de);
-		if (CORBA_TypeCode_equal (any->_type, TC_GNOME_DesktopEntryType, NULL))
+		if (CORBA_TypeCode_equal (any->_type, TC_GNOME_Desktop_EntryType, NULL))
 			de->value = g_strdown (g_strdup (value + 19));
 		else
 			de->value = g_strdup (value);
