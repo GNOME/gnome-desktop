@@ -13,6 +13,8 @@ echo ./update.sh da -- created new pot file and updated the da.po file
 
 elif [ "x$1" = "x" ]; then 
 
+echo "Building the $PACKAGE.pot ..."
+
 xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
@@ -22,7 +24,7 @@ xgettext --default-domain=$PACKAGE --directory=.. \
 
 else
 
-xgettext --default-domain=gfloppy --directory=.. \
+xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments --keyword=_ --keyword=N_ \
   --files-from=./POTFILES.in \
 && test ! -f $PACKAGE.po \
