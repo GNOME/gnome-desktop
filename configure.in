@@ -50,6 +50,50 @@ dnl properties-keyboard
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
+dnl MICO - Magic to extract the relevant information from
+dnl        various installed files
+
+AC_MSG_CHECKING(for MICO prefix)
+for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
+  if test -f $dir/mico-ld ; then
+     mico_prefix=`echo $dir | sed 's%/bin$%%'`
+  fi
+done
+
+if test ${mico_prefix+set} = set ; then
+  AC_MSG_RESULT($mico_prefix)
+else
+  AC_MSG_RESULT(not found)
+  AC_MSG_ERROR(MICO not found)
+fi
+
+MICO_VERS=`(. $mico_prefix/lib/mico-setup.sh ; echo $MICOVERSION)`
+
+# We assume here, to keep things simple, that nobody
+# has MICO older than 2.0.5. 
+
+if test $MICO_VERS = 2.0.5 ; then
+  MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lXt"
+else
+  MICO_LIBS="-lmico$MICO_VERS -lmicogtk$MICO_VERS"
+  AC_DEFINE(HAVE_MICO_ORB_RUN)
+fi
+
+for flag in `grep ^eval < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
+  case $flag in
+    -L*)
+      MICO_LIBS="$flag $MICO_LIBS"
+      ;;
+    -lm|-ldl|-ldld)
+      ;;
+    -l*)
+      MICO_LIBS="$MICO_LIBS $flag"
+      ;;
+  esac
+done
+AC_SUBST(MICO_LIBS)
+AC_SUBST(MICO_VARS)
+
 dnl gnome-session
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
 AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
