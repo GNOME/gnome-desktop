@@ -626,7 +626,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 static void
 save_lang_val(gpointer key, gpointer value, gpointer user_data)
 {
-        char *valptr, tmpbuf[1024];
+        char *valptr, tmpbuf[256];
 
         if(!key || !strcmp(key, "C"))
                 valptr = user_data;
@@ -676,7 +676,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 	if(under) {
 		char *old_loc = item->location;
 		item->location =
-			g_concat_dir_and_file(under,g_basename(item->location));
+			g_concat_dir_and_file(under,
+					      g_basename(item->location));
 		g_free(old_loc);
 	}
 
@@ -727,6 +728,18 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 
         if(item->name)
                 g_hash_table_foreach(item->name, save_lang_val, "Name");
+	if(!gnome_desktop_item_get_name(item, "C")) {
+		/* whoops, there is not default for name if no language is
+		 * found, this could cause this not to be loaded so set it
+		 * to the name of the file if possible, or "Unknown"
+		 * (not to be translated "C" is supposed to be english) */
+		char *name;
+		name = g_basename(item->location);
+		if(!name)
+			name = "Unknown";
+		gnome_config_set_string("Name", name);
+	}
+
         if(item->comment)
                 g_hash_table_foreach(item->comment, save_lang_val, "Comment");
         if(item->other_attributes)
@@ -1105,6 +1118,32 @@ perc_replaced:
 	return ret;
 }
 
+/* works sort of like strcmp(g_strstrip(s1),s2), but returns only
+ * TRUE or FALSE and does not modify s1, basically it tells if s2
+ * is the same as s1 stripped */
+static gboolean
+stripstreq(const char *s1, const char *s2)
+{
+	int len2;
+
+	/* skip over initial spaces */
+	while(*s1 == ' ' || *s1 == '\t')
+		s1++;
+	len2 = strlen(s2);
+	/* compare inner parts */
+	if(strncmp(s1, s2, len2) != 0)
+		return FALSE;
+	/* skip over beyond the equal parts */
+	s1 += len2;
+	for(; *s1; s1++) {
+		/* if we find anything but whitespace that bad */
+		if(*s1 != ' ' && *s1 != '\t')
+			return FALSE;
+	}
+
+	return TRUE;
+}
+
 /* replace %s, %f, %u or %F in exec with files and run, the trick here is
    that we will only replace %? in case it is a complete argument */
 static int
@@ -1148,19 +1187,16 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 	real_argv = g_alloca((real_argc + 2) * sizeof(char *));
 
 	for(i=0,j=0; i < real_argc && j < temp_argc; i++, j++) {
-		char buf[1024];
 		GList *li;
 		real_argv[i] = temp_argv[j];
 		/* we only replace once */
 		if(replaced)
 			continue;
 
-		strcpy(buf,real_argv[i]);
-		g_strstrip(buf);
-		if(strcmp(buf,"%s")!=0 &&
-		   strcmp(buf,"%f")!=0 &&
-		   strcmp(buf,"%u")!=0 &&
-		   strcmp(buf,"%F")!=0)
+		if(!stripstreq(real_argv[i],"%s") &&
+		   !stripstreq(real_argv[i],"%f")!=0 &&
+		   !stripstreq(real_argv[i],"%u")!=0 &&
+		   !stripstreq(real_argv[i],"%F")!=0)
 			continue;
 
 		/* replace the argument with the files we got passed */
