@@ -50,7 +50,7 @@ GNOME_INTRO_PICTURES = $(srcdir)/pix/terminal.gif \
 	$(srcdir)/pix/same-gnome.gif \
 	$(srcdir)/pix/gnomine.gif
 
-install-data-local:
+install-data-local: gnome-intro.html
 	$(mkinstalldirs) $(gnome_intro_helpdir)
 	$(mkinstalldirs) $(gnome_intro_helpdir)/pix
 	$(INSTALL_DATA) $(srcdir)/topic.dat $(gnome_intro_helpdir)/topic.dat
@@ -58,9 +58,13 @@ install-data-local:
 	$(INSTALL_DATA) $(GNOME_INTRO_HTML_FILES) $(gnome_intro_helpdir)
 	$(INSTALL_DATA) $(GNOME_INTRO_PICTURES) $(gnome_intro_helpdir)/pix
 
-INTRO_EXTRA_DIST = gnome-intro.sgml
-GNOME_INTRO_GIFS = pix/panel-basic.gif pix/panel-menu.gif \
-	pix/panel-menu-select.gif
+INTRO_EXTRA_DIST = $(srcdir)/gnome-intro.sgml
+GNOME_INTRO_GIFS = $(srcdir)/pix/panel-basic.gif $(srcdir)/pix/panel-menu.gif \
+	$(srcdir)/pix/panel-menu-select.gif
+
+EXTRA_DIST = $(INTRO_EXTRA_DIST) $(GNOME_INTRO_HTML_FILES) \
+	$(GNOME_INTRO_GIFS) $(GNOME_INTRO_PICTURES) $(srcdir)/topic.dat
+
 
 
 manual-html: gnome-intro/book01.html
