@@ -41,11 +41,11 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
-#include "libgnomeP.h"
-#include "gnome-ditem.h"
-#include "gnome-util.h"
-#include "gnome-exec.h"
-#include "gnome-url.h"
+#include <gnome-desktop/gnome-ditem.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-exec.h>
+#include <libgnome/gnome-url.h>
 #include <locale.h>
 #include <popt.h>
 
@@ -55,6 +55,9 @@
 
 #include <libgnomevfs/gnome-vfs-mime.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
+
+#define PATH_SEP '/'
+#define PATH_SEP_STR "/"
 
 struct _GnomeDesktopItem {
         int refcount;
@@ -126,7 +129,7 @@ ditem_load (const char *data_file,
 	CORBA_any *any;
 	gchar *moniker;
 
-	moniker = g_strdup_printf ("xmldb:" LIBGNOME_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb"
+	moniker = g_strdup_printf ("xmldb:" GNOME_DESKTOP_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb"
 				   "#ditem:%s", data_file);
 
 	CORBA_exception_init (&ev);
@@ -141,7 +144,7 @@ ditem_load (const char *data_file,
 	g_free (moniker);
 
 	CORBA_exception_init (&ev);
-	default_db = bonobo_get_object ("xmldb:" LIBGNOME_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb",
+	default_db = bonobo_get_object ("xmldb:" GNOME_DESKTOP_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb",
 					"Bonobo/ConfigDatabase", &ev);
 	if (BONOBO_EX (&ev)) {
 		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));

@@ -28,7 +28,7 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
-#include <libgnome/Gnome.h>
+#include <gnome-desktop/gnome-desktop.h>
 #include <bonobo/bonobo-arg.h>
 
 G_BEGIN_DECLS
