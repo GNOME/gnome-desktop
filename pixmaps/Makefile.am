@@ -81,7 +81,6 @@ pixmap_DATA =					\
 	gnome-term-tiger.png			\
 	gnome-eterm.png				\
 	gnome-xterm.png				\
-	gnome-terminal.png			\
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
