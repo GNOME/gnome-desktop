@@ -16,7 +16,7 @@ bin_PROGRAMS = gnome-about
 
 gnome_about_SOURCES =		\
 	gnome-about.c		\
-	authors.h
+	contributors.h
 
 authorsdir = $(datadir)/gnome-about
 authors_DATA = contributors.dat
