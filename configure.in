@@ -33,6 +33,18 @@ GNOME_MICRO=3
 GNOME_DISTRIBUTOR="GNOME.Org"
 GNOME_DATE="4th July, 2003"
 
+AC_ARG_WITH(gnome_distributor, [  --with-gnome-distributor=DISTRIBUTOR  Specify name of GNOME distributor])
+
+if test "x$with_gnome_distributor" != x ; then
+  GNOME_DISTRIBUTOR=$with_gnome_distributor
+fi
+
+AC_ARG_WITH(gnome_date, [  --with-gnome-date=DATE  Specify date of this GNOME distribution])
+
+if test "x$with_gnome_date" != x ; then
+  GNOME_DATE=$with_gnome_date
+fi
+
 AC_SUBST(GNOME_PLATFORM)
 AC_SUBST(GNOME_MINOR)
 AC_SUBST(GNOME_MICRO)
