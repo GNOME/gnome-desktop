@@ -2,6 +2,7 @@ appsdir = $(datadir)/gnome/apps
 
 Rootdir           = $(appsdir)
 Applicationsdir   = $(appsdir)/Applications
+Developmentdir	  = $(appsdir)/Development
 Graphicsdir       = $(appsdir)/Graphics
 Systemdir         = $(appsdir)/System
 Utilitiesdir      = $(appsdir)/Utilities
@@ -29,6 +30,7 @@ Directory_files = \
 	Multimedia.directory	\
 	Internet.directory	\
 	Games.directory		\
+	Development.directory   \
 	Settings.directory
 
 
@@ -76,6 +78,7 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(Internetdir)
 	$(mkinstalldirs) $(DESTDIR)$(Gamesdir)
 	$(mkinstalldirs) $(DESTDIR)$(Settingsdir)
+	$(mkinstalldirs) $(DESTDIR)$(Developmentdir)
 
 	$(INSTALL_DATA) $(srcdir)/Root.order $(DESTDIR)$(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Settings.order $(DESTDIR)$(Settingsdir)/.order
@@ -88,3 +91,4 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internetdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Settings.directory $(DESTDIR)$(Settingsdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/Development.directory $(DESTDIR)$(Developmentdir)/.directory
