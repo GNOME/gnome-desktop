@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-10-23 15:54-0400\n"
+"POT-Creation-Date: 2000-11-01 00:18+0100\n"
 "PO-Revision-Date: 2000-08-16 22:39+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -158,7 +158,7 @@ msgstr "Vindueshåndteringskompatibilitet"
 #: applets/desk-guide/deskguide_applet.c:138
 msgid ""
 "Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
 msgstr ""
 "Vindueshåndtering flytter dekorationsvindue istedet\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
@@ -166,7 +166,7 @@ msgstr ""
 #: applets/desk-guide/deskguide_applet.c:141
 msgid ""
 "Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
+"(FVWM, Sawfish)"
 msgstr ""
 "Vindueshåndtering ændrer aktivt område på alle skriveborde\n"
 "(FVWM, Sawfish)"
@@ -371,7 +371,7 @@ msgstr "Kan ikke oprette applet!\n"
 #. * for 24 hour format.  Those are the only two supported
 #: applets/gen_util/clock.c:349
 msgid "clock/hourformat=12"
-msgstr ""
+msgstr "clock/hourformat=24"
 
 #: applets/gen_util/clock.c:552
 msgid "Clock properties"
@@ -446,12 +446,12 @@ msgstr "Der er post."
 #: applets/gen_util/mailcheck.c:462
 #, c-format
 msgid "%d/%d messages"
-msgstr ""
+msgstr "%d/%d meddelelser"
 
 #: applets/gen_util/mailcheck.c:464
 #, c-format
 msgid "%d messages"
-msgstr ""
+msgstr "%d meddelelser"
 
 #: applets/gen_util/mailcheck.c:468
 msgid "No mail."
@@ -1170,7 +1170,7 @@ msgstr "Gnome terminal"
 
 #: gnome-terminal/gnome-terminal.c:243
 msgid "The GNOME terminal emulation program."
-msgstr "Gnome terminalemulerings-programmet."
+msgstr "Gnome terminal-emulerings."
 
 #: gnome-terminal/gnome-terminal.c:605 gnome-terminal/gnome-terminal.c:1165
 #: gnome-terminal/gnome-terminal.c:1175 gnome-terminal/gnome-terminal.c:2356
@@ -1606,28 +1606,28 @@ msgstr "Slår internetadresse for %s op"
 msgid "Hide"
 msgstr "Skjul"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "GNOME Login"
 msgstr "Gnome logind"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "Login"
 msgstr "Logind"
 
-#: gsm/gnome-login-check.c:261
+#: gsm/gnome-login-check.c:271
 msgid "Start with default programs"
 msgstr "Start med standardprogrammer"
 
-#: gsm/gnome-login-check.c:265
+#: gsm/gnome-login-check.c:275
 msgid "Reset all user settings"
 msgstr "Nulstil alle brugerindstillinger"
 
-#: gsm/gnome-login-check.c:276
+#: gsm/gnome-login-check.c:286
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "Gendan alle Gnome brugerindstillinger for %s?"
 
-#: gsm/gnome-login-check.c:308
+#: gsm/gnome-login-check.c:318
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1638,15 +1638,15 @@ msgstr ""
 "af den nuværende bruger, %s.\n"
 "Rét venligst ejerskabet af denne mappe."
 
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
 msgid "Try again"
 msgstr "Prøv igen"
 
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
 msgid "Continue"
 msgstr "Fortsæt"
 
-#: gsm/gnome-login-check.c:332
+#: gsm/gnome-login-check.c:342
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1658,6 +1658,28 @@ msgstr ""
 "Dette vil forhindre Gnome i at fungere korrekt.\n"
 "Det kan muligvis lade sig gøre at korrigere problemet\n"
 "ved at tilføje %s til filen /etc/hosts."
+
+#: gsm/gnome-login-check.c:367
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris 8\n"
+"or use the libICE.so.6 from the original Solaris 7.  You can\n"
+"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
+msgstr ""
+"Din udgave af libICE har en fejl som gør at gnome-session\n"
+"ikke opfører sig korrekt.\n"
+"\n"
+"Hvis du er på Solaris, bør du enten opgradere til Solaris 8\n"
+"eller benytte den originale  libICE.so.6 fra Solaris 7.  Du kan\n"
+"bare kopiere filen ind i /usr/openwin/lib.  (Tak går til Andy\n"
+"for information om denne fejl).\n"
+"\n"
+"Din Gnome session vil lukke ned når du lukker denne dialogboks."
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
@@ -2085,7 +2107,7 @@ msgstr ""
 "\n"
 "<p>\n"
 "<br>\n"
-"<H3>GNU infosider</H3>\n"
+"<H3>Gnu infosider</H3>\n"
 "<p>\n"
 "<UL>\n"
 
@@ -2720,7 +2742,7 @@ msgstr "Oplys knapper når musen er over dem"
 #. Fast but low quality scaling (Nearest versus Hyperbolic)
 #: panel/gnome-panel-properties.c:619
 msgid "Fast but low quality scaling of button icons"
-msgstr ""
+msgstr "Hurtig, men lav kvalitetsskalering af ikoner"
 
 #. Movement frame
 #: panel/gnome-panel-properties.c:674
@@ -3105,7 +3127,7 @@ msgstr "Appletter"
 #. Don't translate the first part of this string
 #: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
-msgstr ""
+msgstr "/panel/Config/clock_format=%H:%M:%S %p"
 
 #: panel/menu.c:2742
 msgid "You can only have one menu panel at a time."
@@ -3172,9 +3194,8 @@ msgid "Without pixmap"
 msgstr "Uden pil"
 
 #: panel/menu.c:3711 panel/panel_config.c:909
-#, fuzzy
 msgid "Ultra Tiny (12 pixels)"
-msgstr "Bitte (24 pixler)"
+msgstr "Mikro (12 pixler)"
 
 #: panel/menu.c:3712 panel/panel_config.c:917
 msgid "Tiny (24 pixels)"
@@ -3194,12 +3215,11 @@ msgstr "Stor (64 pixler)"
 
 #: panel/menu.c:3716 panel/panel_config.c:949
 msgid "Huge (80 pixels)"
-msgstr "Enorm (80 pixler)"
+msgstr "Kæmpe (80 pixler)"
 
 #: panel/menu.c:3717 panel/panel_config.c:957
-#, fuzzy
 msgid "Ridiculous (128 pixels)"
-msgstr "Bitte (24 pixler)"
+msgstr "Enorm (128 pixler)"
 
 #: panel/menu.c:3722 panel/panel_config.c:1111
 msgid "Standard"
@@ -3343,13 +3363,12 @@ msgid "Menu type"
 msgstr "Menutype"
 
 #: panel/menu-properties.c:407
-#, fuzzy
 msgid "Global main menu"
-msgstr "Global menu"
+msgstr "Global hovedmenu"
 
 #: panel/menu-properties.c:435 panel/menu-properties.c:484
 msgid "Normal menu"
-msgstr "Normalmenu"
+msgstr "Standardmenu"
 
 #: panel/menu-properties.c:468
 msgid "Distribution menu (if found): "
@@ -3373,12 +3392,12 @@ msgstr "Menusti"
 
 #: panel/menu-properties.c:526
 msgid "Use custom icon for panel button"
-msgstr ""
+msgstr "Benyt personlig ikon for startmenuen"
 
 #: panel/panel.c:848
 #, c-format
 msgid "Open URL: %s"
-msgstr ""
+msgstr "Åbn adresse: %2"
 
 #: panel/panel_config.c:433
 msgid "Hiding"
@@ -3509,14 +3528,3 @@ msgstr "Bredde"
 #: panel/swallow.c:224
 msgid "Height"
 msgstr "Højde"
-
-#, fuzzy
-#~ msgid "Application"
-#~ msgstr "Handling"
-
-#, fuzzy
-#~ msgid "PanelApplet"
-#~ msgstr "Printerapplet"
-
-#~ msgid "Can't execute copy (cp)"
-#~ msgstr "Kan ikke køre kopiering (cp)"
