@@ -543,7 +543,7 @@ gnome_desktop_item_new_from_uri (const char *uri,
 	info = gnome_vfs_file_info_new ();
 
 	result = gnome_vfs_get_file_info (uri, info,
-					  GNOME_VFS_FILE_INFO_DEFAULT);
+					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
 	if (result != GNOME_VFS_OK) {
 		g_set_error (error,
 			     /* FIXME: better errors */
@@ -598,7 +598,7 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		subfn = g_build_filename (uri, ".directory", NULL);
 		gnome_vfs_file_info_clear (info);
 		if (gnome_vfs_get_file_info (subfn, info,
-					     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
+					     GNOME_VFS_FILE_INFO_FOLLOW_LINKS) != GNOME_VFS_OK) {
 			gnome_vfs_file_info_unref (info);
 			g_free (subfn);
 
@@ -1923,7 +1923,7 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 	
 	if (item->location == NULL ||
 	    gnome_vfs_get_file_info (item->location, info,
-				     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
+				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS) != GNOME_VFS_OK) {
 		gnome_vfs_file_info_unref (info);
 		return GNOME_DESKTOP_ITEM_DISAPPEARED;
 	}
@@ -2300,7 +2300,7 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 			info = gnome_vfs_file_info_new ();
 
 			res = gnome_vfs_get_file_info (item->location, info,
-						       GNOME_VFS_FILE_INFO_DEFAULT);
+						       GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
 
 			if (res == GNOME_VFS_OK &&
 			    info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
