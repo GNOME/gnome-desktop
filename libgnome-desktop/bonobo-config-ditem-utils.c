@@ -30,6 +30,49 @@ key_compare_func (gconstpointer a, gconstpointer b)
 	return strcmp (de->name, b);
 }
 
+static GSList *
+read_string_as_vector (const gchar *value)
+{
+	GSList *retval = NULL;
+	gchar buffer [BUFSIZ+3], *pos, sep = ',';
+	const gchar *c;
+
+	if (!value)
+		return NULL;
+
+	pos = buffer; c = value;
+	while (*c != '\0') {
+		if (pos >= &buffer [BUFSIZ])
+			// Ooooops
+			break;
+
+		if (*c == '\\') {
+			c++;
+			if (*c == '\0')
+				break;
+			else
+				*pos++ = *c++;
+			continue;
+		}
+
+		if (*c == sep) {
+			*pos++ = '\0';
+			retval = g_slist_prepend (retval, g_strdup (buffer));
+			pos = buffer; c++;
+			continue;
+		}
+
+		*pos++ = *c;
+		c++;
+	}
+
+	*pos++ = '\0';
+	if (buffer [0] != '\0')
+		retval = g_slist_prepend (retval, g_strdup (buffer));
+
+	return g_slist_reverse (retval);
+}
+
 CORBA_any *
 bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environment *ev)
 {
@@ -59,20 +102,13 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		DynamicAny_DynSequence dynseq;
 		DynamicAny_DynAny_AnySeq *dynany_anyseq;
 		gulong length = 0, i;
-		gchar **array = NULL;
-		GSList *l;
+		GSList *l, *array = NULL;
 
 		if (de->subvalues)
 			length = g_slist_length (de->subvalues);
 		else if (de->value) {
-			gchar **ptr;
-
-			array = g_strsplit (de->value, ";", 0);
-			for (ptr = array; *ptr; ptr++)
-				length++;
-
-			if ((length > 0) && (array [length-1][0] == '\0'))
-				length--;
+			array = read_string_as_vector (de->value);
+			length = g_slist_length (array);
 		}
 
 		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), type, ev);
@@ -96,18 +132,27 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 				i++;
 			}
 		} else {
-			for (i = 0; i < length; i++) {
+			l = array;
+
+			i = 0;
+			while (l) {
 				DirEntry subentry;
 
 				memset (&subentry, 0, sizeof (DirEntry));
-				subentry.value = array [i];
+				subentry.value = l->data;
+
+				g_message (G_STRLOC ": `%s'", subentry.value);
 
 				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
 					(&subentry, type->subtypes [0], ev);
+
+				l = l->next;
+				i++;
 			}
 		}
 
-		g_strfreev (array);
+		g_slist_foreach (array, (GFunc) g_free, NULL);
+		g_slist_free (array);
 
 		DynamicAny_DynSequence_set_elements (dynseq, dynany_anyseq, ev);
 
