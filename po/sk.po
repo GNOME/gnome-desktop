@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.7\n"
-"POT-Creation-Date: 2000-11-15 14:49+0100\n"
+"POT-Creation-Date: 2000-11-20 12:34+0100\n"
 "PO-Revision-Date: 2000-11-15 14:43CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
@@ -213,7 +213,7 @@ msgstr "Vlastnosti..."
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:418 panel/gnome-run.c:336
 #: panel/launcher.c:613 panel/logout.c:72 panel/logout.c:133 panel/menu.c:5097
-#: panel/status.c:366 panel/swallow.c:381
+#: panel/status.c:366 panel/swallow.c:428
 msgid "Help"
 msgstr "Pomocník"
 
@@ -260,7 +260,7 @@ msgstr "Meno súboru s animáciou:"
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:594 panel/menu-properties.c:632
-#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:212
+#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:263
 msgid "Browse"
 msgstr "Prechádza»"
 
@@ -327,7 +327,7 @@ msgstr "%I:%M %p"
 #. This format string is used, to display the actual time in
 #. 24 hour format.
 #: applets/gen_util/clock.c:159 panel/foobar-widget.c:443
-#: panel/foobar-widget.c:802
+#: panel/foobar-widget.c:818
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -1427,7 +1427,7 @@ msgid "Edit"
 msgstr "Upravi»"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:857
+#: panel/foobar-widget.c:873
 msgid "Settings"
 msgstr "Nastavenie"
 
@@ -1656,22 +1656,22 @@ msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
 msgstr ""
-"Va¹a verzia libICE obsahuje chybu, ktorá spôsobuje nefunkènos»\n"
-"gnome-session.\n"
+"Va¹a verzia libICE obsahuje chybu, ktorá spôsobuje nefunkènos» "
+"gnome-session\n"
 "\n"
-"Ak pou¾ívate Solaris, buï prejdite na Solaris 8, alebo pou¾ite\n"
-"libICE.so.6 z originálneho Solarisu 7. Taktie¾ mô¾ete prekopírova»\n"
-"súbor do /usr/openwin/lib. (Vïaka Andymu Reitzovi za informácie\n"
-"o tejto chybe).\n"
+"Ak pou¾ívate Solaris, buï pou¾ite patch pre Solaris #108376-16\n"
+"alebo pou¾ite libICE.so.6 z originálneho Solarisu 7.\n"
+"Jednoducho tento súbor skopírujte do /usr/openwin/lib.\n"
+"(Vïaka Andymu Reitzovi za informáciu o tejto chybe).\n"
 "\n"
-"Po zatvorení tohoto dialógu bude va¹e GNOME sedenie ukoèené."
+"Po zatvorení tohoto dialógu bude va¹e GNOME sedenie ukonèené."
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
@@ -2261,7 +2261,7 @@ msgstr "Dopredu"
 msgid "Go to the next location in the history list"
 msgstr "Prejde na následujúce miesto podµa zoznamu histórie"
 
-#: help-browser/window.c:244 panel/extern.c:413
+#: help-browser/window.c:244 panel/extern.c:413 panel/swallow.c:89
 msgid "Reload"
 msgstr "Znovu naèíta»"
 
@@ -2307,29 +2307,29 @@ msgstr ""
 "Asi nemáte túto\n"
 "dokumentáciu nain¹talovanú."
 
-#: panel/applet.c:415
+#: panel/applet.c:418
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:454
+#: panel/applet.c:457
 msgid "Remove from panel"
 msgstr "Odstráni» z panelu"
 
-#: panel/applet.c:461
+#: panel/applet.c:464
 msgid "Move"
 msgstr "Presunú»"
 
-#: panel/applet.c:473 panel/menu.c:3263
+#: panel/applet.c:476 panel/menu.c:3263
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Nepodarilo sa nájs» súbor s obrázkom %s"
 
-#: panel/applet.c:474 panel/applet.c:480 panel/menu.c:3488 panel/menu.c:3493
+#: panel/applet.c:477 panel/applet.c:483 panel/menu.c:3488 panel/menu.c:3493
 #: panel/menu.c:4502 panel/menu.c:4507 panel/menu.c:4827
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:745
+#: panel/applet.c:748
 msgid "Can't find an empty spot"
 msgstr "Nepodarilo sa nájs» prázdne miesto"
 
@@ -2430,11 +2430,17 @@ msgstr "Betérie"
 #: panel/extern.c:404
 #, c-format
 msgid ""
-"%s applet appears to have died unexpectadly. Reload this applet?\n"
-"(If you choose not to reload it at this time you can always add it from the "
-"\"Applets\" submenu in the main menu)"
+"%s applet appears to have died unexpectedly.\n"
+"\n"
+"Reload this applet?\n"
+"\n"
+"(If you choose not to reload it at this time you can always add it from\n"
+"the \"Applets\" submenu in the main menu.)"
 msgstr ""
-"Aplet %s neoèakávane skonèil. Mám ho znovu spusti»?\n"
+"Aplet %s neoèakávane skonèil.\n"
+"\n"
+"Mám ho znovu spusti»?\n"
+"\n"
 "(Ak vyberiete Nie, mô¾ete ho v¾dy prida» pomocou podmenu \"Aplety\" v "
 "Hlavnom menu)"
 
@@ -2608,12 +2614,12 @@ msgstr "Prida» schôdzku..."
 msgid "Format"
 msgstr "Formát"
 
-#: panel/foobar-widget.c:840 panel/menu.c:3285 panel/menu.c:3290
+#: panel/foobar-widget.c:856 panel/menu.c:3285 panel/menu.c:3290
 #: panel/menu.c:4732
 msgid "Programs"
 msgstr "Programy"
 
-#: panel/foobar-widget.c:854 panel/menu.c:4704 panel/menu.c:4744
+#: panel/foobar-widget.c:870 panel/menu.c:4704 panel/menu.c:4744
 #: panel/menu.c:4750
 msgid "Favorites"
 msgstr "Obµúbené"
@@ -3191,7 +3197,7 @@ msgid "Applets"
 msgstr "Aplety"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:3128 panel/session.c:1279 panel/session.c:1473
+#: panel/menu.c:3128 panel/session.c:1279
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
@@ -3460,7 +3466,7 @@ msgstr "Cesta k menu"
 msgid "Use custom icon for panel button"
 msgstr "Pou¾i» vlastnú ikonu pre tlaèidlo panelu"
 
-#: panel/panel.c:876
+#: panel/panel.c:880
 #, c-format
 msgid "Open URL: %s"
 msgstr "Otvori» URL: %s"
@@ -3556,7 +3562,7 @@ msgstr "Vlastnosti panelu"
 msgid "Background"
 msgstr "Pozadie"
 
-#: panel/session.c:256
+#: panel/session.c:257
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -3564,34 +3570,47 @@ msgstr ""
 "Aplet nereaguje na po¾iadavku na ulo¾enie.\n"
 "Odstráni» aplet alebo èaka» ïalej?"
 
-#: panel/session.c:267
+#: panel/session.c:268
 msgid "Remove applet"
 msgstr "Odstráni» aplet"
 
-#: panel/session.c:270
+#: panel/session.c:271
 msgid "Continue waiting"
 msgstr "Poèka»"
 
-#: panel/session.c:279
+#: panel/session.c:280
 msgid "Timed out on sending session save to an applet"
 msgstr "Vypr¹al limit pri posielaní ukladania sedenia apletu"
 
-#: panel/swallow.c:184
+#. Don't translate the first part of this string
+#: panel/session.c:1473
+msgid "/panel/Config/clock_format=%l:%M:%S %p"
+msgstr "/panel/Config/clock_format=%l:%M:%S %p"
+
+#: panel/swallow.c:85
+msgid ""
+"A swallowed application appears to have died unexpectedly.\n"
+"Attempt to reload it?"
+msgstr ""
+"Pohltená aplikácia asi neoèakávane skonèila.\n"
+"Mám ho znovu spusti»?"
+
+#: panel/swallow.c:235
 msgid "Create swallow applet"
 msgstr "Vytvori» pohlcovací aplet"
 
-#: panel/swallow.c:200
+#: panel/swallow.c:251
 msgid "Title of application to swallow"
 msgstr "Titulok aplikácie pre pohltenie"
 
-#: panel/swallow.c:210
+#: panel/swallow.c:261
 msgid "Command (optional)"
 msgstr "Príkaz (nepovinné)"
 
-#: panel/swallow.c:221
+#: panel/swallow.c:272
 msgid "Width"
 msgstr "©írka"
 
-#: panel/swallow.c:234
+#: panel/swallow.c:285
 msgid "Height"
 msgstr "Vý¹ka"
