@@ -8,7 +8,6 @@ extern "C" {
 #include <stdio.h>
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <gnome.h>
 
 #define GNOME_TYPE_HINT			(gnome_hint_get_type ())
 #define GNOME_HINT(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_HINT, GnomeHint))
@@ -23,14 +22,14 @@ typedef struct _GnomeHintPrivate	GnomeHintPrivate;
 
 struct _GnomeHint
 {
-	GnomeDialog parent_instance;
+	GtkDialog parent_instance;
 
 	GnomeHintPrivate *_priv;
 };
 
 struct _GnomeHintClass
 {
-	GnomeDialogClass parent_class;
+	GtkDialogClass parent_class;
 };
 
 GType gnome_hint_get_type (void);

@@ -16,6 +16,9 @@
 #define GH_TEXT_FONT "sans bold 10"
 #define GH_TITLE_FONT "sans bold 20"
 
+#define GNOME_HINT_RESPONSE_NEXT 1
+#define GNOME_HINT_RESPONSE_PREV 2
+
 #define MINIMUM_WIDTH 380 
 #define MINIMUM_HEIGHT 180
 
@@ -58,9 +61,10 @@ static void gnome_hint_repaint (GtkWidget *widget, GdkDrawable *drawable,
 		 GnomeHint *gnome_hint);
 static void gnome_hint_notify (GObject *object, GParamSpec *pspec);
 static void gnome_hint_finalize (GObject *object);
-static void dialog_button_clicked(GtkWindow *window, int button, gpointer data);static void checkbutton_clicked(GtkWidget *w, gpointer data);
+static void dialog_response (GtkWindow *window, int button, gpointer data);
+static void checkbutton_clicked(GtkWidget *w, gpointer data);
 
-GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GnomeDialog, GNOME_TYPE_DIALOG)
+GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GtkDialog, GTK_TYPE_DIALOG)
 
 static void
 gnome_hint_class_init (GnomeHintClass *klass) {
@@ -85,7 +89,7 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
                                  GTK_POLICY_NEVER,
                                  GTK_POLICY_NEVER);
-  gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(gnome_hint)->vbox),sw,TRUE,TRUE,0);
+  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(gnome_hint)->vbox),sw,TRUE,TRUE,0);
 
   gnome_hint->_priv->hintlist = NULL;
   gnome_hint->_priv->curhint = NULL;
@@ -101,18 +105,19 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   gnome_hint->_priv->checkbutton = 
 	gtk_check_button_new_with_mnemonic(_("_Show Hints at Startup"));
 	
-  gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(gnome_hint)->vbox),
+  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(gnome_hint)->vbox),
 	gnome_hint->_priv->checkbutton,TRUE,TRUE,0);
 
   gtk_signal_connect(GTK_OBJECT(gnome_hint->_priv->checkbutton), "clicked",
 		     GTK_SIGNAL_FUNC(checkbutton_clicked), gnome_hint);
 
-  gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_PREV);
-  gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_NEXT);
-  gnome_dialog_append_button (GNOME_DIALOG(gnome_hint),GNOME_STOCK_BUTTON_OK);
+  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_BACK, GNOME_HINT_RESPONSE_PREV);
+  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_FORWARD, GNOME_HINT_RESPONSE_NEXT);
+  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_OK, GTK_RESPONSE_OK);
+  
+  gtk_signal_connect(GTK_OBJECT(gnome_hint), "response", 
+		     GTK_SIGNAL_FUNC(dialog_response), gnome_hint);
 
-  gtk_signal_connect(GTK_OBJECT(gnome_hint), "clicked", 
-		     GTK_SIGNAL_FUNC(dialog_button_clicked), gnome_hint);
 }
 
 static void gnome_hint_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) {
@@ -158,12 +163,12 @@ checkbutton_clicked(GtkWidget *w, gpointer data)
 }
 
 static void
-dialog_button_clicked(GtkWindow *window, int button, gpointer data)
+dialog_response(GtkWindow *window, int button, gpointer data)
 {
 	GnomeHint *gh = GNOME_HINT(data);
 
         switch(button) {
-        case 0:
+        case GNOME_HINT_RESPONSE_PREV:
 		if (gh->_priv->curhint == NULL)
                         return;
                 gh->_priv->curhint = gh->_priv->curhint->prev;
@@ -173,7 +178,7 @@ dialog_button_clicked(GtkWindow *window, int button, gpointer data)
                         "text",(char *)gh->_priv->curhint->data,
                         NULL);
                 break;
-        case 1:
+        case GNOME_HINT_RESPONSE_NEXT:
 		if (gh->_priv->curhint == NULL)
                         return;
                 gh->_priv->curhint = gh->_priv->curhint->next;
