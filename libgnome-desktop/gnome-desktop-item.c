@@ -551,6 +551,37 @@ gnome_desktop_item_new_from_uri (const char *uri,
 
 		return NULL;
 	}
+	
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
+	    info->type != GNOME_VFS_FILE_TYPE_REGULAR &&
+	    info->type != GNOME_VFS_FILE_TYPE_DIRECTORY) {
+		g_set_error (error,
+			     /* FIXME: better errors */
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_INVALID_TYPE,
+			     _("File '%s' is not a regular file or directory."),
+			     uri);
+
+		gnome_vfs_file_info_unref (info);
+
+		return NULL;
+	}	    	
+	
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
+	    info->type == GNOME_VFS_FILE_TYPE_REGULAR &&
+	    info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE &&
+	    strcmp (info->mime_type, "application/x-gnome-app-info") != 0) {
+		g_set_error (error,
+			     /* FIXME: better errors */
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_INVALID_TYPE,
+			     _("File '%s' has invalid MIME type: %s"),
+			     uri, info->mime_type);
+
+		gnome_vfs_file_info_unref (info);
+
+		return NULL;
+	}		
 
 	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
 		mtime = info->mtime;
@@ -565,7 +596,12 @@ gnome_desktop_item_new_from_uri (const char *uri,
 					     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
 			gnome_vfs_file_info_unref (info);
 			g_free (subfn);
-			return make_fake_directory (uri);
+
+			if (flags & GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS) {
+				return NULL;
+			} else {
+				return make_fake_directory (uri);
+			}
 		}
 
 		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)

@@ -123,7 +123,8 @@ typedef enum {
 	GNOME_DESKTOP_ITEM_ERROR_NO_EXEC_STRING /* Cannot launch due to no execute string */,
 	GNOME_DESKTOP_ITEM_ERROR_BAD_EXEC_STRING /* Cannot launch due to bad execute string */,
 	GNOME_DESKTOP_ITEM_ERROR_NO_URL /* No URL on a url entry*/,
-	GNOME_DESKTOP_ITEM_ERROR_NOT_LAUNCHABLE /* Not a launchable type of item */
+	GNOME_DESKTOP_ITEM_ERROR_NOT_LAUNCHABLE /* Not a launchable type of item */,
+	GNOME_DESKTOP_ITEM_ERROR_INVALID_TYPE /* Not of type application/x-gnome-app-info */
 } GnomeDesktopItemError;
 
 /* Note that functions can also return the G_FILE_ERROR_* errors */
