@@ -16,6 +16,7 @@ static author authors[] = {
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
 	{ "Federico Mena-Quintero", "<federico@gimp.org>" },
 	{ "The Squeaky Rubber Gnome", "http://www.gnome.org/squeaky-rubber-gnome.shtml" },
+        { "Tomas Ögren", "<stric@ing.umu.se>" },
 	{ "", "" },
 	{ N_("... and many more"), "" },
 	{ NULL, NULL }
