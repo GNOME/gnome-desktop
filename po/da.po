@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
 "POT-Creation-Date: 2000-08-16 22:50+0200\n"
-"PO-Revision-Date: 2000-12-12 22:39+01:00\n"
+"PO-Revision-Date: 2000-12-18 22:39+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -207,24 +207,24 @@ msgstr ""
 msgid "Desk Guide Alert"
 msgstr "Skrivebordsguideadvarsel"
 
-#: applets/desk-guide/deskguide_applet.c:236 applets/fish/fish.c:824
+#: applets/desk-guide/deskguide_applet.c:236 applets/fish/fish.c:905
 #: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:931
 #: panel/drawer.c:417 panel/launcher.c:611 panel/menu.c:1649 panel/menu.c:5108
 msgid "Properties..."
 msgstr "Egenskaber..."
 
-#: applets/desk-guide/deskguide_applet.c:242 applets/fish/fish.c:831
+#: applets/desk-guide/deskguide_applet.c:242 applets/fish/fish.c:912
 #: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1403
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:937
-#: gnome-terminal/gnome-terminal.c:1697 gsm/session-properties.c:182
+#: gnome-terminal/gnome-terminal.c:1703 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:420 panel/gnome-run.c:340
 #: panel/launcher.c:614 panel/logout.c:72 panel/logout.c:133 panel/menu.c:5117
 #: panel/status.c:366 panel/swallow.c:428
 msgid "Help"
 msgstr "Hjælp"
 
-#: applets/desk-guide/deskguide_applet.c:249 applets/fish/fish.c:838
+#: applets/desk-guide/deskguide_applet.c:249 applets/fish/fish.c:919
 #: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1409
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:944
 msgid "About..."
@@ -242,56 +242,80 @@ msgstr "Globalt"
 msgid "Desk Guide Settings"
 msgstr "Skrivebordsguideindstillinger"
 
-#: applets/fish/fish.c:340 applets/fish/fish.c:671
+#: applets/fish/fish.c:362 applets/fish/fish.c:736
 #, no-c-format
 msgid "%s the Fish"
 msgstr "Fisken %s"
 
-#: applets/fish/fish.c:341
+#: applets/fish/fish.c:363
 #, c-format
 msgid "%s the GNOME Fish Says:"
-msgstr "Gnome fisken %s siger:"
+msgstr "Gnome-fisken %s siger:"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:433
+msgid ""
+"Warning:  The command appears to be something actually useful.\n"
+"Since this is a useless applet, you may not want to do this.\n"
+"We strongly advise you against usage of wanda for anything\n"
+"which would make the applet \"practical\" or useful."
+msgstr ""
+"Advarsel: Kommandoen ser ud til at lave noget der faktisk er nyttigt.\n"
+"Eftersom dette er en ubrugelig applet, ønsker du nok ikke at gøre dette.\n"
+"Vi anbefaler på det kraftigste mod at bruge wanda til noget\n"
+"som kan gøre appletten \"praktisk\" eller nyttig."
+
+#: applets/fish/fish.c:472
 msgid "GNOME Fish Properties"
 msgstr "Egenskaber for fisk"
 
-#: applets/fish/fish.c:436
+#: applets/fish/fish.c:482
 msgid "Your GNOME Fish's Name:"
 msgstr "Navnet på din Gnome-fisk:"
 
-#: applets/fish/fish.c:450
+#: applets/fish/fish.c:496
 msgid "The Animation Filename:"
 msgstr "Animationsfilnavn:"
 
-#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
-#: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1313
+#: applets/fish/fish.c:498 applets/gen_util/mailcheck.c:940
+#: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1319
 #: panel/menu-properties.c:594 panel/menu-properties.c:632
 #: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:263
 msgid "Browse"
 msgstr "Gennemse"
 
-#: applets/fish/fish.c:465
+#: applets/fish/fish.c:511
+msgid "Command to execute when fish is clicked:"
+msgstr "Kommando at udføre når fisken bliver klikket på:"
+
+#: applets/fish/fish.c:525
 msgid "Frames In Animation:"
 msgstr "Billeder i animationen:"
 
-#: applets/fish/fish.c:481
+#: applets/fish/fish.c:541
 msgid "Pause per frame (s):"
 msgstr "Pause for hvert billede (s):"
 
-#: applets/fish/fish.c:494
+#: applets/fish/fish.c:554
 msgid "Rotate on vertical panels"
 msgstr "Vend om på lodrette paneler"
 
-#: applets/fish/fish.c:503
+#: applets/fish/fish.c:563
 msgid "Fish"
 msgstr "Fisk"
 
-#: applets/fish/fish.c:572 gnome-hint/gnome-hint.c:260
-msgid "You do not have fortune installed."
-msgstr "Du har ingen 'spåkager' installeret."
+#: applets/fish/fish.c:632
+msgid ""
+"You do not have fortune installed or you have not specified a program to "
+"run.\n"
+"\n"
+"Please refer to fish properties dialog."
+msgstr ""
+"Du har ikke 'fortune' installeret, eller du har ikke angivet et program "
+"der skal køres.\n"
+"\n"
+"Kig venligst på 'fisk' egenskabsdialog."
 
-#: applets/fish/fish.c:585
+#: applets/fish/fish.c:649
 msgid ""
 "The water needs changing!\n"
 "(Look at today's date)"
@@ -299,15 +323,15 @@ msgstr ""
 "Vandet skal skiftes!\n"
 "(Kig på dags dato)"
 
-#: applets/fish/fish.c:680
+#: applets/fish/fish.c:745
 msgid "(with minor help from George)"
 msgstr "(med lidt hjælp fra George)"
 
-#: applets/fish/fish.c:684
+#: applets/fish/fish.c:749
 msgid "The GNOME Fish Applet"
 msgstr "Gnome fisk-appletten"
 
-#: applets/fish/fish.c:687
+#: applets/fish/fish.c:752
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -1067,23 +1091,23 @@ msgstr ""
 "Vælg venligst en almindelig kørbar tekstbehandler i gnome-edit\n"
 "cappletten i Gnome kontrolcentret."
 
-#: gnome-hint/gnome-hint.c:34
+#: gnome-hint/gnome-hint.c:35
 msgid "Start in hint browsing mode"
 msgstr "Start i hint-tilstand"
 
-#: gnome-hint/gnome-hint.c:38
+#: gnome-hint/gnome-hint.c:39
 msgid "Start in motd mode"
 msgstr "Start i dagens besked-tilstand"
 
-#: gnome-hint/gnome-hint.c:42
+#: gnome-hint/gnome-hint.c:43
 msgid "Start in fortune mode"
 msgstr "Start i spåkone-tilstand"
 
-#: gnome-hint/gnome-hint.c:46
+#: gnome-hint/gnome-hint.c:47
 msgid "Start in session login mode (used from gsm)"
 msgstr "Start i sessionslogind-tilstand (brugt fra gsm)"
 
-#: gnome-hint/gnome-hint.c:57
+#: gnome-hint/gnome-hint.c:58
 msgid ""
 "Click on the GNOME foot icon to open the\n"
 "Main Menu.  This menu contains all\n"
@@ -1093,11 +1117,15 @@ msgstr ""
 "hovedmenuen. Denne menu indeholder alle\n"
 "Gnome anvendelser, værktøjer og kommandoer."
 
-#: gnome-hint/gnome-hint.c:388
+#: gnome-hint/gnome-hint.c:271
+msgid "You do not have fortune installed."
+msgstr "Du har ingen 'spåkager' installeret."
+
+#: gnome-hint/gnome-hint.c:399
 msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
 msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
 
-#: gnome-hint/gnome-hint.c:413
+#: gnome-hint/gnome-hint.c:424
 msgid ""
 "You've chosen to disable the startup hint.\n"
 "To re-enable it, choose \"Startup Hint\"\n"
@@ -1107,23 +1135,23 @@ msgstr ""
 "For at bruge det igen, vælg \"Opstartstips\"\n"
 "i Gnome kontrolcentret"
 
-#: gnome-hint/gnome-hint.c:509
+#: gnome-hint/gnome-hint.c:524
 msgid "No message of the day found!"
 msgstr "Fandt ingen besked for idag!"
 
-#: gnome-hint/gnome-hint.c:564
+#: gnome-hint/gnome-hint.c:579
 msgid "Message of The Day"
 msgstr "Dagens meddelelse"
 
-#: gnome-hint/gnome-hint.c:571
+#: gnome-hint/gnome-hint.c:586
 msgid "Fortune"
 msgstr "Spåkage"
 
-#: gnome-hint/gnome-hint.c:579
+#: gnome-hint/gnome-hint.c:594
 msgid "Gnome hint"
 msgstr "Gnome tip"
 
-#: gnome-hint/gnome-hint.c:604
+#: gnome-hint/gnome-hint.c:619
 msgid "Display this dialog next time"
 msgstr "Vis denne dialogboks næste gang"
 
@@ -1161,32 +1189,32 @@ msgstr "Vis \"Dagens meddelelse\" istedetfor tips"
 msgid "Message of the day file to use: "
 msgstr "\"Dagens meddelelse\"-fil: "
 
-#: gnome-terminal/gnome-terminal.c:224
+#: gnome-terminal/gnome-terminal.c:228
 msgid "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
 msgstr "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
 
-#: gnome-terminal/gnome-terminal.c:226
+#: gnome-terminal/gnome-terminal.c:230
 msgid "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
 msgstr "Gnome terminal:     Miguel de Icaza (miguel@kernel.org)"
 
-#: gnome-terminal/gnome-terminal.c:228
+#: gnome-terminal/gnome-terminal.c:232
 msgid "    Erik Troan (ewt@redhat.com)"
 msgstr "    Erik Troan (ewt@redhat.com)"
 
-#: gnome-terminal/gnome-terminal.c:245
+#: gnome-terminal/gnome-terminal.c:249
 msgid "GNOME Terminal"
 msgstr "Gnome terminal"
 
-#: gnome-terminal/gnome-terminal.c:248
+#: gnome-terminal/gnome-terminal.c:252
 msgid "The GNOME terminal emulation program."
 msgstr "Gnome terminalemulerings-programmet."
 
-#: gnome-terminal/gnome-terminal.c:610 gnome-terminal/gnome-terminal.c:1170
-#: gnome-terminal/gnome-terminal.c:1180 gnome-terminal/gnome-terminal.c:2485
+#: gnome-terminal/gnome-terminal.c:615 gnome-terminal/gnome-terminal.c:1176
+#: gnome-terminal/gnome-terminal.c:1186 gnome-terminal/gnome-terminal.c:2500
 msgid "Default"
 msgstr "Standard"
 
-#: gnome-terminal/gnome-terminal.c:788
+#: gnome-terminal/gnome-terminal.c:793
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1196,264 +1224,264 @@ msgstr ""
 "genindstille dette vindue så det passer med\n"
 "standard indstillingen for den nye klasse?"
 
-#: gnome-terminal/gnome-terminal.c:968
+#: gnome-terminal/gnome-terminal.c:973
 msgid "Linux console"
 msgstr "Linuxkonsol"
 
-#: gnome-terminal/gnome-terminal.c:969
+#: gnome-terminal/gnome-terminal.c:974
 msgid "Color Xterm"
 msgstr "Xterm i farver"
 
-#: gnome-terminal/gnome-terminal.c:970
+#: gnome-terminal/gnome-terminal.c:975
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:971
+#: gnome-terminal/gnome-terminal.c:976
 msgid "Custom"
 msgstr "Personlig"
 
-#: gnome-terminal/gnome-terminal.c:976
+#: gnome-terminal/gnome-terminal.c:981
 msgid "White on black"
 msgstr "Hvidt på sort"
 
-#: gnome-terminal/gnome-terminal.c:977
+#: gnome-terminal/gnome-terminal.c:982
 msgid "Black on white"
 msgstr "Sort på hvidt"
 
-#: gnome-terminal/gnome-terminal.c:978
+#: gnome-terminal/gnome-terminal.c:983
 msgid "Green on black"
 msgstr "Grønt på sort"
 
-#: gnome-terminal/gnome-terminal.c:979
+#: gnome-terminal/gnome-terminal.c:984
 msgid "Black on light yellow"
 msgstr "Sort på lysegult"
 
-#: gnome-terminal/gnome-terminal.c:980
+#: gnome-terminal/gnome-terminal.c:985
 msgid "Custom colors"
 msgstr "Egne farver"
 
-#: gnome-terminal/gnome-terminal.c:985
+#: gnome-terminal/gnome-terminal.c:990
 msgid "Left"
 msgstr "Venstre"
 
-#: gnome-terminal/gnome-terminal.c:986
+#: gnome-terminal/gnome-terminal.c:991
 msgid "Right"
 msgstr "Højre"
 
-#: gnome-terminal/gnome-terminal.c:987
+#: gnome-terminal/gnome-terminal.c:992
 msgid "Hidden"
 msgstr "Skjult"
 
-#: gnome-terminal/gnome-terminal.c:1129
+#: gnome-terminal/gnome-terminal.c:1135
 msgid "General"
 msgstr "Generelt"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:1132
+#: gnome-terminal/gnome-terminal.c:1138
 msgid "Font:"
 msgstr "Skrifttype:"
 
-#: gnome-terminal/gnome-terminal.c:1154 panel/gnome-run.c:192
+#: gnome-terminal/gnome-terminal.c:1160 panel/gnome-run.c:192
 #: panel/gnome-run.c:265
 msgid "Browse..."
 msgstr "Gennemse..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:1162
+#: gnome-terminal/gnome-terminal.c:1168
 msgid "Terminal Class"
 msgstr "Terminalklasse"
 
 #. Toggle the use of bold
-#: gnome-terminal/gnome-terminal.c:1191
+#: gnome-terminal/gnome-terminal.c:1197
 msgid "Enable bold text"
 msgstr "Aktivér fed tekst"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:1207
+#: gnome-terminal/gnome-terminal.c:1213
 msgid "Blinking cursor"
 msgstr "Blinkende markør"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:1216
+#: gnome-terminal/gnome-terminal.c:1222
 msgid "Hide menu bar"
 msgstr "Skjul menulinjen"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:1225
+#: gnome-terminal/gnome-terminal.c:1231
 msgid "Silence Terminal bell"
 msgstr "Tavs terminalklokke"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:1234
+#: gnome-terminal/gnome-terminal.c:1240
 msgid "Swap DEL/Backspace"
 msgstr "Ombyt forlæns-/baglænsslet"
 
 #. --login by default
-#: gnome-terminal/gnome-terminal.c:1243
+#: gnome-terminal/gnome-terminal.c:1249
 msgid "Use --login by default"
 msgstr "Brug --login som standard"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:1252
+#: gnome-terminal/gnome-terminal.c:1258
 msgid "Select-by-word characters"
 msgstr "Vælg-ved-ord tegn"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1274 panel/panel_config.c:1201
+#: gnome-terminal/gnome-terminal.c:1280 panel/panel_config.c:1201
 msgid "Image"
 msgstr "Billede"
 
-#: gnome-terminal/gnome-terminal.c:1276 panel/menu.c:4148
+#: gnome-terminal/gnome-terminal.c:1282 panel/menu.c:4148
 msgid "Background type"
 msgstr "Baggrundstype"
 
-#: gnome-terminal/gnome-terminal.c:1286 panel/menu.c:4105
+#: gnome-terminal/gnome-terminal.c:1292 panel/menu.c:4105
 msgid "None"
 msgstr "Ingen"
 
-#: gnome-terminal/gnome-terminal.c:1294
+#: gnome-terminal/gnome-terminal.c:1300
 msgid "Background pixmap"
 msgstr "Baggrundsbillede"
 
-#: gnome-terminal/gnome-terminal.c:1310
+#: gnome-terminal/gnome-terminal.c:1316
 msgid "Pixmap file:"
 msgstr "Billedfil:"
 
-#: gnome-terminal/gnome-terminal.c:1325
+#: gnome-terminal/gnome-terminal.c:1331
 msgid "Background pixmap scrolls"
 msgstr "Baggrundsbillede ruller med"
 
-#: gnome-terminal/gnome-terminal.c:1338
+#: gnome-terminal/gnome-terminal.c:1344
 msgid "Transparent"
 msgstr "Gennemsigtig"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1365
+#: gnome-terminal/gnome-terminal.c:1371
 msgid "Background should be shaded"
 msgstr "Baggrund skal skygges"
 
-#: gnome-terminal/gnome-terminal.c:1379
+#: gnome-terminal/gnome-terminal.c:1385
 msgid "Colors"
 msgstr "Farver"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1382
+#: gnome-terminal/gnome-terminal.c:1388
 msgid "Color scheme:"
 msgstr "Farveskema:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1392
+#: gnome-terminal/gnome-terminal.c:1398
 msgid "Foreground color:"
 msgstr "Forgrundsfarve:"
 
-#: gnome-terminal/gnome-terminal.c:1400
+#: gnome-terminal/gnome-terminal.c:1406
 msgid "Background color:"
 msgstr "Baggrundsfarve:"
 
-#: gnome-terminal/gnome-terminal.c:1407
+#: gnome-terminal/gnome-terminal.c:1413
 msgid "Color palette:"
 msgstr "Farvepalette:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1430
+#: gnome-terminal/gnome-terminal.c:1436
 msgid "Fore/Background Colour:"
 msgstr "For/baggrundsfarve:"
 
-#: gnome-terminal/gnome-terminal.c:1444
+#: gnome-terminal/gnome-terminal.c:1450
 msgid "Scrolling"
 msgstr "Rullebjælke"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1447
+#: gnome-terminal/gnome-terminal.c:1453
 msgid "Scrollbar position"
 msgstr "Rullebjælkeplacering"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1458
+#: gnome-terminal/gnome-terminal.c:1464
 msgid "Scrollback lines"
 msgstr "Antal linjer der kan rulles tilbage"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1472
+#: gnome-terminal/gnome-terminal.c:1478
 msgid "Scroll on keystroke"
 msgstr "Rul ned ved tastetryk"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1481
+#: gnome-terminal/gnome-terminal.c:1487
 msgid "Scroll on output"
 msgstr "Rul ned ved uddata"
 
-#: gnome-terminal/gnome-terminal.c:1513
+#: gnome-terminal/gnome-terminal.c:1519
 msgid "Color selector"
 msgstr "Farvevælger"
 
-#: gnome-terminal/gnome-terminal.c:1619 gnome-terminal/gnome-terminal.c:1636
+#: gnome-terminal/gnome-terminal.c:1625 gnome-terminal/gnome-terminal.c:1642
 msgid "_New terminal"
 msgstr "_Ny terminal"
 
-#: gnome-terminal/gnome-terminal.c:1619 gnome-terminal/gnome-terminal.c:1636
+#: gnome-terminal/gnome-terminal.c:1625 gnome-terminal/gnome-terminal.c:1642
 msgid "Creates a new terminal window"
 msgstr "Opretter et nyt terminal vindue"
 
-#: gnome-terminal/gnome-terminal.c:1621
+#: gnome-terminal/gnome-terminal.c:1627
 msgid "_Hide menubar"
 msgstr "_Skjul menulinje"
 
-#: gnome-terminal/gnome-terminal.c:1623
+#: gnome-terminal/gnome-terminal.c:1629
 msgid "_Close terminal"
 msgstr "_Luk terminal"
 
-#: gnome-terminal/gnome-terminal.c:1638
+#: gnome-terminal/gnome-terminal.c:1644
 msgid "_Show menubar"
 msgstr "_Vis menulinje"
 
-#: gnome-terminal/gnome-terminal.c:1638
+#: gnome-terminal/gnome-terminal.c:1644
 msgid "Toggles whether or not the menubar is displayed."
 msgstr "Vælg mellem at vise eller skjule menulinjen."
 
-#: gnome-terminal/gnome-terminal.c:1640
+#: gnome-terminal/gnome-terminal.c:1646
 msgid "_Secure keyboard"
 msgstr "Beslaglæg tastaturfokus"
 
-#: gnome-terminal/gnome-terminal.c:1641
+#: gnome-terminal/gnome-terminal.c:1647
 msgid "Toggles whether or not the keyboard is grabbed by the terminal."
 msgstr "Vælg om tastaturet opsnappes af terminalen eller ej."
 
-#: gnome-terminal/gnome-terminal.c:1644 gnome-terminal/gnome-terminal.c:1673
+#: gnome-terminal/gnome-terminal.c:1650 gnome-terminal/gnome-terminal.c:1679
 msgid "_Reset Terminal"
 msgstr "_Genstart terminal"
 
-#: gnome-terminal/gnome-terminal.c:1645 gnome-terminal/gnome-terminal.c:1674
+#: gnome-terminal/gnome-terminal.c:1651 gnome-terminal/gnome-terminal.c:1680
 msgid "Reset and _Clear"
 msgstr "Genstart og _ryd"
 
-#: gnome-terminal/gnome-terminal.c:1655
+#: gnome-terminal/gnome-terminal.c:1661
 msgid "_Open in browser"
 msgstr "Å_bn i browser"
 
-#: gnome-terminal/gnome-terminal.c:1676
+#: gnome-terminal/gnome-terminal.c:1682
 msgid "C_olor selector..."
 msgstr "_Farvevælger..."
 
-#: gnome-terminal/gnome-terminal.c:1682
+#: gnome-terminal/gnome-terminal.c:1688
 msgid "File"
 msgstr "Filer"
 
-#: gnome-terminal/gnome-terminal.c:1687
+#: gnome-terminal/gnome-terminal.c:1693
 msgid "Edit"
 msgstr "Redigér"
 
-#: gnome-terminal/gnome-terminal.c:1692 gsm/gsm-client-row.c:59
+#: gnome-terminal/gnome-terminal.c:1698 gsm/gsm-client-row.c:59
 #: panel/foobar-widget.c:904
 msgid "Settings"
 msgstr "Opsætning"
 
-#: gnome-terminal/gnome-terminal.c:2150
+#: gnome-terminal/gnome-terminal.c:2156
 #, c-format
 msgid "The error was: %s"
 msgstr "Fejlen var: %s"
 
-#: gnome-terminal/gnome-terminal.c:2151
+#: gnome-terminal/gnome-terminal.c:2157
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -1467,7 +1495,7 @@ msgstr ""
 "Læs venligst linux/Documentation/Changes for at finde\n"
 "ud af hvordan de opsættes korrekt."
 
-#: gnome-terminal/gnome-terminal.c:2156
+#: gnome-terminal/gnome-terminal.c:2162
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -1478,131 +1506,139 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2688
+#: gnome-terminal/gnome-terminal.c:2710
 msgid "Terminal class name"
 msgstr "Terminalklassenavn"
 
-#: gnome-terminal/gnome-terminal.c:2688
+#: gnome-terminal/gnome-terminal.c:2710
 msgid "TCLASS"
 msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2691
+#: gnome-terminal/gnome-terminal.c:2713
 msgid "Specifies font name"
 msgstr "Angiv skrifttypenavn"
 
-#: gnome-terminal/gnome-terminal.c:2691
+#: gnome-terminal/gnome-terminal.c:2713
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2694
+#: gnome-terminal/gnome-terminal.c:2716
 msgid "Do not start up shells as login shells"
 msgstr "Start ikke kommandoskal som logindskal"
 
-#: gnome-terminal/gnome-terminal.c:2697
+#: gnome-terminal/gnome-terminal.c:2719
 msgid "Start up shells as login shells"
 msgstr "Start kommandoskal som logindskal"
 
-#: gnome-terminal/gnome-terminal.c:2700
+#: gnome-terminal/gnome-terminal.c:2722
 msgid "Specifies the geometry for the main window"
 msgstr "Angiv geometri for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:2700
+#: gnome-terminal/gnome-terminal.c:2722
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:2703
+#: gnome-terminal/gnome-terminal.c:2725
 msgid "Execute this program instead of a shell"
 msgstr "Kør dette program i stedet for en skal"
 
-#: gnome-terminal/gnome-terminal.c:2703 gnome-terminal/gnome-terminal.c:2706
+#: gnome-terminal/gnome-terminal.c:2725 gnome-terminal/gnome-terminal.c:2728
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: gnome-terminal/gnome-terminal.c:2706
+#: gnome-terminal/gnome-terminal.c:2728
 msgid "Execute this program the same way as xterm does"
 msgstr "Kør dette program ligesom en xterm ville gøre"
 
-#: gnome-terminal/gnome-terminal.c:2709
+#: gnome-terminal/gnome-terminal.c:2731
 msgid "Foreground color"
 msgstr "Forgrundsfarve"
 
-#: gnome-terminal/gnome-terminal.c:2709 gnome-terminal/gnome-terminal.c:2712
+#: gnome-terminal/gnome-terminal.c:2731 gnome-terminal/gnome-terminal.c:2734
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:2712
+#: gnome-terminal/gnome-terminal.c:2734
 msgid "Background color"
 msgstr "Baggrundsfarve"
 
-#: gnome-terminal/gnome-terminal.c:2715
+#: gnome-terminal/gnome-terminal.c:2737
 msgid "Update utmp entry"
 msgstr "Opdatér utmp punkt"
 
-#: gnome-terminal/gnome-terminal.c:2715
+#: gnome-terminal/gnome-terminal.c:2737
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2718
+#: gnome-terminal/gnome-terminal.c:2740
 msgid "Do not update utmp entry"
 msgstr "Opdatér ikke UTMP punkt"
 
-#: gnome-terminal/gnome-terminal.c:2718
+#: gnome-terminal/gnome-terminal.c:2740
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2721
+#: gnome-terminal/gnome-terminal.c:2743
 msgid "Update wtmp entry"
 msgstr "Opdatér UTMP punkt"
 
-#: gnome-terminal/gnome-terminal.c:2721
+#: gnome-terminal/gnome-terminal.c:2743
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2724
+#: gnome-terminal/gnome-terminal.c:2746
 msgid "Do not update wtmp entry"
 msgstr "Opdatér ikke UTMP/WTMP punkter"
 
-#: gnome-terminal/gnome-terminal.c:2724
+#: gnome-terminal/gnome-terminal.c:2746
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2727
+#: gnome-terminal/gnome-terminal.c:2749
 msgid "Update lastlog entry"
 msgstr "Opdatér lastlog-punkt"
 
-#: gnome-terminal/gnome-terminal.c:2727
+#: gnome-terminal/gnome-terminal.c:2749
 msgid "LASTLOG"
 msgstr "LASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2730
+#: gnome-terminal/gnome-terminal.c:2752
 msgid "Do not update lastlog entry"
 msgstr "Opdatér ikke lastlog-punkt"
 
-#: gnome-terminal/gnome-terminal.c:2730
+#: gnome-terminal/gnome-terminal.c:2752
 msgid "NOLASTLOG"
 msgstr "NOLASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2733
+#: gnome-terminal/gnome-terminal.c:2755
 msgid "Set the window title"
 msgstr "Angiv vinduestitel"
 
-#: gnome-terminal/gnome-terminal.c:2733
+#: gnome-terminal/gnome-terminal.c:2755
 msgid "TITLE"
 msgstr "TITLE"
 
-#: gnome-terminal/gnome-terminal.c:2736
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "Set the window icon"
+msgstr "Angiv vinduesikon"
+
+#: gnome-terminal/gnome-terminal.c:2758
+msgid "ICON"
+msgstr "ICON"
+
+#: gnome-terminal/gnome-terminal.c:2761
 msgid "Set the TERM variable"
 msgstr "Angiv TERM variablen"
 
-#: gnome-terminal/gnome-terminal.c:2736
+#: gnome-terminal/gnome-terminal.c:2761
 msgid "TERMNAME"
 msgstr "TERMNAME"
 
-#: gnome-terminal/gnome-terminal.c:2739
+#: gnome-terminal/gnome-terminal.c:2764
 msgid "Try to start a TerminalFactory"
 msgstr "Forsøg at starte en TerminalFactory"
 
-#: gnome-terminal/gnome-terminal.c:2742
+#: gnome-terminal/gnome-terminal.c:2767
 msgid "Try to create the terminal with the TerminalFactory"
 msgstr "Prøv at oprette terminalen med TerminalFactory'en"
 
@@ -2462,15 +2498,15 @@ msgstr ""
 "(Hvis du vælger ikke at genindlæse den nu, kan du altid tilføje den fra "
 "'Applet' undermenuen i hoved-menuen)"
 
-#: panel/extern.c:633
+#: panel/extern.c:735
 msgid "Couldn't add applet"
 msgstr "Kunne ikke tilføje applet"
 
-#: panel/extern.c:695
+#: panel/extern.c:799
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Hovsa! af en eller grund kan vi ikke tilføje til panelet"
 
-#: panel/extern.c:769
+#: panel/extern.c:873
 msgid "No socket was created"
 msgstr "Ingen sokkel oprettedes"
 
