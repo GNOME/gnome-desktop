@@ -3,12 +3,12 @@
 %define rel      SNAP
 %define prefix   /usr
 
-Summary: GNOME core programs
+Summary: The core programs for the GNOME GUI desktop environment.
 Name: gnome-core
 Version: %ver
 Release: %rel
 Copyright: LGPL
-Group: X11/Libraries
+Group: System Environment/Libraries
 Source: ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
 BuildRoot: /var/tmp/gnome-core-root
 Obsoletes: gnome
@@ -20,47 +20,29 @@ Docdir: %{prefix}/doc
 Requires: xscreensaver
 Requires: gnome-libs >= 0.99.8
 Requires: ORBit >= 0.3.90
-Summary(es): GNOME paquete de base
-Summary(fr): GNOME paquetage de base
 
 %description
-Basic programs and libraries that are virtually required for
-any GNOME installation.
+GNOME (GNU Network Object Model Environment) is a user-friendly
+set of applications and desktop tools to be used in conjunction with a
+window manager for the X Window System.  GNOME is similar in purpose and
+scope to CDE and KDE, but GNOME is based completely on Open Source
+software.  The gnome-core package includes the basic programs and
+libraries that are needed to install GNOME.
 
-GNOME is the GNU Network Object Model Environment.  That's a fancy
-name but really GNOME is a nice GUI desktop environment.  It makes
-using your computer easy, powerful, and easy to configure.
-
-%description -l es
-Programas y bibliotecas de base para el entorno GNOME.
-
-GNOME (GNU Network Object Model Environment) es un entorno gráfico
-orientado escritorio. Con él el uso de su computadora es más fácil,
-agradable y eficaz.
-
-%description -l fr
-Programmes et bibliothèques de base pour l'environnent GNOME.
-
-GNOME (GNU Network Object Model Environment) est un environnement graphique
-de type bureau. Il rends l'utilisation de votre ordinateur plus facile,
-agréable et eficace, et est facile à configurer.
+You should install the gnome-core package if you would like to use the
+GNOME desktop environment.  You'll also need to install the gnome-libs
+package.  If you would like to develop GNOME applications, you'll also
+need to install gnome-libs-devel.  If you want to use linuxconf with a
+GNOME front end, you'll also need to install the gnome-linuxconf package.
 
 %package devel
-Summary: GNOME core libraries, includes, etc
-Group: X11/Libraries
+Summary: GNOME core libraries, includes and more.
+Group: Development/Libraries
 Requires: gnome-core
 PreReq: /sbin/install-info
-Summary(es): bibliotecas, includes, etc de la base de GNOME
-Summary(fr): bibliothèques, en-têtes, etc pour la base de GNOME
 
 %description devel
-Panel libraries and header files.
-
-%description devel -l es
-Bibliotecas y include para el Panel.
-
-%description devel -l fr
-Bibliothèques et fichiers d'en-tête pour le Panel.
+Panel libraries and header files for creating GNOME panels.
 
 %changelog
 
