@@ -13,8 +13,59 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/another_clock/another_clock.c:205
+#: applets/asclock/asclock.c:590
+#: applets/mini-commander/src/mini-commander_applet.c:264
+msgid "About"
+msgstr "О программе"
+
+#: applets/asclock/asclock.c:597 applets/clockmail/clockmail.c:528
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:536
+#: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gnome-pager/gnomepager_applet.c:1491
+#: applets/mini-commander/src/mini-commander_applet.c:251
+#: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
+#: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
+#: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:375 panel/launcher.c:338
+#: panel/menu.c:945 panel/menu.c:3547
+msgid "Properties..."
+msgstr "Свойства..."
+
+#: applets/asclock/dialogs.c:19
 #, fuzzy
+msgid "ASClock"
+msgstr "Часы"
+
+#: applets/asclock/dialogs.c:21
+#, fuzzy
+msgid "(C) 1998 the Free Software Foundation"
+msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
+
+#: applets/asclock/dialogs.c:23
+msgid "Who said NeXT is dead?"
+msgstr "Кто сказал, что NeXT мертв?"
+
+#: applets/asclock/dialogs.c:143
+msgid ""
+"Since you are root, would you like to set the system's default timezone?"
+msgstr ""
+
+#: applets/asclock/dialogs.c:145
+#, fuzzy
+msgid "My Title"
+msgstr "Название страницы"
+
+#: applets/asclock/dialogs.c:235
+msgid "Continent/City"
+msgstr ""
+
+#: applets/another_clock/another_clock.c:205
+msgid "Clock Theme"
+msgstr "Тема Часов"
+
+#: applets/asclock/dialogs.c:268
 msgid "Clock Settings"
 msgstr "Настройка часов"
 
@@ -194,12 +245,10 @@ msgid "About"
 msgstr "О программе"
 
 #: applets/asclock/dialogs.c:19
-#, fuzzy
 msgid "ASClock"
-msgstr "Часы"
+msgstr "ASC Часы"
 
 #: applets/asclock/dialogs.c:21
-#, fuzzy
 msgid "(C) 1998 the Free Software Foundation"
 msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
 
@@ -270,15 +319,25 @@ msgstr "Внутренняя ошибка: неправильный режим в battery_set_mode"
 msgid "Can't create applet!\n"
 msgstr "Невозможно создать апплет!\n"
 
+#: applets/battery/battery.c:770 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:535 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:519
+#: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:528 applets/gen_util/mailcheck.c:800
+#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1485
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2516
+msgid "About..."
+msgstr "О программе..."
+
 #: applets/battery/battery.c:837
-#, fuzzy
 msgid "The GNOME Battery Monitor Applet"
-msgstr "GNOME KB апплет"
+msgstr "GNOME Апплей Монитор Батарей"
 
 #: applets/battery/battery.c:838
-#, fuzzy
 msgid " (C) 1997-1998 The Free Software Foundation"
-msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
+msgstr "(с) 1997-1998 Фонд Свободного Программного Обеспечения"
 
 #: applets/battery/battery.c:840
 msgid ""
@@ -308,7 +367,6 @@ msgstr "Ширина апплета"
 
 #. Update interval
 #: applets/battery/properties.c:103
-#, fuzzy
 msgid "Update Interval (seconds):"
 msgstr "Период обновления в секундах:"
 
@@ -342,7 +400,7 @@ msgstr "Цвет батареи при выключенном AC питании:"
 #: applets/battery/properties.c:203
 #, fuzzy
 msgid "Low Battery Color:"
-msgstr "Цвет батареи при включенном AC питании:"
+msgstr "Цвет при окончании батареи:"
 
 #: applets/battery/properties.c:263
 #, fuzzy
@@ -583,7 +641,7 @@ msgstr "Ширина"
 
 #: applets/diskusage/properties.c:251 applets/netload/properties.c:170
 msgid "Update Frequency"
-msgstr "Частота Обновления"
+msgstr "Частота обновления"
 
 #: applets/diskusage/properties.c:311
 msgid "Diskusage Settings"
@@ -1100,7 +1158,7 @@ msgstr "Показывать список задачи"
 
 #: applets/gnome-pager/gnomepager_applet.c:327
 msgid "Show button icons"
-msgstr "Показывать поктограмы на кнопках"
+msgstr "Показывать пиктограмы на кнопках"
 
 #. Radio buttons for which tasks to show
 #: applets/gnome-pager/gnomepager_applet.c:342
@@ -1117,7 +1175,7 @@ msgstr "Показывать только нормальные задачи"
 
 #: applets/gnome-pager/gnomepager_applet.c:363
 msgid "Show minimized tasks only"
-msgstr "Показывать только светнутые задачи"
+msgstr "Показывать только свернутые задачи"
 
 #: applets/gnome-pager/gnomepager_applet.c:376
 msgid "Show all tasks on all desktops"
@@ -1138,11 +1196,11 @@ msgstr "Список задач всегда максимального размера"
 
 #: applets/gnome-pager/gnomepager_applet.c:410
 msgid "Maximum width of horizontal task list"
-msgstr "Максимальная ширина списка задач"
+msgstr "Максимальная ширина горизонтального списка задач"
 
 #: applets/gnome-pager/gnomepager_applet.c:424
 msgid "Maximum width of vertical task list"
-msgstr "Максимальная ширина списка задач"
+msgstr "Максимальная ширина вертикального списка задач"
 
 #: applets/gnome-pager/gnomepager_applet.c:436
 msgid "Number of rows of horizontal tasks"
@@ -2889,7 +2947,7 @@ msgstr "Поместить это меню на панель"
 
 #: panel/menu.c:1146 panel/menu.c:1218
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: panel/menu.c:1355
 msgid "Can't get goad_id from desktop entry!"
@@ -2901,7 +2959,7 @@ msgstr "Невозможно получить goad_id для апплет, игнорируется"
 
 #: panel/menu.c:1802
 msgid " (empty)"
-msgstr ""
+msgstr " (пусто)"
 
 #: panel/menu.c:1915
 msgid "Applets"
@@ -2916,24 +2974,21 @@ msgid "Corner panel"
 msgstr "Угловая панель"
 
 #: panel/menu.c:2116 panel/menu.c:2120 panel/menu.c:2201 panel/menu.c:2977
-#, fuzzy
 msgid "Debian menus"
-msgstr "Главное меню"
+msgstr "Debian меню"
 
 #: panel/menu.c:2125
-#, fuzzy
 msgid "No Debian menus found!"
-msgstr "Статьи не найдены"
+msgstr "Debian меню не обнаружены!"
 
 #: panel/menu.c:2138 panel/menu.c:2143 panel/menu.c:3001
-#, fuzzy
 msgid "KDE menus"
-msgstr "Главное меню"
+msgstr "KDE меню"
 
 #: panel/menu.c:2180 panel/menu.c:2184 panel/menu.c:2905 panel/menu.c:2958
 #: panel/menu.c:2961
 msgid "AnotherLevel menus"
-msgstr ""
+msgstr "AnotherLevel меню"
 
 #: panel/menu.c:2218
 msgid "Remove this panel"
@@ -2980,9 +3035,8 @@ msgid "Convert to edge panel"
 msgstr "Превратить в краевую панель"
 
 #: panel/menu.c:2462
-#, fuzzy
 msgid "Create new panel"
-msgstr "Создать новый элемент меню"
+msgstr "Создать новую панель"
 
 #: panel/menu.c:2494
 msgid "Panel"
@@ -3033,19 +3087,17 @@ msgid "User menu: "
 msgstr "Пользовательские меню: "
 
 #: panel/menu.c:3461
-#, fuzzy
 msgid "AnotherLevel menu (if found): "
-msgstr "Red Hat меню (если есть): "
+msgstr "AnotherLevel меню (если есть): "
 
 #: panel/menu.c:3465
 #, fuzzy
 msgid "KDE menu (if found): "
-msgstr "Red Hat меню (если есть): "
+msgstr "KDE меню (если есть): "
 
 #: panel/menu.c:3469
-#, fuzzy
 msgid "Debian menu (if found): "
-msgstr "Red Hat меню (если есть): "
+msgstr "Debian меню (если есть): "
 
 #: panel/menu.c:3483
 msgid "Menu path"
