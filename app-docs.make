@@ -13,7 +13,7 @@ all: index.html omf
 
 omf: $(omffiles)
 	-for omffile in $(omffiles); do \
-	  `which scrollkeeper-preinstall 2>/dev/null` && scrollkeeper-preinstall $(DESTDIR)$(helpdir)/$(app).sgml $$omffile $(omf_dir)/$$omffile; \
+	  which scrollkeeper-preinstall >/dev/null 2>&1 && scrollkeeper-preinstall $(DESTDIR)$(helpdir)/$(app).sgml $$omffile $(omf_dir)/$$omffile; \
 	done
 
 index.html: $(app)/index.html
