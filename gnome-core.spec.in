@@ -44,6 +44,9 @@ PreReq: 	/sbin/install-info
 Panel libraries and header files for creating GNOME panels.
 
 %changelog
+* Sat Feb 17 2001 George Lebl <jirka@5z.com>
+- correctly set localstatedir so that all files are installed
+
 * Sat Feb 26 2000 Gregory McLean <gregm@comstar.net>
 - Updated to 1.1.4
 - Autogenerate the %files section.
@@ -79,7 +82,7 @@ CFLAGS="$RPM_OPT_FLAGS" make
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
-make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT/etc install >install.log 2>&1
+make prefix=$RPM_BUILD_ROOT%{_prefix} sysconfdir=$RPM_BUILD_ROOT/etc localstatedir=$RPM_BUILD_ROOT/var/lib install >install.log 2>&1
 #if [ -d $RPM_BUILD_ROOT%{_prefix}/bin ] ; then
 # strip `file $RPM_BUILD_ROOT%{_prefix}/bin/* | grep ELF | cut -d':' -f 1`
 #fi
