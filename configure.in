@@ -28,7 +28,6 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 GNOME_GHTTP_CHECK
 
-
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
@@ -40,7 +39,6 @@ AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
-
 
 AC_CHECK_HEADERS(dlfcn.h dl.h)
 AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
@@ -94,6 +92,9 @@ GNOME_INIT_LIBGTOP
 dnl Check for ghttp library
 AM_CONDITIONAL(HAVE_LIBGHTTP, test -n "$GHTTP_LIB")
 AC_SUBST(GHTTP_LIB)
+if test -z "$GHTTP_LIB"; then
+  AC_MSG_WARN([*** \`bussign' applet will not be built ***])
+fi
 
 dnl panel/cdplayer
 AC_CANONICAL_HOST
@@ -103,30 +104,36 @@ case "$host" in
 esac
 AM_CONDITIONAL(APPLET_CDPLAYER, test -n "$CDROM_HOST")
 AC_SUBST(CDROM_HOST)
+if test -z "$CDROM_HOST"; then
+  AC_MSG_WARN([*** \`cdplayer' applet will not be built ***])
+fi
 
 dnl panel/mixer
 P_MIXER=
 AC_CHECK_HEADERS(linux/soundcard.h,[P_MIXER=mixer],[
   AC_CHECK_HEADERS(machine/soundcard.h, [P_MIXER=mixer])])
 AM_CONDITIONAL(APPLET_MIXER, test "$P_MIXER" = "mixer")
+if test "$P_MIXER" != "mixer"; then
+  AC_MSG_WARN([*** \`mixer' applet will not be built ***])
+fi
 
 dnl panel/modemlights
 P_MODEMLIGHTS=
 AC_CHECK_HEADERS(net/ppp_defs.h,[P_MODEMLIGHTS=modemlights])
 AM_CONDITIONAL(APPLET_MODEMLIGHTS, test "$P_MODEMLIGHTS" = "modemlights")
+if test "$P_MODEMLIGHTS" != "modemlights"; then
+  AC_MSG_WARN([*** \`modemlights' applet will not be built ***])
+fi
 
 dnl fvwm-pager
 dnl we need the fvwm sources to build it
 AC_ARG_WITH(fvwm2,
-[  --with-fvwm2=DIRECTORY
-			top level dir of fvwm2 with libs and includes], [
-	FVWM_PAGER="fvwm-pager"], [
-	FVWM_PAGER=""])
+[  --with-fvwm2=DIRECTORY	top level dir of fvwm2 with libs and includes],
+	[FVWM_PAGER="fvwm-pager"], [FVWM_PAGER=""])
 
-AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z ${FVWM_PAGER})
-if test ! -z $FVWM_PAGER
+AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
+if test ! -z "$FVWM_PAGER"
 then
-
 	for x_dir in /usr/local/src/fvwm2 /usr/local/src/fvwm-2.0.46 /disk/compiles/fvwm-2.0.46 ${with_fvwm2}
 	do
 		AC_MSG_CHECKING("for fvwm include files in ${x_dir}")
@@ -153,9 +160,6 @@ then
 	AC_SUBST(FVWM2INCLUDE)
 	AC_SUBST(FVWM2LIBS)
 fi
-
-AC_SUBST(FVWM_PAGER)
-
 
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
