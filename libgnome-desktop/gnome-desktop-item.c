@@ -788,14 +788,18 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
  * gnome_desktop_item_ref:
  * @item: A desktop item
  *
- * Increases the reference count of the specified item.
+ * Description: Increases the reference count of the specified item.
+ *
+ * Returns: the newly referenced @item
  */
-void
+GnomeDesktopItem *
 gnome_desktop_item_ref (GnomeDesktopItem *item)
 {
-        g_return_if_fail(item);
+        g_return_val_if_fail (item != NULL, NULL);
 
         item->refcount++;
+
+	return item;
 }
 
 static gboolean
