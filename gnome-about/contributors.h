@@ -268,6 +268,7 @@ static gchar *contributors[] = {
 	"Peter Ryland",
 	"Bibek Sahu",
 	"Arvind Samptur",
+	"S\xc3\xb8ren Sandmann",
 	"Pablo Saratxaga",
 	/* Name in Japanese is: U7b39 U5c71 U548c U5b8f */
 	N_("Kazuhiro Sasayama"),
