@@ -1,4 +1,4 @@
-/* GnomeIconLoaders - a loader for icon-themes
+/* GnomeIconLoader - a loader for icon-themes
  * gnome-icon-loader.h Copyright (C) 2002 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
@@ -68,6 +68,13 @@ GnomeIconLoader *gnome_icon_loader_new                   (void);
 void             gnome_icon_loader_set_search_path       (GnomeIconLoader      *loader,
 							  const char           *path[],
 							  int                   n_elements);
+void             gnome_icon_loader_get_search_path       (GnomeIconLoader      *loader,
+							  char                 **path[],
+							  int                   *n_elements);
+void             gnome_icon_loader_append_search_path    (GnomeIconLoader      *loader,
+							  const char           *path);
+void             gnome_icon_loader_prepend_search_path   (GnomeIconLoader      *loader,
+							  const char           *path);
 void             gnome_icon_loader_set_current_theme     (GnomeIconLoader      *loader,
 							  const char           *theme_name);
 char *           gnome_icon_loader_lookup_icon           (GnomeIconLoader      *loader,

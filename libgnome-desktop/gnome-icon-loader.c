@@ -215,15 +215,70 @@ gnome_icon_loader_set_search_path (GnomeIconLoader *loader,
   int i;
 
   priv = loader->priv;
-  for (i=0; i < priv->search_path_len; i++)
+  for (i = 0; i < priv->search_path_len; i++)
     g_free (priv->search_path[i]);
 
   g_free (priv->search_path);
 
   priv->search_path = g_new (char *, n_elements);
   priv->search_path_len = n_elements;
-  for (i=0; i < priv->search_path_len; i++)
+  for (i = 0; i < priv->search_path_len; i++)
     priv->search_path[i] = g_strdup (path[i]);
+
+  blow_themes (priv);
+}
+
+
+void
+gnome_icon_loader_get_search_path (GnomeIconLoader      *loader,
+				   char                 **path[],
+				   int                   *n_elements)
+{
+  GnomeIconLoaderPrivate *priv;
+  int i;
+
+  priv = loader->priv;
+  
+  *path = g_new (char *, priv->search_path_len);
+  *n_elements = priv->search_path_len;
+  
+  for (i = 0; i < priv->search_path_len; i++)
+    (*path)[i] = g_strdup (priv->search_path[i]);
+}
+
+void
+gnome_icon_loader_append_search_path (GnomeIconLoader      *loader,
+				      const char           *path)
+{
+  GnomeIconLoaderPrivate *priv;
+
+  priv = loader->priv;
+  
+  priv->search_path_len++;
+  priv->search_path = g_realloc (priv->search_path, priv->search_path_len * sizeof(char *));
+  priv->search_path[priv->search_path_len-1] = g_strdup (path);
+
+  blow_themes (priv);
+}
+
+void
+gnome_icon_loader_prepend_search_path (GnomeIconLoader      *loader,
+				       const char           *path)
+{
+  GnomeIconLoaderPrivate *priv;
+  int i;
+
+  priv = loader->priv;
+  
+  priv->search_path_len++;
+  priv->search_path = g_realloc (priv->search_path, priv->search_path_len * sizeof(char *));
+
+  for (i = 0; i < priv->search_path_len - 1; i++)
+    {
+      priv->search_path[i+1] = priv->search_path[i];
+    }
+  
+  priv->search_path[0] = g_strdup (path);
 
   blow_themes (priv);
 }
