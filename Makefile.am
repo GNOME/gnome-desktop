@@ -1,5 +1,3 @@
-control_center = control-center
-capplets = capplets
 panel = panel
 applets = applets
 idl = idl
@@ -8,10 +6,10 @@ always_built_SUBDIRS = \
 	 gsm smproxy pixmaps desktop-links help-browser \
 	 gnome-terminal core-docs gmenu
 
-sometimes_built_SUBDIRS = panel applets control-center capplets idl
+sometimes_built_SUBDIRS = panel applets idl
 
 SUBDIRS = intl po macros \
-	 $(always_built_SUBDIRS) $(panel) $(applets) $(control_center) $(capplets) $(idl)
+	 $(always_built_SUBDIRS) $(panel) $(applets) $(idl)
 
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
 #	$(sometimes_built_SUBDIRS)
