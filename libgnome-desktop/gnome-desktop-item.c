@@ -1023,7 +1023,8 @@ make_args (GList *files)
 		if (file == NULL)
 			continue;;
 		uri = gnome_vfs_uri_new (file);
-		list = g_slist_prepend (list, uri);
+		if (uri)
+			list = g_slist_prepend (list, uri);
 	}
 
 	return g_slist_reverse (list);
