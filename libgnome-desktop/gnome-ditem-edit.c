@@ -161,6 +161,7 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
 
 	/* Always get translations in UTF-8, needed if library is used
 	 * outside of gnome-core */
+        bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 

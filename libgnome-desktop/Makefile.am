@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS = 1.4
 
 INCLUDES =						\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\"	\
 	-DGNOME_CORE_INTERNAL				\
 	$(WARN_CFLAGS)					\
