@@ -61,6 +61,7 @@ static gchar *contributors[] = {
 	"Andrew Clausen",
 	"Jeremy Collins",
 	"Rusty Conover",
+	"Pat Costello",
 	"Alan Cox",
 	"Dennis Cranston",
 	"Mark Crichton",
