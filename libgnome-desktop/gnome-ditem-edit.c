@@ -262,7 +262,7 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
 }
 
 static void
-set_list_width(GtkWidget *clist, char *text[])
+set_list_width(GtkWidget *clist, const char * const text[])
 {
         int i;
         int cols = GTK_CLIST(clist)->columns;
@@ -297,7 +297,7 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         char *lang;
         char *name;
         char *comment;
-        char *text[3];
+        const char *text[3];
         GList *language_list;
         const char *curlang;
         GtkCList *cl = GTK_CLIST(dee->translations);
@@ -340,7 +340,7 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         text[1]=name;
         text[2]=comment;
         set_list_width(GTK_WIDGET(cl),text);
-        gtk_clist_append(cl,text);
+        gtk_clist_append(cl,(char**)text);
         gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
   
         g_free(lang);
@@ -362,7 +362,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         GtkWidget * label;
         GtkWidget * button;
         GtkWidget * box;
-        char *transl[3];
+        const char *transl[3];
 
         label = label_new(_("Try this before using:"));
         table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
@@ -390,7 +390,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         transl[0] = _("Language");
         transl[1] = _("Name");
         transl[2] = _("Comment");
-        dee->translations = gtk_clist_new_with_titles(3,transl);
+        dee->translations = gtk_clist_new_with_titles(3,(char**)transl);
         set_list_width(dee->translations,transl);
         box = gtk_scrolled_window_new(NULL,NULL);
         gtk_widget_set_usize(box,0,120);
@@ -538,10 +538,8 @@ static void
 gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
                               GnomeDesktopItem *ditem)
 {
-        gchar * s = NULL;
-        GList *i18n_list,*li;
+        GSList *i18n_list,*li;
         const gchar* cs;
-        const gchar** csv;
         
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
@@ -557,43 +555,48 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
         gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),
                            cs ? cs : "");
 
-        csv = gnome_desktop_item_get_command(ditem);
+        cs = gnome_desktop_item_get_command(ditem);
 
-        if (csv)
-                s = g_strjoinv(" ", csv);
-        gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s ? s : "");
-        g_free(s);
+        gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), cs ? cs : "");
 
+        cs = gnome_desktop_item_get_attribute(ditem, "TryExec");
         
         gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
-                           ditem->tryexec ? ditem->tryexec : "");
+                           cs ? cs : "");
 
+        cs = gnome_desktop_item_get_icon_path(ditem);
         
-        
-        gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),
-                                  ditem->icon ? ditem->icon : "");
+        gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry), cs);
+
+        cs = gnome_desktop_item_get_attribute(ditem, "DocPath"); /* FIXME check name */
 
         gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
-                           ditem->docpath ? ditem->docpath : "");
+                           cs ? cs : "");
 
+        cs = gnome_desktop_item_get_attribute(ditem, "Type");
+        
         gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry),
-                           ditem->type ? ditem->type : "");
+                           cs ? cs : "");
 
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->terminal_button),
-                                     ditem->terminal);
+                                     gnome_desktop_item_get_flags(ditem) & GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL);
   
         /*set the names and comments from our i18n list*/
         gtk_clist_clear (GTK_CLIST(dee->translations));
-        i18n_list = gnome_desktop_entry_get_i18n_list (ditem);
+        i18n_list = gnome_desktop_item_get_languages(ditem);
         for (li=i18n_list; li; li=li->next) {
-                char *text[3];
-                GnomeDesktopItemI18N *e = li->data;
-                text[0] = e->lang?e->lang:"";
-                text[1] = e->name?e->name:"";
-                text[2] = e->comment?e->comment:"";
+                const char *text[3];
+                const gchar* lang = li->data;
+                cs = gnome_desktop_item_get_name(ditem, lang);
+                text[0] = cs ? cs : "";
+                cs = gnome_desktop_item_get_comment(ditem, lang);
+                text[1] = cs ? cs : "";
+                cs = lang;
+                text[2] = cs ? cs : "";
                 set_list_width (dee->translations,text);
-                gtk_clist_append (GTK_CLIST(dee->translations),text);
+                gtk_clist_append (GTK_CLIST(dee->translations),(char**)text);
         }
+        g_slist_free(i18n_list);
 }
 
 /* Conform ditem to display */
@@ -601,88 +604,66 @@ static void
 gnome_ditem_edit_sync_ditem(GnomeDItemEdit *dee,
                             GnomeDesktopItem *ditem)
 {
-        GList *i18n_list = NULL;
-        gchar * text;
+        const gchar * text;
         int i;
-
+        const gchar* lang;
+        gint curflags;
+        
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
         g_return_if_fail(ditem != NULL);
 
+        lang = gnome_i18n_get_preferred_language();
+        
         text = gtk_entry_get_text(GTK_ENTRY(dee->name_entry));
-        g_free(ditem->name);
-        if (text[0] != '\0')
-                ditem->name = g_strdup(text);
-        else
-                ditem->name = NULL;
+        gnome_desktop_item_set_name(ditem, lang, text);
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->comment_entry));
-        g_free(ditem->comment);
-        if (text[0] != '\0')
-                ditem->comment = g_strdup(text);
-        else
-                ditem->comment = NULL;
+        gnome_desktop_item_set_comment(ditem, lang, text);
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
-        g_strfreev(ditem->exec);
-        if (text[0] != '\0')
-                gnome_config_make_vector(text, &ditem->exec_length, &ditem->exec);
-        else {
-                ditem->exec_length = 0;
-                ditem->exec = NULL;
-        }
+        gnome_desktop_item_set_command(ditem, text);
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->tryexec_entry));
-        g_free(ditem->tryexec);
-        if (text[0] != '\0')
-                ditem->tryexec = g_strdup(text);
-        else
-                ditem->tryexec = NULL;
+        gnome_desktop_item_set_attribute(ditem, "TryExec", text);
   
         text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry));
-        g_free(ditem->type);
-        if (text[0] != '\0')
-                ditem->type = g_strdup(text);
-        else
-                ditem->type = NULL;
+        gnome_desktop_item_set_attribute(ditem, "Type", text);
   
-        g_free(ditem->icon);
-        ditem->icon = gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
+        gnome_desktop_item_set_icon_path(ditem,
+                                         gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry)));
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->doc_entry));
-        g_free(ditem->docpath);
-        if (text[0] != '\0')
-                ditem->docpath = g_strdup(text);
+        gnome_desktop_item_set_attribute(ditem, "DocPath", text);
+
+        curflags = gnome_desktop_item_get_flags(ditem);
+
+        if (GTK_TOGGLE_BUTTON(dee->terminal_button)->active)
+                curflags |= GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL;
         else
-                ditem->docpath = NULL;
+                curflags &= ~GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL;
 
-        ditem->terminal = GTK_TOGGLE_BUTTON(dee->terminal_button)->active;
-
-        g_free(ditem->location);
-        ditem->location = NULL;
-        g_free(ditem->geometry);
-        ditem->geometry = NULL;
-
+        gnome_desktop_item_set_flags(ditem, curflags);
+        
         for(i=0;i<GTK_CLIST(dee->translations)->rows;i++) {
-                char *lang,*name,*comment;
-                GnomeDesktopItemI18N *i18n_entry;
-                gtk_clist_get_text(GTK_CLIST(dee->translations),i,0,&lang);
-                gtk_clist_get_text(GTK_CLIST(dee->translations),i,1,&name);
-                gtk_clist_get_text(GTK_CLIST(dee->translations),i,2,&comment);
+                const char *lang,*name,*comment;
+                gtk_clist_get_text(GTK_CLIST(dee->translations),i,0,(gchar**)&lang);
+                gtk_clist_get_text(GTK_CLIST(dee->translations),i,1,(gchar**)&name);
+                gtk_clist_get_text(GTK_CLIST(dee->translations),i,2,(gchar**)&comment);
                 if(!*lang) lang = NULL;
                 if(!*name) name = NULL;
                 if(!*comment) comment = NULL;
                 if(!name && !comment)
                         continue;
 
-                i18n_entry = g_new0(GnomeDesktopItemI18N,1);
-                i18n_entry->lang = lang?g_strdup(lang):NULL;
-                i18n_entry->name = name?g_strdup(name):NULL;
-                i18n_entry->comment = comment?g_strdup(comment):NULL;
-                i18n_list = g_list_prepend(i18n_list,i18n_entry);
+                if (lang == NULL)
+                        lang = gnome_i18n_get_preferred_language();
+
+                g_assert(lang != NULL);
+                
+                gnome_desktop_item_set_name(ditem, lang, name);
+                gnome_desktop_item_set_comment(ditem, lang, comment);
         }
-        gnome_desktop_entry_free_i18n_list(gnome_desktop_entry_get_i18n_list(ditem));
-        gnome_desktop_entry_set_i18n_list(ditem,i18n_list);
 }
 
 /**
@@ -705,11 +686,13 @@ gnome_ditem_edit_load_file(GnomeDItemEdit *dee,
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
         g_return_if_fail(path != NULL);
 
-        newentry = gnome_desktop_entry_load_unconditional(path);
+        newentry = gnome_desktop_item_new_from_file(path,
+                                                    GNOME_DESKTOP_ITEM_LOAD_NO_SUBDIRS |
+                                                    GNOME_DESKTOP_ITEM_LOAD_NO_SUBITEMS);
 
         if (newentry) {
                 gnome_ditem_edit_sync_display(dee, newentry);
-                gnome_desktop_entry_destroy(newentry);
+                gnome_desktop_item_unref(newentry);
         } else {
                 g_warning("Failed to load file into GnomeDItemEdit");
                 return;
@@ -737,22 +720,6 @@ gnome_ditem_edit_set_ditem(GnomeDItemEdit *dee,
         gnome_ditem_edit_sync_display(dee, ditem);
 }
 
-/*XXX: whoops!!!!, this call is left here just for binary
-  compatibility, it should be gnome_ditem_edit_get_ditem*/
-/**
- * gnome_ditem_get_ditem
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: This call is actually the #gnome_ditem_edit_get_ditem,
- * it should not be used, it is left ONLY for compatibility reasons.
- *
- * Returns: a newly allocated #GnomeDesktopItem structure.
- */
-GnomeDesktopItem *
-gnome_ditem_get_ditem(GnomeDItemEdit *dee)
-{
-        return gnome_ditem_edit_get_ditem(dee);
-}
 /**
  * gnome_ditem_edit_get_ditem
  * @dee: #GnomeDItemEdit object to work with
@@ -770,7 +737,8 @@ gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
         g_return_val_if_fail(dee != NULL, NULL);
         g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
 
-        newentry = g_new0(GnomeDesktopItem, 1);
+        newentry = gnome_desktop_item_new();
+        
         gnome_ditem_edit_sync_ditem(dee, newentry);
         return newentry;
 }
