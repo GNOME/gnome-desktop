@@ -4,6 +4,7 @@ tilesdir = $(datadir)/pixmaps/tiles
 BITMAPS     = \
 	emacs.png				\
 	gnome-aorta.png				\
+	gnome-amusements.png        \
 	gnome-audio2.png			\
 	gnome-balsa2.png			\
 	gnome-calc2.png				\
