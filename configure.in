@@ -130,7 +130,9 @@ CANVAS_PIXBUF_LIBS=`$GNOME_CONFIG --libs gnomecanvaspixbuf`
 AC_SUBST(CANVAS_PIXBUF_CFLAGS)
 AC_SUBST(CANVAS_PIXBUF_LIBS)
 if test "x$CANVAS_PIXBUF_CFLAGS" = x ; then
-	AC_MSG_ERROR(GnomeCanvasPixbuf is required for gnome-about)
+	AC_MSG_ERROR(GnomeCanvasPixbuf is required for gnome-about.
+This is contained in the gdk-pixbuf module, however, make sure to build
+this module after you build gnome-libs)
 fi
 
 dnl
