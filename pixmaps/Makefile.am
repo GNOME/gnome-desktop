@@ -49,6 +49,7 @@ BITMAPS     = \
 	gnome-term-linux2.png			\
 	gnome-term-night.png			\
 	gnome-term-tiger.png			\
+	gnome-eterm.png				\
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
