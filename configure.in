@@ -157,6 +157,14 @@ AC_CHECK_FUNC(inet_aton,,[AC_CHECK_LIB(resolv,inet_aton,RES_LIBS="-lresolv")])
 AC_SUBST(RES_LIBS)
 LIBS="$oLIBS"
 
+dnl
+dnl Check for zvt_term_reset
+dnl
+oLIBS="$LIBS"
+LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR"
+AC_CHECK_FUNCS(zvt_term_reset)
+LIBS="$oLIBS"
+
 dnl AC_CONFIG_SUBDIRS(gemvt)
 
 AC_OUTPUT([
