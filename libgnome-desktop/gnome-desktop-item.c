@@ -1825,9 +1825,12 @@ ditem_execute (const GnomeDesktopItem *item,
 			/* The error was set for us,
 			 * we just can't launch this thingie */
 			ret = -1;
+			g_strfreev (real_argv);
 			break;
 		}
 		launched ++;
+
+		g_strfreev (real_argv);
 
 		if (arg_ptr != NULL)
 			arg_ptr = arg_ptr->next;
