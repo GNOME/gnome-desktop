@@ -267,7 +267,7 @@ case CORBA_tk_ ## k:                                                            
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
 
-		length = CORBA_TypeCode_member_count (type, ev);
+		length = type->length;
 
 		members = CORBA_sequence_DynamicAny_NameValuePair__alloc ();
 		members->_length = length;
@@ -279,8 +279,8 @@ case CORBA_tk_ ## k:                                                            
 			CORBA_any *subvalue = NULL;
 			DirEntry *subentry = NULL;
 
-			member_name = CORBA_TypeCode_member_name (type, i, ev);
-			member_type = CORBA_TypeCode_member_type (type, i, ev);
+			member_name = type->subnames [i];
+			member_type = type->subtypes [i];
 
 			if (CORBA_TypeCode_equal (member_type, TC_GNOME_Desktop_ExtraAttributes, NULL)) {
 				GNOME_Desktop_ExtraAttributes attr_list;
@@ -299,7 +299,7 @@ case CORBA_tk_ ## k:                                                            
 					for (j = 0; j < length; j++) {
 						CORBA_Identifier cur_name;
 
-						cur_name = CORBA_TypeCode_member_name (type, j, ev);
+						cur_name = type->subnames [j];
 						if (!strcmp (subentry->name, cur_name))
 							goto next_extra_attr_loop;
 					}
