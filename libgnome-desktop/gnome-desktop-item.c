@@ -49,8 +49,6 @@
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
-#include "egg-spawn.h"
-
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-desktop-i18n.h"
 
@@ -59,6 +57,7 @@
 #include <libsn/sn.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
+#include <gtk/gtk.h>
 #endif
 
 #define sure_string(s) ((s)!=NULL?(s):"")
@@ -1572,6 +1571,42 @@ stringify_files (GSList *args)
 	return g_string_free (str, FALSE);
 }
 
+static char **
+make_environment_for_screen (GdkScreen  *screen,
+			     char      **envp)
+{
+	char **retval = NULL;
+	char  *display_name;
+	int    display_index = -1;
+	int    i, env_len;
+
+	g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
+
+	if (envp == NULL)
+		envp = environ;
+
+	for (env_len = 0; envp [env_len]; env_len++)
+		if (strncmp (envp [env_len], "DISPLAY", strlen ("DISPLAY")) == 0)
+			display_index = env_len;
+
+	retval = g_new (char *, env_len + 1);
+	retval [env_len] = NULL;
+
+	display_name = gdk_screen_make_display_name (screen);
+
+	for (i = 0; i < env_len; i++)
+		if (i == display_index)
+			retval [i] = g_strconcat ("DISPLAY=", display_name, NULL);
+		else
+			retval [i] = g_strdup (envp[i]);
+
+	g_assert (i == env_len);
+
+	g_free (display_name);
+
+	return retval;
+}
+
 static int
 ditem_execute (const GnomeDesktopItem *item,
 	       const char *exec,
@@ -1686,7 +1721,7 @@ ditem_execute (const GnomeDesktopItem *item,
 #endif
 
 	if (screen) {
-		envp = egg_make_spawn_environment_for_screen (screen, envp);
+		envp = make_environment_for_screen (screen, envp);
 		if (free_me)
 			g_strfreev (free_me);
 		free_me = envp;
@@ -1769,7 +1804,7 @@ ditem_execute (const GnomeDesktopItem *item,
 			sn_launcher_context_initiate (sn_context,
 						      g_get_prgname () ? g_get_prgname () : "unknown",
 						      real_argv[0],
-						      CurrentTime);
+						      gtk_get_current_event_time ());
 
 			envp = make_spawn_environment_for_sn_context (sn_context, envp);
 			if (free_me)

@@ -21,8 +21,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-ditem-edit.c	\
 	gnome-hint.c		\
 	gnome-desktop-i18n.c	\
-	gnome-desktop-i18n.h	\
-	$(EGGFILES)
+	gnome-desktop-i18n.h
 
 libgnome_desktop_2_la_LIBADD = \
 	$(GNOME_DESKTOP_LIBS)
@@ -57,12 +56,3 @@ pkgconfig_DATA = gnome-desktop-2.0.pc
 EXTRA_DIST = \
 	gnome-desktop-2.0.pc.in                \
 	gnome-desktop-2.0-uninstalled.pc.in
-
-EGGFILES =		\
-	egg-spawn.h	\
-	egg-spawn.c
-
-EGGDIR = $(srcdir)/../../libegg/libegg/screen-exec
-
-regenerate-built-sources:
-	EGGFILES="$(EGGFILES)" EGGDIR="$(EGGDIR)" $(srcdir)/update-from-egg.sh

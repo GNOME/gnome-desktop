@@ -1,3 +1,20 @@
+2004-07-19  Mark McLoughlin  <mark@skynet.ie>
+
+	Hopefully a good enough fix for bug #136278.
+	
+	* gnome-desktop-item.c:
+	(ditem_execute): pass the value of gtk_get_current_event_time()
+	to sn_launcher_context_initiate().
+	
+2004-07-19  Mark McLoughlin  <mark@skynet.ie>
+	
+	* gnome-desktop-item.c: (make_environment_for_screen):
+	copy and paste this from egg-spawn.c. Its in gdk now,
+	but this particular function isn't part of the public
+	API.
+
+	* Makefile.am, egg-spawn.[h]: wipe the egg from my face.
+
 ==================== 2.7.3 ====================
 
 ==================== 2.7.1 ====================
