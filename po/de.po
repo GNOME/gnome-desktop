@@ -6,11 +6,14 @@
 # Karl Eichwalder <ke@suse.de>, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999, 2000.
 #
+# 2000-09-25  Christian Meyer  <linux@chrisime.de>
+# Ich habe (hoffentlich) alles infitisch umgeformt!!
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0cvs\n"
-"POT-Creation-Date: 2000-09-23 15:29+0200\n"
-"PO-Revision-Date: 2000-09-23 15:29+0200\n"
+"POT-Creation-Date: 2000-09-25 12:25+0200\n"
+"PO-Revision-Date: 2000-09-25 12:23+0200\n"
 "Last-Translator: Christian Meyer <linux@chrisime.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -207,14 +210,14 @@ msgid "Desk Guide Alert"
 msgstr "Hinweis der Desktop-Übersicht"
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1379
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1392
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:792
 #: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1348 panel/menu.c:4691
 msgid "Properties..."
 msgstr "Eigenschaften..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1404
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:798
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
@@ -224,7 +227,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1397
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1410
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:805
 msgid "About..."
 msgstr "Info..."
@@ -263,7 +266,7 @@ msgstr "Der Name Ihres GNOME-Fischs:"
 msgid "The Animation Filename:"
 msgstr "Name der Animationsdatei:"
 
-#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
+#: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:941
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:498 panel/menu-properties.c:536
 #: panel/panel-util.c:101 panel/panel-util.c:142 panel/panel-util.c:183
@@ -358,10 +361,10 @@ msgstr "%a, %d. %b"
 msgid "%A, %B %d"
 msgstr "%A, %d. %B"
 
-#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1295
+#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1308
 #: applets/gen_util/printer.c:421
 msgid "Can't create applet!\n"
-msgstr "Kann kein Applet anlegen!\n"
+msgstr "Es kann kein Applet angelegt werden!\n"
 
 #. Do NOT translate the clock/hourformat part.  What you
 #. * should change is the 12.  If your country code should use
@@ -423,11 +426,11 @@ msgstr ""
 "Das Uhren-Applet gibt Ihrem Panel eine einfache und wenig Ressourcen "
 "verbrauchende Datums- und Zeitanzeige"
 
-#: applets/gen_util/mailcheck.c:200 applets/gen_util/mailcheck.c:972
+#: applets/gen_util/mailcheck.c:201 applets/gen_util/mailcheck.c:985
 msgid "Password:"
 msgstr "Passwort:"
 
-#: applets/gen_util/mailcheck.c:259
+#: applets/gen_util/mailcheck.c:260
 msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
@@ -435,128 +438,138 @@ msgstr ""
 "Ein Fehler auf dem fernen Rechner ist aufgetreten. Fernabfrage deaktiviert.\n"
 "Vielleicht haben Sie Server, Benutzername oder Passwort falsch angegeben?"
 
-#: applets/gen_util/mailcheck.c:452
+#: applets/gen_util/mailcheck.c:456
 msgid "You have new mail."
 msgstr "Sie haben neue Post."
 
-#: applets/gen_util/mailcheck.c:454
+#: applets/gen_util/mailcheck.c:458
 msgid "You have mail."
 msgstr "Sie haben Post."
 
-#: applets/gen_util/mailcheck.c:456
+#: applets/gen_util/mailcheck.c:462
+#, c-format
+msgid "%d/%d messages"
+msgstr "%d/%d Mitteilungen"
+
+#: applets/gen_util/mailcheck.c:464
+#, c-format
+msgid "%d messages"
+msgstr "%d Mitteilungen"
+
+#: applets/gen_util/mailcheck.c:468
 msgid "No mail."
 msgstr "Keine Post."
 
-#: applets/gen_util/mailcheck.c:873
+#: applets/gen_util/mailcheck.c:886
 msgid "Mailbox resides on:"
 msgstr "Briefkasten wohnt auf:"
 
-#: applets/gen_util/mailcheck.c:880
+#: applets/gen_util/mailcheck.c:893
 msgid "Local mailspool"
 msgstr "Lokales Mail-Spoolverzeichnis"
 
-#: applets/gen_util/mailcheck.c:888
+#: applets/gen_util/mailcheck.c:901
 msgid "Local maildir"
 msgstr "Lokales Mailverzeichnis"
 
-#: applets/gen_util/mailcheck.c:896
+#: applets/gen_util/mailcheck.c:909
 msgid "Remote POP3-server"
 msgstr "Ferner POP3-Server"
 
-#: applets/gen_util/mailcheck.c:904
+#: applets/gen_util/mailcheck.c:917
 msgid "Remote IMAP-server"
 msgstr "Ferner IMAP-Server"
 
-#: applets/gen_util/mailcheck.c:924
+#: applets/gen_util/mailcheck.c:937
 msgid "Mail spool file:"
 msgstr "Mail-Spooldatei:"
 
-#: applets/gen_util/mailcheck.c:941
+#: applets/gen_util/mailcheck.c:954
 msgid "Mail server:"
 msgstr "Mailserver:"
 
-#: applets/gen_util/mailcheck.c:958
+#: applets/gen_util/mailcheck.c:971
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: applets/gen_util/mailcheck.c:1003
+#: applets/gen_util/mailcheck.c:1016
 msgid "Execute"
 msgstr "Ausführen"
 
-#: applets/gen_util/mailcheck.c:1014
+#: applets/gen_util/mailcheck.c:1027
 msgid "Before each update:"
 msgstr "Vor jeder Auffrischung:"
 
-#: applets/gen_util/mailcheck.c:1035
+#: applets/gen_util/mailcheck.c:1048
 msgid "When new mail arrives:"
 msgstr "Wenn neue Mail eintrifft:"
 
-#: applets/gen_util/mailcheck.c:1054
+#: applets/gen_util/mailcheck.c:1067
 msgid "When clicked:"
 msgstr "Wenn angeklickt:"
 
-#: applets/gen_util/mailcheck.c:1077
+#: applets/gen_util/mailcheck.c:1090
 msgid "Check for mail every"
 msgstr "Nach Post sehen alle"
 
-#: applets/gen_util/mailcheck.c:1090
+#: applets/gen_util/mailcheck.c:1103
 msgid "minutes"
 msgstr "Minuten"
 
-#: applets/gen_util/mailcheck.c:1103
+#: applets/gen_util/mailcheck.c:1116
 msgid "seconds"
 msgstr "Sekunden"
 
-#: applets/gen_util/mailcheck.c:1107
+#: applets/gen_util/mailcheck.c:1120
 msgid "Play a sound when new mail arrives"
 msgstr "Einen Klang abspielen, wenn neue Mail eintrifft"
 
-#: applets/gen_util/mailcheck.c:1118
+#: applets/gen_util/mailcheck.c:1131
 msgid "Select animation"
 msgstr "Animation auswählen"
 
-#: applets/gen_util/mailcheck.c:1153
+#: applets/gen_util/mailcheck.c:1166
 msgid "Mail check properties"
 msgstr "Eigenschaften der Postanzeige"
 
-#: applets/gen_util/mailcheck.c:1159
+#: applets/gen_util/mailcheck.c:1172
 msgid "Mail check"
 msgstr "Postanzeige"
 
-#: applets/gen_util/mailcheck.c:1162
+#: applets/gen_util/mailcheck.c:1175
 msgid "Mailbox"
 msgstr "Briefkasten"
 
-#: applets/gen_util/mailcheck.c:1243
+#: applets/gen_util/mailcheck.c:1256
 msgid "Mail check Applet"
 msgstr "Postanzeige-Applet"
 
-#: applets/gen_util/mailcheck.c:1244
+#: applets/gen_util/mailcheck.c:1257
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(C) 1998-2000 The Free Software Foundation"
 
-#: applets/gen_util/mailcheck.c:1246
+#: applets/gen_util/mailcheck.c:1259
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr ""
 "Die Postanzeige benachrichtigt Sie, wenn neue Post in Ihrem Postfach\n"
 "liegt."
 
-#: applets/gen_util/mailcheck.c:1357
+#: applets/gen_util/mailcheck.c:1370
 msgid "Text only"
 msgstr "Nur Text"
 
-#: applets/gen_util/mailcheck.c:1385
+#: applets/gen_util/mailcheck.c:1398
 msgid "Check for mail"
 msgstr "Nach der Post sehen"
 
 #: applets/gen_util/main.c:54
 #, c-format
 msgid "Don't know how to activate `%s'\n"
-msgstr "Weiß nicht, wie `%s' aktiviert werden kann\n"
+msgstr "Keine Ahnung, wie `%s' aktiviert werden kann\n"
 
 #: applets/gen_util/printer.c:120
 msgid "Can't execute printer command"
-msgstr "Kann Druckbefehl nicht ausführen"
+msgstr "Druckbefehl kann nicht ausgeführt werden"
 
 #: applets/gen_util/printer.c:306
 msgid "Printer properties"
@@ -846,17 +859,17 @@ msgstr ""
 
 #: gmenu/main.c:285
 msgid "Unable to retrieve GNOME installation directory\n"
-msgstr "Konnte GNOME-Installationsverzeichnis nicht erhalten\n"
+msgstr "GNOME-Installationsverzeichnis konnte nicht erhalten werden\n"
 
 #: gmenu/order.c:78
 #, c-format
 msgid "Unable to create file: %s\n"
-msgstr "Konnte Datei nicht erzeugen: %s\n"
+msgstr "Datei konnte nicht erzeugt werden: %s\n"
 
 #: gmenu/order.c:96
 #, c-format
 msgid "unable to remove .order file: %s\n"
-msgstr "Konnte .order-Datei nicht entfernen: %s\n"
+msgstr ".order-Datei konnte nicht entfernt werden: %s\n"
 
 #: gmenu/save.c:27 gmenu/save.c:85
 msgid "The menu item must have a name"
@@ -888,7 +901,7 @@ msgstr ""
 
 #: gmenu/tree.c:391
 msgid "One moment, reading menus..."
-msgstr "Einen Moment, lese Menüs..."
+msgstr "Einen Moment, Menüs werden gelesen..."
 
 #: gmenu/tree.c:411
 msgid "Top of user menus"
@@ -938,11 +951,11 @@ msgstr "Neuer Ordner"
 
 #: gmenu/treenew.c:63
 msgid "Failed to create directory"
-msgstr "Konnte Verzeichnis nicht erzeugen"
+msgstr "Verzeichnis konnte nicht erzeugt werden"
 
 #: gmenu/treenew.c:118 gmenu/treenew.c:127
 msgid "untitled.desktop"
-msgstr "titellos.desktop"
+msgstr "namenlos.desktop"
 
 #: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:684
 msgid "untitled"
@@ -951,12 +964,12 @@ msgstr "namenlos"
 #: gmenu/utils.c:28
 #, c-format
 msgid "creating user directory: %s\n"
-msgstr "erzeuge Benutzerverzeichnis: %s\n"
+msgstr "Benutzerverzeichnis wird erzeugt: %s\n"
 
 #: gmenu/utils.c:31
 #, c-format
 msgid "unable to create user directory: %s\n"
-msgstr "konnte Benutzerverzeichnis nicht erzeugen: %s\n"
+msgstr "Benutzerverzeichnis konnte nicht erzeugt werden: %s\n"
 
 #: gnome-about/contributors.h:13
 msgid "GNOME was brought to you by"
@@ -1654,7 +1667,7 @@ msgid ""
 "It may be possible to correct the problem by adding\n"
 "%s to the file /etc/hosts."
 msgstr ""
-"Konnte die Internetadresse für »%s« nicht finden.\n"
+"Die Internetadresse für »%s« konnte nicht gefunden werden.\n"
 "Aus diesem Grund kann GNOME nicht korrekt arbeiten.\n"
 "Es ist vielleicht möglich, diesen Fehler durch\n"
 "Hinzufügen von »%s« zur Datei »/etc/hosts« zu\n"
@@ -1662,7 +1675,7 @@ msgstr ""
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
-msgstr "Abfolge: "
+msgstr "Reihenfolge: "
 
 #: gsm/gsm-client-editor.c:107
 msgid "Style: "
@@ -1670,7 +1683,7 @@ msgstr "Stil: "
 
 #: gsm/gsm-client-list.c:114
 msgid "Order"
-msgstr "Abfolge"
+msgstr "Reihenfolge"
 
 #: gsm/gsm-client-list.c:114
 msgid "Style"
@@ -1714,7 +1727,7 @@ msgstr "Speichert"
 
 #: gsm/gsm-client-row.c:41
 msgid "Saving session details."
-msgstr "Speichere Sitzungsdetails."
+msgstr "Sitzungsdetails werden gespeichert."
 
 #: gsm/gsm-client-row.c:43
 msgid "Unknown"
@@ -1730,7 +1743,7 @@ msgstr "Normal"
 
 #: gsm/gsm-client-row.c:51
 msgid "Unaffected by logouts but can die."
-msgstr "Von Abmeldungen nicht betroffen, kann aber sterben"
+msgstr "Von Abmeldungen nicht betroffen, kann aber sterben."
 
 #: gsm/gsm-client-row.c:53
 msgid "Respawn"
@@ -1835,11 +1848,11 @@ msgstr "Dialogfelder verwenden"
 
 #: gsm/save-session.c:98
 msgid "Could not connect to the session manager"
-msgstr "Konnte Sitzungsmanager nicht kontaktieren"
+msgstr "Sitzungsmanager konnte nicht kontaktiert werden"
 
 #: gsm/save-session.c:113
 msgid "Could not connect to gnome-session"
-msgstr "Konnte »gnome-session« nicht kontaktieren"
+msgstr "»gnome-session« konnte nicht kontaktiert werden"
 
 #: gsm/save-session.c:164
 msgid "Your session has been saved"
@@ -2019,7 +2032,7 @@ msgstr "URL"
 
 #: help-browser/history.c:258
 msgid "Last"
-msgstr "Zulezt am"
+msgstr "Zuletzt am"
 
 #: help-browser/history.c:258
 msgid "Count"
@@ -2058,7 +2071,7 @@ msgid ""
 msgstr ""
 "<html>\n"
 "<body bgcolor=\"#ffffff\">\n"
-"<h2>Ergebnisse der Teilstring-Suche für den String "
+"<h2>Ergebnisse der Teilstring-Suche für den String"
 
 #: help-browser/toc2.c:473
 msgid ""
@@ -2169,7 +2182,7 @@ msgstr "GNOME-Hilfe"
 
 #: help-browser/visit.c:84
 msgid "<BODY>Could not load default TOC page</BODY>"
-msgstr "<BODY>Konnte Standard-Inhaltsverzeichnis nicht laden</BODY>"
+msgstr "<BODY>Standard-Inhaltsverzeichnis konnte nicht geladen werden</BODY>"
 
 #: help-browser/visit.c:102
 msgid "<BODY>Unknown TOC argument</BODY>"
@@ -2309,7 +2322,7 @@ msgstr "Bewegen"
 #: panel/applet.c:463 panel/menu.c:2864
 #, c-format
 msgid "Cannot find pixmap file %s"
-msgstr "Kann Pixmapdatei %s nicht finden"
+msgstr "Pixmapdatei %s konnte nicht gefunden werden"
 
 #: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3089 panel/menu.c:3094
 #: panel/menu.c:4109 panel/menu.c:4114 panel/menu.c:4431
@@ -2318,15 +2331,15 @@ msgstr "Panel"
 
 #: panel/applet.c:690
 msgid "Can't find an empty spot"
-msgstr "Kann keinen leeren Fleck finden"
+msgstr "Leerer Fleck kann nicht gefunden werden"
 
 #: panel/applet-widget.c:912
 msgid "Cannot activate a panel object"
-msgstr "Kann kein Panelobjekt aktivieren"
+msgstr "Es kann kein Panelobjekt aktiviert werden"
 
 #: panel/applet-widget.c:1014
 msgid "Cannot start CORBA"
-msgstr "Kann CORBA nicht starten"
+msgstr "CORBA konnte nicht gestartet werden"
 
 #: panel/applet-widget.c:1176 panel/applet-widget.c:1277
 #: panel/applet-widget.c:1347 panel/applet-widget.c:1376
@@ -2337,7 +2350,7 @@ msgstr "CORBA-Problem"
 
 #: panel/applet-widget.c:1974
 msgid "Cannot create object"
-msgstr "Konnte Objekt nicht erzeugen"
+msgstr "Objekt konnte nicht erzeugt werden"
 
 #: panel/applet-widget.c:1979
 msgid "Object created is not AppletWidget"
@@ -2404,7 +2417,7 @@ msgstr "Schublade"
 
 #: panel/extern.c:443
 msgid "Couldn't add applet"
-msgstr "Konnte Applet nicht hinzufügen"
+msgstr "Applet konnte nicht hinzugefügt werden"
 
 #: panel/extern.c:499
 msgid "Whoops! for some reason we can't add to the panel"
@@ -2412,14 +2425,14 @@ msgstr "Huch! Aus irgendeinem Grund können wir nichts zum Panel hinzufügen"
 
 #: panel/extern.c:573
 msgid "No socket was created"
-msgstr "Kein Socket wurde angelegt"
+msgstr "Es wurde kein Socket angelegt"
 
 #: panel/foobar-widget.c:159
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
 msgstr ""
-"Kann das gmc-Client-Progamm nicht ausführen;\n"
+"Das gmc-Client-Progamm kann nicht ausgeführt werden;\n"
 "gmc ist vielleicht nicht installiert."
 
 #: panel/foobar-widget.c:169
@@ -2428,7 +2441,7 @@ msgid ""
 "perhaps it's not installed.\n"
 "It is in the gnome-pim package."
 msgstr ""
-"Kann den GNOME-Kalender nicht ausführen;\n"
+"Der GNOME-Kalender kann nicht ausgeführt werden;\n"
 "das Programm ist vielleicht nicht installiert."
 
 #: panel/foobar-widget.c:181
@@ -2529,7 +2542,7 @@ msgstr " Desktop "
 
 #: panel/foobar-widget.c:297
 msgid "can't fine real path"
-msgstr "Kann den realten Pfad nicht finden"
+msgstr "Der reale Pfad kann nicht gefunden werden"
 
 #: panel/foobar-widget.c:305
 msgid "menu wasn't created"
@@ -2869,7 +2882,7 @@ msgid ""
 "Failed to execute command:\n"
 "%s"
 msgstr ""
-"Kann Befehl nicht ausführen:\n"
+"Befehl konnte nicht ausgeführt werden:\n"
 "%s"
 
 #: panel/gnome-run.c:126
@@ -2879,7 +2892,7 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
-"Kann Befehl nicht ausführen:\n"
+"Befehl kann nicht ausgeführt werden:\n"
 "%s\n"
 "%s"
 
@@ -2905,7 +2918,7 @@ msgstr "Dieses Startericon gibt kein zu startendes Programm an"
 
 #: panel/launcher.c:76 panel/menu.c:1803
 msgid "Can't get goad_id from desktop entry!"
-msgstr "Erhalte keine goad_id für Desktopeintrag!"
+msgstr "Keine goad_id für Desktopeintrag erhalten!"
 
 #: panel/launcher.c:313
 msgid "App"
@@ -2959,7 +2972,7 @@ msgid ""
 "Start another panel as well?\n"
 "(The new panel will not be restarted.)"
 msgstr ""
-"Ich habe ein bereits laufendes Panel gefunden.\n"
+"Es wurde ein bereits laufendes Panel gefunden.\n"
 "Ein neues Panel starten?\n"
 "(Das neue Panel wird nicht neu gestartet.)"
 
@@ -2999,30 +3012,30 @@ msgstr "Ein Ende dem Hunger der Welt"
 
 #: panel/menu.c:170
 msgid "Can't execute 'About GNOME'"
-msgstr "Kann `Info zu GNOME' nicht ausführen"
+msgstr "`Info zu GNOME' kann nicht ausgeführt werden"
 
 #: panel/menu.c:181 panel/menu.c:860 panel/menu.c:1795
 msgid "Can't load entry"
-msgstr "Kann Eintrag nicht laden"
+msgstr "Eintrag kann nicht geladen werden"
 
 #: panel/menu.c:678
 msgid "Cannot create an item with an empty command"
-msgstr "Kann keinen Eintrag mit einem leeren Kommando erzeugen"
+msgstr "Es kann kein Eintrag mit einem leeren Kommando erzeugt werden"
 
 #: panel/menu.c:714
 #, c-format
 msgid "Could not get file from path: %s"
-msgstr "Konnte Datei aus Pfad nicht erhalten: %s"
+msgstr "Datei aus Pfad konnte nicht erhalten werden: %s"
 
 #: panel/menu.c:718 panel/menu.c:820
 #, c-format
 msgid "Could not open .order file: %s"
-msgstr "Konnte .order-Datei nicht öffnen: %s"
+msgstr ".order-Datei konnte nicht geöffnet werden: %s"
 
 #: panel/menu.c:725
 #, c-format
 msgid "Could not open file '%s' for writing"
-msgstr "Konnte Datei `%s' nicht zum Schreiben öffnen"
+msgstr "Datei `%s' konnte zum Schreiben nicht geöffnet werden"
 
 #: panel/menu.c:745
 msgid "Create menu item"
@@ -3031,17 +3044,17 @@ msgstr "Menüeintrag erzeugen"
 #: panel/menu.c:792
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
-msgstr "Konnte Menüeintrag %s nicht entfernen: %s\n"
+msgstr "Menüeintrag %s konnte nicht entfernt werden: %s\n"
 
 #: panel/menu.c:799
 #, c-format
 msgid "Could not get file name from path: %s"
-msgstr "Konnte Dateiname nicht aus Pfad erhalten: %s"
+msgstr "Dateiname konnte nicht aus Pfad erhalten werden: %s"
 
 #: panel/menu.c:839
 #, c-format
 msgid "Could not rename tmp file %s"
-msgstr "Konnte tmp-Datei %s nicht umbenennen"
+msgstr "tmp-Datei %s konnte nicht umbenannt werden"
 
 #: panel/menu.c:857
 msgid "No 'Exec' field in entry"
@@ -3098,7 +3111,8 @@ msgstr "Füge Abreißmenüs hinzu, wenn Abreißmenüs aktiviert werden"
 
 #: panel/menu.c:2262
 msgid "Can't get goad_id for applet, ignoring it"
-msgstr "Erhalte keine goad_id für Desktopeintrag, ignoriere es"
+msgstr ""
+"Es konnte keine goad_id für Desktopeintrag geholt werden, wird ignoriert"
 
 #: panel/menu.c:2464
 msgid " (empty)"
@@ -3151,7 +3165,7 @@ msgstr "Keine Systemmenüs gefunden!"
 
 #: panel/menu.c:2918
 msgid "Can't create the user menu directory"
-msgstr "Konnte Benutzer-Menüverzeichnis nicht anlegen"
+msgstr "Benutzer-Menüverzeichnis konnte nicht angelegt werden"
 
 #: panel/menu.c:2981 panel/menu.c:2987 panel/menu.c:4406
 msgid "KDE menus"
@@ -3280,7 +3294,7 @@ msgstr "Zum Panel hinzufügen"
 
 #: panel/menu.c:3919
 msgid "Cannot execute panel global properties"
-msgstr "Kann globale Paneleigenschaften nicht aufrufen"
+msgstr "Globale Paneleigenschaften können nicht aufgerufen werden"
 
 #: panel/menu.c:3959
 msgid "Remove this panel..."
@@ -3308,7 +3322,7 @@ msgstr "Panelhandbuch..."
 
 #: panel/menu.c:4086
 msgid "Cannot execute xscreensaver"
-msgstr "Kann xscreensaver nicht ausführen"
+msgstr "xscreensaver kann nicht ausgeführt werden"
 
 #: panel/menu.c:4138 panel/menu.c:4143 panel/menu.c:4440
 msgid "Desktop"
@@ -3324,7 +3338,7 @@ msgstr "Info zu GNOME..."
 
 #: panel/menu.c:4506
 msgid "Can't create menu, using main menu!"
-msgstr "Kann Menü nicht erzeugen, benutze Hauptmenü!"
+msgstr "Menü kann nicht erzeugt werden, Hauptmenü wird benutzt!"
 
 #: panel/menu-properties.c:145 panel/menu.c:4696
 msgid "Edit menus..."
@@ -3332,7 +3346,7 @@ msgstr "Menüs bearbeiten..."
 
 #: panel/menu-properties.c:152
 msgid "Can't open directory, using main menu!"
-msgstr "Kann Verzeichnis nicht öffnen, benutze Hauptmenü!"
+msgstr "Verzeichnis kann nicht geöffnet werden, Hauptmenü wird benutzt!"
 
 #: panel/menu-properties.c:359
 msgid "On the main menu"
@@ -3381,7 +3395,7 @@ msgstr "Standard-Icon für Panel Button"
 #: panel/panel.c:848
 #, c-format
 msgid "Open URL: %s"
-msgstr "Öffne URL: %s"
+msgstr "URL öffnen: %s"
 
 #: panel/panel_config.c:433
 msgid "Hiding"
@@ -3492,7 +3506,8 @@ msgstr "Weiter warten"
 
 #: panel/session.c:268
 msgid "Timed out on sending session save to an applet"
-msgstr "Abpfiff beim Senden des Sitzungs-Speichersignales an ein Applet"
+msgstr ""
+"Zeit ist beim Senden des Sitzungs-Speichersignales an ein Applet abgelaufen"
 
 #: panel/swallow.c:174
 msgid "Create swallow applet"
