@@ -1951,7 +1951,7 @@ gnome_desktop_item_find_icon (const char *icon,
 		for (li = kde_dirs; full == NULL && li != NULL; li = li->next) {
 			int i;
 			for (i = 0; check_exts[i] != NULL; i++) {
-				full = g_strconcat (li->data, G_DIR_SEPARATOR, icon,
+				full = g_strconcat (li->data, G_DIR_SEPARATOR_S, icon,
 						    check_exts[i], NULL);
 				if ( ! g_file_test (full, G_FILE_TEST_EXISTS)) {
 					g_free (full);
