@@ -200,6 +200,8 @@ setup_combo (GnomeDItemEdit *dee,
 
 	g_assert (types != NULL);
 
+	types = g_list_reverse (types);
+
 	gtk_combo_set_popdown_strings (
 		GTK_COMBO (dee->_priv->type_combo), types);
 
@@ -300,10 +302,10 @@ fill_easy_page (GnomeDItemEdit *dee,
 
 	/* Generic Name */
 	label = label_new (_("Generic name:"));
-	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	entry = gtk_entry_new ();
-	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
 
 	g_signal_connect_object (entry, "changed",
 				 G_CALLBACK (gnome_ditem_edit_changed),
@@ -318,10 +320,10 @@ fill_easy_page (GnomeDItemEdit *dee,
 
 	/* Comment */
 	label = label_new (_("Comment:"));
-	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
 
 	entry = gtk_entry_new ();
-	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 2, 3);
 
 	g_signal_connect_object (entry, "changed",
 				 G_CALLBACK (gnome_ditem_edit_changed),
@@ -331,11 +333,11 @@ fill_easy_page (GnomeDItemEdit *dee,
 	set_relation (dee->_priv->comment_entry, GTK_LABEL (label));
 
 	label = label_new (_("Command:"));
-	table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
 	dee->_priv->exec_label = label;
 
 	entry = gtk_entry_new ();
-	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 2, 3);
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 3, 4);
  
 	g_signal_connect_object (entry, "changed",
 				 G_CALLBACK (gnome_ditem_edit_changed),
@@ -345,14 +347,14 @@ fill_easy_page (GnomeDItemEdit *dee,
 	set_relation (dee->_priv->exec_entry, GTK_LABEL (label));
 
 	label = label_new (_("Type:"));
-	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 4, 5);
 	dee->_priv->type_label = label;
 
 	dee->_priv->type_combo = combo = gtk_combo_new ();
 	setup_combo (dee, ALL_TYPES, NULL);
 
 	gtk_combo_set_value_in_list (GTK_COMBO (combo), FALSE, TRUE);
-	table_attach_entry (GTK_TABLE (table), combo, 1, 2, 3, 4);
+	table_attach_entry (GTK_TABLE (table), combo, 1, 2, 4, 5);
 
 	g_signal_connect_object (GTK_COMBO (combo)->entry, "changed",
 				 G_CALLBACK (gnome_ditem_edit_changed),
@@ -365,10 +367,10 @@ fill_easy_page (GnomeDItemEdit *dee,
 	set_relation (dee->_priv->type_combo, GTK_LABEL (label));
 
 	label = label_new (_("Icon:"));
-	table_attach_label (GTK_TABLE (table), label, 0, 1, 4, 5);
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 5, 6);
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_BIG);
-	gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 4, 5,
+	gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 5, 6,
 			  GTK_EXPAND | GTK_FILL, 0, 0, 0); 
 
 	/* FIXME: locale specific icons!!! how the hell do we
@@ -683,6 +685,7 @@ fill_advanced_page (GnomeDItemEdit *dee,
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_name_entry = entry;
 
 	set_tooltip (dee, GTK_WIDGET(entry), _("Name"));
@@ -690,6 +693,7 @@ fill_advanced_page (GnomeDItemEdit *dee,
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_generic_name_entry = entry;
 
 	set_tooltip (dee, GTK_WIDGET(entry), _("Generic name"));
@@ -699,6 +703,7 @@ fill_advanced_page (GnomeDItemEdit *dee,
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_comment_entry = entry;
 
 	set_tooltip (dee, GTK_WIDGET(entry), _("Comment"));
