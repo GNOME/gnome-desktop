@@ -90,10 +90,25 @@ bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 #endif
 
 	switch (type->kind) {
-	case CORBA_tk_long:
-		any = bonobo_arg_new (TC_CORBA_long);
-		BONOBO_ARG_SET_LONG (any, 512);
-		break;
+
+#define SET_BASIC(k,t,v) \
+case CORBA_tk_##k##: \
+	any = bonobo_arg_new (TC_CORBA_##t##); \
+	BONOBO_ARG_SET_GENERAL (any, ##v##, TC_CORBA_##k##, CORBA_##t##, ev); \
+	break;
+
+		SET_BASIC (short,     short,              atoi  (de->value));
+		SET_BASIC (long,      long,               atol  (de->value));
+		SET_BASIC (ushort,    unsigned_short,     atoi  (de->value));
+		SET_BASIC (ulong,     unsigned_long,      atol  (de->value));
+		SET_BASIC (longlong,  long_long,          atoll (de->value));
+		SET_BASIC (float,     float,              atof  (de->value));
+		SET_BASIC (double,    double,             atof  (de->value));
+		SET_BASIC (ulonglong, unsigned_long_long, atoll (de->value));
+		SET_BASIC (char,      char,               de->value [0]);
+		SET_BASIC (octet,     octet,              atoi  (de->value));
+
+#undef SET_BASIC
 
 	case CORBA_tk_boolean:
 		if (!strcmp (de->value, "0") || !strcasecmp (de->value, "false")) {
