@@ -173,25 +173,24 @@ dnl applets/diskusage
 GNOME_FILEUTILS_CHECKS
 
 dnl panel/cdplayer
-PROGRAMS_PANEL_CDPLAYER=""
 AC_CANONICAL_HOST
 case "$host" in
 *linux*) CDROM_HOST=linux;;
 *solaris*) CDROM_HOST=solaris;;
 esac
-test -n "$CDROM_HOST" && PROGRAMS_PANEL_CDPLAYER=cdplayer
+AM_CONDITIONAL(APPLET_CDPLAYER, test -n "$CDROM_HOST")
 AC_SUBST(CDROM_HOST)
-AC_SUBST(PROGRAMS_PANEL_CDPLAYER)
 
 dnl panel/mixer
-PROGRAMS_PANEL_MIXER=""
-AC_CHECK_HEADERS(linux/soundcard.h,[PROGRAMS_PANEL_MIXER=mixer],[
-  AC_CHECK_HEADERS(machine/soundcard.h, [PROGRAMS_PANEL_MIXER=mixer])])
-AC_SUBST(PROGRAMS_PANEL_MIXER)
+P_MIXER=
+AC_CHECK_HEADERS(linux/soundcard.h,[P_MIXER=mixer],[
+  AC_CHECK_HEADERS(machine/soundcard.h, [P_MIXER=mixer])])
+AM_CONDITIONAL(APPLET_MIXER, test "$P_MIXER" = "mixer")
 
 dnl panel/modemlights
-AC_CHECK_HEADERS(net/ppp_defs.h,[PROGRAMS_PANEL_MODEMLIGHTS=modemlights])
-AC_SUBST(PROGRAMS_PANEL_MODEMLIGHTS)
+P_MODEMLIGHTS=
+AC_CHECK_HEADERS(net/ppp_defs.h,[P_MODEMLIGHTS=modemlights])
+AM_CONDITIONAL(APPLET_MODEMLIGHTS, test "$P_MODEMLIGHTS" = "modemlights")
  
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
@@ -209,8 +208,9 @@ dnl AC_CONFIG_SUBDIRS(gemvt)
 
 dnl gmenu requires ctree in the devel GTK 1.1, this is a simple check
 dnl for gtk/gtkctree.h
-AC_CHECK_HEADERS(gtk/gtkctree.h,[PROGRAM_GMENU=gmenu])
-AC_SUBST(PROGRAM_GMENU)
+P_GMENU=
+AC_CHECK_HEADERS(gtk/gtkctree.h,[P_GMENU=gmenu])
+AM_CONDITIONAL(PROGRAM_GMENU, test "$P_GMENU" = "gmenu")
 
 AC_OUTPUT([
 Makefile
@@ -225,7 +225,6 @@ applets/bussign/Makefile
 applets/cdplayer/Makefile
 applets/mixer/Makefile
 applets/modemlights/Makefile
-applets/netwatch/Makefile
 applets/cpuload/Makefile
 applets/netload/Makefile
 applets/cpumemusage/Makefile

@@ -1,3 +1,13 @@
+1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* configure.in (PROGRAM_GMENU):
+	Use AM_CONDITIONAL rather than AC_SUBST. 
+	(PROGRAMS_PANEL_{CDPLAYER,MIXER,MODEMLIGHTS}): Likewise.
+	(AC_OUTPUT): Remove `applets/netwatch/Makefile'.
+
+	* Makefile.am (gmenu): New var.
+	(SUBDIRS): Use $(gmenu) instead of @PROGRAM_GMENU@.
+	
 1998-08-01  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* core-docs/Makefile.am (install-data-local): Use INSTALL_DATA in
