@@ -148,6 +148,7 @@ static gchar *contributors[] = {
 	"Federico Mena-Quintero",
 	"Cesar Miquel",
 	"Eric B. Mitchell",
+	"Julian Missig",
 	"Jaka Mocnik",
 	"Paolo Molaro",
 	"David Mosberger",
