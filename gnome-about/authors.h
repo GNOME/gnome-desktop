@@ -88,6 +88,7 @@ static author authors[] = {
 	{ "Scott Heavner", "" },
 	{ "James Henstridge", "<james@daa.com.au>" },
 	{ "Richard Hestilow", "" },
+	{ "Iain Holmes", "<ih@csd.abdn.ac.uk>" },
 	{ "David Huggins-Daines", "" },
 	{ "Richard Hult", "<d4hult@dtek.chalmers.se>" },
 	{ "Miguel de Icaza", "<miguel@gnu.org>" },
