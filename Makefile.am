@@ -5,7 +5,7 @@ applets = applets
 idl = idl
 
 always_built_SUBDIRS = \
-	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
+	 gsm smproxy pixmaps desktop-links help-browser \
 	 gnome-terminal core-docs gmenu
 
 sometimes_built_SUBDIRS = panel applets control-center capplets idl
