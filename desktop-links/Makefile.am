@@ -50,7 +50,7 @@ Desktop_DATA = \
 	xv.desktop		\
 	xbmbrowser.desktop	\
 	UNIX.desktop		\
-	UNIX-regular.desktop	\
+	xterm.desktop		\
 	Eterm.desktop		\
 	Kterm.desktop		\
 	Vnterm.desktop 		\
