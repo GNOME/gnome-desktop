@@ -331,15 +331,13 @@ main (gint argc, gchar *argv[])
 
 	gnome_init ("gnome-about","1.0", argc, argv);
 	
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-
+	window = gtk_window_new (GTK_WINDOW_DIALOG);
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 
 	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 			    GTK_SIGNAL_FUNC (cb_quit), NULL);
 
 	gtk_window_set_title (GTK_WINDOW (window), "About GNOME");
-	gtk_window_set_policy (GTK_WINDOW (window), FALSE, FALSE, FALSE),
 	gtk_widget_realize (window);
 
 	/* Load the fonts */
