@@ -35,8 +35,6 @@ dnl ## all 'es_??' are only needed for format numbers different of 'es'
 ALL_LINGUAS="ca cs da de es es_DO es_GT es_HN es_MX es_PA es_PE es_SV fi fr ga it ja ko no pt sv ru"
 AM_GNU_GETTEXT
 
-AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
-
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
@@ -242,7 +240,4 @@ idl/Makefile
 pixmaps/Makefile
 gsm/Makefile
 smproxy/Makefile
-intl/Makefile],
-[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
-
-
+intl/Makefile])
