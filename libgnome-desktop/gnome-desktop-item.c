@@ -42,11 +42,6 @@
 #include "gnome-i18n.h"
 
 struct _GnomeDesktopItem {
-        guchar refcount;
-
-        GnomeDesktopItemFormat item_format : 4;
-        GnomeDesktopItemFlags item_flags : 4;
-
         GHashTable *name; /* key is language, value is translated string */
         GHashTable *comment; /* key is language, value is translated string */
 
@@ -61,6 +56,11 @@ struct _GnomeDesktopItem {
         GSList *subitems; /* If GNOME_DESKTOP_ITEM_IS_DIRECTORY */
 
         time_t mtime;
+
+        guchar refcount;
+
+        GnomeDesktopItemFormat item_format : 4;
+        GnomeDesktopItemFlags item_flags : 4;
 };
 
 #ifdef DI_DEBUG
