@@ -1,3 +1,15 @@
+2002-11-30  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-desktop-item.c (ditem_execute): doh, we have to initiate
+	the startup sequence prior to exec'ing the child, otherwise we
+	can't set DESKTOP_STARTUP_ID.
+	(ditem_execute): end startup sequence if it fails
+	(ditem_execute): add to envp instead of using child setup func
+	(ditem_execute): get localized name from the desktop file, not 
+	non-localized.
+	(ditem_execute): add a timeout for the startup sequence as a last 
+	fallback if it doesn't properly end, and no one else times it out.
+
 2002-10-10  Satyajit Kanungo <satyajit.kanungo@wipro.com>
 
 	* gnome-desktop-item.c: Added a new API gnome_desktop_item_drop_uri_list_with_env()

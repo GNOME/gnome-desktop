@@ -1495,14 +1495,148 @@ sn_error_trap_pop (SnDisplay *display,
 	gdk_error_trap_pop ();
 }
 
-static void
-sn_child_setup_func (void *data)
-{
-	SnLauncherContext *sn_context = data;
+extern char **environ;
 
-	sn_launcher_context_setup_child_process (sn_context);
+static char **
+make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
+				       char             **envp)
+{
+	char **retval = NULL;
+	int    i;
+
+	if (envp == NULL)
+		envp = environ;
+	
+	for (i = 0; envp[i]; i++)
+		;
+
+	retval = g_new (char *, i + 1);
+
+	for (i = 0; envp[i]; i++)
+		retval[i] = g_strdup (envp[i]);
+
+	retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s",
+				     sn_launcher_context_get_startup_id (sn_context));
+	++i;
+	retval[i] = NULL;
+
+	return retval;
 }
 
+/* This should be fairly long, as it's confusing to users if a startup
+ * ends when it shouldn't (it appears that the startup failed, and
+ * they have to relaunch the app). Also the timeout only matters when
+ * there are bugs and apps don't end their own startup sequence.
+ *
+ * This timeout is a "last resort" timeout that ignores whether the
+ * startup sequence has shown activity or not.  Metacity and the
+ * tasklist have smarter, and correspondingly able-to-be-shorter
+ * timeouts. The reason our timeout is dumb is that we don't monitor
+ * the sequence (don't use an SnMonitorContext)
+ */
+#define STARTUP_TIMEOUT_LENGTH (30 /* seconds */ * 1000)
+
+typedef struct
+{
+	GdkScreen *screen;
+	GSList *contexts;
+	guint timeout_id;
+} StartupTimeoutData;
+
+static void
+free_startup_timeout (void *data)
+{
+	StartupTimeoutData *std = data;
+
+	g_slist_foreach (std->contexts,
+			 (GFunc) sn_launcher_context_unref,
+			 NULL);
+	g_slist_free (std->contexts);
+
+	if (std->timeout_id != 0) {
+		g_source_remove (std->timeout_id);
+		std->timeout_id = 0;
+	}
+
+	g_free (std);
+}
+
+static gboolean
+startup_timeout (void *data)
+{
+	StartupTimeoutData *std = data;
+	GSList *tmp;
+	GTimeVal now;
+	int min_timeout;
+
+	min_timeout = STARTUP_TIMEOUT_LENGTH;
+	
+	g_get_current_time (&now);
+	
+	tmp = std->contexts;
+	while (tmp != NULL) {
+		SnLauncherContext *sn_context = tmp->data;
+		GSList *next = tmp->next;
+		long tv_sec, tv_usec;
+		double elapsed;
+		
+		sn_launcher_context_get_last_active_time (sn_context,
+							  &tv_sec, &tv_usec);
+
+		elapsed =
+			((((double)now.tv_sec - tv_sec) * G_USEC_PER_SEC +
+			  (now.tv_usec - tv_usec))) / 1000.0;
+
+		if (elapsed >= STARTUP_TIMEOUT_LENGTH) {
+			std->contexts = g_slist_remove (std->contexts,
+							sn_context);
+			sn_launcher_context_complete (sn_context);
+			sn_launcher_context_unref (sn_context);
+		} else {
+			min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT_LENGTH - elapsed));
+		}
+		
+		tmp = next;
+	}
+
+	if (std->contexts == NULL) {
+		std->timeout_id = 0;
+	} else {
+		std->timeout_id = g_timeout_add (min_timeout,
+						 startup_timeout,
+						 std);
+	}
+
+	/* always remove this one, but we may have reinstalled another one. */
+	return FALSE;
+}
+
+static void
+add_startup_timeout (GdkScreen         *screen,
+		     SnLauncherContext *sn_context)
+{
+	StartupTimeoutData *data;
+
+	data = g_object_get_data (G_OBJECT (screen), "gnome-startup-data");
+	if (data == NULL) {
+		data = g_new (StartupTimeoutData, 1);
+		data->screen = screen;
+		data->contexts = NULL;
+		data->timeout_id = 0;
+		
+		g_object_set_data_full (G_OBJECT (screen), "gnome-startup-data",
+					data, free_startup_timeout);		
+	}
+
+	sn_launcher_context_ref (sn_context);
+	data->contexts = g_slist_prepend (data->contexts, sn_context);
+	
+	if (data->timeout_id == 0) {
+		data->timeout_id = g_timeout_add (STARTUP_TIMEOUT_LENGTH,
+						  startup_timeout,
+						  data);		
+	}
+}
 #endif /* HAVE_STARTUP_NOTIFICATION */
 
 static int
@@ -1518,6 +1652,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	       gboolean append_paths,
 	       GError **error)
 {
+	char **free_me = NULL;
 	char **real_argv;
 	int i, ret;
 	char **term_argv = NULL;
@@ -1570,18 +1705,61 @@ ditem_execute (const GnomeDesktopItem *item,
 	 */
 
 	if (gnome_desktop_item_get_boolean (item, "StartupNotify")) {
-		sn_context = sn_launcher_context_new (
-					sn_display,
-					screen ? gdk_screen_get_number (screen) :
-					         DefaultScreen (gdk_display));
+		const char *name;
+		const char *icon;
+
+		sn_context = sn_launcher_context_new (sn_display,
+						      screen ? gdk_screen_get_number (screen) :
+						      DefaultScreen (gdk_display));
+		
+		name = gnome_desktop_item_get_localestring (item,
+							    GNOME_DESKTOP_ITEM_NAME);
+
+		if (name == NULL)
+			name = gnome_desktop_item_get_localestring (item,
+								    GNOME_DESKTOP_ITEM_GENERIC_NAME);
+		
+		if (name != NULL) {
+			char *description;
+			
+			sn_launcher_context_set_name (sn_context, name);
+			
+			description = g_strdup_printf (_("Starting %s"), name);
+			
+			sn_launcher_context_set_description (sn_context, description);
+			
+			g_free (description);
+		}
+		
+		icon = gnome_desktop_item_get_string (item,
+						      GNOME_DESKTOP_ITEM_ICON);
+		
+		if (icon != NULL)
+			sn_launcher_context_set_icon_name (sn_context, icon);
+		
+		sn_launcher_context_set_binary_name (sn_context,
+						     exec);
+
+		sn_launcher_context_set_workspace (sn_context, workspace);
+
+		sn_launcher_context_initiate (sn_context,
+					      g_get_prgname () ? g_get_prgname () : "unknown",
+					      exec,
+					      CurrentTime);
+		
+		envp = make_spawn_environment_for_sn_context (sn_context, envp);
+		g_strfreev (free_me);
+		free_me = envp;		
 	} else {
 		sn_context = NULL;
 	}
 #endif
 
-	if (screen)
-		envp = egg_make_spawn_environment_for_screen (
-				screen, envp);
+	if (screen) {
+		envp = egg_make_spawn_environment_for_screen (screen, envp);
+		g_strfreev (free_me);
+		free_me = envp;
+	}
 	
 	do {
 		added_status = ADDED_NONE;
@@ -1636,18 +1814,13 @@ ditem_execute (const GnomeDesktopItem *item,
 		real_argv = list_to_vector (vector_list);
 		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
 		g_slist_free (vector_list);
-
+		
 		if ( ! g_spawn_async (working_dir,
 				      real_argv,
 				      envp,
 				      G_SPAWN_SEARCH_PATH /* flags */,
-#ifdef HAVE_STARTUP_NOTIFICATION
-				      sn_context ? sn_child_setup_func : NULL,
-				      sn_context,
-#else
-				      NULL /* child_setup */,
-				      NULL /* user_data */,
-#endif
+				      NULL, /* child_setup_func */
+				      NULL, /* child_setup_func_data */
 				      &ret /* child_pid */,
 				      error)) {
 			/* The error was set for us,
@@ -1668,53 +1841,25 @@ ditem_execute (const GnomeDesktopItem *item,
 
 #ifdef HAVE_STARTUP_NOTIFICATION
 	if (sn_context != NULL) {
-		const char *name;
-		const char *icon;
-		
-		name = gnome_desktop_item_get_string (item,
-						      GNOME_DESKTOP_ITEM_NAME);
-		
-		if (name != NULL) {
-			char *description;
-
-			sn_launcher_context_set_name (sn_context, name);
-			
-			description = g_strdup_printf (_("Starting %s"), name);
-
-			sn_launcher_context_set_description (sn_context, description);
-			
-			g_free (description);
-		}
-		
-		icon = gnome_desktop_item_get_string (item,
-						      GNOME_DESKTOP_ITEM_ICON);
-		
-		if (icon != NULL)
-			sn_launcher_context_set_icon_name (sn_context, icon);
-		
-		sn_launcher_context_set_binary_name (sn_context,
-						     exec);
-
-		sn_launcher_context_set_workspace (sn_context, workspace);
-
-		sn_launcher_context_initiate (sn_context,
-					      g_get_prgname () ? g_get_prgname () : "unknown",
-					      exec,
-					      CurrentTime);
-		
+		if (ret < 0)
+			sn_launcher_context_complete (sn_context); /* end sequence */
+		else
+			add_startup_timeout (screen ? screen :
+					     gdk_display_get_default_screen (gdk_display_get_default ()),
+					     sn_context);
 		sn_launcher_context_unref (sn_context);
 	}
 	
 	sn_display_unref (sn_display);
-#endif
+#endif /* HAVE_STARTUP_NOTIFICATION */
 	
 	free_args (args);
 	
 	if (term_argv)
 		g_strfreev (term_argv);
 
-	if (screen)
-		g_free (envp);
+	if (free_me)
+		g_strfreev (free_me);
 
 	return ret;
 }
