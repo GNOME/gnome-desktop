@@ -11,6 +11,7 @@
 /* Please keep this in alphabetical order */
 static gchar *contributors[] = {
 	"J\xc3\xa9r\xc3\xb4me Abela",
+	"Rob Adams",
 	"Lauri Alanko",
 	"Seth Alves",
 	"Shawn T. Amundson",
