@@ -46,6 +46,7 @@ static author authors[] = {
 	{ "Andreas Czechanowski", "" },
 	{ "Phil Dawes", "" },
 	{ "Philip Dawes", "" },
+	{ "Fatih Demir", "kabalak@gmx.net" },
 	{ "Frederic Devernay", "" },
 	{ "Maurer Dietmar", "" },
 	{ "Feico W. Dillema", "" },
