@@ -270,6 +270,7 @@ static gchar *contributors[] = {
 	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
 	"Stalyn",
+	"Jakub Steiner",
 	"Ben Stern",
 	"Micah Stetson",
 	"Nathan Carl Summers",
