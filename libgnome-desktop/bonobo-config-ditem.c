@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /**
  * bonobo-config-ditem.c: ditem configuration database implementation.
  *
@@ -26,6 +27,365 @@ static GObjectClass *parent_class = NULL;
 #define PARENT_TYPE BONOBO_CONFIG_DATABASE_TYPE
 #define FLUSH_INTERVAL 30 /* 30 seconds */
 
+#define STRSIZE 4096
+#define overflow (next == &CharBuffer [STRSIZE-1])
+
+enum {
+	FirstBrace,
+	OnSecHeader,
+	IgnoreToEOL,
+	IgnoreToEOLFirst,
+	KeyDef,
+	KeyDefOnKey,
+	KeyValue
+};
+
+typedef struct {
+	int type;
+	void *value;
+} iterator_type;
+
+typedef enum {
+	LOOKUP,
+	SET
+} access_type;
+
+typedef struct TKeys {
+	char *key_name;
+	char *value;
+	struct TKeys *link;
+} TKeys;
+
+typedef struct TSecHeader {
+	char *section_name;
+	TKeys *keys;
+	struct TSecHeader *link;
+} TSecHeader;
+
+struct _BonoboConfigDItemPrivate {
+	guint                 time_id;
+
+	TSecHeader           *dir;
+
+	BonoboEventSource    *es;
+};
+
+static char *
+decode_string_and_dup (char *s)
+{
+	char *p = g_malloc (strlen (s) + 1);
+	char *q = p;
+
+	do {
+		if (*s == '\\'){
+			switch (*(++s)){
+			case 'n':
+				*p++ = '\n';
+				break;
+			case '\\':
+				*p++ = '\\';
+				break;
+			case 'r':
+				*p++ = '\r';
+				break;
+			default:
+				*p++ = '\\';
+				*p++ = *s;
+			}
+		} else
+			*p++ = *s;
+	} while (*s++);
+	return q;
+}
+
+static char *
+escape_string_and_dup (char *s)
+{
+	char *return_value, *p = s;
+	int len = 0;
+
+	if(!s)
+		return g_strdup("");
+	
+	while (*p){
+		len++;
+		if (*p == '\n' || *p == '\\' || *p == '\r' || *p == '\0')
+			len++;
+		p++;
+	}
+	return_value = p = (char *) g_malloc (len + 1);
+	if (!return_value)
+		return 0;
+	do {
+		switch (*s){
+		case '\n':
+			*p++ = '\\';
+			*p++ = 'n';
+			break;
+		case '\r':
+			*p++ = '\\';
+			*p++ = 'r';
+			break;
+		case '\\':
+			*p++ = '\\';
+			*p++ = '\\';
+			break;
+		default:
+			*p++ = *s;
+		}
+	} while (*s++);
+	return return_value;
+}
+
+static TSecHeader *
+load (const char *file)
+{
+	FILE *f;
+	int state;
+	TSecHeader *SecHeader = 0;
+	char CharBuffer [STRSIZE];
+	char *next = "";		/* Not needed */
+	int c;
+	
+	if ((f = fopen (file, "r"))==NULL)
+		return NULL;
+	
+	state = FirstBrace;
+	while ((c = getc_unlocked (f)) != EOF){
+		if (c == '\r')		/* Ignore Carriage Return */
+			continue;
+		
+		switch (state){
+			
+		case OnSecHeader:
+			if (c == ']' || overflow){
+				*next = '\0';
+				next = CharBuffer;
+				SecHeader->section_name = g_strdup (CharBuffer);
+				state = IgnoreToEOL;
+			} else
+				*next++ = c;
+			break;
+
+		case IgnoreToEOL:
+		case IgnoreToEOLFirst:
+			if (c == '\n'){
+				if (state == IgnoreToEOLFirst)
+					state = FirstBrace;
+				else
+					state = KeyDef;
+				next = CharBuffer;
+			}
+			break;
+
+		case FirstBrace:
+		case KeyDef:
+		case KeyDefOnKey:
+			if (c == '#') {
+				if (state == FirstBrace)
+					state = IgnoreToEOLFirst;
+				else
+					state = IgnoreToEOL;
+				break;
+			}
+
+			if (c == '[' && state != KeyDefOnKey){
+				TSecHeader *temp;
+		
+				temp = SecHeader;
+				SecHeader = (TSecHeader *) g_malloc (sizeof (TSecHeader));
+				SecHeader->link = temp;
+				SecHeader->keys = 0;
+				state = OnSecHeader;
+				next = CharBuffer;
+				break;
+			}
+			/* On first pass, don't allow dangling keys */
+			if (state == FirstBrace)
+				break;
+	    
+			if ((c == ' ' && state != KeyDefOnKey) || c == '\t')
+				break;
+	    
+			if (c == '\n' || overflow) { /* Abort Definition */
+				next = CharBuffer;
+				state = KeyDef;
+                                break;
+                        }
+	    
+			if (c == '=' || overflow){
+				TKeys *temp;
+
+				temp = SecHeader->keys;
+				*next = '\0';
+				SecHeader->keys = (TKeys *) g_malloc (sizeof (TKeys));
+				SecHeader->keys->link = temp;
+				SecHeader->keys->key_name = g_strdup (CharBuffer);
+				state = KeyValue;
+				next = CharBuffer;
+			} else {
+				*next++ = c;
+				state = KeyDefOnKey;
+			}
+			break;
+
+		case KeyValue:
+			if (overflow || c == '\n'){
+				*next = '\0';
+				SecHeader->keys->value = decode_string_and_dup (CharBuffer);
+				state = c == '\n' ? KeyDef : IgnoreToEOL;
+				next = CharBuffer;
+#ifdef GNOME_ENABLE_DEBUG
+#endif
+			} else
+				*next++ = c;
+			break;
+	    
+		} /* switch */
+	
+	} /* while ((c = getc_unlocked (f)) != EOF) */
+	if (c == EOF && state == KeyValue){
+		*next = '\0';
+		SecHeader->keys->value = decode_string_and_dup (CharBuffer);
+	}
+	fclose (f);
+	return SecHeader;
+}
+
+static TSecHeader *
+dir_lookup_subdir (TSecHeader  *dir,
+		   char        *name,
+		   gboolean     create)
+{
+	TSecHeader *dd;
+	
+	for (dd = dir; dd != NULL; dd = dd->link)
+		if (!strcmp (dd->section_name, name))
+			return dd;
+
+#if 0
+	if (create) {
+
+		dd = g_new0 (DirData, 1);
+
+		dd->dir = dir;
+
+		dd->name = g_strdup (name);
+
+		dir->subdirs = g_slist_prepend (dir->subdirs, dd);
+
+		return dd;
+	}
+#endif
+
+	return NULL;
+}
+
+static TSecHeader *
+lookup_dir (TSecHeader *dir,
+	    const char *path,
+	    gboolean    create)
+{
+	const char *s, *e;
+	char *name;
+	TSecHeader *dd = dir;
+	
+	s = path;
+	while (*s == '/') s++;
+	
+	if (*s == '\0')
+		return dir;
+
+	if ((e = strchr (s, '/')))
+		name = g_strndup (s, e - s);
+	else
+		name = g_strdup (s);
+
+	if (e) {
+		g_free (name);
+		return NULL;
+	}
+	
+	if ((dd = dir_lookup_subdir (dd, name, create))) {
+		g_free (name);
+		return dd;
+		
+	}
+
+	return NULL;
+}
+
+static Bonobo_KeyList *
+real_get_dirs (BonoboConfigDatabase *db,
+	       const CORBA_char     *dir,
+	       CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	Bonobo_KeyList *key_list;
+	TSecHeader *dd, *c;
+	int len;
+
+	key_list = Bonobo_KeyList__alloc ();
+	key_list->_length = 0;
+
+	if (!(dd = lookup_dir (ditem->_priv->dir, dir, FALSE)))
+		return key_list;
+
+	for (len = 0, c = dd; c != NULL; c = c->link, len++)
+		;
+
+	if (!len)
+		return key_list;
+
+	key_list->_maximum = len;
+	key_list->_buffer = CORBA_sequence_CORBA_string_allocbuf (len);
+	CORBA_sequence_set_release (key_list, TRUE); 
+	
+	for (c = dd; c != NULL; c = c->link) {
+		key_list->_buffer [key_list->_length] =
+			CORBA_string_dup (c->section_name);
+		key_list->_length++;
+	}
+
+	return key_list;
+}
+
+static Bonobo_KeyList *
+real_get_keys (BonoboConfigDatabase *db,
+	       const CORBA_char     *dir,
+	       CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	Bonobo_KeyList *key_list;
+	TSecHeader *dd;
+	TKeys *c;
+	int len;
+	
+	key_list = Bonobo_KeyList__alloc ();
+	key_list->_length = 0;
+
+	if (!(dd = lookup_dir (ditem->_priv->dir, dir, FALSE)))
+		return key_list;
+
+	for (len = 0, c = dd->keys; c != NULL; c = c->link, len++)
+		;
+
+	if (!len)
+		return key_list;
+
+	key_list->_maximum = len;
+	key_list->_buffer = CORBA_sequence_CORBA_string_allocbuf (len);
+	CORBA_sequence_set_release (key_list, TRUE); 
+	
+	for (c = dd->keys; c != NULL; c = c->link) {
+		key_list->_buffer [key_list->_length] =
+			CORBA_string_dup (c->key_name);
+		key_list->_length++;
+	}
+	
+	return key_list;
+}
+
 static void
 real_sync (BonoboConfigDatabase *db, 
 	   CORBA_Environment    *ev)
@@ -50,7 +410,7 @@ timeout_cb (gpointer data)
 	
 	CORBA_exception_free (&ev);
 
-	ditem->time_id = 0;
+	ditem->_priv->time_id = 0;
 
 	/* remove the timeout */
 	return FALSE;
@@ -73,7 +433,7 @@ notify_listeners (BonoboConfigDItem *ditem,
 
 	ename = g_strconcat ("Bonobo/Property:change:", key, NULL);
 
-	bonobo_event_source_notify_listeners(ditem->es, ename, value, &ev);
+	bonobo_event_source_notify_listeners(ditem->_priv->es, ename, value, &ev);
 
 	g_free (ename);
 	
@@ -86,7 +446,7 @@ notify_listeners (BonoboConfigDItem *ditem,
 	ename = g_strconcat ("Bonobo/ConfigDatabase:change", dir_name, ":", 
 			     leaf_name, NULL);
 
-	bonobo_event_source_notify_listeners (ditem->es, ename, value, &ev);
+	bonobo_event_source_notify_listeners (ditem->_priv->es, ename, value, &ev);
 						   
 	CORBA_exception_free (&ev);
 
@@ -107,8 +467,15 @@ bonobo_config_ditem_finalize (GObject *object)
       
 	CORBA_exception_free (&ev);
 
-	if (ditem->es)
-		bonobo_object_unref (BONOBO_OBJECT (ditem->es));
+	if (ditem->_priv) {
+
+		if (ditem->_priv->es)
+			bonobo_object_unref (BONOBO_OBJECT (ditem->_priv->es));
+
+	}
+
+	g_free (ditem->_priv);
+	ditem->_priv = NULL;
 
 	parent_class->finalize (object);
 }
@@ -125,11 +492,15 @@ bonobo_config_ditem_class_init (BonoboConfigDatabaseClass *class)
 	object_class->finalize = bonobo_config_ditem_finalize;
 
 	cd_class = BONOBO_CONFIG_DATABASE_CLASS (class);
+
+	cd_class->get_dirs     = real_get_dirs;
+	cd_class->get_keys     = real_get_keys;
 }
 
 static void
 bonobo_config_ditem_init (BonoboConfigDItem *ditem)
 {
+	ditem->_priv = g_new0 (BonoboConfigDItemPrivate, 1);
 }
 
 BONOBO_TYPE_FUNC (BonoboConfigDItem, PARENT_TYPE, bonobo_config_ditem);
@@ -172,11 +543,13 @@ bonobo_config_ditem_new (const char *filename)
 	ditem->filename = real_name;
 
 	BONOBO_CONFIG_DATABASE (ditem)->writeable = TRUE;
+
+	ditem->_priv->dir = load (ditem->filename);
 		       
-	ditem->es = bonobo_event_source_new ();
+	ditem->_priv->es = bonobo_event_source_new ();
 
 	bonobo_object_add_interface (BONOBO_OBJECT (ditem), 
-				     BONOBO_OBJECT (ditem->es));
+				     BONOBO_OBJECT (ditem->_priv->es));
 
 	db = CORBA_Object_duplicate (BONOBO_OBJREF (ditem), NULL);
 

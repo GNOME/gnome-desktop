@@ -6,17 +6,53 @@ int
 main (int argc, char **argv)
 {
 	Bonobo_ConfigDatabase db = NULL;
+	Bonobo_KeyList *dirlist, *keylist;
         CORBA_Environment  ev;
 	CORBA_any *value;
+	guint i, j;
 
         CORBA_exception_init (&ev);
 
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Cannot init bonobo");
 
-	db = bonobo_config_ditem_new ("/tmp/t.desktop");
+#if 1
+	db = bonobo_config_ditem_new ("~/work/test.desktop");
+#else
+        CORBA_exception_init (&ev);
+	db = bonobo_get_object ("xmldb:~/work/foo.xml", "Bonobo/ConfigDatabase", &ev);
+	g_assert (!BONOBO_EX (&ev));
+        CORBA_exception_free (&ev);
+#endif
 
 	g_assert (db != NULL);
+
+        CORBA_exception_init (&ev);
+
+	dirlist = Bonobo_ConfigDatabase_getDirs (db, "", &ev);
+	g_assert (!BONOBO_EX (&ev));
+
+	if (dirlist) {
+	    for (i = 0; i < dirlist->_length; i++) {
+		g_print ("DIR: |%s|\n", dirlist->_buffer [i]);
+
+		keylist = Bonobo_ConfigDatabase_getKeys (db, dirlist->_buffer [i], &ev);
+		g_assert (!BONOBO_EX (&ev));
+
+		if (keylist)
+		    for (j = 0; j < keylist->_length; j++)
+			g_print ("KEY (%s): |%s|\n", dirlist->_buffer [i], keylist->_buffer [j]);
+	    }
+	}
+
+	keylist = Bonobo_ConfigDatabase_getKeys (db, "/Config/Foo", &ev);
+	g_assert (!BONOBO_EX (&ev));
+
+	if (keylist)
+	    for (j = 0; j < keylist->_length; j++)
+		g_print ("TEST KEY: |%s|\n", keylist->_buffer [j]);
+
+	exit (0);
 
 	value = bonobo_pbclient_get_value (db, "/test", TC_long, &ev);
 

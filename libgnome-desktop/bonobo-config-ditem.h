@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /**
  * bonobo-config-ditem.c: ditem configuration database implementation.
  *
@@ -22,19 +23,20 @@ G_BEGIN_DECLS
 #define BONOBO_IS_CONFIG_DITEM_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), BONOBO_CONFIG_DITEM_TYPE))
 
 typedef struct _BonoboConfigDItem        BonoboConfigDItem;
+typedef struct _BonoboConfigDItemClass   BonoboConfigDItemClass;
+typedef struct _BonoboConfigDItemPrivate BonoboConfigDItemPrivate;
 
 struct _BonoboConfigDItem {
-	BonoboConfigDatabase  base;
-	
-	char                 *filename;
-	guint                 time_id;
+	BonoboConfigDatabase      base;
 
-	BonoboEventSource    *es;
+	char                     *filename;
+
+	BonoboConfigDItemPrivate *_priv;
 };
 
-typedef struct {
+struct _BonoboConfigDItemClass {
 	BonoboConfigDatabaseClass parent_class;
-} BonoboConfigDItemClass;
+};
 
 
 GType		      
