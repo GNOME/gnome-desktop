@@ -1177,7 +1177,7 @@ create_about_dialog (void)
 }
 
 static void
-generate_randomness ()
+generate_randomness (void)
 {
 	gint i;
 	gint random_number;
