@@ -18,7 +18,7 @@ static gchar *contributors[] = {
 	"Shawn T. Amundson",
 	"Erik Andersen",
 	"Jon Anhold",
-	"Shooby Ban"
+	"Shooby Ban",
 	"Martin Baulig",
 	"Tom Bech",
 	"Andreas Beck",
