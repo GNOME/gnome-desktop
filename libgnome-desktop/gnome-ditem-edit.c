@@ -63,7 +63,7 @@ struct _GnomeDItemEditPrivate {
         GtkWidget *doc_entry;
 
         GtkWidget *type_label;
-        GtkWidget *type_combo;
+        GtkWidget *type_option;
 
         GtkWidget *terminal_button;  
 
@@ -171,43 +171,86 @@ enum {
 	ALL_EXCEPT_DIRECTORY
 };
 
+#define TYPE_STRING "GnomeDitemEdit:TypeString"
+
 static void
-setup_combo (GnomeDItemEdit *dee,
-	     int             type,
-	     const char     *extra)
+add_menuitem (GtkWidget *menu, const char *str, const char *label,
+	      const char *select, GtkWidget **selected)
 {
-	GList *types = NULL;
+	GtkWidget *item = gtk_menu_item_new_with_label (label);
+	gtk_widget_show (item);
+	g_object_set_data_full (G_OBJECT (item), TYPE_STRING,
+				g_strdup (str),
+				(GDestroyNotify)g_free);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	if (select != NULL &&
+	    strcmp (str, select) == 0)
+		*selected = item;
+}
+
+static void
+setup_option (GnomeDItemEdit *dee,
+	      int             type,
+	      const char     *select)
+{
+	GtkWidget *menu;
+	GtkWidget *selected = NULL;
+
+	menu = gtk_menu_new ();
 
 	switch (type) {
 	case ONLY_DIRECTORY:
-		types = g_list_prepend (types, "Directory");
+		add_menuitem (menu, "Directory", _("Directory"),
+			      select, &selected);
 		break;
 	default: 
-		types = g_list_prepend (types, "Application");
+		add_menuitem (menu, "Application", _("Application"),
+			      select, &selected);
 
 		if (type != ALL_EXCEPT_DIRECTORY)
-			types = g_list_prepend (types, "Directory");
+			add_menuitem (menu, "Directory", _("Directory"),
+				      select, &selected);
 
-		types = g_list_prepend (types, "Link");
-		types = g_list_prepend (types, "FSDevice");
-		types = g_list_prepend (types, "MimeType");
-		types = g_list_prepend (types, "Service");
-		types = g_list_prepend (types, "ServiceType");
+		add_menuitem (menu, "Link", _("Link"),
+			      select, &selected);
+		add_menuitem (menu, "FSDevice", _("FSDevice"),
+			      select, &selected);
+		add_menuitem (menu, "MimeType", _("MimeType"),
+			      select, &selected);
+		add_menuitem (menu, "Service", _("Service"),
+			      select, &selected);
+		add_menuitem (menu, "ServiceType", _("ServiceType"),
+			      select, &selected);
 		break;
 	}
 
-	if (extra != NULL)
-		types = g_list_prepend (types, (char *) extra);
+	if (select != NULL &&
+	    selected == NULL)
+		add_menuitem (menu, select, _(select), select, &selected);
 
-	g_assert (types != NULL);
+	if (selected != NULL)
+		gtk_menu_item_activate (GTK_MENU_ITEM (selected));
 
-	types = g_list_reverse (types);
-
-	gtk_combo_set_popdown_strings (
-		GTK_COMBO (dee->_priv->type_combo), types);
-
-	g_list_free (types);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (dee->_priv->type_option), menu);
 }
+
+static const char *
+get_type_from_option (GnomeDItemEdit *dee)
+{
+	GtkWidget *menu, *active;
+
+	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (dee->_priv->type_option));
+	if (menu == NULL)
+		return NULL;
+
+	active = gtk_menu_get_active (GTK_MENU (menu));
+	if (active == NULL)
+		return NULL;
+
+	return g_object_get_data (G_OBJECT (active), TYPE_STRING);
+}
+
 
 static void 
 table_attach_entry (GtkTable  *table,
@@ -248,10 +291,10 @@ label_new (const char *text)
 
 /* A hack! */
 static void
-type_combo_changed (GnomeDItemEdit *dee)
+type_option_changed (GnomeDItemEdit *dee)
 {
 	const char *type;
-        type = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
+	type = get_type_from_option (dee);
 	if (type != NULL &&
 	    strcmp (type, "Link") == 0 /* URL */)
 		gtk_label_set_text (GTK_LABEL (dee->_priv->exec_label),
@@ -270,7 +313,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	GtkWidget *entry;
 	GtkWidget *hbox;
 	GtkWidget *align;
-	GtkWidget *combo;
+	GtkWidget *option;
 	GtkWidget *icon_entry;
 	GtkWidget *check_button;
 
@@ -353,21 +396,19 @@ make_easy_page (GnomeDItemEdit *dee)
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 4, 5);
 	dee->_priv->type_label = label;
 
-	dee->_priv->type_combo = combo = gtk_combo_new ();
-	setup_combo (dee, ALL_TYPES, NULL);
+	dee->_priv->type_option = option = gtk_option_menu_new ();
+	setup_option (dee, ALL_TYPES, NULL);
 
-	gtk_combo_set_value_in_list (GTK_COMBO (combo), FALSE, TRUE);
-	table_attach_entry (GTK_TABLE (table), combo, 1, 2, 4, 5);
+	table_attach_entry (GTK_TABLE (table), option, 1, 2, 4, 5);
 
-	g_signal_connect_object (GTK_COMBO (combo)->entry, "changed",
+	g_signal_connect_object (G_OBJECT (option), "changed",
 				 G_CALLBACK (gnome_ditem_edit_changed),
 				 dee, G_CONNECT_SWAPPED);	
-	g_signal_connect_object (GTK_COMBO (combo)->entry, "changed",
-				 G_CALLBACK (type_combo_changed),
+	g_signal_connect_object (G_OBJECT (option), "changed",
+				 G_CALLBACK (type_option_changed),
 				 dee, G_CONNECT_SWAPPED);
-	dee->_priv->type_combo = combo;
 
-	set_relation (dee->_priv->type_combo, GTK_LABEL (label));
+	set_relation (dee->_priv->type_option, GTK_LABEL (label));
 
 	label = label_new (_("Icon:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 5, 6);
@@ -848,7 +889,7 @@ gnome_ditem_set_directory_sensitive (GnomeDItemEdit *dee,
 	gtk_widget_set_sensitive (dee->_priv->exec_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->exec_entry, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->type_label, ! is_directory);
-	gtk_widget_set_sensitive (dee->_priv->type_combo, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->type_option, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->terminal_button, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->tryexec_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->tryexec_entry, ! is_directory);
@@ -881,18 +922,15 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 	}
 
 	type = gnome_desktop_item_get_entry_type (ditem);
+        cs = gnome_desktop_item_get_string (ditem,
+					    GNOME_DESKTOP_ITEM_TYPE);
 	if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY ||
 	    dee->_priv->directory_only) {
 		gnome_ditem_set_directory_sensitive (dee, TRUE);
-		setup_combo (dee, ONLY_DIRECTORY, NULL);
+		setup_option (dee, ONLY_DIRECTORY, cs);
 	} else {
-		const char *extra = NULL;
 		gnome_ditem_set_directory_sensitive (dee, FALSE);
-		if (type == GNOME_DESKTOP_ITEM_TYPE_OTHER) {
-			extra = gnome_desktop_item_get_string
-				(ditem, GNOME_DESKTOP_ITEM_TYPE);
-		}
-		setup_combo (dee, ALL_EXCEPT_DIRECTORY, extra);
+		setup_option (dee, ALL_EXCEPT_DIRECTORY, cs);
 	}
 
         name = gnome_desktop_item_get_localestring (
@@ -931,10 +969,6 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 
         cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->doc_entry), cs ? cs : "");
-
-        cs = gnome_desktop_item_get_string (ditem, GNOME_DESKTOP_ITEM_TYPE);
-        gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry),
-			    cs ? cs : "");
 
         gtk_toggle_button_set_active
 		(GTK_TOGGLE_BUTTON (dee->_priv->terminal_button),
@@ -1014,10 +1048,8 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 		(GNOME_FILE_ENTRY (dee->_priv->exec_entry));
 	uri = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	type = gtk_entry_get_text (
-			GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
-	gnome_desktop_item_set_string (
-			ditem, GNOME_DESKTOP_ITEM_TYPE, type);
+	type = get_type_from_option (dee);
+	gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, type);
 
 	/* hack really */
 	if (type && !strcmp (type, "Link"))
@@ -1236,7 +1268,7 @@ gnome_ditem_edit_clear (GnomeDItemEdit *dee)
 	gnome_ditem_set_directory_sensitive (dee, FALSE);
 
 	/* put all our possibilities here */
-	setup_combo (dee, ALL_TYPES, NULL);
+	setup_option (dee, ALL_TYPES, NULL /* select */);
 }
 
 static void
@@ -1323,11 +1355,26 @@ void
 gnome_ditem_edit_set_entry_type (GnomeDItemEdit *dee,
 				 const char     *type)
 {
+	const char *prev;
+
         g_return_if_fail (dee != NULL);
         g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+        g_return_if_fail (type != NULL);
 
-        gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry),
-			    type ? type : "");
+	prev = get_type_from_option (dee);
+	if (prev != NULL &&
+	    strcmp (prev, type) == 0)
+		return;
+
+	if (dee->_priv->directory_only) {
+		gnome_ditem_set_directory_sensitive (dee, TRUE);
+		setup_option (dee, ONLY_DIRECTORY, type);
+		g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+	} else {
+		gnome_ditem_set_directory_sensitive (dee, FALSE);
+		setup_option (dee, ALL_EXCEPT_DIRECTORY, type);
+		g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+	}
 }
 
 /* force directory only */
@@ -1342,27 +1389,25 @@ gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
 		dee->_priv->directory_only = directory_only;
 
 		if (directory_only) {
-			gnome_ditem_set_directory_sensitive (dee, TRUE);
 			gnome_ditem_edit_set_entry_type (dee, "Directory");
-			setup_combo (dee, ONLY_DIRECTORY, NULL);
 		} else if (dee->_priv->ditem != NULL) {
+			const char *cs = NULL;
 			GnomeDesktopItemType type;
-			type = gnome_desktop_item_get_entry_type (dee->_priv->ditem);
+			type = gnome_desktop_item_get_entry_type
+				(dee->_priv->ditem);
+			cs = gnome_desktop_item_get_string
+				(dee->_priv->ditem, GNOME_DESKTOP_ITEM_TYPE);
 			if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY) {
 				gnome_ditem_set_directory_sensitive (dee, TRUE);
-				setup_combo (dee, ONLY_DIRECTORY, NULL);
+				setup_option (dee, ONLY_DIRECTORY, cs);
 			} else {
-				const char *extra = NULL;
 				gnome_ditem_set_directory_sensitive (dee, FALSE);
-				if (type == GNOME_DESKTOP_ITEM_TYPE_OTHER) {
-					extra = gnome_desktop_item_get_string
-						(dee->_priv->ditem, GNOME_DESKTOP_ITEM_TYPE);
-				}
-				setup_combo (dee, ALL_EXCEPT_DIRECTORY, extra);
+				setup_option (dee, ALL_EXCEPT_DIRECTORY, cs);
 			}
 		} else {
+			const char *type = get_type_from_option (dee);
 			gnome_ditem_set_directory_sensitive (dee, FALSE);
-			setup_combo (dee, ALL_TYPES, NULL /* extra */);
+			setup_option (dee, ALL_TYPES, type);
 		}
 	}
 }
