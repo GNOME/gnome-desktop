@@ -1229,7 +1229,7 @@ append_app_arg (GSList *vector_list,
 		gboolean *added_files)
 {
 	if (strchr (arg, '%') == NULL) {
-		return vector_list;
+		return g_slist_append (vector_list, g_strdup (arg));
 	
 	/* First we subst for some where it could be more then
 	 * one argument */
@@ -1321,6 +1321,7 @@ ditem_execute (const GnomeDesktopItem *item,
 		new_unused = count_unused (args);
 
 		real_argv = list_to_vector (vector_list);
+		real_argc = g_slist_length (vector_list);
 		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
 		g_slist_free (vector_list);
 
