@@ -301,6 +301,7 @@ static gchar *contributors[] = {
 	"Micah Stetson",
 	"Nathan Carl Summers",
 	N_("Istvan Szekeres"),
+	"HideToshi Tajima"
 	"Tristan Tarrant",
 	"Anthony Taylor",
 	"Owen Taylor",
