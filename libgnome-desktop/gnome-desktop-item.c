@@ -96,6 +96,7 @@ typedef enum {
 } Encoding;
 
 static GnomeDesktopItem * ditem_load (const char *uri,
+				      gboolean no_translations,
 				      GError **error);
 static gboolean ditem_save (GnomeDesktopItem *item,
 			    const char *uri,
@@ -517,7 +518,9 @@ gnome_desktop_item_new_from_uri (const char *uri,
 	gnome_vfs_file_info_clear (info);
 	gnome_vfs_file_info_unref (info);
 
-	retval = ditem_load (subfn, error);
+	retval = ditem_load (subfn,
+			     flags & GNOME_DESKTOP_ITEM_LOAD_NO_TRANSLATIONS,
+			     error);
 
         if (retval == NULL) {
 		g_free (subfn);
@@ -1052,7 +1055,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		return -1;
 	}
 
-	ret = ditem_execute(item, temp_argc, temp_argv, argc, argv, TRUE);
+	ret = ditem_execute (item, temp_argc, temp_argv, argc, argv, TRUE);
 
 	/* free the array done by poptParseArgvString, not by
 	   g_free but free, this is not a memory leak the whole thing
@@ -1340,7 +1343,7 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 	if (try_exec != NULL) {
                 char *tryme;
 
-		tryme = gnome_is_program_in_path (try_exec);
+		tryme = g_find_program_in_path (try_exec);
 		if (tryme != NULL) {
 			g_free (tryme);
 			/* We will try the application itself
@@ -1369,14 +1372,14 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 
 		exe = argv[0];
 
-		if (exe[0] == G_DIR_SEPARATOR &&
+		if (g_path_is_absolute (exe) &&
 		    access (argv[0], X_OK) != 0) {
 			g_strfreev (argv);
 			return FALSE;
 		}
 
-		if (exe[0] != G_DIR_SEPARATOR) {
-			char *tryme = gnome_is_program_in_path (exe);
+		if ( ! g_path_is_absolute (exe)) {
+			char *tryme = g_find_program_in_path (exe);
 			if (tryme == NULL) {
 				g_strfreev (argv);
 				return FALSE;
@@ -1505,7 +1508,7 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 
 	if (icon == NULL) {
 		return NULL;
-	} else if (icon[0] == G_DIR_SEPARATOR) {
+	} else if (g_path_is_absolute (icon)) {
 		if (g_file_test (icon, G_FILE_TEST_EXISTS)) {
 			return g_strdup (icon);
 		} else {
@@ -2118,39 +2121,36 @@ static Encoding
 get_encoding (const char *uri, ReadBuf *rb)
 {
 	int c;
+	char buf[BUFSIZ];
 	gboolean old_kde = FALSE;
 
 	gchar *contents = NULL;
 
-	
-	while ((c = readbuf_getc (rb)) != EOF) {
-		/* find starts of lines */
-		if (c == '\n' || c == '\r') {
-			char buf[256];
-			int i = 0;
-			while ((c = readbuf_getc (rb)) != EOF) {
-				if (c == '\n' ||
-				    c == '\r' ||
-				    i >= sizeof(buf) - 1)
-					break;
-				buf[i++] = c;
-			}
-			buf[i++] = '\0';
-			if (strcmp (GNOME_DESKTOP_ITEM_ENCODING "=UTF-8", buf) == 0) {
+	while (readbuf_gets (buf, sizeof (buf), rb) != NULL) {
+		if (strncmp (GNOME_DESKTOP_ITEM_ENCODING,
+			     buf,
+			     strlen (GNOME_DESKTOP_ITEM_ENCODING)) == 0) {
+			char *p = &buf[strlen (GNOME_DESKTOP_ITEM_ENCODING)];
+			if (*p == ' ')
+				p++;
+			if (*p != '=')
+				continue;
+			p++;
+			if (*p == ' ')
+				p++;
+			if (strcmp (p, "UTF-8") == 0) {
 				return ENCODING_UTF8;
-			} else if (strcmp (GNOME_DESKTOP_ITEM_ENCODING "=Legacy-Mixed", buf) == 0) {
+			} else if (strcmp (p, "Legacy-Mixed") == 0) {
 				return ENCODING_LEGACY_MIXED;
-			} else if (strncmp (GNOME_DESKTOP_ITEM_ENCODING "=", buf,
-					    strlen (GNOME_DESKTOP_ITEM_ENCODING "=")) == 0) {
+			} else {
 				/* According to the spec we're not supposed
 				 * to read a file like this */
 				return ENCODING_UNKNOWN;
 			}
-			if (strcmp ("[KDE Desktop Entry]", buf) == 0) {
-				old_kde = TRUE;
-				/* don't break yet, we still want to support
-				 * Encoding even here */
-			}
+		} else if (strcmp ("[KDE Desktop Entry]", buf) == 0) {
+			old_kde = TRUE;
+			/* don't break yet, we still want to support
+			 * Encoding even here */
 		}
 	}
 
@@ -2249,7 +2249,8 @@ insert_key (GnomeDesktopItem *item,
 	    Encoding encoding,
 	    const char *key,
 	    const char *value,
-	    gboolean old_kde)
+	    gboolean old_kde,
+	    gboolean no_translations)
 {
 	char *k;
 	char *val;
@@ -2260,6 +2261,11 @@ insert_key (GnomeDesktopItem *item,
 		val = g_strdup ("UTF-8");
 	} else {
 		char *locale = snarf_locale_from_key (key);
+		/* If we're ignoring translations */
+		if (no_translations && locale != NULL) {
+			g_free (locale);
+			return;
+		}
 		val = decode_string (value, encoding, locale);
 
 		/* Ignore this key, it's whacked */
@@ -2469,6 +2475,7 @@ enum {
 
 static GnomeDesktopItem *
 ditem_load (const char *uri,
+	    gboolean no_translations,
 	    GError **error)
 {
 	ReadBuf *rb;
@@ -2628,7 +2635,8 @@ rb->eof=FALSE;
 				*next = '\0';
 
 				insert_key (item, cur_section, encoding,
-					    key, CharBuffer, old_kde);
+					    key, CharBuffer, old_kde,
+					    no_translations);
 
 				g_free (key);
 				key = NULL;
@@ -2647,7 +2655,8 @@ rb->eof=FALSE;
 		*next = '\0';
 
 		insert_key (item, cur_section, encoding,
-			    key, CharBuffer, old_kde);
+			    key, CharBuffer, old_kde,
+			    no_translations);
 
 		g_free (key);
 		key = NULL;

@@ -91,8 +91,9 @@ typedef struct _GnomeDesktopItem GnomeDesktopItem;
 #define GNOME_DESKTOP_ITEM_URL		"URL" /* string */
 
 typedef enum {
-	/* Use the TryExec field to determine if this shoul dbe loaded */
-        GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0
+	/* Use the TryExec field to determine if this should be loaded */
+        GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0,
+        GNOME_DESKTOP_ITEM_LOAD_NO_TRANSLATIONS = 1<<1
 } GnomeDesktopItemLoadFlags;
 
 typedef enum {
