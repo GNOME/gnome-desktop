@@ -387,4 +387,3 @@ __argz_count __argz_stringify __argz_next])
    sed -e "/^#/d" -e "/^\$/d" -e "s,.*,	$posrcprefix& \\\\," -e "\$s/\(.*\) \\\\/\1/" \
 	< $srcdir/po/POTFILES.in > po/POTFILES
   ])
-include(ac_gnome.m4)
