@@ -146,10 +146,8 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
 }
 
 /* If you find a bug here, odds are that it exists in ditem_gnome_load() too */
-/* FIXME: it needs to read ALL sections and store them for later saving,
-   otherwise we'll break some dentries */
 static GnomeDesktopItem *
-ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFlags flags,
+ditem_kde_load (const char *data_file, GnomeDesktopItemLoadFlags flags,
 		GnomeDesktopItemFlags item_flags)
 {
         GnomeDesktopItem *retval = gnome_desktop_item_new();
@@ -266,10 +264,8 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
 }
 
 /* There is entirely too much duplication between this function and ditem_kde_load() */
-/* FIXME: it needs to read ALL sections and store them for later saving,
-   otherwise we'll break some dentries */
 static GnomeDesktopItem *
-ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadFlags flags,
+ditem_gnome_load (const char *data_file, GnomeDesktopItemLoadFlags flags,
 		  GnomeDesktopItemFlags item_flags)
 {
         GnomeDesktopItem *retval = gnome_desktop_item_new();
@@ -386,10 +382,13 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
         /* Read the .order file */
         if(retval->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY) {
                 FILE *fh;
+		char *dn;
 
-                g_snprintf(confpath, sizeof(confpath), "%s/.order", file);
+		dn = g_dirname(data_file);
+                g_snprintf(confpath, sizeof(confpath), "%s/.order", dn);
+		g_free(dn);
 
-                fh = fopen(file, "r");
+                fh = fopen(confpath, "r");
 
                 if(fh) {
                         char buf[PATH_MAX];
@@ -487,9 +486,17 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
         if (S_ISDIR(sbuf.st_mode)) {
                 item_flags |= GNOME_DESKTOP_ITEM_IS_DIRECTORY;
                 g_snprintf(subfn, sizeof(subfn), "%s/.directory", file);
+		/* get the correct time for this file */
+		if (stat(subfn, &sbuf) != 0)
+			sbuf.st_mtime = 0;
         } else {
+		/* here we figure out if we're talking about a directory
+		   but have passed the .directory file */
+		if(strcmp(g_basename(file),".directory")==0)
+			item_flags |= GNOME_DESKTOP_ITEM_IS_DIRECTORY;
                 strcpy(subfn, file);
         }
+
 
         fh = fopen(subfn, "r");
 
@@ -537,13 +544,13 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 
         switch (fmt) {
         case GNOME_DESKTOP_ITEM_KDE:
-                retval = ditem_kde_load(file, subfn, flags, item_flags);
+                retval = ditem_kde_load(subfn, flags, item_flags);
                 break;
         case GNOME_DESKTOP_ITEM_GNOME:
-                retval = ditem_gnome_load(file, subfn, flags, item_flags);
+                retval = ditem_gnome_load(subfn, flags, item_flags);
                 break;
         default:
-                g_warning("Unknown desktop file format %d", fmt);
+                g_warning(_("Unknown desktop file format %d"), fmt);
 		/* if we have names of other sections, free that list */
 		if(other_sections) {
 			g_slist_foreach(other_sections,(GFunc)g_free,NULL);
@@ -558,7 +565,28 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 
 	ditem_load_other_sections(retval, subfn, other_sections);
 
-        retval->location = g_strdup(subfn);
+	/* make the 'Type' sane */
+        if(item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY) {
+		/* perhaps a little ineficent way to ensure this
+		   is the correct type */
+		g_free(retval->type);
+		retval->type = g_strdup("Directory");
+	} else {
+		/* this is not a directory so sanitize it by killing the
+		   type altogether if type happens to be "Directory" */
+		if(retval->type && strcmp(retval->type, "Directory")==0) {
+			g_free(retval->type);
+			retval->type = NULL;
+		}
+	}
+
+	if(subfn[0] == '/')
+		retval->location = g_strdup(subfn);
+	else {
+		char *curdir = g_get_current_dir();
+		retval->location = g_concat_dir_and_file(curdir,subfn);
+		g_free(curdir);
+	}
         retval->item_format = fmt;
         retval->mtime = sbuf.st_mtime;
 
@@ -855,18 +883,18 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 			   strcmp(item->type,"Application")!=0) {
 				/* we are not an application so just exit
 				   with an error */
-				g_warning("Attempting to launch a non-application");
+				g_warning(_("Attempting to launch a non-application"));
 				return -1;
 			}
 		} else if(item->item_format == GNOME_DESKTOP_ITEM_GNOME) {
 			if(strcmp(item->type,"Application")!=0) {
 				/* we are not an application so just exit
 				   with an error */
-				g_warning("Attempting to launch a non-application");
+				g_warning(_("Attempting to launch a non-application"));
 				return -1;
 			}
 		} else {
-			g_warning("Unknown desktop file format %d",
+			g_warning(_("Unknown desktop file format %d"),
 				  item->item_format);
 		}
 	}
@@ -979,7 +1007,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
         g_return_val_if_fail(item, -1);
 
 	if(!item->exec) {
-		g_warning("Trying to execute an item with no 'Exec'");
+		g_warning(_("Trying to execute an item with no 'Exec'"));
 		return -1;
 	}
 
@@ -1021,7 +1049,7 @@ ditem_exec_single_file (const GnomeDesktopItem *item, const char *exec, char *fi
 
         g_return_val_if_fail(item, -1);
 	if(!exec) {
-		g_warning("No exec field for this drop");
+		g_warning(_("No exec field for this drop"));
 		return -1;
 	}
 
@@ -1052,7 +1080,7 @@ ditem_exec_single_file (const GnomeDesktopItem *item, const char *exec, char *fi
 	if(replace_percentsign(temp_argc, (char **)temp_argv, "%F", file, &tofree,TRUE))
 		goto perc_replaced;
 	g_free(temp_argv);
-	g_warning("Nothing to replace with a file in the exec string");
+	g_warning(_("Nothing to replace with a file in the exec string"));
 	return -1;
 perc_replaced:
 
@@ -1088,7 +1116,7 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 
         g_return_val_if_fail(item, -1);
 	if(!exec) {
-		g_warning("No exec field for this drop");
+		g_warning(_("No exec field for this drop"));
 		return -1;
 	}
 
@@ -1142,7 +1170,7 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 
 	/* we haven't replaced anything */
 	if(!replaced) {
-		g_warning("There was no argument to replace with dropped files");
+		g_warning(_("There was no argument to replace with dropped files"));
 		return -1;
 	}
 
@@ -1160,11 +1188,12 @@ ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 /**
  * gnome_desktop_item_drop_uri_list:
  * @item: A desktop item
- * @uri_list: an uri_list as if gotten from #gnome_uri_list_extract_filenames
+ * @uri_list: an uri_list as if gotten from #gnome_uri_list_extract_uris
  *
  * A list of files or urls dropped onto an icon, the proper (Url or File)
  * exec is run you can pass directly the output of 
- * #gnome_uri_list_extract_filenames.  If the ditem didn't specify any DND
+ * #gnome_uri_list_extract_uris.  The input thus must be a GList of
+ * strings in the URI format.  If the ditem didn't specify any DND
  * options we assume old style and drop by appending the list to the end
  * of 'Exec' (see #gnome_desktop_item_get_command).  If there were any urls
  * dropped the item must have specified being able to run URLs or you'll get
@@ -1185,6 +1214,7 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 {
 	GList *li;
 	gboolean any_urls = FALSE;
+	GList *file_list = NULL;
 	int ret = -1;
 
 	g_return_val_if_fail(item!=NULL,-1);
@@ -1201,33 +1231,38 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 		int argc = g_list_length(uri_list);
 		const char **argv = g_alloca((argc + 1) * sizeof(char *));
 
-		for(i=0,li=uri_list; li; i++, li=li->next)
-			argv[i] = li->data;
+		for(i=0,li=uri_list; li; i++, li=li->next) {
+			char *p = gnome_uri_extract_filename(li->data);
+			if(p) {
+				char *s = g_alloca(strlen(p)+1);
+				strcpy(s, p);
+				g_free(p);
+				argv[i] = s;
+			} else {
+				argv[i] = li->data;
+			}
+		}
 		argv[i] = NULL;
 		return gnome_desktop_item_launch(item, argc, argv);
 	}
 
-	/* figure out if we have any urls in the dropped files */
+	/* figure out if we have any urls in the dropped files,
+	   this also builds a list of all the files */
 	for(li=uri_list; li; li=li->next) {
-		char *p;
-		for(p=li->data; *p>='a' && *p<='z'; p++)
-			;
-		/* there was no lower case simple ascii string, or
-		   the whole filename is such so this is not a url */
-		if(!*p || p == li->data)
-			continue;
-		/* no :// so this is not a url */
-		if(strncmp(p,"://",strlen("://"))!=0)
-			continue;
-
-		any_urls = TRUE;
+		char *p = gnome_uri_extract_filename(li->data);
+		if(p)
+			file_list = g_list_prepend(file_list, p);
+		else
+			any_urls = TRUE;
 	}
+	if(file_list)
+		file_list = g_list_reverse(file_list);
 
 	/* if there are any urls, or if the app didn't specify a command
 	   for files use the URL command */
 	if(any_urls || item->item_flags & GNOME_DESKTOP_ITEM_NO_FILE_DROP) {
 		if(item->item_flags & GNOME_DESKTOP_ITEM_NO_URL_DROP) {
-			g_warning("Dropped URLs on an app that can only take files");
+			g_warning(_("Dropped URLs on an app that can only take files"));
 			return -1;
 		}
 
@@ -1253,15 +1288,21 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 			if(item->item_format == GNOME_DESKTOP_ITEM_GNOME)
 				exec = gnome_desktop_item_get_attribute(item,"FileDropExec");
 			if(!exec) exec = item->exec;
-			for(li = uri_list; li; li=li->next)
-				ret = ditem_exec_single_file(item, exec, li->data);
+			for(li = file_list; li; li=li->next)
+				ret = ditem_exec_single_file(item, exec,
+							     li->data);
 		} else {
 			const char *exec = NULL;
 			if(item->item_format == GNOME_DESKTOP_ITEM_GNOME)
 				exec = gnome_desktop_item_get_attribute(item,"FileDropExec");
 			if(!exec) exec = item->exec;
-			ret = ditem_exec_multiple_files(item, exec, uri_list);
+			ret = ditem_exec_multiple_files(item, exec, file_list);
 		}
+	}
+
+	if(file_list) {
+		g_list_foreach(file_list,(GFunc)g_free,NULL);
+		g_list_free(file_list);
 	}
 
 	return ret;
