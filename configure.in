@@ -78,6 +78,17 @@ if test "x$PIXBUF_CFLAGS" = x ; then
 fi
 
 dnl
+dnl GnomeCanvasPixbuf
+dnl
+CANVAS_PIXBUF_CFLAGS=`$GNOME_CONFIG --cflags gnomecanvaspixbuf`
+CANVAS_PIXBUF_LIBS=`$GNOME_CONFIG --libs gnomecanvaspixbuf`
+AC_SUBST(CANVAS_PIXBUF_CFLAGS)
+AC_SUBST(CANVAS_PIXBUF_LIBS)
+if test "x$CANVAS_PIXBUF_CFLAGS" = x ; then
+	AC_MSG_ERROR(GnomeCanvasPixbuf is required for gnome-about)
+fi
+
+dnl
 dnl Gnome Terminal
 dnl
 ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
