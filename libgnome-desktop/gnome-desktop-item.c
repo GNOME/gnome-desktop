@@ -1017,7 +1017,9 @@ strip_the_amp(char *exec)
  * then passed to gnome_exec_async for execution with argc and argv appended.
  *
  * Returns: The value returned by gnome_execute_async() upon execution of
- * the specified item or -1 on error.
+ * the specified item or -1 on error.  It may also return a 0 on success
+ * if pid is not available, such as in a case where the entry is a URL
+ * entry.
  */
 int
 gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **argv)
@@ -1032,6 +1034,16 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
 	if(!item->exec) {
 		g_warning(_("Trying to execute an item with no 'Exec'"));
 		return -1;
+	}
+
+	/* This is a URL, so launch it as a url */
+	if (item->type != NULL &&
+	    item->item_format == GNOME_DESKTOP_ITEM_GNOME &&
+	    strcmp (item->type, "URL") == 0) {
+		if (gnome_url_show (item->exec))
+			return 0;
+		else
+			return -1;
 	}
 
 	/* make a new copy and get rid of spaces */
@@ -1263,8 +1275,16 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 	GList *file_list = NULL;
 	int ret = -1;
 
-	g_return_val_if_fail(item!=NULL,-1);
-	g_return_val_if_fail(uri_list!=NULL,-1);
+	g_return_val_if_fail (item != NULL, -1);
+	g_return_val_if_fail (uri_list != NULL, -1);
+
+	/* How could you drop something on a URL entry, that would
+	 * be bollocks */
+	if (item->type != NULL &&
+	    item->item_format == GNOME_DESKTOP_ITEM_GNOME &&
+	    strcmp (item->type, "URL") == 0) {
+		return -1;
+	}
 
 	/* do we even allow drops? */
 	if(item->item_flags & GNOME_DESKTOP_ITEM_NO_FILE_DROP &&

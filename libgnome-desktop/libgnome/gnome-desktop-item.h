@@ -24,8 +24,8 @@
   @NOTATION@
  */
 
-#ifndef __GNOME_DITEM_H__
-#define __GNOME_DITEM_H__ 1
+#ifndef GNOME_DITEM_H
+#define GNOME_DITEM_H
 
 BEGIN_GNOME_DECLS
 
@@ -54,9 +54,9 @@ typedef enum {
 } GnomeDesktopItemFormat;
 
 typedef enum {
-        GNOME_DESKTOP_ITEM_UNCHANGED=0,
-        GNOME_DESKTOP_ITEM_CHANGED=1,
-        GNOME_DESKTOP_ITEM_DISAPPEARED=2
+        GNOME_DESKTOP_ITEM_UNCHANGED = 0,
+        GNOME_DESKTOP_ITEM_CHANGED = 1,
+        GNOME_DESKTOP_ITEM_DISAPPEARED = 2
 } GnomeDesktopItemStatus;
 
 typedef struct _GnomeDesktopItem GnomeDesktopItem;
@@ -149,4 +149,4 @@ void                   gnome_desktop_item_set_location    (GnomeDesktopItem     
 
 END_GNOME_DECLS
 
-#endif /* __GNOME_DITEM_H__ */
+#endif /* GNOME_DITEM_H */
