@@ -52,6 +52,9 @@ struct _GnomeHintPrivate {
 
 GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GtkDialog, GTK_TYPE_DIALOG)
 
+static void gnome_hint_set_accessible_information (GnomeHint *gh,
+						   const gchar *name);
+
 static void
 dialog_response (GnomeHint *gnome_hint,
 		 int        response,
@@ -76,6 +79,7 @@ dialog_response (GnomeHint *gnome_hint,
                 gnome_canvas_item_set (priv->hint_text,
 				       "text", (char *) priv->curhint->data,
 				       NULL);
+		gnome_hint_set_accessible_information (gnome_hint, NULL);
                 break;
         case GNOME_HINT_RESPONSE_NEXT:
 		if (!priv->curhint)
@@ -89,6 +93,7 @@ dialog_response (GnomeHint *gnome_hint,
                 gnome_canvas_item_set (priv->hint_text,
 				       "text", (char *) priv->curhint->data,
 				       NULL);
+		gnome_hint_set_accessible_information (gnome_hint, NULL);
                 break;
         default:
 		gtk_widget_destroy (GTK_WIDGET (gnome_hint));
@@ -369,5 +374,30 @@ gnome_hint_new (const gchar *hintfile,
 	"anchor", GTK_ANCHOR_NW,
 	NULL);
 
+  gnome_hint_set_accessible_information (gnome_hint, title);
+
   return GTK_WIDGET (gnome_hint);
+}
+
+/*
+ * Set accessible information like name and description
+ */
+static void
+gnome_hint_set_accessible_information (GnomeHint *gh, const gchar *name)
+{
+	GtkWidget *widget;
+	AtkObject *aobj;
+
+	widget = gh->_priv->canvas;
+	g_return_if_fail (widget != NULL);
+
+	aobj = gtk_widget_get_accessible (widget);
+
+	/* Return immediately if GAIL is not loaded */
+	if (!GTK_IS_ACCESSIBLE (aobj))
+		return;
+
+	if (name)
+		atk_object_set_name (aobj, name);
+	atk_object_set_description (aobj, (gchar *) gh->_priv->curhint->data);
 }
