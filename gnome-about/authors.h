@@ -175,7 +175,7 @@ static author authors[] = {
 	{ "Tero Pulkkinen", "" },
 	{ "The Rasterman", "" },
 	{ "Oliver Rauch", "" },
-	{ "Cody Russell", "bratsche@dfw.net" },
+	{ "Cody Russell", "<bratsche@dfw.net>" },
 	{ "Reklaw", "" },
 	{ "Jens Christian Restemeier", "" },
 	{ "Patrick Reynolds", "" },
