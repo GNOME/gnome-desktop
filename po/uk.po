@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.1\n"
-"POT-Creation-Date: 2000-11-13 13:13+0200\n"
+"POT-Creation-Date: 2000-11-20 14:54+0200\n"
 "PO-Revision-Date: 1999-11-02 12:56+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -217,7 +217,7 @@ msgstr "Властивост╕..."
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:418 panel/gnome-run.c:336
 #: panel/launcher.c:613 panel/logout.c:72 panel/logout.c:133 panel/menu.c:5097
-#: panel/status.c:366 panel/swallow.c:381
+#: panel/status.c:366 panel/swallow.c:428
 msgid "Help"
 msgstr "Дов╕дка"
 
@@ -263,8 +263,8 @@ msgstr "Назва файлу ан╕мац╕╖:"
 
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
-#: panel/menu-properties.c:526 panel/menu-properties.c:564
-#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:212
+#: panel/menu-properties.c:594 panel/menu-properties.c:632
+#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:263
 msgid "Browse"
 msgstr "Переглянути"
 
@@ -324,14 +324,14 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:443
+#: applets/gen_util/clock.c:152
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:441
-#: panel/foobar-widget.c:761
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:443
+#: panel/foobar-widget.c:818
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -1015,7 +1015,7 @@ msgstr "Ванда - рибка з GNOME"
 msgid "... and many more"
 msgstr "... ╕ багато ╕нших"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:208
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:210
 msgid "About GNOME"
 msgstr "Про GNOME"
 
@@ -1434,7 +1434,7 @@ msgid "Edit"
 msgstr "Редагування"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:816
+#: panel/foobar-widget.c:873
 msgid "Settings"
 msgstr "Установки"
 
@@ -1662,9 +1662,9 @@ msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -1673,7 +1673,7 @@ msgstr ""
 "роботи gnome-session.\n"
 "\n"
 "Якщо ви використову╓те Solaris, вам потр╕бно або поновити систему до\n"
-"Solaris 8, або використовувати libICE.so.6 з ори╜╕нального Solaris 7.\n"
+"латки #108376-16, або використовувати libICE.so.6 з ори╜╕нального Solaris 7.\n"
 "Ви можете просто скоп╕ювати файл в /usr/openwin/lib. (Дяку╓мо Andy Reitz\n"
 "за ╕нформац╕ю про цю помилку).\n"
 "\n"
@@ -2266,7 +2266,7 @@ msgstr "Вперед"
 msgid "Go to the next location in the history list"
 msgstr "Перейти на наступне м╕сце в списку ╕стор╕╖"
 
-#: help-browser/window.c:244 panel/extern.c:413
+#: help-browser/window.c:244 panel/extern.c:413 panel/swallow.c:89
 msgid "Reload"
 msgstr "Перевантажити"
 
@@ -2313,29 +2313,29 @@ msgstr ""
 "документац╕╖ встановлено╖\n"
 "у ваш╕й систем╕."
 
-#: panel/applet.c:411
+#: panel/applet.c:418
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:451
+#: panel/applet.c:457
 msgid "Remove from panel"
 msgstr "Видалити з панел╕"
 
-#: panel/applet.c:458
+#: panel/applet.c:464
 msgid "Move"
 msgstr "Перенести"
 
-#: panel/applet.c:470 panel/menu.c:3263
+#: panel/applet.c:476 panel/menu.c:3263
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Неможливо знайти п╕ктограмний файл %s"
 
-#: panel/applet.c:471 panel/applet.c:477 panel/menu.c:3488 panel/menu.c:3493
+#: panel/applet.c:477 panel/applet.c:483 panel/menu.c:3488 panel/menu.c:3493
 #: panel/menu.c:4502 panel/menu.c:4507 panel/menu.c:4827
 msgid "Panel"
 msgstr "Панель"
 
-#: panel/applet.c:735
+#: panel/applet.c:748
 msgid "Can't find an empty spot"
 msgstr "Не вдалося знайти в╕льне м╕сце"
 
@@ -2394,7 +2394,7 @@ msgstr "Меню SuSE"
 msgid "Tooltip/Name"
 msgstr "П╕дказка/Назва"
 
-#: panel/drawer.c:117 panel/menu-properties.c:547 panel/menu-properties.c:582
+#: panel/drawer.c:117 panel/menu-properties.c:615 panel/menu-properties.c:650
 msgid "Icon"
 msgstr "П╕ктограма"
 
@@ -2436,13 +2436,19 @@ msgstr "Батарея"
 #: panel/extern.c:404
 #, c-format
 msgid ""
-"%s applet appears to have died unexpectadly. Reload this applet?\n"
-"(If you choose not to reload it at this time you can always add it from the "
-"\"Applets\" sbumenu in the mail menu)"
+"%s applet appears to have died unexpectedly.\n"
+"\n"
+"Reload this applet?\n"
+"\n"
+"(If you choose not to reload it at this time you can always add it from\n"
+"the \"Applets\" submenu in the main menu.)"
 msgstr ""
-"Схоже аплет %s зазнав авар╕йного збою. Перевантажити цей аплет?\n"
-"(Якщо ви не перевантажите його зараз, ви завжди зможете додати його "
-"з п╕дменю \"Аплети\" в головному меню)"
+"Схоже аплет %s зазнав авар╕йного збою.\n"
+"\n"
+"Перевантажити цей аплет?\n"
+"\n"
+"(Якщо ви не перевантажите його зараз, ви завжди зможете додати його з "
+"п╕дменю \"Аплети\" в головному меню)"
 
 #: panel/extern.c:633
 msgid "Couldn't add applet"
@@ -2456,7 +2462,7 @@ msgstr "Ой! з деяких причин неможливо додати до панел╕"
 msgid "No socket was created"
 msgstr "Не було створено сокет"
 
-#: panel/foobar-widget.c:165
+#: panel/foobar-widget.c:167
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2464,7 +2470,7 @@ msgstr ""
 "Неможливо виконати програму gmc-client,\n"
 "напевно gmc не встановлено"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:177
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2474,161 +2480,165 @@ msgstr ""
 "напевно його не встановлено.\n"
 "В╕н знаходиться в пакет╕ gnome-pim."
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "News (www)"
 msgstr "Новини (WWW)"
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "FAQ (www)"
 msgstr "В╕дпов╕д╕ на част╕ запитання (WWW)"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "Mailing Lists (www)"
 msgstr "Списки розсилки (WWW)"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "Software (www)"
 msgstr "Програмне забезпечення (WWW)"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "Development (www)"
 msgstr "Розробка (WWW)"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "Bug Tracking System (www)"
 msgstr "Система в╕дсл╕дковування помилок (WWW)"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:239
+#: panel/foobar-widget.c:241
 msgid "By Name"
 msgstr "За назвою"
 
-#: panel/foobar-widget.c:240
+#: panel/foobar-widget.c:242
 msgid "By Type"
 msgstr "За типом"
 
-#: panel/foobar-widget.c:241
+#: panel/foobar-widget.c:243
 msgid "By Size"
 msgstr "За розм╕ром"
 
-#: panel/foobar-widget.c:242
+#: panel/foobar-widget.c:244
 msgid "By Time Last Accessed"
 msgstr "За часом останнього доступу"
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:245
 msgid "By Time Last Modified"
 msgstr "За часом останньо╖ модиф╕кац╕╖"
 
-#: panel/foobar-widget.c:244
+#: panel/foobar-widget.c:246
 msgid "By Time Last Changed"
 msgstr "За часом останньо╖ зм╕ни"
 
-#: panel/foobar-widget.c:253
+#: panel/foobar-widget.c:255
 msgid "Arrange Icons"
 msgstr "Впорядкувати п╕ктограми"
 
-#: panel/foobar-widget.c:263
+#: panel/foobar-widget.c:265
 msgid "Rescan Desktop Directory"
 msgstr "Пересканувати каталог робочого столу"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:266
 msgid "Rescan Desktop Devices"
 msgstr "Пересканувати присторо╖ робочого столу"
 
-#: panel/foobar-widget.c:270
+#: panel/foobar-widget.c:272
 msgid "Lock Screen"
 msgstr "Замкнути екран"
 
-#: panel/foobar-widget.c:280
+#: panel/foobar-widget.c:282
 msgid "Log Out"
 msgstr "Завершити роботу"
 
-#: panel/foobar-widget.c:288
+#: panel/foobar-widget.c:290
 msgid " Desktop "
 msgstr " Робочий ст╕л "
 
-#: panel/foobar-widget.c:305
+#: panel/foobar-widget.c:307
 msgid "can't fine real path"
 msgstr "неможливо визначити справжн╕й шлях"
 
-#: panel/foobar-widget.c:313
+#: panel/foobar-widget.c:315
 msgid "menu wasn't created"
 msgstr "меню не було створено"
 
-#: panel/foobar-widget.c:355
+#: panel/foobar-widget.c:357
 msgid "%A %B %d"
 msgstr "%A %d %B"
 
-#: panel/foobar-widget.c:434
+#: panel/foobar-widget.c:436
 msgid "Today"
 msgstr "Сьогодн╕"
 
-#: panel/foobar-widget.c:435
+#: panel/foobar-widget.c:437
 msgid "This Week"
 msgstr "Цей тиждень"
 
-#: panel/foobar-widget.c:436
+#: panel/foobar-widget.c:438
 msgid "This Month"
 msgstr "Цей м╕сяць"
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:444
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:444
-msgid "%I:%M:%S %p"
-msgstr "%I:%M:%S %p"
+#: panel/foobar-widget.c:445
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
 
-#: panel/foobar-widget.c:451
+#: panel/foobar-widget.c:446
+msgid "%l:%M:%S %p"
+msgstr "%l:%M:%S %p"
+
+#: panel/foobar-widget.c:453
 msgid "Add appointement..."
 msgstr "Додати терм╕н..."
 
-#: panel/foobar-widget.c:468
+#: panel/foobar-widget.c:470
 msgid "Format"
 msgstr "Формат"
 
-#: panel/foobar-widget.c:799 panel/menu.c:3285 panel/menu.c:3290
+#: panel/foobar-widget.c:856 panel/menu.c:3285 panel/menu.c:3290
 #: panel/menu.c:4732
 msgid "Programs"
 msgstr "Програми"
 
-#: panel/foobar-widget.c:813 panel/menu.c:4704 panel/menu.c:4744
+#: panel/foobar-widget.c:870 panel/menu.c:4704 panel/menu.c:4744
 #: panel/menu.c:4750
 msgid "Favorites"
 msgstr "Улюблене"
 
-#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:464
+#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:532
 msgid "Programs: "
 msgstr "Програми: "
 
-#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:471
+#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:539
 msgid "Favorites: "
 msgstr "Улюблене: "
 
-#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:478
+#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:546
 msgid "Applets: "
 msgstr "Аплети: "
 
@@ -2731,7 +2741,7 @@ msgid "Launcher"
 msgstr "Запускач"
 
 #: panel/gnome-panel-properties.c:558 panel/gnome-panel-properties.c:1461
-#: panel/menu-properties.c:542 panel/menu.c:1418 panel/menu.c:2777
+#: panel/menu-properties.c:610 panel/menu.c:1418 panel/menu.c:2777
 #: panel/menu.c:2845 panel/menu.c:2850 panel/menu.c:4169 panel/menu.c:5002
 msgid "Menu"
 msgstr "Меню"
@@ -2791,11 +2801,11 @@ msgstr "Пром╕жок м╕ж аплетами"
 msgid "Padding between applets and panel border"
 msgstr "Пром╕жок м╕ж аплетом та кра╓м панел╕"
 
-#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:324
+#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:392
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:334
+#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:402
 msgid "In a submenu"
 msgstr "В п╕дменю"
 
@@ -3200,7 +3210,7 @@ msgid "Applets"
 msgstr "Аплети"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:3128 panel/session.c:1279 panel/session.c:1473
+#: panel/menu.c:3128 panel/session.c:1279
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
@@ -3329,7 +3339,7 @@ msgstr "Ор╕╓нтац╕я"
 msgid "Applet"
 msgstr "Аплет"
 
-#: panel/menu-properties.c:428 panel/menu-properties.c:450 panel/menu.c:4179
+#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4179
 msgid "Main menu"
 msgstr "Головне меню"
 
@@ -3417,59 +3427,59 @@ msgstr "Про GNOME..."
 msgid "Can't create menu, using main menu!"
 msgstr "Не вдалося створити меню, використову╓ться головне меню!"
 
-#: panel/menu-properties.c:137 panel/menu.c:5093
+#: panel/menu-properties.c:209 panel/menu.c:5093
 msgid "Edit menus..."
 msgstr "Редагувати меню..."
 
-#: panel/menu-properties.c:144
+#: panel/menu-properties.c:190
 msgid "Can't open directory, using main menu!"
 msgstr "Не вдалося в╕дкрити каталог, використову╓ться головне меню!"
 
-#: panel/menu-properties.c:346
+#: panel/menu-properties.c:414
 msgid "On the main menu"
 msgstr "В головному меню"
 
-#: panel/menu-properties.c:383 panel/menu-properties.c:400
+#: panel/menu-properties.c:451 panel/menu-properties.c:468
 msgid "Menu properties"
 msgstr "Властивост╕ меню"
 
-#: panel/menu-properties.c:407
+#: panel/menu-properties.c:475
 msgid "Menu type"
 msgstr "Тип меню"
 
-#: panel/menu-properties.c:414
+#: panel/menu-properties.c:482
 msgid "Global main menu"
 msgstr "Загальне головне меню"
 
-#: panel/menu-properties.c:442 panel/menu-properties.c:512
+#: panel/menu-properties.c:510 panel/menu-properties.c:580
 msgid "Normal menu"
 msgstr "Звичайне меню"
 
-#: panel/menu-properties.c:485
+#: panel/menu-properties.c:553
 msgid "Distribution menu (if found): "
 msgstr "Меню дистрибутиву (якщо знайдено): "
 
-#: panel/menu-properties.c:492
+#: panel/menu-properties.c:560
 msgid "KDE menu (if found): "
 msgstr "Меню KDE (якщо знайдено): "
 
-#: panel/menu-properties.c:499
+#: panel/menu-properties.c:567
 msgid "Panel menu: "
 msgstr "Меню панел╕: "
 
-#: panel/menu-properties.c:506
+#: panel/menu-properties.c:574
 msgid "Desktop menu: "
 msgstr "Меню робочого столу: "
 
-#: panel/menu-properties.c:523
+#: panel/menu-properties.c:591
 msgid "Menu path"
 msgstr "Шлях меню"
 
-#: panel/menu-properties.c:554
+#: panel/menu-properties.c:622
 msgid "Use custom icon for panel button"
 msgstr "Використовувати нетипову п╕ктограму для кнопки панел╕"
 
-#: panel/panel.c:876
+#: panel/panel.c:880
 #, c-format
 msgid "Open URL: %s"
 msgstr "В╕дкрити URL: %s"
@@ -3565,7 +3575,7 @@ msgstr "Властивост╕ панел╕"
 msgid "Background"
 msgstr "Тло"
 
-#: panel/session.c:256
+#: panel/session.c:257
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -3573,34 +3583,47 @@ msgstr ""
 "Аплет не в╕дпов╕да╓ на запит про запис.\n"
 "Видалити аплет чи продовжити чекати?"
 
-#: panel/session.c:267
+#: panel/session.c:268
 msgid "Remove applet"
 msgstr "Видалити аплет"
 
-#: panel/session.c:270
+#: panel/session.c:271
 msgid "Continue waiting"
 msgstr "Продовжити чекати"
 
-#: panel/session.c:279
+#: panel/session.c:280
 msgid "Timed out on sending session save to an applet"
 msgstr "Вийшов час оч╕кування збереження сеансу аплету"
 
-#: panel/swallow.c:184
+#. Don't translate the first part of this string
+#: panel/session.c:1473
+msgid "/panel/Config/clock_format=%l:%M:%S %p"
+msgstr "/panel/Config/clock_format=%l:%M:%S %p"
+
+#: panel/swallow.c:85
+msgid ""
+"A swallowed application appears to have died unexpectedly.\n"
+"Attempt to reload it?"
+msgstr ""
+"Схоже поглинена програма зазнала збою.\n"
+"Спробувати перевантажити ╖╖?"
+
+#: panel/swallow.c:235
 msgid "Create swallow applet"
 msgstr "Створити поглинений аплет"
 
-#: panel/swallow.c:200
+#: panel/swallow.c:251
 msgid "Title of application to swallow"
 msgstr "Заголовок поглинено╖ програми"
 
-#: panel/swallow.c:210
+#: panel/swallow.c:261
 msgid "Command (optional)"
 msgstr "Команда (не обов'язково)"
 
-#: panel/swallow.c:221
+#: panel/swallow.c:272
 msgid "Width"
 msgstr "Ширина"
 
-#: panel/swallow.c:234
+#: panel/swallow.c:285
 msgid "Height"
 msgstr "Висота"
