@@ -24,6 +24,10 @@ BITMAPS     = \
 	gnome-irc.png				\
 	gnome-lockscreen.png			\
 	gnome-log.png				\
+	gnome-menu-down.png			\
+	gnome-menu-left.png			\
+	gnome-menu-right.png			\
+	gnome-menu-up.png			\
 	gnome-mnemonic.png			\
 	gnome-money.png				\
 	gnome-networktool.png			\
