@@ -1,1 +1,1 @@
-SUBDIRS = fdl gpl
+SUBDIRS = fdl gpl lgpl
