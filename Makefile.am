@@ -8,8 +8,8 @@ SUBDIRS =			\
 	man
 
 EXTRA_DIST =			\
-	gnome-version.in	\
-	gnome-version		\
+	gnome-version.xml.in	\
+	gnome-version.xml	\
 	gnome-desktop.spec.in	\
 	gnome-desktop.spec	\
 	COPYING-DOCS		\
@@ -21,4 +21,4 @@ EXTRA_DIST =			\
 	intltool-update.in
 
 versiondir=$(datadir)/gnome-about
-version_DATA=gnome-version
+version_DATA=gnome-version.xml
