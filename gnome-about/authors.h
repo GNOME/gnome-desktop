@@ -87,6 +87,7 @@ static author authors[] = {
 	{ "Lars Hamann", "" },
 	{ "Michael Hanni", "" },
 	{ "Raja R Harinath", "" },
+	{ "Peter Hawkins", "" },
 	{ "Scott Heavner", "" },
 	{ "James Henstridge", "<james@daa.com.au>" },
 	{ "Richard Hestilow", "" },

@@ -395,10 +395,16 @@ cb_exposed (GtkWidget *widget, GdkEventExpose *event)
 gboolean
 cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 {
-	y = widget->allocation.height + font->ascent;
 
 	if (pixmap)
+	{
+		/* Stop display from "jumping back" to beginning on window resize */
+		y = MIN(y, widget->allocation.height + font->ascent);
 		gdk_pixmap_unref (pixmap);
+	} else 
+	{
+		y = widget->allocation.height + font->ascent;
+	}
 	pixmap = gdk_pixmap_new (widget->window,
 				 widget->allocation.width,
 				 widget->allocation.height,
