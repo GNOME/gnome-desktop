@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
 "POT-Creation-Date: 2000-08-16 22:50+0200\n"
-"PO-Revision-Date: 2000-12-18 22:39+01:00\n"
+"PO-Revision-Date: 2000-12-19 22:39+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -210,7 +210,7 @@ msgstr "Skrivebordsguideadvarsel"
 #: applets/desk-guide/deskguide_applet.c:236 applets/fish/fish.c:905
 #: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:931
-#: panel/drawer.c:417 panel/launcher.c:611 panel/menu.c:1649 panel/menu.c:5108
+#: panel/drawer.c:458 panel/launcher.c:624 panel/menu.c:1649 panel/menu.c:5318
 msgid "Properties..."
 msgstr "Egenskaber..."
 
@@ -218,9 +218,9 @@ msgstr "Egenskaber..."
 #: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1403
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:937
 #: gnome-terminal/gnome-terminal.c:1703 gsm/session-properties.c:182
-#: help-browser/window.c:255 panel/drawer.c:420 panel/gnome-run.c:340
-#: panel/launcher.c:614 panel/logout.c:72 panel/logout.c:133 panel/menu.c:5117
-#: panel/status.c:366 panel/swallow.c:428
+#: help-browser/window.c:255 panel/drawer.c:461 panel/gnome-run.c:380
+#: panel/launcher.c:627 panel/logout.c:113 panel/logout.c:194
+#: panel/menu.c:5327 panel/status.c:366 panel/swallow.c:428
 msgid "Help"
 msgstr "Hjælp"
 
@@ -279,7 +279,7 @@ msgstr "Animationsfilnavn:"
 #: applets/fish/fish.c:498 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1319
 #: panel/menu-properties.c:594 panel/menu-properties.c:632
-#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:263
+#: panel/panel-util.c:114 panel/panel_config.c:1479 panel/swallow.c:263
 msgid "Browse"
 msgstr "Gennemse"
 
@@ -310,8 +310,8 @@ msgid ""
 "\n"
 "Please refer to fish properties dialog."
 msgstr ""
-"Du har ikke 'fortune' installeret, eller du har ikke angivet et program "
-"der skal køres.\n"
+"Du har ikke 'fortune' installeret, eller du har ikke angivet et program der "
+"skal køres.\n"
 "\n"
 "Kig venligst på 'fisk' egenskabsdialog."
 
@@ -665,7 +665,7 @@ msgstr "Dræb app"
 msgid "Follow panel size"
 msgstr "Følg panelstørrelse"
 
-#: applets/tasklist/tasklist_properties.c:157 panel/menu.c:4110
+#: applets/tasklist/tasklist_properties.c:157 panel/menu.c:4261
 msgid "Horizontal"
 msgstr "Vandret"
 
@@ -690,7 +690,7 @@ msgstr "Fast opgavelistebredde"
 msgid "Tasklist width is dynamic"
 msgstr "Dynamisk opgavelistebredde"
 
-#: applets/tasklist/tasklist_properties.c:202 panel/menu.c:4111
+#: applets/tasklist/tasklist_properties.c:202 panel/menu.c:4262
 msgid "Vertical"
 msgstr "Lodret"
 
@@ -706,7 +706,7 @@ msgstr "Fast opgavelistehøjde"
 msgid "Tasklist height is dynamic"
 msgstr "Dynamisk opgavelistehøjde"
 
-#: applets/tasklist/tasklist_properties.c:239 panel/menu.c:4142
+#: applets/tasklist/tasklist_properties.c:239 panel/menu.c:4307
 msgid "Size"
 msgstr "Størrelse"
 
@@ -732,8 +732,8 @@ msgstr "Vis minimerede applikationer på alle skriveborde"
 
 #. Miscellaneous frame
 #: applets/tasklist/tasklist_properties.c:273 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:1020
-#: panel/gnome-panel-properties.c:1485
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:1024
+#: panel/gnome-panel-properties.c:1495 panel/panel_config.c:628
 msgid "Miscellaneous"
 msgstr "Diverse"
 
@@ -765,7 +765,7 @@ msgstr " Mappe"
 msgid "Save"
 msgstr "Gem"
 
-#: gmenu/edit.c:323 gsm/session-properties.c:173 panel/launcher.c:494
+#: gmenu/edit.c:323 gsm/session-properties.c:173 panel/launcher.c:507
 #: panel/menu.c:1286 panel/menu.c:1396
 msgid "Revert"
 msgstr "Forkast"
@@ -995,7 +995,7 @@ msgstr "kunne ikke oprette brugermappe: %s\n"
 msgid "GNOME was brought to you by"
 msgstr "Gnome blev bragt til dig af"
 
-#. for languages that can't display atilde, replace 'á' with 'a'
+#. for languages that can't display aacute, replace 'á' with 'a'
 #: gnome-about/contributors.h:22
 msgid "Szabolcs 'Shooby' Bán"
 msgstr "Szabolcs 'Shooby' Bán"
@@ -1211,6 +1211,7 @@ msgstr "Gnome terminalemulerings-programmet."
 
 #: gnome-terminal/gnome-terminal.c:615 gnome-terminal/gnome-terminal.c:1176
 #: gnome-terminal/gnome-terminal.c:1186 gnome-terminal/gnome-terminal.c:2500
+#: panel/menu.c:4285
 msgid "Default"
 msgstr "Standard"
 
@@ -1327,15 +1328,15 @@ msgid "Select-by-word characters"
 msgstr "Vælg-ved-ord tegn"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1280 panel/panel_config.c:1201
+#: gnome-terminal/gnome-terminal.c:1280 panel/panel_config.c:1467
 msgid "Image"
 msgstr "Billede"
 
-#: gnome-terminal/gnome-terminal.c:1282 panel/menu.c:4148
+#: gnome-terminal/gnome-terminal.c:1282 panel/menu.c:4313
 msgid "Background type"
 msgstr "Baggrundstype"
 
-#: gnome-terminal/gnome-terminal.c:1292 panel/menu.c:4105
+#: gnome-terminal/gnome-terminal.c:1292 panel/menu.c:4256
 msgid "None"
 msgstr "Ingen"
 
@@ -1791,7 +1792,7 @@ msgstr "Ukendt"
 msgid "State not reported within timeout."
 msgstr "Status ikke rapporteret inden tiden løb ud."
 
-#: gsm/gsm-client-row.c:50
+#: gsm/gsm-client-row.c:50 panel/menu.c:4287 panel/panel_config.c:1248
 msgid "Normal"
 msgstr "Normal"
 
@@ -1992,7 +1993,7 @@ msgstr "X"
 msgid "Y position of window"
 msgstr "Vinduets Y-position"
 
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:787
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:959
 msgid "Y"
 msgstr "Y"
 
@@ -2373,13 +2374,13 @@ msgstr "Fjern fra panel"
 msgid "Move"
 msgstr "Flyt"
 
-#: panel/applet.c:476 panel/menu.c:3274
+#: panel/applet.c:476 panel/menu.c:3282
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kunne ikke finde billedfil %s"
 
-#: panel/applet.c:477 panel/applet.c:483 panel/menu.c:3499 panel/menu.c:3504
-#: panel/menu.c:4522 panel/menu.c:4527 panel/menu.c:4847
+#: panel/applet.c:477 panel/applet.c:483 panel/menu.c:3507 panel/menu.c:3512
+#: panel/menu.c:4693 panel/menu.c:4698 panel/menu.c:5018
 msgid "Panel"
 msgstr "Panel"
 
@@ -2464,8 +2465,8 @@ msgstr "Brug skjuleknap"
 msgid "Enable hidebutton arrow"
 msgstr "Brug skjuleknapspil"
 
-#: panel/drawer.c:162 panel/drawer.c:275 panel/gnome-panel-properties.c:558
-#: panel/menu.c:4229
+#: panel/drawer.c:162 panel/drawer.c:296 panel/gnome-panel-properties.c:564
+#: panel/menu.c:4400
 msgid "Drawer"
 msgstr "Skuffe"
 
@@ -2668,231 +2669,231 @@ msgstr "Tilføj aftale"
 msgid "Format"
 msgstr "Format"
 
-#: panel/foobar-widget.c:887 panel/menu.c:3296 panel/menu.c:3301
-#: panel/menu.c:4752
+#: panel/foobar-widget.c:887 panel/menu.c:3304 panel/menu.c:3309
+#: panel/menu.c:4923
 msgid "Programs"
 msgstr "Programmer"
 
-#: panel/foobar-widget.c:901 panel/menu.c:4724 panel/menu.c:4764
-#: panel/menu.c:4770
+#: panel/foobar-widget.c:901 panel/menu.c:4895 panel/menu.c:4935
+#: panel/menu.c:4941
 msgid "Favorites"
 msgstr "Favoritter"
 
-#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:532
+#: panel/gnome-panel-properties.c:118 panel/menu-properties.c:532
 msgid "Programs: "
 msgstr "Programmer: "
 
-#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:539
+#: panel/gnome-panel-properties.c:119 panel/menu-properties.c:539
 msgid "Favorites: "
 msgstr "Favoritter: "
 
-#: panel/gnome-panel-properties.c:115 panel/menu-properties.c:546
+#: panel/gnome-panel-properties.c:120 panel/menu-properties.c:546
 msgid "Applets: "
 msgstr "Appletter: "
 
-#: panel/gnome-panel-properties.c:116
+#: panel/gnome-panel-properties.c:121
 msgid "Distribution: "
 msgstr "Distribution: "
 
-#: panel/gnome-panel-properties.c:117
+#: panel/gnome-panel-properties.c:122
 msgid "KDE: "
 msgstr "KDE: "
 
-#: panel/gnome-panel-properties.c:118
+#: panel/gnome-panel-properties.c:123
 msgid "Panel: "
 msgstr "Panel: "
 
-#: panel/gnome-panel-properties.c:119
+#: panel/gnome-panel-properties.c:124
 msgid "Desktop: "
 msgstr "Skrivebord: "
 
 #. Animation enable
-#: panel/gnome-panel-properties.c:306
+#: panel/gnome-panel-properties.c:312
 msgid "Enable animations"
 msgstr "Brug animationer"
 
-#: panel/gnome-panel-properties.c:311
+#: panel/gnome-panel-properties.c:317
 msgid "Constant speed animations"
 msgstr "Konstant animationshastighed"
 
 #. AutoHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:317
+#: panel/gnome-panel-properties.c:323
 msgid "Animation speed"
 msgstr "Animationshastighed"
 
-#: panel/gnome-panel-properties.c:327 panel/gnome-panel-properties.c:345
-#: panel/menu.c:4098
+#: panel/gnome-panel-properties.c:333 panel/gnome-panel-properties.c:351
+#: panel/menu.c:4249
 msgid "Auto hide"
 msgstr "Skjul automatisk"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:334 panel/menu.c:4097
+#: panel/gnome-panel-properties.c:340 panel/menu.c:4248
 msgid "Explicit hide"
 msgstr "Skjul udtrykkeligt"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:340
+#: panel/gnome-panel-properties.c:346
 msgid "Drawer sliding"
 msgstr "Skuffeglidning"
 
 #. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:356
+#: panel/gnome-panel-properties.c:362
 msgid "Delay (ms)"
 msgstr "Forsinkelse (ms)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:362
+#: panel/gnome-panel-properties.c:368
 msgid "Size (pixels)"
 msgstr "Størrelse (pixler)"
 
-#: panel/gnome-panel-properties.c:473
+#: panel/gnome-panel-properties.c:479
 msgid "Launcher icon"
 msgstr "Genvejsikon"
 
-#: panel/gnome-panel-properties.c:474
+#: panel/gnome-panel-properties.c:480
 msgid "Drawer icon"
 msgstr "Skuffeikon"
 
-#: panel/gnome-panel-properties.c:475
+#: panel/gnome-panel-properties.c:481
 msgid "Menu icon"
 msgstr "Menuikon"
 
-#: panel/gnome-panel-properties.c:476
+#: panel/gnome-panel-properties.c:482
 msgid "Special icon"
 msgstr "Speciel ikon"
 
 #. toggle button
-#: panel/gnome-panel-properties.c:488
+#: panel/gnome-panel-properties.c:494
 msgid "Tiles enabled"
 msgstr "Benyt fliser"
 
-#: panel/gnome-panel-properties.c:503
+#: panel/gnome-panel-properties.c:509
 msgid "Normal tile"
 msgstr "Normal flise"
 
-#: panel/gnome-panel-properties.c:516
+#: panel/gnome-panel-properties.c:522
 msgid "Clicked tile"
 msgstr "Trykket flise"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:532
+#: panel/gnome-panel-properties.c:538
 msgid "Border width (tile only)"
 msgstr "Kantbredde (kun fliser)"
 
 #. Minimized size scale frame
-#: panel/gnome-panel-properties.c:538
+#: panel/gnome-panel-properties.c:544
 msgid "Depth (displacement when pressed)"
 msgstr "Dybde (forskydning når nedtrykt)"
 
-#: panel/gnome-panel-properties.c:557
+#: panel/gnome-panel-properties.c:563
 msgid "Launcher"
 msgstr "Genvej"
 
-#: panel/gnome-panel-properties.c:559 panel/gnome-panel-properties.c:1480
+#: panel/gnome-panel-properties.c:565 panel/gnome-panel-properties.c:1490
 #: panel/menu-properties.c:610 panel/menu.c:1429 panel/menu.c:2788
-#: panel/menu.c:2856 panel/menu.c:2861 panel/menu.c:4177 panel/menu.c:5022
+#: panel/menu.c:2856 panel/menu.c:2861 panel/menu.c:4348 panel/menu.c:5215
 msgid "Menu"
 msgstr "Menu"
 
-#: panel/gnome-panel-properties.c:560
+#: panel/gnome-panel-properties.c:566
 msgid "Special"
 msgstr "Speciel"
 
-#: panel/gnome-panel-properties.c:570
+#: panel/gnome-panel-properties.c:576
 msgid "Button type: "
 msgstr "Knappetype: "
 
 #. show/hide frame
-#: panel/gnome-panel-properties.c:603
+#: panel/gnome-panel-properties.c:609
 msgid "Make buttons flush with panel edge"
 msgstr "Lad knapper være i plan med panelkant"
 
 #. only show tiles when mouse is over the button
-#: panel/gnome-panel-properties.c:610
+#: panel/gnome-panel-properties.c:616
 msgid "Show button tiles only when cursor is over the button"
 msgstr "Vis kun knappefliser når markøren er over knappen"
 
 #. prelight on mouseovers hack (used to be saturation, hence
 #. * the config option name)
-#: panel/gnome-panel-properties.c:617
+#: panel/gnome-panel-properties.c:623
 msgid "Prelight buttons on mouseover"
 msgstr "Oplys knapper når musen er over dem"
 
 #. Fast but low quality scaling (Nearest versus Hyperbolic)
-#: panel/gnome-panel-properties.c:623
+#: panel/gnome-panel-properties.c:629
 msgid "Fast but low quality scaling of button icons"
 msgstr "Hurtig men med dårlig skalering af knap-ikoner"
 
 #. Movement frame
-#: panel/gnome-panel-properties.c:680
+#: panel/gnome-panel-properties.c:686
 msgid "Default movement mode"
 msgstr "Standard bevægelsesmåde"
 
 #. Switched
-#: panel/gnome-panel-properties.c:690
+#: panel/gnome-panel-properties.c:696
 msgid "Switched movement (or use Ctrl)"
 msgstr "Omvendt bevægelse (eller brug Ctrl)"
 
-#: panel/gnome-panel-properties.c:698
+#: panel/gnome-panel-properties.c:704
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
 msgstr "Fri bevægelse (forstyrrer ikke andre appletter) (eller brug Alt)"
 
-#: panel/gnome-panel-properties.c:706
+#: panel/gnome-panel-properties.c:712
 msgid "Push movement (or use Shift)"
 msgstr "Skubbebevægelse (eller brug Skift)"
 
-#: panel/gnome-panel-properties.c:711
+#: panel/gnome-panel-properties.c:717
 msgid "Padding between applets"
 msgstr "Skifter mellem appletter"
 
-#: panel/gnome-panel-properties.c:716
+#: panel/gnome-panel-properties.c:722
 msgid "Padding between applets and panel border"
 msgstr "Skifter mellem appletter og panelkant"
 
-#: panel/gnome-panel-properties.c:788 panel/menu-properties.c:392
+#: panel/gnome-panel-properties.c:794 panel/menu-properties.c:392
 msgid "Off"
 msgstr "Fra"
 
-#: panel/gnome-panel-properties.c:795 panel/menu-properties.c:402
+#: panel/gnome-panel-properties.c:801 panel/menu-properties.c:402
 msgid "In a submenu"
 msgstr "I en undermenu"
 
-#: panel/gnome-panel-properties.c:801
+#: panel/gnome-panel-properties.c:807
 msgid "In the menu"
 msgstr "I menuen"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:820
+#: panel/gnome-panel-properties.c:826
 msgid "Menus"
 msgstr "Menuer"
 
 #. large icons
-#: panel/gnome-panel-properties.c:830
+#: panel/gnome-panel-properties.c:836
 msgid "Use large icons"
 msgstr "Brug store ikoner"
 
 #. Dot Buttons
-#: panel/gnome-panel-properties.c:837
+#: panel/gnome-panel-properties.c:843
 msgid "Show [...] buttons"
 msgstr "Vis [...] knapper"
 
 #. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:843
+#: panel/gnome-panel-properties.c:849
 msgid "Show popup menus outside of panels"
 msgstr "Vis pop-op-menuer udenfor panelet"
 
 #. Hungry Menus
-#: panel/gnome-panel-properties.c:849
+#: panel/gnome-panel-properties.c:855
 msgid "Keep menus in memory"
 msgstr "Behold menuer i hukommelsen"
 
 #. Merge system menus
-#: panel/gnome-panel-properties.c:856
+#: panel/gnome-panel-properties.c:862
 msgid "Merge in system menus"
 msgstr "Indflet systemmenuer"
 
 #. Menu check
-#: panel/gnome-panel-properties.c:863
+#: panel/gnome-panel-properties.c:869
 msgid ""
 "Automatically re-check menus\n"
 "for newly installed software"
@@ -2901,95 +2902,95 @@ msgstr ""
 "for nyligt installeret programmel"
 
 #. Menu frame
-#: panel/gnome-panel-properties.c:870
+#: panel/gnome-panel-properties.c:876
 msgid "Global menu"
 msgstr "Global menu"
 
-#: panel/gnome-panel-properties.c:997
+#: panel/gnome-panel-properties.c:1001
 msgid "Press a key..."
 msgstr "Tryk på en tast..."
 
 #. Tooltips enable
-#: panel/gnome-panel-properties.c:1030
+#: panel/gnome-panel-properties.c:1034
 msgid "Tooltips enabled"
 msgstr "Brug værktøjstips"
 
 #. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:1036
+#: panel/gnome-panel-properties.c:1040
 msgid "Close drawer if a launcher inside it is pressed"
 msgstr "Luk skuffen hvis jeg trykker på en ikon i den"
 
 #. Autoraise
-#: panel/gnome-panel-properties.c:1042
+#: panel/gnome-panel-properties.c:1046
 msgid "Raise panels on mouse-over"
 msgstr "Hæv paneler når musen er over dem"
 
 #. Confirm panel removal
-#: panel/gnome-panel-properties.c:1048
+#: panel/gnome-panel-properties.c:1052
 msgid "Confirm the removal of panels with a dialog"
 msgstr "Bekræft fjernelse af paneler med en dialogboks"
 
 #. Collision avoidance
-#: panel/gnome-panel-properties.c:1054
+#: panel/gnome-panel-properties.c:1058
 msgid "Try to avoid overlapping panels"
 msgstr "Forsøg at undgå overlappende paneler"
 
 #. Layer frame
-#: panel/gnome-panel-properties.c:1060
-msgid "Keep panels (GNOME compliant window managers only)"
-msgstr "Behold paneler (kun Gnome-kompatibel vindueshåndtering)"
+#: panel/gnome-panel-properties.c:1064
+msgid "Panel treatment (GNOME compliant window managers only)"
+msgstr "Panelbehandling (kun Gnome-kompatibel vindueshåndtering)"
 
 #. Keep on bottom
-#: panel/gnome-panel-properties.c:1070
-msgid "Below other windows"
-msgstr "Under andre vinduer"
+#: panel/gnome-panel-properties.c:1074
+msgid "Keep panels below other windows"
+msgstr "Behold paneler under andre vinduer"
 
-#: panel/gnome-panel-properties.c:1077
-msgid "On the same level as other windows"
-msgstr "På samme niveau som andre vinduer"
+#: panel/gnome-panel-properties.c:1081
+msgid "Keep panels on the same level as other windows"
+msgstr "Behold paneler på samme niveau som andre vinduer"
 
-#: panel/gnome-panel-properties.c:1084
-msgid "Above other windows"
-msgstr "Over andre vinduer"
+#: panel/gnome-panel-properties.c:1088
+msgid "Keep panels above other windows"
+msgstr "Behold paneler over andre vinduer"
 
 #. Key Bindings frame
-#: panel/gnome-panel-properties.c:1090
+#: panel/gnome-panel-properties.c:1094
 msgid "Key Bindings"
 msgstr "Tastaturgenveje"
 
 #. enabled
-#: panel/gnome-panel-properties.c:1103
+#: panel/gnome-panel-properties.c:1107
 msgid "Enable panel keybindings"
 msgstr "Benyt panelgenvejstaster"
 
 #. menu key
-#: panel/gnome-panel-properties.c:1110
+#: panel/gnome-panel-properties.c:1114
 msgid "Popup menu key"
 msgstr "Popop-menutast"
 
-#: panel/gnome-panel-properties.c:1119 panel/gnome-panel-properties.c:1144
-#: panel/panel-util.c:554 panel/panel-util.c:611
+#: panel/gnome-panel-properties.c:1125 panel/gnome-panel-properties.c:1153
+#: panel/panel-util.c:557 panel/panel-util.c:614
 msgid "Disabled"
 msgstr "Deaktiveret"
 
-#: panel/gnome-panel-properties.c:1130 panel/gnome-panel-properties.c:1155
+#: panel/gnome-panel-properties.c:1136 panel/gnome-panel-properties.c:1164
 msgid "Grab key..."
 msgstr "Opsnap tast..."
 
 #. run key...
-#: panel/gnome-panel-properties.c:1137
+#: panel/gnome-panel-properties.c:1144
 msgid "Run dialog key"
 msgstr "\"Kør\"-dialogtast"
 
-#: panel/gnome-panel-properties.c:1465
+#: panel/gnome-panel-properties.c:1475
 msgid "Animation"
 msgstr "Animation"
 
-#: panel/gnome-panel-properties.c:1470
+#: panel/gnome-panel-properties.c:1480
 msgid "Buttons"
 msgstr "Knapper"
 
-#: panel/gnome-panel-properties.c:1475
+#: panel/gnome-panel-properties.c:1485
 msgid "Panel Objects"
 msgstr "Panelobjekter"
 
@@ -3025,7 +3026,7 @@ msgstr "Kør"
 msgid "Run in terminal"
 msgstr "Kør i terminal"
 
-#: panel/gnome-run.c:315 panel/gnome-run.c:317 panel/menu.c:4833
+#: panel/gnome-run.c:338 panel/gnome-run.c:357 panel/menu.c:5004
 msgid "Run..."
 msgstr "Kør..."
 
@@ -3037,48 +3038,48 @@ msgstr "Denne genvejsikon har intet program at starte"
 msgid "Can't get goad_id from desktop entry!"
 msgstr "Kan ikke få goad_id fra skrivebordselement!"
 
-#: panel/launcher.c:342
+#: panel/launcher.c:355
 msgid "App"
 msgstr "Applikation"
 
 #. watch the enum at the top of the file
-#: panel/launcher.c:492
+#: panel/launcher.c:505
 msgid "Launcher properties"
 msgstr "Egenskaber for genvej"
 
-#: panel/launcher.c:659
+#: panel/launcher.c:672
 msgid "Create launcher applet"
 msgstr "Opret genvejsapplet"
 
-#: panel/logout.c:47 panel/menu.c:4664
+#: panel/logout.c:71 panel/menu.c:4835
 msgid "Log out"
 msgstr "Log ud"
 
-#: panel/logout.c:49
+#: panel/logout.c:90
 msgid "Log out of GNOME"
 msgstr "Log ud af Gnome"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4652
+#: panel/logout.c:131 panel/logout.c:150 panel/menu.c:4823
 msgid "Lock screen"
 msgstr "Lås skærm"
 
-#: panel/logout.c:122
+#: panel/logout.c:183
 msgid "Blank Screen Now"
 msgstr "Blank skærm nu"
 
-#: panel/logout.c:124
+#: panel/logout.c:185
 msgid "Lock Screen Now"
 msgstr "Lås skærmen nu"
 
-#: panel/logout.c:126
+#: panel/logout.c:187
 msgid "Kill Daemon"
 msgstr "Dræb dæmon"
 
-#: panel/logout.c:128
+#: panel/logout.c:189
 msgid "Restart Daemon"
 msgstr "Genstart dæmon"
 
-#: panel/logout.c:130
+#: panel/logout.c:191
 msgid "Preferences"
 msgstr "Præferencer"
 
@@ -3255,64 +3256,64 @@ msgstr "Kan ikke få goad_id for applet, ignorerer den"
 msgid " (empty)"
 msgstr " (tom)"
 
-#: panel/menu.c:2965 panel/menu.c:4782
+#: panel/menu.c:2965 panel/menu.c:4953
 msgid "Applets"
 msgstr "Appletter"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:3139 panel/session.c:1323
+#: panel/menu.c:3147 panel/session.c:1331
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
-#: panel/menu.c:3148
+#: panel/menu.c:3156
 msgid "You can only have one menu panel at a time."
 msgstr "Du kan kun have ét menupanel ad gangen."
 
-#: panel/menu.c:3186 panel/menu.c:3191 panel/menu.c:4412
+#: panel/menu.c:3194 panel/menu.c:3199 panel/menu.c:4583
 msgid "Create panel"
 msgstr "Opret panel"
 
-#: panel/menu.c:3219
+#: panel/menu.c:3227
 msgid "Menu panel"
 msgstr "Menupanel"
 
-#: panel/menu.c:3227 panel/menu.c:4089 panel/panel_config.c:1330
-#: panel/panel_config.c:1446
+#: panel/menu.c:3235 panel/menu.c:4240 panel/panel_config.c:1596
+#: panel/panel_config.c:1714
 msgid "Edge panel"
 msgstr "Kantpanel"
 
-#: panel/menu.c:3235 panel/menu.c:4090 panel/panel_config.c:1337
-#: panel/panel_config.c:1456
+#: panel/menu.c:3243 panel/menu.c:4241 panel/panel_config.c:1603
+#: panel/panel_config.c:1724
 msgid "Aligned panel"
 msgstr "Justeret panel"
 
-#: panel/menu.c:3243 panel/menu.c:4091 panel/panel_config.c:1343
-#: panel/panel_config.c:1466
+#: panel/menu.c:3251 panel/menu.c:4242 panel/panel_config.c:1609
+#: panel/panel_config.c:1734
 msgid "Sliding panel"
 msgstr "Glidende panel"
 
-#: panel/menu.c:3251 panel/menu.c:4092 panel/panel_config.c:1349
-#: panel/panel_config.c:1476
+#: panel/menu.c:3259 panel/menu.c:4243 panel/panel_config.c:1615
+#: panel/panel_config.c:1744
 msgid "Floating panel"
 msgstr "Flydende panel"
 
-#: panel/menu.c:3310 panel/menu.c:3313
+#: panel/menu.c:3318 panel/menu.c:3321
 msgid "No system menus found!"
 msgstr "Fandt ingen systemmenuer!"
 
-#: panel/menu.c:3328
+#: panel/menu.c:3336
 msgid "Can't create the user menu directory"
 msgstr "kan ikke oprette brugermenumappen"
 
-#: panel/menu.c:3391 panel/menu.c:3397 panel/menu.c:4822
+#: panel/menu.c:3399 panel/menu.c:3405 panel/menu.c:4993
 msgid "KDE menus"
 msgstr "KDE-menuer"
 
-#: panel/menu.c:3450
+#: panel/menu.c:3458
 msgid "You cannot remove your last panel."
 msgstr "Du kan ikke fjerne dit sidste panel."
 
-#: panel/menu.c:3460
+#: panel/menu.c:3468
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3320,168 +3321,192 @@ msgstr ""
 "Når et panel bliver fjernet, mister du panelet\n"
 "og dets appletindstillinger. Fjern dette panel?"
 
-#: panel/menu.c:4103
+#: panel/menu.c:4254
 msgid "With pixmap arrow"
 msgstr "Med pil"
 
-#: panel/menu.c:4104
+#: panel/menu.c:4255
 msgid "Without pixmap"
 msgstr "Uden pil"
 
-#: panel/menu.c:4116 panel/panel_config.c:925
+#: panel/menu.c:4267 panel/panel_config.c:1097
 msgid "Ultra Tiny (12 pixels)"
 msgstr "Lillebitte (12 pixler)"
 
-#: panel/menu.c:4117 panel/panel_config.c:933
+#: panel/menu.c:4268 panel/panel_config.c:1105
 msgid "Tiny (24 pixels)"
 msgstr "Bitte (24 pixler)"
 
-#: panel/menu.c:4118 panel/panel_config.c:941
+#: panel/menu.c:4269 panel/panel_config.c:1113
 msgid "Small (36 pixels)"
 msgstr "Lille (36 pixler)"
 
-#: panel/menu.c:4119 panel/panel_config.c:949
+#: panel/menu.c:4270 panel/panel_config.c:1121
 msgid "Standard (48 pixels)"
 msgstr "Standard (48 pixler)"
 
-#: panel/menu.c:4120 panel/panel_config.c:957
+#: panel/menu.c:4271 panel/panel_config.c:1129
 msgid "Large (64 pixels)"
 msgstr "Stor (64 pixler)"
 
-#: panel/menu.c:4121 panel/panel_config.c:965
+#: panel/menu.c:4272 panel/panel_config.c:1137
 msgid "Huge (80 pixels)"
 msgstr "Enorm (80 pixler)"
 
-#: panel/menu.c:4122 panel/panel_config.c:973
+#: panel/menu.c:4273 panel/panel_config.c:1145
 msgid "Ridiculous (128 pixels)"
 msgstr "Latterlig (128 pixler)"
 
-#: panel/menu.c:4127 panel/panel_config.c:1148
+#: panel/menu.c:4278 panel/panel_config.c:1414
 msgid "Standard"
 msgstr "Standard"
 
 #. color frame
-#: panel/menu.c:4128 panel/panel_config.c:1152 panel/panel_config.c:1167
+#: panel/menu.c:4279 panel/panel_config.c:1418 panel/panel_config.c:1433
 msgid "Color"
 msgstr "Farve"
 
-#: panel/menu.c:4129 panel/panel_config.c:1156
+#: panel/menu.c:4280 panel/panel_config.c:1422
 msgid "Pixmap"
 msgstr "Billede"
 
-#: panel/menu.c:4133
+#: panel/menu.c:4286
+msgid "Below"
+msgstr "Under"
+
+#: panel/menu.c:4288
+msgid "Above"
+msgstr "Over"
+
+#: panel/menu.c:4293
+msgid "Avoid on maximize"
+msgstr "Undgå ved maksimér"
+
+#: panel/menu.c:4294
+msgid "Don't avoid on maximize"
+msgstr "Undgå ikke ved maksimér"
+
+#: panel/menu.c:4298
 msgid "Type"
 msgstr "Type"
 
-#: panel/menu.c:4136
+#: panel/menu.c:4301
 msgid "Hiding policy"
 msgstr "Gemmepolitik"
 
-#: panel/menu.c:4139
+#: panel/menu.c:4304
 msgid "Hide buttons"
 msgstr "Skjuleknapper"
 
-#: panel/menu.c:4145
+#: panel/menu.c:4310
 msgid "Orientation"
 msgstr "Orientering"
 
-#: panel/menu.c:4166
+#: panel/menu.c:4316
+msgid "Level"
+msgstr "Niveau"
+
+#: panel/menu.c:4319
+msgid "Maximize mode"
+msgstr "Maksimeringstilstand"
+
+#: panel/menu.c:4337
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4187
+#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4358
 msgid "Main menu"
 msgstr "Hovedmenu"
 
-#: panel/menu.c:4198
+#: panel/menu.c:4369
 msgid "Programs menu"
 msgstr "Programmenu"
 
-#: panel/menu.c:4208
+#: panel/menu.c:4379
 msgid "Favorites menu"
 msgstr "Favoritmenu"
 
-#: panel/menu.c:4219
+#: panel/menu.c:4390
 msgid "Launcher..."
 msgstr "Genvej..."
 
-#: panel/menu.c:4240
+#: panel/menu.c:4411
 msgid "Log out button"
 msgstr "Logudknap"
 
-#: panel/menu.c:4251
+#: panel/menu.c:4422
 msgid "Lock button"
 msgstr "Låseknap"
 
-#: panel/menu.c:4262
+#: panel/menu.c:4433
 msgid "Run button"
 msgstr "Kør-knap"
 
-#: panel/menu.c:4274
+#: panel/menu.c:4445
 msgid "Swallowed app..."
 msgstr "Slugt applikation..."
 
-#: panel/menu.c:4282
+#: panel/menu.c:4453
 msgid "Status dock"
 msgstr "Statusdok"
 
-#: panel/menu.c:4306 panel/menu.c:4311 panel/menu.c:4388
+#: panel/menu.c:4477 panel/menu.c:4482 panel/menu.c:4559
 msgid "Add to panel"
 msgstr "Tilføj til panel"
 
-#: panel/menu.c:4326
+#: panel/menu.c:4497
 msgid "Cannot execute panel global properties"
-msgstr "Kan ikke køre panelets globale egenskaber"
+msgstr "Kan ikke køre panelets overordnede egenskaber"
 
-#: panel/menu.c:4366
+#: panel/menu.c:4537
 msgid "Remove this panel..."
 msgstr "Fjern dette panel..."
 
-#: panel/menu.c:4368 panel/menu.c:4423
+#: panel/menu.c:4539 panel/menu.c:4594
 msgid "Remove this panel"
 msgstr "Fjern dette panel"
 
-#: panel/menu.c:4440
+#: panel/menu.c:4611
 msgid "Properties"
 msgstr "Egenskaber"
 
-#: panel/menu.c:4451
+#: panel/menu.c:4622
 msgid "All properties..."
 msgstr "Alle egenskaber..."
 
-#: panel/menu.c:4467
+#: panel/menu.c:4638
 msgid "Global Preferences..."
 msgstr "Globale indstillinger..."
 
-#: panel/menu.c:4478
+#: panel/menu.c:4649
 msgid "Reread all menus"
 msgstr "Genlæs alle menuer"
 
-#: panel/menu.c:4493
+#: panel/menu.c:4664
 msgid "Panel Manual..."
 msgstr "Panelmanual..."
 
-#: panel/menu.c:4504
+#: panel/menu.c:4675
 msgid "Cannot execute xscreensaver"
 msgstr "Kan ikke køre xscreensaver"
 
-#: panel/menu.c:4551 panel/menu.c:4556 panel/menu.c:4856
+#: panel/menu.c:4722 panel/menu.c:4727 panel/menu.c:5027
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: panel/menu.c:4593
+#: panel/menu.c:4764
 msgid "About the panel..."
 msgstr "Om panelet..."
 
-#: panel/menu.c:4609
+#: panel/menu.c:4780
 msgid "About GNOME..."
 msgstr "Om Gnome..."
 
-#: panel/menu.c:4922
+#: panel/menu.c:5093
 msgid "Can't create menu, using main menu!"
 msgstr "Kan ikke oprette menu, bruger hovedmenu!"
 
-#: panel/menu-properties.c:209 panel/menu.c:5113
+#: panel/menu-properties.c:209 panel/menu.c:5323
 msgid "Edit menus..."
 msgstr "Redigér menuer..."
 
@@ -3533,60 +3558,64 @@ msgstr "Menusti"
 msgid "Use custom icon for panel button"
 msgstr "Brug egen ikon for panelknap"
 
-#: panel/panel.c:895
+#: panel/panel.c:900
 #, c-format
 msgid "Open URL: %s"
 msgstr "Åbn URL: %s"
 
-#: panel/panel_config.c:443
+#: panel/panel_config.c:573
 msgid "Hiding"
 msgstr "Skjuler"
 
 #. Auto-hide
-#: panel/panel_config.c:451
+#: panel/panel_config.c:581
 msgid "Enable Auto-hide"
 msgstr "Brug auto-skjul"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:461
+#: panel/panel_config.c:592
 msgid "Show hide buttons"
 msgstr "Vis skjuleknapper"
 
 #. Arrow enable
-#: panel/panel_config.c:471
+#: panel/panel_config.c:603
 msgid "Show arrows on hide button"
 msgstr "Vis pile på skjuleknap"
 
-#: panel/panel_config.c:528
+#: panel/panel_config.c:637
+msgid "Avoid this panel when maximizing windows"
+msgstr "Undgå dette panel ved maksimering af vinduer"
+
+#: panel/panel_config.c:690
 msgid "Panel Position"
 msgstr "Panelplacering"
 
-#: panel/panel_config.c:647 panel/panel_config.c:674 panel/panel_config.c:734
-#: panel/panel_config.c:832
+#: panel/panel_config.c:809 panel/panel_config.c:846 panel/panel_config.c:906
+#: panel/panel_config.c:1004
 msgid "Size and Position"
 msgstr "Størrelse og placering"
 
-#: panel/panel_config.c:749
+#: panel/panel_config.c:921
 msgid "Orient panel horizontally"
 msgstr "Vend panel vandret"
 
-#: panel/panel_config.c:761
+#: panel/panel_config.c:933
 msgid "Orient panel vertically"
 msgstr "Vend panel lodret"
 
-#: panel/panel_config.c:773
+#: panel/panel_config.c:945
 msgid "Top left corner's position: X"
 msgstr "Placering af øverste venstre hjørne: X"
 
-#: panel/panel_config.c:844
+#: panel/panel_config.c:1016
 msgid "Offset from screen edge:"
 msgstr "Afstand fra skærmkant:"
 
-#: panel/panel_config.c:916
+#: panel/panel_config.c:1088
 msgid "Panel size:"
 msgstr "Panelstørrelse:"
 
-#: panel/panel_config.c:987
+#: panel/panel_config.c:1159
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3596,36 +3625,52 @@ msgstr ""
 "den største applet og ikke alle appletter\n"
 "retter sig efter disse størrelser."
 
-#: panel/panel_config.c:1140
+#: panel/panel_config.c:1224
+msgid "Panel window level:"
+msgstr "Panelvindueniveau:"
+
+#: panel/panel_config.c:1232
+msgid "Default (from global preferences)"
+msgstr "Standard (fra overordnede indstillinger)"
+
+#: panel/panel_config.c:1240
+msgid "Above other windows"
+msgstr "Over andre vinduer"
+
+#: panel/panel_config.c:1256
+msgid "Below other windows"
+msgstr "Under andre vinduer"
+
+#: panel/panel_config.c:1406
 msgid "Background Type: "
 msgstr "Baggrundstype: "
 
-#: panel/panel_config.c:1179
+#: panel/panel_config.c:1445
 msgid "Color to use:"
 msgstr "Vælg farve:"
 
-#: panel/panel_config.c:1227
+#: panel/panel_config.c:1493
 msgid "Don't scale image to fit"
 msgstr "Skalér ikke billede til at være i panel"
 
-#: panel/panel_config.c:1233
+#: panel/panel_config.c:1499
 msgid "Scale image (keep proportions)"
 msgstr "Skalér billede (bevar proportioner)"
 
-#: panel/panel_config.c:1238
+#: panel/panel_config.c:1504
 msgid "Stretch image (change proportions)"
 msgstr "Stræk billede (ændr proportioner)"
 
-#: panel/panel_config.c:1253
+#: panel/panel_config.c:1519
 msgid "Rotate image for vertical panels"
 msgstr "Vend billede om på lodrette paneler"
 
 #. main window
-#: panel/panel_config.c:1418
+#: panel/panel_config.c:1686
 msgid "Panel properties"
 msgstr "Egenskaber for panel"
 
-#: panel/panel_config.c:1494
+#: panel/panel_config.c:1762
 msgid "Background"
 msgstr "Baggrund"
 
@@ -3650,7 +3695,7 @@ msgid "Timed out on sending session save to an applet"
 msgstr "Det tog for lang tid at sende sessionsgemning til applet"
 
 #. Don't translate the first part of this string
-#: panel/session.c:1517
+#: panel/session.c:1555
 msgid "/panel/Config/clock_format=%l:%M:%S %p"
 msgstr "/panel/Config/clock_format=%H:%M:%S"
 
