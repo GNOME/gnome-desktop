@@ -89,7 +89,9 @@ TILES     = \
 	tile-drc-1-up.png			\
 	tile-drc-1-down.png			\
 	tile-drc-2-up.png			\
-	tile-drc-2-down.png
+	tile-drc-2-down.png			\
+	tile-drc-4-up.png			\
+	tile-drc-4-down.png
 
 pixmap_DATA = $(BITMAPS)
 
