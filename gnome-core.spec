@@ -112,7 +112,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
-%{prefix}/share/control-center
 %{prefix}/share/applets
 %{prefix}/share/apps
 %{prefix}/share/gnome
