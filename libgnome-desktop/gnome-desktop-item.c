@@ -51,6 +51,11 @@
 
 #include "gnome-desktop-item.h"
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+#include <libsn/sn.h>
+#include <gdk/gdkx.h>
+#endif
+
 #define sure_string(s) ((s)!=NULL?(s):"")
 
 struct _GnomeDesktopItem {
@@ -1471,6 +1476,31 @@ expand_string (const GnomeDesktopItem *item,
 	return g_string_free (gs, FALSE);
 }
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+static void
+sn_error_trap_push (SnDisplay *display,
+		    Display   *xdisplay)
+{
+	gdk_error_trap_push ();
+}
+
+static void
+sn_error_trap_pop (SnDisplay *display,
+		   Display   *xdisplay)
+{
+	gdk_error_trap_pop ();
+}
+
+static void
+sn_child_setup_func (void *data)
+{
+	SnLauncherContext *sn_context = data;
+
+	sn_launcher_context_setup_child_process (sn_context);
+}
+
+#endif /* HAVE_STARTUP_NOTIFICATION */
+
 static int
 ditem_execute (const GnomeDesktopItem *item,
 	       const char *exec,
@@ -1494,7 +1524,11 @@ ditem_execute (const GnomeDesktopItem *item,
 	int temp_argc = 0;
 	char *new_exec, *uris, *temp;
 	int launched = 0;
-
+#ifdef HAVE_STARTUP_NOTIFICATION
+	SnLauncherContext *sn_context;
+	SnDisplay *display;
+#endif
+	
 	g_return_val_if_fail (item, -1);
 
 	if (!use_current_dir)
@@ -1518,6 +1552,28 @@ ditem_execute (const GnomeDesktopItem *item,
 	args = make_args (file_list);
 	arg_ptr = make_args (file_list);
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+	sn_display = sn_display_new (gdk_display,
+				     sn_error_trap_push,
+				     sn_error_trap_pop);
+
+	
+	/* Only initiate notification if desktop file supports it.
+	 * (we could avoid setting up the SnLauncherContext if we aren't going
+	 * to initiate, but why bother)
+	 */
+
+	if (gnome_desktop_item_get_boolean (item, "StartupNotify")) {
+		/* FIXME this screen isn't the right one.
+		 * Don't we need gnome_desktop_item_launch_with_screen()?
+		 */
+		sn_context = sn_launcher_context_new (sn_display,
+						      DefaultScreen (gdk_display));
+	} else {
+		sn_context = NULL;
+	}
+#endif
+	
 	do {
 		added_status = ADDED_NONE;
 		new_exec = expand_string (item,
@@ -1576,8 +1632,13 @@ ditem_execute (const GnomeDesktopItem *item,
 				      real_argv,
 				      envp,
 				      G_SPAWN_SEARCH_PATH /* flags */,
+#ifdef HAVE_STARTUP_NOTIFICATION
+				      sn_context ? sn_child_setup_func : NULL,
+				      sn_context,
+#else
 				      NULL /* child_setup */,
 				      NULL /* user_data */,
+#endif
 				      &ret /* child_pid */,
 				      error)) {
 			/* The error was set for us,
@@ -1596,8 +1657,51 @@ ditem_execute (const GnomeDesktopItem *item,
 		 arg_ptr != NULL &&
 		 ! launch_only_one);
 
-	free_args (args);
+#ifdef HAVE_STARTUP_NOTIFICATION
+	if (sn_context != NULL) {
+		const char *name;
+		const char *icon;
+		
+		name = gnome_desktop_item_get_string (item,
+						      GNOME_DESKTOP_ITEM_NAME);
+		
+		if (name != NULL) {
+			char *description;
 
+			sn_launcher_context_set_name (sn_context, name);
+			
+			description = g_strdup_printf (_("Starting %s"), name);
+
+			sn_launcher_context_set_description (sn_context, description);
+			
+			g_free (description);
+		}
+		
+		icon = gnome_desktop_item_get_string (item,
+						      GNOME_DESKTOP_ITEM_ICON);
+		
+		if (icon != NULL)
+			sn_launcher_context_set_icon_name (sn_context, icon);
+		
+		sn_launcher_context_set_binary_name (sn_context,
+						     exec);
+
+		/* FIXME we need to pass in the current workspace */
+		/* sn_launcher_context_set_workspace (sn_context, workspace); */
+
+		sn_launcher_context_initiate (sn_context,
+					      g_get_prgname () ? g_get_prgname () : "unknown",
+					      exec,
+					      CurrentTime);
+		
+		sn_launcher_context_unref (sn_context);
+	}
+	
+	sn_display_unref (sn_display);
+#endif
+	
+	free_args (args);
+	
 	if (term_argv)
 		g_strfreev (term_argv);
 
