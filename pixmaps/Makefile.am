@@ -61,7 +61,6 @@ BITMAPS     = \
 	gnome-note.png				\
 	gnome-panel.png				\
 	gnome-qeye.png				\
-	gnome-splash.png			\
 	gnome-squeak.png            \
 	gnome-talk.png				\
 	gnome-term-linux.png			\
