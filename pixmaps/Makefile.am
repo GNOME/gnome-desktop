@@ -110,7 +110,11 @@ pixmap_DATA =					\
 	gnome-debian.png			\
 	gnome-suse.png				\
 	gtkvim.png				\
-	gnome-computer.png	
+	gnome-computer.png			\
+	gnome-day.png				\
+	gnome-week.png				\
+	gnome-month.png				\
+	gnome-set-time.png
 
 # tilesdir = $(datadir)/pixmaps/tiles
 # tiles_DATA =					\
