@@ -38,6 +38,7 @@ pixmap_DATA =					\
 	gnome-graphics.png          		\
 	gnome-gsame.png				\
 	gnome-help.png				\
+	gnome-home.png				\
 	gnome-html.png				\
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
@@ -70,6 +71,7 @@ pixmap_DATA =					\
 	gnome-run.png				\
 	gnome-session.png			\
 	gnome-settings.png          		\
+	gnome-system.png			\
 	gnome-spider.png			\
 	gnome-squeak.png            		\
 	gnome-talk.png				\
