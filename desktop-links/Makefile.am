@@ -51,7 +51,6 @@ Utilities_DATA = \
 	FileRunner.desktop	\
 	TkSETI.desktop		\
 	rxvt.desktop		\
-	Rxvt.desktop		\
 	lynx.desktop		\
 	xbmbrowser.desktop	\
 	VIM.desktop		\
@@ -83,8 +82,6 @@ System_DATA = \
 
 Settings_DATA =	\
 	Imlib_config.desktop	\
-	sawclient.desktop	\
-	sawconfui.desktop	\
 	sawrefresh.desktop	\
 	sawrestart.desktop	\
 	sawtheme.desktop
