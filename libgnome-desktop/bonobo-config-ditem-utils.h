@@ -15,7 +15,9 @@
 G_BEGIN_DECLS
 
 CORBA_any *
-bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode tc, CORBA_Environment *ev);
+bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de,
+				const gchar *path, CORBA_TypeCode tc,
+				CORBA_Environment *ev);
 
 G_END_DECLS
 

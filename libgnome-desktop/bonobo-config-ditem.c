@@ -510,7 +510,7 @@ real_get_value (BonoboConfigDatabase *db,
 
 	CORBA_exception_init (ev);
 
-	value = bonobo_config_ditem_decode_any (de, tc, ev);
+	value = bonobo_config_ditem_decode_any (ditem, de, key, tc, ev);
 
 	if (!value)
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);

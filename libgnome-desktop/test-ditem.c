@@ -2,6 +2,7 @@
 #include <libbonobo.h>
 #include <libgnome/Gnome.h>
 #include <libgnome/gnome-ditem.h>
+#include <locale.h>
 
 #include "bonobo-config-ditem.h"
 
@@ -29,7 +30,9 @@ static void G_GNUC_UNUSED
 test_ditem (Bonobo_ConfigDatabase db)
 {
 	GnomeDesktopItem *ditem;
+	GNOME_DesktopEntryType type;
 	const gchar *text;
+	GSList *list, *c;
 
 	ditem = gnome_desktop_item_new_from_file ("/home/martin/work/test.desktop",
 						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS);
@@ -37,8 +40,8 @@ test_ditem (Bonobo_ConfigDatabase db)
 	text = gnome_desktop_item_get_location (ditem);
 	g_print ("LOCATION: |%s|\n", text);
 
-	text = gnome_desktop_item_get_type (ditem);
-	g_print ("TYPE: |%s|\n", text);
+	type = gnome_desktop_item_get_type (ditem);
+	g_print ("TYPE: |%d|\n", type);
 
 	text = gnome_desktop_item_get_command (ditem);
 	g_print ("COMMAND: |%s|\n", text);
@@ -52,12 +55,24 @@ test_ditem (Bonobo_ConfigDatabase db)
 	text = gnome_desktop_item_get_name (ditem, "de");
 	g_print ("NAME (de): |%s|\n", text);
 
+	text = gnome_desktop_item_get_local_name (ditem);
+	g_print ("LOCAL NAME: |%s|\n", text);
+
 	text = gnome_desktop_item_get_comment (ditem, NULL);
 	g_print ("COMMENT: |%s|\n", text);
 
 	text = gnome_desktop_item_get_comment (ditem, "de");
 	g_print ("COMMENT (de): |%s|\n", text);
 
+	text = gnome_desktop_item_get_local_comment (ditem);
+	g_print ("LOCAL COMMENT: |%s|\n", text);
+
+	list = gnome_desktop_item_get_attributes (ditem);
+	for (c = list; c; c = c->next) {
+		const gchar *attr = c->data;
+
+		g_print ("ATTRIBUTE: |%s|\n", attr);
+	}
 }
 
 int
@@ -73,10 +88,19 @@ main (int argc, char **argv)
 
         CORBA_exception_init (&ev);
 
+	setlocale (LC_ALL, "");
+
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Cannot init bonobo");
 
-	db = bonobo_config_ditem_new ("~/work/test.desktop");
+	bonobo_activate ();
+
+	// db = bonobo_config_ditem_new ("~/work/test.desktop");
+
+        CORBA_exception_init (&ev);
+	db = bonobo_get_object ("ditem:~/work/test.desktop", "Bonobo/ConfigDatabase", &ev);
+	g_assert (!BONOBO_EX (&ev));
+        CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
 	default_db = bonobo_get_object ("xmldb:~/work/foo.xml", "Bonobo/ConfigDatabase", &ev);
@@ -85,8 +109,6 @@ main (int argc, char **argv)
 
 	g_assert (db != NULL);
 	g_assert (default_db != NULL);
-
-	// boot_ditem (default_db);
 
 	test_ditem (db);
 

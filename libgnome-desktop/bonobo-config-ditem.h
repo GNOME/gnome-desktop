@@ -19,8 +19,8 @@ G_BEGIN_DECLS
 #define BONOBO_CONFIG_DITEM_TYPE        (bonobo_config_ditem_get_type ())
 #define BONOBO_CONFIG_DITEM(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_CONFIG_DITEM_TYPE, BonoboConfigDItem))
 #define BONOBO_CONFIG_DITEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST ((k), BONOBO_CONFIG_DITEM_TYPE, BonoboConfigDItemClass))
-#define BONOBO_IS_CONFIG_DITEM(o)       (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_CONFIG_DITEM_TYPE))
-#define BONOBO_IS_CONFIG_DITEM_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), BONOBO_CONFIG_DITEM_TYPE))
+#define BONOBO_IS_CONFIG_DITEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_CONFIG_DITEM_TYPE))
+#define BONOBO_IS_CONFIG_DITEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_CONFIG_DITEM_TYPE))
 
 typedef struct _BonoboConfigDItem        BonoboConfigDItem;
 typedef struct _BonoboConfigDItemClass   BonoboConfigDItemClass;

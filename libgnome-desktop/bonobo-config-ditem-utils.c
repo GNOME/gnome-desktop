@@ -74,10 +74,13 @@ read_string_as_vector (const gchar *value)
 }
 
 CORBA_any *
-bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environment *ev)
+bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gchar *path,
+				CORBA_TypeCode type, CORBA_Environment *ev)
 {
 	CORBA_any *any = NULL;
 
+	g_return_val_if_fail (ditem != NULL, NULL);
+	g_return_val_if_fail (BONOBO_IS_CONFIG_DITEM (ditem), NULL);
 	g_return_val_if_fail (de != NULL, NULL);
 	g_return_val_if_fail (ev != NULL, NULL);
 
@@ -87,6 +90,11 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 #endif
 
 	switch (type->kind) {
+	case CORBA_tk_long:
+		any = bonobo_arg_new (TC_CORBA_long);
+		BONOBO_ARG_SET_LONG (any, 512);
+		break;
+
 	case CORBA_tk_boolean:
 		if (!strcmp (de->value, "0") || !strcasecmp (de->value, "false")) {
 			any = bonobo_arg_new (TC_CORBA_boolean);
@@ -103,7 +111,7 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		break;
 
 	case CORBA_tk_alias:
-		any = bonobo_config_ditem_decode_any (de, type->subtypes [0], ev);
+		any = bonobo_config_ditem_decode_any (ditem, de, path, type->subtypes [0], ev);
 		CORBA_Object_release ((CORBA_Object) any->_type, NULL);
 		any->_type = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object )type, NULL);
 		break;
@@ -114,9 +122,11 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		gulong length = 0, i;
 		GSList *l, *array = NULL;
 
-		if (de->subvalues)
+		if (de->subvalues) {
 			length = g_slist_length (de->subvalues);
-		else if (de->value) {
+			if (de->value)
+				length++;
+		} else if (de->value) {
 			array = read_string_as_vector (de->value);
 			length = g_slist_length (array);
 		}
@@ -131,12 +141,23 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		if (de->subvalues) {
 			l = de->subvalues;
 
-			i = 0;
+			if (de->value) {
+				DirEntry subentry;
+
+				memset (&subentry, 0, sizeof (DirEntry));
+				subentry.value = de->value;
+
+				dynany_anyseq->_buffer [0] = bonobo_config_ditem_decode_any
+					(ditem, &subentry, path, type->subtypes [0], ev);
+				i = 1;
+			} else
+				i = 0;
+
 			while (l) {
 				DirEntry *subentry = (DirEntry *)l->data;
 
 				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
-					(subentry, type->subtypes [0], ev);
+					(ditem, subentry, path, type->subtypes [0], ev);
 
 				l = l->next;
 				i++;
@@ -152,7 +173,7 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 				subentry.value = l->data;
 
 				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
-					(&subentry, type->subtypes [0], ev);
+					(ditem, &subentry, path, type->subtypes [0], ev);
 
 				l = l->next;
 				i++;
@@ -173,7 +194,7 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 	case CORBA_tk_struct: {
 		DynamicAny_DynStruct dynstruct;
 		CORBA_NameValuePairSeq *members;
-		gulong length, i;
+		gulong length, i, j;
 		GSList *l;
 
 		if (CORBA_TypeCode_equal (type, TC_GNOME_LocalizedString, NULL)) {
@@ -205,10 +226,84 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 			member_name = CORBA_TypeCode_member_name (type, i, ev);
 			member_type = CORBA_TypeCode_member_type (type, i, ev);
 
+			if (CORBA_TypeCode_equal (member_type, TC_GNOME_ExtraAttributes, NULL)) {
+				GNOME_ExtraAttributes attr_list;
+				GSList *extra_attrs = NULL;
+				gulong extra_length;
+
+				l = de->subvalues;
+				while (l) {
+					Bonobo_Pair *pair;
+					gchar *default_key;
+					CORBA_TypeCode subtk;
+					CORBA_any *any;
+
+					subentry = l->data;
+
+					for (j = 0; j < length; j++) {
+						CORBA_Identifier cur_name;
+
+						cur_name = CORBA_TypeCode_member_name (type, j, ev);
+						if (!strcmp (subentry->name, cur_name))
+							goto next_extra_attr_loop;
+					}
+
+					default_key = g_strdup_printf ("%s/%s", path, subentry->name);
+
+					subtk = Bonobo_ConfigDatabase_getType (BONOBO_OBJREF (ditem),
+									       default_key, ev);
+
+					any = bonobo_config_ditem_decode_any
+						(ditem, subentry, path, subtk, ev);
+
+					pair = Bonobo_Pair__alloc ();
+					pair->name = CORBA_string_dup (subentry->name);
+					if (any)
+						CORBA_any__copy (&pair->value, any);
+					else
+						pair->value._type = TC_null;
+
+					extra_attrs = g_slist_prepend (extra_attrs, pair);
+
+					g_free (default_key);
+
+				next_extra_attr_loop:
+					l = l->next;
+				}
+
+				extra_length = g_slist_length (extra_attrs);
+				attr_list._buffer = CORBA_sequence_Bonobo_Pair_allocbuf (extra_length);
+				attr_list._length = attr_list._maximum = extra_length;
+				attr_list._release = TRUE;
+
+				j = 0;
+				l = extra_attrs;
+				while (l) {
+					Bonobo_Pair *pair = l->data;
+
+					attr_list._buffer [j] = *pair;
+
+					l = l->next;
+					j++;
+				}
+
+				g_slist_free (extra_attrs);
+
+				members->_buffer [i].id = CORBA_string_dup (member_name);
+
+				subvalue = bonobo_arg_new (TC_GNOME_ExtraAttributes);
+				BONOBO_ARG_SET_GENERAL (subvalue, attr_list, TC_GNOME_ExtraAttributes,
+							GNOME_ExtraAttributes, ev);
+				CORBA_any__copy (&members->_buffer [i].value, subvalue);
+
+				continue;
+			}
+
 			l = g_slist_find_custom (de->subvalues, member_name, key_compare_func);
 			if (l) {
 				subentry = l->data;
-				subvalue = bonobo_config_ditem_decode_any (subentry, member_type, ev);
+				subvalue = bonobo_config_ditem_decode_any
+					(ditem, subentry, path, member_type, ev);
 			}
 
 			if (!subvalue)
