@@ -35,7 +35,6 @@
 #include <glib.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <errno.h>
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
@@ -55,7 +54,7 @@
 #define sure_string(s) ((s)!=NULL?(s):"")
 
 struct _GnomeDesktopItem {
-        int refcount;
+	int refcount;
 
 	/* all languages used */
 	GList *languages;
@@ -75,9 +74,9 @@ struct _GnomeDesktopItem {
 	 * other sections, separated by '/' */
 	GHashTable *main_hash;
 
-        char *location;
+	char *location;
 
-        time_t mtime;
+	time_t mtime;
 };
 
 /* If mtime is set to this, set_location won't update mtime,
@@ -95,24 +94,29 @@ typedef enum {
 	ENCODING_LEGACY_MIXED
 } Encoding;
 
-static GnomeDesktopItem * ditem_load (const char *uri,
-				      gboolean no_translations,
-				      GError **error);
-static gboolean ditem_save (GnomeDesktopItem *item,
-			    const char *uri,
-			    GError **error);
-
 /*
  * GnomeVFS reading utils, that look like the libc buffered io stuff
  */
+
+#define READ_BUF_SIZE (32 * 1024)
+
 typedef struct {
 	GnomeVFSHandle *handle;
 	char *uri;
+	char *buf;
+	gboolean buf_needs_free;
+	gboolean past_first_read;
 	gboolean eof;
-	char buf[BUFSIZ];
 	gsize size;
 	gsize pos;
 } ReadBuf;
+
+static GnomeDesktopItem *ditem_load (ReadBuf           *rb,
+				     gboolean           no_translations,
+				     GError           **error);
+static gboolean          ditem_save (GnomeDesktopItem  *item,
+				     const char        *uri,
+				     GError           **error);
 
 static int
 readbuf_getc (ReadBuf *rb)
@@ -123,24 +127,29 @@ readbuf_getc (ReadBuf *rb)
 	if (rb->size == 0 ||
 	    rb->pos == rb->size) {
 		GnomeVFSFileSize bytes_read;
-		/* FIXME: handle other errors */
-		if (gnome_vfs_read (rb->handle,
-				    rb->buf,
-				    BUFSIZ,
-				    &bytes_read) != GNOME_VFS_OK) {
+
+		/* FIXME: handle errors other than EOF */
+		if (rb->handle == NULL
+		    || gnome_vfs_read (rb->handle,
+				       rb->buf,
+				       READ_BUF_SIZE,
+				       &bytes_read) != GNOME_VFS_OK) {
+			bytes_read = 0;
+		}
+
+		if (bytes_read == 0) {
 			rb->eof = TRUE;
 			return EOF;
 		}
+
+		if (rb->size != 0)
+			rb->past_first_read = TRUE;
 		rb->size = bytes_read;
 		rb->pos = 0;
 
-		if (rb->size == 0) {
-			rb->eof = TRUE;
-			return EOF;
-		}
 	}
 
-	return (int)rb->buf[rb->pos++];
+	return (guchar) rb->buf[rb->pos++];
 }
 
 /* Note, does not include the trailing \n */
@@ -150,6 +159,7 @@ readbuf_gets (char *buf, gsize bufsize, ReadBuf *rb)
 	int c;
 	gsize pos;
 
+	g_return_val_if_fail (buf != NULL, NULL);
 	g_return_val_if_fail (rb != NULL, NULL);
 
 	pos = 0;
@@ -157,14 +167,12 @@ readbuf_gets (char *buf, gsize bufsize, ReadBuf *rb)
 
 	do {
 		c = readbuf_getc (rb);
-		if (c == EOF ||
-		    c == '\n')
+		if (c == EOF || c == '\n')
 			break;
 		buf[pos++] = c;
 	} while (pos < bufsize-1);
 
-	if (c == EOF &&
-	    pos == 0)
+	if (c == EOF && pos == 0)
 		return NULL;
 
 	buf[pos++] = '\0';
@@ -173,40 +181,86 @@ readbuf_gets (char *buf, gsize bufsize, ReadBuf *rb)
 }
 
 static ReadBuf *
-readbuf_open (const char *uri)
+readbuf_open (const char *uri, GError **error)
 {
+	GnomeVFSResult result;
 	GnomeVFSHandle *handle;
 	ReadBuf *rb;
 
 	g_return_val_if_fail (uri != NULL, NULL);
 
-	if (gnome_vfs_open (&handle, uri,
-			    GNOME_VFS_OPEN_READ) != GNOME_VFS_OK)
+	result = gnome_vfs_open (&handle, uri,
+				 GNOME_VFS_OPEN_READ);
+	if (result != GNOME_VFS_OK) {
+		g_set_error (error,
+			     /* FIXME: better errors */
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
+			     _("Error reading file '%s': %s"),
+			     uri, gnome_vfs_result_to_string (result));
 		return NULL;
+	}
 
 	rb = g_new0 (ReadBuf, 1);
 	rb->handle = handle;
 	rb->uri = g_strdup (uri);
-	rb->eof = FALSE;
-	rb->size = 0;
-	rb->pos = 0;
+	rb->buf = g_malloc (READ_BUF_SIZE);
+	rb->buf_needs_free = TRUE;
+	/* rb->past_first_read = FALSE; */
+	/* rb->eof = FALSE; */
+	/* rb->size = 0; */
+	/* rb->pos = 0; */
+
+	return rb;
+}
+
+static ReadBuf *
+readbuf_new_from_string (const char *uri, const char *string, gssize length)
+{
+	ReadBuf *rb;
+
+	g_return_val_if_fail (string != NULL, NULL);
+	g_return_val_if_fail (length >= 0, NULL);
+
+	rb = g_new0 (ReadBuf, 1);
+	/* rb->handle = NULL; */
+	rb->uri = g_strdup (uri);
+	rb->buf = (char *) string;
+	/* rb->buf_needs_free = FALSE; */
+	/* rb->past_first_read = FALSE; */
+	/* rb->eof = FALSE; */
+	rb->size = length;
+	/* rb->pos = 0; */
 
 	return rb;
 }
 
 static gboolean
-readbuf_rewind (ReadBuf *rb)
+readbuf_rewind (ReadBuf *rb, GError *error)
 {
-	if (gnome_vfs_seek (rb->handle,
-			    GNOME_VFS_SEEK_START, 0) == GNOME_VFS_OK)
-		return TRUE;
+	GnomeVFSResult result;
 
-	gnome_vfs_close (rb->handle);
-	rb->handle = NULL;
-	if (gnome_vfs_open (&rb->handle, rb->uri,
-			    GNOME_VFS_OPEN_READ) == GNOME_VFS_OK)
+	rb->eof = FALSE;
+	rb->pos = 0;
+	if (!rb->past_first_read)
 		return TRUE;
-
+	rb->size = 0;
+	if (rb->handle != NULL) {
+		if (gnome_vfs_seek (rb->handle,
+				    GNOME_VFS_SEEK_START, 0) == GNOME_VFS_OK)
+			return TRUE;
+		gnome_vfs_close (rb->handle);
+		rb->handle = NULL;
+	}
+	result = gnome_vfs_open (&rb->handle, rb->uri,
+				 GNOME_VFS_OPEN_READ);
+	if (result == GNOME_VFS_OK)
+		return TRUE;
+	g_set_error (error,
+		     GNOME_DESKTOP_ITEM_ERROR,
+		     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
+		     _("Error rewinding file '%s': %s"),
+		     rb->uri, gnome_vfs_result_to_string (result));
 	return FALSE;
 }
 
@@ -215,13 +269,11 @@ readbuf_close (ReadBuf *rb)
 {
 	if (rb->handle != NULL)
 		gnome_vfs_close (rb->handle);
-	rb->handle = NULL;
 	g_free (rb->uri);
-	rb->uri = NULL;
-
+	if (rb->buf_needs_free)
+		g_free (rb->buf);
 	g_free (rb);
 }
-
 
 static GnomeDesktopItemType G_GNUC_CONST
 type_from_string (const char *type)
@@ -257,11 +309,11 @@ type_from_string (const char *type)
 GnomeDesktopItem *
 gnome_desktop_item_new (void)
 {
-        GnomeDesktopItem *retval;
+	GnomeDesktopItem *retval;
 
-        retval = g_new0 (GnomeDesktopItem, 1);
+	retval = g_new0 (GnomeDesktopItem, 1);
 
-        retval->refcount++;
+	retval->refcount++;
 
 	retval->main_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
 						   (GDestroyNotify) g_free,
@@ -278,7 +330,7 @@ gnome_desktop_item_new (void)
 				       GNOME_DESKTOP_ITEM_VERSION,
 				       _("1.0"));
 
-        return retval;
+	return retval;
 }
 
 static Section *
@@ -319,12 +371,12 @@ GnomeDesktopItem *
 gnome_desktop_item_copy (const GnomeDesktopItem *item)
 {
 	GList *li;
-        GnomeDesktopItem *retval;
+	GnomeDesktopItem *retval;
 
-        g_return_val_if_fail (item != NULL, NULL);
-        g_return_val_if_fail (item->refcount > 0, NULL);
+	g_return_val_if_fail (item != NULL, NULL);
+	g_return_val_if_fail (item->refcount > 0, NULL);
 
-        retval = gnome_desktop_item_new ();
+	retval = gnome_desktop_item_new ();
 
 	retval->type = item->type;
 	retval->modified = item->modified;
@@ -349,7 +401,7 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
 			      copy_string_hash,
 			      retval->main_hash);
 
-        return retval;
+	return retval;
 }
 
 static void
@@ -361,7 +413,7 @@ read_sort_order (GnomeDesktopItem *item, const char *dir)
 	ReadBuf *rb;
 
 	file = g_build_filename (dir, ".order", NULL);
-	rb = readbuf_open (file);
+	rb = readbuf_open (file, NULL);
 	g_free (file);
 
 	if (rb == NULL)
@@ -417,10 +469,10 @@ gnome_desktop_item_new_from_file (const char *file,
 				  GnomeDesktopItemLoadFlags flags,
 				  GError **error)
 {
-        GnomeDesktopItem *retval;
+	GnomeDesktopItem *retval;
 	char *uri;
 
-        g_return_val_if_fail (file != NULL, NULL);
+	g_return_val_if_fail (file != NULL, NULL);
 
 	if (g_path_is_absolute (file)) {
 		uri = gnome_vfs_get_uri_from_local_path (file);
@@ -469,23 +521,26 @@ gnome_desktop_item_new_from_uri (const char *uri,
 	char *subfn, *dir;
 	GnomeVFSFileInfo *info;
 	time_t mtime = 0;
+	ReadBuf *rb;
+	GnomeVFSResult result;
 
 	g_return_val_if_fail (uri != NULL, NULL);
 
 	info = gnome_vfs_file_info_new ();
 
-	if (gnome_vfs_get_file_info (uri, info,
-				     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
+	result = gnome_vfs_get_file_info (uri, info,
+					  GNOME_VFS_FILE_INFO_DEFAULT);
+	if (result != GNOME_VFS_OK) {
 		g_set_error (error,
 			     /* FIXME: better errors */
 			     GNOME_DESKTOP_ITEM_ERROR,
 			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
 			     _("Error reading file '%s': %s"),
-			     uri, strerror (errno));
+			     uri, gnome_vfs_result_to_string (result));
 
 		gnome_vfs_file_info_unref (info);
 
-                return NULL;
+		return NULL;
 	}
 
 	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
@@ -495,7 +550,7 @@ gnome_desktop_item_new_from_uri (const char *uri,
 
 	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
 	    info->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
-                subfn = g_build_filename (uri, ".directory", NULL);
+		subfn = g_build_filename (uri, ".directory", NULL);
 		gnome_vfs_file_info_clear (info);
 		if (gnome_vfs_get_file_info (subfn, info,
 					     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
@@ -509,17 +564,23 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		else
 			mtime = 0;
 	} else {
-                subfn = g_strdup (uri);
+		subfn = g_strdup (uri);
 	}
 
-	gnome_vfs_file_info_clear (info);
 	gnome_vfs_file_info_unref (info);
 
-	retval = ditem_load (subfn,
-			     flags & GNOME_DESKTOP_ITEM_LOAD_NO_TRANSLATIONS,
+	rb = readbuf_open (subfn, error);
+	
+	if (rb == NULL) {
+		g_free (subfn);
+		return NULL;
+	}
+
+	retval = ditem_load (rb,
+			     (flags & GNOME_DESKTOP_ITEM_LOAD_NO_TRANSLATIONS) != 0,
 			     error);
 
-        if (retval == NULL) {
+	if (retval == NULL) {
 		g_free (subfn);
 		return NULL;
 	}
@@ -531,9 +592,9 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		return NULL;
 	}
 
-        retval->mtime = DONT_UPDATE_MTIME;
+	retval->mtime = DONT_UPDATE_MTIME;
 	gnome_desktop_item_set_location (retval, subfn);
-        retval->mtime = mtime;
+	retval->mtime = mtime;
 
 	dir = get_dirname (retval->location);
 	if (dir != NULL) {
@@ -543,7 +604,46 @@ gnome_desktop_item_new_from_uri (const char *uri,
 
 	g_free (subfn);
 
-        return retval;
+	return retval;
+}
+
+/**
+ * gnome_desktop_item_new_from_string:
+ * @string: string to load the GnomeDesktopItem from
+ * @length: length of string, or -1 to use strlen
+ * @flags: Flags to influence the loading process
+ * @error: place to put errors
+ *
+ * This function turns the contents of the string into a GnomeDesktopItem.
+ *
+ * Returns: The newly loaded item.
+ */
+GnomeDesktopItem *
+gnome_desktop_item_new_from_string (const char *uri,
+				    const char *string,
+				    gssize length,
+				    GnomeDesktopItemLoadFlags flags,
+				    GError **error)
+{
+	GnomeDesktopItem *retval;
+	ReadBuf *rb;
+
+	g_return_val_if_fail (string != NULL, NULL);
+	g_return_val_if_fail (length >= -1, NULL);
+
+	rb = readbuf_new_from_string (uri, string, length);
+
+	retval = ditem_load (rb,
+			     (flags & GNOME_DESKTOP_ITEM_LOAD_NO_TRANSLATIONS) != 0,
+			     error);
+
+	if (retval == NULL) {
+		return NULL;
+	}
+	
+	/* FIXME: Sort order? */
+
+	return retval;
 }
 
 /**
@@ -589,7 +689,7 @@ gnome_desktop_item_save (GnomeDesktopItem *item,
 		return FALSE;
 
 	item->modified = FALSE;
-        item->mtime = time (NULL);
+	item->mtime = time (NULL);
 
 	return TRUE;
 }
@@ -605,9 +705,9 @@ gnome_desktop_item_save (GnomeDesktopItem *item,
 GnomeDesktopItem *
 gnome_desktop_item_ref (GnomeDesktopItem *item)
 {
-        g_return_val_if_fail (item != NULL, NULL);
+	g_return_val_if_fail (item != NULL, NULL);
 
-        item->refcount++;
+	item->refcount++;
 
 	return item;
 }
@@ -636,13 +736,13 @@ free_section (gpointer data, gpointer user_data)
 void
 gnome_desktop_item_unref (GnomeDesktopItem *item)
 {
-        g_return_if_fail (item != NULL);
-        g_return_if_fail (item->refcount > 0);
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (item->refcount > 0);
 
-        item->refcount--;
+	item->refcount--;
 
-        if(item->refcount != 0)
-                return;
+	if(item->refcount != 0)
+		return;
 
 	g_list_foreach (item->languages, (GFunc)g_free, NULL);
 	g_list_free (item->languages);
@@ -659,10 +759,10 @@ gnome_desktop_item_unref (GnomeDesktopItem *item)
 	g_hash_table_destroy (item->main_hash);
 	item->main_hash = NULL;
 
-        g_free (item->location);
-        item->location = NULL;
+	g_free (item->location);
+	item->location = NULL;
 
-        g_free (item);
+	g_free (item);
 }
 
 static Section *
@@ -1313,8 +1413,8 @@ ditem_execute (const GnomeDesktopItem *item,
 	       gboolean use_current_dir,
 	       GError **error)
 {
-        char **real_argv;
-        int i, j, ret;
+	char **real_argv;
+	int i, j, ret;
 	char **term_argv = NULL;
 	int term_argc = 0;
 	GSList *vector_list;
@@ -1322,7 +1422,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	int added_status;
 	const char *working_dir;
 
-        g_return_val_if_fail (item, -1);
+	g_return_val_if_fail (item, -1);
 
 	if ( ! use_current_dir)
 		working_dir = g_get_home_dir ();
@@ -1575,7 +1675,7 @@ exec_exists (const char *exec)
 		else
 			return FALSE;
 	} else {
-                char *tryme;
+		char *tryme;
 
 		tryme = g_find_program_in_path (exec);
 		if (tryme != NULL) {
@@ -1603,7 +1703,7 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 	const char *try_exec;
 	const char *exec;
 
-        g_return_val_if_fail (item != NULL, FALSE);
+	g_return_val_if_fail (item != NULL, FALSE);
 
 	try_exec = lookup (item, GNOME_DESKTOP_ITEM_TRY_EXEC);
 
@@ -1716,20 +1816,20 @@ gnome_desktop_item_set_entry_type (GnomeDesktopItem *item,
 GnomeDesktopItemStatus
 gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 {
-        struct stat sbuf;
-        GnomeDesktopItemStatus retval;
+	struct stat sbuf;
+	GnomeDesktopItemStatus retval;
 	GnomeVFSFileInfo *info;
 
-        g_return_val_if_fail (item != NULL, GNOME_DESKTOP_ITEM_DISAPPEARED);
-        g_return_val_if_fail (item->refcount > 0, GNOME_DESKTOP_ITEM_DISAPPEARED);
+	g_return_val_if_fail (item != NULL, GNOME_DESKTOP_ITEM_DISAPPEARED);
+	g_return_val_if_fail (item->refcount > 0, GNOME_DESKTOP_ITEM_DISAPPEARED);
 
 	info = gnome_vfs_file_info_new ();
 	
-        if (item->location == NULL ||
+	if (item->location == NULL ||
 	    gnome_vfs_get_file_info (item->location, info,
 				     GNOME_VFS_FILE_INFO_DEFAULT) != GNOME_VFS_OK) {
 		gnome_vfs_file_info_unref (info);
-                return GNOME_DESKTOP_ITEM_DISAPPEARED;
+		return GNOME_DESKTOP_ITEM_DISAPPEARED;
 	}
 
 	retval = GNOME_DESKTOP_ITEM_UNCHANGED;
@@ -1739,7 +1839,7 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 
 	gnome_vfs_file_info_unref (info);
 	
-        return retval;
+	return retval;
 }
 
 static char *kde_icondir = NULL;
@@ -2010,8 +2110,8 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 	 * -George */
 	const char *icon;
 
-        g_return_val_if_fail (item != NULL, NULL);
-        g_return_val_if_fail (item->refcount > 0, NULL);
+	g_return_val_if_fail (item != NULL, NULL);
+	g_return_val_if_fail (item->refcount > 0, NULL);
 
 	icon = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
 
@@ -2030,10 +2130,10 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 const char *
 gnome_desktop_item_get_location (const GnomeDesktopItem *item)
 {
-        g_return_val_if_fail (item != NULL, NULL);
-        g_return_val_if_fail (item->refcount > 0, NULL);
+	g_return_val_if_fail (item != NULL, NULL);
+	g_return_val_if_fail (item->refcount > 0, NULL);
 
-        return item->location;
+	return item->location;
 }
 
 /**
@@ -2048,15 +2148,15 @@ gnome_desktop_item_get_location (const GnomeDesktopItem *item)
 void
 gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 {
-        g_return_if_fail (item != NULL);
-        g_return_if_fail (item->refcount > 0);
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (item->refcount > 0);
 
 	if (item->location != NULL &&
 	    location != NULL &&
 	    strcmp (item->location, location) == 0)
 		return;
 
-        g_free (item->location);
+	g_free (item->location);
 	item->location = g_strdup (location);
 
 	/* This is ugly, but useful internally */
@@ -2096,8 +2196,8 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 void
 gnome_desktop_item_set_location_file (GnomeDesktopItem *item, const char *file)
 {
-        g_return_if_fail (item != NULL);
-        g_return_if_fail (item->refcount > 0);
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (item->refcount > 0);
 
 	if (file != NULL) {
 		char *uri;
@@ -2636,15 +2736,13 @@ get_encoding_from_locale (const char *locale)
 }
 
 static Encoding
-get_encoding (const char *uri, ReadBuf *rb)
+get_encoding (ReadBuf *rb)
 {
-	gboolean     old_kde = FALSE;
-	GnomeVFSURI *tmp_uri;
-	int          c;
-	char         buf [BUFSIZ];
-	char        *path;
-
-	gchar *contents = NULL;
+	gboolean old_kde = FALSE;
+	int      c;
+	char     buf [BUFSIZ];
+	char    *path;
+	gboolean all_valid_utf8 = TRUE;
 
 	while (readbuf_gets (buf, sizeof (buf), rb) != NULL) {
 		if (strncmp (GNOME_DESKTOP_ITEM_ENCODING,
@@ -2672,42 +2770,28 @@ get_encoding (const char *uri, ReadBuf *rb)
 			/* don't break yet, we still want to support
 			 * Encoding even here */
 		}
+		if (all_valid_utf8 && ! g_utf8_validate (buf, -1, NULL))
+			all_valid_utf8 = FALSE;
 	}
 
 	if (old_kde)
 		return ENCODING_LEGACY_MIXED;
 
 	/* try to guess by location */
-	if (strstr (uri, "gnome/apps/") != NULL) {
+	if (rb->uri != NULL && strstr (rb->uri, "gnome/apps/") != NULL) {
 		/* old gnome */
 		return ENCODING_LEGACY_MIXED;
 	}
 
-
-	/* FIXME: fix for gnome-vfs */
-	/* A dillema, new KDE files are in UTF-8 but have no Encoding
+	/* A dilemma, new KDE files are in UTF-8 but have no Encoding
 	 * info, at this time we really can't tell.  The best thing to
 	 * do right now is to just assume UTF-8 if the whole file
 	 * validates as utf8 I suppose */
 
-	tmp_uri = gnome_vfs_uri_new (uri);
-	path = gnome_vfs_uri_get_path (tmp_uri);
-	g_free (tmp_uri);
-
-	if (!g_file_get_contents (path, &contents, NULL, NULL))
-		return ENCODING_LEGACY_MIXED;
-
-	if (contents == NULL) /* Ooooooops ! */
-		return ENCODING_LEGACY_MIXED;
-
-	if (g_utf8_validate (contents, -1, NULL)) {
-		g_free (contents);
+	if (all_valid_utf8)
 		return ENCODING_UTF8;
-	} else {
-		g_free (contents);
+	else
 		return ENCODING_LEGACY_MIXED;
-	}
-
 }
 
 static char *
@@ -2890,12 +2974,12 @@ insert_key (GnomeDesktopItem *item,
 }
 
 static void
-setup_type (GnomeDesktopItem *item, const char *filename)
+setup_type (GnomeDesktopItem *item, const char *uri)
 {
 	const char *type = g_hash_table_lookup (item->main_hash,
 						GNOME_DESKTOP_ITEM_TYPE);
-	if (type == NULL && filename != NULL) {
-		char *base = g_path_get_basename (filename);
+	if (type == NULL && uri != NULL) {
+		char *base = g_path_get_basename (uri);
 		if (base != NULL &&
 		    strcmp (base, ".directory") == 0) {
 			/* This gotta be a directory */
@@ -2940,7 +3024,7 @@ try_english_key (GnomeDesktopItem *item, const char *key)
 
 
 static void
-sanitize (GnomeDesktopItem *item, const char *file)
+sanitize (GnomeDesktopItem *item, const char *uri)
 {
 	const char *type;
 
@@ -2961,11 +3045,14 @@ sanitize (GnomeDesktopItem *item, const char *file)
 	if (lookup (item, GNOME_DESKTOP_ITEM_NAME) == NULL) {
 		char *name = try_english_key (item, GNOME_DESKTOP_ITEM_NAME);
 		/* If no name, use the basename */
+		if (name == NULL && uri != NULL)
+			name = g_path_get_basename (uri);
+		/* If no uri either, use same default as gnome_desktop_item_new */
 		if (name == NULL)
-			name = g_path_get_basename (file);
+			name = g_strdup (_("No name"));
 		g_hash_table_replace (item->main_hash,
 				      g_strdup (GNOME_DESKTOP_ITEM_NAME), 
-				      g_path_get_basename (file));
+				      name);
 		item->keys = g_list_prepend
 			(item->keys, g_strdup (GNOME_DESKTOP_ITEM_NAME));
 	}
@@ -2998,11 +3085,10 @@ enum {
 };
 
 static GnomeDesktopItem *
-ditem_load (const char *uri,
+ditem_load (ReadBuf *rb,
 	    gboolean no_translations,
 	    GError **error)
 {
-	ReadBuf *rb;
 	int state;
 	char CharBuffer [1024];
 	char *next = CharBuffer;
@@ -3013,19 +3099,7 @@ ditem_load (const char *uri,
 	char *key = NULL;
 	gboolean old_kde = FALSE;
 
-	rb = readbuf_open (uri);
-	
-	if (rb == NULL) {
-		g_set_error (error,
-			     /* FIXME: better errors */
-			     GNOME_DESKTOP_ITEM_ERROR,
-			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-			     _("Error reading file '%s': %s"),
-			     uri, strerror (errno));
-		return NULL;
-	}
-
-	encoding = get_encoding (uri, rb);
+	encoding = get_encoding (rb);
 	if (encoding == ENCODING_UNKNOWN) {
 		readbuf_close (rb);
 		/* spec says, don't read this file */
@@ -3033,19 +3107,14 @@ ditem_load (const char *uri,
 			     GNOME_DESKTOP_ITEM_ERROR,
 			     GNOME_DESKTOP_ITEM_ERROR_UNKNOWN_ENCODING,
 			     _("Unknown encoding of: %s"),
-			     uri);
+			     rb->uri);
 		return NULL;
 	}
 
 	/* Rewind since get_encoding goes through the file */
-	if ( ! readbuf_rewind (rb)) {
+	if (! readbuf_rewind (rb, error)) {
 		readbuf_close (rb);
 		/* spec says, don't read this file */
-		g_set_error (error,
-			     GNOME_DESKTOP_ITEM_ERROR,
-			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-			     _("Error rewinding file '%s': %s"),
-			     uri);
 		return NULL;
 	}
 
@@ -3056,7 +3125,6 @@ ditem_load (const char *uri,
 	 * function since it has those values */
 
 #define OVERFLOW (next == &CharBuffer [sizeof(CharBuffer)-1])
-rb->eof=FALSE;
 
 	state = FirstBrace;
 	while ((c = readbuf_getc (rb)) != EOF) {
@@ -3138,8 +3206,8 @@ rb->eof=FALSE;
 			if (c == '\n' || OVERFLOW) { /* Abort Definition */
 				next = CharBuffer;
 				state = KeyDef;
-                                break;
-                        }
+				break;
+			}
 	    
 			if (c == '=' || OVERFLOW){
 				*next = '\0';
@@ -3199,13 +3267,11 @@ rb->eof=FALSE;
 	/* sections were inserted in reverse */
 	item->sections = g_list_reverse (item->sections);
 
-	/* Here we do a little bit of sanitazition */
-
 	/* sanitize some things */
-	sanitize (item, uri);
+	sanitize (item, rb->uri);
 
 	/* make sure that we set up the type */
-	setup_type (item, uri);
+	setup_type (item, rb->uri);
 
 	return item;
 }
@@ -3255,26 +3321,15 @@ ditem_save (GnomeDesktopItem *item, const char *uri, GError **error)
 	GnomeVFSHandle *handle;
 	GnomeVFSResult result;
 	result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_WRITE);
-	if (result == GNOME_VFS_ERROR_NOT_FOUND) {
+	if (result == GNOME_VFS_ERROR_NOT_FOUND)
 		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE, TRUE, GNOME_VFS_PERM_USER_ALL);
-		if (result != GNOME_VFS_OK) {
-			g_set_error (error,
-				     /* FIXME: better errors */
-				     GNOME_DESKTOP_ITEM_ERROR,
-				     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-				     _("Error writing file '%s': %s"),
-				     uri, strerror (errno));
-
-			return FALSE;
-		}
-	}
 	if (result != GNOME_VFS_OK) {
 		g_set_error (error,
 			     /* FIXME: better errors */
 			     GNOME_DESKTOP_ITEM_ERROR,
 			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
 			     _("Error writing file '%s': %s"),
-			     uri, strerror (errno));
+			     uri, gnome_vfs_result_to_string (result));
 
 		return FALSE;
 	}

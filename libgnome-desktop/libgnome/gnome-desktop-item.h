@@ -137,6 +137,11 @@ GnomeDesktopItem *      gnome_desktop_item_new_from_file     (const char        
 GnomeDesktopItem *      gnome_desktop_item_new_from_uri      (const char                 *uri,
 							      GnomeDesktopItemLoadFlags   flags,
 							      GError                    **error);
+GnomeDesktopItem *      gnome_desktop_item_new_from_string   (const char                 *uri,
+							      const char                 *string,
+							      gssize                      length,
+							      GnomeDesktopItemLoadFlags   flags,
+							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_copy              (const GnomeDesktopItem     *item);
 
 /* if under is NULL save in original location */

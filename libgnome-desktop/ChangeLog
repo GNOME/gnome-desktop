@@ -1,3 +1,48 @@
+2002-02-20  Darin Adler  <darin@bentspoon.com>
+
+	* gnome-desktop-item.h:
+	* gnome-desktop-item.c: (readbuf_getc): Handle case where you try
+	to keep reading and the handle is NULL by treating it as EOF. This
+	is also the case at the end of the string. Set a new
+	"past_first_read" flag, used to optimize rewinding for the vast
+	majority of desktop files that fit entirely in the buffer.
+	(readbuf_gets): More g_return_if_fail.
+	(readbuf_open): Add a GError parameter, and include the
+	GnomeVFSResult in the error. Allocate the buf, which is now a
+	separate object.
+	(readbuf_new_from_string): New function, which creates a readbuf
+	from an existing string.
+	(readbuf_rewind): Reset eof and pos to make this actually work.
+	Check the past_first_read flag to avoid re-reading if the entire
+	file fits in the buffer. Reset size to trigger a read if we decide
+	to re-read the buffer. Make it try to reopen the file instead of
+	just malfunctioning if the GnomeVFSFileHandle is already NULL.
+	(readbuf_close): Free the buf if needed.
+	(read_sort_order): Pass NULL for GError * to readbuf_open.
+	(gnome_desktop_item_new_from_uri): Use the GnomeVFSResult for the
+	error code, rather than errno. Get rid of unneeded
+	gnome_vfs_file_info_clear just before gnome_vfs_file_info_unref.
+	Use the new readbuf_open, since ditem_load now takes a ReadBuf *
+	instead of a URI.
+	(gnome_desktop_item_new_from_string): New.
+	(get_encoding): Do the check for valid UTF-8 as we read the file
+	rather than re-reading it again at the end. Also get the URI from
+	the ReadBuf rather than passing it separately for the "guess by
+	location" hack, which is not really necessary, since the validate
+	heuristic will get it right anyway. Also handle the case of a NULL
+	URI properly.
+	(setup_type): Rename filename to uri to make it clearer what's
+	really going on here.
+	(sanitize): Handle the case of a NULL URI. Also add a fallback
+	name for the case where you have neither a URI nor a name in the
+	file. Also fix a storage leak.
+	(ditem_load): Take a ReadBuf * parameters instead of a URI, so we
+	can share this between the file and non-file cases. Also fix an
+	error format string to avoid segfault.
+	(ditem_save): Share the error handling code for gnome_vfs_open
+	and gnome_vfs_create since they did the same thing. Also change
+	to use GnomeVFSResult instead of errno.
+
 2002-02-14  Nitin Madhukar Yewale <nitin.yewale@wipro.com>
 
 	reviewed by: Mark McLoughlin <mark@skynet.ie>
