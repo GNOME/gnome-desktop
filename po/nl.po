@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-01-31 19:53+02:00\n"
 "Last-Translator: Dirk-Jan C. Binnema <djcb@dds.nl>\n"
 "Language-Team: Linux Gebruikersgroep Den Haag <djcb@dds.nl>\n"
@@ -161,10 +161,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -177,13 +177,14 @@ msgstr "Eigenschappen..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Info..."
 
@@ -263,7 +264,7 @@ msgstr "Interne fout: ongeldige modus in battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Applet kan niet gecreëerd worden!\n"
@@ -400,16 +401,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "'/proc/apm' kan niet geopend worden.  Geen informatie beschikbaar."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "ioctl mislukt op '/dev/apm'"
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM uitgeschakeld! Geen informatie beschikbaar"
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM uitgeschakeld! Geen informatie beschikbaar"
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM uitgeschakeld! Geen informatie beschikbaar"
 
 #: applets/cdplayer/cdplayer.c:345
@@ -420,10 +431,6 @@ msgstr "Voer gtcd uit..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "Karakterkiezer"
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
-msgstr ""
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -596,36 +603,37 @@ msgid "Drive Mount Applet"
 msgstr ""
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "UItgebracht volgens de GPL.\n"
 "Mount en unmount schijven.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr "gemount"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr "niet gemount"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" doorgegeven:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
 msgstr "Mountopdracht mislukt\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Eject"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 #, fuzzy
 msgid "Browse..."
 msgstr "Zoeken..."
@@ -667,13 +675,13 @@ msgid "Use automount friendly status test"
 msgstr "Gebruik 'automount-vriendelijke' status test"
 
 #: applets/esd-manager/esdmanager_applet.c:30
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:30
 #, fuzzy
 msgid "Esound MAnager Applet"
 msgstr "ESound Beheer Applet"
-
-#: applets/esd-manager/esdmanager_applet.c:30
-msgid "Copyright (C)1998 Red Hat Software"
-msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -686,10 +694,6 @@ msgstr "U wint!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Vijftien schuivende stukken"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr ""
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -712,57 +716,57 @@ msgstr "Kan geen applet maken!\n"
 msgid "Scramble pieces"
 msgstr "Schudden"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "%s de vis"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "%s de GNOME vis zegt:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "GNOME Vis Eigenschappen"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "De naam van uw GNOME vis:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 #, fuzzy
 msgid "The Animation Filename:"
 msgstr "Naam van het animatiebestand:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Zoeken..."
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 #, fuzzy
 msgid "Frames In Animation:"
 msgstr "Beeldjes in animatie:"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Pauze per beeldje (sec):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Vis"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(met enige hulp van George)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "Het GNOME Vis Applet"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -785,11 +789,6 @@ msgstr ""
 #, c-format
 msgid "Desk %d"
 msgstr "Bureaublad %d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-#, fuzzy
-msgid "About\t"
-msgstr "Info\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -834,19 +833,22 @@ msgid "%a %b %d"
 msgstr "%a, %d %b"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%H:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -937,19 +939,19 @@ msgstr "'Mail check' waarschuwt u wanneer er nieuwe mail is"
 msgid "Text only"
 msgstr "Alleen tekst"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Printereigenschappen"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Printernaam:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Afdrukcommando:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr ""
 
@@ -1016,12 +1018,12 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "Bureaubladschakelaar Applet"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "Bureaubladschakelaar Applet"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1289,6 +1291,11 @@ msgstr "kindproces beeindigd"
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1309,7 +1316,7 @@ msgid "History"
 msgstr ""
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Help"
 
@@ -1522,6 +1529,11 @@ msgid "Load Graph"
 msgstr "Belastingsgrafiek"
 
 #: applets/multiload/load-graph.c:180
+#, fuzzy
+msgid "Height:"
+msgstr "Hoogte:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "Snelheid:"
 
@@ -1530,15 +1542,10 @@ msgstr "Snelheid:"
 msgid "Width:"
 msgstr "Breedte:"
 
-#: applets/multiload/load-graph.c:180
-#, fuzzy
-msgid "Height:"
-msgstr "Hoogte:"
-
 #: applets/multiload/main.c:27
 #, fuzzy
-msgid "User"
-msgstr "Gebruiker"
+msgid "Idle"
+msgstr "Ongebruikt"
 
 #: applets/multiload/main.c:27
 #, fuzzy
@@ -1552,8 +1559,16 @@ msgstr "Systeem"
 
 #: applets/multiload/main.c:27
 #, fuzzy
-msgid "Idle"
-msgstr "Ongebruikt"
+msgid "User"
+msgstr "Gebruiker"
+
+#: applets/multiload/main.c:31
+msgid "Buffers"
+msgstr ""
+
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+msgid "Free"
+msgstr "Vrij"
 
 #: applets/multiload/main.c:31
 msgid "Other"
@@ -1563,14 +1578,6 @@ msgstr "Anders"
 #, fuzzy
 msgid "Shared"
 msgstr "Gedeeld"
-
-#: applets/multiload/main.c:31
-msgid "Buffers"
-msgstr ""
-
-#: applets/multiload/main.c:31 applets/multiload/main.c:35
-msgid "Free"
-msgstr "Vrij"
 
 #: applets/multiload/main.c:35
 #, fuzzy
@@ -1805,21 +1812,21 @@ msgstr "Uiterlijk"
 msgid " Folder"
 msgstr " Map"
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Bewaren"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Herstel"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 #, fuzzy
 msgid "User menus"
 msgstr "Gebruikersmenu's"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 #, fuzzy
 msgid "System menus"
@@ -1880,13 +1887,13 @@ msgstr "In een submenu"
 
 #: gmenu/main.c:102
 #, fuzzy
-msgid "New Item"
-msgstr "Nieuwe terminal"
+msgid "Create a new item"
+msgstr "Maak een nieuwe map"
 
 #: gmenu/main.c:102
 #, fuzzy
-msgid "Create a new item"
-msgstr "Maak een nieuwe map"
+msgid "New Item"
+msgstr "Nieuwe terminal"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1897,12 +1904,12 @@ msgid "Delete selected menu item"
 msgstr "Verwijderen geselecteerd menu-item"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Naar boven"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Geselecteerd menu naar boven"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Naar boven"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2237,13 +2244,13 @@ msgstr "Kleurselector"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
-msgid "_New terminal"
-msgstr "Nieuwe terminal"
+msgid "Creates a new terminal window"
+msgstr "Maak een nieuwe map"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
-msgid "Creates a new terminal window"
-msgstr "Maak een nieuwe map"
+msgid "_New terminal"
+msgstr "Nieuwe terminal"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2255,12 +2262,12 @@ msgid "_Close terminal"
 msgstr "Terminal sluiten"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "Toon menubalk"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "Toon menubalk"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2307,21 +2314,21 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "Terminalklasse"
-
-#: gnome-terminal/gnome-terminal.c:2232
 #, fuzzy
 msgid "TCLASS"
 msgstr "KLASSE"
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr "Geeft lettertype aan"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "Terminalklasse"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "LETTERTYPE"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr "Geeft lettertype aan"
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2334,46 +2341,46 @@ msgid "Start up shells as login shells"
 msgstr "Start 'shell' als 'login shell'"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr "Geeft de geometrie van het hoofdvenster"
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
-msgstr "In plaats van een shell, voer dit programma uit"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
+msgstr "Geeft de geometrie van het hoofdvenster"
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr "OPDRACHT"
+
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr "In plaats van een shell, voer dit programma uit"
 
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "In plaats van een shell, voer dit programma uit"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Voorgrondkleur"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "KLEUR"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Voorgrondkleur"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Achtergrondkleur"
 
 #: gnome-terminal/gnome-terminal.c:2259
+msgid "UTMP"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "Ververs utmp/wtmp gegevens"
-
-#: gnome-terminal/gnome-terminal.c:2259
-msgid "UTMP"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2262
 #, fuzzy
@@ -2423,47 +2430,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2475,50 +2478,46 @@ msgstr "Sessie beeindigen"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "'save-session': verbinding met sessiebeheer mislukt\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr ""
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr "Panel"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 #, fuzzy
 msgid "Session"
 msgstr "Sessie beeindigen"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 #, fuzzy
 msgid "Start Session"
 msgstr "Vergeet sessie"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr "Panel"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Algemene pictogrameigenschappen"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2540,36 +2539,36 @@ msgid "Remove"
 msgstr "Verwijderen"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "X-coördinaat van het venster"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "Y-coördinaat van het venster"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "X-coördinaat van het venster"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "Vensterbreedte"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "Y-coördinaat van het venster"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "BREEDTE"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "Vensterhoogte"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "Vensterbreedte"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "HOOGTE"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "Vensterhoogte"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2635,21 +2634,21 @@ msgstr ""
 msgid "Paths"
 msgstr "Paden"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2><b>Fout</b>: bestand niet gevonden</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Aantal"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Laatste"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Aantal"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2814,30 +2813,30 @@ msgid "Open new browser window"
 msgstr "Open nieuw browservenster"
 
 #: help-browser/window.c:136
-#, fuzzy
-msgid "_Add Bookmark"
-msgstr "Toevoegen bladwijzer"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Toevoegen bladwijzer"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr ""
+#: help-browser/window.c:136
+#, fuzzy
+msgid "_Add Bookmark"
+msgstr "Toevoegen bladwijzer"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Toon 'history' venster"
 
-#: help-browser/window.c:166
-#, fuzzy
-msgid "_Bookmarks"
-msgstr "Bladwijzers"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr ""
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Toon bladwijzervenster"
+
+#: help-browser/window.c:166
+#, fuzzy
+msgid "_Bookmarks"
+msgstr "Bladwijzers"
 
 #: help-browser/window.c:180
 #, fuzzy
@@ -2890,11 +2889,12 @@ msgstr "Notificatie"
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"Fout bij laden document:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2957,7 +2957,7 @@ msgstr "Toepassing"
 msgid "Launcher properties"
 msgstr "Snelkoppelingseigenschappen"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 #, fuzzy
 msgid "Create launcher applet"
 msgstr "Maak snelkoppeling\n"
@@ -2971,7 +2971,7 @@ msgstr "Uitloggen"
 msgid "Log out of GNOME"
 msgstr "Uitloggen"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3485,154 +3485,533 @@ msgstr "Opdracht (optioneel)"
 msgid "Height"
 msgstr "Hoogte."
 
-#~ msgid "Properties ..."
-#~ msgstr "Eigenschappen..."
+#~ msgid "Height (optional)"
+#~ msgstr "Hoogte (optioneel)"
 
-#~ msgid "Add new panel"
-#~ msgstr "Toevoegen nieuw panel"
+#~ msgid "[URL]"
+#~ msgstr "[URL]"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Vraag bevestiging bij uitloggen"
+#~ msgid "[SESSION]"
+#~ msgstr "[SESSIE]"
 
-#, fuzzy
-#~ msgid "Low Battery Warning"
-#~ msgstr "Laag en aan het opladen."
+#~ msgid "Name"
+#~ msgstr "Naam"
 
-#~ msgid "General Properties"
-#~ msgstr "Algemene eigenschappen"
-
-#~ msgid "Graph Interval:"
-#~ msgstr "Grafiekinterval"
+#~ msgid "Can't allocate memory for color\n"
+#~ msgstr "Geen geheugenruimte voor kleur\n"
 
 #, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "In een submenu"
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Creëren van bestand '%s' mislukt\n"
-
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "verwijderen .order bestand '%s' mislukt\n"
-
-#~ msgid "File exists."
-#~ msgstr "Bestand bestaat."
-
-#, fuzzy
-#~ msgid "Create Submenu:"
-#~ msgstr "Creëer Map:"
-
-#~ msgid "You must select something first."
-#~ msgstr "U moet eerst iets selecteren."
-
-#~ msgid ""
-#~ "You can't delete that file.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "U kunt dat bestand niet wissen,\n"
-#~ "want u heeft niet de benodigde rechten"
+#~ msgid "Theme Information"
+#~ msgstr "Thema-informatie"
 
 #, fuzzy
 #~ msgid ""
-#~ "You are not allowed to move that item there.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "U kunt dat bestand niet wissen,\n"
-#~ "want u heeft niet de benodigde rechten"
-
-#~ msgid "New"
-#~ msgstr "Nieuw"
-
-#~ msgid "Edit selected menu item properties"
-#~ msgstr "Eigenschappen geselecteerd menu-item"
+#~ "Auto\n"
+#~ "Preview"
+#~ msgstr "Voorbeeld"
 
 #, fuzzy
-#~ msgid "Red Hat menus"
-#~ msgstr "RedHat menu's"
+#~ msgid "Enable sounds for events"
+#~ msgstr "Aanzetten koppeling geluid en 'events'"
 
-#~ msgid "Red Hat menu (if found): "
-#~ msgstr "RedHat menu (indien gevonden): "
+#, fuzzy
+#~ msgid "Event"
+#~ msgstr "'event'"
 
-#~ msgid "Hidebutton options"
-#~ msgstr "Verbergknopopties"
+#, fuzzy
+#~ msgid "XID"
+#~ msgstr "XID"
 
-#~ msgid "Really log out?"
-#~ msgstr "Weet u zeker dat u wilt uitloggen?"
+#, fuzzy
+#~ msgid "_Help with GNOME..."
+#~ msgstr "GNOME _Help"
 
-#~ msgid "Ask next time"
-#~ msgstr "Stel vraag de volgende keer"
+#, fuzzy
+#~ msgid "Desktop Properties manager."
+#~ msgstr "Beheer Desktopinstellingen"
 
-#~ msgid "Enable gsm debugging"
-#~ msgstr "Zet gsm debugging aan"
-
-#~ msgid "Gnome Session Properties"
-#~ msgstr "Gnome Sessie-eigenschappen"
-
-#~ msgid "Startup Programs"
-#~ msgstr "Opstartprogramma's"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "'/proc/apm' kan niet geopend worden. Geen informatie beschikbaar."
-
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Probleem met '/proc/apm'.  Geen informatie beschikbaar."
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "'/proc/apm' kan niet geopend worden. Geen informatie beschikbaar."
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "Er is geen batterij?!?"
-
-#~ msgid "High and charging."
-#~ msgstr "Hoog en aan het opladen."
-
-#~ msgid "High."
-#~ msgstr "Hoog."
-
-#~ msgid "Low."
+#, fuzzy
+#~ msgid "Low "
 #~ msgstr "Laag."
 
-#~ msgid "Critical and charging."
-#~ msgstr "Kritiek en aan het opladen."
-
-#~ msgid "Critical!!"
-#~ msgstr "Kritiek!"
-
-#~ msgid "Charging."
-#~ msgstr "Aan het opladen."
-
-#~ msgid "unknown minutes of battery."
-#~ msgstr "onbekend aantal minuten in batterij"
-
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "onbekend aantal minuten in batterij (%d%%)"
-
-#~ msgid "%d minutes of battery"
-#~ msgstr "%d minuten in batterij"
-
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "%d minuten in batterij(%d%%)"
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "Meer dan 100.000.000 uur levensduur voor batterij!?!"
-
-#~ msgid "APM Stats"
-#~ msgstr "APM Statistieken"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM Driver Versie:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "APM BIOS Versie:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Batterijstatus:"
-
-#~ msgid "Refresh Image"
-#~ msgstr "Ververs afbeelding"
+#, fuzzy
+#~ msgid "Screen Saver Settings"
+#~ msgstr "Schermbeveilingsinstellingen"
 
 #, fuzzy
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "Het GNOME Vis Applet"
+#~ msgid "About:"
+#~ msgstr "Over: "
+
+#, fuzzy
+#~ msgid "Preview"
+#~ msgstr "Voorbeeld"
+
+#, fuzzy
+#~ msgid "Test settings"
+#~ msgstr "Test instellingen"
+
+#, fuzzy
+#~ msgid "Repeat Delay"
+#~ msgstr "Herhaal vertraging"
+
+#, fuzzy
+#~ msgid "Icon Selection"
+#~ msgstr "Pictogramselectie"
+
+#~ msgid "Log Out"
+#~ msgstr "Uitloggen"
+
+#~ msgid "Explicitly Hide"
+#~ msgstr "Expliciet verbergen"
+
+#~ msgid "File"
+#~ msgstr "Bestand"
+
+#~ msgid "Configure"
+#~ msgstr "Instellen"
+
+#, fuzzy
+#~ msgid "MemLoad Settings"
+#~ msgstr "Geheugenbelasting Eigenschappen"
+
+#, fuzzy
+#~ msgid "Help & About..."
+#~ msgstr "Help & Info..."
+
+#~ msgid "Info about this program"
+#~ msgstr "Informatie over dit programma"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "Info"
+
+#~ msgid "Exit all windows"
+#~ msgstr "Sluit alle vensters"
+
+#, fuzzy
+#~ msgid "E_xit"
+#~ msgstr "Afsluiten"
+
+#~ msgid "Close window"
+#~ msgstr "Venster sluiten"
+
+#, fuzzy
+#~ msgid "_Close"
+#~ msgstr "Sluiten"
+
+#~ msgid "Preferences"
+#~ msgstr "Eigenschappen"
+
+#, fuzzy
+#~ msgid "P_references..."
+#~ msgstr "Eigenschappen..."
+
+#, fuzzy
+#~ msgid "_About..."
+#~ msgstr "Info..."
+
+#~ msgid "_Quit"
+#~ msgstr "Afsluiten"
+
+#~ msgid "Sort Folder"
+#~ msgstr "Sorteer map"
+
+#, fuzzy
+#~ msgid "_Sort Folder"
+#~ msgstr "_Sorteren map"
+
+#~ msgid "File name:"
+#~ msgstr "Bestandsnaam:"
+
+#~ msgid "Save file?"
+#~ msgstr "Bestand bewaren?"
+
+#~ msgid ""
+#~ "You can't edit an entry in that folder.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "U kunt het object in die map niet bewerken,\n"
+#~ "want u heeft niet de benodigde rechten"
+
+#~ msgid "The Name text field can not be blank."
+#~ msgstr "Het 'Naam'-veld mag niet leeg zijn"
+
+#~ msgid "File or Folder does not exist on filesystem."
+#~ msgstr "Bestand of map bestaat niet in het bestandssysteem"
+
+#~ msgid ""
+#~ "Cannot delete folder.\n"
+#~ "To delete a folder. it must be empty."
+#~ msgstr ""
+#~ "Map kan niet verwijderd worden.\n"
+#~ "Alleen lege mappen kunnen verwijderd worden."
+
+#~ msgid "Delete file?"
+#~ msgstr "Bestand verwijderen?"
+
+#~ msgid "Failed to delete the file."
+#~ msgstr "Verwijderen bestand mislukt."
+
+#~ msgid "Failed to delete the folder."
+#~ msgstr "Verwijderen map mislukt."
+
+#~ msgid "MDI notebook tab position"
+#~ msgstr "MDI notitieboek tabpositie"
+
+#, fuzzy
+#~ msgid "Default MDI mode"
+#~ msgstr "Standaard MDI modus"
+
+#~ msgid "Application"
+#~ msgstr "Toepassing"
+
+#, fuzzy
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Dialoogknoppen hebben ikonen"
+
+#~ msgid "Statusbar is interactive when possible"
+#~ msgstr "Indien mogelijk, statusbalk is interactief"
+
+#~ msgid "Toolbars have text labels"
+#~ msgstr "Gereedschapsbalken hebben tekstlabels"
+
+#~ msgid "Toolbars have line separators"
+#~ msgstr "Gereedschapsbalken hebben scheidingen"
+
+#~ msgid "Toolbars have flat look"
+#~ msgstr "Gereedschapsbalken lijken vlak"
+
+#~ msgid "Toolbar buttons have relieved border"
+#~ msgstr "Gereedschapsknoppen hebben een vrije rand"
+
+#~ msgid "Toolbars are detachable"
+#~ msgstr "Gereedschapsbalken zijn los te halen"
+
+#~ msgid "Menubars have relieved border"
+#~ msgstr "Menubalken hebben een vrije rand"
+
+#~ msgid "Menubars are detachable"
+#~ msgstr "Menubalken zijn los te halen"
+
+#, fuzzy
+#~ msgid "Dialogs"
+#~ msgstr "Dialogen"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Indien mogelijk, plaats dialogen boven toepassingsvenster"
+
+#~ msgid "Use statusbar instead of dialog when possible"
+#~ msgstr "Indien mogelijk, vervang dialoog door statusbalk"
+
+#, fuzzy
+#~ msgid "Dialog hints"
+#~ msgstr "Dialooghints"
+
+#~ msgid "Dialog position"
+#~ msgstr "Dialoogpositie"
+
+#~ msgid "Dialog buttons"
+#~ msgstr "Dialoogknoppen"
+
+#~ msgid "Modal"
+#~ msgstr "Modaal"
+
+#~ msgid "Toplevel"
+#~ msgstr "Bovenop"
+
+#~ msgid "Notebook"
+#~ msgstr "Notitieboek"
+
+#~ msgid "Dialogs are treated specially by window manager"
+#~ msgstr "Dialogen worden anders behandeld door window manager"
+
+#~ msgid "Dialogs are like other windows"
+#~ msgstr "Dialogen zijn als ander vensters"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "Bij de muiscursor"
+
+#~ msgid "Center of the screen"
+#~ msgstr "In het midden van het scherm"
+
+#~ msgid "Let window manager decide"
+#~ msgstr "Laat de window manager beslissen"
+
+#, fuzzy
+#~ msgid "Right-justify buttons"
+#~ msgstr "Knoppen rechts uitlijnen"
+
+#~ msgid "Left-justify buttons"
+#~ msgstr "Knoppen links uitlijnen"
+
+#~ msgid "Put buttons on edges"
+#~ msgstr "Plaats knoppen op randen"
+
+#~ msgid "Spread buttons out"
+#~ msgstr "Vul knoppen uit"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Standaard GTK instelling [FIXME - beschrijf dit beter]"
+
+#~ msgid "Mouse"
+#~ msgstr "Muis"
+
+#~ msgid "Small"
+#~ msgstr "Klein"
+
+#~ msgid "Large"
+#~ msgstr "Groot"
+
+#~ msgid "Slow"
+#~ msgstr "Traag"
+
+#~ msgid "Fast"
+#~ msgstr "Vlug"
+
+#~ msgid "Acceleration"
+#~ msgstr "Versnelling"
+
+#~ msgid "Mouse motion"
+#~ msgstr "Muisbeweging"
+
+#~ msgid "Right handed"
+#~ msgstr "Rechtshandig"
+
+#~ msgid "Left handed"
+#~ msgstr "Linkshandig"
+
+#~ msgid "Mouse buttons"
+#~ msgstr "Muisknoppen"
+
+#~ msgid "Keyboard"
+#~ msgstr "Toetsenbord"
+
+#~ msgid "Click volume"
+#~ msgstr "Klik volume"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Klik bij toetsaanslag"
+
+#~ msgid "Keyboard click"
+#~ msgstr "Toetsaanslag"
+
+#~ msgid "Repeat delay"
+#~ msgstr "Herhalingsvertraging"
+
+#~ msgid "Repeat rate"
+#~ msgstr "Herhalingsaantal"
+
+#~ msgid "Enable auto-repeat"
+#~ msgstr "Aanzetten automatisch herhalen"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Automatisch herhalen"
+
+#~ msgid "Bell"
+#~ msgstr "Bel"
+
+#~ msgid "Test"
+#~ msgstr "Testen"
+
+#~ msgid "Duration"
+#~ msgstr "Duur"
+
+#, fuzzy
+#~ msgid "Pitch"
+#~ msgstr "Toonhoogte"
+
+#~ msgid "Volume"
+#~ msgstr "Volume"
+
+#, fuzzy
+#~ msgid "Sound"
+#~ msgstr "Geluid"
+
+#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
+#~ msgstr ""
+#~ "Toon achtergrondafbeelding: getegeld, gecentreerd, geschaald of "
+#~ "proportioneel geschaald"
+
+#~ msgid "MODE"
+#~ msgstr "MODUS"
+
+#~ msgid "Use a gradient fill for the background"
+#~ msgstr "Gebruik een kleurverloop als achtergrond"
+
+#~ msgid "Use a solid fill for the background"
+#~ msgstr "Gebruik een vaste kleur als achtergrond"
+
+#~ msgid "Gradient orientation: vertical or horizontal"
+#~ msgstr "Kleurverloop: verticaal of horizontaal"
+
+#~ msgid "ORIENT"
+#~ msgstr "ORIENT"
+
+#, fuzzy
+#~ msgid "Specifies end background color for gradient"
+#~ msgstr "Geeft de achtergrondkleur aan"
+
+#~ msgid "Specifies the background color"
+#~ msgstr "Geeft de achtergrondkleur aan"
+
+#~ msgid "Sets the wallpaper to the value specified"
+#~ msgstr "Achtergrondafbeelding instellen"
+
+#~ msgid "IMAGE"
+#~ msgstr "AFBEELDING"
+
+#~ msgid "Tiled"
+#~ msgstr "Getegeld"
+
+#~ msgid "Centered"
+#~ msgstr "Gecentreerd"
+
+#~ msgid "Scaled (keep aspect)"
+#~ msgstr "Geschaald (proportioneel)"
+
+#, fuzzy
+#~ msgid "Scaled"
+#~ msgstr "Geschaald"
+
+#~ msgid " Browse... "
+#~ msgstr " Zoeken..."
+
+#~ msgid "Wallpaper"
+#~ msgstr "Achtergrondafbeelding"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Keuze achtergrondafbeelding"
+
+#~ msgid "Gradient"
+#~ msgstr "Verlopend"
+
+#~ msgid "Flat"
+#~ msgstr "Vlak"
+
+#~ msgid "Set parameters from saved state and exit"
+#~ msgstr "Herstel parameters en afsluiten"
+
+#~ msgid "Gnome Look and Feel Properties"
+#~ msgstr "Gnome Look&Feel eigenschappen"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Muiseigenschappen"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Toetsenbordeigenschappen"
+
+#~ msgid "Bell Properties"
+#~ msgstr "Beleigenschappen"
+
+#~ msgid "Background Properties"
+#~ msgstr "Achtergrondeigenschappen"
+
+#~ msgid "Prefixes %d"
+#~ msgstr "Voorvoegsel %d"
+
+#, fuzzy
+#~ msgid "Special Prefixes"
+#~ msgstr "Bijzondere voorvoegsels"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#, fuzzy
+#~ msgid "Config"
+#~ msgstr "Configuratie"
+
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: optie `-W %s' staat geen argument toe\n"
+
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: optie `-W %s' is niet eenduidig\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: optie vereist een argument -- %c\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: verboden optie -- %c\n"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: verboden optie -- %c\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: onbekende optie `%c%s'\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: onbekende optie `--%s'\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: optie `%s' vereist een argument\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: optie `%c%s' staat geen argument toe\n"
+
+#, fuzzy
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: optie `-W %s' staat geen argument toe\n"
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: optie '%s' is niet eenduidig\n"
+
+#~ msgid ""
+#~ "A binary clock for your panel\n"
+#~ "http://snoopy.net/~jon/jbc/\n"
+#~ msgstr ""
+#~ "Een binaire klok voor uw panel\n"
+#~ "http://snoopy.net/~jon/jbc/\n"
+
+#~ msgid "Failed to retrieve workspace property."
+#~ msgstr "Verkrijgen eigenschap van werkruimte mislukt"
+
+#~ msgid ""
+#~ "This applet requires you to run a window manager with the XA_ extensions.\n"
+#~ msgstr "Deze applet vereist een window manager met XA_ extensies.\n"
+
+#, fuzzy
+#~ msgid "Image path:"
+#~ msgstr "Pad naar plaatje:"
+
+#~ msgid "Image Server Url:"
+#~ msgstr "Plaatjes-Server URL:"
+
+#~ msgid "Article index file:"
+#~ msgstr "Berichten-indexbestand:"
+
+#~ msgid "Ticker Information (unimplemented)"
+#~ msgstr "Ticker Informatie (nog niet geïmplementeerd)"
+
+#, fuzzy
+#~ msgid ""
+#~ "unable to create user directory: \n"
+#~ "\t\t\t\t\t    %s\n"
+#~ msgstr "creëren van gebruikersdirectory '%s' mislukt\n"
+
+#~ msgid "GTicker Article List"
+#~ msgstr "GTicker Berichtenlijst"
+
+#~ msgid "Ticker for the GNOME Project\n"
+#~ msgstr "'Ticker'voor het GNOME Project\n"
+
+#, fuzzy
+#~ msgid "Refresh Articles"
+#~ msgstr "Ververs berichten"
+
+#, fuzzy
+#~ msgid "Show Article Listing"
+#~ msgstr "Toon berichtenlijst"
+
+#, fuzzy
+#~ msgid "Loading headlines..."
+#~ msgstr "Koppen worden geladen..."
+
+#, fuzzy
+#~ msgid "System Load"
+#~ msgstr "Systeem"
+
+#, fuzzy
+#~ msgid "User Load"
+#~ msgstr "Gebruikersopdrachten"
 
 #~ msgid ""
 #~ "This applet is a total waste of time. Get back to work!\n"
@@ -3648,529 +4027,163 @@ msgstr "Hoogte."
 #~ "http://people.netscape.com/mtoy/sign/index.html"
 
 #, fuzzy
-#~ msgid "User Load"
-#~ msgstr "Gebruikersopdrachten"
+#~ msgid "The Bus Sign Applet"
+#~ msgstr "Het GNOME Vis Applet"
 
-#, fuzzy
-#~ msgid "System Load"
-#~ msgstr "Systeem"
+#~ msgid "Refresh Image"
+#~ msgstr "Ververs afbeelding"
 
-#, fuzzy
-#~ msgid "Loading headlines..."
-#~ msgstr "Koppen worden geladen..."
+#~ msgid "Battery Status:"
+#~ msgstr "Batterijstatus:"
 
-#, fuzzy
-#~ msgid "Show Article Listing"
-#~ msgstr "Toon berichtenlijst"
+#~ msgid "APM BIOS Version:"
+#~ msgstr "APM BIOS Versie:"
 
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Ververs berichten"
+#~ msgid "Linux APM Driver Version:"
+#~ msgstr "Linux APM Driver Versie:"
 
-#~ msgid "Ticker for the GNOME Project\n"
-#~ msgstr "'Ticker'voor het GNOME Project\n"
+#~ msgid "APM Stats"
+#~ msgstr "APM Statistieken"
 
-#~ msgid "GTicker Article List"
-#~ msgstr "GTicker Berichtenlijst"
+#~ msgid "More than 100,000,000 minutes of battery life?!?"
+#~ msgstr "Meer dan 100.000.000 uur levensduur voor batterij!?!"
 
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "creëren van gebruikersdirectory '%s' mislukt\n"
+#~ msgid "%d minutes of battery (%d%%)"
+#~ msgstr "%d minuten in batterij(%d%%)"
 
-#~ msgid "Ticker Information (unimplemented)"
-#~ msgstr "Ticker Informatie (nog niet geïmplementeerd)"
+#~ msgid "%d minutes of battery"
+#~ msgstr "%d minuten in batterij"
 
-#~ msgid "Article index file:"
-#~ msgstr "Berichten-indexbestand:"
+#~ msgid "unknown minutes of battery (%d%%)"
+#~ msgstr "onbekend aantal minuten in batterij (%d%%)"
 
-#~ msgid "Image Server Url:"
-#~ msgstr "Plaatjes-Server URL:"
+#~ msgid "unknown minutes of battery."
+#~ msgstr "onbekend aantal minuten in batterij"
 
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Pad naar plaatje:"
+#~ msgid "Charging."
+#~ msgstr "Aan het opladen."
 
-#~ msgid ""
-#~ "This applet requires you to run a window manager with the XA_ extensions.\n"
-#~ msgstr "Deze applet vereist een window manager met XA_ extensies.\n"
+#~ msgid "Critical!!"
+#~ msgstr "Kritiek!"
 
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "Verkrijgen eigenschap van werkruimte mislukt"
+#~ msgid "Critical and charging."
+#~ msgstr "Kritiek en aan het opladen."
 
-#~ msgid ""
-#~ "A binary clock for your panel\n"
-#~ "http://snoopy.net/~jon/jbc/\n"
-#~ msgstr ""
-#~ "Een binaire klok voor uw panel\n"
-#~ "http://snoopy.net/~jon/jbc/\n"
-
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: optie '%s' is niet eenduidig\n"
-
-#, fuzzy
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: optie `-W %s' staat geen argument toe\n"
-
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: optie `%c%s' staat geen argument toe\n"
-
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: optie `%s' vereist een argument\n"
-
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: onbekende optie `--%s'\n"
-
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: onbekende optie `%c%s'\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: verboden optie -- %c\n"
-
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: verboden optie -- %c\n"
-
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: optie vereist een argument -- %c\n"
-
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: optie `-W %s' is niet eenduidig\n"
-
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: optie `-W %s' staat geen argument toe\n"
-
-#, fuzzy
-#~ msgid "Config"
-#~ msgstr "Configuratie"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Special Prefixes"
-#~ msgstr "Bijzondere voorvoegsels"
-
-#~ msgid "Prefixes %d"
-#~ msgstr "Voorvoegsel %d"
-
-#~ msgid "Background Properties"
-#~ msgstr "Achtergrondeigenschappen"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Beleigenschappen"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Toetsenbordeigenschappen"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Muiseigenschappen"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Gnome Look&Feel eigenschappen"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Herstel parameters en afsluiten"
-
-#~ msgid "Flat"
-#~ msgstr "Vlak"
-
-#~ msgid "Gradient"
-#~ msgstr "Verlopend"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Keuze achtergrondafbeelding"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Achtergrondafbeelding"
-
-#~ msgid " Browse... "
-#~ msgstr " Zoeken..."
-
-#, fuzzy
-#~ msgid "Scaled"
-#~ msgstr "Geschaald"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Geschaald (proportioneel)"
-
-#~ msgid "Centered"
-#~ msgstr "Gecentreerd"
-
-#~ msgid "Tiled"
-#~ msgstr "Getegeld"
-
-#~ msgid "IMAGE"
-#~ msgstr "AFBEELDING"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Achtergrondafbeelding instellen"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Geeft de achtergrondkleur aan"
-
-#, fuzzy
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Geeft de achtergrondkleur aan"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENT"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Kleurverloop: verticaal of horizontaal"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Gebruik een vaste kleur als achtergrond"
-
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Gebruik een kleurverloop als achtergrond"
-
-#~ msgid "MODE"
-#~ msgstr "MODUS"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr ""
-#~ "Toon achtergrondafbeelding: getegeld, gecentreerd, geschaald of "
-#~ "proportioneel geschaald"
-
-#, fuzzy
-#~ msgid "Sound"
-#~ msgstr "Geluid"
-
-#~ msgid "Volume"
-#~ msgstr "Volume"
-
-#, fuzzy
-#~ msgid "Pitch"
-#~ msgstr "Toonhoogte"
-
-#~ msgid "Duration"
-#~ msgstr "Duur"
-
-#~ msgid "Test"
-#~ msgstr "Testen"
-
-#~ msgid "Bell"
-#~ msgstr "Bel"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Automatisch herhalen"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Aanzetten automatisch herhalen"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Herhalingsaantal"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Herhalingsvertraging"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Toetsaanslag"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klik bij toetsaanslag"
-
-#~ msgid "Click volume"
-#~ msgstr "Klik volume"
-
-#~ msgid "Keyboard"
-#~ msgstr "Toetsenbord"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Muisknoppen"
-
-#~ msgid "Left handed"
-#~ msgstr "Linkshandig"
-
-#~ msgid "Right handed"
-#~ msgstr "Rechtshandig"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Muisbeweging"
-
-#~ msgid "Acceleration"
-#~ msgstr "Versnelling"
-
-#~ msgid "Fast"
-#~ msgstr "Vlug"
-
-#~ msgid "Slow"
-#~ msgstr "Traag"
-
-#~ msgid "Large"
-#~ msgstr "Groot"
-
-#~ msgid "Small"
-#~ msgstr "Klein"
-
-#~ msgid "Mouse"
-#~ msgstr "Muis"
-
-#~ msgid "Default Gtk setting [FIXME - Describe this better]"
-#~ msgstr "Standaard GTK instelling [FIXME - beschrijf dit beter]"
-
-#~ msgid "Spread buttons out"
-#~ msgstr "Vul knoppen uit"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Plaats knoppen op randen"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Knoppen links uitlijnen"
-
-#, fuzzy
-#~ msgid "Right-justify buttons"
-#~ msgstr "Knoppen rechts uitlijnen"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "Laat de window manager beslissen"
-
-#~ msgid "Center of the screen"
-#~ msgstr "In het midden van het scherm"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Bij de muiscursor"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Dialogen zijn als ander vensters"
-
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Dialogen worden anders behandeld door window manager"
-
-#~ msgid "Notebook"
-#~ msgstr "Notitieboek"
-
-#~ msgid "Toplevel"
-#~ msgstr "Bovenop"
-
-#~ msgid "Modal"
-#~ msgstr "Modaal"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Dialoogknoppen"
-
-#~ msgid "Dialog position"
-#~ msgstr "Dialoogpositie"
-
-#, fuzzy
-#~ msgid "Dialog hints"
-#~ msgstr "Dialooghints"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Indien mogelijk, vervang dialoog door statusbalk"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Indien mogelijk, plaats dialogen boven toepassingsvenster"
-
-#, fuzzy
-#~ msgid "Dialogs"
-#~ msgstr "Dialogen"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Menubalken zijn los te halen"
-
-#~ msgid "Menubars have relieved border"
-#~ msgstr "Menubalken hebben een vrije rand"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Gereedschapsbalken zijn los te halen"
-
-#~ msgid "Toolbar buttons have relieved border"
-#~ msgstr "Gereedschapsknoppen hebben een vrije rand"
-
-#~ msgid "Toolbars have flat look"
-#~ msgstr "Gereedschapsbalken lijken vlak"
-
-#~ msgid "Toolbars have line separators"
-#~ msgstr "Gereedschapsbalken hebben scheidingen"
-
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Gereedschapsbalken hebben tekstlabels"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "Indien mogelijk, statusbalk is interactief"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialoogknoppen hebben ikonen"
-
-#~ msgid "Application"
-#~ msgstr "Toepassing"
-
-#, fuzzy
-#~ msgid "Default MDI mode"
-#~ msgstr "Standaard MDI modus"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "MDI notitieboek tabpositie"
-
-#~ msgid "Failed to delete the folder."
-#~ msgstr "Verwijderen map mislukt."
-
-#~ msgid "Failed to delete the file."
-#~ msgstr "Verwijderen bestand mislukt."
-
-#~ msgid "Delete file?"
-#~ msgstr "Bestand verwijderen?"
-
-#~ msgid ""
-#~ "Cannot delete folder.\n"
-#~ "To delete a folder. it must be empty."
-#~ msgstr ""
-#~ "Map kan niet verwijderd worden.\n"
-#~ "Alleen lege mappen kunnen verwijderd worden."
-
-#~ msgid "File or Folder does not exist on filesystem."
-#~ msgstr "Bestand of map bestaat niet in het bestandssysteem"
-
-#~ msgid "The Name text field can not be blank."
-#~ msgstr "Het 'Naam'-veld mag niet leeg zijn"
-
-#~ msgid ""
-#~ "You can't edit an entry in that folder.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "U kunt het object in die map niet bewerken,\n"
-#~ "want u heeft niet de benodigde rechten"
-
-#~ msgid "Save file?"
-#~ msgstr "Bestand bewaren?"
-
-#~ msgid "File name:"
-#~ msgstr "Bestandsnaam:"
-
-#, fuzzy
-#~ msgid "_Sort Folder"
-#~ msgstr "_Sorteren map"
-
-#~ msgid "Sort Folder"
-#~ msgstr "Sorteer map"
-
-#~ msgid "_Quit"
-#~ msgstr "Afsluiten"
-
-#, fuzzy
-#~ msgid "_About..."
-#~ msgstr "Info..."
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "Eigenschappen..."
-
-#~ msgid "Preferences"
-#~ msgstr "Eigenschappen"
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Sluiten"
-
-#~ msgid "Close window"
-#~ msgstr "Venster sluiten"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Afsluiten"
-
-#~ msgid "Exit all windows"
-#~ msgstr "Sluit alle vensters"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "Info"
-
-#~ msgid "Info about this program"
-#~ msgstr "Informatie over dit programma"
-
-#, fuzzy
-#~ msgid "Help & About..."
-#~ msgstr "Help & Info..."
-
-#, fuzzy
-#~ msgid "MemLoad Settings"
-#~ msgstr "Geheugenbelasting Eigenschappen"
-
-#~ msgid "Configure"
-#~ msgstr "Instellen"
-
-#~ msgid "File"
-#~ msgstr "Bestand"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Expliciet verbergen"
-
-#~ msgid "Log Out"
-#~ msgstr "Uitloggen"
-
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Pictogramselectie"
-
-#, fuzzy
-#~ msgid "Repeat Delay"
-#~ msgstr "Herhaal vertraging"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Test instellingen"
-
-#, fuzzy
-#~ msgid "Preview"
-#~ msgstr "Voorbeeld"
-
-#, fuzzy
-#~ msgid "About:"
-#~ msgstr "Over: "
-
-#, fuzzy
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Schermbeveilingsinstellingen"
-
-#, fuzzy
-#~ msgid "Low "
+#~ msgid "Low."
 #~ msgstr "Laag."
 
-#, fuzzy
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Beheer Desktopinstellingen"
+#~ msgid "High."
+#~ msgstr "Hoog."
+
+#~ msgid "High and charging."
+#~ msgstr "Hoog en aan het opladen."
+
+#~ msgid "There is no battery?!?"
+#~ msgstr "Er is geen batterij?!?"
+
+#~ msgid "Can't open /dev/apm; can't get data."
+#~ msgstr "'/proc/apm' kan niet geopend worden. Geen informatie beschikbaar."
+
+#~ msgid "Something wrong with /proc/apm; can't get data."
+#~ msgstr "Probleem met '/proc/apm'.  Geen informatie beschikbaar."
+
+#~ msgid "Can't open /proc/apm; can't get data."
+#~ msgstr "'/proc/apm' kan niet geopend worden. Geen informatie beschikbaar."
+
+#~ msgid "Startup Programs"
+#~ msgstr "Opstartprogramma's"
+
+#~ msgid "Gnome Session Properties"
+#~ msgstr "Gnome Sessie-eigenschappen"
+
+#~ msgid "Enable gsm debugging"
+#~ msgstr "Zet gsm debugging aan"
+
+#~ msgid "Ask next time"
+#~ msgstr "Stel vraag de volgende keer"
+
+#~ msgid "Really log out?"
+#~ msgstr "Weet u zeker dat u wilt uitloggen?"
+
+#~ msgid "Hidebutton options"
+#~ msgstr "Verbergknopopties"
+
+#~ msgid "Red Hat menu (if found): "
+#~ msgstr "RedHat menu (indien gevonden): "
 
 #, fuzzy
-#~ msgid "_Help with GNOME..."
-#~ msgstr "GNOME _Help"
+#~ msgid "Red Hat menus"
+#~ msgstr "RedHat menu's"
 
-#, fuzzy
-#~ msgid "XID"
-#~ msgstr "XID"
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "Eigenschappen geselecteerd menu-item"
 
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "'event'"
-
-#, fuzzy
-#~ msgid "Enable sounds for events"
-#~ msgstr "Aanzetten koppeling geluid en 'events'"
+#~ msgid "New"
+#~ msgstr "Nieuw"
 
 #, fuzzy
 #~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr "Voorbeeld"
+#~ "You are not allowed to move that item there.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "U kunt dat bestand niet wissen,\n"
+#~ "want u heeft niet de benodigde rechten"
+
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "U kunt dat bestand niet wissen,\n"
+#~ "want u heeft niet de benodigde rechten"
+
+#~ msgid "You must select something first."
+#~ msgstr "U moet eerst iets selecteren."
 
 #, fuzzy
-#~ msgid "Theme Information"
-#~ msgstr "Thema-informatie"
+#~ msgid "Create Submenu:"
+#~ msgstr "Creëer Map:"
 
-#~ msgid "Can't allocate memory for color\n"
-#~ msgstr "Geen geheugenruimte voor kleur\n"
+#~ msgid "File exists."
+#~ msgstr "Bestand bestaat."
 
-#~ msgid "Name"
-#~ msgstr "Naam"
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr "verwijderen .order bestand '%s' mislukt\n"
 
-#~ msgid "[SESSION]"
-#~ msgstr "[SESSIE]"
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Creëren van bestand '%s' mislukt\n"
 
-#~ msgid "[URL]"
-#~ msgstr "[URL]"
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "In een submenu"
 
-#~ msgid "Height (optional)"
-#~ msgstr "Hoogte (optioneel)"
+#~ msgid "Graph Interval:"
+#~ msgstr "Grafiekinterval"
+
+#~ msgid "General Properties"
+#~ msgstr "Algemene eigenschappen"
+
+#, fuzzy
+#~ msgid "Low Battery Warning"
+#~ msgstr "Laag en aan het opladen."
+
+#~ msgid "Prompt before logout"
+#~ msgstr "Vraag bevestiging bij uitloggen"
+
+#~ msgid "Add new panel"
+#~ msgstr "Toevoegen nieuw panel"
+
+#~ msgid "Properties ..."
+#~ msgstr "Eigenschappen..."
+
+#, fuzzy
+#~ msgid "About\t"
+#~ msgstr "Info\t"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Fout bij laden document:\n"
+#~ "\n"
+#~ "%s"

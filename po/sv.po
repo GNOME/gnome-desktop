@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core-0.20\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1998-06-16 00:00+0100\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -161,10 +161,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -177,13 +177,14 @@ msgstr "Egenskaper ..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Om..."
 
@@ -264,7 +265,7 @@ msgstr "Intärt fel: felaktigt läge i battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Kan inte skapa applet!\n"
@@ -400,16 +401,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Kan inte öppna /proc/apm; får inte data."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "ioctl misslyckades på /dev/apm."
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM är avstängt!  Kan inte läsa batteriladdnings information."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM är avstängt!  Kan inte läsa batteriladdnings information."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM är avstängt!  Kan inte läsa batteriladdnings information."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -418,10 +429,6 @@ msgstr ""
 
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
-msgstr ""
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
 msgstr ""
 
 #: applets/charpick/charpick.c:316
@@ -591,36 +598,37 @@ msgid "Drive Mount Applet"
 msgstr "Enhetsmonterings-applet"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "Publicerad under GNUs generella publika licens.\n"
 "Monterar och demonterar enheter.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " monterad"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " inte monterad"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
 msgstr ""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Mataut"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 #, fuzzy
 msgid "Browse..."
 msgstr " Bläddra... "
@@ -663,13 +671,13 @@ msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:30
 #, fuzzy
-msgid "Esound MAnager Applet"
-msgstr "Skrivbordsbläddrarapplet"
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr "Upphovsrättigheter (C)1998 M.Watson"
 
 #: applets/esd-manager/esdmanager_applet.c:30
 #, fuzzy
-msgid "Copyright (C)1998 Red Hat Software"
-msgstr "Upphovsrättigheter (C)1998 M.Watson"
+msgid "Esound MAnager Applet"
+msgstr "Skrivbordsbläddrarapplet"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -682,10 +690,6 @@ msgstr "Du vinner!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Femton glidande pjäser"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr "1.0"
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -705,57 +709,57 @@ msgstr "Kan inte skapa femtonapplet!"
 msgid "Scramble pieces"
 msgstr "Rör runt pjäserna"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "Fisken %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "GNOME-fisken %s säger:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "GNOME-fiskens egenskaper"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "Namnet på din GNOME-fisk:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 #, fuzzy
 msgid "The Animation Filename:"
 msgstr "Animationshastighet för låda"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Bläddra"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 #, fuzzy
 msgid "Frames In Animation:"
 msgstr "Animationshastighet för låda"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr ""
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr ""
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(med lite hjälp från George)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "GNOME-fiskapplet"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -777,11 +781,6 @@ msgstr "Upphovsrättigheter (C)1998 M.Watson"
 #, c-format
 msgid "Desk %d"
 msgstr ""
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-#, fuzzy
-msgid "About\t"
-msgstr "Om"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -826,21 +825,24 @@ msgid "%a %b %d"
 msgstr "%a %b %d"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 "%I:%M\n"
 "%p"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -932,19 +934,19 @@ msgstr "Postkontroll meddelar dig när du har nya brev i din brevlåda"
 msgid "Text only"
 msgstr "Bara text"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Skrivaregenskaper"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Skrivarnamn:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Skrivarkommando:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Skrivare"
 
@@ -1007,13 +1009,13 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "Skrivbordsbläddrarapplet"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 #, fuzzy
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Upphovsrätt (C) 1998 the Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "Skrivbordsbläddrarapplet"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1276,6 +1278,11 @@ msgstr ""
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1297,7 +1304,7 @@ msgid "History"
 msgstr "Historik"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Hjälp"
 
@@ -1506,6 +1513,11 @@ msgid "Load Graph"
 msgstr "Graf"
 
 #: applets/multiload/load-graph.c:180
+#, fuzzy
+msgid "Height:"
+msgstr "Hög."
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr ""
 
@@ -1514,15 +1526,10 @@ msgstr ""
 msgid "Width:"
 msgstr "Bredd"
 
-#: applets/multiload/load-graph.c:180
-#, fuzzy
-msgid "Height:"
-msgstr "Hög."
-
 #: applets/multiload/main.c:27
 #, fuzzy
-msgid "User"
-msgstr "Användarbelastning"
+msgid "Idle"
+msgstr "Index"
 
 #: applets/multiload/main.c:27
 #, fuzzy
@@ -1536,8 +1543,16 @@ msgstr "Systembelastning"
 
 #: applets/multiload/main.c:27
 #, fuzzy
-msgid "Idle"
-msgstr "Index"
+msgid "User"
+msgstr "Användarbelastning"
+
+#: applets/multiload/main.c:31
+msgid "Buffers"
+msgstr ""
+
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+msgid "Free"
+msgstr ""
 
 #: applets/multiload/main.c:31
 msgid "Other"
@@ -1547,14 +1562,6 @@ msgstr ""
 #, fuzzy
 msgid "Shared"
 msgstr "Skalad"
-
-#: applets/multiload/main.c:31
-msgid "Buffers"
-msgstr ""
-
-#: applets/multiload/main.c:31 applets/multiload/main.c:35
-msgid "Free"
-msgstr ""
 
 #: applets/multiload/main.c:35
 #, fuzzy
@@ -1785,21 +1792,21 @@ msgstr "Titta"
 msgid " Folder"
 msgstr " Folder "
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Spara"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Återgå"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 #, fuzzy
 msgid "User menus"
 msgstr "Användarmenyer"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 #, fuzzy
 msgid "System menus"
@@ -1855,13 +1862,13 @@ msgstr ""
 
 #: gmenu/main.c:102
 #, fuzzy
-msgid "New Item"
-msgstr "Nytt terminalfönster"
+msgid "Create a new item"
+msgstr "Skapa uppstarts applet"
 
 #: gmenu/main.c:102
 #, fuzzy
-msgid "Create a new item"
-msgstr "Skapa uppstarts applet"
+msgid "New Item"
+msgstr "Nytt terminalfönster"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1872,11 +1879,11 @@ msgid "Delete selected menu item"
 msgstr ""
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
+msgid "Move selected menu up"
 msgstr ""
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move selected menu up"
+msgid "Move up"
 msgstr ""
 
 #: gmenu/main.c:113 gmenu/main.c:143
@@ -2201,13 +2208,13 @@ msgid "Color selector"
 msgstr "Färgväljare"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "Creates a new terminal window"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
 msgid "_New terminal"
 msgstr "Nytt terminalfönster"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "Creates a new terminal window"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1475
 #, fuzzy
@@ -2220,11 +2227,11 @@ msgid "_Close terminal"
 msgstr "Stäng terminalfönster"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
+msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "Toggles whether or not the menubar is displayed."
+msgid "_Show menubar"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1494
@@ -2272,20 +2279,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "FONT"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2238
 msgid "Do not start up shells as login shells"
@@ -2296,45 +2303,45 @@ msgid "Start up shells as login shells"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr ""
 
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr ""
+
 #: gnome-terminal/gnome-terminal.c:2250
 msgid "Execute this program the same way as xterm does"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Förgrundsfärg"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "FÄRG"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Förgrundsfärg"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
 #: gnome-terminal/gnome-terminal.c:2259
+msgid "UTMP"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "Uppdateringsfrekvens"
-
-#: gnome-terminal/gnome-terminal.c:2259
-msgid "UTMP"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2382,47 +2389,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2434,50 +2437,46 @@ msgstr "Avbryt session"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: kunde inte koppla till sessionshanteraren\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr ""
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr "Panel"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 #, fuzzy
 msgid "Session"
 msgstr "Avbryt session"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 #, fuzzy
 msgid "Start Session"
 msgstr "Avbryt sessionen"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr "Panel"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Övergripande egenskaper"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2499,36 +2498,36 @@ msgid "Remove"
 msgstr "Tag bort"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "Fönstrets X-position"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "Fönstrets Y-position"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "Fönstrets X-position"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "Fönstrets bredd"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "Fönstrets Y-position"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "BREDD"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "Fönstrets höjd"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "Fönstrets bredd"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "HÖJD"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "Fönstrets höjd"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2593,21 +2592,21 @@ msgstr "Historik och cache"
 msgid "Paths"
 msgstr "Sökvägar"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Fel: hittar inte fil</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Räkna"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Sista"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Räkna"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2754,31 +2753,31 @@ msgid "Open new browser window"
 msgstr "Öppna nytt fönster"
 
 #: help-browser/window.c:136
+msgid "Add bookmark"
+msgstr "Lägg till bokmärke"
+
+#: help-browser/window.c:136
 #, fuzzy
 msgid "_Add Bookmark"
 msgstr "Lägg till bokmärke"
 
-#: help-browser/window.c:136
-msgid "Add bookmark"
-msgstr "Lägg till bokmärke"
+#: help-browser/window.c:161 help-browser/window.c:202
+msgid "Show History Window"
+msgstr "Visa historikfönstret"
 
 #: help-browser/window.c:161
 #, fuzzy
 msgid "_History"
 msgstr "Historik"
 
-#: help-browser/window.c:161 help-browser/window.c:202
-msgid "Show History Window"
-msgstr "Visa historikfönstret"
+#: help-browser/window.c:166 help-browser/window.c:204
+msgid "Show Bookmarks Window"
+msgstr "Visa bokmärkesfönstret"
 
 #: help-browser/window.c:166
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Bokmärken"
-
-#: help-browser/window.c:166 help-browser/window.c:204
-msgid "Show Bookmarks Window"
-msgstr "Visa bokmärkesfönstret"
 
 #: help-browser/window.c:180
 #, fuzzy
@@ -2831,7 +2830,11 @@ msgstr "Meddelande"
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
+"%s\n"
+"\n"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
 msgstr ""
 
 #: help-browser/window.c:820
@@ -2895,7 +2898,7 @@ msgstr "Applikation"
 msgid "Launcher properties"
 msgstr "Egenskaper för uppstartaren"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Skapa uppstarts applet"
 
@@ -2908,7 +2911,7 @@ msgstr "Logga ut"
 msgid "Log out of GNOME"
 msgstr "Logga ut"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3420,121 +3423,447 @@ msgstr "Kommando (valfri)"
 msgid "Height"
 msgstr "Hög."
 
-#~ msgid "Properties ..."
-#~ msgstr "Egenskaper ..."
+#~ msgid "Height (optional)"
+#~ msgstr "Höjd (valfri)"
 
-#~ msgid "Add new panel"
-#~ msgstr "Lägg till ny panel"
+#~ msgid "[URL]"
+#~ msgstr "[URL]"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Fråga innan utloggning"
+#~ msgid "Programs to invoke at session startup:"
+#~ msgstr "Program att köra vid sessionsstart:"
 
-#, fuzzy
-#~ msgid "Low Battery Warning"
-#~ msgstr "Låg och laddas."
+#~ msgid "[SESSION]"
+#~ msgstr "[SESSION]"
 
-#~ msgid "General Properties"
-#~ msgstr "Övergripande egenskaper"
+#~ msgid "Garrett Smith <gsmith@serv.net>"
+#~ msgstr "Garrett Smith <gsmith@serv.net>"
 
-#~ msgid "Graph Interval:"
-#~ msgstr "Grafintervall:"
+#~ msgid "Start in mailcheck mode"
+#~ msgstr "Starta i postkontrollläge"
 
-#, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "Ingen post."
+#~ msgid "Start in clock mode"
+#~ msgstr "Starta i klockläge"
 
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Kan inte skapa fil: %s\n"
+#~ msgid "Name"
+#~ msgstr "Namn"
 
-#, fuzzy
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "Kan inte skapa fil: %s\n"
+#~ msgid "Can't allocate memory for color\n"
+#~ msgstr "Kan inte allokera minne till färger\n"
 
-#~ msgid "New"
-#~ msgstr "Ny"
-
-#~ msgid "GNOME"
-#~ msgstr "GNOME"
+#~ msgid "John Ellis (gqview@geocities.com)"
+#~ msgstr "John Ellis (gqview@geocities.com)"
 
 #, fuzzy
-#~ msgid "Red Hat menus"
-#~ msgstr "Lägg till huvudmeny"
-
-#~ msgid "Really log out?"
-#~ msgstr "Verkligen logga ut?"
-
-#~ msgid "Ask next time"
-#~ msgstr "Fråga nästa gång"
-
-#~ msgid "Gnome Session Properties"
-#~ msgstr "GNOME sessionsegenskaper"
+#~ msgid "Theme Information"
+#~ msgstr "Filformat"
 
 #, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "Uppstart"
+#~ msgid ""
+#~ "Auto\n"
+#~ "Preview"
+#~ msgstr "Auto-repetering"
 
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "Kan inte öppna /proc/apm; får inte data."
+#, fuzzy
+#~ msgid "Enable sounds for events"
+#~ msgstr "Slå på auto-repetering"
 
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Något är fel på /proc/apm; får inte data."
+#, fuzzy
+#~ msgid "Event"
+#~ msgstr "Rörelse"
 
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "Kan inte öppna /proc/apm; får inte data."
+#, fuzzy
+#~ msgid "XID"
+#~ msgstr "ID"
 
-#~ msgid "There is no battery?!?"
-#~ msgstr "Inget batteri?!?"
+#, fuzzy
+#~ msgid "_Help with GNOME..."
+#~ msgstr "Om..."
 
-#~ msgid "High and charging."
-#~ msgstr "Hög och laddas."
+#, fuzzy
+#~ msgid "Desktop Properties manager."
+#~ msgstr "Skrivbordsbläddrarapplet"
 
-#~ msgid "High."
-#~ msgstr "Hög."
+#, fuzzy
+#~ msgid "Desktop Manager"
+#~ msgstr "Skrivbordsbläddrarapplet"
 
-#~ msgid "Low."
+#, fuzzy
+#~ msgid "Low "
 #~ msgstr "Låg."
 
-#~ msgid "Critical and charging."
-#~ msgstr "Kritisk och laddas."
+#, fuzzy
+#~ msgid "Start After "
+#~ msgstr "Starta i skrivarläge"
 
-#~ msgid "Critical!!"
-#~ msgstr "Kritisk!!"
+#, fuzzy
+#~ msgid "Screen Saver Settings"
+#~ msgstr "Diskanvändnings inställningar"
 
-#~ msgid "Charging."
-#~ msgstr "Laddas."
+#, fuzzy
+#~ msgid "About:"
+#~ msgstr "Om"
 
-#~ msgid "unknown minutes of battery."
-#~ msgstr "okänd batteritid tid kvar."
+#, fuzzy
+#~ msgid "Preview"
+#~ msgstr "Enhet"
 
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "minuter batteritid okända (%d%%)"
+#, fuzzy
+#~ msgid "Test settings"
+#~ msgstr "Animationsvärden"
 
-#~ msgid "%d minutes of battery"
-#~ msgstr "%d minuter batteritid"
+#, fuzzy
+#~ msgid "Repeat Delay"
+#~ msgstr "Väntetid för repetering"
 
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "%d minuter batteritid (%d%%)"
+#~ msgid "Log Out"
+#~ msgstr "Logga ut"
 
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "Mer än 100 000 000 minuter batteritid?!?"
+#~ msgid "South East"
+#~ msgstr "Sydöst"
 
-#~ msgid "APM Stats"
-#~ msgstr "APM-värden"
+#~ msgid "Explicitly Hide"
+#~ msgstr "Göm uttryckligen"
 
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM-drivrutin version:"
+#~ msgid "File"
+#~ msgstr "Arkiv"
 
-#~ msgid "APM BIOS Version:"
-#~ msgstr "APM BIOS version:"
+#~ msgid "Configure"
+#~ msgstr "Inställning"
 
-#~ msgid "Battery Status:"
-#~ msgstr "Batteristatus:"
+#, fuzzy
+#~ msgid "MemLoad Settings"
+#~ msgstr "Inställningar för processorbelastning"
 
-#~ msgid "Refresh Image"
+#, fuzzy
+#~ msgid "Cached Memory"
+#~ msgstr "Storlek på cache"
+
+#, fuzzy
+#~ msgid "Help & About..."
+#~ msgstr "Om..."
+
+#, fuzzy
+#~ msgid "Icon Selection"
+#~ msgstr "Acceleration"
+
+#~ msgid "Info about this program"
+#~ msgstr "Info om detta programmet"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "Om"
+
+#~ msgid "Exit all windows"
+#~ msgstr "Stäng alla fönster"
+
+#, fuzzy
+#~ msgid "E_xit"
+#~ msgstr "Avsluta"
+
+#~ msgid "Close window"
+#~ msgstr "Stäng fönster"
+
+#, fuzzy
+#~ msgid "_Close"
+#~ msgstr "Stäng"
+
+#, fuzzy
+#~ msgid "Preferences"
+#~ msgstr "Spara "
+
+#, fuzzy
+#~ msgid "P_references..."
+#~ msgstr "Spara "
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#, fuzzy
+#~ msgid "_About..."
+#~ msgstr "Om..."
+
+#, fuzzy
+#~ msgid "_Sort Folder"
+#~ msgstr " Folder "
+
+#, fuzzy
+#~ msgid "_Quit"
+#~ msgstr "Avsluta"
+
+#~ msgid "File name:"
+#~ msgstr "Filnamn:"
+
+#, fuzzy
+#~ msgid "Default MDI mode"
+#~ msgstr "Radera"
+
+#~ msgid "Application"
+#~ msgstr "Applikation"
+
+#, fuzzy
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Knappar i dialogrutan"
+
+#~ msgid "Statusbar is interactive when possible"
+#~ msgstr "Statuslisten är inaktiv när det är möjligt"
+
+#, fuzzy
+#~ msgid "Toolbars have text labels"
+#~ msgstr "Verktygslister är löstagbara"
+
+#, fuzzy
+#~ msgid "Toolbars have line separators"
+#~ msgstr "Verktygslister är löstagbara"
+
+#, fuzzy
+#~ msgid "Toolbars have flat look"
+#~ msgstr "Verktygslister är löstagbara"
+
+#~ msgid "Toolbars are detachable"
+#~ msgstr "Verktygslister är löstagbara"
+
+#~ msgid "Menubars are detachable"
+#~ msgstr "Menylister är löstagbara"
+
+#~ msgid "Dialogs"
+#~ msgstr "Dialogrutor"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Platsera dialogrutor över programfönstret när det är möjligt"
+
+#~ msgid "Use statusbar instead of dialog when possible"
+#~ msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
+
+#~ msgid "Dialog hints"
+#~ msgstr "Tips för dialogrutans placering"
+
+#~ msgid "Dialog position"
+#~ msgstr "Dialogrutansposition"
+
+#~ msgid "Dialog buttons"
+#~ msgstr "Knappar i dialogrutan"
+
+#~ msgid "Dialogs are treated specially by window manager"
+#~ msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
+
+#~ msgid "Dialogs are like other windows"
+#~ msgstr "Dialogrutor är som andra fönster"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "Vid musmarkören"
+
+#~ msgid "Center of the screen"
+#~ msgstr "Skärmens mitt"
+
+#~ msgid "Let window manager decide"
+#~ msgstr "Låt fönsterhanteraren bestämma"
+
+#~ msgid "Right-justify buttons"
+#~ msgstr "Högerjustera knappar"
+
+#~ msgid "Left-justify buttons"
+#~ msgstr "Vänsterjustera knappar"
+
+#~ msgid "Put buttons on edges"
+#~ msgstr "Lägg kanppar på kanterna"
+
+#~ msgid "Spread buttons out"
+#~ msgstr "Spridut knappar"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Standard GTK inställningar [FIXAMIG - Bättre beskrivning]"
+
+#~ msgid "Mouse"
+#~ msgstr "Mus"
+
+#~ msgid "Small"
+#~ msgstr "Liten"
+
+#~ msgid "Large"
+#~ msgstr "Stor"
+
+#~ msgid "Slow"
+#~ msgstr "Långsamt"
+
+#~ msgid "Fast"
+#~ msgstr "Fort"
+
+#~ msgid "Acceleration"
+#~ msgstr "Acceleration"
+
+#~ msgid "Mouse motion"
+#~ msgstr "Musrörelse"
+
+#~ msgid "Right handed"
+#~ msgstr "Högerhänt"
+
+#~ msgid "Left handed"
+#~ msgstr "Vänsterhänt"
+
+#~ msgid "Mouse buttons"
+#~ msgstr "Musknappar"
+
+#~ msgid "Keyboard"
+#~ msgstr "Tangentbord"
+
+#~ msgid "Click volume"
+#~ msgstr "Klickvolym"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Klicka vid tangentnedslag"
+
+#~ msgid "Keyboard click"
+#~ msgstr "Tangentbordsklick"
+
+#~ msgid "Repeat delay"
+#~ msgstr "Väntetid för repetering"
+
+#~ msgid "Repeat rate"
+#~ msgstr "Repeteringshastighet"
+
+#~ msgid "Enable auto-repeat"
+#~ msgstr "Slå på auto-repetering"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Auto-repetering"
+
+#~ msgid "Bell"
+#~ msgstr "Inbyggdhögtalare"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "Duration"
+#~ msgstr "Längd"
+
+#~ msgid "Pitch"
+#~ msgstr "Tonläge"
+
+#~ msgid "Volume"
+#~ msgstr "Volym"
+
+#~ msgid "Sound"
+#~ msgstr "Ljud"
+
+#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
+#~ msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
+
+#~ msgid "MODE"
+#~ msgstr "LÄGE"
+
+#~ msgid "Use a gradient fill for the background"
+#~ msgstr "Avänd gradient ifylld bakgrund"
+
+#~ msgid "Use a solid fill for the background"
+#~ msgstr "Använd solid bakgrundsfärg"
+
+#~ msgid "Gradient orientation: vertical or horizontal"
+#~ msgstr "Graderingsriktning: vertikal eller horisontell?"
+
+#~ msgid "ORIENT"
+#~ msgstr "ORIENT"
+
+#~ msgid "Specifies end background color for gradient"
+#~ msgstr "Specificerar bakgrundsfärgen för gradienten"
+
+#~ msgid "Specifies the background color"
+#~ msgstr "Specificerar bakgrundsfärgen"
+
+#~ msgid "Sets the wallpaper to the value specified"
+#~ msgstr "Sätter bakgrunden till det specificerade värdet"
+
+#~ msgid "IMAGE"
+#~ msgstr "IMAGE"
+
+#~ msgid "Tiled"
+#~ msgstr "Sida-vid-sida"
+
+#~ msgid "Centered"
+#~ msgstr "Centrerad"
+
+#~ msgid "Scaled (keep aspect)"
+#~ msgstr "Skalad (behåll höjd/bredd-förhållandet)"
+
+#~ msgid "Scaled"
+#~ msgstr "Skalad"
+
+#~ msgid " Browse... "
+#~ msgstr " Bläddra... "
+
+#~ msgid "Wallpaper"
+#~ msgstr "Bakgrund"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Bakgrundsval"
+
+#~ msgid "Gradient"
+#~ msgstr "Gradient"
+
+#~ msgid "Flat"
+#~ msgstr "Platt"
+
+#~ msgid "Set parameters from saved state and exit"
+#~ msgstr "Sätt parametrar från det lagrade läget och avsluta"
+
+#~ msgid "Gnome Look and Feel Properties"
+#~ msgstr "Egenskaper för GNOMEs utseende och känsla"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Musegenskaper"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Tangentbordsegenskaper"
+
+#~ msgid "Bell Properties"
+#~ msgstr "Högtalaregenskaper"
+
+#~ msgid "Background Properties"
+#~ msgstr "Bakgrundsegenskaper"
+
+#, fuzzy
+#~ msgid "Special Prefixes"
+#~ msgstr "Specialfiler"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#, fuzzy
+#~ msgid "Config"
+#~ msgstr "Inställning"
+
+#~ msgid "Failed to retrieve workspace property."
+#~ msgstr "Misslykades hämta skrivbordsegenskap."
+
+#~ msgid "Copyright (C)1998 M.Watson"
+#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
+
+#, fuzzy
+#~ msgid "Image path:"
+#~ msgstr "Bildfil"
+
+#, fuzzy
+#~ msgid ""
+#~ "unable to create user directory: \n"
+#~ "\t\t\t\t\t    %s\n"
+#~ msgstr "kunde inte skapa användarkatalog: %s\n"
+
+#, fuzzy
+#~ msgid "GTicker Article List"
 #~ msgstr "Återladda bilden"
 
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "The Bus Sign Applet"
+#, fuzzy
+#~ msgid "Refresh Articles"
+#~ msgstr "Återladda bilden"
+
+#, fuzzy
+#~ msgid "1.0pre1"
+#~ msgstr "1.0"
+
+#~ msgid "System Load"
+#~ msgstr "Systembelastning"
+
+#~ msgid "User Load"
+#~ msgstr "Användarbelastning"
 
 #~ msgid ""
 #~ "This applet is a total waste of time. Get back to work!\n"
@@ -3549,444 +3878,125 @@ msgstr "Hög."
 #~ "\n"
 #~ "http://people.netscape.com/mtoy/sign/index.html"
 
-#~ msgid "User Load"
-#~ msgstr "Användarbelastning"
+#~ msgid "The Bus Sign Applet"
+#~ msgstr "The Bus Sign Applet"
 
-#~ msgid "System Load"
-#~ msgstr "Systembelastning"
+#~ msgid "Refresh Image"
+#~ msgstr "Återladda bilden"
+
+#~ msgid "Battery Status:"
+#~ msgstr "Batteristatus:"
+
+#~ msgid "APM BIOS Version:"
+#~ msgstr "APM BIOS version:"
+
+#~ msgid "Linux APM Driver Version:"
+#~ msgstr "Linux APM-drivrutin version:"
+
+#~ msgid "APM Stats"
+#~ msgstr "APM-värden"
+
+#~ msgid "More than 100,000,000 minutes of battery life?!?"
+#~ msgstr "Mer än 100 000 000 minuter batteritid?!?"
+
+#~ msgid "%d minutes of battery (%d%%)"
+#~ msgstr "%d minuter batteritid (%d%%)"
+
+#~ msgid "%d minutes of battery"
+#~ msgstr "%d minuter batteritid"
+
+#~ msgid "unknown minutes of battery (%d%%)"
+#~ msgstr "minuter batteritid okända (%d%%)"
+
+#~ msgid "unknown minutes of battery."
+#~ msgstr "okänd batteritid tid kvar."
+
+#~ msgid "Charging."
+#~ msgstr "Laddas."
+
+#~ msgid "Critical!!"
+#~ msgstr "Kritisk!!"
+
+#~ msgid "Critical and charging."
+#~ msgstr "Kritisk och laddas."
+
+#~ msgid "Low."
+#~ msgstr "Låg."
+
+#~ msgid "High."
+#~ msgstr "Hög."
+
+#~ msgid "High and charging."
+#~ msgstr "Hög och laddas."
+
+#~ msgid "There is no battery?!?"
+#~ msgstr "Inget batteri?!?"
+
+#~ msgid "Can't open /dev/apm; can't get data."
+#~ msgstr "Kan inte öppna /proc/apm; får inte data."
+
+#~ msgid "Something wrong with /proc/apm; can't get data."
+#~ msgstr "Något är fel på /proc/apm; får inte data."
+
+#~ msgid "Can't open /proc/apm; can't get data."
+#~ msgstr "Kan inte öppna /proc/apm; får inte data."
 
 #, fuzzy
-#~ msgid "1.0pre1"
+#~ msgid "Startup Programs"
+#~ msgstr "Uppstart"
+
+#~ msgid "Gnome Session Properties"
+#~ msgstr "GNOME sessionsegenskaper"
+
+#~ msgid "Ask next time"
+#~ msgstr "Fråga nästa gång"
+
+#~ msgid "Really log out?"
+#~ msgstr "Verkligen logga ut?"
+
+#, fuzzy
+#~ msgid "Red Hat menus"
+#~ msgstr "Lägg till huvudmeny"
+
+#~ msgid "GNOME"
+#~ msgstr "GNOME"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#, fuzzy
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr "Kan inte skapa fil: %s\n"
+
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Kan inte skapa fil: %s\n"
+
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "Ingen post."
+
+#~ msgid "Graph Interval:"
+#~ msgstr "Grafintervall:"
+
+#~ msgid "General Properties"
+#~ msgstr "Övergripande egenskaper"
+
+#, fuzzy
+#~ msgid "Low Battery Warning"
+#~ msgstr "Låg och laddas."
+
+#~ msgid "Prompt before logout"
+#~ msgstr "Fråga innan utloggning"
+
+#~ msgid "Add new panel"
+#~ msgstr "Lägg till ny panel"
+
+#~ msgid "Properties ..."
+#~ msgstr "Egenskaper ..."
+
+#~ msgid "1.0"
 #~ msgstr "1.0"
 
 #, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Återladda bilden"
-
-#, fuzzy
-#~ msgid "GTicker Article List"
-#~ msgstr "Återladda bilden"
-
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "kunde inte skapa användarkatalog: %s\n"
-
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Bildfil"
-
-#~ msgid "Copyright (C)1998 M.Watson"
-#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
-
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "Misslykades hämta skrivbordsegenskap."
-
-#, fuzzy
-#~ msgid "Config"
-#~ msgstr "Inställning"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Special Prefixes"
-#~ msgstr "Specialfiler"
-
-#~ msgid "Background Properties"
-#~ msgstr "Bakgrundsegenskaper"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Högtalaregenskaper"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Tangentbordsegenskaper"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Musegenskaper"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Egenskaper för GNOMEs utseende och känsla"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Sätt parametrar från det lagrade läget och avsluta"
-
-#~ msgid "Flat"
-#~ msgstr "Platt"
-
-#~ msgid "Gradient"
-#~ msgstr "Gradient"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Bakgrundsval"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Bakgrund"
-
-#~ msgid " Browse... "
-#~ msgstr " Bläddra... "
-
-#~ msgid "Scaled"
-#~ msgstr "Skalad"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Skalad (behåll höjd/bredd-förhållandet)"
-
-#~ msgid "Centered"
-#~ msgstr "Centrerad"
-
-#~ msgid "Tiled"
-#~ msgstr "Sida-vid-sida"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMAGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Sätter bakgrunden till det specificerade värdet"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Specificerar bakgrundsfärgen"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Specificerar bakgrundsfärgen för gradienten"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENT"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Graderingsriktning: vertikal eller horisontell?"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Använd solid bakgrundsfärg"
-
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Avänd gradient ifylld bakgrund"
-
-#~ msgid "MODE"
-#~ msgstr "LÄGE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
-
-#~ msgid "Sound"
-#~ msgstr "Ljud"
-
-#~ msgid "Volume"
-#~ msgstr "Volym"
-
-#~ msgid "Pitch"
-#~ msgstr "Tonläge"
-
-#~ msgid "Duration"
-#~ msgstr "Längd"
-
-#~ msgid "Test"
-#~ msgstr "Test"
-
-#~ msgid "Bell"
-#~ msgstr "Inbyggdhögtalare"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-repetering"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Slå på auto-repetering"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Repeteringshastighet"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Väntetid för repetering"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Tangentbordsklick"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klicka vid tangentnedslag"
-
-#~ msgid "Click volume"
-#~ msgstr "Klickvolym"
-
-#~ msgid "Keyboard"
-#~ msgstr "Tangentbord"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Musknappar"
-
-#~ msgid "Left handed"
-#~ msgstr "Vänsterhänt"
-
-#~ msgid "Right handed"
-#~ msgstr "Högerhänt"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Musrörelse"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleration"
-
-#~ msgid "Fast"
-#~ msgstr "Fort"
-
-#~ msgid "Slow"
-#~ msgstr "Långsamt"
-
-#~ msgid "Large"
-#~ msgstr "Stor"
-
-#~ msgid "Small"
-#~ msgstr "Liten"
-
-#~ msgid "Mouse"
-#~ msgstr "Mus"
-
-#~ msgid "Default Gtk setting [FIXME - Describe this better]"
-#~ msgstr "Standard GTK inställningar [FIXAMIG - Bättre beskrivning]"
-
-#~ msgid "Spread buttons out"
-#~ msgstr "Spridut knappar"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Lägg kanppar på kanterna"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Vänsterjustera knappar"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Högerjustera knappar"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "Låt fönsterhanteraren bestämma"
-
-#~ msgid "Center of the screen"
-#~ msgstr "Skärmens mitt"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Vid musmarkören"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Dialogrutor är som andra fönster"
-
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Knappar i dialogrutan"
-
-#~ msgid "Dialog position"
-#~ msgstr "Dialogrutansposition"
-
-#~ msgid "Dialog hints"
-#~ msgstr "Tips för dialogrutans placering"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Platsera dialogrutor över programfönstret när det är möjligt"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialogrutor"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Menylister är löstagbara"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have flat look"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have line separators"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Verktygslister är löstagbara"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "Statuslisten är inaktiv när det är möjligt"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Knappar i dialogrutan"
-
-#~ msgid "Application"
-#~ msgstr "Applikation"
-
-#, fuzzy
-#~ msgid "Default MDI mode"
-#~ msgstr "Radera"
-
-#~ msgid "File name:"
-#~ msgstr "Filnamn:"
-
-#, fuzzy
-#~ msgid "_Quit"
-#~ msgstr "Avsluta"
-
-#, fuzzy
-#~ msgid "_Sort Folder"
-#~ msgstr " Folder "
-
-#, fuzzy
-#~ msgid "_About..."
-#~ msgstr "Om..."
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "Spara "
-
-#, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "Spara "
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Stäng"
-
-#~ msgid "Close window"
-#~ msgstr "Stäng fönster"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Avsluta"
-
-#~ msgid "Exit all windows"
-#~ msgstr "Stäng alla fönster"
-
-#, fuzzy
-#~ msgid "_About"
+#~ msgid "About\t"
 #~ msgstr "Om"
-
-#~ msgid "Info about this program"
-#~ msgstr "Info om detta programmet"
-
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Acceleration"
-
-#, fuzzy
-#~ msgid "Help & About..."
-#~ msgstr "Om..."
-
-#, fuzzy
-#~ msgid "Cached Memory"
-#~ msgstr "Storlek på cache"
-
-#, fuzzy
-#~ msgid "MemLoad Settings"
-#~ msgstr "Inställningar för processorbelastning"
-
-#~ msgid "Configure"
-#~ msgstr "Inställning"
-
-#~ msgid "File"
-#~ msgstr "Arkiv"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Göm uttryckligen"
-
-#~ msgid "South East"
-#~ msgstr "Sydöst"
-
-#~ msgid "Log Out"
-#~ msgstr "Logga ut"
-
-#, fuzzy
-#~ msgid "Repeat Delay"
-#~ msgstr "Väntetid för repetering"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "Preview"
-#~ msgstr "Enhet"
-
-#, fuzzy
-#~ msgid "About:"
-#~ msgstr "Om"
-
-#, fuzzy
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Diskanvändnings inställningar"
-
-#, fuzzy
-#~ msgid "Start After "
-#~ msgstr "Starta i skrivarläge"
-
-#, fuzzy
-#~ msgid "Low "
-#~ msgstr "Låg."
-
-#, fuzzy
-#~ msgid "Desktop Manager"
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "_Help with GNOME..."
-#~ msgstr "Om..."
-
-#, fuzzy
-#~ msgid "XID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "Rörelse"
-
-#, fuzzy
-#~ msgid "Enable sounds for events"
-#~ msgstr "Slå på auto-repetering"
-
-#, fuzzy
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr "Auto-repetering"
-
-#, fuzzy
-#~ msgid "Theme Information"
-#~ msgstr "Filformat"
-
-#~ msgid "John Ellis (gqview@geocities.com)"
-#~ msgstr "John Ellis (gqview@geocities.com)"
-
-#~ msgid "Can't allocate memory for color\n"
-#~ msgstr "Kan inte allokera minne till färger\n"
-
-#~ msgid "Name"
-#~ msgstr "Namn"
-
-#~ msgid "Start in clock mode"
-#~ msgstr "Starta i klockläge"
-
-#~ msgid "Start in mailcheck mode"
-#~ msgstr "Starta i postkontrollläge"
-
-#~ msgid "Garrett Smith <gsmith@serv.net>"
-#~ msgstr "Garrett Smith <gsmith@serv.net>"
-
-#~ msgid "[SESSION]"
-#~ msgstr "[SESSION]"
-
-#~ msgid "Programs to invoke at session startup:"
-#~ msgstr "Program att köra vid sessionsstart:"
-
-#~ msgid "[URL]"
-#~ msgstr "[URL]"
-
-#~ msgid "Height (optional)"
-#~ msgstr "Höjd (valfri)"

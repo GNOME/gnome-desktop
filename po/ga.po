@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1998-05-07 11:00+0100\n"
 "Last-Translator:Alastair McKinstry <alastair@ilo.dec.com>\n"
 "Language-Team: Alastair McKinstry <alastair@ilo.dec.com>\n"
@@ -160,10 +160,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -176,13 +176,14 @@ msgstr "Abaltachtam go liir..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr ""
 
@@ -262,7 +263,7 @@ msgstr ""
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr ""
@@ -393,16 +394,24 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Nml oscailt ar fail \"proc/apm\"; Nml sonrai ar fail."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr ""
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr ""
+
+#: applets/battery/read-battery.c:211
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr ""
+
+#: applets/battery/read-battery.c:215
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr ""
 
 #: applets/cdplayer/cdplayer.c:345
@@ -411,10 +420,6 @@ msgstr ""
 
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
-msgstr ""
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
 msgstr ""
 
 #: applets/charpick/charpick.c:316
@@ -583,32 +588,32 @@ msgstr ""
 #: applets/drivemount/drivemount.c:81
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
 msgstr ""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Dian"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 #, fuzzy
 msgid "Browse..."
 msgstr " Dearcadh.."
@@ -650,11 +655,11 @@ msgid "Use automount friendly status test"
 msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
+msgid "Copyright (C)1998 Red Hat Software"
 msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Copyright (C)1998 Red Hat Software"
+msgid "Esound MAnager Applet"
 msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:32
@@ -667,10 +672,6 @@ msgstr ""
 
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
-msgstr ""
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
 msgstr ""
 
 #: applets/fifteen/fifteen.c:268
@@ -691,55 +692,55 @@ msgstr ""
 msgid "Scramble pieces"
 msgstr ""
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr ""
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr ""
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "Albaltachtam Luch"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr ""
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr ""
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr " Dearcadh.."
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr ""
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr ""
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr ""
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr ""
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr ""
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -758,10 +759,6 @@ msgstr ""
 #: applets/fvwm-pager/fvwm-pager.c:317
 #, c-format
 msgid "Desk %d"
-msgstr ""
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
 msgstr ""
 
 #: applets/fvwm-pager/fvwm-pager.c:412
@@ -806,18 +803,18 @@ msgstr ""
 
 #: applets/gen_util/clock.c:154
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+msgid "%l:%M %p"
 msgstr ""
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+msgid "%k:%M"
 msgstr ""
 
 #: applets/gen_util/clock.c:405
@@ -906,19 +903,19 @@ msgstr ""
 msgid "Text only"
 msgstr ""
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Cumas seoltsra"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr ""
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr ""
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr ""
 
@@ -978,11 +975,11 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
+msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
+msgid "Desktop Pager Applet"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:135
@@ -1231,6 +1228,11 @@ msgstr ""
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr ""
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1252,7 +1254,7 @@ msgid "History"
 msgstr ""
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Cznamh"
 
@@ -1452,6 +1454,11 @@ msgid "Load Graph"
 msgstr ""
 
 #: applets/multiload/load-graph.c:180
+#, fuzzy
+msgid "Height:"
+msgstr "Ard."
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr ""
 
@@ -1460,13 +1467,8 @@ msgstr ""
 msgid "Width:"
 msgstr "Fan"
 
-#: applets/multiload/load-graph.c:180
-#, fuzzy
-msgid "Height:"
-msgstr "Ard."
-
 #: applets/multiload/main.c:27
-msgid "User"
+msgid "Idle"
 msgstr ""
 
 #: applets/multiload/main.c:27
@@ -1480,15 +1482,7 @@ msgid "System"
 msgstr "Claireanna"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr ""
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr ""
-
-#: applets/multiload/main.c:31
-msgid "Shared"
+msgid "User"
 msgstr ""
 
 #: applets/multiload/main.c:31
@@ -1497,6 +1491,14 @@ msgstr ""
 
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
+msgstr ""
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr ""
+
+#: applets/multiload/main.c:31
+msgid "Shared"
 msgstr ""
 
 #: applets/multiload/main.c:35
@@ -1724,23 +1726,23 @@ msgstr ""
 msgid " Folder"
 msgstr " Msd "
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr ""
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr ""
 
 # FIXME Check
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 #, fuzzy
 msgid "User menus"
 msgstr "Claireanna"
 
 # FIXME Check
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 #, fuzzy
 msgid "System menus"
@@ -1794,13 +1796,13 @@ msgid "New Submenu"
 msgstr ""
 
 #: gmenu/main.c:102
+msgid "Create a new item"
+msgstr ""
+
+#: gmenu/main.c:102
 #, fuzzy
 msgid "New Item"
 msgstr "Triall ina bhfuinneog fiin"
-
-#: gmenu/main.c:102
-msgid "Create a new item"
-msgstr ""
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1811,11 +1813,11 @@ msgid "Delete selected menu item"
 msgstr ""
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
+msgid "Move selected menu up"
 msgstr ""
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move selected menu up"
+msgid "Move up"
 msgstr ""
 
 #: gmenu/main.c:113 gmenu/main.c:143
@@ -2136,13 +2138,13 @@ msgid "Color selector"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "Creates a new terminal window"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
 msgid "_New terminal"
 msgstr "Triall ina bhfuinneog fiin"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "Creates a new terminal window"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2154,11 +2156,11 @@ msgid "_Close terminal"
 msgstr "Triall ina bhfuinneog fiin"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
+msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "Toggles whether or not the menubar is displayed."
+msgid "_Show menubar"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1494
@@ -2205,19 +2207,19 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2238
@@ -2229,31 +2231,31 @@ msgid "Start up shells as login shells"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr ""
 
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr ""
+
 #: gnome-terminal/gnome-terminal.c:2250
 msgid "Execute this program the same way as xterm does"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr ""
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
@@ -2261,11 +2263,11 @@ msgid "Background color"
 msgstr " Czlra "
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
+msgid "UTMP"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "UTMP"
+msgid "Update utmp entry"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2262
@@ -2313,47 +2315,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2365,48 +2363,44 @@ msgstr ""
 msgid "save-session: couldn't connect to session manager\n"
 msgstr ""
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr ""
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr "Painial"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr ""
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr ""
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr "Painial"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Albaltachtam Luch"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2428,35 +2422,35 @@ msgid "Remove"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr ""
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr ""
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr ""
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr ""
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
+msgstr ""
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:125
@@ -2521,21 +2515,21 @@ msgstr ""
 msgid "Paths"
 msgstr ""
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr ""
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr ""
+msgid "Count"
+msgstr "Tuairim"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Gluaisigh"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Tuairim"
+msgid "URL"
+msgstr ""
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2678,27 +2672,27 @@ msgid "Open new browser window"
 msgstr ""
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr ""
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr ""
 
-#: help-browser/window.c:161
-msgid "_History"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
 msgstr ""
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr ""
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
+#: help-browser/window.c:161
+msgid "_History"
 msgstr ""
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
+msgstr ""
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
 msgstr ""
 
 #: help-browser/window.c:180
@@ -2751,7 +2745,11 @@ msgstr "Fograiocht."
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
+"%s\n"
+"\n"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
 msgstr ""
 
 #: help-browser/window.c:820
@@ -2815,7 +2813,7 @@ msgstr "Uirlis"
 msgid "Launcher properties"
 msgstr "Cumas seoltsra"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr ""
 
@@ -2828,7 +2826,7 @@ msgstr "Ealu as"
 msgid "Log out of GNOME"
 msgstr "Ealu as"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3326,289 +3324,12 @@ msgstr ""
 msgid "Height"
 msgstr "Ard."
 
-#~ msgid "Properties ..."
-#~ msgstr "Abaltachtam go liir..."
-
-#~ msgid "Add new panel"
-#~ msgstr "Cuir le Painial"
+#~ msgid "Name"
+#~ msgstr "Ainm"
 
 #, fuzzy
-#~ msgid "Low Battery Warning"
-#~ msgstr "Lag agus ag luchtu."
-
-#~ msgid "General Properties"
-#~ msgstr "Albaltachtam Luch"
-
-#, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "Nml rmomhphost agat."
-
-#, fuzzy
-#~ msgid "Red Hat menus"
-#~ msgstr "Cuir le Prmomhchlair"
-
-#~ msgid "Gnome Session Properties"
-#~ msgstr "Albaltachtam Luch"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "Nml oscailt ar fail \"proc/apm\"; Nml sonrai ar fail."
-
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Rud eigin  cearr le \"proc/apm\"; Nml sonram ar fail."
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "Nml oscailt ar fail \"proc/apm\"; Nml sonrai ar fail."
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "Nach bhfuil batairm  ann."
-
-#~ msgid "High and charging."
-#~ msgstr "Ard agus ag luchtu."
-
-#~ msgid "High."
-#~ msgstr "Ard."
-
-#~ msgid "Low."
-#~ msgstr "Lag."
-
-#~ msgid "Critical and charging."
-#~ msgstr "Fmor-lag agus ag luchtu."
-
-#~ msgid "Critical!!"
-#~ msgstr "Rm-lag!"
-
-#~ msgid "Charging."
-#~ msgstr "Ag Luchtz."
-
-#~ msgid "unknown minutes of battery."
-#~ msgstr "%d noimead batairm"
-
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "%d noimead batairm"
-
-#~ msgid "%d minutes of battery"
-#~ msgstr "%d noimead batairm"
-
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "%d noimead batairm"
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "Nmos mo na 100,000,000 noimead beatha fagtha?!?"
-
-#~ msgid "APM Stats"
-#~ msgstr "APM Sonram"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM Leagan Tionanam:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "Leagan BIOS APM:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Staid batairm:"
-
-#, fuzzy
-#~ msgid "Refresh Image"
-#~ msgstr "Ingearach"
-
-# FIXME Check
-#, fuzzy
-#~ msgid "System Load"
-#~ msgstr "Claireanna"
-
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Ingearach"
-
-#, fuzzy
-#~ msgid "GTicker Article List"
-#~ msgstr "Ingearach"
-
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Msr"
-
-#~ msgid "Background Properties"
-#~ msgstr "Albaltachtam Czlra"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Albaltachtam Luch"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Albaltachtam Miarchlar"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Albaltachtam Luch"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Albaltachtam Miarchlar"
-
-#~ msgid "Flat"
-#~ msgstr "Cothrom"
-
-#~ msgid "Gradient"
-#~ msgstr "Gradan"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Rogha Paipiar balla"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Paipiar balla"
-
-#~ msgid " Browse... "
-#~ msgstr " Dearcadh.."
-
-#~ msgid "Centered"
-#~ msgstr "Sa Lar"
-
-#, fuzzy
-#~ msgid "Specifies the background color"
-#~ msgstr " Czlra "
-
-#, fuzzy
-#~ msgid "Sound"
-#~ msgstr "Tuairim"
-
-#, fuzzy
-#~ msgid "Pitch"
-#~ msgstr "Fan"
-
-#~ msgid "Duration"
-#~ msgstr "Caipiis"
-
-#~ msgid "Test"
-#~ msgstr "Triail"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Uath-atriall"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Uath-atriall"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Rata atriallach"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Moill atriallach"
-
-#~ msgid "Keyboard click"
-#~ msgstr " Miarchlar "
-
-#~ msgid "Click on keypress"
-#~ msgstr "Cniog ar eochair"
-
-#~ msgid "Click volume"
-#~ msgstr "Laine Cnioga"
-
-#~ msgid "Keyboard"
-#~ msgstr " Miarchlar "
-
-#, fuzzy
-#~ msgid "Mouse buttons"
-#~ msgstr "Gluaiseacht"
-
-#~ msgid "Right handed"
-#~ msgstr "Deasach"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Gluaiseacht"
-
-#~ msgid "Acceleration"
-#~ msgstr "Brostz"
-
-#~ msgid "Fast"
-#~ msgstr "Gluaisigh"
-
-#~ msgid "Slow"
-#~ msgstr "Mallaigh"
-
-#~ msgid "Large"
-#~ msgstr "Msr"
-
-#~ msgid "Small"
-#~ msgstr "Beag"
-
-#~ msgid "Mouse"
-#~ msgstr "Luch"
-
-#, fuzzy
-#~ msgid "Dialog buttons"
+#~ msgid "Theme Information"
 #~ msgstr "Tsg iomha"
-
-#~ msgid "Dialog position"
-#~ msgstr "Position"
-
-#, fuzzy
-#~ msgid "Dialog hints"
-#~ msgstr "Position"
-
-#, fuzzy
-#~ msgid "Dialogs"
-#~ msgstr "Position"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Position"
-
-#~ msgid "Application"
-#~ msgstr "Fograiocht."
-
-#, fuzzy
-#~ msgid "_Sort Folder"
-#~ msgstr " Msd "
-
-#~ msgid "Terminal"
-#~ msgstr "Ingearach"
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "Abaltachtam go liir..."
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Dzn"
-
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Brostz"
-
-#, fuzzy
-#~ msgid "MemLoad Settings"
-#~ msgstr "Cur Szil"
-
-#~ msgid "File"
-#~ msgstr "Leacaithe"
-
-#~ msgid "Log Out"
-#~ msgstr "Ealu as"
-
-#, fuzzy
-#~ msgid "Repeat Delay"
-#~ msgstr "Moill atriallach"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Cur Szil"
-
-#, fuzzy
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Cur Szil"
-
-#, fuzzy
-#~ msgid "Low "
-#~ msgstr "Lag."
-
-#, fuzzy
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Cumas seoltsra"
-
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "Tuairim"
-
-#, fuzzy
-#~ msgid "Enable sounds for events"
-#~ msgstr "Uath-atriall"
 
 #, fuzzy
 #~ msgid ""
@@ -3617,8 +3338,285 @@ msgstr "Ard."
 #~ msgstr "Uath-atriall"
 
 #, fuzzy
-#~ msgid "Theme Information"
+#~ msgid "Enable sounds for events"
+#~ msgstr "Uath-atriall"
+
+#, fuzzy
+#~ msgid "Event"
+#~ msgstr "Tuairim"
+
+#, fuzzy
+#~ msgid "Desktop Properties manager."
+#~ msgstr "Cumas seoltsra"
+
+#, fuzzy
+#~ msgid "Low "
+#~ msgstr "Lag."
+
+#, fuzzy
+#~ msgid "Screen Saver Settings"
+#~ msgstr "Cur Szil"
+
+#, fuzzy
+#~ msgid "Test settings"
+#~ msgstr "Cur Szil"
+
+#, fuzzy
+#~ msgid "Repeat Delay"
+#~ msgstr "Moill atriallach"
+
+#~ msgid "Log Out"
+#~ msgstr "Ealu as"
+
+#~ msgid "File"
+#~ msgstr "Leacaithe"
+
+#, fuzzy
+#~ msgid "MemLoad Settings"
+#~ msgstr "Cur Szil"
+
+#, fuzzy
+#~ msgid "Icon Selection"
+#~ msgstr "Brostz"
+
+#, fuzzy
+#~ msgid "_Close"
+#~ msgstr "Dzn"
+
+#, fuzzy
+#~ msgid "P_references..."
+#~ msgstr "Abaltachtam go liir..."
+
+#~ msgid "Terminal"
+#~ msgstr "Ingearach"
+
+#, fuzzy
+#~ msgid "_Sort Folder"
+#~ msgstr " Msd "
+
+#~ msgid "Application"
+#~ msgstr "Fograiocht."
+
+#, fuzzy
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "Dialogs"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "Dialog hints"
+#~ msgstr "Position"
+
+#~ msgid "Dialog position"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "Dialog buttons"
 #~ msgstr "Tsg iomha"
 
-#~ msgid "Name"
-#~ msgstr "Ainm"
+#~ msgid "Mouse"
+#~ msgstr "Luch"
+
+#~ msgid "Small"
+#~ msgstr "Beag"
+
+#~ msgid "Large"
+#~ msgstr "Msr"
+
+#~ msgid "Slow"
+#~ msgstr "Mallaigh"
+
+#~ msgid "Fast"
+#~ msgstr "Gluaisigh"
+
+#~ msgid "Acceleration"
+#~ msgstr "Brostz"
+
+#~ msgid "Mouse motion"
+#~ msgstr "Gluaiseacht"
+
+#~ msgid "Right handed"
+#~ msgstr "Deasach"
+
+#, fuzzy
+#~ msgid "Mouse buttons"
+#~ msgstr "Gluaiseacht"
+
+#~ msgid "Keyboard"
+#~ msgstr " Miarchlar "
+
+#~ msgid "Click volume"
+#~ msgstr "Laine Cnioga"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Cniog ar eochair"
+
+#~ msgid "Keyboard click"
+#~ msgstr " Miarchlar "
+
+#~ msgid "Repeat delay"
+#~ msgstr "Moill atriallach"
+
+#~ msgid "Repeat rate"
+#~ msgstr "Rata atriallach"
+
+#~ msgid "Enable auto-repeat"
+#~ msgstr "Uath-atriall"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Uath-atriall"
+
+#~ msgid "Test"
+#~ msgstr "Triail"
+
+#~ msgid "Duration"
+#~ msgstr "Caipiis"
+
+#, fuzzy
+#~ msgid "Pitch"
+#~ msgstr "Fan"
+
+#, fuzzy
+#~ msgid "Sound"
+#~ msgstr "Tuairim"
+
+#, fuzzy
+#~ msgid "Specifies the background color"
+#~ msgstr " Czlra "
+
+#~ msgid "Centered"
+#~ msgstr "Sa Lar"
+
+#~ msgid " Browse... "
+#~ msgstr " Dearcadh.."
+
+#~ msgid "Wallpaper"
+#~ msgstr "Paipiar balla"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Rogha Paipiar balla"
+
+#~ msgid "Gradient"
+#~ msgstr "Gradan"
+
+#~ msgid "Flat"
+#~ msgstr "Cothrom"
+
+#~ msgid "Gnome Look and Feel Properties"
+#~ msgstr "Albaltachtam Miarchlar"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Albaltachtam Luch"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Albaltachtam Miarchlar"
+
+#~ msgid "Bell Properties"
+#~ msgstr "Albaltachtam Luch"
+
+#~ msgid "Background Properties"
+#~ msgstr "Albaltachtam Czlra"
+
+#, fuzzy
+#~ msgid "Image path:"
+#~ msgstr "Msr"
+
+#, fuzzy
+#~ msgid "GTicker Article List"
+#~ msgstr "Ingearach"
+
+#, fuzzy
+#~ msgid "Refresh Articles"
+#~ msgstr "Ingearach"
+
+# FIXME Check
+#, fuzzy
+#~ msgid "System Load"
+#~ msgstr "Claireanna"
+
+#, fuzzy
+#~ msgid "Refresh Image"
+#~ msgstr "Ingearach"
+
+#~ msgid "Battery Status:"
+#~ msgstr "Staid batairm:"
+
+#~ msgid "APM BIOS Version:"
+#~ msgstr "Leagan BIOS APM:"
+
+#~ msgid "Linux APM Driver Version:"
+#~ msgstr "Linux APM Leagan Tionanam:"
+
+#~ msgid "APM Stats"
+#~ msgstr "APM Sonram"
+
+#~ msgid "More than 100,000,000 minutes of battery life?!?"
+#~ msgstr "Nmos mo na 100,000,000 noimead beatha fagtha?!?"
+
+#~ msgid "%d minutes of battery (%d%%)"
+#~ msgstr "%d noimead batairm"
+
+#~ msgid "%d minutes of battery"
+#~ msgstr "%d noimead batairm"
+
+#~ msgid "unknown minutes of battery (%d%%)"
+#~ msgstr "%d noimead batairm"
+
+#~ msgid "unknown minutes of battery."
+#~ msgstr "%d noimead batairm"
+
+#~ msgid "Charging."
+#~ msgstr "Ag Luchtz."
+
+#~ msgid "Critical!!"
+#~ msgstr "Rm-lag!"
+
+#~ msgid "Critical and charging."
+#~ msgstr "Fmor-lag agus ag luchtu."
+
+#~ msgid "Low."
+#~ msgstr "Lag."
+
+#~ msgid "High."
+#~ msgstr "Ard."
+
+#~ msgid "High and charging."
+#~ msgstr "Ard agus ag luchtu."
+
+#~ msgid "There is no battery?!?"
+#~ msgstr "Nach bhfuil batairm  ann."
+
+#~ msgid "Can't open /dev/apm; can't get data."
+#~ msgstr "Nml oscailt ar fail \"proc/apm\"; Nml sonrai ar fail."
+
+#~ msgid "Something wrong with /proc/apm; can't get data."
+#~ msgstr "Rud eigin  cearr le \"proc/apm\"; Nml sonram ar fail."
+
+#~ msgid "Can't open /proc/apm; can't get data."
+#~ msgstr "Nml oscailt ar fail \"proc/apm\"; Nml sonrai ar fail."
+
+#~ msgid "Gnome Session Properties"
+#~ msgstr "Albaltachtam Luch"
+
+#, fuzzy
+#~ msgid "Red Hat menus"
+#~ msgstr "Cuir le Prmomhchlair"
+
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "Nml rmomhphost agat."
+
+#~ msgid "General Properties"
+#~ msgstr "Albaltachtam Luch"
+
+#, fuzzy
+#~ msgid "Low Battery Warning"
+#~ msgstr "Lag agus ag luchtu."
+
+#~ msgid "Add new panel"
+#~ msgstr "Cuir le Painial"
+
+#~ msgid "Properties ..."
+#~ msgstr "Abaltachtam go liir..."

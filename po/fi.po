@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-04-05 01:13+0300\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -161,10 +161,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -177,13 +177,14 @@ msgstr "Asetukset..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Tietoja..."
 
@@ -261,7 +262,7 @@ msgstr "Virhe: virheellinen tila 'battery_set_mode':ssa"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Sovelmaa ei voitu luoda!\n"
@@ -390,16 +391,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr "Ei voitu suorittaa dup()-operaatiota APM-tiedostokuvaajalle: %s\n"
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Tiedostoa /dev/apm ei voitu avata; tietoja ei saatu."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "ioctl-kutsu laitteelle /dev/apm epäonnistui"
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM on poissa päältä! Akun tietoja ei voida lukea."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM on poissa päältä! Akun tietoja ei voida lukea."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM on poissa päältä! Akun tietoja ei voida lukea."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -409,10 +420,6 @@ msgstr "Aja gtcd..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "Kirjaimenvalitsin"
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
-msgstr ""
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -587,26 +594,27 @@ msgid "Drive Mount Applet"
 msgstr "Levynliitossovelma"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "Julkaistu GNU GPL -lisenssillä.\n"
 "Liittää ja irroittaa tiedostojärjestelmiä."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " liitetty"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " irti"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" ilmoitti:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -614,11 +622,11 @@ msgstr ""
 "Liittämiskomento epäonnistui.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Levy ulos"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "Selaa... "
 
@@ -659,12 +667,12 @@ msgid "Use automount friendly status test"
 msgstr "Käytä automount-yhteensopivaa tilankokeilua"
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Esound-hallintasovelma"
-
-#: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr "Esound-hallintasovelma"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -677,10 +685,6 @@ msgstr "Voitit!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Viisitoista liukuvaa palasta"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr ""
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -703,56 +707,56 @@ msgid "Scramble pieces"
 msgstr "Sotke palat"
 
 # , c-format
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "%s-kala"
 
 # , c-format
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "%s, GNOME-kala sanoo:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "GNOME-kalan asetukset"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "GNOME-kalasi nimi:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "Animaatiotiedosto:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Selaa"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "Animaation ruutuja:"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Odotus ruutua kohti (s):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Kala"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(hiukan apua Georgelta)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "GNOME-kalasovelma"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -777,10 +781,6 @@ msgstr ""
 #, c-format
 msgid "Desk %d"
 msgstr "Työpöytä %d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "Tietoja\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -823,18 +823,18 @@ msgstr ""
 
 #: applets/gen_util/clock.c:154
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+msgid "%l:%M %p"
 msgstr ""
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+msgid "%k:%M"
 msgstr ""
 
 #: applets/gen_util/clock.c:405
@@ -923,19 +923,19 @@ msgstr ""
 msgid "Text only"
 msgstr "Pelkkä teksti"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Tulostimen asetukset"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Tulostimen nimi:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Tulostuskomento:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Tulostin"
 
@@ -996,12 +996,12 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "Työpöydänvaihtosovelma"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "Työpöydänvaihtosovelma"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1252,6 +1252,11 @@ msgstr "lapsi poistui"
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr ""
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1271,7 +1276,7 @@ msgid "History"
 msgstr "Historia"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Ohje"
 
@@ -1479,6 +1484,10 @@ msgid "Load Graph"
 msgstr "CPU-kuorma"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "Korkeus:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "Nopeus:"
 
@@ -1486,13 +1495,9 @@ msgstr "Nopeus:"
 msgid "Width:"
 msgstr "Leveys:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "Korkeus:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "Käyttäjät"
+msgid "Idle"
+msgstr "Vapaa"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1503,16 +1508,8 @@ msgid "System"
 msgstr "Järjestelmä"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr "Vapaa"
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr "Muu"
-
-#: applets/multiload/main.c:31
-msgid "Shared"
-msgstr "Jaettu"
+msgid "User"
+msgstr "Käyttäjät"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1521,6 +1518,14 @@ msgstr "Puskurit"
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
 msgstr "Vapaana"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr "Muu"
+
+#: applets/multiload/main.c:31
+msgid "Shared"
+msgstr "Jaettu"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1750,20 +1755,20 @@ msgstr "Ulkoasu"
 msgid " Folder"
 msgstr ""
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Tallenna"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Palauta"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "Käyttäjävalikot"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "Järjestelmävalikot"
@@ -1813,12 +1818,12 @@ msgid "New Submenu"
 msgstr "Uusi kansio"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr "Uusi kohta"
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "Luo uusi kohta"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "Uusi kohta"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1829,12 +1834,12 @@ msgid "Delete selected menu item"
 msgstr "Poista valittu valikon kohta"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Siirrä ylös"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Siirrä valittua kohtaa ylös"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Siirrä ylös"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2151,12 +2156,12 @@ msgid "Color selector"
 msgstr "Värivalitsin"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "_New terminal"
-msgstr "_Uusi pääte"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "Luo uuden pääteikkunan"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "_New terminal"
+msgstr "_Uusi pääte"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2167,12 +2172,12 @@ msgid "_Close terminal"
 msgstr "_Sulje pääteikkuna"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "_Näytä valikkopalkki"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "_Näytä valikkopalkki"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2217,20 +2222,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
+msgid "TCLASS"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2232
 msgid "Terminal class name"
 msgstr "Pääteluokan nimi"
 
-#: gnome-terminal/gnome-terminal.c:2232
-msgid "TCLASS"
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "FONT"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "Specifies font name"
 msgstr "Määrittelee kirjasinlajin nimen"
-
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "FONT"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2243,45 +2248,45 @@ msgid "Start up shells as login shells"
 msgstr "Käynnistä komentotulkit sisäänkirjoittautumistason tulkkeina"
 
 #: gnome-terminal/gnome-terminal.c:2244
+msgid "GEOMETRY"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2244
 msgid "Specifies the geometry for the main window"
 msgstr "Määrittelee pääikkunan sijainnin ja koon"
 
-#: gnome-terminal/gnome-terminal.c:2244
-msgid "GEOMETRY"
+#: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
+msgid "COMMAND"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2247
 msgid "Execute this program instead of a shell"
 msgstr "Suorita tämä ohjelma komentotulkin sijaan"
 
-#: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
-msgid "COMMAND"
-msgstr ""
-
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "Suorita tämä ohjelma komentotulkin sijaan"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Tekstin väri"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Tekstin väri"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Taustan väri"
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
-msgstr "Päivitä utmp-merkinnät"
-
-#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
+msgid "Update utmp entry"
+msgstr "Päivitä utmp-merkinnät"
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2328,48 +2333,44 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 "Asiakkaiden rekisteröitymisen odotusaika millisekunneissa (0=ikuisesti)"
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr "Asiakkaiden vastauksen odotusaika millisekunneissa (0=ikuisesti)"
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr "Asiakkaiden kuoleman odotusaika millisekunneissa (0=ikuisesti)"
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr "Odotus lopetettu ristiriidan vuoksi."
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr "Uudelleenkäynnistys hylätty virheiden vuoksi."
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr "Istuntoa ollaan sulkemassa."
 
@@ -2381,45 +2382,41 @@ msgstr "Tuhoa istunto"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: ei saatu yhteyttä istunnonhallintaan\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "Ohjelma:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr "Yritä"
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr "OK"
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr "Istunto"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr ""
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 msgid "Cancel Login"
 msgstr "Peruuta sisäänkirjoittautuminen"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 msgid "Initialize session settings"
 msgstr "Alusta istuntoasetukset"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr "Näytä vain varoitukset."
 
@@ -2441,36 +2438,36 @@ msgid "Remove"
 msgstr "Poista"
 
 #: help-browser/gnome-help-browser.c:121
+msgid "X"
+msgstr ""
+
+#: help-browser/gnome-help-browser.c:121
 msgid "X position of window"
 msgstr "Ikkunan X-koordinaatti"
 
-#: help-browser/gnome-help-browser.c:121
-msgid "X"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y position of window"
 msgstr "Ikkunan Y-koordinaatti"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y"
+#: help-browser/gnome-help-browser.c:123
+msgid "WIDTH"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:123
 msgid "Width of window"
 msgstr "Ikkunan leveys"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "WIDTH"
+#: help-browser/gnome-help-browser.c:124
+msgid "HEIGHT"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:124
 msgid "Height of window"
 msgstr "Ikkunan korkeus"
-
-#: help-browser/gnome-help-browser.c:124
-msgid "HEIGHT"
-msgstr ""
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2536,21 +2533,21 @@ msgstr "Historia ja välimuisti"
 msgid "Paths"
 msgstr "Polut"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Virhe: tiedostoa ei löydy</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr ""
+msgid "Count"
+msgstr "Määrä"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Viimeinen"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Määrä"
+msgid "URL"
+msgstr ""
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2713,28 +2710,28 @@ msgid "Open new browser window"
 msgstr "Avaa uusi selainikkuna"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "Lisää _kirjanmerkki"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "_Historia"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "Lisää _kirjanmerkki"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Näytä historiaikkuna"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "_Kirjanmerkit"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "_Historia"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Näytä kirjanmerkki-ikkuna"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "_Kirjanmerkit"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2780,17 +2777,17 @@ msgstr "Ohjeen ohje"
 msgid "Location: "
 msgstr "Sijainti: "
 
-# , c-format
 #: help-browser/window.c:817
 #, c-format
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"Virhe ladattaessa dokumenttia:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2850,7 +2847,7 @@ msgstr "Sovellus"
 msgid "Launcher properties"
 msgstr "Käynnistimen asetukset"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Luo käynnistin"
 
@@ -2862,7 +2859,7 @@ msgstr "Kirjoittaudu ulos"
 msgid "Log out of GNOME"
 msgstr "Kirjoittaudu ulos"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3344,69 +3341,14 @@ msgstr "Komento (ei välttämätön)"
 msgid "Height"
 msgstr "Korkeus"
 
-#~ msgid "Properties ..."
-#~ msgstr "Asetukset..."
+#~ msgid "Ask next time"
+#~ msgstr "Kysy ensi kerralla"
 
-#~ msgid "Add new panel"
-#~ msgstr "Lisää paneeli"
+#~ msgid "Only terminate panel"
+#~ msgstr "Lopeta vain paneeli"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Varmista ennen uloskirjoittautumista"
-
-#~ msgid "General Properties"
-#~ msgstr "Yleiset asetukset"
-
-#~ msgid "Graph Interval:"
-#~ msgstr "Käyrän väli:"
-
-#~ msgid "Submenu: "
-#~ msgstr "Kansio: "
-
-# , c-format
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Ei voitu luoda tiedostoa: %s\n"
-
-# , c-format
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr ".order -tiedostoa ei voida poistaa: %s\n"
-
-#~ msgid "File exists."
-#~ msgstr "Tiedosto on olemassa."
-
-#~ msgid "Create Submenu:"
-#~ msgstr "Luo kansio:"
-
-#~ msgid "You must select something first."
-#~ msgstr "Sinun täytyy ensin valita jotakin."
-
-#~ msgid ""
-#~ "You can't delete that file.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Et voi tuhota sitä tiedostoa,\n"
-#~ "sinulta puuttuu tarvittavat oikeudet."
-
-#~ msgid ""
-#~ "You are not allowed to move that item there.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Et voi siirtää kohtaa sinne,\n"
-#~ "sinulta puuttuu tarvittavat oikeudet."
-
-#~ msgid "New"
-#~ msgstr "Uusi"
-
-#~ msgid "Edit selected menu item properties"
-#~ msgstr "Muokkaa valitun kohdan ominaisuuksia"
-
-#~ msgid "Red Hat menus"
-#~ msgstr "Red Hat -valikot"
-
-#~ msgid "Red Hat menu (if found): "
-#~ msgstr "Red Hat -valikko (jos löytyi): "
-
-#~ msgid "Hidebutton options"
-#~ msgstr "Piilotuspainikevalinnat"
+#~ msgid "Really log out?"
+#~ msgstr "Haluatko todella kirjoittautua ulos?"
 
 #~ msgid ""
 #~ "Are you sure you want to just terminate the panel?\n"
@@ -3423,11 +3365,82 @@ msgstr "Korkeus"
 #~ "\n"
 #~ "Paina OK lopettaaksesi paneeli."
 
-#~ msgid "Really log out?"
-#~ msgstr "Haluatko todella kirjoittautua ulos?"
+#~ msgid "Hidebutton options"
+#~ msgstr "Piilotuspainikevalinnat"
 
-#~ msgid "Only terminate panel"
-#~ msgstr "Lopeta vain paneeli"
+#~ msgid "Red Hat menu (if found): "
+#~ msgstr "Red Hat -valikko (jos löytyi): "
 
-#~ msgid "Ask next time"
-#~ msgstr "Kysy ensi kerralla"
+#~ msgid "Red Hat menus"
+#~ msgstr "Red Hat -valikot"
+
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "Muokkaa valitun kohdan ominaisuuksia"
+
+#~ msgid "New"
+#~ msgstr "Uusi"
+
+#~ msgid ""
+#~ "You are not allowed to move that item there.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Et voi siirtää kohtaa sinne,\n"
+#~ "sinulta puuttuu tarvittavat oikeudet."
+
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Et voi tuhota sitä tiedostoa,\n"
+#~ "sinulta puuttuu tarvittavat oikeudet."
+
+#~ msgid "You must select something first."
+#~ msgstr "Sinun täytyy ensin valita jotakin."
+
+#~ msgid "Create Submenu:"
+#~ msgstr "Luo kansio:"
+
+#~ msgid "File exists."
+#~ msgstr "Tiedosto on olemassa."
+
+# , c-format
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr ".order -tiedostoa ei voida poistaa: %s\n"
+
+# , c-format
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Ei voitu luoda tiedostoa: %s\n"
+
+#~ msgid "Submenu: "
+#~ msgstr "Kansio: "
+
+#~ msgid "Graph Interval:"
+#~ msgstr "Käyrän väli:"
+
+#~ msgid "General Properties"
+#~ msgstr "Yleiset asetukset"
+
+#~ msgid "Prompt before logout"
+#~ msgstr "Varmista ennen uloskirjoittautumista"
+
+#~ msgid "Add new panel"
+#~ msgstr "Lisää paneeli"
+
+#~ msgid "Properties ..."
+#~ msgstr "Asetukset..."
+
+#~ msgid "About\t"
+#~ msgstr "Tietoja\t"
+
+#~ msgid "Program:"
+#~ msgstr "Ohjelma:"
+
+# , c-format
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Virhe ladattaessa dokumenttia:\n"
+#~ "\n"
+#~ "%s"

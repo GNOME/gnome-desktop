@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.5\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-07-20 04:10+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -157,10 +157,10 @@ msgstr "CDE 패널의 시계와 비슷한 아날로그 시계"
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -173,13 +173,14 @@ msgstr "속성..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "이 프로그램은..."
 
@@ -257,7 +258,7 @@ msgstr "내부 애러: battery_set_mode에 잘못된 모드"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "애플릿을 만들 수 없음!\n"
@@ -389,16 +390,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr "APM 파일 디스크립터를 dup()할 수 없습니다: %s\n"
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "/dev/apm에 대해 ioctl 실패"
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM을 사용할 수 없습니다!  배터리 충전 정보를 읽을 수 없습니다."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM을 사용할 수 없습니다!  배터리 충전 정보를 읽을 수 없습니다."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM을 사용할 수 없습니다!  배터리 충전 정보를 읽을 수 없습니다."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -408,10 +419,6 @@ msgstr "gtcd 실행..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "문자 선택"
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
-msgstr "0.03"
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -580,26 +587,27 @@ msgid "Drive Mount Applet"
 msgstr "드라이브 마운트 애플릿"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "GNU General Public License에 의해 release\n"
 "드라이브를 마운트/언마운트한다.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " 마운트됨"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " 마운트되지 않음"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" 보고됨:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -607,11 +615,11 @@ msgstr ""
 "드라이브 마운트 명령 실패\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Eject"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "찾아보기..."
 
@@ -652,12 +660,12 @@ msgid "Use automount friendly status test"
 msgstr "automount 상태 테스트 사용"
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Esound 관리자 애플릿"
-
-#: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr "Copyright (C)1998 Red Hat Software"
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr "Esound 관리자 애플릿"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -670,10 +678,6 @@ msgstr "이겼습니다!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "열다섯개의 미끄러지는 조각"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr "1.0"
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -695,55 +699,55 @@ msgstr "fifteen 애플릿을 만들 수 없음!"
 msgid "Scramble pieces"
 msgstr "조각 뒤섞기"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "물고기 %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "그놈 물고기 %s 말하길:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "그놈 물고기 속성"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "당신의 그놈 물고기의 이름:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "애니매이션 파일이름:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "찾아보기"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "애니매이션의 프레임 수"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "각 프레임마다 쉬는시간 (초):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "물고기"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(George의 작은 도움으로)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "그놈 물고기 애플릿"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -766,10 +770,6 @@ msgstr "Copyright (C) 1998 M. Lausch"
 #, c-format
 msgid "Desk %d"
 msgstr "데스크탑 %d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "이 프로그램은\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -813,19 +813,22 @@ msgid "%a %b %d"
 msgstr "%b %d %a"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr "%p %I:%M"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%p %I:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -913,19 +916,19 @@ msgstr "새로운 편지가 편지함에 도착했을 때 알려주기"
 msgid "Text only"
 msgstr "글자만 사용"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "인쇄기 속성"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "인쇄기 이름:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "인쇄기 명령:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "인쇄기"
 
@@ -990,12 +993,12 @@ msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "데스크탑 페이저 애플릿"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "데스크탑 페이저 애플릿"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1250,6 +1253,11 @@ msgstr "자식 프로세스 종료"
 msgid "%H:%M - %d. %b"
 msgstr "%H:%M - %d. %b"
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr "%d. %b"
@@ -1269,7 +1277,7 @@ msgid "History"
 msgstr "히스토리"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "도움말"
 
@@ -1476,6 +1484,10 @@ msgid "Load Graph"
 msgstr "로드 그래프"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "높이:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "속도:"
 
@@ -1483,13 +1495,9 @@ msgstr "속도:"
 msgid "Width:"
 msgstr "폭:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "높이:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "사용자"
+msgid "Idle"
+msgstr "유휴"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1500,16 +1508,8 @@ msgid "System"
 msgstr "시스템"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr "유휴"
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr "그 외"
-
-#: applets/multiload/main.c:31
-msgid "Shared"
-msgstr "공유"
+msgid "User"
+msgstr "사용자"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1518,6 +1518,14 @@ msgstr "버퍼"
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
 msgstr "여유"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr "그 외"
+
+#: applets/multiload/main.c:31
+msgid "Shared"
+msgstr "공유"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1745,20 +1753,20 @@ msgstr "겉모양"
 msgid " Folder"
 msgstr " 폴더"
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "저장"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "되돌리기"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "사용자 메뉴"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "시스템 메뉴"
@@ -1808,12 +1816,12 @@ msgid "New Submenu"
 msgstr "새 하부메뉴"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr "새 항목"
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "새 항목 만들기"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "새 항목"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1824,12 +1832,12 @@ msgid "Delete selected menu item"
 msgstr "선택된 메뉴항목 지우기"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "위로 이동"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "선택된 메뉴 위로 이동"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "위로 이동"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2147,12 +2155,12 @@ msgid "Color selector"
 msgstr "색깔 선택"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "_New terminal"
-msgstr "새 터미널(_N)"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "새 터미널 윈도우 만들기"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "_New terminal"
+msgstr "새 터미널(_N)"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2163,12 +2171,12 @@ msgid "_Close terminal"
 msgstr "터미널 닫기(_C)"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "메뉴바 보이기(_S)"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr "메뉴바를 표시할 지 안 할지 토글."
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "메뉴바 보이기(_S)"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2221,20 +2229,20 @@ msgstr ""
 "%s"
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "터미널 class 이름"
-
-#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
 msgstr "T클래스"
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr "글꼴 이름 지정"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "터미널 class 이름"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "글꼴"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr "글꼴 이름 지정"
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2247,45 +2255,45 @@ msgid "Start up shells as login shells"
 msgstr "로긴셸을 실행한다"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr "주 윈도우의 위치,크기 지정"
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
-msgstr "셸 대신에 프로그램을 실행한다"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
+msgstr "주 윈도우의 위치,크기 지정"
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr "COMMAND"
+
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr "셸 대신에 프로그램을 실행한다"
 
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "xterm과 마찬가지로 이 프로그램을 실행합니다"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "전경색"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "COLOR"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "전경색"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "배경색"
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
-msgstr "utmp 항목 갱신"
-
-#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
 msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2259
+msgid "Update utmp entry"
+msgstr "utmp 항목 갱신"
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2332,47 +2340,43 @@ msgid "Start chooser and pick the session"
 msgstr "세션 선택기를 시작하고 세션 고르기"
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr "정상적으로 동작하지 않고, 세션을 휴지통(trash) 세션에 저장하기"
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr "기본세션(default) 파일에서만 저장된 세션을 읽어오기"
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr "클라이언트가 등록하기까지 기다리는 시간 (천분의 일초) (0=영원히)"
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr "클라이언트가 대답할 때까지 기다리는 시간 (천분의 일초) (0=영원히)"
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr "클라이언트가 끝날 때까지 기다리는 시간 (천분의 일초) (0=영원히)"
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr "충돌로 인해 기다리지 않습니다."
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr "%s 명령에 반응이 없습니다."
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr "프로그램이 느리거나, 멈췄거나 문제가 있습니다."
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr "계속 응답을 기다리거나 강제종료할 수 있습니다."
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr "실패로 인해 재시작하지 않습니다"
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr "세션 닫기가 진행 중입니다."
 
@@ -2384,45 +2388,41 @@ msgstr "세션 없애기"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: 세션 관리자와 연결할 수 없음\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "프로그램:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr "시도"
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr "확인"
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 msgid "Cancel"
 msgstr "취소"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr "세션"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr "세션 선택기"
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr "세션 시작"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 msgid "Cancel Login"
 msgstr "로긴 취소"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 msgid "Initialize session settings"
 msgstr "세션 설정 초기화"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr "경고만 표시"
 
@@ -2444,36 +2444,36 @@ msgid "Remove"
 msgstr "삭제"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "창의 가로 위치"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "창의 세로 위치"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "창의 가로 위치"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "창 폭"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "창의 세로 위치"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "WIDTH"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "창 높이"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "창 폭"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "HEIGHT"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "창 높이"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2539,21 +2539,21 @@ msgstr "히스토리와 캐쉬"
 msgid "Paths"
 msgstr "경로"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>애러: 파일이 없음</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "갯수"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "마지막"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "갯수"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2716,28 +2716,28 @@ msgid "Open new browser window"
 msgstr "새로운 브라우저 창 열기"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "책갈피 추가(_A)"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "책갈피 추가"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "히스토리(_H)"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "책갈피 추가(_A)"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "히스토리 윈도우 보이기"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "책갈피(_B)"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "히스토리(_H)"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "책갈피 창 보이기"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "책갈피(_B)"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2788,11 +2788,12 @@ msgstr "위치: "
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"문서를 읽어들이는 데 애러:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2852,7 +2853,7 @@ msgstr "프로그램"
 msgid "Launcher properties"
 msgstr "실행기 속성"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "실행 애플릿 만들기"
 
@@ -2864,7 +2865,7 @@ msgstr "로그아웃"
 msgid "Log out of GNOME"
 msgstr "그놈 로그아웃"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3337,3 +3338,27 @@ msgstr "명령 (선택사항)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "높이"
+
+#~ msgid "0.03"
+#~ msgstr "0.03"
+
+#~ msgid "1.0"
+#~ msgstr "1.0"
+
+#~ msgid "About\t"
+#~ msgstr "이 프로그램은\t"
+
+#~ msgid "Disable normal operation by saving into the Trash session"
+#~ msgstr "정상적으로 동작하지 않고, 세션을 휴지통(trash) 세션에 저장하기"
+
+#~ msgid "Program:"
+#~ msgstr "프로그램:"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "문서를 읽어들이는 데 애러:\n"
+#~ "\n"
+#~ "%s"

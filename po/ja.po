@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.4\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-03-28 23:05+0900\n"
 "Last-Translator: Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>\n"
 "Language-Team: Japanese\n"
@@ -162,10 +162,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -178,13 +178,14 @@ msgstr "プロパティ..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "情報..."
 
@@ -265,7 +266,7 @@ msgstr "内部エラー: battery_set_modeのモードが不正です"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "アプレットが生成できませんでした\n"
@@ -398,16 +399,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "/dev/apmを開けません;データを取得できません"
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "/dev/apmにioctlできませんでした。"
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APMは使用できません!バッテリー充電情報を取得できません。"
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APMは使用できません!バッテリー充電情報を取得できません。"
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APMは使用できません!バッテリー充電情報を取得できません。"
 
 #: applets/cdplayer/cdplayer.c:345
@@ -416,10 +427,6 @@ msgstr "gtcdを実行..."
 
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
-msgstr ""
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
 msgstr ""
 
 #: applets/charpick/charpick.c:316
@@ -593,26 +600,27 @@ msgid "Drive Mount Applet"
 msgstr "ドライブマウントアプレット"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "GNU一般使用許諾書に基づいてリリースされています。\n"
 "ドライブのマウントとアンマウントをします.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr "マウントされています"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr "マウントされていません"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" のお知らせ:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -620,11 +628,11 @@ msgstr ""
 "ドライブマウントコマンドが失敗しました。\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "取り出し"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "参照..."
 
@@ -665,12 +673,12 @@ msgid "Use automount friendly status test"
 msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Esoundマネージャ・アプレット"
-
-#: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr "Esoundマネージャ・アプレット"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -683,10 +691,6 @@ msgstr "あなたの勝ち!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "15スライドパズル"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr ""
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -706,55 +710,55 @@ msgstr "15パズルアプレットを生成できません!"
 msgid "Scramble pieces"
 msgstr "ピースをバラバラにする"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "さかな君 %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "GNOMEさかな君、%sが言うには: "
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "GNOMEさかな君のプロパティ"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "GNOMEさかな君の名前"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "アニメーションファイルの名前"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "参照"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "アニメーションのフレーム"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "フレーム間のポーズ(秒):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "さかな君"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(あとGeorgeにちょっと手伝ってもらった)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "GNOMEさかな君アプレット"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -778,10 +782,6 @@ msgstr ""
 #, c-format
 msgid "Desk %d"
 msgstr "デスク%d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "情報\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -825,22 +825,27 @@ msgid "%a %b %d"
 msgstr "%_m月%d日%a"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 "%p\n"
 "%I:%M"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%p %I:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr ""
+"%p\n"
+"%I:%M"
 
 #: applets/gen_util/clock.c:405
 msgid "Clock properties"
@@ -927,19 +932,19 @@ msgstr "メールチェックはメールボックスに新しいメールが届くと知らせてくれます"
 msgid "Text only"
 msgstr "テキストのみ"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "プリンタのプロパティ"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "プリンタ名称"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "印刷コマンド"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "プリンタ"
 
@@ -1004,12 +1009,12 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "デスクトップページャ・アプレット"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "デスクトップページャ・アプレット"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1260,6 +1265,11 @@ msgstr "子プロセスが終了しました"
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr ""
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1279,7 +1289,7 @@ msgid "History"
 msgstr "履歴"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -1482,6 +1492,10 @@ msgid "Load Graph"
 msgstr "負荷グラフ"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "高さ:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "速さ:"
 
@@ -1489,13 +1503,9 @@ msgstr "速さ:"
 msgid "Width:"
 msgstr "幅:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "高さ:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "ユーザー"
+msgid "Idle"
+msgstr "待機"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1506,16 +1516,8 @@ msgid "System"
 msgstr "システム"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr "待機"
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr "その他"
-
-#: applets/multiload/main.c:31
-msgid "Shared"
-msgstr "共有"
+msgid "User"
+msgstr "ユーザー"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1524,6 +1526,14 @@ msgstr "バッファ"
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
 msgstr "未使用"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr "その他"
+
+#: applets/multiload/main.c:31
+msgid "Shared"
+msgstr "共有"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1751,20 +1761,20 @@ msgstr "外観"
 msgid " Folder"
 msgstr ""
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "保存"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "戻す"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "ユーザーメニュー"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "システムメニュー"
@@ -1814,12 +1824,12 @@ msgid "New Submenu"
 msgstr "新規サブメニュー"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr "新規項目"
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "新規項目を作成します"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "新規項目"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1830,12 +1840,12 @@ msgid "Delete selected menu item"
 msgstr "選択したメニューアイテムを削除します"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "上移動"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "選択したメニューを上に移動します"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "上移動"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2155,12 +2165,12 @@ msgid "Color selector"
 msgstr "カラーの選択"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "_New terminal"
-msgstr "新規端末(_N)"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "新規の端末を作成します"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "_New terminal"
+msgstr "新規端末(_N)"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2171,12 +2181,12 @@ msgid "_Close terminal"
 msgstr "端末を閉じる(_C)"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "メニューバーを表示(_S)"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "メニューバーを表示(_S)"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2221,20 +2231,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "端末のクラス名称"
-
-#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr "フォント名称を指定します"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "端末のクラス名称"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "フォント"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr "フォント名称を指定します"
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2247,45 +2257,45 @@ msgid "Start up shells as login shells"
 msgstr "起動シェルをログインシェルにする"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr "メインウィンドウの位置を指定します"
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr "位置座標"
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
-msgstr "シェルの代わりにこのプログラムを実行します"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
+msgstr "メインウィンドウの位置を指定します"
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr "コマンド"
+
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr "シェルの代わりにこのプログラムを実行します"
 
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "シェルの代わりにこのプログラムを実行します"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "文字色"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "色"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "文字色"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "背景色"
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
-msgstr "utmpエントリを更新する"
-
-#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
+msgid "Update utmp entry"
+msgstr "utmpエントリを更新する"
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2332,47 +2342,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr "コマンド%sへの応答がありません"
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2384,45 +2390,41 @@ msgstr "セッションの強制終了"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-ssession: セッションマネージャに接続できませんでした。\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "プログラム:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr "試行"
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr "了解"
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr "セッション"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr "セッション選択"
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr "セッション開始"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 msgid "Cancel Login"
 msgstr "ログインをキャンセル"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 msgid "Initialize session settings"
 msgstr "セッション設定の初期化"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr "警告の表示のみ"
 
@@ -2444,36 +2446,36 @@ msgid "Remove"
 msgstr "消去"
 
 #: help-browser/gnome-help-browser.c:121
+msgid "X"
+msgstr ""
+
+#: help-browser/gnome-help-browser.c:121
 msgid "X position of window"
 msgstr "ウィンドウのX座標"
 
-#: help-browser/gnome-help-browser.c:121
-msgid "X"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y position of window"
 msgstr "ウィンドウのY座標"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y"
-msgstr ""
+#: help-browser/gnome-help-browser.c:123
+msgid "WIDTH"
+msgstr "幅"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "Width of window"
 msgstr "ウィンドウの幅"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "WIDTH"
-msgstr "幅"
+#: help-browser/gnome-help-browser.c:124
+msgid "HEIGHT"
+msgstr "高さ"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "Height of window"
 msgstr "ウィンドウの高さ"
-
-#: help-browser/gnome-help-browser.c:124
-msgid "HEIGHT"
-msgstr "高さ"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2539,21 +2541,21 @@ msgstr "履歴とキャッシュ"
 msgid "Paths"
 msgstr "パス"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>エラー: ファイルが見つかりません。</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr ""
+msgid "Count"
+msgstr "参照数"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "最後"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "参照数"
+msgid "URL"
+msgstr ""
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2716,28 +2718,28 @@ msgid "Open new browser window"
 msgstr "ブラウザウィンドウを新規に開く"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "ブックマークに追加する(_A)"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "ブックマークに追加する"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "履歴(_H)"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "ブックマークに追加する(_A)"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "履歴ウィンドウを表示する"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "ブックマーク(_B)"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "履歴(_H)"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "ブックマークウィンドウを表示する"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "ブックマーク(_B)"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2788,11 +2790,12 @@ msgstr "場所: "
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"ドキュメントの読込みでエラーが起こりました:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2852,7 +2855,7 @@ msgstr "アプリ"
 msgid "Launcher properties"
 msgstr "ランチャのプロパティ"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "ランチャアプレットを作成する"
 
@@ -2864,7 +2867,7 @@ msgstr "ログアウト"
 msgid "Log out of GNOME"
 msgstr "GNOMEのログアウト"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3343,14 +3346,29 @@ msgstr "コマンド(オプション)"
 msgid "Height"
 msgstr "高さ"
 
-#~ msgid "Open IM(input method)"
-#~ msgstr "入力メソッド(IM)を開く"
-
-#~ msgid "Properties ..."
-#~ msgstr "プロパティ..."
+#~ msgid "Prompt before logout"
+#~ msgstr "ログアウト時にプロンプトを表示する"
 
 #~ msgid "Add new panel"
 #~ msgstr "新規パネルの追加"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "ログアウト時にプロンプトを表示する"
+#~ msgid "Properties ..."
+#~ msgstr "プロパティ..."
+
+#~ msgid "Open IM(input method)"
+#~ msgstr "入力メソッド(IM)を開く"
+
+#~ msgid "About\t"
+#~ msgstr "情報\t"
+
+#~ msgid "Program:"
+#~ msgstr "プログラム:"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "ドキュメントの読込みでエラーが起こりました:\n"
+#~ "\n"
+#~ "%s"

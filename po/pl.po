@@ -1,8 +1,10 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"Project-Id-Version: gnome-core 1.0.4\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1998-12-05 14:10+0100\n"
 "Last-Translator: Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -156,10 +158,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -172,13 +174,14 @@ msgstr "W³a¶ciwo¶ci..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Informacje..."
 
@@ -259,7 +262,7 @@ msgstr "B³±d wewnêtrzny: niew³a¶ciwy tryb w battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Nie mogê stworzyæ apletu!\n"
@@ -394,16 +397,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Nie mo¿na otworzyæ /dev/apm; nie mo¿na uzyskaæ danych."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr ""
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM jest wy³±czon!  Nie mo¿na odczytaæ stanu baterii."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM jest wy³±czon!  Nie mo¿na odczytaæ stanu baterii."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM jest wy³±czon!  Nie mo¿na odczytaæ stanu baterii."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -414,11 +427,6 @@ msgstr "Urochom gmix..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr ""
-
-#: applets/charpick/charpick.c:315
-#, fuzzy
-msgid "0.03"
-msgstr "0.02"
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -588,34 +596,37 @@ msgid "Drive Mount Applet"
 msgstr ""
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
+"Rozpowszechniany na warunkach licencji GNU GPL.\n"
+"Edytor menu GNOME."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " zamontowany"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " nie zamontowany"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
 msgstr ""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Wysuñ"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "Przegl±daj..."
 
@@ -656,13 +667,13 @@ msgid "Use automount friendly status test"
 msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr ""
-
-#: applets/esd-manager/esdmanager_applet.c:30
 #, fuzzy
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr "Copyright (C)1988 M.Watson"
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -675,10 +686,6 @@ msgstr "Wygra³e¶!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Piêtn¶cie przesuwanych elementów"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr ""
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -698,55 +705,55 @@ msgstr "Nie mo¿na utworzyæ apletu \"piêtnastka\""
 msgid "Scramble pieces"
 msgstr "Wymieszaj elementy"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "Rybka %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "Rybka %s przemawia:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "W³a¶ciwo¶ci rybki GNOME"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "Imiê twojej rybki GNOME:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "Nazwa pliku z animacj±:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Przegl±daj"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "Liczba klatek animacji"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Czas oczekiwania pomiêdzy klatkami (s):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Rybka"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr ""
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "Rybka GNOME - aplet"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -766,10 +773,6 @@ msgstr ""
 #, c-format
 msgid "Desk %d"
 msgstr ""
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "Informacje\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -811,19 +814,22 @@ msgid "%a %b %d"
 msgstr ""
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
-msgstr ""
+msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
-msgstr ""
+#, fuzzy
+msgid "%l:%M %p"
+msgstr "%H:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -913,19 +919,19 @@ msgstr "Monitor poczty informuje ciê, kiedy w skrzynce pojawia siê nowa poczta"
 msgid "Text only"
 msgstr "Tylko tekst"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "W³a¶ciwo¶ci drukarki"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Nazwa drukarki:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Polecenie drukowania:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Drukarka"
 
@@ -987,13 +993,13 @@ msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 #, fuzzy
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C) The Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1251,6 +1257,11 @@ msgstr ""
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1271,7 +1282,7 @@ msgid "History"
 msgstr "Historia"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Pomoc"
 
@@ -1478,6 +1489,11 @@ msgstr ""
 
 #: applets/multiload/load-graph.c:180
 #, fuzzy
+msgid "Height:"
+msgstr "Wysoko¶æ"
+
+#: applets/multiload/load-graph.c:180
+#, fuzzy
 msgid "Speed:"
 msgstr "Szybko¶æ"
 
@@ -1486,13 +1502,8 @@ msgstr "Szybko¶æ"
 msgid "Width:"
 msgstr "Szeroko¶æ"
 
-#: applets/multiload/load-graph.c:180
-#, fuzzy
-msgid "Height:"
-msgstr "Wysoko¶æ"
-
 #: applets/multiload/main.c:27
-msgid "User"
+msgid "Idle"
 msgstr ""
 
 #: applets/multiload/main.c:27
@@ -1506,17 +1517,8 @@ msgid "System"
 msgstr "Menu systemowe"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
+msgid "User"
 msgstr ""
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr ""
-
-#: applets/multiload/main.c:31
-#, fuzzy
-msgid "Shared"
-msgstr "Skalowana"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1526,6 +1528,15 @@ msgstr ""
 #, fuzzy
 msgid "Free"
 msgstr "Wolna przestrzeñ wymiany"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr ""
+
+#: applets/multiload/main.c:31
+#, fuzzy
+msgid "Shared"
+msgstr "Skalowana"
 
 #: applets/multiload/main.c:35
 #, fuzzy
@@ -1750,21 +1761,21 @@ msgstr "Wygl±d"
 msgid " Folder"
 msgstr " Folder"
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Zapisz"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Cofnij"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 #, fuzzy
 msgid "User menus"
 msgstr "Menu u¿ytkownika"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 #, fuzzy
 msgid "System menus"
@@ -1820,13 +1831,13 @@ msgid "New Submenu"
 msgstr ""
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr ""
-
-#: gmenu/main.c:102
 #, fuzzy
 msgid "Create a new item"
 msgstr "Stwórz nowy folder"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr ""
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1837,12 +1848,12 @@ msgid "Delete selected menu item"
 msgstr "Usuñ wybrany element menu"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Przesuñ w górê"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Przesuñ wybrane menu w górê"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Przesuñ w górê"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2172,13 +2183,13 @@ msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
-msgid "_New terminal"
-msgstr "Terminal GNOME"
+msgid "Creates a new terminal window"
+msgstr "Stwórz nowy folder"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
-msgid "Creates a new terminal window"
-msgstr "Stwórz nowy folder"
+msgid "_New terminal"
+msgstr "Terminal GNOME"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2190,12 +2201,12 @@ msgid "_Close terminal"
 msgstr "Terminal"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "_Ukryj pasek menu"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "_Ukryj pasek menu"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2241,20 +2252,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "Nazwa klasy terminala"
-
-#: gnome-terminal/gnome-terminal.c:2232
 #, fuzzy
 msgid "TCLASS"
 msgstr "KLASA"
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr ""
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "Nazwa klasy terminala"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2238
@@ -2268,45 +2279,45 @@ msgid "Start up shells as login shells"
 msgstr "Uruchamiaj pow³oki jako pow³oki startowe"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr ""
 
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr ""
+
 #: gnome-terminal/gnome-terminal.c:2250
 msgid "Execute this program the same way as xterm does"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
+msgid "COLOR"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2253
 msgid "Foreground color"
 msgstr "Kolor tekstu"
 
-#: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
-msgid "COLOR"
-msgstr ""
-
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Kolor t³a"
 
 #: gnome-terminal/gnome-terminal.c:2259
+msgid "UTMP"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "Czêstotliwo¶æ od¶wie¿ania"
-
-#: gnome-terminal/gnome-terminal.c:2259
-msgid "UTMP"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2354,47 +2365,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2406,48 +2413,44 @@ msgstr ""
 msgid "save-session: couldn't connect to session manager\n"
 msgstr ""
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr ""
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr " Anuluj "
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr ""
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr ""
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr " Anuluj "
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Ogólne w³a¶ciwo¶ci"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2469,36 +2472,36 @@ msgid "Remove"
 msgstr "Usuñ"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "Pozioma pozycja okna"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "Pionowa pozycja okna"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "Pozioma pozycja okna"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "Szeroko¶æ okna"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "Pionowa pozycja okna"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "SZEROKO¦Æ"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "Wysoko¶æ okna"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "Szeroko¶æ okna"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "WYSOKO¦Æ"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "Wysoko¶æ okna"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2563,21 +2566,21 @@ msgstr "Historia i cache"
 msgid "Paths"
 msgstr "¦cie¿ki"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>B³±d: nie odnaleziono pliku<h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr ""
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr ""
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr ""
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2721,31 +2724,31 @@ msgid "Open new browser window"
 msgstr "Otwórz nowe okno przegl±darki"
 
 #: help-browser/window.c:136
+msgid "Add bookmark"
+msgstr "Dodaj zak³adkê"
+
+#: help-browser/window.c:136
 #, fuzzy
 msgid "_Add Bookmark"
 msgstr "Dodaj zak³adkê"
 
-#: help-browser/window.c:136
-msgid "Add bookmark"
-msgstr "Dodaj zak³adkê"
+#: help-browser/window.c:161 help-browser/window.c:202
+msgid "Show History Window"
+msgstr "Wy¶wietl okno historii"
 
 #: help-browser/window.c:161
 #, fuzzy
 msgid "_History"
 msgstr "Historia"
 
-#: help-browser/window.c:161 help-browser/window.c:202
-msgid "Show History Window"
-msgstr "Wy¶wietl okno historii"
+#: help-browser/window.c:166 help-browser/window.c:204
+msgid "Show Bookmarks Window"
+msgstr ""
 
 #: help-browser/window.c:166
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Zak³adki"
-
-#: help-browser/window.c:166 help-browser/window.c:204
-msgid "Show Bookmarks Window"
-msgstr ""
 
 #: help-browser/window.c:180
 #, fuzzy
@@ -2797,7 +2800,11 @@ msgstr ""
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
+"%s\n"
+"\n"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
 msgstr ""
 
 #: help-browser/window.c:820
@@ -2860,7 +2867,7 @@ msgstr ""
 msgid "Launcher properties"
 msgstr "W³a¶ciwo¶ci apletu uruchomieniowego"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Stwórz aplet uruchomieniowy"
 
@@ -2873,7 +2880,7 @@ msgstr "Koniec pracy"
 msgid "Log out of GNOME"
 msgstr "Koniec pracy"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3376,465 +3383,174 @@ msgstr "Polecenie (opcjonalne)"
 msgid "Height"
 msgstr "Wysoko¶æ"
 
-#~ msgid "Properties ..."
-#~ msgstr "W³a¶ciwo¶ci ..."
+#~ msgid "Use power management."
+#~ msgstr "W³±cz funkcje oszczêdzanie energii."
 
-#~ msgid "Add new panel"
-#~ msgstr "Dodaj nowy panel"
+#~ msgid "Require Password"
+#~ msgstr "Wymagane has³o"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Zapytaj przed zamkniêciem sesji"
+#~ msgid "Theme Information"
+#~ msgstr "Informacja o motywie"
 
-#~ msgid "General Properties"
-#~ msgstr "Ogólne w³a¶ciwo¶ci"
-
-#, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "Utwórz folder:"
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Nie mo¿na utworzyæ pliku: %s\n"
-
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "nie mo¿na usun±æ pliku .order: %s\n"
-
-#~ msgid "File exists."
-#~ msgstr "Plik istnieje."
-
-#, fuzzy
-#~ msgid "Create Submenu:"
-#~ msgstr "Utwórz folder:"
+#~ msgid "Install"
+#~ msgstr "Zainstaluj"
 
 #~ msgid ""
-#~ "You can't delete that file.\n"
-#~ "You do not have the proper permissions."
+#~ "Auto\n"
+#~ "Preview"
 #~ msgstr ""
-#~ "Nie mo¿na usun±æ podanego ktalogu.\n"
-#~ "Brak praw dostêpu."
+#~ "Automatyczny\n"
+#~ "podgl±d"
+
+#~ msgid "Available Themes"
+#~ msgstr "Dostêpne motywy"
+
+#~ msgid "Sound Events"
+#~ msgstr "D¼wiêki zdarzeñ"
+
+#~ msgid "Select sound file"
+#~ msgstr "Wybierz plik z d¼wiêkiem"
+
+#~ msgid "Play"
+#~ msgstr "Odtwarzaj"
+
+#~ msgid "Enable sounds for events"
+#~ msgstr "W³±cz d¼wiêki dla zdarzeñ"
+
+#~ msgid "Enable GNOME sound support"
+#~ msgstr "W³±cz obs³ugê d¼wiêku GNOME"
+
+#~ msgid "File to Play"
+#~ msgstr "Plik z d¼wiêkiem"
+
+#~ msgid "Event"
+#~ msgstr "Zdarzenie"
+
+#~ msgid "Category"
+#~ msgstr "Kategoria"
 
 #, fuzzy
-#~ msgid ""
-#~ "You are not allowed to move that item there.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Nie mo¿na usun±æ podanego ktalogu.\n"
-#~ "Brak praw dostêpu."
-
-#~ msgid "New"
-#~ msgstr "Nowy"
-
-#~ msgid "Edit selected menu item properties"
-#~ msgstr "Edytuj w³a¶ciwo¶ci wybranego elementu menu"
-
-#~ msgid "GNOME"
-#~ msgstr "GNOME"
-
-#, fuzzy
-#~ msgid "Red Hat menus"
-#~ msgstr "Dodaj menu g³ówne"
-
-#, fuzzy
-#~ msgid "Hidebutton options"
-#~ msgstr "Opcje przycisków ukrywania"
-
-#~ msgid "Really log out?"
-#~ msgstr "Rzeczywi¶cie zamkn±æ sesjê?"
-
-#~ msgid "Ask next time"
-#~ msgstr "Zapytaj nastêpnym razem"
-
-#~ msgid "Gnome Session Properties"
-#~ msgstr "W³a¶ciwo¶ci sesji GNOME"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "Nie mo¿na otworzyæ /proc/apm; nie mo¿na odczytaæ danych"
-
-#, fuzzy
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Nie mo¿na otworzyæ /proc/apm; nie mo¿na odczytaæ danych"
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "Nie mo¿na otworzyæ /dev/apm; nie mo¿na odczytaæ danych"
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "Nie ma baterii?!?"
-
-#, fuzzy
-#~ msgid "High."
-#~ msgstr "Wysoko¶æ"
-
-#, fuzzy
-#~ msgid "Low."
-#~ msgstr "Niski"
-
-#, fuzzy
-#~ msgid "Critical!!"
-#~ msgstr "Pionowo"
-
-#, fuzzy
-#~ msgid "Charging."
-#~ msgstr "Ustawienia..."
-
-#, fuzzy
-#~ msgid "%d minutes of battery"
-#~ msgstr "Nie ma baterii?!?"
-
-#~ msgid "APM Stats"
-#~ msgstr "Status APM"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Wersja sterownika APM dla Linuxa:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "Wersja APM BIOS:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Stan baterii"
-
-#~ msgid "Refresh Image"
-#~ msgstr "Od¶wie¿ obraz"
-
-#, fuzzy
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "Rybka GNOME - aplet"
-
-#, fuzzy
-#~ msgid "User Load"
-#~ msgstr "Wykorzystana przestrzeñ wymiany"
-
-#, fuzzy
-#~ msgid "System Load"
-#~ msgstr "Menu systemowe"
-
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Od¶wie¿ obraz"
-
-#, fuzzy
-#~ msgid "GTicker Article List"
-#~ msgstr "Od¶wie¿ obraz"
-
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "nie mo¿na utworzyæ katalogu u¿ytkownika: %s\n"
-
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Plik z obrazem t³a"
-
-#~ msgid "Copyright (C)1998 M.Watson"
-#~ msgstr "Copyright (C)1988 M.Watson"
-
-#, fuzzy
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "Nie uda³o siê usun±æ foldera."
-
-#~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: opcja '%s' jest niejednoznaczna\n"
-
-#~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: opcja '--%s' nie pozwala na u¿ycie argumentu\n"
-
-#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: opcj '%c%s' nie pozwala na u¿ycie argumentu\n"
-
-#~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: opcja: `%s' wymaga argumentu\n"
-
-#~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: nie rozpoznano opcji `--%s'\n"
-
-#~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: nie rozpoznano opcji `%c%s'\n"
-
-#~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: niedozwolona opcja -- %c\n"
-
-#~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: niew³a¶ciwa opcja -- %s\n"
-
-#~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: opcja wymaga argumentu -- %c\n"
-
-#~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: opcja '-W %s' jest niejednoznaczna\n"
-
-#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: opcja '-W %s' nie pozwal na u¿ycie argumentu\n"
-
-#~ msgid "ID"
+#~ msgid "XID"
 #~ msgstr "ID"
 
-#, fuzzy
-#~ msgid "0.99.1"
-#~ msgstr "0.31"
+#~ msgid "_Main"
+#~ msgstr "_G³ówne"
+
+#~ msgid "_Help with GNOME..."
+#~ msgstr "_Pomoc GNOME"
 
 #, fuzzy
-#~ msgid "Prefixes %d"
-#~ msgstr " Podgl±d "
+#~ msgid "Screen Saver Demo"
+#~ msgstr "Wygaszacz ekranu"
 
-#, fuzzy
-#~ msgid "Background Properties"
-#~ msgstr "Kolor t³a"
+#~ msgid " minutes after screen saver has started."
+#~ msgstr " min. po uruchomieniu wygaszacza."
 
-#, fuzzy
-#~ msgid "Bell Properties"
-#~ msgstr "W³a¶ciwo¶ci"
+#~ msgid "Shutdown monitor "
+#~ msgstr "Wy³±cz monitor "
 
-#~ msgid "Keyboard Properties"
-#~ msgstr "W³a¶ciwo¶ci klawiatury"
+#~ msgid " Normal"
+#~ msgstr " Zwyk³y"
 
-#~ msgid "Mouse Properties"
-#~ msgstr "W³a¶ciwo¶ci myszy"
+#~ msgid "Low "
+#~ msgstr "Niski"
 
-#, fuzzy
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "W³a¶ciwo¶ci sesji GNOME"
+#~ msgid "Priority:"
+#~ msgstr "Priorytet:"
 
-#~ msgid "Flat"
-#~ msgstr "Jednolity"
+#~ msgid " Minutes."
+#~ msgstr " min."
 
-#~ msgid "Gradient"
-#~ msgstr "Przej¶cie tonalne"
+#~ msgid "Start After "
+#~ msgstr "Uruchom po "
 
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Wybór tapety"
+#~ msgid "Screen Saver"
+#~ msgstr "Wygaszacz ekranu"
 
-#~ msgid "Wallpaper"
-#~ msgstr "Tapeta"
+#~ msgid "Author: UNKNOWN"
+#~ msgstr "Autor: NIEZNANY"
 
-#~ msgid " Browse... "
-#~ msgstr " Przegl±daj..."
+#~ msgid "Author:"
+#~ msgstr "Autor:"
 
-#~ msgid "Scaled"
-#~ msgstr "Skalowana"
+#~ msgid "About:"
+#~ msgstr "Informacje:"
 
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Skalowana (zachowaj proporcje)"
+#~ msgid "Preview"
+#~ msgstr "Podgl±d"
 
-#~ msgid "Centered"
-#~ msgstr "Wy¶rodkowana"
+#~ msgid "Test settings"
+#~ msgstr "Wypróbuj ustawienia"
 
-#, fuzzy
-#~ msgid "Specifies the background color"
-#~ msgstr "Kolor t³a"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Kierunek przej¶cia tonalnego"
-
-#, fuzzy
-#~ msgid "Sound"
-#~ msgstr " zamontowany"
-
-#~ msgid "Volume"
-#~ msgstr "G³o¶no¶æ"
-
-#, fuzzy
-#~ msgid "Pitch"
-#~ msgstr "Szeroko¶æ"
-
-#, fuzzy
-#~ msgid "Duration"
-#~ msgstr "Orientacja"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Automatyczne powtarzanie"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "W³±cz automatyczne powtarzanie"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Czêstotliwo¶æ powtarzania"
-
-#~ msgid "Repeat delay"
+#~ msgid "Repeat Delay"
 #~ msgstr "Opó¼nienie powtarzania"
 
-#~ msgid "Keyboard click"
-#~ msgstr "Klikanie klawiatury"
+#~ msgid " Preview "
+#~ msgstr " Podgl±d "
 
-#~ msgid "Click on keypress"
-#~ msgstr "Klikniêcie przy naci¶niêciu klawisza"
+#~ msgid " Options "
+#~ msgstr " Opcje "
 
-#~ msgid "Click volume"
-#~ msgstr "G³o¶no¶æ klikniêcia"
+#~ msgid " Defaults "
+#~ msgstr " Domy¶lne "
 
-#~ msgid "Keyboard"
-#~ msgstr "Klawiatura"
+#~ msgid " Apply "
+#~ msgstr " Zastosuj "
 
-#~ msgid "Mouse buttons"
-#~ msgstr "Przyciski myszy"
+#~ msgid "  OK  "
+#~ msgstr "  OK  "
 
-#~ msgid "Left handed"
-#~ msgstr "Dla leworêcznych"
+#~ msgid " Screensaver "
+#~ msgstr " Wygaszacz ekranu "
 
-#~ msgid "Right handed"
-#~ msgstr "Dla praworêcznych"
+#~ msgid "Screensavers"
+#~ msgstr "Wygaszacze ekranu"
 
-#~ msgid "Mouse motion"
-#~ msgstr "Ruch myszy"
+#~ msgid "Normal"
+#~ msgstr "Zwyk³y"
 
-#~ msgid "Acceleration"
-#~ msgstr "Przy¶pieszenie"
+#~ msgid "Priority"
+#~ msgstr "Priorytet"
 
-#~ msgid "Fast"
-#~ msgstr "Szybko"
+#~ msgid "Requires Password"
+#~ msgstr "Wymaga has³a"
 
-#~ msgid "Slow"
-#~ msgstr "Wolno"
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"
 
-#~ msgid "Large"
-#~ msgstr "Du¿y"
+#~ msgid "Log Out"
+#~ msgstr "Koniec pracy"
 
-#~ msgid "Small"
-#~ msgstr "Ma³y"
+#~ msgid "South East"
+#~ msgstr "Prawy dolny"
 
-#~ msgid "Mouse"
-#~ msgstr "Mysz"
+#~ msgid "Explicitly Hide"
+#~ msgstr "Rêczne ukrywanie"
 
-#~ msgid "Left-justify buttons"
-#~ msgstr "Wyrównaj przyciski do lewej"
+#~ msgid "File"
+#~ msgstr "Plik"
 
-#~ msgid "Right-justify buttons"
-#~ msgstr "Wyrównaj przyciski do prawej"
+#~ msgid "Configure"
+#~ msgstr "Konfiguruj"
 
-#~ msgid "Center of the screen"
-#~ msgstr "¦rodek ekranu"
+#~ msgid "User on the main menu, System menu as a submenu"
+#~ msgstr "Menu u¿ytkownika w g³ównym menu, systemowe jako podmenu"
 
-#~ msgid "At the mouse pointer"
-#~ msgstr "Na pozycji wska¼nika myszy"
+#~ msgid "System on the main menu, User menu as a submenu"
+#~ msgstr "Menu systemowe w g³ównym menu, u¿ytkownika jako podmenu"
 
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Okna dialogowe s± zwyk³ymi oknami"
+#~ msgid "Both System and User menus on the same menu"
+#~ msgstr "Menu systemowe i u¿ytkownika w jednym menu"
 
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Okna dialogowe s± traktowane specjalnie przez mena¿era okien"
+#~ msgid "Shared Memory"
+#~ msgstr "Pamiêæ dzielona"
 
-#~ msgid "Notebook"
-#~ msgstr "Zak³adka"
-
-#, fuzzy
-#~ msgid "Modal"
-#~ msgstr "Poczta"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Przyciski okna dialogowego"
-
-#~ msgid "Dialog position"
-#~ msgstr "Pozycja okna dialogowego"
+#~ msgid "Used Memory"
+#~ msgstr "U¿yta pamiêæ"
 
 #, fuzzy
-#~ msgid "Dialog hints"
-#~ msgstr "Okna dialogowe"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Wykorzystuj pasek statusu zamiast okna dialogowego je¶li to mo¿liwe"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Umieszczaj okna dialogowe pond oknem aplikacji je¶li to mo¿liwe"
-
-#~ msgid "Dialogs"
-#~ msgstr "Okna dialogowe"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Odczepialne paski menu"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Odczepialne paski narzêdzionwe"
-
-#~ msgid "Toolbars have flat look"
-#~ msgstr "P³askie paski narzêdziowe"
-
-#, fuzzy
-#~ msgid "Toolbars have line separators"
-#~ msgstr "P³askie paski narzêdziowe"
-
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Etykiety tekstowe na paskach narzêdziowych"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "Pasek statusu jest interaktywny je¶li to mo¿liwe"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Ikony na przyciskach okien dialogowych"
-
-#~ msgid "Application"
-#~ msgstr "Aplikacja"
-
-#~ msgid "Default MDI mode"
-#~ msgstr "Domy¶lny tryb MDI"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "Pozycja zak³adki MDI"
-
-#~ msgid "MDI"
-#~ msgstr "MDI"
-
-#~ msgid "Failed to delete the file."
-#~ msgstr "Nie uda³o siê usun±æ pliku."
-
-#~ msgid "Delete file?"
-#~ msgstr "Usun±æ plik?"
-
-#~ msgid ""
-#~ "Cannot delete folder.\n"
-#~ "To delete a folder. it must be empty."
-#~ msgstr ""
-#~ "Nie mo¿na usun±æ katalogu.\n"
-#~ "Aby mo¿na by³o usun±æ katalog, musi on byæ pusty."
-
-#~ msgid "File or Folder does not exist on filesystem."
-#~ msgstr "Plik lub Folder nie istnieje."
-
-#~ msgid "The Name text field can not be blank."
-#~ msgstr "Pole nazwy nie mo¿e byæ puste."
-
-#~ msgid "Save file?"
-#~ msgstr "Zapisaæ plik?"
-
-#~ msgid "File name:"
-#~ msgstr "Nazwa pliku:"
-
-#~ msgid "_Quit"
-#~ msgstr "_Wyj¶cie"
-
-#~ msgid "_Sort Folder"
-#~ msgstr "_Sortuj folder"
-
-#~ msgid "_About..."
-#~ msgstr "_Informacje"
-
-#~ msgid "Sort Folder"
-#~ msgstr "Sortuj folder"
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "W³a¶ciwo¶ci..."
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Zamknij"
-
-#~ msgid "Close window"
-#~ msgstr "Zamknij okno"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Wyj¶cie"
-
-#~ msgid "Exit all windows"
-#~ msgstr "Zamknij wszystkie okna"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "Informacje"
-
-#~ msgid "Info about this program"
-#~ msgstr "Informacje o programie"
-
-#~ msgid "Icon Selection"
-#~ msgstr "Wybór ikony"
+#~ msgid "Help & About..."
+#~ msgstr "Informacje..."
 
 #~ msgid ""
 #~ "Couldn't\n"
@@ -3845,171 +3561,469 @@ msgstr "Wysoko¶æ"
 #~ "wczytaæ\n"
 #~ "ikony"
 
-#, fuzzy
-#~ msgid "Help & About..."
-#~ msgstr "Informacje..."
+#~ msgid "Icon Selection"
+#~ msgstr "Wybór ikony"
 
-#~ msgid "Used Memory"
-#~ msgstr "U¿yta pamiêæ"
-
-#~ msgid "Shared Memory"
-#~ msgstr "Pamiêæ dzielona"
-
-#~ msgid "Both System and User menus on the same menu"
-#~ msgstr "Menu systemowe i u¿ytkownika w jednym menu"
-
-#~ msgid "System on the main menu, User menu as a submenu"
-#~ msgstr "Menu systemowe w g³ównym menu, u¿ytkownika jako podmenu"
-
-#~ msgid "User on the main menu, System menu as a submenu"
-#~ msgstr "Menu u¿ytkownika w g³ównym menu, systemowe jako podmenu"
-
-#~ msgid "Configure"
-#~ msgstr "Konfiguruj"
-
-#~ msgid "File"
-#~ msgstr "Plik"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Rêczne ukrywanie"
-
-#~ msgid "South East"
-#~ msgstr "Prawy dolny"
-
-#~ msgid "Log Out"
-#~ msgstr "Koniec pracy"
-
-#~ msgid "Settings"
-#~ msgstr "Ustawienia"
-
-#~ msgid "Requires Password"
-#~ msgstr "Wymaga has³a"
-
-#~ msgid "Priority"
-#~ msgstr "Priorytet"
-
-#~ msgid "Normal"
-#~ msgstr "Zwyk³y"
-
-#~ msgid "Screensavers"
-#~ msgstr "Wygaszacze ekranu"
-
-#~ msgid " Screensaver "
-#~ msgstr " Wygaszacz ekranu "
-
-#~ msgid "  OK  "
-#~ msgstr "  OK  "
-
-#~ msgid " Apply "
-#~ msgstr " Zastosuj "
-
-#~ msgid " Defaults "
-#~ msgstr " Domy¶lne "
-
-#~ msgid " Options "
-#~ msgstr " Opcje "
-
-#~ msgid " Preview "
-#~ msgstr " Podgl±d "
-
-#~ msgid "Repeat Delay"
-#~ msgstr "Opó¼nienie powtarzania"
-
-#~ msgid "Test settings"
-#~ msgstr "Wypróbuj ustawienia"
-
-#~ msgid "Preview"
-#~ msgstr "Podgl±d"
-
-#~ msgid "About:"
-#~ msgstr "Informacje:"
-
-#~ msgid "Author:"
-#~ msgstr "Autor:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Autor: NIEZNANY"
-
-#~ msgid "Screen Saver"
-#~ msgstr "Wygaszacz ekranu"
-
-#~ msgid "Start After "
-#~ msgstr "Uruchom po "
-
-#~ msgid " Minutes."
-#~ msgstr " min."
-
-#~ msgid "Priority:"
-#~ msgstr "Priorytet:"
-
-#~ msgid "Low "
-#~ msgstr "Niski"
-
-#~ msgid " Normal"
-#~ msgstr " Zwyk³y"
-
-#~ msgid "Shutdown monitor "
-#~ msgstr "Wy³±cz monitor "
-
-#~ msgid " minutes after screen saver has started."
-#~ msgstr " min. po uruchomieniu wygaszacza."
+#~ msgid "Info about this program"
+#~ msgstr "Informacje o programie"
 
 #, fuzzy
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Wygaszacz ekranu"
+#~ msgid "_About"
+#~ msgstr "Informacje"
 
-#~ msgid "_Help with GNOME..."
-#~ msgstr "_Pomoc GNOME"
-
-#~ msgid "_Main"
-#~ msgstr "_G³ówne"
+#~ msgid "Exit all windows"
+#~ msgstr "Zamknij wszystkie okna"
 
 #, fuzzy
-#~ msgid "XID"
-#~ msgstr "ID"
+#~ msgid "E_xit"
+#~ msgstr "Wyj¶cie"
 
-#~ msgid "Category"
-#~ msgstr "Kategoria"
+#~ msgid "Close window"
+#~ msgstr "Zamknij okno"
 
-#~ msgid "Event"
-#~ msgstr "Zdarzenie"
+#, fuzzy
+#~ msgid "_Close"
+#~ msgstr "Zamknij"
 
-#~ msgid "File to Play"
-#~ msgstr "Plik z d¼wiêkiem"
+#, fuzzy
+#~ msgid "P_references..."
+#~ msgstr "W³a¶ciwo¶ci..."
 
-#~ msgid "Enable GNOME sound support"
-#~ msgstr "W³±cz obs³ugê d¼wiêku GNOME"
+#~ msgid "Sort Folder"
+#~ msgstr "Sortuj folder"
 
-#~ msgid "Enable sounds for events"
-#~ msgstr "W³±cz d¼wiêki dla zdarzeñ"
+#~ msgid "_About..."
+#~ msgstr "_Informacje"
 
-#~ msgid "Play"
-#~ msgstr "Odtwarzaj"
+#~ msgid "_Sort Folder"
+#~ msgstr "_Sortuj folder"
 
-#~ msgid "Select sound file"
-#~ msgstr "Wybierz plik z d¼wiêkiem"
+#~ msgid "_Quit"
+#~ msgstr "_Wyj¶cie"
 
-#~ msgid "Sound Events"
-#~ msgstr "D¼wiêki zdarzeñ"
+#~ msgid "File name:"
+#~ msgstr "Nazwa pliku:"
 
-#~ msgid "Available Themes"
-#~ msgstr "Dostêpne motywy"
+#~ msgid "Save file?"
+#~ msgstr "Zapisaæ plik?"
+
+#~ msgid "The Name text field can not be blank."
+#~ msgstr "Pole nazwy nie mo¿e byæ puste."
+
+#~ msgid "File or Folder does not exist on filesystem."
+#~ msgstr "Plik lub Folder nie istnieje."
 
 #~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
+#~ "Cannot delete folder.\n"
+#~ "To delete a folder. it must be empty."
 #~ msgstr ""
-#~ "Automatyczny\n"
-#~ "podgl±d"
+#~ "Nie mo¿na usun±æ katalogu.\n"
+#~ "Aby mo¿na by³o usun±æ katalog, musi on byæ pusty."
 
-#~ msgid "Install"
-#~ msgstr "Zainstaluj"
+#~ msgid "Delete file?"
+#~ msgstr "Usun±æ plik?"
 
-#~ msgid "Theme Information"
-#~ msgstr "Informacja o motywie"
+#~ msgid "Failed to delete the file."
+#~ msgstr "Nie uda³o siê usun±æ pliku."
 
-#~ msgid "Require Password"
-#~ msgstr "Wymagane has³o"
+#~ msgid "MDI"
+#~ msgstr "MDI"
 
-#~ msgid "Use power management."
-#~ msgstr "W³±cz funkcje oszczêdzanie energii."
+#~ msgid "MDI notebook tab position"
+#~ msgstr "Pozycja zak³adki MDI"
+
+#~ msgid "Default MDI mode"
+#~ msgstr "Domy¶lny tryb MDI"
+
+#~ msgid "Application"
+#~ msgstr "Aplikacja"
+
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Ikony na przyciskach okien dialogowych"
+
+#~ msgid "Statusbar is interactive when possible"
+#~ msgstr "Pasek statusu jest interaktywny je¶li to mo¿liwe"
+
+#~ msgid "Toolbars have text labels"
+#~ msgstr "Etykiety tekstowe na paskach narzêdziowych"
+
+#, fuzzy
+#~ msgid "Toolbars have line separators"
+#~ msgstr "P³askie paski narzêdziowe"
+
+#~ msgid "Toolbars have flat look"
+#~ msgstr "P³askie paski narzêdziowe"
+
+#~ msgid "Toolbars are detachable"
+#~ msgstr "Odczepialne paski narzêdzionwe"
+
+#~ msgid "Menubars are detachable"
+#~ msgstr "Odczepialne paski menu"
+
+#~ msgid "Dialogs"
+#~ msgstr "Okna dialogowe"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Umieszczaj okna dialogowe pond oknem aplikacji je¶li to mo¿liwe"
+
+#~ msgid "Use statusbar instead of dialog when possible"
+#~ msgstr "Wykorzystuj pasek statusu zamiast okna dialogowego je¶li to mo¿liwe"
+
+#, fuzzy
+#~ msgid "Dialog hints"
+#~ msgstr "Okna dialogowe"
+
+#~ msgid "Dialog position"
+#~ msgstr "Pozycja okna dialogowego"
+
+#~ msgid "Dialog buttons"
+#~ msgstr "Przyciski okna dialogowego"
+
+#, fuzzy
+#~ msgid "Modal"
+#~ msgstr "Poczta"
+
+#~ msgid "Notebook"
+#~ msgstr "Zak³adka"
+
+#~ msgid "Dialogs are treated specially by window manager"
+#~ msgstr "Okna dialogowe s± traktowane specjalnie przez mena¿era okien"
+
+#~ msgid "Dialogs are like other windows"
+#~ msgstr "Okna dialogowe s± zwyk³ymi oknami"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "Na pozycji wska¼nika myszy"
+
+#~ msgid "Center of the screen"
+#~ msgstr "¦rodek ekranu"
+
+#~ msgid "Right-justify buttons"
+#~ msgstr "Wyrównaj przyciski do prawej"
+
+#~ msgid "Left-justify buttons"
+#~ msgstr "Wyrównaj przyciski do lewej"
+
+#~ msgid "Mouse"
+#~ msgstr "Mysz"
+
+#~ msgid "Small"
+#~ msgstr "Ma³y"
+
+#~ msgid "Large"
+#~ msgstr "Du¿y"
+
+#~ msgid "Slow"
+#~ msgstr "Wolno"
+
+#~ msgid "Fast"
+#~ msgstr "Szybko"
+
+#~ msgid "Acceleration"
+#~ msgstr "Przy¶pieszenie"
+
+#~ msgid "Mouse motion"
+#~ msgstr "Ruch myszy"
+
+#~ msgid "Right handed"
+#~ msgstr "Dla praworêcznych"
+
+#~ msgid "Left handed"
+#~ msgstr "Dla leworêcznych"
+
+#~ msgid "Mouse buttons"
+#~ msgstr "Przyciski myszy"
+
+#~ msgid "Keyboard"
+#~ msgstr "Klawiatura"
+
+#~ msgid "Click volume"
+#~ msgstr "G³o¶no¶æ klikniêcia"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Klikniêcie przy naci¶niêciu klawisza"
+
+#~ msgid "Keyboard click"
+#~ msgstr "Klikanie klawiatury"
+
+#~ msgid "Repeat delay"
+#~ msgstr "Opó¼nienie powtarzania"
+
+#~ msgid "Repeat rate"
+#~ msgstr "Czêstotliwo¶æ powtarzania"
+
+#~ msgid "Enable auto-repeat"
+#~ msgstr "W³±cz automatyczne powtarzanie"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Automatyczne powtarzanie"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Orientacja"
+
+#, fuzzy
+#~ msgid "Pitch"
+#~ msgstr "Szeroko¶æ"
+
+#~ msgid "Volume"
+#~ msgstr "G³o¶no¶æ"
+
+#, fuzzy
+#~ msgid "Sound"
+#~ msgstr " zamontowany"
+
+#~ msgid "Gradient orientation: vertical or horizontal"
+#~ msgstr "Kierunek przej¶cia tonalnego"
+
+#, fuzzy
+#~ msgid "Specifies the background color"
+#~ msgstr "Kolor t³a"
+
+#~ msgid "Centered"
+#~ msgstr "Wy¶rodkowana"
+
+#~ msgid "Scaled (keep aspect)"
+#~ msgstr "Skalowana (zachowaj proporcje)"
+
+#~ msgid "Scaled"
+#~ msgstr "Skalowana"
+
+#~ msgid " Browse... "
+#~ msgstr " Przegl±daj..."
+
+#~ msgid "Wallpaper"
+#~ msgstr "Tapeta"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Wybór tapety"
+
+#~ msgid "Gradient"
+#~ msgstr "Przej¶cie tonalne"
+
+#~ msgid "Flat"
+#~ msgstr "Jednolity"
+
+#, fuzzy
+#~ msgid "Gnome Look and Feel Properties"
+#~ msgstr "W³a¶ciwo¶ci sesji GNOME"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "W³a¶ciwo¶ci myszy"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "W³a¶ciwo¶ci klawiatury"
+
+#, fuzzy
+#~ msgid "Bell Properties"
+#~ msgstr "W³a¶ciwo¶ci"
+
+#, fuzzy
+#~ msgid "Background Properties"
+#~ msgstr "Kolor t³a"
+
+#, fuzzy
+#~ msgid "Prefixes %d"
+#~ msgstr " Podgl±d "
+
+#, fuzzy
+#~ msgid "0.99.1"
+#~ msgstr "0.31"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: opcja '-W %s' nie pozwal na u¿ycie argumentu\n"
+
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: opcja '-W %s' jest niejednoznaczna\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: opcja wymaga argumentu -- %c\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: niew³a¶ciwa opcja -- %s\n"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: niedozwolona opcja -- %c\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: nie rozpoznano opcji `%c%s'\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: nie rozpoznano opcji `--%s'\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: opcja: `%s' wymaga argumentu\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: opcj '%c%s' nie pozwala na u¿ycie argumentu\n"
+
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: opcja '--%s' nie pozwala na u¿ycie argumentu\n"
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: opcja '%s' jest niejednoznaczna\n"
+
+#, fuzzy
+#~ msgid "Failed to retrieve workspace property."
+#~ msgstr "Nie uda³o siê usun±æ foldera."
+
+#~ msgid "Copyright (C)1998 M.Watson"
+#~ msgstr "Copyright (C)1988 M.Watson"
+
+#, fuzzy
+#~ msgid "Image path:"
+#~ msgstr "Plik z obrazem t³a"
+
+#, fuzzy
+#~ msgid ""
+#~ "unable to create user directory: \n"
+#~ "\t\t\t\t\t    %s\n"
+#~ msgstr "nie mo¿na utworzyæ katalogu u¿ytkownika: %s\n"
+
+#, fuzzy
+#~ msgid "GTicker Article List"
+#~ msgstr "Od¶wie¿ obraz"
+
+#, fuzzy
+#~ msgid "Refresh Articles"
+#~ msgstr "Od¶wie¿ obraz"
+
+#, fuzzy
+#~ msgid "System Load"
+#~ msgstr "Menu systemowe"
+
+#, fuzzy
+#~ msgid "User Load"
+#~ msgstr "Wykorzystana przestrzeñ wymiany"
+
+#, fuzzy
+#~ msgid "The Bus Sign Applet"
+#~ msgstr "Rybka GNOME - aplet"
+
+#~ msgid "Refresh Image"
+#~ msgstr "Od¶wie¿ obraz"
+
+#~ msgid "Battery Status:"
+#~ msgstr "Stan baterii"
+
+#~ msgid "APM BIOS Version:"
+#~ msgstr "Wersja APM BIOS:"
+
+#~ msgid "Linux APM Driver Version:"
+#~ msgstr "Wersja sterownika APM dla Linuxa:"
+
+#~ msgid "APM Stats"
+#~ msgstr "Status APM"
+
+#, fuzzy
+#~ msgid "%d minutes of battery"
+#~ msgstr "Nie ma baterii?!?"
+
+#, fuzzy
+#~ msgid "Charging."
+#~ msgstr "Ustawienia..."
+
+#, fuzzy
+#~ msgid "Critical!!"
+#~ msgstr "Pionowo"
+
+#, fuzzy
+#~ msgid "Low."
+#~ msgstr "Niski"
+
+#, fuzzy
+#~ msgid "High."
+#~ msgstr "Wysoko¶æ"
+
+#~ msgid "There is no battery?!?"
+#~ msgstr "Nie ma baterii?!?"
+
+#~ msgid "Can't open /dev/apm; can't get data."
+#~ msgstr "Nie mo¿na otworzyæ /dev/apm; nie mo¿na odczytaæ danych"
+
+#, fuzzy
+#~ msgid "Something wrong with /proc/apm; can't get data."
+#~ msgstr "Nie mo¿na otworzyæ /proc/apm; nie mo¿na odczytaæ danych"
+
+#~ msgid "Can't open /proc/apm; can't get data."
+#~ msgstr "Nie mo¿na otworzyæ /proc/apm; nie mo¿na odczytaæ danych"
+
+#~ msgid "Gnome Session Properties"
+#~ msgstr "W³a¶ciwo¶ci sesji GNOME"
+
+#~ msgid "Ask next time"
+#~ msgstr "Zapytaj nastêpnym razem"
+
+#~ msgid "Really log out?"
+#~ msgstr "Rzeczywi¶cie zamkn±æ sesjê?"
+
+#, fuzzy
+#~ msgid "Hidebutton options"
+#~ msgstr "Opcje przycisków ukrywania"
+
+#, fuzzy
+#~ msgid "Red Hat menus"
+#~ msgstr "Dodaj menu g³ówne"
+
+#~ msgid "GNOME"
+#~ msgstr "GNOME"
+
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "Edytuj w³a¶ciwo¶ci wybranego elementu menu"
+
+#~ msgid "New"
+#~ msgstr "Nowy"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are not allowed to move that item there.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Nie mo¿na usun±æ podanego ktalogu.\n"
+#~ "Brak praw dostêpu."
+
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Nie mo¿na usun±æ podanego ktalogu.\n"
+#~ "Brak praw dostêpu."
+
+#, fuzzy
+#~ msgid "Create Submenu:"
+#~ msgstr "Utwórz folder:"
+
+#~ msgid "File exists."
+#~ msgstr "Plik istnieje."
+
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr "nie mo¿na usun±æ pliku .order: %s\n"
+
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Nie mo¿na utworzyæ pliku: %s\n"
+
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "Utwórz folder:"
+
+#~ msgid "General Properties"
+#~ msgstr "Ogólne w³a¶ciwo¶ci"
+
+#~ msgid "Prompt before logout"
+#~ msgstr "Zapytaj przed zamkniêciem sesji"
+
+#~ msgid "Add new panel"
+#~ msgstr "Dodaj nowy panel"
+
+#~ msgid "Properties ..."
+#~ msgstr "W³a¶ciwo¶ci ..."
+
+#, fuzzy
+#~ msgid "0.03"
+#~ msgstr "0.02"
+
+#~ msgid "About\t"
+#~ msgstr "Informacje\t"

@@ -4,8 +4,8 @@
 # Sergey Panov <sipan@mit.edu>, 1999
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"Project-Id-Version: gnome-core VERSION\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-01-22 4:18 EST\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -162,10 +162,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -178,13 +178,14 @@ msgstr "Свойства..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "О программе..."
 
@@ -265,7 +266,7 @@ msgstr "Внутренняя ошибка: неправильный режим в battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Невозможно создать апплет!\n"
@@ -402,16 +403,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr "Невозможно dup() дескриптор файла APM: %s\n"
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Невозможно открыть /proc/apm; нельзя получить данные."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "Команда ioctl не сработала на /dev/apm."
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM выключен! невозможно считать информацию о батарее."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM выключен! невозможно считать информацию о батарее."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM выключен! невозможно считать информацию о батарее."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -421,10 +432,6 @@ msgstr "Запустить gtcd..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "Наборщик"
-
-#: applets/charpick/charpick.c:315
-msgid "0.03"
-msgstr ""
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -596,26 +603,27 @@ msgid "Drive Mount Applet"
 msgstr "Апплет подсоединения диска"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "Released under the GNU general public license.\n"
 "Подсоединяет и отсоединяет диски.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " подсоединен"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " не подсоединен"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" сообщение:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -623,11 +631,11 @@ msgstr ""
 "Комманда подсоединения диска не прошла.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Извлечь"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "Обзор..."
 
@@ -667,14 +675,14 @@ msgstr "Точка подсоединения:"
 msgid "Use automount friendly status test"
 msgstr "Совместимая с automount проверка состояния"
 
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr ""
+
 #
 #: applets/esd-manager/esdmanager_applet.c:30
 msgid "Esound MAnager Applet"
 msgstr "Апплет управления Esound"
-
-#: applets/esd-manager/esdmanager_applet.c:30
-msgid "Copyright (C)1998 Red Hat Software"
-msgstr ""
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -687,10 +695,6 @@ msgstr "Вы выиграли!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Пятнадцать"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr ""
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -712,55 +716,55 @@ msgstr "Невозможно создать апплет \"Пятнадцать\""
 msgid "Scramble pieces"
 msgstr "Перемешать"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "Рыбка %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr " Рыбка %s говорит:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "Свойства рыбки"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "Имя вашей рыбки:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "Файл с мультипликацией:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Обзор"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "Кадров в мультипликации:"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Задержка кадра (сек):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Рыбка"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(с минимальной помощью Георгия)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "GNOME апплет \"рыбка\""
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -784,10 +788,6 @@ msgstr ""
 #, c-format
 msgid "Desk %d"
 msgstr "Стол %d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "О\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -830,18 +830,18 @@ msgstr ""
 
 #: applets/gen_util/clock.c:154
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+msgid "%l:%M %p"
 msgstr ""
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+msgid "%k:%M"
 msgstr ""
 
 #: applets/gen_util/clock.c:405
@@ -930,19 +930,19 @@ msgstr "Проверка почты сообщает вам о новой почте в вашем почтовом ящике"
 msgid "Text only"
 msgstr "Только текст"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Настройка принтера"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Имя принтера:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Команда печати:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Принтер"
 
@@ -1002,13 +1002,13 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "Оконный селектор"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
 "(C) 1998,1999 Red Hat Software, Фонд Свободного Программного Обеспечения"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "Оконный селектор"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1259,6 +1259,11 @@ msgstr "дочерний процесс закончился"
 msgid "%H:%M - %d. %b"
 msgstr ""
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr ""
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr ""
@@ -1278,7 +1283,7 @@ msgid "History"
 msgstr "История"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Справка"
 
@@ -1485,6 +1490,10 @@ msgid "Load Graph"
 msgstr "График занятости"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "Высота:"
+
+#: applets/multiload/load-graph.c:180
 #, fuzzy
 msgid "Speed:"
 msgstr "Скорость"
@@ -1493,13 +1502,9 @@ msgstr "Скорость"
 msgid "Width:"
 msgstr "Ширина:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "Высота:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "Пользователь"
+msgid "Idle"
+msgstr "Простой"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1510,16 +1515,8 @@ msgid "System"
 msgstr "Система"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr "Простой"
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr "Другая"
-
-#: applets/multiload/main.c:31
-msgid "Shared"
-msgstr "Общая"
+msgid "User"
+msgstr "Пользователь"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1528,6 +1525,14 @@ msgstr "Буфера"
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
 msgstr "Свободная"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr "Другая"
+
+#: applets/multiload/main.c:31
+msgid "Shared"
+msgstr "Общая"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1756,20 +1761,20 @@ msgstr "Внешний вид"
 msgid " Folder"
 msgstr ""
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Сохранить"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Восстановить"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "Пользовательские меню"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "Системные меню"
@@ -1819,12 +1824,12 @@ msgid "New Submenu"
 msgstr "Новое меню"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr "Новый элемент"
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "Создать новый элемент меню"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "Новый элемент"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1835,12 +1840,12 @@ msgid "Delete selected menu item"
 msgstr "Удалить выделенный элемент меню"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Вверх"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Передвинуть выделенное меню вверх"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Вверх"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2165,12 +2170,12 @@ msgid "Color selector"
 msgstr "Выбор цвета"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "_New terminal"
-msgstr "Новый терминал"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "Запустить ещё один терминал"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "_New terminal"
+msgstr "Новый терминал"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2181,12 +2186,12 @@ msgid "_Close terminal"
 msgstr "Закрыть терминал"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "Восстановить меню"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "Восстановить меню"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2232,20 +2237,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
+msgid "TCLASS"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2232
 msgid "Terminal class name"
 msgstr "Имя класса терминала"
 
-#: gnome-terminal/gnome-terminal.c:2232
-msgid "TCLASS"
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "FONT"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "Specifies font name"
 msgstr "Задает имя шрифта"
-
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "FONT"
-msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2258,45 +2263,45 @@ msgid "Start up shells as login shells"
 msgstr "Запускать shell как login shell"
 
 #: gnome-terminal/gnome-terminal.c:2244
+msgid "GEOMETRY"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2244
 msgid "Specifies the geometry for the main window"
 msgstr "Задает геометрию главного окна"
 
-#: gnome-terminal/gnome-terminal.c:2244
-msgid "GEOMETRY"
+#: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
+msgid "COMMAND"
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2247
 msgid "Execute this program instead of a shell"
 msgstr "Запустить программу вместо shell"
 
-#: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
-msgid "COMMAND"
-msgstr ""
-
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "Запустить программу вместо shell"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Цвет печати"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Цвет печати"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Цвет фона"
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
-msgstr "Обновить значение utmp"
-
-#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2259
+msgid "Update utmp entry"
+msgstr "Обновить значение utmp"
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2343,49 +2348,45 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr "Период, в миллисекундах, ожидания регистрации клиентов (0=вечность)"
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 #, fuzzy
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr "Период, в миллисекундах, ожидания регистрации клиентов (0=вечность)"
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 #, fuzzy
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr "Период, в миллисекундах, ожидания регистрации клиентов (0=вечность)"
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr "Происходит завершение сеанса работы."
 
@@ -2397,49 +2398,45 @@ msgstr "Остановить сеанс"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: невозможно подсоединиться к диспетчеру сеанса\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "Программа:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr "Панель"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 #, fuzzy
 msgid "Session"
 msgstr "Остановить сеанс"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr ""
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr "Панель"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Общая настройка иконок"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2461,36 +2458,36 @@ msgid "Remove"
 msgstr "Убрать"
 
 #: help-browser/gnome-help-browser.c:121
+msgid "X"
+msgstr ""
+
+#: help-browser/gnome-help-browser.c:121
 msgid "X position of window"
 msgstr "Положение окна по X"
 
-#: help-browser/gnome-help-browser.c:121
-msgid "X"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y position of window"
 msgstr "Положение окна по Y"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y"
+#: help-browser/gnome-help-browser.c:123
+msgid "WIDTH"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:123
 msgid "Width of window"
 msgstr "Ширина окна"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "WIDTH"
+#: help-browser/gnome-help-browser.c:124
+msgid "HEIGHT"
 msgstr ""
 
 #: help-browser/gnome-help-browser.c:124
 msgid "Height of window"
 msgstr "Высота окна"
-
-#: help-browser/gnome-help-browser.c:124
-msgid "HEIGHT"
-msgstr ""
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2556,21 +2553,21 @@ msgstr "История и cache"
 msgid "Paths"
 msgstr "Пути"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Ошибка: файл не найден</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr ""
+msgid "Count"
+msgstr "Счетчик"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Последний раз"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Счетчик"
+msgid "URL"
+msgstr ""
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2722,28 +2719,28 @@ msgid "Open new browser window"
 msgstr "Открыть новое окно навигатора"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "Добавить закладку"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Добавить закладку"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "История"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "Добавить закладку"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Открыть окно истории"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "Закладки"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "История"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Открыть окно закладок"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "Закладки"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2794,11 +2791,12 @@ msgstr "Место: "
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"Ошибка загрузки документа:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2858,7 +2856,7 @@ msgstr "Прил."
 msgid "Launcher properties"
 msgstr "Свойства кнопки запуска"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Создать кнопку запуска"
 
@@ -2870,7 +2868,7 @@ msgstr "Завершить работу"
 msgid "Log out of GNOME"
 msgstr "Завершить работу в GNOME"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3350,83 +3348,14 @@ msgstr "Команда (необязательна)"
 msgid "Height"
 msgstr "Высота"
 
-#~ msgid "Properties ..."
-#~ msgstr "Настройка ..."
+#~ msgid "Refersh interval (ms):"
+#~ msgstr "Интервал между обновлениями (млсек):"
 
-#~ msgid "Add new panel"
-#~ msgstr "Добавить новую панель"
+#~ msgid "Startup Programs"
+#~ msgstr "Запускаемые программы"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Спрашивать подтверждение"
-
-#~ msgid "General Properties"
-#~ msgstr "Общие свойства"
-
-#~ msgid "Graph Interval:"
-#~ msgstr "Шаг графика"
-
-#~ msgid "Submenu: "
-#~ msgstr "Дочернее меню:"
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Невозможно создать файл: %s\n"
-
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "Невозможно удалить .order файл: %s\n"
-
-#~ msgid "File exists."
-#~ msgstr "Файл существует."
-
-#~ msgid "Create Submenu:"
-#~ msgstr "Создать новое дочернее меню"
-
-#~ msgid "You must select something first."
-#~ msgstr "Сначала нужно что-нибудь выбрать."
-
-#~ msgid ""
-#~ "You can't delete that file.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Нельзя удалить этот файл.\n"
-#~ "У вас нет необходимых привилегий доступа."
-
-#~ msgid ""
-#~ "You are not allowed to move that item there.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Сюда этот файл перенести нельзя.\n"
-#~ "У вас нет необходимых привилегий доступа."
-
-#~ msgid "New"
-#~ msgstr "Создать"
-
-#~ msgid "Edit selected menu item properties"
-#~ msgstr "Изменить свойства выделенного элемента меню"
-
-#~ msgid "Red Hat menus"
-#~ msgstr "Red Hat меню"
-
-#~ msgid "Red Hat menu (if found): "
-#~ msgstr "Red Hat меню (если есть): "
-
-#~ msgid "Hidebutton options"
-#~ msgstr "Параметры кнопок сокрытия"
-
-#~ msgid "Really log out?"
-#~ msgstr "Вы действительно хотите завершить работу?"
-
-#~ msgid "Ask next time"
-#~ msgstr "Спрашивать в следующий раз"
-
-#~ msgid "Enable gsm debugging"
-#~ msgstr "Включить отладку gsm"
-
-#~ msgid ""
-#~ "The Gnome Session Manager unexpectedly\n"
-#~ "lost contact with program \"%s\"."
-#~ msgstr ""
-#~ "Диспетчер сеанса Gnome неожиданно\n"
-#~ "потерял контакт с программой \"%s\"."
+#~ msgid "Gnome Session Properties"
+#~ msgstr "Свойства сеанса Gnome"
 
 #~ msgid ""
 #~ "The Gnome Session Manager unexpectedly\n"
@@ -3435,11 +3364,95 @@ msgstr "Высота"
 #~ "Диспетчер сеанса Gnome неожиданно\n"
 #~ "потерял контакт с безымянной программой."
 
-#~ msgid "Gnome Session Properties"
-#~ msgstr "Свойства сеанса Gnome"
+#~ msgid ""
+#~ "The Gnome Session Manager unexpectedly\n"
+#~ "lost contact with program \"%s\"."
+#~ msgstr ""
+#~ "Диспетчер сеанса Gnome неожиданно\n"
+#~ "потерял контакт с программой \"%s\"."
 
-#~ msgid "Startup Programs"
-#~ msgstr "Запускаемые программы"
+#~ msgid "Enable gsm debugging"
+#~ msgstr "Включить отладку gsm"
 
-#~ msgid "Refersh interval (ms):"
-#~ msgstr "Интервал между обновлениями (млсек):"
+#~ msgid "Ask next time"
+#~ msgstr "Спрашивать в следующий раз"
+
+#~ msgid "Really log out?"
+#~ msgstr "Вы действительно хотите завершить работу?"
+
+#~ msgid "Hidebutton options"
+#~ msgstr "Параметры кнопок сокрытия"
+
+#~ msgid "Red Hat menu (if found): "
+#~ msgstr "Red Hat меню (если есть): "
+
+#~ msgid "Red Hat menus"
+#~ msgstr "Red Hat меню"
+
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "Изменить свойства выделенного элемента меню"
+
+#~ msgid "New"
+#~ msgstr "Создать"
+
+#~ msgid ""
+#~ "You are not allowed to move that item there.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Сюда этот файл перенести нельзя.\n"
+#~ "У вас нет необходимых привилегий доступа."
+
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Нельзя удалить этот файл.\n"
+#~ "У вас нет необходимых привилегий доступа."
+
+#~ msgid "You must select something first."
+#~ msgstr "Сначала нужно что-нибудь выбрать."
+
+#~ msgid "Create Submenu:"
+#~ msgstr "Создать новое дочернее меню"
+
+#~ msgid "File exists."
+#~ msgstr "Файл существует."
+
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr "Невозможно удалить .order файл: %s\n"
+
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Невозможно создать файл: %s\n"
+
+#~ msgid "Submenu: "
+#~ msgstr "Дочернее меню:"
+
+#~ msgid "Graph Interval:"
+#~ msgstr "Шаг графика"
+
+#~ msgid "General Properties"
+#~ msgstr "Общие свойства"
+
+#~ msgid "Prompt before logout"
+#~ msgstr "Спрашивать подтверждение"
+
+#~ msgid "Add new panel"
+#~ msgstr "Добавить новую панель"
+
+#~ msgid "Properties ..."
+#~ msgstr "Настройка ..."
+
+#~ msgid "About\t"
+#~ msgstr "О\t"
+
+#~ msgid "Program:"
+#~ msgstr "Программа:"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ошибка загрузки документа:\n"
+#~ "\n"
+#~ "%s"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.99.7\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1998-12-28 14:36+0100\n"
 "Last-Translator: Kenneth Christiansen/Daleak <kenth@writeme.com>\n"
 "Language-Team: None yet\n"
@@ -162,10 +162,10 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -178,13 +178,14 @@ msgstr "Egenskaber ..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Om..."
 
@@ -265,7 +266,7 @@ msgstr "Intern fejl: ugyldig mode i battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Kan ikke oprette applet!\n"
@@ -402,16 +403,26 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr ""
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Kan ikke åbne /dev/apm; får ikke data."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "ioctl fejlet på /dev/apm."
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APM er slået fra! Kan ikke læse informasion om batteriladning."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr "APM er slået fra! Kan ikke læse informasion om batteriladning."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr "APM er slået fra! Kan ikke læse informasion om batteriladning."
 
 #: applets/cdplayer/cdplayer.c:345
@@ -421,11 +432,6 @@ msgstr "Kør gmix..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "Karakter vælger"
-
-#: applets/charpick/charpick.c:315
-#, fuzzy
-msgid "0.03"
-msgstr "0.02"
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -600,26 +606,27 @@ msgid "Drive Mount Applet"
 msgstr "Diskmonteringsapplet"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "Udgivet under GNU general public license.\n"
 "Monterer og avmonterer disker.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " monteret"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " ikke monteret"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr "\" rapportert:\n"
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -627,11 +634,11 @@ msgstr ""
 "Diskmonteringskommandoen fejlede.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Skub ud"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr " Gennemse... "
 
@@ -672,12 +679,12 @@ msgid "Use automount friendly status test"
 msgstr "Brug automount venlig status test"
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Applet for valg af virtuelt skærmområde"
-
-#: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr "Copyright (C)1998 M.Watson"
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr "Applet for valg af virtuelt skærmområde"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -690,10 +697,6 @@ msgstr "Du vinder!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Femten glidene stykker"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr "1.0"
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -715,55 +718,55 @@ msgstr "Kan ikke oprette femten appleten!"
 msgid "Scramble pieces"
 msgstr "Bland stykkene"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "Fisken %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "Gnome-fisken %s siger:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "Egenskaber for fisk"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "Navnet på din Gnome fisk:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "Filnavn for animationen:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Gennemse..."
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "Billeder i animationen:"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Pause for hvert billede (s):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Fisk"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(med lidt hjælp fra George)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "Gnome-fisk applet"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -787,10 +790,6 @@ msgstr "Copyright (C)1998 M.Watson"
 #, c-format
 msgid "Desk %d"
 msgstr "Skrivebord %d"
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "Om"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -834,21 +833,24 @@ msgid "%a %b %d"
 msgstr "%a %b %d"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr ""
 "%I:%M\n"
 "%p"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -939,19 +941,19 @@ msgstr "Posttjekking giver dig besked når du har ny post i postkassen"
 msgid "Text only"
 msgstr "Kun tekst"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Egenskaber for printere"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Printernavn:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Printerkommando:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Printer"
 
@@ -1014,13 +1016,13 @@ msgid "gkb.xpm"
 msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr "Gnome Pager applet"
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 #, fuzzy
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C) The Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr "Gnome Pager applet"
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1276,6 +1278,11 @@ msgstr ""
 msgid "%H:%M - %d. %b"
 msgstr "%H:%M - %d. %b"
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr "%d. %b"
@@ -1295,7 +1302,7 @@ msgid "History"
 msgstr "Historie"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Hjælp"
 
@@ -1499,6 +1506,10 @@ msgid "Load Graph"
 msgstr "Hent graf"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "Højde:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "Hastighed"
 
@@ -1506,13 +1517,9 @@ msgstr "Hastighed"
 msgid "Width:"
 msgstr "Bredde:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "Højde:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "Bruger"
+msgid "Idle"
+msgstr "Stille"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1523,16 +1530,8 @@ msgid "System"
 msgstr "System"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
-msgstr "Stille"
-
-#: applets/multiload/main.c:31
-msgid "Other"
-msgstr "Andre"
-
-#: applets/multiload/main.c:31
-msgid "Shared"
-msgstr "Delt"
+msgid "User"
+msgstr "Bruger"
 
 #: applets/multiload/main.c:31
 msgid "Buffers"
@@ -1541,6 +1540,14 @@ msgstr ""
 #: applets/multiload/main.c:31 applets/multiload/main.c:35
 msgid "Free"
 msgstr "Fri"
+
+#: applets/multiload/main.c:31
+msgid "Other"
+msgstr "Andre"
+
+#: applets/multiload/main.c:31
+msgid "Shared"
+msgstr "Delt"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1769,20 +1776,20 @@ msgstr "Se"
 msgid " Folder"
 msgstr ""
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Gem"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Forkast"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "Brugermenuer"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "Systemmenuer"
@@ -1834,12 +1841,12 @@ msgid "New Submenu"
 msgstr "Ny undermenu"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr ""
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "Opret et nyt punkt"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr ""
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1850,12 +1857,12 @@ msgid "Delete selected menu item"
 msgstr "Slet valgte menu punkt"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Flyt opad"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Flyt valgte menu et niveau op"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Flyt opad"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2178,13 +2185,13 @@ msgid "Color selector"
 msgstr "Farvevælger"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "Creates a new terminal window"
+msgstr "Opret en ny terminal vindue"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 #, fuzzy
 msgid "_New terminal"
 msgstr "GNOME terminal"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "Creates a new terminal window"
-msgstr "Opret en ny terminal vindue"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2195,12 +2202,12 @@ msgid "_Close terminal"
 msgstr "_Luk terminal"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "_Gem menulinje"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "_Gem menulinje"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2246,21 +2253,21 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "Navn på terminalklasse"
-
-#: gnome-terminal/gnome-terminal.c:2232
 #, fuzzy
 msgid "TCLASS"
 msgstr "KLASSE"
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr "Specifisere navnet på skrifttypen"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "Navn på terminalklasse"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "FONT"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr "Specifisere navnet på skrifttypen"
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2273,46 +2280,46 @@ msgid "Start up shells as login shells"
 msgstr "Start kommandoshell'en som loginshell"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr "Specifiserer geometrien for hovedvinduet"
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
-msgstr "Kør dette program i stedet for en shell"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
+msgstr "Specifiserer geometrien for hovedvinduet"
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr "KOMMANDO"
+
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr "Kør dette program i stedet for en shell"
 
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "Kør dette program i stedet for en shell"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Forgrundsfarve"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "COLOR"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Forgrundsfarve"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Baggrundsfarve"
 
 #: gnome-terminal/gnome-terminal.c:2259
+msgid "UTMP"
+msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2259
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "Opdater utmp/wtmp entries"
-
-#: gnome-terminal/gnome-terminal.c:2259
-msgid "UTMP"
-msgstr "UTMP"
 
 #: gnome-terminal/gnome-terminal.c:2262
 #, fuzzy
@@ -2364,47 +2371,43 @@ msgid "Start chooser and pick the session"
 msgstr ""
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr ""
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr ""
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr ""
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr ""
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr ""
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2416,50 +2419,46 @@ msgstr "Dræb session"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: kunne ikke koble til sessionsbehandleren\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "Program:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 #, fuzzy
 msgid "Cancel"
 msgstr "Panel"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 #, fuzzy
 msgid "Session"
 msgstr "Dræb session"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr ""
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 #, fuzzy
 msgid "Start Session"
 msgstr "Afbryd session"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 #, fuzzy
 msgid "Cancel Login"
 msgstr "Panel"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 #, fuzzy
 msgid "Initialize session settings"
 msgstr "Generelle egenskaber"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr ""
 
@@ -2481,36 +2480,36 @@ msgid "Remove"
 msgstr "Fjern"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "Vinduets X-position"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "Vinduets Y-position"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "Vinduets X-position"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "Vinduets bredde"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "Vinduets Y-position"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "BREDDE"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "Vinduets højde"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "Vinduets bredde"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "HØJDE"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "Vinduets højde"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2577,21 +2576,21 @@ msgstr "Historie og mellemlagring"
 msgid "Paths"
 msgstr "Søgestier"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Fejl: filen blev ikke fundet</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Antal"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Sidste"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Antal"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2754,28 +2753,28 @@ msgid "Open new browser window"
 msgstr "Åben nyt vindue"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "Tilføj bogmærke"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Tilføj bogmærke"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "_Historie"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "Tilføj bogmærke"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Vis historievinduet"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "Bogmærker"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "_Historie"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Vis bogmærkevinduet"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "Bogmærker"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2826,11 +2825,12 @@ msgstr ""
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"Fejl ved læsning af dokumentet:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2890,7 +2890,7 @@ msgstr "Applikation"
 msgid "Launcher properties"
 msgstr "Egenskaber for genvej"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Opret genvej"
 
@@ -2902,7 +2902,7 @@ msgstr "Log ud"
 msgid "Log out of GNOME"
 msgstr "Log ud af GNOME"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3381,48 +3381,47 @@ msgstr "Kommando (valgfri)"
 msgid "Height"
 msgstr "Højt."
 
-#~ msgid "Properties ..."
-#~ msgstr "Egenskaber ..."
+#~ msgid "ID"
+#~ msgstr "ID"
 
-#~ msgid "Add new panel"
-#~ msgstr "Tilføj nyt panel"
+#~ msgid "Add"
+#~ msgstr "Tilføj"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Spørg før der logges ud"
+#~ msgid "Config"
+#~ msgstr "Konfiguration"
 
-#~ msgid "General Properties"
-#~ msgstr "Generelle egenskaber"
+#~ msgid "Startup Programs"
+#~ msgstr "Start programmer"
 
-#~ msgid "Graph Interval:"
-#~ msgstr "Grafinterval:"
+#~ msgid "Gnome Session Properties"
+#~ msgstr "Egenskaber for session"
 
-#, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "Ny undermenu"
+#~ msgid "Enable gsm debugging"
+#~ msgstr "Slå gsm debugging til"
 
-#, fuzzy
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Kunne ikke oprette filen."
+#~ msgid "Ask next time"
+#~ msgstr "Spørg næste gang"
 
-#, fuzzy
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr "kunne ikke oprette brugerkatalog: %s\n"
+#~ msgid "Really log out?"
+#~ msgstr "Virkelig logge ud?"
 
-#~ msgid "File exists."
-#~ msgstr "Filen eksisterer."
+#~ msgid "Hidebutton options"
+#~ msgstr "Knappegemnings indstillinger"
 
-#~ msgid "Create Submenu:"
-#~ msgstr "Opret undermenu:"
+#~ msgid "Red Hat menu (if found): "
+#~ msgstr "RedHat menu (hvis fundet): "
 
-#~ msgid "You must select something first."
-#~ msgstr "Du må vælge noget først."
+#~ msgid "Red Hat menus"
+#~ msgstr "RedHat menuer"
 
-#~ msgid ""
-#~ "You can't delete that file.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "Du kan ikke slette denne filen.\n"
-#~ "Du har ikke rigtige tilgangsrettigheter."
+#~ msgid "GNOME"
+#~ msgstr "GNOME"
+
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "Rediger valgte menu punkts egenskaber"
+
+#~ msgid "New"
+#~ msgstr "Ny"
 
 #, fuzzy
 #~ msgid ""
@@ -3432,44 +3431,67 @@ msgstr "Højt."
 #~ "Du kan ikke slette denne filen.\n"
 #~ "Du har ikke rigtige tilgangsrettigheter."
 
-#~ msgid "New"
-#~ msgstr "Ny"
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "Du kan ikke slette denne filen.\n"
+#~ "Du har ikke rigtige tilgangsrettigheter."
 
-#~ msgid "Edit selected menu item properties"
-#~ msgstr "Rediger valgte menu punkts egenskaber"
+#~ msgid "You must select something first."
+#~ msgstr "Du må vælge noget først."
 
-#~ msgid "GNOME"
-#~ msgstr "GNOME"
+#~ msgid "Create Submenu:"
+#~ msgstr "Opret undermenu:"
 
-#~ msgid "Red Hat menus"
-#~ msgstr "RedHat menuer"
+#~ msgid "File exists."
+#~ msgstr "Filen eksisterer."
 
-#~ msgid "Red Hat menu (if found): "
-#~ msgstr "RedHat menu (hvis fundet): "
+#, fuzzy
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr "kunne ikke oprette brugerkatalog: %s\n"
 
-#~ msgid "Hidebutton options"
-#~ msgstr "Knappegemnings indstillinger"
+#, fuzzy
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "Kunne ikke oprette filen."
 
-#~ msgid "Really log out?"
-#~ msgstr "Virkelig logge ud?"
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "Ny undermenu"
 
-#~ msgid "Ask next time"
-#~ msgstr "Spørg næste gang"
+#~ msgid "Graph Interval:"
+#~ msgstr "Grafinterval:"
 
-#~ msgid "Enable gsm debugging"
-#~ msgstr "Slå gsm debugging til"
+#~ msgid "General Properties"
+#~ msgstr "Generelle egenskaber"
 
-#~ msgid "Gnome Session Properties"
-#~ msgstr "Egenskaber for session"
+#~ msgid "Prompt before logout"
+#~ msgstr "Spørg før der logges ud"
 
-#~ msgid "Startup Programs"
-#~ msgstr "Start programmer"
+#~ msgid "Add new panel"
+#~ msgstr "Tilføj nyt panel"
 
-#~ msgid "Config"
-#~ msgstr "Konfiguration"
+#~ msgid "Properties ..."
+#~ msgstr "Egenskaber ..."
 
-#~ msgid "Add"
-#~ msgstr "Tilføj"
+#, fuzzy
+#~ msgid "0.03"
+#~ msgstr "0.02"
 
-#~ msgid "ID"
-#~ msgstr "ID"
+#~ msgid "1.0"
+#~ msgstr "1.0"
+
+#~ msgid "About\t"
+#~ msgstr "Om"
+
+#~ msgid "Program:"
+#~ msgstr "Program:"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Fejl ved læsning af dokumentet:\n"
+#~ "\n"
+#~ "%s"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.5\n"
-"POT-Creation-Date: 1999-08-01 18:15-0400\n"
+"POT-Creation-Date: 1999-08-30 14:20+0200\n"
 "PO-Revision-Date: 1999-04-17 01:21+01:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -153,10 +153,10 @@ msgstr "Um relógio analógico parecido ao do painel CDE."
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:513
-#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
+#: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
 #: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
@@ -169,13 +169,14 @@ msgstr "Propriedades..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
+#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
-#: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
-#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
-#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
+#: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
+#: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
+#: applets/gnome-pager/gnomepager_applet.c:1566 applets/jbc/jbc-applet.c:144
+#: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2515
 msgid "About..."
 msgstr "Acerca..."
 
@@ -254,7 +255,7 @@ msgstr "Erro interno: modo inválido em battery_set_mode"
 
 #: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
-#: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
+#: applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Não consigo criar applet!\n"
@@ -387,16 +388,28 @@ msgstr ""
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr "Não consegui dup() o descritor de ficheiro APM: %s\n"
 
-#: applets/battery/read-battery.c:163
+#: applets/battery/read-battery.c:163 applets/battery/read-battery.c:195
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Não consegui abrir /dev/apm; não posso ler dados."
 
-#: applets/battery/read-battery.c:168
+#: applets/battery/read-battery.c:168 applets/battery/read-battery.c:200
 msgid "ioctl failed on /dev/apm."
 msgstr "Falhou ioctl no /dev/apm."
 
 #: applets/battery/read-battery.c:179
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr ""
+"APM está desactivado! Não posso ler informação sobre a carga da bateria."
+
+#: applets/battery/read-battery.c:211
+#, fuzzy
+msgid "APM battery state unknown!  Cannot read battery charge information."
+msgstr ""
+"APM está desactivado! Não posso ler informação sobre a carga da bateria."
+
+#: applets/battery/read-battery.c:215
+#, fuzzy
+msgid "APM ac state is unknown!  Cannot read battery charge information."
 msgstr ""
 "APM está desactivado! Não posso ler informação sobre a carga da bateria."
 
@@ -407,11 +420,6 @@ msgstr "Executar gtcd..."
 #: applets/charpick/charpick.c:314
 msgid "Character Picker"
 msgstr "Paleta de caracteres"
-
-#: applets/charpick/charpick.c:315
-#, fuzzy
-msgid "0.03"
-msgstr "0.02"
 
 #: applets/charpick/charpick.c:316
 msgid "Copyright (C) 1998"
@@ -580,26 +588,27 @@ msgid "Drive Mount Applet"
 msgstr "Applet Drive Mount"
 
 #: applets/drivemount/drivemount.c:81
+#, fuzzy
 msgid ""
 "Released under the GNU general public license.\n"
-"Mounts and Unmounts drives.."
+"Mounts and Unmounts drives."
 msgstr ""
 "Lançado sob os termos da \"GNU general public license\".\n"
 "Monta e desmonta drives.."
 
-#: applets/drivemount/drivemount.c:182
+#: applets/drivemount/drivemount.c:181
 msgid " mounted"
 msgstr " montado"
 
-#: applets/drivemount/drivemount.c:187
+#: applets/drivemount/drivemount.c:186
 msgid " not mounted"
 msgstr " não montado"
 
-#: applets/drivemount/drivemount.c:259
+#: applets/drivemount/drivemount.c:258
 msgid "\" reported:\n"
 msgstr ""
 
-#: applets/drivemount/drivemount.c:261
+#: applets/drivemount/drivemount.c:260
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -607,11 +616,11 @@ msgstr ""
 "Comando para montar o dispositivo falhou.\n"
 "\""
 
-#: applets/drivemount/drivemount.c:528
+#: applets/drivemount/drivemount.c:527
 msgid "Eject"
 msgstr "Ejectar"
 
-#: applets/drivemount/drivemount.c:537 gnome-terminal/gnome-terminal.c:1064
+#: applets/drivemount/drivemount.c:536 gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "Procurar..."
 
@@ -652,12 +661,12 @@ msgid "Use automount friendly status test"
 msgstr "Usar teste de estado amigável para o automount"
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Applet Gestor do Esound"
-
-#: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
 msgstr "Copyright (C)1998 Red Hat Software"
+
+#: applets/esd-manager/esdmanager_applet.c:30
+msgid "Esound MAnager Applet"
+msgstr "Applet Gestor do Esound"
 
 #: applets/esd-manager/esdmanager_applet.c:32
 msgid "This does nothing useful"
@@ -670,10 +679,6 @@ msgstr "Você ganhou!"
 #: applets/fifteen/fifteen.c:266
 msgid "Fifteen sliding pieces"
 msgstr "Quinze peças deslizantes"
-
-#: applets/fifteen/fifteen.c:267
-msgid "1.0"
-msgstr "1.0"
 
 #: applets/fifteen/fifteen.c:268
 msgid "Copyright (C) The Free Software Foundation"
@@ -695,55 +700,55 @@ msgstr "Não consigo criar applet do quinze!"
 msgid "Scramble pieces"
 msgstr "Baralhar peças"
 
-#: applets/fish/fish.c:126 applets/fish/fish.c:417
+#: applets/fish/fish.c:136 applets/fish/fish.c:427
 #, c-format
 msgid "%s the Fish"
 msgstr "O peixe %s"
 
-#: applets/fish/fish.c:127
+#: applets/fish/fish.c:137
 #, c-format
 msgid "%s the GNOME Fish Says:"
 msgstr "%s, o peixe GNOME diz:"
 
-#: applets/fish/fish.c:213
+#: applets/fish/fish.c:223
 msgid "GNOME Fish Properties"
 msgstr "Propriedades do peixe GNOME"
 
-#: applets/fish/fish.c:221
+#: applets/fish/fish.c:231
 msgid "Your GNOME Fish's Name:"
 msgstr "Nome do seu peixe GNOME:"
 
-#: applets/fish/fish.c:235
+#: applets/fish/fish.c:245
 msgid "The Animation Filename:"
 msgstr "Nome do ficheiro com a animação:"
 
-#: applets/fish/fish.c:237 gnome-terminal/gnome-terminal.c:1202
+#: applets/fish/fish.c:247 gnome-terminal/gnome-terminal.c:1202
 #: panel/menu.c:3487 panel/panel-util.c:78 panel/panel-util.c:116
 #: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "Procurar"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:260
 msgid "Frames In Animation:"
 msgstr "Imagens na animação:"
 
-#: applets/fish/fish.c:266
+#: applets/fish/fish.c:276
 msgid "Pause per frame (s):"
 msgstr "Pausa por imagem (s):"
 
-#: applets/fish/fish.c:280
+#: applets/fish/fish.c:290
 msgid "Fish"
 msgstr "Peixe"
 
-#: applets/fish/fish.c:426
+#: applets/fish/fish.c:436
 msgid "(with minor help from George)"
 msgstr "(com uma pequena ajuda do George)"
 
-#: applets/fish/fish.c:430
+#: applets/fish/fish.c:440
 msgid "The GNOME Fish Applet"
 msgstr "O applet do peixe GNOME"
 
-#: applets/fish/fish.c:433
+#: applets/fish/fish.c:443
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
@@ -767,10 +772,6 @@ msgstr "Copyright (C) 1998 M. Lausch"
 #, c-format
 msgid "Desk %d"
 msgstr ""
-
-#: applets/fvwm-pager/fvwm-pager.c:406
-msgid "About\t"
-msgstr "Acerca\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:412
 msgid "Properties"
@@ -814,19 +815,22 @@ msgid "%a %b %d"
 msgstr "%a %d %b"
 
 #: applets/gen_util/clock.c:154
+#, fuzzy
 msgid ""
-"%I:%M\n"
+"%l:%M\n"
 "%p"
 msgstr "%I:%M %p"
 
 #: applets/gen_util/clock.c:157
-msgid "%I:%M %p"
+#, fuzzy
+msgid "%l:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:105
-msgid "%H:%M"
+#: applets/gen_util/clock.c:163
+#, fuzzy
+msgid "%k:%M"
 msgstr "%H:%M"
 
 #: applets/gen_util/clock.c:405
@@ -916,19 +920,19 @@ msgstr ""
 msgid "Text only"
 msgstr "Só texto"
 
-#: applets/gen_util/printer.c:346
+#: applets/gen_util/printer.c:341
 msgid "Printer properties"
 msgstr "Propriedades de impressora"
 
-#: applets/gen_util/printer.c:354
+#: applets/gen_util/printer.c:349
 msgid "Printer name:"
 msgstr "Nome da impressora:"
 
-#: applets/gen_util/printer.c:358
+#: applets/gen_util/printer.c:353
 msgid "Print command:"
 msgstr "Comando para imprimir:"
 
-#: applets/gen_util/printer.c:364
+#: applets/gen_util/printer.c:359
 msgid "Printer"
 msgstr "Impressora"
 
@@ -992,12 +996,12 @@ msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
 #: applets/gnome-pager/gnomepager_applet.c:133
-msgid "Desktop Pager Applet"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:133
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:133
+msgid "Desktop Pager Applet"
+msgstr ""
 
 #: applets/gnome-pager/gnomepager_applet.c:135
 msgid "Pager for a GNOME compliant Window Manager"
@@ -1248,6 +1252,11 @@ msgstr "filho terminou"
 msgid "%H:%M - %d. %b"
 msgstr "%H:%M - %d. %b"
 
+#. timeFormat = _("%H:%M %Z");
+#: applets/mini-commander/src/message.c:105
+msgid "%H:%M"
+msgstr "%H:%M"
+
 #: applets/mini-commander/src/message.c:107
 msgid "%d. %b"
 msgstr "%d. %b"
@@ -1267,7 +1276,7 @@ msgid "History"
 msgstr "História"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:170 help-browser/window.c:207
+#: gsm/session-properties.c:176 help-browser/window.c:207
 msgid "Help"
 msgstr "Ajuda"
 
@@ -1475,6 +1484,10 @@ msgid "Load Graph"
 msgstr "Gráfico de Carga"
 
 #: applets/multiload/load-graph.c:180
+msgid "Height:"
+msgstr "Altura:"
+
+#: applets/multiload/load-graph.c:180
 msgid "Speed:"
 msgstr "Velocidade:"
 
@@ -1482,13 +1495,9 @@ msgstr "Velocidade:"
 msgid "Width:"
 msgstr "Largura:"
 
-#: applets/multiload/load-graph.c:180
-msgid "Height:"
-msgstr "Altura:"
-
 #: applets/multiload/main.c:27
-msgid "User"
-msgstr "Utilizador"
+msgid "Idle"
+msgstr "Livre"
 
 #: applets/multiload/main.c:27
 msgid "Nice"
@@ -1499,7 +1508,15 @@ msgid "System"
 msgstr "Sistema"
 
 #: applets/multiload/main.c:27
-msgid "Idle"
+msgid "User"
+msgstr "Utilizador"
+
+#: applets/multiload/main.c:31
+msgid "Buffers"
+msgstr "Buffers"
+
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+msgid "Free"
 msgstr "Livre"
 
 #: applets/multiload/main.c:31
@@ -1509,14 +1526,6 @@ msgstr "Outro"
 #: applets/multiload/main.c:31
 msgid "Shared"
 msgstr "Partilhada"
-
-#: applets/multiload/main.c:31
-msgid "Buffers"
-msgstr "Buffers"
-
-#: applets/multiload/main.c:31 applets/multiload/main.c:35
-msgid "Free"
-msgstr "Livre"
 
 #: applets/multiload/main.c:35
 msgid "Used"
@@ -1745,20 +1754,20 @@ msgstr "Aparência"
 msgid " Folder"
 msgstr " Pasta"
 
-#: gmenu/edit.c:317
+#: gmenu/edit.c:318
 msgid "Save"
 msgstr "Gravar"
 
-#: gmenu/edit.c:334 gsm/session-properties.c:161
+#: gmenu/edit.c:335 gsm/session-properties.c:167
 msgid "Revert"
 msgstr "Reverter"
 
-#: gmenu/edit.c:371 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
+#: gmenu/edit.c:372 panel/menu.c:2169 panel/menu.c:2172 panel/menu.c:2899
 #: panel/menu.c:2944 panel/menu.c:2947
 msgid "User menus"
 msgstr "Menus de utilizador"
 
-#: gmenu/edit.c:375 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
+#: gmenu/edit.c:376 panel/menu.c:2070 panel/menu.c:2074 panel/menu.c:2161
 #: panel/menu.c:2930
 msgid "System menus"
 msgstr "Menus de sistema"
@@ -1808,12 +1817,12 @@ msgid "New Submenu"
 msgstr "Novo Submenu"
 
 #: gmenu/main.c:102
-msgid "New Item"
-msgstr "Novo Item"
-
-#: gmenu/main.c:102
 msgid "Create a new item"
 msgstr "Cria um novo item"
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr "Novo Item"
 
 #: gmenu/main.c:106
 msgid "Delete"
@@ -1824,12 +1833,12 @@ msgid "Delete selected menu item"
 msgstr "Apaga o item de menu seleccionado"
 
 #: gmenu/main.c:110 gmenu/main.c:140
-msgid "Move up"
-msgstr "Sobe"
-
-#: gmenu/main.c:110 gmenu/main.c:140
 msgid "Move selected menu up"
 msgstr "Move o menu seleccionado para cima"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "Sobe"
 
 #: gmenu/main.c:113 gmenu/main.c:143
 msgid "Move down"
@@ -2149,12 +2158,12 @@ msgid "Color selector"
 msgstr "Selector de cores"
 
 #: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
-msgid "_New terminal"
-msgstr "_Novo terminal"
-
-#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "Cria uma nova janela de terminal"
+
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
+msgid "_New terminal"
+msgstr "_Novo terminal"
 
 #: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
@@ -2165,12 +2174,12 @@ msgid "_Close terminal"
 msgstr "_Fechar terminal"
 
 #: gnome-terminal/gnome-terminal.c:1492
-msgid "_Show menubar"
-msgstr "_Mostrar barra de menu"
-
-#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1492
+msgid "_Show menubar"
+msgstr "_Mostrar barra de menu"
 
 #: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
@@ -2215,20 +2224,20 @@ msgid ""
 msgstr ""
 
 #: gnome-terminal/gnome-terminal.c:2232
-msgid "Terminal class name"
-msgstr "Nome da classe de terminal"
-
-#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
 msgstr "TCLASSE"
 
-#: gnome-terminal/gnome-terminal.c:2235
-msgid "Specifies font name"
-msgstr "Especifica o nome da fonte"
+#: gnome-terminal/gnome-terminal.c:2232
+msgid "Terminal class name"
+msgstr "Nome da classe de terminal"
 
 #: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "FONTE"
+
+#: gnome-terminal/gnome-terminal.c:2235
+msgid "Specifies font name"
+msgstr "Especifica o nome da fonte"
 
 #: gnome-terminal/gnome-terminal.c:2238
 #, fuzzy
@@ -2241,45 +2250,45 @@ msgid "Start up shells as login shells"
 msgstr "Executar 'shells' como 'login shells'"
 
 #: gnome-terminal/gnome-terminal.c:2244
-msgid "Specifies the geometry for the main window"
-msgstr "Especifica a geometria para a janela principal"
-
-#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: gnome-terminal/gnome-terminal.c:2247
-msgid "Execute this program instead of a shell"
-msgstr "Executar este programa em vez de uma 'shell'"
+#: gnome-terminal/gnome-terminal.c:2244
+msgid "Specifies the geometry for the main window"
+msgstr "Especifica a geometria para a janela principal"
 
 #: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
 msgstr "COMANDO"
+
+#: gnome-terminal/gnome-terminal.c:2247
+msgid "Execute this program instead of a shell"
+msgstr "Executar este programa em vez de uma 'shell'"
 
 #: gnome-terminal/gnome-terminal.c:2250
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "Executar este programa em vez de uma 'shell'"
 
-#: gnome-terminal/gnome-terminal.c:2253
-msgid "Foreground color"
-msgstr "Cor do Texto"
-
 #: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "COR"
+
+#: gnome-terminal/gnome-terminal.c:2253
+msgid "Foreground color"
+msgstr "Cor do Texto"
 
 #: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Cor do Fundo"
 
 #: gnome-terminal/gnome-terminal.c:2259
-msgid "Update utmp entry"
-msgstr "Actualizar entradas utmp"
-
-#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
 msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2259
+msgid "Update utmp entry"
+msgstr "Actualizar entradas utmp"
 
 #: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
@@ -2326,47 +2335,43 @@ msgid "Start chooser and pick the session"
 msgstr "Mostar opções e escolher a sessão"
 
 #: gsm/main.c:57
-msgid "Disable normal operation by saving into the Trash session"
-msgstr "Inibe operação normal gravando para a sessão Lixo"
-
-#: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
 msgstr "Só ler sessões gravadas do ficheiro default.session"
 
-#: gsm/main.c:59
+#: gsm/main.c:58
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr "Milisegundos gastos à espera que os clientes se registem (0=infinito)"
 
-#: gsm/main.c:60
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
 msgstr "Milisegundos gastos à espera que os clientes respondam (0=infinito)"
 
-#: gsm/main.c:61
+#: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr "Milisegundos gastos à espera que os clientes morram (0=infinito)"
 
-#: gsm/manager.c:372
+#: gsm/manager.c:376
 msgid "Wait abandoned due to conflict."
 msgstr "Espera abandonada devido a falhas."
 
-#: gsm/manager.c:822
+#: gsm/manager.c:826
 #, c-format
 msgid "No response to the %s command."
 msgstr "Nenhuma resposta ao comado %s."
 
-#: gsm/manager.c:823
+#: gsm/manager.c:827
 msgid "The program may be slow, stopped or broken."
 msgstr "O programa pode ser lento, estar parado ou \"broken\"."
 
-#: gsm/manager.c:824
+#: gsm/manager.c:828
 msgid "You may wait for it to respond or remove it."
 msgstr "Pode esperar que ele responda ou apagá-lo."
 
-#: gsm/manager.c:1341
+#: gsm/manager.c:1359
 msgid "Respawn abandoned due to failures."
 msgstr "Re-execução abandonada devido a falhas."
 
-#: gsm/manager.c:1509
+#: gsm/manager.c:1527
 msgid "A session shutdown is in progress."
 msgstr "O encerramento da sessão está a ser efectuado."
 
@@ -2378,45 +2383,41 @@ msgstr "Terminar sessão"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: não consegui ligar-me ao gestor de sessão\n"
 
-#: gsm/session-properties.c:125
-msgid "Program:"
-msgstr "Aplicação:"
-
 #. buttons
-#: gsm/session-properties.c:158
+#: gsm/session-properties.c:164
 msgid "Try"
 msgstr "Experimentar"
 
-#: gsm/session-properties.c:164
+#: gsm/session-properties.c:170
 msgid "OK"
 msgstr "OK"
 
-#: gsm/session-properties.c:167
+#: gsm/session-properties.c:173
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: gsm/session-properties.c:258
+#: gsm/session-properties.c:264
 msgid "Session"
 msgstr "Dessão"
 
 #. app
-#: gsm/session-properties.c:312
+#: gsm/session-properties.c:318
 msgid "Session Chooser"
 msgstr "Escolha de Sessão"
 
-#: gsm/session-properties.c:315
+#: gsm/session-properties.c:321
 msgid "Start Session"
 msgstr "Iniciar Sessão"
 
-#: gsm/session-properties.c:318
+#: gsm/session-properties.c:324
 msgid "Cancel Login"
 msgstr "Cancelar Login"
 
-#: gsm/session-properties.c:344
+#: gsm/session-properties.c:350
 msgid "Initialize session settings"
 msgstr "Inicializar propriedades de sessão"
 
-#: gsm/session-properties.c:345
+#: gsm/session-properties.c:351
 msgid "Only display warnings."
 msgstr "Só mostrar avisos."
 
@@ -2438,36 +2439,36 @@ msgid "Remove"
 msgstr "Apagar"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X position of window"
-msgstr "Posição X da janela"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X"
 msgstr "X"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y position of window"
-msgstr "Posição Y da janela"
+#: help-browser/gnome-help-browser.c:121
+msgid "X position of window"
+msgstr "Posição X da janela"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y"
 msgstr "Y"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "Width of window"
-msgstr "Largura da janela"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y position of window"
+msgstr "Posição Y da janela"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "WIDTH"
 msgstr "LARGURA"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "Height of window"
-msgstr "Altura da janela"
+#: help-browser/gnome-help-browser.c:123
+msgid "Width of window"
+msgstr "Largura da janela"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "HEIGHT"
 msgstr "ALTURA"
+
+#: help-browser/gnome-help-browser.c:124
+msgid "Height of window"
+msgstr "Altura da janela"
 
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
@@ -2533,21 +2534,21 @@ msgstr "História e cache"
 msgid "Paths"
 msgstr "Paths"
 
-#: help-browser/gnome-helpwin.c:215
+#: help-browser/gnome-helpwin.c:216
 msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Erro: ficheiro inexistente</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Nº de visitas"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Última visita"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Nº de visitas"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2710,28 +2711,28 @@ msgid "Open new browser window"
 msgstr "Abre nova janela"
 
 #: help-browser/window.c:136
-msgid "_Add Bookmark"
-msgstr "_Adicionar Marca"
-
-#: help-browser/window.c:136
 msgid "Add bookmark"
 msgstr "Adicionar marca"
 
-#: help-browser/window.c:161
-msgid "_History"
-msgstr "_História"
+#: help-browser/window.c:136
+msgid "_Add Bookmark"
+msgstr "_Adicionar Marca"
 
 #: help-browser/window.c:161 help-browser/window.c:202
 msgid "Show History Window"
 msgstr "Abrir Janela da História"
 
-#: help-browser/window.c:166
-msgid "_Bookmarks"
-msgstr "_Marcas"
+#: help-browser/window.c:161
+msgid "_History"
+msgstr "_História"
 
 #: help-browser/window.c:166 help-browser/window.c:204
 msgid "Show Bookmarks Window"
 msgstr "Mostrar Janela de Marcas"
+
+#: help-browser/window.c:166
+msgid "_Bookmarks"
+msgstr "_Marcas"
 
 #: help-browser/window.c:180
 msgid "_Window"
@@ -2782,11 +2783,12 @@ msgstr "Localização: "
 msgid ""
 "Error loading document:\n"
 "\n"
-"%s"
-msgstr ""
-"Erro a carregar documento:\n"
+"%s\n"
 "\n"
-"%s"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
 
 #: help-browser/window.c:820
 msgid "Ok"
@@ -2846,7 +2848,7 @@ msgstr "Apl"
 msgid "Launcher properties"
 msgstr "Propriedades do launcher"
 
-#: panel/launcher.c:368
+#: panel/launcher.c:369
 msgid "Create launcher applet"
 msgstr "Criar launcher"
 
@@ -2858,7 +2860,7 @@ msgstr "Terminar sessão"
 msgid "Log out of GNOME"
 msgstr "Sair do GNOME"
 
-#: panel/main.c:121
+#: panel/main.c:132
 msgid ""
 "I've detected a panel already running.\n"
 "Start another panel as well?\n"
@@ -3334,3 +3336,28 @@ msgstr "Comando (opcional)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "Altura"
+
+#, fuzzy
+#~ msgid "0.03"
+#~ msgstr "0.02"
+
+#~ msgid "1.0"
+#~ msgstr "1.0"
+
+#~ msgid "About\t"
+#~ msgstr "Acerca\t"
+
+#~ msgid "Disable normal operation by saving into the Trash session"
+#~ msgstr "Inibe operação normal gravando para a sessão Lixo"
+
+#~ msgid "Program:"
+#~ msgstr "Aplicação:"
+
+#~ msgid ""
+#~ "Error loading document:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Erro a carregar documento:\n"
+#~ "\n"
+#~ "%s"
