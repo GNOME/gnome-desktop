@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-core 0.20\n"
-"POT-Creation-Date: 1998-08-07 05:05+0100\n"
-"PO-Revision-Date: 1998-08-07 05:55+01:00\n"
+"Project-Id-Version: gnome-core 0.27\n"
+"POT-Creation-Date: 1998-08-18 02:25+0100\n"
+"PO-Revision-Date: 1998-08-18 03:19+01:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr "Fechar"
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Erro interno: modo inválido em battery_set_mode"
 
-#: applets/battery/battery.c:398 applets/cpuload/cpuload.c:201
+#: applets/battery/battery.c:398 applets/cpuload/cpuload.c:203
 #: applets/fish/fish.c:293 applets/gen_util/clock.c:231
 #: applets/gen_util/mailcheck.c:566 applets/gen_util/printer.c:363
 #: applets/netload/netload.c:320
@@ -190,8 +190,8 @@ msgstr ""
 #: applets/fish/fish.c:310 applets/gen_util/mailcheck.c:595
 #: applets/icewm-pager/wmpager_applet.c:85
 #: applets/modemlights/modemlights.c:533 applets/netload/netload.c:338
-#: applets/webcontrol/webcontrol.c:288 gmenu/gmenu.c:56
-#: gnome-terminal/gnome-terminal.c:677 panel/menu.c:1404
+#: applets/webcontrol/webcontrol.c:288 gmenu/gmenu.c:70
+#: gnome-terminal/gnome-terminal.c:677 panel/menu.c:1410
 msgid "About..."
 msgstr "Acerca..."
 
@@ -246,20 +246,22 @@ msgid ""
 "arrives."
 msgstr ""
 "Lançado sob a \"GNU general public license\".\n"
-"Relógio digital básico com a data numa ajuda de balão. Mostrador 12/24 horas. O piscar do correio pode ser para qualquer correio não lido ou apenas brevemente quando chega novo correio."
+"Relógio digital básico com a data numa ajuda de balão. Mostrador 12/24 "
+"horas. O piscar do correio pode ser para qualquer correio não lido ou apenas "
+"brevemente quando chega novo correio."
 
 #: applets/clockmail/clockmail.c:339
 msgid "date"
 msgstr "data"
 
-#: applets/clockmail/clockmail.c:369 applets/cpuload/cpuload.c:219
+#: applets/clockmail/clockmail.c:369 applets/cpuload/cpuload.c:221
 #: applets/diskusage/diskusage.c:583 applets/drivemount/drivemount.c:339
 #: applets/fish/fish.c:318 applets/gen_util/clock.c:258
 #: applets/gen_util/mailcheck.c:588 applets/gen_util/printer.c:388
 #: applets/icewm-pager/wmpager_applet.c:93
 #: applets/modemlights/modemlights.c:527 applets/netload/netload.c:345
 #: applets/webcontrol/webcontrol.c:296 gnome-terminal/gnome-terminal.c:669
-#: panel/drawer.c:518 panel/launcher.c:277
+#: panel/drawer.c:409 panel/launcher.c:295 panel/menu.c:1960
 msgid "Properties..."
 msgstr "Propriedades..."
 
@@ -420,7 +422,9 @@ msgstr "Copyright (C) The Free Software Foundation"
 msgid ""
 "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
 "Guaranteed to be a productivity buster."
-msgstr "O jogo favorito de todos os tempos de Sam Lloyd, agora para seu prazer no painel Gnome. Garantia de arruinar a sua productividade."
+msgstr ""
+"O jogo favorito de todos os tempos de Sam Lloyd, agora para seu prazer no "
+"painel Gnome. Garantia de arruinar a sua productividade."
 
 #: applets/fifteen/fifteen.c:288
 msgid "Can't create fifteen applet!"
@@ -757,10 +761,6 @@ msgstr "Mostrar opção \"abrir nova janela\""
 msgid "Look"
 msgstr "Aparência"
 
-#: applets/winlist/winlist.c:39
-msgid "readfd writefd"
-msgstr ""
-
 #: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "Propriedades do fundo"
@@ -785,7 +785,7 @@ msgstr "Propriedades da Interface GNOME"
 msgid "Set parameters from saved state and exit"
 msgstr "Usar parâmetros gravados e sair"
 
-#: desktop-properties/property-background.c:494 panel/panel_config.c:613
+#: desktop-properties/property-background.c:494 panel/panel_config.c:624
 msgid "Color"
 msgstr "Cor"
 
@@ -797,12 +797,12 @@ msgstr "Sólido"
 msgid "Gradient"
 msgstr "Gradiente"
 
-#: desktop-properties/property-background.c:539 panel/panel_config.c:492
+#: desktop-properties/property-background.c:539 panel/panel_config.c:503
 msgid "Vertical"
 msgstr "Vertical"
 
 #. Horizontal
-#: desktop-properties/property-background.c:545 panel/panel_config.c:479
+#: desktop-properties/property-background.c:545 panel/panel_config.c:490
 msgid "Horizontal"
 msgstr "Horizontal"
 
@@ -1091,21 +1091,21 @@ msgid "Modal"
 msgstr "Modal"
 
 #: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:458
-#: panel/panel_config.c:276
+#: panel/panel_config.c:287
 msgid "Left"
 msgstr "Esquerda"
 
 #: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:459
-#: panel/panel_config.c:287
+#: panel/panel_config.c:298
 msgid "Right"
 msgstr "Direita"
 
 #. Top Position
-#: desktop-properties/property-ui.c:91 panel/panel_config.c:254
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:265
 msgid "Top"
 msgstr "Topo"
 
-#: desktop-properties/property-ui.c:92 panel/panel_config.c:265
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:276
 msgid "Bottom"
 msgstr "Fundo"
 
@@ -1186,7 +1186,7 @@ msgstr " Cancelar "
 msgid " Defaults "
 msgstr " Valores por omissão "
 
-#: desktop-properties/xlockmore.cc:178 gmenu/gmenu.c:64
+#: desktop-properties/xlockmore.cc:178 gmenu/gmenu.c:80
 #: gnome-terminal/gnome-terminal.c:686 help-browser/window.c:176
 #: help-browser/window.c:201
 msgid "Help"
@@ -1208,65 +1208,6 @@ msgstr " Opções "
 msgid " Preview "
 msgstr " Prever "
 
-#: gemvt/getopt.c:669
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
-
-#: gemvt/getopt.c:693
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
-
-#: gemvt/getopt.c:698
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
-
-#: gemvt/getopt.c:715 gemvt/getopt.c:888
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr ""
-
-#. --option
-#: gemvt/getopt.c:744
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
-
-#. +option or -option
-#: gemvt/getopt.c:748
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: gemvt/getopt.c:774
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr ""
-
-#: gemvt/getopt.c:777
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: gemvt/getopt.c:807 gemvt/getopt.c:937
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr ""
-
-#: gemvt/getopt.c:854
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
-
-#: gemvt/getopt.c:872
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
-
 #: gmenu/dialogs.c:39
 msgid "File exists."
 msgstr "Ficheiro existe."
@@ -1283,7 +1224,7 @@ msgstr ""
 "Não pode adicionar uma entrada a essa pasta!\n"
 "Para editar entradas do sistema tem que ser root."
 
-#: gmenu/dialogs.c:125 gmenu/gmenu.c:327
+#: gmenu/dialogs.c:125 gmenu/gmenu.c:87
 msgid "New Folder"
 msgstr "Nova Pasta"
 
@@ -1375,51 +1316,99 @@ msgstr "Reverter"
 msgid "New"
 msgstr "Novo"
 
-#: gmenu/gmenu.c:42
+#: gmenu/gmenu.c:47
 msgid "New Folder..."
 msgstr "Nova Pasta..."
 
-#: gmenu/gmenu.c:45
+#: gmenu/gmenu.c:50
 msgid "Delete..."
 msgstr "Apagar..."
 
-#: gmenu/gmenu.c:48
+#: gmenu/gmenu.c:53
 msgid "Quit"
 msgstr "Sair"
 
-#: gmenu/gmenu.c:62 help-browser/window.c:174
+#: gmenu/gmenu.c:59
+msgid "Folder"
+msgstr "Pasta"
+
+#: gmenu/gmenu.c:62
+msgid "Folder Recursive"
+msgstr "Pasta recursivamente"
+
+#: gmenu/gmenu.c:76 help-browser/window.c:174
 msgid "File"
 msgstr "Ficheiro"
 
-#: gmenu/gmenu.c:192
+#: gmenu/gmenu.c:78
+msgid "Sort"
+msgstr "Ordenar"
+
+#: gmenu/gmenu.c:87
+msgid "Create a new folder"
+msgstr "Criar uma nova pasta"
+
+#: gmenu/gmenu.c:89 gsm/session-properties.c:196
+msgid "Delete"
+msgstr "Apagar"
+
+#: gmenu/gmenu.c:89
+msgid "Delete selected menu item"
+msgstr "Apagar item de menu seleccionado"
+
+#: gmenu/gmenu.c:92
+msgid "Move up"
+msgstr "Mover para cima"
+
+#: gmenu/gmenu.c:92
+msgid "Move selected menu up"
+msgstr "Mover menu seleccionado para cima"
+
+#: gmenu/gmenu.c:94
+msgid "Move down"
+msgstr "Mover para baixo"
+
+#: gmenu/gmenu.c:94
+msgid "Move selected menu down"
+msgstr "Mover menu seleccionado para baixo"
+
+#: gmenu/gmenu.c:97
+msgid "Properties"
+msgstr "Propriedades"
+
+#: gmenu/gmenu.c:97
+msgid "Edit selected menu item properties"
+msgstr "Editar propriedades do item de menu seleccionado"
+
+#: gmenu/gmenu.c:100
+msgid "Sort Folder"
+msgstr "Ordenar pasta"
+
+#: gmenu/gmenu.c:100
+msgid "Sort selected folder"
+msgstr "Ordenar pasta seleccionada"
+
+#: gmenu/gmenu.c:270
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "criando directoria do utilizador: %s\n"
 
-#: gmenu/gmenu.c:195
+#: gmenu/gmenu.c:273
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "não consegui criar directoria do utilizador: %s\n"
 
-#: gmenu/gmenu.c:240 gmenu/gmenu.c:282 gmenu/gmenu.c:388
+#: gmenu/gmenu.c:318 gmenu/gmenu.c:357 gmenu/gmenu.c:414 gmenu/tree.c:501
 msgid "GNOME menu editor"
 msgstr "Editor de menus GNOME"
 
-#: gmenu/gmenu.c:243
+#: gmenu/gmenu.c:321
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
 msgstr ""
 "Lançado sob os termos da \"GNU Public License\".\n"
 "Editor do menu GNOME."
-
-#: gmenu/gmenu.c:338 gsm/session-properties.c:196
-msgid "Delete"
-msgstr "Apagar"
-
-#: gmenu/gmenu.c:367
-msgid "Edit Properties"
-msgstr "Editar propriedades"
 
 #: gmenu/order.c:70
 #, c-format
@@ -1435,29 +1424,33 @@ msgstr "Não consegui apagar ficheiro .order: %s\n"
 msgid " Folder"
 msgstr " Pasta"
 
-#: gmenu/tree.c:363
+#: gmenu/tree.c:511
+msgid "One moment, reading menus..."
+msgstr "Um momento, lendo menus..."
+
+#: gmenu/tree.c:536
 msgid "GNOME"
 msgstr "GNOME"
 
 #. system's menu tree
-#: gmenu/tree.c:371 panel/menu.c:1199 panel/menu.c:1237 panel/menu.c:1437
+#: gmenu/tree.c:544 panel/menu.c:1205 panel/menu.c:1243 panel/menu.c:1443
 msgid "System Menus"
 msgstr "Menus de sistema"
 
-#: gmenu/tree.c:381
+#: gmenu/tree.c:554
 msgid "Top of system menus"
 msgstr "Topo dos menus de sistema"
 
-#: gmenu/tree.c:392
-msgid "Running with root privileges.\n"
-msgstr "A executar com privilégios de root.\n"
+#: gmenu/tree.c:561
+msgid "Running with System Menu privileges.\n"
+msgstr "A executar com privilégios de Menu de Sistema.\n"
 
 #. user's menu tree
-#: gmenu/tree.c:401 panel/menu.c:1220 panel/menu.c:1247 panel/menu.c:1448
+#: gmenu/tree.c:570 panel/menu.c:1226 panel/menu.c:1253 panel/menu.c:1454
 msgid "User Menus"
 msgstr "Menus de Utilizador"
 
-#: gmenu/tree.c:411
+#: gmenu/tree.c:580
 msgid "Top of user menus"
 msgstr "Topo dos menus de utilizador"
 
@@ -1612,7 +1605,7 @@ msgstr "Executar este programa em vez de uma 'shell'"
 msgid "Foreground color"
 msgstr "Cor do Texto"
 
-#: gnome-terminal/gnome-terminal.c:1151 panel/panel_config.c:663
+#: gnome-terminal/gnome-terminal.c:1151 panel/panel_config.c:674
 msgid "Background color"
 msgstr "Cor do Fundo"
 
@@ -1620,7 +1613,7 @@ msgstr "Cor do Fundo"
 msgid "ID"
 msgstr "ID"
 
-#: gsm/main.c:42
+#: gsm/main.c:55
 msgid "[SESSION]"
 msgstr "[SESSÃO]"
 
@@ -1781,67 +1774,49 @@ msgstr "Nº de visitas"
 msgid "Gnome Help History"
 msgstr "História da Ajuda GNOME"
 
-#: help-browser/toc-man.c:18 help-browser/toc2-man.c:21
+#: help-browser/toc2-man.c:21
 msgid "User Commands"
 msgstr "Comados de utilizador"
 
-#: help-browser/toc-man.c:19 help-browser/toc2-man.c:22
+#: help-browser/toc2-man.c:22
 msgid "System Calls"
 msgstr "Chamadas de sistema"
 
-#: help-browser/toc-man.c:20 help-browser/toc2-man.c:23
+#: help-browser/toc2-man.c:23
 msgid "Library Functions"
 msgstr "Funções das bibliotecas"
 
-#: help-browser/toc-man.c:21 help-browser/toc2-man.c:24
+#: help-browser/toc2-man.c:24
 msgid "Special Files"
 msgstr "Ficheiros especiais"
 
-#: help-browser/toc-man.c:22 help-browser/toc2-man.c:25
+#: help-browser/toc2-man.c:25
 msgid "File Formats"
 msgstr "Formatos de ficheiros"
 
-#: help-browser/toc-man.c:23 help-browser/toc2-man.c:26
+#: help-browser/toc2-man.c:26
 msgid "Games"
 msgstr "Jogos"
 
-#: help-browser/toc-man.c:24 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:352
+#: help-browser/toc2-man.c:27 panel/panel_config_global.c:359
 msgid "Miscellaneous"
 msgstr "Vários"
 
-#: help-browser/toc-man.c:25 help-browser/toc2-man.c:28
+#: help-browser/toc2-man.c:28
 msgid "Administration"
 msgstr "Administração"
 
-#: help-browser/toc-man.c:26 help-browser/toc2-man.c:29
+#: help-browser/toc2-man.c:29
 msgid "man9"
 msgstr "Funções do núcleo"
 
-#: help-browser/toc-man.c:27 help-browser/toc2-man.c:30
+#: help-browser/toc2-man.c:30
 msgid "mann"
 msgstr "mann"
 
-#: help-browser/toc-man.c:28 help-browser/toc2-man.c:31
+#: help-browser/toc2-man.c:31
 msgid "manx"
 msgstr "manx"
-
-#. Add one new item for each type
-#. This really should iterate through the toc_config list
-#. MAN PAGES
-#: help-browser/toc.c:134
-msgid "Man Pages"
-msgstr "Páginas de Manual"
-
-#. INFO PAGES
-#: help-browser/toc.c:146
-msgid "Info Pages"
-msgstr "Páginas Info"
-
-#. GNOME HELP
-#: help-browser/toc.c:158
-msgid "GNOME Help"
-msgstr "Ajuda GNOME"
 
 #: help-browser/toc2.c:114 help-browser/toc2.c:255 help-browser/toc2.c:317
 msgid "<h1>Table of Contents</h1>\n"
@@ -2024,47 +1999,47 @@ msgstr "Marcad"
 msgid "Help on Help"
 msgstr "Ajuda sobre a Ajuda"
 
-#: panel/applet.c:298
+#: panel/applet.c:310
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:325
+#: panel/applet.c:337
 msgid "Remove from panel"
 msgstr "Apagar do painel"
 
-#: panel/applet.c:332
+#: panel/applet.c:344
 msgid "Move applet"
 msgstr "Mover applet"
 
-#: panel/drawer.c:88
-msgid "Drawer properties"
-msgstr "Propriedades da gaveta"
-
-#: panel/drawer.c:97
+#: panel/drawer.c:95
 msgid "Tooltip/Name"
 msgstr "Ajuda de balão/Nome"
 
-#: panel/drawer.c:101
+#: panel/drawer.c:99
 msgid "Icon"
 msgstr "Ícone"
 
-#: panel/drawer.c:106 panel/menu.c:1167
+#: panel/drawer.c:103
+msgid "Applet appearance"
+msgstr "Aparência do applet"
+
+#: panel/drawer.c:112 panel/menu.c:1173
 msgid "Drawer"
 msgstr "Gaveta"
 
-#: panel/launcher.c:117
+#: panel/launcher.c:131
 msgid "App"
 msgstr "Apl"
 
-#: panel/launcher.c:214
+#: panel/launcher.c:232
 msgid "Launcher properties"
 msgstr "Propriedades do ??Launcher"
 
-#: panel/launcher.c:298
+#: panel/launcher.c:316
 msgid "Create launcher applet"
 msgstr "Criar applet ??launcher"
 
-#: panel/logout.c:26 panel/menu.c:1278 panel/menu.c:1414
+#: panel/logout.c:26 panel/menu.c:1284 panel/menu.c:1420
 msgid "Log out"
 msgstr "Terminar sessão"
 
@@ -2072,11 +2047,11 @@ msgstr "Terminar sessão"
 msgid "Discard session"
 msgstr "??Rejeitar sessão"
 
-#: panel/menu.c:77
+#: panel/menu.c:79
 msgid "The GNOME Panel"
 msgstr "O painel GNOME"
 
-#: panel/menu.c:80
+#: panel/menu.c:82
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -2084,175 +2059,212 @@ msgstr ""
 "Este programa é responsável por executar outras aplicações, embeber pequenos "
 "applets, a paz mundial e \"crashes\" aleatórios do X."
 
-#: panel/menu.c:316
+#: panel/menu.c:318
 msgid "Add this launcher to panel"
 msgstr "Adicionar este ??launcher ao painel"
 
-#: panel/menu.c:324
+#: panel/menu.c:326
 msgid "Add this as drawer to panel"
 msgstr "Adicionar ao painel como gaveta"
 
-#: panel/menu.c:332
+#: panel/menu.c:334
 msgid "Add this as menu to panel"
 msgstr "Adicionar ao painel como menu"
 
-#: panel/menu.c:341
+#: panel/menu.c:343
 msgid "Properties ..."
 msgstr "Propriedades ..."
 
-#: panel/menu.c:404 panel/menu.c:462
+#: panel/menu.c:406 panel/menu.c:464
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:1115
+#: panel/menu.c:1121
 msgid "Applets"
 msgstr "Applets"
 
-#: panel/menu.c:1174 panel/panel_config.c:778
+#: panel/menu.c:1180 panel/panel_config.c:789
 msgid "Edge Panel"
 msgstr "Painel lateral"
 
-#: panel/menu.c:1181 panel/panel_config.c:784
+#: panel/menu.c:1187 panel/panel_config.c:795
 msgid "Corner Panel"
 msgstr "Painel de Canto"
 
-#: panel/menu.c:1263
+#: panel/menu.c:1269
 msgid "Remove this panel"
 msgstr "Apagar este painel"
 
-#: panel/menu.c:1302
+#: panel/menu.c:1308
 msgid "Add applet"
 msgstr "Adicionar applet"
 
-#: panel/menu.c:1311
+#: panel/menu.c:1317
 msgid "Add new panel"
 msgstr "Adicionar novo painel"
 
-#: panel/menu.c:1319
+#: panel/menu.c:1325
 msgid "Add main menu"
 msgstr "Adicionar menu principal"
 
-#: panel/menu.c:1326
+#: panel/menu.c:1332
 msgid "Add log out button"
 msgstr "Adicionar botão para terminar sessão"
 
-#: panel/menu.c:1334
+#: panel/menu.c:1340
 msgid "Add swallowed app"
 msgstr "Adicionar aplicação \"engolida\""
 
-#: panel/menu.c:1340
+#: panel/menu.c:1346
 msgid "Add new launcher"
 msgstr "Adicionar novo ??launcher"
 
-#: panel/menu.c:1351
+#: panel/menu.c:1357
 msgid "This panel properties..."
 msgstr "Propriedades deste painel..."
 
-#: panel/menu.c:1361
+#: panel/menu.c:1367
 msgid "Global properties..."
 msgstr "Propriedades globais..."
 
-#: panel/menu.c:1388
+#: panel/menu.c:1394
 msgid "Panel"
 msgstr "Painel"
 
-#: panel/menu.c:1395
+#: panel/menu.c:1401
 msgid "Lock screen"
 msgstr "Trancar ecrã"
 
-#: panel/mico-glue.cc:221
-msgid "Error on sending 'session save' to applet!"
-msgstr ""
+#: panel/menu.c:1816
+msgid "Menu properties"
+msgstr "Propriedades de menu"
 
-#: panel/mico-glue.cc:237
-msgid "Error on sending 'orient change' to applet!"
-msgstr ""
+#: panel/menu.c:1823
+msgid "Menu Type"
+msgstr "Tipo de menu"
 
-#: panel/mico-glue.cc:253
-msgid "Error on sending 'do callback' to applet!"
-msgstr ""
+#: panel/menu.c:1830 panel/menu.c:1850
+msgid "Main Menu"
+msgstr "Menu principal"
 
-#: panel/mico-glue.cc:268
-msgid "Error on sending 'start new applet' to applet!"
-msgstr ""
+#: panel/menu.c:1841 panel/menu.c:1891
+msgid "Normal Menu"
+msgstr "Menu normal"
 
-#: panel/mico-glue.cc:286
-msgid "Error on sending 'change back' to applet!"
-msgstr ""
+#: panel/menu.c:1860
+msgid "Both System and User menus on the same menu"
+msgstr "Menus de Sistema e de Utilizador num só menu"
 
-#: panel/mico-glue.cc:301
-msgid "Error on sending 'tooltips state' to applet!"
-msgstr ""
+#: panel/menu.c:1872
+msgid "System on the main menu, User menu as a submenu"
+msgstr "Menu de Sistema no menu principal, menu de Utilizador como submenu"
 
-#: panel/panel-util.c:186 panel/panel_config.c:636 panel/swallow.c:181
+#: panel/menu.c:1883
+msgid "User on the main menu, System menu as a submenu"
+msgstr "Menu de Utilizador no menu principal, menu de Sistema como submenu"
+
+#: panel/menu.c:1901
+msgid "Menu path"
+msgstr "Caminho de menu"
+
+#: panel/menu.c:1904 panel/panel-util.c:186 panel/panel_config.c:647
+#: panel/swallow.c:181
 msgid "Browse"
 msgstr "Procurar"
 
+#: panel/menu.c:1915
+msgid "Menu"
+msgstr "Menu"
+
+#: panel/mico-glue.cc:221
+msgid "Error on sending 'session save' to applet!"
+msgstr "Erro ao enviar 'session save' ao applet!"
+
+#: panel/mico-glue.cc:237
+msgid "Error on sending 'orient change' to applet!"
+msgstr "Erro ao enviar 'orient change' ao applet!"
+
+#: panel/mico-glue.cc:253
+msgid "Error on sending 'do callback' to applet!"
+msgstr "Erro ao enviar 'do callback' ao applet!"
+
+#: panel/mico-glue.cc:268
+msgid "Error on sending 'start new applet' to applet!"
+msgstr "Erro ao enviar 'start new applet' ao applet!"
+
+#: panel/mico-glue.cc:286
+msgid "Error on sending 'change back' to applet!"
+msgstr "Erro ao enviar 'change back' ao applet!"
+
+#: panel/mico-glue.cc:301
+msgid "Error on sending 'tooltips state' to applet!"
+msgstr "Erro ao enviar 'tooltips state' ao applet!"
+
 #. Position frame
-#: panel/panel_config.c:241 panel/panel_config.c:394
+#: panel/panel_config.c:252 panel/panel_config.c:405
 msgid "Position"
 msgstr "Posição"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:315
+#: panel/panel_config.c:326
 msgid "Minimize Options"
 msgstr "Minimização"
 
 #. Stay Put
-#: panel/panel_config.c:326
+#: panel/panel_config.c:337
 msgid "Explicitly Hide"
 msgstr "Esconder explicitamente"
 
-#: panel/panel_config.c:339
+#: panel/panel_config.c:350
 msgid "Auto Hide"
 msgstr "Esconder automaticamente"
 
 #. North East Position
-#: panel/panel_config.c:407
+#: panel/panel_config.c:418
 msgid "North East"
 msgstr "Nordeste"
 
-#: panel/panel_config.c:418
+#: panel/panel_config.c:429
 msgid "South West"
 msgstr "Sudoeste"
 
-#: panel/panel_config.c:429
+#: panel/panel_config.c:440
 msgid "North West"
 msgstr "Noroeste"
 
-#: panel/panel_config.c:440
+#: panel/panel_config.c:451
 msgid "South East"
 msgstr "Sudeste"
 
 #. Orientation frame
-#: panel/panel_config.c:468
+#: panel/panel_config.c:479
 msgid "Orientation"
 msgstr "Orientação"
 
 #. selector frame
-#: panel/panel_config.c:587 panel/panel_config.c:791
+#: panel/panel_config.c:598 panel/panel_config.c:811
 msgid "Background"
 msgstr "Fundo"
 
 #. standard background
-#: panel/panel_config.c:597
+#: panel/panel_config.c:608
 msgid "Standard"
 msgstr "Standard"
 
-#: panel/panel_config.c:605
+#: panel/panel_config.c:616
 msgid "Pixmap"
 msgstr "Imagem"
 
 #. image frame
-#: panel/panel_config.c:619
+#: panel/panel_config.c:630
 msgid "Image file"
 msgstr "Ficheiro com imagem"
 
-#: panel/panel_config.c:649
+#: panel/panel_config.c:660
 msgid "Scale image to fit panel"
 msgstr "Redimensionar imagem de acordo com o painel"
 
-#: panel/panel_config.c:767
+#: panel/panel_config.c:778
 msgid "Panel properties"
 msgstr "Propriedades do Painel"
 
@@ -2330,19 +2342,24 @@ msgstr "Terminar sessão"
 msgid "Prompt before logout"
 msgstr "Confirmar término de sessão"
 
-#: panel/panel_config_global.c:339
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:314
+msgid "Applet Padding"
+msgstr "Enchimento entre applets"
+
+#: panel/panel_config_global.c:346
 msgid "Global Panel Configuration"
 msgstr "Configuração global do painel"
 
-#: panel/panel_config_global.c:347
+#: panel/panel_config_global.c:354
 msgid "Animation settings"
 msgstr "Parâmetros das animações"
 
-#: panel/session.c:563
+#: panel/session.c:568
 msgid "Really log out?"
 msgstr "Deseja mesmo sair?"
 
-#: panel/session.c:577
+#: panel/session.c:582
 msgid "Ask next time"
 msgstr "Perguntar na próxima vez"
 
