@@ -769,8 +769,8 @@ create_date_string (const char *value)
 
 	g_date_set_dmy (date, day, month, year);
 
-	result = g_new0 (char, 20);
-	g_date_strftime (result, 20, "%x", date);
+	result = g_new0 (char, 24);
+	g_date_strftime (result, 24, "%x", date);
 
 	g_date_free (date);
 
