@@ -46,3 +46,9 @@ test_hint_SOURCES = \
 test_hint_LDADD = \
         libgnome-desktop-2.la           \
         $(GNOME_DESKTOP_LIBS)
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gnome-desktop-2.0.pc
+
+EXTRA_DIST = \
+	gnome-desktop-2.0.pc.in
