@@ -125,8 +125,9 @@ gnome_ditem_edit_get_type (void)
                         sizeof (GnomeDItemEditClass),
                         (GtkClassInitFunc) gnome_ditem_edit_class_init,
                         (GtkObjectInitFunc) gnome_ditem_edit_init,
-                        (GtkArgSetFunc) NULL,
-                        (GtkArgGetFunc) NULL,
+                        NULL,
+                        NULL,
+			NULL
                 };
 
                 dee_type = gtk_type_unique (gtk_object_get_type (), &dee_info);
@@ -150,7 +151,7 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         ditem_edit_signals[CHANGED] =
                 gtk_signal_new ("changed",
                                 GTK_RUN_LAST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeDItemEditClass, changed),
                                 gtk_signal_default_marshaller,
                                 GTK_TYPE_NONE, 0);
@@ -158,7 +159,7 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         ditem_edit_signals[ICON_CHANGED] =
                 gtk_signal_new ("icon_changed",
                                 GTK_RUN_LAST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeDItemEditClass, 
                                                    icon_changed),
                                 gtk_signal_default_marshaller,
@@ -167,7 +168,7 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         ditem_edit_signals[NAME_CHANGED] =
                 gtk_signal_new ("name_changed",
                                 GTK_RUN_LAST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeDItemEditClass, 
                                                    name_changed),
                                 gtk_signal_default_marshaller,

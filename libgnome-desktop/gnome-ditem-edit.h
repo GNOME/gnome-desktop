@@ -49,6 +49,7 @@ typedef struct _GnomeDItemEditClass   GnomeDItemEditClass;
 #define GNOME_DITEM_EDIT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DITEM_EDIT, GnomeDItemEditClass))
 #define GNOME_IS_DITEM_EDIT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DITEM_EDIT))
 #define GNOME_IS_DITEM_EDIT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DITEM_EDIT))
+#define GNOME_DITEM_EDIT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DITEM_EDIT, GnomeDItemEditClass))
 
 struct _GnomeDItemEdit {
         GtkObject object;
