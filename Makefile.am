@@ -3,7 +3,9 @@ SUBDIRS = \
 	 idl \
 	 gnome-desktop \
 	 gnome-terminal \
-	 panel
+	 gsm \
+	 panel \
+	 smproxy
 
 EXTRA_SUBDIRS = \
 	 intl \
