@@ -84,7 +84,7 @@ for flag in `grep ^eval < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
     -L*)
       MICO_LIBS="$flag $MICO_LIBS"
       ;;
-    -lm|-ldl|-ldld)
+    -lm|-ldl|-ldld|-lbsd)
       ;;
     -l*)
       MICO_LIBS="$MICO_LIBS $flag"
