@@ -1953,6 +1953,48 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 	return ret;
 }
 
+/**
+* gnome_desktop_item_drop_uri_list_with_env:
+* @item: A desktop item
+* @uri_list: text as gotten from a text/uri-list
+* @flags: FIXME
+* @envp: child's environment
+* @error: FIXME
+*
+* See gnome_desktop_item_drop_uri_list for a full description. This function
+* additionally passes an environment vector for the child process
+* which is to be launched.
+*
+* Returns: The value returned by #gnome_execute_async() upon execution of
+* the specified item or -1 on error.  If multiple instances are run, the
+* return of the last one is returned.
+*/
+int
+gnome_desktop_item_drop_uri_list_with_env (const GnomeDesktopItem *item,
+					   const char *uri_list,
+					   GnomeDesktopItemLaunchFlags flags,
+					   char                        **envp,
+					   GError **error)
+{
+	GList *li;
+	int ret;
+	GList *list = gnome_vfs_uri_list_parse (uri_list);
+
+	for (li = list; li != NULL; li = li->next) {
+		GnomeVFSURI *uri = li->data;
+		li->data = gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
+		gnome_vfs_uri_unref (uri);
+	}
+
+	ret =  gnome_desktop_item_launch_with_env (
+			item, list, flags, envp, error);
+
+	g_list_foreach (list, (GFunc)g_free, NULL);
+	g_list_free (list);
+
+	return ret;
+}
+
 static gboolean
 exec_exists (const char *exec)
 {

@@ -1,3 +1,13 @@
+2002-10-10  Satyajit Kanungo <satyajit.kanungo@wipro.com>
+
+	* gnome-desktop-item.c: Added a new API gnome_desktop_item_drop_uri_list_with_env()
+	  which passes the child's environment to the execution of the specified item.
+	  Same as gnome_desktop_item_drop_uri_list() with an additional parameter env.
+	  To be used by gnome panel  for launching the item in different head.
+	  Fixes bug #94258.
+
+	* gnome-desktop-item.h: Added the declarion of the above API.
+
 2002-11-28  Mark McLoughlin  <mark@skynet.ie>
 
 	Add a ditem launch variant with screen and

@@ -187,6 +187,12 @@ int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktop
 							      GnomeDesktopItemLaunchFlags flags,
 							      GError                    **error);
 
+int                     gnome_desktop_item_drop_uri_list_with_env    (const GnomeDesktopItem     *item,
+								      const char                 *uri_list,
+								      GnomeDesktopItemLaunchFlags flags,
+								      char                      **envp,
+								      GError                    **error);
+
 gboolean                gnome_desktop_item_exists            (const GnomeDesktopItem     *item);
 
 GnomeDesktopItemType	gnome_desktop_item_get_entry_type    (const GnomeDesktopItem	 *item);
