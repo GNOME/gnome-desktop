@@ -14,6 +14,7 @@ SCROLLKEEPER_REQUIRED=0.1.4
 GNOME_LIBS_REQUIRED=1.0.59
 ORBIT_REQUIRED=0.5.0
 CONTROL_CENTER_REQUIRED=1.4.0
+GNOME_PRINT_OPTIONAL=0.25
 
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gnome-core, 1.4.0.4)
@@ -165,7 +166,9 @@ dnl
 ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
 AC_SUBST(ZVT_LIBS)
 
-dnl Gnome Terminal now requires LibGlade
+dnl
+dnl We require libglade in a bunch of places
+dnl
 AC_MSG_CHECKING(for Glade libraries >= $LIBGLADE_REQUIRED)
 libglade_ok=no
 if gnome-config --libs libglade > /dev/null 2>&1; then 
@@ -318,7 +321,9 @@ AC_ARG_WITH(gtkhtml,
     GTK_HTML_PREFIX=`$GNOME_CONFIG --prefix`])
 AC_SUBST(GTK_HTML_PREFIX)
 
-dnl help-browser using gtkhtml
+dnl help-browser using gtkhtml and/or general gnome-print usage
+dnl for general use we don't use the prefix but we use it to disable
+dnl gnome-print
 AC_ARG_WITH(gnome-print,
 [  --with-gnome-print=PREFIX
                           Specify gnome-print prefix],[
@@ -373,6 +378,32 @@ fi
 
 AM_CONDITIONAL(HELP_USE_GTKHTML, test x$help_use_gtkhtml = xtrue)
 dnl AC_SUBST(HELP_USE_GTKHTML)
+
+dnl
+dnl General use of gnome-print
+dnl
+GNOME_PRINT_LIBS=""
+GNOME_PRINT_CFLAGS=""
+if test "x$with_gnome_print" != "xno" ; then
+  AC_MSG_CHECKING(for gnome-print libraries >= $GNOME_PRINT_OPTIONAL)
+  if $GNOME_CONFIG --libs print > /dev/null 2>&1; then 
+      verstxt=`$GNOME_CONFIG --modversion print`
+      vers=`echo "$verstxt" | awk -F. '{ printf "%d", $1 * 1000 + $2;}'`
+      if test "$vers" -ge 25; then
+	  AC_MSG_RESULT($marker_ok found $verstxt)
+          GNOME_PRINT_LIBS=`$GNOME_CONFIG --libs print`
+          GNOME_PRINT_CFLAGS=`$GNOME_CONFIG --cflags print`
+          AC_DEFINE(HAVE_GNOME_PRINT)
+      else
+          AC_MSG_RESULT($marker_fail found only $verstxt)
+      fi
+  else
+      AC_MSG_RESULT($marker_fail not found)
+  fi
+fi
+AC_SUBST(GNOME_PRINT_CFLAGS)
+AC_SUBST(GNOME_PRINT_LIBS)
+
 
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris

@@ -56,3 +56,5 @@
 #undef DO_LIBICE_CHECK
 
 #undef HAVE_LIBXINERAMA
+
+#undef HAVE_GNOME_PRINT
