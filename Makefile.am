@@ -2,11 +2,15 @@ if PROGRAM_GMENU
 gmenu = gmenu
 endif
 
+if ORBIT_INSTALLED
+control_center = control-center
+endif
+
 always_built_SUBDIRS = panel applets \
 	 gsm pixmaps desktop-links desktop-properties help-browser \
-	 gnome-terminal core-docs control-center
+	 gnome-terminal core-docs
 
-sometimes_built_SUBDIRS = gmenu smproxy
+sometimes_built_SUBDIRS = gmenu smproxy control_center
 
 SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu)
 
