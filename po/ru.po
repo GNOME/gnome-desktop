@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.1.7\n"
-"POT-Creation-Date: 2000-08-29 18:59+0400\n"
-"PO-Revision-Date: 2000-08-29 19:00+04:00\n"
+"POT-Creation-Date: 2000-09-04 21:19+0400\n"
+"PO-Revision-Date: 2000-09-04 21:22+04:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -201,24 +201,24 @@ msgid "Desk Guide Alert"
 msgstr ""
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1379
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
-#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4570
+#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4578
 msgid "Properties..."
 msgstr "Свойства..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
-#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4579
-#: panel/status.c:367 panel/swallow.c:369
+#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4587
+#: panel/status.c:366 panel/swallow.c:369
 msgid "Help"
 msgstr "Справка"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1397
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
 msgid "About..."
 msgstr "О программе..."
@@ -260,7 +260,7 @@ msgstr "Файл с мультипликацией:"
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:449 panel/panel-util.c:101 panel/panel-util.c:142
-#: panel/panel-util.c:183 panel/panel_config.c:1141 panel/swallow.c:202
+#: panel/panel-util.c:183 panel/panel_config.c:1169 panel/swallow.c:202
 msgid "Browse"
 msgstr "Обзор"
 
@@ -320,13 +320,13 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:417
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:418
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:415
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:416
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -356,51 +356,59 @@ msgstr "%a %d %b"
 msgid "Can't create applet!\n"
 msgstr "Невозможно создать апплет!\n"
 
-#: applets/gen_util/clock.c:523
+#. Do NOT translate the clock/hourformat part.  What you
+#. * should change is the 12.  If your country code should use
+#. * 12 hour format by default, leave it at 12, otherwise use 24
+#. * for 24 hour format.  Those are the only two supported
+#: applets/gen_util/clock.c:349
+msgid "clock/hourformat=12"
+msgstr "часы/формат часов=12"
+
+#: applets/gen_util/clock.c:552
 msgid "Clock properties"
 msgstr "Свойства часов"
 
-#: applets/gen_util/clock.c:529
+#: applets/gen_util/clock.c:558
 msgid "Time Format"
 msgstr "Формат времени"
 
-#: applets/gen_util/clock.c:541
+#: applets/gen_util/clock.c:570
 msgid "12 hour"
 msgstr "12 часов"
 
-#: applets/gen_util/clock.c:550
+#: applets/gen_util/clock.c:579
 msgid "24 hour"
 msgstr "24 часа"
 
-#: applets/gen_util/clock.c:585
+#: applets/gen_util/clock.c:614
 msgid "Show date in applet"
 msgstr "Показывать дату в апплете"
 
-#: applets/gen_util/clock.c:599
+#: applets/gen_util/clock.c:628
 msgid "Show date in tooltip"
 msgstr "Показывать дату в подсказке"
 
-#: applets/gen_util/clock.c:613
+#: applets/gen_util/clock.c:642
 msgid "Use GMT"
 msgstr "Использовать GMT"
 
-#: applets/gen_util/clock.c:627
+#: applets/gen_util/clock.c:656
 msgid "Unix time"
 msgstr "Unix-время"
 
-#: applets/gen_util/clock.c:656
+#: applets/gen_util/clock.c:685
 msgid "Clock"
 msgstr "Часы"
 
-#: applets/gen_util/clock.c:702
+#: applets/gen_util/clock.c:731
 msgid "Clock Applet"
 msgstr "Апплет 'Часы'"
 
-#: applets/gen_util/clock.c:703 applets/gen_util/printer.c:354
+#: applets/gen_util/clock.c:732 applets/gen_util/printer.c:354
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(с) 1998 Фонд Свободного Программного Обеспечения"
 
-#: applets/gen_util/clock.c:705
+#: applets/gen_util/clock.c:734
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -613,7 +621,7 @@ msgstr "Убить приложение"
 msgid "Follow panel size"
 msgstr "По размеру панели"
 
-#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3602
+#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3607
 msgid "Horizontal"
 msgstr "Горизонтальная"
 
@@ -638,7 +646,7 @@ msgstr "Фиксированная ширина списка задач"
 msgid "Tasklist width is dynamic"
 msgstr "Динамическая ширина списка задач"
 
-#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3603
+#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3608
 msgid "Vertical"
 msgstr "Вертикальная"
 
@@ -654,7 +662,7 @@ msgstr "Фиксированная высота списка задач"
 msgid "Tasklist height is dynamic"
 msgstr "Динамическая высота списка задач"
 
-#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3632
+#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3639
 msgid "Size"
 msgstr "Размер"
 
@@ -989,7 +997,7 @@ msgstr "Ванда -  рыбка Gnome"
 msgid "... and many more"
 msgstr "... и многими другими"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:193
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:194
 msgid "About GNOME"
 msgstr "О программе..."
 
@@ -1091,7 +1099,7 @@ msgstr "Совет GNOME"
 msgid "Display this dialog next time"
 msgstr "Показать этот диалог в следующий раз"
 
-#: gnome-hint/gnome-hint-properties.c:58
+#: gnome-hint/gnome-hint-properties.c:57
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -1099,7 +1107,7 @@ msgstr ""
 "Нет доступной/установленной справки для этих настроек. Пожалуйста проверьте\n"
 "что вы установили \"Руководство пользователя Gnome\"."
 
-#: gnome-hint/gnome-hint-properties.c:60
+#: gnome-hint/gnome-hint-properties.c:59
 msgid "Close"
 msgstr "Закрыть"
 
@@ -1263,15 +1271,15 @@ msgid "Select-by-word characters"
 msgstr "Литеры для выбора слов"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1129
+#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1157
 msgid "Image"
 msgstr "Изображение"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3638
+#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3645
 msgid "Background type"
 msgstr "Тип фона"
 
-#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3597
+#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3602
 msgid "None"
 msgstr "Нет"
 
@@ -1408,7 +1416,7 @@ msgid "Edit"
 msgstr "Правка"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:576
+#: panel/foobar-widget.c:577
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1897,7 +1905,7 @@ msgstr "X"
 msgid "Y position of window"
 msgstr "Положение окна по Y"
 
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:765
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:771
 msgid "Y"
 msgstr "Y"
 
@@ -2266,29 +2274,29 @@ msgstr ""
 "этого домумента в\n"
 "вашей системе."
 
-#: panel/applet.c:403
+#: panel/applet.c:404
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:443
+#: panel/applet.c:444
 msgid "Remove from panel"
 msgstr "Удалить с панели"
 
-#: panel/applet.c:450
+#: panel/applet.c:451
 msgid "Move"
 msgstr "Переместить"
 
-#: panel/applet.c:462 panel/menu.c:2768
+#: panel/applet.c:463 panel/menu.c:2768
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Невозможно найти файл изображения %s"
 
-#: panel/applet.c:463 panel/applet.c:469 panel/menu.c:2994 panel/menu.c:2999
-#: panel/menu.c:4006 panel/menu.c:4011 panel/menu.c:4329
+#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:2993 panel/menu.c:2998
+#: panel/menu.c:4013 panel/menu.c:4018 panel/menu.c:4335
 msgid "Panel"
 msgstr "Панель"
 
-#: panel/applet.c:689
+#: panel/applet.c:690
 msgid "Can't find an empty spot"
 msgstr ""
 
@@ -2315,7 +2323,7 @@ msgstr "Невозможно создать объектn"
 msgid "Object created is not AppletWidget"
 msgstr "Созданный объект не является виджетом апплета"
 
-#: panel/button-widget.c:692
+#: panel/button-widget.c:688
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2370,7 +2378,7 @@ msgid "Enable hidebutton arrow"
 msgstr "Разрешить стрелки на кнопках сокрытия"
 
 #: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:521
-#: panel/menu.c:3719
+#: panel/menu.c:3726
 msgid "Drawer"
 msgstr "Ящик"
 
@@ -2386,7 +2394,7 @@ msgstr "Опсс! по каким-то причинам мы не можем добавить панель"
 msgid "No socket was created"
 msgstr "Сокет не был создан"
 
-#: panel/foobar-widget.c:151
+#: panel/foobar-widget.c:152
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2394,7 +2402,7 @@ msgstr ""
 "Невозможно выполнить программу gmc-client,\n"
 "возможно gmc не установлен."
 
-#: panel/foobar-widget.c:161
+#: panel/foobar-widget.c:162
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2404,149 +2412,149 @@ msgstr ""
 "возможно она не установлена.\n"
 "Она находится в пакете gnome-pim."
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "News (www)"
 msgstr "Новости (www)"
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "FAQ (www)"
 msgstr "ЧАВО (www)"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "Mailing Lists (www)"
 msgstr "Списки рассылки (www)"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "Software (www)"
 msgstr "Программы (www)"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "Development (www)"
 msgstr "Разработка (www)"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "Bug Tracking System (www)"
 msgstr "Система отслеживания ошибок (www)"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:223
+#: panel/foobar-widget.c:224
 msgid "By Name"
 msgstr "По имени"
 
-#: panel/foobar-widget.c:224
+#: panel/foobar-widget.c:225
 msgid "By Type"
 msgstr "По типу"
 
-#: panel/foobar-widget.c:225
+#: panel/foobar-widget.c:226
 msgid "By Size"
 msgstr "По размеру"
 
-#: panel/foobar-widget.c:226
+#: panel/foobar-widget.c:227
 msgid "By Time Last Accessed"
 msgstr "По времени последнего доступа"
 
-#: panel/foobar-widget.c:227
+#: panel/foobar-widget.c:228
 msgid "By Time Last Modified"
 msgstr "По времени последнего изменения"
 
-#: panel/foobar-widget.c:228
+#: panel/foobar-widget.c:229
 msgid "By Time Last Changed"
 msgstr "По времени создания"
 
-#: panel/foobar-widget.c:237
+#: panel/foobar-widget.c:238
 msgid "Arrange Icons"
 msgstr "Выровнять пиктограммы"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:248
 msgid "Rescan Desktop Directory"
 msgstr "Перечитать каталог рабочего стола"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:249
 msgid "Rescan Desktop Devices"
 msgstr "Перечитать устройства рабочего стола"
 
-#: panel/foobar-widget.c:254
+#: panel/foobar-widget.c:255
 msgid "Lock Screen"
 msgstr "Запереть экран"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:265
 msgid "Log Out"
 msgstr "Завершить работу"
 
-#: panel/foobar-widget.c:272
+#: panel/foobar-widget.c:273
 msgid " Desktop "
 msgstr " Рабочий стол "
 
-#: panel/foobar-widget.c:289
+#: panel/foobar-widget.c:290
 msgid "can't fine real path"
 msgstr ""
 
-#: panel/foobar-widget.c:297
+#: panel/foobar-widget.c:298
 msgid "menu wasn't created"
 msgstr "меню не было создано"
 
-#: panel/foobar-widget.c:340
+#: panel/foobar-widget.c:341
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:408
+#: panel/foobar-widget.c:409
 msgid "Today"
 msgstr "Сегодня"
 
-#: panel/foobar-widget.c:409
+#: panel/foobar-widget.c:410
 msgid "This Week"
 msgstr "На этой неделе"
 
-#: panel/foobar-widget.c:410
+#: panel/foobar-widget.c:411
 msgid "This Month"
 msgstr "В этом месяце"
 
-#: panel/foobar-widget.c:416
+#: panel/foobar-widget.c:417
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:418
+#: panel/foobar-widget.c:419
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:425
+#: panel/foobar-widget.c:426
 msgid "Add appointement..."
 msgstr "Добавить встречу..."
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:443
 msgid "Format"
 msgstr "Формат"
 
-#: panel/foobar-widget.c:559 panel/menu.c:2790 panel/menu.c:2795
-#: panel/menu.c:4233
+#: panel/foobar-widget.c:560 panel/menu.c:2790 panel/menu.c:2795
+#: panel/menu.c:4240
 msgid "Programs"
 msgstr "Программы"
 
-#: panel/foobar-widget.c:573 panel/menu.c:4206 panel/menu.c:4245
-#: panel/menu.c:4251
+#: panel/foobar-widget.c:574 panel/menu.c:4212 panel/menu.c:4252
+#: panel/menu.c:4258
 msgid "Favorites"
 msgstr "Предпочтения"
 
@@ -2593,12 +2601,12 @@ msgid "Animation speed"
 msgstr "Скорость мультипликации"
 
 #: panel/gnome-panel-properties.c:296 panel/gnome-panel-properties.c:314
-#: panel/menu.c:3590
+#: panel/menu.c:3595
 msgid "Auto hide"
 msgstr "Автосокрытие"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:303 panel/menu.c:3589
+#: panel/gnome-panel-properties.c:303 panel/menu.c:3594
 msgid "Explicit hide"
 msgstr ""
 
@@ -2662,7 +2670,7 @@ msgstr "Запускатель"
 
 #: panel/gnome-panel-properties.c:522 panel/gnome-panel-properties.c:1330
 #: panel/menu-properties.c:465 panel/menu.c:2314 panel/menu.c:2380
-#: panel/menu.c:2382 panel/menu.c:3667 panel/menu.c:4489
+#: panel/menu.c:2382 panel/menu.c:3674 panel/menu.c:4497
 msgid "Menu"
 msgstr "Меню"
 
@@ -2862,7 +2870,7 @@ msgstr "Запуск"
 msgid "Run in terminal"
 msgstr "Запуск в терминале"
 
-#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4315
+#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4321
 msgid "Run..."
 msgstr "Запуск..."
 
@@ -2886,7 +2894,7 @@ msgstr "Свойства кнопки запуска"
 msgid "Create launcher applet"
 msgstr "Создать кнопку запуска"
 
-#: panel/logout.c:47 panel/menu.c:4148
+#: panel/logout.c:47 panel/menu.c:4155
 msgid "Log out"
 msgstr "Завершить работу"
 
@@ -2894,7 +2902,7 @@ msgstr "Завершить работу"
 msgid "Log out of GNOME"
 msgstr "Завершить работу в GNOME"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4136
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4143
 msgid "Lock screen"
 msgstr "Запереть экран"
 
@@ -3071,7 +3079,7 @@ msgstr "Невозможно получить goad_id для апплета, он игнорируется"
 msgid " (empty)"
 msgstr " (пусто)"
 
-#: panel/menu.c:2467 panel/menu.c:4263
+#: panel/menu.c:2467 panel/menu.c:4270
 msgid "Applets"
 msgstr "Апплеты"
 
@@ -3079,7 +3087,7 @@ msgstr "Апплеты"
 msgid "You can only have one menu panel at a time."
 msgstr "Одновременно может быть только одно меню панели."
 
-#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3903
+#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3910
 msgid "Create panel"
 msgstr "Создать панель"
 
@@ -3087,23 +3095,23 @@ msgstr "Создать панель"
 msgid "Menu panel"
 msgstr "Панель меню"
 
-#: panel/menu.c:2721 panel/menu.c:3581 panel/panel_config.c:1259
-#: panel/panel_config.c:1354
+#: panel/menu.c:2721 panel/menu.c:3586 panel/panel_config.c:1287
+#: panel/panel_config.c:1382
 msgid "Edge panel"
 msgstr "Краевая панель"
 
-#: panel/menu.c:2729 panel/menu.c:3582 panel/panel_config.c:1266
-#: panel/panel_config.c:1364
+#: panel/menu.c:2729 panel/menu.c:3587 panel/panel_config.c:1294
+#: panel/panel_config.c:1392
 msgid "Aligned panel"
 msgstr "Выровненная панель"
 
-#: panel/menu.c:2737 panel/menu.c:3583 panel/panel_config.c:1272
-#: panel/panel_config.c:1374
+#: panel/menu.c:2737 panel/menu.c:3588 panel/panel_config.c:1300
+#: panel/panel_config.c:1402
 msgid "Sliding panel"
 msgstr ""
 
-#: panel/menu.c:2745 panel/menu.c:3584 panel/panel_config.c:1278
-#: panel/panel_config.c:1384
+#: panel/menu.c:2745 panel/menu.c:3589 panel/panel_config.c:1306
+#: panel/panel_config.c:1412
 msgid "Floating panel"
 msgstr "Плавающая панель"
 
@@ -3115,15 +3123,15 @@ msgstr "Не найдено системное меню!"
 msgid "Can't create the user menu directory"
 msgstr "Невозможно создать каталог меню пользователя"
 
-#: panel/menu.c:2886 panel/menu.c:2892 panel/menu.c:4304
+#: panel/menu.c:2885 panel/menu.c:2891 panel/menu.c:4310
 msgid "KDE menus"
 msgstr "Меню KDE"
 
-#: panel/menu.c:2945
+#: panel/menu.c:2944
 msgid "You cannot remove your last panel."
 msgstr "Вы не можете удалить вашу последнюю панель."
 
-#: panel/menu.c:2955
+#: panel/menu.c:2954
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3131,156 +3139,164 @@ msgstr ""
 "Когда панель удаляется, теряются настройки ее апплетов\n"
 "и ее собственные. Удалить эту панель?"
 
-#: panel/menu.c:3595
+#: panel/menu.c:3600
 msgid "With pixmap arrow"
 msgstr "С картинками стрелок"
 
-#: panel/menu.c:3596
+#: panel/menu.c:3601
 msgid "Without pixmap"
 msgstr "Без картинок"
 
-#: panel/menu.c:3608 panel/panel_config.c:903
+#: panel/menu.c:3613 panel/panel_config.c:909
+msgid "Ultra Tiny (12 pixels)"
+msgstr "Сверх Тонкая (12 точек)"
+
+#: panel/menu.c:3614 panel/panel_config.c:917
 msgid "Tiny (24 pixels)"
 msgstr "Тонкая (24 точки)"
 
-#: panel/menu.c:3609 panel/panel_config.c:911
+#: panel/menu.c:3615 panel/panel_config.c:925
 msgid "Small (36 pixels)"
 msgstr "Малая (36 точек)"
 
-#: panel/menu.c:3610 panel/panel_config.c:919
+#: panel/menu.c:3616 panel/panel_config.c:933
 msgid "Standard (48 pixels)"
 msgstr "Стандартная (48 точек)"
 
-#: panel/menu.c:3611 panel/panel_config.c:927
+#: panel/menu.c:3617 panel/panel_config.c:941
 msgid "Large (64 pixels)"
 msgstr "Большая (64 точки)"
 
-#: panel/menu.c:3612 panel/panel_config.c:935
+#: panel/menu.c:3618 panel/panel_config.c:949
 msgid "Huge (80 pixels)"
 msgstr "Огромная (80 точек)"
 
-#: panel/menu.c:3617 panel/panel_config.c:1083
+#: panel/menu.c:3619 panel/panel_config.c:957
+msgid "Ridiculous (128 pixels)"
+msgstr "Нелепая (128 точек)"
+
+#: panel/menu.c:3624 panel/panel_config.c:1111
 msgid "Standard"
 msgstr "Стандартный"
 
 #. color frame
-#: panel/menu.c:3618 panel/panel_config.c:1087 panel/panel_config.c:1102
+#: panel/menu.c:3625 panel/panel_config.c:1115 panel/panel_config.c:1130
 msgid "Color"
 msgstr "Цвет"
 
-#: panel/menu.c:3619 panel/panel_config.c:1091
+#: panel/menu.c:3626 panel/panel_config.c:1119
 msgid "Pixmap"
 msgstr "Изображение"
 
-#: panel/menu.c:3623
+#: panel/menu.c:3630
 msgid "Type"
 msgstr "Тип"
 
-#: panel/menu.c:3626
+#: panel/menu.c:3633
 msgid "Hiding policy"
 msgstr "Политика сокрытия"
 
-#: panel/menu.c:3629
+#: panel/menu.c:3636
 msgid "Hide buttons"
 msgstr "Кнопки сокрытия"
 
-#: panel/menu.c:3635
+#: panel/menu.c:3642
 msgid "Orientation"
 msgstr "Ориентация"
 
-#: panel/menu.c:3656
+#: panel/menu.c:3663
 msgid "Applet"
 msgstr "Апплет"
 
-#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3677
+#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3684
 msgid "Main menu"
 msgstr "Главное меню"
 
-#: panel/menu.c:3688
+#: panel/menu.c:3695
 msgid "Programs menu"
 msgstr "Меню программ"
 
-#: panel/menu.c:3698
+#: panel/menu.c:3705
 msgid "Favorites menu"
 msgstr "Меню предпочтений"
 
-#: panel/menu.c:3709
+#: panel/menu.c:3716
 msgid "Launcher..."
 msgstr "Запускатель..."
 
-#: panel/menu.c:3730
+#: panel/menu.c:3737
 msgid "Log out button"
 msgstr "Кнопка 'Завершить работу'"
 
-#: panel/menu.c:3741
+#: panel/menu.c:3748
 msgid "Lock button"
 msgstr "Кнопка 'Запереть'"
 
-#: panel/menu.c:3752
+#: panel/menu.c:3759
 msgid "Run button"
 msgstr "Кнопка 'Запуск'"
 
-#: panel/menu.c:3764
+#: panel/menu.c:3771
 msgid "Swallowed app..."
 msgstr ""
 
-#: panel/menu.c:3772
+#: panel/menu.c:3779
 msgid "Status dock"
 msgstr ""
 
-#: panel/menu.c:3796 panel/menu.c:3801 panel/menu.c:3879
+#: panel/menu.c:3803 panel/menu.c:3808 panel/menu.c:3886
 msgid "Add to panel"
 msgstr "Добавить на панель"
 
-#: panel/menu.c:3816
+#: panel/menu.c:3823
 msgid "Cannot execute panel global properties"
 msgstr "Невозможно выполнить глобальные свойства панели"
 
-#: panel/menu.c:3856
+#: panel/menu.c:3863
 msgid "Remove this panel..."
 msgstr "Удалить эту панель..."
 
-#: panel/menu.c:3858 panel/menu.c:3914
+#: panel/menu.c:3865 panel/menu.c:3921
 msgid "Remove this panel"
 msgstr "Удалить эту панель"
 
-#: panel/menu.c:3931
+#: panel/menu.c:3938
 msgid "Properties"
 msgstr "Свойства"
 
-#: panel/menu.c:3942
+#: panel/menu.c:3949
 msgid "All properties..."
 msgstr "Все свойства..."
 
-#: panel/menu.c:3958
+#: panel/menu.c:3965
 msgid "Global Preferences..."
 msgstr "Глобальные настройки..."
 
-#: panel/menu.c:3972
+#: panel/menu.c:3979
 msgid "Panel Manual..."
 msgstr "Руководство по панели..."
 
-#: panel/menu.c:3983
+#: panel/menu.c:3990
 msgid "Cannot execute xscreensaver"
 msgstr "Невозможно запустить xscreensaver"
 
-#: panel/menu.c:4035 panel/menu.c:4040 panel/menu.c:4338
+#: panel/menu.c:4042 panel/menu.c:4047 panel/menu.c:4344
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: panel/menu.c:4077
+#: panel/menu.c:4084
 msgid "About the panel..."
 msgstr "О панели..."
 
-#: panel/menu.c:4093
+#: panel/menu.c:4100
 msgid "About GNOME..."
 msgstr "О программе GNOME..."
 
-#: panel/menu.c:4404
+#: panel/menu.c:4410
 msgid "Can't create menu, using main menu!"
 msgstr "Невозможно создать меню, используется главное меню!"
 
-#: panel/menu-properties.c:138 panel/menu.c:4575
+#: panel/menu-properties.c:138 panel/menu.c:4583
 msgid "Edit menus..."
 msgstr "Правка меню..."
 
@@ -3328,55 +3344,60 @@ msgstr "Меню рабочего стола: "
 msgid "Menu path"
 msgstr "Путь меню"
 
-#: panel/panel_config.c:427
+#: panel/panel.c:849
+#, c-format
+msgid "Open URL: %s"
+msgstr "Открыть URL: %s"
+
+#: panel/panel_config.c:433
 msgid "Hiding"
 msgstr "Спрятать"
 
 #. Auto-hide
-#: panel/panel_config.c:435
+#: panel/panel_config.c:441
 msgid "Enable Auto-hide"
 msgstr "Разрешить автосокрытие"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:445
+#: panel/panel_config.c:451
 msgid "Show hide buttons"
 msgstr "Показывать кнопки сокрытия"
 
 #. Arrow enable
-#: panel/panel_config.c:455
+#: panel/panel_config.c:461
 msgid "Show arrows on hide button"
 msgstr "Показывать стрелки на кнопках сокрытия"
 
-#: panel/panel_config.c:506
+#: panel/panel_config.c:512
 msgid "Panel Position"
 msgstr "Расположение панели"
 
-#: panel/panel_config.c:625 panel/panel_config.c:652 panel/panel_config.c:712
-#: panel/panel_config.c:810
+#: panel/panel_config.c:631 panel/panel_config.c:658 panel/panel_config.c:718
+#: panel/panel_config.c:816
 msgid "Size and Position"
 msgstr "Размер и положение"
 
-#: panel/panel_config.c:727
+#: panel/panel_config.c:733
 msgid "Orient panel horizontally"
 msgstr "Ориентировать горизонтально"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:745
 msgid "Orient panel vertically"
 msgstr "Ориентировать вертикально"
 
-#: panel/panel_config.c:751
+#: panel/panel_config.c:757
 msgid "Top left corner's position: X"
 msgstr "Положение верхнего левого угла: X"
 
-#: panel/panel_config.c:822
+#: panel/panel_config.c:828
 msgid "Offset from screen edge:"
 msgstr "Смещение от края экрана:"
 
-#: panel/panel_config.c:894
+#: panel/panel_config.c:900
 msgid "Panel size:"
 msgstr "Размер панели:"
 
-#: panel/panel_config.c:949
+#: panel/panel_config.c:971
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3386,35 +3407,35 @@ msgstr ""
 "по размеру максимального апплета в панели и не все апплеты\n"
 "удовлетворят этим размерам."
 
-#: panel/panel_config.c:1075
+#: panel/panel_config.c:1103
 msgid "Background Type: "
 msgstr "Тип фона: "
 
-#: panel/panel_config.c:1114
+#: panel/panel_config.c:1142
 msgid "Color to use:"
 msgstr "Используемый цвет:"
 
-#: panel/panel_config.c:1155
+#: panel/panel_config.c:1183
 msgid "Don't scale image to fit"
 msgstr "Не масштабировать изображение для заполнения"
 
-#: panel/panel_config.c:1161
+#: panel/panel_config.c:1189
 msgid "Scale image (keep proportions)"
 msgstr "Масштабировать изображение (сохранять пропорции)"
 
-#: panel/panel_config.c:1166
+#: panel/panel_config.c:1194
 msgid "Stretch image (change proportions)"
 msgstr "Растянуть изображение (изменить пропорции)"
 
-#: panel/panel_config.c:1181
+#: panel/panel_config.c:1209
 msgid "Rotate image for vertical panels"
 msgstr "Поворачивать на вертикальных панелях"
 
-#: panel/panel_config.c:1344
+#: panel/panel_config.c:1372
 msgid "Panel properties"
 msgstr "Свойства панели"
 
-#: panel/panel_config.c:1402
+#: panel/panel_config.c:1430
 msgid "Background"
 msgstr "Фон"
 
