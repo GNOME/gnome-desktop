@@ -196,6 +196,7 @@ static gchar *contributors[] = {
 	"Gordon Matzigkeit",
 	"Dietmar Maurer",
 	"Justin Maurer",
+	"Shaun McCance",
 	"Gregory McLean",
 	"Mark McLoughlin",
 	"Michael Meeks",
