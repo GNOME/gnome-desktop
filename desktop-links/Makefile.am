@@ -38,7 +38,8 @@ Network_DATA     =           \
 	Tkrat.desktop
 
 Root_DATA        =           \
-	Gmc.desktop
+	Gmc.desktop	     \
+	Run.desktop
 
 ## We explicitly define these so that the appropriate directories will
 ## be made at install time.
