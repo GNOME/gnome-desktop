@@ -74,6 +74,7 @@ BITMAPS     = \
 	apple-red.png				\
 	gnome-ccbackground.png	\
 	gnome-ccthemes.png		\
+	gnome-ccdialog.png	\
 	gnome-ccscreensaver.png	\
 	gnome-ccwindowmanager.png
 
