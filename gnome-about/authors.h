@@ -11,6 +11,7 @@ static author authors[] = {
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
+	{ "George Lebl", "<jirka@5z.com>" },
 	{ "", "" },
 	{ N_("...and many more"), "" },
 	{NULL, NULL}
