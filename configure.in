@@ -26,7 +26,8 @@ GNOME_COMPILE_WARNINGS
 
 GNOME_X_CHECKS
 
-AM_PATH_GTK(1.2.5)
+AM_PATH_GTK(1.2.5, ,[
+AC_MSG_ERROR(Please upgrade your GTK+)])
 dnl GNOME_GHTTP_CHECK
 
 dnl utility conditional
