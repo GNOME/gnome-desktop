@@ -58,10 +58,24 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 	case CORBA_tk_sequence: {
 		DynamicAny_DynSequence dynseq;
 		DynamicAny_DynAny_AnySeq *dynany_anyseq;
-		gulong length, i;
+		gulong length = 0, i;
+		gchar **array = NULL;
 		GSList *l;
 
-		length = g_slist_length (de->subvalues);
+		if (de->subvalues)
+			length = g_slist_length (de->subvalues);
+		else if (de->value) {
+			gchar **ptr;
+
+			array = g_strsplit (de->value, ";", 0);
+			for (ptr = array; *ptr; ptr++)
+				length++;
+
+			if ((length > 0) && (array [length-1][0] == '\0'))
+				length--;
+
+			g_message (G_STRLOC ": %ld", length);
+		}
 
 		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), type, ev);
 		DynamicAny_DynSequence_set_length (dynseq, length, ev);
@@ -70,18 +84,32 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		dynany_anyseq->_length = length;
 		dynany_anyseq->_buffer = CORBA_sequence_DynamicAny_DynAny_AnySeq_allocbuf (length);
 
-		l = de->subvalues;
+		if (de->subvalues) {
+			l = de->subvalues;
 
-		i = 0;
-		while (l) {
-			DirEntry *subentry = (DirEntry *)l->data;
+			i = 0;
+			while (l) {
+				DirEntry *subentry = (DirEntry *)l->data;
 
-			dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
-				(subentry, type->subtypes [0], ev);
+				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
+					(subentry, type->subtypes [0], ev);
 
-			l = l->next;
-			i++;
+				l = l->next;
+				i++;
+			}
+		} else {
+			for (i = 0; i < length; i++) {
+				DirEntry subentry;
+
+				memset (&subentry, 0, sizeof (DirEntry));
+				subentry.value = array [i];
+
+				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
+					(&subentry, type->subtypes [0], ev);
+			}
 		}
+
+		g_strfreev (array);
 
 		DynamicAny_DynSequence_set_elements (dynseq, dynany_anyseq, ev);
 
