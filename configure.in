@@ -28,7 +28,7 @@ GNOME_X_CHECKS
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
-ALL_LINGUAS="it ko fr de es no ga cv"
+ALL_LINGUAS="it ko fr de es no ga sv"
 AM_GNU_GETTEXT
 
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
@@ -91,7 +91,7 @@ else
   AC_DEFINE(HAVE_MICO_ORB_RUN)
 fi
 
-for flag in `grep ^eval < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
+for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
   case $flag in
     -L*)
       MICO_LIBS="$flag $MICO_LIBS"
@@ -104,7 +104,7 @@ for flag in `grep ^eval < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
   esac
 done
 AC_SUBST(MICO_LIBS)
-AC_SUBST(MICO_VARS)
+AC_SUBST(MICO_VERS)
 
 dnl gnome-session
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
