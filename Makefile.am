@@ -1,5 +1,4 @@
 SUBDIRS = \
-	 intl \
 	 po \
 	 idl \
 	 gnome-desktop \
