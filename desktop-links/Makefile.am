@@ -10,7 +10,6 @@ Multimediadir     = $(appsdir)/Multimedia
 Internetdir       = $(appsdir)/Internet
 Gamesdir          = $(appsdir)/Games
 Settingsdir       = $(appsdir)/Settings
-SettingsSessiondir= $(appsdir)/Settings/Session
 
 gnewdir           = $(datadir)/mc/templates
 
@@ -32,9 +31,7 @@ Directory_files = \
 	Internet.directory	\
 	Games.directory		\
 	Development.directory   \
-	Settings.directory	\
-	SettingsSession.directory
-
+	Settings.directory
 
 Applications_DATA = \
 	Emacs.desktop		\
@@ -80,7 +77,6 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(Internetdir)
 	$(mkinstalldirs) $(DESTDIR)$(Gamesdir)
 	$(mkinstalldirs) $(DESTDIR)$(Settingsdir)
-	$(mkinstalldirs) $(DESTDIR)$(SettingsSessiondir)
 	$(mkinstalldirs) $(DESTDIR)$(Developmentdir)
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/Session/
 
@@ -95,6 +91,4 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internetdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Settings.directory $(DESTDIR)$(Settingsdir)/.directory
-	$(INSTALL_DATA) $(srcdir)/SettingsSession.directory $(DESTDIR)$(SettingsSessiondir)/.directory
-	$(INSTALL_DATA) $(srcdir)/SettingsSession.directory $(DESTDIR)$(datadir)/control-center/Session/.directory
 	$(INSTALL_DATA) $(srcdir)/Development.directory $(DESTDIR)$(Developmentdir)/.directory
