@@ -52,6 +52,7 @@
 #include "egg-spawn.h"
 
 #include "gnome-desktop-item.h"
+#include "gnome-desktop-i18n.h"
 
 #ifdef HAVE_STARTUP_NOTIFICATION
 #define SN_API_NOT_YET_FROZEN
