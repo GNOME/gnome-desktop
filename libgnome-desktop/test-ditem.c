@@ -81,8 +81,33 @@ test_ditem (Bonobo_ConfigDatabase db)
 	gnome_desktop_item_save (ditem, NULL);
 #endif
 
-	// gnome_desktop_item_save (ditem, "~/work/foo.desktop");
+	gnome_desktop_item_save (ditem, "~/work/foo.desktop");
 }
+
+#if 0
+static void G_GNUC_UNUSED
+test_builtin (void)
+{
+	Bonobo_ConfigDatabase db, parent_db;
+	CORBA_Environment ev;
+	CORBA_TypeCode type;
+	BonoboArg *value;
+	gchar *string;
+
+	db = bonobo_config_ditem_new ("/home/martin/work/test.desktop");
+	g_assert (db != CORBA_OBJECT_NIL);
+
+	CORBA_exception_init (&ev);
+	parent_db = bonobo_get_object ("xmldb:~/work/foo.xmldb", "Bonobo/ConfigDatabase", &ev);
+	g_assert (!BONOBO_EX (&ev) && parent_db != CORBA_OBJECT_NIL);
+	CORBA_exception_free (&ev);
+
+	CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_addDatabase (db, parent_db, "", &ev);
+	g_assert (!BONOBO_EX (&ev));
+	CORBA_exception_free (&ev);
+}
+#endif
 
 int
 main (int argc, char **argv)
@@ -93,6 +118,7 @@ main (int argc, char **argv)
         CORBA_Environment  ev;
 	CORBA_TypeCode type;
 	CORBA_any *value;
+	gchar *string;
 	guint i, j;
 
         CORBA_exception_init (&ev);
@@ -103,6 +129,8 @@ main (int argc, char **argv)
 		g_error ("Cannot init bonobo");
 
 	bonobo_activate ();
+
+	// test_builtin ();
 
 	// db = bonobo_config_ditem_new ("~/work/test.desktop");
 
@@ -167,115 +195,54 @@ main (int argc, char **argv)
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Foo/Test", &ev);
+	if (type)
+		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	value = bonobo_pbclient_get_value (db, "/Foo/Test", TC_CORBA_long, &ev);
+	if (value) {
+		g_message (G_STRLOC ": got value as long %d", BONOBO_ARG_GET_LONG (value));
+		BONOBO_ARG_SET_LONG (value, 512);
+		bonobo_pbclient_set_value (db, "/Foo/Test", value, &ev);
+	}
+	bonobo_arg_release (value);
+        CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Desktop Entry/Terminal", &ev);
+	if (type)
+		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Desktop Entry/Name", &ev);
+	if (type)
+		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	type = bonobo_pbclient_get_type (db, "/Desktop Entry/URL", &ev);
+	if (type)
+		g_message (G_STRLOC ": type is %d - %s (%s)", type->kind, type->name, type->repo_id);
+	CORBA_exception_free (&ev);
+
+	string = bonobo_pbclient_get_string (db, "/Desktop Entry/URL", NULL);
+	g_message (G_STRLOC ": |%s|", string);
+	bonobo_pbclient_set_string (db, "/Desktop Entry/URL", "http://www.gnome.org/", NULL);
+
+	CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_sync (db, &ev);
+	g_assert (!BONOBO_EX (&ev));
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
 	value = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_DesktopEntry, &ev);
 	g_message (G_STRLOC ": %p", value);
 	if (value)
-		printf ("got value as string (%s)\n", BONOBO_ARG_GET_STRING (value));
+		printf ("got value as GNOME::DesktopEntry\n");
         CORBA_exception_free (&ev);
-
-        CORBA_exception_init (&ev);
-	value = bonobo_pbclient_get_value (db, "/Desktop Entry",
-					   TC_GNOME_LocalizedStringList, &ev);
-	g_message (G_STRLOC ": %p", value);
-	if (value)
-		printf ("got value as string (%s)\n", BONOBO_ARG_GET_STRING (value));
-        CORBA_exception_free (&ev);
-
-	exit (0);
-
-        CORBA_exception_init (&ev);
-
-	value = bonobo_pbclient_get_value (db, "/storagetype",
-					   TC_Bonobo_StorageType, &ev);
-	if (value) {
-		printf ("got value\n");
-	}
-        CORBA_exception_init (&ev);
-
-	value = bonobo_arg_new (TC_CORBA_long);
-	BONOBO_ARG_SET_LONG (value, 5);
-	
-	Bonobo_ConfigDatabase_setValue (db, "/test", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level2", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level21", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level3/level3", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/bonobo/test1", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	value = bonobo_arg_new (TC_Bonobo_StorageType);
-	
-	Bonobo_ConfigDatabase_setValue (db, "/storagetype", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	value = bonobo_arg_new (TC_CORBA_string);
-	BONOBO_ARG_SET_STRING (value, "a simple test");
-	Bonobo_ConfigDatabase_setValue (db, "a/b/c/d", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_removeDir (db, "/", &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	value = bonobo_arg_new (TC_CORBA_long);
-	BONOBO_ARG_SET_LONG (value, 5);
-	
-	Bonobo_ConfigDatabase_setValue (db, "/test", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level2", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level21", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_setValue (db, "/test/level3/level3", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-
-	value = bonobo_arg_new (TC_Bonobo_StorageType);
-	Bonobo_ConfigDatabase_setValue (db, "/storagetype", value, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-	Bonobo_ConfigDatabase_sync (db, &ev);
-	g_assert (!BONOBO_EX (&ev));
-
-
-	/*
-	{
-		BonoboConfigBag     *config_bag;
-		Bonobo_Unknown       bag, v;
-		char *name;
-
-		config_bag = bonobo_config_bag_new (db, "/bonobo");
-
-		g_assert (config_bag);
-
-		bag = BONOBO_OBJREF (config_bag);
-
-		prop =Bonobo_PropertyBag_getPropertyByName (bag, "test1", &ev);
-		g_assert (!BONOBO_EX (&ev));
-	    
-	
-		printf("TEST3\n");
-		name = Bonobo_Property_getName (prop, &ev);
-		printf("TEST3e %s\n", name);
-		g_assert (!BONOBO_EX (&ev));
-
-
-	}
-	*/
-		
 
 	exit (0);
 }

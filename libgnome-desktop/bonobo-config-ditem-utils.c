@@ -557,3 +557,27 @@ case CORBA_tk_ ## k:                \
 	}
 }
 
+CORBA_TypeCode
+bonobo_config_ditem_get_subtype (BonoboConfigDItem *ditem, DirEntry *de, const gchar *path,
+				 CORBA_TypeCode type, CORBA_Environment *ev)
+{
+	switch (type->kind) {
+	case CORBA_tk_struct: {
+		gulong i;
+
+		for (i = 0; i < type->sub_parts; i++)
+			if (!strcmp (type->subnames [i], path))
+				return type->subtypes [i];
+
+		break;
+	}
+
+	default:
+		g_message (G_STRLOC ": |%s| => |%s| - %d - %s (%s)", path, de->name,
+			   type->kind, type->name, type->repo_id);
+
+		break;
+	}
+
+	return CORBA_OBJECT_NIL;
+}

@@ -249,8 +249,6 @@ load (const char *file)
 				Key->value = decode_string_and_dup (CharBuffer);
 				state = c == '\n' ? KeyDef : IgnoreToEOL;
 				next = CharBuffer;
-#ifdef GNOME_ENABLE_DEBUG
-#endif
 			} else
 				*next++ = c;
 			break;
@@ -345,20 +343,14 @@ dir_lookup_entry (Section    *section,
 			return de;
 	}
 
-#if 0
 	if (create) {
-
 		de = g_new0 (DirEntry, 1);
 		
-		de->dir = dir;
-
 		de->name = g_strdup (name);
-
-		dir->entries = g_slist_prepend (dir->entries, de);
+		section->root.subvalues = g_slist_prepend (section->root.subvalues, de);
 
 		return de;
 	}
-#endif
 
 	return NULL;
 }
@@ -377,20 +369,16 @@ dir_lookup_subdir (Directory   *dir,
 			return section;
 	}
 
-#if 0
 	if (create) {
+		Section *section;
 
-		dd = g_new0 (DirData, 1);
+		section = g_new0 (Section, 1);
+		section->name = g_strdup (name);
 
-		dd->dir = dir;
+		dir->sections = g_slist_prepend (dir->sections, section);
 
-		dd->name = g_strdup (name);
-
-		dir->subdirs = g_slist_prepend (dir->subdirs, dd);
-
-		return dd;
+		return section;
 	}
-#endif
 
 	return NULL;
 }
@@ -466,6 +454,46 @@ lookup_dir_entry (BonoboConfigDItem *ditem,
 	return de;
 }
 
+static CORBA_TypeCode
+real_get_type (BonoboConfigDatabase *db,
+	       const CORBA_char     *key,
+	       CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	gchar             *dir_name, *leaf_name;
+	DirEntry          *de;
+	CORBA_any         *default_value = NULL;
+	CORBA_TypeCode     tc;
+
+	de = lookup_dir_entry (ditem, key, FALSE);
+	if (!de) {
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
+		return CORBA_OBJECT_NIL;
+	}
+
+	default_value = Bonobo_ConfigDatabase_getDefault (BONOBO_OBJREF (db), key, ev);
+	if (!BONOBO_EX (ev) && default_value != NULL)
+		return default_value->_type;
+
+	dir_name = bonobo_config_dir_name (key);
+	if (!dir_name)
+		return CORBA_OBJECT_NIL;
+
+	leaf_name = bonobo_config_leaf_name (key);
+	if (!leaf_name)
+		return CORBA_OBJECT_NIL;
+
+	CORBA_exception_init (ev);
+
+	default_value = Bonobo_ConfigDatabase_getDefault (BONOBO_OBJREF (db), dir_name, ev);
+	if (BONOBO_EX (ev) || default_value == NULL)
+		return CORBA_OBJECT_NIL;
+
+	tc = bonobo_config_ditem_get_subtype (ditem, de, leaf_name, default_value->_type, ev);
+
+	return tc;
+}
+
 static CORBA_any *
 real_get_value (BonoboConfigDatabase *db,
 		const CORBA_char     *key, 
@@ -474,7 +502,6 @@ real_get_value (BonoboConfigDatabase *db,
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	DirEntry          *de;
 	CORBA_TypeCode     tc;
-	CORBA_any         *default_value = NULL;
 	CORBA_any         *value = NULL;
 	char              *locale = NULL; 
 				
@@ -486,14 +513,9 @@ real_get_value (BonoboConfigDatabase *db,
 		return NULL;
 	}
 
-	g_message (G_STRLOC ": (%s) - `%s' - `%s' - %p", key, de->name, de->value,
-		   de->subvalues);
-
-	default_value = Bonobo_ConfigDatabase_getDefault (BONOBO_OBJREF (db), key, ev);
-	if (BONOBO_EX (ev) || !default_value)
-		tc = TC_CORBA_string;
-	else
-		tc = default_value->_type;
+	tc = real_get_type (db, key, ev);
+	if (!tc)
+		return NULL;
 
 	CORBA_exception_init (ev);
 
@@ -796,6 +818,10 @@ bonobo_config_ditem_new (const char *filename)
 	BONOBO_CONFIG_DATABASE (ditem)->writeable = TRUE;
 
 	ditem->_priv->dir = load (ditem->filename);
+	if (!ditem->_priv->dir) {
+		ditem->_priv->dir = g_new0 (Directory, 1);
+		ditem->_priv->dir->path = g_strdup (ditem->filename);
+	}
 		       
 	ditem->_priv->es = bonobo_event_source_new ();
 

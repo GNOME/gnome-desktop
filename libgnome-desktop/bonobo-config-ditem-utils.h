@@ -24,6 +24,11 @@ bonobo_config_ditem_encode_any (BonoboConfigDItem *ditem, DirEntry *de,
 				const gchar *path, const CORBA_any *any,
 				CORBA_Environment *ev);
 
+CORBA_TypeCode
+bonobo_config_ditem_get_subtype (BonoboConfigDItem *ditem, DirEntry *de,
+				 const gchar *path, CORBA_TypeCode type,
+				 CORBA_Environment *ev);
+
 G_END_DECLS
 
 #endif /* ! __BONOBO_CONFIG_DITEM_UTILS_H__ */
