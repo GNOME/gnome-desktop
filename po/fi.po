@@ -6,526 +6,1499 @@ msgstr ""
 "Xgettext-Options: --default-domain=gnome-core --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
 "Files: applets/batmon/batmon.c applets/mailcheck/mailcheck.c applets/netwatch/netwatch.c panel/panel.c panel/applet-lib.cc panel/menu.c panel/panel_config.c panel/panel_config_global.c panel/launcher.c panel/drawer.c panel/main.c panel/logout.c desktop-properties/property-background.c desktop-properties/property-screensaver.cc desktop-properties/xlockmore.cc desktop-properties/property-keyboard.c desktop-properties/property-mouse.c desktop-properties/main.c desktop-properties/app-mouse.c desktop-properties/app-keyboard.c desktop-properties/app-background.c gsm/main.c gsm/save-session.c help-browser/gnome-help-browser.c help-browser/window.c\n"
 
-#: applets/batmon/batmon.c:96
+#: applets/batmon/batmon.c:105
 msgid "Can't open /proc/apm; can't get data."
 msgstr "Ei voi avata /proc/apm;  Ei voi saada dataa."
 
-#: applets/batmon/batmon.c:102
+#: applets/batmon/batmon.c:111
 msgid "Something wrong with /proc/apm; can't get data."
 msgstr "/proc/apm:ss‰ on jotain vialla; ei voi saada dataa."
 
-#: applets/batmon/batmon.c:150
+#: applets/batmon/batmon.c:154
+msgid "Can't open /dev/apm; can't get data."
+msgstr ""
+
+#: applets/batmon/batmon.c:160 applets/battery/read-battery.c:84
+msgid "ioctl failed on /dev/apm."
+msgstr ""
+
+#: applets/batmon/batmon.c:210
 msgid "There is no battery?!?"
 msgstr "Ei ole paristoa!!??"
 
-#: applets/batmon/batmon.c:153
+#: applets/batmon/batmon.c:213
 msgid "High and charging."
 msgstr "T‰ynn‰ ja lataa."
 
-#: applets/batmon/batmon.c:156
+#: applets/batmon/batmon.c:216
 msgid "High."
 msgstr "T‰ynn‰."
 
-#: applets/batmon/batmon.c:159
+#: applets/batmon/batmon.c:219
 msgid "Low and charging."
 msgstr "Tyhj‰ ja lataa."
 
-#: applets/batmon/batmon.c:162
+#: applets/batmon/batmon.c:222
 msgid "Low."
 msgstr "Tyhj‰."
 
-#: applets/batmon/batmon.c:165
+#: applets/batmon/batmon.c:225
 msgid "Critical and charging."
 msgstr "Kriittinen ja lataa."
 
-#: applets/batmon/batmon.c:168
+#: applets/batmon/batmon.c:228
 msgid "Critical!!"
 msgstr "Kriittinen!"
 
-#: applets/batmon/batmon.c:171
+#: applets/batmon/batmon.c:231
 msgid "Charging."
 msgstr "Lataa."
 
-#: applets/batmon/batmon.c:179
+#: applets/batmon/batmon.c:239
+msgid "unknown minutes of battery."
+msgstr ""
+
+#: applets/batmon/batmon.c:240
+msgid "unknown minutes of battery (%d%%)"
+msgstr ""
+
+#: applets/batmon/batmon.c:245
 msgid "%d minutes of battery"
 msgstr "%d minuuttia j‰ljell‰ virtaa"
 
-#: applets/batmon/batmon.c:181
+#: applets/batmon/batmon.c:246
+msgid "%d minutes of battery (%d%%)"
+msgstr ""
+
+#. would have to be an error
+#: applets/batmon/batmon.c:250
 msgid "More than 100,000,000 minutes of battery life?!?"
 msgstr "Enemm‰n kuin 100.000.000 minuuttia akun elinik‰‰ j‰ljell‰?"
 
-#: applets/batmon/batmon.c:253
+#: applets/batmon/batmon.c:333
 msgid "APM Stats"
 msgstr "APM statistiikka"
 
-#: applets/batmon/batmon.c:269
+#: applets/batmon/batmon.c:351
 msgid "Linux APM Driver Version:"
 msgstr "Linux APM ajurin version:"
 
-#: applets/batmon/batmon.c:281
+#: applets/batmon/batmon.c:363
 msgid "APM BIOS Version:"
 msgstr "APM BIOS versio:"
 
-#: applets/batmon/batmon.c:298
+#: applets/batmon/batmon.c:380
 msgid "Battery Status:"
 msgstr "Akun tilanne:"
 
-#. close button
-#: applets/batmon/batmon.c:322 applets/mailcheck/mailcheck.c:460 help-browser/window.c:135 panel/launcher.c:341 panel/panel_config.c:254 panel/panel_config_global.c:283
+#: applets/batmon/batmon.c:404 help-browser/window.c:142
 msgid "Close"
 msgstr "Sulje"
 
-#: applets/mailcheck/mailcheck.c:226
-msgid "You have new mail."
-msgstr "Sinulla on uutta s‰hkˆpostia."
+#: applets/battery/battery.c:353
+msgid "Internal error: invalid mode in battery_set_mode"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:228
-msgid "You have mail."
-msgstr "Sinulla on s‰hkˆpostia."
+#: applets/battery/battery.c:398 applets/cpuload/cpuload.c:203 applets/fish/fish.c:293 applets/gen_util/clock.c:231 applets/gen_util/mailcheck.c:566 applets/gen_util/printer.c:363 applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:230
-msgid "No mail."
-msgstr "Ei s‰hkˆpostia."
+#: applets/battery/battery.c:612
+msgid "Could not allocate space for graph values"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:419
-msgid "Notification"
-msgstr "Ilmoitus"
+#: applets/battery/properties.c:34
+msgid "Battery Monitor Settings"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:436
-msgid "Select animation"
-msgstr "Valitse animaatio"
+#: applets/battery/properties.c:43
+msgid "General Properties"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:455
-msgid "Mail check properties"
-msgstr "Postin tarkistuksen asetukset"
+#: applets/battery/properties.c:45 applets/cpuload/properties.c:125 applets/diskusage/properties.c:176 applets/netload/properties.c:129
+msgid "Applet Height"
+msgstr ""
 
-#. apply button
-#: applets/mailcheck/mailcheck.c:459 panel/launcher.c:350 panel/panel_config.c:262 panel/panel_config_global.c:291
-msgid "Apply"
-msgstr "Toteuta"
+#: applets/battery/properties.c:55
+msgid "Applet Width"
+msgstr ""
 
-#: applets/mailcheck/mailcheck.c:572
-msgid "Properties"
-msgstr "Asetukset"
+#: applets/battery/properties.c:65
+msgid "Applet Mode"
+msgstr ""
 
-#: panel/panel.c:422
-msgid "Remove from panel"
-msgstr "Poista paneelista"
+#: applets/battery/properties.c:66
+msgid "Graph"
+msgstr ""
 
-#: panel/panel.c:429
-msgid "Move applet"
-msgstr "Siirr‰ appletti"
+#: applets/battery/properties.c:68
+msgid "Readout"
+msgstr ""
 
-#: panel/panel.c:781
-msgid "This panel properties..."
-msgstr "T‰m‰n paneelin asetukset..."
+#: applets/battery/properties.c:111 applets/battery/properties.c:176
+msgid "AC-On Battery Color:"
+msgstr ""
 
-#: panel/menu.c:414 panel/panel.c:788
-msgid "Global properties..."
-msgstr "Yleiset asetukset..."
+#: applets/battery/properties.c:117 applets/battery/properties.c:182
+msgid "AC-Off Battery Color:"
+msgstr ""
 
-#: panel/panel.c:795
-msgid "Main menu"
-msgstr "P‰‰valikko"
+#: applets/battery/properties.c:123
+msgid "Graph Interval:"
+msgstr ""
 
-#: panel/logout.c:53 panel/menu.c:456 panel/panel.c:804
-msgid "Log out"
-msgstr "Kirjaudu ulos"
+#: applets/battery/properties.c:137
+msgid "Graph Direction:"
+msgstr ""
 
-#: panel/menu.c:376
-msgid "Add to panel"
-msgstr "Lis‰‰ paneeliin"
+#: applets/battery/properties.c:140
+msgid "Left to Right"
+msgstr ""
 
-#: panel/menu.c:381
-msgid "Add applet"
-msgstr "Lis‰‰ appletti"
+#: applets/battery/properties.c:142
+msgid "Right to Left"
+msgstr ""
 
-#: panel/menu.c:389
-msgid "Add main menu"
-msgstr "Lis‰‰ p‰‰valikko"
+#: applets/battery/read-battery.c:21
+msgid "Cannot open /proc/apm!  Make sure that you built APM support into your kernel.\n"
+msgstr ""
 
-#: panel/menu.c:397
-msgid "Add drawer"
-msgstr "Lis‰‰ valikko"
+#: applets/battery/read-battery.c:79
+msgid "Cannot open /dev/apm; can't get data."
+msgstr ""
 
-#: panel/menu.c:404
-msgid "Add swallowed app"
-msgstr "Nielaise ohjelma"
+#: applets/battery/read-battery.c:95
+msgid "APM is disabled!  Cannot read battery charge information."
+msgstr ""
 
-#: panel/menu.c:444
-msgid "Panel"
-msgstr "Paneeli"
+#: applets/bussign/bussign.c:98 applets/clockmail/clockmail.c:376 applets/dialer/dialer.c:162 applets/diskusage/diskusage.c:572 applets/drivemount/drivemount.c:345 applets/fifteen/fifteen.c:305 applets/fish/fish.c:310 applets/gen_util/mailcheck.c:595 applets/icewm-pager/wmpager_applet.c:85 applets/modemlights/modemlights.c:533 applets/netload/netload.c:338 applets/webcontrol/webcontrol.c:288 gmenu/gmenu.c:70 gnome-terminal/gnome-terminal.c:677 panel/menu.c:1410
+msgid "About..."
+msgstr ""
 
-#: panel/menu.c:451
-msgid "Lock screen"
-msgstr "Lukitse n‰yttˆ"
+#: applets/bussign/bussign.c:119
+msgid "Refresh Image"
+msgstr ""
 
-#. position frame
-#: panel/panel_config.c:100
-msgid "Position"
-msgstr "Sijainti"
+#: applets/bussign/bussign.c:242
+msgid "The Bus Sign Applet"
+msgstr ""
 
-#. Top Position
-#: panel/panel_config.c:112
-msgid "Top"
-msgstr "Yl‰reuna"
+#: applets/bussign/bussign.c:243 applets/gen_util/mailcheck.c:529
+msgid "(c) 1998 the Free Software Foundation"
+msgstr ""
 
-#: panel/panel_config.c:125
-msgid "Bottom"
-msgstr "Alin"
+#: applets/bussign/bussign.c:245
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
 
-#: panel/panel_config.c:138
-msgid "Left"
-msgstr "Vasen"
+#: applets/clockmail/clockmail.c:49
+msgid "%d.%d.%d"
+msgstr ""
 
-#: panel/panel_config.c:151
-msgid "Right"
-msgstr "Oikea"
+#: applets/clockmail/clockmail.c:52
+msgid "John Ellis (gqview@geocities.com)"
+msgstr ""
 
-#: panel/panel_config.c:162
-msgid "Minimize Options"
-msgstr "Piilotus"
+#: applets/clockmail/clockmail.c:55
+msgid "Clock and Mail Notify Applet"
+msgstr ""
 
-#: panel/panel_config.c:174
-msgid "Explicitly Hide"
-msgstr "Piilota k‰skett‰ess‰"
+#: applets/clockmail/clockmail.c:56
+msgid "(C) 1998"
+msgstr ""
 
-#: panel/panel_config.c:187
-msgid "Auto Hide"
-msgstr "Piilota automaattisesti"
+#: applets/clockmail/clockmail.c:58
+msgid ""
+"Released under the GNU general public license.\n"
+"Basic digital clock with date in a tooltip. Optional 12/24 time display. Mail blinking can be for any unread mail, or only briefly when new mail arrives."
+msgstr ""
 
-#: panel/panel_config.c:227
-msgid "Panel Configuration"
-msgstr "Paneelin muokkaus"
+#: applets/clockmail/clockmail.c:339
+msgid "date"
+msgstr ""
 
-#. label for Position notebook page
-#: panel/panel_config.c:241
-msgid "Orientation"
-msgstr "Paikka"
+#: applets/clockmail/clockmail.c:369 applets/cpuload/cpuload.c:221 applets/diskusage/diskusage.c:583 applets/drivemount/drivemount.c:339 applets/fish/fish.c:318 applets/gen_util/clock.c:258 applets/gen_util/mailcheck.c:588 applets/gen_util/printer.c:388 applets/icewm-pager/wmpager_applet.c:93 applets/modemlights/modemlights.c:527 applets/netload/netload.c:345 applets/webcontrol/webcontrol.c:296 gnome-terminal/gnome-terminal.c:669 panel/drawer.c:409 panel/launcher.c:295 panel/menu.c:1960
+msgid "Properties..."
+msgstr ""
 
-#: panel/panel_config_global.c:118
-msgid "Auto-Hide Animation Speed"
-msgstr "Autopiilotus: Animaationopeus"
+#: applets/clockmail/properties.c:111
+msgid "Display time in 12 hour format (AM/PM)"
+msgstr ""
 
-#. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:126
-msgid "Explicit-Hide Animation Speed"
-msgstr "T‰ysi Piilotus: Animaationopeus"
+#: applets/clockmail/properties.c:117
+msgid "Blink when any mail is waiting. (Not just when mail arrives)"
+msgstr ""
 
-#. Minimize Delay scale frame
-#: panel/panel_config_global.c:134
-msgid "Auto-Hide Minimize Delay (ms)"
-msgstr "Autopiilotus: Minimoi viive (ms)"
+#: applets/clockmail/properties.c:128
+msgid "Mail file:"
+msgstr ""
 
-#: panel/panel_config_global.c:142
-msgid "Auto-Hide Minimized Size (pixels)"
-msgstr "Autopiilotus: Minimoi koko (pikseleit‰)"
+#: applets/clockmail/properties.c:145
+msgid "When new mail is received run:"
+msgstr ""
 
-#: panel/panel_config_global.c:166
-msgid "Icon Tooltips"
-msgstr "Vinkit Ikoneille"
+#: applets/clockmail/properties.c:160 applets/cpuload/properties.c:200 applets/diskusage/properties.c:279 applets/drivemount/properties.c:178 applets/modemlights/properties.c:193 applets/netload/properties.c:252
+msgid "General"
+msgstr ""
 
-#. Tooltips enable
-#: panel/panel_config_global.c:179
-msgid "Tooltips enabled"
-msgstr "Vinkit aktivoitu"
+#: applets/cpuload/properties.c:59 applets/diskusage/properties.c:74 applets/netload/properties.c:61
+msgid "Can't allocate memory for color\n"
+msgstr ""
 
-#. Menu frame
-#: panel/panel_config_global.c:191
-msgid "Menus"
-msgstr "Valikot"
+#: applets/cpuload/properties.c:115
+msgid "User Load"
+msgstr ""
 
-#. Small Icons
-#: panel/panel_config_global.c:204
-msgid "Show small icons"
-msgstr "N‰yt‰ pienet ikonit"
+#: applets/cpuload/properties.c:120
+msgid "System Load"
+msgstr ""
 
-#: panel/panel_config_global.c:248
-msgid "Global Panel Configuration"
-msgstr "Yleiset paneeliasetukset"
+#: applets/cpuload/properties.c:131 applets/diskusage/properties.c:182 applets/netload/properties.c:135
+msgid "Width"
+msgstr ""
 
-#: panel/panel_config_global.c:262
-msgid "Animation settings"
-msgstr "Animaation asetukset"
+#: applets/cpuload/properties.c:146 applets/diskusage/properties.c:199 applets/netload/properties.c:150
+msgid "Update Frequency"
+msgstr ""
 
-#. label for Miscellaneous notebook page
-#: help-browser/toc-man.c:24 help-browser/toc2-man.c:26 panel/panel_config_global.c:270
-msgid "Miscellaneous"
-msgstr "Muut"
+#: applets/cpuload/properties.c:197
+msgid "CPULoad Settings"
+msgstr ""
 
-#: panel/launcher.c:265
-msgid "App"
-msgstr "Sovellus"
+#: applets/dialer/dialer.c:46
+msgid "PPP Dialer Applet"
+msgstr ""
 
-#: panel/launcher.c:313
-msgid "Launcher properties"
-msgstr "K‰ynnistysasetukset"
+#: applets/dialer/dialer.c:49
+msgid "A funky PPP dialer, how come no-one has thought of it before!?"
+msgstr ""
 
-#: panel/launcher.c:324
+#: applets/dialer/dialer.c:87
+msgid "Off"
+msgstr ""
+
+#: applets/diskusage/properties.c:155
+msgid "Used Diskspace"
+msgstr ""
+
+#: applets/diskusage/properties.c:160
+msgid "Free Diskspace"
+msgstr ""
+
+#: applets/diskusage/properties.c:165
+msgid "Textcolor"
+msgstr ""
+
+#: applets/diskusage/properties.c:170
+msgid "Backgroundcolor"
+msgstr ""
+
+#: applets/diskusage/properties.c:269
+msgid "Diskusage Settings"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:36
+msgid "Drive Mount Applet"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:39
+msgid ""
+"Released under the GNU general public license.\n"
+"Mounts and Unmounts drives.."
+msgstr ""
+
+#: applets/drivemount/drivemount.c:67
+msgid " mounted"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:72
+msgid " not mounted"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:352
+msgid "Eject"
+msgstr ""
+
+#: applets/drivemount/properties.c:115
+msgid "Drive Mount Settings"
+msgstr ""
+
+#: applets/drivemount/properties.c:123
+msgid "Update in seconds:"
+msgstr ""
+
+#: applets/drivemount/properties.c:134
+msgid "Icon:"
+msgstr ""
+
+#: applets/drivemount/properties.c:141
+msgid "Floppy"
+msgstr ""
+
+#: applets/drivemount/properties.c:145
+msgid "Cdrom"
+msgstr ""
+
+#: applets/drivemount/properties.c:149
+msgid "Zip Drive"
+msgstr ""
+
+#: applets/drivemount/properties.c:153
+msgid "Hard Disk"
+msgstr ""
+
+#: applets/drivemount/properties.c:166
+msgid "Mount point:"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:35
+msgid "You win!"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:263
+msgid "Fifteen sliding pieces"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:264
+msgid "1.0"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:265
+msgid "Copyright (C) The Free Software Foundation"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:267
+msgid "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. Guaranteed to be a productivity buster."
+msgstr ""
+
+#: applets/fifteen/fifteen.c:288
+msgid "Can't create fifteen applet!"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:298
+msgid "Scramble pieces"
+msgstr ""
+
+#: applets/fish/fish.c:63 applets/fish/fish.c:238 applets/webcontrol/webcontrol.c:52
+msgid "%s the Fish"
+msgstr ""
+
+#: applets/fish/fish.c:64
+msgid "%s the GNOME Fish Says:"
+msgstr ""
+
+#: applets/fish/fish.c:104
+msgid "GNOME Fish Properties"
+msgstr ""
+
+#: applets/fish/fish.c:109
+msgid "Your GNOME Fish's Name:"
+msgstr ""
+
+#: applets/fish/fish.c:122
 msgid "Name"
 msgstr "Nimi"
 
-#: panel/launcher.c:325
-msgid "Comment"
-msgstr "Huomautus"
-
-#: panel/launcher.c:326
-msgid "Execute"
-msgstr "K‰ynnist‰"
-
-#: panel/launcher.c:327
-msgid "Icon"
-msgstr "Ikoni"
-
-#: panel/launcher.c:328
-msgid "Documentation"
-msgstr "Dokumentaatio"
-
-#: panel/launcher.c:331
-msgid "Run inside terminal"
-msgstr "Aja p‰‰teikkunassa"
-
-#: panel/launcher.c:493
-msgid "Properties ..."
-msgstr "Asetukset..."
-
-#: panel/main.c:65
-msgid "ID"
+#: applets/fish/fish.c:241
+msgid "(with minor help from George)"
 msgstr ""
 
-#: panel/main.c:65
-msgid "Discard session"
-msgstr "Hylk‰‰ istunto"
+#: applets/fish/fish.c:244
+msgid "The GNOME Fish Applet"
+msgstr ""
 
-#: desktop-properties/property-background.c:415
-msgid "Color"
-msgstr "V‰ri"
+#: applets/fish/fish.c:247
+msgid "This applet has no use what-so-ever. It only takes up disk space and compilation time, and if loaded it also takes up precious panel space and memory. If anyone is found using this applet, he should be promptly sent for a psychiatric evaluation."
+msgstr ""
 
-#: desktop-properties/property-background.c:439
-msgid "Flat"
-msgstr "Tasainen"
+#: applets/gen_util/clock.c:98
+msgid ""
+"%a\n"
+"%b %d"
+msgstr ""
 
-#: desktop-properties/property-background.c:445
-msgid "Gradient"
-msgstr "Liukus‰vy"
+#. This format string is used, to display the actual day,
+#. when showing a horizontal panel.
+#: applets/gen_util/clock.c:103
+msgid "%a %b %d"
+msgstr ""
 
-#: desktop-properties/property-background.c:460
-msgid "Vertical"
-msgstr "Pysty"
+#: applets/gen_util/clock.c:112
+msgid ""
+"%I:%M\n"
+"%p"
+msgstr ""
 
-#: desktop-properties/property-background.c:466
-msgid "Horizontal"
-msgstr "Vaaka"
+#: applets/gen_util/clock.c:115
+msgid "%I:%M %p"
+msgstr ""
 
-#: desktop-properties/property-background.c:599
-msgid "Wallpaper Selection"
-msgstr "Taustakuvan valinta"
+#. This format string is used, to display the actual time in
+#. 24 hour format.
+#: applets/gen_util/clock.c:121
+msgid "%H:%M"
+msgstr ""
 
-#: desktop-properties/property-background.c:638
-msgid "Wallpaper"
-msgstr "Taustakuva"
+#: applets/gen_util/clock.c:311
+msgid "Clock properties"
+msgstr ""
 
-#: desktop-properties/property-background.c:641
-msgid " Browse... "
-msgstr " Selaa... "
+#: applets/gen_util/clock.c:321
+msgid "12 hour"
+msgstr ""
 
-#: desktop-properties/property-background.c:646
-msgid "none"
-msgstr "ei mit‰‰n"
+#: applets/gen_util/clock.c:330
+msgid "24 hour"
+msgstr ""
 
-#: desktop-properties/property-background.c:690
-msgid "Centered"
-msgstr "Keskell‰"
+#: applets/gen_util/clock.c:363
+msgid "Clock"
+msgstr ""
 
-#: desktop-properties/property-background.c:696
-msgid "Tiled"
-msgstr "Vierekk‰in"
+#: applets/gen_util/mailcheck.c:229
+msgid "You have new mail."
+msgstr "Sinulla on uutta s‰hkˆpostia."
 
-#: desktop-properties/property-background.c:943
-msgid " Background "
-msgstr " Tausta "
+#: applets/gen_util/mailcheck.c:231
+msgid "You have mail."
+msgstr "Sinulla on s‰hkˆpostia."
 
-#: desktop-properties/property-screensaver.cc:143
-msgid "Settings"
-msgstr "Asetukset"
+#: applets/gen_util/mailcheck.c:233
+msgid "No mail."
+msgstr "Ei s‰hkˆpostia."
 
-#: desktop-properties/property-screensaver.cc:145
-msgid "Wait"
-msgstr "Odota"
+#: applets/gen_util/mailcheck.c:447
+msgid "Notification"
+msgstr "Ilmoitus"
 
-#: desktop-properties/property-screensaver.cc:146
-msgid "Min"
-msgstr "Min"
+#: applets/gen_util/mailcheck.c:464
+msgid "Select animation"
+msgstr "Valitse animaatio"
 
-#: desktop-properties/property-screensaver.cc:158
-msgid "Requires Password"
-msgstr "Vaatii salasanan"
+#: applets/gen_util/mailcheck.c:487
+msgid "Mail check properties"
+msgstr "Postin tarkistuksen asetukset"
 
-#: desktop-properties/property-screensaver.cc:167
-msgid "Use DPMS"
-msgstr "K‰yt‰ DPMS:‰‰"
+#: applets/gen_util/mailcheck.c:492
+msgid "Mail check"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:176
-msgid "Priority"
-msgstr "T‰rkeysj‰rjestys"
+#: applets/gen_util/mailcheck.c:528
+msgid "Mail check Applet"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:184
-msgid "Normal"
-msgstr "Normaali"
+#: applets/gen_util/mailcheck.c:531
+msgid "Mail check notifies you when new mail is on your mailbox"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:185
-msgid "Low"
-msgstr "Alhainen"
+#: applets/gen_util/mailcheck.c:576
+msgid "Text only"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:231
-msgid "Screensavers"
-msgstr "Ruuduns‰‰st‰j‰"
+#: applets/gen_util/main.c:31
+msgid "Start in clock mode"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:243
-msgid "Setup..."
-msgstr "Asetukset..."
+#: applets/gen_util/main.c:32
+msgid "Start in mailcheck mode"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:247
-msgid "Test"
-msgstr "Kokeile"
+#: applets/gen_util/main.c:33
+msgid "Start in printer mode"
+msgstr ""
 
-#: desktop-properties/property-screensaver.cc:348
-msgid " Screensaver "
-msgstr " Ruuduns‰‰st‰j‰ "
+#: applets/gen_util/printer.c:326
+msgid "Printer properties"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:152
-msgid "XLockMore Properties"
-msgstr "XLockMoren asetukset"
+#: applets/gen_util/printer.c:334
+msgid "Printer name:"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:171
-msgid "  OK  "
-msgstr "  OK  "
+#: applets/gen_util/printer.c:338
+msgid "Print command:"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:172
-msgid " Apply "
-msgstr " Toteuta "
+#: applets/gen_util/printer.c:344
+msgid "Printer"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:173
-msgid " Cancel "
-msgstr " Peruuta "
+#: applets/icewm-pager/wmpager_applet.c:56
+msgid "This applet requires you to run a window manager with the XA_ extensions.\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:174
-msgid " Defaults "
-msgstr " Oletukset "
+#: applets/icewm-pager/wmpager_applet.c:220
+msgid "Desktop Pager Applet"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:175 help-browser/window.c:169 help-browser/window.c:191
-msgid "Help"
-msgstr "Ohje"
+#: applets/icewm-pager/wmpager_applet.c:221
+msgid "Copyright (C)1998 M.Watson"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:180 desktop-properties/xlockmore.cc:192
-msgid " Mode "
-msgstr " Tila "
+#: applets/icewm-pager/wmpager_applet.c:277
+msgid "Failed to retrieve workspace property."
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:181
-msgid " XLockMore "
-msgstr " XLockMore "
+#: applets/modemlights/modemlights.c:64
+msgid "Modem Lights Applet"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:190
-msgid " Options "
-msgstr " Valinnat "
+#: applets/modemlights/modemlights.c:67
+msgid ""
+"Released under the GNU general public license.\n"
+"A modem status indicator and dialer.Lights in order from the top or left are RX and TX"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:191
-msgid " Preview "
-msgstr " Esikatselu "
+#: applets/modemlights/modemlights.c:104
+msgid ""
+"You are currently connected.\n"
+"Do you want to disconnect?"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:153
-msgid "Speed"
-msgstr "Nopeus"
+#: applets/modemlights/modemlights.c:115
+msgid "Do you want to connect?"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:159
-msgid "Auto repeat"
-msgstr "Jatkuva toisto"
+#: applets/modemlights/modemlights.c:133
+msgid "not connected"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:171
-msgid "Repeat rate"
-msgstr "Toistonopeus"
+#: applets/modemlights/properties.c:107
+msgid "Modem Lights Settings"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:185
-msgid "Repeat delay"
-msgstr "Toistoviive"
+#: applets/modemlights/properties.c:115
+msgid "Updates per second"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:210
-msgid "Click"
-msgstr "Naksaus"
+#: applets/modemlights/properties.c:131
+msgid "Modem lock file:"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:216
-msgid "Click on keypress"
-msgstr "Naksaus n‰pp‰imenpainalluksella"
+#: applets/modemlights/properties.c:148
+msgid "Connect command:"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:226
-msgid "Click volume"
-msgstr "N‰p‰yksen ‰‰nenvoimakkuus"
+#: applets/modemlights/properties.c:165
+msgid "Disconnect command:"
+msgstr ""
 
-#: desktop-properties/property-keyboard.c:254
-msgid " Keyboard "
-msgstr " N‰pp‰imistˆ "
+#: applets/modemlights/properties.c:178
+msgid "Confirm connection?"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:184
-msgid "Buttons"
-msgstr "Napit"
+#: applets/netload/netload.c:260
+msgid "Netload Error"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:186
-msgid "Left handed"
-msgstr "Vasenk‰tinen"
+#: applets/netload/netload.c:265
+msgid "An error occured in the Netload Applet:"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:188
-msgid "Right handed"
-msgstr "Oikeak‰tinen"
+#: applets/netload/netload.c:294
+msgid "The GNOME Network Load Applet"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:208
-msgid "Motion"
-msgstr "Liike"
+#: applets/netload/netload.c:297
+msgid "This applet is released under the terms and conditions of the GNU Public Licence.This applet shows the load on a network device. It requires the /proc/net/ip_acct interface to be present and set up correctly for the device."
+msgstr ""
 
-#: desktop-properties/property-mouse.c:213
-msgid "Acceleration"
-msgstr "Kiihdytys"
+#: applets/netload/properties.c:119
+msgid "Network Traffic"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:213
-msgid "Slow"
-msgstr "Hidas"
+#: applets/netload/properties.c:124
+msgid "Traffic bars"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:213
-msgid "Fast"
-msgstr "Nopea"
+#: applets/netload/properties.c:193
+msgid "Device name (like ppp0 or eth0)"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:219
-msgid "Threshold"
-msgstr "Rajapiste"
+#: applets/netload/properties.c:201
+msgid "Vertical spacing of bars (in kilobytes)"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:219
-msgid "Small"
-msgstr "Pieni"
+#: applets/netload/properties.c:243
+msgid "properties.c: gnome_property_box_new() failed.\n"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:219
-msgid "Large"
-msgstr "Suuri"
+#: applets/netload/properties.c:249
+msgid "Network Load Settings"
+msgstr ""
 
-#: desktop-properties/property-mouse.c:231
-msgid "Mouse"
-msgstr "Hiiri"
+#: applets/netload/properties.c:258
+msgid "Device"
+msgstr ""
 
-#: desktop-properties/main.c:31
-msgid "Set parameters from saved state and exit"
-msgstr "Palauta edelliset asetukset ja poistu"
+#: applets/webcontrol/webcontrol.c:54
+msgid "Garrett Smith <gsmith@serv.net>"
+msgstr ""
 
-#: desktop-properties/app-mouse.c:10
-msgid "Mouse Properties"
-msgstr "Hiiren asetukset"
+#: applets/webcontrol/webcontrol.c:57
+msgid "The Web Browser Controller"
+msgstr ""
 
-#: desktop-properties/app-keyboard.c:10
-msgid "Keyboard Properties"
-msgstr "N‰pp‰imistˆasetukset"
+#: applets/webcontrol/webcontrol.c:60
+msgid "This applet currently sends getURL commands to netscape throught the -remote interface.  Hopefully later more webrowsers will be supported."
+msgstr ""
 
-#: desktop-properties/app-background.c:10
+#. create the widget we are going to put on the applet
+#: applets/webcontrol/webcontrol.c:111
+msgid "Url:"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:127
+msgid "Launch new window"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:185
+msgid "WebControl Properties"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:190
+msgid "Display URL label"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:199
+msgid "Display \"launch new window\" option"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:212 gnome-terminal/gnome-terminal.c:501
+msgid "Look"
+msgstr ""
+
+#: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "Taustaasetukset"
 
-#: gsm/main.c:40
+#: desktop-properties/app-bell.c:11
+msgid "Bell Properties"
+msgstr ""
+
+#: desktop-properties/app-keyboard.c:11
+msgid "Keyboard Properties"
+msgstr "N‰pp‰imistˆasetukset"
+
+#: desktop-properties/app-mouse.c:11
+msgid "Mouse Properties"
+msgstr "Hiiren asetukset"
+
+#: desktop-properties/app-ui.c:32
+msgid "Gnome Look and Feel Properties"
+msgstr ""
+
+#: desktop-properties/args.c:11 desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr "Palauta edelliset asetukset ja poistu"
+
+#: desktop-properties/property-background.c:494 panel/panel_config.c:624
+msgid "Color"
+msgstr "V‰ri"
+
+#: desktop-properties/property-background.c:518
+msgid "Flat"
+msgstr "Tasainen"
+
+#: desktop-properties/property-background.c:524
+msgid "Gradient"
+msgstr "Liukus‰vy"
+
+#: desktop-properties/property-background.c:539 panel/panel_config.c:503
+msgid "Vertical"
+msgstr "Pysty"
+
+#: desktop-properties/property-background.c:545 panel/panel_config.c:490
+msgid "Horizontal"
+msgstr "Vaaka"
+
+#: desktop-properties/property-background.c:690
+msgid "Wallpaper Selection"
+msgstr "Taustakuvan valinta"
+
+#: desktop-properties/property-background.c:729
+msgid "Wallpaper"
+msgstr "Taustakuva"
+
+#: desktop-properties/property-background.c:732
+msgid " Browse... "
+msgstr " Selaa... "
+
+#: desktop-properties/property-background.c:737
+msgid "none"
+msgstr "ei mit‰‰n"
+
+#: desktop-properties/property-background.c:781
+msgid "Scaled"
+msgstr ""
+
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr ""
+
+#: desktop-properties/property-background.c:801
+msgid "Centered"
+msgstr "Keskell‰"
+
+#: desktop-properties/property-background.c:812
+msgid "Tiled"
+msgstr "Vierekk‰in"
+
+#: desktop-properties/property-background.c:1006
+msgid " Background "
+msgstr " Tausta "
+
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr ""
+
+#: desktop-properties/property-background.c:1059 desktop-properties/property-background.c:1060 gnome-terminal/gnome-terminal.c:1150 gnome-terminal/gnome-terminal.c:1151
+msgid "COLOR"
+msgstr ""
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr ""
+
+#: desktop-properties/property-background.c:1060
+msgid "Specifies end background color for gradient"
+msgstr ""
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr ""
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr ""
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr ""
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr ""
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr ""
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr ""
+
+#: desktop-properties/property-bell.c:123
+msgid "Sound"
+msgstr ""
+
+#: desktop-properties/property-bell.c:142
+msgid "Volume"
+msgstr ""
+
+#: desktop-properties/property-bell.c:163
+msgid "Pitch"
+msgstr ""
+
+#: desktop-properties/property-bell.c:184
+msgid "Duration"
+msgstr ""
+
+#: desktop-properties/property-bell.c:214 desktop-properties/property-screensaver.cc:250
+msgid "Test"
+msgstr "Kokeile"
+
+#: desktop-properties/property-bell.c:228
+msgid "Bell"
+msgstr ""
+
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr ""
+
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr ""
+
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Toistonopeus"
+
+#: desktop-properties/property-keyboard.c:207
+msgid "Repeat delay"
+msgstr "Toistoviive"
+
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr ""
+
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Naksaus n‰pp‰imenpainalluksella"
+
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "N‰p‰yksen ‰‰nenvoimakkuus"
+
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr ""
+
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:215
+msgid "Mouse buttons"
+msgstr ""
+
+#: desktop-properties/property-mouse.c:224
+msgid "Left handed"
+msgstr "Vasenk‰tinen"
+
+#: desktop-properties/property-mouse.c:226
+msgid "Right handed"
+msgstr "Oikeak‰tinen"
+
+#: desktop-properties/property-mouse.c:243
+msgid "Mouse motion"
+msgstr ""
+
+#: desktop-properties/property-mouse.c:255
+msgid "Acceleration"
+msgstr "Kiihdytys"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Fast"
+msgstr "Nopea"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Slow"
+msgstr "Hidas"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Threshold"
+msgstr "Rajapiste"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Large"
+msgstr "Suuri"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Small"
+msgstr "Pieni"
+
+#: desktop-properties/property-mouse.c:274
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: desktop-properties/property-screensaver.cc:146
+msgid "Settings"
+msgstr "Asetukset"
+
+#: desktop-properties/property-screensaver.cc:148
+msgid "Wait"
+msgstr "Odota"
+
+#: desktop-properties/property-screensaver.cc:149
+msgid "Min"
+msgstr "Min"
+
+#: desktop-properties/property-screensaver.cc:161
+msgid "Requires Password"
+msgstr "Vaatii salasanan"
+
+#: desktop-properties/property-screensaver.cc:170
+msgid "Use DPMS"
+msgstr "K‰yt‰ DPMS:‰‰"
+
+#: desktop-properties/property-screensaver.cc:179
+msgid "Priority"
+msgstr "T‰rkeysj‰rjestys"
+
+#: desktop-properties/property-screensaver.cc:187
+msgid "Normal"
+msgstr "Normaali"
+
+#: desktop-properties/property-screensaver.cc:188
+msgid "Low"
+msgstr "Alhainen"
+
+#: desktop-properties/property-screensaver.cc:234
+msgid "Screensavers"
+msgstr "Ruuduns‰‰st‰j‰"
+
+#: desktop-properties/property-screensaver.cc:246
+msgid "Setup..."
+msgstr "Asetukset..."
+
+#: desktop-properties/property-screensaver.cc:356
+msgid " Screensaver "
+msgstr " Ruuduns‰‰st‰j‰ "
+
+#: desktop-properties/property-ui.c:55
+msgid "Default Gtk setting [FIXME - Describe this better]"
+msgstr ""
+
+#: desktop-properties/property-ui.c:56
+msgid "Spread buttons out"
+msgstr ""
+
+#: desktop-properties/property-ui.c:57
+msgid "Put buttons on edges"
+msgstr ""
+
+#: desktop-properties/property-ui.c:58
+msgid "Left-justify buttons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:59
+msgid "Right-justify buttons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:65
+msgid "Let window manager decide"
+msgstr ""
+
+#: desktop-properties/property-ui.c:66
+msgid "Center of the screen"
+msgstr ""
+
+#: desktop-properties/property-ui.c:67
+msgid "At the mouse pointer"
+msgstr ""
+
+#: desktop-properties/property-ui.c:73
+msgid "Dialogs are like other windows"
+msgstr ""
+
+#: desktop-properties/property-ui.c:74
+msgid "Dialogs are treated specially by window manager"
+msgstr ""
+
+#. looking for better descriptions here...
+#: desktop-properties/property-ui.c:81
+msgid "Notebook"
+msgstr ""
+
+#: desktop-properties/property-ui.c:82
+msgid "Toplevel"
+msgstr ""
+
+#: desktop-properties/property-ui.c:83
+msgid "Modal"
+msgstr ""
+
+#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:458 panel/panel_config.c:287
+msgid "Left"
+msgstr "Vasen"
+
+#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:459 panel/panel_config.c:298
+msgid "Right"
+msgstr "Oikea"
+
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:265
+msgid "Top"
+msgstr "Yl‰reuna"
+
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:276
+msgid "Bottom"
+msgstr "Alin"
+
+#: desktop-properties/property-ui.c:185
+msgid "Dialog buttons"
+msgstr ""
+
+#: desktop-properties/property-ui.c:190
+msgid "Dialog position"
+msgstr ""
+
+#: desktop-properties/property-ui.c:195
+msgid "Dialog hints"
+msgstr ""
+
+#: desktop-properties/property-ui.c:202
+msgid "Use statusbar instead of dialog when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:212
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:223
+msgid "Dialogs"
+msgstr ""
+
+#: desktop-properties/property-ui.c:229
+msgid "Menubars are detachable"
+msgstr ""
+
+#: desktop-properties/property-ui.c:238
+msgid "Toolbars are detachable"
+msgstr ""
+
+#: desktop-properties/property-ui.c:247
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: desktop-properties/property-ui.c:256
+msgid "Statusbar is interactive when possible"
+msgstr ""
+
+#: desktop-properties/property-ui.c:265
+msgid "Application"
+msgstr ""
+
+#: desktop-properties/property-ui.c:270
+msgid "Default MDI mode"
+msgstr ""
+
+#: desktop-properties/property-ui.c:275
+msgid "MDI notebook tab position"
+msgstr ""
+
+#: desktop-properties/property-ui.c:281
+msgid "MDI"
+msgstr ""
+
+#: desktop-properties/xlockmore.cc:156
+msgid "XLockMore Properties"
+msgstr "XLockMoren asetukset"
+
+#: desktop-properties/xlockmore.cc:174
+msgid "  OK  "
+msgstr "  OK  "
+
+#: desktop-properties/xlockmore.cc:175
+msgid " Apply "
+msgstr " Toteuta "
+
+#: desktop-properties/xlockmore.cc:176
+msgid " Cancel "
+msgstr " Peruuta "
+
+#: desktop-properties/xlockmore.cc:177
+msgid " Defaults "
+msgstr " Oletukset "
+
+#: desktop-properties/xlockmore.cc:178 gmenu/gmenu.c:80 gnome-terminal/gnome-terminal.c:686 help-browser/window.c:176 help-browser/window.c:201
+msgid "Help"
+msgstr "Ohje"
+
+#: desktop-properties/xlockmore.cc:183 desktop-properties/xlockmore.cc:195
+msgid " Mode "
+msgstr " Tila "
+
+#: desktop-properties/xlockmore.cc:184
+msgid " XLockMore "
+msgstr " XLockMore "
+
+#: desktop-properties/xlockmore.cc:193
+msgid " Options "
+msgstr " Valinnat "
+
+#: desktop-properties/xlockmore.cc:194
+msgid " Preview "
+msgstr " Esikatselu "
+
+#: gmenu/dialogs.c:39
+msgid "File exists."
+msgstr ""
+
+#: gmenu/dialogs.c:47
+msgid "Failed to create file."
+msgstr ""
+
+#: gmenu/dialogs.c:119 gmenu/dialogs.c:381
+msgid ""
+"You can't add an entry to that folder!\n"
+"To edit system entries you must be root."
+msgstr ""
+
+#: gmenu/dialogs.c:125 gmenu/gmenu.c:87
+msgid "New Folder"
+msgstr ""
+
+#: gmenu/dialogs.c:127
+msgid "Create Folder:"
+msgstr ""
+
+#: gmenu/dialogs.c:165
+msgid "Failed to delete the folder."
+msgstr ""
+
+#: gmenu/dialogs.c:173
+msgid "Failed to delete the file."
+msgstr ""
+
+#: gmenu/dialogs.c:208
+msgid "You must select something first!"
+msgstr ""
+
+#: gmenu/dialogs.c:214
+msgid "You can not delete a top level Folder!"
+msgstr ""
+
+#: gmenu/dialogs.c:222
+msgid ""
+"You can't delete that file!\n"
+"To edit system entries you must be root."
+msgstr ""
+
+#: gmenu/dialogs.c:228
+msgid "Delete file?"
+msgstr ""
+
+#: gmenu/dialogs.c:237
+msgid "Delete empty folder?"
+msgstr ""
+
+#: gmenu/dialogs.c:241
+msgid ""
+"Cannot delete folder.\n"
+"To delete a folder. it must be empty."
+msgstr ""
+
+#: gmenu/dialogs.c:244
+msgid "File or Folder does not exist on filesystem."
+msgstr ""
+
+#: gmenu/dialogs.c:370
+msgid "The Name text field can not be blank."
+msgstr ""
+
+#: gmenu/dialogs.c:379
+msgid ""
+"You can't edit an entry in that folder!\n"
+"To edit system entries you must be root."
+msgstr ""
+
+#: gmenu/dialogs.c:388
+msgid "Save Changes?"
+msgstr ""
+
+#: gmenu/dialogs.c:396
+msgid "Overwrite existing file?"
+msgstr ""
+
+#: gmenu/dialogs.c:402
+msgid "Save file?"
+msgstr ""
+
+#: gmenu/edit.c:173
+msgid "File name:"
+msgstr ""
+
+#: gmenu/edit.c:199
+msgid "Save"
+msgstr ""
+
+#: gmenu/edit.c:216
+msgid "Revert"
+msgstr ""
+
+#: gmenu/edit.c:233
+msgid "New"
+msgstr ""
+
+#: gmenu/gmenu.c:47
+msgid "New Folder..."
+msgstr ""
+
+#: gmenu/gmenu.c:50
+msgid "Delete..."
+msgstr ""
+
+#: gmenu/gmenu.c:53
+msgid "Quit"
+msgstr ""
+
+#: gmenu/gmenu.c:59
+msgid "Folder"
+msgstr ""
+
+#: gmenu/gmenu.c:62
+msgid "Folder Recursive"
+msgstr ""
+
+#: gmenu/gmenu.c:76 help-browser/window.c:174
+msgid "File"
+msgstr "Tiedosto"
+
+#: gmenu/gmenu.c:78
+msgid "Sort"
+msgstr ""
+
+#: gmenu/gmenu.c:87
+msgid "Create a new folder"
+msgstr ""
+
+#: gmenu/gmenu.c:89 gsm/session-properties.c:196
+msgid "Delete"
+msgstr ""
+
+#: gmenu/gmenu.c:89
+msgid "Delete selected menu item"
+msgstr ""
+
+#: gmenu/gmenu.c:92
+msgid "Move up"
+msgstr ""
+
+#: gmenu/gmenu.c:92
+msgid "Move selected menu up"
+msgstr ""
+
+#: gmenu/gmenu.c:94
+msgid "Move down"
+msgstr ""
+
+#: gmenu/gmenu.c:94
+msgid "Move selected menu down"
+msgstr ""
+
+#: gmenu/gmenu.c:97
+msgid "Properties"
+msgstr "Asetukset"
+
+#: gmenu/gmenu.c:97
+msgid "Edit selected menu item properties"
+msgstr ""
+
+#: gmenu/gmenu.c:100
+msgid "Sort Folder"
+msgstr ""
+
+#: gmenu/gmenu.c:100
+msgid "Sort selected folder"
+msgstr ""
+
+#: gmenu/gmenu.c:270
+msgid "creating user directory: %s\n"
+msgstr ""
+
+#: gmenu/gmenu.c:273
+msgid "unable to create user directory: %s\n"
+msgstr ""
+
+#: gmenu/gmenu.c:318 gmenu/gmenu.c:357 gmenu/gmenu.c:414 gmenu/tree.c:501
+msgid "GNOME menu editor"
+msgstr ""
+
+#: gmenu/gmenu.c:321
+msgid ""
+"Released under the terms of the GNU Public License.\n"
+"GNOME menu editor."
+msgstr ""
+
+#: gmenu/order.c:70
+msgid "Unable to create file: %s\n"
+msgstr ""
+
+#. g_print(_("removing .order file: %s\n"),row_file);
+#: gmenu/order.c:90
+msgid "unable to remove .order file: %s\n"
+msgstr ""
+
+#: gmenu/order.c:151 gmenu/order.c:165
+msgid " Folder"
+msgstr ""
+
+#: gmenu/tree.c:511
+msgid "One moment, reading menus..."
+msgstr ""
+
+#: gmenu/tree.c:536
+msgid "GNOME"
+msgstr ""
+
+#: gmenu/tree.c:544 panel/menu.c:1205 panel/menu.c:1243 panel/menu.c:1443
+msgid "System Menus"
+msgstr ""
+
+#: gmenu/tree.c:554
+msgid "Top of system menus"
+msgstr ""
+
+#: gmenu/tree.c:561
+msgid "Running with System Menu privileges.\n"
+msgstr ""
+
+#. user's menu tree
+#: gmenu/tree.c:570 panel/menu.c:1226 panel/menu.c:1253 panel/menu.c:1454
+msgid "User Menus"
+msgstr ""
+
+#: gmenu/tree.c:580
+msgid "Top of user menus"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:105
+msgid "GNOME Terminal"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:108
+msgid "The GNOME terminal emulation program."
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:442
+msgid "Linux console"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:443
+msgid "Color Xterm"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:444
+msgid "rxvt"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:449
+msgid "White on black"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:450
+msgid "Black on white"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:451
+msgid "Green on black"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:452
+msgid "Black on light yellow"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:453
+msgid "Custom colors"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:460
+msgid "Hidden"
+msgstr ""
+
+#. Font
+#: gnome-terminal/gnome-terminal.c:504
+msgid "Font:"
+msgstr ""
+
+#. Scrollbar position
+#: gnome-terminal/gnome-terminal.c:522
+msgid "Scrollbar position"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:532
+msgid "Blinking cursor"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:541
+msgid "Scrollback lines"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:551
+msgid "Colors"
+msgstr ""
+
+#. Color palette
+#: gnome-terminal/gnome-terminal.c:554
+msgid "Color palette:"
+msgstr ""
+
+#. Foreground, background buttons
+#: gnome-terminal/gnome-terminal.c:563
+msgid "Foreground color:"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:572
+msgid "Background color:"
+msgstr ""
+
+#. default foreground/backgorund selector
+#: gnome-terminal/gnome-terminal.c:582
+msgid "Colors:"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:617
+msgid "Color selector"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:664
+msgid "New terminal"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:665
+msgid "Save preferences"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:666
+msgid "Close terminal"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:668
+msgid "Hide menubar..."
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:671
+msgid "Color selector..."
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:685
+msgid "Terminal"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1145
+msgid "FONT"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1145
+msgid "Specifies font name"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1146
+msgid "Do not start up shells as login shells"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1147
+msgid "Start up shells as login shells"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1148
+msgid "GEOMETRY"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1148
+msgid "Specifies the geometry for the main window"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1149
+msgid "COMMAND"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1149
+msgid "Execute this program instead of a shell"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1150
+msgid "Foreground color"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1151 panel/panel_config.c:674
+msgid "Background color"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1152 panel/main.c:46
+msgid "ID"
+msgstr ""
+
+#: gsm/main.c:55
 msgid "[SESSION]"
 msgstr "[ISTUNTO]"
 
@@ -533,286 +1506,781 @@ msgstr "[ISTUNTO]"
 msgid "Kill session"
 msgstr "Tuhoa istunto"
 
-#: help-browser/gnome-help-browser.c:77
-msgid "X"
-msgstr "X"
+#: gsm/save-session.c:81
+msgid "save-session: couldn't connect to session manager\n"
+msgstr ""
 
-#: help-browser/gnome-help-browser.c:77
-msgid "X position of window"
-msgstr "Ikkunan X-koordinaatti"
+#: gsm/session-properties.c:189
+msgid "Startup"
+msgstr ""
 
-#: help-browser/gnome-help-browser.c:78
-msgid "Y"
-msgstr "Y"
+#: gsm/session-properties.c:192
+msgid "Programs to invoke at session startup:"
+msgstr ""
 
-#: help-browser/gnome-help-browser.c:78
-msgid "Y position of window"
-msgstr "Ikkunan Y-koordinaatti"
+#: gsm/session-properties.c:239
+msgid "Gnome Session Properties"
+msgstr ""
 
-#: help-browser/gnome-help-browser.c:79
-msgid "WIDTH"
-msgstr "LEVEYS"
+#: gsm/session-properties.c:289
+msgid "Geometry of window"
+msgstr ""
 
-#: help-browser/gnome-help-browser.c:79
-msgid "Width of window"
-msgstr "Ikkunan leveys"
-
-#: help-browser/gnome-help-browser.c:80
-msgid "HEIGHT"
-msgstr "KORKEUS"
-
-#: help-browser/gnome-help-browser.c:80
-msgid "Height of window"
-msgstr "Ikkunan korkeus"
-
-#: help-browser/gnome-help-browser.c:81
-msgid "Debug level"
-msgstr "Vianm‰‰ritystaso"
-
-#: help-browser/gnome-help-browser.c:89
-msgid "[URL]"
-msgstr "[URL]"
-
-#: help-browser/gnome-help-browser.c:306
-msgid "Gnome Help Browser"
-msgstr "Gnome ohjeen selain"
-
-#: help-browser/gnome-help-browser.c:309
-msgid "GNOME Help Browser allows easy access to various forms of documentation on your system"
-msgstr "GNOMEn Ohjeen Selain antaa helpon reitin monenlaiseen dokumentaatioon"
-
-#: help-browser/gnome-help-browser.c:528
-msgid "History size"
-msgstr "Historian koko"
-
-#: help-browser/gnome-help-browser.c:529
-msgid "History file"
-msgstr "Historiatiedosto"
-
-#: help-browser/gnome-help-browser.c:530
-msgid "Cache size"
-msgstr "V‰limuistin koko"
-
-#: help-browser/gnome-help-browser.c:531
-msgid "Cache file"
-msgstr "V‰limuistitiedosto"
-
-#: help-browser/gnome-help-browser.c:532
-msgid "Bookmark file"
-msgstr "Kirjanmerkkitiedosto"
-
-#: help-browser/gnome-help-browser.c:534
-msgid "Man Path"
-msgstr "Manpolku"
-
-#: help-browser/gnome-help-browser.c:535
-msgid "Info Path"
-msgstr "Infopolku"
-
-#: help-browser/gnome-help-browser.c:536
-msgid "GNOME Help Path"
-msgstr "GNOME ohjeen polku"
-
-#: help-browser/gnome-help-browser.c:604
-msgid "Gnome Help Configure"
-msgstr "Gnome ohjeen asetukset"
-
-#: help-browser/window.c:120
-msgid "New window"
-msgstr "Uusi ikkuna"
-
-#: help-browser/window.c:120
-msgid "Open new browser window"
-msgstr "Avaa uusi selainikkuna"
-
-#: help-browser/window.c:125
-msgid "Add Bookmark"
-msgstr "Lis‰‰ kirjanmerkki"
-
-#: help-browser/window.c:125
-msgid "Add bookmark"
-msgstr "Lis‰‰ kirjanmerkki"
-
-#: help-browser/window.c:130
-msgid "Configure"
-msgstr "Muuta asetuksia"
-
-#: help-browser/window.c:135
-msgid "Close window"
-msgstr "Sulje ikkuna"
-
-#: help-browser/window.c:140
-msgid "Exit"
-msgstr "Sulje"
-
-#: help-browser/window.c:140
-msgid "Exit all windows"
-msgstr "Sulje kaikki ikkunat"
-
-#: help-browser/window.c:149
-msgid "About"
-msgstr "Tiedot"
-
-#: help-browser/window.c:149
-msgid "Info about this program"
-msgstr "Tiedot t‰st‰ ohjelmasta"
-
-#: help-browser/window.c:159 help-browser/window.c:186
-msgid "History"
-msgstr "Historia"
-
-#: help-browser/window.c:159 help-browser/window.c:186
-msgid "Show History Window"
-msgstr "N‰yt‰ historiaikkuna"
-
-#: help-browser/window.c:161
-msgid "Bookmarks"
-msgstr "Kirjanmerkit"
-
-#: help-browser/window.c:161 help-browser/window.c:188
-msgid "Show Bookmarks Window"
-msgstr "N‰yt‰ kirjanmerkki-ikkuna"
-
-#: help-browser/window.c:167
-msgid "File"
-msgstr "Tiedosto"
-
-#: help-browser/window.c:168
-msgid "Window"
-msgstr "Ikkuna"
-
-#: help-browser/window.c:174
-msgid "Back"
-msgstr "Takaisin"
-
-#: help-browser/window.c:175
-msgid "Go to the previous location in the history list"
-msgstr "Palaa takaisin historialistalla"
-
-#: help-browser/window.c:177
-msgid "Forward"
-msgstr "Eteenp‰in"
-
-#: help-browser/window.c:178
-msgid "Go to the next location in the history list"
-msgstr "Etene historialistalla"
-
-#: help-browser/window.c:181
-msgid "Reload"
-msgstr "P‰ivit‰"
-
-#: help-browser/window.c:183
-msgid "Index"
-msgstr "Hakemisto"
-
-#: help-browser/window.c:183
-msgid "Show Documentation Index"
-msgstr "N‰yt‰ dokumentaatiohakemisto"
-
-#: help-browser/window.c:188
-msgid "BMarks"
-msgstr "Merkit"
-
-#: help-browser/window.c:191
-msgid "Help on Help"
-msgstr "Ohjeen ohje"
-
-#: help-browser/gnome-helpwin.c:266
-msgid "<body><h2>Error: file not found</h2></body>"
-msgstr "<body><h2>Virhe: tiedostoa ei lˆydy</h2></body>"
-
-#: help-browser/bookmarks.c:217
+#: help-browser/bookmarks.c:219
 msgid "Bookmark"
 msgstr "Kirjanmerkki"
 
-#: help-browser/bookmarks.c:217
+#: help-browser/bookmarks.c:219
 msgid "Page Title"
 msgstr "Sivu otsikko"
 
-#: help-browser/bookmarks.c:227
+#: help-browser/bookmarks.c:229
 msgid "Gnome Help Bookmarks"
 msgstr "Gnome ohjeen kirjanmerkit"
 
 #. Buttons
-#: help-browser/bookmarks.c:237
+#: help-browser/bookmarks.c:239
 msgid "Remove"
 msgstr "Poista"
 
-#: help-browser/history.c:254
+#: help-browser/gnome-help-browser.c:85
+msgid "X"
+msgstr "X"
+
+#: help-browser/gnome-help-browser.c:85
+msgid "X position of window"
+msgstr "Ikkunan X-koordinaatti"
+
+#: help-browser/gnome-help-browser.c:86
+msgid "Y"
+msgstr "Y"
+
+#: help-browser/gnome-help-browser.c:86
+msgid "Y position of window"
+msgstr "Ikkunan Y-koordinaatti"
+
+#: help-browser/gnome-help-browser.c:87
+msgid "WIDTH"
+msgstr "LEVEYS"
+
+#: help-browser/gnome-help-browser.c:87
+msgid "Width of window"
+msgstr "Ikkunan leveys"
+
+#: help-browser/gnome-help-browser.c:88
+msgid "HEIGHT"
+msgstr "KORKEUS"
+
+#: help-browser/gnome-help-browser.c:88
+msgid "Height of window"
+msgstr "Ikkunan korkeus"
+
+#: help-browser/gnome-help-browser.c:89
+msgid "Debug level"
+msgstr "Vianm‰‰ritystaso"
+
+#: help-browser/gnome-help-browser.c:97
+msgid "[URL]"
+msgstr "[URL]"
+
+#: help-browser/gnome-help-browser.c:340
+msgid "Gnome Help Browser"
+msgstr "Gnome ohjeen selain"
+
+#: help-browser/gnome-help-browser.c:343
+msgid "GNOME Help Browser allows easy access to various forms of documentation on your system"
+msgstr "GNOMEn Ohjeen Selain antaa helpon reitin monenlaiseen dokumentaatioon"
+
+#: help-browser/gnome-help-browser.c:602
+msgid "History size"
+msgstr "Historian koko"
+
+#: help-browser/gnome-help-browser.c:603
+msgid "History file"
+msgstr "Historiatiedosto"
+
+#: help-browser/gnome-help-browser.c:604
+msgid "Cache size"
+msgstr "V‰limuistin koko"
+
+#: help-browser/gnome-help-browser.c:605
+msgid "Cache file"
+msgstr "V‰limuistitiedosto"
+
+#: help-browser/gnome-help-browser.c:606
+msgid "Bookmark file"
+msgstr "Kirjanmerkkitiedosto"
+
+#: help-browser/gnome-help-browser.c:612
+msgid "Man Path"
+msgstr "Manpolku"
+
+#: help-browser/gnome-help-browser.c:613
+msgid "Info Path"
+msgstr "Infopolku"
+
+#: help-browser/gnome-help-browser.c:614
+msgid "GNOME Help Path"
+msgstr "GNOME ohjeen polku"
+
+#: help-browser/gnome-help-browser.c:689
+msgid "Gnome Help Configure"
+msgstr "Gnome ohjeen asetukset"
+
+#: help-browser/gnome-help-browser.c:692
+msgid "History and cache"
+msgstr ""
+
+#: help-browser/gnome-help-browser.c:693
+msgid "Paths"
+msgstr ""
+
+#: help-browser/gnome-helpwin.c:214
+msgid "<body><h2>Error: file not found</h2></body>"
+msgstr "<body><h2>Virhe: tiedostoa ei lˆydy</h2></body>"
+
+#: help-browser/history.c:256
 msgid "URL"
 msgstr "URL"
 
-#: help-browser/history.c:254
+#: help-browser/history.c:256
 msgid "Last"
 msgstr "Viimeinen"
 
-#: help-browser/history.c:254
+#: help-browser/history.c:256
 msgid "Count"
 msgstr "M‰‰r‰"
 
-#. Main Window
-#: help-browser/history.c:267
+#: help-browser/history.c:269
 msgid "Gnome Help History"
 msgstr "Gnome ohjeen historia"
 
-#: help-browser/toc-man.c:18 help-browser/toc2-man.c:20
+#: help-browser/toc2-man.c:21
 msgid "User Commands"
 msgstr "K‰ytt‰j‰n komennot"
 
-#: help-browser/toc-man.c:19 help-browser/toc2-man.c:21
+#: help-browser/toc2-man.c:22
 msgid "System Calls"
 msgstr "J‰rjestelm‰kutsut"
 
-#: help-browser/toc-man.c:20 help-browser/toc2-man.c:22
+#: help-browser/toc2-man.c:23
 msgid "Library Functions"
 msgstr "Kirjastofunktiot"
 
-#: help-browser/toc-man.c:21 help-browser/toc2-man.c:23
+#: help-browser/toc2-man.c:24
 msgid "Special Files"
 msgstr "Erityistiedostot"
 
-#: help-browser/toc-man.c:22 help-browser/toc2-man.c:24
+#: help-browser/toc2-man.c:25
 msgid "File Formats"
 msgstr "Tiedostomuodot"
 
-#: help-browser/toc-man.c:23 help-browser/toc2-man.c:25
+#: help-browser/toc2-man.c:26
 msgid "Games"
 msgstr "Pelit"
 
-#: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
+#: help-browser/toc2-man.c:27 panel/panel_config_global.c:359
+msgid "Miscellaneous"
+msgstr "Muut"
+
+#: help-browser/toc2-man.c:28
 msgid "Administration"
 msgstr "Yll‰pito"
 
-#: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
+#: help-browser/toc2-man.c:29
 msgid "man9"
 msgstr "man9"
 
-#: help-browser/toc-man.c:27 help-browser/toc2-man.c:29
+#: help-browser/toc2-man.c:30
 msgid "mann"
 msgstr ""
 
-#: help-browser/toc-man.c:28 help-browser/toc2-man.c:30
+#: help-browser/toc2-man.c:31
 msgid "manx"
 msgstr ""
 
-#. MAN PAGES
-#: help-browser/toc.c:134
-msgid "Man Pages"
-msgstr "Man-sivut"
+#: help-browser/toc2.c:114 help-browser/toc2.c:255 help-browser/toc2.c:317
+msgid "<h1>Table of Contents</h1>\n"
+msgstr ""
 
-#. INFO PAGES
-#: help-browser/toc.c:146
-msgid "Info Pages"
-msgstr "Info-sivut"
+#: help-browser/toc2.c:118
+msgid "<h2>Man Pages</h2>\n"
+msgstr ""
 
-#. GNOME HELP
-#: help-browser/toc.c:158
-msgid "GNOME Help"
-msgstr "GNOME Ohje"
+#: help-browser/toc2.c:256
+msgid "<br><br><h2>Info Pages</h2>\n"
+msgstr ""
 
-#: help-browser/visit.c:93
+#: help-browser/toc2.c:318
+msgid "<br><br><h2>GNOME Help</h2>\n"
+msgstr ""
+
+#: help-browser/toc2.c:460
+msgid ""
+"<HTML>\n"
+"<BODY>\n"
+"<H2>Results of the substring search for the string "
+msgstr ""
+
+#: help-browser/toc2.c:466
+msgid ""
+"<p>\n"
+"<br>\n"
+"<H3>Manual Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+
+#: help-browser/toc2.c:489
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNU Info Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+
+#: help-browser/toc2.c:513
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNOME Help Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+
+#: help-browser/toc2.c:535
+msgid "<br><B>No matches found</B>\n"
+msgstr ""
+
+#: help-browser/visit.c:83
+msgid "<BODY>Could not load default TOC page</BODY>"
+msgstr ""
+
+#: help-browser/visit.c:101
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Tuntematon m‰‰re*</BODY>"
 
+#: help-browser/window.c:127
+msgid "New window"
+msgstr "Uusi ikkuna"
 
+#: help-browser/window.c:127
+msgid "Open new browser window"
+msgstr "Avaa uusi selainikkuna"
 
+#: help-browser/window.c:132
+msgid "Add Bookmark"
+msgstr "Lis‰‰ kirjanmerkki"
+
+#: help-browser/window.c:132
+msgid "Add bookmark"
+msgstr "Lis‰‰ kirjanmerkki"
+
+#: help-browser/window.c:137
+msgid "Configure"
+msgstr "Muuta asetuksia"
+
+#: help-browser/window.c:142
+msgid "Close window"
+msgstr "Sulje ikkuna"
+
+#: help-browser/window.c:147
+msgid "Exit"
+msgstr "Sulje"
+
+#: help-browser/window.c:147
+msgid "Exit all windows"
+msgstr "Sulje kaikki ikkunat"
+
+#: help-browser/window.c:156
+msgid "About"
+msgstr "Tiedot"
+
+#: help-browser/window.c:156
+msgid "Info about this program"
+msgstr "Tiedot t‰st‰ ohjelmasta"
+
+#: help-browser/window.c:166 help-browser/window.c:196
+msgid "History"
+msgstr "Historia"
+
+#: help-browser/window.c:166 help-browser/window.c:196
+msgid "Show History Window"
+msgstr "N‰yt‰ historiaikkuna"
+
+#: help-browser/window.c:168
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: help-browser/window.c:168 help-browser/window.c:198
+msgid "Show Bookmarks Window"
+msgstr "N‰yt‰ kirjanmerkki-ikkuna"
+
+#: help-browser/window.c:175
+msgid "Window"
+msgstr "Ikkuna"
+
+#: help-browser/window.c:183
+msgid "Back"
+msgstr "Takaisin"
+
+#: help-browser/window.c:184
+msgid "Go to the previous location in the history list"
+msgstr "Palaa takaisin historialistalla"
+
+#: help-browser/window.c:186
+msgid "Forward"
+msgstr "Eteenp‰in"
+
+#: help-browser/window.c:187
+msgid "Go to the next location in the history list"
+msgstr "Etene historialistalla"
+
+#: help-browser/window.c:190
+msgid "Reload"
+msgstr "P‰ivit‰"
+
+#: help-browser/window.c:193
+msgid "Index"
+msgstr "Hakemisto"
+
+#: help-browser/window.c:193
+msgid "Show Documentation Index"
+msgstr "N‰yt‰ dokumentaatiohakemisto"
+
+#: help-browser/window.c:198
+msgid "BMarks"
+msgstr "Merkit"
+
+#: help-browser/window.c:201
+msgid "Help on Help"
+msgstr "Ohjeen ohje"
+
+#: panel/applet.c:310
+msgid "???"
+msgstr ""
+
+#: panel/applet.c:337
+msgid "Remove from panel"
+msgstr "Poista paneelista"
+
+#: panel/applet.c:344
+msgid "Move applet"
+msgstr "Siirr‰ appletti"
+
+#: panel/drawer.c:95
+msgid "Tooltip/Name"
+msgstr ""
+
+#: panel/drawer.c:99
+msgid "Icon"
+msgstr "Ikoni"
+
+#: panel/drawer.c:103
+msgid "Applet appearance"
+msgstr ""
+
+#: panel/drawer.c:112 panel/menu.c:1173
+msgid "Drawer"
+msgstr ""
+
+#: panel/launcher.c:131
+msgid "App"
+msgstr "Sovellus"
+
+#: panel/launcher.c:232
+msgid "Launcher properties"
+msgstr "K‰ynnistysasetukset"
+
+#: panel/launcher.c:316
+msgid "Create launcher applet"
+msgstr ""
+
+#: panel/logout.c:26 panel/menu.c:1284 panel/menu.c:1420
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: panel/main.c:46
+msgid "Discard session"
+msgstr "Hylk‰‰ istunto"
+
+#: panel/menu.c:79
+msgid "The GNOME Panel"
+msgstr ""
+
+#: panel/menu.c:82
+msgid "This program is responsible for launching other applications, embedding small applets within itself, world peace, and random X crashes."
+msgstr ""
+
+#: panel/menu.c:318
+msgid "Add this launcher to panel"
+msgstr ""
+
+#: panel/menu.c:326
+msgid "Add this as drawer to panel"
+msgstr ""
+
+#: panel/menu.c:334
+msgid "Add this as menu to panel"
+msgstr ""
+
+#: panel/menu.c:343
+msgid "Properties ..."
+msgstr "Asetukset..."
+
+#: panel/menu.c:406 panel/menu.c:464
+msgid "..."
+msgstr ""
+
+#: panel/menu.c:1121
+msgid "Applets"
+msgstr ""
+
+#: panel/menu.c:1180 panel/panel_config.c:789
+msgid "Edge Panel"
+msgstr ""
+
+#: panel/menu.c:1187 panel/panel_config.c:795
+msgid "Corner Panel"
+msgstr ""
+
+#: panel/menu.c:1269
+msgid "Remove this panel"
+msgstr ""
+
+#: panel/menu.c:1308
+msgid "Add applet"
+msgstr "Lis‰‰ appletti"
+
+#: panel/menu.c:1317
+msgid "Add new panel"
+msgstr ""
+
+#: panel/menu.c:1325
+msgid "Add main menu"
+msgstr "Lis‰‰ p‰‰valikko"
+
+#: panel/menu.c:1332
+msgid "Add log out button"
+msgstr ""
+
+#: panel/menu.c:1340
+msgid "Add swallowed app"
+msgstr "Nielaise ohjelma"
+
+#: panel/menu.c:1346
+msgid "Add new launcher"
+msgstr ""
+
+#: panel/menu.c:1357
+msgid "This panel properties..."
+msgstr "T‰m‰n paneelin asetukset..."
+
+#: panel/menu.c:1367
+msgid "Global properties..."
+msgstr "Yleiset asetukset..."
+
+#: panel/menu.c:1394
+msgid "Panel"
+msgstr "Paneeli"
+
+#: panel/menu.c:1401
+msgid "Lock screen"
+msgstr "Lukitse n‰yttˆ"
+
+#: panel/menu.c:1816
+msgid "Menu properties"
+msgstr ""
+
+#: panel/menu.c:1823
+msgid "Menu Type"
+msgstr ""
+
+#: panel/menu.c:1830 panel/menu.c:1850
+msgid "Main Menu"
+msgstr ""
+
+#: panel/menu.c:1841 panel/menu.c:1891
+msgid "Normal Menu"
+msgstr ""
+
+#: panel/menu.c:1860
+msgid "Both System and User menus on the same menu"
+msgstr ""
+
+#: panel/menu.c:1872
+msgid "System on the main menu, User menu as a submenu"
+msgstr ""
+
+#: panel/menu.c:1883
+msgid "User on the main menu, System menu as a submenu"
+msgstr ""
+
+#: panel/menu.c:1901
+msgid "Menu path"
+msgstr ""
+
+#: panel/menu.c:1904 panel/panel-util.c:186 panel/panel_config.c:647 panel/swallow.c:181
+msgid "Browse"
+msgstr ""
+
+#: panel/menu.c:1915
+msgid "Menu"
+msgstr ""
+
+#: panel/mico-glue.cc:221
+msgid "Error on sending 'session save' to applet!"
+msgstr ""
+
+#: panel/mico-glue.cc:237
+msgid "Error on sending 'orient change' to applet!"
+msgstr ""
+
+#: panel/mico-glue.cc:253
+msgid "Error on sending 'do callback' to applet!"
+msgstr ""
+
+#: panel/mico-glue.cc:268
+msgid "Error on sending 'start new applet' to applet!"
+msgstr ""
+
+#: panel/mico-glue.cc:286
+msgid "Error on sending 'change back' to applet!"
+msgstr ""
+
+#: panel/mico-glue.cc:301
+msgid "Error on sending 'tooltips state' to applet!"
+msgstr ""
+
+#. Position frame
+#: panel/panel_config.c:252 panel/panel_config.c:405
+msgid "Position"
+msgstr "Sijainti"
+
+#. Auto-hide/stayput frame
+#: panel/panel_config.c:326
+msgid "Minimize Options"
+msgstr "Piilotus"
+
+#: panel/panel_config.c:337
+msgid "Explicitly Hide"
+msgstr "Piilota k‰skett‰ess‰"
+
+#: panel/panel_config.c:350
+msgid "Auto Hide"
+msgstr "Piilota automaattisesti"
+
+#: panel/panel_config.c:418
+msgid "North East"
+msgstr ""
+
+#: panel/panel_config.c:429
+msgid "South West"
+msgstr ""
+
+#: panel/panel_config.c:440
+msgid "North West"
+msgstr ""
+
+#: panel/panel_config.c:451
+msgid "South East"
+msgstr ""
+
+#. Orientation frame
+#: panel/panel_config.c:479
+msgid "Orientation"
+msgstr "Paikka"
+
+#: panel/panel_config.c:598 panel/panel_config.c:811
+msgid "Background"
+msgstr ""
+
+#. standard background
+#: panel/panel_config.c:608
+msgid "Standard"
+msgstr ""
+
+#: panel/panel_config.c:616
+msgid "Pixmap"
+msgstr ""
+
+#. image frame
+#: panel/panel_config.c:630
+msgid "Image file"
+msgstr ""
+
+#: panel/panel_config.c:660
+msgid "Scale image to fit panel"
+msgstr ""
+
+#: panel/panel_config.c:778
+msgid "Panel properties"
+msgstr ""
+
+#: panel/panel_config_global.c:134
+msgid "Disable animations"
+msgstr ""
+
+#. AutoHide Animation step_size scale frame
+#: panel/panel_config_global.c:142
+msgid "Auto-Hide Animation Speed"
+msgstr "Autopiilotus: Animaationopeus"
+
+#. ExplicitHide Animation step_size scale frame
+#: panel/panel_config_global.c:151
+msgid "Explicit-Hide Animation Speed"
+msgstr "T‰ysi Piilotus: Animaationopeus"
+
+#. DrawerHide Animation step_size scale frame
+#: panel/panel_config_global.c:160
+msgid "Drawer Animation Speed"
+msgstr ""
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:169
+msgid "Auto-Hide Minimize Delay (ms)"
+msgstr "Autopiilotus: Minimoi viive (ms)"
+
+#: panel/panel_config_global.c:176
+msgid "Auto-Hide Minimized Size (pixels)"
+msgstr "Autopiilotus: Minimoi koko (pikseleit‰)"
+
+#: panel/panel_config_global.c:218
+msgid "Tooltips"
+msgstr ""
+
+#. Tooltips enable
+#: panel/panel_config_global.c:229
+msgid "Tooltips enabled"
+msgstr "Vinkit aktivoitu"
+
+#: panel/panel_config_global.c:239
+msgid "Menus"
+msgstr "Valikot"
+
+#. Small Icons
+#: panel/panel_config_global.c:250
+msgid "Show small icons"
+msgstr "N‰yt‰ pienet ikonit"
+
+#: panel/panel_config_global.c:260
+msgid "Movement"
+msgstr ""
+
+#. Switched
+#: panel/panel_config_global.c:271
+msgid "Switched movement"
+msgstr ""
+
+#: panel/panel_config_global.c:283
+msgid "Free movement (doesn't disturb other applets)"
+msgstr ""
+
+#: panel/panel_config_global.c:293
+msgid "Log Out"
+msgstr ""
+
+#. Prompt before log out
+#: panel/panel_config_global.c:304
+msgid "Prompt before logout"
+msgstr ""
+
+#: panel/panel_config_global.c:314
+msgid "Applet Padding"
+msgstr ""
+
+#: panel/panel_config_global.c:346
+msgid "Global Panel Configuration"
+msgstr "Yleiset paneeliasetukset"
+
+#: panel/panel_config_global.c:354
+msgid "Animation settings"
+msgstr "Animaation asetukset"
+
+#: panel/session.c:568
+msgid "Really log out?"
+msgstr ""
+
+#: panel/session.c:582
+msgid "Ask next time"
+msgstr ""
+
+#: panel/swallow.c:158
+msgid "Create swallow applet"
+msgstr ""
+
+#: panel/swallow.c:168
+msgid "Title of application to swallow"
+msgstr ""
+
+#: panel/swallow.c:179
+msgid "Command (optional)"
+msgstr ""
+
+#: panel/swallow.c:190
+msgid "Width (optional)"
+msgstr ""
+
+#: panel/swallow.c:196
+msgid "Height (optional)"
+msgstr ""
+# msgid "GNOME Help"
+# msgstr "GNOME Ohje"
+# 
+# msgid "Icon Tooltips"
+# msgstr "Vinkit Ikoneille"
+# 
+# msgid "Buttons"
+# msgstr "Napit"
+# 
+# msgid "Click"
+# msgstr "Naksaus"
+# 
+# msgid "Panel Configuration"
+# msgstr "Paneelin muokkaus"
+# 
+# msgid "Comment"
+# msgstr "Huomautus"
+# 
+# msgid "Main menu"
+# msgstr "P‰‰valikko"
+# 
+# msgid "Add to panel"
+# msgstr "Lis‰‰ paneeliin"
+# 
+# msgid "Run inside terminal"
+# msgstr "Aja p‰‰teikkunassa"
+# 
+# msgid " Keyboard "
+# msgstr " N‰pp‰imistˆ "
+# 
+# msgid "Execute"
+# msgstr "K‰ynnist‰"
+# 
+# msgid "Info Pages"
+# msgstr "Info-sivut"
+# 
+# msgid "Man Pages"
+# msgstr "Man-sivut"
+# 
+# msgid "Add drawer"
+# msgstr "Lis‰‰ valikko"
+# 
+# msgid "Documentation"
+# msgstr "Dokumentaatio"
+# 
+# msgid "Auto repeat"
+# msgstr "Jatkuva toisto"
+# 
+# msgid "Motion"
+# msgstr "Liike"
+# 
+# msgid "Apply"
+# msgstr "Toteuta"
+# 
+# msgid "Speed"
+# msgstr "Nopeus"
+# 
