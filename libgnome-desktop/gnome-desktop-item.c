@@ -1025,7 +1025,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		/* FIXME: use GError */
 	}
 
-	if(exec[0] == '\0') {
+	if(!exec || exec[0] == '\0') {
 		/* FIXME: use GError */
 		g_warning(_("Trying to execute an item with no 'Exec'"));
 		return -1;
