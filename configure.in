@@ -124,11 +124,12 @@ if test "$P_MODEMLIGHTS" != "modemlights"; then
   AC_MSG_WARN([*** \`modemlights' applet will not be built ***])
 fi
 
+FVWM_PAGER=
 if test "$WINDOW_MANAGER" == "Xfvwm2"
 then
    FVWM_PAGER=yes
-   AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
 fi
+AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
 
 dnl esd-manager
 have_libesd=no
