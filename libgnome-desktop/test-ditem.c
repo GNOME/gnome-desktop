@@ -29,7 +29,7 @@ test_ditem (const char *file)
 	text = gnome_desktop_item_get_location (ditem);
 	g_print ("LOCATION: |%s|\n", text);
 
-	type = gnome_desktop_item_get_type (ditem);
+	type = gnome_desktop_item_get_type ();
 	g_print ("TYPE: |%d|\n", type);
 
 	text = gnome_desktop_item_get_string
@@ -72,7 +72,6 @@ test_ditem (const char *file)
 	gnome_desktop_item_set_localestring
 		(ditem,
 		 GNOME_DESKTOP_ITEM_NAME,
-		 "de",
 		 "Neu gesetzt!");
 
 	g_print ("Saving to foo.desktop\n");
