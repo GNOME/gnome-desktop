@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.4.0.4\n"
-"POT-Creation-Date: 2001-09-20 21:31-0400\n"
-"PO-Revision-Date: 2001-09-22 15:06CET\n"
+"POT-Creation-Date: 2001-09-26 10:07+0200\n"
+"PO-Revision-Date: 2001-09-26 10:08CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -366,8 +366,8 @@ msgstr "Poplach Sprievodcu plochy"
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:944
 #: applets/gen_util/clock.c:582 applets/gen_util/mailcheck.c:1516
 #: applets/gen_util/printer.c:468 applets/tasklist/tasklist_applet.c:1693
-#: panel/drawer.c:491 panel/launcher.c:695 panel/menu.c:1766 panel/menu.c:1853
-#: panel/menu.c:5951
+#: panel/drawer.c:491 panel/launcher.c:661 panel/menu.c:1769 panel/menu.c:1856
+#: panel/menu.c:5959
 msgid "Properties..."
 msgstr "Vlastnosti..."
 
@@ -375,8 +375,8 @@ msgstr "Vlastnosti..."
 #: applets/gen_util/clock.c:603 applets/gen_util/mailcheck.c:1528
 #: applets/gen_util/printer.c:475 applets/tasklist/tasklist_applet.c:1701
 #: gsm/session-properties.c:182 help-browser/window.c:255 panel/drawer.c:494
-#: panel/gnome-run.c:1279 panel/launcher.c:698 panel/logout.c:115
-#: panel/logout.c:197 panel/menu.c:5961 panel/status.c:367 panel/swallow.c:432
+#: panel/gnome-run.c:1307 panel/launcher.c:664 panel/logout.c:115
+#: panel/logout.c:197 panel/menu.c:5969 panel/status.c:367 panel/swallow.c:432
 msgid "Help"
 msgstr "Pomocník"
 
@@ -515,7 +515,7 @@ msgstr "%I:%M %p"
 #. This format string is used, to display the actual time in
 #. 24 hour format.
 #: applets/gen_util/clock.c:198 applets/gen_util/clock.c:400
-#: panel/foobar-widget.c:584 panel/foobar-widget.c:1035
+#: panel/foobar-widget.c:587 panel/foobar-widget.c:1038
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -809,8 +809,8 @@ msgstr "Aplet Tlačiareň umožňuje jednoducho tlačiť upustením súboru."
 #. Translators: Task with no name, should not really happen, so
 #. * this should signal that the panel is confused by this task
 #. * (thus question marks)
-#: applets/tasklist/tasklist_applet.c:135 panel/applet.c:435
-#: panel/foobar-widget.c:773
+#: applets/tasklist/tasklist_applet.c:135 panel/applet.c:438
+#: panel/foobar-widget.c:776
 msgid "???"
 msgstr "???"
 
@@ -911,7 +911,7 @@ msgstr "Zabiť všetky"
 msgid "Follow panel size"
 msgstr "Podľa veľkosti panelu"
 
-#: applets/tasklist/tasklist_properties.c:165 panel/menu.c:4768
+#: applets/tasklist/tasklist_properties.c:165 panel/menu.c:4773
 msgid "Horizontal"
 msgstr "Horizontálne"
 
@@ -941,7 +941,7 @@ msgstr "Premenlivá šírka zoznamu úloh"
 msgid "Only use empty space"
 msgstr "Použiť len prázdny priestor"
 
-#: applets/tasklist/tasklist_properties.c:222 panel/menu.c:4769
+#: applets/tasklist/tasklist_properties.c:222 panel/menu.c:4774
 msgid "Vertical"
 msgstr "Vertikálne"
 
@@ -961,7 +961,7 @@ msgstr "Premenlivá výška zoznamu úloh"
 msgid "Tasklist width is that of longest title"
 msgstr "Šírka zoznamu úloh je podľa najdlhšieho titulku"
 
-#: applets/tasklist/tasklist_properties.c:276 panel/menu.c:4817
+#: applets/tasklist/tasklist_properties.c:276 panel/menu.c:4822
 msgid "Size"
 msgstr "Veľkosť"
 
@@ -1032,8 +1032,8 @@ msgstr " Priečinok"
 msgid "Save"
 msgstr "Uložiť"
 
-#: gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:567
-#: panel/menu.c:1416 panel/menu.c:1529
+#: gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:563
+#: panel/menu.c:1419 panel/menu.c:1532
 msgid "Revert"
 msgstr "Vrátiť sa pôvodnej verzii"
 
@@ -1245,7 +1245,7 @@ msgstr "Nepodarilo sa vytvoriť priečinok"
 msgid "untitled.desktop"
 msgstr "bezmena.desktop"
 
-#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:802
+#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:805
 msgid "untitled"
 msgstr "Bez mena"
 
@@ -1382,7 +1382,7 @@ msgstr "GNOME ryba menom Wanda"
 msgid "... and many more"
 msgstr "... a mnoho ďalších"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:263
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:265
 msgid "About GNOME"
 msgstr "O GNOME"
 
@@ -1520,72 +1520,21 @@ msgstr "Zobrazovať správu dňa namiesto rád"
 msgid "Message of the day file to use: "
 msgstr "Súbor so správou dňa:"
 
-#: gnome-terminal/gnome-terminal.c:281
-msgid ""
-"Zvt terminal widget: \n"
-"    Michael Zucchi (zucchi@zedzone.mmc.com.au)"
-msgstr ""
-"Prvok Zvt terminal:\n"
-"    Michael Zucchi (zucchi@zedzone.mmc.com.au)"
-
-#: gnome-terminal/gnome-terminal.c:283
-msgid ""
-"GNOME terminal: \n"
-"    Miguel de Icaza (miguel@kernel.org)"
-msgstr ""
-"GNOME terminál:\n"
-"    Miguel de Icaza (miguel@kernel.org)"
-
-#: gnome-terminal/gnome-terminal.c:285
-msgid "    Erik Troan (ewt@redhat.com)"
-msgstr "    Erik Troan (ewt@redhat.com)"
-
-#: gnome-terminal/gnome-terminal.c:286
-msgid "    Jacob Berkman (jacob@ximian.com)"
-msgstr "    Jacob Berkman (jacob@ximian.com)"
-
-#: gnome-terminal/gnome-terminal.c:305
+#: gnome-terminal/gnome-terminal.c:287
 msgid "GNOME Terminal"
 msgstr "GNOME Terminál"
 
-#: gnome-terminal/gnome-terminal.c:308
+#: gnome-terminal/gnome-terminal.c:290
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME Emulátor terminálu."
 
-#: gnome-terminal/gnome-terminal.c:313
-#, c-format
-msgid ""
-"GNOME Terminal Version %s\n"
-"\n"
-"%s\n"
-"%s\n"
-"%s\n"
-"%s\n"
-"\n"
-"The GNOME terminal emulation program.\n"
-"\n"
-"(C) 1998, 1999 the Free Software Foundation\n"
-"Copyright 2001 Ximian, Inc."
-msgstr ""
-"GNOME Terminál verzia %s\n"
-"\n"
-"%s\n"
-"%s\n"
-"%s\n"
-"%s\n"
-"\n"
-"Emulátor terminálu pre GNOME.\n"
-"\n"
-"(C) 1998, 1999 the Free Software Foundation\n"
-"Copyright 2001 Ximian, Inc."
-
-#: gnome-terminal/gnome-terminal.c:727 gnome-terminal/gnome-terminal.c:1285
-#: gnome-terminal/gnome-terminal.c:1295 gnome-terminal/gnome-terminal.c:2493
-#: gnome-terminal/gnome-terminal.glade.h:8 panel/menu.c:4792
+#: gnome-terminal/gnome-terminal.c:703 gnome-terminal/gnome-terminal.c:1261
+#: gnome-terminal/gnome-terminal.c:1271 gnome-terminal/gnome-terminal.c:2469
+#: gnome-terminal/gnome-terminal.glade.h:8 panel/menu.c:4797
 msgid "Default"
 msgstr "Štandardné"
 
-#: gnome-terminal/gnome-terminal.c:914
+#: gnome-terminal/gnome-terminal.c:890
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1595,64 +1544,64 @@ msgstr ""
 "prekonfigurovať toto okno tak, aby zodpovedalo štandardnej\n"
 "konfigurácii novej triedy?"
 
-#: gnome-terminal/gnome-terminal.c:1091
+#: gnome-terminal/gnome-terminal.c:1067
 msgid "Linux console"
 msgstr "Linuxová konzola"
 
-#: gnome-terminal/gnome-terminal.c:1092
+#: gnome-terminal/gnome-terminal.c:1068
 msgid "Color Xterm"
 msgstr "Farebný Xterm"
 
-#: gnome-terminal/gnome-terminal.c:1093
+#: gnome-terminal/gnome-terminal.c:1069
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:1094
+#: gnome-terminal/gnome-terminal.c:1070
 msgid "Custom"
 msgstr "Vlastné"
 
-#: gnome-terminal/gnome-terminal.c:1099
+#: gnome-terminal/gnome-terminal.c:1075
 msgid "White on black"
 msgstr "Biela na čiernom"
 
-#: gnome-terminal/gnome-terminal.c:1100
+#: gnome-terminal/gnome-terminal.c:1076
 msgid "Black on white"
 msgstr "Čierna na bielom"
 
-#: gnome-terminal/gnome-terminal.c:1101
+#: gnome-terminal/gnome-terminal.c:1077
 msgid "Green on black"
 msgstr "Zelená na čiernom"
 
-#: gnome-terminal/gnome-terminal.c:1102
+#: gnome-terminal/gnome-terminal.c:1078
 msgid "Black on light yellow"
 msgstr "Čierna na svetložltom"
 
-#: gnome-terminal/gnome-terminal.c:1103
+#: gnome-terminal/gnome-terminal.c:1079
 msgid "Custom colors"
 msgstr "Vlastné farby"
 
-#: gnome-terminal/gnome-terminal.c:1108
+#: gnome-terminal/gnome-terminal.c:1084
 msgid "Left"
 msgstr "Vľavo"
 
-#: gnome-terminal/gnome-terminal.c:1109
+#: gnome-terminal/gnome-terminal.c:1085
 msgid "Right"
 msgstr "Vpravo"
 
-#: gnome-terminal/gnome-terminal.c:1110
+#: gnome-terminal/gnome-terminal.c:1086
 msgid "Hidden"
 msgstr "Skryté"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/gnome-run.c:378
-#: panel/gnome-run.c:602
+#: gnome-terminal/gnome-terminal.c:1247 panel/gnome-run.c:392
+#: panel/gnome-run.c:623
 msgid "Browse..."
 msgstr "Prechádzať..."
 
-#: gnome-terminal/gnome-terminal.c:1523
+#: gnome-terminal/gnome-terminal.c:1499
 msgid "Color selector"
 msgstr "Výber farieb"
 
-#: gnome-terminal/gnome-terminal.c:2121
+#: gnome-terminal/gnome-terminal.c:2097
 #, c-format
 msgid ""
 "There has been an error while trying to log in:\n"
@@ -1663,201 +1612,201 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2185 gnome-terminal/gnome-terminal.c:2631
+#: gnome-terminal/gnome-terminal.c:2161 gnome-terminal/gnome-terminal.c:2607
 msgid "Terminal"
 msgstr "Terminál"
 
-#: gnome-terminal/gnome-terminal.c:2718
+#: gnome-terminal/gnome-terminal.c:2694
 msgid "Terminal class name"
 msgstr "Meno triedy terminálu"
 
-#: gnome-terminal/gnome-terminal.c:2718
+#: gnome-terminal/gnome-terminal.c:2694
 msgid "TCLASS"
 msgstr "TRIEDAT"
 
-#: gnome-terminal/gnome-terminal.c:2721
+#: gnome-terminal/gnome-terminal.c:2697
 msgid "Specifies font name"
 msgstr "Špecifikuje meno písma"
 
-#: gnome-terminal/gnome-terminal.c:2721
+#: gnome-terminal/gnome-terminal.c:2697
 msgid "FONT"
 msgstr "PÍSMO"
 
-#: gnome-terminal/gnome-terminal.c:2724
+#: gnome-terminal/gnome-terminal.c:2700
 msgid "Do not start up shells as login shells"
 msgstr "Nespúštať shell ako prihlasovací"
 
-#: gnome-terminal/gnome-terminal.c:2727
+#: gnome-terminal/gnome-terminal.c:2703
 msgid "Start up shells as login shells"
 msgstr "Spúštať shell ako prihlasovací"
 
-#: gnome-terminal/gnome-terminal.c:2730
+#: gnome-terminal/gnome-terminal.c:2706
 msgid "Specifies the geometry for the main window"
 msgstr "Špecifikuje rozmery hlavného okna"
 
-#: gnome-terminal/gnome-terminal.c:2730
+#: gnome-terminal/gnome-terminal.c:2706
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: gnome-terminal/gnome-terminal.c:2733
+#: gnome-terminal/gnome-terminal.c:2709
 msgid "Execute this program instead of a shell"
 msgstr "Spustiť tento program namiesto shellu"
 
-#: gnome-terminal/gnome-terminal.c:2733 gnome-terminal/gnome-terminal.c:2736
+#: gnome-terminal/gnome-terminal.c:2709 gnome-terminal/gnome-terminal.c:2712
 msgid "COMMAND"
 msgstr "PRÍKAZ"
 
-#: gnome-terminal/gnome-terminal.c:2736
+#: gnome-terminal/gnome-terminal.c:2712
 msgid "Execute this program the same way as xterm does"
 msgstr "Spustiť tento program rovnako ako to robí xterm"
 
-#: gnome-terminal/gnome-terminal.c:2739
+#: gnome-terminal/gnome-terminal.c:2715
 msgid "Foreground color"
 msgstr "Farba popredia"
 
-#: gnome-terminal/gnome-terminal.c:2739 gnome-terminal/gnome-terminal.c:2742
+#: gnome-terminal/gnome-terminal.c:2715 gnome-terminal/gnome-terminal.c:2718
 msgid "COLOR"
 msgstr "FARBA"
 
-#: gnome-terminal/gnome-terminal.c:2742
+#: gnome-terminal/gnome-terminal.c:2718
 msgid "Background color"
 msgstr "Farba pozadia"
 
-#: gnome-terminal/gnome-terminal.c:2745
+#: gnome-terminal/gnome-terminal.c:2721
 msgid "Solid background"
 msgstr "Plné pozadie"
 
-#: gnome-terminal/gnome-terminal.c:2745
+#: gnome-terminal/gnome-terminal.c:2721
 msgid "SOLID"
 msgstr "SOLID"
 
-#: gnome-terminal/gnome-terminal.c:2748
+#: gnome-terminal/gnome-terminal.c:2724
 #: gnome-terminal/gnome-terminal.glade.h:22
 msgid "Background pixmap"
 msgstr "Obrázok v pozadí"
 
-#: gnome-terminal/gnome-terminal.c:2748
+#: gnome-terminal/gnome-terminal.c:2724
 msgid "PIXMAP"
 msgstr "PIXMAP"
 
-#: gnome-terminal/gnome-terminal.c:2751
+#: gnome-terminal/gnome-terminal.c:2727
 #: gnome-terminal/gnome-terminal.glade.h:24
 msgid "Background pixmap scrolls"
 msgstr "Obrázok na pozadí sa posúva"
 
-#: gnome-terminal/gnome-terminal.c:2751
+#: gnome-terminal/gnome-terminal.c:2727
 msgid "BGSCROLL"
 msgstr "BGSCROLL"
 
-#: gnome-terminal/gnome-terminal.c:2754
+#: gnome-terminal/gnome-terminal.c:2730
 msgid "Background pixmap does not scroll"
 msgstr "Obrázok na pozadí sa neposúva"
 
-#: gnome-terminal/gnome-terminal.c:2754
+#: gnome-terminal/gnome-terminal.c:2730
 msgid "BGNOSCROLL"
 msgstr "BGNOSCROLL"
 
-#: gnome-terminal/gnome-terminal.c:2757
+#: gnome-terminal/gnome-terminal.c:2733
 msgid "Shade background"
 msgstr "Tieňované pozadie"
 
-#: gnome-terminal/gnome-terminal.c:2757
+#: gnome-terminal/gnome-terminal.c:2733
 msgid "SHADED"
 msgstr "SHADED"
 
-#: gnome-terminal/gnome-terminal.c:2760
+#: gnome-terminal/gnome-terminal.c:2736
 msgid "Do not shade background"
 msgstr "Netieňovať pozadie"
 
-#: gnome-terminal/gnome-terminal.c:2760
+#: gnome-terminal/gnome-terminal.c:2736
 msgid "NOSHADED"
 msgstr "NOSHADED"
 
-#: gnome-terminal/gnome-terminal.c:2763
+#: gnome-terminal/gnome-terminal.c:2739
 msgid "Transparent background"
 msgstr "Priesvitné pozadie"
 
-#: gnome-terminal/gnome-terminal.c:2763
+#: gnome-terminal/gnome-terminal.c:2739
 msgid "TRANSPARENT"
 msgstr "TRANSPARENT"
 
-#: gnome-terminal/gnome-terminal.c:2766
+#: gnome-terminal/gnome-terminal.c:2742
 msgid "Update utmp entry"
 msgstr "Obnovovať informáciu utmp"
 
-#: gnome-terminal/gnome-terminal.c:2766
+#: gnome-terminal/gnome-terminal.c:2742
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2769
+#: gnome-terminal/gnome-terminal.c:2745
 msgid "Do not update utmp entry"
 msgstr "Neobnovovať informáciu utmp"
 
-#: gnome-terminal/gnome-terminal.c:2769
+#: gnome-terminal/gnome-terminal.c:2745
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2772
+#: gnome-terminal/gnome-terminal.c:2748
 msgid "Update wtmp entry"
 msgstr "Obnovovať informáciu wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2772
+#: gnome-terminal/gnome-terminal.c:2748
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2775
+#: gnome-terminal/gnome-terminal.c:2751
 msgid "Do not update wtmp entry"
 msgstr "Nebnovovať informáciu wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2775
+#: gnome-terminal/gnome-terminal.c:2751
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2778
+#: gnome-terminal/gnome-terminal.c:2754
 msgid "Update lastlog entry"
 msgstr "Obnovovať informáciu lastlog"
 
-#: gnome-terminal/gnome-terminal.c:2778
+#: gnome-terminal/gnome-terminal.c:2754
 msgid "LASTLOG"
 msgstr "LASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2781
+#: gnome-terminal/gnome-terminal.c:2757
 msgid "Do not update lastlog entry"
 msgstr "Neobnovovať informáciu lastlog"
 
-#: gnome-terminal/gnome-terminal.c:2781
+#: gnome-terminal/gnome-terminal.c:2757
 msgid "NOLASTLOG"
 msgstr "NOLASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2784
+#: gnome-terminal/gnome-terminal.c:2760
 msgid "Set the window title"
 msgstr "Nastaviť titulok okna"
 
-#: gnome-terminal/gnome-terminal.c:2784
+#: gnome-terminal/gnome-terminal.c:2760
 msgid "TITLE"
 msgstr "TITULOK"
 
-#: gnome-terminal/gnome-terminal.c:2787
+#: gnome-terminal/gnome-terminal.c:2763
 msgid "Set the window icon"
 msgstr "Nastaviť ikonu okna"
 
-#: gnome-terminal/gnome-terminal.c:2787
+#: gnome-terminal/gnome-terminal.c:2763
 msgid "ICON"
 msgstr "IKONA"
 
-#: gnome-terminal/gnome-terminal.c:2790
+#: gnome-terminal/gnome-terminal.c:2766
 msgid "Set the TERM variable"
 msgstr "Nastaviť premennú TERM"
 
-#: gnome-terminal/gnome-terminal.c:2790
+#: gnome-terminal/gnome-terminal.c:2766
 msgid "TERMNAME"
 msgstr "MENOTERM"
 
-#: gnome-terminal/gnome-terminal.c:2793
+#: gnome-terminal/gnome-terminal.c:2769
 msgid "Try to start a TerminalFactory"
 msgstr "Pokúsiť sa spustiť TerminalFactory"
 
-#: gnome-terminal/gnome-terminal.c:2796
+#: gnome-terminal/gnome-terminal.c:2772
 msgid "Try to create the terminal with the TerminalFactory"
 msgstr "Pokúsi sa vytvoriť terminál pomocou TerminalFactory"
 
@@ -2008,7 +1957,7 @@ msgstr "Neznámy"
 msgid "State not reported within timeout."
 msgstr "Stav nebol nahlásený v časovom limite"
 
-#: gsm/gsm-client-row.c:52 panel/menu.c:4794 panel/panel_config.c:1406
+#: gsm/gsm-client-row.c:52 panel/menu.c:4799 panel/panel_config.c:1406
 msgid "Normal"
 msgstr "Normálny"
 
@@ -2032,7 +1981,7 @@ msgstr "Odpad"
 msgid "Discarded on logout and can die."
 msgstr "Pri odhlásení bude zahodený a môže skončiť."
 
-#: gsm/gsm-client-row.c:61 panel/foobar-widget.c:1094
+#: gsm/gsm-client-row.c:61 panel/foobar-widget.c:1097
 msgid "Settings"
 msgstr "Nastavenie"
 
@@ -2290,7 +2239,7 @@ msgstr "Proxy Správcu sedenia"
 msgid "Window Manager"
 msgstr "Správca okien"
 
-#: gsm/splash.c:68 panel/menu.c:5261 panel/menu.c:5266 panel/menu.c:5636
+#: gsm/splash.c:68 panel/menu.c:5269 panel/menu.c:5274 panel/menu.c:5644
 msgid "Desktop"
 msgstr "Plocha"
 
@@ -2741,25 +2690,25 @@ msgstr ""
 "Asi nemáte túto\n"
 "dokumentáciu nainštalovanú."
 
-#: panel/applet.c:476
+#: panel/applet.c:479
 msgid "Remove from panel"
 msgstr "Odstrániť z panelu"
 
-#: panel/applet.c:483
+#: panel/applet.c:486
 msgid "Move"
 msgstr "Presunúť"
 
-#: panel/applet.c:496 panel/menu.c:3692
+#: panel/applet.c:499 panel/menu.c:3695
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Nepodarilo sa nájsť súbor s obrázkom %s"
 
-#: panel/applet.c:497 panel/applet.c:501 panel/menu.c:5232 panel/menu.c:5237
-#: panel/menu.c:5627
+#: panel/applet.c:500 panel/applet.c:504 panel/menu.c:5240 panel/menu.c:5245
+#: panel/menu.c:5635
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:768
+#: panel/applet.c:772
 msgid "Can't find an empty spot"
 msgstr "Nepodarilo sa nájsť prázdne miesto"
 
@@ -2850,7 +2799,7 @@ msgid "Enable hidebutton arrow"
 msgstr "Povoliť šipku hidebutton"
 
 #: panel/drawer.c:187 panel/drawer.c:321 panel/gnome-panel-properties.c:583
-#: panel/menu.c:4925
+#: panel/menu.c:4930
 msgid "Drawer"
 msgstr "Vykresľovač"
 
@@ -2895,7 +2844,7 @@ msgstr "Aj! z nejakého dôvodu nemôžem pridať do panelu"
 msgid "No socket was created"
 msgstr "Nebol vytvorený soket"
 
-#: panel/foobar-widget.c:220
+#: panel/foobar-widget.c:221
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2903,7 +2852,7 @@ msgstr ""
 "Nepodarilo sa spustiť klientský program gmc,\n"
 "možno nie je gmc nainštalovaný"
 
-#: panel/foobar-widget.c:230
+#: panel/foobar-widget.c:232
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2913,115 +2862,115 @@ msgstr ""
 "možno nie je nainštalovaný.\n"
 "Je v balíku gnome-pim."
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:245
 msgid "News (www)"
 msgstr "Novinky (www)"
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:245
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:244
+#: panel/foobar-widget.c:246
 msgid "FAQ (www)"
 msgstr "FAQ (www)"
 
-#: panel/foobar-widget.c:244
+#: panel/foobar-widget.c:246
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:245
+#: panel/foobar-widget.c:247
 msgid "Mailing Lists (www)"
 msgstr "Mailing Listy (www)"
 
-#: panel/foobar-widget.c:245
+#: panel/foobar-widget.c:247
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:249
 msgid "Software (www)"
 msgstr "Softvér (www)"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:249
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:250
 msgid "Development (www)"
 msgstr "Vývoj (www)"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:250
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:249
+#: panel/foobar-widget.c:251
 msgid "Bug Tracking System (www)"
 msgstr "Sledovanie chýb (www)"
 
-#: panel/foobar-widget.c:249
+#: panel/foobar-widget.c:251
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:343
+#: panel/foobar-widget.c:345
 msgid "By Name"
 msgstr "Podľa mena"
 
-#: panel/foobar-widget.c:344
+#: panel/foobar-widget.c:346
 msgid "By Type"
 msgstr "Podľa typu"
 
-#: panel/foobar-widget.c:345
+#: panel/foobar-widget.c:347
 msgid "By Size"
 msgstr "Podľa veľkosti"
 
-#: panel/foobar-widget.c:346
+#: panel/foobar-widget.c:348
 msgid "By Time Last Accessed"
 msgstr "Podľa času prístupu"
 
-#: panel/foobar-widget.c:347
+#: panel/foobar-widget.c:349
 msgid "By Time Last Modified"
 msgstr "Podľa času modifikácie"
 
-#: panel/foobar-widget.c:348
+#: panel/foobar-widget.c:350
 msgid "By Time Last Changed"
 msgstr "Podľa času zmeny"
 
-#: panel/foobar-widget.c:358
+#: panel/foobar-widget.c:360
 msgid "Arrange Icons"
 msgstr "Usporiadať ikony"
 
-#: panel/foobar-widget.c:371
+#: panel/foobar-widget.c:373
 msgid "Rescan Desktop Directory"
 msgstr "Znovunačítať priečinok s plochou"
 
-#: panel/foobar-widget.c:374
+#: panel/foobar-widget.c:376
 msgid "Rescan Desktop Devices"
 msgstr "Znovunačítať zariadenia plochy"
 
-#: panel/foobar-widget.c:383
+#: panel/foobar-widget.c:385
 msgid "Lock Screen"
 msgstr "Uzamknúť obrazovku"
 
-#: panel/foobar-widget.c:393
+#: panel/foobar-widget.c:395
 msgid "Log Out"
 msgstr "Odhlásiť"
 
-#: panel/foobar-widget.c:401
+#: panel/foobar-widget.c:403
 msgid " Desktop "
 msgstr " Plocha "
 
-#: panel/foobar-widget.c:426
+#: panel/foobar-widget.c:428
 msgid "can't fine real path"
 msgstr "nepodarilo sa nájsť skutočnú cestu"
 
-#: panel/foobar-widget.c:443
+#: panel/foobar-widget.c:445
 msgid "menu wasn't created"
 msgstr "menu nebolo vytvorené"
 
-#: panel/foobar-widget.c:485
+#: panel/foobar-widget.c:487
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:566
+#: panel/foobar-widget.c:569
 msgid ""
 "Could not call time-admin\n"
 "Perhaps time-admin is not installed"
@@ -3029,58 +2978,58 @@ msgstr ""
 "Nie je možné spustiť time-admin.\n"
 "Možno nie je nainštalovaný."
 
-#: panel/foobar-widget.c:577
+#: panel/foobar-widget.c:580
 msgid "Today"
 msgstr "Dnes"
 
-#: panel/foobar-widget.c:578
+#: panel/foobar-widget.c:581
 msgid "This Week"
 msgstr "Tento týždeň"
 
-#: panel/foobar-widget.c:579
+#: panel/foobar-widget.c:582
 msgid "This Month"
 msgstr "Tento mesiac"
 
-#: panel/foobar-widget.c:585
+#: panel/foobar-widget.c:588
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:586
+#: panel/foobar-widget.c:589
 msgid "%l:%M %p"
 msgstr "%I:%M %p"
 
-#: panel/foobar-widget.c:587
+#: panel/foobar-widget.c:590
 msgid "%l:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:594
+#: panel/foobar-widget.c:597
 msgid "Add appointement..."
 msgstr "Pridať schôdzku..."
 
-#: panel/foobar-widget.c:602
+#: panel/foobar-widget.c:605
 msgid "Set Time"
 msgstr "Nastaviť čas"
 
-#: panel/foobar-widget.c:620
+#: panel/foobar-widget.c:623
 msgid "Format"
 msgstr "Formát"
 
-#: panel/foobar-widget.c:1076 panel/menu.c:3724 panel/menu.c:3732
-#: panel/menu.c:5553
+#: panel/foobar-widget.c:1079 panel/menu.c:3727 panel/menu.c:3735
+#: panel/menu.c:5561
 msgid "Programs"
 msgstr "Programy"
 
 #. FIXME: add the add to favourites somehow here
-#: panel/foobar-widget.c:1091 panel/menu.c:3878 panel/menu.c:5512
-#: panel/menu.c:5566 panel/menu.c:5574
+#: panel/foobar-widget.c:1094 panel/menu.c:3882 panel/menu.c:5520
+#: panel/menu.c:5574 panel/menu.c:5582
 msgid "Favorites"
 msgstr "Obľúbené"
 
-#: panel/global-keys.c:287 panel/global-keys.c:313
+#: panel/global-keys.c:288 panel/global-keys.c:316
 msgid "Can't find the screenshot program"
 msgstr "Nepodarilo sa nájsť program pre zachytenie obrazovky"
 
-#: panel/global-keys.c:295 panel/global-keys.c:322
+#: panel/global-keys.c:297 panel/global-keys.c:326
 msgid "Can't execute the screenshot program"
 msgstr "Nepodarilo sa spustiť program pre zachytenie obrazovky"
 
@@ -3127,12 +3076,12 @@ msgid "Animation speed"
 msgstr "Rýchlosť animácie"
 
 #: panel/gnome-panel-properties.c:346 panel/gnome-panel-properties.c:364
-#: panel/menu.c:4756
+#: panel/menu.c:4761
 msgid "Auto hide"
 msgstr "Automatické skrývanie"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:353 panel/menu.c:4755
+#: panel/gnome-panel-properties.c:353 panel/menu.c:4760
 msgid "Explicit hide"
 msgstr "Skrývanie na výzvu"
 
@@ -3200,9 +3149,9 @@ msgid "Launcher"
 msgstr "Spúšťač"
 
 #: panel/gnome-panel-properties.c:584 panel/gnome-panel-properties.c:1702
-#: panel/menu-properties.c:616 panel/menu.c:1563 panel/menu.c:3161
-#: panel/menu.c:3236 panel/menu.c:3241 panel/menu.c:4863 panel/menu.c:5705
-#: panel/menu.c:5839 panel/menu.c:5859
+#: panel/menu-properties.c:616 panel/menu.c:1566 panel/menu.c:3164
+#: panel/menu.c:3239 panel/menu.c:3244 panel/menu.c:4868 panel/menu.c:5713
+#: panel/menu.c:5847 panel/menu.c:5867
 msgid "Menu"
 msgstr "Menu"
 
@@ -3428,11 +3377,16 @@ msgid ""
 "configuration"
 msgstr "Administrátor systému nedovolil zmenu nastavenia panelu."
 
-#: panel/gnome-run.c:235
-msgid "Failed to load this program!\n"
-msgstr "Nepodarilo sa načítať tento program!\n"
+#: panel/gnome-run.c:236 panel/gnome-run.c:242
+#, c-format
+msgid ""
+"Failed to load this program!\n"
+"%s"
+msgstr ""
+"Nepodarilo sa načítať tento program!\n"
+"%s"
 
-#: panel/gnome-run.c:279
+#: panel/gnome-run.c:293
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -3441,7 +3395,7 @@ msgstr ""
 "Nepodarilo sa vykonať príkaz:\n"
 "%s"
 
-#: panel/gnome-run.c:331
+#: panel/gnome-run.c:345
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -3452,66 +3406,66 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: panel/gnome-run.c:611
+#: panel/gnome-run.c:632
 msgid "Run in terminal"
 msgstr "Spustiť v termináli"
 
-#: panel/gnome-run.c:860
+#: panel/gnome-run.c:881
 #, c-format
 msgid "Will run '%s'"
 msgstr "Spustím '%s'"
 
-#: panel/gnome-run.c:871 panel/gnome-run.c:874
+#: panel/gnome-run.c:892 panel/gnome-run.c:895
 msgid "No program selected"
 msgstr "Nevybraný žiadny program"
 
-#: panel/gnome-run.c:994
+#: panel/gnome-run.c:1020
 msgid "Available Programs"
 msgstr "Dostupné programy"
 
-#: panel/gnome-run.c:995
+#: panel/gnome-run.c:1021
 msgid "Description"
 msgstr "Popis"
 
-#: panel/gnome-run.c:1046
+#: panel/gnome-run.c:1074
 msgid "Add this program to Favorites"
 msgstr "Pridať tento program do menu Obľúbené"
 
-#: panel/gnome-run.c:1104
+#: panel/gnome-run.c:1132
 msgid "Hide advanced options"
 msgstr "Skryť pokročilé možnosti"
 
-#: panel/gnome-run.c:1107
+#: panel/gnome-run.c:1135
 msgid "Hide the advanced controls below this button."
 msgstr "Skryje pokročilé možnosti pod týmto tlačidlom."
 
-#: panel/gnome-run.c:1116
+#: panel/gnome-run.c:1144
 msgid "Advanced..."
 msgstr "Pokročilé..."
 
-#: panel/gnome-run.c:1119
+#: panel/gnome-run.c:1147
 msgid ""
 "Allow typing in a command line instead of choosing an application from the "
 "list"
 msgstr "Umožní priamo zadať príkaz namiesto výberu aplikácie zo zoznamu."
 
-#: panel/gnome-run.c:1142
+#: panel/gnome-run.c:1170
 msgid "Run Program"
 msgstr "Spustiť program"
 
-#: panel/gnome-run.c:1165
+#: panel/gnome-run.c:1193
 msgid "Run"
 msgstr "Spustiť"
 
-#: panel/gnome-run.c:1237 panel/gnome-run.c:1256 panel/menu.c:5610
+#: panel/gnome-run.c:1265 panel/gnome-run.c:1284 panel/menu.c:5618
 msgid "Run..."
 msgstr "Spustiť..."
 
-#: panel/launcher.c:67
+#: panel/launcher.c:69
 msgid "This launch icon does not specify a url to show"
 msgstr "Táto spúštacia ikona neuvádza, ktoré URL zobraziť"
 
-#: panel/launcher.c:75
+#: panel/launcher.c:77
 #, c-format
 msgid ""
 "Cannot show %s\n"
@@ -3520,7 +3474,7 @@ msgstr ""
 "Nie je možné zobraziť %s\n"
 "%s"
 
-#: panel/launcher.c:101 panel/launcher.c:148
+#: panel/launcher.c:103 panel/launcher.c:148
 #, c-format
 msgid ""
 "Cannot launch icon\n"
@@ -3529,29 +3483,25 @@ msgstr ""
 "Nie je možné spustiť ikonu\n"
 "%s"
 
-#: panel/launcher.c:391
-msgid "App"
-msgstr "Apl"
-
-#: panel/launcher.c:501 panel/launcher.c:707 panel/menu.c:1736
+#: panel/launcher.c:482 panel/menu.c:1739
 #, c-format
 msgid "Help on %s"
 msgstr "Pomocník k %s"
 
-#: panel/launcher.c:504 panel/launcher.c:710 panel/menu.c:1739
+#: panel/launcher.c:484 panel/menu.c:1742
 msgid "Application"
 msgstr "Aplikácia"
 
 #. watch the enum at the top of the file
-#: panel/launcher.c:565
+#: panel/launcher.c:561
 msgid "Launcher properties"
 msgstr "Vlastnosti spúštača"
 
-#: panel/launcher.c:765
+#: panel/launcher.c:709
 msgid "Create launcher applet"
 msgstr "Vytvoriť spúšťací aplet"
 
-#: panel/logout.c:73 panel/menu.c:5377
+#: panel/logout.c:73 panel/menu.c:5385
 msgid "Log out"
 msgstr "Odhlásiť"
 
@@ -3559,7 +3509,7 @@ msgstr "Odhlásiť"
 msgid "Log out of GNOME"
 msgstr "Odhlásiť z GNOME"
 
-#: panel/logout.c:133 panel/logout.c:152 panel/menu.c:5362
+#: panel/logout.c:133 panel/logout.c:152 panel/menu.c:5370
 msgid "Lock screen"
 msgstr "Uzamknúť obrazovku"
 
@@ -3593,7 +3543,7 @@ msgstr ""
 "Spustiť ďalší?\n"
 "(Nový panel nebude znovu spustený.)"
 
-#: panel/main.c:511
+#: panel/main.c:512
 msgid ""
 "There was a problem registering the panel with the GOAD server.\n"
 "The panel will now exit."
@@ -3638,53 +3588,53 @@ msgstr ""
 "Spúšťam v móde \"LockDown\". To znamená, že administrátor systému zakázal "
 "zmeny nastavenia panelu."
 
-#: panel/menu.c:276
+#: panel/menu.c:277
 msgid "Can't execute 'About GNOME'"
 msgstr "Nepodarilo sa spustiť 'O GNOME'"
 
-#: panel/menu.c:294 panel/menu.c:1043 panel/menu.c:1062 panel/menu.c:2300
+#: panel/menu.c:298 panel/menu.c:1046 panel/menu.c:1065 panel/menu.c:2303
 msgid "Can't load entry"
 msgstr "Nepodarilo sa načítať položku"
 
-#: panel/menu.c:795
+#: panel/menu.c:798
 msgid "Cannot create an item with an empty command"
 msgstr "Nepodarilo sa vytvoriť položku s prázdnym príkazom"
 
-#: panel/menu.c:838
+#: panel/menu.c:841
 #, c-format
 msgid "Could not get file from path: %s"
 msgstr "Nepodarilo sa získať súbor s cestou: %s"
 
-#: panel/menu.c:842
+#: panel/menu.c:845
 #, c-format
 msgid "Could not open .order file: %s"
 msgstr "Nemôžem otvoriť súbor s triedením: %s"
 
-#: panel/menu.c:850
+#: panel/menu.c:853
 #, c-format
 msgid "Could not open file '%s' for writing"
 msgstr "Nemôžem otvoriť súbor %s pre zápis"
 
-#: panel/menu.c:871
+#: panel/menu.c:874
 msgid "Create menu item"
 msgstr "Vytvoriť položku menu"
 
-#: panel/menu.c:949
+#: panel/menu.c:952
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
 msgstr "Nepodarilo sa odstrániť položku menu %s: %s\n"
 
-#: panel/menu.c:956
+#: panel/menu.c:959
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "Nepodarilo sa získať meno súboru s cestou: %s"
 
-#: panel/menu.c:963
+#: panel/menu.c:966
 #, c-format
 msgid "Could not get directory name from path: %s"
 msgstr "Nepodarilo sa získať meno priečinku z cesty: %s"
 
-#: panel/menu.c:984
+#: panel/menu.c:987
 #, c-format
 msgid ""
 "Could not open .order file: %s\n"
@@ -3693,12 +3643,12 @@ msgstr ""
 "Nemôžem otvoriť súbor .order s triedením: %s\n"
 "%s"
 
-#: panel/menu.c:1004
+#: panel/menu.c:1007
 #, c-format
 msgid "Could not remove old order file %s: %s\n"
 msgstr "Nemôžem odstrániť starý súbor s triedením %s: %s\n"
 
-#: panel/menu.c:1012
+#: panel/menu.c:1015
 #, c-format
 msgid ""
 "Could not rename tmp file: %s to %s\n"
@@ -3707,140 +3657,140 @@ msgstr ""
 "Nepodarilo sa premenovať tmp súbor %s na %s\n"
 "%s"
 
-#: panel/menu.c:1039
+#: panel/menu.c:1042
 msgid "No 'Exec' field in entry"
 msgstr "V položke nie je pole 'Exec'"
 
 #. watch the enum at the top of the file
-#: panel/menu.c:1414 panel/menu.c:1527
+#: panel/menu.c:1417 panel/menu.c:1530
 msgid "Desktop entry properties"
 msgstr "Vlastnosti položky plochy"
 
-#: panel/menu.c:1666
+#: panel/menu.c:1669
 msgid "Add this launcher to panel"
 msgstr "Pridať tento spúšťač do panelu"
 
-#: panel/menu.c:1669
+#: panel/menu.c:1672
 msgid "Add this applet as a launcher to panel"
 msgstr "Pridať tento aplet ako spúšťač do panelu"
 
-#: panel/menu.c:1679 panel/menu.c:1816
+#: panel/menu.c:1682 panel/menu.c:1819
 msgid "Add this to Favorites menu"
 msgstr "Pridať toto do menu Obľúbené"
 
-#: panel/menu.c:1692
+#: panel/menu.c:1695
 msgid "Remove this item"
 msgstr "Odstrániť túto položku"
 
-#: panel/menu.c:1710
+#: panel/menu.c:1713
 msgid "Put into run dialog"
 msgstr "Vložiť do dialógu Spustiť"
 
-#: panel/menu.c:1789
+#: panel/menu.c:1792
 msgid "Entire menu"
 msgstr "Celé menu"
 
-#: panel/menu.c:1799
+#: panel/menu.c:1802
 msgid "Add this as drawer to panel"
 msgstr "Pridať toto ako vykresľovač do panelu"
 
-#: panel/menu.c:1808
+#: panel/menu.c:1811
 msgid "Add this as menu to panel"
 msgstr "Pridať toto ako menu do panelu"
 
-#: panel/menu.c:1828
+#: panel/menu.c:1831
 msgid "Add new item to this menu"
 msgstr "Pridať novú položku do tohoto menu"
 
-#: panel/menu.c:2043 panel/menu.c:2123
+#: panel/menu.c:2046 panel/menu.c:2126
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:2281
+#: panel/menu.c:2284
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "V paneli už máte stavový priestor. Môžete mať iba jeden."
 
-#: panel/menu.c:2308
+#: panel/menu.c:2311
 msgid "Can't get goad_id from desktop entry!"
 msgstr "Nepodarilo sa získať goad_id položky plochy!"
 
-#: panel/menu.c:2769
+#: panel/menu.c:2772
 msgid "Adding tearoff when tearoffs are disabled"
 msgstr "Pridávam tearoff keď je tearoff zakázané."
 
 #. Add to favourites
-#: panel/menu.c:2916
+#: panel/menu.c:2919
 msgid "Add from menu"
 msgstr "Pridať z menu"
 
-#: panel/menu.c:2994
+#: panel/menu.c:2997
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Nemôžem získať goad_id pre aplet ignorujem"
 
-#: panel/menu.c:3241 panel/menu.c:3243
+#: panel/menu.c:3244 panel/menu.c:3246
 msgid " (empty)"
 msgstr " (prázdne)"
 
 #. applets
 #. launcher_add
 #. favourites_add
-#: panel/menu.c:3350 panel/menu.c:5588
+#: panel/menu.c:3353 panel/menu.c:5596
 msgid "Applets"
 msgstr "Aplety"
 
-#: panel/menu.c:3555 panel/session.c:1550
+#: panel/menu.c:3558 panel/session.c:1549
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/menu.c:3564
+#: panel/menu.c:3567
 msgid "You can only have one menu panel at a time."
 msgstr "V jednom momente môžete mať iba jeden menu panel."
 
-#: panel/menu.c:3601 panel/menu.c:3606 panel/menu.c:5113
+#: panel/menu.c:3604 panel/menu.c:3609 panel/menu.c:5120
 msgid "Create panel"
 msgstr "Vytvoriť panel"
 
-#: panel/menu.c:3634
+#: panel/menu.c:3637
 msgid "Menu panel"
 msgstr "Menu panel"
 
-#: panel/menu.c:3642 panel/menu.c:4747 panel/panel_config.c:1762
+#: panel/menu.c:3645 panel/menu.c:4752 panel/panel_config.c:1762
 #: panel/panel_config.c:1886
 msgid "Edge panel"
 msgstr "Okrajový panel"
 
-#: panel/menu.c:3650 panel/menu.c:4748 panel/panel_config.c:1769
+#: panel/menu.c:3653 panel/menu.c:4753 panel/panel_config.c:1769
 #: panel/panel_config.c:1896
 msgid "Aligned panel"
 msgstr "Zarovnaný panel"
 
-#: panel/menu.c:3658 panel/menu.c:4749 panel/panel_config.c:1775
+#: panel/menu.c:3661 panel/menu.c:4754 panel/panel_config.c:1775
 #: panel/panel_config.c:1906
 msgid "Sliding panel"
 msgstr "Kĺzajúci panel"
 
-#: panel/menu.c:3666 panel/menu.c:4750 panel/panel_config.c:1781
+#: panel/menu.c:3669 panel/menu.c:4755 panel/panel_config.c:1781
 #: panel/panel_config.c:1916
 msgid "Floating panel"
 msgstr "Plávajúci panel"
 
-#: panel/menu.c:3741 panel/menu.c:3744
+#: panel/menu.c:3745 panel/menu.c:3748
 msgid "No system menus found!"
 msgstr "Nenájdené žiadne systémové menu!"
 
-#: panel/menu.c:3761
+#: panel/menu.c:3765
 msgid "Can't create the user menu directory"
 msgstr "Nemôžem vytvoriť používateľský priečinok pre menu"
 
-#: panel/menu.c:3847 panel/menu.c:3856 panel/menu.c:5449
+#: panel/menu.c:3851 panel/menu.c:3860 panel/menu.c:5457
 msgid "KDE menus"
 msgstr "KDE menu"
 
-#: panel/menu.c:3952
+#: panel/menu.c:3957
 msgid "You cannot remove your last panel."
 msgstr "Nemôžete odstrániť posledný panel."
 
-#: panel/menu.c:3963
+#: panel/menu.c:3968
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3848,223 +3798,223 @@ msgstr ""
 "Keď je panel odstránený, jeho a nastavenia jeho\n"
 "apletov sú stratené. Odstrániť tento panel?"
 
-#: panel/menu.c:4003 panel/menu.c:4008 panel/menu.c:5692 panel/menu.c:5719
-#: panel/menu.c:5855
+#: panel/menu.c:4008 panel/menu.c:4013 panel/menu.c:5700 panel/menu.c:5727
+#: panel/menu.c:5863
 msgid "Main Menu"
 msgstr "Hlavné menu"
 
-#: panel/menu.c:4761
+#: panel/menu.c:4766
 msgid "With pixmap arrow"
 msgstr "Bez obrázku šipky"
 
-#: panel/menu.c:4762
+#: panel/menu.c:4767
 msgid "Without pixmap"
 msgstr "Bez obrázku"
 
-#: gnome-terminal/gnome-terminal.glade.h:23 panel/menu.c:4763
+#: gnome-terminal/gnome-terminal.glade.h:23 panel/menu.c:4768
 msgid "None"
 msgstr "Žiadny"
 
-#: panel/menu.c:4774 panel/panel_config.c:1255
+#: panel/menu.c:4779 panel/panel_config.c:1255
 msgid "Ultra Tiny (12 pixels)"
 msgstr "Extra drobné (12 bodov)"
 
-#: panel/menu.c:4775 panel/panel_config.c:1263
+#: panel/menu.c:4780 panel/panel_config.c:1263
 msgid "Tiny (24 pixels)"
 msgstr "Drobné (24  bodov)"
 
-#: panel/menu.c:4776 panel/panel_config.c:1271
+#: panel/menu.c:4781 panel/panel_config.c:1271
 msgid "Small (36 pixels)"
 msgstr "Malé (36 bodov)"
 
-#: panel/menu.c:4777 panel/panel_config.c:1279
+#: panel/menu.c:4782 panel/panel_config.c:1279
 msgid "Standard (48 pixels)"
 msgstr "Štandardné (48 bodov)"
 
-#: panel/menu.c:4778 panel/panel_config.c:1287
+#: panel/menu.c:4783 panel/panel_config.c:1287
 msgid "Large (64 pixels)"
 msgstr "Veľké (64 bodov)"
 
-#: panel/menu.c:4779 panel/panel_config.c:1295
+#: panel/menu.c:4784 panel/panel_config.c:1295
 msgid "Huge (80 pixels)"
 msgstr "Obrovské (80 bodov)"
 
-#: panel/menu.c:4780 panel/panel_config.c:1303
+#: panel/menu.c:4785 panel/panel_config.c:1303
 msgid "Ridiculous (128 pixels)"
 msgstr "Uletené (128 bodov)"
 
-#: panel/menu.c:4785 panel/panel_config.c:1576
+#: panel/menu.c:4790 panel/panel_config.c:1576
 msgid "Standard"
 msgstr "Štandardný"
 
 #. color frame
-#: panel/menu.c:4786 panel/panel_config.c:1580 panel/panel_config.c:1595
+#: panel/menu.c:4791 panel/panel_config.c:1580 panel/panel_config.c:1595
 msgid "Color"
 msgstr "Farba"
 
-#: panel/menu.c:4787 panel/panel_config.c:1584
+#: panel/menu.c:4792 panel/panel_config.c:1584
 msgid "Pixmap"
 msgstr "Obrázok"
 
-#: panel/menu.c:4793
+#: panel/menu.c:4798
 msgid "Below"
 msgstr "Pod"
 
-#: panel/menu.c:4795
+#: panel/menu.c:4800
 msgid "Above"
 msgstr "Nad"
 
-#: panel/menu.c:4800
+#: panel/menu.c:4805
 msgid "Avoid on maximize"
 msgstr "Ignorovať pri maximalizácii"
 
-#: panel/menu.c:4801
+#: panel/menu.c:4806
 msgid "Don't avoid on maximize"
 msgstr "Neignorovať pri maximalizácii"
 
-#: panel/menu.c:4805
+#: panel/menu.c:4810
 msgid "Type"
 msgstr "Typ"
 
-#: panel/menu.c:4809
+#: panel/menu.c:4814
 msgid "Hiding policy"
 msgstr "Spôsob skrývania"
 
-#: panel/menu.c:4813
+#: panel/menu.c:4818
 msgid "Hide buttons"
 msgstr "Tlačidlá Skryť"
 
-#: panel/menu.c:4821
+#: panel/menu.c:4826
 msgid "Orientation"
 msgstr "Orientácia"
 
-#: gnome-terminal/gnome-terminal.glade.h:21 panel/menu.c:4825
+#: gnome-terminal/gnome-terminal.glade.h:21 panel/menu.c:4830
 msgid "Background type"
 msgstr "Typ pozadia"
 
-#: panel/menu.c:4829
+#: panel/menu.c:4834
 msgid "Level"
 msgstr "Úroveň"
 
-#: panel/menu.c:4833
+#: panel/menu.c:4838
 msgid "Maximize mode"
 msgstr "Maximalizačný mód"
 
-#: panel/menu.c:4852
+#: panel/menu.c:4857
 msgid "Applet"
 msgstr "Aplet"
 
-#: panel/menu-properties.c:502 panel/menu-properties.c:524 panel/menu.c:4873
+#: panel/menu-properties.c:502 panel/menu-properties.c:524 panel/menu.c:4878
 msgid "Main menu"
 msgstr "Hlavné menu"
 
-#: panel/menu.c:4884
+#: panel/menu.c:4889
 msgid "Programs menu"
 msgstr "Menu Programy"
 
-#: panel/menu.c:4894
+#: panel/menu.c:4899
 msgid "Favorites menu"
 msgstr "Menu Obľúbené"
 
-#: panel/menu.c:4905
+#: panel/menu.c:4910
 msgid "Launcher..."
 msgstr "Spúšťač..."
 
-#: panel/menu.c:4914
+#: panel/menu.c:4919
 msgid "Launcher from menu"
 msgstr "Spúšťač z menu"
 
-#: panel/menu.c:4936
+#: panel/menu.c:4941
 msgid "Log out button"
 msgstr "Tlačidlo Odhlásiť"
 
-#: panel/menu.c:4947
+#: panel/menu.c:4952
 msgid "Lock button"
 msgstr "Tlačidlo Uzamknúť"
 
-#: panel/menu.c:4958
+#: panel/menu.c:4963
 msgid "Run button"
 msgstr "Tlačidlo Spustiť"
 
-#: panel/menu.c:4969
+#: panel/menu.c:4974
 msgid "Swallowed app..."
 msgstr "Pohltená aplikácia..."
 
-#: panel/menu.c:4977
+#: panel/menu.c:4982
 msgid "Status dock"
 msgstr "Stavový priestor"
 
-#: panel/menu.c:5001 panel/menu.c:5006 panel/menu.c:5090
+#: panel/menu.c:5006 panel/menu.c:5011 panel/menu.c:5097
 msgid "Add to panel"
 msgstr "Pridať do panelu"
 
-#: panel/menu.c:5021
+#: panel/menu.c:5027
 msgid "Cannot execute panel global properties"
 msgstr "Nepodarilo sa spustiť globálne vlastnosti panelu"
 
-#: panel/menu.c:5061
+#: panel/menu.c:5067
 msgid "Remove this panel..."
 msgstr "Odstániť tento panel..."
 
-#: panel/menu.c:5063 panel/menu.c:5123
+#: panel/menu.c:5069 panel/menu.c:5130
 msgid "Remove this panel"
 msgstr "Odstrániť tento panel"
 
-#: panel/menu.c:5077
+#: panel/menu.c:5084
 msgid "Cannot launch gmenu!"
 msgstr "Nie je možné spustiť gmenu!"
 
-#: panel/menu.c:5140
+#: panel/menu.c:5147
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: panel/menu.c:5151
+#: panel/menu.c:5158
 msgid "All properties..."
 msgstr "Všetky vlastnosti..."
 
-#: panel/menu.c:5167
+#: panel/menu.c:5174
 msgid "Global Preferences..."
 msgstr "Globálne vlastnosti"
 
-#: panel/menu-properties.c:211 panel/menu.c:5177 panel/menu.c:5956
+#: panel/menu-properties.c:211 panel/menu.c:5184 panel/menu.c:5964
 msgid "Edit menus..."
 msgstr "Upraviť menu..."
 
-#: panel/menu.c:5188
+#: panel/menu.c:5195
 msgid "Reread all menus"
 msgstr "Znovu načítať všetky menu"
 
-#: panel/menu.c:5203
+#: panel/menu.c:5210
 msgid "Panel Manual..."
 msgstr "Príručka panelu..."
 
-#: panel/menu.c:5214
+#: panel/menu.c:5222
 msgid "Cannot execute xscreensaver"
 msgstr "Nepodarilo sa spustiť xscreensaver"
 
-#: panel/menu.c:5302
+#: panel/menu.c:5310
 msgid "About the panel..."
 msgstr "O paneli..."
 
-#: panel/menu.c:5317
+#: panel/menu.c:5325
 msgid "About GNOME..."
 msgstr "O GNOME..."
 
-#: panel/menu.c:5368
+#: panel/menu.c:5376
 msgid "Lock the screen so that you can temporairly leave your computer"
 msgstr "Zamknúť obrazovku, takže môžete dočasne opustiť počítač."
 
-#: panel/menu.c:5383
+#: panel/menu.c:5391
 msgid ""
 "Log out of this session to log in as a different user or to shut down your "
 "computer"
 msgstr "Ukončiť toto sedenie a prihlásiť sa ako iný používateľ, alebo vypnúť počítač."
 
-#: panel/menu.c:5616
+#: panel/menu.c:5624
 msgid "Execute a command line"
 msgstr "Vykonať príkazový riadok"
 
-#: panel/menu.c:5713
+#: panel/menu.c:5721
 msgid "Can't create menu, using main menu!"
 msgstr "Nemôžem vytvoriť menu, použijem hlavné menu!"
 
@@ -4283,10 +4233,6 @@ msgstr "Šírka"
 #: panel/swallow.c:288
 msgid "Height"
 msgstr "Výška"
-
-#: panel/icon-entry-hack.c:267
-msgid "Choose an icon"
-msgstr "Vyberte ikonu"
 
 #.
 #. * Translatable strings file generated by Glade.
