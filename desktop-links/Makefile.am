@@ -36,13 +36,12 @@ Directory_files = \
 
 Applications_DATA = \
 	Emacs.desktop		\
-	Netscape.desktop	\
 	Vim.desktop
 
 Graphics_DATA = \
 	GIMP.desktop
 
-Utilities_DATA = \
+System_DATA = \
 	UNIX.desktop		\
 	UNIX-regular.desktop	\
 	Eterm.desktop		\
@@ -53,6 +52,7 @@ Settings_DATA =	\
 	Imlib_config.desktop
 
 Internet_DATA = \
+	Netscape.desktop	\
 	Tkrat.desktop
 
 Root_DATA = \
@@ -62,7 +62,7 @@ Root_DATA = \
 ## be made at install time.
 Multimedia_DATA =
 Games_DATA =
-System_DATA=
+Utilities_DATA = 
 
 EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(System_DATA) $(Multimedia_DATA) $(Internet_DATA) $(Games_DATA) \
