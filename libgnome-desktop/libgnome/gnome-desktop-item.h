@@ -28,35 +28,25 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
-/* FIXME #include <gnome-desktop/GNOME_Desktop.h>
-#include <bonobo/bonobo-arg.h>
-*/
-
-/* FIXME: */
-   typedef enum
-   {
-      GNOME_Desktop_ENTRY_TYPE_UNKNOWN,
-      GNOME_Desktop_ENTRY_TYPE_APPLICATION,
-      GNOME_Desktop_ENTRY_TYPE_URL,
-      GNOME_Desktop_ENTRY_TYPE_LINK,
-      GNOME_Desktop_ENTRY_TYPE_FSDEVICE,
-      GNOME_Desktop_ENTRY_TYPE_MIMETYPE,
-      GNOME_Desktop_ENTRY_TYPE_DIRECTORY,
-      GNOME_Desktop_ENTRY_TYPE_SERVICE,
-      GNOME_Desktop_ENTRY_TYPE_SERVICETYPE,
-      GNOME_Desktop_ENTRY_TYPE_PANEL_APPLET,
-      GNOME_Desktop_ENTRY_TYPE_SEPARATOR
-   }
-   GNOME_Desktop_EntryType;
 
 G_BEGIN_DECLS
 
 typedef enum {
-	/* Start a terminal to run this */
-        GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL = 1<<0,
-	/* Directory type */
-        GNOME_DESKTOP_ITEM_IS_DIRECTORY = 1<<1
-} GnomeDesktopItemFlags;
+	GNOME_DESKTOP_ITEM_TYPE_NULL = 0 /* This means its NULL, that is, not
+					   * set */,
+	GNOME_DESKTOP_ITEM_TYPE_OTHER /* This means it's not one of the below
+					      strings types, and you must get the
+					      Type attribute. */,
+
+	/* These are the standard compliant types: */
+	GNOME_DESKTOP_ITEM_TYPE_APPLICATION,
+	GNOME_DESKTOP_ITEM_TYPE_LINK,
+	GNOME_DESKTOP_ITEM_TYPE_FSDEVICE,
+	GNOME_DESKTOP_ITEM_TYPE_MIME_TYPE,
+	GNOME_DESKTOP_ITEM_TYPE_DIRECTORY,
+	GNOME_DESKTOP_ITEM_TYPE_SERVICE,
+	GNOME_DESKTOP_ITEM_TYPE_SERVICE_TYPE
+} GnomeDesktopItemType;
 
 typedef enum {
         GNOME_DESKTOP_ITEM_UNCHANGED = 0,
@@ -66,88 +56,148 @@ typedef enum {
 
 typedef struct _GnomeDesktopItem GnomeDesktopItem;
 
+#define GNOME_DESKTOP_ITEM_ENCODING	"Encoding" /* string */
+#define GNOME_DESKTOP_ITEM_VERSION	"Version"  /* numeric */
+#define GNOME_DESKTOP_ITEM_NAME		"Name" /* localestring */
+#define GNOME_DESKTOP_ITEM_TYPE		"Type" /* string */
+#define GNOME_DESKTOP_ITEM_FILE_PATTERN "FilePattern" /* regexp(s) */
+#define GNOME_DESKTOP_ITEM_TRY_EXEC	"TryExec" /* string */
+#define GNOME_DESKTOP_ITEM_NO_DISPLAY	"NoDisplay" /* boolean */
+#define GNOME_DESKTOP_ITEM_COMMENT	"Comment" /* localestring */
+#define GNOME_DESKTOP_ITEM_EXEC		"Exec" /* string */
+#define GNOME_DESKTOP_ITEM_ACTIONS	"Actions" /* strings */
+#define GNOME_DESKTOP_ITEM_ICON		"Icon" /* string */
+#define GNOME_DESKTOP_ITEM_MINI_ICON	"MiniIcon" /* string */
+#define GNOME_DESKTOP_ITEM_HIDDEN	"Hidden" /* boolean */
+#define GNOME_DESKTOP_ITEM_PATH		"Path" /* string */
+#define GNOME_DESKTOP_ITEM_TERMINAL	"Terminal" /* boolean */
+#define GNOME_DESKTOP_ITEM_TERMINAL_OPTIONS "TerminalOptions" /* string */
+#define GNOME_DESKTOP_ITEM_SWALLOW_TITLE "SwallowTitle" /* string */
+#define GNOME_DESKTOP_ITEM_SWALLOW_EXEC	"SwallowExec" /* string */
+#define GNOME_DESKTOP_ITEM_MIME_TYPE	"MimeType" /* regexp(s) */
+#define GNOME_DESKTOP_ITEM_PATTERNS	"Patterns" /* regexp(s) */
+#define GNOME_DESKTOP_ITEM_DEFAULT_APP	"DefaultApp" /* string */
+#define GNOME_DESKTOP_ITEM_DEV		"Dev" /* string */
+#define GNOME_DESKTOP_ITEM_FS_TYPE	"FSType" /* string */
+#define GNOME_DESKTOP_ITEM_MOUNT_POINT	"MountPoint" /* string */
+#define GNOME_DESKTOP_ITEM_READ_ONLY	"ReadOnly" /* boolean */
+#define GNOME_DESKTOP_ITEM_UNMOUNT_ICON "UnmountIcon" /* string */
+#define GNOME_DESKTOP_ITEM_SORT_ORDER	"SortOrder" /* strings */
+#define GNOME_DESKTOP_ITEM_URL		"URL" /* string */
+
 typedef enum {
 	/* Use the TryExec field to determine if this shoul dbe loaded */
-        GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0,
+        GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0
 } GnomeDesktopItemLoadFlags;
 
 /* Returned item from new*() and copy() methods have a refcount of 1 */
 GnomeDesktopItem *      gnome_desktop_item_new               (void);
 GnomeDesktopItem *      gnome_desktop_item_new_from_file     (const char                 *file,
-							      GnomeDesktopItemLoadFlags   flags);
+							      GnomeDesktopItemLoadFlags   flags,
+							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_copy              (GnomeDesktopItem           *item);
 
 /* if under is NULL save in original location */
 gboolean                gnome_desktop_item_save              (GnomeDesktopItem           *item,
-							      const char                 *under);
+							      const char                 *under,
+							      gboolean			  force,
+							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_ref               (GnomeDesktopItem           *item);
 void                    gnome_desktop_item_unref             (GnomeDesktopItem           *item);
 int                     gnome_desktop_item_launch            (GnomeDesktopItem           *item,
 							      int                         argc,
-							      const char                **argv);
+							      const char                **argv,
+							      GError                    **error);
 
 /* A list of files or urls dropped onto an icon, the proper (Url or File
    exec is run you can pass directly the output of 
-   gnome_uri_list_extract_filenames */
+   gnome_uri_list_extract_filenames) */
 int                     gnome_desktop_item_drop_uri_list     (GnomeDesktopItem           *item,
-							      GList                      *uri_list);
+							      GList                      *uri_list,
+							      GError                    **error);
 
 gboolean                gnome_desktop_item_exists            (GnomeDesktopItem           *item);
-GnomeDesktopItemFlags   gnome_desktop_item_get_flags         (GnomeDesktopItem           *item);
+
+GnomeDesktopItemType	gnome_desktop_item_get_type          (GnomeDesktopItem		 *item);
+/* You could also just use the set_string on the TYPE argument */
+void			gnome_desktop_item_set_type          (GnomeDesktopItem		 *item,
+							      GnomeDesktopItemType	  type);
+
+/* Get current location on disk */
 char *                  gnome_desktop_item_get_location      (GnomeDesktopItem           *item);
-GNOME_Desktop_EntryType gnome_desktop_item_get_type          (GnomeDesktopItem           *item);
-gchar *                 gnome_desktop_item_get_command       (GnomeDesktopItem           *item);
-gchar *                 gnome_desktop_item_get_tryexec       (GnomeDesktopItem           *item);
-gchar *                 gnome_desktop_item_get_icon_path     (GnomeDesktopItem           *item);
-
-/* Note: you want to search each language in the user's search path */
-gchar *                 gnome_desktop_item_get_name          (GnomeDesktopItem           *item,
-							      const char                 *language);
-gchar *                 gnome_desktop_item_get_comment       (GnomeDesktopItem           *item,
-							      const char                 *language);
-
-gchar *                 gnome_desktop_item_get_local_name    (GnomeDesktopItem           *item);
-gchar *                 gnome_desktop_item_get_local_comment (GnomeDesktopItem           *item);
-
-/* FIXME: */
-/*BonoboArg *             gnome_desktop_item_get_attribute     (GnomeDesktopItem           *item,
-							      const char                 *attr_name);*/
-GSList *                gnome_desktop_item_get_order         (GnomeDesktopItem           *item);
+void                    gnome_desktop_item_set_location      (GnomeDesktopItem           *item,
+							      const char                 *location);
 GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (GnomeDesktopItem           *item);
 
 
-/* Free the return value but not the contained strings */
-GSList *                gnome_desktop_item_get_languages     (GnomeDesktopItem           *item);
-GSList *                gnome_desktop_item_get_attributes    (GnomeDesktopItem           *item);
 
-/* the _clear_name clears the name for all languages */
-void                    gnome_desktop_item_clear_name        (GnomeDesktopItem           *item);
-void                    gnome_desktop_item_set_name          (GnomeDesktopItem           *item,
-							      const char                 *language,
-							      const char                 *name);
-void                    gnome_desktop_item_set_type          (GnomeDesktopItem           *item,
-							      GNOME_Desktop_EntryType     type);
-void                    gnome_desktop_item_set_command       (GnomeDesktopItem           *item,
-							      const char                 *command);
-void                    gnome_desktop_item_set_icon_path     (GnomeDesktopItem           *item,
-							      const char                 *icon_path);
-/* the _clear_comment clears the comment for all languages */
-void                    gnome_desktop_item_clear_comment     (GnomeDesktopItem           *item);
-void                    gnome_desktop_item_set_comment       (GnomeDesktopItem           *item,
-							      const char                 *language,
-							      const char                 *comment);
-/* FIXME:
-void                    gnome_desktop_item_set_attribute     (GnomeDesktopItem           *item,
-							      const char                 *attr_name,
-							      const BonoboArg            *attr_value);
-							      */
-void                    gnome_desktop_item_set_order         (GnomeDesktopItem           *item,
-							      GSList                     *order);
-void                    gnome_desktop_item_set_flags         (GnomeDesktopItem           *item,
-							      GnomeDesktopItemFlags       flags);
-void                    gnome_desktop_item_set_location      (GnomeDesktopItem           *item,
-							      const char                 *location);
+/*
+ * Reading/Writing different sections, NULL is the standard section
+ */
+void                    gnome_desktop_item_push_section      (GnomeDesktopItem           *item,
+							      const char                 *section);
+void                    gnome_desktop_item_pop_section       (GnomeDesktopItem           *item);
 
+
+gboolean                gnome_desktop_item_attr_exists       (GnomeDesktopItem           *item,
+							      const char                 *attr);
+
+/*
+ * String type
+ */
+const char *            gnome_desktop_item_get_string        (GnomeDesktopItem           *item,
+							      const char		 *attr);
+
+void                    gnome_desktop_item_set_string        (GnomeDesktopItem           *item,
+							      const char		 *attr,
+							      const char                 *value);
+
+/*
+ * LocaleString type
+ */
+const char *            gnome_desktop_item_get_localestring  (GnomeDesktopItem           *item,
+							      const char		 *attr);
+const char *            gnome_desktop_item_get_localestring_lang (GnomeDesktopItem       *item,
+								  const char		 *attr,
+								  const char             *language);
+/* use g_list_free only */
+GList *                 gnome_desktop_item_get_languages     (GnomeDesktopItem           *item,
+							      const char		 *attr);
+
+void                    gnome_desktop_item_set_localestring  (GnomeDesktopItem           *item,
+							      const char		 *attr,
+							      const char                 *language,
+							      const char                 *value);
+
+/*
+ * Strings, Regexps types
+ */
+
+/* use gnome_desktop_item_free_string_list */
+char **                 gnome_desktop_item_get_strings       (GnomeDesktopItem           *item,
+							      const char		 *attr);
+
+void			gnome_desktop_item_set_strings       (GnomeDesktopItem           *item,
+							      const char                 *attr,
+							      char                      **strings);
+
+/*
+ * Boolean type
+ */
+gboolean                gnome_desktop_item_get_boolean       (GnomeDesktopItem           *item,
+							      const char		 *attr);
+
+void                    gnome_desktop_item_set_boolean       (GnomeDesktopItem           *item,
+							      const char		 *attr,
+							      gboolean                    value);
+
+/*
+ * Clearing attributes
+ */
+#define                 gnome_desktop_item_clear_attr(item,attr) \
+				gnome_desktop_item_set_string(item,attr,NULL)
+void			gnome_desktop_item_clear_section     (GnomeDesktopItem           *item,
+							      const char                 *section);
 
 G_END_DECLS
 
