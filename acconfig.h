@@ -18,3 +18,15 @@
 #undef int64_t
 
 #undef HAVE_DEVGTK
+
+/* LibGTop major, minor and micro version. */
+#undef LIBGTOP_MAJOR_VERSION
+#undef LIBGTOP_MINOR_VERSION
+#undef LIBGTOP_MICRO_VERSION
+
+/* LibGTop version and numerical version code ("1.234.567" -> 1234567). */
+#undef LIBGTOP_VERSION
+#undef LIBGTOP_VERSION_CODE
+
+/* LibGTop server version, increased each time the protocol changes. */
+#undef LIBGTOP_SERVER_VERSION
