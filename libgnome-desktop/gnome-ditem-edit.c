@@ -963,7 +963,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), 
                            cs ? cs : "");
 
-        tmpstr = gnome_desktop_item_get_icon (ditem);
+        tmpstr = gnome_desktop_item_get_icon (ditem, NULL);
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), tmpstr);
 	g_free (tmpstr);
 

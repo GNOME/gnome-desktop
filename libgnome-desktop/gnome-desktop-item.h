@@ -31,6 +31,12 @@
 #include <glib.h>
 #include <glib-object.h>
 
+#ifdef GNOME_CORE_INTERNAL
+# include "gnome-icon-loader.h"
+#else
+# include <libgnome/gnome-icon-loader.h>
+#endif
+
 G_BEGIN_DECLS
 
 typedef enum {
@@ -185,9 +191,11 @@ GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktop
  * Get the icon, this is not as simple as getting the Icon attr as it actually tries to find
  * it and returns %NULL if it can't
  */
-char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item);
+char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item,
+							      GnomeIconLoader            *icon_loader);
 
-char *                  gnome_desktop_item_find_icon         (const char                 *icon,
+char *                  gnome_desktop_item_find_icon         (GnomeIconLoader            *icon_loader,
+							      const char                 *icon,
 							      /* size is only a suggestion */
 							      int                         desired_size,
 							      int                         flags);

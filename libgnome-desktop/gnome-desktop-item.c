@@ -2069,10 +2069,13 @@ find_kde_directory (void)
  * Returns: A newly allocated string
  */
 char *
-gnome_desktop_item_find_icon (const char *icon,
+gnome_desktop_item_find_icon (GnomeIconLoader *icon_loader,
+			      const char *icon,
 			      int desired_size,
 			      int flags)
 {
+	char *full = NULL;
+
 	if (icon == NULL || strcmp(icon,"") == 0) {
 		return NULL;
 	} else if (g_path_is_absolute (icon)) {
@@ -2082,7 +2085,36 @@ gnome_desktop_item_find_icon (const char *icon,
 			return NULL;
 		}
 	} else {
-		char *full;
+		char *icon_no_extension;
+		char *p;
+
+		if (icon_loader == NULL) {
+			icon_loader = gnome_icon_loader_new ();
+		} else {
+			g_object_ref (icon_loader);
+		}
+
+		
+		icon_no_extension = g_strdup (icon);
+		p = strrchr (icon_no_extension, '.');
+		if (p &&
+		    (strcmp (p, ".png") == 0 ||
+		     strcmp (p, ".xpm") == 0 ||
+		     strcmp (p, ".svg") == 0)) {
+		    *p = 0;
+		}
+
+		full = gnome_icon_loader_lookup_icon (icon_loader,
+						      icon_no_extension,
+						      desired_size,
+						      NULL);
+		
+		g_object_unref (icon_loader);
+		
+		g_free (icon_no_extension);
+	}
+
+	if (full == NULL) { /* Fall back on old Gnome/KDE code */
 		GSList *kde_dirs = NULL;
 		GSList *li;
 		const char *exts[] = { ".png", ".xpm", NULL };
@@ -2131,8 +2163,9 @@ gnome_desktop_item_find_icon (const char *icon,
 
 		g_slist_free (kde_dirs);
 
-		return full;
 	}
+	    return full;
+	    
 }
 
 /**
@@ -2146,7 +2179,8 @@ gnome_desktop_item_find_icon (const char *icon,
  * Returns: A newly allocated string
  */
 char *
-gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
+gnome_desktop_item_get_icon (const GnomeDesktopItem *item,
+			     GnomeIconLoader *icon_loader)
 {
 	/* maybe this function should be deprecated in favour of find icon
 	 * -George */
@@ -2157,7 +2191,7 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 
 	icon = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
 
-	return gnome_desktop_item_find_icon (icon,
+	return gnome_desktop_item_find_icon (icon_loader, icon,
 					     48 /* desired_size */,
 					     0 /* flags */);
 }

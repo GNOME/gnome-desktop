@@ -1,3 +1,15 @@
+2002-05-23  Alex Larsson <alexl@redhat.com>
+
+	reviewed by: markk@skynet.ie
+
+	* gnome-desktop-item.c: (gnome_desktop_item_find_icon),
+	(gnome_desktop_item_get_icon):
+	* gnome-desktop-item.h:
+	* gnome-ditem-edit.c: (gnome_ditem_edit_sync_display):
+	Use gnomeIconLoader to load icons.
+	Changes the API, but if you don't know what you need to
+	do, just pass NULL for icon_loader to gnome_desktop_item_get_icon.
+
 2002-05-20  Alex Larsson <alexl@redhat.com>
 
 	* gnome-icon-loader.c: (gnome_icon_loader_init),
