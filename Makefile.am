@@ -4,7 +4,7 @@ endif
 
 SUBDIRS = intl po macros \
 	 panel applets \
-	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
+	 gsm pixmaps desktop-links desktop-properties help-browser \
 	 gnome-terminal core-docs $(gmenu)
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
