@@ -288,6 +288,7 @@ static gchar *contributors[] = {
 	"Sascha Ziemann",
 	"Michael Zucchi",
 	"Jason van Zyl",
+	"Christian F.K. Schaller",
 	" ",
 	N_("... and many more"),
 	NULL, NULL
