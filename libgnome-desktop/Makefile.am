@@ -8,7 +8,7 @@ INCLUDES =						\
 
 lib_LTLIBRARIES = libgnome-desktop-2.la
 
-noinst_PROGRAMS = test-ditem test-hint
+noinst_PROGRAMS = test-ditem test-hint test-ditem-edit
 
 libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c	\
@@ -41,6 +41,12 @@ test_hint_SOURCES = \
 test_hint_LDADD = \
         libgnome-desktop-2.la           \
         $(GNOME_DESKTOP_LIBS)
+
+test_ditem_edit_SOURCES = test-ditem-edit.c
+
+test_ditem_edit_LDADD =		\
+	libgnome-desktop-2.la	\
+	$(GNOME_DESKTOP_LIBS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-2.0.pc

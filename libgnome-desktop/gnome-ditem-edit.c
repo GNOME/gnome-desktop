@@ -162,49 +162,66 @@ enum {
 };
 
 static void
-setup_combo (GnomeDItemEdit *dee, int type, const char *extra)
+setup_combo (GnomeDItemEdit *dee,
+	     int             type,
+	     const char     *extra)
 {
 	GList *types = NULL;
 
-	if (type == ONLY_DIRECTORY) {
+	switch (type) {
+	case ONLY_DIRECTORY:
 		types = g_list_prepend (types, "Directory");
-	} else {
+		break;
+	default: 
 		types = g_list_prepend (types, "Application");
+
+		if (type != ALL_EXCEPT_DIRECTORY)
+			types = g_list_prepend (types, "Directory");
+
 		types = g_list_prepend (types, "Link");
 		types = g_list_prepend (types, "FSDevice");
 		types = g_list_prepend (types, "MimeType");
-		if (type != ALL_EXCEPT_DIRECTORY)
-			types = g_list_prepend (types, "Directory");
 		types = g_list_prepend (types, "Service");
 		types = g_list_prepend (types, "ServiceType");
+		break;
 	}
-	if (extra != NULL)
-		types = g_list_prepend (types, (char *)extra);
 
-	gtk_combo_set_popdown_strings
-		(GTK_COMBO (dee->_priv->type_combo), types);
+	if (extra != NULL)
+		types = g_list_prepend (types, (char *) extra);
+
+	g_assert (types != NULL);
+
+	gtk_combo_set_popdown_strings (
+		GTK_COMBO (dee->_priv->type_combo), types);
 
 	g_list_free (types);
 }
 
 static void 
-table_attach_entry(GtkTable * table, GtkWidget * w,
-		   gint l, gint r, gint t, gint b)
+table_attach_entry (GtkTable  *table,
+		    GtkWidget *entry,
+		    int        left,
+		    int        right,
+		    int        top,
+		    int        bottom)
 {
-        gtk_table_attach(table, w, l, r, t, b,
-                         GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-                         GTK_FILL,
-                         0, 0);
+        gtk_table_attach (
+		table, entry, left, right, top, bottom,
+		GTK_EXPAND | GTK_FILL | GTK_SHRINK, GTK_FILL,
+		0, 0);
 }
 
 static void
-table_attach_label(GtkTable * table, GtkWidget * w,
-		   gint l, gint r, gint t, gint b)
+table_attach_label (GtkTable  *table,
+		    GtkWidget *label,
+		    int        left,
+		    int        right,
+		    int        top,
+		    int        bottom)
 {
-        gtk_table_attach(table, w, l, r, t, b,
-                         GTK_FILL,
-                         GTK_FILL,
-                         0, 0);
+        gtk_table_attach(
+		table, label, left, right, top, bottom,
+		GTK_FILL, GTK_FILL, 0, 0);
 }
 
 static void 
@@ -243,101 +260,101 @@ type_combo_changed (GnomeDItemEdit *dee)
 }
 
 static void
-fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
+fill_easy_page (GnomeDItemEdit *dee,
+		GtkWidget      *table)
 {
-        GtkWidget *label;
-        GtkWidget *hbox;
-        GtkWidget *align;
+	GtkWidget *label;
+	GtkWidget *entry;
+	GtkWidget *hbox;
+	GtkWidget *align;
+	GtkWidget *combo;
+	GtkWidget *icon_entry;
+	GtkWidget *check_button;
 
-        label = label_new(_("Name:"));
-        table_attach_label(GTK_TABLE(table), label, 0, 1, 0, 1);
+	label = label_new (_("Name:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
 
-        dee->_priv->name_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(table),dee->_priv->name_entry, 1, 2, 0, 1);
+	entry = gtk_entry_new ();
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
 
-        g_signal_connect_object (G_OBJECT(dee->_priv->name_entry),
-                                 "changed",
-                                 G_CALLBACK(gnome_ditem_edit_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);		
-        g_signal_connect_object (G_OBJECT(dee->_priv->name_entry),
-                                 "changed",
-                                 G_CALLBACK(gnome_ditem_edit_name_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_changed),
+				 dee, G_CONNECT_SWAPPED);		
 
-        label = label_new(_("Comment:"));
-        table_attach_label(GTK_TABLE(table),label, 0, 1, 1, 2);
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_name_changed),
+				 dee, G_CONNECT_SWAPPED);
+	dee->_priv->name_entry = entry;
 
-        dee->_priv->comment_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(table),dee->_priv->comment_entry, 1, 2, 1, 2);
+	label = label_new (_("Comment:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
-        g_signal_connect_object (G_OBJECT(dee->_priv->comment_entry),		
-                                 "changed",
-                                 G_CALLBACK(gnome_ditem_edit_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);
-        dee->_priv->exec_label = label= label_new (_("Command:"));
-        table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
+	entry = gtk_entry_new ();
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 1, 2);
 
-        dee->_priv->exec_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(table),dee->_priv->exec_entry, 1, 2, 2, 3);
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_changed),
+                                 dee, G_CONNECT_SWAPPED);
+	dee->_priv->comment_entry = entry;
+
+	label = label_new (_("Command:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
+	dee->_priv->exec_label = label;
+
+	entry = gtk_entry_new ();
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 2, 3);
  
-        g_signal_connect_object (G_OBJECT(dee->_priv->exec_entry),
-                                 "changed",
-                                 G_CALLBACK (gnome_ditem_edit_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);
-        dee->_priv->type_label = label = label_new(_("Type:"));
-        table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_changed),
+				 dee, G_CONNECT_SWAPPED);
+	dee->_priv->exec_entry = entry;
 
-        dee->_priv->type_combo = gtk_combo_new();
+	label = label_new (_("Type:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
+	dee->_priv->type_label = label;
+
+	dee->_priv->type_combo = combo = gtk_combo_new ();
 	setup_combo (dee, ALL_TYPES, NULL);
-        gtk_combo_set_value_in_list(GTK_COMBO(dee->_priv->type_combo), 
-                                    FALSE, TRUE);
-        table_attach_entry(GTK_TABLE(table),dee->_priv->type_combo, 1, 2, 3, 4);
 
-        g_signal_connect_object (G_OBJECT(GTK_COMBO(dee->_priv->type_combo)->entry),
-                                 "changed",
-                                 G_CALLBACK (gnome_ditem_edit_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);	
-        g_signal_connect_object (G_OBJECT(GTK_COMBO(dee->_priv->type_combo)->entry),
-                                 "changed",
-                                 G_CALLBACK (type_combo_changed),
-                                 G_OBJECT(dee),
-                                 G_CONNECT_SWAPPED);
+	gtk_combo_set_value_in_list (GTK_COMBO (combo), FALSE, TRUE);
+	table_attach_entry (GTK_TABLE (table), combo, 1, 2, 3, 4);
 
+	g_signal_connect_object (GTK_COMBO (combo)->entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_changed),
+				 dee, G_CONNECT_SWAPPED);	
+	g_signal_connect_object (GTK_COMBO (combo)->entry, "changed",
+				 G_CALLBACK (type_combo_changed),
+				 dee, G_CONNECT_SWAPPED);
+	dee->_priv->type_combo = combo;
 
-        label = label_new(_("Icon:"));
-        table_attach_label(GTK_TABLE(table), label, 0, 1, 4, 5);
+	label = label_new (_("Icon:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 4, 5);
 
-        hbox = gtk_hbox_new(FALSE, GNOME_PAD_BIG);
-        gtk_table_attach(GTK_TABLE(table), hbox,
-                         1, 2, 4, 5,
-                         GTK_EXPAND | GTK_FILL,
-                         0,
-                         0, 0);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_BIG);
+	gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 4, 5,
+			  GTK_EXPAND | GTK_FILL, 0, 0, 0); 
 
-        dee->_priv->icon_entry = gnome_icon_entry_new ("desktop-icon", _("Browse icons"));
-        g_signal_connect_swapped(G_OBJECT(dee->_priv->icon_entry), "changed",
-                                 G_CALLBACK (gnome_ditem_edit_changed),
-                                 G_OBJECT(dee));
-        g_signal_connect_swapped(G_OBJECT(dee->_priv->icon_entry), "changed",
-                                 G_CALLBACK (gnome_ditem_edit_icon_changed),
-                                 G_OBJECT(dee));
-        gtk_box_pack_start (GTK_BOX (hbox), dee->_priv->icon_entry,
-                                 FALSE, FALSE, 0);
+        icon_entry = gnome_icon_entry_new (
+			"desktop-icon", _("Browse icons"));
 
-        align = gtk_alignment_new (0.0, 0.5, 0.0, 0.0);
-        gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
+        g_signal_connect_swapped (icon_entry, "changed",
+				  G_CALLBACK (gnome_ditem_edit_changed), dee);
+        g_signal_connect_swapped (icon_entry, "changed",
+                                  G_CALLBACK (gnome_ditem_edit_icon_changed), dee);
+        gtk_box_pack_start (
+		GTK_BOX (hbox), icon_entry, FALSE, FALSE, 0);
+        dee->_priv->icon_entry = icon_entry;
 
-        dee->_priv->terminal_button = gtk_check_button_new_with_label (_("Run in Terminal"));
-        g_signal_connect_swapped(G_OBJECT(dee->_priv->terminal_button), 
-                                 "clicked",
-                                 G_CALLBACK (gnome_ditem_edit_changed),
-                                 G_OBJECT(dee));
-        gtk_container_add (GTK_CONTAINER (align),dee->_priv->terminal_button);
+	align = gtk_alignment_new (0.0, 0.5, 0.0, 0.0);
+	gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
+
+        check_button = gtk_check_button_new_with_label (_("Run in Terminal"));
+        g_signal_connect_swapped (check_button, "clicked",
+				  G_CALLBACK (gnome_ditem_edit_changed), dee);
+
+        gtk_container_add (GTK_CONTAINER (align), check_button);
+        dee->_priv->terminal_button = check_button;
+
 }
 
 static GtkTreeIter*
@@ -389,8 +406,11 @@ set_iter_nth_row (GtkTreeView *tree_view,
 }
 
 static void
-translations_select_row(GtkTreeView *cl, int row, int column,
-			GdkEvent *event, GnomeDItemEdit *dee)
+translations_select_row (GtkTreeView    *cl,
+			 int             row,
+			 int             column,
+			 GdkEvent       *event,
+			 GnomeDItemEdit *dee)
 {
         char *lang;
         char *name;
@@ -402,19 +422,22 @@ translations_select_row(GtkTreeView *cl, int row, int column,
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));	
         set_iter_nth_row (cl,&iter,row);
 
-        gtk_tree_model_get_value (model,&iter,0,&value);
+        gtk_tree_model_get_value (model, &iter, 0, &value);
         lang = g_strdup (g_value_get_string (&value));
 
-        gtk_tree_model_get_value (model,&iter,1, &value);
+        gtk_tree_model_get_value (model, &iter, 1, &value);
         name = g_strdup (g_value_get_string (&value));
 
-        gtk_tree_model_get_value (model,&iter,2, &value);
+        gtk_tree_model_get_value (model, &iter, 2, &value);
         comment = g_strdup (g_value_get_string (&value));
         g_value_unset (&value);
 
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), lang);
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), name);
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), comment);
+        gtk_entry_set_text(
+		GTK_ENTRY (dee->_priv->transl_lang_entry), lang);
+        gtk_entry_set_text (
+		GTK_ENTRY (dee->_priv->transl_name_entry), name);
+        gtk_entry_set_text(
+		GTK_ENTRY (dee->_priv->transl_comment_entry), comment);
 	
         g_free (lang);
         g_free (comment);
@@ -588,7 +611,8 @@ fill_advanced_page (GnomeDItemEdit *dee,
         gtk_container_add (GTK_CONTAINER (box),dee->_priv->translations);
         table_attach_list (GTK_TABLE (page), box, 0, 2, 5, 6);
 
-        gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (dee->_priv->translations),FALSE);
+        gtk_tree_view_set_headers_clickable (
+		GTK_TREE_VIEW (dee->_priv->translations), FALSE);
         g_signal_connect (dee->_priv->translations, "select_row",
 			  G_CALLBACK (translations_select_row), dee);
 
@@ -1225,93 +1249,3 @@ gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
 		}
 	}
 }
-
-
-#ifdef TEST_DITEM_EDIT
-
-#include <libgnomeui.h>
-
-static void
-changed_callback(GnomeDItemEdit *dee, gpointer data)
-{
-        g_print("Changed!\n");
-        fflush(stdout);
-}
-
-static void
-icon_changed_callback(GnomeDItemEdit *dee, gpointer data)
-{
-        g_print("Icon changed!\n");
-        fflush(stdout);
-}
-
-static void
-name_changed_callback(GnomeDItemEdit *dee, gpointer data)
-{
-        g_print("Name changed!\n");
-        fflush(stdout);
-}
-
-int
-main(int argc, char * argv[])
-{
-        GtkWidget * app;
-        GtkWidget * notebook;
-        GtkObject * dee;
-
-        argp_program_version = VERSION;
-
-        gnome_init ("testing ditem edit", NULL, argc, argv, 0, 0);
-
-        app = bonobo_window_new("testing ditem edit", "Testing");
-
-        notebook = gtk_notebook_new();
-
-        bonobo_window_set_contents(BONOBO_WINDOW(app), notebook);
-
-        dee = gnome_ditem_edit_new(GTK_NOTEBOOK(notebook));
-
-        gnome_ditem_edit_load_file(GNOME_DITEM_EDIT(dee),
-                                   "/usr/local/share/gnome/apps/grun.desktop");
-
-#ifdef GNOME_ENABLE_DEBUG
-        g_print("Dialog (main): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
-#endif
-
-        g_signal_connect_swapped(G_OBJECT(app), "delete_event", 
-                                 G_CALLBACK(gtk_widget_destroy),
-                                 (app));
-
-        g_signal_connect(G_OBJECT(app), "destroy",
-                         G_CALLBACK(gtk_main_quit),
-                         NULL);
-
-        g_signal_connect (G_OBJECT((dee), "changed",
-                          G_CALLBACK(changed_callback),
-                          NULL);
-
-        g_signal_connect(G_OBJECT(dee), "icon_changed",
-                         G_CALLBACK(icon_changed_callback),
-                         NULL);
-
-        g_signal_connect(G_OBJECT(dee), "name_changed",
-                         G_CALLBACK(name_changed_callback),
-                         NULL);
-
-#ifdef GNOME_ENABLE_DEBUG
-        g_print("Dialog (main 2): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
-#endif
-
-        gtk_widget_show(notebook);
-        gtk_widget_show(app);
-
-#ifdef GNOME_ENABLE_DEBUG
-        g_print("Dialog (main 3): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
-#endif
-
-        gtk_main();
-
-        return 0;
-}
-
-#endif
