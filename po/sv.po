@@ -4,8 +4,8 @@
 # Anders Carlsson <anders.carlsson@tordata.se>, 1999.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-core-0.20\n"
-"POT-Creation-Date: 1999-07-12 20:53+0200\n"
+"Project-Id-Version: gnome-core-1.0.7\n"
+"POT-Creation-Date: 1999-07-27 22:57+0200\n"
 "PO-Revision-Date: 1999-07-14 00:00+0100\n"
 "Last-Translator: Anders Carlsson <anders.carlsson@tordata.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -32,30 +32,27 @@ msgid "Your GNOME Fish's Name:"
 msgstr "Namnet på din GNOME-fisk:"
 
 #: applets/fish/fish.c:276
-#, fuzzy
 msgid "The Animation Filename:"
-msgstr "Animationshastighet för låda"
+msgstr "Animation:"
 
 #: applets/fish/fish.c:278 applets/gen_util/mailcheck.c:768
-#: gnome-terminal/gnome-terminal.c:1158 panel/menu.c:3721
+#: gnome-terminal/gnome-terminal.c:1202 panel/menu.c:3721
 #: panel/panel-util.c:78 panel/panel-util.c:116 panel/panel-util.c:154
 #: panel/panel_config.c:880 panel/swallow.c:224
 msgid "Browse"
 msgstr "Bläddra"
 
 #: applets/fish/fish.c:291
-#, fuzzy
 msgid "Frames In Animation:"
-msgstr "Animationshastighet för låda"
+msgstr "Antal bildrutor i animation:"
 
 #: applets/fish/fish.c:307
 msgid "Pause per frame (s):"
-msgstr ""
+msgstr "Paus per bildruta (s):"
 
 #: applets/fish/fish.c:320
-#, fuzzy
 msgid "Rotate on vertical panels"
-msgstr "Tag bort denna panel"
+msgstr "Rotera vid vertikala paneler"
 
 #: applets/fish/fish.c:329
 msgid "Fish"
@@ -78,20 +75,20 @@ msgid ""
 msgstr ""
 "Denna applet har inget som helst användningsområde. Den tar bara upp "
 "diskutrymme och kompileringstid, och om den körs tar den upp minne och "
-"dyrbart utrymme på panelen. Om någon mot förmodan skulle tycka att den "
-"är användbar skall han eller hon genast skickas på psykiatrisk undersökning."
- 
+"dyrbart utrymme på panelen. Om någon mot förmodan skulle tycka att den är "
+"användbar skall han eller hon genast skickas på psykiatrisk undersökning."
+
 #: applets/fish/fish.c:636 applets/gen_util/mailcheck.c:1190 panel/menu.c:2744
 msgid "About..."
 msgstr "Om..."
 
-#: applets/fish/fish.c:644 applets/gen_util/clock.c:336
+#: applets/fish/fish.c:644 applets/gen_util/clock.c:348
 #: applets/gen_util/mailcheck.c:1183 applets/gen_util/printer.c:409
 #: panel/drawer.c:376 panel/launcher.c:341 panel/menu.c:1153 panel/menu.c:3780
 msgid "Properties..."
 msgstr "Egenskaper..."
 
-#: applets/gen_util/clock.c:136
+#: applets/gen_util/clock.c:139
 msgid ""
 "%I:%M\n"
 "%p"
@@ -99,20 +96,20 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:139
+#: applets/gen_util/clock.c:142
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:146
+#: applets/gen_util/clock.c:149
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:157
+#: applets/gen_util/clock.c:160
 msgid ""
 "%a\n"
 "%b %d"
@@ -122,41 +119,48 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:162
+#: applets/gen_util/clock.c:165
 msgid "%a %b %d"
 msgstr "%a %b %d"
 
-#: applets/gen_util/clock.c:302 applets/gen_util/mailcheck.c:1105
+#: applets/gen_util/clock.c:177
+msgid "%A, %B %d"
+msgstr "%A, %B %d"
+
+#: applets/gen_util/clock.c:313 applets/gen_util/mailcheck.c:1105
 #: applets/gen_util/printer.c:384
 msgid "Can't create applet!\n"
 msgstr "Kan inte skapa applet!\n"
 
-#: applets/gen_util/clock.c:438
+#: applets/gen_util/clock.c:463
 msgid "Clock properties"
 msgstr "Klockans egenskaper"
 
-#: applets/gen_util/clock.c:442
-#, fuzzy
+#: applets/gen_util/clock.c:467
 msgid "Time Format"
 msgstr "Tidsformat"
 
-#: applets/gen_util/clock.c:454
+#: applets/gen_util/clock.c:479
 msgid "12 hour"
 msgstr "12 timmar"
 
-#: applets/gen_util/clock.c:463
+#: applets/gen_util/clock.c:488
 msgid "24 hour"
 msgstr "24 timmar"
 
-#: applets/gen_util/clock.c:498
-msgid "Show date"
-msgstr "datum"
+#: applets/gen_util/clock.c:523
+msgid "Show date in applet"
+msgstr "Visa datum"
 
-#: applets/gen_util/clock.c:512
+#: applets/gen_util/clock.c:537
+msgid "Show date in tooltip"
+msgstr "Visa datum som verktygstips"
+
+#: applets/gen_util/clock.c:551
 msgid "Unix time"
 msgstr "Unixtid"
 
-#: applets/gen_util/clock.c:535
+#: applets/gen_util/clock.c:577
 msgid "Clock"
 msgstr "Klocka"
 
@@ -165,7 +169,9 @@ msgid ""
 "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
 "wrong server/username/password?"
 msgstr ""
-
+"Ett fjärr-klient-fel uppstod. Fjärr-undersökning avaktiverad. Kanske du "
+"använde fel server/användarnamn/lösenord?"
+ 
 #: applets/gen_util/mailcheck.c:342
 msgid "You have new mail."
 msgstr "Du har ny post."
@@ -180,34 +186,31 @@ msgstr "Ingen post."
 
 #: applets/gen_util/mailcheck.c:721
 msgid "Mailbox resides on:"
-msgstr ""
+msgstr "Brevlådan finns på:"
 
 #: applets/gen_util/mailcheck.c:728
 msgid "Local mailspool"
-msgstr ""
+msgstr "Lokal brevlåda"
 
 #: applets/gen_util/mailcheck.c:736
 msgid "Remote POP3-server"
-msgstr ""
+msgstr "POP3-server"
 
 #: applets/gen_util/mailcheck.c:744
 msgid "Remote IMAP-server"
-msgstr ""
+msgstr "IMAP-server"
 
 #: applets/gen_util/mailcheck.c:764
-#, fuzzy
 msgid "Mail spool file:"
-msgstr "Postfil:"
+msgstr "Postlådefil:"
 
 #: applets/gen_util/mailcheck.c:781
-#, fuzzy
 msgid "Mail server:"
-msgstr "Postfil:"
+msgstr "E-postserver:"
 
 #: applets/gen_util/mailcheck.c:798
-#, fuzzy
 msgid "Username:"
-msgstr "Användarmenyer"
+msgstr "Användarnamn:"
 
 #: applets/gen_util/mailcheck.c:812
 msgid "Password:"
@@ -222,14 +225,12 @@ msgid "Before each update:"
 msgstr "Innan varje uppdatering"
 
 #: applets/gen_util/mailcheck.c:873
-#, fuzzy
 msgid "When new mail arrives:"
-msgstr "Kör när ny post levereras:"
+msgstr "När ny post levereras:"
 
 #: applets/gen_util/mailcheck.c:892
-#, fuzzy
 msgid "When clicked:"
-msgstr "Kör när ny post levereras:"
+msgstr "Vid klick:"
 
 #: applets/gen_util/mailcheck.c:915
 msgid "Check for mail every"
@@ -245,7 +246,7 @@ msgstr "sekund"
 
 #: applets/gen_util/mailcheck.c:945
 msgid "Play a sound when new mail arrives"
-msgstr "Spela ett ljud när ny post ankommer" 
+msgstr "Spela ett ljud när ny post ankommer"
 
 #: applets/gen_util/mailcheck.c:956
 msgid "Select animation"
@@ -309,19 +310,17 @@ msgstr "Återgå"
 
 #: gmenu/edit.c:371 panel/menu.c:2386 panel/menu.c:2389 panel/menu.c:3128
 #: panel/menu.c:3173 panel/menu.c:3176
-#, fuzzy
 msgid "User menus"
 msgstr "Användarmenyer"
 
 #: gmenu/edit.c:375 panel/menu.c:2287 panel/menu.c:2291 panel/menu.c:2378
 #: panel/menu.c:3159
-#, fuzzy
 msgid "System menus"
 msgstr "Systemmenyer"
 
 #: gmenu/main.c:51 gmenu/main.c:126
 msgid "_New Submenu..."
-msgstr "_Ny undermeny"
+msgstr "_Ny undermeny..."
 
 #: gmenu/main.c:52 gmenu/main.c:96 gmenu/main.c:127
 msgid "Create a new submenu"
@@ -409,6 +408,8 @@ msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
 msgstr ""
+"Släppt under GNU Public License.\n"
+"GNOME meny-editor."
 
 #: gmenu/save.c:27 gmenu/save.c:85
 msgid "The menu item must have a name"
@@ -424,7 +425,7 @@ msgstr "Spara ändringar?"
 
 #: gmenu/save.c:54
 msgid "This change conflicts with an existing menu item"
-msgstr ""
+msgstr "Ändringen påverkar ett existerande menyval"
 
 #: gmenu/save.c:61
 msgid "Overwrite existing menu entry?"
@@ -435,6 +436,8 @@ msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
 msgstr ""
+"Ändringen påverkar ett existerande menyval.\n"
+"Två menyval i en undermeny kan ha samma namn."
 
 #: gmenu/tree.c:391
 msgid "One moment, reading menus..."
@@ -446,7 +449,7 @@ msgstr "Användarmenyer"
 
 #: gmenu/tree.c:411
 msgid "Top of user menus"
-msgstr ""
+msgstr "Toppen av användarmenyerna"
 
 #: gmenu/tree.c:418
 msgid "System Menus"
@@ -458,7 +461,7 @@ msgstr "Toppen av systemmenyerna"
 
 #: gmenu/treedel.c:116
 msgid "You can not delete a top level submenu."
-msgstr ""
+msgstr "Du kan inte ta bort en huvudmeny."
 
 #: gmenu/treedel.c:128 gmenu/treedel.c:151
 msgid "Delete this menu item?"
@@ -477,6 +480,8 @@ msgid ""
 "You can't add an entry to that submenu.\n"
 "You do not have the proper permissions."
 msgstr ""
+"Du kan inte lägga till ett menyval till undermenyn.\n"
+"Du har inte tillräckliga rättigheter."
 
 #: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
 msgid "New Folder"
@@ -488,7 +493,7 @@ msgstr "Kunde inte skapa katalog"
 
 #: gmenu/treenew.c:118 gmenu/treenew.c:127
 msgid "untitled.desktop"
-msgstr ""
+msgstr "namnlös.desktop"
 
 #: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:618
 msgid "untitled"
@@ -504,256 +509,263 @@ msgstr "skapar användarkatalog: %s\n"
 msgid "unable to create user directory: %s\n"
 msgstr "kunde inte skapa användarkatalog: %s\n"
 
-#: gnome-terminal/gnome-terminal.c:187
+#: gnome-terminal/gnome-terminal.c:194
 msgid "GNOME Terminal"
 msgstr "GNOME terminal"
 
-#: gnome-terminal/gnome-terminal.c:190
+#: gnome-terminal/gnome-terminal.c:197
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME Terminalemulerare."
 
-#: gnome-terminal/gnome-terminal.c:508 gnome-terminal/gnome-terminal.c:1036
-#: gnome-terminal/gnome-terminal.c:1046 gnome-terminal/gnome-terminal.c:2029
+#: gnome-terminal/gnome-terminal.c:547 gnome-terminal/gnome-terminal.c:1080
+#: gnome-terminal/gnome-terminal.c:1090 gnome-terminal/gnome-terminal.c:2082
 msgid "Default"
 msgstr "Standard"
 
-#: gnome-terminal/gnome-terminal.c:687
+#: gnome-terminal/gnome-terminal.c:725
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
 "configuration of the new class?"
 msgstr ""
+"Du har ändrat terminalklassen på aktuellt fönster. Vill du\n"
+" konfigurera om fönstret så att det matchar den nya klassen?"
 
-#: gnome-terminal/gnome-terminal.c:854
+#: gnome-terminal/gnome-terminal.c:897
 msgid "Linux console"
 msgstr "Linuxkonsoll"
 
-#: gnome-terminal/gnome-terminal.c:855
+#: gnome-terminal/gnome-terminal.c:898
 msgid "Color Xterm"
 msgstr "XTerm, färg"
 
-#: gnome-terminal/gnome-terminal.c:856
+#: gnome-terminal/gnome-terminal.c:899
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:861
+#: gnome-terminal/gnome-terminal.c:900
+msgid "Custom"
+msgstr "Valfri"
+
+#: gnome-terminal/gnome-terminal.c:905
 msgid "White on black"
 msgstr "Vit på svart"
 
-#: gnome-terminal/gnome-terminal.c:862
+#: gnome-terminal/gnome-terminal.c:906
 msgid "Black on white"
 msgstr "Svart på vitt"
 
-#: gnome-terminal/gnome-terminal.c:863
+#: gnome-terminal/gnome-terminal.c:907
 msgid "Green on black"
 msgstr "Grönt på svart"
 
-#: gnome-terminal/gnome-terminal.c:864
+#: gnome-terminal/gnome-terminal.c:908
 msgid "Black on light yellow"
 msgstr "Svart på ljusgult"
 
-#: gnome-terminal/gnome-terminal.c:865
+#: gnome-terminal/gnome-terminal.c:909
 msgid "Custom colors"
 msgstr "Valfria färger"
 
-#: gnome-terminal/gnome-terminal.c:870 panel/panel_config.c:348
+#: gnome-terminal/gnome-terminal.c:914 panel/panel_config.c:348
 msgid "Left"
 msgstr "Vänster"
 
-#: gnome-terminal/gnome-terminal.c:871 panel/panel_config.c:359
+#: gnome-terminal/gnome-terminal.c:915 panel/panel_config.c:359
 msgid "Right"
 msgstr "Höger"
 
-#: gnome-terminal/gnome-terminal.c:872
+#: gnome-terminal/gnome-terminal.c:916
 msgid "Hidden"
 msgstr "Gömd"
 
 #. General frame
-#: gnome-terminal/gnome-terminal.c:997 panel/panel_config_global.c:310
+#: gnome-terminal/gnome-terminal.c:1041 panel/panel_config_global.c:310
 msgid "General"
 msgstr "Allmänt"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:1000
+#: gnome-terminal/gnome-terminal.c:1044
 msgid "Font:"
 msgstr "Font:"
 
-#: gnome-terminal/gnome-terminal.c:1020
+#: gnome-terminal/gnome-terminal.c:1064
 msgid "Browse..."
 msgstr "Bläddra..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:1028
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:1072
 msgid "Terminal Class"
 msgstr "Terminalklass"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:1056
+#: gnome-terminal/gnome-terminal.c:1100
 msgid "Blinking cursor"
 msgstr "Blinkande markör"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:1065
+#: gnome-terminal/gnome-terminal.c:1109
 msgid "Hide menu bar"
 msgstr "Göm menyrad"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:1074
+#: gnome-terminal/gnome-terminal.c:1118
 msgid "Silence Terminal bell"
 msgstr "Tysta terminalljud"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:1083
+#: gnome-terminal/gnome-terminal.c:1127
 msgid "Swap DEL/Backspace"
 msgstr "Växla DEL/Backspace"
 
 #. --login by default
-#: gnome-terminal/gnome-terminal.c:1092
+#: gnome-terminal/gnome-terminal.c:1136
 msgid "Use --login by default"
 msgstr "Använd --login som standard"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:1101
+#: gnome-terminal/gnome-terminal.c:1145
 msgid "Select-by-word characters"
-msgstr ""
+msgstr "Ord-för-ord-tecken"
 
-#: gnome-terminal/gnome-terminal.c:1119
+#: gnome-terminal/gnome-terminal.c:1163
 msgid "Image"
 msgstr "Bild"
 
-#: gnome-terminal/gnome-terminal.c:1121
+#: gnome-terminal/gnome-terminal.c:1165
 msgid "Background type"
 msgstr "Bakgrundtyp"
 
-#: gnome-terminal/gnome-terminal.c:1131
+#: gnome-terminal/gnome-terminal.c:1175
 msgid "None"
 msgstr "Ingen"
 
-#: gnome-terminal/gnome-terminal.c:1139
+#: gnome-terminal/gnome-terminal.c:1183
 msgid "Background pixmap"
 msgstr "Bakgrundsbild"
 
-#: gnome-terminal/gnome-terminal.c:1155
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:1199
 msgid "Pixmap file:"
 msgstr "Bildfil:"
 
-#: gnome-terminal/gnome-terminal.c:1170
+#: gnome-terminal/gnome-terminal.c:1214
 msgid "Background pixmap scrolls"
 msgstr "Scrolla bakgrundsbild"
 
-#: gnome-terminal/gnome-terminal.c:1183
+#: gnome-terminal/gnome-terminal.c:1227
 msgid "Transparent"
 msgstr "Genomskinlig"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1210
+#: gnome-terminal/gnome-terminal.c:1254
 msgid "Background should be shaded"
 msgstr "Skuggad bakgrund"
 
-#: gnome-terminal/gnome-terminal.c:1223
+#: gnome-terminal/gnome-terminal.c:1267
 msgid "Colors"
 msgstr "Färger"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1226
-msgid "Color palette:"
-msgstr "Färgpalett:"
+#: gnome-terminal/gnome-terminal.c:1270
+msgid "Color scheme:"
+msgstr "Färgschema:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1236
+#: gnome-terminal/gnome-terminal.c:1280
 msgid "Foreground color:"
-msgstr "Förgrundsfärg:"
+msgstr "Textfärg:"
 
-#: gnome-terminal/gnome-terminal.c:1245
+#: gnome-terminal/gnome-terminal.c:1288
 msgid "Background color:"
 msgstr "Bakgrundsfärg:"
 
-#. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1257
-msgid "Colors:"
-msgstr "Färger:"
+#: gnome-terminal/gnome-terminal.c:1295
+msgid "Color palette:"
+msgstr "Färgpalett:"
 
-#: gnome-terminal/gnome-terminal.c:1270
+#. default foreground/backgorund selector
+#: gnome-terminal/gnome-terminal.c:1317
+msgid "Fore/Background Colour:"
+msgstr "Text-/bakgrundsfärg:"
+
+#: gnome-terminal/gnome-terminal.c:1330
 msgid "Scrolling"
 msgstr "Scrollning"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1273
+#: gnome-terminal/gnome-terminal.c:1333
 msgid "Scrollbar position"
 msgstr "Position för rullningslist"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1284
+#: gnome-terminal/gnome-terminal.c:1344
 msgid "Scrollback lines"
-msgstr ""
+msgstr "Antal historikrader"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1296
+#: gnome-terminal/gnome-terminal.c:1356
 msgid "Scroll on keystroke"
-msgstr ""
+msgstr "Scrolla vid tangentnedtryckning"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1305
+#: gnome-terminal/gnome-terminal.c:1365
 msgid "Scroll on output"
-msgstr ""
+msgstr "Scrolla vid utdata"
 
-#: gnome-terminal/gnome-terminal.c:1340
+#: gnome-terminal/gnome-terminal.c:1400
 msgid "Color selector"
 msgstr "Färgväljare"
 
-#: gnome-terminal/gnome-terminal.c:1413 gnome-terminal/gnome-terminal.c:143
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "_New terminal"
 msgstr "_Nytt terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1413 gnome-terminal/gnome-terminal.c:1430
+#: gnome-terminal/gnome-terminal.c:1473 gnome-terminal/gnome-terminal.c:1490
 msgid "Creates a new terminal window"
 msgstr "Öppnar ett nytt terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1415
+#: gnome-terminal/gnome-terminal.c:1475
 msgid "_Hide menubar"
 msgstr "_Göm menyrad"
 
-#: gnome-terminal/gnome-terminal.c:1417
+#: gnome-terminal/gnome-terminal.c:1477
 msgid "_Close terminal"
 msgstr "_Stäng terminalfönster"
 
-#: gnome-terminal/gnome-terminal.c:1432
+#: gnome-terminal/gnome-terminal.c:1492
 msgid "_Show menubar"
 msgstr "_Visa menyrad"
 
-#: gnome-terminal/gnome-terminal.c:1432
+#: gnome-terminal/gnome-terminal.c:1492
 msgid "Toggles whether or not the menubar is displayed."
-msgstr ""
+msgstr "Slår av eller på visning av menyraden."
 
-#: gnome-terminal/gnome-terminal.c:1434
+#: gnome-terminal/gnome-terminal.c:1494
 msgid "_Secure keyboard"
 msgstr "Säkra _tangentbord"
 
-#: gnome-terminal/gnome-terminal.c:1435
+#: gnome-terminal/gnome-terminal.c:1495
 msgid "Toggles whether or not the keyboard is grabbed by the terminal."
-msgstr ""
+msgstr "Välj om tangentbordet ska säkras"
 
-#: gnome-terminal/gnome-terminal.c:1438 gnome-terminal/gnome-terminal.c:1458
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:1498 gnome-terminal/gnome-terminal.c:1518
 msgid "_Reset Terminal"
-msgstr "Stäng terminalfönster"
+msgstr "_Återställ Terminal"
 
-#: gnome-terminal/gnome-terminal.c:1439 gnome-terminal/gnome-terminal.c:1459
+#: gnome-terminal/gnome-terminal.c:1499 gnome-terminal/gnome-terminal.c:1519
 msgid "Reset and _Clear"
 msgstr "Å_terställ och rensa"
 
-#: gnome-terminal/gnome-terminal.c:1461
+#: gnome-terminal/gnome-terminal.c:1521
 msgid "C_olor selector..."
 msgstr "_Färgväljare"
 
-#: gnome-terminal/gnome-terminal.c:1739
+#: gnome-terminal/gnome-terminal.c:1792
 #, c-format
 msgid "The error was: %s"
 msgstr "Felet var: %s"
 
-#: gnome-terminal/gnome-terminal.c:1740
+#: gnome-terminal/gnome-terminal.c:1793
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -761,169 +773,175 @@ msgid ""
 "Please read linux/Documentation/Changes for how to\n"
 "set them up correctly."
 msgstr ""
+"Om du använder Linux 2.2.x med glibc 2.1.x, orsakas problemet\n"
+"troligtvis av felaktigt konfigurerade Unix98 pty.er\n"
+"\n"
+"Läs linux/Documentation/Changes för information om hur de ska\n"
+"konfigureras korrekt."
 
-#: gnome-terminal/gnome-terminal.c:1745
+#: gnome-terminal/gnome-terminal.c:1798
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
 "\n"
 "%s"
-msgstr "Ett fel har uppstått vid försök att logga in.\n"
+msgstr ""
+"Ett fel har uppstått vid försök att logga in.\n"
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2179
+#: gnome-terminal/gnome-terminal.c:2232
 msgid "Terminal class name"
-msgstr ""
+msgstr "Terminalklassnamn"
 
-#: gnome-terminal/gnome-terminal.c:2179
+#: gnome-terminal/gnome-terminal.c:2232
 msgid "TCLASS"
-msgstr ""
+msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2182
+#: gnome-terminal/gnome-terminal.c:2235
 msgid "Specifies font name"
 msgstr "Anger font"
 
-#: gnome-terminal/gnome-terminal.c:2182
+#: gnome-terminal/gnome-terminal.c:2235
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2185
+#: gnome-terminal/gnome-terminal.c:2238
 msgid "Do not start up shells as login shells"
-msgstr ""
+msgstr "Starta inte upp skal som loginskal"
 
-#: gnome-terminal/gnome-terminal.c:2188
+#: gnome-terminal/gnome-terminal.c:2241
 msgid "Start up shells as login shells"
-msgstr ""
+msgstr "Starta upp skal som loginskal"
 
-#: gnome-terminal/gnome-terminal.c:2191
+#: gnome-terminal/gnome-terminal.c:2244
 msgid "Specifies the geometry for the main window"
-msgstr ""
+msgstr "Anger fönsterstorlek för huvudfönstret"
 
-#: gnome-terminal/gnome-terminal.c:2191
+#: gnome-terminal/gnome-terminal.c:2244
 msgid "GEOMETRY"
-msgstr ""
+msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:2194
+#: gnome-terminal/gnome-terminal.c:2247
 msgid "Execute this program instead of a shell"
-msgstr ""
+msgstr "Kör detta program i stället för ett skal"
 
-#: gnome-terminal/gnome-terminal.c:2194 gnome-terminal/gnome-terminal.c:2197
+#: gnome-terminal/gnome-terminal.c:2247 gnome-terminal/gnome-terminal.c:2250
 msgid "COMMAND"
-msgstr ""
+msgstr "COMMAND"
 
-#: gnome-terminal/gnome-terminal.c:2197
-msgid "Execute this program the same was as xterm does"
-msgstr ""
+#: gnome-terminal/gnome-terminal.c:2250
+msgid "Execute this program the same way as xterm does"
+msgstr "Kör detta program på samma sätt som xterm gör"
 
-#: gnome-terminal/gnome-terminal.c:2200
+#: gnome-terminal/gnome-terminal.c:2253
 msgid "Foreground color"
 msgstr "Förgrundsfärg"
 
-#: gnome-terminal/gnome-terminal.c:2200 gnome-terminal/gnome-terminal.c:2203
+#: gnome-terminal/gnome-terminal.c:2253 gnome-terminal/gnome-terminal.c:2256
 msgid "COLOR"
 msgstr "FÄRG"
 
-#: gnome-terminal/gnome-terminal.c:2203 panel/panel_config.c:903
+#: gnome-terminal/gnome-terminal.c:2256 panel/panel_config.c:903
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
-#: gnome-terminal/gnome-terminal.c:2206
+#: gnome-terminal/gnome-terminal.c:2259
 msgid "Update utmp entry"
 msgstr "Uppdatera utmp-post"
 
-#: gnome-terminal/gnome-terminal.c:2206
+#: gnome-terminal/gnome-terminal.c:2259
 msgid "UTMP"
-msgstr ""
+msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2209
+#: gnome-terminal/gnome-terminal.c:2262
 msgid "Do not update utmp entry"
 msgstr "Uppdatera inte utmp-post"
 
-#: gnome-terminal/gnome-terminal.c:2209
+#: gnome-terminal/gnome-terminal.c:2262
 msgid "NOUTMP"
-msgstr ""
+msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2212
+#: gnome-terminal/gnome-terminal.c:2265
 msgid "Update wtmp entry"
 msgstr "Updatera wtmp-post"
 
-#: gnome-terminal/gnome-terminal.c:2212
+#: gnome-terminal/gnome-terminal.c:2265
 msgid "WTMP"
-msgstr ""
+msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2215
+#: gnome-terminal/gnome-terminal.c:2268
 msgid "Do not update wtmp entry"
 msgstr "Uppdatera inte wtmp-post"
 
-#: gnome-terminal/gnome-terminal.c:2215
+#: gnome-terminal/gnome-terminal.c:2268
 msgid "NOWTMP"
-msgstr ""
+msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2218
+#: gnome-terminal/gnome-terminal.c:2271
 msgid "Set the window title"
 msgstr "Sätt fönstertitel"
 
-#: gnome-terminal/gnome-terminal.c:2218
+#: gnome-terminal/gnome-terminal.c:2271
 msgid "TITLE"
-msgstr ""
+msgstr "TITLE"
 
-#: gnome-terminal/gnome-terminal.c:2221
+#: gnome-terminal/gnome-terminal.c:2274
 msgid "Set the TERM variable"
 msgstr "Sätt TERM-variabel"
 
-#: gnome-terminal/gnome-terminal.c:2221
+#: gnome-terminal/gnome-terminal.c:2274
 msgid "TERMNAME"
-msgstr ""
+msgstr "TERMNAME"
 
 #: gsm/main.c:56
 msgid "Start chooser and pick the session"
-msgstr ""
+msgstr "Starta väljare och välj session"
 
 #: gsm/main.c:57
 msgid "Disable normal operation by saving into the Trash session"
-msgstr ""
+msgstr "Kör onormalt genom att spara i Skräp-sessionen"
 
 #: gsm/main.c:58
 msgid "Only read saved sessions from the default.session file"
-msgstr ""
+msgstr "Läs bara sparade sessioner från default.session-filen"
 
 #: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
-msgstr ""
+msgstr "Tid i millisekunder som klienterna får att registrera sig på (0=oändlig)"
 
 #: gsm/main.c:60
 msgid "Millisecond period spent waiting for clients to respond (0=forever)"
-msgstr ""
+msgstr "Tid i millisekunder som klienterna får att svara på (0=oändlig)"
 
 #: gsm/main.c:61
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
-msgstr ""
+msgstr "Tid i millisekunder som klienterna får att dö på (0=oändlig)"
 
-#: gsm/manager.c:374
+#: gsm/manager.c:385
 msgid "Wait abandoned due to conflict."
-msgstr ""
+msgstr "Väntan avbruten pga konflikt."
 
-#: gsm/manager.c:817
+#: gsm/manager.c:828
 #, c-format
 msgid "No response to the %s command."
-msgstr ""
+msgstr "Inget svar på %s-kommandot."
 
-#: gsm/manager.c:818
+#: gsm/manager.c:829
 msgid "The program may be slow, stopped or broken."
-msgstr ""
+msgstr "Programmet kan vara långsamt, stoppat eller trasigt"
 
-#: gsm/manager.c:819
+#: gsm/manager.c:830
 msgid "You may wait for it to respond or remove it."
-msgstr ""
+msgstr "Du kan vänta på programmet att svara eller ta bort det."
 
-#: gsm/manager.c:1346
+#: gsm/manager.c:1357
 msgid "Respawn abandoned due to failures."
-msgstr ""
+msgstr "Återupplivande övergett pga fel."
 
-#: gsm/manager.c:1514
+#: gsm/manager.c:1525
 msgid "A session shutdown is in progress."
-msgstr ""
+msgstr "Sessionen håller på att stängas."
 
 #: gsm/save-session.c:33
 msgid "Kill session"
@@ -956,16 +974,16 @@ msgstr "Hjälp"
 
 #: gsm/session-properties.c:258
 msgid "Session"
-msgstr ""
+msgstr "Session"
 
 #. app
 #: gsm/session-properties.c:312
 msgid "Session Chooser"
-msgstr ""
+msgstr "Sessionsväljare"
 
 #: gsm/session-properties.c:315
 msgid "Start Session"
-msgstr "Starta sessionen"
+msgstr "Starta session"
 
 #: gsm/session-properties.c:318
 msgid "Cancel Login"
@@ -973,7 +991,7 @@ msgstr "Avbryt login"
 
 #: gsm/session-properties.c:344
 msgid "Initialize session settings"
-msgstr ""
+msgstr "Initialisera sessions-inställningar"
 
 #: gsm/session-properties.c:345
 msgid "Only display warnings."
@@ -1037,15 +1055,16 @@ msgid "Gnome Help Browser"
 msgstr "GNOMEs Hjälpläsare"
 
 #: help-browser/gnome-help-browser.c:342
-#, fuzzy
 msgid "Copyright (c) 1998 Red Hat Software, Inc."
-msgstr "Upphovsrättigheter (C)1998 M.Watson"
+msgstr "Copyright (c) 1998 Red Hat Software, Inc."
 
 #: help-browser/gnome-help-browser.c:344
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
 msgstr ""
+"GNOME Hjälpläsaren ger lätt tillgänglighet till diverse former av "
+"dokumentation på ditt system"
 
 #: help-browser/gnome-help-browser.c:600
 msgid "History size"
@@ -1197,6 +1216,9 @@ msgid ""
 "<BODY>\n"
 "<H2>Results of the substring search for the string "
 msgstr ""
+"<HTML>\n"
+"<BODY>\n"
+"<H2>Resultat av delsträngssökning efter "
 
 #: help-browser/toc2.c:467
 msgid ""
@@ -1244,7 +1266,7 @@ msgstr ""
 
 #: help-browser/toc2.c:536
 msgid "<br><B>No matches found</B>\n"
-msgstr ""
+msgstr "<br><B>Inga matchande dokument hittades</B>\n"
 
 #: help-browser/visit.c:84
 msgid "<BODY>Could not load default TOC page</BODY>"
@@ -1374,9 +1396,8 @@ msgid "Applet appearance"
 msgstr "Utseende"
 
 #: panel/drawer.c:127
-#, fuzzy
 msgid "Drawer handle"
-msgstr "Låda"
+msgstr "Lådhandtag"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
@@ -1385,9 +1406,8 @@ msgid "Enable hidebutton"
 msgstr "Visa gömmaknapp"
 
 #: panel/drawer.c:141
-#, fuzzy
 msgid "Enable hidebutton arrow"
-msgstr "Visa pilar på gömmaknapparna"
+msgstr "Visa pil på gömmaknappen"
 
 #: panel/drawer.c:160 panel/drawer.c:242
 msgid "Drawer"
@@ -1395,7 +1415,7 @@ msgstr "Låda"
 
 #: panel/launcher.c:41
 msgid "This launch icon does not specify a program to run"
-msgstr ""
+msgstr "Denna programknapp har ej ett program att köra"
 
 #: panel/launcher.c:44
 msgid "Close"
@@ -1407,11 +1427,11 @@ msgstr "Applikation"
 
 #: panel/launcher.c:279
 msgid "Launcher properties"
-msgstr "Egenskaper för uppstartaren"
+msgstr "Egenskaper för programknappen"
 
 #: panel/launcher.c:372
 msgid "Create launcher applet"
-msgstr "Skapa uppstarts applet"
+msgstr "Skapa programknapp"
 
 #: panel/logout.c:51 panel/menu.c:2451 panel/menu.c:2768
 msgid "Log out"
@@ -1444,6 +1464,8 @@ msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
 msgstr ""
+"Det här programmet kan köra andra program, bädda in små applets i sig själv"
+", världsfred, och diverse X-krascher."
 
 #: panel/menu.c:570 panel/menu.c:1561
 msgid "Can't load entry"
@@ -1452,7 +1474,7 @@ msgstr "Kan inte ladda post"
 #: panel/menu.c:647
 #, c-format
 msgid "Could not get file from path: %s"
-msgstr ""
+msgstr "Kan inte urskilja fil från sökväg: %s"
 
 #: panel/menu.c:651 panel/menu.c:733
 #, c-format
@@ -1466,12 +1488,12 @@ msgstr "Skapa menyval"
 #: panel/menu.c:705
 #, c-format
 msgid "Could not remove the menu item %s: %s\n"
-msgstr ""
+msgstr "Kan inte ta bort menyval %s: %s\n"
 
 #: panel/menu.c:712
 #, c-format
 msgid "Could not get file name from path: %s"
-msgstr ""
+msgstr "Kan inte urskilja filnamn från sökväg: %s"
 
 #: panel/menu.c:751
 #, c-format
@@ -1487,7 +1509,6 @@ msgid "Add this launcher to panel"
 msgstr "Lägg till programknapp på panelen"
 
 #: panel/menu.c:1068 panel/menu.c:1110
-#, fuzzy
 msgid "Add this to personal menu"
 msgstr "Lägg till till personlig meny"
 
@@ -1513,11 +1534,11 @@ msgstr "..."
 
 #: panel/menu.c:1569
 msgid "Can't get goad_id from desktop entry!"
-msgstr ""
+msgstr "Kan inte få goad_id från desktop-post"
 
 #: panel/menu.c:1856
 msgid "Can't get goad_id for applet, ignoring it"
-msgstr ""
+msgstr "Kan inte få goad_id för applet, ignorerar den"
 
 #: panel/menu.c:1972 panel/menu.c:2016 panel/menu.c:2018 panel/menu.c:3367
 #: panel/menu.c:3734
@@ -1533,12 +1554,10 @@ msgid "Applets"
 msgstr "Applets"
 
 #: panel/menu.c:2261 panel/panel_config.c:1031
-#, fuzzy
 msgid "Edge panel"
 msgstr "Kantpanel"
 
 #: panel/menu.c:2268 panel/panel_config.c:1037
-#, fuzzy
 msgid "Corner panel"
 msgstr "Hörnpanel"
 
@@ -1692,7 +1711,7 @@ msgstr "Nederst"
 #. Auto-hide/stayput frame
 #: panel/panel_config.c:387 panel/panel_config.c:710
 msgid "Minimize options"
-msgstr ""
+msgstr "Minimerings-alternativ"
 
 #. Auto-hide
 #: panel/panel_config.c:397 panel/panel_config.c:720
@@ -1706,7 +1725,6 @@ msgstr "Visa gömmaknappar"
 
 #. Arrow enable
 #: panel/panel_config.c:417 panel/panel_config.c:740
-#, fuzzy
 msgid "Enable hidebutton arrows"
 msgstr "Visa pilar på gömmaknapparna"
 
@@ -1722,6 +1740,10 @@ msgid ""
 "the size, but they may choose not to follow it.\n"
 "All standard panel icons follow this size."
 msgstr ""
+"OBS: Panelen kommer att rätta sig efter den\n"
+"största appleten. Appleterna får information om\n"
+"storleken, men de kan välja att strunta i den.\n"
+"Alla panel-ikoner följer storleken."
 
 #. Tiny Size
 #: panel/panel_config.c:484
@@ -1813,38 +1835,37 @@ msgstr "Aktivera animationer"
 
 #: panel/panel_config_global.c:204
 msgid "Constant speed animations"
-msgstr ""
+msgstr "Animationer har konstant fart"
 
 #. AutoHide Animation step_size scale frame
 #: panel/panel_config_global.c:218
 msgid "Auto-hide animation speed"
-msgstr ""
+msgstr "Hastighet för auto-göm"
 
 #. ExplicitHide Animation step_size scale frame
 #: panel/panel_config_global.c:228
-#, fuzzy
 msgid "Explicit-hide animation speed"
-msgstr ""
+msgstr "Hastighet för göm"
 
 #. DrawerHide Animation step_size scale frame
 #: panel/panel_config_global.c:238
 msgid "Drawer animation speed"
-msgstr ""
+msgstr "Animationshastighet för låda"
 
 #. Minimize Delay scale frame
 #: panel/panel_config_global.c:248
 msgid "Auto-hide minimize delay (ms)"
-msgstr ""
+msgstr "Tid för auto-göm (ms)"
 
 #. Minimized size scale frame
 #: panel/panel_config_global.c:254
 msgid "Auto-hide minimized size (pixels)"
-msgstr ""
+msgstr "Storlek för auto-göm (pixels)"
 
 #. Enable tiles frame
 #: panel/panel_config_global.c:320 panel/panel_config_global.c:347
 msgid "Tiles enabled"
-msgstr ""
+msgstr "Använd knappbakgrunder"
 
 #. Image frame
 #: panel/panel_config_global.c:356
@@ -1853,11 +1874,11 @@ msgstr "Bildfiler"
 
 #: panel/panel_config_global.c:368
 msgid "Tile filename (up)"
-msgstr ""
+msgstr "Filnamn (upp)"
 
 #: panel/panel_config_global.c:372
 msgid "Tile filename (down)"
-msgstr ""
+msgstr "Filnamn (ner)"
 
 #. Minimized size scale frame
 #: panel/panel_config_global.c:379
@@ -1867,7 +1888,7 @@ msgstr "Kantbredd"
 #. Minimized size scale frame
 #: panel/panel_config_global.c:386
 msgid "Depth (displacement when pressed)"
-msgstr ""
+msgstr "Djup (förflyttning vid klick)"
 
 #. Tooltips frame
 #: panel/panel_config_global.c:408
@@ -1891,14 +1912,13 @@ msgstr "Visa små ikoner"
 
 #. Dot Buttons
 #: panel/panel_config_global.c:446
-#, fuzzy
 msgid "Show ... buttons"
 msgstr "Visa ...-knappar"
 
 #. Off Panel Popup menus
 #: panel/panel_config_global.c:455
 msgid "Show popup menus outside of panels"
-msgstr ""
+msgstr "Visa popup-menyer utanför paneler"
 
 #. Hungry Menus
 #: panel/panel_config_global.c:464
@@ -1908,12 +1928,12 @@ msgstr "Lagra menyer i minnet"
 #. Movement frame
 #: panel/panel_config_global.c:473
 msgid "Default movement mode"
-msgstr ""
+msgstr "Rörelseläge"
 
 #. Switched
 #: panel/panel_config_global.c:483
 msgid "Switched movement (or use Ctrl)"
-msgstr ""
+msgstr "Växlad rörelse (eller använd Ctrl)"
 
 #: panel/panel_config_global.c:494
 msgid "Free movement (doesn't disturb other applets) (or use Alt)"
@@ -1921,72 +1941,67 @@ msgstr "Fri rörelse (stör inte andra applets) (Alt)"
 
 #: panel/panel_config_global.c:505
 msgid "Push movement (or use Shift)"
-msgstr ""
+msgstr "Knuff-rörelse (eller använd Shift)"
 
 #. Autoraise
 #: panel/panel_config_global.c:524
 msgid "Raise panels on mouse-over (non GNOME compliant window managers only)"
-msgstr ""
+msgstr "Höj panelen vid musrörelse (endast icke-GNOME-fönsterhanderare)"
 
 #. Keep on bottom
 #: panel/panel_config_global.c:533
 msgid "Keep panel below windows (GNOME compliant window managers only)"
-msgstr ""
+msgstr "Låt panelen vara underst (endast GNOME-fönsterhanterare)"
 
 #. Drawer/launcher auto close
 #: panel/panel_config_global.c:542
 msgid "Close drawer if a launcher inside it is pressed"
-msgstr ""
+msgstr "Stäng låda om en programknapp inuti körs"
 
 #. Minimize Delay scale frame
 #: panel/panel_config_global.c:551
-#, fuzzy
 msgid "Applet padding"
-msgstr "Applet-höjd"
+msgstr "Applet-mellanrum"
 
 #: panel/panel_config_global.c:579
-#, fuzzy
 msgid "Launcher icon"
-msgstr "Öppna nytt fönster"
+msgstr "Programknapps-ikon"
 
 #: panel/panel_config_global.c:580
-#, fuzzy
 msgid "Drawer icon"
-msgstr "Låda"
+msgstr "Låd-ikon"
 
 #: panel/panel_config_global.c:581
 msgid "Menu icon"
-msgstr ""
+msgstr "Meny-ikon"
 
 #: panel/panel_config_global.c:582
-#, fuzzy
 msgid "Miscellaneous icon"
-msgstr "Blandat"
+msgstr "Blandat-ikon"
 
 #: panel/panel_config_global.c:606
-#, fuzzy
 msgid "Global panel configuration"
-msgstr "Global panelkonfigurering"
+msgstr "Global konfiguration av panelen"
 
 #: panel/panel_config_global.c:614
-#, fuzzy
 msgid "Animation"
-msgstr "Applikation"
+msgstr "Animation"
 
 #: panel/panel_config_global.c:620
-#, fuzzy
 msgid "General icon settings"
-msgstr "Övergripande egenskaper"
+msgstr "Allmänna ikon-inställningar"
 
 #: panel/session.c:183 panel/session.c:220
 msgid "Timed out on sending session save to an applet"
-msgstr ""
+msgstr "Fick timeout när meddelande om sessions-sparande skickades till en applet"
 
 #: panel/session.c:198
 msgid ""
 "An applet is not responding to a save request,\n"
 "should I stop waiting and cancel the applet?"
 msgstr ""
+"En applet svarar inte på spara-förfrågan,\n"
+"vill du sluta vänta och avsluta appleten?"
 
 #: panel/swallow.c:198
 msgid "Create swallow applet"
@@ -2005,1150 +2020,5 @@ msgid "Width"
 msgstr "Bredd"
 
 #: panel/swallow.c:246
-#, fuzzy
 msgid "Height"
-msgstr "Hög."
-
-#, fuzzy
-#~ msgid "Clock Settings"
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "Clock color"
-#~ msgstr "Klocka"
-
-#, fuzzy
-#~ msgid "Hour needle color"
-#~ msgstr "Förgrundsfärg"
-
-#, fuzzy
-#~ msgid "(C) 1999 the Free Software Foundation"
-#~ msgstr "(c) 1998 the Free Software Foundation"
-
-#~ msgid "About"
-#~ msgstr "Om"
-
-#, fuzzy
-#~ msgid "ASClock"
-#~ msgstr "Klocka"
-
-#, fuzzy
-#~ msgid "(C) 1998 the Free Software Foundation"
-#~ msgstr "(c) 1998 the Free Software Foundation"
-
-#, fuzzy
-#~ msgid "My Title"
-#~ msgstr "Sidtitel"
-
-#, fuzzy
-#~ msgid "Clock Theme"
-#~ msgstr "Klocka"
-
-#, fuzzy
-#~ msgid "ASClock Settings"
-#~ msgstr "Animationsvärden"
-
-#~ msgid "Display time in 12 hour format (AM/PM)"
-#~ msgstr "Visa tid i 12 timmars format (AM/PM)"
-
-#~ msgid "Internal error: invalid mode in battery_set_mode"
-#~ msgstr "Intärt fel: felaktigt läge i battery_set_mode"
-
-#, fuzzy
-#~ msgid "The GNOME Battery Monitor Applet"
-#~ msgstr "GNOME-fiskapplet"
-
-#, fuzzy
-#~ msgid " (C) 1997-1998 The Free Software Foundation"
-#~ msgstr "(c) 1998 the Free Software Foundation"
-
-#~ msgid "Could not allocate space for graph values"
-#~ msgstr "Kan inte allokera utrymme för grafvärden"
-
-#~ msgid "Battery Monitor Settings"
-#~ msgstr "Batteriövervakningsinställningar:"
-
-#, fuzzy
-#~ msgid "Applet Height:"
-#~ msgstr "Applet-höjd"
-
-#, fuzzy
-#~ msgid "Applet Width:"
-#~ msgstr "Applet-höjd"
-
-#, fuzzy
-#~ msgid "Update Interval (seconds):"
-#~ msgstr "Uppdatera var (sekunder):"
-
-#, fuzzy
-#~ msgid "Low Charge Threshold:"
-#~ msgstr "Tröskel"
-
-#, fuzzy
-#~ msgid "Applet Mode:"
-#~ msgstr "Applet-läge"
-
-#~ msgid "Graph"
-#~ msgstr "Graf"
-
-#~ msgid "Readout"
-#~ msgstr "Utdata"
-
-#~ msgid "AC-On Battery Color:"
-#~ msgstr "AC-På batterifärg:"
-
-#~ msgid "AC-Off Battery Color:"
-#~ msgstr "AC-Av batterifärg:"
-
-#, fuzzy
-#~ msgid "Low Battery Color:"
-#~ msgstr "AC-På batterifärg:"
-
-#, fuzzy
-#~ msgid "Graph Battery Low Color:"
-#~ msgstr "AC-På batterifärg:"
-
-#, fuzzy
-#~ msgid "Graph Tick Color:"
-#~ msgstr "Grafriktning:"
-
-#~ msgid "Graph Direction:"
-#~ msgstr "Grafriktning:"
-
-#~ msgid "Left to Right"
-#~ msgstr "Vänster till höger"
-
-#~ msgid "Right to Left"
-#~ msgstr "Höger till vänster"
-
-#~ msgid "Cannot open /dev/apm; can't get data."
-#~ msgstr "Kan inte öppna /proc/apm; får inte data."
-
-#~ msgid "ioctl failed on /dev/apm."
-#~ msgstr "ioctl misslyckades på /dev/apm."
-
-#~ msgid "APM is disabled!  Cannot read battery charge information."
-#~ msgstr "APM är avstängt!  Kan inte läsa batteriladdnings information."
-
-#, fuzzy
-#~ msgid "Copyright (C) 1998"
-#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
-
-#~ msgid "%d.%d.%d"
-#~ msgstr "%d.%d.%d"
-
-#~ msgid "Clock and Mail Notify Applet"
-#~ msgstr "Applet som är klocka och meddelar om post"
-
-#, fuzzy
-#~ msgid "(C) 1999"
-#~ msgstr "(C) 1998"
-
-#, fuzzy
-#~ msgid "%a, %b %d"
-#~ msgstr "%a %b %d"
-
-#, fuzzy
-#~ msgid "ClockMail Settings"
-#~ msgstr "Inställningar för processorbelastning"
-
-#~ msgid "Blink when any mail is waiting. (Not just when mail arrives)"
-#~ msgstr "Blinka när det finns oläst post. (Inte bara när ny post kommer)"
-
-#~ msgid "PPP Dialer Applet"
-#~ msgstr "PPP uppkopplings applet"
-
-#~ msgid "A funky PPP dialer, how come no-one has thought of it before!?"
-#~ msgstr "En funky PPP upkopplare, varför har ingen tänkt på detta förut!?"
-
-#, fuzzy
-#~ msgid "File Systems"
-#~ msgstr "Systembelastning"
-
-#~ msgid "Used Diskspace"
-#~ msgstr "Använd diskplats"
-
-#~ msgid "Free Diskspace"
-#~ msgstr "Ledig diskplats"
-
-#~ msgid "Textcolor"
-#~ msgstr "Textfärg"
-
-#~ msgid "Backgroundcolor"
-#~ msgstr "Bakgrundsfärg"
-
-#~ msgid "Applet Height"
-#~ msgstr "Applet-höjd"
-
-#~ msgid "Update Frequency"
-#~ msgstr "Uppdateringsfrekvens"
-
-#~ msgid "Diskusage Settings"
-#~ msgstr "Diskanvändnings inställningar"
-
-#~ msgid "Drive Mount Applet"
-#~ msgstr "Enhetsmonterings-applet"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Mounts and Unmounts drives.."
-#~ msgstr ""
-#~ "Publicerad under GNUs generella publika licens.\n"
-#~ "Monterar och demonterar enheter.."
-
-#~ msgid " mounted"
-#~ msgstr " monterad"
-
-#~ msgid " not mounted"
-#~ msgstr " inte monterad"
-
-#~ msgid "Eject"
-#~ msgstr "Mataut"
-
-#~ msgid "Drive Mount Settings"
-#~ msgstr "Enhetsmonteringsinställningar"
-
-#~ msgid "Update in seconds:"
-#~ msgstr "Uppdatera var (sekunder):"
-
-#~ msgid "Icon:"
-#~ msgstr "Ikon:"
-
-#~ msgid "Floppy"
-#~ msgstr "Diskett"
-
-#~ msgid "Cdrom"
-#~ msgstr "CDROM"
-
-#~ msgid "Zip Drive"
-#~ msgstr "Zipenhet"
-
-#~ msgid "Hard Disk"
-#~ msgstr "Hårddisk"
-
-#~ msgid "Mount point:"
-#~ msgstr "Monteringspunkt:"
-
-#, fuzzy
-#~ msgid "Esound MAnager Applet"
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "Copyright (C)1998 Red Hat Software"
-#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
-
-#~ msgid "You win!"
-#~ msgstr "Du vinner!"
-
-#~ msgid "Fifteen sliding pieces"
-#~ msgstr "Femton glidande pjäser"
-
-#~ msgid "1.0"
-#~ msgstr "1.0"
-
-#~ msgid "Copyright (C) The Free Software Foundation"
-#~ msgstr "Upphovsrätt (C) 1998 the Free Software Foundation"
-
-#~ msgid "Can't create fifteen applet!"
-#~ msgstr "Kan inte skapa femtonapplet!"
-
-#~ msgid "Scramble pieces"
-#~ msgstr "Rör runt pjäserna"
-
-#, fuzzy
-#~ msgid "Fvwm Pager Applet"
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "Copyright (C) 1998 M. Lausch"
-#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
-
-#, fuzzy
-#~ msgid "About\t"
-#~ msgstr "Om"
-
-#, fuzzy
-#~ msgid "Fvwm Pager Settings"
-#~ msgstr "Diskanvändnings inställningar"
-
-#, fuzzy
-#~ msgid "GKB settings"
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "Program"
-#~ msgstr "Uppstart"
-
-#, fuzzy
-#~ msgid "The GNOME KeyBoard Applet"
-#~ msgstr "GNOME-fiskapplet"
-
-#, fuzzy
-#~ msgid "1.0.1"
-#~ msgstr "1.0"
-
-#~ msgid "Desktop Pager Applet"
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
-#~ msgstr "Upphovsrätt (C) 1998 the Free Software Foundation"
-
-#, fuzzy
-#~ msgid "Gnome Pager Settings"
-#~ msgstr "Diskanvändnings inställningar"
-
-#, fuzzy
-#~ msgid "Pager"
-#~ msgstr "Bildfil"
-
-#, fuzzy
-#~ msgid "Show pager"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Rows of pagers"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Show task list button"
-#~ msgstr "Musknappar"
-
-#, fuzzy
-#~ msgid "Show task list"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Show button icons"
-#~ msgstr "Musknappar"
-
-#, fuzzy
-#~ msgid "Show all tasks"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Show normal tasks only"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Geometry"
-#~ msgstr "Fönstretsgeometri"
-
-#, fuzzy
-#~ msgid "Gnome Pager Error"
-#~ msgstr "GNOMEs Hjälpläsare"
-
-#, fuzzy
-#~ msgid "Show / Hide"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Displays time in Binary Coded Decimal\n"
-#~ "http://snoopy.net/~jon/jbc/."
-#~ msgstr ""
-#~ "Publicerad under GNUs generella publika licens.\n"
-#~ "Monterar och demonterar enheter.."
-
-#, fuzzy
-#~ msgid "not unique"
-#~ msgstr " inte monterad"
-
-#, fuzzy
-#~ msgid "completing..."
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr " inte monterad"
-
-#, fuzzy
-#~ msgid "starting..."
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "history list empty"
-#~ msgstr "Historikstorlek"
-
-#, fuzzy
-#~ msgid "Command history"
-#~ msgstr "Kommando (valfri)"
-
-#, fuzzy
-#~ msgid "Start program"
-#~ msgstr "Uppstart"
-
-#, fuzzy
-#~ msgid "orient. changed"
-#~ msgstr "Skrivarkommando:"
-
-#, fuzzy
-#~ msgid "Browser"
-#~ msgstr "Bläddra"
-
-#, fuzzy
-#~ msgid "Mini-Commander Properties"
-#~ msgstr "Musegenskaper"
-
-#, fuzzy
-#~ msgid "Show time"
-#~ msgstr "datum"
-
-#, fuzzy
-#~ msgid "Applet width:"
-#~ msgstr "Applet-höjd"
-
-#, fuzzy
-#~ msgid "Applet height:"
-#~ msgstr "Applet-höjd"
-
-#, fuzzy
-#~ msgid "Macros"
-#~ msgstr "BMärken"
-
-#, fuzzy
-#~ msgid "Main Volume and Mute"
-#~ msgstr "Lägg till huvudmeny"
-
-#~ msgid "Modem Lights Applet"
-#~ msgstr "Modemlamporapplet"
-
-#~ msgid ""
-#~ "You are currently connected.\n"
-#~ "Do you want to disconnect?"
-#~ msgstr ""
-#~ "Du är uppkopplad.\n"
-#~ "VIll du avbryta och koppla ner förbindelsen?"
-
-#~ msgid "Do you want to connect?"
-#~ msgstr "Vill du koppla upp förbindelsen?"
-
-#~ msgid "not connected"
-#~ msgstr "inte uppkopplad"
-
-#~ msgid "Modem Lights Settings"
-#~ msgstr "Inställningar för modemlamporna"
-
-#~ msgid "Updates per second"
-#~ msgstr "Updateras per sekund"
-
-#~ msgid "Connect command:"
-#~ msgstr "Uppkopplingskommando:"
-
-#~ msgid "Disconnect command:"
-#~ msgstr "Nedkopplingskommando:"
-
-#, fuzzy
-#~ msgid "Confirm connection"
-#~ msgstr "Bekräfta kopplingen?"
-
-#~ msgid "Modem lock file:"
-#~ msgstr "Låsfil för modemet:"
-
-#, fuzzy
-#~ msgid "Device:"
-#~ msgstr "Enhet"
-
-#, fuzzy
-#~ msgid "CPU Load"
-#~ msgstr "Användarbelastning"
-
-#, fuzzy
-#~ msgid "Load Graph"
-#~ msgstr "Graf"
-
-#, fuzzy
-#~ msgid "Width:"
-#~ msgstr "Bredd"
-
-#, fuzzy
-#~ msgid "Height:"
-#~ msgstr "Hög."
-
-#, fuzzy
-#~ msgid "User"
-#~ msgstr "Användarbelastning"
-
-#, fuzzy
-#~ msgid "Nice"
-#~ msgstr "Enhet"
-
-#, fuzzy
-#~ msgid "System"
-#~ msgstr "Systembelastning"
-
-#, fuzzy
-#~ msgid "Idle"
-#~ msgstr "Index"
-
-#, fuzzy
-#~ msgid "Shared"
-#~ msgstr "Skalad"
-
-#, fuzzy
-#~ msgid "Used"
-#~ msgstr "Användarbelastning"
-
-#, fuzzy
-#~ msgid "Memory Load"
-#~ msgstr "Användarbelastning"
-
-#, fuzzy
-#~ msgid "Swap Load"
-#~ msgstr "Inställningar för processorbelastning"
-
-#~ msgid "Netload Error"
-#~ msgstr "Fel i nätverksbelastning"
-
-#~ msgid "An error occured in the Netload Applet:"
-#~ msgstr "En fel uppstod i nätverksbelastningsappletten:"
-
-#~ msgid "The GNOME Network Load Applet"
-#~ msgstr "GNOME nätverksbelastningsapplet"
-
-#~ msgid "Network Traffic"
-#~ msgstr "Nätverkstrafik"
-
-#~ msgid "Traffic bars"
-#~ msgstr "Trafikstolpar"
-
-#~ msgid "Device name (like ppp0 or eth0)"
-#~ msgstr "Enhetsnamn (som ppp0 eller eth0)"
-
-#~ msgid "Vertical spacing of bars (in kilobytes)"
-#~ msgstr "Vertikalt avstånd mellan stolparna (i kilobytes)"
-
-#~ msgid "properties.c: gnome_property_box_new() failed.\n"
-#~ msgstr "properties.c: gnome_property_box_new() misslyckades.\n"
-
-#~ msgid "Network Load Settings"
-#~ msgstr "Inställningar för nätverkslast"
-
-#~ msgid "Device"
-#~ msgstr "Enhet"
-
-#, fuzzy
-#~ msgid "Articles"
-#~ msgstr "Vertikal"
-
-#, fuzzy
-#~ msgid "Open new window"
-#~ msgstr "Öppna nytt fönster"
-
-#, fuzzy
-#~ msgid "No articles"
-#~ msgstr "Ingen post."
-
-#~ msgid "Frederic Devernay <devernay@istar.fr>"
-#~ msgstr "Frédéric Devernay <devernay@istar.fr>"
-
-#~ msgid "(C) 1998"
-#~ msgstr "(C) 1998"
-
-#, fuzzy
-#~ msgid "Refresh articles"
-#~ msgstr "Återladda bilden"
-
-#~ msgid "The Web Browser Controller"
-#~ msgstr "Webläsar kontrollerare"
-
-#~ msgid "Url:"
-#~ msgstr "Url:"
-
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "Stäng"
-
-#~ msgid "Launch new window"
-#~ msgstr "Öppna nytt fönster"
-
-#~ msgid "WebControl Properties"
-#~ msgstr "Webkontrollegenskaper"
-
-#~ msgid "Display URL label"
-#~ msgstr "Visa URL ettiket"
-
-#~ msgid "Display \"launch new window\" option"
-#~ msgstr "Visa \"öppna nytt fönster\" valet"
-
-#~ msgid "Look"
-#~ msgstr "Titta"
-
-#, fuzzy
-#~ msgid "_File"
-#~ msgstr "Arkiv"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Hjälp"
-
-#~ msgid "Movement"
-#~ msgstr "Rörelse"
-
-#, fuzzy
-#~ msgid "Logout icon"
-#~ msgstr "Logga ut"
-
-#~ msgid "Properties ..."
-#~ msgstr "Egenskaper ..."
-
-#~ msgid "Add new panel"
-#~ msgstr "Lägg till ny panel"
-
-#~ msgid "Prompt before logout"
-#~ msgstr "Fråga innan utloggning"
-
-#, fuzzy
-#~ msgid "Low Battery Warning"
-#~ msgstr "Låg och laddas."
-
-#~ msgid "General Properties"
-#~ msgstr "Övergripande egenskaper"
-
-#~ msgid "Graph Interval:"
-#~ msgstr "Grafintervall:"
-
-#, fuzzy
-#~ msgid "Submenu: "
-#~ msgstr "Ingen post."
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "Kan inte skapa fil: %s\n"
-
-#~ msgid "New"
-#~ msgstr "Ny"
-
-#~ msgid "GNOME"
-#~ msgstr "GNOME"
-
-#, fuzzy
-#~ msgid "Red Hat menus"
-#~ msgstr "Lägg till huvudmeny"
-
-#~ msgid "Really log out?"
-#~ msgstr "Verkligen logga ut?"
-
-#~ msgid "Ask next time"
-#~ msgstr "Fråga nästa gång"
-
-#~ msgid "Gnome Session Properties"
-#~ msgstr "GNOME sessionsegenskaper"
-
-#, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "Uppstart"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "Kan inte öppna /proc/apm; får inte data."
-
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Något är fel på /proc/apm; får inte data."
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "Kan inte öppna /proc/apm; får inte data."
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "Inget batteri?!?"
-
-#~ msgid "High and charging."
-#~ msgstr "Hög och laddas."
-
-#~ msgid "High."
-#~ msgstr "Hög."
-
-#~ msgid "Low."
-#~ msgstr "Låg."
-
-#~ msgid "Critical and charging."
-#~ msgstr "Kritisk och laddas."
-
-#~ msgid "Critical!!"
-#~ msgstr "Kritisk!!"
-
-#~ msgid "Charging."
-#~ msgstr "Laddas."
-
-#~ msgid "unknown minutes of battery."
-#~ msgstr "okänd batteritid tid kvar."
-
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "minuter batteritid okända (%d%%)"
-
-#~ msgid "%d minutes of battery"
-#~ msgstr "%d minuter batteritid"
-
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "%d minuter batteritid (%d%%)"
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "Mer än 100 000 000 minuter batteritid?!?"
-
-#~ msgid "APM Stats"
-#~ msgstr "APM-värden"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM-drivrutin version:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "APM BIOS version:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Batteristatus:"
-
-#~ msgid "Refresh Image"
-#~ msgstr "Återladda bilden"
-
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "The Bus Sign Applet"
-
-#~ msgid ""
-#~ "This applet is a total waste of time. Get back to work!\n"
-#~ "\n"
-#~ "To fill in the sign please see:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-#~ msgstr ""
-#~ "Denna applet är fullständigt bortkastad tid. Återgå till arbetet!\n"
-#~ "\n"
-#~ "För att fylla i skylten se:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-
-#~ msgid "User Load"
-#~ msgstr "Användarbelastning"
-
-#~ msgid "System Load"
-#~ msgstr "Systembelastning"
-
-#, fuzzy
-#~ msgid "1.0pre1"
-#~ msgstr "1.0"
-
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Återladda bilden"
-
-#, fuzzy
-#~ msgid "GTicker Article List"
-#~ msgstr "Återladda bilden"
-
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "kunde inte skapa användarkatalog: %s\n"
-
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Bildfil"
-
-#~ msgid "Copyright (C)1998 M.Watson"
-#~ msgstr "Upphovsrättigheter (C)1998 M.Watson"
-
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "Misslykades hämta skrivbordsegenskap."
-
-#, fuzzy
-#~ msgid "Config"
-#~ msgstr "Inställning"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Special Prefixes"
-#~ msgstr "Specialfiler"
-
-#~ msgid "Background Properties"
-#~ msgstr "Bakgrundsegenskaper"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Högtalaregenskaper"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Tangentbordsegenskaper"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Musegenskaper"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Egenskaper för GNOMEs utseende och känsla"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Sätt parametrar från det lagrade läget och avsluta"
-
-#~ msgid "Flat"
-#~ msgstr "Platt"
-
-#~ msgid "Gradient"
-#~ msgstr "Gradient"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Bakgrundsval"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Bakgrund"
-
-#~ msgid " Browse... "
-#~ msgstr " Bläddra... "
-
-#~ msgid "Scaled"
-#~ msgstr "Skalad"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Skalad (behåll höjd/bredd-förhållandet)"
-
-#~ msgid "Centered"
-#~ msgstr "Centrerad"
-
-#~ msgid "Tiled"
-#~ msgstr "Sida-vid-sida"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMAGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Sätter bakgrunden till det specificerade värdet"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Specificerar bakgrundsfärgen"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Specificerar bakgrundsfärgen för gradienten"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENT"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Graderingsriktning: vertikal eller horisontell?"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Använd solid bakgrundsfärg"
-
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Avänd gradient ifylld bakgrund"
-
-#~ msgid "MODE"
-#~ msgstr "LÄGE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
-
-#~ msgid "Sound"
-#~ msgstr "Ljud"
-
-#~ msgid "Volume"
-#~ msgstr "Volym"
-
-#~ msgid "Pitch"
-#~ msgstr "Tonläge"
-
-#~ msgid "Duration"
-#~ msgstr "Längd"
-
-#~ msgid "Test"
-#~ msgstr "Test"
-
-#~ msgid "Bell"
-#~ msgstr "Inbyggdhögtalare"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-repetering"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Slå på auto-repetering"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Repeteringshastighet"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Väntetid för repetering"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Tangentbordsklick"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klicka vid tangentnedslag"
-
-#~ msgid "Click volume"
-#~ msgstr "Klickvolym"
-
-#~ msgid "Keyboard"
-#~ msgstr "Tangentbord"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Musknappar"
-
-#~ msgid "Left handed"
-#~ msgstr "Vänsterhänt"
-
-#~ msgid "Right handed"
-#~ msgstr "Högerhänt"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Musrörelse"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleration"
-
-#~ msgid "Fast"
-#~ msgstr "Fort"
-
-#~ msgid "Slow"
-#~ msgstr "Långsamt"
-
-#~ msgid "Large"
-#~ msgstr "Stor"
-
-#~ msgid "Small"
-#~ msgstr "Liten"
-
-#~ msgid "Mouse"
-#~ msgstr "Mus"
-
-#~ msgid "Default Gtk setting [FIXME - Describe this better]"
-#~ msgstr "Standard GTK inställningar [FIXAMIG - Bättre beskrivning]"
-
-#~ msgid "Spread buttons out"
-#~ msgstr "Spridut knappar"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Lägg kanppar på kanterna"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Vänsterjustera knappar"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Högerjustera knappar"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "Låt fönsterhanteraren bestämma"
-
-#~ msgid "Center of the screen"
-#~ msgstr "Skärmens mitt"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Vid musmarkören"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Dialogrutor är som andra fönster"
-
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Knappar i dialogrutan"
-
-#~ msgid "Dialog position"
-#~ msgstr "Dialogrutansposition"
-
-#~ msgid "Dialog hints"
-#~ msgstr "Tips för dialogrutans placering"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Platsera dialogrutor över programfönstret när det är möjligt"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialogrutor"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Menylister är löstagbara"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have flat look"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have line separators"
-#~ msgstr "Verktygslister är löstagbara"
-
-#, fuzzy
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Verktygslister är löstagbara"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "Statuslisten är inaktiv när det är möjligt"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Knappar i dialogrutan"
-
-#~ msgid "Application"
-#~ msgstr "Applikation"
-
-#~ msgid "File name:"
-#~ msgstr "Filnamn:"
-
-#, fuzzy
-#~ msgid "_Quit"
-#~ msgstr "Avsluta"
-
-#, fuzzy
-#~ msgid "_Sort Folder"
-#~ msgstr " Folder "
-
-#, fuzzy
-#~ msgid "_About..."
-#~ msgstr "Om..."
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "Spara "
-
-#, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "Spara "
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Stäng"
-
-#~ msgid "Close window"
-#~ msgstr "Stäng fönster"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Avsluta"
-
-#~ msgid "Exit all windows"
-#~ msgstr "Stäng alla fönster"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "Om"
-
-#~ msgid "Info about this program"
-#~ msgstr "Info om detta programmet"
-
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Acceleration"
-
-#, fuzzy
-#~ msgid "Help & About..."
-#~ msgstr "Om..."
-
-#, fuzzy
-#~ msgid "Cached Memory"
-#~ msgstr "Storlek på cache"
-
-#, fuzzy
-#~ msgid "MemLoad Settings"
-#~ msgstr "Inställningar för processorbelastning"
-
-#~ msgid "Configure"
-#~ msgstr "Inställning"
-
-#~ msgid "File"
-#~ msgstr "Arkiv"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Göm uttryckligen"
-
-#~ msgid "South East"
-#~ msgstr "Sydöst"
-
-#~ msgid "Log Out"
-#~ msgstr "Logga ut"
-
-#, fuzzy
-#~ msgid "Repeat Delay"
-#~ msgstr "Väntetid för repetering"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Animationsvärden"
-
-#, fuzzy
-#~ msgid "Preview"
-#~ msgstr "Enhet"
-
-#, fuzzy
-#~ msgid "About:"
-#~ msgstr "Om"
-
-#, fuzzy
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Diskanvändnings inställningar"
-
-#, fuzzy
-#~ msgid "Start After "
-#~ msgstr "Starta i skrivarläge"
-
-#, fuzzy
-#~ msgid "Low "
-#~ msgstr "Låg."
-
-#, fuzzy
-#~ msgid "Desktop Manager"
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Skrivbordsbläddrarapplet"
-
-#, fuzzy
-#~ msgid "_Help with GNOME..."
-#~ msgstr "Om..."
-
-#, fuzzy
-#~ msgid "XID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "Rörelse"
-
-#, fuzzy
-#~ msgid "Enable sounds for events"
-#~ msgstr "Slå på auto-repetering"
-
-#, fuzzy
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr "Auto-repetering"
-
-#, fuzzy
-#~ msgid "Theme Information"
-#~ msgstr "Filformat"
-
-#~ msgid "John Ellis (gqview@geocities.com)"
-#~ msgstr "John Ellis (gqview@geocities.com)"
-
-#~ msgid "Can't allocate memory for color\n"
-#~ msgstr "Kan inte allokera minne till färger\n"
-
-#~ msgid "Name"
-#~ msgstr "Namn"
-
-#~ msgid "Start in clock mode"
-#~ msgstr "Starta i klockläge"
-
-#~ msgid "Start in mailcheck mode"
-#~ msgstr "Starta i postkontrollläge"
-
-#~ msgid "Garrett Smith <gsmith@serv.net>"
-#~ msgstr "Garrett Smith <gsmith@serv.net>"
-
-#~ msgid "[SESSION]"
-#~ msgstr "[SESSION]"
-
-#~ msgid "Programs to invoke at session startup:"
-#~ msgstr "Program att köra vid sessionsstart:"
-
-#~ msgid "[URL]"
-#~ msgstr "[URL]"
-
-#~ msgid "Height (optional)"
-#~ msgstr "Höjd (valfri)"
+msgstr "Höjd"
