@@ -18,7 +18,8 @@ static gchar *contributors[] = {
 	"Shawn T. Amundson",
 	"Erik Andersen",
 	"Jon Anhold",
-	"Shooby Ban",
+	/* for languages that can't display atilde, replace 'á' with 'a' */
+	_("Szabolcs 'Shooby' Bán"),
 	"Martin Baulig",
 	"Tom Bech",
 	"Andreas Beck",
