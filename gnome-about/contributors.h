@@ -246,7 +246,7 @@ static gchar *contributors[] = {
 	 * of 'Inigo' */
 	N_("Inigo Serna"),
 	"Shaleh",
-	"Joe \"Harold\" Shaw",
+	"Joe Shaw",
 	"Alejandro Aguilar Sierra",
 	N_("Miroslav Silovic"),
 	"Manish Singh",
