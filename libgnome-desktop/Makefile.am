@@ -7,6 +7,7 @@ INCLUDES =							\
 	-DGNOME_DESKTOP_ICONDIR=\""$(datadir)/icons"\"		\
 	-DGNOME_CORE_INTERNAL					\
 	$(WARN_CFLAGS)						\
+	$(DISABLE_DEPRECATED_CFLAGS)				\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la
