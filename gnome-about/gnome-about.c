@@ -685,6 +685,7 @@ get_description_messages (xmlNodePtr node)
 				cur = xmlNodeGetLang (paras);
 
 				tmp = strip_newlines (value);
+
 				if (!started) {
 					started = TRUE;
 					if (!cur) {
@@ -725,9 +726,11 @@ get_description_messages (xmlNodePtr node)
 				}
 				g_free (tmp);
 				xmlFree (cur);
+				xmlFree (best);
 			}
 
 			paras = paras->next;
+			xmlFree (value);
 		}
 		list = g_slist_prepend (list, best_value);
 		started = FALSE;
@@ -742,6 +745,7 @@ get_description_messages (xmlNodePtr node)
 
 	introduction_messages[i] = NULL;
 
+	g_free (best_value);
 	g_slist_free (list);
 }
 
@@ -827,6 +831,7 @@ display_version_info (GnomeCanvasGroup *group)
 			build_date_string = create_date_string (value);
 
 		bits = bits->next;
+		xmlFree (value);
 	}
 
 	xmlFreeDoc (about);
