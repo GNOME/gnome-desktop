@@ -43,6 +43,7 @@
 #undef KDE_DOCDIR
 
 #undef HAVE_ZVT_TERM_RESET
+#undef HAVE_ZVT_DEL_IS_DEL
 
 #undef HAVE_HOSTS_ACCESS
 

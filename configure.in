@@ -356,11 +356,12 @@ AC_SUBST(RES_LIBS)
 LIBS="$oLIBS"
 
 dnl
-dnl Check for zvt_term_reset
+dnl Check for zvt_term_reset and del_is_del
 dnl
 oLIBS="$LIBS"
 LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR $ZVT_LIBS"
 AC_CHECK_FUNC(zvt_term_reset,[AC_DEFINE(HAVE_ZVT_TERM_RESET)])
+AC_CHECK_FUNC(zvt_term_set_del_is_del,[AC_DEFINE(HAVE_ZVT_DEL_IS_DEL)])
 LIBS="$oLIBS"
 
 dnl
