@@ -12,6 +12,8 @@
 #undef PACKAGE
 #undef VERSION
 
+#undef HAVE_LIBESD
+
 #undef HAVE_LIBGTOP
 
 /* Define if LibGTop has support for multiple processors. */
