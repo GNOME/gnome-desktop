@@ -90,6 +90,7 @@ typedef struct _GnomeDesktopItem GnomeDesktopItem;
 #define GNOME_DESKTOP_ITEM_UNMOUNT_ICON "UnmountIcon" /* string */
 #define GNOME_DESKTOP_ITEM_SORT_ORDER	"SortOrder" /* strings */
 #define GNOME_DESKTOP_ITEM_URL		"URL" /* string */
+#define GNOME_DESKTOP_ITEM_DOC_PATH	"DocPath" /* string */
 
 /* The vfolder proposal */
 #define GNOME_DESKTOP_ITEM_CATEGORIES	"Categories" /* string */

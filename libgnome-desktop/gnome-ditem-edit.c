@@ -422,20 +422,6 @@ translations_select_row (GtkTreeSelection *selection,
         g_free (name);
 }
 
-static int 
-count_rows (GtkTreeModel *model)
-{
-        GtkTreeIter iter;
-        int         rows = 0;
-
-        gtk_tree_model_get_iter_root (model, &iter);
-
-        while (gtk_tree_model_iter_next (model, &iter))
-             rows++;
-
-        return rows;
-}
-
 static void
 translations_add (GtkWidget      *button,
 		  GnomeDItemEdit *dee)
@@ -448,6 +434,7 @@ translations_add (GtkWidget      *button,
 	const char   *name;
 	const char   *comment;
 	char         *lang;
+	gboolean      ret;
 
 	tmp     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
 	name    = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_name_entry));
@@ -478,8 +465,8 @@ translations_add (GtkWidget      *button,
 	tree  = GTK_TREE_VIEW (dee->_priv->translations);
 	model = gtk_tree_view_get_model (tree);
 
-	gtk_tree_model_get_iter_root (model, &iter);
-        do {
+	ret = gtk_tree_model_get_iter_first (model, &iter);
+        while (ret) {
 		char *string;
 
 		gtk_tree_model_get (model, &iter, 0, &string, -1);
@@ -499,7 +486,8 @@ translations_add (GtkWidget      *button,
 
 		g_free (string);
 
-	} while (gtk_tree_model_iter_next (model, &iter));
+		ret = gtk_tree_model_iter_next (model, &iter);
+	}
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (
@@ -870,121 +858,117 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 static const char *
 get_language (void)
 {
-	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
-	while (list != NULL) {
-		const char *lang = list->data;
-		/* find first without encoding */
-		if (strchr (lang, '.') == NULL)
-			return lang;
-	}
+	const GList *list;
+	const GList *l;
+
+	list = gnome_i18n_get_language_list ("LC_MESSAGES");
+
+	for (l = list; l; l = l->next)
+		if (!strchr (l->data, '.'))
+			return (char *) l->data;
+
 	return NULL;
 }
 
-/* Conform ditem to display */
 static void
 gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 {
-        const gchar * text;
-        gchar *file;
 	GnomeDesktopItem *ditem;
-        int i,number_of_rows = 0; 
-        GtkTreeView *view;
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+	const char       *type;
+	const char       *uri;
+	const char       *attr;
+	char             *file;
+	gboolean          ret;
 
-        GtkTreeModel *model;
-        GtkTreeIter iter;
+	g_return_if_fail (dee != NULL);
+	g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
-        g_return_if_fail (dee != NULL);
-        g_return_if_fail (GNOME_IS_DITEM_EDIT(dee));
+	if (!dee->_priv->ditem)
+		dee->_priv->ditem = gnome_desktop_item_new ();
 
 	ditem = dee->_priv->ditem;
 
-	if (ditem == NULL) {
-		ditem = gnome_desktop_item_new ();
-		dee->_priv->ditem = ditem;
-	}
+	uri = gtk_entry_get_text (GTK_ENTRY (dee->_priv->exec_entry));
 
-        text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->_priv->type_combo)->entry));
-        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, text);
+	type = gtk_entry_get_text (
+			GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
+	gnome_desktop_item_set_string (
+			ditem, GNOME_DESKTOP_ITEM_TYPE, type);
 
 	/* hack really */
-	if (text != NULL &&
-	    strcmp (text, "Link") == 0) {
-		text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
-		gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_URL, text);
-	} else {
-		text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
-		gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_EXEC, text);
-	}
+	if (type && !strcmp (type, "Link"))
+		attr = GNOME_DESKTOP_ITEM_URL;
+	else
+		attr  = GNOME_DESKTOP_ITEM_EXEC;
 
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->tryexec_entry));
-        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TRY_EXEC, text);
+	gnome_desktop_item_set_string (ditem, attr, uri);
+
+	gnome_desktop_item_set_string (
+		ditem, GNOME_DESKTOP_ITEM_TRY_EXEC,
+		gtk_entry_get_text (GTK_ENTRY (dee->_priv->tryexec_entry)));
   
-	file = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry));
-        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_ICON, file);
+	file = gnome_icon_entry_get_filename (
+			GNOME_ICON_ENTRY (dee->_priv->icon_entry));
+	gnome_desktop_item_set_string (
+			ditem, GNOME_DESKTOP_ITEM_ICON, file);
 	g_free (file);
 
-        text = gtk_entry_get_text (GTK_ENTRY (dee->_priv->doc_entry));
-        gnome_desktop_item_set_string (ditem, "DocPath", text);
+	gnome_desktop_item_set_string (
+			ditem, GNOME_DESKTOP_ITEM_DOC_PATH,
+			gtk_entry_get_text (GTK_ENTRY (dee->_priv->doc_entry)));
 
-        if (GTK_TOGGLE_BUTTON (dee->_priv->terminal_button)->active)
-		gnome_desktop_item_set_boolean (ditem,
-						GNOME_DESKTOP_ITEM_TERMINAL,
-						TRUE);
-        else
-		gnome_desktop_item_set_boolean (ditem,
-						GNOME_DESKTOP_ITEM_TERMINAL,
-						FALSE);
+	gnome_desktop_item_set_boolean (
+			ditem, GNOME_DESKTOP_ITEM_TERMINAL,
+			GTK_TOGGLE_BUTTON (dee->_priv->terminal_button)->active);
 
-	gnome_desktop_item_clear_localestring (ditem,
-					       GNOME_DESKTOP_ITEM_NAME);
-	gnome_desktop_item_clear_localestring (ditem,
-					       GNOME_DESKTOP_ITEM_COMMENT);
-        view = GTK_TREE_VIEW (dee->_priv->translations);
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
-        number_of_rows = count_rows (model);	
-        gtk_tree_model_get_iter_root (model, &iter);
-        for (i = 0; i < number_of_rows; i++) {
-                char *lang, *name, *comment;
-                GValue value = {0, };
+	gnome_desktop_item_clear_localestring (
+			ditem, GNOME_DESKTOP_ITEM_NAME);
+	gnome_desktop_item_clear_localestring (
+			ditem, GNOME_DESKTOP_ITEM_COMMENT);
 
-                gtk_tree_model_get_value (model,&iter,0, &value);
-                lang = g_strdup (g_value_get_string (&value));
+	model = gtk_tree_view_get_model (
+			GTK_TREE_VIEW (dee->_priv->translations));
 
-                gtk_tree_model_get_value (model,&iter,1, &value); 
-                name = g_strdup (g_value_get_string (&value));;
+	ret = gtk_tree_model_get_iter_first (model, &iter);
+	while (ret) {
+		char *lang;
+		char *name;
+		char *comment;
 
-                gtk_tree_model_get_value (model,&iter,2, &value);
-                comment = g_strdup (g_value_get_string (&value));;
-                g_value_unset (&value);
+		gtk_tree_model_get (
+			model, &iter, 0, &lang, 1, &name, 2, &comment, -1);
 
-                if(!name && !comment){
-                        g_free (lang);
-                        continue;
-                }
-                if (lang == NULL)
-                        lang = g_strdup(get_language());
+		if (!name && !comment) {
+			g_free (lang);
+			ret = gtk_tree_model_iter_next (model, &iter);
+			continue;
+		}
 
-                g_assert (lang != NULL);
-                
-                gnome_desktop_item_set_localestring_lang
-			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, name);
-                gnome_desktop_item_set_localestring_lang
-			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, comment);
+		if (!lang)
+			lang = g_strdup (get_language ());
 
-                g_free (name);
-                g_free (comment);
-                g_free (lang);
-                gtk_tree_model_iter_next (model, &iter);
-        }
+		gnome_desktop_item_set_localestring_lang (
+			ditem, GNOME_DESKTOP_ITEM_NAME, lang, name);
+		gnome_desktop_item_set_localestring_lang (
+			ditem, GNOME_DESKTOP_ITEM_COMMENT, lang, comment);
+		
+		g_free (name);
+		g_free (comment);
+		g_free (lang);
 
-	/* This always overrides the above in case of conflict */
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->name_entry));
-        gnome_desktop_item_set_localestring (ditem, GNOME_DESKTOP_ITEM_NAME, text);
+		ret = gtk_tree_model_iter_next (model, &iter);
+	}
 
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->comment_entry));
-        gnome_desktop_item_set_localestring (ditem, GNOME_DESKTOP_ITEM_COMMENT, text);
+	gnome_desktop_item_set_localestring (
+			ditem, GNOME_DESKTOP_ITEM_NAME,
+			gtk_entry_get_text (GTK_ENTRY(dee->_priv->name_entry)));
 
-	/* ui not dirty any more, we just synced it */
+	gnome_desktop_item_set_localestring (
+			ditem, GNOME_DESKTOP_ITEM_COMMENT,
+			gtk_entry_get_text (GTK_ENTRY(dee->_priv->comment_entry)));
+			
 	dee->_priv->ui_dirty = FALSE;
 }
 
@@ -1011,16 +995,18 @@ gnome_ditem_edit_load_uri (GnomeDItemEdit *dee,
 
         newentry = gnome_desktop_item_new_from_uri (uri, 0, error);
 
-        if (newentry != NULL) {
-		if (dee->_priv->ditem != NULL)
-			gnome_desktop_item_unref (dee->_priv->ditem);
-		dee->_priv->ditem = newentry;
-		dee->_priv->ui_dirty = TRUE;
-                gnome_ditem_edit_sync_display (dee);
-		return TRUE;
-        } else {
-                return FALSE;
-        }
+        if (!newentry)
+		return FALSE;
+
+	if (dee->_priv->ditem)
+		gnome_desktop_item_unref (dee->_priv->ditem);
+
+	dee->_priv->ditem = newentry;
+	dee->_priv->ui_dirty = TRUE;
+
+	gnome_ditem_edit_sync_display (dee);
+
+	return TRUE;
 }
 
 /**
@@ -1043,10 +1029,12 @@ gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
         g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
         g_return_if_fail (ditem != NULL);
 
-	if (dee->_priv->ditem != NULL)
+	if (dee->_priv->ditem)
 		gnome_desktop_item_unref (dee->_priv->ditem);
+
 	dee->_priv->ditem = gnome_desktop_item_copy (ditem);
 	dee->_priv->ui_dirty = TRUE;
+
         gnome_ditem_edit_sync_display (dee);
 }
 
@@ -1067,12 +1055,14 @@ gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
         g_return_val_if_fail (dee != NULL, NULL);
         g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), NULL);
 
-	if (dee->_priv->ditem == NULL) {
+	if (!dee->_priv->ditem) {
 		dee->_priv->ditem = gnome_desktop_item_new ();
 		dee->_priv->ui_dirty = TRUE;
 	}
+
 	if (dee->_priv->ui_dirty)
 		gnome_ditem_edit_sync_ditem (dee);
+
 	return dee->_priv->ditem;
 }
 
