@@ -91,9 +91,11 @@ enum {
 static gint ditem_edit_signals[LAST_SIGNAL] = { 0 };
 
 /* The following defines the get_type */
+
 GNOME_CLASS_BOILERPLATE (GnomeDItemEdit, gnome_ditem_edit,
-			 GtkNotebook, gtk_notebook,
-			 GTK_TYPE_NOTEBOOK)
+			 GtkNotebook, GTK_TYPE_NOTEBOOK)
+
+
 
 static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
@@ -531,7 +533,7 @@ gnome_ditem_edit_destroy (GtkObject *object)
 		gnome_desktop_item_unref (de->_priv->ditem);
 	de->_priv->ditem = NULL; /* just for sanity */
 
-	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -547,7 +549,7 @@ gnome_ditem_edit_finalize (GObject *object)
 	g_free(de->_priv);
 	de->_priv = NULL;
 
-	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 /* set sensitive for directory/other type of a ditem */

@@ -60,8 +60,7 @@ static void gnome_hint_notify (GObject *object, GParamSpec *pspec);
 static void gnome_hint_finalize (GObject *object);
 static void dialog_button_clicked(GtkWindow *window, int button, gpointer data);static void checkbutton_clicked(GtkWidget *w, gpointer data);
 
-GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GnomeDialog,
-			 gnome_dialog, GNOME_TYPE_DIALOG)
+GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GnomeDialog, GNOME_TYPE_DIALOG)
 
 static void
 gnome_hint_class_init (GnomeHintClass *klass) {
@@ -145,7 +144,7 @@ gnome_hint_finalize (GObject *object) {
   g_free (gnome_hint->_priv);
   gnome_hint->_priv = NULL;
 
-  GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
+  GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
