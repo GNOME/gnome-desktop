@@ -30,6 +30,7 @@ BITMAPS     = \
 	gnome-gemvt.png				\
 	gnome-gegl.png				\
 	gnome-gegl2.png				\
+	gnome-gegl2-2.png			\
 	gnome-gimp.png				\
 	gnome-globe.png				\
 	gnome-gmenu.png				\
