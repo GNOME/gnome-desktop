@@ -61,17 +61,18 @@ INSTOBJEXT = @INSTOBJEXT@
 .c.o:
 	$(COMPILE) $<
 
-%.pox: %.po $(srcdir)/$(PACKAGE).pot
+.po.pox:
+	$(MAKE) $(PACKAGE).pot
 	$(MSGMERGE) $< $(srcdir)/$(PACKAGE).pot -o $*.pox
 
-%.mo: %.po
+.po.mo:
 	$(MSGFMT) -o $@ $<
 
-%.gmo: %.po
+.po.gmo:
 	file=$(srcdir)/`echo $* | sed 's,.*/,,'`.gmo \
 	  && rm -f $$file && $(GMSGFMT) -o $$file $<
 
-%.cat: %.po
+.po.cat:
 	sed -f ../intl/po2msg.sed < $< > $*.msg \
 	  && rm -f $@ && $(GENCAT) $@ $*.msg
 
@@ -90,7 +91,7 @@ $(srcdir)/$(PACKAGE).pot: $(POTFILES)
 		&& mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot )
 
 $(srcdir)/cat-id-tbl.c: stamp-cat-id; @:
-$(srcdir)/stamp-cat-id: $(srcdir)/$(PACKAGE).pot
+$(srcdir)/stamp-cat-id: $(PACKAGE).pot
 	rm -f cat-id-tbl.tmp
 	sed -f ../intl/po2tbl.sed $(srcdir)/$(PACKAGE).pot \
 		| sed -e "s/@PACKAGE NAME@/$(PACKAGE)/" > cat-id-tbl.tmp
@@ -205,7 +206,8 @@ dist distdir: update-po $(DISTFILES)
 	    || cp -p $(srcdir)/$$file $(distdir); \
 	done
 
-update-po: Makefile $(srcdir)/$(PACKAGE).pot
+update-po: Makefile
+	$(MAKE) $(PACKAGE).pot
 	PATH=`pwd`/../src:$$PATH; \
 	cd $(srcdir); \
 	catalogs='$(CATALOGS)'; \
