@@ -8,7 +8,7 @@ Order_DATA = \
 	Root.order \
 	Settings.order
 
-Directory_DATA = \
+Directory_in_files = \
 	Root.directory		\
 	Accessories.directory   \
 	Applications.directory	\
@@ -22,7 +22,10 @@ Directory_DATA = \
 	Office.directory	\
 	Settings.directory
 
-Desktop_DATA = \
+Directory_DATA = $(Directory_in_files:.directory.in=.directory)
+@INTLTOOL_DIRECTORY_RULE@
+
+Desktop_in_files = \
 	Xemacs.desktop		\
 	rxvt.desktop		\
 	Emacs.desktop		\
@@ -30,4 +33,7 @@ Desktop_DATA = \
 	xterm.desktop		\
 	Netscape.desktop
 
-EXTRA_DIST = $(Desktop_DATA) $(Directory_DATA) $(Order_DATA)
+Desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
+EXTRA_DIST = $(Desktop_in_files) $(Directory_DATA) $(Order_DATA)
