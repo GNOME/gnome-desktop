@@ -32,6 +32,18 @@ typedef struct DirEntry {
 	GSList *subvalues;
 } DirEntry;
 
+typedef struct Section {
+	char *name;
+
+	DirEntry root;
+} Section;
+
+typedef struct Directory {
+	char *path;
+
+	GSList *sections;
+} Directory;
+
 struct _BonoboConfigDItem {
 	BonoboConfigDatabase      base;
 

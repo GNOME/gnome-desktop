@@ -41,27 +41,11 @@ enum {
 	KeyValue
 };
 
-typedef struct {
-	int type;
-	void *value;
-} iterator_type;
-
-typedef enum {
-	LOOKUP,
-	SET
-} access_type;
-
-typedef struct TSecHeader {
-	char *section_name;
-	DirEntry entry;
-	struct TSecHeader *link;
-} TSecHeader;
-
 struct _BonoboConfigDItemPrivate {
 	guint                 time_id;
 	gboolean              modified;
 
-	TSecHeader           *dir;
+	Directory            *dir;
 
 	BonoboEventSource    *es;
 };
@@ -142,7 +126,7 @@ key_compare_func (gconstpointer a, gconstpointer b)
 }
 
 static DirEntry *
-insert_key_maybe_localized (DirEntry *parent_entry, gchar *key)
+insert_key_maybe_localized (Section *section, gchar *key)
 {
 	gchar *a, *b, *locale = NULL;
 	DirEntry *de = NULL;
@@ -152,7 +136,7 @@ insert_key_maybe_localized (DirEntry *parent_entry, gchar *key)
 	b = strrchr (key, ']');
 	if ((a != NULL) && (b != NULL)) {
 		*a++ = '\0'; *b = '\0'; locale = a;
-		l = g_slist_find_custom (parent_entry->subvalues, key, key_compare_func);
+		l = g_slist_find_custom (section->root.subvalues, key, key_compare_func);
 	}
 	de = g_new0 (DirEntry, 1);
 
@@ -160,28 +144,32 @@ insert_key_maybe_localized (DirEntry *parent_entry, gchar *key)
 		DirEntry *parent = (DirEntry *) l->data;
 
 		de->name = g_strdup (locale);
-		parent->subvalues = g_slist_prepend (parent->subvalues, de);
+		parent->subvalues = g_slist_append (parent->subvalues, de);
 	} else {
 		de->name = g_strdup (key);
-		parent_entry->subvalues = g_slist_prepend (parent_entry->subvalues, de);
+		section->root.subvalues = g_slist_append (section->root.subvalues, de);
 	}
 
 	return de;
 }
 
-static TSecHeader *
+static Directory *
 load (const char *file)
 {
 	FILE *f;
 	int state;
 	DirEntry *Key = 0;
-	TSecHeader *SecHeader = 0;
+	Directory *dir = 0;
+	Section *section = 0;
 	char CharBuffer [STRSIZE];
 	char *next = "";		/* Not needed */
 	int c;
 	
 	if ((f = fopen (file, "r"))==NULL)
 		return NULL;
+
+	dir = g_new0 (Directory, 1);
+	dir->path = g_strdup (file);
 	
 	state = FirstBrace;
 	while ((c = getc_unlocked (f)) != EOF){
@@ -194,7 +182,7 @@ load (const char *file)
 			if (c == ']' || overflow){
 				*next = '\0';
 				next = CharBuffer;
-				SecHeader->section_name = g_strdup (CharBuffer);
+				section->name = g_strdup (CharBuffer);
 				state = IgnoreToEOL;
 			} else
 				*next++ = c;
@@ -223,11 +211,8 @@ load (const char *file)
 			}
 
 			if (c == '[' && state != KeyDefOnKey){
-				TSecHeader *temp;
-		
-				temp = SecHeader;
-				SecHeader = (TSecHeader *) g_malloc (sizeof (TSecHeader));
-				SecHeader->link = temp;
+				section = g_new0 (Section, 1);
+				dir->sections = g_slist_append (dir->sections, section);
 				state = OnSecHeader;
 				next = CharBuffer;
 				Key = 0;
@@ -249,7 +234,7 @@ load (const char *file)
 			if (c == '=' || overflow){
 				*next = '\0';
 
-				Key = insert_key_maybe_localized (&SecHeader->entry, CharBuffer);
+				Key = insert_key_maybe_localized (section, CharBuffer);
 				state = KeyValue;
 				next = CharBuffer;
 			} else {
@@ -278,7 +263,8 @@ load (const char *file)
 		Key->value = decode_string_and_dup (CharBuffer);
 	}
 	fclose (f);
-	return SecHeader;
+
+	return dir;
 }
 
 static void
@@ -298,34 +284,35 @@ dump_subkeys (FILE *f, DirEntry *de)
 }
 
 static void
-dump_keys (FILE *f, DirEntry *de)
+dump_key (FILE *f, DirEntry *de)
 {
-	GSList *c;
+	if (de->value) {
+		gchar *t = escape_string_and_dup (de->value);
 
-	for (c = de->subvalues; c; c = c->next) {
-		DirEntry *subentry = c->data;
-
-		if (subentry->value) {
-			gchar *t = escape_string_and_dup (subentry->value);
-
-			fprintf (f, "%s=%s\n", subentry->name, subentry->value);
-		}
-
-		if (subentry->subvalues)
-			dump_subkeys (f, subentry);
+		fprintf (f, "%s=%s\n", de->name, de->value);
 	}
+
+	if (de->subvalues)
+		dump_subkeys (f, de);
 }
 
 static void 
-dump_section (FILE *f, TSecHeader *p)
+dump_section (FILE *f, Section *section)
 {
-	fprintf (f, "\n[%s]\n", p->section_name);
-	dump_keys (f, &p->entry);
+	GSList *l;
+
+	fprintf (f, "\n[%s]\n", section->name);
+	for (l = section->root.subvalues; l; l = l->next) {
+		DirEntry *de = l->data;
+
+		dump_key (f, de);
+	}
 }
 
 static gboolean
-save (const char *file_name, TSecHeader *dir)
+save (const char *file_name, Directory *dir)
 {
+	GSList *l;
 	FILE *f;
 	
 	if ((f = fopen (file_name, "w"))==NULL)
@@ -333,32 +320,29 @@ save (const char *file_name, TSecHeader *dir)
 
 	g_message (G_STRLOC ": |%s|", file_name);
 
-	while (dir) {
-		dump_section (f, dir);
-		dir = dir->link;
+	for (l = dir->sections; l; l = l->next) {
+		Section *section = l->data;
+
+		dump_section (f, section);
 	}
-	
+
 	fclose (f);
 	return TRUE;
 }
 
 static DirEntry *
-dir_lookup_entry (TSecHeader *dir,
+dir_lookup_entry (Section    *section,
 		  char       *name,
 		  gboolean    create)
 {
 	GSList *l;
 	DirEntry *de;
-	
-	l = dir->entry.subvalues;
 
-	while (l) {
+	for (l = section->root.subvalues; l; l = l->next) {
 		de = (DirEntry *)l->data;
 
 		if (!strcmp (de->name, name))
 			return de;
-		
-		l = l->next;
 	}
 
 #if 0
@@ -379,16 +363,19 @@ dir_lookup_entry (TSecHeader *dir,
 	return NULL;
 }
 
-static TSecHeader *
-dir_lookup_subdir (TSecHeader  *dir,
+static Section *
+dir_lookup_subdir (Directory   *dir,
 		   char        *name,
 		   gboolean     create)
 {
-	TSecHeader *dd;
-	
-	for (dd = dir; dd != NULL; dd = dd->link)
-		if (!strcmp (dd->section_name, name))
-			return dd;
+	GSList *l;
+
+	for (l = dir->sections; l; l = l->next) {
+		Section *section = l->data;
+
+		if (!strcmp (section->name, name))
+			return section;
+	}
 
 #if 0
 	if (create) {
@@ -408,20 +395,20 @@ dir_lookup_subdir (TSecHeader  *dir,
 	return NULL;
 }
 
-static TSecHeader *
-lookup_dir (TSecHeader *dir,
+static Section *
+lookup_dir (Directory  *dir,
 	    const char *path,
 	    gboolean    create)
 {
 	const char *s, *e;
+	Section *section;
 	char *name;
-	TSecHeader *dd = dir;
 	
 	s = path;
 	while (*s == '/') s++;
 	
 	if (*s == '\0')
-		return dir;
+		return NULL;
 
 	if ((e = strchr (s, '/')))
 		name = g_strndup (s, e - s);
@@ -433,9 +420,9 @@ lookup_dir (TSecHeader *dir,
 		return NULL;
 	}
 	
-	if ((dd = dir_lookup_subdir (dd, name, create))) {
+	if ((section = dir_lookup_subdir (dir, name, create))) {
 		g_free (name);
-		return dd;
+		return section;
 		
 	}
 
@@ -450,29 +437,29 @@ lookup_dir_entry (BonoboConfigDItem *ditem,
 	char       *dir_name;
 	char       *leaf_name;
 	DirEntry   *de;
-	TSecHeader *dd;
+	Section    *section;
 
 	if ((dir_name = bonobo_config_dir_name (key))) {
-		dd = lookup_dir (ditem->_priv->dir, dir_name, create);
+		section = lookup_dir (ditem->_priv->dir, dir_name, create);
 		
 		g_free (dir_name);
 
 	} else {
-		dd = lookup_dir (ditem->_priv->dir, key, create);
+		section = lookup_dir (ditem->_priv->dir, key, create);
 
-		if (dd)
-			return &dd->entry;
+		if (section)
+			return &section->root;
 		else
 			return NULL;
 	}
 
-	if (!dd)
+	if (!section)
 		return NULL;
 
 	if (!(leaf_name = bonobo_config_leaf_name (key)))
-		return &dd->entry;
+		return &section->root;
 
-	de = dir_lookup_entry (dd, leaf_name, create);
+	de = dir_lookup_entry (section, leaf_name, create);
 
 	g_free (leaf_name);
 
@@ -525,18 +512,17 @@ real_get_dirs (BonoboConfigDatabase *db,
 {
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	Bonobo_KeyList *key_list;
-	TSecHeader *dd, *c;
+	Section *section;
+	GSList *l;
 	int len;
 
 	key_list = Bonobo_KeyList__alloc ();
 	key_list->_length = 0;
 
-	if (!(dd = lookup_dir (ditem->_priv->dir, dir, FALSE)))
+	if (!(section = lookup_dir (ditem->_priv->dir, dir, FALSE)))
 		return key_list;
 
-	for (len = 0, c = dd; c != NULL; c = c->link, len++)
-		;
-
+	len = g_slist_length (section->root.subvalues);
 	if (!len)
 		return key_list;
 
@@ -544,9 +530,10 @@ real_get_dirs (BonoboConfigDatabase *db,
 	key_list->_buffer = CORBA_sequence_CORBA_string_allocbuf (len);
 	CORBA_sequence_set_release (key_list, TRUE); 
 	
-	for (c = dd; c != NULL; c = c->link) {
-		key_list->_buffer [key_list->_length] =
-			CORBA_string_dup (c->section_name);
+	for (l = section->root.subvalues; l; l = l->next) {
+		DirEntry *de = l->data;
+
+		key_list->_buffer [key_list->_length] = CORBA_string_dup (de->name);
 		key_list->_length++;
 	}
 
@@ -560,7 +547,7 @@ real_get_keys (BonoboConfigDatabase *db,
 {
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	Bonobo_KeyList *key_list;
-	TSecHeader *dd;
+	Section *section;
 	DirEntry *de;
 	GSList *l;
 	int i, len;
@@ -568,12 +555,10 @@ real_get_keys (BonoboConfigDatabase *db,
 	key_list = Bonobo_KeyList__alloc ();
 	key_list->_length = 0;
 
-	if (!(dd = lookup_dir (ditem->_priv->dir, dir, FALSE)))
+	if (!(section = lookup_dir (ditem->_priv->dir, dir, FALSE)))
 		return key_list;
 
-	if (!(len = g_slist_length (dd->entry.subvalues)))
-		return key_list;
-
+	len = g_slist_length (section->root.subvalues);
 	if (!len)
 		return key_list;
 
@@ -582,7 +567,7 @@ real_get_keys (BonoboConfigDatabase *db,
 	CORBA_sequence_set_release (key_list, TRUE); 
 	
 	i = 0;
-	for (l = dd->entry.subvalues; l != NULL; l = l->next) {
+	for (l = section->root.subvalues; l != NULL; l = l->next) {
 		de = (DirEntry *)l->data;
 	       
 		key_list->_buffer [i] = CORBA_string_dup (de->name);

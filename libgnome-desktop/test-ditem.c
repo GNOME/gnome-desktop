@@ -74,7 +74,7 @@ test_ditem (Bonobo_ConfigDatabase db)
 		g_print ("ATTRIBUTE: |%s|\n", attr);
 	}
 
-#if 0
+#if 1
 	gnome_desktop_item_set_name (ditem, "de", "Neu gesetzt!");
 
 	gnome_desktop_item_save (ditem, NULL);

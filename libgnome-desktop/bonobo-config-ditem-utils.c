@@ -241,6 +241,8 @@ case CORBA_tk_##k##: \
 			member_name = CORBA_TypeCode_member_name (type, i, ev);
 			member_type = CORBA_TypeCode_member_type (type, i, ev);
 
+			g_message (G_STRLOC ": |%s|", member_name);
+
 			if (CORBA_TypeCode_equal (member_type, TC_GNOME_ExtraAttributes, NULL)) {
 				GNOME_ExtraAttributes attr_list;
 				GSList *extra_attrs = NULL;
@@ -278,7 +280,7 @@ case CORBA_tk_##k##: \
 					else
 						pair->value._type = TC_null;
 
-					extra_attrs = g_slist_prepend (extra_attrs, pair);
+					extra_attrs = g_slist_append (extra_attrs, pair);
 
 					g_free (default_key);
 
@@ -456,7 +458,7 @@ case CORBA_tk_##k##: \
 					subentry->name = g_strdup (list->_buffer [j].name);
 					bonobo_config_ditem_encode_any (ditem, subentry, path,
 									&list->_buffer [j].value, ev);
-					de->subvalues = g_slist_prepend (de->subvalues, subentry);
+					de->subvalues = g_slist_append (de->subvalues, subentry);
 				}
 			} else {
 				subentry = g_new0 (DirEntry, 1);
@@ -464,7 +466,7 @@ case CORBA_tk_##k##: \
 
 				bonobo_config_ditem_encode_any (ditem, subentry, path, &pair->value, ev);
 
-				de->subvalues = g_slist_prepend (de->subvalues, subentry);
+				de->subvalues = g_slist_append (de->subvalues, subentry);
 			}
 		}
 
@@ -533,7 +535,7 @@ case CORBA_tk_##k##: \
 					subentry = g_new0 (DirEntry, 1);
 					subentry->name = g_strdup (localized->locale);
 					subentry->value = g_strdup (localized->text);
-					de->subvalues = g_slist_prepend (de->subvalues, subentry);
+					de->subvalues = g_slist_append (de->subvalues, subentry);
 				} else
 					de->value = g_strdup (localized->text);
 			} else {
@@ -542,7 +544,7 @@ case CORBA_tk_##k##: \
 				bonobo_config_ditem_encode_any (ditem, subentry, path,
 								dynany_anyseq->_buffer [i], ev);
 
-				de->subvalues = g_slist_prepend (de->subvalues, subentry);
+				de->subvalues = g_slist_append (de->subvalues, subentry);
 			}
 		}
 
