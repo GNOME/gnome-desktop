@@ -413,7 +413,7 @@ main (gint argc, gchar *argv[])
 			    TRUE, FALSE, 0);
 	
 	gtk_box_pack_start (GTK_BOX (vbox), hbox,
-			    TRUE, TRUE, 0);
+			    FALSE, TRUE, 0);
 
 	button_box = gtk_hbutton_box_new ();
 	gtk_box_pack_end (GTK_BOX (vbox), button_box,
