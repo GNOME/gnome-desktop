@@ -82,6 +82,7 @@ pixmap_DATA =					\
 	gnome-week.png				\
 	gnome-month.png				\
 	gnome-background-image.png		\
+	gnome-background-pattern.png		\
 	gnome-set-time.png
 
 EXTRA_DIST = $(pixmap_DATA)
