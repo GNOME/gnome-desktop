@@ -29,6 +29,7 @@ BITMAPS     = \
 	gnome-lockscreen.png			\
 	gnome-log.png				\
 	gnome-logo-icon.png			\
+	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
 	gnome-menu-down.png			\
 	gnome-menu-left.png			\
