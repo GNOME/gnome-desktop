@@ -28,6 +28,8 @@ BITMAPS     = \
 	gnome-irc.png				\
 	gnome-lockscreen.png			\
 	gnome-log.png				\
+	gnome-logo-icon.png			\
+	gnome-logo-large.png			\
 	gnome-menu-down.png			\
 	gnome-menu-left.png			\
 	gnome-menu-right.png			\
