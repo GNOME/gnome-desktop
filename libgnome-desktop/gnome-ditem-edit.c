@@ -818,7 +818,8 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
                            cs ? cs : "");
 
         cs = gnome_desktop_item_get_icon_path(ditem);
-        gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->_priv->icon_entry), cs);
+        gnome_selector_set_uri(GNOME_SELECTOR(dee->_priv->icon_entry),
+                               NULL, cs, NULL, NULL);
 
         cs = gnome_desktop_item_get_attribute(ditem, "DocPath"); /* FIXME check name */
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->doc_entry), 
@@ -911,7 +912,7 @@ gnome_ditem_edit_sync_ditem(GnomeDItemEdit *dee,
         gnome_desktop_item_set_type(ditem, text);
   
         gnome_desktop_item_set_icon_path(ditem,
-                                         gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->_priv->icon_entry)));
+                                         gnome_selector_get_uri(GNOME_SELECTOR(dee->_priv->icon_entry)));
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->doc_entry));
         gnome_desktop_item_set_attribute(ditem, "DocPath", text);
@@ -1097,7 +1098,8 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), "");  
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->doc_entry), "");
-        gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->_priv->icon_entry),"");
+        gnome_selector_set_uri(GNOME_SELECTOR(dee->_priv->icon_entry), NULL,
+                               "", NULL, NULL);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
@@ -1150,7 +1152,7 @@ gnome_ditem_edit_get_icon(GnomeDItemEdit *dee)
         g_return_val_if_fail(dee != NULL, NULL);
         g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
  
-        return gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->_priv->icon_entry));
+        return gnome_selector_get_uri(GNOME_SELECTOR(dee->_priv->icon_entry));
 }
 
 /**
