@@ -34,7 +34,7 @@ static author authors[] = {
 	{ "Christian Bucher", "" },
 	{ "Didier Carlier", "" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
-	{ "Chema Celorio", "<chema@celorio.com" },
+	{ "Chema Celorio", "<chema@celorio.com>" },
 	{ "Damon Chaplin", "" },
 	{ "Kevin Charter", "" },
 	{ "Kenneth Christiánsen", "<kenneth@ripen.dk>" },
