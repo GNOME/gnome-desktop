@@ -338,7 +338,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
 	dee->_priv->exec_label = label;
 
-	entry = gtk_entry_new ();
+	entry = gnome_file_entry_new ("command", _("Browse"));
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 3, 4);
  
 	g_signal_connect_object (entry, "changed",
@@ -916,7 +916,8 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 		cs = gnome_desktop_item_get_string (ditem,
 						    GNOME_DESKTOP_ITEM_EXEC);
 	}
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), cs ? cs : "");
+        gnome_file_entry_set_filename
+		(GNOME_FILE_ENTRY (dee->_priv->exec_entry), cs ? cs : "");
 
         cs = gnome_desktop_item_get_string (ditem,
 					    GNOME_DESKTOP_ITEM_TRY_EXEC);
@@ -993,6 +994,7 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	GnomeDesktopItem *ditem;
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
+	GtkWidget        *entry;
 	const char       *type;
 	const char       *uri;
 	const char       *attr;
@@ -1007,7 +1009,9 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 
 	ditem = dee->_priv->ditem;
 
-	uri = gtk_entry_get_text (GTK_ENTRY (dee->_priv->exec_entry));
+	entry = gnome_file_entry_gtk_entry
+		(GNOME_FILE_ENTRY (dee->_priv->exec_entry));
+	uri = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	type = gtk_entry_get_text (
 			GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
