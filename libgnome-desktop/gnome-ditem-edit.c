@@ -524,7 +524,7 @@ translations_add (GtkWidget      *button,
 	GtkTreeView  *tree;
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	const GList	 *langs;
+	const GList  *langs;
 	const char   *tmp;
 	const char   *name;
 	const char   *generic_name;
@@ -638,7 +638,7 @@ translations_remove (GtkWidget      *button,
 
         gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 	
-	  gnome_ditem_edit_changed (dee);
+	gnome_ditem_edit_changed (dee);
 }
 
 static GtkWidget *
@@ -986,9 +986,10 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
         gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
-	  for (li = i18n_list; li != NULL; li = li->next) {
+	for (li = i18n_list; li != NULL; li = li->next) {
                 const char *name, *comment, *generic_name;
                 const char *lang = li->data;
+
                 name = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_NAME, lang);
                 generic_name = gnome_desktop_item_get_localestring_lang
@@ -996,19 +997,18 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
                 comment = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_COMMENT, lang);
                 
-		    /* only include a language in the list if it 
-		     * has a useful translation
-		     */
-		    if (name != NULL || generic_name != NULL || comment != NULL)
-		    {
-			    gtk_list_store_append (GTK_LIST_STORE(model), &iter);
-      	          gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+		/* only include a language in the list if it 
+		 * has a useful translation
+		 */
+		if (name || generic_name || comment) {
+			gtk_list_store_append (GTK_LIST_STORE(model), &iter);
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 					    0, lang ? lang : "",
 					    1, name ? name : "",
 					    2, generic_name ? generic_name : "",
 					    3, comment ? comment : "",
 					    -1);
-		    }
+		}
         }
         g_list_free (i18n_list);
 
