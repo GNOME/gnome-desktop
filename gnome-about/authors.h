@@ -20,6 +20,7 @@ static author authors[] = {
 	{ "Miguel de Icaza", "<miguel@gnu.org>" },
 	{ "George Lebl", "<jirka@5z.com>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
+	{ "Michael Meeks", "<mmeeks@gnu.org>" },
 	{ "Elliot Lee", "<sopwith@redhat.com>" },
 	{ "Ian Main", "<slow@intergate.bc.ca>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
