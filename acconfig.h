@@ -13,6 +13,9 @@
 
 #undef HAVE_LIBGTOP
 
+/* Define if LibGTop has support for multiple processors. */
+#undef HAVE_LIBGTOP_SMP
+
 /* Define if there is no `u_int64_t' and `int64_t'. */
 #undef u_int64_t
 #undef int64_t
