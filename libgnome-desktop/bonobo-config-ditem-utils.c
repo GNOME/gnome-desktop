@@ -332,7 +332,7 @@ bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 		if (CORBA_TypeCode_equal (type, TC_GNOME_DesktopEntryType, NULL)) {
 			gchar *value, *up;
 
-			up = g_strup (de->value);
+			up = g_strup (g_strdup (de->value));
 			value = g_strdup_printf ("DESKTOP_ENTRY_TYPE_%s", up);
 			DynamicAny_DynEnum_set_as_string (dynenum, value, ev);
 			g_free (value); g_free (up);
