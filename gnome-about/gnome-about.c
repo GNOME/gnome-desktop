@@ -1,5 +1,6 @@
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include "authors.h"
 #include "logo.xpm"
 
@@ -406,6 +407,25 @@ cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 	return TRUE;
 }
 
+static gint
+get_max_width (void)
+{
+	int i;
+	int max_width = 0;
+	
+	i = 0;
+	while (authors[i].name) {
+		int totalwidth = gdk_string_width (font, authors[i].name);
+		if (authors[i].email)
+			totalwidth += 4 + gdk_string_width (italicfont, authors[i].email);
+		if (totalwidth > max_width)
+			max_width = totalwidth;
+		i++;
+	}
+
+	return max_width + 4;
+}
+
 gint
 main (gint argc, gchar *argv[])
 {
@@ -420,6 +440,7 @@ main (gint argc, gchar *argv[])
 	GtkWidget *frame;
 	GtkWidget *gtkpixmap;
 	GtkWidget *href;
+	int max_width;
 	
 	gnome_init ("gnome-about","1.0", argc, argv);
 
@@ -449,8 +470,9 @@ main (gint argc, gchar *argv[])
 	y_to_wrap_at = -(sizeof(authors)/sizeof(authors[0]))*
 	                (font->ascent+font->descent);
 
-	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask, NULL,
-					       logo_xpm);
+	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask,
+						    NULL,
+						    (char **)logo_xpm);
 	gtkpixmap = gtk_pixmap_new (logo_pixmap, logo_mask);
 
 	im = gdk_pixbuf_new_from_xpm_data (logo_xpm);
@@ -487,7 +509,9 @@ main (gint argc, gchar *argv[])
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), hbox);
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 	area = gtk_drawing_area_new ();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (area), 320, 160);
+	max_width = get_max_width();
+	gtk_drawing_area_size (GTK_DRAWING_AREA (area),
+			       max_width<320?320:max_width, 160);
 	gtk_widget_draw (area, NULL);
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
