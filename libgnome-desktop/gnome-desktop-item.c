@@ -1409,6 +1409,9 @@ do_percent_subst (const GnomeDesktopItem *item,
 		}
 		break;
 	default:
+		/* Maintain special characters - e.g. "%20" */
+		if (g_ascii_isdigit (arg [1])) 
+			g_string_append_c (str, '%');
 		return FALSE;
 		break;
 	}
