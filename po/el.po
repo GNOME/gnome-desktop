@@ -14,12 +14,13 @@
 # simos: 874 messages, 18Feb2001, (sgpbea)
 # simos: 897 messages, 01Mar2001, (regmtsgpbea)
 # simos: 959 messages, 04Jun2001, (micumple)
+# simos: 959 messages, 06Jun2001, (fixed minor typo)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.4.0.4\n"
-"POT-Creation-Date: 2001-06-04 17:57+0100\n"
-"PO-Revision-Date: 2001-06-04 17:26:51+0900\n"
+"POT-Creation-Date: 2001-06-06 21:50+0100\n"
+"PO-Revision-Date: 2001-06-06 20:52:20+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +54,44 @@ msgstr ""
 msgid "No panel found\n"
 msgstr "Δε βρέθηκε ταμπλώ\n"
 
-#: panel/gnome-panel-screenshot.c:98
+#: panel/gnome-panel-screenshot.c:117
+msgid ""
+"Unable to initialize png structure.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Αδύνατη η αρχικοποίηση της δομής png.\n"
+"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
+
+#: panel/gnome-panel-screenshot.c:125
+msgid ""
+"Unable to create png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Αδύνατη η δημιουργία πληροφοριών png.\n"
+"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
+
+#: panel/gnome-panel-screenshot.c:132
+msgid ""
+"Unable to set png info.\n"
+"You probably have a bad version of libpng on your system"
+msgstr ""
+"Αδύνατος ο καθορισμός πληροφοριών png.\n"
+"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
+
+#: panel/gnome-panel-screenshot.c:146
+msgid ""
+"Insufficient memory to save the screenshot.\n"
+"Please free up some resources and try again."
+msgstr ""
+"Ανεπαρκής μνήμη για την αποθήκευση της αρπαγής οθόνης.\n"
+"Παρακαλώ ελευθερώστε μερικούς πόρους και δοκιμάστε ξανά."
+
+#: panel/gnome-panel-screenshot.c:190
+#, c-format
+msgid "File %s already exists. Overwrite?"
+msgstr "Το αρχείο %s υπάρχει ήδη. Θέλετε να το γράψετε από πάνω του;"
+
+#: panel/gnome-panel-screenshot.c:204 panel/gnome-panel-screenshot.c:669
 #, c-format
 msgid ""
 "Unable to create the file:\n"
@@ -64,64 +102,37 @@ msgstr ""
 "\"%s\"\n"
 "Παρακαλώ ελέγξτε τα δικαιώματα στο γονικό σας κατάλογο"
 
-#: panel/gnome-panel-screenshot.c:116
-msgid ""
-"Unable to initialize png structure.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Αδύνατη η αρχικοποίηση της δομής png.\n"
-"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
-
-#: panel/gnome-panel-screenshot.c:124
-msgid ""
-"Unable to create png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Αδύνατη η δημιουργία πληροφοριών png.\n"
-"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
-
-#: panel/gnome-panel-screenshot.c:131
-msgid ""
-"Unable to set png info.\n"
-"You probably have a bad version of libpng on your system"
-msgstr ""
-"Αδύνατος ο καθορισμός πληροφοριών png.\n"
-"Πιθανών να έχετε λάθος έκδοση του libpng στο σύστημά σας"
-
-#: panel/gnome-panel-screenshot.c:147
-msgid ""
-"Insufficient memory to save the screenshot.\n"
-"Please free up some resources and try again."
-msgstr ""
-"Ανεπαρκής μνήμη για την αποθήκευση της αρπαγής οθόνης.\n"
-"Παρακαλώ ελευθερώστε μερικούς πόρους και δοκιμάστε ξανά."
-
-#: panel/gnome-panel-screenshot.c:286
+#: panel/gnome-panel-screenshot.c:464
 msgid "Print Screenshot"
 msgstr "Εκτύπωση Αρπαγής Οθόνης"
 
-#: panel/gnome-panel-screenshot.c:334
+#: panel/gnome-panel-screenshot.c:512
 msgid "Screenshot Print Preview"
 msgstr "Προεπισκόπηση Εκτύπωσης Αρπαγής Οθόνης"
 
 #. translators: this the file that gets made up with the screenshot
-#: panel/gnome-panel-screenshot.c:351
+#: panel/gnome-panel-screenshot.c:536
 #, c-format
 msgid "%s%cScreenshot.png"
 msgstr "%s%cΑρπαγήΟθόνης.png"
 
 #. translators: this the file that gets made up with the
 #. * screenshot
-#: panel/gnome-panel-screenshot.c:363
+#: panel/gnome-panel-screenshot.c:548
 #, c-format
 msgid "%s%cScreenshot-%d.png"
 msgstr "%s%cΑρπαγήΟθόνης-%d.png"
 
-#: panel/gnome-panel-screenshot.c:573
+#: panel/gnome-panel-screenshot.c:688
+#, c-format
+msgid "Not enough room to write file %s"
+msgstr "Δεν υπάρχει διαθέσιμος χώρος για να αποθηκευθεί το αρχείο %s"
+
+#: panel/gnome-panel-screenshot.c:888
 msgid "Grab a window instead of the entire screen"
 msgstr "Αρπαγή παραθύρου αντί ολόκληρης της οθόνης"
 
-#: panel/gnome-panel-screenshot.c:601
+#: panel/gnome-panel-screenshot.c:916
 msgid ""
 "Glade file for the screenshot program is missing.\n"
 "Please check your installation of gnome-core"
@@ -129,7 +140,7 @@ msgstr ""
 "Λείπει το αρχείο glade για το πρόγραμμα αρπαγής οθόνης.\n"
 "Παρακαλώ ελέγξτε την εγκατάσταση του gnome-core"
 
-#: panel/gnome-panel-screenshot.c:618
+#: panel/gnome-panel-screenshot.c:933
 msgid "Unable to take a screenshot of the current desktop."
 msgstr "Αδύνατη η αρπαγή οθόνης της τρέχουσας επιφάνειας γραφείου."
 
@@ -161,7 +172,8 @@ msgstr "Αποθήκευση αρπαγής οθόνης στην _επιφάνεια εργασίας"
 
 #: panel/gnome-panel-screenshot.glade.h:12
 msgid "Save screenshot to _web page (save in ~/public__html)"
-msgstr "Αποθήκευση αρπαγής οθόνης σε _σελίδα web (αποθήκευση στο ~/public__html)"
+msgstr ""
+"Αποθήκευση αρπαγής οθόνης σε _σελίδα web (αποθήκευση στο ~/public__html)"
 
 #: panel/gnome-panel-screenshot.glade.h:13
 msgid "_Print screenshot..."
@@ -2097,7 +2109,7 @@ msgstr "Αφαίρεση Προγράμματος"
 
 #: gsm/logout.c:199
 msgid "Really log out?"
-msgstr "Θέλεται πραγματικά να τερματίσετε τη συνεδρία;"
+msgstr "Θέλετε πραγματικά να τερματίσετε τη συνεδρία;"
 
 #: gsm/logout.c:220
 msgid "Save current setup"
@@ -3490,7 +3502,8 @@ msgid ""
 "The system administrator has disallowed modification of the panel "
 "configuration"
 msgstr ""
-"Ο διαχειριστής συστήματος έχει απαγορέψει την τροποποίηση των ρυθμίσεων ταμπλώ"
+"Ο διαχειριστής συστήματος έχει απαγορέψει την τροποποίηση των ρυθμίσεων "
+"ταμπλώ"
 
 #: panel/gnome-run.c:232
 msgid "Failed to load this program!\n"
@@ -4091,14 +4104,17 @@ msgstr "Περί GNOME..."
 
 #: panel/menu.c:5131
 msgid "Lock the screen so that you can temporairly leave your computer"
-msgstr "Κλείδωμα της οθόνης ούτως ώστε να μπορέσετε να φύγετε προσωρινά από τον υπολογιστή σας"
+msgstr ""
+"Κλείδωμα της οθόνης ούτως ώστε να μπορέσετε να φύγετε προσωρινά από τον "
+"υπολογιστή σας"
 
 #: panel/menu.c:5146
 msgid ""
 "Log out of this session to log in as a different user or to shut down your "
 "computer"
 msgstr ""
-"Αποσυνδεθείτε από αυτή τη συνεδρία για να συνδεθείτε ως διαφορετικος χρήστης ή για να κλείσετε τον υπολογιστή σας"
+"Αποσυνδεθείτε από αυτή τη συνεδρία για να συνδεθείτε ως διαφορετικος χρήστης "
+"ή για να κλείσετε τον υπολογιστή σας"
 
 #: panel/menu.c:5360
 msgid "Execute a command line"
