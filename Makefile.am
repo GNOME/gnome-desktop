@@ -1,0 +1,1 @@
+SUBDIRS = panel gsm  pixmaps po desktop-links dekstop-properties

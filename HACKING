@@ -1,0 +1,43 @@
+If you want to hack on the GNOME project, it will make you life easier
+to have the following packages installed:
+
+	- GNU autoconf 2.12
+	- GNU automake 1.2d
+		Available in ftp://ftp.cygnus.com/pub/tromey
+	- GNU libtool 1.0f
+	- GNU guile 1.2
+	- GNU gettext 0.10.32
+	- SLIB 2b3
+		See http://www-swiss.ai.mit.edu/~jaffer/SLIB.html
+
+These should be available by ftp from prep.ai.mit.edu or any of the
+fine GNU mirrors.  Beta software can be found at alpha.gnu.org.
+
+If you are accessing gnome via CVS, then you will need to take several
+steps to get it to compile.  These are:
+
+    cvsroot/gnome# aclocal; automake; autoconf
+    cvsroot/gnome# cd guile-gtk; aclocal; automake; autoconf; cd ..
+    cvsroot/gnome# cd programs/gemvt; aclocal; automake; autoconf; cd ../..
+    cvsroot/gnome# cd programs/freecell; autoheader; aclocal; automake; autoconf; cd ../..
+    cvsroot/gnome# touch programs/gnome-hello/gnome-hello.html
+
+N.b., the "configure" script will not exist until you take these
+steps.  The last step is in case you have not installed the DocBook
+packages.  These are still esoteric enough that we are not requiring
+you to install them to build GNOME.
+
+Before running configure, make sure you have libtool in your path.
+
+There is a simple script (autogen.sh) on the root directory that does
+all of this for you.  Just run this script with any arguments that you
+want to pass to configure.  If you like to build in a directory
+different from the source, you can run `$srcdir/autogen.sh' in the
+build directory, and it will deduce $srcdir.
+
+Please submit patches to the gnome-list@gnome.org mailing list.  All
+kinds of contributions are accepted. If at all possible, please use
+CVS to get the latest development version of gnome; the README file
+has the CVSROOT information.
+
+In devel-docs/ you'll find the GNOME Developer's Tutorial.
