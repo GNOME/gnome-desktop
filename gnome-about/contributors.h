@@ -32,7 +32,7 @@ static gchar *contributors[] = {
 	"Anders Carlsson",
 	"Damon Chaplin",
 	"Kevin Charter",
-	"Kenneth Christiánsen",
+	"Kenneth Rohde Christiansen",
 	"Chad Clark",
 	"Matthias Clasen",
 	"Andrew Clausen",
