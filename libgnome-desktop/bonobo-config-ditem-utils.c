@@ -134,11 +134,7 @@ case CORBA_tk_ ## k:                                                            
 
 	case CORBA_tk_sequence: {
 		DynamicAny_DynSequence dynseq;
-#ifdef ENABLE_ORBIT2
 		DynamicAny_AnySeq *dynany_anyseq;
-#else
-		DynamicAny_DynAny_AnySeq *dynany_anyseq;
-#endif
 		gulong length = 0, i;
 		GSList *l, *array = NULL;
 
@@ -151,7 +147,6 @@ case CORBA_tk_ ## k:                                                            
 			length = g_slist_length (array);
 		}
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -167,20 +162,11 @@ case CORBA_tk_ ## k:                                                            
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), type, ev);
-#endif
 		DynamicAny_DynSequence_set_length (dynseq, length, ev);
 
-#ifdef ENABLE_ORBIT2
 		dynany_anyseq = DynamicAny_AnySeq__alloc ();
 		dynany_anyseq->_length = length;
 		dynany_anyseq->_buffer = DynamicAny_AnySeq_allocbuf (length);
-#else
-		dynany_anyseq = CORBA_sequence_DynamicAny_DynAny_AnySeq__alloc ();
-		dynany_anyseq->_length = length;
-		dynany_anyseq->_buffer = CORBA_sequence_DynamicAny_DynAny_AnySeq_allocbuf (length);
-#endif
 
 		if (de->subvalues) {
 			l = de->subvalues;
@@ -194,12 +180,8 @@ case CORBA_tk_ ## k:                                                            
 
 				any = bonobo_config_ditem_decode_any (ditem, &subentry, path,
 								      type->subtypes [0], ev);
-#ifdef ENABLE_ORBIT2
 				CORBA_any__copy (&dynany_anyseq->_buffer [0], any);
 				CORBA_free (any);
-#else
-				dynany_anyseq->_buffer [0] = any;
-#endif
 
 				i = 1;
 			} else
@@ -212,12 +194,8 @@ case CORBA_tk_ ## k:                                                            
 				any = bonobo_config_ditem_decode_any (ditem, subentry, path,
 								      type->subtypes [0], ev);
 
-#ifdef ENABLE_ORBIT2
 				CORBA_any__copy (&dynany_anyseq->_buffer [i], any);
 				CORBA_free (any);
-#else
-				dynany_anyseq->_buffer [i] = any;
-#endif
 
 				l = l->next;
 				i++;
@@ -236,12 +214,8 @@ case CORBA_tk_ ## k:                                                            
 				any = bonobo_config_ditem_decode_any (ditem, &subentry, path,
 								      type->subtypes [0], ev);
 
-#ifdef ENABLE_ORBIT2
 				CORBA_any__copy (&dynany_anyseq->_buffer [i], any);
 				CORBA_free (any);
-#else
-				dynany_anyseq->_buffer [i] = any;
-#endif
 
 				l = l->next;
 				i++;
@@ -253,11 +227,7 @@ case CORBA_tk_ ## k:                                                            
 
 		DynamicAny_DynSequence_set_elements (dynseq, dynany_anyseq, ev);
 
-#ifdef ENABLE_ORBIT2
 		any = DynamicAny_DynAny_to_any ((DynamicAny_DynAny) dynseq, ev);
-#else
-		any = DynamicAny_DynAny_to_any (dynseq, ev);
-#endif
 
 		break;
 
@@ -265,11 +235,7 @@ case CORBA_tk_ ## k:                                                            
 
 	case CORBA_tk_struct: {
 		DynamicAny_DynStruct dynstruct;
-#ifdef ENABLE_ORBIT2
 		DynamicAny_NameValuePairSeq *members;
-#else
-		CORBA_NameValuePairSeq *members;
-#endif
 		gulong length, i, j;
 		GSList *l;
 
@@ -285,7 +251,6 @@ case CORBA_tk_ ## k:                                                            
 			break;
 		}
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -301,21 +266,12 @@ case CORBA_tk_ ## k:                                                            
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynstruct = CORBA_ORB_create_dyn_struct (bonobo_orb (), type, ev);
-#endif
 
 		length = CORBA_TypeCode_member_count (type, ev);
 
-#ifdef ENABLE_ORBIT2
 		members = CORBA_sequence_DynamicAny_NameValuePair__alloc ();
 		members->_length = length;
 		members->_buffer = CORBA_sequence_DynamicAny_NameValuePair_allocbuf (length);
-#else
-		members = CORBA_sequence_CORBA_NameValuePair__alloc ();
-		members->_length = length;
-		members->_buffer = CORBA_sequence_CORBA_NameValuePair_allocbuf (length);
-#endif
 
 		for (i = 0; i < length; i++) {
 			CORBA_Identifier member_name;
@@ -419,11 +375,7 @@ case CORBA_tk_ ## k:                                                            
 
 		members = DynamicAny_DynStruct_get_members (dynstruct, ev);
 
-#ifdef ENABLE_ORBIT2
 		any = DynamicAny_DynAny_to_any ((DynamicAny_DynAny) dynstruct, ev);
-#else
-		any = DynamicAny_DynAny_to_any (dynstruct, ev);
-#endif
 
 		break;
 	}
@@ -431,7 +383,6 @@ case CORBA_tk_ ## k:                                                            
 	case CORBA_tk_enum: {
 		DynamicAny_DynEnum dynenum;
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -447,9 +398,6 @@ case CORBA_tk_ ## k:                                                            
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynenum = CORBA_ORB_create_dyn_enum (bonobo_orb (), type, ev);
-#endif
 
 		if (CORBA_TypeCode_equal (type, TC_GNOME_DesktopEntryType, NULL)) {
 			gchar *value, *up;
@@ -462,11 +410,7 @@ case CORBA_tk_ ## k:                                                            
 			DynamicAny_DynEnum_set_as_string (dynenum, de->value, ev);
 		}
 
-#ifdef ENABLE_ORBIT2
 		any = DynamicAny_DynAny_to_any ((DynamicAny_DynAny) dynenum, ev);
-#else
-		any = DynamicAny_DynAny_to_any (dynenum, ev);
-#endif
 
 		break;
 	}
@@ -543,16 +487,11 @@ case CORBA_tk_ ## k:                \
 
 	case CORBA_tk_struct: {
 		DynamicAny_DynStruct dynstruct;
-#ifdef ENABLE_ORBIT2
 		DynamicAny_NameValuePairSeq *members;
-#else
-		CORBA_NameValuePairSeq *members;
-#endif
 		DirEntry *subentry;
 		gulong i, j;
 		GSList *l;
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -568,26 +507,15 @@ case CORBA_tk_ ## k:                \
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynstruct = CORBA_ORB_create_dyn_struct (bonobo_orb (), any->_type, ev);
-#endif
 
-#ifdef ENABLE_ORBIT2
 		DynamicAny_DynAny_from_any ((DynamicAny_DynAny) dynstruct, (CORBA_any *) any, ev);
-#else
-		DynamicAny_DynAny_from_any (dynstruct, (CORBA_any *) any, ev);
-#endif
 
 		members = DynamicAny_DynStruct_get_members (dynstruct, ev);
 
 		clear_dir_entry (de);
 
 		for (i = 0; i < members->_length; i++) {
-#ifdef ENABLE_ORBIT2
 			DynamicAny_NameValuePair *pair = &members->_buffer [i];
-#else
-			CORBA_NameValuePair *pair = &members->_buffer [i];
-#endif
 
 			if (CORBA_TypeCode_equal (pair->value._type, TC_GNOME_ExtraAttributes, NULL)) {
 				Bonobo_PropertySet *list = pair->value._value;
@@ -616,7 +544,6 @@ case CORBA_tk_ ## k:                \
 		DynamicAny_DynEnum dynenum;
 		gchar *value;
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -632,15 +559,8 @@ case CORBA_tk_ ## k:                \
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynenum = CORBA_ORB_create_dyn_enum (bonobo_orb (), any->_type, ev);
-#endif
 
-#ifdef ENABLE_ORBIT2
 		DynamicAny_DynAny_from_any ((DynamicAny_DynAny) dynenum, (CORBA_any *) any, ev);
-#else
-		DynamicAny_DynAny_from_any (dynenum, (CORBA_any *) any, ev);
-#endif
 
 		value = DynamicAny_DynEnum_get_as_string (dynenum, ev);
 
@@ -673,16 +593,11 @@ case CORBA_tk_ ## k:                \
 
 	case CORBA_tk_sequence: {
 		DynamicAny_DynSequence dynseq;
-#ifdef ENABLE_ORBIT2
 		DynamicAny_AnySeq *dynany_anyseq;
-#else
-		DynamicAny_DynAny_AnySeq *dynany_anyseq;
-#endif
 		CORBA_TypeCode type;
 		DirEntry *subentry;
 		gulong i;
 
-#ifdef ENABLE_ORBIT2
 		{
 			DynamicAny_DynAnyFactory f;
 			
@@ -698,15 +613,8 @@ case CORBA_tk_ ## k:                \
 
 			CORBA_Object_release ((CORBA_Object) f, ev);
 		}
-#else
-		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), any->_type, ev);
-#endif
 
-#ifdef ENABLE_ORBIT2
 		DynamicAny_DynAny_from_any ((DynamicAny_DynAny) dynseq, (CORBA_any *) any, ev);
-#else
-		DynamicAny_DynAny_from_any (dynseq, (CORBA_any *) any, ev);
-#endif
 
 		dynany_anyseq = DynamicAny_DynSequence_get_elements (dynseq, ev);
 
@@ -716,11 +624,7 @@ case CORBA_tk_ ## k:                \
 
 		for (i = 0; i < dynany_anyseq->_length; i++) {
 			if (CORBA_TypeCode_equal (type, TC_GNOME_LocalizedString, NULL)) {
-#ifdef ENABLE_ORBIT2
 				GNOME_LocalizedString *localized = dynany_anyseq->_buffer [i]._value;
-#else
-				GNOME_LocalizedString *localized = dynany_anyseq->_buffer [i]->_value;
-#endif
 
 				if (localized->locale) {
 					subentry = g_new0 (DirEntry, 1);
@@ -732,13 +636,8 @@ case CORBA_tk_ ## k:                \
 			} else {
 				subentry = g_new0 (DirEntry, 1);
 
-#ifdef ENABLE_ORBIT2
 				bonobo_config_ditem_encode_any (ditem, subentry, path,
 								&dynany_anyseq->_buffer [i], ev);
-#else
-				bonobo_config_ditem_encode_any (ditem, subentry, path,
-								dynany_anyseq->_buffer [i], ev);
-#endif
 
 				de->subvalues = g_slist_append (de->subvalues, subentry);
 			}
