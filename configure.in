@@ -370,6 +370,22 @@ fi
 AC_DEFINE_UNQUOTED(KDE_MENUDIR, "$kde_datadir/applnk")
 AC_DEFINE_UNQUOTED(KDE_ICONDIR, "$kde_datadir/icons")
 AC_DEFINE_UNQUOTED(KDE_MINI_ICONDIR, "$kde_datadir/icons/mini")
+
+dnl
+dnl Place to look for KDE docs
+dnl
+AC_ARG_WITH(kde-docdir, [  --with-kde-docdir=DIR         Location of KDE documentation])
+
+if test "x$with_kde_docdir" = x ; then
+  kde_docdir=/usr/doc/kde
+else
+  kde_docdir=$with_kde_docdir
+fi
+
+AC_DEFINE_UNQUOTED(KDE_DOCDIR, "$kde_docdir")
+
+
+
 dnl AC_CONFIG_SUBDIRS(gemvt)
 
 dnl gtk-doc stuff
