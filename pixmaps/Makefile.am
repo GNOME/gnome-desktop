@@ -9,7 +9,9 @@ BITMAPS     = \
 	gnome-calc2.png				\
 	gnome-calendar.png			\
 	gnome-cardgame.png			\
+	gnome-clock.png             \
 	gnome-color-browser.png			\
+	gnome-color-xterm.png           \
 	gnome-cromagnon.png			\
 	gnome-default.png			\
 	gnome-die1.png				\
@@ -35,12 +37,14 @@ BITMAPS     = \
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
 	gnome-irc.png				\
+	gnome-laptop.png            \
 	gnome-lockscreen.png			\
 	gnome-log.png				\
 	gnome-logo-icon.png			\
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
 	gnome-mnemonic.png			\
+	gnome-modem.png             \
 	gnome-money.png				\
 	gnome-networktool.png			\
 	gnome-note.png				\
@@ -51,9 +55,12 @@ BITMAPS     = \
 	gnome-term-night.png			\
 	gnome-term-tiger.png			\
 	gnome-eterm.png				\
+	gnome-xterm.png				\
+	gnome-terminal.png			\
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
+	gnome-util.png              \
 	gnome-word.png				\
 	kterm.xpm				\
 	vnterm.xpm				\
@@ -71,7 +78,15 @@ BITMAPS     = \
 	gnome-background.png			\
 	panel-menu-main.png		\
 	apple-green.png			\
-	apple-red.png
+	apple-red.png				\
+	gnome-ccbackground.png	\
+	gnome-ccdesktop.png     \
+	gnome-ccthemes.png		\
+	gnome-ccdialog.png	\
+	gnome-ccscreensaver.png	\
+	gnome-ccwindowmanager.png \
+	gnome-cckeyboard-bell.png	\
+	gnome-cckeyboard.png
 
 
 TILES     = \
