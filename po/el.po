@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-09-02 04:12+0000\n"
-"PO-Revision-Date: 2000-09-02 04:12:35+0000\n"
+"POT-Creation-Date: 2000-09-05 12:44+0000\n"
+"PO-Revision-Date: 2000-09-05 12:48:58+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Οριζόντια Διάταξη"
 
 #: applets/desk-guide/deskguide_applet.c:114
 msgid "Desktop Height [pixels]"
-msgstr "Ύψος επιφάνειας εργασίας [πίξελ]"
+msgstr "Ύψος επιφάνειας εργασίας [εικονοστοιχεία]"
 
 #: applets/desk-guide/deskguide_applet.c:116
 msgid "Override desktop height with panel size"
@@ -137,7 +137,7 @@ msgstr "Κάθετη Διάταξη"
 
 #: applets/desk-guide/deskguide_applet.c:125
 msgid "Desktop Width [pixels]"
-msgstr "Πλάτος Επιφάνειας Εργασίας"
+msgstr "Πλάτος Επιφάνειας Εργασίας [εικονοστοιχεία]"
 
 #: applets/desk-guide/deskguide_applet.c:127
 msgid "Override desktop width with panel size"
@@ -215,24 +215,24 @@ msgid "Desk Guide Alert"
 msgstr "Επαγρύπνηση Οδηγού Γραφείου"
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1379
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
-#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4570
+#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4578
 msgid "Properties..."
 msgstr "Ιδιότητες..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
-#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4579
-#: panel/status.c:367 panel/swallow.c:369
+#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4587
+#: panel/status.c:366 panel/swallow.c:369
 msgid "Help"
 msgstr "Βοήθεια"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1397
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
 msgid "About..."
 msgstr "Περί..."
@@ -274,7 +274,7 @@ msgstr "Το όνομα του Αρχείου Κινουμένων Σχεδίων:"
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:449 panel/panel-util.c:101 panel/panel-util.c:142
-#: panel/panel-util.c:183 panel/panel_config.c:1141 panel/swallow.c:202
+#: panel/panel-util.c:183 panel/panel_config.c:1169 panel/swallow.c:202
 msgid "Browse"
 msgstr "Εξερεύνηση"
 
@@ -335,13 +335,13 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:417
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:418
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:415
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:416
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -371,51 +371,59 @@ msgstr "%A, %B %d"
 msgid "Can't create applet!\n"
 msgstr "Αδύνατη η δημιουργία εφαρμογίδιου!\n"
 
-#: applets/gen_util/clock.c:523
+#. Do NOT translate the clock/hourformat part.  What you
+#. * should change is the 12.  If your country code should use
+#. * 12 hour format by default, leave it at 12, otherwise use 24
+#. * for 24 hour format.  Those are the only two supported
+#: applets/gen_util/clock.c:349
+msgid "clock/hourformat=12"
+msgstr "ρολόι/μορφή ώρας=12"
+
+#: applets/gen_util/clock.c:552
 msgid "Clock properties"
 msgstr "Ιδιότητες ρολογιού"
 
-#: applets/gen_util/clock.c:529
+#: applets/gen_util/clock.c:558
 msgid "Time Format"
 msgstr "Μορφή ώρας"
 
-#: applets/gen_util/clock.c:541
+#: applets/gen_util/clock.c:570
 msgid "12 hour"
 msgstr "12ωρο"
 
-#: applets/gen_util/clock.c:550
+#: applets/gen_util/clock.c:579
 msgid "24 hour"
 msgstr "24ωρο"
 
-#: applets/gen_util/clock.c:585
+#: applets/gen_util/clock.c:614
 msgid "Show date in applet"
 msgstr "Εμφάνιση ημερομηνίας στο εφαρμογίδιο"
 
-#: applets/gen_util/clock.c:599
+#: applets/gen_util/clock.c:628
 msgid "Show date in tooltip"
 msgstr "Εμφάνιση ημερομηνίας στο βοήθημα"
 
-#: applets/gen_util/clock.c:613
+#: applets/gen_util/clock.c:642
 msgid "Use GMT"
 msgstr "Χρήση GMT"
 
-#: applets/gen_util/clock.c:627
+#: applets/gen_util/clock.c:656
 msgid "Unix time"
 msgstr "Χρόνος Unix"
 
-#: applets/gen_util/clock.c:656
+#: applets/gen_util/clock.c:685
 msgid "Clock"
 msgstr "Ρολόι"
 
-#: applets/gen_util/clock.c:702
+#: applets/gen_util/clock.c:731
 msgid "Clock Applet"
 msgstr "Εφαρμογίδιο Ρολογιού"
 
-#: applets/gen_util/clock.c:703 applets/gen_util/printer.c:354
+#: applets/gen_util/clock.c:732 applets/gen_util/printer.c:354
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 το Free Software Foundation"
 
-#: applets/gen_util/clock.c:705
+#: applets/gen_util/clock.c:734
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -634,7 +642,7 @@ msgstr "Βίαιο κλείσιμο εφαρμογής"
 msgid "Follow panel size"
 msgstr "Ακολούθησε το μέγεθος ταμπλώ"
 
-#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3602
+#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3607
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
@@ -659,7 +667,7 @@ msgstr "Προκαθορισμένο πλάτος λίστας εργασιών"
 msgid "Tasklist width is dynamic"
 msgstr "Δυναμικό πλάτος λίστας εργασιών"
 
-#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3603
+#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3608
 msgid "Vertical"
 msgstr "Κατακόρυφο"
 
@@ -675,7 +683,7 @@ msgstr "Προκαθορισμένο ύψος λίστας εργασιών"
 msgid "Tasklist height is dynamic"
 msgstr "Δυναμικό ύψος λίστας εργασιών"
 
-#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3632
+#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3639
 msgid "Size"
 msgstr "Μέγεθος"
 
@@ -1013,7 +1021,7 @@ msgstr "Γουάντα το Ψάρι του GNOME"
 msgid "... and many more"
 msgstr "... και πολλών ακόμα"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:193
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:194
 msgid "About GNOME"
 msgstr "Περί GNOME"
 
@@ -1292,15 +1300,15 @@ msgid "Select-by-word characters"
 msgstr "Χαρακτήρες επιλογής ανα λέξη"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1129
+#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1157
 msgid "Image"
 msgstr "Εικόνα"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3638
+#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3645
 msgid "Background type"
 msgstr "Είδος παρασκηνίου"
 
-#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3597
+#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3602
 msgid "None"
 msgstr "Κανένα"
 
@@ -1437,7 +1445,7 @@ msgid "Edit"
 msgstr "Επεξεργασία"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:576
+#: panel/foobar-widget.c:577
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -1926,7 +1934,7 @@ msgstr "Χ"
 msgid "Y position of window"
 msgstr "Ψ-συντεταγμένη παραθύρου"
 
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:765
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:771
 msgid "Y"
 msgstr "Ψ"
 
@@ -2295,29 +2303,29 @@ msgstr ""
 "εγκατεστημένη αυτή την\n"
 "τεκμηρίωση στο σύστημά σας."
 
-#: panel/applet.c:403
+#: panel/applet.c:404
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:443
+#: panel/applet.c:444
 msgid "Remove from panel"
 msgstr "Αφαίρεση από το ταμπλώ"
 
-#: panel/applet.c:450
+#: panel/applet.c:451
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: panel/applet.c:462 panel/menu.c:2768
+#: panel/applet.c:463 panel/menu.c:2768
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Δεν βρέθηκε το αρχείο εικόνας %s"
 
-#: panel/applet.c:463 panel/applet.c:469 panel/menu.c:2994 panel/menu.c:2999
-#: panel/menu.c:4006 panel/menu.c:4011 panel/menu.c:4329
+#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:2993 panel/menu.c:2998
+#: panel/menu.c:4013 panel/menu.c:4018 panel/menu.c:4335
 msgid "Panel"
 msgstr "Ταμπλώ"
 
-#: panel/applet.c:689
+#: panel/applet.c:690
 msgid "Can't find an empty spot"
 msgstr "Δεν βρέθηκε ελεύθερη τοποθεσία"
 
@@ -2344,7 +2352,7 @@ msgstr "Αδύνατη η δημιουργία αντικειμένου"
 msgid "Object created is not AppletWidget"
 msgstr "Το δημιουργημένο αντικείμενο δεν είναι AppletWidget"
 
-#: panel/button-widget.c:692
+#: panel/button-widget.c:688
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2399,7 +2407,7 @@ msgid "Enable hidebutton arrow"
 msgstr "Ενεργοποίηση βέλους κουμπιού απόκρυψης"
 
 #: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:521
-#: panel/menu.c:3719
+#: panel/menu.c:3726
 msgid "Drawer"
 msgstr "Συρτάρι"
 
@@ -2415,7 +2423,7 @@ msgstr "Όπα! Για κάποιον λόγο δεν μπορούμε να προσθέσουμε στο ταμπλώ"
 msgid "No socket was created"
 msgstr "Δεν δημιουργήθηκε socket"
 
-#: panel/foobar-widget.c:151
+#: panel/foobar-widget.c:152
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2423,7 +2431,7 @@ msgstr ""
 "Αδύνατη η εκτέλεση του προγράμματος gmc-client,\n"
 "ενδέχεται το gmc να μην είναι εγκατεστημένο"
 
-#: panel/foobar-widget.c:161
+#: panel/foobar-widget.c:162
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2433,149 +2441,149 @@ msgstr ""
 "ενδέχεται να μην είναι εγκατεστημένο.\n"
 "Βρίσκεται στο πακέτο gnome-pim."
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "News (www)"
 msgstr "Νέα (www)"
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "FAQ (www)"
 msgstr "FAQ (www)"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "Mailing Lists (www)"
 msgstr "Όμιλοι Συνδρομητών (www)"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "Software (www)"
 msgstr "Λογισμικό (www)"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "Development (www)"
 msgstr "Ανάπτυξη (www)"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "Bug Tracking System (www)"
 msgstr "Σύστημα Εντοπισμού Σφάλματων (www)"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:223
+#: panel/foobar-widget.c:224
 msgid "By Name"
 msgstr "Βάση Ονόματος"
 
-#: panel/foobar-widget.c:224
+#: panel/foobar-widget.c:225
 msgid "By Type"
 msgstr "Βάση Είδους"
 
-#: panel/foobar-widget.c:225
+#: panel/foobar-widget.c:226
 msgid "By Size"
 msgstr "Βάση Μεγέθους"
 
-#: panel/foobar-widget.c:226
+#: panel/foobar-widget.c:227
 msgid "By Time Last Accessed"
 msgstr "Βάση Ώρας Τελευταίας Πρόσβασης"
 
-#: panel/foobar-widget.c:227
+#: panel/foobar-widget.c:228
 msgid "By Time Last Modified"
 msgstr "Βάση Ώρας Τελευταίας Τροποποίησης"
 
-#: panel/foobar-widget.c:228
+#: panel/foobar-widget.c:229
 msgid "By Time Last Changed"
 msgstr "Βάση Ώρας Τελευταίας Αλλαγής"
 
-#: panel/foobar-widget.c:237
+#: panel/foobar-widget.c:238
 msgid "Arrange Icons"
 msgstr "Τακτοποίηση Εικονιδίων"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:248
 msgid "Rescan Desktop Directory"
 msgstr "Επανάγνωση Καταλόγου Επιφάνειας Εργασίας"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:249
 msgid "Rescan Desktop Devices"
 msgstr "Επανάγνωση Συσκευών Επιφάνειας Εργασίας"
 
-#: panel/foobar-widget.c:254
+#: panel/foobar-widget.c:255
 msgid "Lock Screen"
 msgstr "Κλείδωμα Οθόνης"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:265
 msgid "Log Out"
 msgstr "Τερματισμός"
 
-#: panel/foobar-widget.c:272
+#: panel/foobar-widget.c:273
 msgid " Desktop "
 msgstr " Eπιφάνεια εργασίας "
 
-#: panel/foobar-widget.c:289
+#: panel/foobar-widget.c:290
 msgid "can't fine real path"
 msgstr "αδύνατη η εύρεση του αληθινού μονοπατιού"
 
-#: panel/foobar-widget.c:297
+#: panel/foobar-widget.c:298
 msgid "menu wasn't created"
 msgstr "δεν δημιουργήθηκε μενού"
 
-#: panel/foobar-widget.c:340
+#: panel/foobar-widget.c:341
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:408
+#: panel/foobar-widget.c:409
 msgid "Today"
 msgstr "Σήμερα"
 
-#: panel/foobar-widget.c:409
+#: panel/foobar-widget.c:410
 msgid "This Week"
 msgstr "Αυτή την Εβδομάδα"
 
-#: panel/foobar-widget.c:410
+#: panel/foobar-widget.c:411
 msgid "This Month"
 msgstr "Αυτό το Μήνα"
 
-#: panel/foobar-widget.c:416
+#: panel/foobar-widget.c:417
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:418
+#: panel/foobar-widget.c:419
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:425
+#: panel/foobar-widget.c:426
 msgid "Add appointement..."
 msgstr "Προσθήκη ραντεβού..."
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:443
 msgid "Format"
 msgstr "Μορφή"
 
-#: panel/foobar-widget.c:559 panel/menu.c:2790 panel/menu.c:2795
-#: panel/menu.c:4233
+#: panel/foobar-widget.c:560 panel/menu.c:2790 panel/menu.c:2795
+#: panel/menu.c:4240
 msgid "Programs"
 msgstr "Προγράμματα"
 
-#: panel/foobar-widget.c:573 panel/menu.c:4206 panel/menu.c:4245
-#: panel/menu.c:4251
+#: panel/foobar-widget.c:574 panel/menu.c:4212 panel/menu.c:4252
+#: panel/menu.c:4258
 msgid "Favorites"
 msgstr "Αγαπημένα"
 
@@ -2622,12 +2630,12 @@ msgid "Animation speed"
 msgstr "Ταχύτητα κινούμενων σχεδίων"
 
 #: panel/gnome-panel-properties.c:296 panel/gnome-panel-properties.c:314
-#: panel/menu.c:3590
+#: panel/menu.c:3595
 msgid "Auto hide"
 msgstr "Αυτόματη απόκρυψη"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:303 panel/menu.c:3589
+#: panel/gnome-panel-properties.c:303 panel/menu.c:3594
 msgid "Explicit hide"
 msgstr "Ρητή απόκρυψη"
 
@@ -2644,7 +2652,7 @@ msgstr "Καθυστέρηση (ms)"
 #. Minimized size scale frame
 #: panel/gnome-panel-properties.c:331
 msgid "Size (pixels)"
-msgstr "Μέγεθος (πίξελ)"
+msgstr "Μέγεθος (εικονοστοιχεία)"
 
 #: panel/gnome-panel-properties.c:436
 msgid "Launcher icon"
@@ -2691,7 +2699,7 @@ msgstr "Εκκινητής"
 
 #: panel/gnome-panel-properties.c:522 panel/gnome-panel-properties.c:1330
 #: panel/menu-properties.c:465 panel/menu.c:2314 panel/menu.c:2380
-#: panel/menu.c:2382 panel/menu.c:3667 panel/menu.c:4489
+#: panel/menu.c:2382 panel/menu.c:3674 panel/menu.c:4497
 msgid "Menu"
 msgstr "Μενού"
 
@@ -2892,7 +2900,7 @@ msgstr "Εκτέλεση"
 msgid "Run in terminal"
 msgstr "Εκτέλεση σε τερματικό"
 
-#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4315
+#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4321
 msgid "Run..."
 msgstr "Εκτέλεση..."
 
@@ -2916,7 +2924,7 @@ msgstr "Ιδιότητες εκκινητή"
 msgid "Create launcher applet"
 msgstr "Δημιουργία εφαρμογιδίου εκκινητή"
 
-#: panel/logout.c:47 panel/menu.c:4148
+#: panel/logout.c:47 panel/menu.c:4155
 msgid "Log out"
 msgstr "Τερματισμός"
 
@@ -2924,7 +2932,7 @@ msgstr "Τερματισμός"
 msgid "Log out of GNOME"
 msgstr "Τερματισμός GNOME"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4136
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4143
 msgid "Lock screen"
 msgstr "Κλείδωμα οθόνης"
 
@@ -3102,7 +3110,7 @@ msgstr "Δε βρέθηκε το goad_id του εφαρμογιδίου, το αγνοώ"
 msgid " (empty)"
 msgstr " (κενό)"
 
-#: panel/menu.c:2467 panel/menu.c:4263
+#: panel/menu.c:2467 panel/menu.c:4270
 msgid "Applets"
 msgstr "Εφαρμογίδια"
 
@@ -3110,7 +3118,7 @@ msgstr "Εφαρμογίδια"
 msgid "You can only have one menu panel at a time."
 msgstr "Μπορείτε να έχετε μόνο ένα μενού ταμπλώ κάθε φορά."
 
-#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3903
+#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3910
 msgid "Create panel"
 msgstr "Δημιουργία ταμπλώ"
 
@@ -3118,23 +3126,23 @@ msgstr "Δημιουργία ταμπλώ"
 msgid "Menu panel"
 msgstr "Μενού ταμπλώ"
 
-#: panel/menu.c:2721 panel/menu.c:3581 panel/panel_config.c:1259
-#: panel/panel_config.c:1354
+#: panel/menu.c:2721 panel/menu.c:3586 panel/panel_config.c:1287
+#: panel/panel_config.c:1382
 msgid "Edge panel"
 msgstr "Ακραίο ταμπλώ"
 
-#: panel/menu.c:2729 panel/menu.c:3582 panel/panel_config.c:1266
-#: panel/panel_config.c:1364
+#: panel/menu.c:2729 panel/menu.c:3587 panel/panel_config.c:1294
+#: panel/panel_config.c:1392
 msgid "Aligned panel"
 msgstr "Ισοζυγισμένο ταμπλώ"
 
-#: panel/menu.c:2737 panel/menu.c:3583 panel/panel_config.c:1272
-#: panel/panel_config.c:1374
+#: panel/menu.c:2737 panel/menu.c:3588 panel/panel_config.c:1300
+#: panel/panel_config.c:1402
 msgid "Sliding panel"
 msgstr "Συρρόμενο ταμπλώ"
 
-#: panel/menu.c:2745 panel/menu.c:3584 panel/panel_config.c:1278
-#: panel/panel_config.c:1384
+#: panel/menu.c:2745 panel/menu.c:3589 panel/panel_config.c:1306
+#: panel/panel_config.c:1412
 msgid "Floating panel"
 msgstr "Πλωτό ταμπλώ"
 
@@ -3146,15 +3154,15 @@ msgstr "Δε βρέθηκαν μενού συστήματος!"
 msgid "Can't create the user menu directory"
 msgstr "Αδύνατη η δημιουργία του καταλόγου μενού χρήστη"
 
-#: panel/menu.c:2886 panel/menu.c:2892 panel/menu.c:4304
+#: panel/menu.c:2885 panel/menu.c:2891 panel/menu.c:4310
 msgid "KDE menus"
 msgstr "Μενού KDE"
 
-#: panel/menu.c:2945
+#: panel/menu.c:2944
 msgid "You cannot remove your last panel."
 msgstr "Δεν μπορείτε να αφαιρέσετε το τελευταίο σας ταμπλώ."
 
-#: panel/menu.c:2955
+#: panel/menu.c:2954
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3162,156 +3170,164 @@ msgstr ""
 "Όταν ένα ταμπλώ αφαιρείται, οι ρυθμίσεις του\n"
 "και των εφαμογιδίων του χάνονται. Αφαίρεση του ταμπλώ αυτού;"
 
-#: panel/menu.c:3595
+#: panel/menu.c:3600
 msgid "With pixmap arrow"
 msgstr "Με εικόνα βέλους"
 
-#: panel/menu.c:3596
+#: panel/menu.c:3601
 msgid "Without pixmap"
 msgstr "Χωρίς εικόνα"
 
-#: panel/menu.c:3608 panel/panel_config.c:903
+#: panel/menu.c:3613 panel/panel_config.c:909
+msgid "Ultra Tiny (12 pixels)"
+msgstr "Μικροσκοπικό (12 εικονοστοιχεία)"
+
+#: panel/menu.c:3614 panel/panel_config.c:917
 msgid "Tiny (24 pixels)"
-msgstr "Πολύ Μικρό (24 pixel)"
+msgstr "Πολύ Μικρό (24 εικονοστοιχεία)"
 
-#: panel/menu.c:3609 panel/panel_config.c:911
+#: panel/menu.c:3615 panel/panel_config.c:925
 msgid "Small (36 pixels)"
-msgstr "Μικρό (36 pixel)"
+msgstr "Μικρό (36 εικονοστοιχεία)"
 
-#: panel/menu.c:3610 panel/panel_config.c:919
+#: panel/menu.c:3616 panel/panel_config.c:933
 msgid "Standard (48 pixels)"
-msgstr "Κανονικό (48 pixel)"
+msgstr "Κανονικό (48 εικονοστοιχεία)"
 
-#: panel/menu.c:3611 panel/panel_config.c:927
+#: panel/menu.c:3617 panel/panel_config.c:941
 msgid "Large (64 pixels)"
-msgstr "Μεγάλο (64 pixel)"
+msgstr "Μεγάλο (64 εικονοστοιχεία)"
 
-#: panel/menu.c:3612 panel/panel_config.c:935
+#: panel/menu.c:3618 panel/panel_config.c:949
 msgid "Huge (80 pixels)"
-msgstr "Τεράστιο (80 pixel)"
+msgstr "Τεράστιο (80 εικονοστοιχεία)"
 
-#: panel/menu.c:3617 panel/panel_config.c:1083
+#: panel/menu.c:3619 panel/panel_config.c:957
+msgid "Ridiculous (128 pixels)"
+msgstr "Γελοίο (128 εικονοστοιχεία)"
+
+#: panel/menu.c:3624 panel/panel_config.c:1111
 msgid "Standard"
 msgstr "Κανονικό"
 
 #. color frame
-#: panel/menu.c:3618 panel/panel_config.c:1087 panel/panel_config.c:1102
+#: panel/menu.c:3625 panel/panel_config.c:1115 panel/panel_config.c:1130
 msgid "Color"
 msgstr "Χρώμα"
 
-#: panel/menu.c:3619 panel/panel_config.c:1091
+#: panel/menu.c:3626 panel/panel_config.c:1119
 msgid "Pixmap"
 msgstr "Εικόνα"
 
-#: panel/menu.c:3623
+#: panel/menu.c:3630
 msgid "Type"
 msgstr "Είδος"
 
-#: panel/menu.c:3626
+#: panel/menu.c:3633
 msgid "Hiding policy"
 msgstr "Πολιτική απόκρυψης"
 
-#: panel/menu.c:3629
+#: panel/menu.c:3636
 msgid "Hide buttons"
 msgstr "Απόκρυψη κουμπιών"
 
-#: panel/menu.c:3635
+#: panel/menu.c:3642
 msgid "Orientation"
 msgstr "Προσανατολισμός"
 
-#: panel/menu.c:3656
+#: panel/menu.c:3663
 msgid "Applet"
 msgstr "Εφαρμογίδιο"
 
-#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3677
+#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3684
 msgid "Main menu"
 msgstr "Κυρίως μενού"
 
-#: panel/menu.c:3688
+#: panel/menu.c:3695
 msgid "Programs menu"
 msgstr "Μενού προγραμμάτων"
 
-#: panel/menu.c:3698
+#: panel/menu.c:3705
 msgid "Favorites menu"
 msgstr "Μενού αγαπημένων"
 
-#: panel/menu.c:3709
+#: panel/menu.c:3716
 msgid "Launcher..."
 msgstr "Εκκινητής..."
 
-#: panel/menu.c:3730
+#: panel/menu.c:3737
 msgid "Log out button"
 msgstr "Kουμπί τερματισμού"
 
-#: panel/menu.c:3741
+#: panel/menu.c:3748
 msgid "Lock button"
 msgstr "Κουμπί κλειδώματος"
 
-#: panel/menu.c:3752
+#: panel/menu.c:3759
 msgid "Run button"
 msgstr "Kουμπί εκτέλεσης"
 
-#: panel/menu.c:3764
+#: panel/menu.c:3771
 msgid "Swallowed app..."
 msgstr "Ενσωματωμένη εφαρμογή..."
 
-#: panel/menu.c:3772
+#: panel/menu.c:3779
 msgid "Status dock"
 msgstr "Προσκόλληση κατάστασης"
 
-#: panel/menu.c:3796 panel/menu.c:3801 panel/menu.c:3879
+#: panel/menu.c:3803 panel/menu.c:3808 panel/menu.c:3886
 msgid "Add to panel"
 msgstr "Προσθήκη στο ταμπλώ"
 
-#: panel/menu.c:3816
+#: panel/menu.c:3823
 msgid "Cannot execute panel global properties"
 msgstr "Αδύνατη η εκτέλεση καθολικών ιδιοτήτων ταμπλώ"
 
-#: panel/menu.c:3856
+#: panel/menu.c:3863
 msgid "Remove this panel..."
 msgstr "Αφαίρεση παρόντος ταμπλώ..."
 
-#: panel/menu.c:3858 panel/menu.c:3914
+#: panel/menu.c:3865 panel/menu.c:3921
 msgid "Remove this panel"
 msgstr "Αφαίρεση παρόντος ταμπλώ"
 
-#: panel/menu.c:3931
+#: panel/menu.c:3938
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: panel/menu.c:3942
+#: panel/menu.c:3949
 msgid "All properties..."
 msgstr "Όλες οι ιδιότητες..."
 
-#: panel/menu.c:3958
+#: panel/menu.c:3965
 msgid "Global Preferences..."
 msgstr "Καθολικές Προτιμήσεις..."
 
-#: panel/menu.c:3972
+#: panel/menu.c:3979
 msgid "Panel Manual..."
 msgstr "Εγχειρίδιο Ταμπλώ..."
 
-#: panel/menu.c:3983
+#: panel/menu.c:3990
 msgid "Cannot execute xscreensaver"
 msgstr "Αδύνατη η εκτέλεση του προγράμματος προφύλαξης οθόνης"
 
-#: panel/menu.c:4035 panel/menu.c:4040 panel/menu.c:4338
+#: panel/menu.c:4042 panel/menu.c:4047 panel/menu.c:4344
 msgid "Desktop"
 msgstr "Επιφάνεια εργασίας"
 
-#: panel/menu.c:4077
+#: panel/menu.c:4084
 msgid "About the panel..."
 msgstr "Περί ταμπλώ..."
 
-#: panel/menu.c:4093
+#: panel/menu.c:4100
 msgid "About GNOME..."
 msgstr "Περί GNOME..."
 
-#: panel/menu.c:4404
+#: panel/menu.c:4410
 msgid "Can't create menu, using main menu!"
 msgstr "Αδύνατη η δημιουργία μενού, χρήση του κυρίως μενού!"
 
-#: panel/menu-properties.c:138 panel/menu.c:4575
+#: panel/menu-properties.c:138 panel/menu.c:4583
 msgid "Edit menus..."
 msgstr "Επεξεργασία μενού..."
 
@@ -3359,55 +3375,60 @@ msgstr "Μενού επιφάνειας εργασίας:"
 msgid "Menu path"
 msgstr "Διαδρομή μενού"
 
-#: panel/panel_config.c:427
+#: panel/panel.c:848
+#, c-format
+msgid "Open URL: %s"
+msgstr "Άνοιγμα Τοποθεσίας: %s"
+
+#: panel/panel_config.c:433
 msgid "Hiding"
 msgstr "Απόκρυψη"
 
 #. Auto-hide
-#: panel/panel_config.c:435
+#: panel/panel_config.c:441
 msgid "Enable Auto-hide"
 msgstr "Ενεργοποίηση Αυτόματης-απόκρυψης"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:445
+#: panel/panel_config.c:451
 msgid "Show hide buttons"
 msgstr "Εμφάνιση κουμπιών απόκρυψης"
 
 #. Arrow enable
-#: panel/panel_config.c:455
+#: panel/panel_config.c:461
 msgid "Show arrows on hide button"
 msgstr "Εμφάνιση βέλων στο κουμπί απόκρυψης"
 
-#: panel/panel_config.c:506
+#: panel/panel_config.c:512
 msgid "Panel Position"
 msgstr "Θέση ταμπλώ"
 
-#: panel/panel_config.c:625 panel/panel_config.c:652 panel/panel_config.c:712
-#: panel/panel_config.c:810
+#: panel/panel_config.c:631 panel/panel_config.c:658 panel/panel_config.c:718
+#: panel/panel_config.c:816
 msgid "Size and Position"
 msgstr "Μέγεθος και Θέση"
 
-#: panel/panel_config.c:727
+#: panel/panel_config.c:733
 msgid "Orient panel horizontally"
 msgstr "Οριζόντιος προσανατολισμός ταμπλώ"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:745
 msgid "Orient panel vertically"
 msgstr "Κάθετος προσανατολισμός ταμπλώ"
 
-#: panel/panel_config.c:751
+#: panel/panel_config.c:757
 msgid "Top left corner's position: X"
 msgstr "Θέση πάνω αριστερά γωνίας: Χ"
 
-#: panel/panel_config.c:822
+#: panel/panel_config.c:828
 msgid "Offset from screen edge:"
 msgstr "Σχετική θέση από την άκρη της οθόνης:"
 
-#: panel/panel_config.c:894
+#: panel/panel_config.c:900
 msgid "Panel size:"
 msgstr "Μέγεθος ταμπλώ:"
 
-#: panel/panel_config.c:949
+#: panel/panel_config.c:971
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3417,35 +3438,35 @@ msgstr ""
 "στο μεγαλύτερο εφαρμογιδίο του ταμπλώ. Ωστόσο,\n"
 "δεν υπακούν όλα τα εφαρμογίδια σε αυτά τα μεγέθη."
 
-#: panel/panel_config.c:1075
+#: panel/panel_config.c:1103
 msgid "Background Type: "
 msgstr "Είδος Παρασκηνίου:"
 
-#: panel/panel_config.c:1114
+#: panel/panel_config.c:1142
 msgid "Color to use:"
 msgstr "Χρώμα προς χρήση:"
 
-#: panel/panel_config.c:1155
+#: panel/panel_config.c:1183
 msgid "Don't scale image to fit"
 msgstr "Όχι κλιμάκωση εικόνας για ταίριασμα"
 
-#: panel/panel_config.c:1161
+#: panel/panel_config.c:1189
 msgid "Scale image (keep proportions)"
 msgstr "Κλιμάκωση εικόνας (τήρηση αναλογιών)"
 
-#: panel/panel_config.c:1166
+#: panel/panel_config.c:1194
 msgid "Stretch image (change proportions)"
 msgstr "Τέντωμα εικόνας (αλλαγή αναλογιών)"
 
-#: panel/panel_config.c:1181
+#: panel/panel_config.c:1209
 msgid "Rotate image for vertical panels"
 msgstr "Περιστροφή εικόνας για κάθετα ταμπλώ"
 
-#: panel/panel_config.c:1344
+#: panel/panel_config.c:1372
 msgid "Panel properties"
 msgstr "Ιδιότητες ταμπλώ"
 
-#: panel/panel_config.c:1402
+#: panel/panel_config.c:1430
 msgid "Background"
 msgstr "Παρασκήνιο"
 
