@@ -18,7 +18,7 @@ static gchar *contributors[] = {
 	"Shawn T. Amundson",
 	"Erik Andersen",
 	"Jon Anhold",
-	/* for languages that can't display atilde, replace 'á' with 'a' */
+	/* for languages that can't display aacute, replace 'á' with 'a' */
 	N_("Szabolcs 'Shooby' Bán"),
 	"Martin Baulig",
 	"Tom Bech",
