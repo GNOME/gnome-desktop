@@ -46,7 +46,7 @@ static gchar *contributors[] = {
 	"Matthias Clasen",
 	"Andrew Clausen",
 	"Jeremy Collins",
-	"Rusty Conover"
+	"Rusty Conover",
 	"Alan Cox",
 	"Mark Crichton",
 	"Andreas Czechanowski",
@@ -80,7 +80,7 @@ static gchar *contributors[] = {
 	"Mark Galassi",
 	"Tony Gale",
 	"Jeff Garzik",
-	"The Mysterious GEGL",
+	N_("The Mysterious GEGL"),
 	"Tim Gerla",
 	"Bjoern Giesler",
 	"Dave Glowacki",
