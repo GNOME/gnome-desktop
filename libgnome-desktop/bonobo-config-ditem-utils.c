@@ -34,7 +34,7 @@ static GSList *
 read_string_as_vector (const gchar *value)
 {
 	GSList *retval = NULL;
-	gchar buffer [BUFSIZ+3], *pos, sep = ',';
+	gchar buffer [BUFSIZ+3], *pos, sep1 = ',', sep2 = ';';
 	const gchar *c;
 
 	if (!value)
@@ -55,7 +55,7 @@ read_string_as_vector (const gchar *value)
 			continue;
 		}
 
-		if (*c == sep) {
+		if ((*c == sep1) || (*c == sep2)) {
 			*pos++ = '\0';
 			retval = g_slist_prepend (retval, g_strdup (buffer));
 			pos = buffer; c++;
