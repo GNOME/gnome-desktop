@@ -16,7 +16,8 @@ noinst_PROGRAMS = test-ditem test-hint test-ditem-edit
 libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c	\
 	gnome-ditem-edit.c	\
-	gnome-hint.c
+	gnome-hint.c		\
+	$(EGGFILES)
 
 
 libgnome_desktopdir = $(includedir)/gnome-desktop-2.0/libgnome
@@ -59,3 +60,12 @@ pkgconfig_DATA = gnome-desktop-2.0.pc
 
 EXTRA_DIST = \
 	gnome-desktop-2.0.pc.in
+
+EGGFILES =		\
+	egg-spawn.h	\
+	egg-spawn.c
+
+EGGDIR = $(srcdir)/../../libegg/libegg/screen-exec
+
+regenerate-built-sources:
+	EGGFILES="$(EGGFILES)" EGGDIR="$(EGGDIR)" $(srcdir)/update-from-egg.sh

@@ -31,6 +31,7 @@
 #include <glib.h>
 #include <glib-object.h>
 
+#include <gdk/gdk.h>
 #include <libgnomeui/gnome-icon-theme.h>
 
 G_BEGIN_DECLS
@@ -172,6 +173,12 @@ int			gnome_desktop_item_launch_with_env   (const GnomeDesktopItem     *item,
 							      char                      **envp,
 							      GError                    **error);
 
+int                     gnome_desktop_item_launch_on_screen  (const GnomeDesktopItem       *item,
+							      GList                        *file_list,
+							      GnomeDesktopItemLaunchFlags   flags,
+							      GdkScreen                    *screen,
+							      int                           workspace,
+							      GError                      **error);
 
 /* A list of files or urls dropped onto an icon This is the output
  * of gnome_vfs_uri_list_parse */

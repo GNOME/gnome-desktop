@@ -49,6 +49,8 @@
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+#include "egg-spawn.h"
+
 #include "gnome-desktop-item.h"
 
 #ifdef HAVE_STARTUP_NOTIFICATION
@@ -1507,6 +1509,8 @@ static int
 ditem_execute (const GnomeDesktopItem *item,
 	       const char *exec,
 	       GList *file_list,
+	       GdkScreen *screen,
+	       int workspace,
                char **envp,
 	       gboolean launch_only_one,
 	       gboolean use_current_dir,
@@ -1566,15 +1570,18 @@ ditem_execute (const GnomeDesktopItem *item,
 	 */
 
 	if (gnome_desktop_item_get_boolean (item, "StartupNotify")) {
-		/* FIXME this screen isn't the right one.
-		 * Don't we need gnome_desktop_item_launch_with_screen()?
-		 */
-		sn_context = sn_launcher_context_new (sn_display,
-						      DefaultScreen (gdk_display));
+		sn_context = sn_launcher_context_new (
+					sn_display,
+					screen ? gdk_screen_get_number (screen) :
+					         DefaultScreen (gdk_display));
 	} else {
 		sn_context = NULL;
 	}
 #endif
+
+	if (screen)
+		envp = egg_make_spawn_environment_for_screen (
+				screen, envp);
 	
 	do {
 		added_status = ADDED_NONE;
@@ -1688,8 +1695,7 @@ ditem_execute (const GnomeDesktopItem *item,
 		sn_launcher_context_set_binary_name (sn_context,
 						     exec);
 
-		/* FIXME we need to pass in the current workspace */
-		/* sn_launcher_context_set_workspace (sn_context, workspace); */
+		sn_launcher_context_set_workspace (sn_context, workspace);
 
 		sn_launcher_context_initiate (sn_context,
 					      g_get_prgname () ? g_get_prgname () : "unknown",
@@ -1706,6 +1712,9 @@ ditem_execute (const GnomeDesktopItem *item,
 	
 	if (term_argv)
 		g_strfreev (term_argv);
+
+	if (screen)
+		g_free (envp);
 
 	return ret;
 }
@@ -1735,58 +1744,16 @@ strip_the_amp (char *exec)
 	return TRUE;
 }
 
-/**
- * gnome_desktop_item_launch:
- * @item: A desktop item
- * @file_list:  Files/URIs to launch this item with, can be %NULL
- * @flags: FIXME
- * @error: FIXME
- *
- * This function runs the program listed in the specified 'item',
- * optionally appending additional arguments to its command line.  It uses
- * #g_shell_parse_argv to parse the the exec string into a vector which is
- * then passed to #g_spawn_async for execution. This can return all
- * the errors from GnomeURL, #g_shell_parse_argv and #g_spawn_async,
- * in addition to it's own.  The files are
- * only added if the entry defines one of the standard % strings in it's
- * Exec field.
- *
- * Returns: The the pid of the process spawned.  If more then one
- * process was spawned the last pid is returned.  On error -1
- * is returned and @error is set.
- */
-int
-gnome_desktop_item_launch (const GnomeDesktopItem *item,
-			   GList *file_list,
-			   GnomeDesktopItemLaunchFlags flags,
-			   GError **error)
-{
-	return gnome_desktop_item_launch_with_env (
-			item, file_list, flags, NULL, error);
-}
 
-/**
- * gnome_desktop_item_launch_with_env:
- * @item: A desktop item
- * @file_list:  Files/URIs to launch this item with, can be %NULL
- * @flags: FIXME
- * @envp: child's environment, or %NULL to inherit parent's
- * @error: FIXME
- *
- * See gnome_desktop_item_launch for a full description. This function
- * additionally passes an environment vector for the child process
- * which is to be launched.
- *
- * Returns: The the pid of the process spawned.  If more then one
- * process was spawned the last pid is returned.  On error -1
- * is returned and @error is set.
- */
-int
-gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
-				    GList                        *file_list,
-				    GnomeDesktopItemLaunchFlags   flags,
-				    char                        **envp,
-				    GError                      **error)
+static int
+gnome_desktop_item_launch_on_screen_with_env (
+		const GnomeDesktopItem       *item,
+		GList                        *file_list,
+		GnomeDesktopItemLaunchFlags   flags,
+		GdkScreen                    *screen,
+		int                           workspace,
+		char                        **envp,
+		GError                      **error)
 {
 	const char *exec;
 	char *the_exec;
@@ -1849,7 +1816,7 @@ gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
 		return -1;
 	}
 
-	ret = ditem_execute (item, the_exec, file_list, envp,
+	ret = ditem_execute (item, the_exec, file_list, screen, workspace, envp,
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS),
@@ -1857,6 +1824,94 @@ gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
 			     error);
 
 	return ret;
+}
+
+/**
+ * gnome_desktop_item_launch:
+ * @item: A desktop item
+ * @file_list:  Files/URIs to launch this item with, can be %NULL
+ * @flags: FIXME
+ * @error: FIXME
+ *
+ * This function runs the program listed in the specified 'item',
+ * optionally appending additional arguments to its command line.  It uses
+ * #g_shell_parse_argv to parse the the exec string into a vector which is
+ * then passed to #g_spawn_async for execution. This can return all
+ * the errors from GnomeURL, #g_shell_parse_argv and #g_spawn_async,
+ * in addition to it's own.  The files are
+ * only added if the entry defines one of the standard % strings in it's
+ * Exec field.
+ *
+ * Returns: The the pid of the process spawned.  If more then one
+ * process was spawned the last pid is returned.  On error -1
+ * is returned and @error is set.
+ */
+int
+gnome_desktop_item_launch (const GnomeDesktopItem       *item,
+			   GList                        *file_list,
+			   GnomeDesktopItemLaunchFlags   flags,
+			   GError                      **error)
+{
+	return gnome_desktop_item_launch_on_screen_with_env (
+			item, file_list, flags, NULL, -1, NULL, error);
+}
+
+/**
+ * gnome_desktop_item_launch_with_env:
+ * @item: A desktop item
+ * @file_list:  Files/URIs to launch this item with, can be %NULL
+ * @flags: FIXME
+ * @envp: child's environment, or %NULL to inherit parent's
+ * @error: FIXME
+ *
+ * See gnome_desktop_item_launch for a full description. This function
+ * additionally passes an environment vector for the child process
+ * which is to be launched.
+ *
+ * Returns: The the pid of the process spawned.  If more then one
+ * process was spawned the last pid is returned.  On error -1
+ * is returned and @error is set.
+ */
+int
+gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
+				    GList                        *file_list,
+				    GnomeDesktopItemLaunchFlags   flags,
+				    char                        **envp,
+				    GError                      **error)
+{
+	return gnome_desktop_item_launch_on_screen_with_env (
+			item, file_list, flags,
+			NULL, -1, envp, error);
+}
+
+/**
+ * gnome_desktop_item_launch_on_screen:
+ * @item: A desktop item
+ * @file_list:  Files/URIs to launch this item with, can be %NULL
+ * @flags: FIXME
+ * @screen: the %GdkScreen on which the application should be launched
+ * @workspace: the workspace on which the app should be launched (-1 for current)
+ * @error: FIXME
+ *
+ * See gnome_desktop_item_launch for a full description. This function
+ * additionally attempts to launch the application on a given screen
+ * and workspace.
+ *
+ * Returns: The the pid of the process spawned.  If more then one
+ * process was spawned the last pid is returned.  On error -1
+ * is returned and @error is set.
+ */
+int
+gnome_desktop_item_launch_on_screen (const GnomeDesktopItem       *item,
+				     GList                        *file_list,
+				     GnomeDesktopItemLaunchFlags   flags,
+				     GdkScreen                    *screen,
+				     int                           workspace,
+				     GError                      **error)
+{
+	return gnome_desktop_item_launch_on_screen_with_env (
+			item, file_list, flags,
+			screen, workspace, NULL, error);
 }
 
 /**

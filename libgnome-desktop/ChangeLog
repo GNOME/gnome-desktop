@@ -1,3 +1,20 @@
+2002-11-28  Mark McLoughlin  <mark@skynet.ie>
+
+	Add a ditem launch variant with screen and
+	workspace args for startup notification support.
+
+	* Makefile.am, egg-spawn.[ch]: add egg-spawn
+	files to the build.
+
+	* gnome-desktop-item.[ch]:
+	(ditem_execute): add screen and workspace args.
+	(gnome_desktop_item_launch_on_screen_with_env): move
+	from launch_with_env.
+	(gnome_desktop_item_launch),
+	(gnome_desktop_item_launch_with_env),
+	(gnome_desktop_item_launch_on_screen):
+	call on_screen_with_env.
+
 2002-11-27  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-ditem-edit.c: (setup_option):
