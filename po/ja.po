@@ -1,5 +1,5 @@
 # gnome-core ja.po.
-# Copyright (C) 1998 Free Software Foundation, Inc.
+# Copyright (C) 1998-2000 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998
 # Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1999
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-07-24 23:07+0900\n"
-"PO-Revision-Date: 2000-07-25 15:40+09:00\n"
+"POT-Creation-Date: 2000-08-09 00:25+0900\n"
+"PO-Revision-Date: 2000-08-09 00:56+09:00\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "幅"
 msgid "Height"
 msgstr "高さ"
 
-#: applets/desk-guide/deskguide_applet.c:241 applets/fish/fish.c:831
+#: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
 #: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
@@ -352,7 +352,7 @@ msgstr "メニューとしてパネルに追加する"
 msgid "Add new item to this menu"
 msgstr "このメニューに新しい項目を追加する"
 
-#: applets/desk-guide/deskguide_applet.c:235 applets/fish/fish.c:824
+#: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
 #: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
 #: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1254 panel/menu.c:4516
@@ -2858,7 +2858,7 @@ msgstr "ウインドウを殺す前に確認"
 msgid "Move iconified tasks to current workspace when restoring"
 msgstr "リストア時に、アイコンかされたタスクを現在のワークスペースへ移動"
 
-#: applets/desk-guide/deskguide_applet.c:75
+#: applets/desk-guide/deskguide_applet.c:76
 #: applets/tasklist/tasklist_properties.c:290
 msgid "Display"
 msgstr "表示"
@@ -2911,7 +2911,7 @@ msgstr "ウィンドウを閉じる"
 msgid "Kill app"
 msgstr "殺す"
 
-#: applets/desk-guide/deskguide_applet.c:248 applets/fish/fish.c:838
+#: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
 #: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
 msgid "About..."
@@ -3228,21 +3228,33 @@ msgstr ""
 "メモリを無駄使いします。このアプレットを使っている人を "
 "見かけたら、カウンセリングを勧めて下さい。"
 
-#: applets/desk-guide/deskguide_applet.c:76
+#: applets/desk-guide/deskguide_applet.c:77
 msgid "Layout"
 msgstr "レイアウト"
 
-#: applets/desk-guide/deskguide_applet.c:78
+#: applets/desk-guide/deskguide_applet.c:79
 msgid "Switch tasklist arrow"
 msgstr "タスクリストの矢印を切替"
 
-#: applets/desk-guide/deskguide_applet.c:86
+#: applets/desk-guide/deskguide_applet.c:81
 msgid "Only show current desktop in pager"
 msgstr "ページャにカレントデスクトップのみ表示"
 
-#: applets/desk-guide/deskguide_applet.c:88
+#: applets/desk-guide/deskguide_applet.c:83
 msgid "Raise area grid over tasks"
 msgstr "分割線をタスクの上に描画"
+
+#: applets/desk-guide/deskguide_applet.c:84
+msgid "Thumb Nails"
+msgstr "サム・ネイル"
+
+#: applets/desk-guide/deskguide_applet.c:86
+msgid "Fill window thumbnails with screen contents"
+msgstr "ウインドウのサム・ネイルに画面と同じものを描く"
+
+#: applets/desk-guide/deskguide_applet.c:88
+msgid "Incremental update delay [ms]"
+msgstr "更新間隔 [ms]"
 
 #: applets/desk-guide/deskguide_applet.c:89
 msgid "Tooltips"
@@ -3346,18 +3358,10 @@ msgid "Advanced"
 msgstr "上級"
 
 #: applets/desk-guide/deskguide_applet.c:136
-msgid "Drawing"
-msgstr "描画"
-
-#: applets/desk-guide/deskguide_applet.c:138
-msgid "Draw desktops double-buffered (recommended)"
-msgstr "デスクトップをダブルバッファで描画 (推奨)"
-
-#: applets/desk-guide/deskguide_applet.c:139
 msgid "Window Manager Workarounds"
 msgstr "ウインドウマネージャごとの対策"
 
-#: applets/desk-guide/deskguide_applet.c:141
+#: applets/desk-guide/deskguide_applet.c:138
 msgid ""
 "Window manager moves decoration window instead\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
@@ -3365,7 +3369,7 @@ msgstr ""
 "ウインドウマネージャは飾りウインドウを動かす\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
 
-#: applets/desk-guide/deskguide_applet.c:144
+#: applets/desk-guide/deskguide_applet.c:141
 msgid ""
 "Window manager changes active area on all desktops\n"
 "(FVWM, Sawmill)"
@@ -3373,7 +3377,7 @@ msgstr ""
 "ウインドウマネージャはすべてのデスクトップのアクティブ領域を変更\n"
 "(FVWM, Sawmill)"
 
-#: applets/desk-guide/deskguide_applet.c:147
+#: applets/desk-guide/deskguide_applet.c:144
 msgid ""
 "Window manager expects pager to modify area+desktop properties directly\n"
 "(Enlightenment, FVWM)"
@@ -3382,19 +3386,19 @@ msgstr ""
 "ことを期待\n"
 "(Enlightenment, FVWM)"
 
-#: applets/desk-guide/deskguide_applet.c:150
+#: applets/desk-guide/deskguide_applet.c:147
 msgid "Behaviour"
 msgstr "振る舞い"
 
-#: applets/desk-guide/deskguide_applet.c:152
+#: applets/desk-guide/deskguide_applet.c:149
 msgid "Popdown task view automatically"
 msgstr "タスクビューを自動的にポップダウンする"
 
-#: applets/desk-guide/deskguide_applet.c:173
+#: applets/desk-guide/deskguide_applet.c:170
 msgid "GNOME Desktop Guide (Pager)"
 msgstr "GNOMEデスクトップガイド (ページャー)"
 
-#: applets/desk-guide/deskguide_applet.c:189
+#: applets/desk-guide/deskguide_applet.c:186
 msgid ""
 "You are not running a GNOME Compliant\n"
 "Window Manager. GNOME support by the \n"
@@ -3406,21 +3410,27 @@ msgstr ""
 "お勧めします.  そうしなければデスクガイドは\n"
 "正常に動作しません."
 
-#: applets/desk-guide/deskguide_applet.c:194
+#: applets/desk-guide/deskguide_applet.c:191
 msgid "Desk Guide Alert"
 msgstr "デスクガイドからの警告"
 
-#: applets/desk-guide/deskguide_applet.c:610
+#: applets/desk-guide/deskguide_applet.c:609
 msgid "Desk Guide Task View"
 msgstr "デスクガイド・タスクビュー"
 
-#: applets/desk-guide/deskguide_applet.c:1055
+#: applets/desk-guide/deskguide_applet.c:1035
 msgid "Global"
 msgstr "全体"
 
-#: applets/desk-guide/deskguide_applet.c:1111
+#: applets/desk-guide/deskguide_applet.c:1091
 msgid "Desk Guide Settings"
 msgstr "デスクガイドの設定"
+
+#~ msgid "Drawing"
+#~ msgstr "描画"
+
+#~ msgid "Draw desktops double-buffered (recommended)"
+#~ msgstr "デスクトップをダブルバッファで描画 (推奨)"
 
 #~ msgid "Debian menus"
 #~ msgstr "Debianメニュー"
