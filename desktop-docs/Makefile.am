@@ -59,17 +59,17 @@ GNOME_INTRO_PICTURES = pix/terminal.gif \
 # the "portable" `basename' stand-in should work for the files that we
 # throw at it
 install-data-local: gnome-intro.html
-	$(mkinstalldirs) $(gnome_intro_helpdir)
-	$(mkinstalldirs) $(gnome_intro_helpdir)/pix
-	$(INSTALL_DATA) $(srcdir)/topic.dat $(gnome_intro_helpdir)/topic.dat
-	$(INSTALL_DATA) $(srcdir)/gnome-intro.html $(gnome_intro_helpdir)/index.html
+	$(mkinstalldirs) $(DESTDIR)$(gnome_intro_helpdir)
+	$(mkinstalldirs) $(DESTDIR)$(gnome_intro_helpdir)/pix
+	$(INSTALL_DATA) $(srcdir)/topic.dat $(DESTDIR)$(gnome_intro_helpdir)/topic.dat
+	$(INSTALL_DATA) $(srcdir)/gnome-intro.html $(DESTDIR)$(gnome_intro_helpdir)/index.html
 	for file in $(GNOME_INTRO_HTML_FILES); do \
 	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
-	  $(INSTALL_DATA) $(srcdir)/$$file $(gnome_intro_helpdir)/$$basefile; \
+	  $(INSTALL_DATA) $(srcdir)/$$file $(DESTDIR)$(gnome_intro_helpdir)/$$basefile; \
 	done
 	for file in $(GNOME_INTRO_PICTURES); do \
 	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
-	  $(INSTALL_DATA) $(srcdir)/$$file $(gnome_intro_helpdir)/pix/$$basefile; \
+	  $(INSTALL_DATA) $(srcdir)/$$file $(DESTDIR)$(gnome_intro_helpdir)/pix/$$basefile; \
 	done
 
 GNOME_INTRO_GIFS = pix/panel-basic.gif pix/panel-menu.gif \
