@@ -3,14 +3,39 @@
 # Sergey Panov <sipan@mit.edu>, 1999
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-core 1.1.7\n"
-"POT-Creation-Date: 2001-01-09 18:06+0300\n"
-"PO-Revision-Date: 2001-01-09 18:08+03:00\n"
+"Project-Id-Version: gnome-core\n"
+"POT-Creation-Date: 2001-01-19 18:59+0300\n"
+"PO-Revision-Date: 2001-01-19 20:22+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: panel/gnome-panel-add-launcher.c:34
+msgid "Panel to add the launcher to"
+msgstr "Добавить этот запускатель на панель"
+
+#: panel/gnome-panel-add-launcher.c:34 panel/gnome-panel-add-launcher.c:35
+msgid "NUMBER"
+msgstr "НОМЕР"
+
+#: panel/gnome-panel-add-launcher.c:35
+msgid "Position to add the launcher to"
+msgstr "Место добавления запускателя"
+
+#: panel/gnome-panel-add-launcher.c:36
+msgid "The argument is a url to add, not a .desktop file"
+msgstr ""
+
+#: panel/gnome-panel-add-launcher.c:66
+msgid ""
+"You must supply a single argument with the .desktop file or url to use\n"
+msgstr ""
+
+#: panel/gnome-panel-add-launcher.c:80
+msgid "No panel found\n"
+msgstr "Панель не найдена\n"
 
 #: applets/desk-guide/deskguide_applet.c:76
 #: applets/tasklist/tasklist_properties.c:311
@@ -210,7 +235,7 @@ msgstr "Свойства..."
 #: applets/desk-guide/deskguide_applet.c:242 applets/fish/fish.c:912
 #: applets/gen_util/clock.c:443 applets/gen_util/mailcheck.c:1403
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:1080
-#: gnome-terminal/gnome-terminal.c:1703 gsm/session-properties.c:182
+#: gnome-terminal/gnome-terminal.c:1587 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:459 panel/gnome-run.c:380
 #: panel/launcher.c:626 panel/logout.c:113 panel/logout.c:194
 #: panel/menu.c:5493 panel/status.c:366 panel/swallow.c:420
@@ -270,9 +295,9 @@ msgid "The Animation Filename:"
 msgstr "Файл с мультипликацией:"
 
 #: applets/fish/fish.c:498 applets/gen_util/mailcheck.c:940
-#: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1319
-#: panel/menu-properties.c:594 panel/menu-properties.c:632
-#: panel/panel-util.c:114 panel/panel_config.c:1479 panel/swallow.c:255
+#: gnome-hint/gnome-hint-properties.c:163 panel/menu-properties.c:594
+#: panel/menu-properties.c:632 panel/panel-util.c:114
+#: panel/panel_config.c:1479 panel/swallow.c:255
 msgid "Browse"
 msgstr "Обзор"
 
@@ -872,7 +897,7 @@ msgid "Sort _Recursive"
 msgstr "Рекурсивная сортировка"
 
 #. loading dialog
-#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:307 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "Редактор GNOME меню"
 
@@ -884,7 +909,7 @@ msgstr ""
 "Выпущен под GNU Public License.\n"
 "Редактор GNOME меню"
 
-#: gmenu/main.c:290
+#: gmenu/main.c:287
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "Не удалось найти каталог установки GNOME\n"
 
@@ -987,12 +1012,12 @@ msgstr "untitled.desktop"
 msgid "untitled"
 msgstr "безымянный"
 
-#: gmenu/utils.c:29
+#: gmenu/utils.c:32
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "создание каталога пользователя: %s\n"
 
-#: gmenu/utils.c:32
+#: gmenu/utils.c:35
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "невозможно создать каталог пользователя: %s\n"
@@ -1123,15 +1148,27 @@ msgstr ""
 "Главное Меню. Это меню содержит все приложения,\n"
 "инструменты и команды Gnome."
 
-#: gnome-hint/gnome-hint.c:271
+#: gnome-hint/gnome-hint.c:273
 msgid "You do not have fortune installed."
 msgstr "У вас не установлена fortune."
 
-#: gnome-hint/gnome-hint.c:399
+#: gnome-hint/gnome-hint.c:401
 msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
 msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
 
-#: gnome-hint/gnome-hint.c:424
+#: gnome-hint/gnome-hint.c:402 gnome-hint/gnome-hint.c:588
+msgid "Fortune"
+msgstr "Фортуна"
+
+#: gnome-hint/gnome-hint.c:402 gnome-hint/gnome-hint.c:581
+msgid "Message of The Day"
+msgstr "Сообщение дня"
+
+#: gnome-hint/gnome-hint.c:402
+msgid "GNOME Hints"
+msgstr "Подсказки GNOME"
+
+#: gnome-hint/gnome-hint.c:426
 msgid ""
 "You've chosen to disable the startup hint.\n"
 "To re-enable it, choose \"Startup Hint\"\n"
@@ -1141,23 +1178,15 @@ msgstr ""
 "Чтобы включить их, выберите \"Советы при запуске\"\n"
 "в центре управления Gnome"
 
-#: gnome-hint/gnome-hint.c:524
+#: gnome-hint/gnome-hint.c:526
 msgid "No message of the day found!"
 msgstr "Сообщение дня не найдено!."
 
-#: gnome-hint/gnome-hint.c:579
-msgid "Message of The Day"
-msgstr "Сообщение дня"
-
-#: gnome-hint/gnome-hint.c:586
-msgid "Fortune"
-msgstr "Фортуна"
-
-#: gnome-hint/gnome-hint.c:594
+#: gnome-hint/gnome-hint.c:596
 msgid "Gnome hint"
 msgstr "Совет GNOME"
 
-#: gnome-hint/gnome-hint.c:619
+#: gnome-hint/gnome-hint.c:621
 msgid "Display this dialog next time"
 msgstr "Показать этот диалог в следующий раз"
 
@@ -1195,33 +1224,33 @@ msgstr "Показывать сообщение дня вместо советов"
 msgid "Message of the day file to use: "
 msgstr "Используемый файл сообщений дня: "
 
-#: gnome-terminal/gnome-terminal.c:228
+#: gnome-terminal/gnome-terminal.c:233
 msgid "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
 msgstr "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
 
-#: gnome-terminal/gnome-terminal.c:230
+#: gnome-terminal/gnome-terminal.c:235
 msgid "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
 msgstr "GNOME Терминал:     Miguel de Icaza (miguel@kernel.org)"
 
-#: gnome-terminal/gnome-terminal.c:232
+#: gnome-terminal/gnome-terminal.c:237
 msgid "    Erik Troan (ewt@redhat.com)"
 msgstr "    Erik Troan (ewt@redhat.com)"
 
-#: gnome-terminal/gnome-terminal.c:249
+#: gnome-terminal/gnome-terminal.c:254
 msgid "GNOME Terminal"
 msgstr "GNOME Терминал"
 
-#: gnome-terminal/gnome-terminal.c:252
+#: gnome-terminal/gnome-terminal.c:257
 msgid "The GNOME terminal emulation program."
 msgstr "Программа эмуляции терминала GNOME"
 
-#: gnome-terminal/gnome-terminal.c:615 gnome-terminal/gnome-terminal.c:1176
-#: gnome-terminal/gnome-terminal.c:1186 gnome-terminal/gnome-terminal.c:2500
+#: gnome-terminal/gnome-terminal.c:610 gnome-terminal/gnome-terminal.c:1163
+#: gnome-terminal/gnome-terminal.c:1173 gnome-terminal/gnome-terminal.c:2384
 #: panel/menu.c:4405
 msgid "Default"
 msgstr "По умолчанию"
 
-#: gnome-terminal/gnome-terminal.c:793
+#: gnome-terminal/gnome-terminal.c:788
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1231,264 +1260,130 @@ msgstr ""
 "конфигурацию этого окна в соответствие с конфигурацией\n"
 "нового класса?"
 
-#: gnome-terminal/gnome-terminal.c:973
+#: gnome-terminal/gnome-terminal.c:965
 msgid "Linux console"
 msgstr "Linux консоль"
 
-#: gnome-terminal/gnome-terminal.c:974
+#: gnome-terminal/gnome-terminal.c:966
 msgid "Color Xterm"
 msgstr "Цветной Xterm"
 
-#: gnome-terminal/gnome-terminal.c:975
+#: gnome-terminal/gnome-terminal.c:967
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:976
+#: gnome-terminal/gnome-terminal.c:968
 msgid "Custom"
 msgstr "Нестандартные"
 
-#: gnome-terminal/gnome-terminal.c:981
+#: gnome-terminal/gnome-terminal.c:973
 msgid "White on black"
 msgstr "Белый на черном"
 
-#: gnome-terminal/gnome-terminal.c:982
+#: gnome-terminal/gnome-terminal.c:974
 msgid "Black on white"
 msgstr "Черный на белом"
 
-#: gnome-terminal/gnome-terminal.c:983
+#: gnome-terminal/gnome-terminal.c:975
 msgid "Green on black"
 msgstr "Зеленый на черном"
 
-#: gnome-terminal/gnome-terminal.c:984
+#: gnome-terminal/gnome-terminal.c:976
 msgid "Black on light yellow"
 msgstr "Черный на светло-желтом"
 
-#: gnome-terminal/gnome-terminal.c:985
+#: gnome-terminal/gnome-terminal.c:977
 msgid "Custom colors"
 msgstr "Нестандартные цвета"
 
-#: gnome-terminal/gnome-terminal.c:990
+#: gnome-terminal/gnome-terminal.c:982
 msgid "Left"
 msgstr "Слева"
 
-#: gnome-terminal/gnome-terminal.c:991
+#: gnome-terminal/gnome-terminal.c:983
 msgid "Right"
 msgstr "Справа"
 
-#: gnome-terminal/gnome-terminal.c:992
+#: gnome-terminal/gnome-terminal.c:984
 msgid "Hidden"
 msgstr "Спрятать"
 
-#: gnome-terminal/gnome-terminal.c:1135
-msgid "General"
-msgstr "Общие"
-
-#. Font
-#: gnome-terminal/gnome-terminal.c:1138
-msgid "Font:"
-msgstr "Шрифт:"
-
-#: gnome-terminal/gnome-terminal.c:1160 panel/gnome-run.c:192
+#: gnome-terminal/gnome-terminal.c:1150 panel/gnome-run.c:192
 #: panel/gnome-run.c:265
 msgid "Browse..."
 msgstr "Обзор..."
 
-#. Terminal class
-#: gnome-terminal/gnome-terminal.c:1168
-msgid "Terminal Class"
-msgstr "Класс терминала"
-
-#. Toggle the use of bold
-#: gnome-terminal/gnome-terminal.c:1197
-msgid "Enable bold text"
-msgstr "Включить полужирный текст"
-
-#. Blinking status
-#: gnome-terminal/gnome-terminal.c:1213
-msgid "Blinking cursor"
-msgstr "Мигающий курсор"
-
-#. Show menu bar
-#: gnome-terminal/gnome-terminal.c:1222
-msgid "Hide menu bar"
-msgstr "Убрать строку меню"
-
-#. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:1231
-msgid "Silence Terminal bell"
-msgstr "Выключить звонок терминала"
-
-#. Swap keys
-#: gnome-terminal/gnome-terminal.c:1240
-msgid "Swap DEL/Backspace"
-msgstr "Переставить DEL/Backspace"
-
-#. --login by default
-#: gnome-terminal/gnome-terminal.c:1249
-msgid "Use --login by default"
-msgstr "--login по умолчанию "
-
-#. Word selection class
-#: gnome-terminal/gnome-terminal.c:1258
-msgid "Select-by-word characters"
-msgstr "Литеры для выбора слов"
-
-#. image frame
-#: gnome-terminal/gnome-terminal.c:1280 panel/panel_config.c:1467
-msgid "Image"
-msgstr "Изображение"
-
-#: gnome-terminal/gnome-terminal.c:1282 panel/menu.c:4433
-msgid "Background type"
-msgstr "Тип фона"
-
-#: gnome-terminal/gnome-terminal.c:1292 panel/menu.c:4376
-msgid "None"
-msgstr "Нет"
-
-#: gnome-terminal/gnome-terminal.c:1300
-msgid "Background pixmap"
-msgstr "Фоновое изображение"
-
-#: gnome-terminal/gnome-terminal.c:1316
-msgid "Pixmap file:"
-msgstr "Файл изображения:"
-
-#: gnome-terminal/gnome-terminal.c:1331
-msgid "Background pixmap scrolls"
-msgstr "Прокрутка фонового изображения"
-
-#: gnome-terminal/gnome-terminal.c:1344
-msgid "Transparent"
-msgstr "Прозрачное"
-
-#. Shaded
-#: gnome-terminal/gnome-terminal.c:1371
-msgid "Background should be shaded"
-msgstr "Фон должен быть затенен"
-
-#: gnome-terminal/gnome-terminal.c:1385
-msgid "Colors"
-msgstr "Цвета"
-
-#. Color palette
-#: gnome-terminal/gnome-terminal.c:1388
-msgid "Color scheme:"
-msgstr "Цветовая схема:"
-
-#. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1398
-msgid "Foreground color:"
-msgstr "Цвет переднего плана:"
-
-#: gnome-terminal/gnome-terminal.c:1406
-msgid "Background color:"
-msgstr "Цвет фона:"
-
-#: gnome-terminal/gnome-terminal.c:1413
-msgid "Color palette:"
-msgstr "Палитра:"
-
-#. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1436
-msgid "Fore/Background Colour:"
-msgstr "Цвет переднего плана/фона:"
-
-#: gnome-terminal/gnome-terminal.c:1450
-msgid "Scrolling"
-msgstr "Прокрутка"
-
-#. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1453
-msgid "Scrollbar position"
-msgstr "Положение полосы прокрутки"
-
-#. Scroll back
-#: gnome-terminal/gnome-terminal.c:1464
-msgid "Scrollback lines"
-msgstr "Глубина прокрутки (строк)"
-
-#. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1478
-msgid "Scroll on keystroke"
-msgstr "Прокрутка при вводе"
-
-#. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1487
-msgid "Scroll on output"
-msgstr "Прокрутка при выводе"
-
-#: gnome-terminal/gnome-terminal.c:1519
+#: gnome-terminal/gnome-terminal.c:1403
 msgid "Color selector"
 msgstr "Выбор цвета"
 
-#: gnome-terminal/gnome-terminal.c:1625 gnome-terminal/gnome-terminal.c:1642
+#: gnome-terminal/gnome-terminal.c:1509 gnome-terminal/gnome-terminal.c:1526
 msgid "_New terminal"
 msgstr "Новый терминал"
 
-#: gnome-terminal/gnome-terminal.c:1625 gnome-terminal/gnome-terminal.c:1642
+#: gnome-terminal/gnome-terminal.c:1509 gnome-terminal/gnome-terminal.c:1526
 msgid "Creates a new terminal window"
 msgstr "Запустить ещё один терминал"
 
-#: gnome-terminal/gnome-terminal.c:1627
+#: gnome-terminal/gnome-terminal.c:1511
 msgid "_Hide menubar"
 msgstr "Спрятать меню"
 
-#: gnome-terminal/gnome-terminal.c:1629
+#: gnome-terminal/gnome-terminal.c:1513
 msgid "_Close terminal"
 msgstr "Закрыть терминал"
 
-#: gnome-terminal/gnome-terminal.c:1644
+#: gnome-terminal/gnome-terminal.c:1528
 msgid "_Show menubar"
 msgstr "Панель меню"
 
-#: gnome-terminal/gnome-terminal.c:1644
+#: gnome-terminal/gnome-terminal.c:1528
 msgid "Toggles whether or not the menubar is displayed."
 msgstr "Использовать или не использовать панель меню"
 
-#: gnome-terminal/gnome-terminal.c:1646
+#: gnome-terminal/gnome-terminal.c:1530
 msgid "_Secure keyboard"
 msgstr "Захват клавиатуры"
 
-#: gnome-terminal/gnome-terminal.c:1647
+#: gnome-terminal/gnome-terminal.c:1531
 msgid "Toggles whether or not the keyboard is grabbed by the terminal."
 msgstr "Нормальное или захваченное состояние клавиатуры"
 
-#: gnome-terminal/gnome-terminal.c:1650 gnome-terminal/gnome-terminal.c:1679
+#: gnome-terminal/gnome-terminal.c:1534 gnome-terminal/gnome-terminal.c:1563
 msgid "_Reset Terminal"
 msgstr "Обновить терминал"
 
-#: gnome-terminal/gnome-terminal.c:1651 gnome-terminal/gnome-terminal.c:1680
+#: gnome-terminal/gnome-terminal.c:1535 gnome-terminal/gnome-terminal.c:1564
 msgid "Reset and _Clear"
 msgstr "Обновить и очистить"
 
-#: gnome-terminal/gnome-terminal.c:1661
+#: gnome-terminal/gnome-terminal.c:1545
 msgid "_Open in browser"
 msgstr "Открыть в навигатора"
 
-#: gnome-terminal/gnome-terminal.c:1682
+#: gnome-terminal/gnome-terminal.c:1566
 msgid "C_olor selector..."
 msgstr "Выбор цвета..."
 
-#: gnome-terminal/gnome-terminal.c:1688
+#: gnome-terminal/gnome-terminal.c:1572
 msgid "File"
 msgstr "Файл"
 
-#: gnome-terminal/gnome-terminal.c:1693
+#: gnome-terminal/gnome-terminal.c:1577
 msgid "Edit"
 msgstr "Правка"
 
-#: gnome-terminal/gnome-terminal.c:1698 gsm/gsm-client-row.c:59
+#: gnome-terminal/gnome-terminal.c:1582 gsm/gsm-client-row.c:59
 #: panel/foobar-widget.c:909
 msgid "Settings"
 msgstr "Настройки"
 
-#: gnome-terminal/gnome-terminal.c:2156
+#: gnome-terminal/gnome-terminal.c:2040
 #, c-format
 msgid "The error was: %s"
 msgstr "Ошибка: %s"
 
-#: gnome-terminal/gnome-terminal.c:2157
+#: gnome-terminal/gnome-terminal.c:2041
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -1502,7 +1397,7 @@ msgstr ""
 "Пожалуйста, прочитайте в linux/Documentation/Changes\n"
 "рекомендации по настройке этих устройств."
 
-#: gnome-terminal/gnome-terminal.c:2162
+#: gnome-terminal/gnome-terminal.c:2046
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -1513,139 +1408,195 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2710
+#: gnome-terminal/gnome-terminal.c:2605
 msgid "Terminal class name"
 msgstr "Имя класса терминала"
 
-#: gnome-terminal/gnome-terminal.c:2710
+#: gnome-terminal/gnome-terminal.c:2605
 msgid "TCLASS"
 msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2713
+#: gnome-terminal/gnome-terminal.c:2608
 msgid "Specifies font name"
 msgstr "Задает имя шрифта"
 
-#: gnome-terminal/gnome-terminal.c:2713
+#: gnome-terminal/gnome-terminal.c:2608
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2716
+#: gnome-terminal/gnome-terminal.c:2611
 msgid "Do not start up shells as login shells"
 msgstr "Не запускать shell как login shell"
 
-#: gnome-terminal/gnome-terminal.c:2719
+#: gnome-terminal/gnome-terminal.c:2614
 msgid "Start up shells as login shells"
 msgstr "Запускать shell как login shell"
 
-#: gnome-terminal/gnome-terminal.c:2722
+#: gnome-terminal/gnome-terminal.c:2617
 msgid "Specifies the geometry for the main window"
 msgstr "Задает геометрию главного окна"
 
-#: gnome-terminal/gnome-terminal.c:2722
+#: gnome-terminal/gnome-terminal.c:2617
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:2725
+#: gnome-terminal/gnome-terminal.c:2620
 msgid "Execute this program instead of a shell"
 msgstr "Запустить программу вместо shell"
 
-#: gnome-terminal/gnome-terminal.c:2725 gnome-terminal/gnome-terminal.c:2728
+#: gnome-terminal/gnome-terminal.c:2620 gnome-terminal/gnome-terminal.c:2623
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: gnome-terminal/gnome-terminal.c:2728
+#: gnome-terminal/gnome-terminal.c:2623
 msgid "Execute this program the same way as xterm does"
 msgstr "Запустить эту программу так как это делает xterm"
 
-#: gnome-terminal/gnome-terminal.c:2731
+#: gnome-terminal/gnome-terminal.c:2626
 msgid "Foreground color"
 msgstr "Цвет переднего плана"
 
-#: gnome-terminal/gnome-terminal.c:2731 gnome-terminal/gnome-terminal.c:2734
+#: gnome-terminal/gnome-terminal.c:2626 gnome-terminal/gnome-terminal.c:2629
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:2734
+#: gnome-terminal/gnome-terminal.c:2629
 msgid "Background color"
 msgstr "Цвет фона"
 
-#: gnome-terminal/gnome-terminal.c:2737
+#: gnome-terminal/gnome-terminal.c:2632
+msgid "Solid background"
+msgstr "Сплошной фон"
+
+#: gnome-terminal/gnome-terminal.c:2632
+msgid "SOLID"
+msgstr "СПЛОШНОЙ"
+
+#: gnome-terminal/gnome-terminal.c:2635
+msgid "Background pixmap"
+msgstr "Фоновое изображение"
+
+#: gnome-terminal/gnome-terminal.c:2635
+msgid "PIXMAP"
+msgstr "ИЗОБРАЖЕНИЕ"
+
+#: gnome-terminal/gnome-terminal.c:2639
+msgid "Background pixmap scrolls"
+msgstr "Прокрутка фонового изображения"
+
+#: gnome-terminal/gnome-terminal.c:2639
+msgid "BGSCROLL"
+msgstr "ПРОКРУТКА_ФОНА"
+
+#: gnome-terminal/gnome-terminal.c:2642
+msgid "Background pixmap does not scroll"
+msgstr "Фоновое изображение не прокручивается"
+
+#: gnome-terminal/gnome-terminal.c:2642
+msgid "BGNOSCROLL"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2646
+msgid "Shade background"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2646
+msgid "SHADED"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2649
+msgid "Do not shade background"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2649
+msgid "NOSHADED"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:2652
+msgid "Transparent background"
+msgstr "Прозрачный фон"
+
+#: gnome-terminal/gnome-terminal.c:2652
+msgid "TRANSPARENT"
+msgstr "ПРОЗРАЧНЫЙ"
+
+#: gnome-terminal/gnome-terminal.c:2655
 msgid "Update utmp entry"
 msgstr "Обновить значение utmp"
 
-#: gnome-terminal/gnome-terminal.c:2737
+#: gnome-terminal/gnome-terminal.c:2655
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2740
+#: gnome-terminal/gnome-terminal.c:2658
 msgid "Do not update utmp entry"
 msgstr "Не обновлять значение utmp"
 
-#: gnome-terminal/gnome-terminal.c:2740
+#: gnome-terminal/gnome-terminal.c:2658
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2743
+#: gnome-terminal/gnome-terminal.c:2661
 msgid "Update wtmp entry"
 msgstr "Обновить значение wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2743
+#: gnome-terminal/gnome-terminal.c:2661
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2746
+#: gnome-terminal/gnome-terminal.c:2664
 msgid "Do not update wtmp entry"
 msgstr "Не обновлять значение wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2746
+#: gnome-terminal/gnome-terminal.c:2664
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2749
+#: gnome-terminal/gnome-terminal.c:2667
 msgid "Update lastlog entry"
 msgstr "Обновить значение последнего входа"
 
-#: gnome-terminal/gnome-terminal.c:2749
+#: gnome-terminal/gnome-terminal.c:2667
 msgid "LASTLOG"
 msgstr "LASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2752
+#: gnome-terminal/gnome-terminal.c:2670
 msgid "Do not update lastlog entry"
 msgstr "Не обновлять значение последнего входа"
 
-#: gnome-terminal/gnome-terminal.c:2752
+#: gnome-terminal/gnome-terminal.c:2670
 msgid "NOLASTLOG"
 msgstr "NOLASTLOG"
 
-#: gnome-terminal/gnome-terminal.c:2755
+#: gnome-terminal/gnome-terminal.c:2673
 msgid "Set the window title"
 msgstr "Определить заголовок окна"
 
-#: gnome-terminal/gnome-terminal.c:2755
+#: gnome-terminal/gnome-terminal.c:2673
 msgid "TITLE"
 msgstr "TITLE"
 
-#: gnome-terminal/gnome-terminal.c:2758
+#: gnome-terminal/gnome-terminal.c:2676
 msgid "Set the window icon"
 msgstr "Установить пиктограмму окна"
 
-#: gnome-terminal/gnome-terminal.c:2758
+#: gnome-terminal/gnome-terminal.c:2676
 msgid "ICON"
 msgstr "ПИКТОГРАММА"
 
-#: gnome-terminal/gnome-terminal.c:2761
+#: gnome-terminal/gnome-terminal.c:2679
 msgid "Set the TERM variable"
 msgstr "Определить переменную TERM"
 
-#: gnome-terminal/gnome-terminal.c:2761
+#: gnome-terminal/gnome-terminal.c:2679
 msgid "TERMNAME"
 msgstr "TERMNAME"
 
-#: gnome-terminal/gnome-terminal.c:2764
+#: gnome-terminal/gnome-terminal.c:2682
 msgid "Try to start a TerminalFactory"
 msgstr "Попытка запустить TerminalFactory"
 
-#: gnome-terminal/gnome-terminal.c:2767
+#: gnome-terminal/gnome-terminal.c:2685
 msgid "Try to create the terminal with the TerminalFactory"
 msgstr "Попытка создать терминал с TerminalFactory"
 
@@ -1658,28 +1609,28 @@ msgstr "Поиск интернет-адресов для %s"
 msgid "Hide"
 msgstr "Спрятать"
 
-#: gsm/gnome-login-check.c:244
+#: gsm/gnome-login-check.c:246
 msgid "GNOME Login"
 msgstr "GNOME Login"
 
-#: gsm/gnome-login-check.c:244
+#: gsm/gnome-login-check.c:246
 msgid "Login"
 msgstr "Вход"
 
-#: gsm/gnome-login-check.c:271
+#: gsm/gnome-login-check.c:273
 msgid "Start with default programs"
 msgstr "Запуск программ по умолчанию"
 
-#: gsm/gnome-login-check.c:275
+#: gsm/gnome-login-check.c:277
 msgid "Reset all user settings"
 msgstr "Сбросить все настройки пользователя"
 
-#: gsm/gnome-login-check.c:286
+#: gsm/gnome-login-check.c:288
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "Сбросить все настройки пользователя GNOME для %s?"
 
-#: gsm/gnome-login-check.c:318
+#: gsm/gnome-login-check.c:320
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1690,15 +1641,15 @@ msgstr ""
 "текущему пользователю %s.\n"
 "Исправьте права владения для этого каталога."
 
-#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
+#: gsm/gnome-login-check.c:327 gsm/gnome-login-check.c:352
 msgid "Try again"
 msgstr "Попробовать снова"
 
-#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
+#: gsm/gnome-login-check.c:328 gsm/gnome-login-check.c:353
 msgid "Continue"
 msgstr "Продолжить"
 
-#: gsm/gnome-login-check.c:342
+#: gsm/gnome-login-check.c:344
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1711,7 +1662,7 @@ msgstr ""
 "Вы можете ликвидировать проблему, добавив\n"
 "%s в файл /etc/hosts."
 
-#: gsm/gnome-login-check.c:368
+#: gsm/gnome-login-check.c:370
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
@@ -1956,18 +1907,59 @@ msgstr "Инициализировать настройку сеанса"
 msgid "Only display warnings."
 msgstr "Только показ предупреждений."
 
-#: gsm/splash.c:81
-msgid "done"
-msgstr "сделано"
+#: gsm/splash.c:155
+#, c-format
+msgid "Starting GNOME: %s"
+msgstr "Запуск GNOME: %s"
 
-#: gsm/splash.c:153
+#: gsm/splash.c:185
+msgid "Audio Settings"
+msgstr "Настройки звука"
+
+#: gsm/splash.c:186 gsm/splash.c:187
+msgid "Screensaver"
+msgstr "Хранитель экрана"
+
+#: gsm/splash.c:188 gsm/splash.c:189
+msgid "Sawfish Window Manager"
+msgstr "Диспетчер окон Sawfish"
+
+#: gsm/splash.c:190
+msgid "Enlightenment Window Manager"
+msgstr "Диспетчер окон Enlightenment"
+
+#: gsm/splash.c:191
+msgid "Background Settings"
+msgstr "Настройки фона"
+
+#. { N_("Keyboard Bell"),                "bell-properties-capplet",        "gnome-cckeyboard-bell.png" },
+#: gsm/splash.c:193
+msgid "Mouse Settings"
+msgstr "Настройки мыши"
+
+#: gsm/splash.c:194
+msgid "Keyboard Settings"
+msgstr "Настройки клавиатуры"
+
+#: gsm/splash.c:195
+msgid "The Panel"
+msgstr "Панель"
+
+#: gsm/splash.c:196
+msgid "Session Manager Proxy"
+msgstr ""
+
+#: gsm/splash.c:197
+msgid "Window Manager"
+msgstr "Диспетчер окон"
+
+#: gsm/splash.c:198 panel/menu.c:4852 panel/menu.c:4857 panel/menu.c:5192
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+#: gsm/splash.c:278
 msgid "Starting GNOME"
 msgstr "Запуск GNOME"
-
-#: gsm/splash.c:177
-#, c-format
-msgid "Starting GNOME... %s"
-msgstr "Запуск GNOME... %s"
 
 #: help-browser/bookmarks.c:221
 msgid "Bookmark"
@@ -3336,6 +3328,10 @@ msgstr "С картинками стрелок"
 msgid "Without pixmap"
 msgstr "Без картинок"
 
+#: panel/menu.c:4376
+msgid "None"
+msgstr "Нет"
+
 #: panel/menu.c:4387 panel/panel_config.c:1097
 msgid "Ultra Tiny (12 pixels)"
 msgstr "Сверх Тонкая (12 точек)"
@@ -3408,6 +3404,10 @@ msgstr "Кнопки сокрытия"
 #: panel/menu.c:4430
 msgid "Orientation"
 msgstr "Ориентация"
+
+#: panel/menu.c:4433
+msgid "Background type"
+msgstr "Тип фона"
 
 #: panel/menu.c:4436
 msgid "Level"
@@ -3500,10 +3500,6 @@ msgstr "Руководство по панели..."
 #: panel/menu.c:4805
 msgid "Cannot execute xscreensaver"
 msgstr "Невозможно запустить xscreensaver"
-
-#: panel/menu.c:4852 panel/menu.c:4857 panel/menu.c:5192
-msgid "Desktop"
-msgstr "Рабочий стол"
 
 #: panel/menu.c:4894
 msgid "About the panel..."
@@ -3659,6 +3655,11 @@ msgstr "Тип фона: "
 #: panel/panel_config.c:1445
 msgid "Color to use:"
 msgstr "Используемый цвет:"
+
+#. image frame
+#: panel/panel_config.c:1467
+msgid "Image"
+msgstr "Изображение"
 
 #: panel/panel_config.c:1493
 msgid "Don't scale image to fit"
