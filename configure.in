@@ -43,14 +43,6 @@ apps, like panel, will not run properly.))
 ])])
 AC_SUBST(DL_LIB)
 
-dnl
-dnl Crypt library
-dnl
-AC_CHECK_LIB(crypt, crypt, [
-	LIBS="$LIBS -lcrypt"
-])
-AC_CHECK_HEADERS(crypt.h)
-
 dnl properties-keyboard
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
