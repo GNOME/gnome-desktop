@@ -91,7 +91,7 @@ else
   AC_DEFINE(HAVE_MICO_ORB_RUN)
 fi
 
-for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%` ; do
+for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%g` ; do
   case $flag in
     -L*)
       MICO_LIBS="$flag $MICO_LIBS"
