@@ -1,5 +1,6 @@
 appsdir = $(datadir)/apps
 
+Rootdir         = $(appsdir)
 Applicationsdir = $(appsdir)/Applications
 Graphicsdir     = $(appsdir)/Graphics
 Systemdir       = $(appsdir)/System
@@ -19,8 +20,7 @@ Directory_files = \
 
 Applications_DATA = 	     \
 	Emacs.desktop	     \
-	Netscape.desktop     \
-	Gmc.desktop
+	Netscape.desktop
 
 Graphics_DATA    = 	     \
 	GIMP.desktop
@@ -37,13 +37,17 @@ Network_DATA     =           \
 	Balsa.desktop        \
 	Tkrat.desktop
 
+Root_DATA        =           \
+	Gmc.desktop
+
 ## We explicitly define these so that the appropriate directories will
 ## be made at install time.
 Audio_DATA =
 Games_DATA =
 
 EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
-	$(System_DATA) $(Audio_DATA) $(Network_DATA) $(Games_DATA) $(Directory_files)
+	$(System_DATA) $(Audio_DATA) $(Network_DATA) $(Games_DATA) \
+	$(Directory_files) $(Root_DATA)
 
 install-data-local:
 	$(mkinstalldirs) $(Applicationsdir)
