@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="Gnome Core Utilities"
+PKG_NAME="GNOME Core Desktop"
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/HACKING \
