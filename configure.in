@@ -1,6 +1,6 @@
 AC_INIT(libgnome-desktop)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-desktop, 2.5.2)
+AM_INIT_AUTOMAKE(gnome-desktop, 2.5.3)
 
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS")
@@ -13,7 +13,7 @@ AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS")
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
 
-LT_VERSION=3:10:1
+LT_VERSION=3:11:1
 AC_SUBST(LT_VERSION)
 
 AM_MAINTAINER_MODE
@@ -30,7 +30,7 @@ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 
 GNOME_PLATFORM=2
 GNOME_MINOR=5
-GNOME_MICRO=2
+GNOME_MICRO=3
 GNOME_DISTRIBUTOR="GNOME.Org"
 GNOME_DATE=`date +"%Y-%m-%d"`
 
