@@ -2,21 +2,32 @@
 %define ver      	@VERSION@
 %define RELEASE		1
 %define rel      	%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
+%define localstatedir   /var/lib
 
-Summary: The core programs for the GNOME GUI desktop environment.
-Name: 		gnome-core
-Version: 	%ver
-Release: 	%rel
-Copyright: 	LGPL
-Group: 		System Environment/Base
-Source: ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
-BuildRoot: 	/var/tmp/%{name}-%{version}-root
-URL: 		http://www.gnome.org
-Prereq: 	/sbin/install-info
+Summary:         The core programs for the GNOME GUI desktop environment.
+Name: 		 gnome-core
+Version: 	 %ver
+Release: 	 %rel
+Copyright: 	 LGPL
+Group: 		 System Environment/Base
+Source:          ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
+BuildRoot: 	 /var/tmp/%{name}-%{version}-root
+URL: 		 http://www.gnome.org
+Prereq: 	 /sbin/install-info
+Requires:        gtk+ >= @GTK_REQUIRED@, gdk-pixbuf >= @GDK_PIXBUF_REQUIRED@
+Requires:        libglade >= @LIBGLADE_REQUIRED@, libxml
+Requires:        scrollkeeper >= @SCROLLKEEPER_REQUIRED@
+Requires:        gnome-libs >= @GNOME_LIBS_REQUIRED@
+Requires:        ORBit >= @ORBIT_REQUIRED@
+Requires:        control-center >= @CONTROL_CENTER_REQUIRED@
+BuildRequires:   gtk+-devel >= @GTK_REQUIRED@, libxml-devel
+BuildRequires:   gdk-pixbuf-devel >= @GDK_PIXBUF_REQUIRED@
+BuildRequires:   libglade-devel >= @LIBGLADE_REQUIRED@
+BuildRequires:   scrollkeeper >= @SCROLLKEEPER_REQUIRED@
+BuildRequires:   gnome-libs-devel >= @GNOME_LIBS_REQUIRED@
+BuildRequires:   ORBit-devel >= @ORBIT_REQUIRED@
+BuildRequires:   control-center-devel >= @CONTROL_CENTER_REQUIRED@
 
-Requires: 	gnome-libs >= 1.0.50
-Requires: 	ORBit >= 0.5.0
-Requires:	gdk-pixbuf >= 0.7.0
 
 %description
 GNOME (GNU Network Object Model Environment) is a user-friendly
@@ -33,7 +44,7 @@ need to install gnome-libs-devel.  If you want to use linuxconf with a
 GNOME front end, you'll also need to install the gnome-linuxconf package.
 
 %package devel
-Summary: GNOME core libraries, includes and more.
+Summary:        GNOME core libraries, includes, and more.
 Group: 		Development/Libraries
 Requires: 	gnome-core
 PreReq: 	/sbin/install-info
@@ -41,13 +52,75 @@ PreReq: 	/sbin/install-info
 %description devel
 Panel libraries and header files for creating GNOME panels.
 
-%changelog
-* Tue Mar 25 2001 Jens Finke <jens@gnome.org>
-- Make use of predefined rpm macros. 
-- Include gnome-terminal datadir stuff.
+%prep
+%setup -q
 
-* Sat Feb 17 2001 George Lebl <jirka@5z.com>
-- correctly set localstatedir so that all files are installed
+%build
+./configure --disable-gtkhtml-help --prefix=%{_prefix} \
+    --bindir=%{_bindir} --mandir=%{_mandir} \
+    --localstatedir=%{localstatedir} --libdir=%{_libdir} \
+    --datadir=%{_datadir} --includedir=%{_includedir} \
+    --sysconfdir=%{_sysconfdir}
+
+CFLAGS="$RPM_OPT_FLAGS" make
+
+
+%install
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+make prefix=$RPM_BUILD_ROOT%{_prefix} bindir=$RPM_BUILD_ROOT%{_bindir} \
+    mandir=$RPM_BUILD_ROOT%{_mandir} libdir=$RPM_BUILD_ROOT%{_libdir} \
+    localstatedir=$RPM_BUILD_ROOT%{localstatedir} \
+    datadir=$RPM_BUILD_ROOT%{_datadir} \
+    includedir=$RPM_BUILD_ROOT%{_includedir} \
+    sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} install
+
+ 
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files
+%doc AUTHORS COPYING ChangeLog NEWS README
+%defattr (-, root, root)
+%{_bindir}/*
+%{_sysconfdir}/CORBA/servers/*
+%{_sysconfdir}/sound/events/*
+%{_datadir}/locale/*/*/*
+%{_mandir}/man1/*
+%{_mandir}/man5/*
+%{_libdir}/*.so.*
+%{_datadir}/applets/*/*
+%{_datadir}/control-center/*/*
+%{_datadir}/gnome/*/*/*/*
+%{_datadir}/gnome-about/*
+%{_datadir}/gnome-terminal/*/*
+%{_datadir}/mc/*/*
+%{_datadir}/omf/*/*
+%{_datadir}/pixmaps/*/*
+
+%files devel
+%{_includedir}/*
+%{_libdir}/*a
+%{_libdir}/*so
+%{_libdir}/*sh
+%{_datadir}/idl/*
+
+
+%changelog
+* Wed Mar 28 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
+- integrate configure.in and gnome-core.spec.in for version numbers of
+  dependancies.  This should help to slow bit-rot in this spec file.
+
+* Fri Mar 23 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
+- re-wrote the %files section from scratch, added a couple of
+  dependancies.
+
+* Wed Feb 21 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
+- updated, fixed macros, removed hard-coded paths.
 
 * Sat Feb 26 2000 Gregory McLean <gregm@comstar.net>
 - Updated to 1.1.4
@@ -67,130 +140,7 @@ Panel libraries and header files for creating GNOME panels.
 - added spanish and french translations for rpm
 
 * Wed Sep 23 1998 Michael Fulbright <msf@redhat.com>
-
 - Built 0.30 release
 
 * Fri Mar 13 1998 Marc Ewing <marc@redhat.com>
-
 - Integrate into gnome-core CVS source tree
-
-%prep
-%setup -q
-
-%build
-%configure --quiet --disable-gtkhtml-help
-CFLAGS="$RPM_OPT_FLAGS" make
-
-%install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-
-%makeinstall > install.log 2>&1
-
-#if [ -d $RPM_BUILD_ROOT%{_bindir} ] ; then
-# strip `file $RPM_BUILD_ROOT%{_bindir}/* | grep ELF | cut -d':' -f 1`
-#fi
-if [ -d $RPM_BUILD_ROOT%{_mandir} ]; then
-  find $RPM_BUILD_ROOT%{_mandir} -type f -exec gzip -9f {} \;
-fi
-if [ -f %{name}.files ] ; then
-  rm -f %{name}.files
-fi
-##############################################################################
-##
-
-function ProcessLang() {
- # rpm provides a handy scriptlet to do the locale stuff lets use that.
- if [ -f /usr/lib/rpm/find-lang.sh ] ; then
-  /usr/lib/rpm/find-lang.sh $RPM_BUILD_ROOT %name
-  sed "s:(644, root, root, 755):(444, bin, bin, 555):" %{name}.lang >tmp.lang && mv tmp.lang %{name}.lang
-  if [ -f %{name}.files ] ; then
-    cat %{name}.files %{name}.lang >tmp.files && mv tmp.files %{name}.files
-  fi
- fi
-}
-#
-# Build up the list of files that need to be installed.
-# its messy but it catches everything that is installed.
-#
-function ProcessBin() {
-  # Gather up all the executable files. Stripping if requested.
-  # This will not recurse.
-  if [ -d $RPM_BUILD_ROOT%{_bindir} ] ; then
-    echo "%defattr (0555, bin, bin)" >>%{name}.files
-    find $RPM_BUILD_ROOT%{_bindir} -type f -print | sed "s:^$RPM_BUILD_ROOT::g" >>%{name}.files
-  fi
-}
-function ProcessLib() {
-  # Gather up any libraries.
-  # Usage: ProcessLib <dir> <type> <output file>
-  # Type is either 'runtime' or 'devel'
-  if [ -d $1 ] ; then
-    echo "%defattr (0555, bin, bin)" >>$3
-    case "$2" in
-      runtime)
-       # Grab runtime libraries
-       find $1 -name "*.so.*" -print | sed "s:^$RPM_BUILD_ROOT::g" >>$3
-       ;;
-      devel)
-       find $1 -name "*.so" -print | sed "s:^$RPM_BUILD_ROOT::g" >>$3
-       find $1 -name "*.la" -print | sed "s:^$RPM_BUILD_ROOT::g" >>$3
-       find $1 -name "*.a" -print | sed "s:^$RPM_BUILD_ROOT::g" >>$3
-       find $1 -name "*.sh" -print | sed "s:^$RPM_BUILD_ROOT::g" >>$3
-       ;;
-    esac
-   fi
-}
-
-function ProcessDir() {
-  # Build a list of files in the specified dir sticking 
-  # a %defattr line as specified in front of the mess. This is intended
-  # for normal dirs. Use ProcessLib for library dirs 
-  # for include dirs. Appending to <output file>.
-  # This will recurse.
-  #
-  # Usage: ProcessDir <dir> <output file> <attr>
-  #
-  if [ -d $1 ] ; then
-   if [ ! -z "$3" ] ; then
-     echo "%defattr ($3)" >>$2
-   fi
-   echo "*** Processing $1"
-   find $1 -type f -print | sed "s:^$RPM_BUILD_ROOT::g" >>$2
-  fi
-}
-
-function BuildFiles() {
-  ProcessBin
-  ProcessLang 
-  for i in `find $RPM_BUILD_ROOT%{_datadir} -maxdepth 1 -type d -print | \
-     sed "s:^$RPM_BUILD_ROOT%{_datadir}::g"` ; do
-    echo $i
-    case $i in
-     /applets|/control-center|/gnome|/gnome-about|/mc|/panelrc|/pixmaps|/gnome-terminal)
-
-         ProcessDir $RPM_BUILD_ROOT%{_datadir}$i %{name}.files "0444, bin, bin, 0555"
-         ;;
-     *)
-         ;;
-   esac
-  done
-  ProcessDir $RPM_BUILD_ROOT%{_sysconfdir} %{name}.files "0444, bin, bin, 0555"
-  ProcessLib $RPM_BUILD_ROOT%{_libdir} runtime %{name}.files
-  ProcessDir $RPM_BUILD_ROOT%{_datadir}/idl %{name}-devel.files "0444, bin, bin, 0555"
-  ProcessLib $RPM_BUILD_ROOT%{_libdir} devel %{name}-devel.files
-  ProcessDir $RPM_BUILD_ROOT%{_includedir} %{name}-devel.files "0444, bin, bin, 0555"
-}
-
-BuildFiles
- 
-%clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-%files -f %{name}.files
-%doc AUTHORS COPYING ChangeLog NEWS README
-
-%files devel -f %{name}-devel.files

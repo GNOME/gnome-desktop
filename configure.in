@@ -1,5 +1,20 @@
 AC_INIT(panel)
 
+dnl ==========================================================================
+dnl
+dnl If you add a version number here, you *must* add an AC_SUBST line for
+dnl it too, or it will never make it into the spec file!
+dnl
+dnl ==========================================================================
+
+GTK_REQUIRED=1.2.5
+GDK_PIXBUF_REQUIRED=0.7.0
+LIBGLADE_REQUIRED=0.14
+SCROLLKEEPER_REQUIRED=0.1.4
+GNOME_LIBS_REQUIRED=1.0.59
+ORBIT_REQUIRED=0.5.0
+CONTROL_CENTER_REQUIRED=1.4.0
+
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gnome-core, 1.4.0.1)
 
@@ -30,8 +45,10 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 GNOME_XML_CHECK
 
-AM_PATH_GTK(1.2.5, ,[
+AM_PATH_GTK($GTK_REQUIRED, ,[
 AC_MSG_ERROR(Please upgrade your GTK+)])
+
+AC_SUBST(GTK_REQUIRED)
 
 dnl Check for new enough gnome-libs
 CFLAGS_save=$CFLAGS
@@ -41,6 +58,8 @@ LIBS=`gnome-config --libs gnomeui`
 
 AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, ,[
 AC_MSG_ERROR(gnome-libs 1.0.59 or higher is required.)])
+
+AC_SUBST(GNOME_LIBS_REQUIRED)
 
 CFLAGS=$CFLAGS_save
 LIBS=$LIBS_save
@@ -80,6 +99,7 @@ ORB_CFLAGS="$ORBIT_CFLAGS"
 
 AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
+AC_SUBST(ORBIT_REQUIRED)
 
 dnl
 dnl CApplet, Note that the libs and all that is set up in gnome_init,
@@ -97,6 +117,9 @@ case "x$vers" in
     ;;
 esac
 
+AC_SUBST(CONTROL_CENTER_REQUIRED)
+
+
 dnl
 dnl Configure Easter Egg
 dnl
@@ -106,7 +129,7 @@ AC_MSG_RESULT(found)
 dnl
 dnl GdkPixBuf
 dnl
-AC_MSG_CHECKING(for GdkPixbuf library >= 0.7.0)
+AC_MSG_CHECKING(for GdkPixbuf library >= $GDK_PIXBUF_REQUIRED)
 PIXBUF_CFLAGS=`$GNOME_CONFIG --cflags gdk_pixbuf`
 PIXBUF_LIBS=`$GNOME_CONFIG --libs gdk_pixbuf`
 if test "x$PIXBUF_CFLAGS" != x ; then
@@ -121,6 +144,7 @@ else
 fi
 AC_SUBST(PIXBUF_CFLAGS)
 AC_SUBST(PIXBUF_LIBS)
+AC_SUBST(GDK_PIXBUF_REQUIRED)
 
 dnl
 dnl GnomeCanvasPixbuf
@@ -142,7 +166,7 @@ ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
 AC_SUBST(ZVT_LIBS)
 
 dnl Gnome Terminal now requires LibGlade
-AC_MSG_CHECKING(for Glade libraries >= 0.14)
+AC_MSG_CHECKING(for Glade libraries >= $LIBGLADE_REQUIRED)
 libglade_ok=no
 if gnome-config --libs libglade > /dev/null 2>&1; then 
     verstxt=`gnome-config --modversion libglade`
@@ -165,6 +189,7 @@ GNOME_TERMINAL_LIBS=`gnome-config --libs $GT_LIBS`
 GNOME_TERMINAL_CFLAGS=`gnome-config --cflags $GT_LIBS`
 AC_SUBST(GNOME_TERMINAL_LIBS)
 AC_SUBST(GNOME_TERMINAL_CFLAGS)
+AC_SUBST(LIBGLADE_REQUIRED)
 
 dnl
 dnl gnome-session
@@ -391,7 +416,6 @@ AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
 if test x$SCROLLKEEPER_CONFIG = xno; then
   AC_MSG_ERROR(Couldn't find scrollkeeper-config, please install the scrollkeeper packaga)
 fi
-SCROLLKEEPER_REQUIRED=0.1.4
 AC_SUBST(SCROLLKEEPER_REQUIRED)
 
 
