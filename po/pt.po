@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.20\n"
-"POT-Creation-Date: 1998-07-25 16:28+0100\n"
+"POT-Creation-Date: 1998-08-01 17:47-0500\n"
 "PO-Revision-Date: 1998-07-25 16:31+01:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -21,7 +21,7 @@ msgstr "Algo errado com /proc/apm; não posso ler dados."
 msgid "Can't open /dev/apm; can't get data."
 msgstr "Não consegui abrir /dev/apm; não posso ler dados."
 
-#: applets/batmon/batmon.c:160
+#: applets/batmon/batmon.c:160 applets/battery/read-battery.c:84
 msgid "ioctl failed on /dev/apm."
 msgstr "Falhou ioctl no /dev/apm."
 
@@ -99,9 +99,102 @@ msgstr "Estado da bateria:"
 msgid "Close"
 msgstr "Fechar"
 
-#: applets/bussign/bussign.c:98 applets/fish/fish.c:310
-#: applets/gen_util/mailcheck.c:595 applets/netload/netload.c:338
-#: gmenu/gmenu.c:56 gnome-terminal/gnome-terminal.c:676 panel/menu.c:1080
+#: applets/battery/battery.c:353
+msgid "Internal error: invalid mode in battery_set_mode"
+msgstr ""
+
+#: applets/battery/battery.c:398 applets/cpuload/cpuload.c:201
+#: applets/fish/fish.c:293 applets/gen_util/clock.c:231
+#: applets/gen_util/mailcheck.c:566 applets/gen_util/printer.c:363
+#: applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr "Não consigo criar applet!\n"
+
+#: applets/battery/battery.c:612
+msgid "Could not allocate space for graph values"
+msgstr ""
+
+#: applets/battery/properties.c:34
+#, fuzzy
+msgid "Battery Monitor Settings"
+msgstr "Estado da bateria:"
+
+#: applets/battery/properties.c:43
+#, fuzzy
+msgid "General Properties"
+msgstr "Propriedades da campainha"
+
+#: applets/battery/properties.c:45 applets/cpuload/properties.c:125
+#: applets/diskusage/properties.c:174 applets/netload/properties.c:129
+msgid "Applet Height"
+msgstr "Altura do applet"
+
+#: applets/battery/properties.c:55
+#, fuzzy
+msgid "Applet Width"
+msgstr "Altura do applet"
+
+#: applets/battery/properties.c:65
+#, fuzzy
+msgid "Applet Mode"
+msgstr "Altura do applet"
+
+#: applets/battery/properties.c:66
+msgid "Graph"
+msgstr ""
+
+#: applets/battery/properties.c:68
+#, fuzzy
+msgid "Readout"
+msgstr "Reler"
+
+#: applets/battery/properties.c:111 applets/battery/properties.c:176
+msgid "AC-On Battery Color:"
+msgstr ""
+
+#: applets/battery/properties.c:117 applets/battery/properties.c:182
+msgid "AC-Off Battery Color:"
+msgstr ""
+
+#: applets/battery/properties.c:123
+msgid "Graph Interval:"
+msgstr ""
+
+#: applets/battery/properties.c:137
+msgid "Graph Direction:"
+msgstr ""
+
+#: applets/battery/properties.c:140
+msgid "Left to Right"
+msgstr ""
+
+#: applets/battery/properties.c:142
+msgid "Right to Left"
+msgstr ""
+
+#: applets/battery/read-battery.c:21
+msgid ""
+"Cannot open /proc/apm!  Make sure that you built APM support into your "
+"kernel.\n"
+msgstr ""
+
+#: applets/battery/read-battery.c:79
+#, fuzzy
+msgid "Cannot open /dev/apm; can't get data."
+msgstr "Não consegui abrir /dev/apm; não posso ler dados."
+
+#: applets/battery/read-battery.c:95
+msgid "APM is disabled!  Cannot read battery charge information."
+msgstr ""
+
+#: applets/bussign/bussign.c:98 applets/clockmail/clockmail.c:376
+#: applets/dialer/dialer.c:162 applets/diskusage/diskusage.c:566
+#: applets/drivemount/drivemount.c:345 applets/fifteen/fifteen.c:304
+#: applets/fish/fish.c:310 applets/gen_util/mailcheck.c:595
+#: applets/icewm-pager/wmpager_applet.c:85
+#: applets/modemlights/modemlights.c:533 applets/netload/netload.c:338
+#: applets/webcontrol/webcontrol.c:288 gmenu/gmenu.c:56
+#: gnome-terminal/gnome-terminal.c:676 panel/menu.c:1298
 msgid "About..."
 msgstr "Acerca..."
 
@@ -131,20 +224,70 @@ msgstr ""
 "\n"
 "http://people.netscape.com/mtoy/sign/index.html"
 
-#: applets/cpuload/cpuload.c:201 applets/fish/fish.c:293
-#: applets/gen_util/clock.c:231 applets/gen_util/mailcheck.c:566
-#: applets/gen_util/printer.c:363 applets/netload/netload.c:320
-msgid "Can't create applet!\n"
-msgstr "Não consigo criar applet!\n"
+#: applets/clockmail/clockmail.c:49
+#, c-format
+msgid "%d.%d.%d"
+msgstr ""
 
-#: applets/cpuload/cpuload.c:219 applets/fish/fish.c:318
-#: applets/gen_util/clock.c:258 applets/gen_util/mailcheck.c:588
-#: applets/gen_util/printer.c:388 applets/netload/netload.c:345
-#: gnome-terminal/gnome-terminal.c:667 panel/drawer.c:508 panel/launcher.c:252
+#: applets/clockmail/clockmail.c:52
+msgid "John Ellis (gqview@geocities.com)"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:55
+msgid "Clock and Mail Notify Applet"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:56
+msgid "(C) 1998"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:58
+msgid ""
+"Released under the GNU general public license.\n"
+"Basic digital clock with date in a tooltip. Optional 12/24 time display. "
+"Mail blinking can be for any unread mail, or only briefly when new mail "
+"arrives."
+msgstr ""
+
+#: applets/clockmail/clockmail.c:339
+msgid "date"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:369 applets/cpuload/cpuload.c:219
+#: applets/diskusage/diskusage.c:577 applets/drivemount/drivemount.c:339
+#: applets/fish/fish.c:318 applets/gen_util/clock.c:258
+#: applets/gen_util/mailcheck.c:588 applets/gen_util/printer.c:388
+#: applets/icewm-pager/wmpager_applet.c:93
+#: applets/modemlights/modemlights.c:527 applets/netload/netload.c:345
+#: applets/webcontrol/webcontrol.c:296 gnome-terminal/gnome-terminal.c:667
+#: panel/drawer.c:517 panel/launcher.c:277
 msgid "Properties..."
 msgstr "Propriedades..."
 
-#: applets/cpuload/properties.c:59 applets/netload/properties.c:61
+#: applets/clockmail/properties.c:111
+msgid "Display time in 12 hour format (AM/PM)"
+msgstr ""
+
+#: applets/clockmail/properties.c:117
+msgid "Blink when any mail is waiting. (Not just when mail arrives)"
+msgstr ""
+
+#: applets/clockmail/properties.c:128
+msgid "Mail file:"
+msgstr ""
+
+#: applets/clockmail/properties.c:145
+msgid "When new mail is received run:"
+msgstr ""
+
+#: applets/clockmail/properties.c:160 applets/cpuload/properties.c:200
+#: applets/diskusage/properties.c:277 applets/drivemount/properties.c:178
+#: applets/modemlights/properties.c:193 applets/netload/properties.c:252
+msgid "General"
+msgstr "Geral"
+
+#: applets/cpuload/properties.c:59 applets/diskusage/properties.c:72
+#: applets/netload/properties.c:61
 msgid "Can't allocate memory for color\n"
 msgstr "Não consigo alocar memória para cor\n"
 
@@ -156,15 +299,13 @@ msgstr "Carga de utilizador"
 msgid "System Load"
 msgstr "Carga de sistema"
 
-#: applets/cpuload/properties.c:125 applets/netload/properties.c:129
-msgid "Applet Height"
-msgstr "Altura do applet"
-
-#: applets/cpuload/properties.c:131 applets/netload/properties.c:135
+#: applets/cpuload/properties.c:131 applets/diskusage/properties.c:180
+#: applets/netload/properties.c:135
 msgid "Width"
 msgstr "Largura"
 
-#: applets/cpuload/properties.c:146 applets/netload/properties.c:150
+#: applets/cpuload/properties.c:146 applets/diskusage/properties.c:197
+#: applets/netload/properties.c:150
 msgid "Update Frequency"
 msgstr "Frequência de actualização"
 
@@ -172,11 +313,134 @@ msgstr "Frequência de actualização"
 msgid "CPULoad Settings"
 msgstr "Parâmetros da Carga da CPU"
 
-#: applets/cpuload/properties.c:200 applets/netload/properties.c:252
-msgid "General"
-msgstr "Geral"
+#: applets/dialer/dialer.c:46
+msgid "PPP Dialer Applet"
+msgstr ""
+
+#: applets/dialer/dialer.c:49
+msgid "A funky PPP dialer, how come no-one has thought of it before!?"
+msgstr ""
+
+#: applets/dialer/dialer.c:87
+msgid "Off"
+msgstr ""
+
+#: applets/diskusage/properties.c:153
+msgid "Used Diskspace"
+msgstr ""
+
+#: applets/diskusage/properties.c:158
+msgid "Free Diskspace"
+msgstr ""
+
+#: applets/diskusage/properties.c:163
+#, fuzzy
+msgid "Textcolor"
+msgstr "Só texto"
+
+#: applets/diskusage/properties.c:168
+#, fuzzy
+msgid "Backgroundcolor"
+msgstr "Cor do Fundo"
+
+#: applets/diskusage/properties.c:267
+#, fuzzy
+msgid "Diskusage Settings"
+msgstr "Parâmetros"
+
+#: applets/drivemount/drivemount.c:36
+msgid "Drive Mount Applet"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:39
+#, fuzzy
+msgid ""
+"Released under the GNU general public license.\n"
+"Mounts and Unmounts drives.."
+msgstr ""
+"Lançado sob os termos da \"GNU Public License\".\n"
+"Editor do menu GNOME."
+
+#: applets/drivemount/drivemount.c:67
+#, fuzzy
+msgid " mounted"
+msgstr "Som"
+
+#: applets/drivemount/drivemount.c:72
+msgid " not mounted"
+msgstr ""
+
+#: applets/drivemount/drivemount.c:352
+msgid "Eject"
+msgstr ""
+
+#: applets/drivemount/properties.c:115
+msgid "Drive Mount Settings"
+msgstr ""
+
+#: applets/drivemount/properties.c:123
+msgid "Update in seconds:"
+msgstr ""
+
+#: applets/drivemount/properties.c:134
+#, fuzzy
+msgid "Icon:"
+msgstr "Ícone"
+
+#: applets/drivemount/properties.c:141
+msgid "Floppy"
+msgstr ""
+
+#: applets/drivemount/properties.c:145
+msgid "Cdrom"
+msgstr ""
+
+#: applets/drivemount/properties.c:149
+msgid "Zip Drive"
+msgstr ""
+
+#: applets/drivemount/properties.c:153
+msgid "Hard Disk"
+msgstr ""
+
+#: applets/drivemount/properties.c:166
+msgid "Mount point:"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:35
+msgid "You win!"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:262
+msgid "Fifteen sliding pieces"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:263
+msgid "1.0"
+msgstr ""
+
+#: applets/fifteen/fifteen.c:264
+#, fuzzy
+msgid "Copyright (C) The Free Software Foundation"
+msgstr "(c) 1998 the Free Software Foundation"
+
+#: applets/fifteen/fifteen.c:266
+msgid ""
+"Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
+"Guaranteed to be a productivity buster."
+msgstr ""
+
+#: applets/fifteen/fifteen.c:287
+#, fuzzy
+msgid "Can't create fifteen applet!"
+msgstr "Não consigo criar applet!\n"
+
+#: applets/fifteen/fifteen.c:297
+msgid "Scramble pieces"
+msgstr ""
 
 #: applets/fish/fish.c:63 applets/fish/fish.c:238
+#: applets/webcontrol/webcontrol.c:52
 #, c-format
 msgid "%s the Fish"
 msgstr "O peixe %s"
@@ -337,6 +601,78 @@ msgstr "Comando para imprimir:"
 msgid "Printer"
 msgstr "Impressora"
 
+#. FIXME: This should check to make sure icewm (or equiv) is running.
+#. Not sure if it is working though...
+#: applets/icewm-pager/wmpager_applet.c:56
+msgid ""
+"This applet requires you to run a window manager with the XA_ extensions.\n"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:220
+msgid "Desktop Pager Applet"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:221
+msgid "Copyright (C)1998 M.Watson"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:277
+#, fuzzy
+msgid "Failed to retrieve workspace property."
+msgstr "Não consegui apagar a pasta."
+
+#: applets/modemlights/modemlights.c:64
+msgid "Modem Lights Applet"
+msgstr ""
+
+#: applets/modemlights/modemlights.c:67
+msgid ""
+"Released under the GNU general public license.\n"
+"A modem status indicator and dialer.Lights in order from the top or left are "
+"RX and TX"
+msgstr ""
+
+#: applets/modemlights/modemlights.c:104
+msgid ""
+"You are currently connected.\n"
+"Do you want to disconnect?"
+msgstr ""
+
+#: applets/modemlights/modemlights.c:115
+msgid "Do you want to connect?"
+msgstr ""
+
+#: applets/modemlights/modemlights.c:133
+msgid "not connected"
+msgstr ""
+
+#: applets/modemlights/properties.c:107
+msgid "Modem Lights Settings"
+msgstr ""
+
+#: applets/modemlights/properties.c:115
+msgid "Updates per second"
+msgstr ""
+
+#: applets/modemlights/properties.c:131
+msgid "Modem lock file:"
+msgstr ""
+
+#: applets/modemlights/properties.c:148
+#, fuzzy
+msgid "Connect command:"
+msgstr "Comando para imprimir:"
+
+#: applets/modemlights/properties.c:165
+#, fuzzy
+msgid "Disconnect command:"
+msgstr "Comando para imprimir:"
+
+#. confirmation checkbox
+#: applets/modemlights/properties.c:178
+msgid "Confirm connection?"
+msgstr ""
+
 #: applets/netload/netload.c:260
 msgid "Netload Error"
 msgstr "Erro da Carga de Rede"
@@ -389,6 +725,51 @@ msgstr "Parâmetros da Carga de Rede"
 msgid "Device"
 msgstr "Dispositivo"
 
+#: applets/webcontrol/webcontrol.c:54
+msgid "Garrett Smith <gsmith@serv.net>"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:57
+msgid "The Web Browser Controller"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:60
+msgid ""
+"This applet currently sends getURL commands to netscape throught the -remote "
+"interface.  Hopefully later more webrowsers will be supported."
+msgstr ""
+
+#. create the widget we are going to put on the applet
+#: applets/webcontrol/webcontrol.c:111
+msgid "Url:"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:127
+#, fuzzy
+msgid "Launch new window"
+msgstr "Nova janela"
+
+#: applets/webcontrol/webcontrol.c:185
+#, fuzzy
+msgid "WebControl Properties"
+msgstr "Propriedades do teclado"
+
+#: applets/webcontrol/webcontrol.c:190
+msgid "Display URL label"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:199
+msgid "Display \"launch new window\" option"
+msgstr ""
+
+#: applets/webcontrol/webcontrol.c:212 gnome-terminal/gnome-terminal.c:499
+msgid "Look"
+msgstr "Aparência"
+
+#: applets/winlist/winlist.c:39
+msgid "readfd writefd"
+msgstr ""
+
 #: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "Propriedades do fundo"
@@ -409,7 +790,11 @@ msgstr "Propriedades do rato"
 msgid "Gnome Look and Feel Properties"
 msgstr "Propriedades da Interface GNOME"
 
-#: desktop-properties/property-background.c:494 panel/panel_config.c:616
+#: desktop-properties/args.c:11 desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr "Usar parâmetros gravados e sair"
+
+#: desktop-properties/property-background.c:494 panel/panel_config.c:613
 msgid "Color"
 msgstr "Cor"
 
@@ -421,12 +806,12 @@ msgstr "Sólido"
 msgid "Gradient"
 msgstr "Gradiente"
 
-#: desktop-properties/property-background.c:539 panel/panel_config.c:495
+#: desktop-properties/property-background.c:539 panel/panel_config.c:492
 msgid "Vertical"
 msgstr "Vertical"
 
 #. Horizontal
-#: desktop-properties/property-background.c:545 panel/panel_config.c:482
+#: desktop-properties/property-background.c:545 panel/panel_config.c:479
 msgid "Horizontal"
 msgstr "Horizontal"
 
@@ -465,10 +850,6 @@ msgstr "Repetido"
 #: desktop-properties/property-background.c:1006
 msgid " Background "
 msgstr " Fundo "
-
-#: desktop-properties/property-background.c:1057
-msgid "Set parameters from saved state and exit"
-msgstr "Usar parâmetros gravados e sair"
 
 #: desktop-properties/property-background.c:1058
 msgid "IMAGE"
@@ -534,7 +915,6 @@ msgid "Duration"
 msgstr "Duração"
 
 #: desktop-properties/property-bell.c:214
-#: desktop-properties/property-screensaver.cc:250
 msgid "Test"
 msgstr "Testar"
 
@@ -622,50 +1002,6 @@ msgstr "Pequena"
 msgid "Mouse"
 msgstr "Rato"
 
-#: desktop-properties/property-screensaver.cc:146
-msgid "Settings"
-msgstr "Parâmetros"
-
-#: desktop-properties/property-screensaver.cc:148
-msgid "Wait"
-msgstr "Esperar"
-
-#: desktop-properties/property-screensaver.cc:149
-msgid "Min"
-msgstr "Min"
-
-#: desktop-properties/property-screensaver.cc:161
-msgid "Requires Password"
-msgstr "Necessita palavra-passe"
-
-#: desktop-properties/property-screensaver.cc:170
-msgid "Use DPMS"
-msgstr "Usar DPMS"
-
-#: desktop-properties/property-screensaver.cc:179
-msgid "Priority"
-msgstr "Prioridade"
-
-#: desktop-properties/property-screensaver.cc:187
-msgid "Normal"
-msgstr "Normal"
-
-#: desktop-properties/property-screensaver.cc:188
-msgid "Low"
-msgstr "Baixa"
-
-#: desktop-properties/property-screensaver.cc:234
-msgid "Screensavers"
-msgstr "Protecções de ecrã"
-
-#: desktop-properties/property-screensaver.cc:246
-msgid "Setup..."
-msgstr "Configurar..."
-
-#: desktop-properties/property-screensaver.cc:356
-msgid " Screensaver "
-msgstr " Protecção de ecrã "
-
 #: desktop-properties/property-ui.c:55
 msgid "Default Gtk setting [FIXME - Describe this better]"
 msgstr "Valor por omissão do Gtk [FIXME: Descrever isto melhor]"
@@ -751,47 +1087,64 @@ msgstr "Barra de estado é interactiva sempre que possível"
 msgid "Application"
 msgstr "Aplicação"
 
-#: desktop-properties/xlockmore.cc:156
-msgid "XLockMore Properties"
-msgstr "Propriedades do XLockMore"
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:174
-msgid "  OK  "
-msgstr "  OK  "
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:175
-msgid " Apply "
-msgstr " Aplicar "
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:176
-msgid " Cancel "
-msgstr " Cancelar "
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:177
-msgid " Defaults "
-msgstr " Valores por omissão "
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:178 gmenu/gmenu.c:64
-#: gnome-terminal/gnome-terminal.c:685 help-browser/window.c:176
-#: help-browser/window.c:201
-msgid "Help"
-msgstr "Ajuda"
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:183 desktop-properties/xlockmore.cc:195
-msgid " Mode "
-msgstr " Modo "
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:184
-msgid " XLockMore "
-msgstr " XLockMore "
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:193
-msgid " Options "
-msgstr " Opções "
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
 
-#: desktop-properties/xlockmore.cc:194
-msgid " Preview "
-msgstr " Prever "
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
 
 #: gmenu/dialogs.c:39
 msgid "File exists."
@@ -917,6 +1270,11 @@ msgstr "Sair"
 msgid "File"
 msgstr "Ficheiro"
 
+#: gmenu/gmenu.c:64 gnome-terminal/gnome-terminal.c:685
+#: help-browser/window.c:176 help-browser/window.c:201
+msgid "Help"
+msgstr "Ajuda"
+
 #: gmenu/gmenu.c:192
 #, c-format
 msgid "creating user directory: %s\n"
@@ -962,8 +1320,7 @@ msgid "GNOME"
 msgstr "GNOME"
 
 #. system's menu tree
-#: gmenu/tree.c:364 panel/menu.c:1157 panel/menu.c:1160 panel/menu.c:1187
-#: panel/menu.c:1211
+#: gmenu/tree.c:364 panel/menu.c:1093 panel/menu.c:1131 panel/menu.c:1331
 msgid "System Menus"
 msgstr "Menus de sistema"
 
@@ -971,17 +1328,16 @@ msgstr "Menus de sistema"
 msgid "Top of system menus"
 msgstr "Topo dos menus de sistema"
 
-#: gmenu/tree.c:382
+#: gmenu/tree.c:385
 msgid "Running with root privileges.\n"
 msgstr "A executar com privilégios de root.\n"
 
 #. user's menu tree
-#: gmenu/tree.c:391 panel/menu.c:1176 panel/menu.c:1179 panel/menu.c:1198
-#: panel/menu.c:1219
+#: gmenu/tree.c:394 panel/menu.c:1114 panel/menu.c:1141 panel/menu.c:1342
 msgid "User Menus"
 msgstr "Menus de Utilizador"
 
-#: gmenu/tree.c:401
+#: gmenu/tree.c:404
 msgid "Top of user menus"
 msgstr "Topo dos menus de utilizador"
 
@@ -1025,21 +1381,17 @@ msgstr "Preto sobre amarelo claro"
 msgid "Custom colors"
 msgstr "Cores personalizadas"
 
-#: gnome-terminal/gnome-terminal.c:456 panel/panel_config.c:279
+#: gnome-terminal/gnome-terminal.c:456 panel/panel_config.c:276
 msgid "Left"
 msgstr "Esquerda"
 
-#: gnome-terminal/gnome-terminal.c:457 panel/panel_config.c:290
+#: gnome-terminal/gnome-terminal.c:457 panel/panel_config.c:287
 msgid "Right"
 msgstr "Direita"
 
 #: gnome-terminal/gnome-terminal.c:458
 msgid "Hidden"
 msgstr "Escondida"
-
-#: gnome-terminal/gnome-terminal.c:499
-msgid "Look"
-msgstr "Aparência"
 
 #. Font
 #: gnome-terminal/gnome-terminal.c:502
@@ -1152,7 +1504,7 @@ msgstr "Executar este programa em vez de uma 'shell'"
 msgid "Foreground color"
 msgstr "Cor do Texto"
 
-#: gnome-terminal/gnome-terminal.c:1148 panel/panel_config.c:666
+#: gnome-terminal/gnome-terminal.c:1148 panel/panel_config.c:663
 msgid "Background color"
 msgstr "Cor do Fundo"
 
@@ -1321,6 +1673,71 @@ msgstr "Nº de visitas"
 msgid "Gnome Help History"
 msgstr "História da Ajuda GNOME"
 
+#: help-browser/toc-man.c:18 help-browser/toc2-man.c:21
+msgid "User Commands"
+msgstr "Comados de utilizador"
+
+#: help-browser/toc-man.c:19 help-browser/toc2-man.c:22
+msgid "System Calls"
+msgstr "Chamadas de sistema"
+
+#: help-browser/toc-man.c:20 help-browser/toc2-man.c:23
+msgid "Library Functions"
+msgstr "Funções das bibliotecas"
+
+#: help-browser/toc-man.c:21 help-browser/toc2-man.c:24
+msgid "Special Files"
+msgstr "Ficheiros especiais"
+
+#: help-browser/toc-man.c:22 help-browser/toc2-man.c:25
+msgid "File Formats"
+msgstr "Formatos de ficheiros"
+
+#: help-browser/toc-man.c:23 help-browser/toc2-man.c:26
+msgid "Games"
+msgstr "Jogos"
+
+#: help-browser/toc-man.c:24 help-browser/toc2-man.c:27
+#: panel/panel_config_global.c:352
+msgid "Miscellaneous"
+msgstr "Vários"
+
+#: help-browser/toc-man.c:25 help-browser/toc2-man.c:28
+msgid "Administration"
+msgstr "Administração"
+
+#: help-browser/toc-man.c:26 help-browser/toc2-man.c:29
+msgid "man9"
+msgstr "Funções do núcleo"
+
+#: help-browser/toc-man.c:27 help-browser/toc2-man.c:30
+msgid "mann"
+msgstr "mann"
+
+#: help-browser/toc-man.c:28 help-browser/toc2-man.c:31
+msgid "manx"
+msgstr "manx"
+
+#. Add one new item for each type
+#. This really should iterate through the toc_config list
+#. MAN PAGES
+#: help-browser/toc.c:134
+#, fuzzy
+msgid "Man Pages"
+msgstr "Man Path"
+
+#. INFO PAGES
+#: help-browser/toc.c:146
+#, fuzzy
+msgid "Info Pages"
+msgstr "Info Path"
+
+#. GNOME HELP
+#: help-browser/toc.c:158
+#, fuzzy
+msgid "GNOME Help"
+msgstr "Path para Ajuda GNOME"
+
 #: help-browser/toc2.c:114 help-browser/toc2.c:255 help-browser/toc2.c:317
 msgid "<h1>Table of Contents</h1>\n"
 msgstr "<h1>Índice</h1>\n"
@@ -1397,50 +1814,6 @@ msgstr ""
 #: help-browser/toc2.c:535
 msgid "<br><B>No matches found</B>\n"
 msgstr "<br><B>Nenhuma correspondência encontrada</B>\n"
-
-#: help-browser/toc2-man.c:21
-msgid "User Commands"
-msgstr "Comados de utilizador"
-
-#: help-browser/toc2-man.c:22
-msgid "System Calls"
-msgstr "Chamadas de sistema"
-
-#: help-browser/toc2-man.c:23
-msgid "Library Functions"
-msgstr "Funções das bibliotecas"
-
-#: help-browser/toc2-man.c:24
-msgid "Special Files"
-msgstr "Ficheiros especiais"
-
-#: help-browser/toc2-man.c:25
-msgid "File Formats"
-msgstr "Formatos de ficheiros"
-
-#: help-browser/toc2-man.c:26
-msgid "Games"
-msgstr "Jogos"
-
-#: help-browser/toc2-man.c:27 panel/panel_config_global.c:349
-msgid "Miscellaneous"
-msgstr "Vários"
-
-#: help-browser/toc2-man.c:28
-msgid "Administration"
-msgstr "Administração"
-
-#: help-browser/toc2-man.c:29
-msgid "man9"
-msgstr "Funções do núcleo"
-
-#: help-browser/toc2-man.c:30
-msgid "mann"
-msgstr "mann"
-
-#: help-browser/toc2-man.c:31
-msgid "manx"
-msgstr "manx"
 
 #: help-browser/visit.c:83
 msgid "<BODY>Could not load default TOC page</BODY>"
@@ -1558,31 +1931,36 @@ msgstr "Apagar do painel"
 msgid "Move applet"
 msgstr "Mover applet"
 
-#: panel/drawer.c:73 panel/drawer.c:123 panel/drawer.c:282 panel/menu.c:990
-msgid "Drawer"
-msgstr "Gaveta"
-
-#: panel/drawer.c:105
+#: panel/drawer.c:88
 msgid "Drawer properties"
 msgstr "Propriedades da gaveta"
 
-#: panel/drawer.c:114
+#: panel/drawer.c:97
 msgid "Tooltip/Name"
 msgstr "Ajuda de balão/Nome"
 
-#: panel/drawer.c:118
+#: panel/drawer.c:101
 msgid "Icon"
 msgstr "Ícone"
 
-#: panel/launcher.c:82 panel/launcher.c:145
+#: panel/drawer.c:106 panel/menu.c:1061
+msgid "Drawer"
+msgstr "Gaveta"
+
+#: panel/launcher.c:117
 msgid "App"
 msgstr "Apl"
 
-#: panel/launcher.c:189
+#: panel/launcher.c:214
 msgid "Launcher properties"
 msgstr "Propriedades do ??Launcher"
 
-#: panel/logout.c:26 panel/menu.c:1127 panel/panel.c:106
+#: panel/launcher.c:298
+#, fuzzy
+msgid "Create launcher applet"
+msgstr "Não consigo criar applet!\n"
+
+#: panel/logout.c:26 panel/menu.c:1172 panel/menu.c:1308
 msgid "Log out"
 msgstr "Terminar sessão"
 
@@ -1602,140 +1980,162 @@ msgstr ""
 "Este programa é responsável por executar outras aplicações, embeber pequenos "
 "applets, a paz mundial e \"crashes\" aleatórios do X."
 
-#: panel/menu.c:997 panel/panel_config.c:778
+#: panel/menu.c:280
+#, fuzzy
+msgid "drawer"
+msgstr "Gaveta"
+
+#. gtk_signal_connect_object(GTK_OBJECT(menuitem),"select",
+#. GTK_SIGNAL_FUNC(gtk_widget_show),
+#. GTK_OBJECT(w));
+#. gtk_signal_connect_object(GTK_OBJECT(menuitem),"deselect",
+#. GTK_SIGNAL_FUNC(gtk_widget_hide),
+#. GTK_OBJECT(w));
+#: panel/menu.c:293
+#, fuzzy
+msgid "menu"
+msgstr "Menus"
+
+#: panel/menu.c:352
+msgid "add"
+msgstr ""
+
+#: panel/menu.c:1009
+#, fuzzy
+msgid "Applets"
+msgstr "Adicionar applet"
+
+#: panel/menu.c:1068 panel/panel_config.c:778
 msgid "Edge Panel"
 msgstr "Painel lateral"
 
-#: panel/menu.c:1004 panel/panel_config.c:784
+#: panel/menu.c:1075 panel/panel_config.c:784
 msgid "Corner Panel"
 msgstr "Painel de Canto"
 
-#: panel/menu.c:1021
-msgid "Add app to panel"
-msgstr "Adicionar aplicação ao painel"
-
-#: panel/menu.c:1029
-msgid "Add applet"
-msgstr "Adicionar applet"
-
-#: panel/menu.c:1037
-msgid "Add new panel"
-msgstr "Adicionar novo painel"
-
-#: panel/menu.c:1045
-msgid "Add main menu"
-msgstr "Adicionar menu principal"
-
-#: panel/menu.c:1052
-msgid "Add log out button"
-msgstr "Adicionar botão para terminar sessão"
-
-#: panel/menu.c:1060
-msgid "Add swallowed app"
-msgstr "Adicionar aplicação \"engolida\""
-
-#: panel/menu.c:1071 panel/panel.c:76
-msgid "Global properties..."
-msgstr "Propriedades globais..."
-
-#: panel/menu.c:1110
-msgid "Panel"
-msgstr "Painel"
-
-#: panel/menu.c:1118
-msgid "Lock screen"
-msgstr "Trancar ecrã"
-
-#: panel/panel.c:69
-msgid "This panel properties..."
-msgstr "Propriedades deste painel..."
-
-#: panel/panel.c:83
+#: panel/menu.c:1157
 msgid "Remove this panel"
 msgstr "Apagar este painel"
 
-#: panel/panel.c:95
-msgid "Add main menu applet"
+#: panel/menu.c:1196
+msgid "Add applet"
+msgstr "Adicionar applet"
+
+#: panel/menu.c:1205
+msgid "Add new panel"
+msgstr "Adicionar novo painel"
+
+#: panel/menu.c:1213
+msgid "Add main menu"
 msgstr "Adicionar menu principal"
 
+#: panel/menu.c:1220
+msgid "Add log out button"
+msgstr "Adicionar botão para terminar sessão"
+
+#: panel/menu.c:1228
+msgid "Add swallowed app"
+msgstr "Adicionar aplicação \"engolida\""
+
+#: panel/menu.c:1234
+#, fuzzy
+msgid "Add new launcher"
+msgstr "Adicionar novo painel"
+
+#: panel/menu.c:1245
+msgid "This panel properties..."
+msgstr "Propriedades deste painel..."
+
+#: panel/menu.c:1255
+msgid "Global properties..."
+msgstr "Propriedades globais..."
+
+#: panel/menu.c:1282
+msgid "Panel"
+msgstr "Painel"
+
+#: panel/menu.c:1289
+msgid "Lock screen"
+msgstr "Trancar ecrã"
+
+#: panel/panel-util.c:186 panel/panel_config.c:636 panel/swallow.c:181
+msgid "Browse"
+msgstr "Procurar"
+
 #. Position frame
-#: panel/panel_config.c:244 panel/panel_config.c:397
+#: panel/panel_config.c:241 panel/panel_config.c:394
 msgid "Position"
 msgstr "Posição"
 
 #. Top Position
-#: panel/panel_config.c:257
+#: panel/panel_config.c:254
 msgid "Top"
 msgstr "Topo"
 
-#: panel/panel_config.c:268
+#: panel/panel_config.c:265
 msgid "Bottom"
 msgstr "Fundo"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:318
+#: panel/panel_config.c:315
 msgid "Minimize Options"
 msgstr "Minimização"
 
 #. Stay Put
-#: panel/panel_config.c:329
+#: panel/panel_config.c:326
 msgid "Explicitly Hide"
 msgstr "Esconder explicitamente"
 
-#: panel/panel_config.c:342
+#: panel/panel_config.c:339
 msgid "Auto Hide"
 msgstr "Esconder automaticamente"
 
 #. North East Position
-#: panel/panel_config.c:410
+#: panel/panel_config.c:407
 msgid "North East"
 msgstr "Nordeste"
 
-#: panel/panel_config.c:421
+#: panel/panel_config.c:418
 msgid "South West"
 msgstr "Sudoeste"
 
-#: panel/panel_config.c:432
+#: panel/panel_config.c:429
 msgid "North West"
 msgstr "Noroeste"
 
-#: panel/panel_config.c:443
+#: panel/panel_config.c:440
 msgid "South East"
 msgstr "Sudeste"
 
 #. Orientation frame
-#: panel/panel_config.c:471
+#: panel/panel_config.c:468
 msgid "Orientation"
 msgstr "Orientação"
 
 #. selector frame
-#: panel/panel_config.c:590 panel/panel_config.c:791
+#: panel/panel_config.c:587 panel/panel_config.c:791
 msgid "Background"
 msgstr "Fundo"
 
 #. standard background
-#: panel/panel_config.c:600
+#: panel/panel_config.c:597
 msgid "Standard"
 msgstr "Standard"
 
-#: panel/panel_config.c:608
+#: panel/panel_config.c:605
 msgid "Pixmap"
 msgstr "Imagem"
 
 #. image frame
-#: panel/panel_config.c:622
+#: panel/panel_config.c:619
 msgid "Image file"
 msgstr "Ficheiro com imagem"
 
-#: panel/panel_config.c:639
-msgid "Browse"
-msgstr "Procurar"
-
-#: panel/panel_config.c:652
+#: panel/panel_config.c:649
 msgid "Scale image to fit panel"
 msgstr "Redimensionar imagem de acordo com o painel"
 
-#: panel/panel_config.c:769
+#: panel/panel_config.c:767
 msgid "Panel properties"
 msgstr "Propriedades do Painel"
 
@@ -1813,18 +2213,103 @@ msgstr "Terminar sessão"
 msgid "Prompt before logout"
 msgstr "Confirmar término de sessão"
 
-#: panel/panel_config_global.c:338
+#: panel/panel_config_global.c:339
 msgid "Global Panel Configuration"
 msgstr "Configuração global do painel"
 
-#: panel/panel_config_global.c:344
+#: panel/panel_config_global.c:347
 msgid "Animation settings"
 msgstr "Parâmetros das animações"
 
-#: panel/session.c:504
+#: panel/session.c:563
 msgid "Really log out?"
 msgstr "Deseja mesmo sair?"
 
-#: panel/session.c:518
+#: panel/session.c:577
 msgid "Ask next time"
 msgstr "Perguntar na próxima vez"
+
+#: panel/swallow.c:158
+#, fuzzy
+msgid "Create swallow applet"
+msgstr "Adicionar aplicação \"engolida\""
+
+#: panel/swallow.c:168
+msgid "Title of application to swallow"
+msgstr ""
+
+#: panel/swallow.c:179
+msgid "Command (optional)"
+msgstr ""
+
+#: panel/swallow.c:190
+msgid "Width (optional)"
+msgstr ""
+
+#: panel/swallow.c:196
+#, fuzzy
+msgid "Height (optional)"
+msgstr "Altura da janela"
+
+#~ msgid "Wait"
+#~ msgstr "Esperar"
+
+#~ msgid "Min"
+#~ msgstr "Min"
+
+#~ msgid "Requires Password"
+#~ msgstr "Necessita palavra-passe"
+
+#~ msgid "Use DPMS"
+#~ msgstr "Usar DPMS"
+
+#~ msgid "Priority"
+#~ msgstr "Prioridade"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Low"
+#~ msgstr "Baixa"
+
+#~ msgid "Screensavers"
+#~ msgstr "Protecções de ecrã"
+
+#~ msgid "Setup..."
+#~ msgstr "Configurar..."
+
+#~ msgid " Screensaver "
+#~ msgstr " Protecção de ecrã "
+
+#~ msgid "XLockMore Properties"
+#~ msgstr "Propriedades do XLockMore"
+
+#~ msgid "  OK  "
+#~ msgstr "  OK  "
+
+#~ msgid " Apply "
+#~ msgstr " Aplicar "
+
+#~ msgid " Cancel "
+#~ msgstr " Cancelar "
+
+#~ msgid " Defaults "
+#~ msgstr " Valores por omissão "
+
+#~ msgid " Mode "
+#~ msgstr " Modo "
+
+#~ msgid " XLockMore "
+#~ msgstr " XLockMore "
+
+#~ msgid " Options "
+#~ msgstr " Opções "
+
+#~ msgid " Preview "
+#~ msgstr " Prever "
+
+#~ msgid "Add app to panel"
+#~ msgstr "Adicionar aplicação ao painel"
+
+#~ msgid "Add main menu applet"
+#~ msgstr "Adicionar menu principal"
