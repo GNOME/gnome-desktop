@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
 "POT-Creation-Date: 2000-08-16 22:50+0200\n"
-"PO-Revision-Date: 2000-12-19 22:39+01:00\n"
+"PO-Revision-Date: 2000-12-22 22:39+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: applets/desk-guide/deskguide_applet.c:76
-#: applets/tasklist/tasklist_properties.c:295
+#: applets/tasklist/tasklist_properties.c:311
 msgid "Display"
 msgstr "Skærm"
 
@@ -208,15 +208,15 @@ msgid "Desk Guide Alert"
 msgstr "Skrivebordsguideadvarsel"
 
 #: applets/desk-guide/deskguide_applet.c:236 applets/fish/fish.c:905
-#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1391
-#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:931
+#: applets/gen_util/clock.c:436 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:1074
 #: panel/drawer.c:458 panel/launcher.c:624 panel/menu.c:1649 panel/menu.c:5318
 msgid "Properties..."
 msgstr "Egenskaber..."
 
 #: applets/desk-guide/deskguide_applet.c:242 applets/fish/fish.c:912
-#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1403
-#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:937
+#: applets/gen_util/clock.c:443 applets/gen_util/mailcheck.c:1403
+#: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:1080
 #: gnome-terminal/gnome-terminal.c:1703 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:461 panel/gnome-run.c:380
 #: panel/launcher.c:627 panel/logout.c:113 panel/logout.c:194
@@ -225,8 +225,8 @@ msgid "Help"
 msgstr "Hjælp"
 
 #: applets/desk-guide/deskguide_applet.c:249 applets/fish/fish.c:919
-#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1409
-#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:944
+#: applets/gen_util/clock.c:450 applets/gen_util/mailcheck.c:1409
+#: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:1087
 msgid "About..."
 msgstr "Om..."
 
@@ -343,7 +343,7 @@ msgstr ""
 "panelet og hukommelsen. Hvis nogen bliver taget i at bruge denne applet, "
 "burde vedkommende straks sendes til psykisk evaluering."
 
-#: applets/gen_util/clock.c:149
+#: applets/gen_util/clock.c:171
 msgid ""
 "%I:%M\n"
 "%p"
@@ -351,13 +351,13 @@ msgstr ""
 "%H:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152
+#: applets/gen_util/clock.c:174
 msgid "%I:%M %p"
 msgstr "%H:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:474
+#: applets/gen_util/clock.c:181 panel/foobar-widget.c:474
 #: panel/foobar-widget.c:849
 msgid "%H:%M"
 msgstr "%H:%M"
@@ -365,7 +365,7 @@ msgstr "%H:%M"
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:170
+#: applets/gen_util/clock.c:192
 msgid ""
 "%a\n"
 "%b %d"
@@ -375,15 +375,15 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:175
+#: applets/gen_util/clock.c:197
 msgid "%a %b %d"
 msgstr "%a %b %d"
 
-#: applets/gen_util/clock.c:187
+#: applets/gen_util/clock.c:209
 msgid "%A, %B %d"
 msgstr "%A, %B %d"
 
-#: applets/gen_util/clock.c:334 applets/gen_util/mailcheck.c:1307
+#: applets/gen_util/clock.c:358 applets/gen_util/mailcheck.c:1307
 #: applets/gen_util/printer.c:421
 msgid "Can't create applet!\n"
 msgstr "Kan ikke oprette applet!\n"
@@ -392,55 +392,59 @@ msgstr "Kan ikke oprette applet!\n"
 #. * should change is the 12.  If your country code should use
 #. * 12 hour format by default, leave it at 12, otherwise use 24
 #. * for 24 hour format.  Those are the only two supported
-#: applets/gen_util/clock.c:349
+#: applets/gen_util/clock.c:373
 msgid "clock/hourformat=12"
 msgstr "ur/timeformat=12"
 
-#: applets/gen_util/clock.c:552
+#: applets/gen_util/clock.c:590
 msgid "Clock properties"
 msgstr "Egenskaber for ur"
 
-#: applets/gen_util/clock.c:558
+#: applets/gen_util/clock.c:596
 msgid "Time Format"
 msgstr "Tidsformat"
 
-#: applets/gen_util/clock.c:570
+#: applets/gen_util/clock.c:608
 msgid "12 hour"
 msgstr "12 timer"
 
-#: applets/gen_util/clock.c:579
+#: applets/gen_util/clock.c:617
 msgid "24 hour"
 msgstr "24 timer"
 
-#: applets/gen_util/clock.c:614
+#: applets/gen_util/clock.c:652
 msgid "Show date in applet"
 msgstr "Vis dato i applet"
 
-#: applets/gen_util/clock.c:628
+#: applets/gen_util/clock.c:666
 msgid "Show date in tooltip"
 msgstr "Vis dato i værktøjstips"
 
-#: applets/gen_util/clock.c:642
+#: applets/gen_util/clock.c:680
 msgid "Use GMT"
 msgstr "Brug GMT"
 
-#: applets/gen_util/clock.c:656
+#: applets/gen_util/clock.c:694
 msgid "Unix time"
 msgstr "Unix-tid"
 
-#: applets/gen_util/clock.c:685
+#: applets/gen_util/clock.c:698
+msgid "Internet time"
+msgstr "Internet tid"
+
+#: applets/gen_util/clock.c:756
 msgid "Clock"
 msgstr "Ur"
 
-#: applets/gen_util/clock.c:731
+#: applets/gen_util/clock.c:802
 msgid "Clock Applet"
 msgstr "Urapplet"
 
-#: applets/gen_util/clock.c:732 applets/gen_util/printer.c:354
+#: applets/gen_util/clock.c:803 applets/gen_util/printer.c:354
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 Free Software Fundation"
 
-#: applets/gen_util/clock.c:734
+#: applets/gen_util/clock.c:805
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -670,7 +674,7 @@ msgid "Horizontal"
 msgstr "Vandret"
 
 #: applets/tasklist/tasklist_properties.c:165
-#: applets/tasklist/tasklist_properties.c:216
+#: applets/tasklist/tasklist_properties.c:221
 msgid "Tasklist width:"
 msgstr "Opgavelistebredde:"
 
@@ -690,70 +694,79 @@ msgstr "Fast opgavelistebredde"
 msgid "Tasklist width is dynamic"
 msgstr "Dynamisk opgavelistebredde"
 
-#: applets/tasklist/tasklist_properties.c:202 panel/menu.c:4262
+#: applets/tasklist/tasklist_properties.c:201
+#: applets/tasklist/tasklist_properties.c:242
+msgid "Only use empty space"
+msgstr "Brug kun tom plads"
+
+#: applets/tasklist/tasklist_properties.c:207 panel/menu.c:4262
 msgid "Vertical"
 msgstr "Lodret"
 
-#: applets/tasklist/tasklist_properties.c:209
+#: applets/tasklist/tasklist_properties.c:214
 msgid "Tasklist height:"
 msgstr "Opgavelistehøjde:"
 
-#: applets/tasklist/tasklist_properties.c:228
+#: applets/tasklist/tasklist_properties.c:233
 msgid "Tasklist height is fixed"
 msgstr "Fast opgavelistehøjde"
 
-#: applets/tasklist/tasklist_properties.c:232
+#: applets/tasklist/tasklist_properties.c:237
 msgid "Tasklist height is dynamic"
 msgstr "Dynamisk opgavelistehøjde"
 
-#: applets/tasklist/tasklist_properties.c:239 panel/menu.c:4307
+#: applets/tasklist/tasklist_properties.c:248
+msgid "Tasklist width is that of longest title"
+msgstr "Opgavelistebredde er som for den længste titel"
+
+#: applets/tasklist/tasklist_properties.c:255 panel/menu.c:4307
 msgid "Size"
 msgstr "Størrelse"
 
-#: applets/tasklist/tasklist_properties.c:252
+#: applets/tasklist/tasklist_properties.c:268
 msgid "Which tasks to show"
 msgstr "Hvilke opgaver skal vises"
 
-#: applets/tasklist/tasklist_properties.c:260
+#: applets/tasklist/tasklist_properties.c:276
 msgid "Show normal applications"
 msgstr "Vis normale applikationer"
 
-#: applets/tasklist/tasklist_properties.c:263
+#: applets/tasklist/tasklist_properties.c:279
 msgid "Show iconified (minimized) applications"
 msgstr "Vis minimerede applikationer"
 
-#: applets/tasklist/tasklist_properties.c:267
+#: applets/tasklist/tasklist_properties.c:283
 msgid "Show normal applications on all desktops"
 msgstr "Vis normale applikationer på alle skriveborde"
 
-#: applets/tasklist/tasklist_properties.c:270
+#: applets/tasklist/tasklist_properties.c:286
 msgid "Show iconified (minimized) applications on all desktops"
 msgstr "Vis minimerede applikationer på alle skriveborde"
 
 #. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:273 help-browser/toc-man.c:25
+#: applets/tasklist/tasklist_properties.c:289 help-browser/toc-man.c:25
 #: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:1024
 #: panel/gnome-panel-properties.c:1495 panel/panel_config.c:628
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: applets/tasklist/tasklist_properties.c:281
+#: applets/tasklist/tasklist_properties.c:297
 msgid "Show mini icons"
 msgstr "Vis små ikoner"
 
-#: applets/tasklist/tasklist_properties.c:284
+#: applets/tasklist/tasklist_properties.c:300
 msgid "Confirm before killing windows"
 msgstr "Bekræft før dræbning af vinduer"
 
-#: applets/tasklist/tasklist_properties.c:287
+#: applets/tasklist/tasklist_properties.c:303
 msgid "Move iconified tasks to current workspace when restoring"
 msgstr "Flyt ikoniserede opgaver til aktuel arbejdsplads ved genindlæsning"
 
-#: applets/tasklist/tasklist_properties.c:290
+#: applets/tasklist/tasklist_properties.c:306
 msgid "Keep tasks sorted"
 msgstr "Hold opgaver sorteret"
 
-#: applets/tasklist/tasklist_properties.c:322
+#: applets/tasklist/tasklist_properties.c:338
 msgid "Tasklist properties"
 msgstr "Opgavelisteegenskaber"
 
@@ -2499,15 +2512,15 @@ msgstr ""
 "(Hvis du vælger ikke at genindlæse den nu, kan du altid tilføje den fra "
 "'Applet' undermenuen i hoved-menuen)"
 
-#: panel/extern.c:735
+#: panel/extern.c:719
 msgid "Couldn't add applet"
 msgstr "Kunne ikke tilføje applet"
 
-#: panel/extern.c:799
+#: panel/extern.c:783
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Hovsa! af en eller grund kan vi ikke tilføje til panelet"
 
-#: panel/extern.c:873
+#: panel/extern.c:857
 msgid "No socket was created"
 msgstr "Ingen sokkel oprettedes"
 
