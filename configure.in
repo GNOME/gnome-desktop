@@ -8,6 +8,11 @@ AM_MAINTAINER_MODE
 
 AM_ACLOCAL_INCLUDE(macros)
 
+dnl
+dnl let applications configure for gnome
+dnl
+gnome_cv_use_gnome=yes
+
 GNOME_INIT
 
 AC_ISC_POSIX
@@ -53,6 +58,8 @@ esac
 test -n "$CDROM_HOST" && PROGRAMS_PANEL_CDPLAYER=cdplayer
 AC_SUBST(CDROM_HOST)
 AC_SUBST(PROGRAMS_PANEL_CDPLAYER)
+
+AC_CONFIG_SUBDIRS(gemvt)
 
 AC_OUTPUT([
 Makefile
