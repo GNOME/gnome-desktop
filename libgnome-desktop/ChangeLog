@@ -1,5 +1,18 @@
 2002-07-12  Mark McLoughlin  <mark@skynet.ie>
 
+	Apply modified version of a patch from Frank Worsley
+	to make sure the 'easy' page is updated when editing
+	the current locale in the advanced page. #87451.
+
+	* gnome-desktop-item.[ch]: (gnome_desktop_item_get_attr_locale):
+	implement method to find the locale the is used for a given
+	attribute.
+
+	* gnome-ditem-edit.c: (translations_add): compare this to the locale
+	we are editing.
+
+2002-07-12  Mark McLoughlin  <mark@skynet.ie>
+
 	* gnome-desktop-item.c: (type_from_string): be a bit
 	smarter with strcmps, switch on the first letter and
 	then compare.

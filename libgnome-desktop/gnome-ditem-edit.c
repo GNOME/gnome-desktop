@@ -530,12 +530,12 @@ translations_add (GtkWidget      *button,
 	GtkTreeView  *tree;
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	const GList  *langs;
 	const char   *tmp;
 	const char   *name;
 	const char   *generic_name;
 	const char   *comment;
 	char         *lang;
+	const char   *locale;
 	gboolean      ret;
 
 	tmp     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
@@ -555,17 +555,9 @@ translations_add (GtkWidget      *button,
 	/*
 	 * If we are editing the current language, change the name and
 	 * comment entries on the easy page as well.
-	 *
-	 * FIXME - this doesn't work. We need something like
-	 * gnome_desktop_item_get_best_locale and compare that with lang.
-	 * Right now for example my locale is en_US, but 
-	 * gnome_i18n_get_language_list returns en_US.iso8859-1 as the first item
-	 * and en_US as the second. gnome-desktop-item handles all this correctly
-	 * and needs a function to return to us the locale it's using as default.
 	 */
-	langs = gnome_i18n_get_language_list ("LC_MESSAGES");
-	tmp = langs ? langs->data : NULL;
-	if ((tmp && !strcmp (tmp, lang)) || (!tmp && !strcmp (lang, "C"))) {
+	locale = gnome_desktop_item_get_attr_locale (dee->_priv->ditem, "Name");
+	if ((locale && !strcmp (locale, lang)) || (!locale && !strcmp (lang, "C"))) {
 		gtk_entry_set_text (
 			GTK_ENTRY (dee->_priv->name_entry), name);
 		gtk_entry_set_text (

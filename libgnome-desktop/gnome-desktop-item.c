@@ -2426,6 +2426,39 @@ gnome_desktop_item_get_localestring_lang (const GnomeDesktopItem *item,
 	return lookup_locale (item, attr, language);
 }
 
+/**
+ * gnome_desktop_item_get_string_locale:
+ * @item: A desktop item
+ * @attr: An attribute name
+ *
+ * Returns the current locale that is used for the given attribute.
+ * This might not be the same for all attributes. For example, if your
+ * locale is "en_US.ISO8859-1" but attribute FOO only has "en_US" then
+ * that would be returned for attr = "FOO". If attribute BAR has
+ * "en_US.ISO8859-1" then that would be returned for "BAR".
+ *
+ * Returns: a string equal to the current locale or NULL
+ * if the attribute is invalid or there is no matching locale.
+ */
+const char *
+gnome_desktop_item_get_attr_locale (const GnomeDesktopItem *item,
+				    const char             *attr)
+{
+	const GList *list, *l;
+
+	list = gnome_i18n_get_language_list ("LC_MESSAGES");
+	for (l = list; l; l = l->next) {
+		const char *locale = l->data;
+		const char *value = NULL;
+
+		value = lookup_locale (item, attr, locale);
+		if (value)
+			return locale;
+	}
+
+	return NULL;
+}
+
 GList *
 gnome_desktop_item_get_languages (const GnomeDesktopItem *item,
 				  const char *attr)

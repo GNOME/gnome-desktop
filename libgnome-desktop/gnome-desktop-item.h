@@ -227,6 +227,9 @@ void                    gnome_desktop_item_set_string        (GnomeDesktopItem  
 							      const char		 *attr,
 							      const char                 *value);
 
+const char *            gnome_desktop_item_get_attr_locale   (const GnomeDesktopItem     *item,
+							      const char		 *attr);
+
 /*
  * LocaleString type
  */
