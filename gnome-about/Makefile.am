@@ -26,3 +26,5 @@ about_DATA = gnome-64.gif
 EXTRA_DIST = $(about_DATA)
 
 SUBDIRS = headers
+
+CLEANFILES = gnome-about.desktop
