@@ -53,9 +53,9 @@ omf_timestamp: $(omffile)
 	touch omf_timestamp
 
 $(docname).xml: $(entities)
-        -ourdir=`pwd`;  \
-        cd $(srcdir);   \
-        cp $(entities) $$ourdir
+	-ourdir=`pwd`;  \
+	cd $(srcdir);   \
+	cp $(entities) $$ourdir
 
 app-dist-hook: 
 	-$(mkinstalldirs) $(distdir)/figures
