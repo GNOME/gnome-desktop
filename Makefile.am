@@ -22,3 +22,12 @@ EXTRA_DIST =			\
 versiondir=$(datadir)/gnome-about
 version_DATA=gnome-version.xml
 @INTLTOOL_XML_RULE@
+
+# ignore scrollkeeper files, which will legitimately exist after uninstall.
+distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
+
+CLEANFILES = $(version_DATA)
+DISTCLEANFILES = \
+  intltool-extract \
+  intltool-merge \
+  intltool-update

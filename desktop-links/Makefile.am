@@ -18,3 +18,5 @@ Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
 EXTRA_DIST = $(Directory_in_files)
+
+CLEANFILES = $(Directory_DATA)
