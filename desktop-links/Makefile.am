@@ -32,7 +32,8 @@ Directory_files = \
 	Internet.directory	\
 	Games.directory		\
 	Development.directory   \
-	Settings.directory
+	Settings.directory	\
+	SettingsSession.directory
 
 
 Applications_DATA = \
@@ -79,7 +80,9 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(Internetdir)
 	$(mkinstalldirs) $(DESTDIR)$(Gamesdir)
 	$(mkinstalldirs) $(DESTDIR)$(Settingsdir)
+	$(mkinstalldirs) $(DESTDIR)$(SettingsSessiondir)
 	$(mkinstalldirs) $(DESTDIR)$(Developmentdir)
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/Session/
 
 	$(INSTALL_DATA) $(srcdir)/Root.order $(DESTDIR)$(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Settings.order $(DESTDIR)$(Settingsdir)/.order
