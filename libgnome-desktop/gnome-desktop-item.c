@@ -1460,7 +1460,7 @@ gnome_desktop_item_get_languages (const GnomeDesktopItem *item,
 	return g_list_reverse (list);
 }
 
-const char *
+static const char *
 get_language (void)
 {
 	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");

@@ -649,7 +649,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 	dee->_priv->ui_dirty = FALSE;
 }
 
-const char *
+static const char *
 get_language (void)
 {
 	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
