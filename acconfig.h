@@ -11,9 +11,6 @@
 #undef PACKAGE
 #undef VERSION
 
-/* Name of default window manager, as string.  */
-#undef WINDOW_MANAGER
-
 /* Define if you have the Andrew File System.  */
 #undef AFS
 

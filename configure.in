@@ -136,7 +136,11 @@ AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
 AC_ARG_WITH(window-manager,
 [  --with-window-manager=NAME
 			   Specify default window manager],[
-AC_DEFINE_UNQUOTED(WINDOW_MANAGER, "$with_window_manager")])
+    WINDOW_MANAGER="$with_window_manager"], [
+    dnl icewm is the default because it supports session management
+    dnl and other Gnome requirements.
+    WINDOW_MANAGER=icewm])
+AC_SUBST(WINDOW_MANAGER)
 
 dnl gnome-smproxy
 dnl Since this is originally from the X11 tree, we have to get 
