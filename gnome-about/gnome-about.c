@@ -1010,7 +1010,7 @@ create_canvas (void)
 	 */
 	href = href_item_new (root,
 			      _("News"),
-			      "http://www.gnomedesktop.org",
+			      "http://news.gnome.org",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
