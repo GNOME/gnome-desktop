@@ -52,6 +52,8 @@ BITMAPS     = \
 	panel-arrow-right.xpm			\
 	panel-arrow-up.xpm			\
 	panel-folder.xpm			\
+	gnome-mouse.png				\
+	gnome-background.png			\
 	panel-menu-main.xpm
 
 pixmap_DATA = $(BITMAPS)
