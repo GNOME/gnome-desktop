@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.3\n"
-"POT-Creation-Date: 2000-11-02 09:12+0100\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-09-07 20:17+02:00\n"
 "Last-Translator: Gaute Hvoslef Kvalnes <ai98ghk@stud.hib.no>\n"
 "Language-Team: Norwegian (Nynorsk)\n"
@@ -792,20 +792,20 @@ msgstr "Lagra"
 msgid "Revert"
 msgstr "Gå tilbake"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr ""
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 #, fuzzy
 msgid "Programs (system menus)"
 msgstr "Programtest-resultat"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr ""
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr ""
 
@@ -906,18 +906,18 @@ msgid "Sort _Recursive"
 msgstr "&Rekursivt"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 #, fuzzy
 msgid "GNOME menu editor"
 msgstr "KDE-menyredigerar"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
 msgstr ""
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 #, fuzzy
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "Kan ikkje laga 'spool'-katalog"
@@ -1774,14 +1774,14 @@ msgid ""
 "%s to the file /etc/hosts."
 msgstr ""
 
-#: gsm/gnome-login-check.c:367
+#: gsm/gnome-login-check.c:368
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -2434,7 +2434,7 @@ msgstr "Fram"
 msgid "Go to the next location in the history list"
 msgstr ""
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "Last om att"
 
@@ -2480,31 +2480,31 @@ msgid ""
 "installed on your system."
 msgstr ""
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 #, fuzzy
 msgid "???"
 msgstr "??"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 #, fuzzy
 msgid "Remove from panel"
 msgstr "Fjern frå påminningsliste"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "Flytt"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, fuzzy, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kan ikkje lasta inn 'pixmap'?"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 #, fuzzy
 msgid "Can't find an empty spot"
 msgstr "Finn ikkje skrifttype"
@@ -2603,16 +2603,37 @@ msgstr "Bruk tastatur"
 msgid "Drawer"
 msgstr "Del ut"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr ""
+
+#: panel/extern.c:338
+#, fuzzy
+msgid "Tasklist"
+msgstr "Oppgåver"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr ""
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 #, fuzzy
 msgid "Couldn't add applet"
 msgstr "Kunne ikkje lasta %1"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr ""
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 #, fuzzy
 msgid "No socket was created"
 msgstr "Ingen tekst vart erstatta."
@@ -3377,7 +3398,7 @@ msgid "Applets"
 msgstr "&Appletar"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr ""
 
@@ -3692,7 +3713,7 @@ msgstr "Menynamn"
 msgid "Use custom icon for panel button"
 msgstr "Bruk eigendefinerte skrifttypar"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, fuzzy, c-format
 msgid "Open URL: %s"
 msgstr "Opna URL"
@@ -3837,4 +3858,3 @@ msgstr "Breidd"
 #: panel/swallow.c:224
 msgid "Height"
 msgstr "Høgd"
-

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.7\n"
-"POT-Creation-Date: 2000-11-02 01:35+0100\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-11-02 01:39+01:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@pluto.linux.it>\n"
 "Language-Team: Italiano <it@li.org>\n"
@@ -741,19 +741,19 @@ msgstr "Salva"
 msgid "Revert"
 msgstr "Ripristina"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "Preferiti (menu utente)"
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "Programmi (menu di sistema)"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "Applet (menu di sistema)"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "Programmi da integrare (menu di sistema)"
 
@@ -838,11 +838,11 @@ msgid "Sort _Recursive"
 msgstr "Ordina _Ricorsivamente"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "Editor dei menu"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -850,7 +850,7 @@ msgstr ""
 "Rilasciato sotto i termini della GNU Public License.\n"
 "Editor dei menu di GNOME."
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "Impossibile trovare la directory di installazione di GNOME\n"
 
@@ -1660,14 +1660,15 @@ msgstr ""
 "É eventualmente possibile correggere l'errore aggiungendo\n"
 "%s al file /etc/hosts."
 
-#: gsm/gnome-login-check.c:367
+#: gsm/gnome-login-check.c:368
+#, fuzzy
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -1841,11 +1842,11 @@ msgstr "Il programma potrebbe essere lento, interrotto o non funzionante."
 msgid "You may wait for it to respond or remove it."
 msgstr "È possibile attendere che risponda o rimuoverlo."
 
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "Riavvio interrotto a causa di errori."
 
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "La chiusura di una sessione è in corso."
 
@@ -2271,7 +2272,7 @@ msgstr "Avanti"
 msgid "Go to the next location in the history list"
 msgstr "Vai alla posizione successiva nella cronologia"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "Ricarica"
 
@@ -2318,29 +2319,29 @@ msgstr ""
 "non è stata installata nel vostro\n"
 "sistema."
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "Rimuovi dal pannello"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "Sposta"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Impossibile trovare il file immagine %s"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Pannello"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "Impossibile trovare uno spazio libero"
 
@@ -2426,16 +2427,37 @@ msgstr "Abilita le frecce sui pulsanti di minimizzazione"
 msgid "Drawer"
 msgstr "Cassetto"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr ""
+
+#: panel/extern.c:338
+#, fuzzy
+msgid "Tasklist"
+msgstr "Lista task"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr ""
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "Impossibile aggiungere l'applet"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr ""
 "OOPS!  Per qualche ragione è impossibile aggiungere un elemento al pannello!"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "Nessun socket è stato creato"
 
@@ -3135,7 +3157,7 @@ msgid "Applets"
 msgstr "Applet"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format:%I:%M:%S %p"
 
@@ -3405,7 +3427,7 @@ msgstr "Percorso del menu"
 msgid "Use custom icon for panel button"
 msgstr "Utilizza icona personalizzata per il pulsalnte del pannello"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr "Apri URL: %s"
@@ -3539,4 +3561,3 @@ msgstr "Larghezza"
 #: panel/swallow.c:224
 msgid "Height"
 msgstr "Altezza"
-

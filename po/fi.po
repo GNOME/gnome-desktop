@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.7\n"
-"POT-Creation-Date: 2000-11-07 20:53+0200\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-11-06 23:08+02:00\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -1675,13 +1675,14 @@ msgstr ""
 "%s tiedostoon /etc/hosts."
 
 #: gsm/gnome-login-check.c:368
+#, fuzzy
 msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -2286,7 +2287,7 @@ msgstr "Eteenpäin"
 msgid "Go to the next location in the history list"
 msgstr "Etene sivuhistoriassa"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "Päivitä"
 
@@ -2332,29 +2333,29 @@ msgstr ""
 "Todennäköisesti tätä tiedostoa ei ole\n"
 "asennettu järjestelmääsi."
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "Poista paneelista"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "Siirrä"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kuvatiedostoa '%s' ei löytynyt"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Paneeli"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "Tyhjää paikkaa ei löydy"
 
@@ -2440,15 +2441,36 @@ msgstr "Näytä piilotusnuolipainike"
 msgid "Drawer"
 msgstr "Vetolaatikko"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr ""
+
+#: panel/extern.c:338
+#, fuzzy
+msgid "Tasklist"
+msgstr "Sovellukset"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr ""
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "Sovelmaa ei voitu lisätä!"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Paneeliin lisääminen ei jostakin syystä onnistu"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "Sockettia ei luotu"
 
@@ -3152,7 +3174,7 @@ msgid "Applets"
 msgstr "Sovelmat"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%H:%M:%S"
 
@@ -3423,7 +3445,7 @@ msgstr "Valikkopolku"
 msgid "Use custom icon for panel button"
 msgstr "Käytä omaa kuvaketta paneelipainikkeessa"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr "Avaa URL: %s"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core-1.0.7\n"
-"POT-Creation-Date: 2000-10-23 15:54-0400\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 1999-11-11 05:04+0800\n"
 "Last-Translator: Dillion Chen <dillon.chen@turbolinux.com.cn>\n"
 "Language-Team: TLDN\n"
@@ -184,7 +184,7 @@ msgstr "Window Manager Workarounds"
 #, fuzzy
 msgid ""
 "Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
 msgstr "迁移到装饰窗口管理程序(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 
 # applets/desk-guide/deskguide_applet.c:139
@@ -192,7 +192,7 @@ msgstr "迁移到装饰窗口管理程序(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 #, fuzzy
 msgid ""
 "Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
+"(FVWM, Sawfish)"
 msgstr "窗口管理程序在所有桌面上改变活动区域"
 
 # applets/desk-guide/deskguide_applet.c:142
@@ -901,24 +901,24 @@ msgid "Revert"
 msgstr "反向"
 
 # gmenu/tree.c:411
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 #, fuzzy
 msgid "Favorites (user menus)"
 msgstr "用户菜单顶端"
 
 # gmenu/tree.c:419
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 #, fuzzy
 msgid "Programs (system menus)"
 msgstr "系统菜单顶端"
 
 # gmenu/tree.c:419
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 #, fuzzy
 msgid "Applets (system menus)"
 msgstr "系统菜单顶端"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr ""
 
@@ -1024,12 +1024,12 @@ msgstr "递回的排序 (_R)"
 
 # gmenu/main.c:239 gmenu/main.c:285 gmenu/tree.c:389
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "GNOME 选单编辑程序"
 
 # gmenu/main.c:242
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -1038,7 +1038,7 @@ msgstr ""
 "GNOME 选单编辑程序"
 
 # applets/slashapp/slashapp.c:258 gmenu/utils.c:31
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 #, fuzzy
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "无法创建用户目录:%s\n"
@@ -1928,35 +1928,35 @@ msgid "Hide"
 msgstr "掩藏"
 
 # gnome-terminal/gnome-terminal.c:208
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 #, fuzzy
 msgid "GNOME Login"
 msgstr "GNOME终端"
 
 # panel/panel_config_global.c:571
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 #, fuzzy
 msgid "Login"
 msgstr "退出"
 
 # applets/mini-commander/src/command_line.c:371
-#: gsm/gnome-login-check.c:261
+#: gsm/gnome-login-check.c:271
 #, fuzzy
 msgid "Start with default programs"
 msgstr "启动程序"
 
 # panel/panel_config_global.c:609
-#: gsm/gnome-login-check.c:265
+#: gsm/gnome-login-check.c:275
 #, fuzzy
 msgid "Reset all user settings"
 msgstr "全局图标设置"
 
-#: gsm/gnome-login-check.c:276
+#: gsm/gnome-login-check.c:286
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr ""
 
-#: gsm/gnome-login-check.c:308
+#: gsm/gnome-login-check.c:318
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1964,23 +1964,36 @@ msgid ""
 "Please correct the ownership of this directory."
 msgstr ""
 
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
 msgid "Try again"
 msgstr ""
 
 # applets/asclock/dialogs.c:235
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
 #, fuzzy
 msgid "Continue"
 msgstr "大陆/程序"
 
-#: gsm/gnome-login-check.c:332
+#: gsm/gnome-login-check.c:342
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
 "This will prevent GNOME from operating correctly.\n"
 "It may be possible to correct the problem by adding\n"
 "%s to the file /etc/hosts."
+msgstr ""
+
+#: gsm/gnome-login-check.c:368
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
 msgstr ""
 
 #: gsm/gsm-client-editor.c:97
@@ -2173,12 +2186,12 @@ msgid "You may wait for it to respond or remove it."
 msgstr "你可以等待它响应或者移去它"
 
 # gsm/manager.c:1359
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "由于失败放弃重新产生"
 
 # gsm/manager.c:1527
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "正在关闭一个对话"
 
@@ -2703,7 +2716,7 @@ msgid "Go to the next location in the history list"
 msgstr "到历史列表中的下一个位置"
 
 # help-browser/window.c:196
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "再装入"
 
@@ -2759,35 +2772,35 @@ msgstr ""
 " "
 
 # panel/applet.c:297
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
 # panel/applet.c:337
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "从面板上移去"
 
 # gmenu/main.c:110 gmenu/main.c:140
-#: panel/applet.c:451
+#: panel/applet.c:455
 #, fuzzy
 msgid "Move"
 msgstr "上移"
 
 # panel/menu.c:2069
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "不能发现像素文件%s"
 
 # panel/menu.c:2576
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "面板"
 
 # panel/menu.c:2069
-#: panel/applet.c:696
+#: panel/applet.c:700
 #, fuzzy
 msgid "Can't find an empty spot"
 msgstr "不能发现像素文件%s"
@@ -2893,20 +2906,45 @@ msgstr "使用隐藏箭头"
 msgid "Drawer"
 msgstr "抽屉"
 
+# applets/desk-guide/deskguide_applet.c:75
+#: panel/extern.c:336
+#, fuzzy
+msgid "Deskguide (the desktop pager)"
+msgstr "显示调用器"
+
+# applets/gnome-pager/gnomepager_applet.c:322
+#: panel/extern.c:338
+msgid "Tasklist"
+msgstr "工作列表"
+
+# applets/battery/battery.c:143
+#: panel/extern.c:340
+#, fuzzy
+msgid "The Battery"
+msgstr "电池快没电了。"
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
 # applets/battery/battery.c:645 applets/esd-manager/esdmanager_applet.c:72
 # applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
 # applets/gen_util/printer.c:381 applets/jbc/jbc-applet.c:129
 # applets/netload/netload.c:321
-#: panel/extern.c:443
+#: panel/extern.c:565
 #, fuzzy
 msgid "Couldn't add applet"
 msgstr "无法建立小程序!\n"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr ""
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr ""
 
@@ -3720,7 +3758,7 @@ msgid "Applets"
 msgstr "小应用程序"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr ""
 
@@ -4070,7 +4108,7 @@ msgstr "选单路径"
 msgid "Use custom icon for panel button"
 msgstr ""
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr ""
@@ -4320,10 +4358,6 @@ msgstr "高度"
 #~ "APM support."
 #~ msgstr "查询电池电量时发生错误，请确定您的系统核心有支持 APM 功能。"
 
-# applets/battery/battery.c:143
-#~ msgid "The battery is low."
-#~ msgstr "电池快没电了。"
-
 # applets/battery/battery.c:158
 #~ msgid "The battery is fully charged."
 #~ msgstr "电池充满。"
@@ -4554,10 +4588,6 @@ msgstr "高度"
 # applets/clockmail/properties.c:463
 #~ msgid "Theme"
 #~ msgstr "主题"
-
-# applets/desk-guide/deskguide_applet.c:75
-#~ msgid "Show desktop pager"
-#~ msgstr "显示调用器"
 
 # applets/desk-guide/deskguide_applet.c:133
 #~ msgid "Draw desktops double-buffered (recommended)"
@@ -4857,10 +4887,6 @@ msgstr "高度"
 # applets/gnome-pager/gnomepager_applet.c:303
 #~ msgid "Height of large pagers"
 #~ msgstr "正常调用器的高度"
-
-# applets/gnome-pager/gnomepager_applet.c:322
-#~ msgid "Tasklist"
-#~ msgstr "工作列表"
 
 # applets/gnome-pager/gnomepager_applet.c:331
 #~ msgid "Show task list"

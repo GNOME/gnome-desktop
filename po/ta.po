@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.x\n"
-"POT-Creation-Date: 2000-11-10 19:19+0000\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-11-10 19:19+0000\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -1656,9 +1656,9 @@ msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -2249,7 +2249,7 @@ msgstr "ÓıÒÈõ"
 msgid "Go to the next location in the history list"
 msgstr "ÅÃÄ¡ÚôÀğÊÂ¢ı «Îò¾ ­¼òĞìÌ §À¡"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "ÁÚÓ¨È"
 
@@ -2296,29 +2296,29 @@ msgstr ""
 "«¨ÁôÀ¢û ¿¢ÚÅ ­øÄ¡Áø\n"
 "­Õì¸Ä¡õ."
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "ÀÄ¨¸Â¢ø ­ÕóĞ ¿£ìÌ"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "¿¸÷òĞ"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "À¢ìŠ-À¼ì §¸¡ôÒ %s ¸¡ÉÅ¢ø¨Ä"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "ÀÄ¨¸"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "¸¡Ä¢Â¡É µÃ¢¼õ ­ø¨Ä"
 
@@ -2404,15 +2404,36 @@ msgstr "Á¨ÈôÒ-¦À¡ò¾¡ı ¾¢¨º¨Â ­ÂÖ¨ÁôÀÎòĞ"
 msgid "Drawer"
 msgstr "­ØôÀ¨È"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr ""
+
+#: panel/extern.c:338
+#, fuzzy
+msgid "Tasklist"
+msgstr "À½¢ì¸¼í¸û"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr ""
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "ÌÚõÀÂ¨É Üğ¼ ÓÊÂÅ¢ø¨Ä"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "²§¾¡ µ÷ ¸¡ÃÉò¾¢É¡ø ÀÄ¨¸Â¢ø Üğ¼ ÓÊÂÅ¢ø¨Ä!!!"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "Ğ¨Ç ¯ÕÅ¡ì¸ Å¢ø¨Ä"
 
@@ -3100,7 +3121,7 @@ msgid "Applets"
 msgstr "ÌÚõÀÂı¸û"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
@@ -3369,7 +3390,7 @@ msgstr "ÀğÊ À¡¨¾"
 msgid "Use custom icon for panel button"
 msgstr "ÀÄ¨¸ ¦À¡ò¾¡ÛìÌ ¾É¢ôÀÂı ÌÚõÀ¼õ ¯À§Â¡¸¢"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr "Å¨Ä Ó¸Å¡¢¨Â ¾¢È: %s"

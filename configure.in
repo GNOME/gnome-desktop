@@ -1,7 +1,7 @@
 AC_INIT(panel)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-core, 1.2.3.1)
+AM_INIT_AUTOMAKE(gnome-core, 1.2.4)
 
 AM_MAINTAINER_MODE
 
@@ -374,8 +374,9 @@ dnl Sun shipped a patch which makes gnome-session seg fault in a libICE call.
 dnl Use the check for the broken libICE on Solaris _only_
 dnl
 uname_s=`uname -s`
-AM_CONDITIONAL(DO_LIBICE_CHECK, test x$uname_s = xSunOS)
-AC_SUBST(DO_LIBICE_CHECK)
+if test x$uname_s = xSunOS; then
+    AC_DEFINE(DO_LIBICE_CHECK)
+fi
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.76\n"
-"POT-Creation-Date: 2000-10-23 15:54-0400\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-08-21 15:45+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: chinese <zh@li.org>\n"
@@ -153,17 +153,19 @@ msgid "Window Manager Workarounds"
 msgstr "視窗管理者工作區域"
 
 #: applets/desk-guide/deskguide_applet.c:138
+#, fuzzy
 msgid ""
 "Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
 msgstr ""
 "視窗管理者只移動裝飾視窗\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
 
 #: applets/desk-guide/deskguide_applet.c:141
+#, fuzzy
 msgid ""
 "Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
+"(FVWM, Sawfish)"
 msgstr ""
 "視窗管理者在所有桌面上改變啟動範圍\n"
 "(FVWM, Sawmill)"
@@ -735,19 +737,19 @@ msgstr "存檔"
 msgid "Revert"
 msgstr "反向"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "我的最愛 (使用者選單)"
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "程式 (系統選單)"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "小程式 (系統選單)"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "要被合併的程式 (系統選單)"
 
@@ -832,11 +834,11 @@ msgid "Sort _Recursive"
 msgstr "遞迴的排序 (_R)"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "GNOME 選單編輯程式"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -844,7 +846,7 @@ msgstr ""
 "依 GNU 一般公有版權 (GPL) 發行。\n"
 "GNOME 選單編輯程式"
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "無法取回 Gnome 安裝目錄\n"
 
@@ -1599,28 +1601,28 @@ msgstr "查詢 %s 的網際網路位址"
 msgid "Hide"
 msgstr "隱藏"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "GNOME Login"
 msgstr "Gnome 登入"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "Login"
 msgstr "登入"
 
-#: gsm/gnome-login-check.c:261
+#: gsm/gnome-login-check.c:271
 msgid "Start with default programs"
 msgstr "以預設程式啟動"
 
-#: gsm/gnome-login-check.c:265
+#: gsm/gnome-login-check.c:275
 msgid "Reset all user settings"
 msgstr "重設所有使用者設定"
 
-#: gsm/gnome-login-check.c:276
+#: gsm/gnome-login-check.c:286
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "是否重設 %s 的全部 Gnome 使用者設定？"
 
-#: gsm/gnome-login-check.c:308
+#: gsm/gnome-login-check.c:318
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1631,15 +1633,15 @@ msgstr ""
 "請聯絡該目錄的擁有人.\n"
 " "
 
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
 msgid "Try again"
 msgstr "再試一次"
 
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
 msgid "Continue"
 msgstr "繼續"
 
-#: gsm/gnome-login-check.c:332
+#: gsm/gnome-login-check.c:342
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1651,6 +1653,19 @@ msgstr ""
 "這會使 Gnome 無法正常工作。\n"
 "您可以經由把 %s 增加到 /etc/hosts\n"
 "以更正這個錯誤。"
+
+#: gsm/gnome-login-check.c:368
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
+msgstr ""
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
@@ -1809,11 +1824,11 @@ msgstr "程式可能很慢，停止或中斷。"
 msgid "You may wait for it to respond or remove it."
 msgstr "您可以等待回應或移除之。"
 
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "因為失敗所以無法衍生。"
 
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "正在進行關閉工作階段。"
 
@@ -2237,7 +2252,7 @@ msgstr "向前"
 msgid "Go to the next location in the history list"
 msgstr "移到歷史列表中下一個位置"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "重新讀取"
 
@@ -2284,29 +2299,29 @@ msgstr ""
 "安裝這個文件\n"
 " "
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "從面板中移除"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "移動"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "找不到點陣圖檔案 %s"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "面板"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "找不到空白的點"
 
@@ -2392,15 +2407,37 @@ msgstr "使用隱藏箭頭"
 msgid "Drawer"
 msgstr "抽屜"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+#, fuzzy
+msgid "Deskguide (the desktop pager)"
+msgstr "顯示呼叫器"
+
+#: panel/extern.c:338
+msgid "Tasklist"
+msgstr "工作列表"
+
+#: panel/extern.c:340
+#, fuzzy
+msgid "The Battery"
+msgstr "電池快沒電了。"
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "無法增加小程式"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Whoops! 由於某些緣故我們無法增加到面板"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "沒有建立插座"
 
@@ -3092,7 +3129,7 @@ msgid "Applets"
 msgstr "小程式"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr ""
 
@@ -3364,7 +3401,7 @@ msgstr "選單路徑"
 msgid "Use custom icon for panel button"
 msgstr ""
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr ""
@@ -3600,9 +3637,6 @@ msgstr "高度"
 #~ "APM support."
 #~ msgstr "查詢電池電量時發生錯誤，請確定您的系統核心有支援 APM 功\能。"
 
-#~ msgid "The battery is low."
-#~ msgstr "電池快沒電了。"
-
 #~ msgid "The battery is fully charged."
 #~ msgstr "電池滿格。"
 
@@ -3780,10 +3814,6 @@ msgstr "高度"
 
 #~ msgid "Theme"
 #~ msgstr "主題"
-
-#, fuzzy
-#~ msgid "Show desktop pager"
-#~ msgstr "顯示呼叫器"
 
 #, fuzzy
 #~ msgid "PPP Dialer Applet"
@@ -3997,9 +4027,6 @@ msgstr "高度"
 
 #~ msgid "Height of large pagers"
 #~ msgstr "正常呼叫器的高度"
-
-#~ msgid "Tasklist"
-#~ msgstr "工作列表"
 
 #~ msgid "Show task list"
 #~ msgstr "顯示工作列表"

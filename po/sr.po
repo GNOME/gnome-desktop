@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-10-23 15:54-0400\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-06-07 20:05+0100\n"
 "Last-Translator: Tomislav Jankovic_<tomaja@net.yu>\n"
 "Language-Team: Serbian(latin) <tomy@linuxyu.org>\n"
@@ -154,17 +154,19 @@ msgid "Window Manager Workarounds"
 msgstr "Radni prostori Window Menadzera"
 
 #: applets/desk-guide/deskguide_applet.c:138
+#, fuzzy
 msgid ""
 "Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
 msgstr ""
 "Window menadzeri pomera dekoracioni prozor umesto toga\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
 
 #: applets/desk-guide/deskguide_applet.c:141
+#, fuzzy
 msgid ""
 "Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
+"(FVWM, Sawfish)"
 msgstr ""
 "Window menadzer menja aktivno polje svih desktopova\n"
 "(FVWM, Sawmill)"
@@ -743,19 +745,19 @@ msgstr "Snimi"
 msgid "Revert"
 msgstr "Vrati"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "Favorites (korisnièki meniji)"
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "Programi (sistemski meni)"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "Apleti (sistemski meni)"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "Programi koji treba da se nalaze u (sistemskom meniju)"
 
@@ -840,11 +842,11 @@ msgid "Sort _Recursive"
 msgstr "Sortiraj_Rekurzivom"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "GNOME editor menija"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -852,7 +854,7 @@ msgstr ""
 "Objavljeno pod uslovima  GNU Public Licence.\n"
 "GNOME editor menija."
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "Nije moguæ da naðe GNOME instalacioni direktorijum\n"
 
@@ -1611,28 +1613,28 @@ msgstr "Tra¾im internet adresu za  %s"
 msgid "Hide"
 msgstr "Sakrij"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "GNOME Login"
 msgstr "GNOME prijava"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "Login"
 msgstr "Prijava"
 
-#: gsm/gnome-login-check.c:261
+#: gsm/gnome-login-check.c:271
 msgid "Start with default programs"
 msgstr "Start sa default programima"
 
-#: gsm/gnome-login-check.c:265
+#: gsm/gnome-login-check.c:275
 msgid "Reset all user settings"
 msgstr "Reset svih opcija korisnika"
 
-#: gsm/gnome-login-check.c:276
+#: gsm/gnome-login-check.c:286
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "Da li da stvarno resetujem opcije svih korisnika za %s?"
 
-#: gsm/gnome-login-check.c:308
+#: gsm/gnome-login-check.c:318
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1643,15 +1645,15 @@ msgstr ""
 "trenutnog korisnika, %s.\n"
 "Ispravite vlasni¹tvo nad ovim direktorijumom."
 
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
 msgid "Try again"
 msgstr "Probaj ponovo"
 
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
 msgid "Continue"
 msgstr "Nastavi"
 
-#: gsm/gnome-login-check.c:332
+#: gsm/gnome-login-check.c:342
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1663,6 +1665,19 @@ msgstr ""
 "Ovo æe saèuvati  GNOME da radi korektno.\n"
 "Mo¾ete re¹iti ovaj problem dodavanjem\n"
 "%s u fajl /etc/hosts."
+
+#: gsm/gnome-login-check.c:368
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
+msgstr ""
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
@@ -1822,11 +1837,11 @@ msgstr "Program mo¾e biti spor,zaustavljen ili prekinut."
 msgid "You may wait for it to respond or remove it."
 msgstr "Mo¾ete èekati do njegovog odgovora ili ga ukloniti"
 
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "Respawn obustavljen usled havarije "
 
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "Ga¹enje sesije je u progresu"
 
@@ -2249,7 +2264,7 @@ msgstr "Napred"
 msgid "Go to the next location in the history list"
 msgstr "Idi na sledeæu lokaciju u listi istorije"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "Ponovo unesi"
 
@@ -2296,29 +2311,29 @@ msgstr ""
 "instalirali ovaj dokument\n"
 "na va¹ sistem."
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "Ukloni iz panela"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "Premesti"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Ne mogu naæi %s pixmap fajl"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "Ne mogu naæi prazno mesto"
 
@@ -2404,15 +2419,36 @@ msgstr "Omoguæi strelicu za taster za sakrivanje"
 msgid "Drawer"
 msgstr "Meni"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+msgid "Deskguide (the desktop pager)"
+msgstr ""
+
+#: panel/extern.c:338
+#, fuzzy
+msgid "Tasklist"
+msgstr "Zadaci"
+
+#: panel/extern.c:340
+msgid "The Battery"
+msgstr ""
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "Ne mogu dodati aplet"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Opa! iz nekog razloga nemo¾emo to dodati na panel"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "socket nije kreiran"
 
@@ -3106,7 +3142,7 @@ msgid "Applets"
 msgstr "Apleti"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr ""
 
@@ -3375,7 +3411,7 @@ msgstr "Putanja menija"
 msgid "Use custom icon for panel button"
 msgstr "Uzmi bilo koju ikonu za taster na panelu"
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr "Otvori URL: %s"

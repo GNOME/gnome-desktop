@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
-"POT-Creation-Date: 2000-10-23 15:54-0400\n"
+"POT-Creation-Date: 2000-11-15 14:17-0500\n"
 "PO-Revision-Date: 2000-08-17 17:25+0200\n"
 "Last-Translator: Quico Llach <quico@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -153,17 +153,19 @@ msgid "Window Manager Workarounds"
 msgstr "Propietats del gestor de finestres"
 
 #: applets/desk-guide/deskguide_applet.c:138
+#, fuzzy
 msgid ""
 "Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawfish)"
 msgstr ""
 "El gestor de finestres mou la decoració de les finestres en el seu lloc\n"
 "(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
 
 #: applets/desk-guide/deskguide_applet.c:141
+#, fuzzy
 msgid ""
 "Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
+"(FVWM, Sawfish)"
 msgstr ""
 "El gestor de finestres canvia l'àrea activa de tots els escriptoris\n"
 "(FVWM, Sawmill)"
@@ -748,19 +750,19 @@ msgstr "Desa"
 msgid "Revert"
 msgstr "Desfés"
 
-#: gmenu/edit.c:362 gmenu/tree.c:401
+#: gmenu/edit.c:365 gmenu/tree.c:401
 msgid "Favorites (user menus)"
 msgstr "Predilectes (menús d'usuari)"
 
-#: gmenu/edit.c:364 gmenu/tree.c:409
+#: gmenu/edit.c:367 gmenu/tree.c:409
 msgid "Programs (system menus)"
 msgstr "Programes (menús de sistema)"
 
-#: gmenu/edit.c:366 gmenu/tree.c:427
+#: gmenu/edit.c:369 gmenu/tree.c:427
 msgid "Applets (system menus)"
 msgstr "Applets (menús de sistema)"
 
-#: gmenu/edit.c:368 gmenu/tree.c:418
+#: gmenu/edit.c:372 gmenu/tree.c:418
 msgid "Programs to be merged in (system menus)"
 msgstr "Programes per fusionar a (menús de sistema)"
 
@@ -847,11 +849,11 @@ msgid "Sort _Recursive"
 msgstr "Ordena _recursivament"
 
 #. loading dialog
-#: gmenu/main.c:244 gmenu/main.c:299 gmenu/tree.c:380
+#: gmenu/main.c:241 gmenu/main.c:308 gmenu/tree.c:380
 msgid "GNOME menu editor"
 msgstr "Editor de Menús de GNOME"
 
-#: gmenu/main.c:247
+#: gmenu/main.c:244
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -859,7 +861,7 @@ msgstr ""
 "Lliurat sota els termes de la Llicència Pública de la GNU.\n"
 "Editor de Menús de GNOME."
 
-#: gmenu/main.c:285
+#: gmenu/main.c:290
 msgid "Unable to retrieve GNOME installation directory\n"
 msgstr "No puc accedir al directori d'instal·lació de GNOME\n"
 
@@ -1620,28 +1622,28 @@ msgstr "Estic cercant l'adreça d'internet per %s"
 msgid "Hide"
 msgstr "Amaga"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "GNOME Login"
 msgstr "Entrada de GNOME"
 
-#: gsm/gnome-login-check.c:234
+#: gsm/gnome-login-check.c:244
 msgid "Login"
 msgstr "Entrada"
 
-#: gsm/gnome-login-check.c:261
+#: gsm/gnome-login-check.c:271
 msgid "Start with default programs"
 msgstr "Inicia amb els programes per defecte"
 
-#: gsm/gnome-login-check.c:265
+#: gsm/gnome-login-check.c:275
 msgid "Reset all user settings"
 msgstr "Reinicialitza tots els paràmetres d'usuari"
 
-#: gsm/gnome-login-check.c:276
+#: gsm/gnome-login-check.c:286
 #, c-format
 msgid "Really reset all GNOME user settings for %s?"
 msgstr "Voleu reinicialitzar realment tots els paràmetres d'usuari per %s?"
 
-#: gsm/gnome-login-check.c:308
+#: gsm/gnome-login-check.c:318
 #, c-format
 msgid ""
 "The directory /tmp/orbit-%s is not owned\n"
@@ -1652,15 +1654,15 @@ msgstr ""
 "a l'usuari actual, %s.\n"
 "Si us plau, corregiu la propietat d'aquest directori."
 
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+#: gsm/gnome-login-check.c:325 gsm/gnome-login-check.c:350
 msgid "Try again"
 msgstr "Torneu-ho a provar"
 
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+#: gsm/gnome-login-check.c:326 gsm/gnome-login-check.c:351
 msgid "Continue"
 msgstr "Continua"
 
-#: gsm/gnome-login-check.c:332
+#: gsm/gnome-login-check.c:342
 #, c-format
 msgid ""
 "Could not look up internet address for %s.\n"
@@ -1672,6 +1674,19 @@ msgstr ""
 "Això provocarà que GNOME no funcioni correctament.\n"
 "Podria ser possible corregir aquest problema afegint\n"
 "%s al fitxer /etc/hosts."
+
+#: gsm/gnome-login-check.c:368
+msgid ""
+"Your version of libICE has a bug which causes gnome-session\n"
+"to not function correctly.\n"
+"\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"for information on this bug).\n"
+"\n"
+"Your GNOME session will terminate after closing this dialog."
+msgstr ""
 
 #: gsm/gsm-client-editor.c:97
 msgid "Order: "
@@ -1834,11 +1849,11 @@ msgstr "El programa podria ser lent, estar parat o trencat."
 msgid "You may wait for it to respond or remove it."
 msgstr "Podeu esperar que respongui o eliminar-lo."
 
-#: gsm/manager.c:1369
+#: gsm/manager.c:1371
 msgid "Respawn abandoned due to failures."
 msgstr "Abandono el reviscolament degut a errors."
 
-#: gsm/manager.c:1537
+#: gsm/manager.c:1539
 msgid "A session shutdown is in progress."
 msgstr "Hi ha un tancament de sessió en progrés."
 
@@ -2268,7 +2283,7 @@ msgstr "Endavant"
 msgid "Go to the next location in the history list"
 msgstr "Vés a la localització següent de la llista del historial"
 
-#: help-browser/window.c:244
+#: help-browser/window.c:244 panel/extern.c:352
 msgid "Reload"
 msgstr "Actualitza"
 
@@ -2315,29 +2330,29 @@ msgstr ""
 "documentació instal·lada\n"
 "al vostre sistema."
 
-#: panel/applet.c:404
+#: panel/applet.c:408
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:444
+#: panel/applet.c:448
 msgid "Remove from panel"
 msgstr "Elimina del quadre"
 
-#: panel/applet.c:451
+#: panel/applet.c:455
 msgid "Move"
 msgstr "Moure"
 
-#: panel/applet.c:463 panel/menu.c:2866
+#: panel/applet.c:467 panel/menu.c:2866
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "No puc trobar el fitxer de mapa de píxels %s"
 
-#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:3091 panel/menu.c:3096
+#: panel/applet.c:468 panel/applet.c:474 panel/menu.c:3091 panel/menu.c:3096
 #: panel/menu.c:4111 panel/menu.c:4116 panel/menu.c:4433
 msgid "Panel"
 msgstr "Quadre"
 
-#: panel/applet.c:696
+#: panel/applet.c:700
 msgid "Can't find an empty spot"
 msgstr "No puc trobar cap forat lliure"
 
@@ -2426,15 +2441,37 @@ msgstr "Habilita la fletxa del botó d'amagar"
 msgid "Drawer"
 msgstr "Calaix"
 
-#: panel/extern.c:443
+#: panel/extern.c:336
+#, fuzzy
+msgid "Deskguide (the desktop pager)"
+msgstr "Mostra el paginador d'escriptoris"
+
+#: panel/extern.c:338
+msgid "Tasklist"
+msgstr "Llista de tasques"
+
+#: panel/extern.c:340
+#, fuzzy
+msgid "The Battery"
+msgstr "La bateria està baixa."
+
+#: panel/extern.c:343
+#, c-format
+msgid ""
+"%s applet appears to have died unexpectedly. Reload this applet?\n"
+"(If you choose not to reload it at this time you can always add it from the "
+"\"Applets\" submenu in the main menu)"
+msgstr ""
+
+#: panel/extern.c:565
 msgid "Couldn't add applet"
 msgstr "No puc afegir l'applet!"
 
-#: panel/extern.c:499
+#: panel/extern.c:625
 msgid "Whoops! for some reason we can't add to the panel"
 msgstr "Ep! per alguna raó no el puc afegir al quadre"
 
-#: panel/extern.c:573
+#: panel/extern.c:699
 msgid "No socket was created"
 msgstr "No s'ha creat el connector"
 
@@ -3137,7 +3174,7 @@ msgid "Applets"
 msgstr "Applets"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:2733 panel/session.c:1182 panel/session.c:1376
+#: panel/menu.c:2733 panel/session.c:1189 panel/session.c:1383
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr ""
 
@@ -3412,7 +3449,7 @@ msgstr "Camí del menú"
 msgid "Use custom icon for panel button"
 msgstr ""
 
-#: panel/panel.c:848
+#: panel/panel.c:863
 #, c-format
 msgid "Open URL: %s"
 msgstr ""
@@ -3596,9 +3633,6 @@ msgstr "Alçada"
 
 #~ msgid "Show properties `?' button"
 #~ msgstr "Mostra les propietats del botó `?'"
-
-#~ msgid "Show desktop pager"
-#~ msgstr "Mostra el paginador d'escriptoris"
 
 #~ msgid "weird: north/west clicked while auto hidden"
 #~ msgstr ""
@@ -4177,9 +4211,6 @@ msgstr "Alçada"
 #~ msgid "Show task list"
 #~ msgstr "Mostra la llista de tasques"
 
-#~ msgid "Tasklist"
-#~ msgstr "Llista de tasques"
-
 #~ msgid "Height of large pagers"
 #~ msgstr "Alçada dels paginadors grans"
 
@@ -4609,9 +4640,6 @@ msgstr "Alçada"
 
 #~ msgid "The battery is fully charged."
 #~ msgstr "La bateria està completament carregada."
-
-#~ msgid "The battery is low."
-#~ msgstr "La bateria està baixa."
 
 #~ msgid ""
 #~ "Error querying battery charge.  Make sure that your kernel was built with "
