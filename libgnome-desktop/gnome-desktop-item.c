@@ -430,7 +430,6 @@ gnome_desktop_item_new_from_file (const char *file,
 		uri = gnome_vfs_get_uri_from_local_path (full);
 		g_free (full);
 	}
-
 	retval = gnome_desktop_item_new_from_uri (uri, flags, error);
 
 	g_free (uri);
@@ -516,18 +515,17 @@ gnome_desktop_item_new_from_uri (const char *uri,
 	}
 
 	gnome_vfs_file_info_clear (info);
+	gnome_vfs_file_info_unref (info);
 
 	retval = ditem_load (subfn, error);
 
         if (retval == NULL) {
-		gnome_vfs_file_info_unref (info);
 		g_free (subfn);
 		return NULL;
 	}
 
 	if (flags & GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS &&
 	    ! gnome_desktop_item_exists (retval)) {
-		gnome_vfs_file_info_unref (info);
 		gnome_desktop_item_unref (retval);
 		g_free (subfn);
 		return NULL;
@@ -543,7 +541,6 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		g_free (dir);
 	}
 
-	gnome_vfs_file_info_unref (info);
 	g_free (subfn);
 
         return retval;
@@ -574,11 +571,18 @@ gnome_desktop_item_save (GnomeDesktopItem *item,
 	    ! force &&
 	    ! item->modified)
 		return TRUE;
-
+	
 	if (under == NULL)
 		uri = item->location;
-	else
-		uri = under;
+	else {
+		if (g_path_is_absolute (under))
+			uri = under;
+		else  {
+			char *cur = g_get_current_dir ();
+			char *full = g_build_filename (cur, under, NULL);
+			uri = full;
+		}	
+	}
 
 	if (uri == NULL) {
 		g_set_error (error,
@@ -1681,9 +1685,11 @@ get_language (void)
 	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
 	while (list != NULL) {
 		const char *lang = list->data;
-		/* find first without encoding */
-		if (strchr (lang, '.') == NULL)
-			return lang;
+		/* find first without encoding  */
+		if (strchr (lang, '.') == NULL) {
+			return lang; 
+		}
+		list = list->next;
 	}
 	return NULL;
 }
@@ -2113,9 +2119,9 @@ get_encoding (const char *uri, ReadBuf *rb)
 {
 	int c;
 	gboolean old_kde = FALSE;
-#if 0
+
 	gchar *contents = NULL;
-#endif
+
 	
 	while ((c = readbuf_getc (rb)) != EOF) {
 		/* find starts of lines */
@@ -2157,14 +2163,16 @@ get_encoding (const char *uri, ReadBuf *rb)
 		return ENCODING_LEGACY_MIXED;
 	}
 
-#if 0
+
 	/* FIXME: fix for gnome-vfs */
 	/* A dillema, new KDE files are in UTF-8 but have no Encoding
 	 * info, at this time we really can't tell.  The best thing to
 	 * do right now is to just assume UTF-8 if the whole file
 	 * validates as utf8 I suppose */
 
-	g_file_get_contents (file, &contents, NULL, NULL);
+	if (!g_file_get_contents (gnome_vfs_uri_get_path (gnome_vfs_uri_new(uri)), &contents, NULL, NULL)) {
+		return ENCODING_UNKNOWN;
+	}
 	if (contents == NULL) /* Ooooooops ! */
 		return ENCODING_UNKNOWN;
 
@@ -2175,7 +2183,7 @@ get_encoding (const char *uri, ReadBuf *rb)
 		g_free (contents);
 		return ENCODING_LEGACY_MIXED;
 	}
-#endif
+
 }
 
 static char *
@@ -2245,7 +2253,6 @@ insert_key (GnomeDesktopItem *item,
 {
 	char *k;
 	char *val;
-
 	/* we always store everything in UTF-8 */
 	if (cur_section == NULL &&
 	    strcmp (key, GNOME_DESKTOP_ITEM_ENCODING) == 0) {
@@ -2518,7 +2525,8 @@ ditem_load (const char *uri,
 	 * function since it has those values */
 
 #define OVERFLOW (next == &CharBuffer [sizeof(CharBuffer)-1])
-	
+rb->eof=FALSE;
+
 	state = FirstBrace;
 	while ((c = readbuf_getc (rb)) != EOF) {
 		if (c == '\r')		/* Ignore Carriage Return */
@@ -2607,7 +2615,6 @@ ditem_load (const char *uri,
 
 				g_free (key);
 				key = g_strdup (CharBuffer);
-
 				state = KeyValue;
 				next = CharBuffer;
 			} else {
@@ -2645,7 +2652,6 @@ ditem_load (const char *uri,
 		g_free (key);
 		key = NULL;
 	}
-
 	readbuf_close (rb);
 
 #undef OVERFLOW
@@ -2687,7 +2693,6 @@ vfs_printf (GnomeVFSHandle *handle, const char *format, ...)
 
     /* FIXME: what about errors */
     gnome_vfs_write (handle, s, strlen (s), &bytes_written);
-
     g_free (s);
 }
 
@@ -2715,16 +2720,20 @@ ditem_save (GnomeDesktopItem *item, const char *uri, GError **error)
 {
 	GList *li;
 	GnomeVFSHandle *handle;
+	GnomeVFSResult result;
+	result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_WRITE);
+	if (result == GNOME_VFS_ERROR_NOT_FOUND) {
+		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE, TRUE, GNOME_VFS_PERM_USER_ALL);
+		if (result != GNOME_VFS_OK) {
+			g_set_error (error,
+				     /* FIXME: better errors */
+				     GNOME_DESKTOP_ITEM_ERROR,
+				     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
+				     _("Error writing file '%s': %s"),
+				     uri, strerror (errno));
 
-	if (gnome_vfs_open (&handle, uri, 
-			    GNOME_VFS_OPEN_WRITE) != GNOME_VFS_OK) {
-		g_set_error (error,
-			     /* FIXME: better errors */
-			     GNOME_DESKTOP_ITEM_ERROR,
-			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-			     _("Error writing file '%s': %s"),
-			     uri, strerror (errno));
-		return FALSE;
+			return FALSE;
+		}
 	}
 
 	vfs_printf (handle, "[Desktop Entry]\n");
