@@ -18,6 +18,7 @@ static gchar *contributors[] = {
 	"Erik Andersen",
 	"Marius Andreiana",
 	"Jon Anhold",
+	"Paolo Bacchilega",
 	"Timur I. Bakeyev",
 	"Szabolcs 'Shooby' B\xc3\xa1n",
 	"Martin Baulig",
