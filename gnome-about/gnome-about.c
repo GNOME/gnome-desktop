@@ -87,10 +87,12 @@ typedef struct {
 	GnomeCanvas     *canvas;
 } AnimationData;
 
-static struct {
+typedef struct {
 	char *file;
 	char *text;
-} foundation_logos [] = {
+} FoundationLogo;
+
+static FoundationLogo foundation_logos [] = {
 	{ "compaq.gif", N_("Compaq") },
 	{ "debian.gif", N_("Debian") },
 	{ "fsf.gif", N_("The Free Software Foundation") },
@@ -125,7 +127,7 @@ animate_logo (gpointer data)
 			char *text;
 
 			text = g_strdup_printf ("<big><b>%s</b></big>",
-						_(logo_data->text));
+						logo_data->text);
 
 			logo_text = gnome_canvas_item_new (
 					GNOME_CANVAS_GROUP (logo_data->canvas->root),
@@ -178,7 +180,8 @@ animate_logo (gpointer data)
 }
 
 static GdkPixbuf *
-get_logo_pixbuf (int *iter)
+get_logo_pixbuf (FoundationLogo *logos,
+		 int            *iter)
 {
 	GdkPixbuf *retval = NULL;
 
@@ -191,14 +194,14 @@ get_logo_pixbuf (int *iter)
 			break;
 
 		tmp = g_strdup_printf ("gnome-about/%s",
-				       foundation_logos [*iter].file);
+				       logos [*iter].file);
 		image = gnome_program_locate_file (
 				NULL, GNOME_FILE_DOMAIN_PIXMAP,
 				tmp, TRUE, NULL);	
 		g_free (tmp);
 		if (!image) {
 			g_warning (_("Unable to locate '%s'"),
-				   foundation_logos [*iter].file);
+				   logos [*iter].file);
 			(*iter)++;
 			continue;
 		}
@@ -206,7 +209,7 @@ get_logo_pixbuf (int *iter)
 		retval = gdk_pixbuf_new_from_file (image, &error);
 		if (error) {
 			g_warning (_("Unable to load '%s': %s"),
-				   foundation_logos [*iter].file,
+				   logos [*iter].file,
 				   error->message);
 			g_error_free (error);
 			g_free (image);
@@ -219,6 +222,40 @@ get_logo_pixbuf (int *iter)
 	return retval;
 }
 
+static FoundationLogo *
+randomize_logos (FoundationLogo *logos,
+		 int             n_elements)
+{
+	FoundationLogo *retval;
+	GSList         *list = NULL;
+	int             i = 0;
+
+	for (i = 0; i < n_elements; i++)
+		list = g_slist_prepend (list, &logos [i]);
+
+	retval = g_new (FoundationLogo, n_elements);
+
+	i = 0;
+
+	while (list != NULL) {
+		FoundationLogo *logo;
+		GSList         *l;
+		int             random = rand () % g_slist_length (list);
+
+		l = g_slist_nth (list, random);
+		logo = (FoundationLogo *) l->data;
+		list = g_slist_delete_link (list, l);
+
+		retval [i].file = logo->file;
+		retval [i].text = _(logo->text);
+		i++;
+	}
+
+	g_assert (i == n_elements);
+
+	return retval;
+}
+
 static gboolean
 display_foundation_logo (gpointer data)
 {
@@ -227,16 +264,23 @@ display_foundation_logo (gpointer data)
 	GdkPixbuf              *pixbuf;
 	int                     logo_width;
 	int                     logo_height;
+	static FoundationLogo  *randomized_logos = NULL;
 	static GnomeCanvasItem *logo = NULL;
 	static int              i = 0;
 
 	if (i >= G_N_ELEMENTS (foundation_logos)) {
 		gtk_object_destroy (GTK_OBJECT (anim_data->item));
+		g_free (randomized_logos);
 		g_free (anim_data);
 		return FALSE;
 	}
 
-	pixbuf = get_logo_pixbuf (&i);
+	if (!randomized_logos)
+		randomized_logos = randomize_logos (
+					foundation_logos,
+					G_N_ELEMENTS (foundation_logos));
+
+	pixbuf = get_logo_pixbuf (randomized_logos, &i);
 	if (!pixbuf) {
 		gtk_object_destroy (GTK_OBJECT (anim_data->item));
 		g_free (anim_data);
@@ -270,7 +314,7 @@ display_foundation_logo (gpointer data)
 	logo_data->item        = logo;
 	logo_data->canvas      = anim_data->canvas;
 	logo_data->header_item = anim_data->item;
-	logo_data->text        = foundation_logos [i].text;
+	logo_data->text        = randomized_logos [i].text;
 	logo_data->x           = CANVAS_MAX_X / 2 + logo_width / 2 + 10.0;
 	logo_data->y           = 170.0;
 

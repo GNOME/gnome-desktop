@@ -1,3 +1,17 @@
+2002-12-11  Mark McLoughlin  <mark@skynet.ie>
+
+	Display the companies logos in random order.
+	Based on a patch by Fernando Herrera.
+
+	* gnome-about.c:
+	(animate_logo): don't translate the text here,
+	its done earlier.
+	(get_logo_pixbuf): pass in the randomized logo
+	list.
+	(randomize_logos): impl.
+	(display_foundation_logo): randomize the logos
+	and display those.
+
 2002-12-06  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-about.c: Complete re-write. Basically Glynn's
