@@ -369,6 +369,14 @@ LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR"
 AC_CHECK_FUNCS(_IceTransNoListen)
 LIBS="$oLIBS"
 
+dnl
+dnl Sun shipped a patch which makes gnome-session seg fault in a libICE call.
+dnl Use the check for the broken libICE on Solaris _only_
+dnl
+uname_s=`uname -s`
+AM_CONDITIONAL(DO_LIBICE_CHECK, test x$uname_s = xSunOS)
+AC_SUBST(DO_LIBICE_CHECK)
+
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
