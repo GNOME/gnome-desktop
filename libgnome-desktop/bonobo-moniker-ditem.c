@@ -102,7 +102,7 @@ bonobo_moniker_ditem_factory (BonoboGenericFactory *this,
 	return NULL;
 }
 
-BONOBO_OAF_SHLIB_FACTORY_MULTI ("OAFIID:Bonobo_Moniker_ditem_Factory",
-				"bonobo desktop item moniker",
-				bonobo_moniker_ditem_factory,
-				NULL);
+BONOBO_OAF_SHLIB_FACTORY ("OAFIID:Bonobo_Moniker_ditem_Factory",
+			  "bonobo desktop item moniker",
+			  bonobo_moniker_ditem_factory,
+			  NULL);

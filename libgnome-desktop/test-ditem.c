@@ -35,7 +35,7 @@ test_ditem (Bonobo_ConfigDatabase db)
 	const gchar *text;
 	GSList *list, *c;
 
-	ditem = gnome_desktop_item_new_from_file ("/home/martin/work/test.desktop",
+	ditem = gnome_desktop_item_new_from_file ("/tmp/test.desktop",
 						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS);
 
 	text = gnome_desktop_item_get_location (ditem);
@@ -81,7 +81,7 @@ test_ditem (Bonobo_ConfigDatabase db)
 	gnome_desktop_item_save (ditem, NULL);
 #endif
 
-	gnome_desktop_item_save (ditem, "~/work/foo.desktop");
+	gnome_desktop_item_save (ditem, "/tmp/foo.desktop");
 }
 
 #if 0
@@ -94,11 +94,11 @@ test_builtin (void)
 	BonoboArg *value;
 	gchar *string;
 
-	db = bonobo_config_ditem_new ("/home/martin/work/test.desktop");
+	db = bonobo_config_ditem_new ("/tmp/test.desktop");
 	g_assert (db != CORBA_OBJECT_NIL);
 
 	CORBA_exception_init (&ev);
-	parent_db = bonobo_get_object ("xmldb:~/work/foo.xmldb", "Bonobo/ConfigDatabase", &ev);
+	parent_db = bonobo_get_object ("xmldb:/tmp/foo.xmldb", "Bonobo/ConfigDatabase", &ev);
 	g_assert (!BONOBO_EX (&ev) && parent_db != CORBA_OBJECT_NIL);
 	CORBA_exception_free (&ev);
 
@@ -133,15 +133,15 @@ main (int argc, char **argv)
 
 	// test_builtin ();
 
-	// db = bonobo_config_ditem_new ("~/work/test.desktop");
+	// db = bonobo_config_ditem_new ("/tmp/test.desktop");
 
         CORBA_exception_init (&ev);
-	db = bonobo_get_object ("ditem:~/work/test.desktop", "Bonobo/ConfigDatabase", &ev);
+	db = bonobo_get_object ("ditem:/tmp/test.desktop", "Bonobo/ConfigDatabase", &ev);
 	g_assert (!BONOBO_EX (&ev));
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
-	default_db = bonobo_get_object ("xmldb:~/work/foo.xml", "Bonobo/ConfigDatabase", &ev);
+	default_db = bonobo_get_object ("xmldb:/tmp/foo.xml", "Bonobo/ConfigDatabase", &ev);
 	g_assert (!BONOBO_EX (&ev));
         CORBA_exception_free (&ev);
 
