@@ -1347,22 +1347,28 @@ append_app_arg (GSList *vector_list,
 	
 	/* First we subst for some where it could be more then
 	 * one argument */
-	} else if (!strcmp (arg, "%F")) {
+	} else if (strcmp (arg, "%F") == 0) {
 		*added_status = ADDED_ALL;
 		return append_files (vector_list,
 				     args);
-	} else if (!strcmp (arg, "%U")) {
+	} else if (strcmp (arg, "%U") == 0) {
 		*added_status = ADDED_ALL;
 		return append_uris (vector_list,
 				    args);
-	} else if (!strcmp (arg, "%D")) {
+	} else if (strcmp (arg, "%D") == 0) {
 		*added_status = ADDED_ALL;
 		return append_dirs (vector_list,
 				    args);
-	} else if (!strcmp (arg, "%N")) {
+	} else if (strcmp (arg, "%N") == 0) {
 		*added_status = ADDED_ALL;
 		return append_names (vector_list,
 				     args);
+	/* FIXME: Hack: ignore %m and %i on the command line since 
+	 * for now KDE .desktop files are kind of broken with respect
+	 * to this */
+	} else if (strcmp (arg, "%m") == 0 ||
+		   strcmp (arg, "%i") == 0) {
+		return vector_list;
 	} else {
 		char *str = substitute_in_string (item,
 						  arg,
@@ -1371,7 +1377,6 @@ append_app_arg (GSList *vector_list,
 						  added_status);
 		return g_slist_append (vector_list, str);
 	}
-
 }
 
 static int
