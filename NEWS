@@ -1,0 +1,231 @@
+=============
+Version 1.5.7
+=============
+
+Applets
+        * pager docoumentation setup (John Fleck)
+        * applet .directory files removal (Mark)
+        * fish about dialog bugfix (Mark)
+        * usability re-naming (Seth)
+        * desktop file culling and fixing (Seth)
+
+
+Panel
+        * launcher saving bugfixes (Mark)
+        * Lots of excellant panel keynav work (Padraig)         
+        * make glade/intltool work together (Darin, Mark)
+        * make run dialog global key work again (George)
+        * authors list update (George)
+        * re-enable applet dnd (George)
+        * fix build breakage (Glynn)
+
+Misc          
+        * ditem error handling improvement (George)
+        * gsm 'double delete' bugfix (Kjartan)    
+
+=============
+Version 1.5.6
+=============
+
+	* rationalise gconf source autoconf check (Mark)
+	* workaround deprecated gtk+ enums usage (Mark)
+
+=============
+Version 1.5.5
+=============
+
+gnome-core/applets -
+	* Make time/date centered for Clock applet [Richard]
+	* Usability applet renaming [Seth]
+	* Misc build fixes [Glynn]
+
+gnome-core/gnome-desktop -
+	* Misc fixes [George, Stephen]
+
+gnome-core/icons -
+	* 7 new icons! Can you *see* the love? [Seth, Jakub]
+
+gnome-core/libpanel_applet -
+	* Misc fixes [Mark]
+	* Build fixes [Glynn]           
+
+gnome-core/panel -
+	* ButtonWidget now inherits from GtkButton [Padraig]
+	* Implement support for popup menus using 'Shift+F10' [Padraig]
+	* Remove last trace of tiles like ever [George]
+	* Draw focus frame around launchers [George]
+	* Implement retrun focus from a child widget using
+	  'Ctrl+Tab' [Padraig]
+	* Port status and swallow applets to use libwnck [George]     
+	* Give panel prelight colour when panel has focus [Padraig]
+	* Usability rewording and new icons [Seth]
+	* Save the world with sensible context menus [Seth]
+	* Fix up default panel schemas [Glynn, Seth]
+	* Remove caveat dialog [George]                 
+	* Give focus to launcher instead of hidebuttons first [Padraig]                 
+	* Lower button displacement [Anders]
+	* Fix panel boundaries [George]                 
+	* Synchronize panel hints with GNOME 1.4 [Roy-Magne Mo]
+	* Implement keyboard move functionality of           
+	  ButtonWidget [Padraig]
+	* De-sensitize basep widget when hidden [George]
+	* Misc fixes [Anders, George, Glynn, Padraig]        
+	* Cleanage of severe cruft [George, Padraig]
+	* Much panel fear [George]            
+
+gnome-core/docs -
+	* We now have documentation! [John]
+	* Build fixes [Mark]
+
+gnome-core/po -     
+	* Translations [Christian Rose, Hasbullah Bin Pit,  
+	  Kjartan Maraas, Marius Andreiana, Peteris Krisjanis,
+	  Roy-Magne Mo, Stanislav Visnovsky, Takayuki Kusano]
+	* Misc fixes [Glynn]
+
+gnome-core/misc -
+	* Build fixes [Glynn]
+
+gnome-core/gnome-terminal -
+	* Misc fixes [Owen]
+	* Build fixes [Darin]
+	* Typographical error [Kjartan]
+
+=============
+Version 1.5.4
+=============
+
+* Panel:
+        + lots of gconf work
+                + Session handling proposal (Alex, Glynn, George, others?)
+                + profiles (Glynn)
+                + default panels/applets (Glynn)
+                + panels saving/loading (Glynn)     
+                + applets/menus etc. saving/loading (Mark)
+                + convience methods (Glynn, Mark)
+        + kill gnome-run button applet (Glynn)
+        + libart -> gdk-pixbuf for button rendering (Alex)
+        + porting properties capplet (Stephen)         
+        + new ditem api usage (George)
+        + launchers/vfolders work (George, Seth)
+        + kill favorites menu (George)           
+        + use gtk image menu items (George) 
+        + port to libwnck (George)    
+        + menu fixage (Anders)
+        + removal of deprecated function/widgets (George)
+        + Menu work (George)                
+        + winhints updates (George, Havoc, Alex, Mark)
+        + foobar pixmap scaling (Chris Phelps)
+        + foobar clock nicifying (Dennis M. Cranston, George)
+        + cruft removal (Mark, George, Glynn)
+        + CORBA namespace fixage (Mark)
+        + make applet background colors 16 bit (Alex)
+        + dialog box fixage (Gediminas Paulauskas)
+        + panel side use of applet item handler (Mark)
+        + solaris distribution menu (Stephen)
+        + screen shooter updates (Anders)   
+        + applet stabilty fixes (Anders)
+        + gegl invaders ... *cough* (George)
+        + panel-widget and button-widget cleanup (Alex)
+        + hidebutton keyborad navigation (Padraig O'Briain)
+        + applet pixmap background implemenation (Mark)
+        + gtk accelerator parsing updates (Alex)
+
+* Panel Applet Library
+
+        + shlib applet macro (Mark)      
+        + move to GNOME_Vertigo CORBA namespace (Mark)
+        + kill session management (Mark)          
+        + make applet background colors 16 bit (Alex)
+        + item handler implementation (Mark)
+        + runtime schema<->key association for applets prefs (Mark)
+        + gconf convienence functions (Mark)
+        + gclosurization (George)
+        + removal of gnome_program_init (George)
+        + applet pixmap bacgrounds (Mark)
+        + expose panel_applet_gconf_get_full_key (Alex)
+
+* Applets
+
+        + update for panel-applet api changes (Mark)
+        + fish preferences/schema/gconf work (Mark)       
+        + clock utf-8 fixage (Richard Hult)      
+        + clock + tasklist background (Alex)  
+        + mailcheck port (Kevin Valdersloot)              
+        + tasklist + pager properties/gconf work (Alex)
+
+* Build:
+        + intl dir removal (Gediminas Paulauskas)
+        + libwnck dependancy (George, Glynn)
+        + libpng check (Anders, Glynn)
+        + file renaming (Mark)
+        + clean up Glynn's drool (Darin)                 
+        + kill -I$(includedir) (Frank Belew)
+
+* Icons
+        + time/date icons (Dennis M. Cranston)               
+        + hand removal from panel icon (Seth)
+
+* ditem library
+
+        + standard compliance (George)                
+        + new api (George)
+        + i18n fixage (Gediminas Paulauskas)
+        + kde icons (George)             
+        + g_spawn fixage (George, Glynn)                    
+        + distcheck fixes (Mark, Glynn)                         
+
+* Misc
+        + gnome-terminal fixage (Owen)          
+        + .directory files work (Seth)
+        + gsm gconf work (Richard Hestilow)
+
+* Other Contributors               
+
+        + Miles Lane, Robert Mibus.     
+
+=============
+Version 1.5.3
+=============
+
+gnome-core/applets -              
+	+ New tasklist using libwnck [Alex]
+	+ Updates for new API [Mark]
+	+ Build fixes [Mark]
+
+gnome-core/gnome-desktop -
+	+ GnomeVFS fixes [Alex]
+	+ Add pc file [Owen]
+	+ Encoding fix [Seth]
+
+gnome-core/gsm -               
+	+ Prefer Metacity to Enlightenment [Havoc]
+	+ Save world yet again with .gnome2 fixes [Malcolm]
+	+ Fix order of initialization [Malcolm]
+	+ Use PangoFontDesc with splash screen [Glynn]
+
+gnome-core/panel -
+	+ Add getExpandFlags method to IDL [Alex]
+	+ Add saveYourself method to IDL [Mark]
+	+ Remove/Replaced all AppletShell IDL methods [Mark]
+
+=============
+Version 1.5.2
+=============
+
+        + new pager applet using libwnck (Alex)
+        + .desktop file updates and additions (Seth)          
+        + gnome-hint is now a GtkDialog (Anders)         
+        + session manager gtk fixes (Owen)               
+        + gtk_idle_add -> g_idle_add stackframes saving (Mark)  
+        + applet button press propogation bug fix (Alex)                
+        + continue switching to new applet design (Mark)
+        + schema file rename (Glynn)
+        + POTFILES redo (Mark)
+
+=============
+Version 1.5.1
+=============
+
+	Initial port to GNOME 2.0.
+
