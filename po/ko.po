@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.5\n"
-"POT-Creation-Date: 1999-07-20 04:07+0900\n"
+"POT-Creation-Date: 1999-07-19 18:00-0500\n"
 "PO-Revision-Date: 1999-07-20 04:10+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -161,7 +161,7 @@ msgstr "CDE 패널의 시계와 비슷한 아날로그 시계"
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:524
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
-#: applets/gnome-pager/gnomepager_applet.c:1568
+#: applets/gnome-pager/gnomepager_applet.c:1572
 #: applets/mini-commander/src/mini-commander_applet.c:251
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
@@ -171,12 +171,12 @@ msgstr "CDE 패널의 시계와 비슷한 아날로그 시계"
 msgid "Properties..."
 msgstr "속성..."
 
-#: applets/another_clock/another_clock.c:620 applets/battery/battery.c:770
+#: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
 #: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:519
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:516 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1562
+#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1566
 #: applets/jbc/jbc-applet.c:141 applets/modemlights/modemlights.c:992
 #: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
 #: applets/webcontrol/webcontrol.c:307 panel/menu.c:2515
@@ -255,22 +255,32 @@ msgstr "건전지가 완전히 충전되었습니다."
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "내부 애러: battery_set_mode에 잘못된 모드"
 
-#: applets/battery/battery.c:641 applets/esd-manager/esdmanager_applet.c:72
+#: applets/battery/battery.c:643 applets/esd-manager/esdmanager_applet.c:72
 #: applets/gen_util/clock.c:273 applets/gen_util/mailcheck.c:745
 #: applets/gen_util/printer.c:386 applets/jbc/jbc-applet.c:126
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "애플릿을 만들 수 없음!\n"
 
-#: applets/battery/battery.c:837
+#: applets/battery/battery.c:648
+#, fuzzy
+msgid ""
+"Error querying battery charge.\n"
+"\n"
+"Make sure that your kernel was built with APM support."
+msgstr ""
+"건전지 충전량을 알아보는 데 오류가 발생했습니다.  커널에 APM 기능이 들어가 "
+"있는지 확인하세요."
+
+#: applets/battery/battery.c:850
 msgid "The GNOME Battery Monitor Applet"
 msgstr "그놈 건전지 감시 애플릿"
 
-#: applets/battery/battery.c:838
+#: applets/battery/battery.c:851
 msgid " (C) 1997-1998 The Free Software Foundation"
 msgstr " (C) 1997-1998 The Free Software Foundation"
 
-#: applets/battery/battery.c:840
+#: applets/battery/battery.c:853
 msgid ""
 "This applet monitors the charge of your laptop's battery.  Click on it to "
 "change display modes."
@@ -278,7 +288,7 @@ msgstr ""
 "이 애플릿은 랩탑의 건전지 충전량을 감시합니다.  표시 모드를 바꾸려면 이 위에 "
 "클릭하세요."
 
-#: applets/battery/battery.c:975
+#: applets/battery/battery.c:988
 msgid "Could not allocate space for graph values"
 msgstr "그래프의 값에 대해 충분한 공간을 확보하지 못함"
 
@@ -1096,11 +1106,11 @@ msgstr "가로 태스크의 줄 개수"
 msgid "Number of vertical columns of tasks"
 msgstr "세로 태스크의 열 개수"
 
-#: applets/gnome-pager/gnomepager_applet.c:1481
+#: applets/gnome-pager/gnomepager_applet.c:1512
 msgid "Gnome Pager Error"
 msgstr "그놈 페이저 오류"
 
-#: applets/gnome-pager/gnomepager_applet.c:1482
+#: applets/gnome-pager/gnomepager_applet.c:1513
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -1117,31 +1127,31 @@ msgstr ""
 #. XXX: a hackish way to bind events on these buttons so that
 #. we will recieve the right click and such events over them to
 #. display menus and allow dragging over them
-#: applets/gnome-pager/gnomepager_applet.c:1541
+#: applets/gnome-pager/gnomepager_applet.c:1545
 msgid "?"
 msgstr "?"
 
-#: applets/gnome-pager/gnomepager_applet.c:2059
+#: applets/gnome-pager/gnomepager_applet.c:2063
 msgid "Sticky"
 msgstr "고정"
 
-#: applets/gnome-pager/gnomepager_applet.c:2525
+#: applets/gnome-pager/gnomepager_applet.c:2529
 msgid "Show / Hide"
 msgstr "보여주기 / 숨기기"
 
-#: applets/gnome-pager/gnomepager_applet.c:2531
+#: applets/gnome-pager/gnomepager_applet.c:2535
 msgid "Shade / Unshade"
 msgstr "가리기 / 들추기"
 
-#: applets/gnome-pager/gnomepager_applet.c:2537
+#: applets/gnome-pager/gnomepager_applet.c:2541
 msgid "Stick / Unstick"
 msgstr "붙이기 / 떼기"
 
-#: applets/gnome-pager/gnomepager_applet.c:2543 panel/launcher.c:44
+#: applets/gnome-pager/gnomepager_applet.c:2547 panel/launcher.c:44
 msgid "Close"
 msgstr "닫기"
 
-#: applets/gnome-pager/gnomepager_applet.c:2549
+#: applets/gnome-pager/gnomepager_applet.c:2553
 msgid "Nuke"
 msgstr "핵공격"
 
