@@ -3344,7 +3344,6 @@ ditem_load (ReadBuf *rb,
 		g_free (key);
 		key = NULL;
 	}
-	readbuf_close (rb);
 
 #undef OVERFLOW
 
@@ -3363,6 +3362,8 @@ ditem_load (ReadBuf *rb,
 
 	/* make sure that we set up the type */
 	setup_type (item, rb->uri);
+
+	readbuf_close (rb);
 
 	return item;
 }
