@@ -28,6 +28,8 @@
 #define GNOME_DITEM_H
 
 #include <glib.h>
+#include <libgnome/Gnome.h>
+#include <bonobo/bonobo-arg.h>
 
 G_BEGIN_DECLS
 
@@ -49,11 +51,6 @@ typedef struct _GnomeDesktopItem GnomeDesktopItem;
 typedef enum {
 	/* Use the TryExec field to determine if this shoul dbe loaded */
         GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0,
-	/* don't drop file from cache after loading */
-	GNOME_DESKTOP_ITEM_LOAD_NO_DROP = 1<<1,
-	/* don't try to load other sections, this is if you don't want to
-	 * save this file and don't need other sections, it saves memory */
-        GNOME_DESKTOP_ITEM_LOAD_NO_OTHER_SECTIONS = 1<<2
 } GnomeDesktopItemLoadFlags;
 
 /* Returned item from new*() and copy() methods have a refcount of 1 */
@@ -80,25 +77,22 @@ int                    gnome_desktop_item_drop_uri_list   (const GnomeDesktopIte
 gboolean               gnome_desktop_item_exists          (const GnomeDesktopItem     *item);
 GnomeDesktopItemFlags  gnome_desktop_item_get_flags       (const GnomeDesktopItem     *item);
 const char *           gnome_desktop_item_get_location    (const GnomeDesktopItem     *item);
-const char *           gnome_desktop_item_get_type        (const GnomeDesktopItem     *item);
-const char *           gnome_desktop_item_get_command     (const GnomeDesktopItem     *item);
-const char *           gnome_desktop_item_get_icon_path   (const GnomeDesktopItem     *item);
+GNOME_DesktopEntryType gnome_desktop_item_get_type        (const GnomeDesktopItem     *item);
+gchar *                gnome_desktop_item_get_command     (const GnomeDesktopItem     *item);
+gchar *                gnome_desktop_item_get_icon_path   (const GnomeDesktopItem     *item);
 
 /* Note: you want to search each language in the user's search path */
-const char *           gnome_desktop_item_get_name        (const GnomeDesktopItem     *item,
+gchar *                gnome_desktop_item_get_name        (const GnomeDesktopItem     *item,
                                                            const char                 *language);
-const char *           gnome_desktop_item_get_comment     (const GnomeDesktopItem     *item,
+gchar *                gnome_desktop_item_get_comment     (const GnomeDesktopItem     *item,
                                                            const char                 *language);
 
-const char *           gnome_desktop_item_get_local_name   (const GnomeDesktopItem     *item);
-const char *           gnome_desktop_item_get_local_comment(const GnomeDesktopItem     *item);
+gchar *                gnome_desktop_item_get_local_name   (const GnomeDesktopItem     *item);
+gchar *                gnome_desktop_item_get_local_comment(const GnomeDesktopItem     *item);
 
-const char *           gnome_desktop_item_get_attribute   (const GnomeDesktopItem     *item,
+BonoboArg *            gnome_desktop_item_get_attribute   (const GnomeDesktopItem     *item,
                                                            const char                 *attr_name);
-/* get a translated version of the attribute */
-const char *           gnome_desktop_item_get_local_attribute (const GnomeDesktopItem *item,
-							       const char *attr_name);
-const GSList *         gnome_desktop_item_get_order    (const GnomeDesktopItem     *item);
+GSList *         gnome_desktop_item_get_order             (const GnomeDesktopItem     *item);
 GnomeDesktopItemStatus gnome_desktop_item_get_file_status (GnomeDesktopItem           *item);
 
 
@@ -112,7 +106,7 @@ void                   gnome_desktop_item_set_name        (GnomeDesktopItem     
                                                            const char                 *language,
                                                            const char                 *name);
 void                   gnome_desktop_item_set_type        (GnomeDesktopItem           *item,
-                                                           const char                 *type);
+                                                           GNOME_DesktopEntryType      type);
 void                   gnome_desktop_item_set_command     (GnomeDesktopItem           *item,
                                                            const char                 *command);
 void                   gnome_desktop_item_set_icon_path   (GnomeDesktopItem           *item,
@@ -124,7 +118,7 @@ void                   gnome_desktop_item_set_comment     (GnomeDesktopItem     
                                                            const char                 *comment);
 void                   gnome_desktop_item_set_attribute   (GnomeDesktopItem           *item,
                                                            const char                 *attr_name,
-                                                           const char                 *attr_value);
+                                                           const BonoboArg            *attr_value);
 void                   gnome_desktop_item_set_order       (GnomeDesktopItem           *item,
                                                            GSList                     *order);
 void                   gnome_desktop_item_set_flags       (GnomeDesktopItem           *item,
