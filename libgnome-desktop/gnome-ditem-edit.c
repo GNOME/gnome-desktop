@@ -550,7 +550,9 @@ translations_add (GtkWidget      *button,
 	 * If we are editing the current language, change the name and
 	 * comment entries on the easy page as well.
 	 */
-	locale = gnome_desktop_item_get_attr_locale (dee->_priv->ditem, "Name");
+	locale = gnome_desktop_item_get_attr_locale (gnome_ditem_edit_get_ditem (dee),
+						     "Name");
+
 	if ((locale && !strcmp (locale, lang)) || (!locale && !strcmp (lang, "C"))) {
 		gtk_entry_set_text (
 			GTK_ENTRY (dee->_priv->name_entry), name);
