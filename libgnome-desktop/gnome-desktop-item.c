@@ -1756,6 +1756,11 @@ ditem_execute (const GnomeDesktopItem *item,
 	}
 	
 	exec_locale = g_filename_from_utf8 (exec, -1, NULL, NULL, NULL);
+	
+	if (exec_locale == NULL) {
+		exec_locale = g_strdup ("");
+	}	
+	
 	do {
 		added_status = ADDED_NONE;
 		new_exec = expand_string (item,
