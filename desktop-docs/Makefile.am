@@ -77,9 +77,12 @@ manual-all: manual-html manual-ps manual-rtf
 %.rtf: %.sgml
 	db2rtf $<
 
-# big ugly kludge: to handle the CVS directory that developers will
-# have in the gnome-intro directory.  eventually I'll handle this by
-# calling it gnome-intro-prebuilt or something
+gnome-intro.html: gnome-intro/book01.html
+	cp $< $@
+
+# now a big ugly kludge: to handle the CVS directory that developers
+# will have in the gnome-intro directory.  eventually I'll handle this
+# by calling it gnome-intro-prebuilt or something
 gnome-intro/book01.html: gnome-intro.sgml
 	db2html gnome-intro.sgml
 	mkdir gnome-intro/pix
