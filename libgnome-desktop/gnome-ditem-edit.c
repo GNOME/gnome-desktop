@@ -47,6 +47,9 @@ struct _GnomeDItemEditPrivate {
 	gboolean ui_dirty; /* TRUE if something got changed, and ditem
 			    * was not yet synced */
 
+	GtkWidget *child1;
+	GtkWidget *child2;
+
         GtkWidget *name_entry;
         GtkWidget *comment_entry;
         GtkWidget *exec_entry;
@@ -486,6 +489,9 @@ gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
         gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
                                   child2,
 				  gtk_label_new (_("Advanced")));
+
+	dee->_priv->child1 = child1;
+	dee->_priv->child2 = child2;
 
 	/* FIXME: There needs to be a way to edit ALL keys/sections */
 }
@@ -936,6 +942,19 @@ gnome_ditem_edit_grab_focus (GnomeDItemEdit *dee)
 
 	gtk_widget_grab_focus (dee->_priv->name_entry);
 }
+
+void
+gnome_ditem_edit_set_editable (GnomeDItemEdit *dee,
+			       gboolean editable)
+{
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+
+	/* FIXME: a better way needs to be found */
+	gtk_widget_set_sensitive (dee->_priv->child1, editable);
+	gtk_widget_set_sensitive (dee->_priv->child2, editable);
+}
+
 
 #ifdef TEST_DITEM_EDIT
 

@@ -103,6 +103,9 @@ gchar *           gnome_ditem_edit_get_name     (GnomeDItemEdit   *dee);
 /* eeeeeeeeek!, evil api */
 void              gnome_ditem_edit_grab_focus   (GnomeDItemEdit   *dee);
 
+void              gnome_ditem_edit_set_editable (GnomeDItemEdit   *dee,
+						 gboolean          editable);
+
 G_END_DECLS
    
 #endif /* GNOME_DITEM_EDIT_H */
