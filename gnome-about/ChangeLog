@@ -1,5 +1,23 @@
 2002-11-05  Mark McLoughlin  <mark@skynet.ie>
 
+	Display the GNOME version, vendor and build date in
+	the about dialog. Based on a patch from Mike Newman,
+	<mike@gnorthern.demon.co.uk>. Fixes #8562.
+
+	* gnome-about.c:
+	(init_version_strings): read the GNOME version,
+	vendor and build date from gnome-version.xml.
+	(get_intro_message): build the intro message
+	and include the GNOME version.
+	(draw_intro): don't allow intro and first name
+	to overlap.
+	(get_max_width): also calculate the into message
+	width.
+	(main): put the GNOME version, vendor and build
+	date in the title.
+
+2002-11-05  Mark McLoughlin  <mark@skynet.ie>
+
 	* gnome-about.c: (draw_intro), (draw_end): do not
 	translate pango markup, only translate the strings
 	themeselves. Fixes #84779, #97073.

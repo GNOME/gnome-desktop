@@ -13,6 +13,8 @@
 #include <libgnomeui/gnome-window-icon.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
+#include <libxml/tree.h>
+#include <libxml/parser.h>
 #include "contributors.h"
 #include "logo.xpm"
 
@@ -28,6 +30,10 @@ static PangoLayout *layout = NULL;
 static int          font_descent;
 static int          font_ascent;
 static int          fast_fwd = 0;
+static char        *gnome_version_string = NULL;
+static char        *gnome_vendor_string = NULL;
+static char        *gnome_build_date_string = NULL;
+static char        *gnome_intro_message = NULL;
 
 int howmuch = 0;
 
@@ -425,6 +431,83 @@ keypress_scroll (GtkWidget       *widget,
 }
 
 static void
+init_version_strings (void)
+{
+	xmlDocPtr   about;
+	xmlNodePtr  node;
+	xmlNodePtr  bits;
+	char       *platform = NULL;
+	char       *minor = NULL;
+	char       *micro = NULL;
+	char       *vendor = NULL;
+
+	about = xmlParseFile (gnome_program_locate_file (
+			      NULL, GNOME_FILE_DOMAIN_DATADIR,
+			      "gnome-about/gnome-version.xml", TRUE, NULL) );
+	if (!about)
+		return;
+
+	node = about->children;
+	
+	if (g_ascii_strcasecmp (node->name, "gnome-version")) {
+		xmlFreeDoc (about);
+		return;
+	}
+
+	bits = node->children;
+
+	while (bits) {
+		char *name  = (char*) bits->name;
+		char *value = (char*) xmlNodeGetContent (bits);
+
+		if (!g_ascii_strcasecmp (name, "platform") && value && value [0])
+			platform = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "minor") && value && value [0])
+			minor = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "micro") && value && value [0])
+			micro = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "vendor") && value && value [0])
+			gnome_vendor_string = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "date") && value && value [0])
+			gnome_build_date_string = g_strdup (value);
+		
+		bits = bits->next;
+	}
+
+	xmlFreeDoc (about);
+
+	if (!platform)
+		gnome_version_string = g_strdup ("");
+
+	if (!gnome_version_string && !minor)
+		gnome_version_string = g_strconcat (platform, vendor, NULL);
+
+	if (!gnome_version_string && !micro)
+		gnome_version_string = g_strconcat (platform, ".", minor, vendor, NULL);
+
+	if (!gnome_version_string)
+		gnome_version_string = g_strconcat (platform, ".", minor, ".", micro, vendor, NULL);
+
+	g_free (platform);
+	g_free (minor);
+	g_free (micro);
+	g_free (vendor);
+}
+
+static char *
+get_intro_message (void)
+{
+	if (!gnome_intro_message)
+		gnome_intro_message =
+			g_strdup_printf ("%s %s %s",
+				  _("GNOME"),
+				  gnome_version_string ? gnome_version_string : "",
+				  ("Was Brought To You By"));
+
+	return gnome_intro_message;
+}
+	
+static void
 draw_intro (void)
 {
 	static int  initial_pause = 50;
@@ -433,7 +516,7 @@ draw_intro (void)
 	static int  layout_width = 0;
 	char       *markup;
 
-	markup = g_strdup_printf ("<big><b>%s</b></big>", _("GNOME Was Brought To You By"));
+	markup = g_strdup_printf ("<big><b>%s</b></big>", get_intro_message ());
 	pango_layout_set_markup (layout, markup, -1);
 	g_free (markup);
 
@@ -466,7 +549,7 @@ draw_intro (void)
 		x = - layout_width;
 		initial_pause = 50;
 
-	} else if ((x + layout_width) > area->allocation.width)
+	} else if ((x + (layout_width / 2)) > area->allocation.width)
 		state = DRAWING_BOTH;
 
 }
@@ -703,6 +786,10 @@ get_max_width (void)
 		max_width = MAX (max_width, extents.width);
 	}
 
+	pango_layout_set_text (layout, get_intro_message (), -1);
+	pango_layout_get_pixel_extents (layout, NULL, &extents);
+	max_width = MAX (max_width, extents.width);
+
 	return max_width + 4;
 }
 
@@ -716,11 +803,13 @@ main (gint argc, gchar *argv[])
 	GdkBitmap        *logo_mask;
 	GtkWidget        *frame;
 	GtkWidget        *gtkpixmap;
-	GtkTooltips *tooltips;
-	GList *hrefs;
+	GtkTooltips      *tooltips;
+	GList            *hrefs;
 	PangoContext     *context;
 	PangoFontMetrics *metrics;
 	int               max_width;
+	char             *title;
+	char             *vendor_string = NULL;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -729,10 +818,28 @@ main (gint argc, gchar *argv[])
 	gnome_program_init ("gnome-about","1.0", LIBGNOMEUI_MODULE, argc, argv, NULL);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-logo-icon-transparent.png");
 	gtk_widget_set_default_colormap (gdk_rgb_get_colormap ());
-	
-	window = gtk_dialog_new_with_buttons (_("About GNOME"), NULL, 0,
+
+	init_version_strings ();
+	g_assert (gnome_version_string);
+
+	if (gnome_vendor_string && gnome_build_date_string)
+		vendor_string = g_strdup_printf (" (%s - %s)",
+						 gnome_vendor_string,
+						 gnome_build_date_string);
+
+	else if (gnome_vendor_string && !gnome_build_date_string)
+		vendor_string = g_strdup_printf (" (%s)", gnome_vendor_string);
+
+	title = g_strdup_printf (_("About GNOME%s%s%s"),
+				 gnome_version_string[0] ? " " : "" ,
+				 gnome_version_string,
+				 vendor_string ? vendor_string : "");
+	window = gtk_dialog_new_with_buttons (title, NULL, 0,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,	
 				   	      NULL);
+	g_free (title);
+	g_free (vendor_string);
+
 	gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_OK);
 
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
@@ -867,6 +974,11 @@ main (gint argc, gchar *argv[])
 
 	gtk_widget_show_all (window);
 	gtk_main ();
+
+	g_free (gnome_version_string);
+	g_free (gnome_vendor_string);
+	g_free (gnome_build_date_string);
+	g_free (gnome_intro_message);
 
 	return 0;
 }
