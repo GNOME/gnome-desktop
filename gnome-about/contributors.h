@@ -208,6 +208,7 @@ static gchar *contributors[] = {
 	"Karl Nelson",
 	"Elijah Newren",
 	"Christian Neumair",
+	"Mike Newman",
 	"Asger Alstrup Nielsen",
 	"Seth Nickell",
 	"Eric Nielson",
