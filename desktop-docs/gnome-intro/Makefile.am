@@ -1,4 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-SUBDIRS = gnome-intro
+# 'it' isn't yet ready
+
+SUBDIRS = C es it
 
