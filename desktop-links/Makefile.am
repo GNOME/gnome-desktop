@@ -18,6 +18,7 @@ Directory_DATA = \
 	Internet.directory	\
 	Games.directory		\
 	Development.directory   \
+	Office.directory	\
 	Settings.directory
 
 Desktop_DATA = \
