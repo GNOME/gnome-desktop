@@ -275,7 +275,7 @@ dnl  ------------------
 PNG_LIBS=
 AC_CHECK_LIB(png, png_init_io, [
 	     PNG_LIBS="-lpng"],[
-	     AC_MSG_ERROR(libpng is required for gnome-core)])
+	     AC_MSG_ERROR(libpng is required for gnome-core)], -lm)
 AC_SUBST(PNG_LIBS)
 
 dnl  ------------------
