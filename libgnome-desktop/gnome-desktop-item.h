@@ -31,11 +31,7 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#ifdef GNOME_CORE_INTERNAL
-# include "gnome-icon-loader.h"
-#else
-# include <libgnome/gnome-icon-loader.h>
-#endif
+#include <libgnomeui/gnome-icon-theme.h>
 
 G_BEGIN_DECLS
 
@@ -204,9 +200,9 @@ GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktop
  * it and returns %NULL if it can't
  */
 char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item,
-							      GnomeIconLoader            *icon_loader);
+							      GnomeIconTheme             *icon_theme);
 
-char *                  gnome_desktop_item_find_icon         (GnomeIconLoader            *icon_loader,
+char *                  gnome_desktop_item_find_icon         (GnomeIconTheme             *icon_theme,
 							      const char                 *icon,
 							      /* size is only a suggestion */
 							      int                         desired_size,

@@ -2152,7 +2152,7 @@ find_kde_directory (void)
  * Returns: A newly allocated string
  */
 char *
-gnome_desktop_item_find_icon (GnomeIconLoader *icon_loader,
+gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
 			      const char *icon,
 			      int desired_size,
 			      int flags)
@@ -2171,10 +2171,10 @@ gnome_desktop_item_find_icon (GnomeIconLoader *icon_loader,
 		char *icon_no_extension;
 		char *p;
 
-		if (icon_loader == NULL) {
-			icon_loader = gnome_icon_loader_new ();
+		if (icon_theme == NULL) {
+			icon_theme = gnome_icon_theme_new ();
 		} else {
-			g_object_ref (icon_loader);
+			g_object_ref (icon_theme);
 		}
 
 		
@@ -2187,12 +2187,12 @@ gnome_desktop_item_find_icon (GnomeIconLoader *icon_loader,
 		    *p = 0;
 		}
 
-		full = gnome_icon_loader_lookup_icon (icon_loader,
-						      icon_no_extension,
-						      desired_size,
-						      NULL);
+		full = gnome_icon_theme_lookup_icon (icon_theme,
+						     icon_no_extension,
+						     desired_size,
+						     NULL, NULL);
 		
-		g_object_unref (icon_loader);
+		g_object_unref (icon_theme);
 		
 		g_free (icon_no_extension);
 	}
@@ -2263,7 +2263,7 @@ gnome_desktop_item_find_icon (GnomeIconLoader *icon_loader,
  */
 char *
 gnome_desktop_item_get_icon (const GnomeDesktopItem *item,
-			     GnomeIconLoader *icon_loader)
+			     GnomeIconTheme *icon_theme)
 {
 	/* maybe this function should be deprecated in favour of find icon
 	 * -George */
@@ -2274,7 +2274,7 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item,
 
 	icon = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
 
-	return gnome_desktop_item_find_icon (icon_loader, icon,
+	return gnome_desktop_item_find_icon (icon_theme, icon,
 					     48 /* desired_size */,
 					     0 /* flags */);
 }
