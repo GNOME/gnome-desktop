@@ -3,7 +3,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 
-#include "gnome-desktop-item.h"
+#include <libgnome/gnome-desktop-item.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 /*
 #include <libgnomeui/gnome-ditem-edit.h>

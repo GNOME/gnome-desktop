@@ -4,8 +4,7 @@
 #include <stdlib.h>
 
 #include <libgnomeui/libgnomeui.h>
-
-#include "gnome-ditem-edit.h"
+#include <libgnomeui/gnome-ditem-edit.h>
 
 static void
 changed_callback (GnomeDItemEdit *dee,

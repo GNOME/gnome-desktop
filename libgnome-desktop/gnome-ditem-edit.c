@@ -37,8 +37,8 @@
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-icon-entry.h>
 
-#include "gnome-desktop-item.h"
-#include "gnome-ditem-edit.h"
+#include <libgnome/gnome-desktop-item.h>
+#include <libgnomeui/gnome-ditem-edit.h>
 
 struct _GnomeDItemEditPrivate {
 	/* we keep a ditem around, since we can never have absolutely

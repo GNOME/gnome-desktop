@@ -1,7 +1,7 @@
 #include <config.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-#include "gnome-hint.h"
+#include <libgnomeui/gnome-hint.h>
 #include <gconf/gconf-client.h>
 #include "gnome-desktop-i18n.h"
 

@@ -35,12 +35,7 @@
 #define GNOME_DITEM_EDIT_H
 
 #include <gtk/gtk.h>
-
-#ifdef GNOME_CORE_INTERNAL
-# include "gnome-desktop-item.h"
-#else
-# include <libgnome/gnome-desktop-item.h>
-#endif
+#include <libgnome/gnome-desktop-item.h>
 
 G_BEGIN_DECLS
 

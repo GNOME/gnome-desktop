@@ -5,7 +5,7 @@
 #include <libgnomeui/libgnomeui.h>
 #include <gconf/gconf-client.h>
 
-#include "gnome-hint.h"
+#include <libgnomeui/gnome-hint.h>
 
 int main (int argc, char **argv) {
   GtkWidget *gnome_hint;

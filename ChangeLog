@@ -1,3 +1,39 @@
+2004-02-18  Laszlo Peter  <laca@sun.com>
+
+	Moving 3 headers around to make it possible to build against
+	uninstalled gnome-desktop; adding uninstalled.pc file.
+
+	* libgnome-desktop/gnome-desktop-item.c: 
+
+	* libgnome-desktop/gnome-desktop-item.h: move this to libgnome/
+	  subdir
+
+	* libgnome-desktop/gnome-ditem-edit.h: move to libgnomeui/ subdir
+
+	* libgnome-desktop/gnome-hint.h: move to libgnomeui/ subdir
+
+	* libgnome-desktop/libgnome/Makefile.am: new file
+
+	* libgnome-desktop/libgnomeui/Makefile.am: new file
+
+	* libgnome-desktop/gnome-ditem-edit.c: update #include's of the moved
+	  headers
+
+	* libgnome-desktop/gnome-hint.c: update #include
+
+	* libgnome-desktop/test-ditem-edit.c: update #include
+
+	* libgnome-desktop/test-ditem.c: update #include
+
+	* libgnome-desktop/test-hint.c: update #include
+
+	* libgnome-desktop/gnome-desktop-2.0-uninstalled.pc.in: new file
+
+	* libgnome-desktop/Makefile.am: remove the installed headers
+          from here, add libgnome, libgnomeui subdirs
+
+	* configure.in: add the new pc file and Makefiles.
+
 ==================== 2.5.5 ====================
 
 2004-02-16  Mark McLoughlin  <mark@skynet.ie>
