@@ -5,45 +5,175 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME-core 0.13\n"
-"POT-Creation-Date: 1998-02-15 11:02+0900\n"
-"PO-Revision-Date: 1998-02-16 07:38+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
+"POT-Creation-Date: 1998-03-17 17:12+0900\n"
+"PO-Revision-Date: 1998-03-17 17:12+0900\n"
+"Last-Translator: Ryu, Changwoo <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/panel.c:402
+#: panel/panel.c:430
 msgid "Remove from panel"
 msgstr "패널에서 삭제"
 
-#: panel/panel.c:411
+#: panel/panel.c:437
 msgid "Move applet"
 msgstr "애플릿 이동"
 
-#: panel/panel.c:424
-msgid "Applet properties..."
-msgstr "애플릿 속성..."
-
-#: panel/panel.c:525
+#: panel/panel.c:787
 msgid "This panel properties..."
 msgstr "패널 속성..."
 
-#: panel/panel.c:532
+#: panel/menu.c:507 panel/panel.c:794
 msgid "Global properties..."
 msgstr "전체 속성..."
 
-#: panel/panel.c:539
-msgid "Add reparent (testing)"
-msgstr "reparent 추가 (테스트중)"
-
-#: panel/panel.c:546
+#. menuitem = gtk_menu_item_new_with_label(_("Add reparent (testing)"));
+#. gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
+#. (GtkSignalFunc) add_reparent,
+#. panel);
+#. gtk_menu_append(GTK_MENU(panel_menu), menuitem);
+#. gtk_widget_show(menuitem);
+#: panel/panel.c:808
 msgid "Main menu"
 msgstr "주 메뉴"
 
-#: panel/menu/main.c:568 panel/panel.c:555
+#: panel/logout.c:56 panel/menu.c:549 panel/panel.c:817
 msgid "Log out"
 msgstr "로그아웃"
+
+#: panel/menu.c:477
+msgid "Add to panel"
+msgstr "패널에 추가"
+
+#: panel/menu.c:491
+msgid "Add main menu"
+msgstr "주 메뉴 추가"
+
+#: panel/menu.c:498
+msgid "Add drawer"
+msgstr "drawer 추가"
+
+#: panel/menu.c:537
+msgid "Panel"
+msgstr "패널"
+
+#: panel/menu.c:544
+msgid "Lock screen"
+msgstr "화면 잠금"
+
+#. Position frame
+#: panel/panel_config.c:106
+msgid "Position"
+msgstr "위치"
+
+#. Top Position
+#: panel/panel_config.c:118
+msgid "Top"
+msgstr "위"
+
+#: panel/panel_config.c:131
+msgid "Bottom"
+msgstr "아래"
+
+#: panel/panel_config.c:144
+msgid "Left"
+msgstr "왼쪽"
+
+#: panel/panel_config.c:157
+msgid "Right"
+msgstr "오른쪽"
+
+#. Auto-hide/stayput frame
+#: panel/panel_config.c:168
+msgid "Minimize Options"
+msgstr "최소화 옵션"
+
+#. Stay Put
+#: panel/panel_config.c:180
+msgid "Explicitly Hide"
+msgstr "수동으로 숨기기"
+
+#: panel/panel_config.c:193
+msgid "Auto Hide"
+msgstr "자동으로 숨기기"
+
+#: panel/panel_config.c:233
+msgid "Panel Configuration"
+msgstr "패널 설정"
+
+#. label for Position notebook page
+#: panel/panel_config.c:247
+msgid "Orientation"
+msgstr "방향"
+
+#. close button
+#: panel/batmon/batmon.c:323 panel/launcher.c:352
+#: panel/mailcheck/mailcheck.c:494 panel/panel_config.c:260
+#: panel/panel_config_global.c:283
+msgid "Close"
+msgstr "닫기"
+
+#. apply button
+#: panel/launcher.c:361 panel/mailcheck/mailcheck.c:493
+#: panel/panel_config.c:268 panel/panel_config_global.c:291
+msgid "Apply"
+msgstr "적용"
+
+#. AutoHide Animation step_size scale frame
+#: panel/panel_config_global.c:118
+msgid "Auto-Hide Animation Speed"
+msgstr "자동숨기기 애니매이션 속도"
+
+#. ExplicitHide Animation step_size scale frame
+#: panel/panel_config_global.c:126
+msgid "Explicit-Hide Animation Speed"
+msgstr "수동숨기기 애니매이션 속도"
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:134
+msgid "Auto-Hide Minimize Delay (ms)"
+msgstr "자동숨기기 지연시간 (천분의 일초)"
+
+#. Minimized size scale frame
+#: panel/panel_config_global.c:142
+msgid "Auto-Hide Minimized Size (pixels)"
+msgstr "자동숨기기 크기 (픽셀)"
+
+#. Tooltips frame
+#: panel/panel_config_global.c:166
+msgid "Icon Tooltips"
+msgstr "아이콘 툴팁"
+
+#. Tooltips enable
+#: panel/panel_config_global.c:179
+msgid "Tooltips enabled"
+msgstr "툴팁 보여주기"
+
+#. Menu frame
+#: panel/panel_config_global.c:191
+msgid "Menus"
+msgstr "메뉴"
+
+#. Small Icons
+#: panel/panel_config_global.c:204
+msgid "Show small icons"
+msgstr "작은 아이콘 보여주기"
+
+#: panel/panel_config_global.c:248
+msgid "Global Panel Configuration"
+msgstr "전체 패널 설정"
+
+#. label for Animation notebook page
+#: panel/panel_config_global.c:262
+msgid "Animation settings"
+msgstr "애니매이션 설정"
+
+#. label for Miscellaneous notebook page
+#: panel/panel_config_global.c:270
+msgid "Miscellaneous"
+msgstr "기타"
 
 #: panel/batmon/batmon.c:97
 msgid "Can't open /proc/apm; can't get data."
@@ -95,170 +225,127 @@ msgstr "%d분만큼의 배터리"
 msgid "More than 100,000,000 minutes of battery life?!?"
 msgstr "100,000,000분 이상만큼의 배터리?!?"
 
-#: panel/batmon/batmon.c:257
+#: panel/batmon/batmon.c:254
 msgid "APM Stats"
 msgstr "APM 정보"
 
-#: panel/batmon/batmon.c:273
+#: panel/batmon/batmon.c:270
 msgid "Linux APM Driver Version:"
 msgstr "리눅스 APM 드라이버 버전:"
 
-#: panel/batmon/batmon.c:285
+#: panel/batmon/batmon.c:282
 msgid "APM BIOS Version:"
 msgstr "APM BIOS 버전"
 
-#: panel/batmon/batmon.c:302
+#: panel/batmon/batmon.c:299
 msgid "Battery Status:"
 msgstr "배터리 상태:"
 
-#: panel/batmon/batmon.c:326 panel/launcher/launcher.c:338
-#: panel/mailcheck/mailcheck.c:479 panel/menu/main.c:854
-msgid "Close"
-msgstr "닫기"
-
-#: panel/launcher/launcher.c:262
+#: panel/launcher.c:276
 msgid "App"
 msgstr "프로그램"
 
-#: panel/launcher/launcher.c:310
+#: panel/launcher.c:324
 msgid "Launcher properties"
-msgstr ""
+msgstr "Launcher 속성"
 
-#: panel/launcher/launcher.c:321
+#: panel/launcher.c:335
 msgid "Name"
 msgstr "이름"
 
-#: panel/launcher/launcher.c:322
+#: panel/launcher.c:336
 msgid "Comment"
 msgstr "코멘트"
 
-#: panel/launcher/launcher.c:323
+#: panel/launcher.c:337
 msgid "Execute"
 msgstr "실행"
 
-#: panel/launcher/launcher.c:324
+#: panel/launcher.c:338
 msgid "Icon"
 msgstr "아이콘"
 
-#: panel/launcher/launcher.c:325
+#: panel/launcher.c:339
 msgid "Documentation"
 msgstr "문서"
 
-#: panel/launcher/launcher.c:328
+#: panel/launcher.c:342
 msgid "Run inside terminal"
 msgstr "터미널에서 실행"
 
-#: panel/launcher/launcher.c:347 panel/mailcheck/mailcheck.c:478
-#: panel/menu/main.c:862
-msgid "Apply"
-msgstr "적용"
-
-#: panel/mailcheck/mailcheck.c:219
+#: panel/mailcheck/mailcheck.c:230
 msgid "You have new mail."
 msgstr "새 편지가 왔습니다"
 
-#: panel/mailcheck/mailcheck.c:221
+#: panel/mailcheck/mailcheck.c:232
 msgid "You have mail."
 msgstr "편지가 왔습니다."
 
-#: panel/mailcheck/mailcheck.c:223
+#: panel/mailcheck/mailcheck.c:234
 msgid "No mail."
 msgstr "편지가 없습니다."
 
-#: panel/mailcheck/mailcheck.c:438
+#: panel/mailcheck/mailcheck.c:453
 msgid "Notification"
 msgstr "편지도착 알려주기"
 
-#: panel/mailcheck/mailcheck.c:455
+#: panel/mailcheck/mailcheck.c:470
 msgid "Select animation"
 msgstr "애니메이션 선택"
 
-#: panel/mailcheck/mailcheck.c:474
+#: panel/mailcheck/mailcheck.c:489
 msgid "Mail check properties"
 msgstr "편지 확인 속성"
 
-#: panel/mailcheck/mailcheck.c:497
+#: panel/mailcheck/mailcheck.c:512
 msgid "No bitmap, use only text"
 msgstr "비트맵 없이, 글만 사용"
 
-#: panel/menu/main.c:496
-msgid "Add to panel"
-msgstr "패널에 추가"
-
-#: panel/menu/main.c:501
-msgid "Add applet"
-msgstr "애플릿 추가"
-
-#: panel/menu/main.c:507
-msgid "Add Drawer"
-msgstr "drawer 추가"
-
-#: panel/menu/main.c:515
-msgid "Configure"
-msgstr "설정"
-
-#: panel/menu/main.c:556
-msgid "Panel"
-msgstr "패널"
-
-#: panel/menu/main.c:563
-msgid "Lock screen"
-msgstr "화면 잠금"
-
-#: panel/menu/main.c:824
-msgid "Menu properties"
-msgstr "메뉴 속성"
-
-#. the different properties go here
-#: panel/menu/main.c:837
-msgid "Enable small icons in menu"
-msgstr "메뉴에 작은 아이콘 사용"
-
-#: desktop-properties/property-background.c:329
+#: desktop-properties/property-background.c:339
 msgid "Color"
 msgstr "색상"
 
-#: desktop-properties/property-background.c:353
+#: desktop-properties/property-background.c:363
 msgid "Flat"
 msgstr "한가지 색"
 
-#: desktop-properties/property-background.c:359
+#: desktop-properties/property-background.c:369
 msgid "Gradient"
 msgstr "서서히 변화"
 
-#: desktop-properties/property-background.c:374
+#: desktop-properties/property-background.c:384
 msgid "Vertical"
 msgstr "수직"
 
-#: desktop-properties/property-background.c:380
+#: desktop-properties/property-background.c:390
 msgid "Horizontal"
 msgstr "수평"
 
-#: desktop-properties/property-background.c:514
+#: desktop-properties/property-background.c:524
 msgid "Wallpaper Selection"
 msgstr "벽지 고르기"
 
-#: desktop-properties/property-background.c:553
+#: desktop-properties/property-background.c:563
 msgid "Wallpaper"
 msgstr "벽지"
 
-#: desktop-properties/property-background.c:556
+#: desktop-properties/property-background.c:566
 msgid " Browse... "
 msgstr " 찾아보기... "
 
-#: desktop-properties/property-background.c:561
+#: desktop-properties/property-background.c:571
 msgid "none"
 msgstr "없음"
 
-#: desktop-properties/property-background.c:605
+#: desktop-properties/property-background.c:615
 msgid "Centered"
 msgstr "중앙"
 
-#: desktop-properties/property-background.c:611
+#: desktop-properties/property-background.c:621
 msgid "Tiled"
 msgstr "타일"
 
-#: desktop-properties/property-background.c:852
+#: desktop-properties/property-background.c:862
 msgid " Background "
 msgstr "배경"
 
@@ -306,7 +393,7 @@ msgstr "설정..."
 msgid "Test"
 msgstr "테스트"
 
-#: desktop-properties/property-screensaver.cc:347
+#: desktop-properties/property-screensaver.cc:348
 msgid " Screensaver "
 msgstr " 화면 보호기 "
 
@@ -383,47 +470,89 @@ msgid " Keyboard "
 msgstr " 키보드 "
 
 #. Frame for choosing button mapping.
-#: desktop-properties/property-mouse.c:183
+#: desktop-properties/property-mouse.c:184
 msgid "Buttons"
 msgstr "버튼"
 
-#: desktop-properties/property-mouse.c:185
+#: desktop-properties/property-mouse.c:186
 msgid "Left handed"
 msgstr "왼손잡이"
 
-#: desktop-properties/property-mouse.c:187
+#: desktop-properties/property-mouse.c:188
 msgid "Right handed"
 msgstr "오른손잡이"
 
 #. Frame for setting pointer acceleration.
-#: desktop-properties/property-mouse.c:207
+#: desktop-properties/property-mouse.c:208
 msgid "Motion"
 msgstr "움직임"
 
-#: desktop-properties/property-mouse.c:212
+#: desktop-properties/property-mouse.c:213
 msgid "Acceleration"
 msgstr "마우스 속도"
 
-#: desktop-properties/property-mouse.c:212
+#: desktop-properties/property-mouse.c:213
 msgid "Slow"
 msgstr "느리게"
 
-#: desktop-properties/property-mouse.c:212
+#: desktop-properties/property-mouse.c:213
 msgid "Fast"
 msgstr "빠르게"
 
-#: desktop-properties/property-mouse.c:218
+#: desktop-properties/property-mouse.c:219
 msgid "Threshold"
 msgstr "처음 움직임"
 
-#: desktop-properties/property-mouse.c:218
+#: desktop-properties/property-mouse.c:219
 msgid "Small"
 msgstr "작게"
 
-#: desktop-properties/property-mouse.c:218
+#: desktop-properties/property-mouse.c:219
 msgid "Large"
 msgstr "크게"
 
-#: desktop-properties/property-mouse.c:230
+#: desktop-properties/property-mouse.c:231
 msgid "Mouse"
 msgstr "마우스"
+
+#: desktop-properties/main.c:31
+msgid "Set parameters from saved state and exit"
+msgstr ""
+
+#: desktop-properties/app-mouse.c:10
+msgid "Mouse Properties"
+msgstr "마우스 속성"
+
+#: desktop-properties/app-keyboard.c:10
+msgid "Keyboard Properties"
+msgstr "키보드 속성"
+
+#: desktop-properties/app-background.c:10
+msgid "Background Properties"
+msgstr "배경 속성"
+
+#: gsm/main.c:40
+msgid "[SESSION]"
+msgstr "[세션]"
+
+#: gsm/save-session.c:35
+msgid "Kill session"
+msgstr "세션 없애기"
+
+#~ msgid "Applet properties..."
+#~ msgstr "애플릿 속성..."
+
+#~ msgid "Add reparent (testing)"
+#~ msgstr "reparent 추가 (테스트중)"
+
+#~ msgid "Add applet"
+#~ msgstr "애플릿 추가"
+
+#~ msgid "Configure"
+#~ msgstr "설정"
+
+#~ msgid "Menu properties"
+#~ msgstr "메뉴 속성"
+
+#~ msgid "Enable small icons in menu"
+#~ msgstr "메뉴에 작은 아이콘 사용"
