@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME-core 0.13\n"
-"POT-Creation-Date: 1998-12-15 03:38+0900\n"
+"POT-Creation-Date: 1998-12-15 11:45-0500\n"
 "PO-Revision-Date: 1998-12-15 03:38+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -23,6 +23,7 @@ msgstr "이 프로그램은"
 #: applets/gen_util/clock.c:268 applets/gen_util/mailcheck.c:686
 #: applets/gen_util/printer.c:404 applets/gkb/gkb.c:180
 #: applets/icewm-pager/wmpager_applet.c:90
+#: applets/mini-commander/mini-commander_applet.c:135
 #: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
 #: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
 #: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
@@ -123,6 +124,7 @@ msgstr "누가 NeXT를 죽었다고 하는가?"
 #: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
 #: applets/cpuload/properties.c:216 applets/diskusage/properties.c:322
 #: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
+#: applets/mini-commander/preferences.c:616
 #: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
 #: applets/multiload/properties-mem.c:283
 #: applets/multiload/properties-swap.c:233 applets/netload/properties.c:276
@@ -411,6 +413,7 @@ msgid "None (default)"
 msgstr "없음 (기본)"
 
 #: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
+#: applets/mini-commander/preferences.c:395
 msgid "Clock"
 msgstr "시계"
 
@@ -748,7 +751,7 @@ msgstr "%p %I:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:133
+#: applets/gen_util/clock.c:133 applets/mini-commander/message.c:101
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -768,7 +771,8 @@ msgstr "12시간"
 msgid "24 hour"
 msgstr "24시간"
 
-#: applets/gen_util/clock.c:393
+#. show date check box
+#: applets/gen_util/clock.c:393 applets/mini-commander/preferences.c:416
 msgid "Show date"
 msgstr "날짜 보여주기"
 
@@ -858,7 +862,11 @@ msgid ""
 "setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
 "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
 "to CVS."
-msgstr "이 애플릿은 각 키보드맵 사이를 전환하는 데 쓰인다.  더 이상은 없다.  이 애플릿은 setxkbmap 혹은 xmodmap 명령을 사용한다.  이 프로그램의 주요 사이트의 URL은 임시로 http://lsc.kva.hu/gkb로 옮겨졌다.  부디 당신의 국기를 편지로 보내주기 바라며 (60x40 크기), 그러면 그 깃발을 CVS에 옮겨 놓겠다."
+msgstr ""
+"이 애플릿은 각 키보드맵 사이를 전환하는 데 쓰인다.  더 이상은 없다.  이 "
+"애플릿은 setxkbmap 혹은 xmodmap 명령을 사용한다.  이 프로그램의 주요 "
+"사이트의 URL은 임시로 http://lsc.kva.hu/gkb로 옮겨졌다.  부디 당신의 국기를 "
+"편지로 보내주기 바라며 (60x40 크기), 그러면 그 깃발을 CVS에 옮겨 놓겠다."
 
 #: applets/gkb/gkb.c:106
 msgid "gkb.xpm"
@@ -1226,6 +1234,172 @@ msgstr "\"launch new window\" 옵션 표시"
 #: applets/webcontrol/webcontrol.c:230
 msgid "Look"
 msgstr "겉모양"
+
+#: applets/mini-commander/mini-commander_applet.c:125
+msgid "Mini-Commander"
+msgstr ""
+
+#: applets/mini-commander/mini-commander_applet.c:142
+#, fuzzy
+msgid "Help & About..."
+msgstr "이 프로그램은..."
+
+#: applets/mini-commander/mini-commander_applet.c:146
+msgid "ready..."
+msgstr ""
+
+#: applets/mini-commander/about.c:33
+msgid "Mini-Commander Applet"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:63
+#, fuzzy
+msgid "completing..."
+msgstr "속성..."
+
+#. showMessage((gchar *) _("exec failed"));
+#. if this line is reached there is really big trouble
+#: applets/mini-commander/cmd_completion.c:73
+#: applets/mini-commander/exec.c:114
+msgid "no /bin/sh"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:89
+msgid "completed"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:92
+#: applets/mini-commander/cmd_completion.c:99
+#, fuzzy
+msgid "not unique"
+msgstr " 마운트되지 않음"
+
+#: applets/mini-commander/cmd_completion.c:94
+#, fuzzy
+msgid "not found"
+msgstr " 마운트되지 않음"
+
+#. enter pressed -> exec command
+#: applets/mini-commander/command_line.c:90 applets/mini-commander/exec.c:100
+#, fuzzy
+msgid "starting..."
+msgstr "충전중."
+
+#: applets/mini-commander/exec.c:102
+msgid "fork error"
+msgstr ""
+
+#: applets/mini-commander/exec.c:128
+msgid "child exited"
+msgstr ""
+
+#: applets/mini-commander/message.c:99
+msgid "%H:%M - %d. %b"
+msgstr ""
+
+#: applets/mini-commander/message.c:103
+msgid "%d. %b"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:91
+msgid "time & date on"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:93
+#, fuzzy
+msgid "time on"
+msgstr "시간대"
+
+#: applets/mini-commander/preferences.c:95
+msgid "date on"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:97
+msgid "clock off"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:368
+msgid "saving prefs..."
+msgstr ""
+
+#: applets/mini-commander/preferences.c:389
+#, fuzzy
+msgid "Mini-Commander Properties"
+msgstr "마우스 속성"
+
+#. show time check box
+#: applets/mini-commander/preferences.c:403
+#, fuzzy
+msgid "Show time"
+msgstr "날짜 보여주기"
+
+#. Size
+#: applets/mini-commander/preferences.c:428
+msgid "Size"
+msgstr ""
+
+#. applet width
+#: applets/mini-commander/preferences.c:440
+#, fuzzy
+msgid "Applet width:"
+msgstr "애플릿 높이"
+
+#. applet height
+#: applets/mini-commander/preferences.c:469
+#, fuzzy
+msgid "Applet height:"
+msgstr "애플릿 높이"
+
+#. cmd line height
+#: applets/mini-commander/preferences.c:498
+msgid "Command line height:"
+msgstr ""
+
+#. hint
+#: applets/mini-commander/preferences.c:527
+msgid ""
+"\n"
+"Sometimes the applet has to be moved on the panel\n"
+"to make a change of the size visible."
+msgstr ""
+
+#. Color
+#: applets/mini-commander/preferences.c:538
+#: gnome-terminal/gnome-terminal.c:1024
+msgid "Colors"
+msgstr "색상"
+
+#. fg
+#: applets/mini-commander/preferences.c:548
+msgid "Command line foreground:"
+msgstr ""
+
+#. bg
+#: applets/mini-commander/preferences.c:583
+msgid "Command line background:"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:626
+#, fuzzy
+msgid "Special Prefixes"
+msgstr "특수 파일들"
+
+#. prefix
+#: applets/mini-commander/preferences.c:645
+#, c-format
+msgid "Prefix %.2d:"
+msgstr ""
+
+#. command
+#: applets/mini-commander/preferences.c:663
+#, c-format
+msgid "   Command %.2d:"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:680
+#, fuzzy, c-format
+msgid "Prefixes %d"
+msgstr " 미리보기 "
 
 #: desktop-properties/app-background.c:15
 msgid "Background Properties"
@@ -2115,10 +2289,6 @@ msgstr "투명하게"
 msgid "Background should be shaded (slow)"
 msgstr "배경에 그늘을 지도록 한다 (느려짐)"
 
-#: gnome-terminal/gnome-terminal.c:1024
-msgid "Colors"
-msgstr "색상"
-
 #. Color palette
 #: gnome-terminal/gnome-terminal.c:1027
 msgid "Color palette:"
@@ -2319,7 +2489,7 @@ msgstr "HEIGHT"
 msgid "Debug level"
 msgstr "디버그 단계"
 
-#: help-browser/gnome-help-browser.c:348 help-browser/window.c:699
+#: help-browser/gnome-help-browser.c:348 help-browser/window.c:701
 msgid "Gnome Help Browser"
 msgstr "Gnome 도움말 프로그램"
 
@@ -2638,7 +2808,7 @@ msgstr "책갈피"
 msgid "Help on Help"
 msgstr "도움말에 대한 도움말"
 
-#: help-browser/window.c:821
+#: help-browser/window.c:823
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2649,7 +2819,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: help-browser/window.c:824
+#: help-browser/window.c:826
 msgid "Ok"
 msgstr "확인"
 

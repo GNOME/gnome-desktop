@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.30\n"
-"POT-Creation-Date: 1998-11-21 00:05+0100\n"
+"POT-Creation-Date: 1998-12-15 11:45-0500\n"
 "PO-Revision-Date: 1998-12-13 00:46+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -37,15 +37,16 @@ msgstr "Acerca"
 
 #: applets/asclock/asclock.c:151 applets/clockmail/clockmail.c:428
 #: applets/cpuload/cpuload.c:220 applets/diskusage/diskusage.c:710
-#: applets/drivemount/drivemount.c:455 applets/fish/fish.c:459
+#: applets/drivemount/drivemount.c:455 applets/fish/fish.c:452
 #: applets/gen_util/clock.c:268 applets/gen_util/mailcheck.c:686
 #: applets/gen_util/printer.c:404 applets/gkb/gkb.c:180
 #: applets/icewm-pager/wmpager_applet.c:90
-#: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:240
-#: applets/multiload/memload.c:279 applets/multiload/swapload.c:240
+#: applets/mini-commander/mini-commander_applet.c:135
+#: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
+#: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
 #: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:409 panel/launcher.c:265
-#: panel/menu.c:2236
+#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:410 panel/launcher.c:266
+#: panel/menu.c:2237
 msgid "Properties..."
 msgstr "Propiedades..."
 
@@ -57,14 +58,95 @@ msgstr "Applet reloj Afterstep"
 msgid "Who said NeXT is dead?"
 msgstr "¿Quien dijo que el NeXT está muerto?"
 
+#. -- not implemented yet --
+#.
+#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
+#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
+#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
+#. gtk_widget_show(frame);
+#.
+#. vbox1 = gtk_vbox_new(FALSE, 1);
+#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
+#. gtk_widget_show(vbox1);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Article index file:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image Server Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image path:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#.
 #. ---
-#: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:371
+#: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
 #: applets/cpuload/properties.c:216 applets/diskusage/properties.c:322
 #: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
+#: applets/mini-commander/preferences.c:616
 #: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
 #: applets/multiload/properties-mem.c:283
 #: applets/multiload/properties-swap.c:233 applets/netload/properties.c:276
-#: applets/slashapp/properties.c:330 gnome-terminal/gnome-terminal.c:876
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:876
 msgid "General"
 msgstr "General"
 
@@ -162,19 +244,18 @@ msgstr "Estado de la batería:"
 msgid "Close"
 msgstr "Cerrar"
 
-#: applets/battery/battery.c:355
+#: applets/battery/battery.c:350
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Error interno: modo inválido en battery_set_mode"
 
-#: applets/battery/battery.c:400 applets/cpuload/cpuload.c:202
-#: applets/fish/fish.c:434 applets/freshapp/freshapp.c:38
-#: applets/gen_util/clock.c:241 applets/gen_util/mailcheck.c:653
-#: applets/gen_util/printer.c:379 applets/gkb/gkb.c:138
-#: applets/netload/netload.c:320
+#: applets/battery/battery.c:395 applets/cpuload/cpuload.c:202
+#: applets/freshapp/freshapp.c:38 applets/gen_util/clock.c:241
+#: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
+#: applets/gkb/gkb.c:138 applets/netload/netload.c:320
 msgid "Can't create applet!\n"
 msgstr "¡No puedo crear el applet!\n"
 
-#: applets/battery/battery.c:614
+#: applets/battery/battery.c:609
 msgid "Could not allocate space for graph values"
 msgstr "No pude atribuir espacio para los valores de los grafos"
 
@@ -238,7 +319,8 @@ msgstr "Derecha a Izquierda"
 msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
-msgstr "¡No puedo abrir /proc/apm!  Asegurese que el núcleo Linux tiene soporte "
+msgstr ""
+"¡No puedo abrir /proc/apm!  Asegurese que el núcleo Linux tiene soporte "
 "APM.\n"
 
 #: applets/battery/read-battery.c:79
@@ -247,18 +329,17 @@ msgstr "No puedo abrir /proc/apm;  No puedo obtener datos"
 
 #: applets/battery/read-battery.c:95
 msgid "APM is disabled!  Cannot read battery charge information."
-msgstr "¡APM desactivado!  No puedo leer información sobre la carga de la batería"
+msgstr ""
+"¡APM desactivado!  No puedo leer información sobre la carga de la batería"
 
-#. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 #: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
 #: applets/clockmail/clockmail.c:435 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:461 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:451 applets/gen_util/mailcheck.c:693
+#: applets/fish/fish.c:444 applets/gen_util/mailcheck.c:693
 #: applets/gkb/gkb.c:174 applets/icewm-pager/wmpager_applet.c:82
 #: applets/modemlights/modemlights.c:725 applets/netload/netload.c:338
 #: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
-#: gmenu/gmenu.c:68 panel/menu.c:1720
+#: panel/menu.c:1723
 msgid "About..."
 msgstr "Acerca"
 
@@ -281,7 +362,8 @@ msgid ""
 "To fill in the sign please see:\n"
 "\n"
 "http://people.netscape.com/mtoy/sign/index.html"
-msgstr "Este applet es una perdida de tiempo. ¡Vuelva a su trabajo!\n"
+msgstr ""
+"Este applet es una perdida de tiempo. ¡Vuelva a su trabajo!\n"
 "\n"
 "Para rellenar el \"sign\" por favor vea:\n"
 "\n"
@@ -303,7 +385,8 @@ msgstr "Copyright © 1998"
 msgid ""
 "Gnome Panel applet for selecting strange characters that are not on my "
 "keyboard. Released under GNU General Public Licence."
-msgstr "Applet del panel de Gnome que permite seleccionar carácteres que no son "
+msgstr ""
+"Applet del panel de Gnome que permite seleccionar carácteres que no son "
 "accesibles directamente con el teclado. Distribuido bajo la licencia GPL de "
 "GNU."
 
@@ -330,7 +413,8 @@ msgid ""
 "Basic digital clock with date in a tooltip. Optional 12/24 time display. "
 "Mail blinking can be for any unread mail, or only briefly when new mail "
 "arrives."
-msgstr "Distribuido bajo los términos de la licencia GPL de GNU.\n"
+msgstr ""
+"Distribuido bajo los términos de la licencia GPL de GNU.\n"
 "Reloj básico con la fecha en un tooltip. afichage opcional en formato de 12 "
 "o 24 horas. El parpadeo del buzón puede ser por todo mensaje no leido, o "
 "solamente brevemente cuando llegan nuevos mensajes."
@@ -345,47 +429,48 @@ msgid " (GMT %+d)"
 msgstr " (GMT %+d)"
 
 #. add default theme
-#: applets/clockmail/properties.c:117
+#: applets/clockmail/properties.c:131
 msgid "None (default)"
 msgstr "Ninguno (por omisión)"
 
-#: applets/clockmail/properties.c:269 applets/gen_util/clock.c:411
+#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
+#: applets/mini-commander/preferences.c:395
 msgid "Clock"
 msgstr "Reloj"
 
-#: applets/clockmail/properties.c:278
+#: applets/clockmail/properties.c:292
 msgid "Display time in 12 hour format (AM/PM)"
 msgstr "Afichar en formato de 12 horas (AM/PM)"
 
-#: applets/clockmail/properties.c:288
+#: applets/clockmail/properties.c:302
 msgid "Display time relative to GMT (Greenwich Mean Time):"
 msgstr "Muestra la hora GMT (Greenwich Mean Time):"
 
-#: applets/clockmail/properties.c:302
+#: applets/clockmail/properties.c:316
 msgid "Mail"
 msgstr "Correo"
 
-#: applets/clockmail/properties.c:311
+#: applets/clockmail/properties.c:325
 msgid "Blink when any mail is waiting. (Not just when mail arrives)"
 msgstr "Parpadea siempre que hay correo en espera. (no solamente cuando llega)"
 
-#: applets/clockmail/properties.c:322
+#: applets/clockmail/properties.c:336
 msgid "Mail file:"
 msgstr "Archivo de correo:"
 
-#: applets/clockmail/properties.c:339
+#: applets/clockmail/properties.c:353
 msgid "When new mail is received run:"
 msgstr "Cuando llega nuevo correo lanzar:"
 
-#: applets/clockmail/properties.c:358
+#: applets/clockmail/properties.c:372
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Cantidad de correo para considerar la casilla llena (Kbytes):"
 
-#: applets/clockmail/properties.c:389
+#: applets/clockmail/properties.c:403
 msgid "Theme file (directory):"
 msgstr "Archivo de tema (directorio):"
 
-#: applets/clockmail/properties.c:417
+#: applets/clockmail/properties.c:431
 msgid "Theme"
 msgstr "Tema"
 
@@ -456,7 +541,8 @@ msgstr "Applet Montador de Discos"
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
-msgstr "Distribuido bajo los términos de la licencia GPL de GNU.\n"
+msgstr ""
+"Distribuido bajo los términos de la licencia GPL de GNU.\n"
 "Monta y Desmonta discos/disquettes/CD/Zip/..."
 
 #: applets/drivemount/drivemount.c:127
@@ -475,7 +561,8 @@ msgstr "\" señaló:\n"
 msgid ""
 "Drivemount command failed.\n"
 "\""
-msgstr "Falló comando de Drivemount.\n"
+msgstr ""
+"Falló comando de Drivemount.\n"
 "\""
 
 #: applets/drivemount/drivemount.c:468
@@ -538,7 +625,8 @@ msgstr "Copyright © la Free Software Foundation"
 msgid ""
 "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
 "Guaranteed to be a productivity buster."
-msgstr "El juego favorito de Sam Lloyd, ahora para su disfrute en el Panel de Gnome."
+msgstr ""
+"El juego favorito de Sam Lloyd, ahora para su disfrute en el Panel de Gnome."
 
 #: applets/fifteen/fifteen.c:292
 msgid "Can't create fifteen applet!"
@@ -572,8 +660,8 @@ msgid "The Animation Filename:"
 msgstr "Nombre del archivo de animación:"
 
 #: applets/fish/fish.c:218 gnome-terminal/gnome-terminal.c:992
-#: panel/menu.c:2178 panel/panel-util.c:180 panel/panel-util.c:218
-#: panel/panel-util.c:255 panel/panel_config.c:721 panel/swallow.c:233
+#: panel/menu.c:2179 panel/panel-util.c:180 panel/panel-util.c:218
+#: panel/panel-util.c:255 panel/panel_config.c:716 panel/swallow.c:233
 msgid "Browse"
 msgstr "Buscar"
 
@@ -603,7 +691,8 @@ msgid ""
 "compilation time, and if loaded it also takes up precious panel space and "
 "memory. If anyone is found using this applet, he should be promptly sent for "
 "a psychiatric evaluation."
-msgstr "Este applet no sirve para nada. Solo ocupa espacio en el disco y tiempo "
+msgstr ""
+"Este applet no sirve para nada. Solo ocupa espacio en el disco y tiempo "
 "durante la compilación, y si es lanzado también ocupa una parte del precioso "
 "espacio del panel y de la memoria. Si alguien es descubierto usando este "
 "applet tiene que ser llevado de inmediato a que le hagan un exámen "
@@ -661,7 +750,8 @@ msgstr "Propiedades del Pager Fvwm"
 msgid ""
 "%a\n"
 "%b %d"
-msgstr "%a %d\n"
+msgstr ""
+"%a %d\n"
 "de %b"
 
 #. This format string is used, to display the actual day,
@@ -682,7 +772,7 @@ msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:133
+#: applets/gen_util/clock.c:133 applets/mini-commander/message.c:101
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -702,7 +792,8 @@ msgstr "12 horas"
 msgid "24 hour"
 msgstr "24 horas"
 
-#: applets/gen_util/clock.c:393
+#. show date check box
+#: applets/gen_util/clock.c:393 applets/mini-commander/preferences.c:416
 msgid "Show date"
 msgstr "Ver fecha"
 
@@ -776,12 +867,12 @@ msgid "Printer"
 msgstr "Impresora"
 
 #: applets/gkb/gkb.c:95
-msgid "0.31"
-msgstr "0.31"
-
-#: applets/gkb/gkb.c:95
 msgid "The GNOME KB Applet"
 msgstr "Applet configurador de teclado"
+
+#: applets/gkb/gkb.c:95
+msgid "0.31"
+msgstr "0.31"
 
 #: applets/gkb/gkb.c:96
 msgid "(C) 1998 LSC - Linux Supporting Center"
@@ -793,42 +884,43 @@ msgid ""
 "setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
 "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
 "to CVS."
-msgstr "Este applet sirve para cambiar de teclado. Nada más. Usa setxkbmap, "
-"o xmodmap. El sitio principal de este applet ha sido desplazado "
-"temporalmente a http://lsc.kva.hu/gkb. Si la banderita para su teclado "
-"no aparece envieme una (tamaño 60×40) por favor, de modo a que pueda "
-"ponerla en el CVS."
+msgstr ""
+"Este applet sirve para cambiar de teclado. Nada más. Usa setxkbmap, o "
+"xmodmap. El sitio principal de este applet ha sido desplazado temporalmente "
+"a http://lsc.kva.hu/gkb. Si la banderita para su teclado no aparece envieme "
+"una (tamaño 60×40) por favor, de modo a que pueda ponerla en el CVS."
 
 #: applets/gkb/gkb.c:106
 msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
-#: applets/gkb/properties.c:105
+#: applets/gkb/properties.c:107
 msgid "Icon Selection"
 msgstr "Selección Ícono"
 
-#: applets/gkb/properties.c:219
+#: applets/gkb/properties.c:223
 msgid "GKB settings"
 msgstr "Propiedades GKB"
 
-#: applets/gkb/properties.c:248 applets/gkb/properties.c:265
+#: applets/gkb/properties.c:254 applets/gkb/properties.c:273
 msgid ""
 "Couldn't\n"
 "load\n"
 "icon"
-msgstr "No pude\n"
+msgstr ""
+"No pude\n"
 "cargar\n"
 "el ícono"
 
-#: applets/gkb/properties.c:277
+#: applets/gkb/properties.c:287
 msgid "Xkb"
 msgstr "Xkb"
 
-#: applets/gkb/properties.c:281
+#: applets/gkb/properties.c:293
 msgid "Xmodmap"
 msgstr "Xmodmap"
 
-#: applets/gkb/properties.c:294 panel/menu.c:2191
+#: applets/gkb/properties.c:308 panel/menu.c:2192
 msgid "Menu"
 msgstr "Menú"
 
@@ -837,7 +929,8 @@ msgstr "Menú"
 #: applets/icewm-pager/wmpager_applet.c:53
 msgid ""
 "This applet requires you to run a window manager with the XA_ extensions.\n"
-msgstr "Este applet requiere que corra un gestor de ventanas con las extensiones XA_ "
+msgstr ""
+"Este applet requiere que corra un gestor de ventanas con las extensiones XA_ "
 "\n"
 
 #: applets/icewm-pager/wmpager_applet.c:217
@@ -865,7 +958,8 @@ msgid ""
 "Released under the GNU general public license.\n"
 "A modem status indicator and dialer.Lights in order from the top or left are "
 "RX and TX"
-msgstr "Distribuido bajo los términos de la licencia GPL de GNU.\n"
+msgstr ""
+"Distribuido bajo los términos de la licencia GPL de GNU.\n"
 "Indicador del estado del modem y discador. Las lucecitas son, por orden a "
 "partir de arriba o de la izquierda, RX y TX"
 
@@ -873,7 +967,8 @@ msgstr "Distribuido bajo los términos de la licencia GPL de GNU.\n"
 msgid ""
 "You are currently connected.\n"
 "Do you want to disconnect?"
-msgstr "Está actualmente conectado.\n"
+msgstr ""
+"Está actualmente conectado.\n"
 "¿Desea desconectarse?"
 
 #: applets/modemlights/modemlights.c:327
@@ -972,7 +1067,8 @@ msgid ""
 "Licence.This applet shows the load on a network device. It requires the "
 "/proc/net/ip_acct interface to be present and set up correctly for the "
 "device."
-msgstr "Este applet es distribuido bajo los términos de la licencia GPL de GNU. Este "
+msgstr ""
+"Este applet es distribuido bajo los términos de la licencia GPL de GNU. Este "
 "applet muestra el nivel de utilización de la red por un dispositivo de red. "
 "Requiere que la interface /proc/net/ip_acct esté present y correctamente "
 "configurada para el dispositivo."
@@ -1005,86 +1101,65 @@ msgstr "Configuración del applet de carga de la red"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: applets/slashapp/properties.c:184
+#: applets/slashapp/properties.c:199
 msgid "Articles"
 msgstr "Artículos"
 
-#: applets/slashapp/properties.c:193
+#: applets/slashapp/properties.c:208
 msgid "Show topic images"
 msgstr "Ver imágenes tópico"
 
-#: applets/slashapp/properties.c:199
+#: applets/slashapp/properties.c:214
 msgid "Show department"
 msgstr "Ver departamento"
 
-#: applets/slashapp/properties.c:205
+#: applets/slashapp/properties.c:220
 msgid "Show extra information (Time, Author, Comments)"
 msgstr "Ver información extra (Fecha, Autor, Comentarios)"
 
-#: applets/slashapp/properties.c:215
+#: applets/slashapp/properties.c:230
 msgid "Delay between articles (10 = 1 sec):"
 msgstr "Tiempo entre artículos (10 = 1 s):"
 
-#: applets/slashapp/properties.c:227
+#: applets/slashapp/properties.c:244
 msgid "(These settings do not take effect until a refresh)"
-msgstr "(Estas propiedades no entrarán en efecto hasta el próximo refresco de "
+msgstr ""
+"(Estas propiedades no entrarán en efecto hasta el próximo refresco de "
 "pantalla)"
 
-#: applets/slashapp/properties.c:232
+#: applets/slashapp/properties.c:249
 msgid "Browser"
 msgstr "Navegador Web"
 
-#: applets/slashapp/properties.c:241
+#: applets/slashapp/properties.c:258
 msgid "Open new window"
 msgstr "Abrir nueva ventana"
 
-#. -- not implemented yet --
-#: applets/slashapp/properties.c:250
-msgid "Ticker Information (unimplemented)"
-msgstr "Información teletipo (no implementado)"
-
-#. create the widget we are going to put on the applet
-#: applets/slashapp/properties.c:263 applets/webcontrol/webcontrol.c:116
-msgid "Url:"
-msgstr "URL:"
-
-#: applets/slashapp/properties.c:280
-msgid "Article index file:"
-msgstr "Archivo de índice de artículos:"
-
-#: applets/slashapp/properties.c:297
-msgid "Image Server Url:"
-msgstr "URL servidor de imágenes:"
-
-#: applets/slashapp/properties.c:314
-msgid "Image path:"
-msgstr "Ruta imágen:"
-
-#: applets/slashapp/properties.c:339 gnome-terminal/gnome-terminal.c:1071
+#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1071
 msgid "Scrolling"
 msgstr "Desfile"
 
-#: applets/slashapp/properties.c:348
+#: applets/slashapp/properties.c:365
 msgid "Smooth scroll"
 msgstr "Desfile suave"
 
-#: applets/slashapp/properties.c:354
+#: applets/slashapp/properties.c:371
 msgid "Smooth type"
 msgstr "Tipo suave"
 
-#: applets/slashapp/properties.c:360
+#: applets/slashapp/properties.c:377
 msgid "Speed"
 msgstr "Velocidad"
 
-#: applets/slashapp/properties.c:373
+#: applets/slashapp/properties.c:390
 msgid "Delay when wrapping text:"
 msgstr "Demora para la ida a la linea automática del texto:"
 
-#: applets/slashapp/properties.c:389
+#: applets/slashapp/properties.c:408
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "Velocidad de desfile entre lineas (desfile suave):"
 
-#: applets/slashapp/properties.c:401
+#: applets/slashapp/properties.c:422
 msgid "Display"
 msgstr "Afichar"
 
@@ -1154,9 +1229,15 @@ msgstr "Applet de Control WEB"
 msgid ""
 "This applet currently sends getURL commands to netscape throught the -remote "
 "interface.  Hopefully later more webrowsers will be supported."
-msgstr "Este applet en realidad envia comandos getURL a netscape a través de la "
+msgstr ""
+"Este applet en realidad envia comandos getURL a netscape a través de la "
 "interface -remote.  Con suerte en el futuro otros navegadores serán "
 "soportados."
+
+#. create the widget we are going to put on the applet
+#: applets/webcontrol/webcontrol.c:116
+msgid "Url:"
+msgstr "URL:"
 
 #: applets/webcontrol/webcontrol.c:119
 msgid "Clear"
@@ -1182,6 +1263,173 @@ msgstr "Afichar la opción \"abrir nueva ventana\""
 msgid "Look"
 msgstr "Mirar"
 
+#: applets/mini-commander/mini-commander_applet.c:125
+msgid "Mini-Commander"
+msgstr ""
+
+#: applets/mini-commander/mini-commander_applet.c:142
+#, fuzzy
+msgid "Help & About..."
+msgstr "Acerca"
+
+#: applets/mini-commander/mini-commander_applet.c:146
+msgid "ready..."
+msgstr ""
+
+#: applets/mini-commander/about.c:33
+msgid "Mini-Commander Applet"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:63
+#, fuzzy
+msgid "completing..."
+msgstr "Propiedades..."
+
+#. showMessage((gchar *) _("exec failed"));
+#. if this line is reached there is really big trouble
+#: applets/mini-commander/cmd_completion.c:73
+#: applets/mini-commander/exec.c:114
+msgid "no /bin/sh"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:89
+msgid "completed"
+msgstr ""
+
+#: applets/mini-commander/cmd_completion.c:92
+#: applets/mini-commander/cmd_completion.c:99
+#, fuzzy
+msgid "not unique"
+msgstr " no montado"
+
+#: applets/mini-commander/cmd_completion.c:94
+#, fuzzy
+msgid "not found"
+msgstr " no montado"
+
+#. enter pressed -> exec command
+#: applets/mini-commander/command_line.c:90 applets/mini-commander/exec.c:100
+#, fuzzy
+msgid "starting..."
+msgstr "Cargando."
+
+#: applets/mini-commander/exec.c:102
+msgid "fork error"
+msgstr ""
+
+#: applets/mini-commander/exec.c:128
+msgid "child exited"
+msgstr ""
+
+#: applets/mini-commander/message.c:99
+msgid "%H:%M - %d. %b"
+msgstr ""
+
+#: applets/mini-commander/message.c:103
+msgid "%d. %b"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:91
+msgid "time & date on"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:93
+#, fuzzy
+msgid "time on"
+msgstr "Huso horario"
+
+#: applets/mini-commander/preferences.c:95
+msgid "date on"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:97
+msgid "clock off"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:368
+msgid "saving prefs..."
+msgstr ""
+
+#: applets/mini-commander/preferences.c:389
+#, fuzzy
+msgid "Mini-Commander Properties"
+msgstr "Propiedades del ratón"
+
+#. show time check box
+#: applets/mini-commander/preferences.c:403
+#, fuzzy
+msgid "Show time"
+msgstr "Ver fecha"
+
+#. Size
+#: applets/mini-commander/preferences.c:428
+msgid "Size"
+msgstr ""
+
+#. applet width
+#: applets/mini-commander/preferences.c:440
+#, fuzzy
+msgid "Applet width:"
+msgstr "Ancho del applet"
+
+#. applet height
+#: applets/mini-commander/preferences.c:469
+#, fuzzy
+msgid "Applet height:"
+msgstr "Alto del applet"
+
+#. cmd line height
+#: applets/mini-commander/preferences.c:498
+msgid "Command line height:"
+msgstr ""
+
+#. hint
+#: applets/mini-commander/preferences.c:527
+msgid ""
+"\n"
+"Sometimes the applet has to be moved on the panel\n"
+"to make a change of the size visible."
+msgstr ""
+
+# gnome-terminal/gnome-terminal.c:801
+#. Color
+#: applets/mini-commander/preferences.c:538
+#: gnome-terminal/gnome-terminal.c:1024
+msgid "Colors"
+msgstr "Colores"
+
+#. fg
+#: applets/mini-commander/preferences.c:548
+msgid "Command line foreground:"
+msgstr ""
+
+#. bg
+#: applets/mini-commander/preferences.c:583
+msgid "Command line background:"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:626
+#, fuzzy
+msgid "Special Prefixes"
+msgstr "Archivos especiales"
+
+#. prefix
+#: applets/mini-commander/preferences.c:645
+#, c-format
+msgid "Prefix %.2d:"
+msgstr ""
+
+#. command
+#: applets/mini-commander/preferences.c:663
+#, c-format
+msgid "   Command %.2d:"
+msgstr ""
+
+#: applets/mini-commander/preferences.c:680
+#, fuzzy, c-format
+msgid "Prefixes %d"
+msgstr " Visionar "
+
 #: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "Propiedades del fondo"
@@ -1206,7 +1454,7 @@ msgstr "Propiedades de la apariencia de Gnome"
 msgid "Set parameters from saved state and exit"
 msgstr "Usa los parámetros que se tenían guardados y terminar"
 
-#: desktop-properties/property-background.c:494 panel/panel_config.c:698
+#: desktop-properties/property-background.c:494 panel/panel_config.c:693
 msgid "Color"
 msgstr "Color"
 
@@ -1218,12 +1466,12 @@ msgstr "Plano"
 msgid "Gradient"
 msgstr "Degradado de color"
 
-#: desktop-properties/property-background.c:539 panel/panel_config.c:546
+#: desktop-properties/property-background.c:539 panel/panel_config.c:541
 msgid "Vertical"
 msgstr "Vertical"
 
 #. Horizontal
-#: desktop-properties/property-background.c:545 panel/panel_config.c:533
+#: desktop-properties/property-background.c:545 panel/panel_config.c:528
 msgid "Horizontal"
 msgstr "Horizontal"
 
@@ -1286,12 +1534,12 @@ msgid "Specifies end background color for gradient"
 msgstr "Indica el color de fondo final para el gradiente"
 
 #: desktop-properties/property-background.c:1061
-msgid "Gradient orientation: vertical or horizontal"
-msgstr "Orientación del gradiente: vertical u horizontal"
-
-#: desktop-properties/property-background.c:1061
 msgid "ORIENT"
 msgstr "ORIENT"
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Orientación del gradiente: vertical u horizontal"
 
 #: desktop-properties/property-background.c:1062
 msgid "Use a solid fill for the background"
@@ -1302,12 +1550,12 @@ msgid "Use a gradient fill for the background"
 msgstr "Usa un gradiente de colores para el fondo"
 
 #: desktop-properties/property-background.c:1064
-msgid "Display wallpaper: tiled, centered, scaled or ratio"
-msgstr "Imágen de fondo: mosaico, centrada, redimensionada o racio"
-
-#: desktop-properties/property-background.c:1064
 msgid "MODE"
 msgstr "MODO"
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "Imágen de fondo: mosaico, centrada, redimensionada o racio"
 
 #: desktop-properties/property-bell.c:123
 msgid "Sound"
@@ -1398,6 +1646,11 @@ msgstr "Rápido"
 msgid "Slow"
 msgstr "Lento"
 
+# una mejor traducción ?
+#: desktop-properties/property-mouse.c:267
+msgid "Threshold"
+msgstr "Punto de activación"
+
 #: desktop-properties/property-mouse.c:267
 msgid "Large"
 msgstr "Grande"
@@ -1406,58 +1659,9 @@ msgstr "Grande"
 msgid "Small"
 msgstr "Pequeño"
 
-# una mejor traducción ?
-#: desktop-properties/property-mouse.c:267
-msgid "Threshold"
-msgstr "Punto de activación"
-
 #: desktop-properties/property-mouse.c:274
 msgid "Mouse"
 msgstr "Ratón"
-
-#: desktop-properties/property-screensaver.cc:146
-msgid "Settings"
-msgstr "Parámetros"
-
-#: desktop-properties/property-screensaver.cc:148
-msgid "Wait"
-msgstr "Espera"
-
-#: desktop-properties/property-screensaver.cc:149
-msgid "Min"
-msgstr "Min"
-
-#: desktop-properties/property-screensaver.cc:161
-msgid "Requires Password"
-msgstr "Requiere Contraseña"
-
-#: desktop-properties/property-screensaver.cc:170
-msgid "Use DPMS"
-msgstr "Usar DPMS"
-
-#: desktop-properties/property-screensaver.cc:179
-msgid "Priority"
-msgstr "Prioridad"
-
-#: desktop-properties/property-screensaver.cc:187
-msgid "Normal"
-msgstr "Normal"
-
-#: desktop-properties/property-screensaver.cc:188
-msgid "Low"
-msgstr "Baja"
-
-#: desktop-properties/property-screensaver.cc:234
-msgid "Screensavers"
-msgstr "Protectores de pantalla"
-
-#: desktop-properties/property-screensaver.cc:246
-msgid "Setup..."
-msgstr "Configuración..."
-
-#: desktop-properties/property-screensaver.cc:356
-msgid " Screensaver "
-msgstr " Protector de pantalla "
 
 #: desktop-properties/property-ui.c:55
 msgid "Default Gtk setting [FIXME - Describe this better]"
@@ -1497,7 +1701,8 @@ msgstr "Las ventanas de diálogo son como las demás ventanas"
 
 #: desktop-properties/property-ui.c:74
 msgid "Dialogs are treated specially by window manager"
-msgstr "Las ventanas de diálogo son tratadas de manera especial por el gestor de "
+msgstr ""
+"Las ventanas de diálogo son tratadas de manera especial por el gestor de "
 "ventanas"
 
 #: desktop-properties/property-ui.c:81
@@ -1513,21 +1718,21 @@ msgid "Modal"
 msgstr "Modal"
 
 #: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:766
-#: panel/panel_config.c:302
+#: panel/panel_config.c:297
 msgid "Left"
 msgstr "Izquierda"
 
 #: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:767
-#: panel/panel_config.c:313
+#: panel/panel_config.c:308
 msgid "Right"
 msgstr "Derecha"
 
 #. Top Position
-#: desktop-properties/property-ui.c:91 panel/panel_config.c:280
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:275
 msgid "Top"
 msgstr "Arriba"
 
-#: desktop-properties/property-ui.c:92 panel/panel_config.c:291
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:286
 msgid "Bottom"
 msgstr "Abajo"
 
@@ -1549,7 +1754,8 @@ msgstr "Usar barra de estado en vez del diálogo siempre que sea posible"
 
 #: desktop-properties/property-ui.c:221
 msgid "Place dialogs over application window when possible"
-msgstr "Poner las ventanas de diálogo encima de las aplicaciones siempre que posible"
+msgstr ""
+"Poner las ventanas de diálogo encima de las aplicaciones siempre que posible"
 
 #: desktop-properties/property-ui.c:232
 msgid "Dialogs"
@@ -1610,6 +1816,50 @@ msgstr "Posición de la etiqueta del bloc de notas MDI"
 #: desktop-properties/property-ui.c:344
 msgid "MDI"
 msgstr "MDI"
+
+#: desktop-properties/property-screensaver.cc:146
+msgid "Settings"
+msgstr "Parámetros"
+
+#: desktop-properties/property-screensaver.cc:148
+msgid "Wait"
+msgstr "Espera"
+
+#: desktop-properties/property-screensaver.cc:149
+msgid "Min"
+msgstr "Min"
+
+#: desktop-properties/property-screensaver.cc:161
+msgid "Requires Password"
+msgstr "Requiere Contraseña"
+
+#: desktop-properties/property-screensaver.cc:170
+msgid "Use DPMS"
+msgstr "Usar DPMS"
+
+#: desktop-properties/property-screensaver.cc:179
+msgid "Priority"
+msgstr "Prioridad"
+
+#: desktop-properties/property-screensaver.cc:187
+msgid "Normal"
+msgstr "Normal"
+
+#: desktop-properties/property-screensaver.cc:188
+msgid "Low"
+msgstr "Baja"
+
+#: desktop-properties/property-screensaver.cc:234
+msgid "Screensavers"
+msgstr "Protectores de pantalla"
+
+#: desktop-properties/property-screensaver.cc:246
+msgid "Setup..."
+msgstr "Configuración..."
+
+#: desktop-properties/property-screensaver.cc:356
+msgid " Screensaver "
+msgstr " Protector de pantalla "
 
 #: desktop-properties/xlockmore.cc:156
 msgid "XLockMore Properties"
@@ -1732,7 +1982,8 @@ msgstr "Falló en crear el archivo."
 msgid ""
 "You can't add an entry to that folder.\n"
 "You do not have the proper permissions."
-msgstr "No puede añadir una entrada en esa carpeta.\n"
+msgstr ""
+"No puede añadir una entrada en esa carpeta.\n"
 "Vd. no tiene los permisos adecuados."
 
 #: gmenu/dialogs.c:128 gmenu/gmenu.c:85
@@ -1763,7 +2014,8 @@ msgstr "No puede borrar una carpeta raíz."
 msgid ""
 "You can't delete that file.\n"
 "You do not have the proper permissions."
-msgstr "No puede borrar este archivo.\n"
+msgstr ""
+"No puede borrar este archivo.\n"
 "Vd. no tiene los permisos adecuados."
 
 #: gmenu/dialogs.c:231
@@ -1778,7 +2030,8 @@ msgstr "¿Borrar carpeta vacía?"
 msgid ""
 "Cannot delete folder.\n"
 "To delete a folder. it must be empty."
-msgstr "No puede borrar la carpeta.\n"
+msgstr ""
+"No puede borrar la carpeta.\n"
 "Para borrar una carpeta tiene que estar vacía."
 
 #: gmenu/dialogs.c:247
@@ -1793,7 +2046,8 @@ msgstr "El campo de texto Nombre no puede estar vacio."
 msgid ""
 "You can't edit an entry in that folder.\n"
 "You do not have the proper permissions."
-msgstr "No puede editar una entrada en esta carpeta.\n"
+msgstr ""
+"No puede editar una entrada en esta carpeta.\n"
 "Vd. no tiene los permisos adecuados."
 
 #: gmenu/dialogs.c:394
@@ -1844,6 +2098,12 @@ msgstr "_Ordenar Carpeta"
 msgid "Sort Folder _Recursive"
 msgstr "Ordenar Carpeta _Recursivamente"
 
+#. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1185
+msgid "_About..."
+msgstr "_Acerca..."
+
 #: gmenu/gmenu.c:74
 msgid "_File"
 msgstr "_Archivo"
@@ -1869,12 +2129,12 @@ msgid "Delete selected menu item"
 msgstr "Borrar el elemento de menú seleccionado"
 
 #: gmenu/gmenu.c:90
-msgid "Move selected menu up"
-msgstr "Mover el menú seleccionado hacia arriba"
-
-#: gmenu/gmenu.c:90
 msgid "Move up"
 msgstr "Hacia arriba"
+
+#: gmenu/gmenu.c:90
+msgid "Move selected menu up"
+msgstr "Mover el menú seleccionado hacia arriba"
 
 #: gmenu/gmenu.c:92
 msgid "Move down"
@@ -1904,7 +2164,8 @@ msgstr "Editor de Menú GNOME"
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
-msgstr "Distribuido bajo los términos de la licencia GPL de GNU.\n"
+msgstr ""
+"Distribuido bajo los términos de la licencia GPL de GNU.\n"
 "Editor de Menú GNOME. Le permite editar los menues del Panel."
 
 #: gmenu/order.c:63
@@ -1930,7 +2191,7 @@ msgid "GNOME"
 msgstr "GNOME"
 
 #. system's menu tree
-#: gmenu/tree.c:543 panel/menu.c:1509 panel/menu.c:1546 panel/menu.c:1768
+#: gmenu/tree.c:543 panel/menu.c:1512 panel/menu.c:1549 panel/menu.c:1771
 msgid "System Menus"
 msgstr "Menú Sistema"
 
@@ -1939,7 +2200,7 @@ msgid "Top of system menus"
 msgstr "Raíz de los menues sistema"
 
 #. user's menu tree
-#: gmenu/tree.c:560 panel/menu.c:1529 panel/menu.c:1556 panel/menu.c:1779
+#: gmenu/tree.c:560 panel/menu.c:1532 panel/menu.c:1559 panel/menu.c:1782
 msgid "User Menus"
 msgstr "Menues Usuario"
 
@@ -1969,7 +2230,8 @@ msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
 "configuration of the new class?"
-msgstr "Vd. cambió la clase de esta ventana. ¿Desea reconfigurar \n"
+msgstr ""
+"Vd. cambió la clase de esta ventana. ¿Desea reconfigurar \n"
 "la ventana para que corresponda a los valores por omisión \n"
 "de la nuava clase?"
 
@@ -2067,11 +2329,6 @@ msgstr "Transparente"
 msgid "Background should be shaded (slow)"
 msgstr "Fondo en degradado (lento)"
 
-# gnome-terminal/gnome-terminal.c:801
-#: gnome-terminal/gnome-terminal.c:1024
-msgid "Colors"
-msgstr "Colores"
-
 #. Color palette
 #: gnome-terminal/gnome-terminal.c:1027
 msgid "Color palette:"
@@ -2123,29 +2380,25 @@ msgstr "_Esconder barra de menú"
 msgid "_Show menubar"
 msgstr "_Ver barra de menú"
 
-#: gnome-terminal/gnome-terminal.c:1185
-msgid "_About..."
-msgstr "_Acerca..."
-
 #: gnome-terminal/gnome-terminal.c:1195
 msgid "Terminal"
 msgstr "Terminal"
 
 #: gnome-terminal/gnome-terminal.c:1767
-msgid "CLASS"
-msgstr "CLASE"
-
-#: gnome-terminal/gnome-terminal.c:1767
 msgid "Terminal class name"
 msgstr "Nombre de la clase del terminal"
 
-#: gnome-terminal/gnome-terminal.c:1770
-msgid "FONT"
-msgstr "FUENTE"
+#: gnome-terminal/gnome-terminal.c:1767
+msgid "CLASS"
+msgstr "CLASE"
 
 #: gnome-terminal/gnome-terminal.c:1770
 msgid "Specifies font name"
 msgstr "Indicar nombre de la fuente"
+
+#: gnome-terminal/gnome-terminal.c:1770
+msgid "FONT"
+msgstr "FUENTE"
 
 #: gnome-terminal/gnome-terminal.c:1773
 msgid "Do not start up shells as logins shells"
@@ -2155,41 +2408,41 @@ msgstr "No abrir los shells como shells de login"
 msgid "Start up shells as logins shells"
 msgstr "Abrir los shells como shells de login"
 
-#: gnome-terminal/gnome-terminal.c:1779 gsm/session-properties.c:256
-msgid "GEOMETRY"
-msgstr "GEOMETRÍA"
-
 #: gnome-terminal/gnome-terminal.c:1779
 msgid "Specifies the geometry for the main window"
 msgstr "Indicar la geometría de la ventana principal"
 
-#: gnome-terminal/gnome-terminal.c:1782
-msgid "COMMAND"
-msgstr "COMANDO"
+#: gnome-terminal/gnome-terminal.c:1779 gsm/session-properties.c:256
+msgid "GEOMETRY"
+msgstr "GEOMETRÍA"
 
 #: gnome-terminal/gnome-terminal.c:1782
 msgid "Execute this program instead of a shell"
 msgstr "Ejecutar este programa en vez del shell"
 
+#: gnome-terminal/gnome-terminal.c:1782
+msgid "COMMAND"
+msgstr "COMANDO"
+
 #: gnome-terminal/gnome-terminal.c:1785
 msgid "Foreground color"
 msgstr "Color de primer plano"
 
-#: gnome-terminal/gnome-terminal.c:1788 panel/panel_config.c:747
+#: gnome-terminal/gnome-terminal.c:1788 panel/panel_config.c:742
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: gnome-terminal/gnome-terminal.c:1791 panel/main.c:73
+#: gnome-terminal/gnome-terminal.c:1791 panel/main.c:74
 msgid "ID"
 msgstr "ID"
 
 #: gnome-terminal/gnome-terminal.c:1794
-msgid "UTMP"
-msgstr "UTMP"
-
-#: gnome-terminal/gnome-terminal.c:1794
 msgid "Update utmp/wtmp entries"
 msgstr "Actualizar las entradas de utmp/wtmp"
+
+#: gnome-terminal/gnome-terminal.c:1794
+msgid "UTMP"
+msgstr "UTMP"
 
 #: gnome-terminal/gnome-terminal.c:1797
 msgid "Do not update utmp/wtmp entries"
@@ -2241,42 +2494,42 @@ msgid "Remove"
 msgstr "Quitar"
 
 #: help-browser/gnome-help-browser.c:121
-msgid "X"
-msgstr "X"
-
-#: help-browser/gnome-help-browser.c:121
 msgid "X position of window"
 msgstr "Posición X de la ventana"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y"
-msgstr "Y"
+#: help-browser/gnome-help-browser.c:121
+msgid "X"
+msgstr "X"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y position of window"
 msgstr "Posición Y de la ventana"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "WIDTH"
-msgstr "Ancho"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y"
+msgstr "Y"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "Width of window"
 msgstr "Ancho de la ventana"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "HEIGHT"
-msgstr "Alto"
+#: help-browser/gnome-help-browser.c:123
+msgid "WIDTH"
+msgstr "Ancho"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "Height of window"
 msgstr "Tamaño de la ventana"
 
+#: help-browser/gnome-help-browser.c:124
+msgid "HEIGHT"
+msgstr "Alto"
+
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
 msgstr "Nivel del rastreo de depuración"
 
-#: help-browser/gnome-help-browser.c:348 help-browser/window.c:699
+#: help-browser/gnome-help-browser.c:348 help-browser/window.c:701
 msgid "Gnome Help Browser"
 msgstr "Visualisador de ayuda de Gnome"
 
@@ -2284,7 +2537,8 @@ msgstr "Visualisador de ayuda de Gnome"
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
-msgstr "El GNOME Help Browser permite acceder facilmente a todos los recursos de "
+msgstr ""
+"El GNOME Help Browser permite acceder facilmente a todos los recursos de "
 "documentación de su sistema"
 
 #: help-browser/gnome-help-browser.c:610
@@ -2336,16 +2590,16 @@ msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Error: archivo no encontrado</h2></body>"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Total"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Último"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Total"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2438,7 +2692,8 @@ msgid ""
 "<HTML>\n"
 "<BODY>\n"
 "<H2>Results of the substring search for the string "
-msgstr "<HTML>\n"
+msgstr ""
+"<HTML>\n"
 "<BODY>\n"
 "<H2>Resultados de la búsqueda con la cadena "
 
@@ -2449,7 +2704,8 @@ msgid ""
 "<H3>Manual Pages</H3>\n"
 "<p>\n"
 "<UL>\n"
-msgstr "<p>\n"
+msgstr ""
+"<p>\n"
 "<br>\n"
 "<H3>Páginas de Manual</H3>\n"
 "<p>\n"
@@ -2463,7 +2719,8 @@ msgid ""
 "<H3>GNU Info Pages</H3>\n"
 "<p>\n"
 "<UL>\n"
-msgstr "\n"
+msgstr ""
+"\n"
 "<p>\n"
 "<br>\n"
 "<H3>Páginas GNU Info</H3>\n"
@@ -2478,7 +2735,8 @@ msgid ""
 "<H3>GNOME Help Pages</H3>\n"
 "<p>\n"
 "<UL>\n"
-msgstr "\n"
+msgstr ""
+"\n"
 "<p>\n"
 "<br>\n"
 "<H3>Páginas de Ayuda GNOME</H3>\n"
@@ -2593,17 +2851,18 @@ msgstr "Marcas"
 msgid "Help on Help"
 msgstr "Ayuda sobre la ayuda"
 
-#: help-browser/window.c:821
+#: help-browser/window.c:823
 #, c-format
 msgid ""
 "Error loading document:\n"
 "\n"
 "%s"
-msgstr "Error al cargar el documento:\n"
+msgstr ""
+"Error al cargar el documento:\n"
 "\n"
 "%s"
 
-#: help-browser/window.c:824
+#: help-browser/window.c:826
 msgid "Ok"
 msgstr "Ok"
 
@@ -2619,270 +2878,271 @@ msgstr "Quitar del panel"
 msgid "Move applet"
 msgstr "Mover applet"
 
-#: panel/drawer.c:119
+#: panel/drawer.c:120
 msgid "Tooltip/Name"
 msgstr "Tooltip/Nombre"
 
-#: panel/drawer.c:123
+#: panel/drawer.c:124
 msgid "Icon"
 msgstr "Ícono"
 
-#: panel/drawer.c:127
+#: panel/drawer.c:128
 msgid "Applet appearance"
 msgstr "Aspecto del Applet"
 
-#: panel/drawer.c:134
+#: panel/drawer.c:135
 msgid "Drawer handle"
 msgstr "Tirador del cajón"
 
-#: panel/drawer.c:136
+#: panel/drawer.c:137
 msgid "Disable hidebutton"
 msgstr "Desactivar el botón de escondido"
 
-#: panel/drawer.c:146
+#: panel/drawer.c:147
 msgid "Disable hidebutton arrow"
 msgstr "Desactivar flecha del botón de escondido"
 
-#: panel/drawer.c:161 panel/menu.c:1477
+#: panel/drawer.c:162 panel/menu.c:1480
 msgid "Drawer"
 msgstr "Cajón"
 
-#: panel/launcher.c:111
+#: panel/launcher.c:114
 msgid "App"
 msgstr "Aplicación"
 
-#: panel/launcher.c:203
+#: panel/launcher.c:204
 msgid "Launcher properties"
 msgstr "Propiedades del lanzado de programas"
 
-#: panel/launcher.c:288
+#: panel/launcher.c:289
 msgid "Create launcher applet"
 msgstr "Crear un applet de lanzado de programas"
 
-#: panel/logout.c:26 panel/menu.c:1587 panel/menu.c:1744
+#: panel/logout.c:26 panel/menu.c:1590 panel/menu.c:1747
 msgid "Log out"
 msgstr "Terminar sesión"
 
-#: panel/main.c:72
+#: panel/main.c:73
 msgid "Discard session"
 msgstr "Descarta sesión"
 
-#: panel/menu.c:81
+#: panel/menu.c:83
 msgid "The GNOME Panel"
 msgstr "El Panel de GNOME"
 
-#: panel/menu.c:84
+#: panel/menu.c:86
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
-msgstr "Este programa es reponsable de lanzar otras aplicaciones, de incluir "
+msgstr ""
+"Este programa es reponsable de lanzar otras aplicaciones, de incluir "
 "pequeños applets dentro de si mismo, de la paz en el mundo, y de cuelgues "
 "aleatorios del sistema X."
 
-#: panel/menu.c:329 panel/menu.c:364
+#: panel/menu.c:332 panel/menu.c:367
 msgid "Desktop entry properties"
 msgstr "Propiedades de la entrada escritorio"
 
-#: panel/menu.c:428
+#: panel/menu.c:431
 msgid "Add this launcher to panel"
 msgstr "Añadir este lanzador al panel"
 
-#: panel/menu.c:436
+#: panel/menu.c:439
 msgid "Add this as drawer to panel"
 msgstr "Añadir este cajón al panel"
 
-#: panel/menu.c:444
+#: panel/menu.c:447
 msgid "Add this as menu to panel"
 msgstr "Añadir este menú al panel"
 
-#: panel/menu.c:465
+#: panel/menu.c:468
 msgid "Properties ..."
 msgstr "Propiedades ..."
 
-#: panel/menu.c:643 panel/menu.c:714
+#: panel/menu.c:646 panel/menu.c:717
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:865
+#: panel/menu.c:868
 msgid "Can't get goad_id from desktop entry!"
 msgstr "¡Imposible de recoger goad_id de la entrada del escritorio!"
 
-#: panel/menu.c:1421
+#: panel/menu.c:1424
 msgid "Applets"
 msgstr "Applets"
 
-#: panel/menu.c:1484 panel/panel_config.c:873
+#: panel/menu.c:1487 panel/panel_config.c:868
 msgid "Edge Panel"
 msgstr "Panel de lado"
 
-#: panel/menu.c:1491 panel/panel_config.c:879
+#: panel/menu.c:1494 panel/panel_config.c:874
 msgid "Corner Panel"
 msgstr "Panel de esquina"
 
-#: panel/menu.c:1572
+#: panel/menu.c:1575
 msgid "Remove this panel"
 msgstr "Quitar este panel"
 
-#: panel/menu.c:1617
+#: panel/menu.c:1620
 msgid "Add applet"
 msgstr "Añadir applet"
 
-#: panel/menu.c:1626
+#: panel/menu.c:1629
 msgid "Add new panel"
 msgstr "Añadir un nuevo panel"
 
-#: panel/menu.c:1634
+#: panel/menu.c:1637
 msgid "Add main menu"
 msgstr "Añadir menú principal"
 
-#: panel/menu.c:1641
+#: panel/menu.c:1644
 msgid "Add log out button"
 msgstr "Añadir botón de salida de sesión"
 
-#: panel/menu.c:1649
+#: panel/menu.c:1652
 msgid "Add swallowed app"
 msgstr "Añadir aplicación miniaturizada"
 
-#: panel/menu.c:1655
+#: panel/menu.c:1658
 msgid "Add new launcher"
 msgstr "Añadir un nuevo lanzador"
 
-#: panel/menu.c:1666
+#: panel/menu.c:1669
 msgid "This panel properties..."
 msgstr "Propiedades de este panel..."
 
-#: panel/menu.c:1676
+#: panel/menu.c:1679
 msgid "Global properties..."
 msgstr "Propiedades globales..."
 
-#: panel/menu.c:1704
+#: panel/menu.c:1707
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/menu.c:1711
+#: panel/menu.c:1714
 msgid "Lock screen"
 msgstr "Bloquear la pantalla"
 
-#: panel/menu.c:1732
+#: panel/menu.c:1735
 msgid "About GNOME..."
 msgstr "Acerca de GNOME..."
 
-#: panel/menu.c:1996
+#: panel/menu.c:1997
 msgid "Can't open directory, using main menu!"
 msgstr "¡Imposible de abrir el directorio, usando el menú principal!"
 
-#: panel/menu.c:2090
+#: panel/menu.c:2091
 msgid "Menu properties"
 msgstr "Propiedades del menú"
 
-#: panel/menu.c:2097
+#: panel/menu.c:2098
 msgid "Menu Type"
 msgstr "Tipo Menú"
 
-#: panel/menu.c:2104 panel/menu.c:2124
+#: panel/menu.c:2105 panel/menu.c:2125
 msgid "Main Menu"
 msgstr "Menú Principal"
 
-#: panel/menu.c:2115 panel/menu.c:2165
+#: panel/menu.c:2116 panel/menu.c:2166
 msgid "Normal Menu"
 msgstr "Menú Normal"
 
-#: panel/menu.c:2134
+#: panel/menu.c:2135
 msgid "Both System and User menus on the same menu"
 msgstr "Menues Sistema y Usuario ambos en el mismo menú"
 
-#: panel/menu.c:2146
+#: panel/menu.c:2147
 msgid "System on the main menu, User menu as a submenu"
 msgstr "Menú Sistema como menú principal, menú de Usuario como submenú"
 
-#: panel/menu.c:2157
+#: panel/menu.c:2158
 msgid "User on the main menu, System menu as a submenu"
 msgstr "Menú Usuario como menú principal, menú Sistema como submenú"
 
-#: panel/menu.c:2175
+#: panel/menu.c:2176
 msgid "Menu path"
 msgstr "Ruta para Menú"
 
 #. Position frame
-#: panel/panel_config.c:267 panel/panel_config.c:444
+#: panel/panel_config.c:262 panel/panel_config.c:439
 msgid "Position"
 msgstr "Posición"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:341
+#: panel/panel_config.c:336
 msgid "Minimize Options"
 msgstr "Opciones de minimización"
 
 #. Stay Put
-#: panel/panel_config.c:352
+#: panel/panel_config.c:347
 msgid "Explicitly Hide"
 msgstr "Esconder manualmente"
 
-#: panel/panel_config.c:365
+#: panel/panel_config.c:360
 msgid "Auto Hide"
 msgstr "Esconderse automáticamente"
 
 #. Hidebuttons disable
-#: panel/panel_config.c:376 panel/panel_config.c:569
+#: panel/panel_config.c:371 panel/panel_config.c:564
 msgid "Disable hidebuttons"
 msgstr "Desactivar botones de escondido"
 
 #. Arrow disable
-#: panel/panel_config.c:387 panel/panel_config.c:580
+#: panel/panel_config.c:382 panel/panel_config.c:575
 msgid "Disable hidebutton arrows"
 msgstr "Desactivar flechas de los botones de escondido"
 
 #. North East Position
-#: panel/panel_config.c:457
+#: panel/panel_config.c:452
 msgid "North East"
 msgstr "Noreste"
 
-#: panel/panel_config.c:468
+#: panel/panel_config.c:463
 msgid "South West"
 msgstr "Suroeste"
 
-#: panel/panel_config.c:479
+#: panel/panel_config.c:474
 msgid "North West"
 msgstr "Noroeste"
 
-#: panel/panel_config.c:490
+#: panel/panel_config.c:485
 msgid "South East"
 msgstr "Sureste"
 
 #. Orientation frame
-#: panel/panel_config.c:522
+#: panel/panel_config.c:517
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Hidebuttons frame
-#: panel/panel_config.c:557
+#: panel/panel_config.c:552
 msgid "Hidebutton Options"
 msgstr "Opciones de botones de escondido"
 
 #. selector frame
-#: panel/panel_config.c:672 panel/panel_config.c:894
+#: panel/panel_config.c:667 panel/panel_config.c:887
 msgid "Background"
 msgstr "Fondo"
 
 #. standard background
-#: panel/panel_config.c:682
+#: panel/panel_config.c:677
 msgid "Standard"
 msgstr "Estándar"
 
-#: panel/panel_config.c:690
+#: panel/panel_config.c:685
 msgid "Pixmap"
 msgstr "Pixmap"
 
 #. image frame
-#: panel/panel_config.c:704
+#: panel/panel_config.c:699
 msgid "Image file"
 msgstr "Archivo de imágen"
 
-#: panel/panel_config.c:733
+#: panel/panel_config.c:728
 msgid "Scale image to fit panel"
 msgstr "Redimencionar para que quepa en el panel"
 
-#: panel/panel_config.c:862
+#: panel/panel_config.c:857
 msgid "Panel properties"
 msgstr "Propiedades del panel"
 
@@ -3018,11 +3278,11 @@ msgstr "Configuración global del panel"
 msgid "Animation"
 msgstr "Animación"
 
-#: panel/session.c:588
+#: panel/session.c:613
 msgid "Really log out?"
 msgstr "¿Desconectar realmente?"
 
-#: panel/session.c:602
+#: panel/session.c:627
 msgid "Ask next time"
 msgstr "Preguntar la próxima vez"
 
@@ -3042,3 +3302,14 @@ msgstr "Comando (opcional)"
 msgid "Height"
 msgstr "Alto"
 
+#~ msgid "Ticker Information (unimplemented)"
+#~ msgstr "Información teletipo (no implementado)"
+
+#~ msgid "Article index file:"
+#~ msgstr "Archivo de índice de artículos:"
+
+#~ msgid "Image Server Url:"
+#~ msgstr "URL servidor de imágenes:"
+
+#~ msgid "Image path:"
+#~ msgstr "Ruta imágen:"
