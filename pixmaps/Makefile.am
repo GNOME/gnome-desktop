@@ -124,7 +124,8 @@ pixmap_DATA =					\
 	gnome-month.png				\
 	gnome-set-time.png			\
 	panel-corner-right.png			\
-	panel-corner-left.png
+	panel-corner-left.png			\
+	cdeappmenu.png 
 
 # tilesdir = $(datadir)/pixmaps/tiles
 # tiles_DATA =					\
