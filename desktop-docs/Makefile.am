@@ -8,14 +8,20 @@
 gnome_intro_helpdir = $(datadir)/gnome/help/gnome-intro/C
 
 GNOME_INTRO_HTML_FILES = \
-	$(srcdir)/gnome-intro/book01.html $(srcdir)/gnome-intro/c0102.html \
-	$(srcdir)/gnome-intro/c0202.html $(srcdir)/gnome-intro/c0205.html \
-	$(srcdir)/gnome-intro/c0208.html $(srcdir)/gnome-intro/f0102.html \
-	$(srcdir)/gnome-intro/c01.html $(srcdir)/gnome-intro/c02.html \
-	$(srcdir)/gnome-intro/c0203.html $(srcdir)/gnome-intro/c0206.html \
-	$(srcdir)/gnome-intro/f01.html $(srcdir)/gnome-intro/c0101.html \
-	$(srcdir)/gnome-intro/c0201.html $(srcdir)/gnome-intro/c0204.html \
-	$(srcdir)/gnome-intro/c0207.html $(srcdir)/gnome-intro/f0101.html
+	$(srcdir)/gnome-intro/c93191.html \
+	$(srcdir)/gnome-intro/f13.html \
+	$(srcdir)/gnome-intro/a-sample-session.html \
+	$(srcdir)/gnome-intro/c93230.html \
+	$(srcdir)/gnome-intro/f1346.html \
+	$(srcdir)/gnome-intro/a-sample-session75.html \
+	$(srcdir)/gnome-intro/c93302.html \
+	$(srcdir)/gnome-intro/gnome-intro.html \
+	$(srcdir)/gnome-intro/c93.html \
+	$(srcdir)/gnome-intro/c93372.html \
+	$(srcdir)/gnome-intro/c93127.html \
+	$(srcdir)/gnome-intro/c93412.html \
+	$(srcdir)/gnome-intro/c93175.html \
+	$(srcdir)/gnome-intro/docbook.css*
 
 GNOME_INTRO_PICTURES = $(srcdir)/pix/terminal.gif \
 	$(srcdir)/pix/gedit-2files.gif \
@@ -67,8 +73,8 @@ EXTRA_DIST = $(INTRO_EXTRA_DIST) $(GNOME_INTRO_HTML_FILES) \
 
 
 
-manual-html: gnome-intro/book01.html
-	cp gnome-intro/book01.html gnome-intro.html
+manual-html: gnome-intro/gnome-intro.html
+	cp gnome-intro/gnome-intro.html gnome-intro.html
 manual-ps: gnome-intro.ps
 manual-rtf: gnome-intro.rtf
 manual-all: manual-html manual-ps manual-rtf
@@ -79,19 +85,19 @@ manual-all: manual-html manual-ps manual-rtf
 %.ps: %.dvi
 	dvips -o $@ $<
 
-%/book01.html: %.sgml
+%/%.html: %.sgml
 	db2html $<
 
 %.rtf: %.sgml
 	db2rtf $<
 
-gnome-intro.html: gnome-intro/book01.html
+gnome-intro.html: gnome-intro/gnome-intro.html
 	cp $< $@
 
 # now a big ugly kludge: to handle the CVS directory that developers
 # will have in the gnome-intro directory.  eventually I'll handle this
 # by calling it gnome-intro-prebuilt or something
-gnome-intro/book01.html: gnome-intro.sgml
+gnome-intro/gnome-intro.html: gnome-intro.sgml
 	db2html gnome-intro.sgml
 	-mkdir gnome-intro/pix
 	cp pix/*.gif gnome-intro/pix
@@ -99,7 +105,3 @@ gnome-intro/book01.html: gnome-intro.sgml
 		echo "CVS directory got moved -- moving it back"; \
 		mv gnome-intro.junk/CVS $(srcdir)/gnome-intro/CVS; \
 	else echo "CVS directory did not get moved -- all is OK"; fi
-#gnome-intro.ps: gnome-intro.dvi
-#	dvips gnome-intro.dvi
-#gnome-intro.rtf: gnome-intro.sgml
-#	db2rtf gnome-intro.sgml
