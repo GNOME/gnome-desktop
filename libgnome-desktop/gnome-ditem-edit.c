@@ -174,18 +174,23 @@ enum {
 #define TYPE_STRING "GnomeDitemEdit:TypeString"
 
 static void
-add_menuitem (GtkWidget *menu, const char *str, const char *label,
-	      const char *select, GtkWidget **selected)
+add_menuitem (GtkWidget   *menu,
+	      const char  *str,
+	      const char  *label,
+	      const char  *select,
+	      GtkWidget  **selected)
 {
-	GtkWidget *item = gtk_menu_item_new_with_label (label);
+	GtkWidget *item;
+
+	item = gtk_menu_item_new_with_label (label);
 	gtk_widget_show (item);
+
 	g_object_set_data_full (G_OBJECT (item), TYPE_STRING,
-				g_strdup (str),
-				(GDestroyNotify)g_free);
+				g_strdup (str), (GDestroyNotify) g_free);
+
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-	if (select != NULL &&
-	    strcmp (str, select) == 0)
+	if (selected && select && !strcmp (str, select))
 		*selected = item;
 }
 
@@ -225,14 +230,22 @@ setup_option (GnomeDItemEdit *dee,
 		break;
 	}
 
-	if (select != NULL &&
-	    selected == NULL)
+	if (select && selected)
 		add_menuitem (menu, select, _(select), select, &selected);
 
-	if (selected != NULL)
-		gtk_menu_item_activate (GTK_MENU_ITEM (selected));
-
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (dee->_priv->type_option), menu);
+
+	if (selected) {
+		GList *children;
+		int    pos;
+
+		children = gtk_container_get_children (GTK_CONTAINER (menu));
+		pos = g_list_index (children, selected);
+		g_list_free (children);	
+
+		gtk_option_menu_set_history (GTK_OPTION_MENU (dee->_priv->type_option), pos);
+	}
+
 }
 
 static const char *
