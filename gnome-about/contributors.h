@@ -197,6 +197,7 @@ static gchar *contributors[] = {
 	N_("Alexandre Muniz"),
 	/* Name in Hangeul is: Ub0a8 Uc131 Ud604 */
 	N_("Sung-Hyun Nam"),
+	"Deepa Natarajan",
 	"Karl Nelson",
 	"Asger Alstrup Nielsen",
 	"Seth Nickell",
@@ -308,7 +309,6 @@ static gchar *contributors[] = {
 	"Sascha Ziemann",
 	"Michael Zucchi",
 	"Jason van Zyl",
-	"Deepa Natarajan",
 	"",
 	""
 };
