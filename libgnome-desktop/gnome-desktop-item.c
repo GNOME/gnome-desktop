@@ -1080,7 +1080,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
 }
 
 /* replace %s, %f, %u or %F in exec with file and run */
-static int
+static int G_GNUC_UNUSED
 ditem_exec_single_file (const GnomeDesktopItem *item, const char *exec, char *file)
 {
 	const char **temp_argv = NULL;
@@ -1169,7 +1169,7 @@ stripstreq(const char *s1, const char *s2)
 
 /* replace %s, %f, %u or %F in exec with files and run, the trick here is
    that we will only replace %? in case it is a complete argument */
-static int
+static int G_GNUC_UNUSED
 ditem_exec_multiple_files (const GnomeDesktopItem *item, const char *exec,
 			   GList *files)
 {
@@ -1278,7 +1278,7 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 				  GList *uri_list)
 {
 	GList *li;
-	gboolean any_urls = FALSE;
+	gboolean G_GNUC_UNUSED any_urls = FALSE;
 	GList *file_list = NULL;
 	int ret = -1;
 
