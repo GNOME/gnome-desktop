@@ -150,6 +150,7 @@ static gchar *contributors[] = {
 	"Peter Kirchgessner",
 	"Helmut K\xc3\xb6" "berle",
 	"Alfredo Kojima",
+	"Martin Kretzschmar",
 	"Andrew Kuchling",
 	"Stephan Kulow",
 	"Martynas Kunigelis",
