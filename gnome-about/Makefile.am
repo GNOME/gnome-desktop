@@ -1,6 +1,7 @@
-INCLUDES = 			\
-	$(GNOME_ABOUT_CFLAGS)	\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale\""
+INCLUDES =		 				\
+	$(GNOME_ABOUT_CFLAGS)				\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale\""	\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""
 
 LDADD = \
 	$(GNOME_ABOUT_LIBS)

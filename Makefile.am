@@ -7,9 +7,9 @@ SUBDIRS =			\
 	desktop-docs		\
 	man
 
-EXTRA_DIST = \
-	gnome-core.spec.in	\
-	gnome-core.spec		\
+EXTRA_DIST =			\
+	gnome-desktop.spec.in	\
+	gnome-desktop.spec	\
 	COPYING-DOCS		\
 	HACKING			\
 	sgmldocs.make		\
