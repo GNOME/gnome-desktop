@@ -10,6 +10,7 @@ Order_DATA = \
 
 Directory_DATA = \
 	Root.directory		\
+	Accessories.directory   \
 	Applications.directory	\
 	Graphics.directory	\
 	System.directory	\
