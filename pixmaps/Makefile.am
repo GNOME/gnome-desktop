@@ -31,11 +31,8 @@ pixmap_DATA =					\
 	gnome-logo-icon.png			\
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
-	gnome-mailcheck.png         		\
 	gnome-mdi.png				\
 	gnome-mnemonic.png			\
-	gnome-modem.png             		\
-	gnome-money.png				\
 	gnome-monitor.png           		\
 	gnome-networktool.png			\
 	gnome-news.png				\
