@@ -7,7 +7,6 @@ BITMAPS     = \
 	gnome-amusements.png        \
 	gnome-applications.png      \
 	gnome-audio2.png			\
-	gnome-balsa2.png			\
 	gnome-calc2.png				\
 	gnome-calendar.png			\
 	gnome-cardgame.png			\

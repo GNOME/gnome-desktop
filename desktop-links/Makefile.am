@@ -53,7 +53,6 @@ Settings_DATA =	\
 	Imlib_config.desktop
 
 Internet_DATA = \
-	Balsa.desktop		\
 	Tkrat.desktop
 
 Root_DATA = \
