@@ -1,11 +1,9 @@
 AUTOMAKE_OPTIONS = 1.4
 
-INCLUDES = \
-	-I.			\
-	-I$(srcdir)		\
-	-I$(top_builddir)/panel	\
-	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
-	-DGNOME_CORE_INTERNAL	\
+INCLUDES =						\
+	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\"	\
+	-DGNOME_CORE_INTERNAL				\
+	$(WARN_CFLAGS)					\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la

@@ -236,32 +236,41 @@ readbuf_new_from_string (const char *uri, const char *string, gssize length)
 }
 
 static gboolean
-readbuf_rewind (ReadBuf *rb, GError *error)
+readbuf_rewind (ReadBuf *rb, GError **error)
 {
 	GnomeVFSResult result;
 
 	rb->eof = FALSE;
 	rb->pos = 0;
+
 	if (!rb->past_first_read)
 		return TRUE;
+
 	rb->size = 0;
-	if (rb->handle != NULL) {
-		if (gnome_vfs_seek (rb->handle,
-				    GNOME_VFS_SEEK_START, 0) == GNOME_VFS_OK)
+
+	if (rb->handle) {
+		result = gnome_vfs_seek (
+				rb->handle, GNOME_VFS_SEEK_START, 0);
+		if (result == GNOME_VFS_OK)
 			return TRUE;
+
 		gnome_vfs_close (rb->handle);
 		rb->handle = NULL;
 	}
-	result = gnome_vfs_open (&rb->handle, rb->uri,
-				 GNOME_VFS_OPEN_READ);
-	if (result == GNOME_VFS_OK)
-		return TRUE;
-	g_set_error (error,
-		     GNOME_DESKTOP_ITEM_ERROR,
-		     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-		     _("Error rewinding file '%s': %s"),
-		     rb->uri, gnome_vfs_result_to_string (result));
-	return FALSE;
+
+	result = gnome_vfs_open (
+			&rb->handle, rb->uri, GNOME_VFS_OPEN_READ);
+	if (result != GNOME_VFS_OK) {
+		g_set_error (
+			error, GNOME_DESKTOP_ITEM_ERROR,
+			GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
+			_("Error rewinding file '%s': %s"),
+			rb->uri, gnome_vfs_result_to_string (result));
+
+		return FALSE;
+	}
+
+	return TRUE;
 }
 
 static void
@@ -930,44 +939,6 @@ set_locale (GnomeDesktopItem *item, const char *key,
 	}
 }
 
-/* replace %? (ps) with a string, the string can be NULL which is the same
-   as "", it works on a vector and appends the 'tofree' with strings which
-   should be freed later, returns TRUE if it replaced something, FALSE
-   otherwise, if only_once is true we jump out after the first, it can actually
-   only replace one 'ps' per argument to avoid infinite loops (in case 'string'
-   would contain 'ps' */
-static gboolean
-replace_percentsign(int argc, char **argv, const char *ps,
-		    const char *string, GSList **tofree,
-		    gboolean only_once)
-{
-	int i;
-	gboolean ret = FALSE;
-	if (string == NULL)
-		string = "";
-	for (i = 0; i < argc; i++) {
-		char *arg = argv[i];
-		char *p = strstr (arg,ps);
-		char *s;
-		size_t start, string_len, ps_len;
-		if (p == NULL)
-			continue;
-		string_len = strlen (string);
-		ps_len = strlen (ps);
-		s = g_new (char, strlen (arg) - ps_len + string_len + 1);
-		start = p - arg;
-		strncpy (s, arg, start);
-		strcpy (&s[start], string);
-		strcpy (&s[start+string_len], &arg[start+ps_len]);
-		argv[i] = s;
-		*tofree = g_slist_prepend (*tofree, s);
-		ret = TRUE;
-		if (only_once)
-			return ret;
-	}
-	return ret;
-}
-
 static char **
 list_to_vector (GSList *list)
 {
@@ -1414,17 +1385,17 @@ ditem_execute (const GnomeDesktopItem *item,
 	       GError **error)
 {
 	char **real_argv;
-	int i, j, ret;
+	int i, ret;
 	char **term_argv = NULL;
 	int term_argc = 0;
 	GSList *vector_list;
 	GSList *args, *arg_ptr;
 	int added_status;
-	const char *working_dir;
+	const char *working_dir = NULL;
 
 	g_return_val_if_fail (item, -1);
 
-	if ( ! use_current_dir)
+	if (!use_current_dir)
 		working_dir = g_get_home_dir ();
 
 	if (gnome_desktop_item_get_boolean (item, GNOME_DESKTOP_ITEM_TERMINAL)) {
@@ -1816,7 +1787,6 @@ gnome_desktop_item_set_entry_type (GnomeDesktopItem *item,
 GnomeDesktopItemStatus
 gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 {
-	struct stat sbuf;
 	GnomeDesktopItemStatus retval;
 	GnomeVFSFileInfo *info;
 
@@ -2344,17 +2314,15 @@ void
 gnome_desktop_item_clear_localestring (GnomeDesktopItem *item,
 				       const char *attr)
 {
-	GList *li;
-	GList *list = NULL;
+	GList *l;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (item->refcount > 0);
 	g_return_if_fail (attr != NULL);
 
-	for (li = item->languages; li != NULL; li = li->next) {
-		char *language = li->data;
-		set_locale (item, attr, language, NULL);
-	}
+	for (l = item->languages; l != NULL; l = l->next)
+		set_locale (item, attr, l->data, NULL);
+
 	set (item, attr, NULL);
 }
 
@@ -2739,9 +2707,7 @@ static Encoding
 get_encoding (ReadBuf *rb)
 {
 	gboolean old_kde = FALSE;
-	int      c;
 	char     buf [BUFSIZ];
-	char    *path;
 	gboolean all_valid_utf8 = TRUE;
 
 	while (readbuf_gets (buf, sizeof (buf), rb) != NULL) {

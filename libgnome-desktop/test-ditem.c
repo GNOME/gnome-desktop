@@ -18,7 +18,6 @@ test_ditem (const char *file)
 	GnomeDesktopItemType type;
 	const gchar *text;
 	char *uri;
-	GSList *list, *c;
 	char path[256];
 
 	ditem = gnome_desktop_item_new_from_file (file,

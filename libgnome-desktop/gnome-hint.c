@@ -50,147 +50,150 @@ struct _GnomeHintPrivate {
 	GnomeCanvasItem *hint_text;
 };
 
-static void gnome_hint_class_init (GnomeHintClass *klass); 
-static void gnome_hint_object_init (GnomeHint *gnome_hint,
-		 GnomeHintClass *klass);
-static void gnome_hint_instance_init (GnomeHint *gnome_hint);
-static void gnome_hint_set_property (GObject *object, guint prop_id,
-		 const GValue *value, GParamSpec *pspec);
-static void gnome_hint_get_property (GObject *object, guint prop_id,
-		 GValue *value, GParamSpec *pspec);
-static void gnome_hint_repaint (GtkWidget *widget, GdkDrawable *drawable,
-		 GnomeHint *gnome_hint);
-static void gnome_hint_notify (GObject *object, GParamSpec *pspec);
-static void gnome_hint_finalize (GObject *object);
-static void dialog_response (GtkWindow *window, int button, gpointer data);
-static void checkbutton_clicked(GtkWidget *w, gpointer data);
-
 GNOME_CLASS_BOILERPLATE (GnomeHint, gnome_hint, GtkDialog, GTK_TYPE_DIALOG)
 
 static void
-gnome_hint_class_init (GnomeHintClass *klass) {
+dialog_response (GnomeHint *gnome_hint,
+		 int        response,
+		 gpointer   dummy)
+{
+	GnomeHintPrivate *priv;
 
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);  
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);  
+	g_return_if_fail (GNOME_IS_HINT (gnome_hint));
 
-  object_class->set_property = gnome_hint_set_property;
-  object_class->get_property = gnome_hint_get_property; 
-  object_class->notify = gnome_hint_notify;
-  object_class->finalize = gnome_hint_finalize;
+	priv = gnome_hint->_priv;
+
+        switch (response) {
+        case GNOME_HINT_RESPONSE_PREV:
+		if (!priv->curhint)
+                        return;
+
+                priv->curhint =	priv->curhint->prev;
+
+                if (!priv->curhint)
+                        priv->curhint = g_list_last (priv->hintlist);
+
+                gnome_canvas_item_set (priv->hint_text,
+				       "text", (char *) priv->curhint->data,
+				       NULL);
+                break;
+        case GNOME_HINT_RESPONSE_NEXT:
+		if (!priv->curhint)
+                        return;
+
+                priv->curhint = priv->curhint->next;
+
+                if (!priv->curhint)
+                        priv->curhint = priv->hintlist;
+
+                gnome_canvas_item_set (priv->hint_text,
+				       "text", (char *) priv->curhint->data,
+				       NULL);
+                break;
+        default:
+		gtk_widget_destroy (GTK_WIDGET (gnome_hint));
+		break;
+        }
+}
+
+static void
+checkbutton_clicked (GtkWidget *w,
+		     GnomeHint *gnome_hint)
+{
+	gconf_client_set_bool (
+		gnome_hint->_priv->client,
+		gnome_hint->_priv->startupkey,
+		gtk_toggle_button_get_active (
+			GTK_TOGGLE_BUTTON (gnome_hint->_priv->checkbutton)),
+		NULL);
+}
+
+static void 
+gnome_hint_finalize (GObject *object)
+{
+	GnomeHint *gnome_hint;
+	GList     *l;
+
+	g_return_if_fail (GNOME_IS_HINT (object));
+
+	gnome_hint = GNOME_HINT (object);
+
+	for (l = gnome_hint->_priv->hintlist; l; l = l->next)
+		g_free (l->data);
+	g_list_free (gnome_hint->_priv->hintlist);
+
+	g_free (gnome_hint->_priv->startupkey);
+
+	g_free  (gnome_hint->_priv);
+	gnome_hint->_priv = NULL;
+
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
+}
+
+static void
+gnome_hint_class_init (GnomeHintClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);  
+
+	object_class->finalize = gnome_hint_finalize;
 }
 
 static void
 gnome_hint_instance_init (GnomeHint *gnome_hint) {
 
-  GtkWidget *sw;
+	GtkWidget *sw;
+
+	gnome_hint->_priv = g_new (GnomeHintPrivate, 1);
+
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_NEVER,
+					GTK_POLICY_NEVER);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (gnome_hint)->vbox),
+			    sw, TRUE, TRUE, 0);
+
+	gnome_hint->_priv->client = gconf_client_get_default();
+
+	gnome_hint->_priv->canvas = gnome_canvas_new ();
+	gnome_canvas_set_scroll_region (
+		GNOME_CANVAS (gnome_hint->_priv->canvas),
+		0.0, 0.0, MINIMUM_WIDTH, MINIMUM_HEIGHT);
+
+	gtk_widget_set_size_request(
+		gnome_hint->_priv->canvas,
+		MINIMUM_WIDTH, MINIMUM_HEIGHT);
+
+	gtk_container_add (GTK_CONTAINER (sw), gnome_hint->_priv->canvas);
+
+	gnome_hint->_priv->checkbutton = 
+		gtk_check_button_new_with_mnemonic (_("_Show Hints at Startup"));
 	
-  gnome_hint->_priv = g_new (GnomeHintPrivate, 1);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (gnome_hint)->vbox),
+			    gnome_hint->_priv->checkbutton, TRUE, TRUE, 0);
 
-  sw = sw = gtk_scrolled_window_new(NULL,NULL);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
-                                 GTK_POLICY_NEVER,
-                                 GTK_POLICY_NEVER);
-  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(gnome_hint)->vbox),sw,TRUE,TRUE,0);
+	g_signal_connect_swapped (
+		gnome_hint->_priv->checkbutton, "clicked",
+		G_CALLBACK (checkbutton_clicked), gnome_hint);
 
-  gnome_hint->_priv->hintlist = NULL;
-  gnome_hint->_priv->curhint = NULL;
+	gtk_dialog_add_button (
+			GTK_DIALOG (gnome_hint),
+			GTK_STOCK_GO_BACK,
+			GNOME_HINT_RESPONSE_PREV);
 
-  gnome_hint->_priv->client = gconf_client_get_default();
+	gtk_dialog_add_button (
+			GTK_DIALOG (gnome_hint),
+			GTK_STOCK_GO_FORWARD,
+			GNOME_HINT_RESPONSE_NEXT);
 
-  gnome_hint->_priv->canvas = gnome_canvas_new();
-  gtk_container_add(GTK_CONTAINER(sw),gnome_hint->_priv->canvas);
-  gnome_canvas_set_scroll_region(GNOME_CANVAS(gnome_hint->_priv->canvas),
-                                 0.0,0.0,MINIMUM_WIDTH,MINIMUM_HEIGHT);
-  gtk_widget_set_size_request(gnome_hint->_priv->canvas,MINIMUM_WIDTH,MINIMUM_HEIGHT);
-
-  gnome_hint->_priv->checkbutton = 
-	gtk_check_button_new_with_mnemonic(_("_Show Hints at Startup"));
-	
-  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(gnome_hint)->vbox),
-	gnome_hint->_priv->checkbutton,TRUE,TRUE,0);
-
-  g_signal_connect_swapped (GTK_OBJECT(gnome_hint->_priv->checkbutton), "clicked",
-                            G_CALLBACK(checkbutton_clicked), gnome_hint);
-  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_BACK, GNOME_HINT_RESPONSE_PREV);
-  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_FORWARD, GNOME_HINT_RESPONSE_NEXT);
-  gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_OK, GTK_RESPONSE_OK);
+	gtk_dialog_add_button (
+			GTK_DIALOG (gnome_hint),
+			GTK_STOCK_OK,
+			GTK_RESPONSE_OK);
   
-  g_signal_connect_swapped (GTK_OBJECT(gnome_hint), "response", 
-                            G_CALLBACK(dialog_response), gnome_hint);
-}
-
-static void gnome_hint_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) {
-  /* Does nothing for the moment */
-}
-static void gnome_hint_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) {
-  /* Does nothing for the moment */
-}
-
-static void 
-gnome_hint_notify (GObject *object, GParamSpec *pspec) {
-  /* Does nothing for the moment */
-}
-
-static void 
-gnome_hint_finalize (GObject *object) {
-  GList *node;
-  GnomeHint *gnome_hint = GNOME_HINT (object);
-
-  node = gnome_hint->_priv->hintlist;
-
-  while (node){
-	g_free(node->data);
-	node=node->next;
-  }
-
-  g_free(gnome_hint->_priv->startupkey);
-
-  g_free (gnome_hint->_priv);
-  gnome_hint->_priv = NULL;
-
-  GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
-}
-
-static void
-checkbutton_clicked(GtkWidget *w, gpointer data)
-{
-	GnomeHint *gh = GNOME_HINT(data);
-	
-	gconf_client_set_bool(gh->_priv->client, gh->_priv->startupkey,
-		gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gh->_priv->checkbutton)),NULL);
-	
-}
-
-static void
-dialog_response(GtkWindow *window, int button, gpointer data)
-{
-	GnomeHint *gh = GNOME_HINT(data);
-
-        switch(button) {
-        case GNOME_HINT_RESPONSE_PREV:
-		if (gh->_priv->curhint == NULL)
-                        return;
-                gh->_priv->curhint = gh->_priv->curhint->prev;
-                if (gh->_priv->curhint == NULL)
-                        gh->_priv->curhint = g_list_last (gh->_priv->hintlist);
-                gnome_canvas_item_set(gh->_priv->hint_text,
-                        "text",(char *)gh->_priv->curhint->data,
-                        NULL);
-                break;
-        case GNOME_HINT_RESPONSE_NEXT:
-		if (gh->_priv->curhint == NULL)
-                        return;
-                gh->_priv->curhint = gh->_priv->curhint->next;
-                if (gh->_priv->curhint == NULL)
-                        gh->_priv->curhint = gh->_priv->hintlist;
-                gnome_canvas_item_set(gh->_priv->hint_text,
-                     "text",(char *)gh->_priv->curhint->data,
-                     NULL);
-                break;
-        default:
-		gtk_widget_destroy(GTK_WIDGET(window));
-		break;
-        }
+	g_signal_connect_swapped (
+			gnome_hint, "response", 
+			G_CALLBACK (dialog_response), NULL);
 }
 
 /*find the language, but only look as far as gotlang*/
@@ -256,18 +259,16 @@ get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
 static GList*
 read_hints_from_file (const char *file, GList *hintlist)
 {
-        xmlDocPtr doc;
-        xmlNodePtr cur,root;
-        doc = xmlParseFile(file);
-	root = xmlDocGetRootElement(doc);
-        if (doc == NULL)
-                return;
+        xmlNodePtr cur, root;
+        xmlDocPtr  doc;
 
-        if (root == NULL)
-	{
+        if (!(doc = xmlParseFile (file)))
+                return NULL;
+
+	if (!(root = xmlDocGetRootElement (doc))) {
                 xmlFreeDoc (doc);
-                return;
-        }
+                return NULL;
+	}
 
         for (cur = root->xmlChildrenNode; cur; cur = cur->next) {
                 char *str;

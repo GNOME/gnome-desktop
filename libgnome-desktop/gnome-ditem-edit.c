@@ -421,7 +421,7 @@ translations_select_row(GtkTreeView *cl, int row, int column,
         g_free (name);
 }
 
-int 
+static int 
 count_rows (GtkTreeView *view)
 {
         int rows = 0;
