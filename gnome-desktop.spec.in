@@ -110,11 +110,12 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/etc/*
 %config %{prefix}/share/panelrc
 %config %{prefix}/share/default.session
+# These are in gnome-core because the shared-library applets need the .so files around
+%{prefix}/lib/lib*.so
 
 %files devel
 %defattr(-, root, root)
 
 %{prefix}/lib/*.sh
-%{prefix}/lib/lib*.so
 %{prefix}/lib/*a
 %{prefix}/include/*
