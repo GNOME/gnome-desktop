@@ -2681,15 +2681,6 @@ standard_is_boolean (const char * key)
 }
 
 static gboolean G_GNUC_CONST
-standard_is_numeric (const char *key)
-{
-	if (strcmp (key, GNOME_DESKTOP_ITEM_VERSION) == 0)
-		return TRUE;
-	else
-		return FALSE;
-}
-
-static gboolean G_GNUC_CONST
 standard_is_strings (const char *key)
 {
 	static GHashTable *strings = NULL;
@@ -2730,16 +2721,15 @@ cannonize (const char *key, const char *value)
 		} else {
 			return g_strdup ("false");
 		}
-	} else if (standard_is_numeric (key)) {
-		double num = 0.0;
-		sscanf (value, "%lf", &num);
-		return g_strdup_printf ("%g", num);
 	} else if (standard_is_strings (key)) {
 		int len = strlen (value);
 		if (len == 0 || value[len-1] != ';') {
 			return g_strconcat (value, ";", NULL);
 		}
 	}
+	/* XXX: Perhaps we should canonize numeric values as well, but this
+	 * has caused some subtle problems before so it needs to be done
+	 * carefully if at all */
 	return NULL;
 }
 
@@ -3511,9 +3501,14 @@ ditem_save (GnomeDesktopItem *item, const char *uri, GError **error)
 	GList *li;
 	GnomeVFSHandle *handle;
 	GnomeVFSResult result;
+
 	result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_WRITE);
-	if (result == GNOME_VFS_ERROR_NOT_FOUND)
+	if (result == GNOME_VFS_ERROR_NOT_FOUND) {
 		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE, TRUE, GNOME_VFS_PERM_USER_ALL);
+	} else {
+		result = gnome_vfs_truncate_handle (handle, 0);
+	}
+
 	if (result != GNOME_VFS_OK) {
 		g_set_error (error,
 			     /* FIXME: better errors */
