@@ -69,13 +69,21 @@ AC_SUBST(ORB_CFLAGS)
 dnl
 dnl GdkPixBuf
 dnl
+AC_MSG_CHECKING(for GdkPixbuf library >= 0.7.0)
 PIXBUF_CFLAGS=`$GNOME_CONFIG --cflags gdk_pixbuf`
 PIXBUF_LIBS=`$GNOME_CONFIG --libs gdk_pixbuf`
+if test "x$PIXBUF_CFLAGS" != x ; then
+    vers=`gdk-pixbuf-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+    if test "$vers" -ge 0007000; then
+        AC_MSG_RESULT(found)
+    else
+       AC_MSG_ERROR(You need at least GdkPixbuf version 0.7.0 for the panel)
+    fi
+else
+    AC_MSG_ERROR(Did not find GdkPixbuf installed)
+fi
 AC_SUBST(PIXBUF_CFLAGS)
 AC_SUBST(PIXBUF_LIBS)
-if test "x$PIXBUF_CFLAGS" = x ; then
-       AC_MSG_ERROR(GdkPixbuf library is required for the panel)
-fi
 
 dnl
 dnl GnomeCanvasPixbuf
