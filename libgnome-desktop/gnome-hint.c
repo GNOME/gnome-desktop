@@ -101,7 +101,7 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   gtk_container_add(GTK_CONTAINER(sw),gnome_hint->_priv->canvas);
   gnome_canvas_set_scroll_region(GNOME_CANVAS(gnome_hint->_priv->canvas),
                                  0.0,0.0,MINIMUM_WIDTH,MINIMUM_HEIGHT);
-  gtk_widget_set_usize(gnome_hint->_priv->canvas,MINIMUM_WIDTH,MINIMUM_HEIGHT);
+  gtk_widget_set_size_request(gnome_hint->_priv->canvas,MINIMUM_WIDTH,MINIMUM_HEIGHT);
 
   gnome_hint->_priv->checkbutton = 
 	gtk_check_button_new_with_mnemonic(_("_Show Hints at Startup"));
@@ -109,16 +109,14 @@ gnome_hint_instance_init (GnomeHint *gnome_hint) {
   gtk_box_pack_start(GTK_BOX(GTK_DIALOG(gnome_hint)->vbox),
 	gnome_hint->_priv->checkbutton,TRUE,TRUE,0);
 
-  gtk_signal_connect(GTK_OBJECT(gnome_hint->_priv->checkbutton), "clicked",
-		     GTK_SIGNAL_FUNC(checkbutton_clicked), gnome_hint);
-
+  g_signal_connect_swapped (GTK_OBJECT(gnome_hint->_priv->checkbutton), "clicked",
+                            G_CALLBACK(checkbutton_clicked), gnome_hint);
   gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_BACK, GNOME_HINT_RESPONSE_PREV);
   gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_GO_FORWARD, GNOME_HINT_RESPONSE_NEXT);
   gtk_dialog_add_button (GTK_DIALOG(gnome_hint),GTK_STOCK_OK, GTK_RESPONSE_OK);
   
-  gtk_signal_connect(GTK_OBJECT(gnome_hint), "response", 
-		     GTK_SIGNAL_FUNC(dialog_response), gnome_hint);
-
+  g_signal_connect_swapped (GTK_OBJECT(gnome_hint), "response", 
+                            G_CALLBACK(dialog_response), gnome_hint);
 }
 
 static void gnome_hint_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) {
@@ -304,7 +302,7 @@ gnome_hint_new (const gchar *hintfile,
   GnomeHint *gnome_hint;
   GdkPixbuf *im;
 
-  if (!g_file_exists(hintfile)) return NULL;
+  if (!g_file_test(hintfile,G_FILE_TEST_EXISTS)) return NULL;
 
   gnome_hint = g_object_new (GNOME_TYPE_HINT, NULL);
 

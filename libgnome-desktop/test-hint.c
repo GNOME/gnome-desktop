@@ -38,9 +38,10 @@ int main (int argc, char **argv) {
 	return (2);
   }
  
-  gtk_signal_connect(GTK_OBJECT(gnome_hint), "destroy",
-		GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
 
+
+  g_signal_connect_swapped(GTK_OBJECT(gnome_hint), "destroy",
+                           G_CALLBACK (gtk_main_quit), NULL);
   gtk_widget_show_all (GTK_WIDGET(gnome_hint));
   gtk_main ();
   return 0;

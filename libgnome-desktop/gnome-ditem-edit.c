@@ -115,30 +115,36 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         gobject_class = (GObjectClass*) klass;
 
         ditem_edit_signals[CHANGED] =
-                gtk_signal_new ("changed",
-                                GTK_RUN_LAST,
-                                GTK_CLASS_TYPE (object_class),
-                                GTK_SIGNAL_OFFSET (GnomeDItemEditClass, changed),
-                                gtk_signal_default_marshaller,
-                                GTK_TYPE_NONE, 0);
+                g_signal_new ("changed",
+                                G_TYPE_FROM_CLASS (object_class),
+                                G_SIGNAL_RUN_LAST,
+                                G_STRUCT_OFFSET (GnomeDItemEditClass, changed),
+                                NULL,
+                                NULL,
+                                g_cclosure_marshal_VOID__VOID,
+                                G_TYPE_NONE, 0);
 
         ditem_edit_signals[ICON_CHANGED] =
-                gtk_signal_new ("icon_changed",
-                                GTK_RUN_LAST,
-                                GTK_CLASS_TYPE (object_class),
-                                GTK_SIGNAL_OFFSET (GnomeDItemEditClass, 
+                g_signal_new ("icon_changed",
+                                G_TYPE_FROM_CLASS (object_class),
+                                G_SIGNAL_RUN_LAST,
+                                G_STRUCT_OFFSET (GnomeDItemEditClass, 
                                                    icon_changed),
-                                gtk_signal_default_marshaller,
-                                GTK_TYPE_NONE, 0);
+                                NULL,
+                                NULL,
+                                g_cclosure_marshal_VOID__VOID,
+                                G_TYPE_NONE, 0);
 
         ditem_edit_signals[NAME_CHANGED] =
-                gtk_signal_new ("name_changed",
-                                GTK_RUN_LAST,
-                                GTK_CLASS_TYPE (object_class),
-                                GTK_SIGNAL_OFFSET (GnomeDItemEditClass, 
+                g_signal_new ("name_changed",
+                                G_TYPE_FROM_CLASS (object_class),
+                                G_SIGNAL_RUN_LAST,
+                                G_STRUCT_OFFSET (GnomeDItemEditClass, 
                                                    name_changed),
-                                gtk_signal_default_marshaller,
-                                GTK_TYPE_NONE, 0);
+                                NULL,
+                                NULL,
+                                g_cclosure_marshal_VOID__VOID,
+                                G_TYPE_NONE, 0);
 
         object_class->destroy = gnome_ditem_edit_destroy;
         gobject_class->finalize = gnome_ditem_edit_finalize;
@@ -248,33 +254,40 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
 
         dee->_priv->name_entry = gtk_entry_new();
         table_attach_entry(GTK_TABLE(table),dee->_priv->name_entry, 1, 2, 0, 1);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->name_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->name_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_name_changed),
-                                              GTK_OBJECT(dee));
 
+        g_signal_connect_object (G_OBJECT(dee->_priv->name_entry),
+                                 "changed",
+                                 G_CALLBACK(gnome_ditem_edit_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);		
+        g_signal_connect_object (G_OBJECT(dee->_priv->name_entry),
+                                 "changed",
+                                 G_CALLBACK(gnome_ditem_edit_name_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);
 
         label = label_new(_("Comment:"));
         table_attach_label(GTK_TABLE(table),label, 0, 1, 1, 2);
 
         dee->_priv->comment_entry = gtk_entry_new();
         table_attach_entry(GTK_TABLE(table),dee->_priv->comment_entry, 1, 2, 1, 2);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->comment_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
 
-
+        g_signal_connect_object (G_OBJECT(dee->_priv->comment_entry),		
+                                 "changed",
+                                 G_CALLBACK(gnome_ditem_edit_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);
         dee->_priv->exec_label = label= label_new (_("Command:"));
         table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
 
         dee->_priv->exec_entry = gtk_entry_new();
         table_attach_entry(GTK_TABLE(table),dee->_priv->exec_entry, 1, 2, 2, 3);
-        gtk_signal_connect_object_while_alive (GTK_OBJECT (dee->_priv->exec_entry), "changed",
-					       GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
-					       GTK_OBJECT (dee));
-
+ 
+        g_signal_connect_object (G_OBJECT(dee->_priv->exec_entry),
+                                 "changed",
+                                 G_CALLBACK (gnome_ditem_edit_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);
         dee->_priv->type_label = label = label_new(_("Type:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
 
@@ -283,14 +296,17 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
         gtk_combo_set_value_in_list(GTK_COMBO(dee->_priv->type_combo), 
                                     FALSE, TRUE);
         table_attach_entry(GTK_TABLE(table),dee->_priv->type_combo, 1, 2, 3, 4);
-        gtk_signal_connect_object_while_alive (GTK_OBJECT (GTK_COMBO (dee->_priv->type_combo)->entry), 
-					       "changed",
-					       GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
-					       GTK_OBJECT (dee));
-	gtk_signal_connect_object_while_alive (GTK_OBJECT (GTK_COMBO (dee->_priv->type_combo)->entry), 
-					       "changed",
-					       GTK_SIGNAL_FUNC (type_combo_changed),
-					       GTK_OBJECT (dee));
+
+        g_signal_connect_object (G_OBJECT(GTK_COMBO(dee->_priv->type_combo)->entry),
+                                 "changed",
+                                 G_CALLBACK (gnome_ditem_edit_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);	
+        g_signal_connect_object (G_OBJECT(GTK_COMBO(dee->_priv->type_combo)->entry),
+                                 "changed",
+                                 G_CALLBACK (type_combo_changed),
+                                 G_OBJECT(dee),
+                                 G_CONNECT_SWAPPED);
 
 
         label = label_new(_("Icon:"));
@@ -304,55 +320,136 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
                          0, 0);
 
         dee->_priv->icon_entry = gnome_icon_entry_new ("desktop-icon", _("Browse icons"));
-	gtk_signal_connect_object (GTK_OBJECT (dee->_priv->icon_entry), "changed",
-				   GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
-				   GTK_OBJECT (dee));
-	gtk_signal_connect_object (GTK_OBJECT (dee->_priv->icon_entry), "changed",
-				   GTK_SIGNAL_FUNC (gnome_ditem_edit_icon_changed),
-				   GTK_OBJECT (dee));
-	gtk_box_pack_start (GTK_BOX (hbox), dee->_priv->icon_entry,
-			    FALSE, FALSE, 0);
+        g_signal_connect_swapped(G_OBJECT(dee->_priv->icon_entry), "changed",
+                                 G_CALLBACK (gnome_ditem_edit_changed),
+                                 G_OBJECT(dee));
+        g_signal_connect_swapped(G_OBJECT(dee->_priv->icon_entry), "changed",
+                                 G_CALLBACK (gnome_ditem_edit_icon_changed),
+                                 G_OBJECT(dee));
+        gtk_box_pack_start (GTK_BOX (hbox), dee->_priv->icon_entry,
+                                 FALSE, FALSE, 0);
 
         align = gtk_alignment_new (0.0, 0.5, 0.0, 0.0);
         gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
 
         dee->_priv->terminal_button = gtk_check_button_new_with_label (_("Run in Terminal"));
-        gtk_signal_connect_object (GTK_OBJECT (dee->_priv->terminal_button), 
-				   "clicked",
-				   GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
-				   GTK_OBJECT (dee));
-        gtk_container_add (GTK_CONTAINER (align),
-			   dee->_priv->terminal_button);
+        g_signal_connect_swapped(G_OBJECT(dee->_priv->terminal_button), 
+                                 "clicked",
+                                 G_CALLBACK (gnome_ditem_edit_changed),
+                                 G_OBJECT(dee));
+        gtk_container_add (GTK_CONTAINER (align),dee->_priv->terminal_button);
+}
+
+static GtkTreeIter*
+return_iter_nth_row(GtkTreeView  *tree_view,
+                    GtkTreeModel *tree_model,
+                    GtkTreeIter  *iter,
+                    gint         increment,
+                    gint         row)
+{
+        GtkTreePath *current_path;
+        gboolean row_expanded;
+        gboolean children_present;
+        gboolean next_iter;
+        gboolean parent_iter;
+        gboolean parent_next_iter;
+
+        current_path = gtk_tree_model_get_path (tree_model, iter);
+
+        if (increment == row)
+            return iter;
+
+        row_expanded = gtk_tree_view_row_expanded (tree_view, current_path);
+        gtk_tree_path_free (current_path);
+        children_present = gtk_tree_model_iter_children (tree_model, iter, iter);
+        next_iter = gtk_tree_model_iter_next (tree_model, iter);
+        parent_iter = gtk_tree_model_iter_parent (tree_model, iter, iter);
+        parent_next_iter = gtk_tree_model_iter_next (tree_model, iter);
+
+        if ((row_expanded && children_present) ||
+            (next_iter) ||
+            (parent_iter && parent_next_iter)){
+               return return_iter_nth_row (tree_view, tree_model, iter,
+                      ++increment, row);
+        }
+
+        return NULL;
 }
 
 static void
-translations_select_row(GtkCList *cl, int row, int column,
+set_iter_nth_row (GtkTreeView *tree_view,
+                  GtkTreeIter *iter,
+                  gint        row)
+{
+        GtkTreeModel *tree_model;
+
+        tree_model = gtk_tree_view_get_model (tree_view);
+        gtk_tree_model_get_iter_root (tree_model, iter);
+        iter = return_iter_nth_row (tree_view, tree_model, iter, 0 , row);
+}
+
+static void
+translations_select_row(GtkTreeView *cl, int row, int column,
 			GdkEvent *event, GnomeDItemEdit *dee)
 {
         char *lang;
         char *name;
         char *comment;
-        gtk_clist_get_text(cl,row,0,&lang);
-        gtk_clist_get_text(cl,row,1,&name);
-        gtk_clist_get_text(cl,row,2,&comment);
-	
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        GValue value = {0, };	
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));	
+        set_iter_nth_row (cl,&iter,row);
+
+        gtk_tree_model_get_value (model,&iter,0,&value);
+        lang = g_strdup (g_value_get_string (&value));
+
+        gtk_tree_model_get_value (model,&iter,1, &value);
+        name = g_strdup (g_value_get_string (&value));
+
+        gtk_tree_model_get_value (model,&iter,2, &value);
+        comment = g_strdup (g_value_get_string (&value));
+        g_value_unset (&value);
+
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), lang);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), name);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), comment);
+	
+        g_free (lang);
+        g_free (comment);
+        g_free (name);
+}
+
+int 
+count_rows (GtkTreeView *view)
+{
+        int rows = 0;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        model = gtk_tree_view_get_model (view);
+        gtk_tree_model_get_iter_root (model, &iter);
+        while (gtk_tree_model_iter_next(model, &iter))
+             rows++;
+        return rows;
 }
 
 static void
 translations_add(GtkWidget *button, GnomeDItemEdit *dee)
 {
-        int i;
+        int i = 0;
+        int number_of_rows = 0;
         const char *lang;
         const char *name;
         const char *comment;
         const char *text[3];
         const GList *language_list;
         const char *curlang;
-        GtkCList *cl = GTK_CLIST(dee->_priv->translations);
+        GtkTreeView *cl;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
 
+        cl = GTK_TREE_VIEW(dee->_priv->translations);
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));
         lang = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_lang_entry));
         name = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_name_entry));
         comment = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_comment_entry));
@@ -370,38 +467,54 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
                 gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry),name);
                 gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),comment);
         }
-
-        for (i=0;i<cl->rows;i++) {
+        gtk_tree_model_get_iter_root (model, &iter);
+        number_of_rows = count_rows (cl);
+        for (i=0;i <number_of_rows;i++){
                 char *s;
-                gtk_clist_get_text(cl,i,0,&s);
+                GValue value = {0, };
+                gtk_tree_model_get_value (model,&iter,0, &value);
+                s = g_strdup (g_value_get_string (&value));
+                g_value_unset (&value);
                 if (strcmp(lang,s)==0) {
-                        gtk_clist_set_text(cl,i,1,name);
-                        gtk_clist_set_text(cl,i,2,comment);
-                        text[0] = s;
-                        text[1] = name;
-                        text[2] = comment;
-                        gtk_signal_emit (GTK_OBJECT(dee),
-                                         ditem_edit_signals[CHANGED], NULL);
+                        gtk_list_store_set (GTK_LIST_STORE(model),
+                                            &iter, 1, name,2, comment, -1);
+                        g_signal_emit (G_OBJECT(dee),
+                                       ditem_edit_signals[CHANGED], 0);
+                        g_free (s);
                         return;
                 }
+                gtk_tree_model_iter_next (model, &iter);
+                g_free (s);
         }
         text[0]=lang;
         text[1]=name;
         text[2]=comment;
-        gtk_clist_append(cl,(char**)text);
-        gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
+        gtk_list_store_append (GTK_LIST_STORE(model), &iter);
+        gtk_list_store_set (GTK_LIST_STORE(model),&iter, 0, text[0],1,text[1],2,text[2],-1);
+        g_signal_emit(G_OBJECT(dee), ditem_edit_signals[CHANGED], 0);
 }
 
 static void
 translations_remove(GtkWidget *button, GnomeDItemEdit *dee)
 {
-        GtkCList *cl = GTK_CLIST(dee->_priv->translations);
-        if(cl->selection == NULL)
-                return;
-        gtk_clist_remove(cl,GPOINTER_TO_INT(cl->selection->data));
-        gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
-}
+        GtkTreeView *view;
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
 
+        view = GTK_TREE_VIEW (dee->_priv->translations);
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
+
+        /* gtk_tree_selection_get_selected will return selected node if
+           selection is set to GTK_SELECTION_SINGLE */
+
+        /* just return if nothing selected */
+        if ( ! gtk_tree_selection_get_selected (selection,&model, &iter))
+               return;
+        gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+        g_signal_emit(G_OBJECT(dee), ditem_edit_signals[CHANGED], 0);
+}
+ 
 static void
 fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
 {
@@ -409,26 +522,29 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         GtkWidget * button;
         GtkWidget * box;
         const char *transl[3];
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
 
         dee->_priv->tryexec_label = label = label_new(_("Try this before using:"));
         table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
 
         dee->_priv->tryexec_entry = gtk_entry_new();
         table_attach_entry(GTK_TABLE(page),dee->_priv->tryexec_entry, 1, 2, 0, 1);
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->tryexec_entry), 
+        g_signal_connect_swapped(G_OBJECT(dee->_priv->tryexec_entry), 
                                   "changed",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
+                                  G_CALLBACK(gnome_ditem_edit_changed),
+                                  G_OBJECT(dee));
 
         label = label_new(_("Documentation:"));
         table_attach_label(GTK_TABLE(page),label, 0, 1, 1, 2);
 
-        dee->_priv->doc_entry = gtk_entry_new_with_max_length(255);
+        dee->_priv->doc_entry = gtk_entry_new();
+        gtk_entry_set_max_length (GTK_ENTRY(dee->_priv->doc_entry), 255);        
         table_attach_entry(GTK_TABLE(page),dee->_priv->doc_entry, 1, 2, 1, 2);
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->doc_entry), 
+        g_signal_connect_swapped(G_OBJECT(dee->_priv->doc_entry), 
                                   "changed",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
+                                  G_CALLBACK(gnome_ditem_edit_changed),
+                                  G_OBJECT(dee));
 
         label = gtk_label_new(_("Name/Comment translations:"));
         table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
@@ -436,28 +552,44 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         transl[0] = _("Language");
         transl[1] = _("Name");
         transl[2] = _("Comment");
-        dee->_priv->translations = gtk_clist_new_with_titles(3,(char**)transl);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
-					  0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
-					  1, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
-					  2, TRUE);
+
+        renderer = gtk_cell_renderer_text_new ();	
+        dee->_priv->translations = gtk_tree_view_new ();
+        column = gtk_tree_view_column_new_with_attributes (transl[0],
+                                                           renderer,
+                                                           NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
+
+
+        column = gtk_tree_view_column_new_with_attributes (transl[1],
+                                                           renderer,
+                                                           NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
+
+
+        column = gtk_tree_view_column_new_with_attributes (transl[2],
+                                                           renderer,
+                                                           NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
+
+        gtk_tree_view_columns_autosize (GTK_TREE_VIEW(dee->_priv->translations));
+
         box = gtk_scrolled_window_new(NULL,NULL);
-        gtk_widget_set_usize(box,0,120);
+        gtk_widget_set_size_request(box,0,120);
         gtk_container_add(GTK_CONTAINER(box),dee->_priv->translations);
         table_attach_list(GTK_TABLE(page),box, 0, 2, 5, 6);
-        gtk_clist_column_titles_passive(GTK_CLIST(dee->_priv->translations));
-        gtk_signal_connect(GTK_OBJECT(dee->_priv->translations),"select_row",
-                           GTK_SIGNAL_FUNC(translations_select_row),
+        gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW(dee->_priv->translations),FALSE);
+        g_signal_connect(G_OBJECT(dee->_priv->translations),"select_row",
+                           G_CALLBACK(translations_select_row),
                            dee);
+
 
         box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
         table_attach_entry(GTK_TABLE(page),box, 0, 2, 3, 4);
   
         dee->_priv->transl_lang_entry = gtk_entry_new();
         gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_lang_entry,FALSE,FALSE,0);
-        gtk_widget_set_usize(dee->_priv->transl_lang_entry,50,0);
+        gtk_widget_set_size_request(dee->_priv->transl_lang_entry,50,0);
 
         dee->_priv->transl_name_entry = gtk_entry_new();
         gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_name_entry,TRUE,TRUE,0);
@@ -470,13 +602,13 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
   
         button = gtk_button_new_with_label(_("Add/Set"));
         gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
-        gtk_signal_connect(GTK_OBJECT(button),"clicked",
-                           GTK_SIGNAL_FUNC(translations_add),
+        g_signal_connect(G_OBJECT(button),"clicked",
+                           G_CALLBACK(translations_add),
                            dee);
         button = gtk_button_new_with_label(_("Remove"));
         gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
-        gtk_signal_connect(GTK_OBJECT(button),"clicked",
-                           GTK_SIGNAL_FUNC(translations_remove),
+        g_signal_connect(G_OBJECT(button),"clicked",
+                           G_CALLBACK(translations_remove),
                            dee);
 }
 
@@ -540,7 +672,7 @@ gnome_ditem_edit_new (void)
 {
         GnomeDItemEdit * dee;
 
-        dee = gtk_type_new (gnome_ditem_edit_get_type());
+        dee = g_object_new (gnome_ditem_edit_get_type(), NULL);
 
         return GTK_WIDGET (dee);
 }
@@ -605,8 +737,10 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         GList *i18n_list, *li;
 	GnomeDesktopItemType type;
         const gchar* cs;
+        char* tmpstr;
 	GnomeDesktopItem *ditem;
-        
+        GtkTreeModel *model; 
+        GtkTreeIter iter;
         g_return_if_fail (dee != NULL);
         g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
@@ -656,9 +790,9 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), 
                            cs ? cs : "");
 
-        cs = gnome_desktop_item_get_icon (ditem);
+        tmpstr = gnome_desktop_item_get_icon (ditem);
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), cs);
-	g_free (cs);
+	g_free (tmpstr);
 
         cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->doc_entry), cs ? cs : "");
@@ -673,7 +807,8 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 						 GNOME_DESKTOP_ITEM_TERMINAL));
 
         /*set the names and comments from our i18n list*/
-        gtk_clist_clear (GTK_CLIST(dee->_priv->translations));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW(dee->_priv->translations));
+        gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
         for (li = i18n_list; li != NULL; li = li->next) {
                 const char *text[3];
@@ -686,7 +821,9 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
                 cs = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_COMMENT, lang);
                 text[2] = cs ? cs : "";
-                gtk_clist_append (GTK_CLIST (dee->_priv->translations), (char**)text);
+                gtk_list_store_append (GTK_LIST_STORE(model), &iter);
+                gtk_list_store_set (GTK_LIST_STORE(model),&iter, 0, 
+                                    text[0],1,text[1],2,text[2],-1);
         }
         g_list_free (i18n_list);
 
@@ -718,9 +855,13 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 {
         const gchar * text;
         gchar *file;
-        int i;
 	GnomeDesktopItem *ditem;
-        
+        int i,number_of_rows = 0; 
+        GtkTreeView *view;
+
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+
         g_return_if_fail (dee != NULL);
         g_return_if_fail (GNOME_IS_DITEM_EDIT(dee));
 
@@ -767,19 +908,30 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 					       GNOME_DESKTOP_ITEM_NAME);
 	gnome_desktop_item_clear_localestring (ditem,
 					       GNOME_DESKTOP_ITEM_COMMENT);
-        for (i = 0; i < GTK_CLIST (dee->_priv->translations)->rows; i++) {
-                const char *lang, *name, *comment;
-                gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,0,(gchar**)&lang);
-                gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,1,(gchar**)&name);
-                gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,2,(gchar**)&comment);
-                if(!*lang) lang = NULL;
-                if(!*name) name = NULL;
-                if(!*comment) comment = NULL;
-                if(!name && !comment)
-                        continue;
+        view = GTK_TREE_VIEW (dee->_priv->translations);
+        number_of_rows = count_rows (view);	
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
+        gtk_tree_model_get_iter_root (model, &iter);
+        for (i = 0; i < number_of_rows; i++) {
+                char *lang, *name, *comment;
+                GValue value = {0, };
 
+                gtk_tree_model_get_value (model,&iter,0, &value);
+                lang = g_strdup (g_value_get_string (&value));
+
+                gtk_tree_model_get_value (model,&iter,1, &value); 
+                name = g_strdup (g_value_get_string (&value));;
+
+                gtk_tree_model_get_value (model,&iter,2, &value);
+                comment = g_strdup (g_value_get_string (&value));;
+                g_value_unset (&value);
+
+                if(!name && !comment){
+                        g_free (lang);
+                        continue;
+                }
                 if (lang == NULL)
-                        lang = get_language ();
+                        lang = g_strdup(get_language());
 
                 g_assert (lang != NULL);
                 
@@ -787,6 +939,11 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, name);
                 gnome_desktop_item_set_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, comment);
+
+                g_free (name);
+                g_free (comment);
+                g_free (lang);
+                gtk_tree_model_iter_next (model, &iter);
         }
 
 	/* This always overrides the above in case of conflict */
@@ -900,6 +1057,7 @@ gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
 void
 gnome_ditem_edit_clear (GnomeDItemEdit *dee)
 {
+        GtkTreeModel *model;
         g_return_if_fail (dee != NULL);
         g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
@@ -917,8 +1075,8 @@ gnome_ditem_edit_clear (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
-        gtk_clist_clear(GTK_CLIST(dee->_priv->translations));
-
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
+        gtk_list_store_clear (GTK_LIST_STORE (model));
 	/* set everything to non-directory type which means any type */
 	gnome_ditem_set_directory_sensitive (dee, FALSE);
 
@@ -930,21 +1088,21 @@ static void
 gnome_ditem_edit_changed (GnomeDItemEdit *dee)
 {
 	dee->_priv->ui_dirty = TRUE;
-        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[CHANGED], NULL);
+        g_signal_emit (G_OBJECT (dee), ditem_edit_signals[CHANGED], 0);
 }
 
 static void
 gnome_ditem_edit_icon_changed (GnomeDItemEdit *dee)
 {
 	dee->_priv->ui_dirty = TRUE;
-        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[ICON_CHANGED], NULL);
+        g_signal_emit (G_OBJECT (dee), ditem_edit_signals[ICON_CHANGED], 0);
 }
 
 static void
 gnome_ditem_edit_name_changed (GnomeDItemEdit *dee)
 {
 	dee->_priv->ui_dirty = TRUE;
-        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[NAME_CHANGED], NULL);
+        g_signal_emit (G_OBJECT (dee), ditem_edit_signals[NAME_CHANGED], 0);
 }
 
 /**
@@ -993,7 +1151,6 @@ gnome_ditem_edit_grab_focus (GnomeDItemEdit *dee)
 
 	gtk_widget_grab_focus (dee->_priv->name_entry);
 }
-
 void
 gnome_ditem_edit_set_editable (GnomeDItemEdit *dee,
 			       gboolean editable)
@@ -1107,25 +1264,25 @@ main(int argc, char * argv[])
         g_print("Dialog (main): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
 #endif
 
-        gtk_signal_connect_object(GTK_OBJECT(app), "delete_event", 
-                                  GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                                  GTK_OBJECT(app));
+        g_signal_connect_swapped(G_OBJECT(app), "delete_event", 
+                                 G_CALLBACK(gtk_widget_destroy),
+                                 (app));
 
-        gtk_signal_connect(GTK_OBJECT(app), "destroy",
-                           GTK_SIGNAL_FUNC(gtk_main_quit),
-                           NULL);
+        g_signal_connect(G_OBJECT(app), "destroy",
+                         G_CALLBACK(gtk_main_quit),
+                         NULL);
 
-        gtk_signal_connect(GTK_OBJECT(dee), "changed",
-                           GTK_SIGNAL_FUNC(changed_callback),
-                           NULL);
+        g_signal_connect (G_OBJECT((dee), "changed",
+                          G_CALLBACK(changed_callback),
+                          NULL);
 
-        gtk_signal_connect(GTK_OBJECT(dee), "icon_changed",
-                           GTK_SIGNAL_FUNC(icon_changed_callback),
-                           NULL);
+        g_signal_connect(G_OBJECT(dee), "icon_changed",
+                         G_CALLBACK(icon_changed_callback),
+                         NULL);
 
-        gtk_signal_connect(GTK_OBJECT(dee), "name_changed",
-                           GTK_SIGNAL_FUNC(name_changed_callback),
-                           NULL);
+        g_signal_connect(G_OBJECT(dee), "name_changed",
+                         G_CALLBACK(name_changed_callback),
+                         NULL);
 
 #ifdef GNOME_ENABLE_DEBUG
         g_print("Dialog (main 2): %p\n", GNOME_DITEM_EDIT(dee)->icon_dialog);
@@ -1144,4 +1301,3 @@ main(int argc, char * argv[])
 }
 
 #endif
-
