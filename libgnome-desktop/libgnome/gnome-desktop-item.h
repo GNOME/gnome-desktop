@@ -41,11 +41,13 @@ const char *gnome_desktop_item_get_name (const GnomeDesktopItem *item, const cha
 const char *gnome_desktop_item_get_comment (const GnomeDesktopItem *item, const char *language);
 const char *gnome_desktop_item_get_attribute (const GnomeDesktopItem *item, const char *attr_name);
 const GSList *gnome_desktop_item_get_subitems (const GnomeDesktopItem *item);
+GnomeDesktopItemFormat gnome_desktop_item_get_format (const GnomeDesktopItem *item);
 
 /* Free the return value but not the contained strings */
 GSList *gnome_desktop_item_get_languages(const GnomeDesktopItem *item);
 GSList *gnome_desktop_item_get_attributes(const GnomeDesktopItem *item);
 
+void gnome_desktop_item_set_format (GnomeDesktopItem *item, GnomeDesktopItemFormat fmt);
 void gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const char *name);
 void gnome_desktop_item_set_command (GnomeDesktopItem *item, const char **command);
 void gnome_desktop_item_set_icon_path (GnomeDesktopItem *item, const char *icon_path);

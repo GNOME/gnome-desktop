@@ -603,8 +603,8 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
   int real_argc;
   int i, j;
 
-  g_return_if_fail(item);
-  g_return_if_fail(item->exec);
+  g_return_val_if_fail(item, -1);
+  g_return_val_if_fail(item->exec, -1);
 
   if(!argv)
     argc = 0;
@@ -639,7 +639,14 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
       tryme = g_hash_table_lookup(item->other_attributes, "TryExec");
       if(tryme)
 	{
-	  return gnome_is_program_in_path(tryme);
+	  tryme = gnome_is_program_in_path(tryme);
+	  if(tryme)
+	    {
+	      g_free(tryme);
+	      return TRUE;
+	    }
+	  else
+	    return FALSE;
 	}
     }
 
@@ -648,7 +655,16 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
       if(item->exec[0][0] == PATH_SEP)
 	return g_file_exists(item->exec[0]);
       else
-	return gnome_is_program_in_path(item->exec[0]);
+	{
+	  char *tryme = gnome_is_program_in_path(item->exec[0]);
+	  if(tryme)
+	    {
+	      g_free(tryme);
+	      return TRUE;
+	    }
+	  else
+	    return FALSE;
+	}
     }
 
   return TRUE;
@@ -836,6 +852,20 @@ gnome_desktop_item_get_attributes(const GnomeDesktopItem *item)
   return retval;
 }
 
+/**
+ * gnome_desktop_item_get_format:
+ * @item: A desktop item
+ *
+ * Returns: The format that the specified 'item' is stored on disk with
+ */
+GnomeDesktopItemFormat
+gnome_desktop_item_get_format (const GnomeDesktopItem *item)
+{
+  g_return_val_if_fail(item, GNOME_DESKTOP_ITEM_UNKNOWN);
+
+  return item->item_format;
+}
+
 /******* Set... ******/
 
 /**
@@ -988,4 +1018,17 @@ gnome_desktop_item_set_flags (GnomeDesktopItem *item, GnomeDesktopItemFlags flag
   g_return_if_fail(item);
 
   item->item_flags = flags;
+}
+
+/**
+ * gnome_desktop_item_set_format:
+ * @item: A desktop item
+ * @fmt: The format to be set
+ */
+void
+gnome_desktop_item_set_format (GnomeDesktopItem *item, GnomeDesktopItemFormat fmt)
+{
+  g_return_if_fail(item);
+
+  item->item_format = fmt;
 }
