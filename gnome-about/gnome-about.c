@@ -281,10 +281,10 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 	case GDK_E:
 		if (howmuch == 4) {
 			howmuch++;
-/*			im = gdk_pixbuf_new_from_xpm_data (magick);
+			im = gdk_pixbuf_new_from_xpm_data (magick);
 			gnome_canvas_item_set (image,
 					       "pixbuf", im,
-					       NULL);*/
+					       NULL);
 		}
 		else
 			howmuch = 0;
