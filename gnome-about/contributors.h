@@ -108,6 +108,7 @@ static gchar *contributors[] = {
 	"Martynas Kunigelis",
 	"Tuomas Kuosmanen",
 	"Olof Kylander",
+	"Mathieu Lacage", 
 	"Francis J. Lacoste",
 	"Chris Lahey",
 	"Scott Laird",
