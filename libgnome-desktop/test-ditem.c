@@ -3,6 +3,7 @@
 #include <libgnome/Gnome.h>
 #include <libgnome/gnome-ditem.h>
 #include <locale.h>
+#include <stdlib.h>
 
 #include "bonobo-config-ditem.h"
 

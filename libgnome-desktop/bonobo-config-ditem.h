@@ -11,7 +11,7 @@
 #define __BONOBO_CONFIG_DITEM_H__
 
 #include <stdio.h>
-#include <bonobo-config/bonobo-config-database.h>
+#include <bonobo-conf/bonobo-config-database.h>
 #include <bonobo/bonobo-event-source.h>
 
 G_BEGIN_DECLS

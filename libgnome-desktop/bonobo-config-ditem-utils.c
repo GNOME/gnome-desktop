@@ -17,7 +17,7 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
-#include <bonobo-config/bonobo-config-utils.h>
+#include <bonobo-conf/bonobo-config-utils.h>
 #include <libgnome/Gnome.h>
 
 #include "bonobo-config-ditem-utils.h"
@@ -91,10 +91,10 @@ bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 
 	switch (type->kind) {
 
-#define DECODE_BASIC(k,t,v) \
-case CORBA_tk_##k##: \
-	any = bonobo_arg_new (TC_CORBA_##t##); \
-	BONOBO_ARG_SET_GENERAL (any, ##v##, TC_CORBA_##k##, CORBA_##t##, ev); \
+#define DECODE_BASIC(k,t,v)                                                         \
+case CORBA_tk_ ## k:                                                                \
+	any = bonobo_arg_new (TC_CORBA_ ## t);                                      \
+	BONOBO_ARG_SET_GENERAL (any, v, TC_CORBA_ ## k, CORBA_ ## t, ev);           \
 	break;
 
 		DECODE_BASIC (short,     short,              atoi  (de->value));
@@ -401,10 +401,10 @@ bonobo_config_ditem_encode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 
 	switch (any->_type->kind) {
 
-#define ENCODE_BASIC(k,t,f) \
-case CORBA_tk_##k##: \
-	clear_dir_entry (de); \
-	de->value = g_strdup_printf (f, BONOBO_ARG_GET_GENERAL (any, TC_CORBA_##t##, CORBA_##t##, ev)); \
+#define ENCODE_BASIC(k,t,f)         \
+case CORBA_tk_ ## k:                \
+	clear_dir_entry (de);       \
+	de->value = g_strdup_printf (f, BONOBO_ARG_GET_GENERAL (any, TC_CORBA_ ## t, CORBA_ ## t, ev)); \
 	break;
 
 		ENCODE_BASIC (short,     short,              "%hd");

@@ -16,7 +16,7 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
-#include <bonobo-config/bonobo-config-utils.h>
+#include <bonobo-conf/bonobo-config-utils.h>
 
 #include "bonobo-config-ditem.h"
 #include "bonobo-config-ditem-utils.h"

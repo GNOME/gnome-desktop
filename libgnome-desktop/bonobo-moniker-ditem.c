@@ -18,7 +18,7 @@
 #include <bonobo/bonobo-moniker-simple.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-shlib-factory.h>
-#include <bonobo-config/bonobo-config-utils.h>
+#include <bonobo-conf/bonobo-config-utils.h>
 
 #include "bonobo-config-ditem.h"
 

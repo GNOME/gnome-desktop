@@ -1,6 +1,7 @@
 /* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <libbonobo.h>
 #include <libgnome/Gnome.h>
+#include <stdlib.h>
 
 static void
 boot_ditem (Bonobo_ConfigDatabase db)
