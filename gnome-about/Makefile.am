@@ -1,5 +1,4 @@
 INCLUDES = 			\
-	-I$(includedir)		\
 	$(GNOME_ABOUT_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale\""
 

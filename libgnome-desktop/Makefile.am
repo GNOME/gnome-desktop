@@ -4,7 +4,6 @@ INCLUDES = \
 	-I.			\
 	-I$(srcdir)		\
 	-I$(top_builddir)/panel	\
-	-I$(includedir)		\
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
 	-DGNOME_CORE_INTERNAL	\
 	$(GNOME_DESKTOP_CFLAGS)
