@@ -322,8 +322,8 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 	default:
 		howmuch = 0;
 	}
-	
-	return FALSE;
+
+	return TRUE;
 }
 
 gboolean
@@ -517,6 +517,8 @@ main (gint argc, gchar *argv[])
 	gnome_canvas_item_lower_to_bottom (image2);
 	
 	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+			    GTK_SIGNAL_FUNC (cb_quit), im);
+	gtk_signal_connect (GTK_OBJECT (window), "destroy",
 			    GTK_SIGNAL_FUNC (cb_quit), im);
 	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
 			    GTK_SIGNAL_FUNC (cb_keypress), NULL);
