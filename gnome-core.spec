@@ -16,6 +16,7 @@ Packager: Marc Ewing <marc@redhat.com>
 URL: http://www.gnome.org
 Prereq: /sbin/install-info
 Docdir: %{prefix}/doc
+Requires: xscreensaver
 
 %description
 Basic programs and libraries that are virtually required for
