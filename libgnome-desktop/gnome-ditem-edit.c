@@ -31,6 +31,7 @@
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-macros.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-desktop-i18n.h"
 
 #include <libgnomeui/gnome-uidefs.h>
