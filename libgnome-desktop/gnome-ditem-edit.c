@@ -318,7 +318,7 @@ type_option_changed (GnomeDItemEdit *dee)
 				    _("_URL:"));
 	else
 		gtk_label_set_text_with_mnemonic (GTK_LABEL (dee->_priv->exec_label),
-				    _("Co_mmand:"));
+				    _("Comm_and:"));
 }
 
 static GtkWidget *
@@ -377,7 +377,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	set_relation (dee->_priv->generic_name_entry, GTK_LABEL (label));
 
 	/* Comment */
-	label = label_new_with_mnemonic (_("C_omment:"));
+	label = label_new_with_mnemonic (_("Co_mment:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
 
 	entry = gtk_entry_new ();
@@ -391,7 +391,7 @@ make_easy_page (GnomeDItemEdit *dee)
 
 	set_relation (dee->_priv->comment_entry, GTK_LABEL (label));
 
-	label = label_new_with_mnemonic (_("Co_mmand:"));
+	label = label_new_with_mnemonic (_("Comm_and:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 3, 4);
 	dee->_priv->exec_label = label;
 
