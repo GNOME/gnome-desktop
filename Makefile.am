@@ -2,7 +2,6 @@ SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
 	gnome-about 		\
-	desktop-links		\
 	pixmaps			\
 	desktop-docs		\
 	man
