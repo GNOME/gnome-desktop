@@ -49,8 +49,12 @@ AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
 dnl gnome-session
-AC_CHECK_HEADERS(X11/SM/SMlib.h, session=yes, session=no)
-AM_CONDITIONAL(SESSION, test $session = yes)
+dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
+if $GNOME_HAVE_SM; then
+  dnl I don't think this check is so useful now --rrh
+  AC_CHECK_HEADERS(X11/SM/SMlib.h, , GNOME_HAVE_SESSION=false)
+fi
+AM_CONDITIONAL(SESSION, $GNOME_HAVE_SM)
 
 dnl panel/cdplayer
 PROGRAMS_PANEL_CDPLAYER=""
