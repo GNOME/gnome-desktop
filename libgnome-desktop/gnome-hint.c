@@ -3,7 +3,6 @@
 #include <libgnomeui/libgnomeui.h>
 #include "gnome-hint.h"
 #include <gconf/gconf-client.h>
-#include "gnome-desktop-i18n.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
