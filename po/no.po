@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.30\n"
-"POT-Creation-Date: 1998-12-14 21:26+0100\n"
-"PO-Revision-Date: 1998-12-14 21:45+0100\n"
+"POT-Creation-Date: 1998-12-14 22:36+0100\n"
+"PO-Revision-Date: 1998-12-14 22:53+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,7 @@ msgstr "Om"
 #: applets/gen_util/clock.c:268 applets/gen_util/mailcheck.c:686
 #: applets/gen_util/printer.c:404 applets/gkb/gkb.c:180
 #: applets/icewm-pager/wmpager_applet.c:90
+#: applets/mini-commander/mini-commander_applet.c:131
 #: applets/modemlights/modemlights.c:719 applets/multiload/cpuload.c:237
 #: applets/multiload/memload.c:276 applets/multiload/swapload.c:237
 #: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
@@ -123,6 +124,7 @@ msgstr "Hvem sa at NeXT er død?"
 #: applets/asclock/dialogs.c:105 applets/clockmail/properties.c:385
 #: applets/cpuload/properties.c:216 applets/diskusage/properties.c:322
 #: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
+#: applets/mini-commander/preferences.c:614
 #: applets/modemlights/properties.c:197 applets/multiload/properties-cpu.c:231
 #: applets/multiload/properties-mem.c:283
 #: applets/multiload/properties-swap.c:233 applets/netload/properties.c:276
@@ -412,6 +414,7 @@ msgid "None (default)"
 msgstr "Ingen (forvalgt)"
 
 #: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
+#: applets/mini-commander/preferences.c:395
 msgid "Clock"
 msgstr "Klokke"
 
@@ -751,7 +754,7 @@ msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:133
+#: applets/gen_util/clock.c:133 applets/mini-commander/message.c:101
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -771,7 +774,8 @@ msgstr "12 timer"
 msgid "24 hour"
 msgstr "24 timer"
 
-#: applets/gen_util/clock.c:393
+#. show date check box
+#: applets/gen_util/clock.c:393 applets/mini-commander/preferences.c:416
 msgid "Show date"
 msgstr "Vis dato"
 
@@ -1235,6 +1239,164 @@ msgstr "Vis \"Åpne nytt vindu\"-valg"
 #: applets/webcontrol/webcontrol.c:230
 msgid "Look"
 msgstr "Se"
+
+#: applets/mini-commander/mini-commander_applet.c:121
+msgid "Mini-Commander"
+msgstr "Mini-commander"
+
+#: applets/mini-commander/mini-commander_applet.c:138
+msgid "Help & About..."
+msgstr "Hjelp & Om..."
+
+#: applets/mini-commander/mini-commander_applet.c:142
+msgid "ready..."
+msgstr "klar..."
+
+#: applets/mini-commander/about.c:33
+msgid "Mini-Commander Applet"
+msgstr "Mini-kommander applet"
+
+#: applets/mini-commander/cmd_completion.c:63
+msgid "completing..."
+msgstr "ferdigstiller..."
+
+#. showMessage((gchar *) _("exec failed"));
+#. if this line is reached there is really big trouble
+#: applets/mini-commander/cmd_completion.c:73
+#: applets/mini-commander/exec.c:114
+msgid "no /bin/sh"
+msgstr "ingen /bin/sh"
+
+#: applets/mini-commander/cmd_completion.c:89
+msgid "completed"
+msgstr "ferdig"
+
+#: applets/mini-commander/cmd_completion.c:92
+#: applets/mini-commander/cmd_completion.c:99
+msgid "not unique"
+msgstr "ikke unik"
+
+#: applets/mini-commander/cmd_completion.c:94
+msgid "not found"
+msgstr "ikke funnet"
+
+#. enter pressed -> exec command
+#: applets/mini-commander/command_line.c:90 applets/mini-commander/exec.c:100
+msgid "starting..."
+msgstr "starter..."
+
+#: applets/mini-commander/exec.c:102
+msgid "fork error"
+msgstr "fork feil"
+
+#: applets/mini-commander/exec.c:128
+msgid "child exited"
+msgstr "barn avsluttet"
+
+#: applets/mini-commander/message.c:99
+msgid "%H:%M - %d. %b"
+msgstr "%H:%M - %d. %b"
+
+#: applets/mini-commander/message.c:103
+msgid "%d. %b"
+msgstr "%d. %b"
+
+#: applets/mini-commander/preferences.c:91
+msgid "time & date on"
+msgstr "tid & dato på"
+
+#: applets/mini-commander/preferences.c:93
+msgid "time on"
+msgstr "tid på"
+
+#: applets/mini-commander/preferences.c:95
+msgid "date on"
+msgstr "dato på"
+
+#: applets/mini-commander/preferences.c:97
+msgid "clock off"
+msgstr "klokke av"
+
+#: applets/mini-commander/preferences.c:368
+msgid "saving prefs..."
+msgstr "lagrer innstillinger..."
+
+#: applets/mini-commander/preferences.c:389
+msgid "Mini-Commander Properties"
+msgstr "Egenskaper for Mini-commander"
+
+#. show time check box
+#: applets/mini-commander/preferences.c:403
+msgid "Show time"
+msgstr "Vis tid"
+
+#. Size
+#: applets/mini-commander/preferences.c:428
+msgid "Size"
+msgstr "Størrelse"
+
+#. applet width
+#: applets/mini-commander/preferences.c:440
+msgid "Applet width:"
+msgstr "Applet-bredde:"
+
+#. applet height
+#: applets/mini-commander/preferences.c:469
+msgid "Applet height:"
+msgstr "Applet-høyde:"
+
+#. cmd line height
+#: applets/mini-commander/preferences.c:498
+msgid "Command line height:"
+msgstr "Kommandolinjehøyde:"
+
+#. hint
+#: applets/mini-commander/preferences.c:527
+msgid ""
+"\n"
+"Sometimes the applet has to be moved on the panel\n"
+"to make a change of the size visible."
+msgstr ""
+"\n"
+"Noen ganger må appleten flyttes på panelet\n"
+"for å gjøre en endring av størrelsen synlig."
+
+#. Color
+#: applets/mini-commander/preferences.c:538
+#: gnome-terminal/gnome-terminal.c:1024
+msgid "Colors"
+msgstr "Farger"
+
+#. fg
+#: applets/mini-commander/preferences.c:548
+msgid "Command line foreground:"
+msgstr "Kommandolinjeforgrunn:"
+
+#. bg
+#: applets/mini-commander/preferences.c:581
+msgid "Command line background:"
+msgstr "Kommandolinjebakgrunn:"
+
+#: applets/mini-commander/preferences.c:624
+msgid "Special Prefixes"
+msgstr "Spesielle prefiks"
+
+#. prefix
+#: applets/mini-commander/preferences.c:643
+#, c-format
+msgid "Prefix %.2d:"
+msgstr "Prefiks %.2d:"
+
+#. command
+#: applets/mini-commander/preferences.c:661
+#, c-format
+msgid "   Command %.2d:"
+msgstr "   Kommando %.2d:"
+
+#: applets/mini-commander/preferences.c:678
+#, c-format
+msgid "Prefixes %d"
+msgstr "Prefiks %d"
 
 #: desktop-properties/app-background.c:15
 msgid "Background Properties"
@@ -2121,10 +2283,6 @@ msgstr "Gjennomsiktig"
 #: gnome-terminal/gnome-terminal.c:1013
 msgid "Background should be shaded (slow)"
 msgstr "Skyggelagt bakgrunn (treg)"
-
-#: gnome-terminal/gnome-terminal.c:1024
-msgid "Colors"
-msgstr "Farger"
 
 #. Color palette
 #: gnome-terminal/gnome-terminal.c:1027
