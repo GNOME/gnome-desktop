@@ -66,18 +66,25 @@ $(docname).sgml: $(sgml_ents)
 # The weird srcdir trick is because the db2html from the Cygnus RPMs
 # cannot handle relative filenames
 $(docname)/index.html: $(srcdir)/$(docname).sgml
-	-srcdir=`cd $(srcdir) && pwd`; \
-	db2html $$srcdir/$(docname).sgml
+	-srcdir=`cd $(srcdir) && pwd`;			\
+	if test "$(HAVE_JW)" = 'yes' ; then 		\
+		jw -c /etc/sgml/catalog $$srcdir/$(docname).sgml -o $$srcdir/$(docname); \
+	else 						\
+		db2html $$srcdir/$(docname).sgml; 	\
+	 fi
 
 app-dist-hook: index.html
 	-$(mkinstalldirs) $(distdir)/$(docname)/stylesheet-images
 	-$(mkinstalldirs) $(distdir)/figures
 	-cp $(srcdir)/$(docname)/*.html $(distdir)/$(docname)
-	-cp $(srcdir)/$(docname)/*.css $(distdir)/$(docname)
-	-cp $(srcdir)/$(docname)/stylesheet-images/*.gif \
-		$(distdir)/$(docname)/stylesheet-images
-	-cp $(srcdir)/figures/*.png \
-		$(distdir)/figures
+	-for file in $(srcdir)/$(docname)/*.css; do \
+	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
+	  cp $$file $(distdir)/$(docname)/$$basefile ; \
+	done
+	-for file in $(srcdir)/$(docname)/stylesheet-images/*.gif; do \
+	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
+	  cp $$file $(distdir)/$(docname)/stylesheet-images/$$basefile ; \
+	done
 	-if [ -e topic.dat ]; then \
 		cp $(srcdir)/topic.dat $(distdir); \
 	 fi
