@@ -14,7 +14,9 @@ AM_PROG_LIBTOOL
 
 GNOME_COMPILE_WARNINGS
 
+GNOMEVERSION=2.0
 
+AC_SUBST(GNOMEVERSION)
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
@@ -98,6 +100,7 @@ desktop-links/Makefile
 gnome-about/Makefile
 libgnome-desktop/Makefile
 libgnome-desktop/gnome-desktop-2.0.pc
+gnome-version
 po/Makefile.in
 pixmaps/Makefile
 desktop-docs/Makefile
