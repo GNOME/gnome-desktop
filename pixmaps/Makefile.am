@@ -61,6 +61,11 @@ pixmap_DATA =					\
 	gnome-news.png				\
 	gnome-note.png				\
 	gnome-panel.png				\
+	gnome-panel-type-corner.png		\
+	gnome-panel-type-floating.png		\
+	gnome-panel-type-sliding.png		\
+	gnome-panel-type-edge.png		\
+	gnome-panel-type-menu.png      		\
 	gnome-qeye.png				\
 	gnome-run.png				\
 	gnome-session.png			\
