@@ -54,6 +54,8 @@ BITMAPS     = \
 	panel-arrow-right.xpm			\
 	panel-arrow-up.xpm			\
 	panel-folder.xpm			\
+	panel-drawer.png			\
+	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
 	panel-menu-main.xpm
