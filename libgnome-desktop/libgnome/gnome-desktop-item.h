@@ -114,7 +114,11 @@ typedef enum {
 	 * handle one file and we have passed many */
         GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE = 1<<0,
 	/* Use current directory instead of home directory */
-        GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR = 1<<1
+        GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR = 1<<1,
+	/* Append the list of URIs to the command if no Exec
+	 * parameter is specified, instead of launching the 
+	 * app without parameters. */
+	  GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS = 1<<2
 } GnomeDesktopItemLaunchFlags;
 
 typedef enum {

@@ -1,3 +1,18 @@
+2002-06-17  Frank Worsley  <fworsley@shaw.ca>
+
+	* libgnome-desktop/gnome-desktop-item.c:
+	(stringify_files):
+	correctly determine local path for %f and %F parameters
+	in Exec field
+	
+	(ditem_execute), (gnome_desktop_item_launch):
+	support new launch options
+	
+	* libgnome-desktop/gnome-desktop-item.h:
+	added new GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS option
+	to always append command line parameters even if no
+	Exec field parameters are present
+
 2002-06-25  Mark McLoughlin  <mark@skynet.ie>
 
 	* configure.in: Version 2.0.2.

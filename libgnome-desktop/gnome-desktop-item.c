@@ -1079,18 +1079,28 @@ stringify_files (GSList *args,
 
 	for (li = args; li != NULL; li = li->next) {
 		GnomeVFSURI *uri = li->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			const char *path;
+		if (!strcmp (gnome_vfs_uri_get_scheme (uri), "file")) {
+			char *path, *local_path;
 			char *escaped;
-			path = gnome_vfs_uri_get_path (uri);
-			g_string_append (str, sep);
+			
+			path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
+			local_path = gnome_vfs_get_local_path_from_uri (path);
 
-			escaped = escape_single_quotes (path,
-							in_single_quotes,
-							in_double_quotes);
-			g_string_append (str, escaped);
-			g_free (escaped);
-
+			if (local_path != NULL) {
+				/* should never be null since we check for scheme
+				 * above, but you never know ...
+				 */
+				g_string_append (str, sep);
+	
+				escaped = escape_single_quotes (local_path,
+								in_single_quotes,
+								in_double_quotes);
+				g_string_append (str, escaped);
+				g_free (escaped);
+				g_free (local_path);
+			}
+			
+			g_free (path);
 			sep = " ";
 		}
 
@@ -1451,6 +1461,7 @@ ditem_execute (const GnomeDesktopItem *item,
                char **envp,
 	       gboolean launch_only_one,
 	       gboolean use_current_dir,
+		 gboolean append_uris,
 	       GError **error)
 {
 	char **real_argv;
@@ -1463,7 +1474,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	const char *working_dir = NULL;
 	char **temp_argv = NULL;
 	int temp_argc = 0;
-	char *new_exec;
+	char *new_exec, *uris, *temp;
 	int launched = 0;
 
 	g_return_val_if_fail (item, -1);
@@ -1494,6 +1505,15 @@ ditem_execute (const GnomeDesktopItem *item,
 		new_exec = expand_string (item,
 					  exec,
 					  args, &arg_ptr, &added_status);
+
+		if (launched == 0 && added_status == ADDED_NONE && append_uris) {
+			uris = stringify_uris (args, FALSE, FALSE);
+			temp = g_strconcat (new_exec, " ", uris, NULL);
+			g_free (uris);
+			g_free (new_exec);
+			new_exec = temp;
+			added_status = ADDED_ALL;
+		}
 
 		if (launched > 0 && added_status == ADDED_NONE) {
 			g_free (new_exec);
@@ -1698,6 +1718,7 @@ gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
 	ret = ditem_execute (item, the_exec, file_list, envp,
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS),
 			     error);
 
 	return ret;
