@@ -1,3 +1,20 @@
+2000-03-15  Jason Leach  <leach@wam.umd.edu>
+
+	* gnome-about.c (main): made the whole thing a GnomeDialog instead
+	of a GtkWindow with separators and button boxes and an ok button,
+	looks a little more GNOME-ish too.
+	
+	* gnome-about.c (cb_quit): we also need to remove the timeouts
+	(otherwise, seemingly at random, a timeout callback could occur
+	right after the image/window has been destroyed), fixes bug #7047
+
+	(gdb) bt
+	#0  0x804a4e7 in scroll (data=0x0) at gnome-about.c:342
+	#1  0x403e75d4 in g_timeout_dispatch (source_data=0x80d5480, 
+	    dispatch_time=0xbffff954, user_data=0x0) at gmain.c:1300
+
+	* authors.h: who, me? woo! maybe nobody will notice...
+	
 Sun Mar 12 09:48:28 2000  George Lebl <jirka@5z.com>
 
 	* gnome-about.c: destroying a gdk_pixbuf with gdk_imlib_destroy_image
@@ -10,8 +27,9 @@ Sun Mar 12 09:48:28 2000  George Lebl <jirka@5z.com>
 
 2000-03-09  Peter Hawkins <peterhawkins@ozemail.com.au>
 
-	* authors.h, gnome-about.c: Made trivial bug fix (stopped list from
-	jumping back to beginning on window resize) as an excuse to add myself =)
+	* authors.h, gnome-about.c: Made trivial bug fix (stopped list
+	from jumping back to beginning on window resize) as an excuse to
+	add myself =)
 
 2000-03-07  Fatih Demir <kabalak@gmx.net>
 
@@ -20,21 +38,22 @@ Sun Mar 12 09:48:28 2000  George Lebl <jirka@5z.com>
 2000-03-05  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* authors.h (authors): I just realized that you're supposed to put
-	yourself in the list alphabetically and not to the end of the list...
+	yourself in the list alphabetically and not to the end of the
+	list...
 
 Fri Mar 03 00:58:09 2000  George Lebl <jirka@5z.com>
 
 	* gnome-about.c: fix warnings, and figure out the width of the
-	  longest string we have to print and size ourselves accordingly with
-	  the 320 being a minimum.  fixes bug #6789
+	  longest string we have to print and size ourselves accordingly
+	  with the 320 being a minimum.  fixes bug #6789
 
->>>>>>> 1.30
 2000-02-17  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-about.c: Don't forget to to gdk_rgb_init () and stuff
 	when dealing with Pixbufs.
 	
 2000-02-17  Cody Russell  <bratsche@dfw.net>
+
 	* gnome-about.c: Removed GnomeCanvasImage and GdkImlib code and
 	replaced them with GnomeCanvasPixbuf and GdkPixbuf code.
 
@@ -104,8 +123,6 @@ Fri Mar 03 00:58:09 2000  George Lebl <jirka@5z.com>
 
 	* authors.h: added myself.
 
-=======
->>>>>>> 1.8
 1999-10-22  Michael Zucchi  <zucchi@zedzone.mmc.com.au>
 
 	* authors.h (authors): Added me!
@@ -149,4 +166,3 @@ Wed Oct 06 22:52:36 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-about.c: A simple "About GNOME" box to be used in the
 	  panel foot menu.
-

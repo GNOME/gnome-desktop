@@ -1,3 +1,12 @@
+/*
+ * gnome-about
+ * (c) 1999-2000 the Free Software Foundation
+ *
+ * Informative little about thing that lets us brag to our friends as
+ * our name scrolls by, and lets users click to load the GNOME
+ * homepages. (no easter eggs here)
+ */
+
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
@@ -7,8 +16,8 @@
 gboolean cb_quit      (GtkWidget *widget, gpointer data);
 gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
 gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
-gboolean cb_keypress (GtkWidget *widget, GdkEventKey *event);
-gboolean cb_clicked (GtkWidget *widget, GdkEvent *event);
+gboolean cb_keypress  (GtkWidget *widget, GdkEventKey *event);
+gboolean cb_clicked   (GtkWidget *widget, GdkEvent *event);
 gint     scroll       (gpointer data);
 
 GtkWidget *area;
@@ -21,11 +30,14 @@ GdkPixbuf *im;
 GtkWidget *canvas;
 GnomeCanvasItem *image;
 	
-
+static gint sparkle_timer = -1;
+static gint scroll_timer = -1;
+static gint new_sparkle_timer = -1;
 
 /* Sparkles */
 #define NUM_FRAMES 8
 
+typedef struct _Sparkle Sparkle;
 struct _Sparkle {
 	GnomeCanvasItem *hline;
 	GnomeCanvasItem *vline;
@@ -41,7 +53,6 @@ struct _Sparkle {
 	gboolean up;
 };
 
-typedef struct _Sparkle Sparkle;
 
 static void
 sparkle_destroy (Sparkle *sparkle)
@@ -197,12 +208,11 @@ sparkle_new (GnomeCanvas *canvas, double x, double y)
 	sparkle->count = 0;
 	sparkle->up = TRUE;
 	
-	gtk_timeout_add(75,(GtkFunction)sparkle_timeout, sparkle);
-	
+	sparkle_timer = gtk_timeout_add (75,(GtkFunction)sparkle_timeout, sparkle);
 }
 
 static gint 
-new_sparkles_timeout(GnomeCanvas* canvas)
+new_sparkles_timeout (GnomeCanvas* canvas)
 {
 	static gint which_sparkle = 0;
 
@@ -317,8 +327,16 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 gboolean
 cb_quit (GtkWidget *widget, gpointer data)
 {
-	gtk_main_quit();
-	return FALSE;
+	if (sparkle_timer != -1)
+		gtk_timeout_remove (sparkle_timer);
+	if (scroll_timer != -1)
+		gtk_timeout_remove (scroll_timer);
+	if (new_sparkle_timer != -1)
+		gtk_timeout_remove (new_sparkle_timer);
+
+	gtk_main_quit ();
+
+	return FALSE; /* causes "destroy" signal to be emitted */
 }
 
 gint
@@ -367,7 +385,7 @@ scroll (gpointer data)
 	}
 
 	y --;
-	if(y < y_to_wrap_at)
+	if (y < y_to_wrap_at)
 	        y = area->allocation.height + font->ascent;
 
 	update_rect.x = 0;
@@ -401,7 +419,8 @@ cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 		/* Stop display from "jumping back" to beginning on window resize */
 		y = MIN(y, widget->allocation.height + font->ascent);
 		gdk_pixmap_unref (pixmap);
-	} else 
+	}
+	else 
 	{
 		y = widget->allocation.height + font->ascent;
 	}
@@ -435,17 +454,13 @@ get_max_width (void)
 gint
 main (gint argc, gchar *argv[])
 {
-	GtkWidget *separator;
 	GtkWidget *window;
-	GtkWidget *button_box;
 	GtkWidget *hbox;
-	GtkWidget *okbutton;
 	GtkWidget *vbox;
 	GdkPixmap *logo_pixmap;
 	GdkBitmap *logo_mask;
 	GtkWidget *frame;
 	GtkWidget *gtkpixmap;
-	GtkWidget *href;
 	int max_width;
 	
 	gnome_init ("gnome-about","1.0", argc, argv);
@@ -454,14 +469,12 @@ main (gint argc, gchar *argv[])
 	gtk_widget_set_default_colormap (gdk_rgb_get_cmap ());
 	gtk_widget_set_default_visual (gdk_rgb_get_visual ());
 	
-	window = gtk_window_new (GTK_WINDOW_DIALOG);
+	window = gnome_dialog_new (_("About GNOME"),
+				   GNOME_STOCK_BUTTON_OK,
+				   NULL);
+
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 
-	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
-			    GTK_SIGNAL_FUNC (cb_quit), NULL);
-	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
-			    GTK_SIGNAL_FUNC (cb_keypress), NULL);
-	gtk_window_set_title (GTK_WINDOW (window), "About GNOME");
 	gtk_widget_realize (window);
 
 	/* Load the fonts */
@@ -499,72 +512,71 @@ main (gint argc, gchar *argv[])
 				       "width", (double) gdk_pixbuf_get_width (im),
 				       "height", (double) gdk_pixbuf_get_height (im),
 				       NULL);
+
+	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+			    GTK_SIGNAL_FUNC (cb_quit), im);
+	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
+			    GTK_SIGNAL_FUNC (cb_keypress), NULL);
+
 	gtk_signal_connect (GTK_OBJECT (image), "destroy",
 			    GTK_SIGNAL_FUNC (unref_gdk_pixbuf), im);
 	gtk_signal_connect (GTK_OBJECT (image), "event",
 			    GTK_SIGNAL_FUNC (cb_clicked), NULL);
-	gtk_timeout_add (1300, (GtkFunction) new_sparkles_timeout, canvas);
 
-	gtk_container_border_width (GTK_CONTAINER (window), 10);
+	new_sparkle_timer = gtk_timeout_add (1300,
+					     (GtkFunction) new_sparkles_timeout,
+					     canvas);
+
+	gtk_container_border_width (GTK_CONTAINER (GNOME_DIALOG (window)->vbox), GNOME_PAD);
+
 	hbox = gtk_hbox_new (FALSE, 10);
 	vbox = gtk_vbox_new (FALSE, 10);
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), canvas);
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
-	gtk_box_pack_start_defaults (GTK_BOX (vbox), hbox);
-	gtk_container_add (GTK_CONTAINER (window), vbox);
+
 	area = gtk_drawing_area_new ();
 	max_width = get_max_width();
 	gtk_drawing_area_size (GTK_DRAWING_AREA (area),
-			       max_width<320?320:max_width, 160);
+			       max_width<320 ? 320 : max_width, 160);
 	gtk_widget_draw (area, NULL);
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), area);
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
-	gtk_widget_show (area);
+
+	gtk_box_pack_start_defaults (GTK_BOX (GNOME_DIALOG (window)->vbox), hbox);
+
 	gtk_signal_connect (GTK_OBJECT (area), "expose_event",
 			    GTK_SIGNAL_FUNC (cb_exposed), NULL);
 	gtk_signal_connect (GTK_OBJECT (area), "configure_event",
 			    GTK_SIGNAL_FUNC (cb_configure), NULL);
 
+	/* horizontal box for URLs */
 	hbox = gtk_hbox_new (TRUE, 10);
 
-	href = gnome_href_new ("http://gnotices.gnome.org/gnome-news/",
-			       _("GNOME News Site"));
-	gtk_box_pack_start (GTK_BOX (hbox), href,
+	gtk_box_pack_start (GTK_BOX (hbox),
+			    gnome_href_new ("http://gnotices.gnome.org/gnome-news/",
+					    _("GNOME News Site")),
 			    TRUE, FALSE, 0);
 
-	href = gnome_href_new ("http://www.gnome.org/",
-			       _("GNOME Main Site"));
-	gtk_box_pack_start (GTK_BOX (hbox), href,
+	gtk_box_pack_start (GTK_BOX (hbox),
+			    gnome_href_new ("http://www.gnome.org/",
+					    _("GNOME Main Site")),
 			    TRUE, FALSE, 0);
 
-	href = gnome_href_new ("http://developer.gnome.org/",
-			       _("GNOME Developers' Site"));
-	gtk_box_pack_start (GTK_BOX (hbox), href,
+	gtk_box_pack_start (GTK_BOX (hbox),
+			    gnome_href_new ("http://developer.gnome.org/",
+					    _("GNOME Developers' Site")),
 			    TRUE, FALSE, 0);
 	
-	gtk_box_pack_start (GTK_BOX (vbox), hbox,
-			    FALSE, TRUE, 0);
+	gtk_box_pack_start_defaults (GTK_BOX (GNOME_DIALOG (window)->vbox), hbox);
 
-	button_box = gtk_hbutton_box_new ();
-	gtk_box_pack_end (GTK_BOX (vbox), button_box,
-			  FALSE, TRUE, 0);
-	separator = gtk_hseparator_new ();
-	gtk_box_pack_end (GTK_BOX (vbox), separator,
-			  FALSE, TRUE,
-			  GNOME_PAD_SMALL);
-	gtk_button_box_set_layout (GTK_BUTTON_BOX (button_box),
-				   gnome_preferences_get_button_layout ());
-	gtk_button_box_set_spacing (GTK_BUTTON_BOX (button_box),
-				    GNOME_PAD);
-	okbutton = gnome_stock_or_ordinary_button (GNOME_STOCK_BUTTON_OK);
-	gtk_signal_connect (GTK_OBJECT (okbutton), "clicked",
+	gtk_signal_connect (GTK_OBJECT (window), "clicked",
 			    GTK_SIGNAL_FUNC (cb_quit), NULL);
-	gtk_box_pack_start (GTK_BOX (button_box), okbutton, TRUE, TRUE, 0);
-	gtk_timeout_add (50, scroll, NULL);
+
+	scroll_timer = gtk_timeout_add (50, scroll, NULL);
 
 	gtk_widget_show_all (window);
 	gtk_main ();

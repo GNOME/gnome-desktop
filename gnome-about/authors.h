@@ -123,6 +123,7 @@ static author authors[] = {
 	{ "Jens Lautenbacher", "" },
 	{ "Evan Lawrence", "" },
 	{ "Garrett LeSage", "" },
+	{ "Jason Leach", "<leach@wam.umd.edu>" },
 	{ "George Lebl", "<jirka@5z.com>" },
 	{ "Elliot Lee", "<sopwith@redhat.com>" },
 	{ "Marc Lehmann", "" },
