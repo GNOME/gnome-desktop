@@ -9,8 +9,12 @@ omf_dir=$(top_srcdir)/omf-install
 
 EXTRA_DIST = $(app).sgml $(help_DATA) $(omffiles)
 
-all: index.html
-	-scrollkeeper-preinstall $(DESTDIR)$(helpdir)/$(app).sgml $(omffiles) $(omf_dir)/$(omffiles)
+all: index.html omf
+
+omf: $(omffiles)
+	-for omffile in $(omffiles); do \
+	  -scrollkeeper-preinstall $(DESTDIR)$(helpdir)/$(app).sgml $$omffile $(omf_dir)/$$omffile; \
+	done
 
 index.html: $(app)/index.html
 	-cp $(app)/index.html .
