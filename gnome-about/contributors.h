@@ -159,6 +159,7 @@ static gchar *contributors[] = {
 	"Gregory McLean",
 	"Michael Meeks",
 	"Federico Mena-Quintero",
+	"Christophe Merlet",
 	"Cesar Miquel",
 	"Julian Missig",
 	"Eric B. Mitchell",
