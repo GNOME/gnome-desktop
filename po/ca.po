@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-core 0.30\n"
-"POT-Creation-Date: 1999-03-13 18:38-0500\n"
-"PO-Revision-Date: 1998-11-28 15:48+01:00\n"
+"Project-Id-Version: gnome-core 0.99.3\n"
+"POT-Creation-Date: 1999-02-14 15:35+0100\n"
+"PO-Revision-Date: 1999-02-27 17:48+01:00\n"
 "Last-Translator: Ivan Vilata i Balaguer <al011097@alumail.uji.es>\n"
-"Language-Team:\n"
+"Language-Team: linux-ca@chanae.alphanet.ch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,20 +13,21 @@ msgstr ""
 #: applets/asclock/asclock.c:155
 #: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
-msgstr "Tocant a"
+msgstr "A propòsit de"
 
 #: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:449
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:477
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
-#: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
-#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
-#: applets/gnome-pager/gnomepager_applet.c:1420
+#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:491
+#: applets/gnome-pager/gnomepager_applet.c:1465 applets/gticker/gticker.c:61
+#: applets/icewm-pager/wmpager_applet.c:90
 #: applets/mini-commander/src/mini-commander_applet.c:246
-#: applets/modemlights/modemlights.c:756 applets/multiload/cpuload.c:64
-#: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
+#: applets/modemlights/modemlights.c:750 applets/multiload/cpuload.c:62
+#: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:371 panel/launcher.c:294
-#: panel/menu.c:3460
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:378 panel/launcher.c:278
+#: panel/menu.c:3319
 msgid "Properties..."
 msgstr "Propietats..."
 
@@ -42,19 +43,113 @@ msgstr "Qui ha dit que NeXT era mort?"
 msgid "Timezone"
 msgstr "Zona horària"
 
-#: applets/battery/battery.c:358
-msgid "Internal error: invalid mode in battery_set_mode"
-msgstr "Error intern: mode invàlid en battery_set_mode"
+#: applets/batmon/batmon.c:106
+msgid "Can't open /proc/apm; can't get data."
+msgstr "No es pot obrir /proc/apm; no es pot obtenir-ne dades."
 
-#: applets/battery/battery.c:403 applets/gen_util/clock.c:273
-#: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
-#: applets/netload/netload.c:321
+#: applets/batmon/batmon.c:112
+msgid "Something wrong with /proc/apm; can't get data."
+msgstr "Quelcom d'erroni amb /proc/apm; no es pot obtenir-ne dades."
+
+#: applets/batmon/batmon.c:155
+msgid "Can't open /dev/apm; can't get data."
+msgstr "No es pot obrir /dev/apm; no es pot obtenir-ne dades."
+
+#: applets/batmon/batmon.c:161 applets/battery/read-battery.c:135
+msgid "ioctl failed on /dev/apm."
+msgstr "ioctl ha fallat amb /dev/apm"
+
+#: applets/batmon/batmon.c:211
+msgid "There is no battery?!?"
+msgstr "No hi ha bateria?!?"
+
+# El que deia Teo...  es refereix a la bateria o al nivell?
+# És clar, la bateria no és alta, ni el nivell es carrega,
+# així que tant se val!
+#: applets/batmon/batmon.c:214
+msgid "High and charging."
+msgstr "Alta i carregant-se."
+
+#: applets/batmon/batmon.c:217
+msgid "High."
+msgstr "Alta."
+
+#: applets/batmon/batmon.c:220
+msgid "Low and charging."
+msgstr "Baixa i carregant-se."
+
+#: applets/batmon/batmon.c:223
+msgid "Low."
+msgstr "Baixa."
+
+#: applets/batmon/batmon.c:226
+msgid "Critical and charging."
+msgstr "Crítica i carregant-se."
+
+#: applets/batmon/batmon.c:229
+msgid "Critical!!"
+msgstr "Crítica!!"
+
+#: applets/batmon/batmon.c:232
+msgid "Charging."
+msgstr "Carregant-se."
+
+#: applets/batmon/batmon.c:240
+msgid "unknown minutes of battery."
+msgstr "minuts de bateria desconeguts."
+
+#: applets/batmon/batmon.c:243
+msgid "unknown minutes of battery (%d%%)"
+msgstr "minuts de bateria desconeguts (%d%%)"
+
+#: applets/batmon/batmon.c:249
+#, c-format
+msgid "%d minutes of battery"
+msgstr "%d minuts de bateria"
+
+#: applets/batmon/batmon.c:251
+msgid "%d minutes of battery (%d%%)"
+msgstr "%d minuts de bateria (%d%%)"
+
+#. would have to be an error
+#: applets/batmon/batmon.c:255
+msgid "More than 100,000,000 minutes of battery life?!?"
+msgstr "¿!¿La bateria té més de 100.000.000 minuts de vida?!?"
+
+#: applets/batmon/batmon.c:338
+msgid "APM Stats"
+msgstr "Estat de l'APM"
+
+#: applets/batmon/batmon.c:356
+msgid "Linux APM Driver Version:"
+msgstr "Versió del controlador APM de Linux:"
+
+#: applets/batmon/batmon.c:368
+msgid "APM BIOS Version:"
+msgstr "Versió d'APM del BIOS:"
+
+#: applets/batmon/batmon.c:385
+msgid "Battery Status:"
+msgstr "Estat de la bateria:"
+
+#: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2453
+#: panel/launcher.c:43
+msgid "Close"
+msgstr "Tancar"
+
+#: applets/battery/battery.c:357
+msgid "Internal error: invalid mode in battery_set_mode"
+msgstr "Error intern: el mode en battery_set_mode no és vàlid"
+
+#: applets/battery/battery.c:402 applets/freshapp/freshapp.c:38
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:672
+#: applets/gen_util/printer.c:386 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "No es pot crear el complement!\n"
 
-#: applets/battery/battery.c:623
+#: applets/battery/battery.c:622
 msgid "Could not allocate space for graph values"
-msgstr "No he pogut reservar espai pels valors de la gràfica"
+msgstr "No s'ha pogut reservar espai pels valors del gràfic"
 
 #: applets/battery/properties.c:37
 msgid "Battery Monitor Settings"
@@ -62,10 +157,11 @@ msgstr "Propietats del Monitor de Bateria"
 
 #: applets/battery/properties.c:46
 msgid "General Properties"
-msgstr "Propietats Generals"
+msgstr "Propietats generals"
 
-#: applets/battery/properties.c:48 applets/diskusage/properties.c:232
-#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
+#: applets/battery/properties.c:48 applets/cpuload/properties.c:149
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
 msgid "Applet Height"
 msgstr "Altura del complement"
 
@@ -79,7 +175,7 @@ msgstr "Mode del complement"
 
 #: applets/battery/properties.c:69
 msgid "Graph"
-msgstr "Gràfica"
+msgstr "Gràfic"
 
 #: applets/battery/properties.c:71
 msgid "Readout"
@@ -95,11 +191,11 @@ msgstr "Color de bat. amb AC inactiu:"
 
 #: applets/battery/properties.c:127
 msgid "Graph Interval:"
-msgstr "Interval de la gràfica:"
+msgstr "Interval del gràfic:"
 
 #: applets/battery/properties.c:141
 msgid "Graph Direction:"
-msgstr "Direcció de la gràfica:"
+msgstr "Direcció del gràfic:"
 
 #: applets/battery/properties.c:144
 msgid "Left to Right"
@@ -113,78 +209,100 @@ msgstr "De dreta a esquerra"
 msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
-msgstr "No puc obrir /proc/apm!  Assegura't que el teu nucli té suport APM.\n"
+msgstr "No es pot obrir /proc/apm!  Assegureu-vos que el nucli té suport per APM.\n"
 
 #: applets/battery/read-battery.c:61
 #, c-format
 msgid "Could not dup() APM file descriptor: %s\n"
-msgstr ""
+msgstr "No s'ha pogut dup()licar el descriptor del fitxer d'APM: %s\n"
 
 #: applets/battery/read-battery.c:130
 msgid "Cannot open /dev/apm; can't get data."
-msgstr "No puc obrir /dev/apm; no puc obtenir-ne dades."
-
-#: applets/battery/read-battery.c:135
-msgid "ioctl failed on /dev/apm."
-msgstr "ioctl ha fallat amb /dev/apm"
+msgstr "No es pot obrir /dev/apm; no es pot obtenir-ne dades."
 
 #: applets/battery/read-battery.c:146
 msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "L'APM no és habilitat!  No es pot llegir informació sobre la càrrega de la bateria."
+
+#: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:483
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
+#: applets/gkb/gkb.c:483 applets/gnome-pager/gnomepager_applet.c:1459
+#: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:756
+#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2354
+msgid "About..."
+msgstr "A propòsit de..."
+
+#: applets/bussign/bussign.c:80
+msgid "Refresh Image"
+msgstr "Actualitzar imatge"
+
+#: applets/bussign/bussign.c:244
+msgid "The Bus Sign Applet"
+msgstr "El complement Bus Sign"
+
+#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:632
+msgid "(c) 1998 the Free Software Foundation"
+msgstr "(c) 1998 Free Software Foundation"
+
+#: applets/bussign/bussign.c:247
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
 msgstr ""
-"L'APM no és habilitat!  No puc llegir informació sobre la càrrega de la "
-"bateria."
+"Aquest complement és una pèrdua total de temps. Torna al treball!\n"
+"\n"
+"Per emplenar el senyal visita:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
 
 #: applets/cdplayer/cdplayer.c:318
 msgid "Run gtcd..."
-msgstr ""
+msgstr "Executar gtcd..."
 
 #: applets/charpick/charpick.c:203
 msgid "Character Picker"
-msgstr ""
+msgstr "Selector de Caràcters"
 
 #: applets/charpick/charpick.c:204
 msgid "0.02"
-msgstr ""
+msgstr "0.02"
 
 #: applets/charpick/charpick.c:205
-#, fuzzy
 msgid "Copyright (C) 1998"
-msgstr "Copyright (C) 1998 M.Watson"
+msgstr "Copyright (C) 1998"
 
 #: applets/charpick/charpick.c:207
 msgid ""
 "Gnome Panel applet for selecting strange characters that are not on my "
 "keyboard. Released under GNU General Public Licence."
-msgstr ""
+msgstr "Complement del Plafó de GNOME per triar caràcters estranys que no són al meu teclat.  Lliurat sota la Llicència Pública General GNU."
 
-#: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
-#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1414
-#: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
-#: panel/menu.c:2456
-msgid "About..."
-msgstr "Tocant a..."
-
-#: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:47 applets/gticker/gticker.c:230
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
 
-#: applets/clockmail/clockmail.c:52
+# És que li deuen agafar el gustet al _(...)
+#: applets/clockmail/clockmail.c:52 applets/gticker/gticker.c:234
 msgid "John Ellis <johne@bellatlantic.net>"
-msgstr ""
+msgstr "John Ellis <johne@bellatlantic.net>"
 
 #: applets/clockmail/clockmail.c:55
 msgid "Clock and Mail Notify Applet"
 msgstr "Complement Rellotge i Notificació de Correu"
 
 #: applets/clockmail/clockmail.c:56
-#, fuzzy
 msgid "(C) 1999"
-msgstr "(C) 1998"
+msgstr "(C) 1999"
 
 #: applets/clockmail/clockmail.c:58
 msgid ""
@@ -194,9 +312,7 @@ msgid ""
 "arrives."
 msgstr ""
 "Lliurat sota la llicència pública general GNU.\n"
-"Rellotge digital bàsic amb la data a una pista.  Visor horari 12/24 hores. "
-"El parpelleig del correu pot ser per qualsevol correu no llegit, o breument "
-"quan arriba nou correu."
+"Rellotge digital bàsic amb la data a una pista.  Visor horari 12/24 hores. El parpelleig del correu pot ser per qualsevol correu no llegit, o breument quan arriba nou correu."
 
 #: applets/clockmail/clockmail.c:128
 msgid " (GMT)"
@@ -212,7 +328,7 @@ msgstr " (GMT %+d)"
 msgid "None (default)"
 msgstr "Cap (per defecte)"
 
-#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:502
+#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:428
 #: applets/mini-commander/src/preferences.c:438
 msgid "Clock"
 msgstr "Rellotge"
@@ -245,93 +361,14 @@ msgstr "Quan arribe nou correu, executar:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Quantitat de correu per considerar plena la bústia (Koctets):"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
 #. ---
-#: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
-#: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
+#: applets/clockmail/properties.c:388 applets/cpuload/properties.c:231
+#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:210
+#: applets/fvwm-pager/properties.c:246 applets/gticker/properties.c:328
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:919
-#: panel/panel_config_global.c:310
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:887
+#: panel/panel_config_global.c:301
 msgid "General"
 msgstr "General"
 
@@ -343,6 +380,29 @@ msgstr "Fitxer de tema (directori):"
 msgid "Theme"
 msgstr "Tema"
 
+#: applets/cpuload/properties.c:137
+msgid "User Load"
+msgstr "Càrrega d'usuari"
+
+#: applets/cpuload/properties.c:143
+msgid "System Load"
+msgstr "Càrrega de sistema"
+
+#: applets/cpuload/properties.c:155 applets/diskusage/properties.c:238
+#: applets/fvwm-pager/properties.c:184 applets/netload/properties.c:147
+#: panel/swallow.c:248
+msgid "Width"
+msgstr "Amplària"
+
+#: applets/cpuload/properties.c:170 applets/diskusage/properties.c:259
+#: applets/netload/properties.c:170
+msgid "Update Frequency"
+msgstr "Freqüència d'actualització"
+
+#: applets/cpuload/properties.c:228
+msgid "CPULoad Settings"
+msgstr "Propietats de Càrrega d'UPC"
+
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
 msgstr "Complement Marcador PPP"
@@ -350,10 +410,9 @@ msgstr "Complement Marcador PPP"
 # Alguna bona traducció per «funky»?
 #: applets/dialer/dialer.c:49
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
-msgstr ""
-"Una canya de macador PPP.  Com no se li havia ocorregut a ningú abans?!"
+msgstr "Un macador PPP amigable.  Com no se li havia ocorregut a ningú abans?!"
 
-#: applets/dialer/dialer.c:87 panel/menu.c:3279
+#: applets/dialer/dialer.c:87 panel/menu.c:3142
 msgid "Off"
 msgstr "Tallat"
 
@@ -373,15 +432,6 @@ msgstr "Color del text"
 msgid "Backgroundcolor"
 msgstr "Color del fons"
 
-#: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
-#: applets/netload/properties.c:147 panel/swallow.c:246
-msgid "Width"
-msgstr "Amplària"
-
-#: applets/diskusage/properties.c:259 applets/netload/properties.c:170
-msgid "Update Frequency"
-msgstr "Freqüència d'actualització"
-
 #: applets/diskusage/properties.c:334
 msgid "Diskusage Settings"
 msgstr "Propietats de l'Ús de Disc"
@@ -390,13 +440,14 @@ msgstr "Propietats de l'Ús de Disc"
 msgid "Drive Mount Applet"
 msgstr "Complement Muntador d'Unitats"
 
+# Iepaa!  Ací se'ls ha escapat un punt!
 #: applets/drivemount/drivemount.c:74
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
 msgstr ""
 "Lliurat sota la llicència pública general GNU.\n"
-"Munta i desmunta unitats..."
+"Munta i desmunta unitats."
 
 #: applets/drivemount/drivemount.c:147
 msgid " mounted"
@@ -420,7 +471,7 @@ msgstr ""
 "Ha fallat la comanda de muntatge\n"
 "\""
 
-#: applets/drivemount/drivemount.c:492
+#: applets/drivemount/drivemount.c:490
 msgid "Eject"
 msgstr "Treure"
 
@@ -438,7 +489,7 @@ msgstr "Icona:"
 
 #: applets/drivemount/properties.c:167
 msgid "Floppy"
-msgstr "Disc flexible"
+msgstr "Disquet"
 
 #: applets/drivemount/properties.c:171
 msgid "Cdrom"
@@ -458,21 +509,19 @@ msgstr "Punt de muntatge:"
 
 #: applets/drivemount/properties.c:204
 msgid "Use automount friendly status test"
-msgstr ""
+msgstr "Usar el test amigable d'estat d'automount"
 
 #: applets/esd-manager/esdmanager_applet.c:29
-#, fuzzy
-msgid "Esound MAnager Applet"
-msgstr "Complement Paginador de l'Escriptori"
-
-#: applets/esd-manager/esdmanager_applet.c:29
-#, fuzzy
 msgid "Copyright (C)1998 Red Hat Software"
-msgstr "Copyright (C) 1998 M.Watson"
+msgstr "Copyright (C) 1998 Red Hat Software"
+
+#: applets/esd-manager/esdmanager_applet.c:29
+msgid "Esound MAnager Applet"
+msgstr "Complement Gestor d'Esound"
 
 #: applets/esd-manager/esdmanager_applet.c:31
 msgid "This does nothing useful"
-msgstr ""
+msgstr "Açò no fa res d'útil"
 
 #: applets/fifteen/fifteen.c:36
 msgid "You win!"
@@ -500,11 +549,11 @@ msgstr ""
 
 #: applets/fifteen/fifteen.c:292
 msgid "Can't create fifteen applet!"
-msgstr "No puc crear el complement Quinze!"
+msgstr "No es pot crear el complement Quinze!"
 
 #: applets/fifteen/fifteen.c:302
 msgid "Scramble pieces"
-msgstr "Rebolicar peces"
+msgstr "Barrejar peces"
 
 #: applets/fish/fish.c:126 applets/fish/fish.c:407
 #, c-format
@@ -526,13 +575,13 @@ msgstr "Nom del teu Peix de GNOME:"
 
 #: applets/fish/fish.c:241
 msgid "The Animation Filename:"
-msgstr "Nom de fitxer amb l'animació:"
+msgstr "Nom del fitxer d'animació:"
 
-#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1072
-#: panel/menu.c:3401 panel/panel-util.c:78 panel/panel-util.c:116
-#: panel/panel-util.c:154 panel/panel_config.c:717 panel/swallow.c:237
+#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1015
+#: panel/menu.c:3260 panel/panel-util.c:77 panel/panel-util.c:115
+#: panel/panel-util.c:153 panel/panel_config.c:728 panel/swallow.c:238
 msgid "Browse"
-msgstr "Buscar"
+msgstr "Fullejar"
 
 #: applets/fish/fish.c:256
 msgid "Frames In Animation:"
@@ -548,7 +597,7 @@ msgstr "Peix"
 
 #: applets/fish/fish.c:416
 msgid "(with minor help from George)"
-msgstr "(amb un xicotet ajut de George)"
+msgstr "(amb una ajudeta de George)"
 
 #: applets/fish/fish.c:420
 msgid "The GNOME Fish Applet"
@@ -560,31 +609,24 @@ msgid ""
 "compilation time, and if loaded it also takes up precious panel space and "
 "memory. If anyone is found using this applet, he should be promptly sent for "
 "a psychiatric evaluation."
-msgstr ""
-"Aquest complement no té cap utilitat.  Només ocupa espai al disc i al temps "
-"de compilació, i carregat també un preciós espai al plafó i a la memòria.  "
-"Si algú queda corprés amb aquest complement, hauria de ser sotmés a "
-"avaluació psiquiàtrica el més aviat possible "
+msgstr "Aquest complement no té cap utilitat.  Només ocupa espai al disc i al temps de compilació, i carregat també un preciós espai al plafó i a la memòria.  Si algú queda corprés amb aquest complement, hauria de ser sotmés a avaluació psiquiàtrica el més aviat possible."
 
 #: applets/fvwm-pager/fvwm-pager.c:154
-#, fuzzy
 msgid "Fvwm Pager Applet"
-msgstr "Complement Paginador de l'Escriptori"
+msgstr "Complement Paginador Fvwm"
 
 #: applets/fvwm-pager/fvwm-pager.c:156
-#, fuzzy
 msgid "Copyright (C) 1998 M. Lausch"
-msgstr "Copyright (C) 1998 M.Watson"
+msgstr "Copyright (C) 1998 M. Lausch"
 
 #: applets/fvwm-pager/fvwm-pager.c:314
 #, c-format
 msgid "Desk %d"
-msgstr ""
+msgstr "Escriptori %d"
 
 #: applets/fvwm-pager/fvwm-pager.c:403
-#, fuzzy
 msgid "About\t"
-msgstr "Tocant a"
+msgstr "A propòsit de\t"
 
 #: applets/fvwm-pager/fvwm-pager.c:409 gmenu/gmenu.c:114
 msgid "Properties"
@@ -592,29 +634,29 @@ msgstr "Propietats"
 
 #: applets/fvwm-pager/properties.c:133 applets/fvwm-pager/properties.c:162
 msgid "Active Window Color"
-msgstr ""
+msgstr "Color de la finestra activa"
 
 #: applets/fvwm-pager/properties.c:137 applets/fvwm-pager/properties.c:166
 msgid "Inactive Window Color"
-msgstr ""
+msgstr "Color de la finestra inactiva"
 
+# Açò em recorda quelcom molt lleig ;)
 #: applets/fvwm-pager/properties.c:141 applets/fvwm-pager/properties.c:170
 msgid "Active Desktop Color"
-msgstr ""
+msgstr "Color de l'escriptori actiu"
 
 #: applets/fvwm-pager/properties.c:145 applets/fvwm-pager/properties.c:174
 msgid "Inactive Desktop Color"
-msgstr ""
+msgstr "Color de l'escriptori inactiu"
 
 #: applets/fvwm-pager/properties.c:242
-#, fuzzy
 msgid "Fvwm Pager Settings"
-msgstr "Propietats de l'Ús de Disc"
+msgstr "Propietats del Paginador Fvwm"
 
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:126
+#: applets/gen_util/clock.c:114
 msgid ""
 "%a\n"
 "%b %d"
@@ -624,11 +666,11 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:131
+#: applets/gen_util/clock.c:119
 msgid "%a %b %d"
 msgstr "%d, %b de %a"
 
-#: applets/gen_util/clock.c:154
+#: applets/gen_util/clock.c:134
 msgid ""
 "%I:%M\n"
 "%p"
@@ -636,101 +678,87 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:157
+#: applets/gen_util/clock.c:137
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:163 applets/mini-commander/src/message.c:104
+#: applets/gen_util/clock.c:143 applets/mini-commander/src/message.c:104
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: applets/gen_util/clock.c:405
+#: applets/gen_util/clock.c:354
 msgid "Clock properties"
 msgstr "Propietats del Rellotge"
 
-#: applets/gen_util/clock.c:409
-#, fuzzy
+#: applets/gen_util/clock.c:358
 msgid "Time Format"
-msgstr "Formats de fitxers"
+msgstr "Format de l'hora"
 
-#: applets/gen_util/clock.c:421
+#: applets/gen_util/clock.c:370
 msgid "12 hour"
 msgstr "12 hores"
 
-#: applets/gen_util/clock.c:430
+#: applets/gen_util/clock.c:379
 msgid "24 hour"
 msgstr "24 hores"
 
 #. show date check box
-#: applets/gen_util/clock.c:465 applets/mini-commander/src/preferences.c:459
+#: applets/gen_util/clock.c:410 applets/mini-commander/src/preferences.c:459
 msgid "Show date"
-msgstr ""
+msgstr "Mostrar la data"
 
-#: applets/gen_util/clock.c:479
-#, fuzzy
-msgid "Unix time"
-msgstr "Preguntar el següent cop"
-
-#: applets/gen_util/mailcheck.c:267
+#: applets/gen_util/mailcheck.c:249
 msgid "You have new mail."
 msgstr "Tens correu nou."
 
-#: applets/gen_util/mailcheck.c:269
+#: applets/gen_util/mailcheck.c:251
 msgid "You have mail."
 msgstr "Tens correu."
 
-#: applets/gen_util/mailcheck.c:271
+#: applets/gen_util/mailcheck.c:253
 msgid "No mail."
 msgstr "No tens correu."
 
-#: applets/gen_util/mailcheck.c:557 applets/gen_util/mailcheck.c:578
-#, fuzzy
+#: applets/gen_util/mailcheck.c:511
 msgid "Execute"
-msgstr "Treure"
+msgstr "Executar"
 
-#: applets/gen_util/mailcheck.c:569
+#: applets/gen_util/mailcheck.c:523
 msgid "before each update"
-msgstr ""
+msgstr "abans de cada actualització"
 
-#: applets/gen_util/mailcheck.c:591
-msgid "when clicked."
-msgstr ""
-
-#: applets/gen_util/mailcheck.c:600
+#: applets/gen_util/mailcheck.c:531
 msgid "Check for mail every"
-msgstr ""
+msgstr "Mirar si hi ha correu cada"
 
-#: applets/gen_util/mailcheck.c:613
+# Uuuuffff!
+#: applets/gen_util/mailcheck.c:544
 msgid "s"
-msgstr ""
+msgstr "s"
 
-#: applets/gen_util/mailcheck.c:621
+#: applets/gen_util/mailcheck.c:552
 msgid "Select animation"
-msgstr "Selecciona una animació"
+msgstr "Seleccioneu una animació"
 
-#: applets/gen_util/mailcheck.c:649
+#: applets/gen_util/mailcheck.c:580
 msgid "Mail check properties"
 msgstr "Propietats del Comprovador de correu"
 
-#: applets/gen_util/mailcheck.c:654
+#: applets/gen_util/mailcheck.c:585
 msgid "Mail check"
 msgstr "Comprovador de Correu"
 
-#: applets/gen_util/mailcheck.c:704
+#: applets/gen_util/mailcheck.c:631
 msgid "Mail check Applet"
 msgstr "Complement Comprovador de Correu"
 
-#: applets/gen_util/mailcheck.c:705
-msgid "(c) 1998 the Free Software Foundation"
-msgstr "(c) 1998 Free Software Foundation"
-
-#: applets/gen_util/mailcheck.c:707
+#: applets/gen_util/mailcheck.c:634
 msgid "Mail check notifies you when new mail is on your mailbox"
-msgstr "El comprovador de correu t'avisa quan tens correu nou a la bústia"
+msgstr "El comprovador de correu vos avisa quan hi ha correu nou a la bústia"
 
-#: applets/gen_util/mailcheck.c:772
+#: applets/gen_util/mailcheck.c:693
 msgid "Text only"
 msgstr "Només text"
 
@@ -750,144 +778,132 @@ msgstr "Comanda d'impressió:"
 msgid "Printer"
 msgstr "Impressora"
 
-#: applets/gkb/gkb.c:187
-#, fuzzy
+#: applets/gkb/gkb.c:177
 msgid "GKB settings"
-msgstr "Propietats generals de les icones"
+msgstr "Propietats de GKB"
 
-#: applets/gkb/gkb.c:200
+#: applets/gkb/gkb.c:190
 msgid "Flag One"
-msgstr ""
+msgstr "Bandera u"
 
-#: applets/gkb/gkb.c:233
+#: applets/gkb/gkb.c:223
 msgid "Flag Two"
-msgstr ""
+msgstr "Bandera dos"
+
+#: applets/gkb/gkb.c:252
+msgid "Program"
+msgstr "Programa"
 
 #: applets/gkb/gkb.c:262
-#, fuzzy
-msgid "Program"
-msgstr "Inici"
-
-#: applets/gkb/gkb.c:272
 msgid "Xkb"
-msgstr ""
+msgstr "Xkb"
 
-#: applets/gkb/gkb.c:276
+#: applets/gkb/gkb.c:266
 msgid "Xmodmap"
-msgstr ""
+msgstr "Xmodmap"
 
-#: applets/gkb/gkb.c:288 panel/menu.c:1723 panel/menu.c:1767 panel/menu.c:1769
-#: panel/menu.c:3061 panel/menu.c:3414
+#: applets/gkb/gkb.c:277 panel/menu.c:1672 panel/menu.c:1732 panel/menu.c:2935
+#: panel/menu.c:3273
 msgid "Menu"
 msgstr "Menú"
 
-#: applets/gkb/gkb.c:426
-#, fuzzy
-msgid "The GNOME KeyBoard Applet"
-msgstr "Complement del Peix de GNOME"
+#: applets/gkb/gkb.c:413
+msgid "The GNOME KB Applet"
+msgstr "Complement Teclat de GNOME"
 
-#: applets/gkb/gkb.c:427
-#, fuzzy
-msgid "1.0.1"
-msgstr "1.0"
+#: applets/gkb/gkb.c:414
+msgid "1.0pre1"
+msgstr "1.0pre1"
 
-#: applets/gkb/gkb.c:428
-msgid "(C) 1998-99 LSC - Linux Supporting Center"
-msgstr ""
+#: applets/gkb/gkb.c:415
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr "(C) 1998 LSC - Linux Supporting Center"
 
-#: applets/gkb/gkb.c:430
+#: applets/gkb/gkb.c:417
 msgid ""
-"This applet switches between keyboard maps. Not more. It uses setxkbmap, or "
-"xmodmap. The main site of this app moved temporarily to URL "
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
 "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-"to CVS.So long, and thanks for all the fish.\n"
-"Thanks for Balazs Nagy (Kevin)<julian7@kva.hu> for minor help."
-msgstr ""
+"to CVS.So long, and thanks for all the fish."
+msgstr "Aquest complement solia canviar taules de teclat.  Mai més.  Ara usa setxkbmap o xmodmap.  El lloc principal d'aquesta aplicaió s'ha traslladat temporalment a la URL http://lsc.kva.hu/gkb.  Envieu-me la vostra bandera, per favor (tamany 60x40), i la posaré al CVS.  Fins prompte, i gràcies per tots els peixos."
 
-#: applets/gkb/gkb.c:441
+#: applets/gkb/gkb.c:426
 msgid "gkb.xpm"
-msgstr ""
+msgstr "gkb.xpm"
 
-#: applets/gnome-pager/gnomepager_applet.c:127
+#: applets/gnome-pager/gnomepager_applet.c:106
+msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
+msgstr "Copyright (C) 1998, 1999 Red Hat Software, Free Software Foundation"
+
+#: applets/gnome-pager/gnomepager_applet.c:106
+#: applets/icewm-pager/wmpager_applet.c:218
 msgid "Desktop Pager Applet"
 msgstr "Complement Paginador de l'Escriptori"
 
-#: applets/gnome-pager/gnomepager_applet.c:127
-#, fuzzy
-msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
-msgstr "Copyright (C) The Free Software Foundation"
-
-#: applets/gnome-pager/gnomepager_applet.c:129
+# Hehe, fa un temps llegia a una revista anglesa un discussió increible sobre
+# unitats de CD «XA compliant» i «XA compatible», que pel que es veu no és
+# el mateix...  Però, tant se val!
+#: applets/gnome-pager/gnomepager_applet.c:108
 msgid "Pager for a GNOME compliant Window Manager"
-msgstr ""
+msgstr "Paginador per gestors de finestres compatibles amb GNOME"
 
-#: applets/gnome-pager/gnomepager_applet.c:203
-#, fuzzy
+#: applets/gnome-pager/gnomepager_applet.c:332
 msgid "Gnome Pager Settings"
-msgstr "Propietats de l'Ús de Disc"
+msgstr "Propietats del Paginador de GNOME"
 
-#: applets/gnome-pager/gnomepager_applet.c:207
-#: applets/slashapp/properties.c:422
+#: applets/gnome-pager/gnomepager_applet.c:336
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
 msgid "Display"
-msgstr ""
+msgstr "Pantalla"
 
-#: applets/gnome-pager/gnomepager_applet.c:208
+#: applets/gnome-pager/gnomepager_applet.c:337
 msgid "Show all tasks on all desktops"
-msgstr ""
+msgstr "Mostrar totes les tasques de tots els escriptoris"
 
-#: applets/gnome-pager/gnomepager_applet.c:216
-#, fuzzy
+#: applets/gnome-pager/gnomepager_applet.c:345
 msgid "Show tasks"
-msgstr "_Amagar barra de menús"
+msgstr "Mostrar tasques"
 
-#: applets/gnome-pager/gnomepager_applet.c:224
-#, fuzzy
+#: applets/gnome-pager/gnomepager_applet.c:353
 msgid "Show pager"
-msgstr "_Amagar barra de menús"
+msgstr "Mostrar paginador"
 
-#: applets/gnome-pager/gnomepager_applet.c:232
+#: applets/gnome-pager/gnomepager_applet.c:361
 msgid "Use small pagers"
-msgstr ""
+msgstr "Usar paginadors menuts"
 
-#: applets/gnome-pager/gnomepager_applet.c:240
+#: applets/gnome-pager/gnomepager_applet.c:369
 msgid "Show icons in tasks"
-msgstr ""
+msgstr "Mostrar icones a les tasques"
 
-#: applets/gnome-pager/gnomepager_applet.c:248
-#, fuzzy
+#: applets/gnome-pager/gnomepager_applet.c:377
 msgid "Show task list button"
-msgstr "Mostrar ... botons"
+msgstr "Mostrar botó llista de tasques"
 
-#: applets/gnome-pager/gnomepager_applet.c:257
-msgid "Tasklist always maximum size"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:270
+#: applets/gnome-pager/gnomepager_applet.c:392
 msgid "Maximum width of horizontal task list"
-msgstr ""
+msgstr "Amplària màxima de la llista de tasques horitzontal"
 
-#: applets/gnome-pager/gnomepager_applet.c:286
-msgid "Maximum width of vertical task list"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:300
+#: applets/gnome-pager/gnomepager_applet.c:405
 msgid "Number of rows of horizontal tasks"
-msgstr ""
+msgstr "Nombre de files horitzontals de tasques"
 
-#: applets/gnome-pager/gnomepager_applet.c:314
+#: applets/gnome-pager/gnomepager_applet.c:418
 msgid "Number of vertical columns of tasks"
-msgstr ""
+msgstr "Nombre de columnes verticals de tasques"
 
-#: applets/gnome-pager/gnomepager_applet.c:328
-msgid "Number rows of pagers"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:1338
+# Em sembla que l'original tampoc no està bé...
+#: applets/gnome-pager/gnomepager_applet.c:431
 #, fuzzy
-msgid "Gnome Pager Error"
-msgstr "Lector d'Ajuda de GNOME"
+msgid "Number rows of pagers"
+msgstr "Nombre de files dels paginadors"
 
-#: applets/gnome-pager/gnomepager_applet.c:1339
+#: applets/gnome-pager/gnomepager_applet.c:1380
+msgid "Gnome Pager Error"
+msgstr "Error del Paginador de GNOME"
+
+# WMaker també!
+#: applets/gnome-pager/gnomepager_applet.c:1381
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -895,187 +911,342 @@ msgid ""
 "Enlightenment (DR-0.15)\n"
 "Then start this applet again.\n"
 msgstr ""
+"No sou usant un gestor de finestres compatible amb GNOME.\n"
+"Per favor useu un gestor de finestres compatible amb GNOME.\n"
+"Per exemple:\n"
+"Enlightenment (DR-0.15)\n"
+"I aleshores executeu aquest complement altra volta.\n"
 
-#. XXX: a hackish way to bind events on these buttons so that
-#. we will recieve the right click and such events over them to
-#. display menus and allow dragging over them
-#: applets/gnome-pager/gnomepager_applet.c:1393
-msgid "?"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:1879
-msgid "Sticky"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:2323
+# El paginador? La finestra?
+#: applets/gnome-pager/gnomepager_applet.c:1828
 #, fuzzy
+msgid "Sticky"
+msgstr "Apegat"
+
+#: applets/gnome-pager/gnomepager_applet.c:2429
 msgid "Show / Hide"
-msgstr "_Amagar barra de menús"
+msgstr "Mostrar / Amagar"
 
-#: applets/gnome-pager/gnomepager_applet.c:2329
+#: applets/gnome-pager/gnomepager_applet.c:2441
 msgid "Shade / Unshade"
-msgstr ""
+msgstr "Enrotllar / Desenrotllar"
 
-#: applets/gnome-pager/gnomepager_applet.c:2335 panel/launcher.c:44
-msgid "Close"
-msgstr "Tancar"
-
-#: applets/gnome-pager/gnomepager_applet.c:2341
+# Uack!
+#: applets/gnome-pager/gnomepager_applet.c:2465
 msgid "Nuke"
+msgstr "Rebentar"
+
+#: applets/gticker/gticker.c:53
+msgid "Loading headlines..."
+msgstr "Carregant titulars..."
+
+#: applets/gticker/gticker.c:72
+msgid "Show Article Listing"
+msgstr "Mostrar llistat d'articles"
+
+#: applets/gticker/gticker.c:77
+msgid "Refresh Articles"
+msgstr "Actualitzar articles"
+
+#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr "Justin Maurer <justin@openprojects.net>"
+
+#: applets/gticker/gticker.c:236 applets/jbc/jbc.c:72
+#: applets/slashapp/slashapp.c:573
+msgid "(C) 1998"
+msgstr "(C) 1998"
+
+#: applets/gticker/gticker.c:236
+msgid "GTicker"
+msgstr "GTicker"
+
+#: applets/gticker/gticker.c:237
+msgid "Ticker for the GNOME Project\n"
+msgstr "Marcador pel Projecte GNOME\n"
+
+#: applets/gticker/gticker.c:250
+msgid "GTicker Article List"
+msgstr "Llista d'articles de GTicker"
+
+#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
+msgid "No articles"
+msgstr "No hi ha articles"
+
+#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
+#: gmenu/utils.c:91
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "creant el directori d'usuari: %s\n"
+
+#: applets/gticker/gticker.c:415
+#, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
 msgstr ""
+"no es pot crear el directori d'usuari: \n"
+"\t\t\t\t\t    %s\n"
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+msgid "Articles"
+msgstr "Articles"
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr "Mostrar images del tema"
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr "Mostrar secció"
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Mostrar informació extra (data, autor, comentaris)"
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "Retard entre articles (10 = 1s):"
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(Aquestes propietats no tindran cap efecte fins una actualització)"
+
+#: applets/gticker/properties.c:231
+#: applets/mini-commander/src/mini-commander_applet.c:184
+#: applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr "Visor"
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+msgid "Open new window"
+msgstr "Obrir una nova finestra"
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr "Informació del marcador (no implementat)"
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr "Url:"
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr "Fitxer índex d'articles:"
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr "URL del servidor d'imatges:"
+
+#: applets/gticker/properties.c:312
+msgid "Image path:"
+msgstr "Ruta de les imatges:"
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1094
+msgid "Scrolling"
+msgstr "Desplaçament"
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr "Desplaçament suau"
+
+# Es refereix a fonts amb antidentat?
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+#, fuzzy
+msgid "Smooth type"
+msgstr "Tipus suavitzat"
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Velocitat"
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr "Retard en ajustar el text:"
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "Velocitat de desplaçament entre línies (despl. suau):"
+
+#. FIXME: This should check to make sure icewm (or equiv) is running.
+#. Not sure if it is working though...
+#: applets/icewm-pager/wmpager_applet.c:53
+msgid ""
+"This applet requires you to run a window manager with the XA_ extensions.\n"
+msgstr ""
+"Aquest complement requereix que uses un gestor de finestres amb les "
+"extensions XA_.\n"
+
+#: applets/icewm-pager/wmpager_applet.c:219
+msgid "Copyright (C)1998 M.Watson"
+msgstr "Copyright (C) 1998 M.Watson"
+
+#: applets/icewm-pager/wmpager_applet.c:275
+msgid "Failed to retrieve workspace property."
+msgstr "No s'ha pogut obtenir una propietat de l'espai de treball."
+
+#: applets/jbc/jbc.c:67
+msgid "Jon Anhold <jon@snoopy.net>"
+msgstr "Jon Anhold <jon@snoopy.net>"
+
+#: applets/jbc/jbc.c:68
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr "Roger Gulbranson <rlg@qual.net>"
+
+#: applets/jbc/jbc.c:71
+msgid "Jon's Binary Clock"
+msgstr "El Rellotge Binari de Jon"
+
+#: applets/jbc/jbc.c:74
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
+msgstr ""
+"Un rellotge binari pel vostre plafó\n"
+"http://snoopy.net/~jon/jbc/\n"
 
 #: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
-msgstr ""
+msgstr "Complement Mini-Comandant"
 
+# Gènere?
 #: applets/mini-commander/src/cmd_completion.c:67
 #: applets/mini-commander/src/cmd_completion.c:118
 #, fuzzy
 msgid "not unique"
-msgstr " no muntada"
+msgstr "no única"
 
 #: applets/mini-commander/src/cmd_completion.c:71
-#, fuzzy
 msgid "completing..."
-msgstr "Propietats de Càrrega d'UPC"
+msgstr "completant..."
 
 #: applets/mini-commander/src/cmd_completion.c:83
 #: applets/mini-commander/src/exec.c:105
 msgid "no /bin/sh"
-msgstr ""
+msgstr "no hi ha /bin/sh"
 
 #: applets/mini-commander/src/cmd_completion.c:116
+#, fuzzy
 msgid "completed"
-msgstr ""
+msgstr "completada"
 
 #: applets/mini-commander/src/cmd_completion.c:121
 #, fuzzy
 msgid "not found"
-msgstr " no muntada"
+msgstr "no trobada"
 
 #: applets/mini-commander/src/command_line.c:86
 #: applets/mini-commander/src/command_line.c:106
 msgid "end of history list"
-msgstr ""
+msgstr "fi de la llista d'històric"
 
 #. enter pressed -> exec command
 #: applets/mini-commander/src/command_line.c:116
 #: applets/mini-commander/src/exec.c:58
-#, fuzzy
 msgid "starting..."
-msgstr "Propietats de Càrrega d'UPC"
+msgstr "iniciant..."
 
 #: applets/mini-commander/src/command_line.c:236
-#, fuzzy
 msgid "history list empty"
-msgstr "Tamany de l'històric"
+msgstr "la llista d'històric és buida"
 
 #. title
 #: applets/mini-commander/src/command_line.c:254
-#, fuzzy
 msgid "Command history"
-msgstr "Comanda (opcional)"
+msgstr "Històric de comandes"
 
 #. build file select dialog
 #: applets/mini-commander/src/command_line.c:371
-#, fuzzy
 msgid "Start program"
-msgstr "Inici"
+msgstr "Iniciar programa"
 
 #: applets/mini-commander/src/exec.c:60
 msgid "fork error"
-msgstr ""
+msgstr "error en fer fork"
 
 #: applets/mini-commander/src/exec.c:92
 msgid "child exited"
-msgstr ""
+msgstr "el fill ha eixit"
 
+# Què és això?
 #: applets/mini-commander/src/message.c:102
 msgid "%H:%M - %d. %b"
-msgstr ""
+msgstr "%H:%M - %d-%b"
 
 #: applets/mini-commander/src/message.c:106
 msgid "%d. %b"
-msgstr ""
+msgstr "%d-%b"
 
 #: applets/mini-commander/src/mini-commander_applet.c:86
-#, fuzzy
 msgid "orient. changed"
-msgstr "Comanda d'impressió:"
-
-#: applets/mini-commander/src/mini-commander_applet.c:184
-#: applets/slashapp/properties.c:249
-#, fuzzy
-msgid "Browser"
-msgstr "Buscar"
+msgstr "l'orientació ha canviat"
 
 #: applets/mini-commander/src/mini-commander_applet.c:197
-#: help-browser/window.c:202
+#: help-browser/window.c:201
 msgid "History"
 msgstr "Històric"
 
 #: applets/mini-commander/src/mini-commander_applet.c:252
-#: gsm/session-properties.c:145 help-browser/window.c:207
+#: help-browser/window.c:206
 msgid "Help"
 msgstr "Ajuda"
 
 #: applets/mini-commander/src/mini-commander_applet.c:263
+#, fuzzy
 msgid "ready..."
-msgstr ""
+msgstr "llest..."
 
 #: applets/mini-commander/src/preferences.c:122
 msgid "time & date on"
-msgstr ""
+msgstr "hora i data connectades"
 
 #: applets/mini-commander/src/preferences.c:124
-#, fuzzy
 msgid "time on"
-msgstr "Zona horària"
+msgstr "hora connectada"
 
 #: applets/mini-commander/src/preferences.c:126
 msgid "date on"
-msgstr ""
+msgstr "data connectada"
 
 #: applets/mini-commander/src/preferences.c:128
 msgid "clock off"
-msgstr ""
+msgstr "rellotge desconnectat"
 
 #: applets/mini-commander/src/preferences.c:397
 msgid "saving prefs..."
-msgstr ""
+msgstr "guardant preferències..."
 
 #: applets/mini-commander/src/preferences.c:432
-#, fuzzy
 msgid "Mini-Commander Properties"
-msgstr "Propietats del Ratolí"
+msgstr "Propietats del Mini-Comandant"
 
 #. show time check box
 #: applets/mini-commander/src/preferences.c:446
-#, fuzzy
 msgid "Show time"
-msgstr "_Amagar barra de menús"
+msgstr "Mostrar l'hora"
 
 #. Size
 #: applets/mini-commander/src/preferences.c:471
 msgid "Size"
-msgstr ""
+msgstr "Tamany"
 
 #. applet width
 #: applets/mini-commander/src/preferences.c:483
-#, fuzzy
 msgid "Applet width:"
-msgstr "Amplària del complement"
+msgstr "Amplària del complement:"
 
 #. applet height
 #: applets/mini-commander/src/preferences.c:512
-#, fuzzy
 msgid "Applet height:"
-msgstr "Altura del complement"
+msgstr "Altura del complement:"
 
 #. cmd line height
 #: applets/mini-commander/src/preferences.c:541
 msgid "Command line height:"
-msgstr ""
+msgstr "Altura de la línia de comandes:"
 
 #. hint
 #: applets/mini-commander/src/preferences.c:570
@@ -1084,49 +1255,51 @@ msgid ""
 "Sometimes the applet has to be moved on the panel\n"
 "to make a change of the size visible."
 msgstr ""
+"\n"
+"A voltes cal moure el complement al plafó\n"
+"per fer visible un canvi de tamany."
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1117
+#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1047
 msgid "Colors"
 msgstr "Colors"
 
 #. fg
 #: applets/mini-commander/src/preferences.c:591
 msgid "Command line foreground:"
-msgstr ""
+msgstr "Primer pla de la línia de comandes:"
 
 #. bg
 #: applets/mini-commander/src/preferences.c:626
 msgid "Command line background:"
-msgstr ""
+msgstr "Fons de la línia de comandes:"
 
 #. prefix
 #: applets/mini-commander/src/preferences.c:686
 #, c-format
 msgid "Prefix %.2d:"
-msgstr ""
+msgstr "Prefix %.2d:"
 
 #. command
 #: applets/mini-commander/src/preferences.c:704
 #, c-format
 msgid "   Macro %.2d:"
-msgstr ""
+msgstr "   Macro %.2d:"
 
 #: applets/mini-commander/src/preferences.c:723
-#, fuzzy
 msgid "Macros"
-msgstr "Marcadors"
+msgstr "Macros"
 
-#: applets/mixer/mixer.c:582
+#: applets/mixer/mixer.c:579
 msgid "Run gmix..."
-msgstr ""
+msgstr "Executar gmix..."
 
-#: applets/modemlights/modemlights.c:119
+#: applets/modemlights/modemlights.c:117
 msgid "Modem Lights Applet"
 msgstr "Complement Llums de Mòdem"
 
-#: applets/modemlights/modemlights.c:122
+#: applets/modemlights/modemlights.c:120
 msgid ""
 "Released under the GNU general public license.\n"
 "A modem status indicator and dialer.Lights in order from the top or left are "
@@ -1136,19 +1309,19 @@ msgstr ""
 "Un marcador i indicador d'estat del mòdem.  Les llums en ordre des de dalt o "
 "l'esquerra són RX i TX"
 
-#: applets/modemlights/modemlights.c:360
+#: applets/modemlights/modemlights.c:344
 msgid ""
 "You are currently connected.\n"
 "Do you want to disconnect?"
 msgstr ""
-"Ara estàs connectat.\n"
-"Vols desconnectar-te?"
+"Ara esteu connectat.\n"
+"Voleu desconnectar-vos?"
 
-#: applets/modemlights/modemlights.c:371
+#: applets/modemlights/modemlights.c:355
 msgid "Do you want to connect?"
-msgstr "Vols connectar-te?"
+msgstr "Voleu connectar-vos?"
 
-#: applets/modemlights/modemlights.c:390
+#: applets/modemlights/modemlights.c:374
 msgid "not connected"
 msgstr "no connectat"
 
@@ -1181,91 +1354,83 @@ msgstr "Fitxer blocatge del mòdem:"
 msgid "Device:"
 msgstr "Dispositiu:"
 
+# Xarxa Digital de Serveis Integrats??
+# O deixe ISDN?
 #. ISDN checkbox
 #: applets/modemlights/properties.c:247
+#, fuzzy
 msgid "Use ISDN"
 msgstr "Usar XDSI"
 
 #: applets/modemlights/properties.c:260
 msgid "Advanced"
-msgstr "Avançat"
+msgstr "Avançades"
 
 #: applets/multiload/cpuload.c:47 applets/multiload/main.c:126
-#, fuzzy
 msgid "CPU Load"
-msgstr "Càrrega d'Usuari"
+msgstr "Càrrega d'UPC"
 
 #: applets/multiload/load-graph.c:26
-#, fuzzy
 msgid "Load Graph"
-msgstr "Gràfica"
+msgstr "Gràfic de càrrega"
 
-#: applets/multiload/load-graph.c:180
-msgid "Speed:"
-msgstr ""
-
-#: applets/multiload/load-graph.c:180
-#, fuzzy
-msgid "Width:"
-msgstr "Amplària"
-
-#: applets/multiload/load-graph.c:180
-#, fuzzy
+#: applets/multiload/load-graph.c:160
 msgid "Height:"
-msgstr "Alta."
+msgstr "Altura:"
+
+#: applets/multiload/load-graph.c:160
+msgid "Speed:"
+msgstr "Velocitat:"
+
+#: applets/multiload/load-graph.c:160
+msgid "Width:"
+msgstr "Amplària:"
 
 #: applets/multiload/main.c:27
-#, fuzzy
-msgid "User"
-msgstr "Càrrega d'Usuari"
+msgid "Idle"
+msgstr "Ociós"
 
 #: applets/multiload/main.c:27
 #, fuzzy
 msgid "Nice"
-msgstr "Dispositiu"
+msgstr "Nice"
 
 #: applets/multiload/main.c:27
-#, fuzzy
 msgid "System"
-msgstr "Càrrega de Sistema"
+msgstr "Sistema"
 
 #: applets/multiload/main.c:27
+msgid "User"
+msgstr "Usuari"
+
+#: applets/multiload/main.c:31
 #, fuzzy
-msgid "Idle"
-msgstr "Índex"
+msgid "Buffers"
+msgstr "Buffers"
+
+#: applets/multiload/main.c:31 applets/multiload/main.c:35
+msgid "Free"
+msgstr "Lliure"
 
 #: applets/multiload/main.c:31
 msgid "Other"
-msgstr ""
+msgstr "Altra"
 
 #: applets/multiload/main.c:31
-#, fuzzy
 msgid "Shared"
-msgstr "Escalat"
-
-#: applets/multiload/main.c:31
-msgid "Buffers"
-msgstr ""
-
-#: applets/multiload/main.c:31 applets/multiload/main.c:35
-#, fuzzy
-msgid "Free"
-msgstr "Espai d'intercanvi lliure"
+msgstr "Compartida"
 
 #: applets/multiload/main.c:35
-#, fuzzy
 msgid "Used"
-msgstr "Càrrega d'Usuari"
+msgstr "Usada"
 
 #: applets/multiload/main.c:130 applets/multiload/memload.c:47
-#, fuzzy
 msgid "Memory Load"
-msgstr "Càrrega d'Usuari"
+msgstr "Càrrega de memòria"
 
 #: applets/multiload/main.c:134 applets/multiload/swapload.c:47
-#, fuzzy
 msgid "Swap Load"
-msgstr "Propietats de Càrrega d'UCP"
+msgstr "Càrrega d'intercanvi"
 
 #: applets/netload/netload.c:261
 msgid "Netload Error"
@@ -1273,7 +1438,7 @@ msgstr "Error de Netload"
 
 #: applets/netload/netload.c:266
 msgid "An error occured in the Netload Applet:"
-msgstr "Ha esdevingut un error al complement Netload"
+msgstr "Ha ocorregut un error al complement Netload"
 
 #: applets/netload/netload.c:295
 msgid "The GNOME Network Load Applet"
@@ -1305,7 +1470,7 @@ msgstr "Nom del dispositiu (com ppp0 o eth0)"
 
 #: applets/netload/properties.c:223
 msgid "Vertical spacing of bars (in kilobytes)"
-msgstr "Espaiat vertical de les barres (en kilooctets)"
+msgstr "Separació vertical de les barres (en kilooctets)"
 
 #: applets/netload/properties.c:271
 msgid "properties.c: gnome_property_box_new() failed.\n"
@@ -1319,124 +1484,50 @@ msgstr "Propietats de la Càrrega de Xarxa"
 msgid "Device"
 msgstr "Dispositiu"
 
-#: applets/slashapp/properties.c:199
-#, fuzzy
-msgid "Articles"
-msgstr "Vertical"
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr ""
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr ""
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr ""
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr ""
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr ""
-
-#: applets/slashapp/properties.c:258
-#, fuzzy
-msgid "Open new window"
-msgstr "Obri una nova finestra del lector"
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1164
-msgid "Scrolling"
-msgstr "Desplaçament"
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr ""
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr ""
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr ""
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr ""
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:152
-#, fuzzy
-msgid "No articles"
-msgstr "No tens correu."
-
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:255 gmenu/utils.c:91
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "creant el directori de l'usuari: %s\n"
+msgstr "Llista d'articles Slashapp"
 
 #: applets/slashapp/slashapp.c:258 gmenu/utils.c:94
 #, c-format
 msgid "unable to create user directory: %s\n"
-msgstr "no es pot crear el directori de l'usuari: %s\n"
+msgstr "no es pot crear el directori d'usuari: %s\n"
 
 #: applets/slashapp/slashapp.c:532
-#, fuzzy
 msgid "No articles found"
-msgstr "<br><B>No s'ha trobat cap coincidència</B>\n"
-
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr ""
+msgstr "No s'ha trobat cap article"
 
 #: applets/slashapp/slashapp.c:567
 msgid "Craig Small <csmall@eye-net.com.au>"
-msgstr ""
+msgstr "Craig Small <csmall@eye-net.com.au>"
 
 #: applets/slashapp/slashapp.c:568
 msgid "John Ellis <johne@bellatlantic.net> - Display engine"
-msgstr ""
+msgstr "John Ellis <johne@bellatlantic.net> - Display engine"
 
 #: applets/slashapp/slashapp.c:569
 msgid "Frederic Devernay <devernay@istar.fr>"
-msgstr ""
+msgstr "Frederic Devernay <devernay@istar.fr>"
 
 #: applets/slashapp/slashapp.c:572
 msgid "SlashApp"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:573
-msgid "(C) 1998"
-msgstr "(C) 1998"
+msgstr "SlashApp"
 
 #: applets/slashapp/slashapp.c:575
 msgid "A ticker to display Slashdot headlines\n"
-msgstr ""
+msgstr "Un marcador per mostrar els titulars d'Slashdot\n"
 
 #: applets/slashapp/slashapp.c:621
 msgid "Loading headlines........"
-msgstr ""
+msgstr "Carregant titulars........"
 
 #: applets/slashapp/slashapp.c:641
 msgid "Show article listing"
-msgstr ""
+msgstr "Mostrar llista d'articles"
 
 #: applets/slashapp/slashapp.c:646
-#, fuzzy
 msgid "Refresh articles"
-msgstr "Refer Imatge"
+msgstr "Actualitzar articles"
 
 #: applets/webcontrol/webcontrol.c:56
 msgid "The Web Browser Controller"
@@ -1451,15 +1542,11 @@ msgstr ""
 "interfície -remote.  Esperem que altres navegadors seràn suportats més "
 "endavant."
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:117
-msgid "Url:"
-msgstr "Url:"
-
+# Esborrar / buidar
 #: applets/webcontrol/webcontrol.c:120
 #, fuzzy
 msgid "Clear"
-msgstr "Tancar"
+msgstr "Esborrar"
 
 #: applets/webcontrol/webcontrol.c:136
 msgid "Launch new window"
@@ -1481,17 +1568,75 @@ msgstr "Mostrar l'opció \"nova finestra\""
 msgid "Look"
 msgstr "Mirar"
 
-#: gmenu/desktop.c:80 gmenu/desktop.c:96
-#, fuzzy
-msgid "Submenu: "
-msgstr "Crear Carpeta:"
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: l'opció «%s» és ambígua\n"
 
-#: gmenu/desktop.c:194
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: l'opció «--%s» no admet arguments\n"
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: l'opció «%c%s» no admet arguments\n"
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: l'opció «%s» necessita un argument\n"
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: no es reconeix l'opció «--%s»\n"
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: no es reconeix l'opció «%c%s»\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: l'opció no és permesa -- %c\n"
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: l'opció no és vàlida -- %c\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: l'opció necessita un argument -- %c\n"
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: l'opció «-W %s» és ambígua\n"
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: l'opció «-W %s» no admet arguments\n"
+
+#: gmenu/desktop.c:80 gmenu/desktop.c:96
+msgid "Submenu: "
+msgstr "Submenú:"
+
+#: gmenu/desktop.c:194 gmenu/order.c:63
 #, c-format
 msgid "Unable to create file: %s\n"
 msgstr "No s'ha pogut crear el fitxer: %s\n"
 
-#: gmenu/desktop.c:213
+#: gmenu/desktop.c:213 gmenu/order.c:82
 #, c-format
 msgid "unable to remove .order file: %s\n"
 msgstr "No s'ha pogut eliminar el fitxer .order: %s\n"
@@ -1502,79 +1647,73 @@ msgstr "El fitxer existeix."
 
 #: gmenu/dialogs.c:46
 msgid "Failed to create file."
-msgstr "No he pogut crear el fitxer."
+msgstr "No s'ha pogut crear el fitxer."
 
 #: gmenu/dialogs.c:142 gmenu/dialogs.c:179
-#, fuzzy
 msgid ""
 "You can't add an entry to that submenu.\n"
 "You do not have the proper permissions."
 msgstr ""
-"No pots afegir una entrada a aqueixa carpeta!\n"
-"Per editar entrades del sistema has de ser el root."
+"No podeu afegir una entrada a aqueix submenú!\n"
+"No teniu els permissos adequats."
 
 #: gmenu/dialogs.c:148 gmenu/gmenu.c:97
 msgid "New Submenu"
-msgstr ""
+msgstr "Nou submenú"
 
 #: gmenu/dialogs.c:150
-#, fuzzy
 msgid "Create Submenu:"
-msgstr "Crear Carpeta:"
+msgstr "Crear submenú:"
 
 #: gmenu/dialogs.c:233
-#, fuzzy
 msgid "You must select something first."
-msgstr "Primer has de seleccionar quelcom!"
+msgstr "Primer heu de seleccionar quelcom."
 
 #: gmenu/dialogs.c:239
-#, fuzzy
 msgid "You can not delete a top level submenu."
-msgstr "No es pot esborrar una carpeta arrel!"
+msgstr "No es pot esborrar un submenú del nivell superior."
 
 #: gmenu/dialogs.c:247
-#, fuzzy
 msgid ""
 "You can't delete that file.\n"
 "You do not have the proper permissions."
 msgstr ""
-"No pots esborrar aquest fitxer!\n"
-"Per editar entrades del sistema has de ser el root."
+"No podeu esborrar aqueix fitxer.\n"
+"No teniu els permissos nadequats."
 
 #: gmenu/dialogs.c:253 gmenu/dialogs.c:273
-#, fuzzy
 msgid "Delete this menu item?"
-msgstr "Esborra l'element seleccionat del menú"
+msgstr "Esborrar aquest ítem del menú?"
 
 #: gmenu/dialogs.c:262
-#, fuzzy
 msgid "Delete empty submenu?"
-msgstr "Vols esborrar la carpeta buida?"
+msgstr "Esborrar el submenú buit?"
 
 #: gmenu/dialogs.c:267
 msgid "Are you sure you want to delete this submenu and all its contents?"
-msgstr ""
+msgstr "Esteu segur de voler esborrar aquest submenú i els seus continguts?"
 
 #: gmenu/dialogs.c:368
 msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
 msgstr ""
+"Aquest canvi provoca un conflicte amb un ítem de menú existent.\n"
+"Dos ítems de menú a un submenú no poden tenir el mateix nom."
 
 #: gmenu/dnd.c:175
-#, fuzzy
 msgid ""
 "You are not allowed to move that item there.\n"
 "You do not have the proper permissions."
 msgstr ""
-"No pots esborrar aquest fitxer!\n"
-"Per editar entrades del sistema has de ser el root."
+"No podeu moure aqueix fitxer allà.\n"
+"No teniu els pernissos adequats"
 
 #: gmenu/edit.c:214
 msgid "Save"
 msgstr "Guardar"
 
-#: gmenu/edit.c:231 gsm/session-properties.c:136
+#: gmenu/edit.c:231
 msgid "Revert"
 msgstr "Revertir"
 
@@ -1584,36 +1723,32 @@ msgstr "Nou"
 
 #: gmenu/gmenu.c:52
 msgid "_New Submenu..."
-msgstr ""
+msgstr "_Nou submenú..."
 
 #: gmenu/gmenu.c:53 gmenu/gmenu.c:97
-#, fuzzy
 msgid "Create a new submenu"
-msgstr "Crea una nova carpeta"
+msgstr "Crea un nou submenú"
 
+# Què passa si accentue la i??
 #: gmenu/gmenu.c:56
-#, fuzzy
 msgid "New _Item..."
-msgstr "Nova _Carpeta..."
+msgstr "Nou _item..."
 
 #: gmenu/gmenu.c:57
-#, fuzzy
 msgid "Create a new menu item"
-msgstr "Crea una nova carpeta"
+msgstr "Crea un nou ítem de menú"
 
 #: gmenu/gmenu.c:60
 msgid "_Delete..."
 msgstr "_Esborrar..."
 
 #: gmenu/gmenu.c:71
-#, fuzzy
 msgid "_Sort Submenu"
-msgstr "_Amagar barra de menús"
+msgstr "_Ordenar submenú"
 
 #: gmenu/gmenu.c:74
-#, fuzzy
 msgid "Sort Submenu _Recursive"
-msgstr "Ordenar Carpeta _Recursivament"
+msgstr "Ordenar submenú _recursivament"
 
 #: gmenu/gmenu.c:86
 msgid "_File"
@@ -1628,14 +1763,12 @@ msgid "_Help"
 msgstr "_Ajuda"
 
 #: gmenu/gmenu.c:100
-#, fuzzy
-msgid "New Item"
-msgstr "_Nou terminal"
+msgid "Create a new item"
+msgstr "Crea un nou ítem"
 
 #: gmenu/gmenu.c:100
-#, fuzzy
-msgid "Create a new item"
-msgstr "Crea una nova carpeta"
+msgid "New Item"
+msgstr "Nou ítem"
 
 #: gmenu/gmenu.c:104
 msgid "Delete"
@@ -1646,12 +1779,12 @@ msgid "Delete selected menu item"
 msgstr "Esborra l'element seleccionat del menú"
 
 #: gmenu/gmenu.c:107
-msgid "Move up"
-msgstr "Moure amunt"
-
-#: gmenu/gmenu.c:107
 msgid "Move selected menu up"
 msgstr "Mou el menú seleccionat cap amunt"
+
+#: gmenu/gmenu.c:107
+msgid "Move up"
+msgstr "Moure amunt"
 
 #: gmenu/gmenu.c:109
 msgid "Move down"
@@ -1666,14 +1799,12 @@ msgid "Edit selected menu item properties"
 msgstr "Editar les propietats de l'element seleccionat del menú"
 
 #: gmenu/gmenu.c:119
-#, fuzzy
 msgid "Sort Submenu"
-msgstr "Menú normal"
+msgstr "Ordenar submenú"
 
 #: gmenu/gmenu.c:119
-#, fuzzy
 msgid "Sort selected submenu"
-msgstr "Ordena la carpeta seleccionada"
+msgstr "Ordena el submenú seleccionat"
 
 #: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:308 gmenu/tree.c:387
 msgid "GNOME menu editor"
@@ -1687,32 +1818,33 @@ msgstr ""
 "Lliurat sota els termes de la Llicència Pública GNU.\n"
 "Editor de Menús de GNOME."
 
+#: gmenu/order.c:126 gmenu/order.c:140
+msgid " Folder"
+msgstr " Carpeta"
+
 #: gmenu/save.c:52
-#, fuzzy
 msgid "The menu item must have a name"
-msgstr "Icona del menú"
+msgstr "Cal que l'ítem del menú tinga nom"
 
 #: gmenu/save.c:58
 msgid "The menu entry must have a filename"
-msgstr ""
+msgstr "L'entrada de menú ha de tenir nom de fitxer"
 
 #: gmenu/save.c:66
-#, fuzzy
 msgid "Save changes?"
-msgstr "Vols guardar els canvis?"
+msgstr "Voleu guardar els canvis?"
 
 #: gmenu/save.c:83
 msgid "This change conflicts with an existing menu item"
-msgstr ""
+msgstr "Aquest canvi provoca un conflicte amb un ítem de menú existent"
 
 #: gmenu/save.c:89
-#, fuzzy
 msgid "Overwrite existing menu entry?"
-msgstr "Vols sobreescriure fitxer existent?"
+msgstr "Voleu sobreescriure l'entrada de menú existent?"
 
 #: gmenu/tree.c:389
 msgid "One moment, reading menus..."
-msgstr "Un moment, estic llegint els menús..."
+msgstr "Un moment, s'estan llegint els menús..."
 
 #: gmenu/tree.c:418
 msgid "GNOME"
@@ -1721,7 +1853,7 @@ msgstr "GNOME"
 #. system's menu tree
 #: gmenu/tree.c:427
 msgid "System Menus"
-msgstr "Menús del Sistema"
+msgstr "Menú del sistema"
 
 #: gmenu/tree.c:437
 msgid "Top of system menus"
@@ -1730,341 +1862,337 @@ msgstr "Arrel dels menús del sistema"
 #. user's menu tree
 #: gmenu/tree.c:445
 msgid "User Menus"
-msgstr "Menús de l'Usuari"
+msgstr "Menú de l'usuari"
 
 #: gmenu/tree.c:455
 msgid "Top of user menus"
 msgstr "Arrel dels menús de l'usuari"
 
-#: gnome-terminal/gnome-terminal.c:147
+#: gnome-terminal/gnome-terminal.c:138
 msgid "GNOME Terminal"
 msgstr "Terminal GNOME"
 
-#: gnome-terminal/gnome-terminal.c:150
+#: gnome-terminal/gnome-terminal.c:141
 msgid "The GNOME terminal emulation program."
 msgstr "L'emulador GNOME de terminal."
 
-#: gnome-terminal/gnome-terminal.c:447 gnome-terminal/gnome-terminal.c:958
-#: gnome-terminal/gnome-terminal.c:968 gnome-terminal/gnome-terminal.c:1804
+#: gnome-terminal/gnome-terminal.c:420 gnome-terminal/gnome-terminal.c:926
+#: gnome-terminal/gnome-terminal.c:936
 msgid "Default"
 msgstr "Per defecte"
 
-#: gnome-terminal/gnome-terminal.c:618
+#: gnome-terminal/gnome-terminal.c:591
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
 "configuration of the new class?"
 msgstr ""
-"Has canviat la classe d'aquesta finestra.  Vols reconfigurar-\n"
-"la per que s'adeqüe als paràmetres per defecte de la nova\n"
-"classe?"
+"Heu canviat la classe d'aquesta finestra.  Voleu\n"
+"reconfigurar-la la per que s'adeqüe als paràmetres\n"
+"per defecte de la nova classe?"
 
-#: gnome-terminal/gnome-terminal.c:781
+#: gnome-terminal/gnome-terminal.c:749
 msgid "Linux console"
 msgstr "Consola Linux"
 
-#: gnome-terminal/gnome-terminal.c:782
+#: gnome-terminal/gnome-terminal.c:750
 msgid "Color Xterm"
 msgstr "Xterm en color"
 
-#: gnome-terminal/gnome-terminal.c:783
+#: gnome-terminal/gnome-terminal.c:751
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:788
+#: gnome-terminal/gnome-terminal.c:756
 msgid "White on black"
 msgstr "Blanc sobre negre"
 
-#: gnome-terminal/gnome-terminal.c:789
+#: gnome-terminal/gnome-terminal.c:757
 msgid "Black on white"
 msgstr "Negre sobre blanc"
 
-#: gnome-terminal/gnome-terminal.c:790
+#: gnome-terminal/gnome-terminal.c:758
 msgid "Green on black"
 msgstr "Verd sobre negre"
 
-#: gnome-terminal/gnome-terminal.c:791
+#: gnome-terminal/gnome-terminal.c:759
 msgid "Black on light yellow"
 msgstr "Negre sobre groc clar"
 
-#: gnome-terminal/gnome-terminal.c:792
+#: gnome-terminal/gnome-terminal.c:760
 msgid "Custom colors"
 msgstr "Colors personalitzats"
 
-#: gnome-terminal/gnome-terminal.c:797 panel/panel_config.c:315
+#: gnome-terminal/gnome-terminal.c:765 panel/panel_config.c:309
 msgid "Left"
 msgstr "Esquerra"
 
-#: gnome-terminal/gnome-terminal.c:798 panel/panel_config.c:326
+#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:320
 msgid "Right"
 msgstr "Dreta"
 
-#: gnome-terminal/gnome-terminal.c:799
+#: gnome-terminal/gnome-terminal.c:767
 msgid "Hidden"
 msgstr "Amagada"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:922
+#: gnome-terminal/gnome-terminal.c:890
 msgid "Font:"
 msgstr "Font:"
 
-#: gnome-terminal/gnome-terminal.c:942
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:910
 msgid "Browse..."
-msgstr " Buscar... "
+msgstr "Fullejar..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:950
+#: gnome-terminal/gnome-terminal.c:918
 msgid "Terminal Class"
 msgstr "Classe del terminal"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:978
+#: gnome-terminal/gnome-terminal.c:946
 msgid "Blinking cursor"
 msgstr "Cursor intermitent"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:987
+#: gnome-terminal/gnome-terminal.c:955
 msgid "Hide menu bar"
 msgstr "Amagar barra de menús"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:996
+#: gnome-terminal/gnome-terminal.c:964
 msgid "Silence Terminal bell"
-msgstr ""
+msgstr "Silenciar el xiulet del terminal"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:1005
+#: gnome-terminal/gnome-terminal.c:973
 msgid "Swap DEL/Backspace"
-msgstr ""
+msgstr "Intercanviar Supr/Retrocés"
 
+# Malament, segur!
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:1014
+#: gnome-terminal/gnome-terminal.c:982
+#, fuzzy
 msgid "Select-by-word characters"
-msgstr ""
+msgstr "Caràcters per seleccionar paraules"
 
-#: gnome-terminal/gnome-terminal.c:1032
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:999
 msgid "Image"
-msgstr "Fitxer d'imatge"
+msgstr "Imatge"
 
-#: gnome-terminal/gnome-terminal.c:1034
-#, fuzzy
-msgid "Background type"
-msgstr " Fons "
-
-#: gnome-terminal/gnome-terminal.c:1044
-#, fuzzy
-msgid "None"
-msgstr "cap"
-
-#: gnome-terminal/gnome-terminal.c:1052
-#, fuzzy
+#. Background Pixmap checkbox
+#: gnome-terminal/gnome-terminal.c:1003
 msgid "Background pixmap"
-msgstr " Fons "
+msgstr "Pixmap de fons"
 
-#: gnome-terminal/gnome-terminal.c:1069
-#, fuzzy
+#. Background pixmap filename
+#: gnome-terminal/gnome-terminal.c:1012
 msgid "Pixmap file:"
-msgstr "Pixmap"
+msgstr "Fitxer de pixmap:"
 
-#: gnome-terminal/gnome-terminal.c:1085
+#. Transparency
+#: gnome-terminal/gnome-terminal.c:1027
 msgid "Transparent"
-msgstr ""
+msgstr "Transparent"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1104
+#: gnome-terminal/gnome-terminal.c:1036
 msgid "Background should be shaded (slow)"
-msgstr ""
+msgstr "Fons translúcid (lent)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1120
+#: gnome-terminal/gnome-terminal.c:1050
 msgid "Color palette:"
 msgstr "Paleta de colors:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1130
+#: gnome-terminal/gnome-terminal.c:1060
 msgid "Foreground color:"
 msgstr "Color del text:"
 
-#: gnome-terminal/gnome-terminal.c:1139
+#: gnome-terminal/gnome-terminal.c:1069
 msgid "Background color:"
 msgstr "Color del fons:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1151
+#: gnome-terminal/gnome-terminal.c:1081
 msgid "Colors:"
 msgstr "Colors:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1167
+#: gnome-terminal/gnome-terminal.c:1097
 msgid "Scrollbar position"
 msgstr "Posició de la barra de desplaçament"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1178
+#: gnome-terminal/gnome-terminal.c:1108
 msgid "Scrollback lines"
 msgstr "Línies de desplaçament enrere"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1190
+#: gnome-terminal/gnome-terminal.c:1120
 msgid "Scroll on keystroke"
 msgstr "Desplaçar amb el tecleig"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1199
+#: gnome-terminal/gnome-terminal.c:1129
 msgid "Scroll on output"
 msgstr "Desplaçar amb l'eixida"
 
-#: gnome-terminal/gnome-terminal.c:1234
+#: gnome-terminal/gnome-terminal.c:1166
 msgid "Color selector"
 msgstr "Selector de colors"
 
-#: gnome-terminal/gnome-terminal.c:1283 gnome-terminal/gnome-terminal.c:1293
-#: gnome-terminal/gnome-terminal.c:1300
+#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
+#: gnome-terminal/gnome-terminal.c:1219
+msgid "Creates a new terminal window"
+msgstr "Crea una nova finestra de terminal"
+
+#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
+#: gnome-terminal/gnome-terminal.c:1219
 msgid "_New terminal"
 msgstr "_Nou terminal"
 
-#: gnome-terminal/gnome-terminal.c:1283 gnome-terminal/gnome-terminal.c:1293
-#: gnome-terminal/gnome-terminal.c:1300
-#, fuzzy
-msgid "Creates a new terminal window"
-msgstr "Crea una nova carpeta"
-
-#: gnome-terminal/gnome-terminal.c:1285 gnome-terminal/gnome-terminal.c:1295
+#: gnome-terminal/gnome-terminal.c:1204 gnome-terminal/gnome-terminal.c:1214
 msgid "_Hide menubar"
 msgstr "_Amagar barra de menús"
 
-#: gnome-terminal/gnome-terminal.c:1287
+#: gnome-terminal/gnome-terminal.c:1206
 msgid "_Close terminal"
 msgstr "_Tancar terminal"
 
-#: gnome-terminal/gnome-terminal.c:1302
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:1221
 msgid "_Show menubar"
-msgstr "_Amagar barra de menús"
+msgstr "_Mostrar barra de menús"
 
-#: gnome-terminal/gnome-terminal.c:1319
+#: gnome-terminal/gnome-terminal.c:1233
 msgid "C_olor selector..."
 msgstr "Selector de _Colors"
 
-#: gnome-terminal/gnome-terminal.c:1942
-msgid "Terminal class name"
-msgstr "Nom de la classe del terminal"
-
-#: gnome-terminal/gnome-terminal.c:1942
+#: gnome-terminal/gnome-terminal.c:1871
 msgid "CLASS"
 msgstr "CLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1945
-msgid "Specifies font name"
-msgstr "Especifica el nom de la font"
+#: gnome-terminal/gnome-terminal.c:1871
+msgid "Terminal class name"
+msgstr "Nom de la classe del terminal"
 
-#: gnome-terminal/gnome-terminal.c:1945
+#: gnome-terminal/gnome-terminal.c:1874
 msgid "FONT"
 msgstr "FONT"
 
+#: gnome-terminal/gnome-terminal.c:1874
+msgid "Specifies font name"
+msgstr "Especifica el nom de la font"
+
 # «Login»??
 #
-#: gnome-terminal/gnome-terminal.c:1948
+#: gnome-terminal/gnome-terminal.c:1877
 #, fuzzy
 msgid "Do not start up shells as logins shells"
 msgstr "No llançar intèrprets de login"
 
-#: gnome-terminal/gnome-terminal.c:1951
+#: gnome-terminal/gnome-terminal.c:1880
 #, fuzzy
 msgid "Start up shells as logins shells"
 msgstr "Llançar intèrprets de login"
 
-#: gnome-terminal/gnome-terminal.c:1954
-msgid "Specifies the geometry for the main window"
-msgstr "Especifica la geometria de la finestra principal"
-
-#: gnome-terminal/gnome-terminal.c:1954
+#: gnome-terminal/gnome-terminal.c:1883 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: gnome-terminal/gnome-terminal.c:1957
-msgid "Execute this program instead of a shell"
-msgstr "Executar aquesta comanda en comptes d'un intèrpret"
+#: gnome-terminal/gnome-terminal.c:1883
+msgid "Specifies the geometry for the main window"
+msgstr "Especifica la geometria de la finestra principal"
 
-#: gnome-terminal/gnome-terminal.c:1957
+#: gnome-terminal/gnome-terminal.c:1886
 msgid "COMMAND"
 msgstr "COMANDA"
 
-#: gnome-terminal/gnome-terminal.c:1960
-msgid "Foreground color"
-msgstr "Color del text"
+#: gnome-terminal/gnome-terminal.c:1886
+msgid "Execute this program instead of a shell"
+msgstr "Executa aquesta comanda en comptes d'un intèrpret"
 
-#: gnome-terminal/gnome-terminal.c:1960 gnome-terminal/gnome-terminal.c:1963
+#: gnome-terminal/gnome-terminal.c:1889 gnome-terminal/gnome-terminal.c:1892
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:1963 panel/panel_config.c:740
+#: gnome-terminal/gnome-terminal.c:1889
+msgid "Foreground color"
+msgstr "Color del text"
+
+#: gnome-terminal/gnome-terminal.c:1892 panel/panel_config.c:754
 msgid "Background color"
 msgstr "Color de fons"
 
-#: gnome-terminal/gnome-terminal.c:1966
-#, fuzzy
-msgid "Update utmp entry"
-msgstr "Freqüència d'actualització"
-
-#: gnome-terminal/gnome-terminal.c:1966
+#: gnome-terminal/gnome-terminal.c:1895
 msgid "UTMP"
-msgstr ""
+msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:1969
+#: gnome-terminal/gnome-terminal.c:1895
+msgid "Update utmp entry"
+msgstr "Actualitzar entrada a utmp"
+
+#: gnome-terminal/gnome-terminal.c:1898
 msgid "Do not update utmp entry"
-msgstr ""
+msgstr "No actualitzar entrada a utmp"
 
-#: gnome-terminal/gnome-terminal.c:1969
+#: gnome-terminal/gnome-terminal.c:1898
 msgid "NOUTMP"
-msgstr ""
+msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:1972
-#, fuzzy
+#: gnome-terminal/gnome-terminal.c:1901
 msgid "Update wtmp entry"
-msgstr "Actualitzacions per segon"
+msgstr "Actualitzar entrada a wtmp"
 
-#: gnome-terminal/gnome-terminal.c:1972
+#: gnome-terminal/gnome-terminal.c:1901
 msgid "WTMP"
-msgstr ""
+msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:1975
+#: gnome-terminal/gnome-terminal.c:1904
 msgid "Do not update wtmp entry"
-msgstr ""
+msgstr "No actualitzar entrada a wtmp"
 
-#: gnome-terminal/gnome-terminal.c:1975
+#: gnome-terminal/gnome-terminal.c:1904
 msgid "NOWTMP"
-msgstr ""
+msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:1978
+#: gnome-terminal/gnome-terminal.c:1907
 msgid "Set the window title"
-msgstr ""
+msgstr "Establir nom de la finestra"
 
-#: gnome-terminal/gnome-terminal.c:1978
+#: gnome-terminal/gnome-terminal.c:1907
 msgid "TITLE"
-msgstr ""
-
-#: gsm/main.c:44
-msgid "Millisecond period spent waiting for clients to register (0=forever)"
-msgstr ""
+msgstr "TÍTOL"
 
 #: gsm/main.c:45
-msgid "Millisecond period spent waiting for clients to die (0=forever)"
-msgstr ""
+msgid "Enable gsm debugging"
+msgstr "Habilitar depuració de gsm"
 
-#: gsm/manager.c:358
-msgid "Wait abandoned due to conflict."
-msgstr ""
+#: gsm/main.c:46
+msgid "Millisecond period spent waiting for clients to register (0=forever)"
+msgstr "Període d'espera d'enregistrament de clients en milisegons (0=indefinidament)"
 
-#: gsm/manager.c:1094
-msgid "Respawn abandoned due to failures."
-msgstr ""
-
-#: gsm/manager.c:1260
+#: gsm/manager.c:895
 msgid "A session shutdown is in progress."
+msgstr "Hi ha un tancat de sessió en progrés."
+
+#: gsm/manager.c:1027
+#, c-format
+msgid ""
+"The Gnome Session Manager unexpectedly\n"
+"lost contact with program \"%s\"."
 msgstr ""
+"El Gestor de Sessions de GNOME ha perdut\n"
+"inesperadament el contacte amb el programa \"%s\"."
+
+#: gsm/manager.c:1032
+msgid ""
+"The Gnome Session Manager unexpectedly\n"
+"lost contact with an unnamed program."
+msgstr ""
+"El Gestor de Sessions de GNOME ha perdut\n"
+"inesperadament el contacte amb un programa sense nom."
 
 #: gsm/save-session.c:33
 msgid "Kill session"
@@ -2072,25 +2200,34 @@ msgstr "Matar sessió"
 
 #: gsm/save-session.c:62
 msgid "save-session: couldn't connect to session manager\n"
-msgstr "save-session: no puc connectar amb el gestor de sessions\n"
+msgstr "save-session: no es pot connectar amb el gestor de sessions\n"
 
-#: gsm/session-properties.c:102
+#: gsm/session-properties.c:97
+msgid "Gnome Session Properties"
+msgstr "Propietats de la Sessió GNOME"
+
+#: gsm/session-properties.c:106
+msgid "Startup Programs"
+msgstr "Programes d'inici"
+
+#. label for the exec entry
+#: gsm/session-properties.c:110
 msgid "Program:"
-msgstr ""
+msgstr "Programa:"
 
-#. buttons
-#: gsm/session-properties.c:133
-msgid "Try"
-msgstr ""
+#. add/remove buttons
+#: gsm/session-properties.c:137
+msgid "Add"
+msgstr "Afegir"
 
-#: gsm/session-properties.c:139
-msgid "OK"
-msgstr ""
+#. Buttons
+#: gsm/session-properties.c:147 help-browser/bookmarks.c:240
+msgid "Remove"
+msgstr "Llevar"
 
-#: gsm/session-properties.c:142
-#, fuzzy
-msgid "Cancel"
-msgstr "Plafó"
+#: gsm/session-properties.c:256
+msgid "Geometry of window"
+msgstr "Geometria de la finestra"
 
 #: help-browser/bookmarks.c:220
 msgid "Bookmark"
@@ -2104,55 +2241,49 @@ msgstr "Títol de la pàgina"
 msgid "Gnome Help Bookmarks"
 msgstr "Marcadors de l'Ajuda de GNOME"
 
-#. Buttons
-#: help-browser/bookmarks.c:240
-msgid "Remove"
-msgstr "Llevar"
+#: help-browser/gnome-help-browser.c:121
+msgid "X"
+msgstr "X"
 
 #: help-browser/gnome-help-browser.c:121
 msgid "X position of window"
 msgstr "Posició X de la finestra"
 
-#: help-browser/gnome-help-browser.c:121
-msgid "X"
-msgstr "X"
+#: help-browser/gnome-help-browser.c:122
+msgid "Y"
+msgstr "Y"
 
 #: help-browser/gnome-help-browser.c:122
 msgid "Y position of window"
 msgstr "Posició Y de la finestra"
 
-#: help-browser/gnome-help-browser.c:122
-msgid "Y"
-msgstr "Y"
+#: help-browser/gnome-help-browser.c:123
+msgid "WIDTH"
+msgstr "AMPLÀRIA"
 
 #: help-browser/gnome-help-browser.c:123
 msgid "Width of window"
 msgstr "Amplària de la finestra"
 
-#: help-browser/gnome-help-browser.c:123
-msgid "WIDTH"
-msgstr "AMPLÀRIA"
+#: help-browser/gnome-help-browser.c:124
+msgid "HEIGHT"
+msgstr "ALTURA"
 
 #: help-browser/gnome-help-browser.c:124
 msgid "Height of window"
 msgstr "Altura de la finestra"
 
-#: help-browser/gnome-help-browser.c:124
-msgid "HEIGHT"
-msgstr "ALTURA"
-
 #: help-browser/gnome-help-browser.c:125
 msgid "Debug level"
 msgstr "Nivell de depuració"
 
-#: help-browser/gnome-help-browser.c:336 help-browser/window.c:690
+#: help-browser/gnome-help-browser.c:336 help-browser/window.c:689
 msgid "Gnome Help Browser"
 msgstr "Lector d'Ajuda de GNOME"
 
 #: help-browser/gnome-help-browser.c:337
-#, fuzzy
 msgid "Copyright (c) 1998 Red Hat Software, Inc."
-msgstr "Copyright (C) 1998 M.Watson"
+msgstr "Copyright (c) 1998 Red Hat Software, Inc."
 
 #: help-browser/gnome-help-browser.c:339
 msgid ""
@@ -2170,13 +2301,14 @@ msgstr "Tamany de l'històric"
 msgid "History file"
 msgstr "Fitxer d'històric"
 
+# I cache es pronuncia «caix»
 #: help-browser/gnome-help-browser.c:600
 msgid "Cache size"
-msgstr "Tamany de caxé"
+msgstr "Tamany de cache"
 
 #: help-browser/gnome-help-browser.c:601
 msgid "Cache file"
-msgstr "Fitxer de caxé"
+msgstr "Fitxer de cache"
 
 #: help-browser/gnome-help-browser.c:602
 msgid "Bookmark file"
@@ -2188,7 +2320,7 @@ msgstr "Ruta dels manuals"
 
 #: help-browser/gnome-help-browser.c:609
 msgid "Info Path"
-msgstr "Ruta dels fitxers Info"
+msgstr "Ruta dels fitxers info"
 
 #: help-browser/gnome-help-browser.c:610
 msgid "GNOME Help Path"
@@ -2200,7 +2332,7 @@ msgstr "Configurar Ajuda de GNOME"
 
 #: help-browser/gnome-help-browser.c:688
 msgid "History and cache"
-msgstr "Històric i caxé"
+msgstr "Històric i cache"
 
 #: help-browser/gnome-help-browser.c:689
 msgid "Paths"
@@ -2211,16 +2343,16 @@ msgid "<body><h2>Error: file not found</h2></body>"
 msgstr "<body><h2>Error: no s'ha trobat el fitxer</h2></body>"
 
 #: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
+msgid "Count"
+msgstr "Total"
 
 #: help-browser/history.c:257
 msgid "Last"
 msgstr "Últim"
 
 #: help-browser/history.c:257
-msgid "Count"
-msgstr "Total"
+msgid "URL"
+msgstr "URL"
 
 #: help-browser/history.c:270
 msgid "Gnome Help History"
@@ -2252,7 +2384,7 @@ msgstr "Jocs"
 
 #. Miscellaneous frame
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:503 panel/panel_config_global.c:632
+#: panel/panel_config_global.c:507 panel/panel_config_global.c:620
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
@@ -2368,95 +2500,89 @@ msgstr "<br><B>No s'ha trobat cap coincidència</B>\n"
 
 #: help-browser/visit.c:84
 msgid "<BODY>Could not load default TOC page</BODY>"
-msgstr "<BODY>No he pogut carregar la pàgina amb la Taula de Continguts</BODY>"
+msgstr "<BODY>No s'ha pogut carregar la pàgina amb la Taula de Continguts</BODY>"
 
 #: help-browser/visit.c:102
 msgid "<BODY>Unknown TOC argument</BODY>"
 msgstr "<BODY>Argument desconegut a la Taula de Continguts</BODY>"
 
-#: help-browser/window.c:129
-#, fuzzy
+#: help-browser/window.c:128
 msgid "_New Window"
-msgstr "Nova finestra"
+msgstr "_Nova finestra"
 
-#: help-browser/window.c:130
+#: help-browser/window.c:129
 msgid "Open new browser window"
 msgstr "Obri una nova finestra del lector"
 
-#: help-browser/window.c:136
-#, fuzzy
-msgid "_Add Bookmark"
-msgstr "Afegir Marcador"
-
-#: help-browser/window.c:136
+#: help-browser/window.c:135
 msgid "Add bookmark"
 msgstr "Afig un nou marcador"
 
-#: help-browser/window.c:161
-#, fuzzy
-msgid "_History"
-msgstr "Històric"
+#: help-browser/window.c:135
+msgid "_Add Bookmark"
+msgstr "_Afegir marcador"
 
-#: help-browser/window.c:161 help-browser/window.c:202
+#: help-browser/window.c:160 help-browser/window.c:201
 msgid "Show History Window"
 msgstr "Mostra la finestra d'històric"
 
-#: help-browser/window.c:166
-#, fuzzy
-msgid "_Bookmarks"
-msgstr "Marcadors"
+#: help-browser/window.c:160
+msgid "_History"
+msgstr "_Històric"
 
-#: help-browser/window.c:166 help-browser/window.c:204
+#: help-browser/window.c:165 help-browser/window.c:203
 msgid "Show Bookmarks Window"
 msgstr "Mostra la finestra de marcadors"
 
-#: help-browser/window.c:180
-#, fuzzy
-msgid "_Window"
-msgstr "Finestra"
+#: help-browser/window.c:165
+msgid "_Bookmarks"
+msgstr "_Marcadors"
 
-#: help-browser/window.c:189
+#: help-browser/window.c:179
+msgid "_Window"
+msgstr "_Finestra"
+
+#: help-browser/window.c:188
 msgid "Back"
 msgstr "Enrere"
 
-#: help-browser/window.c:190
+#: help-browser/window.c:189
 msgid "Go to the previous location in the history list"
-msgstr "Anar a la localització prèvia a la llista-històric"
+msgstr "Va a la localització prèvia a la llista-històric"
 
-#: help-browser/window.c:192
+#: help-browser/window.c:191
 msgid "Forward"
 msgstr "Avant"
 
-#: help-browser/window.c:193
+#: help-browser/window.c:192
 msgid "Go to the next location in the history list"
-msgstr "Anar a la localització següent a la llista-històric"
+msgstr "Va a la localització següent a la llista-històric"
 
-#: help-browser/window.c:196
+#: help-browser/window.c:195
 msgid "Reload"
 msgstr "Rellegir"
 
-#: help-browser/window.c:199
+#: help-browser/window.c:198
 msgid "Index"
 msgstr "Índex"
 
-#: help-browser/window.c:199
+#: help-browser/window.c:198
 msgid "Show Documentation Index"
 msgstr "Mostra l'Índex de Documentació"
 
-#: help-browser/window.c:204
+#: help-browser/window.c:203
 msgid "BMarks"
 msgstr "Marcadors"
 
-#: help-browser/window.c:207
+#: help-browser/window.c:206
 msgid "Help on Help"
-msgstr "Ajuda dobre l'ajuda"
+msgstr "Ajuda sobre l'ajuda"
 
-#: help-browser/window.c:450
-#, fuzzy
+#: help-browser/window.c:449
 msgid "Location: "
-msgstr "Notificació"
+msgstr "Localització:"
 
-#: help-browser/window.c:819
+#: help-browser/window.c:814
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2467,7 +2593,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: help-browser/window.c:822
+#: help-browser/window.c:817
 msgid "Ok"
 msgstr "Val"
 
@@ -2483,344 +2609,292 @@ msgstr "Llevar del plafó"
 msgid "Move applet"
 msgstr "Moure complement"
 
-#: panel/drawer.c:112
+#: panel/drawer.c:117
 msgid "Tooltip/Name"
 msgstr "Pista/Nom"
 
-#: panel/drawer.c:116
+#: panel/drawer.c:121
 msgid "Icon"
 msgstr "Icona"
 
-#: panel/drawer.c:120
+#: panel/drawer.c:125
 msgid "Applet appearance"
-msgstr "Apariència del complement"
+msgstr "Aparença del complement"
 
-#: panel/drawer.c:127
-#, fuzzy
+#: panel/drawer.c:132
 msgid "Drawer handle"
-msgstr "Icona del calaix"
+msgstr "Ansa del calaix"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
-#: panel/drawer.c:132
-#, fuzzy
+#: panel/drawer.c:136
 msgid "Enable hidebutton"
-msgstr "Inhabilitar amagar botons"
+msgstr "Habilitar botó d'amagat"
 
-#: panel/drawer.c:141
-#, fuzzy
+#: panel/drawer.c:146
 msgid "Enable hidebutton arrow"
-msgstr "Inhabilitar amagar botons"
+msgstr "Habilitar fletxa del botó d'amagat"
 
-#: panel/drawer.c:160 panel/drawer.c:238
+#: panel/drawer.c:166 panel/drawer.c:244
 msgid "Drawer"
 msgstr "Calaix"
 
-#: panel/launcher.c:41
+#: panel/launcher.c:40
 msgid "This launch icon does not specify a program to run"
-msgstr ""
+msgstr "Aquesta icona no especifica cap programa per executar"
 
-#: panel/launcher.c:146
+#: panel/launcher.c:129
 msgid "App"
 msgstr "Aplicació"
 
-#: panel/launcher.c:232
+#: panel/launcher.c:215
 msgid "Launcher properties"
 msgstr "Propietats del Llançador"
 
-#: panel/launcher.c:317
+#: panel/launcher.c:301
 msgid "Create launcher applet"
 msgstr "Crear complement llançador"
 
-#: panel/logout.c:49 panel/menu.c:2180 panel/menu.c:2480
+#: panel/logout.c:31 panel/menu.c:2073 panel/menu.c:2378
 msgid "Log out"
 msgstr "Eixir"
 
-#: panel/logout.c:51
-#, fuzzy
+#: panel/logout.c:33
 msgid "Log out of GNOME"
-msgstr "Eixir"
+msgstr "Eixir de GNOME"
 
-#: panel/main.c:121
-msgid ""
-"I've detected a panel already running.\n"
-"Start another panel as well?\n"
-"(The new panel will not be restarted.)"
-msgstr ""
-
-#: panel/menu.c:539
+#: panel/menu.c:538
 msgid "The GNOME Panel"
 msgstr "El Plafó GNOME"
 
-#: panel/menu.c:542
+#: panel/menu.c:541
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
-msgstr ""
-"Aquest programa s'encarrega de llançar altres aplicacions, incorporar\n"
-"complements menuts a ell mateix, la pau al món i alguna petada de les X."
+msgstr "Aquest programa s'encarrega de llançar altres aplicacions, incorporar complements menuts a ell mateix, la pau al món i alguna petada de les X."
 
-#: panel/menu.c:565 panel/menu.c:1314
+#: panel/menu.c:564 panel/menu.c:1307
 msgid "Can't load entry"
-msgstr ""
+msgstr "No es pot carregar l'entrada"
 
-#: panel/menu.c:755 panel/menu.c:789
+#: panel/menu.c:750 panel/menu.c:784
 msgid "Desktop entry properties"
 msgstr "Propietats de l'entrada d'escriptori"
 
-#: panel/menu.c:855
+#: panel/menu.c:850
 msgid "Add this launcher to panel"
 msgstr "Afegir aquest llançador al plafó"
 
-#: panel/menu.c:862 panel/menu.c:888
-#, fuzzy
+#: panel/menu.c:857 panel/menu.c:883
 msgid "Add this to personal menu"
-msgstr "Afegir com a menú al plafó"
+msgstr "Afegir açò al menú personal"
 
-#: panel/menu.c:873
+#: panel/menu.c:868
 msgid "Add this as drawer to panel"
-msgstr "Afegir com a calaix al plafó"
+msgstr "Afegir açò com a calaix al plafó"
 
-#: panel/menu.c:881
+#: panel/menu.c:876
 msgid "Add this as menu to panel"
-msgstr "Afegir com a menú al plafó"
+msgstr "Afegir açò com a menú al plafó"
 
-#: panel/menu.c:916
+#: panel/menu.c:911
 msgid "Properties ..."
 msgstr "Propietats ..."
 
-#: panel/menu.c:1113 panel/menu.c:1185
+#: panel/menu.c:1106 panel/menu.c:1178
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:1322
+#: panel/menu.c:1315
 msgid "Can't get goad_id from desktop entry!"
-msgstr ""
+msgstr "No es pot obtenir el goad_id de l'entrada d'escriptori!"
 
-#: panel/menu.c:1607
+#: panel/menu.c:1556
 msgid "Can't get goad_id for applet, ignoring it"
-msgstr ""
+msgstr "No es pot obtenir el goad_id pel complement; es descarta"
 
-#: panel/menu.c:1769
-msgid " (empty)"
-msgstr ""
-
-#: panel/menu.c:1880
+#: panel/menu.c:1812
 msgid "Applets"
 msgstr "Complements"
 
-#: panel/menu.c:2007 panel/panel_config.c:866
-#, fuzzy
+#: panel/menu.c:1939 panel/panel_config.c:870
 msgid "Edge panel"
 msgstr "Plafó a un costat"
 
-#: panel/menu.c:2014 panel/panel_config.c:872
-#, fuzzy
+#: panel/menu.c:1946 panel/panel_config.c:876
 msgid "Corner panel"
 msgstr "Plafó a un cantó"
 
-#: panel/menu.c:2033 panel/menu.c:2037 panel/menu.c:2107 panel/menu.c:2878
-#, fuzzy
+#: panel/menu.c:1965 panel/menu.c:1969 panel/menu.c:2013 panel/menu.c:2771
 msgid "System menus"
-msgstr "Menús del Sistema"
+msgstr "Menús del sistema"
 
-#: panel/menu.c:2080 panel/menu.c:2084 panel/menu.c:2148 panel/menu.c:2933
-#, fuzzy
-msgid "Debian menus"
-msgstr "Menú principal"
-
-#: panel/menu.c:2089
-#, fuzzy
-msgid "No Debian menus found!"
-msgstr "<br><B>No s'ha trobat cap coincidència</B>\n"
-
-#: panel/menu.c:2115 panel/menu.c:2118 panel/menu.c:2851 panel/menu.c:2892
-#: panel/menu.c:2895
-#, fuzzy
+#: panel/menu.c:2022 panel/menu.c:2024 panel/menu.c:2748 panel/menu.c:2782
+#: panel/menu.c:2785
 msgid "User menus"
-msgstr "Menús de l'Usuari"
+msgstr "Menús de l'usuari"
 
-#: panel/menu.c:2127 panel/menu.c:2131 panel/menu.c:2817 panel/menu.c:2858
-#: panel/menu.c:2907 panel/menu.c:2917
-#, fuzzy
+# ??? $$$???
+#: panel/menu.c:2032 panel/menu.c:2034 panel/menu.c:2714 panel/menu.c:2755
+#: panel/menu.c:2797 panel/menu.c:2807
 msgid "Red Hat menus"
-msgstr "Afegir menú principal"
+msgstr "Menús de Red Hat"
 
-#: panel/menu.c:2165
+#: panel/menu.c:2058
 msgid "Remove this panel"
 msgstr "Llevar aquest plafó"
 
-#: panel/menu.c:2314
+#: panel/menu.c:2205
 msgid "Add applet"
 msgstr "Afegir complement"
 
-#: panel/menu.c:2323
+#: panel/menu.c:2214
 msgid "Add new panel"
 msgstr "Afegir nou plafó"
 
-#: panel/menu.c:2331
-#, fuzzy
+#: panel/menu.c:2222
 msgid "Convert to corner panel"
-msgstr "Plafó a un cantó"
+msgstr "Convertir en plafó a un cantó"
 
-#: panel/menu.c:2339
-#, fuzzy
+#: panel/menu.c:2230
 msgid "Convert to edge panel"
-msgstr "Plafó a un cantó"
+msgstr "Convertir en plafó a un costat"
 
-#: panel/menu.c:2347
+#: panel/menu.c:2249
 msgid "Add main menu"
 msgstr "Afegir menú principal"
 
-#: panel/menu.c:2355
-#, fuzzy
+#: panel/menu.c:2257
 msgid "Add drawer"
-msgstr "Calaix"
+msgstr "Afegir calaix"
 
-#: panel/menu.c:2364
+#: panel/menu.c:2266
 msgid "Add log out button"
 msgstr "Afegir botó d'eixida"
 
-#: panel/menu.c:2373
+#: panel/menu.c:2275
 msgid "Add swallowed app"
 msgstr "Afegir aplicació incorporada"
 
-#: panel/menu.c:2380
+#: panel/menu.c:2282
 msgid "Add new launcher"
 msgstr "Afegir nou llançador"
 
-#: panel/menu.c:2392
+#: panel/menu.c:2294
 msgid "This panel properties..."
 msgstr "Propietats d'aquest plafó..."
 
-#: panel/menu.c:2402
+#: panel/menu.c:2304
 msgid "Global properties..."
 msgstr "Propietats globals..."
 
-#: panel/menu.c:2436
+#: panel/menu.c:2338
 msgid "Panel"
 msgstr "Plafó"
 
-#: panel/menu.c:2447
+#: panel/menu.c:2345
 msgid "Lock screen"
 msgstr "Blocar pantalla"
 
-#: panel/menu.c:2468
+#: panel/menu.c:2366
 msgid "About GNOME..."
-msgstr "Tocant a GNOME..."
+msgstr "A propòsit de GNOME..."
 
-#: panel/menu.c:3153
+# De veres aquesta gent parla així?
+#: panel/menu.c:3025
 msgid "Can't open directory, using main menu!"
-msgstr ""
+msgstr "No es pot obrir el directori; s'usarà el menú principal!"
 
-#: panel/menu.c:3291
+#: panel/menu.c:3154
 msgid "In a submenu"
-msgstr ""
+msgstr "A un submenú"
 
-#: panel/menu.c:3303
-#, fuzzy
+#: panel/menu.c:3166
 msgid "On the main menu"
-msgstr "Afegir menú principal"
+msgstr "Al menú principal"
 
-#: panel/menu.c:3327
+#: panel/menu.c:3190
 msgid "Menu properties"
 msgstr "Propietats del menú"
 
-#: panel/menu.c:3334
-#, fuzzy
+#: panel/menu.c:3197
 msgid "Menu type"
-msgstr "Tipus de menú"
+msgstr "Tipus del menú"
 
-#: panel/menu.c:3341 panel/menu.c:3361
-#, fuzzy
+#: panel/menu.c:3204 panel/menu.c:3224
 msgid "Main menu"
 msgstr "Menú principal"
 
-#: panel/menu.c:3352 panel/menu.c:3388
-#, fuzzy
+#: panel/menu.c:3215 panel/menu.c:3247
 msgid "Normal menu"
 msgstr "Menú normal"
 
-#: panel/menu.c:3372
-#, fuzzy
+#: panel/menu.c:3235
 msgid "System menu: "
-msgstr "Menús del Sistema"
+msgstr "Menú del sistema:"
 
-#: panel/menu.c:3376
-#, fuzzy
+#: panel/menu.c:3239
 msgid "User menu: "
-msgstr "Menús de l'Usuari"
+msgstr "Menú de l'usuari:"
 
-#: panel/menu.c:3380
+#: panel/menu.c:3243
 msgid "Red Hat menu (if found): "
-msgstr ""
+msgstr "Menú de Red Hat (si l'hi ha):"
 
-#: panel/menu.c:3384
-msgid "Debian menu (if found): "
-msgstr ""
-
-#: panel/menu.c:3398
+#: panel/menu.c:3257
 msgid "Menu path"
 msgstr "Ruta del menú"
 
 #. Position frame
-#: panel/panel_config.c:281 panel/panel_config.c:448
+#: panel/panel_config.c:274 panel/panel_config.c:446
 msgid "Position"
 msgstr "Posició"
 
 #. Top Position
-#: panel/panel_config.c:293
+#: panel/panel_config.c:287
 msgid "Top"
 msgstr "Dalt"
 
-#: panel/panel_config.c:304
+#: panel/panel_config.c:298
 msgid "Bottom"
 msgstr "Baix"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:354
-#, fuzzy
+#: panel/panel_config.c:348
 msgid "Minimize options"
 msgstr "Opcions de minimització"
 
 #. Auto-hide
-#: panel/panel_config.c:364
-#, fuzzy
+#: panel/panel_config.c:359
 msgid "Auto hide"
 msgstr "Amagar automàticament"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:374 panel/panel_config.c:567
-#, fuzzy
+#: panel/panel_config.c:370 panel/panel_config.c:571
 msgid "Enable hidebuttons"
-msgstr "Inhabilitar amagar botons"
+msgstr "Habilitar botons d'amagat"
 
 #. Arrow enable
-#: panel/panel_config.c:384 panel/panel_config.c:577
-#, fuzzy
+#: panel/panel_config.c:381 panel/panel_config.c:582
 msgid "Enable hidebutton arrows"
-msgstr "Inhabilitar amagar botons"
+msgstr "Habilitar fletxa als botons d'amagat"
 
 #. North East Position
-#: panel/panel_config.c:460
-#, fuzzy
+#: panel/panel_config.c:459
 msgid "North east"
 msgstr "nord-est"
 
-#: panel/panel_config.c:471
-#, fuzzy
+#: panel/panel_config.c:470
 msgid "South west"
 msgstr "sud-oest"
 
-#: panel/panel_config.c:482
-#, fuzzy
+#: panel/panel_config.c:481
 msgid "North west"
 msgstr "nord-oest"
 
-#: panel/panel_config.c:493
-#, fuzzy
+#: panel/panel_config.c:492
 msgid "South east"
-msgstr "sud-oest"
+msgstr "sud-est"
 
 #. Orientation frame
 #: panel/panel_config.c:524
@@ -2828,248 +2902,214 @@ msgid "Orientation"
 msgstr "Orientació"
 
 #. Horizontal
-#: panel/panel_config.c:534
+#: panel/panel_config.c:535
 msgid "Horizontal"
 msgstr "Horitzontal"
 
-#: panel/panel_config.c:546
+#: panel/panel_config.c:548
 msgid "Vertical"
 msgstr "Vertical"
 
 #. Hidebuttons frame
-#: panel/panel_config.c:556
+#: panel/panel_config.c:559
 msgid "Hidebutton options"
-msgstr ""
+msgstr "Opcions dels botons d'amagat"
 
 #. selector frame
-#: panel/panel_config.c:673 panel/panel_config.c:885
+#: panel/panel_config.c:679 panel/panel_config.c:889
 msgid "Background"
 msgstr "Fons"
 
 #. standard background
-#: panel/panel_config.c:682
+#: panel/panel_config.c:689
 msgid "Standard"
 msgstr "Estàndard"
 
-#: panel/panel_config.c:689
+#: panel/panel_config.c:697
 msgid "Pixmap"
 msgstr "Pixmap"
 
-#: panel/panel_config.c:696
+#: panel/panel_config.c:705
 msgid "Color"
 msgstr "Color"
 
 #. image frame
-#: panel/panel_config.c:701
+#: panel/panel_config.c:711
 msgid "Image file"
 msgstr "Fitxer d'imatge"
 
-#: panel/panel_config.c:728
+#: panel/panel_config.c:740
 msgid "Scale image to fit panel"
 msgstr "Escalar imatge per ajustar-la al plafó"
 
-#: panel/panel_config.c:855
+#: panel/panel_config.c:859
 msgid "Panel properties"
 msgstr "Propietats del Plafó"
 
 #. Animation enable
-#: panel/panel_config_global.c:199
-#, fuzzy
+#: panel/panel_config_global.c:196
 msgid "Enable animations"
-msgstr "Inhabilitar animacions"
-
-#: panel/panel_config_global.c:204
-#, fuzzy
-msgid "Constant speed animations"
-msgstr "Inhabilitar animacions"
+msgstr "Habilitar animacions"
 
 #. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:218
-#, fuzzy
+#: panel/panel_config_global.c:204
 msgid "Auto-hide animation speed"
-msgstr "Velocitat de l'autoamagat"
+msgstr "Velocitat de l'amagat automàtic"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:228
-#, fuzzy
+#: panel/panel_config_global.c:215
 msgid "Explicit-hide animation speed"
-msgstr "Velocitat de l'amagat manual"
+msgstr "Velocitat de l'amagat explícit"
 
 #. DrawerHide Animation step_size scale frame
-#: panel/panel_config_global.c:238
-#, fuzzy
+#: panel/panel_config_global.c:226
 msgid "Drawer animation speed"
 msgstr "Velocitat d'animació del calaix"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:248
-#, fuzzy
+#: panel/panel_config_global.c:237
 msgid "Auto-hide minimize delay (ms)"
-msgstr "Retard d'autoamagat del plafó (ms)"
+msgstr "Retard d'amagat automàtic del plafó (ms)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:254
-#, fuzzy
+#: panel/panel_config_global.c:244
 msgid "Auto-hide minimized size (pixels)"
 msgstr "Tamany del plafó amagat (píxels)"
 
 #. Enable tiles frame
-#: panel/panel_config_global.c:320 panel/panel_config_global.c:347
+#: panel/panel_config_global.c:312 panel/panel_config_global.c:340
 msgid "Tiles enabled"
 msgstr "Taulells habilitats"
 
 #. Image frame
-#: panel/panel_config_global.c:356
+#: panel/panel_config_global.c:350
 msgid "Image files"
 msgstr "Fitxers d'imatge"
 
-#: panel/panel_config_global.c:368
+#: panel/panel_config_global.c:363
 msgid "Tile filename (up)"
 msgstr "Fitxer taulell (dalt)"
 
-#: panel/panel_config_global.c:372
+#: panel/panel_config_global.c:367
 msgid "Tile filename (down)"
 msgstr "Fitxer taulell (baix)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:379
+#: panel/panel_config_global.c:374
 msgid "Border width (tile only)"
 msgstr "Amplària de la vora (sols pel taulell)"
 
 #. Minimized size scale frame
-#: panel/panel_config_global.c:386
+#: panel/panel_config_global.c:382
 msgid "Depth (displacement when pressed)"
 msgstr "Profunditat (desplaçament quan és pres)"
 
 #. Tooltips frame
-#: panel/panel_config_global.c:408
+#: panel/panel_config_global.c:405
 msgid "Tooltips"
 msgstr "Pistes"
 
 #. Tooltips enable
-#: panel/panel_config_global.c:418
+#: panel/panel_config_global.c:416
 msgid "Tooltips enabled"
 msgstr "Pistes habilitades"
 
 #. Menu frame
-#: panel/panel_config_global.c:427
+#: panel/panel_config_global.c:426
 msgid "Menus"
 msgstr "Menús"
 
 #. Small Icons
-#: panel/panel_config_global.c:437
+#: panel/panel_config_global.c:438
 msgid "Show small icons"
 msgstr "Mostrar icones menudes"
 
 #. Dot Buttons
-#: panel/panel_config_global.c:446
+#: panel/panel_config_global.c:447
 msgid "Show ... buttons"
 msgstr "Mostrar ... botons"
 
 #. Off Panel Popup menus
-#: panel/panel_config_global.c:455
+#: panel/panel_config_global.c:456
 msgid "Show popup menus outside of panels"
-msgstr ""
+msgstr "Mostrar menús emergents fora dels plafons"
 
 #. Hungry Menus
-#: panel/panel_config_global.c:464
+#: panel/panel_config_global.c:465
 msgid "Keep menus in memory"
-msgstr ""
+msgstr "Mantenir els menús en memòria"
 
 #. Movement frame
-#: panel/panel_config_global.c:473
+#: panel/panel_config_global.c:474
 msgid "Movement"
 msgstr "Moviment"
 
 #. Switched
-#: panel/panel_config_global.c:483
+#: panel/panel_config_global.c:485
 msgid "Switched movement"
-msgstr "Moviment interromput"
+msgstr "Moviment discret"
 
-#: panel/panel_config_global.c:494
+#: panel/panel_config_global.c:497
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "Moviment lliure (no destorba altres complements)"
 
 #. Prompt before log out
-#: panel/panel_config_global.c:513
+#: panel/panel_config_global.c:518
 msgid "Prompt before logout"
 msgstr "Preguntar abans d'eixir"
 
 #. Autoraise
-#: panel/panel_config_global.c:522
+#: panel/panel_config_global.c:528
 msgid "Raise panels on mouse-over (non GNOME compliant window managers only)"
-msgstr ""
+msgstr "Apujar plafons en posar a sobre el punter (sols gestors incompatibles amb GNOME)"
 
 #. Keep on bottom
-#: panel/panel_config_global.c:531
+#: panel/panel_config_global.c:538
 msgid "Keep panel below windows (GNOME compliant window managers only)"
-msgstr ""
-
-#. Drawer/launcher auto close
-#: panel/panel_config_global.c:540
-msgid "Close drawer if a launcher inside it is pressed"
-msgstr ""
+msgstr "Mantenir plafó per sota de les finestres (sols gestors compatibles amb GNOME)"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:549
-#, fuzzy
+#: panel/panel_config_global.c:548
 msgid "Applet padding"
-msgstr "Espai al voltant del complement"
+msgstr "Separació entre complements"
 
-#: panel/panel_config_global.c:577
+#: panel/panel_config_global.c:565
 msgid "Launcher icon"
 msgstr "Icona del llançador"
 
-#: panel/panel_config_global.c:578
+#: panel/panel_config_global.c:566
 msgid "Drawer icon"
 msgstr "Icona del calaix"
 
-#: panel/panel_config_global.c:579
+#: panel/panel_config_global.c:567
 msgid "Menu icon"
 msgstr "Icona del menú"
 
-#: panel/panel_config_global.c:580
-#, fuzzy
+#: panel/panel_config_global.c:568
 msgid "Logout icon"
-msgstr "Eixir"
+msgstr "Icona d'eixida"
 
-#: panel/panel_config_global.c:604
-#, fuzzy
+#: panel/panel_config_global.c:592
 msgid "Global panel configuration"
-msgstr "Configuració Global del Plafó"
+msgstr "Configuració global dels plafons"
 
-#: panel/panel_config_global.c:612
+#: panel/panel_config_global.c:600
 msgid "Animation"
 msgstr "Animació"
 
-#: panel/panel_config_global.c:618
-#, fuzzy
+#: panel/panel_config_global.c:606
 msgid "General icon settings"
-msgstr "Propietats Generals"
+msgstr "Propietats generals de les icones"
 
-#: panel/session.c:635
-msgid ""
-"Are you sure you want to just terminate the panel?\n"
-"\n"
-"If you need to restart the panel after terminating it here, you will need to "
-"type panel in a terminal window\n"
-"\n"
-"Press OK to terminate the panel!"
-msgstr ""
-
-#: panel/session.c:696
+#: panel/session.c:712
 msgid "Really log out?"
-msgstr "De veres vols eixir?"
+msgstr "De veres voleu eixir?"
 
-#: panel/session.c:701
-msgid "Only terminate panel"
-msgstr ""
-
-#: panel/session.c:715
+#: panel/session.c:729
 msgid "Ask next time"
 msgstr "Preguntar el següent cop"
 
-#: panel/swallow.c:211
+#: panel/swallow.c:210
 msgid "Create swallow applet"
 msgstr "Crear complement incorporat"
 
@@ -3077,727 +3117,25 @@ msgstr "Crear complement incorporat"
 msgid "Title of application to swallow"
 msgstr "Títol de l'aplicació incorporada"
 
-#: panel/swallow.c:235
+#: panel/swallow.c:236
 msgid "Command (optional)"
 msgstr "Comanda (opcional)"
 
-#: panel/swallow.c:258
-#, fuzzy
+#: panel/swallow.c:260
 msgid "Height"
-msgstr "Alta."
+msgstr "Altura"
 
-#~ msgid "Gnome Session Properties"
-#~ msgstr "Propietats de la Sessió GNOME"
+msgid "_Close"
+msgstr "_Tancar"
 
-#, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "Inici"
+msgid "_Settings"
+msgstr "_Propietats"
 
-#~ msgid "Geometry of window"
-#~ msgstr "Geometria de la finestra"
+msgid "_Preferences..."
+msgstr "Pre_ferències"
 
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "No puc obrir /proc/apm; no puc obtenir-ne dades."
+msgid "E_xit"
+msgstr "Ei_xir"
 
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Quelcom d'erroni amb /proc/apm; no puc obtenir-ne dades."
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "No puc obrir /dev/apm; no puc obtenir-ne dades."
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "No hi ha bateria?!?"
-
-#~ msgid "High and charging."
-#~ msgstr "Alta i carregant-se."
-
-#~ msgid "High."
-#~ msgstr "Alta."
-
-#~ msgid "Low and charging."
-#~ msgstr "Baixa i carregant-se."
-
-#~ msgid "Low."
-#~ msgstr "Baixa."
-
-#~ msgid "Critical and charging."
-#~ msgstr "Crítica i carregant-se."
-
-#~ msgid "Critical!!"
-#~ msgstr "Crítica!!"
-
-#~ msgid "Charging."
-#~ msgstr "Carregant-se."
-
-#~ msgid "unknown minutes of battery."
-#~ msgstr "minuts de bateria desconeguts."
-
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "minuts de bateria desconeguts (%d%%)"
-
-#~ msgid "%d minutes of battery"
-#~ msgstr "%d minuts de bateria"
-
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "%d minuts de bateria (%d%%)"
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "¿!¿La bateria té més de 100.000.000 minuts de vida?!?"
-
-#~ msgid "APM Stats"
-#~ msgstr "Estat de l'APM"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Versió del controlador APM de Linux:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "Versió de la BIOS APM:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Estat de la bateria:"
-
-#~ msgid "Refresh Image"
-#~ msgstr "Refer Imatge"
-
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "El complement Bus Sign"
-
-#~ msgid ""
-#~ "This applet is a total waste of time. Get back to work!\n"
-#~ "\n"
-#~ "To fill in the sign please see:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-#~ msgstr ""
-#~ "Aquest complement és una pèrdua total de temps. Torna al treball!\n"
-#~ "\n"
-#~ "Per emplenar el senyal visita:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-
-#~ msgid "User Load"
-#~ msgstr "Càrrega d'Usuari"
-
-#~ msgid "System Load"
-#~ msgstr "Càrrega de Sistema"
-
-#~ msgid "CPULoad Settings"
-#~ msgstr "Propietats de Càrrega d'UPC"
-
-#, fuzzy
-#~ msgid "1.0pre1"
-#~ msgstr "1.0"
-
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "Refer Imatge"
-
-#, fuzzy
-#~ msgid "GTicker Article List"
-#~ msgstr "Refer Imatge"
-
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "no es pot crear el directori de l'usuari: %s\n"
-
-#, fuzzy
-#~ msgid "Image path:"
-#~ msgstr "Ruta del menú"
-
-#~ msgid ""
-#~ "This applet requires you to run a window manager with the XA_ extensions.\n"
-#~ msgstr ""
-#~ "Aquest complement requereix que uses un gestor de finestres amb les "
-#~ "extensions XA_.\n"
-
-#~ msgid "Copyright (C)1998 M.Watson"
-#~ msgstr "Copyright (C) 1998 M.Watson"
-
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "No he pogut prendre una propietat de l'espai de treball."
-
-#~ msgid " Folder"
-#~ msgstr " Carpeta"
-
-#~ msgid "Config"
-#~ msgstr "Configuració"
-
-#~ msgid "Discard session"
-#~ msgstr "Descartar sessió"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#, fuzzy
-#~ msgid "Special Prefixes"
-#~ msgstr "Fitxers especials"
-
-#~ msgid "Background Properties"
-#~ msgstr "Propietats del Fons"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Propietats de la Campana"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Propietats del Teclat"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Propietats del Ratolí"
-
-# «Look and Feel»??
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Propietats del Tarannà de GNOME"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Establir paràmetres de l'estat salvat i eixir"
-
-#~ msgid "Flat"
-#~ msgstr "Pla"
-
-#~ msgid "Gradient"
-#~ msgstr "Gradient"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Selecció de l'empaperat"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Empaperat"
-
-#~ msgid " Browse... "
-#~ msgstr " Buscar... "
-
-#~ msgid "Scaled"
-#~ msgstr "Escalat"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Escalat (mantenir aspecte)"
-
-#~ msgid "Centered"
-#~ msgstr "Centrat"
-
-#~ msgid "Tiled"
-#~ msgstr "Mosaic"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMATGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Estableix l'empaperat al valor donat"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Especifica el color de fons"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Especifica el color final del gradient de fons"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENTACIÓ"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Orientació del gradient: vertical o horitzontal"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Usar un replé sòlid pel fons"
-
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Usar un gradient per plenar el fons"
-
-#~ msgid "MODE"
-#~ msgstr "MODE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Mostrar empaperat: mosaic, centrat, escalat o ratio"
-
-#~ msgid "Sound"
-#~ msgstr "So"
-
-#~ msgid "Volume"
-#~ msgstr "Volum"
-
-#~ msgid "Pitch"
-#~ msgstr "To"
-
-#~ msgid "Duration"
-#~ msgstr "Duració"
-
-#~ msgid "Test"
-#~ msgstr "Provar"
-
-#~ msgid "Bell"
-#~ msgstr "Xiulet"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-repetició"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Activar auto-repetició"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Freqüència de repetició"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Retard de repetició"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Clic de teclat"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Clic en teclejar"
-
-#~ msgid "Click volume"
-#~ msgstr "Volum del clic"
-
-#~ msgid "Keyboard"
-#~ msgstr "Teclat"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Botons del ratolí"
-
-#~ msgid "Left handed"
-#~ msgstr "Esquerrà"
-
-#~ msgid "Right handed"
-#~ msgstr "Dretà"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Moviment del ratolí"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleració"
-
-#~ msgid "Fast"
-#~ msgstr "Ràpida"
-
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgid "Threshold"
-#~ msgstr "Zona d'activació"
-
-#~ msgid "Large"
-#~ msgstr "Gran"
-
-#~ msgid "Small"
-#~ msgstr "Menuda"
-
-#~ msgid "Mouse"
-#~ msgstr "Ratolí"
-
-#~ msgid "Default Gtk setting [FIXME - Describe this better]"
-#~ msgstr "Propietats normals de GTK [ARREGLA'M - Descriure millor]"
-
-#~ msgid "Spread buttons out"
-#~ msgstr "Separar els botons"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Posar botons a les vores"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Alinear botons a l'esquerra"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Alinear botons a la dreta"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "On decidisca el gestor de finestres"
-
-#~ msgid "Center of the screen"
-#~ msgstr "Al centre de la pantalla"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Al punter del ratolí"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Tractats com les altres finestres"
-
-#~ msgid "Dialogs are treated specially by window manager"
-#~ msgstr "Tractats de forma especial pel gestor de finestres"
-
-#~ msgid "Notebook"
-#~ msgstr "Bloc de notes"
-
-#~ msgid "Toplevel"
-#~ msgstr "Dalt de tot"
-
-#~ msgid "Modal"
-#~ msgstr "Modal"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Botons dels quadres"
-
-#~ msgid "Dialog position"
-#~ msgstr "Posició dels quadres"
-
-#~ msgid "Dialog hints"
-#~ msgstr "Tractament"
-
-#~ msgid "Use statusbar instead of dialog when possible"
-#~ msgstr "Fer servir barra d'estat en compte d'un quadre si és possible"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Posar quadres sobre la finestra de l'aplicació si es pot"
-
-#~ msgid "Dialogs"
-#~ msgstr "Quadres de diàleg"
-
-#~ msgid "Menubars are detachable"
-#~ msgstr "Les barres de menú són separables"
-
-#, fuzzy
-#~ msgid "Menubars have relieved border"
-#~ msgstr "Els botons de la barra d'estris tenen relleu"
-
-#~ msgid "Toolbars are detachable"
-#~ msgstr "Les barres d'estris són separables"
-
-#~ msgid "Toolbar buttons have relieved border"
-#~ msgstr "Els botons de la barra d'estris tenen relleu"
-
-#, fuzzy
-#~ msgid "Toolbars have flat look"
-#~ msgstr "Les barres d'estris són separables"
-
-#, fuzzy
-#~ msgid "Toolbars have line separators"
-#~ msgstr "Els botons de la barra d'estris tenen relleu"
-
-#, fuzzy
-#~ msgid "Toolbars have text labels"
-#~ msgstr "Les barres d'estris són separables"
-
-#~ msgid "Statusbar is interactive when possible"
-#~ msgstr "La barra d'estat és interactiva si és possible"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Botons dels quadres"
-
-#~ msgid "Application"
-#~ msgstr "Aplicacions"
-
-#~ msgid "Default MDI mode"
-#~ msgstr "Mode multidocument per defecte"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "Pos. de llengüeta del bloc multidocument"
-
-#~ msgid "MDI"
-#~ msgstr "Multidocument"
-
-#~ msgid "New Folder"
-#~ msgstr "Nova carpeta"
-
-#~ msgid "Failed to delete the folder."
-#~ msgstr "No he pogut esborrar la carpeta."
-
-#~ msgid "Failed to delete the file."
-#~ msgstr "No he pogut esborrar el fitxer."
-
-#~ msgid "Delete file?"
-#~ msgstr "Vols esborrar el fitxer?"
-
-#~ msgid ""
-#~ "Cannot delete folder.\n"
-#~ "To delete a folder. it must be empty."
-#~ msgstr ""
-#~ "No puc esborrar la carpeta.\n"
-#~ "Per esborrar-la, huria de ser buida."
-
-#~ msgid "File or Folder does not exist on filesystem."
-#~ msgstr "La carpeta o fitxer no existeix al sistema de fitxers."
-
-#~ msgid "The Name text field can not be blank."
-#~ msgstr "El camp de text Nom no pot ser buit."
-
-#, fuzzy
-#~ msgid ""
-#~ "You can't edit an entry in that folder.\n"
-#~ "You do not have the proper permissions."
-#~ msgstr ""
-#~ "No pots editar una entrada en aquesta capeta!\n"
-#~ "Per editar entrades del sistema has de ser el root."
-
-#~ msgid "Save file?"
-#~ msgstr "Vols guardar fitxer?"
-
-#~ msgid "File name:"
-#~ msgstr "Nom del fitxer:"
-
-#~ msgid "_Quit"
-#~ msgstr "Ei_xir"
-
-#~ msgid "_Sort Folder"
-#~ msgstr "_Ordenar Carpeta"
-
-#~ msgid "_About..."
-#~ msgstr "_Tocant a..."
-
-#~ msgid "Sort Folder"
-#~ msgstr "Ordenar carpeta"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#, fuzzy
-#~ msgid "P_references..."
-#~ msgstr "_Guardar preferències"
-
-#, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "_Guardar preferències"
-
-#, fuzzy
-#~ msgid "_Close"
-#~ msgstr "Tancar"
-
-#~ msgid "Close window"
-#~ msgstr "Tancar finestra"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Eixir"
-
-#~ msgid "Exit all windows"
-#~ msgstr "Abandonar totes les finestres"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "Tocant a"
-
-#~ msgid "Info about this program"
-#~ msgstr "Informació sobre aquest programa"
-
-#, fuzzy
-#~ msgid "Icon Selection"
-#~ msgstr "Acceleració"
-
-#, fuzzy
-#~ msgid "Help & About..."
-#~ msgstr "Tocant a..."
-
-#~ msgid "Used Memory"
-#~ msgstr "Memòria Usada"
-
-#~ msgid "Shared Memory"
-#~ msgstr "Memòria Compartida"
-
-#~ msgid "Buffered Memory"
-#~ msgstr "Memòria Buferada"
-
-#~ msgid "Cached Memory"
-#~ msgstr "Memòria en Caxé"
-
-#~ msgid "MemLoad Settings"
-#~ msgstr "Propietats de Càrrega de Memòria"
-
-#~ msgid "Used Swap"
-#~ msgstr "Espai d'intercanvi usat"
-
-#~ msgid "Both System and User menus on the same menu"
-#~ msgstr "Tots dos menús de Sistema i d'Usuari al mateix menú"
-
-#~ msgid "System on the main menu, User menu as a submenu"
-#~ msgstr "Menú principal el de Sistema; el d'Usuari com a submenú"
-
-#~ msgid "User on the main menu, System menu as a submenu"
-#~ msgstr "Menú principal el d'Usuari; el de Sistema com a submenú"
-
-#~ msgid "Configure"
-#~ msgstr "Configurar"
-
-#~ msgid "File"
-#~ msgstr "Fitxer"
-
-#~ msgid "Explicitly Hide"
-#~ msgstr "Amagar manualment"
-
-#~ msgid "South East"
-#~ msgstr "sud-est"
-
-#~ msgid "Log Out"
-#~ msgstr "Eixir"
-
-#, fuzzy
-#~ msgid "Settings"
-#~ msgstr "Propietats de Càrrega d'UPC"
-
-#, fuzzy
-#~ msgid "Wait"
-#~ msgstr "Amplària"
-
-#, fuzzy
-#~ msgid "Min"
-#~ msgstr "Principal"
-
-#, fuzzy
-#~ msgid "Use DPMS"
-#~ msgstr "Usar XDSI"
-
-#, fuzzy
-#~ msgid "Normal"
-#~ msgstr "No tens correu."
-
-#, fuzzy
-#~ msgid "Low"
-#~ msgstr "Baixa."
-
-#, fuzzy
-#~ msgid "XLockMore Properties"
-#~ msgstr "Propietats del Ratolí"
-
-#, fuzzy
-#~ msgid " Apply "
-#~ msgstr "Aplicació"
-
-#, fuzzy
-#~ msgid " Defaults "
-#~ msgstr "Per defecte"
-
-#, fuzzy
-#~ msgid " Mode "
-#~ msgstr "Moure amunt"
-
-#, fuzzy
-#~ msgid " Options "
-#~ msgstr "Opcions de minimització"
-
-#, fuzzy
-#~ msgid "Repeat Delay"
-#~ msgstr "Retard de repetició"
-
-#, fuzzy
-#~ msgid "Test settings"
-#~ msgstr "Propietats generals de les icones"
-
-#, fuzzy
-#~ msgid "Preview"
-#~ msgstr "Dispositiu"
-
-#, fuzzy
-#~ msgid "About:"
-#~ msgstr "Tocant a"
-
-#, fuzzy
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Propietats de l'Ús de Disc"
-
-#, fuzzy
-#~ msgid "Start After "
-#~ msgstr "Començar en mode impressora"
-
-#, fuzzy
-#~ msgid "Low "
-#~ msgstr "Baixa."
-
-#, fuzzy
-#~ msgid " Normal"
-#~ msgstr "No tens correu."
-
-#~ msgid "Desktop Manager"
-#~ msgstr "Administrador d'Escriptori"
-
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Administrador de propietats de l'Escriptori."
-
-#, fuzzy
-#~ msgid "_Help with GNOME..."
-#~ msgstr "Ajuda sobre GNOME..."
-
-#, fuzzy
-#~ msgid "_Main"
-#~ msgstr "Principal"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id del complement -- assignat pel Centre de Control"
-
-# «socket» ??
-#, fuzzy
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "id X del sòcol on és connectat"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#, fuzzy
-#~ msgid "IOR of the control-center"
-#~ msgstr "ior del Centre de Control"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#, fuzzy
-#~ msgid "Event"
-#~ msgstr "Moviment"
-
-#, fuzzy
-#~ msgid "Enable sounds for events"
-#~ msgstr "Activar auto-repetició"
-
-#, fuzzy
-#~ msgid "Select sound file"
-#~ msgstr "Vols esborrar el fitxer?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr "Auto-repetició"
-
-#, fuzzy
-#~ msgid "Theme Information"
-#~ msgstr "Formats de fitxers"
-
-#, fuzzy
-#~ msgid " Settings"
-#~ msgstr "Propietats de Càrrega d'UPC"
-
-#~ msgid "John Ellis (gqview@geocities.com)"
-#~ msgstr "John Ellis (gqview@geocities.com)"
-
-#~ msgid "Can't allocate memory for color\n"
-#~ msgstr "No puc reservar memòria pel color\n"
-
-#~ msgid "Start in clock mode"
-#~ msgstr "Començar en mode rellotge"
-
-#~ msgid "Start in mailcheck mode"
-#~ msgstr "Començar en mode comprovador de correu"
-
-#~ msgid "Start in CPU mode"
-#~ msgstr "Començar en mode UCP"
-
-#~ msgid "Start in memory mode"
-#~ msgstr "Començar en mode memòria"
-
-#~ msgid "Start in swapload mode"
-#~ msgstr "Començar en mode càrrega d'intercanvi"
-
-#~ msgid "Garrett Smith <gsmith@serv.net>"
-#~ msgstr "Garrett Smith <gsmith@serv.net>"
-
-# Comorrr?
-#~ msgid "readfd writefd"
-#~ msgstr "readfd writefd"
-
-#~ msgid "Running with System Menu privileges.\n"
-#~ msgstr "Corrent amb privilegis del Menú del Sistema.\n"
-
-#~ msgid "_Properties..."
-#~ msgstr "_Propietats..."
-
-#~ msgid "[SESSION]"
-#~ msgstr "[SESSIÓ]"
-
-#~ msgid "Programs to invoke at session startup:"
-#~ msgstr "Programes invocats en iniciar la sessió:"
-
-#~ msgid "[URL]"
-#~ msgstr "[URL]"
-
-#~ msgid "Width (optional)"
-#~ msgstr "Amplària (opcional)"
-
-#~ msgid "Height (optional)"
-#~ msgstr "Altura (opcional)"
+msgid "_About..."
+msgstr "_A propòsit de..."
