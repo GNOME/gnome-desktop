@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      0.28
+%define ver      0.30
 %define rel      SNAP
 %define prefix   /usr
 
@@ -10,13 +10,17 @@ Release: %rel
 Copyright: LGPL
 Group: X11/Libraries
 Source: ftp://ftp.gnome.org/pub/gnome-core-%{ver}.tar.gz
-BuildRoot: /tmp/gnome-core-root
+Patch: gnome-core-libgtop.patch
+BuildRoot: /var/tmp/gnome-core-root
 Obsoletes: gnome
 Packager: Marc Ewing <marc@redhat.com>
 URL: http://www.gnome.org
 Prereq: /sbin/install-info
 Docdir: %{prefix}/doc
 Requires: xscreensaver
+Requires: gnome-libs >= 0.30
+Requires: ORBit >= 0.3.0
+
 
 %description
 Basic programs and libraries that are virtually required for
@@ -37,12 +41,17 @@ Panel libraries and header files.
 
 %changelog
 
+* Wed Sep 23 1998 Michael Fulbright <msf@redhat.com>
+
+- Built 0.30 release
+
 * Fri Mar 13 1998 Marc Ewing <marc@redhat.com>
 
 - Integrate into gnome-core CVS source tree
 
 %prep
 %setup
+%patch -p1
 
 %build
 # Needed for snapshot releases.
