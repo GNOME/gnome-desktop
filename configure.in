@@ -384,6 +384,15 @@ fi
 
 AC_DEFINE_UNQUOTED(KDE_DOCDIR, "$kde_docdir")
 
+dnl
+dnl ScrollKeeper
+dnl
+AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+if test x$SCROLLKEEPER_CONFIG = xno; then
+  AC_MSG_ERROR(Couldn't find scrollkeeper-config, please install the scrollkeeper packaga)
+fi
+SCROLLKEEPER_REQUIRED=0.1.4
+AC_SUBST(SCROLLKEEPER_REQUIRED)
 
 
 dnl AC_CONFIG_SUBDIRS(gemvt)
