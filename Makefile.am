@@ -14,7 +14,6 @@ SUBDIRS =			\
 	doc
 
 EXTRA_SUBDIRS =			\
-	 intl			\
 	 gsm			\
 	 desktop-links		\
 	 help-browser		\

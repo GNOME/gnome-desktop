@@ -3,8 +3,6 @@ AUTOMAKE_OPTIONS = 1.4
 INCLUDES = \
 	-I.			\
 	-I$(srcdir)		\
-	-I$(top_srcdir)/intl	\
-	-I$(top_builddir)/intl	\
 	-I$(top_builddir)/panel	\
 	-I$(includedir)		\
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
