@@ -358,7 +358,7 @@ gnome_desktop_item_new (void)
 	/* These are guaranteed to be set */
 	gnome_desktop_item_set_string (retval,
 				       GNOME_DESKTOP_ITEM_NAME,
-				       "No name");
+				       _("No name"));
 	gnome_desktop_item_set_string (retval,
 				       GNOME_DESKTOP_ITEM_ENCODING,
 				       "UTF-8");
