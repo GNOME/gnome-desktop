@@ -605,6 +605,12 @@ fill_advanced_page (GnomeDItemEdit *dee,
         dee->_priv->transl_comment_entry = gtk_entry_new();
         gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_comment_entry,TRUE,TRUE,0);
 
+	g_signal_connect_swapped (G_OBJECT (dee->_priv->transl_name_entry), "changed",
+				  G_CALLBACK(gnome_ditem_edit_changed), dee);
+
+	g_signal_connect_swapped (G_OBJECT(dee->_priv->transl_comment_entry), "changed",
+				  G_CALLBACK (gnome_ditem_edit_changed), dee);
+
         box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
         table_attach_entry(GTK_TABLE(page),box, 0, 2, 4, 5);
   
