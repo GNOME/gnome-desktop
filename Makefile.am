@@ -10,7 +10,7 @@ always_built_SUBDIRS = panel applets \
 	 gsm pixmaps desktop-links desktop-properties help-browser \
 	 gnome-terminal core-docs
 
-sometimes_built_SUBDIRS = gmenu smproxy control_center
+sometimes_built_SUBDIRS = gmenu smproxy control-center
 
 SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu)
 
