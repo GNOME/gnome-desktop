@@ -1,3 +1,5 @@
+/* By Elliot Lee <sopwith@redhat.com */
+
 #include "config.h"
 
 #define DI_DEBUG 1
@@ -8,6 +10,10 @@
 #include <glib.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <unistd.h>
+#include <time.h>
 #include "gnome-defs.h"
 #include "gnome-portability.h"
 #include "gnome-ditem.h"
@@ -29,9 +35,13 @@ struct _GnomeDesktopItem {
 
   char *icon_path;
 
+  char *location;
+
   GHashTable *other_attributes; /* string key, string value */
 
   GSList *subitems; /* If GNOME_DESKTOP_ITEM_IS_DIRECTORY */
+
+  time_t mtime;
 };
 
 #ifdef DI_DEBUG
@@ -42,7 +52,7 @@ ditem_dump(const GnomeDesktopItem *ditem, int indent_level)
   for(i = 0; i < indent_level; i++)
     g_print(" ");
 
-  g_print("%s (%s)\n", ditem->name?g_hash_table_lookup(ditem->name, "C"):"ZOT", ditem->icon_path);
+  g_print("%s (%s)\n", ditem->name?(char *)g_hash_table_lookup(ditem->name, "C"):"ZOT", ditem->icon_path);
   g_slist_foreach(ditem->subitems, (GFunc)ditem_dump, GINT_TO_POINTER(indent_level + 3));
 }
 #endif
@@ -91,16 +101,25 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
 
   retval->item_format = item->item_format;
   retval->item_flags = item->item_flags;
-  retval->icon_path = g_strdup(item->icon_path);
-  retval->exec = g_copy_vector((const char **)item->exec);
-  for(retval->exec_length = 0; retval->exec[retval->exec_length]; retval->exec_length++) /* just count */;
+  retval->icon_path = item->icon_path?g_strdup(item->icon_path):NULL;
+  retval->location = item->location?g_strdup(item->location):NULL;
+
+  if(item->exec && item->exec_length)
+    {
+      retval->exec = g_copy_vector((const char **)item->exec);
+      for(retval->exec_length = 0; retval->exec[retval->exec_length]; retval->exec_length++) /* just count */;
+    }
+  else
+    {
+      retval->exec = NULL;
+      retval->exec_length = 0;
+    }
 
   if(item->name
      && g_hash_table_size(item->name) > 0)
     {
       retval->name = g_hash_table_new (g_str_hash, g_str_equal);
-      g_hash_table_foreach(item->name, ditem_copy_key_value, retval->name);
-      
+      g_hash_table_foreach(item->name, ditem_copy_key_value, retval->name);      
     }
 
   if(item->comment
@@ -383,6 +402,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
   GnomeDesktopItemFlags item_flags;
   GnomeDesktopItemFormat fmt;
   char **sub_sort_order;
+  struct stat sbuf;
 
   g_return_val_if_fail (file, NULL);
 
@@ -390,14 +410,18 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
   //  g_print("Loading file %s\n", file);
 #endif
 
-  if (!g_file_exists (file))
+  if (stat(file, &sbuf))
     return NULL;
 
   /* Step one - figure out what type of file this is */
   flags = 0;
   fmt = GNOME_DESKTOP_ITEM_UNKNOWN;
-  if (g_file_test (file, G_FILE_TEST_ISDIR))
+  item_flags = 0;
+  if (S_ISDIR(sbuf.st_mode))
     {
+      if(flags & GNOME_DESKTOP_ITEM_LOAD_NO_DIRS)
+	return NULL;
+
       item_flags |= GNOME_DESKTOP_ITEM_IS_DIRECTORY;
       g_snprintf(subfn, sizeof(subfn), "%s/.directory", file);
     }
@@ -443,7 +467,9 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
   if(!retval)
     goto out;
 
+  retval->location = g_strdup(g_basename(file));
   retval->item_format = fmt;
+  retval->mtime = sbuf.st_mtime;
 
   if(!g_hash_table_size(retval->name))
     {
@@ -462,10 +488,17 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
     }
 
   /* Now, read the subdirectory (if appropriate) */
-  if(retval->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY)
+  if((retval->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY)
+     && !(flags & GNOME_DESKTOP_ITEM_LOAD_NO_SUBITEMS))
     {
       int i;
       DIR *dirh;
+      GnomeDesktopItemLoadFlags subflags;
+
+      subflags = flags|GNOME_DESKTOP_ITEM_LOAD_NO_SYNC;
+
+      if(flags & GNOME_DESKTOP_ITEM_LOAD_NO_SUBDIRS)
+	subflags |= GNOME_DESKTOP_ITEM_LOAD_NO_DIRS;
 
       if(sub_sort_order)
 	{
@@ -475,7 +508,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 
 	      g_snprintf(confpath, sizeof(confpath), "%s/%s", file, sub_sort_order[i]);
 
-	      subitem = gnome_desktop_item_new_from_file(confpath, flags|GNOME_DESKTOP_ITEM_LOAD_NO_SYNC);
+	      subitem = gnome_desktop_item_new_from_file(confpath, subflags);
 
 	      if(subitem)
 		retval->subitems = g_slist_append(retval->subitems, subitem);
@@ -500,7 +533,7 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
 
 	      g_snprintf(confpath, sizeof(confpath), "%s/%s", file, dent->d_name);
 
-	      subitem = gnome_desktop_item_new_from_file(confpath, flags|GNOME_DESKTOP_ITEM_LOAD_NO_SYNC);
+	      subitem = gnome_desktop_item_new_from_file(confpath, subflags);
 
 	      if(subitem)
 		retval->subitems = g_slist_append(retval->subitems, subitem);
@@ -515,6 +548,174 @@ gnome_desktop_item_new_from_file (const char *file, GnomeDesktopItemLoadFlags fl
     gnome_config_sync();
 
   return retval;
+}
+
+static void
+save_lang_val(gpointer key, gpointer value, gpointer user_data)
+{
+  char *valptr, tmpbuf[1024];
+
+  if(!key || !strcmp(key, "C"))
+    valptr = user_data;
+  else
+    g_snprintf((valptr = tmpbuf), sizeof(tmpbuf), "%s[%s]", (char *)user_data, (char *)key);
+
+  gnome_config_set_string(valptr, value);
+}
+
+static void
+save_key_val(gpointer key, gpointer value, gpointer user_data)
+{
+  gnome_config_set_string(key, value);
+}
+
+static void
+ditem_save(GnomeDesktopItem *item, const char *under, GnomeDesktopItemLoadFlags save_flags,
+	   const GnomeDesktopItem *parent)
+{
+  char fnbuf[PATH_MAX];
+
+  gnome_config_sync();
+
+  if(item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY)
+    {
+      int my_errno;
+
+      if(save_flags & GNOME_DESKTOP_ITEM_LOAD_NO_DIRS)
+	return;
+
+      if(mkdir(under, 0777)
+	 && ((my_errno = errno) != EEXIST))
+	{
+	  g_warning("Couldn't create directory for desktop item: %s", g_strerror(my_errno));
+	  return;
+	}
+    }
+
+  if(item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY)
+    {
+      FILE *fh;
+
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/.order", under, parent?item->location:"");
+
+      if(item->subitems && (item->item_format == GNOME_DESKTOP_ITEM_GNOME))
+	{
+	  fh = fopen(fnbuf, "w");
+
+	  if(fh)
+	    {
+	      GSList *subi;
+	      for(subi = item->subitems; subi; subi = subi->next)
+		{
+		  GnomeDesktopItem *subdi;
+		  subdi = subi->data;
+
+		  if(!subdi->location)
+		    continue;
+
+		  fprintf(fh, "%s\n", subdi->location);
+		}
+	    }
+	}
+      else
+	unlink(fnbuf);
+
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/.directory", under, parent?item->location:"");
+      unlink(fnbuf);
+
+      g_snprintf(fnbuf, sizeof(fnbuf), "=%s/%s/.directory=/%sDesktop Entry/", under,
+		 (parent && item->location)?item->location:"",
+		 (item->item_format==GNOME_DESKTOP_ITEM_KDE)?"KDE ":"");
+    }
+  else
+    {
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s", under, item->location);
+      unlink(fnbuf);
+      g_snprintf(fnbuf, sizeof(fnbuf), "=%s/%s=/%sDesktop Entry/", under, item->location,
+		 (item->item_format==GNOME_DESKTOP_ITEM_KDE)?"KDE ":"");
+    }
+
+  gnome_config_push_prefix(fnbuf);
+
+  if(item->icon_path)
+    gnome_config_set_string("Icon", item->icon_path);
+
+  if(item->exec_length)
+    gnome_config_set_vector("Exec", item->exec_length, (const char * const *)item->exec);
+
+  if(item->name)
+    g_hash_table_foreach(item->name, save_lang_val, "Name");
+  if(item->comment)
+    g_hash_table_foreach(item->comment, save_lang_val, "Comment");
+  if(item->other_attributes)
+    g_hash_table_foreach(item->other_attributes, save_key_val, NULL);
+  if(item->item_flags & GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL)
+    gnome_config_set_bool("Terminal", TRUE);
+
+  if(item->other_attributes && !g_hash_table_lookup(item->other_attributes, "Type"))
+    gnome_config_set_string("Type", (item->item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY)?"Directory":"Application");
+
+  if((item->item_format == GNOME_DESKTOP_ITEM_KDE) && item->subitems)
+    {
+      char **myvec = g_alloca((g_slist_length(item->subitems) + 1) * sizeof(char *)), *sortorder;
+      int i;
+      GSList *cur;
+
+      for(cur = item->subitems, i = 0; cur; cur = cur->next, i++)
+	{
+	  GnomeDesktopItem *subdi;
+	  subdi = cur->data;
+
+	  myvec[i] = subdi->location;
+	}
+      myvec[i] = NULL;
+
+      sortorder = g_strjoinv(",", myvec);
+      gnome_config_set_string("SortOrder", sortorder);
+      g_free(sortorder);
+    }
+
+  gnome_config_pop_prefix();
+
+  if(item->subitems
+     && !(save_flags & GNOME_DESKTOP_ITEM_LOAD_NO_SUBITEMS))
+    {
+      GSList *cur;
+      GnomeDesktopItemLoadFlags subflags;
+
+      subflags = save_flags;
+
+      if(save_flags & GNOME_DESKTOP_ITEM_LOAD_NO_SUBDIRS)
+	subflags |= GNOME_DESKTOP_ITEM_LOAD_NO_DIRS;
+
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s", under, item->location);
+
+      for(cur = item->subitems; cur; cur = cur->next)
+	ditem_save(cur->data, fnbuf, subflags, item);
+    }
+
+  item->mtime = time(NULL);
+}
+
+/**
+ * gnome_desktop_item_save:
+ * @item: A desktop item
+ * @under: The directory to save the tree underneath
+ * @save_flags: Flags to be used while saving the item
+ *
+ * Writes the specified item to disk.
+ */
+/* XXX really should remove a directory before rewriting it */
+void
+gnome_desktop_item_save (GnomeDesktopItem *item, const char *under, GnomeDesktopItemLoadFlags save_flags)
+{
+  g_return_if_fail(item);
+  g_return_if_fail(under);
+  g_return_if_fail(item->location);
+
+  ditem_save(item, under, save_flags, NULL);
+
+  gnome_config_sync();
 }
 
 /**
@@ -866,6 +1067,53 @@ gnome_desktop_item_get_format (const GnomeDesktopItem *item)
   return item->item_format;
 }
 
+/**
+ * gnome_desktop_item_get_file_status:
+ * @item: A desktop item
+ * @under: The path that the item's location is relative to
+ *
+ * This function checks the modification time of the on-disk file to
+ * see if it is more recent than the in-memory data.
+ *
+ * Returns: An enum value that specifies whether the item has changed since being loaded.
+ */
+GnomeDesktopItemStatus
+gnome_desktop_item_get_file_status (GnomeDesktopItem *item, const char *under)
+{
+  char fnbuf[PATH_MAX];
+  struct stat sbuf;
+  GnomeDesktopItemStatus retval;
+
+  g_return_val_if_fail(item, GNOME_DESKTOP_ITEM_DISAPPEARED);
+  g_return_val_if_fail(item->location, GNOME_DESKTOP_ITEM_DISAPPEARED);
+
+  g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s", under, item->location);
+
+  if(stat(fnbuf, &sbuf))
+    return GNOME_DESKTOP_ITEM_DISAPPEARED;
+
+  retval = (sbuf.st_mtime > item->mtime)?GNOME_DESKTOP_ITEM_CHANGED:GNOME_DESKTOP_ITEM_UNCHANGED;
+
+  item->mtime = sbuf.st_mtime;
+
+  return retval;
+}
+
+/**
+ * gnome_desktop_item_get_location:
+ * @item: A desktop item
+ *
+ * Returns: The file location associated with 'item'. The returned
+ *          memory remains owned by the GnomeDesktopItem and should
+ *          not be freed.
+ *
+ */
+const char *
+gnome_desktop_item_get_location (const GnomeDesktopItem *item)
+{
+  return item->location;
+}
+
 /******* Set... ******/
 
 /**
@@ -1031,4 +1279,17 @@ gnome_desktop_item_set_format (GnomeDesktopItem *item, GnomeDesktopItemFormat fm
   g_return_if_fail(item);
 
   item->item_format = fmt;
+}
+
+/**
+ * gnome_desktop_item_set_location:
+ * @item: A desktop item
+ * @location: A string specifying the file location of this particular item. Subitems of the specified item are not affected.
+ *
+ */
+void
+gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
+{
+  g_free(item->location);
+  item->location = g_strdup(g_basename(location));
 }
