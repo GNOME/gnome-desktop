@@ -404,6 +404,15 @@ scroll_forward (GtkWidget       *widget,
 		fast_fwd++;
 }
 
+static gboolean
+keypress_scroll_forward (GtkWidget       *widget,
+		GdkEventKey  *event)
+{
+	if (event->keyval == GDK_space)
+		fast_fwd++;
+	return FALSE;
+}
+
 static void
 draw_intro (void)
 {
@@ -744,6 +753,7 @@ main (gint argc, gchar *argv[])
 	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, FALSE, 0);
 
 	area = gtk_drawing_area_new ();
+	GTK_WIDGET_SET_FLAGS(area, GTK_CAN_FOCUS);
 	layout = gtk_widget_create_pango_layout (area, NULL);
 	context = gtk_widget_get_pango_context (area);
 	metrics = pango_context_get_metrics (context,
@@ -765,6 +775,8 @@ main (gint argc, gchar *argv[])
 	gtk_widget_add_events (area, GDK_BUTTON_PRESS_MASK);
 	g_signal_connect (area, "button_press_event",
 			  G_CALLBACK (scroll_forward), NULL);
+	g_signal_connect (area, "key_press_event",
+			  G_CALLBACK (keypress_scroll_forward), NULL);			
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
