@@ -283,6 +283,7 @@ static gchar *contributors[] = {
 	"John Slee",
 	"Garrett Smith",
 	"Suzanna Smith",
+	"Andrew Sobala",
 	/* not really a person name :) translate its meaning */
 	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
