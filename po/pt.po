@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.20\n"
-"POT-Creation-Date: 1998-07-23 03:04+0100\n"
-"PO-Revision-Date: 1998-07-23 03:06+01:00\n"
+"POT-Creation-Date: 1998-07-24 22:55+0100\n"
+"PO-Revision-Date: 1998-07-24 23:05+01:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgstr "Só texto"
 
 #: applets/bussign/bussign.c:98 applets/fish/fish.c:310
 #: applets/gen_util/mailcheck.c:595 applets/netload/netload.c:338
-#: gnome-terminal/gnome-terminal.c:676 panel/menu.c:972
+#: gmenu/gmenu.c:56 gnome-terminal/gnome-terminal.c:676 panel/menu.c:1080
 msgid "About..."
 msgstr "Acerca..."
 
@@ -389,73 +389,91 @@ msgstr "Parâmetros da Carga de Rede"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: panel/menu.c:74
-msgid "The GNOME Panel"
-msgstr "O painel GNOME"
+#: panel/panel.c:69
+msgid "This panel properties..."
+msgstr "Propriedades deste painel..."
 
-#: panel/menu.c:77
-msgid ""
-"This program is responsible for launching other applications, embedding "
-"small applets within itself, world peace, and random X crashes."
-msgstr "Este programa é responsável por executar outras aplicações, embeber pequenos applets, a paz mundial e \"crashes\" aleatórios do X."
-
-#: panel/drawer.c:73 panel/drawer.c:123 panel/drawer.c:282 panel/menu.c:882
-msgid "Drawer"
-msgstr "Gaveta"
-
-#: panel/menu.c:889 panel/panel_config.c:778
-msgid "Edge Panel"
-msgstr "Painel lateral"
-
-#: panel/menu.c:896 panel/panel_config.c:784
-msgid "Corner Panel"
-msgstr "Painel de Canto"
-
-#: panel/menu.c:913
-msgid "Add app to panel"
-msgstr "Adicionar aplicação ao painel"
-
-#: panel/menu.c:921
-msgid "Add applet"
-msgstr "Adicionar applet"
-
-#: panel/menu.c:929
-msgid "Add new panel"
-msgstr "Adicionar novo painel"
-
-#: panel/menu.c:937
-msgid "Add main menu"
-msgstr "Adicionar menu principal"
-
-#: panel/menu.c:944
-msgid "Add log out button"
-msgstr "Adicionar botão para terminar sessão"
-
-#: panel/menu.c:952
-msgid "Add swallowed app"
-msgstr "Adicionar aplicação \"engolida\""
-
-#: panel/applet.c:511 panel/menu.c:963
+#: panel/menu.c:1071 panel/panel.c:76
 msgid "Global properties..."
 msgstr "Propriedades globais..."
 
-#: panel/menu.c:1002
-msgid "Panel"
-msgstr "Painel"
+#: panel/panel.c:83
+msgid "Remove this panel"
+msgstr "Apagar este painel"
 
-#: panel/menu.c:1010
-msgid "Lock screen"
-msgstr "Trancar ecrã"
+#: panel/panel.c:95
+msgid "Add main menu applet"
+msgstr "Adicionar menu principal"
 
-#: panel/applet.c:541 panel/logout.c:26 panel/menu.c:1019
+#: panel/logout.c:26 panel/menu.c:1127 panel/panel.c:106
 msgid "Log out"
 msgstr "Terminar sessão"
 
-#: panel/menu.c:1069
+#: panel/menu.c:77
+msgid "The GNOME Panel"
+msgstr "O painel GNOME"
+
+#: panel/menu.c:80
+msgid ""
+"This program is responsible for launching other applications, embedding "
+"small applets within itself, world peace, and random X crashes."
+msgstr ""
+"Este programa é responsável por executar outras aplicações, embeber pequenos "
+"applets, a paz mundial e \"crashes\" aleatórios do X."
+
+#: panel/drawer.c:73 panel/drawer.c:123 panel/drawer.c:282 panel/menu.c:990
+msgid "Drawer"
+msgstr "Gaveta"
+
+#: panel/menu.c:997 panel/panel_config.c:778
+msgid "Edge Panel"
+msgstr "Painel lateral"
+
+#: panel/menu.c:1004 panel/panel_config.c:784
+msgid "Corner Panel"
+msgstr "Painel de Canto"
+
+#: panel/menu.c:1021
+msgid "Add app to panel"
+msgstr "Adicionar aplicação ao painel"
+
+#: panel/menu.c:1029
+msgid "Add applet"
+msgstr "Adicionar applet"
+
+#: panel/menu.c:1037
+msgid "Add new panel"
+msgstr "Adicionar novo painel"
+
+#: panel/menu.c:1045
+msgid "Add main menu"
+msgstr "Adicionar menu principal"
+
+#: panel/menu.c:1052
+msgid "Add log out button"
+msgstr "Adicionar botão para terminar sessão"
+
+#: panel/menu.c:1060
+msgid "Add swallowed app"
+msgstr "Adicionar aplicação \"engolida\""
+
+#: panel/menu.c:1110
+msgid "Panel"
+msgstr "Painel"
+
+#: panel/menu.c:1118
+msgid "Lock screen"
+msgstr "Trancar ecrã"
+
+#. system's menu tree
+#: gmenu/tree.c:362 panel/menu.c:1157 panel/menu.c:1160 panel/menu.c:1187
+#: panel/menu.c:1211
 msgid "System Menus"
 msgstr "Menus de sistema"
 
-#: panel/menu.c:1080
+#. user's menu tree
+#: gmenu/tree.c:391 panel/menu.c:1176 panel/menu.c:1179 panel/menu.c:1198
+#: panel/menu.c:1219
 msgid "User Menus"
 msgstr "Menus de Utilizador"
 
@@ -679,29 +697,17 @@ msgstr "ID"
 msgid "Discard session"
 msgstr "??Rejeitar sessão"
 
-#: panel/applet.c:293
+#: panel/applet.c:299
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:320
+#: panel/applet.c:326
 msgid "Remove from panel"
 msgstr "Apagar do painel"
 
-#: panel/applet.c:328
+#: panel/applet.c:333
 msgid "Move applet"
 msgstr "Mover applet"
-
-#: panel/applet.c:504
-msgid "This panel properties..."
-msgstr "Propriedades deste painel..."
-
-#: panel/applet.c:518
-msgid "Remove this panel"
-msgstr "Apagar este painel"
-
-#: panel/applet.c:530
-msgid "Add main menu applet"
-msgstr "Adicionar menu principal"
 
 #: desktop-properties/property-background.c:518
 msgid "Flat"
@@ -838,6 +844,7 @@ msgstr "Protecções de ecrã"
 msgid "Setup..."
 msgstr "Configurar..."
 
+#: desktop-properties/property-bell.c:214
 #: desktop-properties/property-screensaver.cc:250
 msgid "Test"
 msgstr "Testar"
@@ -866,8 +873,9 @@ msgstr " Cancelar "
 msgid " Defaults "
 msgstr " Valores por omissão "
 
-#: desktop-properties/xlockmore.cc:178 gnome-terminal/gnome-terminal.c:685
-#: help-browser/window.c:176 help-browser/window.c:201
+#: desktop-properties/xlockmore.cc:178 gmenu/gmenu.c:64
+#: gnome-terminal/gnome-terminal.c:685 help-browser/window.c:176
+#: help-browser/window.c:201
 msgid "Help"
 msgstr "Ajuda"
 
@@ -961,7 +969,7 @@ msgstr "Grande"
 
 #: desktop-properties/property-mouse.c:267
 msgid "Small"
-msgstr "Pequeno"
+msgstr "Pequena"
 
 #: desktop-properties/property-mouse.c:274
 msgid "Mouse"
@@ -997,7 +1005,7 @@ msgstr "Espaçar botões"
 
 #: desktop-properties/property-ui.c:57
 msgid "Put buttons on edges"
-msgstr "Por botões nos cantos"
+msgstr "Colocar botões nos cantos"
 
 #: desktop-properties/property-ui.c:58
 msgid "Left-justify buttons"
@@ -1007,36 +1015,36 @@ msgstr "Alinhar botões à esquerda"
 msgid "Right-justify buttons"
 msgstr "Alinhar botões à direita"
 
-#: desktop-properties/property-ui.c:107
+#: desktop-properties/property-ui.c:110
 msgid "Dialog buttons"
 msgstr "Botões dos diálogos"
 
-#: desktop-properties/property-ui.c:113
+#: desktop-properties/property-ui.c:121
 msgid "Use statusbar instead of dialog when possible"
 msgstr ""
 "Usar a barra de estado em vez de uma caixa de diálogo sempre que possível"
 
-#: desktop-properties/property-ui.c:124
+#: desktop-properties/property-ui.c:132
 msgid "Dialogs"
 msgstr "Diálogos"
 
-#: desktop-properties/property-ui.c:130
+#: desktop-properties/property-ui.c:138
 msgid "Menubars are detachable"
 msgstr "Barras de menu são móveis"
 
-#: desktop-properties/property-ui.c:139
+#: desktop-properties/property-ui.c:147
 msgid "Toolbars are detachable"
 msgstr "Barras de ferramentas são móveis"
 
-#: desktop-properties/property-ui.c:148
+#: desktop-properties/property-ui.c:156
 msgid "Toolbar buttons have relieved border"
 msgstr "Botões da barra de ferramentas têm lados salientes"
 
-#: desktop-properties/property-ui.c:157
+#: desktop-properties/property-ui.c:165
 msgid "Statusbar is interactive when possible"
 msgstr "Barra de estado é interactiva sempre que possível"
 
-#: desktop-properties/property-ui.c:166
+#: desktop-properties/property-ui.c:174
 msgid "Application"
 msgstr "Aplicação"
 
@@ -1072,21 +1080,25 @@ msgstr "Terminar sessão"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-session: não consegui ligar-me ao gestor de sessão\n"
 
-#: gsm/session-properties.c:185
+#: gsm/session-properties.c:189
 msgid "Startup"
 msgstr "Início"
 
-#: gsm/session-properties.c:189
+#: gsm/session-properties.c:192
 msgid "Programs to invoke at session startup:"
 msgstr "Programas a executar no início da sessão:"
 
-#: gsm/session-properties.c:193
+#: gmenu/gmenu.c:346 gsm/session-properties.c:196
 msgid "Delete"
 msgstr "Apagar"
 
-#: gsm/session-properties.c:234
+#: gsm/session-properties.c:239
 msgid "Gnome Session Properties"
 msgstr "Propriedades da Sessão GNOME"
+
+#: gsm/session-properties.c:289
+msgid "Geometry of window"
+msgstr "Geometria da janela"
 
 #: help-browser/gnome-help-browser.c:85
 msgid "X"
@@ -1240,7 +1252,7 @@ msgstr "Marcadores"
 msgid "Show Bookmarks Window"
 msgstr "Mostrar Janela de Marcadores"
 
-#: help-browser/window.c:174
+#: gmenu/gmenu.c:62 help-browser/window.c:174
 msgid "File"
 msgstr "Ficheiro"
 
@@ -1604,3 +1616,171 @@ msgstr "Executar este programa em vez de uma 'shell'"
 #: gnome-terminal/gnome-terminal.c:1147
 msgid "Foreground color"
 msgstr "Cor do Texto"
+
+#: gmenu/dialogs.c:37
+msgid "File exists."
+msgstr "Ficheiro existe."
+
+#: gmenu/dialogs.c:45
+msgid "Failed to create file."
+msgstr "Falhou a criação do ficheiro."
+
+#: gmenu/dialogs.c:117 gmenu/dialogs.c:367
+msgid ""
+"You can't add an entry to that folder!\n"
+"To edit system entries you must be root."
+msgstr ""
+"Não pode adicionar uma entrada a essa pasta!\n"
+"Para editar entradas do sistema tem que ser root."
+
+#: gmenu/dialogs.c:123 gmenu/gmenu.c:329
+msgid "New Folder"
+msgstr "Nova Pasta"
+
+#: gmenu/dialogs.c:125
+msgid "Create Folder:"
+msgstr "Criar Pasta:"
+
+#: gmenu/dialogs.c:163
+msgid "Failed to delete the folder."
+msgstr "Não consegui apagar a pasta."
+
+#: gmenu/dialogs.c:171
+msgid "Failed to delete the file."
+msgstr "Não consegui apagar o ficheiro."
+
+#: gmenu/dialogs.c:206
+msgid "You must select something first!"
+msgstr "Tem que seleccionar algo!"
+
+#: gmenu/dialogs.c:212
+msgid "You can not delete a top level Folder!"
+msgstr "Não pode apagar uma pasta principal!"
+
+#: gmenu/dialogs.c:220
+msgid ""
+"You can't delete that file!\n"
+"To edit system entries you must be root."
+msgstr ""
+"Não pode apagar este ficheiro!\n"
+"Para editar entradas do sistema tem que ser root."
+
+#: gmenu/dialogs.c:226
+msgid "Delete file?"
+msgstr "Apagar ficheiro?"
+
+#: gmenu/dialogs.c:235
+msgid "Delete empty folder?"
+msgstr "Apagar pasta vazia?"
+
+#: gmenu/dialogs.c:239
+msgid ""
+"Cannot delete folder.\n"
+"To delete a folder. it must be empty."
+msgstr ""
+"Não pode apagar esta pasta.\n"
+"Só pode apagar uma pasta vazia."
+
+#: gmenu/dialogs.c:242
+msgid "File or Folder does not exist on filesystem."
+msgstr "Ficheiro ou Pasta não existem no sistema."
+
+#: gmenu/dialogs.c:365
+msgid ""
+"You can't edit an entry in that folder!\n"
+"To edit system entries you must be root."
+msgstr ""
+"Não pode editar uma entrada nesta pasta!\n"
+"Para editar entradas do sistema tem que ser root."
+
+#: gmenu/dialogs.c:374
+msgid "Save Changes?"
+msgstr "Gravar alterações?"
+
+#: gmenu/dialogs.c:382
+msgid "Overwrite existing file?"
+msgstr "Substituir ficheiro existente?"
+
+#: gmenu/dialogs.c:388
+msgid "Save file?"
+msgstr "Gravar ficheiro?"
+
+#: gmenu/edit.c:171
+msgid "File name:"
+msgstr "Nome do ficheiro:"
+
+#: gmenu/edit.c:197
+msgid "Save"
+msgstr "Gravar"
+
+#: gmenu/edit.c:214
+msgid "Revert"
+msgstr "Recuperar"
+
+#: gmenu/edit.c:231
+msgid "New"
+msgstr "Novo"
+
+#: gmenu/gmenu.c:42
+msgid "New Folder..."
+msgstr "Nova Pasta..."
+
+#: gmenu/gmenu.c:45
+msgid "Delete..."
+msgstr "Apagar..."
+
+#: gmenu/gmenu.c:48
+msgid "Quit"
+msgstr "Sair"
+
+#: gmenu/gmenu.c:192
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "criando directoria do utilizador: %s\n"
+
+#: gmenu/gmenu.c:195
+#, c-format
+msgid "unable to create user directory: %s\n"
+msgstr "não consegui criar directoria do utilizador: %s\n"
+
+#: gmenu/gmenu.c:240 gmenu/gmenu.c:387
+msgid "GNOME menu editor"
+msgstr "Editor do menu GNOME"
+
+#: gmenu/gmenu.c:243
+msgid ""
+"Released under the terms of the GNU Public License.\n"
+"GNOME menu editor."
+msgstr ""
+"Lançado sob os termos da \"GNU Public License\".\n"
+"Editor do menu GNOME."
+
+#: gmenu/order.c:70
+#, c-format
+msgid "Unable to create file: %s\n"
+msgstr "Não consegui criar ficheiro: %s\n"
+
+#: gmenu/order.c:90
+#, c-format
+msgid "unable to remove .order file: %s\n"
+msgstr "Não consegui apagar ficheiro .order: %s\n"
+
+#: gmenu/order.c:148 gmenu/order.c:162
+msgid " Folder"
+msgstr " Pasta"
+
+#: gmenu/tree.c:354
+msgid "GNOME"
+msgstr "GNOME"
+
+#: gmenu/tree.c:372
+msgid "Top of system menus"
+msgstr "Topo dos menus de sistema"
+
+#: gmenu/tree.c:382
+msgid "Running with root privileges.\n"
+msgstr "A executar com privilégios de root.\n"
+
+#: gmenu/tree.c:401
+msgid "Top of user menus"
+msgstr "Topo dos menus de utilizador"
