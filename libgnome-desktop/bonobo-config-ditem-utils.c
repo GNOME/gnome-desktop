@@ -241,8 +241,6 @@ case CORBA_tk_##k##: \
 			member_name = CORBA_TypeCode_member_name (type, i, ev);
 			member_type = CORBA_TypeCode_member_type (type, i, ev);
 
-			g_message (G_STRLOC ": |%s|", member_name);
-
 			if (CORBA_TypeCode_equal (member_type, TC_GNOME_ExtraAttributes, NULL)) {
 				GNOME_ExtraAttributes attr_list;
 				GSList *extra_attrs = NULL;

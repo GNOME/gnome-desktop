@@ -340,7 +340,8 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 
 	CORBA_exception_init (&ev);
 	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
-	BONOBO_ARG_SET_GENERAL (arg, &item->entry, TC_GNOME_DesktopEntry, GNOME_DesktopEntry *, &ev);
+	arg->_value = item->entry;
+	arg->_release = FALSE;
 	bonobo_pbclient_set_value (item->db, "/Desktop Entry", arg, &ev);
 	if (BONOBO_EX (&ev)) {
 		g_warning (G_STRLOC ": save failed: %s", bonobo_exception_get_text (&ev));
