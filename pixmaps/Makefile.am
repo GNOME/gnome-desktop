@@ -53,6 +53,10 @@ BITMAPS     = \
 	launcher-program.xpm			\
 	monitor.xpm				\
 	netscape3-small.xpm			\
+	panel-arrow-left.xpm			\
+	panel-arrow-right.xpm			\
+	panel-arrow-up.xpm			\
+	panel-arrow-down.xpm			\
 	panel-folder.xpm			\
 	panel-menu-main.xpm
 
