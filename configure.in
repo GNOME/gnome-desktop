@@ -162,7 +162,7 @@ dnl Check for zvt_term_reset
 dnl
 oLIBS="$LIBS"
 LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR"
-AC_CHECK_FUNCS(zvt_term_reset)
+AC_CHECK_FUNC(zvt_term_reset,[AC_DEFINE(HAVE_ZVT_TERM_RESET)])
 LIBS="$oLIBS"
 
 dnl AC_CONFIG_SUBDIRS(gemvt)
