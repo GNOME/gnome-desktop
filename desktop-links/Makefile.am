@@ -17,6 +17,8 @@ gnew_in_files = GIMP.desktop.in
 gnew_DATA = $(gnew_in_files:.desktop.in=.desktop)
 @XML_I18N_MERGE_DESKTOP_RULE@
 
+@XML_I18N_MERGE_DIRECTORY_RULE@
+
 Order_files = \
 	Root.order
 
@@ -102,7 +104,7 @@ EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(Settings_DATA) \
 	$(Directory_files) $(Order_files) $(Root_DATA) $(Settings_Order_files)
 
-install-data-local:
+install-data-local: $(Directory_files)
 	$(mkinstalldirs) $(DESTDIR)$(Applicationsdir)
 	$(mkinstalldirs) $(DESTDIR)$(Graphicsdir)
 	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
