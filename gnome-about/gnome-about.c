@@ -274,9 +274,9 @@ animate_text (gpointer data)
 {
 	AnimationData *ani_data = (AnimationData *)data;
 
-	gnome_canvas_item_move (ani_data->item, 0.0, -10.0);
+	gnome_canvas_item_move (ani_data->item->parent, 0.0, -10.0);
 
-	if (ani_data->item->y1 <= 120.0) {
+	if (ani_data->item->parent->y1 <= 120.0) {
 		g_timeout_add (5 * 1000,
 			       display_introduction_message,
 			       ani_data->canvas);
@@ -293,15 +293,19 @@ display_introduction_message (gpointer data)
 	GnomeCanvas *canvas = GNOME_CANVAS (data);
 	AnimationData *ani_data;
 
+	static GnomeCanvasItem *intro = NULL;
+	static GnomeCanvasItem *intro_rect = NULL;
 	static GnomeCanvasItem *intro_text = NULL;
 	static gint intro_i = 0;
 
 	if (!introduction_messages || !introduction_messages[intro_i]) {
-		/* weird -- leak leak */
-		if (intro_text)
-			gnome_canvas_item_hide (intro_text);
-		/*gtk_object_unref (GTK_OBJECT (intro_text));*/
-		intro_text = NULL;
+		/* just hide the intro now, the canvas will
+		 * take care of disposing it (if we do an _unref here
+		 * it crashes for some reason, too lazy to find out why)
+		 */
+		if (intro)
+			gnome_canvas_item_hide (GNOME_CANVAS_ITEM (intro));
+		intro = NULL;
 
 		g_timeout_add (100, display_subheader, canvas);
 		return FALSE;
@@ -310,8 +314,23 @@ display_introduction_message (gpointer data)
 	if (!intro_text) {
 		gdouble tmp;
 
-		intro_text =
+		intro =
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (canvas->root),
+					       gnome_canvas_group_get_type (),
+					       NULL);
+
+		intro_rect =
+			gnome_canvas_item_new (GNOME_CANVAS_GROUP (intro),
+					       gnome_canvas_rect_get_type (),
+					       "fill_color", "White",
+					       "x1", -4.0,
+					       "y1", -4.0,
+					       "x2", 304.0,
+					       "y2", 84.0,
+					       NULL);
+
+		intro_text =
+			gnome_canvas_item_new (GNOME_CANVAS_GROUP (intro),
 					       gnome_canvas_rich_text_get_type (),
 					       "text", introduction_messages[intro_i],
 					       /* FIXME */
@@ -322,7 +341,7 @@ display_introduction_message (gpointer data)
 					       NULL);
 
 		g_object_get (intro_text, "height", &tmp, NULL);
-		gnome_canvas_item_move (intro_text,
+		gnome_canvas_item_move (intro,
 					(canvas_width - 300.0) / 2.0,
 					 canvas_height - version_info_height - tmp);
 		gnome_canvas_update_now (canvas);
@@ -335,9 +354,9 @@ display_introduction_message (gpointer data)
 				       NULL);
 
 		g_object_get (intro_text, "height", &tmp, NULL);
-		y = intro_text->y1;
+		y = intro->y1;
 
-		gnome_canvas_item_move (intro_text,
+		gnome_canvas_item_move (intro,
 					0.0,
 					canvas_height - version_info_height - y - tmp);
 		gnome_canvas_update_now (canvas);

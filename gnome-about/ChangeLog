@@ -1,3 +1,11 @@
+Thu Jun  5 22:04:12 2003  Kristian Rietveld  <kris@gtk.org>
+
+	Fix the residue during the intro messages. Only two pixels remain
+	during the last message. Hrm. I blame that on libgnomecanvas.
+
+	* gnome-about.c (animate_text), (display_introduction_message): use
+	group +	white rect to remove residue.
+
 Thu Jun  5 21:23:04 2003  Kristian Rietveld  <kris@gtk.org>
 
 	New GNOME About merge point.
