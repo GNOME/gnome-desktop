@@ -87,6 +87,16 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 #endif
 
 	switch (type->kind) {
+	case CORBA_tk_boolean:
+		if (!strcmp (de->value, "0") || !strcasecmp (de->value, "false")) {
+			any = bonobo_arg_new (TC_CORBA_boolean);
+			BONOBO_ARG_SET_BOOLEAN (any, FALSE);
+		} else if (!strcmp (de->value, "1") || !strcasecmp (de->value, "true")) {
+			any = bonobo_arg_new (TC_CORBA_boolean);
+			BONOBO_ARG_SET_BOOLEAN (any, TRUE);
+		}
+		break;
+
 	case CORBA_tk_string:
 		any = bonobo_arg_new (TC_CORBA_string);
 		BONOBO_ARG_SET_STRING (any, de->value);
@@ -140,8 +150,6 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 
 				memset (&subentry, 0, sizeof (DirEntry));
 				subentry.value = l->data;
-
-				g_message (G_STRLOC ": `%s'", subentry.value);
 
 				dynany_anyseq->_buffer [i] = bonobo_config_ditem_decode_any
 					(&subentry, type->subtypes [0], ev);
@@ -221,7 +229,30 @@ bonobo_config_ditem_decode_any (DirEntry *de, CORBA_TypeCode type, CORBA_Environ
 		break;
 	}
 
+	case CORBA_tk_enum: {
+		DynamicAny_DynEnum dynenum;
+
+		dynenum = CORBA_ORB_create_dyn_enum (bonobo_orb (), type, ev);
+
+		if (CORBA_TypeCode_equal (type, TC_GNOME_DesktopEntryType, NULL)) {
+			gchar *value, *up;
+
+			up = g_strup (de->value);
+			value = g_strdup_printf ("DESKTOP_ENTRY_TYPE_%s", up);
+			DynamicAny_DynEnum_set_as_string (dynenum, value, ev);
+			g_free (value); g_free (up);
+		} else {
+			DynamicAny_DynEnum_set_as_string (dynenum, de->value, ev);
+		}
+
+		any = DynamicAny_DynAny_to_any (dynenum, ev);
+
+		break;
+	}
+
 	default:
+		g_message (G_STRLOC ": |%s| - %d - %s (%s)", de->value,
+			   type->kind, type->name, type->repo_id);
 		break;
 	}
 
