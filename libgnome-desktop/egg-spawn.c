@@ -49,32 +49,33 @@ egg_make_spawn_environment_for_screen (GdkScreen  *screen,
 {
   gchar **retval = NULL;
   gchar  *display_name;
-  gint    i;
   gint    display_index = -1;
+  gint    i, env_len;
 
   g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
   if (envp == NULL)
     envp = environ;
 
-  for (i = 0; envp [i]; i++)
-    if (!strncmp (envp [i], "DISPLAY", strlen ("DISPLAY")))
-      display_index = i;
+  for (env_len = 0; envp [env_len]; env_len++)
+    if (!strncmp (envp [env_len], "DISPLAY", strlen ("DISPLAY")))
+      display_index = env_len;
 
   if (display_index == -1)
-    display_index = i++;
+    display_index = env_len++;
 
-  retval = g_new (char *, i + 1);
+  retval = g_new (char *, env_len + 1);
+  retval [env_len] = NULL;
 
   display_name = gdk_screen_make_display_name (screen);
 
-  for (i = 0; envp [i]; i++)
+  for (i = 0; i < env_len; i++)
     if (i == display_index)
       retval [i] = g_strconcat ("DISPLAY=", display_name, NULL);
     else
       retval [i] = g_strdup (envp [i]);
 
-  retval [i] = NULL;
+  g_assert (i == env_len);
 
   g_free (display_name);
 
