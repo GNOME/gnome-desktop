@@ -15,6 +15,11 @@ boot_ditem (Bonobo_ConfigDatabase db)
 	bonobo_pbclient_set_value (db, "/Desktop Entry", arg, NULL);
 	bonobo_arg_release (arg);
 
+	/* For some strange reason, this function causes the config moniker
+	 * (bonobo-config-xmldb) to crash after successfully writing the file.
+	 * So call this function to initialize the file and the comment it out.
+	 */
+
 	CORBA_exception_init (&ev);
 	Bonobo_ConfigDatabase_sync (db, &ev);
 	CORBA_exception_free (&ev);
