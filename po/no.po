@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 0.99.3.2\n"
-"POT-Creation-Date: 1999-02-04 20:17+0100\n"
+"POT-Creation-Date: 1999-02-07 22:56-0500\n"
 "PO-Revision-Date: 1999-01-28 00:20+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -22,13 +22,12 @@ msgstr "Om"
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:459
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
-#: applets/gen_util/printer.c:411 applets/gnome-pager/gnomepager_applet.c:1457
-#: applets/gticker/gticker.c:61
+#: applets/gen_util/printer.c:411 applets/gnome-pager/gnomepager_applet.c:1459
 #: applets/mini-commander/src/mini-commander_applet.c:246
-#: applets/modemlights/modemlights.c:727 applets/multiload/cpuload.c:62
+#: applets/modemlights/modemlights.c:731 applets/multiload/cpuload.c:62
 #: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:405 panel/launcher.c:278
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:382 panel/launcher.c:278
 #: panel/menu.c:3319
 msgid "Properties..."
 msgstr "Egenskaper ..."
@@ -165,20 +164,19 @@ msgstr ""
 #: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:465
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
-#: applets/gnome-pager/gnomepager_applet.c:1451 applets/gticker/gticker.c:67
-#: applets/modemlights/modemlights.c:733 applets/netload/netload.c:339
+#: applets/gnome-pager/gnomepager_applet.c:1453
+#: applets/modemlights/modemlights.c:737 applets/netload/netload.c:339
 #: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
 #: panel/menu.c:2354
 msgid "About..."
 msgstr "Om..."
 
-#: applets/clockmail/clockmail.c:29 applets/gticker/gticker.c:230
-#: applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr "%d.%d.%d"
 
-#: applets/clockmail/clockmail.c:34 applets/gticker/gticker.c:234
+#: applets/clockmail/clockmail.c:34
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr "John Ellis <johne@bellatlantic.net>"
 
@@ -186,8 +184,7 @@ msgstr "John Ellis <johne@bellatlantic.net>"
 msgid "Clock and Mail Notify Applet"
 msgstr "Klokke- og postnotifiseringsapplet"
 
-#: applets/clockmail/clockmail.c:38 applets/gticker/gticker.c:236
-#: applets/slashapp/slashapp.c:573
+#: applets/clockmail/clockmail.c:38 applets/slashapp/slashapp.c:573
 msgid "(C) 1998"
 msgstr "(C) 1998"
 
@@ -250,10 +247,89 @@ msgstr "Når ny post mottas, kjør:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Postboksen anses som full etter (Kbytes):"
 
+#. -- not implemented yet --
+#.
+#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
+#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
+#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
+#. gtk_widget_show(frame);
+#.
+#. vbox1 = gtk_vbox_new(FALSE, 1);
+#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
+#. gtk_widget_show(vbox1);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Article index file:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image Server Url:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#. hbox = gtk_hbox_new(FALSE, 0);
+#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
+#. gtk_widget_show(hbox);
+#.
+#. label = gtk_label_new(_("Image path:"));
+#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
+#. gtk_widget_show(label);
+#.
+#. entry = gtk_entry_new_with_max_length(255);
+#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
+#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
+#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
+#. GTK_OBJECT(ad->propwindow));
+#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
+#. gtk_widget_set_sensitive(entry, FALSE);
+#. gtk_widget_show(entry);
+#.
+#.
 #. ---
 #: applets/clockmail/properties.c:385 applets/diskusage/properties.c:344
 #: applets/drivemount/properties.c:207 applets/fvwm-pager/properties.c:246
-#: applets/gticker/properties.c:328
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:200 applets/netload/properties.c:280
 #: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:878
@@ -451,7 +527,7 @@ msgstr "Filnavn for animasjonen:"
 
 #: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:994
 #: panel/menu.c:3260 panel/panel-util.c:77 panel/panel-util.c:115
-#: panel/panel-util.c:152 panel/panel_config.c:725 panel/swallow.c:238
+#: panel/panel-util.c:153 panel/panel_config.c:725 panel/swallow.c:238
 msgid "Browse"
 msgstr "Se på"
 
@@ -669,7 +745,7 @@ msgid "Gnome Pager Settings"
 msgstr "Innstillinger for valg av virtuelt skjermområde"
 
 #: applets/gnome-pager/gnomepager_applet.c:336
-#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
+#: applets/slashapp/properties.c:422
 msgid "Display"
 msgstr "Vis"
 
@@ -713,11 +789,11 @@ msgstr "Antall vertikale kolonner med oppgaver"
 msgid "Number rows of pagers"
 msgstr "Antall rader med skjermvelgere"
 
-#: applets/gnome-pager/gnomepager_applet.c:1372
+#: applets/gnome-pager/gnomepager_applet.c:1374
 msgid "Gnome Pager Error"
 msgstr "Feil i GNOME skjermvelger"
 
-#: applets/gnome-pager/gnomepager_applet.c:1373
+#: applets/gnome-pager/gnomepager_applet.c:1375
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -731,152 +807,25 @@ msgstr ""
 "Enlightenment (DR-0.15)\n"
 "Start så denne appleten igjen.\n"
 
-#: applets/gnome-pager/gnomepager_applet.c:1704
+#: applets/gnome-pager/gnomepager_applet.c:1716
 msgid "Sticky"
 msgstr "Klebrig"
 
-#: applets/gnome-pager/gnomepager_applet.c:2291
+#: applets/gnome-pager/gnomepager_applet.c:2317
 msgid "Show / Hide"
 msgstr "Vis / gjem"
 
-#: applets/gnome-pager/gnomepager_applet.c:2303
+#: applets/gnome-pager/gnomepager_applet.c:2329
 msgid "Shade / Unshade"
 msgstr "Skygge / Ikke skygge"
 
-#: applets/gnome-pager/gnomepager_applet.c:2315 panel/launcher.c:43
+#: applets/gnome-pager/gnomepager_applet.c:2341 panel/launcher.c:43
 msgid "Close"
 msgstr "Lukk"
 
-#: applets/gnome-pager/gnomepager_applet.c:2327
+#: applets/gnome-pager/gnomepager_applet.c:2353
 msgid "Nuke"
 msgstr "Fjern"
-
-#: applets/gticker/gticker.c:53
-msgid "Loading headlines..."
-msgstr "Laster overskrifter..."
-
-#: applets/gticker/gticker.c:72
-msgid "Show Article Listing"
-msgstr "Vis artikkelliste"
-
-#: applets/gticker/gticker.c:77
-msgid "Refresh Articles"
-msgstr "Gjenoppfrisk artikler"
-
-#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr "Justin Maurer <justin@openprojects.net>"
-
-#: applets/gticker/gticker.c:236
-msgid "GTicker"
-msgstr "GTicker"
-
-#: applets/gticker/gticker.c:237
-msgid "Ticker for the GNOME Project\n"
-msgstr "Teleks for GNOME\n"
-
-#: applets/gticker/gticker.c:250
-msgid "GTicker Article List"
-msgstr "GTicker artikkelliste"
-
-#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
-msgid "No articles"
-msgstr "Ingen artikler"
-
-#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "oppretter brukerkatalog: %s\n"
-
-#: applets/gticker/gticker.c:415
-#, c-format
-msgid ""
-"unable to create user directory: \n"
-"\t\t\t\t\t    %s\n"
-msgstr ""
-"kunne ikke opprette brukerkatalogen: \n"
-"\t\t\t\t\t    %s\n"
-
-#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
-msgid "Articles"
-msgstr "Artikler"
-
-#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr "Vis emnebilder"
-
-#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr "Vis avdeling"
-
-#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr "Vis ekstra informasjon (Tid, forfatter, kommentarer)"
-
-#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr "Pause mellom artikler (10 = 1 sek):"
-
-#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr "(Disse innstillingene trer ikke i kraft uten en gjenoppfrisking)"
-
-#: applets/gticker/properties.c:231
-#: applets/mini-commander/src/mini-commander_applet.c:184
-#: applets/slashapp/properties.c:249
-msgid "Browser"
-msgstr "Leser"
-
-#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
-msgid "Open new window"
-msgstr "Åpne nytt vindu"
-
-#. -- not implemented yet --
-#: applets/gticker/properties.c:248
-msgid "Ticker Information (unimplemented)"
-msgstr "Informasjon for GTicker (ikke implementert)"
-
-#. create the widget we are going to put on the applet
-#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
-msgid "Url:"
-msgstr "Url:"
-
-#: applets/gticker/properties.c:278
-msgid "Article index file:"
-msgstr "Artikkelindeksfil"
-
-#: applets/gticker/properties.c:295
-msgid "Image Server Url:"
-msgstr "Bildetjener Url:"
-
-#: applets/gticker/properties.c:312
-msgid "Image path:"
-msgstr "Sti til bilde"
-
-#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
-#: gnome-terminal/gnome-terminal.c:1073
-msgid "Scrolling"
-msgstr "Rullende"
-
-#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr "Jevn rulling"
-
-#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr "Jevn skriving"
-
-#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr "Fart"
-
-#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr "Pause under tekstbryting:"
-
-#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr "Rullefart mellom linjer (jevn rulling):"
 
 #: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
@@ -948,6 +897,11 @@ msgstr "%d. %b"
 #: applets/mini-commander/src/mini-commander_applet.c:86
 msgid "orient. changed"
 msgstr "orientering endret"
+
+#: applets/mini-commander/src/mini-commander_applet.c:184
+#: applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr "Leser"
 
 #: applets/mini-commander/src/mini-commander_applet.c:197
 #: help-browser/window.c:201
@@ -1025,7 +979,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:163 gnome-terminal/gnome-terminal.c:1026
+#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1026
 msgid "Colors"
 msgstr "Farger"
 
@@ -1059,11 +1013,11 @@ msgstr "Makroer"
 msgid "Run gmix..."
 msgstr "Kjør gmix..."
 
-#: applets/modemlights/modemlights.c:94
+#: applets/modemlights/modemlights.c:98
 msgid "Modem Lights Applet"
 msgstr "Modemlys applet"
 
-#: applets/modemlights/modemlights.c:97
+#: applets/modemlights/modemlights.c:101
 msgid ""
 "Released under the GNU general public license.\n"
 "A modem status indicator and dialer.Lights in order from the top or left are "
@@ -1073,7 +1027,7 @@ msgstr ""
 "En modem status indikator og nummersender. Lysene fra øverst eller venstre "
 "er RX og TX"
 
-#: applets/modemlights/modemlights.c:321
+#: applets/modemlights/modemlights.c:325
 msgid ""
 "You are currently connected.\n"
 "Do you want to disconnect?"
@@ -1081,11 +1035,11 @@ msgstr ""
 "Du er nå tilkoblet.\n"
 "Vil du koble fra?"
 
-#: applets/modemlights/modemlights.c:332
+#: applets/modemlights/modemlights.c:336
 msgid "Do you want to connect?"
 msgstr "Vil du koble til?"
 
-#: applets/modemlights/modemlights.c:351
+#: applets/modemlights/modemlights.c:355
 msgid "not connected"
 msgstr "ikke tilkoblet"
 
@@ -1135,15 +1089,15 @@ msgstr "Prosessorlast"
 msgid "Load Graph"
 msgstr "Graf for belastning"
 
-#: applets/multiload/load-graph.c:151
+#: applets/multiload/load-graph.c:160
 msgid "Speed:"
 msgstr "Fart:"
 
-#: applets/multiload/load-graph.c:151
+#: applets/multiload/load-graph.c:160
 msgid "Width:"
 msgstr "Bredde:"
 
-#: applets/multiload/load-graph.c:151
+#: applets/multiload/load-graph.c:160
 msgid "Height:"
 msgstr "Høyde:"
 
@@ -1243,9 +1197,70 @@ msgstr "Innstillinger for nettlast"
 msgid "Device"
 msgstr "Enhet"
 
+#: applets/slashapp/properties.c:199
+msgid "Articles"
+msgstr "Artikler"
+
+#: applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr "Vis emnebilder"
+
+#: applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr "Vis avdeling"
+
+#: applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Vis ekstra informasjon (Tid, forfatter, kommentarer)"
+
+#: applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "Pause mellom artikler (10 = 1 sek):"
+
+#: applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(Disse innstillingene trer ikke i kraft uten en gjenoppfrisking)"
+
+#: applets/slashapp/properties.c:258
+msgid "Open new window"
+msgstr "Åpne nytt vindu"
+
+#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1073
+msgid "Scrolling"
+msgstr "Rullende"
+
+#: applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr "Jevn rulling"
+
+#: applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr "Jevn skriving"
+
+#: applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Fart"
+
+#: applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr "Pause under tekstbryting:"
+
+#: applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "Rullefart mellom linjer (jevn rulling):"
+
+#: applets/slashapp/slashapp.c:152
+msgid "No articles"
+msgstr "Ingen artikler"
+
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr "Slashapp artikkelliste"
+
+#: applets/slashapp/slashapp.c:255
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "oppretter brukerkatalog: %s\n"
 
 #: applets/slashapp/slashapp.c:258
 #, c-format
@@ -1255,6 +1270,10 @@ msgstr "kunne ikke opprette brukerkatalogen: %s\n"
 #: applets/slashapp/slashapp.c:532
 msgid "No articles found"
 msgstr "Ingen artikler funnet"
+
+#: applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr "Justin Maurer <justin@openprojects.net>"
 
 #: applets/slashapp/slashapp.c:567
 msgid "Craig Small <csmall@eye-net.com.au>"
@@ -1299,6 +1318,11 @@ msgid ""
 msgstr ""
 "Denne appleten sender getURL kommandoer til Netscape gjennom -remote "
 "grensesnittet Forhåpentligvis vil den støtte flere browsere senere."
+
+#. create the widget we are going to put on the applet
+#: applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr "Url:"
 
 #: applets/webcontrol/webcontrol.c:120
 msgid "Clear"
@@ -1384,15 +1408,15 @@ msgstr ""
 "Denne endringen er i konflikt med en eksisterende menyoppføring.\n"
 "To menyoppføringer i samme undermeny kan ikke ha samme navn."
 
-#: gmenu/edit.c:200
+#: gmenu/edit.c:214
 msgid "Save"
 msgstr "Lagre"
 
-#: gmenu/edit.c:217
+#: gmenu/edit.c:231
 msgid "Revert"
 msgstr "Gå tilbake"
 
-#: gmenu/edit.c:235
+#: gmenu/edit.c:249
 msgid "New"
 msgstr "Ny"
 
@@ -1480,11 +1504,11 @@ msgstr "Sorter undermeny"
 msgid "Sort selected submenu"
 msgstr "Sorter valgte undermeny"
 
-#: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:300 gmenu/tree.c:384
+#: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:308 gmenu/tree.c:387
 msgid "GNOME menu editor"
 msgstr "GNOME menyredigering"
 
-#: gmenu/gmenu.c:303
+#: gmenu/gmenu.c:311
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -1492,29 +1516,29 @@ msgstr ""
 "Utgitt under betingelsene gitt i GNU Public License.\n"
 "GNOME menyredigering."
 
-#: gmenu/tree.c:386
+#: gmenu/tree.c:389
 msgid "One moment, reading menus..."
 msgstr "Et øyeblikk, leser menyene..."
 
-#: gmenu/tree.c:415
+#: gmenu/tree.c:418
 msgid "GNOME"
 msgstr "GNOME"
 
 #. system's menu tree
-#: gmenu/tree.c:424
+#: gmenu/tree.c:427
 msgid "System Menus"
 msgstr "Systemmenyer"
 
-#: gmenu/tree.c:434
+#: gmenu/tree.c:437
 msgid "Top of system menus"
 msgstr "Toppen på systemmenyene"
 
 #. user's menu tree
-#: gmenu/tree.c:442
+#: gmenu/tree.c:445
 msgid "User Menus"
 msgstr "Brukermenyer"
 
-#: gmenu/tree.c:452
+#: gmenu/tree.c:455
 msgid "Top of user menus"
 msgstr "Toppen på brukermenyene"
 
@@ -1526,16 +1550,16 @@ msgstr "GNOME terminal"
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME terminalemulering"
 
-#: gnome-terminal/gnome-terminal.c:418 gnome-terminal/gnome-terminal.c:917
+#: gnome-terminal/gnome-terminal.c:417 gnome-terminal/gnome-terminal.c:917
 #: gnome-terminal/gnome-terminal.c:927
 msgid "Default"
 msgstr "Forvalgt"
 
-#: gnome-terminal/gnome-terminal.c:419
+#: gnome-terminal/gnome-terminal.c:418
 msgid "Config"
 msgstr "Konfigurasjon"
 
-#: gnome-terminal/gnome-terminal.c:586
+#: gnome-terminal/gnome-terminal.c:585
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1545,47 +1569,47 @@ msgstr ""
 " rekonfigurere dette vinduet så det passer med den forvalgte\n"
 "konfigurasjonen til den nye klassen?"
 
-#: gnome-terminal/gnome-terminal.c:749
+#: gnome-terminal/gnome-terminal.c:743
 msgid "Linux console"
 msgstr "Linux konsoll"
 
-#: gnome-terminal/gnome-terminal.c:750
+#: gnome-terminal/gnome-terminal.c:744
 msgid "Color Xterm"
 msgstr "Xterm i farger"
 
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:745
 msgid "rxvt"
 msgstr "rxvt"
 
-#: gnome-terminal/gnome-terminal.c:756
+#: gnome-terminal/gnome-terminal.c:750
 msgid "White on black"
 msgstr "Hvitt på sort"
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:751
 msgid "Black on white"
 msgstr "Sort på hvitt"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:752
 msgid "Green on black"
 msgstr "Grønn på sort"
 
-#: gnome-terminal/gnome-terminal.c:759
+#: gnome-terminal/gnome-terminal.c:753
 msgid "Black on light yellow"
 msgstr "Sort på lys gult"
 
-#: gnome-terminal/gnome-terminal.c:760
+#: gnome-terminal/gnome-terminal.c:754
 msgid "Custom colors"
 msgstr "Egendefinerte farger"
 
-#: gnome-terminal/gnome-terminal.c:765 panel/panel_config.c:306
+#: gnome-terminal/gnome-terminal.c:759 panel/panel_config.c:306
 msgid "Left"
 msgstr "Venstre"
 
-#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:317
+#: gnome-terminal/gnome-terminal.c:760 panel/panel_config.c:317
 msgid "Right"
 msgstr "Høyre"
 
-#: gnome-terminal/gnome-terminal.c:767
+#: gnome-terminal/gnome-terminal.c:761
 msgid "Hidden"
 msgstr "Gjemt"
 
@@ -1716,79 +1740,79 @@ msgstr "Vis menylinje"
 msgid "C_olor selector..."
 msgstr "Fargevelger..."
 
-#: gnome-terminal/gnome-terminal.c:1834
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "Terminal class name"
 msgstr "Navn på terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:1834
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "CLASS"
 msgstr "KLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1837
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "Specifies font name"
 msgstr "Spesifiserer navnet på skrifttypen"
 
-#: gnome-terminal/gnome-terminal.c:1837
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:1840
+#: gnome-terminal/gnome-terminal.c:1845
 msgid "Do not start up shells as logins shells"
 msgstr "Ikke start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1843
+#: gnome-terminal/gnome-terminal.c:1848
 msgid "Start up shells as logins shells"
 msgstr "Start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:1846
+#: gnome-terminal/gnome-terminal.c:1851
 msgid "Specifies the geometry for the main window"
 msgstr "Spesifiserer geometrien for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:1846 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1851 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:1849
+#: gnome-terminal/gnome-terminal.c:1854
 msgid "Execute this program instead of a shell"
 msgstr "Kjør dette programmet i stedet for et skall"
 
-#: gnome-terminal/gnome-terminal.c:1849
+#: gnome-terminal/gnome-terminal.c:1854
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: gnome-terminal/gnome-terminal.c:1852
+#: gnome-terminal/gnome-terminal.c:1857
 msgid "Foreground color"
 msgstr "Forgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:1852 gnome-terminal/gnome-terminal.c:1855
+#: gnome-terminal/gnome-terminal.c:1857 gnome-terminal/gnome-terminal.c:1860
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:1855 panel/panel_config.c:751
+#: gnome-terminal/gnome-terminal.c:1860 panel/panel_config.c:751
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:1858
+#: gnome-terminal/gnome-terminal.c:1863
 msgid "Update utmp/wtmp entries"
 msgstr "Oppdater utmp/wtmp-oppføringer"
 
-#: gnome-terminal/gnome-terminal.c:1858
+#: gnome-terminal/gnome-terminal.c:1863
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:1861
+#: gnome-terminal/gnome-terminal.c:1866
 msgid "Do not update utmp/wtmp entries"
 msgstr "Ikke oppdater utmp/wtmp-oppføringer"
 
-#: gnome-terminal/gnome-terminal.c:1861
+#: gnome-terminal/gnome-terminal.c:1866
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:1864
+#: gnome-terminal/gnome-terminal.c:1869
 msgid "Set the window title"
 msgstr "Sett vindustittel"
 
-#: gnome-terminal/gnome-terminal.c:1864
+#: gnome-terminal/gnome-terminal.c:1869
 msgid "TITLE"
 msgstr "TITTEL"
 
@@ -2750,3 +2774,40 @@ msgstr "Kommando (valgfri)"
 #: panel/swallow.c:260
 msgid "Height"
 msgstr "Høyde"
+
+#~ msgid "Loading headlines..."
+#~ msgstr "Laster overskrifter..."
+
+#~ msgid "Show Article Listing"
+#~ msgstr "Vis artikkelliste"
+
+#~ msgid "Refresh Articles"
+#~ msgstr "Gjenoppfrisk artikler"
+
+#~ msgid "GTicker"
+#~ msgstr "GTicker"
+
+#~ msgid "Ticker for the GNOME Project\n"
+#~ msgstr "Teleks for GNOME\n"
+
+#~ msgid "GTicker Article List"
+#~ msgstr "GTicker artikkelliste"
+
+#~ msgid ""
+#~ "unable to create user directory: \n"
+#~ "\t\t\t\t\t    %s\n"
+#~ msgstr ""
+#~ "kunne ikke opprette brukerkatalogen: \n"
+#~ "\t\t\t\t\t    %s\n"
+
+#~ msgid "Ticker Information (unimplemented)"
+#~ msgstr "Informasjon for GTicker (ikke implementert)"
+
+#~ msgid "Article index file:"
+#~ msgstr "Artikkelindeksfil"
+
+#~ msgid "Image Server Url:"
+#~ msgstr "Bildetjener Url:"
+
+#~ msgid "Image path:"
+#~ msgstr "Sti til bilde"
