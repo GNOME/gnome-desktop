@@ -1,27 +1,22 @@
-%define localstatedir   /var/lib
-
-Summary:         The core programs for the GNOME GUI desktop environment.
-Name: 		 gnome-core
-Version: 	 @VERSION@
-Release: 	 1
-License: 	 LGPL
-Group: 		 System Environment/Base
-Source:          ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{version}.tar.gz
-BuildRoot: 	 /var/tmp/%{name}-%{version}-root
-URL: 		 http://www.gnome.org
-Requires:        gtk+ >= @GTK_REQUIRED@
-Requires:        gdk-pixbuf >= @GDK_PIXBUF_REQUIRED@
-Requires:        libglade >= @LIBGLADE_REQUIRED@, libxml
-Requires:        gnome-libs >= @GNOME_LIBS_REQUIRED@
-Requires:        ORBit >= @ORBIT_REQUIRED@
-Requires:        control-center >= @CONTROL_CENTER_REQUIRED@
-BuildRequires:   gtk+-devel >= @GTK_REQUIRED@, libxml-devel
-BuildRequires:   gdk-pixbuf-devel >= @GDK_PIXBUF_REQUIRED@
-BuildRequires:   libglade-devel >= @LIBGLADE_REQUIRED@
-BuildRequires:   scrollkeeper >= @SCROLLKEEPER_REQUIRED@
-BuildRequires:   gnome-libs-devel >= @GNOME_LIBS_REQUIRED@
-BuildRequires:   ORBit-devel >= @ORBIT_REQUIRED@
-BuildRequires:   control-center-devel >= @CONTROL_CENTER_REQUIRED@
+%define __spec_install_post /usr/lib/rpm/brp-compress
+Summary:          The gnome desktop programs for the GNOME GUI desktop environment.
+Name:             gnome-desktop
+Version:          @VERSION@
+Release:          1
+License:          LGPL
+Group:            System Environment/Base
+Source:           %{name}-%{version}.tar.gz
+BuildRoot:        %{_tmppath}/%{name}-%{version}-root
+URL:              http://www.gnome.org
+BuildRequires:    pkgconfig >= 0.8
+Requires:         gtk2 >= @GTK_REQUIRED@
+Requires:         libgnomeui >= @LIBGNOMEUI_REQUIRED@
+Requires:         gnome-vfs2 >= @GNOME_VFS_MODULE_REQUIRED@
+Requires:         libgnomecanvas >= @LIBGNOMECANVAS_REQUIRED@
+BuildRequires:    gtk2-devel >= @GTK_REQUIRED@
+BuildRequires:    libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
+BuildRequires:    gnome-vfs2-devel >= @GNOME_VFS_MODULE_REQUIRED@
+BuildRequires:    libgnomecanvas-devel >= @LIBGNOMECANVAS_REQUIRED@
 
 
 %description
@@ -32,16 +27,23 @@ scope to CDE and KDE, but GNOME is based completely on free
 software.  The gnome-core package includes the basic programs and
 libraries that are needed to install GNOME.
 
-You should install the gnome-core package if you would like to use the
-GNOME desktop environment.  You'll also need to install the gnome-libs
-package.  If you would like to develop GNOME applications, you'll also
-need to install gnome-libs-devel.  If you want to use linuxconf with a
-GNOME front end, you'll also need to install the gnome-linuxconf package.
+GNOME Desktop provides the core icons and libraries for the gnome
+desktop.
 
 %package devel
-Summary:        GNOME core libraries, includes, and more.
-Group: 		Development/Libraries
-Requires: 	%name = %version
+Summary:          GNOME desktop core libraries, includes, and more.
+Group:            Development/Libraries
+Requires:         %name = %version
+Requires:         pkgconfig >= 0.8
+Requires:         gtk2 >= @GTK_REQUIRED@
+Requires:         gtk2-devel >= @GTK_REQUIRED@
+Requires:         libgnomeui >= @LIBGNOMEUI_REQUIRED@
+Requires:         libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
+Requires:         gnome-vfs2 >= @GNOME_VFS_MODULE_REQUIRED@
+Requires:         gnome-vfs2-devel >= @GNOME_VFS_MODULE_REQUIRED@
+Requires:         libgnomecanvas >= @LIBGNOMECANVAS_REQUIRED@
+Requires:         libgnomecanvas-devel >= @LIBGNOMECANVAS_REQUIRED@
+
 
 %description devel
 Panel libraries and header files for creating GNOME panels.
@@ -50,106 +52,55 @@ Panel libraries and header files for creating GNOME panels.
 %setup -q
 
 %build
-./configure --disable-gtkhtml-help --prefix=%{_prefix} \
-    --bindir=%{_bindir} --mandir=%{_mandir} \
-    --localstatedir=%{localstatedir} --libdir=%{_libdir} \
-    --datadir=%{_datadir} --includedir=%{_includedir} \
-    --sysconfdir=%{_sysconfdir}
-
-CFLAGS="$RPM_OPT_FLAGS" make
+%configure
+make %{?_smp_mflags}
 
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
-make prefix=$RPM_BUILD_ROOT%{_prefix} bindir=$RPM_BUILD_ROOT%{_bindir} \
-    mandir=$RPM_BUILD_ROOT%{_mandir} libdir=$RPM_BUILD_ROOT%{_libdir} \
-    localstatedir=$RPM_BUILD_ROOT%{localstatedir} \
-    datadir=$RPM_BUILD_ROOT%{_datadir} \
-    includedir=$RPM_BUILD_ROOT%{_includedir} \
-    sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} install
 
- 
+export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+
+%makeinstall
+
+unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
+
+%find_lang %{name}-2.0
+
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
 %postun
 /sbin/ldconfig
-if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
-%files
+%files -f %{name}-2.0.lang
 %doc AUTHORS COPYING ChangeLog NEWS README
 %defattr (-, root, root)
 %{_bindir}/*
-%{_sysconfdir}/CORBA/servers/*
-%{_sysconfdir}/sound/events/*
-%{_sysconfdir}/gnome/panel-config/*
-%{_datadir}/locale/*/*/*
 %{_mandir}/man1/*
-%{_mandir}/man5/*
 %{_libdir}/*.so.*
-%{_datadir}/applets/*
-%{_datadir}/control-center/*
-%{_datadir}/gnome/*
+%{_datadir}/gnome/help/*
+%{_datadir}/gnome/vfolders
 %{_datadir}/gnome-about/*
-%{_datadir}/gnome-terminal/*
-%{_datadir}/mc/*
-%{_datadir}/omf/*
 %{_datadir}/pixmaps/*
+%{_mandir}/man1/*
+%dir %{_datadir}/gnome
 
 %files devel
-%{_includedir}/*
+%{_includedir}/gnome-desktop-2.0
 %{_libdir}/*a
 %{_libdir}/*so
-%{_libdir}/*sh
-%{_datadir}/idl/*
+%{_libdir}/pkgconfig/*
 
 
 %changelog
-* Mon Aug  6 2001 Gregory Leblanc <gleblanc@linuxweasel.com>
-- removed unnecessary %defines
-- reformatted the header slightly
-- made the devel package require the main package properly
-- replaced copyright with license
+* Tue Mar 05 2002 Chris Chabot <chabotc@reviewboard.com>
+- Fixed remaining formating issues
+- converted to .spec.in
 
-* Thu Apr 02 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
-- Fixed %files section to include some directories as well as their contents.
-- Updated to do the scrollkeeper ditty.
-
-* Wed Mar 28 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
-- integrate configure.in and gnome-core.spec.in for version numbers of
-  dependancies.  This should help to slow bit-rot in this spec file.
-
-* Fri Mar 23 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
-- re-wrote the %files section from scratch, added a couple of
-  dependancies.
-
-* Wed Feb 21 2001 Gregory Leblanc <gleblanc@cu-portland.edu>
-- updated, fixed macros, removed hard-coded paths.
-
-* Sat Feb 26 2000 Gregory McLean <gregm@comstar.net>
-- Updated to 1.1.4
-- Autogenerate the %files section.
-
-* Sat Oct 16 1999 Gregory McLean <gregm@comstar.net>
-- Updated to 1.0.50
-- Sorted the language specific stuff out.
-
-* Sun Oct 03 1999 Gregory McLean <gregm@comstar.net>
-- updated to 1.0.50
-- Overhauled the %files section.
-
-* Sat Nov 21 1998 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
-
-- Cleaned %files section
-- added spanish and french translations for rpm
-
-* Wed Sep 23 1998 Michael Fulbright <msf@redhat.com>
-- Built 0.30 release
-
-* Fri Mar 13 1998 Marc Ewing <marc@redhat.com>
-- Integrate into gnome-core CVS source tree
+* Sun Feb 15 2002 Chris Chabot <chabotc@reviewboard.com>
+- initial spec file for gnome-desktop
