@@ -4,6 +4,7 @@ Summary:         The core programs for the GNOME GUI desktop environment.
 Name: 		 gnome-core
 Version: 	 @VERSION@
 Release: 	 1
+Epoch:		 1
 License: 	 LGPL
 Group: 		 System Environment/Base
 Source:          ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{version}.tar.gz
@@ -110,6 +111,9 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update; fi
 
 
 %changelog
+* Mon Jan 21 2002 Kjartan Maraas <kmaraas@gnome.org>
+- add epoch to make it install properly for people on RHL.
+
 * Mon Aug  6 2001 Gregory Leblanc <gleblanc@linuxweasel.com>
 - removed unnecessary %defines
 - reformatted the header slightly
