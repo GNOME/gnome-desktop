@@ -48,9 +48,10 @@
 #include "gnome-config.h"
 #include "gnome-exec.h"
 #include "gnome-i18nP.h"
-#include "gnome-mime.h"
 #include "gnome-url.h"
 #include <popt.h>
+
+#include <libgnomevfs/gnome-vfs-mime.h>
 
 struct _GnomeDesktopItem {
         GHashTable *name; /* key is language, value is translated string */
