@@ -8,45 +8,47 @@
 gnome_intro_helpdir = $(datadir)/gnome/help/gnome-intro/C
 
 GNOME_INTRO_HTML_FILES = \
-	gnome-intro/book01.html gnome-intro/c0102.html gnome-intro/c0202.html \
-	gnome-intro/c0205.html gnome-intro/c0208.html gnome-intro/f0102.html \
-	gnome-intro/c01.html gnome-intro/c02.html gnome-intro/c0203.html \
-	gnome-intro/c0206.html gnome-intro/f01.html gnome-intro/c0101.html \
-	gnome-intro/c0201.html gnome-intro/c0204.html gnome-intro/c0207.html \
-	gnome-intro/f0101.html
+	$(srcdir)/gnome-intro/book01.html $(srcdir)/gnome-intro/c0102.html \
+	$(srcdir)/gnome-intro/c0202.html $(srcdir)/gnome-intro/c0205.html \
+	$(srcdir)/gnome-intro/c0208.html $(srcdir)/gnome-intro/f0102.html \
+	$(srcdir)/gnome-intro/c01.html $(srcdir)/gnome-intro/c02.html \
+	$(srcdir)/gnome-intro/c0203.html $(srcdir)/gnome-intro/c0206.html \
+	$(srcdir)/gnome-intro/f01.html $(srcdir)/gnome-intro/c0101.html \
+	$(srcdir)/gnome-intro/c0201.html $(srcdir)/gnome-intro/c0204.html \
+	$(srcdir)/gnome-intro/c0207.html $(srcdir)/gnome-intro/f0101.html
 
-GNOME_INTRO_PICTURES = pix/terminal.gif \
-	pix/gedit-2files.gif \
-	pix/ghex-2files.gif \
-	pix/ghex-basic.gif \
-	pix/gmc-basic.gif \
-	pix/help-browser-initial.gif \
-	pix/help-browser-sample.gif \
-	pix/help-icon.gif \
-	pix/panel-basic.gif \
-	pix/panel-menu-select.gif \
-	pix/panel-menu.gif \
-	pix/panel-icons.gif \
-	pix/panel-add-icon.gif \
-	pix/gmix.gif \
-	pix/gtcd.gif \
-	pix/gtop-procs.gif \
-	pix/gtcd-track-list.gif \
-	pix/gtcd-cddb.gif \
-	pix/gulp.gif \
-	pix/calendar.gif \
-	pix/ee-menu.gif \
-	pix/gtop-mem.gif \
-	pix/gtop-kill.gif \
-	pix/gtt-basic.gif \
-	pix/background-properties.gif \
-	pix/gtt-new.gif \
-	pix/gtt-2proj.gif \
-	pix/gcalc.gif \
-	pix/freecell.gif \
-	pix/mahjongg.gif \
-	pix/same-gnome.gif \
-	pix/gnomine.gif
+GNOME_INTRO_PICTURES = $(srcdir)/pix/terminal.gif \
+	$(srcdir)/pix/gedit-2files.gif \
+	$(srcdir)/pix/ghex-2files.gif \
+	$(srcdir)/pix/ghex-basic.gif \
+	$(srcdir)/pix/gmc-basic.gif \
+	$(srcdir)/pix/help-browser-initial.gif \
+	$(srcdir)/pix/help-browser-sample.gif \
+	$(srcdir)/pix/help-icon.gif \
+	$(srcdir)/pix/panel-basic.gif \
+	$(srcdir)/pix/panel-menu-select.gif \
+	$(srcdir)/pix/panel-menu.gif \
+	$(srcdir)/pix/panel-icons.gif \
+	$(srcdir)/pix/panel-add-icon.gif \
+	$(srcdir)/pix/gmix.gif \
+	$(srcdir)/pix/gtcd.gif \
+	$(srcdir)/pix/gtop-procs.gif \
+	$(srcdir)/pix/gtcd-track-list.gif \
+	$(srcdir)/pix/gtcd-cddb.gif \
+	$(srcdir)/pix/gulp.gif \
+	$(srcdir)/pix/calendar.gif \
+	$(srcdir)/pix/ee-menu.gif \
+	$(srcdir)/pix/gtop-mem.gif \
+	$(srcdir)/pix/gtop-kill.gif \
+	$(srcdir)/pix/gtt-basic.gif \
+	$(srcdir)/pix/background-properties.gif \
+	$(srcdir)/pix/gtt-new.gif \
+	$(srcdir)/pix/gtt-2proj.gif \
+	$(srcdir)/pix/gcalc.gif \
+	$(srcdir)/pix/freecell.gif \
+	$(srcdir)/pix/mahjongg.gif \
+	$(srcdir)/pix/same-gnome.gif \
+	$(srcdir)/pix/gnomine.gif
 
 install-data-local:
 	$(mkinstalldirs) $(gnome_intro_helpdir)
