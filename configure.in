@@ -123,9 +123,8 @@ AC_ARG_WITH(fvwm2,
 	FVWM_PAGER="fvwm-pager"], [
 	FVWM_PAGER=""])
 
-echo "with_fvwm2=X${with_fvwm2}X"
-echo "FVWM_PAGER=X${FVWM_PAGER}X"
-if test ! -z "$FVWM_PAGER"
+AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z ${FVWM_PAGER})
+if test ! -z $FVWM_PAGER
 then
 
 	for x_dir in /usr/local/src/fvwm2 /usr/local/src/fvwm-2.0.46 /disk/compiles/fvwm-2.0.46 ${with_fvwm2}
