@@ -26,7 +26,6 @@ AC_PROG_YACC
 GNOME_COMPILE_WARNINGS
 
 GNOME_X_CHECKS
-GNOME_GHTTP_CHECK
 
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
@@ -48,10 +47,6 @@ apps, like panel, will not run properly.))
 ])])
 AC_SUBST(DL_LIB)
 
-dnl properties-keyboard
-AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
-AC_SUBST(XF86MISC_LIBS)
-
 for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   if test -f $dir/orbit-idl ; then
      orbit_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
@@ -72,12 +67,6 @@ ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
 AC_SUBST(ZVT_LIBS)
 
 dnl
-dnl Fvwm pager
-dnl
-AC_CHECK_HEADER(fvwm.h, fvwm=true, fvwm=false)
-AM_CONDITIONAL(HAVE_FVWM, $fvwm)
-
-dnl
 dnl gnome-session
 dnl
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
@@ -91,60 +80,6 @@ AC_ARG_WITH(window-manager,
     dnl gnome-wm is a shell script that starts the WM.
     WINDOW_MANAGER=gnome-wm])
 AC_SUBST(WINDOW_MANAGER)
-
-dnl Check for libgtop
-GNOME_LIBGTOP_HOOK(,applets_libgtop=yes)
-
-if test x$applets_libgtop != xyes; then
-  AC_MSG_WARN([*** \`cpuload' applet will not be built ***])
-  AC_MSG_WARN([*** \`cpumemusage' applet will not be built ***])
-  AC_MSG_WARN([*** \`diskusage' applet will not be built ***])
-  AC_MSG_WARN([*** \`multiload' applet will not be built ***])
-  AC_MSG_WARN([*** \`netload' applet will not be built ***])
-fi
-
-dnl Check for ghttp library
-AM_CONDITIONAL(HAVE_LIBGHTTP, test -n "$GHTTP_LIB")
-AC_SUBST(GHTTP_LIB)
-dnl if test -z "$GHTTP_LIB"; then
-dnl   AC_MSG_WARN([*** \`bussign' applet will not be built ***])
-dnl fi
-
-dnl panel/cdplayer
-AC_CANONICAL_HOST
-case "$host" in
-*linux*) CDROM_HOST=linux;;
-*solaris*) CDROM_HOST=solaris;;
-esac
-AM_CONDITIONAL(APPLET_CDPLAYER, test -n "$CDROM_HOST")
-AC_SUBST(CDROM_HOST)
-if test -z "$CDROM_HOST"; then
-  AC_MSG_WARN([*** \`cdplayer' applet will not be built ***])
-fi
-
-dnl panel/mixer
-P_MIXER=
-AC_CHECK_HEADERS(linux/soundcard.h,[P_MIXER=mixer],[
-  AC_CHECK_HEADERS(machine/soundcard.h, [P_MIXER=mixer],[
-    AC_CHECK_HEADERS(sys/soundcard.h, [P_MIXER=mixer]) ]) ])
-AM_CONDITIONAL(APPLET_MIXER, test "$P_MIXER" = "mixer")
-if test "$P_MIXER" != "mixer"; then
-  AC_MSG_WARN([*** \`mixer' applet will not be built ***])
-fi
-
-dnl panel/modemlights
-P_MODEMLIGHTS=
-AC_CHECK_HEADERS(net/ppp_defs.h,[P_MODEMLIGHTS=modemlights])
-AM_CONDITIONAL(APPLET_MODEMLIGHTS, test "$P_MODEMLIGHTS" = "modemlights")
-if test "$P_MODEMLIGHTS" != "modemlights"; then
-  AC_MSG_WARN([*** \`modemlights' applet will not be built ***])
-fi
-
-dnl esd-manager
-have_libesd=no
-AM_PATH_ESD(,have_libesd=yes,
-[AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
-AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
 
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
@@ -190,50 +125,10 @@ macros/Makefile
 panel/Makefile
 applets/Makefile
 applets/applet-dirs/Makefile
-applets/asclock/Makefile
-applets/asclock/default_theme/Makefile
-applets/asclock/themes/Makefile
-applets/asclock/themes/Orb/Makefile
-applets/asclock/themes/Freeamp/Makefile
-applets/asclock/themes/shaped/Makefile
-applets/asclock/themes/classic/Makefile
-applets/asclock/themes/beats/Makefile
-applets/asclock/themes/Stone/Makefile
-applets/asclock/themes/Newstone/Makefile
 applets/gen_util/Makefile
-applets/cdplayer/Makefile
-applets/mixer/Makefile
-applets/modemlights/Makefile
-applets/multiload/Makefile
-applets/netload/Makefile
-applets/cpumemusage/Makefile
 applets/fish/Makefile
-applets/diskusage/Makefile
-applets/icewm-pager/Makefile
-applets/gnome-pager/Makefile
 applets/desk-guide/Makefile
-applets/esd-manager/Makefile
-applets/drivemount/Makefile
-applets/clockmail/Makefile
-applets/webcontrol/Makefile
-applets/fifteen/Makefile
-applets/life/Makefile
-applets/battery/Makefile
-applets/charpick/Makefile
-applets/winlist/Makefile
-applets/fvwm-pager/Makefile
-applets/slashapp/Makefile
 applets/tasklist/Makefile
-applets/mini-commander/Makefile
-applets/mini-commander/docs/Makefile
-applets/mini-commander/src/Makefile
-applets/gkb/Makefile
-applets/gkb/gkb/Makefile
-applets/gkb/xmodmap/Makefile
-applets/jbc/Makefile
-applets/jbc/pixmaps/Makefile
-applets/another_clock/Makefile
-applets/hal/Makefile
 core-docs/Makefile
 desktop-links/Makefile
 gnome-terminal/Makefile
