@@ -37,7 +37,8 @@ GType gnome_hint_get_type (void);
 GtkWidget * gnome_hint_new (const gchar *hintfile,
 			    const gchar *title,
 			    const gchar *background_image,
-			    const gchar *logo_image);
+			    const gchar *logo_image,
+			    const gchar *startupkey);
 
 #ifdef __cplusplus
 }
