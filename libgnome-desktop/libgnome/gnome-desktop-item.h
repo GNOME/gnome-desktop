@@ -69,9 +69,7 @@ int                    gnome_desktop_item_launch          (const GnomeDesktopIte
 gboolean               gnome_desktop_item_exists          (const GnomeDesktopItem     *item);
 GnomeDesktopItemFlags  gnome_desktop_item_get_flags       (const GnomeDesktopItem     *item);
 const char *           gnome_desktop_item_get_location    (const GnomeDesktopItem     *item);
-const char **          gnome_desktop_item_get_command     (const GnomeDesktopItem     *item,
-                                                           int                        *argc);
-/* argc can be NULL */
+const char *           gnome_desktop_item_get_command     (const GnomeDesktopItem     *item);
 const char *           gnome_desktop_item_get_icon_path   (const GnomeDesktopItem     *item);
 
 /* Note: you want to search each language in the user's search path */
@@ -100,7 +98,7 @@ void                   gnome_desktop_item_set_name        (GnomeDesktopItem     
                                                            const char                 *language,
                                                            const char                 *name);
 void                   gnome_desktop_item_set_command     (GnomeDesktopItem           *item,
-                                                           const char                **command);
+                                                           const char                 *command);
 void                   gnome_desktop_item_set_icon_path   (GnomeDesktopItem           *item,
                                                            const char                 *icon_path);
 void                   gnome_desktop_item_set_comment     (GnomeDesktopItem           *item,

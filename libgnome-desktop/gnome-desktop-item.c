@@ -50,8 +50,7 @@ struct _GnomeDesktopItem {
         GHashTable *name; /* key is language, value is translated string */
         GHashTable *comment; /* key is language, value is translated string */
 
-        int exec_length; /* Does not include NULL terminator in count */
-        char **exec;
+        char *exec;
 
         char *icon_path;
 
@@ -65,6 +64,8 @@ struct _GnomeDesktopItem {
 };
 
 #ifdef DI_DEBUG
+/* avoid warning */
+void ditem_dump(const GnomeDesktopItem *ditem, int indent_level);
 void
 ditem_dump(const GnomeDesktopItem *ditem, int indent_level)
 {
@@ -124,13 +125,7 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
         retval->icon_path = item->icon_path?g_strdup(item->icon_path):NULL;
         retval->location = item->location?g_strdup(item->location):NULL;
 
-        if(item->exec && item->exec_length) {
-                retval->exec = g_copy_vector((const char **)item->exec);
-                for(retval->exec_length = 0; retval->exec[retval->exec_length]; retval->exec_length++) /* just count */;
-        } else {
-                retval->exec = NULL;
-                retval->exec_length = 0;
-        }
+        retval->exec = item->exec?g_strdup(item->exec):NULL;
 
         if(item->name
            && g_hash_table_size(item->name) > 0) {
@@ -217,13 +212,8 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
                         g_free(key);
                         g_free(value);
                 } else if(!strcmp(key, "Exec")) {
-                        gnome_config_make_vector(value, &retval->exec_length, &retval->exec);
-
-                        retval->exec = g_realloc(retval->exec, (retval->exec_length + 1) * sizeof(char *));
-                        retval->exec[retval->exec_length] = NULL;
-
+			retval->exec = value;
                         g_free(key);
-                        g_free(value);
                 } else if(!strcmp(key, "SortOrder")) {
                         *sub_sort_order = g_strsplit(value, ",", -1);
                         g_free(key);
@@ -244,8 +234,10 @@ ditem_kde_load (const char *file, const char *data_file, GnomeDesktopItemLoadFla
 
                 tryme = g_hash_table_lookup(retval->other_attributes, "TryExec");
 
-                if(tryme && !gnome_is_program_in_path(tryme))
+                if(tryme && !(tryme = gnome_is_program_in_path(tryme))) {
+			g_free(tryme);
                         goto errout;
+		}
         }
 
         return retval;
@@ -314,13 +306,8 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
                         g_free(key);
                         g_free(value);
                 } else if(!strcmp(key, "Exec")) {
-                        gnome_config_make_vector(value, &retval->exec_length, &retval->exec);
-
-                        retval->exec = g_realloc(retval->exec, (retval->exec_length + 1) * sizeof(char *));
-                        retval->exec[retval->exec_length] = NULL;
-
+                        retval->exec = value;
                         g_free(key);
-                        g_free(value);
                 } else {
                         g_hash_table_insert(retval->other_attributes, key, value);
                 }
@@ -336,8 +323,10 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
 
                 tryme = g_hash_table_lookup(retval->other_attributes, "TryExec");
 
-                if(tryme && !gnome_is_program_in_path(tryme))
+                if(tryme && !(tryme = gnome_is_program_in_path(tryme))) {
+			g_free(tryme);
                         goto errout;
+		}
         }
 
         /* Read the .order file */
@@ -350,17 +339,27 @@ ditem_gnome_load (const char *file, const char *data_file, GnomeDesktopItemLoadF
                 fh = fopen(file, "r");
 
                 if(fh) {
-                        char filebuf[8192]; /* Eek, a hardcoded limit! */
-                        int nr;
+			GSList *order = NULL, *li;
+			int count = 0;
+                        char buf[PATH_MAX];
 
-                        nr = fread(filebuf, 1, sizeof(filebuf), fh);
-                        if(nr > 0)
-                        {
-                                filebuf[nr - 1] = '\0';
-                                g_strstrip(filebuf);
+			/* we prepend the things onto the list so the
+			   list will actually be the reverse of the file */
+			while(fgets(buf, PATH_MAX, fh)) {
+				order = g_slist_prepend(order, g_strdup(buf));
+				count++;
+			}
 
-                                *sub_sort_order = g_strsplit(filebuf, "\n", -1);
-                        }
+			*sub_sort_order = g_new0(char *, count + 1);
+			/* we iterate through the list and put it in our vector
+			   backwards */
+			li = order;
+			while(--count >= 0) {
+				(*sub_sort_order)[count] = li->data;
+				li = li->next;
+			}
+
+			g_slist_free(order);
 
                         fclose(fh);
                 }
@@ -629,8 +628,8 @@ ditem_save(GnomeDesktopItem *item, const char *under, GnomeDesktopItemLoadFlags 
         if(item->icon_path)
                 gnome_config_set_string("Icon", item->icon_path);
 
-        if(item->exec_length)
-                gnome_config_set_vector("Exec", item->exec_length, (const char * const *)item->exec);
+        if(item->exec)
+                gnome_config_set_string("Exec", item->exec);
 
         if(item->name)
                 g_hash_table_foreach(item->name, save_lang_val, "Name");
@@ -742,7 +741,7 @@ gnome_desktop_item_unref (GnomeDesktopItem *item)
         if(item->refcount != 0)
                 return;
 
-        g_strfreev(item->exec);
+        g_free(item->exec);
         g_free(item->icon_path);
 
         if(item->name) {
@@ -785,24 +784,36 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
 {
         char **real_argv;
         int real_argc;
-        int i, j;
+        int i, j, ret;
+	char **temp_argv = NULL;
+	int temp_argc = 0;
 
         g_return_val_if_fail(item, -1);
         g_return_val_if_fail(item->exec, -1);
 
+
         if(!argv)
                 argc = 0;
 
-        real_argc = argc + item->exec_length;
+	/* FIXME: I think this should use a shell to execute instead
+	   of trying to pretend we can split strings into vectors
+	   sanely */
+	gnome_config_make_vector(item->exec, &temp_argc, &temp_argv);
+
+        real_argc = argc + temp_argc;
         real_argv = g_alloca((real_argc + 1) * sizeof(char *));
 
-        for(i = 0; i < item->exec_length; i++)
-                real_argv[i] = item->exec[i];
+        for(i = 0; i < temp_argc; i++)
+                real_argv[i] = temp_argv[i];
 
         for(j = 0; j < argc; j++, i++)
                 real_argv[i] = (char *)argv[j];
 
-        return gnome_execute_async(NULL, real_argc, real_argv);
+        ret = gnome_execute_async(NULL, real_argc, real_argv);
+
+	g_strfreev(temp_argv);
+
+	return ret;
 }
 
 /**
@@ -831,18 +842,31 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
                 }
         }
 
-        if(item->exec_length && item->exec) {
-                if(item->exec[0][0] == PATH_SEP)
-                        return g_file_exists(item->exec[0]);
+	/* FIXME: since I think the exec should be a shell expression
+	   this is bad, it is also bad since even if we don't make it a shell
+	   expression, when people would then want to do that they would do
+	   /bin/sh -c 'blah'
+	   Now even if blah doesn't exist we're gonna thing it does */
+        if(item->exec) {
+		char **temp_argv = NULL;
+		int temp_argc = 0;
+		gboolean ret = FALSE;
+
+		gnome_config_make_vector(item->exec, &temp_argc, &temp_argv);
+
+                if(temp_argv[0][0] == PATH_SEP)
+                        ret = g_file_exists(temp_argv[0]);
                 else {
-                        char *tryme = gnome_is_program_in_path(item->exec[0]);
+                        char *tryme = gnome_is_program_in_path(temp_argv[0]);
                         if(tryme) {
                                 g_free(tryme);
-                                return TRUE;
+                                ret = TRUE;
                         }
                         else
-                                return FALSE;
+                                ret = FALSE;
                 }
+		g_strfreev(temp_argv);
+		return ret;
         }
 
         return TRUE;
@@ -865,20 +889,16 @@ gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
 /**
  * gnome_desktop_item_get_command:
  * @item: A desktop item
- * @argc: An optional pointer through which the number of arguments included in the command will be returned. May be NULL.
  *
  * Returns: The command associated with the specified 'item'. The returned memory remains owned by the GnomeDesktopItem
  *          and should not be freed.
  */
-const char **
-gnome_desktop_item_get_command (const GnomeDesktopItem *item, int *argc)
+const char *
+gnome_desktop_item_get_command (const GnomeDesktopItem *item)
 {
         g_return_val_if_fail(item, NULL);
 
-        if(argc)
-                *argc = item->exec_length;
-
-        return (const char **)item->exec;
+        return item->exec;
 }
 
 /**
@@ -1192,22 +1212,19 @@ gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const
 /**
  * gnome_desktop_item_set_command:
  * @item: A desktop item
- * @command: A NULL-terminated array of strings that specifies the command line associated with this item.
+ * @command: A string with the command
  *
  */
 void
-gnome_desktop_item_set_command (GnomeDesktopItem *item, const char **command)
+gnome_desktop_item_set_command (GnomeDesktopItem *item, const char *command)
 {
         g_return_if_fail(item);
 
-        g_strfreev(item->exec);
-        if(command) {
-                item->exec = g_copy_vector(command);
-                for(item->exec_length = 0; item->exec[item->exec_length]; item->exec_length++) /* just count */ ;
-        } else {
+        g_free(item->exec);
+        if(command)
+                item->exec = g_strdup(command);
+        else
                 item->exec = NULL;
-                item->exec_length = 0;
-        }
 }
 
 /**
