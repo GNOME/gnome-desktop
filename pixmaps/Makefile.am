@@ -7,6 +7,7 @@ pixmap_DATA =					\
 	gnome-applications.png      		\
 	gnome-audio2.png			\
 	gnome-calc2.png				\
+	gnome-calc3.png				\
 	gnome-calendar.png			\
 	gnome-cardgame.png			\
 	gnome-clock.png             		\
