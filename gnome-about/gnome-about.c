@@ -752,17 +752,25 @@ get_description_messages (xmlNodePtr node)
 static char*
 create_date_string (const char *value)
 {
-	struct tm tm;
-	char *result;
-	GDate *date = g_date_new ();
+	char  *result;
+	GDate *date;
+	int    day;
+	int    month;
+	int    year;
 
-	if (!strptime (value, "%Y-%m-%d", &tm)) {
+	/* YYYY-MM-DD */
+	if (sscanf (value, "%d-%d-%d", &year, &month, &day) < 3)
 		return NULL;
-	}
-	g_date_set_dmy (date, tm.tm_mday, 1 + tm.tm_mon, 1900 + tm.tm_year);
+
+	date = g_date_new ();
+
+	g_date_set_dmy (date, day, month, year);
+
 	result = g_new0 (char, 20);
 	g_date_strftime (result, 20, "%x", date);
+
 	g_date_free (date);
+
 	return result;
 }
 
