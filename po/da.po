@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.0\n"
 "POT-Creation-Date: 2000-08-16 22:50+0200\n"
-"PO-Revision-Date: 2000-11-11 22:39+01:00\n"
+"PO-Revision-Date: 2000-11-18 22:39+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -220,7 +220,7 @@ msgstr "Egenskaber..."
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:418 panel/gnome-run.c:336
 #: panel/launcher.c:613 panel/logout.c:72 panel/logout.c:133 panel/menu.c:5097
-#: panel/status.c:366 panel/swallow.c:381
+#: panel/status.c:366 panel/swallow.c:428
 msgid "Help"
 msgstr "Hjælp"
 
@@ -266,8 +266,8 @@ msgstr "Animationsfilnavn:"
 
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
-#: panel/menu-properties.c:526 panel/menu-properties.c:564
-#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:212
+#: panel/menu-properties.c:594 panel/menu-properties.c:632
+#: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:263
 msgid "Browse"
 msgstr "Gennemse"
 
@@ -327,14 +327,14 @@ msgstr ""
 "%H:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:443
+#: applets/gen_util/clock.c:152
 msgid "%I:%M %p"
 msgstr "%H:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:441
-#: panel/foobar-widget.c:761
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:443
+#: panel/foobar-widget.c:818
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -1016,7 +1016,7 @@ msgstr "Gnome fisken Wanda"
 msgid "... and many more"
 msgstr "... og mange flere"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:208
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:210
 msgid "About GNOME"
 msgstr "Om Gnome..."
 
@@ -1435,7 +1435,7 @@ msgid "Edit"
 msgstr "Redigér"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:816
+#: panel/foobar-widget.c:873
 msgid "Settings"
 msgstr "Opsætning"
 
@@ -1664,9 +1664,9 @@ msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -1674,9 +1674,9 @@ msgstr ""
 "Din version af libICE har en fejl som gør at gnome-session ikke\n"
 "fungerer korrekt.\n"
 "\n"
-"Hvis du kører Solaris, bør du enten opgradere til Solaris 8\n"
+"Hvis du kører Solaris, bør du enten opgradere til Solaris rettelse 108376-16\n"
 "eller bruge libICE.so.6 fra den oprindeliger Solaris 7. Du kan\n"
-"blot kopierer filen til /usr/openwin/lib. (Tak til Andy Reitz\n"
+"blot kopiere filen til /usr/openwin/lib. (Tak til Andy Reitz\n"
 "for information om denne fejl).\n"
 "\n"
 "Din GNOME session vil blive afsluttet efter lukning af denne dialog."
@@ -2268,7 +2268,7 @@ msgstr "Fremad"
 msgid "Go to the next location in the history list"
 msgstr "Gå til næste punkt i historielisten"
 
-#: help-browser/window.c:244 panel/extern.c:413
+#: help-browser/window.c:244 panel/extern.c:413 panel/swallow.c:89
 msgid "Reload"
 msgstr "Genindlæs"
 
@@ -2315,29 +2315,29 @@ msgstr ""
 "denne dokumentation\n"
 "installeret på dit system."
 
-#: panel/applet.c:411
+#: panel/applet.c:418
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:451
+#: panel/applet.c:457
 msgid "Remove from panel"
 msgstr "Fjern fra panel"
 
-#: panel/applet.c:458
+#: panel/applet.c:464
 msgid "Move"
 msgstr "Flyt"
 
-#: panel/applet.c:470 panel/menu.c:3263
+#: panel/applet.c:476 panel/menu.c:3263
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kunne ikke finde billedfil %s"
 
-#: panel/applet.c:471 panel/applet.c:477 panel/menu.c:3488 panel/menu.c:3493
+#: panel/applet.c:477 panel/applet.c:483 panel/menu.c:3488 panel/menu.c:3493
 #: panel/menu.c:4502 panel/menu.c:4507 panel/menu.c:4827
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:735
+#: panel/applet.c:748
 msgid "Can't find an empty spot"
 msgstr "Kan ikke finde en tom plads"
 
@@ -2396,7 +2396,7 @@ msgstr "SuSE-menuer"
 msgid "Tooltip/Name"
 msgstr "Værktøjstips/Navn"
 
-#: panel/drawer.c:117 panel/menu-properties.c:547 panel/menu-properties.c:582
+#: panel/drawer.c:117 panel/menu-properties.c:615 panel/menu-properties.c:650
 msgid "Icon"
 msgstr "Ikon"
 
@@ -2440,11 +2440,11 @@ msgstr "Batteriet"
 msgid ""
 "%s applet appears to have died unexpectadly. Reload this applet?\n"
 "(If you choose not to reload it at this time you can always add it from the "
-"\"Applets\" sbumenu in the mail menu)"
+"\"Applets\" submenu in the main menu)"
 msgstr ""
-"%s applet synes at være død uforudset. Genindlæs denne applet?\n"
+"%s applet synes at være død uforudset. Vil du genindlæse denne applet?\n"
 "(Hvis du vælger ikke at genindlæse den nu, kan du altid tilføje den fra "
-"'Applet' undermenuen i post-menuen)"
+"'Applet' undermenuen i hoved-menuen)"
 
 #: panel/extern.c:633
 msgid "Couldn't add applet"
@@ -2458,7 +2458,7 @@ msgstr "Hovsa! af en eller grund kan vi ikke tilføje til panelet"
 msgid "No socket was created"
 msgstr "Ingen sokkel oprettedes"
 
-#: panel/foobar-widget.c:165
+#: panel/foobar-widget.c:167
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2466,7 +2466,7 @@ msgstr ""
 "Kan ikke udføre gmc-client programmet,\n"
 "måske er gmc ikke installeret"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:177
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2476,161 +2476,165 @@ msgstr ""
 "måske er den ikke installeret.\n"
 "Det drejer sig om gnome-pim pakken."
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "News (www)"
 msgstr "Nyheder (web)"
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "FAQ (www)"
 msgstr "Ofte stillede spørgsmål (web)"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "Mailing Lists (www)"
 msgstr "Diskussionslister (web)"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "Software (www)"
 msgstr "Programmel (web)"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "Development (www)"
 msgstr "Udvikling (web)"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "Bug Tracking System (www)"
 msgstr "Fejlfølgningssystem (web)"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:239
+#: panel/foobar-widget.c:241
 msgid "By Name"
 msgstr "Efter navn"
 
-#: panel/foobar-widget.c:240
+#: panel/foobar-widget.c:242
 msgid "By Type"
 msgstr "Efter type"
 
-#: panel/foobar-widget.c:241
+#: panel/foobar-widget.c:243
 msgid "By Size"
 msgstr "Efter størrelse"
 
-#: panel/foobar-widget.c:242
+#: panel/foobar-widget.c:244
 msgid "By Time Last Accessed"
 msgstr "Efter sidst benyttet"
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:245
 msgid "By Time Last Modified"
 msgstr "Efter sidst modificeret"
 
-#: panel/foobar-widget.c:244
+#: panel/foobar-widget.c:246
 msgid "By Time Last Changed"
 msgstr "Efter sidst ændret"
 
-#: panel/foobar-widget.c:253
+#: panel/foobar-widget.c:255
 msgid "Arrange Icons"
 msgstr "Arrangér ikoner"
 
-#: panel/foobar-widget.c:263
+#: panel/foobar-widget.c:265
 msgid "Rescan Desktop Directory"
 msgstr "Genskan skrivebordsmappen"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:266
 msgid "Rescan Desktop Devices"
 msgstr "Genskan skrivebordsenheder"
 
-#: panel/foobar-widget.c:270
+#: panel/foobar-widget.c:272
 msgid "Lock Screen"
 msgstr "Lås skærm"
 
-#: panel/foobar-widget.c:280
+#: panel/foobar-widget.c:282
 msgid "Log Out"
 msgstr "Log ud"
 
-#: panel/foobar-widget.c:288
+#: panel/foobar-widget.c:290
 msgid " Desktop "
 msgstr " Skrivebord "
 
-#: panel/foobar-widget.c:305
+#: panel/foobar-widget.c:307
 msgid "can't fine real path"
 msgstr "kan ikke finde rigtige sti"
 
-#: panel/foobar-widget.c:313
+#: panel/foobar-widget.c:315
 msgid "menu wasn't created"
 msgstr "menu blev ikke oprettet"
 
-#: panel/foobar-widget.c:355
+#: panel/foobar-widget.c:357
 msgid "%A %B %d"
 msgstr "%A den %d. %B"
 
-#: panel/foobar-widget.c:434
+#: panel/foobar-widget.c:436
 msgid "Today"
 msgstr "I dag"
 
-#: panel/foobar-widget.c:435
+#: panel/foobar-widget.c:437
 msgid "This Week"
 msgstr "Denne uge"
 
-#: panel/foobar-widget.c:436
+#: panel/foobar-widget.c:438
 msgid "This Month"
 msgstr "Denne måned"
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:444
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:444
-msgid "%I:%M:%S %p"
-msgstr "%H:%M:%S %p"
+#: panel/foobar-widget.c:445
+msgid "%l:%M %p"
+msgstr "%H:%M"
 
-#: panel/foobar-widget.c:451
+#: panel/foobar-widget.c:446
+msgid "%l:%M:%S %p"
+msgstr "%H:%M:%S"
+
+#: panel/foobar-widget.c:453
 msgid "Add appointement..."
 msgstr "Tilføj aftale"
 
-#: panel/foobar-widget.c:468
+#: panel/foobar-widget.c:470
 msgid "Format"
 msgstr "Format"
 
-#: panel/foobar-widget.c:799 panel/menu.c:3285 panel/menu.c:3290
+#: panel/foobar-widget.c:856 panel/menu.c:3285 panel/menu.c:3290
 #: panel/menu.c:4732
 msgid "Programs"
 msgstr "Programmer"
 
-#: panel/foobar-widget.c:813 panel/menu.c:4704 panel/menu.c:4744
+#: panel/foobar-widget.c:870 panel/menu.c:4704 panel/menu.c:4744
 #: panel/menu.c:4750
 msgid "Favorites"
 msgstr "Favoritter"
 
-#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:464
+#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:532
 msgid "Programs: "
 msgstr "Programmer: "
 
-#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:471
+#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:539
 msgid "Favorites: "
 msgstr "Favoritter: "
 
-#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:478
+#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:546
 msgid "Applets: "
 msgstr "Appletter: "
 
@@ -2733,7 +2737,7 @@ msgid "Launcher"
 msgstr "Genvej"
 
 #: panel/gnome-panel-properties.c:558 panel/gnome-panel-properties.c:1461
-#: panel/menu-properties.c:542 panel/menu.c:1418 panel/menu.c:2777
+#: panel/menu-properties.c:610 panel/menu.c:1418 panel/menu.c:2777
 #: panel/menu.c:2845 panel/menu.c:2850 panel/menu.c:4169 panel/menu.c:5002
 msgid "Menu"
 msgstr "Menu"
@@ -2793,11 +2797,11 @@ msgstr "Skifter mellem appletter"
 msgid "Padding between applets and panel border"
 msgstr "Skifter mellem appletter og panelkant"
 
-#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:324
+#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:392
 msgid "Off"
 msgstr "Fra"
 
-#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:334
+#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:402
 msgid "In a submenu"
 msgstr "I en undermenu"
 
@@ -3195,7 +3199,7 @@ msgid "Applets"
 msgstr "Appletter"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:3128 panel/session.c:1279 panel/session.c:1473
+#: panel/menu.c:3128 panel/session.c:1279
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
@@ -3324,7 +3328,7 @@ msgstr "Orientering"
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:428 panel/menu-properties.c:450 panel/menu.c:4179
+#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4179
 msgid "Main menu"
 msgstr "Hovedmenu"
 
@@ -3412,59 +3416,59 @@ msgstr "Om Gnome..."
 msgid "Can't create menu, using main menu!"
 msgstr "Kan ikke oprette menu, bruger hovedmenu!"
 
-#: panel/menu-properties.c:137 panel/menu.c:5093
+#: panel/menu-properties.c:209 panel/menu.c:5093
 msgid "Edit menus..."
 msgstr "Redigér menuer..."
 
-#: panel/menu-properties.c:144
+#: panel/menu-properties.c:190
 msgid "Can't open directory, using main menu!"
 msgstr "Kan ikke åbne mappe, bruger hovedmenu!"
 
-#: panel/menu-properties.c:346
+#: panel/menu-properties.c:414
 msgid "On the main menu"
 msgstr "I hovedmenuen"
 
-#: panel/menu-properties.c:383 panel/menu-properties.c:400
+#: panel/menu-properties.c:451 panel/menu-properties.c:468
 msgid "Menu properties"
 msgstr "Menuegenskaber"
 
-#: panel/menu-properties.c:407
+#: panel/menu-properties.c:475
 msgid "Menu type"
 msgstr "Menutype"
 
-#: panel/menu-properties.c:414
+#: panel/menu-properties.c:482
 msgid "Global main menu"
 msgstr "Global hovedmenu"
 
-#: panel/menu-properties.c:442 panel/menu-properties.c:512
+#: panel/menu-properties.c:510 panel/menu-properties.c:580
 msgid "Normal menu"
 msgstr "Normalmenu"
 
-#: panel/menu-properties.c:485
+#: panel/menu-properties.c:553
 msgid "Distribution menu (if found): "
 msgstr "Distributions-menu (hvis tilstede): "
 
-#: panel/menu-properties.c:492
+#: panel/menu-properties.c:560
 msgid "KDE menu (if found): "
 msgstr "KDE-menu (hvis tilstede): "
 
-#: panel/menu-properties.c:499
+#: panel/menu-properties.c:567
 msgid "Panel menu: "
 msgstr "Panelmenu: "
 
-#: panel/menu-properties.c:506
+#: panel/menu-properties.c:574
 msgid "Desktop menu: "
 msgstr "Skrivebordsmenu: "
 
-#: panel/menu-properties.c:523
+#: panel/menu-properties.c:591
 msgid "Menu path"
 msgstr "Menusti"
 
-#: panel/menu-properties.c:554
+#: panel/menu-properties.c:622
 msgid "Use custom icon for panel button"
 msgstr "Brug egen ikon for panelknap"
 
-#: panel/panel.c:876
+#: panel/panel.c:880
 #, c-format
 msgid "Open URL: %s"
 msgstr "Åbn URL: %s"
@@ -3560,7 +3564,7 @@ msgstr "Egenskaber for panel"
 msgid "Background"
 msgstr "Baggrund"
 
-#: panel/session.c:256
+#: panel/session.c:257
 msgid ""
 "An applet is not responding to a save request.\n"
 "Remove the applet or continue waiting?"
@@ -3568,35 +3572,48 @@ msgstr ""
 "En applet svarer ikke på en gemmeforespørgsel.\n"
 "Fjern appletten eller bliv ved at vente?"
 
-#: panel/session.c:267
+#: panel/session.c:268
 msgid "Remove applet"
 msgstr "Fjern applet"
 
-#: panel/session.c:270
+#: panel/session.c:271
 msgid "Continue waiting"
 msgstr "Fortsæt med at vente"
 
-#: panel/session.c:279
+#: panel/session.c:280
 msgid "Timed out on sending session save to an applet"
 msgstr "Det tog for lang tid at sende sessionsgemning til applet"
 
-#: panel/swallow.c:184
+#. Don't translate the first part of this string
+#: panel/session.c:1473
+msgid "/panel/Config/clock_format=%l:%M:%S %p"
+msgstr "/panel/Config/clock_format=%H:%M:%S"
+
+#: panel/swallow.c:85
+msgid ""
+"A swallowed application appears to have died unexpectadly.\n"
+"Attempt to reload it?"
+msgstr ""
+"En slugt applikation ser ud til at være afsluttet uforudset.\n"
+"Forsøg at genindlæse den?"
+
+#: panel/swallow.c:235
 msgid "Create swallow applet"
 msgstr "Opret en slugt applet"
 
-#: panel/swallow.c:200
+#: panel/swallow.c:251
 msgid "Title of application to swallow"
 msgstr "Titel på applikation som skal sluges"
 
-#: panel/swallow.c:210
+#: panel/swallow.c:261
 msgid "Command (optional)"
 msgstr "Kommando (valgfri)"
 
-#: panel/swallow.c:221
+#: panel/swallow.c:272
 msgid "Width"
 msgstr "Bredde"
 
-#: panel/swallow.c:234
+#: panel/swallow.c:285
 msgid "Height"
 msgstr "Højde"
 
