@@ -381,7 +381,9 @@ dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
-AC_DEFINE_UNQUOTED(GNOME_ICONDIR, "${prefix}/${DATADIRNAME}/pixmaps")
+dnl HACK to expand datadir
+ICONDIR=`eval echo "${datadir}/pixmaps"`
+AC_DEFINE_UNQUOTED(GNOME_ICONDIR,"${ICONDIR}")
 
 AC_OUTPUT([
 Makefile
