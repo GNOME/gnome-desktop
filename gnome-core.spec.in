@@ -77,8 +77,7 @@ else
 fi
 
 if [ "$SMP" != "" ]; then
-  (make "MAKE=make -k -j $SMP"; exit 0)
-  make
+  make -j $SMP "MAKE=make -j $SMP"
 else
   make
 fi
@@ -102,7 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
 %{prefix}/share/applets
-%{prefix}/share/gnome
+%{prefix}/share/gnome/help
+%{prefix}/share/gnome/apps
 %{prefix}/share/idl
 %{prefix}/share/mc/templates
 %{prefix}/share/locale/*/*/*
@@ -110,7 +110,8 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/xmodmap/*
 %{prefix}/etc/*
 %config %{prefix}/share/panelrc
-%config %{prefix}/share/default.session
+%config %{prefix}/share/gnome/default.session
+%config %{prefix}/share/gnome/default.wm
 # These are in gnome-core because the shared-library applets need the .so files around
 %{prefix}/lib/lib*.so
 
