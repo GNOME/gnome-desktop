@@ -44,5 +44,5 @@ test_ditem_SOURCES = \
 	test-ditem.c
 
 test_ditem_LDADD = \
-	libgnome-desktop-2.la
+	libgnome-desktop-2.la -ldmalloc
 
