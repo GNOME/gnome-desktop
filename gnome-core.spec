@@ -10,7 +10,6 @@ Release: %rel
 Copyright: LGPL
 Group: X11/Libraries
 Source: ftp://ftp.gnome.org/pub/gnome-core-%{ver}.tar.gz
-Patch: gnome-core-libgtop.patch
 BuildRoot: /var/tmp/gnome-core-root
 Obsoletes: gnome
 Packager: Marc Ewing <marc@redhat.com>
@@ -51,7 +50,6 @@ Panel libraries and header files.
 
 %prep
 %setup
-%patch -p1
 
 %build
 # Needed for snapshot releases.
