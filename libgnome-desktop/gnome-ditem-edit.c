@@ -207,7 +207,6 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
 {
         GtkWidget *label;
         GList *types = NULL;
-        GtkWidget *e;
         GtkWidget *hbox;
         GtkWidget *align;
 
@@ -272,11 +271,10 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
                          0, 0);
 
         dee->_priv->icon_entry = gnome_icon_entry_new("icon",_("Choose an icon"));
-        e = gnome_icon_entry_gtk_entry(GNOME_ICON_ENTRY(dee->_priv->icon_entry));
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(e),"changed",
+        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
                                               GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
                                               GTK_OBJECT(dee));
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(e),"changed",
+        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
                                               GTK_SIGNAL_FUNC(gnome_ditem_edit_icon_changed),
                                               GTK_OBJECT(dee));
         gtk_box_pack_start(GTK_BOX(hbox), dee->_priv->icon_entry, FALSE, FALSE, 0);
