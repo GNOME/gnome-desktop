@@ -253,11 +253,11 @@ type_combo_changed (GnomeDItemEdit *dee)
         type = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
 	if (type != NULL &&
 	    strcmp (type, "Link") == 0 /* URL */)
-		gtk_label_set_text (GTK_LABEL (dee->_priv->type_label),
+		gtk_label_set_text (GTK_LABEL (dee->_priv->exec_label),
 				    _("URL:"));
 	else
-		gtk_label_set_text (GTK_LABEL (dee->_priv->type_label),
-				    _("Type:"));
+		gtk_label_set_text (GTK_LABEL (dee->_priv->exec_label),
+				    _("Command:"));
 }
 
 static GtkWidget *
