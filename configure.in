@@ -538,7 +538,11 @@ dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
 dnl HACK to expand datadir
-ICONDIR=`eval echo "${datadir}/pixmaps"`
+if test "x$prefix" != xNONE; then
+  ICONDIR=`eval echo "${datadir}/pixmaps"`
+else
+  ICONDIR=`eval echo "${ac_default_prefix}/share/pixmaps"`
+fi
 AC_DEFINE_UNQUOTED(GNOME_ICONDIR,"${ICONDIR}")
 
 AC_OUTPUT([
