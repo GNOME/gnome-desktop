@@ -40,6 +40,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-pixmap.h"
 #include "gnome-icon-entry.h"
+#include "libgnomeuiP.h"
 
 struct _GnomeDItemEditPrivate {
 	/* use the accessors or just use new_notebook */
