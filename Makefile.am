@@ -13,7 +13,6 @@ SUBDIRS = \
 	 gnome-hint \
 	 gnome-about \
 	 core-docs \
-	 grdb \
 	 panel \
 	 applets \
 	 idl
