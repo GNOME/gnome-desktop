@@ -284,7 +284,7 @@ make_contributors_logo_accessible (GtkTooltips *tooltips)
 	gtk_tooltips_set_tip (tooltips, area,
 			      _("List of GNOME Contributors"), NULL);
 	gtk_tooltips_set_tip (tooltips, canvas,
-			      _("Gnome Logo Image"), NULL);
+			      _("GNOME Logo Image"), NULL);
 
 	aobj = gtk_widget_get_accessible (area);
 
@@ -294,7 +294,7 @@ make_contributors_logo_accessible (GtkTooltips *tooltips)
 
 	atk_object_set_name (aobj, _("Contributors' Names"));
 	aobj = gtk_widget_get_accessible (canvas);
-	atk_object_set_name (aobj, _("Gnome Logo"));
+	atk_object_set_name (aobj, _("GNOME Logo"));
 }
 
 gboolean
