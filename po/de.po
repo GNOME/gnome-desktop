@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1998-05-22 17:50+0200\n"
+"POT-Creation-Date: 1998-05-23 12:29+0200\n"
 "PO-Revision-Date: 1998-04-16 19:53+02:00\n"
 "Last-Translator: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>\n"
 "Language-Team: Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/clock/clock.c:78
+#: applets/clock/clock.c:75
 msgid ""
 "%a\n"
 "%b %d"
@@ -27,14 +27,19 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/clock/clock.c:85
+#: applets/clock/clock.c:82
 msgid "%a %b %d"
 msgstr "%a, %d. %b"
 
 #. This format string is used, to display the actual time.
-#: applets/clock/clock.c:91
+#: applets/clock/clock.c:88
 msgid "%H:%M"
 msgstr "%H:%M"
+
+#: applets/clock/clock.c:225 applets/cpuload/cpuload.c:201
+#: applets/fish/fish.c:297 applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr "Kann kein Applet anlegen!\n"
 
 #: applets/batmon/batmon.c:93
 msgid "Can't open /proc/apm; can't get data."
@@ -102,74 +107,75 @@ msgstr "APM BIOS Version:"
 msgid "Battery Status:"
 msgstr "Batteriestatus:"
 
-#: applets/batmon/batmon.c:324 applets/mailcheck/mailcheck.c:479
-#: help-browser/window.c:135
+#: applets/batmon/batmon.c:324 applets/mailcheck/mailcheck.c:477
+#: help-browser/window.c:140
 msgid "Close"
 msgstr "Schließen"
 
-#: applets/mailcheck/mailcheck.c:224
+#: applets/mailcheck/mailcheck.c:222
 msgid "You have new mail."
 msgstr "Sie haben neue Post."
 
-#: applets/mailcheck/mailcheck.c:226
+#: applets/mailcheck/mailcheck.c:224
 msgid "You have mail."
 msgstr "Sie haben Post."
 
-#: applets/mailcheck/mailcheck.c:228
+#: applets/mailcheck/mailcheck.c:226
 msgid "No mail."
 msgstr "Keine Post."
 
-#: applets/mailcheck/mailcheck.c:438
+#: applets/mailcheck/mailcheck.c:436
 msgid "Notification"
 msgstr "Mitteilung"
 
-#: applets/mailcheck/mailcheck.c:455
+#: applets/mailcheck/mailcheck.c:453
 msgid "Select animation"
 msgstr "Animation auswählen"
 
-#: applets/mailcheck/mailcheck.c:474
+#: applets/mailcheck/mailcheck.c:472
 msgid "Mail check properties"
 msgstr "'Mail check' Eigenschaften"
 
-#: applets/mailcheck/mailcheck.c:478
+#: applets/mailcheck/mailcheck.c:476
 msgid "Apply"
 msgstr "Anwenden"
 
-#: applets/mailcheck/mailcheck.c:519
+#: applets/mailcheck/mailcheck.c:509
 #, fuzzy
 msgid "Mail check Applet"
 msgstr "'Mail check' Eigenschaften"
 
-#: applets/bussign/bussign.c:238 applets/mailcheck/mailcheck.c:520
+#: applets/bussign/bussign.c:226 applets/mailcheck/mailcheck.c:510
 msgid "(c) 1998 the Free Software Foundation"
 msgstr ""
 
-#: applets/mailcheck/mailcheck.c:522
+#: applets/mailcheck/mailcheck.c:512
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr ""
 
-#: applets/mailcheck/mailcheck.c:567
+#: applets/mailcheck/mailcheck.c:557
 msgid "Text only"
 msgstr "Nur Text"
 
-#: applets/mailcheck/mailcheck.c:581
+#: applets/mailcheck/mailcheck.c:568
 msgid "Properties"
 msgstr "Eigenschaften"
 
-#: applets/bussign/bussign.c:91 applets/fish/fish.c:324
-#: applets/mailcheck/mailcheck.c:587 panel/menu.c:567
+#: applets/bussign/bussign.c:86 applets/fish/fish.c:313
+#: applets/mailcheck/mailcheck.c:574 applets/netload/netload.c:337
+#: panel/menu.c:561
 msgid "About..."
 msgstr "Über"
 
-#: applets/bussign/bussign.c:107
+#: applets/bussign/bussign.c:102
 msgid "Refresh Image"
 msgstr ""
 
-#: applets/bussign/bussign.c:237
+#: applets/bussign/bussign.c:225
 msgid "The Bus Sign Applet"
 msgstr ""
 
-#: applets/bussign/bussign.c:240
+#: applets/bussign/bussign.c:228
 msgid ""
 "This applet is a total waste of time. Get back to work!\n"
 "\n"
@@ -178,7 +184,7 @@ msgid ""
 "http://people.netscape.com/mtoy/sign/index.html"
 msgstr ""
 
-#: applets/fish/fish.c:65 applets/fish/fish.c:247
+#: applets/fish/fish.c:65 applets/fish/fish.c:240
 #, c-format
 msgid "%s the Fish"
 msgstr "%s der Fisch"
@@ -200,99 +206,185 @@ msgstr "Der Name Ihres GNOME Fischs:"
 msgid "Name"
 msgstr "Name"
 
-#: applets/fish/fish.c:250
+#: applets/fish/fish.c:243
 msgid "(with minor help from George)"
 msgstr "(mit geringer Hilfe von George)"
 
-#: applets/fish/fish.c:253
+#: applets/fish/fish.c:246
 msgid "The GNOME Fish Applet"
 msgstr "Das GNOME Fisch Applet"
 
-#: applets/fish/fish.c:256
+#: applets/fish/fish.c:249
 msgid ""
 "This applet has no use what-so-ever. It only takes up disk space and "
 "compilation time, and if loaded it also takes up precious panel space and "
 "memory. If anyone is found using this applet, he should be promptly sent for "
 "a psychiatric evaluation."
-msgstr "Dieses Applet ist vollkomen sinnlos und überflüssig. Es benötigt nur Plattenplatz und Übersetzungszeit. Wenn es gestartet wurde, verschwendet es Platz im Panel und im Speicher. Falls deshalb jemals jemand gefunden wird, der dieses Applet benutzt, sollte er prompt zur psychatrischen Behandlung geschickt werden."
+msgstr ""
+"Dieses Applet ist vollkomen sinnlos und überflüssig. Es benötigt nur "
+"Plattenplatz und Übersetzungszeit. Wenn es gestartet wurde, verschwendet es "
+"Platz im Panel und im Speicher. Falls deshalb jemals jemand gefunden wird, "
+"der dieses Applet benutzt, sollte er prompt zur psychatrischen Behandlung "
+"geschickt werden."
 
-#: applets/fish/fish.c:305
-msgid "Can't create applet!\n"
-msgstr "Kann kein Applet anlegen!\n"
-
-#: applets/fish/fish.c:331 panel/main.c:334
+#: applets/cpuload/cpuload.c:218 applets/fish/fish.c:320
+#: applets/netload/netload.c:343 panel/main.c:347
 msgid "Properties..."
 msgstr "Eigenschaften..."
 
-#: panel/panel.c:512
+#: applets/cpuload/properties.c:59 applets/netload/properties.c:61
+msgid "Can't allocate memory for color\n"
+msgstr "Kann Speicher für Farben verfügbar\n"
+
+#: applets/cpuload/properties.c:115
+msgid "User Load"
+msgstr "Benutzerlast"
+
+#: applets/cpuload/properties.c:120
+msgid "System Load"
+msgstr "Systemlast"
+
+#: applets/cpuload/properties.c:125 applets/netload/properties.c:129
+msgid "Applet Height"
+msgstr "Applet Höhe"
+
+#: applets/cpuload/properties.c:131 applets/netload/properties.c:135
+msgid "Width"
+msgstr "Breite"
+
+#: applets/cpuload/properties.c:146 applets/netload/properties.c:150
+msgid "Update Frequency"
+msgstr "Sekunden zwischen dem Neuzeichnen"
+
+#: applets/cpuload/properties.c:197
+msgid "CPULoad Settings"
+msgstr "CPULoad Eigenschaften"
+
+#: applets/cpuload/properties.c:200 applets/netload/properties.c:252
+msgid "General"
+msgstr "Allgemein"
+
+#: applets/netload/netload.c:260
+msgid "Netload Error"
+msgstr "Netzlast Fehler"
+
+#: applets/netload/netload.c:265
+msgid "An error occured in the Netload Applet:"
+msgstr "Im Netzlast Applet trat folgender Fehler auf:"
+
+#: applets/netload/netload.c:294
+msgid "The GNOME Network Load Applet"
+msgstr "Das GNOME Netzlast Applet"
+
+#: applets/netload/netload.c:297
+msgid ""
+"This applet is released under the terms and conditions of the GNU Public "
+"Licence.This applet shows the load on a network device. It requires the "
+"/proc/net/ip_acct interface to be present and set up correctly for the "
+"device."
+msgstr ""
+"Dieses Applet wurde unter der GNU Public Licence veröffentlicht. Es zeigt "
+"die Auslastung eines Netzwerkgeräts an. Es setzt voraus, daß das "
+"/proc/net/ip_acct Interface vorhanden ist, und für das entsprechende "
+"Netzwerkgerät korrekt eingestellt ist."
+
+#: applets/netload/properties.c:119
+msgid "Network Traffic"
+msgstr "Netzwerklast"
+
+#: applets/netload/properties.c:124
+msgid "Traffic bars"
+msgstr ""
+
+#: applets/netload/properties.c:193
+msgid "Device name (like ppp0 or eth0)"
+msgstr "Gerätename (z.B. ppp0 oder eth0)"
+
+#: applets/netload/properties.c:201
+msgid "Vertical spacing of bars (in kilobytes)"
+msgstr ""
+
+#: applets/netload/properties.c:243
+msgid "properties.c: gnome_property_box_new() failed.\n"
+msgstr ""
+
+#: applets/netload/properties.c:249
+msgid "Network Load Settings"
+msgstr "Netzlast Eigenschaften"
+
+#: applets/netload/properties.c:258
+msgid "Device"
+msgstr "Gerät"
+
+#: panel/panel.c:380
 msgid "Really log out?"
 msgstr "Wollen Sie sich wirklich abmelden?"
 
-#: panel/panel.c:520
+#: panel/panel.c:388
 msgid "Ask next time"
 msgstr "Nächstes Mal wieder nachfragen"
 
-#: panel/panel.c:651
+#: panel/panel.c:519
 msgid "Remove from panel"
 msgstr "Entfernen"
 
-#: panel/panel.c:659
+#: panel/panel.c:527
 msgid "Move applet"
 msgstr "Verschieben"
 
-#: panel/panel.c:1073
+#: panel/panel.c:939
 msgid "This panel properties..."
 msgstr "Eigenschaften..."
 
-#: panel/menu.c:558 panel/panel.c:1080
+#: panel/menu.c:552 panel/panel.c:946
 msgid "Global properties..."
 msgstr "Konfiguration..."
 
-#: panel/panel.c:1087
+#: panel/panel.c:953
 msgid "Add main menu applet"
 msgstr "Hauptmenü hinzufügen"
 
-#: panel/logout.c:24 panel/menu.c:612 panel/panel.c:1105
+#: panel/logout.c:24 panel/menu.c:606 panel/panel.c:971
 msgid "Log out"
 msgstr "Abmelden"
 
-#: panel/menu.c:447
+#: panel/menu.c:441
 msgid "Create swallow applet"
 msgstr ""
 
-#: panel/menu.c:456
+#: panel/menu.c:450
 msgid "Title of application to swallow"
 msgstr "Titel der zu verschluckenden Anwendung"
 
-#: panel/menu.c:509
+#: panel/menu.c:503
 msgid "Add to panel"
 msgstr "Hinzufügen"
 
-#: panel/menu.c:514
+#: panel/menu.c:508
 msgid "Add applet"
 msgstr "Applet hinzufügen"
 
-#: panel/menu.c:522
+#: panel/menu.c:516
 msgid "Add main menu"
 msgstr "Hauptmenü hinzufügen"
 
-#: panel/menu.c:529
+#: panel/menu.c:523
 msgid "Add log out button"
 msgstr "Abmelde-\"Button\" hinzufügen"
 
-#: panel/menu.c:537
+#: panel/menu.c:531
 msgid "Add drawer"
 msgstr "'drawer' hinzufügen"
 
-#: panel/menu.c:546
+#: panel/menu.c:540
 msgid "Add swallowed app"
 msgstr "Anwendung verschluckten"
 
-#: panel/menu.c:597
+#: panel/menu.c:591
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/menu.c:604
+#: panel/menu.c:598
 msgid "Lock screen"
 msgstr "Bildschirm sperren"
 
@@ -473,11 +565,11 @@ msgstr "Dokumentation"
 msgid "Run inside terminal"
 msgstr "In einem Terminal starten"
 
-#: panel/main.c:101
+#: panel/main.c:102
 msgid "ID"
 msgstr "ID"
 
-#: panel/main.c:101
+#: panel/main.c:102
 #, fuzzy
 msgid "Discard session"
 msgstr "Sitzung beenden"
@@ -656,8 +748,8 @@ msgstr "Abbrechen"
 msgid " Defaults "
 msgstr "Standard"
 
-#: desktop-properties/xlockmore.cc:173 help-browser/window.c:169
-#: help-browser/window.c:194
+#: desktop-properties/xlockmore.cc:173 help-browser/window.c:174
+#: help-browser/window.c:199
 msgid "Help"
 msgstr "Hilfe"
 
@@ -877,104 +969,104 @@ msgstr ""
 msgid "Paths"
 msgstr "Pfade"
 
-#: help-browser/window.c:120
+#: help-browser/window.c:125
 msgid "New window"
 msgstr "Neues Fenster"
 
-#: help-browser/window.c:120
+#: help-browser/window.c:125
 msgid "Open new browser window"
 msgstr ""
 
-#: help-browser/window.c:125
+#: help-browser/window.c:130
 msgid "Add Bookmark"
 msgstr "Lesezeichen hinzufügen"
 
-#: help-browser/window.c:125
+#: help-browser/window.c:130
 msgid "Add bookmark"
 msgstr "Lesezeichen hinzufügen"
 
-#: help-browser/window.c:130
+#: help-browser/window.c:135
 msgid "Configure"
 msgstr "Konfiguration"
 
-#: help-browser/window.c:135
+#: help-browser/window.c:140
 msgid "Close window"
 msgstr "Fenster schließen"
 
-#: help-browser/window.c:140
+#: help-browser/window.c:145
 msgid "Exit"
 msgstr "Beenden"
 
-#: help-browser/window.c:140
+#: help-browser/window.c:145
 msgid "Exit all windows"
 msgstr ""
 
-#: help-browser/window.c:149
+#: help-browser/window.c:154
 msgid "About"
 msgstr "Über"
 
-#: help-browser/window.c:149
+#: help-browser/window.c:154
 msgid "Info about this program"
 msgstr "Information über dieses Programm"
 
-#: help-browser/window.c:159 help-browser/window.c:189
+#: help-browser/window.c:164 help-browser/window.c:194
 msgid "History"
 msgstr ""
 
-#: help-browser/window.c:159 help-browser/window.c:189
+#: help-browser/window.c:164 help-browser/window.c:194
 msgid "Show History Window"
 msgstr ""
 
-#: help-browser/window.c:161
+#: help-browser/window.c:166
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: help-browser/window.c:161 help-browser/window.c:191
+#: help-browser/window.c:166 help-browser/window.c:196
 msgid "Show Bookmarks Window"
 msgstr "Lesezeichen anzeigen"
 
-#: help-browser/window.c:167
+#: help-browser/window.c:172
 msgid "File"
 msgstr "Datei"
 
-#: help-browser/window.c:168
+#: help-browser/window.c:173
 msgid "Window"
 msgstr "Fenster"
 
-#: help-browser/window.c:176
+#: help-browser/window.c:181
 msgid "Back"
 msgstr "Zurück"
 
-#: help-browser/window.c:177
+#: help-browser/window.c:182
 msgid "Go to the previous location in the history list"
 msgstr ""
 
-#: help-browser/window.c:179
+#: help-browser/window.c:184
 msgid "Forward"
 msgstr "Weiter"
 
-#: help-browser/window.c:180
+#: help-browser/window.c:185
 msgid "Go to the next location in the history list"
 msgstr ""
 
-#: help-browser/window.c:183
+#: help-browser/window.c:188
 msgid "Reload"
 msgstr "Neuladen"
 
-#: help-browser/window.c:186
+#: help-browser/window.c:191
 msgid "Index"
 msgstr "Index"
 
-#: help-browser/window.c:186
+#: help-browser/window.c:191
 #, fuzzy
 msgid "Show Documentation Index"
 msgstr "Dokumentation"
 
-#: help-browser/window.c:191
+#: help-browser/window.c:196
 msgid "BMarks"
 msgstr "Lesezeichen"
 
-#: help-browser/window.c:194
+#: help-browser/window.c:199
 msgid "Help on Help"
 msgstr "Hilfe zur Gnome Hilfe"
 
