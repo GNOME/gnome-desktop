@@ -635,7 +635,7 @@ display_version_info (GnomeCanvasGroup *group)
 	char *minor = NULL;
 	char *micro = NULL;
 	char *version_string = NULL;
-	char *vendor_string = NULL;
+	char *distributor_string = NULL;
 	char *build_date_string = NULL;
 	char *text = NULL;
 
@@ -681,8 +681,8 @@ display_version_info (GnomeCanvasGroup *group)
 			minor = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "micro") && value && value[0])
 			micro = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "vendor") && value && value[0])
-			vendor_string = g_strdup (value);
+		if (!g_ascii_strcasecmp (name, "distributor") && value && value[0])
+			distributor_string = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "date") && value && value[0])
 			build_date_string = g_strdup (value);
 
@@ -729,12 +729,12 @@ display_version_info (GnomeCanvasGroup *group)
 		height += tmp + 4.0;
 	}
 
-	if (vendor_string && vendor_string[0]) {
+	if (distributor_string && distributor_string[0]) {
 		gdouble tmp;
 		GnomeCanvasItem *item;
 
 		text = g_strdup_printf ("<b>%s: </b>%s",
-					_("Vendor"), vendor_string);
+					_("Distributor"), distributor_string);
 		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (info),
 					      gnome_canvas_text_get_type (),
 					      "markup", text,
@@ -768,7 +768,7 @@ display_version_info (GnomeCanvasGroup *group)
 	}
 
 	g_free (version_string);
-	g_free (vendor_string);
+	g_free (distributor_string);
 	g_free (build_date_string);
 
 	gnome_canvas_item_set (info, "y", canvas_height - height, NULL);
