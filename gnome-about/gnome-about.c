@@ -458,8 +458,6 @@ load_random_header (void)
 	g_list_free (files);
 
 	if (error) {
-		g_free (directory);
-
 		char *message;
 
 		message = g_strdup_printf (_("Unable to load header image: %s"),
