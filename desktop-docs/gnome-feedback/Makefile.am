@@ -1,1 +1,1 @@
-SUBDIRS = C no
+SUBDIRS = C
