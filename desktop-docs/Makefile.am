@@ -1,1 +1,1 @@
-SUBDIRS = fdl gpl lgpl
+SUBDIRS = fdl gpl lgpl gnome-feedback
