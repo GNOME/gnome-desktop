@@ -567,7 +567,7 @@ main (gint argc, gchar *argv[])
 			    TRUE, FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (hbox),
-			    gnome_href_new ("http://www.gnome.org/",
+			    gnome_href_new (_("http://www.gnome.org/"),
 					    _("GNOME Main Site")),
 			    TRUE, FALSE, 0);
 
