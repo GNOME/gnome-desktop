@@ -72,17 +72,14 @@ install-data-local: gnome-intro.html
 	  $(INSTALL_DATA) $(srcdir)/$$file $(gnome_intro_helpdir)/pix/$$basefile; \
 	done
 
-INTRO_EXTRA_DIST = gnome-intro.sgml
 GNOME_INTRO_GIFS = pix/panel-basic.gif pix/panel-menu.gif \
 	pix/panel-menu-select.gif
 
-EXTRA_DIST = $(INTRO_EXTRA_DIST) $(GNOME_INTRO_HTML_FILES) \
-	$(GNOME_INTRO_GIFS) $(GNOME_INTRO_PICTURES) topic.dat
+EXTRA_DIST = $(GNOME_INTRO_HTML_FILES) \
+	$(GNOME_INTRO_GIFS) $(GNOME_INTRO_PICTURES) \
+	gnome-intro.sgml gnome-intro.html topic.dat
 
-
-
-manual-html: gnome-intro/gnome-intro.html
-	cp gnome-intro/gnome-intro.html gnome-intro.html
+manual-html: gnome-intro.html
 manual-ps: gnome-intro.ps
 manual-rtf: gnome-intro.rtf
 manual-all: manual-html manual-ps manual-rtf
@@ -100,7 +97,8 @@ manual-all: manual-html manual-ps manual-rtf
 	db2rtf $<
 
 gnome-intro.html: gnome-intro/gnome-intro.html
-	cp $< $@
+	cd $(srcdir) \
+	&& cp gnome-intro/gnome-intro.html gnome-intro.html
 
 # now a big ugly kludge: to handle the CVS directory that developers
 # will have in the gnome-intro directory.  eventually I'll handle this
