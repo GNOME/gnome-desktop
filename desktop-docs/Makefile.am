@@ -93,7 +93,7 @@ gnome-intro.html: gnome-intro/book01.html
 # by calling it gnome-intro-prebuilt or something
 gnome-intro/book01.html: gnome-intro.sgml
 	db2html gnome-intro.sgml
-	mkdir gnome-intro/pix
+	-mkdir gnome-intro/pix
 	cp pix/*.gif gnome-intro/pix
 	if test -d gnome-intro.junk/CVS; then \
 		echo "CVS directory got moved -- moving it back"; \
