@@ -64,7 +64,7 @@ struct _GnomeDesktopItem {
 
 	Bonobo_ConfigDatabase db;
 	Bonobo_ConfigDatabase default_db;
-	GNOME_DesktopEntry *entry;
+	GNOME_Desktop_Entry *entry;
 	gboolean modified;
 
         char *location;
@@ -167,7 +167,7 @@ ditem_load (const char *data_file,
 	CORBA_exception_free (&ev);
 
 	CORBA_exception_init (&ev);
-	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_DesktopEntry, &ev);
+	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_Desktop_Entry, &ev);
 	if (BONOBO_EX (&ev)) {
 		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
 		CORBA_exception_free (&ev);
@@ -259,13 +259,13 @@ gnome_desktop_item_new_from_file (const char *file,
         if(item_flags & GNOME_DESKTOP_ITEM_IS_DIRECTORY) {
 		/* perhaps a little ineficent way to ensure this
 		   is the correct type */
-		retval->entry->Type = GNOME_DESKTOP_ENTRY_TYPE_DIRECTORY;
+		retval->entry->Type = GNOME_Desktop_ENTRY_TYPE_DIRECTORY;
 		retval->modified = TRUE;
 	} else {
 		/* this is not a directory so sanitize it by killing the
 		   type altogether if type happens to be "Directory" */
-		if(retval->entry->Type == GNOME_DESKTOP_ENTRY_TYPE_DIRECTORY) {
-			retval->entry->Type = GNOME_DESKTOP_ENTRY_TYPE_UNKNOWN;
+		if(retval->entry->Type == GNOME_Desktop_ENTRY_TYPE_DIRECTORY) {
+			retval->entry->Type = GNOME_Desktop_ENTRY_TYPE_UNKNOWN;
 			retval->modified = TRUE;
 		}
 	}
@@ -344,7 +344,7 @@ gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 		return TRUE;
 
 	CORBA_exception_init (&ev);
-	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
+	arg = bonobo_arg_new (TC_GNOME_Desktop_Entry);
 	arg->_value = item->entry;
 	arg->_release = FALSE;
 	bonobo_pbclient_set_value (item->db, "/Desktop Entry", arg, &ev);
@@ -469,7 +469,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 
 
 	/* check the type, if there is one set */
-	if(item->entry->Type != GNOME_DESKTOP_ENTRY_TYPE_APPLICATION) {
+	if(item->entry->Type != GNOME_Desktop_ENTRY_TYPE_APPLICATION) {
 		/* FIXME: ue GError */
 		/* we are not an application so just exit
 		   with an error */
@@ -579,7 +579,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item, int argc, const char **
         g_return_val_if_fail(item, -1);
 
 	/* This is a URL, so launch it as a url */
-	if (item->entry->Type == GNOME_DESKTOP_ENTRY_TYPE_URL) {
+	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
 		if (item->entry->URL[0] != '\0') {
 			if (gnome_url_show (item->entry->URL))
 				return 0;
@@ -838,7 +838,7 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 
 	/* How could you drop something on a URL entry, that would
 	 * be bollocks */
-	if (item->entry->Type == GNOME_DESKTOP_ENTRY_TYPE_URL) {
+	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
 		/*FIXME: use a GError */
 		return -1;
 	}
@@ -971,10 +971,10 @@ gnome_desktop_item_get_flags (const GnomeDesktopItem *item)
  * Returns: The type of the specified 'item'. The returned
  * memory remains owned by the GnomeDesktopItem and should not be freed.
  */
-GNOME_DesktopEntryType
+GNOME_Desktop_EntryType
 gnome_desktop_item_get_type (const GnomeDesktopItem *item)
 {
-        g_return_val_if_fail(item, GNOME_DESKTOP_ENTRY_TYPE_UNKNOWN);
+        g_return_val_if_fail(item, GNOME_Desktop_ENTRY_TYPE_UNKNOWN);
 
         return item->entry->Type;
 }
@@ -1548,7 +1548,7 @@ gnome_desktop_item_set_name (GnomeDesktopItem *item, const char *language, const
  *
  */
 void
-gnome_desktop_item_set_type (GnomeDesktopItem *item, GNOME_DesktopEntryType type)
+gnome_desktop_item_set_type (GnomeDesktopItem *item, GNOME_Desktop_EntryType type)
 {
         g_return_if_fail(item);
 

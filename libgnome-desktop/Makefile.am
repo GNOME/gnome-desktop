@@ -13,16 +13,16 @@ INCLUDES = \
 noinst_LTLIBRARIES = libgnome-desktop-2.la
 
 CORBA_SRCLIST = \
-	gnome-desktop-stubs.c	\
-	gnome-desktop-skels.c	\
-	gnome-desktop-common.c	\
-	gnome-desktop.h
+	GNOME_Desktop-stubs.c	\
+	GNOME_Desktop-skels.c	\
+	GNOME_Desktop-common.c	\
+	GNOME_Desktop.h
 
 # try to make these get cleaned properly
 CLEANFILES += $(CORBA_SRCLIST)
 
-$(CORBA_SRCLIST): $(top_srcdir)/idl/gnome-desktop.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) -I $(BONOBO_IDLDIR) $(top_srcdir)/idl/gnome-desktop.idl
+$(CORBA_SRCLIST): $(top_srcdir)/idl/GNOME_Desktop.idl $(ORBIT_IDL)
+	$(ORBIT_IDL) -I $(BONOBO_IDLDIR) $(top_srcdir)/idl/GNOME_Desktop.idl
 
 BUILT_SOURCES = $(CORBA_SRCLIST)
 
