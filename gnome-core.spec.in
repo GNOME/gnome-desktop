@@ -46,6 +46,10 @@ Panel libraries and header files for creating GNOME panels.
 
 %changelog
 
+* Sun May 23 1999 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+
+- default.session is now on %{prefix}/share/gnome instead of %{prefix}/share
+
 * Sat Nov 21 1998 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 - Cleaned %files section
@@ -58,10 +62,6 @@ Panel libraries and header files for creating GNOME panels.
 * Fri Mar 13 1998 Marc Ewing <marc@redhat.com>
 
 - Integrate into gnome-core CVS source tree
-
-* Sun May 23 1999 Pablo Saratxaga <srtxg@chanae.alphanet.ch>
-
-- default.session is now on %{prefix}/share/gnome instead of %{prefix}/share 
 
 %prep
 %setup
@@ -105,7 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
 %{prefix}/share/applets
-%{prefix}/share/gnome
+%{prefix}/share/gnome/apps
+%{prefix}/share/gnome/help
 %{prefix}/share/idl
 %{prefix}/share/mc/templates
 %{prefix}/share/locale/*/*/*
@@ -113,6 +114,11 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/xmodmap/*
 %{prefix}/etc/*
 %config %{prefix}/share/panelrc
+<<<<<<< gnome-core.spec.in
+%config %{prefix}/share/gnome/default.session
+%config %{prefix}/share/gnome/default.wm
+=======
+>>>>>>> 1.8
 
 %files devel
 %defattr(-, root, root)
