@@ -1,3 +1,10 @@
+Fri Sep 19 15:49:50 2003  George Lebl <jirka@5z.com>
+
+	* configure.in, acconfig.h: whack the definition of GNOME_ICONDIR here,
+	  it's not neccessary as only gnome-about uses it and it was wrong anyway
+	  if --prefix was not given it would start with NULL.  gnome-about
+	  correctly does it inside the Makefile.am
+
 2003-09-18  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "br" to ALL_LINGUAS.
