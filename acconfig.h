@@ -11,6 +11,12 @@
 #undef PACKAGE
 #undef VERSION
 
+#undef HAVE_LIBGTOP
+
+/* Define if there is no `u_int64_t' and `int64_t'. */
+#undef u_int64_t
+#undef int64_t
+
 /* Define if you have the Andrew File System.  */
 #undef AFS
 
