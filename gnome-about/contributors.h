@@ -10,8 +10,6 @@
 
 /* Please keep this in alphabetical order */
 static gchar *contributors[] = {
-	N_("GNOME was brought to you by"),
-	" ",
 	"Jerome Abela",
 	"Lauri Alanko",
 	"Seth Alves",
@@ -299,9 +297,8 @@ static gchar *contributors[] = {
 	"Michael Zucchi",
 	"Jason van Zyl",
 	"Christian F.K. Schaller",
-	" ",
-	N_("... and many more"),
-	NULL, NULL
+	"",
+	""
 };
 
 

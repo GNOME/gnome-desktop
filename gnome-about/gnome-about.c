@@ -21,16 +21,19 @@ gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
 gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
 gboolean cb_keypress  (GtkWidget *widget, GdkEventKey *event);
 gboolean cb_clicked   (GtkWidget *widget, GdkEvent *event);
-gint     scroll       (gpointer data);
 
-GtkWidget *area;
-GdkPixmap *pixmap=NULL;
-GdkFont *font=NULL;
-gint y, y_to_wrap_at;
-gint howmuch=0;
-GdkPixbuf *im;
-GtkWidget *canvas;
+static GtkWidget   *area   = NULL;
+static GdkPixmap   *pixmap = NULL;
+static PangoLayout *layout = NULL;
+static int          font_descent;
+static int          font_ascent;
+static int          fast_fwd = 0;
+
+int howmuch = 0;
+
 GnomeCanvasItem *image;
+GtkWidget       *canvas;
+GdkPixbuf       *im;
 	
 static gint sparkle_timer = -1;
 static gint scroll_timer = -1;
@@ -252,14 +255,16 @@ new_sparkles_timeout (GnomeCanvas* canvas)
 gboolean
 cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
-	if (event->type == GDK_BUTTON_PRESS) {
-		if (howmuch >= 5) {
-			gchar *filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_LIBDIR, "gnome-about/contributors.dat", TRUE, NULL);
-			if (filename)
-				gnome_sound_play (filename);
+	if (event->type == GDK_BUTTON_PRESS && howmuch >= 5) {
+		char *filename;
+			
+		filename = gnome_program_locate_file (
+				NULL, GNOME_FILE_DOMAIN_LIBDIR,
+				"gnome-about/contributors.dat", TRUE, NULL);
+		if (filename)
+			gnome_sound_play (filename);
 
-			g_free (filename);
-		}
+		g_free (filename);
 
 	}
 
@@ -330,60 +335,201 @@ cb_quit (GtkWidget *widget, gpointer data)
 	if (new_sparkle_timer != -1)
 		gtk_timeout_remove (new_sparkle_timer);
 
+	g_object_unref (layout);
+
 	gtk_main_quit ();
 
 	return FALSE; /* causes "destroy" signal to be emitted */
 }
 
-gint
-scroll (gpointer data)
+static enum {
+	DRAWING_INTRO,
+	DRAWING_BOTH,
+	DRAWING_NAMES,
+	DRAWING_END
+} state = DRAWING_INTRO;
+
+static void
+scroll_forward (GtkWidget       *widget,
+		GdkEventButton  *event)
 {
-	gint cury, i, totalwidth;
-	GdkRectangle update_rect;
+	if (event->button == 1)
+		fast_fwd++;
+}
 
+static void
+draw_intro (void)
+{
+	static int initial_pause = 50;
+	static int x = G_MININT;
+	static int y = G_MININT;
+	static int layout_width = 0;
 
-	i = 0;
-	cury = y;
+	pango_layout_set_markup (layout, _("<big><b>GNOME Was Brought To You By</b></big>"), -1);
+	if (x == G_MININT) {
+		PangoRectangle extents;
+
+		pango_layout_get_pixel_extents (layout, NULL, &extents);
+		
+		x = (area->allocation.width - extents.width) / 2;
+		y = (area->allocation.height - extents.height) / 2;
+		layout_width = extents.width;
+	}
+
+	gdk_draw_layout (pixmap, area->style->white_gc, x, y, layout);
+
+	if (fast_fwd > 0) {
+		fast_fwd--;
+		state = DRAWING_NAMES;
+		x = - layout_width;
+		initial_pause = 50;
+		return;
+	}
+
+	if (x == (area->allocation.width - layout_width) / 2 && initial_pause-- >= 0)
+		return;
+
+	x++;
+	if (x > area->allocation.width) {
+		state = DRAWING_NAMES;
+		x = - layout_width;
+		initial_pause = 50;
+
+	} else if ((x + layout_width) > area->allocation.width)
+		state = DRAWING_BOTH;
+
+}
+
+static void
+draw_names ()
+{
+	PangoRectangle extents;
+	static int     index = -1;
+	static int     going_y = G_MININT;
+	static int     middle_y = G_MININT;
+	static int     coming_y = G_MININT;
+	int            middle_height = 0;
+
+	if (middle_y == G_MININT)
+		middle_y = area->allocation.height / 2 - font_ascent;
+
+	if (fast_fwd > 0) {
+		fast_fwd--;
+		index++;
+		coming_y = G_MININT;
+		going_y = middle_y - font_ascent - font_descent;
+	}
+
+	if (index - 1 >= 0 && going_y != G_MININT) {
+		pango_layout_set_markup (layout, _(contributors [index - 1]), -1);
+		pango_layout_get_pixel_extents (layout, NULL, &extents);
+
+		gdk_draw_layout (pixmap, area->style->white_gc,
+				 (area->allocation.width - extents.width) / 2,
+				 going_y, layout);
+
+		going_y--;
+	}
+
+	if (index >= 0 && index < G_N_ELEMENTS (contributors)) {
+		char *markup;
+
+		markup = g_strdup_printf ("<big><b>%s</b></big>", _(contributors [index]));
+		pango_layout_set_markup (layout, markup, -1);
+		g_free (markup);
+
+		pango_layout_get_pixel_extents (layout, NULL, &extents);
+
+		gdk_draw_layout (pixmap, area->style->white_gc,
+				 (area->allocation.width - extents.width) / 2,
+				 middle_y, layout);
+
+		middle_height = extents.height;
+	}
+
+	if (index + 1 < G_N_ELEMENTS (contributors)) {
+		if (coming_y == G_MININT)
+			coming_y = area->allocation.height + font_ascent;
+
+		pango_layout_set_markup (layout, _(contributors [index + 1]), -1);
+		pango_layout_get_pixel_extents (layout, NULL, &extents);
+
+		gdk_draw_layout (pixmap, area->style->white_gc,
+				 (area->allocation.width - extents.width) / 2,
+				 coming_y, layout);
+
+		coming_y--;
+	}
+
+	if (coming_y != G_MININT && coming_y <= middle_y + middle_height) {
+		index++;
+		coming_y = G_MININT;
+		going_y = middle_y - font_ascent - font_descent;
+	}
+
+	if (index + 1 >= G_N_ELEMENTS (contributors)) {
+		index = -1;
+		going_y  = G_MININT;
+		middle_y = G_MININT;
+		coming_y = G_MININT;
+		state = DRAWING_END;
+	}
+}
+
+static void
+draw_end ()
+{
+	PangoRectangle extents;
+	static int     pause = 100;
+
+	pango_layout_set_markup (layout, _("<big><b>And Many More ...</b></big>"), -1);
+	pango_layout_get_pixel_extents (layout, NULL, &extents);
+
+	gdk_draw_layout (pixmap, area->style->white_gc,
+			(area->allocation.width - extents.width) / 2,
+			(area->allocation.height - extents.height) / 2,
+			layout);
+
+	if (fast_fwd > 0) {
+		fast_fwd--;
+		state = DRAWING_INTRO;
+		pause = 100;
+	}
+
+	if (pause-- == 0) {
+		state = DRAWING_INTRO;
+		pause = 100;
+	}
+}
+
+static gboolean
+scroll (gpointer dummy)
+{
 	gdk_draw_rectangle (pixmap, area->style->black_gc,
-			    TRUE,
-			    0, 0,
+			    TRUE, 0, 0,
 			    area->allocation.width,
 			    area->allocation.height);
 
-	while (contributors[i]) {
-		totalwidth = gdk_string_width (font, contributors[i]);
-
-		if(cury > -font->descent &&
-		   cury < area->allocation.height + font->ascent) {
-		        gdk_draw_string (pixmap,
-					 font,
-					 area->style->white_gc,
-					 (area->allocation.width - 
-					  totalwidth) / 2,
-					 cury,
-					 _(contributors[i]));
-		}
-
-		i++;
-		cury += font->ascent + font->descent;
-
+	switch (state) {
+	case DRAWING_INTRO:
+		draw_intro ();
+		break;
+	case DRAWING_NAMES:
+		draw_names ();
+		break;
+	case DRAWING_BOTH:
+		draw_intro ();
+		draw_names ();
+		break;
+	case DRAWING_END:
+		draw_end ();
+		break;
 	}
 
-	y --;
-	if (y < y_to_wrap_at)
-	        y = area->allocation.height + font->ascent;
+	gtk_widget_queue_draw_area (area, 0, 0,
+				    area->allocation.width,
+				    area->allocation.height);
 
-	update_rect.x = 0;
-	update_rect.y = 0;
-	update_rect.width = area->allocation.width;
-	update_rect.height = area->allocation.height;
-	
-
-	gtk_widget_queue_draw_area (area, 
-				    (&update_rect)->x,
-				    (&update_rect)->y,
-				    (&update_rect)->width,
-				    (&update_rect)->height);
 	return TRUE;
 }
 
@@ -402,17 +548,8 @@ cb_exposed (GtkWidget *widget, GdkEventExpose *event)
 gboolean
 cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 {
+	g_return_val_if_fail (pixmap == NULL, FALSE);
 
-	if (pixmap)
-	{
-		/* Stop display from "jumping back" to beginning on window resize */
-		y = MIN(y, widget->allocation.height + font->ascent);
-		g_object_unref (pixmap);
-	}
-	else 
-	{
-		y = widget->allocation.height + font->ascent;
-	}
 	pixmap = gdk_pixmap_new (widget->window,
 				 widget->allocation.width,
 				 widget->allocation.height,
@@ -424,16 +561,15 @@ cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 static gint
 get_max_width (void)
 {
-	int i;
-	int max_width = 0;
+	PangoRectangle extents;
+	int            max_width = 0;
+	int            i;
 	
-	i = 0;
-	while (contributors[i]) {
-		int totalwidth = gdk_string_width (font, contributors[i]);
+	for (i = 0; i < G_N_ELEMENTS (contributors); i++) {
+		pango_layout_set_text (layout, _(contributors [i]), -1);
+		pango_layout_get_pixel_extents (layout, NULL, &extents);
 
-		if (totalwidth > max_width)
-			max_width = totalwidth;
-		i++;
+		max_width = MAX (max_width, extents.width);
 	}
 
 	return max_width + 4;
@@ -442,14 +578,16 @@ get_max_width (void)
 gint
 main (gint argc, gchar *argv[])
 {
-	GtkWidget *window;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-	GdkPixmap *logo_pixmap;
-	GdkBitmap *logo_mask;
-	GtkWidget *frame;
-	GtkWidget *gtkpixmap;
-	int max_width;
+	GtkWidget        *window;
+	GtkWidget        *hbox;
+	GtkWidget        *vbox;
+	GdkPixmap        *logo_pixmap;
+	GdkBitmap        *logo_mask;
+	GtkWidget        *frame;
+	GtkWidget        *gtkpixmap;
+	PangoContext     *context;
+	PangoFontMetrics *metrics;
+	int               max_width;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -468,13 +606,6 @@ main (gint argc, gchar *argv[])
 	g_object_set (window, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
 
 	gtk_widget_realize (window);
-
-	font = gtk_style_get_font (window->style);
-	if (!font) 
-	    font = gdk_fontset_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*-r-*");
-
-	y_to_wrap_at = -(sizeof(contributors)/sizeof(contributors[0]))*
-	                (font->ascent+font->descent);
 
 	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask,
 						    NULL,
@@ -525,6 +656,15 @@ main (gint argc, gchar *argv[])
 	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, FALSE, 0);
 
 	area = gtk_drawing_area_new ();
+	layout = gtk_widget_create_pango_layout (area, NULL);
+	context = gtk_widget_get_pango_context (area);
+	metrics = pango_context_get_metrics (context,
+					     area->style->font_desc,
+					     pango_context_get_language (context));
+	font_descent = pango_font_metrics_get_descent (metrics) / PANGO_SCALE;
+	font_ascent  = pango_font_metrics_get_ascent  (metrics) / PANGO_SCALE;
+	pango_font_metrics_unref (metrics);
+
 	max_width = get_max_width();
 	if (max_width < 320) 
 		GTK_WIDGET (area)->requisition.width = 320;
@@ -533,6 +673,11 @@ main (gint argc, gchar *argv[])
 	GTK_WIDGET (area)->requisition.height = 160;
 	gtk_widget_queue_resize (GTK_WIDGET (area));
 	gtk_widget_queue_draw (area);
+
+	gtk_widget_add_events (area, GDK_BUTTON_PRESS_MASK);
+	g_signal_connect (area, "button_press_event",
+			  G_CALLBACK (scroll_forward), NULL);
+
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), area);
@@ -568,7 +713,7 @@ main (gint argc, gchar *argv[])
 	g_signal_connect (window, "response",
 			  G_CALLBACK (cb_quit), NULL);
 
-	scroll_timer = gtk_timeout_add (50, scroll, NULL);
+	scroll_timer = gtk_timeout_add (20, scroll, NULL);
 
 	gtk_widget_show_all (window);
 	gtk_main ();
