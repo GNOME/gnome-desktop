@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.3\n"
-"POT-Creation-Date: 1999-03-26 01:22+0100\n"
+"POT-Creation-Date: 1999-03-26 11:46-0500\n"
 "PO-Revision-Date: 1999-03-26 01:26+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: applets/asclock/asclock.c:582
+#: applets/asclock/asclock.c:587
 #: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
 msgstr "Om"
 
-#: applets/asclock/asclock.c:589 applets/clockmail/clockmail.c:449
+#: applets/asclock/asclock.c:594 applets/clockmail/clockmail.c:449
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:485
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
@@ -155,17 +155,32 @@ msgstr "Generelt"
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: applets/battery/battery.c:478
+#: applets/battery/battery.c:122
+msgid ""
+"Error querying battery charge.  Make sure that your kernel was built with "
+"APM support."
+msgstr ""
+
+#: applets/battery/battery.c:141
+msgid "The battery is low."
+msgstr "Batteriet har lite strøm."
+
+#: applets/battery/battery.c:156
+#, fuzzy
+msgid "The battery is fully charged."
+msgstr "Batteriet har lite strøm."
+
+#: applets/battery/battery.c:558
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Intern feil: ugyldig modus i battery_set_mode"
 
-#: applets/battery/battery.c:539 applets/gen_util/clock.c:273
+#: applets/battery/battery.c:641 applets/gen_util/clock.c:273
 #: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Kan ikke opprette applet!\n"
 
-#: applets/battery/battery.c:660 applets/charpick/charpick.c:338
+#: applets/battery/battery.c:770 applets/charpick/charpick.c:338
 #: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:491
 #: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
@@ -177,29 +192,25 @@ msgstr "Kan ikke opprette applet!\n"
 msgid "About..."
 msgstr "Om..."
 
-#: applets/battery/battery.c:718
+#: applets/battery/battery.c:837
 msgid "The GNOME Battery Monitor Applet"
 msgstr "GNOME batterimonitor applet"
 
-#: applets/battery/battery.c:719
+#: applets/battery/battery.c:838
 msgid " (C) 1997-1998 The Free Software Foundation"
 msgstr " (C) 1997-1998 The Free Software Foundation"
 
-#: applets/battery/battery.c:721
+#: applets/battery/battery.c:840
 msgid ""
 "This applet monitors the charge of your laptop's battery.  Click on it to "
 "change display modes."
 msgstr ""
-"Denne appleten overvåker strømstyrken til batteriet på din bærbare. Klikk "
-"på den for å endre visningsmodus."
+"Denne appleten overvåker strømstyrken til batteriet på din bærbare. Klikk på "
+"den for å endre visningsmodus."
 
-#: applets/battery/battery.c:833
+#: applets/battery/battery.c:975
 msgid "Could not allocate space for graph values"
 msgstr "Kunne ikke allokere plass for grafverdiene"
-
-#: applets/battery/battery.c:920
-msgid "The battery is low."
-msgstr "Batteriet har lite strøm."
 
 #: applets/battery/properties.c:67
 msgid "Battery Monitor Settings"
@@ -272,8 +283,8 @@ msgid "Right to Left"
 msgstr "Fra høyre mot venstre"
 
 #: applets/battery/properties.c:300
-msgid "Low Battery Warning"
-msgstr "Advarsel ved dårlig batteri"
+msgid "Battery Charge Messages"
+msgstr ""
 
 #: applets/battery/properties.c:303
 msgid "Enable Low Battery Warning"
@@ -282,6 +293,10 @@ msgstr "Slå på advarsel ved dårlig batteri"
 #: applets/battery/properties.c:308
 msgid "Warn if the battery charge dips below:"
 msgstr "Advar hvis strømstyrken blir lavere enn:"
+
+#: applets/battery/properties.c:322
+msgid "Enable Full-Charge Notification"
+msgstr ""
 
 #: applets/battery/read-battery.c:58
 msgid ""
@@ -3073,3 +3088,5 @@ msgstr "Kommando (valgfri)"
 msgid "Height"
 msgstr "Høyde"
 
+#~ msgid "Low Battery Warning"
+#~ msgstr "Advarsel ved dårlig batteri"

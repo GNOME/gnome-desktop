@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-03-13 18:38-0500\n"
+"POT-Creation-Date: 1999-03-26 11:46-0500\n"
 "PO-Revision-Date: 1998-12-11 06:39+09:00\n"
 "Last-Translator: Yukihiro Nakai <Nakai@abricot.co.jp>\n"
 "Language-Team: Yukihiro Nakai <Nakai@abricot.co.jp>\n"
@@ -13,240 +13,54 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-japan\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/asclock/asclock.c:155
+#: applets/asclock/asclock.c:587
 #: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
 msgstr "情報"
 
-#: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:449
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
+#: applets/asclock/asclock.c:594 applets/clockmail/clockmail.c:449
+#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:485
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
-#: applets/gnome-pager/gnomepager_applet.c:1420
+#: applets/gnome-pager/gnomepager_applet.c:1491
 #: applets/mini-commander/src/mini-commander_applet.c:246
 #: applets/modemlights/modemlights.c:756 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:371 panel/launcher.c:294
-#: panel/menu.c:3460
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:375 panel/launcher.c:334
+#: panel/menu.c:3454
 msgid "Properties..."
 msgstr "プロパティ..."
 
-#: applets/asclock/dialogs.c:22
-msgid "Afterstep Clock Applet"
-msgstr "Afterstepクロックアプレット"
+#: applets/asclock/dialogs.c:17
+#, fuzzy
+msgid "ASClock"
+msgstr "時計"
 
-#: applets/asclock/dialogs.c:25
+#: applets/asclock/dialogs.c:21
 msgid "Who said NeXT is dead?"
 msgstr "NeXTは死んだなんてとんでもない"
 
-#: applets/asclock/dialogs.c:112
-msgid "Timezone"
-msgstr "タイムゾーン"
-
-#: applets/battery/battery.c:358
-msgid "Internal error: invalid mode in battery_set_mode"
-msgstr "内部エラー: battery_set_modeのモードが不正です"
-
-#: applets/battery/battery.c:403 applets/gen_util/clock.c:273
-#: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
-#: applets/netload/netload.c:321
-msgid "Can't create applet!\n"
-msgstr "アプレットが生成できませんでした\n"
-
-#: applets/battery/battery.c:623
-msgid "Could not allocate space for graph values"
-msgstr "グラフ値の領域を確保できませんでした"
-
-#: applets/battery/properties.c:37
-msgid "Battery Monitor Settings"
-msgstr "バッテリーモニタの設定"
-
-#: applets/battery/properties.c:46
-msgid "General Properties"
-msgstr "一般設定"
-
-#: applets/battery/properties.c:48 applets/diskusage/properties.c:232
-#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
-msgid "Applet Height"
-msgstr "アプレットの高さ"
-
-#: applets/battery/properties.c:58
-msgid "Applet Width"
-msgstr "アプレットの幅"
-
-#: applets/battery/properties.c:68
-msgid "Applet Mode"
-msgstr "アプレットのモード"
-
-#: applets/battery/properties.c:69
-msgid "Graph"
-msgstr "グラフ"
-
-#: applets/battery/properties.c:71
-msgid "Readout"
-msgstr "読み出し"
-
-#: applets/battery/properties.c:115 applets/battery/properties.c:180
-msgid "AC-On Battery Color:"
-msgstr "電源オン時のバッテリーの色"
-
-#: applets/battery/properties.c:121 applets/battery/properties.c:186
-msgid "AC-Off Battery Color:"
-msgstr "電源オフ時のバッテリーの色"
-
-#: applets/battery/properties.c:127
-msgid "Graph Interval:"
-msgstr "グラフの更新間隔:"
-
-#: applets/battery/properties.c:141
-msgid "Graph Direction:"
-msgstr "グラフの方向:"
-
-#: applets/battery/properties.c:144
-msgid "Left to Right"
-msgstr "左から右へ"
-
-#: applets/battery/properties.c:146
-msgid "Right to Left"
-msgstr "右から左へ"
-
-#: applets/battery/read-battery.c:28
+#: applets/asclock/dialogs.c:134
 msgid ""
-"Cannot open /proc/apm!  Make sure that you built APM support into your "
-"kernel.\n"
-msgstr ""
-"/proc/apmを開けません! "
-"APMサポートを入れてカーネルを構築しているか確認してください。\n"
-
-#: applets/battery/read-battery.c:61
-#, c-format
-msgid "Could not dup() APM file descriptor: %s\n"
+"Since you are root, would you like to set the system's default timezone?"
 msgstr ""
 
-#: applets/battery/read-battery.c:130
-msgid "Cannot open /dev/apm; can't get data."
-msgstr "/dev/apmを開けません;データを取得できません"
-
-#: applets/battery/read-battery.c:135
-msgid "ioctl failed on /dev/apm."
-msgstr "/dev/apmにioctlできませんでした。"
-
-#: applets/battery/read-battery.c:146
-msgid "APM is disabled!  Cannot read battery charge information."
-msgstr "APMは使用できません!バッテリー充電情報を取得できません。"
-
-#: applets/cdplayer/cdplayer.c:318
+#: applets/asclock/dialogs.c:136
 #, fuzzy
-msgid "Run gtcd..."
-msgstr "gmixを実行..."
+msgid "My Title"
+msgstr "ページタイトル"
 
-#: applets/charpick/charpick.c:203
-msgid "Character Picker"
-msgstr ""
-
-#: applets/charpick/charpick.c:204
-msgid "0.02"
-msgstr ""
-
-#: applets/charpick/charpick.c:205
-msgid "Copyright (C) 1998"
-msgstr ""
-
-#: applets/charpick/charpick.c:207
-msgid ""
-"Gnome Panel applet for selecting strange characters that are not on my "
-"keyboard. Released under GNU General Public Licence."
-msgstr ""
-"私のキーボードでは打てない変わった文字を入力するための Panel "
-"アプレットです。GNUGNU一般公有使用許諾書に基づいてリリースされています。"
-
-#: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
-#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1414
-#: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
-#: panel/menu.c:2456
-msgid "About..."
-msgstr "情報..."
-
-#: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
-#, c-format
-msgid "%d.%d.%d"
-msgstr ""
-
-#: applets/clockmail/clockmail.c:52
-msgid "John Ellis <johne@bellatlantic.net>"
-msgstr ""
-
-#: applets/clockmail/clockmail.c:55
-msgid "Clock and Mail Notify Applet"
-msgstr "クロックとメール通知のアプレット"
-
-#: applets/clockmail/clockmail.c:56
-msgid "(C) 1999"
-msgstr ""
-
-#: applets/clockmail/clockmail.c:58
-msgid ""
-"Released under the GNU general public license.\n"
-"Basic digital clock with date in a tooltip. Optional 12/24 time display. "
-"Mail blinking can be for any unread mail, or only briefly when new mail "
-"arrives."
-msgstr ""
-"GNU一般公有使用許諾書に基づいてリリースされています。\n"
-"基本的なデジタル時計を表示します。12時制/24時制をオプションで選択できます。未"
-"読のメイルがある時か、新規メイルが到着した時に点滅させる事ができます。"
-
-#: applets/clockmail/clockmail.c:128
-msgid " (GMT)"
-msgstr ""
-
-#: applets/clockmail/clockmail.c:134
-#, c-format
-msgid " (GMT %+d)"
-msgstr ""
-
-#. add default theme
-#: applets/clockmail/properties.c:134
-msgid "None (default)"
-msgstr "なし(デフォルト)"
-
-#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:502
-#: applets/mini-commander/src/preferences.c:438
-msgid "Clock"
-msgstr "時計"
-
-#: applets/clockmail/properties.c:295
+#. show ampm toggle button
+#: applets/asclock/dialogs.c:284 applets/clockmail/properties.c:295
 msgid "Display time in 12 hour format (AM/PM)"
 msgstr "12時制フォーマット(AM/PM)で時刻を表示する"
 
-#: applets/clockmail/properties.c:305
-msgid "Display time relative to GMT (Greenwich Mean Time):"
-msgstr "GMT(グリニッジ標準時)からの相対時刻を表示する"
-
-#: applets/clockmail/properties.c:319
-msgid "Mail"
-msgstr "メール"
-
-#: applets/clockmail/properties.c:328
-msgid "Blink when any mail is waiting. (Not just when mail arrives)"
-msgstr "(メールが到着したときだけでなく)メールが待ちになっていたら点滅する。"
-
-#: applets/clockmail/properties.c:339
-msgid "Mail file:"
-msgstr "メールファイル:"
-
-#: applets/clockmail/properties.c:356
-msgid "When new mail is received run:"
-msgstr "新しいメールが届いたときに実行するもの:"
-
-#: applets/clockmail/properties.c:375
-msgid "Amount of mail to consider mailbox full (Kbytes):"
-msgstr "メールボックスがいっぱいと見なすときのメールの量(キロバイト)"
+#. show ampm toggle button
+#: applets/asclock/dialogs.c:292
+msgid "Blinking elements in clock"
+msgstr ""
 
 #. -- not implemented yet --
 #.
@@ -329,14 +143,288 @@ msgstr "メールボックスがいっぱいと見なすときのメールの量(キロバイト)"
 #.
 #.
 #. ---
+#: applets/asclock/dialogs.c:331 applets/battery/properties.c:76
 #: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
 #: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:919
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:933
 #: panel/panel_config_global.c:310
 msgid "General"
 msgstr "一般"
+
+#: applets/asclock/dialogs.c:336
+msgid "Timezone"
+msgstr "タイムゾーン"
+
+#: applets/battery/battery.c:122
+msgid ""
+"Error querying battery charge.  Make sure that your kernel was built with "
+"APM support."
+msgstr ""
+
+#: applets/battery/battery.c:141
+msgid "The battery is low."
+msgstr ""
+
+#: applets/battery/battery.c:156
+msgid "The battery is fully charged."
+msgstr ""
+
+#: applets/battery/battery.c:558
+msgid "Internal error: invalid mode in battery_set_mode"
+msgstr "内部エラー: battery_set_modeのモードが不正です"
+
+#: applets/battery/battery.c:641 applets/gen_util/clock.c:273
+#: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
+#: applets/netload/netload.c:321
+msgid "Can't create applet!\n"
+msgstr "アプレットが生成できませんでした\n"
+
+#: applets/battery/battery.c:770 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:491
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
+#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1485
+#: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2465
+msgid "About..."
+msgstr "情報..."
+
+#: applets/battery/battery.c:837
+#, fuzzy
+msgid "The GNOME Battery Monitor Applet"
+msgstr "GNOME KBアプレット"
+
+#: applets/battery/battery.c:838
+msgid " (C) 1997-1998 The Free Software Foundation"
+msgstr ""
+
+#: applets/battery/battery.c:840
+msgid ""
+"This applet monitors the charge of your laptop's battery.  Click on it to "
+"change display modes."
+msgstr ""
+
+#: applets/battery/battery.c:975
+msgid "Could not allocate space for graph values"
+msgstr "グラフ値の領域を確保できませんでした"
+
+#: applets/battery/properties.c:67
+msgid "Battery Monitor Settings"
+msgstr "バッテリーモニタの設定"
+
+#. Applet height
+#: applets/battery/properties.c:79
+#, fuzzy
+msgid "Applet Height:"
+msgstr "アプレットの高さ"
+
+#. Applet width
+#: applets/battery/properties.c:90
+#, fuzzy
+msgid "Applet Width:"
+msgstr "アプレットの幅"
+
+#. Update interval
+#: applets/battery/properties.c:102
+#, fuzzy
+msgid "Update Interval (seconds):"
+msgstr "更新間隔(秒)"
+
+#. Low battery value
+#: applets/battery/properties.c:116
+#, fuzzy
+msgid "Low Charge Threshold:"
+msgstr "しきい値"
+
+#. Applet mode label
+#: applets/battery/properties.c:130
+#, fuzzy
+msgid "Applet Mode:"
+msgstr "アプレットのモード"
+
+#: applets/battery/properties.c:131 applets/battery/properties.c:215
+msgid "Graph"
+msgstr "グラフ"
+
+#: applets/battery/properties.c:133 applets/battery/properties.c:159
+msgid "Readout"
+msgstr "読み出し"
+
+#: applets/battery/properties.c:190 applets/battery/properties.c:250
+msgid "AC-On Battery Color:"
+msgstr "電源オン時のバッテリーの色"
+
+#: applets/battery/properties.c:196 applets/battery/properties.c:256
+msgid "AC-Off Battery Color:"
+msgstr "電源オフ時のバッテリーの色"
+
+#: applets/battery/properties.c:202
+#, fuzzy
+msgid "Low Battery Color:"
+msgstr "電源オン時のバッテリーの色"
+
+#: applets/battery/properties.c:262
+#, fuzzy
+msgid "Graph Battery Low Color:"
+msgstr "電源オン時のバッテリーの色"
+
+#: applets/battery/properties.c:268
+#, fuzzy
+msgid "Graph Tick Color:"
+msgstr "グラフの方向:"
+
+#: applets/battery/properties.c:275
+msgid "Graph Direction:"
+msgstr "グラフの方向:"
+
+#: applets/battery/properties.c:278
+msgid "Left to Right"
+msgstr "左から右へ"
+
+#: applets/battery/properties.c:280
+msgid "Right to Left"
+msgstr "右から左へ"
+
+#: applets/battery/properties.c:300
+msgid "Battery Charge Messages"
+msgstr ""
+
+#: applets/battery/properties.c:303
+msgid "Enable Low Battery Warning"
+msgstr ""
+
+#: applets/battery/properties.c:308
+msgid "Warn if the battery charge dips below:"
+msgstr ""
+
+#: applets/battery/properties.c:322
+msgid "Enable Full-Charge Notification"
+msgstr ""
+
+#: applets/battery/read-battery.c:58
+msgid ""
+"Cannot open /proc/apm!  Make sure that you built APM support into your "
+"kernel.\n"
+msgstr ""
+"/proc/apmを開けません! "
+"APMサポートを入れてカーネルを構築しているか確認してください。\n"
+
+#: applets/battery/read-battery.c:91
+#, c-format
+msgid "Could not dup() APM file descriptor: %s\n"
+msgstr ""
+
+#: applets/battery/read-battery.c:162
+msgid "Cannot open /dev/apm; can't get data."
+msgstr "/dev/apmを開けません;データを取得できません"
+
+#: applets/battery/read-battery.c:167
+msgid "ioctl failed on /dev/apm."
+msgstr "/dev/apmにioctlできませんでした。"
+
+#: applets/battery/read-battery.c:178
+msgid "APM is disabled!  Cannot read battery charge information."
+msgstr "APMは使用できません!バッテリー充電情報を取得できません。"
+
+#: applets/cdplayer/cdplayer.c:318
+#, fuzzy
+msgid "Run gtcd..."
+msgstr "gmixを実行..."
+
+#: applets/charpick/charpick.c:203
+msgid "Character Picker"
+msgstr ""
+
+#: applets/charpick/charpick.c:204
+msgid "0.02"
+msgstr ""
+
+#: applets/charpick/charpick.c:205
+msgid "Copyright (C) 1998"
+msgstr ""
+
+#: applets/charpick/charpick.c:207
+msgid ""
+"Gnome Panel applet for selecting strange characters that are not on my "
+"keyboard. Released under GNU General Public Licence."
+msgstr ""
+"私のキーボードでは打てない変わった文字を入力するための Panel "
+"アプレットです。GNUGNU一般公有使用許諾書に基づいてリリースされています。"
+
+#: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
+#, c-format
+msgid "%d.%d.%d"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:52
+msgid "John Ellis <johne@bellatlantic.net>"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:55
+msgid "Clock and Mail Notify Applet"
+msgstr "クロックとメール通知のアプレット"
+
+#: applets/clockmail/clockmail.c:56
+msgid "(C) 1999"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:58
+msgid ""
+"Released under the GNU general public license.\n"
+"Basic digital clock with date in a tooltip. Optional 12/24 time display. "
+"Mail blinking can be for any unread mail, or only briefly when new mail "
+"arrives."
+msgstr ""
+"GNU一般公有使用許諾書に基づいてリリースされています。\n"
+"基本的なデジタル時計を表示します。12時制/24時制をオプションで選択できます。未"
+"読のメイルがある時か、新規メイルが到着した時に点滅させる事ができます。"
+
+#: applets/clockmail/clockmail.c:128
+msgid " (GMT)"
+msgstr ""
+
+#: applets/clockmail/clockmail.c:134
+#, c-format
+msgid " (GMT %+d)"
+msgstr ""
+
+#. add default theme
+#: applets/clockmail/properties.c:134
+msgid "None (default)"
+msgstr "なし(デフォルト)"
+
+#: applets/clockmail/properties.c:286 applets/gen_util/clock.c:502
+#: applets/mini-commander/src/preferences.c:438
+msgid "Clock"
+msgstr "時計"
+
+#: applets/clockmail/properties.c:305
+msgid "Display time relative to GMT (Greenwich Mean Time):"
+msgstr "GMT(グリニッジ標準時)からの相対時刻を表示する"
+
+#: applets/clockmail/properties.c:319
+msgid "Mail"
+msgstr "メール"
+
+#: applets/clockmail/properties.c:328
+msgid "Blink when any mail is waiting. (Not just when mail arrives)"
+msgstr "(メールが到着したときだけでなく)メールが待ちになっていたら点滅する。"
+
+#: applets/clockmail/properties.c:339
+msgid "Mail file:"
+msgstr "メールファイル:"
+
+#: applets/clockmail/properties.c:356
+msgid "When new mail is received run:"
+msgstr "新しいメールが届いたときに実行するもの:"
+
+#: applets/clockmail/properties.c:375
+msgid "Amount of mail to consider mailbox full (Kbytes):"
+msgstr "メールボックスがいっぱいと見なすときのメールの量(キロバイト)"
 
 #: applets/clockmail/properties.c:406
 msgid "Theme file (directory):"
@@ -354,7 +442,7 @@ msgstr "PPPダイアラーアプレット"
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
 msgstr "ファンキーなPPPダイアラーです。今まで考えついた人がいたか!?"
 
-#: applets/dialer/dialer.c:87 panel/menu.c:3279
+#: applets/dialer/dialer.c:87 panel/menu.c:3273
 msgid "Off"
 msgstr "オフ"
 
@@ -374,6 +462,11 @@ msgstr "文字の色"
 msgid "Backgroundcolor"
 msgstr "背景の色"
 
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
+msgid "Applet Height"
+msgstr "アプレットの高さ"
+
 #: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
 #: applets/netload/properties.c:147 panel/swallow.c:246
 msgid "Width"
@@ -387,11 +480,11 @@ msgstr "アップデートの間隔"
 msgid "Diskusage Settings"
 msgstr "ディスク容量の設定"
 
-#: applets/drivemount/drivemount.c:71
+#: applets/drivemount/drivemount.c:77
 msgid "Drive Mount Applet"
 msgstr "ドライブマウントアプレット"
 
-#: applets/drivemount/drivemount.c:74
+#: applets/drivemount/drivemount.c:80
 msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
@@ -399,19 +492,19 @@ msgstr ""
 "GNU一般使用許諾書に基づいてリリースされています。\n"
 "ドライブのマウントとアンマウントをします.."
 
-#: applets/drivemount/drivemount.c:147
+#: applets/drivemount/drivemount.c:153
 msgid " mounted"
 msgstr "マウントされています"
 
-#: applets/drivemount/drivemount.c:152
+#: applets/drivemount/drivemount.c:158
 msgid " not mounted"
 msgstr "マウントされていません"
 
-#: applets/drivemount/drivemount.c:224
+#: applets/drivemount/drivemount.c:230
 msgid "\" reported:\n"
 msgstr "\" のお知らせ:\n"
 
-#: applets/drivemount/drivemount.c:226
+#: applets/drivemount/drivemount.c:232
 msgid ""
 "Drivemount command failed.\n"
 "\""
@@ -419,7 +512,7 @@ msgstr ""
 "ドライブマウントコマンドが失敗しました。\n"
 "\""
 
-#: applets/drivemount/drivemount.c:492
+#: applets/drivemount/drivemount.c:499
 msgid "Eject"
 msgstr "取り出し"
 
@@ -524,9 +617,9 @@ msgstr "GNOMEさかな君の名前"
 msgid "The Animation Filename:"
 msgstr "アニメーションファイルの名前"
 
-#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1072
-#: panel/menu.c:3401 panel/panel-util.c:78 panel/panel-util.c:116
-#: panel/panel-util.c:154 panel/panel_config.c:717 panel/swallow.c:237
+#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1086
+#: panel/menu.c:3395 panel/panel-util.c:78 panel/panel-util.c:116
+#: panel/panel-util.c:154 panel/panel_config.c:740 panel/swallow.c:237
 msgid "Browse"
 msgstr "参照"
 
@@ -579,7 +672,7 @@ msgstr ""
 msgid "About\t"
 msgstr "情報\t"
 
-#: applets/fvwm-pager/fvwm-pager.c:409 gmenu/gmenu.c:114
+#: applets/fvwm-pager/fvwm-pager.c:409
 msgid "Properties"
 msgstr "プロパティ"
 
@@ -762,7 +855,7 @@ msgid "Xmodmap"
 msgstr ""
 
 #: applets/gkb/gkb.c:288 panel/menu.c:1723 panel/menu.c:1767 panel/menu.c:1769
-#: panel/menu.c:3061 panel/menu.c:3414
+#: panel/menu.c:3055 panel/menu.c:3408
 msgid "Menu"
 msgstr "メニュー"
 
@@ -798,86 +891,119 @@ msgstr ""
 msgid "gkb.xpm"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:127
+#: applets/gnome-pager/gnomepager_applet.c:130
 msgid "Desktop Pager Applet"
 msgstr "デスクトップページャ・アプレット"
 
-#: applets/gnome-pager/gnomepager_applet.c:127
+#: applets/gnome-pager/gnomepager_applet.c:130
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:129
+#: applets/gnome-pager/gnomepager_applet.c:132
 msgid "Pager for a GNOME compliant Window Manager"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:203
+#: applets/gnome-pager/gnomepager_applet.c:213
 #, fuzzy
 msgid "Gnome Pager Settings"
 msgstr "FVWMページャの設定"
 
-#: applets/gnome-pager/gnomepager_applet.c:207
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "表示"
-
-#: applets/gnome-pager/gnomepager_applet.c:208
-msgid "Show all tasks on all desktops"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:216
+#: applets/gnome-pager/gnomepager_applet.c:220
 #, fuzzy
-msgid "Show tasks"
-msgstr "日付を表示"
+msgid "Pager"
+msgstr "画像"
 
-#: applets/gnome-pager/gnomepager_applet.c:224
+#: applets/gnome-pager/gnomepager_applet.c:222
 #, fuzzy
 msgid "Show pager"
 msgstr "日付を表示"
 
-#: applets/gnome-pager/gnomepager_applet.c:232
+#: applets/gnome-pager/gnomepager_applet.c:229
 msgid "Use small pagers"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:240
+#: applets/gnome-pager/gnomepager_applet.c:241
 #, fuzzy
-msgid "Show icons in tasks"
-msgstr "トピックの絵を表示"
+msgid "Rows of pagers"
+msgstr "日付を表示"
 
-#: applets/gnome-pager/gnomepager_applet.c:248
+#: applets/gnome-pager/gnomepager_applet.c:259
+msgid "Tasklist"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:261
 #, fuzzy
 msgid "Show task list button"
 msgstr "ボタンを表示"
 
-#: applets/gnome-pager/gnomepager_applet.c:257
+#: applets/gnome-pager/gnomepager_applet.c:268
+#, fuzzy
+msgid "Show task list"
+msgstr "日付を表示"
+
+#: applets/gnome-pager/gnomepager_applet.c:275
+#, fuzzy
+msgid "Show button icons"
+msgstr "ボタンを表示"
+
+#: applets/gnome-pager/gnomepager_applet.c:288
+msgid "Which tasks to show"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:297
+#, fuzzy
+msgid "Show all tasks"
+msgstr "日付を表示"
+
+#: applets/gnome-pager/gnomepager_applet.c:306
+#, fuzzy
+msgid "Show normal tasks only"
+msgstr "日付を表示"
+
+#: applets/gnome-pager/gnomepager_applet.c:313
+#, fuzzy
+msgid "Show minimized tasks only"
+msgstr "トピックの絵を表示"
+
+#: applets/gnome-pager/gnomepager_applet.c:320
+msgid "Show all tasks on all desktops"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:327
+msgid "Show minimized tasks on all desktops"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:334
+#, fuzzy
+msgid "Geometry"
+msgstr "ウィンドウの位置"
+
+#: applets/gnome-pager/gnomepager_applet.c:343
 msgid "Tasklist always maximum size"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:270
+#: applets/gnome-pager/gnomepager_applet.c:354
 msgid "Maximum width of horizontal task list"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:286
+#: applets/gnome-pager/gnomepager_applet.c:368
 msgid "Maximum width of vertical task list"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:300
+#: applets/gnome-pager/gnomepager_applet.c:380
 msgid "Number of rows of horizontal tasks"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:314
+#: applets/gnome-pager/gnomepager_applet.c:392
 msgid "Number of vertical columns of tasks"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:328
-msgid "Number rows of pagers"
-msgstr ""
-
-#: applets/gnome-pager/gnomepager_applet.c:1338
+#: applets/gnome-pager/gnomepager_applet.c:1409
 #, fuzzy
 msgid "Gnome Pager Error"
 msgstr "Gnomeヘルプブラウザ"
 
-#: applets/gnome-pager/gnomepager_applet.c:1339
+#: applets/gnome-pager/gnomepager_applet.c:1410
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -889,28 +1015,28 @@ msgstr ""
 #. XXX: a hackish way to bind events on these buttons so that
 #. we will recieve the right click and such events over them to
 #. display menus and allow dragging over them
-#: applets/gnome-pager/gnomepager_applet.c:1393
+#: applets/gnome-pager/gnomepager_applet.c:1464
 msgid "?"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:1879
+#: applets/gnome-pager/gnomepager_applet.c:1953
 msgid "Sticky"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:2323
+#: applets/gnome-pager/gnomepager_applet.c:2400
 #, fuzzy
 msgid "Show / Hide"
 msgstr "日付を表示"
 
-#: applets/gnome-pager/gnomepager_applet.c:2329
+#: applets/gnome-pager/gnomepager_applet.c:2406
 msgid "Shade / Unshade"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:2335 panel/launcher.c:44
+#: applets/gnome-pager/gnomepager_applet.c:2412 panel/launcher.c:44
 msgid "Close"
 msgstr "閉じる"
 
-#: applets/gnome-pager/gnomepager_applet.c:2341
+#: applets/gnome-pager/gnomepager_applet.c:2418
 msgid "Nuke"
 msgstr ""
 
@@ -1004,7 +1130,7 @@ msgid "History"
 msgstr "履歴"
 
 #: applets/mini-commander/src/mini-commander_applet.c:252
-#: gsm/session-properties.c:145 help-browser/window.c:207
+#: gsm/session-properties.c:170 help-browser/window.c:207
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -1076,7 +1202,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1117
+#: applets/multiload/load-graph.c:193 gnome-terminal/gnome-terminal.c:1131
 msgid "Colors"
 msgstr "カラー"
 
@@ -1335,7 +1461,7 @@ msgstr "(以上の設定は再読み込みするまで有効になりません)"
 msgid "Open new window"
 msgstr "ウインドウを新規に開く"
 
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1164
+#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1178
 msgid "Scrolling"
 msgstr "スクロール"
 
@@ -1359,6 +1485,10 @@ msgstr "折り返し行の表示速度:"
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "各行のスクロール速度(滑らかスクロール):"
 
+#: applets/slashapp/properties.c:422
+msgid "Display"
+msgstr "表示"
+
 #: applets/slashapp/slashapp.c:152
 msgid "No articles"
 msgstr "記事なし"
@@ -1367,12 +1497,12 @@ msgstr "記事なし"
 msgid "Slashapp article list"
 msgstr "Slashapp 記事一覧"
 
-#: applets/slashapp/slashapp.c:255 gmenu/utils.c:91
+#: applets/slashapp/slashapp.c:255 gmenu/utils.c:28
 #, c-format
 msgid "creating user directory: %s\n"
 msgstr "ユーザディレクトリの作成中: %s\n"
 
-#: applets/slashapp/slashapp.c:258 gmenu/utils.c:94
+#: applets/slashapp/slashapp.c:258 gmenu/utils.c:31
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "ユーザディレクトリを作成できませんでした: %s\n"
@@ -1462,30 +1592,209 @@ msgstr "\"新しいウィンドウで開く\"オプションの表示"
 msgid "Look"
 msgstr "外観"
 
-#: gmenu/desktop.c:80 gmenu/desktop.c:96
+#: gmenu/desktop.c:80
+msgid " Folder"
+msgstr " フォルダ"
+
+#: gmenu/edit.c:298
+msgid "Save"
+msgstr "保存"
+
+#: gmenu/edit.c:315 gsm/session-properties.c:161
+msgid "Revert"
+msgstr "戻す"
+
+#: gmenu/edit.c:352 panel/menu.c:2118 panel/menu.c:2121 panel/menu.c:2849
+#: panel/menu.c:2890 panel/menu.c:2893
 #, fuzzy
-msgid "Submenu: "
-msgstr "作成するフォルダ:"
+msgid "User menus"
+msgstr "ユーザメニュー"
 
-#: gmenu/desktop.c:194
-#, c-format
-msgid "Unable to create file: %s\n"
-msgstr "ファイルを作成できませんでした: %s\n"
+#: gmenu/edit.c:356 panel/menu.c:2036 panel/menu.c:2040 panel/menu.c:2110
+#: panel/menu.c:2876
+#, fuzzy
+msgid "System menus"
+msgstr "システムメニュー"
 
-#: gmenu/desktop.c:213
-#, c-format
-msgid "unable to remove .order file: %s\n"
-msgstr ".orderファイルを削除できませんでした: %s\n"
+#: gmenu/main.c:51 gmenu/main.c:128
+msgid "_New Submenu..."
+msgstr ""
 
-#: gmenu/dialogs.c:38
-msgid "File exists."
-msgstr "ファイルが存在します。"
+#: gmenu/main.c:52 gmenu/main.c:98 gmenu/main.c:129
+#, fuzzy
+msgid "Create a new submenu"
+msgstr "新規フォルダを作成します"
 
-#: gmenu/dialogs.c:46
-msgid "Failed to create file."
-msgstr "ファイルを作成できませんでした。"
+#: gmenu/main.c:55 gmenu/main.c:125
+#, fuzzy
+msgid "New _Item..."
+msgstr "新規フォルダ(_F)..."
 
-#: gmenu/dialogs.c:142 gmenu/dialogs.c:179
+#: gmenu/main.c:56 gmenu/main.c:126
+#, fuzzy
+msgid "Create a new menu item"
+msgstr "新規フォルダを作成します"
+
+#: gmenu/main.c:59 gmenu/main.c:134
+msgid "_Delete..."
+msgstr "削除(_D)..."
+
+#: gmenu/main.c:70
+#, fuzzy
+msgid "_Sort Submenu"
+msgstr "メニューバーを表示(_S)"
+
+#: gmenu/main.c:74
+#, fuzzy
+msgid "Sort Submenu _Recursive"
+msgstr "フォルダの逆順ソート(_R)"
+
+#: gmenu/main.c:87
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: gmenu/main.c:89 gmenu/main.c:149
+msgid "_Sort"
+msgstr "ソート(_S)"
+
+#: gmenu/main.c:91
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: gmenu/main.c:98
+msgid "New Submenu"
+msgstr ""
+
+#: gmenu/main.c:102
+msgid "New Item"
+msgstr ""
+
+#: gmenu/main.c:102
+#, fuzzy
+msgid "Create a new item"
+msgstr "新規フォルダを作成します"
+
+#: gmenu/main.c:106
+msgid "Delete"
+msgstr "削除"
+
+#: gmenu/main.c:106
+msgid "Delete selected menu item"
+msgstr "選択したメニューアイテムを削除します"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move up"
+msgstr "上移動"
+
+#: gmenu/main.c:110 gmenu/main.c:140
+msgid "Move selected menu up"
+msgstr "選択したメニューを上に移動します"
+
+#: gmenu/main.c:113 gmenu/main.c:143
+msgid "Move down"
+msgstr "下移動"
+
+#: gmenu/main.c:113 gmenu/main.c:143
+msgid "Move selected menu down"
+msgstr "選択したメニューを下に移動します"
+
+#: gmenu/main.c:117
+#, fuzzy
+msgid "Sort Submenu"
+msgstr "ノーマルメニュー"
+
+#: gmenu/main.c:117
+#, fuzzy
+msgid "Sort selected submenu"
+msgstr "選択したフォルダをソートします"
+
+#: gmenu/main.c:153
+#, fuzzy
+msgid "Sort _Recursive"
+msgstr "フォルダの逆順ソート(_R)"
+
+#. loading dialog
+#: gmenu/main.c:239 gmenu/main.c:285 gmenu/tree.c:389
+msgid "GNOME menu editor"
+msgstr "GNOMEメニューエディタ"
+
+#: gmenu/main.c:242
+msgid ""
+"Released under the terms of the GNU Public License.\n"
+"GNOME menu editor."
+msgstr ""
+"GNU一般使用許諾書に基づいてリリースされています。\n"
+"GNOMEメニューエディタです。"
+
+#: gmenu/save.c:27 gmenu/save.c:85
+#, fuzzy
+msgid "The menu item must have a name"
+msgstr "メニュー項目にアイコンを表示する"
+
+#: gmenu/save.c:33
+msgid "The menu entry must have a filename"
+msgstr ""
+
+#: gmenu/save.c:40
+#, fuzzy
+msgid "Save changes?"
+msgstr "変更を保存しますか?"
+
+#: gmenu/save.c:54
+msgid "This change conflicts with an existing menu item"
+msgstr ""
+
+#: gmenu/save.c:61
+#, fuzzy
+msgid "Overwrite existing menu entry?"
+msgstr "すでにあるファイルに上書きしますか?"
+
+#: gmenu/save.c:111
+msgid ""
+"This change conflicts with an existing menu item.\n"
+"No two menu items in a submenu can have the same name."
+msgstr ""
+
+#: gmenu/tree.c:391
+msgid "One moment, reading menus..."
+msgstr "お待ちください、メニューを読み込んでいます..."
+
+#: gmenu/tree.c:410
+msgid "User Menus"
+msgstr "ユーザメニュー"
+
+#: gmenu/tree.c:411
+msgid "Top of user menus"
+msgstr "ユーザメニューのトップ"
+
+#: gmenu/tree.c:418
+msgid "System Menus"
+msgstr "システムメニュー"
+
+#: gmenu/tree.c:419
+msgid "Top of system menus"
+msgstr "システムメニューのトップ"
+
+#: gmenu/treedel.c:116
+#, fuzzy
+msgid "You can not delete a top level submenu."
+msgstr "トップレベルフォルダは削除できません!"
+
+#: gmenu/treedel.c:128 gmenu/treedel.c:151
+#, fuzzy
+msgid "Delete this menu item?"
+msgstr "選択したメニューアイテムを削除します"
+
+#: gmenu/treedel.c:138
+#, fuzzy
+msgid "Delete empty submenu?"
+msgstr "空のフォルダを削除しますか?"
+
+#: gmenu/treedel.c:144
+msgid "Are you sure you want to delete this submenu and all its contents?"
+msgstr ""
+
+#: gmenu/treenew.c:35 gmenu/treenew.c:110
 #, fuzzy
 msgid ""
 "You can't add an entry to that submenu.\n"
@@ -1494,240 +1803,38 @@ msgstr ""
 "フォルダにエントリを追加できません!\n"
 "あなたには権限がありません。"
 
-#: gmenu/dialogs.c:148 gmenu/gmenu.c:97
-msgid "New Submenu"
+#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
+msgid "New Folder"
+msgstr "新規フォルダ"
+
+#: gmenu/treenew.c:63
+#, fuzzy
+msgid "Failed to create directory"
+msgstr "ファイルを作成できませんでした。"
+
+#: gmenu/treenew.c:118 gmenu/treenew.c:127
+msgid "untitled.desktop"
 msgstr ""
 
-#: gmenu/dialogs.c:150
+#: gmenu/treenew.c:137 gmenu/treenew.c:144
 #, fuzzy
-msgid "Create Submenu:"
-msgstr "作成するフォルダ:"
+msgid "untitled"
+msgstr "マウントされています"
 
-#: gmenu/dialogs.c:233
-msgid "You must select something first."
-msgstr "まず何かを選択してください!"
-
-#: gmenu/dialogs.c:239
-#, fuzzy
-msgid "You can not delete a top level submenu."
-msgstr "トップレベルフォルダは削除できません!"
-
-#: gmenu/dialogs.c:247
-msgid ""
-"You can't delete that file.\n"
-"You do not have the proper permissions."
-msgstr ""
-"ファイルを削除できません!\n"
-"あなたには権限がありません。"
-
-#: gmenu/dialogs.c:253 gmenu/dialogs.c:273
-#, fuzzy
-msgid "Delete this menu item?"
-msgstr "選択したメニューアイテムを削除します"
-
-#: gmenu/dialogs.c:262
-#, fuzzy
-msgid "Delete empty submenu?"
-msgstr "空のフォルダを削除しますか?"
-
-#: gmenu/dialogs.c:267
-msgid "Are you sure you want to delete this submenu and all its contents?"
-msgstr ""
-
-#: gmenu/dialogs.c:368
-msgid ""
-"This change conflicts with an existing menu item.\n"
-"No two menu items in a submenu can have the same name."
-msgstr ""
-
-#: gmenu/dnd.c:175
-#, fuzzy
-msgid ""
-"You are not allowed to move that item there.\n"
-"You do not have the proper permissions."
-msgstr ""
-"ファイルを削除できません!\n"
-"あなたには権限がありません。"
-
-#: gmenu/edit.c:214
-msgid "Save"
-msgstr "保存"
-
-#: gmenu/edit.c:231 gsm/session-properties.c:136
-msgid "Revert"
-msgstr "戻す"
-
-#: gmenu/edit.c:249
-msgid "New"
-msgstr "新規"
-
-#: gmenu/gmenu.c:52
-msgid "_New Submenu..."
-msgstr ""
-
-#: gmenu/gmenu.c:53 gmenu/gmenu.c:97
-#, fuzzy
-msgid "Create a new submenu"
-msgstr "新規フォルダを作成します"
-
-#: gmenu/gmenu.c:56
-#, fuzzy
-msgid "New _Item..."
-msgstr "新規フォルダ(_F)..."
-
-#: gmenu/gmenu.c:57
-#, fuzzy
-msgid "Create a new menu item"
-msgstr "新規フォルダを作成します"
-
-#: gmenu/gmenu.c:60
-msgid "_Delete..."
-msgstr "削除(_D)..."
-
-#: gmenu/gmenu.c:71
-#, fuzzy
-msgid "_Sort Submenu"
-msgstr "メニューバーを表示(_S)"
-
-#: gmenu/gmenu.c:74
-#, fuzzy
-msgid "Sort Submenu _Recursive"
-msgstr "フォルダの逆順ソート(_R)"
-
-#: gmenu/gmenu.c:86
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: gmenu/gmenu.c:88
-msgid "_Sort"
-msgstr "ソート(_S)"
-
-#: gmenu/gmenu.c:90
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: gmenu/gmenu.c:100
-msgid "New Item"
-msgstr ""
-
-#: gmenu/gmenu.c:100
-#, fuzzy
-msgid "Create a new item"
-msgstr "新規フォルダを作成します"
-
-#: gmenu/gmenu.c:104
-msgid "Delete"
-msgstr "削除"
-
-#: gmenu/gmenu.c:104
-msgid "Delete selected menu item"
-msgstr "選択したメニューアイテムを削除します"
-
-#: gmenu/gmenu.c:107
-msgid "Move up"
-msgstr "上移動"
-
-#: gmenu/gmenu.c:107
-msgid "Move selected menu up"
-msgstr "選択したメニューを上に移動します"
-
-#: gmenu/gmenu.c:109
-msgid "Move down"
-msgstr "下移動"
-
-#: gmenu/gmenu.c:109
-msgid "Move selected menu down"
-msgstr "選択したメニューを下に移動します"
-
-#: gmenu/gmenu.c:114
-msgid "Edit selected menu item properties"
-msgstr "選択したメニューアイテムのプロパティを編集します"
-
-#: gmenu/gmenu.c:119
-#, fuzzy
-msgid "Sort Submenu"
-msgstr "ノーマルメニュー"
-
-#: gmenu/gmenu.c:119
-#, fuzzy
-msgid "Sort selected submenu"
-msgstr "選択したフォルダをソートします"
-
-#: gmenu/gmenu.c:151 gmenu/gmenu.c:236 gmenu/gmenu.c:308 gmenu/tree.c:387
-msgid "GNOME menu editor"
-msgstr "GNOMEメニューエディタ"
-
-#: gmenu/gmenu.c:311
-msgid ""
-"Released under the terms of the GNU Public License.\n"
-"GNOME menu editor."
-msgstr ""
-"GNU一般使用許諾書に基づいてリリースされています。\n"
-"GNOMEメニューエディタです。"
-
-#: gmenu/save.c:52
-#, fuzzy
-msgid "The menu item must have a name"
-msgstr "メニュー項目にアイコンを表示する"
-
-#: gmenu/save.c:58
-msgid "The menu entry must have a filename"
-msgstr ""
-
-#: gmenu/save.c:66
-#, fuzzy
-msgid "Save changes?"
-msgstr "変更を保存しますか?"
-
-#: gmenu/save.c:83
-msgid "This change conflicts with an existing menu item"
-msgstr ""
-
-#: gmenu/save.c:89
-#, fuzzy
-msgid "Overwrite existing menu entry?"
-msgstr "すでにあるファイルに上書きしますか?"
-
-#: gmenu/tree.c:389
-msgid "One moment, reading menus..."
-msgstr "お待ちください、メニューを読み込んでいます..."
-
-#: gmenu/tree.c:418
-msgid "GNOME"
-msgstr ""
-
-#. system's menu tree
-#: gmenu/tree.c:427
-msgid "System Menus"
-msgstr "システムメニュー"
-
-#: gmenu/tree.c:437
-msgid "Top of system menus"
-msgstr "システムメニューのトップ"
-
-#. user's menu tree
-#: gmenu/tree.c:445
-msgid "User Menus"
-msgstr "ユーザメニュー"
-
-#: gmenu/tree.c:455
-msgid "Top of user menus"
-msgstr "ユーザメニューのトップ"
-
-#: gnome-terminal/gnome-terminal.c:147
+#: gnome-terminal/gnome-terminal.c:161
 msgid "GNOME Terminal"
 msgstr "GNOMEターミナル"
 
-#: gnome-terminal/gnome-terminal.c:150
+#: gnome-terminal/gnome-terminal.c:164
 msgid "The GNOME terminal emulation program."
 msgstr "GNOMEターミナルエミュレーションプログラムです。"
 
-#: gnome-terminal/gnome-terminal.c:447 gnome-terminal/gnome-terminal.c:958
-#: gnome-terminal/gnome-terminal.c:968 gnome-terminal/gnome-terminal.c:1804
+#: gnome-terminal/gnome-terminal.c:461 gnome-terminal/gnome-terminal.c:972
+#: gnome-terminal/gnome-terminal.c:982 gnome-terminal/gnome-terminal.c:1850
 msgid "Default"
 msgstr "デフォルト"
 
-#: gnome-terminal/gnome-terminal.c:618
+#: gnome-terminal/gnome-terminal.c:632
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1737,306 +1844,347 @@ msgstr ""
 "デフォルトの設定にあうように、このウィンドウを\n"
 "設定しなおしますか?"
 
-#: gnome-terminal/gnome-terminal.c:781
+#: gnome-terminal/gnome-terminal.c:795
 msgid "Linux console"
 msgstr "Linuxコンソール"
 
-#: gnome-terminal/gnome-terminal.c:782
+#: gnome-terminal/gnome-terminal.c:796
 msgid "Color Xterm"
 msgstr "カラーXterm"
 
-#: gnome-terminal/gnome-terminal.c:783
+#: gnome-terminal/gnome-terminal.c:797
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:788
+#: gnome-terminal/gnome-terminal.c:802
 msgid "White on black"
 msgstr "黒地に白文字"
 
-#: gnome-terminal/gnome-terminal.c:789
+#: gnome-terminal/gnome-terminal.c:803
 msgid "Black on white"
 msgstr "白地に黒文字"
 
-#: gnome-terminal/gnome-terminal.c:790
+#: gnome-terminal/gnome-terminal.c:804
 msgid "Green on black"
 msgstr "黒地に緑文字"
 
-#: gnome-terminal/gnome-terminal.c:791
+#: gnome-terminal/gnome-terminal.c:805
 msgid "Black on light yellow"
 msgstr "明るい黄色に黒文字"
 
-#: gnome-terminal/gnome-terminal.c:792
+#: gnome-terminal/gnome-terminal.c:806
 msgid "Custom colors"
 msgstr "カスタムカラー"
 
-#: gnome-terminal/gnome-terminal.c:797 panel/panel_config.c:315
+#: gnome-terminal/gnome-terminal.c:811 panel/panel_config.c:317
 msgid "Left"
 msgstr "左"
 
-#: gnome-terminal/gnome-terminal.c:798 panel/panel_config.c:326
+#: gnome-terminal/gnome-terminal.c:812 panel/panel_config.c:328
 msgid "Right"
 msgstr "右"
 
-#: gnome-terminal/gnome-terminal.c:799
+#: gnome-terminal/gnome-terminal.c:813
 msgid "Hidden"
 msgstr "隠す"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:922
+#: gnome-terminal/gnome-terminal.c:936
 msgid "Font:"
 msgstr "フォント:"
 
-#: gnome-terminal/gnome-terminal.c:942
+#: gnome-terminal/gnome-terminal.c:956
 msgid "Browse..."
 msgstr "参照..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:950
+#: gnome-terminal/gnome-terminal.c:964
 msgid "Terminal Class"
 msgstr "ターミナルクラス"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:978
+#: gnome-terminal/gnome-terminal.c:992
 msgid "Blinking cursor"
 msgstr "カーソルの点滅"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:987
+#: gnome-terminal/gnome-terminal.c:1001
 msgid "Hide menu bar"
 msgstr "メニューバーを隠す"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:996
+#: gnome-terminal/gnome-terminal.c:1010
 msgid "Silence Terminal bell"
 msgstr "ターミナルベルを鳴らさない"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:1005
+#: gnome-terminal/gnome-terminal.c:1019
 msgid "Swap DEL/Backspace"
 msgstr "DEL/Backspaceを入れ換え"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:1014
+#: gnome-terminal/gnome-terminal.c:1028
 msgid "Select-by-word characters"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1032
+#: gnome-terminal/gnome-terminal.c:1046
 msgid "Image"
 msgstr "画像"
 
-#: gnome-terminal/gnome-terminal.c:1034
+#: gnome-terminal/gnome-terminal.c:1048
 #, fuzzy
 msgid "Background type"
 msgstr " 背景"
 
-#: gnome-terminal/gnome-terminal.c:1044
+#: gnome-terminal/gnome-terminal.c:1058
 #, fuzzy
 msgid "None"
 msgstr "なし"
 
-#: gnome-terminal/gnome-terminal.c:1052
+#: gnome-terminal/gnome-terminal.c:1066
 msgid "Background pixmap"
 msgstr "背景画像"
 
-#: gnome-terminal/gnome-terminal.c:1069
+#: gnome-terminal/gnome-terminal.c:1083
 msgid "Pixmap file:"
 msgstr "画像ファイル:"
 
-#: gnome-terminal/gnome-terminal.c:1085
+#: gnome-terminal/gnome-terminal.c:1099
 msgid "Transparent"
 msgstr "透明"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1104
+#: gnome-terminal/gnome-terminal.c:1118
 msgid "Background should be shaded (slow)"
 msgstr "背景を暗くする(遅い)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1120
+#: gnome-terminal/gnome-terminal.c:1134
 msgid "Color palette:"
 msgstr "カラーパレット:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1130
+#: gnome-terminal/gnome-terminal.c:1144
 msgid "Foreground color:"
 msgstr "文字色"
 
-#: gnome-terminal/gnome-terminal.c:1139
+#: gnome-terminal/gnome-terminal.c:1153
 msgid "Background color:"
 msgstr "背景色:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1151
+#: gnome-terminal/gnome-terminal.c:1165
 msgid "Colors:"
 msgstr "カラー:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1167
+#: gnome-terminal/gnome-terminal.c:1181
 msgid "Scrollbar position"
 msgstr "スクロールバーの位置"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1178
+#: gnome-terminal/gnome-terminal.c:1192
 msgid "Scrollback lines"
 msgstr "スクロールバックのライン"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1190
+#: gnome-terminal/gnome-terminal.c:1204
 msgid "Scroll on keystroke"
 msgstr "キーストロークでスクロール"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1199
+#: gnome-terminal/gnome-terminal.c:1213
 msgid "Scroll on output"
 msgstr "出力量でスクロール"
 
-#: gnome-terminal/gnome-terminal.c:1234
+#: gnome-terminal/gnome-terminal.c:1248
 msgid "Color selector"
 msgstr "カラーの選択"
 
-#: gnome-terminal/gnome-terminal.c:1283 gnome-terminal/gnome-terminal.c:1293
-#: gnome-terminal/gnome-terminal.c:1300
+#: gnome-terminal/gnome-terminal.c:1312 gnome-terminal/gnome-terminal.c:1322
+#: gnome-terminal/gnome-terminal.c:1333
 #, fuzzy
 msgid "_New terminal"
 msgstr "GNOMEターミナル"
 
-#: gnome-terminal/gnome-terminal.c:1283 gnome-terminal/gnome-terminal.c:1293
-#: gnome-terminal/gnome-terminal.c:1300
+#: gnome-terminal/gnome-terminal.c:1312 gnome-terminal/gnome-terminal.c:1322
+#: gnome-terminal/gnome-terminal.c:1333
 #, fuzzy
 msgid "Creates a new terminal window"
 msgstr "新規フォルダを作成します"
 
-#: gnome-terminal/gnome-terminal.c:1285 gnome-terminal/gnome-terminal.c:1295
+#: gnome-terminal/gnome-terminal.c:1314 gnome-terminal/gnome-terminal.c:1324
 msgid "_Hide menubar"
 msgstr "メニューバーを隠す(_H)"
 
-#: gnome-terminal/gnome-terminal.c:1287
+#: gnome-terminal/gnome-terminal.c:1316
 #, fuzzy
 msgid "_Close terminal"
 msgstr "カラーXterm"
 
-#: gnome-terminal/gnome-terminal.c:1302
+#: gnome-terminal/gnome-terminal.c:1326 gnome-terminal/gnome-terminal.c:1337
+#: gnome-terminal/gnome-terminal.c:1357
+#, fuzzy
+msgid "_Reset Terminal"
+msgstr "カラーXterm"
+
+#: gnome-terminal/gnome-terminal.c:1327 gnome-terminal/gnome-terminal.c:1338
+#: gnome-terminal/gnome-terminal.c:1358
+msgid "Reset and _Clear"
+msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1335
 msgid "_Show menubar"
 msgstr "メニューバーを表示(_S)"
 
-#: gnome-terminal/gnome-terminal.c:1319
+#: gnome-terminal/gnome-terminal.c:1360
 #, fuzzy
 msgid "C_olor selector..."
 msgstr "カラーの選択"
 
-#: gnome-terminal/gnome-terminal.c:1942
+#: gnome-terminal/gnome-terminal.c:1988
 msgid "Terminal class name"
 msgstr "ターミナルのクラス名称"
 
-#: gnome-terminal/gnome-terminal.c:1942
-msgid "CLASS"
+#: gnome-terminal/gnome-terminal.c:1988
+#, fuzzy
+msgid "TCLASS"
 msgstr "クラス"
 
-#: gnome-terminal/gnome-terminal.c:1945
+#: gnome-terminal/gnome-terminal.c:1991
 msgid "Specifies font name"
 msgstr "フォント名称を指定します"
 
-#: gnome-terminal/gnome-terminal.c:1945
+#: gnome-terminal/gnome-terminal.c:1991
 msgid "FONT"
 msgstr "フォント"
 
-#: gnome-terminal/gnome-terminal.c:1948
+#: gnome-terminal/gnome-terminal.c:1994
 msgid "Do not start up shells as logins shells"
 msgstr "起動シェルをログインシェルにしない"
 
-#: gnome-terminal/gnome-terminal.c:1951
+#: gnome-terminal/gnome-terminal.c:1997
 msgid "Start up shells as logins shells"
 msgstr "起動シェルをログインシェルにする"
 
-#: gnome-terminal/gnome-terminal.c:1954
+#: gnome-terminal/gnome-terminal.c:2000
 msgid "Specifies the geometry for the main window"
 msgstr "メインウィンドウの位置を指定します"
 
-#: gnome-terminal/gnome-terminal.c:1954
+#: gnome-terminal/gnome-terminal.c:2000
 msgid "GEOMETRY"
 msgstr "位置"
 
-#: gnome-terminal/gnome-terminal.c:1957
+#: gnome-terminal/gnome-terminal.c:2003
 msgid "Execute this program instead of a shell"
 msgstr "シェルの代わりにこのプログラムを実行します"
 
-#: gnome-terminal/gnome-terminal.c:1957
+#: gnome-terminal/gnome-terminal.c:2003
 msgid "COMMAND"
 msgstr "コマンド"
 
-#: gnome-terminal/gnome-terminal.c:1960
+#: gnome-terminal/gnome-terminal.c:2006
 msgid "Foreground color"
 msgstr "文字色"
 
-#: gnome-terminal/gnome-terminal.c:1960 gnome-terminal/gnome-terminal.c:1963
+#: gnome-terminal/gnome-terminal.c:2006 gnome-terminal/gnome-terminal.c:2009
 msgid "COLOR"
 msgstr "カラー"
 
-#: gnome-terminal/gnome-terminal.c:1963 panel/panel_config.c:740
+#: gnome-terminal/gnome-terminal.c:2009 panel/panel_config.c:763
 msgid "Background color"
 msgstr "背景色"
 
-#: gnome-terminal/gnome-terminal.c:1966
+#: gnome-terminal/gnome-terminal.c:2012
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "utmp/wtmpエントリを更新する"
 
-#: gnome-terminal/gnome-terminal.c:1966
+#: gnome-terminal/gnome-terminal.c:2012
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1969
+#: gnome-terminal/gnome-terminal.c:2015
 #, fuzzy
 msgid "Do not update utmp entry"
 msgstr "utmp/wtmpエントリを更新しない"
 
-#: gnome-terminal/gnome-terminal.c:1969
+#: gnome-terminal/gnome-terminal.c:2015
 msgid "NOUTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1972
+#: gnome-terminal/gnome-terminal.c:2018
 #, fuzzy
 msgid "Update wtmp entry"
 msgstr "utmp/wtmpエントリを更新する"
 
-#: gnome-terminal/gnome-terminal.c:1972
+#: gnome-terminal/gnome-terminal.c:2018
 msgid "WTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1975
+#: gnome-terminal/gnome-terminal.c:2021
 #, fuzzy
 msgid "Do not update wtmp entry"
 msgstr "utmp/wtmpエントリを更新しない"
 
-#: gnome-terminal/gnome-terminal.c:1975
+#: gnome-terminal/gnome-terminal.c:2021
 msgid "NOWTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1978
+#: gnome-terminal/gnome-terminal.c:2024
 msgid "Set the window title"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1978
+#: gnome-terminal/gnome-terminal.c:2024
 msgid "TITLE"
 msgstr ""
 
-#: gsm/main.c:44
+#: gsm/main.c:56
+msgid "Start chooser and pick the session"
+msgstr ""
+
+#: gsm/main.c:57
+msgid "Disable normal operation by saving into the Trash session"
+msgstr ""
+
+#: gsm/main.c:58
+msgid "Only read saved sessions from the default.session file"
+msgstr ""
+
+#: gsm/main.c:59
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/main.c:45
+#: gsm/main.c:60
+msgid "Millisecond period spent waiting for clients to respond (0=forever)"
+msgstr ""
+
+#: gsm/main.c:61
 msgid "Millisecond period spent waiting for clients to die (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:358
+#: gsm/manager.c:374
 msgid "Wait abandoned due to conflict."
 msgstr ""
 
-#: gsm/manager.c:1094
+#: gsm/manager.c:816
+#, c-format
+msgid "No response to the %s command."
+msgstr ""
+
+#: gsm/manager.c:817
+msgid "The program may be slow, stopped or broken."
+msgstr ""
+
+#: gsm/manager.c:818
+msgid "You may wait for it to respond or remove it."
+msgstr ""
+
+#: gsm/manager.c:1345
 msgid "Respawn abandoned due to failures."
 msgstr ""
 
-#: gsm/manager.c:1260
+#: gsm/manager.c:1513
 msgid "A session shutdown is in progress."
 msgstr ""
 
@@ -2048,23 +2196,52 @@ msgstr "セッションの強制終了"
 msgid "save-session: couldn't connect to session manager\n"
 msgstr "save-ssession: セッションマネージャに接続できませんでした。\n"
 
-#: gsm/session-properties.c:102
+#: gsm/session-properties.c:125
 msgid "Program:"
 msgstr ""
 
 #. buttons
-#: gsm/session-properties.c:133
+#: gsm/session-properties.c:158
 msgid "Try"
 msgstr ""
 
-#: gsm/session-properties.c:139
+#: gsm/session-properties.c:164
 msgid "OK"
 msgstr ""
 
-#: gsm/session-properties.c:142
+#: gsm/session-properties.c:167
 #, fuzzy
 msgid "Cancel"
 msgstr " キャンセル "
+
+#: gsm/session-properties.c:258
+#, fuzzy
+msgid "Session"
+msgstr "セッションの強制終了"
+
+#. app
+#: gsm/session-properties.c:312
+msgid "Session Chooser"
+msgstr ""
+
+#: gsm/session-properties.c:315
+#, fuzzy
+msgid "Start Session"
+msgstr "セッションを終了する"
+
+#: gsm/session-properties.c:318
+#, fuzzy
+msgid "Cancel Login"
+msgstr " キャンセル "
+
+#: gsm/session-properties.c:344
+#, fuzzy
+msgid "Initialize session settings"
+msgstr "一般設定"
+
+#: gsm/session-properties.c:345
+msgid "Only display warnings."
+msgstr ""
 
 #: help-browser/bookmarks.c:220
 msgid "Bookmark"
@@ -2443,15 +2620,15 @@ msgstr ""
 msgid "Ok"
 msgstr "OK"
 
-#: panel/applet.c:271
+#: panel/applet.c:273
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:298
+#: panel/applet.c:300
 msgid "Remove from panel"
 msgstr "パネルから取り除く"
 
-#: panel/applet.c:305
+#: panel/applet.c:307
 msgid "Move applet"
 msgstr "アプレットの移動"
 
@@ -2483,7 +2660,7 @@ msgstr "隠蔽ボタンを使わない"
 msgid "Enable hidebutton arrow"
 msgstr "矢印ボタンは使わない"
 
-#: panel/drawer.c:160 panel/drawer.c:238
+#: panel/drawer.c:160 panel/drawer.c:242
 msgid "Drawer"
 msgstr "引出し"
 
@@ -2491,23 +2668,23 @@ msgstr "引出し"
 msgid "This launch icon does not specify a program to run"
 msgstr ""
 
-#: panel/launcher.c:146
+#: panel/launcher.c:171
 msgid "App"
 msgstr "アプリ"
 
-#: panel/launcher.c:232
+#: panel/launcher.c:272
 msgid "Launcher properties"
 msgstr "ランチャのプロパティ"
 
-#: panel/launcher.c:317
+#: panel/launcher.c:357
 msgid "Create launcher applet"
 msgstr "ランチャアプレットを作成する"
 
-#: panel/logout.c:49 panel/menu.c:2180 panel/menu.c:2480
+#: panel/logout.c:51 panel/menu.c:2183 panel/menu.c:2489
 msgid "Log out"
 msgstr "ログアウト"
 
-#: panel/logout.c:51
+#: panel/logout.c:53
 #, fuzzy
 msgid "Log out of GNOME"
 msgstr "ログアウト"
@@ -2578,271 +2755,253 @@ msgstr "デスクトップエントリからgoad_idを取得できません!"
 msgid " (empty)"
 msgstr ""
 
-#: panel/menu.c:1880
+#: panel/menu.c:1882
 msgid "Applets"
 msgstr "アプレット"
 
-#: panel/menu.c:2007 panel/panel_config.c:866
+#: panel/menu.c:2010 panel/panel_config.c:890
 #, fuzzy
 msgid "Edge panel"
 msgstr "エッジパネル"
 
-#: panel/menu.c:2014 panel/panel_config.c:872
+#: panel/menu.c:2017 panel/panel_config.c:896
 #, fuzzy
 msgid "Corner panel"
 msgstr "コーナーパネル"
 
-#: panel/menu.c:2033 panel/menu.c:2037 panel/menu.c:2107 panel/menu.c:2878
-#, fuzzy
-msgid "System menus"
-msgstr "システムメニュー"
-
-#: panel/menu.c:2080 panel/menu.c:2084 panel/menu.c:2148 panel/menu.c:2933
+#: panel/menu.c:2083 panel/menu.c:2087 panel/menu.c:2151 panel/menu.c:2924
 #, fuzzy
 msgid "Debian menus"
 msgstr "メインメニュー"
 
-#: panel/menu.c:2089
+#: panel/menu.c:2092
 #, fuzzy
 msgid "No Debian menus found!"
 msgstr "記事は見つかりません"
 
-#: panel/menu.c:2115 panel/menu.c:2118 panel/menu.c:2851 panel/menu.c:2892
-#: panel/menu.c:2895
-#, fuzzy
-msgid "User menus"
-msgstr "ユーザメニュー"
+#: panel/menu.c:2130 panel/menu.c:2134 panel/menu.c:2856 panel/menu.c:2905
+#: panel/menu.c:2908
+msgid "AnotherLevel menus"
+msgstr ""
 
-#: panel/menu.c:2127 panel/menu.c:2131 panel/menu.c:2817 panel/menu.c:2858
-#: panel/menu.c:2907 panel/menu.c:2917
-#, fuzzy
-msgid "Red Hat menus"
-msgstr "メインメニューの追加"
-
-#: panel/menu.c:2165
+#: panel/menu.c:2168
 msgid "Remove this panel"
 msgstr "このパネルを削除する"
 
-#: panel/menu.c:2314
+#: panel/menu.c:2323
 msgid "Add applet"
 msgstr "アプレットの追加"
 
-#: panel/menu.c:2323
+#: panel/menu.c:2332
 msgid "Add new panel"
 msgstr "新規パネルの追加"
 
-#: panel/menu.c:2331
+#: panel/menu.c:2340
 #, fuzzy
 msgid "Convert to corner panel"
 msgstr "コーナーパネル"
 
-#: panel/menu.c:2339
+#: panel/menu.c:2348
 #, fuzzy
 msgid "Convert to edge panel"
 msgstr "コーナーパネル"
 
-#: panel/menu.c:2347
+#: panel/menu.c:2356
 msgid "Add main menu"
 msgstr "メインメニューの追加"
 
-#: panel/menu.c:2355
+#: panel/menu.c:2364
 #, fuzzy
 msgid "Add drawer"
 msgstr "引出し"
 
-#: panel/menu.c:2364
+#: panel/menu.c:2373
 msgid "Add log out button"
 msgstr "ログアウトボタンの追加"
 
-#: panel/menu.c:2373
+#: panel/menu.c:2382
 msgid "Add swallowed app"
 msgstr "スワロードアプリの追加"
 
-#: panel/menu.c:2380
+#: panel/menu.c:2389
 msgid "Add new launcher"
 msgstr "新規ランチャの追加"
 
-#: panel/menu.c:2392
+#: panel/menu.c:2401
 msgid "This panel properties..."
 msgstr "このパネルのプロパティ..."
 
-#: panel/menu.c:2402
+#: panel/menu.c:2411
 msgid "Global properties..."
 msgstr "全体のプロパティ..."
 
-#: panel/menu.c:2436
+#: panel/menu.c:2445
 msgid "Panel"
 msgstr "パネル"
 
-#: panel/menu.c:2447
+#: panel/menu.c:2456
 msgid "Lock screen"
 msgstr "スクリーンのロック"
 
-#: panel/menu.c:2468
+#: panel/menu.c:2477
 msgid "About GNOME..."
 msgstr "GNOMEについて..."
 
-#: panel/menu.c:3153
+#: panel/menu.c:3147
 msgid "Can't open directory, using main menu!"
 msgstr ""
 
-#: panel/menu.c:3291
+#: panel/menu.c:3285
 msgid "In a submenu"
 msgstr ""
 
-#: panel/menu.c:3303
+#: panel/menu.c:3297
 #, fuzzy
 msgid "On the main menu"
 msgstr "メインメニューの追加"
 
-#: panel/menu.c:3327
+#: panel/menu.c:3321
 msgid "Menu properties"
 msgstr "メニュープロパティ"
 
-#: panel/menu.c:3334
+#: panel/menu.c:3328
 #, fuzzy
 msgid "Menu type"
 msgstr "メニュータイプ"
 
-#: panel/menu.c:3341 panel/menu.c:3361
+#: panel/menu.c:3335 panel/menu.c:3355
 #, fuzzy
 msgid "Main menu"
 msgstr "メインメニュー"
 
-#: panel/menu.c:3352 panel/menu.c:3388
+#: panel/menu.c:3346 panel/menu.c:3382
 #, fuzzy
 msgid "Normal menu"
 msgstr "ノーマルメニュー"
 
-#: panel/menu.c:3372
+#: panel/menu.c:3366
 #, fuzzy
 msgid "System menu: "
 msgstr "システムメニュー"
 
-#: panel/menu.c:3376
+#: panel/menu.c:3370
 #, fuzzy
 msgid "User menu: "
 msgstr "ユーザメニュー"
 
-#: panel/menu.c:3380
-msgid "Red Hat menu (if found): "
+#: panel/menu.c:3374
+msgid "AnotherLevel menu (if found): "
 msgstr ""
 
-#: panel/menu.c:3384
+#: panel/menu.c:3378
 msgid "Debian menu (if found): "
 msgstr ""
 
-#: panel/menu.c:3398
+#: panel/menu.c:3392
 msgid "Menu path"
 msgstr "メニューパス"
 
 #. Position frame
-#: panel/panel_config.c:281 panel/panel_config.c:448
+#: panel/panel_config.c:283 panel/panel_config.c:462
 msgid "Position"
 msgstr "位置"
 
 #. Top Position
-#: panel/panel_config.c:293
+#: panel/panel_config.c:295
 msgid "Top"
 msgstr "上"
 
-#: panel/panel_config.c:304
+#: panel/panel_config.c:306
 msgid "Bottom"
 msgstr "下"
 
 #. Auto-hide/stayput frame
-#: panel/panel_config.c:354
+#: panel/panel_config.c:356 panel/panel_config.c:570
 #, fuzzy
 msgid "Minimize options"
 msgstr "最小化オプション"
 
 #. Auto-hide
-#: panel/panel_config.c:364
+#: panel/panel_config.c:366 panel/panel_config.c:580
 #, fuzzy
 msgid "Auto hide"
 msgstr "自動的に隠す"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:374 panel/panel_config.c:567
+#: panel/panel_config.c:376 panel/panel_config.c:590
 #, fuzzy
 msgid "Enable hidebuttons"
 msgstr "隠れているボタンは使用不能にする"
 
 #. Arrow enable
-#: panel/panel_config.c:384 panel/panel_config.c:577
+#: panel/panel_config.c:386 panel/panel_config.c:600
 #, fuzzy
 msgid "Enable hidebutton arrows"
 msgstr "矢印ボタンを使わない"
 
 #. North East Position
-#: panel/panel_config.c:460
+#: panel/panel_config.c:474
 #, fuzzy
 msgid "North east"
 msgstr "右上"
 
-#: panel/panel_config.c:471
+#: panel/panel_config.c:485
 #, fuzzy
 msgid "South west"
 msgstr "左下"
 
-#: panel/panel_config.c:482
+#: panel/panel_config.c:496
 #, fuzzy
 msgid "North west"
 msgstr "左上"
 
-#: panel/panel_config.c:493
+#: panel/panel_config.c:507
 #, fuzzy
 msgid "South east"
 msgstr "左下"
 
 #. Orientation frame
-#: panel/panel_config.c:524
+#: panel/panel_config.c:538
 msgid "Orientation"
 msgstr "場所"
 
 #. Horizontal
-#: panel/panel_config.c:534
+#: panel/panel_config.c:548
 msgid "Horizontal"
 msgstr "水平"
 
-#: panel/panel_config.c:546
+#: panel/panel_config.c:560
 msgid "Vertical"
 msgstr "垂直"
 
-#. Hidebuttons frame
-#: panel/panel_config.c:556
-#, fuzzy
-msgid "Hidebutton options"
-msgstr "隠蔽ボタンのオプション"
-
 #. selector frame
-#: panel/panel_config.c:673 panel/panel_config.c:885
+#: panel/panel_config.c:696 panel/panel_config.c:909
 msgid "Background"
 msgstr "デスクトップの背景"
 
 #. standard background
-#: panel/panel_config.c:682
+#: panel/panel_config.c:705
 msgid "Standard"
 msgstr "標準"
 
-#: panel/panel_config.c:689
+#: panel/panel_config.c:712
 msgid "Pixmap"
 msgstr "ピクスマップ"
 
-#: panel/panel_config.c:696
+#: panel/panel_config.c:719
 msgid "Color"
 msgstr "色"
 
 #. image frame
-#: panel/panel_config.c:701
+#: panel/panel_config.c:724
 msgid "Image file"
 msgstr "画像ファイル"
 
-#: panel/panel_config.c:728
+#: panel/panel_config.c:751
 msgid "Scale image to fit panel"
 msgstr "画像をパネルのサイズにあわせて変更する"
 
-#: panel/panel_config.c:855
+#: panel/panel_config.c:879
 msgid "Panel properties"
 msgstr "パネルのプロパティ"
 
@@ -3021,28 +3180,6 @@ msgstr "アニメーション"
 msgid "General icon settings"
 msgstr "一般設定"
 
-#: panel/session.c:635
-msgid ""
-"Are you sure you want to just terminate the panel?\n"
-"\n"
-"If you need to restart the panel after terminating it here, you will need to "
-"type panel in a terminal window\n"
-"\n"
-"Press OK to terminate the panel!"
-msgstr ""
-
-#: panel/session.c:696
-msgid "Really log out?"
-msgstr "本当にログアウトしますか?"
-
-#: panel/session.c:701
-msgid "Only terminate panel"
-msgstr ""
-
-#: panel/session.c:715
-msgid "Ask next time"
-msgstr "次回も表示する"
-
 #: panel/swallow.c:211
 msgid "Create swallow applet"
 msgstr "スワローアプレットを生成する"
@@ -3059,6 +3196,74 @@ msgstr "コマンド(オプション)"
 msgid "Height"
 msgstr "高さ"
 
+#, fuzzy
+#~ msgid "Low Battery Warning"
+#~ msgstr "低レベルで充電中です。"
+
+#~ msgid "Afterstep Clock Applet"
+#~ msgstr "Afterstepクロックアプレット"
+
+#~ msgid "General Properties"
+#~ msgstr "一般設定"
+
+#~ msgid "Graph Interval:"
+#~ msgstr "グラフの更新間隔:"
+
+#, fuzzy
+#~ msgid "Submenu: "
+#~ msgstr "作成するフォルダ:"
+
+#~ msgid "Unable to create file: %s\n"
+#~ msgstr "ファイルを作成できませんでした: %s\n"
+
+#~ msgid "unable to remove .order file: %s\n"
+#~ msgstr ".orderファイルを削除できませんでした: %s\n"
+
+#~ msgid "File exists."
+#~ msgstr "ファイルが存在します。"
+
+#, fuzzy
+#~ msgid "Create Submenu:"
+#~ msgstr "作成するフォルダ:"
+
+#~ msgid "You must select something first."
+#~ msgstr "まず何かを選択してください!"
+
+#~ msgid ""
+#~ "You can't delete that file.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "ファイルを削除できません!\n"
+#~ "あなたには権限がありません。"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are not allowed to move that item there.\n"
+#~ "You do not have the proper permissions."
+#~ msgstr ""
+#~ "ファイルを削除できません!\n"
+#~ "あなたには権限がありません。"
+
+#~ msgid "New"
+#~ msgstr "新規"
+
+#~ msgid "Edit selected menu item properties"
+#~ msgstr "選択したメニューアイテムのプロパティを編集します"
+
+#, fuzzy
+#~ msgid "Red Hat menus"
+#~ msgstr "メインメニューの追加"
+
+#, fuzzy
+#~ msgid "Hidebutton options"
+#~ msgstr "隠蔽ボタンのオプション"
+
+#~ msgid "Really log out?"
+#~ msgstr "本当にログアウトしますか?"
+
+#~ msgid "Ask next time"
+#~ msgstr "次回も表示する"
+
 #~ msgid "Enable gsm debugging"
 #~ msgstr "gsmデバッグを有効にする"
 
@@ -3067,9 +3272,6 @@ msgstr "高さ"
 
 #~ msgid "Startup Programs"
 #~ msgstr "スタートアップ"
-
-#~ msgid "Geometry of window"
-#~ msgstr "ウィンドウの位置"
 
 #~ msgid "Can't open /proc/apm; can't get data."
 #~ msgstr "/proc/apmを開けません。データを取得できません。"
@@ -3088,9 +3290,6 @@ msgstr "高さ"
 
 #~ msgid "High."
 #~ msgstr "高レベルです。"
-
-#~ msgid "Low and charging."
-#~ msgstr "低レベルで充電中です。"
 
 #~ msgid "Low."
 #~ msgstr "低レベルです。"
@@ -3202,14 +3401,8 @@ msgstr "高さ"
 #~ msgid "Failed to retrieve workspace property."
 #~ msgstr "ワークスペースの設定を取得できませんでした。"
 
-#~ msgid " Folder"
-#~ msgstr " フォルダ"
-
 #~ msgid "Config"
 #~ msgstr "設定"
-
-#~ msgid "Discard session"
-#~ msgstr "セッションを終了する"
 
 #, fuzzy
 #~ msgid "Special Prefixes"
@@ -3357,9 +3550,6 @@ msgstr "高さ"
 #~ msgid "Slow"
 #~ msgstr "遅い"
 
-#~ msgid "Threshold"
-#~ msgstr "しきい値"
-
 #~ msgid "Large"
 #~ msgstr "長い"
 
@@ -3461,9 +3651,6 @@ msgstr "高さ"
 
 #~ msgid "MDI notebook tab position"
 #~ msgstr "MDIノートタブの位置"
-
-#~ msgid "New Folder"
-#~ msgstr "新規フォルダ"
 
 #~ msgid "Failed to delete the folder."
 #~ msgstr "フォルダを削除できません。"
