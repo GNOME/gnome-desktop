@@ -48,6 +48,7 @@
 #include "gnome-exec.h"
 #include "gnome-i18nP.h"
 #include "gnome-mime.h"
+#include "gnome-url.h"
 #include <popt.h>
 
 struct _GnomeDesktopItem {
