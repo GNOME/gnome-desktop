@@ -138,6 +138,31 @@ dnl
 ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
 AC_SUBST(ZVT_LIBS)
 
+dnl Gnome Terminal now requires LibGlade
+AC_MSG_CHECKING(for Glade libraries >= 0.14					)
+libglade_ok=no
+if gnome-config --libs libglade > /dev/null 2>&1; then 
+    verstxt=`gnome-config --modversion libglade`
+    vers=`echo "$verstxt" | awk -F. '{ printf "%d", $1 * 1000 + $2;}'`
+    if test "$vers" -ge 14; then
+	AC_MSG_RESULT($marker_ok found $verstxt)
+	libglade_ok=yes
+    else
+        AC_MSG_RESULT($marker_fail found only $verstxt)
+    fi
+else
+    AC_MSG_RESULT($marker_fail not found)
+fi
+if test "$libglade_ok" = no; then
+    AC_MSG_ERROR(You need at least libglade 0.14 for this version of Gnumeric)
+fi
+unset libglade_ok
+GT_LIBS="libglade zvt gnorba gnomeui"
+GNOME_TERMINAL_LIBS=`gnome-config --libs $GT_LIBS`
+GNOME_TERMINAL_CFLAGS=`gnome-config --cflags $GT_LIBS`
+AC_SUBST(GNOME_TERMINAL_LIBS)
+AC_SUBST(GNOME_TERMINAL_CFLAGS)
+
 dnl
 dnl gnome-session
 dnl
