@@ -679,8 +679,6 @@ replace_percentsign(int argc, char **argv, const char *ps,
 static int
 ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], int argc, const char *argv[], gboolean replacekdefiles)
 {
-	/*FIXME: */
-#if 0
         char **real_argv;
         int real_argc;
         int i, j, ret;
@@ -695,7 +693,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 
 
 	/* check the type, if there is one set */
-	if(item->entry->Type != GNOME_Desktop_ENTRY_TYPE_APPLICATION) {
+	if(item->type != GNOME_DESKTOP_ITEM_TYPE_APPLICATION) {
 		/* FIXME: ue GError */
 		/* we are not an application so just exit
 		   with an error */
@@ -703,7 +701,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 		return -1;
 	}
 
-	if(item->item_flags & GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL) {
+	if(gnome_desktop_item_get_boolean (item, "Terminal")) {
 		/* FIXME: add temrinal options from desktop file */
 		/* somewhat hackish I guess, we should use this in
 		 * the prepend mode rather then just getting a new
@@ -736,10 +734,10 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 	replace_percentsign(real_argc, real_argv, "%d", g_getenv("PWD"), &tofree, FALSE);
 #if 0
 	replace_percentsign(real_argc, real_argv, "%m", 
-			    gnome_desktop_item_get_attribute(item,"MiniIcon"), &tofree, FALSE);
+			    gnome_desktop_item_get_string(item,"MiniIcon"), &tofree, FALSE);
 #endif
 	replace_percentsign(real_argc, real_argv, "%c", 
-			    gnome_desktop_item_get_local_comment(item), &tofree, FALSE);
+			    gnome_desktop_item_get_localestring(item, "Comment"), &tofree, FALSE);
 
         ret = gnome_execute_async(NULL, real_argc, real_argv);
 
@@ -752,8 +750,6 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 		g_strfreev(term_argv);
 
 	return ret;
-#endif
-	return -1;
 }
 
 /* strip any trailing &, return FALSE if bad things happen and
@@ -804,25 +800,25 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 			   char **argv,
 			   GError **error)
 {
-	/*FIXME: */
-#if 0
 	const char **temp_argv = NULL;
 	int temp_argc = 0;
+	const char *exec;
 	char *the_exec;
 	int ret;
 
-        g_return_val_if_fail (item, -1);
-
+	exec = gnome_desktop_item_get_string (item, "Exec");
 	/* This is a URL, so launch it as a url */
-	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
-		if (item->entry->URL[0] != '\0') {
-			if (gnome_url_show (item->entry->URL, NULL))
+	if (item->type == GNOME_DESKTOP_ITEM_TYPE_LINK) {
+		const char *url;
+		url = gnome_desktop_item_get_string (item, "URL");
+		if (url && url[0] != '\0') {
+			if (gnome_url_show (url, NULL))
 				return 0;
 			else
 				return -1;
 		/* Gnome panel used to put this in Exec */
-		} else if (item->entry->Exec[0] != '\0') {
-			if (gnome_url_show (item->entry->Exec, NULL))
+		} else if (exec && exec[0] != '\0') {
+			if (gnome_url_show (exec, NULL))
 				return 0;
 			else
 				return -1;
@@ -832,7 +828,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		/* FIXME: use GError */
 	}
 
-	if(item->entry->Exec[0] == '\0') {
+	if(exec[0] == '\0') {
 		/* FIXME: use GError */
 		g_warning(_("Trying to execute an item with no 'Exec'"));
 		return -1;
@@ -840,15 +836,15 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 
 
 	/* make a new copy and get rid of spaces */
-	the_exec = g_alloca(strlen(item->entry->Exec)+1);
-	strcpy(the_exec,item->entry->Exec);
+	the_exec = g_alloca(strlen(exec)+1);
+	strcpy(the_exec,exec);
 
 	if(!strip_the_amp(the_exec))
 		return -1;
 
 	/* we use a popt function as it does exactly what we want to do and
 	   gnome already uses popt */
-	if(poptParseArgvString(item->entry->Exec, &temp_argc, &temp_argv) != 0) {
+	if(poptParseArgvString(exec, &temp_argc, &temp_argv) != 0) {
 		/* no we have failed in making this a vector what should
 		   we do? we can pretend that the exec failed and return -1,
 		   perhaps we should give a little better error? */
@@ -863,8 +859,6 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 	free(temp_argv);
 
 	return ret;
-#endif
-	return -1;
 }
 
 /* replace %s, %f, %u or %F in exec with file and run */
