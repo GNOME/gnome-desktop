@@ -5,7 +5,6 @@ Directory_in_files =		\
 	Accessories.directory   \
 	Applications.directory	\
 	Graphics.directory	\
-	Home.directory		\
 	System.directory	\
 	Multimedia.directory	\
 	Internet.directory	\
