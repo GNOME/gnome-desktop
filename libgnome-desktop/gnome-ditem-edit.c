@@ -154,9 +154,6 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
                                 gtk_signal_default_marshaller,
                                 GTK_TYPE_NONE, 0);
 
-        gtk_object_class_add_signals (object_class, ditem_edit_signals, 
-                                      LAST_SIGNAL);
-
         object_class->destroy = gnome_ditem_edit_destroy;
         gobject_class->finalize = gnome_ditem_edit_finalize;
         ditem_edit_class->changed = NULL;
