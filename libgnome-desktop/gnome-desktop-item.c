@@ -875,10 +875,18 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 		gnome_config_get_vector ("/Gnome/Applications/Terminal",
 					 &term_argc, &term_argv);
 		if (term_argv == NULL) {
+			char *check;
+			check = gnome_is_program_in_path("gnome-terminal");
 			term_argc = 2;
-			term_argv = g_new0(char *,3);
-			term_argv[0] = g_strdup("gnome-terminal");
-			term_argv[1] = g_strdup("-x");
+			if(!check) {
+				term_argv = g_new0(char *,3);
+				term_argv[0] = g_strdup("xterm");
+				term_argv[1] = g_strdup("-e");
+			} else {
+				term_argv = g_new0(char *,3);
+				term_argv[0] = check;
+				term_argv[1] = g_strdup("-x");
+			}
 		}
 	}
 
