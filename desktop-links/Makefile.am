@@ -13,10 +13,52 @@ Settingsdir       = $(appsdir)/Settings
 
 gnewdir           = $(datadir)/mc/templates
 
-gnew_in_files = GIMP.desktop.in 
-gnew_DATA = $(gnew_in_files:.desktop.in=.desktop)
+desktop_in_files = \
+	Emacs.desktop.in	\
+	Eterm.desktop.in	\
+	FileRunner.desktop.in	\
+	gaspell.desktop.in	\
+	GIMP.desktop.in		\
+	Gmc.desktop.in		\
+	GXanim.desktop.in	\
+	Imlib_config.desktop.in	\
+	Kterm.desktop.in	\
+	lynx.desktop.in		\
+	Netscape.desktop.in	\
+	realplayer.desktop.in	\
+	rxvt.desktop.in		\
+	Tkrat.desktop.in	\
+	TkSETI.desktop.in	\
+	UNIX.desktop.in		\
+	UNIX-regular.desktop.in	\
+	Vim.desktop.in		\
+	Vnterm.desktop.in	\
+	WordPerfect.desktop.in	\
+	xcolsel.desktop.in	\
+	Xemacs.desktop.in	\
+	XEphem.desktop.in	\
+	XMcd.desktop.in		\
+	xmix.desktop.in		\
+	xv.desktop.in		\
+	GIMP.desktop.in		\
+	Gmc.desktop.in
+gnew_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @XML_I18N_MERGE_DESKTOP_RULE@
 
+
+directory_in_files = \
+	Applications.directory.in	\
+	Development.directory.in	\
+	Games.directory.in		\
+	Graphics.directory.in		\
+	Internet.directory.in		\
+	Multimedia.directory.in		\
+	Root.directory.in		\
+	Settings.directory.in		\
+	System.directory.in		\
+	Utilities.directory.in
+
+noinst_DATA = $(directory_in_files:.directory.in=.directory)
 @XML_I18N_MERGE_DIRECTORY_RULE@
 
 Order_files = \
@@ -54,7 +96,6 @@ Utilities_DATA = \
 	FileRunner.desktop	\
 	TkSETI.desktop		\
 	rxvt.desktop		\
-	lynx.desktop		\
 	xbmbrowser.desktop	\
 	Vim.desktop		\
 	xcolsel.desktop		\
@@ -101,9 +142,10 @@ Utilities_DATA =
 
 EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
 	$(System_DATA) $(Multimedia_DATA) $(Internet_DATA) $(Games_DATA) \
-	$(Settings_DATA) \
-	$(Directory_files) $(Order_files) $(Root_DATA) $(Settings_Order_files)
-
+	$(Settings_DATA) $(noinst_DATA) $(directory_in_files) \
+	$(Directory_files) $(Order_files) $(Root_DATA) $(Settings_Order_files) \
+	$(desktop_in_files) $(gnew_DATA)
+	
 install-data-local: $(Directory_files)
 	$(mkinstalldirs) $(DESTDIR)$(Applicationsdir)
 	$(mkinstalldirs) $(DESTDIR)$(Graphicsdir)
