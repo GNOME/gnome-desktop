@@ -295,8 +295,8 @@ read_hints_from_file (const char *file, GList *hintlist)
 static void
 pick_random_hint(GnomeHint *gh)
 {
-        srandom(time(NULL));
-        gh->_priv->curhint = g_list_nth (gh->_priv->hintlist, random()%hintnum);
+	int rnd = g_random_int_range (0, hintnum);
+        gh->_priv->curhint = g_list_nth (gh->_priv->hintlist, rnd);
 }
 
 GtkWidget *
