@@ -92,7 +92,7 @@ gboolean          gnome_ditem_edit_load_file    (GnomeDItemEdit   *dee,
 void              gnome_ditem_edit_set_ditem    (GnomeDItemEdit   *dee,
                                                  const GnomeDesktopItem *ditem);
 
-/* Get a reference (not a copy) of the ditem based on the contents
+/* Get a pointer (not a copy) to the ditem based on the contents
  * of the display */
 GnomeDesktopItem *gnome_ditem_edit_get_ditem    (GnomeDItemEdit   *dee);
 

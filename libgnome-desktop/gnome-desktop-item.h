@@ -137,7 +137,7 @@ void			gnome_desktop_item_set_entry_type    (GnomeDesktopItem		 *item,
 							      GnomeDesktopItemType	  type);
 
 /* Get current location on disk */
-char *                  gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
+const char *            gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
 void                    gnome_desktop_item_set_location      (GnomeDesktopItem           *item,
 							      const char                 *location);
 GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktopItem     *item);

@@ -139,6 +139,17 @@ gnome_desktop_item_new (void)
 
         retval->refcount++;
 
+	/* These are guaranteed to be set */
+	gnome_desktop_item_set_string (retval,
+				       GNOME_DESKTOP_ITEM_NAME,
+				       _("No name"));
+	gnome_desktop_item_set_string (retval,
+				       GNOME_DESKTOP_ITEM_ENCODING,
+				       _("UTF-8"));
+	gnome_desktop_item_set_string (retval,
+				       GNOME_DESKTOP_ITEM_VERSION,
+				       _("1.0"));
+
         return retval;
 }
 
@@ -358,8 +369,9 @@ gnome_desktop_item_save (GnomeDesktopItem *item,
 {
 	const char *file_name;
 
-	if ( ! force &&
-	     ! item->modified)
+	if (under == NULL &&
+	    ! force &&
+	    ! item->modified)
 		return TRUE;
 
 	if (under == NULL)
@@ -1320,13 +1332,13 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
  * Returns: The file location associated with 'item'.
  *
  */
-char *
+const char *
 gnome_desktop_item_get_location (const GnomeDesktopItem *item)
 {
         g_return_val_if_fail (item != NULL, NULL);
         g_return_val_if_fail (item->refcount > 0, NULL);
 
-        return g_strdup (item->location);
+        return item->location;
 }
 
 /**
@@ -1345,6 +1357,11 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
         g_return_if_fail (item != NULL);
         g_return_if_fail (item->refcount > 0);
 
+	if (item->location != NULL &&
+	    location != NULL &&
+	    strcmp (item->location, location) == 0)
+		return;
+
         g_free (item->location);
 	if (location == NULL) {
 		item->location = NULL;
@@ -1361,12 +1378,15 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
 		struct stat sbuf;
 		item->mtime = 0;
 
-		if (item->location == NULL ||
+		if (item->location != NULL &&
 		    stat (item->location, &sbuf) != 0) {
 			item->mtime = sbuf.st_mtime;
 		}
 		
 	}
+
+	/* Make sure that save actually saves */
+	item->modified = TRUE;
 }
 
 /*
