@@ -2,7 +2,16 @@
 
 PACKAGE="gnome-core"
 
-if [ "x$1" = "x" ]; then 
+if [ "x$1" = "x--help" ]; then
+
+echo Usage: ./update.sh langcode
+echo --help                  display this help and exit
+echo
+echo Examples of use:
+echo ./update.sh ----- just creates a new pot file from the source
+echo ./update.sh da -- created new pot file and updated the da.po file 
+
+elif [ "x$1" = "x" ]; then 
 
 xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments --keyword=_ --keyword=N_ \
