@@ -2,14 +2,11 @@ INCLUDES = 			\
 	-I$(includedir)		\
 	-I$(top_srcdir)/intl	\
 	-I$(top_builddir)/intl	\
-	$(GNOME_INCLUDEDIR)	\
+	$(GNOME_ABOUT_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale\""
 
 LDADD = \
-	$(GNOME_LIBDIR)		\
-	$(GNOMEUI_LIBS)		\
-	$(PIXBUF_LIBS)		\
-	$(CANVAS_PIXBUF_LIBS)	\
+	$(GNOME_ABOUT_LIBS)	\
 	$(INTLLIBS)
 
 bin_PROGRAMS = gnome-about

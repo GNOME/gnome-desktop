@@ -11,7 +11,7 @@
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
+#include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include "contributors.h"
 #include "logo.xpm"
 
@@ -455,7 +455,7 @@ main (gint argc, gchar *argv[])
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
-	
+
 	gnome_init ("gnome-about","1.0", argc, argv);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-logo-icon-transparent.png");
 	gdk_rgb_init ();
@@ -474,10 +474,10 @@ main (gint argc, gchar *argv[])
 	font = gdk_fontset_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*-r-*");
 	italicfont = gdk_fontset_load("-adobe-helvetica-medium-o-normal--*-120-*-*-*-*-*-*,*-r-*");
 	if (!font)
-		font = window->style->font;
+		font = gtk_style_get_font (window->style);
 
 	if (!italicfont)
-	        italicfont = window->style->font;
+	        italicfont = gtk_style_get_font (window->style);
 
 	y_to_wrap_at = -(sizeof(contributors)/sizeof(contributors[0]))*
 	                (font->ascent+font->descent);
