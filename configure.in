@@ -142,33 +142,6 @@ AC_ARG_WITH(window-manager,
     WINDOW_MANAGER=icewm])
 AC_SUBST(WINDOW_MANAGER)
 
-dnl gnome-smproxy
-dnl Since this is originally from the X11 tree, we have to get 
-dnl build information from there
-AC_MSG_CHECKING(for X11 defines for building smproxy)
-SMPROXY_DEFS=
-rm -fr conftestdir
-if mkdir conftestdir; then
-  cd conftestdir
-  # STD_DEFINES is in the Makefiles generated with X11R6/6.1/6.3
-  # and Solaris 2.5 OpenWindows `xmkmf's.  I haven't tested with
-  # older versions.  FIXME if necessary.  Alternative may be
-  # $(ALLDEFINES).
-  cat > Imakefile <<'EOF'
-acfinddefs:
-	@echo 'ac_x_cpp_defs="${STD_DEFINES}"'
-EOF
-  if (xmkmf) >/dev/null 2>/dev/null && test -f Makefile; then
-    # GNU make sometimes prints "make[1]: Entering...", which would confuse us.
-    eval `${MAKE-make} acfinddefs 2>/dev/null | grep -v make`
-    SMPROXY_DEFS="$ac_x_cpp_defs"
-  fi
-  cd ..
-  rm -fr conftestdir
-fi
-AC_SUBST(SMPROXY_DEFS)
-AC_MSG_RESULT($SMPROXY_DEFS)
-
 dnl applets/diskusage
 GNOME_FILEUTILS_CHECKS
 
@@ -229,7 +202,6 @@ applets/cpuload/Makefile
 applets/netload/Makefile
 applets/cpumemusage/Makefile
 applets/fish/Makefile
-applets/gkb/Makefile
 applets/diskusage/Makefile
 applets/icewm-pager/Makefile
 applets/drivemount/Makefile
