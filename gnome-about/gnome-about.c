@@ -427,12 +427,16 @@ keypress_scroll (GtkWidget       *widget,
 static void
 draw_intro (void)
 {
-	static int initial_pause = 50;
-	static int x = G_MININT;
-	static int y = G_MININT;
-	static int layout_width = 0;
+	static int  initial_pause = 50;
+	static int  x = G_MININT;
+	static int  y = G_MININT;
+	static int  layout_width = 0;
+	char       *markup;
 
-	pango_layout_set_markup (layout, _("<big><b>GNOME Was Brought To You By</b></big>"), -1);
+	markup = g_strdup_printf ("<big><b>%s</b></big>", _("GNOME Was Brought To You By"));
+	pango_layout_set_markup (layout, markup, -1);
+	g_free (markup);
+
 	if (x == G_MININT) {
 		PangoRectangle extents;
 
@@ -563,10 +567,14 @@ draw_names ()
 static void
 draw_end ()
 {
-	PangoRectangle extents;
-	static int     pause = 100;
+	PangoRectangle  extents;
+	static int      pause = 100;
+	char           *markup;
 
-	pango_layout_set_markup (layout, _("<big><b>And Many More ...</b></big>"), -1);
+	markup = g_strdup_printf ("<big><b>%s</b></big>", _("And Many More ..."));
+	pango_layout_set_markup (layout, markup, -1);
+	g_free (markup);
+
 	pango_layout_get_pixel_extents (layout, NULL, &extents);
 
 	gdk_draw_layout (pixmap, area->style->white_gc,
