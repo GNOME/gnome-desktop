@@ -392,6 +392,11 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
 	retval->location = g_strdup (item->location);
 	retval->mtime = item->mtime;
 
+	/* Languages */
+	retval->languages = g_list_copy (item->languages);
+	for (li = retval->languages; li != NULL; li = li->next)
+		li->data = g_strdup (li->data);	
+
 	/* Keys */
 	retval->keys = g_list_copy (item->keys);
 	for (li = retval->keys; li != NULL; li = li->next)

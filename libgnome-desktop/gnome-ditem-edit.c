@@ -524,7 +524,7 @@ translations_add (GtkWidget      *button,
 	GtkTreeView  *tree;
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	const GList  *langs;
+	const GList	 *langs;
 	const char   *tmp;
 	const char   *name;
 	const char   *generic_name;
@@ -549,10 +549,17 @@ translations_add (GtkWidget      *button,
 	/*
 	 * If we are editing the current language, change the name and
 	 * comment entries on the easy page as well.
+	 *
+	 * FIXME - this doesn't work. We need something like
+	 * gnome_desktop_item_get_best_locale and compare that with lang.
+	 * Right now for example my locale is en_US, but 
+	 * gnome_i18n_get_language_list returns en_US.iso8859-1 as the first item
+	 * and en_US as the second. gnome-desktop-item handles all this correctly
+	 * and needs a function to return to us the locale it's using as default.
 	 */
-	langs = gnome_i18n_get_language_list ("LC_ALL");
+	langs = gnome_i18n_get_language_list ("LC_MESSAGES");
 	tmp = langs ? langs->data : NULL;
-	if ((tmp && !strcmp (tmp, lang)) || (!tmp && !strcmp (tmp, "C"))) {
+	if ((tmp && !strcmp (tmp, lang)) || (!tmp && !strcmp (lang, "C"))) {
 		gtk_entry_set_text (
 			GTK_ENTRY (dee->_priv->name_entry), name);
 		gtk_entry_set_text (
@@ -578,7 +585,7 @@ translations_add (GtkWidget      *button,
 				3, comment,
 				-1);
 
-			g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+			gnome_ditem_edit_changed (dee);
 
 			g_free (string);
 			g_free (lang);
@@ -609,7 +616,7 @@ translations_add (GtkWidget      *button,
 	gtk_editable_delete_text (
 		GTK_EDITABLE (dee->_priv->transl_comment_entry), 0, -1);
 
-	g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
+	gnome_ditem_edit_changed (dee);
 
 	g_free (lang);
 }
@@ -630,8 +637,8 @@ translations_remove (GtkWidget      *button,
                return;
 
         gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-
-        g_signal_emit (G_OBJECT(dee), ditem_edit_signals [CHANGED], 0);
+	
+	  gnome_ditem_edit_changed (dee);
 }
 
 static GtkWidget *
@@ -704,7 +711,7 @@ make_advanced_page (GnomeDItemEdit *dee)
         gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
         gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
-        gtk_box_pack_start (GTK_BOX (vbox), table, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, 0);
 
 	label = label_new (_("Try this before using:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
@@ -732,7 +739,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 
 	label = gtk_label_new (_("Name/Comment translations:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
 	dee->_priv->translations = setup_translations_list (dee);
 
@@ -742,7 +749,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
 
 	box = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
@@ -979,7 +986,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
         gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
-        for (li = i18n_list; li != NULL; li = li->next) {
+	  for (li = i18n_list; li != NULL; li = li->next) {
                 const char *name, *comment, *generic_name;
                 const char *lang = li->data;
                 name = gnome_desktop_item_get_localestring_lang
@@ -988,13 +995,20 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 			(ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME, lang);
                 comment = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_COMMENT, lang);
-                gtk_list_store_append (GTK_LIST_STORE(model), &iter);
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    0, lang ? lang : "",
-				    1, name ? name : "",
-				    2, generic_name ? generic_name : "",
-				    3, comment ? comment : "",
-				    -1);
+                
+		    /* only include a language in the list if it 
+		     * has a useful translation
+		     */
+		    if (name != NULL || generic_name != NULL || comment != NULL)
+		    {
+			    gtk_list_store_append (GTK_LIST_STORE(model), &iter);
+      	          gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+					    0, lang ? lang : "",
+					    1, name ? name : "",
+					    2, generic_name ? generic_name : "",
+					    3, comment ? comment : "",
+					    -1);
+		    }
         }
         g_list_free (i18n_list);
 
