@@ -494,6 +494,13 @@ translations_add (GtkWidget      *button,
 		GTK_LIST_STORE (model), &iter,
 		0, lang, 1, name, 2, comment, -1);
 
+	gtk_editable_delete_text (
+		GTK_EDITABLE (dee->_priv->transl_lang_entry), 0, -1);
+	gtk_editable_delete_text (
+		GTK_EDITABLE (dee->_priv->transl_name_entry), 0, -1);
+	gtk_editable_delete_text (
+		GTK_EDITABLE (dee->_priv->transl_comment_entry), 0, -1);
+
 	g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
 
 	g_free (lang);
