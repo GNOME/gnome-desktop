@@ -15,6 +15,7 @@ static author authors[] = {
 	{ "George Lebl", "<jirka@5z.com>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
 	{ "Federico Mena-Quintero", "<federico@gimp.org>" },
+	{ "Jaka Mocnik", "<jaka.mocnik@kiss.uni-lj.si>" },
 	{ "The Squeaky Rubber Gnome", "http://www.gnome.org/squeaky-rubber-gnome.shtml" },
         { "Tomas Ögren", "<stric@ing.umu.se>" },
 	{ "", "" },
