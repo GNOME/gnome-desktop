@@ -76,7 +76,7 @@ int                    gnome_desktop_item_drop_uri_list   (const GnomeDesktopIte
 
 gboolean               gnome_desktop_item_exists          (const GnomeDesktopItem     *item);
 GnomeDesktopItemFlags  gnome_desktop_item_get_flags       (const GnomeDesktopItem     *item);
-const char *           gnome_desktop_item_get_location    (const GnomeDesktopItem     *item);
+char *                 gnome_desktop_item_get_location    (const GnomeDesktopItem     *item);
 GNOME_DesktopEntryType gnome_desktop_item_get_type        (const GnomeDesktopItem     *item);
 gchar *                gnome_desktop_item_get_command     (const GnomeDesktopItem     *item);
 gchar *                gnome_desktop_item_get_icon_path   (const GnomeDesktopItem     *item);

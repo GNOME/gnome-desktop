@@ -10,7 +10,7 @@ INCLUDES = \
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
 	$(GNOME_DESKTOP_CFLAGS)
 
-noinst_LTLIBRARIES = libgnome_desktop-2.la
+noinst_LTLIBRARIES = libgnome-desktop-2.la
 
 CORBA_SRCLIST = \
 	gnome-desktop-stubs.c	\

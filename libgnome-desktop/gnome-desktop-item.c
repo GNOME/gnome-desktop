@@ -1480,15 +1480,13 @@ gnome_desktop_item_get_file_status (GnomeDesktopItem *item)
  * gnome_desktop_item_get_location:
  * @item: A desktop item
  *
- * Returns: The file location associated with 'item'. The returned
- *          memory remains owned by the GnomeDesktopItem and should
- *          not be freed.
+ * Returns: The file location associated with 'item'.
  *
  */
-const char *
+char *
 gnome_desktop_item_get_location (const GnomeDesktopItem *item)
 {
-        return item->location;
+        return g_strdup (item->location);
 }
 
 /******* Set... ******/
