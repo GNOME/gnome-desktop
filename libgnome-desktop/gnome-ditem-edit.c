@@ -398,6 +398,7 @@ translations_select_row(GtkTreeView *cl, int row, int column,
         GtkTreeIter iter;
         GtkTreeModel *model;
         GValue value = {0, };	
+
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));	
         set_iter_nth_row (cl,&iter,row);
 
@@ -426,15 +427,19 @@ count_rows (GtkTreeView *view)
         int rows = 0;
         GtkTreeModel *model;
         GtkTreeIter iter;
+
         model = gtk_tree_view_get_model (view);
         gtk_tree_model_get_iter_root (model, &iter);
-        while (gtk_tree_model_iter_next(model, &iter))
+
+        while (gtk_tree_model_iter_next (model, &iter))
              rows++;
+
         return rows;
 }
 
 static void
-translations_add(GtkWidget *button, GnomeDItemEdit *dee)
+translations_add (GtkWidget      *button,
+		  GnomeDItemEdit *dee)
 {
         int i = 0;
         int number_of_rows = 0;
@@ -444,19 +449,20 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         const char *text[3];
         const GList *language_list;
         const char *curlang;
-        GtkTreeView *cl;
+        GtkTreeView *tree;
         GtkTreeIter iter;
         GtkTreeModel *model;
 
-        cl = GTK_TREE_VIEW(dee->_priv->translations);
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (cl));
-        lang = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_lang_entry));
-        name = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_name_entry));
-        comment = gtk_entry_get_text(GTK_ENTRY(dee->_priv->transl_comment_entry));
+        tree = GTK_TREE_VIEW (dee->_priv->translations);
+        model = gtk_tree_view_get_model (tree);
+
+        lang     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
+        name    = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_name_entry));
+        comment = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_comment_entry));
   
-        g_assert(lang && name && comment);
+        g_assert (lang != NULL && name != NULL && comment != NULL);
 	
-        lang = g_strstrip(g_strdup(lang));
+        lang = g_strstrip (g_strdup (lang));
 	
         /*we are setting the current language so set the easy page entries*/
         /*FIXME: do the opposite as well!, but that's not that crucial*/
@@ -468,21 +474,22 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
                 gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),comment);
         }
         gtk_tree_model_get_iter_root (model, &iter);
-        number_of_rows = count_rows (cl);
+        number_of_rows = count_rows (tree);
         for (i=0;i <number_of_rows;i++){
                 char *s;
                 GValue value = {0, };
                 gtk_tree_model_get_value (model,&iter,0, &value);
                 s = g_strdup (g_value_get_string (&value));
                 g_value_unset (&value);
-                if (strcmp(lang,s)==0) {
-                        gtk_list_store_set (GTK_LIST_STORE(model),
-                                            &iter, 1, name,2, comment, -1);
-                        g_signal_emit (G_OBJECT(dee),
-                                       ditem_edit_signals[CHANGED], 0);
+
+                if (!strcmp (lang, s)) {
+                        gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+					    1, name,2, comment, -1);
+                        g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
                         g_free (s);
                         return;
                 }
+
                 gtk_tree_model_iter_next (model, &iter);
                 g_free (s);
         }
@@ -495,7 +502,8 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
 }
 
 static void
-translations_remove(GtkWidget *button, GnomeDItemEdit *dee)
+translations_remove (GtkWidget      *button,
+		     GnomeDItemEdit *dee)
 {
         GtkTreeView *view;
         GtkTreeSelection *selection;
@@ -506,24 +514,28 @@ translations_remove(GtkWidget *button, GnomeDItemEdit *dee)
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
 
         /* gtk_tree_selection_get_selected will return selected node if
-           selection is set to GTK_SELECTION_SINGLE */
+	 * selection is set to GTK_SELECTION_SINGLE
+	 */
 
         /* just return if nothing selected */
-        if ( ! gtk_tree_selection_get_selected (selection,&model, &iter))
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter))
                return;
+
         gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
         g_signal_emit(G_OBJECT(dee), ditem_edit_signals[CHANGED], 0);
 }
  
 static void
-fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
+fill_advanced_page (GnomeDItemEdit *dee,
+		    GtkWidget      *page)
 {
-        GtkWidget * label;
-        GtkWidget * button;
-        GtkWidget * box;
-        const char *transl[3];
-        GtkCellRenderer *renderer;
+        GtkWidget         *label;
+        GtkWidget         *button;
+        GtkWidget         *box;
+        const char        *transl [3];
+        GtkCellRenderer   *renderer;
         GtkTreeViewColumn *column;
+	GtkListStore      *model;
 
         dee->_priv->tryexec_label = label = label_new(_("Try this before using:"));
         table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
@@ -549,40 +561,36 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         label = gtk_label_new(_("Name/Comment translations:"));
         table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
   
-        transl[0] = _("Language");
-        transl[1] = _("Name");
-        transl[2] = _("Comment");
+        transl [0] = _("Language");
+        transl [1] = _("Name");
+        transl [2] = _("Comment");
+
+	model = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+        dee->_priv->translations =
+		gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
+	g_object_unref (model);
 
         renderer = gtk_cell_renderer_text_new ();	
-        dee->_priv->translations = gtk_tree_view_new ();
-        column = gtk_tree_view_column_new_with_attributes (transl[0],
-                                                           renderer,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
 
+        column = gtk_tree_view_column_new_with_attributes (transl [0], renderer, NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
 
-        column = gtk_tree_view_column_new_with_attributes (transl[1],
-                                                           renderer,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
+        column = gtk_tree_view_column_new_with_attributes (transl [1], renderer, NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
 
+        column = gtk_tree_view_column_new_with_attributes (transl [2], renderer, NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (dee->_priv->translations), column);
 
-        column = gtk_tree_view_column_new_with_attributes (transl[2],
-                                                           renderer,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW(dee->_priv->translations), column);
+        gtk_tree_view_columns_autosize (GTK_TREE_VIEW (dee->_priv->translations));
 
-        gtk_tree_view_columns_autosize (GTK_TREE_VIEW(dee->_priv->translations));
+        box = gtk_scrolled_window_new (NULL, NULL);
+        gtk_widget_set_size_request (box, 0, 120);
+        gtk_container_add (GTK_CONTAINER (box),dee->_priv->translations);
+        table_attach_list (GTK_TABLE (page), box, 0, 2, 5, 6);
 
-        box = gtk_scrolled_window_new(NULL,NULL);
-        gtk_widget_set_size_request(box,0,120);
-        gtk_container_add(GTK_CONTAINER(box),dee->_priv->translations);
-        table_attach_list(GTK_TABLE(page),box, 0, 2, 5, 6);
-        gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW(dee->_priv->translations),FALSE);
-        g_signal_connect(G_OBJECT(dee->_priv->translations),"select_row",
-                           G_CALLBACK(translations_select_row),
-                           dee);
-
+        gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (dee->_priv->translations),FALSE);
+        g_signal_connect (dee->_priv->translations, "select_row",
+			  G_CALLBACK (translations_select_row), dee);
 
         box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
         table_attach_entry(GTK_TABLE(page),box, 0, 2, 3, 4);
@@ -807,7 +815,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 						 GNOME_DESKTOP_ITEM_TERMINAL));
 
         /*set the names and comments from our i18n list*/
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW(dee->_priv->translations));
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
         gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
         for (li = i18n_list; li != NULL; li = li->next) {
