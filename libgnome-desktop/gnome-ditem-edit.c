@@ -34,24 +34,22 @@
 
 #include "gnome-uidefs.h"
 #include "gnome-pixmap.h"
-#include "gnome-icon-entry.h"
+#include "gnome-image-entry.h"
 #include "libgnomeuiP.h"
 
 #include <bonobo/bonobo-win.h>
 
 struct _GnomeDItemEditPrivate {
-	/* use the accessors or just use new_notebook */
         GtkWidget *child1; /* basic */
         GtkWidget *child2; /* DND */
         GtkWidget *child3; /* Advanced */
 
-        /* Remaining fields are private - if you need them, 
-           please add an accessor function. */
-  
 	/* we keep a ditem around, since we can never have absolutely
 	   everything in the display so we load a file, or get a ditem,
 	   sync the display and ref the ditem */
 	GnomeDesktopItem *ditem;
+	gboolean ui_dirty; /* TRUE if something got changed, and ditem
+			    * was not yet synced */
 
         GtkWidget *name_entry;
         GtkWidget *comment_entry;
@@ -90,11 +88,8 @@ static void gnome_ditem_edit_init         (GnomeDItemEdit      *messagebox);
 static void gnome_ditem_edit_destroy      (GtkObject           *object);
 static void gnome_ditem_edit_finalize     (GObject             *object);
 
-static void gnome_ditem_edit_sync_display (GnomeDItemEdit      *dee,
-					   GnomeDesktopItem    *ditem);
-
-static void gnome_ditem_edit_sync_ditem   (GnomeDItemEdit      *dee,
-					   GnomeDesktopItem    *ditem);
+static void gnome_ditem_edit_sync_display (GnomeDItemEdit      *dee);
+static void gnome_ditem_edit_sync_ditem   (GnomeDItemEdit      *dee);
 
 static void gnome_ditem_edit_changed      (GnomeDItemEdit      *dee);
 static void gnome_ditem_edit_icon_changed (GnomeDItemEdit      *dee);
@@ -110,9 +105,8 @@ enum {
 static gint ditem_edit_signals[LAST_SIGNAL] = { 0 };
 
 /* The following defines the get_type */
-/* FIXME: this should become a GObject when GObject gets signals !!! */
 GNOME_CLASS_BOILERPLATE (GnomeDItemEdit, gnome_ditem_edit,
-			 GtkObject, gtk_object)
+			 GtkNotebook, gtk_notebook)
 
 static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
@@ -265,13 +259,16 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
                          0,
                          0, 0);
 
-        dee->_priv->icon_entry = gnome_icon_entry_new("icon",_("Choose an icon"));
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
+        dee->_priv->icon_entry = gnome_image_entry_new_icon_entry ();
+	/* FIXME: !!! */
+        /*
+	gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
                                               GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
                                               GTK_OBJECT(dee));
         gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
                                               GTK_SIGNAL_FUNC(gnome_ditem_edit_icon_changed),
                                               GTK_OBJECT(dee));
+					      */
         gtk_box_pack_start(GTK_BOX(hbox), dee->_priv->icon_entry, FALSE, FALSE, 0);
 
         align = gtk_alignment_new(0.0, 0.5, 0.0, 0.0);
@@ -558,7 +555,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
 }
 
 static GtkWidget *
-make_page(void)
+make_page (void)
 {
         GtkWidget * frame, * page;
 
@@ -591,128 +588,38 @@ gnome_ditem_edit_init (GnomeDItemEdit *dee)
         dee->_priv->child3 = make_page();
         fill_advanced_page(dee, GTK_BIN(dee->_priv->child3)->child);
         gtk_widget_show_all(dee->_priv->child3);
+
+        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
+                                  dee->_priv->child1, 
+                                  gtk_label_new (_("Basic")));
+
+        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
+                                  dee->_priv->child2, 
+                                  gtk_label_new (_("Drag and Drop")));
+
+        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
+                                  dee->_priv->child3, 
+                                  gtk_label_new (_("Advanced")));
+
 }
 
 
 /**
  * gnome_ditem_edit_new
  *
- * Description: Creates a new #GnomeDItemEdit object. The object is not
- * a widget, but just an object which creates some widgets which you have
- * to add to a notebook. Use the #gnome_ditem_edit_new_notebook to add
- * pages to the notebook.  If you use this, make sure to take care of
- * the refcounts of this object correctly.  You should ref/sink it when
- * you create it and you should also unref it when your dialog dies.
+ * Description: Creates a new #GnomeDItemEdit widget.  A widget
+ * for the purpose of editing #GnomeDesktopItems
  *
- * Returns: Newly-created #GnomeDItemEdit object.
+ * Returns: Newly-created #GnomeDItemEdit widget.
  */
-GtkObject *
+GtkWidget *
 gnome_ditem_edit_new (void)
 {
         GnomeDItemEdit * dee;
 
-        dee = gtk_type_new(gnome_ditem_edit_get_type());
+        dee = gtk_type_new (gnome_ditem_edit_get_type());
 
-        return GTK_OBJECT (dee);
-}
-
-/**
- * gnome_ditem_edit_child1
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the widget pointer to the first page.  This
- * is the "basic" page.
- *
- * Returns: a pointer to a widget
- */
-GtkWidget *
-gnome_ditem_edit_child1(GnomeDItemEdit  *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->child1;
-}
-
-/**
- * gnome_ditem_edit_child2
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the widget pointer to the second page.  This is the
- * "Drag and Drop" page.
- *
- * Returns: a pointer to a widget
- */
-GtkWidget *
-gnome_ditem_edit_child2(GnomeDItemEdit  *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->child2;
-}
-
-/**
- * gnome_ditem_edit_child3
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the widget pointer to the third page.  This is the
- * "advanced" page.
- *
- * Returns: a pointer to a widget
- */
-GtkWidget *
-gnome_ditem_edit_child3(GnomeDItemEdit  *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->child3;
-}
-
-
-/**
- * gnome_ditem_edit_new_notebook
- * @notebook: notebook to add the pages to
- *
- * Description: Creates a new #GnomeDItemEdit object and adds it's pages
- * to the @notebook specified in the parameter.  The object is reffed and
- * sunk.  When the notebook dies it will be unreffed.  In effect, the notebook
- * takes ownership of the #GnomeDItemEdit.
- *
- * Returns: Newly-created #GnomeDItemEdit object.
- */
-GtkObject *
-gnome_ditem_edit_new_notebook (GtkNotebook *notebook)
-{
-        GnomeDItemEdit * dee;
-
-        g_return_val_if_fail(notebook != NULL, NULL);
-        g_return_val_if_fail(GTK_IS_NOTEBOOK(notebook), NULL);
-  
-        dee = GNOME_DITEM_EDIT(gnome_ditem_edit_new());
-
-	gtk_object_ref(GTK_OBJECT(dee));
-	gtk_object_sink(GTK_OBJECT(dee));
-
-        gtk_notebook_append_page (GTK_NOTEBOOK(notebook), 
-                                  dee->_priv->child1, 
-                                  gtk_label_new(_("Basic")));
-
-        gtk_notebook_append_page (GTK_NOTEBOOK(notebook), 
-                                  dee->_priv->child2, 
-                                  gtk_label_new(_("Drag and Drop")));
-
-        gtk_notebook_append_page (GTK_NOTEBOOK(notebook), 
-                                  dee->_priv->child3, 
-                                  gtk_label_new(_("Advanced")));
-
-        /* Destroy self with the notebook. */
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(notebook), "destroy",
-					      GTK_SIGNAL_FUNC(gtk_object_unref),
-					      GTK_OBJECT(dee));
-
-        return GTK_OBJECT (dee);
+        return GTK_WIDGET (dee);
 }
 
 static void
@@ -766,15 +673,18 @@ gnome_ditem_set_directory_sensitive(GnomeDItemEdit *dee,
 
 /* Conform display to ditem */
 static void
-gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
-                              GnomeDesktopItem *ditem)
+gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 {
         GSList *i18n_list,*li;
         const gchar* cs;
+	GnomeDesktopItem *ditem;
         
         g_return_if_fail(dee != NULL);
         g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-        g_return_if_fail(ditem != NULL);
+
+	ditem = dee->_priv->ditem;
+
+	g_assert (ditem != NULL);
 
         cs = gnome_desktop_item_get_type(ditem);
 	if(cs && strcmp(cs,"Directory")==0) {
@@ -876,21 +786,27 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
+
+	/* ui can't be dirty, I mean, damn we just synced it from the ditem */
+	dee->_priv->ui_dirty = FALSE;
 }
 
 /* Conform ditem to display */
 static void
-gnome_ditem_edit_sync_ditem(GnomeDItemEdit *dee,
-                            GnomeDesktopItem *ditem)
+gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 {
         const gchar * text;
         int i;
         const gchar* lang;
         gint curflags;
+	GnomeDesktopItem *ditem;
         
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-        g_return_if_fail(ditem != NULL);
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT(dee));
+
+	ditem = dee->_priv->ditem;
+
+        g_assert (ditem != NULL);
 
         lang = gnome_i18n_get_preferred_language();
         
@@ -973,6 +889,9 @@ gnome_ditem_edit_sync_ditem(GnomeDItemEdit *dee,
                 gnome_desktop_item_set_name(ditem, lang, name);
                 gnome_desktop_item_set_comment(ditem, lang, comment);
         }
+
+	/* ui not dirty any more, we just synced it */
+	dee->_priv->ui_dirty = FALSE;
 }
 
 /**
@@ -983,28 +902,29 @@ gnome_ditem_edit_sync_ditem(GnomeDItemEdit *dee,
  * Description: Load a .desktop file and update the editting areas
  * of the object accordingly.
  *
- * Returns:
+ * Returns:  %TRUE if successful, %FALSE otherwise
  */
-void
+gboolean
 gnome_ditem_edit_load_file(GnomeDItemEdit *dee,
                            const gchar *path)
 {
         GnomeDesktopItem * newentry;
 
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-        g_return_if_fail(path != NULL);
+        g_return_val_if_fail (dee != NULL, FALSE);
+        g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), FALSE);
+        g_return_val_if_fail (path != NULL, FALSE);
 
-        newentry = gnome_desktop_item_new_from_file(path, 0);
+        newentry = gnome_desktop_item_new_from_file (path, 0);
 
-        if (newentry) {
-		if(dee->_priv->ditem)
-			gnome_desktop_item_unref(dee->_priv->ditem);
+        if (newentry != NULL) {
+		if (dee->_priv->ditem != NULL)
+			gnome_desktop_item_unref (dee->_priv->ditem);
 		dee->_priv->ditem = newentry;
-                gnome_ditem_edit_sync_display(dee, newentry);
+		dee->_priv->ui_dirty = TRUE;
+                gnome_ditem_edit_sync_display (dee);
+		return TRUE;
         } else {
-                g_warning("Failed to load file into GnomeDItemEdit");
-                return;
+                return FALSE;
         }
 }
 
@@ -1013,32 +933,29 @@ gnome_ditem_edit_load_file(GnomeDItemEdit *dee,
  * @dee: #GnomeDItemEdit object to work with
  * @ditem: #GnomeDesktopItem to use
  *
- * Description: Unref the existing item, and replace it with
- * this one.  This doesn't make a copy, it just refs the the passed
- * item.  It them updates the display to reflect the new item.
- * It will not make any modifications to this ditem, but you shouldn't
- * modify it either.  If you need to modify the item independently,
- * make a copy, call this function and then unref the copy (this function
- * will make it's own reference so it won't kill it but transfer
- * ownership here)
+ * Description: Set the ditem edit UI to this item.  This makes a copy
+ * internally so do not worry about modifying this item later yourself.
+ * Note that since the entire item is stored, any hidden fields will be
+ * preserved when you later get it with #gnome_ditem_edit_get_ditem.
  *
  * Returns:
  */
 void
-gnome_ditem_edit_set_ditem(GnomeDItemEdit *dee,
-                           GnomeDesktopItem *ditem)
+gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
+                           const GnomeDesktopItem *ditem)
 {
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-        g_return_if_fail(ditem != NULL);
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+        g_return_if_fail (ditem != NULL);
 
-	if(dee->_priv->ditem)
-		gnome_desktop_item_unref(dee->_priv->ditem);
-	dee->_priv->ditem = ditem;
+	if (dee->_priv->ditem != NULL)
+		gnome_desktop_item_unref (dee->_priv->ditem);
+	dee->_priv->ditem = gnome_desktop_item_copy (ditem);
+	gnome_desktop_item_set_format (dee->_priv->ditem,
+				       GNOME_DESKTOP_ITEM_GNOME);
 
-	gnome_desktop_item_ref(dee->_priv->ditem);
-
-        gnome_ditem_edit_sync_display(dee, dee->_priv->ditem);
+	dee->_priv->ui_dirty = TRUE;
+        gnome_ditem_edit_sync_display (dee);
 }
 
 /**
@@ -1046,28 +963,26 @@ gnome_ditem_edit_set_ditem(GnomeDItemEdit *dee,
  * @dee: #GnomeDItemEdit object to work with
  *
  * Description: Get the current status of the editting areas
- * as a #GnomeDesktopItem structure.  It always gives a completely
- * newly allocated #GnomeDesktopItem structure.  If a copy of an
- * internal or previously set item is made it is always converted
- * to a gnome type of a desktop item.
+ * as a #GnomeDesktopItem structure.  It will give you a new
+ * reference of the internal structure.  If you wish to modify it,
+ * make a copy of it with #gnome_desktop_item_copy and release this
+ * reference.
  *
- * Returns: a newly allocated #GnomeDesktopItem structure.
+ * Returns: a reference to a #GnomeDesktopItem structure.
  */
 GnomeDesktopItem *
 gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
 {
-        GnomeDesktopItem * ditem;
-
         g_return_val_if_fail(dee != NULL, NULL);
         g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
 
-	if(dee->_priv->ditem) {
-		ditem = gnome_desktop_item_copy(dee->_priv->ditem);
-		gnome_desktop_item_set_format(ditem, GNOME_DESKTOP_ITEM_GNOME);
-	} else
-		ditem = gnome_desktop_item_new();
-	gnome_ditem_edit_sync_ditem(dee, ditem);
-        return ditem;
+	if (dee->_priv->ditem == NULL) {
+		dee->_priv->ditem = gnome_desktop_item_new ();
+		dee->_priv->ui_dirty = TRUE;
+	}
+	if (dee->_priv->ui_dirty)
+		gnome_ditem_edit_sync_ditem (dee);
+	return gnome_desktop_item_ref (dee->_priv->ditem);
 }
 
 /**
@@ -1090,6 +1005,7 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
 	if(dee->_priv->ditem)
 		gnome_desktop_item_unref(dee->_priv->ditem);
 	dee->_priv->ditem = NULL;
+	dee->_priv->ui_dirty = TRUE;
 
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),"");
@@ -1117,40 +1033,41 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
 }
 
 static void
-gnome_ditem_edit_changed(GnomeDItemEdit *dee)
+gnome_ditem_edit_changed (GnomeDItemEdit *dee)
 {
-        gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
+	dee->_priv->ui_dirty = TRUE;
+        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[CHANGED], NULL);
 }
 
 static void
-gnome_ditem_edit_icon_changed(GnomeDItemEdit *dee)
+gnome_ditem_edit_icon_changed (GnomeDItemEdit *dee)
 {
-        gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[ICON_CHANGED], NULL);
+	dee->_priv->ui_dirty = TRUE;
+        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[ICON_CHANGED], NULL);
 }
 
 static void
-gnome_ditem_edit_name_changed(GnomeDItemEdit *dee)
+gnome_ditem_edit_name_changed (GnomeDItemEdit *dee)
 {
-        gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[NAME_CHANGED], NULL);
+	dee->_priv->ui_dirty = TRUE;
+        gtk_signal_emit (GTK_OBJECT (dee), ditem_edit_signals[NAME_CHANGED], NULL);
 }
 
 /**
  * gnome_ditem_edit_get_icon
  * @dee: #GnomeDItemEdit object to work with
  *
- * Description: Get the icon filename. The icon is entered into a
- * #GnomeIconEntry, so the semantics of this call are the same as
- * for #gnome_icon_entry_get_filename
+ * Description: Get the icon filename.
  *
  * Returns: a newly allocated string with the filename of the icon
  */
 gchar *
-gnome_ditem_edit_get_icon(GnomeDItemEdit *dee)
+gnome_ditem_edit_get_icon (GnomeDItemEdit *dee)
 {
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
+        g_return_val_if_fail (dee != NULL, NULL);
+        g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), NULL);
  
-        return gnome_selector_get_uri(GNOME_SELECTOR(dee->_priv->icon_entry));
+        return gnome_selector_get_uri (GNOME_SELECTOR (dee->_priv->icon_entry));
 }
 
 /**
@@ -1172,225 +1089,6 @@ gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
         name = gtk_entry_get_text(GTK_ENTRY(dee->_priv->name_entry));
         return g_strdup(name);
 }
-
-/**
- * gnome_ditem_edit_get_name_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the Name field.
- * Note that the name is only valid for this current language.
- *
- * Returns: a pointer to a #GtkEntry widget used for the Name field
- */
-GtkWidget *
-gnome_ditem_edit_get_name_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->name_entry;
-}
-
-/**
- * gnome_ditem_edit_get_comment_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the Comment field.
- * Note that the comment is only valid for this current language.
- *
- * Returns: a pointer to a #GtkEntry widget used for the Comment field
- */
-GtkWidget *
-gnome_ditem_edit_get_comment_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->comment_entry;
-}
-
-/**
- * gnome_ditem_edit_get_exec_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the Command
- * (exec) field.
- *
- * Returns: a pointer to a #GtkEntry widget used for the Command (exec) field
- */
-GtkWidget *
-gnome_ditem_edit_get_exec_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->exec_entry;
-}
-
-/**
- * gnome_ditem_edit_get_tryexec_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the TryExec field.
- *
- * Returns: a pointer to a #GtkEntry widget used for the TryExec field
- */
-GtkWidget *
-gnome_ditem_edit_get_tryexec_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->tryexec_entry;
-}
-
-/**
- * gnome_ditem_edit_get_doc_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the
- * Documentation field.
- *
- * Returns: a pointer to a #GtkEntry widget used for the
- * Documentation field
- */
-GtkWidget *
-gnome_ditem_edit_get_doc_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->doc_entry;
-}
-
-/**
- * gnome_ditem_edit_get_icon_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the icon entry widget (a #GnomeIconEntry)
- * for the icon field.
- *
- * Returns: a pointer to a #GnomeIconEntry widget
- */
-GtkWidget *
-gnome_ditem_edit_get_icon_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->icon_entry;
-}
-
-/**
- * gnome_ditem_edit_get_wmtitles_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for
- * the comma separated list of titles to watch when launching
- * an application
- *
- * Returns: a pointer to a #GtkEntry widget
- */
-GtkWidget *
-gnome_ditem_edit_get_wmtitles_entry (GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-        return dee->_priv->wmtitles_entry;
-}
-
-/**
- * gnome_ditem_edit_get_simple_dnd_toggle
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the check button widget (a #GtkCheckButton)
- * that sets the GNOME_DESKTOP_ITEM_OLD_STYLE_DROP flag for the
- * #GnomeDesktopItem.
- *
- * Returns: a pointer to a #GtkCheckButton
- */
-GtkWidget *
-gnome_ditem_edit_get_simple_dnd_toggle(GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->simple_dnd_toggle;
-}
-
-/**
- * gnome_ditem_edit_get_file_drop_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the
- * FileDropExec field
- *
- * Returns: a pointer to a #GtkEntry widget
- */
-GtkWidget *
-gnome_ditem_edit_get_file_drop_entry(GnomeDItemEdit  *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->file_drop_entry;
-}
-
-/**
- * gnome_ditem_edit_get_single_file_drop_toggle
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the check button widget (a #GtkCheckButton) for the
- * SingleFileDropOnly field
- *
- * Returns: a pointer to a #GtkCheckButton widget
- */
-GtkWidget *
-gnome_ditem_edit_get_single_file_drop_toggle(GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->single_file_drop_toggle;
-}
-
-/**
- * gnome_ditem_edit_get_url_drop_entry
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the entry widget (a #GtkEntry) for the
- * URLDropExec field
- *
- * Returns: a pointer to a #GtkEntry widget
- */
-GtkWidget *
-gnome_ditem_edit_get_url_drop_entry(GnomeDItemEdit  *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->url_drop_entry;
-}
-
-/**
- * gnome_ditem_edit_get_single_file_drop_toggle
- * @dee: #GnomeDItemEdit object to work with
- *
- * Description: Get the check button widget (a #GtkCheckButton) for the
- * SingleURLDropOnly field
- *
- * Returns: a pointer to a #GtkCheckButton widget
- */
-GtkWidget *
-gnome_ditem_edit_get_single_url_drop_toggle(GnomeDItemEdit *dee)
-{
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
-
-	return dee->_priv->single_url_drop_toggle;
-}
-
 
 #ifdef TEST_DITEM_EDIT
 

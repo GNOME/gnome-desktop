@@ -52,14 +52,14 @@ typedef struct _GnomeDItemEditClass   GnomeDItemEditClass;
 #define GNOME_DITEM_EDIT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DITEM_EDIT, GnomeDItemEditClass))
 
 struct _GnomeDItemEdit {
-        GtkObject object;
+        GtkNotebook __parent__;
   
 	/*< private >*/
 	GnomeDItemEditPrivate *_priv;
 };
 
 struct _GnomeDItemEditClass {
-        GtkObjectClass parent_class;
+        GtkNotebookClass __parent__;
 
         /* Any information changed */
         void (* changed)         (GnomeDItemEdit * gee);
@@ -75,60 +75,25 @@ guint             gnome_ditem_edit_get_type     (void) G_GNUC_CONST;
 
 /*create a new ditem and get the children using the below functions 
   or use the utility new_notebook below*/
-GtkObject *       gnome_ditem_edit_new          (void);
+GtkWidget *       gnome_ditem_edit_new          (void);
 
-/* the main page */
-GtkWidget *       gnome_ditem_edit_child1	(GnomeDItemEdit  *dee);
-/* the DND page */
-GtkWidget *       gnome_ditem_edit_child2	(GnomeDItemEdit  *dee);
-/* the advanced page */
-GtkWidget *       gnome_ditem_edit_child3	(GnomeDItemEdit  *dee);
-
-/* Create a new edit in this notebook - appends two pages to the 
-   notebook. */
-GtkObject *       gnome_ditem_edit_new_notebook (GtkNotebook      *notebook);
 void              gnome_ditem_edit_clear        (GnomeDItemEdit   *dee);
 
-
-
-/* The GnomeDItemEdit does not store a ditem, and it does not keep
-   track of the location field of GnomeDesktopItem which will always
-   be NULL. */
-
 /* Make the display reflect ditem at path */
-void              gnome_ditem_edit_load_file    (GnomeDItemEdit   *dee,
+gboolean          gnome_ditem_edit_load_file    (GnomeDItemEdit   *dee,
                                                  const gchar      *path);
 
 /* Copy the contents of this ditem into the display */
 void              gnome_ditem_edit_set_ditem    (GnomeDItemEdit   *dee,
-                                                 GnomeDesktopItem *ditem);
+                                                 const GnomeDesktopItem *ditem);
 
-/* Generate a ditem based on the contents of the display */
+/* Get a reference (not a copy) of the ditem based on the contents
+ * of the display */
 GnomeDesktopItem *gnome_ditem_edit_get_ditem    (GnomeDItemEdit   *dee);
-
-
 
 /* Return an allocated string, you need to g_free it. */
 gchar *           gnome_ditem_edit_get_icon     (GnomeDItemEdit   *dee);
 gchar *           gnome_ditem_edit_get_name     (GnomeDItemEdit   *dee);
-
-
-
-/* These are accessor functions for the widgets that make up the
-   GnomeDItemEdit editting areas. */
-GtkWidget *       gnome_ditem_edit_get_name_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_comment_entry (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_exec_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_tryexec_entry (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_doc_entry     (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_icon_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_edit_get_wmtitles_entry(GnomeDItemEdit   *dee);
-
-GtkWidget *       gnome_ditem_edit_get_simple_dnd_toggle(GnomeDItemEdit *dee);
-GtkWidget *       gnome_ditem_edit_get_file_drop_entry(GnomeDItemEdit  *dee);
-GtkWidget *       gnome_ditem_edit_get_single_file_drop_toggle(GnomeDItemEdit *dee);
-GtkWidget *       gnome_ditem_edit_get_url_drop_entry(GnomeDItemEdit  *dee);
-GtkWidget *       gnome_ditem_edit_get_single_url_drop_toggle(GnomeDItemEdit *dee);
 
 G_END_DECLS
    
