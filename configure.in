@@ -62,6 +62,18 @@ test -n "$CDROM_HOST" && PROGRAMS_PANEL_CDPLAYER=cdplayer
 AC_SUBST(CDROM_HOST)
 AC_SUBST(PROGRAMS_PANEL_CDPLAYER)
 
+dnl help-browser
+dnl I found `inet_aton' in -lresolv on solaris
+oLIBS="$LIBS"
+RES_LIBS=
+# the following two are covered by X11 too.  If inet_aton is found in
+# plain libc, -lsocket or -lnsl, RES_LIBS will be empty.
+AC_CHECK_FUNC(connect,,[AC_CHECK_LIB(socket,connect)])
+AC_CHECK_FUNC(gethostbyname,,[AC_CHECK_LIB(nsl,gethostbyname)])
+AC_CHECK_FUNC(inet_aton,,[AC_CHECK_LIB(resolv,inet_aton,RES_LIBS="-lresolv")])
+AC_SUBST(RES_LIBS)
+LIBS="$oLIBS"
+
 AC_CONFIG_SUBDIRS(gemvt)
 
 AC_OUTPUT([
