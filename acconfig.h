@@ -90,4 +90,4 @@
    [SunOS 4.1.2, 4.1.3, and 4.1.3_U1 are reported to have this problem.
    SunOS 4.1.1 seems not to be affected.]  */
 #undef STATFS_TRUNCATES_BLOCK_COUNTS
-
+#undef HAVE_DEVGTK
