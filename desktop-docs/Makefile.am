@@ -8,68 +8,76 @@
 gnome_intro_helpdir = $(datadir)/gnome/help/gnome-intro/C
 
 GNOME_INTRO_HTML_FILES = \
-	$(srcdir)/gnome-intro/c93191.html \
-	$(srcdir)/gnome-intro/f13.html \
-	$(srcdir)/gnome-intro/a-sample-session.html \
-	$(srcdir)/gnome-intro/c93230.html \
-	$(srcdir)/gnome-intro/f1346.html \
-	$(srcdir)/gnome-intro/a-sample-session75.html \
-	$(srcdir)/gnome-intro/c93302.html \
-	$(srcdir)/gnome-intro/gnome-intro.html \
-	$(srcdir)/gnome-intro/c93.html \
-	$(srcdir)/gnome-intro/c93372.html \
-	$(srcdir)/gnome-intro/c93127.html \
-	$(srcdir)/gnome-intro/c93412.html \
-	$(srcdir)/gnome-intro/c93175.html \
-	$(srcdir)/gnome-intro/docbook.css*
+	gnome-intro/c93191.html \
+	gnome-intro/f13.html \
+	gnome-intro/a-sample-session.html \
+	gnome-intro/c93230.html \
+	gnome-intro/f1346.html \
+	gnome-intro/a-sample-session75.html \
+	gnome-intro/c93302.html \
+	gnome-intro/gnome-intro.html \
+	gnome-intro/c93.html \
+	gnome-intro/c93372.html \
+	gnome-intro/c93127.html \
+	gnome-intro/c93412.html \
+	gnome-intro/c93175.html \
+	gnome-intro/docbook.css
 
-GNOME_INTRO_PICTURES = $(srcdir)/pix/terminal.gif \
-	$(srcdir)/pix/gedit-2files.gif \
-	$(srcdir)/pix/ghex-2files.gif \
-	$(srcdir)/pix/ghex-basic.gif \
-	$(srcdir)/pix/gmc-basic.gif \
-	$(srcdir)/pix/help-browser-initial.gif \
-	$(srcdir)/pix/help-browser-sample.gif \
-	$(srcdir)/pix/help-icon.gif \
-	$(srcdir)/pix/panel-basic.gif \
-	$(srcdir)/pix/panel-menu-select.gif \
-	$(srcdir)/pix/panel-menu.gif \
-	$(srcdir)/pix/panel-icons.gif \
-	$(srcdir)/pix/panel-add-icon.gif \
-	$(srcdir)/pix/gmix.gif \
-	$(srcdir)/pix/gtcd.gif \
-	$(srcdir)/pix/gtop-procs.gif \
-	$(srcdir)/pix/gtcd-track-list.gif \
-	$(srcdir)/pix/gtcd-cddb.gif \
-	$(srcdir)/pix/gulp.gif \
-	$(srcdir)/pix/calendar.gif \
-	$(srcdir)/pix/ee-menu.gif \
-	$(srcdir)/pix/gtop-mem.gif \
-	$(srcdir)/pix/gtop-kill.gif \
-	$(srcdir)/pix/gtt-basic.gif \
-	$(srcdir)/pix/background-properties.gif \
-	$(srcdir)/pix/gtt-new.gif \
-	$(srcdir)/pix/gtt-2proj.gif \
-	$(srcdir)/pix/gcalc.gif \
-	$(srcdir)/pix/freecell.gif \
-	$(srcdir)/pix/mahjongg.gif \
-	$(srcdir)/pix/same-gnome.gif \
-	$(srcdir)/pix/gnomine.gif
+GNOME_INTRO_PICTURES = pix/terminal.gif \
+	pix/gedit-2files.gif \
+	pix/ghex-2files.gif \
+	pix/ghex-basic.gif \
+	pix/gmc-basic.gif \
+	pix/help-browser-initial.gif \
+	pix/help-browser-sample.gif \
+	pix/help-icon.gif \
+	pix/panel-basic.gif \
+	pix/panel-menu-select.gif \
+	pix/panel-menu.gif \
+	pix/panel-icons.gif \
+	pix/panel-add-icon.gif \
+	pix/gmix.gif \
+	pix/gtcd.gif \
+	pix/gtop-procs.gif \
+	pix/gtcd-track-list.gif \
+	pix/gtcd-cddb.gif \
+	pix/gulp.gif \
+	pix/calendar.gif \
+	pix/ee-menu.gif \
+	pix/gtop-mem.gif \
+	pix/gtop-kill.gif \
+	pix/gtt-basic.gif \
+	pix/background-properties.gif \
+	pix/gtt-new.gif \
+	pix/gtt-2proj.gif \
+	pix/gcalc.gif \
+	pix/freecell.gif \
+	pix/mahjongg.gif \
+	pix/same-gnome.gif \
+	pix/gnomine.gif
 
+# the "portable" `basename' stand-in should work for the files that we
+# throw at it
 install-data-local: gnome-intro.html
 	$(mkinstalldirs) $(gnome_intro_helpdir)
 	$(mkinstalldirs) $(gnome_intro_helpdir)/pix
 	$(INSTALL_DATA) $(srcdir)/topic.dat $(gnome_intro_helpdir)/topic.dat
 	$(INSTALL_DATA) $(srcdir)/gnome-intro.html $(gnome_intro_helpdir)/index.html
-	$(INSTALL_DATA) $(GNOME_INTRO_HTML_FILES) $(gnome_intro_helpdir)
-	$(INSTALL_DATA) $(GNOME_INTRO_PICTURES) $(gnome_intro_helpdir)/pix
+	for file in $(GNOME_INTRO_HTML_FILES); do \
+	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
+	  $(INSTALL_DATA) $(srcdir)/$$file $(gnome_intro_helpdir)/$$basefile; \
+	done
+	for file in $(GNOME_INTRO_PICTURES); do \
+	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
+	  $(INSTALL_DATA) $(srcdir)/$$file $(gnome_intro_helpdir)/pix/$$basefile; \
+	done
 
-INTRO_EXTRA_DIST = $(srcdir)/gnome-intro.sgml
-GNOME_INTRO_GIFS = $(srcdir)/pix/panel-basic.gif $(srcdir)/pix/panel-menu.gif \
-	$(srcdir)/pix/panel-menu-select.gif
+INTRO_EXTRA_DIST = gnome-intro.sgml
+GNOME_INTRO_GIFS = pix/panel-basic.gif pix/panel-menu.gif \
+	pix/panel-menu-select.gif
 
 EXTRA_DIST = $(INTRO_EXTRA_DIST) $(GNOME_INTRO_HTML_FILES) \
-	$(GNOME_INTRO_GIFS) $(GNOME_INTRO_PICTURES) $(srcdir)/topic.dat
+	$(GNOME_INTRO_GIFS) $(GNOME_INTRO_PICTURES) topic.dat
 
 
 
