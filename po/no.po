@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.7\n"
-"POT-Creation-Date: 1999-09-13 01:43+0200\n"
-"PO-Revision-Date: 1999-09-13 01:55+02:00\n"
+"POT-Creation-Date: 1999-09-15 00:37+0200\n"
+"PO-Revision-Date: 1999-09-15 00:40+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,7 +157,8 @@ msgstr "En analog klokke lik den som finnes i CDE-panelet"
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:512
+#: applets/desk-guide/deskguide_applet.c:189 applets/diskusage/diskusage.c:711
+#: applets/drivemount/drivemount.c:512
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:406 applets/gkb/gkb.c:506
@@ -173,7 +174,8 @@ msgstr "Egenskaper ..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:783
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:518
+#: applets/desk-guide/deskguide_applet.c:183 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
 #: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
@@ -527,6 +529,33 @@ msgstr "Temafil (katalog):"
 msgid "Theme"
 msgstr "Tema"
 
+#: applets/desk-guide/deskguide_applet.c:120
+msgid "GNOME Desktop Guide (Pager)"
+msgstr "GNOME Skrivebordsoversikt (Pager)"
+
+#: applets/desk-guide/deskguide_applet.c:145
+msgid ""
+"You are not running a GNOME Compliant Window Manager.\n"
+"GNOME support by the window\n"
+"manager is a requirement for the Desk Guide to work properly."
+msgstr ""
+"Du kjører ikke en vindusbehandler som følger GNOMEs\n"
+"retningslinjer. GNOME støtte av vindushåndtereren\n"
+"er helt nødvendig for at Desk Guide skal virke\n"
+"ordentlig."
+
+#: applets/desk-guide/deskguide_applet.c:151
+msgid "Desk Guide Error"
+msgstr "Desk Guide feil"
+
+#: applets/desk-guide/deskguide_applet.c:771
+msgid "Global"
+msgstr "Global"
+
+#: applets/desk-guide/deskguide_applet.c:828
+msgid "Desk Guide Settings"
+msgstr "Innstillinger for Desk Guide"
+
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
 msgstr "PPP oppringingsapplet"
@@ -658,8 +687,8 @@ msgid "Use automount friendly status test"
 msgstr "Bruk automount-vennlig statustest"
 
 #: applets/esd-manager/esdmanager_applet.c:30
-msgid "Esound MAnager Applet"
-msgstr "Esound manager applet"
+msgid "Esound Manager Applet"
+msgstr "Esound Manager Applet"
 
 #: applets/esd-manager/esdmanager_applet.c:30
 msgid "Copyright (C)1998 Red Hat Software"
@@ -1059,18 +1088,22 @@ msgstr "Vis knappeikoner"
 
 #. Radio buttons for which tasks to show
 #: applets/gnome-pager/gnomepager_applet.c:353
+#: applets/tasklist/tasklist_properties.c:233
 msgid "Which tasks to show"
 msgstr "Hvilke oppgaver som skal vises"
 
 #: applets/gnome-pager/gnomepager_applet.c:362
+#: applets/tasklist/tasklist_properties.c:241
 msgid "Show all tasks"
 msgstr "Vis alle oppgaver"
 
 #: applets/gnome-pager/gnomepager_applet.c:368
+#: applets/tasklist/tasklist_properties.c:250
 msgid "Show normal tasks only"
 msgstr "Vis kun normale oppgaver"
 
 #: applets/gnome-pager/gnomepager_applet.c:374
+#: applets/tasklist/tasklist_properties.c:246
 msgid "Show minimized tasks only"
 msgstr "Vis kun minimerte oppgaver"
 
@@ -1083,6 +1116,7 @@ msgid "Show minimized tasks on all desktops"
 msgstr "Vis minimerte oppgaver på alle skrivebord"
 
 #: applets/gnome-pager/gnomepager_applet.c:401
+#: applets/tasklist/tasklist_properties.c:220
 msgid "Geometry"
 msgstr "Geometri"
 
@@ -1147,7 +1181,8 @@ msgstr "Skygge / Ikke skygge"
 msgid "Stick / Unstick"
 msgstr "Fest / Løsne"
 
-#: applets/gnome-pager/gnomepager_applet.c:2583 panel/launcher.c:44
+#: applets/gnome-pager/gnomepager_applet.c:2583
+#: applets/tasklist/tasklist_menu.c:160 panel/launcher.c:44
 msgid "Close"
 msgstr "Lukk"
 
@@ -1467,7 +1502,7 @@ msgstr "Bruk ISDN"
 msgid "Advanced"
 msgstr "Avansert"
 
-#: applets/multiload/cpuload.c:47 applets/multiload/main.c:152
+#: applets/multiload/cpuload.c:47 applets/multiload/main.c:151
 msgid "CPU Load"
 msgstr "Prosessorlast"
 
@@ -1528,11 +1563,11 @@ msgstr "Ledig"
 msgid "Used"
 msgstr "Brukt"
 
-#: applets/multiload/main.c:156 applets/multiload/memload.c:47
+#: applets/multiload/main.c:155 applets/multiload/memload.c:47
 msgid "Memory Load"
 msgstr "Minnelast"
 
-#: applets/multiload/main.c:160 applets/multiload/swapload.c:47
+#: applets/multiload/main.c:159 applets/multiload/swapload.c:47
 msgid "Swap Load"
 msgstr "Belastning på swap"
 
@@ -1705,6 +1740,115 @@ msgstr "Vis artikkelliste"
 #: applets/slashapp/slashapp.c:646
 msgid "Refresh articles"
 msgstr "Gjenoppfrisk artikler"
+
+#: applets/tasklist/tasklist_menu.c:149
+msgid "Restore"
+msgstr "Gjenopprett"
+
+#: applets/tasklist/tasklist_menu.c:149
+msgid "Minimize"
+msgstr "Minimer"
+
+#: applets/tasklist/tasklist_menu.c:153
+msgid "Unshade"
+msgstr "Fjern skygging"
+
+#: applets/tasklist/tasklist_menu.c:153
+msgid "Shade"
+msgstr "Skygging"
+
+#: applets/tasklist/tasklist_menu.c:157
+msgid "Unstick"
+msgstr "Løsne"
+
+#: applets/tasklist/tasklist_menu.c:157
+msgid "Stick"
+msgstr "Fest"
+
+#: applets/tasklist/tasklist_menu.c:166
+msgid "Kill"
+msgstr "Drep"
+
+#. Horizontal
+#: applets/tasklist/tasklist_properties.c:145 panel/panel_config.c:548
+msgid "Horizontal"
+msgstr "Horisontal"
+
+#: applets/tasklist/tasklist_properties.c:153
+#: applets/tasklist/tasklist_properties.c:201
+msgid "Tasklist width:"
+msgstr "Bredde for oppgaveliste:"
+
+#: applets/tasklist/tasklist_properties.c:160
+msgid "Number of rows:"
+msgstr "Antall rader:"
+
+#: applets/tasklist/tasklist_properties.c:168
+msgid "Fixed tasklist width"
+msgstr "Fast bredde for oppgaveliste"
+
+#: applets/tasklist/tasklist_properties.c:172
+msgid "Dynamic tasklist width"
+msgstr "Dynamisk bredde for oppgaveliste"
+
+#: applets/tasklist/tasklist_properties.c:177
+msgid "Default task width:"
+msgstr "Standard bredde for oppgaveliste:"
+
+#: applets/tasklist/tasklist_properties.c:186 panel/panel_config.c:560
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: applets/tasklist/tasklist_properties.c:193
+msgid "Tasklist height:"
+msgstr "Høyde for oppgaveliste:"
+
+#: applets/tasklist/tasklist_properties.c:209
+msgid "Fixed tasklist height"
+msgstr "Fast høyde for oppgaveliste"
+
+#: applets/tasklist/tasklist_properties.c:213
+msgid "Dynamic tasklist height"
+msgstr "Dynamisk høyde for oppgaveliste"
+
+#: applets/tasklist/tasklist_properties.c:254
+msgid "Normal tasks appear on all desktops"
+msgstr "Normale oppgaver vises på alle skrivebord"
+
+#: applets/tasklist/tasklist_properties.c:257
+msgid "Minimized tasks appear on all desktops"
+msgstr "Minimerte oppgaver vises på alle skrivebord"
+
+#. Miscellaneous frame
+#: applets/tasklist/tasklist_properties.c:260 help-browser/toc-man.c:25
+#: help-browser/toc2-man.c:27 panel/panel_config_global.c:503
+#: panel/panel_config_global.c:623
+msgid "Miscellaneous"
+msgstr "Forskjellig"
+
+#: applets/tasklist/tasklist_properties.c:268
+msgid "Show mini icons"
+msgstr "Vis små ikoner"
+
+#: applets/tasklist/tasklist_properties.c:272
+msgid "Appearance"
+msgstr "Utseende"
+
+#: applets/tasklist/tasklist_properties.c:280
+msgid "General behavior"
+msgstr "Generell oppførsel"
+
+#: applets/tasklist/tasklist_properties.c:287
+msgid "Confirm before killing windows"
+msgstr "Bekreft før vinduer drepes"
+
+#: applets/tasklist/tasklist_properties.c:291
+msgid "Behavior"
+msgstr "Oppførsel"
+
+#: applets/tasklist/tasklist_properties.c:304
+msgid "Tasklist properties"
+msgstr "Egenskaper for oppgaveliste"
 
 #: applets/webcontrol/webcontrol.c:56
 msgid "The Web Browser Controller"
@@ -1958,11 +2102,11 @@ msgstr "uten_navn.desktop"
 msgid "untitled"
 msgstr "uten_navn"
 
-#: gnome-terminal/gnome-terminal.c:207
+#: gnome-terminal/gnome-terminal.c:205
 msgid "GNOME Terminal"
 msgstr "GNOME terminal"
 
-#: gnome-terminal/gnome-terminal.c:210
+#: gnome-terminal/gnome-terminal.c:208
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME terminalemulator program."
 
@@ -2229,107 +2373,107 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2291
+#: gnome-terminal/gnome-terminal.c:2297
 msgid "Terminal class name"
 msgstr "Navn på terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:2291
+#: gnome-terminal/gnome-terminal.c:2297
 msgid "TCLASS"
 msgstr "TKLASSE"
 
-#: gnome-terminal/gnome-terminal.c:2294
+#: gnome-terminal/gnome-terminal.c:2300
 msgid "Specifies font name"
 msgstr "Spesifiserer navnet på skrifttypen"
 
-#: gnome-terminal/gnome-terminal.c:2294
+#: gnome-terminal/gnome-terminal.c:2300
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2297
+#: gnome-terminal/gnome-terminal.c:2303
 msgid "Do not start up shells as login shells"
 msgstr "Ikke start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:2300
+#: gnome-terminal/gnome-terminal.c:2306
 msgid "Start up shells as login shells"
 msgstr "Start opp kommandoskall som loginskall"
 
-#: gnome-terminal/gnome-terminal.c:2303
+#: gnome-terminal/gnome-terminal.c:2309
 msgid "Specifies the geometry for the main window"
 msgstr "Spesifiserer geometrien for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:2303
+#: gnome-terminal/gnome-terminal.c:2309
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: gnome-terminal/gnome-terminal.c:2306
+#: gnome-terminal/gnome-terminal.c:2312
 msgid "Execute this program instead of a shell"
 msgstr "Kjør dette programmet i stedet for et skall"
 
-#: gnome-terminal/gnome-terminal.c:2306 gnome-terminal/gnome-terminal.c:2309
+#: gnome-terminal/gnome-terminal.c:2312 gnome-terminal/gnome-terminal.c:2315
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: gnome-terminal/gnome-terminal.c:2309
+#: gnome-terminal/gnome-terminal.c:2315
 msgid "Execute this program the same way as xterm does"
 msgstr "Kjør dette programmet på samme måte som xterm gjør det"
 
-#: gnome-terminal/gnome-terminal.c:2312
+#: gnome-terminal/gnome-terminal.c:2318
 msgid "Foreground color"
 msgstr "Forgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:2312 gnome-terminal/gnome-terminal.c:2315
+#: gnome-terminal/gnome-terminal.c:2318 gnome-terminal/gnome-terminal.c:2321
 msgid "COLOR"
 msgstr "FARGE"
 
-#: gnome-terminal/gnome-terminal.c:2315 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2321 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
 
-#: gnome-terminal/gnome-terminal.c:2318
+#: gnome-terminal/gnome-terminal.c:2324
 msgid "Update utmp entry"
 msgstr "Oppdater utmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:2318
+#: gnome-terminal/gnome-terminal.c:2324
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2321
+#: gnome-terminal/gnome-terminal.c:2327
 msgid "Do not update utmp entry"
 msgstr "Ikke oppdater utmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:2321
+#: gnome-terminal/gnome-terminal.c:2327
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2324
+#: gnome-terminal/gnome-terminal.c:2330
 msgid "Update wtmp entry"
 msgstr "Oppdater wtmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:2324
+#: gnome-terminal/gnome-terminal.c:2330
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2327
+#: gnome-terminal/gnome-terminal.c:2333
 msgid "Do not update wtmp entry"
 msgstr "Ikke oppdater wtmp-oppføring"
 
-#: gnome-terminal/gnome-terminal.c:2327
+#: gnome-terminal/gnome-terminal.c:2333
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2330
+#: gnome-terminal/gnome-terminal.c:2336
 msgid "Set the window title"
 msgstr "Sett vindustittel"
 
-#: gnome-terminal/gnome-terminal.c:2330
+#: gnome-terminal/gnome-terminal.c:2336
 msgid "TITLE"
 msgstr "TITTEL"
 
-#: gnome-terminal/gnome-terminal.c:2333
+#: gnome-terminal/gnome-terminal.c:2339
 msgid "Set the TERM variable"
 msgstr "Sett TERM variabelen"
 
-#: gnome-terminal/gnome-terminal.c:2333
+#: gnome-terminal/gnome-terminal.c:2339
 msgid "TERMNAME"
 msgstr "TERMNAME"
 
@@ -2603,12 +2747,6 @@ msgstr "Filformater"
 #: help-browser/toc-man.c:24 help-browser/toc2-man.c:26
 msgid "Games"
 msgstr "Spill"
-
-#. Miscellaneous frame
-#: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:503 panel/panel_config_global.c:623
-msgid "Miscellaneous"
-msgstr "Forskjellig"
 
 #: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
 msgid "Administration"
@@ -3151,15 +3289,6 @@ msgstr "Sørøst"
 #: panel/panel_config.c:538
 msgid "Orientation"
 msgstr "Plassering"
-
-#. Horizontal
-#: panel/panel_config.c:548
-msgid "Horizontal"
-msgstr "Horisontal"
-
-#: panel/panel_config.c:560
-msgid "Vertical"
-msgstr "Vertikal"
 
 #. selector frame
 #: panel/panel_config.c:696 panel/panel_config.c:909
