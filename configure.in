@@ -33,7 +33,6 @@ AC_MSG_ERROR(Please upgrade your GTK+)])
 dnl Check for new enough gnome-libs
 CPPFLAGS_save=$CPPFLAGS
 LDFLAGS_save=$LDFLAGS
-
 CPPFLAGS=`gnome-config --cflags gnomeui`
 LDFLAGS=`gnome-config --libs gnomeui`
 
@@ -50,7 +49,7 @@ ALL_LINGUAS="bg_BG.cp1251 ca cs da de el en_GB es et eu fi fr ga gl hu it ja ko 
 AM_GNOME_GETTEXT
 # AM_GNOME_GETTEXT above substs $DATADIRNAME
 # this is the directory where the *.{mo,gmo} files are installed
-gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
+gnomelocaledir='${prefix}/share/locale'
 AC_SUBST(gnomelocaledir)
 
 AC_SUBST(CFLAGS)
