@@ -29,7 +29,6 @@ Desktop_in_files = \
 	Xemacs.desktop		\
 	rxvt.desktop		\
 	Emacs.desktop		\
-	GIMP.desktop		\
 	xterm.desktop		\
 	Netscape.desktop
 
