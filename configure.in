@@ -27,6 +27,9 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 GNOME_XML_CHECK
 
+AM_PATH_GTK(1.2.5, ,[
+AC_MSG_ERROR(Please upgrade your GTK+)])
+
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
