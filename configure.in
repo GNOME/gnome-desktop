@@ -48,6 +48,10 @@ dnl properties-keyboard
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
+dnl gnome-session
+AC_CHECK_HEADERS(X11/SM/SMlib.h, session=yes, session=no)
+AM_CONDITIONAL(SESSION, test $session = yes)
+
 dnl panel/cdplayer
 PROGRAMS_PANEL_CDPLAYER=""
 AC_CANONICAL_HOST
