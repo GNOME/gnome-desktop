@@ -1242,7 +1242,6 @@ substitute_in_string (const GnomeDesktopItem *item,
 		i++;
 
 		switch (arg[i]) {
-		/* FIXME: subst also %U, %F, %N, %D */
 		case '%':
 			g_string_append_c (str, '%');
 			break;
@@ -2540,6 +2539,12 @@ decode_string_and_dup (const char *s)
 	do {
 		if (*s == '\\'){
 			switch (*(++s)){
+			case 's':
+				*p++ = ' ';
+				break;
+			case 't':
+				*p++ = '\t';
+				break;
 			case 'n':
 				*p++ = '\n';
 				break;
@@ -2575,13 +2580,17 @@ escape_string_and_dup (const char *s)
 	q = s;
 	while (*q){
 		len++;
-		if (*q == '\n' || *q == '\\' || *q == '\r' || *q == '\0')
+		if (strchr ("\n\r\t\\", *q) != NULL)
 			len++;
 		q++;
 	}
 	return_value = p = (char *) g_malloc (len + 1);
 	do {
 		switch (*s){
+		case '\t':
+			*p++ = '\\';
+			*p++ = 't';
+			break;
 		case '\n':
 			*p++ = '\\';
 			*p++ = 'n';
@@ -3127,6 +3136,8 @@ ditem_load (ReadBuf *rb,
 						(item->sections, cur_section);
 				}
 				state = IgnoreToEOL;
+			} else if (c == '[') {
+				/* FIXME: probably error out instead of ignoring this */
 			} else {
 				*next++ = c;
 			}

@@ -54,6 +54,7 @@ struct _GnomeDItemEditPrivate {
 	GtkWidget *child2;
 
         GtkWidget *name_entry;
+        GtkWidget *generic_name_entry;
         GtkWidget *comment_entry;
         GtkWidget *exec_label;
         GtkWidget *exec_entry;
@@ -71,7 +72,9 @@ struct _GnomeDItemEditPrivate {
         GtkWidget *translations;
         GtkWidget *transl_lang_entry;
         GtkWidget *transl_name_entry;
+        GtkWidget *transl_generic_name_entry;
         GtkWidget *transl_comment_entry;
+        GtkWidget *transl_icon_entry;
 };
 
 static void gnome_ditem_edit_class_init   (GnomeDItemEditClass *klass);
@@ -277,6 +280,7 @@ fill_easy_page (GnomeDItemEdit *dee,
 	GtkWidget *icon_entry;
 	GtkWidget *check_button;
 
+	/* Name */
 	label = label_new (_("Name:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
 
@@ -294,6 +298,25 @@ fill_easy_page (GnomeDItemEdit *dee,
 
 	set_relation (dee->_priv->name_entry, GTK_LABEL (label));
 
+	/* Generic Name */
+	label = label_new (_("Generic name:"));
+	table_attach_label (GTK_TABLE (table), label, 0, 1, 0, 1);
+
+	entry = gtk_entry_new ();
+	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 0, 1);
+
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_changed),
+				 dee, G_CONNECT_SWAPPED);		
+
+	g_signal_connect_object (entry, "changed",
+				 G_CALLBACK (gnome_ditem_edit_name_changed),
+				 dee, G_CONNECT_SWAPPED);
+	dee->_priv->generic_name_entry = entry;
+
+	set_relation (dee->_priv->generic_name_entry, GTK_LABEL (label));
+
+	/* Comment */
 	label = label_new (_("Comment:"));
 	table_attach_label (GTK_TABLE (table), label, 0, 1, 1, 2);
 
@@ -348,6 +371,8 @@ fill_easy_page (GnomeDItemEdit *dee,
 	gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 4, 5,
 			  GTK_EXPAND | GTK_FILL, 0, 0, 0); 
 
+	/* FIXME: locale specific icons!!! how the hell do we
+	 * handle that !!! */
         icon_entry = gnome_icon_entry_new (
 			"desktop-icon", _("Browse icons"));
 
@@ -417,18 +442,26 @@ translations_select_row (GtkTreeSelection *selection,
         GtkTreeIter   iter;
         char         *lang;
         char         *name;
+        char         *generic_name;
         char         *comment;
 
 	 if (!gtk_tree_selection_get_selected (selection, &model, &iter))
 		return;
 
 	gtk_tree_model_get (
-		model, &iter, 0, &lang, 1, &name, 2, &comment, -1);
+		model, &iter,
+		0, &lang,
+		1, &name,
+		2, &generic_name,
+		3, &comment,
+		-1);
 
         gtk_entry_set_text(
 		GTK_ENTRY (dee->_priv->transl_lang_entry), lang);
         gtk_entry_set_text (
 		GTK_ENTRY (dee->_priv->transl_name_entry), name);
+        gtk_entry_set_text (
+		GTK_ENTRY (dee->_priv->transl_generic_name_entry), generic_name);
         gtk_entry_set_text(
 		GTK_ENTRY (dee->_priv->transl_comment_entry), comment);
 	
@@ -447,12 +480,14 @@ translations_add (GtkWidget      *button,
 	const GList  *langs;
 	const char   *tmp;
 	const char   *name;
+	const char   *generic_name;
 	const char   *comment;
 	char         *lang;
 	gboolean      ret;
 
 	tmp     = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_lang_entry));
 	name    = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_name_entry));
+	generic_name = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_generic_name_entry));
 	comment = gtk_entry_get_text (GTK_ENTRY (dee->_priv->transl_comment_entry));
 
 	g_assert (tmp != NULL && name != NULL && comment != NULL);
@@ -474,6 +509,8 @@ translations_add (GtkWidget      *button,
 		gtk_entry_set_text (
 			GTK_ENTRY (dee->_priv->name_entry), name);
 		gtk_entry_set_text (
+			GTK_ENTRY (dee->_priv->generic_name_entry), generic_name);
+		gtk_entry_set_text (
 			GTK_ENTRY (dee->_priv->comment_entry), comment);
 	}
 
@@ -489,7 +526,10 @@ translations_add (GtkWidget      *button,
 		if (!strcmp (lang, string)) {
 			gtk_list_store_set (
 				GTK_LIST_STORE (model), &iter,
-				1, name, 2, comment, -1);
+				1, name,
+				2, generic_name,
+				3, comment,
+				-1);
 
 			g_signal_emit (dee, ditem_edit_signals [CHANGED], 0);
 
@@ -507,12 +547,18 @@ translations_add (GtkWidget      *button,
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (
 		GTK_LIST_STORE (model), &iter,
-		0, lang, 1, name, 2, comment, -1);
+		0, lang,
+		1, name,
+		2, generic_name,
+		3, comment,
+		-1);
 
 	gtk_editable_delete_text (
 		GTK_EDITABLE (dee->_priv->transl_lang_entry), 0, -1);
 	gtk_editable_delete_text (
 		GTK_EDITABLE (dee->_priv->transl_name_entry), 0, -1);
+	gtk_editable_delete_text (
+		GTK_EDITABLE (dee->_priv->transl_generic_name_entry), 0, -1);
 	gtk_editable_delete_text (
 		GTK_EDITABLE (dee->_priv->transl_comment_entry), 0, -1);
 
@@ -550,7 +596,7 @@ setup_translations_list (GnomeDItemEdit *dee)
 	GtkListStore      *model;
 	GtkWidget         *tree;
 
-	model = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	model = gtk_list_store_new (4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 	tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
 	g_object_unref (model);
 
@@ -567,8 +613,13 @@ setup_translations_list (GnomeDItemEdit *dee)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 
 	column = gtk_tree_view_column_new_with_attributes (
-					_("Comment"), renderer,
+					_("Generic name"), renderer,
 					"text", 2, NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+	column = gtk_tree_view_column_new_with_attributes (
+					_("Comment"), renderer,
+					"text", 3, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (tree));
@@ -636,6 +687,15 @@ fill_advanced_page (GnomeDItemEdit *dee,
 
 	set_tooltip (dee, GTK_WIDGET(entry), _("Name"));
 	set_relation (dee->_priv->transl_name_entry, GTK_LABEL (label));
+
+	entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
+	dee->_priv->transl_generic_name_entry = entry;
+
+	set_tooltip (dee, GTK_WIDGET(entry), _("Generic name"));
+	set_relation (dee->_priv->transl_generic_name_entry, GTK_LABEL (label));
+
+	/* FIXME: transl_icon_entry, locale specific icons */
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
@@ -871,25 +931,28 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
         for (li = i18n_list; li != NULL; li = li->next) {
-                const char *text[3];
-                const gchar* lang = li->data;
-                cs = lang;
-                text[0] = cs ? cs : "";
-                cs = gnome_desktop_item_get_localestring_lang
+                const char *name, *comment, *generic_name;
+                const char *lang = li->data;
+                name = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_NAME, lang);
-                text[1] = cs ? cs : "";
-                cs = gnome_desktop_item_get_localestring_lang
+                generic_name = gnome_desktop_item_get_localestring_lang
+			(ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME, lang);
+                comment = gnome_desktop_item_get_localestring_lang
 			(ditem, GNOME_DESKTOP_ITEM_COMMENT, lang);
-                text[2] = cs ? cs : "";
                 gtk_list_store_append (GTK_LIST_STORE(model), &iter);
-                gtk_list_store_set (GTK_LIST_STORE(model),&iter, 0, 
-                                    text[0],1,text[1],2,text[2],-1);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, lang ? lang : "",
+				    1, name ? name : "",
+				    2, generic_name ? generic_name : "",
+				    3, comment ? comment : "",
+				    -1);
         }
         g_list_free (i18n_list);
 
 	/* clear the entries for add/remove */
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_name_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_generic_name_entry), "");
         gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_comment_entry), "");
 
 	/* ui can't be dirty, I mean, damn we just synced it from the ditem */
@@ -1136,6 +1199,7 @@ gnome_ditem_edit_clear (GnomeDItemEdit *dee)
         gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
+        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_generic_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dee->_priv->translations));
         gtk_list_store_clear (GTK_LIST_STORE (model));

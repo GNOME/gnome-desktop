@@ -65,6 +65,7 @@ typedef struct _GnomeDesktopItem GnomeDesktopItem;
 #define GNOME_DESKTOP_ITEM_ENCODING	"Encoding" /* string */
 #define GNOME_DESKTOP_ITEM_VERSION	"Version"  /* numeric */
 #define GNOME_DESKTOP_ITEM_NAME		"Name" /* localestring */
+#define GNOME_DESKTOP_ITEM_GENERIC_NAME	"GenericName" /* localestring */
 #define GNOME_DESKTOP_ITEM_TYPE		"Type" /* string */
 #define GNOME_DESKTOP_ITEM_FILE_PATTERN "FilePattern" /* regexp(s) */
 #define GNOME_DESKTOP_ITEM_TRY_EXEC	"TryExec" /* string */
