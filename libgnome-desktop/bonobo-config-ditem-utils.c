@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-moniker-util.h>
@@ -94,7 +95,7 @@ bonobo_config_ditem_decode_any (BonoboConfigDItem *ditem, DirEntry *de, const gc
 #define DECODE_BASIC(k,t,v)                                                         \
 case CORBA_tk_ ## k:                                                                \
 	any = bonobo_arg_new (TC_CORBA_ ## t);                                      \
-	BONOBO_ARG_SET_GENERAL (any, v, TC_CORBA_ ## k, CORBA_ ## t, ev);           \
+	BONOBO_ARG_SET_GENERAL (any, v, TC_CORBA_ ## t, CORBA_ ## t, ev);           \
 	break;
 
 		DECODE_BASIC (short,     short,              atoi  (de->value));
@@ -110,6 +111,7 @@ case CORBA_tk_ ## k:                                                            
 
 #undef DECODE_BASIC
 
+#ifndef ENABLE_ORBIT2
 	case CORBA_tk_boolean:
 		if (!strcmp (de->value, "0") || !strcasecmp (de->value, "false")) {
 			any = bonobo_arg_new (TC_CORBA_boolean);
@@ -133,7 +135,11 @@ case CORBA_tk_ ## k:                                                            
 
 	case CORBA_tk_sequence: {
 		DynamicAny_DynSequence dynseq;
+#ifdef ENABLE_ORBIT2
+		DynamicAny_AnySeq *dynany_anyseq;
+#else
 		DynamicAny_DynAny_AnySeq *dynany_anyseq;
+#endif
 		gulong length = 0, i;
 		GSList *l, *array = NULL;
 
@@ -146,12 +152,36 @@ case CORBA_tk_ ## k:                                                            
 			length = g_slist_length (array);
 		}
 
+#ifdef ENABLE_ORBIT2
+		{
+			DynamicAny_DynAnyFactory f;
+			
+			f = (DynamicAny_DynAnyFactory)
+				CORBA_ORB_resolve_initial_references (
+					bonobo_orb(), "DynAnyFactory", ev);
+			
+			g_return_val_if_fail (!BONOBO_EX (ev), NULL);
+			
+			dynseq = (DynamicAny_DynSequence)
+				DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (
+					f, type, ev);
+
+			CORBA_Object_release ((CORBA_Object) f, ev);
+		}
+#else
 		dynseq = CORBA_ORB_create_dyn_sequence (bonobo_orb (), type, ev);
+#endif
 		DynamicAny_DynSequence_set_length (dynseq, length, ev);
 
+#ifdef ENABLE_ORBIT2
+		dynany_anyseq = DynamicAny_AnySeq__alloc ();
+		dynany_anyseq->_length = length;
+		dynany_anyseq->_buffer = DynamicAny_AnySeq_allocbuf (length);
+#else
 		dynany_anyseq = CORBA_sequence_DynamicAny_DynAny_AnySeq__alloc ();
 		dynany_anyseq->_length = length;
 		dynany_anyseq->_buffer = CORBA_sequence_DynamicAny_DynAny_AnySeq_allocbuf (length);
+#endif
 
 		if (de->subvalues) {
 			l = de->subvalues;
@@ -359,6 +389,9 @@ case CORBA_tk_ ## k:                                                            
 
 		break;
 	}
+#else
+#warning FIXME: hard-core ORBit2 porting neccessary.
+#endif
 
 	default:
 		g_message (G_STRLOC ": |%s| - %d - %s (%s)", de->value,
@@ -420,6 +453,7 @@ case CORBA_tk_ ## k:                \
 
 #undef ENCODE_BASIC
 
+#ifndef ENABLE_ORBIT2
 	case CORBA_tk_boolean:
 		clear_dir_entry (de);
 		de->value = g_strdup (BONOBO_ARG_GET_BOOLEAN (any) ? "true" : "false");
@@ -548,6 +582,9 @@ case CORBA_tk_ ## k:                \
 
 		break;
 	}
+#else
+#warning FIXME: hard-core ORBit2 porting neccessary.
+#endif
 
 	default:
 		g_message (G_STRLOC ": %d - %s (%s)", any->_type->kind,

@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdarg.h>
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-moniker-util.h>
@@ -941,7 +942,7 @@ real_get_value (BonoboConfigDatabase *db,
 	DirEntry          *de;
 	CORBA_TypeCode     tc;
 	CORBA_any         *value = NULL;
-	char              *locale = NULL; 
+/*	char              *locale = NULL;  */
 				
 	/* fixme: how to handle locale correctly ? */
 
