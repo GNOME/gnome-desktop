@@ -62,6 +62,8 @@ typedef struct
   
   GnomeIconDataPoint attach_points[GNOME_ICON_DATA_MAX_ATTACH_POINTS];
   int n_attach_points;
+
+  char *display_name;
 } GnomeIconData;
 
 GType            gnome_icon_loader_get_type              (void) G_GNUC_CONST;
@@ -85,12 +87,12 @@ void             gnome_icon_loader_set_custom_theme      (GnomeIconLoader      *
 char *           gnome_icon_loader_lookup_icon           (GnomeIconLoader      *loader,
 							  const char           *icon_name,
 							  int                   size,
-							  GnomeIconData       **icon_data);
+							  const GnomeIconData **icon_data);
 /* TODO: This extended crap is pretty ugly, but keep it until we move GnomeIconLoader to the final place. */
 char *           gnome_icon_loader_lookup_icon_extended  (GnomeIconLoader      *loader,
 							  const char           *icon_name,
 							  int                   size,
-							  GnomeIconData       **icon_data,
+							  const GnomeIconData **icon_data,
 							  int                  *base_size);
 gboolean         gnome_icon_loader_has_icon              (GnomeIconLoader      *loader,
 							  const char           *icon_name);

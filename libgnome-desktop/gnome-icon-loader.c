@@ -106,10 +106,8 @@ static void   theme_dir_destroy            (IconThemeDir         *dir);
 static char * theme_lookup_icon            (IconTheme            *theme,
 					    const char           *icon_name,
 					    int                   size,
-					    GnomeIconData       **icon_data,
+					    const GnomeIconData **icon_data,
 					    int                  *base_size);
-static gboolean theme_has_icon             (IconTheme            *theme,
-					    const char           *icon_name);
 static void   theme_list_icons             (IconTheme            *theme,
 					    GHashTable           *icons,
 					    GQuark                context);
@@ -117,8 +115,8 @@ static void   theme_subdir_load            (GnomeIconLoader      *loader,
 					    IconTheme            *theme,
 					    GnomeThemeFile       *theme_file,
 					    char                 *subdir);
-static void   icon_data_destroy            (GnomeIconData        *data);
 static void   blow_themes                  (GnomeIconLoaderPrivate *priv);
+static void   gnome_icon_data_free         (GnomeIconData         *icon_data);
 
 static IconSuffix suffix_from_name         (const char           *name);
 
@@ -659,7 +657,7 @@ char *
 gnome_icon_loader_lookup_icon (GnomeIconLoader      *loader,
 			       const char           *icon_name,
 			       int                   size,
-			       GnomeIconData       **icon_data)
+			       const GnomeIconData **icon_data)
 {
   return gnome_icon_loader_lookup_icon_extended (loader, icon_name, size, icon_data, NULL);
 }
@@ -668,7 +666,7 @@ char *
 gnome_icon_loader_lookup_icon_extended (GnomeIconLoader      *loader,
 					const char           *icon_name,
 					int                   size,
-					GnomeIconData       **icon_data,
+					const GnomeIconData **icon_data,
 					int                  *base_size)
 {
   GnomeIconLoaderPrivate *priv;
@@ -915,7 +913,7 @@ static char *
 theme_lookup_icon (IconTheme *theme,
 		   const char *icon_name,
 		   int size,
-		   GnomeIconData **icon_data,
+		   const GnomeIconData **icon_data,
 		   int *base_size)
 {
   GList *l;
@@ -986,30 +984,6 @@ theme_lookup_icon (IconTheme *theme,
  
   return NULL;
 }
-
-static gboolean
-theme_has_icon (IconTheme *theme,
-		const char *icon_name)
-{
-  GList *l;
-  IconThemeDir *dir;
-  IconSuffix suffix;
-
-  l = theme->dirs;
-  while (l != NULL)
-    {
-      dir = l->data;
-
-      suffix = GPOINTER_TO_INT (g_hash_table_lookup (dir->icons, icon_name));
-      if (suffix != ICON_SUFFIX_NONE)
-	return TRUE;
-      
-      l = l->next;
-    }
- 
-  return FALSE;
-}
-
 
 static void
 theme_list_icons (IconTheme *theme, GHashTable *icons,
@@ -1112,7 +1086,11 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 	      g_strfreev (split);
 	      g_free (str);
 	    }
-
+	  
+	  gnome_theme_file_get_locale_string (icon_file, "Icon Data",
+					      "DisplayName",
+					      &data->display_name);
+	  
 	  gnome_theme_file_free (icon_file);
 	}
       g_free (contents);
@@ -1144,7 +1122,7 @@ scan_directory (GnomeIconLoaderPrivate *loader,
 	{
 	  if (dir->icon_data == NULL)
 	    dir->icon_data = g_hash_table_new_full (g_str_hash, g_str_equal,
-						    g_free, (GDestroyNotify)icon_data_destroy);
+						    g_free, (GDestroyNotify)gnome_icon_data_free);
 	  
 	  path = g_build_filename (full_dir, name, NULL);
 	  if (g_file_test (path, G_FILE_TEST_IS_REGULAR))
@@ -1267,9 +1245,8 @@ theme_subdir_load (GnomeIconLoader *loader,
 }
 
 static void
-icon_data_destroy (GnomeIconData *data)
+gnome_icon_data_free (GnomeIconData *icon_data)
 {
-  g_free (data->attach_points);
-  g_free (data);
+  g_free (icon_data->display_name);
+  g_free (icon_data);
 }
-

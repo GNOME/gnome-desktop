@@ -85,7 +85,10 @@ main (int argc, char *argv[])
 			 icon_data->attach_points[i].y);
 	      g_print ("\n");
 	    }
-	  
+	  if (icon_data->display_name)
+	    {
+	      g_print ("Display name: %s\n", icon_data->display_name);
+	    }
 	}
       
       g_free (icon);
