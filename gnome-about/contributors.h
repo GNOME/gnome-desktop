@@ -251,6 +251,7 @@ static gchar *contributors[] = {
 	"Jens Christian Restemeier",
 	"Patrick Reynolds",
 	"Robert Richardson",
+	"Kristian Rietveld",
 	"Alex Roberts",
 	"Michel Roelofs",
 	"Ueli Rutishauser",
