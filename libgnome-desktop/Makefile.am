@@ -33,8 +33,6 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c		\
 	bonobo-config-ditem.c		\
 	bonobo-config-ditem.h		\
-	bonobo-config-ditem-internals.c	\
-	bonobo-config-ditem-internals.h	\
 	$(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_LIBADD = \
