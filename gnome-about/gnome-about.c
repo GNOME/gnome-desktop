@@ -10,7 +10,7 @@
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
-#include "authors.h"
+#include "contributors.h"
 #include "logo.xpm"
 
 gboolean cb_quit      (GtkWidget *widget, gpointer data);
@@ -28,7 +28,7 @@ gint y, y_to_wrap_at;
 gint howmuch=0;
 GdkPixbuf *im;
 GtkWidget *canvas;
-GnomeCanvasItem *image;
+GnomeCanvasItem *image, *image2;
 	
 static gint sparkle_timer = -1;
 static gint scroll_timer = -1;
@@ -258,7 +258,7 @@ cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
 	if (event->type == GDK_BUTTON_PRESS) {
 		if (howmuch >= 5) {
-			gchar *filename = gnome_datadir_file ("gnome-about/authors.dat");
+			gchar *filename = gnome_datadir_file ("gnome-about/contributors.dat");
 			if (filename)
 				gnome_sound_play (filename);
 
@@ -281,10 +281,10 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 	case GDK_E:
 		if (howmuch == 4) {
 			howmuch++;
-			im = gdk_pixbuf_new_from_xpm_data (magick);
+/*			im = gdk_pixbuf_new_from_xpm_data (magick);
 			gnome_canvas_item_set (image,
 					       "pixbuf", im,
-					       NULL);
+					       NULL);*/
 		}
 		else
 			howmuch = 0;
@@ -354,10 +354,8 @@ scroll (gpointer data)
 			    area->allocation.width,
 			    area->allocation.height);
 
-	while (authors[i].name) {
-		totalwidth = gdk_string_width (font, authors[i].name);
-		if (authors[i].email)
-			totalwidth += 4 + gdk_string_width (italicfont, authors[i].email);
+	while (contributors[i]) {
+		totalwidth = gdk_string_width (font, contributors[i]);
 
 		if(cury > -font->descent &&
 		   cury < area->allocation.height + font->ascent) {
@@ -367,16 +365,7 @@ scroll (gpointer data)
 					 (area->allocation.width - 
 					  totalwidth) / 2,
 					 cury,
-					 _(authors[i].name));
-			gdk_draw_string (pixmap,
-					 italicfont,
-					 area->style->white_gc,
-					 (area->allocation.width -
-					  totalwidth) / 2  + 
-					 (authors[i].email ? 4 :0) +
-					 gdk_string_width (font, authors[i].name),
-					 cury,
-					 _(authors[i].email));
+					 _(contributors[i]));
 		}
 
 		i++;
@@ -439,10 +428,9 @@ get_max_width (void)
 	int max_width = 0;
 	
 	i = 0;
-	while (authors[i].name) {
-		int totalwidth = gdk_string_width (font, authors[i].name);
-		if (authors[i].email)
-			totalwidth += 4 + gdk_string_width (italicfont, authors[i].email);
+	while (contributors[i]) {
+		int totalwidth = gdk_string_width (font, contributors[i]);
+
 		if (totalwidth > max_width)
 			max_width = totalwidth;
 		i++;
@@ -486,7 +474,7 @@ main (gint argc, gchar *argv[])
 	if (!italicfont)
 	        italicfont = window->style->font;
 
-	y_to_wrap_at = -(sizeof(authors)/sizeof(authors[0]))*
+	y_to_wrap_at = -(sizeof(contributors)/sizeof(contributors[0]))*
 	                (font->ascent+font->descent);
 
 	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask,
@@ -495,7 +483,6 @@ main (gint argc, gchar *argv[])
 	gtkpixmap = gtk_pixmap_new (logo_pixmap, logo_mask);
 
 	im = gdk_pixbuf_new_from_xpm_data (logo_xpm);
-
 	canvas = gnome_canvas_new ();
 	gtk_widget_set_usize (canvas,
 			      gdk_pixbuf_get_width (im),
@@ -512,7 +499,18 @@ main (gint argc, gchar *argv[])
 				       "width", (double) gdk_pixbuf_get_width (im),
 				       "height", (double) gdk_pixbuf_get_height (im),
 				       NULL);
-
+	
+	im = gdk_pixbuf_new_from_xpm_data (magick);
+	image2 = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
+				       gnome_canvas_pixbuf_get_type (),
+				       "pixbuf", im,
+				       "x", 0.0,
+				       "y", 0.0,
+				       "width", (double) gdk_pixbuf_get_width (im),
+				       "height", (double) gdk_pixbuf_get_height (im),
+				       NULL);
+	gnome_canvas_item_lower_to_bottom (image2);
+	
 	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
 			    GTK_SIGNAL_FUNC (cb_quit), im);
 	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",

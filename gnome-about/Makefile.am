@@ -19,6 +19,6 @@ gnome_about_SOURCES =		\
 	authors.h
 
 authorsdir = $(datadir)/gnome-about
-authors_DATA = authors.dat
+authors_DATA = contributors.dat
 
 EXTRA_DIST = logo.xpm $(authors_DATA)
