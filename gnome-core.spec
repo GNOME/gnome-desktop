@@ -9,7 +9,7 @@ Version: %ver
 Release: %rel
 Copyright: LGPL
 Group: X11/Libraries
-Source: ftp://ftp.gnome.org/pub/gnome-core-%{ver}.tar.gz
+Source: ftp://ftp.gnome.org/pub/sources/gnome-core/gnome-core-%{ver}.tar.gz
 BuildRoot: /var/tmp/gnome-core-root
 Obsoletes: gnome
 Packager: Marc Ewing <marc@redhat.com>
