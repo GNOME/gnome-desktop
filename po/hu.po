@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-02-11 22:09-0500\n"
+"POT-Creation-Date: 1999-02-15 12:49-0500\n"
 "Last-Translator: Shooby Ban <bansz@szif.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,15 @@ msgstr "Névjegy"
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
-#: applets/gen_util/printer.c:411 applets/gnome-pager/gnomepager_applet.c:1586
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:491
+#: applets/gnome-pager/gnomepager_applet.c:1570 applets/gticker/gticker.c:61
+#: applets/icewm-pager/wmpager_applet.c:90
 #: applets/mini-commander/src/mini-commander_applet.c:246
 #: applets/modemlights/modemlights.c:750 applets/multiload/cpuload.c:62
 #: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:378 panel/launcher.c:278
-#: panel/menu.c:3320
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:378 panel/launcher.c:287
+#: panel/menu.c:3336
 msgid "Properties..."
 msgstr "Tulajdonságok..."
 
@@ -43,13 +45,104 @@ msgstr "Ki mondta, hogy a NeXT halott?"
 msgid "Timezone"
 msgstr "Idõzóna"
 
+#: applets/batmon/batmon.c:106
+msgid "Can't open /proc/apm; can't get data."
+msgstr "Nem lehet megnyinti a '/proc/apm' fájlt. Nem tudok adatokhoz jutni."
+
+#: applets/batmon/batmon.c:112
+msgid "Something wrong with /proc/apm; can't get data."
+msgstr "Valami bibi van a '/proc/apm' fájllal. Nem tudok adatokhoz jutni."
+
+#: applets/batmon/batmon.c:155
+msgid "Can't open /dev/apm; can't get data."
+msgstr "Nem lehet megnyitni a '/proc/apm' fájlt. Nem tudok adatokhoz jutni."
+
+#: applets/batmon/batmon.c:161 applets/battery/read-battery.c:135
+msgid "ioctl failed on /dev/apm."
+msgstr "ioctl hiba a /dev/apm fájlnál"
+
+#: applets/batmon/batmon.c:211
+msgid "There is no battery?!?"
+msgstr "Nincs akkumulátor?!?"
+
+#: applets/batmon/batmon.c:214
+msgid "High and charging."
+msgstr "Magas és töltõdik."
+
+#: applets/batmon/batmon.c:217
+msgid "High."
+msgstr "Magas."
+
+#: applets/batmon/batmon.c:220
+msgid "Low and charging."
+msgstr "Lemerülve, töltõdik."
+
+#: applets/batmon/batmon.c:223
+msgid "Low."
+msgstr "Lemerülve."
+
+#: applets/batmon/batmon.c:226
+msgid "Critical and charging."
+msgstr "Kritikus, töltõdik."
+
+#: applets/batmon/batmon.c:229
+msgid "Critical!!"
+msgstr "Kritikus!"
+
+#: applets/batmon/batmon.c:232
+msgid "Charging."
+msgstr "Töltõdik."
+
+#: applets/batmon/batmon.c:240
+msgid "unknown minutes of battery."
+msgstr ""
+
+#: applets/batmon/batmon.c:243
+msgid "unknown minutes of battery (%d%%)"
+msgstr ""
+
+#: applets/batmon/batmon.c:249
+#, fuzzy, c-format
+msgid "%d minutes of battery"
+msgstr "Nincs akkumulátor?!?"
+
+#: applets/batmon/batmon.c:251
+msgid "%d minutes of battery (%d%%)"
+msgstr ""
+
+#. would have to be an error
+#: applets/batmon/batmon.c:255
+msgid "More than 100,000,000 minutes of battery life?!?"
+msgstr "Több mint 100.000.000 perc akkkumulátor-élettaram?"
+
+#: applets/batmon/batmon.c:338
+msgid "APM Stats"
+msgstr "APM Statisztikák"
+
+#: applets/batmon/batmon.c:356
+msgid "Linux APM Driver Version:"
+msgstr "Linux APM meghajtó verzió:"
+
+#: applets/batmon/batmon.c:368
+msgid "APM BIOS Version:"
+msgstr "APM BIOS verzió:"
+
+#: applets/batmon/batmon.c:385
+msgid "Battery Status:"
+msgstr "Telep állapota:"
+
+#: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2660
+#: panel/launcher.c:44
+msgid "Close"
+msgstr "Bezárás"
+
 #: applets/battery/battery.c:357
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Belsõ hiba: hibás mód a battery_set_mode-ban"
 
-#: applets/battery/battery.c:402 applets/gen_util/clock.c:255
-#: applets/gen_util/mailcheck.c:672 applets/gen_util/printer.c:386
-#: applets/netload/netload.c:321
+#: applets/battery/battery.c:402 applets/freshapp/freshapp.c:38
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:672
+#: applets/gen_util/printer.c:386 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Nem tudom elkészíteni az appletet!\n"
 
@@ -65,8 +158,9 @@ msgstr "Elemek állapota:"
 msgid "General Properties"
 msgstr "Alap tulajdonságok"
 
-#: applets/battery/properties.c:48 applets/diskusage/properties.c:232
-#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
+#: applets/battery/properties.c:48 applets/cpuload/properties.c:149
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
 msgid "Applet Height"
 msgstr "Applet magasság"
 
@@ -115,8 +209,7 @@ msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
 msgstr ""
-"Nem tudom megnyitni a /proc/apm-t ! Tényleg van APM támogatás a "
-"kernelben?\n"
+"Nem tudom megnyitni a /proc/apm-t ! Tényleg van APM támogatás a kernelben?\n"
 
 #: applets/battery/read-battery.c:61
 #, c-format
@@ -127,13 +220,45 @@ msgstr ""
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Nem lehet megnyinti a '/proc/apm' fájlt. Nem tudok adatokhoz jutni."
 
-#: applets/battery/read-battery.c:135
-msgid "ioctl failed on /dev/apm."
-msgstr "ioctl hiba a /dev/apm fájlnál"
-
 #: applets/battery/read-battery.c:146
 msgid "APM is disabled!  Cannot read battery charge information."
-msgstr "APM ki van vapcsolva! Nem tudom kiolvasni a telepek töltöttségi értékeit."
+msgstr ""
+"APM ki van vapcsolva! Nem tudom kiolvasni a telepek töltöttségi értékeit."
+
+#: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:484
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
+#: applets/gkb/gkb.c:483 applets/gnome-pager/gnomepager_applet.c:1564
+#: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:756
+#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2370
+msgid "About..."
+msgstr "Névjegy..."
+
+#: applets/bussign/bussign.c:80
+msgid "Refresh Image"
+msgstr ""
+
+#: applets/bussign/bussign.c:244
+#, fuzzy
+msgid "The Bus Sign Applet"
+msgstr "GNOME hal applet"
+
+#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:632
+msgid "(c) 1998 the Free Software Foundation"
+msgstr ""
+
+#: applets/bussign/bussign.c:247
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
 
 #: applets/cdplayer/cdplayer.c:318
 msgid "Run gtcd..."
@@ -156,26 +281,16 @@ msgid ""
 "Gnome Panel applet for selecting strange characters that are not on my "
 "keyboard. Released under GNU General Public Licence."
 msgstr ""
-"Gnome Panel applet azon karakterek kiválasztására, amelyek nincsenek "
-"a billentyûzeteden. GNU GPL-es."
+"Gnome Panel applet azon karakterek kiválasztására, amelyek nincsenek a "
+"billentyûzeteden. GNU GPL-es."
 
-#: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
-#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
-#: applets/gnome-pager/gnomepager_applet.c:1580
-#: applets/modemlights/modemlights.c:756 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
-#: panel/menu.c:2354
-msgid "About..."
-msgstr "Névjegy..."
-
-#: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:47 applets/gticker/gticker.c:230
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:52
+#: applets/clockmail/clockmail.c:52 applets/gticker/gticker.c:234
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr ""
 
@@ -246,92 +361,13 @@ msgstr "Levél érkezéskor induljon:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "A levelesláda maximális mérete (Kilobájtokban):"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
 #. ---
-#: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
-#: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
+#: applets/clockmail/properties.c:388 applets/cpuload/properties.c:231
+#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:210
+#: applets/fvwm-pager/properties.c:246 applets/gticker/properties.c:328
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:887
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:891
 #: panel/panel_config_global.c:301
 msgid "General"
 msgstr "Alap"
@@ -344,6 +380,29 @@ msgstr "Témafájl"
 msgid "Theme"
 msgstr "Téma"
 
+#: applets/cpuload/properties.c:137
+msgid "User Load"
+msgstr "Felhasználói processzorhasználat"
+
+#: applets/cpuload/properties.c:143
+msgid "System Load"
+msgstr "Rendszerprogramok processszorhasználata"
+
+#: applets/cpuload/properties.c:155 applets/diskusage/properties.c:238
+#: applets/fvwm-pager/properties.c:184 applets/netload/properties.c:147
+#: panel/swallow.c:248
+msgid "Width"
+msgstr "Szélesség"
+
+#: applets/cpuload/properties.c:170 applets/diskusage/properties.c:259
+#: applets/netload/properties.c:170
+msgid "Update Frequency"
+msgstr "Frissítés gyakorisága"
+
+#: applets/cpuload/properties.c:228
+msgid "CPULoad Settings"
+msgstr "CPULoad belállítások"
+
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
 msgstr "PPP tárcsázó applet"
@@ -352,7 +411,7 @@ msgstr "PPP tárcsázó applet"
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
 msgstr ""
 
-#: applets/dialer/dialer.c:87 panel/menu.c:3143
+#: applets/dialer/dialer.c:87 panel/menu.c:3159
 msgid "Off"
 msgstr "Ki"
 
@@ -371,15 +430,6 @@ msgstr "Szövegszín"
 #: applets/diskusage/properties.c:225
 msgid "Backgroundcolor"
 msgstr "Háttérszín"
-
-#: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
-#: applets/netload/properties.c:147 panel/swallow.c:248
-msgid "Width"
-msgstr "Szélesség"
-
-#: applets/diskusage/properties.c:259 applets/netload/properties.c:170
-msgid "Update Frequency"
-msgstr "Frissítés gyakorisága"
 
 #: applets/diskusage/properties.c:334
 msgid "Diskusage Settings"
@@ -521,8 +571,8 @@ msgstr "A GNOME halad neve:"
 msgid "The Animation Filename:"
 msgstr "Az animáció fájlneve:"
 
-#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1015
-#: panel/menu.c:3261 panel/panel-util.c:77 panel/panel-util.c:115
+#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1019
+#: panel/menu.c:3277 panel/panel-util.c:77 panel/panel-util.c:115
 #: panel/panel-util.c:153 panel/panel_config.c:728 panel/swallow.c:238
 msgid "Browse"
 msgstr "Keresés"
@@ -692,10 +742,6 @@ msgstr "Levelesláda"
 msgid "Mail check Applet"
 msgstr "Levelesláda Applet"
 
-#: applets/gen_util/mailcheck.c:632
-msgid "(c) 1998 the Free Software Foundation"
-msgstr ""
-
 #: applets/gen_util/mailcheck.c:634
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "A levelesláda figyelmeztet, ha új leveled van"
@@ -720,7 +766,66 @@ msgstr "Nyomtatási parancs:"
 msgid "Printer"
 msgstr "Nyomtató"
 
+#: applets/gkb/gkb.c:177
+msgid "GKB settings"
+msgstr "GKB Beállítások"
+
+#: applets/gkb/gkb.c:190
+msgid "Flag One"
+msgstr "Elsõ zászló"
+
+#: applets/gkb/gkb.c:223
+msgid "Flag Two"
+msgstr "Második zászló"
+
+#: applets/gkb/gkb.c:252
+#, fuzzy
+msgid "Program"
+msgstr "Program indítása"
+
+#: applets/gkb/gkb.c:262
+msgid "Xkb"
+msgstr ""
+
+#: applets/gkb/gkb.c:266
+msgid "Xmodmap"
+msgstr ""
+
+#: applets/gkb/gkb.c:277 panel/menu.c:1672 panel/menu.c:1716 panel/menu.c:1718
+#: panel/menu.c:2952 panel/menu.c:3290
+msgid "Menu"
+msgstr "Menü"
+
+#: applets/gkb/gkb.c:413
+msgid "The GNOME KB Applet"
+msgstr "GNOME billentyûzet-átkapcsoló"
+
+#: applets/gkb/gkb.c:414
+msgid "1.0pre1"
+msgstr ""
+
+#: applets/gkb/gkb.c:415
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr "(c) 1998 LSC - Linux Támogató Központ, Gyõr"
+
+#: applets/gkb/gkb.c:417
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS.So long, and thanks for all the fish."
+msgstr ""
+"Ez az applet a billentyûzetkiosztások közötti átkapcsolásra szolgál.A "
+"program setxkbmap-ot és xmodmap-ot használ. Jelenleg ahttp://lsc.kva.hu/gkb "
+"helyen található a fejlesztõi oldal.Küldhetsz még ikonokat...Viszlát és kösz "
+"a halakat..."
+
+#: applets/gkb/gkb.c:426
+msgid "gkb.xpm"
+msgstr ""
+
 #: applets/gnome-pager/gnomepager_applet.c:122
+#: applets/icewm-pager/wmpager_applet.c:218
 msgid "Desktop Pager Applet"
 msgstr "GNOME virtuális lapkezelõ"
 
@@ -732,64 +837,64 @@ msgstr ""
 msgid "Pager for a GNOME compliant Window Manager"
 msgstr "Lapkezelõ a GNOME kompatibilis ablakkezelõkhöz"
 
-#: applets/gnome-pager/gnomepager_applet.c:384
+#: applets/gnome-pager/gnomepager_applet.c:363
 msgid "Gnome Pager Settings"
 msgstr "Gnome Pager beállítások"
 
-#: applets/gnome-pager/gnomepager_applet.c:388
-#: applets/slashapp/properties.c:422
+#: applets/gnome-pager/gnomepager_applet.c:367
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
 msgid "Display"
 msgstr "Képernyõ"
 
-#: applets/gnome-pager/gnomepager_applet.c:389
+#: applets/gnome-pager/gnomepager_applet.c:368
 msgid "Show all tasks on all desktops"
 msgstr "Minden taszk mutatása minden képernyõn"
 
-#: applets/gnome-pager/gnomepager_applet.c:397
+#: applets/gnome-pager/gnomepager_applet.c:376
 msgid "Show tasks"
 msgstr "Mutassa a taszkokat"
 
-#: applets/gnome-pager/gnomepager_applet.c:405
+#: applets/gnome-pager/gnomepager_applet.c:384
 msgid "Show pager"
 msgstr "Mutassa a pager-t"
 
-#: applets/gnome-pager/gnomepager_applet.c:413
+#: applets/gnome-pager/gnomepager_applet.c:392
 msgid "Use small pagers"
 msgstr "Kis pager-ek használata"
 
-#: applets/gnome-pager/gnomepager_applet.c:421
+#: applets/gnome-pager/gnomepager_applet.c:400
 msgid "Show icons in tasks"
 msgstr "Ikonok mutatása a taszkokon"
 
-#: applets/gnome-pager/gnomepager_applet.c:429
+#: applets/gnome-pager/gnomepager_applet.c:408
 msgid "Show task list button"
 msgstr "Mutassa a taszklista gombokat"
 
-#: applets/gnome-pager/gnomepager_applet.c:444
+#: applets/gnome-pager/gnomepager_applet.c:423
 msgid "Maximum width of horizontal task list"
 msgstr "A vízszintes taszklista maximális hossza"
 
-#: applets/gnome-pager/gnomepager_applet.c:459
+#: applets/gnome-pager/gnomepager_applet.c:438
 msgid "Maximum width of vertical task list"
 msgstr "A függõleges taszklista maximális hossza"
 
-#: applets/gnome-pager/gnomepager_applet.c:473
+#: applets/gnome-pager/gnomepager_applet.c:452
 msgid "Number of rows of horizontal tasks"
 msgstr "A taszkok sorainak száma"
 
-#: applets/gnome-pager/gnomepager_applet.c:486
+#: applets/gnome-pager/gnomepager_applet.c:465
 msgid "Number of vertical columns of tasks"
 msgstr "Taszkok oszlopainak száma"
 
-#: applets/gnome-pager/gnomepager_applet.c:499
+#: applets/gnome-pager/gnomepager_applet.c:478
 msgid "Number rows of pagers"
 msgstr "Pager-k sorainak száma"
 
-#: applets/gnome-pager/gnomepager_applet.c:1500
+#: applets/gnome-pager/gnomepager_applet.c:1513
 msgid "Gnome Pager Error"
 msgstr "GNOME lapozó hiba"
 
-#: applets/gnome-pager/gnomepager_applet.c:1501
+#: applets/gnome-pager/gnomepager_applet.c:1514
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -803,25 +908,185 @@ msgstr ""
 "Enlightenment (DR-0.15), vagy icewm 0.99.26 fölötti verziói.\n"
 "Ekkor indítsd el az appletet újra.\n"
 
-#: applets/gnome-pager/gnomepager_applet.c:1974
+#: applets/gnome-pager/gnomepager_applet.c:2023
 msgid "Sticky"
 msgstr "Átlátszóság"
 
-#: applets/gnome-pager/gnomepager_applet.c:2587
+#: applets/gnome-pager/gnomepager_applet.c:2636
 msgid "Show / Hide"
 msgstr "Mutat / Elrejt"
 
-#: applets/gnome-pager/gnomepager_applet.c:2599
+#: applets/gnome-pager/gnomepager_applet.c:2648
 msgid "Shade / Unshade"
 msgstr "Felcsuk/Lenyit"
 
-#: applets/gnome-pager/gnomepager_applet.c:2611 panel/launcher.c:43
-msgid "Close"
-msgstr "Bezárás"
-
-#: applets/gnome-pager/gnomepager_applet.c:2623
+#: applets/gnome-pager/gnomepager_applet.c:2672
 msgid "Nuke"
 msgstr "Kinyír"
+
+#: applets/gticker/gticker.c:53
+msgid "Loading headlines..."
+msgstr ""
+
+#: applets/gticker/gticker.c:72
+msgid "Show Article Listing"
+msgstr ""
+
+#: applets/gticker/gticker.c:77
+msgid "Refresh Articles"
+msgstr ""
+
+#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr ""
+
+#: applets/gticker/gticker.c:236
+msgid "GTicker"
+msgstr ""
+
+#: applets/gticker/gticker.c:236 applets/jbc/jbc.c:72
+#: applets/slashapp/slashapp.c:573
+msgid "(C) 1998"
+msgstr ""
+
+#: applets/gticker/gticker.c:237
+msgid "Ticker for the GNOME Project\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:250
+msgid "GTicker Article List"
+msgstr ""
+
+#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
+msgid "No articles"
+msgstr ""
+
+#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
+#: gmenu/utils.c:91
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:415
+#, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
+msgstr ""
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+msgid "Articles"
+msgstr ""
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr ""
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr ""
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr ""
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr ""
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr ""
+
+#: applets/gticker/properties.c:231
+#: applets/mini-commander/src/mini-commander_applet.c:184
+#: applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr ""
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+msgid "Open new window"
+msgstr "Új ablakban megnyit"
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr ""
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr ""
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr ""
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr ""
+
+#: applets/gticker/properties.c:312
+msgid "Image path:"
+msgstr "Kép helye:"
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1098
+msgid "Scrolling"
+msgstr ""
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr ""
+
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr ""
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Sebesség"
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr ""
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr ""
+
+#. FIXME: This should check to make sure icewm (or equiv) is running.
+#. Not sure if it is working though...
+#: applets/icewm-pager/wmpager_applet.c:53
+msgid ""
+"This applet requires you to run a window manager with the XA_ extensions.\n"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:219
+msgid "Copyright (C)1998 M.Watson"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:275
+msgid "Failed to retrieve workspace property."
+msgstr ""
+
+#: applets/jbc/jbc.c:67
+msgid "Jon Anhold <jon@snoopy.net>"
+msgstr ""
+
+#: applets/jbc/jbc.c:68
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr ""
+
+#: applets/jbc/jbc.c:71
+msgid "Jon's Binary Clock"
+msgstr ""
+
+#: applets/jbc/jbc.c:74
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
+msgstr ""
 
 #: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
@@ -893,11 +1158,6 @@ msgstr ""
 #: applets/mini-commander/src/mini-commander_applet.c:86
 msgid "orient. changed"
 msgstr "elhelyezkedés változott"
-
-#: applets/mini-commander/src/mini-commander_applet.c:184
-#: applets/slashapp/properties.c:249
-msgid "Browser"
-msgstr ""
 
 #: applets/mini-commander/src/mini-commander_applet.c:197
 #: help-browser/window.c:201
@@ -972,7 +1232,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1047
+#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1051
 msgid "Colors"
 msgstr "Szinek"
 
@@ -1181,82 +1441,17 @@ msgstr "Hálózatfigyelõ beállítások"
 msgid "Device"
 msgstr "Eszköz"
 
-#: applets/slashapp/properties.c:199
-msgid "Articles"
-msgstr ""
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr ""
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr ""
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr ""
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr ""
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr ""
-
-#: applets/slashapp/properties.c:258
-msgid "Open new window"
-msgstr "Új ablakban megnyit"
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1094
-msgid "Scrolling"
-msgstr ""
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr ""
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr ""
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr "Sebesség"
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr ""
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:152
-msgid "No articles"
-msgstr ""
-
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr ""
 
-#: applets/slashapp/slashapp.c:255
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:258
+#: applets/slashapp/slashapp.c:258 gmenu/utils.c:94
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:532
 msgid "No articles found"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:567
@@ -1273,10 +1468,6 @@ msgstr ""
 
 #: applets/slashapp/slashapp.c:572
 msgid "SlashApp"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:573
-msgid "(C) 1998"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:575
@@ -1305,11 +1496,6 @@ msgid ""
 "interface.  Hopefully later more webrowsers will be supported."
 msgstr ""
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:117
-msgid "Url:"
-msgstr ""
-
 #: applets/webcontrol/webcontrol.c:120
 msgid "Clear"
 msgstr "Bezárás"
@@ -1332,6 +1518,80 @@ msgstr ""
 
 #: applets/webcontrol/webcontrol.c:231
 msgid "Look"
+msgstr ""
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: gmenu/desktop.c:80 gmenu/desktop.c:96
+#, fuzzy
+msgid "Submenu: "
+msgstr "Új almenü"
+
+#: gmenu/desktop.c:194 gmenu/order.c:63
+#, c-format
+msgid "Unable to create file: %s\n"
+msgstr ""
+
+#: gmenu/desktop.c:213 gmenu/order.c:82
+#, c-format
+msgid "unable to remove .order file: %s\n"
 msgstr ""
 
 #: gmenu/dialogs.c:38
@@ -1391,6 +1651,15 @@ msgid ""
 msgstr ""
 "Ez a változás egy meglévõ menüelemmel ütközik.\n"
 "Nem lehet ugyanazon a néven két menüelem ugyanabban a menüben."
+
+#: gmenu/dnd.c:175
+#, fuzzy
+msgid ""
+"You are not allowed to move that item there.\n"
+"You do not have the proper permissions."
+msgstr ""
+"Nem törölheted azt a fájlt.\n"
+"Nincsenek meg hozzá a jogosultságaid."
 
 #: gmenu/edit.c:214
 msgid "Save"
@@ -1500,6 +1769,36 @@ msgstr ""
 "GPL.\n"
 "GNOME menüszerkesztõ."
 
+#: gmenu/order.c:126 gmenu/order.c:140
+msgid " Folder"
+msgstr "Mappa"
+
+#: gmenu/save.c:52
+#, fuzzy
+msgid "The menu item must have a name"
+msgstr "Menükön legyen ikon"
+
+#: gmenu/save.c:58
+msgid "The menu entry must have a filename"
+msgstr ""
+
+#: gmenu/save.c:66
+#, fuzzy
+msgid "Save changes?"
+msgstr "Mentsem a változásokat?"
+
+#: gmenu/save.c:83
+#, fuzzy
+msgid "This change conflicts with an existing menu item"
+msgstr ""
+"Ez a változás egy meglévõ menüelemmel ütközik.\n"
+"Nem lehet ugyanazon a néven két menüelem ugyanabban a menüben."
+
+#: gmenu/save.c:89
+#, fuzzy
+msgid "Overwrite existing menu entry?"
+msgstr "Fölülírjam a létezõ fájlt?"
+
 #: gmenu/tree.c:389
 msgid "One moment, reading menus..."
 msgstr "Egy pillanat, olvasom a menüket..."
@@ -1526,20 +1825,20 @@ msgstr "Felhasználói menük"
 msgid "Top of user menus"
 msgstr "A felhasználói menük teteje"
 
-#: gnome-terminal/gnome-terminal.c:138
+#: gnome-terminal/gnome-terminal.c:142
 msgid "GNOME Terminal"
 msgstr "GNOME Terminál"
 
-#: gnome-terminal/gnome-terminal.c:141
+#: gnome-terminal/gnome-terminal.c:145
 msgid "The GNOME terminal emulation program."
 msgstr "A GNOME terminálemulátor."
 
-#: gnome-terminal/gnome-terminal.c:420 gnome-terminal/gnome-terminal.c:926
-#: gnome-terminal/gnome-terminal.c:936
+#: gnome-terminal/gnome-terminal.c:424 gnome-terminal/gnome-terminal.c:930
+#: gnome-terminal/gnome-terminal.c:940 gnome-terminal/gnome-terminal.c:1740
 msgid "Default"
 msgstr " Alapbeállítás"
 
-#: gnome-terminal/gnome-terminal.c:591
+#: gnome-terminal/gnome-terminal.c:595
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1549,271 +1848,271 @@ msgstr ""
 "beállísam az alap ablaktipusra, amit most\n"
 " adtál meg?"
 
-#: gnome-terminal/gnome-terminal.c:749
+#: gnome-terminal/gnome-terminal.c:753
 msgid "Linux console"
 msgstr "Linux konzol"
 
-#: gnome-terminal/gnome-terminal.c:750
+#: gnome-terminal/gnome-terminal.c:754
 msgid "Color Xterm"
 msgstr "Színes Xterm"
 
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:755
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:756
+#: gnome-terminal/gnome-terminal.c:760
 msgid "White on black"
 msgstr "Fehér a feketén"
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:761
 msgid "Black on white"
 msgstr "Fekete a fehéren"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:762
 msgid "Green on black"
 msgstr "Zöld a feketén"
 
-#: gnome-terminal/gnome-terminal.c:759
+#: gnome-terminal/gnome-terminal.c:763
 msgid "Black on light yellow"
 msgstr "Fekete a világossárgán"
 
-#: gnome-terminal/gnome-terminal.c:760
+#: gnome-terminal/gnome-terminal.c:764
 msgid "Custom colors"
 msgstr "Beállított szinek"
 
-#: gnome-terminal/gnome-terminal.c:765 panel/panel_config.c:309
+#: gnome-terminal/gnome-terminal.c:769 panel/panel_config.c:309
 msgid "Left"
 msgstr "Balra"
 
-#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:320
+#: gnome-terminal/gnome-terminal.c:770 panel/panel_config.c:320
 msgid "Right"
 msgstr "Jobbra"
 
-#: gnome-terminal/gnome-terminal.c:767
+#: gnome-terminal/gnome-terminal.c:771
 msgid "Hidden"
 msgstr "Rejtett"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:890
+#: gnome-terminal/gnome-terminal.c:894
 msgid "Font:"
 msgstr "Betütipus:"
 
-#: gnome-terminal/gnome-terminal.c:910
+#: gnome-terminal/gnome-terminal.c:914
 msgid "Browse..."
 msgstr "Keres..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:918
+#: gnome-terminal/gnome-terminal.c:922
 msgid "Terminal Class"
 msgstr "Terminál tipus"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:946
+#: gnome-terminal/gnome-terminal.c:950
 msgid "Blinking cursor"
 msgstr "Villogó kurzor"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:955
+#: gnome-terminal/gnome-terminal.c:959
 msgid "Hide menu bar"
 msgstr "Menü elrejtése"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:964
+#: gnome-terminal/gnome-terminal.c:968
 msgid "Silence Terminal bell"
 msgstr "Csendes terminálviszhang"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:973
+#: gnome-terminal/gnome-terminal.c:977
 msgid "Swap DEL/Backspace"
 msgstr "DEL/Backspace felcserélése"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:982
+#: gnome-terminal/gnome-terminal.c:986
 msgid "Select-by-word characters"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:999
+#: gnome-terminal/gnome-terminal.c:1003
 msgid "Image"
 msgstr "Kép"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:1003
+#: gnome-terminal/gnome-terminal.c:1007
 msgid "Background pixmap"
 msgstr "Háttérkép"
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:1012
+#: gnome-terminal/gnome-terminal.c:1016
 msgid "Pixmap file:"
 msgstr "Fájl:"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1027
+#: gnome-terminal/gnome-terminal.c:1031
 msgid "Transparent"
 msgstr "Átlátszó"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1036
+#: gnome-terminal/gnome-terminal.c:1040
 msgid "Background should be shaded (slow)"
 msgstr "A háttér el lehet mosva (lassú)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1050
+#: gnome-terminal/gnome-terminal.c:1054
 msgid "Color palette:"
 msgstr "Színpaletta:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1060
+#: gnome-terminal/gnome-terminal.c:1064
 msgid "Foreground color:"
 msgstr "Szövegszín:"
 
-#: gnome-terminal/gnome-terminal.c:1069
+#: gnome-terminal/gnome-terminal.c:1073
 msgid "Background color:"
 msgstr "Háttér szine:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1081
+#: gnome-terminal/gnome-terminal.c:1085
 msgid "Colors:"
 msgstr "Szinek:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1097
+#: gnome-terminal/gnome-terminal.c:1101
 msgid "Scrollbar position"
 msgstr "Gördülõsáv helye"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1108
+#: gnome-terminal/gnome-terminal.c:1112
 msgid "Scrollback lines"
 msgstr "Mentett sorok száma"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1120
+#: gnome-terminal/gnome-terminal.c:1124
 msgid "Scroll on keystroke"
 msgstr "Billentyûleütésre gördül"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1129
+#: gnome-terminal/gnome-terminal.c:1133
 msgid "Scroll on output"
 msgstr "Kiíráskor gördül"
 
-#: gnome-terminal/gnome-terminal.c:1166
+#: gnome-terminal/gnome-terminal.c:1170
 msgid "Color selector"
 msgstr "Szines kiválaszrás"
 
-#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
-#: gnome-terminal/gnome-terminal.c:1219
+#: gnome-terminal/gnome-terminal.c:1206 gnome-terminal/gnome-terminal.c:1216
+#: gnome-terminal/gnome-terminal.c:1223
 msgid "_New terminal"
 msgstr "Ú_j Terminál"
 
-#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
-#: gnome-terminal/gnome-terminal.c:1219
+#: gnome-terminal/gnome-terminal.c:1206 gnome-terminal/gnome-terminal.c:1216
+#: gnome-terminal/gnome-terminal.c:1223
 msgid "Creates a new terminal window"
 msgstr "Új terminál létrehozása"
 
-#: gnome-terminal/gnome-terminal.c:1204 gnome-terminal/gnome-terminal.c:1214
+#: gnome-terminal/gnome-terminal.c:1208 gnome-terminal/gnome-terminal.c:1218
 msgid "_Hide menubar"
 msgstr "_Menü elrejtése"
 
-#: gnome-terminal/gnome-terminal.c:1206
+#: gnome-terminal/gnome-terminal.c:1210
 msgid "_Close terminal"
 msgstr "Terminál _bezárása"
 
-#: gnome-terminal/gnome-terminal.c:1221
+#: gnome-terminal/gnome-terminal.c:1225
 msgid "_Show menubar"
 msgstr "_Menü megjelenítése"
 
-#: gnome-terminal/gnome-terminal.c:1233
+#: gnome-terminal/gnome-terminal.c:1237
 msgid "C_olor selector..."
 msgstr "Szín kiválaszrása"
 
-#: gnome-terminal/gnome-terminal.c:1871
+#: gnome-terminal/gnome-terminal.c:1878
 msgid "Terminal class name"
 msgstr "Terminál tipus neve"
 
-#: gnome-terminal/gnome-terminal.c:1871
+#: gnome-terminal/gnome-terminal.c:1878
 msgid "CLASS"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1874
+#: gnome-terminal/gnome-terminal.c:1881
 msgid "Specifies font name"
 msgstr "Megadja a betütipus nevét"
 
-#: gnome-terminal/gnome-terminal.c:1874
+#: gnome-terminal/gnome-terminal.c:1881
 msgid "FONT"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1877
+#: gnome-terminal/gnome-terminal.c:1884
 msgid "Do not start up shells as logins shells"
 msgstr "Ne indítson shellt mint bejelentkezéskor"
 
-#: gnome-terminal/gnome-terminal.c:1880
+#: gnome-terminal/gnome-terminal.c:1887
 msgid "Start up shells as logins shells"
 msgstr "Bejelentkezési shell indítása"
 
-#: gnome-terminal/gnome-terminal.c:1883
+#: gnome-terminal/gnome-terminal.c:1890
 msgid "Specifies the geometry for the main window"
 msgstr "A fõablak méretét adja meg"
 
-#: gnome-terminal/gnome-terminal.c:1883 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1890 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1886
+#: gnome-terminal/gnome-terminal.c:1893
 msgid "Execute this program instead of a shell"
 msgstr "Ezt indítsa shell helyett"
 
-#: gnome-terminal/gnome-terminal.c:1886
+#: gnome-terminal/gnome-terminal.c:1893
 msgid "COMMAND"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1889
+#: gnome-terminal/gnome-terminal.c:1896
 msgid "Foreground color"
 msgstr "Szövegszín"
 
-#: gnome-terminal/gnome-terminal.c:1889 gnome-terminal/gnome-terminal.c:1892
+#: gnome-terminal/gnome-terminal.c:1896 gnome-terminal/gnome-terminal.c:1899
 msgid "COLOR"
 msgstr "SZÍN"
 
-#: gnome-terminal/gnome-terminal.c:1892 panel/panel_config.c:754
+#: gnome-terminal/gnome-terminal.c:1899 panel/panel_config.c:754
 msgid "Background color"
 msgstr "Háttérszín"
 
-#: gnome-terminal/gnome-terminal.c:1895
+#: gnome-terminal/gnome-terminal.c:1902
 msgid "Update utmp entry"
 msgstr "UTMP bejegyzés frissítése"
 
-#: gnome-terminal/gnome-terminal.c:1895
+#: gnome-terminal/gnome-terminal.c:1902
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1898
+#: gnome-terminal/gnome-terminal.c:1905
 msgid "Do not update utmp entry"
 msgstr "Ne frissítsd az UTMP bejegyzést"
 
-#: gnome-terminal/gnome-terminal.c:1898
+#: gnome-terminal/gnome-terminal.c:1905
 msgid "NOUTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1901
+#: gnome-terminal/gnome-terminal.c:1908
 msgid "Update wtmp entry"
 msgstr "WTMP bejegyzés frissítése"
 
-#: gnome-terminal/gnome-terminal.c:1901
+#: gnome-terminal/gnome-terminal.c:1908
 msgid "WTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1904
+#: gnome-terminal/gnome-terminal.c:1911
 msgid "Do not update wtmp entry"
 msgstr "Nem frissítsd a WTMP bejegyzést"
 
-#: gnome-terminal/gnome-terminal.c:1904
+#: gnome-terminal/gnome-terminal.c:1911
 msgid "NOWTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1907
+#: gnome-terminal/gnome-terminal.c:1914
 msgid "Set the window title"
 msgstr "Az ablak cimkéjének beállítása"
 
-#: gnome-terminal/gnome-terminal.c:1907
+#: gnome-terminal/gnome-terminal.c:1914
 msgid "TITLE"
 msgstr ""
 
@@ -1825,18 +2124,18 @@ msgstr "gsm hibakövetés bekapcsolása"
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:895
+#: gsm/manager.c:886
 msgid "A session shutdown is in progress."
 msgstr ""
 
-#: gsm/manager.c:1027
+#: gsm/manager.c:1018
 #, c-format
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with program \"%s\"."
 msgstr ""
 
-#: gsm/manager.c:1032
+#: gsm/manager.c:1023
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with an unnamed program."
@@ -2029,7 +2328,7 @@ msgstr "Játékok"
 
 #. Miscellaneous frame
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:507 panel/panel_config_global.c:620
+#: panel/panel_config_global.c:507 panel/panel_config_global.c:630
 msgid "Miscellaneous"
 msgstr "Egyéb"
 
@@ -2284,29 +2583,36 @@ msgstr "Az elrejtõgombon lévõ nyíl engedélyezése"
 msgid "Drawer"
 msgstr "Fiók"
 
-#: panel/launcher.c:40
+#: panel/launcher.c:41
 msgid "This launch icon does not specify a program to run"
 msgstr "Ez az indító ikon nem indít programot"
 
-#: panel/launcher.c:129
+#: panel/launcher.c:138
 msgid "App"
 msgstr ""
 
-#: panel/launcher.c:215
+#: panel/launcher.c:224
 msgid "Launcher properties"
 msgstr "Indító beállításai"
 
-#: panel/launcher.c:301
+#: panel/launcher.c:310
 msgid "Create launcher applet"
 msgstr "Nem tudom elkészíteni az appletet!"
 
-#: panel/logout.c:31 panel/menu.c:2073 panel/menu.c:2378
+#: panel/logout.c:41 panel/menu.c:2089 panel/menu.c:2394
 msgid "Log out"
 msgstr "Kilépés"
 
-#: panel/logout.c:33
+#: panel/logout.c:43
 msgid "Log out of GNOME"
 msgstr "Kilépés"
+
+#: panel/main.c:121
+msgid ""
+"I've detected a panel already running.\n"
+"Start another panel as well?\n"
+"(The new panel will not be restarted.)"
+msgstr ""
 
 #: panel/menu.c:538
 msgid "The GNOME Panel"
@@ -2360,137 +2666,137 @@ msgstr ""
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr ""
 
-#: panel/menu.c:1672 panel/menu.c:1732 panel/menu.c:2936 panel/menu.c:3274
-msgid "Menu"
-msgstr "Menü"
+#: panel/menu.c:1718
+msgid " (empty)"
+msgstr ""
 
-#: panel/menu.c:1812
+#: panel/menu.c:1828
 msgid "Applets"
 msgstr "Appletek"
 
-#: panel/menu.c:1939 panel/panel_config.c:870
+#: panel/menu.c:1955 panel/panel_config.c:870
 msgid "Edge panel"
 msgstr "Élpanel"
 
-#: panel/menu.c:1946 panel/panel_config.c:876
+#: panel/menu.c:1962 panel/panel_config.c:876
 msgid "Corner panel"
 msgstr "Sarok panel"
 
-#: panel/menu.c:1965 panel/menu.c:1969 panel/menu.c:2013 panel/menu.c:2772
+#: panel/menu.c:1981 panel/menu.c:1985 panel/menu.c:2029 panel/menu.c:2788
 msgid "System menus"
 msgstr "Rendszer menük"
 
-#: panel/menu.c:2022 panel/menu.c:2024 panel/menu.c:2749 panel/menu.c:2783
-#: panel/menu.c:2786
+#: panel/menu.c:2038 panel/menu.c:2040 panel/menu.c:2765 panel/menu.c:2799
+#: panel/menu.c:2802
 msgid "User menus"
 msgstr "Felhasználói menük"
 
-#: panel/menu.c:2032 panel/menu.c:2034 panel/menu.c:2715 panel/menu.c:2756
-#: panel/menu.c:2798 panel/menu.c:2808
+#: panel/menu.c:2048 panel/menu.c:2050 panel/menu.c:2731 panel/menu.c:2772
+#: panel/menu.c:2814 panel/menu.c:2824
 msgid "Red Hat menus"
 msgstr "Red Hat menük"
 
-#: panel/menu.c:2058
+#: panel/menu.c:2074
 msgid "Remove this panel"
 msgstr "Panel törlése"
 
-#: panel/menu.c:2205
+#: panel/menu.c:2221
 msgid "Add applet"
 msgstr "Applet hozzáadása"
 
-#: panel/menu.c:2214
+#: panel/menu.c:2230
 msgid "Add new panel"
 msgstr "Panel hozzáadása"
 
-#: panel/menu.c:2222
+#: panel/menu.c:2238
 msgid "Convert to corner panel"
 msgstr "Sarok panellé alakít"
 
-#: panel/menu.c:2230
+#: panel/menu.c:2246
 msgid "Convert to edge panel"
 msgstr "Élpanellé alakít"
 
-#: panel/menu.c:2249
+#: panel/menu.c:2265
 msgid "Add main menu"
 msgstr "Fõmenü hozzáadása"
 
-#: panel/menu.c:2257
+#: panel/menu.c:2273
 msgid "Add drawer"
 msgstr "Fiók"
 
-#: panel/menu.c:2266
+#: panel/menu.c:2282
 msgid "Add log out button"
 msgstr "Kilépés-gomb hozzáadása"
 
-#: panel/menu.c:2275
+#: panel/menu.c:2291
 msgid "Add swallowed app"
 msgstr "Lebegõ alkalmazás hozzáadása"
 
-#: panel/menu.c:2282
+#: panel/menu.c:2298
 msgid "Add new launcher"
 msgstr "Új indító hozzáadása"
 
-#: panel/menu.c:2294
+#: panel/menu.c:2310
 msgid "This panel properties..."
 msgstr "Beállítások"
 
-#: panel/menu.c:2304
+#: panel/menu.c:2320
 msgid "Global properties..."
 msgstr "Konfigurálás..."
 
-#: panel/menu.c:2338
+#: panel/menu.c:2354
 msgid "Panel"
 msgstr ""
 
-#: panel/menu.c:2345
+#: panel/menu.c:2361
 msgid "Lock screen"
 msgstr "Képernyõzár"
 
-#: panel/menu.c:2366
+#: panel/menu.c:2382
 msgid "About GNOME..."
 msgstr "GNOME névjegy..."
 
-#: panel/menu.c:3026
+#: panel/menu.c:3042
 msgid "Can't open directory, using main menu!"
 msgstr ""
 
-#: panel/menu.c:3155
+#: panel/menu.c:3171
 msgid "In a submenu"
 msgstr "Almenüben"
 
-#: panel/menu.c:3167
+#: panel/menu.c:3183
 msgid "On the main menu"
 msgstr "Fõmenün"
 
-#: panel/menu.c:3191
+#: panel/menu.c:3207
 msgid "Menu properties"
 msgstr "Menü tulajdonságok"
 
-#: panel/menu.c:3198
+#: panel/menu.c:3214
 msgid "Menu type"
 msgstr "Menü tipusa"
 
-#: panel/menu.c:3205 panel/menu.c:3225
+#: panel/menu.c:3221 panel/menu.c:3241
 msgid "Main menu"
 msgstr "Fõmenü"
 
-#: panel/menu.c:3216 panel/menu.c:3248
+#: panel/menu.c:3232 panel/menu.c:3264
 msgid "Normal menu"
 msgstr "Normál menü"
 
-#: panel/menu.c:3236
+#: panel/menu.c:3252
 msgid "System menu: "
 msgstr "Rendszer menü: "
 
-#: panel/menu.c:3240
+#: panel/menu.c:3256
 msgid "User menu: "
 msgstr "Felhasználói menü: "
 
-#: panel/menu.c:3244
+#: panel/menu.c:3260
 msgid "Red Hat menu (if found): "
 msgstr "Red Hat menü (ha talált): "
 
-#: panel/menu.c:3258
+#: panel/menu.c:3274
 msgid "Menu path"
 msgstr "Menü útvonala"
 
@@ -2717,44 +3023,49 @@ msgstr ""
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr ""
 
-#. Minimize Delay scale frame
+#. Drawer/launcher auto close
 #: panel/panel_config_global.c:548
+msgid "Close drawer if a launcher inside it is pressed"
+msgstr ""
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:558
 msgid "Applet padding"
 msgstr "Applet magasság"
 
-#: panel/panel_config_global.c:565
+#: panel/panel_config_global.c:575
 msgid "Launcher icon"
 msgstr "Indítóikon"
 
-#: panel/panel_config_global.c:566
+#: panel/panel_config_global.c:576
 msgid "Drawer icon"
 msgstr "Fiókikon"
 
-#: panel/panel_config_global.c:567
+#: panel/panel_config_global.c:577
 msgid "Menu icon"
 msgstr "Menüikon"
 
-#: panel/panel_config_global.c:568
+#: panel/panel_config_global.c:578
 msgid "Logout icon"
 msgstr "Kilépés ikon"
 
-#: panel/panel_config_global.c:592
+#: panel/panel_config_global.c:602
 msgid "Global panel configuration"
 msgstr "Panel konfiguráció"
 
-#: panel/panel_config_global.c:600
+#: panel/panel_config_global.c:610
 msgid "Animation"
 msgstr "Animáció"
 
-#: panel/panel_config_global.c:606
+#: panel/panel_config_global.c:616
 msgid "General icon settings"
 msgstr "Alap tulajdonságok"
 
-#: panel/session.c:712
+#: panel/session.c:667
 msgid "Really log out?"
 msgstr "Tényleg kilépsz?"
 
-#: panel/session.c:729
+#: panel/session.c:684
 msgid "Ask next time"
 msgstr "Kérdezze meg következõ alkalommal is"
 
@@ -2782,92 +3093,6 @@ msgstr "Magasság"
 
 #~ msgid "Raise panels on mouse-over"
 #~ msgstr "Az egér alatt elõtérbe kerüljön a panel"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "Nem lehet megnyinti a '/proc/apm' fájlt. Nem tudok adatokhoz jutni."
-
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "Valami bibi van a '/proc/apm' fájllal. Nem tudok adatokhoz jutni."
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "Nem lehet megnyitni a '/proc/apm' fájlt. Nem tudok adatokhoz jutni."
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "Nincs akkumulátor?!?"
-
-#~ msgid "High and charging."
-#~ msgstr "Magas és töltõdik."
-
-#~ msgid "High."
-#~ msgstr "Magas."
-
-#~ msgid "Low and charging."
-#~ msgstr "Lemerülve, töltõdik."
-
-#~ msgid "Low."
-#~ msgstr "Lemerülve."
-
-#~ msgid "Critical and charging."
-#~ msgstr "Kritikus, töltõdik."
-
-#~ msgid "Critical!!"
-#~ msgstr "Kritikus!"
-
-#~ msgid "Charging."
-#~ msgstr "Töltõdik."
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "Több mint 100.000.000 perc akkkumulátor-élettaram?"
-
-#~ msgid "APM Stats"
-#~ msgstr "APM Statisztikák"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM meghajtó verzió:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "APM BIOS verzió:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "Telep állapota:"
-
-#~ msgid "User Load"
-#~ msgstr "Felhasználói processzorhasználat"
-
-#~ msgid "System Load"
-#~ msgstr "Rendszerprogramok processszorhasználata"
-
-#~ msgid "CPULoad Settings"
-#~ msgstr "CPULoad belállítások"
-
-#~ msgid "GKB settings"
-#~ msgstr "GKB Beállítások"
-
-#~ msgid "Flag One"
-#~ msgstr "Elsõ zászló"
-
-#~ msgid "Flag Two"
-#~ msgstr "Második zászló"
-
-#~ msgid "The GNOME KB Applet"
-#~ msgstr "GNOME billentyûzet-átkapcsoló"
-
-#~ msgid "(C) 1998 LSC - Linux Supporting Center"
-#~ msgstr "(c) 1998 LSC - Linux Támogató Központ, Gyõr"
-
-#~ msgid ""
-#~ "This applet used to switch between keyboard maps. No more. It uses "
-#~ "setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
-#~ "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-#~ "to CVS.So long, and thanks for all the fish."
-#~ msgstr ""
-#~ "Ez az applet a billentyûzetkiosztások közötti átkapcsolásra szolgál.A "
-#~ "program setxkbmap-ot és xmodmap-ot használ. Jelenleg ahttp://lsc.kva.hu/gkb "
-#~ "helyen található a fejlesztõi oldal.Küldhetsz még ikonokat...Viszlát és kösz "
-#~ "a halakat..."
-
-#~ msgid "Image path:"
-#~ msgstr "Kép helye:"
 
 #~ msgid "Special Prefixes"
 #~ msgstr "Speciális elõtagok"
@@ -3028,9 +3253,6 @@ msgstr "Magasság"
 #~ msgid "Dialog buttons have icons"
 #~ msgstr "A párbeszédablakok gombjain legyenek ikonok "
 
-#~ msgid "Menu items have icons"
-#~ msgstr "Menükön legyen ikon"
-
 #~ msgid "Application"
 #~ msgstr "Animáció"
 
@@ -3049,12 +3271,6 @@ msgstr "Magasság"
 #~ msgid "The Name text field can not be blank."
 #~ msgstr "A Név mezõt nem hagyhatod üresen."
 
-#~ msgid "Save Changes?"
-#~ msgstr "Mentsem a változásokat?"
-
-#~ msgid "Overwrite existing file?"
-#~ msgstr "Fölülírjam a létezõ fájlt?"
-
 #~ msgid "Save file?"
 #~ msgstr "Elmentsem a fájlt?"
 
@@ -3072,9 +3288,6 @@ msgstr "Magasság"
 
 #~ msgid "Sort Folder"
 #~ msgstr "A Mappa rendezése"
-
-#~ msgid " Folder"
-#~ msgstr "Mappa"
 
 #~ msgid "P_references..."
 #~ msgstr "T_ulajdonságok..."

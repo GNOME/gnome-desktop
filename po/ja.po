@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-02-11 22:09-0500\n"
+"POT-Creation-Date: 1999-02-15 12:49-0500\n"
 "PO-Revision-Date: 1998-12-11 06:39+09:00\n"
 "Last-Translator: Yukihiro Nakai <Nakai@abricot.co.jp>\n"
 "Language-Team: Yukihiro Nakai <Nakai@abricot.co.jp>\n"
@@ -22,13 +22,15 @@ msgstr "¾ðÊó"
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:478
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:705
-#: applets/gen_util/printer.c:411 applets/gnome-pager/gnomepager_applet.c:1586
+#: applets/gen_util/printer.c:411 applets/gkb/gkb.c:491
+#: applets/gnome-pager/gnomepager_applet.c:1570 applets/gticker/gticker.c:61
+#: applets/icewm-pager/wmpager_applet.c:90
 #: applets/mini-commander/src/mini-commander_applet.c:246
 #: applets/modemlights/modemlights.c:750 applets/multiload/cpuload.c:62
 #: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:378 panel/launcher.c:278
-#: panel/menu.c:3320
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:378 panel/launcher.c:287
+#: panel/menu.c:3336
 msgid "Properties..."
 msgstr "¥×¥í¥Ñ¥Æ¥£..."
 
@@ -44,13 +46,104 @@ msgstr "NeXT¤Ï»à¤ó¤À¤Ê¤ó¤Æ¤È¤ó¤Ç¤â¤Ê¤¤"
 msgid "Timezone"
 msgstr "¥¿¥¤¥à¥¾¡¼¥ó"
 
+#: applets/batmon/batmon.c:106
+msgid "Can't open /proc/apm; can't get data."
+msgstr "/proc/apm¤ò³«¤±¤Þ¤»¤ó¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
+
+#: applets/batmon/batmon.c:112
+msgid "Something wrong with /proc/apm; can't get data."
+msgstr "/proc/apm¤Ë²¿¤«ÌäÂê¤¬¤¢¤ê¤Þ¤¹¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
+
+#: applets/batmon/batmon.c:155
+msgid "Can't open /dev/apm; can't get data."
+msgstr "/dev/apm¤ò³«¤±¤Þ¤»¤ó¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
+
+#: applets/batmon/batmon.c:161 applets/battery/read-battery.c:135
+msgid "ioctl failed on /dev/apm."
+msgstr "/dev/apm¤Ëioctl¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡£"
+
+#: applets/batmon/batmon.c:211
+msgid "There is no battery?!?"
+msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤¬Â¸ºß¤·¤Ê¤¤??"
+
+#: applets/batmon/batmon.c:214
+msgid "High and charging."
+msgstr "¹â¥ì¥Ù¥ë¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:217
+msgid "High."
+msgstr "¹â¥ì¥Ù¥ë¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:220
+msgid "Low and charging."
+msgstr "Äã¥ì¥Ù¥ë¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:223
+msgid "Low."
+msgstr "Äã¥ì¥Ù¥ë¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:226
+msgid "Critical and charging."
+msgstr "Ã×Ì¿Åª¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:229
+msgid "Critical!!"
+msgstr "Ã×Ì¿Åª¤Ç¤¹!!"
+
+#: applets/batmon/batmon.c:232
+msgid "Charging."
+msgstr "½¼ÅÅÃæ¤Ç¤¹¡£"
+
+#: applets/batmon/batmon.c:240
+msgid "unknown minutes of battery."
+msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤Î»Ä¤ê»þ´Ö¤¬¤ï¤«¤ê¤Þ¤»¤ó¡£"
+
+#: applets/batmon/batmon.c:243
+msgid "unknown minutes of battery (%d%%)"
+msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤Î»Ä¤ê»þ´Ö¤¬¤ï¤«¤ê¤Þ¤»¤ó¡£(%d%%)"
+
+#: applets/batmon/batmon.c:249
+#, c-format
+msgid "%d minutes of battery"
+msgstr "»Ä¤ê%dÊ¬¤Ç¤¹"
+
+#: applets/batmon/batmon.c:251
+msgid "%d minutes of battery (%d%%)"
+msgstr "»Ä¤ê%dÊ¬¤Ç¤¹ (%d%%)"
+
+#. would have to be an error
+#: applets/batmon/batmon.c:255
+msgid "More than 100,000,000 minutes of battery life?!?"
+msgstr "¥Ð¥Ã¥Æ¥ê¡¼»þ´Ö»Ä¤ê100,000,000Ê¬°Ê¾å!?"
+
+#: applets/batmon/batmon.c:338
+msgid "APM Stats"
+msgstr "APM¥¹¥Æ¡¼¥¿¥¹"
+
+#: applets/batmon/batmon.c:356
+msgid "Linux APM Driver Version:"
+msgstr "Linux APM ¥É¥é¥¤¥Ð¥Ð¡¼¥¸¥ç¥ó:"
+
+#: applets/batmon/batmon.c:368
+msgid "APM BIOS Version:"
+msgstr "APM BIOS¥Ð¡¼¥¸¥ç¥ó:"
+
+#: applets/batmon/batmon.c:385
+msgid "Battery Status:"
+msgstr "¥Ð¥Ã¥Æ¥ê¡¼¥¹¥Æ¡¼¥¿¥¹:"
+
+#: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2660
+#: panel/launcher.c:44
+msgid "Close"
+msgstr "ÊÄ¤¸¤ë"
+
 #: applets/battery/battery.c:357
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "ÆâÉô¥¨¥é¡¼: battery_set_mode¤Î¥â¡¼¥É¤¬ÉÔÀµ¤Ç¤¹"
 
-#: applets/battery/battery.c:402 applets/gen_util/clock.c:255
-#: applets/gen_util/mailcheck.c:672 applets/gen_util/printer.c:386
-#: applets/netload/netload.c:321
+#: applets/battery/battery.c:402 applets/freshapp/freshapp.c:38
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:672
+#: applets/gen_util/printer.c:386 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "¥¢¥×¥ì¥Ã¥È¤¬À¸À®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿\n"
 
@@ -66,8 +159,9 @@ msgstr "¥Ð¥Ã¥Æ¥ê¡¼¥â¥Ë¥¿¤ÎÀßÄê"
 msgid "General Properties"
 msgstr "°ìÈÌÀßÄê"
 
-#: applets/battery/properties.c:48 applets/diskusage/properties.c:232
-#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
+#: applets/battery/properties.c:48 applets/cpuload/properties.c:149
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
 msgid "Applet Height"
 msgstr "¥¢¥×¥ì¥Ã¥È¤Î¹â¤µ"
 
@@ -128,13 +222,48 @@ msgstr ""
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "/dev/apm¤ò³«¤±¤Þ¤»¤ó;¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó"
 
-#: applets/battery/read-battery.c:135
-msgid "ioctl failed on /dev/apm."
-msgstr "/dev/apm¤Ëioctl¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡£"
-
 #: applets/battery/read-battery.c:146
 msgid "APM is disabled!  Cannot read battery charge information."
 msgstr "APM¤Ï»ÈÍÑ¤Ç¤­¤Þ¤»¤ó!¥Ð¥Ã¥Æ¥ê¡¼½¼ÅÅ¾ðÊó¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
+
+#: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:484
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
+#: applets/gkb/gkb.c:483 applets/gnome-pager/gnomepager_applet.c:1564
+#: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:756
+#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:307 panel/menu.c:2370
+msgid "About..."
+msgstr "¾ðÊó..."
+
+#: applets/bussign/bussign.c:80
+msgid "Refresh Image"
+msgstr "²èÁü¤ÎºÆÆÉ¤ß¹þ¤ß"
+
+#: applets/bussign/bussign.c:244
+msgid "The Bus Sign Applet"
+msgstr "Bus¥µ¥¤¥ó¡¦¥¢¥×¥ì¥Ã¥È"
+
+#: applets/bussign/bussign.c:245 applets/gen_util/mailcheck.c:632
+msgid "(c) 1998 the Free Software Foundation"
+msgstr ""
+
+#: applets/bussign/bussign.c:247
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
+"¤³¤Î¥¢¥×¥ì¥Ã¥È¤Ï¤Þ¤Ã¤¿¤¯¤Î»þ´Ö¤ÎÌµÂÌ¤Ç¤¹¡£»Å»ö¤ËÌá¤Ã¤¿Ìá¤Ã¤¿!\n"
+"\n"
+"¥µ¥¤¥ó¤òËä¤á¤ë¤Ë¤Ï¤³¤Á¤é¤ò¸«¤Æ¤¯¤À¤µ¤¤:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
 
 #: applets/cdplayer/cdplayer.c:318
 #, fuzzy
@@ -161,23 +290,13 @@ msgstr ""
 "»ä¤Î¥­¡¼¥Ü¡¼¥É¤Ç¤ÏÂÇ¤Æ¤Ê¤¤ÊÑ¤ï¤Ã¤¿Ê¸»ú¤òÆþÎÏ¤¹¤ë¤¿¤á¤Î Panel "
 "¥¢¥×¥ì¥Ã¥È¤Ç¤¹¡£GNUGNU°ìÈÌ¸øÍ­»ÈÍÑµöÂú½ñ¤Ë´ð¤Å¤¤¤Æ¥ê¥ê¡¼¥¹¤µ¤ì¤Æ¤¤¤Þ¤¹¡£"
 
-#: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:484
-#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:712
-#: applets/gnome-pager/gnomepager_applet.c:1580
-#: applets/modemlights/modemlights.c:756 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
-#: panel/menu.c:2354
-msgid "About..."
-msgstr "¾ðÊó..."
-
-#: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:47 applets/gticker/gticker.c:230
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:52
+#: applets/clockmail/clockmail.c:52 applets/gticker/gticker.c:234
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr ""
 
@@ -247,92 +366,13 @@ msgstr "¿·¤·¤¤¥á¡¼¥ë¤¬ÆÏ¤¤¤¿¤È¤­¤Ë¼Â¹Ô¤¹¤ë¤â¤Î:"
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "¥á¡¼¥ë¥Ü¥Ã¥¯¥¹¤¬¤¤¤Ã¤Ñ¤¤¤È¸«¤Ê¤¹¤È¤­¤Î¥á¡¼¥ë¤ÎÎÌ(¥­¥í¥Ð¥¤¥È)"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
 #. ---
-#: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
-#: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
+#: applets/clockmail/properties.c:388 applets/cpuload/properties.c:231
+#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:210
+#: applets/fvwm-pager/properties.c:246 applets/gticker/properties.c:328
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:887
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:891
 #: panel/panel_config_global.c:301
 msgid "General"
 msgstr "°ìÈÌ"
@@ -345,6 +385,29 @@ msgstr "¥Æ¡¼¥Þ¥Õ¥¡¥¤¥ë(¥Ç¥£¥ì¥¯¥È¥ê):"
 msgid "Theme"
 msgstr "¥Æ¡¼¥Þ"
 
+#: applets/cpuload/properties.c:137
+msgid "User Load"
+msgstr "¥æ¡¼¥¶¥ì¥Ù¥ëÉé²Ù"
+
+#: applets/cpuload/properties.c:143
+msgid "System Load"
+msgstr "¥·¥¹¥Æ¥à¥ì¥Ù¥ëÉé²Ù"
+
+#: applets/cpuload/properties.c:155 applets/diskusage/properties.c:238
+#: applets/fvwm-pager/properties.c:184 applets/netload/properties.c:147
+#: panel/swallow.c:248
+msgid "Width"
+msgstr "Éý"
+
+#: applets/cpuload/properties.c:170 applets/diskusage/properties.c:259
+#: applets/netload/properties.c:170
+msgid "Update Frequency"
+msgstr "¥¢¥Ã¥×¥Ç¡¼¥È¤Î´Ö³Ö"
+
+#: applets/cpuload/properties.c:228
+msgid "CPULoad Settings"
+msgstr "CPUÉé²Ù¤ÎÀßÄê"
+
 #: applets/dialer/dialer.c:46
 msgid "PPP Dialer Applet"
 msgstr "PPP¥À¥¤¥¢¥é¡¼¥¢¥×¥ì¥Ã¥È"
@@ -353,7 +416,7 @@ msgstr "PPP¥À¥¤¥¢¥é¡¼¥¢¥×¥ì¥Ã¥È"
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
 msgstr "¥Õ¥¡¥ó¥­¡¼¤ÊPPP¥À¥¤¥¢¥é¡¼¤Ç¤¹¡£º£¤Þ¤Ç¹Í¤¨¤Ä¤¤¤¿¿Í¤¬¤¤¤¿¤«!?"
 
-#: applets/dialer/dialer.c:87 panel/menu.c:3143
+#: applets/dialer/dialer.c:87 panel/menu.c:3159
 msgid "Off"
 msgstr "¥ª¥Õ"
 
@@ -372,15 +435,6 @@ msgstr "Ê¸»ú¤Î¿§"
 #: applets/diskusage/properties.c:225
 msgid "Backgroundcolor"
 msgstr "ÇØ·Ê¤Î¿§"
-
-#: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
-#: applets/netload/properties.c:147 panel/swallow.c:248
-msgid "Width"
-msgstr "Éý"
-
-#: applets/diskusage/properties.c:259 applets/netload/properties.c:170
-msgid "Update Frequency"
-msgstr "¥¢¥Ã¥×¥Ç¡¼¥È¤Î´Ö³Ö"
 
 #: applets/diskusage/properties.c:334
 msgid "Diskusage Settings"
@@ -523,8 +577,8 @@ msgstr "GNOME¤µ¤«¤Ê·¯¤ÎÌ¾Á°"
 msgid "The Animation Filename:"
 msgstr "¥¢¥Ë¥á¡¼¥·¥ç¥ó¥Õ¥¡¥¤¥ë¤ÎÌ¾Á°"
 
-#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1015
-#: panel/menu.c:3261 panel/panel-util.c:77 panel/panel-util.c:115
+#: applets/fish/fish.c:243 gnome-terminal/gnome-terminal.c:1019
+#: panel/menu.c:3277 panel/panel-util.c:77 panel/panel-util.c:115
 #: panel/panel-util.c:153 panel/panel_config.c:728 panel/swallow.c:238
 msgid "Browse"
 msgstr "»²¾È"
@@ -698,10 +752,6 @@ msgstr "¥á¡¼¥ë¥Á¥§¥Ã¥¯"
 msgid "Mail check Applet"
 msgstr "¥á¡¼¥ë¥Á¥§¥Ã¥¯¥¢¥×¥ì¥Ã¥È"
 
-#: applets/gen_util/mailcheck.c:632
-msgid "(c) 1998 the Free Software Foundation"
-msgstr ""
-
 #: applets/gen_util/mailcheck.c:634
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "¥á¡¼¥ë¥Á¥§¥Ã¥¯¤Ï¥á¡¼¥ë¥Ü¥Ã¥¯¥¹¤Ë¿·¤·¤¤¥á¡¼¥ë¤¬ÆÏ¤¯¤ÈÃÎ¤é¤»¤Æ¤¯¤ì¤Þ¤¹"
@@ -726,7 +776,68 @@ msgstr "°õºþ¥³¥Þ¥ó¥É"
 msgid "Printer"
 msgstr "¥×¥ê¥ó¥¿"
 
+#: applets/gkb/gkb.c:177
+msgid "GKB settings"
+msgstr "GKB¤ÎÀßÄê"
+
+#: applets/gkb/gkb.c:190
+msgid "Flag One"
+msgstr ""
+
+#: applets/gkb/gkb.c:223
+msgid "Flag Two"
+msgstr ""
+
+#: applets/gkb/gkb.c:252
+#, fuzzy
+msgid "Program"
+msgstr "¥¹¥¿¡¼¥È¥¢¥Ã¥×"
+
+#: applets/gkb/gkb.c:262
+msgid "Xkb"
+msgstr ""
+
+#: applets/gkb/gkb.c:266
+msgid "Xmodmap"
+msgstr ""
+
+#: applets/gkb/gkb.c:277 panel/menu.c:1672 panel/menu.c:1716 panel/menu.c:1718
+#: panel/menu.c:2952 panel/menu.c:3290
+msgid "Menu"
+msgstr "¥á¥Ë¥å¡¼"
+
+#: applets/gkb/gkb.c:413
+msgid "The GNOME KB Applet"
+msgstr "GNOME KB¥¢¥×¥ì¥Ã¥È"
+
+#: applets/gkb/gkb.c:414
+msgid "1.0pre1"
+msgstr ""
+
+#: applets/gkb/gkb.c:415
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr ""
+
+#: applets/gkb/gkb.c:417
+#, fuzzy
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS.So long, and thanks for all the fish."
+msgstr ""
+"¥­¡¼¥Ü¡¼¥É¥Þ¥Ã¥×¤òÀÚÂØ¤¨¤ë¤¿¤á¤Î¥¢¥×¥ì¥Ã¥È¤Ç¤¹¡£¤½¤ì¤À¤±¡£setxkbmap ¤« "
+"xmodmap ¤òÍøÍÑ¤·¤Þ¤¹¡£¤³¤Î¥¢¥×¥ì¥Ã¥È¤Î¥á¥¤¥ó¥µ¥¤¥È¤Ïº£ "
+"http://lsc.kva.hu/gkb/ "
+"¤Ë¤¢¤ê¤Þ¤¹¡£¤¢¤Ê¤¿¤Î¹ñ´ú¤ò60x40¥Ô¥¯¥»¥ë¤ÎÂç¤­¤µ¤Ç»ä¤ËÁ÷¤Ã¤Æ²¼¤µ¤¤¡£»ä¤¬CVS¤ËÃ"
+"Ö¤¤¤Æ¤ª¤­¤Þ¤¹¡£"
+
+#: applets/gkb/gkb.c:426
+msgid "gkb.xpm"
+msgstr ""
+
 #: applets/gnome-pager/gnomepager_applet.c:122
+#: applets/icewm-pager/wmpager_applet.c:218
 msgid "Desktop Pager Applet"
 msgstr "¥Ç¥¹¥¯¥È¥Ã¥×¥Ú¡¼¥¸¥ã¡¦¥¢¥×¥ì¥Ã¥È"
 
@@ -738,70 +849,70 @@ msgstr ""
 msgid "Pager for a GNOME compliant Window Manager"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:384
+#: applets/gnome-pager/gnomepager_applet.c:363
 #, fuzzy
 msgid "Gnome Pager Settings"
 msgstr "FVWM¥Ú¡¼¥¸¥ã¤ÎÀßÄê"
 
-#: applets/gnome-pager/gnomepager_applet.c:388
-#: applets/slashapp/properties.c:422
+#: applets/gnome-pager/gnomepager_applet.c:367
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
 msgid "Display"
 msgstr "É½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:389
+#: applets/gnome-pager/gnomepager_applet.c:368
 msgid "Show all tasks on all desktops"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:397
+#: applets/gnome-pager/gnomepager_applet.c:376
 #, fuzzy
 msgid "Show tasks"
 msgstr "ÆüÉÕ¤òÉ½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:405
+#: applets/gnome-pager/gnomepager_applet.c:384
 #, fuzzy
 msgid "Show pager"
 msgstr "ÆüÉÕ¤òÉ½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:413
+#: applets/gnome-pager/gnomepager_applet.c:392
 msgid "Use small pagers"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:421
+#: applets/gnome-pager/gnomepager_applet.c:400
 #, fuzzy
 msgid "Show icons in tasks"
 msgstr "¥È¥Ô¥Ã¥¯¤Î³¨¤òÉ½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:429
+#: applets/gnome-pager/gnomepager_applet.c:408
 #, fuzzy
 msgid "Show task list button"
 msgstr "¥Ü¥¿¥ó¤òÉ½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:444
+#: applets/gnome-pager/gnomepager_applet.c:423
 msgid "Maximum width of horizontal task list"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:459
+#: applets/gnome-pager/gnomepager_applet.c:438
 msgid "Maximum width of vertical task list"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:473
+#: applets/gnome-pager/gnomepager_applet.c:452
 msgid "Number of rows of horizontal tasks"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:486
+#: applets/gnome-pager/gnomepager_applet.c:465
 msgid "Number of vertical columns of tasks"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:499
+#: applets/gnome-pager/gnomepager_applet.c:478
 msgid "Number rows of pagers"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:1500
+#: applets/gnome-pager/gnomepager_applet.c:1513
 #, fuzzy
 msgid "Gnome Pager Error"
 msgstr "Gnome¥Ø¥ë¥×¥Ö¥é¥¦¥¶"
 
-#: applets/gnome-pager/gnomepager_applet.c:1501
+#: applets/gnome-pager/gnomepager_applet.c:1514
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -810,25 +921,191 @@ msgid ""
 "Then start this applet again.\n"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:1974
+#: applets/gnome-pager/gnomepager_applet.c:2023
 msgid "Sticky"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:2587
+#: applets/gnome-pager/gnomepager_applet.c:2636
 #, fuzzy
 msgid "Show / Hide"
 msgstr "ÆüÉÕ¤òÉ½¼¨"
 
-#: applets/gnome-pager/gnomepager_applet.c:2599
+#: applets/gnome-pager/gnomepager_applet.c:2648
 msgid "Shade / Unshade"
 msgstr ""
 
-#: applets/gnome-pager/gnomepager_applet.c:2611 panel/launcher.c:43
-msgid "Close"
-msgstr "ÊÄ¤¸¤ë"
-
-#: applets/gnome-pager/gnomepager_applet.c:2623
+#: applets/gnome-pager/gnomepager_applet.c:2672
 msgid "Nuke"
+msgstr ""
+
+#: applets/gticker/gticker.c:53
+#, fuzzy
+msgid "Loading headlines..."
+msgstr "¸«½Ð¤·¤òÆÉ¤ß¹þ¤ßÃæ¡Ä"
+
+#: applets/gticker/gticker.c:72
+#, fuzzy
+msgid "Show Article Listing"
+msgstr "µ­»ö°ìÍ÷¤òÉ½¼¨"
+
+#: applets/gticker/gticker.c:77
+#, fuzzy
+msgid "Refresh Articles"
+msgstr "µ­»ö¤ÎºÆÆÉ¤ß¹þ¤ß"
+
+#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr ""
+
+#: applets/gticker/gticker.c:236
+msgid "GTicker"
+msgstr ""
+
+#: applets/gticker/gticker.c:236 applets/jbc/jbc.c:72
+#: applets/slashapp/slashapp.c:573
+msgid "(C) 1998"
+msgstr ""
+
+#: applets/gticker/gticker.c:237
+msgid "Ticker for the GNOME Project\n"
+msgstr ""
+
+#: applets/gticker/gticker.c:250
+#, fuzzy
+msgid "GTicker Article List"
+msgstr "µ­»ö°ìÍ÷¤òÉ½¼¨"
+
+#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
+msgid "No articles"
+msgstr "µ­»ö¤Ê¤·"
+
+#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
+#: gmenu/utils.c:91
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤ÎºîÀ®Ãæ: %s\n"
+
+#: applets/gticker/gticker.c:415
+#, fuzzy, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
+msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+msgid "Articles"
+msgstr "µ­»ö"
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr "¥È¥Ô¥Ã¥¯¤Î³¨¤òÉ½¼¨"
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr "Ê¬Ìî¤òÉ½¼¨"
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Â¾¤Î¾ðÊó¤òÉ½¼¨(»þ¹ï¡¢Ãø¼Ô¡¢¥³¥á¥ó¥È)"
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "µ­»ö¤òÉ½¼¨¤¹¤ë´Ö³Ö (10 = 1 ÉÃ):"
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(°Ê¾å¤ÎÀßÄê¤ÏºÆÆÉ¤ß¹þ¤ß¤¹¤ë¤Þ¤ÇÍ­¸ú¤Ë¤Ê¤ê¤Þ¤»¤ó)"
+
+#: applets/gticker/properties.c:231
+#: applets/mini-commander/src/mini-commander_applet.c:184
+#: applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr "¥Ö¥é¥¦¥¶"
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+msgid "Open new window"
+msgstr "¥¦¥¤¥ó¥É¥¦¤ò¿·µ¬¤Ë³«¤¯"
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr "¼õ¿®¾ðÊó(Ì¤¼ÂÁõ)"
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr "URL:"
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr "µ­»öÌÜÏ¿¥Õ¥¡¥¤¥ë:"
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr "²èÁü¥µ¡¼¥Ð¡¼¤ÎURL:"
+
+#: applets/gticker/properties.c:312
+msgid "Image path:"
+msgstr "²èÁü¥Ñ¥¹:"
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1098
+msgid "Scrolling"
+msgstr "¥¹¥¯¥í¡¼¥ë"
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr "³ê¤é¤«¥¹¥¯¥í¡¼¥ë"
+
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr ""
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Â®¤µ"
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr "ÀÞ¤êÊÖ¤·¹Ô¤ÎÉ½¼¨Â®ÅÙ:"
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "³Æ¹Ô¤Î¥¹¥¯¥í¡¼¥ëÂ®ÅÙ(³ê¤é¤«¥¹¥¯¥í¡¼¥ë):"
+
+#. FIXME: This should check to make sure icewm (or equiv) is running.
+#. Not sure if it is working though...
+#: applets/icewm-pager/wmpager_applet.c:53
+msgid ""
+"This applet requires you to run a window manager with the XA_ extensions.\n"
+msgstr ""
+"¤³¤Î¥¢¥×¥ì¥Ã¥È¤ÏXA_¥¨¥¯¥¹¥Æ¥ó¥·¥ç¥ó¤Î¤¢¤ë¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ò»ÈÍÑ¤·¤Æ¤¤¤ëÉ¬"
+"Í×¤¬¤¢¤ê¤Þ¤¹¡£\n"
+
+#: applets/icewm-pager/wmpager_applet.c:219
+msgid "Copyright (C)1998 M.Watson"
+msgstr ""
+
+#: applets/icewm-pager/wmpager_applet.c:275
+msgid "Failed to retrieve workspace property."
+msgstr "¥ï¡¼¥¯¥¹¥Ú¡¼¥¹¤ÎÀßÄê¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡£"
+
+#: applets/jbc/jbc.c:67
+msgid "Jon Anhold <jon@snoopy.net>"
+msgstr ""
+
+#: applets/jbc/jbc.c:68
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr ""
+
+#: applets/jbc/jbc.c:71
+msgid "Jon's Binary Clock"
+msgstr ""
+
+#: applets/jbc/jbc.c:74
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
 msgstr ""
 
 #: applets/mini-commander/src/about.c:32
@@ -910,11 +1187,6 @@ msgstr ""
 msgid "orient. changed"
 msgstr "°õºþ¥³¥Þ¥ó¥É"
 
-#: applets/mini-commander/src/mini-commander_applet.c:184
-#: applets/slashapp/properties.c:249
-msgid "Browser"
-msgstr "¥Ö¥é¥¦¥¶"
-
 #: applets/mini-commander/src/mini-commander_applet.c:197
 #: help-browser/window.c:201
 msgid "History"
@@ -993,7 +1265,7 @@ msgstr ""
 
 #. Color
 #: applets/mini-commander/src/preferences.c:581
-#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1047
+#: applets/multiload/load-graph.c:172 gnome-terminal/gnome-terminal.c:1051
 msgid "Colors"
 msgstr "¥«¥é¡¼"
 
@@ -1224,72 +1496,11 @@ msgstr ""
 msgid "Device"
 msgstr "¥Ç¥Ð¥¤¥¹"
 
-#: applets/slashapp/properties.c:199
-msgid "Articles"
-msgstr "µ­»ö"
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr "¥È¥Ô¥Ã¥¯¤Î³¨¤òÉ½¼¨"
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr "Ê¬Ìî¤òÉ½¼¨"
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr "Â¾¤Î¾ðÊó¤òÉ½¼¨(»þ¹ï¡¢Ãø¼Ô¡¢¥³¥á¥ó¥È)"
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr "µ­»ö¤òÉ½¼¨¤¹¤ë´Ö³Ö (10 = 1 ÉÃ):"
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr "(°Ê¾å¤ÎÀßÄê¤ÏºÆÆÉ¤ß¹þ¤ß¤¹¤ë¤Þ¤ÇÍ­¸ú¤Ë¤Ê¤ê¤Þ¤»¤ó)"
-
-#: applets/slashapp/properties.c:258
-msgid "Open new window"
-msgstr "¥¦¥¤¥ó¥É¥¦¤ò¿·µ¬¤Ë³«¤¯"
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1094
-msgid "Scrolling"
-msgstr "¥¹¥¯¥í¡¼¥ë"
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr "³ê¤é¤«¥¹¥¯¥í¡¼¥ë"
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr ""
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr "Â®¤µ"
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr "ÀÞ¤êÊÖ¤·¹Ô¤ÎÉ½¼¨Â®ÅÙ:"
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr "³Æ¹Ô¤Î¥¹¥¯¥í¡¼¥ëÂ®ÅÙ(³ê¤é¤«¥¹¥¯¥í¡¼¥ë):"
-
-#: applets/slashapp/slashapp.c:152
-msgid "No articles"
-msgstr "µ­»ö¤Ê¤·"
-
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr "Slashapp µ­»ö°ìÍ÷"
 
-#: applets/slashapp/slashapp.c:255
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤ÎºîÀ®Ãæ: %s\n"
-
-#: applets/slashapp/slashapp.c:258
+#: applets/slashapp/slashapp.c:258 gmenu/utils.c:94
 #, c-format
 msgid "unable to create user directory: %s\n"
 msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
@@ -1297,10 +1508,6 @@ msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
 #: applets/slashapp/slashapp.c:532
 msgid "No articles found"
 msgstr "µ­»ö¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó"
-
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr ""
 
 #: applets/slashapp/slashapp.c:567
 msgid "Craig Small <csmall@eye-net.com.au>"
@@ -1316,10 +1523,6 @@ msgstr ""
 
 #: applets/slashapp/slashapp.c:572
 msgid "SlashApp"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:573
-msgid "(C) 1998"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:575
@@ -1350,11 +1553,6 @@ msgstr ""
 "¤³¤Î¥¢¥×¥ì¥Ã¥È¤Ï-remote¥ª¥×¥·¥ç¥ó¤ò»È¤Ã¤Æ¥Í¥Ã¥È¥¹¥±¡¼¥×¤ËgetURL¥³¥Þ¥ó¥É¤òÁ÷¿®"
 "¤·¤Þ¤¹¡£º£¸å¤Ï¤â¤Ã¤ÈÂ¾¤Î¥¦¥§¥Ö¥Ö¥é¥¦¥¶¤¬¥µ¥Ý¡¼¥È¤Ç¤­¤ì¤Ð¤¤¤¤¤È»×¤Ã¤Æ¤¤¤Þ¤¹¡£"
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:117
-msgid "Url:"
-msgstr "URL:"
-
 #: applets/webcontrol/webcontrol.c:120
 msgid "Clear"
 msgstr "¾Ãµî"
@@ -1378,6 +1576,80 @@ msgstr "\"¿·¤·¤¤¥¦¥£¥ó¥É¥¦¤Ç³«¤¯\"¥ª¥×¥·¥ç¥ó¤ÎÉ½¼¨"
 #: applets/webcontrol/webcontrol.c:231
 msgid "Look"
 msgstr "³°´Ñ"
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: gmenu/desktop.c:80 gmenu/desktop.c:96
+#, fuzzy
+msgid "Submenu: "
+msgstr "ºîÀ®¤¹¤ë¥Õ¥©¥ë¥À:"
+
+#: gmenu/desktop.c:194 gmenu/order.c:63
+#, c-format
+msgid "Unable to create file: %s\n"
+msgstr "¥Õ¥¡¥¤¥ë¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
+
+#: gmenu/desktop.c:213 gmenu/order.c:82
+#, c-format
+msgid "unable to remove .order file: %s\n"
+msgstr ".order¥Õ¥¡¥¤¥ë¤òºï½ü¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
 
 #: gmenu/dialogs.c:38
 msgid "File exists."
@@ -1441,6 +1713,15 @@ msgid ""
 "This change conflicts with an existing menu item.\n"
 "No two menu items in a submenu can have the same name."
 msgstr ""
+
+#: gmenu/dnd.c:175
+#, fuzzy
+msgid ""
+"You are not allowed to move that item there.\n"
+"You do not have the proper permissions."
+msgstr ""
+"¥Õ¥¡¥¤¥ë¤òºï½ü¤Ç¤­¤Þ¤»¤ó!\n"
+"¤¢¤Ê¤¿¤Ë¤Ï¸¢¸Â¤¬¤¢¤ê¤Þ¤»¤ó¡£"
 
 #: gmenu/edit.c:214
 msgid "Save"
@@ -1558,6 +1839,33 @@ msgstr ""
 "GNU°ìÈÌ»ÈÍÑµöÂú½ñ¤Ë´ð¤Å¤¤¤Æ¥ê¥ê¡¼¥¹¤µ¤ì¤Æ¤¤¤Þ¤¹¡£\n"
 "GNOME¥á¥Ë¥å¡¼¥¨¥Ç¥£¥¿¤Ç¤¹¡£"
 
+#: gmenu/order.c:126 gmenu/order.c:140
+msgid " Folder"
+msgstr " ¥Õ¥©¥ë¥À"
+
+#: gmenu/save.c:52
+#, fuzzy
+msgid "The menu item must have a name"
+msgstr "¥á¥Ë¥å¡¼¹àÌÜ¤Ë¥¢¥¤¥³¥ó¤òÉ½¼¨¤¹¤ë"
+
+#: gmenu/save.c:58
+msgid "The menu entry must have a filename"
+msgstr ""
+
+#: gmenu/save.c:66
+#, fuzzy
+msgid "Save changes?"
+msgstr "ÊÑ¹¹¤òÊÝÂ¸¤·¤Þ¤¹¤«?"
+
+#: gmenu/save.c:83
+msgid "This change conflicts with an existing menu item"
+msgstr ""
+
+#: gmenu/save.c:89
+#, fuzzy
+msgid "Overwrite existing menu entry?"
+msgstr "¤¹¤Ç¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Ë¾å½ñ¤­¤·¤Þ¤¹¤«?"
+
 #: gmenu/tree.c:389
 msgid "One moment, reading menus..."
 msgstr "¤ªÂÔ¤Á¤¯¤À¤µ¤¤¡¢¥á¥Ë¥å¡¼¤òÆÉ¤ß¹þ¤ó¤Ç¤¤¤Þ¤¹..."
@@ -1584,20 +1892,20 @@ msgstr "¥æ¡¼¥¶¥á¥Ë¥å¡¼"
 msgid "Top of user menus"
 msgstr "¥æ¡¼¥¶¥á¥Ë¥å¡¼¤Î¥È¥Ã¥×"
 
-#: gnome-terminal/gnome-terminal.c:138
+#: gnome-terminal/gnome-terminal.c:142
 msgid "GNOME Terminal"
 msgstr "GNOME¥¿¡¼¥ß¥Ê¥ë"
 
-#: gnome-terminal/gnome-terminal.c:141
+#: gnome-terminal/gnome-terminal.c:145
 msgid "The GNOME terminal emulation program."
 msgstr "GNOME¥¿¡¼¥ß¥Ê¥ë¥¨¥ß¥å¥ì¡¼¥·¥ç¥ó¥×¥í¥°¥é¥à¤Ç¤¹¡£"
 
-#: gnome-terminal/gnome-terminal.c:420 gnome-terminal/gnome-terminal.c:926
-#: gnome-terminal/gnome-terminal.c:936
+#: gnome-terminal/gnome-terminal.c:424 gnome-terminal/gnome-terminal.c:930
+#: gnome-terminal/gnome-terminal.c:940 gnome-terminal/gnome-terminal.c:1740
 msgid "Default"
 msgstr "¥Ç¥Õ¥©¥ë¥È"
 
-#: gnome-terminal/gnome-terminal.c:591
+#: gnome-terminal/gnome-terminal.c:595
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1607,279 +1915,279 @@ msgstr ""
 "¥Ç¥Õ¥©¥ë¥È¤ÎÀßÄê¤Ë¤¢¤¦¤è¤¦¤Ë¡¢¤³¤Î¥¦¥£¥ó¥É¥¦¤ò\n"
 "ÀßÄê¤·¤Ê¤ª¤·¤Þ¤¹¤«?"
 
-#: gnome-terminal/gnome-terminal.c:749
+#: gnome-terminal/gnome-terminal.c:753
 msgid "Linux console"
 msgstr "Linux¥³¥ó¥½¡¼¥ë"
 
-#: gnome-terminal/gnome-terminal.c:750
+#: gnome-terminal/gnome-terminal.c:754
 msgid "Color Xterm"
 msgstr "¥«¥é¡¼Xterm"
 
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:755
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:756
+#: gnome-terminal/gnome-terminal.c:760
 msgid "White on black"
 msgstr "¹õÃÏ¤ËÇòÊ¸»ú"
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:761
 msgid "Black on white"
 msgstr "ÇòÃÏ¤Ë¹õÊ¸»ú"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:762
 msgid "Green on black"
 msgstr "¹õÃÏ¤ËÎÐÊ¸»ú"
 
-#: gnome-terminal/gnome-terminal.c:759
+#: gnome-terminal/gnome-terminal.c:763
 msgid "Black on light yellow"
 msgstr "ÌÀ¤ë¤¤²«¿§¤Ë¹õÊ¸»ú"
 
-#: gnome-terminal/gnome-terminal.c:760
+#: gnome-terminal/gnome-terminal.c:764
 msgid "Custom colors"
 msgstr "¥«¥¹¥¿¥à¥«¥é¡¼"
 
-#: gnome-terminal/gnome-terminal.c:765 panel/panel_config.c:309
+#: gnome-terminal/gnome-terminal.c:769 panel/panel_config.c:309
 msgid "Left"
 msgstr "º¸"
 
-#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:320
+#: gnome-terminal/gnome-terminal.c:770 panel/panel_config.c:320
 msgid "Right"
 msgstr "±¦"
 
-#: gnome-terminal/gnome-terminal.c:767
+#: gnome-terminal/gnome-terminal.c:771
 msgid "Hidden"
 msgstr "±£¤¹"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:890
+#: gnome-terminal/gnome-terminal.c:894
 msgid "Font:"
 msgstr "¥Õ¥©¥ó¥È:"
 
-#: gnome-terminal/gnome-terminal.c:910
+#: gnome-terminal/gnome-terminal.c:914
 msgid "Browse..."
 msgstr "»²¾È..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:918
+#: gnome-terminal/gnome-terminal.c:922
 msgid "Terminal Class"
 msgstr "¥¿¡¼¥ß¥Ê¥ë¥¯¥é¥¹"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:946
+#: gnome-terminal/gnome-terminal.c:950
 msgid "Blinking cursor"
 msgstr "¥«¡¼¥½¥ë¤ÎÅÀÌÇ"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:955
+#: gnome-terminal/gnome-terminal.c:959
 msgid "Hide menu bar"
 msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤ò±£¤¹"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:964
+#: gnome-terminal/gnome-terminal.c:968
 msgid "Silence Terminal bell"
 msgstr "¥¿¡¼¥ß¥Ê¥ë¥Ù¥ë¤òÌÄ¤é¤µ¤Ê¤¤"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:973
+#: gnome-terminal/gnome-terminal.c:977
 msgid "Swap DEL/Backspace"
 msgstr "DEL/Backspace¤òÆþ¤ì´¹¤¨"
 
 #. Word selection class
-#: gnome-terminal/gnome-terminal.c:982
+#: gnome-terminal/gnome-terminal.c:986
 msgid "Select-by-word characters"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:999
+#: gnome-terminal/gnome-terminal.c:1003
 msgid "Image"
 msgstr "²èÁü"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:1003
+#: gnome-terminal/gnome-terminal.c:1007
 msgid "Background pixmap"
 msgstr "ÇØ·Ê²èÁü"
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:1012
+#: gnome-terminal/gnome-terminal.c:1016
 msgid "Pixmap file:"
 msgstr "²èÁü¥Õ¥¡¥¤¥ë:"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1027
+#: gnome-terminal/gnome-terminal.c:1031
 msgid "Transparent"
 msgstr "Æ©ÌÀ"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1036
+#: gnome-terminal/gnome-terminal.c:1040
 msgid "Background should be shaded (slow)"
 msgstr "ÇØ·Ê¤ò°Å¤¯¤¹¤ë(ÃÙ¤¤)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1050
+#: gnome-terminal/gnome-terminal.c:1054
 msgid "Color palette:"
 msgstr "¥«¥é¡¼¥Ñ¥ì¥Ã¥È:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1060
+#: gnome-terminal/gnome-terminal.c:1064
 msgid "Foreground color:"
 msgstr "Ê¸»ú¿§"
 
-#: gnome-terminal/gnome-terminal.c:1069
+#: gnome-terminal/gnome-terminal.c:1073
 msgid "Background color:"
 msgstr "ÇØ·Ê¿§:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1081
+#: gnome-terminal/gnome-terminal.c:1085
 msgid "Colors:"
 msgstr "¥«¥é¡¼:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1097
+#: gnome-terminal/gnome-terminal.c:1101
 msgid "Scrollbar position"
 msgstr "¥¹¥¯¥í¡¼¥ë¥Ð¡¼¤Î°ÌÃÖ"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1108
+#: gnome-terminal/gnome-terminal.c:1112
 msgid "Scrollback lines"
 msgstr "¥¹¥¯¥í¡¼¥ë¥Ð¥Ã¥¯¤Î¥é¥¤¥ó"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1120
+#: gnome-terminal/gnome-terminal.c:1124
 msgid "Scroll on keystroke"
 msgstr "¥­¡¼¥¹¥È¥í¡¼¥¯¤Ç¥¹¥¯¥í¡¼¥ë"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1129
+#: gnome-terminal/gnome-terminal.c:1133
 msgid "Scroll on output"
 msgstr "½ÐÎÏÎÌ¤Ç¥¹¥¯¥í¡¼¥ë"
 
-#: gnome-terminal/gnome-terminal.c:1166
+#: gnome-terminal/gnome-terminal.c:1170
 msgid "Color selector"
 msgstr "¥«¥é¡¼¤ÎÁªÂò"
 
-#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
-#: gnome-terminal/gnome-terminal.c:1219
+#: gnome-terminal/gnome-terminal.c:1206 gnome-terminal/gnome-terminal.c:1216
+#: gnome-terminal/gnome-terminal.c:1223
 #, fuzzy
 msgid "_New terminal"
 msgstr "GNOME¥¿¡¼¥ß¥Ê¥ë"
 
-#: gnome-terminal/gnome-terminal.c:1202 gnome-terminal/gnome-terminal.c:1212
-#: gnome-terminal/gnome-terminal.c:1219
+#: gnome-terminal/gnome-terminal.c:1206 gnome-terminal/gnome-terminal.c:1216
+#: gnome-terminal/gnome-terminal.c:1223
 #, fuzzy
 msgid "Creates a new terminal window"
 msgstr "¿·µ¬¥Õ¥©¥ë¥À¤òºîÀ®¤·¤Þ¤¹"
 
-#: gnome-terminal/gnome-terminal.c:1204 gnome-terminal/gnome-terminal.c:1214
+#: gnome-terminal/gnome-terminal.c:1208 gnome-terminal/gnome-terminal.c:1218
 msgid "_Hide menubar"
 msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤ò±£¤¹(_H)"
 
-#: gnome-terminal/gnome-terminal.c:1206
+#: gnome-terminal/gnome-terminal.c:1210
 #, fuzzy
 msgid "_Close terminal"
 msgstr "¥«¥é¡¼Xterm"
 
-#: gnome-terminal/gnome-terminal.c:1221
+#: gnome-terminal/gnome-terminal.c:1225
 msgid "_Show menubar"
 msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤òÉ½¼¨(_S)"
 
-#: gnome-terminal/gnome-terminal.c:1233
+#: gnome-terminal/gnome-terminal.c:1237
 #, fuzzy
 msgid "C_olor selector..."
 msgstr "¥«¥é¡¼¤ÎÁªÂò"
 
-#: gnome-terminal/gnome-terminal.c:1871
+#: gnome-terminal/gnome-terminal.c:1878
 msgid "Terminal class name"
 msgstr "¥¿¡¼¥ß¥Ê¥ë¤Î¥¯¥é¥¹Ì¾¾Î"
 
-#: gnome-terminal/gnome-terminal.c:1871
+#: gnome-terminal/gnome-terminal.c:1878
 msgid "CLASS"
 msgstr "¥¯¥é¥¹"
 
-#: gnome-terminal/gnome-terminal.c:1874
+#: gnome-terminal/gnome-terminal.c:1881
 msgid "Specifies font name"
 msgstr "¥Õ¥©¥ó¥ÈÌ¾¾Î¤ò»ØÄê¤·¤Þ¤¹"
 
-#: gnome-terminal/gnome-terminal.c:1874
+#: gnome-terminal/gnome-terminal.c:1881
 msgid "FONT"
 msgstr "¥Õ¥©¥ó¥È"
 
-#: gnome-terminal/gnome-terminal.c:1877
+#: gnome-terminal/gnome-terminal.c:1884
 msgid "Do not start up shells as logins shells"
 msgstr "µ¯Æ°¥·¥§¥ë¤ò¥í¥°¥¤¥ó¥·¥§¥ë¤Ë¤·¤Ê¤¤"
 
-#: gnome-terminal/gnome-terminal.c:1880
+#: gnome-terminal/gnome-terminal.c:1887
 msgid "Start up shells as logins shells"
 msgstr "µ¯Æ°¥·¥§¥ë¤ò¥í¥°¥¤¥ó¥·¥§¥ë¤Ë¤¹¤ë"
 
-#: gnome-terminal/gnome-terminal.c:1883
+#: gnome-terminal/gnome-terminal.c:1890
 msgid "Specifies the geometry for the main window"
 msgstr "¥á¥¤¥ó¥¦¥£¥ó¥É¥¦¤Î°ÌÃÖ¤ò»ØÄê¤·¤Þ¤¹"
 
-#: gnome-terminal/gnome-terminal.c:1883 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1890 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr "°ÌÃÖ"
 
-#: gnome-terminal/gnome-terminal.c:1886
+#: gnome-terminal/gnome-terminal.c:1893
 msgid "Execute this program instead of a shell"
 msgstr "¥·¥§¥ë¤ÎÂå¤ï¤ê¤Ë¤³¤Î¥×¥í¥°¥é¥à¤ò¼Â¹Ô¤·¤Þ¤¹"
 
-#: gnome-terminal/gnome-terminal.c:1886
+#: gnome-terminal/gnome-terminal.c:1893
 msgid "COMMAND"
 msgstr "¥³¥Þ¥ó¥É"
 
-#: gnome-terminal/gnome-terminal.c:1889
+#: gnome-terminal/gnome-terminal.c:1896
 msgid "Foreground color"
 msgstr "Ê¸»ú¿§"
 
-#: gnome-terminal/gnome-terminal.c:1889 gnome-terminal/gnome-terminal.c:1892
+#: gnome-terminal/gnome-terminal.c:1896 gnome-terminal/gnome-terminal.c:1899
 msgid "COLOR"
 msgstr "¥«¥é¡¼"
 
-#: gnome-terminal/gnome-terminal.c:1892 panel/panel_config.c:754
+#: gnome-terminal/gnome-terminal.c:1899 panel/panel_config.c:754
 msgid "Background color"
 msgstr "ÇØ·Ê¿§"
 
-#: gnome-terminal/gnome-terminal.c:1895
+#: gnome-terminal/gnome-terminal.c:1902
 #, fuzzy
 msgid "Update utmp entry"
 msgstr "utmp/wtmp¥¨¥ó¥È¥ê¤ò¹¹¿·¤¹¤ë"
 
-#: gnome-terminal/gnome-terminal.c:1895
+#: gnome-terminal/gnome-terminal.c:1902
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1898
+#: gnome-terminal/gnome-terminal.c:1905
 #, fuzzy
 msgid "Do not update utmp entry"
 msgstr "utmp/wtmp¥¨¥ó¥È¥ê¤ò¹¹¿·¤·¤Ê¤¤"
 
-#: gnome-terminal/gnome-terminal.c:1898
+#: gnome-terminal/gnome-terminal.c:1905
 msgid "NOUTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1901
+#: gnome-terminal/gnome-terminal.c:1908
 #, fuzzy
 msgid "Update wtmp entry"
 msgstr "utmp/wtmp¥¨¥ó¥È¥ê¤ò¹¹¿·¤¹¤ë"
 
-#: gnome-terminal/gnome-terminal.c:1901
+#: gnome-terminal/gnome-terminal.c:1908
 msgid "WTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1904
+#: gnome-terminal/gnome-terminal.c:1911
 #, fuzzy
 msgid "Do not update wtmp entry"
 msgstr "utmp/wtmp¥¨¥ó¥È¥ê¤ò¹¹¿·¤·¤Ê¤¤"
 
-#: gnome-terminal/gnome-terminal.c:1904
+#: gnome-terminal/gnome-terminal.c:1911
 msgid "NOWTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1907
+#: gnome-terminal/gnome-terminal.c:1914
 msgid "Set the window title"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1907
+#: gnome-terminal/gnome-terminal.c:1914
 msgid "TITLE"
 msgstr ""
 
@@ -1891,18 +2199,18 @@ msgstr "gsm¥Ç¥Ð¥Ã¥°¤òÍ­¸ú¤Ë¤¹¤ë"
 msgid "Millisecond period spent waiting for clients to register (0=forever)"
 msgstr ""
 
-#: gsm/manager.c:895
+#: gsm/manager.c:886
 msgid "A session shutdown is in progress."
 msgstr ""
 
-#: gsm/manager.c:1027
+#: gsm/manager.c:1018
 #, c-format
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with program \"%s\"."
 msgstr ""
 
-#: gsm/manager.c:1032
+#: gsm/manager.c:1023
 msgid ""
 "The Gnome Session Manager unexpectedly\n"
 "lost contact with an unnamed program."
@@ -2097,7 +2405,7 @@ msgstr "¥²¡¼¥à"
 
 #. Miscellaneous frame
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:507 panel/panel_config_global.c:620
+#: panel/panel_config_global.c:507 panel/panel_config_global.c:630
 msgid "Miscellaneous"
 msgstr "¤½¤ÎÂ¾"
 
@@ -2359,30 +2667,37 @@ msgstr "Ìð°õ¥Ü¥¿¥ó¤Ï»È¤ï¤Ê¤¤"
 msgid "Drawer"
 msgstr "°ú½Ð¤·"
 
-#: panel/launcher.c:40
+#: panel/launcher.c:41
 msgid "This launch icon does not specify a program to run"
 msgstr ""
 
-#: panel/launcher.c:129
+#: panel/launcher.c:138
 msgid "App"
 msgstr "¥¢¥×¥ê"
 
-#: panel/launcher.c:215
+#: panel/launcher.c:224
 msgid "Launcher properties"
 msgstr "¥é¥ó¥Á¥ã¤Î¥×¥í¥Ñ¥Æ¥£"
 
-#: panel/launcher.c:301
+#: panel/launcher.c:310
 msgid "Create launcher applet"
 msgstr "¥é¥ó¥Á¥ã¥¢¥×¥ì¥Ã¥È¤òºîÀ®¤¹¤ë"
 
-#: panel/logout.c:31 panel/menu.c:2073 panel/menu.c:2378
+#: panel/logout.c:41 panel/menu.c:2089 panel/menu.c:2394
 msgid "Log out"
 msgstr "¥í¥°¥¢¥¦¥È"
 
-#: panel/logout.c:33
+#: panel/logout.c:43
 #, fuzzy
 msgid "Log out of GNOME"
 msgstr "¥í¥°¥¢¥¦¥È"
+
+#: panel/main.c:121
+msgid ""
+"I've detected a panel already running.\n"
+"Start another panel as well?\n"
+"(The new panel will not be restarted.)"
+msgstr ""
 
 #: panel/menu.c:538
 msgid "The GNOME Panel"
@@ -2439,151 +2754,151 @@ msgstr "¥Ç¥¹¥¯¥È¥Ã¥×¥¨¥ó¥È¥ê¤«¤égoad_id¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó!"
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "¥Ç¥¹¥¯¥È¥Ã¥×¥¨¥ó¥È¥ê¤«¤égoad_id¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó!"
 
-#: panel/menu.c:1672 panel/menu.c:1732 panel/menu.c:2936 panel/menu.c:3274
-msgid "Menu"
-msgstr "¥á¥Ë¥å¡¼"
+#: panel/menu.c:1718
+msgid " (empty)"
+msgstr ""
 
-#: panel/menu.c:1812
+#: panel/menu.c:1828
 msgid "Applets"
 msgstr "¥¢¥×¥ì¥Ã¥È"
 
-#: panel/menu.c:1939 panel/panel_config.c:870
+#: panel/menu.c:1955 panel/panel_config.c:870
 #, fuzzy
 msgid "Edge panel"
 msgstr "¥¨¥Ã¥¸¥Ñ¥Í¥ë"
 
-#: panel/menu.c:1946 panel/panel_config.c:876
+#: panel/menu.c:1962 panel/panel_config.c:876
 #, fuzzy
 msgid "Corner panel"
 msgstr "¥³¡¼¥Ê¡¼¥Ñ¥Í¥ë"
 
-#: panel/menu.c:1965 panel/menu.c:1969 panel/menu.c:2013 panel/menu.c:2772
+#: panel/menu.c:1981 panel/menu.c:1985 panel/menu.c:2029 panel/menu.c:2788
 #, fuzzy
 msgid "System menus"
 msgstr "¥·¥¹¥Æ¥à¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:2022 panel/menu.c:2024 panel/menu.c:2749 panel/menu.c:2783
-#: panel/menu.c:2786
+#: panel/menu.c:2038 panel/menu.c:2040 panel/menu.c:2765 panel/menu.c:2799
+#: panel/menu.c:2802
 #, fuzzy
 msgid "User menus"
 msgstr "¥æ¡¼¥¶¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:2032 panel/menu.c:2034 panel/menu.c:2715 panel/menu.c:2756
-#: panel/menu.c:2798 panel/menu.c:2808
+#: panel/menu.c:2048 panel/menu.c:2050 panel/menu.c:2731 panel/menu.c:2772
+#: panel/menu.c:2814 panel/menu.c:2824
 #, fuzzy
 msgid "Red Hat menus"
 msgstr "¥á¥¤¥ó¥á¥Ë¥å¡¼¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2058
+#: panel/menu.c:2074
 msgid "Remove this panel"
 msgstr "¤³¤Î¥Ñ¥Í¥ë¤òºï½ü¤¹¤ë"
 
-#: panel/menu.c:2205
+#: panel/menu.c:2221
 msgid "Add applet"
 msgstr "¥¢¥×¥ì¥Ã¥È¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2214
+#: panel/menu.c:2230
 msgid "Add new panel"
 msgstr "¿·µ¬¥Ñ¥Í¥ë¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2222
+#: panel/menu.c:2238
 #, fuzzy
 msgid "Convert to corner panel"
 msgstr "¥³¡¼¥Ê¡¼¥Ñ¥Í¥ë"
 
-#: panel/menu.c:2230
+#: panel/menu.c:2246
 #, fuzzy
 msgid "Convert to edge panel"
 msgstr "¥³¡¼¥Ê¡¼¥Ñ¥Í¥ë"
 
-#: panel/menu.c:2249
+#: panel/menu.c:2265
 msgid "Add main menu"
 msgstr "¥á¥¤¥ó¥á¥Ë¥å¡¼¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2257
+#: panel/menu.c:2273
 #, fuzzy
 msgid "Add drawer"
 msgstr "°ú½Ð¤·"
 
-#: panel/menu.c:2266
+#: panel/menu.c:2282
 msgid "Add log out button"
 msgstr "¥í¥°¥¢¥¦¥È¥Ü¥¿¥ó¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2275
+#: panel/menu.c:2291
 msgid "Add swallowed app"
 msgstr "¥¹¥ï¥í¡¼¥É¥¢¥×¥ê¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2282
+#: panel/menu.c:2298
 msgid "Add new launcher"
 msgstr "¿·µ¬¥é¥ó¥Á¥ã¤ÎÄÉ²Ã"
 
-#: panel/menu.c:2294
+#: panel/menu.c:2310
 msgid "This panel properties..."
 msgstr "¤³¤Î¥Ñ¥Í¥ë¤Î¥×¥í¥Ñ¥Æ¥£..."
 
-#: panel/menu.c:2304
+#: panel/menu.c:2320
 msgid "Global properties..."
 msgstr "Á´ÂÎ¤Î¥×¥í¥Ñ¥Æ¥£..."
 
-#: panel/menu.c:2338
+#: panel/menu.c:2354
 msgid "Panel"
 msgstr "¥Ñ¥Í¥ë"
 
-#: panel/menu.c:2345
+#: panel/menu.c:2361
 msgid "Lock screen"
 msgstr "¥¹¥¯¥ê¡¼¥ó¤Î¥í¥Ã¥¯"
 
-#: panel/menu.c:2366
+#: panel/menu.c:2382
 msgid "About GNOME..."
 msgstr "GNOME¤Ë¤Ä¤¤¤Æ..."
 
-#: panel/menu.c:3026
+#: panel/menu.c:3042
 msgid "Can't open directory, using main menu!"
 msgstr ""
 
-#: panel/menu.c:3155
+#: panel/menu.c:3171
 msgid "In a submenu"
 msgstr ""
 
-#: panel/menu.c:3167
+#: panel/menu.c:3183
 #, fuzzy
 msgid "On the main menu"
 msgstr "¥á¥¤¥ó¥á¥Ë¥å¡¼¤ÎÄÉ²Ã"
 
-#: panel/menu.c:3191
+#: panel/menu.c:3207
 msgid "Menu properties"
 msgstr "¥á¥Ë¥å¡¼¥×¥í¥Ñ¥Æ¥£"
 
-#: panel/menu.c:3198
+#: panel/menu.c:3214
 #, fuzzy
 msgid "Menu type"
 msgstr "¥á¥Ë¥å¡¼¥¿¥¤¥×"
 
-#: panel/menu.c:3205 panel/menu.c:3225
+#: panel/menu.c:3221 panel/menu.c:3241
 #, fuzzy
 msgid "Main menu"
 msgstr "¥á¥¤¥ó¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:3216 panel/menu.c:3248
+#: panel/menu.c:3232 panel/menu.c:3264
 #, fuzzy
 msgid "Normal menu"
 msgstr "¥Î¡¼¥Þ¥ë¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:3236
+#: panel/menu.c:3252
 #, fuzzy
 msgid "System menu: "
 msgstr "¥·¥¹¥Æ¥à¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:3240
+#: panel/menu.c:3256
 #, fuzzy
 msgid "User menu: "
 msgstr "¥æ¡¼¥¶¥á¥Ë¥å¡¼"
 
-#: panel/menu.c:3244
+#: panel/menu.c:3260
 msgid "Red Hat menu (if found): "
 msgstr ""
 
-#: panel/menu.c:3258
+#: panel/menu.c:3274
 msgid "Menu path"
 msgstr "¥á¥Ë¥å¡¼¥Ñ¥¹"
 
@@ -2825,48 +3140,53 @@ msgstr ""
 msgid "Keep panel below windows (GNOME compliant window managers only)"
 msgstr ""
 
-#. Minimize Delay scale frame
+#. Drawer/launcher auto close
 #: panel/panel_config_global.c:548
+msgid "Close drawer if a launcher inside it is pressed"
+msgstr ""
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:558
 #, fuzzy
 msgid "Applet padding"
 msgstr "¥¢¥×¥ì¥Ã¥È¥Ñ¥Ç¥£¥ó¥°"
 
-#: panel/panel_config_global.c:565
+#: panel/panel_config_global.c:575
 msgid "Launcher icon"
 msgstr "¥é¥ó¥Á¥ã¤Î¥¢¥¤¥³¥ó"
 
-#: panel/panel_config_global.c:566
+#: panel/panel_config_global.c:576
 msgid "Drawer icon"
 msgstr "¥É¥í¡¼¥¢¤Î¥¢¥¤¥³¥ó"
 
-#: panel/panel_config_global.c:567
+#: panel/panel_config_global.c:577
 msgid "Menu icon"
 msgstr "¥á¥Ë¥å¡¼¤Î¥¢¥¤¥³¥ó"
 
-#: panel/panel_config_global.c:568
+#: panel/panel_config_global.c:578
 #, fuzzy
 msgid "Logout icon"
 msgstr "¥í¥°¥¢¥¦¥È"
 
-#: panel/panel_config_global.c:592
+#: panel/panel_config_global.c:602
 #, fuzzy
 msgid "Global panel configuration"
 msgstr "Á´ÂÎ¤Î¥Ñ¥Í¥ëÀßÄê"
 
-#: panel/panel_config_global.c:600
+#: panel/panel_config_global.c:610
 msgid "Animation"
 msgstr "¥¢¥Ë¥á¡¼¥·¥ç¥ó"
 
-#: panel/panel_config_global.c:606
+#: panel/panel_config_global.c:616
 #, fuzzy
 msgid "General icon settings"
 msgstr "°ìÈÌÀßÄê"
 
-#: panel/session.c:712
+#: panel/session.c:667
 msgid "Really log out?"
 msgstr "ËÜÅö¤Ë¥í¥°¥¢¥¦¥È¤·¤Þ¤¹¤«?"
 
-#: panel/session.c:729
+#: panel/session.c:684
 msgid "Ask next time"
 msgstr "¼¡²ó¤âÉ½¼¨¤¹¤ë"
 
@@ -2891,152 +3211,6 @@ msgstr "¹â¤µ"
 
 #~ msgid "Discard session"
 #~ msgstr "¥»¥Ã¥·¥ç¥ó¤ò½ªÎ»¤¹¤ë"
-
-#~ msgid "Can't open /proc/apm; can't get data."
-#~ msgstr "/proc/apm¤ò³«¤±¤Þ¤»¤ó¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
-
-#~ msgid "Something wrong with /proc/apm; can't get data."
-#~ msgstr "/proc/apm¤Ë²¿¤«ÌäÂê¤¬¤¢¤ê¤Þ¤¹¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
-
-#~ msgid "Can't open /dev/apm; can't get data."
-#~ msgstr "/dev/apm¤ò³«¤±¤Þ¤»¤ó¡£¥Ç¡¼¥¿¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£"
-
-#~ msgid "There is no battery?!?"
-#~ msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤¬Â¸ºß¤·¤Ê¤¤??"
-
-#~ msgid "High and charging."
-#~ msgstr "¹â¥ì¥Ù¥ë¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
-
-#~ msgid "High."
-#~ msgstr "¹â¥ì¥Ù¥ë¤Ç¤¹¡£"
-
-#~ msgid "Low and charging."
-#~ msgstr "Äã¥ì¥Ù¥ë¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
-
-#~ msgid "Low."
-#~ msgstr "Äã¥ì¥Ù¥ë¤Ç¤¹¡£"
-
-#~ msgid "Critical and charging."
-#~ msgstr "Ã×Ì¿Åª¤Ç½¼ÅÅÃæ¤Ç¤¹¡£"
-
-#~ msgid "Critical!!"
-#~ msgstr "Ã×Ì¿Åª¤Ç¤¹!!"
-
-#~ msgid "Charging."
-#~ msgstr "½¼ÅÅÃæ¤Ç¤¹¡£"
-
-#~ msgid "unknown minutes of battery."
-#~ msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤Î»Ä¤ê»þ´Ö¤¬¤ï¤«¤ê¤Þ¤»¤ó¡£"
-
-#~ msgid "unknown minutes of battery (%d%%)"
-#~ msgstr "¥Ð¥Ã¥Æ¥ê¡¼¤Î»Ä¤ê»þ´Ö¤¬¤ï¤«¤ê¤Þ¤»¤ó¡£(%d%%)"
-
-#~ msgid "%d minutes of battery"
-#~ msgstr "»Ä¤ê%dÊ¬¤Ç¤¹"
-
-#~ msgid "%d minutes of battery (%d%%)"
-#~ msgstr "»Ä¤ê%dÊ¬¤Ç¤¹ (%d%%)"
-
-#~ msgid "More than 100,000,000 minutes of battery life?!?"
-#~ msgstr "¥Ð¥Ã¥Æ¥ê¡¼»þ´Ö»Ä¤ê100,000,000Ê¬°Ê¾å!?"
-
-#~ msgid "APM Stats"
-#~ msgstr "APM¥¹¥Æ¡¼¥¿¥¹"
-
-#~ msgid "Linux APM Driver Version:"
-#~ msgstr "Linux APM ¥É¥é¥¤¥Ð¥Ð¡¼¥¸¥ç¥ó:"
-
-#~ msgid "APM BIOS Version:"
-#~ msgstr "APM BIOS¥Ð¡¼¥¸¥ç¥ó:"
-
-#~ msgid "Battery Status:"
-#~ msgstr "¥Ð¥Ã¥Æ¥ê¡¼¥¹¥Æ¡¼¥¿¥¹:"
-
-#~ msgid "Refresh Image"
-#~ msgstr "²èÁü¤ÎºÆÆÉ¤ß¹þ¤ß"
-
-#~ msgid "The Bus Sign Applet"
-#~ msgstr "Bus¥µ¥¤¥ó¡¦¥¢¥×¥ì¥Ã¥È"
-
-#~ msgid ""
-#~ "This applet is a total waste of time. Get back to work!\n"
-#~ "\n"
-#~ "To fill in the sign please see:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-#~ msgstr ""
-#~ "¤³¤Î¥¢¥×¥ì¥Ã¥È¤Ï¤Þ¤Ã¤¿¤¯¤Î»þ´Ö¤ÎÌµÂÌ¤Ç¤¹¡£»Å»ö¤ËÌá¤Ã¤¿Ìá¤Ã¤¿!\n"
-#~ "\n"
-#~ "¥µ¥¤¥ó¤òËä¤á¤ë¤Ë¤Ï¤³¤Á¤é¤ò¸«¤Æ¤¯¤À¤µ¤¤:\n"
-#~ "\n"
-#~ "http://people.netscape.com/mtoy/sign/index.html"
-
-#~ msgid "User Load"
-#~ msgstr "¥æ¡¼¥¶¥ì¥Ù¥ëÉé²Ù"
-
-#~ msgid "System Load"
-#~ msgstr "¥·¥¹¥Æ¥à¥ì¥Ù¥ëÉé²Ù"
-
-#~ msgid "CPULoad Settings"
-#~ msgstr "CPUÉé²Ù¤ÎÀßÄê"
-
-#~ msgid "GKB settings"
-#~ msgstr "GKB¤ÎÀßÄê"
-
-#~ msgid "The GNOME KB Applet"
-#~ msgstr "GNOME KB¥¢¥×¥ì¥Ã¥È"
-
-#, fuzzy
-#~ msgid ""
-#~ "This applet used to switch between keyboard maps. No more. It uses "
-#~ "setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
-#~ "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-#~ "to CVS.So long, and thanks for all the fish."
-#~ msgstr ""
-#~ "¥­¡¼¥Ü¡¼¥É¥Þ¥Ã¥×¤òÀÚÂØ¤¨¤ë¤¿¤á¤Î¥¢¥×¥ì¥Ã¥È¤Ç¤¹¡£¤½¤ì¤À¤±¡£setxkbmap ¤« "
-#~ "xmodmap ¤òÍøÍÑ¤·¤Þ¤¹¡£¤³¤Î¥¢¥×¥ì¥Ã¥È¤Î¥á¥¤¥ó¥µ¥¤¥È¤Ïº£ "
-#~ "http://lsc.kva.hu/gkb/ "
-#~ "¤Ë¤¢¤ê¤Þ¤¹¡£¤¢¤Ê¤¿¤Î¹ñ´ú¤ò60x40¥Ô¥¯¥»¥ë¤ÎÂç¤­¤µ¤Ç»ä¤ËÁ÷¤Ã¤Æ²¼¤µ¤¤¡£»ä¤¬CVS¤ËÃ"
-#~ "Ö¤¤¤Æ¤ª¤­¤Þ¤¹¡£"
-
-#, fuzzy
-#~ msgid "Loading headlines..."
-#~ msgstr "¸«½Ð¤·¤òÆÉ¤ß¹þ¤ßÃæ¡Ä"
-
-#, fuzzy
-#~ msgid "Show Article Listing"
-#~ msgstr "µ­»ö°ìÍ÷¤òÉ½¼¨"
-
-#, fuzzy
-#~ msgid "Refresh Articles"
-#~ msgstr "µ­»ö¤ÎºÆÆÉ¤ß¹þ¤ß"
-
-#, fuzzy
-#~ msgid ""
-#~ "unable to create user directory: \n"
-#~ "\t\t\t\t\t    %s\n"
-#~ msgstr "¥æ¡¼¥¶¥Ç¥£¥ì¥¯¥È¥ê¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
-
-#~ msgid "Ticker Information (unimplemented)"
-#~ msgstr "¼õ¿®¾ðÊó(Ì¤¼ÂÁõ)"
-
-#~ msgid "Article index file:"
-#~ msgstr "µ­»öÌÜÏ¿¥Õ¥¡¥¤¥ë:"
-
-#~ msgid "Image Server Url:"
-#~ msgstr "²èÁü¥µ¡¼¥Ð¡¼¤ÎURL:"
-
-#~ msgid "Image path:"
-#~ msgstr "²èÁü¥Ñ¥¹:"
-
-#~ msgid ""
-#~ "This applet requires you to run a window manager with the XA_ extensions.\n"
-#~ msgstr ""
-#~ "¤³¤Î¥¢¥×¥ì¥Ã¥È¤ÏXA_¥¨¥¯¥¹¥Æ¥ó¥·¥ç¥ó¤Î¤¢¤ë¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ò»ÈÍÑ¤·¤Æ¤¤¤ëÉ¬"
-#~ "Í×¤¬¤¢¤ê¤Þ¤¹¡£\n"
-
-#~ msgid "Failed to retrieve workspace property."
-#~ msgstr "¥ï¡¼¥¯¥¹¥Ú¡¼¥¹¤ÎÀßÄê¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡£"
 
 #, fuzzy
 #~ msgid "Special Prefixes"
@@ -3286,9 +3460,6 @@ msgstr "¹â¤µ"
 #~ msgid "Dialog buttons have icons"
 #~ msgstr "¥À¥¤¥¢¥í¥°¤Ë¥¢¥¤¥³¥ó¤òÉ½¼¨¤¹¤ë"
 
-#~ msgid "Menu items have icons"
-#~ msgstr "¥á¥Ë¥å¡¼¹àÌÜ¤Ë¥¢¥¤¥³¥ó¤òÉ½¼¨¤¹¤ë"
-
 #~ msgid "Application"
 #~ msgstr "¥¢¥×¥ê¥±¡¼¥·¥ç¥ó"
 
@@ -3330,12 +3501,6 @@ msgstr "¹â¤µ"
 #~ "¤³¤Î¥Õ¥©¥ë¥À¤Î¥¨¥ó¥È¥ê¤ÏÊÔ½¸¤Ç¤­¤Þ¤»¤ó¡£\n"
 #~ "¤¢¤Ê¤¿¤Ë¤Ï¸¢¸Â¤¬¤¢¤ê¤Þ¤»¤ó¡£"
 
-#~ msgid "Save Changes?"
-#~ msgstr "ÊÑ¹¹¤òÊÝÂ¸¤·¤Þ¤¹¤«?"
-
-#~ msgid "Overwrite existing file?"
-#~ msgstr "¤¹¤Ç¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Ë¾å½ñ¤­¤·¤Þ¤¹¤«?"
-
 #~ msgid "Save file?"
 #~ msgstr "¥Õ¥¡¥¤¥ë¤òÊÝÂ¸¤·¤Þ¤¹¤«?"
 
@@ -3353,15 +3518,6 @@ msgstr "¹â¤µ"
 
 #~ msgid "Sort Folder"
 #~ msgstr "¥Õ¥©¥ë¥À¤Î¥½¡¼¥È"
-
-#~ msgid "Unable to create file: %s\n"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
-
-#~ msgid "unable to remove .order file: %s\n"
-#~ msgstr ".order¥Õ¥¡¥¤¥ë¤òºï½ü¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿: %s\n"
-
-#~ msgid " Folder"
-#~ msgstr " ¥Õ¥©¥ë¥À"
 
 #~ msgid "Terminal"
 #~ msgstr "¥¿¡¼¥ß¥Ê¥ë"
