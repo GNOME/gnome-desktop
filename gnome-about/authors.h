@@ -29,6 +29,7 @@ static author authors[] = {
 	{ "Owen Taylor", "<otaylor@redhat.com>" },
 	{ "Peter Teichman", "<pat4@acpub.duke.edu>" },
 	{ "Tom Tromey", "<tromey@cygnus.com>" },
+	{ "Michael Zucchi", "<zucchi@zedzone.mmc.com.au>" },
 	{ "", "" },
 	{ N_("... and many more"), "" },
 	{ NULL, NULL }
