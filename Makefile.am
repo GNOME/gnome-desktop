@@ -1,7 +1,13 @@
 SUBDIRS = \
 	 intl \
 	 po \
-	 macros \
+	 idl \
+	 gnome-ditem \
+	 panel
+
+EXTRA_SUBDIRS = \
+	 intl \
+	 po \
 	 gsm \
 	 smproxy \
 	 pixmaps \
@@ -27,7 +33,3 @@ EXTRA_DIST = \
 	xml-i18n-merge.in	\
 	xml-i18n-update.in
 
-## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
-@MAINT@include macros/macros.dep
-@MAINT@macros/macros.dep: macros/Makefile.am
-@MAINT@	cd macros && $(MAKE) macros.dep
