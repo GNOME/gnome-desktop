@@ -87,8 +87,8 @@ BITMAPS     = \
 	gnome-ccscreensaver.png	\
 	gnome-ccwindowmanager.png \
 	gnome-cckeyboard-bell.png	\
-	gnome-cckeyboard.png
-
+	gnome-cckeyboard.png	\
+	gnome-squeak.png
 
 TILES     = \
 	tile-normal-up.png			\
