@@ -60,6 +60,7 @@ static gchar *contributors[] = {
 	"Jeremy Collins",
 	"Rusty Conover",
 	"Alan Cox",
+	"Dennis Cranston",
 	"Mark Crichton",
 	/* if you encoding allows it, use eacute (U00E9) for the two
 	 * 'e' of 'Frederic' */

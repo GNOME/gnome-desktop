@@ -226,22 +226,22 @@ new_sparkles_timeout (GnomeCanvas* canvas)
 
 	switch (which_sparkle) {
 	case 0:
-		sparkle_new(canvas,50.0,70.0);
+		sparkle_new(canvas,130.0,10.0);
 		break;
 	case 1: 
-		sparkle_new(canvas,70.0,130.0);
+		sparkle_new(canvas,45.0,150.0);
 		break;
 	case 2:
-		sparkle_new(canvas,100.0,37.0);
+		sparkle_new(canvas,45.0,70.0);
 		break;
 	case 3: 
-		sparkle_new(canvas,120.0,110.0);
+		sparkle_new(canvas,111.0,155.0);
 		break;
 	case 4: 
-		sparkle_new(canvas,140.0,120.0);
+		sparkle_new(canvas,110.0,65.0);
 		break;
 	case 5: 
-		sparkle_new(canvas,110.0,160.0);
+		sparkle_new(canvas,115.0,110.0);
 		break;
 	default:
 		which_sparkle = -1;
