@@ -1,18 +1,22 @@
-panel = panel
-applets = applets
-idl = idl
-
-always_built_SUBDIRS = \
-	 gsm smproxy pixmaps desktop-links help-browser \
-	 gnome-terminal gmenu gnome-edit gnome-hint gnome-about core-docs
-
-sometimes_built_SUBDIRS = panel applets idl
-
-SUBDIRS = intl po macros \
-	 $(always_built_SUBDIRS) $(panel) $(applets) $(idl)
-
-#DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
-#	$(sometimes_built_SUBDIRS)
+SUBDIRS = \
+	 intl \
+	 po \
+	 macros \
+	 gsm \
+	 smproxy \
+	 pixmaps \
+	 desktop-links \
+	 help-browser \
+	 gnome-terminal \
+	 gmenu \
+	 gnome-edit \
+	 gnome-hint \
+	 gnome-about \
+	 core-docs \
+	 grdb \
+	 panel \
+	 applets \
+	 idl
 
 EXTRA_DIST = \
 	gnome-core.spec.in	\
