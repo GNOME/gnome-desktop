@@ -71,64 +71,6 @@ AM_CONDITIONAL(ORBIT_INSTALLED, test -n "$ORBIT_LIBS")
 ORB_LIBS="$ORBIT_LIBS"
 ORB_CFLAGS="$ORBIT_CFLAGS"
 
-dnl MICO - Magic to extract the relevant information from
-dnl        various installed files
-MICO_LIBS= MICO_CFLAGS=
-if test -z "$ORB_LIBS"; then
-  AC_MSG_CHECKING(for MICO prefix)
-  for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
-    if test -f $dir/mico-ld ; then
-       mico_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
-       break
-    fi
-  done
-
-  if test x${mico_prefix+set} = xset ; then
-    AC_MSG_RESULT($mico_prefix)
-  else
-    AC_MSG_RESULT(not found)
-    AC_MSG_ERROR(MICO not found)
-  fi
-
-  AC_MSG_CHECKING(for MICO version)
-  if test -f "$mico_prefix/lib/mico-setup.sh"; then
-     MICO_VERS=`(. $mico_prefix/lib/mico-setup.sh ; echo $MICOVERSION)`
-  else
-     # Sometimes mico-setup.sh is installed in doc.
-     files="`echo $mico_prefix/doc/mico-*/mico-setup.sh`"
-     if test "$files" != "$mico_prefix/doc/mico-*/mico-setup.sh"; then
-	MICO_VERS=`(set X $files; . $2; echo $MICOVERSION)`
-     else
-	AC_MSG_ERROR(unknown)
-     fi
-  fi
-  AC_MSG_RESULT($MICO_VERS)
-
-  # We assume here, to keep things simple, that nobody has MICO older
-  # than 2.0.3.  2.0.4 is not checked for since nobody seems to use it.
-
-  if test $MICO_VERS = 2.0.3 || test $MICO_VERS = 2.0.5; then
-    MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lmicocoss$MICO_VERS -lXt"
-  else
-    MICO_LIBS="-lmico$MICO_VERS -lmicogtk$MICO_VERS"
-    AC_DEFINE(HAVE_MICO_ORB_RUN)
-  fi
-
-  for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%g` ; do
-    case $flag in
-      -L*)
-	MICO_LIBS="$flag $MICO_LIBS"
-	;;
-      -lm|-ldl|-ldld|-lbsd)
-	;;
-      -l*)
-	MICO_LIBS="$MICO_LIBS $flag"
-	;;
-    esac
-  done
-  ORB_LIBS="$MICO_LIBS"
-  ORB_CFLAGS="$MICO_CFLAGS"
-fi
 AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
 

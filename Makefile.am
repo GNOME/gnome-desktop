@@ -5,15 +5,18 @@ endif
 if ORBIT_INSTALLED
 control_center = control-center
 capplets = capplets
+panel = panel
+applets = applets
 endif
 
-always_built_SUBDIRS = panel applets \
+always_built_SUBDIRS = \
 	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
 	 gnome-terminal core-docs 
 
-sometimes_built_SUBDIRS = gmenu control-center capplets
+sometimes_built_SUBDIRS = panel applets gmenu control-center capplets
 
-SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu) $(control_center)  $(capplets)
+SUBDIRS = intl po macros \
+	 $(always_built_SUBDIRS) $(panel) $(applets) $(gmenu) $(control_center) $(capplets)
 
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
 #	$(sometimes_built_SUBDIRS)
