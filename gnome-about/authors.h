@@ -32,6 +32,7 @@ static author authors[] = {
 	{ "Emmanuel Briot", "" },
 	{ "Marcus Brubaker", "" },
 	{ "Christian Bucher", "" },
+	{ "Dave Camp", "" },
 	{ "Didier Carlier", "" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
 	{ "Chema Celorio", "<chema@celorio.com>" },
