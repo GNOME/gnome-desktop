@@ -64,6 +64,7 @@ static gchar *contributors[] = {
 	"Marc Ewing",
 	N_("Gergõ Érdi"),
 	"Peter Fales",
+	"Joaquim Fellmann",
 	"Dave Finton",
 	"Milon Firikis",
 	"Raul Perusquia Flores",
