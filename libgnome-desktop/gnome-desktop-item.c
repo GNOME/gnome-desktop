@@ -1924,7 +1924,7 @@ gnome_desktop_item_find_icon (const char *icon,
 			      int desired_size,
 			      int flags)
 {
-	if (icon == NULL) {
+	if (icon == NULL || strcmp(icon,"") == 0) {
 		return NULL;
 	} else if (g_path_is_absolute (icon)) {
 		if (g_file_test (icon, G_FILE_TEST_EXISTS)) {
