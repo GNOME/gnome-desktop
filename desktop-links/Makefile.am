@@ -33,9 +33,32 @@ Directory_files = \
 	Development.directory   \
 	Settings.directory
 
+Multimedia_DATA = \
+	XEphem.desktop		\
+	XMcd.desktop		\
+	xmix.desktop      	\
+	realplayer.desktop	\
+	GXanim.desktop
+
+
+Utilities_DATA = \
+	Xemacs.desktop		\
+	gaspell.desktop   	\
+	sawtheme.desktop	\
+	FileRunner.desktop	\
+	TkSETI.desktop		\
+	rxvt.desktop		\
+	Rxvt.desktop		\
+	lynx.desktop		\
+	xbmbrowser.desktop	\
+	VIM.desktop		\
+	xcolsel.desktop
+
 Applications_DATA = \
 	Emacs.desktop		\
-	Vim.desktop
+	Vim.desktop		\
+	WordPerfect.desktop	\
+	Bluefish.desktop
 
 Graphics_DATA = \
 	GIMP.desktop
@@ -48,7 +71,9 @@ System_DATA = \
 	Vnterm.desktop
 
 Settings_DATA =	\
-	Imlib_config.desktop
+	Imlib_config.desktop	\
+	sawrefresh.desktop	\
+	sawrestart.desktop
 
 Internet_DATA = \
 	Netscape.desktop	\
