@@ -1,6 +1,7 @@
 pixmapdir = $(datadir)/pixmaps
 
 BITMAPS     = \
+	emacs.png				\
 	gnome-aorta.png				\
 	gnome-audio2.png			\
 	gnome-balsa2.png			\
