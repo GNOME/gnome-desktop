@@ -42,8 +42,8 @@
 #include <time.h>
 #include <string.h>
 #include "libgnomeP.h"
-#include "gnome-defs.h"
-#include "gnome-portability.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnomebase/gnome-portability.h>
 #include "gnome-ditem.h"
 #include "gnome-util.h"
 #include "gnome-config.h"
