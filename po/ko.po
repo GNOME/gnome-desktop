@@ -1,533 +1,912 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ko.po -- Korean messages for GNOME core
+# Copyright (C) 1998 Free Software Foundation, Inc.
+# Changwoo Ryu <cwryu@adam.kaist.ac.kr>, 1998.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME-core 0.13\n"
-"POT-Creation-Date: 1998-03-17 17:12+0900\n"
-"PO-Revision-Date: 1998-03-17 17:12+0900\n"
+"POT-Creation-Date: 1998-05-31 21:40+0900\n"
+"PO-Revision-Date: 1998-05-29 17:12+0900\n"
 "Last-Translator: Ryu, Changwoo <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/panel.c:430
-msgid "Remove from panel"
-msgstr "패널에서 삭제"
+#. This format string is used, to display the actual day,
+#. when showing a vertical panel.  For an explanation of
+#. this format string type 'man strftime'.
+#: applets/gen_util/clock.c:98
+msgid ""
+"%a\n"
+"%b %d"
+msgstr ""
+"%b %d\n"
+"%a"
 
-#: panel/panel.c:437
-msgid "Move applet"
-msgstr "애플릿 이동"
+#. This format string is used, to display the actual day,
+#. when showing a horizontal panel.
+#: applets/gen_util/clock.c:103
+msgid "%a %b %d"
+msgstr "%b %d %a"
 
-#: panel/panel.c:787
-msgid "This panel properties..."
-msgstr "패널 속성..."
+#. This format string is used, to display the actual time in
+#. 12 hour format.
+#: applets/gen_util/clock.c:111
+msgid "%I:%M %p"
+msgstr "%p %I:%M"
 
-#: panel/menu.c:507 panel/panel.c:794
-msgid "Global properties..."
-msgstr "전체 속성..."
+#. This format string is used, to display the actual time in
+#. 24 hour format.
+#: applets/gen_util/clock.c:116
+msgid "%H:%M"
+msgstr "%H:%M"
 
-#. menuitem = gtk_menu_item_new_with_label(_("Add reparent (testing)"));
-#. gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
-#. (GtkSignalFunc) add_reparent,
-#. panel);
-#. gtk_menu_append(GTK_MENU(panel_menu), menuitem);
-#. gtk_widget_show(menuitem);
-#: panel/panel.c:808
-msgid "Main menu"
-msgstr "주 메뉴"
+#: applets/cpuload/cpuload.c:201 applets/fish/fish.c:297
+#: applets/gen_util/clock.c:226 applets/gen_util/mailcheck.c:564
+#: applets/gen_util/printer.c:258 applets/netload/netload.c:320
+msgid "Can't create applet!\n"
+msgstr "애플릿을 만들 수 없음!\n"
 
-#: panel/logout.c:56 panel/menu.c:549 panel/panel.c:817
-msgid "Log out"
-msgstr "로그아웃"
+#: applets/cpuload/cpuload.c:218 applets/fish/fish.c:320
+#: applets/gen_util/clock.c:257 applets/gen_util/mailcheck.c:588
+#: applets/gen_util/printer.c:283 applets/netload/netload.c:343
+#: panel/main.c:413
+msgid "Properties..."
+msgstr "속성..."
 
-#: panel/menu.c:477
-msgid "Add to panel"
-msgstr "패널에 추가"
+#: applets/gen_util/clock.c:310
+msgid "Clock properties"
+msgstr "시계 속성"
 
-#: panel/menu.c:491
-msgid "Add main menu"
-msgstr "주 메뉴 추가"
+#: applets/gen_util/clock.c:320
+msgid "12 hour"
+msgstr "12시간"
 
-#: panel/menu.c:498
-msgid "Add drawer"
-msgstr "drawer 추가"
+#: applets/gen_util/clock.c:329
+msgid "24 hour"
+msgstr "24시간"
 
-#: panel/menu.c:537
-msgid "Panel"
-msgstr "패널"
+#: applets/gen_util/clock.c:362
+msgid "Clock"
+msgstr "시계"
 
-#: panel/menu.c:544
-msgid "Lock screen"
-msgstr "화면 잠금"
+#: applets/gen_util/mailcheck.c:229
+msgid "You have new mail."
+msgstr "새 편지가 왔습니다"
 
-#. Position frame
-#: panel/panel_config.c:106
-msgid "Position"
-msgstr "위치"
+#: applets/gen_util/mailcheck.c:231
+msgid "You have mail."
+msgstr "편지가 있습니다."
 
-#. Top Position
-#: panel/panel_config.c:118
-msgid "Top"
-msgstr "위"
+#: applets/gen_util/mailcheck.c:233
+msgid "No mail."
+msgstr "편지가 없습니다."
 
-#: panel/panel_config.c:131
-msgid "Bottom"
-msgstr "아래"
+#: applets/gen_util/mailcheck.c:447
+msgid "Notification"
+msgstr "편지도착 알려주기"
 
-#: panel/panel_config.c:144
-msgid "Left"
-msgstr "왼쪽"
+#: applets/gen_util/mailcheck.c:464
+msgid "Select animation"
+msgstr "애니메이션 선택"
 
-#: panel/panel_config.c:157
-msgid "Right"
-msgstr "오른쪽"
+#: applets/gen_util/mailcheck.c:487
+msgid "Mail check properties"
+msgstr "편지 확인 속성"
 
-#. Auto-hide/stayput frame
-#: panel/panel_config.c:168
-msgid "Minimize Options"
-msgstr "최소화 옵션"
+#: applets/gen_util/mailcheck.c:492
+msgid "Mail check"
+msgstr "편지 확인"
 
-#. Stay Put
-#: panel/panel_config.c:180
-msgid "Explicitly Hide"
-msgstr "수동으로 숨기기"
+#: applets/gen_util/mailcheck.c:528
+msgid "Mail check Applet"
+msgstr "편지 확인 애플릿"
 
-#: panel/panel_config.c:193
-msgid "Auto Hide"
-msgstr "자동으로 숨기기"
+#: applets/bussign/bussign.c:226 applets/gen_util/mailcheck.c:529
+msgid "(c) 1998 the Free Software Foundation"
+msgstr "(c) 1998 the Free Software Foundation"
 
-#: panel/panel_config.c:233
-msgid "Panel Configuration"
-msgstr "패널 설정"
+#: applets/gen_util/mailcheck.c:531
+msgid "Mail check notifies you when new mail is on your mailbox"
+msgstr "새로운 편지가 편지함에 도착했을 때 알려주기"
 
-#. label for Position notebook page
-#: panel/panel_config.c:247
-msgid "Orientation"
-msgstr "방향"
+#: applets/gen_util/mailcheck.c:577
+msgid "Text only"
+msgstr "글자만 사용"
 
-#. close button
-#: panel/batmon/batmon.c:323 panel/launcher.c:352
-#: panel/mailcheck/mailcheck.c:494 panel/panel_config.c:260
-#: panel/panel_config_global.c:283
-msgid "Close"
-msgstr "닫기"
+#: applets/bussign/bussign.c:86 applets/fish/fish.c:313
+#: applets/gen_util/mailcheck.c:594 applets/netload/netload.c:337
+#: panel/menu.c:585
+msgid "About..."
+msgstr "이 프로그램은..."
 
-#. apply button
-#: panel/launcher.c:361 panel/mailcheck/mailcheck.c:493
-#: panel/panel_config.c:268 panel/panel_config_global.c:291
-msgid "Apply"
-msgstr "적용"
+#: applets/gen_util/main.c:31
+msgid "Start in clock mode"
+msgstr "시계 모드에서 시작"
 
-#. AutoHide Animation step_size scale frame
-#: panel/panel_config_global.c:118
-msgid "Auto-Hide Animation Speed"
-msgstr "자동숨기기 애니매이션 속도"
+#: applets/gen_util/main.c:32
+msgid "Start in mailcheck mode"
+msgstr "편지 확인 모ㄷ에서 시작"
 
-#. ExplicitHide Animation step_size scale frame
-#: panel/panel_config_global.c:126
-msgid "Explicit-Hide Animation Speed"
-msgstr "수동숨기기 애니매이션 속도"
+#: applets/gen_util/main.c:33
+msgid "Start in printer mode"
+msgstr "인쇄기 모드에서 시작"
 
-#. Minimize Delay scale frame
-#: panel/panel_config_global.c:134
-msgid "Auto-Hide Minimize Delay (ms)"
-msgstr "자동숨기기 지연시간 (천분의 일초)"
+#: applets/gen_util/printer.c:221
+msgid "Printer properties"
+msgstr "인쇄기 속성"
 
-#. Minimized size scale frame
-#: panel/panel_config_global.c:142
-msgid "Auto-Hide Minimized Size (pixels)"
-msgstr "자동숨기기 크기 (픽셀)"
+#: applets/gen_util/printer.c:229
+msgid "Printer name:"
+msgstr "인쇄기 이름:"
 
-#. Tooltips frame
-#: panel/panel_config_global.c:166
-msgid "Icon Tooltips"
-msgstr "아이콘 툴팁"
+#: applets/gen_util/printer.c:233
+msgid "Print command:"
+msgstr "인쇄기 명령:"
 
-#. Tooltips enable
-#: panel/panel_config_global.c:179
-msgid "Tooltips enabled"
-msgstr "툴팁 보여주기"
+#: applets/gen_util/printer.c:239
+msgid "Printer"
+msgstr "인쇄기"
 
-#. Menu frame
-#: panel/panel_config_global.c:191
-msgid "Menus"
-msgstr "메뉴"
-
-#. Small Icons
-#: panel/panel_config_global.c:204
-msgid "Show small icons"
-msgstr "작은 아이콘 보여주기"
-
-#: panel/panel_config_global.c:248
-msgid "Global Panel Configuration"
-msgstr "전체 패널 설정"
-
-#. label for Animation notebook page
-#: panel/panel_config_global.c:262
-msgid "Animation settings"
-msgstr "애니매이션 설정"
-
-#. label for Miscellaneous notebook page
-#: panel/panel_config_global.c:270
-msgid "Miscellaneous"
-msgstr "기타"
-
-#: panel/batmon/batmon.c:97
+#: applets/batmon/batmon.c:93
 msgid "Can't open /proc/apm; can't get data."
 msgstr "/proc/apm을 열수 없습니다: 데이터를 가져올 수 없습니다"
 
-#: panel/batmon/batmon.c:103
+#: applets/batmon/batmon.c:99
 msgid "Something wrong with /proc/apm; can't get data."
 msgstr "/proc/apm에 문제가 있습니다: 데이터를 가져올 수 없습니다"
 
-#: panel/batmon/batmon.c:151
+#: applets/batmon/batmon.c:147
 msgid "There is no battery?!?"
 msgstr "배터리가 없습니다?!?"
 
-#: panel/batmon/batmon.c:154
+#: applets/batmon/batmon.c:150
 msgid "High and charging."
 msgstr "높고 충전중."
 
-#: panel/batmon/batmon.c:157
+#: applets/batmon/batmon.c:153
 msgid "High."
 msgstr "높음."
 
-#: panel/batmon/batmon.c:160
+#: applets/batmon/batmon.c:156
 msgid "Low and charging."
 msgstr "낮고 충전중."
 
-#: panel/batmon/batmon.c:163
+#: applets/batmon/batmon.c:159
 msgid "Low."
 msgstr "낮음."
 
-#: panel/batmon/batmon.c:166
+#: applets/batmon/batmon.c:162
 msgid "Critical and charging."
 msgstr "위험하고 충전중."
 
-#: panel/batmon/batmon.c:169
+#: applets/batmon/batmon.c:165
 msgid "Critical!!"
 msgstr "위험함!!"
 
-#: panel/batmon/batmon.c:172
+#: applets/batmon/batmon.c:168
 msgid "Charging."
 msgstr "충전중."
 
-#: panel/batmon/batmon.c:180
+#: applets/batmon/batmon.c:176
 #, c-format
 msgid "%d minutes of battery"
 msgstr "%d분만큼의 배터리"
 
 #. would have to be an error
-#: panel/batmon/batmon.c:182
+#: applets/batmon/batmon.c:178
 msgid "More than 100,000,000 minutes of battery life?!?"
 msgstr "100,000,000분 이상만큼의 배터리?!?"
 
-#: panel/batmon/batmon.c:254
+#: applets/batmon/batmon.c:255
 msgid "APM Stats"
 msgstr "APM 정보"
 
-#: panel/batmon/batmon.c:270
+#: applets/batmon/batmon.c:271
 msgid "Linux APM Driver Version:"
 msgstr "리눅스 APM 드라이버 버전:"
 
-#: panel/batmon/batmon.c:282
+#: applets/batmon/batmon.c:283
 msgid "APM BIOS Version:"
 msgstr "APM BIOS 버전"
 
-#: panel/batmon/batmon.c:299
+#: applets/batmon/batmon.c:300
 msgid "Battery Status:"
 msgstr "배터리 상태:"
 
-#: panel/launcher.c:276
-msgid "App"
-msgstr "프로그램"
+#: applets/batmon/batmon.c:324 help-browser/window.c:140
+msgid "Close"
+msgstr "닫기"
 
-#: panel/launcher.c:324
-msgid "Launcher properties"
-msgstr "Launcher 속성"
+#: applets/bussign/bussign.c:102
+msgid "Refresh Image"
+msgstr "그림 다시 그리기"
 
-#: panel/launcher.c:335
+#: applets/bussign/bussign.c:225
+msgid "The Bus Sign Applet"
+msgstr "버스 표시 애플릿"
+
+#: applets/bussign/bussign.c:228
+msgid ""
+"This applet is a total waste of time. Get back to work!\n"
+"\n"
+"To fill in the sign please see:\n"
+"\n"
+"http://people.netscape.com/mtoy/sign/index.html"
+msgstr ""
+"이 애플릿은 완전히 시간낭비임.  돌아가서 일하시오!\n"
+"\n"
+"표시 부분을 채우려면 다음을 보시오:\n"
+"\n"
+"\"http://people.netscape.com/mtoy/sign/index.html"
+
+#: applets/fish/fish.c:65 applets/fish/fish.c:240
+#, c-format
+msgid "%s the Fish"
+msgstr "물고기 %s"
+
+#: applets/fish/fish.c:66
+#, c-format
+msgid "%s the GNOME Fish Says:"
+msgstr "GNOME 물고기 %s 말하길:"
+
+#: applets/fish/fish.c:106
+msgid "GNOME Fish Properties"
+msgstr "GNOME 물고기 속성"
+
+#: applets/fish/fish.c:111
+msgid "Your GNOME Fish's Name:"
+msgstr "당신의 GNOME 물고기의 이름:"
+
+#: applets/fish/fish.c:124 panel/launcher.c:329
 msgid "Name"
 msgstr "이름"
 
-#: panel/launcher.c:336
+#: applets/fish/fish.c:243
+msgid "(with minor help from George)"
+msgstr "(George의 작은 도움으로)"
+
+#: applets/fish/fish.c:246
+msgid "The GNOME Fish Applet"
+msgstr "GNOME 물고기 애플릿"
+
+#: applets/fish/fish.c:249
+msgid ""
+"This applet has no use what-so-ever. It only takes up disk space and "
+"compilation time, and if loaded it also takes up precious panel space and "
+"memory. If anyone is found using this applet, he should be promptly sent for "
+"a psychiatric evaluation."
+msgstr ""
+"이 애플릿은 전혀 쓸 일이 없음.  이것은 디스크 공간과 컴파일 시간을 잡아먹을 "
+"뿐이고, 사용될 때는 소중한 패널의 공간과 기억장치까지 차지한다.  누군가 이 "
+"애플릿을 쓰고 있다면, 그 사람은 빨리 정신 감정을 받으러 가야 한다."
+
+#: applets/cpuload/properties.c:59 applets/netload/properties.c:61
+msgid "Can't allocate memory for color\n"
+msgstr "색을 사용하는데 필요한 메모리를 할당할 수 없습니다.\n"
+
+#: applets/cpuload/properties.c:115
+msgid "User Load"
+msgstr "사용자 로드"
+
+#: applets/cpuload/properties.c:120
+msgid "System Load"
+msgstr "시스템 로드"
+
+#: applets/cpuload/properties.c:125 applets/netload/properties.c:129
+msgid "Applet Height"
+msgstr "애플릿 높이"
+
+#: applets/cpuload/properties.c:131 applets/netload/properties.c:135
+msgid "Width"
+msgstr "폭"
+
+#: applets/cpuload/properties.c:146 applets/netload/properties.c:150
+msgid "Update Frequency"
+msgstr "갱신 간격"
+
+#: applets/cpuload/properties.c:197
+msgid "CPULoad Settings"
+msgstr "CPULoad 설정"
+
+#: applets/cpuload/properties.c:200 applets/netload/properties.c:252
+msgid "General"
+msgstr "일반"
+
+#: applets/netload/netload.c:260
+msgid "Netload Error"
+msgstr "네트워크 사용량 애러"
+
+#: applets/netload/netload.c:265
+msgid "An error occured in the Netload Applet:"
+msgstr "네트워크 사용량 애플릿에 애러 발생"
+
+#: applets/netload/netload.c:294
+msgid "The GNOME Network Load Applet"
+msgstr "GNOME 네트워크 사용량 애플릿"
+
+#: applets/netload/netload.c:297
+msgid ""
+"This applet is released under the terms and conditions of the GNU Public "
+"Licence.This applet shows the load on a network device. It requires the "
+"/proc/net/ip_acct interface to be present and set up correctly for the "
+"device."
+msgstr ""
+"이 애플릿은 GNU Public License의 조항과 조건하에 발표되었습니다.  이 "
+"애플릿은 네트워크 장치의 사용량을 보여줍니다.  이 애플릿은 /proc/net/ip_acct "
+"인터페이스가 있어야 하고, 장치에 맞게 정확히 준비되어 있어야 합니다."
+
+#: applets/netload/properties.c:119
+msgid "Network Traffic"
+msgstr "네트워크 사용량"
+
+#: applets/netload/properties.c:124
+msgid "Traffic bars"
+msgstr "사용량 막대"
+
+#: applets/netload/properties.c:193
+msgid "Device name (like ppp0 or eth0)"
+msgstr "장치 이름 (예: ppp0, eth0)"
+
+#: applets/netload/properties.c:201
+msgid "Vertical spacing of bars (in kilobytes)"
+msgstr "막대의 수직 크기 (킬로바이트)"
+
+#: applets/netload/properties.c:243
+msgid "properties.c: gnome_property_box_new() failed.\n"
+msgstr "properties.c: gnome_property_box_new() 실패.\n"
+
+#: applets/netload/properties.c:249
+msgid "Network Load Settings"
+msgstr "네트워크 사용량 설정"
+
+#: applets/netload/properties.c:258
+msgid "Device"
+msgstr "장치"
+
+#: panel/panel.c:392
+msgid "Really log out?"
+msgstr "정말로 로그아웃하겠습니까?"
+
+#: panel/panel.c:400
+msgid "Ask next time"
+msgstr "다음에도 물어보기"
+
+#: panel/panel.c:540
+msgid "Remove from panel"
+msgstr "패널에서 삭제"
+
+#: panel/panel.c:548
+msgid "Move applet"
+msgstr "애플릿 이동"
+
+#: panel/panel.c:1003
+msgid "This panel properties..."
+msgstr "패널 속성..."
+
+#: panel/menu.c:576 panel/panel.c:1010
+msgid "Global properties..."
+msgstr "전체 속성..."
+
+#: panel/panel.c:1017
+msgid "Add main menu applet"
+msgstr "주 메뉴 애플릿 추가"
+
+#: panel/logout.c:24 panel/menu.c:630 panel/panel.c:1035
+msgid "Log out"
+msgstr "로그아웃"
+
+#: panel/menu.c:465
+msgid "Create swallow applet"
+msgstr "삼킴 애플릿 만들기"
+
+#: panel/menu.c:474
+msgid "Title of application to swallow"
+msgstr "삼킬 응용 프로그램의 이름"
+
+#: panel/menu.c:527
+msgid "Add to panel"
+msgstr "패널에 추가"
+
+#: panel/menu.c:532
+msgid "Add applet"
+msgstr "애플릿 추가"
+
+#: panel/menu.c:540
+msgid "Add main menu"
+msgstr "주 메뉴 추가"
+
+#: panel/menu.c:547
+msgid "Add log out button"
+msgstr "로그아웃 버튼 추가"
+
+#: panel/menu.c:555
+msgid "Add drawer"
+msgstr "drawer 추가"
+
+#: panel/menu.c:564
+msgid "Add swallowed app"
+msgstr "삼킬 프로그램 추가"
+
+#: panel/menu.c:615
+msgid "Panel"
+msgstr "패널"
+
+#: panel/menu.c:622
+msgid "Lock screen"
+msgstr "화면 잠금"
+
+#. Position frame
+#: panel/panel_config.c:113
+msgid "Position"
+msgstr "위치"
+
+#. Top Position
+#: panel/panel_config.c:123
+msgid "Top"
+msgstr "위"
+
+#: panel/panel_config.c:134
+msgid "Bottom"
+msgstr "아래"
+
+#: panel/panel_config.c:145
+msgid "Left"
+msgstr "왼쪽"
+
+#: panel/panel_config.c:156
+msgid "Right"
+msgstr "오른쪽"
+
+#. Auto-hide/stayput frame
+#: panel/panel_config.c:165
+msgid "Minimize Options"
+msgstr "최소화 옵션"
+
+#. Stay Put
+#: panel/panel_config.c:175
+msgid "Explicitly Hide"
+msgstr "수동으로 숨기기"
+
+#: panel/panel_config.c:186
+msgid "Auto Hide"
+msgstr "자동으로 숨기기"
+
+#: panel/panel_config.c:248
+msgid "Image file"
+msgstr "그림 파일"
+
+#: panel/panel_config.c:257
+msgid "Browse"
+msgstr "찾아보기"
+
+#: panel/panel_config.c:258
+msgid "Scale image to fit panel"
+msgstr "패널 크기에 맞게 그림 크기를 조정"
+
+#: panel/panel_config.c:260
+msgid "Enable Background Image"
+msgstr "배경 그림 사용"
+
+#: panel/panel_config.c:317
+msgid "Panel properties"
+msgstr "패널 속성"
+
+#: panel/panel_config.c:325
+msgid "Orientation"
+msgstr "방향"
+
+#: panel/panel_config.c:332
+msgid "Background image"
+msgstr "배경 그림"
+
+#. Animation disable
+#: panel/panel_config_global.c:127
+msgid "Disable animations"
+msgstr "애니메이션 없애기"
+
+#. AutoHide Animation step_size scale frame
+#: panel/panel_config_global.c:135
+msgid "Auto-Hide Animation Speed"
+msgstr "자동숨기기 애니매이션 속도"
+
+#. ExplicitHide Animation step_size scale frame
+#: panel/panel_config_global.c:144
+msgid "Explicit-Hide Animation Speed"
+msgstr "수동숨기기 애니매이션 속도"
+
+#. DrawerHide Animation step_size scale frame
+#: panel/panel_config_global.c:153
+msgid "Drawer Animation Speed"
+msgstr "Drawer 애니매이션 속도"
+
+#. Minimize Delay scale frame
+#: panel/panel_config_global.c:162
+msgid "Auto-Hide Minimize Delay (ms)"
+msgstr "자동숨기기 지연시간 (천분의 일초)"
+
+#. Minimized size scale frame
+#: panel/panel_config_global.c:169
+msgid "Auto-Hide Minimized Size (pixels)"
+msgstr "자동숨기기 크기 (픽셀)"
+
+#. Tooltips frame
+#: panel/panel_config_global.c:211
+msgid "Icon Tooltips"
+msgstr "아이콘 툴팁"
+
+#. Tooltips enable
+#: panel/panel_config_global.c:222
+msgid "Tooltips enabled"
+msgstr "툴팁 보여주기"
+
+#. Menu frame
+#: panel/panel_config_global.c:232
+msgid "Menus"
+msgstr "메뉴"
+
+#. Small Icons
+#: panel/panel_config_global.c:243
+msgid "Show small icons"
+msgstr "작은 아이콘 보여주기"
+
+#. Movement frame
+#: panel/panel_config_global.c:253
+msgid "Movement"
+msgstr "이동"
+
+#. Switched
+#: panel/panel_config_global.c:264
+msgid "Switched movement"
+msgstr "바꾸기 이동"
+
+#: panel/panel_config_global.c:276
+msgid "Free movement (doesn't disturb other applets)"
+msgstr "자유로운 이동 (다른 애플릿을 고정시켜 둠)"
+
+#. Logout frame
+#: panel/panel_config_global.c:286
+msgid "Log Out"
+msgstr "로그아웃"
+
+#. Prompt before log out
+#: panel/panel_config_global.c:297
+msgid "Prompt before logout"
+msgstr "로그아웃 전에 물어보기"
+
+#: panel/panel_config_global.c:329
+msgid "Global Panel Configuration"
+msgstr "전체 패널 설정"
+
+#: panel/panel_config_global.c:335
+msgid "Animation settings"
+msgstr "애니매이션 설정"
+
+#: help-browser/toc-man.c:24 help-browser/toc2-man.c:27
+#: panel/panel_config_global.c:340
+msgid "Miscellaneous"
+msgstr "기타"
+
+#: panel/launcher.c:268
+msgid "App"
+msgstr "프로그램"
+
+#: panel/launcher.c:320
+msgid "Launcher properties"
+msgstr "Launcher 속성"
+
+#: panel/launcher.c:330
 msgid "Comment"
 msgstr "코멘트"
 
-#: panel/launcher.c:337
+#: panel/launcher.c:332
 msgid "Execute"
 msgstr "실행"
 
-#: panel/launcher.c:338
+#: panel/launcher.c:334
 msgid "Icon"
 msgstr "아이콘"
 
-#: panel/launcher.c:339
+#: panel/launcher.c:335
 msgid "Documentation"
 msgstr "문서"
 
-#: panel/launcher.c:342
+#: panel/launcher.c:338
 msgid "Run inside terminal"
 msgstr "터미널에서 실행"
 
-#: panel/mailcheck/mailcheck.c:230
-msgid "You have new mail."
-msgstr "새 편지가 왔습니다"
+#: panel/main.c:102
+msgid "ID"
+msgstr "ID"
 
-#: panel/mailcheck/mailcheck.c:232
-msgid "You have mail."
-msgstr "편지가 왔습니다."
+#: panel/main.c:102
+msgid "Discard session"
+msgstr "세션 버리기"
 
-#: panel/mailcheck/mailcheck.c:234
-msgid "No mail."
-msgstr "편지가 없습니다."
-
-#: panel/mailcheck/mailcheck.c:453
-msgid "Notification"
-msgstr "편지도착 알려주기"
-
-#: panel/mailcheck/mailcheck.c:470
-msgid "Select animation"
-msgstr "애니메이션 선택"
-
-#: panel/mailcheck/mailcheck.c:489
-msgid "Mail check properties"
-msgstr "편지 확인 속성"
-
-#: panel/mailcheck/mailcheck.c:512
-msgid "No bitmap, use only text"
-msgstr "비트맵 없이, 글만 사용"
-
-#: desktop-properties/property-background.c:339
+#: desktop-properties/property-background.c:494
 msgid "Color"
 msgstr "색상"
 
-#: desktop-properties/property-background.c:363
+#: desktop-properties/property-background.c:518
 msgid "Flat"
 msgstr "한가지 색"
 
-#: desktop-properties/property-background.c:369
+#: desktop-properties/property-background.c:524
 msgid "Gradient"
 msgstr "서서히 변화"
 
-#: desktop-properties/property-background.c:384
+#: desktop-properties/property-background.c:539
 msgid "Vertical"
 msgstr "수직"
 
-#: desktop-properties/property-background.c:390
+#: desktop-properties/property-background.c:545
 msgid "Horizontal"
 msgstr "수평"
 
-#: desktop-properties/property-background.c:524
+#: desktop-properties/property-background.c:690
 msgid "Wallpaper Selection"
 msgstr "벽지 고르기"
 
-#: desktop-properties/property-background.c:563
+#: desktop-properties/property-background.c:729
 msgid "Wallpaper"
 msgstr "벽지"
 
-#: desktop-properties/property-background.c:566
+#: desktop-properties/property-background.c:732
 msgid " Browse... "
 msgstr " 찾아보기... "
 
-#: desktop-properties/property-background.c:571
+#: desktop-properties/property-background.c:737
 msgid "none"
 msgstr "없음"
 
-#: desktop-properties/property-background.c:615
+#: desktop-properties/property-background.c:781
+msgid "Scaled"
+msgstr "크기 조정"
+
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr "크기 조정 (가로세로 비율 유지)"
+
+#: desktop-properties/property-background.c:801
 msgid "Centered"
 msgstr "중앙"
 
-#: desktop-properties/property-background.c:621
+#: desktop-properties/property-background.c:812
 msgid "Tiled"
 msgstr "타일"
 
-#: desktop-properties/property-background.c:862
+#: desktop-properties/property-background.c:1006
 msgid " Background "
 msgstr "배경"
 
-#: desktop-properties/property-screensaver.cc:143
+#: desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr "저장된 상태에서 하고 종료"
+
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr "IMAGE"
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr ""
+
+#: desktop-properties/property-background.c:1059
+#: desktop-properties/property-background.c:1060
+msgid "COLOR"
+msgstr "COLOR"
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr "배경색 지정"
+
+#: desktop-properties/property-background.c:1060
+msgid "Specifies end background color for gradient"
+msgstr "단계적인 배경색의 마지막 색 지정"
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr "ORIENT"
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "단계적인 색을 사용할 방향: vertical(수직) 또는 horizontal(수평)"
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr "배경을 한가지 색으로 채우기"
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr "배경에 단계적인 색 사용"
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr "MODE"
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "배경그림 표시방법: tiled(바둑판), centered(중앙), scaled(그림크기조정), 혹은 ratio(그림 가로세로비율 고정)"
+
+#: desktop-properties/property-screensaver.cc:146
 msgid "Settings"
 msgstr "설정"
 
-#: desktop-properties/property-screensaver.cc:145
+#: desktop-properties/property-screensaver.cc:148
 msgid "Wait"
 msgstr "기다림"
 
-#: desktop-properties/property-screensaver.cc:146
+#: desktop-properties/property-screensaver.cc:149
 msgid "Min"
 msgstr "분"
 
-#: desktop-properties/property-screensaver.cc:158
+#: desktop-properties/property-screensaver.cc:161
 msgid "Requires Password"
 msgstr "암호 필요"
 
-#: desktop-properties/property-screensaver.cc:167
+#: desktop-properties/property-screensaver.cc:170
 msgid "Use DPMS"
 msgstr "DPMS 사용"
 
-#: desktop-properties/property-screensaver.cc:176
+#: desktop-properties/property-screensaver.cc:179
 msgid "Priority"
 msgstr "우선순위"
 
-#: desktop-properties/property-screensaver.cc:184
+#: desktop-properties/property-screensaver.cc:187
 msgid "Normal"
 msgstr "보통"
 
-#: desktop-properties/property-screensaver.cc:185
+#: desktop-properties/property-screensaver.cc:188
 msgid "Low"
 msgstr "낮게"
 
-#: desktop-properties/property-screensaver.cc:231
+#: desktop-properties/property-screensaver.cc:234
 msgid "Screensavers"
 msgstr "화면 보호기"
 
-#: desktop-properties/property-screensaver.cc:243
+#: desktop-properties/property-screensaver.cc:246
 msgid "Setup..."
 msgstr "설정..."
 
-#: desktop-properties/property-screensaver.cc:247
+#: desktop-properties/property-screensaver.cc:250
 msgid "Test"
 msgstr "테스트"
 
-#: desktop-properties/property-screensaver.cc:348
+#: desktop-properties/property-screensaver.cc:356
 msgid " Screensaver "
 msgstr " 화면 보호기 "
 
-#: desktop-properties/xlockmore.cc:151
+#: desktop-properties/xlockmore.cc:156
 msgid "XLockMore Properties"
 msgstr "XLockMore 특성"
 
-#: desktop-properties/xlockmore.cc:169
+#: desktop-properties/xlockmore.cc:174
 msgid "  OK  "
 msgstr "  확인  "
 
-#: desktop-properties/xlockmore.cc:170
+#: desktop-properties/xlockmore.cc:175
 msgid " Apply "
 msgstr " 적용 "
 
-#: desktop-properties/xlockmore.cc:171
+#: desktop-properties/xlockmore.cc:176
 msgid " Cancel "
 msgstr " 취소 "
 
-#: desktop-properties/xlockmore.cc:172
+#: desktop-properties/xlockmore.cc:177
 msgid " Defaults "
 msgstr " 기본값 "
 
-#: desktop-properties/xlockmore.cc:173
+#: desktop-properties/xlockmore.cc:178 help-browser/window.c:174
+#: help-browser/window.c:199
 msgid "Help"
 msgstr "도움말"
 
-#: desktop-properties/xlockmore.cc:178 desktop-properties/xlockmore.cc:190
+#: desktop-properties/xlockmore.cc:183 desktop-properties/xlockmore.cc:195
 msgid " Mode "
 msgstr " 모드 "
 
-#: desktop-properties/xlockmore.cc:179
+#: desktop-properties/xlockmore.cc:184
 msgid " XLockMore "
 msgstr " XLockMore "
 
-#: desktop-properties/xlockmore.cc:188
+#: desktop-properties/xlockmore.cc:193
 msgid " Options "
 msgstr " 옵션 "
 
-#: desktop-properties/xlockmore.cc:189
+#: desktop-properties/xlockmore.cc:194
 msgid " Preview "
 msgstr " 미리보기 "
 
-#: desktop-properties/property-keyboard.c:153
-msgid "Speed"
-msgstr "속도"
-
-#: desktop-properties/property-keyboard.c:159
-msgid "Auto repeat"
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
 msgstr "자동반복"
 
-#: desktop-properties/property-keyboard.c:171
-msgid "Repeat rate"
-msgstr " 반복정도 "
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "자동반복하기"
 
-#: desktop-properties/property-keyboard.c:185
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "반복정도"
+
+#: desktop-properties/property-keyboard.c:207
 msgid "Repeat delay"
 msgstr "반복 지연"
 
-#: desktop-properties/property-keyboard.c:210
-msgid "Click"
-msgstr "클릭"
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "키보드 누를때 소리"
 
-#: desktop-properties/property-keyboard.c:216
+#: desktop-properties/property-keyboard.c:254
 msgid "Click on keypress"
 msgstr "누를때 소리 내기"
 
-#: desktop-properties/property-keyboard.c:226
+#: desktop-properties/property-keyboard.c:261
 msgid "Click volume"
 msgstr "누를때 소리 크기"
 
-#: desktop-properties/property-keyboard.c:254
-msgid " Keyboard "
-msgstr " 키보드 "
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr "키보드"
 
-#. Frame for choosing button mapping.
-#: desktop-properties/property-mouse.c:184
-msgid "Buttons"
-msgstr "버튼"
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:201
+msgid "Mouse buttons"
+msgstr "마우스 버튼"
 
-#: desktop-properties/property-mouse.c:186
+#: desktop-properties/property-mouse.c:210
 msgid "Left handed"
 msgstr "왼손잡이"
 
-#: desktop-properties/property-mouse.c:188
+#: desktop-properties/property-mouse.c:212
 msgid "Right handed"
 msgstr "오른손잡이"
 
-#. Frame for setting pointer acceleration.
-#: desktop-properties/property-mouse.c:208
-msgid "Motion"
-msgstr "움직임"
+#. Mouse motion
+#: desktop-properties/property-mouse.c:229
+msgid "Mouse motion"
+msgstr "마우스 움직임"
 
-#: desktop-properties/property-mouse.c:213
+#: desktop-properties/property-mouse.c:241
 msgid "Acceleration"
 msgstr "마우스 속도"
 
-#: desktop-properties/property-mouse.c:213
-msgid "Slow"
-msgstr "느리게"
-
-#: desktop-properties/property-mouse.c:213
+#: desktop-properties/property-mouse.c:241
 msgid "Fast"
 msgstr "빠르게"
 
-#: desktop-properties/property-mouse.c:219
+#: desktop-properties/property-mouse.c:241
+msgid "Slow"
+msgstr "느리게"
+
+#: desktop-properties/property-mouse.c:253
 msgid "Threshold"
 msgstr "처음 움직임"
 
-#: desktop-properties/property-mouse.c:219
-msgid "Small"
-msgstr "작게"
-
-#: desktop-properties/property-mouse.c:219
+#: desktop-properties/property-mouse.c:253
 msgid "Large"
 msgstr "크게"
 
-#: desktop-properties/property-mouse.c:231
+#: desktop-properties/property-mouse.c:253
+msgid "Small"
+msgstr "작게"
+
+#: desktop-properties/property-mouse.c:260
 msgid "Mouse"
 msgstr "마우스"
 
-#: desktop-properties/main.c:31
-msgid "Set parameters from saved state and exit"
-msgstr ""
-
-#: desktop-properties/app-mouse.c:10
+#: desktop-properties/app-mouse.c:11
 msgid "Mouse Properties"
 msgstr "마우스 속성"
 
-#: desktop-properties/app-keyboard.c:10
+#: desktop-properties/app-keyboard.c:11
 msgid "Keyboard Properties"
 msgstr "키보드 속성"
 
-#: desktop-properties/app-background.c:10
+#: desktop-properties/app-background.c:15
 msgid "Background Properties"
 msgstr "배경 속성"
 
@@ -539,20 +918,304 @@ msgstr "[세션]"
 msgid "Kill session"
 msgstr "세션 없애기"
 
-#~ msgid "Applet properties..."
-#~ msgstr "애플릿 속성..."
+#: gsm/save-session.c:82
+msgid "save-session: couldn't connect to session manager\n"
+msgstr "save-session: 세션 관리자와 연결할 수 없음\n"
 
-#~ msgid "Add reparent (testing)"
-#~ msgstr "reparent 추가 (테스트중)"
+#: help-browser/gnome-help-browser.c:85
+msgid "X"
+msgstr "X"
 
-#~ msgid "Add applet"
-#~ msgstr "애플릿 추가"
+#: help-browser/gnome-help-browser.c:85
+msgid "X position of window"
+msgstr "창의 가로 위치"
 
-#~ msgid "Configure"
-#~ msgstr "설정"
+#: help-browser/gnome-help-browser.c:86
+msgid "Y"
+msgstr "Y"
 
-#~ msgid "Menu properties"
-#~ msgstr "메뉴 속성"
+#: help-browser/gnome-help-browser.c:86
+msgid "Y position of window"
+msgstr "창의 세로 위치"
 
-#~ msgid "Enable small icons in menu"
-#~ msgstr "메뉴에 작은 아이콘 사용"
+#: help-browser/gnome-help-browser.c:87
+msgid "WIDTH"
+msgstr "WIDTH"
+
+#: help-browser/gnome-help-browser.c:87
+msgid "Width of window"
+msgstr "창 폭"
+
+#: help-browser/gnome-help-browser.c:88
+msgid "HEIGHT"
+msgstr "HEIGHT"
+
+#: help-browser/gnome-help-browser.c:88
+msgid "Height of window"
+msgstr "창 높이"
+
+#: help-browser/gnome-help-browser.c:89
+msgid "Debug level"
+msgstr "디버그 단계"
+
+#: help-browser/gnome-help-browser.c:97
+msgid "[URL]"
+msgstr "[URL]"
+
+#: help-browser/gnome-help-browser.c:340
+msgid "Gnome Help Browser"
+msgstr "Gnome 도움말 프로그램"
+
+#: help-browser/gnome-help-browser.c:343
+msgid ""
+"GNOME Help Browser allows easy access to various forms of documentation on "
+"your system"
+msgstr ""
+"Gnome 도움말 프로그램은 시스템에 있는 여러가지 형태의 문서를 쉽게 읽도록 해 "
+"줍니다"
+
+#: help-browser/gnome-help-browser.c:602
+msgid "History size"
+msgstr "History 크기"
+
+#: help-browser/gnome-help-browser.c:603
+msgid "History file"
+msgstr "History 파일"
+
+#: help-browser/gnome-help-browser.c:604
+msgid "Cache size"
+msgstr "cache 크기"
+
+#: help-browser/gnome-help-browser.c:605
+msgid "Cache file"
+msgstr "cache 파일"
+
+#: help-browser/gnome-help-browser.c:606
+msgid "Bookmark file"
+msgstr "책갈피 파일"
+
+#: help-browser/gnome-help-browser.c:612
+msgid "Man Path"
+msgstr "Man 경로"
+
+#: help-browser/gnome-help-browser.c:613
+msgid "Info Path"
+msgstr "Info 경로"
+
+#: help-browser/gnome-help-browser.c:614
+msgid "GNOME Help Path"
+msgstr "GNOME 도움말 경로"
+
+#: help-browser/gnome-help-browser.c:689
+msgid "Gnome Help Configure"
+msgstr "Gnome 도움말 설정"
+
+#: help-browser/gnome-help-browser.c:692
+msgid "History and cache"
+msgstr "History와 cache"
+
+#: help-browser/gnome-help-browser.c:693
+msgid "Paths"
+msgstr "경로"
+
+#: help-browser/window.c:125
+msgid "New window"
+msgstr "새 창"
+
+#: help-browser/window.c:125
+msgid "Open new browser window"
+msgstr "새로운 브라우저 창 열기"
+
+#: help-browser/window.c:130
+msgid "Add Bookmark"
+msgstr "책갈피 추가"
+
+#: help-browser/window.c:130
+msgid "Add bookmark"
+msgstr "책갈피 추가"
+
+#: help-browser/window.c:135
+msgid "Configure"
+msgstr "설정"
+
+#: help-browser/window.c:140
+msgid "Close window"
+msgstr "창 닫기"
+
+#: help-browser/window.c:145
+msgid "Exit"
+msgstr "끝내기"
+
+#: help-browser/window.c:145
+msgid "Exit all windows"
+msgstr "모든 창을 끝내기"
+
+#: help-browser/window.c:154
+msgid "About"
+msgstr "이 프로그램은"
+
+#: help-browser/window.c:154
+msgid "Info about this program"
+msgstr "이 프로그램에 관한 정보"
+
+#: help-browser/window.c:164 help-browser/window.c:194
+msgid "History"
+msgstr "History"
+
+#: help-browser/window.c:164 help-browser/window.c:194
+msgid "Show History Window"
+msgstr "History 윈도우 보이기"
+
+#: help-browser/window.c:166
+msgid "Bookmarks"
+msgstr "책갈피"
+
+#: help-browser/window.c:166 help-browser/window.c:196
+msgid "Show Bookmarks Window"
+msgstr "책갈피 윈도우 보이기"
+
+#: help-browser/window.c:172
+msgid "File"
+msgstr "파일"
+
+#: help-browser/window.c:173
+msgid "Window"
+msgstr "윈도우"
+
+#: help-browser/window.c:181
+msgid "Back"
+msgstr "뒤로"
+
+#: help-browser/window.c:182
+msgid "Go to the previous location in the history list"
+msgstr "history 리스트에서 이전 위치로 가기"
+
+#: help-browser/window.c:184
+msgid "Forward"
+msgstr "앞으로"
+
+#: help-browser/window.c:185
+msgid "Go to the next location in the history list"
+msgstr "history 리스트의 다음 위치로 가기"
+
+#: help-browser/window.c:188
+msgid "Reload"
+msgstr "다시 읽기"
+
+#: help-browser/window.c:191
+msgid "Index"
+msgstr "색인"
+
+#: help-browser/window.c:191
+msgid "Show Documentation Index"
+msgstr "문서의 색인 보여주기"
+
+#: help-browser/window.c:196
+msgid "BMarks"
+msgstr "책갈피"
+
+#: help-browser/window.c:199
+msgid "Help on Help"
+msgstr "도움말에 대한 도움말"
+
+#: help-browser/gnome-helpwin.c:214
+msgid "<body><h2>Error: file not found</h2></body>"
+msgstr "<body><h2>애러: 파일이 없음</h2></body>"
+
+#: help-browser/bookmarks.c:218
+msgid "Bookmark"
+msgstr "책갈피"
+
+#: help-browser/bookmarks.c:218
+msgid "Page Title"
+msgstr "페이지 제목"
+
+#: help-browser/bookmarks.c:228
+msgid "Gnome Help Bookmarks"
+msgstr "Gnome 도움말 책갈피"
+
+#. Buttons
+#: help-browser/bookmarks.c:238
+msgid "Remove"
+msgstr "삭제"
+
+#: help-browser/history.c:255
+msgid "URL"
+msgstr "URL"
+
+#: help-browser/history.c:255
+msgid "Last"
+msgstr "마지막"
+
+#: help-browser/history.c:255
+msgid "Count"
+msgstr ""
+
+#: help-browser/history.c:268
+msgid "Gnome Help History"
+msgstr "Gnome 도움말 History"
+
+#: help-browser/toc-man.c:18 help-browser/toc2-man.c:21
+msgid "User Commands"
+msgstr "사용자 명령"
+
+#: help-browser/toc-man.c:19 help-browser/toc2-man.c:22
+msgid "System Calls"
+msgstr "시스템 콜"
+
+#: help-browser/toc-man.c:20 help-browser/toc2-man.c:23
+msgid "Library Functions"
+msgstr "라이브러리 함수"
+
+#: help-browser/toc-man.c:21 help-browser/toc2-man.c:24
+msgid "Special Files"
+msgstr "특수 파일들"
+
+#: help-browser/toc-man.c:22 help-browser/toc2-man.c:25
+msgid "File Formats"
+msgstr "파일 형식"
+
+#: help-browser/toc-man.c:23 help-browser/toc2-man.c:26
+msgid "Games"
+msgstr "게임"
+
+#: help-browser/toc-man.c:25 help-browser/toc2-man.c:28
+msgid "Administration"
+msgstr "관리"
+
+#: help-browser/toc-man.c:26 help-browser/toc2-man.c:29
+msgid "man9"
+msgstr "man9"
+
+#: help-browser/toc-man.c:27 help-browser/toc2-man.c:30
+msgid "mann"
+msgstr "mann"
+
+#: help-browser/toc-man.c:28 help-browser/toc2-man.c:31
+msgid "manx"
+msgstr "manx"
+
+#. Add one new item for each type
+#. This really should iterate through the toc_config list
+#. MAN PAGES
+#: help-browser/toc.c:134
+msgid "Man Pages"
+msgstr "Man 페이지"
+
+#. INFO PAGES
+#: help-browser/toc.c:146
+msgid "Info Pages"
+msgstr "Info 페이지"
+
+#. GNOME HELP
+#: help-browser/toc.c:158
+msgid "GNOME Help"
+msgstr "GNOME 도움말"
+
+#: help-browser/visit.c:83
+msgid "<BODY>Could not load default TOC page</BODY>"
+msgstr "<BODY>기본 TOC 페이지를 읽을 수 없습니다</BODY>"
+
+#: help-browser/visit.c:101
+msgid "<BODY>Unknown TOC argument</BODY>"
+msgstr "<BODY>알 수 없는 TOC 인자</BODY>"
