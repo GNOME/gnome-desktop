@@ -31,7 +31,8 @@ GNOME_GHTTP_CHECK
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
-ALL_LINGUAS="ca cs da de es fi fr ga it ja ko no pt sv ru"
+dnl ## all 'es_??' are only needed for format numbers different of 'es'
+ALL_LINGUAS="ca cs da de es es_DO es_GT es_HN es_MX es_PA es_PE es_SV fi fr ga it ja ko no pt sv ru"
 AM_GNU_GETTEXT
 
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
