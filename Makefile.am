@@ -2,10 +2,16 @@ if PROGRAM_GMENU
 gmenu = gmenu
 endif
 
-SUBDIRS = intl po macros \
-	 panel applets \
+always_built_SUBDIRS = panel applets \
 	 gsm pixmaps desktop-links desktop-properties help-browser \
-	 gnome-terminal core-docs control-center $(gmenu)
+	 gnome-terminal core-docs control-center
+
+sometimes_built_SUBDIRS = gmenu smproxy
+
+SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu)
+
+DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
+	$(sometimes_built_SUBDIRS)
 
 EXTRA_DIST = gnome-core.spec
 
