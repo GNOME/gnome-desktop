@@ -5,42 +5,44 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1998-12-30 12:03-0500\n"
-"PO-Revision-Date: 1999-01-02 19:53+02:00\n"
+"POT-Creation-Date: 1999-01-12 20:19-0600\n"
+"PO-Revision-Date: 1999-01-31 19:53+02:00\n"
 "Last-Translator: Dirk-Jan C. Binnema <djcb@dds.nl>\n"
 "Language-Team: Linux Gebruikersgroep Den Haag <djcb@dds.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/asclock/asclock.c:154
-#: applets/mini-commander/mini-commander_applet.c:154
+#: applets/asclock/asclock.c:155
+#: applets/mini-commander/src/mini-commander_applet.c:231
 msgid "About"
 msgstr "Info"
 
-#: applets/asclock/asclock.c:161 applets/clockmail/clockmail.c:431
+#: applets/asclock/asclock.c:162 applets/clockmail/clockmail.c:431
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:459
-#: applets/fish/fish.c:510 applets/gen_util/clock.c:268
-#: applets/gen_util/mailcheck.c:686 applets/gen_util/printer.c:404
+#: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:510
+#: applets/gen_util/clock.c:282 applets/gen_util/mailcheck.c:686
+#: applets/gen_util/printer.c:404 applets/gkb/gkb.c:444
+#: applets/gnome-pager/gnomepager_applet.c:1447 applets/gticker/gticker.c:61
 #: applets/icewm-pager/wmpager_applet.c:90
-#: applets/mini-commander/mini-commander_applet.c:141
-#: applets/modemlights/modemlights.c:722 applets/multiload/cpuload.c:62
+#: applets/mini-commander/src/mini-commander_applet.c:218
+#: applets/modemlights/modemlights.c:727 applets/multiload/cpuload.c:62
 #: applets/multiload/memload.c:58 applets/multiload/swapload.c:58
-#: applets/netload/netload.c:345 applets/slashapp/slashapp.c:630
-#: applets/webcontrol/webcontrol.c:314 panel/drawer.c:415 panel/launcher.c:264
-#: panel/menu.c:2862
+#: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
+#: applets/webcontrol/webcontrol.c:315 panel/drawer.c:415 panel/launcher.c:264
+#: panel/menu.c:2917
 msgid "Properties..."
 msgstr "Eigenschappen..."
 
-#: applets/asclock/dialogs.c:23
+#: applets/asclock/dialogs.c:22
 msgid "Afterstep Clock Applet"
 msgstr "AfterStep Klok Applet"
 
-#: applets/asclock/dialogs.c:26
+#: applets/asclock/dialogs.c:25
 msgid "Who said NeXT is dead?"
 msgstr "Wie zei dat NeXT dood was?"
 
-#: applets/asclock/dialogs.c:111
+#: applets/asclock/dialogs.c:110
 msgid "Timezone"
 msgstr "Tijdzone"
 
@@ -112,7 +114,7 @@ msgstr "%d minuten in batterij(%d%%)"
 #. would have to be an error
 #: applets/batmon/batmon.c:255
 msgid "More than 100,000,000 minutes of battery life?!?"
-msgstr "Meer dan 100.000.000 uur levensduur voor de batterij!?!"
+msgstr "Meer dan 100.000.000 uur levensduur voor batterij!?!"
 
 #: applets/batmon/batmon.c:338
 msgid "APM Stats"
@@ -130,7 +132,7 @@ msgstr "APM BIOS Versie:"
 msgid "Battery Status:"
 msgstr "Batterijstatus:"
 
-#: applets/batmon/batmon.c:409
+#: applets/batmon/batmon.c:409 applets/gnome-pager/gnomepager_applet.c:2299
 msgid "Close"
 msgstr "Afsluiten"
 
@@ -138,11 +140,11 @@ msgstr "Afsluiten"
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Interne fout: ongeldige modus in battery_set_mode"
 
-#: applets/battery/battery.c:395 applets/gen_util/clock.c:241
-#: applets/gen_util/mailcheck.c:653 applets/gen_util/printer.c:379
-#: applets/netload/netload.c:320
+#: applets/battery/battery.c:395 applets/freshapp/freshapp.c:38
+#: applets/gen_util/clock.c:255 applets/gen_util/mailcheck.c:653
+#: applets/gen_util/printer.c:379 applets/netload/netload.c:321
 msgid "Can't create applet!\n"
-msgstr "Applet kan niet gecreeerd worden!\n"
+msgstr "Applet kan niet gecreëerd worden!\n"
 
 #: applets/battery/battery.c:609
 msgid "Could not allocate space for graph values"
@@ -159,15 +161,15 @@ msgstr "Algemene eigenschappen"
 #: applets/battery/properties.c:45 applets/diskusage/properties.c:232
 #: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
 msgid "Applet Height"
-msgstr "Applet-hoogte"
+msgstr "Applethoogte"
 
 #: applets/battery/properties.c:55
 msgid "Applet Width"
-msgstr "Applet-hoogte"
+msgstr "Appletbreedte"
 
 #: applets/battery/properties.c:65
 msgid "Applet Mode"
-msgstr "Applet-hoogte"
+msgstr "Appletmodus"
 
 #: applets/battery/properties.c:66
 msgid "Graph"
@@ -205,8 +207,9 @@ msgstr "Van rechts naar links"
 msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
-msgstr "'/proc/apm' kan niet geopend worden. Zorg voor APM-ondersteuning in "
-"de kernel.\n"
+msgstr ""
+"'/proc/apm' kan niet geopend worden. Zorg voor APM-ondersteuning in de "
+"kernel.\n"
 
 #: applets/battery/read-battery.c:79
 msgid "Cannot open /dev/apm; can't get data."
@@ -218,14 +221,16 @@ msgstr "APM uitgeschakeld! Geen informatie beschikbaar"
 
 #: applets/bussign/bussign.c:72 applets/charpick/charpick.c:338
 #: applets/clockmail/clockmail.c:438 applets/dialer/dialer.c:162
-#: applets/drivemount/drivemount.c:465 applets/fifteen/fifteen.c:309
+#: applets/drivemount/drivemount.c:465
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:502 applets/gen_util/mailcheck.c:693
-#: applets/icewm-pager/wmpager_applet.c:82
-#: applets/modemlights/modemlights.c:728 applets/netload/netload.c:338
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:306
-#: panel/menu.c:1950
+#: applets/gkb/gkb.c:436 applets/gnome-pager/gnomepager_applet.c:1441
+#: applets/gticker/gticker.c:67 applets/icewm-pager/wmpager_applet.c:82
+#: applets/jbc/jbc.c:167 applets/modemlights/modemlights.c:733
+#: applets/netload/netload.c:339 applets/slashapp/slashapp.c:636
+#: applets/webcontrol/webcontrol.c:307 panel/menu.c:1971
 msgid "About..."
-msgstr "Info"
+msgstr "Info..."
 
 #: applets/bussign/bussign.c:80
 msgid "Refresh Image"
@@ -253,6 +258,11 @@ msgstr ""
 "\n"
 "http://people.netscape.com/mtoy/sign/index.html"
 
+#: applets/cdplayer/cdplayer.c:318
+#, fuzzy
+msgid "Run gtcd..."
+msgstr "Voer gtcd uit..."
+
 #: applets/charpick/charpick.c:203
 msgid "Character Picker"
 msgstr "Karakterkiezer"
@@ -266,18 +276,19 @@ msgid "Copyright (C) 1998"
 msgstr ""
 
 #: applets/charpick/charpick.c:207
+#, fuzzy
 msgid ""
 "Gnome Panel applet for selecting strange characters that are not on my "
-"keyboard. R	eleased under GNU General Public Licence."
-msgstr ""
-"Gnome Panel applet voor het kiezen van vreemde lettertekens."
+"keyboard. Released under GNU General Public Licence."
+msgstr "Gnome Panel applet voor het kiezen van vreemde lettertekens."
 
-#: applets/clockmail/clockmail.c:29 applets/slashapp/slashapp.c:563
+#: applets/clockmail/clockmail.c:29 applets/gticker/gticker.c:230
+#: applets/jbc/jbc.c:63 applets/slashapp/slashapp.c:563
 #, c-format
 msgid "%d.%d.%d"
 msgstr ""
 
-#: applets/clockmail/clockmail.c:34
+#: applets/clockmail/clockmail.c:34 applets/gticker/gticker.c:234
 msgid "John Ellis <johne@bellatlantic.net>"
 msgstr ""
 
@@ -285,7 +296,8 @@ msgstr ""
 msgid "Clock and Mail Notify Applet"
 msgstr "Klok en Mail Notificatie Applet"
 
-#: applets/clockmail/clockmail.c:38 applets/slashapp/slashapp.c:573
+#: applets/clockmail/clockmail.c:38 applets/gticker/gticker.c:236
+#: applets/jbc/jbc.c:72 applets/slashapp/slashapp.c:573
 msgid "(C) 1998"
 msgstr ""
 
@@ -296,10 +308,9 @@ msgid ""
 "Mail blinking can be for any unread mail, or only briefly when new mail "
 "arrives."
 msgstr ""
- "Uitgebracht onder de GPL.\n"
- "Digitale klok met datum in een tooltip. 12/24 uurs weergave. "
- "Knippert bij nieuwe mail"
-
+"Uitgebracht onder de GPL.\n"
+"Digitale klok met datum in een tooltip. 12/24 uurs weergave. Knippert bij "
+"nieuwe mail"
 
 #: applets/clockmail/clockmail.c:110
 msgid " (GMT)"
@@ -315,8 +326,8 @@ msgstr ""
 msgid "None (default)"
 msgstr "Geen (default)"
 
-#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:411
-#: applets/mini-commander/preferences.c:395
+#: applets/clockmail/properties.c:283 applets/gen_util/clock.c:425
+#: applets/mini-commander/src/preferences.c:424
 msgid "Clock"
 msgstr "Klok"
 
@@ -342,98 +353,19 @@ msgstr "Mail bestand:"
 
 #: applets/clockmail/properties.c:353
 msgid "When new mail is received run:"
-msgstr "Wanneer nieuwe mail binnenkomt, doe dan: "
+msgstr "Wanneer nieuwe mail binnenkomt, voer dan uit: "
 
 #: applets/clockmail/properties.c:372
 msgid "Amount of mail to consider mailbox full (Kbytes):"
 msgstr "Hoeveelheid mail voor een 'volle' mailbox (Kbytes):"
 
-#. -- not implemented yet --
-#.
-#. frame = gtk_frame_new(_("Ticker Information (unimplemented)"));
-#. gtk_container_set_border_width (GTK_CONTAINER (frame), 5);
-#. gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-#. gtk_widget_show(frame);
-#.
-#. vbox1 = gtk_vbox_new(FALSE, 1);
-#. gtk_container_add(GTK_CONTAINER(frame), vbox1);
-#. gtk_widget_show(vbox1);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Article index file:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/ultramode.txt");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image Server Url:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "wolfe.slashdot.org");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry ,TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#. hbox = gtk_hbox_new(FALSE, 0);
-#. gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 0);
-#. gtk_widget_show(hbox);
-#.
-#. label = gtk_label_new(_("Image path:"));
-#. gtk_box_pack_start( GTK_BOX(hbox), label, FALSE, FALSE, 0);
-#. gtk_widget_show(label);
-#.
-#. entry = gtk_entry_new_with_max_length(255);
-#. gtk_entry_set_text(GTK_ENTRY(entry), "/images/topics/topic");
-#. gtk_signal_connect_object(GTK_OBJECT(entry), "changed",
-#. GTK_SIGNAL_FUNC(gnome_property_box_changed),
-#. GTK_OBJECT(ad->propwindow));
-#. gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-#. gtk_widget_set_sensitive(entry, FALSE);
-#. gtk_widget_show(entry);
-#.
-#.
 #. ---
 #: applets/clockmail/properties.c:385 applets/diskusage/properties.c:341
 #: applets/drivemount/properties.c:204 applets/fvwm-pager/properties.c:246
-#: applets/mini-commander/preferences.c:616
+#: applets/gticker/properties.c:328
+#: applets/mini-commander/src/preferences.c:645
 #: applets/modemlights/properties.c:197 applets/netload/properties.c:277
-#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:877
+#: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:876
 #: panel/panel_config_global.c:297
 msgid "General"
 msgstr "Algemeen"
@@ -452,9 +384,10 @@ msgstr "PPP Beller Applet"
 
 #: applets/dialer/dialer.c:49
 msgid "A funky PPP dialer, how come no-one has thought of it before!?"
-msgstr "Een PPP-verbindings applet, waarom heeft niemand hier eerder aan gedacht!?"
+msgstr ""
+"Een PPP-verbindings applet, waarom heeft niemand hier eerder aan gedacht!?"
 
-#: applets/dialer/dialer.c:87 panel/menu.c:2688
+#: applets/dialer/dialer.c:87 panel/menu.c:2741
 msgid "Off"
 msgstr "Uit"
 
@@ -496,7 +429,7 @@ msgid ""
 "Released under the GNU general public license.\n"
 "Mounts and Unmounts drives.."
 msgstr ""
-"Gepubliceerd volgens de GPL.\n"
+"UItgebracht volgens de GPL.\n"
 "Mount en unmount schijven.."
 
 #: applets/drivemount/drivemount.c:129
@@ -516,6 +449,7 @@ msgid ""
 "Drivemount command failed.\n"
 "\""
 msgstr "Mountopdracht mislukt"
+"\""
 
 #: applets/drivemount/drivemount.c:472
 msgid "Eject"
@@ -531,7 +465,7 @@ msgstr "Verversingstijd in seconden:"
 
 #: applets/drivemount/properties.c:154
 msgid "Icon:"
-msgstr "Ikoon"
+msgstr "Pictogram"
 
 #: applets/drivemount/properties.c:161
 msgid "Floppy"
@@ -557,6 +491,20 @@ msgstr "Mount punt:"
 msgid "Use automount friendly status test"
 msgstr "Gebruik 'automount-vriendelijke' status test"
 
+#: applets/esd-manager/esdmanager_applet.c:29
+#, fuzzy
+msgid "Esound MAnager Applet"
+msgstr "ESound Beheer Applet"
+
+#: applets/esd-manager/esdmanager_applet.c:29
+#: applets/gnome-pager/gnomepager_applet.c:106
+msgid "Copyright (C)1998 Red Hat Software"
+msgstr ""
+
+#: applets/esd-manager/esdmanager_applet.c:31
+msgid "This does nothing useful"
+msgstr "Dit doet niets nuttigs"
+
 #: applets/fifteen/fifteen.c:36
 msgid "You win!"
 msgstr "U wint!"
@@ -578,9 +526,8 @@ msgid ""
 "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
 "Guaranteed to be a productivity buster."
 msgstr ""
-"Sam Lloyd's all-time favoriete spel, nu voor uw plezier in de Gnome Panel. "
+"Sam Lloyd's all-time favoriete spel, nu voor uw plezier in het Gnome Panel. "
 "Gegarandeerde productiviteitsverminderaar."
-
 
 #: applets/fifteen/fifteen.c:292
 #, fuzzy
@@ -592,7 +539,6 @@ msgid "Scramble pieces"
 msgstr "Schudden"
 
 #: applets/fish/fish.c:126 applets/fish/fish.c:403
-#: applets/webcontrol/webcontrol.c:54
 #, c-format
 msgid "%s the Fish"
 msgstr "%s de vis"
@@ -615,9 +561,9 @@ msgstr "De naam van uw GNOME vis:"
 msgid "The Animation Filename:"
 msgstr "Naam van het animatiebestand:"
 
-#: applets/fish/fish.c:242 gnome-terminal/gnome-terminal.c:993
-#: panel/menu.c:2804 panel/panel-util.c:181 panel/panel-util.c:219
-#: panel/panel-util.c:256 panel/panel_config.c:725 panel/swallow.c:231
+#: applets/fish/fish.c:242 gnome-terminal/gnome-terminal.c:992
+#: panel/menu.c:2859 panel/panel-util.c:90 panel/panel-util.c:128
+#: panel/panel-util.c:165 panel/panel_config.c:725 panel/swallow.c:231
 msgid "Browse"
 msgstr "Zoeken..."
 
@@ -640,7 +586,7 @@ msgstr "(met enige hulp van George)"
 
 #: applets/fish/fish.c:416
 msgid "The GNOME Fish Applet"
-msgstr "Het GNOME Fish Applet"
+msgstr "Het GNOME Vis Applet"
 
 #: applets/fish/fish.c:419
 msgid ""
@@ -650,28 +596,28 @@ msgid ""
 "a psychiatric evaluation."
 msgstr ""
 "Dit applet heeft geen nut. Het kost slechts schijfruimte en compileertijd, "
-"en, indien geladen, kost het ook kostbare ruimte in het panel en het "
-"geheugen. Wie toch nut ziet in deze applet moet zich laten nakijken ;-)"
+"en, indien geladen, ook kostbare ruimte in het panel en het geheugen."
+"Wie toch nut ziet in deze applet moet zich laten nakijken ;-)"
 
-#: applets/fvwm-pager/fvwm-pager.c:146
+#: applets/fvwm-pager/fvwm-pager.c:154
 msgid "Fvwm Pager Applet"
-msgstr ""
+msgstr "Fvwm Bureaubladschakelaar Applet"
 
-#: applets/fvwm-pager/fvwm-pager.c:148
+#: applets/fvwm-pager/fvwm-pager.c:156
 msgid "Copyright (C) 1998 M. Lausch"
 msgstr ""
 
-#: applets/fvwm-pager/fvwm-pager.c:305
+#: applets/fvwm-pager/fvwm-pager.c:314
 #, c-format
 msgid "Desk %d"
-msgstr ""
+msgstr "Bureaublad %d"
 
-#: applets/fvwm-pager/fvwm-pager.c:396
+#: applets/fvwm-pager/fvwm-pager.c:403
 #, fuzzy
 msgid "About\t"
 msgstr "Info\t"
 
-#: applets/fvwm-pager/fvwm-pager.c:402 gmenu/gmenu.c:95
+#: applets/fvwm-pager/fvwm-pager.c:409 gmenu/gmenu.c:96
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -694,12 +640,12 @@ msgstr "Inactieve-bureaubladkleur"
 #: applets/fvwm-pager/properties.c:242
 #, fuzzy
 msgid "Fvwm Pager Settings"
-msgstr "Instellingen"
+msgstr "Instellingen voor Fvwm Bureaubladschakelaar"
 
 #. This format string is used, to display the actual day,
 #. when showing a vertical panel.  For an explanation of
 #. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:104
+#: applets/gen_util/clock.c:114
 msgid ""
 "%a\n"
 "%b %d"
@@ -709,45 +655,45 @@ msgstr ""
 
 #. This format string is used, to display the actual day,
 #. when showing a horizontal panel.
-#: applets/gen_util/clock.c:109
+#: applets/gen_util/clock.c:119
 msgid "%a %b %d"
 msgstr "%a, %d %b"
 
-#: applets/gen_util/clock.c:124
+#: applets/gen_util/clock.c:134
 msgid ""
 "%I:%M\n"
 "%p"
 msgstr "%H:%M"
 
-#: applets/gen_util/clock.c:127
+#: applets/gen_util/clock.c:137
 msgid "%I:%M %p"
 msgstr "%H:%M"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:133 applets/mini-commander/message.c:101
+#: applets/gen_util/clock.c:143 applets/mini-commander/src/message.c:104
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: applets/gen_util/clock.c:337
+#: applets/gen_util/clock.c:351
 msgid "Clock properties"
 msgstr "'Mail check' eigenschappen"
 
-#: applets/gen_util/clock.c:341
+#: applets/gen_util/clock.c:355
 #, fuzzy
 msgid "Time Format"
 msgstr "Tijdformaat"
 
-#: applets/gen_util/clock.c:353
+#: applets/gen_util/clock.c:367
 msgid "12 hour"
 msgstr "12 uur"
 
-#: applets/gen_util/clock.c:362
+#: applets/gen_util/clock.c:376
 msgid "24 hour"
 msgstr "24 uur"
 
 #. show date check box
-#: applets/gen_util/clock.c:393 applets/mini-commander/preferences.c:416
+#: applets/gen_util/clock.c:407 applets/mini-commander/src/preferences.c:445
 msgid "Show date"
 msgstr "Toon datum"
 
@@ -790,11 +736,11 @@ msgstr "'Mail check' Eigenschappen"
 
 #: applets/gen_util/mailcheck.c:571
 msgid "Mail check"
-msgstr "'Mail check' Eigenschappen"
+msgstr ""
 
 #: applets/gen_util/mailcheck.c:612
 msgid "Mail check Applet"
-msgstr "'Mail check' eigenschappen"
+msgstr "'Mail check' Applet"
 
 #: applets/gen_util/mailcheck.c:615
 msgid "Mail check notifies you when new mail is on your mailbox"
@@ -820,17 +766,283 @@ msgstr "Afdrukcommando:"
 msgid "Printer"
 msgstr ""
 
+#: applets/gkb/gkb.c:154
+#, fuzzy
+msgid "GKB settings"
+msgstr "GKB instellingen"
+
+#: applets/gkb/gkb.c:167
+msgid "Flag One"
+msgstr "Vlag Een"
+
+#: applets/gkb/gkb.c:200
+msgid "Flag Two"
+msgstr "Vlag Twee"
+
+#: applets/gkb/gkb.c:252 panel/menu.c:1285 panel/menu.c:2872
+msgid "Menu"
+msgstr ""
+
+#: applets/gkb/gkb.c:369
+#, fuzzy
+msgid "The GNOME KB Applet"
+msgstr "Het GNOME KB Applet"
+
+#: applets/gkb/gkb.c:370
+msgid "0.99.1"
+msgstr ""
+
+#: applets/gkb/gkb.c:371
+msgid "(C) 1998 LSC - Linux Supporting Center"
+msgstr ""
+
+#: applets/gkb/gkb.c:373
+msgid ""
+"This applet used to switch between keyboard maps. No more. It uses "
+"setxkbmap, or xmodmap. The main site of this app moved tempolary to URL "
+"http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
+"to CVS.So long, and thanks for all the fish."
+msgstr "Dit applet schakelt tussen toetsenbordinstellingen. Niets meer. Het "
+"gebruikt 'setxkbmap' or 'xmodmap'. De hoofdlocatie is nu tijdelijk "
+"http://lsc.kva.hu/gkd. Stuur uw vlag (afmetingen 60x40), en ik zet het in "
+"CVS. Tot ziens en bedankt voor alle vis."
+
+#: applets/gkb/gkb.c:382
+msgid "gkb.xpm"
+msgstr ""
+
+#: applets/gnome-pager/gnomepager_applet.c:106
+#: applets/icewm-pager/wmpager_applet.c:218
+msgid "Desktop Pager Applet"
+msgstr "Bureaubladschakelaar Applet"
+
+#: applets/gnome-pager/gnomepager_applet.c:108
+msgid "Pager for a GNOME compliant Window Manager"
+msgstr "Bureaubladschakelaar voor GNOME-Compliant Window Manager"
+
+#: applets/gnome-pager/gnomepager_applet.c:326
+#, fuzzy
+msgid "Gnome Pager Settings"
+msgstr "GNOME Bureaubladschakelaar Instellingen"
+
+#: applets/gnome-pager/gnomepager_applet.c:330
+#: applets/gticker/properties.c:399 applets/slashapp/properties.c:422
+msgid "Display"
+msgstr "Afbeelden"
+
+#: applets/gnome-pager/gnomepager_applet.c:331
+msgid "Show all tasks on all desktops"
+msgstr "Toon alle taken op alle bureaubladen"
+
+#: applets/gnome-pager/gnomepager_applet.c:339
+#, fuzzy
+msgid "Show tasks"
+msgstr "Toon taken"
+
+#: applets/gnome-pager/gnomepager_applet.c:347
+#, fuzzy
+msgid "Show pager"
+msgstr "Toon bureaubladschakelaar"
+
+#: applets/gnome-pager/gnomepager_applet.c:355
+msgid "Use small pagers"
+msgstr "Gebruik kleine bureaubladschakelaars"
+
+#: applets/gnome-pager/gnomepager_applet.c:363
+#, fuzzy
+msgid "Show icons in tasks"
+msgstr "Toon pictogrammen bij taken"
+
+#: applets/gnome-pager/gnomepager_applet.c:371
+#, fuzzy
+msgid "Show task list button"
+msgstr "Toon taaklijstknoppen"
+
+#: applets/gnome-pager/gnomepager_applet.c:386
+msgid "Maximum width of horizontal task list"
+msgstr "Maximale breedte van horizontale taaklijst"
+
+#: applets/gnome-pager/gnomepager_applet.c:399
+msgid "Number of rows of horizontal tasks"
+msgstr "Aantal regels voor taaklijst"
+
+#: applets/gnome-pager/gnomepager_applet.c:412
+msgid "Number of vertical columns of tasks"
+msgstr "Aantal kolommen voor taaklijst"
+
+#: applets/gnome-pager/gnomepager_applet.c:425
+msgid "Number rows of pagers"
+msgstr "Aantal regels voor bureaubladschakelaar"
+
+#: applets/gnome-pager/gnomepager_applet.c:1362
+msgid "Gnome Pager Error"
+msgstr "Fout in Gnome Bureaubladschakelaar"
+
+#: applets/gnome-pager/gnomepager_applet.c:1363
+msgid ""
+"You are not running a GNOME Compliant Window Manager.\n"
+"Please run a GNOME Compliant Window Manager.\n"
+"For Example:\n"
+"Enlightenment (DR-0.15)\n"
+"Then start this applet again.\n"
+msgstr "U gebruikt geen GNOME-compliant Window Manager, \n"
+"bijvoorbeeld Enlightenment (DR-0.15)\n"
+"Probeer dit applet dan opnieuw.\n"
+
+#: applets/gnome-pager/gnomepager_applet.c:1691
+msgid "Sticky"
+msgstr "Plakkerig"
+
+#: applets/gnome-pager/gnomepager_applet.c:2275
+#, fuzzy
+msgid "Show / Hide"
+msgstr "Toon / Verberg"
+
+#: applets/gnome-pager/gnomepager_applet.c:2287
+msgid "Shade / Unshade"
+msgstr "Arceer / Arceer niet"
+
+#: applets/gnome-pager/gnomepager_applet.c:2311
+msgid "Nuke"
+msgstr "Beeindig"
+
+#: applets/gticker/gticker.c:53
+#, fuzzy
+msgid "Loading headlines..."
+msgstr "Koppen worden geladen..."
+
+#: applets/gticker/gticker.c:72
+#, fuzzy
+msgid "Show Article Listing"
+msgstr "Toon berichtenlijst"
+
+#: applets/gticker/gticker.c:77
+#, fuzzy
+msgid "Refresh Articles"
+msgstr "Ververs berichten"
+
+#: applets/gticker/gticker.c:233 applets/slashapp/slashapp.c:566
+msgid "Justin Maurer <justin@openprojects.net>"
+msgstr ""
+
+#: applets/gticker/gticker.c:236
+msgid "GTicker"
+msgstr ""
+
+#: applets/gticker/gticker.c:237
+msgid "Ticker for the GNOME Project\n"
+msgstr "'Ticker'voor het GNOME Project\n"
+
+#: applets/gticker/gticker.c:250
+msgid "GTicker Article List"
+msgstr "GTicker Berichtenlijst"
+
+#: applets/gticker/gticker.c:355 applets/slashapp/slashapp.c:152
+#, fuzzy
+msgid "No articles"
+msgstr "Geen berichten."
+
+#: applets/gticker/gticker.c:412 applets/slashapp/slashapp.c:255
+#: gmenu/gmenu.c:230
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "creëer gebruikersdirectory: %s\n"
+
+#: applets/gticker/gticker.c:415
+#, fuzzy, c-format
+msgid ""
+"unable to create user directory: \n"
+"\t\t\t\t\t    %s\n"
+msgstr "creëren van gebruikersdirectory '%s' mislukt\n"
+
+#: applets/gticker/properties.c:184 applets/slashapp/properties.c:199
+#, fuzzy
+msgid "Articles"
+msgstr "Berichten"
+
+#: applets/gticker/properties.c:193 applets/slashapp/properties.c:208
+msgid "Show topic images"
+msgstr "Toon rubrieksplaatjes"
+
+#: applets/gticker/properties.c:199 applets/slashapp/properties.c:214
+msgid "Show department"
+msgstr "Toon 'department'"
+
+#: applets/gticker/properties.c:205 applets/slashapp/properties.c:220
+msgid "Show extra information (Time, Author, Comments)"
+msgstr "Toon extra informatie (Tijd, Auteur, Reacties)"
+
+#: applets/gticker/properties.c:215 applets/slashapp/properties.c:230
+msgid "Delay between articles (10 = 1 sec):"
+msgstr "Vertraging tussen berichten (10 = 1 sec.):"
+
+#: applets/gticker/properties.c:227 applets/slashapp/properties.c:244
+msgid "(These settings do not take effect until a refresh)"
+msgstr "(Deze instellingen worden pas actief na een verversing)"
+
+#: applets/gticker/properties.c:231 applets/slashapp/properties.c:249
+msgid "Browser"
+msgstr ""
+
+#: applets/gticker/properties.c:240 applets/slashapp/properties.c:258
+#, fuzzy
+msgid "Open new window"
+msgstr "Open nieuw venster"
+
+#. -- not implemented yet --
+#: applets/gticker/properties.c:248
+msgid "Ticker Information (unimplemented)"
+msgstr "Ticker Informatie (nog niet geïmplementeerd)"
+
+#. create the widget we are going to put on the applet
+#: applets/gticker/properties.c:261 applets/webcontrol/webcontrol.c:117
+msgid "Url:"
+msgstr "URL:"
+
+#: applets/gticker/properties.c:278
+msgid "Article index file:"
+msgstr "Berichten-indexbestand:"
+
+#: applets/gticker/properties.c:295
+msgid "Image Server Url:"
+msgstr "Plaatjes-Server URL:"
+
+#: applets/gticker/properties.c:312
+#, fuzzy
+msgid "Image path:"
+msgstr "Pad naar plaatje:"
+
+#: applets/gticker/properties.c:337 applets/slashapp/properties.c:356
+#: gnome-terminal/gnome-terminal.c:1071
+msgid "Scrolling"
+msgstr "Aan het scrollen"
+
+#: applets/gticker/properties.c:346 applets/slashapp/properties.c:365
+msgid "Smooth scroll"
+msgstr "Gelijkmatig scrollen"
+
+#: applets/gticker/properties.c:352 applets/slashapp/properties.c:371
+msgid "Smooth type"
+msgstr "Gelijkmatig"
+
+#: applets/gticker/properties.c:358 applets/slashapp/properties.c:377
+msgid "Speed"
+msgstr "Snelheid"
+
+#: applets/gticker/properties.c:371 applets/slashapp/properties.c:390
+msgid "Delay when wrapping text:"
+msgstr "Vertraging bij het 'wrappen' van tekst:"
+
+#: applets/gticker/properties.c:387 applets/slashapp/properties.c:408
+msgid "Scroll speed between lines (Smooth scroll):"
+msgstr "Scrollsnelheid tussen regels (gelijkmatig scrollen):"
+
 #. FIXME: This should check to make sure icewm (or equiv) is running.
 #. Not sure if it is working though...
 #: applets/icewm-pager/wmpager_applet.c:53
 msgid ""
 "This applet requires you to run a window manager with the XA_ extensions.\n"
-msgstr ""
-"Deze applet vereist een window manager met XA_ extensies.\n"
-
-#: applets/icewm-pager/wmpager_applet.c:218
-msgid "Desktop Pager Applet"
-msgstr "Bureaubladschakelaar Applet"
+msgstr "Deze applet vereist een window manager met XA_ extensies.\n"
 
 #: applets/icewm-pager/wmpager_applet.c:219
 msgid "Copyright (C)1998 M.Watson"
@@ -840,170 +1052,199 @@ msgstr ""
 msgid "Failed to retrieve workspace property."
 msgstr "Verkrijgen eigenschap van werkruimte mislukt"
 
-#: applets/mini-commander/mini-commander_applet.c:131
-msgid "Mini-Commander"
+#: applets/jbc/jbc.c:67
+msgid "Jon Anhold <jon@snoopy.net>"
 msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:147
-#: gnome-terminal/gnome-terminal.c:1197 help-browser/window.c:206
-msgid "Help"
-msgstr "Help"
+#: applets/jbc/jbc.c:68
+msgid "Roger Gulbranson <rlg@qual.net>"
+msgstr ""
 
-#: applets/mini-commander/mini-commander_applet.c:158
-msgid "ready..."
-msgstr "klaar..."
+#: applets/jbc/jbc.c:71
+msgid "Jon's Binary Clock"
+msgstr "Jon's Binaire Clock"
 
-#: applets/mini-commander/about.c:33
+#: applets/jbc/jbc.c:74
+msgid ""
+"A binary clock for your panel\n"
+"http://snoopy.net/~jon/jbc/\n"
+msgstr ""
+"Een binaire klok voor uw panel\n"
+"http://snoopy.net/~jon/jbc/\n"
+
+#: applets/mini-commander/src/about.c:32
 msgid "Mini-Commander Applet"
 msgstr ""
 
-#: applets/mini-commander/cmd_completion.c:63
+#: applets/mini-commander/src/cmd_completion.c:63
 #, fuzzy
 msgid "completing..."
 msgstr "voltooien..."
 
-#. showMessage((gchar *) _("exec failed"));
-#. if this line is reached there is really big trouble
-#: applets/mini-commander/cmd_completion.c:73
-#: applets/mini-commander/exec.c:114
+#: applets/mini-commander/src/cmd_completion.c:73
+#: applets/mini-commander/src/exec.c:151
 msgid "no /bin/sh"
 msgstr "geen '/bin/sh'"
 
-#: applets/mini-commander/cmd_completion.c:89
+#: applets/mini-commander/src/cmd_completion.c:89
 msgid "completed"
 msgstr "voltooid"
 
-#: applets/mini-commander/cmd_completion.c:92
-#: applets/mini-commander/cmd_completion.c:99
+#: applets/mini-commander/src/cmd_completion.c:92
+#: applets/mini-commander/src/cmd_completion.c:99
 msgid "not unique"
 msgstr "niet uniek"
 
-#: applets/mini-commander/cmd_completion.c:94
+#: applets/mini-commander/src/cmd_completion.c:94
 msgid "not found"
 msgstr "niet gevonden"
 
 #. enter pressed -> exec command
-#: applets/mini-commander/command_line.c:90 applets/mini-commander/exec.c:100
+#: applets/mini-commander/src/command_line.c:94
+#: applets/mini-commander/src/exec.c:104
 #, fuzzy
 msgid "starting..."
 msgstr "starten..."
 
-#: applets/mini-commander/exec.c:102
+#: applets/mini-commander/src/command_line.c:158
+msgid "The history list comes later."
+msgstr "De historielijst komt later."
+
+#. build file select dialog
+#: applets/mini-commander/src/command_line.c:198
+#, fuzzy
+msgid "Start program"
+msgstr "Voer programma uit"
+
+#: applets/mini-commander/src/exec.c:106
 msgid "fork error"
 msgstr "'fork' fout"
 
-#: applets/mini-commander/exec.c:128
+#: applets/mini-commander/src/exec.c:138
 msgid "child exited"
 msgstr "kindproces beeindigd"
 
-#: applets/mini-commander/message.c:99
+#: applets/mini-commander/src/message.c:102
 msgid "%H:%M - %d. %b"
 msgstr ""
 
-#: applets/mini-commander/message.c:103
+#: applets/mini-commander/src/message.c:106
 msgid "%d. %b"
 msgstr ""
 
-#: applets/mini-commander/preferences.c:91
+#: applets/mini-commander/src/mini-commander_applet.c:208
+msgid "Mini-Commander"
+msgstr ""
+
+#: applets/mini-commander/src/mini-commander_applet.c:224
+#: help-browser/window.c:206
+msgid "Help"
+msgstr "Help"
+
+#: applets/mini-commander/src/mini-commander_applet.c:235
+msgid "ready..."
+msgstr "klaar..."
+
+#: applets/mini-commander/src/preferences.c:101
 msgid "time & date on"
 msgstr "tijd en datum aan"
 
-#: applets/mini-commander/preferences.c:93
+#: applets/mini-commander/src/preferences.c:103
 msgid "time on"
 msgstr "tijd aan"
 
-#: applets/mini-commander/preferences.c:95
+#: applets/mini-commander/src/preferences.c:105
 msgid "date on"
 msgstr "datum aan"
 
-#: applets/mini-commander/preferences.c:97
+#: applets/mini-commander/src/preferences.c:107
 msgid "clock off"
 msgstr "klok uit"
 
-#: applets/mini-commander/preferences.c:368
+#: applets/mini-commander/src/preferences.c:381
 msgid "saving prefs..."
-msgstr "instellingen worden bewaard"
+msgstr "instellingen worden bewaard..."
 
-#: applets/mini-commander/preferences.c:389
+#: applets/mini-commander/src/preferences.c:418
 #, fuzzy
 msgid "Mini-Commander Properties"
 msgstr "Mini-Commander Eigenschappen"
 
 #. show time check box
-#: applets/mini-commander/preferences.c:403
+#: applets/mini-commander/src/preferences.c:432
 msgid "Show time"
 msgstr "Toon tijd"
 
 #. Size
-#: applets/mini-commander/preferences.c:428
+#: applets/mini-commander/src/preferences.c:457
 msgid "Size"
 msgstr "Afmetingen"
 
 #. applet width
-#: applets/mini-commander/preferences.c:440
+#: applets/mini-commander/src/preferences.c:469
 #, fuzzy
 msgid "Applet width:"
-msgstr "Applet-breedte:"
+msgstr "Appletbreedte:"
 
 #. applet height
-#: applets/mini-commander/preferences.c:469
+#: applets/mini-commander/src/preferences.c:498
 #, fuzzy
 msgid "Applet height:"
-msgstr "Applet-hoogte:"
+msgstr "Applethoogte:"
 
 #. cmd line height
-#: applets/mini-commander/preferences.c:498
+#: applets/mini-commander/src/preferences.c:527
 msgid "Command line height:"
 msgstr "Hoogte opdrachtregel:"
 
 #. hint
-#: applets/mini-commander/preferences.c:527
+#: applets/mini-commander/src/preferences.c:556
 msgid ""
 "\n"
 "Sometimes the applet has to be moved on the panel\n"
 "to make a change of the size visible."
 msgstr ""
 "\n"
-"Soms moet het applet op het panel bewogen worden\n"
+"Soms moet het applet op het panel bewogen worden "
 "voordat wijzigingen zichtbaar worden."
 
 #. Color
-#: applets/mini-commander/preferences.c:538 applets/multiload/load-graph.c:163
-#: gnome-terminal/gnome-terminal.c:1025
+#: applets/mini-commander/src/preferences.c:567
+#: applets/multiload/load-graph.c:163 gnome-terminal/gnome-terminal.c:1024
 msgid "Colors"
 msgstr "Kleuren"
 
 #. fg
-#: applets/mini-commander/preferences.c:548
+#: applets/mini-commander/src/preferences.c:577
 msgid "Command line foreground:"
 msgstr "Voorgrond opdrachtregel:"
 
 #. bg
-#: applets/mini-commander/preferences.c:583
+#: applets/mini-commander/src/preferences.c:612
 msgid "Command line background:"
 msgstr "Achtergrond opdrachtregel:"
 
-#: applets/mini-commander/preferences.c:626
+#: applets/mini-commander/src/preferences.c:655
 #, fuzzy
 msgid "Special Prefixes"
-msgstr "Bijzondere prefixes"
+msgstr "Bijzondere voorvoegsels"
 
 #. prefix
-#: applets/mini-commander/preferences.c:645
+#: applets/mini-commander/src/preferences.c:674
 #, c-format
 msgid "Prefix %.2d:"
-msgstr ""
+msgstr "Voorvoegel %.2d:"
 
 #. command
-#: applets/mini-commander/preferences.c:663
+#: applets/mini-commander/src/preferences.c:692
 #, c-format
 msgid "   Command %.2d:"
-msgstr "   Commando %.2d:"
+msgstr "   Opdracht %.2d:"
 
-#: applets/mini-commander/preferences.c:680
+#: applets/mini-commander/src/preferences.c:709
 #, c-format
 msgid "Prefixes %d"
-msgstr "Prefixes %d"
+msgstr "Voorvoegsel %d"
 
 #: applets/mixer/mixer.c:576
 msgid "Run gmix..."
@@ -1011,7 +1252,7 @@ msgstr "Voer gmix uit..."
 
 #: applets/modemlights/modemlights.c:94
 msgid "Modem Lights Applet"
-msgstr "Modemlichtjes-Applet"
+msgstr "Modemlichtjes Applet"
 
 #: applets/modemlights/modemlights.c:97
 msgid ""
@@ -1020,10 +1261,10 @@ msgid ""
 "RX and TX"
 msgstr ""
 "Uitgebracht onder de GNU GPL.\n"
-"Een modemstatusindicator en dialer. Lichtjes (van links naar rechts) betekenen "
-"RX en TX"
+"Een modemstatusindicator en dialer. Lichtjes (van links naar rechts) "
+"betekenen RX en TX"
 
-#: applets/modemlights/modemlights.c:316
+#: applets/modemlights/modemlights.c:321
 msgid ""
 "You are currently connected.\n"
 "Do you want to disconnect?"
@@ -1031,11 +1272,11 @@ msgstr ""
 "U heeft momenteel verbinding.\n"
 "Wilt u de verbinding verbreken?"
 
-#: applets/modemlights/modemlights.c:327
+#: applets/modemlights/modemlights.c:332
 msgid "Do you want to connect?"
-msgstr ""
+msgstr "Wilt u verbinding maken?"
 
-#: applets/modemlights/modemlights.c:346
+#: applets/modemlights/modemlights.c:351
 msgid "not connected"
 msgstr "niet verbonden"
 
@@ -1045,15 +1286,15 @@ msgstr "Modemlichtjes Instellingen"
 
 #: applets/modemlights/properties.c:143
 msgid "Updates per second"
-msgstr "Verversingsfrequentie (1/sec)"
+msgstr "Verversingsfrequentie (Hz)"
 
 #: applets/modemlights/properties.c:160
 msgid "Connect command:"
-msgstr "Commando voor maken verbinding:"
+msgstr "Opdracht voor maken verbinding:"
 
 #: applets/modemlights/properties.c:177
 msgid "Disconnect command:"
-msgstr "Commando voor verbreken verbinding:"
+msgstr "Opdracht voor verbreken verbinding:"
 
 #. confirmation checkbox
 #: applets/modemlights/properties.c:190
@@ -1081,7 +1322,7 @@ msgstr "Geavanceerd"
 #: applets/multiload/cpuload.c:47 applets/multiload/main.c:126
 #, fuzzy
 msgid "CPU Load"
-msgstr "CPU Belasting"
+msgstr "Processorbelasting"
 
 #: applets/multiload/load-graph.c:26
 msgid "Load Graph"
@@ -1119,7 +1360,7 @@ msgstr "Systeem"
 #: applets/multiload/main.c:27
 #, fuzzy
 msgid "Idle"
-msgstr "Index"
+msgstr "Ongebruikt"
 
 #: applets/multiload/main.c:31
 msgid "Other"
@@ -1153,19 +1394,19 @@ msgstr "Geheugenbelasting"
 msgid "Swap Load"
 msgstr "Omschakelen belasting"
 
-#: applets/netload/netload.c:260
+#: applets/netload/netload.c:261
 msgid "Netload Error"
 msgstr "Netwerkbelasting Fout"
 
-#: applets/netload/netload.c:265
+#: applets/netload/netload.c:266
 msgid "An error occured in the Netload Applet:"
 msgstr "Een fout is opgetreden in het Netwerkbelastings-Applet:"
 
-#: applets/netload/netload.c:294
+#: applets/netload/netload.c:295
 msgid "The GNOME Network Load Applet"
 msgstr "Het GNOME Netwerkbelasting-Applet"
 
-#: applets/netload/netload.c:297
+#: applets/netload/netload.c:298
 msgid ""
 "This applet is released under the terms and conditions of the GNU Public "
 "Licence.This applet shows the load on a network device. It requires the "
@@ -1194,7 +1435,7 @@ msgstr "Vertical verdeling van balken (in Kb)"
 
 #: applets/netload/properties.c:268
 msgid "properties.c: gnome_property_box_new() failed.\n"
-msgstr "properties.c: gnone_property_box_new() mislukt.\n"
+msgstr "properties.c: gnome_property_box_new() mislukt.\n"
 
 #: applets/netload/properties.c:274
 msgid "Network Load Settings"
@@ -1204,98 +1445,21 @@ msgstr "Netwerkbelasting Eigenschappen"
 msgid "Device"
 msgstr "Apparaat"
 
-#: applets/slashapp/properties.c:199
-#, fuzzy
-msgid "Articles"
-msgstr "Berichten"
-
-#: applets/slashapp/properties.c:208
-msgid "Show topic images"
-msgstr "Toon rubriekplaatjes"
-
-#: applets/slashapp/properties.c:214
-msgid "Show department"
-msgstr "Toon 'department'"
-
-#: applets/slashapp/properties.c:220
-msgid "Show extra information (Time, Author, Comments)"
-msgstr "Toon extra informatie (Tijd, Auteur, Reacties)"
-
-#: applets/slashapp/properties.c:230
-msgid "Delay between articles (10 = 1 sec):"
-msgstr "Vertraging tussen berichten (10 = 1 sec.):"
-
-#: applets/slashapp/properties.c:244
-msgid "(These settings do not take effect until a refresh)"
-msgstr "(Deze instellingen worden pas actief na een verversing)"
-
-#: applets/slashapp/properties.c:249
-#, fuzzy
-msgid "Browser"
-msgstr ""
-
-#: applets/slashapp/properties.c:258
-#, fuzzy
-msgid "Open new window"
-msgstr "Nieuw venster"
-
-#: applets/slashapp/properties.c:356 gnome-terminal/gnome-terminal.c:1072
-msgid "Scrolling"
-msgstr ""
-
-#: applets/slashapp/properties.c:365
-msgid "Smooth scroll"
-msgstr ""
-
-#: applets/slashapp/properties.c:371
-msgid "Smooth type"
-msgstr ""
-
-#: applets/slashapp/properties.c:377
-msgid "Speed"
-msgstr "Snelheid"
-
-#: applets/slashapp/properties.c:390
-msgid "Delay when wrapping text:"
-msgstr "Vertraging bij het 'wrappen' van tekst:"
-
-#: applets/slashapp/properties.c:408
-msgid "Scroll speed between lines (Smooth scroll):"
-msgstr "Scrollsnelheid tussen regels (smooth scroll):"
-
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr ""
-
-#: applets/slashapp/slashapp.c:152
-#, fuzzy
-msgid "No articles"
-msgstr "Geen berichten."
-
 #: applets/slashapp/slashapp.c:169
 msgid "Slashapp article list"
 msgstr "Slashapp berichtenlijst"
 
-#: applets/slashapp/slashapp.c:255 gmenu/gmenu.c:229
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "maken van gebruikersdirectory: %s\n"
-
-#: applets/slashapp/slashapp.c:258 gmenu/gmenu.c:232
+#: applets/slashapp/slashapp.c:258 gmenu/gmenu.c:233
 #, c-format
 msgid "unable to create user directory: %s\n"
-msgstr "maken van gebruikersdirectory '%s' mislukt\n"
+msgstr "creëren van gebruikersdirectory '%s' mislukt\n"
 
 #: applets/slashapp/slashapp.c:532
 msgid "No articles found"
 msgstr "Geen berichten gevonden"
 
-#: applets/slashapp/slashapp.c:566
-msgid "Justin Maurer <justin@openprojects.net>"
-msgstr ""
-
 #: applets/slashapp/slashapp.c:567
-msgid "Craig Small <csmall@small.dropbear.co.uk>"
+msgid "Craig Small <csmall@eye-net.com.au>"
 msgstr ""
 
 #: applets/slashapp/slashapp.c:568
@@ -1328,45 +1492,491 @@ msgstr "Ververs berichten"
 
 #: applets/webcontrol/webcontrol.c:56
 msgid "The Web Browser Controller"
-msgstr ""
+msgstr "De Web Browser Controller"
 
 #: applets/webcontrol/webcontrol.c:59
 msgid ""
 "This applet currently sends getURL commands to netscape throught the -remote "
 "interface.  Hopefully later more webrowsers will be supported."
 msgstr ""
-"Dit applet stuurt 'getURL' opdrachten naar Netscape, via de -remote interface "
-"Hopelijk worden in de toekomst meer webbrowsers ondersteund"
+"Dit applet stuurt 'getURL' opdrachten naar Netscape, via de -remote "
+"interface.  Hopelijk worden in de toekomst meer browsers ondersteund"
 
-#. create the widget we are going to put on the applet
-#: applets/webcontrol/webcontrol.c:116
-msgid "Url:"
-msgstr "URL:"
-
-#: applets/webcontrol/webcontrol.c:119
+#: applets/webcontrol/webcontrol.c:120
 #, fuzzy
 msgid "Clear"
 msgstr "Leegmaken"
 
-#: applets/webcontrol/webcontrol.c:135
+#: applets/webcontrol/webcontrol.c:136
 msgid "Launch new window"
-msgstr "Nieuw venster"
+msgstr "Open nieuw venster"
 
-#: applets/webcontrol/webcontrol.c:203
+#: applets/webcontrol/webcontrol.c:204
 msgid "WebControl Properties"
-msgstr "WebController eigenschappen"
+msgstr "WebControl Eigenschappen"
 
-#: applets/webcontrol/webcontrol.c:208
+#: applets/webcontrol/webcontrol.c:209
 msgid "Display URL label"
 msgstr "Toon URL label"
 
-#: applets/webcontrol/webcontrol.c:217
+#: applets/webcontrol/webcontrol.c:218
 msgid "Display \"launch new window\" option"
 msgstr "Toon 'Nieuw venster'-optie"
 
-#: applets/webcontrol/webcontrol.c:230
+#: applets/webcontrol/webcontrol.c:231
 msgid "Look"
 msgstr "Uiterlijk"
+
+#: desktop-properties/app-background.c:15
+msgid "Background Properties"
+msgstr "Achtergrondeigenschappen"
+
+#: desktop-properties/app-bell.c:11
+msgid "Bell Properties"
+msgstr "Beleigenschappen"
+
+#: desktop-properties/app-keyboard.c:11
+msgid "Keyboard Properties"
+msgstr "Toetsenbordeigenschappen"
+
+#: desktop-properties/app-mouse.c:11
+msgid "Mouse Properties"
+msgstr "Muiseigenschappen"
+
+#: desktop-properties/app-ui.c:32
+msgid "Gnome Look and Feel Properties"
+msgstr "Gnome Look&Feel eigenschappen"
+
+#: desktop-properties/args.c:8 desktop-properties/property-background.c:1057
+msgid "Set parameters from saved state and exit"
+msgstr "Herstel parameters en afsluiten"
+
+#: desktop-properties/property-background.c:494 panel/panel_config.c:702
+msgid "Color"
+msgstr "Kleur"
+
+#: desktop-properties/property-background.c:518
+msgid "Flat"
+msgstr "Vlak"
+
+#: desktop-properties/property-background.c:524
+msgid "Gradient"
+msgstr "Verlopend"
+
+#: desktop-properties/property-background.c:539 panel/panel_config.c:545
+msgid "Vertical"
+msgstr "Verticaal"
+
+#. Horizontal
+#: desktop-properties/property-background.c:545 panel/panel_config.c:532
+msgid "Horizontal"
+msgstr "Horizontaal"
+
+#: desktop-properties/property-background.c:690
+msgid "Wallpaper Selection"
+msgstr "Keuze achtergrondafbeelding"
+
+#: desktop-properties/property-background.c:729
+msgid "Wallpaper"
+msgstr "Achtergrondafbeelding"
+
+#: desktop-properties/property-background.c:732
+msgid " Browse... "
+msgstr " Zoeken..."
+
+#: desktop-properties/property-background.c:737
+msgid "none"
+msgstr "geen"
+
+#: desktop-properties/property-background.c:781
+#, fuzzy
+msgid "Scaled"
+msgstr "Geschaald"
+
+#: desktop-properties/property-background.c:790
+msgid "Scaled (keep aspect)"
+msgstr "Geschaald (proportioneel)"
+
+#: desktop-properties/property-background.c:801
+msgid "Centered"
+msgstr "Gecentreerd"
+
+#: desktop-properties/property-background.c:812
+msgid "Tiled"
+msgstr "Getegeld"
+
+#: desktop-properties/property-background.c:1006
+msgid " Background "
+msgstr " Achtergrond "
+
+#: desktop-properties/property-background.c:1058
+msgid "IMAGE"
+msgstr "AFBEELDING"
+
+#: desktop-properties/property-background.c:1058
+msgid "Sets the wallpaper to the value specified"
+msgstr "Achtergrondafbeelding instellen"
+
+#: desktop-properties/property-background.c:1059
+#: desktop-properties/property-background.c:1060
+#: gnome-terminal/gnome-terminal.c:1833 gnome-terminal/gnome-terminal.c:1836
+msgid "COLOR"
+msgstr "KLEUR"
+
+#: desktop-properties/property-background.c:1059
+msgid "Specifies the background color"
+msgstr "Geeft de achtergrondkleur aan"
+
+#: desktop-properties/property-background.c:1060
+#, fuzzy
+msgid "Specifies end background color for gradient"
+msgstr "Geeft de achtergrondkleur aan"
+
+#: desktop-properties/property-background.c:1061
+msgid "ORIENT"
+msgstr "ORIENT"
+
+#: desktop-properties/property-background.c:1061
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Kleurverloop: verticaal of horizontaal"
+
+#: desktop-properties/property-background.c:1062
+msgid "Use a solid fill for the background"
+msgstr "Gebruik een vaste kleur als achtergrond"
+
+#: desktop-properties/property-background.c:1063
+msgid "Use a gradient fill for the background"
+msgstr "Gebruik een kleurverloop als achtergrond"
+
+#: desktop-properties/property-background.c:1064
+msgid "MODE"
+msgstr "MODUS"
+
+#: desktop-properties/property-background.c:1064
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "Toon achtergrondafbeelding: getegeld, gecentreerd, geschaald of proportioneel geschaald"
+
+#: desktop-properties/property-bell.c:123
+#, fuzzy
+msgid "Sound"
+msgstr "Geluid"
+
+#: desktop-properties/property-bell.c:142
+msgid "Volume"
+msgstr "Volume"
+
+#: desktop-properties/property-bell.c:163
+#, fuzzy
+msgid "Pitch"
+msgstr "Toonhoogte"
+
+#: desktop-properties/property-bell.c:184
+msgid "Duration"
+msgstr "Duur"
+
+#: desktop-properties/property-bell.c:214
+msgid "Test"
+msgstr "Testen"
+
+#: desktop-properties/property-bell.c:228
+msgid "Bell"
+msgstr "Bel"
+
+#. Auto repeat
+#: desktop-properties/property-keyboard.c:160
+msgid "Auto-repeat"
+msgstr "Automatisch herhalen"
+
+#: desktop-properties/property-keyboard.c:179
+msgid "Enable auto-repeat"
+msgstr "Aanzetten automatisch herhalen"
+
+#: desktop-properties/property-keyboard.c:186
+msgid "Repeat rate"
+msgstr "Herhalingsaantal"
+
+#: desktop-properties/property-keyboard.c:207
+msgid "Repeat delay"
+msgstr "Herhalingsvertraging"
+
+#. Keyboard click
+#: desktop-properties/property-keyboard.c:235
+msgid "Keyboard click"
+msgstr "Toetsaanslag"
+
+#: desktop-properties/property-keyboard.c:254
+msgid "Click on keypress"
+msgstr "Klik bij toetsaanslag"
+
+#: desktop-properties/property-keyboard.c:261
+msgid "Click volume"
+msgstr "Klik volume"
+
+#: desktop-properties/property-keyboard.c:291
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#. Mouse buttons
+#: desktop-properties/property-mouse.c:215
+msgid "Mouse buttons"
+msgstr "Muisknoppen"
+
+#: desktop-properties/property-mouse.c:224
+msgid "Left handed"
+msgstr "Linkshandig"
+
+#: desktop-properties/property-mouse.c:226
+msgid "Right handed"
+msgstr "Rechtshandig"
+
+#. Mouse motion
+#: desktop-properties/property-mouse.c:243
+msgid "Mouse motion"
+msgstr "Muisbeweging"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Acceleration"
+msgstr "Versnelling"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Fast"
+msgstr "Vlug"
+
+#: desktop-properties/property-mouse.c:255
+msgid "Slow"
+msgstr "Traag"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Threshold"
+msgstr "Drempelwaarde"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Large"
+msgstr "Groot"
+
+#: desktop-properties/property-mouse.c:267
+msgid "Small"
+msgstr "Klein"
+
+#: desktop-properties/property-mouse.c:274
+msgid "Mouse"
+msgstr "Muis"
+
+#: desktop-properties/property-ui.c:55
+msgid "Default Gtk setting [FIXME - Describe this better]"
+msgstr "Standaard GTK instelling [FIXME - beschrijf dit beter]"
+
+#: desktop-properties/property-ui.c:56
+msgid "Spread buttons out"
+msgstr "Vul knoppen uit"
+
+#: desktop-properties/property-ui.c:57
+msgid "Put buttons on edges"
+msgstr "Plaats knoppen op randen"
+
+#: desktop-properties/property-ui.c:58
+msgid "Left-justify buttons"
+msgstr "Knoppen links uitlijnen"
+
+#: desktop-properties/property-ui.c:59
+#, fuzzy
+msgid "Right-justify buttons"
+msgstr "Knoppen rechts uitlijnen"
+
+#: desktop-properties/property-ui.c:65
+msgid "Let window manager decide"
+msgstr "Laat de window manager beslissen"
+
+#: desktop-properties/property-ui.c:66
+msgid "Center of the screen"
+msgstr "In het midden van het scherm"
+
+#: desktop-properties/property-ui.c:67
+msgid "At the mouse pointer"
+msgstr "Bij de muiscursor"
+
+#: desktop-properties/property-ui.c:73
+msgid "Dialogs are like other windows"
+msgstr "Dialogen zijn als ander vensters"
+
+#: desktop-properties/property-ui.c:74
+msgid "Dialogs are treated specially by window manager"
+msgstr "Dialogen worden anders behandeld door window manager"
+
+#: desktop-properties/property-ui.c:81
+msgid "Notebook"
+msgstr "Notitieboek"
+
+#: desktop-properties/property-ui.c:82
+msgid "Toplevel"
+msgstr "Bovenop"
+
+#: desktop-properties/property-ui.c:83
+msgid "Modal"
+msgstr "Modaal"
+
+#: desktop-properties/property-ui.c:89 gnome-terminal/gnome-terminal.c:765
+#: panel/panel_config.c:306
+msgid "Left"
+msgstr "Links"
+
+#: desktop-properties/property-ui.c:90 gnome-terminal/gnome-terminal.c:766
+#: panel/panel_config.c:317
+msgid "Right"
+msgstr "Rechts"
+
+#. Top Position
+#: desktop-properties/property-ui.c:91 panel/panel_config.c:284
+msgid "Top"
+msgstr "Bovenrand"
+
+#: desktop-properties/property-ui.c:92 panel/panel_config.c:295
+msgid "Bottom"
+msgstr "Onderrand"
+
+#: desktop-properties/property-ui.c:194
+msgid "Dialog buttons"
+msgstr "Dialoogknoppen"
+
+#: desktop-properties/property-ui.c:199
+msgid "Dialog position"
+msgstr "Dialoogpositie"
+
+#: desktop-properties/property-ui.c:204
+#, fuzzy
+msgid "Dialog hints"
+msgstr "Dialooghints"
+
+#: desktop-properties/property-ui.c:211
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Indien mogelijk, vervang dialoog door statusbalk"
+
+#: desktop-properties/property-ui.c:221
+msgid "Place dialogs over application window when possible"
+msgstr "Indien mogelijk, plaats dialogen boven toepassingsvenster"
+
+#: desktop-properties/property-ui.c:232
+#, fuzzy
+msgid "Dialogs"
+msgstr "Dialogen"
+
+#: desktop-properties/property-ui.c:238
+msgid "Menubars are detachable"
+msgstr "Menubalken zijn los te halen"
+
+#: desktop-properties/property-ui.c:247
+msgid "Menubars have relieved border"
+msgstr "Menubalken hebben een vrije rand"
+
+#: desktop-properties/property-ui.c:256
+msgid "Toolbars are detachable"
+msgstr "Gereedschapsbalken zijn los te halen"
+
+#: desktop-properties/property-ui.c:265
+msgid "Toolbar buttons have relieved border"
+msgstr "Gereedschapsknoppen hebben een vrije rand"
+
+#: desktop-properties/property-ui.c:274
+msgid "Toolbars have flat look"
+msgstr "Gereedschapsbalken lijken vlak"
+
+#: desktop-properties/property-ui.c:283
+msgid "Toolbars have line separators"
+msgstr "Gereedschapsbalken hebben scheidingen"
+
+#: desktop-properties/property-ui.c:292
+msgid "Toolbars have text labels"
+msgstr "Gereedschapsbalken hebben tekstlabels"
+
+#: desktop-properties/property-ui.c:301
+msgid "Statusbar is interactive when possible"
+msgstr "Indien mogelijk, statusbalk is interactief"
+
+#: desktop-properties/property-ui.c:310
+#, fuzzy
+msgid "Dialog buttons have icons"
+msgstr "Dialoogknoppen hebben ikonen"
+
+#: desktop-properties/property-ui.c:319
+#, fuzzy
+msgid "Menu items have icons"
+msgstr "Dialoogknoppen hebben pictogrammen"
+
+#: desktop-properties/property-ui.c:328
+msgid "Application"
+msgstr "Toepassing"
+
+#: desktop-properties/property-ui.c:333
+#, fuzzy
+msgid "Default MDI mode"
+msgstr "Standaard MDI modus"
+
+#: desktop-properties/property-ui.c:338
+msgid "MDI notebook tab position"
+msgstr "MDI notitieboek tabpositie"
+
+#: desktop-properties/property-ui.c:344
+msgid "MDI"
+msgstr ""
+
+#: gemvt/getopt.c:669
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: optie '%s' is niet eenduidig\n"
+
+#: gemvt/getopt.c:693
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: gemvt/getopt.c:698
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: optie `%c%s' staat geen argument toe\n"
+
+#: gemvt/getopt.c:715 gemvt/getopt.c:888
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: optie `%s' vereist een argument\n"
+
+#. --option
+#: gemvt/getopt.c:744
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: onbekende optie `--%s'\n"
+
+#. +option or -option
+#: gemvt/getopt.c:748
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: onbekende optie `%c%s'\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:774
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: verboden optie -- %c\n"
+
+#: gemvt/getopt.c:777
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: verboden optie -- %c\n"
+
+#. 1003.2 specifies the format of this message.
+#: gemvt/getopt.c:807 gemvt/getopt.c:937
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: optie vereist een argument -- %c\n"
+
+#: gemvt/getopt.c:854
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: optie `-W %s' is niet eenduidig\n"
+
+#: gemvt/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: optie `-W %s' staat geen argument toe\n"
 
 #: gmenu/dialogs.c:39
 msgid "File exists."
@@ -1374,7 +1984,7 @@ msgstr "Bestand bestaat."
 
 #: gmenu/dialogs.c:47
 msgid "Failed to create file."
-msgstr "Maken van bestand mislukt."
+msgstr "Creëren van bestand mislukt."
 
 #: gmenu/dialogs.c:122 gmenu/dialogs.c:387
 msgid ""
@@ -1384,13 +1994,13 @@ msgstr ""
 "U kunt niets toevoegen aan die map,\n"
 "want u heeft niet de benodigde rechten."
 
-#: gmenu/dialogs.c:128 gmenu/gmenu.c:85
+#: gmenu/dialogs.c:128 gmenu/gmenu.c:86
 msgid "New Folder"
 msgstr "Nieuwe Map"
 
 #: gmenu/dialogs.c:130
 msgid "Create Folder:"
-msgstr "Nieuwe Map:"
+msgstr "Creëer Map:"
 
 #: gmenu/dialogs.c:168
 msgid "Failed to delete the folder."
@@ -1406,7 +2016,7 @@ msgstr "U moet eerst iets selecteren."
 
 #: gmenu/dialogs.c:217
 msgid "You can not delete a top level Folder."
-msgstr "U kunt niet een map van het hoogste niveau wissen."
+msgstr "U kunt geen map van het hoogste niveau wissen."
 
 #: gmenu/dialogs.c:225
 msgid ""
@@ -1434,7 +2044,7 @@ msgstr ""
 
 #: gmenu/dialogs.c:247
 msgid "File or Folder does not exist on filesystem."
-msgstr "Bestand of map bestaat niet op het bestandssysteem"
+msgstr "Bestand of map bestaat niet in het bestandssysteem"
 
 #: gmenu/dialogs.c:376
 msgid "The Name text field can not be blank."
@@ -1450,13 +2060,13 @@ msgstr ""
 
 #: gmenu/dialogs.c:394
 msgid "Save Changes?"
-msgstr "Bewaren veranderingen?"
+msgstr "Veranderingen bewaren?"
 
-#: gmenu/dialogs.c:402
+#: gmenu/dialogs.c:403
 msgid "Overwrite existing file?"
 msgstr "Overschrijven van bestaand bestand?"
 
-#: gmenu/dialogs.c:408
+#: gmenu/dialogs.c:412
 msgid "Save file?"
 msgstr "Bestand bewaren?"
 
@@ -1478,92 +2088,81 @@ msgstr "Nieuw"
 
 #: gmenu/gmenu.c:45
 #, fuzzy
-msgid "New _Folder..."
+msgid "_New Folder..."
 msgstr "Nieuwe Map..."
 
-#: gmenu/gmenu.c:48
+#: gmenu/gmenu.c:46 gmenu/gmenu.c:86
+msgid "Create a new folder"
+msgstr "Maak een nieuwe map"
+
+#: gmenu/gmenu.c:49
 msgid "_Delete..."
 msgstr "Verwijderen"
 
-#: gmenu/gmenu.c:51
-msgid "_Quit"
-msgstr "Afsluiten"
-
-#: gmenu/gmenu.c:57
+#: gmenu/gmenu.c:60
 #, fuzzy
 msgid "_Sort Folder"
-msgstr "Sorteren map"
+msgstr "_Sorteren map"
 
-#: gmenu/gmenu.c:60
+#: gmenu/gmenu.c:63
 msgid "Sort Folder _Recursive"
-msgstr "Recursief sorteren folder"
+msgstr "Map _Recursief Sorteren"
 
-#. { GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-#. GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#: gmenu/gmenu.c:68 gnome-terminal/gnome-terminal.c:1186
-#, fuzzy
-msgid "_About..."
-msgstr "Info..."
-
-#: gmenu/gmenu.c:74 help-browser/window.c:179
+#: gmenu/gmenu.c:75
 #, fuzzy
 msgid "_File"
 msgstr "Bestand"
 
-#: gmenu/gmenu.c:76
+#: gmenu/gmenu.c:77
 msgid "_Sort"
 msgstr "Sorteren"
 
-#: gmenu/gmenu.c:78 help-browser/window.c:181
+#: gmenu/gmenu.c:79
 #, fuzzy
 msgid "_Help"
 msgstr "_Help"
 
-#: gmenu/gmenu.c:85
-msgid "Create a new folder"
-msgstr "Maak een nieuwe map"
-
-#: gmenu/gmenu.c:87
+#: gmenu/gmenu.c:88
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: gmenu/gmenu.c:87
+#: gmenu/gmenu.c:88
 msgid "Delete selected menu item"
-msgstr "Verwijderen"
+msgstr "Verwijderen geselecteerd menu-item"
 
-#: gmenu/gmenu.c:90
+#: gmenu/gmenu.c:91
 msgid "Move up"
 msgstr "Naar boven"
 
-#: gmenu/gmenu.c:90
+#: gmenu/gmenu.c:91
 msgid "Move selected menu up"
 msgstr "Geselecteerd menu naar boven"
 
-#: gmenu/gmenu.c:92
+#: gmenu/gmenu.c:93
 msgid "Move down"
 msgstr "Naar beneden"
 
-#: gmenu/gmenu.c:92
+#: gmenu/gmenu.c:93
 msgid "Move selected menu down"
 msgstr "Geselecteerd menu naar beneden"
 
-#: gmenu/gmenu.c:95
+#: gmenu/gmenu.c:96
 msgid "Edit selected menu item properties"
-msgstr "Eigenschappen geslecteerd menu-item"
+msgstr "Eigenschappen geselecteerd menu-item"
 
-#: gmenu/gmenu.c:98
+#: gmenu/gmenu.c:99
 msgid "Sort Folder"
 msgstr "Sorteer map"
 
-#: gmenu/gmenu.c:98
+#: gmenu/gmenu.c:99
 msgid "Sort selected folder"
 msgstr "Sorteer geselecteerde map"
 
-#: gmenu/gmenu.c:274 gmenu/gmenu.c:319 gmenu/gmenu.c:389 gmenu/tree.c:505
+#: gmenu/gmenu.c:275 gmenu/gmenu.c:320 gmenu/gmenu.c:390 gmenu/tree.c:499
 msgid "GNOME menu editor"
 msgstr "GNOME Menu-editor"
 
-#: gmenu/gmenu.c:277
+#: gmenu/gmenu.c:278
 msgid ""
 "Released under the terms of the GNU Public License.\n"
 "GNOME menu editor."
@@ -1572,7 +2171,7 @@ msgstr ""
 #: gmenu/order.c:63
 #, c-format
 msgid "Unable to create file: %s\n"
-msgstr "Maken van bestand '%s' mislukt\n"
+msgstr "Creëren van bestand '%s' mislukt\n"
 
 #: gmenu/order.c:82
 #, c-format
@@ -1581,53 +2180,53 @@ msgstr "verwijderen .order bestand '%s' mislukt\n"
 
 #: gmenu/order.c:126 gmenu/order.c:140
 msgid " Folder"
-msgstr "Map"
+msgstr " Map"
 
-#: gmenu/tree.c:507
+#: gmenu/tree.c:501
 msgid "One moment, reading menus..."
 msgstr "Even geduld, menu's worden ingelezen"
 
-#: gmenu/tree.c:535
+#: gmenu/tree.c:529
 msgid "GNOME"
 msgstr ""
 
 #. system's menu tree
-#: gmenu/tree.c:543
+#: gmenu/tree.c:537
 msgid "System Menus"
 msgstr "Systeemmenu's"
 
-#: gmenu/tree.c:553
+#: gmenu/tree.c:547
 msgid "Top of system menus"
 msgstr "Top van systeemmenu's"
 
 #. user's menu tree
-#: gmenu/tree.c:560
+#: gmenu/tree.c:554
 msgid "User Menus"
 msgstr "Gebruikersmenu's"
 
-#: gmenu/tree.c:570
+#: gmenu/tree.c:564
 msgid "Top of user menus"
 msgstr "Top van gebruikersmenu's"
 
-#: gnome-terminal/gnome-terminal.c:138
+#: gnome-terminal/gnome-terminal.c:136
 msgid "GNOME Terminal"
 msgstr "GNOME Terminal"
 
-#: gnome-terminal/gnome-terminal.c:141
+#: gnome-terminal/gnome-terminal.c:139
 msgid "The GNOME terminal emulation program."
 msgstr "De GNOME terminal-emulator"
 
-#: gnome-terminal/gnome-terminal.c:419 gnome-terminal/gnome-terminal.c:916
-#: gnome-terminal/gnome-terminal.c:926
+#: gnome-terminal/gnome-terminal.c:418 gnome-terminal/gnome-terminal.c:915
+#: gnome-terminal/gnome-terminal.c:925
 msgid "Default"
 msgstr "Standaard"
 
-#: gnome-terminal/gnome-terminal.c:420
+#: gnome-terminal/gnome-terminal.c:419
 #, fuzzy
 msgid "Config"
 msgstr "Configuratie"
 
-#: gnome-terminal/gnome-terminal.c:587
+#: gnome-terminal/gnome-terminal.c:586
 msgid ""
 "You have switched the class of this window. Do you\n"
 " want to reconfigure this window to match the default\n"
@@ -1637,151 +2236,143 @@ msgstr ""
 " het venster herconfigureren zodat het overeenkomt met\n"
 " de standaardconfiguratie van de nieuwe klasse?"
 
-#: gnome-terminal/gnome-terminal.c:750
+#: gnome-terminal/gnome-terminal.c:749
 msgid "Linux console"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:751
+#: gnome-terminal/gnome-terminal.c:750
 msgid "Color Xterm"
 msgstr "Kleuren X-Term"
 
-#: gnome-terminal/gnome-terminal.c:752
+#: gnome-terminal/gnome-terminal.c:751
 msgid "rxvt"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:757
+#: gnome-terminal/gnome-terminal.c:756
 msgid "White on black"
 msgstr "Wit op zwart"
 
-#: gnome-terminal/gnome-terminal.c:758
+#: gnome-terminal/gnome-terminal.c:757
 msgid "Black on white"
 msgstr "Zwart op wit"
 
-#: gnome-terminal/gnome-terminal.c:759
+#: gnome-terminal/gnome-terminal.c:758
 msgid "Green on black"
 msgstr "Groen op zwart"
 
-#: gnome-terminal/gnome-terminal.c:760
+#: gnome-terminal/gnome-terminal.c:759
 msgid "Black on light yellow"
 msgstr "Zwart op lichtgeel"
 
-#: gnome-terminal/gnome-terminal.c:761
+#: gnome-terminal/gnome-terminal.c:760
 msgid "Custom colors"
 msgstr "Aangepaste kleuren"
 
-#: gnome-terminal/gnome-terminal.c:766 panel/panel_config.c:306
-msgid "Left"
-msgstr "Links"
-
-#: gnome-terminal/gnome-terminal.c:767 panel/panel_config.c:317
-msgid "Right"
-msgstr "Rechts"
-
-#: gnome-terminal/gnome-terminal.c:768
+#: gnome-terminal/gnome-terminal.c:767
 msgid "Hidden"
 msgstr "Verborgen"
 
 #. Font
-#: gnome-terminal/gnome-terminal.c:880
+#: gnome-terminal/gnome-terminal.c:879
 msgid "Font:"
 msgstr "Lettertype:"
 
-#: gnome-terminal/gnome-terminal.c:900
+#: gnome-terminal/gnome-terminal.c:899
 #, fuzzy
 msgid "Browse..."
 msgstr "Zoeken..."
 
 #. Terminal class
-#: gnome-terminal/gnome-terminal.c:908
+#: gnome-terminal/gnome-terminal.c:907
 #, fuzzy
 msgid "Terminal Class"
 msgstr "Terminalklasse"
 
 #. Blinking status
-#: gnome-terminal/gnome-terminal.c:936
+#: gnome-terminal/gnome-terminal.c:935
 msgid "Blinking cursor"
 msgstr "Knipperende cursor"
 
 #. Show menu bar
-#: gnome-terminal/gnome-terminal.c:945
+#: gnome-terminal/gnome-terminal.c:944
 msgid "Hide menu bar"
 msgstr "Verberg menubalk"
 
 #. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:954
+#: gnome-terminal/gnome-terminal.c:953
 msgid "Silence Terminal bell"
 msgstr "Uitzetten terminalbel"
 
 #. Swap keys
-#: gnome-terminal/gnome-terminal.c:963
+#: gnome-terminal/gnome-terminal.c:962
 msgid "Swap DEL/Backspace"
 msgstr "Verwissel DEL en Backspace"
 
-#: gnome-terminal/gnome-terminal.c:977
+#: gnome-terminal/gnome-terminal.c:976
 #, fuzzy
 msgid "Image"
 msgstr "Afbeelding"
 
 #. Background Pixmap checkbox
-#: gnome-terminal/gnome-terminal.c:981
+#: gnome-terminal/gnome-terminal.c:980
 #, fuzzy
 msgid "Background pixmap"
 msgstr "Achtergrondplaatje"
 
 #. Background pixmap filename
-#: gnome-terminal/gnome-terminal.c:990
+#: gnome-terminal/gnome-terminal.c:989
 #, fuzzy
 msgid "Pixmap file:"
 msgstr "Afbeeldingsbestand:"
 
 #. Transparency
-#: gnome-terminal/gnome-terminal.c:1005
+#: gnome-terminal/gnome-terminal.c:1004
 msgid "Transparent"
 msgstr "Transparant"
 
 #. Shaded
-#: gnome-terminal/gnome-terminal.c:1014
+#: gnome-terminal/gnome-terminal.c:1013
 msgid "Background should be shaded (slow)"
-msgstr ""
+msgstr "Achtergrond gearceerd (langzaam)"
 
 #. Color palette
-#: gnome-terminal/gnome-terminal.c:1028
+#: gnome-terminal/gnome-terminal.c:1027
 msgid "Color palette:"
 msgstr "Kleurenpalet:"
 
 #. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1038
+#: gnome-terminal/gnome-terminal.c:1037
 msgid "Foreground color:"
 msgstr "Voorgrondkleur:"
 
-#: gnome-terminal/gnome-terminal.c:1047
+#: gnome-terminal/gnome-terminal.c:1046
 msgid "Background color:"
 msgstr "Achtergrondkleur:"
 
 #. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1059
+#: gnome-terminal/gnome-terminal.c:1058
 msgid "Colors:"
 msgstr "Kleuren:"
 
 #. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1075
+#: gnome-terminal/gnome-terminal.c:1074
 msgid "Scrollbar position"
 msgstr "Schuifbalkpositie"
 
 #. Scroll back
-#: gnome-terminal/gnome-terminal.c:1086
+#: gnome-terminal/gnome-terminal.c:1085
 msgid "Scrollback lines"
-msgstr ""
+msgstr "Aantal regels in schuifbuffer"
 
 #. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1098
+#: gnome-terminal/gnome-terminal.c:1097
 msgid "Scroll on keystroke"
-msgstr ""
+msgstr "Schuiven bij toetsaanslag"
 
 #. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1107
+#: gnome-terminal/gnome-terminal.c:1106
 msgid "Scroll on output"
-msgstr ""
+msgstr "Schuiven bij uitvoer"
 
 #: gnome-terminal/gnome-terminal.c:1136
 msgid "Color selector"
@@ -1789,83 +2380,83 @@ msgstr "Kleurselector"
 
 #: gnome-terminal/gnome-terminal.c:1182
 msgid "_Hide menubar"
-msgstr "Verberger menubalk"
+msgstr "Verberg menubalk"
 
 #: gnome-terminal/gnome-terminal.c:1183
 msgid "_Show menubar"
 msgstr "Toon menubalk"
 
-#: gnome-terminal/gnome-terminal.c:1196
-msgid "Terminal"
-msgstr ""
-
-#: gnome-terminal/gnome-terminal.c:1787
+#: gnome-terminal/gnome-terminal.c:1815
 msgid "Terminal class name"
 msgstr "Terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:1787
+#: gnome-terminal/gnome-terminal.c:1815
 msgid "CLASS"
 msgstr "KLASSE"
 
-#: gnome-terminal/gnome-terminal.c:1790
+#: gnome-terminal/gnome-terminal.c:1818
 msgid "Specifies font name"
 msgstr "Geeft lettertype aan"
 
-#: gnome-terminal/gnome-terminal.c:1790
+#: gnome-terminal/gnome-terminal.c:1818
 msgid "FONT"
 msgstr "LETTERTYPE"
 
-#: gnome-terminal/gnome-terminal.c:1793
+#: gnome-terminal/gnome-terminal.c:1821
 msgid "Do not start up shells as logins shells"
-msgstr "Start 'shells' niet als 'login shells'"
+msgstr "Start 'shell' niet als 'login shell'"
 
-#: gnome-terminal/gnome-terminal.c:1796
+#: gnome-terminal/gnome-terminal.c:1824
 msgid "Start up shells as logins shells"
-msgstr "Start 'shells' als 'login shells'"
+msgstr "Start 'shell' als 'login shell'"
 
-#: gnome-terminal/gnome-terminal.c:1799
+#: gnome-terminal/gnome-terminal.c:1827
 msgid "Specifies the geometry for the main window"
 msgstr "Geeft de geometrie van het hoofdvenster"
 
-#: gnome-terminal/gnome-terminal.c:1799 gsm/session-properties.c:256
+#: gnome-terminal/gnome-terminal.c:1827 gsm/session-properties.c:256
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: gnome-terminal/gnome-terminal.c:1802
+#: gnome-terminal/gnome-terminal.c:1830
 msgid "Execute this program instead of a shell"
 msgstr "In plaats van een shell, voer dit programma uit"
 
-#: gnome-terminal/gnome-terminal.c:1802
+#: gnome-terminal/gnome-terminal.c:1830
 msgid "COMMAND"
-msgstr "COMMANDO"
+msgstr "OPDRACHT"
 
-#: gnome-terminal/gnome-terminal.c:1805
+#: gnome-terminal/gnome-terminal.c:1833
 msgid "Foreground color"
 msgstr "Voorgrondkleur"
 
-#: gnome-terminal/gnome-terminal.c:1805 gnome-terminal/gnome-terminal.c:1808
-msgid "COLOR"
-msgstr "KLEUR"
-
-#: gnome-terminal/gnome-terminal.c:1808 panel/panel_config.c:751
+#: gnome-terminal/gnome-terminal.c:1836 panel/panel_config.c:751
 msgid "Background color"
 msgstr "Achtergrondkleur"
 
-#: gnome-terminal/gnome-terminal.c:1811
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "Update utmp/wtmp entries"
 msgstr "Ververs utmp/wtmp gegevens"
 
-#: gnome-terminal/gnome-terminal.c:1811
+#: gnome-terminal/gnome-terminal.c:1839
 msgid "UTMP"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1814
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "Do not update utmp/wtmp entries"
 msgstr "Ververs utmp/wtml gegevens niet"
 
-#: gnome-terminal/gnome-terminal.c:1814
+#: gnome-terminal/gnome-terminal.c:1842
 msgid "NOUTMP"
 msgstr ""
+
+#: gnome-terminal/gnome-terminal.c:1845
+msgid "Set the window title"
+msgstr "Zet de venstertitel"
+
+#: gnome-terminal/gnome-terminal.c:1845
+msgid "TITLE"
+msgstr "TITEL"
 
 #: gsm/main.c:41
 msgid "Enable gsm debugging"
@@ -1952,8 +2543,9 @@ msgstr ""
 msgid ""
 "GNOME Help Browser allows easy access to various forms of documentation on "
 "your system"
-msgstr "GNOME Help Browser stelt u in staat gemakkelijke verschillende soorten "
-"documentatie te benaderen" 
+msgstr ""
+"GNOME Help Browser stelt u in staat gemakkelijke verschillende soorten "
+"documentatie te benaderen"
 
 #: help-browser/gnome-help-browser.c:598
 msgid "History size"
@@ -2044,9 +2636,9 @@ msgid "Games"
 msgstr "Spelletjes"
 
 #: help-browser/toc-man.c:25 help-browser/toc2-man.c:27
-#: panel/panel_config_global.c:571
+#: panel/panel_config_global.c:582
 msgid "Miscellaneous"
-msgstr "Overig"
+msgstr "Diversen"
 
 #: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
 msgid "Administration"
@@ -2069,12 +2661,12 @@ msgstr "manx"
 #. MAN PAGES
 #: help-browser/toc.c:135
 msgid "Man Pages"
-msgstr "'man' pagina's"
+msgstr "'man'-pagina's"
 
 #. INFO PAGES
 #: help-browser/toc.c:147
 msgid "Info Pages"
-msgstr "'Info' pagina's "
+msgstr "'Info'-pagina's "
 
 #. GNOME HELP
 #: help-browser/toc.c:159
@@ -2089,11 +2681,11 @@ msgstr "<h1>Inhoudsopgave</h1>\n"
 #. Man Pages
 #: help-browser/toc2.c:119
 msgid "<h2>Man Pages</h2>\n"
-msgstr "<h2>Man-pagina's</h2>\n"
+msgstr "<h2>Man-Pagina's</h2>\n"
 
 #: help-browser/toc2.c:257
 msgid "<br><br><h2>Info Pages</h2>\n"
-msgstr "<br><br><h2>Info Pagina's</h2>\n"
+msgstr "<br><br><h2>Info-Pagina's</h2>\n"
 
 #: help-browser/toc2.c:319
 msgid "<br><br><h2>GNOME Help</h2>\n"
@@ -2135,7 +2727,7 @@ msgstr ""
 "\n"
 "<p>\n"
 "<br>\n"
-"<H3>GNU Info Pagina's</H3>\n"
+"<H3>GNU Info-Pagina's</H3>\n"
 "<p>\n"
 "<UL>\n"
 
@@ -2169,76 +2761,40 @@ msgstr "<body>Onbekend inhoudsopgave-argument</body>"
 
 #: help-browser/window.c:128
 #, fuzzy
-msgid "_New window"
-msgstr "Nieuw venster"
+msgid "_New Window"
+msgstr "_Nieuw venster"
 
-#: help-browser/window.c:128
+#: help-browser/window.c:129
 msgid "Open new browser window"
 msgstr "Open nieuw browservenster"
 
-#: help-browser/window.c:132
+#: help-browser/window.c:135
 #, fuzzy
 msgid "_Add Bookmark"
 msgstr "Toevoegen bladwijzer"
 
-#: help-browser/window.c:132
+#: help-browser/window.c:135
 msgid "Add bookmark"
 msgstr "Toevoegen bladwijzer"
 
-#: help-browser/window.c:137
-#, fuzzy
-msgid "P_references..."
-msgstr "Eigenschappen..."
-
-#: help-browser/window.c:137
-msgid "Preferences"
-msgstr "Eigenschappen"
-
-#: help-browser/window.c:141
-#, fuzzy
-msgid "_Close"
-msgstr "Sluiten"
-
-#: help-browser/window.c:141
-msgid "Close window"
-msgstr "Venster sluiten"
-
-#: help-browser/window.c:146
-#, fuzzy
-msgid "E_xit"
-msgstr "Afsluiten"
-
-#: help-browser/window.c:146
-msgid "Exit all windows"
-msgstr "Sluit alle vensters"
-
-#: help-browser/window.c:155
-#, fuzzy
-msgid "_About"
-msgstr "Info"
-
-#: help-browser/window.c:155
-msgid "Info about this program"
-msgstr "Informatie over dit programma"
-
-#: help-browser/window.c:166
+#: help-browser/window.c:160
 msgid "_History"
 msgstr ""
 
-#: help-browser/window.c:166 help-browser/window.c:201
+#: help-browser/window.c:160 help-browser/window.c:201
 msgid "Show History Window"
 msgstr "Toon 'history' venster"
 
-#: help-browser/window.c:171
+#: help-browser/window.c:165
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Bladwijzers"
 
-#: help-browser/window.c:171 help-browser/window.c:203
+#: help-browser/window.c:165 help-browser/window.c:203
 msgid "Show Bookmarks Window"
 msgstr "Toon bladwijzervenster"
 
-#: help-browser/window.c:180
+#: help-browser/window.c:179
 #, fuzzy
 msgid "_Window"
 msgstr "Venster"
@@ -2249,7 +2805,7 @@ msgstr "Terug"
 
 #: help-browser/window.c:189
 msgid "Go to the previous location in the history list"
-msgstr "Ga naar vorige lokatie in 'history'-lijst"
+msgstr "Ga naar vorige locatie in 'history'-lijst"
 
 #: help-browser/window.c:191
 msgid "Forward"
@@ -2283,7 +2839,7 @@ msgstr "Bladwijzers"
 msgid "Help on Help"
 msgstr "Hulp bij Gnome Help"
 
-#: help-browser/window.c:810
+#: help-browser/window.c:813
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2294,7 +2850,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: help-browser/window.c:813
+#: help-browser/window.c:816
 msgid "Ok"
 msgstr "Ok"
 
@@ -2316,7 +2872,7 @@ msgstr "Tooltip/Naam"
 
 #: panel/drawer.c:123
 msgid "Icon"
-msgstr "Ikoon"
+msgstr "Pictogram"
 
 #: panel/drawer.c:127
 msgid "Applet appearance"
@@ -2325,7 +2881,7 @@ msgstr "Appletweergave"
 #: panel/drawer.c:134
 #, fuzzy
 msgid "Drawer handle"
-msgstr "'drawer' handvat"
+msgstr "Handvat van subpanel"
 
 #. we store this in w for later use!, so don't use w as temp from now
 #. on
@@ -2341,7 +2897,7 @@ msgstr "Toon pijl op verbergknop"
 
 #: panel/drawer.c:168
 msgid "Drawer"
-msgstr ""
+msgstr "Subpanel"
 
 #: panel/launcher.c:113
 msgid "App"
@@ -2349,7 +2905,7 @@ msgstr "Toepassing"
 
 #: panel/launcher.c:202
 msgid "Launcher properties"
-msgstr "Starter-eigenschappen"
+msgstr "Snelkoppelingseigenschappen"
 
 #: panel/launcher.c:287
 #, fuzzy
@@ -2357,9 +2913,14 @@ msgid "Create launcher applet"
 msgstr "Maak snelkoppeling\n"
 
 #. Logout frame
-#: panel/logout.c:26 panel/menu.c:1694 panel/menu.c:1974
-#: panel/panel_config_global.c:485
+#: panel/logout.c:28 panel/menu.c:1702 panel/menu.c:1995
+#: panel/panel_config_global.c:495
 msgid "Log out"
+msgstr "Uitloggen"
+
+#: panel/logout.c:37
+#, fuzzy
+msgid "Log out of GNOME"
 msgstr "Uitloggen"
 
 #: panel/main.c:75
@@ -2382,178 +2943,174 @@ msgstr ""
 "Dit programma is verantwoordelijk voor het starten van andere applicaties "
 "het bevatten van applets, de wereldvrede en willekeurige crashes van X."
 
-#: panel/menu.c:327 panel/menu.c:362
+#: panel/menu.c:326 panel/menu.c:355
 #, fuzzy
 msgid "Desktop entry properties"
 msgstr "Eigenschappen van bureaubladobject"
 
-#: panel/menu.c:426
+#: panel/menu.c:421
 msgid "Add this launcher to panel"
 msgstr "Voeg deze snelkoppeling toe aan het panel"
 
-#: panel/menu.c:434
+#: panel/menu.c:429
 msgid "Add this as drawer to panel"
-msgstr "Voeg deze bureaubladmap toe aan het panel"
+msgstr "Voeg dit subpanel toe aan het panel"
 
-#: panel/menu.c:442
+#: panel/menu.c:437
 msgid "Add this as menu to panel"
-msgstr "Voeg dit menu toe aan het panel"
+msgstr "Voeg dit als menu toe aan het panel"
 
-#: panel/menu.c:467
+#: panel/menu.c:462
 msgid "Properties ..."
 msgstr "Eigenschappen..."
 
-#: panel/menu.c:657 panel/menu.c:728
+#: panel/menu.c:657 panel/menu.c:729
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: panel/menu.c:858
 msgid "Can't get goad_id from desktop entry!"
-msgstr "'goad_id'van bureaubladobject kan niet verkregen worden"
+msgstr "'goad_id'van bureaubladobject kan niet verkregen worden!"
 
-#: panel/menu.c:1171 panel/menu.c:2817
-msgid "Menu"
-msgstr ""
-
-#: panel/menu.c:1440
+#: panel/menu.c:1448
 msgid "Applets"
 msgstr ""
 
-#: panel/menu.c:1567 panel/panel_config.c:877
+#: panel/menu.c:1575 panel/panel_config.c:877
 #, fuzzy
 msgid "Edge panel"
-msgstr "Rand-panel"
+msgstr "Randpanel"
 
-#: panel/menu.c:1574 panel/panel_config.c:883
+#: panel/menu.c:1582 panel/panel_config.c:883
 #, fuzzy
 msgid "Corner panel"
-msgstr "Hoek-panel"
+msgstr "Hoekpanel"
 
-#: panel/menu.c:1593 panel/menu.c:1597 panel/menu.c:1640 panel/menu.c:2320
+#: panel/menu.c:1601 panel/menu.c:1605 panel/menu.c:1648 panel/menu.c:2370
 #, fuzzy
 msgid "System menus"
 msgstr "Systeemmenu's"
 
-#: panel/menu.c:1649 panel/menu.c:1651 panel/menu.c:2297 panel/menu.c:2331
-#: panel/menu.c:2334
+#: panel/menu.c:1657 panel/menu.c:1659 panel/menu.c:2347 panel/menu.c:2381
+#: panel/menu.c:2384
 #, fuzzy
 msgid "User menus"
 msgstr "Gebruikersmenu's"
 
-#: panel/menu.c:1659 panel/menu.c:1661 panel/menu.c:2267 panel/menu.c:2304
-#: panel/menu.c:2346 panel/menu.c:2356
+#: panel/menu.c:1667 panel/menu.c:1669 panel/menu.c:2314 panel/menu.c:2354
+#: panel/menu.c:2396 panel/menu.c:2406
 #, fuzzy
 msgid "Red Hat menus"
 msgstr "RedHat menu's"
 
-#: panel/menu.c:1679
+#: panel/menu.c:1687
 msgid "Remove this panel"
 msgstr "Verwijder dit panel"
 
-#: panel/menu.c:1819
+#: panel/menu.c:1827
 msgid "Add applet"
 msgstr "Applet toevoegen"
 
-#: panel/menu.c:1828
+#: panel/menu.c:1836
 msgid "Add new panel"
 msgstr "Toevoegen nieuw panel"
 
-#: panel/menu.c:1836
-msgid "Convert to corner panel"
-msgstr "Omzetten naar hoek-panel"
-
 #: panel/menu.c:1844
-msgid "Convert to edge panel"
-msgstr "Omzetten naar rand-panel"
+msgid "Convert to corner panel"
+msgstr "Omzetten naar hoekpanel"
 
-#: panel/menu.c:1856
+#: panel/menu.c:1852
+msgid "Convert to edge panel"
+msgstr "Omzetten naar randpanel"
+
+#: panel/menu.c:1871
 msgid "Add main menu"
 msgstr "Toevoegen hoofdmenu"
 
-#: panel/menu.c:1863
+#: panel/menu.c:1878
 #, fuzzy
 msgid "Add drawer"
-msgstr "Bureaubladmap toevoegen"
+msgstr "Subpanel toevoegen"
 
-#: panel/menu.c:1871
+#: panel/menu.c:1886
 msgid "Add log out button"
 msgstr "Toevoegen uitlogknop"
 
-#: panel/menu.c:1879
+#: panel/menu.c:1894
 msgid "Add swallowed app"
 msgstr "Toevoegen ingeslikte applicatie"
 
-#: panel/menu.c:1885
+#: panel/menu.c:1900
 msgid "Add new launcher"
-msgstr "Toevoegen nieuwe bureaubladmap"
+msgstr "Toevoegen nieuwe snelkoppeling"
 
-#: panel/menu.c:1896
+#: panel/menu.c:1911
 msgid "This panel properties..."
 msgstr "Eigenschappen van dit panel..."
 
-#: panel/menu.c:1906
+#: panel/menu.c:1921
 msgid "Global properties..."
 msgstr "Algemene eigenschappen..."
 
-#: panel/menu.c:1934
+#: panel/menu.c:1955
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/menu.c:1941
+#: panel/menu.c:1962
 msgid "Lock screen"
 msgstr "Vergrendelen beeldscherm"
 
-#: panel/menu.c:1962
+#: panel/menu.c:1983
 #, fuzzy
 msgid "About GNOME..."
 msgstr "Over GNOME..."
 
-#: panel/menu.c:2571
+#: panel/menu.c:2624
 msgid "Can't open directory, using main menu!"
 msgstr "Directory kan niet geopend worden via het hoofdmenu!"
 
-#: panel/menu.c:2700
+#: panel/menu.c:2752
 msgid "In a submenu"
 msgstr "In een submenu"
 
-#: panel/menu.c:2712
+#: panel/menu.c:2765
 #, fuzzy
 msgid "On the main menu"
 msgstr "In het hoofdmenu"
 
-#: panel/menu.c:2734
+#: panel/menu.c:2789
 msgid "Menu properties"
 msgstr "Menu-eigenschappen"
 
-#: panel/menu.c:2741
+#: panel/menu.c:2796
 msgid "Menu type"
 msgstr "Menutype"
 
-#: panel/menu.c:2748 panel/menu.c:2768
+#: panel/menu.c:2803 panel/menu.c:2823
 #, fuzzy
 msgid "Main menu"
 msgstr "Hoofdmenu"
 
-#: panel/menu.c:2759 panel/menu.c:2791
+#: panel/menu.c:2814 panel/menu.c:2846
 #, fuzzy
 msgid "Normal menu"
 msgstr "Gewoon menu"
 
-#: panel/menu.c:2779
+#: panel/menu.c:2834
 #, fuzzy
 msgid "System menu: "
 msgstr "Systeemmenu: "
 
-#: panel/menu.c:2783
+#: panel/menu.c:2838
 #, fuzzy
 msgid "User menu: "
 msgstr "Gebruikersmenu: "
 
-#: panel/menu.c:2787
+#: panel/menu.c:2842
 msgid "Red Hat menu (if found): "
 msgstr "RedHat menu (indien gevonden): "
 
-#: panel/menu.c:2801
+#: panel/menu.c:2856
 msgid "Menu path"
 msgstr "Menupad"
 
@@ -2561,15 +3118,6 @@ msgstr "Menupad"
 #: panel/panel_config.c:271 panel/panel_config.c:443
 msgid "Position"
 msgstr "Positie"
-
-#. Top Position
-#: panel/panel_config.c:284
-msgid "Top"
-msgstr "Bovenrand"
-
-#: panel/panel_config.c:295
-msgid "Bottom"
-msgstr "Onderrand"
 
 #. Auto-hide/stayput frame
 #: panel/panel_config.c:345
@@ -2581,7 +3129,7 @@ msgstr "Opties voor minimaliseren"
 #: panel/panel_config.c:356
 #, fuzzy
 msgid "Auto hide"
-msgstr "AutoVerberg"
+msgstr "Automatisch verbergen"
 
 #. Hidebuttons enable
 #: panel/panel_config.c:367 panel/panel_config.c:568
@@ -2617,15 +3165,6 @@ msgstr "Zuid-Oost"
 msgid "Orientation"
 msgstr "Oriëntatie"
 
-#. Horizontal
-#: panel/panel_config.c:532
-msgid "Horizontal"
-msgstr "Horizontaal"
-
-#: panel/panel_config.c:545
-msgid "Vertical"
-msgstr "Verticaal"
-
 #. Hidebuttons frame
 #: panel/panel_config.c:556
 msgid "Hidebutton options"
@@ -2645,14 +3184,10 @@ msgstr "Standaard"
 msgid "Pixmap"
 msgstr "Afbeelding"
 
-#: panel/panel_config.c:702
-msgid "Color"
-msgstr "Kleur"
-
 #. image frame
 #: panel/panel_config.c:708
 msgid "Image file"
-msgstr "Afbeelding"
+msgstr "Afbeeldingsbestand"
 
 #: panel/panel_config.c:737
 msgid "Scale image to fit panel"
@@ -2672,7 +3207,7 @@ msgstr "Animaties inschakelen"
 #: panel/panel_config_global.c:200
 #, fuzzy
 msgid "Auto-hide animation speed"
-msgstr "AutoVerberg animatiesnelheid"
+msgstr "Animatiesnelheid automatisch verbergen"
 
 #. ExplicitHide Animation step_size scale frame
 #: panel/panel_config_global.c:211
@@ -2684,19 +3219,19 @@ msgstr "Snelheid handmatig verbergen"
 #: panel/panel_config_global.c:222
 #, fuzzy
 msgid "Drawer animation speed"
-msgstr "Bureaubladmap animatiesnelheid"
+msgstr "Subpanel animatiesnelheid"
 
 #. Minimize Delay scale frame
 #: panel/panel_config_global.c:233
 #, fuzzy
 msgid "Auto-hide minimize delay (ms)"
-msgstr "AutoVerberg-vertraging (ms)"
+msgstr "Vertraging bij automatisch verbergen (ms)"
 
 #. Minimized size scale frame
 #: panel/panel_config_global.c:240
 #, fuzzy
 msgid "Auto-hide minimized size (pixels)"
-msgstr "AutoVerberg restgrootte  (pixels)"
+msgstr "Restgrootte bij automatisch verbergen (pixels)"
 
 #. Enable tiles frame
 #: panel/panel_config_global.c:308 panel/panel_config_global.c:336
@@ -2746,75 +3281,85 @@ msgstr "Menu's"
 #. Small Icons
 #: panel/panel_config_global.c:432
 msgid "Show small icons"
-msgstr "Toon kleine ikonen"
+msgstr "Toon kleine pictogrammen"
 
 #. Dot Buttons
 #: panel/panel_config_global.c:442
 #, fuzzy
 msgid "Show ... buttons"
-msgstr "Toom ... knoppen"
+msgstr "Toon ... knoppen"
+
+#. Off Panel Popup menus
+#: panel/panel_config_global.c:452
+msgid "Show popup menus outside of panels"
+msgstr "Toon popup-menu's buiten panels"
 
 #. Movement frame
-#: panel/panel_config_global.c:452
+#: panel/panel_config_global.c:462
 msgid "Movement"
 msgstr "Beweging"
 
 #. Switched
-#: panel/panel_config_global.c:463
+#: panel/panel_config_global.c:473
 msgid "Switched movement"
 msgstr "Geschakelde beweging"
 
-#: panel/panel_config_global.c:475
+#: panel/panel_config_global.c:485
 msgid "Free movement (doesn't disturb other applets)"
 msgstr "Vrije beweging (laat andere applets onberoerd)"
 
 #. Prompt before log out
-#: panel/panel_config_global.c:496
+#: panel/panel_config_global.c:506
 msgid "Prompt before logout"
 msgstr "Vraag bevestiging bij uitloggen"
 
 #. Minimize Delay scale frame
-#: panel/panel_config_global.c:506
+#: panel/panel_config_global.c:516
 #, fuzzy
 msgid "Applet padding"
 msgstr "Applet-uitvulling"
 
-#: panel/panel_config_global.c:522
+#: panel/panel_config_global.c:532
 #, fuzzy
 msgid "Launcher icon"
-msgstr "Snelkoppelingsikoon"
+msgstr "Snelkoppelingspictogram"
 
-#: panel/panel_config_global.c:523
+#: panel/panel_config_global.c:533
 #, fuzzy
 msgid "Drawer icon"
-msgstr "Bureaubladmapikoon"
+msgstr "Subpanel pictogram"
 
-#: panel/panel_config_global.c:524
+#: panel/panel_config_global.c:534
 msgid "Menu icon"
-msgstr "Menu-ikoon"
+msgstr "Menu-pictogram"
 
-#: panel/panel_config_global.c:543
+#: panel/panel_config_global.c:535
+#, fuzzy
+msgid "Logout icon"
+msgstr "Uitlog-pictogram"
+
+#: panel/panel_config_global.c:554
 #, fuzzy
 msgid "Global panel configuration"
 msgstr "Algemene panel-configuratie"
 
-#: panel/panel_config_global.c:551
+#: panel/panel_config_global.c:562
 #, fuzzy
 msgid "Animation"
 msgstr "Animatie"
 
-#: panel/panel_config_global.c:557
+#: panel/panel_config_global.c:568
 #, fuzzy
 msgid "General icon settings"
-msgstr "Algemene ikooneigenschappen"
+msgstr "Algemene pictogrameigenschappen"
 
-#: panel/session.c:650
+#: panel/session.c:664
 msgid "Really log out?"
 msgstr "Weet u zeker dat u wilt uitloggen?"
 
-#: panel/session.c:665
+#: panel/session.c:679
 msgid "Ask next time"
-msgstr "Vraag de volgende keer"
+msgstr "Stel vraag de volgende keer"
 
 #: panel/swallow.c:208
 msgid "Create swallow applet"
@@ -2832,6 +3377,41 @@ msgstr "Opdracht (optioneel)"
 #, fuzzy
 msgid "Height"
 msgstr "Hoogte."
+
+#~ msgid "_Quit"
+#~ msgstr "Afsluiten"
+
+#, fuzzy
+#~ msgid "_About..."
+#~ msgstr "Info..."
+
+#, fuzzy
+#~ msgid "P_references..."
+#~ msgstr "Eigenschappen..."
+
+#~ msgid "Preferences"
+#~ msgstr "Eigenschappen"
+
+#, fuzzy
+#~ msgid "_Close"
+#~ msgstr "Sluiten"
+
+#~ msgid "Close window"
+#~ msgstr "Venster sluiten"
+
+#, fuzzy
+#~ msgid "E_xit"
+#~ msgstr "Afsluiten"
+
+#~ msgid "Exit all windows"
+#~ msgstr "Sluit alle vensters"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "Info"
+
+#~ msgid "Info about this program"
+#~ msgstr "Informatie over dit programma"
 
 #, fuzzy
 #~ msgid "Help & About..."
@@ -2857,155 +3437,8 @@ msgstr "Hoogte."
 #~ msgstr "Uitloggen"
 
 #, fuzzy
-#~ msgid "The GNOME KB Applet"
-#~ msgstr "De GNOME KB Applet"
-
-#, fuzzy
 #~ msgid "Icon Selection"
-#~ msgstr "Ikoonselectie"
-
-#, fuzzy
-#~ msgid "GKB settings"
-#~ msgstr "GKB instellingen"
-
-#~ msgid "Background Properties"
-#~ msgstr "Achtergrondinstellingen"
-
-#~ msgid "Bell Properties"
-#~ msgstr "Beleigenschappen"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Toetsenbordeigenschappen"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Muiseigenschappen"
-
-#~ msgid "Gnome Look and Feel Properties"
-#~ msgstr "Gnome Look&Feel eigenschappen"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Stel parameters in en stop"
-
-#~ msgid "Flat"
-#~ msgstr "Vlak"
-
-#~ msgid "Gradient"
-#~ msgstr "Verlopend"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Achtergrondkeuze"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Achtergrond"
-
-#~ msgid " Browse... "
-#~ msgstr " Zoeken..."
-
-#~ msgid "none"
-#~ msgstr "geen"
-
-#~ msgid "Scaled (keep aspect)"
-#~ msgstr "Geschaald (x/y constant)"
-
-#~ msgid "Centered"
-#~ msgstr "Gecentreerd"
-
-#~ msgid "Tiled"
-#~ msgstr "Getegeld"
-
-#~ msgid " Background "
-#~ msgstr " Achtergrond "
-
-#~ msgid "IMAGE"
-#~ msgstr "AFBEELDING"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Achtergrondafbeelding instellen"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Geeft de achtergrondkleur aan"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENT"
-
-#~ msgid "Duration"
-#~ msgstr "Duur"
-
-#~ msgid "Test"
-#~ msgstr "Testen"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Automatisch herhalen"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Aanzetten automatisch herhalen"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Herhalingsaantal"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Herhalingsvertraging"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Toetsaanslag"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klik bij toetsaanslag"
-
-#~ msgid "Click volume"
-#~ msgstr "Klik volume"
-
-#~ msgid "Keyboard"
-#~ msgstr "Toetsenbord"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Muisknoppen"
-
-#~ msgid "Left handed"
-#~ msgstr "Linkshandig"
-
-#~ msgid "Right handed"
-#~ msgstr "Rechtshandig"
-
-#~ msgid "Mouse motion"
-#~ msgstr "Muisbeweging"
-
-#~ msgid "Acceleration"
-#~ msgstr "Versnelling"
-
-#~ msgid "Fast"
-#~ msgstr "Vlug"
-
-#~ msgid "Slow"
-#~ msgstr "Traag"
-
-#~ msgid "Threshold"
-#~ msgstr "Drempelwaarde"
-
-#~ msgid "Large"
-#~ msgstr "Groot"
-
-#~ msgid "Small"
-#~ msgstr "Klein"
-
-#~ msgid "Mouse"
-#~ msgstr "Muis"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Knoppen links uitlijnen"
-
-#~ msgid "Dialog buttons"
-#~ msgstr "Knoppen rechts uitlijnen"
-
-#~ msgid "Dialog position"
-#~ msgstr "Dialoogpositie"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialoogknoppen hebben ikonen"
-
-#~ msgid "Application"
-#~ msgstr "Toepassing"
+#~ msgstr "Pictogramselectie"
 
 #, fuzzy
 #~ msgid "Repeat Delay"
@@ -3037,7 +3470,7 @@ msgstr "Hoogte."
 
 #, fuzzy
 #~ msgid "_Help with GNOME..."
-#~ msgstr "GNOME Help"
+#~ msgstr "GNOME _Help"
 
 #, fuzzy
 #~ msgid "XID"
