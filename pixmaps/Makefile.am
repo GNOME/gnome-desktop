@@ -32,10 +32,6 @@ BITMAPS     = \
 	gnome-logo-icon.png			\
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
-	gnome-menu-down.png			\
-	gnome-menu-left.png			\
-	gnome-menu-right.png			\
-	gnome-menu-up.png			\
 	gnome-mnemonic.png			\
 	gnome-money.png				\
 	gnome-networktool.png			\
