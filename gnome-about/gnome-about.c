@@ -251,9 +251,9 @@ new_sparkles_timeout (GnomeCanvas* canvas)
 }
 
 static void
-unref_gdk_pixbuf (GtkObject *object, gpointer data)
+unref_gdk_pixbuf (GObject *object, gpointer data)
 {
-	gdk_pixbuf_unref (data);
+	g_object_unref (data);
 }
 
 gboolean
@@ -261,7 +261,7 @@ cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
 	if (event->type == GDK_BUTTON_PRESS) {
 		if (howmuch >= 5) {
-			gchar *filename = gnome_datadir_file ("gnome-about/contributors.dat");
+			gchar *filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_LIBDIR, "gnome-about/contributors.dat", TRUE, NULL);
 			if (filename)
 				gnome_sound_play (filename);
 
@@ -386,19 +386,23 @@ scroll (gpointer data)
 	update_rect.height = area->allocation.height;
 	
 
-	gtk_widget_draw (area, &update_rect);
+	gtk_widget_queue_draw_area (area, 
+				    (&update_rect)->x,
+				    (&update_rect)->y,
+				    (&update_rect)->width,
+				    (&update_rect)->height);
 	return TRUE;
 }
 
 gboolean
 cb_exposed (GtkWidget *widget, GdkEventExpose *event)
 {
-	gdk_draw_pixmap (widget->window,
-			 widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
-			 pixmap,
-			 event->area.x, event->area.y,
-			 event->area.x, event->area.y,
-			 event->area.width, event->area.height);
+	gdk_draw_drawable (widget->window,
+			   widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
+			   pixmap,
+			   event->area.x, event->area.y,
+			   event->area.x, event->area.y,
+			   event->area.width, event->area.height);
 	return TRUE;
 }
 
@@ -410,7 +414,7 @@ cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 	{
 		/* Stop display from "jumping back" to beginning on window resize */
 		y = MIN(y, widget->allocation.height + font->ascent);
-		gdk_pixmap_unref (pixmap);
+		g_object_unref (pixmap);
 	}
 	else 
 	{
@@ -458,15 +462,13 @@ main (gint argc, gchar *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_init ("gnome-about","1.0", argc, argv);
+	gnome_program_init ("gnome-about","1.0", LIBGNOMEUI_MODULE, argc, argv, NULL);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-logo-icon-transparent.png");
-	gdk_rgb_init ();
-	gtk_widget_set_default_colormap (gdk_rgb_get_cmap ());
-	gtk_widget_set_default_visual (gdk_rgb_get_visual ());
+	gtk_widget_set_default_colormap (gdk_rgb_get_colormap ());
 	
-	window = gnome_dialog_new (_("About GNOME"),
-				   GNOME_STOCK_BUTTON_OK,
-				   NULL);
+	window = gtk_dialog_new_with_buttons (_("About GNOME"), NULL, 0,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,	
+				   	      NULL);
 
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 
@@ -487,13 +489,13 @@ main (gint argc, gchar *argv[])
 	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask,
 						    NULL,
 						    (char **)logo_xpm);
-	gtkpixmap = gtk_pixmap_new (logo_pixmap, logo_mask);
+	gtkpixmap = gtk_image_new_from_pixmap (logo_pixmap, logo_mask);
 
 	im = gdk_pixbuf_new_from_xpm_data (logo_xpm);
 	canvas = gnome_canvas_new ();
-	gtk_widget_set_usize (canvas,
-			      gdk_pixbuf_get_width (im),
-			      gdk_pixbuf_get_height (im));
+	gtk_widget_set_size_request (canvas,
+			             gdk_pixbuf_get_width (im),
+			             gdk_pixbuf_get_height (im));
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0,
 					gdk_pixbuf_get_width (im),
 					gdk_pixbuf_get_height (im));
@@ -518,23 +520,23 @@ main (gint argc, gchar *argv[])
 				       NULL);
 	gnome_canvas_item_lower_to_bottom (image2);
 	
-	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
-			    GTK_SIGNAL_FUNC (cb_quit), im);
-	gtk_signal_connect (GTK_OBJECT (window), "destroy",
-			    GTK_SIGNAL_FUNC (cb_quit), im);
-	gtk_signal_connect (GTK_OBJECT (window), "key_press_event",
-			    GTK_SIGNAL_FUNC (cb_keypress), NULL);
+	g_signal_connect (G_OBJECT (window), "delete_event",
+			  G_CALLBACK (cb_quit), im);
+	g_signal_connect (G_OBJECT (window), "destroy",
+			  G_CALLBACK (cb_quit), im);
+	g_signal_connect (G_OBJECT (window), "key_press_event",
+			  G_CALLBACK (cb_keypress), NULL);
 
-	gtk_signal_connect (GTK_OBJECT (image), "destroy",
-			    GTK_SIGNAL_FUNC (unref_gdk_pixbuf), im);
-	gtk_signal_connect (GTK_OBJECT (image), "event",
-			    GTK_SIGNAL_FUNC (cb_clicked), NULL);
+	g_signal_connect (G_OBJECT (image), "destroy",
+			  G_CALLBACK (unref_gdk_pixbuf), im);
+	g_signal_connect (G_OBJECT (image), "event",
+			  G_CALLBACK (cb_clicked), NULL);
 
 	new_sparkle_timer = gtk_timeout_add (1300,
 					     (GtkFunction) new_sparkles_timeout,
 					     canvas);
 
-	gtk_container_border_width (GTK_CONTAINER (GNOME_DIALOG (window)->vbox), GNOME_PAD);
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (window)->vbox), GNOME_PAD);
 
 	hbox = gtk_hbox_new (FALSE, 10);
 	vbox = gtk_vbox_new (FALSE, 10);
@@ -545,20 +547,24 @@ main (gint argc, gchar *argv[])
 
 	area = gtk_drawing_area_new ();
 	max_width = get_max_width();
-	gtk_drawing_area_size (GTK_DRAWING_AREA (area),
-			       max_width<320 ? 320 : max_width, 160);
-	gtk_widget_draw (area, NULL);
+	if (max_width < 320) 
+		GTK_WIDGET (area)->requisition.width = 320;
+	else
+		GTK_WIDGET (area)->requisition.width = max_width;
+	GTK_WIDGET (area)->requisition.height = 160;
+	gtk_widget_queue_resize (GTK_WIDGET (area));
+	gtk_widget_queue_draw (area);
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), area);
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
 
-	gtk_box_pack_start_defaults (GTK_BOX (GNOME_DIALOG (window)->vbox), hbox);
+	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
 
-	gtk_signal_connect (GTK_OBJECT (area), "expose_event",
-			    GTK_SIGNAL_FUNC (cb_exposed), NULL);
-	gtk_signal_connect (GTK_OBJECT (area), "configure_event",
-			    GTK_SIGNAL_FUNC (cb_configure), NULL);
+	g_signal_connect (G_OBJECT (area), "expose_event",
+			  G_CALLBACK (cb_exposed), NULL);
+	g_signal_connect (G_OBJECT (area), "configure_event",
+			  G_CALLBACK (cb_configure), NULL);
 
 	/* horizontal box for URLs */
 	hbox = gtk_hbox_new (TRUE, 10);
@@ -578,10 +584,10 @@ main (gint argc, gchar *argv[])
 					    _("GNOME Developers' Site")),
 			    TRUE, FALSE, 0);
 	
-	gtk_box_pack_start_defaults (GTK_BOX (GNOME_DIALOG (window)->vbox), hbox);
+	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
 
-	gtk_signal_connect (GTK_OBJECT (window), "clicked",
-			    GTK_SIGNAL_FUNC (cb_quit), NULL);
+	g_signal_connect (G_OBJECT (window), "response",
+			  G_CALLBACK (cb_quit), NULL);
 
 	scroll_timer = gtk_timeout_add (50, scroll, NULL);
 
