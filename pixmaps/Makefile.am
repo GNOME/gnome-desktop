@@ -47,6 +47,7 @@ BITMAPS     = \
 	gnome-logo-icon.png			\
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
+	gnome-mailcheck.png         \
 	gnome-mnemonic.png			\
 	gnome-modem.png             \
 	gnome-money.png				\
