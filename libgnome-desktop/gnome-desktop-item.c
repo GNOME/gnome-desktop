@@ -443,7 +443,6 @@ ditem_load_other_sections(GnomeDesktopItem *item, const char *data_file,
 			g_hash_table_insert(item->other_attributes,
 					    realkey, value);
 			g_free(key);
-			g_free(value);
 		}
         }
 }
@@ -795,8 +794,8 @@ gnome_desktop_item_unref (GnomeDesktopItem *item)
 
         g_free(item->type);
         g_free(item->exec);
-        g_free(item->type);
         g_free(item->icon_path);
+        g_free(item->location);
 
         if(item->name) {
                 g_hash_table_freeze(item->name);
