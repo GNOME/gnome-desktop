@@ -67,6 +67,9 @@ struct _GnomeDItemEditPrivate {
         GtkWidget *terminal_button;  
 
         GtkWidget *icon_entry;
+
+	/* the directory of the theme for the icon, see bug #119208 */
+	char *icon_theme_dir;
   
         GtkWidget *translations;
         GtkWidget *transl_lang_entry;
@@ -284,16 +287,6 @@ table_attach_label (GtkTable  *table,
         gtk_table_attach(
 		table, label, left, right, top, bottom,
 		GTK_FILL, GTK_FILL, 0, 0);
-}
-
-static GtkWidget *
-label_new (const char *text)
-{
-        GtkWidget *label;
-
-        label = gtk_label_new (text);
-        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-        return label;
 }
 
 static GtkWidget *
@@ -983,8 +976,22 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), 
                            cs ? cs : "");
 
+	cs = gnome_desktop_item_get_string (ditem, GNOME_DESKTOP_ITEM_ICON);
         tmpstr = gnome_desktop_item_get_icon (ditem, NULL);
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), tmpstr);
+
+	g_free (dee->_priv->icon_theme_dir);
+	if (cs != NULL &&  ! g_path_is_absolute (cs)) {
+		/* this is a themed icon, see bug #119208 */
+		dee->_priv->icon_theme_dir = g_path_get_dirname (tmpstr);
+		/* FIXME: what about theme changes when the dialog is up */
+	} else {
+		/* use the default pixmap directory as the standard icon_theme_dir,
+		 * since the standard directory is themed */
+		g_object_get (G_OBJECT (dee->_priv->icon_entry), "pixmap_subdir",
+			      &(dee->_priv->icon_theme_dir), NULL);
+	}
+
 	g_free (tmpstr);
 
         cs = gnome_desktop_item_get_string (ditem, "X-GNOME-DocPath");
@@ -1038,6 +1045,10 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 static const char *
 get_language (void)
 {
+	/* there is some include header problem and we can't include the
+	   gnome i18n header or some such */
+	extern const GList *gnome_i18n_get_language_list (const char *category);
+
 	const GList *list;
 	const GList *l;
 
@@ -1092,8 +1103,20 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
   
 	file = gnome_icon_entry_get_filename (
 			GNOME_ICON_ENTRY (dee->_priv->icon_entry));
-	gnome_desktop_item_set_string (
-			ditem, GNOME_DESKTOP_ITEM_ICON, file);
+	if (file != NULL && file[0] != '\0') {
+		/* if the icon_theme_dir is the same as the directory name of this
+		   icon, then just use the basename as we've just picked another
+		   icon from the theme.  See bug #119208 */
+		char *dn = g_path_get_dirname (file);
+		if (dee->_priv->icon_theme_dir != NULL &&
+		    strcmp (dn, dee->_priv->icon_theme_dir) == 0) {
+			char *base = g_path_get_basename (file);
+			g_free (file);
+			file = base;
+		}
+		g_free (dn);
+	}
+	gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_ICON, file);
 	g_free (file);
 
 	gnome_desktop_item_set_string (
