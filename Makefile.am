@@ -2,7 +2,6 @@ SUBDIRS =			\
 	po 			\
 	idl 			\
 	gnome-desktop 		\
-	gnome-terminal	 	\
 	gnome-about 		\
 	desktop-links		\
 	gsm 			\
@@ -14,14 +13,6 @@ SUBDIRS =			\
 	core-docs		\
 	omf-install		\
 	doc
-
-EXTRA_SUBDIRS =			\
-	 gsm			\
-	 desktop-links		\
-	 help-browser		\
-	 gmenu			\
-	 gnome-edit		\
-	 gnome-hint		
 
 EXTRA_DIST = \
 	gnome-core.spec.in	\
