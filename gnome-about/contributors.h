@@ -29,6 +29,7 @@ static gchar *contributors[] = {
 	"Carlos Amador Bedolla",
 	"Martijn van Beers",
 	"Frank Belew",
+	"Calum Benson",
 	"Jacob Berkman",
 	"Eckehard Berns",
 	"Robert Bihlmeyer",
@@ -189,6 +190,7 @@ static gchar *contributors[] = {
 	N_("Sung-Hyun Nam"),
 	"Karl Nelson",
 	"Asger Alstrup Nielsen",
+	"Seth Nickell",
 	"Eric Nielson",
 	/* If your encodings allows it, use adiaeresis (U00E4) for the 'ae'
 	 * of 'Norbaeck' */
@@ -204,6 +206,7 @@ static gchar *contributors[] = {
 	"Cameron Parish",
 	"Conrad Parker",
 	"Stuart Parmenter",
+	"Nils Pederson",
 	"Havoc Pennington",
 	"Ettore Perazzoli",
 	/* If your encoding allows it, use oacute (U00F3) for the 'o'
@@ -253,6 +256,7 @@ static gchar *contributors[] = {
 	"Josh Sled",
 	"John Slee",
 	"Garrett Smith",
+	"Suzanna Smith",
 	/* not really a person name :) translate its meaning */
 	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
