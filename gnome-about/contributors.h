@@ -39,6 +39,7 @@ static gchar *contributors[] = {
 	"Dave Camp",
 	"Didier Carlier",
 	"Anders Carlsson",
+	"Chema Celorio",
 	"Damon Chaplin",
 	"Kevin Charter",
 	"Kenneth Rohde Christiansen",
