@@ -6,6 +6,7 @@ gboolean cb_quit      (GtkWidget *widget, gpointer data);
 gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
 gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
 gboolean cb_keypress (GtkWidget *widget, GdkEventKey *event);
+gboolean cb_clicked (GtkWidget *widget, GdkEvent *event);
 gint     scroll       (gpointer data);
 
 GtkWidget *area;
@@ -241,6 +242,23 @@ free_imlib_image (GtkObject *object, gpointer data)
 }
 
 gboolean
+cb_clicked (GtkWidget *widget, GdkEvent *event)
+{
+	if (event->type == GDK_BUTTON_PRESS) {
+		if (howmuch >= 5) {
+			gchar *filename = gnome_datadir_file ("gnome-about/authors.dat");
+			if (filename)
+				gnome_sound_play (filename);
+
+			g_free (filename);
+		}
+
+	}
+
+	return FALSE;
+}
+
+gboolean
 cb_keypress (GtkWidget *widget, GdkEventKey *event)
 {
 	if (howmuch >= 5)
@@ -447,6 +465,8 @@ main (gint argc, gchar *argv[])
 				       NULL);
 	gtk_signal_connect (GTK_OBJECT (image), "destroy",
 			    GTK_SIGNAL_FUNC (free_imlib_image), im);
+	gtk_signal_connect (GTK_OBJECT (image), "event",
+			    GTK_SIGNAL_FUNC (cb_clicked), NULL);
 	gtk_timeout_add (1300, (GtkFunction) new_sparkles_timeout, canvas);
 
 	gtk_container_border_width (GTK_CONTAINER (window), 10);
