@@ -114,7 +114,50 @@ dnl panel/modemlights
 P_MODEMLIGHTS=
 AC_CHECK_HEADERS(net/ppp_defs.h,[P_MODEMLIGHTS=modemlights])
 AM_CONDITIONAL(APPLET_MODEMLIGHTS, test "$P_MODEMLIGHTS" = "modemlights")
- 
+
+dnl fvwm-pager
+dnl we need the fvwm sources to build it
+AC_ARG_WITH(fvwm2,
+[  --with-fvwm2=DIRECTORY
+			top level dir of fvwm2 with libs and includes], [
+	FVWM_PAGER="fvwm-pager"], [
+	FVWM_PAGER=""])
+
+echo "with_fvwm2=X${with_fvwm2}X"
+echo "FVWM_PAGER=X${FVWM_PAGER}X"
+if test ! -z $FVWM_PAGER
+then
+
+	for x_dir in /usr/local/src/fvwm2 /usr/local/src/fvwm-2.0.46 /disk/compiles/fvwm-2.0.46 ${with_fvwm2}
+	do
+		AC_MSG_CHECKING("for fvwm include files in ${x_dir}")
+		if test -f "${x_dir}/fvwm/module.h"
+		then
+			AC_MSG_RESULT("found");
+			break;
+		else
+			AC_MSG_RESULT("not found");
+		fi
+	done
+
+	AC_MSG_CHECKING("for fvwm library ${x_dir}/libs/libfvwm2.a")
+	if test -f ${x_dir}/libs/libfvwm2.a
+	then
+		AC_MSG_RESULT("found")
+	else
+		AC_MSG_ERROR(["You have to compile fvwm2 so that we can use the fvwm2 library.\
+		This library is neceassry to compile fvwm-pager"])
+	fi
+
+	FVWM2INCLUDE="-I${x_dir}/"
+	FVWM2LIBS="-L${x_dir}/libs -lfvwm2"
+	AC_SUBST(FVWM2INCLUDE)
+	AC_SUBST(FVWM2LIBS)
+fi
+
+AC_SUBST(FVWM_PAGER)
+
+
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
 oLIBS="$LIBS"
@@ -159,6 +202,7 @@ applets/fifteen/Makefile
 applets/battery/Makefile
 applets/charpick/Makefile
 applets/winlist/Makefile
+applets/fvwm-pager/Makefile
 core-docs/Makefile
 desktop-links/Makefile
 desktop-properties/Makefile
