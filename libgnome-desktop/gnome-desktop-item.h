@@ -30,7 +30,7 @@
 #include <glib.h>
 #include <libgnomebase/gnome-defs.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 typedef enum {
 	/* Start a terminal to run this */
@@ -150,6 +150,6 @@ void                   gnome_desktop_item_set_location    (GnomeDesktopItem     
                                                            const char                 *location);
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* GNOME_DITEM_H */
