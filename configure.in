@@ -66,6 +66,12 @@ AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
 
 dnl
+dnl Gnome Terminal
+dnl
+ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
+AC_SUBST(ZVT_LIBS)
+
+dnl
 dnl Fvwm pager
 dnl
 AC_CHECK_HEADER(fvwm.h, fvwm=true, fvwm=false)
