@@ -89,6 +89,7 @@ static void gnome_ditem_edit_class_init   (GnomeDItemEditClass *klass);
 static void gnome_ditem_edit_init         (GnomeDItemEdit      *messagebox);
 
 static void gnome_ditem_edit_destroy      (GtkObject *dee);
+static void gnome_ditem_edit_finalize     (GObject *dee);
 
 static void gnome_ditem_edit_sync_display (GnomeDItemEdit * dee,
 					   GnomeDesktopItem * ditem);
@@ -140,11 +141,13 @@ static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
 {
         GtkObjectClass *object_class;
+        GObjectClass *gobject_class;
         GnomeDItemEditClass * ditem_edit_class;
 
         ditem_edit_class = (GnomeDItemEditClass*) klass;
 
         object_class = (GtkObjectClass*) klass;
+        gobject_class = (GObjectClass*) klass;
 
         parent_class = gtk_type_class (gtk_object_get_type ());
   
@@ -178,6 +181,7 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
                                       LAST_SIGNAL);
 
         object_class->destroy = gnome_ditem_edit_destroy;
+        gobject_class->finalize = gnome_ditem_edit_finalize;
         ditem_edit_class->changed = NULL;
 }
 
@@ -760,9 +764,22 @@ gnome_ditem_edit_destroy (GtkObject *dee)
 
         if (GTK_OBJECT_CLASS(parent_class)->destroy)
                 (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dee);
+}
+
+static void
+gnome_ditem_edit_finalize (GObject *dee)
+{
+        GnomeDItemEdit *de;
+        g_return_if_fail(dee != NULL);
+        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
+
+        de = GNOME_DITEM_EDIT(dee);
 
 	g_free(de->_priv);
 	de->_priv = NULL;
+
+        if (G_OBJECT_CLASS(parent_class)->finalize)
+                (* (G_OBJECT_CLASS(parent_class)->finalize))(dee);
 }
 
 /* set sensitive for directory/other type of a ditem */
