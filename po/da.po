@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core CVS > 1.0.40\n"
-"POT-Creation-Date: 2000-03-24 10:59+0100\n"
+"POT-Creation-Date: 2000-03-27 15:08-0500\n"
 "PO-Revision-Date: 2000-03-24 00:40+01:00\n"
 "Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
@@ -14,389 +14,2666 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/desk-guide/deskguide_applet.c:71
+#: panel/swallow.c:168
+msgid "Create swallow applet"
+msgstr "Opret en slugt applet"
+
+#: panel/swallow.c:183
+msgid "Title of application to swallow"
+msgstr "Titel på applikation som skal sluges"
+
+#: panel/swallow.c:193
+msgid "Command (optional)"
+msgstr "Kommando (valgfri)"
+
+#: applets/fish/fish.c:394 applets/gen_util/mailcheck.c:896
+#: gnome-hint/gnome-hint-properties.c:162 gnome-terminal/gnome-terminal.c:1280
+#: panel/menu-properties.c:397 panel/panel-util.c:101 panel/panel-util.c:141
+#: panel/panel-util.c:181 panel/panel_config.c:1074 panel/swallow.c:195
+msgid "Browse"
+msgstr "Gennemse"
+
+#: panel/swallow.c:204
+msgid "Width"
+msgstr "Bredde"
+
+#: panel/swallow.c:217
+msgid "Height"
+msgstr "Højde"
+
+#: applets/desk-guide/deskguide_applet.c:235 applets/fish/fish.c:767
+#: applets/gen_util/mailcheck.c:1333 applets/tasklist/tasklist_applet.c:872
+#: gnome-terminal/gnome-terminal.c:1661 gsm/session-properties.c:179
+#: help-browser/window.c:234 panel/drawer.c:414 panel/launcher.c:526
+#: panel/logout.c:72 panel/logout.c:110 panel/menu.c:4435 panel/status.c:367
+#: panel/swallow.c:362
+msgid "Help"
+msgstr "Hjælp"
+
+#: panel/session.c:210
+msgid ""
+"An applet is not responding to a save request.\n"
+"Remove the applet or continue waiting?"
+msgstr ""
+"En applet svarer ikke på en gemmeforespørgsel.\n"
+"Fjern appletten eller bliv ved at vente?"
+
+#: panel/session.c:221
+msgid "Remove applet"
+msgstr "Fjern applet"
+
+#: panel/session.c:224
+msgid "Continue waiting"
+msgstr "Fortsæt med at vente"
+
+#: panel/session.c:233
+msgid "Timed out on sending session save to an applet"
+msgstr "Det tog for lang tid at sende sessionsgemning til applet"
+
+#: panel/panel_config.c:365
+msgid "Hiding"
+msgstr "Skjuler"
+
+#. Auto-hide
+#: panel/panel_config.c:373
+msgid "Enable Auto-hide"
+msgstr "Brug auto-skjul"
+
+#. Hidebuttons enable
+#: panel/panel_config.c:383
+msgid "Show hide buttons"
+msgstr "Vis skjuleknapper"
+
+#. Arrow enable
+#: panel/panel_config.c:393
+msgid "Show arrows on hide button"
+msgstr "Vis pile på skjuleknap"
+
+#: panel/panel_config.c:444
+msgid "Panel Position"
+msgstr "Panelplacering"
+
+#: panel/panel_config.c:563 panel/panel_config.c:590 panel/panel_config.c:646
+#: panel/panel_config.c:745
+msgid "Size and Position"
+msgstr "Størrelse og placering"
+
+#: panel/panel_config.c:661
+msgid "Orient panel horizontally"
+msgstr "Vend panel vandret"
+
+#: panel/panel_config.c:673
+msgid "Orient panel vertically"
+msgstr "Vend panel lodret"
+
+#: panel/panel_config.c:685
+msgid "Top left corner's position: X"
+msgstr "Placering af øverste venstre hjørne: X"
+
+#: help-browser/gnome-help-browser.c:126 panel/panel_config.c:700
+msgid "Y"
+msgstr "Y"
+
+#: panel/panel_config.c:757
+msgid "Offset from screen edge:"
+msgstr "Afstand fra skærmkant:"
+
+#: panel/panel_config.c:827
+msgid "Panel size:"
+msgstr "Panelstørrelse:"
+
+#: panel/menu.c:3473 panel/panel_config.c:836
+msgid "Tiny (24 pixels)"
+msgstr "Bitte (24 pixler)"
+
+#: panel/menu.c:3474 panel/panel_config.c:844
+msgid "Small (36 pixels)"
+msgstr "Lille (36 pixler)"
+
+#: panel/menu.c:3475 panel/panel_config.c:852
+msgid "Standard (48 pixels)"
+msgstr "Standard (48 pixler)"
+
+#: panel/menu.c:3476 panel/panel_config.c:860
+msgid "Large (64 pixels)"
+msgstr "Stor (64 pixler)"
+
+#: panel/menu.c:3477 panel/panel_config.c:868
+msgid "Huge (80 pixels)"
+msgstr "Enorm (80 pixler)"
+
+#: panel/panel_config.c:882
+msgid ""
+"Note: The panel will size itself to the\n"
+"largest applet in the panel, and that\n"
+"not all applets obey these sizes."
+msgstr ""
+"Bemærk: Panelet vil få samme størrelse som\n"
+"den største applet og ikke alle appletter\n"
+"retter sig efter disse størrelser."
+
+#: panel/panel_config.c:1008
+msgid "Background Type: "
+msgstr "Baggrundstype: "
+
+#: panel/menu.c:3482 panel/panel_config.c:1016
+msgid "Standard"
+msgstr "Standard"
+
+#. color frame
+#: panel/menu.c:3483 panel/panel_config.c:1020 panel/panel_config.c:1035
+msgid "Color"
+msgstr "Farve"
+
+#: panel/menu.c:3484 panel/panel_config.c:1024
+msgid "Pixmap"
+msgstr "Billede"
+
+#: panel/panel_config.c:1047
+msgid "Color to use:"
+msgstr "Vælg farve:"
+
+#. image frame
+#: gnome-terminal/gnome-terminal.c:1241 panel/panel_config.c:1062
+msgid "Image"
+msgstr "Billede"
+
+#: panel/panel_config.c:1088
+msgid "Don't scale image to fit"
+msgstr "Skalér ikke billede til at være i panel"
+
+#: panel/panel_config.c:1094
+msgid "Scale image (keep proportions)"
+msgstr "Skalér billede (bevar proportioner)"
+
+#: panel/panel_config.c:1099
+msgid "Stretch image (change proportions)"
+msgstr "Stræk billede (ændr proportioner)"
+
+#: panel/panel_config.c:1114
+msgid "Rotate image for vertical panels"
+msgstr "Vend billede om på lodrette paneler"
+
+#: panel/menu.c:2608 panel/menu.c:3446 panel/panel_config.c:1168
+#: panel/panel_config.c:1278
+msgid "Edge panel"
+msgstr "Kantpanel"
+
+#: panel/menu.c:2616 panel/menu.c:3447 panel/panel_config.c:1175
+#: panel/panel_config.c:1287
+msgid "Aligned panel"
+msgstr "Justeret panel"
+
+#: panel/menu.c:2624 panel/menu.c:3448 panel/panel_config.c:1181
+#: panel/panel_config.c:1296
+msgid "Sliding panel"
+msgstr "Glidende panel"
+
+#: panel/menu.c:2632 panel/menu.c:3449 panel/panel_config.c:1187
+#: panel/panel_config.c:1305
+msgid "Floating panel"
+msgstr "Flydende panel"
+
+#: panel/panel_config.c:1268
+msgid "Panel properties"
+msgstr "Egenskaber for panel"
+
+#: panel/panel_config.c:1323
+msgid "Background"
+msgstr "Baggrund"
+
+#: panel/gnome-panel-properties.c:951 panel/gnome-panel-properties.c:976
+#: panel/panel-util.c:619 panel/panel-util.c:676
+msgid "Disabled"
+msgstr "Slået fra"
+
+#: panel/menu.c:125
+msgid "The GNOME Panel"
+msgstr "GNOME panelet"
+
+#: panel/menu.c:128
+msgid ""
+"This program is responsible for launching other applications, embedding "
+"small applets within itself, world peace, and random X crashes."
+msgstr ""
+"Dette program er ansvarlig for at starte andre applikationer, indlemme små "
+"appletter i sig selv, verdensfreden og vilkårlige X crashes."
+
+#: panel/menu.c:142
+msgid "Can't execute 'About GNOME'"
+msgstr "Kan ikke udføre 'Om GNOME'"
+
+#: panel/menu.c:153 panel/menu.c:1611
+msgid "Can't load entry"
+msgstr "Kunne ikke indlæse element"
+
+#: panel/menu.c:170
+msgid "Can't execute copy (cp)"
+msgstr "Kan ikke køre kopiering (cp)"
+
+#: panel/menu.c:551
+msgid "Cannot create an item with an empty command"
+msgstr ""
+
+#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:557
+msgid "untitled"
+msgstr "unavngivet"
+
+#: panel/menu.c:587
+#, c-format
+msgid "Could not get file from path: %s"
+msgstr "Kunne ikke finde fil i sti: %s"
+
+#: panel/menu.c:591 panel/menu.c:689
+#, c-format
+msgid "Could not open .order file: %s"
+msgstr "kunne ikke åbne .order fil: %s"
+
+#: panel/menu.c:598
+#, fuzzy, c-format
+msgid "Could not open file '%s' for writing"
+msgstr "kunne ikke åbne .order fil: %s"
+
+#: panel/menu.c:618
+msgid "Create menu item"
+msgstr "Opret menuelement"
+
+#: panel/menu.c:661
+#, c-format
+msgid "Could not remove the menu item %s: %s\n"
+msgstr "Kunne ikke fjerne menuelement %s: %s\n"
+
+#: panel/menu.c:668
+#, c-format
+msgid "Could not get file name from path: %s"
+msgstr "Kunne ikke finde filnavn i sti: %s"
+
+#: panel/menu.c:708
+#, c-format
+msgid "Could not rename tmp file %s"
+msgstr "Kunne ikke omdøbe tmp fil %s"
+
+#: panel/menu.c:928 panel/menu.c:978
+msgid "Desktop entry properties"
+msgstr "Egenskaber for skrivebordselementer"
+
+#: panel/menu.c:1066
+msgid "Add this launcher to panel"
+msgstr "Tilføj denne genvej til panelet"
+
+#: panel/menu.c:1069
+msgid "Add this applet as a launcher to panel"
+msgstr "Tilføj denne applet som genvej til panelet"
+
+#: panel/menu.c:1079 panel/menu.c:1126
+msgid "Add this to Favorites menu"
+msgstr "Tilføj denne til favoritmenuen"
+
+#: panel/menu.c:1092
+msgid "Remove this item"
+msgstr "Fjern dette element"
+
+#: panel/menu.c:1109
+msgid "Add this as drawer to panel"
+msgstr "Tilføj som skuffe på panelet"
+
+#: panel/menu.c:1118
+msgid "Add this as menu to panel"
+msgstr "Tilføj som menu på panelet"
+
+#: panel/menu.c:1138
+msgid "Add new item to this menu"
+msgstr "Tilføj nyt element til denne menu"
+
+#: applets/desk-guide/deskguide_applet.c:229 applets/fish/fish.c:774
+#: applets/gen_util/clock.c:386 applets/gen_util/mailcheck.c:1327
+#: applets/gen_util/printer.c:456 applets/tasklist/tasklist_applet.c:866
+#: panel/drawer.c:411 panel/launcher.c:523 panel/menu.c:1171 panel/menu.c:4426
+msgid "Properties..."
+msgstr "Egenskaber..."
+
+#: panel/menu.c:1372 panel/menu.c:1448
+msgid "..."
+msgstr "..."
+
+#: panel/menu.c:1590
+msgid "You already have a status dock on the panel. You can only have one"
+msgstr "Du har allerede en statusdok på panelet. Du kan kun have én"
+
+#: panel/launcher.c:76 panel/menu.c:1619
+msgid "Can't get goad_id from desktop entry!"
+msgstr "Kan ikke få goad_id fra skrivebordselement!"
+
+#: panel/menu.c:1956
+msgid "Adding tearoff when tearoffs are disabled"
+msgstr "Tilføj rivafmenuer når rivafmenuer er slået fra"
+
+#: panel/menu.c:2091
+msgid "Can't get goad_id for applet, ignoring it"
+msgstr "Kan ikke få goad_id for applet, ignorerer den"
+
+#: panel/gnome-panel-properties.c:469 panel/gnome-panel-properties.c:1273
+#: panel/menu-properties.c:413 panel/menu.c:2218 panel/menu.c:2271
+#: panel/menu.c:2273 panel/menu.c:3534 panel/menu.c:4347
+msgid "Menu"
+msgstr "Menu"
+
+#: panel/menu.c:2273
+msgid " (empty)"
+msgstr " (tom)"
+
+#: panel/menu.c:2356 panel/menu.c:4128
+msgid "Applets"
+msgstr "Appletter"
+
+#: panel/menu.c:2531
+msgid "You can only have one menu panel at a time."
+msgstr "Du kan kun have ét menupanel ad gangen."
+
+#: panel/menu.c:2568 panel/menu.c:2573 panel/menu.c:3759
+msgid "Create panel"
+msgstr "Opret panel"
+
+#: panel/menu.c:2600
+msgid "Menu panel"
+msgstr "Menupanel"
+
+#: panel/applet.c:416 panel/menu.c:2654
+#, c-format
+msgid "Cannot find pixmap file %s"
+msgstr "Kunne ikke finde billedfil %s"
+
+#: panel/menu.c:2673 panel/menu.c:2678 panel/menu.c:4094
+msgid "Programs"
+msgstr "Programmer"
+
+#: panel/menu.c:2687 panel/menu.c:2690
+msgid "No system menus found!"
+msgstr "Fandt ingen systemmenuer!"
+
+#: panel/menu.c:2705
+msgid "Can't create the user menu directory"
+msgstr "kan ikke oprette brugermenumappen"
+
+#: panel/menu.c:2729 panel/menu.c:2733 panel/menu.c:4158
+msgid "Debian menus"
+msgstr "Debian-menuer"
+
+#: panel/menu.c:2751 panel/menu.c:2757 panel/menu.c:4182
+msgid "KDE menus"
+msgstr "KDE-menuer"
+
+#: panel/menu.c:2810
+msgid "You cannot remove your last panel."
+msgstr "Du kan ikke fjerne dit sidste panel."
+
+#: panel/menu.c:2820
+msgid ""
+"When a panel is removed, the panel and its\n"
+"applet settings are lost. Remove this panel?"
+msgstr ""
+"Når et panel bliver fjernet, mister du panelet\n"
+"og dets appletindstillinger. Fjern dette panel?"
+
+#: panel/applet.c:417 panel/applet.c:423 panel/menu.c:2859 panel/menu.c:2864
+#: panel/menu.c:3870 panel/menu.c:3875 panel/menu.c:4207
+msgid "Panel"
+msgstr "Panel"
+
+#. ExplicitHide Animation step_size scale frame
+#: panel/gnome-panel-properties.c:266 panel/menu.c:3454
+msgid "Explicit hide"
+msgstr "Skjul udtrykkeligt"
+
+#: panel/gnome-panel-properties.c:259 panel/gnome-panel-properties.c:277
+#: panel/menu.c:3455
+msgid "Auto hide"
+msgstr "Skjul automatisk"
+
+#: panel/menu.c:3460
+msgid "With pixmap arrow"
+msgstr "Med pil"
+
+#: panel/menu.c:3461
+msgid "Without pixmap"
+msgstr "Uden pil"
+
+#: gnome-terminal/gnome-terminal.c:1253 panel/menu.c:3462
+msgid "None"
+msgstr "Ingen"
+
+#: applets/tasklist/tasklist_properties.c:153 panel/menu.c:3467
+msgid "Horizontal"
+msgstr "Vandret"
+
+#: applets/tasklist/tasklist_properties.c:198 panel/menu.c:3468
+msgid "Vertical"
+msgstr "Lodret"
+
+#: panel/menu.c:3488
+msgid "Type"
+msgstr "Type"
+
+#: panel/menu.c:3491
+msgid "Hiding policy"
+msgstr "Gemmepolitik"
+
+#: panel/menu.c:3494
+msgid "Hide buttons"
+msgstr "Skjuleknapper"
+
+#: applets/tasklist/tasklist_properties.c:235 panel/menu.c:3497
+msgid "Size"
+msgstr "Størrelse"
+
+#: panel/menu.c:3500
+msgid "Orientation"
+msgstr "Orientering"
+
+#: gnome-terminal/gnome-terminal.c:1243 panel/menu.c:3503
+msgid "Background type"
+msgstr "Baggrundstype"
+
+#: panel/menu.c:3523
+msgid "Applet"
+msgstr "Applet"
+
+#: panel/menu-properties.c:321 panel/menu-properties.c:341 panel/menu.c:3544
+msgid "Main menu"
+msgstr "Hovedmenu"
+
+#: panel/menu.c:3555
+msgid "Programs menu"
+msgstr "Programmenu"
+
+#: panel/menu.c:3565
+msgid "Favorites menu"
+msgstr "Favoritmenu"
+
+#: panel/menu.c:3576
+msgid "Launcher..."
+msgstr "Genvej..."
+
+#: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:468
+#: panel/menu.c:3586
+msgid "Drawer"
+msgstr "Skuffe"
+
+#: panel/menu.c:3597
+msgid "Log out button"
+msgstr "Logudknap"
+
+#: panel/menu.c:3608
+msgid "Lock button"
+msgstr "Låseknap"
+
+#: panel/menu.c:3620
+msgid "Swallowed app..."
+msgstr "Slugt applikation..."
+
+#: panel/menu.c:3628
+msgid "Status dock"
+msgstr "Statusdok"
+
+#: panel/menu.c:3652 panel/menu.c:3657 panel/menu.c:3735
+msgid "Add to panel"
+msgstr "Tilføj til panel"
+
+#: panel/menu.c:3672
+msgid "Cannot execute panel global properties"
+msgstr "Kan ikke køre panelets globale egenskaber"
+
+#: panel/menu.c:3712
+msgid "Remove this panel..."
+msgstr "Fjern dette panel..."
+
+#: panel/menu.c:3714 panel/menu.c:3770
+msgid "Remove this panel"
+msgstr "Fjern dette panel"
+
+#: panel/menu.c:3787
+msgid "Properties"
+msgstr "Egenskaber"
+
+#: panel/menu.c:3798
+msgid "All properties..."
+msgstr "Alle egenskaber..."
+
+#: panel/menu.c:3814
+msgid "Global Preferences..."
+msgstr "Globale indstillinger..."
+
+#: panel/menu.c:3828
+msgid "Panel Manual..."
+msgstr "Panelmanual..."
+
+#: panel/menu.c:3847
+msgid "Cannot execute xscreensaver"
+msgstr "Kan ikke køre xscreensaver"
+
+#: panel/menu.c:3899 panel/menu.c:3904 panel/menu.c:4216
+msgid "Desktop"
+msgstr "Skrivebord"
+
+#: panel/menu.c:3941
+msgid "About the panel..."
+msgstr "Om panelet..."
+
+#: panel/menu.c:3957
+msgid "About GNOME..."
+msgstr "Om GNOME..."
+
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4000
+msgid "Lock screen"
+msgstr "Lås skærm"
+
+#: panel/logout.c:47 panel/menu.c:4012
+msgid "Log out"
+msgstr "Log ud"
+
+#: panel/menu.c:4064 panel/menu.c:4106 panel/menu.c:4112
+msgid "Favorites"
+msgstr "Favoritter"
+
+#: panel/menu.c:4072 panel/menu.c:4136 panel/menu.c:4142
+msgid "AnotherLevel menus"
+msgstr "AnotherLevel-menuer"
+
+#: panel/menu.c:4193
+msgid "Run..."
+msgstr "Kør..."
+
+#: panel/menu.c:4271
+msgid "Can't create menu, using main menu!"
+msgstr "Kan ikke oprette menu, bruger hovedmenu!"
+
+#: panel/menu-properties.c:128 panel/menu.c:4431
+msgid "Edit menus..."
+msgstr "Redigér menuer..."
+
+#: panel/menu-properties.c:135
+msgid "Can't open directory, using main menu!"
+msgstr "Kan ikke åbne mappe, bruger hovedmenu!"
+
+#: panel/gnome-panel-properties.c:676 panel/menu-properties.c:258
+msgid "Off"
+msgstr "Fra"
+
+#: panel/gnome-panel-properties.c:683 panel/menu-properties.c:270
+msgid "In a submenu"
+msgstr "I en undermenu"
+
+#: panel/menu-properties.c:282
+msgid "On the main menu"
+msgstr "I hovedmenuen"
+
+#: panel/menu-properties.c:307
+msgid "Menu properties"
+msgstr "Menuegenskaber"
+
+#: panel/menu-properties.c:314
+msgid "Menu type"
+msgstr "Menutype"
+
+#: panel/menu-properties.c:332 panel/menu-properties.c:384
+msgid "Normal menu"
+msgstr "Normal menu"
+
+#: panel/gnome-panel-properties.c:108 panel/menu-properties.c:352
+msgid "Programs: "
+msgstr "Programmer: "
+
+#: panel/gnome-panel-properties.c:109 panel/menu-properties.c:356
+msgid "Favorites: "
+msgstr "Favoritter: "
+
+#: panel/gnome-panel-properties.c:110 panel/menu-properties.c:360
+msgid "Applets: "
+msgstr "Appletter: "
+
+#: panel/menu-properties.c:364
+msgid "AnotherLevel menu (if found): "
+msgstr "AnotherLevel-menu (hvis tilstede): "
+
+#: panel/menu-properties.c:368
+msgid "KDE menu (if found): "
+msgstr "KDE-menu (hvis tilstede): "
+
+#: panel/menu-properties.c:372
+msgid "Debian menu (if found): "
+msgstr "Debian-menu (hvis tilstede): "
+
+#: panel/menu-properties.c:376
+msgid "Panel menu: "
+msgstr "Panelmenu: "
+
+#: panel/menu-properties.c:380
+msgid "Desktop menu: "
+msgstr "Skrivebordsmenu: "
+
+#: panel/menu-properties.c:394
+msgid "Menu path"
+msgstr "Menusti"
+
+#: panel/main.c:168
+msgid ""
+"I've detected a panel already running.\n"
+"Start another panel as well?\n"
+"(The new panel will not be restarted.)"
+msgstr ""
+"Jeg kan se at et andet panel allerede kører.\n"
+"Skal vi starte et panel mere?\n"
+"(Det nye panel bliver ikke genstartet.)"
+
+#: panel/main.c:179
+msgid ""
+"There was a problem registering the panel with the GOAD server.\n"
+"The panel will now exit."
+msgstr ""
+"Der opstod et problem med at registrere panelet hos GOAD-tjeneren.\n"
+"Panelet vil afslutte nu."
+
+#: panel/logout.c:49
+msgid "Log out of GNOME"
+msgstr "Log ud af GNOME"
+
+#: panel/launcher.c:49
+msgid "This launch icon does not specify a program to run"
+msgstr "Denne genvejsikon har intet program at starte"
+
+#: panel/launcher.c:313
+msgid "App"
+msgstr "Applikation"
+
+#: panel/launcher.c:432
+msgid "Launcher properties"
+msgstr "Egenskaber for genvej"
+
+#: panel/launcher.c:559
+msgid "Create launcher applet"
+msgstr "Opret genvejsapplet"
+
+#: panel/gnome-run.c:59
+#, c-format
+msgid ""
+"Failed to execute command:\n"
+"%s"
+msgstr ""
+"Kunne ikke udføre kommando:\n"
+"%s"
+
+#: panel/gnome-run.c:115
+#, c-format
+msgid ""
+"Failed to execute command:\n"
+"%s\n"
+"%s"
+msgstr ""
+"Kunne ikke udføre kommando:\n"
+"%s\n"
+"%s"
+
+#: gnome-terminal/gnome-terminal.c:1139 panel/gnome-run.c:150
+#: panel/gnome-run.c:218
+msgid "Browse..."
+msgstr "Gennemse..."
+
+#: panel/gnome-run.c:186
+msgid "Run Program"
+msgstr "Kør program"
+
+#: panel/gnome-run.c:192
+msgid "Run"
+msgstr "Kør"
+
+#: panel/gnome-run.c:227
+msgid "Run in terminal"
+msgstr "Kør i terminal"
+
+#: panel/gnome-panel-properties.c:111
+msgid "AnotherLevel: "
+msgstr "AnotherLevel: "
+
+#: panel/gnome-panel-properties.c:112
+msgid "KDE: "
+msgstr "KDE: "
+
+#: panel/gnome-panel-properties.c:113
+msgid "Debian: "
+msgstr "Debian: "
+
+#: panel/gnome-panel-properties.c:114
+msgid "Panel: "
+msgstr "Panel: "
+
+#: panel/gnome-panel-properties.c:115
+msgid "Desktop: "
+msgstr "Skrivebord: "
+
+#. Animation enable
+#: panel/gnome-panel-properties.c:238
+msgid "Enable animations"
+msgstr "Brug animationer"
+
+#: panel/gnome-panel-properties.c:243
+msgid "Constant speed animations"
+msgstr "Konstant animationshastighed"
+
+#. AutoHide Animation step_size scale frame
+#: panel/gnome-panel-properties.c:249
+msgid "Animation speed"
+msgstr "Animationshastighed"
+
+#. DrawerHide Animation step_size scale frame
+#: panel/gnome-panel-properties.c:272
+msgid "Drawer sliding"
+msgstr "Skuffeglidning"
+
+#. Minimize Delay scale frame
+#: panel/gnome-panel-properties.c:288
+msgid "Delay (ms)"
+msgstr "Forsinkelse (ms)"
+
+#. Minimized size scale frame
+#: panel/gnome-panel-properties.c:294
+msgid "Size (pixels)"
+msgstr "Størrelse (pixler)"
+
+#: panel/gnome-panel-properties.c:385
+msgid "Launcher icon"
+msgstr "Genvejsikon"
+
+#: panel/gnome-panel-properties.c:386
+msgid "Drawer icon"
+msgstr "Skuffeikon"
+
+#: panel/gnome-panel-properties.c:387
+msgid "Menu icon"
+msgstr "Menuikon"
+
+#: panel/gnome-panel-properties.c:388
+msgid "Special icon"
+msgstr "Speciel ikon"
+
+#. toggle button
+#: panel/gnome-panel-properties.c:400
+msgid "Tiles enabled"
+msgstr "Brug fliser"
+
+#: panel/gnome-panel-properties.c:414
+#, fuzzy
+msgid "Normal tile"
+msgstr "Normal flise"
+
+#: panel/gnome-panel-properties.c:426
+#, fuzzy
+msgid "Clicked tile"
+msgstr "Trykket flise"
+
+#. Minimized size scale frame
+#: panel/gnome-panel-properties.c:442
+msgid "Border width (tile only)"
+msgstr "Kantbredde (kun fliser)"
+
+#. Minimized size scale frame
+#: panel/gnome-panel-properties.c:448
+msgid "Depth (displacement when pressed)"
+msgstr "Dybde (forskydning når nedtrykt)"
+
+#: panel/gnome-panel-properties.c:467
+msgid "Launcher"
+msgstr "Genvej"
+
+#: panel/gnome-panel-properties.c:470
+msgid "Special"
+msgstr "Speciel"
+
+#: panel/gnome-panel-properties.c:480
+#, fuzzy
+msgid "Button type: "
+msgstr "Knappetype: "
+
+#. show/hide frame
+#: panel/gnome-panel-properties.c:513
+msgid "Make buttons flush with panel edge"
+msgstr "Lad knapper være i plan med panelkant"
+
+#. only show tiles when mouse is over the button
+#: panel/gnome-panel-properties.c:520
+msgid "Show button tiles only when cursor is over the button"
+msgstr "Vis kun knappefliser når markøren er over knappen"
+
+#. saturate on mouseovers hack
+#: panel/gnome-panel-properties.c:526
+msgid "Keep saturation low when cursor is not on the button"
+msgstr "Brug lav farvemætning når markøren ikke er over knappen"
+
+#. Movement frame
+#: panel/gnome-panel-properties.c:581
+msgid "Default movement mode"
+msgstr "Standard bevægelsesmåde"
+
+#. Switched
+#: panel/gnome-panel-properties.c:591
+msgid "Switched movement (or use Ctrl)"
+msgstr "Omvendt bevægelse (eller brug Ctrl)"
+
+#: panel/gnome-panel-properties.c:599
+msgid "Free movement (doesn't disturb other applets) (or use Alt)"
+msgstr "Fri bevægelse (forstyrrer ikke andre appletter) (eller brug Alt)"
+
+#: panel/gnome-panel-properties.c:607
+msgid "Push movement (or use Shift)"
+msgstr "Skubbebevægelse (eller brug Skift)"
+
+#: panel/gnome-panel-properties.c:612
+#, fuzzy
+msgid "Padding"
+msgstr "Gemmer"
+
+#: panel/gnome-panel-properties.c:689
+msgid "In the menu"
+msgstr "I menuen"
+
+#. Menu frame
+#: panel/gnome-panel-properties.c:708
+msgid "Menus"
+msgstr "Menuer"
+
+#. Dot Buttons
+#: panel/gnome-panel-properties.c:718
+msgid "Show [...] buttons"
+msgstr "Vis [...] knapper"
+
+#. Off Panel Popup menus
+#: panel/gnome-panel-properties.c:724
+msgid "Show popup menus outside of panels"
+msgstr "Vis popup-menuer udenfor panelet"
+
+#. Hungry Menus
+#: panel/gnome-panel-properties.c:730
+msgid "Keep menus in memory"
+msgstr "Behold menuer i hukommelsen"
+
+#. large icons
+#: panel/gnome-panel-properties.c:736
+msgid "Use large icons"
+msgstr "Brug store ikoner"
+
+#. Menu frame
+#: panel/gnome-panel-properties.c:742
+#, fuzzy
+msgid "Global menu"
+msgstr "Normal menu"
+
+#: panel/gnome-panel-properties.c:860
+msgid "Press a key..."
+msgstr "Tryk på en tast..."
+
+#. Miscellaneous frame
+#: applets/tasklist/tasklist_properties.c:269 help-browser/toc-man.c:25
+#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:882
+#: panel/gnome-panel-properties.c:1278
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#. Tooltips enable
+#: panel/gnome-panel-properties.c:892
+msgid "Tooltips enabled"
+msgstr "Brug værktøjstips"
+
+#. Drawer/launcher auto close
+#: panel/gnome-panel-properties.c:898
+msgid "Close drawer if a launcher inside it is pressed"
+msgstr "Luk skuffen hvis jeg trykker på en ikon i den"
+
+#. Autoraise
+#: panel/gnome-panel-properties.c:904
+msgid "Raise panels on mouse-over"
+msgstr "Hæv paneler når musen er over dem"
+
+#. Keep on bottom
+#: panel/gnome-panel-properties.c:910
+msgid "Keep panel below windows (GNOME compliant window managers only)"
+msgstr "Behold panel under vinduer (kun GNOME-kompatibel vindueshåndtering)"
+
+#. Confirm panel removal
+#: panel/gnome-panel-properties.c:916
+msgid "Confirm the removal of panels with a dialog"
+msgstr "Bekræft fjernelse af paneler med en dialogboks"
+
+#. Key Bindings frame
+#: panel/gnome-panel-properties.c:922
+msgid "Key Bindings"
+msgstr "Tastaturgenveje"
+
+#. enabled
+#: panel/gnome-panel-properties.c:935
+msgid "Enable panel keybindings"
+msgstr "Brug paneltastaturgenveje"
+
+#. menu key
+#: panel/gnome-panel-properties.c:942
+msgid "Popup menu key"
+msgstr "Popop-menutast"
+
+#: panel/gnome-panel-properties.c:962 panel/gnome-panel-properties.c:987
+msgid "Grab key..."
+msgstr "Opsnap tast..."
+
+#. run key...
+#: panel/gnome-panel-properties.c:969
+msgid "Run dialog key"
+msgstr "\"Kør\"-dialogtast"
+
+#: gnome-hint/gnome-hint-properties.c:57 panel/gnome-panel-properties.c:1009
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Ingen hjælp er tilgængelig/installeret for disse indstillinger. Sørg\n"
+"venligst for at du installeret GNOMEs brugervejledning på systemet."
+
+#: gnome-hint/gnome-hint-properties.c:59 panel/gnome-panel-properties.c:1011
+msgid "Close"
+msgstr "Luk"
+
+#: panel/gnome-panel-properties.c:1258
+msgid "Animation"
+msgstr "Animation"
+
+#: panel/gnome-panel-properties.c:1263
+msgid "Buttons"
+msgstr "Knapper"
+
+#: panel/gnome-panel-properties.c:1268
+#, fuzzy
+msgid "Panel Objects"
+msgstr "Egenskaber for panel"
+
+#: panel/extern.c:443
+msgid "Couldn't add applet"
+msgstr "Kunne ikke tilføje applet"
+
+#: panel/extern.c:499
+msgid "Whoops! for some reason we can't add to the panel"
+msgstr "Hovsa! af en eller grund kan vi ikke tilføje til panelet"
+
+#: panel/extern.c:572
+msgid "No socket was created"
+msgstr "Ingen sokkel oprettedes"
+
+#: panel/drawer.c:112
+msgid "Tooltip/Name"
+msgstr "Værktøjstips/Navn"
+
+#: panel/drawer.c:116
+msgid "Icon"
+msgstr "Ikon"
+
+#: panel/drawer.c:120
+msgid "Applet appearance"
+msgstr "Appletudseende"
+
+#: panel/drawer.c:127
+msgid "Drawer handle"
+msgstr "Skuffehåndtag"
+
+#. we store this in w for later use!, so don't use w as temp from now
+#. on
+#: panel/drawer.c:132
+msgid "Enable hidebutton"
+msgstr "Brug skjuleknap"
+
+#: panel/drawer.c:141
+msgid "Enable hidebutton arrow"
+msgstr "Brug skjuleknapspil"
+
+#: panel/applet.c:357
+msgid "???"
+msgstr "???"
+
+#: panel/applet.c:397
+msgid "Remove from panel"
+msgstr "Fjern fra panelet"
+
+#: panel/applet.c:404
+msgid "Move"
+msgstr "Flyt"
+
+#: panel/applet.c:641
+msgid "Can't find an empty spot"
+msgstr "Kan ikke finde en tom plads"
+
+#: panel/applet-widget.c:912
+msgid "Cannot activate a panel object"
+msgstr "Kan ikke aktivere et panelobjekt"
+
+#: panel/applet-widget.c:1014
+msgid "Cannot start CORBA"
+msgstr "Kan ikke starte CORBA"
+
+#: panel/applet-widget.c:1176 panel/applet-widget.c:1277
+#: panel/applet-widget.c:1347 panel/applet-widget.c:1376
+#: panel/applet-widget.c:1403 panel/applet-widget.c:1439
+#: panel/applet-widget.c:1572
+msgid "CORBA Exception"
+msgstr "CORBA undtagelse"
+
+#: panel/applet-widget.c:1974
+msgid "Cannot create object"
+msgstr "Kan ikke oprette objekt"
+
+#: help-browser/window.c:130
+msgid "_New Window"
+msgstr "_Nyt vindue"
+
+#: help-browser/window.c:131
+msgid "Open new browser window"
+msgstr "Åbn nyt browservindue"
+
+#: help-browser/window.c:137
+msgid "_Add Bookmark"
+msgstr "_Tilføj bogmærke"
+
+#: help-browser/window.c:137
+msgid "Add bookmark"
+msgstr "Tilføj bogmærke"
+
+#: help-browser/window.c:152
+msgid "_Back"
+msgstr "Til_bage"
+
+#: help-browser/window.c:155
+msgid "_Forward"
+msgstr "_Fremad"
+
+#: help-browser/window.c:160
+msgid "_Reload"
+msgstr "_Genindlæs"
+
+#: help-browser/window.c:165
+msgid "_Index"
+msgstr "_Indeks"
+
+#: help-browser/window.c:187
+msgid "_History"
+msgstr "_Historie"
+
+#: help-browser/window.c:187 help-browser/window.c:229
+msgid "Show History Window"
+msgstr "Vis historievinduet"
+
+#: help-browser/window.c:192
+msgid "_Bookmarks"
+msgstr "_Bogmærker"
+
+#: help-browser/window.c:192 help-browser/window.c:231
+msgid "Show Bookmarks Window"
+msgstr "Vis bogmærkevindue"
+
+#: help-browser/window.c:206
+msgid "_Window"
+msgstr "_Vindue"
+
+#: help-browser/window.c:207
+msgid "_View"
+msgstr "V_is"
+
+#: help-browser/window.c:216
+msgid "Back"
+msgstr "Tilbage"
+
+#: help-browser/window.c:217
+msgid "Go to the previous location in the history list"
+msgstr "Gå til forrige punkt i historielisten"
+
+#: help-browser/window.c:219
+msgid "Forward"
+msgstr "Fremad"
+
+#: help-browser/window.c:220
+msgid "Go to the next location in the history list"
+msgstr "Gå til næste punkt i historielisten"
+
+#: help-browser/window.c:223
+msgid "Reload"
+msgstr "Genindlæs"
+
+#: help-browser/window.c:226
+msgid "Index"
+msgstr "Indeks"
+
+#: help-browser/window.c:226
+msgid "Show Documentation Index"
+msgstr "Vis indeks for dokumentation"
+
+#: help-browser/window.c:229
+msgid "History"
+msgstr "Historie"
+
+#: help-browser/window.c:231
+msgid "BMarks"
+msgstr "Bogmærker"
+
+#: help-browser/window.c:234
+msgid "Help on Help"
+msgstr "Hjælp om Hjælp"
+
+#: help-browser/window.c:542
+msgid "Location: "
+msgstr "Placering: "
+
+#: help-browser/gnome-help-browser.c:351 help-browser/window.c:819
+msgid "Gnome Help Browser"
+msgstr "GNOME Hjælpevejledning"
+
+#: help-browser/window.c:946
+#, c-format
+msgid ""
+"Error loading document:\n"
+"\n"
+"%s\n"
+"\n"
+"You probably don't\n"
+"have this documentation\n"
+"installed on your system."
+msgstr ""
+"Fejl ved indlæsning af dokument:\n"
+"\n"
+"%s\n"
+"\n"
+"Du har sikkert ikke\n"
+"denne dokumentation\n"
+"installeret på dit system."
+
+#: help-browser/window.c:949
+msgid "Ok"
+msgstr "Ok"
+
+#: help-browser/visit.c:84
+msgid "<BODY>Could not load default TOC page</BODY>"
+msgstr "<BODY>Kunne ikke indlæse standard indholdsfortegnelse</BODY>"
+
+#: help-browser/visit.c:102
+msgid "<BODY>Unknown TOC argument</BODY>"
+msgstr "<BODY>Ukendt argument for indholdsfortegnelse</BODY>"
+
+#: help-browser/toc2.c:115 help-browser/toc2.c:258 help-browser/toc2.c:322
+msgid "<h1>Table of Contents</h1>\n"
+msgstr "<h1>Indholdsfortegnelse</h1>\n"
+
+#. Man Pages
+#: help-browser/toc2.c:119
+msgid "<h2>Man Pages</h2>\n"
+msgstr "<h2>Manualsider</h2>\n"
+
+#: help-browser/toc2.c:259
+msgid "<br><br><h2>Info Pages</h2>\n"
+msgstr "<br><br><h2>Infosider</h2>\n"
+
+#: help-browser/toc2.c:323
+msgid "<br><br><h2>GNOME Help</h2>\n"
+msgstr "<br><br><h2>GNOME Hjælp</h2>\n"
+
+#: help-browser/toc2.c:467
+msgid ""
+"<HTML>\n"
+"<BODY>\n"
+"<H2>Results of the substring search for the string "
+msgstr ""
+"<HTML>\n"
+"<BODY>\n"
+"<H2>Resultater af substrengsøgning efter teksten "
+
+#: help-browser/toc2.c:473
+msgid ""
+"<p>\n"
+"<br>\n"
+"<H3>Manual Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"<p>\n"
+"<br>\n"
+"<H3>Manualsider</H3>\n"
+"<p>\n"
+"<UL>\n"
+
+#: help-browser/toc2.c:496
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNU Info Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNU infosider</H3>\n"
+"<p>\n"
+"<UL>\n"
+
+#: help-browser/toc2.c:520
+msgid ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNOME Help Pages</H3>\n"
+"<p>\n"
+"<UL>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"<br>\n"
+"<H3>GNOME hjælpesider</H3>\n"
+"<p>\n"
+"<UL>\n"
+
+#: help-browser/toc2.c:542
+msgid "<br><B>No matches found</B>\n"
+msgstr "<br><B>Ingen træffere</B>\n"
+
+#: help-browser/toc-man.c:19 help-browser/toc2-man.c:21
+msgid "User Commands"
+msgstr "Brugerkommandoer"
+
+#: help-browser/toc-man.c:20 help-browser/toc2-man.c:22
+msgid "System Calls"
+msgstr "Systemkald"
+
+#: help-browser/toc-man.c:21 help-browser/toc2-man.c:23
+msgid "Library Functions"
+msgstr "Biblioteksfunktioner"
+
+#: help-browser/toc-man.c:22 help-browser/toc2-man.c:24
+msgid "Special Files"
+msgstr "Specialfiler"
+
+#: help-browser/toc-man.c:23 help-browser/toc2-man.c:25
+msgid "File Formats"
+msgstr "Filformater"
+
+#: help-browser/toc-man.c:24 help-browser/toc2-man.c:26
+msgid "Games"
+msgstr "Spil"
+
+#: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
+msgid "Administration"
+msgstr "Administration"
+
+#: help-browser/toc-man.c:27 help-browser/toc2-man.c:29
+msgid "man9"
+msgstr "man9"
+
+#: help-browser/toc-man.c:28 help-browser/toc2-man.c:30
+msgid "mann"
+msgstr "mann"
+
+#: help-browser/toc-man.c:29 help-browser/toc2-man.c:31
+msgid "manx"
+msgstr "manx"
+
+#. Add one new item for each type
+#. This really should iterate through the toc_config list
+#. MAN PAGES
+#: help-browser/toc.c:135
+msgid "Man Pages"
+msgstr "Manualsider"
+
+#. INFO PAGES
+#: help-browser/toc.c:147
+msgid "Info Pages"
+msgstr "Infosider"
+
+#. GNOME HELP
+#: help-browser/toc.c:159
+msgid "GNOME Help"
+msgstr "GNOME Hjælp"
+
+#: help-browser/history.c:257
+msgid "URL"
+msgstr "URL"
+
+#: help-browser/history.c:257
+msgid "Last"
+msgstr "Sidste"
+
+#: help-browser/history.c:257
+msgid "Count"
+msgstr "Antal"
+
+#: help-browser/history.c:270
+msgid "Gnome Help History"
+msgstr "Historie for GNOME Hjælp"
+
+#: help-browser/gnome-helpwin.c:220
+msgid "<body><h2>Error: file not found</h2></body>"
+msgstr "<body><h2>Fejl: filen blev ikke fundet</h2></body>"
+
+#: help-browser/gnome-help-browser.c:125
+msgid "X position of window"
+msgstr "Vinduets X-position"
+
+#: help-browser/gnome-help-browser.c:125
+msgid "X"
+msgstr "X"
+
+#: help-browser/gnome-help-browser.c:126
+msgid "Y position of window"
+msgstr "Vinduets Y-position"
+
+#: help-browser/gnome-help-browser.c:127
+msgid "Width of window"
+msgstr "Vinduets bredde"
+
+#: help-browser/gnome-help-browser.c:127
+msgid "WIDTH"
+msgstr "WIDTH"
+
+#: help-browser/gnome-help-browser.c:128
+msgid "Height of window"
+msgstr "Vinduets højde"
+
+#: help-browser/gnome-help-browser.c:128
+msgid "HEIGHT"
+msgstr "HEIGHT"
+
+#: help-browser/gnome-help-browser.c:129
+msgid "Debug level"
+msgstr "Aflusningsniveau"
+
+#: help-browser/gnome-help-browser.c:352
+msgid "Copyright (c) 1998 Red Hat Software, Inc."
+msgstr "Ophavsret (c) 1998 Red Hat Software, Inc."
+
+#: help-browser/gnome-help-browser.c:354
+msgid ""
+"GNOME Help Browser allows easy access to various forms of documentation on "
+"your system"
+msgstr ""
+"GNOME Hjælpevejledning giver dig let adgang til forskellige typer "
+"dokumentation på dit system"
+
+#: help-browser/gnome-help-browser.c:612
+msgid "History size"
+msgstr "Historiestørrelse"
+
+#: help-browser/gnome-help-browser.c:613
+msgid "History file"
+msgstr "Historiefil"
+
+#: help-browser/gnome-help-browser.c:614
+msgid "Cache size"
+msgstr "Mellemlagerstørrelse"
+
+#: help-browser/gnome-help-browser.c:615
+msgid "Cache file"
+msgstr "Mellemlagerfil"
+
+#: help-browser/gnome-help-browser.c:616
+msgid "Bookmark file"
+msgstr "Bogmærkefil"
+
+#: help-browser/gnome-help-browser.c:622
+msgid "Man Path"
+msgstr "Manualsti"
+
+#: help-browser/gnome-help-browser.c:623
+msgid "Info Path"
+msgstr "Infosidesti"
+
+#: help-browser/gnome-help-browser.c:624
+msgid "GNOME Help Path"
+msgstr "GNOME hjælpesti"
+
+#: help-browser/gnome-help-browser.c:699
+msgid "Gnome Help Configure"
+msgstr "Indstil GNOME Hjælp"
+
+#: help-browser/gnome-help-browser.c:702
+msgid "History and cache"
+msgstr "Historie og mellemlager"
+
+#: help-browser/gnome-help-browser.c:703
+msgid "Paths"
+msgstr "Søgestier"
+
+#: help-browser/bookmarks.c:220
+msgid "Bookmark"
+msgstr "Bogmærke"
+
+#: help-browser/bookmarks.c:220
+msgid "Page Title"
+msgstr "Sidetitel"
+
+#: help-browser/bookmarks.c:230
+msgid "Gnome Help Bookmarks"
+msgstr "GNOME hjælpebogmærker"
+
+#. Buttons
+#: help-browser/bookmarks.c:240
+msgid "Remove"
+msgstr "Fjern"
+
+#: gsm/splash.c:82
+msgid "done"
+msgstr "færdig"
+
+#: gsm/splash.c:154
+msgid "Starting GNOME"
+msgstr "Starter GNOME"
+
+#: gsm/splash.c:178
+#, c-format
+msgid "Starting GNOME... %s"
+msgstr "Starter GNOME... %s"
+
+#. buttons
+#: gsm/session-properties.c:167
+msgid "Try"
+msgstr "Prøv"
+
+#: gmenu/edit.c:345 gsm/session-properties.c:170
+msgid "Revert"
+msgstr "Forkast"
+
+#: gsm/session-properties.c:173
+msgid "OK"
+msgstr "Ok"
+
+#: gsm/session-properties.c:176
+msgid "Cancel"
+msgstr "Annullér"
+
+#: gsm/session-properties.c:269
+msgid "Session"
+msgstr "Session"
+
+#. app
+#: gsm/session-properties.c:323
+msgid "Session Chooser"
+msgstr "Sessionsvælger"
+
+#: gsm/session-properties.c:326
+msgid "Start Session"
+msgstr "Start session"
+
+#: gsm/session-properties.c:329
+msgid "Cancel Login"
+msgstr "Annullér logind"
+
+#: gsm/session-properties.c:355
+msgid "Initialize session settings"
+msgstr "Start sessionsindstillinger"
+
+#: gsm/session-properties.c:356
+msgid "Only display warnings."
+msgstr "Vis kun advarsler."
+
+#: gsm/save-session.c:44
+msgid "Kill session"
+msgstr "Dræb session"
+
+#: gsm/save-session.c:45
+msgid "Use dialog boxes"
+msgstr "Brug dialogbokse"
+
+#: gsm/save-session.c:96
+msgid "Could not connect to the session manager"
+msgstr "Kunne ikke forbinde med sessionshåndtering"
+
+#: gsm/save-session.c:111
+msgid "Could not connect to gnome-session"
+msgstr "Kunne ikke forbinde med gnome-session"
+
+#: gsm/save-session.c:162
+msgid "Your session has been saved"
+msgstr "Din session er blevet gemt"
+
+#: gsm/manager.c:379
+msgid "Wait abandoned due to conflict."
+msgstr "Ventning opgivet pga. konflikt."
+
+#: gsm/manager.c:831
+#, c-format
+msgid "No response to the %s command."
+msgstr "Ingen reaktion på %s kommandoen."
+
+#: gsm/manager.c:832
+msgid "The program may be slow, stopped or broken."
+msgstr "Programmet er måske langsomt, gået i stå eller defekt."
+
+#: gsm/manager.c:833
+msgid "You may wait for it to respond or remove it."
+msgstr "Du kan vente på at programmet svarer eller blot fjerne det."
+
+#: gsm/manager.c:1367
+msgid "Respawn abandoned due to failures."
+msgstr "Gendan opgivet pga. fejl."
+
+#: gsm/manager.c:1535
+msgid "A session shutdown is in progress."
+msgstr "En session er i færd med at lukke ned."
+
+#: gsm/main.c:57
+msgid "Start chooser and pick the session"
+msgstr "Start vælger og vælg session"
+
+#: gsm/main.c:58
+msgid "Only read saved sessions from the default.session file"
+msgstr "Læs kun gemte sessioner fra default.session filen"
+
+#: gsm/main.c:59
+msgid "Millisecond period spent waiting for clients to register (0=forever)"
+msgstr "Millisekund periode at vente på at klienter registrerer (0=for evigt)"
+
+#: gsm/main.c:60
+msgid "Millisecond period spent waiting for clients to respond (0=forever)"
+msgstr "Millisekund periode at vente på at klienter svarer (0=for evigt)"
+
+#: gsm/main.c:61
+msgid "Millisecond period spent waiting for clients to die (0=forever)"
+msgstr "Millisekund periode at vente på at klienter dør (0=for evigt)"
+
+#: gsm/logout.c:199
+msgid "Really log out?"
+msgstr "Vil du logge ud?"
+
+#: gsm/logout.c:220
+msgid "Save current setup"
+msgstr "Gem nuværende opsætning"
+
+#: gsm/logout.c:239
+msgid "Action"
+msgstr "Handling"
+
+#: gsm/logout.c:247
+msgid "Logout"
+msgstr "Log ud"
+
+#: gsm/logout.c:250
+msgid "Halt"
+msgstr "Luk ned"
+
+#: gsm/logout.c:253
+msgid "Reboot"
+msgstr "Genstart"
+
+#: gsm/gsm-protocol.c:500
+msgid "Remove Program"
+msgstr "Fjern program"
+
+#: gsm/gsm-client-row.c:31
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: gsm/gsm-client-row.c:32
+msgid "Waiting to start or already finished."
+msgstr "Venter på at starte eller er allerede færdig."
+
+#: gsm/gsm-client-row.c:34
+msgid "Starting"
+msgstr "Starter"
+
+#: gsm/gsm-client-row.c:35
+msgid "Started but has not yet reported state."
+msgstr "Startet men har endnu ikke rapporteret status."
+
+#: gsm/gsm-client-row.c:37
+msgid "Running"
+msgstr "Kører"
+
+#: gsm/gsm-client-row.c:38
+msgid "A normal member of the session."
+msgstr "Et normalt medlem af sessionen."
+
+#: gsm/gsm-client-row.c:40
+msgid "Saving"
+msgstr "Gemmer"
+
+#: gsm/gsm-client-row.c:41
+msgid "Saving session details."
+msgstr "Gemmer sessionsdetaljer"
+
+#: gsm/gsm-client-row.c:43
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: gsm/gsm-client-row.c:44
+msgid "State not reported within timeout."
+msgstr "Status ikke rapporteret inden tiden løb ud."
+
+#: gsm/gsm-client-row.c:50
+msgid "Normal"
+msgstr "Normal"
+
+#: gsm/gsm-client-row.c:51
+msgid "Unaffected by logouts but can die."
+msgstr "Upåvirket af logud men kan dø."
+
+#: gsm/gsm-client-row.c:53
+msgid "Respawn"
+msgstr "Gendan"
+
+#: gsm/gsm-client-row.c:54
+msgid "Never allowed to die."
+msgstr "Må aldrig dø."
+
+#: gsm/gsm-client-row.c:56
+msgid "Trash"
+msgstr "Affald"
+
+#: gsm/gsm-client-row.c:57
+msgid "Discarded on logout and can die."
+msgstr "Forkastes ved logud og må gerne dø."
+
+#: gnome-terminal/gnome-terminal.c:1656 gsm/gsm-client-row.c:59
+msgid "Settings"
+msgstr "Opsætning"
+
+#: gsm/gsm-client-row.c:60
+msgid "Always started on every login."
+msgstr "Start altid ved hvert logind."
+
+#: gsm/gsm-client-list.c:114
+msgid "Order"
+msgstr "Orden"
+
+#: gsm/gsm-client-list.c:114
+msgid "Style"
+msgstr "Stil"
+
+#: gsm/gsm-client-list.c:114
+msgid "State"
+msgstr "Status"
+
+#: gsm/gsm-client-list.c:114
+msgid "Program"
+msgstr "Program"
+
+#: gsm/gsm-client-editor.c:97
+msgid "Order: "
+msgstr "Orden: "
+
+#: gsm/gsm-client-editor.c:107
+msgid "Style: "
+msgstr "Stil: "
+
+#: gsm/gnome-login-check.c:67
+#, c-format
+msgid "Looking up internet address for %s"
+msgstr "Slår internetadresse for %s op"
+
+#: gsm/gnome-login-check.c:71
+msgid "Hide"
+msgstr "Skjul"
+
+#: gsm/gnome-login-check.c:234
+msgid "GNOME Login"
+msgstr "GNOME logind"
+
+#: gsm/gnome-login-check.c:234
+msgid "Login"
+msgstr "Logind"
+
+#: gsm/gnome-login-check.c:261
+msgid "Start with default programs"
+msgstr "Start med standardprogrammer"
+
+#: gsm/gnome-login-check.c:265
+msgid "Reset all user settings"
+msgstr "Nulstil alle brugerindstillinger"
+
+#: gsm/gnome-login-check.c:276
+#, c-format
+msgid "Really reset all GNOME user settings for %s?"
+msgstr "Gendan alle GNOME brugerindstillinger for %s?"
+
+#: gsm/gnome-login-check.c:308
+#, c-format
+msgid ""
+"The directory /tmp/orbit-%s is not owned\n"
+"by the current user, %s.\n"
+"Please correct the ownership of this directory."
+msgstr ""
+"Mappen /tmp/orbit-%s er ejes ikke\n"
+"af den nuværende bruger, %s.\n"
+"Rét venligst ejerskabet af denne mappe."
+
+#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
+msgid "Try again"
+msgstr "Prøv igen"
+
+#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
+msgid "Continue"
+msgstr "Fortsæt"
+
+#: gsm/gnome-login-check.c:332
+#, c-format
+msgid ""
+"Could not look up internet address for %s.\n"
+"This will prevent GNOME from operating correctly.\n"
+"It may be possible to correct the problem by adding\n"
+"%s to the file /etc/hosts."
+msgstr ""
+"Kunne ikke slå internetadressen for %s op.\n"
+"Dette vil forhindre GNOME i at fungere korrekt.\n"
+"Det kan muligvis lade sig gøre at korrigere problemet\n"
+"ved at tilføje %s til filen /etc/hosts."
+
+#: gnome-terminal/gnome-terminal.c:215
+msgid "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
+msgstr "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
+
+#: gnome-terminal/gnome-terminal.c:217
+msgid "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
+msgstr "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
+
+#: gnome-terminal/gnome-terminal.c:219
+msgid "    Erik Troan (ewt@redhat.com)"
+msgstr "    Erik Troan (ewt@redhat.com)"
+
+#: gnome-terminal/gnome-terminal.c:236
+msgid "GNOME Terminal"
+msgstr "GNOME Terminal"
+
+#: gnome-terminal/gnome-terminal.c:239
+msgid "The GNOME terminal emulation program."
+msgstr "GNOME terminalemuleringsprogrammet."
+
+#: gnome-terminal/gnome-terminal.c:598 gnome-terminal/gnome-terminal.c:1155
+#: gnome-terminal/gnome-terminal.c:1165 gnome-terminal/gnome-terminal.c:2325
+msgid "Default"
+msgstr "Standard"
+
+#: gnome-terminal/gnome-terminal.c:776
+msgid ""
+"You have switched the class of this window. Do you\n"
+" want to reconfigure this window to match the default\n"
+"configuration of the new class?"
+msgstr ""
+"Du har ændret dette vindues klasse. Vil du\n"
+"genindstille dette vindue så det passer med\n"
+"standard indstillingen for den nye klasse?"
+
+#: gnome-terminal/gnome-terminal.c:956
+msgid "Linux console"
+msgstr "Linuxkonsol"
+
+#: gnome-terminal/gnome-terminal.c:957
+msgid "Color Xterm"
+msgstr "Xterm i farver"
+
+#: gnome-terminal/gnome-terminal.c:958
+msgid "rxvt"
+msgstr "rxvt"
+
+#: gnome-terminal/gnome-terminal.c:959
+msgid "Custom"
+msgstr "Personlig"
+
+#: gnome-terminal/gnome-terminal.c:964
+msgid "White on black"
+msgstr "Hvidt på sort"
+
+#: gnome-terminal/gnome-terminal.c:965
+msgid "Black on white"
+msgstr "Sort på hvidt"
+
+#: gnome-terminal/gnome-terminal.c:966
+msgid "Green on black"
+msgstr "Grønt på sort"
+
+#: gnome-terminal/gnome-terminal.c:967
+msgid "Black on light yellow"
+msgstr "Sort på lysegult"
+
+#: gnome-terminal/gnome-terminal.c:968
+msgid "Custom colors"
+msgstr "Egne farver"
+
+#: gnome-terminal/gnome-terminal.c:973
+msgid "Left"
+msgstr "Venstre"
+
+#: gnome-terminal/gnome-terminal.c:974
+msgid "Right"
+msgstr "Højre"
+
+#: gnome-terminal/gnome-terminal.c:975
+msgid "Hidden"
+msgstr "Skjult"
+
+#: gnome-terminal/gnome-terminal.c:1114
+msgid "General"
+msgstr "Generelt"
+
+#. Font
+#: gnome-terminal/gnome-terminal.c:1117
+msgid "Font:"
+msgstr "Skrifttype:"
+
+#. Terminal class
+#: gnome-terminal/gnome-terminal.c:1147
+msgid "Terminal Class"
+msgstr "Terminalklasse"
+
+#. Blinking status
+#: gnome-terminal/gnome-terminal.c:1175
+msgid "Blinking cursor"
+msgstr "Blinkende markør"
+
+#. Show menu bar
+#: gnome-terminal/gnome-terminal.c:1184
+msgid "Hide menu bar"
+msgstr "Skjul menulinien"
+
+#. Toggle the bell
+#: gnome-terminal/gnome-terminal.c:1193
+msgid "Silence Terminal bell"
+msgstr "Tavs terminalklokke"
+
+#. Swap keys
+#: gnome-terminal/gnome-terminal.c:1202
+msgid "Swap DEL/Backspace"
+msgstr "Ombyt DEL/Sletbaglæns"
+
+#. --login by default
+#: gnome-terminal/gnome-terminal.c:1211
+msgid "Use --login by default"
+msgstr "Brug --login som standard"
+
+#. Word selection class
+#: gnome-terminal/gnome-terminal.c:1220
+msgid "Select-by-word characters"
+msgstr "Vælg-ved-ord bogstaver"
+
+#: gnome-terminal/gnome-terminal.c:1261
+msgid "Background pixmap"
+msgstr "Baggrundsbillede"
+
+#: gnome-terminal/gnome-terminal.c:1277
+msgid "Pixmap file:"
+msgstr "Billedfil:"
+
+#: gnome-terminal/gnome-terminal.c:1292
+msgid "Background pixmap scrolls"
+msgstr "Baggrundsbillede ruller med"
+
+#: gnome-terminal/gnome-terminal.c:1305
+msgid "Transparent"
+msgstr "Gennemsigtig"
+
+#. Shaded
+#: gnome-terminal/gnome-terminal.c:1332
+msgid "Background should be shaded"
+msgstr "Baggrund skal skygges"
+
+#: gnome-terminal/gnome-terminal.c:1345
+msgid "Colors"
+msgstr "Farver"
+
+#. Color palette
+#: gnome-terminal/gnome-terminal.c:1348
+msgid "Color scheme:"
+msgstr "Farveskema:"
+
+#. Foreground, background buttons
+#: gnome-terminal/gnome-terminal.c:1358
+msgid "Foreground color:"
+msgstr "Forgrundsfarve:"
+
+#: gnome-terminal/gnome-terminal.c:1366
+msgid "Background color:"
+msgstr "Baggrundsfarve:"
+
+#: gnome-terminal/gnome-terminal.c:1373
+msgid "Color palette:"
+msgstr "Farvepalette:"
+
+#. default foreground/backgorund selector
+#: gnome-terminal/gnome-terminal.c:1395
+msgid "Fore/Background Colour:"
+msgstr "For/baggrundsfarve:"
+
+#: gnome-terminal/gnome-terminal.c:1408
+msgid "Scrolling"
+msgstr "Rullebjælke"
+
+#. Scrollbar position
+#: gnome-terminal/gnome-terminal.c:1411
+msgid "Scrollbar position"
+msgstr "Rullebjælkeplacering"
+
+#. Scroll back
+#: gnome-terminal/gnome-terminal.c:1422
+msgid "Scrollback lines"
+msgstr "Antal linier man kan rulle tilbage"
+
+#. Scroll on keystroke checkbox
+#: gnome-terminal/gnome-terminal.c:1436
+msgid "Scroll on keystroke"
+msgstr "Rul ned ved tastetryk"
+
+#. Scroll on output checkbox
+#: gnome-terminal/gnome-terminal.c:1445
+msgid "Scroll on output"
+msgstr "Rul ned ved uddata"
+
+#: gnome-terminal/gnome-terminal.c:1477
+msgid "Color selector"
+msgstr "Farvevælger"
+
+#: gnome-terminal/gnome-terminal.c:1583 gnome-terminal/gnome-terminal.c:1600
+msgid "_New terminal"
+msgstr "_Ny terminal"
+
+#: gnome-terminal/gnome-terminal.c:1583 gnome-terminal/gnome-terminal.c:1600
+msgid "Creates a new terminal window"
+msgstr "Opretter et nyt terminal vindue"
+
+#: gnome-terminal/gnome-terminal.c:1585
+msgid "_Hide menubar"
+msgstr "_Skjul menulinie"
+
+#: gnome-terminal/gnome-terminal.c:1587
+msgid "_Close terminal"
+msgstr "_Luk terminal"
+
+#: gnome-terminal/gnome-terminal.c:1602
+msgid "_Show menubar"
+msgstr "_Vis menulinie"
+
+#: gnome-terminal/gnome-terminal.c:1602
+msgid "Toggles whether or not the menubar is displayed."
+msgstr "Vælg mellem at vise eller skjule menulinien."
+
+#: gnome-terminal/gnome-terminal.c:1604
+msgid "_Secure keyboard"
+msgstr "_Sikkert tastatur"
+
+#: gnome-terminal/gnome-terminal.c:1605
+msgid "Toggles whether or not the keyboard is grabbed by the terminal."
+msgstr "Vælg om tastaturet opsnappes af terminalen eller ej."
+
+#: gnome-terminal/gnome-terminal.c:1608 gnome-terminal/gnome-terminal.c:1637
+msgid "_Reset Terminal"
+msgstr "_Genstart terminal"
+
+#: gnome-terminal/gnome-terminal.c:1609 gnome-terminal/gnome-terminal.c:1638
+msgid "Reset and _Clear"
+msgstr "Genstart og _ryd"
+
+#: gnome-terminal/gnome-terminal.c:1619
+msgid "_Open in browser"
+msgstr "Å_bn i browser"
+
+#: gnome-terminal/gnome-terminal.c:1640
+msgid "C_olor selector..."
+msgstr "_Farvevælger..."
+
+#: gnome-terminal/gnome-terminal.c:1646
+msgid "File"
+msgstr "Filer"
+
+#: gnome-terminal/gnome-terminal.c:1651
+msgid "Edit"
+msgstr "Redigér"
+
+#: gnome-terminal/gnome-terminal.c:1990
+#, c-format
+msgid "The error was: %s"
+msgstr "Fejlen var: %s"
+
+#: gnome-terminal/gnome-terminal.c:1991
+msgid ""
+"If you are using Linux 2.2.x with glibc 2.1.x, this\n"
+"is probably due to incorrectly setup Unix98 ptys.\n"
+"\n"
+"Please read linux/Documentation/Changes for how to\n"
+"set them up correctly."
+msgstr ""
+"Hvis du bruger Linux 2.2.x med glibc 2.1.x, er\n"
+"dette sikkert pga. forkert indstillede Unix98 pty'er.\n"
+"\n"
+"Læs venligst linux/Documentation/Changes for at finde\n"
+"ud af hvordan de opsættes korrekt."
+
+#: gnome-terminal/gnome-terminal.c:1996
+#, c-format
+msgid ""
+"There has been an error while trying to log in.\n"
+"\n"
+"%s"
+msgstr ""
+"Der opstod en fejl da du fosøgte at logge ind.\n"
+"\n"
+"%s"
+
+#: gnome-terminal/gnome-terminal.c:2528
+msgid "Terminal class name"
+msgstr "Terminalklassenavn"
+
+#: gnome-terminal/gnome-terminal.c:2528
+msgid "TCLASS"
+msgstr "TCLASS"
+
+#: gnome-terminal/gnome-terminal.c:2531
+msgid "Specifies font name"
+msgstr "Angiv skrifttypenavn"
+
+#: gnome-terminal/gnome-terminal.c:2531
+msgid "FONT"
+msgstr "FONT"
+
+#: gnome-terminal/gnome-terminal.c:2534
+msgid "Do not start up shells as login shells"
+msgstr "Start ikke kommandoskal som logindskal"
+
+#: gnome-terminal/gnome-terminal.c:2537
+msgid "Start up shells as login shells"
+msgstr "Start kommandoskal som logindskal"
+
+#: gnome-terminal/gnome-terminal.c:2540
+msgid "Specifies the geometry for the main window"
+msgstr "Angiv geometri for hovedvinduet"
+
+#: gnome-terminal/gnome-terminal.c:2540
+msgid "GEOMETRY"
+msgstr "GEOMETRY"
+
+#: gnome-terminal/gnome-terminal.c:2543
+msgid "Execute this program instead of a shell"
+msgstr "Kør dette program i stedet for en skal"
+
+#: gnome-terminal/gnome-terminal.c:2543 gnome-terminal/gnome-terminal.c:2546
+msgid "COMMAND"
+msgstr "COMMAND"
+
+#: gnome-terminal/gnome-terminal.c:2546
+msgid "Execute this program the same way as xterm does"
+msgstr "Kør dette program ligesom en xterm ville gøre"
+
+#: gnome-terminal/gnome-terminal.c:2549
+msgid "Foreground color"
+msgstr "Forgrundsfarve"
+
+#: gnome-terminal/gnome-terminal.c:2549 gnome-terminal/gnome-terminal.c:2552
+msgid "COLOR"
+msgstr "COLOR"
+
+#: gnome-terminal/gnome-terminal.c:2552
+msgid "Background color"
+msgstr "Baggrundsfarve"
+
+#: gnome-terminal/gnome-terminal.c:2555
+msgid "Update utmp entry"
+msgstr "Opdatér utmp punkt"
+
+#: gnome-terminal/gnome-terminal.c:2555
+msgid "UTMP"
+msgstr "UTMP"
+
+#: gnome-terminal/gnome-terminal.c:2558
+msgid "Do not update utmp entry"
+msgstr "Opdatér ikke utmp punkt"
+
+#: gnome-terminal/gnome-terminal.c:2558
+msgid "NOUTMP"
+msgstr "NOUTMP"
+
+#: gnome-terminal/gnome-terminal.c:2561
+msgid "Update wtmp entry"
+msgstr "Opdatér wtmp punkt"
+
+#: gnome-terminal/gnome-terminal.c:2561
+msgid "WTMP"
+msgstr "WTMP"
+
+#: gnome-terminal/gnome-terminal.c:2564
+msgid "Do not update wtmp entry"
+msgstr "Opdatér ikke utmp/wtmp punkter"
+
+#: gnome-terminal/gnome-terminal.c:2564
+msgid "NOWTMP"
+msgstr "NOWTMP"
+
+#: gnome-terminal/gnome-terminal.c:2567
+msgid "Update lastlog entry"
+msgstr "Opdatér lastlog-punkt"
+
+#: gnome-terminal/gnome-terminal.c:2567
+msgid "LASTLOG"
+msgstr "LASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2570
+msgid "Do not update lastlog entry"
+msgstr "Opdatér ikke lastlog-punkt"
+
+#: gnome-terminal/gnome-terminal.c:2570
+msgid "NOLASTLOG"
+msgstr "NOLASTLOG"
+
+#: gnome-terminal/gnome-terminal.c:2573
+msgid "Set the window title"
+msgstr "Sæt vinduestitel"
+
+#: gnome-terminal/gnome-terminal.c:2573
+msgid "TITLE"
+msgstr "TITLE"
+
+#: gnome-terminal/gnome-terminal.c:2576
+msgid "Set the TERM variable"
+msgstr "Sæt TERM variablen"
+
+#: gnome-terminal/gnome-terminal.c:2576
+msgid "TERMNAME"
+msgstr "TERMNAME"
+
+#: gnome-terminal/gnome-terminal.c:2579
+msgid "Try to start a TerminalFactory"
+msgstr "Forsøg at starte en TerminalFactory"
+
+#: gnome-terminal/gnome-terminal.c:2582
+msgid "Try to create the terminal with the TerminalFactory"
+msgstr "Prøv at oprette terminalen med TerminalFactory'en"
+
+#: gnome-hint/gnome-hint.c:29
+msgid ""
+"Press the foot in the lower left corner\n"
+"to start working with GNOME"
+msgstr ""
+"Klik på foden i det nederste venstre hjørne\n"
+"for at begynde at arbejde med GNOME"
+
+#: applets/fish/fish.c:512 gnome-hint/gnome-hint.c:231
+msgid "You do not have fortune installed."
+msgstr "Du har ingen 'spåkager' installeret."
+
+#: gnome-hint/gnome-hint.c:373
+msgid ""
+"You've chosen to disable the startup hint.\n"
+"To re-enable it, choose \"Startup Hint\"\n"
+"in the GNOME Control Center"
+msgstr ""
+
+#: gnome-hint/gnome-hint.c:456
+msgid "No message of the day found!"
+msgstr "Fandt ingen besked for idag!"
+
+#: gnome-hint/gnome-hint.c:503
+msgid "Message of The Day"
+msgstr "Dagens meddelelse"
+
+#: gnome-hint/gnome-hint.c:510
+msgid "Fortune"
+msgstr "Spåkage"
+
+#: gnome-hint/gnome-hint.c:518
+msgid "Gnome hint"
+msgstr "GNOME tip"
+
+#: gnome-hint/gnome-hint.c:540
+msgid "Display this dialog next time"
+msgstr ""
+
+#. add the enable box
+#: gnome-hint/gnome-hint-properties.c:126
+msgid "Enable login hints"
+msgstr "Brug logindtips"
+
+#. add the hint box
+#: gnome-hint/gnome-hint-properties.c:133
+msgid "Display normal hints"
+msgstr "Vis normale tips"
+
+#: gnome-hint/gnome-hint-properties.c:142
+msgid "Display fortunes instead of hints"
+msgstr "Vis spåkager istedet for tips"
+
+#: gnome-hint/gnome-hint-properties.c:151
+msgid "Display message of the day instead of hints"
+msgstr "Vis \"Dagens meddelelse\" istedetfor tips"
+
+#: gnome-hint/gnome-hint-properties.c:160
+msgid "Message of the day file to use: "
+msgstr "\"Dagens meddelelse\"-fil: "
+
+#: gnome-edit/gnome-edit.c:141 gnome-edit/gnome-edit.c:148
+msgid ""
+"Error during execution of chosen editor.\n"
+"\n"
+"The editor you have chosen is probably either not available,\n"
+"or is not on your current path."
+msgstr ""
+"Fejl under udførsel af valgt tekstbehandler.\n"
+"\n"
+"Tekstbehandleren du har valgt, er formentlig enten ikke\n"
+"tilgængelig eller ikke i din nuværende søgesti."
+
+#: gnome-edit/gnome-edit.c:167
+msgid ""
+"Alternate editor types are not supported by gnome-edit yet.\n"
+"Please choose a standard executable editor in the gnome-edit capplet\n"
+"in the gnome control center."
+msgstr ""
+"Alternative tekstbehandlertyper er endnu ikke understøttet af gnome-edit.\n"
+"Vælg venligst en almindelig kørbar tekstbehandler i gnome-edit\n"
+"cappletten i GNOME kontrolcenteret."
+
+#: gnome-about/gnome-about.c:472
+msgid "About GNOME"
+msgstr "Om GNOME..."
+
+#: gnome-about/gnome-about.c:561
+msgid "GNOME News Site"
+msgstr "GNOME nyhedsside"
+
+#: gnome-about/gnome-about.c:566
+msgid "GNOME Main Site"
+msgstr "GNOME hovedside"
+
+#: gnome-about/gnome-about.c:571
+msgid "GNOME Developers' Site"
+msgstr "GNOME udviklingsside"
+
+#: gnome-about/authors.h:10
+msgid "GNOME was brought to you by"
+msgstr "GNOME blev bragt til dig af"
+
+#: gnome-about/authors.h:247
+msgid "... and many more"
+msgstr "... og mange flere"
+
+#: gmenu/utils.c:28
+#, c-format
+msgid "creating user directory: %s\n"
+msgstr "opretter brugermappe: %s\n"
+
+#: gmenu/utils.c:31
+#, c-format
+msgid "unable to create user directory: %s\n"
+msgstr "kunne ikke oprette brugermappe: %s\n"
+
+#: gmenu/treenew.c:35 gmenu/treenew.c:110
+msgid ""
+"You can't add an entry to that submenu.\n"
+"You do not have the proper permissions."
+msgstr ""
+"Du kan ikke tilføje noget i denne undermenu.\n"
+"Du har ikke de rigtige rettigheder."
+
+#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
+msgid "New Folder"
+msgstr "Ny mappe"
+
+#: gmenu/treenew.c:63
+msgid "Failed to create directory"
+msgstr "Kunne ikke oprette mappen."
+
+#: gmenu/treenew.c:118 gmenu/treenew.c:127
+msgid "untitled.desktop"
+msgstr "unavngivet.desktop"
+
+#: gmenu/treedel.c:117
+msgid "You can not delete a top level submenu."
+msgstr "Du kan ikke slette en undermenu på topniveau."
+
+#: gmenu/treedel.c:129 gmenu/treedel.c:152
+msgid "Delete this menu item?"
+msgstr "Slet dette menuelement?"
+
+#: gmenu/treedel.c:139
+msgid "Delete empty submenu?"
+msgstr "Slet tom undermenu?"
+
+#: gmenu/treedel.c:145
+msgid "Are you sure you want to delete this submenu and all its contents?"
+msgstr "Er du sikker på at du vil slette denne undermenu og dens indhold?"
+
+#. loading dialog
+#: gmenu/main.c:243 gmenu/main.c:291 gmenu/tree.c:389
+msgid "GNOME menu editor"
+msgstr "GNOME menuredigering"
+
+#: gmenu/tree.c:391
+msgid "One moment, reading menus..."
+msgstr "Et øjeblik, læser menuerne..."
+
+#: gmenu/edit.c:385 gmenu/tree.c:410
+msgid "Favorites (user menus)"
+msgstr "Favoritter (brugermenuer)"
+
+#: gmenu/tree.c:411
+msgid "Top of user menus"
+msgstr "Top af brugermenuer"
+
+#: gmenu/edit.c:389 gmenu/tree.c:418
+msgid "Programs (system menus)"
+msgstr "Programmer (brugermenuer)"
+
+#: gmenu/tree.c:419
+msgid "Top of system menus"
+msgstr "Top af systemmenuer"
+
+#: gmenu/edit.c:393 gmenu/tree.c:426
+msgid "Applets (system menus)"
+msgstr "Appletter (systemmenuer)"
+
+#: gmenu/tree.c:427
+msgid "Top of applet menus"
+msgstr "Top af appletmenuer"
+
+#: gmenu/save.c:27 gmenu/save.c:85
+msgid "The menu item must have a name"
+msgstr "Menupunktet skal have et navn"
+
+#: gmenu/save.c:33
+msgid "The menu entry must have a filename"
+msgstr "Menupunktet skal have et filnavn"
+
+#: gmenu/save.c:40
+msgid "Save changes?"
+msgstr "Gem ændringer?"
+
+#: gmenu/save.c:54
+msgid "This change conflicts with an existing menu item"
+msgstr "Denne ændring er i konflikt med et eksisterende menupunkt"
+
+#: gmenu/save.c:61
+msgid "Overwrite existing menu entry?"
+msgstr "Overskriv eksisterende menupunkt?"
+
+#: gmenu/save.c:112
+msgid ""
+"This change conflicts with an existing menu item.\n"
+"No two menu items in a submenu can have the same name."
+msgstr ""
+"Denne ændring er i konflikt med et eksisterende menupunkt.\n"
+"To menupunkter i en undermenu kan ikke have det samme navn."
+
+#: gmenu/order.c:78
+#, c-format
+msgid "Unable to create file: %s\n"
+msgstr "kunne ikke oprette fil: %s\n"
+
+#: gmenu/order.c:96
+#, c-format
+msgid "unable to remove .order file: %s\n"
+msgstr "kunne ikke fjerne .order fil: %s\n"
+
+#: gmenu/main.c:52 gmenu/main.c:127
+msgid "_New Submenu..."
+msgstr "_Ny undermenu..."
+
+#: gmenu/main.c:53 gmenu/main.c:97 gmenu/main.c:128
+msgid "Create a new submenu"
+msgstr "Opret en ny undermenu"
+
+#: gmenu/main.c:56 gmenu/main.c:124
+msgid "New _Item..."
+msgstr "Nyt _element..."
+
+#: gmenu/main.c:57 gmenu/main.c:125
+msgid "Create a new menu item"
+msgstr "Opret et nyt menupunkt"
+
+#: gmenu/main.c:60 gmenu/main.c:133
+msgid "_Delete..."
+msgstr "Sle_t..."
+
+#: gmenu/main.c:71
+msgid "_Sort Submenu"
+msgstr "_Sortér undermenu"
+
+#: gmenu/main.c:75
+msgid "Sort Submenu _Recursive"
+msgstr "Sortér undermenu _rekursivt"
+
+#: gmenu/main.c:89 gmenu/main.c:148
+msgid "_Sort"
+msgstr "_Sortér"
+
+#: gmenu/main.c:97
+msgid "New Submenu"
+msgstr "Ny undermenu"
+
+#: gmenu/main.c:101
+msgid "New Item"
+msgstr "Nyt punkt"
+
+#: gmenu/main.c:101
+msgid "Create a new item"
+msgstr "Opret et nyt punkt"
+
+#: gmenu/main.c:105
+msgid "Delete"
+msgstr "Slet"
+
+#: gmenu/main.c:105
+msgid "Delete selected menu item"
+msgstr "Slet valgte menupunkt"
+
+#: gmenu/main.c:109 gmenu/main.c:139
+msgid "Move up"
+msgstr "Flyt op"
+
+#: gmenu/main.c:109 gmenu/main.c:139
+msgid "Move selected menu up"
+msgstr "Flyt valgte menu et niveau op"
+
+#: gmenu/main.c:112 gmenu/main.c:142
+msgid "Move down"
+msgstr "Flyt ned"
+
+#: gmenu/main.c:112 gmenu/main.c:142
+msgid "Move selected menu down"
+msgstr "Flyt valgte menu et niveau ned"
+
+#: gmenu/main.c:116
+msgid "Sort Submenu"
+msgstr "Sortér menu"
+
+#: gmenu/main.c:116
+msgid "Sort selected submenu"
+msgstr "Sortér valgte undermenu"
+
+#: gmenu/main.c:152
+msgid "Sort _Recursive"
+msgstr "Sortér _rekursivt"
+
+#: gmenu/main.c:246
+msgid ""
+"Released under the terms of the GNU Public License.\n"
+"GNOME menu editor."
+msgstr ""
+"Udgivet under betingelserne givet i GNU Public License.\n"
+"GNOME menuredigering."
+
+#: gmenu/main.c:283
+msgid "Unable to retrieve GNOME installation directory\n"
+msgstr "kunne ikke hente GNOME installationsmappe\n"
+
+#: gmenu/edit.c:327
+msgid "Save"
+msgstr "Gem"
+
+#: gmenu/desktop.c:80
+msgid " Folder"
+msgstr " Mappe"
+
+#: applets/tasklist/tasklist_properties.c:144
+msgid "Follow panel size"
+msgstr "Følg panelstørrelse"
+
+#: applets/tasklist/tasklist_properties.c:161
+#: applets/tasklist/tasklist_properties.c:212
+msgid "Tasklist width:"
+msgstr "Opgavelistebredde:"
+
+#: applets/tasklist/tasklist_properties.c:167
+msgid "Rows of tasks:"
+msgstr "Opgaverækker:"
+
+#: applets/tasklist/tasklist_properties.c:179
+msgid "Default task size:"
+msgstr "Standard opgavestørrelse:"
+
+#: applets/tasklist/tasklist_properties.c:188
+msgid "Tasklist width is fixed"
+msgstr "Fast opgavelistebredde"
+
+#: applets/tasklist/tasklist_properties.c:192
+msgid "Tasklist width is dynamic"
+msgstr "Dynamisk opgavelistebredde"
+
+#: applets/tasklist/tasklist_properties.c:205
+msgid "Tasklist height:"
+msgstr "Opgavelistehøjde:"
+
+#: applets/tasklist/tasklist_properties.c:224
+msgid "Tasklist height is fixed"
+msgstr "Fast opgavelistehøjde"
+
+#: applets/tasklist/tasklist_properties.c:228
+msgid "Tasklist height is dynamic"
+msgstr "Dynamisk opgavelistehøjde"
+
+#: applets/tasklist/tasklist_properties.c:248
+msgid "Which tasks to show"
+msgstr "Hvilke opgaver skal vises"
+
+#: applets/tasklist/tasklist_properties.c:256
+msgid "Show normal applications"
+msgstr "Vis normale applikationer"
+
+#: applets/tasklist/tasklist_properties.c:259
+msgid "Show iconified (minimized) applications"
+msgstr "Vis minimerede applikationer"
+
+#: applets/tasklist/tasklist_properties.c:263
+msgid "Show normal applications on all desktops"
+msgstr "Vis normale applikationer på alle skriveborde"
+
+#: applets/tasklist/tasklist_properties.c:266
+msgid "Show iconified (minimized) applications on all desktops"
+msgstr "Vis minimerede applikationer på alle skriveborde"
+
+#: applets/tasklist/tasklist_properties.c:277
+msgid "Show mini icons"
+msgstr "Vis små ikoner"
+
+#: applets/tasklist/tasklist_properties.c:280
+msgid "Confirm before killing windows"
+msgstr "Bekræft før dræbning af vinduer"
+
+#: applets/desk-guide/deskguide_applet.c:76
 #: applets/tasklist/tasklist_properties.c:285
 msgid "Display"
 msgstr "Skærm"
 
-#: applets/desk-guide/deskguide_applet.c:72
-msgid "Layout"
-msgstr "Udseende"
+#: applets/tasklist/tasklist_properties.c:312
+msgid "Tasklist properties"
+msgstr "Opgavelisteegenskaber"
 
-#: applets/desk-guide/deskguide_applet.c:74
-msgid "Switch tasklist arrow"
-msgstr "Skift opgavelistepil"
-
-#: applets/desk-guide/deskguide_applet.c:76
-msgid "Show properties `?' button"
-msgstr "Vis '?' knap for egenskaber"
-
-#: applets/desk-guide/deskguide_applet.c:78
-msgid "Show desktop pager"
-msgstr "Vis skrivebordsoversigt"
-
-#: applets/desk-guide/deskguide_applet.c:80
-msgid "Only show current desktop in pager"
-msgstr "Vis kun aktive skrivebord i oversigt"
-
-#: applets/desk-guide/deskguide_applet.c:82
-msgid "Raise area grid over tasks"
-msgstr "Hæv områdegitter over opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:83
-msgid "Tooltips"
-msgstr "Værktøjstips"
-
-#: applets/desk-guide/deskguide_applet.c:85
-msgid "Show Desk-Guide tooltips"
-msgstr "Vis generelle værktøjstips"
-
-#: applets/desk-guide/deskguide_applet.c:87
-msgid "Desk-Guide tooltip delay [ms]"
-msgstr "Forsinkelse v/generelle tips [ms]"
-
-#: applets/desk-guide/deskguide_applet.c:89
-msgid "Show desktop name tooltips"
-msgstr "Vis skrivebordsnavne som værktøjstips"
-
-#: applets/desk-guide/deskguide_applet.c:91
-msgid "Desktop name tooltip delay [ms]"
-msgstr "Forsinkelse v/navnetips [ms]"
-
-#: applets/desk-guide/deskguide_applet.c:93
-msgid "Tasks"
-msgstr "Opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:94
-msgid "Visibility"
-msgstr "Synlighed"
-
-#: applets/desk-guide/deskguide_applet.c:96
-msgid "Show hidden tasks (HIDDEN)"
-msgstr "Vis skjulte opgaver (HIDDEN)"
-
-#: applets/desk-guide/deskguide_applet.c:98
-msgid "Show shaded tasks (SHADED)"
-msgstr "Vis skyggede opgaver (SHADED)"
-
-#: applets/desk-guide/deskguide_applet.c:100
-msgid "Show tasks which hide from window list (SKIP-WINLIST)"
-msgstr "Vis opgaver som gemmer sig fra vindueslisten (SKIP-WINLIST)"
-
-#: applets/desk-guide/deskguide_applet.c:102
-msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
-msgstr "Vis opgaver som gemmer sig for opgavelinien (SKIP-TASKBAR)"
-
-#. CONFIG_SECTION (sect_null_1, NULL),
-#: applets/desk-guide/deskguide_applet.c:105
-msgid "Geometry"
-msgstr "Geometri"
-
-#: applets/desk-guide/deskguide_applet.c:106
-msgid "Horizontal Layout"
-msgstr "Vandret udseende"
-
-#: applets/desk-guide/deskguide_applet.c:108
-msgid "Desktop Height [pixels]"
-msgstr "Skrivebordshøjde [pixler]"
-
-#: applets/desk-guide/deskguide_applet.c:110
-msgid "Override desktop height with panel size"
-msgstr "Overskriv skrivebordshøjde med panelstørrelse"
-
-#: applets/desk-guide/deskguide_applet.c:112
-msgid "Divide height by number of vertical areas"
-msgstr "Dividér højde med antal lodrette områder"
-
-#: applets/desk-guide/deskguide_applet.c:114
-msgid "Rows of Desktops"
-msgstr "Skrivebordsrækker"
-
-#: applets/desk-guide/deskguide_applet.c:116
-msgid "Divide height by number of rows"
-msgstr "Dividér højde med antal rækker"
-
-#: applets/desk-guide/deskguide_applet.c:117
-msgid "Vertical Layout"
-msgstr "Lodret udseende"
-
-#: applets/desk-guide/deskguide_applet.c:119
-msgid "Desktop Width [pixels]"
-msgstr "Skrivebordsbredde [pixler]"
-
-#: applets/desk-guide/deskguide_applet.c:121
-msgid "Override desktop width with panel size"
-msgstr "Overskriv skrivebordsvidde med panelstørrelse"
-
-#: applets/desk-guide/deskguide_applet.c:123
-msgid "Divide width by number of horizontal areas"
-msgstr "Dividér bredde med antal vandrette områder"
-
-#: applets/desk-guide/deskguide_applet.c:125
-msgid "Columns of Desktops"
-msgstr "Skrivebordskolonner"
-
-#: applets/desk-guide/deskguide_applet.c:127
-msgid "Divide width by number of columns"
-msgstr "Dividér bredde med antal kolonner"
-
-#: applets/desk-guide/deskguide_applet.c:129
-msgid "Advanced"
-msgstr "Avanceret"
-
-#: applets/desk-guide/deskguide_applet.c:130
-msgid "Drawing"
-msgstr "Tegning"
-
-#: applets/desk-guide/deskguide_applet.c:132
-msgid "Draw desktops double-buffered (recommended)"
-msgstr "Tegn skriveborde som dobbelt-bufferet (anbefales)"
-
-#: applets/desk-guide/deskguide_applet.c:133
-msgid "Window Manager Workarounds"
-msgstr "Vindueshåndteringskompatibilitet"
-
-#: applets/desk-guide/deskguide_applet.c:135
+#: applets/tasklist/tasklist_menu.c:79
 msgid ""
-"Window manager moves decoration window instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
+"Warning! Unsaved changes will be lost!\n"
+"Proceed?"
 msgstr ""
-"Vindueshåndtering flytter dekorationsvindue istedet\n"
-"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
+"Advarsel! Ugemte ændringer vil gå tabt!\n"
+"Fortsæt?"
 
-#: applets/desk-guide/deskguide_applet.c:138
-msgid ""
-"Window manager changes active area on all desktops\n"
-"(FVWM, Sawmill)"
-msgstr ""
-"Vindueshåndtering ændrer aktivt område på alle skriveborde\n"
-"(FVWM, SawMill)"
+#: applets/tasklist/tasklist_menu.c:188
+msgid "Restore"
+msgstr "Gendan"
 
-#: applets/desk-guide/deskguide_applet.c:141
-msgid ""
-"Window manager expects pager to modify area+desktop properties directly\n"
-"(Enlightenment, FVWM)"
-msgstr ""
-"Vindueshåndtering forventer at skrivebordsguiden ændrer \n"
-"areal+skrivebordsegenskaber direkte (Enlightenment, FVWM)"
+#: applets/tasklist/tasklist_menu.c:188
+msgid "Iconify"
+msgstr "Minimér"
 
-#: applets/desk-guide/deskguide_applet.c:162
-msgid "GNOME Desktop Guide (Pager)"
-msgstr "GNOME skrivebordsguide (oversigt)"
+#: applets/tasklist/tasklist_menu.c:194
+msgid "Unshade"
+msgstr "Rul ned"
 
-#: applets/desk-guide/deskguide_applet.c:178
-msgid ""
-"You are not running a GNOME Compliant\n"
-"Window Manager. GNOME support by the \n"
-"window manager is strongly recommended\n"
-"for proper Desk Guide operation."
-msgstr ""
-"Du bruger i øjeblikket ikke en Gnome-kompatibel\n"
-"vindueshåndtering. Gnome-understøttelse af\n"
-"vindueshåndteringen er nødvendig for at\n"
-"skrivebordsguiden kan virke ordentligt."
+#: applets/tasklist/tasklist_menu.c:194
+msgid "Shade"
+msgstr "Rul op"
 
-#: applets/desk-guide/deskguide_applet.c:183
-msgid "Desk Guide Alert"
-msgstr "Skrivebordsguideadvarsel"
+#: applets/tasklist/tasklist_menu.c:200
+msgid "Unstick"
+msgstr "Klæb ikke"
 
-#: applets/desk-guide/deskguide_applet.c:224 applets/fish/fish.c:754
-#: applets/gen_util/clock.c:379 applets/gen_util/mailcheck.c:1325
-#: applets/gen_util/printer.c:449 applets/tasklist/tasklist_applet.c:858
+#: applets/tasklist/tasklist_menu.c:200
+msgid "Stick"
+msgstr "Klæb"
+
+#: applets/tasklist/tasklist_menu.c:206
+msgid "To desktop"
+msgstr "Til skrivebord"
+
+#: applets/tasklist/tasklist_menu.c:245
+msgid "Close window"
+msgstr "Luk vindue"
+
+#: applets/tasklist/tasklist_menu.c:252
+msgid "Kill app"
+msgstr "Dræb app"
+
+#: applets/desk-guide/deskguide_applet.c:242 applets/fish/fish.c:760
+#: applets/gen_util/clock.c:379 applets/gen_util/mailcheck.c:1339
+#: applets/gen_util/printer.c:449 applets/tasklist/tasklist_applet.c:879
 msgid "About..."
 msgstr "Om..."
 
-#: applets/desk-guide/deskguide_applet.c:230 applets/fish/fish.c:768
-#: applets/gen_util/clock.c:386 applets/gen_util/mailcheck.c:1331
-#: applets/gen_util/printer.c:456 applets/tasklist/tasklist_applet.c:864
-#: panel/drawer.c:411 panel/launcher.c:522 panel/menu.c:1156 panel/menu.c:4420
-msgid "Properties..."
-msgstr "Egenskaber..."
+#: applets/gen_util/printer.c:119
+msgid "Can't execute printer command"
+msgstr "Kan ikke køre printerkommando"
 
-#: applets/desk-guide/deskguide_applet.c:1005
-msgid "Global"
-msgstr "Globalt"
+#: applets/gen_util/printer.c:295
+msgid "Printer properties"
+msgstr "Egenskaber for printere"
 
-#: applets/desk-guide/deskguide_applet.c:1061
-msgid "Desk Guide Settings"
-msgstr "Skrivebordsguideindstillinger"
+#: applets/gen_util/printer.c:302
+msgid "Printer name:"
+msgstr "Printernavn:"
 
-#: applets/fish/fish.c:284 applets/fish/fish.c:605
-#, no-c-format
-msgid "%s the Fish"
-msgstr "Fisken %s"
+#: applets/gen_util/printer.c:306
+msgid "Print command:"
+msgstr "Printerkommando:"
 
-#: applets/fish/fish.c:285
-#, c-format
-msgid "%s the GNOME Fish Says:"
-msgstr "GNOME fisken %s siger:"
+#: applets/gen_util/printer.c:312
+msgid "Printer"
+msgstr "Printer"
 
-#: applets/fish/fish.c:363
-msgid "GNOME Fish Properties"
-msgstr "Egenskaber for fisk"
-
-#: applets/fish/fish.c:371
-msgid "Your GNOME Fish's Name:"
-msgstr "Navnet på din GNOME-fisk:"
-
-#: applets/fish/fish.c:385
-msgid "The Animation Filename:"
-msgstr "Animationsfilnavn:"
-
-#: applets/fish/fish.c:387 applets/gen_util/mailcheck.c:896
-#: gnome-hint/gnome-hint-properties.c:162 gnome-terminal/gnome-terminal.c:1267
-#: panel/menu-properties.c:397 panel/panel-util.c:81 panel/panel-util.c:121
-#: panel/panel-util.c:161 panel/panel_config.c:1074 panel/swallow.c:186
-msgid "Browse"
-msgstr "Gennemse"
-
-#: applets/fish/fish.c:400
-msgid "Frames In Animation:"
-msgstr "Billeder i animationen:"
-
-#: applets/fish/fish.c:416
-msgid "Pause per frame (s):"
-msgstr "Pause for hvert billede (s):"
-
-#: applets/fish/fish.c:429
-msgid "Rotate on vertical panels"
-msgstr "Vend om på lodrette paneler"
-
-#: applets/fish/fish.c:438
-msgid "Fish"
-msgstr "Fisk"
-
-#: applets/fish/fish.c:506 gnome-hint/gnome-hint.c:230
-msgid "You do not have fortune installed."
-msgstr "Du har ingen 'spåkager' installeret."
-
-#: applets/fish/fish.c:519
-msgid ""
-"The water needs changing!\n"
-"(Look at today's date)"
-msgstr ""
-"Vandet skal skiftes!\n"
-"(Kig på dags dato)"
-
-#: applets/fish/fish.c:614
-msgid "(with minor help from George)"
-msgstr "(med lidt hjælp fra George)"
-
-#: applets/fish/fish.c:618
-msgid "The GNOME Fish Applet"
-msgstr "GNOME Fisk-appletten"
-
-#: applets/fish/fish.c:621
-msgid ""
-"This applet has no use what-so-ever. It only takes up disk space and "
-"compilation time, and if loaded it also takes up precious panel space and "
-"memory. If anyone is found using this applet, he should be promptly sent for "
-"a psychiatric evaluation."
-msgstr ""
-"Denne applet er totalt værdiløs. Den optager bare diskplads og "
-"kompileringstid, og når den er i brug optager den også dyrebar plads i "
-"panelet og hukommelsen. Hvis nogen bliver taget i at bruge denne applet, "
-"burde vedkommende straks sendes til psykisk evaluering."
-
-#: applets/fish/fish.c:761 applets/gen_util/mailcheck.c:1337
-#: gnome-terminal/gnome-terminal.c:1651 gsm/session-properties.c:179
-#: help-browser/window.c:234
-msgid "Help"
-msgstr "Hjælp"
-
-#: applets/gen_util/clock.c:147
-msgid ""
-"%I:%M\n"
-"%p"
-msgstr ""
-"%I:%M\n"
-"%p"
-
-#: applets/gen_util/clock.c:150
-msgid "%I:%M %p"
-msgstr "%I:%M %p"
-
-#. This format string is used, to display the actual time in
-#. 24 hour format.
-#: applets/gen_util/clock.c:157
-msgid "%H:%M"
-msgstr "%H:%M"
-
-#. This format string is used, to display the actual day,
-#. when showing a vertical panel.  For an explanation of
-#. this format string type 'man strftime'.
-#: applets/gen_util/clock.c:168
-msgid ""
-"%a\n"
-"%b %d"
-msgstr ""
-"%a\n"
-"%b %d"
-
-#. This format string is used, to display the actual day,
-#. when showing a horizontal panel.
-#: applets/gen_util/clock.c:173
-msgid "%a %b %d"
-msgstr "%a %b %d"
-
-#: applets/gen_util/clock.c:185
-msgid "%A, %B %d"
-msgstr "%A, %B %d"
-
-#: applets/gen_util/clock.c:332 applets/gen_util/mailcheck.c:1239
-#: applets/gen_util/printer.c:406
-msgid "Can't create applet!\n"
-msgstr "Kan ikke oprette applet!\n"
-
-#: applets/gen_util/clock.c:515
-msgid "Clock properties"
-msgstr "Egenskaber for ur"
-
-#: applets/gen_util/clock.c:519
-msgid "Time Format"
-msgstr "Tidsformat"
-
-#: applets/gen_util/clock.c:531
-msgid "12 hour"
-msgstr "12 timer"
-
-#: applets/gen_util/clock.c:540
-msgid "24 hour"
-msgstr "24 timer"
-
-#: applets/gen_util/clock.c:575
-msgid "Show date in applet"
-msgstr "Vis dato i applet"
-
-#: applets/gen_util/clock.c:589
-msgid "Show date in tooltip"
-msgstr "Vis dato i værktøjstips"
-
-#: applets/gen_util/clock.c:603
-msgid "Use GMT"
-msgstr "Brug GMT"
-
-#: applets/gen_util/clock.c:617
-msgid "Unix time"
-msgstr "Unix-tid"
-
-#: applets/gen_util/clock.c:646
-msgid "Clock"
-msgstr "Ur"
-
-#: applets/gen_util/clock.c:677
-msgid "Clock Applet"
-msgstr "Urapplet"
+#: applets/gen_util/printer.c:340
+msgid "Printer Applet"
+msgstr "Printerapplet"
 
 #: applets/gen_util/clock.c:678 applets/gen_util/printer.c:341
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 Free Software Fundation"
 
-#: applets/gen_util/clock.c:680
+#: applets/gen_util/printer.c:343
 msgid ""
-"The clock applet gives your panel a lightweight and simple display of the "
-"date and time"
-msgstr "Urappletten giver panelet en enkel måde at vise tiden og datoen på"
+"The printer applet lets you easily drag files to be printed via a print "
+"command"
+msgstr ""
+"Printerappletten lader dig trække og slippe appletter som bliver udskrevet "
+"vha. printerkommando"
+
+#: applets/gen_util/clock.c:332 applets/gen_util/mailcheck.c:1241
+#: applets/gen_util/printer.c:406
+msgid "Can't create applet!\n"
+msgstr "Kan ikke oprette applet!\n"
+
+#: applets/gen_util/main.c:54
+#, c-format
+msgid "Don't know how to activate `%s'\n"
+msgstr "Ved ikke hvordan '%s' aktiveres\n"
 
 #: applets/gen_util/mailcheck.c:197 applets/gen_util/mailcheck.c:940
 msgid "Password:"
@@ -490,2617 +2767,379 @@ msgstr "Afspil en lyd når der er ny post"
 msgid "Select animation"
 msgstr "Vælg animation"
 
-#: applets/gen_util/mailcheck.c:1112
+#: applets/gen_util/mailcheck.c:1115
 msgid "Mail check properties"
 msgstr "Egenskaber for posttjek"
 
-#: applets/gen_util/mailcheck.c:1116
+#: applets/gen_util/mailcheck.c:1119
 msgid "Mail check"
 msgstr "Posttjek"
 
-#: applets/gen_util/mailcheck.c:1119
+#: applets/gen_util/mailcheck.c:1122
 msgid "Mailbox"
 msgstr "Postkasse"
 
-#: applets/gen_util/mailcheck.c:1192
+#: applets/gen_util/mailcheck.c:1194
 msgid "Mail check Applet"
 msgstr "Posttjekapplet"
 
-#: applets/gen_util/mailcheck.c:1193
+#: applets/gen_util/mailcheck.c:1195
 msgid "(c) 1998-2000 the Free Software Foundation"
 msgstr "(c) 1998-2000 Free Software Fundation"
 
-#: applets/gen_util/mailcheck.c:1195
+#: applets/gen_util/mailcheck.c:1197
 msgid "Mail check notifies you when new mail is on your mailbox"
 msgstr "Posttjek giver dig besked når du har modtaget ny post"
 
-#: applets/gen_util/mailcheck.c:1303
+#: applets/gen_util/mailcheck.c:1305
 msgid "Text only"
 msgstr "Kun tekst"
 
-#: applets/gen_util/main.c:54
+#: applets/gen_util/clock.c:147
+msgid ""
+"%I:%M\n"
+"%p"
+msgstr ""
+"%I:%M\n"
+"%p"
+
+#: applets/gen_util/clock.c:150
+msgid "%I:%M %p"
+msgstr "%I:%M %p"
+
+#. This format string is used, to display the actual time in
+#. 24 hour format.
+#: applets/gen_util/clock.c:157
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#. This format string is used, to display the actual day,
+#. when showing a vertical panel.  For an explanation of
+#. this format string type 'man strftime'.
+#: applets/gen_util/clock.c:168
+msgid ""
+"%a\n"
+"%b %d"
+msgstr ""
+"%a\n"
+"%b %d"
+
+#. This format string is used, to display the actual day,
+#. when showing a horizontal panel.
+#: applets/gen_util/clock.c:173
+msgid "%a %b %d"
+msgstr "%a %b %d"
+
+#: applets/gen_util/clock.c:185
+msgid "%A, %B %d"
+msgstr "%A, %B %d"
+
+#: applets/gen_util/clock.c:515
+msgid "Clock properties"
+msgstr "Egenskaber for ur"
+
+#: applets/gen_util/clock.c:519
+msgid "Time Format"
+msgstr "Tidsformat"
+
+#: applets/gen_util/clock.c:531
+msgid "12 hour"
+msgstr "12 timer"
+
+#: applets/gen_util/clock.c:540
+msgid "24 hour"
+msgstr "24 timer"
+
+#: applets/gen_util/clock.c:575
+msgid "Show date in applet"
+msgstr "Vis dato i applet"
+
+#: applets/gen_util/clock.c:589
+msgid "Show date in tooltip"
+msgstr "Vis dato i værktøjstips"
+
+#: applets/gen_util/clock.c:603
+msgid "Use GMT"
+msgstr "Brug GMT"
+
+#: applets/gen_util/clock.c:617
+msgid "Unix time"
+msgstr "Unix-tid"
+
+#: applets/gen_util/clock.c:646
+msgid "Clock"
+msgstr "Ur"
+
+#: applets/gen_util/clock.c:677
+msgid "Clock Applet"
+msgstr "Urapplet"
+
+#: applets/gen_util/clock.c:680
+msgid ""
+"The clock applet gives your panel a lightweight and simple display of the "
+"date and time"
+msgstr "Urappletten giver panelet en enkel måde at vise tiden og datoen på"
+
+#: applets/fish/fish.c:284 applets/fish/fish.c:611
+#, no-c-format
+msgid "%s the Fish"
+msgstr "Fisken %s"
+
+#: applets/fish/fish.c:285
 #, c-format
-msgid "Don't know how to activate `%s'\n"
-msgstr "Ved ikke hvordan '%s' aktiveres\n"
+msgid "%s the GNOME Fish Says:"
+msgstr "GNOME fisken %s siger:"
 
-#: applets/gen_util/printer.c:119
-msgid "Can't execute printer command"
-msgstr "Kan ikke køre printerkommando"
+#: applets/fish/fish.c:370
+msgid "GNOME Fish Properties"
+msgstr "Egenskaber for fisk"
 
-#: applets/gen_util/printer.c:295
-msgid "Printer properties"
-msgstr "Egenskaber for printere"
+#: applets/fish/fish.c:378
+msgid "Your GNOME Fish's Name:"
+msgstr "Navnet på din GNOME-fisk:"
 
-#: applets/gen_util/printer.c:302
-msgid "Printer name:"
-msgstr "Printernavn:"
+#: applets/fish/fish.c:392
+msgid "The Animation Filename:"
+msgstr "Animationsfilnavn:"
 
-#: applets/gen_util/printer.c:306
-msgid "Print command:"
-msgstr "Printerkommando:"
+#: applets/fish/fish.c:407
+msgid "Frames In Animation:"
+msgstr "Billeder i animationen:"
 
-#: applets/gen_util/printer.c:312
-msgid "Printer"
-msgstr "Printer"
+#: applets/fish/fish.c:423
+msgid "Pause per frame (s):"
+msgstr "Pause for hvert billede (s):"
 
-#: applets/gen_util/printer.c:340
-msgid "Printer Applet"
-msgstr "Printerapplet"
+#: applets/fish/fish.c:436
+msgid "Rotate on vertical panels"
+msgstr "Vend om på lodrette paneler"
 
-#: applets/gen_util/printer.c:343
+#: applets/fish/fish.c:445
+msgid "Fish"
+msgstr "Fisk"
+
+#: applets/fish/fish.c:525
 msgid ""
-"The printer applet lets you easily drag files to be printed via a print "
-"command"
+"The water needs changing!\n"
+"(Look at today's date)"
 msgstr ""
-"Printerappletten lader dig trække og slippe appletter som bliver udskrevet "
-"vha. printerkommando"
+"Vandet skal skiftes!\n"
+"(Kig på dags dato)"
 
-#: applets/tasklist/tasklist_menu.c:79
+#: applets/fish/fish.c:620
+msgid "(with minor help from George)"
+msgstr "(med lidt hjælp fra George)"
+
+#: applets/fish/fish.c:624
+msgid "The GNOME Fish Applet"
+msgstr "GNOME Fisk-appletten"
+
+#: applets/fish/fish.c:627
 msgid ""
-"Warning! Unsaved changes will be lost!\n"
-"Proceed?"
+"This applet has no use what-so-ever. It only takes up disk space and "
+"compilation time, and if loaded it also takes up precious panel space and "
+"memory. If anyone is found using this applet, he should be promptly sent for "
+"a psychiatric evaluation."
 msgstr ""
-"Advarsel! Ugemte ændringer vil gå tabt!\n"
-"Fortsæt?"
+"Denne applet er totalt værdiløs. Den optager bare diskplads og "
+"kompileringstid, og når den er i brug optager den også dyrebar plads i "
+"panelet og hukommelsen. Hvis nogen bliver taget i at bruge denne applet, "
+"burde vedkommende straks sendes til psykisk evaluering."
 
-#: applets/tasklist/tasklist_menu.c:188
-msgid "Iconify"
-msgstr "Minimér"
+#: applets/desk-guide/deskguide_applet.c:77
+msgid "Layout"
+msgstr "Udseende"
 
-#: applets/tasklist/tasklist_menu.c:188
-msgid "Restore"
-msgstr "Gendan"
+#: applets/desk-guide/deskguide_applet.c:79
+msgid "Switch tasklist arrow"
+msgstr "Skift opgavelistepil"
 
-#: applets/tasklist/tasklist_menu.c:194
-msgid "Shade"
-msgstr "Rul op"
+#: applets/desk-guide/deskguide_applet.c:81
+msgid "Show properties `?' button"
+msgstr "Vis '?' knap for egenskaber"
 
-#: applets/tasklist/tasklist_menu.c:194
-msgid "Unshade"
-msgstr "Rul ned"
+#: applets/desk-guide/deskguide_applet.c:83
+msgid "Show desktop pager"
+msgstr "Vis skrivebordsoversigt"
 
-#: applets/tasklist/tasklist_menu.c:200
-msgid "Stick"
-msgstr "Klæb"
+#: applets/desk-guide/deskguide_applet.c:85
+msgid "Only show current desktop in pager"
+msgstr "Vis kun aktive skrivebord i oversigt"
 
-#: applets/tasklist/tasklist_menu.c:200
-msgid "Unstick"
-msgstr "Klæb ikke"
+#: applets/desk-guide/deskguide_applet.c:87
+msgid "Raise area grid over tasks"
+msgstr "Hæv områdegitter over opgaver"
 
-#: applets/tasklist/tasklist_menu.c:206
-msgid "To desktop"
-msgstr "Til skrivebord"
+#: applets/desk-guide/deskguide_applet.c:88
+msgid "Tooltips"
+msgstr "Værktøjstips"
 
-#: applets/tasklist/tasklist_menu.c:245
-msgid "Close window"
-msgstr "Luk vindue"
+#: applets/desk-guide/deskguide_applet.c:90
+msgid "Show Desk-Guide tooltips"
+msgstr "Vis generelle værktøjstips"
 
-#: applets/tasklist/tasklist_menu.c:252
-msgid "Kill app"
-msgstr "Dræb app"
+#: applets/desk-guide/deskguide_applet.c:92
+msgid "Desk-Guide tooltip delay [ms]"
+msgstr "Forsinkelse v/generelle tips [ms]"
 
-#: applets/tasklist/tasklist_properties.c:144
-msgid "Follow panel size"
-msgstr "Følg panelstørrelse"
+#: applets/desk-guide/deskguide_applet.c:94
+msgid "Show desktop name tooltips"
+msgstr "Vis skrivebordsnavne som værktøjstips"
 
-#: applets/tasklist/tasklist_properties.c:153 panel/menu.c:3461
-msgid "Horizontal"
-msgstr "Vandret"
+#: applets/desk-guide/deskguide_applet.c:96
+msgid "Desktop name tooltip delay [ms]"
+msgstr "Forsinkelse v/navnetips [ms]"
 
-#: applets/tasklist/tasklist_properties.c:161
-#: applets/tasklist/tasklist_properties.c:212
-msgid "Tasklist width:"
-msgstr "Opgavelistebredde:"
+#: applets/desk-guide/deskguide_applet.c:98
+msgid "Tasks"
+msgstr "Opgaver"
 
-#: applets/tasklist/tasklist_properties.c:167
-msgid "Rows of tasks:"
-msgstr "Opgaverækker:"
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Visibility"
+msgstr "Synlighed"
 
-#: applets/tasklist/tasklist_properties.c:179
-msgid "Default task size:"
-msgstr "Standard opgavestørrelse:"
+#: applets/desk-guide/deskguide_applet.c:101
+msgid "Show hidden tasks (HIDDEN)"
+msgstr "Vis skjulte opgaver (HIDDEN)"
 
-#: applets/tasklist/tasklist_properties.c:188
-msgid "Tasklist width is fixed"
-msgstr "Fast opgavelistebredde"
+#: applets/desk-guide/deskguide_applet.c:103
+msgid "Show shaded tasks (SHADED)"
+msgstr "Vis skyggede opgaver (SHADED)"
 
-#: applets/tasklist/tasklist_properties.c:192
-msgid "Tasklist width is dynamic"
-msgstr "Dynamisk opgavelistebredde"
+#: applets/desk-guide/deskguide_applet.c:105
+msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+msgstr "Vis opgaver som gemmer sig fra vindueslisten (SKIP-WINLIST)"
 
-#: applets/tasklist/tasklist_properties.c:198 panel/menu.c:3462
-msgid "Vertical"
-msgstr "Lodret"
+#: applets/desk-guide/deskguide_applet.c:107
+msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+msgstr "Vis opgaver som gemmer sig for opgavelinien (SKIP-TASKBAR)"
 
-#: applets/tasklist/tasklist_properties.c:205
-msgid "Tasklist height:"
-msgstr "Opgavelistehøjde:"
+#. CONFIG_SECTION (sect_null_1, NULL),
+#: applets/desk-guide/deskguide_applet.c:110
+msgid "Geometry"
+msgstr "Geometri"
 
-#: applets/tasklist/tasklist_properties.c:224
-msgid "Tasklist height is fixed"
-msgstr "Fast opgavelistehøjde"
+#: applets/desk-guide/deskguide_applet.c:111
+msgid "Horizontal Layout"
+msgstr "Vandret udseende"
 
-#: applets/tasklist/tasklist_properties.c:228
-msgid "Tasklist height is dynamic"
-msgstr "Dynamisk opgavelistehøjde"
+#: applets/desk-guide/deskguide_applet.c:113
+msgid "Desktop Height [pixels]"
+msgstr "Skrivebordshøjde [pixler]"
 
-#: applets/tasklist/tasklist_properties.c:235 panel/menu.c:3491
-msgid "Size"
-msgstr "Størrelse"
+#: applets/desk-guide/deskguide_applet.c:115
+msgid "Override desktop height with panel size"
+msgstr "Overskriv skrivebordshøjde med panelstørrelse"
 
-#: applets/tasklist/tasklist_properties.c:248
-msgid "Which tasks to show"
-msgstr "Hvilke opgaver skal vises"
+#: applets/desk-guide/deskguide_applet.c:117
+msgid "Divide height by number of vertical areas"
+msgstr "Dividér højde med antal lodrette områder"
 
-#: applets/tasklist/tasklist_properties.c:256
-msgid "Show normal applications"
-msgstr "Vis normale applikationer"
+#: applets/desk-guide/deskguide_applet.c:119
+msgid "Rows of Desktops"
+msgstr "Skrivebordsrækker"
 
-#: applets/tasklist/tasklist_properties.c:259
-msgid "Show iconified (minimized) applications"
-msgstr "Vis minimerede applikationer"
+#: applets/desk-guide/deskguide_applet.c:121
+msgid "Divide height by number of rows"
+msgstr "Dividér højde med antal rækker"
 
-#: applets/tasklist/tasklist_properties.c:263
-msgid "Show normal applications on all desktops"
-msgstr "Vis normale applikationer på alle skriveborde"
+#: applets/desk-guide/deskguide_applet.c:122
+msgid "Vertical Layout"
+msgstr "Lodret udseende"
 
-#: applets/tasklist/tasklist_properties.c:266
-msgid "Show iconified (minimized) applications on all desktops"
-msgstr "Vis minimerede applikationer på alle skriveborde"
+#: applets/desk-guide/deskguide_applet.c:124
+msgid "Desktop Width [pixels]"
+msgstr "Skrivebordsbredde [pixler]"
 
-#. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:269 help-browser/toc-man.c:25
-#: help-browser/toc2-man.c:27 panel/gnome-panel-properties.c:878
-#: panel/gnome-panel-properties.c:1274
-msgid "Miscellaneous"
-msgstr "Diverse"
+#: applets/desk-guide/deskguide_applet.c:126
+msgid "Override desktop width with panel size"
+msgstr "Overskriv skrivebordsvidde med panelstørrelse"
 
-#: applets/tasklist/tasklist_properties.c:277
-msgid "Show mini icons"
-msgstr "Vis små ikoner"
+#: applets/desk-guide/deskguide_applet.c:128
+msgid "Divide width by number of horizontal areas"
+msgstr "Dividér bredde med antal vandrette områder"
 
-#: applets/tasklist/tasklist_properties.c:280
-msgid "Confirm before killing windows"
-msgstr "Bekræft før dræbning af vinduer"
+#: applets/desk-guide/deskguide_applet.c:130
+msgid "Columns of Desktops"
+msgstr "Skrivebordskolonner"
 
-#: applets/tasklist/tasklist_properties.c:304
-msgid "Tasklist properties"
-msgstr "Opgavelisteegenskaber"
+#: applets/desk-guide/deskguide_applet.c:132
+msgid "Divide width by number of columns"
+msgstr "Dividér bredde med antal kolonner"
 
-#: gmenu/desktop.c:80
-msgid " Folder"
-msgstr " Mappe"
+#: applets/desk-guide/deskguide_applet.c:134
+msgid "Advanced"
+msgstr "Avanceret"
 
-#: gmenu/edit.c:327
-msgid "Save"
-msgstr "Gem"
+#: applets/desk-guide/deskguide_applet.c:135
+msgid "Drawing"
+msgstr "Tegning"
 
-#: gmenu/edit.c:345 gsm/session-properties.c:170
-msgid "Revert"
-msgstr "Forkast"
+#: applets/desk-guide/deskguide_applet.c:137
+msgid "Draw desktops double-buffered (recommended)"
+msgstr "Tegn skriveborde som dobbelt-bufferet (anbefales)"
 
-#: gmenu/edit.c:385 gmenu/tree.c:410
-msgid "Favorites (user menus)"
-msgstr "Favoritter (brugermenuer)"
+#: applets/desk-guide/deskguide_applet.c:138
+msgid "Window Manager Workarounds"
+msgstr "Vindueshåndteringskompatibilitet"
 
-#: gmenu/edit.c:389 gmenu/tree.c:418
-msgid "Programs (system menus)"
-msgstr "Programmer (brugermenuer)"
-
-#: gmenu/edit.c:393 gmenu/tree.c:426
-msgid "Applets (system menus)"
-msgstr "Appletter (systemmenuer)"
-
-#: gmenu/main.c:52 gmenu/main.c:127
-msgid "_New Submenu..."
-msgstr "_Ny undermenu..."
-
-#: gmenu/main.c:53 gmenu/main.c:97 gmenu/main.c:128
-msgid "Create a new submenu"
-msgstr "Opret en ny undermenu"
-
-#: gmenu/main.c:56 gmenu/main.c:124
-msgid "New _Item..."
-msgstr "Nyt _element..."
-
-#: gmenu/main.c:57 gmenu/main.c:125
-msgid "Create a new menu item"
-msgstr "Opret et nyt menupunkt"
-
-#: gmenu/main.c:60 gmenu/main.c:133
-msgid "_Delete..."
-msgstr "Sle_t..."
-
-#: gmenu/main.c:71
-msgid "_Sort Submenu"
-msgstr "_Sortér undermenu"
-
-#: gmenu/main.c:75
-msgid "Sort Submenu _Recursive"
-msgstr "Sortér undermenu _rekursivt"
-
-#: gmenu/main.c:89 gmenu/main.c:148
-msgid "_Sort"
-msgstr "_Sortér"
-
-#: gmenu/main.c:97
-msgid "New Submenu"
-msgstr "Ny undermenu"
-
-#: gmenu/main.c:101
-msgid "Create a new item"
-msgstr "Opret et nyt punkt"
-
-#: gmenu/main.c:101
-msgid "New Item"
-msgstr "Nyt punkt"
-
-#: gmenu/main.c:105
-msgid "Delete"
-msgstr "Slet"
-
-#: gmenu/main.c:105
-msgid "Delete selected menu item"
-msgstr "Slet valgte menupunkt"
-
-#: gmenu/main.c:109 gmenu/main.c:139
-msgid "Move selected menu up"
-msgstr "Flyt valgte menu et niveau op"
-
-#: gmenu/main.c:109 gmenu/main.c:139
-msgid "Move up"
-msgstr "Flyt op"
-
-#: gmenu/main.c:112 gmenu/main.c:142
-msgid "Move down"
-msgstr "Flyt ned"
-
-#: gmenu/main.c:112 gmenu/main.c:142
-msgid "Move selected menu down"
-msgstr "Flyt valgte menu et niveau ned"
-
-#: gmenu/main.c:116
-msgid "Sort Submenu"
-msgstr "Sortér menu"
-
-#: gmenu/main.c:116
-msgid "Sort selected submenu"
-msgstr "Sortér valgte undermenu"
-
-#: gmenu/main.c:152
-msgid "Sort _Recursive"
-msgstr "Sortér _rekursivt"
-
-#. loading dialog
-#: gmenu/main.c:243 gmenu/main.c:291 gmenu/tree.c:389
-msgid "GNOME menu editor"
-msgstr "GNOME menuredigering"
-
-#: gmenu/main.c:246
+#: applets/desk-guide/deskguide_applet.c:140
 msgid ""
-"Released under the terms of the GNU Public License.\n"
-"GNOME menu editor."
+"Window manager moves decoration window instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM, Sawmill)"
 msgstr ""
-"Udgivet under betingelserne givet i GNU Public License.\n"
-"GNOME menuredigering."
+"Vindueshåndtering flytter dekorationsvindue istedet\n"
+"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 
-#: gmenu/main.c:283
-msgid "Unable to retrieve GNOME installation directory\n"
-msgstr "kunne ikke hente GNOME installationsmappe\n"
-
-#: gmenu/order.c:78
-#, c-format
-msgid "Unable to create file: %s\n"
-msgstr "kunne ikke oprette fil: %s\n"
-
-#: gmenu/order.c:96
-#, c-format
-msgid "unable to remove .order file: %s\n"
-msgstr "kunne ikke fjerne .order fil: %s\n"
-
-#: gmenu/save.c:27 gmenu/save.c:85
-msgid "The menu item must have a name"
-msgstr "Menupunktet skal have et navn"
-
-#: gmenu/save.c:33
-msgid "The menu entry must have a filename"
-msgstr "Menupunktet skal have et filnavn"
-
-#: gmenu/save.c:40
-msgid "Save changes?"
-msgstr "Gem ændringer?"
-
-#: gmenu/save.c:54
-msgid "This change conflicts with an existing menu item"
-msgstr "Denne ændring er i konflikt med et eksisterende menupunkt"
-
-#: gmenu/save.c:61
-msgid "Overwrite existing menu entry?"
-msgstr "Overskriv eksisterende menupunkt?"
-
-#: gmenu/save.c:112
+#: applets/desk-guide/deskguide_applet.c:143
 msgid ""
-"This change conflicts with an existing menu item.\n"
-"No two menu items in a submenu can have the same name."
+"Window manager changes active area on all desktops\n"
+"(FVWM, Sawmill)"
 msgstr ""
-"Denne ændring er i konflikt med et eksisterende menupunkt.\n"
-"To menupunkter i en undermenu kan ikke have det samme navn."
+"Vindueshåndtering ændrer aktivt område på alle skriveborde\n"
+"(FVWM, SawMill)"
 
-#: gmenu/tree.c:391
-msgid "One moment, reading menus..."
-msgstr "Et øjeblik, læser menuerne..."
-
-#: gmenu/tree.c:411
-msgid "Top of user menus"
-msgstr "Top af brugermenuer"
-
-#: gmenu/tree.c:419
-msgid "Top of system menus"
-msgstr "Top af systemmenuer"
-
-#: gmenu/tree.c:427
-msgid "Top of applet menus"
-msgstr "Top af appletmenuer"
-
-#: gmenu/treedel.c:117
-msgid "You can not delete a top level submenu."
-msgstr "Du kan ikke slette en undermenu på topniveau."
-
-#: gmenu/treedel.c:129 gmenu/treedel.c:152
-msgid "Delete this menu item?"
-msgstr "Slet dette menuelement?"
-
-#: gmenu/treedel.c:139
-msgid "Delete empty submenu?"
-msgstr "Slet tom undermenu?"
-
-#: gmenu/treedel.c:145
-msgid "Are you sure you want to delete this submenu and all its contents?"
-msgstr "Er du sikker på at du vil slette denne undermenu og dens indhold?"
-
-#: gmenu/treenew.c:35 gmenu/treenew.c:110
+#: applets/desk-guide/deskguide_applet.c:146
 msgid ""
-"You can't add an entry to that submenu.\n"
-"You do not have the proper permissions."
+"Window manager expects pager to modify area+desktop properties directly\n"
+"(Enlightenment, FVWM)"
 msgstr ""
-"Du kan ikke tilføje noget i denne undermenu.\n"
-"Du har ikke de rigtige rettigheder."
+"Vindueshåndtering forventer at skrivebordsguiden ændrer \n"
+"areal+skrivebordsegenskaber direkte (Enlightenment, FVWM)"
 
-#: gmenu/treenew.c:43 gmenu/treenew.c:52 gmenu/treenew.c:73 gmenu/treenew.c:82
-msgid "New Folder"
-msgstr "Ny mappe"
+#: applets/desk-guide/deskguide_applet.c:167
+msgid "GNOME Desktop Guide (Pager)"
+msgstr "GNOME skrivebordsguide (oversigt)"
 
-#: gmenu/treenew.c:63
-msgid "Failed to create directory"
-msgstr "Kunne ikke oprette mappen."
-
-#: gmenu/treenew.c:118 gmenu/treenew.c:127
-msgid "untitled.desktop"
-msgstr "unavngivet.desktop"
-
-#: gmenu/treenew.c:137 gmenu/treenew.c:144 panel/menu.c:545
-msgid "untitled"
-msgstr "unavngivet"
-
-#: gmenu/utils.c:28
-#, c-format
-msgid "creating user directory: %s\n"
-msgstr "opretter brugermappe: %s\n"
-
-#: gmenu/utils.c:31
-#, c-format
-msgid "unable to create user directory: %s\n"
-msgstr "kunne ikke oprette brugermappe: %s\n"
-
-#: gnome-about/authors.h:10
-msgid "GNOME was brought to you by"
-msgstr "GNOME blev bragt til dig af"
-
-#: gnome-about/authors.h:247
-msgid "... and many more"
-msgstr "... og mange flere"
-
-#: gnome-about/gnome-about.c:472
-msgid "About GNOME"
-msgstr "Om GNOME..."
-
-#: gnome-about/gnome-about.c:561
-msgid "GNOME News Site"
-msgstr "GNOME nyhedsside"
-
-#: gnome-about/gnome-about.c:566
-msgid "GNOME Main Site"
-msgstr "GNOME hovedside"
-
-#: gnome-about/gnome-about.c:571
-msgid "GNOME Developers' Site"
-msgstr "GNOME udviklingsside"
-
-#: gnome-edit/gnome-edit.c:141 gnome-edit/gnome-edit.c:148
+#: applets/desk-guide/deskguide_applet.c:183
 msgid ""
-"Error during execution of chosen editor.\n"
-"\n"
-"The editor you have chosen is probably either not available,\n"
-"or is not on your current path."
+"You are not running a GNOME Compliant\n"
+"Window Manager. GNOME support by the \n"
+"window manager is strongly recommended\n"
+"for proper Desk Guide operation."
 msgstr ""
-"Fejl under udførsel af valgt tekstbehandler.\n"
-"\n"
-"Tekstbehandleren du har valgt, er formentlig enten ikke\n"
-"tilgængelig eller ikke i din nuværende søgesti."
-
-#: gnome-edit/gnome-edit.c:167
-msgid ""
-"Alternate editor types are not supported by gnome-edit yet.\n"
-"Please choose a standard executable editor in the gnome-edit capplet\n"
-"in the gnome control center."
-msgstr ""
-"Alternative tekstbehandlertyper er endnu ikke understøttet af gnome-edit.\n"
-"Vælg venligst en almindelig kørbar tekstbehandler i gnome-edit\n"
-"cappletten i GNOME kontrolcenteret."
-
-#: gnome-hint/gnome-hint-properties.c:57 panel/gnome-panel-properties.c:1005
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Ingen hjælp er tilgængelig/installeret for disse indstillinger. Sørg\n"
-"venligst for at du installeret GNOMEs brugervejledning på systemet."
-
-#: gnome-hint/gnome-hint-properties.c:59 panel/gnome-panel-properties.c:1007
-msgid "Close"
-msgstr "Luk"
-
-#. add the enable box
-#: gnome-hint/gnome-hint-properties.c:126
-msgid "Enable login hints"
-msgstr "Brug logindtips"
-
-#. add the hint box
-#: gnome-hint/gnome-hint-properties.c:133
-msgid "Display normal hints"
-msgstr "Vis normale tips"
-
-#: gnome-hint/gnome-hint-properties.c:142
-msgid "Display fortunes instead of hints"
-msgstr "Vis spåkager istedet for tips"
-
-#: gnome-hint/gnome-hint-properties.c:151
-msgid "Display message of the day instead of hints"
-msgstr "Vis \"Dagens meddelelse\" istedetfor tips"
-
-#: gnome-hint/gnome-hint-properties.c:160
-msgid "Message of the day file to use: "
-msgstr "\"Dagens meddelelse\"-fil: "
-
-#: gnome-hint/gnome-hint.c:28
-msgid ""
-"Press the foot in the lower left corner\n"
-"to start working with GNOME"
-msgstr ""
-"Klik på foden i det nederste venstre hjørne\n"
-"for at begynde at arbejde med GNOME"
-
-#: gnome-hint/gnome-hint.c:433
-msgid "No message of the day found!"
-msgstr "Fandt ingen besked for idag!"
-
-#: gnome-hint/gnome-hint.c:480
-msgid "Message of The Day"
-msgstr "Dagens meddelelse"
-
-#: gnome-hint/gnome-hint.c:487
-msgid "Fortune"
-msgstr "Spåkage"
-
-#: gnome-hint/gnome-hint.c:495
-msgid "Gnome hint"
-msgstr "GNOME tip"
-
-#: gnome-terminal/gnome-terminal.c:215
-msgid "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
-msgstr "Zvt terminal widget:     Michael Zucchi (zucchi@zedzone.mmc.com.au)"
-
-#: gnome-terminal/gnome-terminal.c:217
-msgid "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
-msgstr "GNOME terminal:     Miguel de Icaza (miguel@kernel.org)"
-
-#: gnome-terminal/gnome-terminal.c:219
-msgid "    Erik Troan (ewt@redhat.com)"
-msgstr "    Erik Troan (ewt@redhat.com)"
-
-#: gnome-terminal/gnome-terminal.c:236
-msgid "GNOME Terminal"
-msgstr "GNOME Terminal"
-
-#: gnome-terminal/gnome-terminal.c:239
-msgid "The GNOME terminal emulation program."
-msgstr "GNOME terminalemuleringsprogrammet."
-
-#: gnome-terminal/gnome-terminal.c:598 gnome-terminal/gnome-terminal.c:1142
-#: gnome-terminal/gnome-terminal.c:1152 gnome-terminal/gnome-terminal.c:2315
-msgid "Default"
-msgstr "Standard"
-
-#: gnome-terminal/gnome-terminal.c:776
-msgid ""
-"You have switched the class of this window. Do you\n"
-" want to reconfigure this window to match the default\n"
-"configuration of the new class?"
-msgstr ""
-"Du har ændret dette vindues klasse. Vil du\n"
-"genindstille dette vindue så det passer med\n"
-"standard indstillingen for den nye klasse?"
-
-#: gnome-terminal/gnome-terminal.c:956
-msgid "Linux console"
-msgstr "Linuxkonsol"
-
-#: gnome-terminal/gnome-terminal.c:957
-msgid "Color Xterm"
-msgstr "Xterm i farver"
-
-#: gnome-terminal/gnome-terminal.c:958
-msgid "rxvt"
-msgstr "rxvt"
-
-#: gnome-terminal/gnome-terminal.c:959
-msgid "Custom"
-msgstr "Personlig"
-
-#: gnome-terminal/gnome-terminal.c:964
-msgid "White on black"
-msgstr "Hvidt på sort"
-
-#: gnome-terminal/gnome-terminal.c:965
-msgid "Black on white"
-msgstr "Sort på hvidt"
-
-#: gnome-terminal/gnome-terminal.c:966
-msgid "Green on black"
-msgstr "Grønt på sort"
-
-#: gnome-terminal/gnome-terminal.c:967
-msgid "Black on light yellow"
-msgstr "Sort på lysegult"
-
-#: gnome-terminal/gnome-terminal.c:968
-msgid "Custom colors"
-msgstr "Egne farver"
-
-#: gnome-terminal/gnome-terminal.c:973
-msgid "Left"
-msgstr "Venstre"
-
-#: gnome-terminal/gnome-terminal.c:974
-msgid "Right"
-msgstr "Højre"
-
-#: gnome-terminal/gnome-terminal.c:975
-msgid "Hidden"
-msgstr "Skjult"
-
-#: gnome-terminal/gnome-terminal.c:1101
-msgid "General"
-msgstr "Generelt"
-
-#. Font
-#: gnome-terminal/gnome-terminal.c:1104
-msgid "Font:"
-msgstr "Skrifttype:"
-
-#: gnome-terminal/gnome-terminal.c:1126 panel/gnome-run.c:155
-#: panel/gnome-run.c:223
-msgid "Browse..."
-msgstr "Gennemse..."
-
-#. Terminal class
-#: gnome-terminal/gnome-terminal.c:1134
-msgid "Terminal Class"
-msgstr "Terminalklasse"
-
-#. Blinking status
-#: gnome-terminal/gnome-terminal.c:1162
-msgid "Blinking cursor"
-msgstr "Blinkende markør"
-
-#. Show menu bar
-#: gnome-terminal/gnome-terminal.c:1171
-msgid "Hide menu bar"
-msgstr "Skjul menulinien"
-
-#. Toggle the bell
-#: gnome-terminal/gnome-terminal.c:1180
-msgid "Silence Terminal bell"
-msgstr "Tavs terminalklokke"
-
-#. Swap keys
-#: gnome-terminal/gnome-terminal.c:1189
-msgid "Swap DEL/Backspace"
-msgstr "Ombyt DEL/Sletbaglæns"
-
-#. --login by default
-#: gnome-terminal/gnome-terminal.c:1198
-msgid "Use --login by default"
-msgstr "Brug --login som standard"
-
-#. Word selection class
-#: gnome-terminal/gnome-terminal.c:1207
-msgid "Select-by-word characters"
-msgstr "Vælg-ved-ord bogstaver"
-
-#. image frame
-#: gnome-terminal/gnome-terminal.c:1228 panel/panel_config.c:1062
-msgid "Image"
-msgstr "Billede"
-
-#: gnome-terminal/gnome-terminal.c:1230 panel/menu.c:3497
-msgid "Background type"
-msgstr "Baggrundstype"
-
-#: gnome-terminal/gnome-terminal.c:1240 panel/menu.c:3456
-msgid "None"
-msgstr "Ingen"
-
-#: gnome-terminal/gnome-terminal.c:1248
-msgid "Background pixmap"
-msgstr "Baggrundsbillede"
-
-#: gnome-terminal/gnome-terminal.c:1264
-msgid "Pixmap file:"
-msgstr "Billedfil:"
-
-#: gnome-terminal/gnome-terminal.c:1279
-msgid "Background pixmap scrolls"
-msgstr "Baggrundsbillede ruller med"
-
-#: gnome-terminal/gnome-terminal.c:1292
-msgid "Transparent"
-msgstr "Gennemsigtig"
-
-#. Shaded
-#: gnome-terminal/gnome-terminal.c:1319
-msgid "Background should be shaded"
-msgstr "Baggrund skal skygges"
-
-#: gnome-terminal/gnome-terminal.c:1332
-msgid "Colors"
-msgstr "Farver"
-
-#. Color palette
-#: gnome-terminal/gnome-terminal.c:1335
-msgid "Color scheme:"
-msgstr "Farveskema:"
-
-#. Foreground, background buttons
-#: gnome-terminal/gnome-terminal.c:1345
-msgid "Foreground color:"
-msgstr "Forgrundsfarve:"
-
-#: gnome-terminal/gnome-terminal.c:1353
-msgid "Background color:"
-msgstr "Baggrundsfarve:"
-
-#: gnome-terminal/gnome-terminal.c:1360
-msgid "Color palette:"
-msgstr "Farvepalette:"
-
-#. default foreground/backgorund selector
-#: gnome-terminal/gnome-terminal.c:1382
-msgid "Fore/Background Colour:"
-msgstr "For/baggrundsfarve:"
-
-#: gnome-terminal/gnome-terminal.c:1395
-msgid "Scrolling"
-msgstr "Rullebjælke"
-
-#. Scrollbar position
-#: gnome-terminal/gnome-terminal.c:1398
-msgid "Scrollbar position"
-msgstr "Rullebjælkeplacering"
-
-#. Scroll back
-#: gnome-terminal/gnome-terminal.c:1409
-msgid "Scrollback lines"
-msgstr "Antal linier man kan rulle tilbage"
-
-#. Scroll on keystroke checkbox
-#: gnome-terminal/gnome-terminal.c:1423
-msgid "Scroll on keystroke"
-msgstr "Rul ned ved tastetryk"
-
-#. Scroll on output checkbox
-#: gnome-terminal/gnome-terminal.c:1432
-msgid "Scroll on output"
-msgstr "Rul ned ved uddata"
-
-#: gnome-terminal/gnome-terminal.c:1467
-msgid "Color selector"
-msgstr "Farvevælger"
-
-#: gnome-terminal/gnome-terminal.c:1573 gnome-terminal/gnome-terminal.c:1590
-msgid "Creates a new terminal window"
-msgstr "Opretter et nyt terminal vindue"
-
-#: gnome-terminal/gnome-terminal.c:1573 gnome-terminal/gnome-terminal.c:1590
-msgid "_New terminal"
-msgstr "_Ny terminal"
-
-#: gnome-terminal/gnome-terminal.c:1575
-msgid "_Hide menubar"
-msgstr "_Skjul menulinie"
-
-#: gnome-terminal/gnome-terminal.c:1577
-msgid "_Close terminal"
-msgstr "_Luk terminal"
-
-#: gnome-terminal/gnome-terminal.c:1592
-msgid "Toggles whether or not the menubar is displayed."
-msgstr "Vælg mellem at vise eller skjule menulinien."
-
-#: gnome-terminal/gnome-terminal.c:1592
-msgid "_Show menubar"
-msgstr "_Vis menulinie"
-
-#: gnome-terminal/gnome-terminal.c:1594
-msgid "_Secure keyboard"
-msgstr "_Sikkert tastatur"
-
-#: gnome-terminal/gnome-terminal.c:1595
-msgid "Toggles whether or not the keyboard is grabbed by the terminal."
-msgstr "Vælg om tastaturet opsnappes af terminalen eller ej."
-
-#: gnome-terminal/gnome-terminal.c:1598 gnome-terminal/gnome-terminal.c:1627
-msgid "_Reset Terminal"
-msgstr "_Genstart terminal"
-
-#: gnome-terminal/gnome-terminal.c:1599 gnome-terminal/gnome-terminal.c:1628
-msgid "Reset and _Clear"
-msgstr "Genstart og _ryd"
-
-#: gnome-terminal/gnome-terminal.c:1609
-msgid "_Open in browser"
-msgstr "Å_bn i browser"
-
-#: gnome-terminal/gnome-terminal.c:1630
-msgid "C_olor selector..."
-msgstr "_Farvevælger..."
-
-#: gnome-terminal/gnome-terminal.c:1636
-msgid "File"
-msgstr "Filer"
-
-#: gnome-terminal/gnome-terminal.c:1641
-msgid "Edit"
-msgstr "Redigér"
-
-#: gnome-terminal/gnome-terminal.c:1646 gsm/gsm-client-row.c:59
-msgid "Settings"
-msgstr "Opsætning"
-
-#: gnome-terminal/gnome-terminal.c:1980
-#, c-format
-msgid "The error was: %s"
-msgstr "Fejlen var: %s"
-
-#: gnome-terminal/gnome-terminal.c:1981
-msgid ""
-"If you are using Linux 2.2.x with glibc 2.1.x, this\n"
-"is probably due to incorrectly setup Unix98 ptys.\n"
-"\n"
-"Please read linux/Documentation/Changes for how to\n"
-"set them up correctly."
-msgstr ""
-"Hvis du bruger Linux 2.2.x med glibc 2.1.x, er\n"
-"dette sikkert pga. forkert indstillede Unix98 pty'er.\n"
-"\n"
-"Læs venligst linux/Documentation/Changes for at finde\n"
-"ud af hvordan de opsættes korrekt."
-
-#: gnome-terminal/gnome-terminal.c:1986
-#, c-format
-msgid ""
-"There has been an error while trying to log in.\n"
-"\n"
-"%s"
-msgstr ""
-"Der opstod en fejl da du fosøgte at logge ind.\n"
-"\n"
-"%s"
-
-#: gnome-terminal/gnome-terminal.c:2518
-msgid "TCLASS"
-msgstr "TCLASS"
-
-#: gnome-terminal/gnome-terminal.c:2518
-msgid "Terminal class name"
-msgstr "Terminalklassenavn"
-
-#: gnome-terminal/gnome-terminal.c:2521
-msgid "FONT"
-msgstr "FONT"
-
-#: gnome-terminal/gnome-terminal.c:2521
-msgid "Specifies font name"
-msgstr "Angiv skrifttypenavn"
-
-#: gnome-terminal/gnome-terminal.c:2524
-msgid "Do not start up shells as login shells"
-msgstr "Start ikke kommandoskal som logindskal"
-
-#: gnome-terminal/gnome-terminal.c:2527
-msgid "Start up shells as login shells"
-msgstr "Start kommandoskal som logindskal"
-
-#: gnome-terminal/gnome-terminal.c:2530
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: gnome-terminal/gnome-terminal.c:2530
-msgid "Specifies the geometry for the main window"
-msgstr "Angiv geometri for hovedvinduet"
-
-#: gnome-terminal/gnome-terminal.c:2533 gnome-terminal/gnome-terminal.c:2536
-msgid "COMMAND"
-msgstr "COMMAND"
-
-#: gnome-terminal/gnome-terminal.c:2533
-msgid "Execute this program instead of a shell"
-msgstr "Kør dette program i stedet for en skal"
-
-#: gnome-terminal/gnome-terminal.c:2536
-msgid "Execute this program the same way as xterm does"
-msgstr "Kør dette program ligesom en xterm ville gøre"
-
-#: gnome-terminal/gnome-terminal.c:2539 gnome-terminal/gnome-terminal.c:2542
-msgid "COLOR"
-msgstr "COLOR"
-
-#: gnome-terminal/gnome-terminal.c:2539
-msgid "Foreground color"
-msgstr "Forgrundsfarve"
-
-#: gnome-terminal/gnome-terminal.c:2542
-msgid "Background color"
-msgstr "Baggrundsfarve"
-
-#: gnome-terminal/gnome-terminal.c:2545
-msgid "UTMP"
-msgstr "UTMP"
-
-#: gnome-terminal/gnome-terminal.c:2545
-msgid "Update utmp entry"
-msgstr "Opdatér utmp punkt"
-
-#: gnome-terminal/gnome-terminal.c:2548
-msgid "Do not update utmp entry"
-msgstr "Opdatér ikke utmp punkt"
-
-#: gnome-terminal/gnome-terminal.c:2548
-msgid "NOUTMP"
-msgstr "NOUTMP"
-
-#: gnome-terminal/gnome-terminal.c:2551
-msgid "Update wtmp entry"
-msgstr "Opdatér wtmp punkt"
-
-#: gnome-terminal/gnome-terminal.c:2551
-msgid "WTMP"
-msgstr "WTMP"
-
-#: gnome-terminal/gnome-terminal.c:2554
-msgid "Do not update wtmp entry"
-msgstr "Opdatér ikke utmp/wtmp punkter"
-
-#: gnome-terminal/gnome-terminal.c:2554
-msgid "NOWTMP"
-msgstr "NOWTMP"
-
-#: gnome-terminal/gnome-terminal.c:2557
-msgid "LASTLOG"
-msgstr "LASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2557
-msgid "Update lastlog entry"
-msgstr "Opdatér lastlog-punkt"
-
-#: gnome-terminal/gnome-terminal.c:2560
-msgid "Do not update lastlog entry"
-msgstr "Opdatér ikke lastlog-punkt"
-
-#: gnome-terminal/gnome-terminal.c:2560
-msgid "NOLASTLOG"
-msgstr "NOLASTLOG"
-
-#: gnome-terminal/gnome-terminal.c:2563
-msgid "Set the window title"
-msgstr "Sæt vinduestitel"
-
-#: gnome-terminal/gnome-terminal.c:2563
-msgid "TITLE"
-msgstr "TITLE"
-
-#: gnome-terminal/gnome-terminal.c:2566
-msgid "Set the TERM variable"
-msgstr "Sæt TERM variablen"
-
-#: gnome-terminal/gnome-terminal.c:2566
-msgid "TERMNAME"
-msgstr "TERMNAME"
-
-#: gnome-terminal/gnome-terminal.c:2569
-msgid "Try to start a TerminalFactory"
-msgstr "Forsøg at starte en TerminalFactory"
-
-#: gnome-terminal/gnome-terminal.c:2572
-msgid "Try to create the terminal with the TerminalFactory"
-msgstr "Prøv at oprette terminalen med TerminalFactory'en"
-
-#: gsm/gnome-login-check.c:67
-#, c-format
-msgid "Looking up internet address for %s"
-msgstr "Slår internetadresse for %s op"
-
-#: gsm/gnome-login-check.c:71
-msgid "Hide"
-msgstr "Skjul"
-
-#: gsm/gnome-login-check.c:234
-msgid "GNOME Login"
-msgstr "GNOME logind"
-
-#: gsm/gnome-login-check.c:234
-msgid "Login"
-msgstr "Logind"
-
-#: gsm/gnome-login-check.c:261
-msgid "Start with default programs"
-msgstr "Start med standardprogrammer"
-
-#: gsm/gnome-login-check.c:265
-msgid "Reset all user settings"
-msgstr "Nulstil alle brugerindstillinger"
-
-#: gsm/gnome-login-check.c:276
-#, c-format
-msgid "Really reset all GNOME user settings for %s?"
-msgstr "Gendan alle GNOME brugerindstillinger for %s?"
-
-#: gsm/gnome-login-check.c:308
-#, c-format
-msgid ""
-"The directory /tmp/orbit-%s is not owned\n"
-"by the current user, %s.\n"
-"Please correct the ownership of this directory."
-msgstr ""
-"Mappen /tmp/orbit-%s er ejes ikke\n"
-"af den nuværende bruger, %s.\n"
-"Rét venligst ejerskabet af denne mappe."
-
-#: gsm/gnome-login-check.c:315 gsm/gnome-login-check.c:340
-msgid "Try again"
-msgstr "Prøv igen"
-
-#: gsm/gnome-login-check.c:316 gsm/gnome-login-check.c:341
-msgid "Continue"
-msgstr "Fortsæt"
-
-#: gsm/gnome-login-check.c:332
-#, c-format
-msgid ""
-"Could not look up internet address for %s.\n"
-"This will prevent GNOME from operating correctly.\n"
-"It may be possible to correct the problem by adding\n"
-"%s to the file /etc/hosts."
-msgstr ""
-"Kunne ikke slå internetadressen for %s op.\n"
-"Dette vil forhindre GNOME i at fungere korrekt.\n"
-"Det kan muligvis lade sig gøre at korrigere problemet\n"
-"ved at tilføje %s til filen /etc/hosts."
-
-#: gsm/gsm-client-editor.c:97
-msgid "Order: "
-msgstr "Orden: "
-
-#: gsm/gsm-client-editor.c:107
-msgid "Style: "
-msgstr "Stil: "
-
-#: gsm/gsm-client-list.c:114
-msgid "Order"
-msgstr "Orden"
-
-#: gsm/gsm-client-list.c:114
-msgid "Program"
-msgstr "Program"
-
-#: gsm/gsm-client-list.c:114
-msgid "State"
-msgstr "Status"
-
-#: gsm/gsm-client-list.c:114
-msgid "Style"
-msgstr "Stil"
-
-#: gsm/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#: gsm/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Venter på at starte eller er allerede færdig."
-
-#: gsm/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Starter"
-
-#: gsm/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Startet men har endnu ikke rapporteret status."
-
-#: gsm/gsm-client-row.c:37
-msgid "Running"
-msgstr "Kører"
-
-#: gsm/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Et normalt medlem af sessionen."
-
-#: gsm/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Gemmer"
-
-#: gsm/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Gemmer sessionsdetaljer"
-
-#: gsm/gsm-client-row.c:43
-msgid "Unknown"
-msgstr "Ukendt"
-
-#: gsm/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Status ikke rapporteret inden tiden løb ud."
-
-#: gsm/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normal"
-
-#: gsm/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Upåvirket af logud men kan dø."
-
-#: gsm/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Gendan"
-
-#: gsm/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Må aldrig dø."
-
-#: gsm/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Affald"
-
-#: gsm/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Forkastes ved logud og må gerne dø."
-
-#: gsm/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Start altid ved hvert logind."
-
-#: gsm/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Fjern program"
-
-#: gsm/logout.c:199
-msgid "Really log out?"
-msgstr "Vil du logge ud?"
-
-#: gsm/logout.c:220
-msgid "Save current setup"
-msgstr "Gem nuværende opsætning"
-
-#: gsm/logout.c:239
-msgid "Action"
-msgstr "Handling"
-
-#: gsm/logout.c:247
-msgid "Logout"
-msgstr "Log ud"
-
-#: gsm/logout.c:250
-msgid "Halt"
-msgstr "Luk ned"
-
-#: gsm/logout.c:253
-msgid "Reboot"
-msgstr "Genstart"
-
-#: gsm/main.c:57
-msgid "Start chooser and pick the session"
-msgstr "Start vælger og vælg session"
-
-#: gsm/main.c:58
-msgid "Only read saved sessions from the default.session file"
-msgstr "Læs kun gemte sessioner fra default.session filen"
-
-#: gsm/main.c:59
-msgid "Millisecond period spent waiting for clients to register (0=forever)"
-msgstr "Millisekund periode at vente på at klienter registrerer (0=for evigt)"
-
-#: gsm/main.c:60
-msgid "Millisecond period spent waiting for clients to respond (0=forever)"
-msgstr "Millisekund periode at vente på at klienter svarer (0=for evigt)"
-
-#: gsm/main.c:61
-msgid "Millisecond period spent waiting for clients to die (0=forever)"
-msgstr "Millisekund periode at vente på at klienter dør (0=for evigt)"
-
-#: gsm/manager.c:379
-msgid "Wait abandoned due to conflict."
-msgstr "Ventning opgivet pga. konflikt."
-
-#: gsm/manager.c:831
-#, c-format
-msgid "No response to the %s command."
-msgstr "Ingen reaktion på %s kommandoen."
-
-#: gsm/manager.c:832
-msgid "The program may be slow, stopped or broken."
-msgstr "Programmet er måske langsomt, gået i stå eller defekt."
-
-#: gsm/manager.c:833
-msgid "You may wait for it to respond or remove it."
-msgstr "Du kan vente på at programmet svarer eller blot fjerne det."
-
-#: gsm/manager.c:1367
-msgid "Respawn abandoned due to failures."
-msgstr "Gendan opgivet pga. fejl."
-
-#: gsm/manager.c:1535
-msgid "A session shutdown is in progress."
-msgstr "En session er i færd med at lukke ned."
-
-#: gsm/save-session.c:44
-msgid "Kill session"
-msgstr "Dræb session"
-
-#: gsm/save-session.c:45
-msgid "Use dialog boxes"
-msgstr "Brug dialogbokse"
-
-#: gsm/save-session.c:96
-msgid "Could not connect to the session manager"
-msgstr "Kunne ikke forbinde med sessionshåndtering"
-
-#: gsm/save-session.c:111
-msgid "Could not connect to gnome-session"
-msgstr "Kunne ikke forbinde med gnome-session"
-
-#: gsm/save-session.c:162
-msgid "Your session has been saved"
-msgstr "Din session er blevet gemt"
-
-#. buttons
-#: gsm/session-properties.c:167
-msgid "Try"
-msgstr "Prøv"
-
-#: gsm/session-properties.c:173
-msgid "OK"
-msgstr "Ok"
-
-#: gsm/session-properties.c:176
-msgid "Cancel"
-msgstr "Annullér"
-
-#: gsm/session-properties.c:269
-msgid "Session"
-msgstr "Session"
-
-#. app
-#: gsm/session-properties.c:323
-msgid "Session Chooser"
-msgstr "Sessionsvælger"
-
-#: gsm/session-properties.c:326
-msgid "Start Session"
-msgstr "Start session"
-
-#: gsm/session-properties.c:329
-msgid "Cancel Login"
-msgstr "Annullér logind"
-
-#: gsm/session-properties.c:355
-msgid "Initialize session settings"
-msgstr "Start sessionsindstillinger"
-
-#: gsm/session-properties.c:356
-msgid "Only display warnings."
-msgstr "Vis kun advarsler."
-
-#: gsm/splash.c:82
-msgid "done"
-msgstr "færdig"
-
-#: gsm/splash.c:154
-msgid "Starting GNOME"
-msgstr "Starter GNOME"
-
-#: gsm/splash.c:178
-#, c-format
-msgid "Starting GNOME... %s"
-msgstr "Starter GNOME... %s"
-
-#: help-browser/bookmarks.c:220
-msgid "Bookmark"
-msgstr "Bogmærke"
-
-#: help-browser/bookmarks.c:220
-msgid "Page Title"
-msgstr "Sidetitel"
-
-#: help-browser/bookmarks.c:230
-msgid "Gnome Help Bookmarks"
-msgstr "GNOME hjælpebogmærker"
-
-#. Buttons
-#: help-browser/bookmarks.c:240
-msgid "Remove"
-msgstr "Fjern"
-
-#: help-browser/gnome-help-browser.c:125
-msgid "X"
-msgstr "X"
-
-#: help-browser/gnome-help-browser.c:125
-msgid "X position of window"
-msgstr "Vinduets X-position"
-
-#: help-browser/gnome-help-browser.c:126 panel/panel_config.c:700
-msgid "Y"
-msgstr "Y"
-
-#: help-browser/gnome-help-browser.c:126
-msgid "Y position of window"
-msgstr "Vinduets Y-position"
-
-#: help-browser/gnome-help-browser.c:127
-msgid "WIDTH"
-msgstr "WIDTH"
-
-#: help-browser/gnome-help-browser.c:127
-msgid "Width of window"
-msgstr "Vinduets bredde"
-
-#: help-browser/gnome-help-browser.c:128
-msgid "HEIGHT"
-msgstr "HEIGHT"
-
-#: help-browser/gnome-help-browser.c:128
-msgid "Height of window"
-msgstr "Vinduets højde"
-
-#: help-browser/gnome-help-browser.c:129
-msgid "Debug level"
-msgstr "Aflusningsniveau"
-
-#: help-browser/gnome-help-browser.c:351 help-browser/window.c:819
-msgid "Gnome Help Browser"
-msgstr "GNOME Hjælpevejledning"
-
-#: help-browser/gnome-help-browser.c:352
-msgid "Copyright (c) 1998 Red Hat Software, Inc."
-msgstr "Ophavsret (c) 1998 Red Hat Software, Inc."
-
-#: help-browser/gnome-help-browser.c:354
-msgid ""
-"GNOME Help Browser allows easy access to various forms of documentation on "
-"your system"
-msgstr ""
-"GNOME Hjælpevejledning giver dig let adgang til forskellige typer "
-"dokumentation på dit system"
-
-#: help-browser/gnome-help-browser.c:612
-msgid "History size"
-msgstr "Historiestørrelse"
-
-#: help-browser/gnome-help-browser.c:613
-msgid "History file"
-msgstr "Historiefil"
-
-#: help-browser/gnome-help-browser.c:614
-msgid "Cache size"
-msgstr "Mellemlagerstørrelse"
-
-#: help-browser/gnome-help-browser.c:615
-msgid "Cache file"
-msgstr "Mellemlagerfil"
-
-#: help-browser/gnome-help-browser.c:616
-msgid "Bookmark file"
-msgstr "Bogmærkefil"
-
-#: help-browser/gnome-help-browser.c:622
-msgid "Man Path"
-msgstr "Manualsti"
-
-#: help-browser/gnome-help-browser.c:623
-msgid "Info Path"
-msgstr "Infosidesti"
-
-#: help-browser/gnome-help-browser.c:624
-msgid "GNOME Help Path"
-msgstr "GNOME hjælpesti"
-
-#: help-browser/gnome-help-browser.c:699
-msgid "Gnome Help Configure"
-msgstr "Indstil GNOME Hjælp"
-
-#: help-browser/gnome-help-browser.c:702
-msgid "History and cache"
-msgstr "Historie og mellemlager"
-
-#: help-browser/gnome-help-browser.c:703
-msgid "Paths"
-msgstr "Søgestier"
-
-#: help-browser/gnome-helpwin.c:220
-msgid "<body><h2>Error: file not found</h2></body>"
-msgstr "<body><h2>Fejl: filen blev ikke fundet</h2></body>"
-
-#: help-browser/history.c:257
-msgid "Count"
-msgstr "Antal"
-
-#: help-browser/history.c:257
-msgid "Last"
-msgstr "Sidste"
-
-#: help-browser/history.c:257
-msgid "URL"
-msgstr "URL"
-
-#: help-browser/history.c:270
-msgid "Gnome Help History"
-msgstr "Historie for GNOME Hjælp"
-
-#: help-browser/toc-man.c:19 help-browser/toc2-man.c:21
-msgid "User Commands"
-msgstr "Brugerkommandoer"
-
-#: help-browser/toc-man.c:20 help-browser/toc2-man.c:22
-msgid "System Calls"
-msgstr "Systemkald"
-
-#: help-browser/toc-man.c:21 help-browser/toc2-man.c:23
-msgid "Library Functions"
-msgstr "Biblioteksfunktioner"
-
-#: help-browser/toc-man.c:22 help-browser/toc2-man.c:24
-msgid "Special Files"
-msgstr "Specialfiler"
-
-#: help-browser/toc-man.c:23 help-browser/toc2-man.c:25
-msgid "File Formats"
-msgstr "Filformater"
-
-#: help-browser/toc-man.c:24 help-browser/toc2-man.c:26
-msgid "Games"
-msgstr "Spil"
-
-#: help-browser/toc-man.c:26 help-browser/toc2-man.c:28
-msgid "Administration"
-msgstr "Administration"
-
-#: help-browser/toc-man.c:27 help-browser/toc2-man.c:29
-msgid "man9"
-msgstr "man9"
-
-#: help-browser/toc-man.c:28 help-browser/toc2-man.c:30
-msgid "mann"
-msgstr "mann"
-
-#: help-browser/toc-man.c:29 help-browser/toc2-man.c:31
-msgid "manx"
-msgstr "manx"
-
-#. Add one new item for each type
-#. This really should iterate through the toc_config list
-#. MAN PAGES
-#: help-browser/toc.c:135
-msgid "Man Pages"
-msgstr "Manualsider"
-
-#. INFO PAGES
-#: help-browser/toc.c:147
-msgid "Info Pages"
-msgstr "Infosider"
-
-#. GNOME HELP
-#: help-browser/toc.c:159
-msgid "GNOME Help"
-msgstr "GNOME Hjælp"
-
-#: help-browser/toc2.c:115 help-browser/toc2.c:258 help-browser/toc2.c:322
-msgid "<h1>Table of Contents</h1>\n"
-msgstr "<h1>Indholdsfortegnelse</h1>\n"
-
-#. Man Pages
-#: help-browser/toc2.c:119
-msgid "<h2>Man Pages</h2>\n"
-msgstr "<h2>Manualsider</h2>\n"
-
-#: help-browser/toc2.c:259
-msgid "<br><br><h2>Info Pages</h2>\n"
-msgstr "<br><br><h2>Infosider</h2>\n"
-
-#: help-browser/toc2.c:323
-msgid "<br><br><h2>GNOME Help</h2>\n"
-msgstr "<br><br><h2>GNOME Hjælp</h2>\n"
-
-#: help-browser/toc2.c:467
-msgid ""
-"<HTML>\n"
-"<BODY>\n"
-"<H2>Results of the substring search for the string "
-msgstr ""
-"<HTML>\n"
-"<BODY>\n"
-"<H2>Resultater af substrengsøgning efter teksten "
-
-#: help-browser/toc2.c:473
-msgid ""
-"<p>\n"
-"<br>\n"
-"<H3>Manual Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"<p>\n"
-"<br>\n"
-"<H3>Manualsider</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:496
-msgid ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNU Info Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNU infosider</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:520
-msgid ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNOME Help Pages</H3>\n"
-"<p>\n"
-"<UL>\n"
-msgstr ""
-"\n"
-"<p>\n"
-"<br>\n"
-"<H3>GNOME hjælpesider</H3>\n"
-"<p>\n"
-"<UL>\n"
-
-#: help-browser/toc2.c:542
-msgid "<br><B>No matches found</B>\n"
-msgstr "<br><B>Ingen træffere</B>\n"
-
-#: help-browser/visit.c:84
-msgid "<BODY>Could not load default TOC page</BODY>"
-msgstr "<BODY>Kunne ikke indlæse standard indholdsfortegnelse</BODY>"
-
-#: help-browser/visit.c:102
-msgid "<BODY>Unknown TOC argument</BODY>"
-msgstr "<BODY>Ukendt argument for indholdsfortegnelse</BODY>"
-
-#: help-browser/window.c:130
-msgid "_New Window"
-msgstr "_Nyt vindue"
-
-#: help-browser/window.c:131
-msgid "Open new browser window"
-msgstr "Åbn nyt browservindue"
-
-#: help-browser/window.c:137
-msgid "Add bookmark"
-msgstr "Tilføj bogmærke"
-
-#: help-browser/window.c:137
-msgid "_Add Bookmark"
-msgstr "_Tilføj bogmærke"
-
-#: help-browser/window.c:152
-msgid "_Back"
-msgstr "Til_bage"
-
-#: help-browser/window.c:155
-msgid "_Forward"
-msgstr "_Fremad"
-
-#: help-browser/window.c:160
-msgid "_Reload"
-msgstr "_Genindlæs"
-
-#: help-browser/window.c:165
-msgid "_Index"
-msgstr "_Indeks"
-
-#: help-browser/window.c:187 help-browser/window.c:229
-msgid "Show History Window"
-msgstr "Vis historievinduet"
-
-#: help-browser/window.c:187
-msgid "_History"
-msgstr "_Historie"
-
-#: help-browser/window.c:192 help-browser/window.c:231
-msgid "Show Bookmarks Window"
-msgstr "Vis bogmærkevindue"
-
-#: help-browser/window.c:192
-msgid "_Bookmarks"
-msgstr "_Bogmærker"
-
-#: help-browser/window.c:206
-msgid "_Window"
-msgstr "_Vindue"
-
-#: help-browser/window.c:207
-msgid "_View"
-msgstr "V_is"
-
-#: help-browser/window.c:216
-msgid "Back"
-msgstr "Tilbage"
-
-#: help-browser/window.c:217
-msgid "Go to the previous location in the history list"
-msgstr "Gå til forrige punkt i historielisten"
-
-#: help-browser/window.c:219
-msgid "Forward"
-msgstr "Fremad"
-
-#: help-browser/window.c:220
-msgid "Go to the next location in the history list"
-msgstr "Gå til næste punkt i historielisten"
-
-#: help-browser/window.c:223
-msgid "Reload"
-msgstr "Genindlæs"
-
-#: help-browser/window.c:226
-msgid "Index"
-msgstr "Indeks"
-
-#: help-browser/window.c:226
-msgid "Show Documentation Index"
-msgstr "Vis indeks for dokumentation"
-
-#: help-browser/window.c:229
-msgid "History"
-msgstr "Historie"
-
-#: help-browser/window.c:231
-msgid "BMarks"
-msgstr "Bogmærker"
-
-#: help-browser/window.c:234
-msgid "Help on Help"
-msgstr "Hjælp om Hjælp"
-
-#: help-browser/window.c:542
-msgid "Location: "
-msgstr "Placering: "
-
-#: help-browser/window.c:946
-#, c-format
-msgid ""
-"Error loading document:\n"
-"\n"
-"%s\n"
-"\n"
-"You probably don't\n"
-"have this documentation\n"
-"installed on your system."
-msgstr ""
-"Fejl ved indlæsning af dokument:\n"
-"\n"
-"%s\n"
-"\n"
-"Du har sikkert ikke\n"
-"denne dokumentation\n"
-"installeret på dit system."
-
-#: help-browser/window.c:949
-msgid "Ok"
-msgstr "Ok"
-
-#: panel/applet-widget.c:912
-msgid "Cannot activate a panel object"
-msgstr "Kan ikke aktivere et panelobjekt"
-
-#: panel/applet-widget.c:1014
-msgid "Cannot start CORBA"
-msgstr "Kan ikke starte CORBA"
-
-#: panel/applet-widget.c:1176 panel/applet-widget.c:1277
-#: panel/applet-widget.c:1347 panel/applet-widget.c:1376
-#: panel/applet-widget.c:1403 panel/applet-widget.c:1439
-#: panel/applet-widget.c:1572
-msgid "CORBA Exception"
-msgstr "CORBA undtagelse"
-
-#: panel/applet-widget.c:1974
-msgid "Cannot create object"
-msgstr "Kan ikke oprette objekt"
-
-#: panel/applet.c:339
-msgid "???"
-msgstr "???"
-
-#: panel/applet.c:379
-msgid "Remove from panel"
-msgstr "Fjern fra panelet"
-
-#: panel/applet.c:386
-msgid "Move"
-msgstr "Flyt"
-
-#: panel/applet.c:398 panel/menu.c:2645
-#, c-format
-msgid "Cannot find pixmap file %s"
-msgstr "Kunne ikke finde billedfil %s"
-
-#: panel/applet.c:399 panel/applet.c:405 panel/menu.c:2853 panel/menu.c:2858
-#: panel/menu.c:3864 panel/menu.c:3869 panel/menu.c:4201
-msgid "Panel"
-msgstr "Panel"
-
-#: panel/applet.c:623
-msgid "Can't find an empty spot"
-msgstr "Kan ikke finde en tom plads"
-
-#: panel/drawer.c:112
-msgid "Tooltip/Name"
-msgstr "Værktøjstips/Navn"
-
-#: panel/drawer.c:116
-msgid "Icon"
-msgstr "Ikon"
-
-#: panel/drawer.c:120
-msgid "Applet appearance"
-msgstr "Appletudseende"
-
-#: panel/drawer.c:127
-msgid "Drawer handle"
-msgstr "Skuffehåndtag"
-
-#. we store this in w for later use!, so don't use w as temp from now
-#. on
-#: panel/drawer.c:132
-msgid "Enable hidebutton"
-msgstr "Brug skjuleknap"
-
-#: panel/drawer.c:141
-msgid "Enable hidebutton arrow"
-msgstr "Brug skjuleknapspil"
-
-#: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:464
-#: panel/menu.c:3580
-msgid "Drawer"
-msgstr "Skuffe"
-
-#: panel/extern.c:442
-msgid "Couldn't add applet"
-msgstr "Kunne ikke tilføje applet"
-
-#: panel/extern.c:498
-msgid "Whoops! for some reason we can't add to the panel"
-msgstr "Hovsa! af en eller grund kan vi ikke tilføje til panelet"
-
-#: panel/extern.c:571
-msgid "No socket was created"
-msgstr "Ingen sokkel oprettedes"
-
-#: panel/gnome-panel-properties.c:104 panel/menu-properties.c:352
-msgid "Programs: "
-msgstr "Programmer: "
-
-#: panel/gnome-panel-properties.c:105 panel/menu-properties.c:356
-msgid "Favorites: "
-msgstr "Favoritter: "
-
-#: panel/gnome-panel-properties.c:106 panel/menu-properties.c:360
-msgid "Applets: "
-msgstr "Appletter: "
-
-#: panel/gnome-panel-properties.c:107
-msgid "AnotherLevel: "
-msgstr "AnotherLevel: "
-
-#: panel/gnome-panel-properties.c:108
-msgid "KDE: "
-msgstr "KDE: "
-
-#: panel/gnome-panel-properties.c:109
-msgid "Debian: "
-msgstr "Debian: "
-
-#: panel/gnome-panel-properties.c:110
-msgid "Panel: "
-msgstr "Panel: "
-
-#: panel/gnome-panel-properties.c:111
-msgid "Desktop: "
-msgstr "Skrivebord: "
-
-#. Animation enable
-#: panel/gnome-panel-properties.c:234
-msgid "Enable animations"
-msgstr "Brug animationer"
-
-#: panel/gnome-panel-properties.c:239
-msgid "Constant speed animations"
-msgstr "Konstant animationshastighed"
-
-#. AutoHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:245
-msgid "Animation speed"
-msgstr "Animationshastighed"
-
-#: panel/gnome-panel-properties.c:255 panel/gnome-panel-properties.c:273
-#: panel/menu.c:3449
-msgid "Auto hide"
-msgstr "Skjul automatisk"
-
-#. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:262 panel/menu.c:3448
-msgid "Explicit hide"
-msgstr "Skjul udtrykkeligt"
-
-#. DrawerHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:268
-msgid "Drawer sliding"
-msgstr "Skuffeglidning"
-
-#. Minimize Delay scale frame
-#: panel/gnome-panel-properties.c:284
-msgid "Delay (ms)"
-msgstr "Forsinkelse (ms)"
-
-#. Minimized size scale frame
-#: panel/gnome-panel-properties.c:290
-msgid "Size (pixels)"
-msgstr "Størrelse (pixler)"
-
-#: panel/gnome-panel-properties.c:381
-msgid "Launcher icon"
-msgstr "Genvejsikon"
-
-#: panel/gnome-panel-properties.c:382
-msgid "Drawer icon"
-msgstr "Skuffeikon"
-
-#: panel/gnome-panel-properties.c:383
-msgid "Menu icon"
-msgstr "Menuikon"
-
-#: panel/gnome-panel-properties.c:384
-msgid "Special icon"
-msgstr "Speciel ikon"
-
-#. toggle button
-#: panel/gnome-panel-properties.c:396
-msgid "Tiles enabled"
-msgstr "Brug fliser"
-
-#: panel/gnome-panel-properties.c:410
-msgid "Normal Tile"
-msgstr "Normal flise"
-
-#: panel/gnome-panel-properties.c:422
-msgid "Clicked Tile"
-msgstr "Trykket flise"
-
-#. Minimized size scale frame
-#: panel/gnome-panel-properties.c:438
-msgid "Border width (tile only)"
-msgstr "Kantbredde (kun fliser)"
-
-#. Minimized size scale frame
-#: panel/gnome-panel-properties.c:444
-msgid "Depth (displacement when pressed)"
-msgstr "Dybde (forskydning når nedtrykt)"
-
-#: panel/gnome-panel-properties.c:463
-msgid "Launcher"
-msgstr "Genvej"
-
-#: panel/gnome-panel-properties.c:465 panel/gnome-panel-properties.c:1269
-#: panel/menu-properties.c:413 panel/menu.c:2206 panel/menu.c:2259
-#: panel/menu.c:2261 panel/menu.c:3528 panel/menu.c:4341
-msgid "Menu"
-msgstr "Menu"
-
-#: panel/gnome-panel-properties.c:466
-msgid "Special"
-msgstr "Speciel"
-
-#: panel/gnome-panel-properties.c:476
-msgid "Button Type: "
-msgstr "Knappetype: "
-
-#. show/hide frame
-#: panel/gnome-panel-properties.c:509
-msgid "Make buttons flush with panel edge"
-msgstr "Lad knapper være i plan med panelkant"
-
-#. only show tiles when mouse is over the button
-#: panel/gnome-panel-properties.c:516
-msgid "Show button tiles only when cursor is over the button"
-msgstr "Vis kun knappefliser når markøren er over knappen"
-
-#. saturate on mouseovers hack
-#: panel/gnome-panel-properties.c:522
-msgid "Keep saturation low when cursor is not on the button"
-msgstr "Brug lav farvemætning når markøren ikke er over knappen"
-
-#. Movement frame
-#: panel/gnome-panel-properties.c:577
-msgid "Default movement mode"
-msgstr "Standard bevægelsesmåde"
-
-#. Switched
-#: panel/gnome-panel-properties.c:587
-msgid "Switched movement (or use Ctrl)"
-msgstr "Omvendt bevægelse (eller brug Ctrl)"
-
-#: panel/gnome-panel-properties.c:595
-msgid "Free movement (doesn't disturb other applets) (or use Alt)"
-msgstr "Fri bevægelse (forstyrrer ikke andre appletter) (eller brug Alt)"
-
-#: panel/gnome-panel-properties.c:603
-msgid "Push movement (or use Shift)"
-msgstr "Skubbebevægelse (eller brug Skift)"
-
-#: panel/gnome-panel-properties.c:608
-msgid "Applet padding"
-msgstr "Appletfyld"
-
-#: panel/gnome-panel-properties.c:672 panel/menu-properties.c:258
-msgid "Off"
-msgstr "Fra"
-
-#: panel/gnome-panel-properties.c:679 panel/menu-properties.c:270
-msgid "In a submenu"
-msgstr "I en undermenu"
-
-#: panel/gnome-panel-properties.c:685
-msgid "In the menu"
-msgstr "I menuen"
-
-#. Menu frame
-#: panel/gnome-panel-properties.c:704
-msgid "Menus"
-msgstr "Menuer"
-
-#. Dot Buttons
-#: panel/gnome-panel-properties.c:714
-msgid "Show [...] buttons"
-msgstr "Vis [...] knapper"
-
-#. Off Panel Popup menus
-#: panel/gnome-panel-properties.c:720
-msgid "Show popup menus outside of panels"
-msgstr "Vis popup-menuer udenfor panelet"
-
-#. Hungry Menus
-#: panel/gnome-panel-properties.c:726
-msgid "Keep menus in memory"
-msgstr "Behold menuer i hukommelsen"
-
-#. large icons
-#: panel/gnome-panel-properties.c:732
-msgid "Use large icons"
-msgstr "Brug store ikoner"
-
-#. Menu frame
-#: panel/gnome-panel-properties.c:738
-msgid "Panel menu"
-msgstr "Panelmenu"
-
-#: panel/gnome-panel-properties.c:856
-msgid "Press a key..."
-msgstr "Tryk på en tast..."
-
-#. Tooltips enable
-#: panel/gnome-panel-properties.c:888
-msgid "Tooltips enabled"
-msgstr "Brug værktøjstips"
-
-#. Drawer/launcher auto close
-#: panel/gnome-panel-properties.c:894
-msgid "Close drawer if a launcher inside it is pressed"
-msgstr "Luk skuffen hvis jeg trykker på en ikon i den"
-
-#. Autoraise
-#: panel/gnome-panel-properties.c:900
-msgid "Raise panels on mouse-over"
-msgstr "Hæv paneler når musen er over dem"
-
-#. Keep on bottom
-#: panel/gnome-panel-properties.c:906
-msgid "Keep panel below windows (GNOME compliant window managers only)"
-msgstr "Behold panel under vinduer (kun GNOME-kompatibel vindueshåndtering)"
-
-#. Confirm panel removal
-#: panel/gnome-panel-properties.c:912
-msgid "Confirm the removal of panels with a dialog"
-msgstr "Bekræft fjernelse af paneler med en dialogboks"
-
-#. Key Bindings frame
-#: panel/gnome-panel-properties.c:918
-msgid "Key Bindings"
-msgstr "Tastaturgenveje"
-
-#. enabled
-#: panel/gnome-panel-properties.c:931
-msgid "Enable panel keybindings"
-msgstr "Brug paneltastaturgenveje"
-
-#. menu key
-#: panel/gnome-panel-properties.c:938
-msgid "Popup menu key"
-msgstr "Popop-menutast"
-
-#: panel/gnome-panel-properties.c:947 panel/gnome-panel-properties.c:972
-#: panel/panel-util.c:599 panel/panel-util.c:651
-msgid "Disabled"
-msgstr "Slået fra"
-
-#: panel/gnome-panel-properties.c:958 panel/gnome-panel-properties.c:983
-msgid "Grab key..."
-msgstr "Opsnap tast..."
-
-#. run key...
-#: panel/gnome-panel-properties.c:965
-msgid "Run dialog key"
-msgstr "\"Kør\"-dialogtast"
-
-#: panel/gnome-panel-properties.c:1254
-msgid "Animation"
-msgstr "Animation"
-
-#: panel/gnome-panel-properties.c:1259
-msgid "Buttons"
-msgstr "Knapper"
-
-#: panel/gnome-panel-properties.c:1264 panel/menu.c:2344 panel/menu.c:4122
-msgid "Applets"
-msgstr "Appletter"
-
-#: panel/gnome-run.c:58
-#, c-format
-msgid ""
-"Failed to execute command:\n"
-"%s"
-msgstr ""
-"Kunne ikke udføre kommando:\n"
-"%s"
-
-#: panel/gnome-run.c:117
-#, c-format
-msgid ""
-"Failed to execute command:\n"
-"%s\n"
-"%s"
-msgstr ""
-"Kunne ikke udføre kommando:\n"
-"%s\n"
-"%s"
-
-#: panel/gnome-run.c:191
-msgid "Run Program"
-msgstr "Kør program"
-
-#: panel/gnome-run.c:197
-msgid "Run"
-msgstr "Kør"
-
-#: panel/gnome-run.c:232
-msgid "Run in terminal"
-msgstr "Kør i terminal"
-
-#: panel/launcher.c:48
-msgid "This launch icon does not specify a program to run"
-msgstr "Denne genvejsikon har intet program at starte"
-
-#: panel/launcher.c:78 panel/menu.c:1607
-msgid "Can't get goad_id from desktop entry!"
-msgstr "Kan ikke få goad_id fra skrivebordselement!"
-
-#: panel/launcher.c:315
-msgid "App"
-msgstr "Applikation"
-
-#: panel/launcher.c:434
-msgid "Launcher properties"
-msgstr "Egenskaber for genvej"
-
-#: panel/launcher.c:555
-msgid "Create launcher applet"
-msgstr "Opret genvejsapplet"
-
-#: panel/logout.c:45 panel/menu.c:4006
-msgid "Log out"
-msgstr "Log ud"
-
-#: panel/logout.c:47
-msgid "Log out of GNOME"
-msgstr "Log ud af GNOME"
-
-#: panel/logout.c:79 panel/logout.c:81 panel/menu.c:3994
-msgid "Lock screen"
-msgstr "Lås skærm"
-
-#: panel/main.c:167
-msgid ""
-"I've detected a panel already running.\n"
-"Start another panel as well?\n"
-"(The new panel will not be restarted.)"
-msgstr ""
-"Jeg kan se at et andet panel allerede kører.\n"
-"Skal vi starte et panel mere?\n"
-"(Det nye panel bliver ikke genstartet.)"
-
-#: panel/main.c:177
-msgid ""
-"There was a problem registering the panel with the GOAD server.\n"
-"The panel will now exit."
-msgstr ""
-"Der opstod et problem med at registrere panelet hos GOAD-tjeneren.\n"
-"Panelet vil afslutte nu."
-
-#: panel/menu-properties.c:128 panel/menu.c:4425
-msgid "Edit menus..."
-msgstr "Redigér menuer..."
-
-#: panel/menu-properties.c:135
-msgid "Can't open directory, using main menu!"
-msgstr "Kan ikke åbne mappe, bruger hovedmenu!"
-
-#: panel/menu-properties.c:282
-msgid "On the main menu"
-msgstr "I hovedmenuen"
-
-#: panel/menu-properties.c:307
-msgid "Menu properties"
-msgstr "Menuegenskaber"
-
-#: panel/menu-properties.c:314
-msgid "Menu type"
-msgstr "Menutype"
-
-#: panel/menu-properties.c:321 panel/menu-properties.c:341 panel/menu.c:3538
-msgid "Main menu"
-msgstr "Hovedmenu"
-
-#: panel/menu-properties.c:332 panel/menu-properties.c:384
-msgid "Normal menu"
-msgstr "Normal menu"
-
-#: panel/menu-properties.c:364
-msgid "AnotherLevel menu (if found): "
-msgstr "AnotherLevel-menu (hvis tilstede): "
-
-#: panel/menu-properties.c:368
-msgid "KDE menu (if found): "
-msgstr "KDE-menu (hvis tilstede): "
-
-#: panel/menu-properties.c:372
-msgid "Debian menu (if found): "
-msgstr "Debian-menu (hvis tilstede): "
-
-#: panel/menu-properties.c:376
-msgid "Panel menu: "
-msgstr "Panelmenu: "
-
-#: panel/menu-properties.c:380
-msgid "Desktop menu: "
-msgstr "Skrivebordsmenu: "
-
-#: panel/menu-properties.c:394
-msgid "Menu path"
-msgstr "Menusti"
-
-#: panel/menu.c:124
-msgid "The GNOME Panel"
-msgstr "GNOME panelet"
-
-#: panel/menu.c:127
-msgid ""
-"This program is responsible for launching other applications, embedding "
-"small applets within itself, world peace, and random X crashes."
-msgstr ""
-"Dette program er ansvarlig for at starte andre applikationer, indlemme små "
-"appletter i sig selv, verdensfreden og vilkårlige X crashes."
-
-#: panel/menu.c:141
-msgid "Can't execute 'About GNOME'"
-msgstr "Kan ikke udføre 'Om GNOME'"
-
-#: panel/menu.c:152 panel/menu.c:1599
-msgid "Can't load entry"
-msgstr "Kunne ikke indlæse element"
-
-#: panel/menu.c:169
-msgid "Can't execute copy (cp)"
-msgstr "Kan ikke køre kopiering (cp)"
-
-#: panel/menu.c:575
-#, c-format
-msgid "Could not get file from path: %s"
-msgstr "Kunne ikke finde fil i sti: %s"
-
-#: panel/menu.c:579 panel/menu.c:675
-#, c-format
-msgid "Could not open .order file: %s"
-msgstr "kunne ikke åbne .order fil: %s"
-
-#: panel/menu.c:597
-msgid "Create menu item"
-msgstr "Opret menuelement"
-
-#: panel/menu.c:644
-#, c-format
-msgid "Could not remove the menu item %s: %s\n"
-msgstr "Kunne ikke fjerne menuelement %s: %s\n"
-
-#: panel/menu.c:653
-#, c-format
-msgid "Could not get file name from path: %s"
-msgstr "Kunne ikke finde filnavn i sti: %s"
-
-#: panel/menu.c:697
-#, c-format
-msgid "Could not rename tmp file %s"
-msgstr "Kunne ikke omdøbe tmp fil %s"
-
-#: panel/menu.c:919 panel/menu.c:966
-msgid "Desktop entry properties"
-msgstr "Egenskaber for skrivebordselementer"
-
-#: panel/menu.c:1051
-msgid "Add this launcher to panel"
-msgstr "Tilføj denne genvej til panelet"
-
-#: panel/menu.c:1054
-msgid "Add this applet as a launcher to panel"
-msgstr "Tilføj denne applet som genvej til panelet"
-
-#: panel/menu.c:1064 panel/menu.c:1111
-msgid "Add this to Favorites menu"
-msgstr "Tilføj denne til favoritmenuen"
-
-#: panel/menu.c:1077
-msgid "Remove this item"
-msgstr "Fjern dette element"
-
-#: panel/menu.c:1094
-msgid "Add this as drawer to panel"
-msgstr "Tilføj som skuffe på panelet"
-
-#: panel/menu.c:1103
-msgid "Add this as menu to panel"
-msgstr "Tilføj som menu på panelet"
-
-#: panel/menu.c:1123
-msgid "Add new item to this menu"
-msgstr "Tilføj nyt element til denne menu"
-
-#: panel/menu.c:1357 panel/menu.c:1433
-msgid "..."
-msgstr "..."
-
-#: panel/menu.c:1575
-msgid "You already have a status dock on the panel. You can only have one"
-msgstr "Du har allerede en statusdok på panelet. Du kan kun have én"
-
-#: panel/menu.c:1944
-msgid "Adding tearoff when tearoffs are disabled"
-msgstr "Tilføj rivafmenuer når rivafmenuer er slået fra"
-
-#: panel/menu.c:2079
-msgid "Can't get goad_id for applet, ignoring it"
-msgstr "Kan ikke få goad_id for applet, ignorerer den"
-
-#: panel/menu.c:2261
-msgid " (empty)"
-msgstr " (tom)"
-
-#: panel/menu.c:2519
-msgid "You can only have one menu panel at a time."
-msgstr "Du kan kun have ét menupanel ad gangen."
-
-#: panel/menu.c:2559 panel/menu.c:2564 panel/menu.c:3753
-msgid "Create panel"
-msgstr "Opret panel"
-
-#: panel/menu.c:2591
-msgid "Menu panel"
-msgstr "Menupanel"
-
-#: panel/menu.c:2599 panel/menu.c:3440 panel/panel_config.c:1168
-#: panel/panel_config.c:1281
-msgid "Edge panel"
-msgstr "Kantpanel"
-
-#: panel/menu.c:2607 panel/menu.c:3441 panel/panel_config.c:1175
-#: panel/panel_config.c:1290
-msgid "Aligned panel"
-msgstr "Justeret panel"
-
-#: panel/menu.c:2615 panel/menu.c:3442 panel/panel_config.c:1181
-#: panel/panel_config.c:1299
-msgid "Sliding panel"
-msgstr "Glidende panel"
-
-#: panel/menu.c:2623 panel/menu.c:3443 panel/panel_config.c:1187
-#: panel/panel_config.c:1308
-msgid "Floating panel"
-msgstr "Flydende panel"
-
-#: panel/menu.c:2664 panel/menu.c:2669 panel/menu.c:4088
-msgid "Programs"
-msgstr "Programmer"
-
-#: panel/menu.c:2678 panel/menu.c:2681
-msgid "No system menus found!"
-msgstr "Fandt ingen systemmenuer!"
-
-#: panel/menu.c:2696
-msgid "Can't create the user menu directory"
-msgstr "kan ikke oprette brugermenumappen"
-
-#: panel/menu.c:2720 panel/menu.c:2724 panel/menu.c:4152
-msgid "Debian menus"
-msgstr "Debian-menuer"
-
-#: panel/menu.c:2742 panel/menu.c:2748 panel/menu.c:4176
-msgid "KDE menus"
-msgstr "KDE-menuer"
-
-#: panel/menu.c:2801
-msgid "You cannot remove your last panel."
-msgstr "Du kan ikke fjerne dit sidste panel."
-
-#: panel/menu.c:2811
-msgid ""
-"When a panel is removed, the panel and its\n"
-"applet settings are lost. Remove this panel?"
-msgstr ""
-"Når et panel bliver fjernet, mister du panelet\n"
-"og dets appletindstillinger. Fjern dette panel?"
-
-#: panel/menu.c:3454
-msgid "With pixmap arrow"
-msgstr "Med pil"
-
-#: panel/menu.c:3455
-msgid "Without pixmap"
-msgstr "Uden pil"
-
-#: panel/menu.c:3467 panel/panel_config.c:836
-msgid "Tiny (24 pixels)"
-msgstr "Bitte (24 pixler)"
-
-#: panel/menu.c:3468 panel/panel_config.c:844
-msgid "Small (36 pixels)"
-msgstr "Lille (36 pixler)"
-
-#: panel/menu.c:3469 panel/panel_config.c:852
-msgid "Standard (48 pixels)"
-msgstr "Standard (48 pixler)"
-
-#: panel/menu.c:3470 panel/panel_config.c:860
-msgid "Large (64 pixels)"
-msgstr "Stor (64 pixler)"
-
-#: panel/menu.c:3471 panel/panel_config.c:868
-msgid "Huge (80 pixels)"
-msgstr "Enorm (80 pixler)"
-
-#: panel/menu.c:3476 panel/panel_config.c:1016
-msgid "Standard"
-msgstr "Standard"
-
-#. color frame
-#: panel/menu.c:3477 panel/panel_config.c:1020 panel/panel_config.c:1035
-msgid "Color"
-msgstr "Farve"
-
-#: panel/menu.c:3478 panel/panel_config.c:1024
-msgid "Pixmap"
-msgstr "Billede"
-
-#: panel/menu.c:3482
-msgid "Type"
-msgstr "Type"
-
-#: panel/menu.c:3485
-msgid "Hiding policy"
-msgstr "Gemmepolitik"
-
-#: panel/menu.c:3488
-msgid "Hide buttons"
-msgstr "Skjuleknapper"
-
-#: panel/menu.c:3494
-msgid "Orientation"
-msgstr "Orientering"
-
-#: panel/menu.c:3517
-msgid "Applet"
-msgstr "Applet"
-
-#: panel/menu.c:3549
-msgid "Programs menu"
-msgstr "Programmenu"
-
-#: panel/menu.c:3559
-msgid "Favorites menu"
-msgstr "Favoritmenu"
-
-#: panel/menu.c:3570
-msgid "Launcher..."
-msgstr "Genvej..."
-
-#: panel/menu.c:3591
-msgid "Log out button"
-msgstr "Logudknap"
-
-#: panel/menu.c:3602
-msgid "Lock button"
-msgstr "Låseknap"
-
-#: panel/menu.c:3614
-msgid "Swallowed app..."
-msgstr "Slugt applikation..."
-
-#: panel/menu.c:3622
-msgid "Status dock"
-msgstr "Statusdok"
-
-#: panel/menu.c:3646 panel/menu.c:3651 panel/menu.c:3729
-msgid "Add to panel"
-msgstr "Tilføj til panel"
-
-#: panel/menu.c:3666
-msgid "Cannot execute panel global properties"
-msgstr "Kan ikke køre panelets globale egenskaber"
-
-#: panel/menu.c:3706
-msgid "Remove this panel..."
-msgstr "Fjern dette panel..."
-
-#: panel/menu.c:3708 panel/menu.c:3764
-msgid "Remove this panel"
-msgstr "Fjern dette panel"
-
-#: panel/menu.c:3781
-msgid "Properties"
-msgstr "Egenskaber"
-
-#: panel/menu.c:3792
-msgid "All properties..."
-msgstr "Alle egenskaber..."
-
-#: panel/menu.c:3808
-msgid "Global Preferences..."
-msgstr "Globale indstillinger..."
-
-#: panel/menu.c:3822
-msgid "Panel Manual..."
-msgstr "Panelmanual..."
-
-#: panel/menu.c:3841
-msgid "Cannot execute xscreensaver"
-msgstr "Kan ikke køre xscreensaver"
-
-#: panel/menu.c:3893 panel/menu.c:3898 panel/menu.c:4210
-msgid "Desktop"
-msgstr "Skrivebord"
-
-#: panel/menu.c:3935
-msgid "About the panel..."
-msgstr "Om panelet..."
-
-#: panel/menu.c:3951
-msgid "About GNOME..."
-msgstr "Om GNOME..."
-
-#: panel/menu.c:4058 panel/menu.c:4100 panel/menu.c:4106
-msgid "Favorites"
-msgstr "Favoritter"
-
-#: panel/menu.c:4066 panel/menu.c:4130 panel/menu.c:4136
-msgid "AnotherLevel menus"
-msgstr "AnotherLevel-menuer"
-
-#: panel/menu.c:4187
-msgid "Run..."
-msgstr "Kør..."
-
-#: panel/menu.c:4265
-msgid "Can't create menu, using main menu!"
-msgstr "Kan ikke oprette menu, bruger hovedmenu!"
-
-#: panel/panel_config.c:365
-msgid "Hiding"
-msgstr "Skjuler"
-
-#. Auto-hide
-#: panel/panel_config.c:373
-msgid "Enable Auto-hide"
-msgstr "Brug auto-skjul"
-
-#. Hidebuttons enable
-#: panel/panel_config.c:383
-msgid "Show hide buttons"
-msgstr "Vis skjuleknapper"
-
-#. Arrow enable
-#: panel/panel_config.c:393
-msgid "Show arrows on hide button"
-msgstr "Vis pile på skjuleknap"
-
-#: panel/panel_config.c:444
-msgid "Panel Position"
-msgstr "Panelplacering"
-
-#: panel/panel_config.c:563 panel/panel_config.c:590 panel/panel_config.c:646
-#: panel/panel_config.c:745
-msgid "Size and Position"
-msgstr "Størrelse og placering"
-
-#: panel/panel_config.c:661
-msgid "Orient panel horizontally"
-msgstr "Vend panel vandret"
-
-#: panel/panel_config.c:673
-msgid "Orient panel vertically"
-msgstr "Vend panel lodret"
-
-#: panel/panel_config.c:685
-msgid "Top left corner's position: X"
-msgstr "Placering af øverste venstre hjørne: X"
-
-#: panel/panel_config.c:757
-msgid "Offset from screen edge:"
-msgstr "Afstand fra skærmkant:"
-
-#: panel/panel_config.c:827
-msgid "Panel size:"
-msgstr "Panelstørrelse:"
-
-#: panel/panel_config.c:882
-msgid ""
-"Note: The panel will size itself to the\n"
-"largest applet in the panel, and that\n"
-"not all applets obey these sizes."
-msgstr ""
-"Bemærk: Panelet vil få samme størrelse som\n"
-"den største applet og ikke alle appletter\n"
-"retter sig efter disse størrelser."
-
-#: panel/panel_config.c:1008
-msgid "Background Type: "
-msgstr "Baggrundstype: "
-
-#: panel/panel_config.c:1047
-msgid "Color to use:"
-msgstr "Vælg farve:"
-
-#: panel/panel_config.c:1088
-msgid "Don't scale image to fit"
-msgstr "Skalér ikke billede til at være i panel"
-
-#: panel/panel_config.c:1094
-msgid "Scale image (keep proportions)"
-msgstr "Skalér billede (bevar proportioner)"
-
-#: panel/panel_config.c:1099
-msgid "Stretch image (change proportions)"
-msgstr "Stræk billede (ændr proportioner)"
-
-#: panel/panel_config.c:1114
-msgid "Rotate image for vertical panels"
-msgstr "Vend billede om på lodrette paneler"
-
-#: panel/panel_config.c:1272
-msgid "Panel properties"
-msgstr "Egenskaber for panel"
-
-#: panel/panel_config.c:1326
-msgid "Background"
-msgstr "Baggrund"
-
-#: panel/session.c:210
-msgid ""
-"An applet is not responding to a save request.\n"
-"Remove the applet or continue waiting?"
-msgstr ""
-"En applet svarer ikke på en gemmeforespørgsel.\n"
-"Fjern appletten eller bliv ved at vente?"
-
-#: panel/session.c:221
-msgid "Remove applet"
-msgstr "Fjern applet"
-
-#: panel/session.c:224
-msgid "Continue waiting"
-msgstr "Fortsæt med at vente"
-
-#: panel/session.c:233
-msgid "Timed out on sending session save to an applet"
-msgstr "Det tog for lang tid at sende sessionsgemning til applet"
-
-#: panel/swallow.c:159
-msgid "Create swallow applet"
-msgstr "Opret en slugt applet"
-
-#: panel/swallow.c:174
-msgid "Title of application to swallow"
-msgstr "Titel på applikation som skal sluges"
-
-#: panel/swallow.c:184
-msgid "Command (optional)"
-msgstr "Kommando (valgfri)"
-
-#: panel/swallow.c:195
-msgid "Width"
-msgstr "Bredde"
-
-#: panel/swallow.c:208
-msgid "Height"
-msgstr "Højde"
+"Du bruger i øjeblikket ikke en Gnome-kompatibel\n"
+"vindueshåndtering. Gnome-understøttelse af\n"
+"vindueshåndteringen er nødvendig for at\n"
+"skrivebordsguiden kan virke ordentligt."
+
+#: applets/desk-guide/deskguide_applet.c:188
+msgid "Desk Guide Alert"
+msgstr "Skrivebordsguideadvarsel"
+
+#: applets/desk-guide/deskguide_applet.c:1032
+msgid "Global"
+msgstr "Globalt"
+
+#: applets/desk-guide/deskguide_applet.c:1088
+msgid "Desk Guide Settings"
+msgstr "Skrivebordsguideindstillinger"
+
+#~ msgid "Applet padding"
+#~ msgstr "Appletfyld"
+
+#~ msgid "Panel menu"
+#~ msgstr "Panelmenu"
 
 #~ msgid "Select a program to run"
 #~ msgstr "Vælg program at køre"
