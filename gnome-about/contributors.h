@@ -94,7 +94,7 @@ static gchar *contributors[] = {
 	N_("Raul Perusquia Flores"),
 	"Lawrence Foard",
 	"Glynn Foster",
-	"Ben Frantzdale",
+	"Ben FrantzDale",
 	"Jeff Freedman",
 	"David Abilleira Freijeiro",
 	"Nat Friedman",
