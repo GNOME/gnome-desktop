@@ -2841,6 +2841,7 @@ insert_key (GnomeDesktopItem *item,
 			return;
 		}
 		val = decode_string (value, encoding, locale);
+		g_strchomp (val);
 
 		/* Ignore this key, it's whacked */
 		if (val == NULL) {
