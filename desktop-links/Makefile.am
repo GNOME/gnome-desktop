@@ -17,22 +17,29 @@ Directory_files = \
 	Network.directory      \
 	Games.directory
 
-Applications_DATA = 	\
-	Emacs.desktop	\
-	Netscape.desktop
+Applications_DATA = 	     \
+	Emacs.desktop	     \
+	Netscape.desktop     \
+	Gmc.desktop
 
-Graphics_DATA    = 	\
+Graphics_DATA    = 	     \
 	GIMP.desktop
 
-Utilities_DATA   = 	\
-	UNIX.desktop	\
-	UNIX-regular.desktop
+Utilities_DATA   = 	     \
+	UNIX.desktop	     \
+	UNIX-regular.desktop \
+	Eterm.desktop
+	
+System_DATA      =           \
+	Imlib_config.desktop
+
+Network_DATA     =           \
+	Balsa.desktop        \
+	Tkrat.desktop
 
 ## We explicitly define these so that the appropriate directories will
 ## be made at install time.
-System_DATA =
 Audio_DATA =
-Network_DATA =
 Games_DATA =
 
 EXTRA_DIST = $(Applications_DATA) $(Graphics_DATA) $(Utilities_DATA) \
