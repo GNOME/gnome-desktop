@@ -1308,7 +1308,7 @@ do_percent_subst (const GnomeDesktopItem  *item,
 		break;
 	case 'k':
 		/* Note: v0.9.4 of the spec says name but means filename */
-		if (item->location == NULL) {
+		if (item->location != NULL) {
 			esc = escape_single_quotes (item->location, in_single_quotes, in_double_quotes);
 			g_string_append (str, esc);
 			g_free (esc);
