@@ -31,18 +31,12 @@ GNOME_PLATFORM=2
 GNOME_MINOR=3
 GNOME_MICRO=4
 GNOME_DISTRIBUTOR="GNOME.Org"
-GNOME_DATE="15th July, 2003"
+GNOME_DATE=`date +"%Y-%m-%d"`
 
 AC_ARG_WITH(gnome_distributor, [  --with-gnome-distributor=DISTRIBUTOR  Specify name of GNOME distributor])
 
 if test "x$with_gnome_distributor" != x ; then
   GNOME_DISTRIBUTOR=$with_gnome_distributor
-fi
-
-AC_ARG_WITH(gnome_date, [  --with-gnome-date=DATE  Specify date of this GNOME distribution])
-
-if test "x$with_gnome_date" != x ; then
-  GNOME_DATE=$with_gnome_date
 fi
 
 AC_SUBST(GNOME_PLATFORM)
@@ -142,6 +136,9 @@ if test "x$enable_rebuilds" = "xyes" && \
 fi
 AC_SUBST(REBUILD)
 
+AC_DEFINE(_XOPEN_SOURCE, [], [Needed on Linux systems to provide full X/Open
+compatibility (e.g. prototypes strptime).])
+
 AC_OUTPUT([
 Makefile
 gnome-desktop.spec
@@ -150,7 +147,7 @@ gnome-about/Makefile
 gnome-about/headers/Makefile
 libgnome-desktop/Makefile
 libgnome-desktop/gnome-desktop-2.0.pc
-gnome-version.xml
+gnome-version.xml.in
 po/Makefile.in
 pixmaps/Makefile
 desktop-docs/Makefile

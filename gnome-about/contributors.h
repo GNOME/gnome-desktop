@@ -297,6 +297,7 @@ static gchar *contributors[] = {
 	"Kimball Thurston",
 	"Chris Toshok",
 	"Christoph Toshok",
+	"Malcolm Tredinnick",
 	"Tom Tromey",
 	"Jon Trowbridge",
 	"Vincent Untz",

@@ -23,6 +23,7 @@
  *	Mark McLoughlin <mark@skynet.ie>
  *	Kristian Rietveld <kris@gtk.org>
  *	Jeff Waugh <jdub@perkypants.org>
+ *	Malcolm Tredinnick <malcolm@commsecure.com.au>
  */
 
 #include <config.h>
@@ -42,6 +43,7 @@
 
 #include <dirent.h>
 #include <errno.h>
+#include <time.h>
 
 #include "contributors.h"
 
@@ -630,7 +632,6 @@ strip_newlines (const char *str)
 {
 	char **strv;
 	char *tmp;
-	char *retval;
 
 	if (!str)
 		return NULL;
@@ -638,30 +639,97 @@ strip_newlines (const char *str)
 	strv = g_strsplit (str, "\n", -1);
 	tmp = g_strjoinv (" ", strv);
 	g_strfreev (strv);
+	tmp = g_strchug (tmp);
 
-	retval = g_strdup (tmp + 1);
-	g_free (tmp);
-
-	return retval;
+	return tmp;
 }
 
+/* FIXME: This could possibly be done more smoothly. The locale matching stuff
+ * needs to be abstracted out, since it must be useful in a number of places. */
+
+/* The language selection stuff here is not blindingly efficient, but it is
+ * only done once for a small number of paragraphs, so I (Malcolm) think we can
+ * just pay the penalty rather than going for something more complex.
+ *
+ * The problem we are solving here is, for each paragraph, find the translated
+ * version that matches the highest preference possible from amongst the user's
+ * LC_MESSAGES settings. Note that the translated paragraphs may not appear in
+ * the same order as the LC_MESSAGE preferences, so a certain amount of messing
+ * around is required (in particular, we cannot quit after finding the first
+ * match).
+ */
 static void
 get_description_messages (xmlNodePtr node)
 {
 	xmlNodePtr paras;
 	GSList *list = NULL, *l;
+	const GList *langs = NULL;
 	gint i;
+	gboolean started = FALSE;
+	char *best_value = NULL;
 
+	langs = gnome_i18n_get_language_list ("LC_MESSAGES");
 	paras = node->children;
 
 	while (paras) {
-		char *name = (char *)paras->name;
-		char *value = (char *)xmlNodeGetContent (paras);
+		while (paras) {
+			char *value = (char *)xmlNodeGetContent (paras);
+			char *tmp;
+			xmlChar *cur, *best = NULL;
+			const GList *t;
 
-		if (!g_ascii_strcasecmp (name, "p") && value && value[0])
-			list = g_slist_prepend (list, strip_newlines (value));
+			if (paras->type == XML_ELEMENT_NODE &&
+					xmlStrEqual (paras->name, "p") &&
+					value && value[0]) {
+				cur = xmlNodeGetLang (paras);
 
-		paras = paras->next;
+				tmp = strip_newlines (value);
+				if (!started) {
+					started = TRUE;
+					if (!cur) {
+						best = xmlCharStrdup ("C");
+					}
+					else {
+						best = xmlStrdup (cur);
+					}
+					best_value = g_strdup (tmp);
+				}
+				else {
+					if (!cur || xmlStrEqual (cur, "C")) {
+						break;
+					}
+					/* See if the current lanaguage occurs
+					 * earlier than the previous best. */
+					for (t = langs; t; t = t->next) {
+						if (xmlStrEqual (t->data,
+								best)) {
+							break;
+						}
+						else if (xmlStrEqual (t->data,
+									cur)) {
+							xmlFree (best);
+							best = xmlStrdup (cur);
+							best_value = g_strdup (tmp);
+							/* If this is the first
+							 * language on the
+							 * list of choices,
+							 * stop. We are not
+							 * going to go any
+							 * better. */
+							if (t == langs) {
+								break;
+							}
+						}
+					}
+				}
+				g_free (tmp);
+				xmlFree (cur);
+			}
+
+			paras = paras->next;
+		}
+		list = g_slist_prepend (list, best_value);
+		started = FALSE;
 	}
 
 	list = g_slist_reverse (list);
@@ -674,6 +742,23 @@ get_description_messages (xmlNodePtr node)
 	introduction_messages[i] = NULL;
 
 	g_slist_free (list);
+}
+
+static char*
+create_date_string (const char *value)
+{
+	struct tm tm;
+	char *result;
+	GDate *date = g_date_new ();
+
+	if (!strptime (value, "%Y-%m-%d", &tm)) {
+		return NULL;
+	}
+	g_date_set_dmy (date, tm.tm_mday, tm.tm_mon, 1900 + tm.tm_year);
+	result = g_new0 (char, 20);
+	g_date_strftime (result, 20, "%x", date);
+	g_date_free (date);
+	return result;
 }
 
 static void
@@ -738,7 +823,7 @@ display_version_info (GnomeCanvasGroup *group)
 		if (!g_ascii_strcasecmp (name, "distributor") && value && value[0])
 			distributor_string = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "date") && value && value[0])
-			build_date_string = g_strdup (value);
+			build_date_string = create_date_string (value);
 
 		bits = bits->next;
 	}
@@ -890,7 +975,7 @@ create_canvas (void)
 
 	href = href_item_new (root,
 			      _("About GNOME"),
-			      "http://www.gnome.org/intro/findout.html",
+			      "http://www.gnome.org/about/",
 			      &current_x, &current_y);
 
 	/* make a nice guess for the dot delta */
@@ -900,18 +985,21 @@ create_canvas (void)
 	/* draw a dot */
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
-	/* and more items on a likewise way (FIXME: update the links
-	 * if the new website ever comes online)
+	/* and more items on a likewise way.
 	 */
 	href = href_item_new (root,
-			      _("Download"),
-			      "http://www.gnome.org/start/2.2/",
+			      _("News"),
+			      "http://www.gnomedesktop.org",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
+	/*
+	 * FIXME: this used to be 'users' and it would be great to make it
+	 * users again once there is a user-centric page on the we site.
+	 */
 	href = href_item_new (root,
-			      _("Users"),
-			      "http://www.gnome.org/",
+			      _("Software"),
+			      "http://www.gnome.org/softwaremap",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
@@ -922,8 +1010,8 @@ create_canvas (void)
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
 	href = href_item_new (root,
-			      _("Foundation"),
-			      "http://foundation.gnome.org/",
+			      _("Friends of GNOME"),
+			      "http://www.gnome.org/friends/",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 

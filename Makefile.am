@@ -8,7 +8,7 @@ SUBDIRS =			\
 	man
 
 EXTRA_DIST =			\
-	gnome-version.xml.in	\
+	gnome-version.xml.in.in	\
 	gnome-version.xml	\
 	gnome-desktop.spec.in	\
 	gnome-desktop.spec	\
@@ -22,3 +22,4 @@ EXTRA_DIST =			\
 
 versiondir=$(datadir)/gnome-about
 version_DATA=gnome-version.xml
+@INTLTOOL_XML_RULE@
