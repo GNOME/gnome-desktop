@@ -11,7 +11,6 @@ BITMAPS     = \
 	gnome-cardgame.png			\
 	gnome-color-browser.png			\
 	gnome-cromagnon.png			\
-	gnome-default.png			\
 	gnome-die1.png				\
 	gnome-die2.png				\
 	gnome-die3.png				\
