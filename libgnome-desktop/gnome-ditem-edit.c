@@ -382,7 +382,7 @@ make_easy_page (GnomeDItemEdit *dee)
 	dee->_priv->exec_label = label;
 
 	entry = gnome_file_entry_new ("command", _("Browse"));
-	gtk_label_set_mnemonic_widget (GTK_LABEL(label), entry);
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (entry)));
 	table_attach_entry (GTK_TABLE (table), entry, 1, 2, 3, 4);
  
 	g_signal_connect_object (entry, "changed",
