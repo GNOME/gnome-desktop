@@ -1363,27 +1363,29 @@ do_percent_subst (const GnomeDesktopItem *item,
 		}
 		break;
 	case 'm':
-#if 0
+		/* Note: v0.9.4 of the spec says this is deprecated and
+		   just replace with icon name but KDE replaces with --icon iconname */
 		cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_MINI_ICON);
-		g_string_append (str, sure_string (cs));
-#endif
+		if (cs != NULL) {
+			g_string_append (str, "--miniicon=");
+			esc = escape_single_quotes (cs, in_single_quotes, in_double_quotes);
+			g_string_append (str, esc);
+		}
 		break;
 	case 'i':
-		/* FIXME: ignore for now, KDE is broken WRT the spec */
-#if 0
-		s = gnome_desktop_item_get_icon (item);
-		if (s != NULL) {
-			g_string_append (str, sure_string (s));
-			g_free (s);
-		} else {
-			/* else default to just what's in there */
-			cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
-			g_string_append (str, sure_string (cs));
+		/* Note: v0.9.4 of the spec says just replace with icon name
+		   but KDE replaces with --icon iconname */
+		cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
+		if (cs != NULL) {
+			g_string_append (str, "--icon=");
+			esc = escape_single_quotes (cs, in_single_quotes, in_double_quotes);
+			g_string_append (str, esc);
 		}
-#endif
 		break;
 	case 'c':
-		cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_COMMENT);
+		/* Note: v0.9.4 of the spec says comment, but kde uses Name=, so use
+		   Name= since no gnome app is using this anyhow */
+		cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_NAME);
 		if (cs != NULL) {
 			esc = escape_single_quotes (cs, in_single_quotes, in_double_quotes);
 			g_string_append (str, esc);
@@ -1391,11 +1393,9 @@ do_percent_subst (const GnomeDesktopItem *item,
 		}
 		break;
 	case 'k':
-		/* FIXME: is this the name of the .desktop file (location) or the name
-		 * of the entry???? the spec is ambiguous */
-		cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_NAME);
-		if (cs != NULL) {
-			esc = escape_single_quotes (cs, in_single_quotes, in_double_quotes);
+		/* Note: v0.9.4 of the spec says name but means filename */
+		if (item->location == NULL) {
+			esc = escape_single_quotes (item->location, in_single_quotes, in_double_quotes);
 			g_string_append (str, esc);
 			g_free (esc);
 		}
