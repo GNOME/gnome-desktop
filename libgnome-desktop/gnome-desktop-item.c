@@ -599,22 +599,6 @@ gnome_desktop_item_new_from_uri (const char *uri,
 		return NULL;
 	}	    	
 	
-	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE &&
-	    info->type == GNOME_VFS_FILE_TYPE_REGULAR &&
-	    info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE &&
-	    strcmp (info->mime_type, "application/x-gnome-app-info") != 0) {
-		g_set_error (error,
-			     /* FIXME: better errors */
-			     GNOME_DESKTOP_ITEM_ERROR,
-			     GNOME_DESKTOP_ITEM_ERROR_INVALID_TYPE,
-			     _("File '%s' has invalid MIME type: %s"),
-			     uri, info->mime_type);
-
-		gnome_vfs_file_info_unref (info);
-
-		return NULL;
-	}		
-
 	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
 		mtime = info->mtime;
 	else
