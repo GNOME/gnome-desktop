@@ -48,6 +48,7 @@ BITMAPS     = \
 	gnome-money.png				\
 	gnome-networktool.png			\
 	gnome-note.png				\
+	gnome-panel.png				\
 	gnome-qeye.png				\
 	gnome-talk.png				\
 	gnome-term-linux.png			\

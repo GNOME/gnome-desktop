@@ -1,7 +1,7 @@
 AC_INIT(panel)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-core, 1.0.10)
+AM_INIT_AUTOMAKE(gnome-core, 1.0.40)
 
 AM_MAINTAINER_MODE
 
@@ -176,7 +176,8 @@ else
 fi
 
 AC_DEFINE_UNQUOTED(KDE_MENUDIR, "$kde_datadir/applnk")
-
+AC_DEFINE_UNQUOTED(KDE_ICONDIR, "$kde_datadir/icons")
+AC_DEFINE_UNQUOTED(KDE_MINI_ICONDIR, "$kde_datadir/icons/mini")
 
 dnl AC_CONFIG_SUBDIRS(gemvt)
 
