@@ -659,6 +659,9 @@ strip_newlines (const char *str)
  * around is required (in particular, we cannot quit after finding the first
  * match).
  */
+
+/* FIXME: this code is atrocious */
+
 static void
 get_description_messages (xmlNodePtr node)
 {
@@ -711,6 +714,7 @@ get_description_messages (xmlNodePtr node)
 									cur)) {
 							xmlFree (best);
 							best = xmlStrdup (cur);
+							g_free (best_value);
 							best_value = g_strdup (tmp);
 							/* If this is the first
 							 * language on the
@@ -745,7 +749,6 @@ get_description_messages (xmlNodePtr node)
 
 	introduction_messages[i] = NULL;
 
-	g_free (best_value);
 	g_slist_free (list);
 }
 
