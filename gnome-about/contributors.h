@@ -206,6 +206,7 @@ static gchar *contributors[] = {
 	"Stuart Parmenter",
 	"Havoc Pennington",
 	"Ettore Perazzoli",
+	N_("Carlos Perello Marin"),
 	"Ian Peters",
 	"Martin Kasper Petersen",
 	"Christof Petig",
