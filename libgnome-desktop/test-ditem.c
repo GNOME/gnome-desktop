@@ -127,11 +127,9 @@ main (int argc, char **argv)
 
 	setlocale (LC_ALL, "");
 
-#if 0
+#if 1
 	gnome_program_init ("test-ditem", "0.01", &libgnome_module_info,
 			    argc, argv, NULL);
-
-	g_main_iteration (FALSE);
 #else
 	if (!bonobo_init (&argc, argv))
 		g_error ("Can not bonobo_init");
