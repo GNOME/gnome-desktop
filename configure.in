@@ -87,7 +87,14 @@ AC_ARG_WITH(window-manager,
 AC_SUBST(WINDOW_MANAGER)
 
 dnl Check for libgtop
-GNOME_INIT_LIBGTOP
+GNOME_LIBGTOP_HOOK(,applets_libgtop=yes)
+
+if test x$applets_libgtop != xyes; then
+  AC_MSG_WARN([*** \`cpuload' applet will not be built ***])
+  AC_MSG_WARN([*** \`cpumemusage' applet will not be built ***])
+  AC_MSG_WARN([*** \`diskusage' applet will not be built ***])
+  AC_MSG_WARN([*** \`multiload' applet will not be built ***])
+fi
 
 dnl Check for ghttp library
 AM_CONDITIONAL(HAVE_LIBGHTTP, test -n "$GHTTP_LIB")
