@@ -10,6 +10,7 @@ Multimediadir     = $(appsdir)/Multimedia
 Internetdir       = $(appsdir)/Internet
 Gamesdir          = $(appsdir)/Games
 Settingsdir       = $(appsdir)/Settings
+SettingsSessiondir= $(appsdir)/Settings/Session
 
 gnewdir           = $(datadir)/mc/templates
 
@@ -91,4 +92,6 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/Internet.directory $(DESTDIR)$(Internetdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Games.directory $(DESTDIR)$(Gamesdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Settings.directory $(DESTDIR)$(Settingsdir)/.directory
+	$(INSTALL_DATA) $(srcdir)/SettingsSession.directory $(DESTDIR)$(SettingsSessiondir)/.directory
+	$(INSTALL_DATA) $(srcdir)/SettingsSession.directory $(DESTDIR)$(datadir)/control-center/Session/.directory
 	$(INSTALL_DATA) $(srcdir)/Development.directory $(DESTDIR)$(Developmentdir)/.directory
