@@ -159,7 +159,6 @@ static author authors[] = {
 	{ "Karl Anders Oygard", "" },
 	{ "Tomas Ögren", "<stric@ing.umu.se>" },
 	{ "Jay Painter", "" },
-	{ "Molaro Paolo", "" },
 	{ "Cameron Parish", "" },
 	{ "Conrad Parker", "" },
 	{ "Stuart Parmenter", "" },
