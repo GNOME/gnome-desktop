@@ -1,0 +1,459 @@
+<!DOCTYPE book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+]>
+
+<book id="gnome-intro">
+  <bookinfo>
+    <title>Introduction to GNOME</title>
+    <releaseinfo>for the May 1998 alpha release of GNOME in RedHat 5.1
+    </releaseinfo>
+    <author>
+      <firstname>Mark</firstname>
+      <surname>Galassi</surname>
+      <affiliation>
+	<shortaffil>Cygnus Solutions and Los Alamos National
+	  Laboratory</shortaffil>
+      </affiliation>
+    </author>
+    <address><email>rosalia@cygnus.com</email></address>
+  </bookinfo>
+  <preface>
+    <title>Preface to the alpha release of GNOME</title>
+    <para>
+      Dear GNOME enthusiast,
+    </para>
+    <para>
+      This document accompanies the alpha release of GNOME, shipped in
+      May of 1998.  At this time GNOME is an interestign and useful
+      suite of programs, but it is under very active development.
+      This means that you will find many programs which are incomplete
+      and some bugs which you would not expect from a mature product.</para>
+    <para>
+      Having said this, GNOME is already today an exciting product,
+      and many of the programs are quite useful.
+    </para>
+    <sect1>
+      <title>What is GNOME</title>
+      <note>
+	<para>
+	  If you tire of explanations and just want to get going with
+	  GNOME in a practical way, please skip the rest of this
+	  preface and read <xref linkend="a-sample-session">
+	  immediately.</para>
+      </note>
+      <para>
+	GNOME is a project which endeavors to provide a complete,
+	consistent, state of the art and free user environment for
+	UNIX systems.  This includes:</para>
+      <itemizedlist>
+	<listitem><para>
+	    An <firstterm>application framework</firstterm> &mdash;
+	    this consists of a style guide for applications along with
+	    a set of libraries which enforce the style requirements.
+	    For example, the GNOME libraries allow a programmer to
+	    invoke standard menus and dialog boxes.</para>
+	</listitem>
+	<listitem><para>
+	    A <firstterm>file manager</firstterm> &mdash; the GNOME
+	    file manager is based on the well known <application>GNU
+	      midnight commander</application>, which has been endowed
+	    with a GNOME&ndash;compliant graphical interface.</para>
+	</listitem>
+	<listitem><para>
+	    A <firstterm>panel</firstterm> &mdash; this replaces the
+	    button&ndash;bars sometimes provided by UNIX window
+	    managers.  The panel also allows the running programs in
+	    little squares in the panel, both by swallowing X Window
+	    programs and by running especially written
+	    <firstterm>applets</firstterm>.
+	  </para>
+	</listitem>
+	<listitem><para>
+	    <firstterm>Session management</firstterm> support &mdash;
+	    applications are notified so they can save state
+	    information when a user logs out: the next time a session
+	    is started, these applications can pick up where they left
+	    off.
+	    </para>
+	</listitem>
+	<listitem><para>
+	    A <emphasis>suite of GNOME applications</emphasis> &mdash;
+	    these have written (or adapted) to use the GNOME
+	    facilities, and thus present a consistent look and
+	    behaviour.
+	  </para>
+	</listitem>
+      </itemizedlist>
+      <para>
+	There are many more facets to GNOME, and much information can
+	be found at the <ulink URL="http://www.gnome.org/">GNOME web
+	  page</ulink>.
+      </para>
+      <para>GNOME is a GNU project, was started in 1997, and has
+	developed very quickly.  <acronym>GNOME</acronym> can be
+	thought of as an acronym standing for GNU Networked Object
+	Model Environment.
+      </para>
+    </sect1>
+    <sect1>
+      <title>Obtaining and installing GNOME</title>
+      <para>
+	GNOME is in early stages and being modified very actively, so
+	the only way to get up to date instructions on how to grab and
+	install GNOME is to look at the GNOME home page at <ulink
+	URL="http://www.gnome.org/">http://www.gnome.org/</ulink>
+      </para>
+    </sect1>
+  </preface>
+  <chapter id="a-sample-session">
+    <title>A sample session</title>
+    <para>
+      When GNOME becomes stable there will be a simple recipe for
+      starting up a GNOME session: users will simply type
+      <command>gnome-session</command> and it will start up their
+      environment.  But we are not yet at that point: right now UNIX
+      users usually run their stable X Window environment with their
+      favorite window manager, and the run the GNOME panel and other
+      programs from the shell or from their
+      <filename>.xsession</filename> or <filename>.xinitrc</filename>
+      files.
+    </para>
+    <para>
+      I assume that you have the GNOME programs and libraries
+      installed on your system, and that they are in your path.
+    </para>
+
+    <sect1>
+      <title>The provisional startup sequence</title>
+      <procedure>
+	<title>Startup sequence without session management</title>
+	<step>
+	  <para>start your normal X Window setup, including your
+	    window manager</para>
+	</step>
+	<step>
+	  <para>run <command>panel &</command></para>
+	</step>
+	<step>
+	  <para>You can now start programs from the panel's main menu
+	    (which you get to by clicking on the foot icon and
+	    selecting the program or submenu.  You will usually start
+	    up a file manager (gmc) and a help browser
+	    (gnome-help-browser) toward the start of your
+	    session.</para>
+	</step>
+      </procedure>
+
+      <procedure>
+	<title>Startup sequence with session management</title>
+	<step><para>start your normal X Window setup, including your
+	    window manager</para>
+	</step>
+	<step>
+	  <para>Run <command>gnome-session</command>.  This will start
+	    up the basic GNOME programs, like the panel, a help
+	    browser and the file manager.</para>
+	</step>
+      </procedure>
+    </sect1>
+
+    <sect1>
+      <title>Using GNOME's internationalization support</title>
+      <para>GNOME has had internationalization (sometimes called
+	<acronym>i18n</acronym> support from the earliest phases of
+	development.  To get a GNOME program to give you messages in
+	your favourite language, simply set your
+	<envar>LANGUAGE</envar> environment variable to the two letter
+	code for that language.</para>
+      <para>For example, the <command>gnome-hello-2-i18n</command>
+	command invokes the <application>gnome-hello</application>
+	variant which includes support for internationalization. If
+	you want to see this program (or any GNOME application)
+	display its menus and other information in
+	<emphasis>Italian</emphasis>, you could type (for Bourne shell
+	or bash):</para>
+      <literallayout><prompt>$ </prompt><userinput>LANGUAGE=it</userinput></literallayout>
+      <literallayout><prompt>$ </prompt><userinput>export LANGUAGE</userinput></literallayout>
+      <literallayout><prompt>$ </prompt><userinput>gnome-hello-2-i18n</userinput></literallayout>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>A tour of some GNOME applications</title>
+    <para>
+      I will now give a very brief description of what you can do with
+      some GNOME programs.</para>
+    <sect1>
+      <title>The GNOME help browser (gnome-help-browser)</title>
+      <para>
+	GNOME has a help browser which allows you to view
+	documentation in several formats, including UNIX man pages,
+	GNU info files and HTML documents.  The documents are shown
+	with an HTML rendering widget, so any documentation format
+	that can be translated into HTML could be rendered with
+	<command>gnome-help-browser</command>.
+      </para>
+      <para>
+	You can invoke the help browser from the penel or from the
+	shell by typing
+      </para>
+      <literallayout><prompt>$ </prompt><userinput>gnome-help-browser &</userinput></literallayout>
+      <para>
+	The initial window you get is shown in <xref
+	  linkend="help-browser-initial">
+      </para>
+      <figure id="help-browser-initial">
+	<title>GNOME help browser &mdash; initial screen</title>
+	<screenshot>
+	  <graphic fileref="pix/help-browser-initial"></graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	The help browser is well documented, so once you are in it you
+	can click on the help icon (which looks like <inlinegraphic
+	  fileref="pix/help-icon.gif"></inlinegraphic>) and see the
+	help browser's online help.  I will only add one more tip on
+	using the help browser: you can invoke it from the command
+	line directly and give it a file URL, which has to be a
+	complete path to the file.  So if you have just written or
+	generated a web page, you could view it with by typing
+	<literallayout><prompt>$ </prompt><userinput>gnome-help-browser file:&lt;full-path&gt;/file.html</userinput></literallayout>
+	or more conveniently
+	<literallayout><prompt>$ </prompt><userinput>gnome-help-browser file:`pwd`/file.html</userinput></literallayout>
+      </para>
+
+      <para>
+	You can see an example of invoking the help browser on a file
+	in <xref linkend="help-browser-sample">: it is a snapshot of
+	the top level of this document as I am writing these
+	paragraphs.  I invoked it with
+	<literallayout><prompt>$ </prompt><userinput>gnome-help-browser file:`pwd`/gnome-intro/book01.html</userinput></literallayout>
+      </para>
+
+      <figure id="help-browser-sample">
+	<title>GNOME help browser &mdash; a specific HTML page</title>
+	<screenshot>
+	  <graphic fileref="pix/help-browser-sample"></graphic>
+	</screenshot>
+      </figure>
+    </sect1>
+
+    <sect1>
+      <title>The <application>panel</application> and its applets</title>
+      <para>
+	The panel is invoked directly by the GNOME session manager
+	when you type <command>gnome-session</command>, but it can be
+	also be invoked directly from the shell by typing
+      <literallayout><prompt>$ </prompt><userinput>panel &</userinput></literallayout>
+      </para>
+      <para>
+	The panel will bring up a bar at the bottom of the screen,
+	shown in <xref linkend="panel-basic"> (note that this bar will
+	run across the entire bottom of your screen &mdash; in this
+	picture I have narrowed it so that it will fit in a browser
+	more conveniently.
+      </para>
+      <figure id="panel-basic">
+	<title>GNOME panel: the basic panel bar</title>
+	<screenshot>
+	  <graphic fileref="pix/panel-basic"></graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	Starting programs with the panel is easy: you simply click on
+	the foot icon, from which you will get the top level launcher
+	menu, as shown in <xref linkend="panel-menu">.
+      </para>
+      <figure id="panel-menu">
+	<title>GNOME panel: main menu</title>
+	<screenshot>
+	  <graphic fileref="pix/panel-menu"></graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	Most of the entries in the panel menu are submenus; <xref
+	linkend="panel-menu-select"> shows an example of running the
+	<guimenuitem>CD player</guimenuitem> from the
+	<guisubmenu>Audio</guisubmenu> submenu.</para>
+
+      <figure id="panel-menu-select">
+	<title>GNOME panel: selecting one of the submenus</title>
+	<screenshot>
+	  <graphic fileref="pix/panel-menu-select"></graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	[FIXME: need to describe applets and panel configuration; I
+	should also mention how you can click on the sides of the
+	panel to make it slide over.]
+      </para>
+    </sect1>
+
+    <sect1>
+      <title>The file manager &mdash; <command>gmc</command></title>
+      <para>
+	The GNOME file manager is based on the GNU Midnight
+	Commander, and can be invoked from the panel's main menu or by
+	typing at the shell:
+      <literallayout><prompt>$ </prompt><userinput>gmc &</userinput></literallayout>
+      <para>
+	The file manager allows users to navigate their directories
+	and the rest of the filesystem with an easy graphical point
+	and click interface.  GNOME Midnight Commander adds even more
+	functionality through its notion of <firstterm>Virtual File
+	Systems</firstterm> (<acronym>VFS</acronym>): these are
+	abstractions which allow you to navigate files that are not on
+	your file system as if they were.  Examples of virtual
+	filesystems are the ftp filesystem and the tar filesystem:
+	files can be accessed by anonymous ftp or by extraction from a
+	tar file, and Midnight Commander treats them in the same way
+	as local files.</para>
+      <para>
+	Midnight Commander is powerful and vast, and it has its own
+	manual (available by typing <command>man mc</command>) so I
+	will not give more detail now.
+      </para>
+    </sect1>
+
+    <sect1>
+      <title>General purpose applications</title>
+      <sect2>
+	<title>GNOME hex editor &mdash; ghex</title>
+	<para>
+	  The GNOME hex editor is an editor for non-ASCII files.  It
+	  can be invoked from the panel or by typing
+      <literallayout><prompt>$ </prompt><userinput>ghex &</userinput></literallayout>
+	  Using <command>ghex</command> is quite straightforward, and
+	  it has a manual available in the GNOME help browser.
+	</para>
+      </sect2>
+      <sect2>
+	<title>gEdit</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>GNOME terminal emulator (gnome-terminal)</title>
+	<para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Graphical applications</title>
+      <sect2>
+	<title>Electric Eyes</title>
+	<para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Audio applications</title>
+      <sect2>
+	<title>gmix</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>gtcd</title>
+	<para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>System and configuration programs</title>
+      <sect2>
+	<title>gtop</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>Background properties</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>Keyboard properties</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>Mouse properties</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>Line printer configuration (gulp)</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>GNOME su helper (gsu)</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>GNOME shutdown helper (gshutdown)</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>Imlib configuration options (imlib_config)</title>
+	<para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>"Productivity" tools</title>
+      <sect2>
+	<title>GNOME time tracker (gtt)</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>GNOME calendar (gnomecal)</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>GNOME calculator (gcalc)</title>
+	<para></para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Games</title>
+      <sect2>
+	<title>freecell</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>mahjongg</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>phase_chess</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title>gnomines</title>
+	<para></para>
+      </sect2>
+      <sect2>
+	<title></title>
+	<para>same-gnome</para>
+      </sect2>
+    </sect1>
+  </chapter>
+  <chapter>
+    <title>How GNOME will work and how it works now</title>
+    <para></para>
+  </chapter>
+</book>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"gnome-intro.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
