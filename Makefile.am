@@ -1,18 +1,10 @@
 SUBDIRS =			\
 	po 			\
-	idl 			\
-	gnome-desktop 		\
+	libgnome-desktop 	\
 	gnome-about 		\
 	desktop-links		\
-	gsm 			\
-	panel 			\
-	libpanel-applet		\
-	smproxy 		\
 	pixmaps			\
-	applets			\
-	core-docs		\
-	omf-install		\
-	doc			\
+	desktop-docs		\
 	man
 
 EXTRA_DIST = \

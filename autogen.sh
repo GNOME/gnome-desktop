@@ -8,7 +8,7 @@ PKG_NAME="Gnome Core Utilities"
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/HACKING \
-  && test -d $srcdir/gsm) || {
+  && test -d $srcdir/libgnome-desktop) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level gnome directory"
     exit 1
