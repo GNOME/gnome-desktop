@@ -336,19 +336,7 @@ dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 dnl -----------------------------------------------------------
 
-dnl Specify the gconf configuration source,
-dnl default to xml::$(sysconfdir)/gconf/gconf.xml.defaults
-
-GCONF_CONFIG_SOURCE=
-
-AC_ARG_ENABLE(gconf-source, [  --enable-gconf-source=sourceaddress Where to install schema files.], GCONF_CONFIG_SOURCE=$enable_gconf_source,)
-
-if test "x$GCONF_CONFIG_SOURCE" = "x"; then
-	GCONF_CONFIG_SOURCE="xml::\${sysconfdir}/gconf/gconf.xml.defaults"
-fi
-
-AC_SUBST(GCONF_CONFIG_SOURCE)
-AC_SUBST(INSTALL_GCONF_CONFIG_SOURCE)
+AM_GCONF_SOURCE_2
 
 dnl  --------------------------------------------------------
 dnl | Solaris does not have IceListenForWellKnownConnections |-
@@ -425,81 +413,3 @@ core-docs/lgpl/Makefile
 core-docs/lgpl/C/Makefile
 omf-install/Makefile
 ])
-
-dnl panel/doc/Makefile
-dnl panel/help/Makefile
-dnl panel/help/C/Makefile
-dnl panel/help/de/Makefile
-dnl panel/help/it/Makefile
-dnl panel/help/ja/Makefile
-dnl applets/applet-dirs/Makefile
-dnl applets/gen_util/Makefile
-dnl applets/gen_util/help/Makefile
-dnl applets/gen_util/help/C/Makefile
-dnl applets/gen_util/help/C/clock/Makefile
-dnl applets/gen_util/help/C/mailcheck/Makefile
-dnl applets/gen_util/help/C/printer/Makefile
-dnl applets/gen_util/help/de/Makefile
-dnl applets/gen_util/help/no/Makefile
-dnl applets/gen_util/help/da/Makefile
-dnl applets/gen_util/help/da/clock/Makefile
-dnl applets/gen_util/help/da/mailcheck/Makefile
-dnl applets/gen_util/help/da/printer/Makefile
-dnl applets/gen_util/help/es/Makefile
-dnl applets/gen_util/help/es/printer/Makefile
-dnl applets/gen_util/help/it/Makefile
-dnl applets/gen_util/help/it/clock/Makefile
-dnl applets/gen_util/help/it/mailcheck/Makefile
-dnl applets/gen_util/help/it/printer/Makefile
-dnl applets/fish/help/Makefile
-dnl applets/fish/help/C/Makefile
-dnl applets/fish/help/no/Makefile
-dnl applets/fish/help/da/Makefile
-dnl applets/fish/help/it/Makefile
-dnl applets/desk-guide/Makefile
-dnl applets/desk-guide/help/Makefile
-dnl applets/desk-guide/help/C/Makefile
-dnl applets/desk-guide/help/de/Makefile
-dnl applets/desk-guide/help/it/Makefile
-dnl applets/tasklist/Makefile
-dnl applets/tasklist/help/Makefile
-dnl applets/tasklist/help/C/Makefile
-dnl core-docs/gnome-feedback/Makefile
-dnl core-docs/gnome-feedback/C/Makefile
-dnl desktop-links/Makefile
-dnl gnome-terminal/C/Makefile
-dnl gnome-terminal/de/Makefile
-dnl gnome-terminal/da/Makefile
-dnl gnome-terminal/es/Makefile
-dnl gnome-terminal/it/Makefile
-dnl gnome-terminal/no/Makefile
-dnl help-browser/Makefile
-dnl help-browser/gnome-man2html/Makefile
-dnl help-browser/gnome-info2html/Makefile
-dnl help-browser/help/Makefile
-dnl help-browser/help/C/Makefile
-dnl help-browser/help/ca/Makefile
-dnl help-browser/help/da/Makefile
-dnl help-browser/help/el/Makefile
-dnl help-browser/help/es/Makefile
-dnl help-browser/help/et/Makefile
-dnl help-browser/help/eu/Makefile
-dnl help-browser/help/hu/Makefile
-dnl help-browser/help/fr/Makefile
-dnl help-browser/help/gl/Makefile
-dnl help-browser/help/it/Makefile
-dnl help-browser/help/ja/Makefile
-dnl help-browser/help/ko/Makefile
-dnl help-browser/help/lt/Makefile
-dnl help-browser/help/no/Makefile
-dnl help-browser/help/uk/Makefile
-dnl help-browser/help/wa/Makefile
-dnl gnome-hint/Makefile
-dnl gmenu/Makefile
-dnl gnome-edit/Makefile
-dnl gsm/Makefile
-dnl gsm/help/Makefile
-dnl gsm/help/C/Makefile
-dnl gsm/help/ja/Makefile
-dnl smproxy/Makefile])
-
