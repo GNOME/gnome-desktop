@@ -50,14 +50,16 @@ typedef struct _GnomeDItemEditClass GnomeDItemEditClass;
 struct _GnomeDItemEdit {
         GtkObject object;
   
-        /*semi public entries, you should however use macros to get these*/
+	/*< private >*/
+
+	/* use the accessors or just use new_notebook */
         GtkWidget *child1; /* basic */
         GtkWidget *child2; /* DND */
         GtkWidget *child3; /* Advanced */
-  
+
         /* Remaining fields are private - if you need them, 
            please add an accessor function. */
-
+  
 	/* we keep a ditem around, since we can never have absolutely
 	   everything in the display so we load a file, or get a ditem,
 	   sync the display and ref the ditem */
@@ -107,15 +109,18 @@ struct _GnomeDItemEditClass {
         void (* name_changed)    (GnomeDItemEdit * gee);
 };
 
-#define gnome_ditem_edit_child1(d) (GNOME_DITEM_EDIT(d)->child1)
-#define gnome_ditem_edit_child2(d) (GNOME_DITEM_EDIT(d)->child2)
-
 guint             gnome_ditem_edit_get_type     (void);
 
-/*create a new ditem and get the children using the below macros
+/*create a new ditem and get the children using the below functions 
   or use the utility new_notebook below*/
 GtkObject *       gnome_ditem_edit_new          (void);
 
+/* the main page */
+GtkWidget *       gnome_ditem_edit_child1	(GnomeDItemEdit  *dee);
+/* the DND page */
+GtkWidget *       gnome_ditem_edit_child2	(GnomeDItemEdit  *dee);
+/* the advanced page */
+GtkWidget *       gnome_ditem_edit_child3	(GnomeDItemEdit  *dee);
 
 /* Create a new edit in this notebook - appends two pages to the 
    notebook. */
@@ -149,19 +154,19 @@ gchar *           gnome_ditem_edit_get_name     (GnomeDItemEdit   *dee);
 
 /* These are accessor functions for the widgets that make up the
    GnomeDItemEdit editting areas. */
-GtkWidget *       gnome_ditem_get_name_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_comment_entry (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_exec_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_tryexec_entry (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_doc_entry     (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_icon_entry    (GnomeDItemEdit   *dee);
-GtkWidget *       gnome_ditem_get_wmtitles_entry(GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_name_entry    (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_comment_entry (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_exec_entry    (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_tryexec_entry (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_doc_entry     (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_icon_entry    (GnomeDItemEdit   *dee);
+GtkWidget *       gnome_ditem_edit_get_wmtitles_entry(GnomeDItemEdit   *dee);
 
-GtkWidget *       gnome_ditem_get_simple_dnd_toggle(GnomeDItemEdit *dee);
-GtkWidget *       gnome_ditem_get_file_drop_entry(GnomeDItemEdit  *dee);
-GtkWidget *       gnome_ditem_get_single_file_drop_toggle(GnomeDItemEdit *dee);
-GtkWidget *       gnome_ditem_get_url_drop_entry(GnomeDItemEdit  *dee);
-GtkWidget *       gnome_ditem_get_single_url_drop_toggle(GnomeDItemEdit *dee);
+GtkWidget *       gnome_ditem_edit_get_simple_dnd_toggle(GnomeDItemEdit *dee);
+GtkWidget *       gnome_ditem_edit_get_file_drop_entry(GnomeDItemEdit  *dee);
+GtkWidget *       gnome_ditem_edit_get_single_file_drop_toggle(GnomeDItemEdit *dee);
+GtkWidget *       gnome_ditem_edit_get_url_drop_entry(GnomeDItemEdit  *dee);
+GtkWidget *       gnome_ditem_edit_get_single_url_drop_toggle(GnomeDItemEdit *dee);
 
 END_GNOME_DECLS
    
