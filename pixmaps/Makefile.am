@@ -47,7 +47,7 @@ BITMAPS     = \
 	gnome-tigert.png			\
 	gnome-unknown.png			\
 	gnome-word.png				\
-	kterm.png				\
+	kterm.xpm				\
 	launcher-program.png			\
 	monitor.png				\
 	netscape.png				\
