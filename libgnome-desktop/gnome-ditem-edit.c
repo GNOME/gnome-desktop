@@ -33,7 +33,7 @@
 #ifdef NEED_GNOMESUPPORT_H
 # include "gnomesupport.h"
 #endif
-#include <libgnomebase/gnome-i18n.h>
+#include <libgnome/gnome-i18n.h>
 
 #include "gnome-stock.h"
 #include "gnome-dialog.h"
