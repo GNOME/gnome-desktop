@@ -52,6 +52,8 @@
 
 #include "gnome-desktop-item.h"
 
+#define sure_string(s) ((s)!=NULL?(s):"")
+
 struct _GnomeDesktopItem {
         int refcount;
 
@@ -866,80 +868,475 @@ replace_percentsign(int argc, char **argv, const char *ps,
 	return ret;
 }
 
-/* the appargv, will get modified but not freed, the replacekdefiles
-   tells us to replace the %f %u and %F for kde files with nothing */
+static char **
+list_to_vector (GSList *list)
+{
+	int len = g_slist_length (list);
+	char **argv;
+	int i;
+	GSList *li;
+
+	argv = g_new0 (char *, len+1);
+
+	for (i = 0, li = list;
+	     li != NULL;
+	     li = li->next, i++) {
+		argv[i] = g_strdup (li->data);
+	}
+	argv[i] = NULL;
+
+	return argv;
+}
+
+typedef struct {
+	int used;
+	int dir_used; /* hack, how many times was the directory (%d)
+			 used, rather then just the file.  we always
+			 equalize these to used after each exec */
+	int name_used; /* same but for the basename (%n) */
+	GnomeVFSURI *uri;
+} Arg;
+
+static GSList *
+make_args (GList *files)
+{
+	GSList *list = NULL;
+	GList *li;
+
+	for (li = files; li != NULL; li = li->next) {
+		Arg *arg = g_new0 (Arg, 1);
+		const char *file = li->data;
+		if (file == NULL)
+			continue;;
+		arg->used = 0;
+		arg->uri = gnome_vfs_uri_new (file);
+		list = g_slist_prepend (list, arg);
+	}
+
+	return g_slist_reverse (list);
+}
+
+static void
+free_args (GSList *list)
+{
+	GSList *li;
+
+	for (li = list; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		li->data = NULL;
+		gnome_vfs_uri_unref (arg->uri);
+		arg->uri = NULL;
+		g_free (arg);
+	}
+	g_slist_free (list);
+}
+
 static int
-ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], int argc, const char *argv[], gboolean replacekdefiles)
+count_unused (GSList *args)
+{
+	GSList *li;
+	int count = 0;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (arg->used == 0)
+			count ++;
+	}
+	return count;
+}
+
+static void
+normalize_used (GSList *args)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		arg->dir_used = arg->used;
+	}
+}
+
+static GSList *
+append_files (GSList *vector_list,
+	      GSList *args,
+	      gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = g_strdup (gnome_vfs_uri_get_path (arg->uri));
+			*added_files = TRUE;
+			vector_list = g_slist_append (vector_list, path);
+			arg->used++;
+		}
+
+	}
+
+	return vector_list;
+}
+
+static GSList *
+append_dirs (GSList *vector_list,
+	     GSList *args,
+	     gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_dirname (arg->uri);
+			if (path == NULL)
+				continue;
+			*added_files = TRUE;
+			vector_list = g_slist_append (vector_list, path);
+			arg->dir_used++;
+		}
+	}
+
+	return vector_list;
+}
+
+static GSList *
+append_names (GSList *vector_list,
+	      GSList *args,
+	      gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_short_path_name (arg->uri);
+			if (path == NULL)
+				continue;
+			*added_files = TRUE;
+			vector_list = g_slist_append (vector_list, path);
+			arg->name_used++;
+		}
+	}
+
+	return vector_list;
+}
+
+static GSList *
+append_uris (GSList *vector_list,
+	     GSList *args,
+	     gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		char *str;
+
+		str = gnome_vfs_uri_to_string (arg->uri, 0 /* hide_options */);
+		*added_files = TRUE;
+		arg->used++;
+		vector_list = g_slist_append (vector_list, str);
+	}
+
+	return vector_list;
+}
+
+static char *
+get_first_file (GSList *args,
+		gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (arg->used != 0)
+			continue;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = g_strdup (gnome_vfs_uri_get_path (arg->uri));
+			*added_files = TRUE;
+			arg->used++;
+			return path;
+		}
+
+	}
+
+	return NULL;
+}
+
+static char *
+get_first_dir (GSList *args,
+	       gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (arg->dir_used != 0)
+			continue;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_dirname (arg->uri);
+			if (path == NULL)
+				continue;
+			*added_files = TRUE;
+			arg->dir_used++;
+			return path;
+		}
+	}
+
+	return NULL;
+}
+
+static char *
+get_first_name (GSList *args,
+		gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		if (arg->name_used != 0)
+			continue;
+		if (gnome_vfs_uri_is_local (arg->uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_short_path_name (arg->uri);
+			if (path == NULL)
+				continue;
+			*added_files = TRUE;
+			arg->name_used++;
+			return path;
+		}
+	}
+
+	return NULL;
+}
+
+static char *
+get_first_uri (GSList *args,
+	       gboolean *added_files)
+{
+	GSList *li;
+
+	for (li = args; li != NULL; li = li->next) {
+		Arg *arg = li->data;
+		char *str;
+
+		if (arg->used != 0)
+			continue;
+
+		str = gnome_vfs_uri_to_string (arg->uri, 0 /* hide_options */);
+		*added_files = TRUE;
+		arg->used++;
+
+		return str;
+	}
+
+	return NULL;
+}
+
+static char *
+substitute_in_string (const GnomeDesktopItem *item,
+		      const char *arg,
+		      GSList *args,
+		      gboolean *added_files)
+{
+	GString *str = g_string_new (NULL);
+	int i;
+
+	for (i = 0; arg[i] != '\0'; i++) {
+		char *s;
+		const char *cs;
+
+		if (arg[i] != '%' ||
+		    arg[i+1] == '\0') {
+			g_string_append_c (str, arg[i]);
+			continue;
+		}
+
+		i++;
+
+		switch (arg[i]) {
+		/* FIXME: subst also %U, %F, %N, %D */
+		case '%':
+			g_string_append_c (str, '%');
+			break;
+		case 'f':
+			s = get_first_file (args, added_files);
+			g_string_append (str, sure_string (s));
+			g_free (s);
+			break;
+		case 'u':
+			s = get_first_uri (args, added_files);
+			g_string_append (str, sure_string (s));
+			g_free (s);
+			break;
+		case 'd':
+			s = get_first_dir (args, added_files);
+			g_string_append (str, sure_string (s));
+			g_free (s);
+			break;
+		case 'n':
+			s = get_first_name (args, added_files);
+			g_string_append (str, sure_string (s));
+			g_free (s);
+			break;
+		case 'm':
+			cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_MINI_ICON);
+			g_string_append (str, sure_string (cs));
+			break;
+		case 'i':
+			s = gnome_desktop_item_get_icon (item);
+			if (s != NULL) {
+				g_string_append (str, sure_string (s));
+				g_free (s);
+			} else {
+				/* else default to just what's in there */
+				cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
+				g_string_append (str, sure_string (cs));
+			}
+			break;
+		case 'c':
+			cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_COMMENT);
+			g_string_append (str, sure_string (cs));
+			break;
+		case 'k':
+			/* FIXME: is this the name of the .desktop file (location) or the name
+			 * of the entry???? the spec is ambiguous */
+			cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_NAME);
+			g_string_append (str, sure_string (cs));
+			break;
+		case 'v':
+			cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_DEV);
+			g_string_append (str, sure_string (cs));
+			break;
+		default:
+			break;
+		}
+	}
+
+	return g_string_free (str, FALSE);
+}
+
+static GSList *
+append_app_arg (GSList *vector_list,
+		const GnomeDesktopItem *item,
+		const char *arg,
+		GSList *args,
+		gboolean *added_files)
+{
+	if (strchr (arg, '%') == NULL) {
+		return vector_list;
+	
+	/* First we subst for some where it could be more then
+	 * one argument */
+	} else if (strcmp (arg, "%F")) {
+		return append_files (vector_list,
+				     args,
+				     added_files);
+	} else if (strcmp (arg, "%U")) {
+		return append_uris (vector_list,
+				    args,
+				    added_files);
+	} else if (strcmp (arg, "%D")) {
+		return append_dirs (vector_list,
+				    args,
+				    added_files);
+	} else if (strcmp (arg, "%N")) {
+		return append_names (vector_list,
+				     args,
+				     added_files);
+	} else {
+		char *str = substitute_in_string (item,
+						  arg,
+						  args,
+						  added_files);
+		return g_slist_append (vector_list, str);
+	}
+
+}
+
+static int
+ditem_execute (const GnomeDesktopItem *item,
+	       int appargc,
+	       char *appargv[],
+	       GList *file_list,
+	       gboolean launch_only_one)
 {
         char **real_argv;
         int real_argc;
         int i, j, ret;
 	char **term_argv = NULL;
 	int term_argc = 0;
-	GSList *tofree = NULL;
+	GSList *vector_list;
+	GSList *args;
+	int old_unused, new_unused;
+	gboolean added_files;
 
         g_return_val_if_fail (item, -1);
 
-        if(!argv)
-                argc = 0;
+	if (gnome_desktop_item_get_boolean (item, GNOME_DESKTOP_ITEM_TERMINAL)) {
+		const char *options =
+			gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_TERMINAL_OPTIONS);
 
-
-	/* check the type, if there is one set */
-	if(item->type != GNOME_DESKTOP_ITEM_TYPE_APPLICATION) {
-		/* FIXME: ue GError */
-		/* we are not an application so just exit
-		   with an error */
-		g_warning(_("Attempting to launch a non-application"));
-		return -1;
-	}
-
-	if(gnome_desktop_item_get_boolean (item, "Terminal")) {
-		/* FIXME: add temrinal options from desktop file */
-		/* somewhat hackish I guess, we should use this in
-		 * the prepend mode rather then just getting a new
-		 * vector, but I didn't want to rewrite this whole
-		 * function */
 		term_argc = 0;
 		term_argv = NULL;
+
+		if (options != NULL) {
+			g_shell_parse_argv (options,
+					    &term_argc,
+					    &term_argv,
+					    NULL /* error */);
+			/* ignore errors */
+		}
+
 		gnome_prepend_terminal_to_vector (&term_argc, &term_argv);
 	}
 
-        real_argc = term_argc + argc + appargc;
-        real_argv = g_alloca((real_argc + 1) * sizeof(char *));
+	args = make_args (file_list);
 
-        for(i = 0; i < term_argc; i++)
-                real_argv[i] = term_argv[i];
+	new_unused = old_unused = count_unused (args);
 
-        for(j = 0; j < appargc; j++, i++)
-                real_argv[i] = (char *)appargv[j];
+	do {
+		old_unused = new_unused;
 
-        for(j = 0; j < argc; j++, i++)
-                real_argv[i] = (char *)argv[j];
+		normalize_used (args);
 
-	/* FIXME: this ought to be standards compliant */
-	/* replace the standard %? thingies */
-	if(replacekdefiles) {
-		replace_percentsign(real_argc, real_argv, "%f", NULL, &tofree, TRUE);
-		replace_percentsign(real_argc, real_argv, "%F", NULL, &tofree, TRUE);
-		replace_percentsign(real_argc, real_argv, "%u", NULL, &tofree, TRUE);
-	}
-	replace_percentsign(real_argc, real_argv, "%d", g_getenv("PWD"), &tofree, FALSE);
-#if 0
-	replace_percentsign(real_argc, real_argv, "%m", 
-			    gnome_desktop_item_get_string(item,"MiniIcon"), &tofree, FALSE);
-#endif
-	replace_percentsign(real_argc, real_argv, "%c", 
-			    gnome_desktop_item_get_localestring(item, "Comment"), &tofree, FALSE);
+		added_files = FALSE;
 
-        ret = gnome_execute_async(NULL, real_argc, real_argv);
+		vector_list = NULL;
+		for(i = 0; i < term_argc; i++)
+			vector_list = g_slist_append (vector_list,
+						      g_strdup (term_argv[i]));
 
-	if(tofree) {
-		g_slist_foreach(tofree,(GFunc)g_free,NULL);
-		g_slist_free(tofree);
-	}
+		for (i = 0; i < appargc; i++) {
+			vector_list = append_app_arg (vector_list, item,
+						      appargv[i], args,
+						      &added_files);
+		}
 
-	if(term_argv)
-		g_strfreev(term_argv);
+		new_unused = count_unused (args);
+
+		real_argv = list_to_vector (vector_list);
+		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
+		g_slist_free (vector_list);
+
+		ret = gnome_execute_async (NULL, real_argc, real_argv);
+
+	/* rinse, repeat until we either stop adding new arguments or
+	 * run out of unused ones */
+	} while (added_files &&
+		 new_unused > 0 &&
+		 new_unused != old_unused &&
+		 ! launch_only_one);
+
+	free_args (args);
+
+	if (term_argv)
+		g_strfreev (term_argv);
 
 	return ret;
 }
@@ -972,27 +1369,30 @@ strip_the_amp (char *exec)
 /**
  * gnome_desktop_item_launch:
  * @item: A desktop item
- * @argc: An optional count of arguments to be added to the arguments defined.
- * @argv: An optional argument array, of length 'argc', to be appended
- *        to the command arguments specified in 'item'. Can be NULL.
+ * @file_list:  Files/URIs to launch this item with, can be %NULL
+ * @flags: FIXME
+ * @error: FIXME
  *
  * This function runs the program listed in the specified 'item',
  * optionally appending additional arguments to its command line.  It uses
- * poptParseArgvString to parse the the exec string into a vector which is
- * then passed to gnome_exec_async for execution with argc and argv appended.
+ * #g_shell_parse_argv to parse the the exec string into a vector which is
+ * then passed to #gnome_execute_async for execution. This can return all
+ * the errors from GnomeURL in addition to it's own.  The files are
+ * only added if the entry defines one of the standard % strings in it's
+ * Exec field.
  *
- * Returns: The value returned by gnome_execute_async() upon execution of
+ * Returns: The value returned by #gnome_execute_async() upon execution of
  * the specified item or -1 on error.  It may also return a 0 on success
  * if pid is not available, such as in a case where the entry is a URL
  * entry.
  */
 int
 gnome_desktop_item_launch (const GnomeDesktopItem *item,
-			   int argc,
-			   char **argv,
+			   GList *file_list,
+			   GnomeDesktopItemLaunchFlags flags,
 			   GError **error)
 {
-	const char **temp_argv = NULL;
+	char **temp_argv = NULL;
 	int temp_argc = 0;
 	const char *exec;
 	char *the_exec;
@@ -1004,307 +1404,110 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		const char *url;
 		url = gnome_desktop_item_get_string (item, "URL");
 		if (url && url[0] != '\0') {
-			if (gnome_url_show (url, NULL))
+			if (gnome_url_show (url, error))
 				return 0;
 			else
 				return -1;
 		/* Gnome panel used to put this in Exec */
 		} else if (exec && exec[0] != '\0') {
-			if (gnome_url_show (exec, NULL))
+			if (gnome_url_show (exec, error))
 				return 0;
 			else
 				return -1;
 		} else {
+			g_set_error (error,
+				     GNOME_DESKTOP_ITEM_ERROR,
+				     GNOME_DESKTOP_ITEM_ERROR_NO_URL,
+				     _("No URL to launch"));
 			return -1;
 		}
-		/* FIXME: use GError */
 	}
 
-	if(!exec || exec[0] == '\0') {
-		/* FIXME: use GError */
-		g_warning(_("Trying to execute an item with no 'Exec'"));
+	/* check the type, if there is one set */
+	if (item->type != GNOME_DESKTOP_ITEM_TYPE_APPLICATION) {
+		g_set_error (error,
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_NOT_LAUNCHABLE,
+			     _("Not a launchable item"));
+		return -1;
+	}
+
+
+	if (exec == NULL ||
+	    exec[0] == '\0') {
+		g_set_error (error,
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_NO_EXEC_STRING,
+			     _("No command (Exec) to launch"));
 		return -1;
 	}
 
 
 	/* make a new copy and get rid of spaces */
-	the_exec = g_alloca(strlen(exec)+1);
-	strcpy(the_exec,exec);
+	the_exec = g_alloca (strlen (exec) + 1);
+	strcpy (the_exec, exec);
 
-	if(!strip_the_amp(the_exec))
-		return -1;
-
-	/* we use a popt function as it does exactly what we want to do and
-	   gnome already uses popt */
-	if(poptParseArgvString(exec, &temp_argc, &temp_argv) != 0) {
-		/* no we have failed in making this a vector what should
-		   we do? we can pretend that the exec failed and return -1,
-		   perhaps we should give a little better error? */
+	if ( ! strip_the_amp (the_exec)) {
+		g_set_error (error,
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_BAD_EXEC_STRING,
+			     _("Bad command (Exec) to launch"));
 		return -1;
 	}
 
-	ret = ditem_execute (item, temp_argc, temp_argv, argc, argv, TRUE);
+	if ( ! g_shell_parse_argv (exec, &temp_argc, &temp_argv, NULL)) {
+		g_set_error (error,
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_BAD_EXEC_STRING,
+			     _("Bad command (Exec) to launch"));
+		return -1;
+	}
 
-	/* free the array done by poptParseArgvString, not by
-	   g_free but free, this is not a memory leak the whole thing
-	   is one allocation */
-	free(temp_argv);
+	ret = ditem_execute (item, temp_argc, temp_argv, file_list,
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE));
+
+	g_strfreev (temp_argv);
 
 	return ret;
 }
-
-/* replace %s, %f, %u or %F in exec with file and run */
-static int G_GNUC_UNUSED
-ditem_exec_single_file (GnomeDesktopItem *item, const char *exec, char *file)
-{
-	const char **temp_argv = NULL;
-	int temp_argc = 0;
-	char *the_exec;
-	GSList *tofree = NULL;
-	int ret;
-
-        g_return_val_if_fail (item, -1);
-	if(!exec) {
-		g_warning(_("No exec field for this drop"));
-		return -1;
-	}
-
-	/* make a new copy and get rid of spaces */
-	the_exec = g_alloca(strlen(exec)+1);
-	strcpy(the_exec,exec);
-
-	if(!strip_the_amp(the_exec))
-		return -1;
-
-	/* we use a popt function as it does exactly what we want to do and
-	   gnome already uses popt */
-	if(poptParseArgvString(exec, &temp_argc, &temp_argv) != 0) {
-		/* no we have failed in making this a vector what should
-		   we do? we can pretend that the exec failed and return -1,
-		   perhaps we should give a little better error? */
-		return -1;
-	}
-
-	/* we are gnomish and we want to use %s, but if someone uses %f, %u or %F
-	   we forgive them and do it too */
-	if(replace_percentsign(temp_argc, (char **)temp_argv, "%s", file, &tofree,TRUE))
-		goto perc_replaced;
-	if(replace_percentsign(temp_argc, (char **)temp_argv, "%f", file, &tofree,TRUE))
-		goto perc_replaced;
-	if(replace_percentsign(temp_argc, (char **)temp_argv, "%u", file, &tofree,TRUE))
-		goto perc_replaced;
-	if(replace_percentsign(temp_argc, (char **)temp_argv, "%F", file, &tofree,TRUE))
-		goto perc_replaced;
-	g_free(temp_argv);
-	g_warning(_("Nothing to replace with a file in the exec string"));
-	return -1;
-perc_replaced:
-
-	ret = ditem_execute(item, temp_argc, temp_argv, 0, NULL, FALSE);
-
-	if(tofree) {
-		g_slist_foreach(tofree,(GFunc)g_free,NULL);
-		g_slist_free(tofree);
-	}
-
-	/* free the array done by poptParseArgvString, not by
-	   g_free but free, this is not a memory leak the whole thing
-	   is one allocation */
-	free(temp_argv);
-
-	return ret;
-}
-
-/* works sort of like strcmp(g_strstrip(s1),s2), but returns only
- * TRUE or FALSE and does not modify s1, basically it tells if s2
- * is the same as s1 stripped */
-static gboolean
-stripstreq(const char *s1, const char *s2)
-{
-	size_t len2;
-
-	/* skip over initial spaces */
-	while(*s1 == ' ' || *s1 == '\t')
-		s1++;
-	len2 = strlen(s2);
-	/* compare inner parts */
-	if(strncmp(s1, s2, len2) != 0)
-		return FALSE;
-	/* skip over beyond the equal parts */
-	s1 += len2;
-	for(; *s1; s1++) {
-		/* if we find anything but whitespace that bad */
-		if(*s1 != ' ' && *s1 != '\t')
-			return FALSE;
-	}
-
-	return TRUE;
-}
-
-/* replace %s, %f, %u or %F in exec with files and run, the trick here is
-   that we will only replace %? in case it is a complete argument */
-static int G_GNUC_UNUSED
-ditem_exec_multiple_files (GnomeDesktopItem *item, const char *exec,
-			   GList *files)
-{
-	const char **temp_argv = NULL;
-	int temp_argc = 0;
-	char *the_exec;
-	int ret;
-	int real_argc;
-	const char **real_argv;
-	int i,j;
-	gboolean replaced = FALSE;
-
-        g_return_val_if_fail (item, -1);
-	if(!exec) {
-		g_warning(_("No exec field for this drop"));
-		return -1;
-	}
-
-	/* make a new copy and get rid of spaces */
-	the_exec = g_alloca(strlen(exec)+1);
-	strcpy(the_exec,exec);
-
-	if(!strip_the_amp(the_exec))
-		return -1;
-
-	/* we use a popt function as it does exactly what we want to do and
-	   gnome already uses popt */
-	if(poptParseArgvString(exec, &temp_argc, &temp_argv) != 0) {
-		/* no we have failed in making this a vector what should
-		   we do? we can pretend that the exec failed and return -1,
-		   perhaps we should give a little better error? */
-		return -1;
-	}
-
-	real_argc = temp_argc - 1 + g_list_length(files);
-	/* we allocate +2, one for NULL, one as a buffer in case
-	   we don't find anything to replace */
-	real_argv = g_alloca((real_argc + 2) * sizeof(char *));
-
-	for(i=0,j=0; i < real_argc && j < temp_argc; i++, j++) {
-		GList *li;
-		real_argv[i] = temp_argv[j];
-		/* we only replace once */
-		if(replaced)
-			continue;
-
-		if(!stripstreq(real_argv[i],"%s") &&
-		   !stripstreq(real_argv[i],"%f")!=0 &&
-		   !stripstreq(real_argv[i],"%u")!=0 &&
-		   !stripstreq(real_argv[i],"%F")!=0)
-			continue;
-
-		/* replace the argument with the files we got passed */
-		for(li = files; li!=NULL; li=li->next)
-			real_argv[i++] = li->data;
-
-		/* since we will increment in the for loop itself */
-		i--;
-
-		/* don't replace again! */
-		replaced = TRUE;
-	}
-
-	/* we haven't replaced anything */
-	if(!replaced) {
-		g_warning(_("There was no argument to replace with dropped files"));
-		return -1;
-	}
-
-	ret = ditem_execute(item, real_argc, real_argv, 0, NULL, FALSE);
-
-	/* free the array done by poptParseArgvString, not by
-	   g_free but free, this is not a memory leak the whole thing
-	   is one allocation */
-	free(temp_argv);
-
-	return ret;
-}
-
 
 /**
  * gnome_desktop_item_drop_uri_list:
  * @item: A desktop item
- * @uri_list: an uri_list as if gotten from #gnome_uri_list_extract_uris
+ * @uri_list: text as gotten from a text/uri-list
+ * @flags: FIXME
+ * @error: FIXME
  *
  * A list of files or urls dropped onto an icon, the proper (Url or File)
- * exec is run you can pass directly the output of 
- * #gnome_uri_list_extract_uris.  The input thus must be a GList of
- * strings in the URI format.  If the ditem didn't specify any DND
- * options we assume old style and drop by appending the list to the end
- * of 'Exec' (see #gnome_desktop_item_get_command).  If there were any urls
- * dropped the item must have specified being able to run URLs or you'll get
- * a warning and an error.  Basically if there are ANY urls in the list
- * it's taken as a list of urls and works only on apps that can take urls.
- * If the program can't take that many arguments, as many instances as
- * necessary will be started.
+ * exec is run you can pass directly string that you got as the
+ * text/uri-list.  This just parses the list and calls 
  *
- * Returns: The value returned by gnome_execute_async() upon execution of
+ * Returns: The value returned by #gnome_execute_async() upon execution of
  * the specified item or -1 on error.  If multiple instances are run, the
  * return of the last one is returned.
  */
-/*FIXME: perhaps we should be able to handle mixed url/file lists better
-  rather then treating it as a list of urls */
 int
 gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
-				  GList *uri_list,
+				  const char *uri_list,
+				  GnomeDesktopItemLaunchFlags flags,
 				  GError **error)
 {
-	/* FIXME: */
-#if 0
 	GList *li;
-	gboolean G_GNUC_UNUSED any_urls = FALSE;
-	GList *file_list = NULL;
-	int ret = -1;
+	int ret;
+	GList *list = gnome_vfs_uri_list_parse (uri_list);
 
-	g_return_val_if_fail (item != NULL, -1);
-	g_return_val_if_fail (uri_list != NULL, -1);
-
-	/* How could you drop something on a URL entry, that would
-	 * be bollocks */
-	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
-		/*FIXME: use a GError */
-		return -1;
+	for (li = list; li != NULL; li = li->next) {
+		GnomeVFSURI *uri = li->data;
+		li->data = gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
+		gnome_vfs_uri_unref (uri);
 	}
 
-	/* FIXME: we should really test if this was a compliant entry and there
-	 * were no %f %u or %F or whatnot, we shouldn't allow a drop!,
-	 * in that case I suppose, we should do that during load and add a
-	 * %F or something */
+	ret = gnome_desktop_item_launch (item, list, flags, error);
 
-#if 0
-	/* the simple case */
-	if(item->item_flags & GNOME_DESKTOP_ITEM_OLD_STYLE_DROP) {
-		int i;
-		int argc = g_list_length(uri_list);
-		const char **argv = g_alloca((argc + 1) * sizeof(char *));
-
-		for(i=0,li=uri_list; li; i++, li=li->next) {
-			argv[i] = li->data;
-		}
-		argv[i] = NULL;
-		return gnome_desktop_item_launch(item, argc, argv);
-	}
-#endif
-
-	/* figure out if we have any urls in the dropped files,
-	   this also builds a list of all the files */
-	for(li=uri_list; li; li=li->next) {
-		file_list = g_list_prepend(file_list, g_strdup (li->data));
-	}
-	if(file_list)
-		file_list = g_list_reverse(file_list);
-
-	if(file_list) {
-		g_list_foreach(file_list,(GFunc)g_free,NULL);
-		g_list_free(file_list);
-	}
+	g_list_foreach (list, (GFunc)g_free, NULL);
+	g_list_free (list);
 
 	return ret;
-#endif
-	return -1;
 }
 
 /**

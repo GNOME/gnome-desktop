@@ -52,10 +52,13 @@ struct _GnomeDItemEditPrivate {
 
         GtkWidget *name_entry;
         GtkWidget *comment_entry;
+        GtkWidget *exec_label;
         GtkWidget *exec_entry;
+        GtkWidget *tryexec_label;
         GtkWidget *tryexec_entry;
         GtkWidget *doc_entry;
 
+        GtkWidget *type_label;
         GtkWidget *type_combo;
 
         GtkWidget *terminal_button;  
@@ -212,6 +215,21 @@ label_new (const char *text)
         return label;
 }
 
+/* A hack! */
+static void
+type_combo_changed (GnomeDItemEdit *dee)
+{
+	const char *type;
+        type = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry));
+	if (type != NULL &&
+	    strcmp (type, "Link") == 0 /* URL */)
+		gtk_label_set_text (GTK_LABEL (dee->_priv->type_label),
+				    _("URL:"));
+	else
+		gtk_label_set_text (GTK_LABEL (dee->_priv->type_label),
+				    _("Command:"));
+}
+
 static void
 fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
 {
@@ -242,17 +260,16 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
                                               GTK_OBJECT(dee));
 
 
-        label = label_new(_("Command:"));
-        table_attach_label(GTK_TABLE(table),label, 0, 1, 2, 3);
+        dee->_priv->exec_label = label= label_new (_("Command:"));
+        table_attach_label (GTK_TABLE (table), label, 0, 1, 2, 3);
 
         dee->_priv->exec_entry = gtk_entry_new();
         table_attach_entry(GTK_TABLE(table),dee->_priv->exec_entry, 1, 2, 2, 3);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->exec_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
+        gtk_signal_connect_object_while_alive (GTK_OBJECT (dee->_priv->exec_entry), "changed",
+					       GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
+					       GTK_OBJECT (dee));
 
-
-        label = label_new(_("Type:"));
+        dee->_priv->type_label = label = label_new(_("Type:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
 
         dee->_priv->type_combo = gtk_combo_new();
@@ -260,10 +277,15 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
         gtk_combo_set_value_in_list(GTK_COMBO(dee->_priv->type_combo), 
                                     FALSE, TRUE);
         table_attach_entry(GTK_TABLE(table),dee->_priv->type_combo, 1, 2, 3, 4);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(GTK_COMBO(dee->_priv->type_combo)->entry), 
-                                              "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
+        gtk_signal_connect_object_while_alive (GTK_OBJECT (GTK_COMBO (dee->_priv->type_combo)->entry), 
+					       "changed",
+					       GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
+					       GTK_OBJECT (dee));
+	gtk_signal_connect_object_while_alive (GTK_OBJECT (GTK_COMBO (dee->_priv->type_combo)->entry), 
+					       "changed",
+					       GTK_SIGNAL_FUNC (type_combo_changed),
+					       GTK_OBJECT (dee));
+
 
         label = label_new(_("Icon:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 4, 5);
@@ -382,7 +404,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         GtkWidget * box;
         const char *transl[3];
 
-        label = label_new(_("Try this before using:"));
+        dee->_priv->tryexec_label = label = label_new(_("Try this before using:"));
         table_attach_label(GTK_TABLE(page),label, 0, 1, 0, 1);
 
         dee->_priv->tryexec_entry = gtk_entry_new();
@@ -557,9 +579,12 @@ static void
 gnome_ditem_set_directory_sensitive (GnomeDItemEdit *dee,
 				     gboolean is_directory)
 {
+	gtk_widget_set_sensitive (dee->_priv->exec_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->exec_entry, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->type_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->type_combo, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->terminal_button, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->tryexec_label, ! is_directory);
 	gtk_widget_set_sensitive (dee->_priv->tryexec_entry, ! is_directory);
 }
 
@@ -606,8 +631,13 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),
                            cs ? cs : "");
 
-        cs = gnome_desktop_item_get_string (ditem,
-					    GNOME_DESKTOP_ITEM_EXEC);
+	if (type == GNOME_DESKTOP_ITEM_TYPE_LINK) {
+		cs = gnome_desktop_item_get_string (ditem,
+						    GNOME_DESKTOP_ITEM_URL);
+	} else {
+		cs = gnome_desktop_item_get_string (ditem,
+						    GNOME_DESKTOP_ITEM_EXEC);
+	}
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), cs ? cs : "");
 
         cs = gnome_desktop_item_get_string (ditem,
@@ -689,14 +719,21 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 		dee->_priv->ditem = ditem;
 	}
 
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
-        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_EXEC, text);
+        text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->_priv->type_combo)->entry));
+        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, text);
+
+	/* hack really */
+	if (text != NULL &&
+	    strcmp (text, "Link") == 0) {
+		text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
+		gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_URL, text);
+	} else {
+		text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
+		gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_EXEC, text);
+	}
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->tryexec_entry));
         gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TRY_EXEC, text);
-  
-        text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->_priv->type_combo)->entry));
-        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, text);
   
 	file = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry));
         gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_ICON, file);
@@ -752,9 +789,9 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 }
 
 /**
- * gnome_ditem_edit_load_file
+ * gnome_ditem_edit_load_uri
  * @dee: #GnomeDItemEdit object to work with
- * @path: file to load into the editting areas
+ * @uri: file to load into the editting areas
  *
  * Description: Load a .desktop file and update the editting areas
  * of the object accordingly.
@@ -762,17 +799,17 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
  * Returns:  %TRUE if successful, %FALSE otherwise
  */
 gboolean
-gnome_ditem_edit_load_file (GnomeDItemEdit *dee,
-			    const gchar *path,
-			    GError **error)
+gnome_ditem_edit_load_uri (GnomeDItemEdit *dee,
+			   const gchar *uri,
+			   GError **error)
 {
         GnomeDesktopItem * newentry;
 
         g_return_val_if_fail (dee != NULL, FALSE);
         g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), FALSE);
-        g_return_val_if_fail (path != NULL, FALSE);
+        g_return_val_if_fail (uri != NULL, FALSE);
 
-        newentry = gnome_desktop_item_new_from_file (path, 0, error);
+        newentry = gnome_desktop_item_new_from_uri (uri, 0, error);
 
         if (newentry != NULL) {
 		if (dee->_priv->ditem != NULL)

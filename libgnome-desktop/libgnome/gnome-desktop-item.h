@@ -97,9 +97,19 @@ typedef enum {
 } GnomeDesktopItemLoadFlags;
 
 typedef enum {
+	/* Never launch more instances even if the app can only
+	 * handle one file and we have passed many */
+        GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE = 1<<0
+} GnomeDesktopItemLaunchFlags;
+
+typedef enum {
 	GNOME_DESKTOP_ITEM_ERROR_NO_FILENAME /* No filename set or given on save */,
 	GNOME_DESKTOP_ITEM_ERROR_UNKNOWN_ENCODING /* Unknown encoding of the file */,
-	GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN /* Cannot open file */
+	GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN /* Cannot open file */,
+	GNOME_DESKTOP_ITEM_ERROR_NO_EXEC_STRING /* Cannot launch due to no execute string */,
+	GNOME_DESKTOP_ITEM_ERROR_BAD_EXEC_STRING /* Cannot launch due to bad execute string */,
+	GNOME_DESKTOP_ITEM_ERROR_NO_URL /* No URL on a url entry*/,
+	GNOME_DESKTOP_ITEM_ERROR_NOT_LAUNCHABLE /* Not a launchable type of item */
 } GnomeDesktopItemError;
 
 /* Note that functions can also return the G_FILE_ERROR_* errors */
@@ -124,15 +134,16 @@ gboolean                gnome_desktop_item_save              (GnomeDesktopItem  
 							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_ref               (GnomeDesktopItem           *item);
 void                    gnome_desktop_item_unref             (GnomeDesktopItem           *item);
-int                     gnome_desktop_item_launch            (const GnomeDesktopItem     *item,
-							      int                         argc,
-							      char                      **argv,
+int			gnome_desktop_item_launch	     (const GnomeDesktopItem     *item,
+							      GList                      *file_list,
+							      GnomeDesktopItemLaunchFlags flags,
 							      GError                    **error);
 
 /* A list of files or urls dropped onto an icon This is the output
  * of gnome_vfs_uri_list_parse */
 int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktopItem     *item,
-							      GList                      *uri_list,
+							      const char                 *uri_list,
+							      GnomeDesktopItemLaunchFlags flags,
 							      GError                    **error);
 
 gboolean                gnome_desktop_item_exists            (const GnomeDesktopItem     *item);

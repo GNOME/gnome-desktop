@@ -84,8 +84,8 @@ GtkWidget *       gnome_ditem_edit_new          (void);
 void              gnome_ditem_edit_clear        (GnomeDItemEdit   *dee);
 
 /* Make the display reflect ditem at path */
-gboolean          gnome_ditem_edit_load_file    (GnomeDItemEdit   *dee,
-                                                 const gchar      *path,
+gboolean          gnome_ditem_edit_load_uri     (GnomeDItemEdit   *dee,
+						 const gchar      *path,
 						 GError          **error);
 
 /* Copy the contents of this ditem into the display */
