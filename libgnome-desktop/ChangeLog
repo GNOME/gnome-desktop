@@ -1,3 +1,13 @@
+Fri Dec 14 16:43:23 2001  George Lebl <jirka@5z.com>
+
+	* gnome-desktop-item.c: simplify and complete the %? substitution.
+	  Now %f and friends behave in a more predictable way.  If there
+	  are multiple instances on the command line you get the
+	  same file.  This also fixes other corner cases and simplifies what
+	  we do.  It's also more predictable, and makes more sense.  Things
+	  may still be weird if you use both %u and %f on the same line,
+	  but then you deserve what you get.
+
 Fri Dec 14 15:58:06 2001  George Lebl <jirka@5z.com>
 
 	* gnome-desktop-item.[ch], gnome-ditem-edit.[ch]: added some needed

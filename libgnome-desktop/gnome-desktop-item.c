@@ -888,15 +888,6 @@ list_to_vector (GSList *list)
 	return argv;
 }
 
-typedef struct {
-	int used;
-	int dir_used; /* hack, how many times was the directory (%d)
-			 used, rather then just the file.  we always
-			 equalize these to used after each exec */
-	int name_used; /* same but for the basename (%n) */
-	GnomeVFSURI *uri;
-} Arg;
-
 static GSList *
 make_args (GList *files)
 {
@@ -904,13 +895,12 @@ make_args (GList *files)
 	GList *li;
 
 	for (li = files; li != NULL; li = li->next) {
-		Arg *arg = g_new0 (Arg, 1);
+		GnomeVFSURI *uri;
 		const char *file = li->data;
 		if (file == NULL)
 			continue;;
-		arg->used = 0;
-		arg->uri = gnome_vfs_uri_new (file);
-		list = g_slist_prepend (list, arg);
+		uri = gnome_vfs_uri_new (file);
+		list = g_slist_prepend (list, uri);
 	}
 
 	return g_slist_reverse (list);
@@ -922,55 +912,113 @@ free_args (GSList *list)
 	GSList *li;
 
 	for (li = list; li != NULL; li = li->next) {
-		Arg *arg = li->data;
+		GnomeVFSURI *uri = li->data;
 		li->data = NULL;
-		gnome_vfs_uri_unref (arg->uri);
-		arg->uri = NULL;
-		g_free (arg);
+		gnome_vfs_uri_unref (uri);
 	}
 	g_slist_free (list);
 }
 
-static int
-count_unused (GSList *args)
+static char *
+stringify_files (GSList *args)
 {
 	GSList *li;
-	int count = 0;
+	GString *str = g_string_new (NULL);
+	const char *sep = "";
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (arg->used == 0)
-			count ++;
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
+			const char *path;
+			path = gnome_vfs_uri_get_path (uri);
+			g_string_append (str, sep);
+			g_string_append (str, path);
+			sep = " ";
+		}
+
 	}
-	return count;
+
+	return g_string_free (str, FALSE);
 }
 
-static void
-normalize_used (GSList *args)
+static char *
+stringify_dirs (GSList *args)
 {
 	GSList *li;
+	GString *str = g_string_new (NULL);
+	const char *sep = "";
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		arg->dir_used = arg->used;
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_dirname (uri);
+			g_string_append (str, sep);
+			g_string_append (str, path);
+			g_free (path);
+			sep = " ";
+		}
+
 	}
+
+	return g_string_free (str, FALSE);
+}
+
+static char *
+stringify_names (GSList *args)
+{
+	GSList *li;
+	GString *str = g_string_new (NULL);
+	const char *sep = "";
+
+	for (li = args; li != NULL; li = li->next) {
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
+			char *path;
+			path = gnome_vfs_uri_extract_short_path_name (uri);
+			g_string_append (str, sep);
+			g_string_append (str, path);
+			g_free (path);
+			sep = " ";
+		}
+
+	}
+
+	return g_string_free (str, FALSE);
+}
+
+static char *
+stringify_uris (GSList *args)
+{
+	GSList *li;
+	GString *str = g_string_new (NULL);
+
+	for (li = args; li != NULL; li = li->next) {
+		GnomeVFSURI *uri = li->data;
+		char *suri;
+		if (li != args)
+			g_string_append (str, " ");
+
+		suri = gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
+		g_string_append (str, suri);
+		g_free (suri);
+	}
+
+	return g_string_free (str, FALSE);
 }
 
 static GSList *
 append_files (GSList *vector_list,
-	      GSList *args,
-	      gboolean *added_files)
+	      GSList *args)
 {
 	GSList *li;
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = g_strdup (gnome_vfs_uri_get_path (arg->uri));
-			*added_files = TRUE;
+			path = g_strdup (gnome_vfs_uri_get_path (uri));
 			vector_list = g_slist_append (vector_list, path);
-			arg->used++;
 		}
 
 	}
@@ -980,21 +1028,18 @@ append_files (GSList *vector_list,
 
 static GSList *
 append_dirs (GSList *vector_list,
-	     GSList *args,
-	     gboolean *added_files)
+	     GSList *args)
 {
 	GSList *li;
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = gnome_vfs_uri_extract_dirname (arg->uri);
+			path = gnome_vfs_uri_extract_dirname (uri);
 			if (path == NULL)
 				continue;
-			*added_files = TRUE;
 			vector_list = g_slist_append (vector_list, path);
-			arg->dir_used++;
 		}
 	}
 
@@ -1003,21 +1048,18 @@ append_dirs (GSList *vector_list,
 
 static GSList *
 append_names (GSList *vector_list,
-	      GSList *args,
-	      gboolean *added_files)
+	      GSList *args)
 {
 	GSList *li;
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+		GnomeVFSURI *uri = li->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = gnome_vfs_uri_extract_short_path_name (arg->uri);
+			path = gnome_vfs_uri_extract_short_path_name (uri);
 			if (path == NULL)
 				continue;
-			*added_files = TRUE;
 			vector_list = g_slist_append (vector_list, path);
-			arg->name_used++;
 		}
 	}
 
@@ -1026,18 +1068,15 @@ append_names (GSList *vector_list,
 
 static GSList *
 append_uris (GSList *vector_list,
-	     GSList *args,
-	     gboolean *added_files)
+	     GSList *args)
 {
 	GSList *li;
 
 	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
+		GnomeVFSURI *uri = li->data;
 		char *str;
 
-		str = gnome_vfs_uri_to_string (arg->uri, 0 /* hide_options */);
-		*added_files = TRUE;
-		arg->used++;
+		str = gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
 		vector_list = g_slist_append (vector_list, str);
 	}
 
@@ -1045,104 +1084,76 @@ append_uris (GSList *vector_list,
 }
 
 static char *
-get_first_file (GSList *args,
-		gboolean *added_files)
+get_first_file (GSList **arg_ptr)
 {
-	GSList *li;
-
-	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (arg->used != 0)
-			continue;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+	while (*arg_ptr != NULL) {
+		GnomeVFSURI *uri = (*arg_ptr)->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = g_strdup (gnome_vfs_uri_get_path (arg->uri));
-			*added_files = TRUE;
-			arg->used++;
+			path = g_strdup (gnome_vfs_uri_get_path (uri));
 			return path;
 		}
-
+		*arg_ptr = (*arg_ptr)->next;
 	}
 
 	return NULL;
 }
 
 static char *
-get_first_dir (GSList *args,
-	       gboolean *added_files)
+get_first_dir (GSList **arg_ptr)
 {
-	GSList *li;
-
-	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (arg->dir_used != 0)
-			continue;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+	while (*arg_ptr != NULL) {
+		GnomeVFSURI *uri = (*arg_ptr)->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = gnome_vfs_uri_extract_dirname (arg->uri);
-			if (path == NULL)
-				continue;
-			*added_files = TRUE;
-			arg->dir_used++;
+			path = gnome_vfs_uri_extract_dirname (uri);
 			return path;
 		}
+		*arg_ptr = (*arg_ptr)->next;
 	}
 
 	return NULL;
 }
 
 static char *
-get_first_name (GSList *args,
-		gboolean *added_files)
+get_first_name (GSList **arg_ptr)
 {
-	GSList *li;
-
-	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		if (arg->name_used != 0)
-			continue;
-		if (gnome_vfs_uri_is_local (arg->uri)) {
+	while (*arg_ptr != NULL) {
+		GnomeVFSURI *uri = (*arg_ptr)->data;
+		if (gnome_vfs_uri_is_local (uri)) {
 			char *path;
-			path = gnome_vfs_uri_extract_short_path_name (arg->uri);
-			if (path == NULL)
-				continue;
-			*added_files = TRUE;
-			arg->name_used++;
+			path = gnome_vfs_uri_extract_short_path_name (uri);
 			return path;
 		}
+		*arg_ptr = (*arg_ptr)->next;
 	}
 
 	return NULL;
 }
 
 static char *
-get_first_uri (GSList *args,
-	       gboolean *added_files)
+get_first_uri (GSList **arg_ptr)
 {
-	GSList *li;
-
-	for (li = args; li != NULL; li = li->next) {
-		Arg *arg = li->data;
-		char *str;
-
-		if (arg->used != 0)
-			continue;
-
-		str = gnome_vfs_uri_to_string (arg->uri, 0 /* hide_options */);
-		*added_files = TRUE;
-		arg->used++;
-
-		return str;
+	if (*arg_ptr != NULL) {
+		GnomeVFSURI *uri = (*arg_ptr)->data;
+		return gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
 	}
 
 	return NULL;
 }
+
+enum {
+	ADDED_NONE = 0,
+	ADDED_SINGLE,
+	ADDED_ALL
+};
 
 static char *
 substitute_in_string (const GnomeDesktopItem *item,
 		      const char *arg,
 		      GSList *args,
-		      gboolean *added_files)
+		      GSList **arg_ptr,
+		      int *added_status)
 {
 	GString *str = g_string_new (NULL);
 	int i;
@@ -1164,25 +1175,57 @@ substitute_in_string (const GnomeDesktopItem *item,
 		case '%':
 			g_string_append_c (str, '%');
 			break;
+		case 'U':
+			s = stringify_uris (args);
+			g_string_append (str, s);
+			g_free (s);
+			*added_status = ADDED_ALL;
+			break;
+		case 'F':
+			s = stringify_files (args);
+			g_string_append (str, s);
+			g_free (s);
+			*added_status = ADDED_ALL;
+			break;
+		case 'N':
+			s = stringify_names (args);
+			g_string_append (str, s);
+			g_free (s);
+			*added_status = ADDED_ALL;
+			break;
+		case 'D':
+			s = stringify_dirs (args);
+			g_string_append (str, s);
+			g_free (s);
+			*added_status = ADDED_ALL;
+			break;
 		case 'f':
-			s = get_first_file (args, added_files);
+			s = get_first_file (arg_ptr);
 			g_string_append (str, sure_string (s));
 			g_free (s);
+			if (*added_status != ADDED_ALL)
+				*added_status = ADDED_SINGLE;
 			break;
 		case 'u':
-			s = get_first_uri (args, added_files);
+			s = get_first_uri (arg_ptr);
 			g_string_append (str, sure_string (s));
 			g_free (s);
+			if (*added_status != ADDED_ALL)
+				*added_status = ADDED_SINGLE;
 			break;
 		case 'd':
-			s = get_first_dir (args, added_files);
+			s = get_first_dir (arg_ptr);
 			g_string_append (str, sure_string (s));
 			g_free (s);
+			if (*added_status != ADDED_ALL)
+				*added_status = ADDED_SINGLE;
 			break;
 		case 'n':
-			s = get_first_name (args, added_files);
+			s = get_first_name (arg_ptr);
 			g_string_append (str, sure_string (s));
 			g_free (s);
+			if (*added_status != ADDED_ALL)
+				*added_status = ADDED_SINGLE;
 			break;
 		case 'm':
 			cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_MINI_ICON);
@@ -1226,7 +1269,8 @@ append_app_arg (GSList *vector_list,
 		const GnomeDesktopItem *item,
 		const char *arg,
 		GSList *args,
-		gboolean *added_files)
+		GSList **arg_ptr,
+		int *added_status)
 {
 	if (strchr (arg, '%') == NULL) {
 		return g_slist_append (vector_list, g_strdup (arg));
@@ -1234,26 +1278,27 @@ append_app_arg (GSList *vector_list,
 	/* First we subst for some where it could be more then
 	 * one argument */
 	} else if (strcmp (arg, "%F")) {
+		*added_status = ADDED_ALL;
 		return append_files (vector_list,
-				     args,
-				     added_files);
+				     args);
 	} else if (strcmp (arg, "%U")) {
+		*added_status = ADDED_ALL;
 		return append_uris (vector_list,
-				    args,
-				    added_files);
+				    args);
 	} else if (strcmp (arg, "%D")) {
+		*added_status = ADDED_ALL;
 		return append_dirs (vector_list,
-				    args,
-				    added_files);
+				    args);
 	} else if (strcmp (arg, "%N")) {
+		*added_status = ADDED_ALL;
 		return append_names (vector_list,
-				     args,
-				     added_files);
+				     args);
 	} else {
 		char *str = substitute_in_string (item,
 						  arg,
 						  args,
-						  added_files);
+						  arg_ptr,
+						  added_status);
 		return g_slist_append (vector_list, str);
 	}
 
@@ -1272,9 +1317,8 @@ ditem_execute (const GnomeDesktopItem *item,
 	char **term_argv = NULL;
 	int term_argc = 0;
 	GSList *vector_list;
-	GSList *args;
-	int old_unused, new_unused;
-	gboolean added_files;
+	GSList *args, *arg_ptr;
+	int added_status;
 
         g_return_val_if_fail (item, -1);
 
@@ -1297,28 +1341,22 @@ ditem_execute (const GnomeDesktopItem *item,
 	}
 
 	args = make_args (file_list);
-
-	new_unused = old_unused = count_unused (args);
+	arg_ptr = make_args (file_list);
 
 	do {
-		old_unused = new_unused;
-
-		normalize_used (args);
-
-		added_files = FALSE;
-
 		vector_list = NULL;
 		for(i = 0; i < term_argc; i++)
 			vector_list = g_slist_append (vector_list,
 						      g_strdup (term_argv[i]));
 
+		added_status = ADDED_NONE;
 		for (i = 0; i < appargc; i++) {
 			vector_list = append_app_arg (vector_list, item,
-						      appargv[i], args,
-						      &added_files);
+						      appargv[i],
+						      args,
+						      &arg_ptr,
+						      &added_status);
 		}
-
-		new_unused = count_unused (args);
 
 		real_argv = list_to_vector (vector_list);
 		real_argc = g_slist_length (vector_list);
@@ -1327,11 +1365,13 @@ ditem_execute (const GnomeDesktopItem *item,
 
 		ret = gnome_execute_async (NULL, real_argc, real_argv);
 
-	/* rinse, repeat until we either stop adding new arguments or
-	 * run out of unused ones */
-	} while (added_files &&
-		 new_unused > 0 &&
-		 new_unused != old_unused &&
+		if (arg_ptr != NULL)
+			arg_ptr = arg_ptr->next;
+
+	/* rinse, repeat until we run out of arguments (That
+	 * is if we were adding singles anyway) */
+	} while (added_status == ADDED_SINGLE &&
+		 arg_ptr != NULL &&
 		 ! launch_only_one);
 
 	free_args (args);
