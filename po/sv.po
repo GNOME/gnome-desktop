@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core\n"
-"POT-Creation-Date: 2000-11-13 13:52+0100\n"
-"PO-Revision-Date: 2000-11-13 15:04+0100\n"
+"POT-Creation-Date: 2000-11-16 01:42+0100\n"
+"PO-Revision-Date: 2000-11-16 01:50+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -266,7 +266,7 @@ msgstr "Animationens filnamn:"
 
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:940
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
-#: panel/menu-properties.c:526 panel/menu-properties.c:564
+#: panel/menu-properties.c:594 panel/menu-properties.c:632
 #: panel/panel-util.c:111 panel/panel_config.c:1213 panel/swallow.c:212
 msgid "Browse"
 msgstr "Bläddra"
@@ -327,14 +327,14 @@ msgstr ""
 "%I.%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:443
+#: applets/gen_util/clock.c:152
 msgid "%I:%M %p"
 msgstr "%I.%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:441
-#: panel/foobar-widget.c:761
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:443
+#: panel/foobar-widget.c:818
 msgid "%H:%M"
 msgstr "%H.%M"
 
@@ -1019,7 +1019,7 @@ msgstr "GNOME-fisken Wanda"
 msgid "... and many more"
 msgstr "...och många fler"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:208
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:210
 msgid "About GNOME"
 msgstr "Om GNOME"
 
@@ -1438,7 +1438,7 @@ msgid "Edit"
 msgstr "Redigera"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:816
+#: panel/foobar-widget.c:873
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -1667,9 +1667,9 @@ msgid ""
 "Your version of libICE has a bug which causes gnome-session\n"
 "to not function correctly.\n"
 "\n"
-"If you are on Solaris, you should either upgrade to Solaris 8\n"
-"or use the libICE.so.6 from the original Solaris 7.  You can\n"
-"just copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
+"If you are on Solaris, you should either upgrade to Solaris patch\n"
+"#108376-16 or use the libICE.so.6 from the original Solaris 7.\n"
+"Copy the file into /usr/openwin/lib.  (Thanks go to Andy Reitz\n"
 "for information on this bug).\n"
 "\n"
 "Your GNOME session will terminate after closing this dialog."
@@ -1677,10 +1677,10 @@ msgstr ""
 "Din version av libICE har en bugg som gör att gnome-session inte\n"
 "fungerar korrekt.\n"
 "\n"
-"Om ditt system är Solaris bör du antingen uppgradera till Solaris 8\n"
-"eller använda libICE.so.6 från originalversionen av Solaris 7. Du kan\n"
-"kopiera denna fil till /usr/openwin/lib för att lösa problemet. (Vi\n"
-"tackar Andy Reitz för informarion om denna bugg).\n"
+"Om ditt system är Solaris bör du antingen uppgradera till Solaris-\n"
+"patchen #108376-16 eller använda libICE.so.6 från originalversionen\n"
+"av Solaris 7. Kopiera filen till /usr/openwin/lib. (Vi tackar Andy\n"
+"Reitz för information om denna bugg).\n"
 "\n"
 "Din GNOME-session kommer att avslutas då du stänger denna dialogruta."
 
@@ -2318,29 +2318,29 @@ msgstr ""
 "installerat denna dokumentation\n"
 "på ditt system."
 
-#: panel/applet.c:411
+#: panel/applet.c:415
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:451
+#: panel/applet.c:454
 msgid "Remove from panel"
 msgstr "Ta bort från panelen"
 
-#: panel/applet.c:458
+#: panel/applet.c:461
 msgid "Move"
 msgstr "Flytta"
 
-#: panel/applet.c:470 panel/menu.c:3263
+#: panel/applet.c:473 panel/menu.c:3263
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kunde inte hitta bildfilen %s"
 
-#: panel/applet.c:471 panel/applet.c:477 panel/menu.c:3488 panel/menu.c:3493
+#: panel/applet.c:474 panel/applet.c:480 panel/menu.c:3488 panel/menu.c:3493
 #: panel/menu.c:4502 panel/menu.c:4507 panel/menu.c:4827
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:735
+#: panel/applet.c:745
 msgid "Can't find an empty spot"
 msgstr "Kan inte hitta ett ledigt ställe"
 
@@ -2399,7 +2399,7 @@ msgstr "SuSE-menyer"
 msgid "Tooltip/Name"
 msgstr "Verktygstips/Namn"
 
-#: panel/drawer.c:117 panel/menu-properties.c:547 panel/menu-properties.c:582
+#: panel/drawer.c:117 panel/menu-properties.c:615 panel/menu-properties.c:650
 msgid "Icon"
 msgstr "Ikon"
 
@@ -2443,12 +2443,12 @@ msgstr "Batteriet"
 msgid ""
 "%s applet appears to have died unexpectadly. Reload this applet?\n"
 "(If you choose not to reload it at this time you can always add it from the "
-"\"Applets\" sbumenu in the mail menu)"
+"\"Applets\" submenu in the main menu)"
 msgstr ""
 "Panelprogrammet %s verkar ha dött. Vill du läsa in det här panelprogrammet "
 "igen?\n"
 "(Om du väljer att inte läsa in det igen det igen just nu kan du alltid lägga "
-"till det från undermenyn \"Panelprogram\" i e-postmenyn)"
+"till det från undermenyn \"Panelprogram\" i huvudmenyn)"
 
 #: panel/extern.c:633
 msgid "Couldn't add applet"
@@ -2462,7 +2462,7 @@ msgstr "Hoppsan! kan inte lägga till i panelen av någon anledning"
 msgid "No socket was created"
 msgstr "Inget uttag (socket) skapades"
 
-#: panel/foobar-widget.c:165
+#: panel/foobar-widget.c:167
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2470,7 +2470,7 @@ msgstr ""
 "Kan inte köra gmc-klientprogrammet.\n"
 "gmc är kanske inte installerat"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:177
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2480,161 +2480,165 @@ msgstr ""
 "Den är kanske inte installerad.\n"
 "Den finns i gnome-pim-paketet."
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "News (www)"
 msgstr "Nyheter (www)"
 
-#: panel/foobar-widget.c:188
+#: panel/foobar-widget.c:190
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "FAQ (www)"
 msgstr "FAQ (www)"
 
-#: panel/foobar-widget.c:189
+#: panel/foobar-widget.c:191
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "Mailing Lists (www)"
 msgstr "Sändlistor (www)"
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:192
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "Software (www)"
 msgstr "Programvara (www)"
 
-#: panel/foobar-widget.c:192
+#: panel/foobar-widget.c:194
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "Development (www)"
 msgstr "Utveckling (www)"
 
-#: panel/foobar-widget.c:193
+#: panel/foobar-widget.c:195
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "Bug Tracking System (www)"
 msgstr "Felsökningssystem (www)"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:196
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:239
+#: panel/foobar-widget.c:241
 msgid "By Name"
 msgstr "Efter namn"
 
-#: panel/foobar-widget.c:240
+#: panel/foobar-widget.c:242
 msgid "By Type"
 msgstr "Efter typ"
 
-#: panel/foobar-widget.c:241
+#: panel/foobar-widget.c:243
 msgid "By Size"
 msgstr "Efter storlek"
 
-#: panel/foobar-widget.c:242
+#: panel/foobar-widget.c:244
 msgid "By Time Last Accessed"
 msgstr "Efter tid för senaste åtkomst"
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:245
 msgid "By Time Last Modified"
 msgstr "Efter tid för senaste modifiering"
 
-#: panel/foobar-widget.c:244
+#: panel/foobar-widget.c:246
 msgid "By Time Last Changed"
 msgstr "Efter tid för senaste ändring"
 
-#: panel/foobar-widget.c:253
+#: panel/foobar-widget.c:255
 msgid "Arrange Icons"
 msgstr "Ordna ikoner"
 
-#: panel/foobar-widget.c:263
+#: panel/foobar-widget.c:265
 msgid "Rescan Desktop Directory"
 msgstr "Läs om skrivbordskatalogen"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:266
 msgid "Rescan Desktop Devices"
 msgstr "Läs om skrivbordsenheter"
 
-#: panel/foobar-widget.c:270
+#: panel/foobar-widget.c:272
 msgid "Lock Screen"
 msgstr "Lås skärmen"
 
-#: panel/foobar-widget.c:280
+#: panel/foobar-widget.c:282
 msgid "Log Out"
 msgstr "Logga ut"
 
-#: panel/foobar-widget.c:288
+#: panel/foobar-widget.c:290
 msgid " Desktop "
 msgstr " Skrivbord "
 
-#: panel/foobar-widget.c:305
+#: panel/foobar-widget.c:307
 msgid "can't fine real path"
 msgstr "kan inte hitta verklig sökväg"
 
-#: panel/foobar-widget.c:313
+#: panel/foobar-widget.c:315
 msgid "menu wasn't created"
 msgstr "menyn skapades inte"
 
-#: panel/foobar-widget.c:355
+#: panel/foobar-widget.c:357
 msgid "%A %B %d"
 msgstr "%A %d %B"
 
-#: panel/foobar-widget.c:434
+#: panel/foobar-widget.c:436
 msgid "Today"
 msgstr "Idag"
 
-#: panel/foobar-widget.c:435
+#: panel/foobar-widget.c:437
 msgid "This Week"
 msgstr "Den här veckan"
 
-#: panel/foobar-widget.c:436
+#: panel/foobar-widget.c:438
 msgid "This Month"
 msgstr "Den här månaden"
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:444
 msgid "%H:%M:%S"
 msgstr "%H.%M.%S"
 
-#: panel/foobar-widget.c:444
-msgid "%I:%M:%S %p"
-msgstr "%H.%M.%S"
+#: panel/foobar-widget.c:445
+msgid "%l:%M %p"
+msgstr "%I.%M %p"
 
-#: panel/foobar-widget.c:451
+#: panel/foobar-widget.c:446
+msgid "%l:%M:%S %p"
+msgstr "%I.%M.%S %p"
+
+#: panel/foobar-widget.c:453
 msgid "Add appointement..."
 msgstr "Lägg till möte..."
 
-#: panel/foobar-widget.c:468
+#: panel/foobar-widget.c:470
 msgid "Format"
 msgstr "Format"
 
-#: panel/foobar-widget.c:799 panel/menu.c:3285 panel/menu.c:3290
+#: panel/foobar-widget.c:856 panel/menu.c:3285 panel/menu.c:3290
 #: panel/menu.c:4732
 msgid "Programs"
 msgstr "Program"
 
-#: panel/foobar-widget.c:813 panel/menu.c:4704 panel/menu.c:4744
+#: panel/foobar-widget.c:870 panel/menu.c:4704 panel/menu.c:4744
 #: panel/menu.c:4750
 msgid "Favorites"
 msgstr "Favoriter"
 
-#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:464
+#: panel/gnome-panel-properties.c:112 panel/menu-properties.c:532
 msgid "Programs: "
 msgstr "Program: "
 
-#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:471
+#: panel/gnome-panel-properties.c:113 panel/menu-properties.c:539
 msgid "Favorites: "
 msgstr "Favoriter: "
 
-#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:478
+#: panel/gnome-panel-properties.c:114 panel/menu-properties.c:546
 msgid "Applets: "
 msgstr "Panelprogram: "
 
@@ -2737,7 +2741,7 @@ msgid "Launcher"
 msgstr "Programknappsikon"
 
 #: panel/gnome-panel-properties.c:558 panel/gnome-panel-properties.c:1461
-#: panel/menu-properties.c:542 panel/menu.c:1418 panel/menu.c:2777
+#: panel/menu-properties.c:610 panel/menu.c:1418 panel/menu.c:2777
 #: panel/menu.c:2845 panel/menu.c:2850 panel/menu.c:4169 panel/menu.c:5002
 msgid "Menu"
 msgstr "Meny"
@@ -2797,11 +2801,11 @@ msgstr "Mellanrum mellan panelprogram"
 msgid "Padding between applets and panel border"
 msgstr "Mellanrum mellan panelprogram och panelkanten"
 
-#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:324
+#: panel/gnome-panel-properties.c:783 panel/menu-properties.c:392
 msgid "Off"
 msgstr "Av"
 
-#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:334
+#: panel/gnome-panel-properties.c:790 panel/menu-properties.c:402
 msgid "In a submenu"
 msgstr "I en undermeny"
 
@@ -3328,7 +3332,7 @@ msgstr "Orientering"
 msgid "Applet"
 msgstr "Panelprogram"
 
-#: panel/menu-properties.c:428 panel/menu-properties.c:450 panel/menu.c:4179
+#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4179
 msgid "Main menu"
 msgstr "Huvudmeny"
 
@@ -3416,55 +3420,55 @@ msgstr "Om GNOME..."
 msgid "Can't create menu, using main menu!"
 msgstr "Kan inte skapa meny, använder huvudmenyn!"
 
-#: panel/menu-properties.c:137 panel/menu.c:5093
+#: panel/menu-properties.c:209 panel/menu.c:5093
 msgid "Edit menus..."
 msgstr "Redigera menyer..."
 
-#: panel/menu-properties.c:144
+#: panel/menu-properties.c:190
 msgid "Can't open directory, using main menu!"
 msgstr "Kan inte öppna katalog, använder huvudmenyn!"
 
-#: panel/menu-properties.c:346
+#: panel/menu-properties.c:414
 msgid "On the main menu"
 msgstr "På huvudmenyn"
 
-#: panel/menu-properties.c:383 panel/menu-properties.c:400
+#: panel/menu-properties.c:451 panel/menu-properties.c:468
 msgid "Menu properties"
 msgstr "Menyegenskaper"
 
-#: panel/menu-properties.c:407
+#: panel/menu-properties.c:475
 msgid "Menu type"
 msgstr "Typ av meny"
 
-#: panel/menu-properties.c:414
+#: panel/menu-properties.c:482
 msgid "Global main menu"
 msgstr "Global huvudmeny"
 
-#: panel/menu-properties.c:442 panel/menu-properties.c:512
+#: panel/menu-properties.c:510 panel/menu-properties.c:580
 msgid "Normal menu"
 msgstr "Normal meny"
 
-#: panel/menu-properties.c:485
+#: panel/menu-properties.c:553
 msgid "Distribution menu (if found): "
 msgstr "Distributionsmeny (om den hittas): "
 
-#: panel/menu-properties.c:492
+#: panel/menu-properties.c:560
 msgid "KDE menu (if found): "
 msgstr "KDE-meny (om den hittas): "
 
-#: panel/menu-properties.c:499
+#: panel/menu-properties.c:567
 msgid "Panel menu: "
 msgstr "Panelmeny: "
 
-#: panel/menu-properties.c:506
+#: panel/menu-properties.c:574
 msgid "Desktop menu: "
 msgstr "Skrivbordsmeny: "
 
-#: panel/menu-properties.c:523
+#: panel/menu-properties.c:591
 msgid "Menu path"
 msgstr "Sökväg till meny"
 
-#: panel/menu-properties.c:554
+#: panel/menu-properties.c:622
 msgid "Use custom icon for panel button"
 msgstr "Använd anpassad ikon för panelknapp"
 
