@@ -1310,6 +1310,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	       char *appargv[],
 	       GList *file_list,
 	       gboolean launch_only_one,
+	       gboolean use_current_dir,
 	       GError **error)
 {
         char **real_argv;
@@ -1319,8 +1320,12 @@ ditem_execute (const GnomeDesktopItem *item,
 	GSList *vector_list;
 	GSList *args, *arg_ptr;
 	int added_status;
+	const char *working_dir;
 
         g_return_val_if_fail (item, -1);
+
+	if ( ! use_current_dir)
+		working_dir = g_get_home_dir ();
 
 	if (gnome_desktop_item_get_boolean (item, GNOME_DESKTOP_ITEM_TERMINAL)) {
 		const char *options =
@@ -1362,7 +1367,7 @@ ditem_execute (const GnomeDesktopItem *item,
 		g_slist_foreach (vector_list, (GFunc)g_free, NULL);
 		g_slist_free (vector_list);
 
-		if ( ! g_spawn_async (NULL /* working_directory */,
+		if ( ! g_spawn_async (working_dir,
 				      real_argv,
 				      NULL /* envp */,
 				      G_SPAWN_SEARCH_PATH /* flags */,
@@ -1514,6 +1519,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 
 	ret = ditem_execute (item, temp_argc, temp_argv, file_list,
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
 			     error);
 
 	g_strfreev (temp_argv);
@@ -3319,7 +3325,7 @@ gnome_desktop_item_error_quark (void)
 {
 	static GQuark q = 0;
 	if (q == 0)
-		q = g_quark_from_static_string ("g-file-error-quark");
+		q = g_quark_from_static_string ("gnome-desktop-item-error-quark");
 
 	return q;
 }

@@ -104,7 +104,9 @@ typedef enum {
 typedef enum {
 	/* Never launch more instances even if the app can only
 	 * handle one file and we have passed many */
-        GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE = 1<<0
+        GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE = 1<<0,
+	/* Use current directory instead of home directory */
+        GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR = 1<<1
 } GnomeDesktopItemLaunchFlags;
 
 typedef enum {
