@@ -148,6 +148,7 @@ static gchar *contributors[] = {
 	"Birger Langkjer",
 	"Alexander Larsson",
 	"Guillaume Laurent",
+	"Ole Laursen",
 	"Michael Lausch",
 	"Will LaShell",
 	"Jens Lautenbacher",
