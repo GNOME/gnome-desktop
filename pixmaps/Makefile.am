@@ -69,6 +69,7 @@ pixmap_DATA =					\
 	gnome-panel-type-menu.png      		\
 	gnome-qeye.png				\
 	gnome-run.png				\
+	gnome-screenshot.png			\
 	gnome-session.png			\
 	gnome-settings.png          		\
 	gnome-system.png			\
