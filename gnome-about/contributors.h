@@ -80,6 +80,7 @@ static gchar *contributors[] = {
 	"Arturo Espinosa",
 	"Gus Estrella",
 	"David Etherton",
+	"Larry Ewing",
 	"Marc Ewing",
 	/* if your encoding allows it, use odoubleacute (U0151) for the 'o'
 	 * of 'Gergo' and use Eacute (U00C9) for the 'E' of 'Erdi' */
@@ -284,6 +285,7 @@ static gchar *contributors[] = {
 	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
 	"Stalyn",
+	"Jeffrey Stedfast",
 	"Jakub Steiner",
 	"Ben Stern",
 	"Micah Stetson",
