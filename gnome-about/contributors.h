@@ -255,7 +255,7 @@ static gchar *contributors[] = {
 	"S\xc3\xb8ren Sandmann",
 	"Pablo Saratxaga",
 	/* Kazuhiro Sasayama: */
-	"\xe7\xac\xb9 \xe5\xb1\xb1 \xe5\x92\x82 \xe5\xae\x8f",
+	"\xe7\xac\xb9 \xe5\xb1\xb1 \xe5\x92\x8c \xe5\xae\x8f",
 	"Carsten Schaar",
 	"Christian Schaller",
 	"Wayne Schuller",
