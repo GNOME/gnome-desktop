@@ -164,6 +164,12 @@ int			gnome_desktop_item_launch	     (const GnomeDesktopItem     *item,
 							      GList                      *file_list,
 							      GnomeDesktopItemLaunchFlags flags,
 							      GError                    **error);
+int			gnome_desktop_item_launch_with_env   (const GnomeDesktopItem     *item,
+							      GList                      *file_list,
+							      GnomeDesktopItemLaunchFlags flags,
+							      char                      **envp,
+							      GError                    **error);
+
 
 /* A list of files or urls dropped onto an icon This is the output
  * of gnome_vfs_uri_list_parse */

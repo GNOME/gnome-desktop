@@ -1448,6 +1448,7 @@ static int
 ditem_execute (const GnomeDesktopItem *item,
 	       const char *exec,
 	       GList *file_list,
+               char **envp,
 	       gboolean launch_only_one,
 	       gboolean use_current_dir,
 	       GError **error)
@@ -1525,7 +1526,7 @@ ditem_execute (const GnomeDesktopItem *item,
 
 		if ( ! g_spawn_async (working_dir,
 				      real_argv,
-				      NULL /* envp */,
+				      envp,
 				      G_SPAWN_SEARCH_PATH /* flags */,
 				      NULL /* child_setup */,
 				      NULL /* user_data */,
@@ -1606,6 +1607,33 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 			   GnomeDesktopItemLaunchFlags flags,
 			   GError **error)
 {
+	return gnome_desktop_item_launch_with_env (
+			item, file_list, flags, NULL, error);
+}
+
+/**
+ * gnome_desktop_item_launch_wth_env:
+ * @item: A desktop item
+ * @file_list:  Files/URIs to launch this item with, can be %NULL
+ * @flags: FIXME
+ * @envp: child's environment, or %NULL to inherit parent's
+ * @error: FIXME
+ *
+ * See gnome_desktop_item_launch for a full description. This function
+ * additionally passes an environment vector for the child process
+ * which is to be launched.
+ *
+ * Returns: The the pid of the process spawned.  If more then one
+ * process was spawned the last pid is returned.  On error -1
+ * is returned and @error is set.
+ */
+int
+gnome_desktop_item_launch_with_env (const GnomeDesktopItem       *item,
+				    GList                        *file_list,
+				    GnomeDesktopItemLaunchFlags   flags,
+				    char                        **envp,
+				    GError                      **error)
+{
 	const char *exec;
 	char *the_exec;
 	int ret;
@@ -1667,7 +1695,7 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 		return -1;
 	}
 
-	ret = ditem_execute (item, the_exec, file_list,
+	ret = ditem_execute (item, the_exec, file_list, envp,
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_ONLY_ONE),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
 			     error);
