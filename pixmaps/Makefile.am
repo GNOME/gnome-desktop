@@ -45,9 +45,9 @@ BITMAPS     = \
 	gnome-phone-small.xpm			\
 	gnome-phone-transparent.xpm		\
 	gnome-phone.xpm				\
-	gnome-samegnome-small.xpm		\
-	gnome-samegnome-transparent.xpm		\
-	gnome-samegnome.xpm			\
+	gnome-same-gnome-small.xpm		\
+	gnome-same-gnome-transparent.xpm	\
+	gnome-same-gnome.xpm			\
 	gnome-word-small.xpm			\
 	gnome-word-transparent.xpm		\
 	gnome-word.xpm				\
