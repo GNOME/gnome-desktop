@@ -35,10 +35,10 @@
 #define GNOME_DITEM_EDIT_H
 
 #include <gtk/gtk.h>
-#include <libgnomebase/gnome-defs.h>
+
 #include <libgnome/gnome-ditem.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 typedef struct _GnomeDItemEdit        GnomeDItemEdit;
 typedef struct _GnomeDItemEditPrivate GnomeDItemEditPrivate;
@@ -130,7 +130,7 @@ GtkWidget *       gnome_ditem_edit_get_single_file_drop_toggle(GnomeDItemEdit *d
 GtkWidget *       gnome_ditem_edit_get_url_drop_entry(GnomeDItemEdit  *dee);
 GtkWidget *       gnome_ditem_edit_get_single_url_drop_toggle(GnomeDItemEdit *dee);
 
-END_GNOME_DECLS
+G_END_DECLS
    
 #endif /* GNOME_DITEM_EDIT_H */
 
