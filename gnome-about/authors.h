@@ -12,6 +12,7 @@ static author authors[] = {
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
 	{ "Jonathan Blandford", "<jrb@redhat.com>" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },
+	{ "Miguel de Icaza", "<miguel@gnu.org>" },
 	{ "George Lebl", "<jirka@5z.com>" },
 	{ "Kjartan Maraas", "<kmaraas@online.no>" },
 	{ "Federico Mena-Quintero", "<federico@gimp.org>" },
