@@ -22,7 +22,9 @@ gnome_about_SOURCES =		\
 	gnome-about.c		\
 	contributors.h
 
-authorsdir = $(datadir)/gnome-about
-authors_DATA = contributors.dat
+aboutdir = $(datadir)/gnome-about
+about_DATA = gnome-64.gif
 
-EXTRA_DIST = logo.xpm $(authors_DATA)
+EXTRA_DIST = $(about_DATA)
+
+SUBDIRS = headers
