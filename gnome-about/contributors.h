@@ -207,7 +207,7 @@ static gchar *contributors[] = {
 	"Cameron Parish",
 	"Conrad Parker",
 	"Stuart Parmenter",
-	"Nils Pederson",
+	"Nils Pedersen",
 	"Havoc Pennington",
 	"Ettore Perazzoli",
 	/* If your encoding allows it, use oacute (U00F3) for the 'o'
