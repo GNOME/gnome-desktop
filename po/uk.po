@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.1\n"
-"POT-Creation-Date: 2001-02-16 14:02+0200\n"
+"POT-Creation-Date: 2001-02-23 07:36+0200\n"
 "PO-Revision-Date: 1999-11-02 12:56+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -236,7 +236,7 @@ msgstr "Попередження Г╕да Робочого столу"
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:944
 #: applets/gen_util/clock.c:584 applets/gen_util/mailcheck.c:1395
 #: applets/gen_util/printer.c:468 applets/tasklist/tasklist_applet.c:1451
-#: panel/drawer.c:479 panel/launcher.c:623 panel/menu.c:1662 panel/menu.c:5487
+#: panel/drawer.c:479 panel/launcher.c:623 panel/menu.c:1664 panel/menu.c:5489
 msgid "Properties..."
 msgstr "Властивост╕..."
 
@@ -244,9 +244,9 @@ msgstr "Властивост╕..."
 #: applets/gen_util/clock.c:612 applets/gen_util/mailcheck.c:1407
 #: applets/gen_util/printer.c:475 applets/tasklist/tasklist_applet.c:1459
 #: gnome-terminal/gnome-terminal.c:1587 gsm/session-properties.c:182
-#: help-browser/window.c:255 panel/drawer.c:482 panel/gnome-run.c:380
+#: help-browser/window.c:255 panel/drawer.c:482 panel/gnome-run.c:381
 #: panel/launcher.c:626 panel/logout.c:113 panel/logout.c:194
-#: panel/menu.c:5496 panel/status.c:368 panel/swallow.c:420
+#: panel/menu.c:5498 panel/status.c:368 panel/swallow.c:420
 msgid "Help"
 msgstr "Дов╕дка"
 
@@ -419,7 +419,7 @@ msgstr "%A, %d %B %Y"
 #. * locales I don't think
 #: applets/gen_util/clock.c:450
 msgid "%a, %d  %b  %Y %H:%M:%S %z"
-msgstr ""
+msgstr "%a, %d  %b  %Y %H:%M:%S %z"
 
 #: applets/gen_util/clock.c:504 applets/gen_util/mailcheck.c:1311
 #: applets/gen_util/printer.c:425
@@ -774,7 +774,7 @@ msgstr "Знищити все"
 msgid "Follow panel size"
 msgstr "Дотримуватись розм╕р╕в панел╕"
 
-#: applets/tasklist/tasklist_properties.c:158 panel/menu.c:4384
+#: applets/tasklist/tasklist_properties.c:158 panel/menu.c:4386
 msgid "Horizontal"
 msgstr "Горизонтальна"
 
@@ -804,7 +804,7 @@ msgstr "Динам╕чна ширина"
 msgid "Only use empty space"
 msgstr "Використовувати лише порожн╕й прост╕р"
 
-#: applets/tasklist/tasklist_properties.c:215 panel/menu.c:4385
+#: applets/tasklist/tasklist_properties.c:215 panel/menu.c:4387
 msgid "Vertical"
 msgstr "Вертикальна"
 
@@ -824,7 +824,7 @@ msgstr "Динам╕чна висота"
 msgid "Tasklist width is that of longest title"
 msgstr "Ширина списку завдань в╕дпов╕дно до найдовшого заголовку"
 
-#: applets/tasklist/tasklist_properties.c:269 panel/menu.c:4430
+#: applets/tasklist/tasklist_properties.c:269 panel/menu.c:4432
 msgid "Size"
 msgstr "Розм╕р"
 
@@ -888,7 +888,7 @@ msgid "Save"
 msgstr "Зберегти"
 
 #: gmenu/edit.c:323 gsm/session-properties.c:173 panel/launcher.c:506
-#: panel/menu.c:1299 panel/menu.c:1409
+#: panel/menu.c:1301 panel/menu.c:1411
 msgid "Revert"
 msgstr "Повернути"
 
@@ -1242,23 +1242,29 @@ msgstr ""
 msgid "You do not have fortune installed."
 msgstr "У вас не встановлено Fortune."
 
-#: gnome-hint/gnome-hint.c:401
-msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
-msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+#. the fixed font should be a font that is of a fixed
+#. * spacing, such as would be one in a terminal
+#: gnome-hint/gnome-hint.c:404
+msgid "fixed"
+msgstr "моноширний"
 
-#: gnome-hint/gnome-hint.c:402 gnome-hint/gnome-hint.c:588
+#: gnome-hint/gnome-hint.c:413 gnome-hint/gnome-hint.c:615
 msgid "Fortune"
 msgstr "Цитата дня"
 
-#: gnome-hint/gnome-hint.c:402 gnome-hint/gnome-hint.c:581
+#: gnome-hint/gnome-hint.c:415 gnome-hint/gnome-hint.c:608
 msgid "Message of The Day"
 msgstr "Зв╕стка дня"
 
-#: gnome-hint/gnome-hint.c:402
+#: gnome-hint/gnome-hint.c:417
 msgid "GNOME Hints"
 msgstr "Поради GNOME"
 
-#: gnome-hint/gnome-hint.c:426
+#: gnome-hint/gnome-hint.c:425
+msgid "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+msgstr "-*-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"
+
+#: gnome-hint/gnome-hint.c:453
 msgid ""
 "You've chosen to disable the startup hint.\n"
 "To re-enable it, choose \"Startup Hint\"\n"
@@ -1268,15 +1274,15 @@ msgstr ""
 "Що знову дозвилити ╖х, вибер╕ть \"Поради на початку роботи\"\n"
 "в Центр╕ керування GNOME"
 
-#: gnome-hint/gnome-hint.c:526
+#: gnome-hint/gnome-hint.c:553
 msgid "No message of the day found!"
 msgstr "Не знайдено зв╕стки дня!"
 
-#: gnome-hint/gnome-hint.c:596
+#: gnome-hint/gnome-hint.c:623
 msgid "Gnome hint"
 msgstr "Порада GNOME"
 
-#: gnome-hint/gnome-hint.c:621
+#: gnome-hint/gnome-hint.c:648
 msgid "Display this dialog next time"
 msgstr "Показувати це в╕кно наступного разу"
 
@@ -1337,7 +1343,7 @@ msgstr "Емулятор терм╕налу для GNOME"
 
 #: gnome-terminal/gnome-terminal.c:610 gnome-terminal/gnome-terminal.c:1163
 #: gnome-terminal/gnome-terminal.c:1173 gnome-terminal/gnome-terminal.c:2384
-#: gnome-terminal/gnome-terminal.glade.h:8 panel/menu.c:4408
+#: gnome-terminal/gnome-terminal.glade.h:8 panel/menu.c:4410
 msgid "Default"
 msgstr "Типово"
 
@@ -1399,8 +1405,8 @@ msgstr "Праворуч"
 msgid "Hidden"
 msgstr "Прибрати"
 
-#: gnome-terminal/gnome-terminal.c:1150 panel/gnome-run.c:192
-#: panel/gnome-run.c:265
+#: gnome-terminal/gnome-terminal.c:1150 panel/gnome-run.c:193
+#: panel/gnome-run.c:266
 msgid "Browse..."
 msgstr "Перегляд..."
 
@@ -1845,7 +1851,7 @@ msgstr "Нев╕домо"
 msgid "State not reported within timeout."
 msgstr "За в╕дведений час стан не пов╕домлено."
 
-#: gsm/gsm-client-row.c:50 panel/menu.c:4410 panel/panel_config.c:1323
+#: gsm/gsm-client-row.c:50 panel/menu.c:4412 panel/panel_config.c:1323
 msgid "Normal"
 msgstr "Звичайна"
 
@@ -2053,7 +2059,7 @@ msgstr "Посередник в╕конного менеджера"
 msgid "Window Manager"
 msgstr "В╕конний менеджер"
 
-#: gsm/splash.c:67 panel/menu.c:4855 panel/menu.c:4860 panel/menu.c:5195
+#: gsm/splash.c:67 panel/menu.c:4857 panel/menu.c:4862 panel/menu.c:5197
 msgid "Desktop"
 msgstr "Робочий ст╕л"
 
@@ -2492,13 +2498,13 @@ msgstr "Видалити з панел╕"
 msgid "Move"
 msgstr "Перенести"
 
-#: panel/applet.c:479 panel/menu.c:3348
+#: panel/applet.c:479 panel/menu.c:3350
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Неможливо знайти п╕ктограмний файл %s"
 
-#: panel/applet.c:480 panel/applet.c:486 panel/menu.c:3630 panel/menu.c:3635
-#: panel/menu.c:4826 panel/menu.c:4831 panel/menu.c:5186
+#: panel/applet.c:480 panel/applet.c:486 panel/menu.c:4828 panel/menu.c:4833
+#: panel/menu.c:5188
 msgid "Panel"
 msgstr "Панель"
 
@@ -2589,7 +2595,7 @@ msgid "Enable hidebutton arrow"
 msgstr "Показати стр╕лки на кнопках прибирання"
 
 #: panel/drawer.c:179 panel/drawer.c:313 panel/gnome-panel-properties.c:564
-#: panel/menu.c:4533
+#: panel/menu.c:4535
 msgid "Drawer"
 msgstr "Шухляда"
 
@@ -2792,13 +2798,13 @@ msgstr "Додати терм╕н..."
 msgid "Format"
 msgstr "Формат"
 
-#: panel/foobar-widget.c:898 panel/menu.c:3375 panel/menu.c:3382
-#: panel/menu.c:5123
+#: panel/foobar-widget.c:898 panel/menu.c:3377 panel/menu.c:3384
+#: panel/menu.c:5125
 msgid "Programs"
 msgstr "Програми"
 
-#: panel/foobar-widget.c:912 panel/menu.c:3519 panel/menu.c:5092
-#: panel/menu.c:5135 panel/menu.c:5141
+#: panel/foobar-widget.c:912 panel/menu.c:3521 panel/menu.c:5094
+#: panel/menu.c:5137 panel/menu.c:5143
 msgid "Favorites"
 msgstr "Улюблене"
 
@@ -2845,12 +2851,12 @@ msgid "Animation speed"
 msgstr "Швидк╕сть ан╕мац╕╖"
 
 #: panel/gnome-panel-properties.c:333 panel/gnome-panel-properties.c:351
-#: panel/menu.c:4372
+#: panel/menu.c:4374
 msgid "Auto hide"
 msgstr "Автоприбирання"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:340 panel/menu.c:4371
+#: panel/gnome-panel-properties.c:340 panel/menu.c:4373
 msgid "Explicit hide"
 msgstr "Ручне прибирання"
 
@@ -2913,8 +2919,8 @@ msgid "Launcher"
 msgstr "Запускач"
 
 #: panel/gnome-panel-properties.c:565 panel/gnome-panel-properties.c:1526
-#: panel/menu-properties.c:610 panel/menu.c:1442 panel/menu.c:2848
-#: panel/menu.c:2919 panel/menu.c:2924 panel/menu.c:4471 panel/menu.c:5384
+#: panel/menu-properties.c:610 panel/menu.c:1444 panel/menu.c:2850
+#: panel/menu.c:2921 panel/menu.c:2926 panel/menu.c:4473 panel/menu.c:5386
 msgid "Menu"
 msgstr "Меню"
 
@@ -3124,7 +3130,7 @@ msgstr "Кнопки"
 msgid "Panel Objects"
 msgstr "Об'╓кти панел╕"
 
-#: panel/gnome-run.c:99
+#: panel/gnome-run.c:100
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -3133,7 +3139,7 @@ msgstr ""
 "Не вдалося виконати команду:\n"
 "%s"
 
-#: panel/gnome-run.c:155
+#: panel/gnome-run.c:156
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -3144,19 +3150,19 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: panel/gnome-run.c:229
+#: panel/gnome-run.c:230
 msgid "Run Program"
 msgstr "Виконати програму"
 
-#: panel/gnome-run.c:238
+#: panel/gnome-run.c:239
 msgid "Run"
 msgstr "Виконати"
 
-#: panel/gnome-run.c:274
+#: panel/gnome-run.c:275
 msgid "Run in terminal"
 msgstr "Запустити в терм╕нал╕"
 
-#: panel/gnome-run.c:338 panel/gnome-run.c:357 panel/menu.c:5172
+#: panel/gnome-run.c:339 panel/gnome-run.c:358 panel/menu.c:5174
 msgid "Run..."
 msgstr "Виконати..."
 
@@ -3164,7 +3170,7 @@ msgstr "Виконати..."
 msgid "This launch icon does not specify a program to run"
 msgstr "Ц╕й п╕ктограм╕ запускача не вказано програму для запуску"
 
-#: panel/launcher.c:83 panel/menu.c:2100
+#: panel/launcher.c:83 panel/menu.c:2102
 msgid "Can't get goad_id from desktop entry!"
 msgstr "Неможливо отримати goad_id з елементу робочого столу"
 
@@ -3181,7 +3187,7 @@ msgstr "Властивост╕ запускача"
 msgid "Create launcher applet"
 msgstr "Створити аплет запускача"
 
-#: panel/logout.c:71 panel/menu.c:4968
+#: panel/logout.c:71 panel/menu.c:4970
 msgid "Log out"
 msgstr "Завершити роботу"
 
@@ -3189,7 +3195,7 @@ msgstr "Завершити роботу"
 msgid "Log out of GNOME"
 msgstr "Завершити роботу з GNOME"
 
-#: panel/logout.c:131 panel/logout.c:150 panel/menu.c:4956
+#: panel/logout.c:131 panel/logout.c:150 panel/menu.c:4958
 msgid "Lock screen"
 msgstr "Замкнути екран"
 
@@ -3244,6 +3250,10 @@ msgstr "╕, нарешт╕, Лицар╕, що кажуть \"Н╤\"!"
 msgid "The GNOME Panel"
 msgstr "Панель GNOME"
 
+#: panel/menu.c:205
+msgid "(C) 1997-2000 the Free Software Foundation"
+msgstr "© 1997-2000 Фундац╕я в╕льного програмного забезпечення"
+
 #: panel/menu.c:207
 msgid ""
 "This program is responsible for launching other applications, embedding "
@@ -3260,7 +3270,7 @@ msgstr "К╕нець всесв╕тнього голоду"
 msgid "Can't execute 'About GNOME'"
 msgstr "Не вдалося виконати \"About GNOME\""
 
-#: panel/menu.c:242 panel/menu.c:956 panel/menu.c:2092
+#: panel/menu.c:242 panel/menu.c:956 panel/menu.c:2094
 msgid "Can't load entry"
 msgstr "Неможливо завантажити елемент меню"
 
@@ -3330,122 +3340,122 @@ msgid "No 'Exec' field in entry"
 msgstr "Нема╓ поля \"Exec\" в запису"
 
 #. watch the enum at the top of the file
-#: panel/menu.c:1297 panel/menu.c:1407
+#: panel/menu.c:1299 panel/menu.c:1409
 msgid "Desktop entry properties"
 msgstr "Властивост╕ елементу робочого столу"
 
-#: panel/menu.c:1539
+#: panel/menu.c:1541
 msgid "Add this launcher to panel"
 msgstr "Додати цей запускач до панел╕"
 
-#: panel/menu.c:1542
+#: panel/menu.c:1544
 msgid "Add this applet as a launcher to panel"
 msgstr "Додати цей аплет як запускач на панель"
 
-#: panel/menu.c:1552 panel/menu.c:1617
+#: panel/menu.c:1554 panel/menu.c:1619
 msgid "Add this to Favorites menu"
 msgstr "Додати це до меню улюбленого"
 
-#: panel/menu.c:1565
+#: panel/menu.c:1567
 msgid "Remove this item"
 msgstr "Видалити цей елемент"
 
-#: panel/menu.c:1583
+#: panel/menu.c:1585
 msgid "Put into run dialog"
 msgstr "Пом╕стити в д╕алог запуску"
 
-#: panel/menu.c:1600
+#: panel/menu.c:1602
 msgid "Add this as drawer to panel"
 msgstr "Додати це до панел╕ як шухляду"
 
-#: panel/menu.c:1609
+#: panel/menu.c:1611
 msgid "Add this as menu to panel"
 msgstr "Додати це до панел╕ як меню"
 
-#: panel/menu.c:1629
+#: panel/menu.c:1631
 msgid "Add new item to this menu"
 msgstr "Додати новий елемент до цього меню"
 
-#: panel/menu.c:1842 panel/menu.c:1920
+#: panel/menu.c:1844 panel/menu.c:1922
 msgid "..."
 msgstr "..."
 
-#: panel/menu.c:2071
+#: panel/menu.c:2073
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "Ви вже ма╓те док стану на панел╕. Ви можете мати лише один."
 
-#: panel/menu.c:2526
+#: panel/menu.c:2528
 msgid "Adding tearoff when tearoffs are disabled"
 msgstr "Додавання в╕д╕рваного меню при заборон╕ ╖х використання"
 
-#: panel/menu.c:2693
+#: panel/menu.c:2695
 msgid "Can't get goad_id for applet, ignoring it"
 msgstr "Неможливо отримати goad_id для аплету, його про╕╜норовано"
 
-#: panel/menu.c:2924 panel/menu.c:2926
+#: panel/menu.c:2926 panel/menu.c:2928
 msgid " (empty)"
 msgstr " (пусто)"
 
 #. applets
 #. launcher_add
-#: panel/menu.c:3031 panel/menu.c:5153
+#: panel/menu.c:3033 panel/menu.c:5155
 msgid "Applets"
 msgstr "Аплети"
 
 #. Don't translate the first part of this string
-#: panel/menu.c:3213 panel/session.c:1351
+#: panel/menu.c:3215 panel/session.c:1351
 msgid "/panel/Config/clock_format=%I:%M:%S %p"
 msgstr "/panel/Config/clock_format=%I:%M:%S %p"
 
-#: panel/menu.c:3222
+#: panel/menu.c:3224
 msgid "You can only have one menu panel at a time."
 msgstr "Ви можете мати лише одну панель меню одночасно."
 
-#: panel/menu.c:3260 panel/menu.c:3265 panel/menu.c:4716
+#: panel/menu.c:3262 panel/menu.c:3267 panel/menu.c:4718
 msgid "Create panel"
 msgstr "Створити панель"
 
-#: panel/menu.c:3293
+#: panel/menu.c:3295
 msgid "Menu panel"
 msgstr "Панель меню"
 
-#: panel/menu.c:3301 panel/menu.c:4363 panel/panel_config.c:1672
+#: panel/menu.c:3303 panel/menu.c:4365 panel/panel_config.c:1672
 #: panel/panel_config.c:1791
 msgid "Edge panel"
 msgstr "Бокова панель"
 
-#: panel/menu.c:3309 panel/menu.c:4364 panel/panel_config.c:1679
+#: panel/menu.c:3311 panel/menu.c:4366 panel/panel_config.c:1679
 #: panel/panel_config.c:1801
 msgid "Aligned panel"
 msgstr "Вир╕вняна панель"
 
-#: panel/menu.c:3317 panel/menu.c:4365 panel/panel_config.c:1685
+#: panel/menu.c:3319 panel/menu.c:4367 panel/panel_config.c:1685
 #: panel/panel_config.c:1811
 msgid "Sliding panel"
 msgstr "Ковзна панель"
 
-#: panel/menu.c:3325 panel/menu.c:4366 panel/panel_config.c:1691
+#: panel/menu.c:3327 panel/menu.c:4368 panel/panel_config.c:1691
 #: panel/panel_config.c:1821
 msgid "Floating panel"
 msgstr "Плаваюча панель"
 
-#: panel/menu.c:3391 panel/menu.c:3394
+#: panel/menu.c:3393 panel/menu.c:3396
 msgid "No system menus found!"
 msgstr "Не знайдено системних меню!"
 
-#: panel/menu.c:3410
+#: panel/menu.c:3412
 msgid "Can't create the user menu directory"
 msgstr "Неможливо створити каталог меню користувача"
 
-#: panel/menu.c:3489 panel/menu.c:3497 panel/menu.c:5032
+#: panel/menu.c:3491 panel/menu.c:3499 panel/menu.c:5034
 msgid "KDE menus"
 msgstr "Меню KDE"
 
-#: panel/menu.c:3581
+#: panel/menu.c:3583
 msgid "You cannot remove your last panel."
 msgstr "Ви неможете вилучити останню панель."
 
-#: panel/menu.c:3591
+#: panel/menu.c:3593
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3453,200 +3463,204 @@ msgstr ""
 "З видаленням панел╕ буде втрачено ус╕ настройки\n"
 "╖╖ аплет╕в. Видалити цю панель?"
 
-#: panel/menu.c:4377
+#: panel/menu.c:3632 panel/menu.c:3637
+msgid "Main Menu"
+msgstr "Головне меню"
+
+#: panel/menu.c:4379
 msgid "With pixmap arrow"
 msgstr "З п╕ктограмою стр╕лки"
 
-#: panel/menu.c:4378
+#: panel/menu.c:4380
 msgid "Without pixmap"
 msgstr "Без п╕ктограми"
 
-#: gnome-terminal/gnome-terminal.glade.h:22 panel/menu.c:4379
+#: gnome-terminal/gnome-terminal.glade.h:22 panel/menu.c:4381
 msgid "None"
 msgstr "Нема╓"
 
-#: panel/menu.c:4390 panel/panel_config.c:1172
+#: panel/menu.c:4392 panel/panel_config.c:1172
 msgid "Ultra Tiny (12 pixels)"
 msgstr "Крих╕тний (12 п╕ксел╕в)"
 
-#: panel/menu.c:4391 panel/panel_config.c:1180
+#: panel/menu.c:4393 panel/panel_config.c:1180
 msgid "Tiny (24 pixels)"
 msgstr "Малесенький (24 п╕ксел╕)"
 
-#: panel/menu.c:4392 panel/panel_config.c:1188
+#: panel/menu.c:4394 panel/panel_config.c:1188
 msgid "Small (36 pixels)"
 msgstr "Малий (36 п╕ксел╕в)"
 
-#: panel/menu.c:4393 panel/panel_config.c:1196
+#: panel/menu.c:4395 panel/panel_config.c:1196
 msgid "Standard (48 pixels)"
 msgstr "Стандартний (48 п╕ксел╕в)"
 
-#: panel/menu.c:4394 panel/panel_config.c:1204
+#: panel/menu.c:4396 panel/panel_config.c:1204
 msgid "Large (64 pixels)"
 msgstr "Великий (64 п╕ксел╕)"
 
-#: panel/menu.c:4395 panel/panel_config.c:1212
+#: panel/menu.c:4397 panel/panel_config.c:1212
 msgid "Huge (80 pixels)"
 msgstr "Величезний (80 п╕ксел╕в)"
 
-#: panel/menu.c:4396 panel/panel_config.c:1220
+#: panel/menu.c:4398 panel/panel_config.c:1220
 msgid "Ridiculous (128 pixels)"
 msgstr "См╕шний (128 п╕ксел╕в)"
 
-#: panel/menu.c:4401 panel/panel_config.c:1489
+#: panel/menu.c:4403 panel/panel_config.c:1489
 msgid "Standard"
 msgstr "Стандартне"
 
 #. color frame
-#: panel/menu.c:4402 panel/panel_config.c:1493 panel/panel_config.c:1508
+#: panel/menu.c:4404 panel/panel_config.c:1493 panel/panel_config.c:1508
 msgid "Color"
 msgstr "Кол╕р"
 
-#: panel/menu.c:4403 panel/panel_config.c:1497
+#: panel/menu.c:4405 panel/panel_config.c:1497
 msgid "Pixmap"
 msgstr "Зображення"
 
-#: panel/menu.c:4409
+#: panel/menu.c:4411
 msgid "Below"
 msgstr "П╕д"
 
-#: panel/menu.c:4411
+#: panel/menu.c:4413
 msgid "Above"
 msgstr "Над"
 
-#: panel/menu.c:4416
+#: panel/menu.c:4418
 msgid "Avoid on maximize"
 msgstr "Уникати при максим╕зац╕╖"
 
-#: panel/menu.c:4417
+#: panel/menu.c:4419
 msgid "Don't avoid on maximize"
 msgstr "Не уникати при максим╕зац╕╖"
 
-#: panel/menu.c:4421
+#: panel/menu.c:4423
 msgid "Type"
 msgstr "Тип"
 
-#: panel/menu.c:4424
+#: panel/menu.c:4426
 msgid "Hiding policy"
 msgstr "Спос╕б прибирання"
 
-#: panel/menu.c:4427
+#: panel/menu.c:4429
 msgid "Hide buttons"
 msgstr "Кнопки прибирання"
 
-#: panel/menu.c:4433
+#: panel/menu.c:4435
 msgid "Orientation"
 msgstr "Ор╕╓нтац╕я"
 
-#: gnome-terminal/gnome-terminal.glade.h:20 panel/menu.c:4436
+#: gnome-terminal/gnome-terminal.glade.h:20 panel/menu.c:4438
 msgid "Background type"
 msgstr "Тип тла"
 
-#: panel/menu.c:4439
+#: panel/menu.c:4441
 msgid "Level"
 msgstr "Р╕вень"
 
-#: panel/menu.c:4442
+#: panel/menu.c:4444
 msgid "Maximize mode"
 msgstr "Режим максим╕зац╕╖"
 
-#: panel/menu.c:4460
+#: panel/menu.c:4462
 msgid "Applet"
 msgstr "Аплет"
 
-#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4481
+#: panel/menu-properties.c:496 panel/menu-properties.c:518 panel/menu.c:4483
 msgid "Main menu"
 msgstr "Головне меню"
 
-#: panel/menu.c:4492
+#: panel/menu.c:4494
 msgid "Programs menu"
 msgstr "Меню програм"
 
-#: panel/menu.c:4502
+#: panel/menu.c:4504
 msgid "Favorites menu"
 msgstr "Меню улюбленого"
 
-#: panel/menu.c:4513
+#: panel/menu.c:4515
 msgid "Launcher..."
 msgstr "Запускач..."
 
-#: panel/menu.c:4522
+#: panel/menu.c:4524
 msgid "Launcher from menu"
 msgstr "Запускач з меню"
 
-#: panel/menu.c:4544
+#: panel/menu.c:4546
 msgid "Log out button"
 msgstr "Кнопка завершення роботи"
 
-#: panel/menu.c:4555
+#: panel/menu.c:4557
 msgid "Lock button"
 msgstr "Кнопка замикання"
 
-#: panel/menu.c:4566
+#: panel/menu.c:4568
 msgid "Run button"
 msgstr "Кнопка запуску"
 
-#: panel/menu.c:4578
+#: panel/menu.c:4580
 msgid "Swallowed app..."
 msgstr "Поглинена програма..."
 
-#: panel/menu.c:4586
+#: panel/menu.c:4588
 msgid "Status dock"
 msgstr "Док стану"
 
-#: panel/menu.c:4610 panel/menu.c:4615 panel/menu.c:4692
+#: panel/menu.c:4612 panel/menu.c:4617 panel/menu.c:4694
 msgid "Add to panel"
 msgstr "Додати до панел╕"
 
-#: panel/menu.c:4630
+#: panel/menu.c:4632
 msgid "Cannot execute panel global properties"
 msgstr "Неможливо виконати глобальн╕ властивост╕ панел╕"
 
-#: panel/menu.c:4670
+#: panel/menu.c:4672
 msgid "Remove this panel..."
 msgstr "Видалити цю панель..."
 
-#: panel/menu.c:4672 panel/menu.c:4727
+#: panel/menu.c:4674 panel/menu.c:4729
 msgid "Remove this panel"
 msgstr "Видалити цю панель"
 
-#: panel/menu.c:4744
+#: panel/menu.c:4746
 msgid "Properties"
 msgstr "Властивост╕"
 
-#: panel/menu.c:4755
+#: panel/menu.c:4757
 msgid "All properties..."
 msgstr "Ус╕ властивост╕..."
 
-#: panel/menu.c:4771
+#: panel/menu.c:4773
 msgid "Global Preferences..."
 msgstr "Глобальн╕ настройки..."
 
-#: panel/menu.c:4782
+#: panel/menu.c:4784
 msgid "Reread all menus"
 msgstr "Перечитати вс╕ меню"
 
-#: panel/menu.c:4797
+#: panel/menu.c:4799
 msgid "Panel Manual..."
 msgstr "Дов╕дник панел╕..."
 
-#: panel/menu.c:4808
+#: panel/menu.c:4810
 msgid "Cannot execute xscreensaver"
 msgstr "Неможливо виконати xscreensaver"
 
-#: panel/menu.c:4897
+#: panel/menu.c:4899
 msgid "About the panel..."
 msgstr "Про панель..."
 
-#: panel/menu.c:4913
+#: panel/menu.c:4915
 msgid "About GNOME..."
 msgstr "Про GNOME..."
 
-#: panel/menu.c:5263
+#: panel/menu.c:5265
 msgid "Can't create menu, using main menu!"
 msgstr "Не вдалося створити меню, використову╓ться головне меню!"
 
-#: panel/menu-properties.c:209 panel/menu.c:5492
+#: panel/menu-properties.c:209 panel/menu.c:5494
 msgid "Edit menus..."
 msgstr "Редагувати меню..."
 
@@ -3886,7 +3900,7 @@ msgstr "Виб╕р шрифту"
 
 #: gnome-terminal/gnome-terminal.glade.h:11
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГг╫╜ДдЕе╢╓ЖжЗзИи╤╕╥╖Мм"
 
 #: gnome-terminal/gnome-terminal.glade.h:12
 msgid "Enable bold text"
@@ -3914,7 +3928,7 @@ msgstr "Використовувати --login типово"
 
 #: gnome-terminal/gnome-terminal.glade.h:18
 msgid "Select-by-word characters:"
-msgstr ""
+msgstr "Символи, як╕ можуть бути частиною слова:"
 
 #: gnome-terminal/gnome-terminal.glade.h:19
 msgid "General"
