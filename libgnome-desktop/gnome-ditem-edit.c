@@ -357,11 +357,11 @@ fill_dnd_page(GnomeDItemEdit * dee, GtkWidget * bigtable)
                          0, 0);
 
         label = label_new(_("In the following commands you should use %s in "
-			    "the spot where the\nfilename/url should be "
+			    "the spot where the\nfilename/URL should be "
 			    "substituted.  If you leave the field blank\n"
-			    "drops will not be accepted.  If this app"
-			    "can just accept\nmultiple files or urls after "
-			    "it's command check the above box."));
+			    "drops will not be accepted.  If this application "
+			    "can accept\nmultiple files or URLs as arguments "
+			    "after its command name check the box above."));
         gtk_table_attach(GTK_TABLE(table), label,
                          0, 2, 1, 2,
 			 0,
