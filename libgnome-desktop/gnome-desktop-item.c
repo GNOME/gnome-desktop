@@ -87,6 +87,8 @@ struct _GnomeDesktopItem {
 	char *location;
 
 	time_t mtime;
+
+	guint32 launch_time;
 };
 
 /* If mtime is set to this, set_location won't update mtime,
@@ -366,6 +368,8 @@ gnome_desktop_item_new (void)
 				       GNOME_DESKTOP_ITEM_VERSION,
 				       "1.0");
 
+	retval->launch_time = 0;
+
 	return retval;
 }
 
@@ -418,6 +422,7 @@ gnome_desktop_item_copy (const GnomeDesktopItem *item)
 	retval->modified = item->modified;
 	retval->location = g_strdup (item->location);
 	retval->mtime = item->mtime;
+	retval->launch_time = item->launch_time;
 
 	/* Languages */
 	retval->languages = g_list_copy (item->languages);
@@ -1790,6 +1795,7 @@ ditem_execute (const GnomeDesktopItem *item,
 #ifdef HAVE_STARTUP_NOTIFICATION
 		if (sn_context != NULL &&
 		    !sn_launcher_context_get_initiated (sn_context)) {
+			guint32 launch_time;
 
 			/* This means that we always use the first real_argv[0]
 			 * we select for the "binary name", but it's probably
@@ -1801,10 +1807,18 @@ ditem_execute (const GnomeDesktopItem *item,
 			sn_launcher_context_set_binary_name (sn_context,
 							     real_argv[0]);
 			
+			if (item->launch_time > 0)
+				launch_time = item->launch_time;
+			else
+				launch_time = gtk_get_current_event_time ();
+
 			sn_launcher_context_initiate (sn_context,
 						      g_get_prgname () ? g_get_prgname () : "unknown",
 						      real_argv[0],
-						      gtk_get_current_event_time ());
+						      launch_time);
+
+			/* Don't allow accidental reuse of same timestamp */
+			((GnomeDesktopItem *)item)->launch_time = 0;
 
 			envp = make_spawn_environment_for_sn_context (sn_context, envp);
 			if (free_me)
@@ -2977,8 +2991,18 @@ gnome_desktop_item_set_boolean (GnomeDesktopItem *item,
 	set (item, attr, value ? "true" : "false");
 }
 
+void
+gnome_desktop_item_set_launch_time (GnomeDesktopItem *item,
+				    guint32           timestamp)
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (timestamp > 0);
+
+	item->launch_time = timestamp;
+}
+
 /*
-* Clearing attributes
+ * Clearing attributes
  */
 void
 gnome_desktop_item_clear_section (GnomeDesktopItem *item,

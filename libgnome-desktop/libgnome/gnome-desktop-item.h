@@ -286,6 +286,12 @@ void                    gnome_desktop_item_set_boolean       (GnomeDesktopItem  
 							      gboolean                    value);
 
 /*
+ * Xserver time of user action that caused the application launch to start.
+ */
+void                    gnome_desktop_item_set_launch_time   (GnomeDesktopItem           *item,
+							      guint32                     timestamp);
+
+/*
  * Clearing attributes
  */
 #define                 gnome_desktop_item_clear_attr(item,attr) \

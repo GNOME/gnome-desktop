@@ -1,3 +1,15 @@
+2005-01-30  Mark McLoughlin  <mark@skynet.ie>
+
+	Based on a patch from Elijah Newren in bug #150910
+	to add gnome_desktop_item_set_launch_time()
+
+	* gnome-desktop-item.c, libgnome/gnome-desktop-item.h:
+	(gnome_desktop_item_set_launch_time): add.
+	(gnome_desktop_item_new): explicitly initialize launch_time.
+	(gnome_desktop_item_copy): copy launch_time.
+	(ditem_execute): if launch_time is set, use that instead
+	of gtk_get_current_event_time()
+
 ==================== 2.9.90.1 ====================
 
 ==================== 2.9.90 ====================
