@@ -1078,212 +1078,129 @@ escape_single_quotes (const char *s,
 	return g_string_free (gs, FALSE);
 }
 
+typedef enum {
+	URI_TO_STRING,
+	URI_TO_LOCAL_PATH,
+	URI_TO_LOCAL_DIRNAME,
+	URI_TO_LOCAL_BASENAME
+} ConversionType;
 
 static char *
-stringify_files (GSList *args,
-		 gboolean in_single_quotes,
-		 gboolean in_double_quotes)
+convert_uri (GnomeVFSURI    *uri,
+	     ConversionType  conversion)
 {
-	GSList *li;
-	GString *str = g_string_new (NULL);
-	const char *sep = "";
+	char *uri_str;
+	char *local_path;
+	char *retval = NULL;
 
-	for (li = args; li != NULL; li = li->next) {
-		GnomeVFSURI *uri = li->data;
-		if (!strcmp (gnome_vfs_uri_get_scheme (uri), "file")) {
-			char *path, *local_path;
-			char *escaped;
-			
-			path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
-			local_path = gnome_vfs_get_local_path_from_uri (path);
+	uri_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
 
-			if (local_path != NULL) {
-				/* should never be null since we check for scheme
-				 * above, but you never know ...
-				 */
-				g_string_append (str, sep);
-	
-				escaped = escape_single_quotes (local_path,
-								in_single_quotes,
-								in_double_quotes);
-				g_string_append (str, escaped);
-				g_free (escaped);
-				g_free (local_path);
-			}
-			
-			g_free (path);
-			sep = " ";
-		}
+	if (conversion == URI_TO_STRING)
+		return uri_str;
 
+	local_path = gnome_vfs_get_local_path_from_uri (uri_str);
+	g_free (uri_str);
+
+	if (!local_path)
+		return NULL;
+
+	switch (conversion) {
+	case URI_TO_LOCAL_PATH:
+		retval = local_path;
+		break;
+	case URI_TO_LOCAL_DIRNAME:
+		retval = g_path_get_dirname (local_path);
+		g_free (local_path);
+		break;
+	case URI_TO_LOCAL_BASENAME:
+		retval = g_path_get_basename (local_path);
+		g_free (local_path);
+		break;
+	default:
+		g_assert_not_reached ();
 	}
 
-	return g_string_free (str, FALSE);
+	return retval;
 }
 
-static char *
-stringify_dirs (GSList *args,
-		gboolean in_single_quotes,
-		gboolean in_double_quotes)
-{
-	GSList *li;
-	GString *str = g_string_new (NULL);
-	const char *sep = "";
-
-	for (li = args; li != NULL; li = li->next) {
-		GnomeVFSURI *uri = li->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			char *path, *escaped;
-			path = gnome_vfs_uri_extract_dirname (uri);
-			g_string_append (str, sep);
-
-			escaped = escape_single_quotes (path,
-							in_single_quotes,
-							in_double_quotes);
-			g_free (path);
-			g_string_append (str, escaped);
-			g_free (escaped);
-
-			sep = " ";
-		}
-
-	}
-
-	return g_string_free (str, FALSE);
-}
-
-static char *
-stringify_names (GSList *args,
-		 gboolean in_single_quotes,
-		 gboolean in_double_quotes)
-{
-	GSList *li;
-	GString *str = g_string_new (NULL);
-	const char *sep = "";
-
-	for (li = args; li != NULL; li = li->next) {
-		GnomeVFSURI *uri = li->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			char *path, *escaped;
-			path = gnome_vfs_uri_extract_short_path_name (uri);
-			g_string_append (str, sep);
-
-			escaped = escape_single_quotes (path,
-							in_single_quotes,
-							in_double_quotes);
-			g_free (path);
-			g_string_append (str, escaped);
-			g_free (escaped);
-
-			sep = " ";
-		}
-
-	}
-
-	return g_string_free (str, FALSE);
-}
-
-static char *
-stringify_uris (GSList *args,
-		gboolean in_single_quotes,
-		gboolean in_double_quotes)
-{
-	GSList *li;
-	GString *str = g_string_new (NULL);
-
-	for (li = args; li != NULL; li = li->next) {
-		GnomeVFSURI *uri = li->data;
-		char *suri, *escaped;
-		if (li != args)
-			g_string_append (str, " ");
-
-		suri = gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
-		escaped = escape_single_quotes (suri,
-						in_single_quotes,
-						in_double_quotes);
-		g_free (suri);
-		g_string_append (str, escaped);
-		g_free (escaped);
-	}
-
-	return g_string_free (str, FALSE);
-}
-
-static char *
-get_first_file (GSList **arg_ptr)
-{
-	while (*arg_ptr != NULL) {
-		GnomeVFSURI *uri = (*arg_ptr)->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			char *path;
-			path = g_strdup (gnome_vfs_uri_get_path (uri));
-			return path;
-		}
-		*arg_ptr = (*arg_ptr)->next;
-	}
-
-	return NULL;
-}
-
-static char *
-get_first_dir (GSList **arg_ptr)
-{
-	while (*arg_ptr != NULL) {
-		GnomeVFSURI *uri = (*arg_ptr)->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			char *path;
-			path = gnome_vfs_uri_extract_dirname (uri);
-			return path;
-		}
-		*arg_ptr = (*arg_ptr)->next;
-	}
-
-	return NULL;
-}
-
-static char *
-get_first_name (GSList **arg_ptr)
-{
-	while (*arg_ptr != NULL) {
-		GnomeVFSURI *uri = (*arg_ptr)->data;
-		if (gnome_vfs_uri_is_local (uri)) {
-			char *path;
-			path = gnome_vfs_uri_extract_short_path_name (uri);
-			return path;
-		}
-		*arg_ptr = (*arg_ptr)->next;
-	}
-
-	return NULL;
-}
-
-static char *
-get_first_uri (GSList **arg_ptr)
-{
-	if (*arg_ptr != NULL) {
-		GnomeVFSURI *uri = (*arg_ptr)->data;
-		return gnome_vfs_uri_to_string (uri, 0 /* hide_options */);
-	}
-
-	return NULL;
-}
-
-enum {
+typedef enum {
 	ADDED_NONE = 0,
 	ADDED_SINGLE,
 	ADDED_ALL
-};
+} AddedStatus;
+
+static AddedStatus
+append_all_converted (GString        *str,
+		      ConversionType  conversion,
+		      GSList         *args,
+		      gboolean        in_single_quotes,
+		      gboolean        in_double_quotes,
+		      AddedStatus     added_status)
+{
+	GSList *l;
+
+	for (l = args; l; l = l->next) {
+		char *converted;
+		char *escaped;
+
+		if (!(converted = convert_uri (l->data, conversion)))
+			continue;
+
+		g_string_append (str, " ");
+
+		escaped = escape_single_quotes (converted,
+						in_single_quotes,
+						in_double_quotes);
+		g_string_append (str, escaped);
+
+		g_free (escaped);
+		g_free (converted);
+	}
+
+	return ADDED_ALL;
+}
+
+static AddedStatus
+append_first_converted (GString         *str,
+			ConversionType   conversion,
+			GSList         **arg_ptr,
+			gboolean         in_single_quotes,
+			gboolean         in_double_quotes,
+			AddedStatus      added_status)
+{
+	GSList *l;
+	char   *converted = NULL;
+	char   *escaped;
+
+	for (l = *arg_ptr; l; l = l->next) {
+		if ((converted = convert_uri (l->data, conversion)))
+			break;
+
+		*arg_ptr = l->next;
+	}
+
+	if (!converted)
+		return added_status;
+
+	escaped = escape_single_quotes (converted, in_single_quotes, in_double_quotes);
+	g_string_append (str, escaped);
+	g_free (escaped);
+	g_free (converted);
+
+	return added_status != ADDED_ALL ? ADDED_SINGLE : added_status;
+}
 
 static gboolean
-do_percent_subst (const GnomeDesktopItem *item,
-		  const char *arg,
-		  GString *str,
-		  gboolean in_single_quotes,
-		  gboolean in_double_quotes,
-		  GSList *args,
-		  GSList **arg_ptr,
-		  int *added_status)
+do_percent_subst (const GnomeDesktopItem  *item,
+		  const char              *arg,
+		  GString                 *str,
+		  gboolean                 in_single_quotes,
+		  gboolean                 in_double_quotes,
+		  GSList                  *args,
+		  GSList                 **arg_ptr,
+		  AddedStatus             *added_status)
 {
-	char *s, *esc;
+	char *esc;
 	const char *cs;
 
 	if (arg[0] != '%' || arg[1] == '\0') {
@@ -1295,72 +1212,68 @@ do_percent_subst (const GnomeDesktopItem *item,
 		g_string_append_c (str, '%');
 		break;
 	case 'U':
-		s = stringify_uris (args, in_single_quotes, in_double_quotes);
-		g_string_append (str, s);
-		g_free (s);
-		*added_status = ADDED_ALL;
+		*added_status = append_all_converted (str,
+						      URI_TO_STRING,
+						      args,
+						      in_single_quotes,
+						      in_double_quotes,
+						      *added_status);
 		break;
 	case 'F':
-		s = stringify_files (args, in_single_quotes, in_double_quotes);
-		g_string_append (str, s);
-		g_free (s);
-		*added_status = ADDED_ALL;
+		*added_status = append_all_converted (str,
+						      URI_TO_LOCAL_PATH,
+						      args,
+						      in_single_quotes,
+						      in_double_quotes,
+						      *added_status);
 		break;
 	case 'N':
-		s = stringify_names (args, in_single_quotes, in_double_quotes);
-		g_string_append (str, s);
-		g_free (s);
-		*added_status = ADDED_ALL;
+		*added_status = append_all_converted (str,
+						      URI_TO_LOCAL_BASENAME,
+						      args,
+						      in_single_quotes,
+						      in_double_quotes,
+						      *added_status);
 		break;
 	case 'D':
-		s = stringify_dirs (args, in_single_quotes, in_double_quotes);
-		g_string_append (str, s);
-		g_free (s);
-		*added_status = ADDED_ALL;
+		*added_status = append_all_converted (str,
+						      URI_TO_LOCAL_DIRNAME,
+						      args,
+						      in_single_quotes,
+						      in_double_quotes,
+						      *added_status);
 		break;
 	case 'f':
-		s = get_first_file (arg_ptr);
-		if (s != NULL) {
-			esc = escape_single_quotes (s, in_single_quotes, in_double_quotes);
-			g_string_append (str, esc);
-			g_free (s);
-			g_free (esc);
-			if (*added_status != ADDED_ALL)
-				*added_status = ADDED_SINGLE;
-		}
+		*added_status = append_first_converted (str,
+							URI_TO_LOCAL_PATH,
+							arg_ptr,
+							in_single_quotes,
+							in_double_quotes,
+							*added_status);
 		break;
 	case 'u':
-		s = get_first_uri (arg_ptr);
-		if (s != NULL) {
-			esc = escape_single_quotes (s, in_single_quotes, in_double_quotes);
-			g_string_append (str, esc);
-			g_free (s);
-			g_free (esc);
-			if (*added_status != ADDED_ALL)
-				*added_status = ADDED_SINGLE;
-		}
+		*added_status = append_first_converted (str,
+							URI_TO_STRING,
+							arg_ptr,
+							in_single_quotes,
+							in_double_quotes,
+							*added_status);
 		break;
 	case 'd':
-		s = get_first_dir (arg_ptr);
-		if (s != NULL) {
-			esc = escape_single_quotes (s, in_single_quotes, in_double_quotes);
-			g_string_append (str, esc);
-			g_free (s);
-			g_free (esc);
-			if (*added_status != ADDED_ALL)
-				*added_status = ADDED_SINGLE;
-		}
+		*added_status = append_first_converted (str,
+							URI_TO_LOCAL_DIRNAME,
+							arg_ptr,
+							in_single_quotes,
+							in_double_quotes,
+							*added_status);
 		break;
 	case 'n':
-		s = get_first_name (arg_ptr);
-		if (s != NULL) {
-			esc = escape_single_quotes (s, in_single_quotes, in_double_quotes);
-			g_string_append (str, esc);
-			g_free (s);
-			g_free (esc);
-			if (*added_status != ADDED_ALL)
-				*added_status = ADDED_SINGLE;
-		}
+		*added_status = append_first_converted (str,
+							URI_TO_LOCAL_BASENAME,
+							arg_ptr,
+							in_single_quotes,
+							in_double_quotes,
+							*added_status);
 		break;
 	case 'm':
 		/* Note: v0.9.4 of the spec says this is deprecated and
@@ -1420,11 +1333,11 @@ do_percent_subst (const GnomeDesktopItem *item,
 }
 
 static char *
-expand_string (const GnomeDesktopItem *item,
-	       const char *s,
-	       GSList *args,
-	       GSList **arg_ptr,
-	       int *added_status)
+expand_string (const GnomeDesktopItem  *item,
+	       const char              *s,
+	       GSList                  *args,
+	       GSList                 **arg_ptr,
+	       AddedStatus             *added_status)
 {
 	const char *p;
 	gboolean escape = FALSE;
@@ -1635,6 +1548,30 @@ add_startup_timeout (GdkScreen         *screen,
 }
 #endif /* HAVE_STARTUP_NOTIFICATION */
 
+static inline char *
+stringify_uris (GSList *args)
+{
+	GString *str;
+
+	str = g_string_new (NULL);
+
+	append_all_converted (str, URI_TO_STRING, args, FALSE, FALSE, ADDED_NONE);
+
+	return g_string_free (str, FALSE);
+}
+
+static inline char *
+stringify_files (GSList *args)
+{
+	GString *str;
+
+	str = g_string_new (NULL);
+
+	append_all_converted (str, URI_TO_LOCAL_PATH, args, FALSE, FALSE, ADDED_NONE);
+
+	return g_string_free (str, FALSE);
+}
+
 static int
 ditem_execute (const GnomeDesktopItem *item,
 	       const char *exec,
@@ -1655,7 +1592,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	int term_argc = 0;
 	GSList *vector_list;
 	GSList *args, *arg_ptr;
-	int added_status;
+	AddedStatus added_status;
 	const char *working_dir = NULL;
 	char **temp_argv = NULL;
 	int temp_argc = 0;
@@ -1768,7 +1705,7 @@ ditem_execute (const GnomeDesktopItem *item,
 					  args, &arg_ptr, &added_status);
 
 		if (launched == 0 && added_status == ADDED_NONE && append_uris) {
-			uris = stringify_uris (args, FALSE, FALSE);
+			uris = stringify_uris (args);
 			temp = g_strconcat (new_exec, " ", uris, NULL);
 			g_free (uris);
 			g_free (new_exec);
@@ -1778,7 +1715,7 @@ ditem_execute (const GnomeDesktopItem *item,
 
 		/* append_uris and append_paths are mutually exlusive */
 		if (launched == 0 && added_status == ADDED_NONE && append_paths) {
-			uris = stringify_files (args, FALSE, FALSE);
+			uris = stringify_files (args);
 			temp = g_strconcat (new_exec, " ", uris, NULL);
 			g_free (uris);
 			g_free (new_exec);

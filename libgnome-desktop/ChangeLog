@@ -1,3 +1,15 @@
+2004-02-29  Mark McLoughlin  <mark@skynet.ie>
+
+	Fixes bug #135629. Basically, dragging and dropping a file
+	from an NFS mounted dir onto a launcher using '%f' wouldn't
+	work because we were using uri_is_local() rather than checking
+	if its a file: URI. Root cause identified by Dan Williams.
+
+	* gnome-desktop-item.c: Don't use uri_is_local(), use
+	get_local_path() which has the semantics we require. Re-work
+	the code substitution code substantially to cleanup and not
+	have several different functions with only slight differences.
+
 ==================== 2.5.90 ====================
 
 ==================== 2.5.5 ====================
