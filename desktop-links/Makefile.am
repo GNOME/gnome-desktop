@@ -13,7 +13,9 @@ Settingsdir       = $(appsdir)/Settings
 
 gnewdir           = $(datadir)/mc/templates
 
-gnew_DATA = GIMP.desktop 
+gnew_in_files = GIMP.desktop.in 
+gnew_DATA = $(gnew_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 Order_files = \
 	Root.order
