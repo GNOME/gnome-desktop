@@ -3,8 +3,8 @@
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 1999
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-core 1.0.53\n"
-"POT-Creation-Date: 1999-11-01 20:33+0100\n"
+"Project-Id-Version: gnome-core 1.0.54\n"
+"POT-Creation-Date: 1999-11-05 21:34+0100\n"
 "PO-Revision-Date: 1999-01-13 00:46+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -159,7 +159,7 @@ msgstr "Un reloj analógico similar al del panel de CDE."
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/desk-guide/deskguide_applet.c:207 applets/diskusage/diskusage.c:711
+#: applets/desk-guide/deskguide_applet.c:241 applets/diskusage/diskusage.c:711
 #: applets/drivemount/drivemount.c:512
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
@@ -169,21 +169,21 @@ msgstr "Un reloj analógico similar al del panel de CDE."
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/tasklist/tasklist_applet.c:669 applets/webcontrol/webcontrol.c:315
+#: applets/tasklist/tasklist_applet.c:689 applets/webcontrol/webcontrol.c:315
 #: panel/drawer.c:375 panel/launcher.c:355 panel/menu.c:947 panel/menu.c:3646
 msgid "Properties..."
 msgstr "Propiedades..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:785
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/desk-guide/deskguide_applet.c:201 applets/dialer/dialer.c:162
+#: applets/desk-guide/deskguide_applet.c:235 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
 #: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
 #: applets/gnome-pager/gnomepager_applet.c:1588 applets/jbc/jbc-applet.c:144
 #: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:663
+#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:683
 #: applets/webcontrol/webcontrol.c:307 panel/menu.c:2602
 msgid "About..."
 msgstr "Acerca..."
@@ -537,131 +537,164 @@ msgstr "Archivo de tema (directorio):"
 msgid "Theme"
 msgstr "Tema"
 
-#. Tooltips frame
-#: applets/desk-guide/deskguide_applet.c:61 panel/panel_config_global.c:408
-msgid "Tooltips"
-msgstr "Tooltips"
+#: applets/desk-guide/deskguide_applet.c:70 applets/slashapp/properties.c:422
+#: applets/tasklist/tasklist_properties.c:270
+msgid "Display"
+msgstr "Afichar"
 
-#: applets/desk-guide/deskguide_applet.c:63
-msgid "Enable Desktop Names"
-msgstr "Activar nombres de escritorios"
-
-#: applets/desk-guide/deskguide_applet.c:65
-msgid "Desktop Name Popup Delay [ms]"
-msgstr "Demora para que aparezcan los nombres de escritorio (ms)"
-
-#: applets/desk-guide/deskguide_applet.c:67
-msgid "Enable Tooltips"
-msgstr "Activar tooltips"
-
-#: applets/desk-guide/deskguide_applet.c:69
-msgid "Tooltips Delay [ms]"
-msgstr "Demora para los tooltips (ms)"
-
-#: applets/desk-guide/deskguide_applet.c:70
+#: applets/desk-guide/deskguide_applet.c:71
 msgid "Layout"
 msgstr "Disposición"
 
-#: applets/desk-guide/deskguide_applet.c:72
-msgid "Switch Arrow"
-msgstr "Flecha de cambio"
+#: applets/desk-guide/deskguide_applet.c:73
+msgid "Switch tasklist arrow"
+msgstr "Flecha de cambio de la lista de tareas"
 
-#: applets/desk-guide/deskguide_applet.c:74
-msgid "Show only current Desktop"
-msgstr "Ver solo escritorio corriente"
+#: applets/desk-guide/deskguide_applet.c:75
+msgid "Show desktop pager"
+msgstr "Ver paginador del escritorio"
 
-#: applets/desk-guide/deskguide_applet.c:76
-msgid "Show Desktop Pager"
-msgstr "Ver pagindaor del escritorio"
+#: applets/desk-guide/deskguide_applet.c:77
+msgid "Only show current desktop in pager"
+msgstr "Ver solo escritorio corriente en el paginador"
 
-#: applets/desk-guide/deskguide_applet.c:78
+#: applets/desk-guide/deskguide_applet.c:79
+msgid "Raise area grid over tasks"
+msgstr "Suscitar la rejilla de las áreas encima de las tareas"
+
+#. Tooltips frame
+#: applets/desk-guide/deskguide_applet.c:80 panel/panel_config_global.c:408
+msgid "Tooltips"
+msgstr "Tooltips"
+
+#: applets/desk-guide/deskguide_applet.c:82
+msgid "Show Desk-Guide tooltips"
+msgstr "Mostrar tooltips del paginador"
+
+#: applets/desk-guide/deskguide_applet.c:84
+msgid "Desk-Guide tooltip delay [ms]"
+msgstr "Demora para los tooltips del paginador (ms)"
+
+#: applets/desk-guide/deskguide_applet.c:86
+msgid "Show desktop name tooltips"
+msgstr "Mostrar los nombres de escritorios en los tooltips"
+
+#: applets/desk-guide/deskguide_applet.c:88
+msgid "Desktop name tooltip delay [ms]"
+msgstr "Demora para que aparezcan los nombres de escritorio (ms)"
+
+#: applets/desk-guide/deskguide_applet.c:90
 msgid "Tasks"
 msgstr "Tareas"
 
-#: applets/desk-guide/deskguide_applet.c:79
+#: applets/desk-guide/deskguide_applet.c:91
 msgid "Visibility"
 msgstr "Visibilidad"
 
-#: applets/desk-guide/deskguide_applet.c:81
-msgid "Show `HIDDEN' Tasks"
-msgstr "Ver las tareas 'OCULTADAS'"
-
-#: applets/desk-guide/deskguide_applet.c:83
-msgid "Show `SHADED' Tasks"
-msgstr "Ver las tareas 'ENROLLADAS'"
-
-#: applets/desk-guide/deskguide_applet.c:85
-msgid "Show `SKIP-WINLIST' Tasks"
-msgstr "Ver las tareas 'FUERA-LISTA-TAREAS'"
-
-#: applets/desk-guide/deskguide_applet.c:87
-msgid "Show `SKIP-TASKBAR' Tasks"
-msgstr "Ver las tareas 'FUERA-BARRA-TAREAS'"
-
-#: applets/desk-guide/deskguide_applet.c:88
-msgid "Cosmetics"
-msgstr "Mejoras de presentación"
-
-#: applets/desk-guide/deskguide_applet.c:90
-msgid "Raise Area Grid Above Tasks"
-msgstr "Suscitar la rejilla de las área encima de las tareas"
-
-#. CONFIG_SECTION ("", NULL),
 #: applets/desk-guide/deskguide_applet.c:93
+msgid "Show hidden tasks (HIDDEN)"
+msgstr "Ver las tareas escondidas (HIDDEN)"
+
+#: applets/desk-guide/deskguide_applet.c:95
+msgid "Show shaded tasks (SHADED)"
+msgstr "Ver las tareas enroiscadas (SHADED)"
+
+#: applets/desk-guide/deskguide_applet.c:97
+msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+msgstr ""
+
+#. CONFIG_SECTION (sect_null_1, NULL),
+#: applets/desk-guide/deskguide_applet.c:102
 #: applets/gnome-pager/gnomepager_applet.c:401
-#: applets/tasklist/tasklist_properties.c:248
 msgid "Geometry"
 msgstr "Geometría"
 
-#: applets/desk-guide/deskguide_applet.c:94
+#: applets/desk-guide/deskguide_applet.c:103
 msgid "Horizontal Layout"
 msgstr "Disposición horizontal"
 
-#: applets/desk-guide/deskguide_applet.c:96
+#: applets/desk-guide/deskguide_applet.c:105
 msgid "Desktop Height [pixels]"
 msgstr "Alto del escritorio (pixeles)"
 
-#: applets/desk-guide/deskguide_applet.c:98
-msgid "Divide Height By Number Of Vertical Areas"
+#: applets/desk-guide/deskguide_applet.c:111
+msgid "Divide height by number of vertical areas"
 msgstr "Dividir la altura por la cantidad de áreas verticales"
 
-#: applets/desk-guide/deskguide_applet.c:99
+#: applets/desk-guide/deskguide_applet.c:113
+msgid "Rows of Desktops"
+msgstr "Líneas de escritorios"
+
+#: applets/desk-guide/deskguide_applet.c:115
+msgid "Divide height by number of rows"
+msgstr "Dividir la altura por la cantidad de líneas"
+
+#: applets/desk-guide/deskguide_applet.c:116
 msgid "Vertical Layout"
 msgstr "Disposición vertical"
 
-#: applets/desk-guide/deskguide_applet.c:101
-msgid "Desktop width [pixels]"
+#: applets/desk-guide/deskguide_applet.c:118
+msgid "Desktop Width [pixels]"
 msgstr "Ancho del escritorio (pixeles)"
 
-#: applets/desk-guide/deskguide_applet.c:103
-msgid "Divide Width By Number Of Horizontal Areas"
+#: applets/desk-guide/deskguide_applet.c:124
+msgid "Divide width by number of horizontal areas"
 msgstr "Dividir el ancho por la cantidad de áreas horizontales"
 
-#: applets/desk-guide/deskguide_applet.c:105
-msgid "Advanced Options"
-msgstr "Opciones avanzadas"
+#: applets/desk-guide/deskguide_applet.c:126
+msgid "Columns of Desktops"
+msgstr "Columnas de escritorios"
 
-#: applets/desk-guide/deskguide_applet.c:107
-msgid "Draw Desktops Double Buffered"
-msgstr "Dibujar los escritorios con doble buffering"
+#: applets/desk-guide/deskguide_applet.c:128
+msgid "Divide width by number of columns"
+msgstr "Dividir el ancho por la cantidad de columnas"
 
-#: applets/desk-guide/deskguide_applet.c:108
-msgid "Bug Fixes"
-msgstr "Corrección de Bugs"
+#: applets/desk-guide/deskguide_applet.c:130
+#: applets/modemlights/properties.c:308
+msgid "Advanced"
+msgstr "Avanzado"
 
-#: applets/desk-guide/deskguide_applet.c:110
+#: applets/desk-guide/deskguide_applet.c:131
+msgid "Drawing"
+msgstr "Dibujando"
+
+#: applets/desk-guide/deskguide_applet.c:133
+msgid "Draw desktops double-buffered (recommended)"
+msgstr "Dibujar los escritorios con doble buffering (recomendado)"
+
+#: applets/desk-guide/deskguide_applet.c:134
+msgid "Window Manager Workarounds"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:136
 msgid ""
-"Window Manager Moves Decoration Window Instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
+"Window manager moves decoration window instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 msgstr ""
 "El gestor de ventanas mueve en vez las decoraciones de las ventanas\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
+"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 
-#: applets/desk-guide/deskguide_applet.c:140
+#: applets/desk-guide/deskguide_applet.c:139
+msgid ""
+"Window manager changes active area on all desktops\n"
+"(FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:142
+msgid ""
+"Window manager expects pager to modify area+desktop properties directly\n"
+"(Enlightenment, FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:172
 msgid "GNOME Desktop Guide (Pager)"
 msgstr "Guía del Escritorio de GNOME (Paginador)"
 
-#: applets/desk-guide/deskguide_applet.c:156
+#: applets/desk-guide/deskguide_applet.c:188
 msgid ""
 "You are not running a GNOME Compliant\n"
 "Window Manager. GNOME support by the \n"
@@ -673,15 +706,15 @@ msgstr ""
 "que utilice un gestor de ventanas conforme para poder\n"
 "usar correctamente las opciones del paginador."
 
-#: applets/desk-guide/deskguide_applet.c:161
+#: applets/desk-guide/deskguide_applet.c:193
 msgid "Desk Guide Alert"
 msgstr "Alerta del Paginador"
 
-#: applets/desk-guide/deskguide_applet.c:835
+#: applets/desk-guide/deskguide_applet.c:943
 msgid "Global"
 msgstr "Global"
 
-#: applets/desk-guide/deskguide_applet.c:892
+#: applets/desk-guide/deskguide_applet.c:998
 msgid "Desk Guide Settings"
 msgstr "Configuración del Paginador"
 
@@ -789,11 +822,11 @@ msgstr "Tiempo de actualización (s):"
 
 #: applets/drivemount/properties.c:160
 msgid "Icon:"
-msgstr "Ícono"
+msgstr "Icono:"
 
 #: applets/drivemount/properties.c:167
 msgid "Floppy"
-msgstr "Disquette"
+msgstr "Disquete"
 
 #: applets/drivemount/properties.c:171
 msgid "Cdrom"
@@ -1217,7 +1250,7 @@ msgstr "Ver botones con íconos"
 
 #. Radio buttons for which tasks to show
 #: applets/gnome-pager/gnomepager_applet.c:353
-#: applets/tasklist/tasklist_properties.c:259
+#: applets/tasklist/tasklist_properties.c:233
 msgid "Which tasks to show"
 msgstr "Cuales tareas a mostrar"
 
@@ -1472,6 +1505,7 @@ msgstr "Ver hora"
 
 #. Size
 #: applets/mini-commander/src/preferences.c:487
+#: applets/tasklist/tasklist_properties.c:220
 msgid "Size"
 msgstr "Tamaño"
 
@@ -1621,10 +1655,6 @@ msgstr "Dispositivo:"
 #: applets/modemlights/properties.c:294
 msgid "Use ISDN"
 msgstr "Usar RDSI"
-
-#: applets/modemlights/properties.c:308
-msgid "Advanced"
-msgstr "Avanzado"
 
 #: applets/multiload/cpuload.c:47 applets/multiload/main.c:151
 msgid "CPU Load"
@@ -1801,10 +1831,6 @@ msgstr "Demora para la ida a la linea automática del texto:"
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "Velocidad de desfile entre lineas (desfile suave):"
 
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "Afichar"
-
 #: applets/slashapp/slashapp.c:152
 msgid "No articles"
 msgstr "No hay artículos"
@@ -1867,128 +1893,119 @@ msgstr "Ver lista de artículos"
 msgid "Refresh articles"
 msgstr "Refrescar artículos"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Iconify"
 msgstr "Iconificar"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Restore"
 msgstr "Restaurar"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Shade"
 msgstr "Enrollar"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Unshade"
 msgstr "Desenrollar"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Stick"
 msgstr "Clavar"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Unstick"
 msgstr "Desclavar"
 
-#: applets/tasklist/tasklist_menu.c:196
+#: applets/tasklist/tasklist_menu.c:201
 msgid "To desktop"
 msgstr "Al escritorio"
 
-#: applets/tasklist/tasklist_menu.c:235
+#: applets/tasklist/tasklist_menu.c:240
 msgid "Close window"
 msgstr "Cerrar ventana"
 
-#: applets/tasklist/tasklist_menu.c:242
+#: applets/tasklist/tasklist_menu.c:247
 msgid "Kill app"
 msgstr "Matar aplicación"
 
 #. Horizontal
-#: applets/tasklist/tasklist_properties.c:173 panel/panel_config.c:548
+#: applets/tasklist/tasklist_properties.c:144 panel/panel_config.c:548
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: applets/tasklist/tasklist_properties.c:181
-#: applets/tasklist/tasklist_properties.c:229
+#: applets/tasklist/tasklist_properties.c:152
+#: applets/tasklist/tasklist_properties.c:201
 msgid "Tasklist width:"
 msgstr "Ancho de la lista de tareas:"
 
-#: applets/tasklist/tasklist_properties.c:188
-msgid "Number of rows:"
-msgstr "Cantidad de líneas:"
+#: applets/tasklist/tasklist_properties.c:159
+msgid "Rows of tasks:"
+msgstr "Líneas de tareas:"
 
-#: applets/tasklist/tasklist_properties.c:196
-msgid "Fixed tasklist width"
+#: applets/tasklist/tasklist_properties.c:167
+msgid "Default task size:"
+msgstr "Tamaño por omisión por tarea:"
+
+#: applets/tasklist/tasklist_properties.c:176
+msgid "Tasklist width is fixed"
 msgstr "Ancho de la lista de tareas fijo"
 
-#: applets/tasklist/tasklist_properties.c:200
-msgid "Dynamic tasklist width"
-msgstr "Ancho de la lista de tareas dinámico"
+#: applets/tasklist/tasklist_properties.c:180
+msgid "Tasklist width is dynamic"
+msgstr "Ancho de la lista de tareas dinico"
 
-#: applets/tasklist/tasklist_properties.c:205
-msgid "Default task width:"
-msgstr "Ancho por omisión de la lista de tareas:"
-
-#: applets/tasklist/tasklist_properties.c:214 panel/panel_config.c:560
+#: applets/tasklist/tasklist_properties.c:186 panel/panel_config.c:560
 msgid "Vertical"
 msgstr "Vertical"
 
-#: applets/tasklist/tasklist_properties.c:221
+#: applets/tasklist/tasklist_properties.c:193
 msgid "Tasklist height:"
 msgstr "Alto de la lista de tareas:"
 
-#: applets/tasklist/tasklist_properties.c:237
-msgid "Fixed tasklist height"
+#: applets/tasklist/tasklist_properties.c:209
+msgid "Tasklist height is fixed"
 msgstr "Alto de la lista de tareas fijo"
 
-#: applets/tasklist/tasklist_properties.c:241
-msgid "Dynamic tasklist height"
+#: applets/tasklist/tasklist_properties.c:213
+msgid "Tasklist height is dynamic"
 msgstr "Alto de la lista de tareas dinámico"
 
-#: applets/tasklist/tasklist_properties.c:267
-msgid "Show normal tasks"
-msgstr "Ver las tareas normales"
+#: applets/tasklist/tasklist_properties.c:241
+#, fuzzy
+msgid "Show normal applications"
+msgstr "Muestra íconos pequeños"
 
-#: applets/tasklist/tasklist_properties.c:270
-msgid "Show iconified tasks"
-msgstr "Ver las tareas iconoficadas"
+#: applets/tasklist/tasklist_properties.c:244
+msgid "Show iconified (minimized) applications"
+msgstr ""
 
-#: applets/tasklist/tasklist_properties.c:274
-msgid "Normal tasks appear on all desktops"
-msgstr "Las tareas normales se ven en todos los escritorios"
+#: applets/tasklist/tasklist_properties.c:248
+#, fuzzy
+msgid "Show normal applications on all desktops"
+msgstr "Ver todas las tareas en todos los espacios de trabajo"
 
-#: applets/tasklist/tasklist_properties.c:277
-msgid "Iconified tasks appear on all desktops"
-msgstr "Las tareas iconificadas se ven en todos los escritorios"
+#: applets/tasklist/tasklist_properties.c:251
+#, fuzzy
+msgid "Show iconified (minimized) applications on all desktops"
+msgstr "Ver las tareas minimizadas en todos los espacios de trabajo"
 
 #. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:280 help-browser/toc-man.c:25
+#: applets/tasklist/tasklist_properties.c:254 help-browser/toc-man.c:25
 #: help-browser/toc2-man.c:27 panel/panel_config_global.c:503
 #: panel/panel_config_global.c:623
 msgid "Miscellaneous"
 msgstr "Varios"
 
-#: applets/tasklist/tasklist_properties.c:288
+#: applets/tasklist/tasklist_properties.c:262
 msgid "Show mini icons"
 msgstr "Muestra iconos pequeños"
 
-#: applets/tasklist/tasklist_properties.c:292
-msgid "Appearance"
-msgstr "Aspecto"
-
-#: applets/tasklist/tasklist_properties.c:300
-msgid "General behavior"
-msgstr "Comportamiento general"
-
-#: applets/tasklist/tasklist_properties.c:307
+#: applets/tasklist/tasklist_properties.c:265
 msgid "Confirm before killing windows"
 msgstr "Confirmar antes de matar una ventana"
 
-#: applets/tasklist/tasklist_properties.c:311
-msgid "Behavior"
-msgstr "Comportamiento"
-
-#: applets/tasklist/tasklist_properties.c:324
+#: applets/tasklist/tasklist_properties.c:282
 msgid "Tasklist properties"
 msgstr "Propiedades de la lista de tareas"
 
@@ -2276,7 +2293,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "El programa de emulación de terminal de GNOME"
 
 #: gnome-terminal/gnome-terminal.c:563 gnome-terminal/gnome-terminal.c:1105
-#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2223
+#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2226
 msgid "Default"
 msgstr "Por omisión"
 
@@ -2518,12 +2535,12 @@ msgstr "Editar"
 msgid "Settings"
 msgstr "Configuración"
 
-#: gnome-terminal/gnome-terminal.c:1921
+#: gnome-terminal/gnome-terminal.c:1924
 #, c-format
 msgid "The error was: %s"
 msgstr "El error era: %s"
 
-#: gnome-terminal/gnome-terminal.c:1922
+#: gnome-terminal/gnome-terminal.c:1925
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -2538,7 +2555,7 @@ msgstr ""
 "Lea linux/Documentation/Changes para ver como\n"
 "configurarlos correctamente."
 
-#: gnome-terminal/gnome-terminal.c:1927
+#: gnome-terminal/gnome-terminal.c:1930
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -2549,107 +2566,107 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "TCLASS"
 msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "Terminal class name"
 msgstr "Nombre de la clase del terminal"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "FONT"
 msgstr "FUENTE"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "Specifies font name"
 msgstr "Indicar nombre de la fuente"
 
-#: gnome-terminal/gnome-terminal.c:2411
+#: gnome-terminal/gnome-terminal.c:2414
 msgid "Do not start up shells as login shells"
 msgstr "No abrir los shells como shells de login"
 
-#: gnome-terminal/gnome-terminal.c:2414
+#: gnome-terminal/gnome-terminal.c:2417
 msgid "Start up shells as login shells"
 msgstr "Abrir los shells como shells de login"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "GEOMETRY"
 msgstr "GEOMETRÍA"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "Specifies the geometry for the main window"
 msgstr "Indicar la geometría de la ventana principal"
 
-#: gnome-terminal/gnome-terminal.c:2420 gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2423 gnome-terminal/gnome-terminal.c:2426
 msgid "COMMAND"
 msgstr "COMANDO"
 
-#: gnome-terminal/gnome-terminal.c:2420
+#: gnome-terminal/gnome-terminal.c:2423
 msgid "Execute this program instead of a shell"
 msgstr "Ejecutar este programa en vez del shell"
 
-#: gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2426
 msgid "Execute this program the same way as xterm does"
 msgstr "Ejecutar este programa de la misma manera que lo hace un xterm"
 
-#: gnome-terminal/gnome-terminal.c:2426 gnome-terminal/gnome-terminal.c:2429
+#: gnome-terminal/gnome-terminal.c:2429 gnome-terminal/gnome-terminal.c:2432
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:2426
+#: gnome-terminal/gnome-terminal.c:2429
 msgid "Foreground color"
 msgstr "Color de primer plano"
 
-#: gnome-terminal/gnome-terminal.c:2429 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2432 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "Update utmp entry"
 msgstr "Actualizar la entrada de utmp"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "Do not update utmp entry"
 msgstr "No actualizar la entrada de utmp"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "Update wtmp entry"
 msgstr "Actualizar la entrada de wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "Do not update wtmp entry"
 msgstr "No actualizar la entrada de wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "Set the window title"
 msgstr "Definir el título de la ventana"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "TITLE"
 msgstr "TÍTULO"
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "Set the TERM variable"
 msgstr "Definir la variable TERM"
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "TERMNAME"
 msgstr "NOMBRETERMINAL"
 
@@ -3163,7 +3180,7 @@ msgstr "Tooltip/Nombre"
 
 #: panel/drawer.c:116
 msgid "Icon"
-msgstr "Ícono"
+msgstr "Icono"
 
 #: panel/drawer.c:120
 msgid "Applet appearance"
@@ -3639,19 +3656,19 @@ msgstr "Relleno de applet"
 
 #: panel/panel_config_global.c:568
 msgid "Launcher icon"
-msgstr "Ícono del lanzador"
+msgstr "Icono del lanzador"
 
 #: panel/panel_config_global.c:569
 msgid "Drawer icon"
-msgstr "Ícono del cajón"
+msgstr "Icono del cajón"
 
 #: panel/panel_config_global.c:570
 msgid "Menu icon"
-msgstr "Ícono del menú"
+msgstr "Icono del menú"
 
 #: panel/panel_config_global.c:571
 msgid "Logout icon"
-msgstr "Ícono de fin de sesión"
+msgstr "Icono de fin de sesión"
 
 #: panel/panel_config_global.c:595
 msgid "Global panel configuration"
@@ -3680,3 +3697,66 @@ msgstr "Comando (opcional)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "Alto"
+
+#~ msgid "Enable Desktop Names"
+#~ msgstr "Activar nombres de escritorios"
+
+#~ msgid "Enable Tooltips"
+#~ msgstr "Activar tooltips"
+
+#~ msgid "Show `HIDDEN' Tasks"
+#~ msgstr "Ver las tareas 'OCULTADAS'"
+
+#~ msgid "Show `SHADED' Tasks"
+#~ msgstr "Ver las tareas 'ENROLLADAS'"
+
+#~ msgid "Show `SKIP-WINLIST' Tasks"
+#~ msgstr "Ver las tareas 'FUERA-LISTA-TAREAS'"
+
+#~ msgid "Show `SKIP-TASKBAR' Tasks"
+#~ msgstr "Ver las tareas 'FUERA-BARRA-TAREAS'"
+
+#~ msgid "Cosmetics"
+#~ msgstr "Mejoras de presentación"
+
+#~ msgid "Advanced Options"
+#~ msgstr "Opciones avanzadas"
+
+#~ msgid "Bug Fixes"
+#~ msgstr "Corrección de Bugs"
+
+#~ msgid "Number of rows:"
+#~ msgstr "Cantidad de líneas:"
+
+#~ msgid "Fixed tasklist width"
+#~ msgstr "Ancho de la lista de tareas fijo"
+
+#~ msgid "Dynamic tasklist width"
+#~ msgstr "Ancho de la lista de tareas dinámico"
+
+#~ msgid "Fixed tasklist height"
+#~ msgstr "Alto de la lista de tareas fijo"
+
+#~ msgid "Dynamic tasklist height"
+#~ msgstr "Alto de la lista de tareas dinámico"
+
+#~ msgid "Show normal tasks"
+#~ msgstr "Ver las tareas normales"
+
+#~ msgid "Show iconified tasks"
+#~ msgstr "Ver las tareas iconoficadas"
+
+#~ msgid "Normal tasks appear on all desktops"
+#~ msgstr "Las tareas normales se ven en todos los escritorios"
+
+#~ msgid "Iconified tasks appear on all desktops"
+#~ msgstr "Las tareas iconificadas se ven en todos los escritorios"
+
+#~ msgid "Appearance"
+#~ msgstr "Aspecto"
+
+#~ msgid "General behavior"
+#~ msgstr "Comportamiento general"
+
+#~ msgid "Behavior"
+#~ msgstr "Comportamiento"

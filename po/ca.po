@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.4\n"
-"POT-Creation-Date: 1999-11-01 21:15+0100\n"
+"POT-Creation-Date: 1999-11-05 21:34+0100\n"
 "PO-Revision-Date: 1999-07-18 14:24+02:00\n"
 "Last-Translator: Ivan Vilata i Balaguer <al011097@alumail.uji.es>\n"
 "Language-Team: linux-ca@chanae.alphanet.ch\n"
@@ -158,7 +158,7 @@ msgstr ""
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/desk-guide/deskguide_applet.c:207 applets/diskusage/diskusage.c:711
+#: applets/desk-guide/deskguide_applet.c:241 applets/diskusage/diskusage.c:711
 #: applets/drivemount/drivemount.c:512
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
@@ -168,21 +168,21 @@ msgstr ""
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/tasklist/tasklist_applet.c:669 applets/webcontrol/webcontrol.c:315
+#: applets/tasklist/tasklist_applet.c:689 applets/webcontrol/webcontrol.c:315
 #: panel/drawer.c:375 panel/launcher.c:355 panel/menu.c:947 panel/menu.c:3646
 msgid "Properties..."
 msgstr "Propietats..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:785
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/desk-guide/deskguide_applet.c:201 applets/dialer/dialer.c:162
+#: applets/desk-guide/deskguide_applet.c:235 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
 #: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
 #: applets/gnome-pager/gnomepager_applet.c:1588 applets/jbc/jbc-applet.c:144
 #: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:663
+#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:683
 #: applets/webcontrol/webcontrol.c:307 panel/menu.c:2602
 msgid "About..."
 msgstr "A propòsit de..."
@@ -546,141 +546,178 @@ msgstr "Fitxer de tema (directori):"
 msgid "Theme"
 msgstr "Tema"
 
-#. Tooltips frame
-#: applets/desk-guide/deskguide_applet.c:61 panel/panel_config_global.c:408
-msgid "Tooltips"
-msgstr "Pistes"
+#: applets/desk-guide/deskguide_applet.c:70 applets/slashapp/properties.c:422
+#: applets/tasklist/tasklist_properties.c:270
+msgid "Display"
+msgstr "Pantalla"
 
-#: applets/desk-guide/deskguide_applet.c:63
-msgid "Enable Desktop Names"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:65
-msgid "Desktop Name Popup Delay [ms]"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:67
-#, fuzzy
-msgid "Enable Tooltips"
-msgstr "Pistes"
-
-#: applets/desk-guide/deskguide_applet.c:69
-#, fuzzy
-msgid "Tooltips Delay [ms]"
-msgstr "Pistes habilitades"
-
-#: applets/desk-guide/deskguide_applet.c:70
+#: applets/desk-guide/deskguide_applet.c:71
 #, fuzzy
 msgid "Layout"
 msgstr "Visual"
 
-#: applets/desk-guide/deskguide_applet.c:72
-msgid "Switch Arrow"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:74
-msgid "Show only current Desktop"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:76
+#: applets/desk-guide/deskguide_applet.c:73
 #, fuzzy
-msgid "Show Desktop Pager"
+msgid "Switch tasklist arrow"
+msgstr "Mostrar quines tasques?"
+
+#: applets/desk-guide/deskguide_applet.c:75
+#, fuzzy
+msgid "Show desktop pager"
 msgstr "Mostrar paginador"
 
-#: applets/desk-guide/deskguide_applet.c:78
+#: applets/desk-guide/deskguide_applet.c:77
+msgid "Only show current desktop in pager"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:79
+msgid "Raise area grid over tasks"
+msgstr ""
+
+#. Tooltips frame
+#: applets/desk-guide/deskguide_applet.c:80 panel/panel_config_global.c:408
+msgid "Tooltips"
+msgstr "Pistes"
+
+#: applets/desk-guide/deskguide_applet.c:82
+#, fuzzy
+msgid "Show Desk-Guide tooltips"
+msgstr "Propietats de l'Ús de Disc"
+
+#: applets/desk-guide/deskguide_applet.c:84
+#, fuzzy
+msgid "Desk-Guide tooltip delay [ms]"
+msgstr "Pistes habilitades"
+
+#: applets/desk-guide/deskguide_applet.c:86
+#, fuzzy
+msgid "Show desktop name tooltips"
+msgstr "Mostrar paginador"
+
+#: applets/desk-guide/deskguide_applet.c:88
+#, fuzzy
+msgid "Desktop name tooltip delay [ms]"
+msgstr "Pistes habilitades"
+
+#: applets/desk-guide/deskguide_applet.c:90
 #, fuzzy
 msgid "Tasks"
 msgstr "Llista de tasques"
 
-#: applets/desk-guide/deskguide_applet.c:79
+#: applets/desk-guide/deskguide_applet.c:91
 msgid "Visibility"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:81
-#, fuzzy
-msgid "Show `HIDDEN' Tasks"
-msgstr "Totes les tasques"
-
-#: applets/desk-guide/deskguide_applet.c:83
-#, fuzzy
-msgid "Show `SHADED' Tasks"
-msgstr "Totes les tasques"
-
-#: applets/desk-guide/deskguide_applet.c:85
-msgid "Show `SKIP-WINLIST' Tasks"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:87
-msgid "Show `SKIP-TASKBAR' Tasks"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:88
-msgid "Cosmetics"
-msgstr ""
-
-#: applets/desk-guide/deskguide_applet.c:90
-msgid "Raise Area Grid Above Tasks"
-msgstr ""
-
-#. CONFIG_SECTION ("", NULL),
 #: applets/desk-guide/deskguide_applet.c:93
+msgid "Show hidden tasks (HIDDEN)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:95
+#, fuzzy
+msgid "Show shaded tasks (SHADED)"
+msgstr "Totes les tasques"
+
+#: applets/desk-guide/deskguide_applet.c:97
+msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+msgstr ""
+
+#. CONFIG_SECTION (sect_null_1, NULL),
+#: applets/desk-guide/deskguide_applet.c:102
 #: applets/gnome-pager/gnomepager_applet.c:401
-#: applets/tasklist/tasklist_properties.c:248
 msgid "Geometry"
 msgstr "Geometria"
 
-#: applets/desk-guide/deskguide_applet.c:94
+#: applets/desk-guide/deskguide_applet.c:103
 #, fuzzy
 msgid "Horizontal Layout"
 msgstr "Horitzontal"
 
-#: applets/desk-guide/deskguide_applet.c:96
+#: applets/desk-guide/deskguide_applet.c:105
 #, fuzzy
 msgid "Desktop Height [pixels]"
 msgstr "Propietats de l'entrada d'escriptori"
 
-#: applets/desk-guide/deskguide_applet.c:98
-msgid "Divide Height By Number Of Vertical Areas"
+#: applets/desk-guide/deskguide_applet.c:111
+msgid "Divide height by number of vertical areas"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:99
+#: applets/desk-guide/deskguide_applet.c:113
+#, fuzzy
+msgid "Rows of Desktops"
+msgstr "Files de paginadors"
+
+#: applets/desk-guide/deskguide_applet.c:115
+msgid "Divide height by number of rows"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:116
 #, fuzzy
 msgid "Vertical Layout"
 msgstr "Vertical"
 
-#: applets/desk-guide/deskguide_applet.c:101
+#: applets/desk-guide/deskguide_applet.c:118
 #, fuzzy
-msgid "Desktop width [pixels]"
+msgid "Desktop Width [pixels]"
 msgstr "Propietats de l'entrada d'escriptori"
 
-#: applets/desk-guide/deskguide_applet.c:103
-msgid "Divide Width By Number Of Horizontal Areas"
+#: applets/desk-guide/deskguide_applet.c:124
+#, fuzzy
+msgid "Divide width by number of horizontal areas"
+msgstr "Amplària màxima de la llista de tasques horitzontal"
+
+#: applets/desk-guide/deskguide_applet.c:126
+msgid "Columns of Desktops"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:105
-#, fuzzy
-msgid "Advanced Options"
+#: applets/desk-guide/deskguide_applet.c:128
+msgid "Divide width by number of columns"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:130
+#: applets/modemlights/properties.c:308
+msgid "Advanced"
 msgstr "Avançades"
 
-#: applets/desk-guide/deskguide_applet.c:107
-msgid "Draw Desktops Double Buffered"
+#: applets/desk-guide/deskguide_applet.c:131
+#, fuzzy
+msgid "Drawing"
+msgstr "Icona del calaix"
+
+#: applets/desk-guide/deskguide_applet.c:133
+msgid "Draw desktops double-buffered (recommended)"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:108
-msgid "Bug Fixes"
+#: applets/desk-guide/deskguide_applet.c:134
+msgid "Window Manager Workarounds"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:110
+#: applets/desk-guide/deskguide_applet.c:136
 msgid ""
-"Window Manager Moves Decoration Window Instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
+"Window manager moves decoration window instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:140
+#: applets/desk-guide/deskguide_applet.c:139
+msgid ""
+"Window manager changes active area on all desktops\n"
+"(FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:142
+msgid ""
+"Window manager expects pager to modify area+desktop properties directly\n"
+"(Enlightenment, FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:172
 msgid "GNOME Desktop Guide (Pager)"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:156
+#: applets/desk-guide/deskguide_applet.c:188
 #, fuzzy
 msgid ""
 "You are not running a GNOME Compliant\n"
@@ -694,16 +731,16 @@ msgstr ""
 "Enlightenment (DR-0.15)\n"
 "I aleshores executeu aquest applet altra volta.\n"
 
-#: applets/desk-guide/deskguide_applet.c:161
+#: applets/desk-guide/deskguide_applet.c:193
 #, fuzzy
 msgid "Desk Guide Alert"
 msgstr "Propietats de l'Ús de Disc"
 
-#: applets/desk-guide/deskguide_applet.c:835
+#: applets/desk-guide/deskguide_applet.c:943
 msgid "Global"
 msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:892
+#: applets/desk-guide/deskguide_applet.c:998
 #, fuzzy
 msgid "Desk Guide Settings"
 msgstr "Propietats de l'Ús de Disc"
@@ -1254,7 +1291,7 @@ msgstr "Mostrar icones als botons"
 
 #. Radio buttons for which tasks to show
 #: applets/gnome-pager/gnomepager_applet.c:353
-#: applets/tasklist/tasklist_properties.c:259
+#: applets/tasklist/tasklist_properties.c:233
 msgid "Which tasks to show"
 msgstr "Mostrar quines tasques?"
 
@@ -1501,6 +1538,7 @@ msgstr "Mostrar l'hora"
 
 #. Size
 #: applets/mini-commander/src/preferences.c:487
+#: applets/tasklist/tasklist_properties.c:220
 msgid "Size"
 msgstr "Tamany"
 
@@ -1649,10 +1687,6 @@ msgstr "Dispositiu:"
 #: applets/modemlights/properties.c:294
 msgid "Use ISDN"
 msgstr "Usar XDSI"
-
-#: applets/modemlights/properties.c:308
-msgid "Advanced"
-msgstr "Avançades"
 
 #: applets/multiload/cpuload.c:47 applets/multiload/main.c:151
 msgid "CPU Load"
@@ -1828,10 +1862,6 @@ msgstr "Retard en ajustar el text:"
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "Velocitat de desplaçament entre línies (despl. suau):"
 
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "Pantalla"
-
 #: applets/slashapp/slashapp.c:152
 msgid "No articles"
 msgstr "No hi ha articles"
@@ -1894,144 +1924,134 @@ msgstr "Mostrar llista d'articles"
 msgid "Refresh articles"
 msgstr "Actualitzar articles"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 #, fuzzy
 msgid "Iconify"
 msgstr "Icona"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 #, fuzzy
 msgid "Restore"
 msgstr "Eliminar"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 #, fuzzy
 msgid "Shade"
 msgstr "Compartida"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 #, fuzzy
 msgid "Unshade"
 msgstr "Enrotllar / Desenrotllar"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 #, fuzzy
 msgid "Stick"
 msgstr "Apegaloses"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 #, fuzzy
 msgid "Unstick"
 msgstr "Apegaloses"
 
-#: applets/tasklist/tasklist_menu.c:196
+#: applets/tasklist/tasklist_menu.c:201
 msgid "To desktop"
 msgstr ""
 
-#: applets/tasklist/tasklist_menu.c:235
+#: applets/tasklist/tasklist_menu.c:240
 #, fuzzy
 msgid "Close window"
 msgstr "_Nova finestra"
 
-#: applets/tasklist/tasklist_menu.c:242
+#: applets/tasklist/tasklist_menu.c:247
 msgid "Kill app"
 msgstr ""
 
 #. Horizontal
-#: applets/tasklist/tasklist_properties.c:173 panel/panel_config.c:548
+#: applets/tasklist/tasklist_properties.c:144 panel/panel_config.c:548
 msgid "Horizontal"
 msgstr "Horitzontal"
 
-#: applets/tasklist/tasklist_properties.c:181
-#: applets/tasklist/tasklist_properties.c:229
+#: applets/tasklist/tasklist_properties.c:152
+#: applets/tasklist/tasklist_properties.c:201
 #, fuzzy
 msgid "Tasklist width:"
 msgstr "Llista de tasques"
 
-#: applets/tasklist/tasklist_properties.c:188
-msgid "Number of rows:"
+#: applets/tasklist/tasklist_properties.c:159
+#, fuzzy
+msgid "Rows of tasks:"
+msgstr "Files de paginadors"
+
+#: applets/tasklist/tasklist_properties.c:167
+msgid "Default task size:"
 msgstr ""
 
-#: applets/tasklist/tasklist_properties.c:196
-msgid "Fixed tasklist width"
-msgstr ""
+#: applets/tasklist/tasklist_properties.c:176
+#, fuzzy
+msgid "Tasklist width is fixed"
+msgstr "Llista de tasques"
 
-#: applets/tasklist/tasklist_properties.c:200
-msgid "Dynamic tasklist width"
-msgstr ""
+#: applets/tasklist/tasklist_properties.c:180
+#, fuzzy
+msgid "Tasklist width is dynamic"
+msgstr "Llista de tasques"
 
-#: applets/tasklist/tasklist_properties.c:205
-msgid "Default task width:"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:214 panel/panel_config.c:560
+#: applets/tasklist/tasklist_properties.c:186 panel/panel_config.c:560
 msgid "Vertical"
 msgstr "Vertical"
 
-#: applets/tasklist/tasklist_properties.c:221
+#: applets/tasklist/tasklist_properties.c:193
 #, fuzzy
 msgid "Tasklist height:"
 msgstr "Llista de tasques"
 
-#: applets/tasklist/tasklist_properties.c:237
-msgid "Fixed tasklist height"
-msgstr ""
+#: applets/tasklist/tasklist_properties.c:209
+#, fuzzy
+msgid "Tasklist height is fixed"
+msgstr "Llista de tasques"
+
+#: applets/tasklist/tasklist_properties.c:213
+#, fuzzy
+msgid "Tasklist height is dynamic"
+msgstr "Llista de tasques"
 
 #: applets/tasklist/tasklist_properties.c:241
-msgid "Dynamic tasklist height"
+#, fuzzy
+msgid "Show normal applications"
+msgstr "Mostrar icones menudes"
+
+#: applets/tasklist/tasklist_properties.c:244
+msgid "Show iconified (minimized) applications"
 msgstr ""
 
-#: applets/tasklist/tasklist_properties.c:267
+#: applets/tasklist/tasklist_properties.c:248
 #, fuzzy
-msgid "Show normal tasks"
-msgstr "Només tasques normals"
-
-#: applets/tasklist/tasklist_properties.c:270
-#, fuzzy
-msgid "Show iconified tasks"
-msgstr "Només tasques minimitzades"
-
-#: applets/tasklist/tasklist_properties.c:274
-#, fuzzy
-msgid "Normal tasks appear on all desktops"
+msgid "Show normal applications on all desktops"
 msgstr "Totes les tasques de tots els escriptoris"
 
-#: applets/tasklist/tasklist_properties.c:277
+#: applets/tasklist/tasklist_properties.c:251
 #, fuzzy
-msgid "Iconified tasks appear on all desktops"
+msgid "Show iconified (minimized) applications on all desktops"
 msgstr "Tasques minimitzades de tots els escriptoris"
 
 #. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:280 help-browser/toc-man.c:25
+#: applets/tasklist/tasklist_properties.c:254 help-browser/toc-man.c:25
 #: help-browser/toc2-man.c:27 panel/panel_config_global.c:503
 #: panel/panel_config_global.c:623
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
-#: applets/tasklist/tasklist_properties.c:288
+#: applets/tasklist/tasklist_properties.c:262
 #, fuzzy
 msgid "Show mini icons"
 msgstr "Mostrar icones menudes"
 
-#: applets/tasklist/tasklist_properties.c:292
-#, fuzzy
-msgid "Appearance"
-msgstr "Aparença de l'applet"
-
-#: applets/tasklist/tasklist_properties.c:300
-#, fuzzy
-msgid "General behavior"
-msgstr "General"
-
-#: applets/tasklist/tasklist_properties.c:307
+#: applets/tasklist/tasklist_properties.c:265
 msgid "Confirm before killing windows"
 msgstr ""
 
-#: applets/tasklist/tasklist_properties.c:311
-msgid "Behavior"
-msgstr ""
-
-#: applets/tasklist/tasklist_properties.c:324
+#: applets/tasklist/tasklist_properties.c:282
 #, fuzzy
 msgid "Tasklist properties"
 msgstr "Propietats del plafó"
@@ -2316,7 +2336,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "L'emulador GNOME de terminal."
 
 #: gnome-terminal/gnome-terminal.c:563 gnome-terminal/gnome-terminal.c:1105
-#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2223
+#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2226
 msgid "Default"
 msgstr "Per defecte"
 
@@ -2567,12 +2587,12 @@ msgstr ""
 msgid "Settings"
 msgstr "Propietats del Rellotge"
 
-#: gnome-terminal/gnome-terminal.c:1921
+#: gnome-terminal/gnome-terminal.c:1924
 #, c-format
 msgid "The error was: %s"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1922
+#: gnome-terminal/gnome-terminal.c:1925
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -2581,7 +2601,7 @@ msgid ""
 "set them up correctly."
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:1927
+#: gnome-terminal/gnome-terminal.c:1930
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -2589,111 +2609,111 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "TCLASS"
 msgstr "CLASSE-TERM"
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "Terminal class name"
 msgstr "Nom de la classe del terminal"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "Specifies font name"
 msgstr "Especifica el nom de la font"
 
 # «Login»?? «Entrada» queda bastant bé, però per no marejar... iv
-#: gnome-terminal/gnome-terminal.c:2411
+#: gnome-terminal/gnome-terminal.c:2414
 #, fuzzy
 msgid "Do not start up shells as login shells"
 msgstr "No llançar intèrprets d'entrada (login)"
 
-#: gnome-terminal/gnome-terminal.c:2414
+#: gnome-terminal/gnome-terminal.c:2417
 #, fuzzy
 msgid "Start up shells as login shells"
 msgstr "Llançar intèrprets d'entrada (login)"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "Specifies the geometry for the main window"
 msgstr "Especifica la geometria de la finestra principal"
 
-#: gnome-terminal/gnome-terminal.c:2420 gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2423 gnome-terminal/gnome-terminal.c:2426
 msgid "COMMAND"
 msgstr "COMANDA"
 
-#: gnome-terminal/gnome-terminal.c:2420
+#: gnome-terminal/gnome-terminal.c:2423
 msgid "Execute this program instead of a shell"
 msgstr "Executar aquesta comanda en comptes d'un intèrpret"
 
-#: gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2426
 #, fuzzy
 msgid "Execute this program the same way as xterm does"
 msgstr "Executar aquesta comanda en comptes d'un intèrpret"
 
-#: gnome-terminal/gnome-terminal.c:2426 gnome-terminal/gnome-terminal.c:2429
+#: gnome-terminal/gnome-terminal.c:2429 gnome-terminal/gnome-terminal.c:2432
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:2426
+#: gnome-terminal/gnome-terminal.c:2429
 msgid "Foreground color"
 msgstr "Color del text"
 
-#: gnome-terminal/gnome-terminal.c:2429 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2432 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Color de fons"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "Update utmp entry"
 msgstr "Actualitzar registre a utmp"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "Do not update utmp entry"
 msgstr "No actualitzar registre a utmp"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "Update wtmp entry"
 msgstr "Actualitzar registre a wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "Do not update wtmp entry"
 msgstr "No actualitzar registre a wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "Set the window title"
 msgstr "Establir nom de la finestra"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "TITLE"
 msgstr "TÍTOL"
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "Set the TERM variable"
 msgstr ""
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "TERMNAME"
 msgstr ""
 
@@ -3728,14 +3748,20 @@ msgstr "Comanda (opcional)"
 msgid "Height"
 msgstr "Altura"
 
-#~ msgid "Prompt before logout"
-#~ msgstr "Preguntar abans d'eixir"
+#~ msgid "0.02"
+#~ msgstr "0.02"
 
-#~ msgid "Add new panel"
-#~ msgstr "Afegir nou plafó"
+#~ msgid "1.0"
+#~ msgstr "1.0"
 
-#~ msgid "Properties ..."
-#~ msgstr "Propietats ..."
+#~ msgid "About\t"
+#~ msgstr "A propòsit de\t"
+
+#~ msgid "Disable normal operation by saving into the Trash session"
+#~ msgstr "Inhabilitar l'operació normal salvant dins la sessió «Trash»"
+
+#~ msgid "Program:"
+#~ msgstr "Programa:"
 
 #~ msgid ""
 #~ "Error loading document:\n"
@@ -3746,17 +3772,51 @@ msgstr "Altura"
 #~ "\n"
 #~ "%s"
 
-#~ msgid "Program:"
-#~ msgstr "Programa:"
+#~ msgid "Properties ..."
+#~ msgstr "Propietats ..."
 
-#~ msgid "Disable normal operation by saving into the Trash session"
-#~ msgstr "Inhabilitar l'operació normal salvant dins la sessió «Trash»"
+#~ msgid "Add new panel"
+#~ msgstr "Afegir nou plafó"
 
-#~ msgid "About\t"
-#~ msgstr "A propòsit de\t"
+#~ msgid "Prompt before logout"
+#~ msgstr "Preguntar abans d'eixir"
 
-#~ msgid "1.0"
-#~ msgstr "1.0"
+#, fuzzy
+#~ msgid "Enable Tooltips"
+#~ msgstr "Pistes"
 
-#~ msgid "0.02"
-#~ msgstr "0.02"
+#, fuzzy
+#~ msgid "Show `HIDDEN' Tasks"
+#~ msgstr "Totes les tasques"
+
+#, fuzzy
+#~ msgid "Show `SHADED' Tasks"
+#~ msgstr "Totes les tasques"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Avançades"
+
+#, fuzzy
+#~ msgid "Show normal tasks"
+#~ msgstr "Només tasques normals"
+
+#, fuzzy
+#~ msgid "Show iconified tasks"
+#~ msgstr "Només tasques minimitzades"
+
+#, fuzzy
+#~ msgid "Normal tasks appear on all desktops"
+#~ msgstr "Totes les tasques de tots els escriptoris"
+
+#, fuzzy
+#~ msgid "Iconified tasks appear on all desktops"
+#~ msgstr "Tasques minimitzades de tots els escriptoris"
+
+#, fuzzy
+#~ msgid "Appearance"
+#~ msgstr "Aparença de l'applet"
+
+#, fuzzy
+#~ msgid "General behavior"
+#~ msgstr "General"

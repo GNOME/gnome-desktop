@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core STABLE 1.0.50\n"
-"POT-Creation-Date: 1999-11-01 21:15+0100\n"
+"POT-Creation-Date: 1999-11-05 21:34+0100\n"
 "PO-Revision-Date: 1999-10-02 23:55+02:00\n"
 "Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
@@ -158,7 +158,7 @@ msgstr "Et analogt ur i stil med det i CDE panelet"
 
 #: applets/another_clock/another_clock.c:614 applets/asclock/asclock.c:601
 #: applets/charpick/charpick.c:440 applets/clockmail/clockmail.c:528
-#: applets/desk-guide/deskguide_applet.c:207 applets/diskusage/diskusage.c:711
+#: applets/desk-guide/deskguide_applet.c:241 applets/diskusage/diskusage.c:711
 #: applets/drivemount/drivemount.c:512
 #: applets/esd-manager/esdmanager_applet.c:87 applets/fish/fish.c:539
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
@@ -168,21 +168,21 @@ msgstr "Et analogt ur i stil med det i CDE panelet"
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/tasklist/tasklist_applet.c:669 applets/webcontrol/webcontrol.c:315
+#: applets/tasklist/tasklist_applet.c:689 applets/webcontrol/webcontrol.c:315
 #: panel/drawer.c:375 panel/launcher.c:355 panel/menu.c:947 panel/menu.c:3646
 msgid "Properties..."
 msgstr "Egenskaber..."
 
 #: applets/another_clock/another_clock.c:620 applets/battery/battery.c:785
 #: applets/charpick/charpick.c:433 applets/clockmail/clockmail.c:535
-#: applets/desk-guide/deskguide_applet.c:201 applets/dialer/dialer.c:162
+#: applets/desk-guide/deskguide_applet.c:235 applets/dialer/dialer.c:162
 #: applets/drivemount/drivemount.c:518
 #: applets/esd-manager/esdmanager_applet.c:80 applets/fifteen/fifteen.c:309
 #: applets/fish/fish.c:531 applets/fvwm-pager/fvwm-pager.c:406
 #: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
 #: applets/gnome-pager/gnomepager_applet.c:1588 applets/jbc/jbc-applet.c:144
 #: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:663
+#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:683
 #: applets/webcontrol/webcontrol.c:307 panel/menu.c:2602
 msgid "About..."
 msgstr "Om..."
@@ -531,131 +531,182 @@ msgstr "Temafil (mappe):"
 msgid "Theme"
 msgstr "Tema"
 
-#. Tooltips frame
-#: applets/desk-guide/deskguide_applet.c:61 panel/panel_config_global.c:408
-msgid "Tooltips"
-msgstr "Værktøjstips"
+#: applets/desk-guide/deskguide_applet.c:70 applets/slashapp/properties.c:422
+#: applets/tasklist/tasklist_properties.c:270
+msgid "Display"
+msgstr "Vis"
 
-#: applets/desk-guide/deskguide_applet.c:63
-msgid "Enable Desktop Names"
-msgstr "Slå skrivebordsnavne til"
-
-#: applets/desk-guide/deskguide_applet.c:65
-msgid "Desktop Name Popup Delay [ms]"
-msgstr "Skrivebordsnavn popop forsinkelses [ms]"
-
-#: applets/desk-guide/deskguide_applet.c:67
-msgid "Enable Tooltips"
-msgstr "Slå værktøjstips til"
-
-#: applets/desk-guide/deskguide_applet.c:69
-msgid "Tooltips Delay [ms]"
-msgstr "Værktøjstipsforsinkelse [ms]"
-
-#: applets/desk-guide/deskguide_applet.c:70
+#: applets/desk-guide/deskguide_applet.c:71
 msgid "Layout"
 msgstr "Udseende"
 
-#: applets/desk-guide/deskguide_applet.c:72
-msgid "Switch Arrow"
+#: applets/desk-guide/deskguide_applet.c:73
+#, fuzzy
+msgid "Switch tasklist arrow"
 msgstr "Ombyt pil"
 
-#: applets/desk-guide/deskguide_applet.c:74
-msgid "Show only current Desktop"
-msgstr "Vis kun nuværende opsætning"
-
-#: applets/desk-guide/deskguide_applet.c:76
-msgid "Show Desktop Pager"
+#: applets/desk-guide/deskguide_applet.c:75
+#, fuzzy
+msgid "Show desktop pager"
 msgstr "Vis skærmoversigt"
 
-#: applets/desk-guide/deskguide_applet.c:78
+#: applets/desk-guide/deskguide_applet.c:77
+#, fuzzy
+msgid "Only show current desktop in pager"
+msgstr "Vis kun nuværende opsætning"
+
+#: applets/desk-guide/deskguide_applet.c:79
+#, fuzzy
+msgid "Raise area grid over tasks"
+msgstr "Fremhæv arealgitter over opgaver"
+
+#. Tooltips frame
+#: applets/desk-guide/deskguide_applet.c:80 panel/panel_config_global.c:408
+msgid "Tooltips"
+msgstr "Værktøjstips"
+
+#: applets/desk-guide/deskguide_applet.c:82
+#, fuzzy
+msgid "Show Desk-Guide tooltips"
+msgstr "Skrivebordsguides indstillinger"
+
+#: applets/desk-guide/deskguide_applet.c:84
+#, fuzzy
+msgid "Desk-Guide tooltip delay [ms]"
+msgstr "Værktøjstipsforsinkelse [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:86
+#, fuzzy
+msgid "Show desktop name tooltips"
+msgstr "Vis skærmoversigt"
+
+#: applets/desk-guide/deskguide_applet.c:88
+#, fuzzy
+msgid "Desktop name tooltip delay [ms]"
+msgstr "Skrivebordsnavn popop forsinkelses [ms]"
+
+#: applets/desk-guide/deskguide_applet.c:90
 msgid "Tasks"
 msgstr "Opgaveliste"
 
-#: applets/desk-guide/deskguide_applet.c:79
+#: applets/desk-guide/deskguide_applet.c:91
 msgid "Visibility"
 msgstr "Synlighed"
 
-#: applets/desk-guide/deskguide_applet.c:81
-msgid "Show `HIDDEN' Tasks"
-msgstr "Vis 'SKJULTE' opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:83
-msgid "Show `SHADED' Tasks"
-msgstr "Vis 'OPRULLEDE' opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:85
-msgid "Show `SKIP-WINLIST' Tasks"
-msgstr "Vis 'UDELAD-I-WINLISTE' opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:87
-msgid "Show `SKIP-TASKBAR' Tasks"
-msgstr "Vis 'UDELAD-I-OPGAVELINIE' opgaver"
-
-#: applets/desk-guide/deskguide_applet.c:88
-msgid "Cosmetics"
-msgstr "Kosmetik"
-
-#: applets/desk-guide/deskguide_applet.c:90
-msgid "Raise Area Grid Above Tasks"
-msgstr "Fremhæv arealgitter over opgaver"
-
-#. CONFIG_SECTION ("", NULL),
 #: applets/desk-guide/deskguide_applet.c:93
+msgid "Show hidden tasks (HIDDEN)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:95
+#, fuzzy
+msgid "Show shaded tasks (SHADED)"
+msgstr "Vis alle opgaver"
+
+#: applets/desk-guide/deskguide_applet.c:97
+msgid "Show tasks which hide from window list (SKIP-WINLIST)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:99
+msgid "Show tasks which hide from taskbar (SKIP-TASKBAR)"
+msgstr ""
+
+#. CONFIG_SECTION (sect_null_1, NULL),
+#: applets/desk-guide/deskguide_applet.c:102
 #: applets/gnome-pager/gnomepager_applet.c:401
-#: applets/tasklist/tasklist_properties.c:248
 msgid "Geometry"
 msgstr "Geometri"
 
-#: applets/desk-guide/deskguide_applet.c:94
+#: applets/desk-guide/deskguide_applet.c:103
 msgid "Horizontal Layout"
 msgstr "Vandret udseende"
 
-#: applets/desk-guide/deskguide_applet.c:96
+#: applets/desk-guide/deskguide_applet.c:105
 msgid "Desktop Height [pixels]"
 msgstr "Skrivebordshøjde [pixler]"
 
-#: applets/desk-guide/deskguide_applet.c:98
-msgid "Divide Height By Number Of Vertical Areas"
+#: applets/desk-guide/deskguide_applet.c:111
+#, fuzzy
+msgid "Divide height by number of vertical areas"
 msgstr "Divider højde med antal lodrette arealer"
 
-#: applets/desk-guide/deskguide_applet.c:99
+#: applets/desk-guide/deskguide_applet.c:113
+#, fuzzy
+msgid "Rows of Desktops"
+msgstr "Antal oversigtsrækker"
+
+#: applets/desk-guide/deskguide_applet.c:115
+#, fuzzy
+msgid "Divide height by number of rows"
+msgstr "Divider højde med antal lodrette arealer"
+
+#: applets/desk-guide/deskguide_applet.c:116
 msgid "Vertical Layout"
 msgstr "Lodret udseende"
 
-#: applets/desk-guide/deskguide_applet.c:101
-msgid "Desktop width [pixels]"
+#: applets/desk-guide/deskguide_applet.c:118
+#, fuzzy
+msgid "Desktop Width [pixels]"
 msgstr "Skrivebordsbredde [pixler]"
 
-#: applets/desk-guide/deskguide_applet.c:103
-msgid "Divide Width By Number Of Horizontal Areas"
+#: applets/desk-guide/deskguide_applet.c:124
+#, fuzzy
+msgid "Divide width by number of horizontal areas"
 msgstr "Divider bredde med antal vandrette arealer"
 
-#: applets/desk-guide/deskguide_applet.c:105
-msgid "Advanced Options"
-msgstr "Advancerede indstillinger"
+#: applets/desk-guide/deskguide_applet.c:126
+msgid "Columns of Desktops"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:107
-msgid "Draw Desktops Double Buffered"
+#: applets/desk-guide/deskguide_applet.c:128
+#, fuzzy
+msgid "Divide width by number of columns"
+msgstr "Divider bredde med antal vandrette arealer"
+
+#: applets/desk-guide/deskguide_applet.c:130
+#: applets/modemlights/properties.c:308
+msgid "Advanced"
+msgstr "Advanceret"
+
+#: applets/desk-guide/deskguide_applet.c:131
+#, fuzzy
+msgid "Drawing"
+msgstr "Skuffeikon"
+
+#: applets/desk-guide/deskguide_applet.c:133
+#, fuzzy
+msgid "Draw desktops double-buffered (recommended)"
 msgstr "Tegn skriveborde dobbelt bufferet"
 
-#: applets/desk-guide/deskguide_applet.c:108
-msgid "Bug Fixes"
-msgstr "Fejlretninger"
+#: applets/desk-guide/deskguide_applet.c:134
+msgid "Window Manager Workarounds"
+msgstr ""
 
-#: applets/desk-guide/deskguide_applet.c:110
+#: applets/desk-guide/deskguide_applet.c:136
+#, fuzzy
 msgid ""
-"Window Manager Moves Decoration Window Instead\n"
-"(AfterStep, Enlightenment, FVWM, IceWM)"
+"Window manager moves decoration window instead\n"
+"(AfterStep, Enlightenment, FVWM, IceWM, SawMill)"
 msgstr ""
 "Vindueshåndteringen flytter vinduesdekorationer istedet\n"
 "(AfterStep, Enlightenment, FVWM, IceWM)"
 
-#: applets/desk-guide/deskguide_applet.c:140
+#: applets/desk-guide/deskguide_applet.c:139
+msgid ""
+"Window manager changes active area on all desktops\n"
+"(FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:142
+msgid ""
+"Window manager expects pager to modify area+desktop properties directly\n"
+"(Enlightenment, FVWM, SawMill)"
+msgstr ""
+
+#: applets/desk-guide/deskguide_applet.c:172
 msgid "GNOME Desktop Guide (Pager)"
 msgstr "GNOME Skrivebordsguide (Pager)"
 
-#: applets/desk-guide/deskguide_applet.c:156
+#: applets/desk-guide/deskguide_applet.c:188
 msgid ""
 "You are not running a GNOME Compliant\n"
 "Window Manager. GNOME support by the \n"
@@ -667,15 +718,15 @@ msgstr ""
 "vindueshåndteringen er stærkt anbefalet hvis\n"
 "skrivebordsguiden skal virke ordentligt."
 
-#: applets/desk-guide/deskguide_applet.c:161
+#: applets/desk-guide/deskguide_applet.c:193
 msgid "Desk Guide Alert"
 msgstr "Skrivebordsguide advarsel"
 
-#: applets/desk-guide/deskguide_applet.c:835
+#: applets/desk-guide/deskguide_applet.c:943
 msgid "Global"
 msgstr "Global"
 
-#: applets/desk-guide/deskguide_applet.c:892
+#: applets/desk-guide/deskguide_applet.c:998
 msgid "Desk Guide Settings"
 msgstr "Skrivebordsguides indstillinger"
 
@@ -1211,7 +1262,7 @@ msgstr "Vis knapikoner"
 
 #. Radio buttons for which tasks to show
 #: applets/gnome-pager/gnomepager_applet.c:353
-#: applets/tasklist/tasklist_properties.c:259
+#: applets/tasklist/tasklist_properties.c:233
 msgid "Which tasks to show"
 msgstr "Hvilke opgaver skal vises"
 
@@ -1465,6 +1516,7 @@ msgstr "Vis tid"
 
 #. Size
 #: applets/mini-commander/src/preferences.c:487
+#: applets/tasklist/tasklist_properties.c:220
 msgid "Size"
 msgstr "Størrelse"
 
@@ -1613,10 +1665,6 @@ msgstr "Enhed:"
 #: applets/modemlights/properties.c:294
 msgid "Use ISDN"
 msgstr "Brug ISDN"
-
-#: applets/modemlights/properties.c:308
-msgid "Advanced"
-msgstr "Advanceret"
 
 #: applets/multiload/cpuload.c:47 applets/multiload/main.c:151
 msgid "CPU Load"
@@ -1791,10 +1839,6 @@ msgstr "Forsinkelse ved tekstombrydning:"
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "Rullehastighed mellem linjer (Blødrul):"
 
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "Vis"
-
 #: applets/slashapp/slashapp.c:152
 msgid "No articles"
 msgstr "Ingen artikler"
@@ -1857,128 +1901,125 @@ msgstr "Vis artikelliste"
 msgid "Refresh articles"
 msgstr "Genopfrisk artikler"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Iconify"
 msgstr "Ikonificér"
 
-#: applets/tasklist/tasklist_menu.c:177
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Restore"
 msgstr "Gendan"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Shade"
 msgstr "Rul op"
 
-#: applets/tasklist/tasklist_menu.c:183
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Unshade"
 msgstr "Rul ned"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Stick"
 msgstr "Klæb"
 
-#: applets/tasklist/tasklist_menu.c:189
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Unstick"
 msgstr "Klæb ikke"
 
-#: applets/tasklist/tasklist_menu.c:196
+#: applets/tasklist/tasklist_menu.c:201
 msgid "To desktop"
 msgstr "Til skrivebord"
 
-#: applets/tasklist/tasklist_menu.c:235
+#: applets/tasklist/tasklist_menu.c:240
 msgid "Close window"
 msgstr "Luk vindue"
 
-#: applets/tasklist/tasklist_menu.c:242
+#: applets/tasklist/tasklist_menu.c:247
 msgid "Kill app"
 msgstr "Dræb"
 
 #. Horizontal
-#: applets/tasklist/tasklist_properties.c:173 panel/panel_config.c:548
+#: applets/tasklist/tasklist_properties.c:144 panel/panel_config.c:548
 msgid "Horizontal"
 msgstr "Vandret"
 
-#: applets/tasklist/tasklist_properties.c:181
-#: applets/tasklist/tasklist_properties.c:229
+#: applets/tasklist/tasklist_properties.c:152
+#: applets/tasklist/tasklist_properties.c:201
 msgid "Tasklist width:"
 msgstr "Opgavelistebredde"
 
-#: applets/tasklist/tasklist_properties.c:188
-msgid "Number of rows:"
-msgstr "Nummer af rækker:"
+#: applets/tasklist/tasklist_properties.c:159
+#, fuzzy
+msgid "Rows of tasks:"
+msgstr "Antal oversigtsrækker"
 
-#: applets/tasklist/tasklist_properties.c:196
-msgid "Fixed tasklist width"
-msgstr "Fast opgavelistebredde"
-
-#: applets/tasklist/tasklist_properties.c:200
-msgid "Dynamic tasklist width"
-msgstr "Dynamisk opgavelistebredde"
-
-#: applets/tasklist/tasklist_properties.c:205
-msgid "Default task width:"
+#: applets/tasklist/tasklist_properties.c:167
+#, fuzzy
+msgid "Default task size:"
 msgstr "Standard opgavebredde"
 
-#: applets/tasklist/tasklist_properties.c:214 panel/panel_config.c:560
+#: applets/tasklist/tasklist_properties.c:176
+#, fuzzy
+msgid "Tasklist width is fixed"
+msgstr "Opgavelistebredde"
+
+#: applets/tasklist/tasklist_properties.c:180
+#, fuzzy
+msgid "Tasklist width is dynamic"
+msgstr "Opgavelistebredde"
+
+#: applets/tasklist/tasklist_properties.c:186 panel/panel_config.c:560
 msgid "Vertical"
 msgstr "Lodret"
 
-#: applets/tasklist/tasklist_properties.c:221
+#: applets/tasklist/tasklist_properties.c:193
 msgid "Tasklist height:"
 msgstr "Opgavelistehøjde:"
 
-#: applets/tasklist/tasklist_properties.c:237
-msgid "Fixed tasklist height"
-msgstr "Fast opgavelistehøjde"
+#: applets/tasklist/tasklist_properties.c:209
+#, fuzzy
+msgid "Tasklist height is fixed"
+msgstr "Opgavelistehøjde:"
+
+#: applets/tasklist/tasklist_properties.c:213
+#, fuzzy
+msgid "Tasklist height is dynamic"
+msgstr "Opgavelistehøjde:"
 
 #: applets/tasklist/tasklist_properties.c:241
-msgid "Dynamic tasklist height"
-msgstr "Dynamisk opgavelistehøjde"
+#, fuzzy
+msgid "Show normal applications"
+msgstr "Vis små ikoner"
 
-#: applets/tasklist/tasklist_properties.c:267
-msgid "Show normal tasks"
-msgstr "Vis normale opgaver"
+#: applets/tasklist/tasklist_properties.c:244
+msgid "Show iconified (minimized) applications"
+msgstr ""
 
-#: applets/tasklist/tasklist_properties.c:270
-msgid "Show iconified tasks"
-msgstr "Vis minimerede opgaver"
+#: applets/tasklist/tasklist_properties.c:248
+#, fuzzy
+msgid "Show normal applications on all desktops"
+msgstr "Vis alle opgaver på alle skriveborde"
 
-#: applets/tasklist/tasklist_properties.c:274
-msgid "Normal tasks appear on all desktops"
-msgstr "Normale opgaver ses på alle skriveborde"
-
-#: applets/tasklist/tasklist_properties.c:277
-msgid "Iconified tasks appear on all desktops"
-msgstr "Minimerede opgaver ses på alle skriveborde"
+#: applets/tasklist/tasklist_properties.c:251
+#, fuzzy
+msgid "Show iconified (minimized) applications on all desktops"
+msgstr "Vis minimerede opgaver på alle skriveborde"
 
 #. Miscellaneous frame
-#: applets/tasklist/tasklist_properties.c:280 help-browser/toc-man.c:25
+#: applets/tasklist/tasklist_properties.c:254 help-browser/toc-man.c:25
 #: help-browser/toc2-man.c:27 panel/panel_config_global.c:503
 #: panel/panel_config_global.c:623
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: applets/tasklist/tasklist_properties.c:288
+#: applets/tasklist/tasklist_properties.c:262
 msgid "Show mini icons"
 msgstr "Vis små ikoner"
 
-#: applets/tasklist/tasklist_properties.c:292
-msgid "Appearance"
-msgstr "Udseende"
-
-#: applets/tasklist/tasklist_properties.c:300
-msgid "General behavior"
-msgstr "Generel opførsel"
-
-#: applets/tasklist/tasklist_properties.c:307
+#: applets/tasklist/tasklist_properties.c:265
 msgid "Confirm before killing windows"
 msgstr "Bekræft før dræbning af vinduer"
 
-#: applets/tasklist/tasklist_properties.c:311
-msgid "Behavior"
-msgstr "Opførsel"
-
-#: applets/tasklist/tasklist_properties.c:324
+#: applets/tasklist/tasklist_properties.c:282
 msgid "Tasklist properties"
 msgstr "Opgaveliste egenskaber"
 
@@ -2265,7 +2306,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "GNOME terminalemuleringsprogram."
 
 #: gnome-terminal/gnome-terminal.c:563 gnome-terminal/gnome-terminal.c:1105
-#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2223
+#: gnome-terminal/gnome-terminal.c:1115 gnome-terminal/gnome-terminal.c:2226
 msgid "Default"
 msgstr "Standard"
 
@@ -2507,12 +2548,12 @@ msgstr "Rediger"
 msgid "Settings"
 msgstr "Opsætning"
 
-#: gnome-terminal/gnome-terminal.c:1921
+#: gnome-terminal/gnome-terminal.c:1924
 #, c-format
 msgid "The error was: %s"
 msgstr "Fejlen var: %s"
 
-#: gnome-terminal/gnome-terminal.c:1922
+#: gnome-terminal/gnome-terminal.c:1925
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -2526,7 +2567,7 @@ msgstr ""
 "Læs venligst linux/Documentation/Changes for at\n"
 "finde ud af, hvordan de opsættes korrekt."
 
-#: gnome-terminal/gnome-terminal.c:1927
+#: gnome-terminal/gnome-terminal.c:1930
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -2537,107 +2578,107 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "TCLASS"
 msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2405
+#: gnome-terminal/gnome-terminal.c:2408
 msgid "Terminal class name"
 msgstr "Navn på terminalklasse"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "FONT"
 msgstr "FONT"
 
-#: gnome-terminal/gnome-terminal.c:2408
+#: gnome-terminal/gnome-terminal.c:2411
 msgid "Specifies font name"
 msgstr "Angiver navn på skrifttypen"
 
-#: gnome-terminal/gnome-terminal.c:2411
+#: gnome-terminal/gnome-terminal.c:2414
 msgid "Do not start up shells as login shells"
 msgstr "Start ikke kommandoskallen som logindskal"
 
-#: gnome-terminal/gnome-terminal.c:2414
+#: gnome-terminal/gnome-terminal.c:2417
 msgid "Start up shells as login shells"
 msgstr "Start kommandoskallen som logindskal"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: gnome-terminal/gnome-terminal.c:2417
+#: gnome-terminal/gnome-terminal.c:2420
 msgid "Specifies the geometry for the main window"
 msgstr "Specificerer geometri for hovedvinduet"
 
-#: gnome-terminal/gnome-terminal.c:2420 gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2423 gnome-terminal/gnome-terminal.c:2426
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: gnome-terminal/gnome-terminal.c:2420
+#: gnome-terminal/gnome-terminal.c:2423
 msgid "Execute this program instead of a shell"
 msgstr "Kør dette program i stedet for en skal"
 
-#: gnome-terminal/gnome-terminal.c:2423
+#: gnome-terminal/gnome-terminal.c:2426
 msgid "Execute this program the same way as xterm does"
 msgstr "Kør dette program ligesom en xterm ville gøre"
 
-#: gnome-terminal/gnome-terminal.c:2426 gnome-terminal/gnome-terminal.c:2429
+#: gnome-terminal/gnome-terminal.c:2429 gnome-terminal/gnome-terminal.c:2432
 msgid "COLOR"
 msgstr "COLOR"
 
-#: gnome-terminal/gnome-terminal.c:2426
+#: gnome-terminal/gnome-terminal.c:2429
 msgid "Foreground color"
 msgstr "Forgrundsfarve"
 
-#: gnome-terminal/gnome-terminal.c:2429 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2432 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Baggrundsfarve"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2432
+#: gnome-terminal/gnome-terminal.c:2435
 msgid "Update utmp entry"
 msgstr "Opdater utmp punkt"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "Do not update utmp entry"
 msgstr "Opdater ikke utmp punkt"
 
-#: gnome-terminal/gnome-terminal.c:2435
+#: gnome-terminal/gnome-terminal.c:2438
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "Update wtmp entry"
 msgstr "Opdater wtmp punkt"
 
-#: gnome-terminal/gnome-terminal.c:2438
+#: gnome-terminal/gnome-terminal.c:2441
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "Do not update wtmp entry"
 msgstr "Opdater ikke utmp/wtmp punkter"
 
-#: gnome-terminal/gnome-terminal.c:2441
+#: gnome-terminal/gnome-terminal.c:2444
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "Set the window title"
 msgstr "Sæt vinduestitel"
 
-#: gnome-terminal/gnome-terminal.c:2444
+#: gnome-terminal/gnome-terminal.c:2447
 msgid "TITLE"
 msgstr "TITLE"
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "Set the TERM variable"
 msgstr "Sæt TERM variablen"
 
-#: gnome-terminal/gnome-terminal.c:2447
+#: gnome-terminal/gnome-terminal.c:2450
 msgid "TERMNAME"
 msgstr "TERMNAME"
 
@@ -3664,116 +3705,139 @@ msgstr "Kommando (valgfri)"
 msgid "Height"
 msgstr "Højde"
 
-#~ msgid "Favorites: "
-#~ msgstr "Favoritter: "
+#~ msgid "Rotate on vertical panels"
+#~ msgstr "Roter på lodrette paneler"
 
-#~ msgid "Programs: "
-#~ msgstr "Programmer: "
+#~ msgid "%A, %B %d"
+#~ msgstr "%A, %B %d"
 
-#~ msgid "Right click on the panel to get a menu"
-#~ msgstr "Højreklik på panelet for at få en menu"
+#~ msgid ""
+#~ "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
+#~ "wrong server/username/password?"
+#~ msgstr ""
+#~ "Remote-client-error occured. Remote-polling deaktiveret. Du har måske brugt "
+#~ "forkert server/brugernavn/afgangskode?"
 
-#~ msgid "Show this dialog on startup"
-#~ msgstr "Vis denne dialog ved opstart"
+#~ msgid "Mailbox resides on:"
+#~ msgstr "Postkassen befinder sig på:"
 
-#~ msgid "Show another hint"
-#~ msgstr "Vis et nyt tip"
+#~ msgid "Local mailspool"
+#~ msgstr "Lokal postspole"
 
-#~ msgid "Panel hint"
-#~ msgstr "Panel tip"
+#~ msgid "Local maildir"
+#~ msgstr "Lokal postmappe"
 
-#~ msgid "Miscellaneous icon"
-#~ msgstr "Forskellige ikoner"
+#~ msgid "Remote POP3-server"
+#~ msgstr "Fjern POP3-server"
 
-#~ msgid "Show hints on panel startup"
-#~ msgstr "Vis tips ved panelopstart"
+#~ msgid "Remote IMAP-server"
+#~ msgstr "Fjern IMAP-server"
 
-#~ msgid "Push movement (or use Shift)"
-#~ msgstr "Skubbe bevægelse (eller brug Skift)"
+#~ msgid "Mail server:"
+#~ msgstr "Postserver:"
 
-#~ msgid "Default movement mode"
-#~ msgstr "Standard bevægelsesmode"
+#~ msgid "Password:"
+#~ msgstr "Adgangskode:"
 
-#~ msgid "Huge (80 pixels)"
-#~ msgstr "Kæmpe (80 pixels)"
+#~ msgid "minutes"
+#~ msgstr ". minut"
 
-#~ msgid "Large (64 pixels)"
-#~ msgstr "Stor (64 pixels)"
+#~ msgid "seconds"
+#~ msgstr ". sekund"
 
-#~ msgid "Standard (48 pixels)"
-#~ msgstr "Standard (48 pixels)"
+#~ msgid "Play a sound when new mail arrives"
+#~ msgstr "Afspil en lyd når der er ny post"
 
-#~ msgid "Tiny (24 pixels)"
-#~ msgstr "Lille (24 pixels)"
+#~ msgid "Minimize"
+#~ msgstr "Minimer"
 
-#~ msgid "Panel size"
-#~ msgstr "Panelstørrelse"
+#~ msgid "Looking up internet address for %s"
+#~ msgstr "Slåer internet adresse for %s op"
 
-#~ msgid "Right / Bottom"
-#~ msgstr "Højre / Nederst"
+#~ msgid "Hide"
+#~ msgstr "Skjul"
 
-#~ msgid "Center"
-#~ msgstr "Center"
+#~ msgid "GNOME Login"
+#~ msgstr "GNOME logind"
 
-#~ msgid "Left / Top"
-#~ msgstr "Venstre / Top"
+#~ msgid "Login"
+#~ msgstr "Logind"
 
-#~ msgid "Alignment"
-#~ msgstr "Justering"
+#~ msgid "Reset all user settings"
+#~ msgstr "Nulstil alle brugerindstillinger"
 
-#~ msgid "Edge"
-#~ msgstr "Kant"
+#~ msgid "Really reset all GNOME user settings for %s?"
+#~ msgstr "Virkelig nulstille alle GNOME brugerindstillinger for %s?"
 
-#~ msgid "Edit menus..."
-#~ msgstr "Rediger menuer..."
+#~ msgid "Try again"
+#~ msgstr "Prøv igen"
 
-#~ msgid "Panel..."
-#~ msgstr "Panel..."
+#~ msgid "Order: "
+#~ msgstr "Orden: "
 
-#~ msgid "Add to panel"
-#~ msgstr "Tilføj til panel"
+#~ msgid "Style: "
+#~ msgstr "Stil: "
 
-#~ msgid "Lock button"
-#~ msgstr "Lås knap"
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr ""
+#~ "Denne kolonne angiver kommandoen der bruges til at starte et program."
 
-#~ msgid "Launcher"
-#~ msgstr "Genvej"
+#~ msgid "Style"
+#~ msgstr "Stil"
 
-#~ msgid "Hide buttons"
-#~ msgstr "Skjul knapper"
+#~ msgid "State"
+#~ msgstr "Stadie"
 
-#~ msgid "Hiding policy"
-#~ msgstr "Gemningspolitik"
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
 
-#~ msgid "Type"
-#~ msgstr "Type"
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Venter på at starte eller er allerede færdig."
 
-#~ msgid "Favorites"
-#~ msgstr "Farvoritter"
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Startet men har endnu ikke rapporteret status."
 
-#~ msgid "Programs"
-#~ msgstr "Programmer"
+#~ msgid "Running"
+#~ msgstr "Kører"
 
-#~ msgid "Sliding panel"
-#~ msgstr "Glidende panel"
+#~ msgid "A normal member of the session."
+#~ msgstr "Et normalt medlem af sessionen."
 
-#~ msgid "Add new item to this menu"
-#~ msgstr "Tilføj nyt element til denne menu"
+#~ msgid "Saving"
+#~ msgstr "Gemmer"
 
-#~ msgid "Remove this item"
-#~ msgstr "Fjern dette element"
+#~ msgid "Saving session details."
+#~ msgstr "Gemmer sessionsdetaljer"
 
-#~ msgid "Could not rename tmp file %s"
-#~ msgstr "Kunne ikke omdøbe tmp fil %s"
+#~ msgid "Unknown"
+#~ msgstr "Ukendt"
 
-#~ msgid "Could not get file name from path: %s"
-#~ msgstr "Kunne ikke finde filnavn i sti: %s"
+#~ msgid "State not reported within timeout."
+#~ msgstr "Status ikke rapporteret inden timeout."
 
-#~ msgid "Could not remove the menu item %s: %s\n"
-#~ msgstr "Kunne ikke fjerne menu punkt %s: %s\n"
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
-#~ msgid "Create menu item"
-#~ msgstr "Opret menu punkt"
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Upåvirket af logud men kan dø."
+
+#~ msgid "Respawn"
+#~ msgstr "Gendan"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Må aldrig dø."
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Forkastes ved logud og må gerne dø."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Start altid ved hvert logind"
+
+#~ msgid "Remove Program"
+#~ msgstr "Fjern program"
+
+#~ msgid "Ask next time"
+#~ msgstr "Spørg næste gang"
 
 #~ msgid ""
 #~ "Error loading document:\n"
@@ -3784,136 +3848,176 @@ msgstr "Højde"
 #~ "\n"
 #~ "%s"
 
-#~ msgid "Ask next time"
-#~ msgstr "Spørg næste gang"
+#~ msgid "Create menu item"
+#~ msgstr "Opret menu punkt"
 
-#~ msgid "Remove Program"
-#~ msgstr "Fjern program"
+#~ msgid "Could not remove the menu item %s: %s\n"
+#~ msgstr "Kunne ikke fjerne menu punkt %s: %s\n"
 
-#~ msgid "Always started on every login."
-#~ msgstr "Start altid ved hvert logind"
+#~ msgid "Could not get file name from path: %s"
+#~ msgstr "Kunne ikke finde filnavn i sti: %s"
 
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Forkastes ved logud og må gerne dø."
+#~ msgid "Could not rename tmp file %s"
+#~ msgstr "Kunne ikke omdøbe tmp fil %s"
 
-#~ msgid "Never allowed to die."
-#~ msgstr "Må aldrig dø."
+#~ msgid "Remove this item"
+#~ msgstr "Fjern dette element"
 
-#~ msgid "Respawn"
-#~ msgstr "Gendan"
+#~ msgid "Add new item to this menu"
+#~ msgstr "Tilføj nyt element til denne menu"
 
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Upåvirket af logud men kan dø."
+#~ msgid "Sliding panel"
+#~ msgstr "Glidende panel"
 
-#~ msgid "Normal"
-#~ msgstr "Normal"
+#~ msgid "Programs"
+#~ msgstr "Programmer"
 
-#~ msgid "State not reported within timeout."
-#~ msgstr "Status ikke rapporteret inden timeout."
+#~ msgid "Favorites"
+#~ msgstr "Farvoritter"
 
-#~ msgid "Unknown"
-#~ msgstr "Ukendt"
+#~ msgid "Type"
+#~ msgstr "Type"
 
-#~ msgid "Saving session details."
-#~ msgstr "Gemmer sessionsdetaljer"
+#~ msgid "Hiding policy"
+#~ msgstr "Gemningspolitik"
 
-#~ msgid "Saving"
-#~ msgstr "Gemmer"
+#~ msgid "Hide buttons"
+#~ msgstr "Skjul knapper"
 
-#~ msgid "A normal member of the session."
-#~ msgstr "Et normalt medlem af sessionen."
+#~ msgid "Launcher"
+#~ msgstr "Genvej"
 
-#~ msgid "Running"
-#~ msgstr "Kører"
+#~ msgid "Lock button"
+#~ msgstr "Lås knap"
 
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Startet men har endnu ikke rapporteret status."
+#~ msgid "Add to panel"
+#~ msgstr "Tilføj til panel"
 
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Venter på at starte eller er allerede færdig."
+#~ msgid "Panel..."
+#~ msgstr "Panel..."
 
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
+#~ msgid "Edit menus..."
+#~ msgstr "Rediger menuer..."
 
-#~ msgid "State"
-#~ msgstr "Stadie"
+#~ msgid "Edge"
+#~ msgstr "Kant"
 
-#~ msgid "Style"
-#~ msgstr "Stil"
+#~ msgid "Alignment"
+#~ msgstr "Justering"
 
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr ""
-#~ "Denne kolonne angiver kommandoen der bruges til at starte et program."
+#~ msgid "Left / Top"
+#~ msgstr "Venstre / Top"
 
-#~ msgid "Style: "
-#~ msgstr "Stil: "
+#~ msgid "Center"
+#~ msgstr "Center"
 
-#~ msgid "Order: "
-#~ msgstr "Orden: "
+#~ msgid "Right / Bottom"
+#~ msgstr "Højre / Nederst"
 
-#~ msgid "Try again"
-#~ msgstr "Prøv igen"
+#~ msgid "Panel size"
+#~ msgstr "Panelstørrelse"
 
-#~ msgid "Really reset all GNOME user settings for %s?"
-#~ msgstr "Virkelig nulstille alle GNOME brugerindstillinger for %s?"
+#~ msgid "Tiny (24 pixels)"
+#~ msgstr "Lille (24 pixels)"
 
-#~ msgid "Reset all user settings"
-#~ msgstr "Nulstil alle brugerindstillinger"
+#~ msgid "Standard (48 pixels)"
+#~ msgstr "Standard (48 pixels)"
 
-#~ msgid "Login"
-#~ msgstr "Logind"
+#~ msgid "Large (64 pixels)"
+#~ msgstr "Stor (64 pixels)"
 
-#~ msgid "GNOME Login"
-#~ msgstr "GNOME logind"
+#~ msgid "Huge (80 pixels)"
+#~ msgstr "Kæmpe (80 pixels)"
 
-#~ msgid "Hide"
-#~ msgstr "Skjul"
+#~ msgid "Default movement mode"
+#~ msgstr "Standard bevægelsesmode"
 
-#~ msgid "Looking up internet address for %s"
-#~ msgstr "Slåer internet adresse for %s op"
+#~ msgid "Push movement (or use Shift)"
+#~ msgstr "Skubbe bevægelse (eller brug Skift)"
 
-#~ msgid "Minimize"
-#~ msgstr "Minimer"
+#~ msgid "Show hints on panel startup"
+#~ msgstr "Vis tips ved panelopstart"
 
-#~ msgid "Play a sound when new mail arrives"
-#~ msgstr "Afspil en lyd når der er ny post"
+#~ msgid "Miscellaneous icon"
+#~ msgstr "Forskellige ikoner"
 
-#~ msgid "seconds"
-#~ msgstr ". sekund"
+#~ msgid "Panel hint"
+#~ msgstr "Panel tip"
 
-#~ msgid "minutes"
-#~ msgstr ". minut"
+#~ msgid "Show another hint"
+#~ msgstr "Vis et nyt tip"
 
-#~ msgid "Password:"
-#~ msgstr "Adgangskode:"
+#~ msgid "Show this dialog on startup"
+#~ msgstr "Vis denne dialog ved opstart"
 
-#~ msgid "Mail server:"
-#~ msgstr "Postserver:"
+#~ msgid "Right click on the panel to get a menu"
+#~ msgstr "Højreklik på panelet for at få en menu"
 
-#~ msgid "Remote IMAP-server"
-#~ msgstr "Fjern IMAP-server"
+#~ msgid "Programs: "
+#~ msgstr "Programmer: "
 
-#~ msgid "Remote POP3-server"
-#~ msgstr "Fjern POP3-server"
+#~ msgid "Favorites: "
+#~ msgstr "Favoritter: "
 
-#~ msgid "Local maildir"
-#~ msgstr "Lokal postmappe"
+#~ msgid "Enable Desktop Names"
+#~ msgstr "Slå skrivebordsnavne til"
 
-#~ msgid "Local mailspool"
-#~ msgstr "Lokal postspole"
+#~ msgid "Enable Tooltips"
+#~ msgstr "Slå værktøjstips til"
 
-#~ msgid "Mailbox resides on:"
-#~ msgstr "Postkassen befinder sig på:"
+#~ msgid "Show `HIDDEN' Tasks"
+#~ msgstr "Vis 'SKJULTE' opgaver"
 
-#~ msgid ""
-#~ "Remote-client-error occured. Remote-polling deactivated. Maybe you used a "
-#~ "wrong server/username/password?"
-#~ msgstr ""
-#~ "Remote-client-error occured. Remote-polling deaktiveret. Du har måske brugt "
-#~ "forkert server/brugernavn/afgangskode?"
+#~ msgid "Show `SHADED' Tasks"
+#~ msgstr "Vis 'OPRULLEDE' opgaver"
 
-#~ msgid "%A, %B %d"
-#~ msgstr "%A, %B %d"
+#~ msgid "Show `SKIP-WINLIST' Tasks"
+#~ msgstr "Vis 'UDELAD-I-WINLISTE' opgaver"
 
-#~ msgid "Rotate on vertical panels"
-#~ msgstr "Roter på lodrette paneler"
+#~ msgid "Show `SKIP-TASKBAR' Tasks"
+#~ msgstr "Vis 'UDELAD-I-OPGAVELINIE' opgaver"
+
+#~ msgid "Cosmetics"
+#~ msgstr "Kosmetik"
+
+#~ msgid "Advanced Options"
+#~ msgstr "Advancerede indstillinger"
+
+#~ msgid "Bug Fixes"
+#~ msgstr "Fejlretninger"
+
+#~ msgid "Number of rows:"
+#~ msgstr "Nummer af rækker:"
+
+#~ msgid "Fixed tasklist width"
+#~ msgstr "Fast opgavelistebredde"
+
+#~ msgid "Dynamic tasklist width"
+#~ msgstr "Dynamisk opgavelistebredde"
+
+#~ msgid "Fixed tasklist height"
+#~ msgstr "Fast opgavelistehøjde"
+
+#~ msgid "Dynamic tasklist height"
+#~ msgstr "Dynamisk opgavelistehøjde"
+
+#~ msgid "Show normal tasks"
+#~ msgstr "Vis normale opgaver"
+
+#~ msgid "Show iconified tasks"
+#~ msgstr "Vis minimerede opgaver"
+
+#~ msgid "Normal tasks appear on all desktops"
+#~ msgstr "Normale opgaver ses på alle skriveborde"
+
+#~ msgid "Iconified tasks appear on all desktops"
+#~ msgstr "Minimerede opgaver ses på alle skriveborde"
+
+#~ msgid "Appearance"
+#~ msgstr "Udseende"
+
+#~ msgid "General behavior"
+#~ msgstr "Generel opførsel"
+
+#~ msgid "Behavior"
+#~ msgstr "Opførsel"
