@@ -182,6 +182,7 @@ static gchar *contributors[] = {
 	"Paolo Maggi",
 	"Sam Magnuson",
 	"Ian Main",
+        "Jordi Mallach",
 	"Mandrake",
 	"Daniel Manrique",
 	"Kjartan Maraas",
