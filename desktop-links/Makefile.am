@@ -1,4 +1,4 @@
-appsdir = $(datadir)/apps
+appsdir = $(datadir)/gnome/apps
 
 Rootdir           = $(appsdir)
 Applicationsdir   = $(appsdir)/Applications
