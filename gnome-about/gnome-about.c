@@ -357,7 +357,7 @@ scroll (gpointer data)
 			    area->allocation.height);
 
 	while (contributors[i]) {
-		totalwidth = gdk_string_width (font, contributors[i]);
+		totalwidth = gdk_string_width (font, _(contributors[i]));
 
 		if(cury > -font->descent &&
 		   cury < area->allocation.height + font->ascent) {
@@ -471,8 +471,8 @@ main (gint argc, gchar *argv[])
 	gtk_widget_realize (window);
 
 	/* Load the fonts */
-	font = gdk_font_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*");
-	italicfont = gdk_font_load("-adobe-helvetica-medium-o-normal--*-120-*-*-*-*-*-*");
+	font = gdk_fontset_load ("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*-r-*");
+	italicfont = gdk_fontset_load("-adobe-helvetica-medium-o-normal--*-120-*-*-*-*-*-*,*-r-*");
 	if (!font)
 		font = window->style->font;
 

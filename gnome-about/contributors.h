@@ -1,9 +1,17 @@
 #include <gnome.h>
 
+/* If your name uses some letters not in 7bit ascii, or a non-lati script;
+ * put your name in ascii enclosed with N_( ) and put a comment before your
+ * line giving some info on how it should be written for languages that
+ * support the proper letters/script for your name. So for example someone
+ * with a name normally written in cyrillic can have it displayed in cyrillic
+ * for those languages supporting it */ 
+
+
 /* Please keep this in alphabetical order */
 static gchar *contributors[] = {
 	N_("GNOME was brought to you by"),
-	"",
+	" ",
 	"Jerome Abela",
 	"Lauri Alanko",
 	"Seth Alves",
@@ -53,7 +61,7 @@ static gchar *contributors[] = {
 	"Gus Estrella",
 	"David Etherton",
 	"Marc Ewing",
-	"Gergõ Érdi",
+	N_("Gergõ Érdi"),
 	"Peter Fales",
 	"Dave Finton",
 	"Milon Firikis",
@@ -153,16 +161,19 @@ static gchar *contributors[] = {
 	"Paolo Molaro",
 	"David Mosberger",
 	"Thomas Muldowney",
-	"Alexandre Muñiz",
-	"Sung-Hyun Nam",
+	/* for languages that can't display ntilde, replace 'ñ' with 'n' */
+	N_("Alexandre Muñiz"),
+	N_("Sung-Hyun Nam"),
 	"Karl Nelson",
 	"Asger Alstrup Nielsen",
 	"Eric Nielson",
+	/* languages that can't display adiaeresis, replace 'ä' with 'ae' */
 	"Martin Norbäck",
 	"Eskil Olsen",
 	"Jimmy Olsen",
 	"David Orme",
 	"Karl Anders Oygard",
+	/* languages that can't display Odiaeresis, replace 'Ö' with 'Oe' */
 	"Tomas Ögren",
 	"Jay Painter",
 	"Cameron Parish",
@@ -191,13 +202,15 @@ static gchar *contributors[] = {
 	"Lars Rydlinge",
 	"Peter Ryland",
 	"Bibek Sahu",
-	"Kazuhiro Sasayama",
+	"Pablo Saratxaga",
+	N_("Kazuhiro Sasayama"),
 	"Carsten Schaar",
 	"Franck Schneider",
 	"Ingo Schneider",
 	"Bernd Schroeder",
 	"John Schulien",
-	"Iñigo Serna",
+	/* for languages that can't display ntilde, replace 'ñ' with 'n' */ 
+	N_("Iñigo Serna"),
 	"Shaleh",
 	"Joe \"Harold\" Shaw",
 	"Alejandro Aguilar Sierra",
@@ -209,7 +222,8 @@ static gchar *contributors[] = {
 	"Josh Sled",
 	"John Slee",
 	"Garrett Smith",
-	"The Squeaky Rubber Gnome",
+	/* not really a person name :) */
+	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
 	"Stalyn",
 	"Ben Stern",
@@ -233,7 +247,7 @@ static gchar *contributors[] = {
 	"Marius Vollmer",
 	"Shawn Wagner",
 	"Matthias Warkus",
-	"Wanda the GNOME Fish",
+	N_("Wanda the GNOME Fish"),
 	"Bruno Widmann",
 	"Robert Wilhelm",
 	"Sebastian Wilhelmi",
@@ -245,7 +259,7 @@ static gchar *contributors[] = {
 	"Sascha Ziemann",
 	"Michael Zucchi",
 	"Jason van Zyl",
-	"",
+	" ",
 	N_("... and many more"),
 	NULL, NULL
 };
