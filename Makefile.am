@@ -11,7 +11,7 @@ SUBDIRS =			\
 
 EXTRA_SUBDIRS = \
 	 intl \
-	 po \
+	 applets \
 	 gsm \
 	 smproxy \
 	 desktop-links \
@@ -21,17 +21,14 @@ EXTRA_SUBDIRS = \
 	 gnome-edit \
 	 gnome-hint \
 	 core-docs \
-	 panel \
-	 applets \
-	 omf-install \
-	 idl
+	 omf-install
 
 EXTRA_DIST = \
 	gnome-core.spec.in	\
 	gnome-core.spec		\
 	COPYING-DOCS		\
 	sgmldocs.make		\
-	xml-i18n-extract.in	\
-	xml-i18n-merge.in	\
-	xml-i18n-update.in
+	intltool-extract.in	\
+	intltool-merge.in	\
+	intltool-update.in
 

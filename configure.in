@@ -7,7 +7,6 @@ AM_INIT_AUTOMAKE(gnome-core, 1.5.0)
 AM_MAINTAINER_MODE
 GNOME_COMMON_INIT
 
-AM_PROG_XML_I18N_TOOLS
 AC_PROG_INTLTOOL
 
 AC_ISC_POSIX
@@ -113,6 +112,10 @@ dnl -----------------------------------------------------------
 dnl  ------------------
 dnl | Language Support |---------------------------------------
 dnl  ------------------
+GETTEXT_PACKAGE=gnome-core-2.0
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_SUBST(GETTEXT_PACKAGE)
+
 ALL_LINGUAS="az bg ca cs da de el en_GB es et eu fi fr ga gl hu it ja ko lt lv ms nl nn no pl pt pt_BR ro ru sk sl sp sr sv ta tr uk wa zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 dnl -----------------------------------------------------------

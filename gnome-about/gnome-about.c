@@ -453,8 +453,8 @@ main (gint argc, gchar *argv[])
 	GtkWidget *gtkpixmap;
 	int max_width;
 
-	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-	textdomain (PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	textdomain (GETTEXT_PACKAGE);
 
 	gnome_init ("gnome-about","1.0", argc, argv);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-logo-icon-transparent.png");

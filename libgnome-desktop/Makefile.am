@@ -20,13 +20,15 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-ditem-edit.c	\
 	gnome-hint.c
 
+
 libgnome_desktopdir = $(includedir)/gnome-desktop-2.0/libgnome
 libgnome_desktop_HEADERS = \
 	gnome-desktop-item.h
 
 libgnomeui_desktopdir = $(includedir)/gnome-desktop-2.0/libgnomeui
 libgnomeui_desktop_HEADERS = \
-	gnome-ditem-edit.h
+	gnome-ditem-edit.h \
+	gnome-hint.h
 
 libgnome_desktop_2_la_LIBADD = \
 	$(GNOME_DESKTOP_LIBS)
