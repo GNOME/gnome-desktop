@@ -1,6 +1,5 @@
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include "authors.h"
 #include "logo.xpm"
 
@@ -17,7 +16,7 @@ GdkFont *font=NULL;
 GdkFont *italicfont=NULL;
 gint y, y_to_wrap_at;
 gint howmuch=0;
-GdkPixbuf *pixbuf;
+GdkPixbuf *im;
 GtkWidget *canvas;
 GnomeCanvasItem *image;
 	
@@ -145,7 +144,7 @@ sparkle_new (GnomeCanvas *canvas, double x, double y)
 						"fill_color", "light gray",
 						"width_units", 1.0,
 						NULL);
-
+	
 	gnome_canvas_item_raise_to_top(sparkle->hsmall);
 	
 	fill_points(points, x, y, 0.1, FALSE, TRUE);
@@ -237,6 +236,12 @@ new_sparkles_timeout(GnomeCanvas* canvas)
 	return TRUE;
 }
 
+static void
+free_imlib_image (GtkObject *object, gpointer data)
+{
+	gdk_imlib_destroy_image (data);
+}
+
 gboolean
 cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
@@ -265,9 +270,9 @@ cb_keypress (GtkWidget *widget, GdkEventKey *event)
 	case GDK_E:
 		if (howmuch == 4) {
 			howmuch++;
-			pixbuf = gdk_pixbuf_new_from_xpm_data(magick);
+			im = gdk_pixbuf_new_from_xpm_data (magick);
 			gnome_canvas_item_set (image,
-					       "pixbuf", pixbuf,
+					       "pixbuf", im,
 					       NULL);
 		}
 		else
@@ -417,6 +422,10 @@ main (gint argc, gchar *argv[])
 	GtkWidget *href;
 	
 	gnome_init ("gnome-about","1.0", argc, argv);
+
+	gdk_rgb_init ();
+	gtk_widget_set_default_colormap (gdk_rgb_get_cmap ());
+	gtk_widget_set_default_visual (gdk_rgb_get_visual ());
 	
 	window = gtk_window_new (GTK_WINDOW_DIALOG);
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
@@ -444,23 +453,26 @@ main (gint argc, gchar *argv[])
 					       logo_xpm);
 	gtkpixmap = gtk_pixmap_new (logo_pixmap, logo_mask);
 
-	pixbuf = gdk_pixbuf_new_from_xpm_data (logo_xpm);
+	im = gdk_pixbuf_new_from_xpm_data (logo_xpm);
 
 	canvas = gnome_canvas_new ();
-	gtk_widget_set_usize (canvas, gdk_pixbuf_get_width(pixbuf),
-                              gdk_pixbuf_get_height(pixbuf));
+	gtk_widget_set_usize (canvas,
+			      gdk_pixbuf_get_width (im),
+			      gdk_pixbuf_get_height (im));
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0,
-					gdk_pixbuf_get_width(pixbuf),
-                                        gdk_pixbuf_get_height(pixbuf));
+					gdk_pixbuf_get_width (im),
+					gdk_pixbuf_get_height (im));
+
 	image = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
 				       gnome_canvas_pixbuf_get_type (),
-				       "pixbuf", pixbuf,
+				       "pixbuf", im,
 				       "x", 0.0,
 				       "y", 0.0,
-				       "width", (double) gdk_pixbuf_get_width(pixbuf),
-				       "height", (double) gdk_pixbuf_get_height(pixbuf),
-				       "anchor", GTK_ANCHOR_NW,
+				       "width", (double) gdk_pixbuf_get_width (im),
+				       "height", (double) gdk_pixbuf_get_height (im),
 				       NULL);
+	gtk_signal_connect (GTK_OBJECT (image), "destroy",
+			    GTK_SIGNAL_FUNC (free_imlib_image), im);
 	gtk_signal_connect (GTK_OBJECT (image), "event",
 			    GTK_SIGNAL_FUNC (cb_clicked), NULL);
 	gtk_timeout_add (1300, (GtkFunction) new_sparkles_timeout, canvas);
@@ -529,3 +541,5 @@ main (gint argc, gchar *argv[])
 
 	return 0;
 }
+
+
