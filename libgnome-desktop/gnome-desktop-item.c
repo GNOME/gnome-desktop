@@ -1503,6 +1503,7 @@ make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
 {
 	char **retval = NULL;
 	int    i;
+	int    desktop_startup_id_len;
 
 	if (envp == NULL)
 		envp = environ;
@@ -1512,8 +1513,12 @@ make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
 
 	retval = g_new (char *, i + 2);
 
-	for (i = 0; envp[i]; i++)
-		retval[i] = g_strdup (envp[i]);
+	desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
+	
+	for (i = 0; envp[i]; i++) {
+		if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0)
+			retval[i] = g_strdup (envp[i]);
+	}
 
 	retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s",
 				     sn_launcher_context_get_startup_id (sn_context));
@@ -1746,9 +1751,6 @@ ditem_execute (const GnomeDesktopItem *item,
 		if (startup_class != NULL)
 			sn_launcher_context_set_wmclass (sn_context,
 							 startup_class);
-		
-		envp = make_spawn_environment_for_sn_context (sn_context, envp);
-		free_me = envp;		
 	} else {
 		sn_context = NULL;
 	}
@@ -1833,6 +1835,11 @@ ditem_execute (const GnomeDesktopItem *item,
 						      g_get_prgname () ? g_get_prgname () : "unknown",
 						      real_argv[0],
 						      CurrentTime);
+
+			envp = make_spawn_environment_for_sn_context (sn_context, envp);
+			if (free_me)
+				g_strfreev (free_me);
+			free_me = envp;
 		}
 #endif
 		
