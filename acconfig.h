@@ -8,3 +8,6 @@
 #undef VERSION
 #undef HAVE_PROGRAM_INVOCATION_SHORT_NAME
 #undef HAVE_PROGRAM_INVOCATION_NAME
+
+/* Name of default window manager, as string.  */
+#undef WINDOW_MANAGER

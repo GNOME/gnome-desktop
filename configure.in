@@ -58,6 +58,11 @@ AC_SUBST(XF86MISC_LIBS)
 dnl gnome-session
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
 AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
+AC_ARG_WITH(window-manager,
+[  --with-window-manager=NAME
+			   Specify default window manager],[
+AC_DEFINE_UNQUOTED(WINDOW_MANAGER, "$with_window_manager")])
+
 
 dnl panel/cdplayer
 PROGRAMS_PANEL_CDPLAYER=""
