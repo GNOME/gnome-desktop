@@ -9,6 +9,7 @@ BITMAPS     = \
 	gnome-calc2.png				\
 	gnome-calendar.png			\
 	gnome-cardgame.png			\
+	gnome-clock.png             \
 	gnome-color-browser.png			\
 	gnome-color-xterm.png           \
 	gnome-cromagnon.png			\
@@ -35,6 +36,7 @@ BITMAPS     = \
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
 	gnome-irc.png				\
+	gnome-laptop.png            \
 	gnome-lockscreen.png			\
 	gnome-log.png				\
 	gnome-logo-icon.png			\
