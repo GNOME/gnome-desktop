@@ -83,3 +83,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %{prefix}/lib/lib*.so
 %{prefix}/lib/*a
+%{prefix}/include/*
