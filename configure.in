@@ -1,7 +1,7 @@
 AC_INIT(panel)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-core, 1.1.0-pre1)
+AM_INIT_AUTOMAKE(gnome-core, 1.1.0)
 
 AM_MAINTAINER_MODE
 
@@ -70,7 +70,7 @@ PIXBUF_LIBS=`$GNOME_CONFIG --libs gdk_pixbuf`
 AC_SUBST(PIXBUF_CFLAGS)
 AC_SUBST(PIXBUF_LIBS)
 if test "x$PIXBUF_CFLAGS" = x ; then
-       AC_MSG_ERROR(GdkPixBuf library is required for the panel)
+       AC_MSG_ERROR(GdkPixbuf library is required for the panel)
 fi
 
 dnl
@@ -218,10 +218,6 @@ applets/fish/Makefile
 applets/desk-guide/Makefile
 applets/tasklist/Makefile
 core-docs/Makefile
-core-docs/gnome-intro/Makefile
-core-docs/gnome-intro/C/Makefile
-core-docs/gnome-intro/es/Makefile
-core-docs/gnome-intro/it/Makefile
 desktop-links/Makefile
 gnome-terminal/Makefile
 gnome-terminal/C/Makefile
