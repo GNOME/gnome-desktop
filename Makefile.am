@@ -1,19 +1,19 @@
-SUBDIRS = \
-	 po \
-	 idl \
-	 gnome-desktop \
-	 gnome-terminal \
-	 gnome-about \
-	 gsm \
-	 panel \
-	 smproxy
+SUBDIRS =			\
+	po 			\
+	idl 			\
+	gnome-desktop 		\
+	gnome-terminal	 	\
+	gnome-about 		\
+	gsm 			\
+	panel 			\
+	smproxy 		\
+	pixmaps
 
 EXTRA_SUBDIRS = \
 	 intl \
 	 po \
 	 gsm \
 	 smproxy \
-	 pixmaps \
 	 desktop-links \
 	 help-browser \
 	 gnome-terminal \
