@@ -1483,6 +1483,102 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
         return retval;
 }
 
+static char *kde_icondir = NULL;
+
+static GSList *
+add_dirs (GSList *list, const char *dirname)
+{
+	DIR *dir;
+	struct dirent *dent;
+
+	dir = opendir (dirname);
+	if (dir == NULL)
+		return list;
+
+	while ((dent = readdir (dir)) != NULL) {
+		char *full = g_build_filename (dirname, dent->d_name, NULL);
+		if (g_file_test (full, G_FILE_TEST_IS_DIR))
+			list = g_slist_prepend (list, full);
+		else
+			g_free (full);
+	}
+	closedir (dir);
+
+	return list;
+}
+
+static GSList *
+get_kde_dirs (void)
+{
+	GSList *list = NULL;
+	char *dirname;
+
+	if (kde_icondir == NULL)
+		return NULL;
+
+	list = g_slist_prepend (list, kde_icondir);
+
+	dirname = g_build_filename (kde_icondir, "hicolor", "48x48", NULL);
+	list = add_dirs (list, dirname);
+	g_free (dirname);
+
+	dirname = g_build_filename (kde_icondir, "hicolor", "32x32", NULL);
+	list = add_dirs (list, dirname);
+	g_free (dirname);
+
+	dirname = g_build_filename (kde_icondir, "locolor", "48x48", NULL);
+	list = add_dirs (list, dirname);
+	g_free (dirname);
+
+	dirname = g_build_filename (kde_icondir, "locolor", "32x32", NULL);
+	list = add_dirs (list, dirname);
+	g_free (dirname);
+
+	return g_slist_reverse (list);
+}
+
+/* similar function is in panel/main.c */
+static void
+find_kde_directory (void)
+{
+	int i;
+	const char *kdedir = g_getenv ("KDEDIR");
+	char *try_prefixes[] = {
+		"/usr",
+		"/opt/kde",
+		"/opt/kde2",
+		"/usr/local",
+		"/kde",
+		"/kde2",
+		NULL
+	};
+	if (kdedir != NULL) {
+		kde_icondir = g_build_filename (kdedir, "share", "icons", NULL);
+		return;
+	}
+
+	/* if what configure gave us works use that */
+	if (g_file_test (KDE_MENUDIR, G_FILE_TEST_IS_DIR)) {
+		kde_icondir = g_strdup (KDE_ICONDIR);
+		return;
+	}
+
+	for (i = 0; try_prefixes[i] != NULL; i++) {
+		char *try;
+		try = g_build_filename (try_prefixes[i], "share", "applnk", NULL);
+		if (g_file_test (try, G_FILE_TEST_IS_DIR)) {
+			g_free (try);
+			kde_icondir = g_build_filename (try_prefixes[i], "share", "icons", NULL);
+			return;
+		}
+		g_free (try);
+	}
+
+	/* absolute fallback, these don't exist, but we're out of options
+	   here */
+	kde_icondir = g_strdup (KDE_ICONDIR);
+}
+
 /**
  * gnome_desktop_item_get_icon:
  * @item: A desktop item
@@ -1496,7 +1592,9 @@ gnome_desktop_item_get_file_status (const GnomeDesktopItem *item)
 char *
 gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 {
+/* Similar function is in quick-desktop-reader */
 	const char *icon;
+	static gboolean checked_kde = FALSE;
 
         g_return_val_if_fail (item != NULL, NULL);
         g_return_val_if_fail (item->refcount > 0, NULL);
@@ -1512,14 +1610,46 @@ gnome_desktop_item_get_icon (const GnomeDesktopItem *item)
 			return NULL;
 		}
 	} else {
-		char *full = gnome_program_locate_file (NULL,
-							GNOME_FILE_DOMAIN_PIXMAP,
-							icon,
-							TRUE /* only_if_exists */,
-							NULL /* ret_locations */);
+		char *full;
+		char *name = NULL;
+		static GSList *kde_dirs = NULL;
+		GSList *li;
 
-		/* FIXME: Maybe check elsewhere, this could be from KDE
-		 * or some such */
+		/* FIXME: no extention, use .png, this is wrong,
+		 * we need to be smarter here */
+		if (strchr (icon, '.') == NULL) {
+			name = g_strconcat (icon, ".png", NULL);
+			icon = name;
+		}
+	       
+		full = gnome_program_locate_file (NULL,
+						  GNOME_FILE_DOMAIN_PIXMAP,
+						  icon,
+						  TRUE /* only_if_exists */,
+						  NULL /* ret_locations */);
+		if (full == NULL)
+			full = gnome_program_locate_file (NULL,
+							  GNOME_FILE_DOMAIN_APP_PIXMAP,
+							  icon,
+							  TRUE /* only_if_exists */,
+							  NULL /* ret_locations */);
+
+		if ( ! checked_kde) {
+			find_kde_directory ();
+			checked_kde = TRUE;
+			kde_dirs = get_kde_dirs ();
+		}
+
+		for (li = kde_dirs; full == NULL && li != NULL; li = li->next) {
+			full = g_build_filename (li->data, icon, NULL);
+			if ( ! g_file_test (full, G_FILE_TEST_EXISTS)) {
+				g_free (full);
+				full = NULL;
+			}
+		}
+
+		g_free (name);
+
 		return full;
 	}
 }
