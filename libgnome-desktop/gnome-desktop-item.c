@@ -454,7 +454,6 @@ set (GnomeDesktopItem *item, const char *key, const char *value)
 {
 	if (item->section_stack != NULL &&
 	    item->section_stack->data != NULL) {
-		const char *ret;
 		Section *sec = item->section_stack->data;
 		char *full = g_strdup_printf ("%s/%s", sec->name, key);
 
@@ -496,6 +495,7 @@ set (GnomeDesktopItem *item, const char *key, const char *value)
 			g_hash_table_remove (item->main_hash, key);
 		}
 	}
+	item->modified = TRUE;
 }
 
 static void
@@ -1479,6 +1479,7 @@ gnome_desktop_item_clear_section (GnomeDesktopItem *item,
 		g_list_free (sec->keys);
 		sec->keys = NULL;
 	}
+	item->modified = TRUE;
 }
 
 /************************************************************
@@ -1561,8 +1562,8 @@ cannonize (const char *key, const char *value)
 		}
 	} else if (standard_is_numeric (key)) {
 		double num = 0.0;
-		sscanf (value, "%f", &num);
-		return g_strdup_printf ("%lf", num);
+		sscanf (value, "%lf", &num);
+		return g_strdup_printf ("%g", num);
 	} else if (standard_is_strings (key)) {
 		int len = strlen (value);
 		if (len == 0 || value[len-1] != ';') {
@@ -1880,7 +1881,7 @@ insert_key (GnomeDesktopItem *item,
 
 	/* we always store everything in UTF-8 */
 	if (cur_section == NULL &&
-	    strcmp (key, GNOME_DESKTOP_ITEM_TYPE) == 0) {
+	    strcmp (key, GNOME_DESKTOP_ITEM_ENCODING) == 0) {
 		k = g_strdup (key);
 		val = g_strdup ("UTF-8");
 	} else {
@@ -1963,7 +1964,7 @@ insert_key (GnomeDesktopItem *item,
 
 	if (cur_section == NULL) {
 		/* only add to list if we haven't seen it before */
-		if (g_hash_table_lookup (item->main_hash, k) != NULL) {
+		if (g_hash_table_lookup (item->main_hash, k) == NULL) {
 			item->keys = g_list_prepend (item->keys,
 						     g_strdup (k));
 		}
@@ -1974,7 +1975,7 @@ insert_key (GnomeDesktopItem *item,
 			("%s/%s",
 			 cur_section->name, k);
 		/* only add to list if we haven't seen it before */
-		if (g_hash_table_lookup (item->main_hash, full) != NULL) {
+		if (g_hash_table_lookup (item->main_hash, full) == NULL) {
 			cur_section->keys =
 				g_list_prepend (cur_section->keys, k);
 		}
@@ -2231,7 +2232,7 @@ ditem_load (const char *file,
 		/* this is the version that we follow, so write it down */
 		g_hash_table_replace (item->main_hash,
 				      g_strdup (GNOME_DESKTOP_ITEM_VERSION), 
-				      g_strdup ("0.9.2"));
+				      g_strdup ("1.0"));
 		item->keys = g_list_prepend
 			(item->keys, g_strdup (GNOME_DESKTOP_ITEM_VERSION));
 	}
