@@ -44,11 +44,13 @@ GTK_REQUIRED=1.3.1
 GDK_PIXBUF_REQUIRED=1.3.1
 LIBGLADE_REQUIRED=0.16
 LIBGNOME_REQUIRED=1.96.0
-LIBGNOME1COMPAT_REQUIRED=1.96.0
+dnl LIBGNOME1COMPAT_REQUIRED=1.96.0
 LIBGNOMEUI_REQUIRED=1.96.0
+LIBGNOMECANVAS_REQUIRED=1.102.0
 ORBIT_REQUIRED=2.3.91
 XML_REQUIRED=2.2.8
 LIBCAPPLET_REQUIRED=1.4.0
+LIBZVT_REQUIRED=1.97.0
 SCROLLKEEPER_REQUIRED=0.1.4
 BONOBO_CONFIG_REQUIRED=0.1.3
 
@@ -57,10 +59,12 @@ AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GDK_PIXBUF_REQUIRED)
 AC_SUBST(LIBGLADE_REQUIRED)
 AC_SUBST(LIBGNOME_REQUIRED)
-AC_SUBST(LIBGNOME1COMPAT_REQUIRED)
+dnl AC_SUBST(LIBGNOME1COMPAT_REQUIRED)
+AC_SUBST(LIBGNOMECANVAS_REQUIRED)
 AC_SUBST(ORBIT_REQUIRED)
 AC_SUBST(XML_REQUIRED)
 AC_SUBST(LIBCAPPLET_REQUIRED)
+AC_SUBST(LIBZVT_REQUIRED)
 AC_SUBST(SCROLLKEEPER_REQUIRED)
 
 
@@ -68,13 +72,21 @@ dnl ================================
 dnl | Pkg-Config dependency checks |---------------------------
 dnl ================================
 
-  PKG_CHECK_MODULES(PANEL, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED libgnome1compat-2.0 >= $LIBGNOME1COMPAT_REQUIRED)
-  AC_SUBST(PANEL_CFLAGS)
-  AC_SUBST(PANEL_LIBS)
+PKG_CHECK_MODULES(PANEL, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED)
+AC_SUBST(PANEL_CFLAGS)
+AC_SUBST(PANEL_LIBS)
 
-  PKG_CHECK_MODULES(GNOME_DESKTOP, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED bonobo-config-2.0 >= $BONOBO_CONFIG_REQUIRED libbonobo-config >= $BONOBO_CONFIG_REQUIRED)
-  AC_SUBST(GNOME_DESKTOP_CFLAGS)
-  AC_SUBST(GNOME_DESKTOP_LIBS)
+PKG_CHECK_MODULES(GNOME_DESKTOP, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED bonobo-config-2.0 >= $BONOBO_CONFIG_REQUIRED libbonobo-config >= $BONOBO_CONFIG_REQUIRED)
+AC_SUBST(GNOME_DESKTOP_CFLAGS)
+AC_SUBST(GNOME_DESKTOP_LIBS)
+
+PKG_CHECK_MODULES(GNOME_TERMINAL, ORBit-2.0 >= $ORBIT_REQUIRED gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED libzvt-2.0 >= $LIBZVT_REQUIRED)
+AC_SUBST(GNOME_TERMINAL_CFLAGS)
+AC_SUBST(GNOME_TERMINAL_LIBS)
+
+PKG_CHECK_MODULES(GNOME_SESSION, libgnomecanvas-2.0 >= $LIBGNOMECANVAS_REQUIRED libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED)
+AC_SUBST(GNOME_SESSION_CFLAGS)
+AC_SUBST(GNOME_SESSION_LIBS)
 
 dnl -----------------------------------------------------------
 
@@ -123,32 +135,6 @@ AC_MSG_CHECKING(for Configure Easter Egg version >= 6.38)
 AC_MSG_RESULT(found)
 dnl -----------------------------------------------------------
 
-
-dnl  ----------------
-dnl | Gnome Terminal |-----------------------------------------
-dnl  ----------------
-dnl ZVT_LIBS=`$GNOME_CONFIG --libs zvt`
-dnl AC_SUBST(ZVT_LIBS)
-dnl 
-dnl GT_LIBS="libglade zvt gnorba gnomeui"
-dnl GNOME_TERMINAL_LIBS=`gnome-config --libs $GT_LIBS`
-dnl GNOME_TERMINAL_CFLAGS=`gnome-config --cflags $GT_LIBS`
-dnl AC_SUBST(GNOME_TERMINAL_LIBS)
-dnl AC_SUBST(GNOME_TERMINAL_CFLAGS)
-dnl AC_SUBST(LIBGLADE_REQUIRED)
-dnl -----------------------------------------------------------
-
-
-dnl  ----------
-dnl | libglade |-----------------------------------------------
-dnl  ----------
-dnl GLADE_LIBS=`gnome-config --libs libglade`
-dnl GLADE_CFLAGS=`gnome-config --cflags libglade`
-dnl AC_SUBST(GLADE_LIBS)
-dnl AC_SUBST(GLADE_CFLAGS)
-dnl -----------------------------------------------------------
-
-
 dnl  --------
 dnl | libpng |-------------------------------------------------
 dnl  --------
@@ -163,15 +149,29 @@ dnl -----------------------------------------------------------
 dnl  ---------------
 dnl | gnome-session |------------------------------------------
 dnl  ---------------
-dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
-AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
+dnl
+AC_MSG_CHECKING([Whether libgnomeui was built with session management])
+case "$GNOME_SESSION_LIBS" in
+	*-lSM*)
+		GNOME_HAVE_SM=yes
+		;;
+	*)
+		GNOME_HAVE_SM=no
+		;;
+esac
+AC_MSG_RESULT($GNOME_HAVE_SM)
+if test "$GNOME_HAVE_SM" = no ; then
+	AC_MSG_WARN([Session management support not built into libgnomeui; gnome-session will not be built])
+fi
+AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = yes)
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 dnl -----------------------------------------------------------
 
 
 dnl  -------------------
 dnl | Use TCP Wrappers? |--------------------------------------
 dnl  -------------------
-AC_MSG_CHECKING("whether to use TCP wrappers")
+AC_MSG_CHECKING(whether to use TCP wrappers)
 LIBWRAP_PATH=""
 for I in $LDFLAGS $LIBS -L/usr/lib -L/usr/local/lib; do
         case "$I" in
@@ -281,16 +281,6 @@ AC_SUBST(XINERAMA_LIBS)
 dnl -----------------------------------------------------------
 
 
-
-dnl
-dnl Check for zvt_term_reset and del_is_del
-dnl
-oLIBS="$LIBS"
-LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR $ZVT_LIBS"
-AC_CHECK_FUNC(zvt_term_reset,[AC_DEFINE(HAVE_ZVT_TERM_RESET)])
-AC_CHECK_FUNC(zvt_term_set_del_is_del,[AC_DEFINE(HAVE_ZVT_DEL_IS_DEL)])
-LIBS="$oLIBS"
-
 dnl  ------------------
 dnl | Check for libbz2 |---------------------------------------
 dnl  ------------------
@@ -382,7 +372,7 @@ dnl  --------------------------------------------------------
 dnl | Solaris does not have IceListenForWellKnownConnections |-
 dnl  --------------------------------------------------------
 oLIBS="$LIBS"
-LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR"
+LIBS="$GNOME_SESSION_LIBS"
 AC_CHECK_FUNCS(_IceTransNoListen)
 LIBS="$oLIBS"
 dnl -----------------------------------------------------------
@@ -423,11 +413,15 @@ AC_SUBST(REBUILD)
 AC_OUTPUT([
 Makefile
 gnome-core.spec
-po/Makefile.in
+gnome-terminal/Makefile
 panel/Makefile
 gnome-desktop/Makefile
+po/Makefile.in
 idl/Makefile
 intl/Makefile])
+
+dnl panel/Makefile
+dnl gnome-desktop/Makefile
 
 dnl panel/config/Makefile
 dnl panel/doc/Makefile
@@ -480,7 +474,6 @@ dnl core-docs/lgpl/C/Makefile
 dnl core-docs/gnome-feedback/Makefile
 dnl core-docs/gnome-feedback/C/Makefile
 dnl desktop-links/Makefile
-dnl gnome-terminal/Makefile
 dnl gnome-terminal/C/Makefile
 dnl gnome-terminal/de/Makefile
 dnl gnome-terminal/da/Makefile
@@ -517,8 +510,6 @@ dnl gsm/Makefile
 dnl gsm/help/Makefile
 dnl gsm/help/C/Makefile
 dnl gsm/help/ja/Makefile
-dnl gsm/default.session.5
-dnl gsm/gnome-session.1
 dnl smproxy/Makefile
 dnl intl/Makefile
 dnl omf-install/Makefile])

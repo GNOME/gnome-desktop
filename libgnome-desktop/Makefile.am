@@ -66,7 +66,8 @@ test_ditem_SOURCES = \
 	test-ditem.c
 
 test_ditem_LDADD = \
-	libgnome-desktop-2.la
+	libgnome-desktop-2.la		\
+	$(GNOME_DESKTOP_LIBS)
 
 locale_DATA = \
 	locale.alias

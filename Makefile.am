@@ -3,6 +3,7 @@ SUBDIRS = \
 	 po \
 	 idl \
 	 gnome-desktop \
+	 gnome-terminal \
 	 panel
 
 EXTRA_SUBDIRS = \
