@@ -14,7 +14,6 @@ EXTRA_DIST =			\
 	gnome-desktop.spec	\
 	COPYING-DOCS		\
 	HACKING			\
-	sgmldocs.make		\
 	xmldocs.make		\
 	intltool-extract.in	\
 	intltool-merge.in	\
