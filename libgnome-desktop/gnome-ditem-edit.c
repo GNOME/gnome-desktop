@@ -726,7 +726,7 @@ gnome_ditem_edit_sync_display(GnomeDItemEdit *dee,
                            cs ? cs : "");
 
         cs = gnome_desktop_item_get_icon_path(ditem);
-        gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry), cs);
+        gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->icon_entry), cs);
 
         cs = gnome_desktop_item_get_attribute(ditem, "DocPath"); /* FIXME check name */
         gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
@@ -1005,7 +1005,7 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), "");  
         gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
-        gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),"");
+        gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->icon_entry),"");
         gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), "");
