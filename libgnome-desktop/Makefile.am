@@ -9,9 +9,12 @@ INCLUDES =						\
 
 lib_LTLIBRARIES = libgnome-desktop-2.la
 
-noinst_PROGRAMS = test-ditem test-hint test-ditem-edit
+noinst_PROGRAMS = test-ditem test-hint test-ditem-edit test-icon-theme
 
 libgnome_desktop_2_la_SOURCES = \
+	gnome-theme-parser.h	\
+	gnome-icon-loader.c	\
+	gnome-theme-parser.c	\
 	gnome-desktop-item.c	\
 	gnome-ditem-edit.c	\
 	gnome-hint.c
@@ -19,6 +22,7 @@ libgnome_desktop_2_la_SOURCES = \
 
 libgnome_desktopdir = $(includedir)/gnome-desktop-2.0/libgnome
 libgnome_desktop_HEADERS = \
+	gnome-icon-loader.h	\
 	gnome-desktop-item.h
 
 libgnomeui_desktopdir = $(includedir)/gnome-desktop-2.0/libgnomeui
@@ -27,6 +31,13 @@ libgnomeui_desktop_HEADERS = \
 	gnome-hint.h
 
 libgnome_desktop_2_la_LIBADD = \
+	$(GNOME_DESKTOP_LIBS)
+
+test_icon_theme_SOURCES = \
+	test-icon-theme.c
+
+test_icon_theme_LDADD = \
+	libgnome-desktop-2.la		\
 	$(GNOME_DESKTOP_LIBS)
 
 test_ditem_SOURCES = \
