@@ -27,7 +27,6 @@ Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 
 Desktop_in_files = \
 	Xemacs.desktop		\
-	rxvt.desktop		\
 	Emacs.desktop		\
 	xterm.desktop		\
 	Netscape.desktop
