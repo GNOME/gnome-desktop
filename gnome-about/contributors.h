@@ -247,6 +247,7 @@ static gchar *contributors[] = {
 	/* Name in Japanese is: U7b39 U5c71 U548c U5b8f */
 	N_("Kazuhiro Sasayama"),
 	"Carsten Schaar",
+	"Christian Schaller",
 	"Franck Schneider",
 	"Ingo Schneider",
 	"Bernd Schroeder",
