@@ -73,6 +73,12 @@ if test -z "$*"; then
     echo
 fi
 
+for I in /usr /usr/local /opt /opt/gnome; do
+	if [ -f $I/lib/gnomeConf.sh ]; then
+		GNOMEINSTDIR="--with-gnome=$I"
+	fi
+done
+
 for i in .
 do 
     echo processing $srcdir/$i
@@ -84,5 +90,6 @@ do
     automake --gnu; autoheader; autoconf)
 done
 
-echo running $srcdir/configure
-$srcdir/configure "$@" && echo Now type \`make\' to compile the Gnome Libraries.
+echo running $srcdir/configure --enable-maintainer-mode $GNOMEINSTDIR "$@"
+$srcdir/configure --enable-maintainer-mode $GNOMEINSTDIR "$@" \
+&& echo Now type \`make\' to compile the Gnome Libraries.

@@ -24,6 +24,15 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
+AC_CHECK_HEADERS(dlfcn.h dl.h)
+AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
+AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
+AC_CHECK_FUNCS(dlopen, DL_LIB="",
+AC_MSG_ERROR(Dynamic linking is not available on this platform.  Some
+apps, like panel, will not run properly.))
+])])
+AC_SUBST(DL_LIB)
+
 dnl properties-keyboard
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
