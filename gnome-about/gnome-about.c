@@ -24,6 +24,10 @@
 
 /*
  * TODO:
+ *  * Bring over the old "Brought to you by" code and
+ *    do that before the companies.
+ *  * We don't want any easter eggs here. Just like the
+ *    old dialog.
  *  * Lots of magic numbers here. Each of them should
  *    be calculated based on the pixbuf sizes and text
  *    size. Try this on a large print theme ! :/
