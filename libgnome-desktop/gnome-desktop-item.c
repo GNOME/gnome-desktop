@@ -61,6 +61,7 @@ struct _GnomeDesktopItem {
         int refcount;
 
 	Bonobo_ConfigDatabase db;
+	Bonobo_ConfigDatabase default_db;
 	GNOME_DesktopEntry *entry;
 	gboolean modified;
 
@@ -121,7 +122,7 @@ ditem_load (const char *data_file,
 	    GnomeDesktopItemFlags item_flags)
 {
         GnomeDesktopItem *retval;
-	Bonobo_ConfigDatabase db;
+	Bonobo_ConfigDatabase db, default_db;
 	CORBA_Environment ev;
 	CORBA_any *any;
 	gchar *moniker;
@@ -141,6 +142,28 @@ ditem_load (const char *data_file,
 	g_free (moniker);
 
 	CORBA_exception_init (&ev);
+	default_db = bonobo_get_object ("xmldb:" LIBGNOME_SYSCONFDIR "/gnome-2.0/gnome-desktop.xmldb",
+					"Bonobo/ConfigDatabase", &ev);
+	if (BONOBO_EX (&ev)) {
+		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+		bonobo_object_release_unref (db, NULL);
+		CORBA_exception_free (&ev);
+		return NULL;
+	}
+	CORBA_exception_free (&ev);
+
+	CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_addDatabase (db, default_db, "", &ev);
+	if (BONOBO_EX (&ev)) {
+		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+		bonobo_object_release_unref (db, NULL);
+		bonobo_object_release_unref (default_db, NULL);
+		CORBA_exception_free (&ev);
+		return NULL;
+	}
+	CORBA_exception_free (&ev);
+
+	CORBA_exception_init (&ev);
 	any = bonobo_pbclient_get_value (db, "/Desktop Entry", TC_GNOME_DesktopEntry, &ev);
 	if (BONOBO_EX (&ev)) {
 		g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
@@ -151,6 +174,7 @@ ditem_load (const char *data_file,
 
 	retval = gnome_desktop_item_new ();
 	retval->db = db;
+	retval->default_db = default_db;
 	retval->entry = any->_value;
 
         retval->item_flags = item_flags;
@@ -253,8 +277,6 @@ gnome_desktop_item_new_from_file (const char *file,
         retval->mtime = sbuf.st_mtime;
 
  out:
-	/* if we have names of other sections, free that list */
-
         return retval;
 }
 
@@ -272,25 +294,77 @@ gnome_desktop_item_new_from_file (const char *file,
 gboolean
 gnome_desktop_item_save (GnomeDesktopItem *item, const char *under)
 {
+	CORBA_Environment ev;
+	BonoboArg *arg;
+
         g_return_val_if_fail(item, FALSE);
-        g_return_val_if_fail(under, FALSE);
         g_return_val_if_fail(item->location, FALSE);
 
 	/* first we setup the new location if we need to */
-	if(under) {
-		char *old_loc = item->location;
-		char *base;
-		base = g_path_get_basename(item->location);
-		item->location = g_concat_dir_and_file(under, base);
-		g_free(base);
-		g_free(old_loc);
+	if (under) {
+		Bonobo_ConfigDatabase db;
+		gchar *moniker;
+
+		g_free (item->location);
+		item->location = g_strdup (under);
+		item->modified = TRUE;
+
+		moniker = g_strdup_printf ("ditem:%s", item->location);
+
+		CORBA_exception_init (&ev);
+		db = bonobo_get_object (moniker, "Bonobo/ConfigDatabase", &ev);
+		if (BONOBO_EX (&ev)) {
+			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+			CORBA_exception_free (&ev);
+			g_free (moniker);
+			return FALSE;
+		}
+		CORBA_exception_free (&ev);
+
+		CORBA_exception_init (&ev);
+		Bonobo_ConfigDatabase_addDatabase (db, item->default_db, "", &ev);
+		if (BONOBO_EX (&ev)) {
+			g_warning (G_STRLOC ": %s", bonobo_exception_get_text (&ev));
+			bonobo_object_release_unref (db, NULL);
+			CORBA_exception_free (&ev);
+			return FALSE;
+		}
+		CORBA_exception_free (&ev);
+
+		bonobo_object_release_unref (item->db, NULL);
+		item->db = db;
 	}
 
+	if (!item->modified)
+		return TRUE;
+
+	CORBA_exception_init (&ev);
+	arg = bonobo_arg_new (TC_GNOME_DesktopEntry);
+	BONOBO_ARG_SET_GENERAL (arg, &item->entry, TC_GNOME_DesktopEntry, GNOME_DesktopEntry *, &ev);
+	bonobo_pbclient_set_value (item->db, "/Desktop Entry", arg, &ev);
+	if (BONOBO_EX (&ev)) {
+		g_warning (G_STRLOC ": save failed: %s", bonobo_exception_get_text (&ev));
+		bonobo_arg_release (arg);
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+
+	bonobo_arg_release (arg);
+	CORBA_exception_free (&ev);
+
+	CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_sync (item->db, &ev);
+	if (BONOBO_EX (&ev)) {
+		g_warning (G_STRLOC ": save failed: %s", bonobo_exception_get_text (&ev));
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+	CORBA_exception_free (&ev);
+
+	item->modified = FALSE;
         item->mtime = time(NULL);
 
-	/* FIXME: Save! */
-
-	return FALSE;
+	return TRUE;
 }
 
 /**
