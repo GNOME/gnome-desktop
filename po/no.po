@@ -1,29 +1,29 @@
 # Norwegian translation of the gnome-core module (bokmål dialect).
 # Copyright (C) 1998, 1999 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@fib.hl.no>, 1998, 1999.
+# Kjartan Maraas <kmaraas@online.no>, 1998, 1999.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.3\n"
-"POT-Creation-Date: 1999-03-23 00:58+0100\n"
-"PO-Revision-Date: 1999-03-23 01:26+0100\n"
-"Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
+"POT-Creation-Date: 1999-03-26 01:22+0100\n"
+"PO-Revision-Date: 1999-03-26 01:26+0100\n"
+"Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: applets/asclock/asclock.c:572
+#: applets/asclock/asclock.c:582
 #: applets/mini-commander/src/mini-commander_applet.c:259
 msgid "About"
 msgstr "Om"
 
-#: applets/asclock/asclock.c:579 applets/clockmail/clockmail.c:449
+#: applets/asclock/asclock.c:589 applets/clockmail/clockmail.c:449
 #: applets/diskusage/diskusage.c:711 applets/drivemount/drivemount.c:485
 #: applets/esd-manager/esdmanager_applet.c:82 applets/fish/fish.c:514
 #: applets/gen_util/clock.c:303 applets/gen_util/mailcheck.c:793
 #: applets/gen_util/printer.c:411 applets/gkb/gkb.c:506
-#: applets/gnome-pager/gnomepager_applet.c:1433
+#: applets/gnome-pager/gnomepager_applet.c:1491
 #: applets/mini-commander/src/mini-commander_applet.c:246
 #: applets/modemlights/modemlights.c:756 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
@@ -50,9 +50,15 @@ msgstr "Siden du er root, ønsker du å sette systemets standard tiddsone?"
 msgid "My Title"
 msgstr "Min tittel"
 
-#: applets/asclock/dialogs.c:242
-msgid "Blinking Colon:"
-msgstr "Blinkende kolon:"
+#. show ampm toggle button
+#: applets/asclock/dialogs.c:284 applets/clockmail/properties.c:295
+msgid "Display time in 12 hour format (AM/PM)"
+msgstr "Vis tiden i 12-timers format (AM/PM)"
+
+#. show ampm toggle button
+#: applets/asclock/dialogs.c:292
+msgid "Blinking elements in clock"
+msgstr "Blinkende elementer i klokken"
 
 #. -- not implemented yet --
 #.
@@ -135,9 +141,9 @@ msgstr "Blinkende kolon:"
 #.
 #.
 #. ---
-#: applets/asclock/dialogs.c:277 applets/clockmail/properties.c:388
-#: applets/diskusage/properties.c:344 applets/drivemount/properties.c:210
-#: applets/fvwm-pager/properties.c:246
+#: applets/asclock/dialogs.c:331 applets/battery/properties.c:76
+#: applets/clockmail/properties.c:388 applets/diskusage/properties.c:344
+#: applets/drivemount/properties.c:210 applets/fvwm-pager/properties.c:246
 #: applets/mini-commander/src/preferences.c:659
 #: applets/modemlights/properties.c:204 applets/netload/properties.c:280
 #: applets/slashapp/properties.c:347 gnome-terminal/gnome-terminal.c:933
@@ -145,78 +151,139 @@ msgstr "Blinkende kolon:"
 msgid "General"
 msgstr "Generelt"
 
-#: applets/asclock/dialogs.c:282
+#: applets/asclock/dialogs.c:336
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: applets/battery/battery.c:358
+#: applets/battery/battery.c:478
 msgid "Internal error: invalid mode in battery_set_mode"
 msgstr "Intern feil: ugyldig modus i battery_set_mode"
 
-#: applets/battery/battery.c:403 applets/gen_util/clock.c:273
+#: applets/battery/battery.c:539 applets/gen_util/clock.c:273
 #: applets/gen_util/mailcheck.c:745 applets/gen_util/printer.c:386
 #: applets/netload/netload.c:321
 msgid "Can't create applet!\n"
 msgstr "Kan ikke opprette applet!\n"
 
-#: applets/battery/battery.c:627
+#: applets/battery/battery.c:660 applets/charpick/charpick.c:338
+#: applets/clockmail/clockmail.c:456 applets/dialer/dialer.c:162
+#: applets/drivemount/drivemount.c:491
+#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
+#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
+#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1485
+#: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
+#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
+#: panel/menu.c:2465
+msgid "About..."
+msgstr "Om..."
+
+#: applets/battery/battery.c:718
+msgid "The GNOME Battery Monitor Applet"
+msgstr "GNOME batterimonitor applet"
+
+#: applets/battery/battery.c:719
+msgid " (C) 1997-1998 The Free Software Foundation"
+msgstr " (C) 1997-1998 The Free Software Foundation"
+
+#: applets/battery/battery.c:721
+msgid ""
+"This applet monitors the charge of your laptop's battery.  Click on it to "
+"change display modes."
+msgstr ""
+"Denne appleten overvåker strømstyrken til batteriet på din bærbare. Klikk "
+"på den for å endre visningsmodus."
+
+#: applets/battery/battery.c:833
 msgid "Could not allocate space for graph values"
 msgstr "Kunne ikke allokere plass for grafverdiene"
 
-#: applets/battery/properties.c:44
+#: applets/battery/battery.c:920
+msgid "The battery is low."
+msgstr "Batteriet har lite strøm."
+
+#: applets/battery/properties.c:67
 msgid "Battery Monitor Settings"
-msgstr "Innstillinger for batterimonitor:"
+msgstr "Innstillinger for batterimonitor"
 
-#: applets/battery/properties.c:53
-msgid "General Properties"
-msgstr "Generelle egenskaper"
+#. Applet height
+#: applets/battery/properties.c:79
+msgid "Applet Height:"
+msgstr "Applet-høyde:"
 
-#: applets/battery/properties.c:55 applets/diskusage/properties.c:232
-#: applets/fvwm-pager/properties.c:178 applets/netload/properties.c:141
-msgid "Applet Height"
-msgstr "Applet-høyde"
+#. Applet width
+#: applets/battery/properties.c:90
+msgid "Applet Width:"
+msgstr "Applet-bredde:"
 
-#: applets/battery/properties.c:65
-msgid "Applet Width"
-msgstr "Applet-bredde"
+#. Update interval
+#: applets/battery/properties.c:102
+msgid "Update Interval (seconds):"
+msgstr "Oppdateringsintervall (sekunder):"
 
-#: applets/battery/properties.c:76
-msgid "Applet Mode"
-msgstr "Applet-modus"
+#. Low battery value
+#: applets/battery/properties.c:116
+msgid "Low Charge Threshold:"
+msgstr "Terskel for lavnivå på strøm:"
 
-#: applets/battery/properties.c:77
+#. Applet mode label
+#: applets/battery/properties.c:130
+msgid "Applet Mode:"
+msgstr "Applet-modus:"
+
+#: applets/battery/properties.c:131 applets/battery/properties.c:215
 msgid "Graph"
 msgstr "Graf"
 
-#: applets/battery/properties.c:79
+#: applets/battery/properties.c:133 applets/battery/properties.c:159
 msgid "Readout"
 msgstr "Utskrift"
 
-#: applets/battery/properties.c:123 applets/battery/properties.c:188
+#: applets/battery/properties.c:190 applets/battery/properties.c:250
 msgid "AC-On Battery Color:"
 msgstr "AC-På batterifarge:"
 
-#: applets/battery/properties.c:129 applets/battery/properties.c:194
+#: applets/battery/properties.c:196 applets/battery/properties.c:256
 msgid "AC-Off Battery Color:"
 msgstr "AC-Av batterifarge:"
 
-#: applets/battery/properties.c:135
-msgid "Graph Interval:"
-msgstr "Grafintervall:"
+#: applets/battery/properties.c:202
+msgid "Low Battery Color:"
+msgstr "Farge for svak strøm:"
 
-#: applets/battery/properties.c:149
+#: applets/battery/properties.c:262
+msgid "Graph Battery Low Color:"
+msgstr "Farge for graf av lavt batteri:"
+
+#: applets/battery/properties.c:268
+#, fuzzy
+msgid "Graph Tick Color:"
+msgstr "Orientering for graf:"
+
+#: applets/battery/properties.c:275
 msgid "Graph Direction:"
 msgstr "Orientering for graf:"
 
-#: applets/battery/properties.c:152
+#: applets/battery/properties.c:278
 msgid "Left to Right"
 msgstr "Fra venstre mot høyre"
 
-#: applets/battery/properties.c:154
+#: applets/battery/properties.c:280
 msgid "Right to Left"
 msgstr "Fra høyre mot venstre"
 
-#: applets/battery/read-battery.c:28
+#: applets/battery/properties.c:300
+msgid "Low Battery Warning"
+msgstr "Advarsel ved dårlig batteri"
+
+#: applets/battery/properties.c:303
+msgid "Enable Low Battery Warning"
+msgstr "Slå på advarsel ved dårlig batteri"
+
+#: applets/battery/properties.c:308
+msgid "Warn if the battery charge dips below:"
+msgstr "Advar hvis strømstyrken blir lavere enn:"
+
+#: applets/battery/read-battery.c:58
 msgid ""
 "Cannot open /proc/apm!  Make sure that you built APM support into your "
 "kernel.\n"
@@ -224,20 +291,20 @@ msgstr ""
 "Kan ikke åpne /proc/apm! Sjekk om du kompilerte inn støtte for APM i "
 "kjernen.\n"
 
-#: applets/battery/read-battery.c:61
+#: applets/battery/read-battery.c:91
 #, c-format
 msgid "Could not dup() APM file descriptor: %s\n"
 msgstr "Kunne ikke kjøre dup() på APM-fildeskriptor: %s\n"
 
-#: applets/battery/read-battery.c:130
+#: applets/battery/read-battery.c:162
 msgid "Cannot open /dev/apm; can't get data."
 msgstr "Kan ikke åpne /dev/apm; får ikke data."
 
-#: applets/battery/read-battery.c:135
+#: applets/battery/read-battery.c:167
 msgid "ioctl failed on /dev/apm."
 msgstr "ioctl feilet på /dev/apm."
 
-#: applets/battery/read-battery.c:146
+#: applets/battery/read-battery.c:178
 msgid "APM is disabled!  Cannot read battery charge information."
 msgstr "APM er slått av! Kan ikke lese informasjon om batterilading."
 
@@ -264,17 +331,6 @@ msgid ""
 msgstr ""
 "Gnome Panel applet for å velge rare tegn som ikke er på mitt tastatur Utgitt "
 "under GNU General Puclic License."
-
-#: applets/charpick/charpick.c:338 applets/clockmail/clockmail.c:456
-#: applets/dialer/dialer.c:162 applets/drivemount/drivemount.c:491
-#: applets/esd-manager/esdmanager_applet.c:75 applets/fifteen/fifteen.c:309
-#: applets/fish/fish.c:506 applets/gen_util/mailcheck.c:800
-#: applets/gkb/gkb.c:498 applets/gnome-pager/gnomepager_applet.c:1427
-#: applets/modemlights/modemlights.c:762 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/webcontrol/webcontrol.c:307
-#: panel/menu.c:2465
-msgid "About..."
-msgstr "Om..."
 
 #: applets/clockmail/clockmail.c:47 applets/slashapp/slashapp.c:563
 #, c-format
@@ -323,10 +379,6 @@ msgstr "Ingen (forvalgt)"
 #: applets/mini-commander/src/preferences.c:438
 msgid "Clock"
 msgstr "Klokke"
-
-#: applets/clockmail/properties.c:295
-msgid "Display time in 12 hour format (AM/PM)"
-msgstr "Vis tiden i 12-timers format (AM/PM)"
 
 #: applets/clockmail/properties.c:305
 msgid "Display time relative to GMT (Greenwich Mean Time):"
@@ -387,6 +439,11 @@ msgstr "Tekstfarge"
 #: applets/diskusage/properties.c:225
 msgid "Backgroundcolor"
 msgstr "Bakgrunnsfarge"
+
+#: applets/diskusage/properties.c:232 applets/fvwm-pager/properties.c:178
+#: applets/netload/properties.c:141
+msgid "Applet Height"
+msgstr "Applet-høyde"
 
 #: applets/diskusage/properties.c:238 applets/fvwm-pager/properties.c:184
 #: applets/netload/properties.c:147 panel/swallow.c:246
@@ -813,84 +870,107 @@ msgstr ""
 msgid "gkb.xpm"
 msgstr "gkb.xpm"
 
-#: applets/gnome-pager/gnomepager_applet.c:128
+#: applets/gnome-pager/gnomepager_applet.c:130
 msgid "Desktop Pager Applet"
 msgstr "Applet for valg av viruelt skjermområde"
 
-#: applets/gnome-pager/gnomepager_applet.c:128
+#: applets/gnome-pager/gnomepager_applet.c:130
 msgid "Copyright (C)1998,1999 Red Hat Software, Free Software Foundation"
 msgstr "Copyright (C)1998,1999 Red Hat Software, The Free Software Foundation"
 
-#: applets/gnome-pager/gnomepager_applet.c:130
+#: applets/gnome-pager/gnomepager_applet.c:132
 msgid "Pager for a GNOME compliant Window Manager"
 msgstr "Skjermvalg for en vindusbehandler som følger GNOMEs retningslinjer"
 
-#: applets/gnome-pager/gnomepager_applet.c:204
+#: applets/gnome-pager/gnomepager_applet.c:213
 msgid "Gnome Pager Settings"
 msgstr "Innstillinger for valg av virtuelt skjermområde"
 
-#: applets/gnome-pager/gnomepager_applet.c:208
-#: applets/slashapp/properties.c:422
-msgid "Display"
-msgstr "Vis"
+#: applets/gnome-pager/gnomepager_applet.c:220
+msgid "Pager"
+msgstr "Velger for virtuell skjerm"
 
-#: applets/gnome-pager/gnomepager_applet.c:210
-msgid "Show all tasks on all desktops"
-msgstr "Vis alle oppgaver på alle skrivebord"
-
-#: applets/gnome-pager/gnomepager_applet.c:219
-msgid "Show minimized tasks on all desktops"
-msgstr "Vis minimerte oppgaver på alle skrivebord"
-
-#: applets/gnome-pager/gnomepager_applet.c:228
-msgid "Show tasks"
-msgstr "Vis oppgaver"
-
-#: applets/gnome-pager/gnomepager_applet.c:236
+#: applets/gnome-pager/gnomepager_applet.c:222
 msgid "Show pager"
 msgstr "Vis skjermvelger"
 
-#: applets/gnome-pager/gnomepager_applet.c:244
+#: applets/gnome-pager/gnomepager_applet.c:229
 msgid "Use small pagers"
 msgstr "Bruk små skjermoversikter"
 
-#: applets/gnome-pager/gnomepager_applet.c:252
-msgid "Show icons in tasks"
-msgstr "Vis ikoner i oppgaver"
+#: applets/gnome-pager/gnomepager_applet.c:241
+msgid "Rows of pagers"
+msgstr "Rader med skjermvelgere"
 
-#: applets/gnome-pager/gnomepager_applet.c:260
+#: applets/gnome-pager/gnomepager_applet.c:259
+msgid "Tasklist"
+msgstr "Oppgaveliste"
+
+#: applets/gnome-pager/gnomepager_applet.c:261
 msgid "Show task list button"
 msgstr "Vis oppgaveliste knappen"
 
-#: applets/gnome-pager/gnomepager_applet.c:269
+#: applets/gnome-pager/gnomepager_applet.c:268
+msgid "Show task list"
+msgstr "Vis oppgavelisten"
+
+#: applets/gnome-pager/gnomepager_applet.c:275
+msgid "Show button icons"
+msgstr "Vis knappeikoner"
+
+#: applets/gnome-pager/gnomepager_applet.c:288
+msgid "Which tasks to show"
+msgstr "Hvilke oppgaver som skal vises"
+
+#: applets/gnome-pager/gnomepager_applet.c:297
+msgid "Show all tasks"
+msgstr "Vis alle oppgaver"
+
+#: applets/gnome-pager/gnomepager_applet.c:306
+msgid "Show normal tasks only"
+msgstr "Vis kun normale oppgaver"
+
+#: applets/gnome-pager/gnomepager_applet.c:313
+msgid "Show minimized tasks only"
+msgstr "Vis kun minimerte oppgaver"
+
+#: applets/gnome-pager/gnomepager_applet.c:320
+msgid "Show all tasks on all desktops"
+msgstr "Vis alle oppgaver på alle skrivebord"
+
+#: applets/gnome-pager/gnomepager_applet.c:327
+msgid "Show minimized tasks on all desktops"
+msgstr "Vis minimerte oppgaver på alle skrivebord"
+
+#: applets/gnome-pager/gnomepager_applet.c:334
+msgid "Geometry"
+msgstr "Geometri"
+
+#: applets/gnome-pager/gnomepager_applet.c:343
 msgid "Tasklist always maximum size"
 msgstr "Oppgavelisten alltid i maksimal størrelse"
 
-#: applets/gnome-pager/gnomepager_applet.c:282
+#: applets/gnome-pager/gnomepager_applet.c:354
 msgid "Maximum width of horizontal task list"
 msgstr "Maks bredde av horisontal oppgaveliste"
 
-#: applets/gnome-pager/gnomepager_applet.c:298
+#: applets/gnome-pager/gnomepager_applet.c:368
 msgid "Maximum width of vertical task list"
 msgstr "Maks bredde av vertikal oppgaveliste"
 
-#: applets/gnome-pager/gnomepager_applet.c:312
+#: applets/gnome-pager/gnomepager_applet.c:380
 msgid "Number of rows of horizontal tasks"
 msgstr "Antall rader av horisontale oppgaver"
 
-#: applets/gnome-pager/gnomepager_applet.c:326
+#: applets/gnome-pager/gnomepager_applet.c:392
 msgid "Number of vertical columns of tasks"
 msgstr "Antall vertikale kolonner med oppgaver"
 
-#: applets/gnome-pager/gnomepager_applet.c:340
-msgid "Number rows of pagers"
-msgstr "Antall rader med skjermvelgere"
-
-#: applets/gnome-pager/gnomepager_applet.c:1351
+#: applets/gnome-pager/gnomepager_applet.c:1409
 msgid "Gnome Pager Error"
 msgstr "Feil i GNOME skjermvelger"
 
-#: applets/gnome-pager/gnomepager_applet.c:1352
+#: applets/gnome-pager/gnomepager_applet.c:1410
 msgid ""
 "You are not running a GNOME Compliant Window Manager.\n"
 "Please run a GNOME Compliant Window Manager.\n"
@@ -907,27 +987,27 @@ msgstr ""
 #. XXX: a hackish way to bind events on these buttons so that
 #. we will recieve the right click and such events over them to
 #. display menus and allow dragging over them
-#: applets/gnome-pager/gnomepager_applet.c:1406
+#: applets/gnome-pager/gnomepager_applet.c:1464
 msgid "?"
 msgstr "?"
 
-#: applets/gnome-pager/gnomepager_applet.c:1893
+#: applets/gnome-pager/gnomepager_applet.c:1953
 msgid "Sticky"
 msgstr "Klebrig"
 
-#: applets/gnome-pager/gnomepager_applet.c:2338
+#: applets/gnome-pager/gnomepager_applet.c:2400
 msgid "Show / Hide"
 msgstr "Vis / gjem"
 
-#: applets/gnome-pager/gnomepager_applet.c:2344
+#: applets/gnome-pager/gnomepager_applet.c:2406
 msgid "Shade / Unshade"
 msgstr "Skygge / Ikke skygge"
 
-#: applets/gnome-pager/gnomepager_applet.c:2350 panel/launcher.c:44
+#: applets/gnome-pager/gnomepager_applet.c:2412 panel/launcher.c:44
 msgid "Close"
 msgstr "Lukk"
 
-#: applets/gnome-pager/gnomepager_applet.c:2356
+#: applets/gnome-pager/gnomepager_applet.c:2418
 msgid "Nuke"
 msgstr "Fjern"
 
@@ -1353,6 +1433,10 @@ msgstr "Pause under tekstbryting:"
 msgid "Scroll speed between lines (Smooth scroll):"
 msgstr "Rullefart mellom linjer (jevn rulling):"
 
+#: applets/slashapp/properties.c:422
+msgid "Display"
+msgstr "Vis"
+
 #: applets/slashapp/slashapp.c:152
 msgid "No articles"
 msgstr "Ingen artikler"
@@ -1567,7 +1651,7 @@ msgid "Sort _Recursive"
 msgstr "Sorter _rekursivt"
 
 #. loading dialog
-#: gmenu/main.c:239 gmenu/main.c:285 gmenu/tree.c:388
+#: gmenu/main.c:239 gmenu/main.c:285 gmenu/tree.c:389
 msgid "GNOME menu editor"
 msgstr "GNOME menyredigering"
 
@@ -1607,23 +1691,23 @@ msgstr ""
 "Denne endringen er i konflikt med en eksisterende menyoppføring.\n"
 "To menyoppføringer i samme undermeny kan ikke ha samme navn."
 
-#: gmenu/tree.c:390
+#: gmenu/tree.c:391
 msgid "One moment, reading menus..."
 msgstr "Et øyeblikk, leser menyene..."
 
-#: gmenu/tree.c:409
+#: gmenu/tree.c:410
 msgid "User Menus"
 msgstr "Brukermenyer"
 
-#: gmenu/tree.c:410
+#: gmenu/tree.c:411
 msgid "Top of user menus"
 msgstr "Toppen på brukermenyene"
 
-#: gmenu/tree.c:417
+#: gmenu/tree.c:418
 msgid "System Menus"
 msgstr "Systemmenyer"
 
-#: gmenu/tree.c:418
+#: gmenu/tree.c:419
 msgid "Top of system menus"
 msgstr "Toppen på systemmenyene"
 
@@ -2973,32 +3057,6 @@ msgstr "Animasjon"
 msgid "General icon settings"
 msgstr "Generelle egenskaper for ikoner"
 
-#: panel/session.c:628
-msgid ""
-"Are you sure you want to just terminate the panel?\n"
-"\n"
-"If you need to restart the panel after terminating it here, you will need to "
-"type panel in a terminal window\n"
-"\n"
-"Press OK to terminate the panel!"
-msgstr ""
-"Er du sikker på at du vil terminere panelet?\n"
-"\n"
-"Hvis du vil ha panelet tilbake etter å ha terminert det her, må du starte et "
-"nytt panel fra et terminalvindu!"
-
-#: panel/session.c:689
-msgid "Really log out?"
-msgstr "Virkelig logge ut?"
-
-#: panel/session.c:694
-msgid "Only terminate panel"
-msgstr "Bare avslutt panelet"
-
-#: panel/session.c:708
-msgid "Ask next time"
-msgstr "Spør neste gang"
-
 #: panel/swallow.c:211
 msgid "Create swallow applet"
 msgstr "Opprett slukt applikasjon"
@@ -3014,3 +3072,4 @@ msgstr "Kommando (valgfri)"
 #: panel/swallow.c:258
 msgid "Height"
 msgstr "Høyde"
+
