@@ -244,6 +244,9 @@ static gchar *contributors[] = {
 	"Joe Pfeiffer",
 	"Ben Pierce",
 	"Chris Pinkham",
+	/* If your encoding allows it, use aacute (U00E1) for the 'a'
+	 * of 'German' and use ntilde (U00F1) for the 'n' of 'Caamano' */
+	N_("German Poo-Caamano"),
 	"Dick Porter",
 	"Tero Pulkkinen",
 	"The Rasterman",
