@@ -25,7 +25,7 @@ AC_PROG_YACC
 GNOME_COMPILE_WARNINGS
 
 GNOME_X_CHECKS
-GNOME_GHTTP_CHECK
+dnl GNOME_GHTTP_CHECK
 
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
@@ -47,8 +47,8 @@ apps, like panel, will not run properly.))
 AC_SUBST(DL_LIB)
 
 dnl properties-keyboard
-AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
-AC_SUBST(XF86MISC_LIBS)
+dnl AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
+dnl AC_SUBST(XF86MISC_LIBS)
 
 for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
   if test -f $dir/orbit-idl ; then
@@ -72,8 +72,8 @@ AC_SUBST(ZVT_LIBS)
 dnl
 dnl Fvwm pager
 dnl
-AC_CHECK_HEADER(fvwm.h, fvwm=true, fvwm=false)
-AM_CONDITIONAL(HAVE_FVWM, $fvwm)
+dnl AC_CHECK_HEADER(fvwm.h, fvwm=true, fvwm=false)
+dnl AM_CONDITIONAL(HAVE_FVWM, $fvwm)
 
 dnl
 dnl gnome-session
@@ -139,10 +139,10 @@ if test "$P_MODEMLIGHTS" != "modemlights"; then
 fi
 
 dnl esd-manager
-have_libesd=no
-AM_PATH_ESD(,have_libesd=yes,
-[AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
-AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
+dnl have_libesd=no
+dnl AM_PATH_ESD(,have_libesd=yes,
+dnl [AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
+dnl AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
 
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
