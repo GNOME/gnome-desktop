@@ -7,15 +7,15 @@ control_center = control-center
 endif
 
 always_built_SUBDIRS = panel applets \
-	 gsm pixmaps desktop-links desktop-properties help-browser \
+	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
 	 gnome-terminal core-docs
 
-sometimes_built_SUBDIRS = gmenu smproxy control-center
+sometimes_built_SUBDIRS = gmenu control-center
 
-SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu)
+SUBDIRS = intl po macros $(always_built_SUBDIRS) $(gmenu) $(control_center)
 
-DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
-	$(sometimes_built_SUBDIRS)
+#DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
+#	$(sometimes_built_SUBDIRS)
 
 EXTRA_DIST = gnome-core.spec
 
