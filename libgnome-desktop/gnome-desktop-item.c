@@ -3262,6 +3262,16 @@ ditem_save (GnomeDesktopItem *item, const char *uri, GError **error)
 			return FALSE;
 		}
 	}
+	if (result != GNOME_VFS_OK) {
+		g_set_error (error,
+			     /* FIXME: better errors */
+			     GNOME_DESKTOP_ITEM_ERROR,
+			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
+			     _("Error writing file '%s': %s"),
+			     uri, strerror (errno));
+
+		return FALSE;
+	}
 
 	vfs_printf (handle, "[Desktop Entry]\n");
 	for (li = item->keys; li != NULL; li = li->next) {

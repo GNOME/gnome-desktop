@@ -3,6 +3,7 @@
 #include <libgnomeui/libgnomeui.h>
 
 #include "gnome-desktop-item.h"
+#include <libgnomevfs/gnome-vfs-utils.h>
 /*
 #include <libgnomeui/gnome-ditem-edit.h>
 */
@@ -16,7 +17,9 @@ test_ditem (const char *file)
 	GnomeDesktopItem *ditem;
 	GnomeDesktopItemType type;
 	const gchar *text;
+	char *uri;
 	GSList *list, *c;
+	char path[256];
 
 	ditem = gnome_desktop_item_new_from_file (file,
 						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
@@ -29,7 +32,7 @@ test_ditem (const char *file)
 	text = gnome_desktop_item_get_location (ditem);
 	g_print ("LOCATION: |%s|\n", text);
 
-	type = gnome_desktop_item_get_type ();
+	type = gnome_desktop_item_get_entry_type (ditem);
 	g_print ("TYPE: |%d|\n", type);
 
 	text = gnome_desktop_item_get_string
@@ -74,8 +77,14 @@ test_ditem (const char *file)
 		 GNOME_DESKTOP_ITEM_NAME,
 		 "Neu gesetzt!");
 
+	getcwd (path, 255 - strlen ("/foo.desktop"));
+	strcat (path, "/foo.desktop");
+
 	g_print ("Saving to foo.desktop\n");
-	gnome_desktop_item_save (ditem, "foo.desktop", FALSE, NULL);
+	uri = gnome_vfs_get_uri_from_local_path (path);
+	g_print ("URI: %s\n", uri);
+	gnome_desktop_item_save (ditem, uri, FALSE, NULL);
+	g_free (uri);
 }
 
 
