@@ -14,6 +14,12 @@ gnome_about_SOURCES =		\
 	gnome-about.c		\
 	contributors.h
 
+@INTLTOOL_DESKTOP_RULE@
+
+desktopdir = $(datadir)/applications/
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+desktop_in_files = gnome-about.desktop.in
+
 aboutdir = $(datadir)/gnome-about
 about_DATA = gnome-64.gif
 
