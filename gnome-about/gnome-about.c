@@ -1,437 +1,468 @@
-/*
- * gnome-about
- * (c) 1999-2000 the Free Software Foundation
+/* gnome-about.c:
  *
- * Informative little about thing that lets us brag to our friends as
- * our name scrolls by, and lets users click to load the GNOME
- * homepages. (no easter eggs here)
+ * Copyright (C) 2002 Sun Microsystems, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ * Authors:
+ *      Glynn Foster <glynn.foster@sun.com>
+ *      Mark McLoughlin <mark@skynet.ie>
+ */
+
+/*
+ * TODO:
+ *  * Lots of magic numbers here. Each of them should
+ *    be calculated based on the pixbuf sizes and text
+ *    size. Try this on a large print theme ! :/
+ *  * Get the translator credits from the translations.
+ *  * Allow the text in gnome-version.xml to be translated.
+ *  * The text isn't accessible.
  */
 
 #include <config.h>
+
+#include <gtk/gtk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnomeui/gnome-window-icon.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <libgnomecanvas/gnome-canvas-pixbuf.h>
+
+#include <libgnomecanvas/gnome-canvas.h>
+#include <libgnomecanvas/gnome-canvas-text.h>
+
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+
 #include "contributors.h"
-#include "logo.xpm"
 
-gboolean cb_quit      (GtkWidget *widget, gpointer data);
-gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
-gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
-gboolean cb_keypress  (GtkWidget *widget, GdkEventKey *event);
-gboolean cb_clicked   (GtkWidget *widget, GdkEvent *event);
-
-static GtkWidget   *area   = NULL;
-static GdkPixmap   *pixmap = NULL;
-static PangoLayout *layout = NULL;
-static int          font_descent;
-static int          font_ascent;
-static int          fast_fwd = 0;
-static char        *gnome_version_string = NULL;
-static char        *gnome_vendor_string = NULL;
-static char        *gnome_build_date_string = NULL;
-static char        *gnome_intro_message = NULL;
-
-int howmuch = 0;
-
-GnomeCanvasItem *image;
-GtkWidget       *canvas;
-GdkPixbuf       *im;
-	
-static gint sparkle_timer = -1;
-static gint scroll_timer = -1;
-static gint new_sparkle_timer = -1;
-
-/* Sparkles */
-#define NUM_FRAMES 8
-
-typedef struct _Sparkle Sparkle;
-struct _Sparkle {
-	GnomeCanvasItem *hline;
-	GnomeCanvasItem *vline;
-	GnomeCanvasItem *hsmall;
-	GnomeCanvasItem *vsmall;
-	
-	GnomeCanvasPoints *hpoints [NUM_FRAMES];
-	GnomeCanvasPoints *vpoints [NUM_FRAMES];
-	GnomeCanvasPoints *hspoints [NUM_FRAMES];
-	GnomeCanvasPoints *vspoints [NUM_FRAMES];
-
-	gint count;
-	gboolean up;
+static char *translators [] = {
+	"Me me me",
+	"You you you",
+	"And the christmas fairy",
+	"FIXME",
+	NULL
 };
 
+#define GNOME_LOGO_FILENAME "gnome-foot-large.png"
 
-static void
-sparkle_destroy (Sparkle *sparkle)
-{
-	int i;
-	g_return_if_fail (sparkle != NULL);
-	
-	gtk_object_destroy (GTK_OBJECT (sparkle->hline));
-	gtk_object_destroy (GTK_OBJECT (sparkle->vline));
-	gtk_object_destroy (GTK_OBJECT (sparkle->hsmall));
-	gtk_object_destroy (GTK_OBJECT (sparkle->vsmall));
+#define CANVAS_MAX_X 480.0
+#define CANVAS_MAX_Y 300.0
 
-	for (i=0; i > NUM_FRAMES ; i++) {
-		gnome_canvas_points_free (sparkle->hpoints [i]);
-		gnome_canvas_points_free (sparkle->vpoints [i]);
-		gnome_canvas_points_free (sparkle->hspoints [i]);
-		gnome_canvas_points_free (sparkle->vspoints [i]);
-	}
-	g_free (sparkle);
-}
+#define RESPONSE_CREDITS 1
+#define STOCK_CREDITS "credits"
+
+
+typedef struct {
+	GnomeCanvasItem *item;
+	GnomeCanvas     *canvas;
+	GdkPixbuf       *logo;
+	int              width;
+	int              height;
+	int              alpha;
+} LogoMergeData;
+
+typedef struct {
+	GnomeCanvasItem *item;
+	GnomeCanvas     *canvas;
+	GnomeCanvasItem *header_item;
+	char            *text;
+	gdouble          x;
+	gdouble          y;
+} FoundationLogoData;
+
+typedef struct {
+	GnomeCanvasItem *item;
+	GnomeCanvas     *canvas;
+} AnimationData;
+
+static struct {
+	char *file;
+	char *text;
+} foundation_logos [] = {
+	{ "compaq.gif", N_("Compaq") },
+	{ "debian.gif", N_("Debian") },
+	{ "fsf.gif", N_("The Free Software Foundation") },
+	{ "hp.gif", N_("Hewlett-Packard") },
+	{ "ibm.gif", N_("IBM") },
+	{ "mandrakesoft.gif", N_("MandrakeSoft") },
+	{ "osdn.gif", N_("Open Source\nDevelopment Network") },
+	{ "redflag.gif", N_("Red Flag") },
+	{ "redhat.gif", N_("Red Hat") },
+	{ "sun.gif", N_("Sun Microsystems") },
+	{ "ximian.jpg", N_("Ximian") }
+};
+
+static PangoLayout  *global_layout = NULL;
+static char        **introduction_messages =  NULL;
+
+static gboolean display_foundation_logo      (gpointer data);
+static gboolean display_introduction_message (gpointer data);
+
 
 static gboolean
-sparkle_timeout (Sparkle *sparkle)
+animate_logo (gpointer data)
 {
-	g_return_val_if_fail (sparkle != 0, FALSE);
+	FoundationLogoData *logo_data = (FoundationLogoData *) data;
+	GnomeCanvasItem    *item = logo_data->item;
+	static int          stop_counter = 0;
 
-	if (sparkle->count == -1) {
-		sparkle_destroy (sparkle);
+	if (stop_counter > 0) {
+		static GnomeCanvasItem *logo_text;
+
+		if (stop_counter == 20) {
+			char *text;
+
+			text = g_strdup_printf ("<big><b>%s</b></big>",
+						_(logo_data->text));
+
+			logo_text = gnome_canvas_item_new (
+					GNOME_CANVAS_GROUP (logo_data->canvas->root),
+					gnome_canvas_text_get_type (),
+					"markup", text,
+					"anchor", GTK_ANCHOR_NW,
+					"x", logo_data->x,
+					"y", logo_data->y,
+					NULL);
+
+			g_free (text);
+		}
+
+		if (--stop_counter == 0) {
+			g_assert (logo_text != NULL);
+			gtk_object_destroy (GTK_OBJECT (logo_text));
+			logo_text = NULL;
+			stop_counter = -1;
+		}
+
+		return TRUE;
+	}
+
+	if (stop_counter == 0 &&
+	    item->x1 + ((item->x2 - item->x1) / 2) <= CANVAS_MAX_X / 2) {
+		stop_counter = 20;
+		return TRUE;
+	}
+
+	if (item->x2 <= 0.0) {
+		AnimationData *anim_data;
+
+		stop_counter = 0;
+
+		anim_data = g_new (AnimationData, 1);
+
+		anim_data->item   = logo_data->header_item;
+		anim_data->canvas = logo_data->canvas;
+
+		g_timeout_add (1 * 1000, display_foundation_logo, anim_data);
+
+		g_free (logo_data);
+
 		return FALSE;
 	}
 
-	gnome_canvas_item_set (sparkle->hline, "points",
-			       sparkle->hpoints [sparkle->count], NULL);
-	gnome_canvas_item_set (sparkle->vline, "points",
-			       sparkle->vpoints [sparkle->count], NULL);
-	gnome_canvas_item_set (sparkle->hsmall, "points",
-			       sparkle->hspoints [sparkle->count], NULL);
-	gnome_canvas_item_set (sparkle->vsmall, "points",
-			       sparkle->vspoints [sparkle->count], NULL);
-
-	if (sparkle->count == NUM_FRAMES - 1)
-		sparkle->up = FALSE;
-
-	if (sparkle->up)
-		sparkle->count++;
-	else
-		sparkle->count--;
+	gnome_canvas_item_move (item, -10.0, 0.0);
 
 	return TRUE;
 }
 
-static void
-fill_points (GnomeCanvasPoints *points, double x, double y, double delta,
-	     gboolean horizontal, gboolean square)
+static GdkPixbuf *
+get_logo_pixbuf (int *iter)
 {
-	if (horizontal) {
-		if (square) {
-			points->coords[0] = x - delta;
-			points->coords[1] = y;
-			points->coords[2] = x + delta;
-			points->coords[3] = y;
+	GdkPixbuf *retval = NULL;
+
+	while (!retval) {
+		GError *error = NULL;
+		char   *image;
+		char   *tmp;
+
+		if (*iter >= G_N_ELEMENTS (foundation_logos))
+			break;
+
+		tmp = g_strdup_printf ("gnome-about/%s",
+				       foundation_logos [*iter].file);
+		image = gnome_program_locate_file (
+				NULL, GNOME_FILE_DOMAIN_PIXMAP,
+				tmp, TRUE, NULL);	
+		g_free (tmp);
+		if (!image) {
+			g_warning (_("Unable to locate '%s'"),
+				   foundation_logos [*iter].file);
+			(*iter)++;
+			continue;
 		}
-		else {
-			points->coords[0] = x - delta;
-			points->coords[1] = y - delta;
-			points->coords[2] = x + delta;
-			points->coords[3] = y + delta;
+	
+		retval = gdk_pixbuf_new_from_file (image, &error);
+		if (error) {
+			g_warning (_("Unable to load '%s': %s"),
+				   foundation_logos [*iter].file,
+				   error->message);
+			g_error_free (error);
+			g_free (image);
+			(*iter)++;
+			continue;
 		}
+		g_free (image);
 	}
+
+	return retval;
+}
+
+static gboolean
+display_foundation_logo (gpointer data)
+{
+	AnimationData          *anim_data = (AnimationData *) data;
+	FoundationLogoData     *logo_data;
+	GdkPixbuf              *pixbuf;
+	int                     logo_width;
+	int                     logo_height;
+	static GnomeCanvasItem *logo = NULL;
+	static int              i = 0;
+
+	if (i >= G_N_ELEMENTS (foundation_logos)) {
+		gtk_object_destroy (GTK_OBJECT (anim_data->item));
+		g_free (anim_data);
+		return FALSE;
+	}
+
+	pixbuf = get_logo_pixbuf (&i);
+	if (!pixbuf) {
+		gtk_object_destroy (GTK_OBJECT (anim_data->item));
+		g_free (anim_data);
+		return FALSE;
+	}
+
+	logo_width  = gdk_pixbuf_get_width  (pixbuf);
+	logo_height = gdk_pixbuf_get_height (pixbuf);
+
+	if (!logo) {
+		logo = gnome_canvas_item_new (
+				GNOME_CANVAS_GROUP (anim_data->canvas->root),
+				gnome_canvas_pixbuf_get_type (),
+				"pixbuf", pixbuf,
+				"x", CANVAS_MAX_X + logo_width  + 10.0,
+				"y", 170.0,
+				NULL);
+		gnome_canvas_item_lower_to_bottom (logo);
+	} else {
+		gnome_canvas_item_move (
+			logo,
+			(CANVAS_MAX_X + logo_width  + 10.0) - logo->x1,
+			170.0 - logo->y1);
+		gnome_canvas_item_set (logo, "pixbuf", pixbuf, NULL);
+	}
+
+	g_object_unref (pixbuf);
+
+	logo_data = g_new (FoundationLogoData, 1);
+
+	logo_data->item        = logo;
+	logo_data->canvas      = anim_data->canvas;
+	logo_data->header_item = anim_data->item;
+	logo_data->text        = foundation_logos [i].text;
+	logo_data->x           = CANVAS_MAX_X / 2 + logo_width / 2 + 10.0;
+	logo_data->y           = 170.0;
+
+	g_timeout_add (50, animate_logo, logo_data); 
+
+	i++;
+
+	g_free (anim_data);
+
+	return FALSE;
+}
+
+static void
+display_foundation_logos (GnomeCanvas *canvas)
+{
+	AnimationData   *anim_data;
+	GnomeCanvasItem *item;
+	char            *text;
+
+	text = g_strdup_printf ("<big><b>%s</b></big>",
+				_("Supported by:"));
+
+	item = gnome_canvas_item_new (
+			GNOME_CANVAS_GROUP (canvas->root),
+			gnome_canvas_text_get_type (),
+			"markup", text, 
+			"anchor", GTK_ANCHOR_NW,
+			"x", 150.0, "y", 150.0, NULL);
+
+	g_free (text);
+
+	anim_data = g_new (AnimationData, 1);
+
+	anim_data->canvas = canvas;
+	anim_data->item   = item;
+
+	display_foundation_logo (anim_data);
+}
+
+static gboolean
+animate_text (gpointer data)
+{
+	AnimationData *anim_data = (AnimationData *) data;
+
+	gnome_canvas_item_move (anim_data->item, 0.0, -10.0);
+
+	if (anim_data->item->y1 <= 60.0) {
+		g_timeout_add (5 * 1000,
+			       display_introduction_message,
+			       anim_data->canvas);
+		g_free (anim_data);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+display_introduction_message (gpointer data)
+{
+	GnomeCanvas            *canvas = (GnomeCanvas *) data;
+	AnimationData          *anim_data;
+	static GnomeCanvasItem *introduction_text = NULL;
+	static int              i = 0;
+
+	if (!introduction_messages [i])
+		return FALSE;
+
+	if (!introduction_text)
+		introduction_text =
+			gnome_canvas_item_new (
+				GNOME_CANVAS_GROUP (canvas->root),
+				gnome_canvas_rich_text_get_type (),
+				"text", introduction_messages [i],
+			        "x", 150.0,
+				"y", CANVAS_MAX_Y + 20.0,
+				"width", 320.0,
+				"height", 220.0, 
+				"cursor_visible", FALSE,
+				NULL);
 	else {
-		if (square) {
-			points->coords[0] = x;
-			points->coords[1] = y - delta;
-			points->coords[2] = x;
-			points->coords[3] = y + delta;
-		}
-		else {
-			points->coords[0] = x + delta;
-			points->coords[1] = y - delta;
-			points->coords[2] = x - delta;
-			points->coords[3] = y + delta;
-		}
-	}  
-}
-
-#define DELTA 0.4
-
-static void
-sparkle_new (GnomeCanvas *canvas, double x, double y)
-{
-	int i;
-	double delta;
-
-	Sparkle *sparkle = g_new (Sparkle, 1);
-	GnomeCanvasPoints *points = gnome_canvas_points_new (2);
-
-	fill_points (points, x, y, 0.1, TRUE, TRUE);
-	sparkle->hsmall = gnome_canvas_item_new(GNOME_CANVAS_GROUP(canvas->root),
-						gnome_canvas_line_get_type(),
-						"points", points,
-						"fill_color", "light gray",
-						"width_units", 1.0,
-						NULL);
-	
-	gnome_canvas_item_raise_to_top(sparkle->hsmall);
-	
-	fill_points(points, x, y, 0.1, FALSE, TRUE);
-	sparkle->vsmall = gnome_canvas_item_new(GNOME_CANVAS_GROUP(canvas->root),
-						gnome_canvas_line_get_type(),
-						"points", points,
-						"fill_color", "light gray",
-						"width_units", 1.0,
-						NULL);
-	
-	gnome_canvas_item_raise_to_top(sparkle->vsmall);
-	
-	fill_points(points, x, y, DELTA, TRUE, TRUE);
-	sparkle->hline = gnome_canvas_item_new(GNOME_CANVAS_GROUP(canvas->root),
-					       gnome_canvas_line_get_type(),
-					       "points", points,
-					       "fill_color", "white",
-					       "width_units", 1.0,
-					       NULL);
-	
-	fill_points(points, x, y, DELTA, FALSE, TRUE);
-	sparkle->vline = gnome_canvas_item_new(GNOME_CANVAS_GROUP(canvas->root),
-					       gnome_canvas_line_get_type(),
-					       "points", points,
-					       "fill_color", "white",
-					       "width_units", 1.0,
-					       NULL);
-	
-	gnome_canvas_points_free(points);
-	
-	i = 0;
-	delta = 0.0;
-	while ( i < NUM_FRAMES ) {
-		sparkle->hpoints[i] = gnome_canvas_points_new(2);
-		sparkle->vpoints[i] = gnome_canvas_points_new(2);
-		sparkle->hspoints[i] = gnome_canvas_points_new(2);
-		sparkle->vspoints[i] = gnome_canvas_points_new(2);
-		
-		
-		fill_points(sparkle->hspoints[i], x, y, delta, TRUE, FALSE);    
-		fill_points(sparkle->vspoints[i], x, y, delta, FALSE, FALSE);    
-		
-		delta += DELTA;
-		fill_points(sparkle->hpoints[i], x, y, delta, TRUE, TRUE);
-		fill_points(sparkle->vpoints[i], x, y, delta + delta*.70, FALSE, TRUE);
-		++i;
+		gnome_canvas_item_move (
+			introduction_text,
+			0.0,
+			(CANVAS_MAX_Y + 20.0) - introduction_text->y1);
+		gnome_canvas_item_set (
+			introduction_text,
+			"text", introduction_messages [i],
+			NULL);
 	}
-	
-	sparkle->count = 0;
-	sparkle->up = TRUE;
-	
-	sparkle_timer = gtk_timeout_add (75,(GtkFunction)sparkle_timeout, sparkle);
-}
 
-static gint 
-new_sparkles_timeout (GnomeCanvas* canvas)
-{
-	static gint which_sparkle = 0;
+	anim_data = g_new (AnimationData, 1);
 
-	if (howmuch >= 5)
-	        return TRUE;
+	anim_data->canvas = canvas;
+	anim_data->item   = introduction_text;
 
-	switch (which_sparkle) {
-	case 0:
-		sparkle_new(canvas,130.0,10.0);
-		break;
-	case 1: 
-		sparkle_new(canvas,45.0,150.0);
-		break;
-	case 2:
-		sparkle_new(canvas,45.0,70.0);
-		break;
-	case 3: 
-		sparkle_new(canvas,111.0,155.0);
-		break;
-	case 4: 
-		sparkle_new(canvas,110.0,65.0);
-		break;
-	case 5: 
-		sparkle_new(canvas,115.0,110.0);
-		break;
-	default:
-		which_sparkle = -1;
-		break;
-	};
-	
-	++which_sparkle;
-	return TRUE;
-}
+	g_timeout_add (10, animate_text, anim_data); 
 
-static void
-set_tooltip_foreach_link (GtkWidget   *href,
-			  GtkTooltips *tooltips)
-{
-	const char *url;
-	char       *description;
-
-	g_return_if_fail (GTK_IS_WIDGET (href));
-	g_return_if_fail (GTK_IS_TOOLTIPS (tooltips));
-	
-	url = gnome_href_get_url (GNOME_HREF (href));
-	description = g_strconcat (
-			_("Click here to visit the site : "),
-			url, NULL);
-	gtk_tooltips_set_tip (tooltips, href, description, NULL);
-	g_free (description);
-}
-
-static void
-make_contributors_logo_accessible (GtkTooltips *tooltips)
-{
-	AtkObject *aobj;
-	
-	gtk_tooltips_set_tip (tooltips, area,
-			      _("List of GNOME Contributors"), NULL);
-	gtk_tooltips_set_tip (tooltips, canvas,
-			      _("GNOME Logo Image"), NULL);
-
-	aobj = gtk_widget_get_accessible (area);
-
-	/* Check if gail is loaded */
-	if (GTK_IS_ACCESSIBLE (aobj) == FALSE)
-		return;
-
-	atk_object_set_name (aobj, _("Contributors' Names"));
-	aobj = gtk_widget_get_accessible (canvas);
-	atk_object_set_name (aobj, _("GNOME Logo"));
-}
-
-gboolean
-cb_clicked (GtkWidget *widget, GdkEvent *event)
-{
-	if (event->type == GDK_BUTTON_PRESS && howmuch >= 5) {
-		char *filename;
-			
-		filename = gnome_program_locate_file (
-				NULL, GNOME_FILE_DOMAIN_DATADIR,
-				"gnome-about/contributors.dat", TRUE, NULL);
-		if (filename)
-			gnome_sound_play (filename);
-
-		g_free (filename);
-
-	}
+	i++;
 
 	return FALSE;
 }
 
-gboolean
-cb_keypress (GtkWidget *widget, GdkEventKey *event)
+static void
+display_introduction_text (GnomeCanvas *canvas)
 {
-	if (howmuch >= 5)
-		return FALSE;
+	char *text;
 
-	switch (event->keyval) {
-	case GDK_e:
-	case GDK_E:
-		if (howmuch == 4) {
-			howmuch++;
-			im = gdk_pixbuf_new_from_xpm_data (magick);
-			gnome_canvas_item_set (image,
-					       "pixbuf", im,
-					       NULL);
-		}
-		else
-			howmuch = 0;
-		break;
-	case GDK_g:
-	case GDK_G:
-		if (howmuch == 0)
-			howmuch++;
-		else
-			howmuch = 0;
-		break;
-	case GDK_m:
-	case GDK_M:
-		if (howmuch == 3)
-			howmuch ++;
-		else
-			howmuch = 0;
-		break;
-	case GDK_n:
-	case GDK_N:
-		if (howmuch == 1)
-			howmuch++;
-		else
-			howmuch = 0;
-		break;
-	case GDK_o:
-	case GDK_O:
-		if (howmuch == 2)
-			howmuch++;
-		else
-			howmuch = 0;
-		break;
-	default:
-		howmuch = 0;
+	text = g_strdup_printf ("<big><b>%s</b></big>",
+				_("Welcome to the GNOME Desktop"));
+
+	gnome_canvas_item_new (
+		GNOME_CANVAS_GROUP (canvas->root),
+		gnome_canvas_text_get_type (),
+		"markup", text, 
+		"anchor", GTK_ANCHOR_NW,
+		"x", 150.0, "y", 30.0, NULL);
+
+	g_free (text);
+
+	if (introduction_messages)
+		display_introduction_message (canvas);
+
+	display_foundation_logos (canvas);
+}
+
+static gdouble
+get_text_height (const char *text)
+{
+	PangoRectangle extents;
+
+	g_assert (global_layout != NULL);
+
+	pango_layout_set_markup (global_layout, text, -1);
+	pango_layout_get_pixel_extents (global_layout, NULL, &extents);
+
+	return extents.height;
+}
+
+static char *
+strip_newlines (const char *str)
+{
+	char **strv;
+	char  *retval;
+
+	if (!str)
+		return NULL;
+
+	strv = g_strsplit (str, "\n", -1);
+
+	retval = g_strjoinv ("", strv);
+
+	g_strfreev (strv);
+
+	return retval;
+}
+
+static void
+get_description_messages (xmlNodePtr node)
+{
+	xmlNodePtr  paras;
+	GSList     *list = NULL, *l;
+	int         i;
+
+	paras = node->children;
+
+	while (paras) {
+		char *name  = (char*) paras->name;
+		char *value = (char*) xmlNodeGetContent (paras);
+
+		if (!g_ascii_strcasecmp (name, "p") && value && value [0])
+			list = g_slist_prepend (list, strip_newlines (value));
+
+		paras = paras->next;
 	}
 
-	return FALSE;
-}
+	list = g_slist_reverse (list);
 
-gboolean
-cb_quit (GtkWidget *widget, gpointer data)
-{
-	GtkTooltips *tooltips;
+	introduction_messages = g_new (char *, g_slist_length (list) + 1);
 
-	tooltips = g_object_get_data (G_OBJECT (widget), "tooltips");
-	if (tooltips) {
-		g_object_unref (tooltips);
-		g_object_set_data (G_OBJECT (widget), "tooltips", NULL);
-	}
+	for (i = 0, l = list; l; l = l->next, i++)
+		introduction_messages [i] = l->data;
 
-	if (sparkle_timer != -1)
-		gtk_timeout_remove (sparkle_timer);
-	if (scroll_timer != -1)
-		gtk_timeout_remove (scroll_timer);
-	if (new_sparkle_timer != -1)
-		gtk_timeout_remove (new_sparkle_timer);
+	introduction_messages [i] = NULL;
 
-	g_object_unref (layout);
-
-	gtk_main_quit ();
-
-	return FALSE; /* causes "destroy" signal to be emitted */
-}
-
-static enum {
-	DRAWING_INTRO,
-	DRAWING_BOTH,
-	DRAWING_NAMES,
-	DRAWING_END
-} state = DRAWING_INTRO;
-
-static void
-mouseclick_scroll (GtkWidget       *widget,
-		   GdkEventButton  *event)
-{
-	if (event->button == 1)
-		fast_fwd++;
+	g_slist_free (list);
 }
 
 static void
-mousewheel_scroll (GtkWidget *widget,
-		   GdkEventScroll *event)
-{
-	if (event->direction == GDK_SCROLL_UP)
-		fast_fwd--;
-	else if (event->direction == GDK_SCROLL_DOWN)
-		fast_fwd++;
-}
-
-static gboolean
-keypress_scroll (GtkWidget       *widget,
-		GdkEventKey  *event)
-{
-	if (event->keyval == GDK_space)
-		fast_fwd++;
-		
-	return FALSE;
-}
-
-static void
-init_version_strings (void)
+display_version_info (GnomeCanvas *canvas,
+		      gdouble      x,
+		      gdouble      y)
 {
 	xmlDocPtr   about;
 	xmlNodePtr  node;
@@ -439,7 +470,10 @@ init_version_strings (void)
 	char       *platform = NULL;
 	char       *minor = NULL;
 	char       *micro = NULL;
-	char       *vendor = NULL;
+	char       *version_string = NULL;
+	char       *vendor_string = NULL;
+	char       *build_date_string = NULL;
+	char       *text = NULL;
 
 	about = xmlParseFile (gnome_program_locate_file (
 			      NULL, GNOME_FILE_DOMAIN_DATADIR,
@@ -458,7 +492,12 @@ init_version_strings (void)
 
 	while (bits) {
 		char *name  = (char*) bits->name;
-		char *value = (char*) xmlNodeGetContent (bits);
+		char *value;
+
+		if (!g_ascii_strcasecmp (name, "description"))
+			get_description_messages (bits);
+
+		value = (char*) xmlNodeGetContent (bits);
 
 		if (!g_ascii_strcasecmp (name, "platform") && value && value [0])
 			platform = g_strdup (value);
@@ -467,518 +506,455 @@ init_version_strings (void)
 		if (!g_ascii_strcasecmp (name, "micro") && value && value [0])
 			micro = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "vendor") && value && value [0])
-			gnome_vendor_string = g_strdup (value);
+			vendor_string = g_strdup (value);
 		if (!g_ascii_strcasecmp (name, "date") && value && value [0])
-			gnome_build_date_string = g_strdup (value);
+			build_date_string = g_strdup (value);
 		
 		bits = bits->next;
 	}
 
 	xmlFreeDoc (about);
 
-	if (!platform)
-		gnome_version_string = g_strdup ("");
+	if (!minor)
+		version_string = g_strconcat (platform, NULL);
 
-	if (!gnome_version_string && !minor)
-		gnome_version_string = g_strconcat (platform, vendor, NULL);
+	if (!version_string && !micro)
+		version_string = g_strconcat (platform, ".", minor, NULL);
 
-	if (!gnome_version_string && !micro)
-		gnome_version_string = g_strconcat (platform, ".", minor, vendor, NULL);
-
-	if (!gnome_version_string)
-		gnome_version_string = g_strconcat (platform, ".", minor, ".", micro, vendor, NULL);
+	if (!version_string)
+		version_string = g_strconcat (platform, ".", minor, ".", micro, NULL);
 
 	g_free (platform);
 	g_free (minor);
 	g_free (micro);
-	g_free (vendor);
+
+	if (version_string && version_string [0]) {
+		text = g_strdup_printf ("<big><b>%s: </b>%s</big>",
+					_("Version"), version_string);
+		gnome_canvas_item_new (
+			GNOME_CANVAS_GROUP (canvas->root),
+			gnome_canvas_text_get_type (),
+			"markup", text, 
+			"anchor", GTK_ANCHOR_NW,
+			"x", x,
+			"y", y,
+			NULL);
+
+		y += get_text_height (text) + 4.0;
+
+		g_free (text);
+	}
+
+	if (vendor_string && vendor_string [0]) {
+		text = g_strdup_printf ("<big><b>%s: </b>%s</big>",
+					_("Vendor"), vendor_string);
+		gnome_canvas_item_new (
+			GNOME_CANVAS_GROUP (canvas->root),
+			gnome_canvas_text_get_type (),
+			"markup", text, 
+			"anchor", GTK_ANCHOR_NW,
+			"x", x,
+			"y", y,
+			NULL);
+
+		y += get_text_height (text) + 4.0;
+
+		g_free (text);
+	}
+
+	if (build_date_string && build_date_string [0]) {
+		text = g_strdup_printf ("<big><b>%s: </b>%s</big>",
+					_("Build Date"), build_date_string);
+		gnome_canvas_item_new (
+			GNOME_CANVAS_GROUP (canvas->root),
+			gnome_canvas_text_get_type (),
+			"markup", text, 
+			"anchor", GTK_ANCHOR_NW,
+			"x", x,
+			"y", y,
+			NULL);
+
+		y += get_text_height (text) + 4.0;
+
+		g_free (text);
+	}
+
+	g_free (version_string);
+	g_free (vendor_string);
+	g_free (build_date_string);
 }
 
-static char *
-get_intro_message (void)
+static gboolean 
+merge_in_logo (gpointer data)
 {
-	if (!gnome_intro_message)
-		gnome_intro_message =
-			g_strdup_printf ("%s %s %s",
-				  _("GNOME"),
-				  gnome_version_string ? gnome_version_string : "",
-				  ("Was Brought To You By"));
+	LogoMergeData *merge_data = (LogoMergeData *) data;
+	GdkPixbuf     *merged;
 
-	return gnome_intro_message;
-}
-	
-static void
-draw_intro (void)
-{
-	static int  initial_pause = 50;
-	static int  x = G_MININT;
-	static int  y = G_MININT;
-	static int  layout_width = 0;
-	char       *markup;
+	if (merge_data->alpha == -1) {
+		GnomeCanvas *canvas;
 
-	markup = g_strdup_printf ("<big><b>%s</b></big>", get_intro_message ());
-	pango_layout_set_markup (layout, markup, -1);
-	g_free (markup);
+		gnome_canvas_item_set (
+			merge_data->item, "pixbuf",
+			merge_data->logo, NULL);
 
-	if (x == G_MININT) {
-		PangoRectangle extents;
+		g_object_unref (merge_data->logo);
 
-		pango_layout_get_pixel_extents (layout, NULL, &extents);
-		
-		x = (area->allocation.width - extents.width) / 2;
-		y = (area->allocation.height - extents.height) / 2;
-		layout_width = extents.width;
+		canvas = merge_data->canvas;
+
+		g_free (merge_data);
+
+		display_version_info (
+			canvas, 10.0, 20.0 + merge_data->height);
+
+		display_introduction_text (canvas);
+
+		return FALSE;
 	}
 
-	gdk_draw_layout (pixmap, area->style->white_gc, x, y, layout);
+	merged = gdk_pixbuf_composite_color_simple (
+			merge_data->logo,
+			merge_data->width,
+			merge_data->height,
+			GDK_INTERP_HYPER,
+			merge_data->alpha,
+			128, 0xffffffff, 0xffffffff);
 
-	if (fast_fwd  != 0) {
-		state = (fast_fwd > 0) ? DRAWING_NAMES : DRAWING_END;
-		fast_fwd = MAX (0, fast_fwd);
-		x = - layout_width;
-		initial_pause = 50;
-		return;
-	}
+	gnome_canvas_item_set (merge_data->item, "pixbuf", merged, NULL);
 
-	if (x == (area->allocation.width - layout_width) / 2 && initial_pause-- >= 0)
-		return;
+	g_object_unref (merged);
 
-	x++;
-	if (x > area->allocation.width) {
-		state = DRAWING_NAMES;
-		x = - layout_width;
-		initial_pause = 50;
+	if ((merge_data->alpha += 15) >= 0xff)
+		merge_data->alpha = -1;
 
-	} else if ((x + (layout_width / 2)) > area->allocation.width)
-		state = DRAWING_BOTH;
-
-}
-
-static void
-draw_names ()
-{
-	PangoRectangle extents;
-	static int     index = -1;
-	static int     going_y = G_MININT;
-	static int     middle_y = G_MININT;
-	static int     coming_y = G_MININT;
-	int            middle_height = 0;
-
-	if (middle_y == G_MININT)
-		middle_y = area->allocation.height / 2 - font_ascent;
-
-	if (fast_fwd != 0) {
-		(fast_fwd > 0) ? index++ : index--;
-		fast_fwd = 0;
-		coming_y = G_MININT;
-		going_y = middle_y - font_ascent - font_descent;
-		
-		if (index < 0) {
-			index = G_N_ELEMENTS (contributors) - 2;
-			going_y  = G_MININT;
-			state = DRAWING_END;
-			return;
-		}
-		
-		if (index >= G_N_ELEMENTS (contributors) - 2) {
-			index = -1;
-			index = -1;
-			going_y  = G_MININT;
-			middle_y = G_MININT;
-			coming_y = G_MININT;
-			state = DRAWING_END;
-			return;
-		}
-	}
-
-	if (index - 1 >= 0 && going_y != G_MININT) {
-		pango_layout_set_markup (layout, _(contributors [index - 1]), -1);
-		pango_layout_get_pixel_extents (layout, NULL, &extents);
-
-		gdk_draw_layout (pixmap, area->style->white_gc,
-				 (area->allocation.width - extents.width) / 2,
-				 going_y, layout);
-
-		going_y--;
-	}
-
-	if (index >= 0 && index < G_N_ELEMENTS (contributors)) {
-		char *markup;
-
-		markup = g_strdup_printf ("<big><b>%s</b></big>", _(contributors [index]));
-		pango_layout_set_markup (layout, markup, -1);
-		g_free (markup);
-
-		pango_layout_get_pixel_extents (layout, NULL, &extents);
-
-		gdk_draw_layout (pixmap, area->style->white_gc,
-				 (area->allocation.width - extents.width) / 2,
-				 middle_y, layout);
-
-		middle_height = extents.height;
-	}
-
-	if (index + 1 < G_N_ELEMENTS (contributors)) {
-		if (coming_y == G_MININT)
-			coming_y = area->allocation.height + font_ascent;
-
-		pango_layout_set_markup (layout, _(contributors [index + 1]), -1);
-		pango_layout_get_pixel_extents (layout, NULL, &extents);
-
-		gdk_draw_layout (pixmap, area->style->white_gc,
-				 (area->allocation.width - extents.width) / 2,
-				 coming_y, layout);
-
-		coming_y--;
-	}
-
-	if (coming_y != G_MININT && coming_y <= middle_y + middle_height) {
-		index++;
-		coming_y = G_MININT;
-		going_y = middle_y - font_ascent - font_descent;
-	}
-
-	if (index + 1 >= G_N_ELEMENTS (contributors)) {
-		index = -1;
-		going_y  = G_MININT;
-		middle_y = G_MININT;
-		coming_y = G_MININT;
-		state = DRAWING_END;
-	}
+	return TRUE;
 }
 
 static void
-draw_end ()
+show_error_dialog (const char *message)
 {
-	PangoRectangle  extents;
-	static int      pause = 100;
-	char           *markup;
+	GtkWidget *dialog;
 
-	markup = g_strdup_printf ("<big><b>%s</b></big>", _("And Many More ..."));
-	pango_layout_set_markup (layout, markup, -1);
-	g_free (markup);
+	dialog = gtk_message_dialog_new (NULL,
+					 GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_CLOSE,
+					 message);
 
-	pango_layout_get_pixel_extents (layout, NULL, &extents);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+	gtk_widget_show (dialog);
 
-	gdk_draw_layout (pixmap, area->style->white_gc,
-			(area->allocation.width - extents.width) / 2,
-			(area->allocation.height - extents.height) / 2,
-			layout);
+	gtk_dialog_run (GTK_DIALOG (dialog));
 
-	if (fast_fwd != 0) {
-		state = DRAWING_NAMES;
-		pause = 100;
-		return;
-	}
-
-	if (pause-- == 0) {
-		state = DRAWING_INTRO;
-		pause = 100;
-	}
-}
-
-#define NUM_STARS 150
-
-static void
-draw_stars ()
-{
-	static gint starx[NUM_STARS];
-	static gint stary[NUM_STARS];
-	static gint starz[NUM_STARS];
-	static gboolean inited=FALSE;
-
-	gint i=0;
-	gint x=0, y=0;
-
-	if (!inited) {
-		gint depth=0;
-		for (i = 0; i < NUM_STARS; i++) {
-			starx[i] = (random()%50) - 25;
-			stary[i] = (random()%50) - 25;
-			starz[i] = depth;
-			depth+=150/NUM_STARS;
-		}
-		inited=TRUE;
-	}
-
-	for (i = 0; i < NUM_STARS; i++) {
-		x = (((double)starx[i]/(double)starz[i])*625) +
-			area->allocation.width/2;
-		y = (((double)stary[i]/(double)starz[i])*625) +
-			area->allocation.height/2;
-	
-		gdk_draw_point (pixmap, area->style->white_gc, x, y);
-		
-		starz[i]-=1;
-		if (starz[i] < 0 ) starz[i] = 150;
-	}
+	gtk_widget_destroy (dialog);
 }
 
 static gboolean
-scroll (gpointer dummy)
+load_gnome_logo (GnomeCanvas     *canvas,
+		 GnomeCanvasItem *item)
 {
-	gdk_draw_rectangle (pixmap, area->style->black_gc,
-			    TRUE, 0, 0,
-			    area->allocation.width,
-			    area->allocation.height);
+	LogoMergeData *merge_data;
+	GdkPixbuf     *logo = NULL;
+	GError        *error = NULL;
+	char          *image;
 
-	draw_stars ();
+	image = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP,
+					   GNOME_LOGO_FILENAME,
+					   TRUE, NULL);	
+	if (!image) {
+		char *message;
 
-	switch (state) {
-	case DRAWING_INTRO:
-		draw_intro ();
-		break;
-	case DRAWING_NAMES:
-		draw_names ();
-		break;
-	case DRAWING_BOTH:
-		draw_intro ();
-		draw_names ();
-		break;
-	case DRAWING_END:
-		draw_end ();
-		break;
+		message = g_strdup_printf (_("Unable to locate '%s'"), 
+					   GNOME_LOGO_FILENAME);
+		show_error_dialog (message);
+
+		g_free (message);
+
+		return FALSE;
 	}
-
-	gtk_widget_queue_draw_area (area, 0, 0,
-				    area->allocation.width,
-				    area->allocation.height);
-
-	return TRUE;
-}
-
-gboolean
-cb_exposed (GtkWidget *widget, GdkEventExpose *event)
-{
-	gdk_draw_drawable (widget->window,
-			   widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
-			   pixmap,
-			   event->area.x, event->area.y,
-			   event->area.x, event->area.y,
-			   event->area.width, event->area.height);
-	return TRUE;
-}
-
-gboolean
-cb_configure (GtkWidget *widget, GdkEventConfigure *event)
-{
-	g_return_val_if_fail (pixmap == NULL, FALSE);
-
-	pixmap = gdk_pixmap_new (widget->window,
-				 widget->allocation.width,
-				 widget->allocation.height,
-				 -1);
-
-	return TRUE;
-}
-
-static gint
-get_max_width (void)
-{
-	PangoRectangle extents;
-	int            max_width = 0;
-	int            i;
 	
-	for (i = 0; i < G_N_ELEMENTS (contributors); i++) {
-		pango_layout_set_text (layout, _(contributors [i]), -1);
-		pango_layout_get_pixel_extents (layout, NULL, &extents);
+	logo = gdk_pixbuf_new_from_file (image, &error);
+	if (error) {
+		char *message;
 
-		max_width = MAX (max_width, extents.width);
+		message = g_strdup_printf (_("Unable to load '%s': %s"), 
+					   GNOME_LOGO_FILENAME,
+					   error->message);
+		show_error_dialog (message);
+
+		g_free (message);
+		g_free (image);
+		g_error_free (error);
+
+		return FALSE;
 	}
+	g_free (image);
 
-	pango_layout_set_text (layout, get_intro_message (), -1);
-	pango_layout_get_pixel_extents (layout, NULL, &extents);
-	max_width = MAX (max_width, extents.width);
+	merge_data = g_new (LogoMergeData, 1);
 
-	return max_width + 4;
+	merge_data->item    = item;
+	merge_data->logo    = logo;
+	merge_data->canvas  = canvas;
+	merge_data->width   = gdk_pixbuf_get_width (logo);
+	merge_data->height  = gdk_pixbuf_get_height (logo);
+	merge_data->alpha   = 0;
+
+	g_timeout_add (50, merge_in_logo, merge_data);	
+
+	return TRUE;
 }
 
-gint
-main (gint argc, gchar *argv[])
+static GtkWidget *
+create_canvas (void)
 {
-	GtkWidget        *window;
-	GtkWidget        *hbox;
-	GtkWidget        *vbox;
-	GdkPixmap        *logo_pixmap;
-	GdkBitmap        *logo_mask;
-	GtkWidget        *frame;
-	GtkWidget        *gtkpixmap;
-	GtkTooltips      *tooltips;
-	GList            *hrefs;
-	PangoContext     *context;
-	PangoFontMetrics *metrics;
-	int               max_width;
-	char             *title;
-	char             *vendor_string = NULL;
+	GnomeCanvasItem *item;
+	GtkWidget       *canvas;
+	GdkColor         color = { 0, 0xffff, 0xffff, 0xffff };
+	
+	canvas = gnome_canvas_new ();
+        gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0,
+					CANVAS_MAX_X, CANVAS_MAX_Y);
+
+	global_layout = gtk_widget_create_pango_layout (
+				GTK_WIDGET (canvas), NULL);
+
+        gtk_widget_set_size_request (canvas, CANVAS_MAX_X, CANVAS_MAX_Y);
+
+	gdk_colormap_alloc_color (gtk_widget_get_colormap (GTK_WIDGET (canvas)),
+				  &color, FALSE, TRUE);
+
+	gtk_widget_modify_bg (GTK_WIDGET (canvas), GTK_STATE_NORMAL, &color);
+
+	item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
+				      gnome_canvas_pixbuf_get_type (),
+				      "x", 10.0,
+				      "y", 10.0,
+				      NULL);
+
+	if (!load_gnome_logo (GNOME_CANVAS (canvas), item)) {
+		gtk_widget_destroy (canvas);
+		return NULL;
+	}
+
+	return canvas;
+}
+
+static GtkWidget *
+create_label (char **peoples)
+{
+	GtkWidget *label;
+	GString   *string;
+	int        i;
+
+	label = gtk_label_new ("");
+	gtk_label_set_selectable (GTK_LABEL (label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
+	gtk_misc_set_padding (GTK_MISC (label), 8, 8);
+
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+
+	string = g_string_new ("");
+
+	for (i = 0; peoples [i]; i++) {
+		char *tmp;
+
+		tmp = g_markup_escape_text (_(peoples [i]), -1);
+		g_string_append (string, tmp);
+
+		if (peoples [i + 1])
+			g_string_append (string, "\n");
+		g_free (tmp);
+	}
+
+	gtk_label_set_markup (GTK_LABEL (label), string->str);
+	g_string_free (string, TRUE);
+
+	return label;
+}
+
+static void
+display_credits_dialog (GtkDialog *parent)
+{
+	static GtkWidget *dialog = NULL;
+	GtkWidget        *label;
+	GtkWidget        *notebook;
+	GtkWidget        *sw;
+
+	if (dialog) {
+		gtk_window_present (GTK_WINDOW (dialog));
+		return;
+	}
+
+	dialog = gtk_dialog_new_with_buttons (_("Credits"),
+					      GTK_WINDOW (parent),
+					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      NULL);
+
+	gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	g_signal_connect (dialog, "response",
+			  G_CALLBACK (gtk_widget_destroy), dialog);
+	g_signal_connect (dialog, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &dialog);
+
+	notebook = gtk_notebook_new ();
+	gtk_container_set_border_width (GTK_CONTAINER (notebook), 8);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, TRUE, TRUE, 0);
+
+	if (contributors) {
+		label = create_label (contributors);
+
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_AUTOMATIC);
+
+		gtk_scrolled_window_add_with_viewport (
+				GTK_SCROLLED_WINDOW (sw), label);
+		gtk_viewport_set_shadow_type (
+				GTK_VIEWPORT (GTK_BIN (sw)->child),
+				GTK_SHADOW_NONE);
+
+		gtk_notebook_append_page (
+				GTK_NOTEBOOK (notebook), sw,
+				gtk_label_new_with_mnemonic (_("Brought to you by")));
+	}
+
+	if (translators) {
+		label = create_label (translators);
+
+		sw = gtk_scrolled_window_new (NULL, NULL);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_AUTOMATIC);
+
+		gtk_scrolled_window_add_with_viewport (
+				GTK_SCROLLED_WINDOW (sw), label);
+		gtk_viewport_set_shadow_type (
+				GTK_VIEWPORT (GTK_BIN (sw)->child),
+				GTK_SHADOW_NONE);
+
+		gtk_notebook_append_page (
+				GTK_NOTEBOOK (notebook), sw,
+				gtk_label_new_with_mnemonic (_("Translated by")));
+	}
+
+	gtk_widget_show_all (dialog);
+}
+
+static gboolean 
+quit_callback (GtkWidget *widget,
+	       gpointer  dummy)
+{
+	gtk_main_quit ();
+
+	return FALSE;
+}
+
+static void
+response_callback (GtkDialog *dialog,
+		   int        response_id,
+		   gpointer   dummy)
+{
+	if (response_id == RESPONSE_CREDITS) {
+		display_credits_dialog (dialog);
+		return;
+	}
+
+	quit_callback (GTK_WIDGET (dialog), NULL);
+}
+
+static inline void
+register_stock_item (void)
+{
+	GtkIconFactory *factory;
+	GtkIconSet     *cancel_icons;
+
+	static GtkStockItem  credits_item [] = {
+		{ STOCK_CREDITS, N_("C_redits"), 0, 0, GETTEXT_PACKAGE },
+	};
+
+	cancel_icons = gtk_icon_factory_lookup_default (GNOME_STOCK_ABOUT);
+
+	factory = gtk_icon_factory_new ();
+
+	gtk_icon_factory_add (factory, STOCK_CREDITS, cancel_icons);
+
+	gtk_icon_factory_add_default (factory);
+
+	gtk_stock_add_static (credits_item, 1);
+}
+
+
+static GtkWidget *
+create_about_dialog (void)
+{
+	GtkWidget *canvas;
+	GtkWidget *dialog;
+	GtkWidget *button;
+
+	dialog = gtk_dialog_new_with_buttons (_("About the GNOME Desktop"), 
+					      NULL, 0,
+					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,	
+				   	      NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
+
+	register_stock_item ();
+
+	button = gtk_dialog_add_button (
+			GTK_DIALOG (dialog), STOCK_CREDITS, RESPONSE_CREDITS);
+        gtk_button_box_set_child_secondary (
+			GTK_BUTTON_BOX (GTK_DIALOG (dialog)->action_area),
+			button, TRUE);
+
+	g_signal_connect (dialog, "destroy", G_CALLBACK (quit_callback), NULL);
+	g_signal_connect (dialog, "delete_event", G_CALLBACK (quit_callback), NULL);
+	g_signal_connect (dialog, "response", G_CALLBACK (response_callback), NULL);
+
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+	g_object_set (dialog, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
+
+	if (!(canvas = create_canvas ())) {
+		gtk_widget_destroy (dialog);
+		return NULL;
+	}
+
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
+					GNOME_PAD_SMALL);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+			    canvas, TRUE, TRUE, 0);
+
+	return dialog;
+}
+
+int
+main (int argc, char *argv[])   
+{
+	GtkWidget *dialog;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-about","1.0", LIBGNOMEUI_MODULE, argc, argv, NULL);
-	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-logo-icon-transparent.png");
-	gtk_widget_set_default_colormap (gdk_rgb_get_colormap ());
+	gnome_program_init ("gnome-about", "1.0", LIBGNOMEUI_MODULE,
+			    argc, argv, NULL);
+	gnome_window_icon_set_default_from_file (
+		GNOME_ICONDIR "/gnome-logo-icon-transparent.png");
 
-	init_version_strings ();
-	g_assert (gnome_version_string);
+	if (!(dialog = create_about_dialog ()))
+		return -1;
 
-	if (gnome_vendor_string && gnome_build_date_string)
-		vendor_string = g_strdup_printf (" (%s - %s)",
-						 gnome_vendor_string,
-						 gnome_build_date_string);
+	gtk_widget_show_all (dialog);
 
-	else if (gnome_vendor_string && !gnome_build_date_string)
-		vendor_string = g_strdup_printf (" (%s)", gnome_vendor_string);
-
-	title = g_strdup_printf (_("About GNOME%s%s%s"),
-				 gnome_version_string[0] ? " " : "" ,
-				 gnome_version_string,
-				 vendor_string ? vendor_string : "");
-	window = gtk_dialog_new_with_buttons (title, NULL, 0,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,	
-				   	      NULL);
-	g_free (title);
-	g_free (vendor_string);
-
-	gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_OK);
-
-	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
-	g_object_set (window, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
-
-	gtk_widget_realize (window);
-
-	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask,
-						    NULL,
-						    (char **)logo_xpm);
-	gtkpixmap = gtk_image_new_from_pixmap (logo_pixmap, logo_mask);
-
-	im = gdk_pixbuf_new_from_xpm_data (logo_xpm);
-	canvas = gnome_canvas_new ();
-	gtk_widget_set_size_request (canvas,
-			             gdk_pixbuf_get_width (im),
-			             gdk_pixbuf_get_height (im));
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0,
-					gdk_pixbuf_get_width (im),
-					gdk_pixbuf_get_height (im));
-
-	image = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
-				       gnome_canvas_pixbuf_get_type (),
-				       "pixbuf", im,
-				       "x", 0.0,
-				       "y", 0.0,
-				       "width", (double) gdk_pixbuf_get_width (im),
-				       "height", (double) gdk_pixbuf_get_height (im),
-				       NULL);
-
-	g_object_unref (im);
-	
-	g_signal_connect (window, "delete_event",
-			  G_CALLBACK (cb_quit), im);
-	g_signal_connect (window, "destroy",
-			  G_CALLBACK (cb_quit), im);
-	g_signal_connect (window, "key_press_event",
-			  G_CALLBACK (cb_keypress), NULL);
-
-	g_signal_connect (image, "event",
-			  G_CALLBACK (cb_clicked), NULL);
-
-	new_sparkle_timer = gtk_timeout_add (1300,
-					     (GtkFunction) new_sparkles_timeout,
-					     canvas);
-
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (window)->vbox), GNOME_PAD);
-
-	hbox = gtk_hbox_new (FALSE, 10);
-	vbox = gtk_vbox_new (FALSE, 10);
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (frame), canvas);
-	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, FALSE, 0);
-
-	area = gtk_drawing_area_new ();
-	GTK_WIDGET_SET_FLAGS(area, GTK_CAN_FOCUS);
-	layout = gtk_widget_create_pango_layout (area, NULL);
-	context = gtk_widget_get_pango_context (area);
-	metrics = pango_context_get_metrics (context,
-					     area->style->font_desc,
-					     pango_context_get_language (context));
-	font_descent = pango_font_metrics_get_descent (metrics) / PANGO_SCALE;
-	font_ascent  = pango_font_metrics_get_ascent  (metrics) / PANGO_SCALE;
-	pango_font_metrics_unref (metrics);
-
-	max_width = get_max_width();
-	if (max_width < 320) 
-		GTK_WIDGET (area)->requisition.width = 320;
-	else
-		GTK_WIDGET (area)->requisition.width = max_width;
-	GTK_WIDGET (area)->requisition.height = 160;
-	gtk_widget_queue_resize (GTK_WIDGET (area));
-	gtk_widget_queue_draw (area);
-
-	gtk_widget_add_events (area, GDK_BUTTON_PRESS_MASK);
-	gtk_widget_add_events (area, GDK_KEY_PRESS_MASK);
-	g_signal_connect (area, "button_press_event",
-			  G_CALLBACK (mouseclick_scroll), NULL);
-	g_signal_connect (area, "key_press_event",
-			  G_CALLBACK (keypress_scroll), NULL);
-	g_signal_connect (area, "scroll_event",
-			  G_CALLBACK (mousewheel_scroll), NULL);
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (frame), area);
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
-
-	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
-
-	g_signal_connect (area, "expose_event",
-			  G_CALLBACK (cb_exposed), NULL);
-	g_signal_connect (area, "configure_event",
-			  G_CALLBACK (cb_configure), NULL);
-
-	/* horizontal box for URLs */
-	hbox = gtk_hbox_new (TRUE, 10);
-
-	gtk_box_pack_start (GTK_BOX (hbox),
-			    gnome_href_new ("http://gnotices.gnome.org/gnome-news/",
-					    _("GNOME News Site")),
-			    TRUE, FALSE, 0);
-
-	gtk_box_pack_start (GTK_BOX (hbox),
-			    gnome_href_new (_("http://www.gnome.org/"),
-					    _("GNOME Main Site")),
-			    TRUE, FALSE, 0);
-
-	gtk_box_pack_start (GTK_BOX (hbox),
-			    gnome_href_new ("http://developer.gnome.org/",
-					    _("GNOME Developers' Site")),
-			    TRUE, FALSE, 0);
-	
-	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
-
-	g_signal_connect (window, "response",
-			  G_CALLBACK (cb_quit), NULL);
-
-	scroll_timer = gtk_timeout_add (20, scroll, NULL);
-
-	tooltips = gtk_tooltips_new ();
-	g_object_ref (tooltips);
-	gtk_object_sink (GTK_OBJECT (tooltips));
-	g_object_set_data (G_OBJECT (window), "tooltips", tooltips);
-
-	hrefs = gtk_container_get_children (GTK_CONTAINER (hbox));
-	g_list_foreach (hrefs, (GFunc) set_tooltip_foreach_link, tooltips);
-	g_list_free (hrefs);
-
-	make_contributors_logo_accessible (tooltips);
-
-	gtk_widget_show_all (window);
 	gtk_main ();
 
-	g_free (gnome_version_string);
-	g_free (gnome_vendor_string);
-	g_free (gnome_build_date_string);
-	g_free (gnome_intro_message);
+	if (global_layout)
+		g_object_unref (global_layout);
+
+	if (introduction_messages)
+		g_strfreev (introduction_messages);
 
 	return 0;
 }
