@@ -24,26 +24,22 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
 
 #include <ctype.h>
 #include <string.h>
-#include "gnome-ditem-edit.h"
+#include <gtk/gtk.h>
 
+#include <libgnome/gnome-macros.h>
+/* FIXME: this needs to be localized */
 #include <libgnome/gnome-i18n.h>
 
-#include "gnome-uidefs.h"
-#include "gnome-pixmap.h"
-#include "gnome-image-entry.h"
-#include "libgnomeuiP.h"
+#include <libgnomeui/gnome-uidefs.h>
+#include <libgnomeui/gnome-icon-entry.h>
 
-#include <bonobo/bonobo-win.h>
+#include "gnome-desktop-item.h"
+#include "gnome-ditem-edit.h"
 
 struct _GnomeDItemEditPrivate {
-        GtkWidget *child1; /* basic */
-        GtkWidget *child2; /* DND */
-        GtkWidget *child3; /* Advanced */
-
 	/* we keep a ditem around, since we can never have absolutely
 	   everything in the display so we load a file, or get a ditem,
 	   sync the display and ref the ditem */
@@ -56,15 +52,6 @@ struct _GnomeDItemEditPrivate {
         GtkWidget *exec_entry;
         GtkWidget *tryexec_entry;
         GtkWidget *doc_entry;
-        GtkWidget *wmtitles_entry;
-
-        GtkWidget *simple_dnd_toggle;
-
-        GtkWidget *file_drop_entry;
-        GtkWidget *single_file_drop_toggle;
-
-        GtkWidget *url_drop_entry;
-        GtkWidget *single_url_drop_toggle;
 
         GtkWidget *type_combo;
 
@@ -76,14 +63,10 @@ struct _GnomeDItemEditPrivate {
         GtkWidget *transl_lang_entry;
         GtkWidget *transl_name_entry;
         GtkWidget *transl_comment_entry;
-
-	/* we store this so we can set sensitive the
-	   drag and drop stuff, no point in an accessor */
-        GtkWidget *dndtable;
 };
 
 static void gnome_ditem_edit_class_init   (GnomeDItemEditClass *klass);
-static void gnome_ditem_edit_init         (GnomeDItemEdit      *messagebox);
+static void gnome_ditem_edit_instance_init(GnomeDItemEdit      *dee);
 
 static void gnome_ditem_edit_destroy      (GtkObject           *object);
 static void gnome_ditem_edit_finalize     (GObject             *object);
@@ -106,7 +89,8 @@ static gint ditem_edit_signals[LAST_SIGNAL] = { 0 };
 
 /* The following defines the get_type */
 GNOME_CLASS_BOILERPLATE (GnomeDItemEdit, gnome_ditem_edit,
-			 GtkNotebook, gtk_notebook)
+			 GtkNotebook, gtk_notebook,
+			 GTK_TYPE_NOTEBOOK)
 
 static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
@@ -151,6 +135,38 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         ditem_edit_class->changed = NULL;
 }
 
+enum {
+	ALL_TYPES,
+	ONLY_DIRECTORY,
+	ALL_EXCEPT_DIRECTORY
+};
+
+static void
+setup_combo (GnomeDItemEdit *dee, int type, const char *extra)
+{
+	GList *types = NULL;
+
+	if (type == ONLY_DIRECTORY) {
+		types = g_list_prepend (types, "Directory");
+	} else {
+		types = g_list_prepend (types, "Application");
+		types = g_list_prepend (types, "Link");
+		types = g_list_prepend (types, "FSDevice");
+		types = g_list_prepend (types, "MimeType");
+		if (type != ALL_EXCEPT_DIRECTORY)
+			types = g_list_prepend (types, "Directory");
+		types = g_list_prepend (types, "Service");
+		types = g_list_prepend (types, "ServiceType");
+	}
+	if (extra != NULL)
+		types = g_list_prepend (types, (char *)extra);
+
+	gtk_combo_set_popdown_strings
+		(GTK_COMBO (dee->_priv->type_combo), types);
+
+	g_list_free (types);
+}
+
 static void 
 table_attach_entry(GtkTable * table, GtkWidget * w,
 		   gint l, gint r, gint t, gint b)
@@ -182,7 +198,7 @@ table_attach_list(GtkTable * table, GtkWidget * w,
 }
 
 static GtkWidget *
-label_new (char *text)
+label_new (const char *text)
 {
         GtkWidget *label;
 
@@ -195,7 +211,6 @@ static void
 fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
 {
         GtkWidget *label;
-        GList *types = NULL;
         GtkWidget *hbox;
         GtkWidget *align;
 
@@ -235,12 +250,8 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
         label = label_new(_("Type:"));
         table_attach_label(GTK_TABLE(table), label, 0, 1, 3, 4);
 
-        types = g_list_prepend (types, "Directory");
-        types = g_list_prepend (types, "URL");
-        types = g_list_prepend (types, "Application");
         dee->_priv->type_combo = gtk_combo_new();
-        gtk_combo_set_popdown_strings(GTK_COMBO(dee->_priv->type_combo), types);
-        g_list_free(types);
+	setup_combo (dee, ALL_TYPES, NULL);
         gtk_combo_set_value_in_list(GTK_COMBO(dee->_priv->type_combo), 
                                     FALSE, TRUE);
         table_attach_entry(GTK_TABLE(table),dee->_priv->type_combo, 1, 2, 3, 4);
@@ -259,137 +270,26 @@ fill_easy_page(GnomeDItemEdit * dee, GtkWidget * table)
                          0,
                          0, 0);
 
-        dee->_priv->icon_entry = gnome_image_entry_new_icon_entry ();
-	/* FIXME: !!! */
-        /*
-	gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->icon_entry),"changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_icon_changed),
-                                              GTK_OBJECT(dee));
-					      */
-        gtk_box_pack_start(GTK_BOX(hbox), dee->_priv->icon_entry, FALSE, FALSE, 0);
+        dee->_priv->icon_entry = gnome_icon_entry_new ("desktop-icon", _("Browse icons"));
+	gtk_signal_connect_object (GTK_OBJECT (dee->_priv->icon_entry), "changed",
+				   GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
+				   GTK_OBJECT (dee));
+	gtk_signal_connect_object (GTK_OBJECT (dee->_priv->icon_entry), "changed",
+				   GTK_SIGNAL_FUNC (gnome_ditem_edit_icon_changed),
+				   GTK_OBJECT (dee));
+	gtk_box_pack_start (GTK_BOX (hbox), dee->_priv->icon_entry,
+			    FALSE, FALSE, 0);
 
-        align = gtk_alignment_new(0.0, 0.5, 0.0, 0.0);
-        gtk_box_pack_start(GTK_BOX(hbox), align, FALSE, FALSE, 0);
+        align = gtk_alignment_new (0.0, 0.5, 0.0, 0.0);
+        gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
 
         dee->_priv->terminal_button = gtk_check_button_new_with_label (_("Run in Terminal"));
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->terminal_button), 
-                                  "clicked",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
-        gtk_container_add(GTK_CONTAINER(align), dee->_priv->terminal_button);
-}
-
-static void
-simple_drag_and_drop_toggled(GtkToggleButton *tb, GnomeDItemEdit *dee)
-{
-	if(tb->active) {
-		gtk_widget_set_sensitive(dee->_priv->dndtable,FALSE);
-	} else {
-		gtk_widget_set_sensitive(dee->_priv->dndtable,TRUE);
-	}
-	gnome_ditem_edit_changed(dee);
-}
-
-static void
-fill_dnd_page(GnomeDItemEdit * dee, GtkWidget * bigtable)
-{
-        GtkWidget *label;
-        GtkWidget *table;
-
-        dee->_priv->simple_dnd_toggle =
-		gtk_check_button_new_with_label (_("Simple drag and drop"));
-        gtk_signal_connect(GTK_OBJECT(dee->_priv->simple_dnd_toggle), 
-			   "toggled",
-			   GTK_SIGNAL_FUNC(simple_drag_and_drop_toggled),
-			   dee);
-        gtk_table_attach(GTK_TABLE(bigtable), dee->_priv->simple_dnd_toggle,
-                         0, 2, 0, 1,
-                         GTK_EXPAND | GTK_FILL,
-                         0,
-                         0, 0);
-
-	table = dee->_priv->dndtable = gtk_table_new (5, 2, FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-        gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-        gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-
-        gtk_table_attach(GTK_TABLE(bigtable), table,
-                         0, 2, 1, 2,
-                         GTK_EXPAND | GTK_FILL,
-                         GTK_EXPAND | GTK_FILL,
-                         0, 0);
-
-        label = label_new(_("In the following commands you should use %s in "
-			    "the spot where the\nfilename/URL should be "
-			    "substituted.  If you leave the field blank\n"
-			    "drops will not be accepted.  If this application "
-			    "can accept\nmultiple files or URLs as arguments "
-			    "after its command name check the box above."));
-        gtk_table_attach(GTK_TABLE(table), label,
-                         0, 2, 1, 2,
-			 0,
-                         0,
-                         0, 0);
-
-        label = label_new(_("Command for file drops:"));
-        table_attach_label(GTK_TABLE(table),label, 0, 1, 2, 3);
-
-        dee->_priv->file_drop_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(table),dee->_priv->file_drop_entry, 1, 2, 2, 3);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->file_drop_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
-
-        dee->_priv->single_file_drop_toggle =
-		gtk_check_button_new_with_label (_("Drop one file at a time "
-						   "only."));
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->single_file_drop_toggle), 
-                                  "clicked",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
-        gtk_table_attach(GTK_TABLE(table), dee->_priv->single_file_drop_toggle,
-                         1, 2, 3, 4,
-                         GTK_EXPAND | GTK_FILL,
-                         0,
-                         0, 0);
-
-        label = label_new(_("Command for URL drops:"));
-        table_attach_label(GTK_TABLE(table),label, 0, 1, 4, 5);
-
-        dee->_priv->url_drop_entry = gtk_entry_new();
-        table_attach_entry(GTK_TABLE(table),dee->_priv->url_drop_entry, 1, 2, 4, 5);
-        gtk_signal_connect_object_while_alive(GTK_OBJECT(dee->_priv->url_drop_entry), "changed",
-                                              GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                              GTK_OBJECT(dee));
-
-        dee->_priv->single_url_drop_toggle =
-		gtk_check_button_new_with_label (_("Drop one URL at a time "
-						   "only."));
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->single_url_drop_toggle), 
-                                  "clicked",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
-        gtk_table_attach(GTK_TABLE(table), dee->_priv->single_url_drop_toggle,
-                         1, 2, 5, 6,
-                         GTK_EXPAND | GTK_FILL,
-                         0,
-                         0, 0);
-}
-
-static void
-set_list_width(GtkWidget *clist, const char * const text[])
-{
-        int i;
-        int cols = GTK_CLIST(clist)->columns;
-        GtkCList *cl = GTK_CLIST(clist);
-        for(i=0;i<cols;i++) {
-                int w = gdk_string_width(clist->style->font,text[i]);
-                if(cl->column[i].width < w)
-                        gtk_clist_set_column_width(cl,i,w);
-        }
+        gtk_signal_connect_object (GTK_OBJECT (dee->_priv->terminal_button), 
+				   "clicked",
+				   GTK_SIGNAL_FUNC (gnome_ditem_edit_changed),
+				   GTK_OBJECT (dee));
+        gtk_container_add (GTK_CONTAINER (align),
+			   dee->_priv->terminal_button);
 }
 
 static void
@@ -447,7 +347,6 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
                         text[0] = s;
                         text[1] = name;
                         text[2] = comment;
-                        set_list_width (GTK_WIDGET(cl), text);
                         gtk_signal_emit (GTK_OBJECT(dee),
                                          ditem_edit_signals[CHANGED], NULL);
                         return;
@@ -456,7 +355,6 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         text[0]=lang;
         text[1]=name;
         text[2]=comment;
-        set_list_width(GTK_WIDGET(cl),text);
         gtk_clist_append(cl,(char**)text);
         gtk_signal_emit(GTK_OBJECT(dee), ditem_edit_signals[CHANGED], NULL);
 }
@@ -499,24 +397,19 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
                                   GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
                                   GTK_OBJECT(dee));
 
-        label = label_new(_("Window titles to wait for (comma separated):"));
-        table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
-
-        dee->_priv->wmtitles_entry = gtk_entry_new_with_max_length(255);
-        table_attach_entry(GTK_TABLE(page),dee->_priv->wmtitles_entry, 0, 2, 3, 4);
-        gtk_signal_connect_object(GTK_OBJECT(dee->_priv->wmtitles_entry), 
-                                  "changed",
-                                  GTK_SIGNAL_FUNC(gnome_ditem_edit_changed),
-                                  GTK_OBJECT(dee));
-
         label = gtk_label_new(_("Name/Comment translations:"));
-        table_attach_label(GTK_TABLE(page),label, 0, 2, 4, 5);
+        table_attach_label(GTK_TABLE(page),label, 0, 2, 2, 3);
   
         transl[0] = _("Language");
         transl[1] = _("Name");
         transl[2] = _("Comment");
         dee->_priv->translations = gtk_clist_new_with_titles(3,(char**)transl);
-        set_list_width(dee->_priv->translations,transl);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
+					  0, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
+					  1, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (dee->_priv->translations),
+					  2, TRUE);
         box = gtk_scrolled_window_new(NULL,NULL);
         gtk_widget_set_usize(box,0,120);
         gtk_container_add(GTK_CONTAINER(box),dee->_priv->translations);
@@ -527,7 +420,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
                            dee);
 
         box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
-        table_attach_entry(GTK_TABLE(page),box, 0, 2, 6, 7);
+        table_attach_entry(GTK_TABLE(page),box, 0, 2, 3, 4);
   
         dee->_priv->transl_lang_entry = gtk_entry_new();
         gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_lang_entry,FALSE,FALSE,0);
@@ -540,7 +433,7 @@ fill_advanced_page(GnomeDItemEdit * dee, GtkWidget * page)
         gtk_box_pack_start(GTK_BOX(box),dee->_priv->transl_comment_entry,TRUE,TRUE,0);
 
         box = gtk_hbox_new(FALSE,GNOME_PAD_SMALL);
-        table_attach_entry(GTK_TABLE(page),box, 0, 2, 7, 8);
+        table_attach_entry(GTK_TABLE(page),box, 0, 2, 4, 5);
   
         button = gtk_button_new_with_label(_("Add/Set"));
         gtk_box_pack_start(GTK_BOX(box),button,FALSE,FALSE,0);
@@ -573,34 +466,28 @@ make_page (void)
 } 
 
 static void
-gnome_ditem_edit_init (GnomeDItemEdit *dee)
+gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
 {
+	GtkWidget *child1, *child2;
 	dee->_priv = g_new0(GnomeDItemEditPrivate, 1);
 
-        dee->_priv->child1 = make_page();
-        fill_easy_page(dee, GTK_BIN(dee->_priv->child1)->child);
-        gtk_widget_show_all(dee->_priv->child1);
+        child1 = make_page();
+        fill_easy_page (dee, GTK_BIN (child1)->child);
+        gtk_widget_show_all (child1);
 
-        dee->_priv->child2 = make_page();
-        fill_dnd_page(dee, GTK_BIN(dee->_priv->child2)->child);
-        gtk_widget_show_all(dee->_priv->child2);
-
-        dee->_priv->child3 = make_page();
-        fill_advanced_page(dee, GTK_BIN(dee->_priv->child3)->child);
-        gtk_widget_show_all(dee->_priv->child3);
+        child2 = make_page();
+        fill_advanced_page (dee, GTK_BIN(child2)->child);
+        gtk_widget_show_all (child2);
 
         gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
-                                  dee->_priv->child1, 
-                                  gtk_label_new (_("Basic")));
+                                  child1,
+				  gtk_label_new (_("Basic")));
 
         gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
-                                  dee->_priv->child2, 
-                                  gtk_label_new (_("Drag and Drop")));
+                                  child2,
+				  gtk_label_new (_("Advanced")));
 
-        gtk_notebook_append_page (GTK_NOTEBOOK (dee), 
-                                  dee->_priv->child3, 
-                                  gtk_label_new (_("Advanced")));
-
+	/* FIXME: There needs to be a way to edit ALL keys/sections */
 }
 
 
@@ -659,136 +546,120 @@ gnome_ditem_edit_finalize (GObject *object)
 
 /* set sensitive for directory/other type of a ditem */
 static void
-gnome_ditem_set_directory_sensitive(GnomeDItemEdit *dee,
-				    gboolean is_directory)
+gnome_ditem_set_directory_sensitive (GnomeDItemEdit *dee,
+				     gboolean is_directory)
 {
-	gtk_widget_set_sensitive(dee->_priv->exec_entry, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->type_combo, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->terminal_button, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->tryexec_entry, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->wmtitles_entry, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->simple_dnd_toggle, !is_directory);
-	gtk_widget_set_sensitive(dee->_priv->dndtable, !is_directory);
+	gtk_widget_set_sensitive (dee->_priv->exec_entry, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->type_combo, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->terminal_button, ! is_directory);
+	gtk_widget_set_sensitive (dee->_priv->tryexec_entry, ! is_directory);
 }
 
 /* Conform display to ditem */
 static void
 gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 {
-        GSList *i18n_list,*li;
+        GList *i18n_list, *li;
+	GnomeDesktopItemType type;
         const gchar* cs;
 	GnomeDesktopItem *ditem;
         
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
 	ditem = dee->_priv->ditem;
 
-	g_assert (ditem != NULL);
-
-        cs = gnome_desktop_item_get_type(ditem);
-	if(cs && strcmp(cs,"Directory")==0) {
-		GList *types = NULL;
-		gnome_ditem_set_directory_sensitive(dee, TRUE);
-		types = g_list_prepend(types, "Directory");
-		gtk_combo_set_popdown_strings(GTK_COMBO(dee->_priv->type_combo),
-					      types);
-		g_list_free(types);
-	} else {
-		GList *types = NULL;
-		gnome_ditem_set_directory_sensitive(dee, FALSE);
-		types = g_list_prepend(types, "URL");
-		types = g_list_prepend(types, "PanelApplet");
-		types = g_list_prepend(types, "Application");
-		if(cs &&
-		   strcmp(cs,"URL") != 0 &&
-		   strcmp(cs,"PanelApplet") != 0 &&
-		   strcmp(cs,"Application") != 0)
-			types = g_list_prepend(types, (char *)cs);
-		gtk_combo_set_popdown_strings(GTK_COMBO(dee->_priv->type_combo),
-					      types);
-		g_list_free(types);
+	if (ditem == NULL) {
+		gnome_ditem_edit_clear (dee);
+		return;
 	}
 
-        cs = gnome_desktop_item_get_local_name(ditem);
+	type = gnome_desktop_item_get_entry_type (ditem);
+	if (type == GNOME_DESKTOP_ITEM_TYPE_DIRECTORY) {
+		gnome_ditem_set_directory_sensitive (dee, TRUE);
+		setup_combo (dee, ONLY_DIRECTORY, NULL);
+	} else {
+		const char *extra = NULL;
+		gnome_ditem_set_directory_sensitive (dee, FALSE);
+		if (type == GNOME_DESKTOP_ITEM_TYPE_OTHER) {
+			extra = gnome_desktop_item_get_string
+				(ditem, GNOME_DESKTOP_ITEM_TYPE);
+		}
+		setup_combo (dee, ALL_EXCEPT_DIRECTORY, extra);
+	}
+
+        cs = gnome_desktop_item_get_localestring
+		(ditem, GNOME_DESKTOP_ITEM_NAME);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry), 
                            cs ? cs : "");
 
-        cs = gnome_desktop_item_get_local_comment(ditem);
+        cs = gnome_desktop_item_get_localestring
+		(ditem, GNOME_DESKTOP_ITEM_COMMENT);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),
                            cs ? cs : "");
 
-        cs = gnome_desktop_item_get_command(ditem);
+        cs = gnome_desktop_item_get_string (ditem,
+					    GNOME_DESKTOP_ITEM_EXEC);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), cs ? cs : "");
 
-        cs = gnome_desktop_item_get_attribute(ditem, "TryExec");
+        cs = gnome_desktop_item_get_string (ditem,
+					    GNOME_DESKTOP_ITEM_TRY_EXEC);
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), 
                            cs ? cs : "");
 
-        cs = gnome_desktop_item_get_icon_path(ditem);
-        gnome_selector_set_uri(GNOME_SELECTOR(dee->_priv->icon_entry),
-                               NULL, cs, NULL, NULL);
+        cs = gnome_desktop_item_get_icon (ditem);
+	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), cs);
 
-        cs = gnome_desktop_item_get_attribute(ditem, "DocPath"); /* FIXME check name */
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->doc_entry), 
-                           cs ? cs : "");
+        cs = gnome_desktop_item_get_string (ditem, "DocPath"); /* FIXME check name */
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->doc_entry), cs ? cs : "");
 
-        cs = gnome_desktop_item_get_attribute(ditem, "WMTitles");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->wmtitles_entry), 
-                           cs ? cs : "");
+        cs = gnome_desktop_item_get_string (ditem, GNOME_DESKTOP_ITEM_TYPE);
+        gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (dee->_priv->type_combo)->entry),
+			    cs ? cs : "");
 
-        cs = gnome_desktop_item_get_type(ditem);
-        gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(dee->_priv->type_combo)->entry),
-                           cs ? cs : "");
+        gtk_toggle_button_set_active
+		(GTK_TOGGLE_BUTTON (dee->_priv->terminal_button),
+		 gnome_desktop_item_get_boolean (ditem,
+						 GNOME_DESKTOP_ITEM_TERMINAL));
 
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->_priv->terminal_button),
-                                     gnome_desktop_item_get_flags(ditem) &
-				      GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL);
-
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->_priv->simple_dnd_toggle),
-                                     gnome_desktop_item_get_flags(ditem) &
-				      GNOME_DESKTOP_ITEM_OLD_STYLE_DROP);
-
-        cs = gnome_desktop_item_get_attribute(ditem, "FileDropExec");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->file_drop_entry), 
-                           cs ? cs : "");
-
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->_priv->single_file_drop_toggle),
-                                     gnome_desktop_item_get_flags(ditem) &
-				      GNOME_DESKTOP_ITEM_SINGLE_FILE_DROP_ONLY);
-	
-        cs = gnome_desktop_item_get_attribute(ditem, "URLDropExec");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->url_drop_entry), 
-                           cs ? cs : "");
-
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(dee->_priv->single_url_drop_toggle),
-                                     gnome_desktop_item_get_flags(ditem) &
-				      GNOME_DESKTOP_ITEM_SINGLE_URL_DROP_ONLY);
-  
         /*set the names and comments from our i18n list*/
         gtk_clist_clear (GTK_CLIST(dee->_priv->translations));
-        i18n_list = gnome_desktop_item_get_languages(ditem);
-        for (li=i18n_list; li; li=li->next) {
+        i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
+        for (li = i18n_list; li != NULL; li = li->next) {
                 const char *text[3];
                 const gchar* lang = li->data;
                 cs = lang;
                 text[0] = cs ? cs : "";
-                cs = gnome_desktop_item_get_name(ditem, lang);
+                cs = gnome_desktop_item_get_localestring_lang
+			(ditem, GNOME_DESKTOP_ITEM_NAME, lang);
                 text[1] = cs ? cs : "";
-                cs = gnome_desktop_item_get_comment(ditem, lang);
+                cs = gnome_desktop_item_get_localestring_lang
+			(ditem, GNOME_DESKTOP_ITEM_COMMENT, lang);
                 text[2] = cs ? cs : "";
-                set_list_width (dee->_priv->translations,text);
-                gtk_clist_append (GTK_CLIST(dee->_priv->translations),(char**)text);
+                gtk_clist_append (GTK_CLIST (dee->_priv->translations), (char**)text);
         }
-        g_slist_free(i18n_list);
+        g_list_free (i18n_list);
 
 	/* clear the entries for add/remove */
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_lang_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_name_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (dee->_priv->transl_comment_entry), "");
 
 	/* ui can't be dirty, I mean, damn we just synced it from the ditem */
 	dee->_priv->ui_dirty = FALSE;
+}
+
+const char *
+get_language (void)
+{
+	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
+	while (list != NULL) {
+		const char *lang = list->data;
+		/* find first without encoding */
+		if (strchr (lang, '.') == NULL)
+			return lang;
+	}
+	return NULL;
 }
 
 /* Conform ditem to display */
@@ -796,9 +667,8 @@ static void
 gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 {
         const gchar * text;
+        gchar *file;
         int i;
-        const gchar* lang;
-        gint curflags;
 	GnomeDesktopItem *ditem;
         
         g_return_if_fail (dee != NULL);
@@ -806,72 +676,42 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 
 	ditem = dee->_priv->ditem;
 
-        g_assert (ditem != NULL);
-
-        lang = gnome_i18n_get_preferred_language();
-        
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->name_entry));
-        gnome_desktop_item_set_name(ditem, lang, text);
-
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->comment_entry));
-        gnome_desktop_item_set_comment(ditem, lang, text);
+	if (ditem == NULL) {
+		ditem = gnome_desktop_item_new ();
+		dee->_priv->ditem = ditem;
+	}
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->exec_entry));
-        gnome_desktop_item_set_command(ditem, text);
+        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_EXEC, text);
 
         text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->tryexec_entry));
-        gnome_desktop_item_set_attribute(ditem, "TryExec", text);
+        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TRY_EXEC, text);
   
         text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->_priv->type_combo)->entry));
-        gnome_desktop_item_set_type(ditem, text);
+        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, text);
   
-        gnome_desktop_item_set_icon_path(ditem,
-                                         gnome_selector_get_uri(GNOME_SELECTOR(dee->_priv->icon_entry)));
+	file = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry));
+        gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_ICON, file);
+	g_free (file);
 
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->doc_entry));
-        gnome_desktop_item_set_attribute(ditem, "DocPath", text);
+        text = gtk_entry_get_text (GTK_ENTRY (dee->_priv->doc_entry));
+        gnome_desktop_item_set_string (ditem, "DocPath", text);
 
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->wmtitles_entry));
-        gnome_desktop_item_set_attribute(ditem, "WMTitles", text);
-
-        curflags = gnome_desktop_item_get_flags(ditem);
-        if (GTK_TOGGLE_BUTTON(dee->_priv->terminal_button)->active)
-                curflags |= GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL;
+        if (GTK_TOGGLE_BUTTON (dee->_priv->terminal_button)->active)
+		gnome_desktop_item_set_boolean (ditem,
+						GNOME_DESKTOP_ITEM_TERMINAL,
+						TRUE);
         else
-                curflags &= ~GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL;
-        gnome_desktop_item_set_flags(ditem, curflags);
+		gnome_desktop_item_set_boolean (ditem,
+						GNOME_DESKTOP_ITEM_TERMINAL,
+						FALSE);
 
-        curflags = gnome_desktop_item_get_flags(ditem);
-        if (GTK_TOGGLE_BUTTON(dee->_priv->simple_dnd_toggle)->active)
-                curflags |= GNOME_DESKTOP_ITEM_OLD_STYLE_DROP;
-        else
-                curflags &= ~GNOME_DESKTOP_ITEM_OLD_STYLE_DROP;
-        gnome_desktop_item_set_flags(ditem, curflags);
-
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->file_drop_entry));
-        gnome_desktop_item_set_attribute(ditem, "FileDropExec", text);
-
-        curflags = gnome_desktop_item_get_flags(ditem);
-        if (GTK_TOGGLE_BUTTON(dee->_priv->single_file_drop_toggle)->active)
-                curflags |= GNOME_DESKTOP_ITEM_SINGLE_FILE_DROP_ONLY;
-        else
-                curflags &= ~GNOME_DESKTOP_ITEM_SINGLE_FILE_DROP_ONLY;
-        gnome_desktop_item_set_flags(ditem, curflags);
-
-        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->url_drop_entry));
-        gnome_desktop_item_set_attribute(ditem, "URLDropExec", text);
-
-        curflags = gnome_desktop_item_get_flags(ditem);
-        if (GTK_TOGGLE_BUTTON(dee->_priv->single_url_drop_toggle)->active)
-                curflags |= GNOME_DESKTOP_ITEM_SINGLE_URL_DROP_ONLY;
-        else
-                curflags &= ~GNOME_DESKTOP_ITEM_SINGLE_URL_DROP_ONLY;
-        gnome_desktop_item_set_flags(ditem, curflags);
-        
-	gnome_desktop_item_clear_name(ditem);
-	gnome_desktop_item_clear_comment(ditem);
-        for(i=0;i<GTK_CLIST(dee->_priv->translations)->rows;i++) {
-                const char *lang,*name,*comment;
+	gnome_desktop_item_clear_localestring (ditem,
+					       GNOME_DESKTOP_ITEM_NAME);
+	gnome_desktop_item_clear_localestring (ditem,
+					       GNOME_DESKTOP_ITEM_COMMENT);
+        for (i = 0; i < GTK_CLIST (dee->_priv->translations)->rows; i++) {
+                const char *lang, *name, *comment;
                 gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,0,(gchar**)&lang);
                 gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,1,(gchar**)&name);
                 gtk_clist_get_text(GTK_CLIST(dee->_priv->translations),i,2,(gchar**)&comment);
@@ -882,13 +722,22 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
                         continue;
 
                 if (lang == NULL)
-                        lang = gnome_i18n_get_preferred_language();
+                        lang = get_language ();
 
-                g_assert(lang != NULL);
+                g_assert (lang != NULL);
                 
-                gnome_desktop_item_set_name(ditem, lang, name);
-                gnome_desktop_item_set_comment(ditem, lang, comment);
+                gnome_desktop_item_set_localestring_lang
+			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, name);
+                gnome_desktop_item_set_localestring_lang
+			(ditem, GNOME_DESKTOP_ITEM_NAME, lang, comment);
         }
+
+	/* This always overrides the above in case of conflict */
+        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->name_entry));
+        gnome_desktop_item_set_localestring (ditem, GNOME_DESKTOP_ITEM_NAME, text);
+
+        text = gtk_entry_get_text(GTK_ENTRY(dee->_priv->comment_entry));
+        gnome_desktop_item_set_localestring (ditem, GNOME_DESKTOP_ITEM_COMMENT, text);
 
 	/* ui not dirty any more, we just synced it */
 	dee->_priv->ui_dirty = FALSE;
@@ -905,8 +754,9 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
  * Returns:  %TRUE if successful, %FALSE otherwise
  */
 gboolean
-gnome_ditem_edit_load_file(GnomeDItemEdit *dee,
-                           const gchar *path)
+gnome_ditem_edit_load_file (GnomeDItemEdit *dee,
+			    const gchar *path,
+			    GError **error)
 {
         GnomeDesktopItem * newentry;
 
@@ -914,7 +764,7 @@ gnome_ditem_edit_load_file(GnomeDItemEdit *dee,
         g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), FALSE);
         g_return_val_if_fail (path != NULL, FALSE);
 
-        newentry = gnome_desktop_item_new_from_file (path, 0);
+        newentry = gnome_desktop_item_new_from_file (path, 0, error);
 
         if (newentry != NULL) {
 		if (dee->_priv->ditem != NULL)
@@ -951,9 +801,6 @@ gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
 	if (dee->_priv->ditem != NULL)
 		gnome_desktop_item_unref (dee->_priv->ditem);
 	dee->_priv->ditem = gnome_desktop_item_copy (ditem);
-	gnome_desktop_item_set_format (dee->_priv->ditem,
-				       GNOME_DESKTOP_ITEM_GNOME);
-
 	dee->_priv->ui_dirty = TRUE;
         gnome_ditem_edit_sync_display (dee);
 }
@@ -963,18 +810,17 @@ gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
  * @dee: #GnomeDItemEdit object to work with
  *
  * Description: Get the current status of the editting areas
- * as a #GnomeDesktopItem structure.  It will give you a new
- * reference of the internal structure.  If you wish to modify it,
- * make a copy of it with #gnome_desktop_item_copy and release this
- * reference.
+ * as a #GnomeDesktopItem structure.  It will give you a pointer
+ * to the internal structure.  If you wish to modify it,
+ * make a copy of it with #gnome_desktop_item_copy
  *
- * Returns: a reference to a #GnomeDesktopItem structure.
+ * Returns: a pointer to the internal #GnomeDesktopItem structure.
  */
 GnomeDesktopItem *
-gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
+gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
 {
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
+        g_return_val_if_fail (dee != NULL, NULL);
+        g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), NULL);
 
 	if (dee->_priv->ditem == NULL) {
 		dee->_priv->ditem = gnome_desktop_item_new ();
@@ -982,7 +828,7 @@ gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
 	}
 	if (dee->_priv->ui_dirty)
 		gnome_ditem_edit_sync_ditem (dee);
-	return gnome_desktop_item_ref (dee->_priv->ditem);
+	return dee->_priv->ditem;
 }
 
 /**
@@ -995,15 +841,13 @@ gnome_ditem_edit_get_ditem(GnomeDItemEdit *dee)
  * Returns:
  */
 void
-gnome_ditem_edit_clear(GnomeDItemEdit *dee)
+gnome_ditem_edit_clear (GnomeDItemEdit *dee)
 {
-	GList *types = NULL;
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
 
-        g_return_if_fail(dee != NULL);
-        g_return_if_fail(GNOME_IS_DITEM_EDIT(dee));
-
-	if(dee->_priv->ditem)
-		gnome_desktop_item_unref(dee->_priv->ditem);
+	if (dee->_priv->ditem != NULL)
+		gnome_desktop_item_unref (dee->_priv->ditem);
 	dee->_priv->ditem = NULL;
 	dee->_priv->ui_dirty = TRUE;
 
@@ -1012,24 +856,17 @@ gnome_ditem_edit_clear(GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), "");  
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->doc_entry), "");
-        gnome_selector_set_uri(GNOME_SELECTOR(dee->_priv->icon_entry), NULL,
-                               "", NULL, NULL);
+        gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_lang_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->transl_comment_entry), "");
         gtk_clist_clear(GTK_CLIST(dee->_priv->translations));
 
 	/* set everything to non-directory type which means any type */
-	gnome_ditem_set_directory_sensitive(dee, FALSE);
+	gnome_ditem_set_directory_sensitive (dee, FALSE);
 
 	/* put all our possibilities here */
-	types = g_list_prepend(types, "Application");
-	types = g_list_prepend(types, "PanelApplet");
-	types = g_list_prepend(types, "URL");
-	types = g_list_prepend(types, "Directory");
-	gtk_combo_set_popdown_strings(GTK_COMBO(dee->_priv->type_combo),
-				      types);
-	g_list_free(types);
+	setup_combo (dee, ALL_TYPES, NULL);
 }
 
 static void
@@ -1067,7 +904,7 @@ gnome_ditem_edit_get_icon (GnomeDItemEdit *dee)
         g_return_val_if_fail (dee != NULL, NULL);
         g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), NULL);
  
-        return gnome_selector_get_uri (GNOME_SELECTOR (dee->_priv->icon_entry));
+        return gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry));
 }
 
 /**
@@ -1083,11 +920,11 @@ gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
 {
         const char * name;
 
-        g_return_val_if_fail(dee != NULL, NULL);
-        g_return_val_if_fail(GNOME_IS_DITEM_EDIT(dee), NULL);
+        g_return_val_if_fail (dee != NULL, NULL);
+        g_return_val_if_fail (GNOME_IS_DITEM_EDIT (dee), NULL);
 
-        name = gtk_entry_get_text(GTK_ENTRY(dee->_priv->name_entry));
-        return g_strdup(name);
+        name = gtk_entry_get_text (GTK_ENTRY (dee->_priv->name_entry));
+        return g_strdup (name);
 }
 
 #ifdef TEST_DITEM_EDIT

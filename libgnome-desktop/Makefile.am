@@ -8,6 +8,7 @@ INCLUDES = \
 	-I$(top_builddir)/panel	\
 	-I$(includedir)		\
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
+	-DGNOME_CORE_INTERNAL	\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la
@@ -15,9 +16,8 @@ lib_LTLIBRARIES = libgnome-desktop-2.la
 noinst_PROGRAMS = test-ditem
 
 libgnome_desktop_2_la_SOURCES = \
-	gnome-desktop-item.c
-
-#	gnome-ditem-edit.c
+	gnome-desktop-item.c	\
+	gnome-ditem-edit.c
 
 libgnome_desktopdir = $(includedir)/gnome-desktop-2.0/libgnome
 libgnome_desktop_HEADERS = \

@@ -36,7 +36,11 @@
 
 #include <gtk/gtk.h>
 
-#include <libgnome/gnome-ditem.h>
+#ifdef GNOME_CORE_INTERNAL
+# include "gnome-desktop-item.h"
+#else
+# include <libgnome/gnome-desktop-item.h>
+#endif
 
 G_BEGIN_DECLS
 
@@ -63,7 +67,7 @@ struct _GnomeDItemEditClass {
 
         /* Any information changed */
         void (* changed)         (GnomeDItemEdit * gee);
-        /* These two more specific signals are provided since they 
+        /* These more specific signals are provided since they 
            will likely require a display update */
         /* The icon in particular has changed. */
         void (* icon_changed)    (GnomeDItemEdit * gee);
@@ -71,7 +75,7 @@ struct _GnomeDItemEditClass {
         void (* name_changed)    (GnomeDItemEdit * gee);
 };
 
-guint             gnome_ditem_edit_get_type     (void) G_GNUC_CONST;
+GType             gnome_ditem_edit_get_type     (void) G_GNUC_CONST;
 
 /*create a new ditem and get the children using the below functions 
   or use the utility new_notebook below*/
@@ -81,7 +85,8 @@ void              gnome_ditem_edit_clear        (GnomeDItemEdit   *dee);
 
 /* Make the display reflect ditem at path */
 gboolean          gnome_ditem_edit_load_file    (GnomeDItemEdit   *dee,
-                                                 const gchar      *path);
+                                                 const gchar      *path,
+						 GError          **error);
 
 /* Copy the contents of this ditem into the display */
 void              gnome_ditem_edit_set_ditem    (GnomeDItemEdit   *dee,

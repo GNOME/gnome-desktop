@@ -2,6 +2,7 @@
 /* gnome-ditem.h - GNOME Desktop File Representation 
 
    Copyright (C) 1999, 2000 Red Hat Inc.
+   Copyright (C) 2001 Sid Vicious
    All rights reserved.
 
    This file is part of the Gnome Library.
@@ -54,6 +55,9 @@ typedef enum {
         GNOME_DESKTOP_ITEM_DISAPPEARED = 2
 } GnomeDesktopItemStatus;
 
+#define GNOME_TYPE_DESKTOP_ITEM         (gnome_desktop_item_get_type ())
+GType gnome_desktop_item_get_type       (void);
+
 typedef struct _GnomeDesktopItem GnomeDesktopItem;
 
 #define GNOME_DESKTOP_ITEM_ENCODING	"Encoding" /* string */
@@ -90,12 +94,22 @@ typedef enum {
         GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0
 } GnomeDesktopItemLoadFlags;
 
+typedef enum {
+	GNOME_DESKTOP_ITEM_ERROR_NO_FILENAME /* No filename set or given on save */,
+	GNOME_DESKTOP_ITEM_ERROR_UNKNOWN_ENCODING /* Unknown encoding of the file */,
+} GnomeDesktopItemError;
+
+/* Note that functions can also return the G_FILE_ERROR_* errors */
+
+#define GNOME_DESKTOP_ITEM_ERROR gnome_desktop_item_error_quark ()
+GQuark gnome_desktop_item_error_quark (void);
+
 /* Returned item from new*() and copy() methods have a refcount of 1 */
 GnomeDesktopItem *      gnome_desktop_item_new               (void);
 GnomeDesktopItem *      gnome_desktop_item_new_from_file     (const char                 *file,
 							      GnomeDesktopItemLoadFlags   flags,
 							      GError                    **error);
-GnomeDesktopItem *      gnome_desktop_item_copy              (GnomeDesktopItem           *item);
+GnomeDesktopItem *      gnome_desktop_item_copy              (const GnomeDesktopItem     *item);
 
 /* if under is NULL save in original location */
 gboolean                gnome_desktop_item_save              (GnomeDesktopItem           *item,
@@ -104,7 +118,7 @@ gboolean                gnome_desktop_item_save              (GnomeDesktopItem  
 							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_ref               (GnomeDesktopItem           *item);
 void                    gnome_desktop_item_unref             (GnomeDesktopItem           *item);
-int                     gnome_desktop_item_launch            (GnomeDesktopItem           *item,
+int                     gnome_desktop_item_launch            (const GnomeDesktopItem     *item,
 							      int                         argc,
 							      const char                **argv,
 							      GError                    **error);
@@ -112,40 +126,40 @@ int                     gnome_desktop_item_launch            (GnomeDesktopItem  
 /* A list of files or urls dropped onto an icon, the proper (Url or File
    exec is run you can pass directly the output of 
    gnome_uri_list_extract_filenames) */
-int                     gnome_desktop_item_drop_uri_list     (GnomeDesktopItem           *item,
+int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktopItem     *item,
 							      GList                      *uri_list,
 							      GError                    **error);
 
-gboolean                gnome_desktop_item_exists            (GnomeDesktopItem           *item);
+gboolean                gnome_desktop_item_exists            (const GnomeDesktopItem     *item);
 
-GnomeDesktopItemType	gnome_desktop_item_get_type          (GnomeDesktopItem		 *item);
+GnomeDesktopItemType	gnome_desktop_item_get_entry_type    (const GnomeDesktopItem	 *item);
 /* You could also just use the set_string on the TYPE argument */
-void			gnome_desktop_item_set_type          (GnomeDesktopItem		 *item,
+void			gnome_desktop_item_set_entry_type    (GnomeDesktopItem		 *item,
 							      GnomeDesktopItemType	  type);
 
 /* Get current location on disk */
-char *                  gnome_desktop_item_get_location      (GnomeDesktopItem           *item);
+char *                  gnome_desktop_item_get_location      (const GnomeDesktopItem     *item);
 void                    gnome_desktop_item_set_location      (GnomeDesktopItem           *item,
 							      const char                 *location);
-GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (GnomeDesktopItem           *item);
+GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktopItem     *item);
 
+/*
+ * Get the icon, this is not as simple as getting the Icon attr as it actually tries to find
+ * it and returns %NULL if it can't
+ */
+char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item);
 
 
 /*
  * Reading/Writing different sections, NULL is the standard section
  */
-void                    gnome_desktop_item_push_section      (GnomeDesktopItem           *item,
-							      const char                 *section);
-void                    gnome_desktop_item_pop_section       (GnomeDesktopItem           *item);
-
-
-gboolean                gnome_desktop_item_attr_exists       (GnomeDesktopItem           *item,
+gboolean                gnome_desktop_item_attr_exists       (const GnomeDesktopItem     *item,
 							      const char                 *attr);
 
 /*
  * String type
  */
-const char *            gnome_desktop_item_get_string        (GnomeDesktopItem           *item,
+const char *            gnome_desktop_item_get_string        (const GnomeDesktopItem     *item,
 							      const char		 *attr);
 
 void                    gnome_desktop_item_set_string        (GnomeDesktopItem           *item,
@@ -155,26 +169,31 @@ void                    gnome_desktop_item_set_string        (GnomeDesktopItem  
 /*
  * LocaleString type
  */
-const char *            gnome_desktop_item_get_localestring  (GnomeDesktopItem           *item,
+const char *            gnome_desktop_item_get_localestring  (const GnomeDesktopItem     *item,
 							      const char		 *attr);
-const char *            gnome_desktop_item_get_localestring_lang (GnomeDesktopItem       *item,
+const char *            gnome_desktop_item_get_localestring_lang (const GnomeDesktopItem *item,
 								  const char		 *attr,
 								  const char             *language);
 /* use g_list_free only */
-GList *                 gnome_desktop_item_get_languages     (GnomeDesktopItem           *item,
+GList *                 gnome_desktop_item_get_languages     (const GnomeDesktopItem     *item,
 							      const char		 *attr);
 
 void                    gnome_desktop_item_set_localestring  (GnomeDesktopItem           *item,
 							      const char		 *attr,
-							      const char                 *language,
 							      const char                 *value);
+void                    gnome_desktop_item_set_localestring_lang  (GnomeDesktopItem      *item,
+								   const char		 *attr,
+								   const char		 *language,
+								   const char            *value);
+void                    gnome_desktop_item_clear_localestring(GnomeDesktopItem           *item,
+							      const char		 *attr);
 
 /*
  * Strings, Regexps types
  */
 
 /* use gnome_desktop_item_free_string_list */
-char **                 gnome_desktop_item_get_strings       (GnomeDesktopItem           *item,
+char **                 gnome_desktop_item_get_strings       (const GnomeDesktopItem     *item,
 							      const char		 *attr);
 
 void			gnome_desktop_item_set_strings       (GnomeDesktopItem           *item,
@@ -184,7 +203,7 @@ void			gnome_desktop_item_set_strings       (GnomeDesktopItem           *item,
 /*
  * Boolean type
  */
-gboolean                gnome_desktop_item_get_boolean       (GnomeDesktopItem           *item,
+gboolean                gnome_desktop_item_get_boolean       (const GnomeDesktopItem     *item,
 							      const char		 *attr);
 
 void                    gnome_desktop_item_set_boolean       (GnomeDesktopItem           *item,
