@@ -46,6 +46,9 @@ static gchar *contributors[] = {
 	"Chema Celorio",
 	"Damon Chaplin",
 	"Kevin Charter",
+	/* if your encoding allows it, use eacute (U00E9) for the first 
+	 * and the last 'e' in 'Chenede' */
+	N_("Erwann Chenede"),
 	/* CJK people please use (U5F35) (U570B) (U51A0) to replace
 	 * this name */
 	N_("Abel Cheung"),
@@ -85,6 +88,7 @@ static gchar *contributors[] = {
 	"John Fleck",
 	N_("Raul Perusquia Flores"),
 	"Lawrence Foard",
+	"Glynn Foster",
 	"Jeff Freedman",
 	"David Abilleira Freijeiro",
 	"Nat Friedman",
