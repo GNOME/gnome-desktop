@@ -81,6 +81,7 @@ pixmap_DATA =					\
 	gnome-user-interface.png		\
 	gnome-util.png              		\
 	gnome-word.png				\
+	gnome-workspace.png			\
 	kterm.xpm				\
 	vnterm.xpm				\
 	launcher-program.png			\
