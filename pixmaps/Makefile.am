@@ -14,6 +14,7 @@ BITMAPS     = \
 	gnome-file-h.png			\
 	gnome-folder.png			\
 	gnome-gemvt.png				\
+	gnome-gegl.png				\
 	gnome-gimp.png				\
 	gnome-globe.png				\
 	gnome-gmenu.png				\
