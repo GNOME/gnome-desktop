@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.5.0\n"
-"POT-Creation-Date: 2002-02-04 16:26+0000\n"
+"POT-Creation-Date: 2002-02-10 18:25+0200\n"
 "PO-Revision-Date: 2001-11-23 19:27+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional chinese <zh-l10n@linux.org.tw>\n"
@@ -191,7 +191,7 @@ msgstr "Linux 主控台"
 msgid "Color Xterm"
 msgstr "彩色 Xterm"
 
-#: gnome-terminal/gnome-terminal.c:995
+#: desktop-links/rxvt.desktop.in.h:1 gnome-terminal/gnome-terminal.c:995
 msgid "rxvt"
 msgstr "rxvt"
 
@@ -247,6 +247,7 @@ msgstr ""
 "%s"
 
 #: gnome-terminal/gnome-terminal.c:2092 gnome-terminal/gnome-terminal.c:2524
+#: gnome-terminal/gnome-terminal.desktop.in.h:2
 msgid "Terminal"
 msgstr "終端機"
 
@@ -453,6 +454,10 @@ msgstr "gnome_program_init () 失敗"
 #. * c-basic-offset: 8
 #. * End:
 #.
+#: gnome-terminal/gnome-terminal.desktop.in.h:1
+msgid "Enter UNIX commands"
+msgstr "GNOME 終端機模擬程式"
+
 #: gnome-terminal/gnome-terminal.glade.h:1
 msgid "Background color:"
 msgstr "背景顏色："
@@ -600,8 +605,8 @@ msgid "GNOME terminal users guide"
 msgstr "GNOME 終端機"
 
 #: gnome-terminal/gnome-terminal.xml.h:6 gsm/session-properties.c:182
-#: panel/drawer.c:512 panel/launcher.c:678 panel/logout.c:130
-#: panel/logout.c:215 panel/menu.c:4278 panel/status.c:372 panel/swallow.c:454
+#: panel/drawer.c:512 panel/launcher.c:679 panel/logout.c:130
+#: panel/logout.c:215 panel/menu.c:4349 panel/status.c:372 panel/swallow.c:454
 msgid "Help"
 msgstr "說明"
 
@@ -1323,6 +1328,14 @@ msgstr "無法連接 gnome-session"
 msgid "Your session has been saved"
 msgstr "你的工作階段已經儲存"
 
+#: gsm/save-session.desktop.in.h:1
+msgid "Save Current Session"
+msgstr "儲存現時的作業階段"
+
+#: gsm/save-session.desktop.in.h:2
+msgid "Save current state of desktop"
+msgstr "儲存現時的桌面狀態"
+
 #. buttons
 #: gsm/session-properties.c:170
 msgid "Try"
@@ -1341,7 +1354,7 @@ msgid "Cancel"
 msgstr "取消"
 
 #. app
-#: gsm/session-properties.c:217
+#: gsm/session-properties.c:217 gsm/session.desktop.in.h:2
 msgid "Session Properties"
 msgstr "工作階段屬性"
 
@@ -1365,6 +1378,14 @@ msgstr "取消登入"
 #: gsm/session-properties.c:360
 msgid "Initialize session settings"
 msgstr "初始化工作階段設定"
+
+#: gsm/session-properties.desktop.in.h:1
+msgid "Session Properties & Startup Programs"
+msgstr "作業階段內容及啟動程式"
+
+#: gsm/session.desktop.in.h:1
+msgid "Current session managed programs"
+msgstr "現時接受作業階段管理的程式"
 
 #: gsm/splash.c:55
 msgid "Audio Settings"
@@ -1410,7 +1431,7 @@ msgstr "工作階段管理程式代理"
 msgid "Window Manager"
 msgstr "視窗管理程式"
 
-#: gsm/splash.c:68 panel/menu.c:3921
+#: gsm/splash.c:68 panel/menu.c:3963
 msgid "Desktop"
 msgstr "桌面"
 
@@ -1435,34 +1456,36 @@ msgstr "GNOME"
 msgid "Starting GNOME"
 msgstr "正在啟動 GNOME"
 
-#: libpanel-applet/panel-applet.c:591
+#: libpanel-applet/panel-applet.c:611 libpanel-applet/panel-applet.c:744
 #, c-format
-msgid "panel_applet_set_prop: Incomplete '%s' background type received"
+msgid "%s: Incomplete '%s' background type received"
 msgstr ""
 
-#: libpanel-applet/panel-applet.c:612
+#: libpanel-applet/panel-applet.c:630 libpanel-applet/panel-applet.c:766
 #, c-format
-msgid "panel_applet_set_prop: Incomplete '%s' background type received: %s"
+msgid "%s: Incomplete '%s' background type received: %s"
 msgstr ""
 
-#: libpanel-applet/panel-applet.c:622
-#, c-format
-msgid "panel_applet_set_prop: Failed to get pixmap %s"
+#: libpanel-applet/panel-applet.c:641 libpanel-applet/panel-applet.c:777
+#, fuzzy, c-format
+msgid "%s: Failed to get pixmap %s"
 msgstr ""
+"無法執行指令：\n"
+"%s"
 
-#: libpanel-applet/panel-applet.c:639
+#: libpanel-applet/panel-applet.c:651 libpanel-applet/panel-applet.c:795
 msgid "panel_applet_set_prop: Unknown background type received"
 msgstr ""
 
-#: libpanel-applet/panel-applet.c:666
+#: libpanel-applet/panel-applet.c:821
 msgid "The Applet's containing Panel's orientation"
 msgstr ""
 
-#: libpanel-applet/panel-applet.c:674
+#: libpanel-applet/panel-applet.c:829
 msgid "The Applet's containing Panel's size in pixels"
 msgstr ""
 
-#: libpanel-applet/panel-applet.c:682
+#: libpanel-applet/panel-applet.c:837
 msgid "The Applet's containing Panel's background color or pixmap"
 msgstr ""
 
@@ -1500,7 +1523,7 @@ msgid "The Animation Filename:"
 msgstr "動畫檔案名稱："
 
 #: applets/fish/fish.c:578 applets/gen_util/mailcheck.c:1023
-#: panel/menu-properties.c:549 panel/menu-properties.c:587
+#: panel/menu-properties.c:551 panel/menu-properties.c:589
 #: panel/panel-config.c:1375 panel/panel-util.c:243 panel/swallow.c:284
 msgid "Browse"
 msgstr "瀏覽"
@@ -1579,7 +1602,7 @@ msgstr "%p %I:%M"
 #. This format string is used, to display the actual time in
 #. 24 hour format.
 #: applets/gen_util/clock.c:209 applets/gen_util/clock.c:449
-#: panel/foobar-widget.c:397 panel/foobar-widget.c:999
+#: panel/foobar-widget.c:430 panel/foobar-widget.c:1025
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -1622,55 +1645,55 @@ msgstr "%a, %d  %b  %Y %H:%M:%S %z"
 msgid "clock/hourformat=12"
 msgstr "clock/hourformat=12"
 
-#: applets/gen_util/clock.c:773
+#: applets/gen_util/clock.c:774
 msgid "Clock properties"
 msgstr "時鐘屬性"
 
-#: applets/gen_util/clock.c:790
+#: applets/gen_util/clock.c:791
 msgid "Time Format"
 msgstr "時間格式"
 
-#: applets/gen_util/clock.c:802
+#: applets/gen_util/clock.c:803
 msgid "12 hour"
 msgstr "12 小時"
 
-#: applets/gen_util/clock.c:810
+#: applets/gen_util/clock.c:811
 msgid "24 hour"
 msgstr "24 小時"
 
-#: applets/gen_util/clock.c:845
+#: applets/gen_util/clock.c:846
 msgid "Show date in applet"
 msgstr "在面板程式中顯示日期"
 
-#: applets/gen_util/clock.c:859
+#: applets/gen_util/clock.c:860
 msgid "Show date in tooltip"
 msgstr "在工作提示中顯示日期"
 
-#: applets/gen_util/clock.c:873
+#: applets/gen_util/clock.c:874
 msgid "Use GMT"
 msgstr "使用 GMT"
 
-#: applets/gen_util/clock.c:887
+#: applets/gen_util/clock.c:888
 msgid "Unix time"
 msgstr "Unix 時間"
 
-#: applets/gen_util/clock.c:891
+#: applets/gen_util/clock.c:892
 msgid "Internet time"
 msgstr "Internet 時間"
 
-#: applets/gen_util/clock.c:948
+#: applets/gen_util/clock.c:949
 msgid "Clock"
 msgstr "時鐘"
 
-#: applets/gen_util/clock.c:1014
+#: applets/gen_util/clock.c:1015
 msgid "Clock Applet"
 msgstr "時鐘面板程式"
 
-#: applets/gen_util/clock.c:1015
+#: applets/gen_util/clock.c:1016
 msgid "(c) 1998-2001 the Free Software Foundation"
 msgstr "(c) 1998-2001 the Free Software Foundation"
 
-#: applets/gen_util/clock.c:1016
+#: applets/gen_util/clock.c:1017
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -1816,38 +1839,38 @@ msgstr "郵件檢查程式會在收到新電郵的時候通知你"
 msgid "Text only"
 msgstr "僅使用文字"
 
-#: applets/gen_util/pager.c:391
+#: applets/gen_util/pager.c:401
 #, fuzzy
 msgid "Pager Applet"
 msgstr "印表機面板程式"
 
-#: applets/gen_util/pager.c:392
+#: applets/gen_util/pager.c:402
 #, fuzzy
 msgid "(c) 2001 Red Hat, Inc."
 msgstr "Copyright (c) 1998 Red Hat Software, Inc."
 
-#: applets/gen_util/pager.c:393
+#: applets/gen_util/pager.c:403
 msgid ""
 "The pager applet shows you a small version of your workspaces that lets you "
 "manage the windows."
 msgstr ""
 
-#: applets/gen_util/tasklist.c:417
+#: applets/gen_util/tasklist.c:427
 #, fuzzy
 msgid "Tasklist Applet"
 msgstr "測試面板程式"
 
-#: applets/gen_util/tasklist.c:418
+#: applets/gen_util/tasklist.c:428
 msgid "(c) 2001 Red Hat, Inc"
 msgstr ""
 
-#: applets/gen_util/tasklist.c:419
+#: applets/gen_util/tasklist.c:429
 msgid ""
 "The tasklist applet shows a list of all visible windows and let you browse "
 "them."
 msgstr ""
 
-#: panel/applet.c:203 panel/menu.c:1094 panel/panel-util.c:52
+#: panel/applet.c:207 panel/menu.c:1115 panel/panel-util.c:52
 #, c-format
 msgid ""
 "<b>Cannot display help document</b>\n"
@@ -1858,31 +1881,32 @@ msgstr ""
 #. Translators: Task with no name, should not really happen, so
 #. * this should signal that the panel is confused by this task
 #. * (thus question marks)
-#: panel/applet.c:488 panel/foobar-widget.c:695
+#: panel/applet.c:492 panel/foobar-widget.c:724
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:547 panel/applet.c:553 panel/menu.c:3913
+#: panel/applet.c:551 panel/applet.c:557
+#: panel/gnome-panel-properties.desktop.in.h:2 panel/menu.c:3955
 msgid "Panel"
 msgstr "面板"
 
-#: panel/applet.c:551
+#: panel/applet.c:555
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "找不到 pixmap 檔案 %s"
 
-#: panel/applet.c:583
+#: panel/applet.c:587
 msgid "Remove from panel"
 msgstr "從面板中移除"
 
 #.
 #. * FIXME: should have a "Move" pixmap.
 #.
-#: panel/applet.c:597
+#: panel/applet.c:601
 msgid "Move"
 msgstr "移動"
 
-#: panel/applet.c:1156
+#: panel/applet.c:1155
 msgid "Can't find an empty spot"
 msgstr "找不到空位"
 
@@ -1946,7 +1970,7 @@ msgstr "大小與位置"
 msgid "Tooltip/Name"
 msgstr "工具提示/名稱"
 
-#: panel/drawer.c:148 panel/menu-properties.c:570 panel/menu-properties.c:604
+#: panel/drawer.c:148 panel/menu-properties.c:572 panel/menu-properties.c:606
 msgid "Icon"
 msgstr "圖示"
 
@@ -1968,16 +1992,16 @@ msgstr "可使用隱藏鈕"
 msgid "Enable hidebutton arrow"
 msgstr "可使用隱藏箭頭"
 
-#: panel/drawer.c:191 panel/drawer.c:332 panel/menu.c:3438
+#: panel/drawer.c:191 panel/drawer.c:332 panel/menu.c:3480
 msgid "Drawer"
 msgstr "抽屜"
 
-#: panel/drawer.c:510 panel/launcher.c:676 panel/menu.c:1716 panel/menu.c:1788
-#: panel/menu.c:3595 panel/menu.c:4268
+#: panel/drawer.c:510 panel/launcher.c:677 panel/menu.c:1744 panel/menu.c:1816
+#: panel/menu.c:3637 panel/menu.c:4339
 msgid "Properties..."
 msgstr "屬性..."
 
-#: panel/foobar-widget.c:163
+#: panel/foobar-widget.c:198
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -1987,85 +2011,85 @@ msgstr ""
 "可能是因為沒有安裝它。\n"
 "這是 gnome-pim 套件的一部份。"
 
-#: panel/foobar-widget.c:175 panel/menu.c:3897
+#: panel/foobar-widget.c:210 panel/menu.c:3939
 msgid "Run..."
 msgstr "執行..."
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:213
 msgid "Run applications, if you know the correct command to type in"
 msgstr ""
 
-#: panel/foobar-widget.c:190
+#: panel/foobar-widget.c:225
 #, fuzzy
 msgid "Lock Display"
 msgstr "顯示"
 
-#: panel/foobar-widget.c:194
+#: panel/foobar-widget.c:229
 msgid "Protect your computer from unauthorized use"
 msgstr ""
 
-#: panel/foobar-widget.c:203
+#: panel/foobar-widget.c:238
 msgid "Log Out"
 msgstr "登出"
 
-#: panel/foobar-widget.c:206
+#: panel/foobar-widget.c:241
 msgid "Quit from the GNOME desktop"
 msgstr ""
 
-#: panel/foobar-widget.c:213
+#: panel/foobar-widget.c:248
 #, fuzzy
 msgid "Actions"
 msgstr "動作"
 
-#: panel/foobar-widget.c:243
+#: panel/foobar-widget.c:274
 msgid "menu wasn't created"
 msgstr "沒有建立選單"
 
-#: panel/foobar-widget.c:278
+#: panel/foobar-widget.c:311
 msgid "Today"
 msgstr "今天"
 
-#: panel/foobar-widget.c:278
+#: panel/foobar-widget.c:311
 msgid "View the calendar for today."
 msgstr ""
 
-#: panel/foobar-widget.c:279
+#: panel/foobar-widget.c:312
 msgid "This Week"
 msgstr "本週"
 
-#: panel/foobar-widget.c:279
+#: panel/foobar-widget.c:312
 msgid "View the calendar for this week."
 msgstr ""
 
-#: panel/foobar-widget.c:280
+#: panel/foobar-widget.c:313
 msgid "This Month"
 msgstr "本月"
 
-#: panel/foobar-widget.c:280
+#: panel/foobar-widget.c:313
 msgid "View the calendar for this month."
 msgstr ""
 
-#: panel/foobar-widget.c:316
+#: panel/foobar-widget.c:349
 msgid "%A %B %d"
 msgstr "%B %d(%A)"
 
-#: panel/foobar-widget.c:398
+#: panel/foobar-widget.c:431
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:399
+#: panel/foobar-widget.c:432
 msgid "%l:%M %p"
 msgstr "%p %l:%M"
 
-#: panel/foobar-widget.c:400
+#: panel/foobar-widget.c:433
 msgid "%l:%M:%S %p"
 msgstr "%p %l:%M:%S"
 
-#: panel/foobar-widget.c:405 panel/panel.c:2509
+#: panel/foobar-widget.c:438 panel/panel.c:2582
 msgid "%I:%M:%S %p"
 msgstr "%p %I:%M:%S"
 
-#: panel/foobar-widget.c:443
+#: panel/foobar-widget.c:476
 msgid ""
 "Could not call time-admin\n"
 "Perhaps time-admin is not installed"
@@ -2073,30 +2097,30 @@ msgstr ""
 "無法呼叫 time-admin\n"
 "可能 time-admin 並未安裝"
 
-#: panel/foobar-widget.c:457
+#: panel/foobar-widget.c:490
 #, fuzzy
 msgid "Add Appointment..."
 msgstr "增加約會..."
 
-#: panel/foobar-widget.c:466
+#: panel/foobar-widget.c:499
 #, fuzzy
 msgid "Set Time..."
 msgstr "設定時間"
 
-#: panel/foobar-widget.c:469
+#: panel/foobar-widget.c:502
 msgid "Adjust the date and time."
 msgstr ""
 
-#: panel/foobar-widget.c:481
+#: panel/foobar-widget.c:514
 msgid "Format"
 msgstr "格式"
 
-#: panel/foobar-widget.c:777
+#: panel/foobar-widget.c:806
 msgid "No windows open"
 msgstr ""
 
-#: panel/foobar-widget.c:1039 panel/gnome-run.c:711 panel/menu.c:2994
-#: panel/menu.c:3000
+#: desktop-links/Applications.directory.in.h:1 panel/foobar-widget.c:1065
+#: panel/gnome-run.c:723 panel/menu.c:3036 panel/menu.c:3042
 msgid "Applications"
 msgstr "應用程式"
 
@@ -2118,21 +2142,25 @@ msgstr "GNOME 面板程式"
 msgid "GNOME Panel Shell"
 msgstr "GNOME 主網頁"
 
-#: panel/gnome-panel-properties.c:187
+#: panel/gnome-panel-properties.c:190
 msgid "Press a key..."
 msgstr "按任意鍵..."
 
-#: panel/gnome-panel-properties.c:404
+#: panel/gnome-panel-properties.c:408
 #, fuzzy
 msgid ""
 "The system administrator has disallowed\n"
 " modification of the panel configuration"
 msgstr "系統管理員不允許任何人修改面板設定"
 
-#: panel/gnome-panel-properties.c:418
+#: panel/gnome-panel-properties.c:422
 #, fuzzy
 msgid "Panel Global Properties"
 msgstr "面板屬性"
+
+#: panel/gnome-panel-properties.desktop.in.h:1
+msgid "Global panel properties"
+msgstr "整體面板設定內容"
 
 #: panel/gnome-panel-properties.glade.h:1
 msgid "<Alt>F1"
@@ -2207,9 +2235,8 @@ msgstr "按鍵結合"
 msgid "Medium"
 msgstr "選單"
 
-#: panel/gnome-panel-properties.glade.h:18 panel/menu-properties.c:565
-#: panel/menu.c:1552 panel/menu.c:2432 panel/menu.c:3391 panel/menu.c:3991
-#: panel/menu.c:4148 panel/menu.c:4168
+#: panel/gnome-panel-properties.glade.h:18 panel/menu-properties.c:567
+#: panel/menu.c:1580 panel/menu.c:3433 panel/menu.c:3994 panel/menu.c:4217
 msgid "Menu"
 msgstr "選單"
 
@@ -2383,7 +2410,7 @@ msgstr "列印螢幕畫面(_P)..."
 msgid "_Save screenshot to file:"
 msgstr "將螢幕畫面存入檔案(_S)："
 
-#: panel/gnome-run.c:260 panel/gnome-run.c:268
+#: panel/gnome-run.c:267 panel/gnome-run.c:275
 #, c-format
 msgid ""
 "Failed to load this program!\n"
@@ -2392,7 +2419,7 @@ msgstr ""
 "無法載入此程式！\n"
 "%s"
 
-#: panel/gnome-run.c:319
+#: panel/gnome-run.c:329
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2401,7 +2428,7 @@ msgstr ""
 "無法執行指令：\n"
 "%s"
 
-#: panel/gnome-run.c:373
+#: panel/gnome-run.c:383
 #, c-format
 msgid ""
 "Failed to execute command:\n"
@@ -2412,42 +2439,47 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: panel/gnome-run.c:416 panel/gnome-run.c:664
+#: panel/gnome-run.c:426 panel/gnome-run.c:673
 msgid "Browse..."
 msgstr "瀏覽..."
 
-#: panel/gnome-run.c:673
+#: panel/gnome-run.c:682
 msgid "Run in terminal"
 msgstr "在終端機中執行"
 
-#: panel/gnome-run.c:880
+#: panel/gnome-run.c:892
 #, c-format
 msgid "Will run '%s'"
 msgstr "會執行 '%s'"
 
-#: panel/gnome-run.c:891 panel/gnome-run.c:894
+#: panel/gnome-run.c:903 panel/gnome-run.c:906
 msgid "No program selected"
 msgstr "未選擇程式"
 
-#: panel/gnome-run.c:1085
+#: panel/gnome-run.c:1102
 msgid "Hide advanced options"
 msgstr "隱藏進階選項"
 
-#: panel/gnome-run.c:1088
+#: panel/gnome-run.c:1105
 msgid "Hide the advanced controls below this button."
 msgstr "隱藏此按鈕之下的進階控制"
 
-#: panel/gnome-run.c:1097
+#: panel/gnome-run.c:1114
 msgid "Advanced..."
 msgstr "進階設定..."
 
-#: panel/gnome-run.c:1100
+#: panel/gnome-run.c:1117
 msgid ""
 "Allow typing in a command line instead of choosing an application from the "
 "list"
 msgstr "允許直接輸入指令列來代替由列表中選擇應用程式"
 
-#: panel/gnome-run.c:1122
+#: panel/gnome-run.c:1134
+#, fuzzy
+msgid "_Run ..."
+msgstr "執行..."
+
+#: panel/gnome-run.c:1169
 msgid "Run Program"
 msgstr "執行程式"
 
@@ -2483,22 +2515,22 @@ msgstr ""
 "無法啟動圖示\n"
 "%s"
 
-#: panel/launcher.c:463
+#: panel/launcher.c:464
 #, c-format
 msgid "Help on %s Application"
 msgstr "應用程式 %s 的求助說明"
 
 #. watch the enum at the top of the file
-#: panel/launcher.c:542
+#: panel/launcher.c:543
 msgid "Launcher properties"
 msgstr "啟動器屬性"
 
-#: panel/launcher.c:722
+#: panel/launcher.c:723
 msgid "Create launcher applet"
 msgstr "建立啟動器面板程式"
 
 #. class
-#: panel/launcher.c:942
+#: panel/launcher.c:943
 #, c-format
 msgid ""
 "Cannot save launcher to disk, the following error occured:\n"
@@ -2506,7 +2538,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: panel/logout.c:84 panel/menu.c:3729
+#: panel/logout.c:84 panel/menu.c:3771
 msgid "Log out"
 msgstr "登出"
 
@@ -2514,7 +2546,7 @@ msgstr "登出"
 msgid "Log out of GNOME"
 msgstr "登出 GNOME 環境"
 
-#: panel/logout.c:149 panel/logout.c:168 panel/menu.c:3716
+#: panel/logout.c:149 panel/logout.c:168 panel/menu.c:3758
 msgid "Lock screen"
 msgstr "鎖定螢幕"
 
@@ -2545,7 +2577,7 @@ msgstr "終止伺服程式"
 msgid "Restart Daemon"
 msgstr "重新啟動伺服程式"
 
-#: panel/logout.c:213
+#: desktop-links/Settings.directory.in.h:2 panel/logout.c:213
 msgid "Preferences"
 msgstr "偏好設定"
 
@@ -2554,25 +2586,21 @@ msgstr "偏好設定"
 msgid "Specify a profile name to load"
 msgstr "指定載入的工作階段名稱"
 
-#: panel/menu.c:267
+#: panel/menu.c:270
 msgid "Many many others ..."
 msgstr "還有很多..."
 
 #. ... from the Monty Pythons show...
-#: panel/menu.c:269
+#: panel/menu.c:272
 msgid "and finally, The Knights Who Say ... NI!"
 msgstr "最後還有說 NI 的騎士!"
 
-#: panel/menu.c:293
-msgid "The GNOME Panel"
-msgstr "GNOME 面板程式"
+#. Translator credits
+#: panel/menu.c:282
+msgid "translator_credits"
+msgstr ""
 
-#: panel/menu.c:294
-#, fuzzy
-msgid "(C) 1997-2002 the Free Software Foundation"
-msgstr "(C) 1997-2000 the Free Software Foundation"
-
-#: panel/menu.c:295
+#: panel/menu.c:307
 msgid ""
 "This program is responsible for launching other applications, embedding "
 "small applets within itself, world peace, and random X crashes."
@@ -2580,21 +2608,33 @@ msgstr ""
 "這個程式負責啟動其它的應用程式、啟動內嵌式面板程式、令世界和平和隨時令 X 不正"
 "常地終止。"
 
-#: panel/menu.c:311
-msgid "End world hunger"
-msgstr "結束世界飢荒"
-
-#: panel/menu.c:318
+#: panel/menu.c:313
+#, fuzzy
 msgid ""
+"\n"
+"\n"
 "Running in \"Lockdown\" mode.  This means your system administrator has "
 "prohibited any changes to the panel's configuration to take place."
 msgstr "正在 \"鎖定\" 模式執行。這表示你的系統管理員禁止修改任何面板設定。"
 
-#: panel/menu.c:335
+#: panel/menu.c:319
+msgid "The GNOME Panel"
+msgstr "GNOME 面板程式"
+
+#: panel/menu.c:320
+#, fuzzy
+msgid "(C) 1997-2002 the Free Software Foundation"
+msgstr "(C) 1997-2000 the Free Software Foundation"
+
+#: panel/menu.c:339
+msgid "End world hunger"
+msgstr "結束世界飢荒"
+
+#: panel/menu.c:353
 msgid "Can't execute 'About GNOME'"
 msgstr "無法執行 '關於 GNOME'"
 
-#: panel/menu.c:353 panel/swallow.c:85
+#: panel/menu.c:371 panel/swallow.c:85
 #, c-format
 msgid ""
 "<b>Can't launch entry</b>\n"
@@ -2602,7 +2642,7 @@ msgid ""
 "Details: %s"
 msgstr ""
 
-#: panel/menu.c:361 panel/menu.c:1075 panel/menu.c:1103
+#: panel/menu.c:379 panel/menu.c:1096 panel/menu.c:1124
 #, fuzzy, c-format
 msgid ""
 "<b>Can't load entry</b>\n"
@@ -2610,7 +2650,7 @@ msgid ""
 "Details: %s"
 msgstr "無法載入項目"
 
-#: panel/menu.c:889
+#: panel/menu.c:910
 msgid ""
 "Cannot create the launcher.\n"
 "\n"
@@ -2618,7 +2658,7 @@ msgid ""
 msgstr ""
 
 #. class
-#: panel/menu.c:918
+#: panel/menu.c:939
 #, c-format
 msgid ""
 "Cannot save menu item to disk, the following error occured:\n"
@@ -2626,11 +2666,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: panel/menu.c:939
+#: panel/menu.c:960
 msgid "Create menu item"
 msgstr "建立選單項目"
 
-#: panel/menu.c:988
+#: panel/menu.c:1009
 #, fuzzy, c-format
 msgid ""
 "<b>Could not remove the menu item %s</b>\n"
@@ -2638,117 +2678,127 @@ msgid ""
 "Details: %s\n"
 msgstr "無法移除選單項目 %s：%s\n"
 
-#: panel/menu.c:996
+#: panel/menu.c:1017
 #, c-format
 msgid "Could not get file name from path: %s"
 msgstr "無法從路徑取得檔案名稱：%s"
 
-#: panel/menu.c:1003
+#: panel/menu.c:1024
 #, c-format
 msgid "Could not get directory name from path: %s"
 msgstr "無法從路徑取得目錄名稱：%s"
 
-#: panel/menu.c:1069
+#: panel/menu.c:1090
 msgid "No 'Exec' or 'URL' field in entry"
 msgstr "項目中沒有「執行」或「URL」欄位"
+
+#: panel/menu.c:1405
+#, fuzzy, c-format
+msgid ""
+"<b>Cannot save changes to menu entry</b>\n"
+"\n"
+"Details: %s"
+msgstr ""
+"無法啟動圖示\n"
+"%s"
 
 #. flags
 #. error
 #. watch the enum at the top of the file
-#: panel/menu.c:1441 panel/menu.c:1517
+#: panel/menu.c:1469 panel/menu.c:1545
 msgid "Desktop entry properties"
 msgstr "桌面項目屬性"
 
-#: panel/menu.c:1643
+#: panel/menu.c:1671
 msgid "Add this launcher to panel"
 msgstr "將這個啟動器加入面板"
 
-#: panel/menu.c:1646
+#: panel/menu.c:1674
 msgid "Add this applet as a launcher to panel"
 msgstr "將面板程式以啟動器方式加入面板"
 
-#: panel/menu.c:1654
+#: panel/menu.c:1682
 msgid "Remove this item"
 msgstr "移除這個項目"
 
-#: panel/menu.c:1671
+#: panel/menu.c:1699
 msgid "Put into run dialog"
 msgstr "放到執行對話窗"
 
-#: panel/menu.c:1690
+#: panel/menu.c:1718
 #, c-format
 msgid "Help on %s"
 msgstr "%s 的說明"
 
-#: panel/menu.c:1691
+#: panel/menu.c:1719
 msgid "Application"
 msgstr "應用程式"
 
-#: panel/menu.c:1737
+#: panel/menu.c:1765
 msgid "Entire menu"
 msgstr "整個選單"
 
-#: panel/menu.c:1746
+#: panel/menu.c:1774
 msgid "Add this as drawer to panel"
 msgstr "以抽屜方式加入面板"
 
-#: panel/menu.c:1754
+#: panel/menu.c:1782
 msgid "Add this as menu to panel"
 msgstr "以選單方式加入面板"
 
-#: panel/menu.c:1762
+#: panel/menu.c:1790
 msgid "Add new item to this menu"
 msgstr "增加項目到此選單中"
 
-#: panel/menu.c:2055
+#: panel/menu.c:2083
 msgid "You already have a status dock on the panel. You can only have one"
 msgstr "你已經有一個嵌入式程式顯示工具放置於面板中。這工具只能有一個。"
 
-#: panel/menu.c:2630
+#: panel/menu.c:2668
 #, c-format
 msgid "query returned exception %s\n"
 msgstr ""
 
-#: panel/menu.c:2896
+#: panel/menu.c:2947
 #, fuzzy
 msgid "%I: %M: %S: %p"
 msgstr "%p %I:%M:%S"
 
-#: panel/menu.c:2902
+#: panel/menu.c:2954
 msgid "You can only have one menu panel at a time."
 msgstr "你一次只能有一個選單面板。"
 
-#: panel/menu.c:2934
+#: panel/menu.c:2976
 msgid "Menu panel"
 msgstr "選單面板"
 
-#: panel/menu.c:2942 panel/panel-config.c:1494 panel/panel-config.c:1616
+#: panel/menu.c:2984 panel/panel-config.c:1494 panel/panel-config.c:1616
 msgid "Edge panel"
 msgstr "邊界面板"
 
-#: panel/menu.c:2950 panel/panel-config.c:1501 panel/panel-config.c:1627
+#: panel/menu.c:2992 panel/panel-config.c:1501 panel/panel-config.c:1627
 #, fuzzy
 msgid "Corner panel"
 msgstr "建立面板"
 
-#: panel/menu.c:2958 panel/panel-config.c:1507 panel/panel-config.c:1638
+#: panel/menu.c:3000 panel/panel-config.c:1507 panel/panel-config.c:1638
 msgid "Sliding panel"
 msgstr "滑動面板"
 
-#: panel/menu.c:2966 panel/panel-config.c:1513 panel/panel-config.c:1649
+#: panel/menu.c:3008 panel/panel-config.c:1513 panel/panel-config.c:1649
 msgid "Floating panel"
 msgstr "浮動面板"
 
 #. force_image
-#: panel/menu.c:3063 panel/menu.c:3070 panel/menu.c:3789
+#: panel/menu.c:3105 panel/menu.c:3112 panel/menu.c:3831
 msgid "KDE menus"
 msgstr "KDE 選單"
 
-#: panel/menu.c:3143
+#: panel/menu.c:3185
 msgid "You cannot remove your last panel."
 msgstr "你不能移除最後一個面板。"
 
-#: panel/menu.c:3155
+#: panel/menu.c:3197
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -2756,119 +2806,124 @@ msgstr ""
 "當移除面板後，面板與其面板程式\n"
 "都會消失。是否要移除這個面板？"
 
-#: panel/menu-properties.c:459 panel/menu-properties.c:482 panel/menu.c:3400
+#: panel/menu-properties.c:461 panel/menu-properties.c:484 panel/menu.c:3442
 msgid "Main menu"
 msgstr "主選單"
 
-#: panel/menu.c:3410
+#: desktop-links/Root.directory.in.h:2 panel/menu.c:3452
 msgid "Programs menu"
 msgstr "程式選單"
 
-#: panel/menu.c:3420
+#: panel/menu.c:3462
 msgid "Launcher..."
 msgstr "啟動器..."
 
-#: panel/menu.c:3428
+#: panel/menu.c:3470
 msgid "Launcher from menu"
 msgstr "選單的啟動器"
 
-#: panel/menu.c:3448
+#: panel/menu.c:3490
 msgid "Log out button"
 msgstr "登出按鈕"
 
-#: panel/menu.c:3458
+#: panel/menu.c:3500
 msgid "Lock button"
 msgstr "螢幕鎖定按鈕"
 
-#: panel/menu.c:3468
+#: panel/menu.c:3510
 msgid "Swallowed app..."
 msgstr "嵌入的程式..."
 
-#: panel/menu.c:3475
+#: panel/menu.c:3517
 msgid "Status dock"
 msgstr "嵌入式狀態顯示工具"
 
-#: panel/menu.c:3489
+#: panel/menu.c:3531
 msgid "Cannot execute panel global properties"
 msgstr "無法執行面板整體屬性"
 
-#: panel/menu.c:3529
+#: panel/menu.c:3571
 msgid "Remove this panel..."
 msgstr "移除這個面板..."
 
-#: panel/menu.c:3531 panel/menu.c:3579
+#: panel/menu.c:3573 panel/menu.c:3621
 msgid "Remove this panel"
 msgstr "移除這個面板"
 
-#: panel/menu.c:3546
+#: panel/menu.c:3588
 #, fuzzy
 msgid "Cannot launch nautilus!"
 msgstr "無法啟動 gmenu！"
 
-#: panel/menu.c:3558
+#: panel/menu.c:3600
 msgid "Add to panel"
 msgstr "增加到面板"
 
-#: panel/menu.c:3570
+#: panel/menu.c:3612
 msgid "Create panel"
 msgstr "建立面板"
 
-#: panel/menu.c:3607
+#: panel/menu.c:3649
 msgid "Global Preferences..."
 msgstr "整體偏好設定..."
 
-#: panel/menu-properties.c:177 panel/menu.c:3616 panel/menu.c:4274
+#: panel/menu-properties.c:177 panel/menu.c:3658 panel/menu.c:4345
 msgid "Edit menus..."
 msgstr "編輯選單..."
 
-#: panel/menu.c:3626
+#: panel/menu.c:3668
 msgid "Reread all menus"
 msgstr "重新讀取所有選單"
 
-#: panel/menu.c:3640
+#: panel/menu.c:3682
 msgid "Panel Manual..."
 msgstr "面板說明書..."
 
-#: panel/menu.c:3652
+#: panel/menu.c:3694
 msgid "Cannot execute xscreensaver"
 msgstr "無法執行 xscreensaver"
 
-#: panel/menu.c:3671
+#: panel/menu.c:3713
 msgid "About the panel..."
 msgstr "關於這個面板..."
 
-#: panel/menu.c:3685
+#: panel/menu.c:3727
 msgid "About GNOME..."
 msgstr "關於 GNOME..."
 
-#: panel/menu.c:3722
+#: panel/menu.c:3764
 msgid "Lock the screen so that you can temporairly leave your computer"
 msgstr "鎖定螢幕，讓你可暫時離開電腦"
 
-#: panel/menu.c:3735
+#: panel/menu.c:3777
 msgid ""
 "Log out of this session to log in as a different user or to shut down your "
 "computer"
 msgstr "登出此工作階段來以其它身份登入或關掉電腦"
 
-#: panel/menu.c:3863
+#: desktop-links/Root.directory.in.h:1 panel/menu.c:3905
 msgid "Programs"
 msgstr "程式"
 
-#: panel/menu.c:3880
+#: panel/menu.c:3922
 msgid "Applets"
 msgstr "面板程式"
 
-#: panel/menu.c:3903
+#: panel/menu.c:3945
 #, fuzzy
 msgid "Run a command"
 msgstr "列印指令："
 
-#: panel/menu.c:3980 panel/menu.c:4005 panel/menu.c:4164
+#: panel/menu.c:3996
+#, fuzzy
+msgid "Menu:"
+msgstr "選單"
+
+#: panel/menu.c:4046 panel/menu.c:4074 panel/menu.c:4255
 msgid "Main Menu"
 msgstr "主選單"
 
-#: panel/menu.c:3999
+#: panel/menu.c:4068
 msgid "Can't create menu, using main menu!"
 msgstr "無法建立選單，使用主選單！"
 
@@ -2876,84 +2931,84 @@ msgstr "無法建立選單，使用主選單！"
 msgid "Can't open directory, using main menu!"
 msgstr "無法開啟目錄，使用主選單！"
 
-#: panel/menu-properties.c:356
+#: panel/menu-properties.c:358
 msgid "Off"
 msgstr "關閉"
 
-#: panel/menu-properties.c:366
+#: panel/menu-properties.c:368
 msgid "In a submenu"
 msgstr "於副選單內"
 
-#: panel/menu-properties.c:378
+#: panel/menu-properties.c:380
 msgid "On the main menu"
 msgstr "在主選單上"
 
-#: panel/menu-properties.c:415
+#: panel/menu-properties.c:417
 msgid "Menu properties"
 msgstr "選單屬性"
 
-#: panel/menu-properties.c:438
+#: panel/menu-properties.c:440
 msgid "Menu type"
 msgstr "選單種類"
 
-#: panel/menu-properties.c:445
+#: panel/menu-properties.c:447
 msgid "Global main menu"
 msgstr "整體主選單"
 
-#: panel/menu-properties.c:473 panel/menu-properties.c:536
+#: panel/menu-properties.c:475 panel/menu-properties.c:538
 msgid "Normal menu"
 msgstr "一般選單"
 
-#: panel/menu-properties.c:495
+#: panel/menu-properties.c:497
 msgid "Programs: "
 msgstr "程式："
 
-#: panel/menu-properties.c:502
+#: panel/menu-properties.c:504
 msgid "Applets: "
 msgstr "面板程式："
 
-#: panel/menu-properties.c:509
+#: panel/menu-properties.c:511
 msgid "Distribution menu (if found): "
 msgstr "發行套件選單（若存在）："
 
-#: panel/menu-properties.c:516
+#: panel/menu-properties.c:518
 msgid "KDE menu (if found): "
 msgstr "KDE 選單（若存在）："
 
-#: panel/menu-properties.c:523
+#: panel/menu-properties.c:525
 msgid "Panel menu: "
 msgstr "面板選單："
 
-#: panel/menu-properties.c:530
+#: panel/menu-properties.c:532
 msgid "Desktop menu: "
 msgstr "桌面選單："
 
-#: panel/menu-properties.c:546
+#: panel/menu-properties.c:548
 msgid "Menu path"
 msgstr "選單路徑"
 
-#: panel/menu-properties.c:577
+#: panel/menu-properties.c:579
 msgid "Use custom icon for panel button"
 msgstr "面板按鈕使用自訂圖示"
 
-#: panel/panel-applet-frame.c:166
+#: panel/panel-applet-frame.c:180
 msgid "There was a problem loading the applet."
 msgstr ""
 
-#: panel/panel-applet-frame.c:186
+#: panel/panel-applet-frame.c:200
 msgid "Cannot register control widget\n"
 msgstr ""
 
-#: panel/panel-applet-frame.c:376
+#: panel/panel-applet-frame.c:430
 msgid "Unable to obtain AppletShell interface from control\n"
 msgstr ""
 
-#: panel/panel.c:911
+#: panel/panel.c:931
 #, c-format
 msgid "Open URL: %s"
 msgstr "開啟網址：%s"
 
-#: panel/panel.c:2535
+#: panel/panel.c:2607
 msgid ""
 "No panels were found in your configuration.  I will create a menu panel for "
 "you"
@@ -3099,7 +3154,7 @@ msgstr "面板屬性"
 msgid "Background"
 msgstr "背景"
 
-#: panel/panel-shell.c:51
+#: panel/panel-shell.c:56
 msgid ""
 "I've detected a panel already running,\n"
 "and will now exit."
@@ -3107,7 +3162,7 @@ msgstr ""
 "偵測到已經有面板正在執行，\n"
 "因此會立刻中止執行。"
 
-#: panel/panel-shell.c:55
+#: panel/panel-shell.c:60
 #, fuzzy, c-format
 msgid ""
 "There was a problem registering the panel with the bonobo-activation "
@@ -3159,6 +3214,125 @@ msgstr "寬度"
 #: panel/swallow.c:306
 msgid "Height"
 msgstr "高度"
+
+#: desktop-links/Accessories.directory.in.h:1
+msgid "Accessories"
+msgstr ""
+
+#: desktop-links/Applications.directory.in.h:2
+msgid "Applications menu"
+msgstr "應用程式選單"
+
+#: desktop-links/Development.directory.in.h:1
+msgid "Programming"
+msgstr "軟體發展工具"
+
+#: desktop-links/Development.directory.in.h:2
+msgid "Tools for software development"
+msgstr "用來開發軟體的工具程式"
+
+#: desktop-links/Emacs.desktop.in.h:1
+msgid "Emacs Text Editor"
+msgstr "Emacs"
+
+#: desktop-links/GIMP.desktop.in.h:1
+msgid "Create and edit images or photographs"
+msgstr "GNU 圖像處理程式"
+
+#: desktop-links/GIMP.desktop.in.h:2
+msgid "GIMP Image Editor"
+msgstr "GIMP"
+
+#: desktop-links/Games.directory.in.h:1
+msgid "Games"
+msgstr "遊戲"
+
+#: desktop-links/Games.directory.in.h:2
+msgid "Games menu"
+msgstr "遊戲選單"
+
+#: desktop-links/Graphics.directory.in.h:1
+msgid "Graphics"
+msgstr "美工繪圖"
+
+#: desktop-links/Graphics.directory.in.h:2
+msgid "Graphics menu"
+msgstr "美工繪圖選單"
+
+#: desktop-links/Home.directory.in.h:1
+msgid "Home"
+msgstr ""
+
+#: desktop-links/Home.directory.in.h:2
+#, fuzzy
+msgid "Home Applications"
+msgstr "應用程式"
+
+#: desktop-links/Internet.directory.in.h:1
+msgid "Internet"
+msgstr "互聯網"
+
+#: desktop-links/Internet.directory.in.h:2
+msgid "Programs for Internet and networks"
+msgstr "網絡及互聯網相關應用程式"
+
+#: desktop-links/Multimedia.directory.in.h:1
+msgid "Multimedia menu"
+msgstr "多媒體選單"
+
+#: desktop-links/Multimedia.directory.in.h:2
+msgid "Sound & Video"
+msgstr "多媒體"
+
+#: desktop-links/Netscape.desktop.in.h:1
+msgid "Browse the world wide web"
+msgstr "Netscape 瀏覽器"
+
+#: desktop-links/Netscape.desktop.in.h:2
+msgid "Netscape Web Browser"
+msgstr "Netscape"
+
+#: desktop-links/Office.directory.in.h:1
+#, fuzzy
+msgid "Office"
+msgstr "關閉"
+
+#: desktop-links/Office.directory.in.h:2
+#, fuzzy
+msgid "Office Applications"
+msgstr "應用程式"
+
+#: desktop-links/Settings.directory.in.h:1
+msgid "Desktop Settings"
+msgstr "桌面設定"
+
+#: desktop-links/System.directory.in.h:1
+msgid "System Tools"
+msgstr "系統"
+
+#: desktop-links/System.directory.in.h:2
+msgid "System menu"
+msgstr "系統選單"
+
+#: desktop-links/Xemacs.desktop.in.h:1
+msgid "XEmacs Text Editor"
+msgstr "XEmacs"
+
+#: desktop-links/Xemacs.desktop.in.h:2
+msgid "xemacs text editor"
+msgstr "xemacs 文字編輯器"
+
+#: desktop-links/rxvt.desktop.in.h:2
+msgid "rxvt terminal"
+msgstr "rxvt 終端機"
+
+#: desktop-links/xterm.desktop.in.h:1
+msgid "Enter UNIX commands with the standard X Terminal"
+msgstr "X 終端機"
+
+#: desktop-links/xterm.desktop.in.h:2
+msgid "X Terminal"
+msgstr "X 終端機"
 
 #~ msgid "Can't get goad_id for applet, ignoring it"
 #~ msgstr "無法取得面板程式的 goad_id，忽略之"
@@ -3598,9 +3772,6 @@ msgstr "高度"
 
 #~ msgid "Popdown task view automatically"
 #~ msgstr "工作檢視視窗會自動隱藏"
-
-#~ msgid "GNOME Desktop Guide (Pager)"
-#~ msgstr "Gnome 桌面導引(呼叫器)"
 
 #~ msgid ""
 #~ "You are not running a GNOME Compliant\n"
@@ -4228,9 +4399,6 @@ msgstr "高度"
 #~ msgid "File Formats"
 #~ msgstr "檔案格式"
 
-#~ msgid "Games"
-#~ msgstr "遊戲"
-
 #~ msgid "Administration"
 #~ msgstr "管理"
 
@@ -4339,9 +4507,6 @@ msgstr "高度"
 
 #~ msgid "Deskguide (the desktop pager)"
 #~ msgstr "桌面導引(桌面呼叫器)"
-
-#~ msgid "Tasklist"
-#~ msgstr "工作列表"
 
 #~ msgid "The Battery"
 #~ msgstr "電池"
@@ -4690,149 +4855,17 @@ msgstr "高度"
 #~ msgid "Enable multibyte support"
 #~ msgstr "啟用多字節（multibyte）支援"
 
-#~ msgid "Global panel properties"
-#~ msgstr "整體面板設定內容"
-
 #~ msgid "Collapse"
 #~ msgstr "縮小"
 
 #~ msgid "Expand"
 #~ msgstr "擴張"
 
-#~ msgid "Help system"
-#~ msgstr "輔助說明系統"
-
-#~ msgid "Integrated help system (Info, man, HTML)"
-#~ msgstr "整合輔助說明系統 (Info, man, HTML)"
-
-#~ msgid "Save Current Session"
-#~ msgstr "儲存現時的作業階段"
-
-#~ msgid "Save current state of desktop"
-#~ msgstr "儲存現時的桌面狀態"
-
-#~ msgid "Current session managed programs"
-#~ msgstr "現時接受作業階段管理的程式"
-
-#~ msgid "Session Properties & Startup Programs"
-#~ msgstr "作業階段內容及啟動程式"
-
-#~ msgid "Terminal emulation program"
-#~ msgstr "GNOME 終端機模擬程式"
-
-#~ msgid "Options for the startup hint dialog"
-#~ msgstr "啟動提示對話窗選項"
-
-#~ msgid "Startup Hint"
-#~ msgstr "啟動提示"
-
-#~ msgid "Browse the startup hints"
-#~ msgstr "瀏覽啟動提示"
-
-#~ msgid "Menu editor"
-#~ msgstr "選單編輯器"
-
-#~ msgid "the GNOME menu editor"
-#~ msgstr "GNOME 選單編輯器"
-
-#~ msgid "Applications menu"
-#~ msgstr "應用程式選單"
-
-#~ msgid "Development"
-#~ msgstr "軟體發展工具"
-
-#~ msgid "Tools for software development"
-#~ msgstr "用來開發軟體的工具程式"
-
-#~ msgid "Emacs"
-#~ msgstr "Emacs"
-
-#~ msgid "Emacs text editor"
-#~ msgstr "Emacs 文字編緝器"
-
-#~ msgid "FileRunner"
-#~ msgstr "FileRunner"
-
-#~ msgid "directory utility"
-#~ msgstr "目錄處理工具"
-
-#~ msgid "GNU Image Manipulation Program"
-#~ msgstr "GNU 圖像處理程式"
-
-#~ msgid "The GIMP"
-#~ msgstr "The GIMP"
-
-#~ msgid "GXAnim"
-#~ msgstr "GXAnim"
-
 #~ msgid "Video player"
 #~ msgstr "視像檔播放程式"
 
-#~ msgid "Games menu"
-#~ msgstr "遊戲選單"
-
-#~ msgid "File Manager"
-#~ msgstr "檔案管理程式"
-
-#~ msgid "Graphical File Manager"
-#~ msgstr "圖形介面檔案管理程式"
-
-#~ msgid "Graphics"
-#~ msgstr "美工繪圖"
-
-#~ msgid "Graphics menu"
-#~ msgstr "美工繪圖選單"
-
-#~ msgid "Image loading and display settings"
-#~ msgstr "圖像載入與顯示相關設定"
-
-#~ msgid "Imlib Configuration Options"
-#~ msgstr "Imlib 設定選項"
-
-#~ msgid "Internet"
-#~ msgstr "互聯網"
-
-#~ msgid "Programs for Internet and networks"
-#~ msgstr "網絡及互聯網相關應用程式"
-
-#~ msgid "Japanese terminal emulation program"
-#~ msgstr "日文終端機模擬程式"
-
-#~ msgid "Kanji terminal"
-#~ msgstr "日文終端機"
-
-#~ msgid "Multimedia"
-#~ msgstr "多媒體"
-
-#~ msgid "Multimedia menu"
-#~ msgstr "多媒體選單"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape browser"
-#~ msgstr "Netscape 瀏覽器"
-
-#~ msgid "Desktop Settings"
-#~ msgstr "桌面設定"
-
-#~ msgid "System"
-#~ msgstr "系統"
-
-#~ msgid "System menu"
-#~ msgstr "系統選單"
-
-#~ msgid "SETI@home monitor"
-#~ msgstr "SETI@home 監控程式"
-
-#~ msgid "TkSETI"
-#~ msgstr "TkSETI"
-
 #~ msgid "E-Mail utility"
 #~ msgstr "電子郵件程式"
-
-#~ msgid "Tkrat"
-#~ msgstr "Tkrat"
 
 #~ msgid "Color XTerm"
 #~ msgstr "彩色 X 終端機"
@@ -4873,12 +4906,6 @@ msgstr "高度"
 #~ msgid "XMcd"
 #~ msgstr "XMcd"
 
-#~ msgid "XEmacs"
-#~ msgstr "XEmacs"
-
-#~ msgid "xemacs text editor"
-#~ msgstr "xemacs 文字編輯器"
-
 #~ msgid "GNOME front-end to aspell "
 #~ msgstr "aspell 的 GNOME 介面"
 
@@ -4896,9 +4923,6 @@ msgstr "高度"
 
 #~ msgid "RealPlayer multimedia player"
 #~ msgstr "RealPlayer 多媒體播放程式"
-
-#~ msgid "rxvt terminal"
-#~ msgstr "rxvt 終端機"
 
 #~ msgid "XbmBrowser"
 #~ msgstr "XbmBrowser"
@@ -4923,18 +4947,6 @@ msgstr "高度"
 
 #~ msgid "xv image viewer"
 #~ msgstr "xv 圖像檢視器"
-
-#~ msgid "GNOME Tasklist"
-#~ msgstr "GNOME 工作列表"
-
-#~ msgid "Mailcheck"
-#~ msgstr "郵件檢查"
-
-#~ msgid "New Mail"
-#~ msgstr "新郵件"
-
-#~ msgid "Desk Guide"
-#~ msgstr "桌面指引"
 
 #~ msgid "Amusements"
 #~ msgstr "消遣娛樂"
@@ -4978,3 +4990,42 @@ msgstr "高度"
 
 #~ msgid "Halt"
 #~ msgstr "停機"
+
+#~ msgid "Help system"
+#~ msgstr "輔助說明系統"
+
+#~ msgid "Integrated help system (Info, man, HTML)"
+#~ msgstr "整合輔助說明系統 (Info, man, HTML)"
+
+#~ msgid "Tasklist"
+#~ msgstr "工作列表"
+
+#~ msgid "GNOME Tasklist"
+#~ msgstr "GNOME 工作列表"
+
+#~ msgid "Mailcheck"
+#~ msgstr "郵件檢查"
+
+#~ msgid "New Mail"
+#~ msgstr "新郵件"
+
+#~ msgid "Desk Guide"
+#~ msgstr "桌面指引"
+
+#~ msgid "GNOME Desktop Guide (Pager)"
+#~ msgstr "GNOME 桌面指引 (呼叫器)"
+
+#~ msgid "Startup Hint"
+#~ msgstr "啟動提示"
+
+#~ msgid "Browse the startup hints"
+#~ msgstr "瀏覽啟動提示"
+
+#~ msgid "Options for the startup hint dialog"
+#~ msgstr "啟動提示對話窗選項"
+
+#~ msgid "Menu editor"
+#~ msgstr "選單編輯器"
+
+#~ msgid "the GNOME menu editor"
+#~ msgstr "GNOME 選單編輯器"

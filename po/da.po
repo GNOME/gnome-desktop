@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core\n"
-"POT-Creation-Date: 2002-02-10 00:50+0100\n"
+"POT-Creation-Date: 2002-02-10 18:25+0200\n"
 "PO-Revision-Date: 2002-02-10 00:52+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -186,7 +186,7 @@ msgstr "Linuxkonsol"
 msgid "Color Xterm"
 msgstr "Xterm i farver"
 
-#: gnome-terminal/gnome-terminal.c:995
+#: desktop-links/rxvt.desktop.in.h:1 gnome-terminal/gnome-terminal.c:995
 msgid "rxvt"
 msgstr "rxvt"
 
@@ -242,6 +242,7 @@ msgstr ""
 "%s"
 
 #: gnome-terminal/gnome-terminal.c:2092 gnome-terminal/gnome-terminal.c:2524
+#: gnome-terminal/gnome-terminal.desktop.in.h:2
 msgid "Terminal"
 msgstr "Terminal"
 
@@ -449,6 +450,10 @@ msgstr "Kan ikke udføre gnome_program_init()"
 #. * c-basic-offset: 8
 #. * End:
 #.
+#: gnome-terminal/gnome-terminal.desktop.in.h:1
+msgid "Enter UNIX commands"
+msgstr "Gnomes terminalemulator"
+
 #: gnome-terminal/gnome-terminal.glade.h:1
 msgid "Background color:"
 msgstr "Baggrundsfarve:"
@@ -1295,6 +1300,14 @@ msgstr "Kunne ikke tilkoble til gnome-session"
 msgid "Your session has been saved"
 msgstr "Din session er blevet gemt"
 
+#: gsm/save-session.desktop.in.h:1
+msgid "Save Current Session"
+msgstr "Gem session"
+
+#: gsm/save-session.desktop.in.h:2
+msgid "Save current state of desktop"
+msgstr "Gem den nuværende session"
+
 #. buttons
 #: gsm/session-properties.c:170
 msgid "Try"
@@ -1313,7 +1326,7 @@ msgid "Cancel"
 msgstr "Annullér"
 
 #. app
-#: gsm/session-properties.c:217
+#: gsm/session-properties.c:217 gsm/session.desktop.in.h:2
 msgid "Session Properties"
 msgstr "Sessionsegenskaber"
 
@@ -1337,6 +1350,14 @@ msgstr "Annullér logind"
 #: gsm/session-properties.c:360
 msgid "Initialize session settings"
 msgstr "Klargør sessionsopsætning"
+
+#: gsm/session-properties.desktop.in.h:1
+msgid "Session Properties & Startup Programs"
+msgstr "Sessionsegenskaber og opstartsprogrammer"
+
+#: gsm/session.desktop.in.h:1
+msgid "Current session managed programs"
+msgstr "Nuværende sessionshåndterede programmer"
 
 #: gsm/splash.c:55
 msgid "Audio Settings"
@@ -1843,7 +1864,8 @@ msgstr ""
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:551 panel/applet.c:557 panel/menu.c:3955
+#: panel/applet.c:551 panel/applet.c:557
+#: panel/gnome-panel-properties.desktop.in.h:2 panel/menu.c:3955
 msgid "Panel"
 msgstr "Panel"
 
@@ -2070,8 +2092,8 @@ msgstr "Format"
 msgid "No windows open"
 msgstr "Ingen vinduer åbne"
 
-#: panel/foobar-widget.c:1065 panel/gnome-run.c:723 panel/menu.c:3036
-#: panel/menu.c:3042
+#: desktop-links/Applications.directory.in.h:1 panel/foobar-widget.c:1065
+#: panel/gnome-run.c:723 panel/menu.c:3036 panel/menu.c:3042
 msgid "Applications"
 msgstr "Programmer"
 
@@ -2105,6 +2127,10 @@ msgstr ""
 
 #: panel/gnome-panel-properties.c:422
 msgid "Panel Global Properties"
+msgstr "Globale panelegenskaber"
+
+#: panel/gnome-panel-properties.desktop.in.h:1
+msgid "Global panel properties"
 msgstr "Globale panelegenskaber"
 
 #: panel/gnome-panel-properties.glade.h:1
@@ -2510,7 +2536,7 @@ msgstr "Dræb dæmon"
 msgid "Restart Daemon"
 msgstr "Genstart dæmon"
 
-#: panel/logout.c:213
+#: desktop-links/Settings.directory.in.h:2 panel/logout.c:213
 msgid "Preferences"
 msgstr "Indstillinger"
 
@@ -2546,7 +2572,11 @@ msgid ""
 "\n"
 "Running in \"Lockdown\" mode.  This means your system administrator has "
 "prohibited any changes to the panel's configuration to take place."
-msgstr "\n\nKører i nedlåst tilstand. Dette betyder at din systemadministrator har forbudt alle ændringer i panelets opsætning."
+msgstr ""
+"\n"
+"\n"
+"Kører i nedlåst tilstand. Dette betyder at din systemadministrator har "
+"forbudt alle ændringer i panelets opsætning."
 
 #: panel/menu.c:319
 msgid "The GNOME Panel"
@@ -2755,7 +2785,7 @@ msgstr ""
 msgid "Main menu"
 msgstr "Hovedmenu"
 
-#: panel/menu.c:3452
+#: desktop-links/Root.directory.in.h:2 panel/menu.c:3452
 msgid "Programs menu"
 msgstr "Programmenu"
 
@@ -2848,7 +2878,7 @@ msgstr ""
 "Log ud af denne session for at logge på som en anden bruger eller lukke "
 "maskinen ned"
 
-#: panel/menu.c:3905
+#: desktop-links/Root.directory.in.h:1 panel/menu.c:3905
 msgid "Programs"
 msgstr "Programmer"
 
@@ -3164,6 +3194,125 @@ msgstr "Bredde"
 #: panel/swallow.c:306
 msgid "Height"
 msgstr "Højde"
+
+#: desktop-links/Accessories.directory.in.h:1
+msgid "Accessories"
+msgstr ""
+
+#: desktop-links/Applications.directory.in.h:2
+msgid "Applications menu"
+msgstr "Diverse programmer"
+
+#: desktop-links/Development.directory.in.h:1
+msgid "Programming"
+msgstr "Programudvikling"
+
+#: desktop-links/Development.directory.in.h:2
+msgid "Tools for software development"
+msgstr "Værktøjer til programudvikling"
+
+#: desktop-links/Emacs.desktop.in.h:1
+msgid "Emacs Text Editor"
+msgstr "Emacs"
+
+#: desktop-links/GIMP.desktop.in.h:1
+msgid "Create and edit images or photographs"
+msgstr "Tegne- og billedbehandlingsprogram"
+
+#: desktop-links/GIMP.desktop.in.h:2
+msgid "GIMP Image Editor"
+msgstr "Gimp'en"
+
+#: desktop-links/Games.directory.in.h:1
+msgid "Games"
+msgstr "Spil"
+
+#: desktop-links/Games.directory.in.h:2
+msgid "Games menu"
+msgstr "Diverse computerspil"
+
+#: desktop-links/Graphics.directory.in.h:1
+msgid "Graphics"
+msgstr "Grafik"
+
+#: desktop-links/Graphics.directory.in.h:2
+msgid "Graphics menu"
+msgstr "Grafikprogrammer"
+
+#: desktop-links/Home.directory.in.h:1
+msgid "Home"
+msgstr ""
+
+#: desktop-links/Home.directory.in.h:2
+#, fuzzy
+msgid "Home Applications"
+msgstr "Programmer"
+
+#: desktop-links/Internet.directory.in.h:1
+msgid "Internet"
+msgstr "Internet"
+
+#: desktop-links/Internet.directory.in.h:2
+msgid "Programs for Internet and networks"
+msgstr "Internet- og netværksprogrammer"
+
+#: desktop-links/Multimedia.directory.in.h:1
+msgid "Multimedia menu"
+msgstr "Multimedieprogrammer"
+
+#: desktop-links/Multimedia.directory.in.h:2
+msgid "Sound & Video"
+msgstr "Multimedia"
+
+#: desktop-links/Netscape.desktop.in.h:1
+msgid "Browse the world wide web"
+msgstr "Netscape-netsurfningsprogram"
+
+#: desktop-links/Netscape.desktop.in.h:2
+msgid "Netscape Web Browser"
+msgstr "Netscape"
+
+#: desktop-links/Office.directory.in.h:1
+#, fuzzy
+msgid "Office"
+msgstr "Fra"
+
+#: desktop-links/Office.directory.in.h:2
+#, fuzzy
+msgid "Office Applications"
+msgstr "Programmer"
+
+#: desktop-links/Settings.directory.in.h:1
+msgid "Desktop Settings"
+msgstr "Skrivebordsindstillinger"
+
+#: desktop-links/System.directory.in.h:1
+msgid "System Tools"
+msgstr "System"
+
+#: desktop-links/System.directory.in.h:2
+msgid "System menu"
+msgstr "Systemprogrammer"
+
+#: desktop-links/Xemacs.desktop.in.h:1
+msgid "XEmacs Text Editor"
+msgstr "XEmacs"
+
+#: desktop-links/Xemacs.desktop.in.h:2
+msgid "xemacs text editor"
+msgstr "XEmacs tekstbehandler"
+
+#: desktop-links/rxvt.desktop.in.h:2
+msgid "rxvt terminal"
+msgstr "rxvt-terminal"
+
+#: desktop-links/xterm.desktop.in.h:1
+msgid "Enter UNIX commands with the standard X Terminal"
+msgstr "Den gode gamle X-terminal"
+
+#: desktop-links/xterm.desktop.in.h:2
+msgid "X Terminal"
+msgstr "Almindelig xterm"
 
 #~ msgid "Can't get goad_id for applet, ignoring it"
 #~ msgstr "Kan ikke skaffe goad_id for panelprogram, ignorerer det"
@@ -4056,11 +4205,41 @@ msgstr "Højde"
 #~ msgid "Choose an icon"
 #~ msgstr "Vælg et ikon"
 
-#~ msgid "Save Current Session"
-#~ msgstr "Gem session"
+#~ msgid "Help system"
+#~ msgstr "Hjælp"
 
-#~ msgid "Save current state of desktop"
-#~ msgstr "Gem den nuværende session"
+#~ msgid "Integrated help system (Info, man, HTML)"
+#~ msgstr "Integreret hjælpesystem (Info, man, HTML)"
 
-#~ msgid "Session Properties & Startup Programs"
-#~ msgstr "Sessionsegenskaber og opstartsprogrammer"
+#~ msgid "Tasklist"
+#~ msgstr "Opgaveliste"
+
+#~ msgid "GNOME Tasklist"
+#~ msgstr "Oversigt over kørende programmer"
+
+#~ msgid "Mailcheck"
+#~ msgstr "Posttjek"
+
+#~ msgid "New Mail"
+#~ msgstr "Ny post"
+
+#~ msgid "Desk Guide"
+#~ msgstr "Skrivebordsguide"
+
+#~ msgid "GNOME Desktop Guide (Pager)"
+#~ msgstr "Giver en oversigt over skrivebordet"
+
+#~ msgid "Startup Hint"
+#~ msgstr "Opstartstips"
+
+#~ msgid "Browse the startup hints"
+#~ msgstr "Se opstartstipsene igennem"
+
+#~ msgid "Options for the startup hint dialog"
+#~ msgstr "Indstillinger for opstartstipsdialogboksen"
+
+#~ msgid "Menu editor"
+#~ msgstr "Menuredigering"
+
+#~ msgid "the GNOME menu editor"
+#~ msgstr "Tilpasning af menuer"
