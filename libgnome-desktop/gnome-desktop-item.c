@@ -284,28 +284,45 @@ readbuf_close (ReadBuf *rb)
 	g_free (rb);
 }
 
-static GnomeDesktopItemType G_GNUC_CONST
+static GnomeDesktopItemType
 type_from_string (const char *type)
 {
-	if (type == NULL) {
+	if (!type)
 		return GNOME_DESKTOP_ITEM_TYPE_NULL;
-	} else if (strcmp (type, "Application") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_APPLICATION;
-	} else if (strcmp (type, "Link") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_LINK;
-	} else if (strcmp (type, "FSDevice") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_FSDEVICE;
-	} else if (strcmp (type, "MimeType") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_MIME_TYPE;
-	} else if (strcmp (type, "Directory") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_DIRECTORY;
-	} else if (strcmp (type, "Service") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_SERVICE;
-	} else if (strcmp (type, "ServiceType") == 0) {
-		return GNOME_DESKTOP_ITEM_TYPE_SERVICE_TYPE;
-	} else {
-		return GNOME_DESKTOP_ITEM_TYPE_OTHER;
+
+	switch (type [0]) {
+	case 'A':
+		if (!strcmp (type, "Application"))
+			return GNOME_DESKTOP_ITEM_TYPE_APPLICATION;
+		break;
+	case 'L':
+		if (!strcmp (type, "Link"))
+			return GNOME_DESKTOP_ITEM_TYPE_LINK;
+		break;
+	case 'F':
+		if (!strcmp (type, "FSDevice"))
+			return GNOME_DESKTOP_ITEM_TYPE_FSDEVICE;
+		break;
+	case 'M':
+		if (!strcmp (type, "MimeType"))
+			return GNOME_DESKTOP_ITEM_TYPE_MIME_TYPE;
+		break;
+	case 'D':
+		if (!strcmp (type, "Directory"))
+			return GNOME_DESKTOP_ITEM_TYPE_DIRECTORY;
+		break;
+	case 'S':
+		if (!strcmp (type, "Service"))
+			return GNOME_DESKTOP_ITEM_TYPE_SERVICE;
+
+		else if (!strcmp (type, "ServiceType"))
+			return GNOME_DESKTOP_ITEM_TYPE_SERVICE_TYPE;
+		break;
+	default:
+		break;
 	}
+
+	return GNOME_DESKTOP_ITEM_TYPE_OTHER;
 }
 
 /**
