@@ -812,13 +812,13 @@ gnome_desktop_item_launch (const GnomeDesktopItem *item,
 	/* This is a URL, so launch it as a url */
 	if (item->entry->Type == GNOME_Desktop_ENTRY_TYPE_URL) {
 		if (item->entry->URL[0] != '\0') {
-			if (gnome_url_show (item->entry->URL))
+			if (gnome_url_show (item->entry->URL, NULL))
 				return 0;
 			else
 				return -1;
 		/* Gnome panel used to put this in Exec */
 		} else if (item->entry->Exec[0] != '\0') {
-			if (gnome_url_show (item->entry->Exec))
+			if (gnome_url_show (item->entry->Exec, NULL))
 				return 0;
 			else
 				return -1;
