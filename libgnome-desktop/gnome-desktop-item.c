@@ -1566,6 +1566,26 @@ gnome_desktop_item_drop_uri_list (const GnomeDesktopItem *item,
 	return ret;
 }
 
+static gboolean
+exec_exists (const char *exec)
+{
+	if (g_path_is_absolute (exec)) {
+		if (access (exec, X_OK) == 0)
+			return TRUE;
+		else
+			return FALSE;
+	} else {
+                char *tryme;
+
+		tryme = g_find_program_in_path (exec);
+		if (tryme != NULL) {
+			g_free (tryme);
+			return TRUE;
+		}
+		return FALSE;
+	}
+}
+
 /**
  * gnome_desktop_item_exists:
  * @item: A desktop item
@@ -1587,17 +1607,9 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 
 	try_exec = lookup (item, GNOME_DESKTOP_ITEM_TRY_EXEC);
 
-	if (try_exec != NULL) {
-                char *tryme;
-
-		tryme = g_find_program_in_path (try_exec);
-		if (tryme != NULL) {
-			g_free (tryme);
-			/* We will try the application itself
-			 * next if applicable */
-		} else {
-			return FALSE;
-		}
+	if (try_exec != NULL &&
+	    ! exec_exists (try_exec)) {
+		return FALSE;
 	}
 
 	if (item->type == GNOME_DESKTOP_ITEM_TYPE_APPLICATION) {
@@ -1619,21 +1631,10 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 
 		exe = argv[0];
 
-		if (g_path_is_absolute (exe) &&
-		    access (argv[0], X_OK) != 0) {
+		if ( ! exec_exists (exe)) {
 			g_strfreev (argv);
 			return FALSE;
 		}
-
-		if ( ! g_path_is_absolute (exe)) {
-			char *tryme = g_find_program_in_path (exe);
-			if (tryme == NULL) {
-				g_strfreev (argv);
-				return FALSE;
-			}
-			g_free (tryme);
-		}
-
 		g_strfreev (argv);
 	}
 
