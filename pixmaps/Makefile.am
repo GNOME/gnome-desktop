@@ -71,7 +71,11 @@ BITMAPS     = \
 	gnome-background.png			\
 	panel-menu-main.png		\
 	apple-green.png			\
-	apple-red.png
+	apple-red.png				\
+	gnome-ccbackground.png	\
+	gnome-ccthemes.png		\
+	gnome-ccscreensaver.png	\
+	gnome-ccwindowmanager.png
 
 
 TILES     = \
