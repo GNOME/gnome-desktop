@@ -121,7 +121,9 @@ pixmap_DATA =					\
 	gnome-day.png				\
 	gnome-week.png				\
 	gnome-month.png				\
-	gnome-set-time.png
+	gnome-set-time.png			\
+	panel-corner-right.png			\
+	panel-corner-left.png
 
 # tilesdir = $(datadir)/pixmaps/tiles
 # tiles_DATA =					\
