@@ -3514,10 +3514,11 @@ ditem_save (GnomeDesktopItem *item, const char *uri, GError **error)
 	GnomeVFSHandle *handle;
 	GnomeVFSResult result;
 
+	handle = NULL;
 	result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_WRITE);
 	if (result == GNOME_VFS_ERROR_NOT_FOUND) {
 		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE, TRUE, GNOME_VFS_PERM_USER_ALL);
-	} else {
+	} else if (result == GNOME_VFS_OK) {
 		result = gnome_vfs_truncate_handle (handle, 0);
 	}
 
