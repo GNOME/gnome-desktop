@@ -233,7 +233,7 @@ type_combo_changed (GnomeDItemEdit *dee)
 				    _("URL:"));
 	else
 		gtk_label_set_text (GTK_LABEL (dee->_priv->type_label),
-				    _("Command:"));
+				    _("Type:"));
 }
 
 static void
