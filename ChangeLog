@@ -1,3 +1,18 @@
+1998-05-05  Mark Galassi  <rosalia@cygnus.com>
+
+	* core-docs/gnome-intro.sgml: completed the GNOME intro; there are
+	many omissions, but it seems OK.  Now I have to proofread it a bit
+	and add a mention of panel applets.  I also added all the
+	generated HTML files for people who do not have the docbook tools
+	installed (this sucks).
+
+	* core-docs/Makefile.am: put core-docs under automake with some
+	quickly hacked-up rules for the RH-5.1 release.  I will clean it
+	up later; this seems to work and install gnome-intro in a way such
+	that the help browser picks it up.
+
+	* Makefile.am (SUBDIRS): added core-docs
+
 Sun May  3 22:43:59 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* acconfig.h (HAVE_FORKPTY): New macro.
