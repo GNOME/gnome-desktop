@@ -502,10 +502,11 @@ get_intro_message (void)
 {
 	if (!gnome_intro_message)
 		gnome_intro_message =
-			g_strdup_printf ("%s %s %s",
-				  _("GNOME"),
-				  gnome_version_string ? gnome_version_string : "",
-				  ("Was Brought To You By"));
+			/* translators: %s is a placeholder for GNOME's
+			version information */
+			g_strdup_printf (_("GNOME %s Was Brought To You By"),
+				gnome_version_string ?
+				  gnome_version_string : "");
 
 	return gnome_intro_message;
 }
