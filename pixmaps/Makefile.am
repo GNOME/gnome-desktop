@@ -29,6 +29,7 @@ BITMAPS     = \
 	gnome-folder.png			\
 	gnome-gemvt.png				\
 	gnome-gegl.png				\
+	gnome-gegl2.png				\
 	gnome-gimp.png				\
 	gnome-globe.png				\
 	gnome-gmenu.png				\
@@ -59,6 +60,7 @@ BITMAPS     = \
 	gnome-note.png				\
 	gnome-panel.png				\
 	gnome-qeye.png				\
+	gnome-splash.png			\
 	gnome-squeak.png            \
 	gnome-talk.png				\
 	gnome-term-linux.png			\
