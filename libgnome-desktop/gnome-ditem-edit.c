@@ -30,7 +30,7 @@
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-macros.h>
-/* FIXME: this needs to be localized */
+#define GNOME_EXPLICIT_TRANSLATION_DOMAIN GETTEXT_PACKAGE
 #include <libgnome/gnome-i18n.h>
 
 #include <libgnomeui/gnome-uidefs.h>
@@ -143,6 +143,10 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         object_class->destroy = gnome_ditem_edit_destroy;
         gobject_class->finalize = gnome_ditem_edit_finalize;
         ditem_edit_class->changed = NULL;
+
+	/* Always get translations in UTF-8, needed if library is used
+	 * outside of gnome-core */
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 
 enum {
