@@ -88,7 +88,8 @@ AC_ARG_WITH(window-manager,
     WINDOW_MANAGER="$with_window_manager"], [
     dnl icewm is the default because it supports session management
     dnl and other Gnome requirements.
-    WINDOW_MANAGER=icewm])
+    dnl gnome-wm is a shell script that starts the WM.
+    WINDOW_MANAGER=gnome-wm])
 AC_SUBST(WINDOW_MANAGER)
 
 dnl Check for libgtop
