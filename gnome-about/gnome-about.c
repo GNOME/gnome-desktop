@@ -847,6 +847,7 @@ main (gint argc, gchar *argv[])
 	g_free (distro_string);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_OK);
+	gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 	g_object_set (window, "allow_shrink", FALSE, "allow_grow", FALSE, NULL);
