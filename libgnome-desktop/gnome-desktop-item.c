@@ -1416,7 +1416,7 @@ gnome_desktop_item_exists (const GnomeDesktopItem *item)
 		}
 
                 if(temp_argv[0][0] == PATH_SEP)
-                        ret = g_file_exists(temp_argv[0]);
+                        ret = g_file_test(temp_argv[0], G_FILE_TEST_EXISTS);
                 else {
                         char *tryme = gnome_is_program_in_path(temp_argv[0]);
                         if(tryme) {
