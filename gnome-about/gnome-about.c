@@ -524,29 +524,42 @@ href_item_event_callback (GnomeCanvasItem *item,
 			  GdkEvent        *event,
 			  gpointer         user_data)
 {
-	GdkCursor *cursor;
-	HRefItem *href = (HRefItem *)user_data;
+	HRefItem *href = (HRefItem *) user_data;
 
 	switch (event->type) {
-		case GDK_ENTER_NOTIFY:
-			cursor = gdk_cursor_new (GDK_HAND2);
+	case GDK_ENTER_NOTIFY: {
+		GdkCursor *cursor;
 
-			gdk_window_set_cursor (GTK_WIDGET (item->canvas)->window, cursor);
-			gdk_cursor_unref (cursor);
-			break;
+		cursor = gdk_cursor_new (GDK_HAND2);
 
-		case GDK_LEAVE_NOTIFY:
-			gdk_window_set_cursor (GTK_WIDGET (item->canvas)->window, NULL);
-			break;
+		gdk_window_set_cursor (GTK_WIDGET (item->canvas)->window, cursor);
+		gdk_cursor_unref (cursor);
+	}
+		break;
+	case GDK_LEAVE_NOTIFY:
+		gdk_window_set_cursor (GTK_WIDGET (item->canvas)->window, NULL);
+		break;
 
-		case GDK_BUTTON_PRESS:
-			/* FIXME: handle errors */
-			gnome_url_show (href->url, NULL);
-			return TRUE;
-			break;
+	case GDK_BUTTON_PRESS: {
+		GError *error= NULL;
 
-		default:
-			break;
+		gnome_url_show (href->url, &error);
+		if (error) {
+			char *message;
+
+			message = g_strdup_printf (_("Could not open the address \"%s\": %s"),
+						   href->url, error->message);
+			show_error_dialog (message);
+
+			g_free (message);
+			g_error_free (error);
+		}
+
+		return TRUE;
+	}
+
+	default:
+		break;
 	}
 
 	return FALSE;
