@@ -21,38 +21,39 @@ Settings_Order_files = \
 	Settings.order
 
 Directory_files = \
-	Applications.directory   \
-	Graphics.directory       \
-	System.directory         \
-	Utilities.directory      \
-	Multimedia.directory          \
-	Internet.directory        \
-	Games.directory          \
+	Root.directory		\
+	Applications.directory	\
+	Graphics.directory	\
+	System.directory	\
+	Utilities.directory	\
+	Multimedia.directory	\
+	Internet.directory	\
+	Games.directory		\
 	Settings.directory
 
 
-Applications_DATA = 	     \
-	Emacs.desktop	     \
+Applications_DATA = \
+	Emacs.desktop		\
 	Netscape.desktop
 
-Graphics_DATA    = 	     \
+Graphics_DATA = \
 	GIMP.desktop
 
-Utilities_DATA   = 	     \
-	UNIX.desktop	     \
-	UNIX-regular.desktop \
-	Eterm.desktop        \
-	Kterm.desktop	     \
+Utilities_DATA = \
+	UNIX.desktop		\
+	UNIX-regular.desktop	\
+	Eterm.desktop		\
+	Kterm.desktop		\
 	Vnterm.desktop
 
 Settings_DATA =	\
 	Imlib_config.desktop
 
-Internet_DATA     =           \
-	Balsa.desktop        \
+Internet_DATA = \
+	Balsa.desktop		\
 	Tkrat.desktop
 
-Root_DATA        =           \
+Root_DATA = \
 	Gmc.desktop
 
 ## We explicitly define these so that the appropriate directories will
@@ -78,6 +79,7 @@ install-data-local:
 
 	$(INSTALL_DATA) $(srcdir)/Root.order $(DESTDIR)$(Rootdir)/.order
 	$(INSTALL_DATA) $(srcdir)/Settings.order $(DESTDIR)$(Settingsdir)/.order
+	$(INSTALL_DATA) $(srcdir)/Root.directory $(DESTDIR)$(Rootdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Applications.directory $(DESTDIR)$(Applicationsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/Graphics.directory $(DESTDIR)$(Graphicsdir)/.directory
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
