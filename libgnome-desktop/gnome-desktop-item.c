@@ -1348,19 +1348,19 @@ append_app_arg (GSList *vector_list,
 	
 	/* First we subst for some where it could be more then
 	 * one argument */
-	} else if (strcmp (arg, "%F")) {
+	} else if (!strcmp (arg, "%F")) {
 		*added_status = ADDED_ALL;
 		return append_files (vector_list,
 				     args);
-	} else if (strcmp (arg, "%U")) {
+	} else if (!strcmp (arg, "%U")) {
 		*added_status = ADDED_ALL;
 		return append_uris (vector_list,
 				    args);
-	} else if (strcmp (arg, "%D")) {
+	} else if (!strcmp (arg, "%D")) {
 		*added_status = ADDED_ALL;
 		return append_dirs (vector_list,
 				    args);
-	} else if (strcmp (arg, "%N")) {
+	} else if (!strcmp (arg, "%N")) {
 		*added_status = ADDED_ALL;
 		return append_names (vector_list,
 				     args);
@@ -1401,9 +1401,6 @@ ditem_execute (const GnomeDesktopItem *item,
 	if (gnome_desktop_item_get_boolean (item, GNOME_DESKTOP_ITEM_TERMINAL)) {
 		const char *options =
 			gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_TERMINAL_OPTIONS);
-
-		term_argc = 0;
-		term_argv = NULL;
 
 		if (options != NULL) {
 			g_shell_parse_argv (options,
