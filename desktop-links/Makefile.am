@@ -35,7 +35,8 @@ Graphics_DATA    = 	     \
 Utilities_DATA   = 	     \
 	UNIX.desktop	     \
 	UNIX-regular.desktop \
-	Eterm.desktop
+	Eterm.desktop        \
+	Kterm.desktop
 	
 System_DATA      =           \
 	Imlib_config.desktop
