@@ -322,6 +322,7 @@ static gchar *contributors[] = {
 	"Bruno Widmann",
 	"Robert Wilhelm",
 	"Sebastian Wilhelmi",
+	"James Willcox",
 	"David Winkler",
 	"Jeremy Wise",
 	"Roger Wolff",
