@@ -103,6 +103,12 @@ PKG_CHECK_MODULES(GNOME_ABOUT, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >
 AC_SUBST(GNOME_ABOUT_CFLAGS)
 AC_SUBST(GNOME_ABOUT_LIBS)
 
+dnl scrollkeeper checks
+
+AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+if test x$SCROLLKEEPER_CONFIG = xno; then
+  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)
+fi
 
 dnl Language Support
 
