@@ -952,7 +952,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 			replace_percentsign(real_argc, real_argv, "%F", NULL, &tofree, TRUE);
 			replace_percentsign(real_argc, real_argv, "%u", NULL, &tofree, TRUE);
 		}
-		replace_percentsign(real_argc, real_argv, "%d", getenv("PWD"), &tofree, FALSE);
+		replace_percentsign(real_argc, real_argv, "%d", g_getenv("PWD"), &tofree, FALSE);
 		replace_percentsign(real_argc, real_argv, "%i", item->icon_path, &tofree, FALSE);
 		replace_percentsign(real_argc, real_argv, "%m", 
 				    gnome_desktop_item_get_attribute(item,"MiniIcon"), &tofree, FALSE);
