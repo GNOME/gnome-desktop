@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.0.5\n"
-"POT-Creation-Date: 1999-09-22 16:34-0500\n"
+"POT-Creation-Date: 1999-09-23 03:39-0500\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -167,7 +167,7 @@ msgstr "Une horloge analogique similaire a celle du panel CDE."
 #: applets/modemlights/modemlights.c:986 applets/multiload/cpuload.c:64
 #: applets/multiload/memload.c:60 applets/multiload/swapload.c:60
 #: applets/netload/netload.c:346 applets/slashapp/slashapp.c:630
-#: applets/tasklist/tasklist_applet.c:667 applets/webcontrol/webcontrol.c:315
+#: applets/tasklist/tasklist_applet.c:668 applets/webcontrol/webcontrol.c:315
 #: panel/drawer.c:375 panel/launcher.c:356 panel/menu.c:944 panel/menu.c:3609
 msgid "Properties..."
 msgstr "Propriétés..."
@@ -181,7 +181,7 @@ msgstr "Propriétés..."
 #: applets/gen_util/mailcheck.c:800 applets/gkb/gkb.c:498
 #: applets/gnome-pager/gnomepager_applet.c:1588 applets/jbc/jbc-applet.c:144
 #: applets/modemlights/modemlights.c:992 applets/netload/netload.c:339
-#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:661
+#: applets/slashapp/slashapp.c:636 applets/tasklist/tasklist_applet.c:662
 #: applets/webcontrol/webcontrol.c:307 panel/menu.c:2573
 msgid "About..."
 msgstr "A Propos..."
@@ -1318,7 +1318,8 @@ msgid "History"
 msgstr "Historique"
 
 #: applets/mini-commander/src/mini-commander_applet.c:257
-#: gsm/session-properties.c:176 help-browser/window.c:207
+#: gnome-terminal/gnome-terminal.c:1585 gsm/session-properties.c:176
+#: help-browser/window.c:207
 msgid "Help"
 msgstr "Aide"
 
@@ -1750,39 +1751,39 @@ msgstr "Afficher la liste des articles"
 msgid "Refresh articles"
 msgstr "Rafraîchir les articles"
 
-#: applets/tasklist/tasklist_menu.c:182
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Restore"
 msgstr "Restaurer"
 
-#: applets/tasklist/tasklist_menu.c:182
+#: applets/tasklist/tasklist_menu.c:183
 msgid "Iconify"
 msgstr "Icônifier"
 
-#: applets/tasklist/tasklist_menu.c:188
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Unshade"
 msgstr "Désombrer"
 
-#: applets/tasklist/tasklist_menu.c:188
+#: applets/tasklist/tasklist_menu.c:189
 msgid "Shade"
 msgstr "Ombrer"
 
-#: applets/tasklist/tasklist_menu.c:194
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Unstick"
 msgstr "Décoller"
 
-#: applets/tasklist/tasklist_menu.c:194
+#: applets/tasklist/tasklist_menu.c:195
 msgid "Stick"
 msgstr "Coller"
 
-#: applets/tasklist/tasklist_menu.c:200
+#: applets/tasklist/tasklist_menu.c:201
 msgid "To desktop"
 msgstr "Vers le bureau"
 
-#: applets/tasklist/tasklist_menu.c:238
+#: applets/tasklist/tasklist_menu.c:239
 msgid "Close window"
 msgstr "fermer fenêtre"
 
-#: applets/tasklist/tasklist_menu.c:245
+#: applets/tasklist/tasklist_menu.c:246
 msgid "Kill app"
 msgstr "Tuer appli"
 
@@ -2136,7 +2137,7 @@ msgid "The GNOME terminal emulation program."
 msgstr "L'émulateur de terminal Gnome."
 
 #: gnome-terminal/gnome-terminal.c:560 gnome-terminal/gnome-terminal.c:1095
-#: gnome-terminal/gnome-terminal.c:1105 gnome-terminal/gnome-terminal.c:2148
+#: gnome-terminal/gnome-terminal.c:1105 gnome-terminal/gnome-terminal.c:2176
 msgid "Default"
 msgstr "Défaut"
 
@@ -2367,12 +2368,25 @@ msgstr "_Ouvrir dans le navigateur"
 msgid "C_olor selector..."
 msgstr "Sélection de la c_ouleur..."
 
-#: gnome-terminal/gnome-terminal.c:1854
+#: gnome-terminal/gnome-terminal.c:1570
+#, fuzzy
+msgid "File"
+msgstr "_Fichier"
+
+#: gnome-terminal/gnome-terminal.c:1575
+msgid "Edit"
+msgstr "Edition"
+
+#: gnome-terminal/gnome-terminal.c:1580
+msgid "Settings"
+msgstr "Paramétres"
+
+#: gnome-terminal/gnome-terminal.c:1881
 #, c-format
 msgid "The error was: %s"
 msgstr "L'erreur était: %s"
 
-#: gnome-terminal/gnome-terminal.c:1855
+#: gnome-terminal/gnome-terminal.c:1882
 msgid ""
 "If you are using Linux 2.2.x with glibc 2.1.x, this\n"
 "is probably due to incorrectly setup Unix98 ptys.\n"
@@ -2387,7 +2401,7 @@ msgstr ""
 "Lisez linux/Documentation/Changes pour plus d'informations\n"
 "sur leur configuration."
 
-#: gnome-terminal/gnome-terminal.c:1860
+#: gnome-terminal/gnome-terminal.c:1887
 #, c-format
 msgid ""
 "There has been an error while trying to log in.\n"
@@ -2398,107 +2412,107 @@ msgstr ""
 "\n"
 "%s"
 
-#: gnome-terminal/gnome-terminal.c:2304
+#: gnome-terminal/gnome-terminal.c:2332
 msgid "Terminal class name"
 msgstr "Classe de terminal"
 
-#: gnome-terminal/gnome-terminal.c:2304
+#: gnome-terminal/gnome-terminal.c:2332
 msgid "TCLASS"
 msgstr "TCLASS"
 
-#: gnome-terminal/gnome-terminal.c:2307
+#: gnome-terminal/gnome-terminal.c:2335
 msgid "Specifies font name"
 msgstr "Spécifie le nom de la police"
 
-#: gnome-terminal/gnome-terminal.c:2307
+#: gnome-terminal/gnome-terminal.c:2335
 msgid "FONT"
 msgstr "POLICE"
 
-#: gnome-terminal/gnome-terminal.c:2310
+#: gnome-terminal/gnome-terminal.c:2338
 msgid "Do not start up shells as login shells"
 msgstr "Ne pas lancer les shells comme shells de login"
 
-#: gnome-terminal/gnome-terminal.c:2313
+#: gnome-terminal/gnome-terminal.c:2341
 msgid "Start up shells as login shells"
 msgstr "Lancer les shells comme shells de login"
 
-#: gnome-terminal/gnome-terminal.c:2316
+#: gnome-terminal/gnome-terminal.c:2344
 msgid "Specifies the geometry for the main window"
 msgstr "Spécifier la géométrie pour la fenétre principale"
 
-#: gnome-terminal/gnome-terminal.c:2316
+#: gnome-terminal/gnome-terminal.c:2344
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: gnome-terminal/gnome-terminal.c:2319
+#: gnome-terminal/gnome-terminal.c:2347
 msgid "Execute this program instead of a shell"
 msgstr "Exécuter ce prorgamme à la place du shell"
 
-#: gnome-terminal/gnome-terminal.c:2319 gnome-terminal/gnome-terminal.c:2322
+#: gnome-terminal/gnome-terminal.c:2347 gnome-terminal/gnome-terminal.c:2350
 msgid "COMMAND"
 msgstr "COMMANDE"
 
-#: gnome-terminal/gnome-terminal.c:2322
+#: gnome-terminal/gnome-terminal.c:2350
 msgid "Execute this program the same way as xterm does"
 msgstr "Exécuter ce prorgamme de la même manière que xterm"
 
-#: gnome-terminal/gnome-terminal.c:2325
+#: gnome-terminal/gnome-terminal.c:2353
 msgid "Foreground color"
 msgstr "Couleur de de l'avant-plan"
 
-#: gnome-terminal/gnome-terminal.c:2325 gnome-terminal/gnome-terminal.c:2328
+#: gnome-terminal/gnome-terminal.c:2353 gnome-terminal/gnome-terminal.c:2356
 msgid "COLOR"
 msgstr "COULEUR"
 
-#: gnome-terminal/gnome-terminal.c:2328 panel/panel_config.c:763
+#: gnome-terminal/gnome-terminal.c:2356 panel/panel_config.c:763
 msgid "Background color"
 msgstr "Couleur de fond"
 
-#: gnome-terminal/gnome-terminal.c:2331
+#: gnome-terminal/gnome-terminal.c:2359
 msgid "Update utmp entry"
 msgstr "Mettre à jour l'entrée dans utmp"
 
-#: gnome-terminal/gnome-terminal.c:2331
+#: gnome-terminal/gnome-terminal.c:2359
 msgid "UTMP"
 msgstr "UTMP"
 
-#: gnome-terminal/gnome-terminal.c:2334
+#: gnome-terminal/gnome-terminal.c:2362
 msgid "Do not update utmp entry"
 msgstr "Ne pas mettre à jour l'entrée dans utmp"
 
-#: gnome-terminal/gnome-terminal.c:2334
+#: gnome-terminal/gnome-terminal.c:2362
 msgid "NOUTMP"
 msgstr "NOUTMP"
 
-#: gnome-terminal/gnome-terminal.c:2337
+#: gnome-terminal/gnome-terminal.c:2365
 msgid "Update wtmp entry"
 msgstr "Mettre à jour l'entrée dans wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2337
+#: gnome-terminal/gnome-terminal.c:2365
 msgid "WTMP"
 msgstr "WTMP"
 
-#: gnome-terminal/gnome-terminal.c:2340
+#: gnome-terminal/gnome-terminal.c:2368
 msgid "Do not update wtmp entry"
 msgstr "Ne pas mettre à jour l'entrée dans wtmp"
 
-#: gnome-terminal/gnome-terminal.c:2340
+#: gnome-terminal/gnome-terminal.c:2368
 msgid "NOWTMP"
 msgstr "NOWTMP"
 
-#: gnome-terminal/gnome-terminal.c:2343
+#: gnome-terminal/gnome-terminal.c:2371
 msgid "Set the window title"
 msgstr "Changer le titre de la fenêtre"
 
-#: gnome-terminal/gnome-terminal.c:2343
+#: gnome-terminal/gnome-terminal.c:2371
 msgid "TITLE"
 msgstr "TITRE"
 
-#: gnome-terminal/gnome-terminal.c:2346
+#: gnome-terminal/gnome-terminal.c:2374
 msgid "Set the TERM variable"
 msgstr "Changer la variable TERM"
 
-#: gnome-terminal/gnome-terminal.c:2346
+#: gnome-terminal/gnome-terminal.c:2374
 msgid "TERMNAME"
 msgstr "TERMNAME"
 
@@ -3892,12 +3906,6 @@ msgstr "Hauteur"
 
 #~ msgid "Mailbox"
 #~ msgstr "Mailbox"
-
-#~ msgid "Edit"
-#~ msgstr "Edition"
-
-#~ msgid "Settings"
-#~ msgstr "Paramétres"
 
 #~ msgid "Looking up internet address for %s"
 #~ msgstr "Recherche de l'adresse Internet pour %s"

@@ -3,15 +3,19 @@ tilesdir = $(datadir)/pixmaps/tiles
 
 BITMAPS     = \
 	emacs.png				\
+	charpick.png				\
 	gnome-aorta.png				\
 	gnome-audio2.png			\
 	gnome-balsa2.png			\
+	gnome-battery.png			\
 	gnome-calc2.png				\
 	gnome-calendar.png			\
 	gnome-cardgame.png			\
-	gnome-clock.png             \
+	gnome-clock.png             		\
 	gnome-color-browser.png			\
-	gnome-color-xterm.png           \
+	gnome-color-xterm.png           	\
+	gnome-cpu.png				\
+	gnome-cpu-mem.png			\
 	gnome-cromagnon.png			\
 	gnome-default.png			\
 	gnome-die1.png				\
@@ -23,6 +27,8 @@ BITMAPS     = \
 	gnome-ee.png				\
 	gnome-file-c.png			\
 	gnome-file-h.png			\
+	gnome-fifteen.png			\
+	gnome-fish.png				\
 	gnome-folder.png			\
 	gnome-gemvt.png				\
 	gnome-gegl.png				\
@@ -31,20 +37,24 @@ BITMAPS     = \
 	gnome-gmenu.png				\
 	gnome-gmush.png				\
 	gnome-gnomine.png			\
+	gnome-graphics.png			\
 	gnome-gsame.png				\
 	gnome-help.png				\
 	gnome-html.png				\
 	gnome-image-gif.png			\
 	gnome-image-jpeg.png			\
 	gnome-irc.png				\
-	gnome-laptop.png            \
+	gnome-joystick.png			\
+	gnome-laptop.png            		\
+	gnome-life.png				\
 	gnome-lockscreen.png			\
 	gnome-log.png				\
 	gnome-logo-icon.png			\
 	gnome-logo-icon-transparent.png		\
 	gnome-logo-large.png			\
+	gnome-mem.png				\
 	gnome-mnemonic.png			\
-	gnome-modem.png             \
+	gnome-modem.png             		\
 	gnome-money.png				\
 	gnome-networktool.png			\
 	gnome-note.png				\
@@ -61,7 +71,7 @@ BITMAPS     = \
 	gnome-term.png				\
 	gnome-tigert.png			\
 	gnome-unknown.png			\
-	gnome-util.png              \
+	gnome-util.png              		\
 	gnome-word.png				\
 	kterm.xpm				\
 	vnterm.xpm				\
@@ -77,17 +87,19 @@ BITMAPS     = \
 	panel-knob.png				\
 	gnome-mouse.png				\
 	gnome-background.png			\
-	panel-menu-main.png		\
-	apple-green.png			\
+	panel-menu-main.png			\
+	apple-green.png				\
 	apple-red.png				\
-	gnome-ccbackground.png	\
-	gnome-ccdesktop.png     \
-	gnome-ccthemes.png		\
-	gnome-ccdialog.png	\
-	gnome-ccscreensaver.png	\
-	gnome-ccwindowmanager.png \
-	gnome-cckeyboard-bell.png	\
-	gnome-cckeyboard.png
+	gnome-ccbackground.png			\
+	gnome-ccdesktop.png     		\
+	gnome-ccthemes.png			\
+	gnome-ccdialog.png			\
+	gnome-ccscreensaver.png			\
+	gnome-ccwindowmanager.png 		\
+	gnome-cckeyboard-bell.png		\
+	gnome-cckeyboard.png			\
+	gnome-ccmime.png			\
+	gnome-ccperiph.png
 
 
 TILES     = \
