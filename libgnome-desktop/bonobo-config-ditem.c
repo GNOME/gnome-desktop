@@ -51,15 +51,14 @@ typedef enum {
 	SET
 } access_type;
 
-typedef struct TKeys {
-	char *key_name;
+typedef struct DirEntry {
+	char *name;
 	char *value;
-	struct TKeys *link;
-} TKeys;
+} DirEntry;
 
 typedef struct TSecHeader {
 	char *section_name;
-	TKeys *keys;
+	GSList *keys;
 	struct TSecHeader *link;
 } TSecHeader;
 
@@ -143,6 +142,7 @@ load (const char *file)
 {
 	FILE *f;
 	int state;
+	DirEntry *Key = 0;
 	TSecHeader *SecHeader = 0;
 	char CharBuffer [STRSIZE];
 	char *next = "";		/* Not needed */
@@ -199,6 +199,7 @@ load (const char *file)
 				SecHeader->keys = 0;
 				state = OnSecHeader;
 				next = CharBuffer;
+				Key = 0;
 				break;
 			}
 			/* On first pass, don't allow dangling keys */
@@ -215,13 +216,10 @@ load (const char *file)
                         }
 	    
 			if (c == '=' || overflow){
-				TKeys *temp;
-
-				temp = SecHeader->keys;
 				*next = '\0';
-				SecHeader->keys = (TKeys *) g_malloc (sizeof (TKeys));
-				SecHeader->keys->link = temp;
-				SecHeader->keys->key_name = g_strdup (CharBuffer);
+				Key = g_new0 (DirEntry, 1);
+				Key->name = g_strdup (CharBuffer);
+				SecHeader->keys = g_slist_prepend (SecHeader->keys, Key);
 				state = KeyValue;
 				next = CharBuffer;
 			} else {
@@ -233,7 +231,7 @@ load (const char *file)
 		case KeyValue:
 			if (overflow || c == '\n'){
 				*next = '\0';
-				SecHeader->keys->value = decode_string_and_dup (CharBuffer);
+				Key->value = decode_string_and_dup (CharBuffer);
 				state = c == '\n' ? KeyDef : IgnoreToEOL;
 				next = CharBuffer;
 #ifdef GNOME_ENABLE_DEBUG
@@ -247,22 +245,30 @@ load (const char *file)
 	} /* while ((c = getc_unlocked (f)) != EOF) */
 	if (c == EOF && state == KeyValue){
 		*next = '\0';
-		SecHeader->keys->value = decode_string_and_dup (CharBuffer);
+		Key->value = decode_string_and_dup (CharBuffer);
 	}
 	fclose (f);
 	return SecHeader;
 }
 
-static TKeys *
+static DirEntry *
 dir_lookup_entry (TSecHeader *dir,
 		  char       *name,
 		  gboolean    create)
 {
-	TKeys *de;
+	GSList *l;
+	DirEntry *de;
 	
-	for (de = dir->keys; de != NULL; de = de->link)
-		if (!strcmp (de->key_name, name))
+	l = dir->keys;
+
+	while (l) {
+		de = (DirEntry *)l->data;
+
+		if (!strcmp (de->name, name))
 			return de;
+		
+		l = l->next;
+	}
 
 #if 0
 	if (create) {
@@ -345,14 +351,14 @@ lookup_dir (TSecHeader *dir,
 	return NULL;
 }
 
-static TKeys *
+static DirEntry *
 lookup_dir_entry (BonoboConfigDItem *ditem,
 		  const char        *key, 
 		  gboolean           create)
 {
 	char       *dir_name;
 	char       *leaf_name;
-	TKeys      *de;
+	DirEntry   *de;
 	TSecHeader *dd;
 
 	if ((dir_name = bonobo_config_dir_name (key))) {
@@ -393,7 +399,7 @@ real_get_value (BonoboConfigDatabase *db,
 		CORBA_Environment    *ev)
 {
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
-	TKeys             *de;
+	DirEntry          *de;
 	CORBA_TypeCode     tc;
 	CORBA_any         *value = NULL;
 	char              *locale = NULL; 
@@ -463,8 +469,9 @@ real_get_keys (BonoboConfigDatabase *db,
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
 	Bonobo_KeyList *key_list;
 	TSecHeader *dd;
-	TKeys *c;
-	int len;
+	DirEntry *de;
+	GSList *l;
+	int i, len;
 	
 	key_list = Bonobo_KeyList__alloc ();
 	key_list->_length = 0;
@@ -472,20 +479,22 @@ real_get_keys (BonoboConfigDatabase *db,
 	if (!(dd = lookup_dir (ditem->_priv->dir, dir, FALSE)))
 		return key_list;
 
-	for (len = 0, c = dd->keys; c != NULL; c = c->link, len++)
-		;
+	if (!(len = g_slist_length (dd->keys)))
+		return key_list;
 
 	if (!len)
 		return key_list;
 
-	key_list->_maximum = len;
+	key_list->_maximum = key_list->_length = len;
 	key_list->_buffer = CORBA_sequence_CORBA_string_allocbuf (len);
 	CORBA_sequence_set_release (key_list, TRUE); 
 	
-	for (c = dd->keys; c != NULL; c = c->link) {
-		key_list->_buffer [key_list->_length] =
-			CORBA_string_dup (c->key_name);
-		key_list->_length++;
+	i = 0;
+	for (l = dd->keys; l != NULL; l = l->next) {
+		de = (DirEntry *)l->data;
+	       
+		key_list->_buffer [i] = CORBA_string_dup (de->name);
+		i++;
 	}
 	
 	return key_list;
