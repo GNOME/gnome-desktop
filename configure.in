@@ -37,19 +37,6 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
-for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
-  if test -f $dir/orbit-idl ; then
-     orbit_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
-     break
-  fi
-done
-AC_CHECK_PROG(ORBIT_CONFIG, orbit-config, orbit-config)
-if [ ! -z "$ORBIT_CONFIG" ]; then
-	ORBIT_LIBS="`orbit-config --libs client server`"
-	ORBIT_CFLAGS="`orbit-config --cflags client server`"
-fi
-AC_SUBST(ORBIT_LIBS)
-AM_CONDITIONAL(ORBIT_INSTALLED, test ! -z "$ORBIT_LIBS")
 
 AC_CHECK_HEADERS(dlfcn.h dl.h)
 AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
@@ -64,67 +51,84 @@ dnl properties-keyboard
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
-dnl MICO - Magic to extract the relevant information from
-dnl        various installed files
-
-if test -z "$ORBIT_LIBS"; then
-AC_MSG_CHECKING(for MICO prefix)
 for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
-  if test -f $dir/mico-ld ; then
-     mico_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
+  if test -f $dir/orbit-idl ; then
+     orbit_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
      break
   fi
 done
-
-if test x${mico_prefix+set} = xset ; then
-  AC_MSG_RESULT($mico_prefix)
-else
-  AC_MSG_RESULT(not found)
-  AC_MSG_ERROR(MICO not found)
+AC_CHECK_PROG(ORBIT_CONFIG, orbit-config, orbit-config)
+if test -n "$ORBIT_CONFIG"; then
+	ORBIT_LIBS="`orbit-config --libs client server`"
+	ORBIT_CFLAGS="`orbit-config --cflags client server`"
 fi
+AC_SUBST(ORBIT_CFLAGS)
+AC_SUBST(ORBIT_LIBS)
+AM_CONDITIONAL(ORBIT_INSTALLED, test -n "$ORBIT_LIBS")
 
-AC_MSG_CHECKING(for MICO version)
-if test -f "$mico_prefix/lib/mico-setup.sh"; then
-   MICO_VERS=`(. $mico_prefix/lib/mico-setup.sh ; echo $MICOVERSION)`
-else
-   # Sometimes mico-setup.sh is installed in doc.
-   files="`echo $mico_prefix/doc/mico-*/mico-setup.sh`"
-   if test "$files" != "$mico_prefix/doc/mico-*/mico-setup.sh"; then
-      MICO_VERS=`(set X $files; . $2; echo $MICOVERSION)`
-   else
-      AC_MSG_ERROR(unknown)
-   fi
+ORB_LIBS="$ORBIT_LIBS"
+ORB_CFLAGS="$ORBIT_CFLAGS"
+
+dnl MICO - Magic to extract the relevant information from
+dnl        various installed files
+MICO_LIBS= MICO_CFLAGS=
+if test -z "$ORB_LIBS"; then
+  AC_MSG_CHECKING(for MICO prefix)
+  for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
+    if test -f $dir/mico-ld ; then
+       mico_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
+       break
+    fi
+  done
+
+  if test x${mico_prefix+set} = xset ; then
+    AC_MSG_RESULT($mico_prefix)
+  else
+    AC_MSG_RESULT(not found)
+    AC_MSG_ERROR(MICO not found)
+  fi
+
+  AC_MSG_CHECKING(for MICO version)
+  if test -f "$mico_prefix/lib/mico-setup.sh"; then
+     MICO_VERS=`(. $mico_prefix/lib/mico-setup.sh ; echo $MICOVERSION)`
+  else
+     # Sometimes mico-setup.sh is installed in doc.
+     files="`echo $mico_prefix/doc/mico-*/mico-setup.sh`"
+     if test "$files" != "$mico_prefix/doc/mico-*/mico-setup.sh"; then
+	MICO_VERS=`(set X $files; . $2; echo $MICOVERSION)`
+     else
+	AC_MSG_ERROR(unknown)
+     fi
+  fi
+  AC_MSG_RESULT($MICO_VERS)
+
+  # We assume here, to keep things simple, that nobody has MICO older
+  # than 2.0.3.  2.0.4 is not checked for since nobody seems to use it.
+
+  if test $MICO_VERS = 2.0.3 || test $MICO_VERS = 2.0.5; then
+    MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lmicocoss$MICO_VERS -lXt"
+  else
+    MICO_LIBS="-lmico$MICO_VERS -lmicogtk$MICO_VERS"
+    AC_DEFINE(HAVE_MICO_ORB_RUN)
+  fi
+
+  for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%g` ; do
+    case $flag in
+      -L*)
+	MICO_LIBS="$flag $MICO_LIBS"
+	;;
+      -lm|-ldl|-ldld|-lbsd)
+	;;
+      -l*)
+	MICO_LIBS="$MICO_LIBS $flag"
+	;;
+    esac
+  done
+  ORB_LIBS="$MICO_LIBS"
+  ORB_CFLAGS="$MICO_CFLAGS"
 fi
-AC_MSG_RESULT($MICO_VERS)
-
-# We assume here, to keep things simple, that nobody has MICO older
-# than 2.0.3.  2.0.4 is not checked for since nobody seems to use it.
-
-if test $MICO_VERS = 2.0.3 || test $MICO_VERS = 2.0.5; then
-  MICO_LIBS="-lmicoaux$MICO_VERS -lmico$MICO_VERS -lmicocoss$MICO_VERS -lXt"
-else
-  MICO_LIBS="-lmico$MICO_VERS -lmicogtk$MICO_VERS"
-  AC_DEFINE(HAVE_MICO_ORB_RUN)
-fi
-
-for flag in `grep '^eval' < $mico_prefix/bin/mico-ld | sed s%\"%%g` ; do
-  case $flag in
-    -L*)
-      MICO_LIBS="$flag $MICO_LIBS"
-      ;;
-    -lm|-ldl|-ldld|-lbsd)
-      ;;
-    -l*)
-      MICO_LIBS="$MICO_LIBS $flag"
-      ;;
-  esac
-done
-else
-MICO_LIBS="$ORBIT_LIBS"
-MICO_VERS=""
-fi
-AC_SUBST(MICO_LIBS)
-AC_SUBST(MICO_VERS)
+AC_SUBST(ORB_LIBS)
+AC_SUBST(ORB_CFLAGS)
 
 dnl gnome-session
 dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
@@ -142,12 +146,13 @@ SMPROXY_DEFS=
 rm -fr conftestdir
 if mkdir conftestdir; then
   cd conftestdir
-  # STD_CPP_DEFINES is in the Makefiles generated with X11R6/6.1/6.3
+  # STD_DEFINES is in the Makefiles generated with X11R6/6.1/6.3
   # and Solaris 2.5 OpenWindows `xmkmf's.  I haven't tested with
-  # older versions.  FIXME if necessary.
+  # older versions.  FIXME if necessary.  Alternative may be
+  # $(ALLDEFINES).
   cat > Imakefile <<'EOF'
 acfinddefs:
-	@echo 'ac_x_cpp_defs="${STD_CPP_DEFINES}"'
+	@echo 'ac_x_cpp_defs="${STD_DEFINES}"'
 EOF
   if (xmkmf) >/dev/null 2>/dev/null && test -f Makefile; then
     # GNU make sometimes prints "make[1]: Entering...", which would confuse us.
