@@ -93,7 +93,8 @@ BITMAPS     = \
 	gnome-ccwindowmanager.png \
 	gnome-cckeyboard-bell.png	\
 	gnome-cckeyboard.png	\
-	gnome-ccperiph.png      
+	gnome-ccperiph.png      \
+	gtkvim.png
 
 TILES     = \
 	tile-normal-up.png			\

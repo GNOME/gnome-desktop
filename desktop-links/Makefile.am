@@ -36,7 +36,8 @@ Directory_files = \
 
 Applications_DATA = \
 	Emacs.desktop		\
-	Netscape.desktop
+	Netscape.desktop	\
+	Vim.desktop
 
 Graphics_DATA = \
 	GIMP.desktop
