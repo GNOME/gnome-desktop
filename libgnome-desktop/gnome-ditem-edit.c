@@ -927,6 +927,16 @@ gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
         return g_strdup (name);
 }
 
+/* eeeeeeeeek!, evil api */
+void
+gnome_ditem_edit_grab_focus (GnomeDItemEdit *dee)
+{
+        g_return_if_fail (dee != NULL);
+        g_return_if_fail (GNOME_IS_DITEM_EDIT (dee));
+
+	gtk_widget_grab_focus (dee->_priv->name_entry);
+}
+
 #ifdef TEST_DITEM_EDIT
 
 #include <libgnomeui.h>
