@@ -11,7 +11,6 @@ static author authors[] = {
 	{ "", "" },
 	{ "Martin Baulig", "<martin@home-of-linux.org>" },
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
-	{ "Anders Carlsson", "<andersca@gnu.org>" },
 	{ "Jonathan Blandford", "<jrb@redhat.com>" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },	
 	{ "Tim Gerla", "<timg@means.net>" },

@@ -2,11 +2,17 @@
 #include "authors.h"
 #include "logo.xpm"
 
+gboolean cb_quit      (GtkWidget *widget, gpointer data);
+gboolean cb_exposed   (GtkWidget *widget, GdkEventExpose *event);
+gboolean cb_configure (GtkWidget *widget, GdkEventConfigure *event);
+gint     scroll       (gpointer data);
+
 GtkWidget *area;
 GdkPixmap *pixmap=NULL;
 GdkFont *font=NULL;
 GdkFont *italicfont=NULL;
-gint y;
+gint y, y_to_wrap_at;
+
 
 /* Sparkles */
 #define NUM_FRAMES 8
@@ -252,29 +258,35 @@ scroll (gpointer data)
 		if (authors[i].email)
 			totalwidth += 4 + gdk_string_width (italicfont, authors[i].email);
 
-		gdk_draw_string (pixmap,
-				 font,
-				 area->style->white_gc,
-				 (area->allocation.width - 
-				  totalwidth) / 2,
-				 cury,
-				 _(authors[i].name));
-		gdk_draw_string (pixmap,
-				 italicfont,
-				 area->style->white_gc,
-				 (area->allocation.width -
-				  totalwidth) / 2  + 
-				 (authors[i].email ? 4 :0) +
-				 gdk_string_width (font, authors[i].name),
-				 cury,
-				 _(authors[i].email));
-				  
+		if(cury > -font->descent &&
+		   cury < area->allocation.height + font->ascent) {
+		        gdk_draw_string (pixmap,
+					 font,
+					 area->style->white_gc,
+					 (area->allocation.width - 
+					  totalwidth) / 2,
+					 cury,
+					 _(authors[i].name));
+			gdk_draw_string (pixmap,
+					 italicfont,
+					 area->style->white_gc,
+					 (area->allocation.width -
+					  totalwidth) / 2  + 
+					 (authors[i].email ? 4 :0) +
+					 gdk_string_width (font, authors[i].name),
+					 cury,
+					 _(authors[i].email));
+		}
+
 		i++;
 		cury += font->ascent + font->descent;
 
 	}
 
 	y --;
+	if(y < y_to_wrap_at)
+	        y = area->allocation.height + font->ascent;
+
 	update_rect.x = 0;
 	update_rect.y = 0;
 	update_rect.width = area->allocation.width;
@@ -300,7 +312,7 @@ cb_exposed (GtkWidget *widget, GdkEventExpose *event)
 gboolean
 cb_configure (GtkWidget *widget, GdkEventConfigure *event)
 {
-	y = widget->allocation.height;
+	y = widget->allocation.height + font->ascent;
 
 	if (pixmap)
 		gdk_pixmap_unref (pixmap);
@@ -349,6 +361,9 @@ main (gint argc, gchar *argv[])
 
 	if (!italicfont)
 	        italicfont = window->style->font;
+
+	y_to_wrap_at = -(sizeof(authors)/sizeof(authors[0]))*
+	                (font->ascent+font->descent);
 
 	logo_pixmap = gdk_pixmap_create_from_xpm_d (window->window, &logo_mask, NULL,
 					       logo_xpm);
