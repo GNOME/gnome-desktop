@@ -315,6 +315,7 @@ static gchar *contributors[] = {
 	"Vincent Untz",
 	N_("Manish Vachharajani"),
 	N_("Neil Vachharajani"),
+	"Thomas Vander Stichele",
 	"Daniel Veillard",
 	"Vendu",
 	"Andrew Veliath",
