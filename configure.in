@@ -191,6 +191,20 @@ AC_SUBST(GNOME_TERMINAL_LIBS)
 AC_SUBST(GNOME_TERMINAL_CFLAGS)
 AC_SUBST(LIBGLADE_REQUIRED)
 
+GLADE_LIBS=`gnome-config --libs libglade`
+GLADE_CFLAGS=`gnome-config --cflags libglade`
+AC_SUBST(GLADE_LIBS)
+AC_SUBST(GLADE_CFLAGS)
+
+dnl
+dnl libpng
+dnl
+PNG_LIBS=
+AC_CHECK_LIB(png, png_init_io, [
+	     PNG_LIBS="-lpng"],[
+	     AC_MSG_ERROR(libpng is required for gnome-core)])
+AC_SUBST(PNG_LIBS)
+
 dnl
 dnl gnome-session
 dnl
