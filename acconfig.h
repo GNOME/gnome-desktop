@@ -38,5 +38,7 @@
 
 /* Location of KDE menus */
 #undef KDE_MENUDIR
+#undef KDE_ICONDIR
+#undef KDE_MINI_ICONDIR
 
 #undef HAVE_ZVT_TERM_RESET
