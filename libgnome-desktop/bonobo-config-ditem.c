@@ -59,6 +59,7 @@ typedef struct TSecHeader {
 
 struct _BonoboConfigDItemPrivate {
 	guint                 time_id;
+	gboolean              modified;
 
 	TSecHeader           *dir;
 
@@ -278,6 +279,67 @@ load (const char *file)
 	}
 	fclose (f);
 	return SecHeader;
+}
+
+static void
+dump_subkeys (FILE *f, DirEntry *de)
+{
+	GSList *c;
+
+	for (c = de->subvalues; c; c = c->next) {
+		DirEntry *subentry = c->data;
+
+		if (subentry->value) {
+			gchar *t = escape_string_and_dup (subentry->value);
+
+			fprintf (f, "%s[%s]=%s\n", de->name, subentry->name, t);
+		}
+	}
+}
+
+static void
+dump_keys (FILE *f, DirEntry *de)
+{
+	GSList *c;
+
+	for (c = de->subvalues; c; c = c->next) {
+		DirEntry *subentry = c->data;
+
+		if (subentry->value) {
+			gchar *t = escape_string_and_dup (subentry->value);
+
+			fprintf (f, "%s=%s\n", subentry->name, subentry->value);
+		}
+
+		if (subentry->subvalues)
+			dump_subkeys (f, subentry);
+	}
+}
+
+static void 
+dump_section (FILE *f, TSecHeader *p)
+{
+	fprintf (f, "\n[%s]\n", p->section_name);
+	dump_keys (f, &p->entry);
+}
+
+static gboolean
+save (const char *file_name, TSecHeader *dir)
+{
+	FILE *f;
+	
+	if ((f = fopen (file_name, "w"))==NULL)
+		return FALSE;
+
+	g_message (G_STRLOC ": |%s|", file_name);
+
+	while (dir) {
+		dump_section (f, dir);
+		dir = dir->link;
+	}
+	
+	fclose (f);
+	return TRUE;
 }
 
 static DirEntry *
@@ -547,15 +609,33 @@ static void
 real_sync (BonoboConfigDatabase *db, 
 	   CORBA_Environment    *ev)
 {
-	BonoboConfigDItem *ditem G_GNUC_UNUSED = BONOBO_CONFIG_DITEM (db);
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	char *tmp_name;
 
-	if (!db->writeable)
+	if (!db->writeable || !ditem->_priv->modified)
 		return;
 
+	tmp_name = g_strdup_printf ("%s.tmp.%d", ditem->filename, getpid ());
+
+	if (!save (tmp_name, ditem->_priv->dir)) {
+		g_free (tmp_name);
+		db->writeable = FALSE;
+		return;
+	}
+
+	if (rename (tmp_name, ditem->filename) < 0) {
+		g_free (tmp_name);
+		db->writeable = FALSE;
+		return;
+	}
+
+	ditem->_priv->modified = FALSE;
+
+	g_free (tmp_name);
 	return;
 }
 
-static gboolean G_GNUC_UNUSED
+static gboolean
 timeout_cb (gpointer data)
 {
 	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (data);
@@ -571,6 +651,25 @@ timeout_cb (gpointer data)
 
 	/* remove the timeout */
 	return FALSE;
+}
+
+static void
+real_set_value (BonoboConfigDatabase *db,
+		const CORBA_char     *key, 
+		const CORBA_any      *value,
+		CORBA_Environment    *ev)
+{
+	BonoboConfigDItem *ditem = BONOBO_CONFIG_DITEM (db);
+	DirEntry *de;
+	char *name;
+
+	de = lookup_dir_entry (ditem, key, TRUE);
+
+	ditem->_priv->modified = TRUE;
+
+	if (!ditem->_priv->time_id)
+		ditem->_priv->time_id = g_timeout_add (FLUSH_INTERVAL * 1000, 
+						       timeout_cb, ditem);
 }
 
 static void G_GNUC_UNUSED
@@ -650,10 +749,12 @@ bonobo_config_ditem_class_init (BonoboConfigDatabaseClass *class)
 
 	cd_class = BONOBO_CONFIG_DATABASE_CLASS (class);
 
+	cd_class->set_value    = real_set_value;
 	cd_class->get_value    = real_get_value;
 	cd_class->get_dirs     = real_get_dirs;
 	cd_class->get_keys     = real_get_keys;
 	cd_class->has_dir      = real_has_dir;
+	cd_class->sync         = real_sync;
 }
 
 static void

@@ -29,9 +29,35 @@ static void G_GNUC_UNUSED
 test_ditem (Bonobo_ConfigDatabase db)
 {
 	GnomeDesktopItem *ditem;
+	const gchar *text;
 
 	ditem = gnome_desktop_item_new_from_file ("/home/martin/work/test.desktop",
 						  GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS);
+
+	text = gnome_desktop_item_get_location (ditem);
+	g_print ("LOCATION: |%s|\n", text);
+
+	text = gnome_desktop_item_get_type (ditem);
+	g_print ("TYPE: |%s|\n", text);
+
+	text = gnome_desktop_item_get_command (ditem);
+	g_print ("COMMAND: |%s|\n", text);
+
+	text = gnome_desktop_item_get_icon_path (ditem);
+	g_print ("ICON PATH: |%s|\n", text);
+
+	text = gnome_desktop_item_get_name (ditem, NULL);
+	g_print ("NAME: |%s|\n", text);
+
+	text = gnome_desktop_item_get_name (ditem, "de");
+	g_print ("NAME (de): |%s|\n", text);
+
+	text = gnome_desktop_item_get_comment (ditem, NULL);
+	g_print ("COMMENT: |%s|\n", text);
+
+	text = gnome_desktop_item_get_comment (ditem, "de");
+	g_print ("COMMENT (de): |%s|\n", text);
+
 }
 
 int
@@ -68,6 +94,7 @@ main (int argc, char **argv)
 	Bonobo_ConfigDatabase_addDatabase (db, default_db, "/gnome-ditem/", &ev);
 	g_assert (!BONOBO_EX (&ev));
 
+#if 0
 	dirlist = Bonobo_ConfigDatabase_getDirs (db, "", &ev);
 	g_assert (!BONOBO_EX (&ev));
 
@@ -91,6 +118,7 @@ main (int argc, char **argv)
 	if (keylist)
 		for (j = 0; j < keylist->_length; j++)
 			g_print ("TEST KEY: |%s|\n", keylist->_buffer [j]);
+#endif
 
         CORBA_exception_init (&ev);
 	type = bonobo_pbclient_get_type (db, "/Config/scrollbacklines", &ev);
@@ -99,8 +127,14 @@ main (int argc, char **argv)
 
         CORBA_exception_init (&ev);
 	value = bonobo_pbclient_get_value (db, "/Config/scrollbacklines", TC_CORBA_long, &ev);
-	if (value)
+	if (value) {
 		printf ("got value as long %d\n", BONOBO_ARG_GET_LONG (value));
+		bonobo_pbclient_set_value (db, "/Config/scrollbacklines", value, &ev);
+	}
+        CORBA_exception_free (&ev);
+
+        CORBA_exception_init (&ev);
+	Bonobo_ConfigDatabase_sync (db, &ev);
         CORBA_exception_free (&ev);
 
         CORBA_exception_init (&ev);
