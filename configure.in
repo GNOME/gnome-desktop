@@ -273,24 +273,41 @@ AC_SUBST(LIBWRAP_LIBS)
 
 AC_ARG_WITH(window-manager,
 [  --with-window-manager=NAME
-			   Specify default window manager],[
+			  Specify default window manager],[
     WINDOW_MANAGER="$with_window_manager"], [
     dnl gnome-wm is a shell script that starts the WM.
     WINDOW_MANAGER=gnome-wm])
 AC_SUBST(WINDOW_MANAGER)
 
+dnl
+dnl X11 Xinerama extension
+dnl
+AC_ARG_ENABLE(xinerama,
+  [  --disable-xinerama      Disable Xinerama support],,
+  with_xinerama=yes)
+XINERAMA_LIBS=
+if test x$with_xinerama != xno ; then
+	AC_CHECK_HEADER(X11/extensions/Xinerama.h, [
+		AC_CHECK_LIB(Xinerama, XineramaQueryScreens, [
+		     	AC_DEFINE(HAVE_LIBXINERAMA)
+		     	XINERAMA_LIBS="-lXinerama"
+		     	XINERAMA_SUPPORT=yes],, $GTK_LIBS)
+	])
+fi
+AC_SUBST(XINERAMA_LIBS)
 
 
 dnl help-browser using gtkhtml
 AC_ARG_WITH(gtkhtml,
-[  --with-gtkhtml=PREFIX  Specify gtkhtml prefix],[
+[  --with-gtkhtml=PREFIX   Specify gtkhtml prefix],[
     GTK_HTML_PREFIX="$with_gtkhtml"], [
     GTK_HTML_PREFIX=`$GNOME_CONFIG --prefix`])
 AC_SUBST(GTK_HTML_PREFIX)
 
 dnl help-browser using gtkhtml
 AC_ARG_WITH(gnome-print,
-[  --with-gnome-print=PREFIX  Specify gnome-print prefix],[
+[  --with-gnome-print=PREFIX
+                          Specify gnome-print prefix],[
     GNOME_PRINT_PREFIX="$with_gnome_print"], [
     GNOME_PRINT_PREFIX=`$GNOME_CONFIG --prefix`])
 AC_SUBST(GNOME_PRINT_PREFIX)
@@ -312,7 +329,7 @@ CPPFLAGS=$CPPFLAGS_save
 LDFLAGS=$LDFLAGS_save
 
 dnl this shouldn't be enabled by default yet, since gtkhtml has some bugs
-AC_ARG_ENABLE(gtkhtml-help, [  --enable-gtkhtml-help  Use GtkHTML for the help browser],
+AC_ARG_ENABLE(gtkhtml-help, [  --enable-gtkhtml-help   Use GtkHTML for the help browser],
 	gtkhtml_enabled="$enableval", gtkhtml_enabled=no)
 
 if test "x$gtkhtml_enabled" = "xyes" ; then
@@ -385,7 +402,7 @@ AC_SUBST(BZ_LIBS)
 dnl
 dnl Place to look for KDE menus
 dnl
-AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR         Location of KDE data])
+AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR  Location of KDE data])
 
 if test "x$with_kde_datadir" = x ; then
   kde_datadir=/usr/share
@@ -400,7 +417,7 @@ AC_DEFINE_UNQUOTED(KDE_MINI_ICONDIR, "$kde_datadir/icons/mini")
 dnl
 dnl Place to look for KDE docs
 dnl
-AC_ARG_WITH(kde-docdir, [  --with-kde-docdir=DIR         Location of KDE documentation])
+AC_ARG_WITH(kde-docdir, [  --with-kde-docdir=DIR   Location of KDE documentation])
 
 if test "x$with_kde_docdir" = x ; then
   kde_docdir=/usr/doc/kde
@@ -429,7 +446,7 @@ AM_CONDITIONAL(HAVE_GTK_DOC, $GTKDOC)
 AC_SUBST(HAVE_GTK_DOC)
 
 dnl Let people disable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
+AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc        Use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
 
 if test x$enable_gtk_doc = xauto ; then
   if test x$GTKDOC = xtrue ; then
