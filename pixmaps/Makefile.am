@@ -14,6 +14,7 @@ BITMAPS     = \
 	gnome-color-browser.png			\
 	gnome-color-xterm.png           \
 	gnome-cromagnon.png			\
+	gnome-devel.png             \
 	gnome-die1.png				\
 	gnome-die2.png				\
 	gnome-die3.png				\
