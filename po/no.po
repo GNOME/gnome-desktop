@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.2.3\n"
-"POT-Creation-Date: 2000-08-31 21:19+0200\n"
-"PO-Revision-Date: 2000-08-31 21:20+02:00\n"
+"POT-Creation-Date: 2000-09-04 23:15+0200\n"
+"PO-Revision-Date: 2000-09-04 23:17+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -204,24 +204,24 @@ msgid "Desk Guide Alert"
 msgstr "Advarsel fra skrivebordsoversikt"
 
 #: applets/desk-guide/deskguide_applet.c:232 applets/fish/fish.c:824
-#: applets/gen_util/clock.c:382 applets/gen_util/mailcheck.c:1379
+#: applets/gen_util/clock.c:411 applets/gen_util/mailcheck.c:1379
 #: applets/gen_util/printer.c:464 applets/tasklist/tasklist_applet.c:791
-#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4570
+#: panel/drawer.c:411 panel/launcher.c:527 panel/menu.c:1269 panel/menu.c:4578
 msgid "Properties..."
 msgstr "Egenskaper ..."
 
 #: applets/desk-guide/deskguide_applet.c:238 applets/fish/fish.c:831
-#: applets/gen_util/clock.c:389 applets/gen_util/mailcheck.c:1391
+#: applets/gen_util/clock.c:418 applets/gen_util/mailcheck.c:1391
 #: applets/gen_util/printer.c:471 applets/tasklist/tasklist_applet.c:797
 #: gnome-terminal/gnome-terminal.c:1692 gsm/session-properties.c:182
 #: help-browser/window.c:255 panel/drawer.c:414 panel/gnome-run.c:311
-#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4579
-#: panel/status.c:367 panel/swallow.c:369
+#: panel/launcher.c:530 panel/logout.c:72 panel/logout.c:133 panel/menu.c:4587
+#: panel/status.c:366 panel/swallow.c:369
 msgid "Help"
 msgstr "Hjelp"
 
 #: applets/desk-guide/deskguide_applet.c:245 applets/fish/fish.c:838
-#: applets/gen_util/clock.c:396 applets/gen_util/mailcheck.c:1397
+#: applets/gen_util/clock.c:425 applets/gen_util/mailcheck.c:1397
 #: applets/gen_util/printer.c:477 applets/tasklist/tasklist_applet.c:804
 msgid "About..."
 msgstr "Om..."
@@ -263,7 +263,7 @@ msgstr "Filnavn for animasjonen:"
 #: applets/fish/fish.c:452 applets/gen_util/mailcheck.c:928
 #: gnome-hint/gnome-hint-properties.c:163 gnome-terminal/gnome-terminal.c:1308
 #: panel/menu-properties.c:449 panel/panel-util.c:101 panel/panel-util.c:142
-#: panel/panel-util.c:183 panel/panel_config.c:1141 panel/swallow.c:202
+#: panel/panel-util.c:183 panel/panel_config.c:1169 panel/swallow.c:202
 msgid "Browse"
 msgstr "Bla gjennom"
 
@@ -323,13 +323,13 @@ msgstr ""
 "%I:%M\n"
 "%p"
 
-#: applets/gen_util/clock.c:152 panel/foobar-widget.c:417
+#: applets/gen_util/clock.c:152 panel/foobar-widget.c:418
 msgid "%I:%M %p"
 msgstr "%I:%M %p"
 
 #. This format string is used, to display the actual time in
 #. 24 hour format.
-#: applets/gen_util/clock.c:159 panel/foobar-widget.c:415
+#: applets/gen_util/clock.c:159 panel/foobar-widget.c:416
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -359,51 +359,59 @@ msgstr "%A %B %d"
 msgid "Can't create applet!\n"
 msgstr "Kan ikke opprette applet!\n"
 
-#: applets/gen_util/clock.c:523
+#. Do NOT translate the clock/hourformat part.  What you
+#. * should change is the 12.  If your country code should use
+#. * 12 hour format by default, leave it at 12, otherwise use 24
+#. * for 24 hour format.  Those are the only two supported
+#: applets/gen_util/clock.c:349
+msgid "clock/hourformat=12"
+msgstr "klokke/tidsformat=12"
+
+#: applets/gen_util/clock.c:552
 msgid "Clock properties"
 msgstr "Egenskaper for klokke"
 
-#: applets/gen_util/clock.c:529
+#: applets/gen_util/clock.c:558
 msgid "Time Format"
 msgstr "Tidsformat"
 
-#: applets/gen_util/clock.c:541
+#: applets/gen_util/clock.c:570
 msgid "12 hour"
 msgstr "12 timer"
 
-#: applets/gen_util/clock.c:550
+#: applets/gen_util/clock.c:579
 msgid "24 hour"
 msgstr "24 timer"
 
-#: applets/gen_util/clock.c:585
+#: applets/gen_util/clock.c:614
 msgid "Show date in applet"
 msgstr "Vis dato i applet"
 
-#: applets/gen_util/clock.c:599
+#: applets/gen_util/clock.c:628
 msgid "Show date in tooltip"
 msgstr "Vis dato i verktøytips"
 
-#: applets/gen_util/clock.c:613
+#: applets/gen_util/clock.c:642
 msgid "Use GMT"
 msgstr "Bruk GMT"
 
-#: applets/gen_util/clock.c:627
+#: applets/gen_util/clock.c:656
 msgid "Unix time"
 msgstr "Unix tid"
 
-#: applets/gen_util/clock.c:656
+#: applets/gen_util/clock.c:685
 msgid "Clock"
 msgstr "Klokke"
 
-#: applets/gen_util/clock.c:702
+#: applets/gen_util/clock.c:731
 msgid "Clock Applet"
 msgstr "Klokkeapplet"
 
-#: applets/gen_util/clock.c:703 applets/gen_util/printer.c:354
+#: applets/gen_util/clock.c:732 applets/gen_util/printer.c:354
 msgid "(c) 1998 the Free Software Foundation"
 msgstr "(c) 1998 the Free Software Foundation"
 
-#: applets/gen_util/clock.c:705
+#: applets/gen_util/clock.c:734
 msgid ""
 "The clock applet gives your panel a lightweight and simple display of the "
 "date and time"
@@ -620,7 +628,7 @@ msgstr "Drep app"
 msgid "Follow panel size"
 msgstr "Følg panelets størrelse"
 
-#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3602
+#: applets/tasklist/tasklist_properties.c:156 panel/menu.c:3607
 msgid "Horizontal"
 msgstr "Horisontal"
 
@@ -645,7 +653,7 @@ msgstr "Fast bredde på oppgaveliste"
 msgid "Tasklist width is dynamic"
 msgstr "Dynamisk bredde på oppgaveliste"
 
-#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3603
+#: applets/tasklist/tasklist_properties.c:201 panel/menu.c:3608
 msgid "Vertical"
 msgstr "Vertikal"
 
@@ -661,7 +669,7 @@ msgstr "Fast høyde for oppgaveliste"
 msgid "Tasklist height is dynamic"
 msgstr "Dynamisk høyde for oppgaveliste"
 
-#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3632
+#: applets/tasklist/tasklist_properties.c:238 panel/menu.c:3639
 msgid "Size"
 msgstr "Størrelse"
 
@@ -995,7 +1003,7 @@ msgstr "GNOME fisken Wanda"
 msgid "... and many more"
 msgstr "... og mange flere"
 
-#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:193
+#: gnome-about/gnome-about.c:465 panel/foobar-widget.c:194
 msgid "About GNOME"
 msgstr "Om GNOME"
 
@@ -1269,15 +1277,15 @@ msgid "Select-by-word characters"
 msgstr "Velg-etter-ord tegn"
 
 #. image frame
-#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1129
+#: gnome-terminal/gnome-terminal.c:1269 panel/panel_config.c:1157
 msgid "Image"
 msgstr "Bilde"
 
-#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3638
+#: gnome-terminal/gnome-terminal.c:1271 panel/menu.c:3645
 msgid "Background type"
 msgstr "Bakgrunnstype"
 
-#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3597
+#: gnome-terminal/gnome-terminal.c:1281 panel/menu.c:3602
 msgid "None"
 msgstr "Ingen"
 
@@ -1414,7 +1422,7 @@ msgid "Edit"
 msgstr "Rediger"
 
 #: gnome-terminal/gnome-terminal.c:1687 gsm/gsm-client-row.c:59
-#: panel/foobar-widget.c:576
+#: panel/foobar-widget.c:577
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -1904,7 +1912,7 @@ msgstr "X"
 msgid "Y position of window"
 msgstr "Vinduets Y-posisjon"
 
-#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:765
+#: help-browser/gnome-help-browser.c:132 panel/panel_config.c:771
 msgid "Y"
 msgstr "Y"
 
@@ -1928,7 +1936,7 @@ msgstr "HØYDE"
 msgid "Debug level"
 msgstr "Nivå for avlusing (debugging)"
 
-#: help-browser/gnome-help-browser.c:365 help-browser/window.c:913
+#: help-browser/gnome-help-browser.c:365 help-browser/window.c:911
 msgid "Gnome Help Browser"
 msgstr "Gnome Hjelp Leser"
 
@@ -2254,7 +2262,7 @@ msgstr "Hjelp om Hjelp"
 msgid "Location: "
 msgstr "Plassering: "
 
-#: help-browser/window.c:1083
+#: help-browser/window.c:1081
 #, c-format
 msgid ""
 "Error loading document:\n"
@@ -2273,29 +2281,29 @@ msgstr ""
 "dette dokumentet installert\n"
 "på ditt system."
 
-#: panel/applet.c:403
+#: panel/applet.c:404
 msgid "???"
 msgstr "???"
 
-#: panel/applet.c:443
+#: panel/applet.c:444
 msgid "Remove from panel"
 msgstr "Fjern fra panelet"
 
-#: panel/applet.c:450
+#: panel/applet.c:451
 msgid "Move"
 msgstr "Flytt"
 
-#: panel/applet.c:462 panel/menu.c:2768
+#: panel/applet.c:463 panel/menu.c:2768
 #, c-format
 msgid "Cannot find pixmap file %s"
 msgstr "Kunne ikke bildefil %s"
 
-#: panel/applet.c:463 panel/applet.c:469 panel/menu.c:2994 panel/menu.c:2999
-#: panel/menu.c:4006 panel/menu.c:4011 panel/menu.c:4329
+#: panel/applet.c:464 panel/applet.c:470 panel/menu.c:2993 panel/menu.c:2998
+#: panel/menu.c:4013 panel/menu.c:4018 panel/menu.c:4335
 msgid "Panel"
 msgstr "Panel"
 
-#: panel/applet.c:689
+#: panel/applet.c:690
 msgid "Can't find an empty spot"
 msgstr "Kunne ikke finne en tom plass"
 
@@ -2322,7 +2330,7 @@ msgstr "Kan ikke opprette objekt"
 msgid "Object created is not AppletWidget"
 msgstr "Opprettet objekt er ikke av type AppletWidget"
 
-#: panel/button-widget.c:692
+#: panel/button-widget.c:688
 msgid "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
 
@@ -2377,7 +2385,7 @@ msgid "Enable hidebutton arrow"
 msgstr "Slå på pil for skjuling av knapper"
 
 #: panel/drawer.c:160 panel/drawer.c:272 panel/gnome-panel-properties.c:521
-#: panel/menu.c:3719
+#: panel/menu.c:3726
 msgid "Drawer"
 msgstr "Skuff"
 
@@ -2393,7 +2401,7 @@ msgstr "Opps! Det er noe som hindrer oss i å legge til på panelet"
 msgid "No socket was created"
 msgstr "Ingen socket ble opprettet"
 
-#: panel/foobar-widget.c:151
+#: panel/foobar-widget.c:152
 msgid ""
 "Cannot execute the gmc-client program,\n"
 "perhaps gmc is not installed"
@@ -2401,7 +2409,7 @@ msgstr ""
 "Kan ikke kjøre gmc-client programmet,\n"
 "kanskje gmc ikke er installert"
 
-#: panel/foobar-widget.c:161
+#: panel/foobar-widget.c:162
 msgid ""
 "Cannot execute the gnome calendar,\n"
 "perhaps it's not installed.\n"
@@ -2411,149 +2419,149 @@ msgstr ""
 "kanskje den ikke er installert.\n"
 "Du finner den i gnome-pim pakken."
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "News (www)"
 msgstr "Nyheter (www)"
 
-#: panel/foobar-widget.c:173
+#: panel/foobar-widget.c:174
 msgid "http://gnotices.gnome.org/gnome-news/"
 msgstr "http://gnotices.gnome.org/gnome-news/"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "FAQ (www)"
 msgstr "OBS (www)"
 
-#: panel/foobar-widget.c:174
+#: panel/foobar-widget.c:175
 msgid "http://www.gnome.org/gnomefaq/html/"
 msgstr "http://www.gnome.org/gnomefaq/html/"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "Mailing Lists (www)"
 msgstr "E-postlister (www)"
 
-#: panel/foobar-widget.c:175
+#: panel/foobar-widget.c:176
 msgid "http://mail.gnome.org/mailman/listinfo/"
 msgstr "http://mail.gnome.org/mailman/listinfo/"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "Software (www)"
 msgstr "Programvare (www)"
 
-#: panel/foobar-widget.c:177
+#: panel/foobar-widget.c:178
 msgid "http://www.gnome.org/applist/list-martin.phtml"
 msgstr "http://www.gnome.org/applist/list-martin.phtml"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "Development (www)"
 msgstr "Utvikling (www)"
 
-#: panel/foobar-widget.c:178
+#: panel/foobar-widget.c:179
 msgid "http://developer.gnome.org/"
 msgstr "http://developer.gnome.org/"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "Bug Tracking System (www)"
 msgstr "Feilrapporteringssystem (www)"
 
-#: panel/foobar-widget.c:179
+#: panel/foobar-widget.c:180
 msgid "http://bugs.gnome.org/"
 msgstr "http://bugs.gnome.org/"
 
-#: panel/foobar-widget.c:223
+#: panel/foobar-widget.c:224
 msgid "By Name"
 msgstr "Etter navn"
 
-#: panel/foobar-widget.c:224
+#: panel/foobar-widget.c:225
 msgid "By Type"
 msgstr "Etter type"
 
-#: panel/foobar-widget.c:225
+#: panel/foobar-widget.c:226
 msgid "By Size"
 msgstr "Etter størrelse"
 
-#: panel/foobar-widget.c:226
+#: panel/foobar-widget.c:227
 msgid "By Time Last Accessed"
 msgstr "Etter tid for siste aksess"
 
-#: panel/foobar-widget.c:227
+#: panel/foobar-widget.c:228
 msgid "By Time Last Modified"
 msgstr "Etter tid for siste modifikasjon"
 
-#: panel/foobar-widget.c:228
+#: panel/foobar-widget.c:229
 msgid "By Time Last Changed"
 msgstr "Etter tid for siste endring"
 
-#: panel/foobar-widget.c:237
+#: panel/foobar-widget.c:238
 msgid "Arrange Icons"
 msgstr "Arranger ikoner"
 
-#: panel/foobar-widget.c:247
+#: panel/foobar-widget.c:248
 msgid "Rescan Desktop Directory"
 msgstr "Gjenles skrivebordskatalogen"
 
-#: panel/foobar-widget.c:248
+#: panel/foobar-widget.c:249
 msgid "Rescan Desktop Devices"
 msgstr "Gjenles skrivebordsenhetene"
 
-#: panel/foobar-widget.c:254
+#: panel/foobar-widget.c:255
 msgid "Lock Screen"
 msgstr "Lås skjerm"
 
-#: panel/foobar-widget.c:264
+#: panel/foobar-widget.c:265
 msgid "Log Out"
 msgstr "Logg ut"
 
-#: panel/foobar-widget.c:272
+#: panel/foobar-widget.c:273
 msgid " Desktop "
 msgstr " Skrivebord "
 
-#: panel/foobar-widget.c:289
+#: panel/foobar-widget.c:290
 msgid "can't fine real path"
 msgstr "kan ikke finne reell sti"
 
-#: panel/foobar-widget.c:297
+#: panel/foobar-widget.c:298
 msgid "menu wasn't created"
 msgstr "menyen ble ikke opprettet"
 
-#: panel/foobar-widget.c:340
+#: panel/foobar-widget.c:341
 msgid "%A %B %d"
 msgstr "%A %B %d"
 
-#: panel/foobar-widget.c:408
+#: panel/foobar-widget.c:409
 msgid "Today"
 msgstr "I dag"
 
-#: panel/foobar-widget.c:409
+#: panel/foobar-widget.c:410
 msgid "This Week"
 msgstr "Denne uken"
 
-#: panel/foobar-widget.c:410
+#: panel/foobar-widget.c:411
 msgid "This Month"
 msgstr "Denne måneden"
 
-#: panel/foobar-widget.c:416
+#: panel/foobar-widget.c:417
 msgid "%H:%M:%S"
 msgstr "%H:%M:%S"
 
-#: panel/foobar-widget.c:418
+#: panel/foobar-widget.c:419
 msgid "%I:%M:%S %p"
 msgstr "%I:%M:%S %p"
 
-#: panel/foobar-widget.c:425
+#: panel/foobar-widget.c:426
 msgid "Add appointement..."
 msgstr "Legg til avtale..."
 
-#: panel/foobar-widget.c:442
+#: panel/foobar-widget.c:443
 msgid "Format"
 msgstr "Format"
 
-#: panel/foobar-widget.c:559 panel/menu.c:2790 panel/menu.c:2795
-#: panel/menu.c:4233
+#: panel/foobar-widget.c:560 panel/menu.c:2790 panel/menu.c:2795
+#: panel/menu.c:4240
 msgid "Programs"
 msgstr "Programmer"
 
-#: panel/foobar-widget.c:573 panel/menu.c:4206 panel/menu.c:4245
-#: panel/menu.c:4251
+#: panel/foobar-widget.c:574 panel/menu.c:4212 panel/menu.c:4252
+#: panel/menu.c:4258
 msgid "Favorites"
 msgstr "Favoritter"
 
@@ -2600,12 +2608,12 @@ msgid "Animation speed"
 msgstr "Animasjonshastighet"
 
 #: panel/gnome-panel-properties.c:296 panel/gnome-panel-properties.c:314
-#: panel/menu.c:3590
+#: panel/menu.c:3595
 msgid "Auto hide"
 msgstr "Skjul automatisk"
 
 #. ExplicitHide Animation step_size scale frame
-#: panel/gnome-panel-properties.c:303 panel/menu.c:3589
+#: panel/gnome-panel-properties.c:303 panel/menu.c:3594
 msgid "Explicit hide"
 msgstr "Skjul eksplisitt"
 
@@ -2669,7 +2677,7 @@ msgstr "Oppstarter"
 
 #: panel/gnome-panel-properties.c:522 panel/gnome-panel-properties.c:1330
 #: panel/menu-properties.c:465 panel/menu.c:2314 panel/menu.c:2380
-#: panel/menu.c:2382 panel/menu.c:3667 panel/menu.c:4489
+#: panel/menu.c:2382 panel/menu.c:3674 panel/menu.c:4497
 msgid "Menu"
 msgstr "Meny"
 
@@ -2870,7 +2878,7 @@ msgstr "Kjør"
 msgid "Run in terminal"
 msgstr "Kjør i terminal"
 
-#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4315
+#: panel/gnome-run.c:286 panel/gnome-run.c:288 panel/menu.c:4321
 msgid "Run..."
 msgstr "Kjør..."
 
@@ -2902,7 +2910,7 @@ msgstr "Panel applet"
 msgid "Create launcher applet"
 msgstr "Opprett oppstarts-applet"
 
-#: panel/logout.c:47 panel/menu.c:4148
+#: panel/logout.c:47 panel/menu.c:4155
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -2910,7 +2918,7 @@ msgstr "Logg ut"
 msgid "Log out of GNOME"
 msgstr "Logg ut fra GNOME"
 
-#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4136
+#: panel/logout.c:87 panel/logout.c:89 panel/menu.c:4143
 msgid "Lock screen"
 msgstr "Lås skjerm"
 
@@ -3087,7 +3095,7 @@ msgstr "Får ikke goad_id for appleten, overser den!"
 msgid " (empty)"
 msgstr " (tom)"
 
-#: panel/menu.c:2467 panel/menu.c:4263
+#: panel/menu.c:2467 panel/menu.c:4270
 msgid "Applets"
 msgstr "Appleter"
 
@@ -3095,7 +3103,7 @@ msgstr "Appleter"
 msgid "You can only have one menu panel at a time."
 msgstr "Du kan kun ha ett menypanel om gangen."
 
-#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3903
+#: panel/menu.c:2681 panel/menu.c:2686 panel/menu.c:3910
 msgid "Create panel"
 msgstr "Opprett panel"
 
@@ -3103,23 +3111,23 @@ msgstr "Opprett panel"
 msgid "Menu panel"
 msgstr "Menypanel"
 
-#: panel/menu.c:2721 panel/menu.c:3581 panel/panel_config.c:1259
-#: panel/panel_config.c:1354
+#: panel/menu.c:2721 panel/menu.c:3586 panel/panel_config.c:1287
+#: panel/panel_config.c:1382
 msgid "Edge panel"
 msgstr "Kantpanel"
 
-#: panel/menu.c:2729 panel/menu.c:3582 panel/panel_config.c:1266
-#: panel/panel_config.c:1364
+#: panel/menu.c:2729 panel/menu.c:3587 panel/panel_config.c:1294
+#: panel/panel_config.c:1392
 msgid "Aligned panel"
 msgstr "Justert panel"
 
-#: panel/menu.c:2737 panel/menu.c:3583 panel/panel_config.c:1272
-#: panel/panel_config.c:1374
+#: panel/menu.c:2737 panel/menu.c:3588 panel/panel_config.c:1300
+#: panel/panel_config.c:1402
 msgid "Sliding panel"
 msgstr "Glidende panel"
 
-#: panel/menu.c:2745 panel/menu.c:3584 panel/panel_config.c:1278
-#: panel/panel_config.c:1384
+#: panel/menu.c:2745 panel/menu.c:3589 panel/panel_config.c:1306
+#: panel/panel_config.c:1412
 msgid "Floating panel"
 msgstr "Flytende panel"
 
@@ -3131,15 +3139,15 @@ msgstr "Ingen systemmenyer funnet!"
 msgid "Can't create the user menu directory"
 msgstr "kunne ikke opprette brukerens menykatalog"
 
-#: panel/menu.c:2886 panel/menu.c:2892 panel/menu.c:4304
+#: panel/menu.c:2885 panel/menu.c:2891 panel/menu.c:4310
 msgid "KDE menus"
 msgstr "KDE-menyer"
 
-#: panel/menu.c:2945
+#: panel/menu.c:2944
 msgid "You cannot remove your last panel."
 msgstr "Du kan ikke fjerne det siste panelet:"
 
-#: panel/menu.c:2955
+#: panel/menu.c:2954
 msgid ""
 "When a panel is removed, the panel and its\n"
 "applet settings are lost. Remove this panel?"
@@ -3147,156 +3155,164 @@ msgstr ""
 "Når et panel fjernes, blir panelet og dets\n"
 "instillinger tapt. Fjern dette panelet?"
 
-#: panel/menu.c:3595
+#: panel/menu.c:3600
 msgid "With pixmap arrow"
 msgstr "Med bildepil"
 
-#: panel/menu.c:3596
+#: panel/menu.c:3601
 msgid "Without pixmap"
 msgstr "Uten bildepil"
 
-#: panel/menu.c:3608 panel/panel_config.c:903
+#: panel/menu.c:3613 panel/panel_config.c:909
+msgid "Ultra Tiny (12 pixels)"
+msgstr "Ultra-liten (12 piksler)"
+
+#: panel/menu.c:3614 panel/panel_config.c:917
 msgid "Tiny (24 pixels)"
 msgstr "Liten (24 piksler)"
 
-#: panel/menu.c:3609 panel/panel_config.c:911
+#: panel/menu.c:3615 panel/panel_config.c:925
 msgid "Small (36 pixels)"
 msgstr "Mindre (36 piksler)"
 
-#: panel/menu.c:3610 panel/panel_config.c:919
+#: panel/menu.c:3616 panel/panel_config.c:933
 msgid "Standard (48 pixels)"
 msgstr "Standard (48 piksler)"
 
-#: panel/menu.c:3611 panel/panel_config.c:927
+#: panel/menu.c:3617 panel/panel_config.c:941
 msgid "Large (64 pixels)"
 msgstr "Stor (64 piksler)"
 
-#: panel/menu.c:3612 panel/panel_config.c:935
+#: panel/menu.c:3618 panel/panel_config.c:949
 msgid "Huge (80 pixels)"
 msgstr "Enorm (80 piksler)"
 
-#: panel/menu.c:3617 panel/panel_config.c:1083
+#: panel/menu.c:3619 panel/panel_config.c:957
+msgid "Ridiculous (128 pixels)"
+msgstr "Vanvittig (128 piksler)"
+
+#: panel/menu.c:3624 panel/panel_config.c:1111
 msgid "Standard"
 msgstr "Standard"
 
 #. color frame
-#: panel/menu.c:3618 panel/panel_config.c:1087 panel/panel_config.c:1102
+#: panel/menu.c:3625 panel/panel_config.c:1115 panel/panel_config.c:1130
 msgid "Color"
 msgstr "Farge"
 
-#: panel/menu.c:3619 panel/panel_config.c:1091
+#: panel/menu.c:3626 panel/panel_config.c:1119
 msgid "Pixmap"
 msgstr "Bilde"
 
-#: panel/menu.c:3623
+#: panel/menu.c:3630
 msgid "Type"
 msgstr "Type"
 
-#: panel/menu.c:3626
+#: panel/menu.c:3633
 msgid "Hiding policy"
 msgstr "Kriterier for skjuling"
 
-#: panel/menu.c:3629
+#: panel/menu.c:3636
 msgid "Hide buttons"
 msgstr "Skjul knapper"
 
-#: panel/menu.c:3635
+#: panel/menu.c:3642
 msgid "Orientation"
 msgstr "Orientering"
 
-#: panel/menu.c:3656
+#: panel/menu.c:3663
 msgid "Applet"
 msgstr "Applet"
 
-#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3677
+#: panel/menu-properties.c:372 panel/menu-properties.c:394 panel/menu.c:3684
 msgid "Main menu"
 msgstr "Hovedmeny"
 
-#: panel/menu.c:3688
+#: panel/menu.c:3695
 msgid "Programs menu"
 msgstr "Programmer meny"
 
-#: panel/menu.c:3698
+#: panel/menu.c:3705
 msgid "Favorites menu"
 msgstr "Favoritter meny"
 
-#: panel/menu.c:3709
+#: panel/menu.c:3716
 msgid "Launcher..."
 msgstr "Oppstarter..."
 
-#: panel/menu.c:3730
+#: panel/menu.c:3737
 msgid "Log out button"
 msgstr "Avloggingsknapp"
 
-#: panel/menu.c:3741
+#: panel/menu.c:3748
 msgid "Lock button"
 msgstr "Låseknapp"
 
-#: panel/menu.c:3752
+#: panel/menu.c:3759
 msgid "Run button"
 msgstr "Kjør knapp"
 
-#: panel/menu.c:3764
+#: panel/menu.c:3771
 msgid "Swallowed app..."
 msgstr "Slukt applikasjon..."
 
-#: panel/menu.c:3772
+#: panel/menu.c:3779
 msgid "Status dock"
 msgstr "Statusdokk"
 
-#: panel/menu.c:3796 panel/menu.c:3801 panel/menu.c:3879
+#: panel/menu.c:3803 panel/menu.c:3808 panel/menu.c:3886
 msgid "Add to panel"
 msgstr "Legg til på panelet"
 
-#: panel/menu.c:3816
+#: panel/menu.c:3823
 msgid "Cannot execute panel global properties"
 msgstr "Kan ikke åpne globale egenskaper for panelet"
 
-#: panel/menu.c:3856
+#: panel/menu.c:3863
 msgid "Remove this panel..."
 msgstr "Fjern dette panelet..."
 
-#: panel/menu.c:3858 panel/menu.c:3914
+#: panel/menu.c:3865 panel/menu.c:3921
 msgid "Remove this panel"
 msgstr "Fjern dette panelet"
 
-#: panel/menu.c:3931
+#: panel/menu.c:3938
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: panel/menu.c:3942
+#: panel/menu.c:3949
 msgid "All properties..."
 msgstr "Alle egenskaper..."
 
-#: panel/menu.c:3958
+#: panel/menu.c:3965
 msgid "Global Preferences..."
 msgstr "Globale brukervalg..."
 
-#: panel/menu.c:3972
+#: panel/menu.c:3979
 msgid "Panel Manual..."
 msgstr "Panel håndbok..."
 
-#: panel/menu.c:3983
+#: panel/menu.c:3990
 msgid "Cannot execute xscreensaver"
 msgstr "Kan ikke kjøre xscreensaver"
 
-#: panel/menu.c:4035 panel/menu.c:4040 panel/menu.c:4338
+#: panel/menu.c:4042 panel/menu.c:4047 panel/menu.c:4344
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: panel/menu.c:4077
+#: panel/menu.c:4084
 msgid "About the panel..."
 msgstr "Om panelet..."
 
-#: panel/menu.c:4093
+#: panel/menu.c:4100
 msgid "About GNOME..."
 msgstr "Om GNOME..."
 
-#: panel/menu.c:4404
+#: panel/menu.c:4410
 msgid "Can't create menu, using main menu!"
 msgstr "Kan ikke opprette meny, bruker hovedmenyen!"
 
-#: panel/menu-properties.c:138 panel/menu.c:4575
+#: panel/menu-properties.c:138 panel/menu.c:4583
 msgid "Edit menus..."
 msgstr "Rediger menyer..."
 
@@ -3344,55 +3360,60 @@ msgstr "Skrivebordsmeny: "
 msgid "Menu path"
 msgstr "Menysti"
 
-#: panel/panel_config.c:427
+#: panel/panel.c:849
+#, c-format
+msgid "Open URL: %s"
+msgstr "Åpne URL: %s"
+
+#: panel/panel_config.c:433
 msgid "Hiding"
 msgstr "Skjuler"
 
 #. Auto-hide
-#: panel/panel_config.c:435
+#: panel/panel_config.c:441
 msgid "Enable Auto-hide"
 msgstr "Slå på autoskjuling"
 
 #. Hidebuttons enable
-#: panel/panel_config.c:445
+#: panel/panel_config.c:451
 msgid "Show hide buttons"
 msgstr "Vis knapper for skjuling"
 
 #. Arrow enable
-#: panel/panel_config.c:455
+#: panel/panel_config.c:461
 msgid "Show arrows on hide button"
 msgstr "Vis piler på \"skjul\"-knappen"
 
-#: panel/panel_config.c:506
+#: panel/panel_config.c:512
 msgid "Panel Position"
 msgstr "Panelplassering"
 
-#: panel/panel_config.c:625 panel/panel_config.c:652 panel/panel_config.c:712
-#: panel/panel_config.c:810
+#: panel/panel_config.c:631 panel/panel_config.c:658 panel/panel_config.c:718
+#: panel/panel_config.c:816
 msgid "Size and Position"
 msgstr "Størrelse og plassering"
 
-#: panel/panel_config.c:727
+#: panel/panel_config.c:733
 msgid "Orient panel horizontally"
 msgstr "Plassér panelet horisontalt"
 
-#: panel/panel_config.c:739
+#: panel/panel_config.c:745
 msgid "Orient panel vertically"
 msgstr "Plassér panelet vertikalt"
 
-#: panel/panel_config.c:751
+#: panel/panel_config.c:757
 msgid "Top left corner's position: X"
 msgstr "X-posisjon for øverste venstre hjørne:"
 
-#: panel/panel_config.c:822
+#: panel/panel_config.c:828
 msgid "Offset from screen edge:"
 msgstr "Avstand fra kanten av skjermen:"
 
-#: panel/panel_config.c:894
+#: panel/panel_config.c:900
 msgid "Panel size:"
 msgstr "Størrelse på panelet:"
 
-#: panel/panel_config.c:949
+#: panel/panel_config.c:971
 msgid ""
 "Note: The panel will size itself to the\n"
 "largest applet in the panel, and that\n"
@@ -3402,35 +3423,35 @@ msgstr ""
 "den største appleten, og ikke alle appleter\n"
 "følger disse størrelsene."
 
-#: panel/panel_config.c:1075
+#: panel/panel_config.c:1103
 msgid "Background Type: "
 msgstr "Bakgrunnstype: "
 
-#: panel/panel_config.c:1114
+#: panel/panel_config.c:1142
 msgid "Color to use:"
 msgstr "Farge som skal brukes:"
 
-#: panel/panel_config.c:1155
+#: panel/panel_config.c:1183
 msgid "Don't scale image to fit"
 msgstr "Ikke skalér bildet til å passe"
 
-#: panel/panel_config.c:1161
+#: panel/panel_config.c:1189
 msgid "Scale image (keep proportions)"
 msgstr "Skalér bildet (behold proporsjonene)"
 
-#: panel/panel_config.c:1166
+#: panel/panel_config.c:1194
 msgid "Stretch image (change proportions)"
 msgstr "Strekk bildet (endre proporsjonene)"
 
-#: panel/panel_config.c:1181
+#: panel/panel_config.c:1209
 msgid "Rotate image for vertical panels"
 msgstr "Rotér bildet på vertikale paneler"
 
-#: panel/panel_config.c:1344
+#: panel/panel_config.c:1372
 msgid "Panel properties"
 msgstr "Egenskaper for panelet"
 
-#: panel/panel_config.c:1402
+#: panel/panel_config.c:1430
 msgid "Background"
 msgstr "Bakgrunn"
 
