@@ -52,7 +52,9 @@
 #include "gnome-desktop-item.h"
 
 #ifdef HAVE_STARTUP_NOTIFICATION
+#define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
+#include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #endif
 
@@ -1526,7 +1528,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	int launched = 0;
 #ifdef HAVE_STARTUP_NOTIFICATION
 	SnLauncherContext *sn_context;
-	SnDisplay *display;
+	SnDisplay *sn_display;
 #endif
 	
 	g_return_val_if_fail (item, -1);
