@@ -167,9 +167,11 @@ then
 fi
 
 dnl esd-manager
-AM_PATH_ESD(,AC_DEFINE(HAVE_LIBESD),
-[AC_MSG_WARN([Warning: no EsounD detected.])])
-	
+have_libesd=no
+AM_PATH_ESD(,have_libesd=yes,
+[AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
+AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
+
 dnl help-browser
 dnl I found `inet_aton' in -lresolv on solaris
 oLIBS="$LIBS"
