@@ -534,7 +534,7 @@ main (gint argc, gchar *argv[])
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), canvas);
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), frame);
+	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, FALSE, 0);
 
 	area = gtk_drawing_area_new ();
 	max_width = get_max_width();
