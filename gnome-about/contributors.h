@@ -18,9 +18,10 @@ static gchar *contributors[] = {
 	"Shawn T. Amundson",
 	"Erik Andersen",
 	"Jon Anhold",
-	"Timur I. Bakeyev",
-	/* for languages that can't display aacute, replace 'á' with 'a' */
-	N_("Szabolcs 'Shooby' Bán"),
+	N_("Timur I. Bakeyev"),
+	/* if your encoding allows it, use aacute (U00E1) 
+	 * for the 'a' of 'Ban' */
+	N_("Szabolcs 'Shooby' Ban"),
 	"Martin Baulig",
 	"Tom Bech",
 	"Andreas Beck",
@@ -32,7 +33,7 @@ static gchar *contributors[] = {
 	"Robert Bihlmeyer",
 	"Jonathan Blandford",
 	"Christopher Blizzard",
-	"Jerome Bolliet",
+	N_("Jerome Bolliet"),
 	"Andreas Bolsch",
 	"Dario Bressanini",
 	"Emmanuel Briot",
@@ -56,7 +57,9 @@ static gchar *contributors[] = {
 	"Dan Damian",
 	"Phil Dawes",
 	"Fatih Demir",
-	"Frederic Devernay",
+	/* if your encoding allows it, use eacute (U00E9) for the two
+	 * 'e' of 'Frederic' */
+	N_("Frederic Devernay"),
 	"Dietmar Maurer",
 	"Feico W. Dillema",
 	"Radek Doulik",
@@ -67,13 +70,15 @@ static gchar *contributors[] = {
 	"Gus Estrella",
 	"David Etherton",
 	"Marc Ewing",
-	N_("Gergõ Érdi"),
+	/* if your encoding allows it, use odoubleacute (U0151) for the 'o'
+	 * of 'Gergo' and use Eacute (U00C9) for the 'E' of 'Erdi' */
+	N_("Gergo Erdi"),
 	"Peter Fales",
 	"Joaquim Fellmann",
 	"Jens Finke",
 	"Dave Finton",
 	"Milon Firikis",
-	"Raul Perusquia Flores",
+	N_("Raul Perusquia Flores"),
 	"Lawrence Foard",
 	"Jeff Freedman",
 	"David Abilleira Freijeiro",
@@ -87,12 +92,12 @@ static gchar *contributors[] = {
 	"Jeff Garzik",
 	N_("The Mysterious GEGL"),
 	"Tim Gerla",
-	"Bjoern Giesler",
+	N_("Bjoern Giesler"),
 	"Dave Glowacki",
 	"Scott Goehring",
 	"Randy Gordon",
-    "Jamin Philip Gray",
-    "Dov Grobgeld",
+	"Jamin Philip Gray",
+	N_("Dov Grobgeld"),
 	"Bertrand Guiheneuf",
 	"Alan Aspuru Guzik",
 	"Telsa Gwynne",
@@ -118,7 +123,7 @@ static gchar *contributors[] = {
 	"Stephen Kiernan",
 	"Spencer Kimball",
 	"Peter Kirchgessner",
-	"Helmut Koeberle",
+	N_("Helmut Koeberle"),
 	"Alfredo Kojima",
 	"Andrew Kuchling",
 	"Stephan Kulow",
@@ -151,7 +156,7 @@ static gchar *contributors[] = {
 	"Mandrake",
 	"Daniel Manrique",
 	"Kjartan Maraas",
-	"Matthew Marjanovic",
+	N_("Matthew Marjanovic"),
 	"Heath Martin",
 	"Oliver Maruhn",
 	"Dave Mason",
@@ -171,20 +176,24 @@ static gchar *contributors[] = {
 	"Paolo Molaro",
 	"David Mosberger",
 	"Thomas Muldowney",
-	/* for languages that can't display ntilde, replace 'ñ' with 'n' */
-	N_("Alexandre Muñiz"),
+	/* If your encodings allows it, use ntilde (U00F1) for the 'n'
+	 * of 'Muniz' */
+	N_("Alexandre Muniz"),
+	/* Name in Hangeul is: Ub0a8 Uc131 Ud604 */
 	N_("Sung-Hyun Nam"),
 	"Karl Nelson",
 	"Asger Alstrup Nielsen",
 	"Eric Nielson",
-	/* languages that can't display adiaeresis, replace 'ä' with 'ae' */
-	N_("Martin Norbäck"),
+	/* If your encodings allows it, use adiaeresis (U00E4) for the 'ae'
+	 * of 'Norbaeck' */
+	N_("Martin Norbaeck"),
 	"Eskil Olsen",
 	"Jimmy Olsen",
 	"David Orme",
 	"Karl Anders Oygard",
-	/* languages that can't display Odiaeresis, replace 'Ö' with 'Oe' */
-	N_("Tomas Ögren"),
+	/* If your encodings allows it, use Odiaeresis (U00D6) for the 'Oe'
+	 * of 'Oegren' */
+	N_("Tomas Oegren"),
 	"Jay Painter",
 	"Cameron Parish",
 	"Conrad Parker",
@@ -213,18 +222,20 @@ static gchar *contributors[] = {
 	"Peter Ryland",
 	"Bibek Sahu",
 	"Pablo Saratxaga",
+	/* Name in Japanese is: U7b39 U5c71 U548c U5b8f */
 	N_("Kazuhiro Sasayama"),
 	"Carsten Schaar",
 	"Franck Schneider",
 	"Ingo Schneider",
 	"Bernd Schroeder",
 	"John Schulien",
-	/* for languages that can't display ntilde, replace 'ñ' with 'n' */ 
-	N_("Iñigo Serna"),
+	/* If your encodings allows it, use ntilde (U00F1) for the 'n'
+	 * of 'Inigo' */
+	N_("Inigo Serna"),
 	"Shaleh",
 	"Joe \"Harold\" Shaw",
 	"Alejandro Aguilar Sierra",
-	"Miroslav Silovic",
+	N_("Miroslav Silovic"),
 	"Manish Singh",
 	"Timo Sirainen",
 	"David F. Skoll",
@@ -232,14 +243,14 @@ static gchar *contributors[] = {
 	"Josh Sled",
 	"John Slee",
 	"Garrett Smith",
-	/* not really a person name :) */
+	/* not really a person name :) translate its meaning */
 	N_("The Squeaky Rubber Gnome"),
 	"Maciej Stachowiak",
 	"Stalyn",
 	"Ben Stern",
 	"Micah Stetson",
 	"Nathan Carl Summers",
-	"Istvan Szekeres",
+	N_("Istvan Szekeres"),
 	"Tristan Tarrant",
 	"Anthony Taylor",
 	"Owen Taylor",
@@ -250,8 +261,8 @@ static gchar *contributors[] = {
 	"Christoph Toshok",
 	"Tom Tromey",
 	"Jon Trowbridge",
-	"Manish Vachharajani",
-	"Neil Vachharajani",
+	N_("Manish Vachharajani"),
+	N_("Neil Vachharajani"),
 	"Daniel Veillard",
 	"Vendu",
 	"Andrew Veliath",
