@@ -3,6 +3,7 @@ INCLUDES = 			\
 	-I$(top_srcdir)/intl	\
 	-I$(top_builddir)/intl	\
 	$(GNOME_INCLUDEDIR)	\
+	$(PIXBUF_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale\""
 
 LDADD = \
