@@ -41,7 +41,6 @@ static gchar *contributors[] = {
 	"Mark Crichton",
 	"Andreas Czechanowski",
 	"Phil Dawes",
-	"Philip Dawes",
 	"Fatih Demir",
 	"Frederic Devernay",
 	"Maurer Dietmar",
