@@ -1,7 +1,3 @@
-if PROGRAM_GMENU
-gmenu = gmenu
-endif
-
 if ORBIT_INSTALLED
 control_center = control-center
 capplets = capplets
@@ -11,12 +7,12 @@ endif
 
 always_built_SUBDIRS = \
 	 gsm smproxy pixmaps desktop-links desktop-properties help-browser \
-	 gnome-terminal core-docs 
+	 gnome-terminal core-docs gmenu
 
-sometimes_built_SUBDIRS = panel applets gmenu control-center capplets
+sometimes_built_SUBDIRS = panel applets control-center capplets
 
 SUBDIRS = intl po macros \
-	 $(always_built_SUBDIRS) $(panel) $(applets) $(gmenu) $(control_center) $(capplets)
+	 $(always_built_SUBDIRS) $(panel) $(applets) $(control_center) $(capplets)
 
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS) \
 #	$(sometimes_built_SUBDIRS)

@@ -129,12 +129,6 @@ LIBS="$oLIBS"
 
 dnl AC_CONFIG_SUBDIRS(gemvt)
 
-dnl gmenu requires ctree in the devel GTK 1.1, this is a simple check
-dnl for gtk/gtkctree.h
-P_GMENU=
-AC_CHECK_HEADERS(gtk/gtkctree.h,[P_GMENU=gmenu])
-AM_CONDITIONAL(PROGRAM_GMENU, test "$P_GMENU" = "gmenu")
-
 AC_OUTPUT([
 Makefile
 po/Makefile.in
