@@ -8,17 +8,10 @@ pixmap_DATA =					\
 	gnome-calc2.png				\
 	gnome-calc3.png				\
 	gnome-calendar.png			\
-	gnome-cardgame.png			\
 	gnome-color-browser.png			\
 	gnome-color-xterm.png           	\
 	gnome-cromagnon.png			\
 	gnome-devel.png             		\
-	gnome-die1.png				\
-	gnome-die2.png				\
-	gnome-die3.png				\
-	gnome-die4.png				\
-	gnome-die5.png				\
-	gnome-die6.png				\
 	gnome-diskfree.png          		\
 	gnome-favorites.png			\
 	gnome-file-c.png			\
@@ -29,10 +22,8 @@ pixmap_DATA =					\
 	gnome-globe.png				\
 	gnome-gmenu.png				\
 	gnome-gmush.png				\
-	gnome-gnomine.png			\
 	gnome-gnomoku.png			\
 	gnome-graphics.png          		\
-	gnome-gsame.png				\
 	gnome-help.png				\
 	gnome-home.png				\
 	gnome-html.png				\
