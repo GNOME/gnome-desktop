@@ -210,6 +210,7 @@ static gchar *contributors[] = {
 	"Tero Pulkkinen",
 	"The Rasterman",
 	"Oliver Rauch",
+	"Christian Rose",
 	"Cody Russell",
 	"Reklaw",
 	"Jens Christian Restemeier",
