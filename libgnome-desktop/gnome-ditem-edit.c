@@ -446,7 +446,7 @@ translations_add(GtkWidget *button, GnomeDItemEdit *dee)
         char *name;
         char *comment;
         const char *text[3];
-        GList *language_list;
+        const GList *language_list;
         const char *curlang;
         GtkCList *cl = GTK_CLIST(dee->_priv->translations);
 
