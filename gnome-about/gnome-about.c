@@ -80,21 +80,32 @@ animate_contributor (gpointer data)
 		      "size_points", &size,
 		      NULL);
 
-	y = ani_data->item->y1;
+	y = ani_data->item->parent->y1;
+
+	/* ugh */
+	g_object_set (GNOME_CANVAS_GROUP (ani_data->item->parent)->item_list->data,
+		      "x1", -1.0 * (tmp / 2.0 + 3.0),
+		      "y1", -1.0 * (tmp2 / 2.0 + 3.0),
+		      "x2", tmp / 2.0 + 3.0,
+		      "y2", tmp2 / 2.0 + 3.0,
+		      NULL);
 
 	before_middle = 130.0 + ((canvas_height - 130.0 - version_info_height - tmp2) / 2.0) < y;
 
 	/* update the color */
 	tmpcolor = color & 0xff;
-	tmpcolor += before_middle ? -7 : 7;
+	tmpcolor += before_middle ? -6 : 6;
 	size += before_middle ? 1.0 : -1.0;
 	size = MAX (0.0, size);
 	color = GNOME_CANVAS_COLOR_A (tmpcolor, tmpcolor, tmpcolor, tmpcolor);
 
-	g_object_set (ani_data->item, "fill_color_rgba", color, "size_points", size, NULL);
+	g_object_set (ani_data->item,
+		      "fill_color_rgba", color,
+		      "size_points", size,
+		      NULL);
 
 	/* move damnit!! */
-	gnome_canvas_item_move (ani_data->item, 0.0, -2.5);
+	gnome_canvas_item_move (ani_data->item->parent, 0.0, -2.5);
 
 	y -= 2.5;
 
@@ -143,20 +154,33 @@ display_contributors (gpointer data)
 	AnimationData *ani_data;
 
 	static GnomeCanvasItem *contributor = NULL;
+	static GnomeCanvasItem *contributor_rect = NULL;
+	static GnomeCanvasItem *contributor_text = NULL;
 
 	if (!contributors[contrib_i]) {
 		g_signal_handlers_disconnect_by_func (canvas,
 						      canvas_button_press_event,
-						      contributor);
+						      contributor_text);
 		return FALSE;
 	}
 
 	if (!contributor) {
 		gchar *text;
 
-		text = g_strdup_printf ("<b>%s</b>", contributors[contrib_i]);
 		contributor =
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (canvas->root),
+					       gnome_canvas_group_get_type (),
+					       NULL);
+
+		contributor_rect =
+			gnome_canvas_item_new (GNOME_CANVAS_GROUP (contributor),
+					       gnome_canvas_rect_get_type (),
+					       "fill_color", "White",
+					       NULL);
+
+		text = g_strdup_printf ("<b>%s</b>", contributors[contrib_i]);
+		contributor_text =
+			gnome_canvas_item_new (GNOME_CANVAS_GROUP (contributor),
 					       gnome_canvas_text_get_type (),
 					       "markup", text,
 					       "anchor", GTK_ANCHOR_CENTER,
@@ -165,7 +189,8 @@ display_contributors (gpointer data)
 		g_free (text);
 
 		g_signal_connect (canvas, "button_press_event",
-				  G_CALLBACK (canvas_button_press_event), contributor);
+				  G_CALLBACK (canvas_button_press_event),
+				  contributor_text);
 
 		gnome_canvas_item_move (contributor,
 				        canvas_width / 2.0,
@@ -174,7 +199,7 @@ display_contributors (gpointer data)
 		gchar *text;
 
 		text = g_strdup_printf ("<b>%s</b>", contributors[contrib_i]);
-		gnome_canvas_item_set (contributor,
+		gnome_canvas_item_set (contributor_text,
 				       "markup", text,
 				       "fill_color_rgba", 0xffffffff,
 				       "size_points", 0.0,
@@ -183,13 +208,12 @@ display_contributors (gpointer data)
 
 		gnome_canvas_item_move (contributor, 0.0,
 				        canvas_height - version_info_height - contributor->y1);
-		gnome_canvas_update_now (canvas);
 	}
 
 	ani_data = g_new0 (AnimationData, 1);
 
 	ani_data->canvas = canvas;
-	ani_data->item = contributor;
+	ani_data->item = contributor_text;
 
 	g_timeout_add (75, animate_contributor, ani_data);
 	contrib_i++;
@@ -836,7 +860,7 @@ create_canvas (void)
 
 	href = href_item_new (root,
 			      _("About GNOME"),
-			      "http://www.gnome.org/about.html",
+			      "http://www.gnome.org/intro/findout.html",
 			      &current_x, &current_y);
 
 	/* make a nice guess for the dot delta */
@@ -846,16 +870,18 @@ create_canvas (void)
 	/* draw a dot */
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
-	/* and more items on a likewise way */
+	/* and more items on a likewise way (FIXME: update the links
+	 * if the new website ever comes online)
+	 */
 	href = href_item_new (root,
 			      _("Download"),
-			      "http://www.gnome.org/download.html",
+			      "http://www.gnome.org/start/2.2/",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
 	href = href_item_new (root,
 			      _("Users"),
-			      "http://www.gnome.org/users.html",
+			      "http://www.gnome.org/",
 			      &current_x, &current_y);
 	item = create_dot (root, &current_x, &current_y, dot_delta);
 
@@ -873,7 +899,7 @@ create_canvas (void)
 
 	href = href_item_new (root,
 			      _("Contact"),
-			      "http://www.gnome.org/contact.html",
+			      "http://mail.gnome.org/",
 			      &current_x, &current_y);
 
 	/* resize */
