@@ -12,7 +12,8 @@ SUBDIRS =			\
 	applets			\
 	core-docs		\
 	omf-install		\
-	doc
+	doc			\
+	man
 
 EXTRA_DIST = \
 	gnome-core.spec.in	\
