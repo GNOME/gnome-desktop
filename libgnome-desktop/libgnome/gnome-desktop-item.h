@@ -35,25 +35,8 @@ typedef enum {
 	/* Start a terminal to run this */
         GNOME_DESKTOP_ITEM_RUN_IN_TERMINAL = 1<<0,
 	/* Directory type */
-        GNOME_DESKTOP_ITEM_IS_DIRECTORY = 1<<1,
-	/* drop by appending arguments after Exec */
-        GNOME_DESKTOP_ITEM_OLD_STYLE_DROP = 1<<2,
-	/* never drop files (always off for OLD_STYLE_DROP items) */
- 	GNOME_DESKTOP_ITEM_NO_FILE_DROP = 1<<3,
-	/* never drop urls (always off for OLD_STYLE_DROP items) */
-        GNOME_DESKTOP_ITEM_NO_URL_DROP = 1<<4,
-	/* if multiple files are dropped start multiple instances */
-        GNOME_DESKTOP_ITEM_SINGLE_FILE_DROP_ONLY = 1<<5,
-	/* if multiple urls are dropped start multiple instances */
-        GNOME_DESKTOP_ITEM_SINGLE_URL_DROP_ONLY = 1<<6
+        GNOME_DESKTOP_ITEM_IS_DIRECTORY = 1<<1
 } GnomeDesktopItemFlags;
-
-typedef enum {
-        GNOME_DESKTOP_ITEM_UNKNOWN=0,
-        GNOME_DESKTOP_ITEM_GNOME=1,
-        GNOME_DESKTOP_ITEM_KDE=2
-        /* More types can be added here as needed */
-} GnomeDesktopItemFormat;
 
 typedef enum {
         GNOME_DESKTOP_ITEM_UNCHANGED = 0,
@@ -64,10 +47,13 @@ typedef enum {
 typedef struct _GnomeDesktopItem GnomeDesktopItem;
 
 typedef enum {
+	/* Use the TryExec field to determine if this shoul dbe loaded */
         GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS = 1<<0,
-        GNOME_DESKTOP_ITEM_LOAD_NO_SYNC = 1<<1,
-        GNOME_DESKTOP_ITEM_LOAD_NO_OTHER_SECTIONS = 1<<2 /* don't try to load
-							    other sections */
+	/* don't drop file from cache after loading */
+	GNOME_DESKTOP_ITEM_LOAD_NO_DROP = 1<<1,
+	/* don't try to load other sections, this is if you don't want to
+	 * save this file and don't need other sections, it saves memory */
+        GNOME_DESKTOP_ITEM_LOAD_NO_OTHER_SECTIONS = 1<<2
 } GnomeDesktopItemLoadFlags;
 
 /* Returned item from new*() and copy() methods have a refcount of 1 */
@@ -113,15 +99,13 @@ const char *           gnome_desktop_item_get_attribute   (const GnomeDesktopIte
 const char *           gnome_desktop_item_get_local_attribute (const GnomeDesktopItem *item,
 							       const char *attr_name);
 const GSList *         gnome_desktop_item_get_order    (const GnomeDesktopItem     *item);
-GnomeDesktopItemFormat gnome_desktop_item_get_format      (const GnomeDesktopItem     *item);
 GnomeDesktopItemStatus gnome_desktop_item_get_file_status (GnomeDesktopItem           *item);
 
 
 /* Free the return value but not the contained strings */
 GSList *               gnome_desktop_item_get_languages   (const GnomeDesktopItem     *item);
 GSList *               gnome_desktop_item_get_attributes  (const GnomeDesktopItem     *item);
-void                   gnome_desktop_item_set_format      (GnomeDesktopItem           *item,
-                                                           GnomeDesktopItemFormat      fmt);
+
 /* the _clear_name clears the name for all languages */
 void                   gnome_desktop_item_clear_name      (GnomeDesktopItem           *item);
 void                   gnome_desktop_item_set_name        (GnomeDesktopItem           *item,
