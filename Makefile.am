@@ -22,8 +22,6 @@ EXTRA_DIST = \
 	gnome-core.spec.in	\
 	gnome-core.spec		\
 	COPYING-DOCS		\
-	applet-docs.make	\
-	app-docs.make		\
 	sgmldocs.make		\
 	xml-i18n-extract.in	\
 	xml-i18n-merge.in	\
