@@ -451,10 +451,14 @@ dnl
 dnl Sun shipped a patch which makes gnome-session seg fault in a libICE call.
 dnl Use the check for the broken libICE on Solaris _only_
 dnl
-uname_s=`uname -s`
-if test "x$uname_s" = xSunOS; then
-  AC_DEFINE(DO_LIBICE_CHECK)
-fi
+dnl update: they've fixed this, so this is probably unnecessary
+dnl         uncomment if this is still an issue
+dnl         - jacob <jacob@ximian.com> 5/15/2001 
+dnl
+dnl uname_s=`uname -s`
+dnl if test "x$uname_s" = xSunOS; then
+dnl   AC_DEFINE(DO_LIBICE_CHECK)
+dnl fi
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
