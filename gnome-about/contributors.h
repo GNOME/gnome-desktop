@@ -130,6 +130,7 @@ static gchar *contributors[] = {
 	"Peter Hawkins",
 	"Scott Heavner",
 	"James Henstridge",
+        "Fernando Herrera"
 	"Richard Hestilow",
 	"Iain Holmes",
 	"David Huggins-Daines",
