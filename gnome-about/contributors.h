@@ -60,6 +60,9 @@ static gchar *contributors[] = {
 	"Rusty Conover",
 	"Alan Cox",
 	"Mark Crichton",
+	/* if you encoding allows it, use eacute (U00E9) for the two
+	 * 'e' of 'Frederic' */
+	N_("Frederic Crozat"),
 	"Andreas Czechanowski",
 	"Dan Damian",
 	"Phil Dawes",
@@ -297,10 +300,12 @@ static gchar *contributors[] = {
 	"Daniel Veillard",
 	"Vendu",
 	"Andrew Veliath",
+	"Luis Villa",
 	"Marius Vollmer",
 	"Shawn Wagner",
-	"Matthias Warkus",
 	N_("Wanda the GNOME Fish"),
+	"Matthias Warkus",
+	"Jeff Waugh",
 	"Bruno Widmann",
 	"Robert Wilhelm",
 	"Sebastian Wilhelmi",
