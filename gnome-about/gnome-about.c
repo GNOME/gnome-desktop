@@ -250,12 +250,6 @@ new_sparkles_timeout (GnomeCanvas* canvas)
 	return TRUE;
 }
 
-static void
-unref_gdk_pixbuf (GObject *object, gpointer data)
-{
-	g_object_unref (data);
-}
-
 gboolean
 cb_clicked (GtkWidget *widget, GdkEvent *event)
 {
@@ -520,16 +514,16 @@ main (gint argc, gchar *argv[])
 				       NULL);
 	gnome_canvas_item_lower_to_bottom (image2);
 	
-	g_signal_connect (G_OBJECT (window), "delete_event",
+	g_signal_connect (window, "delete_event",
 			  G_CALLBACK (cb_quit), im);
-	g_signal_connect (G_OBJECT (window), "destroy",
+	g_signal_connect (window, "destroy",
 			  G_CALLBACK (cb_quit), im);
-	g_signal_connect (G_OBJECT (window), "key_press_event",
+	g_signal_connect (window, "key_press_event",
 			  G_CALLBACK (cb_keypress), NULL);
 
-	g_signal_connect (G_OBJECT (image), "destroy",
-			  G_CALLBACK (unref_gdk_pixbuf), im);
-	g_signal_connect (G_OBJECT (image), "event",
+	g_signal_connect (image, "destroy",
+			  G_CALLBACK (g_object_unref), im);
+	g_signal_connect (image, "event",
 			  G_CALLBACK (cb_clicked), NULL);
 
 	new_sparkle_timer = gtk_timeout_add (1300,
@@ -561,9 +555,9 @@ main (gint argc, gchar *argv[])
 
 	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
 
-	g_signal_connect (G_OBJECT (area), "expose_event",
+	g_signal_connect (area, "expose_event",
 			  G_CALLBACK (cb_exposed), NULL);
-	g_signal_connect (G_OBJECT (area), "configure_event",
+	g_signal_connect (area, "configure_event",
 			  G_CALLBACK (cb_configure), NULL);
 
 	/* horizontal box for URLs */
@@ -586,7 +580,7 @@ main (gint argc, gchar *argv[])
 	
 	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (window)->vbox), hbox);
 
-	g_signal_connect (G_OBJECT (window), "response",
+	g_signal_connect (window, "response",
 			  G_CALLBACK (cb_quit), NULL);
 
 	scroll_timer = gtk_timeout_add (50, scroll, NULL);
@@ -596,5 +590,3 @@ main (gint argc, gchar *argv[])
 
 	return 0;
 }
-
-
