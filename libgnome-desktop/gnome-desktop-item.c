@@ -866,7 +866,7 @@ replace_percentsign(int argc, char **argv, const char *ps,
 		char *arg = argv[i];
 		char *p = strstr(arg,ps);
 		char *s;
-		int start, string_len, ps_len;
+		size_t start, string_len, ps_len;
 		if(!p) continue;
 		string_len = strlen(string);
 		ps_len = strlen(ps);
@@ -980,7 +980,7 @@ ditem_execute(const GnomeDesktopItem *item, int appargc, const char *appargv[], 
 static gboolean
 strip_the_amp(char *exec)
 {
-	int exec_len;
+	size_t exec_len;
 
 	g_strstrip(exec);
 	if(!*exec) return FALSE;
@@ -1134,7 +1134,7 @@ perc_replaced:
 static gboolean
 stripstreq(const char *s1, const char *s2)
 {
-	int len2;
+	size_t len2;
 
 	/* skip over initial spaces */
 	while(*s1 == ' ' || *s1 == '\t')
