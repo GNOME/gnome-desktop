@@ -36,4 +36,7 @@
 /* LibGTop server version, increased each time the protocol changes. */
 #undef LIBGTOP_SERVER_VERSION
 
+/* Location of KDE menus */
+#undef KDE_MENUDIR
+
 #undef HAVE_ZVT_TERM_RESET

@@ -166,6 +166,20 @@ LIBS="$GNOMEUI_LIBS $GNOME_LIBDIR $ZVT_LIBS"
 AC_CHECK_FUNC(zvt_term_reset,[AC_DEFINE(HAVE_ZVT_TERM_RESET)])
 LIBS="$oLIBS"
 
+dnl
+dnl Place to look for KDE menus
+dnl
+AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR         Location of KDE data])
+
+if test "x$with_kde_datadir" = x ; then
+  kde_datadir=/usr/share
+else
+  kde_datadir=$with_kde_datadir
+fi
+
+AC_DEFINE_UNQUOTED(KDE_MENUDIR, "$kde_datadir/applnk")
+
+
 dnl AC_CONFIG_SUBDIRS(gemvt)
 
 AC_OUTPUT([
