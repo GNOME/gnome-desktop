@@ -1,5 +1,6 @@
 #include <config.h>
-#include <gnome.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
 #include "gnome-hint.h"
 #include <gconf/gconf-client.h>
 

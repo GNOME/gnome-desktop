@@ -1,7 +1,8 @@
 #include <config.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <gnome.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
 #include <gconf/gconf-client.h>
 
 #include "gnome-hint.h"

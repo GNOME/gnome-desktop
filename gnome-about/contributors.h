@@ -1,4 +1,4 @@
-#include <gnome.h>
+#include <libgnome/libgnome.h>
 
 /* If your name uses some letters not in 7bit ascii, or a non-lati script;
  * put your name in ascii enclosed with N_( ) and put a comment before your
