@@ -3479,14 +3479,11 @@ insert_key (GnomeDesktopItem *item,
 		} else if (locale != NULL) {
 			char *p, *brace;
 
-			/* Whack the encoding and modifier part */
+			/* Whack the encoding part */
 			p = strchr (locale, '.');
 			if (p != NULL)
 				*p = '\0';
-			p = strchr (locale, '@');
-			if (p != NULL)
-				*p = '\0';
-
+				
 			if (g_list_find_custom (item->languages, locale,
 						(GCompareFunc)strcmp) == NULL) {
 				item->languages = g_list_prepend
@@ -3495,14 +3492,9 @@ insert_key (GnomeDesktopItem *item,
 				g_free (locale);
 			}
 
-			/* Whack encoding and modifier from encoding in the key */ 
+			/* Whack encoding from encoding in the key */ 
 			brace = strchr (k, '[');
 			p = strchr (brace, '.');
-			if (p != NULL) {
-				*p = ']';
-				*(p+1) = '\0';
-			}
-			p = strchr (brace, '@');
 			if (p != NULL) {
 				*p = ']';
 				*(p+1) = '\0';
