@@ -1,5 +1,7 @@
 AUTOMAKE_OPTIONS = 1.4
 
+localedir = $(datadir)/gnome
+
 INCLUDES = \
 	-I.			\
 	-I$(srcdir)		\
@@ -8,6 +10,7 @@ INCLUDES = \
 	-I$(top_builddir)/panel	\
 	-I$(includedir)		\
 	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\" \
+	-DLOCALE_ALIAS_PATH=\""$(localedir)"\" \
 	$(GNOME_DESKTOP_CFLAGS)
 
 noinst_LTLIBRARIES = libgnome-desktop-2.la
@@ -33,14 +36,20 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c		\
 	bonobo-config-ditem.c		\
 	bonobo-config-ditem.h		\
+	gnome-desktop-i18n.c		\
+	gnome-desktop-i18n.h		\
 	$(CORBA_SRCLIST)
 
 libgnome_desktop_2_la_LIBADD = \
-	$(GNOME_DESKTOP_LIBS)
+	$(GNOME_DESKTOP_LIBS)		\
+	$(INTLLIBS)
 
 test_ditem_SOURCES = \
 	test-ditem.c
 
 test_ditem_LDADD = \
 	libgnome-desktop-2.la -ldmalloc
+
+locale_DATA = \
+	locale.alias
 
