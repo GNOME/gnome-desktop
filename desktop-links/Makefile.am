@@ -14,7 +14,7 @@ Directory_DATA = \
 	Applications.directory	\
 	Graphics.directory	\
 	System.directory	\
-	Utilities.directory	\
+	Tools.directory		\
 	Multimedia.directory	\
 	Internet.directory	\
 	Games.directory		\
