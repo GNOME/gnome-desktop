@@ -69,6 +69,7 @@ static gchar *contributors[] = {
 	 * 'e' of 'Frederic' */
 	N_("Frederic Crozat"),
 	"Andreas Czechanowski",
+	"Johan Dahlin",
 	"Dan Damian",
 	"Phil Dawes",
 	"Fatih Demir",
