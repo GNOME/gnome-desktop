@@ -5,7 +5,6 @@ AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gnome-core, 1.5.8)
 
 AM_MAINTAINER_MODE
-GNOME_COMMON_INIT
 
 AC_PROG_INTLTOOL
 
@@ -20,14 +19,13 @@ AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
-dnl ==========================================================================
+dnl ======================================================================
 dnl
 dnl Library Dependencies, uses pkg-config to detect correct version, etc
 dnl
-dnl ==========================================================================
+dnl ======================================================================
 
-GNOME_PLATFORM_GNOME_2(yes)
-GNOME_COMPILE_WARNINGS(maximum)
+GNOME_COMPILE_WARNINGS
 
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
@@ -89,11 +87,11 @@ AC_SUBST(GNOME_SESSION_LIBS)
 dnl -----------------------------------------------------------
 
 dnl
-dnl libglade conversion script, needed by gnome-terminal
+dnl libglade conversion script
 dnl
 AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
 if test -z $LIBGLADE_CONVERT; then
-	AC_MSG_ERROR([libglade-convert (from libglade 2.0) is needed to build gnome-terminal.])
+	AC_MSG_ERROR([libglade-convert (from libglade 2.0) is needed to build gnome-core.])
 fi
 
 dnl ================================
