@@ -13,6 +13,7 @@ static author authors[] = {
 	{ "Jacob Berkman", "<jberkman@andrew.cmu.edu>" },
 	{ "Jonathan Blandford", "<jrb@redhat.com>" },
 	{ "Anders Carlsson", "<andersca@gnu.org>" },	
+	{ "Alan Cox", "" },
 	{ "Tim Gerla", "<timg@means.net>" },
 	{ "Bertrand Guiheneuf", "<Bertrand.Guiheneuf@aful.org>" },
 	{ "James Henstridge", "<james@daa.com.au>" },
@@ -41,4 +42,6 @@ static author authors[] = {
 	{ N_("... and many more"), "" },
 	{ NULL, NULL }
 };
+
+
 
