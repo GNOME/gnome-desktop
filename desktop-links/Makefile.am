@@ -1,14 +1,6 @@
-NULL=
+Directorydir = $(datadir)/gnome/vfolders
 
-Desktopdir	  = $(datadir)/applications
-Directorydir      = $(datadir)/gnome/vfolders
-Orderdir          = $(datadir)/gnome/vfolders
-
-Order_DATA = \
-	Root.order \
-	Settings.order
-
-Directory_in_files = \
+Directory_in_files =		\
 	Root.directory		\
 	Accessories.directory   \
 	Applications.directory	\
@@ -25,4 +17,4 @@ Directory_in_files = \
 Directory_DATA = $(Directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
 
-EXTRA_DIST = $(Directory_DATA) $(Order_DATA)
+EXTRA_DIST = $(Directory_DATA)
