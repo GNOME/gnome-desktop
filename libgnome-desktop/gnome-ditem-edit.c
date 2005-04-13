@@ -124,6 +124,10 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         object_class = (GtkObjectClass*) klass;
         gobject_class = (GObjectClass*) klass;
 
+        bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+        textdomain (GETTEXT_PACKAGE);
+
         ditem_edit_signals[CHANGED] =
                 g_signal_new ("changed",
                                 G_TYPE_FROM_CLASS (object_class),
