@@ -1026,18 +1026,14 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 static const char *
 get_language (void)
 {
-	/* there is some include header problem and we can't include the
-	   gnome i18n header or some such */
-	extern const GList *gnome_i18n_get_language_list (const char *category);
+	const char * const *languages;
+        int                 i;
 
-	const GList *list;
-	const GList *l;
+        languages = g_get_language_names ();
 
-	list = gnome_i18n_get_language_list ("LC_MESSAGES");
-
-	for (l = list; l; l = l->next)
-		if (!strchr (l->data, '.'))
-			return (char *) l->data;
+	for (i = 0; languages[i] != NULL; i++)
+		if (!strchr (languages[i], '.'))
+			return languages[i];
 
 	return NULL;
 }
