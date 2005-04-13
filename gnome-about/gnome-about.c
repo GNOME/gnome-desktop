@@ -135,13 +135,12 @@ canvas_button_press_event (GtkWidget      *widget,
 	if (event->y <= 80.0)
 		return FALSE;
 
-	if (contrib_i >= (G_N_ELEMENTS (contributors) - 1))
-		text = g_strdup_printf ("<b>%s</b>", _("The End!"));
-	else {
-		text = g_strdup_printf ("<b>%s</b>", 
-					contributors[contrib_order[contrib_i]]);
-		contrib_i++;
-	}
+	if (contrib_i >= G_N_ELEMENTS (contributors))
+		contrib_i = 0;
+
+	text = g_strdup_printf ("<b>%s</b>", 
+				contributors[contrib_order[contrib_i]]);
+	contrib_i++;
 
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (user_data),
 			       "markup", text,
@@ -161,12 +160,8 @@ display_contributors (gpointer data)
 	static GnomeCanvasItem *contributor_rect = NULL;
 	static GnomeCanvasItem *contributor_text = NULL;
 
-	if (contrib_i >= (G_N_ELEMENTS (contributors) - 1)) {
-		g_signal_handlers_disconnect_by_func (canvas,
-						      canvas_button_press_event,
-						      contributor_text);
-		return FALSE;
-	}
+	if (contrib_i >= G_N_ELEMENTS (contributors))
+		contrib_i = 0;
 
 	if (!contributor) {
 		gchar *text;
