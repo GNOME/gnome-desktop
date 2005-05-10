@@ -154,7 +154,7 @@ GnomeDesktopItem *      gnome_desktop_item_new_from_string   (const char        
 							      gssize                      length,
 							      GnomeDesktopItemLoadFlags   flags,
 							      GError                    **error);
-GnomeDesktopItem *      gnome_desktop_item_new_from_basename (const char                 *file_id,
+GnomeDesktopItem *      gnome_desktop_item_new_from_basename (const char                 *basename,
 							      GnomeDesktopItemLoadFlags   flags,
 							      GError                    **error);
 GnomeDesktopItem *      gnome_desktop_item_copy              (const GnomeDesktopItem     *item);
