@@ -38,7 +38,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-exec.h>
 #include <libgnome/gnome-url.h>
@@ -337,6 +337,19 @@ type_from_string (const char *type)
 	return GNOME_DESKTOP_ITEM_TYPE_OTHER;
 }
 
+static void
+init_i18n (void) {
+	static gboolean initialized = FALSE;
+	
+	if (!initialized) {
+		bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+		bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
+		initialized = TRUE;
+	}
+}
+
 /**
  * gnome_desktop_item_new:
  *
@@ -348,6 +361,8 @@ GnomeDesktopItem *
 gnome_desktop_item_new (void)
 {
 	GnomeDesktopItem *retval;
+
+	init_i18n ();
 
 	retval = g_new0 (GnomeDesktopItem, 1);
 

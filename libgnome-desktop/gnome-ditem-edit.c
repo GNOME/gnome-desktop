@@ -28,7 +28,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-macros.h>
@@ -125,8 +125,9 @@ gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
         gobject_class = (GObjectClass*) klass;
 
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+#    ifdef HAVE_BIND_TEXTDOMAIN_CODESET
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-        textdomain (GETTEXT_PACKAGE);
+#    endif
 
         ditem_edit_signals[CHANGED] =
                 g_signal_new ("changed",

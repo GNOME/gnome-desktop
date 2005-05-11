@@ -1,3 +1,10 @@
+2005-05-11  Frederic Crozat  <fcrozat@mandriva.com>
+
+	* gnome-desktop-item.c: (init_i18n), (gnome_desktop_item_new):
+	* gnome-ditem-edit.c: (gnome_ditem_edit_class_init):
+	Initialize i18n before using it, remove textdomain
+	call, it is evil in a library.
+
 2005-05-09  Dennis Cranston <dennis_cranston@yahoo.com>
 
 	* libgnome/gnome-desktop-item.h: s/file_id/basename.
