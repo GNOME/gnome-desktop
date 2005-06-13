@@ -516,6 +516,7 @@ translations_select_row (GtkTreeSelection *selection,
 		GTK_ENTRY (dee->_priv->transl_comment_entry), comment);
 	
         g_free (lang);
+        g_free (generic_name);
         g_free (comment);
         g_free (name);
 }
