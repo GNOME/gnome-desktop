@@ -21,5 +21,4 @@ which gnome-autogen.sh || {
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.7
-USE_COMMON_DOC_BUILD=yes
 . gnome-autogen.sh

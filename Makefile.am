@@ -16,7 +16,8 @@ EXTRA_DIST =			\
 	xmldocs.make		\
 	intltool-extract.in	\
 	intltool-merge.in	\
-	intltool-update.in
+	intltool-update.in	\
+	gnome-doc-utils.make
 
 versiondir=$(datadir)/gnome-about
 version_DATA=gnome-version.xml
@@ -29,4 +30,5 @@ CLEANFILES = $(version_DATA)
 DISTCLEANFILES = \
   intltool-extract \
   intltool-merge \
-  intltool-update
+  intltool-update \
+  gnome-doc-utils.make
