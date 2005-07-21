@@ -21,7 +21,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 desktop_in_files = gnome-about.desktop.in
 
 aboutdir = $(datadir)/gnome-about
-about_DATA = gnome-64.gif
+about_DATA = gnome-64.png
 
 EXTRA_DIST = $(about_DATA)
 

@@ -476,7 +476,7 @@ load_random_header (void)
 }
 
 static GdkPixbuf *
-load_button (void)
+load_logo (void)
 {
 	gchar *file;
 	GdkPixbuf *pixbuf;
@@ -484,10 +484,10 @@ load_button (void)
 
 	file = gnome_program_locate_file (NULL,
 					  GNOME_FILE_DOMAIN_DATADIR,
-					  "gnome-about/gnome-64.gif",
+					  "gnome-about/gnome-64.png",
 					  TRUE, NULL);
 	if (!file) {
-		show_error_dialog (_("Could not locate the GNOME logo button."));
+		show_error_dialog (_("Could not locate the GNOME logo."));
 
 		return NULL;
 	}
@@ -944,7 +944,7 @@ create_canvas (void)
 	GnomeCanvasPoints *points;
 
 	GdkPixbuf *header;
-	GdkPixbuf *button;
+	GdkPixbuf *logo;
 
 	gdouble current_x;
 	gdouble current_y;
@@ -979,14 +979,14 @@ create_canvas (void)
 				      "pixbuf", header,
 				      NULL);
 
-	/* load button logo in advance, we need it's size */
-	button = load_button ();
-	if (!button)
+	/* load logo in advance, we need it's size */
+	logo = load_logo ();
+	if (!logo)
 		/* emergency stop complete with leaks */
 		return NULL;
 
 	/* and a coulple o' links */
-	current_x = 10.0 + (gdouble)gdk_pixbuf_get_width (button) + 10.0;
+	current_x = 10.0 + (gdouble)gdk_pixbuf_get_width (logo) + 10.0;
 	current_y = (gdouble)gdk_pixbuf_get_height (header) + 5.0;
 
 	href = href_item_new (root,
@@ -1059,12 +1059,12 @@ create_canvas (void)
 
 	gnome_canvas_points_free (points);
 
-	/* the gnome button logo */
+	/* the gnome logo */
 	item = gnome_canvas_item_new (root,
 				      gnome_canvas_pixbuf_get_type (),
 				      "x", 10.0,
 				      "y", 10.0,
-				      "pixbuf", button,
+				      "pixbuf", logo,
 				      NULL);
 
 	/* and some introduction text */
