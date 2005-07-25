@@ -1,3 +1,16 @@
+2005-07-25  Mark McLoughlin  <mark@skynet.ie>
+
+	Partially based on patch from Christian Persch <chpe@gnome.org>
+	in bug #156687
+
+	* gnome-desktop-item.c:
+	(gnome_desktop_item_find_icon): if we're passed a GtkIconTheme
+	instead of a GnomeIconTheme, use the GtkIconTheme API to lookup
+	the icon.
+	
+	* libgnome/gnome-desktop-item.h: allow find_icon() and get_icon()
+	take a GtkIconTheme.
+
 ==================== 2.11.5 ====================
 
 ==================== 2.11.4 ====================

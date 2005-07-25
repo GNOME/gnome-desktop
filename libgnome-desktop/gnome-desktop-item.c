@@ -2592,6 +2592,7 @@ find_kde_directory (void)
 
 /**
  * gnome_desktop_item_find_icon:
+ * @icon_theme: a #GtkIconTheme
  * @icon: icon name, something you'd get out of the Icon key
  * @desired_size: FIXME
  * @flags: FIXME
@@ -2603,12 +2604,16 @@ find_kde_directory (void)
  * Returns: A newly allocated string
  */
 char *
-gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
+gnome_desktop_item_find_icon (GtkIconTheme *icon_theme,
 			      const char *icon,
 			      int desired_size,
 			      int flags)
 {
 	char *full = NULL;
+
+	g_return_val_if_fail (icon_theme == NULL ||
+			      GTK_IS_ICON_THEME (icon_theme) ||
+			      GNOME_IS_ICON_THEME (icon_theme), NULL);
 
 	if (icon == NULL || strcmp(icon,"") == 0) {
 		return NULL;
@@ -2623,11 +2628,10 @@ gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
 		char *p;
 
 		if (icon_theme == NULL) {
-			icon_theme = gnome_icon_theme_new ();
+			icon_theme = gtk_icon_theme_new ();
 		} else {
 			g_object_ref (icon_theme);
 		}
-
 		
 		icon_no_extension = g_strdup (icon);
 		p = strrchr (icon_no_extension, '.');
@@ -2638,10 +2642,26 @@ gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
 		    *p = 0;
 		}
 
-		full = gnome_icon_theme_lookup_icon (icon_theme,
-						     icon_no_extension,
-						     desired_size,
-						     NULL, NULL);
+		/* For backwards compat we support GnomeIconTheme too */
+		if (GNOME_IS_ICON_THEME (icon_theme)) {
+			full = gnome_icon_theme_lookup_icon (icon_theme,
+							     icon_no_extension,
+							     desired_size,
+							     NULL, NULL);
+		} else {
+			GtkIconInfo *info;
+
+			info = gtk_icon_theme_lookup_icon (icon_theme,
+							   icon_no_extension,
+							   desired_size,
+							   0);
+
+			full = NULL;
+			if (info) {
+				full = g_strdup (gtk_icon_info_get_filename (info));
+				gtk_icon_info_free (info);
+			}
+		}
 		
 		g_object_unref (icon_theme);
 		
@@ -2704,6 +2724,7 @@ gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
 
 /**
  * gnome_desktop_item_get_icon:
+ * @icon_theme: a #GtkIconTheme
  * @item: A desktop item
  *
  * Description:  This function goes and looks for the icon file.  If the icon
@@ -2714,7 +2735,7 @@ gnome_desktop_item_find_icon (GnomeIconTheme *icon_theme,
  */
 char *
 gnome_desktop_item_get_icon (const GnomeDesktopItem *item,
-			     GnomeIconTheme *icon_theme)
+			     GtkIconTheme *icon_theme)
 {
 	/* maybe this function should be deprecated in favour of find icon
 	 * -George */

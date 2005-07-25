@@ -32,6 +32,7 @@
 #include <glib-object.h>
 
 #include <gdk/gdk.h>
+#include <gtk/gtkicontheme.h>
 #include <libgnomeui/gnome-icon-theme.h>
 
 G_BEGIN_DECLS
@@ -216,9 +217,9 @@ GnomeDesktopItemStatus  gnome_desktop_item_get_file_status   (const GnomeDesktop
  * it and returns %NULL if it can't
  */
 char *                  gnome_desktop_item_get_icon          (const GnomeDesktopItem     *item,
-							      GnomeIconTheme             *icon_theme);
+							      GtkIconTheme               *icon_theme);
 
-char *                  gnome_desktop_item_find_icon         (GnomeIconTheme             *icon_theme,
+char *                  gnome_desktop_item_find_icon         (GtkIconTheme               *icon_theme,
 							      const char                 *icon,
 							      /* size is only a suggestion */
 							      int                         desired_size,
