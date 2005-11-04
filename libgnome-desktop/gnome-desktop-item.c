@@ -61,8 +61,6 @@
 
 #define sure_string(s) ((s)!=NULL?(s):"")
 
-extern char **environ;
-
 struct _GnomeDesktopItem {
 	int refcount;
 
@@ -1492,23 +1490,32 @@ static char **
 make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
 				       char             **envp)
 {
-	char **retval = NULL;
+	char **retval;
+	char **freeme;
 	int    i, j;
 	int    desktop_startup_id_len;
 
-	if (envp == NULL)
-		envp = environ;
-	
-	for (i = 0; envp[i]; i++)
-		;
+	retval = freeme = NULL;
+
+	if (envp == NULL) {
+		envp = freeme = g_listenv ();
+		for (i = 0; envp[i]; i++) {
+			char *name = envp[i];
+
+			envp[i] = g_strjoin ("=", name, g_getenv (name), NULL);
+			g_free (name);
+		}
+	} else {
+		for (i = 0; envp[i]; i++)
+			;
+	}
 
 	retval = g_new (char *, i + 2);
 
 	desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
 	
 	for (i = 0, j = 0; envp[i]; i++) {
-		if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0)
-		{
+		if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0) {
 			retval[j] = g_strdup (envp[i]);
 			++j;
 	        }
@@ -1518,6 +1525,8 @@ make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
 				     sn_launcher_context_get_startup_id (sn_context));
 	++j;
 	retval[j] = NULL;
+
+	g_strfreev (freeme);
 
 	return retval;
 }
@@ -1666,15 +1675,25 @@ static char **
 make_environment_for_screen (GdkScreen  *screen,
 			     char      **envp)
 {
-	char **retval = NULL;
+	char **retval;
+	char **freeme;
 	char  *display_name;
 	int    display_index = -1;
 	int    i, env_len;
 
 	g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
-	if (envp == NULL)
-		envp = environ;
+	retval = freeme = NULL;
+
+	if (envp == NULL) {
+		envp = freeme = g_listenv ();
+		for (i = 0; envp [i]; i++) {
+			char *name = envp[i];
+
+			envp[i] = g_strjoin ("=", name, g_getenv (name), NULL);
+			g_free (name);
+		}
+	}
 
 	for (env_len = 0; envp [env_len]; env_len++)
 		if (strncmp (envp [env_len], "DISPLAY", strlen ("DISPLAY")) == 0)
@@ -1694,6 +1713,7 @@ make_environment_for_screen (GdkScreen  *screen,
 	g_assert (i == env_len);
 
 	g_free (display_name);
+	g_free (freeme);
 
 	return retval;
 }
