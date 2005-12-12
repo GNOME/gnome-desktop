@@ -117,7 +117,7 @@ typedef struct {
 	gboolean buf_needs_free;
 	gboolean past_first_read;
 	gboolean eof;
-	gsize size;
+	guint64 size;
 	gsize pos;
 } ReadBuf;
 
@@ -1416,7 +1416,6 @@ do_percent_subst (const GnomeDesktopItem  *item,
 		if (g_ascii_isdigit (arg [1])) 
 			g_string_append_c (str, '%');
 		return FALSE;
-		break;
 	}
 
 	return TRUE;

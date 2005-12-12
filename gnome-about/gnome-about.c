@@ -157,7 +157,6 @@ display_contributors (gpointer data)
 	AnimationData *ani_data;
 
 	static GnomeCanvasItem *contributor = NULL;
-	static GnomeCanvasItem *contributor_rect = NULL;
 	static GnomeCanvasItem *contributor_text = NULL;
 
 	if (contrib_i >= G_N_ELEMENTS (contributors))
@@ -169,12 +168,6 @@ display_contributors (gpointer data)
 		contributor =
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (canvas->root),
 					       gnome_canvas_group_get_type (),
-					       NULL);
-
-		contributor_rect =
-			gnome_canvas_item_new (GNOME_CANVAS_GROUP (contributor),
-					       gnome_canvas_rect_get_type (),
-					       "fill_color", "White",
 					       NULL);
 
 		text = g_strdup_printf ("<b>%s</b>", 
@@ -295,7 +288,6 @@ display_introduction_message (gpointer data)
 	AnimationData *ani_data;
 
 	static GnomeCanvasItem *intro = NULL;
-	static GnomeCanvasItem *intro_rect = NULL;
 	static GnomeCanvasItem *intro_text = NULL;
 	static gint intro_i = 0;
 
@@ -318,16 +310,6 @@ display_introduction_message (gpointer data)
 		intro =
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (canvas->root),
 					       gnome_canvas_group_get_type (),
-					       NULL);
-
-		intro_rect =
-			gnome_canvas_item_new (GNOME_CANVAS_GROUP (intro),
-					       gnome_canvas_rect_get_type (),
-					       "fill_color", "White",
-					       "x1", -4.0,
-					       "y1", -4.0,
-					       "x2", 304.0,
-					       "y2", 84.0,
 					       NULL);
 
 		intro_text =

@@ -33,7 +33,7 @@ test_ditem (const char *file)
 	g_print ("LOCATION: |%s|\n", text);
 
 	type = gnome_desktop_item_get_entry_type (ditem);
-	g_print ("TYPE: |%d|\n", type);
+	g_print ("TYPE: |%u|\n", type);
 
 	text = gnome_desktop_item_get_string
 		(ditem, GNOME_DESKTOP_ITEM_TYPE);

@@ -9,12 +9,10 @@
 
 int main (int argc, char **argv) {
   GtkWidget *gnome_hint;
-  GnomeProgram *gnome_hint_program;
-  GConfClient* client;
 
   gchar *hintfile, *backimg, *logoimg;
 
-  gnome_hint_program = gnome_program_init("gnome-hint","0.1",LIBGNOMEUI_MODULE,
+  gnome_program_init("gnome-hint","0.1",LIBGNOMEUI_MODULE,
                                    argc, argv, NULL);
 
   if (argc !=4){
@@ -25,10 +23,6 @@ int main (int argc, char **argv) {
   hintfile = g_strdup(argv[1]);
   backimg = g_strdup(argv[2]);
   logoimg = g_strdup(argv[3]);
-
-  client = gconf_client_get_default();
-/*  gconf_client_add_dir(client,"/apps/test-hint/",
-	GCONF_CLIENT_PRELOAD_NONE,NULL); */
 
   gnome_hint = gnome_hint_new (hintfile, "GNOME Test Hints",
 				backimg, logoimg, "/apps/test-hint/startup");
