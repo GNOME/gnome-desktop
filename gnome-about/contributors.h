@@ -148,6 +148,7 @@ static gchar *contributors[] = {
 	"Michael Kellen",
 	"Stephen Kiernan",
 	"Spencer Kimball",
+	"Christian Kirbach",
 	"Alexander Kirillov",
 	"Peter Kirchgessner",
 	"Helmut K\xc3\xb6" "berle",
