@@ -1752,7 +1752,10 @@ ditem_execute (const GnomeDesktopItem *item,
 	
 	g_return_val_if_fail (item, -1);
 
-	if (!use_current_dir)
+	if (item->type == GNOME_DESKTOP_ITEM_TYPE_APPLICATION)
+		working_dir = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_PATH);
+
+	if (working_dir == NULL && !use_current_dir)
 		working_dir = g_get_home_dir ();
 
 	if (gnome_desktop_item_get_boolean (item, GNOME_DESKTOP_ITEM_TERMINAL)) {
