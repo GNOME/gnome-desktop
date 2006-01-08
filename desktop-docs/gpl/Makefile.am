@@ -5,4 +5,4 @@ DOC_MODULE = gpl
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = es fi pa
+DOC_LINGUAS = es fi fr pa
