@@ -239,6 +239,7 @@ static gchar *contributors[] = {
 	"Cameron Parish",
 	"Conrad Parker",
 	"Stuart Parmenter",
+	"Guilherme de S. Pastore",
 	/* Danilo Segan */
 	"'\xd0\x94\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xbb\xd0\xbe\x20\xd0\xa8\xd0\xb5\xd0\xb3\xd0\xb0\xd0\xbd",
 	"Nils Pedersen",
@@ -257,6 +258,7 @@ static gchar *contributors[] = {
 	"Tero Pulkkinen",
 	"The Rasterman",
 	"Oliver Rauch",
+	"Lucas Almeida Rocha",
 	"Christian Rose",
 	"Cody Russell",
 	"Reklaw",
