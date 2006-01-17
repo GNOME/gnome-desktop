@@ -968,7 +968,7 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), tmpstr);
 
 	g_free (dee->_priv->icon_theme_dir);
-	if (cs != NULL &&  ! g_path_is_absolute (cs)) {
+	if (cs != NULL && !g_path_is_absolute (cs) && tmpstr != NULL) {
 		/* this is a themed icon, see bug #119208 */
 		dee->_priv->icon_theme_dir = g_path_get_dirname (tmpstr);
 		/* FIXME: what about theme changes when the dialog is up */
