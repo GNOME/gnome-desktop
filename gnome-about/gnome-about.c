@@ -1194,7 +1194,7 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-about", "1.0",
+	gnome_program_init ("gnome-about", VERSION,
 			    LIBGNOMEUI_MODULE,
 			    argc, argv, NULL);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR
