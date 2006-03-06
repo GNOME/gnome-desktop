@@ -1287,7 +1287,7 @@ gnome_ditem_edit_clear (GnomeDItemEdit *dee)
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->generic_name_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->comment_entry),"");
-        gtk_entry_set_text(GTK_ENTRY(dee->_priv->exec_entry), "");  
+        gnome_file_entry_set_filename (GNOME_FILE_ENTRY (dee->_priv->exec_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->tryexec_entry), "");
         gtk_entry_set_text(GTK_ENTRY(dee->_priv->doc_entry), "");
         gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (dee->_priv->icon_entry), "");
