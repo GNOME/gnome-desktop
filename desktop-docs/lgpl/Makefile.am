@@ -5,4 +5,4 @@ DOC_MODULE = lgpl
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = es fr pa
+DOC_LINGUAS = es fr pa uk
