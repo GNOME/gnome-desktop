@@ -1,3 +1,12 @@
+2006-03-25  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-desktop-item.c:
+	(gnome_desktop_item_launch_on_screen_with_env): if the .desktop file
+	is a link, make a canonical URI before launching it
+	* gnome-ditem-edit.c: (gnome_ditem_edit_sync_ditem): if the .desktop
+	file is a link, make a canonical URI before saving it
+	This will help with bug #328317
+
 ==================== 2.14.0 ====================
 
 2006-03-06  Vincent Untz  <vuntz@gnome.org>
