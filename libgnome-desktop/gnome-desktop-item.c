@@ -1077,6 +1077,13 @@ set_locale (GnomeDesktopItem *item, const char *key,
 		char *full = g_strdup_printf ("%s[%s]", key, locale);
 		set (item, full, value);
 		g_free (full);
+
+		/* add the locale to the list of languages if it wasn't there
+		 * before */
+		if (g_list_find_custom (item->languages, locale,
+					(GCompareFunc)strcmp) == NULL)
+			item->languages = g_list_prepend (item->languages,
+							  g_strdup (locale));
 	}
 }
 

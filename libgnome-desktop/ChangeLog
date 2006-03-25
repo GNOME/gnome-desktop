@@ -1,5 +1,12 @@
 2006-03-25  Vincent Untz  <vuntz@gnome.org>
 
+	* gnome-desktop-item.c: (set_locale): if we add an attribute with a
+	new locale, save the locale into our list of languages
+	Fix bug #86169
+	* gnome-ditem-edit.c: (setup_translations_list): sort by languages
+
+2006-03-25  Vincent Untz  <vuntz@gnome.org>
+
 	* gnome-desktop-item.c:
 	(gnome_desktop_item_launch_on_screen_with_env): if the .desktop file
 	is a link, make a canonical URI before launching it
