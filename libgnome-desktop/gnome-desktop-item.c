@@ -1373,8 +1373,8 @@ do_percent_subst (const GnomeDesktopItem  *item,
 							*added_status);
 		break;
 	case 'm':
-		/* Note: v0.9.4 of the spec says this is deprecated and
-		   just replace with icon name but KDE replaces with --icon iconname */
+		/* Note: v0.9.4 of the spec says this is deprecated
+		 * and replace with --miniicon iconname */
 		cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_MINI_ICON);
 		if (cs != NULL) {
 			g_string_append (str, "--miniicon=");
@@ -1383,8 +1383,7 @@ do_percent_subst (const GnomeDesktopItem  *item,
 		}
 		break;
 	case 'i':
-		/* Note: v0.9.4 of the spec says just replace with icon name
-		   but KDE replaces with --icon iconname */
+		/* Note: v0.9.4 of the spec says replace with --icon iconname */
 		cs = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_ICON);
 		if (cs != NULL) {
 			g_string_append (str, "--icon=");
@@ -1393,8 +1392,6 @@ do_percent_subst (const GnomeDesktopItem  *item,
 		}
 		break;
 	case 'c':
-		/* Note: v0.9.4 of the spec says comment, but kde uses Name=, so use
-		   Name= since no gnome app is using this anyhow */
 		cs = gnome_desktop_item_get_localestring (item, GNOME_DESKTOP_ITEM_NAME);
 		if (cs != NULL) {
 			esc = escape_single_quotes (cs, in_single_quotes, in_double_quotes);
@@ -1403,7 +1400,6 @@ do_percent_subst (const GnomeDesktopItem  *item,
 		}
 		break;
 	case 'k':
-		/* Note: v0.9.4 of the spec says name but means filename */
 		if (item->location != NULL) {
 			esc = escape_single_quotes (item->location, in_single_quotes, in_double_quotes);
 			g_string_append (str, esc);
