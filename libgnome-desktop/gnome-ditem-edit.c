@@ -1050,6 +1050,19 @@ get_language (void)
 }
 
 static void
+ensure_item_localefiled (GnomeDesktopItem *ditem,
+			 const char       *field)
+{
+	const char *localized;
+
+	if (gnome_desktop_item_get_string (ditem, field) == NULL) {
+		localized = gnome_desktop_item_get_localestring (ditem, field);
+		if (localized != NULL)
+			gnome_desktop_item_set_string (ditem, field, localized);
+	}
+}
+
+static void
 gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 {
 	GnomeDesktopItem *ditem;
@@ -1177,6 +1190,14 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	gnome_desktop_item_set_localestring (
 			ditem, GNOME_DESKTOP_ITEM_COMMENT,
 			gtk_entry_get_text (GTK_ENTRY(dee->_priv->comment_entry)));
+
+	/* Make sure we set the "C" locale strings to the terms we set here.
+	 * This is so that if the user logs into another locale they get their
+	 * own description there rather then empty. It is not the C locale
+	 * however, but the user created this entry herself so it's OK */
+	ensure_item_localefiled (ditem, GNOME_DESKTOP_ITEM_NAME);
+	ensure_item_localefiled (ditem, GNOME_DESKTOP_ITEM_GENERIC_NAME);
+	ensure_item_localefiled (ditem, GNOME_DESKTOP_ITEM_COMMENT);
 			
 	dee->_priv->ui_dirty = FALSE;
 }
