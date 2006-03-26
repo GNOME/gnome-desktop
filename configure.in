@@ -5,6 +5,8 @@ AC_CONFIG_SRCDIR([libgnome-desktop])
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 
+AC_CONFIG_MACRO_DIR([m4])
+
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
 
@@ -159,6 +161,9 @@ if test "x$enable_rebuilds" = "xyes" && \
 fi
 AC_SUBST(REBUILD)
 
+# check for gtk-doc
+GTK_DOC_CHECK([1.4])
+
 AC_CONFIG_FILES([
 Makefile
 gnome-desktop.spec
@@ -170,6 +175,9 @@ libgnome-desktop/libgnome/Makefile
 libgnome-desktop/libgnomeui/Makefile
 libgnome-desktop/gnome-desktop-2.0.pc
 libgnome-desktop/gnome-desktop-2.0-uninstalled.pc
+docs/Makefile
+docs/reference/Makefile
+docs/reference/gnome-desktop/Makefile
 gnome-version.xml.in
 po/Makefile.in
 pixmaps/Makefile
