@@ -80,7 +80,7 @@ void              gnome_ditem_edit_clear        (GnomeDItemEdit   *dee);
 
 /* Make the display reflect ditem at path */
 gboolean          gnome_ditem_edit_load_uri     (GnomeDItemEdit   *dee,
-						 const gchar      *path,
+						 const gchar      *uri,
 						 GError          **error);
 
 /* Copy the contents of this ditem into the display */

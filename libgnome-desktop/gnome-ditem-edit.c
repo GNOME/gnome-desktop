@@ -1206,6 +1206,7 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
  * gnome_ditem_edit_load_uri
  * @dee: #GnomeDItemEdit object to work with
  * @uri: file to load into the editting areas
+ * @error: location to store error, or NULL
  *
  * Description: Load a .desktop file and update the editting areas
  * of the object accordingly.
@@ -1248,8 +1249,6 @@ gnome_ditem_edit_load_uri (GnomeDItemEdit *dee,
  * internally so do not worry about modifying this item later yourself.
  * Note that since the entire item is stored, any hidden fields will be
  * preserved when you later get it with #gnome_ditem_edit_get_ditem.
- *
- * Returns:
  */
 void
 gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
@@ -1302,8 +1301,6 @@ gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
  *
  * Description: Clear the editting areas.  And unref any
  * stored #GnomeDesktopItem.
- *
- * Returns:
  */
 void
 gnome_ditem_edit_clear (GnomeDItemEdit *dee)
@@ -1492,6 +1489,10 @@ destroy_tooltip (GtkObject *object)
 
 /**
  * set_tooltip
+ * @dee: #GnomeDItemEdit object to work with
+ * @widget: the GtkWidget you wish to associate the tip with.
+ * @description: a string containing the tip itself.
+ *
  * Description : Set @description as the tooltip for the @widget.
  *		 Creates the GtkTooltips structure if not already present.
  */
