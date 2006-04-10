@@ -4,6 +4,7 @@ SUBDIRS =			\
 	gnome-about 		\
 	pixmaps			\
 	desktop-docs		\
+	docs			\
 	man
 
 EXTRA_DIST =			\
@@ -22,7 +23,7 @@ versiondir=$(datadir)/gnome-about
 version_DATA=gnome-version.xml
 @INTLTOOL_XML_RULE@
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
 CLEANFILES = $(version_DATA)
 DISTCLEANFILES = \
