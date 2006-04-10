@@ -2037,25 +2037,26 @@ gnome_desktop_item_launch_on_screen_with_env (
 	/* This is a URL, so launch it as a url */
 	if (item->type == GNOME_DESKTOP_ITEM_TYPE_LINK) {
 		const char *url;
+		char       *free_url;
+		gboolean    retval;
+
 		url = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_URL);
-		if (url && url[0] != '\0') {
-			if (gnome_url_show (url, error))
-				return 0;
-			else
-				return -1;
+		if (url && url[0] != '\0')
+			free_url = gnome_vfs_make_uri_canonical (url);
 		/* Gnome panel used to put this in Exec */
-		} else if (exec && exec[0] != '\0') {
-			if (gnome_url_show (exec, error))
-				return 0;
-			else
-				return -1;
-		} else {
+		else if (exec && exec[0] != '\0')
+			free_url = gnome_vfs_make_uri_canonical (exec);
+		else {
 			g_set_error (error,
 				     GNOME_DESKTOP_ITEM_ERROR,
 				     GNOME_DESKTOP_ITEM_ERROR_NO_URL,
 				     _("No URL to launch"));
 			return -1;
 		}
+
+		retval = gnome_url_show (free_url, error);
+		g_free (free_url);
+		return retval ? 0 : -1;
 	}
 
 	/* check the type, if there is one set */

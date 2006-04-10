@@ -36,6 +36,8 @@
 #include <libgnomeui/gnome-uidefs.h>
 #include <libgnomeui/gnome-icon-entry.h>
 
+#include <libgnomevfs/gnome-vfs-utils.h>
+
 #include <libgnome/gnome-desktop-item.h>
 #include <libgnomeui/gnome-ditem-edit.h>
 
@@ -1053,6 +1055,7 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	GtkWidget        *entry;
 	const char       *type;
 	const char       *uri;
+	char             *free_uri;
 	const char       *attr;
 	char             *file;
 	gboolean          ret;
@@ -1073,12 +1076,18 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
 	gnome_desktop_item_set_string (ditem, GNOME_DESKTOP_ITEM_TYPE, type);
 
 	/* hack really */
-	if (type && !strcmp (type, "Link"))
+	free_uri = NULL;
+	if (type && !strcmp (type, "Link")) {
+		free_uri = gnome_vfs_make_uri_canonical (uri);
+		uri = free_uri;
+
 		attr = GNOME_DESKTOP_ITEM_URL;
-	else
+	} else
 		attr  = GNOME_DESKTOP_ITEM_EXEC;
 
 	gnome_desktop_item_set_string (ditem, attr, uri);
+	if (free_uri)
+		g_free (free_uri);
 
 	gnome_desktop_item_set_string (
 		ditem, GNOME_DESKTOP_ITEM_TRY_EXEC,
