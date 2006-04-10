@@ -2,6 +2,14 @@
 
 	Backport from HEAD.
 
+	* gnome-desktop-item.c: (ditem_execute): use
+	gdk_x11_display_get_user_time() to get the launch time
+	Fix bug #165689
+
+2006-04-10  Vincent Untz  <vuntz@gnome.org>
+
+	Backport from HEAD.
+
 	* gnome-ditem-edit.c: (ensure_item_localefiled): new
 	(gnome_ditem_edit_sync_ditem): add a C name/comment/genericname if
 	there's none, copied from the locale value
