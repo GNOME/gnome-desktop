@@ -676,6 +676,9 @@ setup_translations_list (GnomeDItemEdit *dee)
 					"text", 3, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+					      0, GTK_SORT_ASCENDING);
+
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (tree));
 
 	gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (tree), FALSE);
