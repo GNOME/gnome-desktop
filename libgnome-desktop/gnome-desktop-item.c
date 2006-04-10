@@ -2807,8 +2807,6 @@ gnome_desktop_item_get_location (const GnomeDesktopItem *item)
  * @location: A uri string specifying the file location of this particular item.
  *
  * Set's the 'location' uri of this item.
- *
- * Returns:
  */
 void
 gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
@@ -2855,8 +2853,6 @@ gnome_desktop_item_set_location (GnomeDesktopItem *item, const char *location)
  * @file: A local filename specifying the file location of this particular item.
  *
  * Set's the 'location' uri of this item to the given @file.
- *
- * Returns:
  */
 void
 gnome_desktop_item_set_location_file (GnomeDesktopItem *item, const char *file)
