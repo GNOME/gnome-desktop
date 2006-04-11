@@ -1924,8 +1924,10 @@ ditem_execute (const GnomeDesktopItem *item,
 			
 			if (item->launch_time > 0)
 				launch_time = item->launch_time;
-			else
+			else if (screen != NULL)
 				launch_time = gdk_x11_display_get_user_time (gdk_screen_get_display (screen));
+			else
+				launch_time = gdk_x11_display_get_user_time (gdk_display_get_default ());
 
 			sn_launcher_context_initiate (sn_context,
 						      g_get_prgname () ? g_get_prgname () : "unknown",
