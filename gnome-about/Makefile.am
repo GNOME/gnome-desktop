@@ -4,7 +4,8 @@ INCLUDES =		 					\
 	$(GNOME_ABOUT_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""		\
+	-DDATADIR=\"$(datadir)/gnome-about\"
 
 LDADD = $(GNOME_ABOUT_LIBS)
 
