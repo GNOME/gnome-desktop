@@ -665,7 +665,7 @@ get_description_messages (xmlNodePtr node)
 			const GList *t;
 
 			if (paras->type == XML_ELEMENT_NODE &&
-					xmlStrEqual (paras->name, "p") &&
+					xmlStrEqual (paras->name, (const xmlChar *) "p") &&
 					value && value[0]) {
 				cur = xmlNodeGetLang (paras);
 
@@ -682,7 +682,7 @@ get_description_messages (xmlNodePtr node)
 					best_value = g_strdup (tmp);
 				}
 				else {
-					if (!cur || xmlStrEqual (cur, "C")) {
+					if (!cur || xmlStrEqual (cur, (const xmlChar *) "C")) {
 						break;
 					}
 					/* See if the current lanaguage occurs
@@ -796,7 +796,7 @@ display_version_info (GnomeCanvasGroup *group)
 
 	node = about->children;
 
-	if (g_ascii_strcasecmp (node->name, "gnome-version")) {
+	if (g_ascii_strcasecmp ((const char *) node->name, "gnome-version")) {
 		xmlFreeDoc (about);
 		return;
 	}
