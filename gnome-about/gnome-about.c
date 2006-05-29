@@ -398,9 +398,10 @@ load_random_header (void)
 	struct dirent *d;
 
 	directory = gnome_program_locate_file (NULL,
-					       GNOME_FILE_DOMAIN_DATADIR,
-					       "gnome-about/headers/",
+					       GNOME_FILE_DOMAIN_APP_DATADIR,
+					       "headers",
 					       TRUE, NULL);
+
 	if (!directory) {
 		show_error_dialog (_("Could not locate the directory with header images."));
 
@@ -465,8 +466,8 @@ load_logo (void)
 	GError *error = NULL;
 
 	file = gnome_program_locate_file (NULL,
-					  GNOME_FILE_DOMAIN_DATADIR,
-					  "gnome-about/gnome-64.png",
+					  GNOME_FILE_DOMAIN_APP_DATADIR,
+					  "gnome-64.png",
 					  TRUE, NULL);
 	if (!file) {
 		show_error_dialog (_("Could not locate the GNOME logo."));
@@ -779,11 +780,12 @@ display_version_info (GnomeCanvasGroup *group)
 	gdouble height = 0.0;
 
 	file = gnome_program_locate_file (NULL,
-					  GNOME_FILE_DOMAIN_DATADIR,
-					  "gnome-about/gnome-version.xml",
+					  GNOME_FILE_DOMAIN_APP_DATADIR,
+					  "gnome-version.xml",
 					  TRUE, NULL);
 	if (!file) {
 		show_error_dialog (_("Could not locate the file with GNOME version information."));
+		return;
 	}
 
 	about = xmlParseFile (file);
@@ -1188,15 +1190,18 @@ generate_randomness (void)
 int
 main (int argc, char **argv)
 {
+	GnomeProgram *program;
 	GtkWidget *dialog;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-about", VERSION,
-			    LIBGNOMEUI_MODULE,
-			    argc, argv, NULL);
+	program = gnome_program_init ("gnome-about", VERSION,
+				      LIBGNOMEUI_MODULE,
+				      argc, argv,
+				      GNOME_PARAM_APP_DATADIR, DATADIR,
+				      NULL);
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR
 			"/gnome-logo-icon-transparent.png");
 
@@ -1209,6 +1214,8 @@ main (int argc, char **argv)
 	gtk_widget_show_all (dialog);
 
 	gtk_main ();
+
+	g_object_unref (program);
 
 	return 0;
 }
