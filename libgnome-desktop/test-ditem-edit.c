@@ -40,7 +40,9 @@ main(int argc, char * argv[])
 
 	gnome_program_init ("gnome-ditem-edit", "0.1",
 			    LIBGNOMEUI_MODULE,
-			    argc, argv, NULL);
+			    argc, argv,
+			    GNOME_PARAM_APP_DATADIR, DATADIR,
+			    NULL);
 
         app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
