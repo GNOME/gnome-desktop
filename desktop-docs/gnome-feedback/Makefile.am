@@ -5,4 +5,4 @@ DOC_MODULE = gnome-feedback
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = es fr it uk zh_CN
+DOC_LINGUAS = es fr it uk zh_CN sv
