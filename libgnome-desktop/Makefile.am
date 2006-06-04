@@ -8,6 +8,7 @@ INCLUDES =							\
 	-DGNOME_DESKTOP_PIXMAPDIR=\""$(datadir)/pixmaps"\"	\
 	-DGNOME_DESKTOP_ICONDIR=\""$(datadir)/icons"\"		\
 	-DGNOME_CORE_INTERNAL					\
+	-DDATADIR=\""$(pkgdatadir)"\"				\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	$(GNOME_DESKTOP_CFLAGS)

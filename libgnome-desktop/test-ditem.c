@@ -91,7 +91,7 @@ static void
 launch_item (const char *file)
 {
 	GnomeDesktopItem *ditem;
-	GList *file_list;
+	GList *file_list = NULL;
 	int ret;
 
 	ditem = gnome_desktop_item_new_from_file (file,
@@ -103,10 +103,12 @@ launch_item (const char *file)
 
 	}
 
+#if 0
 	file_list = g_list_append (NULL, "file:///bin/sh");
 	file_list = g_list_append (file_list, "foo");
 	file_list = g_list_append (file_list, "bar");
 	file_list = g_list_append (file_list, "http://slashdot.org");
+#endif
 
 	ret = gnome_desktop_item_launch (ditem, file_list, 0, NULL);
 	g_print ("launch returned: %d\n", ret);
@@ -120,7 +122,7 @@ main (int argc, char **argv)
 	gboolean launch = FALSE;
 
 	if (argc < 2 || argc > 3) {
-		fprintf (stderr, "One argument, with name of .desktop file allowed\n");
+		fprintf (stderr, "Usage: test-ditem path [LAUNCH]\n");
 		exit (1);
 	}
 
