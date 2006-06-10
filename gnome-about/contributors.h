@@ -1,5 +1,3 @@
-#include <libgnome/libgnome.h>
-
 /* If your name uses some letters not in 7bit ascii, or a non-lati script;
  * put your name in ascii enclosed with N_( ) and put a comment before your
  * line giving some info on how it should be written for languages that
@@ -9,7 +7,7 @@
 
 
 /* Please keep this in alphabetical order */
-static gchar *contributors[] = {
+static const gchar *contributors[] = {
 	"J\xc3\xa9r\xc3\xb4me Abela",
 	"Rob Adams",
 	"Lauri Alanko",
@@ -349,6 +347,4 @@ static gchar *contributors[] = {
 	"Michael Zucchi",
 	"Jason van Zyl"
 };
-
-
 
