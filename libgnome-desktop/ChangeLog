@@ -1,3 +1,10 @@
+2006-08-05  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-desktop-item.c: (gnome_desktop_item_find_icon): use
+	gtk_icon_theme_get_default() instead of gtk_icon_theme_new() when no
+	icon theme is specified so that the currently in use icon theme is
+	used to find the icon (else, it just looks in hicolor).
+
 ==================== 2.15.90 ====================
 
 ==================== 2.15.4 ====================

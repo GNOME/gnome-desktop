@@ -2659,11 +2659,8 @@ gnome_desktop_item_find_icon (GtkIconTheme *icon_theme,
 		char *icon_no_extension;
 		char *p;
 
-		if (icon_theme == NULL) {
-			icon_theme = gtk_icon_theme_new ();
-		} else {
-			g_object_ref (icon_theme);
-		}
+		if (icon_theme == NULL)
+			icon_theme = gtk_icon_theme_get_default ();
 		
 		icon_no_extension = g_strdup (icon);
 		p = strrchr (icon_no_extension, '.');
@@ -2694,8 +2691,6 @@ gnome_desktop_item_find_icon (GtkIconTheme *icon_theme,
 				gtk_icon_info_free (info);
 			}
 		}
-		
-		g_object_unref (icon_theme);
 		
 		g_free (icon_no_extension);
 	}
