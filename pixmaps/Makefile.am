@@ -48,7 +48,6 @@ pixmap_DATA =					\
 	gnome-user-interface.png		\
 	gnome-windows.png			\
 	gnome-word.png				\
-	gnome-workspace.png			\
 	kterm.xpm				\
 	vnterm.xpm				\
 	monitor.png				\
