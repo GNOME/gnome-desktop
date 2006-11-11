@@ -311,6 +311,7 @@ static const gchar *contributors[] = {
 	"Owen Taylor",
 	"Peter Teichman",
 	"Arturo Tena",
+	"Thomas Thurman",
 	"Kimball Thurston",
 	"Chris Toshok",
 	"Christoph Toshok",
