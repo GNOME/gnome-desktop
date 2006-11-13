@@ -1731,6 +1731,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	       gboolean use_current_dir,
 	       gboolean append_uris,
 	       gboolean append_paths,
+	       gboolean do_not_reap_child,
 	       GError **error)
 {
 	char **free_me = NULL;
@@ -1948,7 +1949,7 @@ ditem_execute (const GnomeDesktopItem *item,
 		if ( ! g_spawn_async (working_dir,
 				      real_argv,
 				      envp,
-				      G_SPAWN_SEARCH_PATH /* flags */,
+				      (do_not_reap_child ? G_SPAWN_DO_NOT_REAP_CHILD : 0) | G_SPAWN_SEARCH_PATH /* flags */,
 				      NULL, /* child_setup_func */
 				      NULL, /* child_setup_func_data */
 				      &ret /* child_pid */,
@@ -2101,6 +2102,7 @@ gnome_desktop_item_launch_on_screen_with_env (
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_USE_CURRENT_DIR),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS),
 			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_APPEND_PATHS),
+			     (flags & GNOME_DESKTOP_ITEM_LAUNCH_DO_NOT_REAP_CHILD),
 			     error);
 
 	return ret;

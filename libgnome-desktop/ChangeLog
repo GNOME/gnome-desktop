@@ -1,3 +1,15 @@
+2006-11-13  Vincent Untz  <vuntz@gnome.org>
+
+	Make it possible to let caller handle reaping child process
+	Patch by Tom Tromey <tromey@redhat.com>
+	Fix bug #360045
+
+	* gnome-desktop-item.c (ditem_execute): Added do_not_reap_child
+	argument.
+	(gnome_desktop_item_launch_on_screen_with_env): Handle new flag.
+	* libgnome/gnome-desktop-item.h (GnomeDesktopItemLoadFlags): Added
+	GNOME_DESKTOP_ITEM_LAUNCH_DO_NOT_REAP_CHILD.
+
 ==================== 2.17.2 ====================
 
 ==================== 2.16.1 ====================

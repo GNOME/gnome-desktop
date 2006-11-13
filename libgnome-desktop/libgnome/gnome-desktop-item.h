@@ -118,7 +118,9 @@ typedef enum {
 	 * app without parameters. */
 	GNOME_DESKTOP_ITEM_LAUNCH_APPEND_URIS = 1<<2,
 	/* Same as above but instead append local paths */
-	GNOME_DESKTOP_ITEM_LAUNCH_APPEND_PATHS = 1<<3
+	GNOME_DESKTOP_ITEM_LAUNCH_APPEND_PATHS = 1<<3,
+	/* Don't automatically reap child process.  */
+	GNOME_DESKTOP_ITEM_LAUNCH_DO_NOT_REAP_CHILD = 1<<4
 } GnomeDesktopItemLaunchFlags;
 
 typedef enum {
