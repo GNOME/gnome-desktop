@@ -1,3 +1,15 @@
+2006-11-13  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-about.c: (get_version_info): new, to parse the xml file
+	(display_version_info_on_term): new, to output the version info on
+	terminal
+	(display_version_info): call get_version_info(), and also l10nize
+	"%s:"
+	(main): use GOption, display gnome info on --gnome-version,
+	use gtk_window_set_default_icon_from_file() instead of
+	libgnomeui function
+	Fix bug #353057
+
 ==================== 2.17.2 ====================
 
 2006-11-11  Thomas Thurman  <thomas@thurman.org.uk>

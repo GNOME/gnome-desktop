@@ -781,46 +781,39 @@ create_date_string (const char *value)
 	return result;
 }
 
-static void
-display_version_info (GnomeCanvasGroup *group)
+static gboolean
+get_version_info (char **version_string,
+		  char **distributor_string,
+		  char **build_date_string)
 {
+	gchar *file;
+
 	xmlDocPtr about;
 	xmlNodePtr node;
 	xmlNodePtr bits;
 
-	gchar *file;
-
 	char *platform = NULL;
 	char *minor = NULL;
 	char *micro = NULL;
-	char *version_string = NULL;
-	char *distributor_string = NULL;
-	char *build_date_string = NULL;
-	char *text = NULL;
-
-	GnomeCanvasItem *info;
-	gdouble height = 0.0;
 
 	file = gnome_program_locate_file (NULL,
 					  GNOME_FILE_DOMAIN_APP_DATADIR,
 					  "gnome-version.xml",
 					  TRUE, NULL);
-	if (!file) {
-		show_error_dialog (_("Could not locate the file with GNOME version information."));
-		return;
-	}
+	if (!file)
+		return FALSE;
 
 	about = xmlParseFile (file);
 	g_free (file);
 
 	if (!about)
-		return;
+		return FALSE;
 
 	node = about->children;
 
 	if (g_ascii_strcasecmp ((const char *) node->name, "gnome-version")) {
 		xmlFreeDoc (about);
-		return;
+		return FALSE;
 	}
 
 	bits = node->children;
@@ -837,14 +830,14 @@ display_version_info (GnomeCanvasGroup *group)
 		if (!g_ascii_strcasecmp (name, "platform")
 		    && value && value[0])
 			platform = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "minor") && value && value[0])
+		else if (!g_ascii_strcasecmp (name, "minor") && value && value[0])
 			minor = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "micro") && value && value[0])
+		else if (!g_ascii_strcasecmp (name, "micro") && value && value[0])
 			micro = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "distributor") && value && value[0])
-			distributor_string = g_strdup (value);
-		if (!g_ascii_strcasecmp (name, "date") && value && value[0])
-			build_date_string = create_date_string (value);
+		else if (!g_ascii_strcasecmp (name, "distributor") && value && value[0])
+			*distributor_string = g_strdup (value);
+		else if (!g_ascii_strcasecmp (name, "date") && value && value[0])
+			*build_date_string = create_date_string (value);
 
 		bits = bits->next;
 		xmlFree (value);
@@ -853,29 +846,76 @@ display_version_info (GnomeCanvasGroup *group)
 	xmlFreeDoc (about);
 
 	if (!minor)
-		version_string = g_strconcat (platform, NULL);
+		*version_string = g_strdup (platform);
 
-	if (!version_string && !micro)
-		version_string = g_strconcat (platform, ".", minor, NULL);
+	if (!*version_string && !micro)
+		*version_string = g_strconcat (platform, ".", minor, NULL);
 
-	if (!version_string)
-		version_string = g_strconcat (platform, ".", minor, ".",
-					      micro, NULL);
+	if (!*version_string)
+		*version_string = g_strconcat (platform, ".", minor, ".",
+					       micro, NULL);
 
 	g_free (platform);
 	g_free (minor);
 	g_free (micro);
+
+	return TRUE;
+}
+
+static gboolean
+display_version_info_on_term (void)
+{
+	char *version_string = NULL;
+	char *distributor_string = NULL;
+	char *build_date_string = NULL;
+
+	if (!get_version_info (&version_string,
+			       &distributor_string,
+			       &build_date_string)) {
+		g_printerr (_("Could not get informations about GNOME version."));
+		return FALSE;
+	}
+
+	g_print (_("%s: %s\n"), _("Version"), version_string);
+	g_print (_("%s: %s\n"), _("Distributor"), distributor_string);
+	g_print (_("%s: %s\n"), _("Build Date"), build_date_string);
+		 
+	g_free (version_string);
+	g_free (distributor_string);
+	g_free (build_date_string);
+
+	return TRUE;
+}
+
+static void
+display_version_info (GnomeCanvasGroup *group)
+{
+	char *version_string = NULL;
+	char *distributor_string = NULL;
+	char *build_date_string = NULL;
+	char *format = NULL;
+	char *text = NULL;
+
+	GnomeCanvasItem *info;
+	gdouble height = 0.0;
+
+	if (!get_version_info (&version_string,
+			       &distributor_string,
+			       &build_date_string))
+		show_error_dialog (_("Could not get informations about GNOME version."));
 
 	info = gnome_canvas_item_new (group,
 				      gnome_canvas_group_get_type (),
 				      "x", 10.0,
 				      NULL);
 
+	format = g_strdup_printf ("<b>%s</b>%%s", _("%s: "));
+
 	if (version_string && version_string[0]) {
 		gdouble tmp;
 		GnomeCanvasItem *item;
 
-		text = g_strdup_printf ("<b>%s: </b>%s",
+		text = g_strdup_printf (format,
 					_("Version"), version_string);
 		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (info),
 					      gnome_canvas_text_get_type (),
@@ -894,7 +934,7 @@ display_version_info (GnomeCanvasGroup *group)
 		gdouble tmp;
 		GnomeCanvasItem *item;
 
-		text = g_strdup_printf ("<b>%s: </b>%s",
+		text = g_strdup_printf (format,
 					_("Distributor"), distributor_string);
 		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (info),
 					      gnome_canvas_text_get_type (),
@@ -913,7 +953,7 @@ display_version_info (GnomeCanvasGroup *group)
 		gdouble tmp;
 		GnomeCanvasItem *item;
 
-		text = g_strdup_printf ("<b>%s: </b>%s",
+		text = g_strdup_printf (format,
 					_("Build Date"), build_date_string);
 		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (info),
 					      gnome_canvas_text_get_type (),
@@ -928,6 +968,7 @@ display_version_info (GnomeCanvasGroup *group)
 		height += tmp + 4.0;
 	}
 
+	g_free (format);
 	g_free (version_string);
 	g_free (distributor_string);
 	g_free (build_date_string);
@@ -1207,11 +1248,18 @@ generate_randomness (void)
 	g_rand_free (generator);
 }
 		
+static gboolean gnome_version = FALSE;
+
+static const GOptionEntry options[] = {
+  { "gnome-version", 0, 0, G_OPTION_ARG_NONE, &gnome_version, N_("Display informations on this GNOME version"), NULL },
+  { NULL }
+};
 
 /* main */
 int
 main (int argc, char **argv)
 {
+	GOptionContext *context;
 	GnomeProgram *program;
 	GtkWidget *dialog;
 
@@ -1219,13 +1267,24 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	context = g_option_context_new ("");
+
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+
 	program = gnome_program_init ("gnome-about", VERSION,
 				      LIBGNOMEUI_MODULE,
 				      argc, argv,
 				      GNOME_PARAM_APP_DATADIR, DATADIR,
+				      GNOME_PARAM_GOPTION_CONTEXT, context,
 				      NULL);
-	gnome_window_icon_set_default_from_file (GNOME_ICONDIR
-			"/gnome-logo-icon-transparent.png");
+
+	if (gnome_version) {
+		g_object_unref (program);
+		return (display_version_info_on_term ()) ? 0 : 1;
+	}
+
+	gtk_window_set_default_icon_from_file (GNOME_ICONDIR
+			"/gnome-logo-icon-transparent.png", NULL);
 
 	dialog = create_about_dialog ();
 	if (!dialog)
