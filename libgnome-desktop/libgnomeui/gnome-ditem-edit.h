@@ -34,6 +34,8 @@
 #ifndef GNOME_DITEM_EDIT_H
 #define GNOME_DITEM_EDIT_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 #include <libgnome/gnome-desktop-item.h>
 
@@ -111,8 +113,6 @@ void              gnome_ditem_edit_set_editable (GnomeDItemEdit   *dee,
 
 G_END_DECLS
    
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 #endif /* GNOME_DITEM_EDIT_H */
-
-
-
-

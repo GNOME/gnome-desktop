@@ -25,6 +25,8 @@
 
 #include <config.h>
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -834,6 +836,8 @@ gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
  * for the purpose of editing #GnomeDesktopItems
  *
  * Returns: Newly-created #GnomeDItemEdit widget.
+ *
+ * Deprecated: 2.18:
  */
 GtkWidget *
 gnome_ditem_edit_new (void)
@@ -1212,6 +1216,8 @@ gnome_ditem_edit_sync_ditem (GnomeDItemEdit *dee)
  * of the object accordingly.
  *
  * Returns:  %TRUE if successful, %FALSE otherwise
+ *
+ * Deprecated: 2.18:
  */
 gboolean
 gnome_ditem_edit_load_uri (GnomeDItemEdit *dee,
@@ -1249,6 +1255,8 @@ gnome_ditem_edit_load_uri (GnomeDItemEdit *dee,
  * internally so do not worry about modifying this item later yourself.
  * Note that since the entire item is stored, any hidden fields will be
  * preserved when you later get it with #gnome_ditem_edit_get_ditem.
+ *
+ * Deprecated: 2.18:
  */
 void
 gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
@@ -1277,6 +1285,8 @@ gnome_ditem_edit_set_ditem (GnomeDItemEdit *dee,
  * make a copy of it with #gnome_desktop_item_copy
  *
  * Returns: a pointer to the internal #GnomeDesktopItem structure.
+ *
+ * Deprecated: 2.18:
  */
 GnomeDesktopItem *
 gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
@@ -1301,6 +1311,8 @@ gnome_ditem_edit_get_ditem (GnomeDItemEdit *dee)
  *
  * Description: Clear the editting areas.  And unref any
  * stored #GnomeDesktopItem.
+ *
+ * Deprecated: 2.18:
  */
 void
 gnome_ditem_edit_clear (GnomeDItemEdit *dee)
@@ -1362,6 +1374,8 @@ gnome_ditem_edit_name_changed (GnomeDItemEdit *dee)
  * Description: Get the icon filename.
  *
  * Returns: a newly allocated string with the filename of the icon
+ *
+ * Deprecated: 2.18:
  */
 gchar *
 gnome_ditem_edit_get_icon (GnomeDItemEdit *dee)
@@ -1379,6 +1393,8 @@ gnome_ditem_edit_get_icon (GnomeDItemEdit *dee)
  * Description: Get the Name field from the ditem for the current language.
  *
  * Returns: a newly allocated string with the name of the ditem
+ *
+ * Deprecated: 2.18:
  */
 gchar *
 gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
@@ -1393,6 +1409,14 @@ gnome_ditem_edit_get_name (GnomeDItemEdit *dee)
 }
 
 /* eeeeeeeeek!, evil api */
+/**
+ * gnome_ditem_edit_grab_focus
+ * @dee: #GnomeDItemEdit object to work with
+ *
+ * Description: Give the focus to the editor.
+ *
+ * Deprecated: 2.18:
+ */
 void
 gnome_ditem_edit_grab_focus (GnomeDItemEdit *dee)
 {
@@ -1401,6 +1425,16 @@ gnome_ditem_edit_grab_focus (GnomeDItemEdit *dee)
 
 	gtk_widget_grab_focus (dee->_priv->name_entry);
 }
+
+/**
+ * gnome_ditem_edit_set_editable
+ * @dee: #GnomeDItemEdit object to work with
+ * @editable: %TRUE to set the object editable
+ *
+ * Description: Set the object editable.
+ *
+ * Deprecated: 2.18:
+ */
 void
 gnome_ditem_edit_set_editable (GnomeDItemEdit *dee,
 			       gboolean editable)
@@ -1413,7 +1447,15 @@ gnome_ditem_edit_set_editable (GnomeDItemEdit *dee,
 	gtk_widget_set_sensitive (dee->_priv->child2, editable);
 }
 
-/* set the string type of the entry */
+/**
+ * gnome_ditem_edit_set_entry_type
+ * @dee: #GnomeDItemEdit object to work with
+ * @type: a type
+ *
+ * Description: Set the string type of the entry.
+ *
+ * Deprecated: 2.18:
+ */
 void
 gnome_ditem_edit_set_entry_type (GnomeDItemEdit *dee,
 				 const char     *type)
@@ -1440,7 +1482,15 @@ gnome_ditem_edit_set_entry_type (GnomeDItemEdit *dee,
 	}
 }
 
-/* force directory only */
+/**
+ * gnome_ditem_edit_set_entry_type
+ * @dee: #GnomeDItemEdit object to work with
+ * @directory_only: %TRUE to force directory only
+ *
+ * Description: Force directory only.
+ *
+ * Deprecated: 2.18:
+ */
 void
 gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
 				     gboolean        directory_only)
@@ -1514,3 +1564,5 @@ set_tooltip (GnomeDItemEdit *dee, GtkWidget *widget, const gchar *description)
 
         gtk_tooltips_set_tip (tooltips, widget, description, NULL);
 }
+
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */

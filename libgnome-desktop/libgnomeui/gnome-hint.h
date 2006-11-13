@@ -1,6 +1,8 @@
 #ifndef __GNOME_HINT_H__
 #define __GNOME_HINT_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -42,5 +44,7 @@ GtkWidget * gnome_hint_new (const gchar *hintfile,
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif

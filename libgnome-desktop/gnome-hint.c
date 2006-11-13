@@ -1,4 +1,7 @@
 #include <config.h>
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-hint.h>
@@ -300,6 +303,13 @@ pick_random_hint(GnomeHint *gh)
         gh->_priv->curhint = g_list_nth (gh->_priv->hintlist, rnd);
 }
 
+/**
+ * gnome_hint_new
+ * 
+ * Description:
+ *
+ * Deprecated: 2.18:
+ */
 GtkWidget *
 gnome_hint_new (const gchar *hintfile,
 		const gchar *title,
@@ -403,3 +413,5 @@ gnome_hint_set_accessible_information (GnomeHint *gh, const gchar *name)
 		atk_object_set_name (aobj, name);
 	atk_object_set_description (aobj, (gchar *) gh->_priv->curhint->data);
 }
+
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
