@@ -872,7 +872,7 @@ display_version_info_on_term (void)
 	if (!get_version_info (&version_string,
 			       &distributor_string,
 			       &build_date_string)) {
-		g_printerr (_("Could not get informations about GNOME version."));
+		g_printerr (_("Could not get information about GNOME version."));
 		return FALSE;
 	}
 
@@ -902,7 +902,7 @@ display_version_info (GnomeCanvasGroup *group)
 	if (!get_version_info (&version_string,
 			       &distributor_string,
 			       &build_date_string))
-		show_error_dialog (_("Could not get informations about GNOME version."));
+		show_error_dialog (_("Could not get information about GNOME version."));
 
 	info = gnome_canvas_item_new (group,
 				      gnome_canvas_group_get_type (),
@@ -1251,7 +1251,7 @@ generate_randomness (void)
 static gboolean gnome_version = FALSE;
 
 static const GOptionEntry options[] = {
-  { "gnome-version", 0, 0, G_OPTION_ARG_NONE, &gnome_version, N_("Display informations on this GNOME version"), NULL },
+  { "gnome-version", 0, 0, G_OPTION_ARG_NONE, &gnome_version, N_("Display information on this GNOME version"), NULL },
   { NULL }
 };
 
