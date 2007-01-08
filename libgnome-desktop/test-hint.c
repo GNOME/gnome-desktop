@@ -5,6 +5,7 @@
 #include <libgnomeui/libgnomeui.h>
 #include <gconf/gconf-client.h>
 
+#undef GNOME_DISABLE_DEPRECATED
 #include <libgnomeui/gnome-hint.h>
 
 int main (int argc, char **argv) {

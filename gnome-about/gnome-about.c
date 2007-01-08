@@ -28,6 +28,7 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
@@ -671,27 +672,26 @@ get_description_messages (xmlNodePtr node)
 {
 	xmlNodePtr paras;
 	GSList *list = NULL, *l;
-	const GList *langs = NULL;
+	const char * const * langs;
 	gint i;
 	gboolean started = FALSE;
 	char *best_value = NULL;
 
-	langs = gnome_i18n_get_language_list ("LC_MESSAGES");
+	langs = g_get_language_names ();
 	paras = node->children;
 
 	while (paras) {
 		while (paras) {
-			char *value = (char *)xmlNodeGetContent (paras);
+			xmlChar *value = xmlNodeGetContent (paras);
 			char *tmp;
 			xmlChar *cur, *best = NULL;
-			const GList *t;
 
 			if (paras->type == XML_ELEMENT_NODE &&
 					xmlStrEqual (paras->name, (const xmlChar *) "p") &&
 					value && value[0]) {
 				cur = xmlNodeGetLang (paras);
 
-				tmp = strip_newlines (value);
+				tmp = strip_newlines ((const gchar *) value);
 
 				if (!started) {
 					started = TRUE;
@@ -704,17 +704,19 @@ get_description_messages (xmlNodePtr node)
 					best_value = g_strdup (tmp);
 				}
 				else {
+					guint i;
+
 					if (!cur || xmlStrEqual (cur, (const xmlChar *) "C")) {
 						break;
 					}
 					/* See if the current lanaguage occurs
 					 * earlier than the previous best. */
-					for (t = langs; t; t = t->next) {
-						if (xmlStrEqual (t->data,
+					for (i = 0; langs[i] != NULL; ++i) {
+						if (xmlStrEqual ((const xmlChar *) langs[i],
 								best)) {
 							break;
 						}
-						else if (xmlStrEqual (t->data,
+						else if (xmlStrEqual ((const xmlChar *) langs[i],
 									cur)) {
 							xmlFree (best);
 							best = xmlStrdup (cur);
@@ -726,7 +728,7 @@ get_description_messages (xmlNodePtr node)
 							 * stop. We are not
 							 * going to go any
 							 * better. */
-							if (t == langs) {
+							if (i == 0) {
 								break;
 							}
 						}
@@ -1267,8 +1269,7 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	context = g_option_context_new ("");
-
+	context = g_option_context_new (NULL);
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 
 	program = gnome_program_init ("gnome-about", VERSION,

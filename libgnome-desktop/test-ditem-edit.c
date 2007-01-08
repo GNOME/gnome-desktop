@@ -4,6 +4,8 @@
 #include <stdlib.h>
 
 #include <libgnomeui/libgnomeui.h>
+
+#undef GNOME_DISABLE_DEPRECATED
 #include <libgnomeui/gnome-ditem-edit.h>
 
 static void

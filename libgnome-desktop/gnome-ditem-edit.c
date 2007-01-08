@@ -31,14 +31,18 @@
 #include <ctype.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
+
+#undef GTK_DISABLE_DEPRECATED /* for GtkOptionMenu */
 #include <gtk/gtk.h>
 
 #include <libgnome/gnome-macros.h>
 
 #include <libgnomeui/gnome-uidefs.h>
-#include <libgnomeui/gnome-icon-entry.h>
 
 #include <libgnomevfs/gnome-vfs-utils.h>
+
+#undef GNOME_DISABLE_DEPRECATED
+#include <libgnomeui/gnome-icon-entry.h>
 
 #include <libgnome/gnome-desktop-item.h>
 #include <libgnomeui/gnome-ditem-edit.h>
@@ -84,7 +88,6 @@ struct _GnomeDItemEditPrivate {
 };
 
 static void gnome_ditem_edit_class_init   (GnomeDItemEditClass *klass);
-static void gnome_ditem_edit_instance_init(GnomeDItemEdit      *dee);
 
 static void gnome_ditem_edit_destroy      (GtkObject           *object);
 static void gnome_ditem_edit_finalize     (GObject             *object);
@@ -111,10 +114,7 @@ static gint ditem_edit_signals[LAST_SIGNAL] = { 0 };
 
 /* The following defines the get_type */
 
-GNOME_CLASS_BOILERPLATE (GnomeDItemEdit, gnome_ditem_edit,
-			 GtkNotebook, GTK_TYPE_NOTEBOOK)
-
-
+G_DEFINE_TYPE(GnomeDItemEdit, gnome_ditem_edit, GTK_TYPE_NOTEBOOK)
 
 static void
 gnome_ditem_edit_class_init (GnomeDItemEditClass *klass)
@@ -804,7 +804,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 }
 
 static void
-gnome_ditem_edit_instance_init (GnomeDItemEdit *dee)
+gnome_ditem_edit_init (GnomeDItemEdit *dee)
 {
 	GtkWidget *page;
 
@@ -867,7 +867,7 @@ gnome_ditem_edit_destroy (GtkObject *object)
 
 	destroy_tooltip (object);
 
-	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
+	GTK_OBJECT_CLASS (gnome_ditem_edit_parent_class)->destroy (object);
 }
 
 static void
@@ -883,7 +883,7 @@ gnome_ditem_edit_finalize (GObject *object)
 	g_free(de->_priv);
 	de->_priv = NULL;
 
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
+	G_OBJECT_CLASS (gnome_ditem_edit_parent_class)->finalize (object);
 }
 
 /* set sensitive for directory/other type of a ditem */

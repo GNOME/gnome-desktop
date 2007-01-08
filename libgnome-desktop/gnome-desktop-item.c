@@ -49,8 +49,6 @@
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
-#include <libgnome/gnome-desktop-item.h>
-
 #ifdef HAVE_STARTUP_NOTIFICATION
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
@@ -60,6 +58,9 @@
 #endif
 
 #define sure_string(s) ((s)!=NULL?(s):"")
+
+#undef GNOME_DISABLE_DEPRECATED
+#include <libgnome/gnome-desktop-item.h>
 
 struct _GnomeDesktopItem {
 	int refcount;

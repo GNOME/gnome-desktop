@@ -1,5 +1,3 @@
-AUTOMAKE_OPTIONS = 1.4
-
 SUBDIRS = libgnome libgnomeui
 
 INCLUDES =							\
@@ -10,7 +8,7 @@ INCLUDES =							\
 	-DGNOME_CORE_INTERNAL					\
 	-DDATADIR=\""$(pkgdatadir)"\"				\
 	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED_CFLAGS)				\
+	$(DISABLE_DEPRECATED)					\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la

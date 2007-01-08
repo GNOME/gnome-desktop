@@ -2,6 +2,9 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
+#undef GNOME_DISABLE_DEPRECATED
+#undef GTK_DISABLE_DEPRECATED
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-hint.h>
@@ -127,7 +130,7 @@ gnome_hint_finalize (GObject *object)
 	gnome_hint = GNOME_HINT (object);
 
 	for (l = gnome_hint->_priv->hintlist; l; l = l->next)
-		g_free (l->data);
+		xmlFree (l->data);
 	g_list_free (gnome_hint->_priv->hintlist);
 
 	g_free (gnome_hint->_priv->startupkey);
@@ -220,10 +223,10 @@ find_lang (const char * const *langs_pointer, const char *gotlang, const char *l
 }
 
 /*parse all children and pick out the best language one*/
-static char *
+static xmlChar *
 get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
 {
-        char *current;
+        xmlChar *current;
         xmlNodePtr cur;
         const char * const *langs_pointer;
         const char  *gotlang = NULL; /*the highest language we got*/
@@ -234,12 +237,12 @@ get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
 
         /*find C the locale string*/
         for(cur = child->xmlChildrenNode; cur; cur = cur->next) {
-                char *lang;
+                xmlChar *lang;
                 if (cur->name == NULL ||
-                    g_strcasecmp (cur->name, name) != 0)
+                    g_ascii_strcasecmp ((const gchar *) cur->name, name) != 0)
                         continue;
 
-                lang = xmlGetProp (cur, "xml:lang");
+                lang = xmlGetProp (cur, (const xmlChar *) "xml:lang");
                 if (lang == NULL ||
                     lang[0] == '\0') {
                         if (lang != NULL)
@@ -250,7 +253,7 @@ get_i18n_string (xmlDocPtr doc, xmlNodePtr child, const char *name)
                                 xmlFree (current);
                         current = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
                 } else {
-                        const char *ll = find_lang (langs_pointer, gotlang, lang);
+                        const char *ll = find_lang (langs_pointer, gotlang, (const gchar *) lang);
                         xmlFree (lang);
                         if (ll != NULL) {
                                 if (current != NULL)
@@ -281,9 +284,9 @@ read_hints_from_file (const char *file, GList *hintlist)
 	}
 
         for (cur = root->xmlChildrenNode; cur; cur = cur->next) {
-                char *str;
+                xmlChar *str;
                 if (cur->name == NULL ||
-                    g_strcasecmp (cur->name, "Hint") != 0)
+                    g_ascii_strcasecmp ((const gchar *) cur->name, "Hint") != 0)
                         continue;
                 str = get_i18n_string (doc, cur, "Content");
                 if (str != NULL) {
@@ -341,7 +344,7 @@ gnome_hint_new (const gchar *hintfile,
                   "width", (double) gdk_pixbuf_get_width(im),
                   "height", (double) gdk_pixbuf_get_height(im),
                   NULL);
-       	gdk_pixbuf_unref(im);
+       	g_object_unref(im);
   	}
   }
   if (logo_image){
@@ -354,7 +357,7 @@ gnome_hint_new (const gchar *hintfile,
                   "width", (double) gdk_pixbuf_get_width(im),
                   "height", (double) gdk_pixbuf_get_height(im),
                   NULL);
-       	gdk_pixbuf_unref(im);
+       	g_object_unref(im);
   	}
   }
   if (!title) title="Gnome Hints";

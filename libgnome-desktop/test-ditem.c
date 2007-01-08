@@ -1,5 +1,6 @@
 /* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <config.h>
+#include <string.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 

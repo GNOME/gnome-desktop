@@ -16,9 +16,8 @@ PKG_NAME="GNOME Core Desktop"
 
 
 which gnome-autogen.sh || {
-    echo "You need to install gnome-common from the GNOME CVS"
+    echo "You need to install gnome-common from the GNOME SVN"
     exit 1
 }
 
-REQUIRED_AUTOMAKE_VERSION=1.7
-. gnome-autogen.sh
+REQUIRED_AUTOMAKE_VERSION=1.9 . gnome-autogen.sh
