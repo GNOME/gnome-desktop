@@ -3129,7 +3129,6 @@ gnome_desktop_item_set_launch_time (GnomeDesktopItem *item,
 				    guint32           timestamp)
 {
 	g_return_if_fail (item != NULL);
-	g_return_if_fail (timestamp > 0);
 
 	item->launch_time = timestamp;
 }

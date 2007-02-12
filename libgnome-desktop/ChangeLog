@@ -1,3 +1,10 @@
+2007-02-12  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-desktop-item.c: (gnome_desktop_item_set_launch_time):
+	don't check the value of timestamp since gtk_get_current_event_time()
+	can return 0.
+	Fix bug #397185. Thanks to Padraig O'Briain <padraig.obriain@sun.com>
+
 ==================== 2.17.91 ====================
 
 ==================== 2.17.90 ====================
