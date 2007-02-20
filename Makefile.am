@@ -10,6 +10,7 @@ SUBDIRS =			\
 	man
 
 EXTRA_DIST =			\
+	MAINTAINERS		\
 	gnome-version.xml.in.in	\
 	gnome-version.xml	\
 	gnome-desktop.spec.in	\
