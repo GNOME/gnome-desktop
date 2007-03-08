@@ -230,6 +230,7 @@ static const gchar *contributors[] = {
 	"Eric Nielson",
 	"Bastien Nocera",
 	"Martin Norb\xc3\xa4" "ck",
+	"Daniel Nylander",
 	"Eskil Olsen",
 	"Jimmy Olsen",
 	"David Orme",
