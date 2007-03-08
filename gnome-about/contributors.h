@@ -294,6 +294,7 @@ static const gchar *contributors[] = {
 	"David F. Skoll",
 	"Nuke Skyjumper",
 	"Josh Sled",
+	"Djihed Afifi",
 	"John Slee",
 	"Garrett Smith",
 	"Suzanna Smith",
