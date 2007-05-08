@@ -465,7 +465,7 @@ static const gchar *contributors[] = {
 	"Garrett Smith",
 	"Suzanna Smith",
 	"Andrew Sobala",
-	N_("The Squeaky Rubber Gnome"),
+	N_("The Squeaky Rubber GNOME"),
 	"Shreyas Srinivasan",
 	"Maciej Stachowiak",
 	"Stalyn",
