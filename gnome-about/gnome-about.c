@@ -282,9 +282,9 @@ animate_text (gpointer data)
 	gnome_canvas_item_move (ani_data->item->parent, 0.0, -10.0);
 
 	if (ani_data->item->parent->y1 <= 120.0) {
-		g_timeout_add (5 * 1000,
-			       display_introduction_message,
-			       ani_data->canvas);
+		g_timeout_add_seconds (5,
+				       display_introduction_message,
+				       ani_data->canvas);
 		g_free (ani_data);
 		return FALSE;
 	}
