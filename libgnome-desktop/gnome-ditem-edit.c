@@ -99,10 +99,6 @@ static void gnome_ditem_edit_changed      (GnomeDItemEdit      *dee);
 static void gnome_ditem_edit_icon_changed (GnomeDItemEdit      *dee);
 static void gnome_ditem_edit_name_changed (GnomeDItemEdit      *dee);
 
-static void destroy_tooltip (GtkObject *object);
-static void set_tooltip (GnomeDItemEdit *dee, GtkWidget *widget,
-			 const gchar *description);
-
 enum {
         CHANGED,
         ICON_CHANGED,
@@ -702,6 +698,7 @@ make_advanced_page (GnomeDItemEdit *dee)
 	GtkWidget *entry;
 	GtkWidget *button;
 	GtkWidget *box;
+	char      *markup;
 
 	vbox = gtk_vbox_new (FALSE, 6);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
@@ -760,21 +757,27 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_widget_set_size_request (entry, 30, -1);
 	dee->_priv->transl_lang_entry = entry;
 
-	set_tooltip (dee, GTK_WIDGET(entry), _("Language"));
+	markup = g_markup_escape_text (_("Language"), -1);
+	g_object_set (entry, "tooltip-markup", markup, NULL);
+	g_free (markup);
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_name_entry = entry;
 
-	set_tooltip (dee, GTK_WIDGET(entry), _("Name"));
+	markup = g_markup_escape_text (_("Name"), -1);
+	g_object_set (entry, "tooltip-markup", markup, NULL);
+	g_free (markup);
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_generic_name_entry = entry;
 
-	set_tooltip (dee, GTK_WIDGET (entry), _("Generic name"));
+	markup = g_markup_escape_text (_("Generic name"), -1);
+	g_object_set (entry, "tooltip-markup", markup, NULL);
+	g_free (markup);
 
 	/* FIXME: transl_icon_entry, locale specific icons */
 
@@ -783,22 +786,29 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_comment_entry = entry;
 
-	set_tooltip (dee, GTK_WIDGET(entry), _("Comment"));
+	markup = g_markup_escape_text (_("Comment"), -1);
+	g_object_set (entry, "tooltip-markup", markup, NULL);
+	g_free (markup);
 
 	button = gtk_button_new_with_mnemonic (_("_Add/Set"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_add), dee);
   
-	set_tooltip (dee, GTK_WIDGET(button),
-		    _("Add or Set Name/Comment Translations"));
+	markup = g_markup_escape_text (_("Add or Set Name/Comment Translations"),
+				       -1);
+	g_object_set (button, "tooltip-markup", markup, NULL);
+	g_free (markup);
 
 	button = gtk_button_new_with_mnemonic (_("Re_move"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_remove), dee);
-	set_tooltip (dee, GTK_WIDGET(button),
-		    _("Remove Name/Comment Translation"));
+
+	markup = g_markup_escape_text (_("Remove Name/Comment Translation"),
+				       -1);
+	g_object_set (button, "tooltip-markup", markup, NULL);
+	g_free (markup);
   
 	return vbox;
 }
@@ -864,8 +874,6 @@ gnome_ditem_edit_destroy (GtkObject *object)
 	if (de->_priv->ditem != NULL)
 		gnome_desktop_item_unref (de->_priv->ditem);
 	de->_priv->ditem = NULL; /* just for sanity */
-
-	destroy_tooltip (object);
 
 	GTK_OBJECT_CLASS (gnome_ditem_edit_parent_class)->destroy (object);
 }
@@ -1523,46 +1531,6 @@ gnome_ditem_edit_set_directory_only (GnomeDItemEdit *dee,
 			setup_option (dee, ALL_TYPES, type);
 		}
 	}
-}
-
-static void
-destroy_tooltip (GtkObject *object)
-{
-	GtkTooltips *tooltips;
-
-	tooltips = g_object_get_data (G_OBJECT (object), "tooltips");
-	if (tooltips) {
-		g_object_unref (tooltips);
-		g_object_set_data (G_OBJECT (object), "tooltips", NULL);
-	}
-}
-
-/**
- * set_tooltip
- * @dee: #GnomeDItemEdit object to work with
- * @widget: the GtkWidget you wish to associate the tip with.
- * @description: a string containing the tip itself.
- *
- * Description : Set @description as the tooltip for the @widget.
- *		 Creates the GtkTooltips structure if not already present.
- */
-static void
-set_tooltip (GnomeDItemEdit *dee, GtkWidget *widget, const gchar *description)
-{
-        GtkTooltips *tooltips;
-
-	tooltips = g_object_get_data (G_OBJECT (dee), "tooltips");
-
-	/* create if not already present */
-	if (!tooltips) {
-		tooltips = gtk_tooltips_new ();
-		g_return_if_fail (tooltips != NULL);
-		g_object_ref (tooltips);
-		gtk_object_sink (GTK_OBJECT (tooltips));
-		g_object_set_data (G_OBJECT (dee), "tooltips", tooltips);
-	}
-
-        gtk_tooltips_set_tip (tooltips, widget, description, NULL);
 }
 
 #endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
