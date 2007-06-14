@@ -1545,7 +1545,8 @@ make_spawn_environment_for_sn_context (SnLauncherContext *sn_context,
  * timeouts. The reason our timeout is dumb is that we don't monitor
  * the sequence (don't use an SnMonitorContext)
  */
-#define STARTUP_TIMEOUT_LENGTH (30 /* seconds */ * 1000)
+#define STARTUP_TIMEOUT_LENGTH_SEC 30 /* seconds */
+#define STARTUP_TIMEOUT_LENGTH (STARTUP_TIMEOUT_LENGTH_SEC * 1000)
 
 typedef struct
 {
@@ -1610,12 +1611,16 @@ startup_timeout (void *data)
 		tmp = next;
 	}
 
+	/* we'll use seconds for the timeout */
+	if (min_timeout < 1000)
+		min_timeout = 1000;
+
 	if (std->contexts == NULL) {
 		std->timeout_id = 0;
 	} else {
-		std->timeout_id = g_timeout_add (min_timeout,
-						 startup_timeout,
-						 std);
+		std->timeout_id = g_timeout_add_seconds (min_timeout / 1000,
+							 startup_timeout,
+							 std);
 	}
 
 	/* always remove this one, but we may have reinstalled another one. */
@@ -1643,9 +1648,10 @@ add_startup_timeout (GdkScreen         *screen,
 	data->contexts = g_slist_prepend (data->contexts, sn_context);
 	
 	if (data->timeout_id == 0) {
-		data->timeout_id = g_timeout_add (STARTUP_TIMEOUT_LENGTH,
-						  startup_timeout,
-						  data);		
+		data->timeout_id = g_timeout_add_seconds (
+						STARTUP_TIMEOUT_LENGTH_SEC,
+						startup_timeout,
+						data);		
 	}
 }
 #endif /* HAVE_STARTUP_NOTIFICATION */
