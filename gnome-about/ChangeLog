@@ -1,5 +1,25 @@
 2007-06-30  Vincent Untz  <vuntz@gnome.org>
 
+	Implement downloading list of foundation members from api.gnome.org,
+	but we're waiting for an api.gnome.org page for now.
+
+	* contributors.c: (contributors_read_from_file): don't always read
+	contributors.list, but read the file passed as argument, only accept
+	files with a known format: first line should be "# gnome-about
+	contributors - format 1". This should help in case we get a wrong
+	file.
+	(contributors_ensure_dir_exists): new, to make sure
+	~/.gnome2/gnome-about/ exists
+	(contributors_async_xfer_progress): new, include the online
+	contributor list after download
+	(contributors_online_read): implement, but deactivated for now. We
+	check if the cached file is not older than 2 weeks, and if it is (or
+	if it doesn't exist), download the list of foundation members
+	(contributors_free): updated
+	* contributors.list: add a format line
+
+2007-06-30  Vincent Untz  <vuntz@gnome.org>
+
 	* Makefile.am: add new files
 	* contributors.list: the list of contributors is now data
 	* contributors.[ch]: new file, to handle everything related to the
