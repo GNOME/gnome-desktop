@@ -13,6 +13,7 @@ bin_PROGRAMS = gnome-about
 
 gnome_about_SOURCES =		\
 	gnome-about.c		\
+	contributors.c		\
 	contributors.h
 
 @INTLTOOL_DESKTOP_RULE@
@@ -22,7 +23,7 @@ desktop_in_files = gnome-about.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 aboutdir = $(datadir)/gnome-about
-about_DATA = gnome-64.png
+about_DATA = gnome-64.png contributors.list
 
 EXTRA_DIST = $(about_DATA)
 

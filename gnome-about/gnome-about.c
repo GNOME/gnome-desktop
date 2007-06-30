@@ -57,7 +57,6 @@ static char             **introduction_messages = NULL;
 static GnomeCanvasItem   *subheader = NULL;
 static gdouble            version_info_height = 0.0;
 static gint               contrib_i = 0;
-static gint              *contrib_order;
 
 /* funky animations */
 typedef struct {
@@ -136,11 +135,7 @@ canvas_button_press_event (GtkWidget      *widget,
 	if (event->y <= 80.0)
 		return FALSE;
 
-	if (contrib_i >= G_N_ELEMENTS (contributors))
-		contrib_i = 0;
-
-	text = g_strdup_printf ("<b>%s</b>", 
-				contributors[contrib_order[contrib_i]]);
+	text = g_strdup_printf ("<b>%s</b>", contributors_get (contrib_i));
 	contrib_i++;
 
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (user_data),
@@ -164,9 +159,6 @@ display_contributors (gpointer data)
 	static GnomeCanvasItem *contributor_rect = NULL;
 	static GnomeCanvasItem *contributor_text = NULL;
 
-	if (contrib_i >= G_N_ELEMENTS (contributors))
-		contrib_i = 0;
-
 	if (!contributor) {
 		gchar *text;
 
@@ -181,8 +173,7 @@ display_contributors (gpointer data)
 					       "fill_color", "White",
 					       NULL);
 
-		text = g_strdup_printf ("<b>%s</b>", 
-					contributors[contrib_order[contrib_i]]);
+		text = g_strdup_printf ("<b>%s</b>", contributors_get (contrib_i));
 		contributor_text =
 			gnome_canvas_item_new (GNOME_CANVAS_GROUP (contributor),
 					       gnome_canvas_text_get_type (),
@@ -202,8 +193,7 @@ display_contributors (gpointer data)
 	} else {
 		gchar *text;
 
-		text = g_strdup_printf ("<b>%s</b>", 
-					contributors[contrib_order[contrib_i]]);
+		text = g_strdup_printf ("<b>%s</b>", contributors_get (contrib_i));
 		gnome_canvas_item_set (contributor_text,
 				       "markup", text,
 				       "fill_color_rgba", 0xffffffff,
@@ -1220,36 +1210,6 @@ create_about_dialog (void)
 	return dialog;
 }
 
-static void
-generate_randomness (void)
-{
-	gint i;
-	gint random_number;
-	gint tmp;
-	gint num_contributors;
-	GRand *generator;
-
-	generator = g_rand_new ();
-
-	num_contributors = G_N_ELEMENTS (contributors);
-
-	contrib_order = g_malloc (num_contributors * sizeof (gint));
-
-	for (i = 0; i < num_contributors; i++) {
-		contrib_order[i]=i;
-	}
-
-	for (i = 0; i < num_contributors; i++) {
-		random_number = g_rand_int_range (generator, i, 
-						  num_contributors);
-		tmp = contrib_order[i];
-		contrib_order[i] = contrib_order[random_number];
-		contrib_order[random_number] = tmp;
-	}
-
-	g_rand_free (generator);
-}
-		
 static gboolean gnome_version = FALSE;
 
 static const GOptionEntry options[] = {
@@ -1291,12 +1251,13 @@ main (int argc, char **argv)
 	if (!dialog)
 		return -1;
 
-	generate_randomness ();
-
 	gtk_widget_show_all (dialog);
+
+	contributors_init ();
 
 	gtk_main ();
 
+	contributors_free ();
 	g_object_unref (program);
 
 	return 0;

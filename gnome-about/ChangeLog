@@ -1,3 +1,16 @@
+2007-06-30  Vincent Untz  <vuntz@gnome.org>
+
+	* Makefile.am: add new files
+	* contributors.list: the list of contributors is now data
+	* contributors.[ch]: new file, to handle everything related to the
+	list of contributors. We don't download the list of foundation members
+	yet.
+	* gnome-about.c: (canvas_button_press_event): use contributors_get()
+	(display_contributors): ditto
+	(generate_randomness): moved to contributors.c
+	(main): init and free contributors stuff
+	Fix bug #415516
+
 ==================== 2.19.4 ====================
 
 2007-06-14  Vincent Untz  <vuntz@gnome.org>
