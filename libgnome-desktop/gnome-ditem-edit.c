@@ -698,7 +698,6 @@ make_advanced_page (GnomeDItemEdit *dee)
 	GtkWidget *entry;
 	GtkWidget *button;
 	GtkWidget *box;
-	char      *markup;
 
 	vbox = gtk_vbox_new (FALSE, 6);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
@@ -756,28 +755,19 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 30, -1);
 	dee->_priv->transl_lang_entry = entry;
-
-	markup = g_markup_escape_text (_("Language"), -1);
-	g_object_set (entry, "tooltip-markup", markup, NULL);
-	g_free (markup);
+	gtk_widget_set_tooltip_text (entry, _("Language"));
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_name_entry = entry;
-
-	markup = g_markup_escape_text (_("Name"), -1);
-	g_object_set (entry, "tooltip-markup", markup, NULL);
-	g_free (markup);
+	gtk_widget_set_tooltip_text (entry, _("Name"));
 
 	entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_generic_name_entry = entry;
-
-	markup = g_markup_escape_text (_("Generic name"), -1);
-	g_object_set (entry, "tooltip-markup", markup, NULL);
-	g_free (markup);
+	gtk_widget_set_tooltip_text (entry, _("Generic name"));
 
 	/* FIXME: transl_icon_entry, locale specific icons */
 
@@ -785,30 +775,21 @@ make_advanced_page (GnomeDItemEdit *dee)
 	gtk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (entry, 80, -1);
 	dee->_priv->transl_comment_entry = entry;
-
-	markup = g_markup_escape_text (_("Comment"), -1);
-	g_object_set (entry, "tooltip-markup", markup, NULL);
-	g_free (markup);
+	gtk_widget_set_tooltip_text (entry, _("Comment"));
 
 	button = gtk_button_new_with_mnemonic (_("_Add/Set"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_add), dee);
+	gtk_widget_set_tooltip_text (button,
+				     _("Add or Set Name/Comment Translations"));
   
-	markup = g_markup_escape_text (_("Add or Set Name/Comment Translations"),
-				       -1);
-	g_object_set (button, "tooltip-markup", markup, NULL);
-	g_free (markup);
-
 	button = gtk_button_new_with_mnemonic (_("Re_move"));
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (translations_remove), dee);
-
-	markup = g_markup_escape_text (_("Remove Name/Comment Translation"),
-				       -1);
-	g_object_set (button, "tooltip-markup", markup, NULL);
-	g_free (markup);
+	gtk_widget_set_tooltip_text (button,
+				     _("Remove Name/Comment Translation"));
   
 	return vbox;
 }
