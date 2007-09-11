@@ -1,3 +1,19 @@
+2007-09-11  Vincent Untz  <vuntz@gnome.org>
+
+	Remove code to download the list of foundation members. This will be
+	in a file that is created during make dist.
+
+	* contributors.c: rename some variables.
+	(generate_randomness): update for new names
+	(contributors_get): ditto
+	(contributors_read): renamed from contributors_static_read(), make
+	more generic
+	(contributors_free): updated
+	(contributors_init): updated
+	(contributors_ensure_dir_exists): kill
+	(contributors_async_xfer_progress): kill
+	(contributors_online_read): kill
+
 ==================== 2.19.92 ====================
 
 ==================== 2.19.90 ====================
