@@ -13,8 +13,6 @@ EXTRA_DIST =			\
 	MAINTAINERS		\
 	gnome-version.xml.in.in	\
 	gnome-version.xml	\
-	gnome-desktop.spec.in	\
-	gnome-desktop.spec	\
 	COPYING-DOCS		\
 	HACKING			\
 	intltool-extract.in	\
