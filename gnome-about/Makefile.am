@@ -23,7 +23,7 @@ desktop_in_files = gnome-about.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 aboutdir = $(datadir)/gnome-about
-about_DATA = gnome-64.png contributors.list
+about_DATA = gnome-64.png contributors.list foundation-members.list
 
 EXTRA_DIST = $(about_DATA)
 
