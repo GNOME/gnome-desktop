@@ -30,3 +30,6 @@ EXTRA_DIST = $(about_DATA)
 SUBDIRS = headers
 
 CLEANFILES = gnome-about.desktop
+
+check:
+	test -s foundation-members.list
