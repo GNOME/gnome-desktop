@@ -1722,7 +1722,7 @@ make_environment_for_screen (GdkScreen  *screen,
 	g_assert (i == env_len);
 
 	g_free (display_name);
-	g_free (freeme);
+	g_strfreev (freeme);
 
 	return retval;
 }

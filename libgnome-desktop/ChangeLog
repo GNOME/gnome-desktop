@@ -1,3 +1,9 @@
+2007-09-25  Glynn Foster  <glynn.foster@sun.com>
+
+	* gnome-desktop-item.c: (make_environment_for_screen): Use 
+        g_strfreev () to free the vector instead of g_free () so we
+        don't leak.
+
 ==================== 2.20.0 ====================
 
 ==================== 2.19.92 ====================
