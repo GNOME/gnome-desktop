@@ -32,4 +32,4 @@ SUBDIRS = headers
 CLEANFILES = gnome-about.desktop
 
 check:
-	test -s foundation-members.list
+	test -s $(top_srcdir)/gnome-about/foundation-members.list
