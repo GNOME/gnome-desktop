@@ -1,20 +1,16 @@
-INCLUDES =		 					\
-	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED_CFLAGS)				\
-	$(GNOME_ABOUT_CFLAGS)					\
-	$(DISABLE_DEPRECATED)					\
-	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps\""		\
-	-DDATADIR=\"$(datadir)/gnome-about\"
+bin_SCRIPTS = gnome-about
 
-LDADD = $(GNOME_ABOUT_LIBS)
-
-bin_PROGRAMS = gnome-about
-
-gnome_about_SOURCES =		\
-	gnome-about.c		\
-	contributors.c		\
-	contributors.h
+gnome-about: gnome-about.in Makefile
+	sed								\
+		-e s!\@PYTHON\@!@PYTHON@!				\
+		-e s!\@GETTEXT_PACKAGE\@!@GETTEXT_PACKAGE@!		\
+		-e s!\@LOCALEDIR\@!$(datadir)/locale!			\
+		-e s!\@DATADIR\@!$(datadir)/gnome-about!		\
+		-e s!\@ICONDIR\@!$(datadir)/pixmaps!			\
+		-e s!\@PACKAGE_NAME\@!$(PACKAGE_NAME)!			\
+		-e s!\@PACKAGE_VERSION\@!$(PACKAGE_VERSION)!		\
+		< $< > $@
+	chmod a+x $@
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -25,11 +21,11 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 aboutdir = $(datadir)/gnome-about
 about_DATA = gnome-64.png contributors.list foundation-members.list
 
-EXTRA_DIST = $(about_DATA)
+EXTRA_DIST = $(about_DATA) gnome-about.in
 
 SUBDIRS = headers
 
-CLEANFILES = gnome-about.desktop
+CLEANFILES = gnome-about.desktop gnome-about
 
 check:
 	test -s $(top_srcdir)/gnome-about/foundation-members.list
