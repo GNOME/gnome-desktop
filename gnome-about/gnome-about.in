@@ -826,7 +826,7 @@ class GnomeAbout (gtk.Dialog):
         self.create_ui ()
 
         self.set_default_response (gtk.RESPONSE_CLOSE)
-        self.set_position (gtk.WIN_POS_CENTER_ALWAYS)
+        self.set_position (gtk.WIN_POS_CENTER)
         map (lambda prop: self.set_property (prop[0], prop[1]),
              [("allow-grow", False), ("allow-shrink", False)])
         self.connect ("delete-event", gtk.main_quit)
