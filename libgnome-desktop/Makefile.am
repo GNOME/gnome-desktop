@@ -9,6 +9,7 @@ INCLUDES =							\
 	-DDATADIR=\""$(pkgdatadir)"\"				\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED)					\
+	$(XLIB_CFLAGS)						\
 	$(GNOME_DESKTOP_CFLAGS)
 
 lib_LTLIBRARIES = libgnome-desktop-2.la
@@ -21,7 +22,8 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-hint.c		\
 	gnome-bg.c
 
-libgnome_desktop_2_la_LIBADD = \
+libgnome_desktop_2_la_LIBADD =	\
+	$(XLIB_LIBS)		\
 	$(GNOME_DESKTOP_LIBS)
 
 libgnome_desktop_2_la_LDFLAGS = \
@@ -33,6 +35,7 @@ test_ditem_SOURCES = \
 
 test_ditem_LDADD = \
 	libgnome-desktop-2.la		\
+	$(XLIB_LIBS)			\
 	$(GNOME_DESKTOP_LIBS)
 
 test_hint_SOURCES = \
@@ -40,12 +43,14 @@ test_hint_SOURCES = \
 
 test_hint_LDADD = \
         libgnome-desktop-2.la           \
+	$(XLIB_LIBS)			\
         $(GNOME_DESKTOP_LIBS)
 
 test_ditem_edit_SOURCES = test-ditem-edit.c
 
 test_ditem_edit_LDADD =		\
 	libgnome-desktop-2.la	\
+	$(XLIB_LIBS)		\
 	$(GNOME_DESKTOP_LIBS)
 
 pkgconfigdir = $(libdir)/pkgconfig
