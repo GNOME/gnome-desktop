@@ -42,6 +42,9 @@ import os, sys, random, time, gettext
 
 import xml.dom.minidom
 
+DESCRIPTION_DELAY = 10000
+CONTRIBUTOR_DELAY = 2500
+
 PACKAGE         = "@PACKAGE_NAME@"
 VERSION         = "@PACKAGE_VERSION@"
 GETTEXT_PACKAGE = "@GETTEXT_PACKAGE@"
@@ -877,7 +880,8 @@ class GnomeAbout (gtk.Dialog):
         main_box.pack_start (welcome_label)
 
         descriptions_label = VertAnimatedLabel (self.description_messages,
-                                                300, 120, 8000, "%s")
+                                                300, 120,
+                                                DESCRIPTION_DELAY, "%s")
         welcome_label.connect ("button-press-event",
                                descriptions_label.on_button_press)
         box = gtk.EventBox ()
@@ -898,7 +902,7 @@ contributors list) correctly positionned and sized.'''
         self.header.realize ()
         width = self.header.width
         label = HorzAnimatedLabel (self.contributors, width,
-                                   30, 2500, "<b>%s</b>")
+                                   30, CONTRIBUTOR_DELAY, "<b>%s</b>")
         by_label.connect ("button-press-event", label.on_button_press)
         label.show_all ()
         alignment.add (label)
