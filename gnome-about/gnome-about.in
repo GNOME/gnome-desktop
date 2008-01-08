@@ -628,18 +628,20 @@ class HyperLink (WindowedLabel):
 gobject.type_register (HyperLink)
 
 class GnomeLogo (gtk.Widget):
+    '''Simple widget displaying a colored GNOME logo'''
+
+    _surface = None
+    _parent  = None
+    _file    = None
 
     def __init__ (self, parent, file):
+        '''Initialize object and do the initial painting'''
         gtk.Widget.__init__ (self)
 
-        self._surface = cairo.ImageSurface.create_from_png (file)
+        self._parent = parent
+        self._file = file
 
-        text_color = parent.get_style ().text[gtk.STATE_NORMAL]
-
-        cr = cairo.Context (self._surface)
-        cr.set_source_rgb (text_color.red, text_color.green, text_color.blue)
-        cr.set_operator (cairo.OPERATOR_ATOP)
-        cr.paint ()
+        self.paint_surface ()
 
         width = self._surface.get_width ()
         height = self._surface.get_height ()
@@ -647,12 +649,31 @@ class GnomeLogo (gtk.Widget):
 
         self.set_flags(self.flags() | gtk.NO_WINDOW)
 
+    def paint_surface (self):
+        '''Paint image and color overlay'''
+        self._surface = cairo.ImageSurface.create_from_png (self._file)
+
+        text_color = self._parent.get_style ().fg[gtk.STATE_NORMAL]
+
+        cr = cairo.Context (self._surface)
+        cr.set_source_rgb (float (text_color.red) / 65535,
+                           float (text_color.green) / 65535,
+                           float (text_color.blue) / 65535)
+        cr.set_operator (cairo.OPERATOR_ATOP)
+        cr.paint ()
+
     def do_expose_event (self, event):
+        '''Paint the saved surface to the widget context'''
         cr = self.window.cairo_create ()
 
         cr.set_operator (cairo.OPERATOR_OVER)
         cr.set_source_surface (self._surface, 10, 10)
         cr.paint ()
+
+    def do_style_set (self, *args):
+        '''Style changed, let's repaint image'''
+        self.paint_surface ()
+        self.queue_draw ()
 
 gobject.type_register (GnomeLogo)
 
