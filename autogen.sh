@@ -20,7 +20,7 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-if test "`which gnomevfs-copy`" = ""; then
+if test "`which gnomevfs-copy`" != ""; then
 	gnomevfs-copy http://api.gnome.org/gnome-about/foundation-members gnome-about/foundation-members.list
 fi
 touch gnome-about/foundation-members.list
