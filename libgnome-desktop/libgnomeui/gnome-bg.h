@@ -25,6 +25,10 @@
 #ifndef __GNOME_BG_H__
 #define __GNOME_BG_H__
 
+#ifndef GNOME_DESKTOP_USE_UNSTABLE_API
+#error    GnomeBG is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-bg.h
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

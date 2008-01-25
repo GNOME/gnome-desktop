@@ -28,6 +28,7 @@ Author: Soren Sandmann <sandmann@redhat.com>
 */
 
 #include <string.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 #include <gdk/gdkx.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
