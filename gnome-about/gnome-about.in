@@ -66,9 +66,9 @@ header_links = [
 ]
 
 translated_contributors = [
-	_("The Mysterious GEGL"),
-	_("The Squeaky Rubber GNOME"),
-	_("Wanda The GNOME Fish")
+    _("The Mysterious GEGL"),
+    _("The Squeaky Rubber GNOME"),
+    _("Wanda The GNOME Fish")
 ]
 
 default_link_color = gtk.gdk.Color (0, 0, 65535)
@@ -860,8 +860,8 @@ class GnomeAbout (gtk.Dialog):
         '''Output basic GNOME version information to console'''
         def print_info (info):
             infos_dict = {"name": info[0], "value": info[1]}
-	    # Translators: %(name)s and %(value)s should not be translated:
-	    # it's a way to identify a string, so just handle them like %s
+        # Translators: %(name)s and %(value)s should not be translated:
+        # it's a way to identify a string, so just handle them like %s
             print _("%(name)s: %(value)s") % infos_dict
         map (print_info, self.system_infos)
 
@@ -915,8 +915,8 @@ contributors list) correctly positionned and sized.'''
                 return False
             label = gtk.Label ()
             infos_dict = {"name": info[0], "value": info[1]}
-	    # Translators: %(name)s and %(value)s should not be translated:
-	    # it's a way to identify a string, so just handle them like %s
+        # Translators: %(name)s and %(value)s should not be translated:
+        # it's a way to identify a string, so just handle them like %s
             label.set_markup (_("<b>%(name)s:</b> %(value)s") % infos_dict)
             label.set_selectable (True)
             label.connect ("focus-out-event",
@@ -1012,7 +1012,7 @@ contributors list) correctly positionned and sized.'''
 
 if __name__ == "__main__":
     parser = OptionParser (
-    		option_list = [
+            option_list = [
                     make_option ("--gnome-version",
                                  action="store_true",
                                  dest="gnome_version",
