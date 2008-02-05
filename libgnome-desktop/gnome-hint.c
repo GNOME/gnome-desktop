@@ -25,7 +25,7 @@
 #undef GTK_DISABLE_DEPRECATED
 
 #include <glib/gi18n-lib.h>
-#include <libgnome/libgnome.h>
+#include <libgnome/gnome-macros.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-hint.h>
 #include <gconf/gconf-client.h>

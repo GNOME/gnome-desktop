@@ -1,3 +1,11 @@
+2008-02-05  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-hint.c: don't include libgnome.h, since it includes
+	gnome-i18n.h, which includes bonobo-i18n.h, which will include gi18n.h
+	if there's not a defined macro. And it's a conflict with our
+	gi18n-lib.h include.
+	Fix bug #511905
+
 ==================== 2.21.90 ====================
 
 2008-01-25  Soren Sandmann  <sandmann@redhat.com>
