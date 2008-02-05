@@ -3797,13 +3797,13 @@ ditem_load (ReadBuf *rb,
 
 	encoding = get_encoding (rb);
 	if (encoding == ENCODING_UNKNOWN) {
-		readbuf_close (rb);
 		/* spec says, don't read this file */
 		g_set_error (error,
 			     GNOME_DESKTOP_ITEM_ERROR,
 			     GNOME_DESKTOP_ITEM_ERROR_UNKNOWN_ENCODING,
 			     _("Unknown encoding of: %s"),
 			     rb->uri);
+		readbuf_close (rb);
 		return NULL;
 	}
 
