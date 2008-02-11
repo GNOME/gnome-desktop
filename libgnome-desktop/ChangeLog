@@ -1,5 +1,13 @@
 2008-02-11  Vincent Untz  <vuntz@gnome.org>
 
+	Port GnomeBg to gio.
+
+	* gnome-bg.c: (get_original_size): use g_filename_from_uri()
+	(get_mtime): use GFileInfo
+	(read_slideshow_file): use g_file_load_contents()
+
+2008-02-11  Vincent Untz  <vuntz@gnome.org>
+
 	Port to gio. Fix bug #510870
 
 	* gnome-desktop-item.c: (readbuf_getc): straight gio port

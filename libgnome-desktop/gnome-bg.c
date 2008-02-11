@@ -28,17 +28,18 @@ Author: Soren Sandmann <sandmann@redhat.com>
 */
 
 #include <string.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-bg.h>
-#include <gdk/gdkx.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
-#include <libgnomeui/libgnomeui.h>
 #include <math.h>
+#include <stdarg.h>
+
+#include <gio/gio.h>
+
+#include <gdk/gdkx.h>
+#include <libgnomeui/libgnomeui.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-#include <gdk/gdkx.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
-#include <stdarg.h>
+
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnomeui/gnome-bg.h>
 
 typedef struct _SlideShow SlideShow;
 typedef struct _Slide Slide;
@@ -620,7 +621,7 @@ get_original_size (const char *uri,
 	gboolean result;
 
 	if (g_str_has_prefix (uri, "file:"))
-		filename = gnome_vfs_get_local_path_from_uri (uri);
+		filename = g_filename_from_uri (uri, NULL, NULL);
 	else 
 		filename = g_strdup (uri);
 	
@@ -1065,23 +1066,21 @@ ensure_timeout (GnomeBG *bg,
 static time_t
 get_mtime (const char *uri)
 {
-        time_t mtime;
-        GnomeVFSFileInfo *info;
+	GFile     *file;
+	GFileInfo *info;
+	time_t     mtime;
 	
 	mtime = (time_t)-1;
 	
 	if (uri) {
-		GnomeVFSResult vfs_res;
-		
-		info = gnome_vfs_file_info_new ();
-		
-		vfs_res = gnome_vfs_get_file_info (
-			uri, info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-		
-		if (vfs_res == GNOME_VFS_OK)
-			mtime = info->mtime;
-		
-		gnome_vfs_file_info_unref (info);
+		file = g_file_new_for_uri (uri);
+		info = g_file_query_info (file, G_FILE_ATTRIBUTE_TIME_MODIFIED,
+					  G_FILE_QUERY_INFO_NONE, NULL, NULL);
+		if (info)
+			mtime = g_file_info_get_attribute_uint64 (info,
+								  G_FILE_ATTRIBUTE_TIME_MODIFIED);
+		g_object_unref (info);
+		g_object_unref (file);
 	}
 	
 	return mtime;
@@ -1718,14 +1717,22 @@ read_slideshow_file (const char *uri,
 		NULL, /* error */
 	};
 	
+	GFile *file;
 	char *contents = NULL;
-	gssize len;
+	gsize len;
 	SlideShow *show = NULL;
 	GMarkupParseContext *context = NULL;
 	time_t t;
 
-	if (!uri || (gnome_vfs_read_entire_file (uri, &len, &contents) != GNOME_VFS_OK))
+	if (!uri)
 		return NULL;
+
+	file = g_file_new_for_uri (uri);
+	if (!g_file_load_contents (file, NULL, &contents, &len, NULL, NULL)) {
+		g_object_unref (file);
+		return NULL;
+	}
+	g_object_unref (file);
 	
 	show = g_new0 (SlideShow, 1);
 	threadsafe_localtime ((time_t)0, &show->start_tm);
