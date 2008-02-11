@@ -22,7 +22,6 @@
 #include <libgnomeui/libgnomeui.h>
 
 #include <libgnome/gnome-desktop-item.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 /*
 #include <libgnomeui/gnome-ditem-edit.h>
 */
@@ -99,7 +98,7 @@ test_ditem (const char *file)
 	strcat (path, "/foo.desktop");
 
 	g_print ("Saving to foo.desktop\n");
-	uri = gnome_vfs_get_uri_from_local_path (path);
+	uri = g_filename_to_uri (path, NULL, NULL);
 	g_print ("URI: %s\n", uri);
 	gnome_desktop_item_save (ditem, uri, FALSE, NULL);
 	g_free (uri);

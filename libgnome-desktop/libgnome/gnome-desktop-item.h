@@ -186,8 +186,7 @@ int                     gnome_desktop_item_launch_on_screen  (const GnomeDesktop
 							      int                           workspace,
 							      GError                      **error);
 
-/* A list of files or urls dropped onto an icon This is the output
- * of gnome_vfs_uri_list_parse */
+/* A list of files or urls dropped onto an icon */
 int                     gnome_desktop_item_drop_uri_list     (const GnomeDesktopItem     *item,
 							      const char                 *uri_list,
 							      GnomeDesktopItemLaunchFlags flags,

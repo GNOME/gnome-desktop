@@ -1,3 +1,39 @@
+2008-02-11  Vincent Untz  <vuntz@gnome.org>
+
+	Port to gio. Fix bug #510870
+
+	* gnome-desktop-item.c: (readbuf_getc): straight gio port
+	(readbuf_open): ditto, we keep a GFileInputStream instead of a handle
+	(readbuf_new_from_string): updated
+	(readbuf_rewind): gio port, without any difficulty
+	(readbuf_close): updated
+	(read_sort_order): easy
+	(make_fake_directory): ditto
+	(gnome_desktop_item_new_from_file): I love gio
+	(get_dirname): killed
+	(gnome_desktop_item_new_from_uri): gio is my friend
+	(gnome_desktop_item_new_from_gfile): new, nothing hard here
+	(make_args): we use GFile instead of GnomeVFSURI now
+	(free_args): updated
+	(convert_uri): GFile makes this easy
+	(gnome_desktop_item_launch_on_screen_with_env): no need to make the
+	uri canonical
+	(gnome_desktop_item_drop_uri_list): just call
+	gnome_desktop_item_drop_uri_list_with_env()
+	(gnome_desktop_item_drop_uri_list_with_env): use
+	g_uri_list_extract_uris() instead of gnome-vfs things
+	(gnome_desktop_item_get_file_status): easy gio update
+	(gnome_desktop_item_set_location): ditto
+	(gnome_desktop_item_set_location_file): ditto
+	(gnome_desktop_item_set_location_gfile): new, easy
+	(stream_printf): renamed from vfs_printf, GOutputStream is my friend
+	(dump_section): updated
+	(ditem_save): easy gio update
+	* gnome-ditem-edit.c: (gnome_ditem_edit_sync_ditem): get rid of
+	gnome-vfs, it wasn't needed anyway
+	* libgnome/gnome-desktop-item.h: get rid of a comment about gnome-vfs
+	* test-ditem.c: (test_ditem): get rid of gnome-vfs
+
 2008-02-05  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-hint.c: don't include libgnome.h, since it includes
