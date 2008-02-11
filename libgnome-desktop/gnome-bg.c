@@ -1755,11 +1755,13 @@ read_slideshow_file (const char *uri,
 	
 	g_markup_parse_context_free (context);
 
-	t = mktime (&show->start_tm);
+	if (show) {
+		t = mktime (&show->start_tm);
 
-	show->start_time = (double)t;
-		
-	dump_bg (show);
+		show->start_time = (double)t;
+			
+		dump_bg (show);
+	}
 
 	g_free (contents);
 	
