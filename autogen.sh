@@ -20,9 +20,10 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-if test "`which gnomevfs-copy`" != ""; then
-	gnomevfs-copy http://api.gnome.org/gnome-about/foundation-members gnome-about/foundation-members.list
+if test "`which gvfs-copy`" != ""; then
+	gvfs-copy http://api.gnome.org/gnome-about/foundation-members gnome-about/foundation-members.list
+else
+	touch gnome-about/foundation-members.list
 fi
-touch gnome-about/foundation-members.list
 
 REQUIRED_AUTOMAKE_VERSION=1.9 . gnome-autogen.sh
