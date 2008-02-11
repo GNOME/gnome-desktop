@@ -1017,12 +1017,20 @@ if __name__ == "__main__":
                                  action="store_true",
                                  dest="gnome_version",
                                  help=_("Display information on this GNOME version")),
+		    # FIXME: remove this when we can get all the default
+		    # options
+                    make_option ("--version",
+                                 action="store_true",
+                                 dest="version",
+                                 help=VERSION),
                 ])
     #FIXME: http://bugzilla.gnome.org/show_bug.cgi?id=496278
     parser.parse_args (sys.argv)
     if parser.values.gnome_version:
         about = GnomeAbout (ui = False)
         about.gnome_version ()
+    elif parser.values.version:
+        print "GNOME gnome-about %s" % (VERSION)
     else:
         about = GnomeAbout ()
         about.show_all ()
