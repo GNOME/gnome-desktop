@@ -1,3 +1,13 @@
+2008-02-13  Soren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_set_uri): If we are passed a filename,
+	first convert it to a uri since GIO doesn't support paths as
+	uris. 
+
+	* gnome-bg.c (handle_text): Convert the filenames to uris.
+
+	Fix bug 516269, reported by Sebastian Bacher.
+	
 2008-02-13  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-bg.c: (get_mtime): don't unref NULL

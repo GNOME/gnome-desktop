@@ -238,7 +238,12 @@ void
 gnome_bg_set_uri (GnomeBG     *bg,
 		  const char  *uri)
 {
+	char *free_me = NULL;
+	
 	g_return_if_fail (bg != NULL);
+	
+	if (g_path_is_absolute (uri))
+		uri = free_me = g_filename_to_uri (uri, NULL, NULL);
 	
 	if (is_different (bg, uri)) {
 		char *tmp = g_strdup (uri);
@@ -253,6 +258,8 @@ gnome_bg_set_uri (GnomeBG     *bg,
 		
 		emit_changed (bg);
 	}
+
+	g_free (free_me);
 }
 
 static void
@@ -1603,6 +1610,21 @@ parse_int (const char *text)
 	return strtol (text, NULL, 0);
 }
 
+static char *
+make_uri (char *file)
+{
+	if (g_path_is_absolute (file)) {
+		char *result = g_filename_to_uri (file, NULL, NULL);
+
+		g_free (file);
+
+		return result;
+	}
+	else {
+		return file;
+	}
+}
+
 static void
 handle_text (GMarkupParseContext *context,
 	     const gchar         *text,
@@ -1639,9 +1661,11 @@ handle_text (GMarkupParseContext *context,
 	else if (stack_is (parser, "file", "static", "background", NULL) ||
 		 stack_is (parser, "from", "transition", "background", NULL)) {
 		slide->file1 = g_strdup (text);
+		slide->file1 = make_uri (slide->file1);
 	}
 	else if (stack_is (parser, "to", "transition", "background", NULL)) {
 		slide->file2 = g_strdup (text);
+		slide->file2 = make_uri (slide->file2);
 	}
 }
 
