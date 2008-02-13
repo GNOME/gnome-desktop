@@ -554,7 +554,7 @@ class HyperLink (WindowedLabel):
         try:
             gnome.url_show (self.url)
         except Exception, e:
-            print '''Warning: could not open "%s": %s''' % self.url, e
+            print '''Warning: could not open "%s": %s''' % (self.url, e)
 
     def copy_url (self, *args):
         '''Copy URL to Clipboard'''
