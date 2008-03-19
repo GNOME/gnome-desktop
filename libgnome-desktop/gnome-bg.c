@@ -95,7 +95,7 @@ enum {
 
 static guint signals[N_SIGNALS] = { 0 };
 
-G_DEFINE_TYPE (GnomeBG, gnome_bg, G_TYPE_OBJECT);
+G_DEFINE_TYPE (GnomeBG, gnome_bg, G_TYPE_OBJECT)
 
 static GdkPixmap *make_root_pixmap     (GdkScreen  *screen,
 					gint        width,

@@ -447,42 +447,6 @@ make_easy_page (GnomeDItemEdit *dee)
 	return table;
 }
 
-static GtkTreeIter*
-return_iter_nth_row(GtkTreeView  *tree_view,
-                    GtkTreeModel *tree_model,
-                    GtkTreeIter  *iter,
-                    gint         increment,
-                    gint         row)
-{
-        GtkTreePath *current_path;
-        gboolean row_expanded;
-        gboolean children_present;
-        gboolean next_iter;
-        gboolean parent_iter;
-        gboolean parent_next_iter;
-
-        current_path = gtk_tree_model_get_path (tree_model, iter);
-
-        if (increment == row)
-            return iter;
-
-        row_expanded = gtk_tree_view_row_expanded (tree_view, current_path);
-        gtk_tree_path_free (current_path);
-        children_present = gtk_tree_model_iter_children (tree_model, iter, iter);
-        next_iter = gtk_tree_model_iter_next (tree_model, iter);
-        parent_iter = gtk_tree_model_iter_parent (tree_model, iter, iter);
-        parent_next_iter = gtk_tree_model_iter_next (tree_model, iter);
-
-        if ((row_expanded && children_present) ||
-            (next_iter) ||
-            (parent_iter && parent_next_iter)){
-               return return_iter_nth_row (tree_view, tree_model, iter,
-                      ++increment, row);
-        }
-
-        return NULL;
-}
-
 static void
 translations_select_row (GtkTreeSelection *selection,
 			 GnomeDItemEdit   *dee)
@@ -991,7 +955,6 @@ gnome_ditem_edit_sync_display (GnomeDItemEdit *dee)
         gtk_list_store_clear (GTK_LIST_STORE (model));
         i18n_list = gnome_desktop_item_get_languages (ditem, NULL);
 	for (li = i18n_list; li != NULL; li = li->next) {
-                const char *name, *comment, *generic_name;
                 const char *lang = li->data;
 
                 name = gnome_desktop_item_get_localestring_lang
