@@ -828,6 +828,9 @@ get_current_slide (SlideShow *show,
 	double elapsed;
 	int i;
 
+	if (delta < 0)
+		delta += show->total_duration;
+
 	elapsed = 0;
 	i = 0;
 	for (list = show->slides->head; list != NULL; list = list->next) {
