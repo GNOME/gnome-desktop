@@ -995,8 +995,11 @@ contributors list) correctly positionned and sized.'''
         for desc in raw_descs:
             new_i = descs.index (desc)
             if i != - 1:
+                # Append the previous description
                 translations.append (descs[i:new_i])
             i = new_i
+        # Open ended to retrieve all translation for last description
+        translations.append (descs[i:])
         messages = GettableList ()
         for block in translations:
             sorted_descs = sorted (block, cmp = desc_sort_func,
