@@ -310,10 +310,6 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 		new = pixbuf_scale_to_min (pixbuf, width, height);
 		break;
 		
-	case GNOME_BG_PLACEMENT_CENTERED:
-		new = g_object_ref (pixbuf);
-		break;
-		
 	case GNOME_BG_PLACEMENT_FILL_SCREEN:
 		new = gdk_pixbuf_scale_simple (pixbuf, width, height,
 					       GDK_INTERP_BILINEAR);
@@ -323,6 +319,7 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 		new = pixbuf_scale_to_fit (pixbuf, width, height);
 		break;
 		
+	case GNOME_BG_PLACEMENT_CENTERED:
 	case GNOME_BG_PLACEMENT_TILED:
 	default:
 		new = g_object_ref (pixbuf);
@@ -1489,15 +1486,11 @@ pixbuf_blend (GdkPixbuf *src,
 	if (height < 0)
 		height = gdk_pixbuf_get_height (src);
 	
-	if (dest_x < 0) {
-		offset_x -= dest_x;
+	if (dest_x < 0)
 		dest_x = 0;
-	}
 	
-	if (dest_y < 0) {
-		offset_y -= dest_y;
+	if (dest_y < 0)
 		dest_y = 0;
-	}
 	
 	if (dest_x + width > dest_width) {
 		width = dest_width - dest_x;
