@@ -38,7 +38,7 @@ import gnome
 import cairo
 from math import pi
 
-import os, sys, random, time, gettext
+import os, sys, random, time, gettext, locale
 
 import xml.dom.minidom
 
@@ -83,7 +83,8 @@ def locate_file (program, file):
 def cleanup_date (date):
     '''Parse a date as found in gnome-version.xml and nicely format it'''
     try:
-        return time.strftime ("%x", time.strptime (date, "%Y-%m-%d"))
+        # FIXME: we don't have g_locale_to_utf8 in python. See bug #530382
+        return unicode (time.strftime ("%x", time.strptime (date, "%Y-%m-%d")), locale.getpreferredencoding ()).encode ("utf-8")
     except:
         return False
 
