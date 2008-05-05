@@ -22,7 +22,8 @@ which gnome-autogen.sh || {
 
 if test "`which gvfs-copy`" != ""; then
 	gvfs-copy http://api.gnome.org/gnome-about/foundation-members gnome-about/foundation-members.list
-else
+fi
+if test ! -f gnome-about/foundation-members.list; then
 	touch gnome-about/foundation-members.list
 fi
 
