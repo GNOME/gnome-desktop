@@ -1,3 +1,14 @@
+2008-05-12  William Jon McCann  <jmccann@redhat.com>
+
+	* gnome-bg.c (set_color_from_string), (set_color_type_from_string),
+	(set_placement_from_string), (do_changed), (queue_changed),
+	(gnome_bg_load_from_preferences), (gnome_bg_finalize),
+	(gnome_bg_class_init), (gnome_bg_set_color),
+	(gnome_bg_set_placement), (gnome_bg_set_uri), (on_timeout):
+	* libgnomeui/gnome-bg.h:
+	Add gnome_bg_load_from_preferences().  So applications don't
+	have to rely on libbackground.  Fixes #532414
+
 2008-05-05  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-bg.c: (get_scaled_pixbuf): simplify

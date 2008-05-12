@@ -1,9 +1,9 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
-   
+
 gnomebg.c: Object for the desktop background.
 
 Copyright (C) 2000 Eazel, Inc.
-Copyright (C) 2007 Red Hat, Inc.
+Copyright (C) 2007-2008 Red Hat, Inc.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU Library General Public License as
@@ -34,12 +34,22 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <gio/gio.h>
 
 #include <gdk/gdkx.h>
-#include <libgnomeui/libgnomeui.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+#include <gconf/gconf-client.h>
+#include <libgnomeui/libgnomeui.h>
+
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
+
+#define BG_KEY_DRAW_BACKGROUND    GNOME_BG_KEY_DIR "/draw_background"
+#define BG_KEY_PRIMARY_COLOR      GNOME_BG_KEY_DIR "/primary_color"
+#define BG_KEY_SECONDARY_COLOR    GNOME_BG_KEY_DIR "/secondary_color"
+#define BG_KEY_COLOR_SHADING_TYPE GNOME_BG_KEY_DIR "/color_shading_type"
+#define BG_KEY_PICTURE_OPTIONS    GNOME_BG_KEY_DIR "/picture_options"
+#define BG_KEY_PICTURE_OPACITY    GNOME_BG_KEY_DIR "/picture_opacity"
+#define BG_KEY_PICTURE_FILENAME   GNOME_BG_KEY_DIR "/picture_filename"
 
 typedef struct _SlideShow SlideShow;
 typedef struct _Slide Slide;
@@ -47,8 +57,8 @@ typedef struct _Slide Slide;
 struct _Slide
 {
 	double   duration;		/* in seconds */
-	gboolean fixed;	
-	
+	gboolean fixed;
+
 	char *file1;
 	char *file2;		/* NULL if fixed is TRUE */
 };
@@ -66,14 +76,13 @@ typedef struct FileCacheEntry FileCacheEntry;
  */
 struct _GnomeBG
 {
-	GObject			parent_instance;
-	
+	GObject                 parent_instance;
 	char *			uri;
 	GnomeBGPlacement	placement;
 	GnomeBGColorType	color_type;
 	GdkColor		c1;
 	GdkColor		c2;
-	
+
 	/* Cached information, only access through cache accessor functions */
         SlideShow *		slideshow;
 	time_t			uri_mtime;
@@ -81,6 +90,8 @@ struct _GnomeBG
 	int			timeout_id;
 
 	GList *		        file_cache;
+
+	guint                   changed_id;
 };
 
 struct _GnomeBGClass
@@ -143,10 +154,128 @@ static GdkPixbuf *create_img_thumbnail (GnomeBG               *bg,
 					GdkScreen             *screen,
 					int                    dest_width,
 					int                    dest_height);
-static SlideShow * get_as_slideshow    (GnomeBG               *bg, 
+static SlideShow * get_as_slideshow    (GnomeBG               *bg,
 					const char 	      *uri);
 static Slide *     get_current_slide   (SlideShow 	      *show,
 		   			double    	      *alpha);
+
+static void
+set_color_from_string (const char *string,
+		       GdkColor   *colorp)
+{
+	/* If all else fails use black */
+	if (string == NULL || !gdk_color_parse (string, colorp)) {
+		gdk_color_parse ("black", colorp);
+	}
+	gdk_rgb_find_color (gdk_rgb_get_colormap (), colorp);
+}
+
+
+static void
+set_color_type_from_string (const char       *string,
+			    GnomeBGColorType *color_type)
+{
+	*color_type = GNOME_BG_COLOR_SOLID;
+
+	if (string != NULL) {
+		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
+                        *color_type = GNOME_BG_COLOR_V_GRADIENT;
+		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
+                        *color_type = GNOME_BG_COLOR_H_GRADIENT;
+		}
+	}
+}
+
+static void
+set_placement_from_string (const char       *string,
+			   GnomeBGPlacement *placement)
+{
+	*placement = GNOME_BG_PLACEMENT_ZOOMED;
+
+	if (string != NULL) {
+		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
+			*placement = GNOME_BG_PLACEMENT_TILED;
+		} else if (!strncmp (string, "centered", sizeof ("centered"))) {
+			*placement = GNOME_BG_PLACEMENT_CENTERED;
+		} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
+			*placement = GNOME_BG_PLACEMENT_SCALED;
+		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
+			*placement = GNOME_BG_PLACEMENT_FILL_SCREEN;
+		} else if (!strncmp (string, "zoom", sizeof ("zoom"))) {
+			*placement = GNOME_BG_PLACEMENT_ZOOMED;
+		}
+	}
+}
+
+static gboolean
+do_changed (GnomeBG *bg)
+{
+	bg->changed_id = 0;
+
+	g_signal_emit (G_OBJECT (bg), signals[CHANGED], 0);
+
+	return FALSE;
+}
+
+static void
+queue_changed (GnomeBG *bg)
+{
+	if (bg->changed_id > 0) {
+		g_source_remove (bg->changed_id);
+	}
+
+	bg->changed_id = g_idle_add_full (G_PRIORITY_LOW,
+					  (GSourceFunc)do_changed,
+					  bg,
+					  NULL);
+}
+
+void
+gnome_bg_load_from_preferences (GnomeBG     *bg,
+				GConfClient *client)
+{
+	char    *tmp;
+	char    *uri;
+
+	g_return_if_fail (GNOME_IS_BG (bg));
+	g_return_if_fail (client != NULL);
+
+	/* Filename */
+	uri = NULL;
+	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_FILENAME, NULL);
+	if (tmp != NULL) {
+		if (g_utf8_validate (tmp, -1, NULL) &&
+		    g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+			uri = g_strdup (tmp);
+		} else {
+			uri = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
+		}
+	}
+	g_free (tmp);
+
+	/* Colors */
+	tmp = gconf_client_get_string (client, BG_KEY_PRIMARY_COLOR, NULL);
+	set_color_from_string (tmp, &bg->c1);
+	g_free (tmp);
+
+	tmp = gconf_client_get_string (client, BG_KEY_SECONDARY_COLOR, NULL);
+	set_color_from_string (tmp, &bg->c2);
+	g_free (tmp);
+
+	/* Color type */
+	tmp = gconf_client_get_string (client, BG_KEY_COLOR_SHADING_TYPE, NULL);
+	set_color_type_from_string (tmp, &bg->color_type);
+	g_free (tmp);
+
+	/* Placement */
+	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_OPTIONS, NULL);
+	set_placement_from_string (tmp, &bg->placement);
+	g_free (tmp);
+
+	gnome_bg_set_uri (bg, uri);
+
+	queue_changed (bg);
+}
 
 static void
 gnome_bg_init (GnomeBG *bg)
@@ -157,19 +286,24 @@ static void
 gnome_bg_finalize (GObject *object)
 {
 	GnomeBG *bg = GNOME_BG (object);
-	
+
+	if (bg->changed_id != 0) {
+		g_source_remove (bg->changed_id);
+		bg->changed_id = 0;
+	}
+
 	clear_cache (bg);
-	
+
 	G_OBJECT_CLASS (gnome_bg_parent_class)->finalize (object);
 }
 
 static void
-gnome_bg_class_init (GnomeBGClass *class)
+gnome_bg_class_init (GnomeBGClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
 	object_class->finalize = gnome_bg_finalize;
-	
+
 	signals[CHANGED] = g_signal_new ("changed",
 					 G_OBJECT_CLASS_TYPE (object_class),
 					 G_SIGNAL_RUN_LAST,
@@ -177,12 +311,6 @@ gnome_bg_class_init (GnomeBGClass *class)
 					 NULL, NULL,
 					 g_cclosure_marshal_VOID__VOID,
 					 G_TYPE_NONE, 0);
-}
-
-static void
-emit_changed (GnomeBG *bg)
-{
-	g_signal_emit (G_OBJECT (bg), signals[CHANGED], 0);
 }
 
 GnomeBG *
@@ -206,18 +334,18 @@ gnome_bg_set_color (GnomeBG *bg,
 		    GdkColor *c2)
 {
 	g_return_if_fail (bg != NULL);
-	
+
 	if (bg->color_type != type			||
 	    !colors_equal (&bg->c1, c1)			||
 	    (c2 && !colors_equal (&bg->c2, c2))) {
-		
+
 		bg->color_type = type;
-		bg->c1 = *c1;	
+		bg->c1 = *c1;
 		if (c2) {
 			bg->c2 = *c2;
 		}
-		
-		emit_changed (bg);
+
+		queue_changed (bg);
 	}
 }
 
@@ -230,7 +358,7 @@ gnome_bg_set_placement (GnomeBG          *bg,
 	if (bg->placement != placement) {
 		bg->placement = placement;
 		
-		emit_changed (bg);
+		queue_changed (bg);
 	}
 }
 
@@ -242,8 +370,9 @@ gnome_bg_set_uri (GnomeBG     *bg,
 	
 	g_return_if_fail (bg != NULL);
 	
-	if (g_path_is_absolute (uri))
+	if (g_path_is_absolute (uri)) {
 		uri = free_me = g_filename_to_uri (uri, NULL, NULL);
+	}
 	
 	if (is_different (bg, uri)) {
 		char *tmp = g_strdup (uri);
@@ -256,7 +385,7 @@ gnome_bg_set_uri (GnomeBG     *bg,
 		
 		clear_cache (bg);
 		
-		emit_changed (bg);
+		queue_changed (bg);
 	}
 
 	g_free (free_me);
@@ -1043,7 +1172,7 @@ on_timeout (gpointer data)
 
 	bg->timeout_id = 0;
 	
-	emit_changed (bg);
+	queue_changed (bg);
 
 	return FALSE;
 }

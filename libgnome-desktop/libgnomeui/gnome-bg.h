@@ -29,12 +29,11 @@
 #error    GnomeBG is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-bg.h
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libgnomeui/libgnomeui.h>
 #include <gdk/gdk.h>
+#include <gconf/gconf-client.h>
+
+G_BEGIN_DECLS
 
 #define GNOME_TYPE_BG            (gnome_bg_get_type ())
 #define GNOME_BG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_BG, GnomeBG))
@@ -42,6 +41,8 @@ extern "C" {
 #define GNOME_IS_BG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_BG))
 #define GNOME_IS_BG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass),  GNOME_TYPE_BG))
 #define GNOME_BG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj),  GNOME_TYPE_BG, GnomeBGClass))
+
+#define GNOME_BG_KEY_DIR "/desktop/gnome/background"
 
 typedef struct _GnomeBG GnomeBG;
 typedef struct _GnomeBGClass GnomeBGClass;
@@ -62,6 +63,10 @@ typedef enum {
 
 GType      gnome_bg_get_type           (void);
 GnomeBG *  gnome_bg_new                (void);
+
+void       gnome_bg_load_from_preferences (GnomeBG               *bg,
+                                           GConfClient           *client);
+
 void       gnome_bg_set_placement      (GnomeBG               *img,
 					GnomeBGPlacement       placement);
 void       gnome_bg_set_color          (GnomeBG               *img,
@@ -94,9 +99,6 @@ gboolean   gnome_bg_changes_with_size  (GnomeBG               *img);
 void       gnome_bg_set_pixmap_as_root (GdkScreen             *screen,
 					GdkPixmap             *pixmap);
 
-
-#ifdef __cplusplus
-}
-#endif
+G_END_DECLS
 
 #endif
