@@ -1,5 +1,12 @@
 2008-05-14  William Jon McCann  <jmccann@redhat.com>
 
+	* gnome-bg.c (gnome_bg_load_from_preferences): Falls back to the
+	default image if the user's background doesn't exist.  Prevents
+	a white screen on OS upgrade.
+	Patch by Ray Strode <rstrode@redhat.com>
+
+2008-05-14  William Jon McCann  <jmccann@redhat.com>
+
 	* gnome-bg.c (gnome_bg_changes_with_size),
 	(gnome_bg_create_pixmap), (gnome_bg_get_image_size),
 	(create_img_thumbnail), (find_best_size), (get_pixbuf),

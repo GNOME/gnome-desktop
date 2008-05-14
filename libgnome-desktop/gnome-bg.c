@@ -263,6 +263,22 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 		} else {
 			uri = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
 		}
+
+		/* Fall back to default background if filename was set
+		   but no longer exists */
+		if (!g_file_test (uri, G_FILE_TEST_EXISTS)) {
+			GConfValue *default_value;
+
+			g_free (uri);
+			uri = NULL;
+
+			default_value = gconf_client_get_default_from_schema (client,
+									      BG_KEY_PICTURE_FILENAME, NULL);
+			if (default_value != NULL) {
+				uri = g_strdup (gconf_value_get_string (default_value));
+				gconf_value_free (default_value);
+			}
+		}
 	}
 	g_free (tmp);
 
