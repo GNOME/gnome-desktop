@@ -918,6 +918,7 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 /* Implementation of the pixbuf cache */
 struct _SlideShow
 {
+	gint ref_count;
 	double start_time;
 	double total_duration;
 
@@ -930,7 +931,8 @@ struct _SlideShow
 
 static SlideShow *read_slideshow_file (const char *filename,
 				       GError     **err);
-static void       slideshow_free      (SlideShow  *show);
+static void       slideshow_ref       (SlideShow  *show);
+static void       slideshow_unref     (SlideShow  *show);
 
 static double
 now (void)
@@ -1025,7 +1027,7 @@ file_cache_entry_delete (FileCacheEntry *ent)
 		g_object_unref (ent->u.pixbuf);
 		break;
 	case SLIDESHOW:
-		slideshow_free (ent->u.slideshow);
+		slideshow_unref (ent->u.slideshow);
 		break;
 	case THUMBNAIL:
 		g_object_unref (ent->u.thumbnail);
@@ -1294,7 +1296,11 @@ create_img_thumbnail (GnomeBG               *bg,
 			
 			if (show) {
 				double alpha;
-				Slide *slide = get_current_slide (show, &alpha);
+				Slide *slide;
+
+				slideshow_ref (show);
+
+				slide = get_current_slide (show, &alpha);
 
 				if (slide->fixed) {
 					GdkPixbuf *tmp;
@@ -1327,6 +1333,8 @@ create_img_thumbnail (GnomeBG               *bg,
 				}
 
 				ensure_timeout (bg, slide);
+
+				slideshow_unref (show);
 			}
 		}
 
@@ -1353,7 +1361,11 @@ get_pixbuf (GnomeBG *bg)
 
 			if (show) {
 				double alpha;
-				Slide *slide = get_current_slide (show, &alpha);
+				Slide *slide;
+
+				slideshow_ref (show);
+
+				slide = get_current_slide (show, &alpha);
 
 				if (slide->fixed) {
 					bg->pixbuf_cache = get_as_pixbuf (bg, slide->file1);
@@ -1369,6 +1381,8 @@ get_pixbuf (GnomeBG *bg)
 				}
 
 				ensure_timeout (bg, slide);
+
+				slideshow_unref (show);
 			}
 		}
 	}
@@ -1795,10 +1809,20 @@ handle_text (GMarkupParseContext *context,
 }
 
 static void
-slideshow_free (SlideShow *show)
+slideshow_ref (SlideShow *show)
+{
+	show->ref_count++;
+}
+
+static void
+slideshow_unref (SlideShow *show)
 {
 	GList *list;
-	
+
+	show->ref_count--;
+	if (show->ref_count > 0)
+		return;
+
 	for (list = show->slides->head; list != NULL; list = list->next) {
 		Slide *slide = list->data;
 		
@@ -1885,6 +1909,7 @@ read_slideshow_file (const char *uri,
 	g_object_unref (file);
 	
 	show = g_new0 (SlideShow, 1);
+	show->ref_count = 1;
 	threadsafe_localtime ((time_t)0, &show->start_tm);
 	show->stack = g_queue_new ();
 	show->slides = g_queue_new ();
@@ -1892,13 +1917,13 @@ read_slideshow_file (const char *uri,
 	context = g_markup_parse_context_new (&parser, 0, show, NULL);
 	
 	if (!g_markup_parse_context_parse (context, contents, len, err)) {
-		slideshow_free (show);
+		slideshow_unref (show);
 		show = NULL;
 	}
 	
 	if (!g_markup_parse_context_end_parse (context, err)) {
 		if (show) {
-			slideshow_free (show);
+			slideshow_unref (show);
 			show = NULL;
 		}
 	}
