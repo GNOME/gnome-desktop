@@ -411,6 +411,7 @@ gnome_bg_set_uri (GnomeBG     *bg,
 		g_free (bg->uri);
 		
 		bg->uri = tmp;
+		bg->uri_mtime = get_mtime (bg->uri);
 		
 		clear_cache (bg);
 		
@@ -507,7 +508,7 @@ draw_image (GnomeBGPlacement  placement,
 	
 	scaled = get_scaled_pixbuf (
 		placement, pixbuf, dest_width, dest_height, &x, &y, &w, &h);
-	
+
 	switch (placement) {
 	case GNOME_BG_PLACEMENT_TILED:
 		pixbuf_tile (scaled, dest);
@@ -1032,14 +1033,16 @@ blend (GdkPixbuf *p1,
 	GdkPixbuf *tmp;
 
 	if (gdk_pixbuf_get_width (p2) != gdk_pixbuf_get_width (p1) ||
-            gdk_pixbuf_get_height (p2) != gdk_pixbuf_get_height (p1))
-          tmp = gdk_pixbuf_scale_simple (p2, 
-                                         gdk_pixbuf_get_width (p1),
-                                         gdk_pixbuf_get_height (p1),
-                                         GDK_INTERP_BILINEAR);
-        else
-          tmp = g_object_ref (p2);
-
+            gdk_pixbuf_get_height (p2) != gdk_pixbuf_get_height (p1)) {
+		tmp = gdk_pixbuf_scale_simple (p2, 
+					       gdk_pixbuf_get_width (p1),
+					       gdk_pixbuf_get_height (p1),
+					       GDK_INTERP_BILINEAR);
+	}
+        else {
+		tmp = g_object_ref (p2);
+	}
+	
 	pixbuf_blend (tmp, result, 0, 0, -1, -1, 0, 0, alpha);
         
         g_object_unref (tmp);	

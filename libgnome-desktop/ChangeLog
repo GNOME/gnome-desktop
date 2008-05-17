@@ -1,3 +1,11 @@
+Fri May 16 23:39:26 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_set_uri): Set the URI mtime here to prevent
+	loops where someone setting the same URI in the changed callback
+	causes the changed callback to be emitted.
+
+	* gnome-bg.c (blend): Coding style fix.
+
 2008-05-14  William Jon McCann  <jmccann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_load_from_preferences): Falls back to the
