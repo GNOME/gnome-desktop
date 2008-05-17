@@ -2153,7 +2153,8 @@ create_thumbnail_for_uri (GnomeThumbnailFactory *factory,
 	
 	if (filename) {
 		pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-		
+		g_free (filename);
+
 		return pixbuf;
 	}
 	
