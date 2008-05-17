@@ -399,7 +399,7 @@ gnome_bg_set_uri (GnomeBG     *bg,
 	
 	g_return_if_fail (bg != NULL);
 	
-	if (g_path_is_absolute (uri)) {
+	if (uri && g_path_is_absolute (uri)) {
 		uri = free_me = g_filename_to_uri (uri, NULL, NULL);
 	}
 	
