@@ -47,7 +47,7 @@
  * all the configurations.  That element has a "version" attribute which is an integer.
  * So, the file looks like this:
  *
- *   <monitors>
+ *   <monitors version="1">
  *     <configuration>
  *       ...
  *     </configuration>
