@@ -1350,7 +1350,7 @@ create_img_thumbnail (GnomeBG               *bg,
 					tmp = get_as_thumbnail (bg, factory, fs->file);
 
 					thumb = scale_thumbnail (
-						bg->placement, bg->filename,
+						bg->placement, fs->file,
 						tmp, screen, dest_width, dest_height);
 				}
 				else {
@@ -1359,17 +1359,21 @@ create_img_thumbnail (GnomeBG               *bg,
 
 					fs = slide->file1->data;
 					p1 = get_as_thumbnail (bg, factory, fs->file);
+
 					fs = slide->file2->data;
 					p2 = get_as_thumbnail (bg, factory, fs->file);
 
 					if (p1 && p2) {
 						GdkPixbuf *thumb1, *thumb2;
 
+						fs = slide->file1->data;
 						thumb1 = scale_thumbnail (
-							bg->placement, bg->filename,
+							bg->placement, fs->file,
 							p1, screen, dest_width, dest_height);
+
+						fs = slide->file2->data;
 						thumb2 = scale_thumbnail (
-							bg->placement, bg->filename,
+							bg->placement, fs->file,
 							p2, screen, dest_width, dest_height);
 
 						thumb = blend (thumb1, thumb2, alpha);
