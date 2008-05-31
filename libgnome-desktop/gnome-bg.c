@@ -1285,11 +1285,6 @@ scale_thumbnail (GnomeBGPlacement placement,
 		return g_object_ref (thumb);
 	}
 	
-	/* FIXME: in case of tiled, we should probably scale the pixbuf to
-	 * be maybe dest_width/4 pixels tall. While strictly speaking incorrect,
-	 * it might give a better idea of what the background would actually look
-	 * like.
-	 */
 	if (get_thumb_annotations (thumb, &o_width, &o_height)		||
 	    (filename && get_original_size (filename, &o_width, &o_height))) {
 		
@@ -1306,7 +1301,30 @@ scale_thumbnail (GnomeBGPlacement placement,
 		
 		new_width = floor (thumb_width * f + 0.5);
 		new_height = floor (thumb_height * f + 0.5);
+
+		if (placement == GNOME_BG_PLACEMENT_TILED) {
+			double min_tile_width;
+			
+			/* When tiling, make sure the tiles are at least 24 pixels wide,
+			 * (or the original width if that was less than 24, since we never
+			 * want to upscale the image in a thumbnail).
+			 * 
+			 * This is strictly speaking incorrect, but the resulting thumbnail
+			 * gives a much better idea what the background will actually look
+			 * like.
+			 *
+			 * FIXME: This should possibly look at height too.
+			 */
+			min_tile_width = o_width >= 24.0 ? 24.0 : o_width;
 		
+			if (new_width < min_tile_width) {
+				double factor = min_tile_width / new_width;
+				
+				new_height = floor (new_height * factor + 0.5);
+				new_width = floor (new_width * factor + 0.5);
+			}
+		}
+			
 		thumb = gdk_pixbuf_scale_simple (thumb, new_width, new_height,
 						 GDK_INTERP_BILINEAR);
 	}
