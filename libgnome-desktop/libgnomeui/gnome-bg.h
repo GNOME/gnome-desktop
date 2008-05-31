@@ -73,8 +73,8 @@ void       gnome_bg_set_color          (GnomeBG               *img,
 					GnomeBGColorType       type,
 					GdkColor              *c1,
 					GdkColor              *c2);
-void       gnome_bg_set_uri            (GnomeBG               *img,
-					const char            *uri);
+void       gnome_bg_set_filename       (GnomeBG               *img,
+					const char            *filename);
 void       gnome_bg_draw               (GnomeBG               *img,
 					GdkPixbuf             *dest);
 GdkPixmap *gnome_bg_create_pixmap      (GnomeBG               *img,
