@@ -46,8 +46,8 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #define BG_KEY_DRAW_BACKGROUND    GNOME_BG_KEY_DIR "/draw_background"
 #define BG_KEY_PRIMARY_COLOR      GNOME_BG_KEY_DIR "/primary_color"
 #define BG_KEY_SECONDARY_COLOR    GNOME_BG_KEY_DIR "/secondary_color"
-#define BG_KEY_COLOR_SHADING_TYPE GNOME_BG_KEY_DIR "/color_shading_type"
-#define BG_KEY_PICTURE_OPTIONS    GNOME_BG_KEY_DIR "/picture_options"
+#define BG_KEY_COLOR_TYPE         GNOME_BG_KEY_DIR "/color_shading_type"
+#define BG_KEY_PICTURE_PLACEMENT  GNOME_BG_KEY_DIR "/picture_options"
 #define BG_KEY_PICTURE_OPACITY    GNOME_BG_KEY_DIR "/picture_opacity"
 #define BG_KEY_PICTURE_FILENAME   GNOME_BG_KEY_DIR "/picture_filename"
 
@@ -89,8 +89,8 @@ struct _GnomeBG
 	char *			filename;
 	GnomeBGPlacement	placement;
 	GnomeBGColorType	color_type;
-	GdkColor		c1;
-	GdkColor		c2;
+	GdkColor		primary;
+	GdkColor		secondary;
 
  	gint                    last_pixmap_width;
  	gint                    last_pixmap_height;
@@ -173,51 +173,80 @@ static Slide *     get_current_slide   (SlideShow 	      *show,
 static gboolean    slideshow_changes_with_size (SlideShow *show);
 
 static void
-set_color_from_string (const char *string,
-		       GdkColor   *colorp)
+color_from_string (const char *string,
+		   GdkColor   *colorp)
 {
 	/* If all else fails use black */
-	if (string == NULL || !gdk_color_parse (string, colorp)) {
-		gdk_color_parse ("black", colorp);
-	}
-	gdk_rgb_find_color (gdk_rgb_get_colormap (), colorp);
+	gdk_color_parse ("black", colorp);
+
+	if (!string)
+		return;
+
+	if (!gdk_color_parse (string, colorp))
+		return;
+
+	gdk_rgb_find_color (gdk_rgb_get_colormap(), colorp);
 }
 
+static char *
+color_to_string (const GdkColor *color)
+{
+	return g_strdup_printf ("#%02x%02x%02x",
+				color->red >> 8,
+				color->green >> 8,
+				color->blue >> 8);
+}
+
+static GConfEnumStringPair placement_lookup[] = {
+	{ GNOME_BG_PLACEMENT_CENTERED,    "centered" },
+	{ GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
+	{ GNOME_BG_PLACEMENT_SCALED,      "scaled" },
+	{ GNOME_BG_PLACEMENT_ZOOMED,      "zoom" },
+	{ GNOME_BG_PLACEMENT_TILED,       "wallpaper" },
+	{ 0, NULL }
+};
+
+static GConfEnumStringPair color_type_lookup[] = {
+	{ GNOME_BG_COLOR_SOLID,      "solid" },
+	{ GNOME_BG_COLOR_H_GRADIENT, "horizontal-gradient" },
+	{ GNOME_BG_COLOR_V_GRADIENT, "vertical-gradient" },
+	{ 0, NULL }
+};
 
 static void
-set_color_type_from_string (const char       *string,
-			    GnomeBGColorType *color_type)
+color_type_from_string (const char       *string,
+			GnomeBGColorType *color_type)
 {
 	*color_type = GNOME_BG_COLOR_SOLID;
 
-	if (string != NULL) {
-		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
-                        *color_type = GNOME_BG_COLOR_V_GRADIENT;
-		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
-                        *color_type = GNOME_BG_COLOR_H_GRADIENT;
-		}
+	if (string) {
+		gconf_string_to_enum (color_type_lookup,
+				      string, (int *)color_type);
 	}
 }
 
+static const char *
+color_type_to_string (GnomeBGColorType color_type)
+{
+	return gconf_enum_to_string (color_type_lookup, color_type);
+}
+
 static void
-set_placement_from_string (const char       *string,
-			   GnomeBGPlacement *placement)
+placement_from_string (const char       *string,
+		       GnomeBGPlacement *placement)
 {
 	*placement = GNOME_BG_PLACEMENT_ZOOMED;
 
-	if (string != NULL) {
-		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
-			*placement = GNOME_BG_PLACEMENT_TILED;
-		} else if (!strncmp (string, "centered", sizeof ("centered"))) {
-			*placement = GNOME_BG_PLACEMENT_CENTERED;
-		} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
-			*placement = GNOME_BG_PLACEMENT_SCALED;
-		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
-			*placement = GNOME_BG_PLACEMENT_FILL_SCREEN;
-		} else if (!strncmp (string, "zoom", sizeof ("zoom"))) {
-			*placement = GNOME_BG_PLACEMENT_ZOOMED;
-		}
+	if (string) {
+		gconf_string_to_enum (placement_lookup,
+				      string, (int *)placement);
 	}
+}
+
+static const char *
+placement_to_string (GnomeBGPlacement placement)
+{
+	return gconf_enum_to_string (placement_lookup, placement);
 }
 
 static gboolean
@@ -272,8 +301,10 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 			g_free (filename);
 			filename = NULL;
 
-			default_value = gconf_client_get_default_from_schema (client,
-									      BG_KEY_PICTURE_FILENAME, NULL);
+			default_value =
+				gconf_client_get_default_from_schema (client,
+								      BG_KEY_PICTURE_FILENAME,
+								      NULL);
 			if (default_value != NULL) {
 				filename = g_strdup (gconf_value_get_string (default_value));
 				gconf_value_free (default_value);
@@ -284,27 +315,62 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 
 	/* Colors */
 	tmp = gconf_client_get_string (client, BG_KEY_PRIMARY_COLOR, NULL);
-	set_color_from_string (tmp, &bg->c1);
+	color_from_string (tmp, &bg->primary);
 	g_free (tmp);
 
 	tmp = gconf_client_get_string (client, BG_KEY_SECONDARY_COLOR, NULL);
-	set_color_from_string (tmp, &bg->c2);
+	color_from_string (tmp, &bg->secondary);
 	g_free (tmp);
 
 	/* Color type */
-	tmp = gconf_client_get_string (client, BG_KEY_COLOR_SHADING_TYPE, NULL);
-	set_color_type_from_string (tmp, &bg->color_type);
+	tmp = gconf_client_get_string (client, BG_KEY_COLOR_TYPE, NULL);
+	color_type_from_string (tmp, &bg->color_type);
 	g_free (tmp);
 
 	/* Placement */
-	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_OPTIONS, NULL);
-	set_placement_from_string (tmp, &bg->placement);
+	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_PLACEMENT, NULL);
+	placement_from_string (tmp, &bg->placement);
 	g_free (tmp);
 
 	gnome_bg_set_filename (bg, filename);
 
 	queue_changed (bg);
 }
+
+void
+gnome_bg_save_to_preferences (GnomeBG     *bg,
+			      GConfClient *client)
+{
+	const char *color_type;
+	const char *placement;
+        const gchar *filename;
+        gchar *primary;
+        gchar *secondary;
+        
+	primary = color_to_string (&bg->primary);
+	secondary = color_to_string (&bg->secondary);
+
+	color_type = color_type_to_string (bg->color_type);
+
+        if (bg->filename) {
+		filename = bg->filename;
+		placement = placement_to_string (bg->placement);
+        }
+        else {
+                filename = "(none)";
+                placement = "none";
+        }
+
+	gconf_client_set_string (client, BG_KEY_PICTURE_FILENAME, filename, NULL);
+        gconf_client_set_string (client, BG_KEY_PRIMARY_COLOR, primary, NULL);
+        gconf_client_set_string (client, BG_KEY_SECONDARY_COLOR, secondary, NULL);
+        gconf_client_set_string (client, BG_KEY_COLOR_TYPE, color_type, NULL);
+	gconf_client_set_string (client, BG_KEY_PICTURE_PLACEMENT, placement, NULL);
+
+	g_free (primary);
+	g_free (secondary);
+}
+
 
 static void
 gnome_bg_init (GnomeBG *bg)
@@ -349,29 +415,29 @@ gnome_bg_new (void)
 }
 
 static gboolean
-colors_equal (const GdkColor *c1, const GdkColor *c2)
+colors_equal (const GdkColor *primary, const GdkColor *secondary)
 {
-	return  c1->red   == c2->red	&&
-		c1->green == c2->green  &&
-		c1->blue  == c2->blue;
+	return  primary->red   == secondary->red	&&
+		primary->green == secondary->green  &&
+		primary->blue  == secondary->blue;
 }
 
 void
 gnome_bg_set_color (GnomeBG *bg,
 		    GnomeBGColorType type,
-		    GdkColor *c1,
-		    GdkColor *c2)
+		    GdkColor *primary,
+		    GdkColor *secondary)
 {
 	g_return_if_fail (bg != NULL);
 
 	if (bg->color_type != type			||
-	    !colors_equal (&bg->c1, c1)			||
-	    (c2 && !colors_equal (&bg->c2, c2))) {
+	    !colors_equal (&bg->primary, primary)			||
+	    (secondary && !colors_equal (&bg->secondary, secondary))) {
 
 		bg->color_type = type;
-		bg->c1 = *c1;
-		if (c2) {
-			bg->c2 = *c2;
+		bg->primary = *primary;
+		if (secondary) {
+			bg->secondary = *secondary;
 		}
 
 		queue_changed (bg);
@@ -425,20 +491,20 @@ draw_color (GnomeBG *bg, GdkPixbuf *dest)
 	switch (bg->color_type)
 	{
 	case GNOME_BG_COLOR_SOLID:
-		pixel = ((bg->c1.red >> 8) << 24)      |
-			((bg->c1.green >> 8) << 16)    |
-			((bg->c1.blue >> 8) << 8)      |
+		pixel = ((bg->primary.red >> 8) << 24)      |
+			((bg->primary.green >> 8) << 16)    |
+			((bg->primary.blue >> 8) << 8)      |
 			(0xff);
 		
 		gdk_pixbuf_fill (dest, pixel);
 		break;
 		
 	case GNOME_BG_COLOR_H_GRADIENT:
-		pixbuf_draw_gradient (dest, TRUE, &(bg->c1), &(bg->c2));
+		pixbuf_draw_gradient (dest, TRUE, &(bg->primary), &(bg->secondary));
 		break;
 		
 	case GNOME_BG_COLOR_V_GRADIENT:
-		pixbuf_draw_gradient (dest, FALSE, &(bg->c1), &(bg->c2));
+		pixbuf_draw_gradient (dest, FALSE, &(bg->primary), &(bg->secondary));
 		break;
 		
 	default:
@@ -675,7 +741,7 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 	
 	if (!get_pixbuf (bg) && bg->color_type == GNOME_BG_COLOR_SOLID) {
 		GdkGC *gc = gdk_gc_new (pixmap);
-		gdk_gc_set_rgb_fg_color (gc, &(bg->c1));
+		gdk_gc_set_rgb_fg_color (gc, &(bg->primary));
 		
 		gdk_draw_point (pixmap, gc, 0, 0);
 		
@@ -710,11 +776,11 @@ gnome_bg_is_dark (GnomeBG *bg)
 	g_return_val_if_fail (bg != NULL, FALSE);
 	
 	if (bg->color_type == GNOME_BG_COLOR_SOLID) {
-		color = bg->c1;
+		color = bg->primary;
 	} else {
-		color.red = (bg->c1.red + bg->c2.red) / 2;
-		color.green = (bg->c1.green + bg->c2.green) / 2;
-		color.blue = (bg->c1.blue + bg->c2.blue) / 2;
+		color.red = (bg->primary.red + bg->secondary.red) / 2;
+		color.green = (bg->primary.green + bg->secondary.green) / 2;
+		color.blue = (bg->primary.blue + bg->secondary.blue) / 2;
 	}
 	
 	if (get_pixbuf (bg)) {
@@ -1303,25 +1369,18 @@ scale_thumbnail (GnomeBGPlacement placement,
 		new_height = floor (thumb_height * f + 0.5);
 
 		if (placement == GNOME_BG_PLACEMENT_TILED) {
-			double min_tile_width;
-			
-			/* When tiling, make sure the tiles are at least 24 pixels wide,
-			 * (or the original width if that was less than 24, since we never
-			 * want to upscale the image in a thumbnail).
-			 * 
-			 * This is strictly speaking incorrect, but the resulting thumbnail
-			 * gives a much better idea what the background will actually look
-			 * like.
+			/* Heuristic to make sure tiles don't become so small that
+			 * they turn into a blur.
 			 *
-			 * FIXME: This should possibly look at height too.
+			 * This is strictly speaking incorrect, but the resulting
+			 * thumbnail gives a much better idea what the background
+			 * will actually look like.
 			 */
-			min_tile_width = o_width >= 24.0 ? 24.0 : o_width;
-		
-			if (new_width < min_tile_width) {
-				double factor = min_tile_width / new_width;
-				
-				new_height = floor (new_height * factor + 0.5);
-				new_width = floor (new_width * factor + 0.5);
+			
+			if ((new_width < 32 || new_height < 32) &&
+			    (new_width < o_width / 4 || new_height < o_height / 4)) {
+				new_width = o_width / 4;
+				new_height = o_height / 4;
 			}
 		}
 			
@@ -1668,8 +1727,8 @@ pixbuf_scale_to_min (GdkPixbuf *src, int min_width, int min_height)
 }
 
 static guchar *
-create_gradient (const GdkColor *c1,
-		 const GdkColor *c2,
+create_gradient (const GdkColor *primary,
+		 const GdkColor *secondary,
 		 int	          n_pixels)
 {
 	guchar *result = g_malloc (n_pixels * 3);
@@ -1678,9 +1737,9 @@ create_gradient (const GdkColor *c1,
 	for (i = 0; i < n_pixels; ++i) {
 		double ratio = (i + 0.5) / n_pixels;
 		
-		result[3 * i + 0] = ((guint16) (c1->red * (1 - ratio) + c2->red * ratio)) >> 8;
-		result[3 * i + 1] = ((guint16) (c1->green * (1 - ratio) + c2->green * ratio)) >> 8;
-		result[3 * i + 2] = ((guint16) (c1->blue * (1 - ratio) + c2->blue * ratio)) >> 8;
+		result[3 * i + 0] = ((guint16) (primary->red * (1 - ratio) + secondary->red * ratio)) >> 8;
+		result[3 * i + 1] = ((guint16) (primary->green * (1 - ratio) + secondary->green * ratio)) >> 8;
+		result[3 * i + 2] = ((guint16) (primary->blue * (1 - ratio) + secondary->blue * ratio)) >> 8;
 	}
 	
 	return result;
@@ -1689,8 +1748,8 @@ create_gradient (const GdkColor *c1,
 static void
 pixbuf_draw_gradient (GdkPixbuf *pixbuf,
 		      gboolean   horizontal,
-		      GdkColor  *c1,
-		      GdkColor  *c2)
+		      GdkColor  *primary,
+		      GdkColor  *secondary)
 {
 	int width  = gdk_pixbuf_get_width (pixbuf);
 	int height = gdk_pixbuf_get_height (pixbuf);
@@ -1699,7 +1758,7 @@ pixbuf_draw_gradient (GdkPixbuf *pixbuf,
 	guchar *dst_limit = dst + height * rowstride;
 	
 	if (horizontal) {
-		guchar *gradient = create_gradient (c1, c2, width);
+		guchar *gradient = create_gradient (primary, secondary, width);
 		int copy_bytes_per_row = width * 3;
 		
 		while (dst < dst_limit) {
@@ -1710,7 +1769,7 @@ pixbuf_draw_gradient (GdkPixbuf *pixbuf,
 	} else {
 		guchar *gb, *gradient;
 		
-		gb = gradient = create_gradient (c1, c2, height);
+		gb = gradient = create_gradient (primary, secondary, height);
 		while (dst < dst_limit) {
 			int i;
 			guchar *d = dst;
