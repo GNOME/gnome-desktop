@@ -457,6 +457,34 @@ gnome_bg_set_placement (GnomeBG          *bg,
 	}
 }
 
+GnomeBGPlacement
+gnome_bg_get_placement (GnomeBG *bg)
+{
+	g_return_val_if_fail (bg != NULL, -1);
+
+	return bg->placement;
+}
+
+void
+gnome_bg_get_color (GnomeBG               *bg,
+		    GnomeBGColorType      *type,
+		    GdkColor              *primary,
+		    GdkColor              *secondary)
+{
+	g_return_if_fail (bg != NULL);
+
+	if (type)
+		*type = bg->color_type;
+
+	if (primary)
+		*primary = bg->primary;
+
+	if (secondary)
+		*secondary = bg->secondary;
+}
+
+const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
+
 void
 gnome_bg_set_filename (GnomeBG     *bg,
 		       const char  *filename)
