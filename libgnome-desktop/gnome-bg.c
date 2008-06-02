@@ -95,6 +95,10 @@ struct _GnomeBG
  	gint                    last_pixmap_width;
  	gint                    last_pixmap_height;
 
+	GFileMonitor *		file_monitor;
+
+	guint                   changed_id;
+	
 	/* Cached information, only access through cache accessor functions */
         SlideShow *		slideshow;
 	time_t			file_mtime;
@@ -102,8 +106,6 @@ struct _GnomeBG
 	int			timeout_id;
 
 	GList *		        file_cache;
-
-	guint                   changed_id;
 };
 
 struct _GnomeBGClass
@@ -485,6 +487,19 @@ gnome_bg_get_color (GnomeBG               *bg,
 
 const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 
+static void
+file_changed (GFileMonitor *file_monitor,
+	      GFile *child,
+	      GFile *other_file,
+	      GFileMonitorEvent event_type,
+	      gpointer user_data)
+{
+	GnomeBG *bg = GNOME_BG (user_data);
+
+	clear_cache (bg);
+	queue_changed (bg);
+}
+
 void
 gnome_bg_set_filename (GnomeBG     *bg,
 		       const char  *filename)
@@ -496,12 +511,25 @@ gnome_bg_set_filename (GnomeBG     *bg,
 	if (is_different (bg, filename)) {
 		char *tmp = g_strdup (filename);
 		
-		/* FIXME: maybe check that it is local */
-		
 		g_free (bg->filename);
 		
 		bg->filename = tmp;
 		bg->file_mtime = get_mtime (bg->filename);
+
+		if (bg->file_monitor) {
+			g_object_unref (bg->file_monitor);
+			bg->file_monitor = NULL;
+		}
+
+		if (bg->filename) {
+			GFile *f = g_file_new_for_path (bg->filename);
+			
+			bg->file_monitor = g_file_monitor_file (f, 0, NULL, NULL);
+			g_signal_connect (bg->file_monitor, "changed",
+					  G_CALLBACK (file_changed), bg);
+
+			g_object_unref (f);
+		}
 		
 		clear_cache (bg);
 		
