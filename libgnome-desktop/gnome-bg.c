@@ -485,7 +485,13 @@ gnome_bg_get_color (GnomeBG               *bg,
 		*secondary = bg->secondary;
 }
 
-const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
+const gchar *
+gnome_bg_get_filename (GnomeBG *bg)
+{
+	g_return_val_if_fail (bg != NULL, NULL);
+
+	return bg->filename;
+}
 
 static void
 file_changed (GFileMonitor *file_monitor,
