@@ -28,7 +28,7 @@
 #include <string.h>
 #include <glib.h>
 #include <glib/gstdio.h>
-#include "libgnomeui/monitor-db.h"
+#include "libgnomeui/gnome-rr-config.h"
 #include "edid.h"
 
 #define CONFIG_BASENAME "monitors.xml"

@@ -4,4 +4,4 @@ libgnomeui_desktop_HEADERS =	\
 	gnome-hint.h		\
 	gnome-bg.h		\
 	gnome-rr.h		\
-	monitor-db.h
+	gnome-rr-config.h
