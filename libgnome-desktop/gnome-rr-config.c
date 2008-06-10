@@ -82,7 +82,7 @@ struct Parser
 {
     int config_file_version;
     Output *output;
-    Configuration *configuration;
+    GnomeRRConfig *configuration;
     GPtrArray *outputs;
     GPtrArray *configurations;
     GQueue *stack;
@@ -184,7 +184,7 @@ handle_start_element (GMarkupParseContext *context,
     {
 	g_assert (parser->configuration == NULL);
 	
-	parser->configuration = g_new0 (Configuration, 1);
+	parser->configuration = g_new0 (GnomeRRConfig, 1);
 	parser->configuration->clone = FALSE;
 	parser->configuration->outputs = g_new0 (Output *, 1);
     }
@@ -352,7 +352,7 @@ parser_free (Parser *parser)
 	output_free (parser->output);
 
     if (parser->configuration)
-	configuration_free (parser->configuration);
+	gnome_rr_config_free (parser->configuration);
 
     for (i = 0; i < parser->outputs->len; ++i)
     {
@@ -365,9 +365,9 @@ parser_free (Parser *parser)
 
     for (i = 0; i < parser->configurations->len; ++i)
     {
-	Configuration *config = parser->configurations->pdata[i];
+	GnomeRRConfig *config = parser->configurations->pdata[i];
 
-	configuration_free (config);
+	gnome_rr_config_free (config);
     }
 
     g_ptr_array_free (parser->configurations, TRUE);
@@ -379,11 +379,11 @@ parser_free (Parser *parser)
     g_free (parser);
 }
 
-static Configuration **
+static GnomeRRConfig **
 configurations_read_from_file (const gchar *filename, GError **error)
 {
     Parser *parser = g_new0 (Parser, 1);
-    Configuration **result;
+    GnomeRRConfig **result;
     GMarkupParser callbacks = {
 	handle_start_element,
 	handle_end_element,
@@ -408,7 +408,7 @@ configurations_read_from_file (const gchar *filename, GError **error)
     g_assert (parser->outputs);
     
     g_ptr_array_add (parser->configurations, NULL);
-    result = (Configuration **)g_ptr_array_free (parser->configurations, FALSE);
+    result = (GnomeRRConfig **)g_ptr_array_free (parser->configurations, FALSE);
     parser->configurations = g_ptr_array_new ();
     
     g_assert (parser->outputs);
@@ -418,11 +418,11 @@ out:
     return result;
 }
 
-static Configuration **
+static GnomeRRConfig **
 configurations_read (GError **error)
 {
     char *filename;
-    Configuration **configs;
+    GnomeRRConfig **configs;
     GError *err;
 
     /* Try the new configuration file... */
@@ -450,10 +450,10 @@ configurations_read (GError **error)
     return configs;
 }
 
-Configuration *
-configuration_new_current (GnomeRRScreen *screen)
+GnomeRRConfig *
+gnome_rr_config_new_current (GnomeRRScreen *screen)
 {
-    Configuration *config = g_new0 (Configuration, 1);
+    GnomeRRConfig *config = g_new0 (GnomeRRConfig, 1);
     GPtrArray *a = g_ptr_array_new ();
     GnomeRROutput **gnome_rr_outputs;
     int i;
@@ -584,7 +584,7 @@ configuration_new_current (GnomeRRScreen *screen)
     
     config->outputs = (Output **)g_ptr_array_free (a, FALSE);
 
-    g_assert (configuration_match (config, config));
+    g_assert (gnome_rr_config_match (config, config));
     
     return config;
 }
@@ -626,7 +626,7 @@ outputs_free (Output **outputs)
 }
 
 void
-configuration_free (Configuration *config)
+gnome_rr_config_free (GnomeRRConfig *config)
 {
     g_return_if_fail (config != NULL);
     outputs_free (config->outputs);
@@ -635,14 +635,14 @@ configuration_free (Configuration *config)
 }
 
 static void
-configurations_free (Configuration **configurations)
+configurations_free (GnomeRRConfig **configurations)
 {
     int i;
 
     g_assert (configurations != NULL);
 
     for (i = 0; configurations[i] != NULL; ++i)
-	configuration_free (configurations[i]);
+	gnome_rr_config_free (configurations[i]);
 
     g_free (configurations);
 }
@@ -713,7 +713,7 @@ output_match (Output *output1, Output *output2)
 }
 
 static Output *
-find_output (Configuration *config, const char *name)
+find_output (GnomeRRConfig *config, const char *name)
 {
     int i;
 
@@ -729,7 +729,7 @@ find_output (Configuration *config, const char *name)
 }
 
 gboolean
-configuration_match (Configuration *c1, Configuration *c2)
+gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
 {
     int i;
 
@@ -747,7 +747,7 @@ configuration_match (Configuration *c1, Configuration *c2)
 }
 
 static Output **
-make_outputs (Configuration *config)
+make_outputs (GnomeRRConfig *config)
 {
     GPtrArray *outputs;
     Output *first_on;;
@@ -785,7 +785,7 @@ make_outputs (Configuration *config)
 }
 
 gboolean
-configuration_applicable (Configuration  *configuration,
+gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 			  GnomeRRScreen       *screen)
 {
     Output **outputs = make_outputs (configuration);
@@ -807,15 +807,15 @@ configuration_applicable (Configuration  *configuration,
     return result;
 }
 
-static Configuration *
-configuration_find (Configuration **haystack,
-		    Configuration  *needle)
+static GnomeRRConfig *
+gnome_rr_config_find (GnomeRRConfig **haystack,
+		    GnomeRRConfig  *needle)
 {
     int i;
 
     for (i = 0; haystack[i] != NULL; ++i)
     {
-	if (configuration_match (haystack[i], needle))
+	if (gnome_rr_config_match (haystack[i], needle))
 	    return haystack[i];
     }
 
@@ -870,7 +870,7 @@ get_reflect_y (GnomeRRRotation r)
 }
 
 static void
-emit_configuration (Configuration *config,
+emit_configuration (GnomeRRConfig *config,
 		    GString *string)
 {
     int j;
@@ -924,7 +924,7 @@ emit_configuration (Configuration *config,
 }
 
 void
-configuration_sanitize (Configuration *config)
+gnome_rr_config_sanitize (GnomeRRConfig *config)
 {
     int i;
     int x_offset, y_offset;
@@ -958,9 +958,9 @@ configuration_sanitize (Configuration *config)
 
 
 gboolean
-configuration_save (Configuration *configuration, GError **err)
+gnome_rr_config_save (GnomeRRConfig *configuration, GError **err)
 {
-    Configuration **configurations;
+    GnomeRRConfig **configurations;
     GString *output = g_string_new("");
     int i;
     gchar *filename;
@@ -974,7 +974,7 @@ configuration_save (Configuration *configuration, GError **err)
     {
 	for (i = 0; configurations[i] != NULL; ++i)
 	{
-	    if (!configuration_match (configurations[i], configuration))
+	    if (!gnome_rr_config_match (configurations[i], configuration))
 		emit_configuration (configurations[i], output);
 	}
 
@@ -1004,7 +1004,7 @@ configuration_save (Configuration *configuration, GError **err)
 }
 
 static gboolean
-apply_configuration (Configuration *conf, GnomeRRScreen *screen)
+apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 {
     CrtcAssignment *assignment;
     Output **outputs;
@@ -1028,11 +1028,11 @@ apply_configuration (Configuration *conf, GnomeRRScreen *screen)
 }
 
 gboolean
-configuration_apply_stored (GnomeRRScreen *screen)
+gnome_rr_config_apply_stored (GnomeRRScreen *screen)
 {
-    Configuration **configs = configurations_read (NULL); /* NULL-GError */
-    Configuration *current;
-    Configuration *found;
+    GnomeRRConfig **configs = configurations_read (NULL); /* NULL-GError */
+    GnomeRRConfig *current;
+    GnomeRRConfig *found;
     gboolean result = TRUE;
 
     if (!screen)
@@ -1040,10 +1040,10 @@ configuration_apply_stored (GnomeRRScreen *screen)
     
     gnome_rr_screen_refresh (screen);
     
-    current = configuration_new_current (screen);
+    current = gnome_rr_config_new_current (screen);
     if (configs)
     {
-	if ((found = configuration_find (configs, current)))
+	if ((found = gnome_rr_config_find (configs, current)))
 	{
 	    apply_configuration (found, screen);
 	    result = TRUE;
@@ -1056,7 +1056,7 @@ configuration_apply_stored (GnomeRRScreen *screen)
 	configurations_free (configs);
     }
 	
-    configuration_free (current);
+    gnome_rr_config_free (current);
 
     return result;
 }

@@ -21,59 +21,59 @@
  * 
  * Author: Soren Sandmann <sandmann@redhat.com>
  */
-#ifndef MONITOR_DB_H
-#define MONITOR_DB_H
+#ifndef GNOME_RR_CONFIG_H
+#define GNOME_RR_CONFIG_H
 
 #ifndef GNOME_DESKTOP_USE_UNSTABLE_API
-#error    monitor-db.h is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including monitor-db.h
+#error   gnome-rr-config.h is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-rr-config.h
 #endif
 
 #include <libgnomeui/gnome-rr.h>
 #include <glib.h>
 
 typedef struct Output Output;
-typedef struct Configuration Configuration;
+typedef struct GnomeRRConfig GnomeRRConfig;
 
 struct Output
 {
-    char *	name;
+    char *		name;
 
-    gboolean	on;
-    int		width;
-    int		height;
-    int		rate;
-    int		x;
-    int		y;
+    gboolean		on;
+    int			width;
+    int			height;
+    int			rate;
+    int			x;
+    int			y;
     GnomeRRRotation	rotation;
 
-    gboolean	connected;
-    char	vendor[4];
-    guint	product;
-    guint	serial;
-    double	aspect;
-    int		pref_width;
-    int		pref_height;
-    char *      display_name;
+    gboolean		connected;
+    char		vendor[4];
+    guint		product;
+    guint		serial;
+    double		aspect;
+    int			pref_width;
+    int			pref_height;
+    char *		display_name;
 
-    gpointer	user_data;
+    gpointer		user_data;
 };
 
-struct Configuration
+struct GnomeRRConfig
 {
-    gboolean clone;
+    gboolean		clone;
     
-    Output **outputs;
+    Output **		outputs;
 };
 
-void            configuration_free         (Configuration  *configuration);
-Configuration  *configuration_new_current  (GnomeRRScreen       *screen);
-gboolean        configuration_match        (Configuration  *config1,
-					    Configuration  *config2);
-gboolean        configuration_save         (Configuration  *configuration,
-					    GError        **err);
-void		configuration_sanitize     (Configuration  *configuration);
-gboolean	configuration_apply_stored (GnomeRRScreen       *screen);
-gboolean	configuration_applicable   (Configuration  *configuration,
-					    GnomeRRScreen       *screen);
+void            gnome_rr_config_free         (GnomeRRConfig  *configuration);
+GnomeRRConfig  *gnome_rr_config_new_current  (GnomeRRScreen  *screen);
+gboolean        gnome_rr_config_match        (GnomeRRConfig  *config1,
+					      GnomeRRConfig  *config2);
+gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
+					      GError        **err);
+void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
+gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen);
+gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
+					      GnomeRRScreen  *screen);
 
 #endif
