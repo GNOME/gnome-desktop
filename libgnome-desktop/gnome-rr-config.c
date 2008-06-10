@@ -65,12 +65,12 @@ static gboolean parse_file_gmarkup (const gchar *file,
 
 typedef struct CrtcAssignment CrtcAssignment;
 
-static void            crtc_assignment_apply (CrtcAssignment *assign);
-static CrtcAssignment *crtc_assignment_new   (GnomeRRScreen       *screen,
-					      Output        **outputs);
-static void            crtc_assignment_free  (CrtcAssignment *assign);
-static void            output_free           (Output         *output);
-static Output *	       output_copy	     (Output         *output);
+static void            crtc_assignment_apply (CrtcAssignment  *assign);
+static CrtcAssignment *crtc_assignment_new   (GnomeRRScreen   *screen,
+					      Output         **outputs);
+static void            crtc_assignment_free  (CrtcAssignment  *assign);
+static void            output_free           (Output          *output);
+static Output *        output_copy           (Output          *output);
 
 static gchar *get_old_config_filename (void);
 static gchar *get_config_filename (void);
@@ -455,27 +455,27 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 {
     GnomeRRConfig *config = g_new0 (GnomeRRConfig, 1);
     GPtrArray *a = g_ptr_array_new ();
-    GnomeRROutput **gnome_rr_outputs;
+    GnomeRROutput **rr_outputs;
     int i;
     int clone_width = -1;
     int clone_height = -1;
 
     g_return_val_if_fail (screen != NULL, NULL);
 
-    gnome_rr_outputs = gnome_rr_screen_list_outputs (screen);
+    rr_outputs = gnome_rr_screen_list_outputs (screen);
 
     config->clone = FALSE;
     
-    for (i = 0; gnome_rr_outputs[i] != NULL; ++i)
+    for (i = 0; rr_outputs[i] != NULL; ++i)
     {
-	GnomeRROutput *gnome_rr_output = gnome_rr_outputs[i];
+	GnomeRROutput *rr_output = rr_outputs[i];
 	Output *output = g_new0 (Output, 1);
 	GnomeRRMode *mode = NULL;
-	const guint8 *edid_data = gnome_rr_output_get_edid_data (gnome_rr_output);
+	const guint8 *edid_data = gnome_rr_output_get_edid_data (rr_output);
 	GnomeRRCrtc *crtc;
 
-	output->name = g_strdup (gnome_rr_output_get_name (gnome_rr_output));
-	output->connected = gnome_rr_output_is_connected (gnome_rr_output);
+	output->name = g_strdup (gnome_rr_output_get_name (rr_output));
+	output->connected = gnome_rr_output_is_connected (rr_output);
 
 	if (!output->connected)
 	{
@@ -510,11 +510,11 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    }
 	    
 	    output->display_name = make_display_name (
-		gnome_rr_output_get_name (gnome_rr_output), info);
+		gnome_rr_output_get_name (rr_output), info);
 		
 	    g_free (info);
 		
-	    crtc = gnome_rr_output_get_crtc (gnome_rr_output);
+	    crtc = gnome_rr_output_get_crtc (rr_output);
 	    mode = crtc? gnome_rr_crtc_get_current_mode (crtc) : NULL;
 	    
 	    if (crtc && mode)
@@ -544,11 +544,11 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    }
 
 	    /* Get preferred size for the monitor */
-	    mode = gnome_rr_output_get_preferred_mode (gnome_rr_output);
+	    mode = gnome_rr_output_get_preferred_mode (rr_output);
 	    
 	    if (!mode)
 	    {
-		GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
+		GnomeRRMode **modes = gnome_rr_output_list_modes (rr_output);
 		
 		/* FIXME: we should pick the "best" mode here, where best is
 		 * sorted wrt
@@ -648,10 +648,10 @@ configurations_free (GnomeRRConfig **configurations)
 }
 
 static gboolean
-parse_file_gmarkup (const gchar *filename,
-		    const GMarkupParser *parser,
-		    gpointer data,
-		    GError **err)
+parse_file_gmarkup (const gchar          *filename,
+		    const GMarkupParser  *parser,
+		    gpointer             data,
+		    GError              **err)
 {
     GMarkupParseContext *context = NULL;
     gchar *contents = NULL;
