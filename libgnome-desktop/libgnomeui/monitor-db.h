@@ -44,7 +44,7 @@ struct Output
     int		rate;
     int		x;
     int		y;
-    RWRotation	rotation;
+    GnomeRRRotation	rotation;
 
     gboolean	connected;
     char	vendor[4];
@@ -66,14 +66,14 @@ struct Configuration
 };
 
 void            configuration_free         (Configuration  *configuration);
-Configuration  *configuration_new_current  (RWScreen       *screen);
+Configuration  *configuration_new_current  (GnomeRRScreen       *screen);
 gboolean        configuration_match        (Configuration  *config1,
 					    Configuration  *config2);
 gboolean        configuration_save         (Configuration  *configuration,
 					    GError        **err);
 void		configuration_sanitize     (Configuration  *configuration);
-gboolean	configuration_apply_stored (RWScreen       *screen);
+gboolean	configuration_apply_stored (GnomeRRScreen       *screen);
 gboolean	configuration_applicable   (Configuration  *configuration,
-					    RWScreen       *screen);
+					    GnomeRRScreen       *screen);
 
 #endif

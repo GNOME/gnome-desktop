@@ -66,7 +66,7 @@ static gboolean parse_file_gmarkup (const gchar *file,
 typedef struct CrtcAssignment CrtcAssignment;
 
 static void            crtc_assignment_apply (CrtcAssignment *assign);
-static CrtcAssignment *crtc_assignment_new   (RWScreen       *screen,
+static CrtcAssignment *crtc_assignment_new   (GnomeRRScreen       *screen,
 					      Output        **outputs);
 static void            crtc_assignment_free  (CrtcAssignment *assign);
 static void            output_free           (Output         *output);
@@ -215,9 +215,9 @@ handle_end_element (GMarkupParseContext *context,
     
     if (strcmp (name, "output") == 0)
     {
-	/* If no rotation properties were set, just use RW_ROTATION_0 */
+	/* If no rotation properties were set, just use GNOME_RR_ROTATION_0 */
 	if (parser->output->rotation == 0)
-	    parser->output->rotation = RW_ROTATION_0;
+	    parser->output->rotation = GNOME_RR_ROTATION_0;
 	
 	g_ptr_array_add (parser->outputs, parser->output);
 
@@ -305,33 +305,33 @@ handle_text (GMarkupParseContext *context,
     {
 	if (strcmp (text, "normal") == 0)
 	{
-	    parser->output->rotation |= RW_ROTATION_0;
+	    parser->output->rotation |= GNOME_RR_ROTATION_0;
 	}
 	else if (strcmp (text, "left") == 0)
 	{
-	    parser->output->rotation |= RW_ROTATION_90;
+	    parser->output->rotation |= GNOME_RR_ROTATION_90;
 	}
 	else if (strcmp (text, "upside_down") == 0)
 	{
-	    parser->output->rotation |= RW_ROTATION_180;
+	    parser->output->rotation |= GNOME_RR_ROTATION_180;
 	}
 	else if (strcmp (text, "right") == 0)
 	{
-	    parser->output->rotation |= RW_ROTATION_270;
+	    parser->output->rotation |= GNOME_RR_ROTATION_270;
 	}
     }
     else if (stack_is (parser, "reflect_x", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
 	{
-	    parser->output->rotation |= RW_REFLECT_X;
+	    parser->output->rotation |= GNOME_RR_REFLECT_X;
 	}
     }
     else if (stack_is (parser, "reflect_y", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
 	{
-	    parser->output->rotation |= RW_REFLECT_Y;
+	    parser->output->rotation |= GNOME_RR_REFLECT_Y;
 	}
     }
     else
@@ -451,31 +451,31 @@ configurations_read (GError **error)
 }
 
 Configuration *
-configuration_new_current (RWScreen *screen)
+configuration_new_current (GnomeRRScreen *screen)
 {
     Configuration *config = g_new0 (Configuration, 1);
     GPtrArray *a = g_ptr_array_new ();
-    RWOutput **rw_outputs;
+    GnomeRROutput **gnome_rr_outputs;
     int i;
     int clone_width = -1;
     int clone_height = -1;
 
     g_return_val_if_fail (screen != NULL, NULL);
 
-    rw_outputs = rw_screen_list_outputs (screen);
+    gnome_rr_outputs = gnome_rr_screen_list_outputs (screen);
 
     config->clone = FALSE;
     
-    for (i = 0; rw_outputs[i] != NULL; ++i)
+    for (i = 0; gnome_rr_outputs[i] != NULL; ++i)
     {
-	RWOutput *rw_output = rw_outputs[i];
+	GnomeRROutput *gnome_rr_output = gnome_rr_outputs[i];
 	Output *output = g_new0 (Output, 1);
-	RWMode *mode = NULL;
-	const guint8 *edid_data = rw_output_get_edid_data (rw_output);
-	RWCrtc *crtc;
+	GnomeRRMode *mode = NULL;
+	const guint8 *edid_data = gnome_rr_output_get_edid_data (gnome_rr_output);
+	GnomeRRCrtc *crtc;
 
-	output->name = g_strdup (rw_output_get_name (rw_output));
-	output->connected = rw_output_is_connected (rw_output);
+	output->name = g_strdup (gnome_rr_output_get_name (gnome_rr_output));
+	output->connected = gnome_rr_output_is_connected (gnome_rr_output);
 
 	if (!output->connected)
 	{
@@ -484,7 +484,7 @@ configuration_new_current (RWScreen *screen)
 	    output->width = -1;
 	    output->height = -1;
 	    output->rate = -1;
-	    output->rotation = RW_ROTATION_0;
+	    output->rotation = GNOME_RR_ROTATION_0;
 	}
 	else
 	{
@@ -510,22 +510,22 @@ configuration_new_current (RWScreen *screen)
 	    }
 	    
 	    output->display_name = make_display_name (
-		rw_output_get_name (rw_output), info);
+		gnome_rr_output_get_name (gnome_rr_output), info);
 		
 	    g_free (info);
 		
-	    crtc = rw_output_get_crtc (rw_output);
-	    mode = crtc? rw_crtc_get_current_mode (crtc) : NULL;
+	    crtc = gnome_rr_output_get_crtc (gnome_rr_output);
+	    mode = crtc? gnome_rr_crtc_get_current_mode (crtc) : NULL;
 	    
 	    if (crtc && mode)
 	    {
 		output->on = TRUE;
 		
-		rw_crtc_get_position (crtc, &output->x, &output->y);
-		output->width = rw_mode_get_width (mode);
-		output->height = rw_mode_get_height (mode);
-		output->rate = rw_mode_get_freq (mode);
-		output->rotation = rw_crtc_get_current_rotation (crtc);
+		gnome_rr_crtc_get_position (crtc, &output->x, &output->y);
+		output->width = gnome_rr_mode_get_width (mode);
+		output->height = gnome_rr_mode_get_height (mode);
+		output->rate = gnome_rr_mode_get_freq (mode);
+		output->rotation = gnome_rr_crtc_get_current_rotation (crtc);
 
 		if (output->x == 0 && output->y == 0) {
 			if (clone_width == -1) {
@@ -544,11 +544,11 @@ configuration_new_current (RWScreen *screen)
 	    }
 
 	    /* Get preferred size for the monitor */
-	    mode = rw_output_get_preferred_mode (rw_output);
+	    mode = gnome_rr_output_get_preferred_mode (gnome_rr_output);
 	    
 	    if (!mode)
 	    {
-		RWMode **modes = rw_output_list_modes (rw_output);
+		GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
 		
 		/* FIXME: we should pick the "best" mode here, where best is
 		 * sorted wrt
@@ -566,8 +566,8 @@ configuration_new_current (RWScreen *screen)
 	    
 	    if (mode)
 	    {
-		output->pref_width = rw_mode_get_width (mode);
-		output->pref_height = rw_mode_get_height (mode);
+		output->pref_width = gnome_rr_mode_get_width (mode);
+		output->pref_height = gnome_rr_mode_get_height (mode);
 	    }
 	    else
 	    {
@@ -786,7 +786,7 @@ make_outputs (Configuration *config)
 
 gboolean
 configuration_applicable (Configuration  *configuration,
-			  RWScreen       *screen)
+			  GnomeRRScreen       *screen)
 {
     Output **outputs = make_outputs (configuration);
     CrtcAssignment *assign = crtc_assignment_new (screen, outputs);
@@ -837,15 +837,15 @@ get_config_filename (void)
 }
 
 static const char *
-get_rotation_name (RWRotation r)
+get_rotation_name (GnomeRRRotation r)
 {
-    if (r & RW_ROTATION_0)
+    if (r & GNOME_RR_ROTATION_0)
 	return "normal";
-    if (r & RW_ROTATION_90)
+    if (r & GNOME_RR_ROTATION_90)
 	return "left";
-    if (r & RW_ROTATION_180)
+    if (r & GNOME_RR_ROTATION_180)
 	return "upside_down";
-    if (r & RW_ROTATION_270)
+    if (r & GNOME_RR_ROTATION_270)
 	return "right";
 
     return "normal";
@@ -858,15 +858,15 @@ yes_no (int x)
 }
 
 static const char *
-get_reflect_x (RWRotation r)
+get_reflect_x (GnomeRRRotation r)
 {
-    return yes_no (r & RW_REFLECT_X);
+    return yes_no (r & GNOME_RR_REFLECT_X);
 }
 
 static const char *
-get_reflect_y (RWRotation r)
+get_reflect_y (GnomeRRRotation r)
 {
-    return yes_no (r & RW_REFLECT_Y);
+    return yes_no (r & GNOME_RR_REFLECT_Y);
 }
 
 static void
@@ -1004,7 +1004,7 @@ configuration_save (Configuration *configuration, GError **err)
 }
 
 static gboolean
-apply_configuration (Configuration *conf, RWScreen *screen)
+apply_configuration (Configuration *conf, GnomeRRScreen *screen)
 {
     CrtcAssignment *assignment;
     Output **outputs;
@@ -1028,17 +1028,17 @@ apply_configuration (Configuration *conf, RWScreen *screen)
 }
 
 gboolean
-configuration_apply_stored (RWScreen *screen)
+configuration_apply_stored (GnomeRRScreen *screen)
 {
     Configuration **configs = configurations_read (NULL); /* NULL-GError */
     Configuration *current;
     Configuration *found;
-    gboolean result;
+    gboolean result = TRUE;
 
     if (!screen)
 	return FALSE;
     
-    rw_screen_refresh (screen);
+    gnome_rr_screen_refresh (screen);
     
     current = configuration_new_current (screen);
     if (configs)
@@ -1069,30 +1069,30 @@ typedef struct CrtcInfo CrtcInfo;
 
 struct CrtcInfo
 {
-    RWMode    *mode;
+    GnomeRRMode    *mode;
     int        x;
     int        y;
-    RWRotation rotation;
+    GnomeRRRotation rotation;
     GPtrArray *outputs;
 };
 
 struct CrtcAssignment
 {
-    RWScreen *screen;
+    GnomeRRScreen *screen;
     GHashTable *info;
 };
 
 static gboolean
 can_clone (CrtcInfo *info,
-	   RWOutput *output)
+	   GnomeRROutput *output)
 {
     int i;
 
     for (i = 0; i < info->outputs->len; ++i)
     {
-	RWOutput *clone = info->outputs->pdata[i];
+	GnomeRROutput *clone = info->outputs->pdata[i];
 
-	if (!rw_output_can_clone (clone, output))
+	if (!gnome_rr_output_can_clone (clone, output))
 	    return FALSE;
     }
 
@@ -1101,20 +1101,20 @@ can_clone (CrtcInfo *info,
 
 static gboolean
 crtc_assignment_assign (CrtcAssignment *assign,
-			RWCrtc         *crtc,
-			RWMode         *mode,
+			GnomeRRCrtc         *crtc,
+			GnomeRRMode         *mode,
 			int             x,
 			int             y,
-			RWRotation      rotation,
-			RWOutput       *output)
+			GnomeRRRotation      rotation,
+			GnomeRROutput       *output)
 {
     /* FIXME: We should reject stuff that is outside the screen ranges */
     
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
 
-    if (!rw_crtc_can_drive_output (crtc, output) ||
-	!rw_output_supports_mode (output, mode)  ||
-	!rw_crtc_supports_rotation (crtc, rotation))
+    if (!gnome_rr_crtc_can_drive_output (crtc, output) ||
+	!gnome_rr_output_supports_mode (output, mode)  ||
+	!gnome_rr_crtc_supports_rotation (crtc, rotation))
     {
 	return FALSE;
     }
@@ -1154,8 +1154,8 @@ crtc_assignment_assign (CrtcAssignment *assign,
 
 static void
 crtc_assignment_unassign (CrtcAssignment *assign,
-			  RWCrtc         *crtc,
-			  RWOutput       *output)
+			  GnomeRRCrtc         *crtc,
+			  GnomeRROutput       *output)
 {
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
 
@@ -1181,22 +1181,22 @@ configure_crtc (gpointer key,
 		gpointer value,
 		gpointer data)
 {
-    RWCrtc *crtc = key;
+    GnomeRRCrtc *crtc = key;
     CrtcInfo *info = value;
 
-    rw_crtc_set_config (crtc,
+    gnome_rr_crtc_set_config (crtc,
 			info->x, info->y,
 			info->mode,
 			info->rotation,
-			(RWOutput **)info->outputs->pdata,
+			(GnomeRROutput **)info->outputs->pdata,
 			info->outputs->len);
 }
 
 static gboolean
 mode_is_rotated (CrtcInfo *info)
 {
-    if ((info->rotation & RW_ROTATION_270)		||
-	(info->rotation & RW_ROTATION_90))
+    if ((info->rotation & GNOME_RR_ROTATION_270)		||
+	(info->rotation & GNOME_RR_ROTATION_90))
     {
 	return TRUE;
     }
@@ -1204,12 +1204,12 @@ mode_is_rotated (CrtcInfo *info)
 }
 
 static gboolean
-crtc_is_rotated (RWCrtc *crtc)
+crtc_is_rotated (GnomeRRCrtc *crtc)
 {
-    RWRotation r = rw_crtc_get_current_rotation (crtc);
+    GnomeRRRotation r = gnome_rr_crtc_get_current_rotation (crtc);
 
-    if ((r & RW_ROTATION_270)		||
-	(r & RW_ROTATION_90))
+    if ((r & GNOME_RR_ROTATION_270)		||
+	(r & GNOME_RR_ROTATION_90))
     {
 	return TRUE;
     }
@@ -1221,7 +1221,7 @@ static void
 crtc_assignment_apply (CrtcAssignment *assign)
 {
     GList *active_crtcs = g_hash_table_get_keys (assign->info);
-    RWCrtc **all_crtcs = rw_screen_list_crtcs (assign->screen);
+    GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
     GList *list;
     int width, height;
     int i;
@@ -1232,12 +1232,12 @@ crtc_assignment_apply (CrtcAssignment *assign)
     width = height = 1;
     for (list = active_crtcs; list != NULL; list = list->next)
     {
-	RWCrtc *crtc = list->data;
+	GnomeRRCrtc *crtc = list->data;
 	CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
 	int w, h;
 
-	w = rw_mode_get_width (info->mode);
-	h = rw_mode_get_height (info->mode);
+	w = gnome_rr_mode_get_width (info->mode);
+	h = gnome_rr_mode_get_height (info->mode);
 	
 	if (mode_is_rotated (info))
 	{
@@ -1251,7 +1251,7 @@ crtc_assignment_apply (CrtcAssignment *assign)
     }
     g_list_free (active_crtcs);
 
-    rw_screen_get_ranges (
+    gnome_rr_screen_get_ranges (
 	assign->screen, &min_width, &max_width, &min_height, &max_height);
 
     width = MAX (min_width, width);
@@ -1262,17 +1262,17 @@ crtc_assignment_apply (CrtcAssignment *assign)
     /* Turn off all crtcs currently displaying outside the new screen */
     for (i = 0; all_crtcs[i] != NULL; ++i)
     {
-	RWCrtc *crtc = all_crtcs[i];
-	RWMode *mode = rw_crtc_get_current_mode (crtc);
+	GnomeRRCrtc *crtc = all_crtcs[i];
+	GnomeRRMode *mode = gnome_rr_crtc_get_current_mode (crtc);
 	int x, y;
 
 	if (mode)
 	{
 	    int w, h;
-	    rw_crtc_get_position (crtc, &x, &y);
+	    gnome_rr_crtc_get_position (crtc, &x, &y);
 
-	    w = rw_mode_get_width (mode);
-	    h = rw_mode_get_height (mode);
+	    w = gnome_rr_mode_get_width (mode);
+	    h = gnome_rr_mode_get_height (mode);
 	    
 	    if (crtc_is_rotated (crtc))
 	    {
@@ -1282,17 +1282,17 @@ crtc_assignment_apply (CrtcAssignment *assign)
 	    }
 	    
 	    if (x + w > width || y + h > height)
-		rw_crtc_set_config (crtc, 0, 0, NULL, RW_ROTATION_0, NULL, 0);
+		gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
 	}
     }
 
     /* Turn off all CRTC's that are not in the assignment */
     for (i = 0; all_crtcs[i] != NULL; ++i)
     {
-	RWCrtc *crtc = all_crtcs[i];
+	GnomeRRCrtc *crtc = all_crtcs[i];
 	
 	if (!g_hash_table_lookup (assign->info, crtc))
-	    rw_crtc_set_config (crtc, 0, 0, NULL, RW_ROTATION_0, NULL, 0);
+	    gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
     }
 
     /* The 'physical size' of an X screen is meaningless if that screen
@@ -1304,7 +1304,7 @@ crtc_assignment_apply (CrtcAssignment *assign)
     width_mm = (width / 96.0) * 25.4 + 0.5;
     height_mm = (height / 96.0) * 25.4 + 0.5;
     
-    rw_screen_set_size (assign->screen, width, height, width_mm, height_mm);
+    gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
 
     g_hash_table_foreach (assign->info, configure_crtc, NULL);
 }
@@ -1317,11 +1317,11 @@ crtc_assignment_apply (CrtcAssignment *assign)
  * enough that it doesn't matter.
  */
 static gboolean
-real_assign_crtcs (RWScreen *screen,
+real_assign_crtcs (GnomeRRScreen *screen,
 		   Output **outputs,
 		   CrtcAssignment *assignment)
 {
-    RWCrtc **crtcs = rw_screen_list_crtcs (screen);
+    GnomeRRCrtc **crtcs = gnome_rr_screen_list_crtcs (screen);
     Output *output;
     int i;
 
@@ -1344,29 +1344,29 @@ real_assign_crtcs (RWScreen *screen,
 	 */
 	for (pass = 0; pass < 2; ++pass)
 	{
-	    RWCrtc *crtc = crtcs[i];
-	    RWOutput *rw_output = rw_screen_get_output_by_name (screen, output->name);
-	    RWMode **modes = rw_output_list_modes (rw_output);
+	    GnomeRRCrtc *crtc = crtcs[i];
+	    GnomeRROutput *gnome_rr_output = gnome_rr_screen_get_output_by_name (screen, output->name);
+	    GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
 	    int j;
 	
 	    for (j = 0; modes[j] != NULL; ++j)
 	    {
-		RWMode *mode = modes[j];
+		GnomeRRMode *mode = modes[j];
 		
-		if (rw_mode_get_width (mode) == output->width	&&
-		    rw_mode_get_height (mode) == output->height &&
-		    (pass == 1 || rw_mode_get_freq (mode) == output->rate))
+		if (gnome_rr_mode_get_width (mode) == output->width	&&
+		    gnome_rr_mode_get_height (mode) == output->height &&
+		    (pass == 1 || gnome_rr_mode_get_freq (mode) == output->rate))
 		{
 		    if (crtc_assignment_assign (
 			    assignment, crtc, modes[j],
 			    output->x, output->y,
 			    output->rotation,
-			    rw_output))
+			    gnome_rr_output))
 		    {
 			if (real_assign_crtcs (screen, outputs + 1, assignment))
 			    return TRUE;
 			
-			crtc_assignment_unassign (assignment, crtc, rw_output);
+			crtc_assignment_unassign (assignment, crtc, gnome_rr_output);
 		    }
 		}
 	    }
@@ -1384,7 +1384,7 @@ crtc_info_free (CrtcInfo *info)
 }
 
 static CrtcAssignment *
-crtc_assignment_new (RWScreen *screen, Output **outputs)
+crtc_assignment_new (GnomeRRScreen *screen, Output **outputs)
 {
     CrtcAssignment *assignment = g_new0 (CrtcAssignment, 1);
 
