@@ -1,4 +1,4 @@
-/* monitor-db.h
+/* gnome-rr-config.h
  *
  * Copyright 2007, 2008, Red Hat, Inc.
  * 
@@ -31,10 +31,10 @@
 #include <libgnomeui/gnome-rr.h>
 #include <glib.h>
 
-typedef struct Output Output;
+typedef struct GnomeOutputInfo GnomeOutputInfo;
 typedef struct GnomeRRConfig GnomeRRConfig;
 
-struct Output
+struct GnomeOutputInfo
 {
     char *		name;
 
@@ -62,11 +62,11 @@ struct GnomeRRConfig
 {
     gboolean		clone;
     
-    Output **		outputs;
+    GnomeOutputInfo **	outputs;
 };
 
-void            gnome_rr_config_free         (GnomeRRConfig  *configuration);
 GnomeRRConfig  *gnome_rr_config_new_current  (GnomeRRScreen  *screen);
+void            gnome_rr_config_free         (GnomeRRConfig  *configuration);
 gboolean        gnome_rr_config_match        (GnomeRRConfig  *config1,
 					      GnomeRRConfig  *config2);
 gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,

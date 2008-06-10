@@ -1,4 +1,4 @@
-/* monitor-db.c
+/* gnome-rr-config.c
  *
  * Copyright 2007, 2008, Red Hat, Inc.
  * 
@@ -65,12 +65,12 @@ static gboolean parse_file_gmarkup (const gchar *file,
 
 typedef struct CrtcAssignment CrtcAssignment;
 
-static void            crtc_assignment_apply (CrtcAssignment  *assign);
-static CrtcAssignment *crtc_assignment_new   (GnomeRRScreen   *screen,
-					      Output         **outputs);
-static void            crtc_assignment_free  (CrtcAssignment  *assign);
-static void            output_free           (Output          *output);
-static Output *        output_copy           (Output          *output);
+static void             crtc_assignment_apply (CrtcAssignment   *assign);
+static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
+					       GnomeOutputInfo **outputs);
+static void             crtc_assignment_free  (CrtcAssignment   *assign);
+static void             output_free           (GnomeOutputInfo  *output);
+static GnomeOutputInfo *output_copy           (GnomeOutputInfo  *output);
 
 static gchar *get_old_config_filename (void);
 static gchar *get_config_filename (void);
@@ -80,12 +80,12 @@ typedef struct Parser Parser;
 /* Parser for monitor configurations */
 struct Parser
 {
-    int config_file_version;
-    Output *output;
-    GnomeRRConfig *configuration;
-    GPtrArray *outputs;
-    GPtrArray *configurations;
-    GQueue *stack;
+    int			config_file_version;
+    GnomeOutputInfo *	output;
+    GnomeRRConfig *	configuration;
+    GPtrArray *		outputs;
+    GPtrArray *		configurations;
+    GQueue *		stack;
 };
 
 static int
@@ -156,7 +156,7 @@ handle_start_element (GMarkupParseContext *context,
 	int i;
 	g_assert (parser->output == NULL);
 
-	parser->output = g_new0 (Output, 1);
+	parser->output = g_new0 (GnomeOutputInfo, 1);
 	parser->output->rotation = 0;
 	
 	for (i = 0; attr_names[i] != NULL; ++i)
@@ -186,7 +186,7 @@ handle_start_element (GMarkupParseContext *context,
 	
 	parser->configuration = g_new0 (GnomeRRConfig, 1);
 	parser->configuration->clone = FALSE;
-	parser->configuration->outputs = g_new0 (Output *, 1);
+	parser->configuration->outputs = g_new0 (GnomeOutputInfo *, 1);
     }
     else if (strcmp (name, "monitors") == 0)
     {
@@ -227,7 +227,7 @@ handle_end_element (GMarkupParseContext *context,
     {
 	g_ptr_array_add (parser->outputs, NULL);
 	parser->configuration->outputs =
-	    (Output **)g_ptr_array_free (parser->outputs, FALSE);
+	    (GnomeOutputInfo **)g_ptr_array_free (parser->outputs, FALSE);
 	parser->outputs = g_ptr_array_new ();
 	g_ptr_array_add (parser->configurations, parser->configuration);
 	parser->configuration = NULL;
@@ -356,7 +356,7 @@ parser_free (Parser *parser)
 
     for (i = 0; i < parser->outputs->len; ++i)
     {
-	Output *output = parser->outputs->pdata[i];
+	GnomeOutputInfo *output = parser->outputs->pdata[i];
 
 	output_free (output);
     }
@@ -469,7 +469,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
     for (i = 0; rr_outputs[i] != NULL; ++i)
     {
 	GnomeRROutput *rr_output = rr_outputs[i];
-	Output *output = g_new0 (Output, 1);
+	GnomeOutputInfo *output = g_new0 (GnomeOutputInfo, 1);
 	GnomeRRMode *mode = NULL;
 	const guint8 *edid_data = gnome_rr_output_get_edid_data (rr_output);
 	GnomeRRCrtc *crtc;
@@ -582,7 +582,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 
     g_ptr_array_add (a, NULL);
     
-    config->outputs = (Output **)g_ptr_array_free (a, FALSE);
+    config->outputs = (GnomeOutputInfo **)g_ptr_array_free (a, FALSE);
 
     g_assert (gnome_rr_config_match (config, config));
     
@@ -590,7 +590,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 }
 
 static void
-output_free (Output *output)
+output_free (GnomeOutputInfo *output)
 {
     if (output->display_name)
 	g_free (output->display_name);
@@ -601,10 +601,10 @@ output_free (Output *output)
     g_free (output);
 }
 
-static Output *
-output_copy (Output *output)
+static GnomeOutputInfo *
+output_copy (GnomeOutputInfo *output)
 {
-    Output *copy = g_new0 (Output, 1);
+    GnomeOutputInfo *copy = g_new0 (GnomeOutputInfo, 1);
 
     *copy = *output;
 
@@ -615,7 +615,7 @@ output_copy (Output *output)
 }
 
 static void
-outputs_free (Output **outputs)
+outputs_free (GnomeOutputInfo **outputs)
 {
     int i;
 
@@ -689,7 +689,7 @@ out:
 }
 
 static gboolean
-output_match (Output *output1, Output *output2)
+output_match (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
 {
     g_assert (output1 != NULL);
     g_assert (output2 != NULL);
@@ -712,14 +712,14 @@ output_match (Output *output1, Output *output2)
     return TRUE;
 }
 
-static Output *
+static GnomeOutputInfo *
 find_output (GnomeRRConfig *config, const char *name)
 {
     int i;
 
     for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	Output *output = config->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 	
 	if (strcmp (name, output->name) == 0)
 	    return output;
@@ -735,8 +735,8 @@ gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
 
     for (i = 0; c1->outputs[i] != NULL; ++i)
     {
-	Output *output1 = c1->outputs[i];
-	Output *output2;
+	GnomeOutputInfo *output1 = c1->outputs[i];
+	GnomeOutputInfo *output2;
 
 	output2 = find_output (c2, output1->name);
 	if (!output2 || !output_match (output1, output2))
@@ -746,11 +746,11 @@ gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
     return TRUE;
 }
 
-static Output **
+static GnomeOutputInfo **
 make_outputs (GnomeRRConfig *config)
 {
     GPtrArray *outputs;
-    Output *first_on;;
+    GnomeOutputInfo *first_on;;
     int i;
 
     outputs = g_ptr_array_new ();
@@ -759,8 +759,8 @@ make_outputs (GnomeRRConfig *config)
     
     for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	Output *old = config->outputs[i];
-	Output *new = output_copy (old);
+	GnomeOutputInfo *old = config->outputs[i];
+	GnomeOutputInfo *new = output_copy (old);
 
 	if (old->on && !first_on)
 	    first_on = old;
@@ -781,14 +781,14 @@ make_outputs (GnomeRRConfig *config)
 
     g_ptr_array_add (outputs, NULL);
 
-    return (Output **)g_ptr_array_free (outputs, FALSE);
+    return (GnomeOutputInfo **)g_ptr_array_free (outputs, FALSE);
 }
 
 gboolean
 gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 			  GnomeRRScreen       *screen)
 {
-    Output **outputs = make_outputs (configuration);
+    GnomeOutputInfo **outputs = make_outputs (configuration);
     CrtcAssignment *assign = crtc_assignment_new (screen, outputs);
     gboolean result;
 
@@ -881,7 +881,7 @@ emit_configuration (GnomeRRConfig *config,
     
     for (j = 0; config->outputs[j] != NULL; ++j)
     {
-	Output *output = config->outputs[j];
+	GnomeOutputInfo *output = config->outputs[j];
 	
 	g_string_append_printf (
 	    string, "      <output name=\"%s\">\n", output->name);
@@ -935,7 +935,7 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
     x_offset = y_offset = G_MAXINT;
     for (i = 0; config->outputs[i]; ++i)
     {
-	Output *output = config->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
 	if (output->on)
 	{
@@ -946,7 +946,7 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
 
     for (i = 0; config->outputs[i]; ++i)
     {
-	Output *output = config->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 	
 	if (output->on)
 	{
@@ -1007,7 +1007,7 @@ static gboolean
 apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 {
     CrtcAssignment *assignment;
-    Output **outputs;
+    GnomeOutputInfo **outputs;
 
     outputs = make_outputs (conf);
 
@@ -1318,11 +1318,11 @@ crtc_assignment_apply (CrtcAssignment *assign)
  */
 static gboolean
 real_assign_crtcs (GnomeRRScreen *screen,
-		   Output **outputs,
+		   GnomeOutputInfo **outputs,
 		   CrtcAssignment *assignment)
 {
     GnomeRRCrtc **crtcs = gnome_rr_screen_list_crtcs (screen);
-    Output *output;
+    GnomeOutputInfo *output;
     int i;
 
     output = *outputs;
@@ -1345,7 +1345,8 @@ real_assign_crtcs (GnomeRRScreen *screen,
 	for (pass = 0; pass < 2; ++pass)
 	{
 	    GnomeRRCrtc *crtc = crtcs[i];
-	    GnomeRROutput *gnome_rr_output = gnome_rr_screen_get_output_by_name (screen, output->name);
+	    GnomeRROutput *gnome_rr_output =
+		gnome_rr_screen_get_output_by_name (screen, output->name);
 	    GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
 	    int j;
 	
@@ -1384,7 +1385,7 @@ crtc_info_free (CrtcInfo *info)
 }
 
 static CrtcAssignment *
-crtc_assignment_new (GnomeRRScreen *screen, Output **outputs)
+crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 {
     CrtcAssignment *assignment = g_new0 (CrtcAssignment, 1);
 
