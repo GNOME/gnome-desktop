@@ -22,7 +22,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-hint.c		\
 	gnome-bg.c		\
 	display-name.c		\
-	gnomerr.c		\
+	gnome-rr.c		\
 	monitor-db.c		\
 	edid-parse.c		\
 	edid.h
