@@ -21,11 +21,11 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-ditem-edit.c	\
 	gnome-hint.c		\
 	gnome-bg.c		\
- 	display-name.c		\
- 	randrwrap.c		\
- 	monitor-db.c		\
- 	edid-parse.c		\
- 	edid.h
+	display-name.c		\
+	gnomerr.c		\
+	monitor-db.c		\
+	edid-parse.c		\
+	edid.h
 
 libgnome_desktop_2_la_LIBADD =	\
 	$(XLIB_LIBS)		\

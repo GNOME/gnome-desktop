@@ -3,5 +3,5 @@ libgnomeui_desktop_HEADERS =	\
 	gnome-ditem-edit.h	\
 	gnome-hint.h		\
 	gnome-bg.h		\
- 	randrwrap.h		\
- 	monitor-db.h
+	gnome-rr.h		\
+	monitor-db.h

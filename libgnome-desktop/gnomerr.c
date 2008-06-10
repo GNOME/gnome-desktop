@@ -1,4 +1,4 @@
-/* randrwrap.c
+/* gnome-rr.c
  *
  * Copyright 2007, 2008, Red Hat, Inc.
  * 
@@ -24,7 +24,7 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 
-#include "libgnomeui/randrwrap.h"
+#include "libgnomeui/gnome-rr.h"
 #include <string.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>

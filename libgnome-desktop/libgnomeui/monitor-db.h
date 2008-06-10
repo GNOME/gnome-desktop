@@ -28,7 +28,7 @@
 #error    monitor-db.h is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including monitor-db.h
 #endif
 
-#include <libgnomeui/randrwrap.h>
+#include <libgnomeui/gnome-rr.h>
 #include <glib.h>
 
 typedef struct Output Output;
