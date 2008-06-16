@@ -20,12 +20,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-item.c	\
 	gnome-ditem-edit.c	\
 	gnome-hint.c		\
-	gnome-bg.c		\
-	display-name.c		\
-	gnome-rr.c		\
-	gnome-rr-config.c	\
-	edid-parse.c		\
-	edid.h
+	gnome-bg.c
 
 libgnome_desktop_2_la_LIBADD =	\
 	$(XLIB_LIBS)		\

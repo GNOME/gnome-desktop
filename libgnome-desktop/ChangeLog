@@ -1,31 +1,89 @@
-Tue Jun 10 13:29:52 2008  Søren Sandmann  <sandmann@redhat.com>
+==================== 2.23.3 ====================
 
-	* Put RW* into the gnome namespace; various formatting fixes
+Sun Jun  1 20:49:10 2008  Søren Sandmann  <sandmann@redhat.com>
 
-2008-05-14  Soren Sandmann Pedersen  <sandmann@redhat.com>
+	* gnome-bg.c (gnome_bg_get_filename): Implement this function.
 
-	* libgnomeui/randrwrap.h: Add copyright statement and warning
-	about unstable API.
+Sun Jun  1 20:35:56 2008  Søren Sandmann  <sandmann@redhat.com>
 
-	* libgnomeui/monitor-db.h: Same.
+	* gnome-bg.c: Monitor the image file.
 
-	* monitor-db.c: Same
+Sun Jun  1 19:35:42 2008  Søren Sandmann  <sandmann@redhat.com>
 
-	* randrwrap.c: Same
+	* gnome-bg.[ch]: Add getters for the various properties
 
-	* edid.h: Add Copyright statement and header guards
+Sun Jun  1 19:01:19 2008  Søren Sandmann  <sandmann@redhat.com>
 
-2008-04-17  James Westby  <james.westby@canonical.com>
- 
- 	* monitor-db.c (configuration_new_current): Invert the logic in
- 	the detection of clone mode so that it works for a single screen
- 	as well. Without this change single screens are always reported as
- 	clone, which makes no sense.
+	* gnome-bg.c (scale_thumbnail): Some tweaks to the tile scaling
+	heuristic. 
 
-2008-05-14  Soren Sandmann Pedersen  <sandmann@redhat.com>
+	* gnome-bg.c (gnome_bg_save_to_preferences): New function
 
-	* Check in RandR 1.2 support
-	
+	* gnome-bg.c (placement_lookup): Use tables to convert between
+	enums and strings.
+
+	* gnome-bg.c (struct _GnomeBG): Change the color names to primary
+	and secondary
+
+Sat May 31 01:38:52 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (scale_thumbnail): Make sure tiles are at least 24
+	pixels wide. 
+
+Sat May 31 01:15:33 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (create_img_thumbnail): Pass the correct filename to
+	scale_thumbnail().
+
+Sat May 31 00:37:10 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.[ch]: Get rid of URIs. We now only deal in
+	filenames. (Except as necessary for thumbnails).
+
+2008-05-17  Vincent Untz  <vuntz@gnome.org>
+
+	* gnome-bg.c: (create_thumbnail_for_uri): fix leak.
+	Patch by Kjartan Maraas <kmaraas@gnome.org>. Fix bug #532152.
+
+Sat May 17 00:55:48 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_set_uri): don't call g_path_is_absolute()
+	on a NULL uri.
+
+Fri May 16 23:39:26 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_set_uri): Set the URI mtime here to prevent
+	loops where someone setting the same URI in the changed callback
+	causes the changed callback to be emitted.
+
+	* gnome-bg.c (blend): Coding style fix.
+
+2008-05-14  William Jon McCann  <jmccann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_load_from_preferences): Falls back to the
+	default image if the user's background doesn't exist.  Prevents
+	a white screen on OS upgrade.
+	Patch by Ray Strode <rstrode@redhat.com>
+
+2008-05-14  William Jon McCann  <jmccann@redhat.com>
+
+	* gnome-bg.c (gnome_bg_changes_with_size),
+	(gnome_bg_create_pixmap), (gnome_bg_get_image_size),
+	(create_img_thumbnail), (find_best_size), (get_pixbuf),
+	(handle_start_element), (handle_text), (slideshow_unref),
+	(dump_bg), (read_slideshow_file), (slideshow_changes_with_size):
+	Support multi-resolution backgrounds
+	Patch by Matthias Clasen <mclasen@redhat.com>
+
+2008-05-14  William Jon McCann  <jmccann@redhat.com>
+
+	* gnome-bg.c (file_cache_entry_delete), (create_img_thumbnail),
+	(get_pixbuf), (slideshow_ref), (slideshow_unref),
+	(read_slideshow_file):
+	Fix some logic errors wrt to caching of slideshows that may cause
+	nautilus crashes
+	Patch by Matthias Clasen <mclasen@redhat.com>
+
 ==================== 2.23.2 ====================
 
 2008-05-12  William Jon McCann  <jmccann@redhat.com>

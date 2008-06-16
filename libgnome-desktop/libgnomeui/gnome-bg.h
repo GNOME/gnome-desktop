@@ -61,43 +61,54 @@ typedef enum {
 	GNOME_BG_PLACEMENT_FILL_SCREEN
 } GnomeBGPlacement;
 
-GType      gnome_bg_get_type           (void);
-GnomeBG *  gnome_bg_new                (void);
+GType            gnome_bg_get_type              (void);
+GnomeBG *        gnome_bg_new                   (void);
+void             gnome_bg_load_from_preferences (GnomeBG               *bg,
+						 GConfClient           *client);
+void             gnome_bg_save_to_preferences   (GnomeBG               *bg,
+						 GConfClient           *client);
+/* Setters */
+void             gnome_bg_set_filename          (GnomeBG               *bg,
+						 const char            *filename);
+void             gnome_bg_set_placement         (GnomeBG               *bg,
+						 GnomeBGPlacement       placement);
+void             gnome_bg_set_color             (GnomeBG               *bg,
+						 GnomeBGColorType       type,
+						 GdkColor              *primary,
+						 GdkColor              *secondary);
+/* Getters */
+GnomeBGPlacement gnome_bg_get_placement         (GnomeBG               *bg);
+void		 gnome_bg_get_color             (GnomeBG               *bg,
+						 GnomeBGColorType      *type,
+						 GdkColor              *primary,
+						 GdkColor              *secondary);
+const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 
-void       gnome_bg_load_from_preferences (GnomeBG               *bg,
-                                           GConfClient           *client);
-
-void       gnome_bg_set_placement      (GnomeBG               *img,
-					GnomeBGPlacement       placement);
-void       gnome_bg_set_color          (GnomeBG               *img,
-					GnomeBGColorType       type,
-					GdkColor              *c1,
-					GdkColor              *c2);
-void       gnome_bg_set_uri            (GnomeBG               *img,
-					const char            *uri);
-void       gnome_bg_draw               (GnomeBG               *img,
-					GdkPixbuf             *dest);
-GdkPixmap *gnome_bg_create_pixmap      (GnomeBG               *img,
-					GdkWindow             *window,
-					int                    width,
-					int                    height,
-					gboolean               root);
-gboolean   gnome_bg_get_image_size     (GnomeBG	               *bg,
-					GnomeThumbnailFactory *factory,
-					int		       *width,
-					int		       *height);
-GdkPixbuf *gnome_bg_create_thumbnail   (GnomeBG               *bg,
-					GnomeThumbnailFactory *factory,
-					GdkScreen             *screen,
-					int		       dest_width,
-					int		       dest_height);
-gboolean   gnome_bg_is_dark            (GnomeBG               *img);
-gboolean   gnome_bg_changes_with_size  (GnomeBG               *img);
+/* Drawing and thumbnailing */
+void             gnome_bg_draw                  (GnomeBG               *bg,
+						 GdkPixbuf             *dest);
+GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
+						 GdkWindow             *window,
+						 int                    width,
+						 int                    height,
+						 gboolean               root);
+gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
+						 GnomeThumbnailFactory *factory,
+						 int                   *width,
+						 int                   *height);
+GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
+						 GnomeThumbnailFactory *factory,
+						 GdkScreen             *screen,
+						 int                    dest_width,
+						 int                    dest_height);
+gboolean         gnome_bg_is_dark               (GnomeBG               *bg);
+gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
 
 
 /* Set a pixmap as root - not a GnomeBG method */
-void       gnome_bg_set_pixmap_as_root (GdkScreen             *screen,
-					GdkPixmap             *pixmap);
+void             gnome_bg_set_pixmap_as_root    (GdkScreen             *screen,
+						 GdkPixmap             *pixmap);
+
 
 G_END_DECLS
 
