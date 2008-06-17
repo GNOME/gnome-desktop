@@ -15,9 +15,6 @@ EXTRA_DIST =			\
 	gnome-version.xml	\
 	COPYING-DOCS		\
 	HACKING			\
-	intltool-extract.in	\
-	intltool-merge.in	\
-	intltool-update.in	\
 	gnome-doc-utils.make
 
 versiondir=$(datadir)/gnome-about
@@ -28,7 +25,4 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
 CLEANFILES = $(version_DATA)
 DISTCLEANFILES = \
-  intltool-extract \
-  intltool-merge \
-  intltool-update \
   gnome-doc-utils.make
