@@ -5,4 +5,4 @@ DOC_MODULE = fdl
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = ar es fr hu ko oc sv uk vi
+DOC_LINGUAS = ar es fr hu ko oc sv uk vi de
