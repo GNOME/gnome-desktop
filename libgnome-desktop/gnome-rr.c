@@ -327,7 +327,9 @@ fill_out_screen_info (Display *xdisplay,
     }
     else
     {
+#if 0
 	g_print ("Couldn't get screen resources\n");
+#endif
 	
 	return FALSE;
     }
@@ -638,7 +640,9 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res)
     GPtrArray *a;
     int i;
     
+#if 0
     g_print ("Output %lx Timestamp: %u\n", output->id, (guint32)info->timestamp);
+#endif
     
     if (!info || !output->info)
     {
@@ -1037,7 +1041,9 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     GPtrArray *a;
     int i;
     
+#if 0
     g_print ("CRTC %lx Timestamp: %u\n", crtc->id, (guint32)info->timestamp);
+#endif
     
     if (!info)
     {
@@ -1148,68 +1154,3 @@ mode_free (GnomeRRMode *mode)
     g_free (mode->name);
     g_free (mode);
 }
-
-
-#ifdef INCLUDE_MAIN
-static void
-on_screen_changed (GnomeRRScreen *screen, gpointer data)
-{
-    g_print ("Changed\n");
-}
-
-static gboolean
-do_refresh (gpointer data)
-{
-    GnomeRRScreen *screen = data;
-    
-    gnome_rr_screen_refresh (screen);
-    
-    return TRUE;
-}
-
-int
-main (int argc, char **argv)
-{
-    int i;
-    
-    gtk_init (&argc, &argv);
-    
-    GnomeRRScreen *screen = gnome_rr_screen_new (gdk_screen_get_default(),
-					    on_screen_changed,
-					    NULL);
-    
-    for (i = 0; screen->info->crtcs[i]; ++i)
-    {
-	GnomeRRCrtc *crtc = screen->info->crtcs[i];
-	
-	if (crtc->current_mode)
-	{
-	    g_print ("CRTC %p: (%d %d %d %d)\n",
-		     crtc, crtc->x, crtc->y,
-		     crtc->current_mode->width, crtc->current_mode->height);
-	}
-	else
-	{
-	    g_print ("CRTC %p: turned off\n", crtc);
-	}
-    }
-    
-    for (i = 0; screen->info->outputs[i]; ++i)
-    {
-	GnomeRROutput *output = screen->info->outputs[i];
-	
-	g_print ("Output %s currently", output->name);
-	
-	if (!output->current_crtc)
-	    g_print (" turned off\n");
-	else
-	    g_print (" driven by CRTC %p\n", output->current_crtc);
-    }
-    
-    g_timeout_add (500, do_refresh, screen);
-    
-    gtk_main ();
-    
-    return 0;
-}
-#endif

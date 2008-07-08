@@ -22,6 +22,8 @@
 
 /* Author: Soren Sandmann <sandmann@redhat.com> */
 
+#include <config.h>
+#include <glib/gi18n-lib.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
@@ -207,7 +209,7 @@ make_display_name (const char *output_name,
 	 strstr ("LVDS", output_name)	||
 	 strstr ("Lvds", output_name)))
     {
-	vendor = "Laptop";
+	vendor = _("Laptop");
     }
     else if (info)
     {
@@ -215,7 +217,7 @@ make_display_name (const char *output_name,
     }
     else
     {
-	vendor = "Unknown";
+	vendor = _("Unknown");
     }
 
     if (info && info->width_mm != -1 && info->height_mm)
