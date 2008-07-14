@@ -280,6 +280,9 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 {
 	char    *tmp;
 	char    *filename;
+	GnomeBGColorType ctype;
+	GdkColor c1, c2;
+	GnomeBGPlacement placement;
 
 	g_return_if_fail (GNOME_IS_BG (bg));
 	g_return_if_fail (client != NULL);
@@ -317,26 +320,26 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 
 	/* Colors */
 	tmp = gconf_client_get_string (client, BG_KEY_PRIMARY_COLOR, NULL);
-	color_from_string (tmp, &bg->primary);
+	color_from_string (tmp, &c1);
 	g_free (tmp);
 
 	tmp = gconf_client_get_string (client, BG_KEY_SECONDARY_COLOR, NULL);
-	color_from_string (tmp, &bg->secondary);
+	color_from_string (tmp, &c2);
 	g_free (tmp);
 
 	/* Color type */
 	tmp = gconf_client_get_string (client, BG_KEY_COLOR_TYPE, NULL);
-	color_type_from_string (tmp, &bg->color_type);
+	color_type_from_string (tmp, &ctype);
 	g_free (tmp);
 
 	/* Placement */
 	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_PLACEMENT, NULL);
-	placement_from_string (tmp, &bg->placement);
+	placement_from_string (tmp, &placement);
 	g_free (tmp);
 
+	gnome_bg_set_color (bg, ctype, &c1, &c2);
+	gnome_bg_set_placement (bg, placement);
 	gnome_bg_set_filename (bg, filename);
-
-	queue_changed (bg);
 }
 
 void
@@ -1104,12 +1107,9 @@ static double
 now (void)
 {
 	GTimeVal tv;
-	time_t t;
 
 	g_get_current_time (&tv);
 
-	time (&t);
-	
 	return (double)tv.tv_sec + (tv.tv_usec / 1000000.0);
 }
 
@@ -2133,12 +2133,7 @@ slideshow_unref (SlideShow *show)
 
 	g_queue_free (show->slides);
 	
-	for (list = show->stack->head; list != NULL; list = list->next) {
-		gchar *str = list->data;
-		
-		g_free (str);
-	}
-	
+	g_list_foreach (show->stack->head, (GFunc) g_free, NULL);
 	g_queue_free (show->stack);
 	
 	g_free (show);
