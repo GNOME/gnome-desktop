@@ -665,9 +665,11 @@ gnome_bg_draw (GnomeBG *bg, GdkPixbuf *dest)
 gboolean
 gnome_bg_changes_with_size (GnomeBG *bg)
 {
+	SlideShow *show;
+
 	g_return_val_if_fail (bg != NULL, FALSE);
 
-	SlideShow *show = get_as_slideshow (bg, bg->filename);
+	show = get_as_slideshow (bg, bg->filename);
 	if (show) 
 		return slideshow_changes_with_size (show);
 	
