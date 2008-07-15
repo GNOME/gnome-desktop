@@ -430,23 +430,27 @@ configurations_read (GError **error)
     filename = get_config_filename ();
 
     err = NULL;
+    
     configs = configurations_read_from_file (filename, &err);
 
     g_free (filename);
 
-    if (g_error_matches (err, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+    if (err)
     {
-	g_error_free (err);
-
-	/* Okay, so try the old configuration file */
-	filename = get_old_config_filename ();
-	configs = configurations_read_from_file (filename, error);
-	g_free (filename);
-
-	return configs;
+	if (g_error_matches (err, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+	{
+	    g_error_free (err);
+	    
+	    /* Okay, so try the old configuration file */
+	    filename = get_old_config_filename ();
+	    configs = configurations_read_from_file (filename, error);
+	    g_free (filename);
+	}
+	else
+	{
+	    g_propagate_error (error, err);
+	}
     }
-
-    g_propagate_error (error, err);
     return configs;
 }
 
