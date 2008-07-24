@@ -754,7 +754,7 @@ static GnomeOutputInfo **
 make_outputs (GnomeRRConfig *config)
 {
     GPtrArray *outputs;
-    GnomeOutputInfo *first_on;;
+    GnomeOutputInfo *first_on;
     int i;
 
     outputs = g_ptr_array_new ();

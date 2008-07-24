@@ -137,14 +137,14 @@ decode_display_parameters (const uchar *edid, MonitorInfo *info)
 	};
 
 	bits = get_bits (edid[0x14], 4, 6);
-	info->digital.bits_per_primary = bit_depth[bits];
+	info->connector.digital.bits_per_primary = bit_depth[bits];
 
 	bits = get_bits (edid[0x14], 0, 3);
 	
 	if (bits <= 5)
-	    info->digital.interface = interfaces[bits];
+	    info->connector.digital.interface = interfaces[bits];
 	else
-	    info->digital.interface = UNDEFINED;
+	    info->connector.digital.interface = UNDEFINED;
     }
     else
     {
@@ -158,17 +158,17 @@ decode_display_parameters (const uchar *edid, MonitorInfo *info)
 	    { 0.7,   0.0,    0.7 },
 	};
 
-	info->analog.video_signal_level = levels[bits][0];
-	info->analog.sync_signal_level = levels[bits][1];
-	info->analog.total_signal_level = levels[bits][2];
+	info->connector.analog.video_signal_level = levels[bits][0];
+	info->connector.analog.sync_signal_level = levels[bits][1];
+	info->connector.analog.total_signal_level = levels[bits][2];
 
-	info->analog.blank_to_black = get_bit (edid[0x14], 4);
+	info->connector.analog.blank_to_black = get_bit (edid[0x14], 4);
 
-	info->analog.separate_hv_sync = get_bit (edid[0x14], 3);
-	info->analog.composite_sync_on_h = get_bit (edid[0x14], 2);
-	info->analog.composite_sync_on_green = get_bit (edid[0x14], 1);
+	info->connector.analog.separate_hv_sync = get_bit (edid[0x14], 3);
+	info->connector.analog.composite_sync_on_h = get_bit (edid[0x14], 2);
+	info->connector.analog.composite_sync_on_green = get_bit (edid[0x14], 1);
 
-	info->analog.serration_on_vsync = get_bit (edid[0x14], 0);
+	info->connector.analog.serration_on_vsync = get_bit (edid[0x14], 0);
     }
 
     /* Screen Size / Aspect Ratio */
@@ -210,11 +210,11 @@ decode_display_parameters (const uchar *edid, MonitorInfo *info)
 
     if (info->is_digital)
     {
-	info->digital.rgb444 = TRUE;
+	info->connector.digital.rgb444 = TRUE;
 	if (get_bit (edid[0x18], 3))
-	    info->digital.ycrcb444 = 1;
+	    info->connector.digital.ycrcb444 = 1;
 	if (get_bit (edid[0x18], 4))
-	    info->digital.ycrcb422 = 1;
+	    info->connector.digital.ycrcb422 = 1;
     }
     else
     {
@@ -224,7 +224,7 @@ decode_display_parameters (const uchar *edid, MonitorInfo *info)
 	    MONOCHROME, RGB, OTHER_COLOR, UNDEFINED_COLOR
 	};
 
-	info->analog.color_type = color_type[bits];
+	info->connector.analog.color_type = color_type[bits];
     }
 
     info->srgb_is_standard = get_bit (edid[0x18], 2);
@@ -452,26 +452,26 @@ decode_detailed_timing (const uchar *timing,
     detailed->digital_sync = get_bit (bits, 4);
     if (detailed->digital_sync)
     {
-	detailed->digital.composite = !get_bit (bits, 3);
+	detailed->connector.digital.composite = !get_bit (bits, 3);
 
-	if (detailed->digital.composite)
+	if (detailed->connector.digital.composite)
 	{
-	    detailed->digital.serrations = get_bit (bits, 2);
-	    detailed->digital.negative_vsync = FALSE;
+	    detailed->connector.digital.serrations = get_bit (bits, 2);
+	    detailed->connector.digital.negative_vsync = FALSE;
 	}
 	else
 	{
-	    detailed->digital.serrations = FALSE;
-	    detailed->digital.negative_vsync = !get_bit (bits, 2);
+	    detailed->connector.digital.serrations = FALSE;
+	    detailed->connector.digital.negative_vsync = !get_bit (bits, 2);
 	}
 
-	detailed->digital.negative_hsync = !get_bit (bits, 0);
+	detailed->connector.digital.negative_hsync = !get_bit (bits, 0);
     }
     else
     {
-	detailed->analog.bipolar = get_bit (bits, 3);
-	detailed->analog.serrations = get_bit (bits, 2);
-	detailed->analog.sync_on_green = !get_bit (bits, 1);
+	detailed->connector.analog.bipolar = get_bit (bits, 3);
+	detailed->connector.analog.serrations = get_bit (bits, 2);
+	detailed->connector.analog.sync_on_green = !get_bit (bits, 1);
     }
 }
 
