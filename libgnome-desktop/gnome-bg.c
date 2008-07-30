@@ -290,7 +290,7 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 	/* Filename */
 	filename = NULL;
 	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_FILENAME, NULL);
-	if (tmp != NULL) {
+	if (tmp != NULL && *tmp != '\0') {
 		if (g_utf8_validate (tmp, -1, NULL) &&
 		    g_file_test (tmp, G_FILE_TEST_EXISTS)) {
 			filename = g_strdup (tmp);
