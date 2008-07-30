@@ -1,3 +1,8 @@
+Wed Jul 30 01:02:28 2008  Søren Sandmann  <sandmann@redhat.com>
+
+	* gnome-bg.c (queue_changed): Go back to using a timeout rather
+	than an idle, to work around non-atomic gconf.
+
 Tue Jul 29 23:51:05 2008  Søren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_load_from_preferences): If the filename is

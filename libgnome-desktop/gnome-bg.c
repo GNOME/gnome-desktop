@@ -268,10 +268,11 @@ queue_changed (GnomeBG *bg)
 		g_source_remove (bg->changed_id);
 	}
 
-	bg->changed_id = g_idle_add_full (G_PRIORITY_LOW,
-					  (GSourceFunc)do_changed,
-					  bg,
-					  NULL);
+	bg->changed_id = g_timeout_add_full (G_PRIORITY_LOW,
+					     100,
+					     (GSourceFunc)do_changed,
+					     bg,
+					     NULL);
 }
 
 void
