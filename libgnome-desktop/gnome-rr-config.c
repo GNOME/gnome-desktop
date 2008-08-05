@@ -1054,6 +1054,8 @@ apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 	    
 	crtc_assignment_free (assignment);
 
+	gdk_flush ();
+
 	return TRUE;
     }
 
@@ -1063,22 +1065,26 @@ apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 gboolean
 gnome_rr_config_apply_stored (GnomeRRScreen *screen)
 {
-    GnomeRRConfig **configs = configurations_read (NULL); /* NULL-GError */
+    GnomeRRConfig **configs;
     GnomeRRConfig *current;
     GnomeRRConfig *found;
     gboolean result = TRUE;
 
     if (!screen)
 	return FALSE;
-    
+
+    configs = configurations_read (NULL); /* NULL-GError */
+
     gnome_rr_screen_refresh (screen);
     
     current = gnome_rr_config_new_current (screen);
+
     if (configs)
     {
 	if ((found = gnome_rr_config_find (configs, current)))
 	{
 	    apply_configuration (found, screen);
+
 	    result = TRUE;
 	}
 	else
@@ -1250,98 +1256,6 @@ crtc_is_rotated (GnomeRRCrtc *crtc)
     return FALSE;
 }
 
-static void
-crtc_assignment_apply (CrtcAssignment *assign)
-{
-    GList *active_crtcs = g_hash_table_get_keys (assign->info);
-    GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
-    GList *list;
-    int width, height;
-    int i;
-    int min_width, max_width, min_height, max_height;
-    int width_mm, height_mm;
-
-    /* Compute size of the screen */
-    width = height = 1;
-    for (list = active_crtcs; list != NULL; list = list->next)
-    {
-	GnomeRRCrtc *crtc = list->data;
-	CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
-	int w, h;
-
-	w = gnome_rr_mode_get_width (info->mode);
-	h = gnome_rr_mode_get_height (info->mode);
-	
-	if (mode_is_rotated (info))
-	{
-	    int tmp = h;
-	    h = w;
-	    w = tmp;
-	}
-	
-	width = MAX (width, info->x + w);
-	height = MAX (height, info->y + h);
-    }
-    g_list_free (active_crtcs);
-
-    gnome_rr_screen_get_ranges (
-	assign->screen, &min_width, &max_width, &min_height, &max_height);
-
-    width = MAX (min_width, width);
-    width = MIN (max_width, width);
-    height = MAX (min_height, height);
-    height = MIN (max_height, height);
-    
-    /* Turn off all crtcs currently displaying outside the new screen */
-    for (i = 0; all_crtcs[i] != NULL; ++i)
-    {
-	GnomeRRCrtc *crtc = all_crtcs[i];
-	GnomeRRMode *mode = gnome_rr_crtc_get_current_mode (crtc);
-	int x, y;
-
-	if (mode)
-	{
-	    int w, h;
-	    gnome_rr_crtc_get_position (crtc, &x, &y);
-
-	    w = gnome_rr_mode_get_width (mode);
-	    h = gnome_rr_mode_get_height (mode);
-	    
-	    if (crtc_is_rotated (crtc))
-	    {
-		int tmp = h;
-		h = w;
-		w = tmp;
-	    }
-	    
-	    if (x + w > width || y + h > height)
-		gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
-	}
-    }
-
-    /* Turn off all CRTC's that are not in the assignment */
-    for (i = 0; all_crtcs[i] != NULL; ++i)
-    {
-	GnomeRRCrtc *crtc = all_crtcs[i];
-	
-	if (!g_hash_table_lookup (assign->info, crtc))
-	    gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
-    }
-
-    /* The 'physical size' of an X screen is meaningless if that screen
-     * can consist of many monitors. So just pick a size that make the
-     * dpi 96.
-     *
-     * Firefox and Evince apparently believe what X tells them.
-     */
-    width_mm = (width / 96.0) * 25.4 + 0.5;
-    height_mm = (height / 96.0) * 25.4 + 0.5;
-    
-    gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
-
-    g_hash_table_foreach (assign->info, configure_crtc, NULL);
-}
-
 /* Check whether the given set of settings can be used
  * at the same time -- ie. whether there is an assignment
  * of CRTC's to outputs.
@@ -1417,6 +1331,43 @@ crtc_info_free (CrtcInfo *info)
     g_free (info);
 }
 
+static void
+get_required_virtual_size (CrtcAssignment *assign, int *width, int *height)
+{
+    GList *active_crtcs = g_hash_table_get_keys (assign->info);
+    GList *list;
+    int d;
+
+    if (!width)
+	width = &d;
+    if (!height)
+	height = &d;
+    
+    /* Compute size of the screen */
+    *width = *height = 1;
+    for (list = active_crtcs; list != NULL; list = list->next)
+    {
+	GnomeRRCrtc *crtc = list->data;
+	CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
+	int w, h;
+
+	w = gnome_rr_mode_get_width (info->mode);
+	h = gnome_rr_mode_get_height (info->mode);
+	
+	if (mode_is_rotated (info))
+	{
+	    int tmp = h;
+	    h = w;
+	    w = tmp;
+	}
+	
+	*width = MAX (*width, info->x + w);
+	*height = MAX (*height, info->y + h);
+    }
+
+    g_list_free (active_crtcs);
+}
+
 static CrtcAssignment *
 crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 {
@@ -1427,14 +1378,93 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 
     if (real_assign_crtcs (screen, outputs, assignment))
     {
+	int width, height;
+	int min_width, max_width, min_height, max_height;
+
+	get_required_virtual_size (assignment, &width, &height);
+
+	gnome_rr_screen_get_ranges (
+	    screen, &min_width, &max_width, &min_height, &max_height);
+    
+	if (width < min_width || width > max_width ||
+	    height < min_height || height > max_height)
+	{
+	    goto fail;
+	}
+
 	assignment->screen = screen;
 	
 	return assignment;
     }
-    else
-    {
-	crtc_assignment_free (assignment);
     
-	return NULL;
+fail:
+    crtc_assignment_free (assignment);
+    
+    return NULL;
+}
+
+static void
+crtc_assignment_apply (CrtcAssignment *assign)
+{
+    GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
+    int width, height;
+    int i;
+    int min_width, max_width, min_height, max_height;
+    int width_mm, height_mm;
+
+    /* Compute size of the screen */
+    get_required_virtual_size (assign, &width, &height);
+
+    gnome_rr_screen_get_ranges (
+	assign->screen, &min_width, &max_width, &min_height, &max_height);
+
+    /* We should never get here if the dimensions don't fit in the virtual size,
+     * but just in case we do, fix it up.
+     */
+    width = MAX (min_width, width);
+    width = MIN (max_width, width);
+    height = MAX (min_height, height);
+    height = MIN (max_height, height);
+    
+    /* Turn off all crtcs that are currently displaying outside the new screen,
+     * or are not used in the new setup
+     */
+    for (i = 0; all_crtcs[i] != NULL; ++i)
+    {
+	GnomeRRCrtc *crtc = all_crtcs[i];
+	GnomeRRMode *mode = gnome_rr_crtc_get_current_mode (crtc);
+	int x, y;
+
+	if (mode)
+	{
+	    int w, h;
+	    gnome_rr_crtc_get_position (crtc, &x, &y);
+
+	    w = gnome_rr_mode_get_width (mode);
+	    h = gnome_rr_mode_get_height (mode);
+	    
+	    if (crtc_is_rotated (crtc))
+	    {
+		int tmp = h;
+		h = w;
+		w = tmp;
+	    }
+	    
+	    if (x + w > width || y + h > height || !g_hash_table_lookup (assign->info, crtc))
+		gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
+	}
     }
+
+    /* The 'physical size' of an X screen is meaningless if that screen
+     * can consist of many monitors. So just pick a size that make the
+     * dpi 96.
+     *
+     * Firefox and Evince apparently believe what X tells them.
+     */
+    width_mm = (width / 96.0) * 25.4 + 0.5;
+    height_mm = (height / 96.0) * 25.4 + 0.5;
+    
+    gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
+
+    g_hash_table_foreach (assign->info, configure_crtc, NULL);
 }
