@@ -463,6 +463,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
     int i;
     int clone_width = -1;
     int clone_height = -1;
+    int last_x;
 
     g_return_val_if_fail (screen != NULL, NULL);
 
@@ -536,7 +537,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 				clone_width = output->width;
 				clone_height = output->height;
 			} else if (clone_width == output->width &&
-					clone_height == output->height) {
+				   clone_height == output->height) {
 				config->clone = TRUE;
 			}
 		}
@@ -588,6 +589,34 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
     
     config->outputs = (GnomeOutputInfo **)g_ptr_array_free (a, FALSE);
 
+    /* Walk the outputs computing the right-most edge of all
+     * lit-up displays
+     */
+    last_x = 0;
+    for (i = 0; config->outputs[i] != NULL; ++i)
+    {
+	GnomeOutputInfo *output = config->outputs[i];
+
+	if (output->on)
+	{
+	    last_x = MAX (last_x, output->x + output->width);
+	}
+    }
+
+    /* Now position all off displays to the right of the
+     * on displays
+     */
+    for (i = 0; config->outputs[i] != NULL; ++i)
+    {
+	GnomeOutputInfo *output = config->outputs[i];
+
+	if (output->connected && !output->on)
+	{
+	    output->x = last_x;
+	    last_x = output->x + output->width;
+	}
+    }
+    
     g_assert (gnome_rr_config_match (config, config));
     
     return config;
