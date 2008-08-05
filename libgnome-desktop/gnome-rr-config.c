@@ -1139,16 +1139,14 @@ can_clone (CrtcInfo *info,
 }
 
 static gboolean
-crtc_assignment_assign (CrtcAssignment *assign,
-			GnomeRRCrtc         *crtc,
-			GnomeRRMode         *mode,
-			int             x,
-			int             y,
-			GnomeRRRotation      rotation,
-			GnomeRROutput       *output)
+crtc_assignment_assign (CrtcAssignment   *assign,
+			GnomeRRCrtc      *crtc,
+			GnomeRRMode      *mode,
+			int               x,
+			int               y,
+			GnomeRRRotation   rotation,
+			GnomeRROutput    *output)
 {
-    /* FIXME: We should reject stuff that is outside the screen ranges */
-    
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
 
     if (!gnome_rr_crtc_can_drive_output (crtc, output) ||
