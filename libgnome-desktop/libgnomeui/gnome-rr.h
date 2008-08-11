@@ -52,6 +52,7 @@ typedef enum
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
 						    GnomeRRScreenChanged   callback,
 						    gpointer               data);
+void            gnome_rr_screen_destroy            (GnomeRRScreen         *screen);
 GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *screen);
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_modes         (GnomeRRScreen         *screen);

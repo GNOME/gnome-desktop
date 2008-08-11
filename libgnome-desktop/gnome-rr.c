@@ -440,8 +440,10 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	
 	screen->info = screen_info_new (screen);
 	
-	if (!screen->info)
+	if (!screen->info) {
+	    g_free (screen);
 	    return NULL;
+	}
 	
 	XRRSelectInput (screen->xdisplay,
 			screen->xroot,
@@ -459,6 +461,19 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
     }
     
     return NULL;
+}
+
+void
+gnome_rr_screen_destroy (GnomeRRScreen *screen)
+{
+	g_return_if_fail (screen != NULL);
+
+	gdk_window_remove_filter (screen->gdk_root, screen_on_event, screen);
+
+	screen_info_free (screen->info);
+	screen->info = NULL;
+
+	g_free (screen);
 }
 
 void
