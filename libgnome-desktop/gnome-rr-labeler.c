@@ -36,6 +36,7 @@ struct _GnomeRRLabeler {
 	int num_outputs;
 
 	GdkColor *palette;
+	GtkWidget **windows;
 };
 
 struct _GnomeRRLabelerClass {
@@ -72,6 +73,8 @@ gnome_rr_labeler_finalize (GObject *object)
 	/* We don't destroy the labeler->config (a GnomeRRConfig*) here; let our
 	 * caller do that instead.
 	 */
+
+	gnome_rr_labeler_hide (labeler);
 
 	G_OBJECT_CLASS (gnome_rr_labeler_parent_class)->finalize (object);
 }
@@ -201,11 +204,35 @@ make_palette (GnomeRRLabeler *labeler)
 	}
 }
 
+static GtkWidget *
+create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor *color)
+{
+	/* FIXME */
+}
+
+static void
+create_label_windows (GnomeRRLabeler *labeler)
+{
+	int i;
+
+	labeler->windows = g_new (GtkWidget *, labeler->num_outputs);
+
+	for (i = 0; i < labeler->num_outputs; i++) {
+		if (labeler->config->outputs[i]->on)
+			labeler->windows[i] = create_label_window (labeler, labeler->config->outputs[i], labeler->palette + i);
+		else
+			labeler->windows[i] = NULL;
+	}
+}
+
 static void
 setup_from_config (GnomeRRLabeler *labeler)
 {
 	labeler->num_outputs = count_outputs (labeler->config);
+
 	make_palette (labeler);
+
+	create_label_windows (labeler);
 }
 
 GnomeRRLabeler *
@@ -226,9 +253,15 @@ gnome_rr_labeler_new (GnomeRRConfig *config)
 void
 gnome_rr_labeler_hide (GnomeRRLabeler *labeler)
 {
+	int i;
+
 	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
 
-	/* FIXME */
+	for (i = 0; i < labeler->num_outputs; i++)
+		if (labeler->windows[i] != NULL) {
+			gtk_widget_destroy (labeler->windows[i]);
+			labeler->windows[i] = NULL;
+		}
 }
 
 void
