@@ -24,6 +24,7 @@ libgnome_desktop_2_la_SOURCES = \
 	display-name.c		\
 	gnome-rr.c		\
 	gnome-rr-config.c	\
+	gnome-rr-labeler.c	\
 	edid-parse.c		\
 	edid.h
 

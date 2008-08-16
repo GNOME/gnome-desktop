@@ -4,4 +4,5 @@ libgnomeui_desktop_HEADERS =	\
 	gnome-hint.h		\
 	gnome-bg.h		\
 	gnome-rr.h		\
-	gnome-rr-config.h
+	gnome-rr-config.h	\
+	gnome-rr-labeler.h
