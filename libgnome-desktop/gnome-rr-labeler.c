@@ -98,83 +98,6 @@ count_outputs (GnomeRRConfig *config)
 	return i;
 }
 
-/* hsv_to_rgb() stolen from gtk+/gtk/gtkhsv.c, sigh. */
-
-#define INTENSITY(r, g, b) ((r) * 0.30 + (g) * 0.59 + (b) * 0.11)
-
-/* Converts from HSV to RGB */
-static void
-hsv_to_rgb (gdouble *h,
-	    gdouble *s,
-	    gdouble *v)
-{
-  gdouble hue, saturation, value;
-  gdouble f, p, q, t;
-
-  if (*s == 0.0)
-    {
-      *h = *v;
-      *s = *v;
-      *v = *v; /* heh */
-    }
-  else
-    {
-      hue = *h * 6.0;
-      saturation = *s;
-      value = *v;
-
-      if (hue == 6.0)
-	hue = 0.0;
-
-      f = hue - (int) hue;
-      p = value * (1.0 - saturation);
-      q = value * (1.0 - saturation * f);
-      t = value * (1.0 - saturation * (1.0 - f));
-
-      switch ((int) hue)
-	{
-	case 0:
-	  *h = value;
-	  *s = t;
-	  *v = p;
-	  break;
-
-	case 1:
-	  *h = q;
-	  *s = value;
-	  *v = p;
-	  break;
-
-	case 2:
-	  *h = p;
-	  *s = value;
-	  *v = t;
-	  break;
-
-	case 3:
-	  *h = p;
-	  *s = q;
-	  *v = value;
-	  break;
-
-	case 4:
-	  *h = t;
-	  *s = p;
-	  *v = value;
-	  break;
-
-	case 5:
-	  *h = value;
-	  *s = p;
-	  *v = q;
-	  break;
-
-	default:
-	  g_assert_not_reached ();
-	}
-    }
-}
-
 static void
 make_palette (GnomeRRLabeler *labeler)
 {
@@ -199,16 +122,17 @@ make_palette (GnomeRRLabeler *labeler)
 
 	for (i = 0; i < labeler->num_outputs; i++) {
 		double h, s, v;
+		double r, g, b;
 
 		h = start_hue + (end_hue - start_hue) / labeler->num_outputs * i;
 		s = 1.0 / 3;
 		v = 1.0;
 
-		hsv_to_rgb (&h, &s, &v);
+		gtk_hsv_to_rgb (h, s, v, &r, &g, &b);
 
-		labeler->palette[i].red   = (int) (65535 * h + 0.5);
-		labeler->palette[i].green = (int) (65535 * s + 0.5);
-		labeler->palette[i].blue  = (int) (65535 * v + 0.5);
+		labeler->palette[i].red   = (int) (65535 * r + 0.5);
+		labeler->palette[i].green = (int) (65535 * g + 0.5);
+		labeler->palette[i].blue  = (int) (65535 * b + 0.5);
 	}
 }
 
