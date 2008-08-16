@@ -46,4 +46,6 @@ GType gnome_rr_labeler_get_type (void);
 
 GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRScreen *screen);
 
+void gnome_rr_labeler_hide (GnomeRRLabeler *labeler);
+
 #endif

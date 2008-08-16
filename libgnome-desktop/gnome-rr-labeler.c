@@ -84,3 +84,11 @@ gnome_rr_labeler_new (GnomeRRScreen *screen)
 
 	return labeler;
 }
+
+void
+gnome_rr_labeler_hide (GnomeRRLabeler *labeler)
+{
+	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
+
+	/* FIXME */
+}
