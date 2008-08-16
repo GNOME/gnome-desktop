@@ -74,7 +74,14 @@ gnome_rr_labeler_finalize (GObject *object)
 	 * caller do that instead.
 	 */
 
-	gnome_rr_labeler_hide (labeler);
+	g_free (labeler->palette);
+	labeler->palette = NULL;
+
+	if (labeler->windows != NULL) {
+		gnome_rr_labeler_hide (labeler);
+		g_free (labeler->windows);
+		labeler->windows = NULL;
+	}
 
 	G_OBJECT_CLASS (gnome_rr_labeler_parent_class)->finalize (object);
 }
