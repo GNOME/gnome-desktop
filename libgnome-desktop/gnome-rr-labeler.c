@@ -65,10 +65,9 @@ gnome_rr_labeler_finalize (GObject *object)
 
 	labeler = GNOME_RR_LABELER (object);
 
-	if (labeler->screen) {
-		gnome_rr_screen_destroy (labeler->screen);
-		labeler->screen = NULL;
-	}
+	/* We don't destroy the labeler->screen (a GnomeRRScreen) here; let our
+	 * caller do that instead.
+	 */
 
 	G_OBJECT_CLASS (gnome_rr_labeler_parent_class)->finalize (object);
 }
