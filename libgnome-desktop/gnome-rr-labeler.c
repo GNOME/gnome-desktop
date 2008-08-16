@@ -30,6 +30,8 @@
 
 struct _GnomeRRLabeler {
 	GObject parent;
+
+	GnomeRRScreen *screen;
 };
 
 struct _GnomeRRLabelerClass {
@@ -37,3 +39,40 @@ struct _GnomeRRLabelerClass {
 };
 
 G_DEFINE_TYPE (GnomeRRLabeler, gnome_rr_labeler, G_TYPE_OBJECT);
+
+static void gnome_rr_labeler_finalize (GObject *object);
+
+static void
+gnome_rr_labeler_init (GnomeRRLabeler *labeler)
+{
+	/* nothing */
+}
+
+static void
+gnome_rr_labeler_class_init (GnomeRRLabelerClass *class)
+{
+	GObjectClass *object_class;
+
+	object_class = (GObjectClass *) class;
+
+	object_class->finalize = gnome_rr_labeler_finalize;
+}
+
+static void
+gnome_rr_labeler_finalize (GObject *object)
+{
+	/* FIXME: unref labeler->screen */
+}
+
+GnomeRRLabeler *
+gnome_rr_labeler_new (GnomeRRScreen *screen)
+{
+	GnomeRRLabeler *labeler;
+
+	g_return_val_if_fail (screen != NULL, NULL);
+
+	labeler = g_object_new (GNOME_TYPE_RR_LABELER, NULL);
+	labeler->screen = screen;
+
+	return labeler;
+}

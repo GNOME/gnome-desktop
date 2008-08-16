@@ -44,4 +44,6 @@ typedef struct _GnomeRRLabelerClass GnomeRRLabelerClass;
 
 GType gnome_rr_labeler_get_type (void);
 
+GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRScreen *screen);
+
 #endif
