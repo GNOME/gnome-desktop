@@ -30,7 +30,7 @@
 #error    GnomeRR is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnomerr.h
 #endif
 
-#include <libgnomeui/gnome-rr.h>
+#include <libgnomeui/gnome-rr-config.h>
 
 #define GNOME_TYPE_RR_LABELER            (gnome_rr_labeler_get_type ())
 #define GNOME_RR_LABELER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_RR_LABELER, GnomeRRLabeler))
@@ -44,7 +44,7 @@ typedef struct _GnomeRRLabelerClass GnomeRRLabelerClass;
 
 GType gnome_rr_labeler_get_type (void);
 
-GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRScreen *screen);
+GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRConfig *config);
 
 void gnome_rr_labeler_hide (GnomeRRLabeler *labeler);
 

@@ -31,7 +31,6 @@
 struct _GnomeRRLabeler {
 	GObject parent;
 
-	GnomeRRScreen *screen;
 	GnomeRRConfig *config;
 
 	int num_outputs;
@@ -70,7 +69,7 @@ gnome_rr_labeler_finalize (GObject *object)
 
 	labeler = GNOME_RR_LABELER (object);
 
-	/* We don't destroy the labeler->screen (a GnomeRRScreen) here; let our
+	/* We don't destroy the labeler->config (a GnomeRRConfig*) here; let our
 	 * caller do that instead.
 	 */
 
@@ -203,24 +202,23 @@ make_palette (GnomeRRLabeler *labeler)
 }
 
 static void
-setup_from_rr_screen (GnomeRRLabeler *labeler)
+setup_from_config (GnomeRRLabeler *labeler)
 {
-	labeler->config = gnome_rr_config_new_current (labeler->screen);
 	labeler->num_outputs = count_outputs (labeler->config);
 	make_palette (labeler);
 }
 
 GnomeRRLabeler *
-gnome_rr_labeler_new (GnomeRRScreen *screen)
+gnome_rr_labeler_new (GnomeRRConfig *config)
 {
 	GnomeRRLabeler *labeler;
 
-	g_return_val_if_fail (screen != NULL, NULL);
+	g_return_val_if_fail (config != NULL, NULL);
 
 	labeler = g_object_new (GNOME_TYPE_RR_LABELER, NULL);
-	labeler->screen = screen;
+	labeler->config = config;
 
-	setup_from_rr_screen (labeler);
+	setup_from_config (labeler);
 
 	return labeler;
 }
