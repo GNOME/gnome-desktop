@@ -25,6 +25,7 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 
+#include <config.h>
 #include "libgnomeui/gnome-rr-labeler.h"
 #include <gtk/gtk.h>
 
@@ -211,10 +212,75 @@ make_palette (GnomeRRLabeler *labeler)
 	}
 }
 
+#define LABEL_WINDOW_EDGE_THICKNESS 2
+#define LABEL_WINDOW_PADDING 12
+
+static gboolean
+label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer data)
+{
+	cairo_t *cr;
+	GdkColor *color;
+
+	color = g_object_get_data (G_OBJECT (widget), "color");
+
+	cr = gdk_cairo_create (widget->window);
+
+	/* edge outline */
+
+	cairo_set_source_rgb (cr, 0, 0, 0);
+	cairo_rectangle (cr,
+			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
+			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
+			 widget->allocation.width - LABEL_WINDOW_EDGE_THICKNESS,
+			 widget->allocation.height - LABEL_WINDOW_EDGE_THICKNESS);
+	cairo_set_line_width (cr, LABEL_WINDOW_EDGE_THICKNESS);
+	cairo_stroke (cr);
+
+	/* fill */
+
+	gdk_cairo_set_source_color (cr, color);
+	cairo_rectangle (cr,
+			 LABEL_WINDOW_EDGE_THICKNESS,
+			 LABEL_WINDOW_EDGE_THICKNESS,
+			 widget->allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
+			 widget->allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2);
+	cairo_fill (cr);
+
+	cairo_destroy (cr);
+
+	return FALSE;
+}
+
 static GtkWidget *
 create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor *color)
 {
-	/* FIXME */
+	GtkWidget *window;
+	GtkWidget *widget;
+
+	window = gtk_window_new (GTK_WINDOW_POPUP);
+	GTK_WIDGET_SET_FLAGS (window, GTK_APP_PAINTABLE);
+
+	gtk_container_set_border_width (GTK_CONTAINER (window), LABEL_WINDOW_PADDING + LABEL_WINDOW_EDGE_THICKNESS);
+
+	/* This is semi-dangerous.  The color is part of the labeler->palette
+	 * array.  Note that in gnome_rr_labeler_finalize(), we are careful to
+	 * free the palette only after we free the windows.
+	 */
+	g_object_set_data (G_OBJECT (window), "color", color);
+
+	g_signal_connect (window, "expose-event",
+			  G_CALLBACK (label_window_expose_event_cb), labeler);
+
+	widget = gtk_label_new (output->display_name);
+
+	gtk_container_add (GTK_CONTAINER (window), widget);
+
+	/* Should we center this at the top edge of the monitor, instead of using the upper-left corner? */
+	gtk_window_move (GTK_WINDOW (window), output->x, output->y);
+
+	gtk_widget_show_all (window);
+
+	return window;
 }
 
 static void
@@ -222,12 +288,14 @@ create_label_windows (GnomeRRLabeler *labeler)
 {
 	int i;
 
+	/* FIXME: this doesn't handle cloned outputs yet */
+
 	labeler->windows = g_new (GtkWidget *, labeler->num_outputs);
 
 	for (i = 0; i < labeler->num_outputs; i++) {
-		if (labeler->config->outputs[i]->on)
+		if (labeler->config->outputs[i]->on) {
 			labeler->windows[i] = create_label_window (labeler, labeler->config->outputs[i], labeler->palette + i);
-		else
+		} else
 			labeler->windows[i] = NULL;
 	}
 }
