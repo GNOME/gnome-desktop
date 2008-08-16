@@ -61,7 +61,16 @@ gnome_rr_labeler_class_init (GnomeRRLabelerClass *class)
 static void
 gnome_rr_labeler_finalize (GObject *object)
 {
-	/* FIXME: unref labeler->screen */
+	GnomeRRLabeler *labeler;
+
+	labeler = GNOME_RR_LABELER (object);
+
+	if (labeler->screen) {
+		gnome_rr_screen_destroy (labeler->screen);
+		labeler->screen = NULL;
+	}
+
+	G_OBJECT_CLASS (gnome_rr_labeler_parent_class)->finalize (object);
 }
 
 GnomeRRLabeler *
