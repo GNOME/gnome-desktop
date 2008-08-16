@@ -256,6 +256,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 {
 	GtkWidget *window;
 	GtkWidget *widget;
+	char *str;
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	GTK_WIDGET_SET_FLAGS (window, GTK_APP_PAINTABLE);
@@ -271,7 +272,10 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	g_signal_connect (window, "expose-event",
 			  G_CALLBACK (label_window_expose_event_cb), labeler);
 
-	widget = gtk_label_new (output->display_name);
+	str = g_strdup_printf ("<b>%s</b>", output->display_name);
+	widget = gtk_label_new (NULL);
+	gtk_label_set_markup (GTK_LABEL (widget), str);
+	g_free (str);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 
