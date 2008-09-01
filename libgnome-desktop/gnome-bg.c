@@ -341,6 +341,8 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 	gnome_bg_set_color (bg, ctype, &c1, &c2);
 	gnome_bg_set_placement (bg, placement);
 	gnome_bg_set_filename (bg, filename);
+
+	g_free (filename);
 }
 
 void
@@ -514,8 +516,6 @@ void
 gnome_bg_set_filename (GnomeBG     *bg,
 		       const char  *filename)
 {
-	char *free_me = NULL;
-	
 	g_return_if_fail (bg != NULL);
 	
 	if (is_different (bg, filename)) {
@@ -545,8 +545,6 @@ gnome_bg_set_filename (GnomeBG     *bg,
 		
 		queue_changed (bg);
 	}
-
-	g_free (free_me);
 }
 
 static void
