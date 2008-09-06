@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-11 18:00+0000\n"
+"POT-Creation-Date: 2008-07-09 09:15+0000\n"
 "PO-Revision-Date: 2008-02-24 18:43+0800\n"
 "Last-Translator: Funda Wang <fundawang@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -18,10 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # panel/menu.c:2614
-#: ../gnome-about/gnome-about.in:61
 #: ../gnome-about/gnome-about.desktop.in.in.h:1
+#: ../gnome-about/gnome-about.in:61
 msgid "About GNOME"
 msgstr "关于 GNOME"
+
+# panel/menu.c:2614
+#: ../gnome-about/gnome-about.desktop.in.in.h:2
+msgid "Learn more about GNOME"
+msgstr "关于 GNOME 的更多内容"
 
 #: ../gnome-about/gnome-about.in:62
 msgid "News"
@@ -52,55 +57,50 @@ msgstr "吱吱响的橡皮 GNOME"
 msgid "Wanda The GNOME Fish"
 msgstr "GNOME 小鱼 Wanda"
 
-#: ../gnome-about/gnome-about.in:567
+#: ../gnome-about/gnome-about.in:568
 msgid "_Open URL"
 msgstr "打开 URL(_O)"
 
-#: ../gnome-about/gnome-about.in:574
+#: ../gnome-about/gnome-about.in:575
 msgid "_Copy URL"
 msgstr "复制 URL(_C)"
 
 # panel/menu.c:2614
-#: ../gnome-about/gnome-about.in:829
+#: ../gnome-about/gnome-about.in:830
 msgid "About the GNOME Desktop"
 msgstr "关于 GNOME 桌面"
 
-#: ../gnome-about/gnome-about.in:865
+#: ../gnome-about/gnome-about.in:866
 msgid "%(name)s: %(value)s"
 msgstr "%(name)s: %(value)s"
 
-#: ../gnome-about/gnome-about.in:879
+#: ../gnome-about/gnome-about.in:880
 msgid "Welcome to the GNOME Desktop"
 msgstr "欢迎使用 GNOME 桌面"
 
-#: ../gnome-about/gnome-about.in:896
+#: ../gnome-about/gnome-about.in:897
 msgid "Brought to you by:"
 msgstr "为您效命的："
 
-#: ../gnome-about/gnome-about.in:920
+#: ../gnome-about/gnome-about.in:921
 msgid "<b>%(name)s:</b> %(value)s"
 msgstr "<b>%(name)s:</b> %(value)s"
 
-#: ../gnome-about/gnome-about.in:976
+#: ../gnome-about/gnome-about.in:977
 msgid "Version"
 msgstr "版本"
 
-#: ../gnome-about/gnome-about.in:977
+#: ../gnome-about/gnome-about.in:978
 msgid "Distributor"
 msgstr "发行者"
 
-#: ../gnome-about/gnome-about.in:978
+#: ../gnome-about/gnome-about.in:979
 msgid "Build Date"
 msgstr "创建日期"
 
-#: ../gnome-about/gnome-about.in:1019
+#: ../gnome-about/gnome-about.in:1023
 msgid "Display information on this GNOME version"
 msgstr "显示关于此 GNOME 版本的信息"
-
-# panel/menu.c:2614
-#: ../gnome-about/gnome-about.desktop.in.in.h:2
-msgid "Learn more about GNOME"
-msgstr "关于 GNOME 的更多内容"
 
 #: ../gnome-version.xml.in.in.h:1
 msgid ""
@@ -113,7 +113,7 @@ msgstr ""
 msgid ""
 "GNOME includes most of what you see on your computer, including the file "
 "manager, web browser, menus, and many applications."
-msgstr "" 
+msgstr ""
 "GNOME 囊括了您计算机上最经常使用的软件，如文件管理器、菜单和像浏览器这样的应"
 "用程序。"
 
@@ -152,6 +152,14 @@ msgstr ""
 "自 GNOME 项目 1997 年启动一来，数以百计的人不断地贡献出他们编写的代码。此外，"
 "还有更多人在其它方面做出了重要努力，包括翻译、文档和质量控制。"
 
+#: ../libgnome-desktop/display-name.c:212
+msgid "Laptop"
+msgstr "笔记本"
+
+#: ../libgnome-desktop/display-name.c:220
+msgid "Unknown"
+msgstr "未知"
+
 #: ../libgnome-desktop/gnome-desktop-item.c:219
 #, c-format
 msgid "Error reading file '%s': %s"
@@ -179,6 +187,7 @@ msgid "Error cannot find file id '%s'"
 msgstr "找不到 ID 为“%s”的文件"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:842
+#, c-format
 msgid "No filename to save to"
 msgstr "没有文件名来保存"
 
@@ -188,18 +197,22 @@ msgid "Starting %s"
 msgstr "正在启动 %s"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:2063
+#, c-format
 msgid "No URL to launch"
 msgstr "没有 URL 来启动"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:2076
+#, c-format
 msgid "Not a launchable item"
 msgstr "不是一个可调用项"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:2086
+#, c-format
 msgid "No command (Exec) to launch"
 msgstr "没有要执行的命令"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:2099
+#, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "要执行的命令是错的"
 
@@ -294,105 +307,69 @@ msgstr "浏览图标"
 msgid "Run in t_erminal"
 msgstr "在终端中运行(_E)"
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:657
-#: ../libgnome-desktop/gnome-ditem-edit.c:757
+#: ../libgnome-desktop/gnome-ditem-edit.c:621
+#: ../libgnome-desktop/gnome-ditem-edit.c:721
 msgid "Language"
 msgstr "语言"
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:662
-#: ../libgnome-desktop/gnome-ditem-edit.c:763
+#: ../libgnome-desktop/gnome-ditem-edit.c:626
+#: ../libgnome-desktop/gnome-ditem-edit.c:727
 msgid "Name"
 msgstr "名称"
 
 # SUN NEW TRANSLATION
-#: ../libgnome-desktop/gnome-ditem-edit.c:667
-#: ../libgnome-desktop/gnome-ditem-edit.c:769
+#: ../libgnome-desktop/gnome-ditem-edit.c:631
+#: ../libgnome-desktop/gnome-ditem-edit.c:733
 msgid "Generic name"
 msgstr "通用名称"
 
 # help-browser/toc-man.c:19 help-browser/toc2-man.c:21
-#: ../libgnome-desktop/gnome-ditem-edit.c:672
-#: ../libgnome-desktop/gnome-ditem-edit.c:777
+#: ../libgnome-desktop/gnome-ditem-edit.c:636
+#: ../libgnome-desktop/gnome-ditem-edit.c:741
 msgid "Comment"
 msgstr "备注"
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:710
+#: ../libgnome-desktop/gnome-ditem-edit.c:674
 msgid "_Try this before using:"
 msgstr "在使用前先尝试(_T)："
 
 # help-browser/window.c:199
-#: ../libgnome-desktop/gnome-ditem-edit.c:721
+#: ../libgnome-desktop/gnome-ditem-edit.c:685
 msgid "_Documentation:"
 msgstr "文档(_D)："
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:732
+#: ../libgnome-desktop/gnome-ditem-edit.c:696
 msgid "_Name/Comment translations:"
 msgstr "名称/备注翻译(_N)："
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:779
+#: ../libgnome-desktop/gnome-ditem-edit.c:743
 msgid "_Add/Set"
 msgstr "添加/设置(_A)"
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:784
+#: ../libgnome-desktop/gnome-ditem-edit.c:748
 msgid "Add or Set Name/Comment Translations"
 msgstr "添加或设置名称/备注翻译"
 
 # help-browser/bookmarks.c:240
-#: ../libgnome-desktop/gnome-ditem-edit.c:786
+#: ../libgnome-desktop/gnome-ditem-edit.c:750
 msgid "Re_move"
 msgstr "删除(_M)"
 
-#: ../libgnome-desktop/gnome-ditem-edit.c:791
+#: ../libgnome-desktop/gnome-ditem-edit.c:755
 msgid "Remove Name/Comment Translation"
 msgstr "删除名称/备注翻译"
 
 # help-browser/window.c:189
-#: ../libgnome-desktop/gnome-ditem-edit.c:807
+#: ../libgnome-desktop/gnome-ditem-edit.c:771
 msgid "Basic"
 msgstr "基本"
 
 # applets/desk-guide/deskguide_applet.c:130
 # applets/modemlights/properties.c:308
-#: ../libgnome-desktop/gnome-ditem-edit.c:815
+#: ../libgnome-desktop/gnome-ditem-edit.c:779
 msgid "Advanced"
 msgstr "高级"
 
 #: ../libgnome-desktop/gnome-hint.c:201
 msgid "_Show Hints at Startup"
 msgstr "启动时显示提示(_S)"
-
-#~ msgid "Could not locate the directory with header images."
-#~ msgstr "找不到标题图像所在目录。"
-
-#~ msgid "Failed to open directory with header images: %s"
-#~ msgstr "打开标题图像所在目录失败：%s"
-
-#~ msgid "Unable to load header image: %s"
-#~ msgstr "无法装入标题图像：%s"
-
-#~ msgid "Could not locate the GNOME logo."
-#~ msgstr "找不到 GNOME 标志。"
-
-#~ msgid "Unable to load '%s': %s"
-#~ msgstr "无法装入“%s”：%s"
-
-#~ msgid "Could not open the address \"%s\": %s"
-#~ msgstr "无法到打开地址“%s”：%s"
-
-#~ msgid "Could not get information about GNOME version."
-#~ msgstr "无法获得关于 GNOME 版本的信息。"
-
-#~ msgid "%s: %s\n"
-#~ msgstr "%s: %s\n"
-
-#~ msgid "%s: "
-#~ msgstr "%s："
-
-#~ msgid "Software"
-#~ msgstr "软件"
-
-#~ msgid "Developers"
-#~ msgstr "开发者"
-
-#~ msgid "Error writing file '%s': %s"
-#~ msgstr "写入文件“%s”时出错：%s"
