@@ -66,10 +66,6 @@ struct Timing
     int frequency;
 };
 
-struct DisplayDescriptor
-{
-};
-
 struct DetailedTiming
 {
     int		pixel_clock;
