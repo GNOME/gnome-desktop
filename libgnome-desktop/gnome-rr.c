@@ -931,6 +931,7 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 {
     ScreenInfo *info;
     GArray *output_ids;
+    gboolean result = TRUE;
     int i;
     
     g_return_val_if_fail (crtc != NULL, FALSE);
@@ -952,17 +953,20 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 	    g_array_append_val (output_ids, outputs[i]->id);
     }
     
-    XRRSetCrtcConfig (DISPLAY (crtc), info->resources, crtc->id,
-		      CurrentTime, 
-		      x, y,
-		      mode? mode->id : None,
-		      xrotation_from_rotation (rotation),
-		      (RROutput *)output_ids->data,
-		      output_ids->len);
+    if (!XRRSetCrtcConfig (DISPLAY (crtc), info->resources, crtc->id,
+			   CurrentTime, 
+			   x, y,
+			   mode? mode->id : None,
+			   xrotation_from_rotation (rotation),
+			   (RROutput *)output_ids->data,
+			   output_ids->len))
+    {
+	result = FALSE;
+    }
     
     g_array_free (output_ids, TRUE);
     
-    return TRUE;
+    return result;
 }
 
 GnomeRRMode *

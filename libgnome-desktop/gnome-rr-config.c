@@ -33,8 +33,9 @@
 
 #define CONFIG_BASENAME "monitors.xml"
 
-/* In version 0 of the config file format, we had several <configuration> toplevel elements
- * and no explicit version number.  So, the filed looked like
+/* In version 0 of the config file format, we had several <configuration>
+ * toplevel elements and no explicit version number.  So, the filed looked
+ * like
  *
  *   <configuration>
  *     ...
@@ -43,9 +44,9 @@
  *     ...
  *   </configuration>
  *
- * Since version 1 of the config file, the file has a toplevel <monitors> element to group
- * all the configurations.  That element has a "version" attribute which is an integer.
- * So, the file looks like this:
+ * Since version 1 of the config file, the file has a toplevel <monitors>
+ * element to group all the configurations.  That element has a "version"
+ * attribute which is an integer. So, the file looks like this:
  *
  *   <monitors version="1">
  *     <configuration>
@@ -65,7 +66,7 @@ static gboolean parse_file_gmarkup (const gchar *file,
 
 typedef struct CrtcAssignment CrtcAssignment;
 
-static void             crtc_assignment_apply (CrtcAssignment   *assign);
+static gboolean         crtc_assignment_apply (CrtcAssignment   *assign);
 static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
 					       GnomeOutputInfo **outputs);
 static void             crtc_assignment_free  (CrtcAssignment   *assign);
@@ -1041,6 +1042,7 @@ apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 {
     CrtcAssignment *assignment;
     GnomeOutputInfo **outputs;
+    gboolean result = FALSE;
 
     outputs = make_outputs (conf);
 
@@ -1050,16 +1052,15 @@ apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
     
     if (assignment)
     {
-	crtc_assignment_apply (assignment);
+	if (crtc_assignment_apply (assignment))
+	    result = TRUE;
 	    
 	crtc_assignment_free (assignment);
 
 	gdk_flush ();
-
-	return TRUE;
     }
 
-    return FALSE;
+    return result;
 }
 
 gboolean
@@ -1401,7 +1402,7 @@ fail:
     return NULL;
 }
 
-static void
+static gboolean
 crtc_assignment_apply (CrtcAssignment *assign)
 {
     GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
@@ -1409,6 +1410,7 @@ crtc_assignment_apply (CrtcAssignment *assign)
     int i;
     int min_width, max_width, min_height, max_height;
     int width_mm, height_mm;
+    gboolean success = TRUE;
 
     /* Compute size of the screen */
     get_required_virtual_size (assign, &width, &height);
@@ -1449,7 +1451,14 @@ crtc_assignment_apply (CrtcAssignment *assign)
 	    }
 	    
 	    if (x + w > width || y + h > height || !g_hash_table_lookup (assign->info, crtc))
-		gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0);
+	    {
+		if (!gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0))
+		{
+		    success = FALSE;
+		    break;
+		}
+		
+	    }
 	}
     }
 
@@ -1461,8 +1470,13 @@ crtc_assignment_apply (CrtcAssignment *assign)
      */
     width_mm = (width / 96.0) * 25.4 + 0.5;
     height_mm = (height / 96.0) * 25.4 + 0.5;
-    
-    gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
 
-    g_hash_table_foreach (assign->info, configure_crtc, NULL);
+    if (success)
+    {
+	gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
+	
+	g_hash_table_foreach (assign->info, configure_crtc, NULL);
+    }
+
+    return success;
 }
