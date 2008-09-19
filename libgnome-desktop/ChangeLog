@@ -1,3 +1,9 @@
+2008-09-18  Federico Mena Quintero  <federico@novell.com>
+
+	* gnome-desktop-item.c (gnome_desktop_item_new_from_string):
+	If the passed length == -1, compute the length of the string.
+	Otherwise, our internal readbuf_new_from_string() will bail out.
+
 Tue Sep 16 11:23:05 2008  Søren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr.c (gnome_rr_crtc_set_config): Propagate errors from

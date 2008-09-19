@@ -718,6 +718,10 @@ gnome_desktop_item_new_from_string (const char *uri,
 	g_return_val_if_fail (string != NULL, NULL);
 	g_return_val_if_fail (length >= -1, NULL);
 
+	if (length == -1) {
+		length = strlen (string);
+	}
+
 	rb = readbuf_new_from_string (uri, string, length);
 
 	retval = ditem_load (rb,
