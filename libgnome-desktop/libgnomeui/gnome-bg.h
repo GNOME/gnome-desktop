@@ -29,9 +29,9 @@
 #error    GnomeBG is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-bg.h
 #endif
 
-#include <libgnomeui/libgnomeui.h>
 #include <gdk/gdk.h>
 #include <gconf/gconf-client.h>
+#include <libgnomeui/gnome-desktop-thumbnail.h>
 
 G_BEGIN_DECLS
 
@@ -93,11 +93,11 @@ GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
 						 int                    height,
 						 gboolean               root);
 gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
-						 GnomeThumbnailFactory *factory,
+						 GnomeDesktopThumbnailFactory *factory,
 						 int                   *width,
 						 int                   *height);
 GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
-						 GnomeThumbnailFactory *factory,
+						 GnomeDesktopThumbnailFactory *factory,
 						 GdkScreen             *screen,
 						 int                    dest_width,
 						 int                    dest_height);

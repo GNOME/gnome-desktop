@@ -33,7 +33,6 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
-#include <libgnomeui/gnome-icon-theme.h>
 
 G_BEGIN_DECLS
 

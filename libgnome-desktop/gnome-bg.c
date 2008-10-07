@@ -30,6 +30,7 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <string.h>
 #include <math.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 #include <gio/gio.h>
 
@@ -38,7 +39,6 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <X11/Xatom.h>
 
 #include <gconf/gconf-client.h>
-#include <libgnomeui/libgnomeui.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
@@ -151,7 +151,7 @@ static void       pixbuf_blend         (GdkPixbuf  *src,
 					double      alpha);
 
 /* Thumbnail utilities */
-static GdkPixbuf *create_thumbnail_for_filename (GnomeThumbnailFactory *factory,
+static GdkPixbuf *create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 						 const char            *filename);
 static gboolean   get_thumb_annotations (GdkPixbuf             *thumb,
 					 int                   *orig_width,
@@ -164,7 +164,7 @@ static gboolean   is_different         (GnomeBG               *bg,
 					const char            *filename);
 static time_t     get_mtime            (const char            *filename);
 static GdkPixbuf *create_img_thumbnail (GnomeBG               *bg,
-					GnomeThumbnailFactory *factory,
+					GnomeDesktopThumbnailFactory *factory,
 					GdkScreen             *screen,
 					int                    dest_width,
 					int                    dest_height);
@@ -934,7 +934,7 @@ get_original_size (const char *filename,
 
 gboolean
 gnome_bg_get_image_size (GnomeBG	       *bg,
-			 GnomeThumbnailFactory *factory,
+			 GnomeDesktopThumbnailFactory *factory,
 			 int		       *width,
 			 int		       *height)
 {
@@ -987,7 +987,7 @@ fit_factor (int from_width, int from_height,
 
 GdkPixbuf *
 gnome_bg_create_thumbnail (GnomeBG               *bg,
-			   GnomeThumbnailFactory *factory,
+			   GnomeDesktopThumbnailFactory *factory,
 			   GdkScreen             *screen,
 			   int                    dest_width,
 			   int                    dest_height)
@@ -1315,7 +1315,7 @@ get_as_slideshow (GnomeBG *bg, const char *filename)
 }
 
 static GdkPixbuf *
-get_as_thumbnail (GnomeBG *bg, GnomeThumbnailFactory *factory, const char *filename)
+get_as_thumbnail (GnomeBG *bg, GnomeDesktopThumbnailFactory *factory, const char *filename)
 {
 	const FileCacheEntry *ent;
 	if ((ent = file_cache_lookup (bg, THUMBNAIL, filename))) {
@@ -1458,7 +1458,7 @@ scale_thumbnail (GnomeBGPlacement placement,
 
 static GdkPixbuf *
 create_img_thumbnail (GnomeBG               *bg,
-		      GnomeThumbnailFactory *factory,
+		      GnomeDesktopThumbnailFactory *factory,
 		      GdkScreen             *screen,
 		      int                    dest_width,
 		      int                    dest_height)
@@ -2251,7 +2251,7 @@ read_slideshow_file (const char *filename,
 
 /* Thumbnail utilities */
 static GdkPixbuf *
-create_thumbnail_for_filename (GnomeThumbnailFactory *factory,
+create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 			       const char            *filename)
 {
 	char *thumb;
@@ -2266,7 +2266,7 @@ create_thumbnail_for_filename (GnomeThumbnailFactory *factory,
 	
 	uri = g_filename_to_uri (filename, NULL, NULL);
 	
-	thumb = gnome_thumbnail_factory_lookup (factory, uri, mtime);
+	thumb = gnome_desktop_thumbnail_factory_lookup (factory, uri, mtime);
 	
 	if (thumb) {
 		result = gdk_pixbuf_new_from_file (thumb, NULL);
@@ -2287,10 +2287,10 @@ create_thumbnail_for_filename (GnomeThumbnailFactory *factory,
 			
 			g_object_unref (orig);
 			
-			gnome_thumbnail_factory_save_thumbnail (factory, result, uri, mtime);
+			gnome_desktop_thumbnail_factory_save_thumbnail (factory, result, uri, mtime);
 		}
 		else {
-			gnome_thumbnail_factory_create_failed_thumbnail (factory, uri, mtime);
+			gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, mtime);
 		}
 	}
 

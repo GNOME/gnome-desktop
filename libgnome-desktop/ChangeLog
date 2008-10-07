@@ -1,3 +1,51 @@
+2008-10-07  Alexander Larsson  <alexl@redhat.com>
+
+	Removes the dependency on libgnome* by removing some
+	ancient code that uses it and pulling in some code from
+	libgnome that we need internally and that other apps that
+	don't want to require libgnome needs.
+	
+        * gnome-desktop-thumbnail.c: Added.
+        * gnome-thumbnail-pixbuf-utils.c: Added.
+        * libgnomeui/gnome-desktop-thumbnail.h: Added.
+	Added a copy of gnome-thumbnail from libgnomeui, renamed
+	to GnomeDesktopThumbnail.
+	
+        * gnome-desktop-utils.c: Added.
+        * libgnome/gnome-desktop-utils.h: Added.
+	Add gnome_desktop_prepend_terminal_to_vector (from libgnome).
+	Used internally and by nautilus.
+	
+        * gnome-ditem-edit.c:
+        * gnome-hint.c: 
+	* test-hint.c:
+	* test-ditem-edit.c:
+        * libgnomeui/gnome-ditem-edit.h: Removed.
+        * libgnomeui/gnome-hint.h: Removed.
+	Remove gnome-ditem-edit and gnome-hint.
+	
+        * gnome-bg.c:
+        * libgnomeui/gnome-bg.h:
+	Use GnomeDesktopThumbnail instead of GnomeThumbnail
+	
+        * gnome-desktop-2.0.pc.in:
+	Remove libgnomeui dependency
+	
+        * gnome-desktop-item.c:
+        * libgnome/gnome-desktop-item.h:
+	Don't use libgnome* stuff.
+	If needed, instead use the new copies from gnome-desktop.
+	This drops backwards compat for really old gnome1 and kde2 icons
+	in desktop files...
+	
+        * test-ditem.c:
+	Don't use gnome-program.
+
+        * Makefile.am:
+        * libgnome/Makefile.am:
+        * libgnomeui/Makefile.am:
+	Update for removed/added files
+	
 ==================== 2.24.0 ====================
 
 2008-09-22  Vincent Untz  <vuntz@gnome.org>

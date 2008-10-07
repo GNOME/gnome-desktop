@@ -18,13 +18,9 @@
 
 #include <config.h>
 #include <string.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
+#include <unistd.h>
 
 #include <libgnome/gnome-desktop-item.h>
-/*
-#include <libgnomeui/gnome-ditem-edit.h>
-*/
 
 #include <locale.h>
 #include <stdlib.h>
@@ -149,9 +145,7 @@ main (int argc, char **argv)
 
 	file = g_strdup (argv[1]);
 
-	gnome_program_init ("test-ditem", "0.01",
-			    LIBGNOMEUI_MODULE,
-			    argc, argv, NULL);
+	gtk_init (&argc, &argv);
 
 	if (launch)
 		launch_item (file);
