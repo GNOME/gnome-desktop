@@ -746,6 +746,42 @@ output_match (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
     return TRUE;
 }
 
+static gboolean
+output_equal (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
+{
+    g_assert (output1 != NULL);
+    g_assert (output2 != NULL);
+
+    if (!output_match (output1, output2))
+	return FALSE;
+
+    if (output1->on != output2->on)
+	return FALSE;
+
+    if (output1->on)
+    {
+	if (output1->width != output2->width)
+	    return FALSE;
+	
+	if (output1->height != output2->height)
+	    return FALSE;
+	
+	if (output1->rate != output2->rate)
+	    return FALSE;
+	
+	if (output1->x != output2->x)
+	    return FALSE;
+	
+	if (output1->y != output2->y)
+	    return FALSE;
+	
+	if (output1->rotation != output2->rotation)
+	    return FALSE;
+    }
+
+    return TRUE;
+}
+
 static GnomeOutputInfo *
 find_output (GnomeRRConfig *config, const char *name)
 {
@@ -762,6 +798,9 @@ find_output (GnomeRRConfig *config, const char *name)
     return NULL;
 }
 
+/* Match means "these configurations apply to the same hardware
+ * setups"
+ */
 gboolean
 gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
 {
@@ -774,6 +813,28 @@ gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
 
 	output2 = find_output (c2, output1->name);
 	if (!output2 || !output_match (output1, output2))
+	    return FALSE;
+    }
+    
+    return TRUE;
+}
+
+/* Equal means "the configurations will result in the same
+ * modes being set on the outputs"
+ */
+gboolean
+gnome_rr_config_equal (GnomeRRConfig  *c1,
+		       GnomeRRConfig  *c2)
+{
+    int i;
+
+    for (i = 0; c1->outputs[i] != NULL; ++i)
+    {
+	GnomeOutputInfo *output1 = c1->outputs[i];
+	GnomeOutputInfo *output2;
+
+	output2 = find_output (c2, output1->name);
+	if (!output2 || !output_equal (output1, output2))
 	    return FALSE;
     }
     
@@ -839,21 +900,6 @@ gnome_rr_config_applicable (GnomeRRConfig  *configuration,
     outputs_free (outputs);
 
     return result;
-}
-
-static GnomeRRConfig *
-gnome_rr_config_find (GnomeRRConfig **haystack,
-		    GnomeRRConfig  *needle)
-{
-    int i;
-
-    for (i = 0; haystack[i] != NULL; ++i)
-    {
-	if (gnome_rr_config_match (haystack[i], needle))
-	    return haystack[i];
-    }
-
-    return NULL;
 }
 
 /* Database management */
@@ -1037,14 +1083,69 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **err)
     return result;
 }
 
-static gboolean
-apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
+static GnomeRRConfig *
+gnome_rr_config_copy (GnomeRRConfig *config)
+{
+    GnomeRRConfig *copy = g_new0 (GnomeRRConfig, 1);
+    int i;
+    GPtrArray *array = g_ptr_array_new ();
+
+    copy->clone = config->clone;
+    
+    for (i = 0; config->outputs[i] != NULL; ++i)
+	g_ptr_array_add (array, output_copy (config->outputs[i]));
+
+    g_ptr_array_add (array, NULL);
+    copy->outputs = (GnomeOutputInfo **)g_ptr_array_free (array, FALSE);
+
+    return copy;
+}
+
+GnomeRRConfig *
+gnome_rr_config_new_stored (GnomeRRScreen *screen)
+{
+    GnomeRRConfig *current;
+    GnomeRRConfig **configs;
+    GnomeRRConfig *result;
+
+    if (!screen)
+	return NULL;
+    
+    current = gnome_rr_config_new_current (screen);
+    
+    configs = configurations_read (NULL); /* NULL_GError */
+
+    result = NULL;
+    if (configs)
+    {
+	int i;
+	
+	for (i = 0; configs[i] != NULL; ++i)
+	{
+	    if (gnome_rr_config_match (configs[i], current))
+	    {
+		result = gnome_rr_config_copy (configs[i]);
+		break;
+	    }
+	}
+
+	configurations_free (configs);
+    }
+
+    gnome_rr_config_free (current);
+    
+    return result;
+}
+
+gboolean
+gnome_rr_config_apply (GnomeRRConfig *config,
+		       GnomeRRScreen *screen)
 {
     CrtcAssignment *assignment;
     GnomeOutputInfo **outputs;
     gboolean result = FALSE;
 
-    outputs = make_outputs (conf);
+    outputs = make_outputs (config);
 
     assignment = crtc_assignment_new (screen, outputs);
 
@@ -1066,41 +1167,50 @@ apply_configuration (GnomeRRConfig *conf, GnomeRRScreen *screen)
 gboolean
 gnome_rr_config_apply_stored (GnomeRRScreen *screen)
 {
-    GnomeRRConfig **configs;
-    GnomeRRConfig *current;
-    GnomeRRConfig *found;
-    gboolean result = TRUE;
+    GnomeRRConfig *stored;
 
     if (!screen)
 	return FALSE;
 
-    configs = configurations_read (NULL); /* NULL-GError */
-
     gnome_rr_screen_refresh (screen);
-    
-    current = gnome_rr_config_new_current (screen);
 
-    if (configs)
+    stored = gnome_rr_config_new_stored (screen);
+
+    if (stored)
     {
-	if ((found = gnome_rr_config_find (configs, current)))
-	{
-	    apply_configuration (found, screen);
+	gnome_rr_config_apply (stored, screen);
 
-	    result = TRUE;
-	}
-	else
-	{
-	    result = FALSE;
-	}
+	gnome_rr_config_free (stored);
 	
-	configurations_free (configs);
+	return TRUE;
     }
-	
-    gnome_rr_config_free (current);
-
-    return result;
+    else
+    {
+	return FALSE;
+    }
 }
 
+static gboolean
+has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
+{
+    int i;
+    GnomeRRMode **modes = gnome_rr_output_list_modes (output);
+    int width = gnome_rr_mode_get_width (mode);
+    int height = gnome_rr_mode_get_height (mode);
+
+    for (i = 0; modes[i] != NULL; ++i)
+    {
+	GnomeRRMode *m = modes[i];
+
+	if (gnome_rr_mode_get_width (m) == width	&&
+	    gnome_rr_mode_get_height (m) == height)
+	{
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
 
 /*
  * CRTC assignment

@@ -56,6 +56,7 @@ void            gnome_rr_screen_destroy            (GnomeRRScreen         *scree
 GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *screen);
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_modes         (GnomeRRScreen         *screen);
+GnomeRRMode **  gnome_rr_screen_list_clone_modes   (GnomeRRScreen	  *screen);
 void            gnome_rr_screen_set_size           (GnomeRRScreen         *screen,
 						    int                    width,
 						    int                    height,

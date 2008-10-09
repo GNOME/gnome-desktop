@@ -50,6 +50,8 @@ struct ScreenInfo
     GnomeRRMode **	modes;
     
     GnomeRRScreen *	screen;
+
+    GnomeRRMode **	clone_modes;
 };
 
 struct GnomeRRScreen
@@ -222,8 +224,83 @@ screen_info_free (ScreenInfo *info)
 	    mode_free (*mode);
 	g_free (info->modes);
     }
+
+    if (info->clone_modes)
+    {
+	/* The modes themselves were freed above */
+	g_free (info->clone_modes);
+    }
     
     g_free (info);
+}
+
+static gboolean
+has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
+{
+    int i;
+    GnomeRRMode **modes = gnome_rr_output_list_modes (output);
+    int width = gnome_rr_mode_get_width (mode);
+    int height = gnome_rr_mode_get_height (mode);
+
+    for (i = 0; modes[i] != NULL; ++i)
+    {
+	GnomeRRMode *m = modes[i];
+
+	if (gnome_rr_mode_get_width (m) == width	&&
+	    gnome_rr_mode_get_height (m) == height)
+	{
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
+static void
+gather_clone_modes (ScreenInfo *info)
+{
+    int i;
+    GPtrArray *result = g_ptr_array_new ();
+
+    for (i = 0; info->outputs[i] != NULL; ++i)
+    {
+	int j;
+	GnomeRROutput *output1, *output2;
+
+	output1 = info->outputs[i];
+	
+	if (!output1->connected)
+	    continue;
+	
+	for (j = 0; output1->modes[j] != NULL; ++j)
+	{
+	    GnomeRRMode *mode = output1->modes[j];
+	    gboolean valid;
+	    int k;
+
+	    valid = TRUE;
+	    for (k = 0; info->outputs[k] != NULL; ++k)
+	    {
+		output2 = info->outputs[k];
+		
+		if (!output2->connected)
+		    continue;
+		
+		if (!has_similar_mode (output2, mode))
+		{
+		    valid = FALSE;
+		    break;
+		}
+	    }
+
+	    if (valid)
+		g_ptr_array_add (result, mode);
+	}
+    }
+
+    g_ptr_array_add (result, NULL);
+    
+    info->clone_modes = (GnomeRRMode **)g_ptr_array_free (result, FALSE);
 }
 
 static gboolean
@@ -322,6 +399,8 @@ fill_out_screen_info (Display *xdisplay,
 	    
 	    mode_initialize (mode, &(resources->modes[i]));
 	}
+
+	gather_clone_modes (info);
 	
 	return TRUE;
     }
@@ -524,6 +603,15 @@ gnome_rr_screen_list_modes (GnomeRRScreen *screen)
     g_return_val_if_fail (screen->info != NULL, NULL);
     
     return screen->info->modes;
+}
+
+GnomeRRMode **
+gnome_rr_screen_list_clone_modes   (GnomeRRScreen *screen)
+{
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
+
+    return screen->info->clone_modes;
 }
 
 GnomeRRCrtc **
