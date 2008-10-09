@@ -454,7 +454,7 @@ gnome_desktop_thumbnail_factory_new (GnomeDesktopThumbnailSize size)
 {
   GnomeDesktopThumbnailFactory *factory;
   
-  factory = g_object_new (GNOME_TYPE_THUMBNAIL_FACTORY, NULL);
+  factory = g_object_new (GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY, NULL);
   
   factory->priv->size = size;
   
