@@ -880,6 +880,7 @@ make_root_pixmap (GdkScreen *screen, gint width, gint height)
 	Pixmap result;
 	GdkPixmap *gdk_pixmap;
 	int screen_num;
+	int depth;
 	
 	screen_num = gdk_screen_get_number (screen);
 	
@@ -902,14 +903,17 @@ make_root_pixmap (GdkScreen *screen, gint width, gint height)
 	
 	XSetCloseDownMode (display, RetainPermanent);
 	
+	depth = DefaultDepth (display, screen_num);
+
 	result = XCreatePixmap (display,
 				RootWindow (display, screen_num),
-				width, height,
-				DefaultDepth (display, screen_num));
+				width, height, depth);
 	
 	XCloseDisplay (display);
 	
-	gdk_pixmap = gdk_pixmap_foreign_new (result);
+	gdk_pixmap = gdk_pixmap_foreign_new_for_screen (screen, result,
+							width, height, depth);
+
 	gdk_drawable_set_colormap (
 		GDK_DRAWABLE (gdk_pixmap),
 		gdk_drawable_get_colormap (gdk_screen_get_root_window (screen)));
