@@ -1,4 +1,39 @@
 ==============
+Version 2.25.1
+==============
+
+Note: this release breaks API and ABI, so we can stop depending on libgnome.
+We also lose backwards compatibility for GNOME 1 and KDE 2 icons in desktop
+files in GnomeDesktopItem (GKeyFile doesn't support this anyway).
+
+  libgnome-desktop
+
+	* Remove all libgnome usage (Alex Larsson)
+	* GnomeDesktopThumbnail: new, copied from libgnome* (Alex Larsson)
+	* Add gnome_desktop_prepend_terminal_to_vector(), copied from libgnome
+	  (Alex Larsson)
+	* Remove GnomeDItemEdit and GnomeHint objects (Alex Larsson)
+	* GnomeRR: new API to support fn-F7 (Søren Sandmann)
+	* GnomeBG: use foreign_new_for_screen() instead of _foreign_new()
+	  (Roland Dreier)
+	* GnomeDesktopThumbnail: Check for preview::icon for fast backend-side
+	  thumbnails (David Zeuthen)
+
+  Misc
+
+	* Remove dependencies on libxml and libgnome*
+	* Require glib 2.19
+
+  Doc Translations
+
+	* Gabor Kelemen (hu)
+
+  Translators
+
+	* Astur (ast)
+	* Margulan Moldabekov (kk)
+
+==============
 Version 2.24.0
 ==============
 
