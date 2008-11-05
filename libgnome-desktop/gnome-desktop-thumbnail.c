@@ -137,7 +137,9 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     gboolean has_frame;
     SizePrepareContext info;
     GFile *file;
+#if 0
     GFileInfo *file_info;
+#endif
     GInputStream *input_stream;
 
     g_return_val_if_fail (uri != NULL, NULL);
@@ -146,6 +148,7 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 
     file = g_file_new_for_uri (uri);
 
+#if 0
     /* First see if we can get an input stream via preview::icon  */
     file_info = g_file_query_info (file,
                                    G_FILE_ATTRIBUTE_PREVIEW_ICON,
@@ -166,6 +169,7 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
         }
         g_object_unref (file_info);
     }
+#endif
 
     if (input_stream == NULL) {
         input_stream = G_INPUT_STREAM (g_file_read (file, NULL, NULL));
