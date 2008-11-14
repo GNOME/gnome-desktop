@@ -90,6 +90,7 @@ static const struct Vendor vendors[] =
     { "IBM", "IBM" },
     { "INT", "Intel" },
     { "ISA", "Iomega" },
+    { "LEN", "Lenovo" },
     { "MDG", "Madge" },
     { "MDY", "Microdyne" },
     { "MET", "Metheus" },
