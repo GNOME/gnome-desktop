@@ -395,6 +395,8 @@ gnome_bg_finalize (GObject *object)
 		bg->changed_id = 0;
 	}
 
+	g_free (bg->filename);
+
 	clear_cache (bg);
 
 	G_OBJECT_CLASS (gnome_bg_parent_class)->finalize (object);
