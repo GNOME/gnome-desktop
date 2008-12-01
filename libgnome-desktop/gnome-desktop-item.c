@@ -43,7 +43,6 @@
 #include <libgnome/gnome-exec.h>
 #include <libgnome/gnome-url.h>
 #include <locale.h>
-#include <popt.h>
 
 #include <gio/gio.h>
 
