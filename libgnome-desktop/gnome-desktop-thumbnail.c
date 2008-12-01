@@ -804,9 +804,8 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   if (script)
     {
       int fd;
-      GError *error = NULL;
 
-      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, &error);
+      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
 
       if (fd != -1)
 	{
@@ -823,8 +822,8 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 
 	  g_free (expanded_script);
 	  g_unlink(tmpname);
+	  g_free (tmpname);
 	}
-      g_free (tmpname);
     }
 
   /* Fall back to gdk-pixbuf */
