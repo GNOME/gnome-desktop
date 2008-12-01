@@ -395,7 +395,10 @@ gnome_bg_finalize (GObject *object)
 		bg->changed_id = 0;
 	}
 
-	g_free (bg->filename);
+	if (bg->filename) {
+		g_free (bg->filename);
+		bg->filename = NULL;
+	}
 
 	clear_cache (bg);
 
