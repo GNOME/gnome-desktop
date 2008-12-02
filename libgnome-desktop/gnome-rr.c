@@ -807,6 +807,11 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res)
 static void
 output_free (GnomeRROutput *output)
 {
+    g_free (output->clones);
+    g_free (output->modes);
+    g_free (output->possible_crtcs);
+    g_free (output->edid_data);
+    g_free (output->name);
     g_free (output);
 }
 

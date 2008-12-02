@@ -187,7 +187,7 @@ handle_start_element (GMarkupParseContext *context,
 	
 	parser->configuration = g_new0 (GnomeRRConfig, 1);
 	parser->configuration->clone = FALSE;
-	parser->configuration->outputs = g_new0 (GnomeOutputInfo *, 1);
+	parser->configuration->outputs = NULL;
     }
     else if (strcmp (name, "monitors") == 0)
     {
@@ -657,6 +657,8 @@ outputs_free (GnomeOutputInfo **outputs)
 
     for (i = 0; outputs[i] != NULL; ++i)
 	output_free (outputs[i]);
+
+    g_free (outputs);
 }
 
 void
