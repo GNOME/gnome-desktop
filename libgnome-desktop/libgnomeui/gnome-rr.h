@@ -77,7 +77,8 @@ void            gnome_rr_screen_set_size           (GnomeRRScreen         *scree
 						    int                    mm_height);
 GnomeRRCrtc *   gnome_rr_screen_get_crtc_by_id     (GnomeRRScreen         *screen,
 						    guint32                id);
-gboolean        gnome_rr_screen_refresh            (GnomeRRScreen         *screen);
+gboolean        gnome_rr_screen_refresh            (GnomeRRScreen         *screen,
+						    GError               **error);
 GnomeRROutput * gnome_rr_screen_get_output_by_id   (GnomeRRScreen         *screen,
 						    guint32                id);
 GnomeRROutput * gnome_rr_screen_get_output_by_name (GnomeRRScreen         *screen,

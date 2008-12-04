@@ -469,14 +469,14 @@ screen_info_new (GnomeRRScreen *screen, GError **error)
 }
 
 static gboolean
-screen_update (GnomeRRScreen *screen, gboolean force_callback)
+screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
 {
     ScreenInfo *info;
     gboolean changed = FALSE;
     
     g_assert (screen != NULL);
 
-    info = screen_info_new (screen);    /* FMQ: do we need to return an error here? */
+    info = screen_info_new (screen, error);
     if (info)
     {
 	if (info->resources->configTimestamp != screen->info->resources->configTimestamp)
@@ -514,7 +514,7 @@ screen_on_event (GdkXEvent *xevent,
 	/* FIXME: we may need to be more discriminating in
 	 * what causes 'changed' events
 	 */
-	screen_update (screen, TRUE);
+	screen_update (screen, TRUE, NULL); /* NULL-GError */
     }
     
     /* Pass the event on to GTK+ */
@@ -630,9 +630,11 @@ gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 }
 
 gboolean
-gnome_rr_screen_refresh (GnomeRRScreen *screen)
+gnome_rr_screen_refresh (GnomeRRScreen *screen,
+			 GError       **error)
 {
-    return screen_update (screen, FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+    return screen_update (screen, FALSE, error);
 }
 
 GnomeRRMode **
