@@ -1337,6 +1337,11 @@ crtc_assignment_free (CrtcAssignment *assign)
     g_free (assign);
 }
 
+typedef struct {
+    gboolean has_error;
+    GError **error;
+} ConfigureCrtcState;
+
 static void
 configure_crtc (gpointer key,
 		gpointer value,
@@ -1344,13 +1349,19 @@ configure_crtc (gpointer key,
 {
     GnomeRRCrtc *crtc = key;
     CrtcInfo *info = value;
+    ConfigureCrtcState *state = data;
 
-    gnome_rr_crtc_set_config (crtc,
-			info->x, info->y,
-			info->mode,
-			info->rotation,
-			(GnomeRROutput **)info->outputs->pdata,
-			info->outputs->len);
+    if (state->has_error)
+	return;
+
+    if (!gnome_rr_crtc_set_config (crtc,
+				   info->x, info->y,
+				   info->mode,
+				   info->rotation,
+				   (GnomeRROutput **)info->outputs->pdata,
+				   info->outputs->len,
+				   state->error))
+	state->has_error = TRUE;
 }
 
 static gboolean
@@ -1526,7 +1537,7 @@ fail:
 }
 
 static gboolean
-crtc_assignment_apply (CrtcAssignment *assign)
+crtc_assignment_apply (CrtcAssignment *assign, GError **error)
 {
     GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
     int width, height;
@@ -1548,6 +1559,8 @@ crtc_assignment_apply (CrtcAssignment *assign)
     width = MIN (max_width, width);
     height = MAX (min_height, height);
     height = MIN (max_height, height);
+
+    /* FMQ: do we need to check the sizes instead of clamping them? */
     
     /* Turn off all crtcs that are currently displaying outside the new screen,
      * or are not used in the new setup
@@ -1575,7 +1588,7 @@ crtc_assignment_apply (CrtcAssignment *assign)
 	    
 	    if (x + w > width || y + h > height || !g_hash_table_lookup (assign->info, crtc))
 	    {
-		if (!gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0))
+		if (!gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0, error))
 		{
 		    success = FALSE;
 		    break;
@@ -1596,9 +1609,16 @@ crtc_assignment_apply (CrtcAssignment *assign)
 
     if (success)
     {
+	ConfigureCrtcState state;
+
 	gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
+
+	state.has_error = FALSE;
+	state.error = error;
 	
-	g_hash_table_foreach (assign->info, configure_crtc, NULL);
+	g_hash_table_foreach (assign->info, configure_crtc, &state);
+
+	success = !state.has_error;
     }
 
     return success;
