@@ -1110,6 +1110,8 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen)
     GnomeRRConfig **configs;
     GnomeRRConfig *result;
 
+    /* FMQ: return error */
+
     if (!screen)
 	return NULL;
     
@@ -1167,14 +1169,23 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 }
 
 gboolean
-gnome_rr_config_apply_stored (GnomeRRScreen *screen)
+gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
 {
     GnomeRRConfig *stored;
+    GError *my_error;
 
-    if (!screen)
-	return FALSE;
+    g_return_val_if_fail (screen != NULL, FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-    gnome_rr_screen_refresh (screen);
+    my_error = NULL;
+    if (!gnome_rr_screen_refresh (screen, &my_error)) {
+	    if (my_error) {
+		    g_propagate_error (error, my_error);
+		    return FALSE; /* This is a genuine error */
+	    }
+
+	    /* This means the screen didn't change, so just proceed */
+    }
 
     stored = gnome_rr_config_new_stored (screen);
 

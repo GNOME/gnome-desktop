@@ -478,16 +478,16 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
     g_assert (screen != NULL);
 
     info = screen_info_new (screen, error);
-    if (info)
-    {
-	if (info->resources->configTimestamp != screen->info->resources->configTimestamp)
+    if (!info)
+	    return FALSE;
+
+    if (info->resources->configTimestamp != screen->info->resources->configTimestamp)
 	    changed = TRUE;
 	
-	screen_info_free (screen->info);
+    screen_info_free (screen->info);
 	
-	screen->info = info;
-    }
-    
+    screen->info = info;
+
     if ((changed || force_callback) && screen->callback)
 	screen->callback (screen, screen->data);
     
@@ -630,6 +630,19 @@ gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 	*max_height = screen->info->max_height;
 }
 
+/**
+ * gnome_rr_screen_refresh
+ * @screen: a #GnomeRRScreen
+ * @error: location to store error, or %NULL
+ *
+ * Refreshes the screen configuration, and calls the screen's callback if it
+ * exists and if the screen's configuration changed.
+ *
+ * Return value: TRUE if the screen's configuration changed; otherwise, the
+ * function returns FALSE and a NULL error if the configuration didn't change,
+ * or FALSE and a non-NULL error if there was an error while refreshing the
+ * configuration.
+ */
 gboolean
 gnome_rr_screen_refresh (GnomeRRScreen *screen,
 			 GError       **error)
