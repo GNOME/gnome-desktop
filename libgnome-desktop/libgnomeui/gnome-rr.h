@@ -57,6 +57,7 @@ GQuark gnome_rr_error_quark (void);
 typedef enum {
     GNOME_RR_ERROR_UNKNOWN,		/* generic "fail" */
     GNOME_RR_ERROR_NO_RANDR_EXTENSION,	/* RANDR extension is not present */
+    GNOME_RR_ERROR_RANDR_ERROR,		/* generic/undescribed error from the underlying XRR API */
 } GnomeRRError;
 
 /* GnomeRRScreen */

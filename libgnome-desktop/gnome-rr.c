@@ -323,7 +323,8 @@ gather_clone_modes (ScreenInfo *info)
 static gboolean
 fill_out_screen_info (Display *xdisplay,
 		      Window xroot,
-		      ScreenInfo *info)
+		      ScreenInfo *info,
+		      GError **error)
 {
     XRRScreenResources *resources;
     
@@ -338,14 +339,18 @@ fill_out_screen_info (Display *xdisplay,
                                 &(info->max_width),
                                 &(info->max_height))) {
         /* XRR caught an error */
-        return False;
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not get the range of screen sizes"));
+        return FALSE;
     }
     
     gdk_flush ();
     if (gdk_error_trap_pop ())
     {
         /* Unhandled X Error was generated */
-        return False;
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_UNKNOWN,
+		     _("unhandled X error while getting the range of screen sizes"));
+        return FALSE;
     }
     
 #if 0
@@ -405,10 +410,10 @@ fill_out_screen_info (Display *xdisplay,
 	
 	/* Initialize */
 	for (crtc = info->crtcs; *crtc; ++crtc)
-	    crtc_initialize (*crtc, resources);
+	    crtc_initialize (*crtc, resources); /* FMQ: return error */
 	
 	for (output = info->outputs; *output; ++output)
-	    output_initialize (*output, resources);
+	    output_initialize (*output, resources); /* FMQ: return error */
 	
 	for (i = 0; i < resources->nmode; ++i)
 	{
@@ -426,7 +431,8 @@ fill_out_screen_info (Display *xdisplay,
 #if 0
 	g_print ("Couldn't get screen resources\n");
 #endif
-	
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not get the screen resources (CRTCs, outputs, modes)"));
 	return FALSE;
     }
 }
@@ -776,6 +782,7 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res)
     if (!info || !output->info)
     {
 	/* FIXME */
+	/* FMQ: return error */
 	return;
     }
     
@@ -1183,6 +1190,7 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     if (!info)
     {
 	/* FIXME: We need to reaquire the screen resources */
+	/* FMQ: return error.  See BadRRCrtc - can we actually catch that? */
 	return;
     }
     
