@@ -1112,8 +1112,6 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
     GnomeRRConfig **configs;
     GnomeRRConfig *result;
 
-    /* FMQ: return error */
-
     g_return_val_if_fail (screen != NULL, NULL);
     g_return_val_if_fail (error == NULL || *error == NULL, NULL);
     
@@ -1135,7 +1133,9 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
 	    }
 	}
 
-	/* FMQ: what if result == NULL here?  Do we return an error? */
+	if (result == NULL)
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_MATCHING_CONFIG,
+			 _("none of the saved display configurations matched the active configuration"));
 
 	configurations_free (configs);
     }
