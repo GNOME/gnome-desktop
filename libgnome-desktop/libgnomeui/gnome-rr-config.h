@@ -84,11 +84,13 @@ gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
 					      GError        **err);
 void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
-					      GnomeRRScreen  *screen);
+					      GnomeRRScreen  *screen,
+					      GError        **error);
 gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen,
 					      GError        **error);
 gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
-					      GnomeRRScreen  *screen);
+					      GnomeRRScreen  *screen,
+					      GError        **error);
 
 /* A utility function that isn't really in the spirit of this file, but I don't
  * don't know a better place for it.

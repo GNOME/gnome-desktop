@@ -885,11 +885,18 @@ make_outputs (GnomeRRConfig *config)
 
 gboolean
 gnome_rr_config_applicable (GnomeRRConfig  *configuration,
-			  GnomeRRScreen       *screen)
+			    GnomeRRScreen  *screen,
+			    GError        **error)
 {
-    GnomeOutputInfo **outputs = make_outputs (configuration);
-    CrtcAssignment *assign = crtc_assignment_new (screen, outputs);
+    GnomeOutputInfo **outputs;
+    CrtcAssignment *assign;
     gboolean result;
+
+    g_return_val_if_fail (configuration != NULL, FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+    outputs = make_outputs (configuration);
+    assign = crtc_assignment_new (screen, outputs, error);
 
     if (assign)
     {
