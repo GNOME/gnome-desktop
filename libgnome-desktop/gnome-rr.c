@@ -128,8 +128,9 @@ static gboolean       crtc_initialize   (GnomeRRCrtc        *crtc,
 /* GnomeRROutput */
 static GnomeRROutput *output_new        (ScreenInfo         *info,
 					 RROutput            id);
-static void           output_initialize (GnomeRROutput      *output,
-					 XRRScreenResources *res);
+static gboolean       output_initialize (GnomeRROutput      *output,
+					 XRRScreenResources *res,
+					 GError            **error);
 static void           output_free       (GnomeRROutput      *output);
 
 /* GnomeRRMode */
@@ -420,7 +421,13 @@ fill_out_screen_info (Display *xdisplay,
 	}
 	
 	for (output = info->outputs; *output; ++output)
-	    output_initialize (*output, resources); /* FMQ: return error */
+	{
+	    if (!output_initialize (*output, resources, error))
+	    {
+		screen_info_free (info);
+		return FALSE;
+	    }
+	}
 	
 	for (i = 0; i < resources->nmode; ++i)
 	{
@@ -774,8 +781,8 @@ read_edid_data (GnomeRROutput *output)
     return NULL;
 }
 
-static void
-output_initialize (GnomeRROutput *output, XRRScreenResources *res)
+static gboolean
+output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **error)
 {
     XRROutputInfo *info = XRRGetOutputInfo (
 	DISPLAY (output), res, output->id);
@@ -788,9 +795,11 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res)
     
     if (!info || !output->info)
     {
-	/* FIXME */
-	/* FMQ: return error */
-	return;
+	/* FIXME: see the comment in crtc_initialize() */
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not get information about output %d"),
+		     (int) output->id);
+	return FALSE;
     }
     
     output->name = g_strdup (info->name); /* FIXME: what is nameLen used for? */
