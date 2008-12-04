@@ -121,8 +121,9 @@ struct GnomeRRMode
 static GnomeRRCrtc *  crtc_new          (ScreenInfo         *info,
 					 RRCrtc              id);
 static void           crtc_free         (GnomeRRCrtc        *crtc);
-static void           crtc_initialize   (GnomeRRCrtc        *crtc,
-					 XRRScreenResources *res);
+static gboolean       crtc_initialize   (GnomeRRCrtc        *crtc,
+					 XRRScreenResources *res,
+					 GError            **error);
 
 /* GnomeRROutput */
 static GnomeRROutput *output_new        (ScreenInfo         *info,
@@ -410,7 +411,13 @@ fill_out_screen_info (Display *xdisplay,
 	
 	/* Initialize */
 	for (crtc = info->crtcs; *crtc; ++crtc)
-	    crtc_initialize (*crtc, resources); /* FMQ: return error */
+	{
+	    if (!crtc_initialize (*crtc, resources, error))
+	    {
+		screen_info_free (info);
+		return FALSE;
+	    }
+	}
 	
 	for (output = info->outputs; *output; ++output)
 	    output_initialize (*output, resources); /* FMQ: return error */
@@ -1175,9 +1182,10 @@ crtc_new (ScreenInfo *info, RROutput id)
     return crtc;
 }
 
-static void
+static gboolean
 crtc_initialize (GnomeRRCrtc        *crtc,
-		 XRRScreenResources *res)
+		 XRRScreenResources *res,
+		 GError            **error)
 {
     XRRCrtcInfo *info = XRRGetCrtcInfo (DISPLAY (crtc), res, crtc->id);
     GPtrArray *a;
@@ -1190,8 +1198,12 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     if (!info)
     {
 	/* FIXME: We need to reaquire the screen resources */
-	/* FMQ: return error.  See BadRRCrtc - can we actually catch that? */
-	return;
+	/* FIXME: can we actually catch BadRRCrtc, and does it make sense to emit that? */
+
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not get information about CRTC %d"),
+		     (int) crtc->id);
+	return FALSE;
     }
     
     /* GnomeRRMode */
