@@ -81,7 +81,7 @@ gboolean        gnome_rr_config_match        (GnomeRRConfig  *config1,
 gboolean        gnome_rr_config_equal	     (GnomeRRConfig  *config1,
 					      GnomeRRConfig  *config2);
 gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
-					      GError        **err);
+					      GError        **error);
 void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,

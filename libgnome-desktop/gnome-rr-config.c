@@ -1051,13 +1051,18 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
 
 
 gboolean
-gnome_rr_config_save (GnomeRRConfig *configuration, GError **err)
+gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 {
     GnomeRRConfig **configurations;
-    GString *output = g_string_new("");
+    GString *output;
     int i;
     gchar *filename;
     gboolean result;
+
+    g_return_val_if_fail (configuration != NULL, FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+    output = g_string_new ("");
 
     configurations = configurations_read (NULL); /* NULL-GError */
     
@@ -1079,7 +1084,7 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **err)
     g_string_append_printf (output, "</monitors>\n");
 
     filename = get_config_filename ();
-    result = g_file_set_contents (filename, output->str, -1, err);
+    result = g_file_set_contents (filename, output->str, -1, error);
     g_free (filename);
 
     if (result)
