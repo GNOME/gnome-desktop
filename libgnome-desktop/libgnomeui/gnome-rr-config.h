@@ -73,7 +73,8 @@ struct GnomeRRConfig
 };
 
 GnomeRRConfig  *gnome_rr_config_new_current  (GnomeRRScreen  *screen);
-GnomeRRConfig  *gnome_rr_config_new_stored   (GnomeRRScreen  *screen);
+GnomeRRConfig  *gnome_rr_config_new_stored   (GnomeRRScreen  *screen,
+					      GError        **error);
 void            gnome_rr_config_free         (GnomeRRConfig  *configuration);
 gboolean        gnome_rr_config_match        (GnomeRRConfig  *config1,
 					      GnomeRRConfig  *config2);

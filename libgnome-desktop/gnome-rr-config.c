@@ -1106,7 +1106,7 @@ gnome_rr_config_copy (GnomeRRConfig *config)
 }
 
 GnomeRRConfig *
-gnome_rr_config_new_stored (GnomeRRScreen *screen)
+gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
 {
     GnomeRRConfig *current;
     GnomeRRConfig **configs;
@@ -1114,12 +1114,12 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen)
 
     /* FMQ: return error */
 
-    if (!screen)
-	return NULL;
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
     
     current = gnome_rr_config_new_current (screen);
     
-    configs = configurations_read (NULL); /* NULL_GError */
+    configs = configurations_read (error);
 
     result = NULL;
     if (configs)
@@ -1134,6 +1134,8 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen)
 		break;
 	    }
 	}
+
+	/* FMQ: what if result == NULL here?  Do we return an error? */
 
 	configurations_free (configs);
     }
