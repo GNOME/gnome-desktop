@@ -66,7 +66,8 @@ static gboolean parse_file_gmarkup (const gchar *file,
 
 typedef struct CrtcAssignment CrtcAssignment;
 
-static gboolean         crtc_assignment_apply (CrtcAssignment   *assign);
+static gboolean         crtc_assignment_apply (CrtcAssignment   *assign,
+					       GError          **error);
 static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
 					       GnomeOutputInfo **outputs);
 static void             crtc_assignment_free  (CrtcAssignment   *assign);
@@ -1143,7 +1144,8 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen)
 
 gboolean
 gnome_rr_config_apply (GnomeRRConfig *config,
-		       GnomeRRScreen *screen)
+		       GnomeRRScreen *screen,
+		       GError       **error)
 {
     CrtcAssignment *assignment;
     GnomeOutputInfo **outputs;
@@ -1157,7 +1159,7 @@ gnome_rr_config_apply (GnomeRRConfig *config,
     
     if (assignment)
     {
-	if (crtc_assignment_apply (assignment))
+	if (crtc_assignment_apply (assignment, error))
 	    result = TRUE;
 	    
 	crtc_assignment_free (assignment);
@@ -1505,6 +1507,8 @@ static CrtcAssignment *
 crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 {
     CrtcAssignment *assignment = g_new0 (CrtcAssignment, 1);
+
+    /* FMQ: return error */
 
     assignment->info = g_hash_table_new_full (
 	g_direct_hash, g_direct_equal, NULL, (GFreeFunc)crtc_info_free);
