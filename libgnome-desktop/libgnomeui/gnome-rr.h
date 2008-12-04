@@ -58,6 +58,7 @@ typedef enum {
     GNOME_RR_ERROR_UNKNOWN,		/* generic "fail" */
     GNOME_RR_ERROR_NO_RANDR_EXTENSION,	/* RANDR extension is not present */
     GNOME_RR_ERROR_RANDR_ERROR,		/* generic/undescribed error from the underlying XRR API */
+    GNOME_RR_ERROR_BOUNDS_ERROR,	/* requested bounds of a CRTC are outside the maximum size */
 } GnomeRRError;
 
 /* GnomeRRScreen */
@@ -124,7 +125,8 @@ gboolean        gnome_rr_crtc_set_config           (GnomeRRCrtc           *crtc,
 						    GnomeRRMode           *mode,
 						    GnomeRRRotation        rotation,
 						    GnomeRROutput        **outputs,
-						    int                    n_outputs);
+						    int                    n_outputs,
+						    GError               **error);
 gboolean        gnome_rr_crtc_can_drive_output     (GnomeRRCrtc           *crtc,
 						    GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_crtc_get_current_mode     (GnomeRRCrtc           *crtc);

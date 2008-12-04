@@ -1064,22 +1064,35 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 			  GnomeRRMode      *mode,
 			  GnomeRRRotation   rotation,
 			  GnomeRROutput   **outputs,
-			  int               n_outputs)
+			  int               n_outputs,
+			  GError          **error)
 {
     ScreenInfo *info;
     GArray *output_ids;
+    Status status;
     gboolean result;
     int i;
     
     g_return_val_if_fail (crtc != NULL, FALSE);
     g_return_val_if_fail (mode != NULL || outputs == NULL || n_outputs == 0, FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
     
     info = crtc->info;
     
     if (mode)
     {
-	g_return_val_if_fail (x + mode->width <= info->max_width, FALSE);
-	g_return_val_if_fail (y + mode->height <= info->max_height, FALSE);
+	if (x + mode->width > info->max_width
+	    || y + mode->height > info->max_height)
+	{
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
+			 _("requested position/size for CRTC %d is outside the allowed limit: "
+			   "req_x = %d, req_width = %d, max_width = %d, "
+			   "req_y = %d, req_height = %d, max_height = %d"),
+			 (int) crtc->id,
+			 x, mode->width, info->max_width,
+			 y, mode->height, info->max_height);
+	    return FALSE;
+	}
     }
     
     output_ids = g_array_new (FALSE, FALSE, sizeof (RROutput));
@@ -1090,15 +1103,24 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 	    g_array_append_val (output_ids, outputs[i]->id);
     }
     
-    result = XRRSetCrtcConfig (DISPLAY (crtc), info->resources, crtc->id,
+    status = XRRSetCrtcConfig (DISPLAY (crtc), info->resources, crtc->id,
 			       CurrentTime, 
 			       x, y,
 			       mode ? mode->id : None,
 			       xrotation_from_rotation (rotation),
 			       (RROutput *)output_ids->data,
-			       output_ids->len) == RRSetConfigSuccess;
+			       output_ids->len);
     
     g_array_free (output_ids, TRUE);
+
+    if (status == RRSetConfigSuccess)
+	result = TRUE;
+    else {
+	result = FALSE;
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not set the configuration for CRTC %d"),
+		     (int) crtc->id);
+    }
     
     return result;
 }
