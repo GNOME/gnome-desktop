@@ -414,19 +414,13 @@ fill_out_screen_info (Display *xdisplay,
 	for (crtc = info->crtcs; *crtc; ++crtc)
 	{
 	    if (!crtc_initialize (*crtc, resources, error))
-	    {
-		screen_info_free (info);
 		return FALSE;
-	    }
 	}
 	
 	for (output = info->outputs; *output; ++output)
 	{
 	    if (!output_initialize (*output, resources, error))
-	    {
-		screen_info_free (info);
 		return FALSE;
-	    }
 	}
 	
 	for (i = 0; i < resources->nmode; ++i)
@@ -452,7 +446,7 @@ fill_out_screen_info (Display *xdisplay,
 }
 
 static ScreenInfo *
-screen_info_new (GnomeRRScreen *screen)
+screen_info_new (GnomeRRScreen *screen, GError **error)
 {
     ScreenInfo *info = g_new0 (ScreenInfo, 1);
     
@@ -463,14 +457,14 @@ screen_info_new (GnomeRRScreen *screen)
     info->modes = NULL;
     info->screen = screen;
     
-    if (fill_out_screen_info (screen->xdisplay, screen->xroot, info))
+    if (fill_out_screen_info (screen->xdisplay, screen->xroot, info, error))
     {
 	return info;
     }
     else
     {
-	g_free (info);
-	return NULL; /* FMQ: return error */
+	screen_info_free (info);
+	return NULL;
     }
 }
 
@@ -481,8 +475,8 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback)
     gboolean changed = FALSE;
     
     g_assert (screen != NULL);
-    
-    info = screen_info_new (screen);
+
+    info = screen_info_new (screen);    /* FMQ: do we need to return an error here? */
     if (info)
     {
 	if (info->resources->configTimestamp != screen->info->resources->configTimestamp)
@@ -557,12 +551,11 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	
 	screen->randr_event_base = event_base;
 	
-	screen->info = screen_info_new (screen);
+	screen->info = screen_info_new (screen, error);
 	
 	if (!screen->info) {
 	    g_free (screen);
 	    return NULL;
-	    /* FMQ: return error */
 	}
 	
 	XRRSelectInput (screen->xdisplay,
