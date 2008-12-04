@@ -847,6 +847,8 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     output->edid_data = read_edid_data (output);
     
     XRRFreeOutputInfo (info);
+
+    return TRUE;
 }
 
 static void
@@ -1268,6 +1270,8 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     crtc->rotations = gnome_rr_rotation_from_xrotation (info->rotations);
     
     XRRFreeCrtcInfo (info);
+
+    return TRUE;
 }
 
 static void
