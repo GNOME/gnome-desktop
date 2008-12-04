@@ -69,7 +69,8 @@ typedef struct CrtcAssignment CrtcAssignment;
 static gboolean         crtc_assignment_apply (CrtcAssignment   *assign,
 					       GError          **error);
 static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
-					       GnomeOutputInfo **outputs);
+					       GnomeOutputInfo **outputs,
+					       GError          **error);
 static void             crtc_assignment_free  (CrtcAssignment   *assign);
 static void             output_free           (GnomeOutputInfo  *output);
 static GnomeOutputInfo *output_copy           (GnomeOutputInfo  *output);
@@ -1153,7 +1154,7 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 
     outputs = make_outputs (config);
 
-    assignment = crtc_assignment_new (screen, outputs);
+    assignment = crtc_assignment_new (screen, outputs, error);
 
     outputs_free (outputs);
     
@@ -1504,11 +1505,9 @@ get_required_virtual_size (CrtcAssignment *assign, int *width, int *height)
 }
 
 static CrtcAssignment *
-crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
+crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **error)
 {
     CrtcAssignment *assignment = g_new0 (CrtcAssignment, 1);
-
-    /* FMQ: return error */
 
     assignment->info = g_hash_table_new_full (
 	g_direct_hash, g_direct_equal, NULL, (GFreeFunc)crtc_info_free);
@@ -1526,6 +1525,14 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 	if (width < min_width || width > max_width ||
 	    height < min_height || height > max_height)
 	{
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
+			 _("required virtual size does not fit available size: "
+			   "req_width = %d, req_height = %d, "
+			   "min_width = %d, min_height = %d, "
+			   "max_width = %d, max_height = %d"),
+			 width, height,
+			 min_width, min_height,
+			 max_width, max_height);
 	    goto fail;
 	}
 
@@ -1533,6 +1540,9 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs)
 	
 	return assignment;
     }
+    else
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+		     _("could not find a suitable configuration of screens"));
     
 fail:
     crtc_assignment_free (assignment);

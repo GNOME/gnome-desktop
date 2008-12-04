@@ -59,6 +59,7 @@ typedef enum {
     GNOME_RR_ERROR_NO_RANDR_EXTENSION,	/* RANDR extension is not present */
     GNOME_RR_ERROR_RANDR_ERROR,		/* generic/undescribed error from the underlying XRR API */
     GNOME_RR_ERROR_BOUNDS_ERROR,	/* requested bounds of a CRTC are outside the maximum size */
+    GNOME_RR_ERROR_CRTC_ASSIGNMENT,	/* could not assign CRTCs to outputs */
 } GnomeRRError;
 
 /* GnomeRRScreen */
