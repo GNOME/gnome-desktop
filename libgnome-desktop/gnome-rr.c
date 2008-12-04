@@ -138,6 +138,22 @@ static void           mode_initialize   (GnomeRRMode        *mode,
 static void           mode_free         (GnomeRRMode        *mode);
 
 
+/* Errors */
+
+/**
+ * gnome_rr_error_quark:
+ *
+ * Returns the #GQuark that will be used for #GError values returned by the
+ * GnomeRR API.
+ *
+ * Return value: a #GQuark used to identify errors coming from the GnomeRR API.
+ */
+GQuark
+gnome_rr_error_quark (void)
+{
+    return g_quark_from_static_string ("gnome-rr-error-quark");
+}
+
 /* Screen */
 static GnomeRROutput *
 gnome_rr_output_by_id (ScreenInfo *info, RROutput id)

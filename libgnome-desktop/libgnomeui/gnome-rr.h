@@ -48,6 +48,16 @@ typedef enum
     GNOME_RR_REFLECT_Y =	(1 << 5)
 } GnomeRRRotation;
 
+/* Error codes */
+
+#define GNOME_RR_ERROR (gnome_rr_error_quark ())
+
+GQuark gnome_rr_error_quark (void);
+
+typedef enum {
+    GNOME_RR_ERROR_UNKNOWN,		/* generic "fail" */
+} GnomeRRError;
+
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
 						    GnomeRRScreenChanged   callback,
