@@ -24,6 +24,7 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 
+#include <glib/gi18n-lib.h>
 #include "libgnomeui/gnome-rr.h"
 #include <string.h>
 #include <X11/Xlib.h>
@@ -449,7 +450,7 @@ screen_info_new (GnomeRRScreen *screen)
     else
     {
 	g_free (info);
-	return NULL;
+	return NULL; /* FMQ: return error */
     }
 }
 
@@ -512,11 +513,14 @@ screen_on_event (GdkXEvent *xevent,
 GnomeRRScreen *
 gnome_rr_screen_new (GdkScreen *gdk_screen,
 		     GnomeRRScreenChanged callback,
-		     gpointer data)
+		     gpointer data,
+		     GError **error)
 {
     Display *dpy = GDK_SCREEN_XDISPLAY (gdk_screen);
     int event_base;
     int ignore;
+
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
     
     if (XRRQueryExtension (dpy, &event_base, &ignore))
     {
@@ -538,6 +542,7 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	if (!screen->info) {
 	    g_free (screen);
 	    return NULL;
+	    /* FMQ: return error */
 	}
 	
 	XRRSelectInput (screen->xdisplay,
@@ -554,8 +559,13 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	gdk_window_add_filter (screen->gdk_root, screen_on_event, screen);
 	return screen;
     }
-    
-    return NULL;
+    else
+    {
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+		     _("RANDR extension is not present"));
+	
+	return NULL;
+   }
 }
 
 void

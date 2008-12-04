@@ -56,12 +56,14 @@ GQuark gnome_rr_error_quark (void);
 
 typedef enum {
     GNOME_RR_ERROR_UNKNOWN,		/* generic "fail" */
+    GNOME_RR_ERROR_NO_RANDR_EXTENSION,	/* RANDR extension is not present */
 } GnomeRRError;
 
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
 						    GnomeRRScreenChanged   callback,
-						    gpointer               data);
+						    gpointer               data,
+						    GError               **error);
 void            gnome_rr_screen_destroy            (GnomeRRScreen         *screen);
 GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *screen);
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
