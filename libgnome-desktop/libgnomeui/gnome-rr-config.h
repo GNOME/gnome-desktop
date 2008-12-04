@@ -85,7 +85,8 @@ gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
 void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen);
-gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen);
+gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen,
+					      GError        **error);
 gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen);
 

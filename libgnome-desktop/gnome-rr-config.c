@@ -1192,15 +1192,17 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
 	    /* This means the screen didn't change, so just proceed */
     }
 
-    stored = gnome_rr_config_new_stored (screen);
+    stored = gnome_rr_config_new_stored (screen, error);
 
     if (stored)
     {
-	gnome_rr_config_apply (stored, screen);
+	gboolean result;
+
+	result = gnome_rr_config_apply (stored, screen, error);
 
 	gnome_rr_config_free (stored);
 	
-	return TRUE;
+	return result;
     }
     else
     {
