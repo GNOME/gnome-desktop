@@ -1147,6 +1147,11 @@ get_current_slide (SlideShow *show,
 		elapsed += slide->duration;
 	}
 
+	/* this should never happen since we have slides and we should always
+	 * find a current slide for the elapsed time since beginning -- we're
+	 * looping with fmod() */
+	g_assert_not_reached ();
+
 	return NULL;
 }
 
@@ -2251,6 +2256,12 @@ read_slideshow_file (const char *filename,
 		show->start_time = (double)t;
 			
 		dump_bg (show);
+
+		/* no slides, that's not a slideshow */
+		if (g_queue_get_length (show->slides) == 0) {
+			slideshow_unref (show);
+			show = NULL;
+		}
 	}
 
 	g_free (contents);
