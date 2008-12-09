@@ -1543,15 +1543,16 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **
 	if (width < min_width || width > max_width ||
 	    height < min_height || height > max_height)
 	{
+	    /* Translators: the "requested", "minimum", and "maximum" words here
+	     * are not keywords; please translate them as usual.
+	     */
 	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
 			 _("required virtual size does not fit available size: "
-			   "req_width = %d, req_height = %d, "
-			   "min_width = %d, min_height = %d, "
-			   "max_width = %d, max_height = %d"),
+			   "requested=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"),
 			 width, height,
 			 min_width, min_height,
 			 max_width, max_height);
-	    goto fail;
+	    goto epic_fail;
 	}
 
 	assignment->screen = screen;

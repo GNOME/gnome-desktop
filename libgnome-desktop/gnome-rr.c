@@ -1100,13 +1100,16 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 	if (x + mode->width > info->max_width
 	    || y + mode->height > info->max_height)
 	{
+	    /* Translators: the "position", "size", and "maximum" words here are
+	     * not keywords; please translate them as usual.
+	     */
 	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
 			 _("requested position/size for CRTC %d is outside the allowed limit: "
-			   "req_x = %d, req_width = %d, max_width = %d, "
-			   "req_y = %d, req_height = %d, max_height = %d"),
+			   "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"),
 			 (int) crtc->id,
-			 x, mode->width, info->max_width,
-			 y, mode->height, info->max_height);
+			 x, y,
+			 mode->width, mode->height,
+			 info->max_width, info->max-height);
 	    return FALSE;
 	}
     }
