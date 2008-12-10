@@ -1109,7 +1109,7 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 			 (int) crtc->id,
 			 x, y,
 			 mode->width, mode->height,
-			 info->max_width, info->max-height);
+			 info->max_width, info->max_height);
 	    return FALSE;
 	}
     }

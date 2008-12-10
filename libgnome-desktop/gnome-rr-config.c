@@ -1552,7 +1552,7 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **
 			 width, height,
 			 min_width, min_height,
 			 max_width, max_height);
-	    goto epic_fail;
+	    goto fail;
 	}
 
 	assignment->screen = screen;
