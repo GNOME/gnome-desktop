@@ -427,14 +427,6 @@ gnome_bg_new (void)
 	return g_object_new (GNOME_TYPE_BG, NULL);
 }
 
-static gboolean
-colors_equal (const GdkColor *primary, const GdkColor *secondary)
-{
-	return  primary->red   == secondary->red	&&
-		primary->green == secondary->green  &&
-		primary->blue  == secondary->blue;
-}
-
 void
 gnome_bg_set_color (GnomeBG *bg,
 		    GnomeBGColorType type,
@@ -444,8 +436,8 @@ gnome_bg_set_color (GnomeBG *bg,
 	g_return_if_fail (bg != NULL);
 
 	if (bg->color_type != type			||
-	    !colors_equal (&bg->primary, primary)			||
-	    (secondary && !colors_equal (&bg->secondary, secondary))) {
+	    !gdk_color_equal (&bg->primary, primary)			||
+	    (secondary && !gdk_color_equal (&bg->secondary, secondary))) {
 
 		bg->color_type = type;
 		bg->primary = *primary;
