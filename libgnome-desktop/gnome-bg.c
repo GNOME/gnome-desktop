@@ -1046,15 +1046,9 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	return result;
 }
 
-
-/* Set the root pixmap, and properties pointing to it. We
- * do this atomically with a server grab to make sure that
- * we won't leak the pixmap if somebody else it setting
- * it at the same time. (This assumes that they follow the
- * same conventions we do)
- */
-void 
-gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
+static void
+gnome_bg_set_root_pixmap_id (GdkScreen *screen,
+			     GdkPixmap *pixmap)
 {
 	int      result;
 	gint     format;
@@ -1065,24 +1059,20 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 	Atom     type;
 	Display *display;
 	int      screen_num;
-	
-	g_return_if_fail (screen != NULL);
-	g_return_if_fail (pixmap != NULL);
-	
+
 	screen_num = gdk_screen_get_number (screen);
-	
 	data_esetroot = NULL;
+
 	display = GDK_DISPLAY_XDISPLAY (gdk_screen_get_display (screen));
-	
-	gdk_x11_display_grab (gdk_screen_get_display (screen));
-	
-	result = XGetWindowProperty (
-		display, RootWindow (display, screen_num),
-		gdk_x11_get_xatom_by_name ("ESETROOT_PMAP_ID"),
-		0L, 1L, False, XA_PIXMAP,
-		&type, &format, &nitems, &bytes_after,
-		&data_esetroot);
-	
+
+	result = XGetWindowProperty (display,
+				     RootWindow (display, screen_num),
+				     gdk_x11_get_xatom_by_name ("ESETROOT_PMAP_ID"),
+				     0L, 1L, False, XA_PIXMAP,
+				     &type, &format, &nitems,
+				     &bytes_after,
+				     &data_esetroot);
+
 	if (data_esetroot != NULL) {
 		if (result == Success && type == XA_PIXMAP &&
 		    format == 32 &&
@@ -1105,9 +1095,33 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 			 gdk_x11_get_xatom_by_name ("_XROOTPMAP_ID"), XA_PIXMAP,
 			 32, PropModeReplace,
 			 (guchar *) &pixmap_id, 1);
-	
+}
+
+/* Set the root pixmap, and properties pointing to it. We
+ * do this atomically with a server grab to make sure that
+ * we won't leak the pixmap if somebody else it setting
+ * it at the same time. (This assumes that they follow the
+ * same conventions we do)
+ */
+void
+gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
+{
+	Display *display;
+	int      screen_num;
+
+	g_return_if_fail (screen != NULL);
+	g_return_if_fail (pixmap != NULL);
+
+	screen_num = gdk_screen_get_number (screen);
+
+	display = GDK_DISPLAY_XDISPLAY (gdk_screen_get_display (screen));
+
+	gdk_x11_display_grab (gdk_screen_get_display (screen));
+
+	gnome_bg_set_root_pixmap_id (screen, pixmap);
+
 	XSetWindowBackgroundPixmap (display, RootWindow (display, screen_num),
-				    pixmap_id);
+				    GDK_PIXMAP_XID (pixmap));
 	XClearWindow (display, RootWindow (display, screen_num));
 
 	gdk_display_flush (gdk_screen_get_display (screen));

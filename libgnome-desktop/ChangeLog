@@ -1,5 +1,19 @@
 2009-01-19  Ray Strode  <rstrode@redhat.com>
 
+	Move part of set_pixmap_as_root to set_root_pixmap_id
+
+	* gnome-bg.c (set_pixmap_as_root),
+	(set_root_pixmap_id): The meatiest part of
+	set_pixmap_as_root takes the passed
+	in pixmap and stores it on the root window in the
+	ESETROOT_PMAP_ID and _XROOTPMAP_ID properties.  That
+	functionality stands on its own, and should be factored
+	out so it can get reused later when adding crossfade
+	transitions on background changes.
+
+
+2009-01-19  Ray Strode  <rstrode@redhat.com>
+
 	* gnome-bg.c (gnome_bg_set_pixmap_as_root): Use gdk
 	functions to grab server and flush client.
 
