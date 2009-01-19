@@ -22,6 +22,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-desktop-thumbnail.c \
 	gnome-thumbnail-pixbuf-utils.c \
 	gnome-bg.c		\
+	gnome-bg-crossfade.c	\
 	display-name.c		\
 	gnome-rr.c		\
 	gnome-rr-config.c	\
