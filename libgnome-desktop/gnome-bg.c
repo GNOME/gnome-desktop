@@ -98,7 +98,8 @@ struct _GnomeBG
 	GFileMonitor *		file_monitor;
 
 	guint                   changed_id;
-	
+	guint                   transitioned_id;
+
 	/* Cached information, only access through cache accessor functions */
         SlideShow *		slideshow;
 	time_t			file_mtime;
@@ -115,6 +116,7 @@ struct _GnomeBGClass
 
 enum {
 	CHANGED,
+	TRANSITIONED,
 	N_SIGNALS
 };
 
@@ -275,6 +277,30 @@ queue_changed (GnomeBG *bg)
 					     NULL);
 }
 
+static gboolean
+do_transitioned (GnomeBG *bg)
+{
+	bg->transitioned_id = 0;
+
+	g_signal_emit (G_OBJECT (bg), signals[TRANSITIONED], 0);
+
+	return FALSE;
+}
+
+static void
+queue_transitioned (GnomeBG *bg)
+{
+	if (bg->transitioned_id > 0) {
+		g_source_remove (bg->transitioned_id);
+	}
+
+	bg->transitioned_id = g_timeout_add_full (G_PRIORITY_LOW,
+					     100,
+					     (GSourceFunc)do_transitioned,
+					     bg,
+					     NULL);
+}
+
 void
 gnome_bg_load_from_preferences (GnomeBG     *bg,
 				GConfClient *client)
@@ -413,6 +439,14 @@ gnome_bg_class_init (GnomeBGClass *klass)
 	object_class->finalize = gnome_bg_finalize;
 
 	signals[CHANGED] = g_signal_new ("changed",
+					 G_OBJECT_CLASS_TYPE (object_class),
+					 G_SIGNAL_RUN_LAST,
+					 0,
+					 NULL, NULL,
+					 g_cclosure_marshal_VOID__VOID,
+					 G_TYPE_NONE, 0);
+
+	signals[TRANSITIONED] = g_signal_new ("transitioned",
 					 G_OBJECT_CLASS_TYPE (object_class),
 					 G_SIGNAL_RUN_LAST,
 					 0,
@@ -1349,7 +1383,7 @@ on_timeout (gpointer data)
 
 	bg->timeout_id = 0;
 	
-	queue_changed (bg);
+	queue_transitioned (bg);
 
 	return FALSE;
 }

@@ -1,3 +1,13 @@
+2009-01-19  Ray Strode  <rstrode@redhat.com>
+
+	Emit "transitioned" not "changed" for new frames
+
+	* gnome-bg.c (do_transitioned), (queue_transitioned),
+	(gnome_bg_class_init), (on_timeout): When changing
+	slideshow frames emit a different signal than when
+	changing whole backgrounds, so the two cases can be
+	detected.
+
 2009-01-19  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-rr.c: (fill_out_screen_info): if xrandr 1.3 is available, use
