@@ -1097,12 +1097,18 @@ gnome_bg_set_root_pixmap_id (GdkScreen *screen,
 			 (guchar *) &pixmap_id, 1);
 }
 
-/* Set the root pixmap, and properties pointing to it. We
+/**
+ * gnome_bg_set_pixmap_as_root:
+ * @screen: the #GdkScreen to change root background on
+ * @pixmap: the #GdkPixmap to set root background from
+ *
+ * Set the root pixmap, and properties pointing to it. We
  * do this atomically with a server grab to make sure that
  * we won't leak the pixmap if somebody else it setting
  * it at the same time. (This assumes that they follow the
- * same conventions we do)
- */
+ * same conventions we do).  @pixmap should come from a call
+ * to gnome_bg_create_pixmap().
+ **/
 void
 gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 {
