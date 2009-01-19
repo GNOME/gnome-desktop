@@ -1048,7 +1048,7 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 
 
 /* Set the root pixmap, and properties pointing to it. We
- * do this atomically with XGrabServer to make sure that
+ * do this atomically with a server grab to make sure that
  * we won't leak the pixmap if somebody else it setting
  * it at the same time. (This assumes that they follow the
  * same conventions we do)
@@ -1074,7 +1074,7 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 	data_esetroot = NULL;
 	display = GDK_DISPLAY_XDISPLAY (gdk_screen_get_display (screen));
 	
-	XGrabServer (display);
+	gdk_x11_display_grab (gdk_screen_get_display (screen));
 	
 	result = XGetWindowProperty (
 		display, RootWindow (display, screen_num),
@@ -1109,10 +1109,9 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 	XSetWindowBackgroundPixmap (display, RootWindow (display, screen_num),
 				    pixmap_id);
 	XClearWindow (display, RootWindow (display, screen_num));
-	
-	XUngrabServer (display);
-	
-	XFlush (display);
+
+	gdk_display_flush (gdk_screen_get_display (screen));
+	gdk_x11_display_ungrab (gdk_screen_get_display (screen));
 }
 
 
