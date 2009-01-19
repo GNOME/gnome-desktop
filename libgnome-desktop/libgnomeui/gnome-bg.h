@@ -32,6 +32,7 @@
 #include <gdk/gdk.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
+#include <libgnomeui/gnome-bg-crossfade.h>
 
 G_BEGIN_DECLS
 
@@ -109,6 +110,9 @@ gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
 void             gnome_bg_set_pixmap_as_root    (GdkScreen             *screen,
 						 GdkPixmap             *pixmap);
 
+GnomeBGCrossfade *gnome_bg_set_pixmap_as_root_with_crossfade (GdkScreen *screen,
+                                                              GdkPixmap *pixmap);
+GdkPixmap *gnome_bg_get_pixmap_from_root (GdkScreen *screen);
 
 G_END_DECLS
 

@@ -38,10 +38,13 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
+#include <cairo.h>
+
 #include <gconf/gconf-client.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
+#include <libgnomeui/gnome-bg-crossfade.h>
 
 #define BG_KEY_DRAW_BACKGROUND    GNOME_BG_KEY_DIR "/draw_background"
 #define BG_KEY_PRIMARY_COLOR      GNOME_BG_KEY_DIR "/primary_color"
@@ -1046,6 +1049,91 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	return result;
 }
 
+/**
+ * gnome_bg_get_pixmap_from_root:
+ * @screen: a #GdkScreen
+ *
+ * This function queries the _XROOTPMAP_ID property from
+ * the root window associated with @screen to determine
+ * the current root window background pixmap and returns
+ * a copy of it. If the _XROOTPMAP_ID is not set, then
+ * a black pixmap is returned.
+ *
+ * Return value: a #GdkPixmap if successful or %NULL
+ **/
+GdkPixmap *
+gnome_bg_get_pixmap_from_root (GdkScreen *screen)
+{
+	int result;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	guchar *data;
+	Atom type;
+	Display *display;
+	int screen_num;
+	GdkPixmap *pixmap;
+	GdkPixmap *source_pixmap;
+	int width, height;
+	cairo_t *cr;
+	cairo_pattern_t *pattern;
+
+	display = GDK_DISPLAY_XDISPLAY (gdk_screen_get_display (screen));
+	screen_num = gdk_screen_get_number (screen);
+
+	result = XGetWindowProperty (display,
+				     RootWindow (display, screen_num),
+				     gdk_x11_get_xatom_by_name ("_XROOTPMAP_ID"),
+				     0L, 1L, False, XA_PIXMAP,
+				     &type, &format, &nitems, &bytes_after,
+				     &data);
+	pixmap = NULL;
+	source_pixmap = NULL;
+
+	if (result != Success || type != XA_PIXMAP ||
+	    format != 32 || nitems != 1) {
+		XFree (data);
+		data = NULL;
+	}
+
+	if (data != NULL) {
+		source_pixmap = gdk_pixmap_foreign_new (*(Pixmap *) data);
+		gdk_drawable_set_colormap (source_pixmap,
+					   gdk_screen_get_default_colormap (screen));
+	}
+
+	width = gdk_screen_get_width (screen);
+	height = gdk_screen_get_width (screen);
+
+	pixmap = gdk_pixmap_new (source_pixmap != NULL? source_pixmap :
+				 gdk_screen_get_root_window (screen),
+				 width, height, -1);
+
+	cr = gdk_cairo_create (pixmap);
+	if (source_pixmap != NULL) {
+		gdk_cairo_set_source_pixmap (cr, source_pixmap, 0, 0);
+		pattern = cairo_get_source (cr);
+		cairo_pattern_set_extend (pattern, CAIRO_EXTEND_REPEAT);
+	} else {
+		cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+	}
+	cairo_paint (cr);
+
+	if (cairo_status (cr) != CAIRO_STATUS_SUCCESS) {
+		g_object_unref (pixmap);
+		pixmap = NULL;
+	}
+	cairo_destroy (cr);
+
+	if (source_pixmap != NULL)
+		g_object_unref (source_pixmap);
+
+	if (data != NULL)
+		XFree (data);
+
+	return pixmap;
+}
+
 static void
 gnome_bg_set_root_pixmap_id (GdkScreen *screen,
 			     GdkPixmap *pixmap)
@@ -1134,6 +1222,54 @@ gnome_bg_set_pixmap_as_root (GdkScreen *screen, GdkPixmap *pixmap)
 	gdk_x11_display_ungrab (gdk_screen_get_display (screen));
 }
 
+/**
+ * gnome_bg_set_pixmap_as_root_with_crossfade:
+ * @screen: the #GdkScreen to change root background on
+ * @pixmap: the #GdkPixmap to set root background from
+ * @context: a #GMainContext or %NULL
+ *
+ * Set the root pixmap, and properties pointing to it.
+ * This function differs from gnome_bg_set_pixmap_as_root()
+ * in that it adds a subtle crossfade animation from the
+ * current root pixmap to the new one.
+ * same conventions we do).
+ *
+ * Return value: a #GnomeBGCrossfade object
+ **/
+GnomeBGCrossfade *
+gnome_bg_set_pixmap_as_root_with_crossfade (GdkScreen    *screen,
+					    GdkPixmap    *pixmap)
+{
+	GdkDisplay *display;
+	GdkWindow *root_window;
+	GdkPixmap *old_pixmap;
+	int      width, height;
+	GnomeBGCrossfade *fade;
+
+	g_return_val_if_fail (screen != NULL, NULL);
+	g_return_val_if_fail (pixmap != NULL, NULL);
+
+	root_window = gdk_screen_get_root_window (screen);
+
+	width = gdk_screen_get_width (screen);
+	height = gdk_screen_get_height (screen);
+
+	fade = gnome_bg_crossfade_new (width, height);
+
+	display = gdk_screen_get_display (screen);
+	gdk_x11_display_grab (display);
+	old_pixmap = gnome_bg_get_pixmap_from_root (screen);
+	gnome_bg_set_root_pixmap_id (screen, pixmap);
+	gnome_bg_crossfade_set_start_pixmap (fade, old_pixmap);
+	g_object_unref (old_pixmap);
+	gnome_bg_crossfade_set_end_pixmap (fade, pixmap);
+	gdk_display_flush (display);
+	gdk_x11_display_ungrab (display);
+
+	gnome_bg_crossfade_start (fade, root_window);
+
+	return fade;
+}
 
 /* Implementation of the pixbuf cache */
 struct _SlideShow
