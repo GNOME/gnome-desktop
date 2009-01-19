@@ -106,7 +106,10 @@ gboolean         gnome_bg_is_dark               (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
 
 
-/* Set a pixmap as root - not a GnomeBG method */
+/* Set a pixmap as root - not a GnomeBG method. At some point
+ * if we decide to stabilize the API then we may want to make
+ * these object methods, drop gnome_bg_create_pixmap, etc.
+ */
 void             gnome_bg_set_pixmap_as_root    (GdkScreen             *screen,
 						 GdkPixmap             *pixmap);
 
