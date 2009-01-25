@@ -926,7 +926,16 @@ get_old_config_filename (void)
 static gchar *
 get_config_filename (void)
 {
-    return g_build_filename (g_get_user_config_dir (), CONFIG_BASENAME, NULL);
+    const char *config_dir;
+
+    config_dir = g_get_user_config_dir ();
+
+    if (!g_file_test (config_dir, G_FILE_TEST_IS_DIR))
+    {
+        g_mkdir_with_parents (config_dir, 0700);
+    }
+
+    return g_build_filename (config_dir, CONFIG_BASENAME, NULL);
 }
 
 static const char *
