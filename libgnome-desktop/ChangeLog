@@ -1,3 +1,23 @@
+2009-01-27  Federico Mena Quintero  <federico@novell.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=545115 - Ask for
+	confirmation, with a timeout, after changing the RANDR
+	configuration for if we leave the user with an unusable display.
+	This also handles the case where the machine may crash after
+	changing the configuration; the old/known-good configuration will
+	be restored when the user restarts his session.
+
+	Add public API to get to $(XDG_CONFIG_HOME)/monitors.xml and a
+	backup of that file (monitors.xml.backup):
+
+	* libgnomeui/gnome-rr-config.h
+	(gnome_rr_config_get_backup_filename,
+	gnome_rr_config_get_intended_filename): New prototypes.
+
+	* gnome-rr-config.c (gnome_rr_config_get_backup_filename): Implement.
+	(gnome_rr_config_get_intended_filename): Implement.
+	(get_config_filename): Replaced by gnome_rr_config_get_intended_filename().
+
 2009-01-25  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-rr-config.c: (get_config_filename): create the config dir if it

@@ -33,7 +33,8 @@
 #include "libgnomeui/gnome-rr-config.h"
 #include "edid.h"
 
-#define CONFIG_BASENAME "monitors.xml"
+#define CONFIG_INTENDED_BASENAME "monitors.xml"
+#define CONFIG_BACKUP_BASENAME "monitors.xml.backup"
 
 /* In version 0 of the config file format, we had several <configuration>
  * toplevel elements and no explicit version number.  So, the filed looked
@@ -78,7 +79,6 @@ static void             output_free           (GnomeOutputInfo  *output);
 static GnomeOutputInfo *output_copy           (GnomeOutputInfo  *output);
 
 static gchar *get_old_config_filename (void);
-static gchar *get_config_filename (void);
 
 typedef struct Parser Parser;
 
@@ -432,7 +432,7 @@ configurations_read (GError **error)
 
     /* Try the new configuration file... */
 
-    filename = get_config_filename ();
+    filename = gnome_rr_config_get_intended_filename ();
 
     err = NULL;
     
@@ -917,25 +917,31 @@ gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 
 /* Database management */
 
-static gchar *
-get_old_config_filename (void)
+static void
+ensure_config_directory (void)
 {
-    return g_build_filename (g_get_home_dir(), ".gnome2", CONFIG_BASENAME, NULL);
+    g_mkdir_with_parents (g_get_user_config_dir (), 0700);
 }
 
 static gchar *
-get_config_filename (void)
+get_old_config_filename (void)
 {
-    const char *config_dir;
+    ensure_config_directory ();
+    return g_build_filename (g_get_home_dir(), ".gnome2", CONFIG_INTENDED_BASENAME, NULL);
+}
 
-    config_dir = g_get_user_config_dir ();
+char *
+gnome_rr_config_get_backup_filename (void)
+{
+    ensure_config_directory ();
+    return g_build_filename (g_get_user_config_dir (), CONFIG_BACKUP_BASENAME, NULL);
+}
 
-    if (!g_file_test (config_dir, G_FILE_TEST_IS_DIR))
-    {
-        g_mkdir_with_parents (config_dir, 0700);
-    }
-
-    return g_build_filename (config_dir, CONFIG_BASENAME, NULL);
+char *
+gnome_rr_config_get_intended_filename (void)
+{
+    ensure_config_directory ();
+    return g_build_filename (g_get_user_config_dir (), CONFIG_INTENDED_BASENAME, NULL);
 }
 
 static const char *
@@ -1092,7 +1098,7 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 
     g_string_append_printf (output, "</monitors>\n");
 
-    filename = get_config_filename ();
+    filename = gnome_rr_config_get_intended_filename ();
     result = g_file_set_contents (filename, output->str, -1, error);
     g_free (filename);
 

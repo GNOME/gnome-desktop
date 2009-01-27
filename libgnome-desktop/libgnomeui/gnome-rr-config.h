@@ -92,6 +92,9 @@ gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,
 					      GError        **error);
 
+char *gnome_rr_config_get_backup_filename (void);
+char *gnome_rr_config_get_intended_filename (void);
+
 /* A utility function that isn't really in the spirit of this file, but I don't
  * don't know a better place for it.
  */
