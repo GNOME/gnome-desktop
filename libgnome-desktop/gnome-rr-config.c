@@ -1071,7 +1071,8 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
     GnomeRRConfig **configurations;
     GString *output;
     int i;
-    gchar *filename;
+    gchar *intended_filename;
+    gchar *backup_filename;
     gboolean result;
 
     g_return_val_if_fail (configuration != NULL, FALSE);
@@ -1098,20 +1099,29 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 
     g_string_append_printf (output, "</monitors>\n");
 
-    filename = gnome_rr_config_get_intended_filename ();
-    result = g_file_set_contents (filename, output->str, -1, error);
-    g_free (filename);
+    backup_filename = gnome_rr_config_get_backup_filename ();
+    intended_filename = gnome_rr_config_get_intended_filename ();
+
+    /* backup the file first */
+    rename (intended_filename, backup_filename); /* no error checking because the intended file may not even exist */
+
+    result = g_file_set_contents (intended_filename, output->str, -1, error);
 
     if (result)
     {
+	char *filename;
+
 	/* Only remove the old config file if we were successful in saving the new one */
 
 	filename = get_old_config_filename ();
-	if (g_file_test (filename, G_FILE_TEST_EXISTS))
-	    g_unlink (filename);
+	g_unlink (filename);
 
 	g_free (filename);
-    }
+    } else
+	rename (backup_filename, intended_filename); /* no error checking because the backup may not even exist */
+
+    g_free (backup_filename);
+    g_free (intended_filename);
 
     return result;
 }

@@ -18,6 +18,11 @@
 	(gnome_rr_config_get_intended_filename): Implement.
 	(get_config_filename): Replaced by gnome_rr_config_get_intended_filename().
 
+	Create the backup file:
+
+	* gnome-rr-config.c (gnome_rr_config_save): Create a backup file
+	of monitors.xml when saving a new configuration.
+
 2009-01-25  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-rr-config.c: (get_config_filename): create the config dir if it
