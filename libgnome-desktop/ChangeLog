@@ -32,6 +32,18 @@
 	(gnome_rr_config_save): Don't delete the pre-XDG configuration
 	file anymore.
 
+	Pass a filename argument to gnome_rr_config_apply_stored() so we
+	can try the backup configuration from gnome-settings-daemon, for
+	recovery after a failed reconfiguration:
+
+	* gnome-rr-config.c (configurations_read): Removed, as
+	configurations_read_from_file() does everything we need now.
+	(gnome_rr_config_apply_stored): Take a filename argument; this
+	indicates from which file the configuration will be read.
+
+	* libgnomeui/gnome-rr-config.h (gnome_rr_config_apply_stored):
+	Update prototype with the filename argument.
+	
 2009-01-25  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-rr-config.c: (get_config_filename): create the config dir if it

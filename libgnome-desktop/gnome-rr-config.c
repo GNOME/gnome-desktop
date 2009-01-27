@@ -421,21 +421,6 @@ out:
     return result;
 }
 
-static GnomeRRConfig **
-configurations_read (GError **error)
-{
-    char *filename;
-    GnomeRRConfig **configs;
-
-    filename = gnome_rr_config_get_intended_filename ();
-
-    configs = configurations_read_from_file (filename, error);
-
-    g_free (filename);
-
-    return configs;
-}
-
 GnomeRRConfig *
 gnome_rr_config_new_current (GnomeRRScreen *screen)
 {
@@ -1050,7 +1035,10 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 
     output = g_string_new ("");
 
-    configurations = configurations_read (NULL); /* NULL-GError */
+    backup_filename = gnome_rr_config_get_backup_filename ();
+    intended_filename = gnome_rr_config_get_intended_filename ();
+
+    configurations = configurations_read_from_file (intended_filename, NULL); /* NULL-GError */
     
     g_string_append_printf (output, "<monitors version=\"1\">\n");
 
@@ -1068,9 +1056,6 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
     emit_configuration (configuration, output);
 
     g_string_append_printf (output, "</monitors>\n");
-
-    backup_filename = gnome_rr_config_get_backup_filename ();
-    intended_filename = gnome_rr_config_get_intended_filename ();
 
     /* backup the file first */
     rename (intended_filename, backup_filename); /* no error checking because the intended file may not even exist */
@@ -1104,8 +1089,8 @@ gnome_rr_config_copy (GnomeRRConfig *config)
     return copy;
 }
 
-GnomeRRConfig *
-gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
+static GnomeRRConfig *
+config_new_stored (GnomeRRScreen *screen, const char *filename, GError **error)
 {
     GnomeRRConfig *current;
     GnomeRRConfig **configs;
@@ -1116,7 +1101,7 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
     
     current = gnome_rr_config_new_current (screen);
     
-    configs = configurations_read (error);
+    configs = configurations_read_from_file (filename, error);
 
     result = NULL;
     if (configs)
@@ -1142,6 +1127,21 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
     gnome_rr_config_free (current);
     
     return result;
+}
+
+GnomeRRConfig *
+gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
+{
+    char *intended_filename;
+    GnomeRRConfig *config;
+
+    intended_filename = gnome_rr_config_get_intended_filename ();
+
+    config = config_new_stored (screen, intended_filename, error);
+
+    g_free (intended_filename);
+
+    return config;
 }
 
 gboolean
@@ -1173,7 +1173,7 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 }
 
 gboolean
-gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
+gnome_rr_config_apply_stored (GnomeRRScreen *screen, const char *filename, GError **error)
 {
     GnomeRRConfig *stored;
     GError *my_error;
@@ -1191,7 +1191,7 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
 	    /* This means the screen didn't change, so just proceed */
     }
 
-    stored = gnome_rr_config_new_stored (screen, error);
+    stored = config_new_stored (screen, filename, error);
 
     if (stored)
     {
