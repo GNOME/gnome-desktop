@@ -23,6 +23,15 @@
 	* gnome-rr-config.c (gnome_rr_config_save): Create a backup file
 	of monitors.xml when saving a new configuration.
 
+	Remove the use of the "old" version of the configuration format
+	(which was never in a public release):
+
+	* gnome-rr-config.c (get_old_config_filename): Removed.
+	(configurations_read): Don't fall back to the pre-XDG location of
+	the configuration file.
+	(gnome_rr_config_save): Don't delete the pre-XDG configuration
+	file anymore.
+
 2009-01-25  Vincent Untz  <vuntz@gnome.org>
 
 	* gnome-rr-config.c: (get_config_filename): create the config dir if it

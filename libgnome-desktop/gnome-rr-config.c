@@ -78,8 +78,6 @@ static void             crtc_assignment_free  (CrtcAssignment   *assign);
 static void             output_free           (GnomeOutputInfo  *output);
 static GnomeOutputInfo *output_copy           (GnomeOutputInfo  *output);
 
-static gchar *get_old_config_filename (void);
-
 typedef struct Parser Parser;
 
 /* Parser for monitor configurations */
@@ -428,34 +426,13 @@ configurations_read (GError **error)
 {
     char *filename;
     GnomeRRConfig **configs;
-    GError *err;
-
-    /* Try the new configuration file... */
 
     filename = gnome_rr_config_get_intended_filename ();
 
-    err = NULL;
-    
-    configs = configurations_read_from_file (filename, &err);
+    configs = configurations_read_from_file (filename, error);
 
     g_free (filename);
 
-    if (err)
-    {
-	if (g_error_matches (err, G_FILE_ERROR, G_FILE_ERROR_NOENT))
-	{
-	    g_error_free (err);
-	    
-	    /* Okay, so try the old configuration file */
-	    filename = get_old_config_filename ();
-	    configs = configurations_read_from_file (filename, error);
-	    g_free (filename);
-	}
-	else
-	{
-	    g_propagate_error (error, err);
-	}
-    }
     return configs;
 }
 
@@ -923,13 +900,6 @@ ensure_config_directory (void)
     g_mkdir_with_parents (g_get_user_config_dir (), 0700);
 }
 
-static gchar *
-get_old_config_filename (void)
-{
-    ensure_config_directory ();
-    return g_build_filename (g_get_home_dir(), ".gnome2", CONFIG_INTENDED_BASENAME, NULL);
-}
-
 char *
 gnome_rr_config_get_backup_filename (void)
 {
@@ -1107,17 +1077,7 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 
     result = g_file_set_contents (intended_filename, output->str, -1, error);
 
-    if (result)
-    {
-	char *filename;
-
-	/* Only remove the old config file if we were successful in saving the new one */
-
-	filename = get_old_config_filename ();
-	g_unlink (filename);
-
-	g_free (filename);
-    } else
+    if (!result)
 	rename (backup_filename, intended_filename); /* no error checking because the backup may not even exist */
 
     g_free (backup_filename);
