@@ -1172,6 +1172,18 @@ gnome_rr_config_apply (GnomeRRConfig *config,
     return result;
 }
 
+/**
+ * gnome_rr_config_apply_stored:
+ * @screen: A #GnomeRRScreen
+ * @error: Location to store error, or %NULL
+ *
+ * See the documentation for gnome_rr_config_apply_from_filename().  This
+ * function simply calls that other function with a filename of
+ * gnome_rr_config_get_intended_filename().
+
+ * @Deprecated: 2.26: Use gnome_rr_config_apply_from_filename() instead and pass it
+ * the filename from gnome_rr_config_get_intended_filename().
+ */
 gboolean
 gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
 {
@@ -1185,6 +1197,37 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
     return result;
 }
 
+/* gnome_rr_config_apply_from_filename:
+ * @screen: A #GnomeRRScreen
+ * @filename: Path of the file to look in for stored RANDR configurations.
+ * @error: Location to store error, or %NULL
+ *
+ * First, this function refreshes the @screen to match the current RANDR
+ * configuration from the X server.  Then, it tries to load the file in
+ * @filename and looks for suitable matching RANDR configurations in the file;
+ * if one is found, that configuration will be applied to the current set of
+ * RANDR outputs.
+ *
+ * Typically, @filename is the result of gnome_rr_config_get_intended_filename() or
+ * gnome_rr_config_get_backup_filename().
+ *
+ * Returns: TRUE if the RANDR configuration was loaded and applied from
+ * $(XDG_CONFIG_HOME)/monitors.xml, or FALSE otherwise:
+ *
+ * If the current RANDR configuration could not be refreshed, the @error will
+ * have a domain of #GNOME_RR_ERROR and a corresponding error code.
+ *
+ * If the file in question is loaded successfully but the configuration cannot
+ * be applied, the @error will have a domain of #GNOME_RR_ERROR.  Note that an
+ * error code of #GNOME_RR_ERROR_NO_MATCHING_CONFIG is not a real error; it
+ * simply means that there were no stored configurations that match the current
+ * set of RANDR outputs.
+ *
+ * If the file in question cannot be loaded, the @error will have a domain of
+ * #G_FILE_ERROR.  Note that an error code of G_FILE_ERROR_NOENT is not really
+ * an error, either; it means that there was no stored configuration file and so
+ * nothing is changed.
+ */
 gboolean
 gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename, GError **error)
 {
