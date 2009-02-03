@@ -1173,12 +1173,26 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 }
 
 gboolean
-gnome_rr_config_apply_stored (GnomeRRScreen *screen, const char *filename, GError **error)
+gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
+{
+    char *filename;
+    gboolean result;
+
+    filename = gnome_rr_config_get_intended_filename ();
+    result = gnome_rr_config_apply_from_filename (screen, filename, error);
+    g_free (filename);
+
+    return result;
+}
+
+gboolean
+gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename, GError **error)
 {
     GnomeRRConfig *stored;
     GError *my_error;
 
     g_return_val_if_fail (screen != NULL, FALSE);
+    g_return_val_if_fail (filename != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
     my_error = NULL;

@@ -87,8 +87,12 @@ gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,
 					      GError        **error);
 gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen,
-					      const char     *filename,
 					      GError        **error);
+
+gboolean        gnome_rr_config_apply_from_filename (GnomeRRScreen  *screen,
+						     const char     *filename
+						     GError        **error);
+
 gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,
 					      GError        **error);

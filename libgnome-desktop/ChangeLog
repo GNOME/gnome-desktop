@@ -1,3 +1,16 @@
+2009-02-03  Federico Mena Quintero  <federico@novell.com>
+
+	Don't break the API/ABI for gnome_rr_config_apply_stored(); just
+	deprecate it.
+
+	* gnome-rr-config.c (gnome_rr_config_apply_stored): Remove the
+	"filename" argument to avoid breaking the API/ABI.
+	(gnome_rr_config_apply_from_filename): New public function that
+	takes a filename.
+
+	* libgnomeui/gnome-rr-config.h (gnome_rr_config_apply_from_filename):
+	New prototype.
+
 2009-01-27  Federico Mena Quintero  <federico@novell.com>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=545115 - Ask for
