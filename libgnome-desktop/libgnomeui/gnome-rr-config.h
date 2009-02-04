@@ -86,8 +86,10 @@ void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,
 					      GError        **error);
+#ifndef GNOME_DISABLE_DEPRECATED
 gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen,
 					      GError        **error);
+#endif
 
 gboolean        gnome_rr_config_apply_from_filename (GnomeRRScreen  *screen,
 						     const char     *filename,

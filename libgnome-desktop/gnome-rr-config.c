@@ -30,6 +30,8 @@
 #include <string.h>
 #include <glib.h>
 #include <glib/gstdio.h>
+
+#undef GNOME_DISABLE_DEPRECATED
 #include "libgnomeui/gnome-rr-config.h"
 #include "edid.h"
 
