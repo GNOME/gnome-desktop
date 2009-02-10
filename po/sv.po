@@ -1,11 +1,11 @@
 # Swedish messages for gnome-desktop.
-# Copyright (C) 1998-2008 Free Software Foundation, Inc.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008.
+# Copyright (C) 1998-2009 Free Software Foundation, Inc.
 # Martin Wahlen <mva@sbbs.se>, 1998.
 # Anders Carlsson <anders.carlsson@tordata.se>, 1999.
 # Andreas Hyden  <a.hyden@cyberpoint.se>, 2000.
 # Martin Norbäck <d95mback@dtek.chalmers.se>, 2000, 2001.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009.
 #
 # $Id: sv.po,v 1.191 2006/11/19 16:10:54 dnylande Exp $
 #
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-01 21:54+0100\n"
-"PO-Revision-Date: 2008-12-01 21:54+0100\n"
+"POT-Creation-Date: 2009-02-10 01:08+0100\n"
+"PO-Revision-Date: 2009-02-10 01:12+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -202,6 +202,67 @@ msgstr "Okänd kodning av: %s"
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr "Kan inte hitta en terminal, använder xterm även om det kanske inte fungerar"
 
+#: ../libgnome-desktop/gnome-rr.c:346
+#, c-format
+msgid "could not get the range of screen sizes"
+msgstr "kunde inte få tag på information om skärmstorlekar"
+
+#: ../libgnome-desktop/gnome-rr.c:355
+#, c-format
+msgid "unhandled X error while getting the range of screen sizes"
+msgstr "ohanterat X-fel när information om skärmstorlekarna hämtades"
+
+#: ../libgnome-desktop/gnome-rr.c:448
+#, c-format
+msgid "could not get the screen resources (CRTCs, outputs, modes)"
+msgstr "kunde inte få skärmresurserna (CRTC:er, utgångar, lägen)"
+
+#: ../libgnome-desktop/gnome-rr.c:583
+#, c-format
+msgid "RANDR extension is not present"
+msgstr "RANDR-utökningen finns inte"
+
+#: ../libgnome-desktop/gnome-rr.c:813
+#, c-format
+msgid "could not get information about output %d"
+msgstr "kunde inte få tag på information om utgång %d"
+
+#. Translators: the "position", "size", and "maximum"
+#. * words here are not keywords; please translate them
+#. * as usual.
+#: ../libgnome-desktop/gnome-rr.c:1111
+#, c-format
+msgid "requested position/size for CRTC %d is outside the allowed limit: position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+msgstr "begärd position/storlek för CRTC %d är utanför den tillåtna gränsen: position=(%d, %d), storlek=(%d, %d), maximum=(%d, %d)"
+
+#: ../libgnome-desktop/gnome-rr.c:1144
+#, c-format
+msgid "could not set the configuration for CRTC %d"
+msgstr "kunde inte ställa in konfigurationen för CRTC %d"
+
+#: ../libgnome-desktop/gnome-rr.c:1253
+#, c-format
+msgid "could not get information about CRTC %d"
+msgstr "kunde inte få tag på information om CRTC %d"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1124
+#, c-format
+msgid "none of the saved display configurations matched the active configuration"
+msgstr "ingen av de sparade skärmkonfigurationerna matchade den aktiva konfigurationen"
+
+#. Translators: the "requested", "minimum", and
+#. * "maximum" words here are not keywords; please
+#. * translate them as usual.
+#: ../libgnome-desktop/gnome-rr-config.c:1572
+#, c-format
+msgid "required virtual size does not fit available size: requested=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
+msgstr "nödvändig virtuell storlek passar inte tillgänglig storlek: nödvändig=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1586
+#, c-format
+msgid "could not find a suitable configuration of screens"
+msgstr "kunde inte hitta en lämplig konfiguration för skärmar"
+
 #~ msgid "Directory"
 #~ msgstr "Katalog"
 #~ msgid "Application"
@@ -278,8 +339,6 @@ msgstr "Kan inte hitta en terminal, använder xterm även om det kanske inte fun
 #~ msgstr "Kan inte läsa in \"%s\": %s"
 #~ msgid "Could not open the address \"%s\": %s"
 #~ msgstr "Kunde inte öppna adressen \"%s\": %s"
-#~ msgid "Could not get information about GNOME version."
-#~ msgstr "Kunde inte få information om GNOME-versionen."
 #~ msgid "%s: %s\n"
 #~ msgstr "%s: %s\n"
 #~ msgid "%s: "
