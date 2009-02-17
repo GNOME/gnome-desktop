@@ -1,3 +1,17 @@
+2009-02-17  Alexander Larsson  <alexl@redhat.com>
+
+        * gnome-bg.c:
+	Allow apps to ignore a pending change so they can avoid updating
+	their background twice. (Nautilus needs this)
+
+	Blow all expensive caches if we're not gonna update the background
+	again in one minute.
+
+	Do slightly less steps in slide transitions to avoid using to
+	much resources on things that are not visible.
+
+	Remove outstanding transitions on finalize
+
 ==================== 2.25.91 ====================
 
 ==================== 2.25.90 ====================

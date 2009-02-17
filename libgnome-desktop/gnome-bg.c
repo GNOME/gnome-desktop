@@ -54,6 +54,10 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #define BG_KEY_PICTURE_OPACITY    GNOME_BG_KEY_DIR "/picture_opacity"
 #define BG_KEY_PICTURE_FILENAME   GNOME_BG_KEY_DIR "/picture_filename"
 
+/* We keep the large pixbufs around if the next update
+   in the slideshow is less than 60 seconds away */
+#define KEEP_EXPENSIVE_CACHE_SECS 60
+
 typedef struct _SlideShow SlideShow;
 typedef struct _Slide Slide;
 
@@ -102,6 +106,7 @@ struct _GnomeBG
 
 	guint                   changed_id;
 	guint                   transitioned_id;
+	guint                   blow_caches_id;
 
 	/* Cached information, only access through cache accessor functions */
         SlideShow *		slideshow;
@@ -259,9 +264,16 @@ placement_to_string (GnomeBGPlacement placement)
 static gboolean
 do_changed (GnomeBG *bg)
 {
+	gboolean ignore_pending_change;
 	bg->changed_id = 0;
 
-	g_signal_emit (G_OBJECT (bg), signals[CHANGED], 0);
+	ignore_pending_change =
+		GPOINTER_TO_INT (g_object_get_data (G_OBJECT (bg),
+						    "ignore-pending-change"));
+
+	if (!ignore_pending_change) {
+		g_signal_emit (G_OBJECT (bg), signals[CHANGED], 0);
+	}
 
 	return FALSE;
 }
@@ -273,6 +285,14 @@ queue_changed (GnomeBG *bg)
 		g_source_remove (bg->changed_id);
 	}
 
+	/* We unset this here to allow apps to set it if they don't want
+	   to get the change event. This is used by nautilus when it
+	   gets the pixmap from the bg (due to a reason other than the changed
+	   event). Because if there is no other change after this time the
+	   pending changed event will just uselessly cause us to recreate
+	   the pixmap. */
+	g_object_set_data (G_OBJECT (bg), "ignore-pending-change",
+			   GINT_TO_POINTER (FALSE));
 	bg->changed_id = g_timeout_add_full (G_PRIORITY_LOW,
 					     100,
 					     (GSourceFunc)do_changed,
@@ -424,6 +444,16 @@ gnome_bg_finalize (GObject *object)
 		bg->changed_id = 0;
 	}
 
+	if (bg->transitioned_id != 0) {
+		g_source_remove (bg->transitioned_id);
+		bg->transitioned_id = 0;
+	}
+	
+	if (bg->blow_caches_id != 0) {
+		g_source_remove (bg->blow_caches_id);
+		bg->blow_caches_id = 0;
+	}
+	
 	if (bg->filename) {
 		g_free (bg->filename);
 		bg->filename = NULL;
@@ -1527,14 +1557,47 @@ get_as_thumbnail (GnomeBG *bg, GnomeDesktopThumbnailFactory *factory, const char
 }
 
 static gboolean
-on_timeout (gpointer data)
+blow_expensive_caches (gpointer data)
 {
 	GnomeBG *bg = data;
+	GList *list, *next;
+	
+	bg->blow_caches_id = 0;
+	
+	for (list = bg->file_cache; list != NULL; list = next) {
+		FileCacheEntry *ent = list->data;
+		next = list->next;
+		
+		if (ent->type == PIXBUF) {
+			file_cache_entry_delete (ent);
+			bg->file_cache = g_list_delete_link (bg->file_cache,
+							     list);
+		}
+	}
 
 	if (bg->pixbuf_cache) {
 		g_object_unref (bg->pixbuf_cache);
 		bg->pixbuf_cache = NULL;
 	}
+
+	return FALSE;
+}
+
+static void
+blow_expensive_caches_in_idle (GnomeBG *bg)
+{
+	if (bg->blow_caches_id == 0) {
+		bg->blow_caches_id =
+			g_idle_add (blow_expensive_caches,
+				    bg);
+	}
+}
+
+
+static gboolean
+on_timeout (gpointer data)
+{
+	GnomeBG *bg = data;
 
 	bg->timeout_id = 0;
 	
@@ -1543,21 +1606,36 @@ on_timeout (gpointer data)
 	return FALSE;
 }
 
+static double
+get_slide_timeout (Slide   *slide)
+{
+	double timeout;
+	if (slide->fixed) {
+		timeout = slide->duration;
+	} else {
+		/* Maybe the number of steps should be configurable? */
+		
+		/* In the worst case we will do a fade from 0 to 256, which mean
+		 * we will never use more than 255 steps, however in most cases
+		 * the first and last value are similar and users can't percieve
+		 * changes in pixel values as small as 1/255th. So, lets not waste
+		 * CPU cycles on transitioning to often.
+		 *
+		 * 64 steps is enough for each step to be just detectable in a 16bit
+		 * color mode in the worst case, so we'll use this as an approximation
+		 * of whats detectable.
+		 */
+		timeout = slide->duration / 64.0;
+	}
+	return timeout;
+}
+
 static void
 ensure_timeout (GnomeBG *bg,
 		Slide   *slide)
 {
 	if (!bg->timeout_id) {
-		double timeout;
-		
-		if (slide->fixed) {
-			timeout = slide->duration;
-		}
-		else {
-			/* Maybe the number of steps should be configurable? */
-			timeout = slide->duration / 255.0;
-		}
-
+		double timeout = get_slide_timeout (slide);
 		bg->timeout_id = g_timeout_add_full (
 			G_PRIORITY_LOW,
 			timeout * 1000, on_timeout, bg, NULL);
@@ -1780,6 +1858,7 @@ get_pixbuf (GnomeBG *bg)
 {
 	/* FIXME: this ref=TRUE/FALSE stuff is crazy */
 	
+	guint time_until_next_change;
 	gboolean ref = FALSE;
 	
 	if (!bg->pixbuf_cache && bg->filename) {
@@ -1787,6 +1866,7 @@ get_pixbuf (GnomeBG *bg)
 		bg->file_mtime = get_mtime (bg->filename);
 		
 		bg->pixbuf_cache = get_as_pixbuf (bg, bg->filename);
+		time_until_next_change = G_MAXUINT;
 		if (!bg->pixbuf_cache) {
 			SlideShow *show = get_as_slideshow (bg, bg->filename);
 
@@ -1797,7 +1877,7 @@ get_pixbuf (GnomeBG *bg)
 				slideshow_ref (show);
 
 				slide = get_current_slide (show, &alpha);
-
+				time_until_next_change = (guint)get_slide_timeout (slide);
 				if (slide->fixed) {
 					FileSize *size;
 					size = find_best_size (slide->file1, bg->last_pixmap_width, bg->last_pixmap_height);
@@ -1823,6 +1903,12 @@ get_pixbuf (GnomeBG *bg)
 				slideshow_unref (show);
 			}
 		}
+
+		/* If the next slideshow step is a long time away then
+		   we blow away the expensive stuff (large pixbufs) from
+		   the cache */
+		if (time_until_next_change > KEEP_EXPENSIVE_CACHE_SECS)
+		    blow_expensive_caches_in_idle (bg);
 	}
 
 	if (bg->pixbuf_cache && ref)
