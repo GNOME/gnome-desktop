@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <glib.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -519,7 +520,7 @@ decode_check_sum (const uchar *edid,
 MonitorInfo *
 decode_edid (const uchar *edid)
 {
-    MonitorInfo *info = calloc (1, sizeof (MonitorInfo));
+    MonitorInfo *info = g_new0 (MonitorInfo, 1);
 
     decode_check_sum (edid, info);
     

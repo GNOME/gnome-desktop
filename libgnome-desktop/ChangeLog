@@ -1,3 +1,8 @@
+2009-02-17  Federico Mena Quintero  <federico@novell.com>
+
+	* edid-parse.c (decode_edid): Use g_new0() instead of calloc() so
+	the caller can keep on using g_free(), and to actually abort on EOM.
+
 2009-02-17  Alexander Larsson  <alexl@redhat.com>
 
         * gnome-bg.c:
