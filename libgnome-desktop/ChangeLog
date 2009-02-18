@@ -2,6 +2,7 @@
 
 	* edid-parse.c (decode_edid): Use g_new0() instead of calloc() so
 	the caller can keep on using g_free(), and to actually abort on EOM.
+	(decode_edid): Don't leak the info in case of error.
 
 2009-02-17  Alexander Larsson  <alexl@redhat.com>
 
