@@ -28,9 +28,6 @@
 #include <math.h>
 #include <glib.h>
 
-#define TRUE 1
-#define FALSE 0
-
 static int
 get_bit (int in, int bit)
 {
