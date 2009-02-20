@@ -362,11 +362,7 @@ fill_out_screen_info (Display *xdisplay,
 	     screen->min_height, screen->max_height);
 #endif
     
-#if (RANDR_MAJOR == 1 && RANDR_MINOR >= 3)
-    resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
-#else
     resources = XRRGetScreenResources (xdisplay, xroot);
-#endif
     
     if (resources)
     {
