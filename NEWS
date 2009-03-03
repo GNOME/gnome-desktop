@@ -1,4 +1,43 @@
 ===============
+Version 2.25.92
+===============
+
+  libgnome-desktop
+
+	* GnomeBG: Allow apps to ignore a pending change so they can avoid
+	  updating their background twice (Alexander Larsson)
+	* GnomeBG: Blow all expensive caches if we're not gonna update the
+	  background again in one minute (Alexander Larsson)
+	* GnomeBG: Do slightly less steps in slide transitions to avoid using
+	  to much resources on things that are not visible (Alexander Larsson)
+	* GnomeBG: Remove outstanding transitions on finalize (Alexander
+	  Larsson)
+	* GnomeRR: Use g_new0() instead of calloc() for consistency (Federico
+	  Mena Quintero)
+	* GnomeRR: Fix leak (Federico Mena Quintero)
+	* GnomeRR: Code cleanup (Federico Mena Quintero)
+	* GnomeRR: Revert the change to use XRRGetScreenResourcesCurrent(),
+	  it's not needed anymore and it broke the "Detect Monitors" button
+	  (Matthias Clasen)
+	* General: Make sure that the translation system is initiliazed so that
+	  translations can be used (Vincent)
+
+  Doc Translations
+
+	* Joan Duran (ca)
+
+  Translators
+
+	* Ihar Hrachyshka (be@latin)
+	* Reşat SABIQ (crh)
+	* David Lodge (en_GB)
+	* Luca Ferretti (it)
+	* Praveen Arimbrathodiyil (ml)
+	* Manoj Kumar Giri (or)
+	* Duarte Loreto (pt)
+	* Adi Roiban (ro)
+
+===============
 Version 2.25.91
 ===============
 
