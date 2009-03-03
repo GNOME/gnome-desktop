@@ -32,6 +32,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome/gnome-desktop-utils.h>
 
+#include "private.h"
 
 /**
  * gnome_desktop_prepend_terminal_to_vector:
@@ -64,6 +65,8 @@ gnome_desktop_prepend_terminal_to_vector (int *argc, char ***argv)
 
         g_return_if_fail (argc != NULL);
         g_return_if_fail (argv != NULL);
+
+        _gnome_desktop_init_i18n ();
 
 	/* sanity */
         if(*argv == NULL)
@@ -159,3 +162,17 @@ gnome_desktop_prepend_terminal_to_vector (int *argc, char ***argv)
 	g_warning ("gnome_prepend_terminal_to_vector: Not implemented");
 #endif
 }
+
+void
+_gnome_desktop_init_i18n (void) {
+	static gboolean initialized = FALSE;
+	
+	if (!initialized) {
+		bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+		bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
+		initialized = TRUE;
+	}
+}
+

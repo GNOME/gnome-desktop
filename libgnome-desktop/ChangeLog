@@ -1,3 +1,20 @@
+2009-03-03  Vincent Untz  <vuntz@gnome.org>
+
+	Make sure the translations of gnome-desktop can be used for the randr
+	stuff. Fix bug #573744.
+
+	* private.h: new file
+	* gnome-desktop-utils.c:
+	(_gnome_desktop_init_i18n): add _gnome_desktop_init_i18n() to init the
+	i18n system.
+	* gnome-desktop-item.c: (gnome_desktop_item_new): call
+	_gnome_desktop_init_i18n() instead of init_i18n()
+	(init_i18n): killed
+	* gnome-desktop-utils.c:
+	(gnome_desktop_prepend_terminal_to_vector): call
+	_gnome_desktop_init_i18n()
+	* gnome-rr.c: (gnome_rr_screen_new): call _gnome_desktop_init_i18n()
+
 2009-02-19  Matthias Clasen  <mclasen@redhat.com>
 
 	* gnome-rr.c (fill_out_screen_info): Revert the change from

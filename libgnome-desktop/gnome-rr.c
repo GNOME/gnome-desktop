@@ -34,6 +34,8 @@
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
 
+#include "private.h"
+
 #define DISPLAY(o) ((o)->info->screen->xdisplay)
 
 typedef struct ScreenInfo ScreenInfo;
@@ -537,6 +539,8 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 
     g_return_val_if_fail (error == NULL || *error == NULL, NULL);
     
+    _gnome_desktop_init_i18n ();
+
     if (XRRQueryExtension (dpy, &event_base, &ignore))
     {
 	GnomeRRScreen *screen = g_new0 (GnomeRRScreen, 1);
