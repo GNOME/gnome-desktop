@@ -28,7 +28,8 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-rr-config.c	\
 	gnome-rr-labeler.c	\
 	edid-parse.c		\
-	edid.h
+	edid.h			\
+	private.h
 
 libgnome_desktop_2_la_LIBADD =	\
 	$(XLIB_LIBS)		\

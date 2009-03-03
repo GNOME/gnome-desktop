@@ -1,4 +1,4 @@
-/* gnome-bg-crossfade.h - fade window background between two pixmaps
+/* private.h: various private functions
 
    Copyright 2009, Novell, Inc.
 
