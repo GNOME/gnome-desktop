@@ -35,43 +35,9 @@
 #include <X11/Xatom.h>
 
 #include "private.h"
+#include "gnome-rr-private.h"
 
 #define DISPLAY(o) ((o)->info->screen->xdisplay)
-
-typedef struct ScreenInfo ScreenInfo;
-
-struct ScreenInfo
-{
-    int			min_width;
-    int			max_width;
-    int			min_height;
-    int			max_height;
-
-    XRRScreenResources *resources;
-    
-    GnomeRROutput **	outputs;
-    GnomeRRCrtc **	crtcs;
-    GnomeRRMode **	modes;
-    
-    GnomeRRScreen *	screen;
-
-    GnomeRRMode **	clone_modes;
-};
-
-struct GnomeRRScreen
-{
-    GdkScreen *			gdk_screen;
-    GdkWindow *			gdk_root;
-    Display *			xdisplay;
-    Screen *			xscreen;
-    Window			xroot;
-    ScreenInfo *		info;
-    
-    int				randr_event_base;
-    
-    GnomeRRScreenChanged	callback;
-    gpointer			data;
-};
 
 struct GnomeRROutput
 {

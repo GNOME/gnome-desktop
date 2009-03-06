@@ -27,6 +27,7 @@ libgnome_desktop_2_la_SOURCES = \
 	gnome-rr.c		\
 	gnome-rr-config.c	\
 	gnome-rr-labeler.c	\
+	gnome-rr-private.h	\
 	edid-parse.c		\
 	edid.h			\
 	private.h
