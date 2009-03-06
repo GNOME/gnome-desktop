@@ -34,6 +34,10 @@
 #undef GNOME_DISABLE_DEPRECATED
 #include "libgnomeui/gnome-rr-config.h"
 #include "edid.h"
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+#include <gdk/gdkx.h>
+#include "gnome-rr-private.h"
 
 #define CONFIG_INTENDED_BASENAME "monitors.xml"
 #define CONFIG_BACKUP_BASENAME "monitors.xml.backup"
@@ -1616,6 +1620,13 @@ crtc_assignment_apply (CrtcAssignment *assign, GError **error)
     height = MIN (max_height, height);
 
     /* FMQ: do we need to check the sizes instead of clamping them? */
+
+    /* Grab the server while we fiddle with the CRTCs and the screen, so that
+     * apps that listen for RANDR notifications will only receive the final
+     * status.
+     */
+
+    gdk_x11_display_grab (gdk_screen_get_display (assign->screen->gdk_screen));
     
     /* Turn off all crtcs that are currently displaying outside the new screen,
      * or are not used in the new setup
@@ -1675,6 +1686,8 @@ crtc_assignment_apply (CrtcAssignment *assign, GError **error)
 
 	success = !state.has_error;
     }
+
+    gdk_x11_display_ungrab (gdk_screen_get_display (assign->screen->gdk_screen));
 
     return success;
 }

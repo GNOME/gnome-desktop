@@ -1,5 +1,7 @@
 2009-03-06  Federico Mena Quintero  <federico@novell.com>
 
+	Grab the X server while tweaking the RANDR configuration.
+
 	* gnome-rr-private.h: New uninstalled header.  This only contains
 	the definition of struct GnomeRRScreen, so that it can be used
 	from gnome-rr-config.c as well as gnome-rr.c.
@@ -8,6 +10,11 @@
 	GnomeRRScreen to that file.
 
 	* Makefile.am (libgnome_desktop_2_la_SOURCES): Add gnome-rr-private.h.
+
+	* gnome-rr-config.c (crtc_assignment_apply): Grab the server while
+	tweaking the CRTCs and screen, so that apps that request RANDR
+	notifications will only receive the final result, not the
+	intermediate ones.
 
 ==================== 2.25.92 ====================
 
