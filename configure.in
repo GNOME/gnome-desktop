@@ -124,13 +124,6 @@ dnl gnome-doc-utils stuff
 
 GNOME_DOC_INIT
 
-dnl scrollkeeper checks
-
-AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-if test x$SCROLLKEEPER_CONFIG = xno; then
-  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)
-fi
-
 dnl Language Support
 
 GETTEXT_PACKAGE=gnome-desktop-2.0
