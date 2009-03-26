@@ -1127,9 +1127,14 @@ gnome_bg_get_pixmap_from_root (GdkScreen *screen)
 	}
 
 	if (data != NULL) {
+		gdk_error_trap_push ();
 		source_pixmap = gdk_pixmap_foreign_new (*(Pixmap *) data);
-		gdk_drawable_set_colormap (source_pixmap,
-					   gdk_screen_get_default_colormap (screen));
+		gdk_error_trap_pop ();
+
+		if (source_pixmap != NULL) {
+			gdk_drawable_set_colormap (source_pixmap,
+						   gdk_screen_get_default_colormap (screen));
+		}
 	}
 
 	width = gdk_screen_get_width (screen);
