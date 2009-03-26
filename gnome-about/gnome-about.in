@@ -86,7 +86,7 @@ def cleanup_date (date):
         # FIXME: we don't have g_locale_to_utf8 in python. See bug #530382
         return unicode (time.strftime ("%x", time.strptime (date, "%Y-%m-%d")), locale.getpreferredencoding ()).encode ("utf-8")
     except:
-        return False
+        return ""
 
 # Imported from GNOME's Sabayon
 # (sabayon/admin-tool/lockdown/disabledapplets.py)
@@ -965,7 +965,9 @@ contributors list) correctly positionned and sized.'''
                 self.load_description_messages (node)
 
         '''Format version'''
-        if not len (infos["minor"]):
+        if not len (infos["platform"]):
+            version = ""
+        elif not len (infos["minor"]):
             version = infos["platform"]
         elif not len (infos["micro"]):
             version = "%s.%s" % (infos["platform"], infos["minor"])
@@ -973,11 +975,17 @@ contributors list) correctly positionned and sized.'''
             version = "%s.%s.%s" % (infos["platform"], infos["minor"],
                                     infos["micro"])
 
-        return [
-                    (_("Version"), version),
-                    (_("Distributor"), infos["distributor"]),
-                    (_("Build Date"), cleanup_date (infos["date"]))
-               ]
+        date = cleanup_date (infos["date"])
+
+        retval = []
+        if version:
+            retval.append((_("Version"), version))
+        if infos["distributor"]:
+            retval.append((_("Distributor"), infos["distributor"]))
+        if date:
+            retval.append((_("Build Date"), date))
+
+        return retval
 
     def load_description_messages (self, node):
         '''Find the best translation of each description message'''
