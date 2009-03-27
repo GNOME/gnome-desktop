@@ -408,6 +408,9 @@ fill_out_screen_info (Display *xdisplay,
 #if 0
 	g_print ("Couldn't get screen resources\n");
 #endif
+	/* Translators: This indicates an error in X.  CRTCs is "CRT
+	 * controllers".  This error should never happen; it is just here for
+	 * completeness. */
 	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
 		     _("could not get the screen resources (CRTCs, outputs, modes)"));
 	return FALSE;
@@ -775,6 +778,7 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     if (!info || !output->info)
     {
 	/* FIXME: see the comment in crtc_initialize() */
+	/* Translators: here, an "output" is a video output */
 	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
 		     _("could not get information about output %d"),
 		     (int) output->id);
@@ -1073,7 +1077,7 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
 			 /* Translators: the "position", "size", and "maximum"
 			  * words here are not keywords; please translate them
-			  * as usual.  */
+			  * as usual.  A CRTC is a CRT Controller (this is X terminology) */
 			 _("requested position/size for CRTC %d is outside the allowed limit: "
 			   "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"),
 			 (int) crtc->id,
@@ -1106,6 +1110,9 @@ gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
 	result = TRUE;
     else {
 	result = FALSE;
+	/* Translators: CRTC is a CRT Controller (this is X terminology).
+	 * It is *very* unlikely that you'll ever get this error, so it is
+	 * only listed for completeness. */
 	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
 		     _("could not set the configuration for CRTC %d"),
 		     (int) crtc->id);
@@ -1215,6 +1222,9 @@ crtc_initialize (GnomeRRCrtc        *crtc,
 	/* FIXME: We need to reaquire the screen resources */
 	/* FIXME: can we actually catch BadRRCrtc, and does it make sense to emit that? */
 
+	/* Translators: CRTC is a CRT Controller (this is X terminology).
+	 * It is *very* unlikely that you'll ever get this error, so it is
+	 * only listed for completeness. */
 	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
 		     _("could not get information about CRTC %d"),
 		     (int) crtc->id);
