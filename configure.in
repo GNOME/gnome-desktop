@@ -45,11 +45,25 @@ if test "x$with_gnome_distributor" != x ; then
   GNOME_DISTRIBUTOR=$with_gnome_distributor
 fi
 
+AC_ARG_ENABLE([date-in-gnome-version],
+	[AS_HELP_STRING([--disable-date-in-gnome-version],[do not put the build date in gnome-version.xml])],
+	[],[enable_date_in_gnome_version=yes])
+if test "$enable_date_in_gnome_version" = "no"; then
+	GNOME_DATE=
+	GNOME_DATE_COMMENT_START="<!--"
+	GNOME_DATE_COMMENT_END="-->"
+else
+	GNOME_DATE_COMMENT_START=
+	GNOME_DATE_COMMENT_END=
+fi
+
 AC_SUBST(GNOME_PLATFORM)
 AC_SUBST(GNOME_MINOR)
 AC_SUBST(GNOME_MICRO)
 AC_SUBST(GNOME_DISTRIBUTOR)
 AC_SUBST(GNOME_DATE)
+AC_SUBST(GNOME_DATE_COMMENT_START)
+AC_SUBST(GNOME_DATE_COMMENT_END)
 
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
