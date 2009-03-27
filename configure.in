@@ -148,23 +148,6 @@ AC_SUBST(GETTEXT_PACKAGE)
 AM_GLIB_GNU_GETTEXT
 
 
-dnl Place to look for KDE menus
-
-AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR  Location of KDE data])
-
-if test "x$with_kde_datadir" = x ; then
-  kde_datadir=/usr/share
-else
-  kde_datadir=$with_kde_datadir
-fi
-
-AC_DEFINE_UNQUOTED(KDE_MENUDIR, "$kde_datadir/applnk",
-		   [The KDE menu directory])
-AC_DEFINE_UNQUOTED(KDE_ICONDIR, "$kde_datadir/icons",
-                   [The KDE icon directory])
-AC_DEFINE_UNQUOTED(KDE_MINI_ICONDIR, "$kde_datadir/icons/mini",
-                   [The KDE mini icon directory])
-
 dnl Don't use AC_PROG_AWK since we need the full pathname.
 AC_PATH_PROGS(AWK, mawk gawk nawk awk, )
 AC_PATH_PROGS(PERL, perl5 perl)
