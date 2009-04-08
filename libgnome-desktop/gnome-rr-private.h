@@ -31,6 +31,8 @@ struct GnomeRRScreen
     ScreenInfo *		info;
     
     int				randr_event_base;
+    int				rr_major_version;
+    int				rr_minor_version;
     
     GnomeRRScreenChanged	callback;
     gpointer			data;

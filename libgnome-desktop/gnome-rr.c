@@ -295,43 +295,55 @@ static gboolean
 fill_out_screen_info (Display *xdisplay,
 		      Window xroot,
 		      ScreenInfo *info,
+		      gboolean needs_reprobe,
 		      GError **error)
 {
     XRRScreenResources *resources;
     
     g_assert (xdisplay != NULL);
     g_assert (info != NULL);
-    
-    gdk_error_trap_push ();
-    
-    if (!XRRGetScreenSizeRange (xdisplay, xroot,
-                                &(info->min_width),
-                                &(info->min_height),
-                                &(info->max_width),
-                                &(info->max_height))) {
-        /* XRR caught an error */
-	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
-		     _("could not get the range of screen sizes"));
-        return FALSE;
+
+    if (needs_reprobe) {
+	gboolean success;
+
+        gdk_error_trap_push ();
+	success = XRRGetScreenSizeRange (xdisplay, xroot,
+					 &(info->min_width),
+					 &(info->min_height),
+					 &(info->max_width),
+					 &(info->max_height));
+	gdk_flush ();
+	if (gdk_error_trap_pop ()) {
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_UNKNOWN,
+			 _("unhandled X error while getting the range of screen sizes"));
+	    return FALSE;
+	}
+
+	if (!success) {
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+			 _("could not get the range of screen sizes"));
+            return FALSE;
+        }
+
+        resources = XRRGetScreenResources (xdisplay, xroot);
     }
-    
-    gdk_flush ();
-    if (gdk_error_trap_pop ())
+    else
     {
-        /* Unhandled X Error was generated */
-	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_UNKNOWN,
-		     _("unhandled X error while getting the range of screen sizes"));
-        return FALSE;
-    }
-    
-#if 0
-    g_print ("ranges: %d - %d; %d - %d\n",
-	     screen->min_width, screen->max_width,
-	     screen->min_height, screen->max_height);
+	/* XRRGetScreenResourcesCurrent is less expensive than
+	 * XRRGetScreenResources, however it is available only
+	 * in RandR 1.3 or higher
+	 */
+#if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
+        /* Runtime check for RandR 1.3 or higher */
+        if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3)
+            resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
+        else
+            resources = XRRGetScreenResources (xdisplay, xroot);
+#else
+        resources = XRRGetScreenResources (xdisplay, xroot);
 #endif
-    
-    resources = XRRGetScreenResources (xdisplay, xroot);
-    
+    }
+
     if (resources)
     {
 	int i;
@@ -418,7 +430,7 @@ fill_out_screen_info (Display *xdisplay,
 }
 
 static ScreenInfo *
-screen_info_new (GnomeRRScreen *screen, GError **error)
+screen_info_new (GnomeRRScreen *screen, gboolean needs_reprobe, GError **error)
 {
     ScreenInfo *info = g_new0 (ScreenInfo, 1);
     
@@ -429,7 +441,7 @@ screen_info_new (GnomeRRScreen *screen, GError **error)
     info->modes = NULL;
     info->screen = screen;
     
-    if (fill_out_screen_info (screen->xdisplay, screen->xroot, info, error))
+    if (fill_out_screen_info (screen->xdisplay, screen->xroot, info, needs_reprobe, error))
     {
 	return info;
     }
@@ -441,14 +453,14 @@ screen_info_new (GnomeRRScreen *screen, GError **error)
 }
 
 static gboolean
-screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
+screen_update (GnomeRRScreen *screen, gboolean force_callback, gboolean needs_reprobe, GError **error)
 {
     ScreenInfo *info;
     gboolean changed = FALSE;
     
     g_assert (screen != NULL);
 
-    info = screen_info_new (screen, error);
+    info = screen_info_new (screen, needs_reprobe, error);
     if (!info)
 	    return FALSE;
 
@@ -472,23 +484,40 @@ screen_on_event (GdkXEvent *xevent,
 {
     GnomeRRScreen *screen = data;
     XEvent *e = xevent;
-    
-    if (e && e->type - screen->randr_event_base == RRNotify)
+    int event_num;
+
+    if (!e)
+	return GDK_FILTER_CONTINUE;
+
+    event_num = e->type - screen->randr_event_base;
+
+    if (event_num == RRScreenChangeNotify) {
+	/* If outputs are either connected or disconnected, reprobe hardware
+	 * and/or get the screen size again.
+	 */
+        screen_update (screen, TRUE, TRUE, NULL); /* NULL-GError */
+    }
+    else if (event_num == RRNotify)
     {
+	/* Other RandR events */
+
 	XRRNotifyEvent *event = (XRRNotifyEvent *)e;
-	
+
+	/* Here we can distinguish between RRNotify events supported
+	 * since RandR 1.2 such as RRNotify_OutputProperty.  For now, we
+	 * don't have anything special to do for particular subevent types, so
+	 * we leave this as an empty switch().
+	 */
 	switch (event->subtype)
 	{
 	default:
 	    break;
 	}
-	
-	/* FIXME: we may need to be more discriminating in
-	 * what causes 'changed' events
-	 */
-	screen_update (screen, TRUE, NULL); /* NULL-GError */
+
+	/* No need to reprobe hardware here */
+	screen_update (screen, TRUE, FALSE, NULL); /* NULL-GError */
     }
-    
+
     /* Pass the event on to GTK+ */
     return GDK_FILTER_CONTINUE;
 }
@@ -524,14 +553,16 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	screen->data = data;
 	
 	screen->randr_event_base = event_base;
-	
-	screen->info = screen_info_new (screen, error);
+
+	XRRQueryVersion (dpy, &screen->rr_major_version, &screen->rr_minor_version);
+
+	screen->info = screen_info_new (screen, TRUE, error);
 	
 	if (!screen->info) {
 	    g_free (screen);
 	    return NULL;
 	}
-	
+
 	XRRSelectInput (screen->xdisplay,
 			screen->xroot,
 			RRScreenChangeNotifyMask	|
@@ -621,7 +652,7 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
 			 GError       **error)
 {
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-    return screen_update (screen, FALSE, error);
+    return screen_update (screen, FALSE, TRUE, error);
 }
 
 GnomeRRMode **

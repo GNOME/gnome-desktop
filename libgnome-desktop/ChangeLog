@@ -1,3 +1,20 @@
+2009-04-08  Federico Mena Quintero  <federico@novell.com>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=568160 - Use
+	XRRGetScreenResourcesCurrent() if available (i.e. we were compiled
+	with RANDR 1.3 and it is actually available at runtime), when we
+	only need to fetch the current RANDR status.  Use
+	XRRGetScreenResources() as usual when we do need to re-probe.
+	Patch by Alberto Milone <albertomilone@alice.it>, with minor
+	modifications:
+
+	* gnome-rr.c (fill_out_screen_info): Take a needs_reprobe
+	argument.  We'll use XRRGetScreenResourcesCurrent() or
+	XRRGetScreenResources() as appropriate.
+	(screen_on_event): Don't re-probe RANDR for all events; just for
+	RRScreenChangeNotify.  This avoids expensive probing for (e.g.)
+	when only output properties change (RRNotify).
+
 2009-03-26  Alexander Larsson  <alexl@redhat.com>
 
 	* gnome-bg.c (gnome_bg_get_pixmap_from_root):
