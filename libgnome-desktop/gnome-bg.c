@@ -1518,7 +1518,20 @@ get_as_pixbuf (GnomeBG *bg, const char *filename)
 		return ent->u.pixbuf;
 	}
 	else {
-		GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+		GdkPixbufFormat *format;
+		GdkPixbuf *pixbuf;
+
+		/* If scalable choose maximum size */
+		format = gdk_pixbuf_get_file_info (bg->filename, NULL, NULL);
+		if (format != NULL &&
+		    strcmp (gdk_pixbuf_format_get_name (format), "svg") == 0 &&
+		    (bg->last_pixmap_width > 0 && bg->last_pixmap_height > 0) &&
+		    (bg->placement == GNOME_BG_PLACEMENT_FILL_SCREEN ||
+		     bg->placement == GNOME_BG_PLACEMENT_SCALED ||
+		     bg->placement == GNOME_BG_PLACEMENT_ZOOMED))
+			pixbuf = gdk_pixbuf_new_from_file_at_size (filename, bg->last_pixmap_width, bg->last_pixmap_height, NULL);
+		else
+			pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 
 		if (pixbuf)
 			file_cache_add_pixbuf (bg, filename, pixbuf);

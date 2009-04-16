@@ -1,3 +1,12 @@
+2009-04-16  Alexander Larsson  <alexl@redhat.com>
+
+	Bug 141557 â€“ Svg backgrounds not scaled correctly
+
+	* gnome-bg.c:
+	(get_as_pixbuf):
+	When loading an svg, load at the requested zoom level
+	instead of resizing after rendering.
+
 ==================== 2.26.1 ====================
 
 2009-04-08  Federico Mena Quintero  <federico@novell.com>
@@ -307,7 +316,7 @@
 	* gnome-bg.c: (gnome_bg_finalize): plug a leak in GnomeBG; free the
 	filename when finalizing the object (#561377).
 
-Fri Nov 14 06:59:59 2008  Søren Sandmann  <sandmann@redhat.com>
+Fri Nov 14 06:59:59 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* display-name.c (vendors): Add Lenovo display name
 
@@ -333,19 +342,19 @@ Fri Nov 14 06:59:59 2008  Søren Sandmann  <sandmann@redhat.com>
 	Check for preview::icon for fast backend-side thumbnails (#557184)
 	Patch from David Zeuthen
 
-Sat Oct 18 16:03:10 2008  Søren Sandmann  <sandmann@redhat.com>
+Sat Oct 18 16:03:10 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (make_root_pixmap): Use foreign_new_for_screen()
 	instead of _foreign_new(). Bug 555701, patch from Roland Dreier.
 
-Wed Oct  8 21:56:58 2008  Søren Sandmann  <sandmann@redhat.com>
+Wed Oct  8 21:56:58 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* libgnomeui/gnome-desktop-thumbnail.h
 	(GNOME_DESKTOP_THUMBNAIL_FACTORY_CLASS): Put the macros into the
 	GNOME_DESKTOP namespace so they don't clash if you also include
 	libgnomeui.h
 
-Wed Oct  8 21:05:22 2008  Søren Sandmann  <sandmann@redhat.com>
+Wed Oct  8 21:05:22 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* Various new RR API to support fn-F7 support
 
@@ -411,7 +420,7 @@ Wed Oct  8 21:05:22 2008  Søren Sandmann  <sandmann@redhat.com>
 	If the passed length == -1, compute the length of the string.
 	Otherwise, our internal readbuf_new_from_string() will bail out.
 
-Tue Sep 16 11:23:05 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Sep 16 11:23:05 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr.c (gnome_rr_crtc_set_config): Propagate errors from
 	XRRSetCrtcConfig() 
@@ -473,16 +482,16 @@ Tue Sep 16 11:23:05 2008  Søren Sandmann  <sandmann@redhat.com>
 	should probably make GnomeRRScreen a GObject at some point if it
 	is to become public API.
 
-Tue Aug  5 02:59:30 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Aug  5 02:59:30 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr-config.c (crtc_assignment_assign): Remove fixme 
 
-Tue Aug  5 02:57:19 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Aug  5 02:57:19 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr-config.c: Don't set modes that we know don't fit in the
 	virtual size. 
 
-Tue Aug  5 01:55:50 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Aug  5 01:55:50 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr-config.c (gnome_rr_config_new_current): Position
 	displays that are turned off so that they don't overlap with any
@@ -490,12 +499,12 @@ Tue Aug  5 01:55:50 2008  Søren Sandmann  <sandmann@redhat.com>
 
 ==================== 2.23.6 ====================
 
-Wed Jul 30 01:02:28 2008  Søren Sandmann  <sandmann@redhat.com>
+Wed Jul 30 01:02:28 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (queue_changed): Go back to using a timeout rather
 	than an idle, to work around non-atomic gconf.
 
-Tue Jul 29 23:51:05 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Jul 29 23:51:05 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_load_from_preferences): If the filename is
 	empty, treat that as (none).
@@ -512,7 +521,7 @@ Tue Jul 29 23:51:05 2008  Søren Sandmann  <sandmann@redhat.com>
 
 ==================== 2.23.5 ====================
 
-Tue Jul 15 18:41:27 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Jul 15 18:41:27 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-rr-config.c: Fix error handling in configurations_read().
 
@@ -528,7 +537,7 @@ Tue Jul 15 18:41:27 2008  Søren Sandmann  <sandmann@redhat.com>
 	* gnome-bg.c: (gnome_bg_changes_with_size): fix build with
 	gcc 2.x (bug #536312)
 
-Tue Jul  8 13:25:58 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Jul  8 13:25:58 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* display-name.c: Translate a couple of strings
 
@@ -538,19 +547,19 @@ Tue Jul  8 13:25:58 2008  Søren Sandmann  <sandmann@redhat.com>
 
 ==================== 2.23.3 ====================
 
-Sun Jun  1 20:49:10 2008  Søren Sandmann  <sandmann@redhat.com>
+Sun Jun  1 20:49:10 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_get_filename): Implement this function.
 
-Sun Jun  1 20:35:56 2008  Søren Sandmann  <sandmann@redhat.com>
+Sun Jun  1 20:35:56 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c: Monitor the image file.
 
-Sun Jun  1 19:35:42 2008  Søren Sandmann  <sandmann@redhat.com>
+Sun Jun  1 19:35:42 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.[ch]: Add getters for the various properties
 
-Sun Jun  1 19:01:19 2008  Søren Sandmann  <sandmann@redhat.com>
+Sun Jun  1 19:01:19 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (scale_thumbnail): Some tweaks to the tile scaling
 	heuristic. 
@@ -563,17 +572,17 @@ Sun Jun  1 19:01:19 2008  Søren Sandmann  <sandmann@redhat.com>
 	* gnome-bg.c (struct _GnomeBG): Change the color names to primary
 	and secondary
 
-Sat May 31 01:38:52 2008  Søren Sandmann  <sandmann@redhat.com>
+Sat May 31 01:38:52 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (scale_thumbnail): Make sure tiles are at least 24
 	pixels wide. 
 
-Sat May 31 01:15:33 2008  Søren Sandmann  <sandmann@redhat.com>
+Sat May 31 01:15:33 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (create_img_thumbnail): Pass the correct filename to
 	scale_thumbnail().
 
-Sat May 31 00:37:10 2008  Søren Sandmann  <sandmann@redhat.com>
+Sat May 31 00:37:10 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.[ch]: Get rid of URIs. We now only deal in
 	filenames. (Except as necessary for thumbnails).
@@ -583,12 +592,12 @@ Sat May 31 00:37:10 2008  Søren Sandmann  <sandmann@redhat.com>
 	* gnome-bg.c: (create_thumbnail_for_uri): fix leak.
 	Patch by Kjartan Maraas <kmaraas@gnome.org>. Fix bug #532152.
 
-Sat May 17 00:55:48 2008  Søren Sandmann  <sandmann@redhat.com>
+Sat May 17 00:55:48 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_set_uri): don't call g_path_is_absolute()
 	on a NULL uri.
 
-Fri May 16 23:39:26 2008  Søren Sandmann  <sandmann@redhat.com>
+Fri May 16 23:39:26 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* gnome-bg.c (gnome_bg_set_uri): Set the URI mtime here to prevent
 	loops where someone setting the same URI in the changed callback
@@ -622,7 +631,7 @@ Fri May 16 23:39:26 2008  Søren Sandmann  <sandmann@redhat.com>
 	nautilus crashes
 	Patch by Matthias Clasen <mclasen@redhat.com>
 
-Tue Jun 10 13:29:52 2008  Søren Sandmann  <sandmann@redhat.com>
+Tue Jun 10 13:29:52 2008  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* Put RW* into the gnome namespace; various formatting fixes
 
@@ -785,7 +794,7 @@ Tue Jun 10 13:29:52 2008  Søren Sandmann  <sandmann@redhat.com>
 
 ==================== 2.21.4 ====================
 
-Tue Nov 13 17:48:13 2007  Søren Sandmann  <sandmann@redhat.com>
+Tue Nov 13 17:48:13 2007  SÃ¸ren Sandmann  <sandmann@redhat.com>
 
 	* libgnomeui/gnome-bg.h: New file
 	* gnome-bg.c: New file
@@ -1121,7 +1130,7 @@ Tue Nov 13 17:48:13 2007  Søren Sandmann  <sandmann@redhat.com>
 
 ==================== 2.7.91 ====================
 
-2004-08-05  Mariano Suárez-Alvarez <mariano@gnome.org>
+2004-08-05  Mariano SuÃ¡rez-Alvarez <mariano@gnome.org>
 
 	* gnome-desktop-item.c: move the declaration of environ out of a
 	preprocessor conditional block. Fixes bug #149340.
@@ -1685,7 +1694,7 @@ Wed Mar 27 10:39:24 2002  George Lebl <jirka@5z.com>
 	* gnome-desktop-item.c: (append_app_arg): strcmp does return
 	zero if the strings are the same ... right ?
 
-2002-03-18   Diego González  <dggonz@yahoo.com>
+2002-03-18   Diego GonzÃ¡lez  <dggonz@yahoo.com>
 
 	* libgnome-desktop/gnome-desktop-item
 	(gnome_desktop_item_set_location_file): fix, so that it stores the
