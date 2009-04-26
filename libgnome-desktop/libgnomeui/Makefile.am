@@ -6,3 +6,5 @@ libgnomeui_desktop_HEADERS =	\
 	gnome-rr.h		\
 	gnome-rr-config.h	\
 	gnome-rr-labeler.h
+
+-include $(top_srcdir)/git.mk

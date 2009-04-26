@@ -74,3 +74,5 @@ pixmap_DATA =					\
 	gnome-set-time.png
 
 EXTRA_DIST = $(pixmap_DATA)
+
+-include $(top_srcdir)/git.mk

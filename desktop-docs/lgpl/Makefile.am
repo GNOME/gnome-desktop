@@ -6,3 +6,5 @@ DOC_ENTITIES =
 DOC_INCLUDES = 
 
 DOC_LINGUAS = ar de el es eu fi fr hu ko oc pa sv uk vi zh_CN
+
+-include $(top_srcdir)/git.mk

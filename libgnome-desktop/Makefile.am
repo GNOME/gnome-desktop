@@ -50,3 +50,5 @@ pkgconfig_DATA = gnome-desktop-2.0.pc
 EXTRA_DIST = \
 	gnome-desktop-2.0.pc.in                \
 	gnome-desktop-2.0-uninstalled.pc.in
+
+-include $(top_srcdir)/git.mk

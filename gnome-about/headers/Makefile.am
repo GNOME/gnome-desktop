@@ -11,3 +11,5 @@ headers_DATA =				\
 	header-bg-sunset01.png
 
 EXTRA_DIST = $(headers_DATA)
+
+-include $(top_srcdir)/git.mk

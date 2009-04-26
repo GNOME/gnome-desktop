@@ -31,3 +31,8 @@ CLEANFILES = gnome-about.desktop gnome-about
 
 check:
 	test -s $(top_srcdir)/gnome-about/foundation-members.list
+
+MAINTAINERCLEANFILES = \
+	foundation-members.list
+
+-include $(top_srcdir)/git.mk
