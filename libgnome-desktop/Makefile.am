@@ -2,10 +2,6 @@ SUBDIRS = libgnome libgnomeui
 
 INCLUDES =							\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
-	-DGNOME_DESKTOP_SYSCONFDIR=\""$(sysconfdir)"\"		\
-	-DGNOME_DESKTOP_PIXMAPDIR=\""$(datadir)/pixmaps"\"	\
-	-DGNOME_DESKTOP_ICONDIR=\""$(datadir)/icons"\"		\
-	-DGNOME_CORE_INTERNAL					\
 	-DDATADIR=\""$(pkgdatadir)"\"				\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED)					\
