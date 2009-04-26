@@ -1,7 +1,9 @@
+QUIET_GEN = $(Q:@=@echo '  GEN   '$@;)
+
 bin_SCRIPTS = gnome-about
 
 gnome-about: gnome-about.in Makefile
-	sed								\
+	$(QUIET_GEN)sed							\
 		-e s!\@PYTHON\@!@PYTHON@!				\
 		-e s!\@GETTEXT_PACKAGE\@!@GETTEXT_PACKAGE@!		\
 		-e s!\@LOCALEDIR\@!$(datadir)/locale!			\
@@ -9,7 +11,7 @@ gnome-about: gnome-about.in Makefile
 		-e s!\@ICONDIR\@!$(datadir)/pixmaps!			\
 		-e s!\@PACKAGE_NAME\@!$(PACKAGE_NAME)!			\
 		-e s!\@PACKAGE_VERSION\@!$(PACKAGE_VERSION)!		\
-		< $< > $@
+		< $< > $@ &&						\
 	chmod a+x $@
 
 @INTLTOOL_DESKTOP_RULE@
