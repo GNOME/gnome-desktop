@@ -329,6 +329,11 @@ fill_out_screen_info (Display *xdisplay,
     }
     else
     {
+        gnome_rr_screen_get_ranges (info->screen, 
+					 &(info->min_width),
+					 &(info->max_width),
+					 &(info->min_height),
+					 &(info->max_height));
 	/* XRRGetScreenResourcesCurrent is less expensive than
 	 * XRRGetScreenResources, however it is available only
 	 * in RandR 1.3 or higher
