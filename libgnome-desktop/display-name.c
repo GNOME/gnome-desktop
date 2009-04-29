@@ -205,7 +205,6 @@ make_display_name (const char *output_name,
     const char *vendor;
     int width_mm, height_mm, inches;
 
-    g_print ("output name %s, vendor %s\n", output_name, info ? info->manufacturer_code : "nada");
     if (output_name &&
 	(strstr (output_name, "lvds")	||
 	 strstr (output_name, "LVDS")	||
