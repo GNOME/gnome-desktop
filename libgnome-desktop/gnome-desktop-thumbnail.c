@@ -48,7 +48,6 @@
 #define SECONDS_BETWEEN_STATS 10
 
 struct _GnomeDesktopThumbnailFactoryPrivate {
-  char *application;
   GnomeDesktopThumbnailSize size;
 
   GMutex *lock;
@@ -57,6 +56,8 @@ struct _GnomeDesktopThumbnailFactoryPrivate {
   guint thumbnailers_notify;
   guint reread_scheduled;
 };
+
+static const char *appname = "gnome-thumbnail-factory";
 
 static void gnome_desktop_thumbnail_factory_init          (GnomeDesktopThumbnailFactory      *factory);
 static void gnome_desktop_thumbnail_factory_class_init    (GnomeDesktopThumbnailFactoryClass *class);
@@ -258,9 +259,6 @@ gnome_desktop_thumbnail_factory_finalize (GObject *object)
 
   priv = factory->priv;
   
-  g_free (priv->application);
-  priv->application = NULL;
-
   if (priv->reread_scheduled != 0) {
     g_source_remove (priv->reread_scheduled);
     priv->reread_scheduled = 0;
@@ -434,7 +432,6 @@ gnome_desktop_thumbnail_factory_init (GnomeDesktopThumbnailFactory *factory)
   priv = factory->priv;
 
   priv->size = GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL;
-  priv->application = g_strdup ("gnome-thumbnail-factory");
   
   priv->scripts_hash = NULL;
   
@@ -590,7 +587,7 @@ gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (GnomeDesktopThumbnai
 
   path = g_build_filename (g_get_home_dir (),
 			   ".thumbnails/fail",
-			   factory->priv->application,
+			   appname,
 			   file,
 			   NULL);
   g_free (file);
@@ -950,7 +947,7 @@ make_thumbnail_fail_dirs (GnomeDesktopThumbnailFactory *factory)
     }
 
   app_dir = g_build_filename (fail_dir,
-			      factory->priv->application,
+			      appname,
 			      NULL);
   if (!g_file_test (app_dir, G_FILE_TEST_IS_DIR))
     {
@@ -1115,7 +1112,7 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
   
   dir = g_build_filename (g_get_home_dir (),
 			  ".thumbnails/fail",
-			  factory->priv->application,
+			  appname,
 			  NULL);
   
   path = g_build_filename (dir,
