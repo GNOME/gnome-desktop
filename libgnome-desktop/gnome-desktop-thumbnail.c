@@ -986,7 +986,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
 						time_t                 original_mtime)
 {
   GnomeDesktopThumbnailFactoryPrivate *priv = factory->priv;
-  char *path, *file, *dir;
+  char *path, *file;
   char *tmp_path;
   const char *width, *height;
   int tmp_fd;
@@ -1003,15 +1003,13 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   g_assert (digest_len == 16);
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
-  
-  dir = g_build_filename (g_get_home_dir (),
-			  ".thumbnails",
-			  (priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
-			  NULL);
-  
-  path = g_build_filename (dir,
+
+  path = g_build_filename (g_get_home_dir (),
+			   ".thumbnails",
+			   (priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			   file,
 			   NULL);
+
   g_free (file);
 
   g_checksum_free (checksum);
@@ -1030,7 +1028,6 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   if (tmp_fd == -1)
     {
       gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, original_mtime);
-      g_free (dir);
       g_free (tmp_path);
       g_free (path);
       return;
@@ -1071,7 +1068,6 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
       gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, original_mtime);
     }
 
-  g_free (dir);
   g_free (path);
   g_free (tmp_path);
 }
@@ -1094,7 +1090,7 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
 							 const char            *uri,
 							 time_t                 mtime)
 {
-  char *path, *file, *dir;
+  char *path, *file;
   char *tmp_path;
   int tmp_fd;
   char mtime_str[21];
@@ -1111,13 +1107,10 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
   g_assert (digest_len == 16);
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
-  
-  dir = g_build_filename (g_get_home_dir (),
-			  ".thumbnails/fail",
-			  appname,
-			  NULL);
-  
-  path = g_build_filename (dir,
+
+  path = g_build_filename (g_get_home_dir (),
+			   ".thumbnails/fail",
+			   appname,
 			   file,
 			   NULL);
   g_free (file);
@@ -1137,7 +1130,6 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
 
   if (tmp_fd == -1)
     {
-      g_free (dir);
       g_free (tmp_path);
       g_free (path);
       return;
@@ -1160,7 +1152,6 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
       g_rename(tmp_path, path);
     }
 
-  g_free (dir);
   g_free (path);
   g_free (tmp_path);
 }
