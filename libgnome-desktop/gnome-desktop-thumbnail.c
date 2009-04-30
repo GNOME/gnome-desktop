@@ -67,6 +67,9 @@ G_DEFINE_TYPE (GnomeDesktopThumbnailFactory,
 	       G_TYPE_OBJECT)
 #define parent_class gnome_desktop_thumbnail_factory_parent_class
 
+#define GNOME_DESKTOP_THUMBNAIL_FACTORY_GET_PRIVATE(object) \
+  (G_TYPE_INSTANCE_GET_PRIVATE ((object), GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY, GnomeDesktopThumbnailFactoryPrivate))
+
 typedef struct {
     gint width;
     gint height;
@@ -283,9 +286,6 @@ gnome_desktop_thumbnail_factory_finalize (GObject *object)
       priv->lock = NULL;
     }
   
-  g_free (priv);
-  factory->priv = NULL;
-  
   if (G_OBJECT_CLASS (parent_class)->finalize)
     (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
@@ -427,7 +427,7 @@ gnome_desktop_thumbnail_factory_init (GnomeDesktopThumbnailFactory *factory)
   GConfClient *client;
   GnomeDesktopThumbnailFactoryPrivate *priv;
   
-  factory->priv = g_new0 (GnomeDesktopThumbnailFactoryPrivate, 1);
+  factory->priv = GNOME_DESKTOP_THUMBNAIL_FACTORY_GET_PRIVATE (factory);
 
   priv = factory->priv;
 
@@ -459,6 +459,8 @@ gnome_desktop_thumbnail_factory_class_init (GnomeDesktopThumbnailFactoryClass *c
   gobject_class = G_OBJECT_CLASS (class);
 	
   gobject_class->finalize = gnome_desktop_thumbnail_factory_finalize;
+
+  g_type_class_add_private (class, sizeof (GnomeDesktopThumbnailFactoryPrivate));
 }
 
 /**
