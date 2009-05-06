@@ -181,6 +181,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	GtkWidget *window;
 	GtkWidget *widget;
 	char *str;
+	GdkColor black = { 0, 0, 0, 0 };
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	GTK_WIDGET_SET_FLAGS (window, GTK_APP_PAINTABLE);
@@ -200,6 +201,12 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	widget = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
+
+	/* Make the label explicitly black.  We don't want it to follow the
+	 * theme's colors, since the label is always shown against a light
+	 * pastel background.  See bgo#556050
+	 */
+	gtk_widget_modify_fg (widget, GTK_WIDGET_STATE (widget), &black);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 
