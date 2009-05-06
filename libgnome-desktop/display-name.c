@@ -251,5 +251,5 @@ make_display_name (const char *output_name,
     if (inches > 0)
 	return g_strdup_printf ("%s %d\"", vendor, inches);
     else
-	return g_strdup_printf ("%s", vendor);
+	return g_strdup (vendor);
 }
