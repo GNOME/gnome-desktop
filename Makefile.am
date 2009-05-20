@@ -11,6 +11,7 @@ SUBDIRS =			\
 
 EXTRA_DIST =			\
 	MAINTAINERS		\
+	ChangeLog.pre-git	\
 	gnome-version.xml.in.in	\
 	gnome-version.xml	\
 	COPYING-DOCS		\
