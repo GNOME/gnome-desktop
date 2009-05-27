@@ -656,6 +656,33 @@ gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 }
 
 /**
+ * gnome_rr_screen_get_timestamps
+ * @screen: a #GnomeRRScreen
+ * @change_timestamp_ret: Location in which to store the timestamp at which the RANDR configuration was last changed
+ * @config_timestamp_ret: Location in which to store the timestamp at which the RANDR configuration was last obtained
+ *
+ * Queries the two timestamps that the X RANDR extension maintains.  The X
+ * server will prevent change requests for stale configurations, those whose
+ * timestamp is not equal to that of the latest request for configuration.  The
+ * X server will also prevent change requests that have an older timestamp to
+ * the latest change request.
+ */
+void
+gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
+				guint32       *change_timestamp_ret,
+				guint32       *config_timestamp_ret)
+{
+    g_return_if_fail (screen != NULL);
+
+    if (change_timestamp_ret)
+	*change_timestamp_ret = screen->info->resources->timestamp;
+
+    if (config_timestamp_ret)
+	*config_timestamp_ret = screen->info->resources->configTimestamp;
+}
+
+
+/**
  * gnome_rr_screen_refresh
  * @screen: a #GnomeRRScreen
  * @error: location to store error, or %NULL

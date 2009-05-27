@@ -91,6 +91,9 @@ void            gnome_rr_screen_get_ranges         (GnomeRRScreen         *scree
 						    int                   *max_width,
 						    int                   *min_height,
 						    int                   *max_height);
+void            gnome_rr_screen_get_timestamps     (GnomeRRScreen         *screen,
+						    guint32               *change_timestamp_ret,
+						    guint32               *config_timestamp_ret);
 
 /* GnomeRROutput */
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
