@@ -83,17 +83,33 @@ gboolean        gnome_rr_config_equal	     (GnomeRRConfig  *config1,
 gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
 					      GError        **error);
 void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
+
+#ifndef GNOME_DISABLE_DEPRECATED
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,
 					      GError        **error);
+#endif
+
+gboolean	gnome_rr_config_apply_with_time (GnomeRRConfig  *configuration,
+						 GnomeRRScreen  *screen,
+						 guint32         timestamp,
+						 GError        **error);
+
 #ifndef GNOME_DISABLE_DEPRECATED
 gboolean        gnome_rr_config_apply_stored (GnomeRRScreen  *screen,
 					      GError        **error);
 #endif
 
+#ifndef GNOME_DISABLE_DEPRECATED
 gboolean        gnome_rr_config_apply_from_filename (GnomeRRScreen  *screen,
 						     const char     *filename,
 						     GError        **error);
+#endif
+
+gboolean        gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen  *screen,
+							       const char     *filename,
+							       guint32         timestamp,
+							       GError        **error);
 
 gboolean        gnome_rr_config_applicable   (GnomeRRConfig  *configuration,
 					      GnomeRRScreen  *screen,

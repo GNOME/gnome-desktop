@@ -121,7 +121,20 @@ int             gnome_rr_mode_get_freq             (GnomeRRMode           *mode)
 
 /* GnomeRRCrtc */
 guint32         gnome_rr_crtc_get_id               (GnomeRRCrtc           *crtc);
+
+#ifndef GNOME_DISABLE_DEPRECATED
 gboolean        gnome_rr_crtc_set_config           (GnomeRRCrtc           *crtc,
+						    int                    x,
+						    int                    y,
+						    GnomeRRMode           *mode,
+						    GnomeRRRotation        rotation,
+						    GnomeRROutput        **outputs,
+						    int                    n_outputs,
+						    GError               **error);
+#endif
+
+gboolean        gnome_rr_crtc_set_config_with_time (GnomeRRCrtc           *crtc,
+						    guint32                timestamp,
 						    int                    x,
 						    int                    y,
 						    GnomeRRMode           *mode,

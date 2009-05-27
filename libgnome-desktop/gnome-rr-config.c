@@ -76,6 +76,7 @@ static gboolean parse_file_gmarkup (const gchar *file,
 typedef struct CrtcAssignment CrtcAssignment;
 
 static gboolean         crtc_assignment_apply (CrtcAssignment   *assign,
+					       guint32           timestamp,
 					       GError          **error);
 static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
 					       GnomeOutputInfo **outputs,
@@ -1155,6 +1156,15 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 		       GnomeRRScreen *screen,
 		       GError       **error)
 {
+    return gnome_rr_config_apply_with_time (config, screen, GDK_CURRENT_TIME, error);
+}
+
+gboolean
+gnome_rr_config_apply_with_time (GnomeRRConfig *config,
+				 GnomeRRScreen *screen,
+				 guint32        timestamp,
+				 GError       **error)
+{
     CrtcAssignment *assignment;
     GnomeOutputInfo **outputs;
     gboolean result = FALSE;
@@ -1167,7 +1177,7 @@ gnome_rr_config_apply (GnomeRRConfig *config,
     
     if (assignment)
     {
-	if (crtc_assignment_apply (assignment, error))
+	if (crtc_assignment_apply (assignment, timestamp, error))
 	    result = TRUE;
 	    
 	crtc_assignment_free (assignment);
@@ -1197,7 +1207,7 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
     gboolean result;
 
     filename = gnome_rr_config_get_intended_filename ();
-    result = gnome_rr_config_apply_from_filename (screen, filename, error);
+    result = gnome_rr_config_apply_from_filename_with_time (screen, filename, GDK_CURRENT_TIME, error);
     g_free (filename);
 
     return result;
@@ -1233,9 +1243,49 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
  * #G_FILE_ERROR.  Note that an error code of G_FILE_ERROR_NOENT is not really
  * an error, either; it means that there was no stored configuration file and so
  * nothing is changed.
+ *
+ * @Deprecated: 2.28: use gnome_rr_config_apply_from_filename_with_time() instead.
  */
 gboolean
 gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename, GError **error)
+{
+    return gnome_rr_config_apply_from_filename_with_time (screen, filename, GDK_CURRENT_TIME, error);
+}
+
+/* gnome_rr_config_apply_from_filename_with_time:
+ * @screen: A #GnomeRRScreen
+ * @filename: Path of the file to look in for stored RANDR configurations.
+ * @timestamp: X server timestamp from the event that causes the screen configuration to change (a user's button press, for example)
+ * @error: Location to store error, or %NULL
+ *
+ * First, this function refreshes the @screen to match the current RANDR
+ * configuration from the X server.  Then, it tries to load the file in
+ * @filename and looks for suitable matching RANDR configurations in the file;
+ * if one is found, that configuration will be applied to the current set of
+ * RANDR outputs.
+ *
+ * Typically, @filename is the result of gnome_rr_config_get_intended_filename() or
+ * gnome_rr_config_get_backup_filename().
+ *
+ * Returns: TRUE if the RANDR configuration was loaded and applied from
+ * $(XDG_CONFIG_HOME)/monitors.xml, or FALSE otherwise:
+ *
+ * If the current RANDR configuration could not be refreshed, the @error will
+ * have a domain of #GNOME_RR_ERROR and a corresponding error code.
+ *
+ * If the file in question is loaded successfully but the configuration cannot
+ * be applied, the @error will have a domain of #GNOME_RR_ERROR.  Note that an
+ * error code of #GNOME_RR_ERROR_NO_MATCHING_CONFIG is not a real error; it
+ * simply means that there were no stored configurations that match the current
+ * set of RANDR outputs.
+ *
+ * If the file in question cannot be loaded, the @error will have a domain of
+ * #G_FILE_ERROR.  Note that an error code of G_FILE_ERROR_NOENT is not really
+ * an error, either; it means that there was no stored configuration file and so
+ * nothing is changed.
+ */
+gboolean
+gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char *filename, guint32 timestamp, GError **error)
 {
     GnomeRRConfig *stored;
     GError *my_error;
@@ -1260,7 +1310,7 @@ gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename
     {
 	gboolean result;
 
-	result = gnome_rr_config_apply (stored, screen, error);
+	result = gnome_rr_config_apply_with_time (stored, screen, timestamp, error);
 
 	gnome_rr_config_free (stored);
 	
@@ -1385,6 +1435,7 @@ crtc_assignment_free (CrtcAssignment *assign)
 }
 
 typedef struct {
+    guint32 timestamp;
     gboolean has_error;
     GError **error;
 } ConfigureCrtcState;
@@ -1401,13 +1452,14 @@ configure_crtc (gpointer key,
     if (state->has_error)
 	return;
 
-    if (!gnome_rr_crtc_set_config (crtc,
-				   info->x, info->y,
-				   info->mode,
-				   info->rotation,
-				   (GnomeRROutput **)info->outputs->pdata,
-				   info->outputs->len,
-				   state->error))
+    if (!gnome_rr_crtc_set_config_with_time (crtc,
+					     state->timestamp,
+					     info->x, info->y,
+					     info->mode,
+					     info->rotation,
+					     (GnomeRROutput **)info->outputs->pdata,
+					     info->outputs->len,
+					     state->error))
 	state->has_error = TRUE;
 }
 
@@ -1596,7 +1648,7 @@ fail:
 }
 
 static gboolean
-crtc_assignment_apply (CrtcAssignment *assign, GError **error)
+crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error)
 {
     GnomeRRCrtc **all_crtcs = gnome_rr_screen_list_crtcs (assign->screen);
     int width, height;
@@ -1654,7 +1706,7 @@ crtc_assignment_apply (CrtcAssignment *assign, GError **error)
 	    
 	    if (x + w > width || y + h > height || !g_hash_table_lookup (assign->info, crtc))
 	    {
-		if (!gnome_rr_crtc_set_config (crtc, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0, error))
+		if (!gnome_rr_crtc_set_config_with_time (crtc, timestamp, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0, error))
 		{
 		    success = FALSE;
 		    break;
@@ -1679,6 +1731,7 @@ crtc_assignment_apply (CrtcAssignment *assign, GError **error)
 
 	gnome_rr_screen_set_size (assign->screen, width, height, width_mm, height_mm);
 
+	state.timestamp = timestamp;
 	state.has_error = FALSE;
 	state.error = error;
 	
