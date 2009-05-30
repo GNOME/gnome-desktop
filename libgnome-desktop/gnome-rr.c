@@ -292,6 +292,76 @@ gather_clone_modes (ScreenInfo *info)
 }
 
 static gboolean
+fill_screen_info_from_resources (ScreenInfo *info,
+				 XRRScreenResources *resources,
+				 GError **error)
+{
+    int i;
+    GPtrArray *a;
+    GnomeRRCrtc **crtc;
+    GnomeRROutput **output;
+
+    info->resources = resources;
+
+    /* We create all the structures before initializing them, so
+     * that they can refer to each other.
+     */
+    a = g_ptr_array_new ();
+    for (i = 0; i < resources->ncrtc; ++i)
+    {
+	GnomeRRCrtc *crtc = crtc_new (info, resources->crtcs[i]);
+
+	g_ptr_array_add (a, crtc);
+    }
+    g_ptr_array_add (a, NULL);
+    info->crtcs = (GnomeRRCrtc **)g_ptr_array_free (a, FALSE);
+
+    a = g_ptr_array_new ();
+    for (i = 0; i < resources->noutput; ++i)
+    {
+	GnomeRROutput *output = output_new (info, resources->outputs[i]);
+
+	g_ptr_array_add (a, output);
+    }
+    g_ptr_array_add (a, NULL);
+    info->outputs = (GnomeRROutput **)g_ptr_array_free (a, FALSE);
+
+    a = g_ptr_array_new ();
+    for (i = 0;  i < resources->nmode; ++i)
+    {
+	GnomeRRMode *mode = mode_new (info, resources->modes[i].id);
+
+	g_ptr_array_add (a, mode);
+    }
+    g_ptr_array_add (a, NULL);
+    info->modes = (GnomeRRMode **)g_ptr_array_free (a, FALSE);
+
+    /* Initialize */
+    for (crtc = info->crtcs; *crtc; ++crtc)
+    {
+	if (!crtc_initialize (*crtc, resources, error))
+	    return FALSE;
+    }
+
+    for (output = info->outputs; *output; ++output)
+    {
+	if (!output_initialize (*output, resources, error))
+	    return FALSE;
+    }
+
+    for (i = 0; i < resources->nmode; ++i)
+    {
+	GnomeRRMode *mode = mode_by_id (info, resources->modes[i].id);
+
+	mode_initialize (mode, &(resources->modes[i]));
+    }
+
+    gather_clone_modes (info);
+
+    return TRUE;
+}
+
+static gboolean
 fill_out_screen_info (Display *xdisplay,
 		      Window xroot,
 		      ScreenInfo *info,
@@ -302,6 +372,43 @@ fill_out_screen_info (Display *xdisplay,
     
     g_assert (xdisplay != NULL);
     g_assert (info != NULL);
+
+    /* First update the screen resources */
+
+    if (needs_reprobe)
+        resources = XRRGetScreenResources (xdisplay, xroot);
+    else
+    {
+	/* XRRGetScreenResourcesCurrent is less expensive than
+	 * XRRGetScreenResources, however it is available only
+	 * in RandR 1.3 or higher
+	 */
+#if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
+        /* Runtime check for RandR 1.3 or higher */
+        if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3)
+            resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
+        else
+            resources = XRRGetScreenResources (xdisplay, xroot);
+#else
+        resources = XRRGetScreenResources (xdisplay, xroot);
+#endif
+    }
+
+    if (resources)
+    {
+	if (!fill_screen_info_from_resources (info, resources, error))
+	    return FALSE;
+    }
+    else
+    {
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     _("could not get the screen resources (CRTCs, outputs, modes)"));
+	return FALSE;
+    }
+
+    /* Then update the screen size range.  We do this after XRRGetScreenResources() so that
+     * the X server will already have an updated view of the outputs.
+     */
 
     if (needs_reprobe) {
 	gboolean success;
@@ -324,8 +431,6 @@ fill_out_screen_info (Display *xdisplay,
 			 _("could not get the range of screen sizes"));
             return FALSE;
         }
-
-        resources = XRRGetScreenResources (xdisplay, xroot);
     }
     else
     {
@@ -334,104 +439,9 @@ fill_out_screen_info (Display *xdisplay,
 					 &(info->max_width),
 					 &(info->min_height),
 					 &(info->max_height));
-	/* XRRGetScreenResourcesCurrent is less expensive than
-	 * XRRGetScreenResources, however it is available only
-	 * in RandR 1.3 or higher
-	 */
-#if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
-        /* Runtime check for RandR 1.3 or higher */
-        if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3)
-            resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
-        else
-            resources = XRRGetScreenResources (xdisplay, xroot);
-#else
-        resources = XRRGetScreenResources (xdisplay, xroot);
-#endif
     }
 
-    if (resources)
-    {
-	int i;
-	GPtrArray *a;
-	GnomeRRCrtc **crtc;
-	GnomeRROutput **output;
-	
-#if 0
-	g_print ("Resource Timestamp: %u\n", (guint32)resources->timestamp);
-	g_print ("Resource Configuration Timestamp: %u\n", (guint32)resources->configTimestamp);
-#endif
-	
-	info->resources = resources;
-	
-	/* We create all the structures before initializing them, so
-	 * that they can refer to each other.
-	 */
-	a = g_ptr_array_new ();
-	for (i = 0; i < resources->ncrtc; ++i)
-	{
-	    GnomeRRCrtc *crtc = crtc_new (info, resources->crtcs[i]);
-	    
-	    g_ptr_array_add (a, crtc);
-	}
-	g_ptr_array_add (a, NULL);
-	info->crtcs = (GnomeRRCrtc **)g_ptr_array_free (a, FALSE);
-	
-	a = g_ptr_array_new ();
-	for (i = 0; i < resources->noutput; ++i)
-	{
-	    GnomeRROutput *output = output_new (info, resources->outputs[i]);
-	    
-	    g_ptr_array_add (a, output);
-	}
-	g_ptr_array_add (a, NULL);
-	info->outputs = (GnomeRROutput **)g_ptr_array_free (a, FALSE);
-	
-	a = g_ptr_array_new ();
-	for (i = 0;  i < resources->nmode; ++i)
-	{
-	    GnomeRRMode *mode = mode_new (info, resources->modes[i].id);
-	    
-	    g_ptr_array_add (a, mode);
-	}
-	g_ptr_array_add (a, NULL);
-	info->modes = (GnomeRRMode **)g_ptr_array_free (a, FALSE);
-	
-	/* Initialize */
-	for (crtc = info->crtcs; *crtc; ++crtc)
-	{
-	    if (!crtc_initialize (*crtc, resources, error))
-		return FALSE;
-	}
-	
-	for (output = info->outputs; *output; ++output)
-	{
-	    if (!output_initialize (*output, resources, error))
-		return FALSE;
-	}
-	
-	for (i = 0; i < resources->nmode; ++i)
-	{
-	    GnomeRRMode *mode = mode_by_id (info, resources->modes[i].id);
-	    
-	    mode_initialize (mode, &(resources->modes[i]));
-	}
-
-	gather_clone_modes (info);
-	
-	return TRUE;
-    }
-    else
-    {
-#if 0
-	g_print ("Couldn't get screen resources\n");
-#endif
-	/* Translators: This indicates an error in X.  CRTCs is "CRT
-	 * controllers".  This error should never happen; it is just here for
-	 * completeness. */
-	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
-		     _("could not get the screen resources (CRTCs, outputs, modes)"));
-	return FALSE;
-    }
+    return TRUE;
 }
 
 static ScreenInfo *
