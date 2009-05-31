@@ -45,7 +45,7 @@ struct GnomeOutputInfo
 {
     char *		name;
 
-    gboolean		on;
+    gboolean		on; /* whether there is a CRTC assigned to this output (i.e. a signal is being sent to it) */
     int			width;
     int			height;
     int			rate;
@@ -53,7 +53,7 @@ struct GnomeOutputInfo
     int			y;
     GnomeRRRotation	rotation;
 
-    gboolean		connected;
+    gboolean		connected; /* whether the output is physically connected to a monitor */
     char		vendor[4];
     guint		product;
     guint		serial;
@@ -67,6 +67,10 @@ struct GnomeOutputInfo
 
 struct GnomeRRConfig
 {
+    /* "clone" means that at least two outputs are at (0, 0) offset and they
+     * have the same width/height.  Those outputs are of course connected and on
+     * (i.e. they have a CRTC assigned).
+     */
     gboolean		clone;
     
     GnomeOutputInfo **	outputs;
