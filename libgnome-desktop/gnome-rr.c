@@ -584,16 +584,18 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	    return NULL;
 	}
 
-	XRRSelectInput (screen->xdisplay,
-			screen->xroot,
-			RRScreenChangeNotifyMask);
+	if (screen->callback) {
+	    XRRSelectInput (screen->xdisplay,
+			    screen->xroot,
+			    RRScreenChangeNotifyMask);
 
-	gdk_x11_register_standard_event_type (
-	    gdk_screen_get_display (gdk_screen),
-	    event_base,
-	    RRNotify + 1);
-	
-	gdk_window_add_filter (screen->gdk_root, screen_on_event, screen);
+	    gdk_x11_register_standard_event_type (gdk_screen_get_display (gdk_screen),
+						  event_base,
+						  RRNotify + 1);
+
+	    gdk_window_add_filter (screen->gdk_root, screen_on_event, screen);
+	}
+
 	return screen;
     }
     else
