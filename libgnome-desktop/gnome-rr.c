@@ -502,6 +502,21 @@ screen_on_event (GdkXEvent *xevent,
 	 */
         screen_update (screen, TRUE, TRUE, NULL); /* NULL-GError */
     }
+#if 0
+    /* WHY THIS CODE IS DISABLED:
+     *
+     * Note that in gnome_rr_screen_new(), we only select for
+     * RRScreenChangeNotifyMask.  We used to select for other values in
+     * RR*NotifyMask, but we weren't really doing anything useful with those
+     * events.  We only care about "the screens changed in some way or another"
+     * for now.
+     *
+     * If we ever run into a situtation that could benefit from processing more
+     * detailed events, we can enable this code again.
+     *
+     * Note that the X server sends RRScreenChangeNotify in conjunction with the
+     * more detailed events from RANDR 1.2 - see xserver/randr/randr.c:TellChanged().
+     */
     else if (event_num == RRNotify)
     {
 	/* Other RandR events */
@@ -522,6 +537,7 @@ screen_on_event (GdkXEvent *xevent,
 	/* No need to reprobe hardware here */
 	screen_update (screen, TRUE, FALSE, NULL); /* NULL-GError */
     }
+#endif
 
     /* Pass the event on to GTK+ */
     return GDK_FILTER_CONTINUE;
@@ -570,10 +586,8 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 
 	XRRSelectInput (screen->xdisplay,
 			screen->xroot,
-			RRScreenChangeNotifyMask	|
-			RRCrtcChangeNotifyMask		|
-			RROutputPropertyNotifyMask);
-	
+			RRScreenChangeNotifyMask);
+
 	gdk_x11_register_standard_event_type (
 	    gdk_screen_get_display (gdk_screen),
 	    event_base,
