@@ -512,6 +512,37 @@ screen_on_event (GdkXEvent *xevent,
 	 * why it sent us an event!
 	 */
         screen_update (screen, TRUE, FALSE, NULL); /* NULL-GError */
+#if 0
+	/* Enable this code to get a dialog showing the RANDR timestamps, for debugging purposes */
+	{
+	    GtkWidget *dialog;
+	    XRRScreenChangeNotifyEvent *rr_event;
+	    static int dialog_num;
+
+	    rr_event = (XRRScreenChangeNotifyEvent *) e;
+
+	    dialog = gtk_message_dialog_new (NULL,
+					     0,
+					     GTK_MESSAGE_INFO,
+					     GTK_BUTTONS_CLOSE,
+					     "RRScreenChangeNotify timestamps (%d):\n"
+					     "event change: %u\n"
+					     "event config: %u\n"
+					     "event serial: %lu\n"
+					     "----------------------"
+					     "screen change: %u\n"
+					     "screen config: %u\n",
+					     dialog_num++,
+					     (guint32) rr_event->timestamp,
+					     (guint32) rr_event->config_timestamp,
+					     rr_event->serial,
+					     (guint32) screen->info->resources->timestamp,
+					     (guint32) screen->info->resources->configTimestamp);
+	    g_signal_connect (dialog, "response",
+			      G_CALLBACK (gtk_widget_destroy), NULL);
+	    gtk_widget_show (dialog);
+	}
+#endif
     }
 #if 0
     /* WHY THIS CODE IS DISABLED:
