@@ -497,10 +497,11 @@ screen_on_event (GdkXEvent *xevent,
     event_num = e->type - screen->randr_event_base;
 
     if (event_num == RRScreenChangeNotify) {
-	/* If outputs are either connected or disconnected, reprobe hardware
-	 * and/or get the screen size again.
+	/* We don't reprobe the hardware; we just fetch the X server's latest
+	 * state.  The server already knows the new state of the outputs; that's
+	 * why it sent us an event!
 	 */
-        screen_update (screen, TRUE, TRUE, NULL); /* NULL-GError */
+        screen_update (screen, TRUE, FALSE, NULL); /* NULL-GError */
     }
 #if 0
     /* WHY THIS CODE IS DISABLED:
