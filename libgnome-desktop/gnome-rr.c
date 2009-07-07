@@ -866,13 +866,21 @@ get_property (Display *dpy,
 static guint8 *
 read_edid_data (GnomeRROutput *output)
 {
-    Atom edid_atom = XInternAtom (DISPLAY (output), "EDID_DATA", FALSE);
+    Atom edid_atom;
     guint8 *result;
     int len;
-    
+
+    edid_atom = XInternAtom (DISPLAY (output), "EDID", FALSE);
     result = get_property (DISPLAY (output),
 			   output->id, edid_atom, &len);
-    
+
+    if (!result)
+    {
+	edid_atom = XInternAtom (DISPLAY (output), "EDID_DATA", FALSE);
+	result = get_property (DISPLAY (output),
+			       output->id, edid_atom, &len);
+    }
+
     if (result)
     {
 	if (len % 128 == 0)
