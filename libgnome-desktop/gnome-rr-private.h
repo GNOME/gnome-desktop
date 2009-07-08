@@ -19,6 +19,8 @@ struct ScreenInfo
     GnomeRRScreen *	screen;
 
     GnomeRRMode **	clone_modes;
+
+    RROutput            primary;
 };
 
 struct GnomeRRScreen

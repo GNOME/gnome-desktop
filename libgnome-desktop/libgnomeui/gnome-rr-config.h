@@ -61,6 +61,7 @@ struct GnomeOutputInfo
     int			pref_width;
     int			pref_height;
     char *		display_name;
+    gboolean            primary;
 
     gpointer		user_data;
 };

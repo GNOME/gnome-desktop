@@ -441,6 +441,17 @@ fill_out_screen_info (Display *xdisplay,
 					 &(info->max_height));
     }
 
+    info->primary = None;
+#if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
+    /* Runtime check for RandR 1.3 or higher */
+    if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3) {
+        gdk_error_trap_push ();
+        info->primary = XRRGetOutputPrimary (xdisplay, xroot);
+	gdk_flush ();
+	gdk_error_trap_pop (); /* ignore error */
+    }
+#endif
+
     return TRUE;
 }
 
@@ -1127,6 +1138,24 @@ gnome_rr_output_can_clone (GnomeRROutput *output,
     }
     
     return FALSE;
+}
+
+gboolean
+gnome_rr_output_get_primary (GnomeRROutput *output)
+{
+    return output->info->primary == output->id;
+}
+
+void
+gnome_rr_output_set_primary (GnomeRROutput *output)
+{
+    GnomeRRScreen *screen = output->info->screen;
+
+#if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
+        /* Runtime check for RandR 1.3 or higher */
+    if (screen->rr_major_version == 1 && screen->rr_minor_version >= 3)
+        XRRSetOutputPrimary (screen->xdisplay, screen->xroot, output->id);
+#endif
 }
 
 /* GnomeRRCrtc */

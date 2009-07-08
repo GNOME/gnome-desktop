@@ -189,6 +189,7 @@ handle_start_element (GMarkupParseContext *context,
 	}	
 	parser->output->connected = FALSE;
 	parser->output->on = FALSE;
+	parser->output->primary = FALSE;
     }
     else if (strcmp (name, "configuration") == 0)
     {
@@ -342,6 +343,13 @@ handle_text (GMarkupParseContext *context,
 	if (strcmp (text, "yes") == 0)
 	{
 	    parser->output->rotation |= GNOME_RR_REFLECT_Y;
+	}
+    }
+    else if (stack_is (parser, "primary", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
+    {
+	if (strcmp (text, "yes") == 0)
+	{
+	    parser->output->primary = TRUE;
 	}
     }
     else
@@ -555,6 +563,8 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 		output->pref_height = 768;
 	    }
 	}
+
+        output->primary = gnome_rr_output_get_primary (rr_output);
  
 	g_ptr_array_add (a, output);
     }
@@ -985,6 +995,8 @@ emit_configuration (GnomeRRConfig *config,
 		string, "          <reflect_x>%s</reflect_x>\n", get_reflect_x (output->rotation));
 	    g_string_append_printf (
 		string, "          <reflect_y>%s</reflect_y>\n", get_reflect_y (output->rotation));
+            g_string_append_printf (
+                string, "          <primary>%s</primary>\n", yes_no (output->primary));
 	}
 	
 	g_string_append_printf (string, "      </output>\n");
@@ -998,6 +1010,7 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
 {
     int i;
     int x_offset, y_offset;
+    gboolean found;
 
     /* Offset everything by the top/left-most coordinate to
      * make sure the configuration starts at (0, 0)
@@ -1023,6 +1036,23 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
 	    output->x -= x_offset;
 	    output->y -= y_offset;
 	}
+    }
+
+    /* Only one primary, please */
+    found = FALSE;
+    for (i = 0; config->outputs[i]; ++i)
+    {
+        if (config->outputs[i]->primary)
+        {
+            if (found)
+            {
+                config->outputs[i]->primary = FALSE;
+            }
+            else
+            {
+                found = TRUE;
+            }
+        }
     }
 }
 
@@ -1179,7 +1209,7 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
     {
 	if (crtc_assignment_apply (assignment, timestamp, error))
 	    result = TRUE;
-	    
+
 	crtc_assignment_free (assignment);
 
 	gdk_flush ();
@@ -1340,6 +1370,7 @@ struct CrtcAssignment
 {
     GnomeRRScreen *screen;
     GHashTable *info;
+    GnomeRROutput *primary;
 };
 
 static gboolean
@@ -1366,6 +1397,7 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 			int               x,
 			int               y,
 			GnomeRRRotation   rotation,
+                        gboolean          primary,
 			GnomeRROutput    *output)
 {
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
@@ -1387,6 +1419,11 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 	{
 	    g_ptr_array_add (info->outputs, output);
 
+            if (primary && !assign->primary)
+            {
+                assign->primary = output;
+            }
+
 	    return TRUE;
 	}
     }
@@ -1404,6 +1441,11 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 	
 	g_hash_table_insert (assign->info, crtc, info);
 	    
+        if (primary && !assign->primary)
+        {
+            assign->primary = output;
+        }
+
 	return TRUE;
     }
     
@@ -1420,6 +1462,11 @@ crtc_assignment_unassign (CrtcAssignment *assign,
     if (info)
     {
 	g_ptr_array_remove (info->outputs, output);
+
+        if (assign->primary == output)
+        {
+            assign->primary = NULL;
+        }
 
 	if (info->outputs->len == 0)
 	    g_hash_table_remove (assign->info, crtc);
@@ -1541,6 +1588,7 @@ real_assign_crtcs (GnomeRRScreen *screen,
 			    assignment, crtc, modes[j],
 			    output->x, output->y,
 			    output->rotation,
+                            output->primary,
 			    gnome_rr_output))
 		    {
 			if (real_assign_crtcs (screen, outputs + 1, assignment))
@@ -1738,6 +1786,11 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
 	g_hash_table_foreach (assign->info, configure_crtc, &state);
 
 	success = !state.has_error;
+    }
+
+    if (assign->primary)
+    {
+        gnome_rr_output_set_primary (assign->primary);
     }
 
     gdk_x11_display_ungrab (gdk_screen_get_display (assign->screen->gdk_screen));
