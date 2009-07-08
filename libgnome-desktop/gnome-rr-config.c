@@ -564,7 +564,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    }
 	}
 
-        output->primary = gnome_rr_output_get_primary (rr_output);
+        output->primary = gnome_rr_output_get_is_primary (rr_output);
  
 	g_ptr_array_add (a, output);
     }
@@ -1727,7 +1727,7 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
      */
 
     gdk_x11_display_grab (gdk_screen_get_display (assign->screen->gdk_screen));
-    
+
     /* Turn off all crtcs that are currently displaying outside the new screen,
      * or are not used in the new setup
      */
@@ -1744,7 +1744,7 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
 
 	    w = gnome_rr_mode_get_width (mode);
 	    h = gnome_rr_mode_get_height (mode);
-	    
+
 	    if (crtc_is_rotated (crtc))
 	    {
 		int tmp = h;
@@ -1788,10 +1788,7 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
 	success = !state.has_error;
     }
 
-    if (assign->primary)
-    {
-        gnome_rr_output_set_primary (assign->primary);
-    }
+    gnome_rr_screen_set_primary_output (assign->screen, assign->primary);
 
     gdk_x11_display_ungrab (gdk_screen_get_display (assign->screen->gdk_screen));
 

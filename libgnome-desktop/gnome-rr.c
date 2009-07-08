@@ -1141,20 +1141,26 @@ gnome_rr_output_can_clone (GnomeRROutput *output,
 }
 
 gboolean
-gnome_rr_output_get_primary (GnomeRROutput *output)
+gnome_rr_output_get_is_primary (GnomeRROutput *output)
 {
     return output->info->primary == output->id;
 }
 
 void
-gnome_rr_output_set_primary (GnomeRROutput *output)
+gnome_rr_screen_set_primary_output (GnomeRRScreen *screen,
+                                    GnomeRROutput *output)
 {
-    GnomeRRScreen *screen = output->info->screen;
-
 #if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
+    RROutput id;
+
+    if (output)
+        id = output->id;
+    else
+        id = None;
+
         /* Runtime check for RandR 1.3 or higher */
     if (screen->rr_major_version == 1 && screen->rr_minor_version >= 3)
-        XRRSetOutputPrimary (screen->xdisplay, screen->xroot, output->id);
+        XRRSetOutputPrimary (screen->xdisplay, screen->xroot, id);
 #endif
 }
 

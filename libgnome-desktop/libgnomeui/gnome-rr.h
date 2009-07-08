@@ -95,6 +95,9 @@ void            gnome_rr_screen_get_timestamps     (GnomeRRScreen         *scree
 						    guint32               *change_timestamp_ret,
 						    guint32               *config_timestamp_ret);
 
+void            gnome_rr_screen_set_primary_output (GnomeRRScreen         *screen,
+                                                    GnomeRROutput         *output);
+
 /* GnomeRROutput */
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_name           (GnomeRROutput         *output);
@@ -115,8 +118,7 @@ GnomeRRMode **  gnome_rr_output_list_modes         (GnomeRROutput         *outpu
 GnomeRRMode *   gnome_rr_output_get_preferred_mode (GnomeRROutput         *output);
 gboolean        gnome_rr_output_supports_mode      (GnomeRROutput         *output,
 						    GnomeRRMode           *mode);
-gboolean        gnome_rr_output_get_primary        (GnomeRROutput         *output);
-void            gnome_rr_output_set_primary        (GnomeRROutput         *output);
+gboolean        gnome_rr_output_get_is_primary     (GnomeRROutput         *output);
 
 /* GnomeRRMode */
 guint32         gnome_rr_mode_get_id               (GnomeRRMode           *mode);
