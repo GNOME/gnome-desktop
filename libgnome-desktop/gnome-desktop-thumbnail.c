@@ -667,20 +667,27 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
 					       const char            *mime_type,
 					       time_t                 mtime)
 {
+  gboolean have_script;
+
   /* Don't thumbnail thumbnails */
   if (uri &&
       strncmp (uri, "file:/", 6) == 0 &&
       strstr (uri, "/.thumbnails/") != NULL)
     return FALSE;
   
-  if (mime_type != NULL &&
-      (mimetype_supported_by_gdk_pixbuf (mime_type) ||
-       (factory->priv->scripts_hash != NULL &&
-	g_hash_table_lookup (factory->priv->scripts_hash, mime_type))))
+  if (!mime_type)
+    return FALSE;
+
+  g_mutex_lock (factory->priv->lock);
+  have_script = (factory->priv->scripts_hash != NULL &&
+                 g_hash_table_lookup (factory->priv->scripts_hash, mime_type));
+  g_mutex_unlock (factory->priv->lock);
+
+  if (have_script || mimetype_supported_by_gdk_pixbuf (mime_type))
     {
       return !gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (factory,
-								  uri,
-								  mtime);
+                                                                          uri,
+                                                                          mtime);
     }
   
   return FALSE;
@@ -797,8 +804,14 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   pixbuf = NULL;
 
   script = NULL;
+  g_mutex_lock (factory->priv->lock);
   if (factory->priv->scripts_hash != NULL)
-    script = g_hash_table_lookup (factory->priv->scripts_hash, mime_type);
+    {
+      script = g_hash_table_lookup (factory->priv->scripts_hash, mime_type);
+      if (script)
+	script = g_strdup (script);
+    }
+  g_mutex_unlock (factory->priv->lock);
   
   if (script)
     {
@@ -823,6 +836,8 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 	  g_unlink(tmpname);
 	  g_free (tmpname);
 	}
+
+      g_free (script);
     }
 
   /* Fall back to gdk-pixbuf */
