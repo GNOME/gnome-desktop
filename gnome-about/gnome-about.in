@@ -34,7 +34,6 @@ import gobject
 from gobject.option import OptionParser, make_option
 import gtk
 
-import gnome
 import cairo
 from math import pi
 
@@ -73,12 +72,14 @@ translated_contributors = [
 
 default_link_color = gtk.gdk.Color (0, 0, 65535)
 
-def locate_file (program, file):
+def locate_file (file):
     '''Wrap gnome_program_locate_file to avoid ugly duplication'''
-    file = program.locate_file (gnome.FILE_DOMAIN_APP_DATADIR, file, True)
-    if not file:
-        return False
-    return file[0]
+    dirnames = [DATADIR, '.']
+    for dirname in dirnames:
+        filename = os.path.join(dirname, file)
+        if os.path.exists(filename):
+            return filename
+    return False
 
 def cleanup_date (date):
     '''Parse a date as found in gnome-version.xml and nicely format it'''
@@ -191,13 +192,11 @@ the list'''
 class GnomeContributors (GettableList):
     '''Randomized contributors list'''
 
-    program      = None
     current      = 0
 
-    def __init__ (self, program):
+    def __init__ (self):
         '''Initiate object and load contributors lists'''
         super (GnomeContributors, self).__init__ ()
-        self.program = program
         map (self.append, translated_contributors)
         self.load_from_file ("contributors.list")
         self.load_from_file ("foundation-members.list")
@@ -213,7 +212,7 @@ class GnomeContributors (GettableList):
                 print e
                 return False
 
-        path = locate_file (self.program, file)
+        path = locate_file (file)
 
         if not path:
             print '''Warning: "%s" file not found.''' % file
@@ -553,7 +552,7 @@ class HyperLink (WindowedLabel):
     def open_url (self, *args):
         '''Use GNOME API to open the url'''
         try:
-            gnome.url_show (self.url)
+            gtk.show_uri (self.get_screen(), self.url, 0)
         except Exception, e:
             print '''Warning: could not open "%s": %s''' % (self.url, e)
 
@@ -684,16 +683,14 @@ gobject.type_register (GnomeLogo)
 class GnomeAboutHeader (gtk.Layout):
     '''Pretty header for gnome-about'''
 
-    program = None
     links   = []
 
     width   = 0
     height  = 0
 
-    def __init__ (self, program, links):
+    def __init__ (self, links):
         '''Initialize object, plug map signal'''
         super (GnomeAboutHeader, self).__init__ () 
-        self.program = program
         self.links = links
 
     def do_realize (self):
@@ -750,7 +747,7 @@ class GnomeAboutHeader (gtk.Layout):
     def load_header (self):
         '''Load a random header image as a gtk.Image'''
 
-        directory = locate_file (self.program, "headers")
+        directory = locate_file ("headers")
         if not directory:
             print "Warning: header images directory not found."
             return None
@@ -779,7 +776,7 @@ class GnomeAboutHeader (gtk.Layout):
     def load_logo (self):
         '''Load a GNOME foot logo as a gtk.Image'''
 
-        file = locate_file (self.program, LOGO_FILE)
+        file = locate_file (LOGO_FILE)
         if not file:
             print '''Warning: GNOME logo file "%s" not found.''' % LOGO_FILE
             return None
@@ -819,7 +816,6 @@ gobject.type_register (GnomeAboutHeader)
 class GnomeAbout (gtk.Dialog):
     '''Super pretty About Dialog for the GNOME Desktop'''
 
-    program              = None
     header               = None
     contributors         = None
     description_messages = GettableList ()
@@ -831,16 +827,13 @@ class GnomeAbout (gtk.Dialog):
                                            buttons = (gtk.STOCK_CLOSE,
                                                       gtk.RESPONSE_CLOSE))
 
-        defs = {gnome.PARAM_APP_DATADIR : DATADIR}
-        self.program = gnome.program_init ("gnome-about", VERSION,
-                                           properties = defs)
         # Immediately fetch system infos to load description messages
         self.system_infos = self.get_system_infos ()
 
         if not ui:
             return
 
-        self.contributors = GnomeContributors (self.program)
+        self.contributors = GnomeContributors ()
 
         icon_file = ICONDIR + "/gnome-logo-icon-transparent.png"
         try:
@@ -872,7 +865,7 @@ class GnomeAbout (gtk.Dialog):
         main_box = self.get_children ()[0] # Get the internal Dialog VBox
 
         '''Pretty header'''
-        self.header = GnomeAboutHeader (self.program, header_links)
+        self.header = GnomeAboutHeader (header_links)
         main_box.pack_start (self.header)
 
         welcome_label = WindowedLabel ()
@@ -935,7 +928,7 @@ contributors list) correctly positionned and sized.'''
 
     def get_system_infos (self):
         '''Fetch various system infos'''
-        file = locate_file (self.program, "gnome-version.xml")
+        file = locate_file ("gnome-version.xml")
         if not file:
             print '''Warning: "gnome-version.xml" file not found.'''
             return []
