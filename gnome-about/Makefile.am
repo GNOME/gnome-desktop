@@ -1,9 +1,7 @@
-QUIET_GEN = $(Q:@=@echo '  GEN   '$@;)
-
 bin_SCRIPTS = gnome-about
 
 gnome-about: gnome-about.in Makefile
-	$(QUIET_GEN)sed							\
+	$(AM_V_GEN)sed							\
 		-e s!\@PYTHON\@!@PYTHON@!				\
 		-e s!\@GETTEXT_PACKAGE\@!@GETTEXT_PACKAGE@!		\
 		-e s!\@LOCALEDIR\@!$(datadir)/locale!			\
