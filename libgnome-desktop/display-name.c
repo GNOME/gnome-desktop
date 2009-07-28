@@ -189,8 +189,6 @@ static const struct Vendor vendors[] =
 
 static GHashTable *pnp_ids = NULL;
 
-#define PNP_IDS "/usr/share/hwdata/pnp.ids"
-
 static void
 read_pnp_ids (void)
 {

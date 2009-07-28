@@ -2,7 +2,7 @@ SUBDIRS = libgnome libgnomeui
 
 INCLUDES =							\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
-	-DDATADIR=\""$(pkgdatadir)"\"				\
+	-DPNP_IDS=\""$(PNP_IDS)"\"				\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED)					\
 	$(XLIB_CFLAGS)						\
@@ -47,8 +47,20 @@ test_ditem_LDADD = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-2.0.pc
 
+pnpdatadir = $(datadir)/libgnome-desktop
+if USE_INTERNAL_PNP_IDS
+pnpdata_DATA = pnp.ids
+endif
+
+check:
+	test -s $(top_srcdir)/libgnome-desktop/pnp.ids
+
 EXTRA_DIST = \
 	gnome-desktop-2.0.pc.in                \
-	gnome-desktop-2.0-uninstalled.pc.in
+	gnome-desktop-2.0-uninstalled.pc.in    \
+	pnp.ids
+
+MAINTAINERCLEANFILES = \
+	pnp.ids
 
 -include $(top_srcdir)/git.mk

@@ -81,6 +81,18 @@ if test "$enable_deprecations" = "no"; then
 	AC_SUBST([DISABLE_DEPRECATED])
 fi
 
+# Path to the pnp.ids file -- to know if we use one shipped with another
+# package, or an internal file
+
+AC_ARG_WITH(pnp-ids-path,
+              [AC_HELP_STRING([--with-pnp-ids-path],
+                              [Specify the path to pnp.ids @<:@default=(internal)@:>@])],,
+                              [with_pnp_ids_path="\${pnpdatadir}/pnp.ids"])
+
+AM_CONDITIONAL(USE_INTERNAL_PNP_IDS, test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids")
+PNP_IDS=$with_pnp_ids_path
+AC_SUBST(PNP_IDS)
+
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 

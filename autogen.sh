@@ -21,9 +21,13 @@ which gnome-autogen.sh || {
 
 if test "`which gvfs-copy`" != ""; then
 	gvfs-copy http://api.gnome.org/gnome-about/foundation-members gnome-about/foundation-members.list
+	gvfs-copy "http://git.fedorahosted.org/git/?p=hwdata.git;a=blob_plain;f=pnp.ids;hb=HEAD" libgnome-desktop/pnp.ids
 fi
 if test ! -f gnome-about/foundation-members.list; then
 	touch gnome-about/foundation-members.list
+fi
+if test ! -f libgnome-desktop/pnp.ids; then
+	touch libgnome-desktop/pnp.ids
 fi
 
 . gnome-autogen.sh
