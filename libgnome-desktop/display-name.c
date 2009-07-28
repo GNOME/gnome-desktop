@@ -41,6 +41,11 @@ struct Vendor
 /* This list of vendor codes derived from lshw
  * 
  * http://ezix.org/project/wiki/HardwareLiSter
+ *
+ * Note: we now prefer to use data coming from hwdata (and shipped with
+ * gnome-desktop). See
+ * http://git.fedorahosted.org/git/?p=hwdata.git;a=blob_plain;f=pnp.ids;hb=HEAD
+ * All contributions to the list of vendors should go there.
  */
 static const struct Vendor vendors[] = 
 {
@@ -182,15 +187,61 @@ static const struct Vendor vendors[] =
     { "???", "Unknown" },
 };
 
+static GHashTable *pnp_ids = NULL;
+
+#define PNP_IDS "/usr/share/hwdata/pnp.ids"
+
+static void
+read_pnp_ids (void)
+{
+    gchar *contents;
+    gchar **lines;
+    gchar *line;
+    gchar *code, *name;
+    gint i;
+
+    if (pnp_ids)
+        return;
+
+    pnp_ids = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+    if (g_file_get_contents (PNP_IDS, &contents, NULL, NULL))
+    {
+        lines = g_strsplit (contents, "\n", -1);
+        for (i = 0; lines[i]; i++)
+        {
+             line = lines[i];
+             if (line[3] == '\t')
+             {
+                 code = line;
+                 line[3] = '\0';
+                 name = line + 4;
+                 g_hash_table_insert (pnp_ids, code, name);
+             }
+        }
+        g_free (lines);
+        g_free (contents);
+    }
+}
+
+
 static const char *
 find_vendor (const char *code)
 {
+    const char *vendor_name;
     int i;
+
+    read_pnp_ids ();
+
+    vendor_name = g_hash_table_lookup (pnp_ids, code);
+
+    if (vendor_name)
+        return vendor_name;
 
     for (i = 0; i < sizeof (vendors) / sizeof (vendors[0]); ++i)
     {
 	const Vendor *v = &(vendors[i]);
-	
+
 	if (strcmp (v->vendor_id, code) == 0)
 	    return v->vendor_name;
     }
