@@ -47,8 +47,9 @@ test_ditem_LDADD = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-2.0.pc
 
-pnpdatadir = $(datadir)/libgnome-desktop
+pnpdata_DATA_dist = pnp.ids
 if USE_INTERNAL_PNP_IDS
+pnpdatadir = $(datadir)/libgnome-desktop
 pnpdata_DATA = pnp.ids
 endif
 
@@ -58,7 +59,7 @@ check:
 EXTRA_DIST = \
 	gnome-desktop-2.0.pc.in                \
 	gnome-desktop-2.0-uninstalled.pc.in    \
-	pnp.ids
+	$(pnpdata_DATA_dist)
 
 MAINTAINERCLEANFILES = \
 	pnp.ids
