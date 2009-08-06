@@ -181,6 +181,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	GtkWidget *window;
 	GtkWidget *widget;
 	char *str;
+	const char *display_name;
 	GdkColor black = { 0, 0, 0, 0 };
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
@@ -197,7 +198,19 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	g_signal_connect (window, "expose-event",
 			  G_CALLBACK (label_window_expose_event_cb), labeler);
 
-	str = g_strdup_printf ("<b>%s</b>", output->display_name);
+	if (labeler->config->clone) {
+		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
+
+		/* Translators:  this is the feature where what you see on your laptop's
+		 * screen is the same as your external monitor.  Here, "Mirror" is being
+		 * used as an adjective, not as a verb.  For example, the Spanish
+		 * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+		 */
+		display_name = _("Mirror Screens");
+	} else
+		display_name = output->display_name;
+
+	str = g_strdup_printf ("<b>%s</b>", display_name);
 	widget = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
@@ -222,14 +235,18 @@ static void
 create_label_windows (GnomeRRLabeler *labeler)
 {
 	int i;
-
-	/* FIXME: this doesn't handle cloned outputs yet */
+	gboolean created_window_for_clone;
 
 	labeler->windows = g_new (GtkWidget *, labeler->num_outputs);
 
+	created_window_for_clone = FALSE;
+
 	for (i = 0; i < labeler->num_outputs; i++) {
-		if (labeler->config->outputs[i]->on) {
+		if (!created_window_for_clone && labeler->config->outputs[i]->on) {
 			labeler->windows[i] = create_label_window (labeler, labeler->config->outputs[i], labeler->palette + i);
+
+			if (labeler->config->clone)
+				created_window_for_clone = TRUE;
 		} else
 			labeler->windows[i] = NULL;
 	}
