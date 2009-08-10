@@ -1181,6 +1181,7 @@ gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
     return config;
 }
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 gboolean
 gnome_rr_config_apply (GnomeRRConfig *config,
 		       GnomeRRScreen *screen,
@@ -1188,6 +1189,7 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 {
     return gnome_rr_config_apply_with_time (config, screen, GDK_CURRENT_TIME, error);
 }
+#endif
 
 gboolean
 gnome_rr_config_apply_with_time (GnomeRRConfig *config,
@@ -1218,6 +1220,7 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
     return result;
 }
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 /**
  * gnome_rr_config_apply_stored:
  * @screen: A #GnomeRRScreen
@@ -1242,7 +1245,9 @@ gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
 
     return result;
 }
+#endif
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 /* gnome_rr_config_apply_from_filename:
  * @screen: A #GnomeRRScreen
  * @filename: Path of the file to look in for stored RANDR configurations.
@@ -1281,6 +1286,7 @@ gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename
 {
     return gnome_rr_config_apply_from_filename_with_time (screen, filename, GDK_CURRENT_TIME, error);
 }
+#endif
 
 /* gnome_rr_config_apply_from_filename_with_time:
  * @screen: A #GnomeRRScreen
