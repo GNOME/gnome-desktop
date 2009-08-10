@@ -222,8 +222,51 @@ make_palette (GnomeRRLabeler *labeler)
 	}
 }
 
+static void
+rounded_rectangle (cairo_t *cr,
+                   gint     x,
+                   gint     y,
+                   gint     width,
+                   gint     height,
+                   gint     x_radius,
+                   gint     y_radius)
+{
+	gint x1, x2;
+	gint y1, y2;
+	gint xr1, xr2;
+	gint yr1, yr2;
+
+	x1 = x;
+	x2 = x1 + width;
+	y1 = y;
+	y2 = y1 + height;
+
+	x_radius = MIN (x_radius, width / 2.0);
+	y_radius = MIN (y_radius, width / 2.0);
+
+	xr1 = x_radius;
+	xr2 = x_radius / 2.0;
+	yr1 = y_radius;
+	yr2 = y_radius / 2.0;
+
+	cairo_move_to    (cr, x1 + xr1, y1);
+	cairo_line_to    (cr, x2 - xr1, y1);
+	cairo_curve_to   (cr, x2 - xr2, y1, x2, y1 + yr2, x2, y1 + yr1);
+	cairo_line_to    (cr, x2, y2 - yr1);
+	cairo_curve_to   (cr, x2, y2 - yr2, x2 - xr2, y2, x2 - xr1, y2);
+	cairo_line_to    (cr, x1 + xr1, y2);
+	cairo_curve_to   (cr, x1 + xr2, y2, x1, y2 - yr2, x1, y2 - yr1);
+	cairo_line_to    (cr, x1, y1 + yr1);
+	cairo_curve_to   (cr, x1, y1 + yr2, x1 + xr2, y1, x1 + xr1, y1);
+	cairo_close_path (cr);
+}
+
 #define LABEL_WINDOW_EDGE_THICKNESS 2
 #define LABEL_WINDOW_PADDING 12
+/* Look for panel-corner in:
+ * http://git.gnome.org/browse/gnome-shell/tree/data/theme/gnome-shell.css
+ * to match the corner radius */
+#define LABEL_CORNER_RADIUS 6 + LABEL_WINDOW_EDGE_THICKNESS
 
 static gboolean
 label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
@@ -238,22 +281,24 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 
 	/* edge outline */
 	cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
-	cairo_rectangle (cr,
-			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
-			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
-			 allocation.width - LABEL_WINDOW_EDGE_THICKNESS,
-			 allocation.height - LABEL_WINDOW_EDGE_THICKNESS);
+	rounded_rectangle (cr,
+	                   LABEL_WINDOW_EDGE_THICKNESS / 2.0,
+	                   LABEL_WINDOW_EDGE_THICKNESS / 2.0,
+	                   allocation.width - LABEL_WINDOW_EDGE_THICKNESS,
+	                   allocation.height - LABEL_WINDOW_EDGE_THICKNESS,
+	                   LABEL_CORNER_RADIUS, LABEL_CORNER_RADIUS);
 	cairo_set_line_width (cr, LABEL_WINDOW_EDGE_THICKNESS);
 	cairo_stroke (cr);
 
 	/* fill */
 	rgba->alpha = 0.75;
 	gdk_cairo_set_source_rgba (cr, rgba);
-	cairo_rectangle (cr,
-			 LABEL_WINDOW_EDGE_THICKNESS,
-			 LABEL_WINDOW_EDGE_THICKNESS,
-			 allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
-			 allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2);
+	rounded_rectangle (cr,
+	                   LABEL_WINDOW_EDGE_THICKNESS,
+	                   LABEL_WINDOW_EDGE_THICKNESS,
+	                   allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
+	                   allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2,
+	                   LABEL_CORNER_RADIUS, LABEL_CORNER_RADIUS);
 	cairo_fill (cr);
 
 	return FALSE;
