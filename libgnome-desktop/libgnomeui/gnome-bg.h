@@ -105,7 +105,12 @@ GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
 gboolean         gnome_bg_is_dark               (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_time     (GnomeBG               *bg);
-
+GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
+						 GnomeDesktopThumbnailFactory *factory,
+						 GdkScreen             *screen,
+						 int                    dest_width,
+						 int                    dest_height,
+                                                 int                    frame_num);
 
 /* Set a pixmap as root - not a GnomeBG method. At some point
  * if we decide to stabilize the API then we may want to make

@@ -177,7 +177,8 @@ static GdkPixbuf *create_img_thumbnail (GnomeBG               *bg,
 					GnomeDesktopThumbnailFactory *factory,
 					GdkScreen             *screen,
 					int                    dest_width,
-					int                    dest_height);
+					int                    dest_height,
+					int		       frame_num);
 static SlideShow * get_as_slideshow    (GnomeBG               *bg,
 					const char 	      *filename);
 static Slide *     get_current_slide   (SlideShow 	      *show,
@@ -1055,7 +1056,7 @@ fit_factor (int from_width, int from_height,
 
 GdkPixbuf *
 gnome_bg_create_thumbnail (GnomeBG               *bg,
-			   GnomeDesktopThumbnailFactory *factory,
+		           GnomeDesktopThumbnailFactory *factory,
 			   GdkScreen             *screen,
 			   int                    dest_width,
 			   int                    dest_height)
@@ -1069,7 +1070,7 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	
 	draw_color (bg, result);
 	
-	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height);
+	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
 	
 	if (thumb) {
 		draw_image (bg->placement, thumb, result);
@@ -1747,12 +1748,16 @@ scale_thumbnail (GnomeBGPlacement placement,
 	return thumb;
 }
 
+/* frame_num determines which slide to thumbnail.
+ * -1 means 'current slide'.
+ */
 static GdkPixbuf *
-create_img_thumbnail (GnomeBG               *bg,
+create_img_thumbnail (GnomeBG                      *bg,
 		      GnomeDesktopThumbnailFactory *factory,
-		      GdkScreen             *screen,
-		      int                    dest_width,
-		      int                    dest_height)
+		      GdkScreen                    *screen,
+		      int                           dest_width,
+		      int                           dest_height,
+		      int                           frame_num)
 {
 	if (bg->filename) {
 		GdkPixbuf *thumb = get_as_thumbnail (bg, factory, bg->filename);
@@ -1771,7 +1776,10 @@ create_img_thumbnail (GnomeBG               *bg,
 
 				slideshow_ref (show);
 
-				slide = get_current_slide (show, &alpha);
+				if (frame_num == -1)
+					slide = get_current_slide (show, &alpha);
+				else
+					slide = g_queue_peek_nth (show->slides, frame_num);
 
 				if (slide->fixed) {
 					GdkPixbuf *tmp;
@@ -2636,6 +2644,9 @@ slideshow_changes_with_size (SlideShow *show)
 	return show->changes_with_size;
 }
 
+/*
+ * Returns whether the background is a slideshow.
+ */
 gboolean
 gnome_bg_changes_with_time (GnomeBG *bg)
 {
@@ -2648,5 +2659,68 @@ gnome_bg_changes_with_time (GnomeBG *bg)
 		return g_queue_get_length (show->slides) > 1;
 
 	return FALSE;
+}
+
+/* Creates a thumbnail for a certain frame, where 'frame' is somewhat
+ * vaguely defined as 'suitable point to show while single-stepping
+ * through the slideshow'. Returns NULL if frame_num is out of bounds.
+ */
+GdkPixbuf *
+gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
+				 GnomeDesktopThumbnailFactory	*factory,
+				 GdkScreen			*screen,
+				 int				 dest_width,
+				 int				 dest_height,
+				 int				 frame_num)
+{
+	SlideShow *show;
+	GdkPixbuf *result;
+	GdkPixbuf *thumb;
+        GList *l;
+        int i, skipped;
+        gboolean found;
+
+	g_return_val_if_fail (bg != NULL, FALSE);
+
+	show = get_as_slideshow (bg, bg->filename);
+
+	if (!show)
+		return NULL;
+
+
+	if (frame_num < 0 || frame_num >= g_queue_get_length (show->slides))
+		return NULL;
+
+	i = 0;
+	skipped = 0;
+	found = FALSE;
+	for (l = show->slides->head; l; l = l->next) {
+		Slide *slide = l->data;
+		if (!slide->fixed) {
+			skipped++;
+			continue;
+		}
+		if (i == frame_num) {
+			found = TRUE;
+			break;
+		}
+		i++;
+	}
+	if (!found)
+		return NULL;
+
+
+	result = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, dest_width, dest_height);
+
+	draw_color (bg, result);
+
+	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
+
+	if (thumb) {
+		draw_image (bg->placement, thumb, result);
+		g_object_unref (thumb);
+	}
+
+	return result;
 }
 
