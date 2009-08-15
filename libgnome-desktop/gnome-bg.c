@@ -2636,3 +2636,17 @@ slideshow_changes_with_size (SlideShow *show)
 	return show->changes_with_size;
 }
 
+gboolean
+gnome_bg_changes_with_time (GnomeBG *bg)
+{
+	SlideShow *show;
+
+	g_return_val_if_fail (bg != NULL, FALSE);
+
+	show = get_as_slideshow (bg, bg->filename);
+	if (show)
+		return g_queue_get_length (show->slides) > 1;
+
+	return FALSE;
+}
+

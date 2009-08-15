@@ -104,6 +104,7 @@ GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
 						 int                    dest_height);
 gboolean         gnome_bg_is_dark               (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
+gboolean         gnome_bg_changes_with_time     (GnomeBG               *bg);
 
 
 /* Set a pixmap as root - not a GnomeBG method. At some point
