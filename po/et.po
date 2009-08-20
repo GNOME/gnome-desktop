@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&amp;component=general\n"
-"POT-Creation-Date: 2008-12-09 18:19+0000\n"
-"PO-Revision-Date: 2009-06-09 18:02+0300\n"
+"desktop&component=general\n"
+"POT-Creation-Date: 2009-08-19 19:24+0000\n"
+"PO-Revision-Date: 2009-08-20 10:49+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -194,16 +194,16 @@ msgstr ""
 "pruugi töötada"
 
 #, c-format
-msgid "could not get the range of screen sizes"
-msgstr "ekraanisuuruste vahemikku pole võimalik hankida"
+msgid "could not get the screen resources (CRTCs, outputs, modes)"
+msgstr "ekraani ressursse (CRTC-d, väljundeid, režiime) pole võimalik hankida"
 
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "X-serveri käsitlematu viga ekraanisuuruste vahemiku hankimisel"
 
 #, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr "ekraani ressursse (CRTC-d, väljundeid, režiime) pole võimalik hankida"
+msgid "could not get the range of screen sizes"
+msgstr "ekraanisuuruste vahemikku pole võimalik hankida"
 
 #, c-format
 msgid "RANDR extension is not present"
@@ -213,6 +213,9 @@ msgstr "RANRD-laiendus pole saadaval"
 msgid "could not get information about output %d"
 msgstr "väljundi %d kohta pole võimalik teavet hankida"
 
+#. Translators: the "position", "size", and "maximum"
+#. * words here are not keywords; please translate them
+#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -234,6 +237,9 @@ msgid ""
 "none of the saved display configurations matched the active configuration"
 msgstr "salvestatud kuvasätete hulgast ei sobi aktiivsete sätetega mitte ükski"
 
+#. Translators: the "requested", "minimum", and
+#. * "maximum" words here are not keywords; please
+#. * translate them as usual.
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -245,3 +251,12 @@ msgstr ""
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "ekraanidele pole võimalik sobivaid sätteid leida"
+
+#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
+#. Translators:  this is the feature where what you see on your laptop's
+#. * screen is the same as your external monitor.  Here, "Mirror" is being
+#. * used as an adjective, not as a verb.  For example, the Spanish
+#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#.
+msgid "Mirror Screens"
+msgstr "Ekraanid on peegeldatud"
