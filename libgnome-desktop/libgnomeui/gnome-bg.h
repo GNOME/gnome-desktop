@@ -110,7 +110,7 @@ GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
 						 GdkScreen             *screen,
 						 int                    dest_width,
 						 int                    dest_height,
-                                                 int                    frame_num);
+						 int                    frame_num);
 
 /* Set a pixmap as root - not a GnomeBG method. At some point
  * if we decide to stabilize the API then we may want to make
