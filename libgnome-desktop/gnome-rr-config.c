@@ -1666,14 +1666,18 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **
     {
 	int width, height;
 	int min_width, max_width, min_height, max_height;
+	int required_pixels, min_pixels, max_pixels;
 
 	get_required_virtual_size (assignment, &width, &height);
 
 	gnome_rr_screen_get_ranges (
 	    screen, &min_width, &max_width, &min_height, &max_height);
-    
-	if (width < min_width || width > max_width ||
-	    height < min_height || height > max_height)
+
+	required_pixels = width * height;
+	min_pixels = min_width * min_height;
+	max_pixels = max_width * max_height;
+
+	if (required_pixels < min_pixels || required_pixels > max_pixels)
 	{
 	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_BOUNDS_ERROR,
 			 /* Translators: the "requested", "minimum", and
