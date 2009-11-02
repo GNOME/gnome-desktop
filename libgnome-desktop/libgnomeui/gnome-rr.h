@@ -160,4 +160,14 @@ GnomeRRRotation gnome_rr_crtc_get_rotations        (GnomeRRCrtc           *crtc)
 gboolean        gnome_rr_crtc_supports_rotation    (GnomeRRCrtc           *crtc,
 						    GnomeRRRotation        rotation);
 
+gboolean        gnome_rr_crtc_get_gamma            (GnomeRRCrtc           *crtc,
+						    int                   *size,
+						    unsigned short       **red,
+						    unsigned short       **green,
+						    unsigned short       **blue);
+void            gnome_rr_crtc_set_gamma            (GnomeRRCrtc           *crtc,
+						    int                    size,
+						    unsigned short        *red,
+						    unsigned short        *green,
+						    unsigned short        *blue);
 #endif

@@ -74,6 +74,7 @@ struct GnomeRRCrtc
     
     GnomeRRRotation	current_rotation;
     GnomeRRRotation	rotations;
+    int			gamma_size;
 };
 
 struct GnomeRRMode
@@ -1447,6 +1448,9 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     
     XRRFreeCrtcInfo (info);
 
+    /* get an store gamma size */
+    crtc->gamma_size = XRRGetCrtcGammaSize (DISPLAY (crtc), crtc->id);
+
     return TRUE;
 }
 
@@ -1516,3 +1520,75 @@ mode_free (GnomeRRMode *mode)
     g_free (mode->name);
     g_free (mode);
 }
+
+void
+gnome_rr_crtc_set_gamma (GnomeRRCrtc *crtc, int size,
+			 unsigned short *red,
+			 unsigned short *green,
+			 unsigned short *blue)
+{
+    int copy_size;
+    XRRCrtcGamma *gamma;
+
+    g_return_if_fail (crtc != NULL);
+    g_return_if_fail (red != NULL);
+    g_return_if_fail (green != NULL);
+    g_return_if_fail (blue != NULL);
+
+    if (size != crtc->gamma_size)
+	return;
+
+    gamma = XRRAllocGamma (crtc->gamma_size);
+
+    copy_size = crtc->gamma_size * sizeof (unsigned short);
+    memcpy (gamma->red, red, copy_size);
+    memcpy (gamma->green, green, copy_size);
+    memcpy (gamma->blue, blue, copy_size);
+
+    XRRSetCrtcGamma (DISPLAY (crtc), crtc->id, gamma);
+    XRRFreeGamma (gamma);
+}
+
+gboolean
+gnome_rr_crtc_get_gamma (GnomeRRCrtc *crtc, int *size,
+			 unsigned short **red, unsigned short **green,
+			 unsigned short **blue)
+{
+    int copy_size;
+    unsigned short *r, *g, *b;
+    XRRCrtcGamma *gamma;
+
+    g_return_val_if_fail (crtc != NULL, FALSE);
+
+    gamma = XRRGetCrtcGamma (DISPLAY (crtc), crtc->id);
+    if (!gamma)
+	return FALSE;
+
+    copy_size = crtc->gamma_size * sizeof (unsigned short);
+
+    if (red) {
+	r = g_new0 (unsigned short, crtc->gamma_size);
+	memcpy (r, gamma->red, copy_size);
+	*red = r;
+    }
+
+    if (green) {
+	g = g_new0 (unsigned short, crtc->gamma_size);
+	memcpy (g, gamma->green, copy_size);
+	*green = g;
+    }
+
+    if (blue) {
+	b = g_new0 (unsigned short, crtc->gamma_size);
+	memcpy (b, gamma->blue, copy_size);
+	*blue = b;
+    }
+
+    XRRFreeGamma (gamma);
+
+    if (size)
+	*size = crtc->gamma_size;
+
+    return TRUE;
+}
+
