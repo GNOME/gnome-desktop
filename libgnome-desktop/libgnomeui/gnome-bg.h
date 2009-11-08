@@ -87,7 +87,8 @@ const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 
 /* Drawing and thumbnailing */
 void             gnome_bg_draw                  (GnomeBG               *bg,
-						 GdkPixbuf             *dest);
+						 GdkPixbuf             *dest,
+						 GdkScreen	       *screen);
 GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
 						 GdkWindow             *window,
 						 int                    width,
@@ -95,6 +96,8 @@ GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
 						 gboolean               root);
 gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
 						 GnomeDesktopThumbnailFactory *factory,
+                                                 int                    best_width,
+                                                 int                    best_height,
 						 int                   *width,
 						 int                   *height);
 GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
@@ -102,8 +105,10 @@ GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
 						 GdkScreen             *screen,
 						 int                    dest_width,
 						 int                    dest_height);
-gboolean         gnome_bg_is_dark               (GnomeBG               *bg);
-gboolean         gnome_bg_changes_with_size     (GnomeBG               *bg);
+gboolean         gnome_bg_is_dark               (GnomeBG               *bg,
+                                                 int                    dest_width,
+						 int                    dest_height);
+gboolean         gnome_bg_has_multiple_sizes    (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_time     (GnomeBG               *bg);
 GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
 						 GnomeDesktopThumbnailFactory *factory,
