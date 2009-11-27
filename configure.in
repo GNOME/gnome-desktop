@@ -1,4 +1,14 @@
-AC_INIT([gnome-desktop], [2.29.3],
+m4_define(gnome_platform, 2)
+m4_define(gnome_minor, 29)
+m4_define(gnome_micro, 3)
+dnl gnome_sub is an optional sub-version which will not be advertised to the user
+dnl It allows to release a 2.30.1.1 which is just a better 2.30.1
+dnl Leave empty if not needed
+m4_define(gnome_sub, )
+
+m4_define(gnome_version, [gnome_platform.gnome_minor.gnome_micro]m4_ifval(gnome_sub, .gnome_sub)),
+
+AC_INIT([gnome-desktop], gnome_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop])
 AC_CONFIG_SRCDIR([libgnome-desktop])
 
@@ -34,9 +44,9 @@ AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 
-GNOME_PLATFORM=2
-GNOME_MINOR=29
-GNOME_MICRO=2
+GNOME_PLATFORM=gnome_platform
+GNOME_MINOR=gnome_minor
+GNOME_MICRO=gnome_micro
 GNOME_DISTRIBUTOR="GNOME.Org"
 GNOME_DATE=`date +"%Y-%m-%d"`
 
