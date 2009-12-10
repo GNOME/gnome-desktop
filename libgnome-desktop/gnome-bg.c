@@ -1843,10 +1843,10 @@ create_img_thumbnail (GnomeBG                      *bg,
 					FileSize *fs;
 					fs = find_best_size (slide->file1, dest_width, dest_height);
 					tmp = get_as_thumbnail (bg, factory, fs->file);
-
-					thumb = scale_thumbnail (
-						bg->placement, fs->file,
-						tmp, screen, dest_width, dest_height);
+					if (tmp)
+						thumb = scale_thumbnail (
+									 bg->placement, fs->file,
+									 tmp, screen, dest_width, dest_height);
 				}
 				else {
 					FileSize *fs1, *fs2;
