@@ -144,10 +144,11 @@ static GdkPixbuf *pixbuf_scale_to_fit  (GdkPixbuf  *src,
 static GdkPixbuf *pixbuf_scale_to_min  (GdkPixbuf  *src,
 					int         min_width,
 					int         min_height);
-static void       pixbuf_draw_gradient (GdkPixbuf  *pixbuf,
-					gboolean    horizontal,
-					GdkColor   *c1,
-					GdkColor   *c2);
+static void       pixbuf_draw_gradient (GdkPixbuf    *pixbuf,
+					gboolean      horizontal,
+					GdkColor     *c1,
+					GdkColor     *c2,
+					GdkRectangle *rect);
 static void       pixbuf_tile          (GdkPixbuf  *src,
 					GdkPixbuf  *dest);
 static void       pixbuf_blend         (GdkPixbuf  *src,
@@ -619,13 +620,15 @@ gnome_bg_set_filename (GnomeBG     *bg,
 }
 
 static void
-draw_color (GnomeBG *bg, GdkPixbuf *dest)
+draw_color_area (GnomeBG *bg,
+		 GdkPixbuf *dest,
+		 GdkRectangle *rect)
 {
 	guint32 pixel;
 	
-	switch (bg->color_type)
-	{
+	switch (bg->color_type) {
 	case GNOME_BG_COLOR_SOLID:
+		/* not really a big deal to ignore the area of interest */
 		pixel = ((bg->primary.red >> 8) << 24)      |
 			((bg->primary.green >> 8) << 16)    |
 			((bg->primary.blue >> 8) << 8)      |
@@ -635,11 +638,11 @@ draw_color (GnomeBG *bg, GdkPixbuf *dest)
 		break;
 		
 	case GNOME_BG_COLOR_H_GRADIENT:
-		pixbuf_draw_gradient (dest, TRUE, &(bg->primary), &(bg->secondary));
+		pixbuf_draw_gradient (dest, TRUE, &(bg->primary), &(bg->secondary), rect);
 		break;
 		
 	case GNOME_BG_COLOR_V_GRADIENT:
-		pixbuf_draw_gradient (dest, FALSE, &(bg->primary), &(bg->secondary));
+		pixbuf_draw_gradient (dest, FALSE, &(bg->primary), &(bg->secondary), rect);
 		break;
 		
 	default:
@@ -647,14 +650,77 @@ draw_color (GnomeBG *bg, GdkPixbuf *dest)
 	}
 }
 
+static void
+draw_color (GnomeBG *bg,
+	    GdkPixbuf *dest,
+	    GdkScreen *screen)
+{
+	GdkRectangle rect;
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = gdk_pixbuf_get_width (dest);
+	rect.height = gdk_pixbuf_get_height (dest);
+	draw_color_area (bg, dest, &rect);
+}
+
+static void
+draw_color_each_monitor (GnomeBG *bg,
+			 GdkPixbuf *dest,
+			 GdkScreen *screen)
+{
+	GdkRectangle rect;
+	gint num_monitors;
+	int monitor;
+
+	num_monitors = gdk_screen_get_n_monitors (screen);
+	for (monitor = 0; monitor < num_monitors; monitor++) {
+		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+		draw_color_area (bg, dest, &rect);
+	}
+}
+
+static GdkPixbuf *
+pixbuf_clip_to_fit (GdkPixbuf *src,
+		    int        max_width,
+		    int        max_height)
+{
+	int src_width, src_height;
+	int w, h;
+	int src_x, src_y;
+	GdkPixbuf *pixbuf;
+
+	src_width = gdk_pixbuf_get_width (src);
+	src_height = gdk_pixbuf_get_height (src);
+
+	if (src_width < max_width && src_height < max_height)
+		return g_object_ref (src);
+
+	w = MIN(src_width, max_width);
+	h = MIN(src_height, max_height);
+
+	pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
+				 gdk_pixbuf_get_has_alpha (src),
+				 8, w, h);
+
+	src_x = (src_width - w) / 2;
+	src_y = (src_height - h) / 2;
+	gdk_pixbuf_copy_area (src,
+			      src_x, src_y,
+			      w, h,
+			      pixbuf,
+			      0, 0);
+	return pixbuf;
+}
+
 static GdkPixbuf *
 get_scaled_pixbuf (GnomeBGPlacement placement,
 		   GdkPixbuf *pixbuf,
 		   int width, int height,
-		   int *x, int *y, int *w, int *h)
+		   int *x, int *y,
+		   int *w, int *h)
 {
 	GdkPixbuf *new;
-	
+
 #if 0
 	g_print ("original_width: %d %d\n",
 		 gdk_pixbuf_get_width (pixbuf),
@@ -678,7 +744,7 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 	case GNOME_BG_PLACEMENT_CENTERED:
 	case GNOME_BG_PLACEMENT_TILED:
 	default:
-		new = g_object_ref (pixbuf);
+		new = pixbuf_clip_to_fit (pixbuf, width, height);
 		break;
 	}
 	
@@ -703,9 +769,8 @@ draw_image_area (GnomeBGPlacement  placement,
 	
 	if (!pixbuf)
 		return;
-	
-	scaled = get_scaled_pixbuf (
-		placement, pixbuf, dest_width, dest_height, &x, &y, &w, &h);
+
+	scaled = get_scaled_pixbuf (placement, pixbuf, dest_width, dest_height, &x, &y, &w, &h);
 
 	switch (placement) {
 	case GNOME_BG_PLACEMENT_TILED:
@@ -741,44 +806,57 @@ draw_image (GnomeBGPlacement  placement,
 }
 
 static void
+draw_once (GnomeBG   *bg,
+	   GdkPixbuf *dest,
+	   GdkScreen *screen)
+{
+	GdkRectangle rect;
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = gdk_pixbuf_get_width (dest);
+	rect.height = gdk_pixbuf_get_height (dest);
+
+	draw_image_area (bg->placement,
+			 get_pixbuf_for_size (bg, gdk_pixbuf_get_width (dest), gdk_pixbuf_get_height (dest)),
+			 dest,
+			 &rect);
+}
+
+static void
 draw_each_monitor (GnomeBG   *bg,
 		   GdkPixbuf *dest,
 		   GdkScreen *screen)
 {
 	GdkRectangle rect;
+	gint num_monitors;
+	int monitor;
 
-	if (bg->placement == GNOME_BG_PLACEMENT_TILED) {
-		GdkScreen *screen;
-
-		/* don't worry about aligning on every monitor */
-		screen = gdk_screen_get_default ();
-		gdk_screen_get_monitor_geometry (screen, 0, &rect);
-		draw_image (bg->placement,
-			    get_pixbuf_for_size (bg, rect.width, rect.height),
-			    dest);
-	} else {
-		gint num_monitors;
-		int monitor;
-
-		num_monitors = gdk_screen_get_n_monitors (screen);
-		for (monitor = 0; monitor < num_monitors; monitor++) {
-			gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-			draw_image_area (bg->placement,
-					 get_pixbuf_for_size (bg, rect.width, rect.height),
-					 dest, &rect);
-		}
+	num_monitors = gdk_screen_get_n_monitors (screen);
+	for (monitor = 0; monitor < num_monitors; monitor++) {
+		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+		draw_image_area (bg->placement,
+				 get_pixbuf_for_size (bg, rect.width, rect.height),
+				 dest, &rect);
 	}
 }
 
 void
-gnome_bg_draw (GnomeBG *bg, GdkPixbuf *dest, GdkScreen *screen)
+gnome_bg_draw (GnomeBG *bg,
+	       GdkPixbuf *dest,
+	       GdkScreen *screen,
+	       gboolean is_root)
 {
 	if (!bg)
 		return;
-	
-	draw_color (bg, dest);
-	
-	draw_each_monitor (bg, dest, screen);
+
+	if (is_root) {
+		draw_color_each_monitor (bg, dest, screen);
+		draw_each_monitor (bg, dest, screen);
+	} else {
+		draw_color (bg, dest, screen);
+		draw_once (bg, dest, screen);
+	}
 }
 
 gboolean
@@ -803,7 +881,6 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
 			  int       *pixmap_height)
 {
 	int dummy;
-	int pb_width, pb_height;
 	
 	if (!pixmap_width)
 		pixmap_width = &dummy;
@@ -821,45 +898,11 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
 			break;
 			
 		case GNOME_BG_COLOR_H_GRADIENT:
-			*pixmap_width = width;
-			*pixmap_height = GRADIENT_PIXMAP_TILE_SIZE;
-			break;
-			
 		case GNOME_BG_COLOR_V_GRADIENT:
-			*pixmap_width = GRADIENT_PIXMAP_TILE_SIZE;
-			*pixmap_height = height;
 			break;
 		}
 		
 		return;
-	}
-	
-	if (bg->placement == GNOME_BG_PLACEMENT_TILED) {
-		GdkPixbuf *pixbuf;
-		pixbuf = get_pixbuf_for_size (bg, width, height);
-		pb_width = gdk_pixbuf_get_width (pixbuf);
-		pb_height = gdk_pixbuf_get_height (pixbuf);
-	
-		if (gdk_pixbuf_get_has_alpha (pixbuf) &&
-		    bg->color_type != GNOME_BG_COLOR_SOLID) {
-			if (bg->color_type == GNOME_BG_COLOR_H_GRADIENT) {
-				/* FIXME: Should this be
-				 * MAX (GRADIENT_TILE_SIZE, pb_height)?
-				 */
-				*pixmap_height = pb_height; 
-				*pixmap_width = width;
-			}
-			else {
-				/* FIXME: Should this be
-				 * MAX (GRAIDENT_TILE_SIZE, pb_width? */
-				*pixmap_width = pb_width;
-				*pixmap_height = height;
-			}
-		}
-		else {
-			*pixmap_width = pb_width;
-			*pixmap_height = pb_height;
-		}
 	}
 }
 
@@ -882,7 +925,7 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 			GdkWindow   *window,
 			int	     width,
 			int	     height,
-			gboolean     root)
+			gboolean     is_root)
 {
 	int pm_width, pm_height;
 	GdkPixmap *pixmap;
@@ -903,7 +946,7 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 	/* has the side effect of loading and caching pixbuf only when in tile mode */
 	gnome_bg_get_pixmap_size (bg, width, height, &pm_width, &pm_height);
 	
-	if (root) {
+	if (is_root) {
 		pixmap = make_root_pixmap (gdk_drawable_get_screen (window),
 					   pm_width, pm_height);
 	}
@@ -924,7 +967,7 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 		
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 width, height);
-		gnome_bg_draw (bg, pixbuf, gdk_drawable_get_screen (GDK_DRAWABLE (window)));
+		gnome_bg_draw (bg, pixbuf, gdk_drawable_get_screen (GDK_DRAWABLE (window)), is_root);
 		gdk_draw_pixbuf (pixmap, NULL, pixbuf,
 				 0, 0,
 				 0, 0, width, height,
@@ -1121,7 +1164,7 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	
 	result = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, dest_width, dest_height);
 	
-	draw_color (bg, result);
+	draw_color (bg, result, screen);
 	
 	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
 	
@@ -1820,9 +1863,8 @@ create_img_thumbnail (GnomeBG                      *bg,
 		GdkPixbuf *thumb = get_as_thumbnail (bg, factory, bg->filename);
 
 		if (thumb) {
-			return scale_thumbnail (
-				bg->placement, bg->filename,
-				thumb, screen, dest_width, dest_height);
+			return scale_thumbnail (bg->placement, bg->filename,
+						thumb, screen, dest_width, dest_height);
 		}
 		else {
 			SlideShow *show = get_as_slideshow (bg, bg->filename);
@@ -1844,8 +1886,7 @@ create_img_thumbnail (GnomeBG                      *bg,
 					fs = find_best_size (slide->file1, dest_width, dest_height);
 					tmp = get_as_thumbnail (bg, factory, fs->file);
 					if (tmp)
-						thumb = scale_thumbnail (
-									 bg->placement, fs->file,
+						thumb = scale_thumbnail (bg->placement, fs->file,
 									 tmp, screen, dest_width, dest_height);
 				}
 				else {
@@ -1860,13 +1901,11 @@ create_img_thumbnail (GnomeBG                      *bg,
 					if (p1 && p2) {
 						GdkPixbuf *thumb1, *thumb2;
 
-						thumb1 = scale_thumbnail (
-							bg->placement, fs1->file,
-							p1, screen, dest_width, dest_height);
+						thumb1 = scale_thumbnail (bg->placement, fs1->file,
+									  p1, screen, dest_width, dest_height);
 
-						thumb2 = scale_thumbnail (
-							bg->placement, fs2->file,
-							p2, screen, dest_width, dest_height);
+						thumb2 = scale_thumbnail (bg->placement, fs2->file,
+									  p2, screen, dest_width, dest_height);
 
 						thumb = blend (thumb1, thumb2, alpha);
 
@@ -2145,22 +2184,38 @@ pixbuf_scale_to_min (GdkPixbuf *src, int min_width, int min_height)
 	double factor;
 	int src_width, src_height;
 	int new_width, new_height;
-	
+	GdkPixbuf *dest;
+
 	src_width = gdk_pixbuf_get_width (src);
 	src_height = gdk_pixbuf_get_height (src);
-	
+
 	factor = MAX (min_width / (double) src_width, min_height / (double) src_height);
-	
+
 	new_width = floor (src_width * factor + 0.5);
 	new_height = floor (src_height * factor + 0.5);
-	
-	return gdk_pixbuf_scale_simple (src, new_width, new_height, GDK_INTERP_BILINEAR);
+
+	dest = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
+			       gdk_pixbuf_get_has_alpha (src),
+			       8, min_width, min_height);
+	if (!dest)
+		return NULL;
+
+	/* crop the result */
+	gdk_pixbuf_scale (src, dest,
+			  0, 0,
+			  min_width, min_height,
+			  (new_width - min_width) / -2,
+			  (new_height - min_height) / -2,
+			  factor,
+			  factor,
+			  GDK_INTERP_BILINEAR);
+	return dest;
 }
 
 static guchar *
 create_gradient (const GdkColor *primary,
 		 const GdkColor *secondary,
-		 int	          n_pixels)
+		 int	         n_pixels)
 {
 	guchar *result = g_malloc (n_pixels * 3);
 	int i;
@@ -2177,43 +2232,56 @@ create_gradient (const GdkColor *primary,
 }	
 
 static void
-pixbuf_draw_gradient (GdkPixbuf *pixbuf,
-		      gboolean   horizontal,
-		      GdkColor  *primary,
-		      GdkColor  *secondary)
+pixbuf_draw_gradient (GdkPixbuf    *pixbuf,
+		      gboolean      horizontal,
+		      GdkColor     *primary,
+		      GdkColor     *secondary,
+		      GdkRectangle *rect)
 {
-	int width  = gdk_pixbuf_get_width (pixbuf);
-	int height = gdk_pixbuf_get_height (pixbuf);
-	int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-	guchar *dst = gdk_pixbuf_get_pixels (pixbuf);
-	guchar *dst_limit = dst + height * rowstride;
-	
+	int width;
+	int height;
+	int rowstride;
+	guchar *dst;
+	guchar *dst_limit;
+	int n_channels = 3;
+
+	rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+	width = rect->width;
+	height = rect->height;
+	dst = gdk_pixbuf_get_pixels (pixbuf) + rect->x * n_channels + rowstride * rect->y;
+	dst_limit = dst + height * rowstride;
+
 	if (horizontal) {
 		guchar *gradient = create_gradient (primary, secondary, width);
-		int copy_bytes_per_row = width * 3;
-		
-		while (dst < dst_limit) {
-			memcpy (dst, gradient, copy_bytes_per_row);
-			dst += rowstride;
+		int copy_bytes_per_row = width * n_channels;
+		int i;
+
+		for (i = 0; i < height; i++) {
+			guchar *d;
+			d = dst + rowstride * i;
+			memcpy (d, gradient, copy_bytes_per_row);
 		}
 		g_free (gradient);
 	} else {
 		guchar *gb, *gradient;
-		
-		gb = gradient = create_gradient (primary, secondary, height);
-		while (dst < dst_limit) {
-			int i;
-			guchar *d = dst;
-			guchar r = *gb++;
-			guchar g = *gb++;
-			guchar b = *gb++;
-			for (i = 0; i < width; i++) {
-				*d++ = r;
-				*d++ = g;
-				*d++ = b;
+		int i;
+
+		gradient = create_gradient (primary, secondary, height);
+		for (i = 0; i < height; i++) {
+			int j;
+			guchar *d;
+
+			d = dst + rowstride * i;
+			gb = gradient + n_channels * i;
+			for (j = width; j > 0; j--) {
+				int k;
+
+				for (k = 0; k < n_channels; k++) {
+					*(d++) = gb[k];
+				}
 			}
-			dst += rowstride;
 		}
+
 		g_free (gradient);
 	}
 }
@@ -2223,8 +2291,8 @@ pixbuf_blend (GdkPixbuf *src,
 	      GdkPixbuf *dest,
 	      int	 src_x,
 	      int	 src_y,
-	      int	 width,
-	      int        height,
+	      int	 src_width,
+	      int        src_height,
 	      int	 dest_x,
 	      int	 dest_y,
 	      double	 alpha)
@@ -2234,11 +2302,11 @@ pixbuf_blend (GdkPixbuf *src,
 	int offset_x = dest_x - src_x;
 	int offset_y = dest_y - src_y;
 
-	if (width < 0)
-		width = gdk_pixbuf_get_width (src);
+	if (src_width < 0)
+		src_width = gdk_pixbuf_get_width (src);
 
-	if (height < 0)
-		height = gdk_pixbuf_get_height (src);
+	if (src_height < 0)
+		src_height = gdk_pixbuf_get_height (src);
 	
 	if (dest_x < 0)
 		dest_x = 0;
@@ -2246,17 +2314,17 @@ pixbuf_blend (GdkPixbuf *src,
 	if (dest_y < 0)
 		dest_y = 0;
 	
-	if (dest_x + width > dest_width) {
-		width = dest_width - dest_x;
+	if (dest_x + src_width > dest_width) {
+		src_width = dest_width - dest_x;
 	}
 	
-	if (dest_y + height > dest_height) {
-		height = dest_height - dest_y;
+	if (dest_y + src_height > dest_height) {
+		src_height = dest_height - dest_y;
 	}
 
 	gdk_pixbuf_composite (src, dest,
 			      dest_x, dest_y,
-			      width, height,
+			      src_width, src_height,
 			      offset_x, offset_y,
 			      1, 1, GDK_INTERP_NEAREST,
 			      alpha * 0xFF + 0.5);
@@ -2773,7 +2841,7 @@ gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 
 	result = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, dest_width, dest_height);
 
-	draw_color (bg, result);
+	draw_color (bg, result, screen);
 
 	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
 

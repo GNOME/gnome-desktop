@@ -88,7 +88,8 @@ const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 /* Drawing and thumbnailing */
 void             gnome_bg_draw                  (GnomeBG               *bg,
 						 GdkPixbuf             *dest,
-						 GdkScreen	       *screen);
+						 GdkScreen	       *screen,
+                                                 gboolean               is_root);
 GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
 						 GdkWindow             *window,
 						 int                    width,
