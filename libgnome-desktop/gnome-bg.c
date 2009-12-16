@@ -188,6 +188,11 @@ static Slide *     get_current_slide   (SlideShow 	      *show,
 		   			double    	      *alpha);
 static gboolean    slideshow_has_multiple_sizes (SlideShow *show);
 
+static SlideShow *read_slideshow_file (const char *filename,
+				       GError     **err);
+static SlideShow *slideshow_ref       (SlideShow  *show);
+static void       slideshow_unref     (SlideShow  *show);
+
 static FileSize   *find_best_size      (GSList                *sizes,
 					gint                   width,
 					gint                   height);
@@ -811,16 +816,21 @@ draw_once (GnomeBG   *bg,
 	   GdkScreen *screen)
 {
 	GdkRectangle rect;
+	GdkPixbuf   *pixbuf;
 
 	rect.x = 0;
 	rect.y = 0;
 	rect.width = gdk_pixbuf_get_width (dest);
 	rect.height = gdk_pixbuf_get_height (dest);
 
-	draw_image_area (bg->placement,
-			 get_pixbuf_for_size (bg, gdk_pixbuf_get_width (dest), gdk_pixbuf_get_height (dest)),
-			 dest,
-			 &rect);
+	pixbuf = get_pixbuf_for_size (bg, gdk_pixbuf_get_width (dest), gdk_pixbuf_get_height (dest));
+	if (pixbuf) {
+		draw_image_area (bg->placement,
+				 pixbuf,
+				 dest,
+				 &rect);
+		g_object_unref (pixbuf);
+	}
 }
 
 static void
@@ -834,10 +844,15 @@ draw_each_monitor (GnomeBG   *bg,
 
 	num_monitors = gdk_screen_get_n_monitors (screen);
 	for (monitor = 0; monitor < num_monitors; monitor++) {
+		GdkPixbuf *pixbuf;
 		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-		draw_image_area (bg->placement,
-				 get_pixbuf_for_size (bg, rect.width, rect.height),
-				 dest, &rect);
+		pixbuf = get_pixbuf_for_size (bg, rect.width, rect.height);
+		if (pixbuf) {
+			draw_image_area (bg->placement,
+					 pixbuf,
+					 dest, &rect);
+			g_object_unref (pixbuf);
+		}
 	}
 }
 
@@ -863,14 +878,19 @@ gboolean
 gnome_bg_has_multiple_sizes (GnomeBG *bg)
 {
 	SlideShow *show;
+	gboolean ret;
 
 	g_return_val_if_fail (bg != NULL, FALSE);
 
-	show = get_as_slideshow (bg, bg->filename);
-	if (show)
-		return slideshow_has_multiple_sizes (show);
+	ret = FALSE;
 
-	return FALSE;
+	show = get_as_slideshow (bg, bg->filename);
+	if (show) {
+		ret = slideshow_has_multiple_sizes (show);
+		slideshow_unref (show);
+	}
+
+	return ret;
 }
 
 static void
@@ -1011,6 +1031,7 @@ gnome_bg_is_dark (GnomeBG *bg,
 		color.red = (color.red * (0xFF - a) + r * 0x101 * a) / 0xFF;
 		color.green = (color.green * (0xFF - a) + g * 0x101 * a) / 0xFF;
 		color.blue = (color.blue * (0xFF - a) + b * 0x101 * a) / 0xFF;
+		g_object_unref (pixbuf);
 	}
 	
 	intensity = (color.red * 77 +
@@ -1104,6 +1125,7 @@ get_filename_for_size (GnomeBG *bg, gint best_width, gint best_height)
 	}
 
 	slide = get_current_slide (show, NULL);
+	slideshow_unref (show);
 	size = find_best_size (slide->file1, best_width, best_height);
 	return size->file;
 }
@@ -1419,10 +1441,6 @@ struct _SlideShow
 	GQueue *stack;
 };
 
-static SlideShow *read_slideshow_file (const char *filename,
-				       GError     **err);
-static void       slideshow_ref       (SlideShow  *show);
-static void       slideshow_unref     (SlideShow  *show);
 
 static double
 now (void)
@@ -1538,9 +1556,9 @@ bound_cache (GnomeBG *bg)
       while (g_list_length (bg->file_cache) >= CACHE_SIZE) {
 	      GList *last_link = g_list_last (bg->file_cache);
 	      FileCacheEntry *ent = last_link->data;
-	      
+
 	      file_cache_entry_delete (ent);
-	      
+
 	      bg->file_cache = g_list_delete_link (bg->file_cache, last_link);
       }
 }
@@ -1587,7 +1605,7 @@ file_cache_add_pixbuf (GnomeBG *bg,
 		       GdkPixbuf *pixbuf)
 {
 	FileCacheEntry *ent = file_cache_entry_new (bg, PIXBUF, filename);
-	ent->u.pixbuf = pixbuf;
+	ent->u.pixbuf = g_object_ref (pixbuf);
 }
 
 static void
@@ -1596,7 +1614,7 @@ file_cache_add_thumbnail (GnomeBG *bg,
 			  GdkPixbuf *pixbuf)
 {
 	FileCacheEntry *ent = file_cache_entry_new (bg, THUMBNAIL, filename);
-	ent->u.thumbnail = pixbuf;
+	ent->u.thumbnail = g_object_ref (pixbuf);
 }
 
 static void
@@ -1605,7 +1623,7 @@ file_cache_add_slide_show (GnomeBG *bg,
 			   SlideShow *show)
 {
 	FileCacheEntry *ent = file_cache_entry_new (bg, SLIDESHOW, filename);
-	ent->u.slideshow = show;
+	ent->u.slideshow = slideshow_ref (show);
 }
 
 static GdkPixbuf *
@@ -1616,7 +1634,7 @@ get_as_pixbuf_for_size (GnomeBG    *bg,
 {
 	const FileCacheEntry *ent;
 	if ((ent = file_cache_lookup (bg, PIXBUF, filename))) {
-		return ent->u.pixbuf;
+		return g_object_ref (ent->u.pixbuf);
 	}
 	else {
 		GdkPixbufFormat *format;
@@ -1646,7 +1664,7 @@ get_as_slideshow (GnomeBG *bg, const char *filename)
 {
 	const FileCacheEntry *ent;
 	if ((ent = file_cache_lookup (bg, SLIDESHOW, filename))) {
-		return ent->u.slideshow;
+		return slideshow_ref (ent->u.slideshow);
 	}
 	else {
 		SlideShow *show = read_slideshow_file (filename, NULL);
@@ -1663,7 +1681,7 @@ get_as_thumbnail (GnomeBG *bg, GnomeDesktopThumbnailFactory *factory, const char
 {
 	const FileCacheEntry *ent;
 	if ((ent = file_cache_lookup (bg, THUMBNAIL, filename))) {
-		return ent->u.thumbnail;
+		return g_object_ref (ent->u.thumbnail);
 	}
 	else {
 		GdkPixbuf *thumb = create_thumbnail_for_filename (factory, filename);
@@ -1860,20 +1878,27 @@ create_img_thumbnail (GnomeBG                      *bg,
 		      int                           frame_num)
 {
 	if (bg->filename) {
-		GdkPixbuf *thumb = get_as_thumbnail (bg, factory, bg->filename);
+		GdkPixbuf *thumb;
+
+		thumb = get_as_thumbnail (bg, factory, bg->filename);
 
 		if (thumb) {
-			return scale_thumbnail (bg->placement, bg->filename,
-						thumb, screen, dest_width, dest_height);
+			GdkPixbuf *result;
+			result = scale_thumbnail (bg->placement,
+						  bg->filename,
+						  thumb,
+						  screen,
+						  dest_width,
+						  dest_height);
+			g_object_unref (thumb);
+			return result;
 		}
 		else {
 			SlideShow *show = get_as_slideshow (bg, bg->filename);
-			
+
 			if (show) {
 				double alpha;
 				Slide *slide;
-
-				slideshow_ref (show);
 
 				if (frame_num == -1)
 					slide = get_current_slide (show, &alpha);
@@ -1885,9 +1910,15 @@ create_img_thumbnail (GnomeBG                      *bg,
 					FileSize *fs;
 					fs = find_best_size (slide->file1, dest_width, dest_height);
 					tmp = get_as_thumbnail (bg, factory, fs->file);
-					if (tmp)
-						thumb = scale_thumbnail (bg->placement, fs->file,
-									 tmp, screen, dest_width, dest_height);
+					if (tmp) {
+						thumb = scale_thumbnail (bg->placement,
+									 fs->file,
+									 tmp,
+									 screen,
+									 dest_width,
+									 dest_height);
+						g_object_unref (tmp);
+					}
 				}
 				else {
 					FileSize *fs1, *fs2;
@@ -1901,17 +1932,29 @@ create_img_thumbnail (GnomeBG                      *bg,
 					if (p1 && p2) {
 						GdkPixbuf *thumb1, *thumb2;
 
-						thumb1 = scale_thumbnail (bg->placement, fs1->file,
-									  p1, screen, dest_width, dest_height);
+						thumb1 = scale_thumbnail (bg->placement,
+									  fs1->file,
+									  p1,
+									  screen,
+									  dest_width,
+									  dest_height);
 
-						thumb2 = scale_thumbnail (bg->placement, fs2->file,
-									  p2, screen, dest_width, dest_height);
+						thumb2 = scale_thumbnail (bg->placement,
+									  fs2->file,
+									  p2,
+									  screen,
+									  dest_width,
+									  dest_height);
 
 						thumb = blend (thumb1, thumb2, alpha);
 
 						g_object_unref (thumb1);
 						g_object_unref (thumb2);
 					}
+					if (p1)
+						g_object_unref (p1);
+					if (p2)
+						g_object_unref (p2);
 				}
 
 				ensure_timeout (bg, slide);
@@ -1972,11 +2015,11 @@ find_best_size (GSList *sizes, gint width, gint height)
 }
 
 static GdkPixbuf *
-get_pixbuf_for_size (GnomeBG *bg, gint best_width, gint best_height)
+get_pixbuf_for_size (GnomeBG *bg,
+		     gint best_width,
+		     gint best_height)
 {
-	/* FIXME: this ref=TRUE/FALSE stuff is crazy */
 	guint time_until_next_change;
-	gboolean ref = FALSE;
 	gboolean hit_cache = FALSE;
 
 	/* only hit the cache if the aspect ratio matches */
@@ -1985,12 +2028,15 @@ get_pixbuf_for_size (GnomeBG *bg, gint best_width, gint best_height)
 		width = gdk_pixbuf_get_width (bg->pixbuf_cache);
 		height = gdk_pixbuf_get_height (bg->pixbuf_cache);
 		hit_cache = 0.2 > fabs ((best_width / (double)best_height) - (width / (double)height));
+		if (!hit_cache) {
+			g_object_unref (bg->pixbuf_cache);
+			bg->pixbuf_cache = NULL;
+		}
 	}
 
 	if (!hit_cache && bg->filename) {
-		ref = TRUE;
 		bg->file_mtime = get_mtime (bg->filename);
-		
+
 		bg->pixbuf_cache = get_as_pixbuf_for_size (bg, bg->filename, best_width, best_height);
 		time_until_next_change = G_MAXUINT;
 		if (!bg->pixbuf_cache) {
@@ -2017,11 +2063,13 @@ get_pixbuf_for_size (GnomeBG *bg, gint best_width, gint best_height)
 					size = find_best_size (slide->file2, best_width, best_height);
 					p2 = get_as_pixbuf_for_size (bg, size->file, best_width, best_height);
 
-
 					if (p1 && p2) {
 						bg->pixbuf_cache = blend (p1, p2, alpha);
-						ref = FALSE;
 					}
+					if (p1)
+						g_object_unref (p1);
+					if (p2)
+						g_object_unref (p2);
 				}
 
 				ensure_timeout (bg, slide);
@@ -2037,9 +2085,9 @@ get_pixbuf_for_size (GnomeBG *bg, gint best_width, gint best_height)
 		    blow_expensive_caches_in_idle (bg);
 	}
 
-	if (bg->pixbuf_cache && ref)
+	if (bg->pixbuf_cache)
 		g_object_ref (bg->pixbuf_cache);
-	
+
 	return bg->pixbuf_cache;
 }
 
@@ -2529,10 +2577,11 @@ handle_text (GMarkupParseContext *context,
 	}
 }
 
-static void
+static SlideShow *
 slideshow_ref (SlideShow *show)
 {
 	show->ref_count++;
+	return show;
 }
 
 static void
