@@ -545,6 +545,8 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    
 	    if (crtc && mode)
 	    {
+		int width, height;
+
 		output->on = TRUE;
 		
 		gnome_rr_crtc_get_position (crtc, &output->x, &output->y);
@@ -554,12 +556,17 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 		output->rotation = gnome_rr_crtc_get_current_rotation (crtc);
 		gnome_rr_crtc_get_current_transform (crtc, &output->transform);
 
+		width = (int) (output->transform.transform[0][0] *
+			       output->width + 0.5);
+		height = (int) (output->transform.transform[1][1] *
+				output->height + 0.5);
+
 		if (output->x == 0 && output->y == 0) {
 			if (clone_width == -1) {
-				clone_width = output->width;
-				clone_height = output->height;
-			} else if (clone_width == output->width &&
-				   clone_height == output->height) {
+				clone_width = width;
+				clone_height = height;
+			} else if (clone_width == width &&
+				   clone_height == height) {
 				config->clone = TRUE;
 			}
 		}
@@ -893,10 +900,7 @@ make_outputs (GnomeRRConfig *config)
 	{
 	    g_assert (first_on);
 
-	    new->width = first_on->width;
-	    new->height = first_on->height;
 	    new->rotation = first_on->rotation;
-	    new->transform = first_on->transform;
 	    new->x = 0;
 	    new->y = 0;
 	}
