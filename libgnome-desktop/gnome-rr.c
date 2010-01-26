@@ -346,12 +346,6 @@ fill_screen_info_from_resources (ScreenInfo *info,
 	    return FALSE;
     }
 
-    for (output = info->outputs; *output; ++output)
-    {
-	if (!output_initialize (*output, resources, error))
-	    return FALSE;
-    }
-
     for (i = 0; i < resources->nmode; ++i)
     {
 	GnomeRRMode *mode = mode_by_id (info, resources->modes[i].id);
@@ -359,6 +353,12 @@ fill_screen_info_from_resources (ScreenInfo *info,
 	mode_initialize (mode, &(resources->modes[i]));
     }
 
+    for (output = info->outputs; *output; ++output)
+    {
+	if (!output_initialize (*output, resources, error))
+	    return FALSE;
+    }
+	
     gather_clone_modes (info);
 
     return TRUE;
@@ -964,9 +964,18 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     for (i = 0; i < info->nmode; ++i)
     {
 	GnomeRRMode *mode = mode_by_id (output->info, info->modes[i]);
-	
+
 	if (mode)
+	{
+	    /* ignore 640x480 and 800x600 modes of LVDS output */
+	    if (strncmp (output->name, "LVDS", 4) == 0)
+	    {
+		if (mode->width < 1024 || mode->height < 600)
+		    continue;
+	    }
+
 	    g_ptr_array_add (a, mode);
+	}
     }
     g_ptr_array_add (a, NULL);
     output->modes = (GnomeRRMode **)g_ptr_array_free (a, FALSE);
