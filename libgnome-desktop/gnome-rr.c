@@ -28,7 +28,9 @@
 #include <glib/gi18n-lib.h>
 #include "libgnomeui/gnome-rr.h"
 #include <string.h>
+#include <math.h>
 #include <X11/Xlib.h>
+#include <X11/extensions/Xrender.h>
 #include <X11/extensions/Xrandr.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -71,10 +73,11 @@ struct GnomeRRCrtc
     GnomeRROutput **	possible_outputs;
     int			x;
     int			y;
-    
     GnomeRRRotation	current_rotation;
     GnomeRRRotation	rotations;
     int			gamma_size;
+    GnomeRRTransform	current_transform;
+    GnomeRRTransform	pending_transform;
 };
 
 struct GnomeRRMode
@@ -911,7 +914,7 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
 	DISPLAY (output), res, output->id);
     GPtrArray *a;
     int i;
-    
+
 #if 0
     g_print ("Output %lx Timestamp: %u\n", output->id, (guint32)info->timestamp);
 #endif
@@ -973,7 +976,7 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     
     /* Edid data */
     output->edid_data = read_edid_data (output);
-    
+
     XRRFreeOutputInfo (info);
 
     return TRUE;
@@ -1276,7 +1279,31 @@ gnome_rr_crtc_set_config_with_time (GnomeRRCrtc      *crtc,
 	for (i = 0; i < n_outputs; ++i)
 	    g_array_append_val (output_ids, outputs[i]->id);
     }
-    
+
+#if RANDR_MAJOR > 1 || RANDR_MINOR >= 3
+    if (memcmp (&crtc->current_transform,
+		&crtc->pending_transform,
+		sizeof (GnomeRRTransform)) != 0)
+    {
+	XTransform xtransform;
+	int        j;
+
+	for (i = 0; i < 3; i++)
+	    for (j = 0; j < 3; j++)
+		xtransform.matrix[i][j] =
+		    XDoubleToFixed (crtc->pending_transform.transform[i][j]);
+
+        gdk_error_trap_push ();
+	XRRSetCrtcTransform (DISPLAY (crtc), crtc->id,
+			     &xtransform,
+			     "bilinear",
+			     NULL,
+			     0);
+        XSync (DISPLAY (crtc), FALSE);
+        gdk_error_trap_pop ();
+    }
+#endif
+
     status = XRRSetCrtcConfig (DISPLAY (crtc), info->resources, crtc->id,
 			       timestamp, 
 			       x, y,
@@ -1393,7 +1420,11 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     XRRCrtcInfo *info = XRRGetCrtcInfo (DISPLAY (crtc), res, crtc->id);
     GPtrArray *a;
     int i;
-    
+
+#if RANDR_MAJOR > 1 || RANDR_MINOR >= 3
+    XRRCrtcTransformAttributes *attr;
+#endif
+
 #if 0
     g_print ("CRTC %lx Timestamp: %u\n", crtc->id, (guint32)info->timestamp);
 #endif
@@ -1445,7 +1476,34 @@ crtc_initialize (GnomeRRCrtc        *crtc,
     /* Rotations */
     crtc->current_rotation = gnome_rr_rotation_from_xrotation (info->rotation);
     crtc->rotations = gnome_rr_rotation_from_xrotation (info->rotations);
-    
+
+#if RANDR_MAJOR > 1 || RANDR_MINOR >= 3
+    if (XRRGetCrtcTransform (DISPLAY (crtc), crtc->id, &attr) && attr) {
+	int j;
+
+	for (i = 0; i < 3; i++)
+	    for (j = 0; j < 3; j++)
+		crtc->current_transform.transform[i][j] =
+		    XFixedToDouble (attr->currentTransform.matrix[i][j]);
+
+	XFree (attr);
+    }
+    else
+#endif
+    {
+	crtc->current_transform.transform[0][0] = 1.0;
+	crtc->current_transform.transform[0][1] = 0.0;
+	crtc->current_transform.transform[0][2] = 0.0;
+	crtc->current_transform.transform[1][0] = 0.0;
+	crtc->current_transform.transform[1][1] = 1.0;
+	crtc->current_transform.transform[1][2] = 0.0;
+	crtc->current_transform.transform[2][0] = 0.0;
+	crtc->current_transform.transform[2][1] = 0.0;
+	crtc->current_transform.transform[2][2] = 1.0;
+    }
+
+    crtc->pending_transform = crtc->current_transform;
+
     XRRFreeCrtcInfo (info);
 
     /* get an store gamma size */
@@ -1592,3 +1650,184 @@ gnome_rr_crtc_get_gamma (GnomeRRCrtc *crtc, int *size,
     return TRUE;
 }
 
+typedef struct {
+    int	    x, y, width, height;
+} rectangle_t;
+
+typedef struct {
+    int	    x1, y1, x2, y2;
+} box_t;
+
+typedef struct {
+    int	    x, y;
+} point_t;
+
+static gboolean
+transform_point (GnomeRRTransform *transform, double *xp, double *yp)
+{
+    double  vector[3];
+    double  result[3];
+    int	    i, j;
+    double  v;
+
+    vector[0] = *xp;
+    vector[1] = *yp;
+    vector[2] = 1;
+    for (j = 0; j < 3; j++)
+    {
+	v = 0;
+	for (i = 0; i < 3; i++)
+	    v += (transform->transform[j][i] * vector[i]);
+	if (v > 32767 || v < -32767)
+	    return FALSE;
+	result[j] = v;
+    }
+    if (!result[2])
+	return FALSE;
+    for (j = 0; j < 2; j++)
+	vector[j] = result[j] / result[2];
+    *xp = vector[0];
+    *yp = vector[1];
+    return TRUE;
+}
+
+static void
+path_bounds (GnomeRRTransform *transform, point_t *points, int npoints, box_t *box)
+{
+    int	    i;
+    box_t   point;
+
+    for (i = 0; i < npoints; i++) {
+	double	x, y;
+	x = points[i].x;
+	y = points[i].y;
+	transform_point (transform, &x, &y);
+	point.x1 = floor (x);
+	point.y1 = floor (y);
+	point.x2 = ceil (x);
+	point.y2 = ceil (y);
+	if (i == 0)
+	    *box = point;
+	else {
+	    if (point.x1 < box->x1) box->x1 = point.x1;
+	    if (point.y1 < box->y1) box->y1 = point.y1;
+	    if (point.x2 > box->x2) box->x2 = point.x2;
+	    if (point.y2 > box->y2) box->y2 = point.y2;
+	}
+    }
+}
+
+static int
+mode_height (GnomeRRMode *mode, GnomeRRRotation rotation)
+{
+    switch (rotation & 0xf) {
+    case GNOME_RR_ROTATION_0:
+    case GNOME_RR_ROTATION_180:
+	return gnome_rr_mode_get_height (mode);
+    case GNOME_RR_ROTATION_90:
+    case GNOME_RR_ROTATION_270:
+	return gnome_rr_mode_get_width (mode);
+    default:
+	return 0;
+    }
+}
+
+static int
+mode_width (GnomeRRMode *mode, GnomeRRRotation rotation)
+{
+    switch (rotation & 0xf) {
+    case GNOME_RR_ROTATION_0:
+    case GNOME_RR_ROTATION_180:
+	return gnome_rr_mode_get_width (mode);
+    case GNOME_RR_ROTATION_90:
+    case GNOME_RR_ROTATION_270:
+	return gnome_rr_mode_get_height (mode);
+    default:
+	return 0;
+    }
+}
+
+static void
+mode_get_geometry (GnomeRRMode *mode,
+		   GnomeRRRotation rotation,
+		   GnomeRRTransform *transform,
+		   box_t *bounds)
+{
+    point_t rect[4];
+    int	width = mode_width (mode, rotation);
+    int height = mode_height (mode, rotation);
+
+    rect[0].x = 0;
+    rect[0].y = 0;
+    rect[1].x = width;
+    rect[1].y = 0;
+    rect[2].x = width;
+    rect[2].y = height;
+    rect[3].x = 0;
+    rect[3].y = height;
+
+    path_bounds (transform, rect, 4, bounds);
+}
+
+void
+gnome_rr_mode_get_geometry (GnomeRRMode           *mode,
+			    GnomeRRRotation        rotation,
+			    GnomeRRTransform      *transform,
+			    int                   *x1,
+			    int                   *y1,
+			    int                   *x2,
+			    int                   *y2)
+{
+    box_t bounds = { 0 };
+
+    mode_get_geometry (mode, rotation, transform, &bounds);
+
+    *x1 = bounds.x1;
+    *y1 = bounds.y1;
+    *x2 = bounds.x2;
+    *y2 = bounds.y2;
+}
+
+void
+gnome_rr_crtc_get_current_transform (GnomeRRCrtc           *crtc,
+				     GnomeRRTransform      *transform)
+{
+    *transform = crtc->current_transform;
+}
+
+gboolean
+gnome_rr_crtc_supports_transform (GnomeRRCrtc           *crtc,
+				  GnomeRRTransform      *transform)
+{
+    const static GnomeRRTransform identity = {
+	{
+	    { 1.0, 0.0, 0.0 },
+	    { 0.0, 1.0, 0.0 },
+	    { 0.0, 0.0, 1.0 }
+	}
+    };
+
+    if (memcmp (transform, &identity, sizeof (identity)) == 0)
+	return TRUE;
+
+#if RANDR_MAJOR > 1 || RANDR_MINOR >= 3
+    int	major, minor;
+
+    XRRQueryVersion (DISPLAY (crtc), &major, &minor);
+    if (major > 1 || (major == 1 && minor >= 3))
+	return TRUE;
+#endif
+
+    return FALSE;
+}
+
+gboolean
+gnome_rr_crtc_set_transform (GnomeRRCrtc           *crtc,
+			     GnomeRRTransform      *transform)
+{
+    if (!gnome_rr_crtc_supports_transform (crtc, transform))
+	return FALSE;
+
+    crtc->pending_transform = *transform;
+    return TRUE;
+}

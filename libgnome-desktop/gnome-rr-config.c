@@ -98,6 +98,19 @@ struct Parser
     GQueue *		stack;
 };
 
+static void
+init_transform (GnomeRRTransform *transform)
+{
+    int i, j;
+
+    for (i = 0; i < 3; i++)
+	for (j = 0; j < 3; j++)
+	    if (i == j)
+		transform->transform[i][j] = 1.0;
+	    else
+		transform->transform[i][j] = 0.0;
+}
+
 static int
 parse_int (const char *text)
 {
@@ -168,6 +181,7 @@ handle_start_element (GMarkupParseContext *context,
 
 	parser->output = g_new0 (GnomeOutputInfo, 1);
 	parser->output->rotation = 0;
+	init_transform (&parser->output->transform);
 	
 	for (i = 0; attr_names[i] != NULL; ++i)
 	{
@@ -352,6 +366,30 @@ handle_text (GMarkupParseContext *context,
 	    parser->output->primary = TRUE;
 	}
     }
+    else if (stack_is (parser, "transform", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
+    {
+	float transform[3][3];
+
+	if (sscanf (text,
+		    "[%f,%f,%f,%f,%f,%f,%f,%f,%f]",
+		    &transform[0][0],
+		    &transform[0][1],
+		    &transform[0][2],
+		    &transform[1][0],
+		    &transform[1][1],
+		    &transform[1][2],
+		    &transform[2][0],
+		    &transform[2][1],
+		    &transform[2][2]) == 9)
+	{
+	    int i, j;
+
+	    for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+		    parser->output->transform.transform[i][j] =
+			transform[i][j];
+	}
+    }
     else
     {
 	/* Ignore other properties so we can expand the format in the future */
@@ -472,6 +510,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    output->height = -1;
 	    output->rate = -1;
 	    output->rotation = GNOME_RR_ROTATION_0;
+	    init_transform (&output->transform);
 	}
 	else
 	{
@@ -513,6 +552,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 		output->height = gnome_rr_mode_get_height (mode);
 		output->rate = gnome_rr_mode_get_freq (mode);
 		output->rotation = gnome_rr_crtc_get_current_rotation (crtc);
+		gnome_rr_crtc_get_current_transform (crtc, &output->transform);
 
 		if (output->x == 0 && output->y == 0) {
 			if (clone_width == -1) {
@@ -762,6 +802,10 @@ output_equal (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
 	
 	if (output1->rotation != output2->rotation)
 	    return FALSE;
+
+	if (memcmp (&output1->transform, &output2->transform,
+		    sizeof (GnomeRRTransform)) != 0)
+	    return FALSE;
     }
 
     return TRUE;
@@ -852,6 +896,7 @@ make_outputs (GnomeRRConfig *config)
 	    new->width = first_on->width;
 	    new->height = first_on->height;
 	    new->rotation = first_on->rotation;
+	    new->transform = first_on->transform;
 	    new->x = 0;
 	    new->y = 0;
 	}
@@ -997,6 +1042,11 @@ emit_configuration (GnomeRRConfig *config,
 		string, "          <reflect_y>%s</reflect_y>\n", get_reflect_y (output->rotation));
             g_string_append_printf (
                 string, "          <primary>%s</primary>\n", yes_no (output->primary));
+	    g_string_append_printf (
+		string, "          <transform>[%f,%f,%f,%f,%f,%f,%f,%f,%f]</transform>\n",
+		output->transform.transform[0][0], output->transform.transform[0][1], output->transform.transform[0][2],
+		output->transform.transform[1][0], output->transform.transform[1][1], output->transform.transform[1][2],
+		output->transform.transform[2][0], output->transform.transform[2][1], output->transform.transform[2][2]);
 	}
 	
 	g_string_append_printf (string, "      </output>\n");
@@ -1369,6 +1419,7 @@ struct CrtcInfo
     int        x;
     int        y;
     GnomeRRRotation rotation;
+    GnomeRRTransform transform;
     GPtrArray *outputs;
 };
 
@@ -1404,13 +1455,15 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 			int               y,
 			GnomeRRRotation   rotation,
                         gboolean          primary,
+			GnomeRRTransform *transform,
 			GnomeRROutput    *output)
 {
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
 
     if (!gnome_rr_crtc_can_drive_output (crtc, output) ||
 	!gnome_rr_output_supports_mode (output, mode)  ||
-	!gnome_rr_crtc_supports_rotation (crtc, rotation))
+	!gnome_rr_crtc_supports_rotation (crtc, rotation) ||
+	!gnome_rr_crtc_supports_transform (crtc, transform))
     {
 	return FALSE;
     }
@@ -1421,6 +1474,9 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 	    info->x == x		&&
 	    info->y == y		&&
 	    info->rotation == rotation  &&
+	    memcmp (&info->transform,
+		    transform,
+		    sizeof (GnomeRRTransform)) == 0 &&
 	    can_clone (info, output))
 	{
 	    g_ptr_array_add (info->outputs, output);
@@ -1441,6 +1497,7 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 	info->x = x;
 	info->y = y;
 	info->rotation = rotation;
+	info->transform = *transform;
 	info->outputs = g_ptr_array_new ();
 	
 	g_ptr_array_add (info->outputs, output);
@@ -1505,6 +1562,15 @@ configure_crtc (gpointer key,
     if (state->has_error)
 	return;
 
+    if (gnome_rr_crtc_supports_transform (crtc, &info->transform))
+    {
+	if (!gnome_rr_crtc_set_transform (crtc, &info->transform))
+	{
+	    state->has_error = TRUE;
+	    return;
+	}
+    }
+
     if (!gnome_rr_crtc_set_config_with_time (crtc,
 					     state->timestamp,
 					     info->x, info->y,
@@ -1514,31 +1580,6 @@ configure_crtc (gpointer key,
 					     info->outputs->len,
 					     state->error))
 	state->has_error = TRUE;
-}
-
-static gboolean
-mode_is_rotated (CrtcInfo *info)
-{
-    if ((info->rotation & GNOME_RR_ROTATION_270)		||
-	(info->rotation & GNOME_RR_ROTATION_90))
-    {
-	return TRUE;
-    }
-    return FALSE;
-}
-
-static gboolean
-crtc_is_rotated (GnomeRRCrtc *crtc)
-{
-    GnomeRRRotation r = gnome_rr_crtc_get_current_rotation (crtc);
-
-    if ((r & GNOME_RR_ROTATION_270)		||
-	(r & GNOME_RR_ROTATION_90))
-    {
-	return TRUE;
-    }
-
-    return FALSE;
 }
 
 /* Check whether the given set of settings can be used
@@ -1595,6 +1636,7 @@ real_assign_crtcs (GnomeRRScreen *screen,
 			    output->x, output->y,
 			    output->rotation,
                             output->primary,
+			    &output->transform,
 			    gnome_rr_output))
 		    {
 			if (real_assign_crtcs (screen, outputs + 1, assignment))
@@ -1635,20 +1677,21 @@ get_required_virtual_size (CrtcAssignment *assign, int *width, int *height)
     {
 	GnomeRRCrtc *crtc = list->data;
 	CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
-	int w, h;
+	int x, y, w, h;
+	int x1, y1, x2, y2;
 
-	w = gnome_rr_mode_get_width (info->mode);
-	h = gnome_rr_mode_get_height (info->mode);
-	
-	if (mode_is_rotated (info))
-	{
-	    int tmp = h;
-	    h = w;
-	    w = tmp;
-	}
-	
-	*width = MAX (*width, info->x + w);
-	*height = MAX (*height, info->y + h);
+	gnome_rr_mode_get_geometry (info->mode,
+				    info->rotation,
+				    &info->transform,
+				    &x1, &y1, &x2, &y2);
+
+	x = info->x + x1;
+	y = info->y + y1;
+	w = x2 - x1;
+	h = y2 - y1;
+
+	*width = MAX (*width, x + w);
+	*height = MAX (*height, y + h);
     }
 
     g_list_free (active_crtcs);
@@ -1745,23 +1788,28 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
     {
 	GnomeRRCrtc *crtc = all_crtcs[i];
 	GnomeRRMode *mode = gnome_rr_crtc_get_current_mode (crtc);
-	int x, y;
+	GnomeRRRotation rotation = gnome_rr_crtc_get_current_rotation (crtc);
+	GnomeRRTransform transform;
+
+	gnome_rr_crtc_get_current_transform (crtc, &transform);
 
 	if (mode)
 	{
-	    int w, h;
+	    int x, y, w, h;
+	    int x1, y1, x2, y2;
+
+	    gnome_rr_mode_get_geometry (mode,
+					rotation,
+					&transform,
+					&x1, &y1, &x2, &y2);
+
 	    gnome_rr_crtc_get_position (crtc, &x, &y);
 
-	    w = gnome_rr_mode_get_width (mode);
-	    h = gnome_rr_mode_get_height (mode);
+	    x += x1;
+	    y += y1;
+	    w = x2 - x1;
+	    h = y2 - y1;
 
-	    if (crtc_is_rotated (crtc))
-	    {
-		int tmp = h;
-		h = w;
-		w = tmp;
-	    }
-	    
 	    if (x + w > width || y + h > height || !g_hash_table_lookup (assign->info, crtc))
 	    {
 		if (!gnome_rr_crtc_set_config_with_time (crtc, timestamp, 0, 0, NULL, GNOME_RR_ROTATION_0, NULL, 0, error))
