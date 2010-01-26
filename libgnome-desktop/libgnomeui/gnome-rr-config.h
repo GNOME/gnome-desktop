@@ -52,6 +52,7 @@ struct GnomeOutputInfo
     int			x;
     int			y;
     GnomeRRRotation	rotation;
+    GnomeRRTransform    transform;
 
     gboolean		connected; /* whether the output is physically connected to a monitor */
     char		vendor[4];

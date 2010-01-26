@@ -48,6 +48,11 @@ typedef enum
     GNOME_RR_REFLECT_Y =	(1 << 5)
 } GnomeRRRotation;
 
+typedef struct
+{
+    double transform[3][3];
+} GnomeRRTransform;
+
 /* Error codes */
 
 #define GNOME_RR_ERROR (gnome_rr_error_quark ())
@@ -125,6 +130,14 @@ guint32         gnome_rr_mode_get_id               (GnomeRRMode           *mode)
 guint           gnome_rr_mode_get_width            (GnomeRRMode           *mode);
 guint           gnome_rr_mode_get_height           (GnomeRRMode           *mode);
 int             gnome_rr_mode_get_freq             (GnomeRRMode           *mode);
+void            gnome_rr_mode_get_geometry         (GnomeRRMode           *mode,
+						    GnomeRRRotation        rotation,
+						    GnomeRRTransform      *transform,
+						    int                   *x1,
+						    int                   *y1,
+						    int                   *x2,
+						    int                   *y2);
+
 
 /* GnomeRRCrtc */
 guint32         gnome_rr_crtc_get_id               (GnomeRRCrtc           *crtc);
@@ -159,5 +172,11 @@ GnomeRRRotation gnome_rr_crtc_get_current_rotation (GnomeRRCrtc           *crtc)
 GnomeRRRotation gnome_rr_crtc_get_rotations        (GnomeRRCrtc           *crtc);
 gboolean        gnome_rr_crtc_supports_rotation    (GnomeRRCrtc           *crtc,
 						    GnomeRRRotation        rotation);
+void            gnome_rr_crtc_get_current_transform (GnomeRRCrtc           *crtc,
+						     GnomeRRTransform      *transform);
+gboolean        gnome_rr_crtc_supports_transform   (GnomeRRCrtc           *crtc,
+						    GnomeRRTransform      *transform);
+gboolean        gnome_rr_crtc_set_transform        (GnomeRRCrtc           *crtc,
+						    GnomeRRTransform      *transform);
 
 #endif
