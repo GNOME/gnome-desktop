@@ -228,6 +228,7 @@ static GConfEnumStringPair placement_lookup[] = {
 	{ GNOME_BG_PLACEMENT_SCALED,      "scaled" },
 	{ GNOME_BG_PLACEMENT_ZOOMED,      "zoom" },
 	{ GNOME_BG_PLACEMENT_TILED,       "wallpaper" },
+	{ GNOME_BG_PLACEMENT_SPANNED,       "spanned" },
 	{ 0, NULL }
 };
 
@@ -733,6 +734,9 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 #endif
 	
 	switch (placement) {
+	case GNOME_BG_PLACEMENT_SPANNED:
+                new = pixbuf_scale_to_fit (pixbuf, width, height);
+		break;
 	case GNOME_BG_PLACEMENT_ZOOMED:
 		new = pixbuf_scale_to_min (pixbuf, width, height);
 		break;
@@ -786,6 +790,9 @@ draw_image_area (GnomeBGPlacement  placement,
 	case GNOME_BG_PLACEMENT_FILL_SCREEN:
 	case GNOME_BG_PLACEMENT_SCALED:
 		pixbuf_blend (scaled, dest, 0, 0, w, h, x + area->x, y + area->y, 1.0);
+		break;
+	case GNOME_BG_PLACEMENT_SPANNED:
+		pixbuf_blend (scaled, dest, 0, 0, w, h, x, y, 1.0);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -865,7 +872,7 @@ gnome_bg_draw (GnomeBG *bg,
 	if (!bg)
 		return;
 
-	if (is_root) {
+	if (is_root && (bg->placement != GNOME_BG_PLACEMENT_SPANNED)) {
 		draw_color_each_monitor (bg, dest, screen);
 		draw_each_monitor (bg, dest, screen);
 	} else {
