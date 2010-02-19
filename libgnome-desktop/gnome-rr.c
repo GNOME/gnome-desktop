@@ -1085,6 +1085,36 @@ gnome_rr_output_get_connector_type (GnomeRROutput *output)
     return output->connector_type;
 }
 
+gboolean
+gnome_rr_output_is_laptop (GnomeRROutput *output)
+{
+    const char *connector_type;
+
+    g_return_val_if_fail (output != NULL, FALSE);
+
+    if (!output->connected)
+	return FALSE;
+
+    /* The ConnectorType property is present in RANDR 1.3 and greater */
+
+    connector_type = gnome_rr_output_get_connector_type (output);
+    if (connector_type && strcmp (connector_type, GNOME_RR_CONNECTOR_TYPE_PANEL) == 0)
+	return TRUE;
+
+    /* Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
+     * so drivers can use whatever they like.
+     */
+
+    if (output->name
+	&& (strstr (output->name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
+	    strstr (output->name, "LVDS") ||
+	    strstr (output->name, "Lvds") ||
+	    strstr (output->name, "LCD")))    /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
+	return TRUE;
+
+    return FALSE;
+}
+
 GnomeRRMode *
 gnome_rr_output_get_current_mode (GnomeRROutput *output)
 {

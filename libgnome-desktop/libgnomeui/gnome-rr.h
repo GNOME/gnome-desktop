@@ -112,6 +112,7 @@ GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *outpu
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
 GnomeRRCrtc *   gnome_rr_output_get_crtc           (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_connector_type (GnomeRROutput         *output);
+gboolean        gnome_rr_output_is_laptop          (GnomeRROutput         *output);
 void            gnome_rr_output_get_position       (GnomeRROutput         *output,
 						    int                   *x,
 						    int                   *y);
