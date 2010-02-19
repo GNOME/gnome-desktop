@@ -495,9 +495,11 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 		output->product = 0;
 		output->serial = 0;
 	    }
-	    
-	    output->display_name = make_display_name (
-		gnome_rr_output_get_name (rr_output), info);
+
+	    if (gnome_rr_output_is_laptop (rr_output))
+		output->display_name = _("Laptop");
+	    else
+		output->display_name = make_display_name (info);
 		
 	    g_free (info);
 		
