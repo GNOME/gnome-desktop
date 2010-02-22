@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop&component=general\n"
-"POT-Creation-Date: 2010-02-22 11:16+0000\n"
-"PO-Revision-Date: 2010-02-22 12:23+0100\n"
+"POT-Creation-Date: 2010-02-22 14:29+0000\n"
+"PO-Revision-Date: 2010-02-22 15:51+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,11 @@ msgstr "GNOME je od svojega začetka leta 1997 združeval na stotine programerje
 msgid "Laptop"
 msgstr "Prenosni računalnik"
 
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:273
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -149,52 +153,57 @@ msgstr "Napaka ob branju datoteke '%s': %s"
 msgid "Error rewinding file '%s': %s"
 msgstr "Napaka ob branju datoteke '%s': %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:377
-#: ../libgnome-desktop/gnome-desktop-item.c:3519
+#. Translators: the "name" mentioned
+#. * here is the name of an application or
+#. * a document
+#. Translators: the "name" mentioned here is the name of
+#. * an application or a document
+#: ../libgnome-desktop/gnome-desktop-item.c:380
+#: ../libgnome-desktop/gnome-desktop-item.c:3524
 msgid "No name"
 msgstr "Brez imena"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:604
+#: ../libgnome-desktop/gnome-desktop-item.c:607
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Datoteka '%s' ni običajna datoteka ali mapa."
 
-#: ../libgnome-desktop/gnome-desktop-item.c:788
+#: ../libgnome-desktop/gnome-desktop-item.c:791
 #, c-format
 msgid "Cannot find file '%s'"
 msgstr "Ni mogoče najti datoteke '%s'"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:834
+#: ../libgnome-desktop/gnome-desktop-item.c:837
 #, c-format
 msgid "No filename to save to"
 msgstr "Ni imena datoteke za shranitev"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:1819
+#: ../libgnome-desktop/gnome-desktop-item.c:1822
 #, c-format
 msgid "Starting %s"
 msgstr "Zaganjanje %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2055
+#: ../libgnome-desktop/gnome-desktop-item.c:2058
 #, c-format
 msgid "No URL to launch"
 msgstr "Ni URLja za zagon"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2071
+#: ../libgnome-desktop/gnome-desktop-item.c:2074
 #, c-format
 msgid "Not a launchable item"
 msgstr "Predmet ni zagonljiv"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2081
+#: ../libgnome-desktop/gnome-desktop-item.c:2084
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Ni ukaza za zagon"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2094
+#: ../libgnome-desktop/gnome-desktop-item.c:2097
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Slab ukaz za zagon"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:3575
+#: ../libgnome-desktop/gnome-desktop-item.c:3581
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Neznana vrsta kodnega zapisa: %s"
@@ -203,27 +212,27 @@ msgstr "Neznana vrsta kodnega zapisa: %s"
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr "Ni mogoče najti konzole, zato bo uporabljen xterm, čeprav morda ne bo deloval"
 
-#: ../libgnome-desktop/gnome-rr.c:406
+#: ../libgnome-desktop/gnome-rr.c:407
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "ni mogoče dobiti virov zaslonov (CRTC, odvodi, načini)"
 
-#: ../libgnome-desktop/gnome-rr.c:426
+#: ../libgnome-desktop/gnome-rr.c:427
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "nepričakovana X napaka med pridobivanjem območja velikosti zaslonov"
 
-#: ../libgnome-desktop/gnome-rr.c:432
+#: ../libgnome-desktop/gnome-rr.c:433
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "ni mogoče dobiti območja velikosti zaslonov"
 
-#: ../libgnome-desktop/gnome-rr.c:658
+#: ../libgnome-desktop/gnome-rr.c:659
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "Razširitev RANDR ni na voljo"
 
-#: ../libgnome-desktop/gnome-rr.c:924
+#: ../libgnome-desktop/gnome-rr.c:925
 #, c-format
 msgid "could not get information about output %d"
 msgstr "ni mogoče dobiti podatkov o odvodu %d"
@@ -231,17 +240,17 @@ msgstr "ni mogoče dobiti podatkov o odvodu %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1262
+#: ../libgnome-desktop/gnome-rr.c:1263
 #, c-format
 msgid "requested position/size for CRTC %d is outside the allowed limit: position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
 msgstr "zahtevana lega/velikost za CRTC %d je izven dovoljenih omejitev: lega=(%d, %d), velikost=(%d, %d), največja dovoljena vrednost=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1298
+#: ../libgnome-desktop/gnome-rr.c:1299
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "ni mogoče določiti nastavitev za CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1410
+#: ../libgnome-desktop/gnome-rr.c:1411
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "ni mogoče dobiti podatkov o CRTC %d"
