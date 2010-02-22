@@ -374,6 +374,9 @@ gnome_desktop_item_new (void)
 	/* These are guaranteed to be set */
 	gnome_desktop_item_set_string (retval,
 				       GNOME_DESKTOP_ITEM_NAME,
+				       /* Translators: the "name" mentioned
+					* here is the name of an application or
+					* a document */
 				       _("No name"));
 	gnome_desktop_item_set_string (retval,
 				       GNOME_DESKTOP_ITEM_ENCODING,
@@ -3515,8 +3518,11 @@ sanitize (GnomeDesktopItem *item, const char *uri)
 		if (name == NULL && uri != NULL)
 			name = g_path_get_basename (uri);
 		/* If no uri either, use same default as gnome_desktop_item_new */
-		if (name == NULL)
+		if (name == NULL) {
+		       /* Translators: the "name" mentioned here is the name of
+			* an application or a document */
 			name = g_strdup (_("No name"));
+		}
 		g_hash_table_replace (item->main_hash,
 				      g_strdup (GNOME_DESKTOP_ITEM_NAME), 
 				      name);
