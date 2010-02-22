@@ -937,9 +937,9 @@ get_connector_type_string (GnomeRROutput *output)
 	XFree (connector_type_str);
     }
 
-    XFree (prop);
-
 out:
+
+    XFree (prop);
 
     return result;
 }
