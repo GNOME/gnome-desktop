@@ -267,7 +267,10 @@ make_display_name (const char *output_name,
     }
     else
     {
-	vendor = _("Unknown");
+        /* Translators: "Unknown" here is used to identify a monitor for which
+         * we don't know the vendor. When a vendor is known, the name of the
+         * vendor is used. */
+	vendor = C_("Monitor vendor", "Unknown");
     }
 
     if (info && info->width_mm != -1 && info->height_mm)
