@@ -785,7 +785,7 @@ gnome_desktop_item_new_from_basename (const char *basename,
 		g_set_error (error,
 			     GNOME_DESKTOP_ITEM_ERROR,
 			     GNOME_DESKTOP_ITEM_ERROR_CANNOT_OPEN,
-			     _("Error cannot find file id '%s'"),
+			     _("Cannot find file '%s'"),
 			     basename);
 		return NULL;
 	}
