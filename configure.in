@@ -136,7 +136,7 @@ AC_SUBST(STARTUP_NOTIFICATION_PACKAGE)
 
 dnl we need x11 for GnomeBG
 
-PKG_CHECK_MODULES(XLIB, x11 xrandr >= $XRANDR_REQUIRED,
+PKG_CHECK_MODULES(XLIB, x11,
     X11_PACKAGE=x11,
     [X11_PACKAGE=
      AC_PATH_XTRA
@@ -150,9 +150,25 @@ AC_SUBST(X11_PACKAGE)
 AC_SUBST(XLIB_CFLAGS)
 AC_SUBST(XLIB_LIBS)
 
+dnl Checks for X's RANDR extension
+
+if $PKG_CONFIG --atleast-version $XRANDR_REQUIRED xrandr; then
+  echo "Building with the RANDR extension"
+  AC_DEFINE(HAVE_RANDR, 1,
+            [Define if the xrandr-1.2 library is present])
+  with_randr=yes
+  RANDR_PACKAGE=xrandr
+else
+  echo "***** WARNING: Building without RANDR support"
+  with_randr=no
+  RANDR_PACKAGE=
+fi
+
+AC_SUBST(RANDR_PACKAGE)
+
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
 
 dnl for gnome-about
 AM_PATH_PYTHON
