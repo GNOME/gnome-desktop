@@ -38,6 +38,8 @@ struct GnomeRRScreen
     
     GnomeRRScreenChanged	callback;
     gpointer			data;
+
+    Atom                        connector_type_atom;
 };
 
 #endif

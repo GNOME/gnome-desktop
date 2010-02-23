@@ -54,6 +54,7 @@ struct GnomeRROutput
     GnomeRRMode **	modes;
     int			n_preferred;
     guint8 *		edid_data;
+    char *              connector_type;
 };
 
 struct GnomeRROutputWrap
@@ -624,6 +625,7 @@ gnome_rr_screen_new (GdkScreen *gdk_screen,
 	screen->xroot = gdk_x11_drawable_get_xid (screen->gdk_root);
 	screen->xdisplay = dpy;
 	screen->xscreen = gdk_x11_screen_get_xscreen (screen->gdk_screen);
+	screen->connector_type_atom = XInternAtom (dpy, "ConnectorType", FALSE);
 	
 	screen->callback = callback;
 	screen->data = data;
@@ -905,6 +907,44 @@ read_edid_data (GnomeRROutput *output)
     return NULL;
 }
 
+static char *
+get_connector_type_string (GnomeRROutput *output)
+{
+    char *result;
+    unsigned char *prop;
+    int actual_format;
+    unsigned long nitems, bytes_after;
+    Atom actual_type;
+    Atom connector_type;
+    char *connector_type_str;
+
+    result = NULL;
+
+    if (XRRGetOutputProperty (DISPLAY (output), output->id, output->info->screen->connector_type_atom,
+			      0, 100, False, False,
+			      AnyPropertyType,
+			      &actual_type, &actual_format,
+			      &nitems, &bytes_after, &prop) != Success)
+	return NULL;
+
+    if (!(actual_type == XA_ATOM && actual_format == 32 && nitems == 1))
+	goto out;
+
+    connector_type = *((Atom *) prop);
+
+    connector_type_str = XGetAtomName (DISPLAY (output), connector_type);
+    if (connector_type_str) {
+	result = g_strdup (connector_type_str); /* so the caller can g_free() it */
+	XFree (connector_type_str);
+    }
+
+out:
+
+    XFree (prop);
+
+    return result;
+}
+
 static gboolean
 output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **error)
 {
@@ -932,7 +972,8 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     output->width_mm = info->mm_width;
     output->height_mm = info->mm_height;
     output->connected = (info->connection == RR_Connected);
-    
+    output->connector_type = get_connector_type_string (output);
+
     /* Possible crtcs */
     a = g_ptr_array_new ();
     
@@ -988,6 +1029,7 @@ output_free (GnomeRROutput *output)
     g_free (output->possible_crtcs);
     g_free (output->edid_data);
     g_free (output->name);
+    g_free (output->connector_type);
     g_free (output);
 }
 
@@ -1033,6 +1075,45 @@ gnome_rr_output_get_crtc (GnomeRROutput *output)
     g_return_val_if_fail (output != NULL, NULL);
     
     return output->current_crtc;
+}
+
+/* Returns NULL if the ConnectorType property is not available */
+const char *
+gnome_rr_output_get_connector_type (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, NULL);
+
+    return output->connector_type;
+}
+
+gboolean
+gnome_rr_output_is_laptop (GnomeRROutput *output)
+{
+    const char *connector_type;
+
+    g_return_val_if_fail (output != NULL, FALSE);
+
+    if (!output->connected)
+	return FALSE;
+
+    /* The ConnectorType property is present in RANDR 1.3 and greater */
+
+    connector_type = gnome_rr_output_get_connector_type (output);
+    if (connector_type && strcmp (connector_type, GNOME_RR_CONNECTOR_TYPE_PANEL) == 0)
+	return TRUE;
+
+    /* Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
+     * so drivers can use whatever they like.
+     */
+
+    if (output->name
+	&& (strstr (output->name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
+	    strstr (output->name, "LVDS") ||
+	    strstr (output->name, "Lvds") ||
+	    strstr (output->name, "LCD")))    /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
+	return TRUE;
+
+    return FALSE;
 }
 
 GnomeRRMode *

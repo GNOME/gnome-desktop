@@ -248,20 +248,12 @@ find_vendor (const char *code)
 };
 
 char *
-make_display_name (const char *output_name,
-		   const MonitorInfo *info)
+make_display_name (const MonitorInfo *info)
 {
     const char *vendor;
     int width_mm, height_mm, inches;
 
-    if (output_name &&
-	(strstr (output_name, "lvds")	||
-	 strstr (output_name, "LVDS")	||
-	 strstr (output_name, "Lvds")))
-    {
-	vendor = _("Laptop");
-    }
-    else if (info)
+    if (info)
     {
 	vendor = find_vendor (info->manufacturer_code);
     }

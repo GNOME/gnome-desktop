@@ -63,6 +63,8 @@ typedef enum {
     GNOME_RR_ERROR_NO_MATCHING_CONFIG,	/* none of the saved configurations matched the current configuration */
 } GnomeRRError;
 
+#define GNOME_RR_CONNECTOR_TYPE_PANEL "Panel"  /* This is a laptop's built-in LCD */
+
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
 						    GnomeRRScreenChanged   callback,
@@ -109,6 +111,8 @@ const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *outpu
 GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
 GnomeRRCrtc *   gnome_rr_output_get_crtc           (GnomeRROutput         *output);
+const char *    gnome_rr_output_get_connector_type (GnomeRROutput         *output);
+gboolean        gnome_rr_output_is_laptop          (GnomeRROutput         *output);
 void            gnome_rr_output_get_position       (GnomeRROutput         *output,
 						    int                   *x,
 						    int                   *y);
