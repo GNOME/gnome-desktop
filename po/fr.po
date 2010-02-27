@@ -1,5 +1,5 @@
 # French translation of gnome-desktop.
-# Copyright (C) 1998-2009 Free Software Foundation, Inc.
+# Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-desktop package.
 #
 # Vincent Renardias <vincent@ldsol.com>, 1998-2000.
@@ -9,15 +9,16 @@
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002.
 # Robert-André Mauchin <zebob.m@pengzone.org>, 2006-2008.
 # Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007.
-# Claude Paroz <claude@2xlibre.net>, 2008-2009.
+# Claude Paroz <claude@2xlibre.net>, 2008-2010.
 # Yannick Tailliez <ytdispatch-libre@yahoo.com>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-28 23:08+0200\n"
-"PO-Revision-Date: 2009-08-28 23:11+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"desktop&component=general\n"
+"POT-Creation-Date: 2010-02-22 11:33+0000\n"
+"PO-Revision-Date: 2010-02-27 11:20+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +167,11 @@ msgstr ""
 msgid "Laptop"
 msgstr "Ordinateur portable"
 
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:273
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -192,8 +197,8 @@ msgstr "Le fichier « %s » n'est pas un fichier régulier ou un répertoire."
 
 #: ../libgnome-desktop/gnome-desktop-item.c:788
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Impossible de trouver l'identificateur du fichier « %s »"
+msgid "Cannot find file '%s'"
+msgstr "Impossible de trouver le fichier « %s »"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:834
 #, c-format
@@ -236,29 +241,29 @@ msgstr ""
 "Impossible de trouver un terminal, xterm sera utilisé mais il pourrait ne "
 "pas fonctionner"
 
-#: ../libgnome-desktop/gnome-rr.c:405
+#: ../libgnome-desktop/gnome-rr.c:407
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "impossible d'obtenir les ressources d'écran (CRTC, sorties, modes)"
 
-#: ../libgnome-desktop/gnome-rr.c:425
+#: ../libgnome-desktop/gnome-rr.c:427
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr ""
 "erreur X non gérée lors de l'obtention de la liste des tailles d'écran "
 "disponibles"
 
-#: ../libgnome-desktop/gnome-rr.c:431
+#: ../libgnome-desktop/gnome-rr.c:433
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "impossible d'obtenir la liste des tailles d'écran disponibles"
 
-#: ../libgnome-desktop/gnome-rr.c:657
+#: ../libgnome-desktop/gnome-rr.c:659
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "l'extension RANDR n'est pas présente"
 
-#: ../libgnome-desktop/gnome-rr.c:923
+#: ../libgnome-desktop/gnome-rr.c:925
 #, c-format
 msgid "could not get information about output %d"
 msgstr "impossible d'obtenir des informations sur la sortie %d"
@@ -266,7 +271,7 @@ msgstr "impossible d'obtenir des informations sur la sortie %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1261
+#: ../libgnome-desktop/gnome-rr.c:1263
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -275,12 +280,12 @@ msgstr ""
 "la taille et la position demandées pour le CRTC %d sont en dehors des "
 "limites autorisées : position=(%d, %d), taille=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1297
+#: ../libgnome-desktop/gnome-rr.c:1299
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "impossible de définir la configuration pour le CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1409
+#: ../libgnome-desktop/gnome-rr.c:1411
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "impossible d'obtenir des informations sur le CRTC %d"
@@ -296,7 +301,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1682
+#: ../libgnome-desktop/gnome-rr-config.c:1686
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -305,7 +310,7 @@ msgstr ""
 "la taille virtuelle demandée n'est pas adaptée à la taille disponible : "
 "demande=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1696
+#: ../libgnome-desktop/gnome-rr-config.c:1700
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "impossible de trouver une configuration convenable des écrans"
