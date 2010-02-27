@@ -8,14 +8,15 @@
 # Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003, 2006.
 # Torstein A. Winterseth <kvikende@yahoo.no>, 2009.
 # Torstein Adolf Winterseth <kvikende@yahoo.no>, 2009.
+# Torstein Adolf Winterseth <kvikende@fsfe>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&component=general\n"
-"POT-Creation-Date: 2009-12-22 16:25+0000\n"
-"PO-Revision-Date: 2009-12-28 15:36+0000\n"
-"Last-Translator: Torstein Adolf Winterseth <kvikende@yahoo.no>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gnome-desktop&component=general\n"
+"POT-Creation-Date: 2010-02-22 11:33+0000\n"
+"PO-Revision-Date: 2010-02-25 20:09+0100\n"
+"Last-Translator: Torstein Adolf Winterseth <kvikende@fsfe>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "Lær meir om GNOME"
 
 #: ../gnome-about/gnome-about.in:61
 msgid "News"
-msgstr "Nyhende"
+msgstr "Nyheiter"
 
 #: ../gnome-about/gnome-about.in:62
 msgid "GNOME Library"
@@ -124,7 +125,7 @@ msgid ""
 "GNOME includes most of what you see on your computer, including the file "
 "manager, web browser, menus, and many applications."
 msgstr ""
-"GNOME har det meste av det du ser på datamaskinen din, inkludert ein "
+"GNOME har det meste av det du ser på datamaskina di, inkludert ein "
 "filhandsamar, ein nettlesar, menyar og mange program."
 
 #. NOTE TO AUTHORS: Do not put anything in the following paragraphs that
@@ -169,7 +170,12 @@ msgstr ""
 msgid "Laptop"
 msgstr "Bærbar"
 
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:273
+#| msgid "Unknown"
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Ukjend"
 
@@ -187,7 +193,7 @@ msgstr "Feil ved tilbakespoling av fil «%s»: %s"
 #: ../libgnome-desktop/gnome-desktop-item.c:377
 #: ../libgnome-desktop/gnome-desktop-item.c:3519
 msgid "No name"
-msgstr "Ikkje namn"
+msgstr "Inkje namn"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:604
 #, c-format
@@ -196,8 +202,9 @@ msgstr "Fila «%s» er ikkje ei vanleg fil eller mappe."
 
 #: ../libgnome-desktop/gnome-desktop-item.c:788
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Fann ikkje fil-ID «%s»"
+#| msgid "Error cannot find file id '%s'"
+msgid "Cannot find file '%s'"
+msgstr "Klarte ikkje finna fila «%s»"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:834
 #, c-format
@@ -240,27 +247,27 @@ msgstr ""
 "Klarte ikkje finna ein terminal. Vil prøva å bruka xterm, sjølv om han "
 "kanskje ikkje fungerer"
 
-#: ../libgnome-desktop/gnome-rr.c:406
+#: ../libgnome-desktop/gnome-rr.c:407
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "klarte ikkje få skjermressursane (CRTC, utdata, modusar)"
 
-#: ../libgnome-desktop/gnome-rr.c:426
+#: ../libgnome-desktop/gnome-rr.c:427
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "Uhandtert X-feil under henting av område med skjermstorleikar"
 
-#: ../libgnome-desktop/gnome-rr.c:432
+#: ../libgnome-desktop/gnome-rr.c:433
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "klarte ikkje henta område med skjermstorleikar"
 
-#: ../libgnome-desktop/gnome-rr.c:658
+#: ../libgnome-desktop/gnome-rr.c:659
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "RANDR-utvidinga er ikkje til stades"
 
-#: ../libgnome-desktop/gnome-rr.c:924
+#: ../libgnome-desktop/gnome-rr.c:925
 #, c-format
 msgid "could not get information about output %d"
 msgstr "klarte ikkje henta informasjon om utdata %d"
@@ -268,7 +275,7 @@ msgstr "klarte ikkje henta informasjon om utdata %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1262
+#: ../libgnome-desktop/gnome-rr.c:1263
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -277,12 +284,12 @@ msgstr ""
 "førespurd posisjon/storleik for CRTC %d er utanfor dei gyldige grensene: "
 "posisjon=(%d, %d), storleik=(%d, %d), maksimum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1298
+#: ../libgnome-desktop/gnome-rr.c:1299
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "klarte ikkje setja innstillingane til CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1410
+#: ../libgnome-desktop/gnome-rr.c:1411
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "klarte ikkje henta informasjon om CRTC %d"
