@@ -1,11 +1,11 @@
 # Swedish messages for gnome-desktop.
-# Copyright (C) 1998-2009 Free Software Foundation, Inc.
+# Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # Martin Wahlen <mva@sbbs.se>, 1998.
 # Anders Carlsson <anders.carlsson@tordata.se>, 1999.
 # Andreas Hyden  <a.hyden@cyberpoint.se>, 2000.
 # Martin Norbäck <d95mback@dtek.chalmers.se>, 2000, 2001.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010.
 #
 # $Id: sv.po,v 1.191 2006/11/19 16:10:54 dnylande Exp $
 #
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-19 10:28+0200\n"
-"PO-Revision-Date: 2009-09-19 10:28+0100\n"
+"POT-Creation-Date: 2010-02-28 13:03+0100\n"
+"PO-Revision-Date: 2010-02-28 13:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -129,11 +129,11 @@ msgstr "GNOME:s största styrka är vår starka gemenskap. Nästan alla, med ell
 msgid "Hundreds of people have contributed code to GNOME since it was started in 1997; many more have contributed in other important ways, including translations, documentation, and quality assurance."
 msgstr "Hundratals personer har bidragit med kod till GNOME sedan projektet startades 1997. Långt flera har bidragit på andra viktiga sätt, inklusive översättningar, dokumentation, och kvalitetssäkring."
 
-#: ../libgnome-desktop/display-name.c:262
-msgid "Laptop"
-msgstr "Bärbar dator"
-
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:265
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -147,53 +147,57 @@ msgstr "Fel vid läsning av filen \"%s\": %s"
 msgid "Error rewinding file '%s': %s"
 msgstr "Fel vid återspolning av filen \"%s\": %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:377
-#: ../libgnome-desktop/gnome-desktop-item.c:3519
+#. Translators: the "name" mentioned
+#. * here is the name of an application or
+#. * a document
+#. Translators: the "name" mentioned here is the name of
+#. * an application or a document
+#: ../libgnome-desktop/gnome-desktop-item.c:380
+#: ../libgnome-desktop/gnome-desktop-item.c:3524
 msgid "No name"
 msgstr "Inget namn"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:604
+#: ../libgnome-desktop/gnome-desktop-item.c:607
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Filen \"%s\" är inte en vanlig fil eller katalog."
 
-# FIXME: Broken messages like this should be bug reported...
-#: ../libgnome-desktop/gnome-desktop-item.c:788
+#: ../libgnome-desktop/gnome-desktop-item.c:791
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Fel kan inte hitta fil-id \"%s\""
+msgid "Cannot find file '%s'"
+msgstr "Kan inte hitta filen \"%s\""
 
-#: ../libgnome-desktop/gnome-desktop-item.c:834
+#: ../libgnome-desktop/gnome-desktop-item.c:837
 #, c-format
 msgid "No filename to save to"
 msgstr "Inget filnamn att spara till"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:1819
+#: ../libgnome-desktop/gnome-desktop-item.c:1822
 #, c-format
 msgid "Starting %s"
 msgstr "Startar %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2055
+#: ../libgnome-desktop/gnome-desktop-item.c:2058
 #, c-format
 msgid "No URL to launch"
 msgstr "Ingen URL att starta"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2071
+#: ../libgnome-desktop/gnome-desktop-item.c:2074
 #, c-format
 msgid "Not a launchable item"
 msgstr "Inget startbart objekt"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2081
+#: ../libgnome-desktop/gnome-desktop-item.c:2084
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Inget kommando (Exec) att starta"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2094
+#: ../libgnome-desktop/gnome-desktop-item.c:2097
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Felaktigt kommando (Exec) att starta"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:3575
+#: ../libgnome-desktop/gnome-desktop-item.c:3581
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Okänd kodning av: %s"
@@ -202,27 +206,27 @@ msgstr "Okänd kodning av: %s"
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr "Kan inte hitta en terminal, använder xterm även om det kanske inte fungerar"
 
-#: ../libgnome-desktop/gnome-rr.c:405
+#: ../libgnome-desktop/gnome-rr.c:442
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "kunde inte få skärmresurserna (CRTC:er, utgångar, lägen)"
 
-#: ../libgnome-desktop/gnome-rr.c:425
+#: ../libgnome-desktop/gnome-rr.c:462
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "ohanterat X-fel när information om skärmstorlekarna hämtades"
 
-#: ../libgnome-desktop/gnome-rr.c:431
+#: ../libgnome-desktop/gnome-rr.c:468
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "kunde inte få tag på information om skärmstorlekar"
 
-#: ../libgnome-desktop/gnome-rr.c:657
+#: ../libgnome-desktop/gnome-rr.c:713
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "RANDR-utökningen finns inte"
 
-#: ../libgnome-desktop/gnome-rr.c:923
+#: ../libgnome-desktop/gnome-rr.c:1032
 #, c-format
 msgid "could not get information about output %d"
 msgstr "kunde inte få tag på information om utgång %d"
@@ -230,22 +234,26 @@ msgstr "kunde inte få tag på information om utgång %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1261
+#: ../libgnome-desktop/gnome-rr.c:1419
 #, c-format
 msgid "requested position/size for CRTC %d is outside the allowed limit: position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
 msgstr "begärd position/storlek för CRTC %d är utanför den tillåtna gränsen: position=(%d, %d), storlek=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1297
+#: ../libgnome-desktop/gnome-rr.c:1455
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "kunde inte ställa in konfigurationen för CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1409
+#: ../libgnome-desktop/gnome-rr.c:1571
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "kunde inte få tag på information om CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1159
+#: ../libgnome-desktop/gnome-rr-config.c:500
+msgid "Laptop"
+msgstr "Bärbar dator"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1161
 #, c-format
 msgid "none of the saved display configurations matched the active configuration"
 msgstr "ingen av de sparade skärmkonfigurationerna matchade den aktiva konfigurationen"
@@ -253,12 +261,12 @@ msgstr "ingen av de sparade skärmkonfigurationerna matchade den aktiva konfigur
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1682
+#: ../libgnome-desktop/gnome-rr-config.c:1688
 #, c-format
 msgid "required virtual size does not fit available size: requested=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
 msgstr "nödvändig virtuell storlek passar inte tillgänglig storlek: nödvändig=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1696
+#: ../libgnome-desktop/gnome-rr-config.c:1702
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "kunde inte hitta en lämplig konfiguration för skärmar"
@@ -272,133 +280,4 @@ msgstr "kunde inte hitta en lämplig konfiguration för skärmar"
 #: ../libgnome-desktop/gnome-rr-labeler.c:210
 msgid "Mirror Screens"
 msgstr "Spegla skärmar"
-
-#~ msgid "Directory"
-#~ msgstr "Katalog"
-#~ msgid "Application"
-#~ msgstr "Program"
-#~ msgid "Link"
-#~ msgstr "Länk"
-#~ msgid "FSDevice"
-#~ msgstr "FS-enhet"
-#~ msgid "MIME Type"
-#~ msgstr "MIME-typ"
-#~ msgid "Service"
-#~ msgstr "Tjänst"
-#~ msgid "ServiceType"
-#~ msgstr "Tjänstetyp"
-#~ msgid "_URL:"
-#~ msgstr "_URL:"
-#~ msgid "Comm_and:"
-#~ msgstr "Komm_ando:"
-#~ msgid "_Name:"
-#~ msgstr "_Namn:"
-#~ msgid "_Generic name:"
-#~ msgstr "_Allmänt namn:"
-#~ msgid "Co_mment:"
-#~ msgstr "Ko_mmentar:"
-#~ msgid "Browse"
-#~ msgstr "Bläddra"
-#~ msgid "_Type:"
-#~ msgstr "_Typ:"
-#~ msgid "_Icon:"
-#~ msgstr "_Ikon:"
-#~ msgid "Browse icons"
-#~ msgstr "Bläddra bland ikoner"
-#~ msgid "Run in t_erminal"
-#~ msgstr "Kör i t_erminal"
-#~ msgid "Language"
-#~ msgstr "Språk"
-#~ msgid "Name"
-#~ msgstr "Namn"
-#~ msgid "Generic name"
-#~ msgstr "Allmänt namn"
-#~ msgid "Comment"
-#~ msgstr "Kommentar"
-#~ msgid "_Try this before using:"
-#~ msgstr "_Försök med detta innan användande:"
-#~ msgid "_Documentation:"
-#~ msgstr "_Dokumentation:"
-#~ msgid "_Name/Comment translations:"
-#~ msgstr "_Namn/Kommentar för översättningar:"
-#~ msgid "_Add/Set"
-#~ msgstr "_Lägg till/Ställ in"
-#~ msgid "Add or Set Name/Comment Translations"
-#~ msgstr "Lägg till eller ställ in namn/Kommentar för översättningar"
-#~ msgid "Re_move"
-#~ msgstr "_Ta bort"
-#~ msgid "Remove Name/Comment Translation"
-#~ msgstr "Ta bort namn/Kommentar för översättning"
-#~ msgid "Basic"
-#~ msgstr "Grundläggande"
-#~ msgid "Advanced"
-#~ msgstr "Avancerat"
-#~ msgid "_Show Hints at Startup"
-#~ msgstr "_Visa tips vid uppstart"
-#~ msgid "Error writing file '%s': %s"
-#~ msgstr "Fel vid skrivning av filen \"%s\": %s"
-#~ msgid "Could not locate the directory with header images."
-#~ msgstr "Kunde inte hitta katalogen med huvudbilder."
-#~ msgid "Failed to open directory with header images: %s"
-#~ msgstr "Misslyckades med att öppna katalogen med huvudbilder: %s"
-#~ msgid "Unable to load header image: %s"
-#~ msgstr "Kan inte läsa in huvudbild: %s"
-#~ msgid "Could not locate the GNOME logo."
-#~ msgstr "Kunde inte hitta GNOME-logotypen."
-#~ msgid "Unable to load '%s': %s"
-#~ msgstr "Kan inte läsa in \"%s\": %s"
-#~ msgid "Could not open the address \"%s\": %s"
-#~ msgstr "Kunde inte öppna adressen \"%s\": %s"
-#~ msgid "%s: %s\n"
-#~ msgstr "%s: %s\n"
-#~ msgid "%s: "
-#~ msgstr "%s: "
-#~ msgid "Software"
-#~ msgstr "Programvara"
-#~ msgid "Developers"
-#~ msgstr "Utvecklare"
-#~ msgid "Cannot find file id '%s'"
-#~ msgstr "Kan inte hitta fil-id \"%s\""
-#~ msgid "The End!"
-#~ msgstr "Slutet!"
-#~ msgid "Accessories"
-#~ msgstr "Tillbehör"
-#~ msgid "Accessories menu"
-#~ msgstr "Tillbehörsmeny"
-#~ msgid "Applications"
-#~ msgstr "Program"
-#~ msgid "Programming"
-#~ msgstr "Programutveckling"
-#~ msgid "Tools for software development"
-#~ msgstr "Verktyg för programutveckling"
-#~ msgid "Games"
-#~ msgstr "Spel"
-#~ msgid "Games menu"
-#~ msgstr "Spelmeny"
-#~ msgid "Graphics"
-#~ msgstr "Grafik"
-#~ msgid "Graphics menu"
-#~ msgstr "Grafikmeny"
-#~ msgid "Internet"
-#~ msgstr "Internet"
-#~ msgid "Programs for Internet and networks"
-#~ msgstr "Program för Internet och nätverk"
-#~ msgid "Multimedia"
-#~ msgstr "Multimedia"
-#~ msgid "Multimedia menu"
-#~ msgstr "Multimediameny"
-#~ msgid "Office"
-#~ msgstr "Kontor"
-#~ msgid "Office Applications"
-#~ msgstr "Kontorsprogram"
-#~ msgid "Applications without a category"
-#~ msgstr "Program utan en kategori"
-#~ msgid "Other"
-#~ msgstr "Annat"
-#~ msgid "Programs"
-#~ msgstr "Program"
-#~ msgid "Programs menu"
-#~ msgstr "Programmeny"
-#~ msgid "Desktop Preferences"
-#~ msgstr "Skrivbordsinställningar"
 
