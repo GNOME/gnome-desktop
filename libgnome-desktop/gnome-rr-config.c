@@ -497,7 +497,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    }
 
 	    if (gnome_rr_output_is_laptop (rr_output))
-		output->display_name = _("Laptop");
+		output->display_name = g_strdup (_("Laptop"));
 	    else
 		output->display_name = make_display_name (info);
 		
