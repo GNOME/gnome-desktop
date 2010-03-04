@@ -1,17 +1,17 @@
 # translation of eu.po to Basque
-# Copyright (C) 1999, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Copyright (C) 1999, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 #
 # Joseba Bidaurrazaga van Dierdonck <jbv@euskalnet.net>, 2000,2002.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
 # Mikel Olasagasti Uranga <hey_neken@undurat.net>, 2005.
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2005, 2006, 2007, 2008, 2009.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2005, 2006, 2007, 2008, 2009, 2010.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 15:23+0200\n"
-"PO-Revision-Date: 2009-08-26 15:24+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop&component=general\n"
+"POT-Creation-Date: 2010-02-22 11:33+0000\n"
+"PO-Revision-Date: 2010-03-04 23:35+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -167,7 +167,12 @@ msgstr ""
 msgid "Laptop"
 msgstr "Eramangarria"
 
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:273
+#| msgid "Unknown"
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
@@ -193,8 +198,9 @@ msgstr "'%s' fitxategia ez da fitxategi arrunta edo direktorioa."
 
 #: ../libgnome-desktop/gnome-desktop-item.c:788
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Errorea: ezin da fitxategiaren '%s' id-a aurkitu"
+#| msgid "Error cannot find file id '%s'"
+msgid "Cannot find file '%s'"
+msgstr "Ezin da '%s' fitxategia aurkitu"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:834
 #, c-format
@@ -237,27 +243,27 @@ msgstr ""
 "Ezin izan da terminala aurkitu, xterm erabiliko da, nahiz eta agian ez "
 "funtzionatu"
 
-#: ../libgnome-desktop/gnome-rr.c:405
+#: ../libgnome-desktop/gnome-rr.c:407
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "ezin izan da pantailen baliabideak lortu (CRTCak, irteerak, moduak)"
 
-#: ../libgnome-desktop/gnome-rr.c:425
+#: ../libgnome-desktop/gnome-rr.c:427
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "kudeatu gabeko X errorea pantailen tamainen barrutia lortzean"
 
-#: ../libgnome-desktop/gnome-rr.c:431
+#: ../libgnome-desktop/gnome-rr.c:433
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "ezin izan da pantailen tamainen barrutia lortu"
 
-#: ../libgnome-desktop/gnome-rr.c:657
+#: ../libgnome-desktop/gnome-rr.c:659
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "RANDR hedapena ez dago"
 
-#: ../libgnome-desktop/gnome-rr.c:923
+#: ../libgnome-desktop/gnome-rr.c:925
 #, c-format
 msgid "could not get information about output %d"
 msgstr "ezin izan da %d irteerari buruzko informazioa lortu"
@@ -265,7 +271,7 @@ msgstr "ezin izan da %d irteerari buruzko informazioa lortu"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1261
+#: ../libgnome-desktop/gnome-rr.c:1263
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -274,12 +280,12 @@ msgstr ""
 "eskatutako %d. CRTCaren posizioa/tamaina baimendutako mugatik at dago: "
 "posizioa=(%d, %d), tamaina=(%d, %d), gehienezkoa=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1297
+#: ../libgnome-desktop/gnome-rr.c:1299
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "ezin izan da %d. CRTCaren konfigurazioa ezarri"
 
-#: ../libgnome-desktop/gnome-rr.c:1409
+#: ../libgnome-desktop/gnome-rr.c:1411
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "ezin izan da %d. CRTCari buruzko informazioa lortu"
@@ -294,7 +300,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1682
+#: ../libgnome-desktop/gnome-rr-config.c:1686
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -303,7 +309,7 @@ msgstr ""
 "eskatutako tamaina birtuala ez zaio tamaina erabilgarriari doitzen: "
 "eskatutakoa=(%d, %d), gutxienekoa=(%d, %d), gehienezkoa=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1696
+#: ../libgnome-desktop/gnome-rr-config.c:1700
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "ezin izan da pantailen konfigurazio egokirik aurkitu"
