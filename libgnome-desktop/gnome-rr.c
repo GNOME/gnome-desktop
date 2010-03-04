@@ -26,7 +26,6 @@
 
 #include <config.h>
 #include <glib/gi18n-lib.h>
-#include "libgnomeui/gnome-rr.h"
 #include <string.h>
 #include <X11/Xlib.h>
 
@@ -37,6 +36,9 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
+
+#undef GNOME_DISABLE_DEPRECATED
+#include "libgnomeui/gnome-rr.h"
 
 #include "private.h"
 #include "gnome-rr-private.h"
