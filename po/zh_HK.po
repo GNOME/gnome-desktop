@@ -13,10 +13,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-desktop 2.28.0\n"
+"Project-Id-Version: gnome-desktop 2.29.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 06:29+0800\n"
-"PO-Revision-Date: 2009-09-13 06:29+0800\n"
+"POT-Creation-Date: 2010-03-06 19:57+0800\n"
+"PO-Revision-Date: 2010-03-06 19:57+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -144,11 +144,11 @@ msgid ""
 "translations, documentation, and quality assurance."
 msgstr "在 1997 年創立後，數以百計的人都在編寫 GNOME 方面作出貢獻；還有更多人以其它方式貢獻，包括翻譯、撰寫文件和進行品質測試。"
 
-#: ../libgnome-desktop/display-name.c:262
-msgid "Laptop"
-msgstr "手提電腦"
-
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:265
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "不明"
 
@@ -162,52 +162,57 @@ msgstr "讀取檔案‘%s’時發生錯誤：%s"
 msgid "Error rewinding file '%s': %s"
 msgstr "回到檔案‘%s’的開始位置時發生錯誤：%s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:377
-#: ../libgnome-desktop/gnome-desktop-item.c:3519
+#. Translators: the "name" mentioned
+#. * here is the name of an application or
+#. * a document
+#. Translators: the "name" mentioned here is the name of
+#. * an application or a document
+#: ../libgnome-desktop/gnome-desktop-item.c:380
+#: ../libgnome-desktop/gnome-desktop-item.c:3524
 msgid "No name"
 msgstr "沒有名稱"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:604
+#: ../libgnome-desktop/gnome-desktop-item.c:607
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "‘%s’不是普通的檔案或目錄。"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:788
+#: ../libgnome-desktop/gnome-desktop-item.c:791
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "錯誤，無法找到檔案 id ‘%s’"
+msgid "Cannot find file '%s'"
+msgstr "找不到檔案「%s」"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:834
+#: ../libgnome-desktop/gnome-desktop-item.c:837
 #, c-format
 msgid "No filename to save to"
 msgstr "儲存檔案時沒有指定檔案名稱"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:1819
+#: ../libgnome-desktop/gnome-desktop-item.c:1822
 #, c-format
 msgid "Starting %s"
 msgstr "準備啟動 %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2055
+#: ../libgnome-desktop/gnome-desktop-item.c:2058
 #, c-format
 msgid "No URL to launch"
 msgstr "沒有可以啟動的 URL"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2071
+#: ../libgnome-desktop/gnome-desktop-item.c:2074
 #, c-format
 msgid "Not a launchable item"
 msgstr "不是可以啟動的項目"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2081
+#: ../libgnome-desktop/gnome-desktop-item.c:2084
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "沒有可啟動的指令 (Exec)"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2094
+#: ../libgnome-desktop/gnome-desktop-item.c:2097
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "準備啟動的指令 (Exec) 出現錯誤"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:3575
+#: ../libgnome-desktop/gnome-desktop-item.c:3581
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "以下 URI 內容的編碼不明：%s"
@@ -216,27 +221,27 @@ msgstr "以下 URI 內容的編碼不明：%s"
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr "找不到終端機，將使用 xterm 代替，不管系統中有沒有 xterm"
 
-#: ../libgnome-desktop/gnome-rr.c:405
+#: ../libgnome-desktop/gnome-rr.c:444
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "無法取得螢幕資源 (CTRCs、輸出、模式)"
 
-#: ../libgnome-desktop/gnome-rr.c:425
+#: ../libgnome-desktop/gnome-rr.c:464
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "在取得螢幕大小的範圍發生無法處理的 X 錯誤"
 
-#: ../libgnome-desktop/gnome-rr.c:431
+#: ../libgnome-desktop/gnome-rr.c:470
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "無法取得螢幕大小的範圍"
 
-#: ../libgnome-desktop/gnome-rr.c:657
+#: ../libgnome-desktop/gnome-rr.c:715
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "沒有 RANDR 擴充功能"
 
-#: ../libgnome-desktop/gnome-rr.c:923
+#: ../libgnome-desktop/gnome-rr.c:1034
 #, c-format
 msgid "could not get information about output %d"
 msgstr "無法取得輸出 %d 的資訊"
@@ -244,24 +249,28 @@ msgstr "無法取得輸出 %d 的資訊"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1261
+#: ../libgnome-desktop/gnome-rr.c:1421
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
 "d, %d), size=(%d, %d), maximum=(%d, %d)"
 msgstr "對 CTRC %d 要求的位置/大小超出允許的限制：位置 =(%d, %d)，大小 =(%d, %d)，最大值=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1297
+#: ../libgnome-desktop/gnome-rr.c:1457
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "無法設定 CRTC %d 的組態"
 
-#: ../libgnome-desktop/gnome-rr.c:1409
+#: ../libgnome-desktop/gnome-rr.c:1573
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "無法取得 CRTC %d 的資訊"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1159
+#: ../libgnome-desktop/gnome-rr-config.c:500
+msgid "Laptop"
+msgstr "手提電腦"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1161
 #, c-format
 msgid ""
 "none of the saved display configurations matched the active configuration"
@@ -270,14 +279,14 @@ msgstr "已儲存的顯示組態沒有一個符合使用中的組態"
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1682
+#: ../libgnome-desktop/gnome-rr-config.c:1688
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
 "minimum=(%d, %d), maximum=(%d, %d)"
 msgstr "要求的虛擬大小無法符合可用的大小：要求的 =(%d, %d)，最小值 =(%d, %d)，最大值 =(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1696
+#: ../libgnome-desktop/gnome-rr-config.c:1702
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "找不到合適的螢幕組態"
