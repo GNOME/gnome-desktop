@@ -319,6 +319,11 @@ do_transitioned (GnomeBG *bg)
 {
 	bg->transitioned_id = 0;
 
+	if (bg->pixbuf_cache) {
+		g_object_unref (bg->pixbuf_cache);
+		bg->pixbuf_cache = NULL;
+	}
+
 	g_signal_emit (G_OBJECT (bg), signals[TRANSITIONED], 0);
 
 	return FALSE;
