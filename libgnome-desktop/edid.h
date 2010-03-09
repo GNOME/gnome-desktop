@@ -183,12 +183,13 @@ struct MonitorInfo
 						 */
 
     /* Optional product description */
-    char		dsc_serial_number[14];
-    char		dsc_product_name[14];
-    char		dsc_string[14];		/* Unspecified ASCII data */
+    char	       *dsc_serial_number;
+    char	       *dsc_product_name;
+    char	       *dsc_string;		/* Unspecified ASCII data */
 };
 
 MonitorInfo *decode_edid (const uchar *data);
-char *make_display_name (const MonitorInfo *info);
+void         free_edid (MonitorInfo *);
+char *       make_display_name (const MonitorInfo *info);
 
 #endif
