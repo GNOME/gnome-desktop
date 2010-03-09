@@ -102,6 +102,11 @@ AC_ARG_WITH(pnp-ids-path,
 AM_CONDITIONAL(USE_INTERNAL_PNP_IDS, test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids")
 PNP_IDS=$with_pnp_ids_path
 AC_SUBST(PNP_IDS)
+if test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids"; then
+	EXTERNAL_PNP_IDS="no (internal)"
+else
+	EXTERNAL_PNP_IDS="$with_pnp_ids_path"
+fi
 
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
@@ -120,15 +125,16 @@ AC_SUBST(GCONF_REQUIRED)
 AC_SUBST(STARTUP_NOTIFICATION_REQUIRED)
 AC_SUBST(XRANDR_REQUIRED)
 
+AC_MSG_CHECKING(for libstartup-notification)
 if $PKG_CONFIG --atleast-version $STARTUP_NOTIFICATION_REQUIRED libstartup-notification-1.0; then
-  echo "Building with libstartup-notification"
+  AC_MSG_RESULT(yes)
   AC_DEFINE(HAVE_STARTUP_NOTIFICATION, 1,
             [Define if the startup-notification package is present])
-  with_startup_notification=yes
+  have_startup_notification=yes
   STARTUP_NOTIFICATION_PACKAGE=libstartup-notification-1.0
 else
-  echo "***** WARNING: Building without libstartup-notification"
-  with_startup_notification=no
+  AC_MSG_RESULT(no)
+  have_startup_notification=no
   STARTUP_NOTIFICATION_PACKAGE=
 fi
 
@@ -152,15 +158,16 @@ AC_SUBST(XLIB_LIBS)
 
 dnl Checks for X's RANDR extension
 
+AC_MSG_CHECKING(for xrandr)
 if $PKG_CONFIG --atleast-version $XRANDR_REQUIRED xrandr; then
-  echo "Building with the RANDR extension"
+  AC_MSG_RESULT(yes)
   AC_DEFINE(HAVE_RANDR, 1,
             [Define if the xrandr-$XRANDR_REQUIRED library is present])
-  with_randr=yes
+  have_randr=yes
   RANDR_PACKAGE=xrandr
 else
-  echo "***** WARNING: Building without RANDR support"
-  with_randr=no
+  AC_MSG_RESULT(no)
+  have_randr=no
   RANDR_PACKAGE=
 fi
 
@@ -230,3 +237,33 @@ man/Makefile
 ])
 
 AC_OUTPUT
+
+dnl ---------------------------------------------------------------------------
+dnl - Show summary
+dnl ---------------------------------------------------------------------------
+
+echo "
+              gnome-desktop $VERSION
+              `echo gnome-desktop $VERSION | sed "s/./=/g"`
+
+        prefix:                       ${prefix}
+        exec_prefix:                  ${exec_prefix}
+        libdir:                       ${libdir}
+        bindir:                       ${bindir}
+        sbindir:                      ${sbindir}
+        sysconfdir:                   ${sysconfdir}
+        localstatedir:                ${localstatedir}
+        datadir:                      ${datadir}
+        source code location:         ${srcdir}
+        compiler:	              ${CC}
+        cflags:	                      ${CFLAGS}
+        Maintainer mode:              ${USE_MAINTAINER_MODE}
+	Warn about deprecations:      ${enable_deprecations}
+
+	GNOME Distributor:            ${GNOME_DISTRIBUTOR}
+	Date in gnome-version.xml:    ${enable_date_in_gnome_version}
+	Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
+	Startup notification support: ${have_startup_notification}
+        XRandr support:               ${have_randr}
+
+"
