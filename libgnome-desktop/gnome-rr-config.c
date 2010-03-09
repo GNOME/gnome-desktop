@@ -31,12 +31,13 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 
+#include <X11/Xlib.h>
+#include <gdk/gdkx.h>
+
 #undef GNOME_DISABLE_DEPRECATED
 #include "libgnomeui/gnome-rr-config.h"
+
 #include "edid.h"
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrandr.h>
-#include <gdk/gdkx.h>
 #include "gnome-rr-private.h"
 
 #define CONFIG_INTENDED_BASENAME "monitors.xml"

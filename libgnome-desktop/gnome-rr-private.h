@@ -1,6 +1,10 @@
 #ifndef GNOME_RR_PRIVATE_H
 #define GNOME_RR_PRIVATE_H
 
+#ifdef HAVE_RANDR
+#include <X11/extensions/Xrandr.h>
+#endif
+
 typedef struct ScreenInfo ScreenInfo;
 
 struct ScreenInfo
