@@ -220,7 +220,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	 * theme's colors, since the label is always shown against a light
 	 * pastel background.  See bgo#556050
 	 */
-	gtk_widget_modify_fg (widget, GTK_WIDGET_STATE (widget), &black);
+	gtk_widget_modify_fg (widget, gtk_widget_get_state (widget), &black);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 
