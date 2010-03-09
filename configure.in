@@ -103,9 +103,9 @@ AM_CONDITIONAL(USE_INTERNAL_PNP_IDS, test "x$with_pnp_ids_path" = "x\${pnpdatadi
 PNP_IDS=$with_pnp_ids_path
 AC_SUBST(PNP_IDS)
 if test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids"; then
-	EXTERNAL_PNP_IDS="no (internal)"
+        EXTERNAL_PNP_IDS="no (internal)"
 else
-	EXTERNAL_PNP_IDS="$with_pnp_ids_path"
+        EXTERNAL_PNP_IDS="$with_pnp_ids_path"
 fi
 
 dnl If you add a version number here, you *must* add an AC_SUBST line for
@@ -255,15 +255,15 @@ echo "
         localstatedir:                ${localstatedir}
         datadir:                      ${datadir}
         source code location:         ${srcdir}
-        compiler:	              ${CC}
-        cflags:	                      ${CFLAGS}
+        compiler:                     ${CC}
+        cflags:                       ${CFLAGS}
         Maintainer mode:              ${USE_MAINTAINER_MODE}
-	Warn about deprecations:      ${enable_deprecations}
+        Warn about deprecations:      ${enable_deprecations}
 
-	GNOME Distributor:            ${GNOME_DISTRIBUTOR}
-	Date in gnome-version.xml:    ${enable_date_in_gnome_version}
-	Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
-	Startup notification support: ${have_startup_notification}
+        GNOME Distributor:            ${GNOME_DISTRIBUTOR}
+        Date in gnome-version.xml:    ${enable_date_in_gnome_version}
+        Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
+        Startup notification support: ${have_startup_notification}
         XRandr support:               ${have_randr}
 
 "
