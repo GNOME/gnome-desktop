@@ -743,8 +743,11 @@ gnome_rr_screen_set_size (GnomeRRScreen *screen,
     g_return_if_fail (screen != NULL);
 
 #ifdef HAVE_RANDR
+    gdk_error_trap_push ();
     XRRSetScreenSize (screen->xdisplay, screen->xroot,
 		      width, height, mm_width, mm_height);
+    gdk_flush ();
+    gdk_error_trap_pop (); /* ignore error */
 #endif
 }
 
