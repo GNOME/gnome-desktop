@@ -145,10 +145,12 @@ label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer
 {
 	cairo_t *cr;
 	GdkColor *color;
+	GtkAllocation allocation;
 
 	color = g_object_get_data (G_OBJECT (widget), "color");
+	gtk_widget_get_allocation (widget, &allocation);
 
-	cr = gdk_cairo_create (widget->window);
+	cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	/* edge outline */
 
@@ -156,8 +158,8 @@ label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer
 	cairo_rectangle (cr,
 			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
 			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
-			 widget->allocation.width - LABEL_WINDOW_EDGE_THICKNESS,
-			 widget->allocation.height - LABEL_WINDOW_EDGE_THICKNESS);
+			 allocation.width - LABEL_WINDOW_EDGE_THICKNESS,
+			 allocation.height - LABEL_WINDOW_EDGE_THICKNESS);
 	cairo_set_line_width (cr, LABEL_WINDOW_EDGE_THICKNESS);
 	cairo_stroke (cr);
 
@@ -167,8 +169,8 @@ label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer
 	cairo_rectangle (cr,
 			 LABEL_WINDOW_EDGE_THICKNESS,
 			 LABEL_WINDOW_EDGE_THICKNESS,
-			 widget->allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
-			 widget->allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2);
+			 allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
+			 allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2);
 	cairo_fill (cr);
 
 	cairo_destroy (cr);
@@ -186,7 +188,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	GdkColor black = { 0, 0, 0, 0 };
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
-	GTK_WIDGET_SET_FLAGS (window, GTK_APP_PAINTABLE);
+	gtk_widget_set_app_paintable (window, TRUE);
 
 	gtk_container_set_border_width (GTK_CONTAINER (window), LABEL_WINDOW_PADDING + LABEL_WINDOW_EDGE_THICKNESS);
 
