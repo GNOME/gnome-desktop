@@ -636,6 +636,14 @@ draw_color_area (GnomeBG *bg,
 		 GdkRectangle *rect)
 {
 	guint32 pixel;
+        GdkRectangle extent;
+
+        extent.x = 0;
+        extent.y = 0;
+        extent.width = gdk_pixbuf_get_width (dest);
+        extent.height = gdk_pixbuf_get_height (dest);
+
+        gdk_rectangle_intersect (rect, &extent, rect);
 	
 	switch (bg->color_type) {
 	case GNOME_BG_COLOR_SOLID:
