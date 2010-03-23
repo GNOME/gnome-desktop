@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&component=general\n"
-"POT-Creation-Date: 2009-08-19 19:24+0000\n"
-"PO-Revision-Date: 2008-09-20 03:26+0100\n"
+"POT-Creation-Date: 2010-02-22 11:33+0000\n"
+"PO-Revision-Date: 2010-03-23 10:43+0100\n"
 "Last-Translator: Горан Ракић <grakic@devbase.net>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,7 +157,12 @@ msgstr ""
 msgid "Laptop"
 msgstr "Лаптоп"
 
-#: ../libgnome-desktop/display-name.c:270
+#. Translators: "Unknown" here is used to identify a monitor for which
+#. * we don't know the vendor. When a vendor is known, the name of the
+#. * vendor is used.
+#: ../libgnome-desktop/display-name.c:273
+#| msgid "Unknown"
+msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Непознато"
 
@@ -184,8 +189,9 @@ msgstr "Датотека „%s“ није обична датотека или 
 # bug: w00t?
 #: ../libgnome-desktop/gnome-desktop-item.c:788
 #, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Грешка: не може да нађе датотеку са ИБ-ом „%s“"
+#| msgid "Error cannot find file id '%s'"
+msgid "Cannot find file '%s'"
+msgstr "Не могу да нађем датотеку „%s“"
 
 #: ../libgnome-desktop/gnome-desktop-item.c:834
 #, c-format
@@ -226,27 +232,27 @@ msgstr "Непознато кодирање за: %s"
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr "Не могу да нађем терминал, користим xterm чак и уколико не ради"
 
-#: ../libgnome-desktop/gnome-rr.c:405
+#: ../libgnome-desktop/gnome-rr.c:407
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "не могу да добијем ресурсе за екран (CRTC-и, излази, модови)"
 
-#: ../libgnome-desktop/gnome-rr.c:425
+#: ../libgnome-desktop/gnome-rr.c:427
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "неутврђена грешка у X серверу при добијању опсега величина за екран"
 
-#: ../libgnome-desktop/gnome-rr.c:431
+#: ../libgnome-desktop/gnome-rr.c:433
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "не могу да добијем опсег величина за екран"
 
-#: ../libgnome-desktop/gnome-rr.c:657
+#: ../libgnome-desktop/gnome-rr.c:659
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "Није присутно RANDR проширење"
 
-#: ../libgnome-desktop/gnome-rr.c:923
+#: ../libgnome-desktop/gnome-rr.c:925
 #, c-format
 msgid "could not get information about output %d"
 msgstr "не могу да добијем податке о излазу %d"
@@ -254,7 +260,7 @@ msgstr "не могу да добијем податке о излазу %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1261
+#: ../libgnome-desktop/gnome-rr.c:1263
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -263,12 +269,12 @@ msgstr ""
 "захтеван положај/величина за CRTC %d је изван дозвољеног ограничења: положај="
 "(%d, %d), величина=(%d, %d), највише=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1297
+#: ../libgnome-desktop/gnome-rr.c:1299
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "не могу да пставим подешавања за CRTC %d екран"
 
-#: ../libgnome-desktop/gnome-rr.c:1409
+#: ../libgnome-desktop/gnome-rr.c:1411
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "не могу да добијем податке о CRTC %d екрану"
@@ -283,7 +289,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1682
+#: ../libgnome-desktop/gnome-rr-config.c:1686
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -292,7 +298,7 @@ msgstr ""
 "захтевана виртуелна величина је изван доступне: захтевана=(%d, %d), најмања="
 "(%d, %d), највећа=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1696
+#: ../libgnome-desktop/gnome-rr-config.c:1700
 #, c-format
 msgid "could not find a suitable configuration of screens"
 msgstr "не могу да нађем одговарајућа подешавања за екране"
