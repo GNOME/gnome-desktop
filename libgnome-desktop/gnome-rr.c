@@ -439,8 +439,8 @@ fill_out_screen_info (Display *xdisplay,
     }
     else
     {
-        /* Translators: a CRTC is a CRT Controller (this is X terminology). */
 	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_RANDR_ERROR,
+		     /* Translators: a CRTC is a CRT Controller (this is X terminology). */
 		     _("could not get the screen resources (CRTCs, outputs, modes)"));
 	return FALSE;
     }
