@@ -1407,34 +1407,79 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 			int               y,
 			GnomeRRRotation   rotation,
                         gboolean          primary,
-			GnomeRROutput    *output)
+			GnomeRROutput    *output,
+			GError          **error)
 {
     CrtcInfo *info = g_hash_table_lookup (assign->info, crtc);
+    guint32 crtc_id;
+    const char *output_name;
 
-    if (!gnome_rr_crtc_can_drive_output (crtc, output) ||
-	!gnome_rr_output_supports_mode (output, mode)  ||
-	!gnome_rr_crtc_supports_rotation (crtc, rotation))
+    crtc_id = gnome_rr_crtc_get_id (crtc);
+    output_name = gnome_rr_output_get_name (output);
+
+    if (!gnome_rr_crtc_can_drive_output (crtc, output))
     {
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+		     _("CRTC %d cannot drive output %s"), crtc_id, output_name);
+	return FALSE;
+    }
+
+    if (!gnome_rr_output_supports_mode (output, mode))
+    {
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+		     _("output %s does not support mode %dx%d@%fHz"),
+		     output_name,
+		     gnome_rr_mode_get_width (mode),
+		     gnome_rr_mode_get_height (mode),
+		     gnome_rr_mode_get_freq (mode) / 1000000.0);
+	return FALSE;
+    }
+
+    if (!gnome_rr_crtc_supports_rotation (crtc, rotation))
+    {
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+		     _("CRTC %d does not support rotation=%s"),
+		     crtc_id,
+		     get_rotation_name (rotation));
 	return FALSE;
     }
 
     if (info)
     {
-	if (info->mode == mode		&&
-	    info->x == x		&&
-	    info->y == y		&&
-	    info->rotation == rotation  &&
-	    can_clone (info, output))
+	if (!(info->mode == mode	&&
+	      info->x == x		&&
+	      info->y == y		&&
+	      info->rotation == rotation))
 	{
-	    g_ptr_array_add (info->outputs, output);
-
-            if (primary && !assign->primary)
-            {
-                assign->primary = output;
-            }
-
-	    return TRUE;
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+			 _("output %s does not have the same parameters as another cloned output:\n"
+			   "existing mode = %d, new mode = %d\n"
+			   "existing coordinates = (%d, %d), new coordinates = (%d, %d)"
+			   "existing rotation = %s, new rotation = %s"),
+			 output_name,
+			 gnome_rr_mode_get_id (info->mode), gnome_rr_mode_get_id (mode),
+			 info->x, info->y,
+			 x, y,
+			 get_rotation_name (info->rotation), get_rotation_name (rotation));
+	    return FALSE;
 	}
+
+	if (!can_clone (info, output))
+	{
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
+			 _("cannot clone to output %s"),
+			 output_name);
+	    return FALSE;
+	}
+
+	g_ptr_array_add (info->outputs, output);
+
+	if (primary && !assign->primary)
+	{
+	    assign->primary = output;
+	}
+
+	return TRUE;
     }
     else
     {	
@@ -1457,8 +1502,6 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 
 	return TRUE;
     }
-    
-    return FALSE;
 }
 
 static void
@@ -1554,7 +1597,8 @@ crtc_is_rotated (GnomeRRCrtc *crtc)
 static gboolean
 real_assign_crtcs (GnomeRRScreen *screen,
 		   GnomeOutputInfo **outputs,
-		   CrtcAssignment *assignment)
+		   CrtcAssignment *assignment,
+		   GError **error)
 {
     GnomeRRCrtc **crtcs = gnome_rr_screen_list_crtcs (screen);
     GnomeOutputInfo *output;
@@ -1567,7 +1611,7 @@ real_assign_crtcs (GnomeRRScreen *screen,
     /* It is always allowed for an output to be turned off */
     if (!output->on)
     {
-	return real_assign_crtcs (screen, outputs + 1, assignment);
+	return real_assign_crtcs (screen, outputs + 1, assignment, error);
     }
 
     for (i = 0; crtcs[i] != NULL; ++i)
@@ -1598,9 +1642,10 @@ real_assign_crtcs (GnomeRRScreen *screen,
 			    output->x, output->y,
 			    output->rotation,
                             output->primary,
-			    gnome_rr_output))
+			    gnome_rr_output,
+			    error))
 		    {
-			if (real_assign_crtcs (screen, outputs + 1, assignment))
+			if (real_assign_crtcs (screen, outputs + 1, assignment, error))
 			    return TRUE;
 			
 			crtc_assignment_unassign (assignment, crtc, gnome_rr_output);
@@ -1665,7 +1710,7 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **
     assignment->info = g_hash_table_new_full (
 	g_direct_hash, g_direct_equal, NULL, (GFreeFunc)crtc_info_free);
 
-    if (real_assign_crtcs (screen, outputs, assignment))
+    if (real_assign_crtcs (screen, outputs, assignment, error))
     {
 	int width, height;
 	int min_width, max_width, min_height, max_height;
@@ -1698,10 +1743,7 @@ crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **
 	
 	return assignment;
     }
-    else
-	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
-		     _("could not find a suitable configuration of screens"));
-    
+
 fail:
     crtc_assignment_free (assignment);
     
