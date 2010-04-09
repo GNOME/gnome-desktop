@@ -1454,7 +1454,7 @@ crtc_assignment_assign (CrtcAssignment   *assign,
 	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_CRTC_ASSIGNMENT,
 			 _("output %s does not have the same parameters as another cloned output:\n"
 			   "existing mode = %d, new mode = %d\n"
-			   "existing coordinates = (%d, %d), new coordinates = (%d, %d)"
+			   "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
 			   "existing rotation = %s, new rotation = %s"),
 			 output_name,
 			 gnome_rr_mode_get_id (info->mode), gnome_rr_mode_get_id (mode),
