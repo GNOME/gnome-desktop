@@ -1631,15 +1631,19 @@ real_assign_crtcs (GnomeRRScreen *screen,
 
     for (i = 0; crtcs[i] != NULL; ++i)
     {
+	GnomeRRCrtc *crtc = crtcs[i];
+	int crtc_id = gnome_rr_crtc_get_id (crtc);
 	int pass;
+
+	g_string_append_printf (accumulated_error,
+				_("Trying modes for CRTC %d\n"),
+				crtc_id);
 
 	/* Make two passes, one where frequencies must match, then
 	 * one where they don't have to
 	 */
 	for (pass = 0; pass < 2; ++pass)
 	{
-	    GnomeRRCrtc *crtc = crtcs[i];
-	    int crtc_id = gnome_rr_crtc_get_id (crtc);
 	    GnomeRROutput *gnome_rr_output = gnome_rr_screen_get_output_by_name (screen, output->name);
 	    GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
 	    int j;
