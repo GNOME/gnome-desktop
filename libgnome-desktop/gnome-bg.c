@@ -1277,7 +1277,7 @@ gnome_bg_get_pixmap_from_root (GdkScreen *screen)
 	}
 
 	width = gdk_screen_get_width (screen);
-	height = gdk_screen_get_width (screen);
+	height = gdk_screen_get_height (screen);
 
 	pixmap = gdk_pixmap_new (source_pixmap != NULL? source_pixmap :
 				 gdk_screen_get_root_window (screen),
