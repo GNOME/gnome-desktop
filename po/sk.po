@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&component=general\n"
-"POT-Creation-Date: 2010-03-13 15:43+0000\n"
-"PO-Revision-Date: 2010-03-15 20:41+0100\n"
+"POT-Creation-Date: 2010-04-21 07:53+0000\n"
+"PO-Revision-Date: 2010-04-21 23:17+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,9 +76,8 @@ msgid "Welcome to the GNOME Desktop"
 msgstr "Víta vás prostredie GNOME"
 
 #: ../gnome-about/gnome-about.in:890
-#, fuzzy
 msgid "Brought to you by:"
-msgstr "Prinesené pre vás od:"
+msgstr "Vám priniesli:"
 
 #: ../gnome-about/gnome-about.in:914
 msgid "<b>%(name)s:</b> %(value)s"
@@ -234,6 +233,7 @@ msgstr ""
 "fungovať"
 
 # * https://bugzilla.gnome.org/show_bug.cgi?id=610571
+#. Translators: a CRTC is a CRT Controller (this is X terminology).
 #: ../libgnome-desktop/gnome-rr.c:444
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
@@ -254,7 +254,7 @@ msgstr "nepodarilo sa získať rozsah veľkostí obrazovky"
 msgid "RANDR extension is not present"
 msgstr "rozšírenie RANDR nie je prítomné"
 
-#: ../libgnome-desktop/gnome-rr.c:1034
+#: ../libgnome-desktop/gnome-rr.c:1037
 #, c-format
 msgid "could not get information about output %d"
 msgstr "nepodarilo sa získať informácie o výstupe %d"
@@ -262,7 +262,7 @@ msgstr "nepodarilo sa získať informácie o výstupe %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1421
+#: ../libgnome-desktop/gnome-rr.c:1424
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -271,12 +271,12 @@ msgstr ""
 "vyžiadaná poloha/veľkosť pre CRTC %d je mimo povolenú hranicu: poloha=(%d, %"
 "d), veľkosť=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1457
+#: ../libgnome-desktop/gnome-rr.c:1460
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "nepodarilo sa nastaviť konfiguráciu pre CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1573
+#: ../libgnome-desktop/gnome-rr.c:1576
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "nepodarilo sa získať informáciu o CRTC %d"
@@ -292,10 +292,72 @@ msgid ""
 msgstr ""
 "žiadna z uložených konfigurácií displeja nezodpovedá aktívnej konfigurácii"
 
+#: ../libgnome-desktop/gnome-rr-config.c:1423
+#, c-format
+msgid "CRTC %d cannot drive output %s"
+msgstr "CRTC %d nemôže obsluhovať výstup %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1430
+#, c-format
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "výstup %s nepodporuje režim %dx%d@%dHz"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1441
+#, c-format
+msgid "CRTC %d does not support rotation=%s"
+msgstr "CRTC %d nepodporuje otočenie=%s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1455
+#, c-format
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"výstup %s nemá rovnaké parametre ako iný klonovaný výstup:\n"
+"existujúci režim = %d, nový režim = %d\n"
+"existujúce súradnice = (%d, %d), nové súradnice = (%d, %d)\n"
+"existujúca otočenie = %s, nové otočenie = %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1470
+#, c-format
+msgid "cannot clone to output %s"
+msgstr "nepodarilo sa klonovať na výstup %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1639
+#, c-format
+msgid "Trying modes for CRTC %d\n"
+msgstr "Skúšanie režimov pre CRTC %d\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1663
+#, c-format
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr ""
+"CRTC %d: skúšanie režimu %dx%d@%dHz s výstupom %dx%d@%dHz (prechod %d)\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1710
+#, c-format
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"nepodarilo sa priradiť CRTC na výstupy:\n"
+"%s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1714
+#, c-format
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"žiaden z vybraných režimov nebol kompatibilný s možnými režimami:\n"
+"%s"
+
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1689
+#: ../libgnome-desktop/gnome-rr-config.c:1796
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -303,11 +365,6 @@ msgid ""
 msgstr ""
 "vyžadovaná virtuálna veľkosť nezodpovedá dostupnej veľkosti: vyžadované=(%d, "
 "%d), minimum=(%d, %d), maximum=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1703
-#, c-format
-msgid "could not find a suitable configuration of screens"
-msgstr "nepodarilo sa nájsť použiteľnú konfiguráciu obrazoviek"
 
 #. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
 #. Translators:  this is the feature where what you see on your laptop's
@@ -318,3 +375,6 @@ msgstr "nepodarilo sa nájsť použiteľnú konfiguráciu obrazoviek"
 #: ../libgnome-desktop/gnome-rr-labeler.c:212
 msgid "Mirror Screens"
 msgstr "Zrkadliť obrazovky"
+
+#~ msgid "could not find a suitable configuration of screens"
+#~ msgstr "nepodarilo sa nájsť použiteľnú konfiguráciu obrazoviek"
