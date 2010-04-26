@@ -16,9 +16,9 @@ msgstr ""
 "Project-Id-Version: gnome-desktop HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&component=general\n"
-"POT-Creation-Date: 2010-02-22 11:33+0000\n"
-"PO-Revision-Date: 2010-02-23 08:29+0200\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"POT-Creation-Date: 2010-04-23 20:15+0000\n"
+"PO-Revision-Date: 2010-04-24 10:25+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -135,9 +135,6 @@ msgstr ""
 "muul moel kaasa aidanud: näiteks tõlkimise, dokumentatsiooni kirjutamise "
 "ning kvaliteedikontrolliga."
 
-msgid "Laptop"
-msgstr "Sülearvuti"
-
 #. Translators: "Unknown" here is used to identify a monitor for which
 #. * we don't know the vendor. When a vendor is known, the name of the
 #. * vendor is used.
@@ -153,6 +150,11 @@ msgstr "Viga faili '%s' lugemisel: %s"
 msgid "Error rewinding file '%s': %s"
 msgstr "Viga faili '%s' tagasikerimisel: %s"
 
+#. Translators: the "name" mentioned
+#. * here is the name of an application or
+#. * a document
+#. Translators: the "name" mentioned here is the name of
+#. * an application or a document
 msgid "No name"
 msgstr "Nimi puudub"
 
@@ -197,6 +199,7 @@ msgstr ""
 "Terminali pole võimalik leida, kasutatakse xtermi, isegi juhul, kui see ei "
 "pruugi töötada"
 
+#. Translators: a CRTC is a CRT Controller (this is X terminology).
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "ekraani ressursse (CRTC-d, väljundeid, režiime) pole võimalik hankida"
@@ -236,10 +239,68 @@ msgstr "CRTC %d jaoks pole võimalik sätteid määrata"
 msgid "could not get information about CRTC %d"
 msgstr "CRTC %d kohta pole võimalik teavet hankida"
 
+msgid "Laptop"
+msgstr "Sülearvuti"
+
 #, c-format
 msgid ""
 "none of the saved display configurations matched the active configuration"
 msgstr "salvestatud kuvasätete hulgast ei sobi aktiivsete sätetega mitte ükski"
+
+#, c-format
+msgid "CRTC %d cannot drive output %s"
+msgstr "CRTC %d ei suuda juhtida väljundit %s"
+
+#, c-format
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "väljund %s ei toeta režiimi %dx%d@%dHz"
+
+#, c-format
+msgid "CRTC %d does not support rotation=%s"
+msgstr "CRTC %d ei toeta pöördenurka=%s"
+
+#, c-format
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"väljundil %s ei ole samad parameetrid nagu teisel kloonitud väljundil:\n"
+"praegune režiim = %d, uus režiim = %d\n"
+"praegused koordinaadid = (%d, %d), uued koordinaadid = (%d, %d)\n"
+"praegune pöördenurk = %s, uus pöördenurk %s"
+
+#, c-format
+msgid "cannot clone to output %s"
+msgstr "pole võimalik väljundisse %s kloonida"
+
+#, c-format
+msgid "Trying modes for CRTC %d\n"
+msgstr "CRTC %d režiimide proovimine\n"
+
+# või peaks pass tõlkima kui läbilase või tiir?
+# päris tõlkimata vist ka ei saa jätta
+#, c-format
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr ""
+"CRTC %d: režiimi %dx%d@%dHz proovimine väljundiga %dx%d@%dHz (käik %d)\n"
+
+#, c-format
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"CRTC-sid pole võimalik väljunditele määrata:\n"
+"%s"
+
+#, c-format
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"ükski valitud režiimidest ei sobi võimalikega:\n"
+"%s"
 
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
@@ -252,10 +313,6 @@ msgstr ""
 "vajalik virtuaalsuurus ei sobi saadaoleva suurusega: küsitud suurus=(%d, %"
 "d), vähim=(%d, %d), suurim=(%d, %d)"
 
-#, c-format
-msgid "could not find a suitable configuration of screens"
-msgstr "ekraanidele pole võimalik sobivaid sätteid leida"
-
 #. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
@@ -264,3 +321,6 @@ msgstr "ekraanidele pole võimalik sobivaid sätteid leida"
 #.
 msgid "Mirror Screens"
 msgstr "Ekraanid on peegeldatud"
+
+#~ msgid "could not find a suitable configuration of screens"
+#~ msgstr "ekraanidele pole võimalik sobivaid sätteid leida"
