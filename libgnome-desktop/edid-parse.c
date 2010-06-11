@@ -349,44 +349,27 @@ decode_standard_timings (const uchar *edid, MonitorInfo *info)
     return TRUE;
 }
 
-static char *
-decode_lf_string (const uchar *s, int n_chars, char *prev)
+static void
+decode_lf_string (const uchar *s, int n_chars, char *result)
 {
     int i;
-    char *ret, *tmp;
-
-    tmp = g_malloc0 (n_chars);
-
     for (i = 0; i < n_chars; ++i)
     {
 	if (s[i] == 0x0a)
 	{
-	    tmp[i] = '\0';
+	    *result++ = '\0';
 	    break;
 	}
 	else if (s[i] == 0x00)
 	{
 	    /* Convert embedded 0's to spaces */
-	    tmp[i] = ' ';
+	    *result++ = ' ';
 	}
 	else
 	{
-	    tmp[i] = s[i];
+	    *result++ = s[i];
 	}
     }
-
-    if (prev)
-    {
-       ret = g_strjoin(NULL, prev, tmp, NULL);
-       g_free(prev);
-       g_free(tmp);
-    }
-    else
-    {
-       ret = tmp;
-    }
-
-    return ret;
 }
 
 static void
@@ -396,16 +379,13 @@ decode_display_descriptor (const uchar *desc,
     switch (desc[0x03])
     {
     case 0xFC:
-	info->dsc_product_name = decode_lf_string (desc + 5, 13,
-                                                   info->dsc_product_name);
+	decode_lf_string (desc + 5, 13, info->dsc_product_name);
 	break;
     case 0xFF:
-	info->dsc_serial_number = decode_lf_string (desc + 5, 13,
-                                                    info->dsc_serial_number);
+	decode_lf_string (desc + 5, 13, info->dsc_serial_number);
 	break;
     case 0xFE:
-	info->dsc_string = decode_lf_string (desc + 5, 13,
-                                             info->dsc_string);
+	decode_lf_string (desc + 5, 13, info->dsc_string);
 	break;
     case 0xFD:
 	/* Range Limits */
@@ -532,18 +512,6 @@ decode_check_sum (const uchar *edid,
 	check += edid[i];
 
     info->checksum = check;
-}
-
-void
-free_edid (MonitorInfo *info)
-{
-    if (info)
-    {
-	g_free (info->dsc_product_name);
-	g_free (info->dsc_serial_number);
-	g_free (info->dsc_string);
-    }
-    g_free (info);
 }
 
 MonitorInfo *

@@ -502,7 +502,7 @@ gnome_rr_config_new_current (GnomeRRScreen *screen)
 	    else
 		output->display_name = make_display_name (info);
 		
-	    free_edid (info);
+	    g_free (info);
 		
 	    crtc = gnome_rr_output_get_crtc (rr_output);
 	    mode = crtc? gnome_rr_crtc_get_current_mode (crtc) : NULL;
