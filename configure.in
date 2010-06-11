@@ -30,7 +30,7 @@ AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
 
-LT_VERSION=18:1:1
+LT_VERSION=0:0:0
 AC_SUBST(LT_VERSION)
 
 AM_MAINTAINER_MODE
@@ -111,8 +111,8 @@ fi
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
-GDK_PIXBUF_REQUIRED=2.4.0
-GTK_REQUIRED=2.18.0
+GDK_PIXBUF_REQUIRED=2.90.2
+GTK_REQUIRED=2.90.2
 GLIB_REQUIRED=2.19.1
 GCONF_REQUIRED=2.0.0
 STARTUP_NOTIFICATION_REQUIRED=0.5
@@ -175,7 +175,7 @@ AC_SUBST(RANDR_PACKAGE)
 
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-2.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-3.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
 
 dnl for gnome-about
 AM_PATH_PYTHON
@@ -186,7 +186,7 @@ GNOME_DOC_INIT
 
 dnl Language Support
 
-GETTEXT_PACKAGE=gnome-desktop-2.0
+GETTEXT_PACKAGE=gnome-desktop-3.0
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 		   [The gettext translation domain])
 AC_SUBST(GETTEXT_PACKAGE)
@@ -221,8 +221,8 @@ gnome-about/headers/Makefile
 libgnome-desktop/Makefile
 libgnome-desktop/libgnome/Makefile
 libgnome-desktop/libgnomeui/Makefile
-libgnome-desktop/gnome-desktop-2.0.pc
-libgnome-desktop/gnome-desktop-2.0-uninstalled.pc
+libgnome-desktop/gnome-desktop-3.0.pc
+libgnome-desktop/gnome-desktop-3.0-uninstalled.pc
 docs/Makefile
 docs/reference/Makefile
 docs/reference/gnome-desktop/Makefile

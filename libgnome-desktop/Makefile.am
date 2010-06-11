@@ -8,11 +8,11 @@ INCLUDES =							\
 	$(XLIB_CFLAGS)						\
 	$(GNOME_DESKTOP_CFLAGS)
 
-lib_LTLIBRARIES = libgnome-desktop-2.la
+lib_LTLIBRARIES = libgnome-desktop-3.la
 
 noinst_PROGRAMS = test-ditem
 
-libgnome_desktop_2_la_SOURCES = \
+libgnome_desktop_3_la_SOURCES = \
 	gnome-desktop-item.c	\
 	gnome-desktop-utils.c	\
 	gnome-desktop-thumbnail.c \
@@ -28,11 +28,11 @@ libgnome_desktop_2_la_SOURCES = \
 	edid.h			\
 	private.h
 
-libgnome_desktop_2_la_LIBADD =	\
+libgnome_desktop_3_la_LIBADD =	\
 	$(XLIB_LIBS)		\
 	$(GNOME_DESKTOP_LIBS)
 
-libgnome_desktop_2_la_LDFLAGS = \
+libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \
 	-no-undefined
 
@@ -40,12 +40,12 @@ test_ditem_SOURCES = \
 	test-ditem.c
 
 test_ditem_LDADD = \
-	libgnome-desktop-2.la		\
+	libgnome-desktop-3.la		\
 	$(XLIB_LIBS)			\
 	$(GNOME_DESKTOP_LIBS)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gnome-desktop-2.0.pc
+pkgconfig_DATA = gnome-desktop-3.0.pc
 
 pnpdata_DATA_dist = pnp.ids
 if USE_INTERNAL_PNP_IDS
@@ -57,8 +57,8 @@ check:
 	test -s $(top_srcdir)/libgnome-desktop/pnp.ids
 
 EXTRA_DIST = \
-	gnome-desktop-2.0.pc.in                \
-	gnome-desktop-2.0-uninstalled.pc.in    \
+	gnome-desktop-3.0.pc.in                \
+	gnome-desktop-3.0-uninstalled.pc.in    \
 	$(pnpdata_DATA_dist)
 
 MAINTAINERCLEANFILES = \
