@@ -68,7 +68,7 @@ expand_content_files=
 # e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
 # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
 INCLUDES=$(GNOME_DESKTOP_CFLAGS) -I$(top_srcdir)/libgnome-desktop -DGNOME_DESKTOP_USE_UNSTABLE_API
-GTKDOC_LIBS=$(GNOME_DESKTOP_LIBS) $(top_builddir)/libgnome-desktop/libgnome-desktop-2.la
+GTKDOC_LIBS=$(GNOME_DESKTOP_LIBS) $(top_builddir)/libgnome-desktop/libgnome-desktop-3.la
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make
