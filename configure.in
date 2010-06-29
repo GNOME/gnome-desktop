@@ -111,7 +111,7 @@ fi
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
-GDK_PIXBUF_REQUIRED=2.90.2
+GDK_PIXBUF_REQUIRED=2.21.3
 GTK_REQUIRED=2.90.2
 GLIB_REQUIRED=2.19.1
 GCONF_REQUIRED=2.0.0
@@ -175,7 +175,7 @@ AC_SUBST(RANDR_PACKAGE)
 
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-3.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
 
 dnl for gnome-about
 AM_PATH_PYTHON
