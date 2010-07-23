@@ -207,10 +207,7 @@ color_from_string (const char *string,
 	if (!string)
 		return;
 
-	if (!gdk_color_parse (string, colorp))
-		return;
-
-	gdk_rgb_find_color (gdk_rgb_get_colormap(), colorp);
+	gdk_color_parse (string, colorp);
 }
 
 static char *
@@ -969,6 +966,7 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 {
 	int pm_width, pm_height;
 	GdkPixmap *pixmap;
+	cairo_t *cr;
 	
 	g_return_val_if_fail (bg != NULL, NULL);
 	g_return_val_if_fail (window != NULL, NULL);
@@ -994,13 +992,9 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 		pixmap = gdk_pixmap_new (window, pm_width, pm_height, -1);
 	}
 	
+	cr = gdk_cairo_create (pixmap);
 	if (!bg->filename && bg->color_type == GNOME_BG_COLOR_SOLID) {
-		GdkGC *gc = gdk_gc_new (pixmap);
-		gdk_gc_set_rgb_fg_color (gc, &(bg->primary));
-		
-		gdk_draw_point (pixmap, gc, 0, 0);
-		
-		g_object_unref (gc);
+		gdk_cairo_set_source_color (cr, &(bg->primary));
 	}
 	else {
 		GdkPixbuf *pixbuf;
@@ -1008,13 +1002,14 @@ gnome_bg_create_pixmap (GnomeBG	    *bg,
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 width, height);
 		gnome_bg_draw (bg, pixbuf, gdk_drawable_get_screen (GDK_DRAWABLE (window)), is_root);
-		gdk_draw_pixbuf (pixmap, NULL, pixbuf,
-				 0, 0,
-				 0, 0, width, height,
-				 GDK_RGB_DITHER_MAX, 0, 0);
+		gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
 		g_object_unref (pixbuf);
 	}
+
+	cairo_paint (cr);
 	
+	cairo_destroy (cr);
+
 	return pixmap;
 }
 
