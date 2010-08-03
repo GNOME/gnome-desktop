@@ -14,14 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-04 11:22+0200\n"
-"PO-Revision-Date: 2010-02-22 18:31+0300\n"
-"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
+"POT-Creation-Date: 2010-08-03 17:02+0300\n"
+"PO-Revision-Date: 2010-04-09 09:31+0300\n"
+"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
@@ -60,7 +60,7 @@ msgstr "Пищащий резиновый GNOME"
 
 #: ../gnome-about/gnome-about.in:70
 msgid "Wanda The GNOME Fish"
-msgstr "Ванда -- рыбка GNOME"
+msgstr "Ванда — рыбка GNOME"
 
 #: ../gnome-about/gnome-about.in:567
 msgid "_Open URL"
@@ -104,7 +104,7 @@ msgstr "Дата сборки"
 
 #: ../gnome-about/gnome-about.in:1024
 msgid "Display information on this GNOME version"
-msgstr "Показать информацию о версии этой среды GNOME"
+msgstr "Показать информацию об этой версии среды GNOME"
 
 #: ../gnome-version.xml.in.in.h:1
 msgid ""
@@ -243,27 +243,28 @@ msgstr ""
 "Не удалось найти подходящий терминал, используется приложение xterm, хотя и "
 "оно может не работать"
 
-#: ../libgnome-desktop/gnome-rr.c:442
+#. Translators: a CRTC is a CRT Controller (this is X terminology).
+#: ../libgnome-desktop/gnome-rr.c:444
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "не удалось получить доступ к ресурсам экрана (CRTC, выходы, режимы)"
 
-#: ../libgnome-desktop/gnome-rr.c:462
+#: ../libgnome-desktop/gnome-rr.c:464
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "при попытке получения допустимых размеров экрана возникла ошибка"
 
-#: ../libgnome-desktop/gnome-rr.c:468
+#: ../libgnome-desktop/gnome-rr.c:470
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "не удалось получить допустимые размеры экрана"
 
-#: ../libgnome-desktop/gnome-rr.c:713
+#: ../libgnome-desktop/gnome-rr.c:715
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "Расширение RANDR отсутствует"
 
-#: ../libgnome-desktop/gnome-rr.c:1032
+#: ../libgnome-desktop/gnome-rr.c:1037
 #, c-format
 msgid "could not get information about output %d"
 msgstr "не удалось получить информацию о выходе %d"
@@ -271,7 +272,7 @@ msgstr "не удалось получить информацию о выход�
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1419
+#: ../libgnome-desktop/gnome-rr.c:1424
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -280,30 +281,93 @@ msgstr ""
 "требуемое положение или размер для CRTC %d выходит за рамки допустимых "
 "пределов: положение=(%d, %d), размер=(%d, %d), максимально=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1455
+#: ../libgnome-desktop/gnome-rr.c:1460
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "не удалось установить конфигурацию контроллера CRT %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1571
+#: ../libgnome-desktop/gnome-rr.c:1576
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "не удалось получить информацию о контроллере CRT %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:500
+#: ../libgnome-desktop/gnome-rr-config.c:501
 msgid "Laptop"
 msgstr "Ноутбук"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1161
+#: ../libgnome-desktop/gnome-rr-config.c:1162
 #, c-format
 msgid ""
 "none of the saved display configurations matched the active configuration"
 msgstr "ни одна из сохранённых конфигураций не совпадает с текущей"
 
+#: ../libgnome-desktop/gnome-rr-config.c:1423
+#, c-format
+msgid "CRTC %d cannot drive output %s"
+msgstr "контроллер CRT %d не может управлять выходом %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1430
+#, c-format
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "выход %s не поддерживает режим %dx%d@%dГц"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1441
+#, c-format
+msgid "CRTC %d does not support rotation=%s"
+msgstr "контроллер CRT %d не поддерживает вращение=%s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1455
+#, fuzzy, c-format
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"параметры выхода %s отличаются от параметров другого клонированного выхода:\n"
+"режим = %d, новый режим = %d\n"
+"координаты = (%d, %d), новые координаты = (%d, %d)вращениe = %s, новое "
+"вращение = %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1470
+#, c-format
+msgid "cannot clone to output %s"
+msgstr "не удалось клонировать в выход %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1639
+#, c-format
+msgid "Trying modes for CRTC %d\n"
+msgstr ""
+
+#: ../libgnome-desktop/gnome-rr-config.c:1663
+#, c-format
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr ""
+"контроллер CRT %d: пробный режим %dx%d@%dГц с выходом на %dx%d@%dГц (попытка "
+"%d)\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1710
+#, c-format
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"не удалось установить контроллеры CRT для выходов:\n"
+"%s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1714
+#, c-format
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"ни один из выбранных режимов не совместим с разрешёнными режимами:\n"
+"%s"
+
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1688
+#: ../libgnome-desktop/gnome-rr-config.c:1796
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -312,17 +376,15 @@ msgstr ""
 "требуемый виртуальный размер не умещается в доступное пространство: "
 "требуется=(%d, %d), минимум=(%d, %d), максимум=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1702
-#, c-format
-msgid "could not find a suitable configuration of screens"
-msgstr "не удалось найти подходящую конфигурацию экранов"
-
 #. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../libgnome-desktop/gnome-rr-labeler.c:210
+#: ../libgnome-desktop/gnome-rr-labeler.c:212
 msgid "Mirror Screens"
 msgstr "Зеркальные экраны"
+
+#~ msgid "could not find a suitable configuration of screens"
+#~ msgstr "не удалось найти подходящую конфигурацию экранов"
