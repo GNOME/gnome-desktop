@@ -10,10 +10,7 @@ INCLUDES =							\
 
 lib_LTLIBRARIES = libgnome-desktop-3.la
 
-noinst_PROGRAMS = test-ditem
-
 libgnome_desktop_3_la_SOURCES = \
-	gnome-desktop-item.c	\
 	gnome-desktop-utils.c	\
 	gnome-desktop-thumbnail.c \
 	gnome-thumbnail-pixbuf-utils.c \
@@ -35,14 +32,6 @@ libgnome_desktop_3_la_LIBADD =	\
 libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \
 	-no-undefined
-
-test_ditem_SOURCES = \
-	test-ditem.c
-
-test_ditem_LDADD = \
-	libgnome-desktop-3.la		\
-	$(XLIB_LIBS)			\
-	$(GNOME_DESKTOP_LIBS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-3.0.pc
