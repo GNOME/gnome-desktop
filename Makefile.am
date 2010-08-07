@@ -3,11 +3,14 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
-	gnome-about 		\
 	pixmaps			\
 	desktop-docs		\
 	docs			\
 	man
+
+if GNOME_ABOUT_ENABLED
+SUBDIRS += gnome-about
+endif
 
 EXTRA_DIST =			\
 	MAINTAINERS		\
