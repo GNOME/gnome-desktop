@@ -38,7 +38,7 @@ pkgconfig_DATA = gnome-desktop-3.0.pc
 
 pnpdata_DATA_dist = pnp.ids
 if USE_INTERNAL_PNP_IDS
-pnpdatadir = $(datadir)/libgnome-desktop
+pnpdatadir = $(datadir)/libgnome-desktop-3.0
 pnpdata_DATA = pnp.ids
 endif
 
