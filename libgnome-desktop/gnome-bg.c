@@ -451,6 +451,21 @@ gnome_bg_init (GnomeBG *bg)
 }
 
 static void
+gnome_bg_dispose (GObject *object)
+{
+	GnomeBG *bg = GNOME_BG (object);
+
+	if (bg->file_monitor) {
+		g_object_unref (bg->file_monitor);
+		bg->file_monitor = NULL;
+	}
+
+	clear_cache (bg);
+
+	G_OBJECT_CLASS (gnome_bg_parent_class)->dispose (object);
+}
+
+static void
 gnome_bg_finalize (GObject *object)
 {
 	GnomeBG *bg = GNOME_BG (object);
@@ -475,8 +490,6 @@ gnome_bg_finalize (GObject *object)
 		bg->filename = NULL;
 	}
 
-	clear_cache (bg);
-
 	G_OBJECT_CLASS (gnome_bg_parent_class)->finalize (object);
 }
 
@@ -485,6 +498,7 @@ gnome_bg_class_init (GnomeBGClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = gnome_bg_dispose;
 	object_class->finalize = gnome_bg_finalize;
 
 	signals[CHANGED] = g_signal_new ("changed",
