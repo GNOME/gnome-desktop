@@ -1,4 +1,4 @@
-/* gnome-bg-crossfade.h - fade window background between two pixmaps
+/* gnome-bg-crossfade.h - fade window background between two surfaces
 
    Copyright 2008, Red Hat, Inc.
 
@@ -60,10 +60,10 @@ struct _GnomeBGCrossfadeClass
 
 GType             gnome_bg_crossfade_get_type              (void);
 GnomeBGCrossfade *gnome_bg_crossfade_new (int width, int height);
-gboolean          gnome_bg_crossfade_set_start_pixmap (GnomeBGCrossfade *fade,
-                                                      GdkPixmap *pixmap);
-gboolean          gnome_bg_crossfade_set_end_pixmap (GnomeBGCrossfade *fade,
-                                                    GdkPixmap *pixmap);
+gboolean          gnome_bg_crossfade_set_start_surface (GnomeBGCrossfade *fade,
+                                                        cairo_surface_t *surface);
+gboolean          gnome_bg_crossfade_set_end_surface (GnomeBGCrossfade *fade,
+                                                      cairo_surface_t *surface);
 void              gnome_bg_crossfade_start (GnomeBGCrossfade *fade,
                                             GdkWindow        *window);
 gboolean          gnome_bg_crossfade_is_started (GnomeBGCrossfade *fade);
