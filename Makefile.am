@@ -3,12 +3,14 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
-	desktop-docs		\
 	docs			\
 	man
 
 if GNOME_ABOUT_ENABLED
 SUBDIRS += gnome-about
+endif
+if DESKTOP_DOCS_ENABLED
+SUBDIRS += desktop-docs
 endif
 
 EXTRA_DIST =			\
