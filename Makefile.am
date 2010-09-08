@@ -1,5 +1,3 @@
-ACLOCAL_AMFLAGS = -I m4
-
 SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
@@ -14,13 +12,7 @@ if DESKTOP_DOCS_ENABLED
 SUBDIRS += desktop-docs
 endif
 
-EXTRA_DIST =			\
-	MAINTAINERS		\
-	ChangeLog.pre-git	\
-	gnome-version.xml.in.in	\
-	COPYING-DOCS		\
-	HACKING			\
-	gnome-doc-utils.make
+ACLOCAL_AMFLAGS = -I m4
 
 if GNOME_ABOUT_ENABLED
 versiondir=$(datadir)/gnome-about
@@ -28,11 +20,21 @@ version_DATA=gnome-version.xml
 endif
 @INTLTOOL_XML_RULE@
 
+EXTRA_DIST =			\
+	COPYING-DOCS		\
+	HACKING			\
+	MAINTAINERS		\
+	ChangeLog.pre-git	\
+	gnome-version.xml.in.in	\
+	gnome-doc-utils.make
+
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
-CLEANFILES = $(version_DATA)
+CLEANFILES = \
+	$(version_DATA)
+
 DISTCLEANFILES = \
-  gnome-doc-utils.make
+	gnome-doc-utils.make
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/aclocal.m4 \
