@@ -4,12 +4,14 @@ SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
 	pixmaps			\
-	desktop-docs		\
 	docs			\
 	man
 
 if GNOME_ABOUT_ENABLED
 SUBDIRS += gnome-about
+endif
+if DESKTOP_DOCS_ENABLED
+SUBDIRS += desktop-docs
 endif
 
 EXTRA_DIST =			\
