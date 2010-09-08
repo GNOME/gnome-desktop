@@ -3,7 +3,6 @@ ACLOCAL_AMFLAGS = -I m4
 SUBDIRS =			\
 	po 			\
 	libgnome-desktop 	\
-	pixmaps			\
 	desktop-docs		\
 	docs			\
 	man
