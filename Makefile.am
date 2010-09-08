@@ -16,13 +16,14 @@ EXTRA_DIST =			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
 	gnome-version.xml.in.in	\
-	gnome-version.xml	\
 	COPYING-DOCS		\
 	HACKING			\
 	gnome-doc-utils.make
 
+if GNOME_ABOUT_ENABLED
 versiondir=$(datadir)/gnome-about
 version_DATA=gnome-version.xml
+endif
 @INTLTOOL_XML_RULE@
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
