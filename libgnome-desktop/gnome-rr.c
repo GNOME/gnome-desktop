@@ -801,6 +801,51 @@ gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
 #endif
 }
 
+static gboolean
+force_timestamp_update (GnomeRRScreen *screen)
+{
+    GnomeRRCrtc *crtc;
+    XRRCrtcInfo *current_info;
+    Status status;
+    gboolean timestamp_updated;
+
+    timestamp_updated = FALSE;
+
+    crtc = screen->info->crtcs[0];
+
+    if (crtc == NULL)
+	goto out;
+
+    current_info = XRRGetCrtcInfo (screen->xdisplay,
+				   screen->info->resources,
+				   crtc->id);
+
+    if (current_info == NULL)
+	goto out;
+
+    gdk_error_trap_push ();
+    status = XRRSetCrtcConfig (screen->xdisplay,
+			       screen->info->resources,
+			       crtc->id,
+			       current_info->timestamp,
+			       current_info->x,
+			       current_info->y,
+			       current_info->mode,
+			       current_info->rotation,
+			       current_info->outputs,
+			       current_info->noutput);
+
+    XRRFreeCrtcInfo (current_info);
+
+    gdk_flush ();
+    if (gdk_error_trap_pop ())
+	goto out;
+
+    if (status == RRSetConfigSuccess)
+	timestamp_updated = TRUE;
+out:
+    return timestamp_updated;
+}
 
 /**
  * gnome_rr_screen_refresh
@@ -819,8 +864,18 @@ gboolean
 gnome_rr_screen_refresh (GnomeRRScreen *screen,
 			 GError       **error)
 {
+    gboolean refreshed;
+
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-    return screen_update (screen, FALSE, TRUE, error);
+
+    gdk_x11_display_grab (gdk_screen_get_display (screen->gdk_screen));
+
+    refreshed = screen_update (screen, FALSE, TRUE, error);
+    force_timestamp_update (screen); /* this is to keep other clients from thinking that the X server re-detected things by itself - bgo#621046 */
+
+    gdk_x11_display_ungrab (gdk_screen_get_display (screen->gdk_screen));
+
+    return refreshed;
 }
 
 GnomeRRMode **
