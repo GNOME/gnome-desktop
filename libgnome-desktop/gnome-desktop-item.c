@@ -1750,6 +1750,7 @@ ditem_execute (const GnomeDesktopItem *item,
 	char *exec_locale;
 	int launched = 0;
 #ifdef HAVE_STARTUP_NOTIFICATION
+	GdkDisplay *gdkdisplay;
 	SnLauncherContext *sn_context;
 	SnDisplay *sn_display;
 	const char *startup_class;
@@ -1786,7 +1787,12 @@ ditem_execute (const GnomeDesktopItem *item,
 	arg_ptr = make_args (file_list);
 
 #ifdef HAVE_STARTUP_NOTIFICATION
-	sn_display = sn_display_new (gdk_display,
+	if (screen)
+		gdkdisplay = gdk_screen_get_display (screen);
+	else
+		gdkdisplay = gdk_display_get_default ();
+
+	sn_display = sn_display_new (GDK_DISPLAY_XDISPLAY (gdkdisplay),
 				     sn_error_trap_push,
 				     sn_error_trap_pop);
 
@@ -1805,7 +1811,7 @@ ditem_execute (const GnomeDesktopItem *item,
 
 		sn_context = sn_launcher_context_new (sn_display,
 						      screen ? gdk_screen_get_number (screen) :
-						      DefaultScreen (gdk_display));
+						      DefaultScreen (GDK_DISPLAY_XDISPLAY (gdkdisplay)));
 		
 		name = gnome_desktop_item_get_localestring (item,
 							    GNOME_DESKTOP_ITEM_NAME);
@@ -1926,10 +1932,8 @@ ditem_execute (const GnomeDesktopItem *item,
 			
 			if (item->launch_time > 0)
 				launch_time = item->launch_time;
-			else if (screen != NULL)
-				launch_time = gdk_x11_display_get_user_time (gdk_screen_get_display (screen));
 			else
-				launch_time = gdk_x11_display_get_user_time (gdk_display_get_default ());
+				launch_time = gdk_x11_display_get_user_time (gdkdisplay);
 
 			sn_launcher_context_initiate (sn_context,
 						      g_get_prgname () ? g_get_prgname () : "unknown",
