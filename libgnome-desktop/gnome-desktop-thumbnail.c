@@ -611,38 +611,44 @@ gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (GnomeDesktopThumbnai
 static gboolean
 mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 {
-	guint i;
-	static GHashTable *formats_hash = NULL;
+        guint i;
+        static GHashTable *formats_hash = NULL;
+        gchar *key;
+        gboolean result;
 
-	if (!formats_hash) {
-		GSList *formats, *list;
-		
-		formats_hash = g_hash_table_new (g_str_hash, g_str_equal);
+        if (!formats_hash) {
+                GSList *formats, *list;
 
-		formats = gdk_pixbuf_get_formats ();
-		list = formats;
-		
-		while (list) {
-			GdkPixbufFormat *format = list->data;
-			gchar **mime_types;
-			
-			mime_types = gdk_pixbuf_format_get_mime_types (format);
+                formats_hash = g_hash_table_new_full (g_str_hash, g_content_type_equals, g_free, NULL);
 
-			for (i = 0; mime_types[i] != NULL; i++)
-				g_hash_table_insert (formats_hash,
-						     (gpointer) g_strdup (mime_types[i]),
-						     GUINT_TO_POINTER (1));	
-				
-			g_strfreev (mime_types);
-			list = list->next;
-		}
-		g_slist_free (formats);
-	}
+                formats = gdk_pixbuf_get_formats ();
+                list = formats;
 
-	if (g_hash_table_lookup (formats_hash, mime_type))
-		return TRUE;
+                while (list) {
+                        GdkPixbufFormat *format = list->data;
+                        gchar **mime_types;
 
-	return FALSE;
+                        mime_types = gdk_pixbuf_format_get_mime_types (format);
+
+                        for (i = 0; mime_types[i] != NULL; i++)
+                                g_hash_table_insert (formats_hash,
+                                                     (gpointer) g_content_type_from_mime_type (mime_types[i]),
+                                                     GUINT_TO_POINTER (1));	
+
+                        g_strfreev (mime_types);
+                        list = list->next;
+                }
+                g_slist_free (formats);
+        }
+
+        key = g_content_type_from_mime_type (mime_type);
+        if (g_hash_table_lookup (formats_hash, key))
+                result = TRUE;
+        else
+                result = FALSE;
+        g_free (key);
+
+        return result;
 }
 
 /**
