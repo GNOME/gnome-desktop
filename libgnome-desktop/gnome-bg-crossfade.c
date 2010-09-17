@@ -1,6 +1,7 @@
-/* gnome-bg-crossfade.h - fade window background between two pixmaps
+/* gnome-bg-crossfade.h - fade window background between two surfaces
  *
  * Copyright (C) 2008 Red Hat, Inc.
+ * Copyright © 2010 Christian Persch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public License
@@ -19,6 +20,8 @@
  *
  * Author: Ray Strode <rstrode@redhat.com>
 */
+
+#include <config.h>
 
 #include <string.h>
 #include <math.h>
@@ -42,10 +45,8 @@
 struct _GnomeBGCrossfadePrivate
 {
 	GdkWindow *window;
-	int        width;
-	int        height;
-	GdkPixmap *fading_pixmap;
-	GdkPixmap *end_pixmap;
+        cairo_surface_t *fading_surface;
+        cairo_surface_t *end_surface;
 	gdouble    start_time;
 	gdouble    total_duration;
 	guint      timeout_id;
@@ -54,8 +55,7 @@ struct _GnomeBGCrossfadePrivate
 
 enum {
 	PROP_0,
-	PROP_WIDTH,
-	PROP_HEIGHT,
+	PROP_WINDOW
 };
 
 enum {
@@ -76,20 +76,14 @@ gnome_bg_crossfade_set_property (GObject      *object,
 				 const GValue *value,
 				 GParamSpec   *pspec)
 {
-	GnomeBGCrossfade *fade;
-
-	g_assert (GNOME_IS_BG_CROSSFADE (object));
-
-	fade = GNOME_BG_CROSSFADE (object);
+	GnomeBGCrossfade *fade = GNOME_BG_CROSSFADE (object);
 
 	switch (property_id)
 	{
-	case PROP_WIDTH:
-		fade->priv->width = g_value_get_int (value);
-		break;
-	case PROP_HEIGHT:
-		fade->priv->height = g_value_get_int (value);
-		break;
+        case PROP_WINDOW:
+                fade->priv->window = g_value_get_object (value);
+                g_assert (GDK_IS_WINDOW (fade->priv->window) && GDK_WINDOW_TYPE (fade->priv->window) != GDK_WINDOW_FOREIGN);
+                break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 		break;
@@ -102,21 +96,13 @@ gnome_bg_crossfade_get_property (GObject    *object,
 			     GValue     *value,
 			     GParamSpec *pspec)
 {
-	GnomeBGCrossfade *fade;
-
-	g_assert (GNOME_IS_BG_CROSSFADE (object));
-
-	fade = GNOME_BG_CROSSFADE (object);
+        GnomeBGCrossfade *fade = GNOME_BG_CROSSFADE (object);
 
 	switch (property_id)
 	{
-	case PROP_WIDTH:
-		g_value_set_int (value, fade->priv->width);
-		break;
-	case PROP_HEIGHT:
-		g_value_set_int (value, fade->priv->height);
-		break;
-
+        case PROP_WINDOW:
+                g_value_set_object (value, fade->priv->window);
+                break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 		break;
@@ -132,14 +118,14 @@ gnome_bg_crossfade_finalize (GObject *object)
 
 	gnome_bg_crossfade_stop (fade);
 
-	if (fade->priv->fading_pixmap != NULL) {
-		g_object_unref (fade->priv->fading_pixmap);
-		fade->priv->fading_pixmap = NULL;
+	if (fade->priv->fading_surface != NULL) {
+		cairo_surface_destroy (fade->priv->fading_surface);
+		fade->priv->fading_surface = NULL;
 	}
 
-	if (fade->priv->end_pixmap != NULL) {
-		g_object_unref (fade->priv->end_pixmap);
-		fade->priv->end_pixmap = NULL;
+	if (fade->priv->end_surface != NULL) {
+		cairo_surface_destroy (fade->priv->end_surface);
+		fade->priv->end_surface = NULL;
 	}
 }
 
@@ -154,37 +140,22 @@ gnome_bg_crossfade_class_init (GnomeBGCrossfadeClass *fade_class)
 	gobject_class->set_property = gnome_bg_crossfade_set_property;
 	gobject_class->finalize = gnome_bg_crossfade_finalize;
 
-	/**
-	 * GnomeBGCrossfade:width:
-	 *
-	 * When a crossfade is running, this is width of the fading
-	 * pixmap.
-	 */
-	g_object_class_install_property (gobject_class,
-					 PROP_WIDTH,
-					 g_param_spec_int ("width",
-						           "Window Width",
-							    "Width of window to fade",
-							    0, G_MAXINT, 0,
-							    G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE));
-
-	/**
-	 * GnomeBGCrossfade:height:
-	 *
-	 * When a crossfade is running, this is height of the fading
-	 * pixmap.
-	 */
-	g_object_class_install_property (gobject_class,
-					 PROP_HEIGHT,
-					 g_param_spec_int ("height", "Window Height",
-						           "Height of window to fade on",
-							   0, G_MAXINT, 0,
-							   G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE));
+        /**
+         * GnomeBGCrossfade:window:
+         *
+         * The #GdkWindow the crossfade is shown on.
+         */
+        g_object_class_install_property (gobject_class,
+                                         PROP_WINDOW,
+                                         g_param_spec_object ("window",
+                                                              "Window",
+                                                              "Window",
+                                                              GDK_TYPE_WINDOW,
+                                                              G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE));
 
 	/**
 	 * GnomeBGCrossfade::finished:
 	 * @fade: the #GnomeBGCrossfade that received the signal
-	 * @window: the #GdkWindow the crossfade happend on.
 	 *
 	 * When a crossfade finishes, @window will have a copy
 	 * of the end pixmap as its background, and this signal will
@@ -193,8 +164,8 @@ gnome_bg_crossfade_class_init (GnomeBGCrossfadeClass *fade_class)
 	signals[FINISHED] = g_signal_new ("finished",
 					  G_OBJECT_CLASS_TYPE (gobject_class),
 					  G_SIGNAL_RUN_LAST, 0, NULL, NULL,
-					  g_cclosure_marshal_VOID__OBJECT,
-					  G_TYPE_NONE, 1, G_TYPE_OBJECT);
+					  g_cclosure_marshal_VOID__VOID,
+					  G_TYPE_NONE, 0);
 
 	g_type_class_add_private (gobject_class, sizeof (GnomeBGCrossfadePrivate));
 }
@@ -204,51 +175,69 @@ gnome_bg_crossfade_init (GnomeBGCrossfade *fade)
 {
 	fade->priv = GNOME_BG_CROSSFADE_GET_PRIVATE (fade);
 
-	fade->priv->fading_pixmap = NULL;
-	fade->priv->end_pixmap = NULL;
+	fade->priv->fading_surface = NULL;
+	fade->priv->end_surface = NULL;
 	fade->priv->timeout_id = 0;
 }
 
 /**
  * gnome_bg_crossfade_new:
- * @width: The width of the crossfading window
- * @height: The height of the crossfading window
+ * @window: a #GdkWindow
  *
  * Creates a new object to manage crossfading a
- * window background between two #GdkPixmap drawables.
+ * window background between two cairo surfaces.
  *
  * Return value: the new #GnomeBGCrossfade
  **/
 GnomeBGCrossfade *
-gnome_bg_crossfade_new (int width,
-			int height)
+gnome_bg_crossfade_new (GdkWindow *window)
 {
-	GObject *object;
+        g_return_val_if_fail (window == NULL || (GDK_IS_WINDOW (window) && GDK_WINDOW_TYPE (window) != GDK_WINDOW_FOREIGN), NULL);
 
-	object = g_object_new (GNOME_TYPE_BG_CROSSFADE,
-			       "width", width,
-			       "height", height, NULL);
-
-	return (GnomeBGCrossfade *) object;
+        return g_object_new (GNOME_TYPE_BG_CROSSFADE,
+                             "window", window,
+                             NULL);
 }
 
-static GdkPixmap *
-tile_pixmap (GdkPixmap *pixmap,
-	     int        width,
-	     int        height)
+GdkWindow *
+gnome_bg_crossfade_get_window (GnomeBGCrossfade *fade)
 {
-	GdkPixmap *copy;
-	cairo_t *cr;
+        g_return_val_if_fail (GNOME_IS_BG_CROSSFADE (fade), NULL);
 
-	copy = gdk_pixmap_new (pixmap, width, height, pixmap == NULL? 24 : -1);
+        return fade->priv->window;
+}
 
-	cr = gdk_cairo_create (copy);
+static void
+clear_surface (cairo_surface_t **surface)
+{
+        if (*surface)
+                cairo_surface_destroy (*surface);
+        *surface = NULL;
+}
 
-	if (pixmap != NULL) {
-		cairo_pattern_t *pattern;
-		gdk_cairo_set_source_pixmap (cr, pixmap, 0.0, 0.0);
-		pattern = cairo_get_source (cr);
-		cairo_pattern_set_extend (pattern, CAIRO_EXTEND_REPEAT);
+static cairo_surface_t *
+tile_surface (GnomeBGCrossfade *fade,
+              cairo_surface_t *surface)
+{
+        GnomeBGCrossfadePrivate *priv = fade->priv;
+        cairo_surface_t *copy;
+        cairo_t *cr;
+        int width, height;
+
+        width = gdk_window_get_width (fade->priv->window);
+        height = gdk_window_get_height (fade->priv->window);
+
+        copy = gdk_window_create_similar_surface (priv->window,
+                                                  surface ? cairo_surface_get_content (surface)
+                                                          : CAIRO_CONTENT_COLOR,
+                                                  width, height);
+        cr = cairo_create (copy);
+
+        if (surface) {
+                cairo_pattern_t *pattern;
+                cairo_set_source_surface (cr, surface, 0., 0.);
+                pattern = cairo_get_source (cr);
+                cairo_pattern_set_extend (pattern, CAIRO_EXTEND_REPEAT);
 	} else {
 		GtkStyle *style;
 		style = gtk_widget_get_default_style ();
@@ -258,7 +247,7 @@ tile_pixmap (GdkPixmap *pixmap,
 	cairo_paint (cr);
 
 	if (cairo_status (cr) != CAIRO_STATUS_SUCCESS) {
-		g_object_unref (copy);
+		cairo_surface_destroy (copy);
 		copy = NULL;
 	}
 	cairo_destroy (cr);
@@ -267,33 +256,23 @@ tile_pixmap (GdkPixmap *pixmap,
 }
 
 /**
- * gnome_bg_crossfade_set_start_pixmap:
+ * gnome_bg_crossfade_set_start_surface:
  * @fade: a #GnomeBGCrossfade
- * @pixmap: The #GdkPixmap to fade from
+ * @surface: a #cairo_surface_t to fade from
  *
  * Before initiating a crossfade with gnome_bg_crossfade_start()
- * a start and end pixmap have to be set.  This function sets
- * the pixmap shown at the beginning of the crossfade effect.
- *
- * Return value: %TRUE if successful, or %FALSE if the pixmap
- * could not be copied.
+ * start and end surfaces have to be set.  This function sets
+ * the surface shown at the beginning of the crossfade effect.
  **/
-gboolean
-gnome_bg_crossfade_set_start_pixmap (GnomeBGCrossfade *fade,
-				     GdkPixmap        *pixmap)
+void
+gnome_bg_crossfade_set_start_surface (GnomeBGCrossfade *fade,
+				      cairo_surface_t  *surface)
 {
-	g_return_val_if_fail (GNOME_IS_BG_CROSSFADE (fade), FALSE);
+	g_return_if_fail (GNOME_IS_BG_CROSSFADE (fade));
+        g_return_if_fail (fade->priv->window != NULL);
 
-	if (fade->priv->fading_pixmap != NULL) {
-		g_object_unref (fade->priv->fading_pixmap);
-		fade->priv->fading_pixmap = NULL;
-	}
-
-	fade->priv->fading_pixmap = tile_pixmap (pixmap,
-						 fade->priv->width,
-						 fade->priv->height);
-
-	return fade->priv->fading_pixmap != NULL;
+        clear_surface (&fade->priv->fading_surface);
+        fade->priv->fading_surface = tile_surface (fade, surface);
 }
 
 static gdouble
@@ -312,36 +291,27 @@ get_current_time (void)
 }
 
 /**
- * gnome_bg_crossfade_set_end_pixmap:
+ * gnome_bg_crossfade_set_end_surface:
  * @fade: a #GnomeBGCrossfade
- * @pixmap: The #GdkPixmap to fade to
+ * @surface: a #cairo_surface_t to fade to
  *
  * Before initiating a crossfade with gnome_bg_crossfade_start()
- * a start and end pixmap have to be set.  This function sets
- * the pixmap shown at the end of the crossfade effect.
- *
- * Return value: %TRUE if successful, or %FALSE if the pixmap
- * could not be copied.
+ * start and end surfaces have to be set.  This function sets
+ * the surface shown at the end of the crossfade effect.
  **/
-gboolean
-gnome_bg_crossfade_set_end_pixmap (GnomeBGCrossfade *fade,
-				   GdkPixmap        *pixmap)
+void
+gnome_bg_crossfade_set_end_surface (GnomeBGCrossfade *fade,
+				    cairo_surface_t  *surface)
 {
-	g_return_val_if_fail (GNOME_IS_BG_CROSSFADE (fade), FALSE);
+	g_return_if_fail (GNOME_IS_BG_CROSSFADE (fade));
+        g_return_if_fail (fade->priv->window != NULL);
 
-	if (fade->priv->end_pixmap != NULL) {
-		g_object_unref (fade->priv->end_pixmap);
-		fade->priv->end_pixmap = NULL;
-	}
+        clear_surface (&fade->priv->end_surface);
+        fade->priv->end_surface = tile_surface (fade, surface);
 
-	fade->priv->end_pixmap = tile_pixmap (pixmap,
-					      fade->priv->width,
-					      fade->priv->height);
-
-	/* Reset timer in case we're called while animating
+        /* Reset timer in case we're called while animating
 	 */
 	fade->priv->start_time = get_current_time ();
-	return fade->priv->end_pixmap != NULL;
 }
 
 static gboolean
@@ -353,7 +323,7 @@ animations_are_disabled (GnomeBGCrossfade *fade)
 
 	g_assert (fade->priv->window != NULL);
 
-	screen = gdk_drawable_get_screen (fade->priv->window);
+	screen = gdk_window_get_screen (fade->priv->window);
 
 	settings = gtk_settings_get_for_screen (screen);
 
@@ -363,12 +333,18 @@ animations_are_disabled (GnomeBGCrossfade *fade)
 }
 
 static void
-draw_background (GnomeBGCrossfade *fade)
+update_background (GnomeBGCrossfade *fade)
 {
+        cairo_pattern_t *pattern;
+
+        pattern = cairo_pattern_create_for_surface (fade->priv->fading_surface);
+        gdk_window_set_background_pattern (fade->priv->window, pattern);
+        cairo_pattern_destroy (pattern);
+
 	if (GDK_WINDOW_TYPE (fade->priv->window) == GDK_WINDOW_ROOT) {
 		GdkDisplay *display;
-		display = gdk_drawable_get_display (fade->priv->window);
-		gdk_window_clear (fade->priv->window);
+		display = gdk_window_get_display (fade->priv->window);
+		/* FIXMEchpe: gdk_window_clear (fade->priv->window); */
 		gdk_flush ();
 	} else {
 		gdk_window_invalidate_rect (fade->priv->window, NULL, FALSE);
@@ -400,7 +376,7 @@ on_tick (GnomeBGCrossfade *fade)
 		return on_tick (fade);
 	}
 
-	if (fade->priv->fading_pixmap == NULL) {
+	if (fade->priv->fading_surface == NULL) {
 		return FALSE;
 	}
 
@@ -416,17 +392,16 @@ on_tick (GnomeBGCrossfade *fade)
 	 * even the fastest machines will get *some* fade because the framerate
 	 * is capped.
 	 */
-	cr = gdk_cairo_create (fade->priv->fading_pixmap);
+	cr = cairo_create (fade->priv->fading_surface);
 
-	gdk_cairo_set_source_pixmap (cr, fade->priv->end_pixmap,
-				     0.0, 0.0);
+        cairo_set_source_surface (cr,fade->priv->end_surface, 0., 0.);
 	cairo_paint_with_alpha (cr, percent_done);
 
 	status = cairo_status (cr);
 	cairo_destroy (cr);
 
 	if (status == CAIRO_STATUS_SUCCESS) {
-		draw_background (fade);
+		update_background (fade);
 	}
 	return percent_done <= .99;
 }
@@ -437,50 +412,41 @@ on_finished (GnomeBGCrossfade *fade)
 	if (fade->priv->timeout_id == 0)
 		return;
 
-	g_assert (fade->priv->end_pixmap != NULL);
+	g_assert (fade->priv->end_surface != NULL);
 
-	gdk_window_set_back_pixmap (fade->priv->window,
-				    fade->priv->end_pixmap,
-				    FALSE);
-	draw_background (fade);
+	update_background (fade);
 
-	g_object_unref (fade->priv->end_pixmap);
-	fade->priv->end_pixmap = NULL;
-
-	g_assert (fade->priv->fading_pixmap != NULL);
-
-	g_object_unref (fade->priv->fading_pixmap);
-	fade->priv->fading_pixmap = NULL;
+	clear_surface (&fade->priv->end_surface);
+	g_assert (fade->priv->fading_surface != NULL);
+        clear_surface (&fade->priv->fading_surface);
 
 	fade->priv->timeout_id = 0;
-	g_signal_emit (fade, signals[FINISHED], 0, fade->priv->window);
+	g_signal_emit (fade, signals[FINISHED], 0);
 }
 
 /**
  * gnome_bg_crossfade_start:
  * @fade: a #GnomeBGCrossfade
- * @window: The #GdkWindow to draw crossfade on
  *
- * This function initiates a quick crossfade between two pixmaps on
+ * This function initiates a quick crossfade between two surfaces on
  * the background of @window.  Before initiating the crossfade both
  * gnome_bg_crossfade_start() and gnome_bg_crossfade_end() need to
  * be called. If animations are disabled, the crossfade is skipped,
- * and the window background is set immediately to the end pixmap.
+ * and the window background is set immediately to the end surface.
  **/
 void
-gnome_bg_crossfade_start (GnomeBGCrossfade *fade,
-			  GdkWindow        *window)
+gnome_bg_crossfade_start (GnomeBGCrossfade *fade)
 {
 	GSource *source;
 	GMainContext *context;
 
 	g_return_if_fail (GNOME_IS_BG_CROSSFADE (fade));
-	g_return_if_fail (window != NULL);
-	g_return_if_fail (fade->priv->fading_pixmap != NULL);
-	g_return_if_fail (fade->priv->end_pixmap != NULL);
+	g_return_if_fail (fade->priv->window != NULL);
+	g_return_if_fail (fade->priv->fading_surface != NULL);
+	g_return_if_fail (fade->priv->end_surface != NULL);
 	g_return_if_fail (!gnome_bg_crossfade_is_started (fade));
-	g_return_if_fail (GDK_WINDOW_TYPE (window) != GDK_WINDOW_FOREIGN);
 
+        /* FIXME shouldn't this use gdk_threads_add_timout_full ? */
 	source = g_timeout_source_new (1000 / 60.0);
 	g_source_set_callback (source,
 			       (GSourceFunc) on_tick,
@@ -490,17 +456,12 @@ gnome_bg_crossfade_start (GnomeBGCrossfade *fade,
 	fade->priv->timeout_id = g_source_attach (source, context);
 	g_source_unref (source);
 
-	fade->priv->window = window;
-	gdk_window_set_back_pixmap (fade->priv->window,
-				    fade->priv->fading_pixmap,
-				    FALSE);
-	draw_background (fade);
+        update_background (fade);
 
 	fade->priv->is_first_frame = TRUE;
 	fade->priv->total_duration = .75;
 	fade->priv->start_time = get_current_time ();
 }
-
 
 /**
  * gnome_bg_crossfade_is_started:

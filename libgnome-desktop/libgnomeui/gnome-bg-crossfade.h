@@ -1,6 +1,7 @@
 /* gnome-bg-crossfade.h - fade window background between two pixmaps
 
    Copyright 2008, Red Hat, Inc.
+   Copyright © 2010 Christian Persch
 
    This file is part of the Gnome Library.
 
@@ -30,6 +31,7 @@
 #endif
 
 #include <gdk/gdk.h>
+#include <cairo.h>
 
 G_BEGIN_DECLS
 
@@ -55,17 +57,17 @@ struct _GnomeBGCrossfadeClass
 {
 	GObjectClass parent_class;
 
-	void (* finished) (GnomeBGCrossfade *fade, GdkWindow *window);
+	void (* finished) (GnomeBGCrossfade *fade);
 };
 
 GType             gnome_bg_crossfade_get_type              (void);
-GnomeBGCrossfade *gnome_bg_crossfade_new (int width, int height);
-gboolean          gnome_bg_crossfade_set_start_pixmap (GnomeBGCrossfade *fade,
-                                                      GdkPixmap *pixmap);
-gboolean          gnome_bg_crossfade_set_end_pixmap (GnomeBGCrossfade *fade,
-                                                    GdkPixmap *pixmap);
-void              gnome_bg_crossfade_start (GnomeBGCrossfade *fade,
-                                            GdkWindow        *window);
+GnomeBGCrossfade *gnome_bg_crossfade_new (GdkWindow *window);
+GdkWindow        *gnome_bg_crossfade_get_window (GnomeBGCrossfade *fade);
+void              gnome_bg_crossfade_set_start_surface (GnomeBGCrossfade *fade,
+                                                        cairo_surface_t *surface);
+void              gnome_bg_crossfade_set_end_surface (GnomeBGCrossfade *fade,
+                                                      cairo_surface_t *surface);
+void              gnome_bg_crossfade_start (GnomeBGCrossfade *fade);
 gboolean          gnome_bg_crossfade_is_started (GnomeBGCrossfade *fade);
 void              gnome_bg_crossfade_stop (GnomeBGCrossfade *fade);
 
