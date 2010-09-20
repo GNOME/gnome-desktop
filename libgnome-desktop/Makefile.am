@@ -1,14 +1,16 @@
 SUBDIRS = libgnome libgnomeui
 
-INCLUDES =							\
-	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""  \
-	-DPNP_IDS=\""$(PNP_IDS)"\"				\
-	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED)					\
-	$(XLIB_CFLAGS)						\
-	$(GNOME_DESKTOP_CFLAGS)
-
 lib_LTLIBRARIES = libgnome-desktop-3.la
+
+AM_CPPFLAGS =							\
+	$(GNOME_DESKTOP_CFLAGS)					\
+	$(XLIB_CFLAGS)						\
+	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""	\
+	-DPNP_IDS=\""$(PNP_IDS)"\"				\
+	$(DISABLE_DEPRECATED)
+
+AM_CFLAGS = $(WARN_CFLAGS)
 
 libgnome_desktop_3_la_SOURCES = \
 	gnome-desktop-utils.c	\
@@ -36,18 +38,18 @@ libgnome_desktop_3_la_LDFLAGS = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-3.0.pc
 
-pnpdata_DATA_dist = pnp.ids
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
 pnpdata_DATA = pnp.ids
 endif
+pnpdata_DATA_dist = pnp.ids
 
 check:
 	test -s $(top_srcdir)/libgnome-desktop/pnp.ids
 
 EXTRA_DIST = \
-	gnome-desktop-3.0.pc.in                \
-	gnome-desktop-3.0-uninstalled.pc.in    \
+	gnome-desktop-3.0.pc.in			\
+	gnome-desktop-3.0-uninstalled.pc.in	\
 	$(pnpdata_DATA_dist)
 
 MAINTAINERCLEANFILES = \

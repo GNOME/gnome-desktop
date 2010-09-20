@@ -1,8 +1,4 @@
-SUBDIRS =			\
-	po 			\
-	libgnome-desktop 	\
-	docs			\
-	man
+SUBDIRS = libgnome-desktop man docs po
 
 if GNOME_ABOUT_ENABLED
 SUBDIRS += gnome-about
@@ -13,10 +9,13 @@ endif
 
 ACLOCAL_AMFLAGS = -I m4
 
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
+
 if GNOME_ABOUT_ENABLED
-versiondir=$(datadir)/gnome-about
-version_DATA=gnome-version.xml
+versiondir = $(datadir)/gnome-about
+version_DATA = gnome-version.xml
 endif
+
 @INTLTOOL_XML_RULE@
 
 EXTRA_DIST =			\
@@ -26,8 +25,6 @@ EXTRA_DIST =			\
 	ChangeLog.pre-git	\
 	gnome-version.xml.in.in	\
 	gnome-doc-utils.make
-
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
 CLEANFILES = \
 	$(version_DATA)
