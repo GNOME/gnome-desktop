@@ -30,6 +30,7 @@
 #endif
 
 #include <gdk/gdk.h>
+#include <cairo.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <libgnomeui/gnome-bg-crossfade.h>
@@ -76,8 +77,8 @@ void             gnome_bg_set_placement         (GnomeBG               *bg,
 						 GnomeBGPlacement       placement);
 void             gnome_bg_set_color             (GnomeBG               *bg,
 						 GnomeBGColorType       type,
-						 GdkColor              *primary,
-						 GdkColor              *secondary);
+						 const GdkColor        *primary,
+						 const GdkColor        *secondary);
 /* Getters */
 GnomeBGPlacement gnome_bg_get_placement         (GnomeBG               *bg);
 void		 gnome_bg_get_color             (GnomeBG               *bg,
@@ -91,7 +92,13 @@ void             gnome_bg_draw                  (GnomeBG               *bg,
 						 GdkPixbuf             *dest,
 						 GdkScreen	       *screen,
                                                  gboolean               is_root);
-GdkPixmap *      gnome_bg_create_pixmap         (GnomeBG               *bg,
+void             gnome_bg_draw_cairo            (GnomeBG               *bg,
+                                                 cairo_t               *cr,
+                                                 int                    width,
+                                                 int                    height,
+                                                 GdkScreen             *screen,
+                                                 gboolean               is_root);
+cairo_surface_t *gnome_bg_create_surface        (GnomeBG               *bg,
 						 GdkWindow             *window,
 						 int                    width,
 						 int                    height,
@@ -119,16 +126,16 @@ GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
 						 int                    dest_height,
 						 int                    frame_num);
 
-/* Set a pixmap as root - not a GnomeBG method. At some point
+/* Set a surface as root - not a GnomeBG method. At some point
  * if we decide to stabilize the API then we may want to make
- * these object methods, drop gnome_bg_create_pixmap, etc.
+ * these object methods, drop gnome_bg_create_surface, etc.
  */
-void             gnome_bg_set_pixmap_as_root    (GdkScreen             *screen,
-						 GdkPixmap             *pixmap);
+void             gnome_bg_set_surface_as_root   (GdkScreen             *screen,
+						 cairo_surface_t       *surface);
 
-GnomeBGCrossfade *gnome_bg_set_pixmap_as_root_with_crossfade (GdkScreen *screen,
-                                                              GdkPixmap *pixmap);
-GdkPixmap *gnome_bg_get_pixmap_from_root (GdkScreen *screen);
+GnomeBGCrossfade *gnome_bg_set_surface_as_root_with_crossfade (GdkScreen *screen,
+                                                               cairo_surface_t *surface);
+cairo_surface_t * gnome_bg_get_surface_from_root (GdkScreen *screen);
 
 G_END_DECLS
 
