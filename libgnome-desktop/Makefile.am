@@ -8,7 +8,7 @@ AM_CPPFLAGS =							\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""	\
 	-DPNP_IDS=\""$(PNP_IDS)"\"				\
-	$(DISABLE_DEPRECATED)
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 AM_CFLAGS = $(WARN_CFLAGS)
 
