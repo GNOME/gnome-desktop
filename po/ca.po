@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-13 16:21+0100\n"
-"PO-Revision-Date: 2010-04-02 17:33+0200\n"
+"POT-Creation-Date: 2010-09-27 23:39+0200\n"
+"PO-Revision-Date: 2010-09-27 22:48+0200\n"
 "Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -148,9 +148,9 @@ msgid ""
 "1997; many more have contributed in other important ways, including "
 "translations, documentation, and quality assurance."
 msgstr ""
-"Centenars de persones han contribuït codi al GNOME des que es va començar "
-"al 1997; molts més hi han contribuït d'altres maneres importants, que "
-"inclouen traduccions, documentació i control de qualitat."
+"Centenars de persones han contribuït codi al GNOME des que es va començar al "
+"1997; molts més hi han contribuït d'altres maneres importants, que inclouen "
+"traduccions, documentació i control de qualitat."
 
 #. Translators: "Unknown" here is used to identify a monitor for which
 #. * we don't know the vendor. When a vendor is known, the name of the
@@ -176,7 +176,7 @@ msgstr "S'ha produït un error en rebobinar el fitxer «%s»: %s"
 #. Translators: the "name" mentioned here is the name of
 #. * an application or a document
 #: ../libgnome-desktop/gnome-desktop-item.c:380
-#: ../libgnome-desktop/gnome-desktop-item.c:3524
+#: ../libgnome-desktop/gnome-desktop-item.c:3528
 msgid "No name"
 msgstr "Sense nom"
 
@@ -195,32 +195,32 @@ msgstr "No s'ha pogut trobar el fitxer «%s»"
 msgid "No filename to save to"
 msgstr "No hi ha un nom de fitxer per a desar"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:1822
+#: ../libgnome-desktop/gnome-desktop-item.c:1828
 #, c-format
 msgid "Starting %s"
 msgstr "S'està iniciant %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2058
+#: ../libgnome-desktop/gnome-desktop-item.c:2062
 #, c-format
 msgid "No URL to launch"
 msgstr "No hi ha un URL per a obrir"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2074
+#: ../libgnome-desktop/gnome-desktop-item.c:2078
 #, c-format
 msgid "Not a launchable item"
 msgstr "No és un element llançable"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2084
+#: ../libgnome-desktop/gnome-desktop-item.c:2088
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "No hi ha una ordre (Exec) per a llançar"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2097
+#: ../libgnome-desktop/gnome-desktop-item.c:2101
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Ordre errònia (Exec) per a llançar"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:3581
+#: ../libgnome-desktop/gnome-desktop-item.c:3585
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Codificació desconeguda de: %s"
@@ -231,6 +231,7 @@ msgstr ""
 "No s'ha trobat cap terminal, s'utilitzarà l'xterm encara que potser no "
 "funcioni"
 
+#. Translators: a CRTC is a CRT Controller (this is X terminology).
 #: ../libgnome-desktop/gnome-rr.c:444
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
@@ -253,7 +254,7 @@ msgstr "no s'ha pogut obtenir el rang de les mides de pantalla"
 msgid "RANDR extension is not present"
 msgstr "no hi ha l'extensió RANDR"
 
-#: ../libgnome-desktop/gnome-rr.c:1034
+#: ../libgnome-desktop/gnome-rr.c:1092
 #, c-format
 msgid "could not get information about output %d"
 msgstr "no s'ha pogut obtenir la informació sobre la sortida %d"
@@ -261,7 +262,7 @@ msgstr "no s'ha pogut obtenir la informació sobre la sortida %d"
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1421
+#: ../libgnome-desktop/gnome-rr.c:1479
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -270,12 +271,12 @@ msgstr ""
 "la posició/mida sol·licitades per al CRTC %d són fora dels límits permesos: "
 "posició=(%d, %d), mida=(%d, %d), màxim=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1457
+#: ../libgnome-desktop/gnome-rr.c:1515
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "no s'ha pogut establir la configuració per al CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1573
+#: ../libgnome-desktop/gnome-rr.c:1631
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "no s'ha pogut obtenir la informació sobre el CRTC %d"
@@ -292,10 +293,74 @@ msgstr ""
 "cap de les configuracions desades de la pantalla coincideix amb la "
 "configuració activa"
 
+#: ../libgnome-desktop/gnome-rr-config.c:1423
+#, c-format
+msgid "CRTC %d cannot drive output %s"
+msgstr "la pantalla CRTC %d no pot mostrar la sortida %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1430
+#, c-format
+msgid "output %s does not support mode %dx%d@%dHz"
+msgstr "la sortida %s no pot utilitzar el mode %dx%d@%dHz"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1441
+#, c-format
+msgid "CRTC %d does not support rotation=%s"
+msgstr "la pantalla CRTC %d no permet la rotació = %s»"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1455
+#, c-format
+msgid ""
+"output %s does not have the same parameters as another cloned output:\n"
+"existing mode = %d, new mode = %d\n"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
+msgstr ""
+"la sortida %s no permet utilitzar els mateixos paràmetres que l'altra "
+"sortida clonada:\n"
+"el mode existent = %d, el mode nou = %d\n"
+"les coordenades existents = (%d, %d), les coordenades noves (%d, %d)\n"
+"la rotació existent = %s, la rotació nova = %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1470
+#, c-format
+msgid "cannot clone to output %s"
+msgstr "no s'ha pogut clonar cap a la sortida %s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1639
+#, c-format
+msgid "Trying modes for CRTC %d\n"
+msgstr "S'estan provant els modes per la pantalla CRTC %d\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1663
+#, c-format
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgstr ""
+"Pantalla CRTC %d: s'està provant el mode %dx%d@%dHz amb la sortida a %dx%d@%"
+"dHz (intent %d)\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1710
+#, c-format
+msgid ""
+"could not assign CRTCs to outputs:\n"
+"%s"
+msgstr ""
+"no s'han pogut assignar les pantalles CRTC a les sortides:\n"
+"%s"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1714
+#, c-format
+msgid ""
+"none of the selected modes were compatible with the possible modes:\n"
+"%s"
+msgstr ""
+"cap mètode seleccionat era compatible amb els mètodes possibles:\n"
+"%s"
+
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1689
+#: ../libgnome-desktop/gnome-rr-config.c:1796
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -303,11 +368,6 @@ msgid ""
 msgstr ""
 "la mida virtual sol·licitada no s'ajusta a la mida disponible: sol·licitada="
 "(%d, %d), mínima=(%d, %d), màxima=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1703
-#, c-format
-msgid "could not find a suitable configuration of screens"
-msgstr "no s'ha pogut trobar una configuració adequada de les pantalles"
 
 #. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
 #. Translators:  this is the feature where what you see on your laptop's
@@ -318,6 +378,9 @@ msgstr "no s'ha pogut trobar una configuració adequada de les pantalles"
 #: ../libgnome-desktop/gnome-rr-labeler.c:212
 msgid "Mirror Screens"
 msgstr "Pantalles duplicades"
+
+#~ msgid "could not find a suitable configuration of screens"
+#~ msgstr "no s'ha pogut trobar una configuració adequada de les pantalles"
 
 #~ msgid "Directory"
 #~ msgstr "Directori"
