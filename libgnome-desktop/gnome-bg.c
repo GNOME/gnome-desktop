@@ -1290,7 +1290,7 @@ gnome_bg_get_surface_from_root (GdkScreen *screen)
                                                                    w_ret, h_ret);
                 }
 
-		gdk_error_trap_pop ();
+                gdk_error_trap_pop_ignored ();
 	}
 
 	width = gdk_screen_get_width (screen);
@@ -1361,8 +1361,7 @@ gnome_bg_set_root_pixmap_id (GdkScreen       *screen,
 		    nitems == 1) {
 			gdk_error_trap_push ();
 			XKillClient (display, *(Pixmap *)data_esetroot);
-			gdk_flush ();
-			gdk_error_trap_pop ();
+                        gdk_error_trap_pop_ignored ();
 		}
 		XFree (data_esetroot);
 	}
