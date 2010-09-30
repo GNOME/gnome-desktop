@@ -141,16 +141,13 @@ make_palette (GnomeRRLabeler *labeler)
 #define LABEL_WINDOW_PADDING 12
 
 static gboolean
-label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer data)
+label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-	cairo_t *cr;
 	GdkColor *color;
 	GtkAllocation allocation;
 
 	color = g_object_get_data (G_OBJECT (widget), "color");
 	gtk_widget_get_allocation (widget, &allocation);
-
-	cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	/* edge outline */
 
@@ -172,8 +169,6 @@ label_window_expose_event_cb (GtkWidget *widget, GdkEventExpose *event, gpointer
 			 allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
 			 allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2);
 	cairo_fill (cr);
-
-	cairo_destroy (cr);
 
 	return FALSE;
 }
@@ -198,8 +193,8 @@ create_label_window (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor 
 	 */
 	g_object_set_data (G_OBJECT (window), "color", color);
 
-	g_signal_connect (window, "expose-event",
-			  G_CALLBACK (label_window_expose_event_cb), labeler);
+	g_signal_connect (window, "draw",
+			  G_CALLBACK (label_window_draw_event_cb), labeler);
 
 	if (labeler->config->clone) {
 		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
