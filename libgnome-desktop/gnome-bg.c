@@ -1676,8 +1676,14 @@ get_as_pixbuf_for_size (GnomeBG    *bg,
 
 		/* If scalable choose maximum size */
 		format = gdk_pixbuf_get_file_info (filename, NULL, NULL);
-                tmp = gdk_pixbuf_format_get_name (format);
-		if (format != NULL &&
+
+                if (format != NULL) {
+                        tmp = gdk_pixbuf_format_get_name (format);
+                } else {
+                        tmp = NULL;
+                }
+
+		if (tmp != NULL &&
 		    strcmp (tmp, "svg") == 0 &&
 		    (best_width > 0 && best_height > 0) &&
 		    (bg->placement == GNOME_BG_PLACEMENT_FILL_SCREEN ||
