@@ -88,6 +88,9 @@ typedef enum {
 #define GNOME_RR_TYPE_MODE   (gnome_rr_mode_get_type())
 
 GType gnome_rr_screen_get_type (void);
+GType gnome_rr_output_get_type (void);
+GType gnome_rr_crtc_get_type (void);
+GType gnome_rr_mode_get_type (void);
 
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
