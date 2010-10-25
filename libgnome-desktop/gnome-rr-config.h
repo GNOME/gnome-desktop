@@ -66,6 +66,11 @@ struct GnomeOutputInfo
     gpointer		user_data;
 };
 
+#define GNOME_RR_TYPE_OUTPUT_INFO    (gnome_rr_output_info_get_type())
+#define GNOME_RR_TYPE_CONFIG         (gnome_rr_config_get_type())
+GType gnome_rr_output_info_get_type (void);
+GType gnome_rr_config_get_type (void);
+
 struct GnomeRRConfig
 {
     /* "clone" means that at least two outputs are at (0, 0) offset and they

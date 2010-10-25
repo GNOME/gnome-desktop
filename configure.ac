@@ -204,6 +204,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 
 AM_GLIB_GNU_GETTEXT
 
+GOBJECT_INTROSPECTION_CHECK([0.9.7])
 
 dnl Don't use AC_PROG_AWK since we need the full pathname.
 AC_PATH_PROGS(AWK, mawk gawk nawk awk, )
