@@ -47,4 +47,35 @@ struct GnomeRRScreenPrivate
     Atom                        connector_type_atom;
 };
 
+struct GnomeRROutputInfoPrivate
+{
+    char *		name;
+
+    gboolean		on;
+    int			width;
+    int			height;
+    int			rate;
+    int			x;
+    int			y;
+    GnomeRRRotation	rotation;
+
+    gboolean		connected;
+    gchar		vendor[4];
+    guint		product;
+    guint		serial;
+    double		aspect;
+    int			pref_width;
+    int			pref_height;
+    char *		display_name;
+    gboolean            primary;
+};
+
+struct GnomeRRConfigPrivate
+{
+  gboolean clone;
+  gboolean current;
+  GnomeRRScreen *screen;
+  GnomeRROutputInfo **outputs;
+};
+
 #endif

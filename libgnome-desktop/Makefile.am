@@ -22,6 +22,7 @@ introspection_sources = 		\
 	display-name.c			\
 	gnome-rr.c			\
 	gnome-rr-config.c		\
+	gnome-rr-output-info.c		\
 	gnome-rr-labeler.c		\
 	edid-parse.c
 

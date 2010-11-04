@@ -76,16 +76,16 @@ typedef enum {
 
 #define GNOME_RR_CONNECTOR_TYPE_PANEL "Panel"  /* This is a laptop's built-in LCD */
 
-#define GNOME_RR_TYPE_SCREEN                  (gnome_rr_screen_get_type())
-#define GNOME_RR_SCREEN(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_RR_TYPE_SCREEN, GnomeRRScreen))
-#define GNOME_RR_IS_SCREEN(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_RR_TYPE_SCREEN))
-#define GNOME_RR_SCREEN_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_RR_TYPE_SCREEN, GnomeRRScreenClass))
-#define GNOME_RR_IS_SCREEN_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_RR_TYPE_SCREEN))
-#define GNOME_RR_SCREEN_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_RR_TYPE_SCREEN, GnomeRRScreenClass))
+#define GNOME_TYPE_RR_SCREEN                  (gnome_rr_screen_get_type())
+#define GNOME_RR_SCREEN(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_RR_SCREEN, GnomeRRScreen))
+#define GNOME_IS_RR_SCREEN(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_RR_SCREEN))
+#define GNOME_RR_SCREEN_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_RR_SCREEN, GnomeRRScreenClass))
+#define GNOME_IS_RR_SCREEN_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RR_SCREEN))
+#define GNOME_RR_SCREEN_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_RR_SCREEN, GnomeRRScreenClass))
 
-#define GNOME_RR_TYPE_OUTPUT (gnome_rr_output_get_type())
-#define GNOME_RR_TYPE_CRTC   (gnome_rr_crtc_get_type())
-#define GNOME_RR_TYPE_MODE   (gnome_rr_mode_get_type())
+#define GNOME_TYPE_RR_OUTPUT (gnome_rr_output_get_type())
+#define GNOME_TYPE_RR_CRTC   (gnome_rr_crtc_get_type())
+#define GNOME_TYPE_RR_MODE   (gnome_rr_mode_get_type())
 
 GType gnome_rr_screen_get_type (void);
 GType gnome_rr_output_get_type (void);
@@ -126,6 +126,8 @@ void            gnome_rr_screen_get_timestamps     (GnomeRRScreen         *scree
 
 void            gnome_rr_screen_set_primary_output (GnomeRRScreen         *screen,
                                                     GnomeRROutput         *output);
+
+GnomeRRMode   **gnome_rr_screen_create_clone_modes (GnomeRRScreen *screen);
 
 /* GnomeRROutput */
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
