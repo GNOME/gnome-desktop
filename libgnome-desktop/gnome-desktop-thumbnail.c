@@ -40,7 +40,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include "libgnomeui/gnome-desktop-thumbnail.h"
+#include "gnome-desktop-thumbnail.h"
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 #include <glib/gstdio.h>

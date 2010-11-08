@@ -230,8 +230,6 @@ gnome-about/Makefile
 gnome-about/gnome-about.desktop.in
 gnome-about/headers/Makefile
 libgnome-desktop/Makefile
-libgnome-desktop/libgnome/Makefile
-libgnome-desktop/libgnomeui/Makefile
 libgnome-desktop/gnome-desktop-3.0.pc
 libgnome-desktop/gnome-desktop-3.0-uninstalled.pc
 docs/Makefile

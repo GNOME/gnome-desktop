@@ -33,6 +33,7 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <stdlib.h>
 
 #include <gio/gio.h>
+#include <gdesktop-enums.h>
 
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
@@ -42,9 +43,8 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <cairo-xlib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-bg.h>
-#include <libgnomeui/gnome-bg-crossfade.h>
-#include <gdesktop-enums.h>
+#include "gnome-bg.h"
+#include "gnome-bg-crossfade.h"
 
 #define BG_KEY_DRAW_BACKGROUND    "draw-background"
 #define BG_KEY_PRIMARY_COLOR      "primary-color"

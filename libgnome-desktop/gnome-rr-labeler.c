@@ -29,7 +29,7 @@
 
 #include <config.h>
 #include <glib/gi18n-lib.h>
-#include "libgnomeui/gnome-rr-labeler.h"
+#include "gnome-rr-labeler.h"
 #include <gtk/gtk.h>
 
 #include <X11/Xproto.h>

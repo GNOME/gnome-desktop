@@ -35,7 +35,7 @@
 #include <gdk/gdkx.h>
 
 #undef GNOME_DISABLE_DEPRECATED
-#include "libgnomeui/gnome-rr-config.h"
+#include "gnome-rr-config.h"
 
 #include "edid.h"
 #include "gnome-rr-private.h"

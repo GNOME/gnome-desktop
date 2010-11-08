@@ -36,8 +36,8 @@
 #include <cairo-xlib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnomeui/gnome-bg.h>
-#include "libgnomeui/gnome-bg-crossfade.h"
+#include "gnome-bg.h"
+#include "gnome-bg-crossfade.h"
 
 struct _GnomeBGCrossfadePrivate
 {

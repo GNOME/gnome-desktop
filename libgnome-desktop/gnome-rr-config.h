@@ -28,8 +28,8 @@
 #error   gnome-rr-config.h is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-rr-config.h
 #endif
 
-#include <libgnomeui/gnome-rr.h>
 #include <glib.h>
+#include <libgnome-desktop/gnome-rr.h>
 
 typedef struct GnomeOutputInfo GnomeOutputInfo;
 typedef struct GnomeRRConfig GnomeRRConfig;

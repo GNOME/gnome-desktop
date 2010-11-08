@@ -30,7 +30,7 @@
 #include <glib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include "libgnomeui/gnome-desktop-thumbnail.h"
+#include "gnome-desktop-thumbnail.h"
 
 #define LOAD_BUFFER_SIZE 65536
 

@@ -30,7 +30,7 @@
 #include <glib/gi18n-lib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome/gnome-desktop-utils.h>
+#include "gnome-desktop-utils.h"
 
 #include "private.h"
 

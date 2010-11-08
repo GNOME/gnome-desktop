@@ -38,7 +38,7 @@
 #include <X11/Xatom.h>
 
 #undef GNOME_DISABLE_DEPRECATED
-#include "libgnomeui/gnome-rr.h"
+#include "gnome-rr.h"
 
 #include "private.h"
 #include "gnome-rr-private.h"

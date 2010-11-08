@@ -1,8 +1,7 @@
-SUBDIRS = libgnome libgnomeui
-
 lib_LTLIBRARIES = libgnome-desktop-3.la
 
 AM_CPPFLAGS =							\
+	-I$(top_srcdir)						\
 	$(GNOME_DESKTOP_CFLAGS)					\
 	$(XLIB_CFLAGS)						\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
@@ -37,6 +36,16 @@ libgnome_desktop_3_la_LDFLAGS = \
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-3.0.pc
+
+libgnome_desktopdir = $(includedir)/gnome-desktop-3.0/libgnome-destkop
+libgnome_desktop_HEADERS = \
+        gnome-bg.h                      \
+        gnome-bg-crossfade.h            \
+        gnome-desktop-utils.h           \
+        gnome-desktop-thumbnail.h       \
+        gnome-rr.h                      \
+        gnome-rr-config.h               \
+        gnome-rr-labeler.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
