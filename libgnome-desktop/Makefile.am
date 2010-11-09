@@ -43,7 +43,7 @@ libgnome_desktop_3_la_LDFLAGS = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-desktop-3.0.pc
 
-libgnome_desktopdir = $(includedir)/gnome-desktop-3.0/libgnome-destkop
+libgnome_desktopdir = $(includedir)/gnome-desktop-3.0/libgnome-desktop
 libgnome_desktop_HEADERS = \
         gnome-bg.h                      \
         gnome-bg-crossfade.h            \
