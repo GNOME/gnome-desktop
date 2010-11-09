@@ -84,11 +84,7 @@ static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
 					       GError          **error);
 static void             crtc_assignment_free  (CrtcAssignment   *assign);
 static void             output_free           (GnomeOutputInfo  *output);
-static GnomeOutputInfo *output_copy           (const GnomeOutputInfo  *output);
-static GnomeRRConfig *  gnome_rr_config_copy (const GnomeRRConfig *config);
-
-G_DEFINE_BOXED_TYPE (GnomeOutputInfo, gnome_rr_output_info, output_copy, output_free)
-G_DEFINE_BOXED_TYPE (GnomeRRConfig, gnome_rr_config, gnome_rr_config_copy, gnome_rr_config_free)
+static GnomeOutputInfo *output_copy           (GnomeOutputInfo  *output);
 
 typedef struct Parser Parser;
 
@@ -626,7 +622,7 @@ output_free (GnomeOutputInfo *output)
 }
 
 static GnomeOutputInfo *
-output_copy (const GnomeOutputInfo *output)
+output_copy (GnomeOutputInfo *output)
 {
     GnomeOutputInfo *copy = g_new0 (GnomeOutputInfo, 1);
 
@@ -1116,7 +1112,7 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 }
 
 static GnomeRRConfig *
-gnome_rr_config_copy (const GnomeRRConfig *config)
+gnome_rr_config_copy (GnomeRRConfig *config)
 {
     GnomeRRConfig *copy = g_new0 (GnomeRRConfig, 1);
     int i;
@@ -1236,8 +1232,8 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
  * See the documentation for gnome_rr_config_apply_from_filename().  This
  * function simply calls that other function with a filename of
  * gnome_rr_config_get_intended_filename().
- *
- * Deprecated: 2.26: Use gnome_rr_config_apply_from_filename() instead and pass it
+
+ * @Deprecated: 2.26: Use gnome_rr_config_apply_from_filename() instead and pass it
  * the filename from gnome_rr_config_get_intended_filename().
  */
 gboolean

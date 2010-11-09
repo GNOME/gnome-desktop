@@ -87,7 +87,6 @@ struct GnomeRROutput
     GnomeRRMode **	modes;
     int			n_preferred;
     guint8 *		edid_data;
-    int         edid_size;
     char *              connector_type;
 };
 
@@ -125,7 +124,6 @@ struct GnomeRRMode
 /* GnomeRRCrtc */
 static GnomeRRCrtc *  crtc_new          (ScreenInfo         *info,
 					 RRCrtc              id);
-static GnomeRRCrtc *  crtc_copy         (const GnomeRRCrtc  *from);
 static void           crtc_free         (GnomeRRCrtc        *crtc);
 
 #ifdef HAVE_RANDR
@@ -144,7 +142,6 @@ static gboolean       output_initialize (GnomeRROutput      *output,
 					 GError            **error);
 #endif
 
-static GnomeRROutput *output_copy       (const GnomeRROutput *from);
 static void           output_free       (GnomeRROutput      *output);
 
 /* GnomeRRMode */
@@ -156,7 +153,6 @@ static void           mode_initialize   (GnomeRRMode        *mode,
 					 XRRModeInfo        *info);
 #endif
 
-static GnomeRRMode *  mode_copy         (const GnomeRRMode  *from);
 static void           mode_free         (GnomeRRMode        *mode);
 
 static void gnome_rr_screen_finalize (GObject*);
@@ -165,10 +161,6 @@ static gboolean gnome_rr_screen_initable_init (GInitable*, GCancellable*, GError
 static void gnome_rr_screen_initable_iface_init (GInitableIface *iface);
 G_DEFINE_TYPE_WITH_CODE (GnomeRRScreen, gnome_rr_screen, G_TYPE_OBJECT,
         G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_screen_initable_iface_init))
-
-G_DEFINE_BOXED_TYPE (GnomeRRCrtc, gnome_rr_crtc, crtc_copy, crtc_free)
-G_DEFINE_BOXED_TYPE (GnomeRROutput, gnome_rr_output, output_copy, output_free)
-G_DEFINE_BOXED_TYPE (GnomeRRMode, gnome_rr_mode, mode_copy, mode_free)
 
 /* Errors */
 
@@ -773,7 +765,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
                     "GDK Screen",
                     "The GDK Screen represented by this GnomeRRScreen",
                     GDK_TYPE_SCREEN,
-                    G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
+                    G_PARAM_CONSTRUCT | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
                     )
             );
 
@@ -1110,7 +1102,7 @@ gnome_rr_screen_get_output_by_id (GnomeRRScreen *screen,
 static GnomeRROutput *
 output_new (ScreenInfo *info, RROutput id)
 {
-    GnomeRROutput *output = g_slice_new0 (GnomeRROutput);
+    GnomeRROutput *output = g_new0 (GnomeRROutput, 1);
     
     output->id = id;
     output->info = info;
@@ -1157,25 +1149,26 @@ get_property (Display *dpy,
 }
 
 static guint8 *
-read_edid_data (GnomeRROutput *output, int *len)
+read_edid_data (GnomeRROutput *output)
 {
     Atom edid_atom;
     guint8 *result;
+    int len;
 
     edid_atom = XInternAtom (DISPLAY (output), "EDID", FALSE);
     result = get_property (DISPLAY (output),
-			   output->id, edid_atom, len);
+			   output->id, edid_atom, &len);
 
     if (!result)
     {
 	edid_atom = XInternAtom (DISPLAY (output), "EDID_DATA", FALSE);
 	result = get_property (DISPLAY (output),
-			       output->id, edid_atom, len);
+			       output->id, edid_atom, &len);
     }
 
     if (result)
     {
-	if (*len % 128 == 0)
+	if (len % 128 == 0)
 	    return result;
 	else
 	    g_free (result);
@@ -1296,59 +1289,13 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     output->n_preferred = info->npreferred;
     
     /* Edid data */
-    output->edid_data = read_edid_data (output, &output->edid_size);
+    output->edid_data = read_edid_data (output);
     
     XRRFreeOutputInfo (info);
 
     return TRUE;
 }
 #endif /* HAVE_RANDR */
-
-static GnomeRROutput*
-output_copy (const GnomeRROutput *from)
-{
-    GPtrArray *array;
-    GnomeRRCrtc **p_crtc;
-    GnomeRROutput **p_output;
-    GnomeRRMode **p_mode;
-    GnomeRROutput *output = g_slice_new0 (GnomeRROutput);
-
-    output->id = from->id;
-    output->info = from->info;
-    output->name = g_strdup (from->name);
-    output->current_crtc = from->current_crtc;
-    output->width_mm = from->width_mm;
-    output->height_mm = from->height_mm;
-    output->connected = from->connected;
-    output->n_preferred = from->n_preferred;
-    output->connector_type = g_strdup (from->connector_type);
-
-    array = g_ptr_array_new ();
-    for (p_crtc = from->possible_crtcs; *p_crtc != NULL; p_crtc++)
-    {
-        g_ptr_array_add (array, *p_crtc);
-    }
-    output->possible_crtcs = (GnomeRRCrtc**) g_ptr_array_free (array, FALSE);
-
-    array = g_ptr_array_new ();
-    for (p_output = from->clones; *p_output != NULL; p_output++)
-    {
-        g_ptr_array_add (array, *p_output);
-    }
-    output->clones = (GnomeRROutput**) g_ptr_array_free (array, FALSE);
-
-    array = g_ptr_array_new ();
-    for (p_mode = from->modes; *p_mode != NULL; p_mode++)
-    {
-        g_ptr_array_add (array, *p_mode);
-    }
-    output->modes = (GnomeRRMode**) g_ptr_array_free (array, FALSE);
-
-    output->edid_size = from->edid_size;
-    output->edid_data = g_memdup (from->edid_data, from->edid_size);
-
-    return output;
-}
 
 static void
 output_free (GnomeRROutput *output)
@@ -1359,7 +1306,7 @@ output_free (GnomeRROutput *output)
     g_free (output->edid_data);
     g_free (output->name);
     g_free (output->connector_type);
-    g_slice_free (GnomeRROutput, output);
+    g_free (output);
 }
 
 guint32
@@ -1803,45 +1750,12 @@ gnome_rr_crtc_supports_rotation (GnomeRRCrtc *   crtc,
 static GnomeRRCrtc *
 crtc_new (ScreenInfo *info, RROutput id)
 {
-    GnomeRRCrtc *crtc = g_slice_new0 (GnomeRRCrtc);
+    GnomeRRCrtc *crtc = g_new0 (GnomeRRCrtc, 1);
     
     crtc->id = id;
     crtc->info = info;
     
     return crtc;
-}
-
-static GnomeRRCrtc *
-crtc_copy (const GnomeRRCrtc *from)
-{
-    GnomeRROutput **p_output;
-    GPtrArray *array;
-    GnomeRRCrtc *to = g_slice_new0 (GnomeRRCrtc);
-
-    to->info = from->info;
-    to->id = from->id;
-    to->current_mode = from->current_mode;
-    to->x = from->x;
-    to->y = from->y;
-    to->current_rotation = from->current_rotation;
-    to->rotations = from->rotations;
-    to->gamma_size = from->gamma_size;
-
-    array = g_ptr_array_new ();
-    for (p_output = from->current_outputs; *p_output != NULL; p_output++)
-    {
-        g_ptr_array_add (array, *p_output);
-    }
-    to->current_outputs = (GnomeRROutput**) g_ptr_array_free (array, FALSE);
-
-    array = g_ptr_array_new ();
-    for (p_output = from->possible_outputs; *p_output != NULL; p_output++)
-    {
-        g_ptr_array_add (array, *p_output);
-    }
-    to->possible_outputs = (GnomeRROutput**) g_ptr_array_free (array, FALSE);
-
-    return to;
 }
 
 #ifdef HAVE_RANDR
@@ -1920,14 +1834,14 @@ crtc_free (GnomeRRCrtc *crtc)
 {
     g_free (crtc->current_outputs);
     g_free (crtc->possible_outputs);
-    g_slice_free (GnomeRRCrtc, crtc);
+    g_free (crtc);
 }
 
 /* GnomeRRMode */
 static GnomeRRMode *
 mode_new (ScreenInfo *info, RRMode id)
 {
-    GnomeRRMode *mode = g_slice_new0 (GnomeRRMode);
+    GnomeRRMode *mode = g_new0 (GnomeRRMode, 1);
     
     mode->id = id;
     mode->info = info;
@@ -1977,26 +1891,11 @@ mode_initialize (GnomeRRMode *mode, XRRModeInfo *info)
 }
 #endif /* HAVE_RANDR */
 
-static GnomeRRMode *
-mode_copy (const GnomeRRMode *from)
-{
-    GnomeRRMode *to = g_slice_new0 (GnomeRRMode);
-
-    to->id = from->id;
-    to->info = from->info;
-    to->name = g_strdup (from->name);
-    to->width = from->width;
-    to->height = from->height;
-    to->freq = from->freq;
-
-    return to;
-}
-
 static void
 mode_free (GnomeRRMode *mode)
 {
     g_free (mode->name);
-    g_slice_free (GnomeRRMode, mode);
+    g_free (mode);
 }
 
 void
