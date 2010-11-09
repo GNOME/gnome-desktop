@@ -1,8 +1,6 @@
 /* gnome-rr-config.c
- * -*- c-basic-offset: 4 -*-
  *
  * Copyright 2007, 2008, Red Hat, Inc.
- * Copyright 2010 Giovanni Campagna
  * 
  * This file is part of the Gnome Library.
  * 
@@ -36,6 +34,7 @@
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
 
+#undef GNOME_DISABLE_DEPRECATED
 #include "gnome-rr-config.h"
 
 #include "edid.h"
@@ -80,21 +79,16 @@ typedef struct CrtcAssignment CrtcAssignment;
 static gboolean         crtc_assignment_apply (CrtcAssignment   *assign,
 					       guint32           timestamp,
 					       GError          **error);
-static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen      *screen,
-					       GnomeRROutputInfo **outputs,
-					       GError            **error);
+static CrtcAssignment  *crtc_assignment_new   (GnomeRRScreen    *screen,
+					       GnomeOutputInfo **outputs,
+					       GError          **error);
 static void             crtc_assignment_free  (CrtcAssignment   *assign);
+static void             output_free           (GnomeOutputInfo  *output);
+static GnomeOutputInfo *output_copy           (const GnomeOutputInfo  *output);
+static GnomeRRConfig *  gnome_rr_config_copy (const GnomeRRConfig *config);
 
-enum {
-  PROP_0,
-  PROP_CURRENT,
-  PROP_SCREEN,
-  PROP_LAST
-};
-
-static void gnome_rr_config_initable_iface_init (GInitableIface *iface);
-G_DEFINE_TYPE_WITH_CODE (GnomeRRConfig, gnome_rr_config, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_config_initable_iface_init))
+G_DEFINE_BOXED_TYPE (GnomeOutputInfo, gnome_rr_output_info, output_copy, output_free)
+G_DEFINE_BOXED_TYPE (GnomeRRConfig, gnome_rr_config, gnome_rr_config_copy, gnome_rr_config_free)
 
 typedef struct Parser Parser;
 
@@ -102,7 +96,7 @@ typedef struct Parser Parser;
 struct Parser
 {
     int			config_file_version;
-    GnomeRROutputInfo *	output;
+    GnomeOutputInfo *	output;
     GnomeRRConfig *	configuration;
     GPtrArray *		outputs;
     GPtrArray *		configurations;
@@ -177,38 +171,38 @@ handle_start_element (GMarkupParseContext *context,
 	int i;
 	g_assert (parser->output == NULL);
 
-	parser->output = g_object_new (GNOME_TYPE_RR_OUTPUT_INFO, NULL);
-	parser->output->priv->rotation = 0;
+	parser->output = g_new0 (GnomeOutputInfo, 1);
+	parser->output->rotation = 0;
 	
 	for (i = 0; attr_names[i] != NULL; ++i)
 	{
 	    if (strcmp (attr_names[i], "name") == 0)
 	    {
-		parser->output->priv->name = g_strdup (attr_values[i]);
+		parser->output->name = g_strdup (attr_values[i]);
 		break;
 	    }
 	}
 
-	if (!parser->output->priv->name)
+	if (!parser->output->name)
 	{
 	    /* This really shouldn't happen, but it's better to make
 	     * something up than to crash later.
 	     */
 	    g_warning ("Malformed monitor configuration file");
 	    
-	    parser->output->priv->name = g_strdup ("default");
+	    parser->output->name = g_strdup ("default");
 	}	
-	parser->output->priv->connected = FALSE;
-	parser->output->priv->on = FALSE;
-	parser->output->priv->primary = FALSE;
+	parser->output->connected = FALSE;
+	parser->output->on = FALSE;
+	parser->output->primary = FALSE;
     }
     else if (strcmp (name, "configuration") == 0)
     {
 	g_assert (parser->configuration == NULL);
 	
-	parser->configuration = g_object_new (GNOME_TYPE_RR_CONFIG, NULL);
-	parser->configuration->priv->clone = FALSE;
-	parser->configuration->priv->outputs = NULL;
+	parser->configuration = g_new0 (GnomeRRConfig, 1);
+	parser->configuration->clone = FALSE;
+	parser->configuration->outputs = NULL;
     }
     else if (strcmp (name, "monitors") == 0)
     {
@@ -238,8 +232,8 @@ handle_end_element (GMarkupParseContext *context,
     if (strcmp (name, "output") == 0)
     {
 	/* If no rotation properties were set, just use GNOME_RR_ROTATION_0 */
-	if (parser->output->priv->rotation == 0)
-	    parser->output->priv->rotation = GNOME_RR_ROTATION_0;
+	if (parser->output->rotation == 0)
+	    parser->output->rotation = GNOME_RR_ROTATION_0;
 	
 	g_ptr_array_add (parser->outputs, parser->output);
 
@@ -248,8 +242,8 @@ handle_end_element (GMarkupParseContext *context,
     else if (strcmp (name, "configuration") == 0)
     {
 	g_ptr_array_add (parser->outputs, NULL);
-	parser->configuration->priv->outputs =
-	    (GnomeRROutputInfo **)g_ptr_array_free (parser->outputs, FALSE);
+	parser->configuration->outputs =
+	    (GnomeOutputInfo **)g_ptr_array_free (parser->outputs, FALSE);
 	parser->outputs = g_ptr_array_new ();
 	g_ptr_array_add (parser->configurations, parser->configuration);
 	parser->configuration = NULL;
@@ -271,96 +265,96 @@ handle_text (GMarkupParseContext *context,
     
     if (stack_is (parser, "vendor", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->connected = TRUE;
+	parser->output->connected = TRUE;
 	
-	strncpy ((gchar*) parser->output->priv->vendor, text, 3);
-	parser->output->priv->vendor[3] = 0;
+	strncpy (parser->output->vendor, text, 3);
+	parser->output->vendor[3] = 0;
     }
     else if (stack_is (parser, "clone", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
-	    parser->configuration->priv->clone = TRUE;
+	    parser->configuration->clone = TRUE;
     }
     else if (stack_is (parser, "product", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->connected = TRUE;
+	parser->output->connected = TRUE;
 
-	parser->output->priv->product = parse_int (text);
+	parser->output->product = parse_int (text);
     }
     else if (stack_is (parser, "serial", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->connected = TRUE;
+	parser->output->connected = TRUE;
 
-	parser->output->priv->serial = parse_uint (text);
+	parser->output->serial = parse_uint (text);
     }
     else if (stack_is (parser, "width", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->on = TRUE;
+	parser->output->on = TRUE;
 
-	parser->output->priv->width = parse_int (text);
+	parser->output->width = parse_int (text);
     }
     else if (stack_is (parser, "x", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->on = TRUE;
+	parser->output->on = TRUE;
 
-	parser->output->priv->x = parse_int (text);
+	parser->output->x = parse_int (text);
     }
     else if (stack_is (parser, "y", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->on = TRUE;
+	parser->output->on = TRUE;
 
-	parser->output->priv->y = parse_int (text);
+	parser->output->y = parse_int (text);
     }
     else if (stack_is (parser, "height", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->on = TRUE;
+	parser->output->on = TRUE;
 
-	parser->output->priv->height = parse_int (text);
+	parser->output->height = parse_int (text);
     }
     else if (stack_is (parser, "rate", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
-	parser->output->priv->on = TRUE;
+	parser->output->on = TRUE;
 
-	parser->output->priv->rate = parse_int (text);
+	parser->output->rate = parse_int (text);
     }
     else if (stack_is (parser, "rotation", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "normal") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_ROTATION_0;
+	    parser->output->rotation |= GNOME_RR_ROTATION_0;
 	}
 	else if (strcmp (text, "left") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_ROTATION_90;
+	    parser->output->rotation |= GNOME_RR_ROTATION_90;
 	}
 	else if (strcmp (text, "upside_down") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_ROTATION_180;
+	    parser->output->rotation |= GNOME_RR_ROTATION_180;
 	}
 	else if (strcmp (text, "right") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_ROTATION_270;
+	    parser->output->rotation |= GNOME_RR_ROTATION_270;
 	}
     }
     else if (stack_is (parser, "reflect_x", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_REFLECT_X;
+	    parser->output->rotation |= GNOME_RR_REFLECT_X;
 	}
     }
     else if (stack_is (parser, "reflect_y", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
 	{
-	    parser->output->priv->rotation |= GNOME_RR_REFLECT_Y;
+	    parser->output->rotation |= GNOME_RR_REFLECT_Y;
 	}
     }
     else if (stack_is (parser, "primary", "output", "configuration", TOPLEVEL_ELEMENT, NULL))
     {
 	if (strcmp (text, "yes") == 0)
 	{
-	    parser->output->priv->primary = TRUE;
+	    parser->output->primary = TRUE;
 	}
     }
     else
@@ -378,16 +372,16 @@ parser_free (Parser *parser)
     g_assert (parser != NULL);
 
     if (parser->output)
-	g_object_unref (parser->output);
+	output_free (parser->output);
 
     if (parser->configuration)
-	g_object_unref (parser->configuration);
+	gnome_rr_config_free (parser->configuration);
 
     for (i = 0; i < parser->outputs->len; ++i)
     {
-	GnomeRROutputInfo *output = parser->outputs->pdata[i];
+	GnomeOutputInfo *output = parser->outputs->pdata[i];
 
-	g_object_unref (output);
+	output_free (output);
     }
 
     g_ptr_array_free (parser->outputs, TRUE);
@@ -396,7 +390,7 @@ parser_free (Parser *parser)
     {
 	GnomeRRConfig *config = parser->configurations->pdata[i];
 
-	g_object_unref (config);
+	gnome_rr_config_free (config);
     }
 
     g_ptr_array_free (parser->configurations, TRUE);
@@ -447,58 +441,10 @@ out:
     return result;
 }
 
-static void
-gnome_rr_config_init (GnomeRRConfig *self)
+GnomeRRConfig *
+gnome_rr_config_new_current (GnomeRRScreen *screen)
 {
-    self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_RR_CONFIG, GnomeRRConfigPrivate);
-
-    self->priv->current = FALSE;
-    self->priv->clone = FALSE;
-    self->priv->screen = NULL;
-    self->priv->outputs = NULL;
-}
-
-static void
-gnome_rr_config_set_property (GObject *gobject, guint property_id, const GValue *value, GParamSpec *property)
-{
-    GnomeRRConfig *self = GNOME_RR_CONFIG (gobject);
-
-    switch (property_id) {
-	case PROP_CURRENT:
-	    self->priv->current = g_value_get_boolean (value);
-	    return;
-	case PROP_SCREEN:
-	    self->priv->screen = g_value_dup_object (value);
-	    return;
-	default:
-	    G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, property);
-    }
-}
-
-static void
-gnome_rr_config_finalize (GObject *gobject)
-{
-    GnomeRRConfig *self = GNOME_RR_CONFIG (gobject);
-
-    if (self->priv->screen)
-	g_object_unref (self->priv->screen);
-
-    if (self->priv->outputs) {
-	int i;
-
-        for (i = 0; self->priv->outputs[i] != NULL; i++) {
-	    GnomeRROutputInfo *output = self->priv->outputs[i];
-	    g_object_unref (output);
-	}
-	g_free (self->priv->outputs);
-    }
-
-    G_OBJECT_CLASS (gnome_rr_config_parent_class)->finalize (gobject);
-}
-
-static gboolean
-config_init_current (GnomeRRConfig *config)
-{
+    GnomeRRConfig *config = g_new0 (GnomeRRConfig, 1);
     GPtrArray *a = g_ptr_array_new ();
     GnomeRROutput **rr_outputs;
     int i;
@@ -506,29 +452,31 @@ config_init_current (GnomeRRConfig *config)
     int clone_height = -1;
     int last_x;
 
-    rr_outputs = gnome_rr_screen_list_outputs (config->priv->screen);
+    g_return_val_if_fail (screen != NULL, NULL);
 
-    config->priv->clone = FALSE;
+    rr_outputs = gnome_rr_screen_list_outputs (screen);
+
+    config->clone = FALSE;
     
     for (i = 0; rr_outputs[i] != NULL; ++i)
     {
 	GnomeRROutput *rr_output = rr_outputs[i];
-	GnomeRROutputInfo *output = g_object_new (GNOME_TYPE_RR_OUTPUT_INFO, NULL);
+	GnomeOutputInfo *output = g_new0 (GnomeOutputInfo, 1);
 	GnomeRRMode *mode = NULL;
 	const guint8 *edid_data = gnome_rr_output_get_edid_data (rr_output);
 	GnomeRRCrtc *crtc;
 
-	output->priv->name = g_strdup (gnome_rr_output_get_name (rr_output));
-	output->priv->connected = gnome_rr_output_is_connected (rr_output);
+	output->name = g_strdup (gnome_rr_output_get_name (rr_output));
+	output->connected = gnome_rr_output_is_connected (rr_output);
 
-	if (!output->priv->connected)
+	if (!output->connected)
 	{
-	    output->priv->x = -1;
-	    output->priv->y = -1;
-	    output->priv->width = -1;
-	    output->priv->height = -1;
-	    output->priv->rate = -1;
-	    output->priv->rotation = GNOME_RR_ROTATION_0;
+	    output->x = -1;
+	    output->y = -1;
+	    output->width = -1;
+	    output->height = -1;
+	    output->rate = -1;
+	    output->rotation = GNOME_RR_ROTATION_0;
 	}
 	else
 	{
@@ -539,24 +487,24 @@ config_init_current (GnomeRRConfig *config)
 
 	    if (info)
 	    {
-		memcpy (output->priv->vendor, info->manufacturer_code,
-			sizeof (output->priv->vendor));
+		memcpy (output->vendor, info->manufacturer_code,
+			sizeof (output->vendor));
 		
-		output->priv->product = info->product_code;
-		output->priv->serial = info->serial_number;
-		output->priv->aspect = info->aspect_ratio;
+		output->product = info->product_code;
+		output->serial = info->serial_number;
+		output->aspect = info->aspect_ratio;
 	    }
 	    else
 	    {
-		strcpy (output->priv->vendor, "???");
-		output->priv->product = 0;
-		output->priv->serial = 0;
+		strcpy (output->vendor, "???");
+		output->product = 0;
+		output->serial = 0;
 	    }
 
 	    if (gnome_rr_output_is_laptop (rr_output))
-		output->priv->display_name = g_strdup (_("Laptop"));
+		output->display_name = g_strdup (_("Laptop"));
 	    else
-		output->priv->display_name = make_display_name (info);
+		output->display_name = make_display_name (info);
 		
 	    g_free (info);
 		
@@ -565,28 +513,28 @@ config_init_current (GnomeRRConfig *config)
 	    
 	    if (crtc && mode)
 	    {
-		output->priv->on = TRUE;
+		output->on = TRUE;
 		
-		gnome_rr_crtc_get_position (crtc, &output->priv->x, &output->priv->y);
-		output->priv->width = gnome_rr_mode_get_width (mode);
-		output->priv->height = gnome_rr_mode_get_height (mode);
-		output->priv->rate = gnome_rr_mode_get_freq (mode);
-		output->priv->rotation = gnome_rr_crtc_get_current_rotation (crtc);
+		gnome_rr_crtc_get_position (crtc, &output->x, &output->y);
+		output->width = gnome_rr_mode_get_width (mode);
+		output->height = gnome_rr_mode_get_height (mode);
+		output->rate = gnome_rr_mode_get_freq (mode);
+		output->rotation = gnome_rr_crtc_get_current_rotation (crtc);
 
-		if (output->priv->x == 0 && output->priv->y == 0) {
+		if (output->x == 0 && output->y == 0) {
 			if (clone_width == -1) {
-				clone_width = output->priv->width;
-				clone_height = output->priv->height;
-			} else if (clone_width == output->priv->width &&
-				   clone_height == output->priv->height) {
-				config->priv->clone = TRUE;
+				clone_width = output->width;
+				clone_height = output->height;
+			} else if (clone_width == output->width &&
+				   clone_height == output->height) {
+				config->clone = TRUE;
 			}
 		}
 	    }
 	    else
 	    {
-		output->priv->on = FALSE;
-		config->priv->clone = FALSE;
+		output->on = FALSE;
+		config->clone = FALSE;
 	    }
 
 	    /* Get preferred size for the monitor */
@@ -612,160 +560,117 @@ config_init_current (GnomeRRConfig *config)
 	    
 	    if (mode)
 	    {
-		output->priv->pref_width = gnome_rr_mode_get_width (mode);
-		output->priv->pref_height = gnome_rr_mode_get_height (mode);
+		output->pref_width = gnome_rr_mode_get_width (mode);
+		output->pref_height = gnome_rr_mode_get_height (mode);
 	    }
 	    else
 	    {
 		/* Pick some random numbers. This should basically never happen */
-		output->priv->pref_width = 1024;
-		output->priv->pref_height = 768;
+		output->pref_width = 1024;
+		output->pref_height = 768;
 	    }
 	}
 
-        output->priv->primary = gnome_rr_output_get_is_primary (rr_output);
+        output->primary = gnome_rr_output_get_is_primary (rr_output);
  
 	g_ptr_array_add (a, output);
     }
 
     g_ptr_array_add (a, NULL);
     
-    config->priv->outputs = (GnomeRROutputInfo **)g_ptr_array_free (a, FALSE);
+    config->outputs = (GnomeOutputInfo **)g_ptr_array_free (a, FALSE);
 
     /* Walk the outputs computing the right-most edge of all
      * lit-up displays
      */
     last_x = 0;
-    for (i = 0; config->priv->outputs[i] != NULL; ++i)
+    for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
-	if (output->priv->on)
+	if (output->on)
 	{
-	    last_x = MAX (last_x, output->priv->x + output->priv->width);
+	    last_x = MAX (last_x, output->x + output->width);
 	}
     }
 
     /* Now position all off displays to the right of the
      * on displays
      */
-    for (i = 0; config->priv->outputs[i] != NULL; ++i)
+    for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
-	if (output->priv->connected && !output->priv->on)
+	if (output->connected && !output->on)
 	{
-	    output->priv->x = last_x;
-	    last_x = output->priv->x + output->priv->width;
+	    output->x = last_x;
+	    last_x = output->x + output->width;
 	}
     }
     
     g_assert (gnome_rr_config_match (config, config));
-
-    return TRUE;
-}
-
-static gboolean
-config_init_stored (GnomeRRConfig *result, const char *filename, GError **error)
-{
-    GnomeRRConfig *current;
-    GnomeRRConfig **configs;
-    gboolean found = FALSE;
-
-    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-    current = gnome_rr_config_new_current (result->priv->screen, error);
-
-    configs = configurations_read_from_file (filename, error);
-
-    if (configs)
-    {
-	int i;
-
-	for (i = 0; configs[i] != NULL; ++i)
-	{
-	    if (gnome_rr_config_match (configs[i], current))
-	    {
-		int j;
-		GPtrArray *array;
-		result->priv->clone = configs[i]->priv->clone;
-
-		array = g_ptr_array_new ();
-		for (j = 0; configs[i]->priv->outputs[j] != NULL; j++) {
-		    g_ptr_array_add (array, configs[i]->priv->outputs[i]);
-		}
-		g_ptr_array_add (array, NULL);
-		result->priv->outputs = (GnomeRROutputInfo **) g_ptr_array_free (array, FALSE);
-
-		found = TRUE;
-		break;
-	    }
-	    g_object_unref (configs[i]);
-	}
-	g_free (configs);
-
-	if (!found)
-	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_MATCHING_CONFIG,
-			 _("none of the saved display configurations matched the active configuration"));
-    }
-
-    g_object_unref (current);
-    return found;
-}
-
-static gboolean
-gnome_rr_config_initable_init (GInitable* initable, GCancellable* cancellable, GError** error)
-{
-    GnomeRRConfig *self = GNOME_RR_CONFIG (initable);
-
-    if (self->priv->current) {
-	return config_init_current (self);
-    } else {
-	gchar *filename;
-	gboolean retval;
-
-	filename = gnome_rr_config_get_intended_filename ();
-	retval = config_init_stored (self, filename, error);
-
-	g_free (filename);
-	return retval;
-    }
+    
+    return config;
 }
 
 static void
-gnome_rr_config_initable_iface_init (GInitableIface *iface)
+output_free (GnomeOutputInfo *output)
 {
-    iface->init = gnome_rr_config_initable_init;
+    if (output->display_name)
+	g_free (output->display_name);
+
+    if (output->name)
+	g_free (output->name);
+    
+    g_free (output);
+}
+
+static GnomeOutputInfo *
+output_copy (const GnomeOutputInfo *output)
+{
+    GnomeOutputInfo *copy = g_new0 (GnomeOutputInfo, 1);
+
+    *copy = *output;
+
+    copy->name = g_strdup (output->name);
+    copy->display_name = g_strdup (output->display_name);
+
+    return copy;
 }
 
 static void
-gnome_rr_config_class_init (GnomeRRConfigClass *klass)
+outputs_free (GnomeOutputInfo **outputs)
 {
-    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+    int i;
 
-    g_type_class_add_private (klass, sizeof (GnomeRROutputInfoPrivate));
+    g_assert (outputs != NULL);
 
-    gobject_class->set_property = gnome_rr_config_set_property;
-    gobject_class->finalize = gnome_rr_config_finalize;
+    for (i = 0; outputs[i] != NULL; ++i)
+	output_free (outputs[i]);
 
-    g_object_class_install_property (gobject_class, PROP_CURRENT,
-				     g_param_spec_boolean ("current", "Current", "If this is current screen configuration", FALSE,
-							   G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
-    g_object_class_install_property (gobject_class, PROP_SCREEN,
-				     g_param_spec_object ("screen", "Screen", "The GnomeRRScreen this config applies to", GNOME_TYPE_RR_SCREEN,
-							  G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+    g_free (outputs);
 }
 
-GnomeRRConfig *
-gnome_rr_config_new_current (GnomeRRScreen *screen, GError **error)
+void
+gnome_rr_config_free (GnomeRRConfig *config)
 {
-    return g_initable_new (GNOME_TYPE_RR_CONFIG, NULL, error, "screen", screen, "current", TRUE, NULL);
+    g_return_if_fail (config != NULL);
+    outputs_free (config->outputs);
+    
+    g_free (config);
 }
 
-GnomeRRConfig *
-gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
+static void
+configurations_free (GnomeRRConfig **configurations)
 {
-    return g_initable_new (GNOME_TYPE_RR_CONFIG, NULL, error, "screen", screen, "current", FALSE, NULL);
+    int i;
+
+    g_assert (configurations != NULL);
+
+    for (i = 0; configurations[i] != NULL; ++i)
+	gnome_rr_config_free (configurations[i]);
+
+    g_free (configurations);
 }
 
 static gboolean
@@ -810,75 +715,75 @@ out:
 }
 
 static gboolean
-output_match (GnomeRROutputInfo *output1, GnomeRROutputInfo *output2)
+output_match (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
 {
-    g_assert (GNOME_IS_RR_OUTPUT_INFO (output1));
-    g_assert (GNOME_IS_RR_OUTPUT_INFO (output2));
+    g_assert (output1 != NULL);
+    g_assert (output2 != NULL);
 
-    if (strcmp (output1->priv->name, output2->priv->name) != 0)
+    if (strcmp (output1->name, output2->name) != 0)
 	return FALSE;
 
-    if (strcmp (output1->priv->vendor, output2->priv->vendor) != 0)
+    if (strcmp (output1->vendor, output2->vendor) != 0)
 	return FALSE;
 
-    if (output1->priv->product != output2->priv->product)
+    if (output1->product != output2->product)
 	return FALSE;
 
-    if (output1->priv->serial != output2->priv->serial)
+    if (output1->serial != output2->serial)
 	return FALSE;
 
-    if (output1->priv->connected != output2->priv->connected)
+    if (output1->connected != output2->connected)
 	return FALSE;
     
     return TRUE;
 }
 
 static gboolean
-output_equal (GnomeRROutputInfo *output1, GnomeRROutputInfo *output2)
+output_equal (GnomeOutputInfo *output1, GnomeOutputInfo *output2)
 {
-    g_assert (GNOME_IS_RR_OUTPUT_INFO (output1));
-    g_assert (GNOME_IS_RR_OUTPUT_INFO (output2));
+    g_assert (output1 != NULL);
+    g_assert (output2 != NULL);
 
     if (!output_match (output1, output2))
 	return FALSE;
 
-    if (output1->priv->on != output2->priv->on)
+    if (output1->on != output2->on)
 	return FALSE;
 
-    if (output1->priv->on)
+    if (output1->on)
     {
-	if (output1->priv->width != output2->priv->width)
+	if (output1->width != output2->width)
 	    return FALSE;
 	
-	if (output1->priv->height != output2->priv->height)
+	if (output1->height != output2->height)
 	    return FALSE;
 	
-	if (output1->priv->rate != output2->priv->rate)
+	if (output1->rate != output2->rate)
 	    return FALSE;
 	
-	if (output1->priv->x != output2->priv->x)
+	if (output1->x != output2->x)
 	    return FALSE;
 	
-	if (output1->priv->y != output2->priv->y)
+	if (output1->y != output2->y)
 	    return FALSE;
 	
-	if (output1->priv->rotation != output2->priv->rotation)
+	if (output1->rotation != output2->rotation)
 	    return FALSE;
     }
 
     return TRUE;
 }
 
-static GnomeRROutputInfo *
+static GnomeOutputInfo *
 find_output (GnomeRRConfig *config, const char *name)
 {
     int i;
 
-    for (i = 0; config->priv->outputs[i] != NULL; ++i)
+    for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 	
-	if (strcmp (name, output->priv->name) == 0)
+	if (strcmp (name, output->name) == 0)
 	    return output;
     }
 
@@ -892,15 +797,13 @@ gboolean
 gnome_rr_config_match (GnomeRRConfig *c1, GnomeRRConfig *c2)
 {
     int i;
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (c1), FALSE);
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (c2), FALSE);
 
-    for (i = 0; c1->priv->outputs[i] != NULL; ++i)
+    for (i = 0; c1->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *output1 = c1->priv->outputs[i];
-	GnomeRROutputInfo *output2;
+	GnomeOutputInfo *output1 = c1->outputs[i];
+	GnomeOutputInfo *output2;
 
-	output2 = find_output (c2, output1->priv->name);
+	output2 = find_output (c2, output1->name);
 	if (!output2 || !output_match (output1, output2))
 	    return FALSE;
     }
@@ -916,15 +819,13 @@ gnome_rr_config_equal (GnomeRRConfig  *c1,
 		       GnomeRRConfig  *c2)
 {
     int i;
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (c1), FALSE);
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (c2), FALSE);
 
-    for (i = 0; c1->priv->outputs[i] != NULL; ++i)
+    for (i = 0; c1->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *output1 = c1->priv->outputs[i];
-	GnomeRROutputInfo *output2;
+	GnomeOutputInfo *output1 = c1->outputs[i];
+	GnomeOutputInfo *output2;
 
-	output2 = find_output (c2, output1->priv->name);
+	output2 = find_output (c2, output1->name);
 	if (!output2 || !output_equal (output1, output2))
 	    return FALSE;
     }
@@ -932,39 +833,34 @@ gnome_rr_config_equal (GnomeRRConfig  *c1,
     return TRUE;
 }
 
-static GnomeRROutputInfo **
+static GnomeOutputInfo **
 make_outputs (GnomeRRConfig *config)
 {
     GPtrArray *outputs;
-    GnomeRROutputInfo *first_on;
+    GnomeOutputInfo *first_on;
     int i;
 
     outputs = g_ptr_array_new ();
 
     first_on = NULL;
     
-    for (i = 0; config->priv->outputs[i] != NULL; ++i)
+    for (i = 0; config->outputs[i] != NULL; ++i)
     {
-	GnomeRROutputInfo *old = config->priv->outputs[i];
-	GnomeRROutputInfo *new = g_object_new (GNOME_TYPE_RR_OUTPUT_INFO, NULL);
-	*(new->priv) = *(old->priv);
-	if (old->priv->name)
-	    new->priv->name = g_strdup (old->priv->name);
-	if (old->priv->display_name)
-	    new->priv->display_name = g_strdup (old->priv->display_name);
+	GnomeOutputInfo *old = config->outputs[i];
+	GnomeOutputInfo *new = output_copy (old);
 
-	if (old->priv->on && !first_on)
+	if (old->on && !first_on)
 	    first_on = old;
 	
-	if (config->priv->clone && new->priv->on)
+	if (config->clone && new->on)
 	{
 	    g_assert (first_on);
 
-	    new->priv->width = first_on->priv->width;
-	    new->priv->height = first_on->priv->height;
-	    new->priv->rotation = first_on->priv->rotation;
-	    new->priv->x = 0;
-	    new->priv->y = 0;
+	    new->width = first_on->width;
+	    new->height = first_on->height;
+	    new->rotation = first_on->rotation;
+	    new->x = 0;
+	    new->y = 0;
 	}
 
 	g_ptr_array_add (outputs, new);
@@ -972,7 +868,7 @@ make_outputs (GnomeRRConfig *config)
 
     g_ptr_array_add (outputs, NULL);
 
-    return (GnomeRROutputInfo **)g_ptr_array_free (outputs, FALSE);
+    return (GnomeOutputInfo **)g_ptr_array_free (outputs, FALSE);
 }
 
 gboolean
@@ -980,13 +876,11 @@ gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 			    GnomeRRScreen  *screen,
 			    GError        **error)
 {
-    GnomeRROutputInfo **outputs;
+    GnomeOutputInfo **outputs;
     CrtcAssignment *assign;
     gboolean result;
-    int i;
 
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (configuration), FALSE);
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), FALSE);
+    g_return_val_if_fail (configuration != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
     outputs = make_outputs (configuration);
@@ -1002,9 +896,7 @@ gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 	result = FALSE;
     }
 
-    for (i = 0; outputs[i] != NULL; i++) {
-	 g_object_unref (outputs[i]);
-    }
+    outputs_free (outputs);
 
     return result;
 }
@@ -1072,46 +964,46 @@ emit_configuration (GnomeRRConfig *config,
 
     g_string_append_printf (string, "  <configuration>\n");
 
-    g_string_append_printf (string, "      <clone>%s</clone>\n", yes_no (config->priv->clone));
+    g_string_append_printf (string, "      <clone>%s</clone>\n", yes_no (config->clone));
     
-    for (j = 0; config->priv->outputs[j] != NULL; ++j)
+    for (j = 0; config->outputs[j] != NULL; ++j)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[j];
+	GnomeOutputInfo *output = config->outputs[j];
 	
 	g_string_append_printf (
-	    string, "      <output name=\"%s\">\n", output->priv->name);
+	    string, "      <output name=\"%s\">\n", output->name);
 	
-	if (output->priv->connected && *output->priv->vendor != '\0')
+	if (output->connected && *output->vendor != '\0')
 	{
 	    g_string_append_printf (
-		string, "          <vendor>%s</vendor>\n", output->priv->vendor);
+		string, "          <vendor>%s</vendor>\n", output->vendor);
 	    g_string_append_printf (
-		string, "          <product>0x%04x</product>\n", output->priv->product);
+		string, "          <product>0x%04x</product>\n", output->product);
 	    g_string_append_printf (
-		string, "          <serial>0x%08x</serial>\n", output->priv->serial);
+		string, "          <serial>0x%08x</serial>\n", output->serial);
 	}
 	
 	/* An unconnected output which is on does not make sense */
-	if (output->priv->connected && output->priv->on)
+	if (output->connected && output->on)
 	{
 	    g_string_append_printf (
-		string, "          <width>%d</width>\n", output->priv->width);
+		string, "          <width>%d</width>\n", output->width);
 	    g_string_append_printf (
-		string, "          <height>%d</height>\n", output->priv->height);
+		string, "          <height>%d</height>\n", output->height);
 	    g_string_append_printf (
-		string, "          <rate>%d</rate>\n", output->priv->rate);
+		string, "          <rate>%d</rate>\n", output->rate);
 	    g_string_append_printf (
-		string, "          <x>%d</x>\n", output->priv->x);
+		string, "          <x>%d</x>\n", output->x);
 	    g_string_append_printf (
-		string, "          <y>%d</y>\n", output->priv->y);
+		string, "          <y>%d</y>\n", output->y);
 	    g_string_append_printf (
-		string, "          <rotation>%s</rotation>\n", get_rotation_name (output->priv->rotation));
+		string, "          <rotation>%s</rotation>\n", get_rotation_name (output->rotation));
 	    g_string_append_printf (
-		string, "          <reflect_x>%s</reflect_x>\n", get_reflect_x (output->priv->rotation));
+		string, "          <reflect_x>%s</reflect_x>\n", get_reflect_x (output->rotation));
 	    g_string_append_printf (
-		string, "          <reflect_y>%s</reflect_y>\n", get_reflect_y (output->priv->rotation));
+		string, "          <reflect_y>%s</reflect_y>\n", get_reflect_y (output->rotation));
             g_string_append_printf (
-                string, "          <primary>%s</primary>\n", yes_no (output->priv->primary));
+                string, "          <primary>%s</primary>\n", yes_no (output->primary));
 	}
 	
 	g_string_append_printf (string, "      </output>\n");
@@ -1131,37 +1023,37 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
      * make sure the configuration starts at (0, 0)
      */
     x_offset = y_offset = G_MAXINT;
-    for (i = 0; config->priv->outputs[i]; ++i)
+    for (i = 0; config->outputs[i]; ++i)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 
-	if (output->priv->on)
+	if (output->on)
 	{
-	    x_offset = MIN (x_offset, output->priv->x);
-	    y_offset = MIN (y_offset, output->priv->y);
+	    x_offset = MIN (x_offset, output->x);
+	    y_offset = MIN (y_offset, output->y);
 	}
     }
 
-    for (i = 0; config->priv->outputs[i]; ++i)
+    for (i = 0; config->outputs[i]; ++i)
     {
-	GnomeRROutputInfo *output = config->priv->outputs[i];
+	GnomeOutputInfo *output = config->outputs[i];
 	
-	if (output->priv->on)
+	if (output->on)
 	{
-	    output->priv->x -= x_offset;
-	    output->priv->y -= y_offset;
+	    output->x -= x_offset;
+	    output->y -= y_offset;
 	}
     }
 
     /* Only one primary, please */
     found = FALSE;
-    for (i = 0; config->priv->outputs[i]; ++i)
+    for (i = 0; config->outputs[i]; ++i)
     {
-        if (config->priv->outputs[i]->priv->primary)
+        if (config->outputs[i]->primary)
         {
             if (found)
             {
-                config->priv->outputs[i]->priv->primary = FALSE;
+                config->outputs[i]->primary = FALSE;
             }
             else
             {
@@ -1182,7 +1074,7 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
     gchar *backup_filename;
     gboolean result;
 
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (configuration), FALSE);
+    g_return_val_if_fail (configuration != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
     output = g_string_new ("");
@@ -1200,10 +1092,9 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
 	{
 	    if (!gnome_rr_config_match (configurations[i], configuration))
 		emit_configuration (configurations[i], output);
-	    g_object_unref (configurations[i]);
 	}
 
-	g_free (configurations);
+	configurations_free (configurations);
     }
 
     emit_configuration (configuration, output);
@@ -1224,6 +1115,89 @@ gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
     return result;
 }
 
+static GnomeRRConfig *
+gnome_rr_config_copy (const GnomeRRConfig *config)
+{
+    GnomeRRConfig *copy = g_new0 (GnomeRRConfig, 1);
+    int i;
+    GPtrArray *array = g_ptr_array_new ();
+
+    copy->clone = config->clone;
+    
+    for (i = 0; config->outputs[i] != NULL; ++i)
+	g_ptr_array_add (array, output_copy (config->outputs[i]));
+
+    g_ptr_array_add (array, NULL);
+    copy->outputs = (GnomeOutputInfo **)g_ptr_array_free (array, FALSE);
+
+    return copy;
+}
+
+static GnomeRRConfig *
+config_new_stored (GnomeRRScreen *screen, const char *filename, GError **error)
+{
+    GnomeRRConfig *current;
+    GnomeRRConfig **configs;
+    GnomeRRConfig *result;
+
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+    
+    current = gnome_rr_config_new_current (screen);
+    
+    configs = configurations_read_from_file (filename, error);
+
+    result = NULL;
+    if (configs)
+    {
+	int i;
+	
+	for (i = 0; configs[i] != NULL; ++i)
+	{
+	    if (gnome_rr_config_match (configs[i], current))
+	    {
+		result = gnome_rr_config_copy (configs[i]);
+		break;
+	    }
+	}
+
+	if (result == NULL)
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_MATCHING_CONFIG,
+			 _("none of the saved display configurations matched the active configuration"));
+
+	configurations_free (configs);
+    }
+
+    gnome_rr_config_free (current);
+    
+    return result;
+}
+
+GnomeRRConfig *
+gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
+{
+    char *intended_filename;
+    GnomeRRConfig *config;
+
+    intended_filename = gnome_rr_config_get_intended_filename ();
+
+    config = config_new_stored (screen, intended_filename, error);
+
+    g_free (intended_filename);
+
+    return config;
+}
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+gboolean
+gnome_rr_config_apply (GnomeRRConfig *config,
+		       GnomeRRScreen *screen,
+		       GError       **error)
+{
+    return gnome_rr_config_apply_with_time (config, screen, GDK_CURRENT_TIME, error);
+}
+#endif
+
 gboolean
 gnome_rr_config_apply_with_time (GnomeRRConfig *config,
 				 GnomeRRScreen *screen,
@@ -1231,20 +1205,14 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
 				 GError       **error)
 {
     CrtcAssignment *assignment;
-    GnomeRROutputInfo **outputs;
+    GnomeOutputInfo **outputs;
     gboolean result = FALSE;
-    int i;
-
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (config), FALSE);
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), FALSE);
 
     outputs = make_outputs (config);
 
     assignment = crtc_assignment_new (screen, outputs, error);
 
-    for (i = 0; outputs[i] != NULL; i++)
-	g_object_unref (outputs[i]);
-    g_free (outputs);
+    outputs_free (outputs);
     
     if (assignment)
     {
@@ -1258,6 +1226,74 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
 
     return result;
 }
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+/**
+ * gnome_rr_config_apply_stored:
+ * @screen: A #GnomeRRScreen
+ * @error: Location to store error, or %NULL
+ *
+ * See the documentation for gnome_rr_config_apply_from_filename().  This
+ * function simply calls that other function with a filename of
+ * gnome_rr_config_get_intended_filename().
+ *
+ * Deprecated: 2.26: Use gnome_rr_config_apply_from_filename() instead and pass it
+ * the filename from gnome_rr_config_get_intended_filename().
+ */
+gboolean
+gnome_rr_config_apply_stored (GnomeRRScreen *screen, GError **error)
+{
+    char *filename;
+    gboolean result;
+
+    filename = gnome_rr_config_get_intended_filename ();
+    result = gnome_rr_config_apply_from_filename_with_time (screen, filename, GDK_CURRENT_TIME, error);
+    g_free (filename);
+
+    return result;
+}
+#endif
+
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+/* gnome_rr_config_apply_from_filename:
+ * @screen: A #GnomeRRScreen
+ * @filename: Path of the file to look in for stored RANDR configurations.
+ * @error: Location to store error, or %NULL
+ *
+ * First, this function refreshes the @screen to match the current RANDR
+ * configuration from the X server.  Then, it tries to load the file in
+ * @filename and looks for suitable matching RANDR configurations in the file;
+ * if one is found, that configuration will be applied to the current set of
+ * RANDR outputs.
+ *
+ * Typically, @filename is the result of gnome_rr_config_get_intended_filename() or
+ * gnome_rr_config_get_backup_filename().
+ *
+ * Returns: TRUE if the RANDR configuration was loaded and applied from
+ * $(XDG_CONFIG_HOME)/monitors.xml, or FALSE otherwise:
+ *
+ * If the current RANDR configuration could not be refreshed, the @error will
+ * have a domain of #GNOME_RR_ERROR and a corresponding error code.
+ *
+ * If the file in question is loaded successfully but the configuration cannot
+ * be applied, the @error will have a domain of #GNOME_RR_ERROR.  Note that an
+ * error code of #GNOME_RR_ERROR_NO_MATCHING_CONFIG is not a real error; it
+ * simply means that there were no stored configurations that match the current
+ * set of RANDR outputs.
+ *
+ * If the file in question cannot be loaded, the @error will have a domain of
+ * #G_FILE_ERROR.  Note that an error code of G_FILE_ERROR_NOENT is not really
+ * an error, either; it means that there was no stored configuration file and so
+ * nothing is changed.
+ *
+ * @Deprecated: 2.28: use gnome_rr_config_apply_from_filename_with_time() instead.
+ */
+gboolean
+gnome_rr_config_apply_from_filename (GnomeRRScreen *screen, const char *filename, GError **error)
+{
+    return gnome_rr_config_apply_from_filename_with_time (screen, filename, GDK_CURRENT_TIME, error);
+}
+#endif
 
 /* gnome_rr_config_apply_from_filename_with_time:
  * @screen: A #GnomeRRScreen
@@ -1297,7 +1333,7 @@ gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char
     GnomeRRConfig *stored;
     GError *my_error;
 
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), FALSE);
+    g_return_val_if_fail (screen != NULL, FALSE);
     g_return_val_if_fail (filename != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -1311,58 +1347,22 @@ gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char
 	    /* This means the screen didn't change, so just proceed */
     }
 
-    stored = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, "current", FALSE, NULL);
+    stored = config_new_stored (screen, filename, error);
 
-    if (config_init_stored (stored, filename, error))
+    if (stored)
     {
 	gboolean result;
 
 	result = gnome_rr_config_apply_with_time (stored, screen, timestamp, error);
 
-	g_object_unref (stored);
+	gnome_rr_config_free (stored);
+	
 	return result;
     }
     else
     {
-	g_object_unref (stored);
 	return FALSE;
     }
-}
-
-/**
- * gnome_rr_config_get_outputs:
- *
- * Returns: (array zero-terminated=1) (element-type GnomeDesktop.RROutputInfo) (transfer none): the output configuration for this #GnomeRRConfig
- */
-GnomeRROutputInfo **
-gnome_rr_config_get_outputs (GnomeRRConfig *self)
-{
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (self), NULL);
-
-    return self->priv->outputs;
-}
-
-/**
- * gnome_rr_config_get_clone:
- *
- * Returns: whether at least two outputs are at (0, 0) offset and they
- * have the same width/height.  Those outputs are of course connected and on
- * (i.e. they have a CRTC assigned).
- */
-gboolean
-gnome_rr_config_get_clone (GnomeRRConfig *self)
-{
-    g_return_val_if_fail (GNOME_IS_RR_CONFIG (self), FALSE);
-
-    return self->priv->clone;
-}
-
-void
-gnome_rr_config_set_clone (GnomeRRConfig *self, gboolean clone)
-{
-    g_return_if_fail (GNOME_IS_RR_CONFIG (self));
-
-    self->priv->clone = clone;
 }
 
 /*
@@ -1607,12 +1607,12 @@ accumulate_error (GString *accumulated_error, GError *error)
  */
 static gboolean
 real_assign_crtcs (GnomeRRScreen *screen,
-		   GnomeRROutputInfo **outputs,
+		   GnomeOutputInfo **outputs,
 		   CrtcAssignment *assignment,
 		   GError **error)
 {
     GnomeRRCrtc **crtcs = gnome_rr_screen_list_crtcs (screen);
-    GnomeRROutputInfo *output;
+    GnomeOutputInfo *output;
     int i;
     gboolean tried_mode;
     GError *my_error;
@@ -1624,7 +1624,7 @@ real_assign_crtcs (GnomeRRScreen *screen,
 	return TRUE;
 
     /* It is always allowed for an output to be turned off */
-    if (!output->priv->on)
+    if (!output->on)
     {
 	return real_assign_crtcs (screen, outputs + 1, assignment, error);
     }
@@ -1648,7 +1648,7 @@ real_assign_crtcs (GnomeRRScreen *screen,
 	 */
 	for (pass = 0; pass < 2; ++pass)
 	{
-	    GnomeRROutput *gnome_rr_output = gnome_rr_screen_get_output_by_name (screen, output->priv->name);
+	    GnomeRROutput *gnome_rr_output = gnome_rr_screen_get_output_by_name (screen, output->name);
 	    GnomeRRMode **modes = gnome_rr_output_list_modes (gnome_rr_output);
 	    int j;
 
@@ -1667,21 +1667,21 @@ real_assign_crtcs (GnomeRRScreen *screen,
 					_("CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"),
 					crtc_id,
 					mode_width, mode_height, mode_freq,
-					output->priv->width, output->priv->height, output->priv->rate,
+					output->width, output->height, output->rate,
 					pass);
 
-		if (mode_width == output->priv->width	&&
-		    mode_height == output->priv->height &&
-		    (pass == 1 || mode_freq == output->priv->rate))
+		if (mode_width == output->width	&&
+		    mode_height == output->height &&
+		    (pass == 1 || mode_freq == output->rate))
 		{
 		    tried_mode = TRUE;
 
 		    my_error = NULL;
 		    if (crtc_assignment_assign (
 			    assignment, crtc, modes[j],
-			    output->priv->x, output->priv->y,
-			    output->priv->rotation,
-                            output->priv->primary,
+			    output->x, output->y,
+			    output->rotation,
+                            output->primary,
 			    gnome_rr_output,
 			    &my_error))
 		    {
@@ -1769,7 +1769,7 @@ get_required_virtual_size (CrtcAssignment *assign, int *width, int *height)
 }
 
 static CrtcAssignment *
-crtc_assignment_new (GnomeRRScreen *screen, GnomeRROutputInfo **outputs, GError **error)
+crtc_assignment_new (GnomeRRScreen *screen, GnomeOutputInfo **outputs, GError **error)
 {
     CrtcAssignment *assignment = g_new0 (CrtcAssignment, 1);
 

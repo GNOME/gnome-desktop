@@ -39,7 +39,6 @@
 
 #undef GNOME_DISABLE_DEPRECATED
 #include "gnome-rr.h"
-#include "gnome-rr-config.h"
 
 #include "private.h"
 #include "gnome-rr-private.h"
@@ -793,7 +792,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
 void
 gnome_rr_screen_init (GnomeRRScreen *self)
 {
-    self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_RR_SCREEN, GnomeRRScreenPrivate);
+    self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_RR_TYPE_SCREEN, GnomeRRScreenPrivate);
 
     self->priv->gdk_screen = NULL;
     self->priv->gdk_root = NULL;
@@ -824,7 +823,7 @@ gnome_rr_screen_new (GdkScreen *screen,
 		     GError **error)
 {
     _gnome_desktop_init_i18n ();
-    GnomeRRScreen *self = g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-screen", screen, NULL);
+    GnomeRRScreen *self = g_initable_new (GNOME_RR_TYPE_SCREEN, NULL, error, "gdk-screen", screen, NULL);
     if (self && callback) {
         g_signal_connect (self, "screen-changed", G_CALLBACK (callback), data);
     }
@@ -850,7 +849,7 @@ gnome_rr_screen_set_size (GnomeRRScreen *screen,
 			  int       mm_width,
 			  int       mm_height)
 {
-    g_return_if_fail (GNOME_IS_RR_SCREEN (screen));
+    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
 
 #ifdef HAVE_RANDR
     gdk_error_trap_push ();
@@ -877,7 +876,7 @@ gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 			    int           *min_height,
 			    int	          *max_height)
 {
-    g_return_if_fail (GNOME_IS_RR_SCREEN (screen));
+    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
     
     if (min_width)
 	*min_width = screen->priv->info->min_width;
@@ -909,7 +908,7 @@ gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
 				guint32       *change_timestamp_ret,
 				guint32       *config_timestamp_ret)
 {
-    g_return_if_fail (GNOME_IS_RR_SCREEN (screen));
+    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
 
 #ifdef HAVE_RANDR
     if (change_timestamp_ret)
@@ -1007,7 +1006,7 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
 GnomeRRMode **
 gnome_rr_screen_list_modes (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     return screen->priv->info->modes;
@@ -1023,7 +1022,7 @@ gnome_rr_screen_list_modes (GnomeRRScreen *screen)
 GnomeRRMode **
 gnome_rr_screen_list_clone_modes   (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
 
     return screen->priv->info->clone_modes;
@@ -1039,7 +1038,7 @@ gnome_rr_screen_list_clone_modes   (GnomeRRScreen *screen)
 GnomeRRCrtc **
 gnome_rr_screen_list_crtcs (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     return screen->priv->info->crtcs;
@@ -1055,7 +1054,7 @@ gnome_rr_screen_list_crtcs (GnomeRRScreen *screen)
 GnomeRROutput **
 gnome_rr_screen_list_outputs (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     return screen->priv->info->outputs;
@@ -1072,7 +1071,7 @@ gnome_rr_screen_get_crtc_by_id (GnomeRRScreen *screen,
 {
     int i;
     
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     for (i = 0; screen->priv->info->crtcs[i] != NULL; ++i)
@@ -1095,7 +1094,7 @@ gnome_rr_screen_get_output_by_id (GnomeRRScreen *screen,
 {
     int i;
     
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     for (i = 0; screen->priv->info->outputs[i] != NULL; ++i)
@@ -1390,7 +1389,7 @@ gnome_rr_screen_get_output_by_name (GnomeRRScreen *screen,
 {
     int i;
     
-    g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), NULL);
+    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
     g_return_val_if_fail (screen->priv->info != NULL, NULL);
     
     for (i = 0; screen->priv->info->outputs[i] != NULL; ++i)

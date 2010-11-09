@@ -41,18 +41,6 @@
 
 typedef struct _GnomeRRLabeler GnomeRRLabeler;
 typedef struct _GnomeRRLabelerClass GnomeRRLabelerClass;
-typedef struct _GnomeRRLabelerPrivate GnomeRRLabelerPrivate;
-
-struct _GnomeRRLabeler {
-	GObject parent;
-
-	/*< private >*/
-	GnomeRRLabelerPrivate *priv;
-};
-
-struct _GnomeRRLabelerClass {
-	GObjectClass parent_class;
-};
 
 GType gnome_rr_labeler_get_type (void);
 
@@ -60,6 +48,6 @@ GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRConfig *config);
 
 void gnome_rr_labeler_hide (GnomeRRLabeler *labeler);
 
-void gnome_rr_labeler_get_color_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColor *color_out);
+void gnome_rr_labeler_get_color_for_output (GnomeRRLabeler *labeler, GnomeOutputInfo *output, GdkColor *color_out);
 
 #endif
