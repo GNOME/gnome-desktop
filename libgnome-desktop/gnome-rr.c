@@ -43,7 +43,7 @@
 #include "private.h"
 #include "gnome-rr-private.h"
 
-#define DISPLAY(o) ((o)->info->screen->priv->xdisplay)
+#define DISPLAY(o) ((o)->info->screen->xdisplay)
 
 #ifndef HAVE_RANDR
 /* This is to avoid a ton of ifdefs wherever we use a type from libXrandr */
@@ -58,19 +58,6 @@ typedef int Rotation;
 #define RR_Reflect_X		16
 #define RR_Reflect_Y		32
 #endif
-
-enum {
-    SCREEN_PROP_0,
-    SCREEN_PROP_GDK_SCREEN,
-    SCREEN_PROP_LAST,
-};
-
-enum {
-    SCREEN_CHANGED,
-    SCREEN_SIGNAL_LAST,
-};
-
-gint screen_signals[SCREEN_SIGNAL_LAST];
 
 struct GnomeRROutput
 {
@@ -155,12 +142,6 @@ static void           mode_initialize   (GnomeRRMode        *mode,
 
 static void           mode_free         (GnomeRRMode        *mode);
 
-static void gnome_rr_screen_finalize (GObject*);
-static void gnome_rr_screen_set_property (GObject*, guint, const GValue*, GParamSpec*);
-static gboolean gnome_rr_screen_initable_init (GInitable*, GCancellable*, GError**);
-static void gnome_rr_screen_initable_iface_init (GInitableIface *iface);
-G_DEFINE_TYPE_WITH_CODE (GnomeRRScreen, gnome_rr_screen, G_TYPE_OBJECT,
-        G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_screen_initable_iface_init))
 
 /* Errors */
 
@@ -427,8 +408,8 @@ fill_out_screen_info (Display *xdisplay,
 #ifdef HAVE_RANDR
     XRRScreenResources *resources;
     
-    g_return_val_if_fail (xdisplay != NULL, FALSE);
-    g_return_val_if_fail (info != NULL, FALSE);
+    g_assert (xdisplay != NULL);
+    g_assert (info != NULL);
 
     /* First update the screen resources */
 
@@ -442,7 +423,7 @@ fill_out_screen_info (Display *xdisplay,
 	 */
 #if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
         /* Runtime check for RandR 1.3 or higher */
-        if (info->screen->priv->rr_major_version == 1 && info->screen->priv->rr_minor_version >= 3)
+        if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3)
             resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
         else
             resources = XRRGetScreenResources (xdisplay, xroot);
@@ -502,7 +483,7 @@ fill_out_screen_info (Display *xdisplay,
     info->primary = None;
 #if (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
     /* Runtime check for RandR 1.3 or higher */
-    if (info->screen->priv->rr_major_version == 1 && info->screen->priv->rr_minor_version >= 3) {
+    if (info->screen->rr_major_version == 1 && info->screen->rr_minor_version >= 3) {
         gdk_error_trap_push ();
         info->primary = XRRGetOutputPrimary (xdisplay, xroot);
 	gdk_error_trap_pop_ignored ();
@@ -527,7 +508,7 @@ screen_info_new (GnomeRRScreen *screen, gboolean needs_reprobe, GError **error)
     info->modes = NULL;
     info->screen = screen;
     
-    if (fill_out_screen_info (screen->priv->xdisplay, screen->priv->xroot, info, needs_reprobe, error))
+    if (fill_out_screen_info (screen->xdisplay, screen->xroot, info, needs_reprobe, error))
     {
 	return info;
     }
@@ -551,16 +532,16 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, gboolean needs_re
 	    return FALSE;
 
 #ifdef HAVE_RANDR
-    if (info->resources->configTimestamp != screen->priv->info->resources->configTimestamp)
+    if (info->resources->configTimestamp != screen->info->resources->configTimestamp)
 	    changed = TRUE;
 #endif
 
-    screen_info_free (screen->priv->info);
+    screen_info_free (screen->info);
 	
-    screen->priv->info = info;
+    screen->info = info;
 
-    if (changed || force_callback)
-        g_signal_emit (G_OBJECT (screen), screen_signals[SCREEN_CHANGED], 0);
+    if ((changed || force_callback) && screen->callback)
+	screen->callback (screen, screen->data);
     
     return changed;
 }
@@ -578,7 +559,7 @@ screen_on_event (GdkXEvent *xevent,
     if (!e)
 	return GDK_FILTER_CONTINUE;
 
-    event_num = e->type - screen->priv->randr_event_base;
+    event_num = e->type - screen->randr_event_base;
 
     if (event_num == RRScreenChangeNotify) {
 	/* We don't reprobe the hardware; we just fetch the X server's latest
@@ -610,8 +591,8 @@ screen_on_event (GdkXEvent *xevent,
 					     (guint32) rr_event->timestamp,
 					     (guint32) rr_event->config_timestamp,
 					     rr_event->serial,
-					     (guint32) screen->priv->info->resources->timestamp,
-					     (guint32) screen->priv->info->resources->configTimestamp);
+					     (guint32) screen->info->resources->timestamp,
+					     (guint32) screen->info->resources->configTimestamp);
 	    g_signal_connect (dialog, "response",
 			      G_CALLBACK (gtk_widget_destroy), NULL);
 	    gtk_widget_show (dialog);
@@ -661,177 +642,94 @@ screen_on_event (GdkXEvent *xevent,
     return GDK_FILTER_CONTINUE;
 }
 
-static gboolean
-gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError **error)
+/* Returns NULL if screen could not be created.  For instance, if
+ * the driver does not support Xrandr 1.2.
+ */
+GnomeRRScreen *
+gnome_rr_screen_new (GdkScreen *gdk_screen,
+		     GnomeRRScreenChanged callback,
+		     gpointer data,
+		     GError **error)
 {
-    GnomeRRScreen *self = GNOME_RR_SCREEN (initable);
-    Display *dpy = GDK_SCREEN_XDISPLAY (self->priv->gdk_screen);
+#ifdef HAVE_RANDR
+    Display *dpy = GDK_SCREEN_XDISPLAY (gdk_screen);
     int event_base;
     int ignore;
+#endif
 
-    self->priv->connector_type_atom = XInternAtom (dpy, "ConnectorType", FALSE);
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+    
+    _gnome_desktop_init_i18n ();
 
 #ifdef HAVE_RANDR
     if (XRRQueryExtension (dpy, &event_base, &ignore))
     {
-        self->priv->randr_event_base = event_base;
+	GnomeRRScreen *screen = g_new0 (GnomeRRScreen, 1);
+	
+	screen->gdk_screen = gdk_screen;
+	screen->gdk_root = gdk_screen_get_root_window (gdk_screen);
+	screen->xroot = gdk_x11_drawable_get_xid (screen->gdk_root);
+	screen->xdisplay = dpy;
+	screen->xscreen = gdk_x11_screen_get_xscreen (screen->gdk_screen);
+	screen->connector_type_atom = XInternAtom (dpy, "ConnectorType", FALSE);
+	
+	screen->callback = callback;
+	screen->data = data;
+	
+	screen->randr_event_base = event_base;
 
-        XRRQueryVersion (dpy, &self->priv->rr_major_version, &self->priv->rr_minor_version);
-        if (self->priv->rr_major_version > 1 || (self->priv->rr_major_version == 1 && self->priv->rr_minor_version < 2)) {
-            g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
-                    "RANDR extension is too old (must be at least 1.2)");
-            return FALSE;
-        }
+	XRRQueryVersion (dpy, &screen->rr_major_version, &screen->rr_minor_version);
+	if (screen->rr_major_version > 1 || (screen->rr_major_version == 1 && screen->rr_minor_version < 2)) {
+	    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+			 "RANDR extension is too old (must be at least 1.2)");
+	    g_free (screen);
+	    return NULL;
+	}
 
-        self->priv->info = screen_info_new (self, TRUE, error);
+	screen->info = screen_info_new (screen, TRUE, error);
+	
+	if (!screen->info) {
+	    g_free (screen);
+	    return NULL;
+	}
 
-        if (!self->priv->info) {
-            return FALSE;
-        }
+	if (screen->callback) {
+	    XRRSelectInput (screen->xdisplay,
+			    screen->xroot,
+			    RRScreenChangeNotifyMask);
 
-        XRRSelectInput (self->priv->xdisplay,
-                self->priv->xroot,
-                RRScreenChangeNotifyMask);
-        gdk_x11_register_standard_event_type (gdk_screen_get_display (self->priv->gdk_screen),
-                          event_base,
-                          RRNotify + 1);
-        gdk_window_add_filter (self->priv->gdk_root, screen_on_event, self);
+	    gdk_x11_register_standard_event_type (gdk_screen_get_display (gdk_screen),
+						  event_base,
+						  RRNotify + 1);
 
-        return TRUE;
+	    gdk_window_add_filter (screen->gdk_root, screen_on_event, screen);
+	}
+
+	return screen;
     }
     else
     {
 #endif /* HAVE_RANDR */
-    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
-             _("RANDR extension is not present"));
-
-    return FALSE;
+	g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+		     _("RANDR extension is not present"));
+	
+	return NULL;
 #ifdef HAVE_RANDR
    }
 #endif
 }
 
 void
-gnome_rr_screen_initable_iface_init (GInitableIface *iface)
+gnome_rr_screen_destroy (GnomeRRScreen *screen)
 {
-    iface->init = gnome_rr_screen_initable_init;
-}
+	g_return_if_fail (screen != NULL);
 
-void
-gnome_rr_screen_finalize (GObject *gobject)
-{
-    GnomeRRScreen *screen = GNOME_RR_SCREEN (gobject);
+	gdk_window_remove_filter (screen->gdk_root, screen_on_event, screen);
 
-    gdk_window_remove_filter (screen->priv->gdk_root, screen_on_event, screen);
+	screen_info_free (screen->info);
+	screen->info = NULL;
 
-    screen_info_free (screen->priv->info);
-}
-
-void
-gnome_rr_screen_set_property (GObject *gobject, guint property_id, const GValue *value, GParamSpec *property)
-{
-    GnomeRRScreen *self = GNOME_RR_SCREEN (gobject);
-
-    switch (property_id)
-    {
-    case SCREEN_PROP_GDK_SCREEN:
-        self->priv->gdk_screen = g_value_get_object (value);
-        self->priv->gdk_root = gdk_screen_get_root_window (self->priv->gdk_screen);
-        self->priv->xroot = gdk_x11_drawable_get_xid (self->priv->gdk_root);
-        self->priv->xdisplay = GDK_SCREEN_XDISPLAY (self->priv->gdk_screen);
-        self->priv->xscreen = gdk_x11_screen_get_xscreen (self->priv->gdk_screen);
-        return;
-    default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, property);
-        return;
-    }
-}
-
-void
-gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
-{
-    GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-    g_type_class_add_private (klass, sizeof (GnomeRRScreenPrivate));
-
-    gobject_class->set_property = gnome_rr_screen_set_property;
-    gobject_class->get_property = NULL;
-    gobject_class->finalize = gnome_rr_screen_finalize;
-
-    g_object_class_install_property(
-            gobject_class,
-            SCREEN_PROP_GDK_SCREEN,
-            g_param_spec_object (
-                    "gdk-screen",
-                    "GDK Screen",
-                    "The GDK Screen represented by this GnomeRRScreen",
-                    GDK_TYPE_SCREEN,
-                    G_PARAM_CONSTRUCT | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
-                    )
-            );
-
-    screen_signals[SCREEN_CHANGED] = g_signal_newv("screen-changed",
-            G_TYPE_FROM_CLASS (gobject_class),
-            G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-            NULL,
-            NULL,
-            NULL,
-            g_cclosure_marshal_VOID__VOID,
-            G_TYPE_NONE,
-            0,
-            NULL);
-}
-
-void
-gnome_rr_screen_init (GnomeRRScreen *self)
-{
-    self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_RR_TYPE_SCREEN, GnomeRRScreenPrivate);
-
-    self->priv->gdk_screen = NULL;
-    self->priv->gdk_root = NULL;
-    self->priv->xdisplay = NULL;
-    self->priv->xroot = None;
-    self->priv->xscreen = NULL;
-    self->priv->info = NULL;
-    self->priv->rr_major_version = 0;
-    self->priv->rr_minor_version = 0;
-}
-
-/**
- * gnome_rr_screen_new: (skip)
- * Creates a new #GnomeRRScreen instance
- *
- * @screen: the #GdkScreen on which to operate
- * @callback: an optional callback for screen-changed signal
- * @data:
- * @error: will be set if XRandR is not supported
- *
- * Returns: a new #GnomeRRScreen instance or NULL if screen could not be created,
- * for instance if the driver does not support Xrandr 1.2
- */
-GnomeRRScreen *
-gnome_rr_screen_new (GdkScreen *screen,
-		     GnomeRRScreenChanged callback,
-		     gpointer data,
-		     GError **error)
-{
-    _gnome_desktop_init_i18n ();
-    GnomeRRScreen *self = g_initable_new (GNOME_RR_TYPE_SCREEN, NULL, error, "gdk-screen", screen, NULL);
-    if (self && callback) {
-        g_signal_connect (self, "screen-changed", G_CALLBACK (callback), data);
-    }
-    return self;
-}
-
-/**
- * gnome_rr_screen_destroy:
- *
- * Destroy the screen and all associated resources
- * Deprecated: 3.0
- */
-void
-gnome_rr_screen_destroy (GnomeRRScreen *self)
-{
-    g_object_run_dispose (G_OBJECT (self));
+	g_free (screen);
 }
 
 void
@@ -841,26 +739,16 @@ gnome_rr_screen_set_size (GnomeRRScreen *screen,
 			  int       mm_width,
 			  int       mm_height)
 {
-    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
+    g_return_if_fail (screen != NULL);
 
 #ifdef HAVE_RANDR
     gdk_error_trap_push ();
-    XRRSetScreenSize (screen->priv->xdisplay, screen->priv->xroot,
+    XRRSetScreenSize (screen->xdisplay, screen->xroot,
 		      width, height, mm_width, mm_height);
     gdk_error_trap_pop_ignored ();
 #endif
 }
 
-/**
- * gnome_rr_screen_get_ranges:
- *
- * Get the ranges of the screen
- * @screen: a #GnomeRRScreen
- * @min_width: (out): the minimum width
- * @max_width: (out): the maximum width
- * @min_height: (out): the minimum height
- * @max_height: (out): the maximum height
- */
 void
 gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 			    int	          *min_width,
@@ -868,26 +756,26 @@ gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
 			    int           *min_height,
 			    int	          *max_height)
 {
-    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
+    g_return_if_fail (screen != NULL);
     
     if (min_width)
-	*min_width = screen->priv->info->min_width;
+	*min_width = screen->info->min_width;
     
     if (max_width)
-	*max_width = screen->priv->info->max_width;
+	*max_width = screen->info->max_width;
     
     if (min_height)
-	*min_height = screen->priv->info->min_height;
+	*min_height = screen->info->min_height;
     
     if (max_height)
-	*max_height = screen->priv->info->max_height;
+	*max_height = screen->info->max_height;
 }
 
 /**
- * gnome_rr_screen_get_timestamps:
+ * gnome_rr_screen_get_timestamps
  * @screen: a #GnomeRRScreen
- * @change_timestamp_ret: (out): Location in which to store the timestamp at which the RANDR configuration was last changed
- * @config_timestamp_ret: (out): Location in which to store the timestamp at which the RANDR configuration was last obtained
+ * @change_timestamp_ret: Location in which to store the timestamp at which the RANDR configuration was last changed
+ * @config_timestamp_ret: Location in which to store the timestamp at which the RANDR configuration was last obtained
  *
  * Queries the two timestamps that the X RANDR extension maintains.  The X
  * server will prevent change requests for stale configurations, those whose
@@ -900,14 +788,14 @@ gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
 				guint32       *change_timestamp_ret,
 				guint32       *config_timestamp_ret)
 {
-    g_return_if_fail (GNOME_RR_IS_SCREEN (screen));
+    g_return_if_fail (screen != NULL);
 
 #ifdef HAVE_RANDR
     if (change_timestamp_ret)
-	*change_timestamp_ret = screen->priv->info->resources->timestamp;
+	*change_timestamp_ret = screen->info->resources->timestamp;
 
     if (config_timestamp_ret)
-	*config_timestamp_ret = screen->priv->info->resources->configTimestamp;
+	*config_timestamp_ret = screen->info->resources->configTimestamp;
 #endif
 }
 
@@ -921,21 +809,21 @@ force_timestamp_update (GnomeRRScreen *screen)
 
     timestamp_updated = FALSE;
 
-    crtc = screen->priv->info->crtcs[0];
+    crtc = screen->info->crtcs[0];
 
     if (crtc == NULL)
 	goto out;
 
-    current_info = XRRGetCrtcInfo (screen->priv->xdisplay,
-				   screen->priv->info->resources,
+    current_info = XRRGetCrtcInfo (screen->xdisplay,
+				   screen->info->resources,
 				   crtc->id);
 
     if (current_info == NULL)
 	goto out;
 
     gdk_error_trap_push ();
-    status = XRRSetCrtcConfig (screen->priv->xdisplay,
-			       screen->priv->info->resources,
+    status = XRRSetCrtcConfig (screen->xdisplay,
+			       screen->info->resources,
 			       crtc->id,
 			       current_info->timestamp,
 			       current_info->x,
@@ -958,7 +846,7 @@ out:
 }
 
 /**
- * gnome_rr_screen_refresh:
+ * gnome_rr_screen_refresh
  * @screen: a #GnomeRRScreen
  * @error: location to store error, or %NULL
  *
@@ -978,121 +866,83 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
 
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-    gdk_x11_display_grab (gdk_screen_get_display (screen->priv->gdk_screen));
+    gdk_x11_display_grab (gdk_screen_get_display (screen->gdk_screen));
 
     refreshed = screen_update (screen, FALSE, TRUE, error);
     force_timestamp_update (screen); /* this is to keep other clients from thinking that the X server re-detected things by itself - bgo#621046 */
 
-    gdk_x11_display_ungrab (gdk_screen_get_display (screen->priv->gdk_screen));
+    gdk_x11_display_ungrab (gdk_screen_get_display (screen->gdk_screen));
 
     return refreshed;
 }
 
-/**
- * gnome_rr_screen_list_modes:
- *
- * List available XRandR modes
- *
- * Returns: (array zero-terminated=1) (transfer none):
- */
 GnomeRRMode **
 gnome_rr_screen_list_modes (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    return screen->priv->info->modes;
+    return screen->info->modes;
 }
 
-/**
- * gnome_rr_screen_list_clone_modes:
- *
- * List available XRandR clone modes
- *
- * Returns: (array zero-terminated=1) (transfer none):
- */
 GnomeRRMode **
 gnome_rr_screen_list_clone_modes   (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
 
-    return screen->priv->info->clone_modes;
+    return screen->info->clone_modes;
 }
 
-/**
- * gnome_rr_screen_list_crtcs:
- *
- * List all CRTCs
- *
- * Returns: (array zero-terminated=1) (transfer none):
- */
 GnomeRRCrtc **
 gnome_rr_screen_list_crtcs (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    return screen->priv->info->crtcs;
+    return screen->info->crtcs;
 }
 
-/**
- * gnome_rr_screen_list_outputs:
- *
- * List all outputs
- *
- * Returns: (array zero-terminated=1) (transfer none):
- */
 GnomeRROutput **
 gnome_rr_screen_list_outputs (GnomeRRScreen *screen)
 {
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    return screen->priv->info->outputs;
+    return screen->info->outputs;
 }
 
-/**
- * gnome_rr_screen_get_crtc_by_id:
- *
- * Returns: (transfer none): the CRTC identified by @id
- */
 GnomeRRCrtc *
 gnome_rr_screen_get_crtc_by_id (GnomeRRScreen *screen,
 				guint32        id)
 {
     int i;
     
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    for (i = 0; screen->priv->info->crtcs[i] != NULL; ++i)
+    for (i = 0; screen->info->crtcs[i] != NULL; ++i)
     {
-	if (screen->priv->info->crtcs[i]->id == id)
-	    return screen->priv->info->crtcs[i];
+	if (screen->info->crtcs[i]->id == id)
+	    return screen->info->crtcs[i];
     }
     
     return NULL;
 }
 
-/**
- * gnome_rr_screen_get_output_by_id:
- *
- * Returns: (transfer none): the output identified by @id
- */
 GnomeRROutput *
 gnome_rr_screen_get_output_by_id (GnomeRRScreen *screen,
 				  guint32        id)
 {
     int i;
     
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    for (i = 0; screen->priv->info->outputs[i] != NULL; ++i)
+    for (i = 0; screen->info->outputs[i] != NULL; ++i)
     {
-	if (screen->priv->info->outputs[i]->id == id)
-	    return screen->priv->info->outputs[i];
+	if (screen->info->outputs[i]->id == id)
+	    return screen->info->outputs[i];
     }
     
     return NULL;
@@ -1191,7 +1041,7 @@ get_connector_type_string (GnomeRROutput *output)
 
     result = NULL;
 
-    if (XRRGetOutputProperty (DISPLAY (output), output->id, output->info->screen->priv->connector_type_atom,
+    if (XRRGetOutputProperty (DISPLAY (output), output->id, output->info->screen->connector_type_atom,
 			      0, 100, False, False,
 			      AnyPropertyType,
 			      &actual_type, &actual_format,
@@ -1325,23 +1175,18 @@ gnome_rr_output_get_edid_data (GnomeRROutput *output)
     return output->edid_data;
 }
 
-/**
- * gnome_rr_screen_get_output_by_id:
- *
- * Returns: (transfer none): the output identified by @name
- */
 GnomeRROutput *
 gnome_rr_screen_get_output_by_name (GnomeRRScreen *screen,
 				    const char    *name)
 {
     int i;
     
-    g_return_val_if_fail (GNOME_RR_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (screen->priv->info != NULL, NULL);
+    g_return_val_if_fail (screen != NULL, NULL);
+    g_return_val_if_fail (screen->info != NULL, NULL);
     
-    for (i = 0; screen->priv->info->outputs[i] != NULL; ++i)
+    for (i = 0; screen->info->outputs[i] != NULL; ++i)
     {
-	GnomeRROutput *output = screen->priv->info->outputs[i];
+	GnomeRROutput *output = screen->info->outputs[i];
 	
 	if (strcmp (output->name, name) == 0)
 	    return output;
@@ -1528,8 +1373,8 @@ gnome_rr_screen_set_primary_output (GnomeRRScreen *screen,
         id = None;
 
         /* Runtime check for RandR 1.3 or higher */
-    if (screen->priv->rr_major_version == 1 && screen->priv->rr_minor_version >= 3)
-        XRRSetOutputPrimary (screen->priv->xdisplay, screen->priv->xroot, id);
+    if (screen->rr_major_version == 1 && screen->rr_minor_version >= 3)
+        XRRSetOutputPrimary (screen->xdisplay, screen->xroot, id);
 #endif
 #endif /* HAVE_RANDR */
 }

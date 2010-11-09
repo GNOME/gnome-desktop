@@ -31,21 +31,10 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 
-typedef struct GnomeRRScreenPrivate GnomeRRScreenPrivate;
+typedef struct GnomeRRScreen GnomeRRScreen;
 typedef struct GnomeRROutput GnomeRROutput;
 typedef struct GnomeRRCrtc GnomeRRCrtc;
 typedef struct GnomeRRMode GnomeRRMode;
-
-typedef struct {
-	GObject parent;
-
-	GnomeRRScreenPrivate* priv;
-} GnomeRRScreen;
-
-typedef struct {
-	GObjectClass parent_class;
-
-} GnomeRRScreenClass;
 
 typedef void (* GnomeRRScreenChanged) (GnomeRRScreen *screen, gpointer data);
 
@@ -75,19 +64,6 @@ typedef enum {
 } GnomeRRError;
 
 #define GNOME_RR_CONNECTOR_TYPE_PANEL "Panel"  /* This is a laptop's built-in LCD */
-
-#define GNOME_RR_TYPE_SCREEN                  (gnome_rr_screen_get_type())
-#define GNOME_RR_SCREEN(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_RR_TYPE_SCREEN, GnomeRRScreen))
-#define GNOME_RR_IS_SCREEN(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_RR_TYPE_SCREEN))
-#define GNOME_RR_SCREEN_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_RR_TYPE_SCREEN, GnomeRRScreenClass))
-#define GNOME_RR_IS_SCREEN_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_RR_TYPE_SCREEN))
-#define GNOME_RR_SCREEN_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_RR_TYPE_SCREEN, GnomeRRScreenClass))
-
-#define GNOME_RR_TYPE_OUTPUT (gnome_rr_output_get_type())
-#define GNOME_RR_TYPE_CRTC   (gnome_rr_crtc_get_type())
-#define GNOME_RR_TYPE_MODE   (gnome_rr_mode_get_type())
-
-GType gnome_rr_screen_get_type (void);
 
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
