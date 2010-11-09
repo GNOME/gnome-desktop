@@ -41,19 +41,18 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <cairo.h>
 #include <cairo-xlib.h>
 
-#include <gconf/gconf-client.h>
-
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnomeui/gnome-bg.h>
 #include <libgnomeui/gnome-bg-crossfade.h>
+#include <gdesktop-enums.h>
 
-#define BG_KEY_DRAW_BACKGROUND    GNOME_BG_KEY_DIR "/draw_background"
-#define BG_KEY_PRIMARY_COLOR      GNOME_BG_KEY_DIR "/primary_color"
-#define BG_KEY_SECONDARY_COLOR    GNOME_BG_KEY_DIR "/secondary_color"
-#define BG_KEY_COLOR_TYPE         GNOME_BG_KEY_DIR "/color_shading_type"
-#define BG_KEY_PICTURE_PLACEMENT  GNOME_BG_KEY_DIR "/picture_options"
-#define BG_KEY_PICTURE_OPACITY    GNOME_BG_KEY_DIR "/picture_opacity"
-#define BG_KEY_PICTURE_FILENAME   GNOME_BG_KEY_DIR "/picture_filename"
+#define BG_KEY_DRAW_BACKGROUND    "draw-background"
+#define BG_KEY_PRIMARY_COLOR      "primary-color"
+#define BG_KEY_SECONDARY_COLOR    "secondary-color"
+#define BG_KEY_COLOR_TYPE         "color-shading-type"
+#define BG_KEY_PICTURE_PLACEMENT  "picture-options"
+#define BG_KEY_PICTURE_OPACITY    "picture-opacity"
+#define BG_KEY_PICTURE_FILENAME   "picture-filename"
 
 /* We keep the large pixbufs around if the next update
    in the slideshow is less than 60 seconds away */
@@ -95,10 +94,11 @@ struct _GnomeBG
 {
 	GObject                 parent_instance;
 	char *			filename;
-	GnomeBGPlacement	placement;
-	GnomeBGColorType	color_type;
+	GDesktopBackgroundStyle	placement;
+	GDesktopBackgroundShading	color_type;
 	GdkColor		primary;
 	GdkColor		secondary;
+	gboolean		is_enabled;
 
 	GFileMonitor *		file_monitor;
 
@@ -217,59 +217,6 @@ color_to_string (const GdkColor *color)
 				color->blue >> 8);
 }
 
-static GConfEnumStringPair placement_lookup[] = {
-	{ GNOME_BG_PLACEMENT_CENTERED,    "centered" },
-	{ GNOME_BG_PLACEMENT_FILL_SCREEN, "stretched" },
-	{ GNOME_BG_PLACEMENT_SCALED,      "scaled" },
-	{ GNOME_BG_PLACEMENT_ZOOMED,      "zoom" },
-	{ GNOME_BG_PLACEMENT_TILED,       "wallpaper" },
-	{ GNOME_BG_PLACEMENT_SPANNED,       "spanned" },
-	{ 0, NULL }
-};
-
-static GConfEnumStringPair color_type_lookup[] = {
-	{ GNOME_BG_COLOR_SOLID,      "solid" },
-	{ GNOME_BG_COLOR_H_GRADIENT, "horizontal-gradient" },
-	{ GNOME_BG_COLOR_V_GRADIENT, "vertical-gradient" },
-	{ 0, NULL }
-};
-
-static void
-color_type_from_string (const char       *string,
-			GnomeBGColorType *color_type)
-{
-	*color_type = GNOME_BG_COLOR_SOLID;
-
-	if (string) {
-		gconf_string_to_enum (color_type_lookup,
-				      string, (int *)color_type);
-	}
-}
-
-static const char *
-color_type_to_string (GnomeBGColorType color_type)
-{
-	return gconf_enum_to_string (color_type_lookup, color_type);
-}
-
-static void
-placement_from_string (const char       *string,
-		       GnomeBGPlacement *placement)
-{
-	*placement = GNOME_BG_PLACEMENT_ZOOMED;
-
-	if (string) {
-		gconf_string_to_enum (placement_lookup,
-				      string, (int *)placement);
-	}
-}
-
-static const char *
-placement_to_string (GnomeBGPlacement placement)
-{
-	return gconf_enum_to_string (placement_lookup, placement);
-}
-
 static gboolean
 do_changed (GnomeBG *bg)
 {
@@ -339,67 +286,42 @@ queue_transitioned (GnomeBG *bg)
 }
 
 void
-gnome_bg_load_from_preferences (GnomeBG     *bg,
-				GConfClient *client)
+gnome_bg_load_from_preferences (GnomeBG   *bg,
+				GSettings *settings)
 {
 	char    *tmp;
 	char    *filename;
-	GnomeBGColorType ctype;
+	GDesktopBackgroundShading ctype;
 	GdkColor c1, c2;
-	GnomeBGPlacement placement;
+	GDesktopBackgroundStyle placement;
 
 	g_return_if_fail (GNOME_IS_BG (bg));
-	g_return_if_fail (client != NULL);
+	g_return_if_fail (G_IS_SETTINGS (settings));
+
+	bg->is_enabled = g_settings_get_boolean (settings, BG_KEY_DRAW_BACKGROUND);
 
 	/* Filename */
 	filename = NULL;
-	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_FILENAME, NULL);
-	if (tmp != NULL && *tmp != '\0') {
-		if (g_utf8_validate (tmp, -1, NULL) &&
-		    g_file_test (tmp, G_FILE_TEST_EXISTS)) {
-			filename = g_strdup (tmp);
-		} else {
-			filename = g_filename_from_utf8 (tmp, -1, NULL, NULL, NULL);
-		}
-
-		/* Fall back to default background if filename was set
-		   but no longer exists */
-		if (!g_file_test (filename, G_FILE_TEST_EXISTS)) {
-			GConfValue *default_value;
-
-			g_free (filename);
-			filename = NULL;
-
-			default_value =
-				gconf_client_get_default_from_schema (client,
-								      BG_KEY_PICTURE_FILENAME,
-								      NULL);
-			if (default_value != NULL) {
-				filename = g_strdup (gconf_value_get_string (default_value));
-				gconf_value_free (default_value);
-			}
-		}
+	tmp = g_settings_get_string (settings, BG_KEY_PICTURE_FILENAME);
+	if (tmp != NULL && *tmp != '\0' && g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+		filename = g_strdup (tmp);
 	}
 	g_free (tmp);
 
 	/* Colors */
-	tmp = gconf_client_get_string (client, BG_KEY_PRIMARY_COLOR, NULL);
+	tmp = g_settings_get_string (settings, BG_KEY_PRIMARY_COLOR);
 	color_from_string (tmp, &c1);
 	g_free (tmp);
 
-	tmp = gconf_client_get_string (client, BG_KEY_SECONDARY_COLOR, NULL);
+	tmp = g_settings_get_string (settings, BG_KEY_SECONDARY_COLOR);
 	color_from_string (tmp, &c2);
 	g_free (tmp);
 
 	/* Color type */
-	tmp = gconf_client_get_string (client, BG_KEY_COLOR_TYPE, NULL);
-	color_type_from_string (tmp, &ctype);
-	g_free (tmp);
+	ctype = g_settings_get_enum (settings, BG_KEY_COLOR_TYPE);
 
 	/* Placement */
-	tmp = gconf_client_get_string (client, BG_KEY_PICTURE_PLACEMENT, NULL);
-	placement_from_string (tmp, &placement);
-	g_free (tmp);
+	placement = g_settings_get_enum (settings, BG_KEY_PICTURE_PLACEMENT);
 
 	gnome_bg_set_color (bg, ctype, &c1, &c2);
 	gnome_bg_set_placement (bg, placement);
@@ -409,34 +331,29 @@ gnome_bg_load_from_preferences (GnomeBG     *bg,
 }
 
 void
-gnome_bg_save_to_preferences (GnomeBG     *bg,
-			      GConfClient *client)
+gnome_bg_save_to_preferences (GnomeBG   *bg,
+			      GSettings *settings)
 {
-	const char *color_type;
-	const char *placement;
-        const gchar *filename;
-        gchar *primary;
-        gchar *secondary;
-        
+	gchar *primary;
+	gchar *secondary;
+
+	g_return_if_fail (GNOME_IS_BG (bg));
+	g_return_if_fail (G_IS_SETTINGS (settings));
+
 	primary = color_to_string (&bg->primary);
 	secondary = color_to_string (&bg->secondary);
 
-	color_type = color_type_to_string (bg->color_type);
+	g_settings_delay (settings);
 
-        if (bg->filename) {
-		filename = bg->filename;
-		placement = placement_to_string (bg->placement);
-        }
-        else {
-                filename = "(none)";
-                placement = "none";
-        }
+	g_settings_set_boolean (settings, BG_KEY_DRAW_BACKGROUND, bg->is_enabled);
+	g_settings_set_string (settings, BG_KEY_PICTURE_FILENAME, bg->filename);
+	g_settings_set_string (settings, BG_KEY_PRIMARY_COLOR, primary);
+	g_settings_set_string (settings, BG_KEY_SECONDARY_COLOR, secondary);
+	g_settings_set_enum (settings, BG_KEY_COLOR_TYPE, bg->color_type);
+	g_settings_set_enum (settings, BG_KEY_PICTURE_PLACEMENT, bg->placement);
 
-	gconf_client_set_string (client, BG_KEY_PICTURE_FILENAME, filename, NULL);
-        gconf_client_set_string (client, BG_KEY_PRIMARY_COLOR, primary, NULL);
-        gconf_client_set_string (client, BG_KEY_SECONDARY_COLOR, secondary, NULL);
-        gconf_client_set_string (client, BG_KEY_COLOR_TYPE, color_type, NULL);
-	gconf_client_set_string (client, BG_KEY_PICTURE_PLACEMENT, placement, NULL);
+	/* Apply changes atomically. */
+	g_settings_apply (settings);
 
 	g_free (primary);
 	g_free (secondary);
@@ -483,10 +400,8 @@ gnome_bg_finalize (GObject *object)
 		bg->blow_caches_id = 0;
 	}
 	
-	if (bg->filename) {
-		g_free (bg->filename);
-		bg->filename = NULL;
-	}
+	g_free (bg->filename);
+	bg->filename = NULL;
 
 	G_OBJECT_CLASS (gnome_bg_parent_class)->finalize (object);
 }
@@ -524,11 +439,12 @@ gnome_bg_new (void)
 
 void
 gnome_bg_set_color (GnomeBG *bg,
-		    GnomeBGColorType type,
+		    GDesktopBackgroundShading type,
 		    GdkColor *primary,
 		    GdkColor *secondary)
 {
 	g_return_if_fail (bg != NULL);
+	g_return_if_fail (primary != NULL);
 
 	if (bg->color_type != type			||
 	    !gdk_color_equal (&bg->primary, primary)			||
@@ -545,8 +461,8 @@ gnome_bg_set_color (GnomeBG *bg,
 }
 
 void
-gnome_bg_set_placement (GnomeBG          *bg,
-			GnomeBGPlacement  placement)
+gnome_bg_set_placement (GnomeBG                 *bg,
+			GDesktopBackgroundStyle  placement)
 {
 	g_return_if_fail (bg != NULL);
 	
@@ -557,7 +473,7 @@ gnome_bg_set_placement (GnomeBG          *bg,
 	}
 }
 
-GnomeBGPlacement
+GDesktopBackgroundStyle
 gnome_bg_get_placement (GnomeBG *bg)
 {
 	g_return_val_if_fail (bg != NULL, -1);
@@ -566,10 +482,10 @@ gnome_bg_get_placement (GnomeBG *bg)
 }
 
 void
-gnome_bg_get_color (GnomeBG               *bg,
-		    GnomeBGColorType      *type,
-		    GdkColor              *primary,
-		    GdkColor              *secondary)
+gnome_bg_get_color (GnomeBG                   *bg,
+		    GDesktopBackgroundShading *type,
+		    GdkColor                  *primary,
+		    GdkColor                  *secondary)
 {
 	g_return_if_fail (bg != NULL);
 
@@ -582,6 +498,28 @@ gnome_bg_get_color (GnomeBG               *bg,
 	if (secondary)
 		*secondary = bg->secondary;
 }
+
+void
+gnome_bg_set_draw_background (GnomeBG  *bg,
+			      gboolean  draw_background)
+{
+	g_return_if_fail (bg != NULL);
+	
+	if (bg->is_enabled != draw_background) {
+		bg->is_enabled = draw_background;
+		
+		queue_changed (bg);
+	}
+}
+
+gboolean
+gnome_bg_get_draw_background (GnomeBG *bg)
+{
+	g_return_val_if_fail (bg != NULL, FALSE);
+
+	return bg->is_enabled;
+}
+
 
 const gchar *
 gnome_bg_get_filename (GnomeBG *bg)
@@ -611,11 +549,9 @@ gnome_bg_set_filename (GnomeBG     *bg,
 	g_return_if_fail (bg != NULL);
 	
 	if (is_different (bg, filename)) {
-		char *tmp = g_strdup (filename);
-		
 		g_free (bg->filename);
 		
-		bg->filename = tmp;
+		bg->filename = g_strdup (filename);
 		bg->file_mtime = get_mtime (bg->filename);
 
 		if (bg->file_monitor) {
@@ -655,7 +591,7 @@ draw_color_area (GnomeBG *bg,
         gdk_rectangle_intersect (rect, &extent, rect);
 	
 	switch (bg->color_type) {
-	case GNOME_BG_COLOR_SOLID:
+	case G_DESKTOP_BACKGROUND_SHADING_SOLID:
 		/* not really a big deal to ignore the area of interest */
 		pixel = ((bg->primary.red >> 8) << 24)      |
 			((bg->primary.green >> 8) << 16)    |
@@ -665,11 +601,11 @@ draw_color_area (GnomeBG *bg,
 		gdk_pixbuf_fill (dest, pixel);
 		break;
 		
-	case GNOME_BG_COLOR_H_GRADIENT:
+	case G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL:
 		pixbuf_draw_gradient (dest, TRUE, &(bg->primary), &(bg->secondary), rect);
 		break;
 		
-	case GNOME_BG_COLOR_V_GRADIENT:
+	case G_DESKTOP_BACKGROUND_SHADING_VERTICAL:
 		pixbuf_draw_gradient (dest, FALSE, &(bg->primary), &(bg->secondary), rect);
 		break;
 		
@@ -741,7 +677,7 @@ pixbuf_clip_to_fit (GdkPixbuf *src,
 }
 
 static GdkPixbuf *
-get_scaled_pixbuf (GnomeBGPlacement placement,
+get_scaled_pixbuf (GDesktopBackgroundStyle placement,
 		   GdkPixbuf *pixbuf,
 		   int width, int height,
 		   int *x, int *y,
@@ -756,24 +692,24 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 #endif
 	
 	switch (placement) {
-	case GNOME_BG_PLACEMENT_SPANNED:
+	case G_DESKTOP_BACKGROUND_STYLE_SPANNED:
                 new = pixbuf_scale_to_fit (pixbuf, width, height);
 		break;
-	case GNOME_BG_PLACEMENT_ZOOMED:
+	case G_DESKTOP_BACKGROUND_STYLE_ZOOM:
 		new = pixbuf_scale_to_min (pixbuf, width, height);
 		break;
 		
-	case GNOME_BG_PLACEMENT_FILL_SCREEN:
+	case G_DESKTOP_BACKGROUND_STYLE_STRETCHED:
 		new = gdk_pixbuf_scale_simple (pixbuf, width, height,
 					       GDK_INTERP_BILINEAR);
 		break;
 		
-	case GNOME_BG_PLACEMENT_SCALED:
+	case G_DESKTOP_BACKGROUND_STYLE_SCALED:
 		new = pixbuf_scale_to_fit (pixbuf, width, height);
 		break;
 		
-	case GNOME_BG_PLACEMENT_CENTERED:
-	case GNOME_BG_PLACEMENT_TILED:
+	case G_DESKTOP_BACKGROUND_STYLE_CENTERED:
+	case G_DESKTOP_BACKGROUND_STYLE_WALLPAPER:
 	default:
 		new = pixbuf_clip_to_fit (pixbuf, width, height);
 		break;
@@ -788,10 +724,10 @@ get_scaled_pixbuf (GnomeBGPlacement placement,
 }
 
 static void
-draw_image_area (GnomeBGPlacement  placement,
-		 GdkPixbuf        *pixbuf,
-		 GdkPixbuf        *dest,
-		 GdkRectangle     *area)
+draw_image_area (GDesktopBackgroundStyle  placement,
+		 GdkPixbuf               *pixbuf,
+		 GdkPixbuf               *dest,
+		 GdkRectangle            *area)
 {
 	int dest_width = area->width;
 	int dest_height = area->height;
@@ -804,16 +740,16 @@ draw_image_area (GnomeBGPlacement  placement,
 	scaled = get_scaled_pixbuf (placement, pixbuf, dest_width, dest_height, &x, &y, &w, &h);
 
 	switch (placement) {
-	case GNOME_BG_PLACEMENT_TILED:
+	case G_DESKTOP_BACKGROUND_STYLE_WALLPAPER:
 		pixbuf_tile (scaled, dest);
 		break;
-	case GNOME_BG_PLACEMENT_ZOOMED:
-	case GNOME_BG_PLACEMENT_CENTERED:
-	case GNOME_BG_PLACEMENT_FILL_SCREEN:
-	case GNOME_BG_PLACEMENT_SCALED:
+	case G_DESKTOP_BACKGROUND_STYLE_ZOOM:
+	case G_DESKTOP_BACKGROUND_STYLE_CENTERED:
+	case G_DESKTOP_BACKGROUND_STYLE_STRETCHED:
+	case G_DESKTOP_BACKGROUND_STYLE_SCALED:
 		pixbuf_blend (scaled, dest, 0, 0, w, h, x + area->x, y + area->y, 1.0);
 		break;
-	case GNOME_BG_PLACEMENT_SPANNED:
+	case G_DESKTOP_BACKGROUND_STYLE_SPANNED:
 		pixbuf_blend (scaled, dest, 0, 0, w, h, x, y, 1.0);
 		break;
 	default:
@@ -825,9 +761,9 @@ draw_image_area (GnomeBGPlacement  placement,
 }
 
 static void
-draw_image (GnomeBGPlacement  placement,
-	    GdkPixbuf        *pixbuf,
-	    GdkPixbuf        *dest)
+draw_image (GDesktopBackgroundStyle  placement,
+	    GdkPixbuf               *pixbuf,
+	    GdkPixbuf               *dest)
 {
 	GdkRectangle rect;
 
@@ -894,12 +830,16 @@ gnome_bg_draw (GnomeBG *bg,
 	if (!bg)
 		return;
 
-	if (is_root && (bg->placement != GNOME_BG_PLACEMENT_SPANNED)) {
+	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
 		draw_color_each_monitor (bg, dest, screen);
-		draw_each_monitor (bg, dest, screen);
+		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+			draw_each_monitor (bg, dest, screen);
+		}
 	} else {
 		draw_color (bg, dest, screen);
-		draw_once (bg, dest, screen);
+		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+			draw_once (bg, dest, screen);
+		}
 	}
 }
 
@@ -941,13 +881,13 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
 
 	if (!bg->filename) {
 		switch (bg->color_type) {
-		case GNOME_BG_COLOR_SOLID:
+		case G_DESKTOP_BACKGROUND_SHADING_SOLID:
 			*pixmap_width = 1;
 			*pixmap_height = 1;
 			break;
 			
-		case GNOME_BG_COLOR_H_GRADIENT:
-		case GNOME_BG_COLOR_V_GRADIENT:
+		case G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL:
+		case G_DESKTOP_BACKGROUND_SHADING_VERTICAL:
 			break;
 		}
 		
@@ -1003,7 +943,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	}
 	
 	cr = cairo_create (surface);
-	if (!bg->filename && bg->color_type == GNOME_BG_COLOR_SOLID) {
+	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		gdk_cairo_set_source_color (cr, &(bg->primary));
 	}
 	else {
@@ -1038,7 +978,7 @@ gnome_bg_is_dark (GnomeBG *bg,
 	
 	g_return_val_if_fail (bg != NULL, FALSE);
 	
-	if (bg->color_type == GNOME_BG_COLOR_SOLID) {
+	if (bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		color = bg->primary;
 	} else {
 		color.red = (bg->primary.red + bg->secondary.red) / 2;
@@ -1211,11 +1151,13 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	
 	draw_color (bg, result, screen);
 	
-	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
-	
-	if (thumb) {
-		draw_image (bg->placement, thumb, result);
-		g_object_unref (thumb);
+	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
+		
+		if (thumb) {
+			draw_image (bg->placement, thumb, result);
+			g_object_unref (thumb);
+		}
 	}
 	
 	return result;
@@ -1686,9 +1628,9 @@ get_as_pixbuf_for_size (GnomeBG    *bg,
 		if (tmp != NULL &&
 		    strcmp (tmp, "svg") == 0 &&
 		    (best_width > 0 && best_height > 0) &&
-		    (bg->placement == GNOME_BG_PLACEMENT_FILL_SCREEN ||
-		     bg->placement == GNOME_BG_PLACEMENT_SCALED ||
-		     bg->placement == GNOME_BG_PLACEMENT_ZOOMED))
+		    (bg->placement == G_DESKTOP_BACKGROUND_STYLE_STRETCHED ||
+		     bg->placement == G_DESKTOP_BACKGROUND_STYLE_SCALED ||
+		     bg->placement == G_DESKTOP_BACKGROUND_STYLE_ZOOM))
 			pixbuf = gdk_pixbuf_new_from_file_at_size (filename, best_width, best_height, NULL);
 		else
 			pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
@@ -1847,7 +1789,7 @@ get_mtime (const char *filename)
 }
 
 static GdkPixbuf *
-scale_thumbnail (GnomeBGPlacement placement,
+scale_thumbnail (GDesktopBackgroundStyle placement,
 		 const char *filename,
 		 GdkPixbuf *thumb,
 		 GdkScreen *screen,
@@ -1857,8 +1799,8 @@ scale_thumbnail (GnomeBGPlacement placement,
 	int o_width;
 	int o_height;
 	
-	if (placement != GNOME_BG_PLACEMENT_TILED &&
-	    placement != GNOME_BG_PLACEMENT_CENTERED) {
+	if (placement != G_DESKTOP_BACKGROUND_STYLE_WALLPAPER &&
+	    placement != G_DESKTOP_BACKGROUND_STYLE_CENTERED) {
 		
 		/* In this case, the pixbuf will be scaled to fit the screen anyway,
 		 * so just return the pixbuf here
@@ -1883,7 +1825,7 @@ scale_thumbnail (GnomeBGPlacement placement,
 		new_width = floor (thumb_width * f + 0.5);
 		new_height = floor (thumb_height * f + 0.5);
 
-		if (placement == GNOME_BG_PLACEMENT_TILED) {
+		if (placement == G_DESKTOP_BACKGROUND_STYLE_WALLPAPER) {
 			/* Heuristic to make sure tiles don't become so small that
 			 * they turn into a blur.
 			 *
@@ -2799,6 +2741,9 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 	
 	uri = g_filename_to_uri (filename, NULL, NULL);
 	
+	if (uri == NULL)
+		return NULL;
+	
 	thumb = gnome_desktop_thumbnail_factory_lookup (factory, uri, mtime);
 	
 	if (thumb) {
@@ -2934,11 +2879,13 @@ gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 
 	draw_color (bg, result, screen);
 
-	thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
+	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
 
-	if (thumb) {
-		draw_image (bg->placement, thumb, result);
-		g_object_unref (thumb);
+		if (thumb) {
+			draw_image (bg->placement, thumb, result);
+			g_object_unref (thumb);
+		}
 	}
 
 	return result;

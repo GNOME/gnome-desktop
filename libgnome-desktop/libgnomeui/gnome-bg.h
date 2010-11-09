@@ -30,9 +30,10 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gconf/gconf-client.h>
+#include <gio/gio.h>
 #include <libgnomeui/gnome-desktop-thumbnail.h>
 #include <libgnomeui/gnome-bg-crossfade.h>
+#include <gdesktop-enums.h>
 
 G_BEGIN_DECLS
 
@@ -43,45 +44,31 @@ G_BEGIN_DECLS
 #define GNOME_IS_BG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass),  GNOME_TYPE_BG))
 #define GNOME_BG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj),  GNOME_TYPE_BG, GnomeBGClass))
 
-#define GNOME_BG_KEY_DIR "/desktop/gnome/background"
-
 typedef struct _GnomeBG GnomeBG;
 typedef struct _GnomeBGClass GnomeBGClass;
-
-typedef enum {
-	GNOME_BG_COLOR_SOLID,
-	GNOME_BG_COLOR_H_GRADIENT,
-	GNOME_BG_COLOR_V_GRADIENT
-} GnomeBGColorType;
-
-typedef enum {
-	GNOME_BG_PLACEMENT_TILED,
-	GNOME_BG_PLACEMENT_ZOOMED,
-	GNOME_BG_PLACEMENT_CENTERED,
-	GNOME_BG_PLACEMENT_SCALED,
-	GNOME_BG_PLACEMENT_FILL_SCREEN,
-	GNOME_BG_PLACEMENT_SPANNED
-} GnomeBGPlacement;
 
 GType            gnome_bg_get_type              (void);
 GnomeBG *        gnome_bg_new                   (void);
 void             gnome_bg_load_from_preferences (GnomeBG               *bg,
-						 GConfClient           *client);
+						 GSettings             *settings);
 void             gnome_bg_save_to_preferences   (GnomeBG               *bg,
-						 GConfClient           *client);
+						 GSettings             *settings);
 /* Setters */
 void             gnome_bg_set_filename          (GnomeBG               *bg,
 						 const char            *filename);
 void             gnome_bg_set_placement         (GnomeBG               *bg,
-						 GnomeBGPlacement       placement);
+						 GDesktopBackgroundStyle placement);
 void             gnome_bg_set_color             (GnomeBG               *bg,
-						 GnomeBGColorType       type,
+						 GDesktopBackgroundShading type,
 						 GdkColor              *primary,
 						 GdkColor              *secondary);
+void             gnome_bg_set_draw_background   (GnomeBG               *bg,
+						 gboolean               draw_background);
 /* Getters */
-GnomeBGPlacement gnome_bg_get_placement         (GnomeBG               *bg);
+GDesktopBackgroundStyle gnome_bg_get_placement  (GnomeBG               *bg);
+gboolean         gnome_bg_get_draw_background   (GnomeBG               *bg);
 void		 gnome_bg_get_color             (GnomeBG               *bg,
-						 GnomeBGColorType      *type,
+						 GDesktopBackgroundShading *type,
 						 GdkColor              *primary,
 						 GdkColor              *secondary);
 const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
