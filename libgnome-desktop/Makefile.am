@@ -22,6 +22,7 @@ libgnome_desktop_3_la_SOURCES = \
 	gnome-rr-config.c	\
 	gnome-rr-labeler.c	\
 	gnome-rr-private.h	\
+	gnome-tz-monitor.c	\
 	edid-parse.c		\
 	edid.h			\
 	private.h
@@ -45,7 +46,8 @@ libgnome_desktop_HEADERS = \
         gnome-desktop-thumbnail.h       \
         gnome-rr.h                      \
         gnome-rr-config.h               \
-        gnome-rr-labeler.h
+        gnome-rr-labeler.h		\
+        gnome-tz-monitor.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
