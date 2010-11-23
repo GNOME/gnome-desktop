@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&component=general\n"
-"POT-Creation-Date: 2010-04-08 19:41+0000\n"
-"PO-Revision-Date: 2010-04-09 11:42+0700\n"
+"POT-Creation-Date: 2010-11-16 08:38+0000\n"
+"PO-Revision-Date: 2010-11-23 17:18+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr "เกิดข้อผิดพลาดขณะกรอแฟ้ม
 #. Translators: the "name" mentioned here is the name of
 #. * an application or a document
 #: ../libgnome-desktop/gnome-desktop-item.c:380
-#: ../libgnome-desktop/gnome-desktop-item.c:3524
+#: ../libgnome-desktop/gnome-desktop-item.c:3528
 msgid "No name"
 msgstr "ไม่มีชื่อ"
 
@@ -194,32 +194,32 @@ msgstr "หาแฟ้ม '%s' ไม่พบ"
 msgid "No filename to save to"
 msgstr "ไม่มีชื่อแฟ้มสำหรับใช้ในการบันทึก"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:1822
+#: ../libgnome-desktop/gnome-desktop-item.c:1828
 #, c-format
 msgid "Starting %s"
 msgstr "กำลังเริ่ม %s"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2058
+#: ../libgnome-desktop/gnome-desktop-item.c:2062
 #, c-format
 msgid "No URL to launch"
 msgstr "ไม่มี URL จะเปิด"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2074
+#: ../libgnome-desktop/gnome-desktop-item.c:2078
 #, c-format
 msgid "Not a launchable item"
 msgstr "เรียกใช้ไม่ได้"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2084
+#: ../libgnome-desktop/gnome-desktop-item.c:2088
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "ไม่มีคำสั่ง (Exec) จะเรียก"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:2097
+#: ../libgnome-desktop/gnome-desktop-item.c:2101
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "คำสั่งที่เรียก (Exec) นั้นใช้ไม่ได้"
 
-#: ../libgnome-desktop/gnome-desktop-item.c:3581
+#: ../libgnome-desktop/gnome-desktop-item.c:3585
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "ไม่รู้จักรหัสอักขระของ: %s"
@@ -249,7 +249,7 @@ msgstr "ไม่สามารถอ่านค่าช่วงของข
 msgid "RANDR extension is not present"
 msgstr "ไม่มีส่วนขยาย RANDR"
 
-#: ../libgnome-desktop/gnome-rr.c:1037
+#: ../libgnome-desktop/gnome-rr.c:1092
 #, c-format
 msgid "could not get information about output %d"
 msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับเอาต์พุต %d"
@@ -257,7 +257,7 @@ msgstr "ไม่สามารถอ่านข้อมูลเกี่ย
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:1424
+#: ../libgnome-desktop/gnome-rr.c:1479
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position=(%"
@@ -266,12 +266,12 @@ msgstr ""
 "ตำแหน่ง/ขนาดสำหรับ CRTC %d ที่ร้องขอ มีค่าอยู่นอกขีดจำกัดที่กำหนด: ตำแหน่ง=(%d, %d), ขนาด="
 "(%d, %d), ค่าสูงสุด=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:1460
+#: ../libgnome-desktop/gnome-rr.c:1515
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "ไม่สามารถกำหนดค่าสำหรับ CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1576
+#: ../libgnome-desktop/gnome-rr.c:1631
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "ไม่สามารถอ่านข้อมูลเกี่ยวกับ CRTC %d"
@@ -306,8 +306,8 @@ msgstr "CTRC %d ไม่รองรับมุมหมุน=%s"
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
-"existing coordinates = (%d, %d), new coordinates = (%d, %d)existing rotation "
-"= %s, new rotation = %s"
+"existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+"existing rotation = %s, new rotation = %s"
 msgstr ""
 "อุปกรณ์แสดงผล %s มีพารามิเตอร์ไม่ตรงกับอุปกรณ์แสดงผลอีกอันที่ผลิตซ้ำออกไป:\n"
 "โหมดเดิม = %d, โหมดใหม่ = %d\n"
@@ -319,12 +319,17 @@ msgstr ""
 msgid "cannot clone to output %s"
 msgstr "ไม่สามารถผลิตซ้ำอุปกรณ์แสดงผล %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1659
+#: ../libgnome-desktop/gnome-rr-config.c:1639
+#, c-format
+msgid "Trying modes for CRTC %d\n"
+msgstr "กำลังลองโหมดต่างๆ สำหรับ CRTC %d\n"
+
+#: ../libgnome-desktop/gnome-rr-config.c:1663
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr "CRTC %d: กำลังลองใช้โหมด %dx%d@%dHz โดยแสดงผลที่ %dx%d@%dHz (รอบที่ %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1706
+#: ../libgnome-desktop/gnome-rr-config.c:1710
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -333,7 +338,7 @@ msgstr ""
 "ไม่สามารถกำหนด CRTC ให้กับอุปกรณ์แสดงผล:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1710
+#: ../libgnome-desktop/gnome-rr-config.c:1714
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -345,7 +350,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1792
+#: ../libgnome-desktop/gnome-rr-config.c:1796
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
