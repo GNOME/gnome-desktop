@@ -1059,6 +1059,69 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
     }
 }
 
+static gboolean
+output_info_is_laptop (GnomeOutputInfo *info)
+{
+        if (info->name
+            && (strstr (info->name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
+                strstr (info->name, "LVDS") ||
+                strstr (info->name, "Lvds") ||
+                strstr (info->name, "LCD")))    /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
+                return TRUE;
+
+        return FALSE;
+}
+
+gboolean
+gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
+{
+        int               i;
+        GnomeOutputInfo  *laptop;
+        GnomeOutputInfo  *top_left;
+        gboolean          found;
+
+        laptop = NULL;
+        top_left = NULL;
+        found = FALSE;
+
+        for (i = 0; configuration->outputs[i] != NULL; ++i) {
+                GnomeOutputInfo *info = configuration->outputs[i];
+
+                if (! info->on)
+                        continue;
+
+                /* ensure only one */
+                if (info->primary) {
+                        if (found) {
+                                info->primary = FALSE;
+                        } else {
+                                found = TRUE;
+                        }
+                }
+
+                if (top_left == NULL
+                    || (info->x < top_left->x
+                        && info->y < top_left->y)) {
+                        top_left = info;
+                }
+                if (laptop == NULL
+                    && output_info_is_laptop (info)) {
+                        /* shame we can't find the connector type
+                           as with gnome_rr_output_is_laptop */
+                        laptop = info;
+                }
+        }
+
+        if (! found) {
+                if (laptop != NULL) {
+                        laptop->primary = TRUE;
+                } else {
+                        top_left->primary = TRUE;
+                }
+        }
+
+        return !found;
+}
 
 gboolean
 gnome_rr_config_save (GnomeRRConfig *configuration, GError **error)
@@ -1349,6 +1412,7 @@ gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char
     {
 	gboolean result;
 
+        gnome_rr_config_ensure_primary (stored);
 	result = gnome_rr_config_apply_with_time (stored, screen, timestamp, error);
 
 	gnome_rr_config_free (stored);

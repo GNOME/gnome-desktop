@@ -88,6 +88,7 @@ gboolean        gnome_rr_config_equal	     (GnomeRRConfig  *config1,
 gboolean        gnome_rr_config_save         (GnomeRRConfig  *configuration,
 					      GError        **error);
 void            gnome_rr_config_sanitize     (GnomeRRConfig  *configuration);
+gboolean        gnome_rr_config_ensure_primary (GnomeRRConfig  *configuration);
 
 #ifndef GNOME_DISABLE_DEPRECATED
 gboolean	gnome_rr_config_apply        (GnomeRRConfig  *configuration,
