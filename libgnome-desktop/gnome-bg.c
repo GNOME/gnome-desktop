@@ -32,9 +32,9 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #include <stdarg.h>
 #include <stdlib.h>
 
+#include <glib/gstdio.h>
 #include <gio/gio.h>
 #include <gdesktop-enums.h>
-#include <glib/gstdio.h>
 
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
@@ -573,6 +573,36 @@ get_wallpaper_cache_filename (const char              *filename,
 	return cache_filename;
 }
 
+static void
+cleanup_cache_for_monitor (gchar *cache_dir,
+			   gint   num_monitor)
+{
+	GDir            *g_cache_dir;
+	gchar           *monitor_prefix;
+	const gchar     *file;
+
+	g_cache_dir = g_dir_open (cache_dir, 0, NULL);
+	monitor_prefix = g_strdup_printf ("%i_", num_monitor);
+
+	file = g_dir_read_name (g_cache_dir);
+	while (file != NULL) {
+		gchar *path;
+
+		path = g_build_filename (cache_dir, file, NULL);
+		/* purge files with same monitor id */
+		if (g_str_has_prefix (file, monitor_prefix) &&
+		    g_file_test (path, G_FILE_TEST_IS_REGULAR))
+			g_unlink (path);
+
+		g_free (path);
+
+		file = g_dir_read_name (g_cache_dir);
+	}
+
+	g_free (monitor_prefix);
+	g_dir_close (g_cache_dir);
+}
+
 static gboolean
 cache_file_is_valid (const char *filename,
 		     const char *cache_filename)
@@ -600,9 +630,6 @@ refresh_cache_file (GnomeBG     *bg,
 	gchar           *cache_dir;
 	GdkPixbufFormat *format;
 	gchar           *format_name;
-	GDir            *g_cache_dir;
-	gchar           *monitor_prefix;
-	const gchar     *file;
 
 	if ((num_monitor != -1) && (width > 300) && (height > 300))
 		return;
@@ -618,24 +645,7 @@ refresh_cache_file (GnomeBG     *bg,
 			if (!g_file_test (cache_dir, G_FILE_TEST_IS_DIR)) {
 				g_mkdir_with_parents (cache_dir, 0700);
 			} else {
-				g_cache_dir = g_dir_open (cache_dir, 0, NULL);
-				monitor_prefix = g_strdup_printf ("%i_", num_monitor);
-
-				file = g_dir_read_name (g_cache_dir);
-				while (file != NULL) {
-					gchar *path;
-
-					path = g_build_filename (cache_dir, file, NULL);
-					/* purge files with same monitor id */
-					if (g_str_has_prefix (file, monitor_prefix) && g_file_test (path, G_FILE_TEST_IS_REGULAR))
-						g_unlink (path);
-					g_free (path);
-
-					file = g_dir_read_name (g_cache_dir);
-				}
-
-				g_free (monitor_prefix);
-				g_dir_close (g_cache_dir);
+				cleanup_cache_for_monitor (cache_dir, num_monitor);
 			}
 
 			format_name = gdk_pixbuf_format_get_name (format);
