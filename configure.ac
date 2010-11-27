@@ -44,38 +44,6 @@ AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 
-GNOME_PLATFORM=gnome_platform
-GNOME_MINOR=gnome_minor
-GNOME_MICRO=gnome_micro
-GNOME_DISTRIBUTOR="GNOME.Org"
-GNOME_DATE=`date +"%Y-%m-%d"`
-
-AC_ARG_WITH(gnome_distributor, [  --with-gnome-distributor=DISTRIBUTOR  Specify name of GNOME distributor])
-
-if test "x$with_gnome_distributor" != x ; then
-  GNOME_DISTRIBUTOR=$with_gnome_distributor
-fi
-
-AC_ARG_ENABLE([date-in-gnome-version],
-	[AS_HELP_STRING([--disable-date-in-gnome-version],[do not put the build date in gnome-version.xml])],
-	[],[enable_date_in_gnome_version=yes])
-if test "$enable_date_in_gnome_version" = "no"; then
-	GNOME_DATE=
-	GNOME_DATE_COMMENT_START="<!--"
-	GNOME_DATE_COMMENT_END="-->"
-else
-	GNOME_DATE_COMMENT_START=
-	GNOME_DATE_COMMENT_END=
-fi
-
-AC_SUBST(GNOME_PLATFORM)
-AC_SUBST(GNOME_MINOR)
-AC_SUBST(GNOME_MICRO)
-AC_SUBST(GNOME_DISTRIBUTOR)
-AC_SUBST(GNOME_DATE)
-AC_SUBST(GNOME_DATE_COMMENT_START)
-AC_SUBST(GNOME_DATE_COMMENT_END)
-
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
@@ -91,12 +59,8 @@ if test "x$enable_deprecation_flags" = "xyes"; then
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
 
-# Should we build gnome-about or the shared desktop docs? Useful for people who
+# Should we build shared desktop docs? Useful for people who
 # need to build two gnome-desktop using two different versions of GTK+
-AC_ARG_ENABLE([gnome-about],
-	[AS_HELP_STRING([--disable-gnome-about],[don't build gnome-about])],
-	[],[enable_gnome_about=yes])
-AM_CONDITIONAL(GNOME_ABOUT_ENABLED, test "x$enable_gnome_about" = "xyes")
 AC_ARG_ENABLE([desktop-docs],
 	[AS_HELP_STRING([--disable-desktop-docs],[don't build desktop-wide help documents])],
 	[],[enable_desktop_docs=yes])
@@ -188,9 +152,6 @@ dnl pkg-config dependency checks
 
 PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gconf-2.0 >= $GCONF_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE gsettings-desktop-schemas)
 
-dnl for gnome-about
-AM_PATH_PYTHON
-
 dnl gnome-doc-utils stuff
 
 GNOME_DOC_INIT
@@ -226,22 +187,17 @@ GTK_DOC_CHECK([1.4])
 
 AC_CONFIG_FILES([
 Makefile
-gnome-about/Makefile
-gnome-about/gnome-about.desktop.in
-gnome-about/headers/Makefile
 libgnome-desktop/Makefile
 libgnome-desktop/gnome-desktop-3.0.pc
 libgnome-desktop/gnome-desktop-3.0-uninstalled.pc
 docs/Makefile
 docs/reference/Makefile
 docs/reference/gnome-desktop3/Makefile
-gnome-version.xml.in
 po/Makefile.in
 desktop-docs/Makefile
 desktop-docs/fdl/Makefile
 desktop-docs/gpl/Makefile
 desktop-docs/lgpl/Makefile
-man/Makefile
 ])
 
 AC_OUTPUT
@@ -269,9 +225,7 @@ echo "
         Use *_DISABLE_DEPRECATED:     ${enable_deprecation_flags}
 
         GNOME Distributor:            ${GNOME_DISTRIBUTOR}
-        Build gnome-about:            ${enable_gnome_about}
         Build desktop-wide docs:      ${enable_desktop_docs}
-        Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
         Startup notification support: ${have_startup_notification}
         XRandr support:               ${have_randr}

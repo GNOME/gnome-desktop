@@ -1,8 +1,5 @@
-SUBDIRS = libgnome-desktop man docs po
+SUBDIRS = libgnome-desktop docs po
 
-if GNOME_ABOUT_ENABLED
-SUBDIRS += gnome-about
-endif
 if DESKTOP_DOCS_ENABLED
 SUBDIRS += desktop-docs
 endif
@@ -11,11 +8,6 @@ ACLOCAL_AMFLAGS = -I m4
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
-if GNOME_ABOUT_ENABLED
-versiondir = $(datadir)/gnome-about
-version_DATA = gnome-version.xml
-endif
-
 @INTLTOOL_XML_RULE@
 
 EXTRA_DIST =			\
@@ -23,11 +15,7 @@ EXTRA_DIST =			\
 	HACKING			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
-	gnome-version.xml.in.in	\
 	gnome-doc-utils.make
-
-CLEANFILES = \
-	$(version_DATA)
 
 DISTCLEANFILES = \
 	gnome-doc-utils.make
