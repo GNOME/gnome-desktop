@@ -87,14 +87,11 @@ static void             crtc_assignment_free  (CrtcAssignment   *assign);
 
 enum {
   PROP_0,
-  PROP_CURRENT,
   PROP_SCREEN,
   PROP_LAST
 };
 
-static void gnome_rr_config_initable_iface_init (GInitableIface *iface);
-G_DEFINE_TYPE_WITH_CODE (GnomeRRConfig, gnome_rr_config, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_config_initable_iface_init))
+G_DEFINE_TYPE (GnomeRRConfig, gnome_rr_config, G_TYPE_OBJECT)
 
 typedef struct Parser Parser;
 
@@ -452,7 +449,6 @@ gnome_rr_config_init (GnomeRRConfig *self)
 {
     self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_RR_CONFIG, GnomeRRConfigPrivate);
 
-    self->priv->current = FALSE;
     self->priv->clone = FALSE;
     self->priv->screen = NULL;
     self->priv->outputs = NULL;
@@ -464,9 +460,6 @@ gnome_rr_config_set_property (GObject *gobject, guint property_id, const GValue 
     GnomeRRConfig *self = GNOME_RR_CONFIG (gobject);
 
     switch (property_id) {
-	case PROP_CURRENT:
-	    self->priv->current = g_value_get_boolean (value);
-	    return;
 	case PROP_SCREEN:
 	    self->priv->screen = g_value_dup_object (value);
 	    return;
@@ -496,16 +489,19 @@ gnome_rr_config_finalize (GObject *gobject)
     G_OBJECT_CLASS (gnome_rr_config_parent_class)->finalize (gobject);
 }
 
-static gboolean
-config_init_current (GnomeRRConfig *config)
+gboolean
+gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 {
-    GPtrArray *a = g_ptr_array_new ();
+    GPtrArray *a;
     GnomeRROutput **rr_outputs;
     int i;
     int clone_width = -1;
     int clone_height = -1;
     int last_x;
 
+    g_return_val_if_fail (GNOME_IS_RR_CONFIG (config), FALSE);
+
+    a = g_ptr_array_new ();
     rr_outputs = gnome_rr_screen_list_outputs (config->priv->screen);
 
     config->priv->clone = FALSE;
@@ -665,14 +661,18 @@ config_init_current (GnomeRRConfig *config)
     return TRUE;
 }
 
-static gboolean
-config_init_stored (GnomeRRConfig *result, const char *filename, GError **error)
+gboolean
+gnome_rr_config_load_filename (GnomeRRConfig *result, const char *filename, GError **error)
 {
     GnomeRRConfig *current;
     GnomeRRConfig **configs;
     gboolean found = FALSE;
 
+    g_return_val_if_fail (GNOME_IS_RR_CONFIG (result), FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+    if (filename == NULL)
+      filename = gnome_rr_config_get_intended_filename ();
 
     current = gnome_rr_config_new_current (result->priv->screen, error);
 
@@ -713,31 +713,6 @@ config_init_stored (GnomeRRConfig *result, const char *filename, GError **error)
     return found;
 }
 
-static gboolean
-gnome_rr_config_initable_init (GInitable* initable, GCancellable* cancellable, GError** error)
-{
-    GnomeRRConfig *self = GNOME_RR_CONFIG (initable);
-
-    if (self->priv->current) {
-	return config_init_current (self);
-    } else {
-	gchar *filename;
-	gboolean retval;
-
-	filename = gnome_rr_config_get_intended_filename ();
-	retval = config_init_stored (self, filename, error);
-
-	g_free (filename);
-	return retval;
-    }
-}
-
-static void
-gnome_rr_config_initable_iface_init (GInitableIface *iface)
-{
-    iface->init = gnome_rr_config_initable_init;
-}
-
 static void
 gnome_rr_config_class_init (GnomeRRConfigClass *klass)
 {
@@ -748,9 +723,6 @@ gnome_rr_config_class_init (GnomeRRConfigClass *klass)
     gobject_class->set_property = gnome_rr_config_set_property;
     gobject_class->finalize = gnome_rr_config_finalize;
 
-    g_object_class_install_property (gobject_class, PROP_CURRENT,
-				     g_param_spec_boolean ("current", "Current", "If this is current screen configuration", FALSE,
-							   G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
     g_object_class_install_property (gobject_class, PROP_SCREEN,
 				     g_param_spec_object ("screen", "Screen", "The GnomeRRScreen this config applies to", GNOME_TYPE_RR_SCREEN,
 							  G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
@@ -759,13 +731,29 @@ gnome_rr_config_class_init (GnomeRRConfigClass *klass)
 GnomeRRConfig *
 gnome_rr_config_new_current (GnomeRRScreen *screen, GError **error)
 {
-    return g_initable_new (GNOME_TYPE_RR_CONFIG, NULL, error, "screen", screen, "current", TRUE, NULL);
+    GnomeRRConfig *self = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, NULL);
+
+    if (gnome_rr_config_load_current (self, error))
+      return self;
+    else
+      {
+	g_object_unref (self);
+	return NULL;
+      }
 }
 
 GnomeRRConfig *
 gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
 {
-    return g_initable_new (GNOME_TYPE_RR_CONFIG, NULL, error, "screen", screen, "current", FALSE, NULL);
+    GnomeRRConfig *self = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, NULL);
+
+    if (gnome_rr_config_load_filename (self, NULL, error))
+      return self;
+    else
+      {
+	g_object_unref (self);
+	return NULL;
+      }
 }
 
 static gboolean
@@ -1380,9 +1368,9 @@ gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char
 	    /* This means the screen didn't change, so just proceed */
     }
 
-    stored = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, "current", FALSE, NULL);
+    stored = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, NULL);
 
-    if (config_init_stored (stored, filename, error))
+    if (gnome_rr_config_load_filename (stored, filename, error))
     {
 	gboolean result;
 

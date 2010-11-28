@@ -112,6 +112,11 @@ GnomeRRConfig      *gnome_rr_config_new_current  (GnomeRRScreen  *screen,
 						  GError        **error);
 GnomeRRConfig      *gnome_rr_config_new_stored   (GnomeRRScreen  *screen,
 						  GError        **error);
+gboolean                gnome_rr_config_load_current (GnomeRRConfig  *self,
+						      GError        **error);
+gboolean                gnome_rr_config_load_filename (GnomeRRConfig  *self,
+						       const gchar    *filename,
+						       GError        **error);
 gboolean            gnome_rr_config_match        (GnomeRRConfig  *config1,
 						  GnomeRRConfig  *config2);
 gboolean            gnome_rr_config_equal	 (GnomeRRConfig  *config1,

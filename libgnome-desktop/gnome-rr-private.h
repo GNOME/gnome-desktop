@@ -73,7 +73,6 @@ struct GnomeRROutputInfoPrivate
 struct GnomeRRConfigPrivate
 {
   gboolean clone;
-  gboolean current;
   GnomeRRScreen *screen;
   GnomeRROutputInfo **outputs;
 };
