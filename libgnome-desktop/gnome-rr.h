@@ -1,4 +1,4 @@
-/* randrwrap.h
+/* gnome-rr.h
  *
  * Copyright 2007, 2008, Red Hat, Inc.
  * 
@@ -21,8 +21,8 @@
  * 
  * Author: Soren Sandmann <sandmann@redhat.com>
  */
-#ifndef RANDR_WRAP_H
-#define RANDR_WRAP_H
+#ifndef GNOME_RR_H
+#define GNOME_RR_H
 
 #ifndef GNOME_DESKTOP_USE_UNSTABLE_API
 #error    GnomeRR is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnomerr.h
@@ -45,9 +45,8 @@ typedef struct {
 typedef struct {
 	GObjectClass parent_class;
 
+        void (* changed) (void);
 } GnomeRRScreenClass;
-
-typedef void (* GnomeRRScreenChanged) (GnomeRRScreen *screen, gpointer data);
 
 typedef enum
 {
@@ -94,10 +93,7 @@ GType gnome_rr_mode_get_type (void);
 
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
-						    GnomeRRScreenChanged   callback,
-						    gpointer               data,
 						    GError               **error);
-void            gnome_rr_screen_destroy            (GnomeRRScreen         *screen);
 GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *screen);
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_modes         (GnomeRRScreen         *screen);
@@ -203,4 +199,4 @@ void            gnome_rr_crtc_set_gamma            (GnomeRRCrtc           *crtc,
 						    unsigned short        *red,
 						    unsigned short        *green,
 						    unsigned short        *blue);
-#endif
+#endif /* GNOME_RR_H */
