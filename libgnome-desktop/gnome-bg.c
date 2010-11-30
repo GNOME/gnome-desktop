@@ -1094,7 +1094,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 		
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 width, height);
-		gnome_bg_draw (bg, pixbuf, gdk_window_get_screen (GDK_DRAWABLE (window)), is_root);
+		gnome_bg_draw (bg, pixbuf, gdk_window_get_screen (window), is_root);
 		gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
 		g_object_unref (pixbuf);
 	}
