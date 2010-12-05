@@ -33,6 +33,7 @@ libgnome_desktop_3_la_LIBADD =	\
 
 libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \
+	-export-symbols-regex "^gnome_.*" \
 	-no-undefined
 
 pkgconfigdir = $(libdir)/pkgconfig
