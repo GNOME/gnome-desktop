@@ -11,8 +11,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&component=general\n"
 "POT-Creation-Date: 2010-11-27 02:14+0000\n"
-"PO-Revision-Date: 2009-02-07 16:13+0930\n"
-"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"PO-Revision-Date: 2010-12-29 20:05+0700\n"
+"Last-Translator: Nguyen Vu Hung <vuhung16plus@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,17 +24,14 @@ msgstr ""
 #. * we don't know the vendor. When a vendor is known, the name of the
 #. * vendor is used.
 #: ../libgnome-desktop/display-name.c:265
-#, fuzzy
 #| msgid "Unknown"
 msgctxt "Monitor vendor"
 msgid "Unknown"
-msgstr "Không biết"
+msgstr "Chưa biết"
 
 #: ../libgnome-desktop/gnome-desktop-utils.c:133
 msgid "Cannot find a terminal, using xterm, even if it may not work"
-msgstr ""
-"Không tìm thấy thiết bị cuối nên dùng xterm, dù nó có thể không chức năng "
-"đúng"
+msgstr "Không tìm thấy thiết bị, dùng xterm dù nó có thể chạy hay không"
 
 #. Translators: a CRTC is a CRT Controller (this is X terminology).
 #: ../libgnome-desktop/gnome-rr.c:444
@@ -45,7 +42,7 @@ msgstr "không thể lấy các tài nguyên màn hình (CRTC, kết xuất, ch�
 #: ../libgnome-desktop/gnome-rr.c:464
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
-msgstr "gặp lỗi X không thể quản lý trong khi lấy phạm vi kích cỡ màn hình"
+msgstr "gặp lỗi X (không thể xử lý) trong khi lấy phạm vi kích cỡ màn hình"
 
 #: ../libgnome-desktop/gnome-rr.c:470
 #, c-format
@@ -99,17 +96,17 @@ msgstr ""
 #: ../libgnome-desktop/gnome-rr-config.c:1489
 #, c-format
 msgid "CRTC %d cannot drive output %s"
-msgstr ""
+msgstr "CRTC %d không thể xuất ra %s"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1496
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
-msgstr ""
+msgstr "Đầu ra %s không hỗ trợ phương thức %dx%d@%dHz"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1507
 #, c-format
 msgid "CRTC %d does not support rotation=%s"
-msgstr ""
+msgstr "CRTC %d không hỗ trợ quay (%s)"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1521
 #, c-format
@@ -119,21 +116,25 @@ msgid ""
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
 "existing rotation = %s, new rotation = %s"
 msgstr ""
+"đầu ra %s không chứa đúng thông số như đầu ra khác đã được nhân tính:\n"
+"chế độ cũ = %d, chế độ mới = %d\n"
+"tọa độ cũ = (%d, %d), tọa độ mới = (%d, %d)\n"
+"hướng quay cũ = %s, hướng quay mới = %s"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1536
 #, c-format
 msgid "cannot clone to output %s"
-msgstr ""
+msgstr "không thể sao đầu ra %s"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1705
 #, c-format
 msgid "Trying modes for CRTC %d\n"
-msgstr ""
+msgstr "Thử chế độ cho CRTC %d\n"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1729
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
-msgstr ""
+msgstr "CRTC %d: Thử chế độ %dx%d@%dHz với đầu ra %dx%d@%dHz (pass %d\n"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1776
 #, c-format
@@ -141,6 +142,8 @@ msgid ""
 "could not assign CRTCs to outputs:\n"
 "%s"
 msgstr ""
+"không thể chỉ định CRTC với đầu ra:\n"
+"%s"
 
 #: ../libgnome-desktop/gnome-rr-config.c:1780
 #, c-format
@@ -148,6 +151,8 @@ msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
 "%s"
 msgstr ""
+"Các chế độ đã chọn không tương thích với mọi chế độ có thể chọn:\n"
+"%s"
 
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
@@ -168,8 +173,9 @@ msgstr ""
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 #: ../libgnome-desktop/gnome-rr-labeler.c:336
+#, fuzzy
 msgid "Mirror Screens"
-msgstr ""
+msgstr "Màn hình gương"
 
 #~ msgid "About GNOME"
 #~ msgstr "Giới thiệu GNOME"
