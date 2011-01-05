@@ -669,10 +669,8 @@ gnome_rr_config_load_filename (GnomeRRConfig *result, const char *filename, GErr
     gboolean found = FALSE;
 
     g_return_val_if_fail (GNOME_IS_RR_CONFIG (result), FALSE);
+    g_return_val_if_fail (filename != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-    if (filename == NULL)
-      filename = gnome_rr_config_get_intended_filename ();
 
     current = gnome_rr_config_new_current (result->priv->screen, error);
 
@@ -746,8 +744,16 @@ GnomeRRConfig *
 gnome_rr_config_new_stored (GnomeRRScreen *screen, GError **error)
 {
     GnomeRRConfig *self = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, NULL);
+    char *filename;
+    gboolean success;
 
-    if (gnome_rr_config_load_filename (self, NULL, error))
+    filename = gnome_rr_config_get_intended_filename ();
+
+    success = gnome_rr_config_load_filename (self, filename, error);
+
+    g_free (filename);
+
+    if (success);
       return self;
     else
       {
