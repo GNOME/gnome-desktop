@@ -814,7 +814,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
 		    G_PARAM_STATIC_STRINGS)
             );
 
-    screen_signals[SCREEN_CHANGED] = g_signal_new("screen-changed",
+    screen_signals[SCREEN_CHANGED] = g_signal_new("changed",
             G_TYPE_FROM_CLASS (gobject_class),
             G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
             G_STRUCT_OFFSET (GnomeRRScreenClass, changed),
