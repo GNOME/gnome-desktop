@@ -31,7 +31,7 @@ struct ScreenInfo
 #endif
 };
 
-struct GnomeRRScreen
+struct GnomeRRScreenPrivate
 {
     GdkScreen *			gdk_screen;
     GdkWindow *			gdk_root;
@@ -44,10 +44,37 @@ struct GnomeRRScreen
     int				rr_major_version;
     int				rr_minor_version;
     
-    GnomeRRScreenChanged	callback;
-    gpointer			data;
-
     Atom                        connector_type_atom;
+};
+
+struct GnomeRROutputInfoPrivate
+{
+    char *		name;
+
+    gboolean		on;
+    int			width;
+    int			height;
+    int			rate;
+    int			x;
+    int			y;
+    GnomeRRRotation	rotation;
+
+    gboolean		connected;
+    gchar		vendor[4];
+    guint		product;
+    guint		serial;
+    double		aspect;
+    int			pref_width;
+    int			pref_height;
+    char *		display_name;
+    gboolean            primary;
+};
+
+struct GnomeRRConfigPrivate
+{
+  gboolean clone;
+  GnomeRRScreen *screen;
+  GnomeRROutputInfo **outputs;
 };
 
 #endif

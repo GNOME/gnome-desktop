@@ -1278,6 +1278,11 @@ fit_factor (int from_width, int from_height,
 	return MIN (to_width  / (double) from_width, to_height / (double) from_height);
 }
 
+/**
+ * gnome_bg_create_thumbnail:
+ *
+ * Returns: (transfer full): a #GdkPixbuf showing the background as a thumbnail
+ */
 GdkPixbuf *
 gnome_bg_create_thumbnail (GnomeBG               *bg,
 		           GnomeDesktopThumbnailFactory *factory,
@@ -1499,14 +1504,13 @@ gnome_bg_set_surface_as_root (GdkScreen *screen, cairo_surface_t *surface)
  * gnome_bg_set_surface_as_root_with_crossfade:
  * @screen: the #GdkScreen to change root background on
  * @surface: the cairo xlib surface to set root background from
- * @context: a #GMainContext or %NULL
  *
  * Set the root pixmap, and properties pointing to it.
  * This function differs from gnome_bg_set_surface_as_root()
  * in that it adds a subtle crossfade animation from the
  * current root pixmap to the new one.
  *
- * Return value: a #GnomeBGCrossfade object
+ * Return value: (transfer full): a #GnomeBGCrossfade object
  **/
 GnomeBGCrossfade *
 gnome_bg_set_surface_as_root_with_crossfade (GdkScreen       *screen,
@@ -2996,9 +3000,15 @@ gnome_bg_changes_with_time (GnomeBG *bg)
 	return FALSE;
 }
 
-/* Creates a thumbnail for a certain frame, where 'frame' is somewhat
+/**
+ * gnome_bg_create_frame_thumbnail:
+ *
+ * Creates a thumbnail for a certain frame, where 'frame' is somewhat
  * vaguely defined as 'suitable point to show while single-stepping
- * through the slideshow'. Returns NULL if frame_num is out of bounds.
+ * through the slideshow'.
+ *
+ * Returns: (transfer full): the newly created thumbnail or
+ * or NULL if frame_num is out of bounds.
  */
 GdkPixbuf *
 gnome_bg_create_frame_thumbnail (GnomeBG			*bg,

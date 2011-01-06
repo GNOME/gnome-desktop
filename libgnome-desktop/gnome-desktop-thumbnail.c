@@ -781,7 +781,7 @@ expand_thumbnailing_script (const char *script,
  *
  * Usage of this function is threadsafe.
  *
- * Return value: thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
+ * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
  *
  * Since: 2.2
  **/
@@ -1189,8 +1189,7 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
  * Return value: A string with the MD5 digest of the uri string.
  *
  * Since: 2.2
- *
- * @Deprecated: 2.22: Use #GChecksum instead
+ * Deprecated: 2.22: Use #GChecksum instead
  **/
 char *
 gnome_desktop_thumbnail_md5 (const char *uri)
