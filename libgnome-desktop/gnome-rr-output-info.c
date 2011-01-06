@@ -76,11 +76,11 @@ char *gnome_rr_output_info_get_name (GnomeRROutputInfo *self)
 }
 
 /**
- * gnome_rr_output_info_get_active:
+ * gnome_rr_output_info_is_active:
  *
  * Returns: whether there is a CRTC assigned to this output (i.e. a signal is being sent to it)
  */
-gboolean gnome_rr_output_info_get_active (GnomeRROutputInfo *self)
+gboolean gnome_rr_output_info_is_active (GnomeRROutputInfo *self)
 {
     g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), FALSE);
 
@@ -156,11 +156,11 @@ void gnome_rr_output_info_set_rotation (GnomeRROutputInfo *self, GnomeRRRotation
 }
 
 /**
- * gnome_rr_output_info_get_connected:
+ * gnome_rr_output_info_is_connected:
  *
  * Returns: whether the output is physically connected to a monitor
  */
-gboolean gnome_rr_output_info_get_connected (GnomeRROutputInfo *self)
+gboolean gnome_rr_output_info_is_connected (GnomeRROutputInfo *self)
 {
     g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), FALSE);
 

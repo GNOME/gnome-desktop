@@ -61,7 +61,7 @@ GType gnome_rr_output_info_get_type (void);
 
 char *gnome_rr_output_info_get_name (GnomeRROutputInfo *self);
 
-gboolean gnome_rr_output_info_get_active (GnomeRROutputInfo *self);
+gboolean gnome_rr_output_info_is_active  (GnomeRROutputInfo *self);
 void     gnome_rr_output_info_set_active (GnomeRROutputInfo *self, gboolean active);
 
 void gnome_rr_output_info_get_geometry (GnomeRROutputInfo *self, int *x, int *y, int *width, int *height);
@@ -73,7 +73,7 @@ void gnome_rr_output_info_set_refresh_rate (GnomeRROutputInfo *self, int rate);
 GnomeRRRotation gnome_rr_output_info_get_rotation (GnomeRROutputInfo *self);
 void            gnome_rr_output_info_set_rotation (GnomeRROutputInfo *self, GnomeRRRotation rotation);
 
-gboolean gnome_rr_output_info_get_connected    (GnomeRROutputInfo *self);
+gboolean gnome_rr_output_info_is_connected     (GnomeRROutputInfo *self);
 void     gnome_rr_output_info_get_vendor       (GnomeRROutputInfo *self, gchar* vendor);
 guint    gnome_rr_output_info_get_product      (GnomeRROutputInfo *self);
 guint    gnome_rr_output_info_get_serial       (GnomeRROutputInfo *self);
