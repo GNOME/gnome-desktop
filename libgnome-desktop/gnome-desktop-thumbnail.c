@@ -238,9 +238,9 @@ init_thumbnailers_dirs (gpointer data)
 
   thumbs_dirs = g_new (gchar *, length + 2);
   thumbs_dirs[0] = g_build_filename (g_get_user_data_dir (), "thumbnailers", NULL);
-  for (i = 1; i < length; i++)
-    thumbs_dirs[i] = g_build_filename (data_dirs[i], "thumbnailers", NULL);
-  thumbs_dirs[length] = NULL;
+  for (i = 0; i < length; i++)
+    thumbs_dirs[i + 1] = g_build_filename (data_dirs[i], "thumbnailers", NULL);
+  thumbs_dirs[length + 1] = NULL;
 
   return thumbs_dirs;
 }
