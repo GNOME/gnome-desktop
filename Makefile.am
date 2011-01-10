@@ -8,6 +8,9 @@ ACLOCAL_AMFLAGS = -I m4
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
+versiondir = $(datadir)/gnome
+version_DATA = gnome-version.xml
+
 @INTLTOOL_XML_RULE@
 
 EXTRA_DIST =			\
@@ -15,7 +18,11 @@ EXTRA_DIST =			\
 	HACKING			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
+	gnome-version.xml.in.in \
 	gnome-doc-utils.make
+
+CLEANFILES = \
+	$(version_DATA)
 
 DISTCLEANFILES = \
 	gnome-doc-utils.make
