@@ -257,6 +257,7 @@ echo "
         Maintainer mode:              ${USE_MAINTAINER_MODE}
         Use *_DISABLE_DEPRECATED:     ${enable_deprecation_flags}
 
+        GNOME Distributor:            ${GNOME_DISTRIBUTOR}
         Build desktop-wide docs:      ${enable_desktop_docs}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
