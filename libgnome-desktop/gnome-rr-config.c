@@ -690,7 +690,8 @@ gnome_rr_config_load_filename (GnomeRRConfig *result, const char *filename, GErr
 
 		array = g_ptr_array_new ();
 		for (j = 0; configs[i]->priv->outputs[j] != NULL; j++) {
-		    g_ptr_array_add (array, configs[i]->priv->outputs[i]);
+                    g_object_ref (configs[i]->priv->outputs[j]);
+		    g_ptr_array_add (array, configs[i]->priv->outputs[j]);
 		}
 		g_ptr_array_add (array, NULL);
 		result->priv->outputs = (GnomeRROutputInfo **) g_ptr_array_free (array, FALSE);
