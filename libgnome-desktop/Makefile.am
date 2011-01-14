@@ -73,8 +73,8 @@ INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 if HAVE_INTROSPECTION
 
 GnomeDesktop-3.0.gir: libgnome-desktop-3.la
-GnomeDesktop_3_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 GConf-2.0
-GnomeDesktop_3_0_gir_PACKAGES = gdk-pixbuf-2.0 glib-2.0 gobject-2.0 gio-2.0 gtk+-3.0 gconf-2.0 gsettings-desktop-schemas
+GnomeDesktop_3_0_gir_INCLUDES = GObject-2.0 Gtk-3.0
+GnomeDesktop_3_0_gir_PACKAGES = gdk-pixbuf-2.0 glib-2.0 gobject-2.0 gio-2.0 gtk+-3.0 gsettings-desktop-schemas
 GnomeDesktop_3_0_gir_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API -I$(top_srcdir)
 GnomeDesktop_3_0_gir_LIBS = libgnome-desktop-3.la
 GnomeDesktop_3_0_gir_FILES = $(introspection_sources) $(libgnome_desktop_HEADERS)
