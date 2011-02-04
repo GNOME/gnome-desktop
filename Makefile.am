@@ -4,7 +4,7 @@ if DESKTOP_DOCS_ENABLED
 SUBDIRS += desktop-docs
 endif
 
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --disable-scrollkeeper
 
