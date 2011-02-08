@@ -631,7 +631,7 @@ refresh_cache_file (GnomeBG     *bg,
 	GdkPixbufFormat *format;
 	gchar           *format_name;
 
-	if ((num_monitor != -1) && (width > 300) && (height > 300))
+	if ((num_monitor == -1) || (width <= 300) || (height <= 300))
 		return;
 
 	cache_filename = get_wallpaper_cache_filename (bg->filename, num_monitor, bg->placement, width, height);
