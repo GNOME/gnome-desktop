@@ -116,7 +116,7 @@ dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
 GDK_PIXBUF_REQUIRED=2.21.3
-GTK_REQUIRED=2.90.2
+GTK_REQUIRED=3.0
 GLIB_REQUIRED=2.19.1
 STARTUP_NOTIFICATION_REQUIRED=0.5
 XRANDR_REQUIRED=1.2
