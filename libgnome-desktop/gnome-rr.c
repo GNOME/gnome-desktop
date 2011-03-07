@@ -947,6 +947,7 @@ gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
 static gboolean
 force_timestamp_update (GnomeRRScreen *screen)
 {
+#ifdef HAVE_RANDR
     GnomeRRScreenPrivate *priv = screen->priv;
     GnomeRRCrtc *crtc;
     XRRCrtcInfo *current_info;
@@ -989,6 +990,9 @@ force_timestamp_update (GnomeRRScreen *screen)
 	timestamp_updated = TRUE;
 out:
     return timestamp_updated;
+#else
+    return FALSE;
+#endif
 }
 
 /**
