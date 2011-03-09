@@ -53,7 +53,7 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #define BG_KEY_COLOR_TYPE         "color-shading-type"
 #define BG_KEY_PICTURE_PLACEMENT  "picture-options"
 #define BG_KEY_PICTURE_OPACITY    "picture-opacity"
-#define BG_KEY_PICTURE_FILENAME   "picture-filename"
+#define BG_KEY_PICTURE_URI        "picture-uri"
 
 /* We keep the large pixbufs around if the next update
    in the slideshow is less than 60 seconds away */
@@ -304,9 +304,13 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
 
 	/* Filename */
 	filename = NULL;
-	tmp = g_settings_get_string (settings, BG_KEY_PICTURE_FILENAME);
-	if (tmp != NULL && *tmp != '\0' && g_file_test (tmp, G_FILE_TEST_EXISTS)) {
-		filename = g_strdup (tmp);
+	tmp = g_settings_get_string (settings, BG_KEY_PICTURE_URI);
+	if (*tmp != '\0') {
+		filename = g_filename_from_uri (tmp, NULL, NULL);
+		if (filename != NULL && g_file_test (filename, G_FILE_TEST_EXISTS) == FALSE) {
+			g_free (filename);
+			filename = NULL;
+		}
 	}
 	g_free (tmp);
 
@@ -338,6 +342,7 @@ gnome_bg_save_to_preferences (GnomeBG   *bg,
 {
 	gchar *primary;
 	gchar *secondary;
+	gchar *uri;
 
 	g_return_if_fail (GNOME_IS_BG (bg));
 	g_return_if_fail (G_IS_SETTINGS (settings));
@@ -347,8 +352,13 @@ gnome_bg_save_to_preferences (GnomeBG   *bg,
 
 	g_settings_delay (settings);
 
+	uri = NULL;
+	if (bg->filename != NULL)
+		uri = g_filename_to_uri (bg->filename, NULL, NULL);
+	if (uri == NULL)
+		uri = g_strdup ("");
 	g_settings_set_boolean (settings, BG_KEY_DRAW_BACKGROUND, bg->is_enabled);
-	g_settings_set_string (settings, BG_KEY_PICTURE_FILENAME, bg->filename);
+	g_settings_set_string (settings, BG_KEY_PICTURE_URI, uri);
 	g_settings_set_string (settings, BG_KEY_PRIMARY_COLOR, primary);
 	g_settings_set_string (settings, BG_KEY_SECONDARY_COLOR, secondary);
 	g_settings_set_enum (settings, BG_KEY_COLOR_TYPE, bg->color_type);
@@ -359,6 +369,7 @@ gnome_bg_save_to_preferences (GnomeBG   *bg,
 
 	g_free (primary);
 	g_free (secondary);
+	g_free (uri);
 }
 
 
