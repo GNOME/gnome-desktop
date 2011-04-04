@@ -1228,7 +1228,8 @@ gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
         if (!found) {
                 if (laptop != NULL) {
                         laptop->priv->primary = TRUE;
-                } else {
+                } else if (top_left != NULL) {
+                        /* Note: top_left can be NULL if all outputs are off */
                         top_left->priv->primary = TRUE;
                 }
         }
