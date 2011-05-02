@@ -60,7 +60,6 @@ enum {
 G_DEFINE_TYPE (GnomeRRLabeler, gnome_rr_labeler, G_TYPE_OBJECT);
 
 static void gnome_rr_labeler_finalize (GObject *object);
-static void create_label_windows (GnomeRRLabeler *labeler);
 static void setup_from_config (GnomeRRLabeler *labeler);
 
 static int
@@ -174,8 +173,10 @@ screen_xevent_filter (GdkXEvent      *xevent,
 	if (xev->type == PropertyNotify &&
 	    xev->xproperty.atom == labeler->priv->workarea_atom) {
 		/* update label positions */
-		gnome_rr_labeler_hide (labeler);
-		create_label_windows (labeler);
+		if (labeler->priv->windows != NULL) {
+			gnome_rr_labeler_hide (labeler);
+			gnome_rr_labeler_show (labeler);
+		}
 	}
 
 	return GDK_FILTER_CONTINUE;
@@ -434,11 +435,34 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColo
 }
 
 static void
-create_label_windows (GnomeRRLabeler *labeler)
+setup_from_config (GnomeRRLabeler *labeler)
+{
+	labeler->priv->num_outputs = count_outputs (labeler->priv->config);
+
+	make_palette (labeler);
+
+	gnome_rr_labeler_show (labeler);
+}
+
+GnomeRRLabeler *
+gnome_rr_labeler_new (GnomeRRConfig *config)
+{
+	g_return_val_if_fail (GNOME_IS_RR_CONFIG (config), NULL);
+
+	return g_object_new (GNOME_TYPE_RR_LABELER, "config", config, NULL);
+}
+
+void
+gnome_rr_labeler_show (GnomeRRLabeler *labeler)
 {
 	int i;
 	gboolean created_window_for_clone;
 	GnomeRROutputInfo **outputs;
+
+	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
+
+	if (labeler->priv->windows != NULL)
+		return;
 
 	labeler->priv->windows = g_new (GtkWidget *, labeler->priv->num_outputs);
 
@@ -455,24 +479,6 @@ create_label_windows (GnomeRRLabeler *labeler)
 		} else
 			labeler->priv->windows[i] = NULL;
 	}
-}
-
-static void
-setup_from_config (GnomeRRLabeler *labeler)
-{
-	labeler->priv->num_outputs = count_outputs (labeler->priv->config);
-
-	make_palette (labeler);
-
-	create_label_windows (labeler);
-}
-
-GnomeRRLabeler *
-gnome_rr_labeler_new (GnomeRRConfig *config)
-{
-	g_return_val_if_fail (GNOME_IS_RR_CONFIG (config), NULL);
-
-	return g_object_new (GNOME_TYPE_RR_LABELER, "config", config, NULL);
 }
 
 void

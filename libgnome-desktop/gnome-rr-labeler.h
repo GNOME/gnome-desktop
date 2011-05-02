@@ -58,6 +58,8 @@ GType gnome_rr_labeler_get_type (void);
 
 GnomeRRLabeler *gnome_rr_labeler_new (GnomeRRConfig *config);
 
+void gnome_rr_labeler_show (GnomeRRLabeler *labeler);
+
 void gnome_rr_labeler_hide (GnomeRRLabeler *labeler);
 
 void gnome_rr_labeler_get_color_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColor *color_out);
