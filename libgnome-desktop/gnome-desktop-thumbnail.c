@@ -927,16 +927,17 @@ static gboolean
 mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 {
         guint i;
-        static GHashTable *formats_hash = NULL;
+        static gsize formats_hash = 0;
         gchar *key;
         gboolean result;
 
-        if (!formats_hash) {
+	if (g_once_init_enter (&formats_hash)) {
                 GSList *formats, *list;
+		GHashTable *hash;
 
-                formats_hash = g_hash_table_new_full (g_str_hash,
-                                                      (GEqualFunc) g_content_type_equals,
-                                                      g_free, NULL);
+                hash = g_hash_table_new_full (g_str_hash,
+					      (GEqualFunc) g_content_type_equals,
+					      g_free, NULL);
 
                 formats = gdk_pixbuf_get_formats ();
                 list = formats;
@@ -948,7 +949,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
                         mime_types = gdk_pixbuf_format_get_mime_types (format);
 
                         for (i = 0; mime_types[i] != NULL; i++)
-                                g_hash_table_insert (formats_hash,
+                                g_hash_table_insert (hash,
                                                      (gpointer) g_content_type_from_mime_type (mime_types[i]),
                                                      GUINT_TO_POINTER (1));	
 
@@ -956,10 +957,12 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
                         list = list->next;
                 }
                 g_slist_free (formats);
+
+		g_once_init_leave (&formats_hash, (gsize) hash);
         }
 
         key = g_content_type_from_mime_type (mime_type);
-        if (g_hash_table_lookup (formats_hash, key))
+        if (g_hash_table_lookup ((void*)formats_hash, key))
                 result = TRUE;
         else
                 result = FALSE;
