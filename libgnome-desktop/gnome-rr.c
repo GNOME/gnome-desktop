@@ -96,7 +96,7 @@ struct GnomeRROutput
     GnomeRRMode **	modes;
     int			n_preferred;
     guint8 *		edid_data;
-    int         edid_size;
+    gsize		edid_size;
     char *              connector_type;
 };
 
@@ -1159,7 +1159,7 @@ static guint8 *
 get_property (Display *dpy,
 	      RROutput output,
 	      Atom atom,
-	      int *len)
+	      gsize *len)
 {
 #ifdef HAVE_RANDR
     unsigned char *prop;
@@ -1194,7 +1194,7 @@ get_property (Display *dpy,
 }
 
 static guint8 *
-read_edid_data (GnomeRROutput *output, int *len)
+read_edid_data (GnomeRROutput *output, gsize *len)
 {
     Atom edid_atom;
     guint8 *result;
@@ -1408,10 +1408,11 @@ gnome_rr_output_get_id (GnomeRROutput *output)
 }
 
 const guint8 *
-gnome_rr_output_get_edid_data (GnomeRROutput *output)
+gnome_rr_output_get_edid_data (GnomeRROutput *output, gsize *size)
 {
     g_return_val_if_fail (output != NULL, NULL);
-    
+    if (size)
+        *size = output->edid_size;
     return output->edid_data;
 }
 

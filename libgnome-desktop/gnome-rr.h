@@ -132,7 +132,8 @@ gboolean        gnome_rr_output_is_connected       (GnomeRROutput         *outpu
 int             gnome_rr_output_get_size_inches    (GnomeRROutput         *output);
 int             gnome_rr_output_get_width_mm       (GnomeRROutput         *outout);
 int             gnome_rr_output_get_height_mm      (GnomeRROutput         *output);
-const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output);
+const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output,
+                                                    gsize                 *size);
 GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
 GnomeRRCrtc *   gnome_rr_output_get_crtc           (GnomeRROutput         *output);

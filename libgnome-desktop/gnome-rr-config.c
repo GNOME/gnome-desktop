@@ -511,7 +511,7 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 	GnomeRROutput *rr_output = rr_outputs[i];
 	GnomeRROutputInfo *output = g_object_new (GNOME_TYPE_RR_OUTPUT_INFO, NULL);
 	GnomeRRMode *mode = NULL;
-	const guint8 *edid_data = gnome_rr_output_get_edid_data (rr_output);
+	const guint8 *edid_data = gnome_rr_output_get_edid_data (rr_output, NULL);
 	GnomeRRCrtc *crtc;
 
 	output->priv->name = g_strdup (gnome_rr_output_get_name (rr_output));
