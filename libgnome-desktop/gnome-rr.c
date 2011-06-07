@@ -76,6 +76,8 @@ enum {
 
 enum {
     SCREEN_CHANGED,
+    SCREEN_OUTPUT_CONNECTED,
+    SCREEN_OUTPUT_DISCONNECTED,
     SCREEN_SIGNAL_LAST,
 };
 
@@ -560,6 +562,80 @@ screen_info_new (GnomeRRScreen *screen, gboolean needs_reprobe, GError **error)
     }
 }
 
+static GnomeRROutput *
+find_output_by_id (GnomeRROutput **haystack, guint32 id)
+{
+    guint i;
+
+    for (i = 0; haystack[i] != NULL; i++)
+    {
+	if (gnome_rr_output_get_id (haystack[i]) == id)
+	    return haystack[i];
+    }
+    return NULL;
+}
+
+static void
+diff_outputs_and_emit_signals (ScreenInfo *old, ScreenInfo *new)
+{
+    guint i;
+    guint32 id_old, id_new;
+    GnomeRROutput *output_old;
+    GnomeRROutput *output_new;
+
+    /* have any outputs been removed or disconnected */
+    for (i = 0; old->outputs[i] != NULL; i++)
+    {
+        id_old = gnome_rr_output_get_id (old->outputs[i]);
+        output_new = find_output_by_id (new->outputs, id_old);
+	if (output_new == NULL)
+	{
+	    /* output removed (and disconnected) */
+	    if (gnome_rr_output_is_connected (old->outputs[i]))
+	     {
+	        g_signal_emit (G_OBJECT (new->screen),
+			       screen_signals[SCREEN_OUTPUT_DISCONNECTED], 0,
+			       old->outputs[i]);
+             }
+	    continue;
+	}
+	if (gnome_rr_output_is_connected (old->outputs[i]) &&
+	    !gnome_rr_output_is_connected (output_new))
+	{
+	    /* output disconnected */
+	    g_signal_emit (G_OBJECT (new->screen),
+			   screen_signals[SCREEN_OUTPUT_DISCONNECTED], 0,
+			   old->outputs[i]);
+        }
+    }
+
+    /* have any outputs been created or connected */
+    for (i = 0; new->outputs[i] != NULL; i++)
+    {
+        id_new = gnome_rr_output_get_id (new->outputs[i]);
+        output_old = find_output_by_id (old->outputs, id_new);
+	if (output_old == NULL)
+	{
+	    /* output created */
+	    if (gnome_rr_output_is_connected (new->outputs[i]))
+	     {
+	        g_signal_emit (G_OBJECT (new->screen),
+			       screen_signals[SCREEN_OUTPUT_CONNECTED], 0,
+			       new->outputs[i]);
+            }
+	    continue;
+	}
+	if (!gnome_rr_output_is_connected (output_old) &&
+	    gnome_rr_output_is_connected (new->outputs[i]))
+	{
+	    /* output connected */
+	    g_signal_emit (G_OBJECT (new->screen),
+			   screen_signals[SCREEN_OUTPUT_CONNECTED], 0,
+			   new->outputs[i]);
+         }
+    }
+}
+
 static gboolean
 screen_update (GnomeRRScreen *screen, gboolean force_callback, gboolean needs_reprobe, GError **error)
 {
@@ -576,6 +652,9 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, gboolean needs_re
     if (info->resources->configTimestamp != screen->priv->info->resources->configTimestamp)
 	    changed = TRUE;
 #endif
+
+    /* work out if any outputs have changed connected state */
+    diff_outputs_and_emit_signals (screen->priv->info, info);
 
     screen_info_free (screen->priv->info);
 	
@@ -824,6 +903,63 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
             g_cclosure_marshal_VOID__VOID,
             G_TYPE_NONE,
 	    0);
+
+    /**
+     * GnomeRRScreen::output-connected:
+     * @screen: the #GnomeRRScreen that emitted the signal
+     * @output: the #GnomeRROutput that was connected
+     *
+     * This signal is emitted when a display device is connected to a
+     * port, or a port is hotplugged with an active output. The latter
+     * can happen if a laptop is docked, and the dock provides a new
+     * active output.
+     *
+     * The @output value is not a #GObject. The returned @output value can
+     * only assume to be valid during the emission of the signal (i.e. within
+     * your signal handler only), as it may change later when the @screen
+     * is modified due to an event from the X server, or due to another
+     * place in the application modifying the @screen and the @output.
+     * Therefore, deal with changes to the @output right in your signal
+     * handler, instead of keeping the @output reference for an async or
+     * idle function.
+     **/
+    screen_signals[SCREEN_OUTPUT_CONNECTED] = g_signal_new("output-connected",
+            G_TYPE_FROM_CLASS (gobject_class),
+            G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+            G_STRUCT_OFFSET (GnomeRRScreenClass, output_connected),
+            NULL,
+            NULL,
+            g_cclosure_marshal_VOID__POINTER,
+            G_TYPE_NONE,
+            1, GNOME_TYPE_RR_OUTPUT);
+
+    /**
+     * GnomeRRScreen::output-disconnected:
+     * @screen: the #GnomeRRScreen that emitted the signal
+     * @output: the #GnomeRROutput that was disconnected
+     *
+     * This signal is emitted when a display device is disconnected from
+     * a port, or a port output is hot-unplugged. The latter can happen
+     * if a laptop is undocked, and the dock provided the output.
+     *
+     * The @output value is not a #GObject. The returned @output value can
+     * only assume to be valid during the emission of the signal (i.e. within
+     * your signal handler only), as it may change later when the @screen
+     * is modified due to an event from the X server, or due to another
+     * place in the application modifying the @screen and the @output.
+     * Therefore, deal with changes to the @output right in your signal
+     * handler, instead of keeping the @output reference for an async or
+     * idle function.
+     **/
+    screen_signals[SCREEN_OUTPUT_DISCONNECTED] = g_signal_new("output-disconnected",
+            G_TYPE_FROM_CLASS (gobject_class),
+            G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+            G_STRUCT_OFFSET (GnomeRRScreenClass, output_disconnected),
+            NULL,
+            NULL,
+            g_cclosure_marshal_VOID__POINTER,
+            G_TYPE_NONE,
+            1, GNOME_TYPE_RR_OUTPUT);
 }
 
 void

@@ -46,6 +46,8 @@ typedef struct {
 	GObjectClass parent_class;
 
         void (* changed) (void);
+        void (* output_connected)       (GnomeRROutput *output);
+        void (* output_disconnected)    (GnomeRROutput *output);
 } GnomeRRScreenClass;
 
 typedef enum
