@@ -931,7 +931,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
             NULL,
             g_cclosure_marshal_VOID__POINTER,
             G_TYPE_NONE,
-            1, GNOME_TYPE_RR_OUTPUT);
+            1, G_TYPE_POINTER);
 
     /**
      * GnomeRRScreen::output-disconnected:
@@ -959,7 +959,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
             NULL,
             g_cclosure_marshal_VOID__POINTER,
             G_TYPE_NONE,
-            1, GNOME_TYPE_RR_OUTPUT);
+            1, G_TYPE_POINTER);
 }
 
 void
