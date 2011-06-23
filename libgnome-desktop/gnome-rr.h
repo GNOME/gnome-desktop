@@ -136,6 +136,15 @@ int             gnome_rr_output_get_width_mm       (GnomeRROutput         *outou
 int             gnome_rr_output_get_height_mm      (GnomeRROutput         *output);
 const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output,
                                                     gsize                 *size);
+
+gint            gnome_rr_output_get_backlight_min  (GnomeRROutput         *output);
+gint            gnome_rr_output_get_backlight_max  (GnomeRROutput         *output);
+gint            gnome_rr_output_get_backlight_now  (GnomeRROutput         *output,
+                                                    GError                **error);
+gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,
+                                                    gint                   value,
+                                                    GError                **error);
+
 GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
 GnomeRRCrtc *   gnome_rr_output_get_crtc           (GnomeRROutput         *output);

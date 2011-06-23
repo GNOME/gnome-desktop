@@ -100,6 +100,8 @@ struct GnomeRROutput
     guint8 *		edid_data;
     gsize		edid_size;
     char *              connector_type;
+    gint		backlight_min;
+    gint		backlight_max;
 };
 
 struct GnomeRROutputWrap
@@ -1399,6 +1401,32 @@ out:
 #endif
 }
 
+static void
+update_brightness_limits (GnomeRROutput *output)
+{
+#ifdef HAVE_RANDR
+    Atom atom;
+    XRRPropertyInfo *info;
+
+    atom = XInternAtom (DISPLAY (output), "BACKLIGHT", FALSE);
+    info = XRRQueryOutputProperty (DISPLAY (output), output->id, atom);
+    if (info == NULL)
+    {
+        g_warning ("could not get output property");
+        goto out;
+    }
+    if (!info->range || info->num_values != 2)
+    {
+        g_debug ("backlight was not range");
+        goto out;
+    }
+    output->backlight_min = info->values[0];
+    output->backlight_max = info->values[1];
+out:
+    XFree (info);
+#endif
+}
+
 #ifdef HAVE_RANDR
 static gboolean
 output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **error)
@@ -1470,7 +1498,10 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     
     /* Edid data */
     output->edid_data = read_edid_data (output, &output->edid_size);
-    
+
+    /* brightness data */
+    update_brightness_limits (output);
+
     XRRFreeOutputInfo (info);
 
     return TRUE;
@@ -1495,6 +1526,8 @@ output_copy (const GnomeRROutput *from)
     output->connected = from->connected;
     output->n_preferred = from->n_preferred;
     output->connector_type = g_strdup (from->connector_type);
+    output->backlight_min = -1;
+    output->backlight_max = -1;
 
     array = g_ptr_array_new ();
     for (p_crtc = from->possible_crtcs; *p_crtc != NULL; p_crtc++)
@@ -1550,6 +1583,153 @@ gnome_rr_output_get_edid_data (GnomeRROutput *output, gsize *size)
     if (size)
         *size = output->edid_size;
     return output->edid_data;
+}
+
+/**
+ * gnome_rr_output_get_backlight_min:
+ *
+ * Returns: The mimimum backlight value, or -1 if not supported
+ */
+gint
+gnome_rr_output_get_backlight_min (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, -1);
+    return output->backlight_min;
+}
+
+/**
+ * gnome_rr_output_get_backlight_max:
+ *
+ * Returns: The maximum backlight value, or -1 if not supported
+ */
+gint
+gnome_rr_output_get_backlight_max (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, -1);
+    return output->backlight_max;
+}
+
+/**
+ * gnome_rr_output_get_backlight_now:
+ *
+ * Returns: The currently set backlight brightness
+ */
+gint
+gnome_rr_output_get_backlight_now (GnomeRROutput *output, GError **error)
+{
+    guint now = -1;
+#ifdef HAVE_RANDR
+    unsigned long nitems;
+    unsigned long bytes_after;
+    guint *prop;
+    Atom atom;
+    Atom actual_type;
+    int actual_format;
+    gint retval;
+
+    g_return_val_if_fail (output != NULL, -1);
+
+    gdk_error_trap_push ();
+    atom = XInternAtom (DISPLAY (output), "BACKLIGHT", FALSE);
+    retval = XRRGetOutputProperty (DISPLAY (output), output->id, atom,
+				   0, 4, False, False, None,
+				   &actual_type, &actual_format,
+				   &nitems, &bytes_after, ((unsigned char **)&prop));
+    gdk_flush ();
+    if (gdk_error_trap_pop ())
+    {
+        g_set_error_literal (error,
+			     GNOME_RR_ERROR,
+			     GNOME_RR_ERROR_UNKNOWN,
+			     "unhandled X error while getting the range of backlight values");
+        goto out;
+    }
+
+    if (retval != Success) {
+        g_set_error_literal (error,
+			     GNOME_RR_ERROR,
+			     GNOME_RR_ERROR_RANDR_ERROR,
+			     "could not get the range of backlight values");
+        goto out;
+    }
+    if (actual_type == XA_INTEGER &&
+        nitems == 1 &&
+        actual_format == 32)
+    {
+        memcpy (&now, prop, sizeof (guint));
+    }
+    else
+    {
+	g_set_error (error,
+		     GNOME_RR_ERROR,
+		     GNOME_RR_ERROR_RANDR_ERROR,
+		     "failed to get correct property type, got %lu,%i",
+		     nitems, actual_format);
+    }
+out:
+    XFree (prop);
+#else
+    g_set_error_literal (error,
+			 GNOME_RR_ERROR,
+			 GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+			 "not compiled with RANDR support");
+#endif /* HAVE_RANDR */
+    return now;
+}
+
+/**
+ * gnome_rr_output_set_backlight:
+ * @value: the absolute value which is min >= this <= max
+ *
+ * Returns: %TRUE for success
+ */
+gboolean
+gnome_rr_output_set_backlight (GnomeRROutput *output, gint value, GError **error)
+{
+    gboolean ret = FALSE;
+#ifdef HAVE_RANDR
+    Atom atom;
+
+    g_return_val_if_fail (output != NULL, FALSE);
+
+    /* check this is sane */
+    if (value < output->backlight_min ||
+        value > output->backlight_max)
+    {
+	g_set_error (error,
+		     GNOME_RR_ERROR,
+		     GNOME_RR_ERROR_BOUNDS_ERROR,
+		     "out of brightness range: %i, has to be %i -> %i",
+		     value,
+		     output->backlight_max, output->backlight_min);
+	goto out;
+    }
+
+    /* don't abort on error */
+    gdk_error_trap_push ();
+    atom = XInternAtom (DISPLAY (output), "BACKLIGHT", FALSE);
+    XRRChangeOutputProperty (DISPLAY (output), output->id, atom,
+			     XA_INTEGER, 32, PropModeReplace,
+			     (unsigned char *) &value, 1);
+    if (gdk_error_trap_pop ())
+    {
+        g_set_error_literal (error,
+			     GNOME_RR_ERROR,
+			     GNOME_RR_ERROR_UNKNOWN,
+			     "unhandled X error while setting the backlight values");
+        goto out;
+    }
+
+    /* we assume this succeeded as there's no return value */
+    ret = TRUE;
+#else
+    g_set_error_literal (error,
+			 GNOME_RR_ERROR,
+			 GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+			 "not compiled with RANDR support");
+#endif /* HAVE_RANDR */
+out:
+    return ret;
 }
 
 /**
