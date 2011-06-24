@@ -1610,12 +1610,12 @@ gnome_rr_output_get_backlight_max (GnomeRROutput *output)
 }
 
 /**
- * gnome_rr_output_get_backlight_now:
+ * gnome_rr_output_get_backlight:
  *
  * Returns: The currently set backlight brightness
  */
 gint
-gnome_rr_output_get_backlight_now (GnomeRROutput *output, GError **error)
+gnome_rr_output_get_backlight (GnomeRROutput *output, GError **error)
 {
     guint now = -1;
 #ifdef HAVE_RANDR

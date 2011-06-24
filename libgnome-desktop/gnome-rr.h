@@ -139,7 +139,7 @@ const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *outpu
 
 gint            gnome_rr_output_get_backlight_min  (GnomeRROutput         *output);
 gint            gnome_rr_output_get_backlight_max  (GnomeRROutput         *output);
-gint            gnome_rr_output_get_backlight_now  (GnomeRROutput         *output,
+gint            gnome_rr_output_get_backlight      (GnomeRROutput         *output,
                                                     GError                **error);
 gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,
                                                     gint                   value,
