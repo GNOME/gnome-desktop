@@ -1405,19 +1405,29 @@ static void
 update_brightness_limits (GnomeRROutput *output)
 {
 #ifdef HAVE_RANDR
+    gint rc;
     Atom atom;
     XRRPropertyInfo *info;
 
+    gdk_error_trap_push ();
     atom = XInternAtom (DISPLAY (output), "BACKLIGHT", FALSE);
     info = XRRQueryOutputProperty (DISPLAY (output), output->id, atom);
+    rc = gdk_error_trap_pop ();
+    if (rc != 0)
+    {
+        g_warning ("could not get output property for %s, rc: %i",
+		   output->name, rc);
+        goto out;
+    }
     if (info == NULL)
     {
-        g_warning ("could not get output property");
+        g_warning ("could not get output property for %s",
+		   output->name);
         goto out;
     }
     if (!info->range || info->num_values != 2)
     {
-        g_debug ("backlight was not range");
+        g_debug ("backlight %s was not range", output->name);
         goto out;
     }
     output->backlight_min = info->values[0];
@@ -1500,7 +1510,8 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     output->edid_data = read_edid_data (output, &output->edid_size);
 
     /* brightness data */
-    update_brightness_limits (output);
+    if (output->connected)
+        update_brightness_limits (output);
 
     XRRFreeOutputInfo (info);
 
