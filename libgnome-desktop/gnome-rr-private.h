@@ -47,6 +47,7 @@ struct GnomeRRScreenPrivate
     int				rr_minor_version;
     
     Atom                        connector_type_atom;
+    gboolean                    dpms_capable;
 };
 
 struct GnomeRROutputInfoPrivate

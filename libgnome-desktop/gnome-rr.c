@@ -36,6 +36,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
+#include <X11/extensions/dpms.h>
 
 #undef GNOME_DISABLE_DEPRECATED
 #include "gnome-rr.h"
@@ -531,6 +532,11 @@ fill_out_screen_info (Display *xdisplay,
 	gdk_error_trap_pop_ignored ();
     }
 #endif
+
+    /* can the screen do DPMS? */
+    gdk_error_trap_push ();
+    priv->dpms_capable = DPMSCapable (priv->xdisplay);
+    gdk_error_trap_pop_ignored ();
 
     return TRUE;
 #else
@@ -1163,6 +1169,125 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
     gdk_x11_display_ungrab (gdk_screen_get_display (screen->priv->gdk_screen));
 
     return refreshed;
+}
+
+/**
+ * gnome_rr_screen_get_dpms_mode:
+ **/
+gboolean
+gnome_rr_screen_get_dpms_mode (GnomeRRScreen *screen,
+                               GnomeRRDpmsMode *mode,
+                               GError **error)
+{
+    BOOL enabled = FALSE;
+    CARD16 state;
+    gboolean ret = FALSE;
+
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+    g_return_val_if_fail (mode != NULL, FALSE);
+
+    if (!screen->priv->dpms_capable) {
+        g_set_error_literal (error,
+                             GNOME_RR_ERROR,
+                             GNOME_RR_ERROR_NO_DPMS_EXTENSION,
+                             "Display is not DPMS capable");
+        goto out;
+    }
+
+    if (!DPMSInfo (screen->priv->xdisplay,
+                   &state,
+                   &enabled)) {
+        g_set_error_literal (error,
+                             GNOME_RR_ERROR,
+                             GNOME_RR_ERROR_UNKNOWN,
+                             "Unable to get DPMS state");
+        goto out;
+    }
+
+    /* DPMS not enabled is a valid mode */
+    if (!enabled) {
+        *mode = GNOME_RR_DPMS_DISABLED;
+        ret = TRUE;
+        goto out;
+    }
+
+    switch (state) {
+    case DPMSModeOn:
+        *mode = GNOME_RR_DPMS_ON;
+        break;
+    case DPMSModeStandby:
+        *mode = GNOME_RR_DPMS_STANDBY;
+        break;
+    case DPMSModeSuspend:
+        *mode = GNOME_RR_DPMS_SUSPEND;
+        break;
+    case DPMSModeOff:
+        *mode = GNOME_RR_DPMS_OFF;
+        break;
+    default:
+        g_assert_not_reached ();
+        break;
+    }
+    ret = TRUE;
+out:
+    return ret;
+}
+
+/**
+ * gnome_rr_screen_set_dpms_mode:
+ **/
+gboolean
+gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
+                               GnomeRRDpmsMode mode,
+                               GError **error)
+{
+    CARD16 state = 0;
+    gboolean ret;
+    GnomeRRDpmsMode current_mode;
+
+    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+    /* set, if the new mode is different */
+    ret = gnome_rr_screen_get_dpms_mode (screen, &current_mode, error);
+    if (!ret)
+        goto out;
+    if (current_mode == mode)
+        goto out;
+
+    switch (state) {
+    case GNOME_RR_DPMS_ON:
+        state = DPMSModeOn;
+        break;
+    case GNOME_RR_DPMS_STANDBY:
+        state = DPMSModeStandby;
+        break;
+    case GNOME_RR_DPMS_SUSPEND:
+        state = DPMSModeSuspend;
+        break;
+    case GNOME_RR_DPMS_OFF:
+        state = DPMSModeOff;
+        break;
+    default:
+        g_assert_not_reached ();
+        break;
+    }
+
+    gdk_error_trap_push ();
+    ret = DPMSForceLevel (screen->priv->xdisplay, state);
+    gdk_flush ();
+    if (gdk_error_trap_pop ())
+        ret = FALSE;
+
+    if (!ret) {
+        ret = FALSE;
+        g_set_error_literal (error,
+                             GNOME_RR_ERROR,
+                             GNOME_RR_ERROR_UNKNOWN,
+                             "Could not change DPMS mode");
+        goto out;
+    }
+out:
+    return ret;
 }
 
 /**

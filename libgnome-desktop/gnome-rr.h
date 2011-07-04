@@ -60,6 +60,15 @@ typedef enum
     GNOME_RR_REFLECT_Y =	(1 << 5)
 } GnomeRRRotation;
 
+typedef enum {
+	GNOME_RR_DPMS_ON,
+	GNOME_RR_DPMS_STANDBY,
+	GNOME_RR_DPMS_SUSPEND,
+	GNOME_RR_DPMS_OFF,
+	GNOME_RR_DPMS_DISABLED,
+	GNOME_RR_DPMS_UNKNOWN
+} GnomeRRDpmsMode;
+
 /* Error codes */
 
 #define GNOME_RR_ERROR (gnome_rr_error_quark ())
@@ -73,6 +82,7 @@ typedef enum {
     GNOME_RR_ERROR_BOUNDS_ERROR,	/* requested bounds of a CRTC are outside the maximum size */
     GNOME_RR_ERROR_CRTC_ASSIGNMENT,	/* could not assign CRTCs to outputs */
     GNOME_RR_ERROR_NO_MATCHING_CONFIG,	/* none of the saved configurations matched the current configuration */
+    GNOME_RR_ERROR_NO_DPMS_EXTENSION,	/* DPMS extension is not present */
 } GnomeRRError;
 
 #define GNOME_RR_CONNECTOR_TYPE_PANEL "Panel"  /* This is a laptop's built-in LCD */
@@ -126,6 +136,13 @@ void            gnome_rr_screen_set_primary_output (GnomeRRScreen         *scree
                                                     GnomeRROutput         *output);
 
 GnomeRRMode   **gnome_rr_screen_create_clone_modes (GnomeRRScreen *screen);
+
+gboolean        gnome_rr_screen_get_dpms_mode      (GnomeRRScreen        *screen,
+                                                    GnomeRRDpmsMode       *mode,
+                                                    GError               **error);
+gboolean        gnome_rr_screen_set_dpms_mode      (GnomeRRScreen         *screen,
+                                                    GnomeRRDpmsMode        mode,
+                                                    GError              **error);
 
 /* GnomeRROutput */
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
