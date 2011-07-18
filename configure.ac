@@ -113,30 +113,13 @@ dnl it too, or it will never make it into the spec file!
 GDK_PIXBUF_REQUIRED=2.21.3
 GTK_REQUIRED=3.0
 GLIB_REQUIRED=2.19.1
-STARTUP_NOTIFICATION_REQUIRED=0.5
 XRANDR_REQUIRED=1.2
 GSETTINGS_DESKTOP_SCHEMAS_REQUIRED=0.1.4
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GDK_PIXBUF_REQUIRED)
-AC_SUBST(STARTUP_NOTIFICATION_REQUIRED)
 AC_SUBST(XRANDR_REQUIRED)
-
-AC_MSG_CHECKING(for libstartup-notification)
-if $PKG_CONFIG --atleast-version $STARTUP_NOTIFICATION_REQUIRED libstartup-notification-1.0; then
-  AC_MSG_RESULT(yes)
-  AC_DEFINE(HAVE_STARTUP_NOTIFICATION, 1,
-            [Define if the startup-notification package is present])
-  have_startup_notification=yes
-  STARTUP_NOTIFICATION_PACKAGE=libstartup-notification-1.0
-else
-  AC_MSG_RESULT(no)
-  have_startup_notification=no
-  STARTUP_NOTIFICATION_PACKAGE=
-fi
-
-AC_SUBST(STARTUP_NOTIFICATION_PACKAGE)
 
 dnl we need x11 for GnomeBG
 
@@ -173,7 +156,7 @@ AC_SUBST(RANDR_PACKAGE)
 
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED $STARTUP_NOTIFICATION_PACKAGE $RANDR_PACKAGE)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED $RANDR_PACKAGE)
 
 dnl gnome-doc-utils stuff
 
@@ -237,7 +220,6 @@ echo "
         Build desktop-wide docs:      ${enable_desktop_docs}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
-        Startup notification support: ${have_startup_notification}
         XRandr support:               ${have_randr}
         Build gtk-doc documentation:  ${enable_gtk_doc}
 
