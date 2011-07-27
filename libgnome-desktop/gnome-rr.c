@@ -1254,7 +1254,7 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
     if (current_mode == mode)
         goto out;
 
-    switch (state) {
+    switch (mode) {
     case GNOME_RR_DPMS_ON:
         state = DPMSModeOn;
         break;
