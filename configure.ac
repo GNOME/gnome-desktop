@@ -27,7 +27,7 @@ AC_CONFIG_MACRO_DIR([m4])
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
 
-LT_VERSION=2:0:0
+LT_VERSION=2:1:0
 AC_SUBST(LT_VERSION)
 
 LT_PREREQ([2.2.6])
