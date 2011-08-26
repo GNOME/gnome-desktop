@@ -163,8 +163,7 @@ gnome_tz_monitor_init (GnomeTzMonitor *monitor)
  * Return value: the new #GnomeTzMonitor
  **/
 GnomeTzMonitor *
-gnome_tz_monitor_new (int width,
-			int height)
+gnome_tz_monitor_new (void)
 {
 	return g_object_new (GNOME_TYPE_TZ_MONITOR, NULL);
 }

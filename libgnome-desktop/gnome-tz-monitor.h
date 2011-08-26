@@ -58,8 +58,8 @@ struct _GnomeTzMonitorClass
 	void (* changed) (GnomeTzMonitor *monitor);
 };
 
-GType             gnome_tz_monitor_get_type              (void);
-GnomeTzMonitor *gnome_tz_monitor_new (int width, int height);
+GType             gnome_tz_monitor_get_type      (void);
+GnomeTzMonitor *gnome_tz_monitor_new             (void);
 
 G_END_DECLS
 
