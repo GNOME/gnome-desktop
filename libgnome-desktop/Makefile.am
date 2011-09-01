@@ -24,6 +24,7 @@ introspection_sources = 		\
 	gnome-rr-config.c		\
 	gnome-rr-output-info.c		\
 	gnome-rr-labeler.c		\
+	gnome-wall-clock.c		\
 	edid-parse.c
 
 libgnome_desktop_3_la_SOURCES = 	\
@@ -53,7 +54,8 @@ libgnome_desktop_HEADERS = \
         gnome-desktop-thumbnail.h       \
         gnome-rr.h                      \
         gnome-rr-config.h               \
-        gnome-rr-labeler.h
+        gnome-rr-labeler.h		\
+        gnome-wall-clock.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
