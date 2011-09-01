@@ -29,6 +29,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-wall-clock.h"
 #include <gdesktop-enums.h>
+#include "gnome-datetime-source.h"
 
 struct _GnomeWallClockPrivate {
 	guint clock_update_id;
@@ -162,22 +163,25 @@ update_clock (gpointer data)
 	GSource *source;
 	GDateTime *now;
 	GDateTime *expiry;
-  
-	now = g_date_time_new_now_local ();
-	expiry = g_date_time_add_seconds (now, 60 - g_date_time_get_second (now));
-  
-	if (self->priv->clock_update_id)
-		g_source_remove (self->priv->clock_update_id);
-  
-	source = g_timeout_source_new_seconds (1);
-	g_source_set_priority (source, G_PRIORITY_HIGH);
-	g_source_set_callback (source, update_clock, self, NULL);
-	self->priv->clock_update_id = g_source_attach (source, NULL);
-	g_source_unref (source);
 
 	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
 	show_date = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
 	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
+
+	now = g_date_time_new_now_local ();
+	if (show_seconds)
+		expiry = g_date_time_add_seconds (now, 1);
+	else
+		expiry = g_date_time_add_seconds (now, 60 - g_date_time_get_second (now));
+  
+	if (self->priv->clock_update_id)
+		g_source_remove (self->priv->clock_update_id);
+  
+	source = _gnome_datetime_source_new (now, expiry, TRUE);
+	g_source_set_priority (source, G_PRIORITY_HIGH);
+	g_source_set_callback (source, update_clock, self, NULL);
+	self->priv->clock_update_id = g_source_attach (source, NULL);
+	g_source_unref (source);
 
 	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H) {
 		if (show_date)

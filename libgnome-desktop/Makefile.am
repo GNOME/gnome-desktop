@@ -29,6 +29,8 @@ introspection_sources = 		\
 
 libgnome_desktop_3_la_SOURCES = 	\
 	$(introspection_sources)	\
+	gnome-datetime-source.h		\
+	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
 	edid.h				\
 	private.h
