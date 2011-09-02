@@ -164,7 +164,7 @@ dnl pkg-config dependency checks
 PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED $RANDR_PACKAGE xext >= $XEXT_REQUIRED)
 
 AC_CACHE_CHECK(for timerfd_create(2) system call,
-    glib_cv_timerfd,AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
+    gnome_cv_timerfd,AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
 #include <sys/timerfd.h>
 #include <unistd.h>
 ],[
@@ -174,8 +174,8 @@ main (void)
   timerfd_create (CLOCK_MONOTONIC, TFD_CLOEXEC);
   return 0;
 }
-])],glib_cv_timerfd=yes,glib_cv_timerfd=no))
-if test x"$glib_cv_timerfd" = x"yes"; then
+])],gnome_cv_timerfd=yes,gnome_cv_timerfd=no))
+if test x"$gnome_cv_timerfd" = x"yes"; then
   AC_DEFINE(HAVE_TIMERFD, 1, [we have the timerfd_create(2) system call])
 fi
 
