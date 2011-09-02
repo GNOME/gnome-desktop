@@ -71,10 +71,10 @@ gnome_wall_clock_init (GnomeWallClock *self)
 	self->priv->tz_monitor = g_file_monitor_file (tz, 0, NULL, NULL);
 	g_object_unref (tz);
 	
-	g_signal_connect (self->priv->tz_monitor, "changed", G_CALLBACK(on_tz_changed), self);
+	g_signal_connect (self->priv->tz_monitor, "changed", G_CALLBACK (on_tz_changed), self);
 	
 	self->priv->desktop_settings = g_settings_new ("org.gnome.desktop.interface");
-	g_signal_connect (self->priv->desktop_settings, "changed", G_CALLBACK(on_schema_change), self);
+	g_signal_connect (self->priv->desktop_settings, "changed", G_CALLBACK (on_schema_change), self);
 
 	update_clock (self);
 }
@@ -94,7 +94,7 @@ gnome_wall_clock_dispose (GObject *object)
 		self->priv->desktop_settings = NULL;
 	}
 
-	G_OBJECT_CLASS(gnome_wall_clock_parent_class)->dispose (object);
+	G_OBJECT_CLASS (gnome_wall_clock_parent_class)->dispose (object);
 }
 
 static void
@@ -104,7 +104,7 @@ gnome_wall_clock_finalize (GObject *object)
 
 	g_free (self->priv->clock_string);
 
-	G_OBJECT_CLASS(gnome_wall_clock_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gnome_wall_clock_parent_class)->finalize (object);
 }
 
 static void
