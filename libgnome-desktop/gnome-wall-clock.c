@@ -84,6 +84,11 @@ gnome_wall_clock_dispose (GObject *object)
 {
 	GnomeWallClock *self = GNOME_WALL_CLOCK (object);
 
+	if (self->priv->clock_update_id) {
+		g_source_remove (self->priv->clock_update_id);
+		self->priv->clock_update_id = 0;
+	}
+
 	if (self->priv->tz_monitor != NULL) {
 		g_object_unref (self->priv->tz_monitor);
 		self->priv->tz_monitor = NULL;
