@@ -29,9 +29,7 @@
 #include <string.h>
 #include <X11/Xlib.h>
 
-#ifdef HAVE_RANDR
 #include <X11/extensions/Xrandr.h>
-#endif
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -46,26 +44,6 @@
 #include "gnome-rr-private.h"
 
 #define DISPLAY(o) ((o)->info->screen->priv->xdisplay)
-
-#ifndef HAVE_RANDR
-/* This is to avoid a ton of ifdefs wherever we use a type from libXrandr */
-typedef int RROutput;
-typedef int RRCrtc;
-typedef int RRMode;
-typedef int Rotation;
-#define RR_Rotate_0		1
-#define RR_Rotate_90		2
-#define RR_Rotate_180		4
-#define RR_Rotate_270		8
-#define RR_Reflect_X		16
-#define RR_Reflect_Y		32
-#endif
-
-#ifdef HAVE_RANDR
-#define RANDR_LIBRARY_IS_AT_LEAST_1_3 (RANDR_MAJOR > 1 || (RANDR_MAJOR == 1 && RANDR_MINOR >= 3))
-#else
-#define RANDR_LIBRARY_IS_AT_LEAST_1_3 0
-#endif
 
 #define SERVERS_RANDR_IS_AT_LEAST_1_3(priv) (priv->rr_major_version > 1 || (priv->rr_major_version == 1 && priv->rr_minor_version >= 3))
 
@@ -142,21 +120,17 @@ static GnomeRRCrtc *  crtc_new          (ScreenInfo         *info,
 static GnomeRRCrtc *  crtc_copy         (const GnomeRRCrtc  *from);
 static void           crtc_free         (GnomeRRCrtc        *crtc);
 
-#ifdef HAVE_RANDR
 static gboolean       crtc_initialize   (GnomeRRCrtc        *crtc,
 					 XRRScreenResources *res,
 					 GError            **error);
-#endif
 
 /* GnomeRROutput */
 static GnomeRROutput *output_new        (ScreenInfo         *info,
 					 RROutput            id);
 
-#ifdef HAVE_RANDR
 static gboolean       output_initialize (GnomeRROutput      *output,
 					 XRRScreenResources *res,
 					 GError            **error);
-#endif
 
 static GnomeRROutput *output_copy       (const GnomeRROutput *from);
 static void           output_free       (GnomeRROutput      *output);
@@ -165,10 +139,8 @@ static void           output_free       (GnomeRROutput      *output);
 static GnomeRRMode *  mode_new          (ScreenInfo         *info,
 					 RRMode              id);
 
-#ifdef HAVE_RANDR
 static void           mode_initialize   (GnomeRRMode        *mode,
 					 XRRModeInfo        *info);
-#endif
 
 static GnomeRRMode *  mode_copy         (const GnomeRRMode  *from);
 static void           mode_free         (GnomeRRMode        *mode);
@@ -260,14 +232,12 @@ screen_info_free (ScreenInfo *info)
     
     g_assert (info != NULL);
 
-#ifdef HAVE_RANDR
     if (info->resources)
     {
 	XRRFreeScreenResources (info->resources);
 	
 	info->resources = NULL;
     }
-#endif
     
     if (info->outputs)
     {
@@ -368,7 +338,6 @@ gather_clone_modes (ScreenInfo *info)
     info->clone_modes = (GnomeRRMode **)g_ptr_array_free (result, FALSE);
 }
 
-#ifdef HAVE_RANDR
 static gboolean
 fill_screen_info_from_resources (ScreenInfo *info,
 				 XRRScreenResources *resources,
@@ -438,7 +407,6 @@ fill_screen_info_from_resources (ScreenInfo *info,
 
     return TRUE;
 }
-#endif /* HAVE_RANDR */
 
 static gboolean
 fill_out_screen_info (Display *xdisplay,
@@ -447,7 +415,6 @@ fill_out_screen_info (Display *xdisplay,
 		      gboolean needs_reprobe,
 		      GError **error)
 {
-#ifdef HAVE_RANDR
     XRRScreenResources *resources;
     GnomeRRScreenPrivate *priv;
     
@@ -466,14 +433,10 @@ fill_out_screen_info (Display *xdisplay,
 	 * XRRGetScreenResources, however it is available only
 	 * in RandR 1.3 or higher
 	 */
-#if RANDR_LIBRARY_IS_AT_LEAST_1_3
         if (SERVERS_RANDR_IS_AT_LEAST_1_3 (priv))
             resources = XRRGetScreenResourcesCurrent (xdisplay, xroot);
         else
             resources = XRRGetScreenResources (xdisplay, xroot);
-#else
-        resources = XRRGetScreenResources (xdisplay, xroot);
-#endif
     }
 
     if (resources)
@@ -525,13 +488,11 @@ fill_out_screen_info (Display *xdisplay,
     }
 
     info->primary = None;
-#if RANDR_LIBRARY_IS_AT_LEAST_1_3
     if (SERVERS_RANDR_IS_AT_LEAST_1_3 (priv)) {
         gdk_error_trap_push ();
         info->primary = XRRGetOutputPrimary (xdisplay, xroot);
 	gdk_error_trap_pop_ignored ();
     }
-#endif
 
     /* can the screen do DPMS? */
     gdk_error_trap_push ();
@@ -539,9 +500,6 @@ fill_out_screen_info (Display *xdisplay,
     gdk_error_trap_pop_ignored ();
 
     return TRUE;
-#else
-    return FALSE;
-#endif /* HAVE_RANDR */
 }
 
 static ScreenInfo *
@@ -656,10 +614,8 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, gboolean needs_re
     if (!info)
 	    return FALSE;
 
-#ifdef HAVE_RANDR
     if (info->resources->configTimestamp != screen->priv->info->resources->configTimestamp)
 	    changed = TRUE;
-#endif
 
     /* work out if any outputs have changed connected state */
     diff_outputs_and_emit_signals (screen->priv->info, info);
@@ -679,7 +635,6 @@ screen_on_event (GdkXEvent *xevent,
 		 GdkEvent *event,
 		 gpointer data)
 {
-#ifdef HAVE_RANDR
     GnomeRRScreen *screen = data;
     GnomeRRScreenPrivate *priv = screen->priv;
     XEvent *e = xevent;
@@ -765,8 +720,6 @@ screen_on_event (GdkXEvent *xevent,
     }
 #endif
 
-#endif /* HAVE_RANDR */
-
     /* Pass the event on to GTK+ */
     return GDK_FILTER_CONTINUE;
 }
@@ -782,7 +735,6 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
 
     priv->connector_type_atom = XInternAtom (dpy, "ConnectorType", FALSE);
 
-#ifdef HAVE_RANDR
     if (XRRQueryExtension (dpy, &event_base, &ignore))
     {
         priv->randr_event_base = event_base;
@@ -812,14 +764,11 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
     }
     else
     {
-#endif /* HAVE_RANDR */
-    g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
-             _("RANDR extension is not present"));
+      g_set_error (error, GNOME_RR_ERROR, GNOME_RR_ERROR_NO_RANDR_EXTENSION,
+                   _("RANDR extension is not present"));
 
-    return FALSE;
-#ifdef HAVE_RANDR
+      return FALSE;
    }
-#endif
 }
 
 void
@@ -1013,12 +962,10 @@ gnome_rr_screen_set_size (GnomeRRScreen *screen,
 {
     g_return_if_fail (GNOME_IS_RR_SCREEN (screen));
 
-#ifdef HAVE_RANDR
     gdk_error_trap_push ();
     XRRSetScreenSize (screen->priv->xdisplay, screen->priv->xroot,
 		      width, height, mm_width, mm_height);
     gdk_error_trap_pop_ignored ();
-#endif
 }
 
 /**
@@ -1080,19 +1027,16 @@ gnome_rr_screen_get_timestamps (GnomeRRScreen *screen,
 
     priv = screen->priv;
 
-#ifdef HAVE_RANDR
     if (change_timestamp_ret)
 	*change_timestamp_ret = priv->info->resources->timestamp;
 
     if (config_timestamp_ret)
 	*config_timestamp_ret = priv->info->resources->configTimestamp;
-#endif
 }
 
 static gboolean
 force_timestamp_update (GnomeRRScreen *screen)
 {
-#ifdef HAVE_RANDR
     GnomeRRScreenPrivate *priv = screen->priv;
     GnomeRRCrtc *crtc;
     XRRCrtcInfo *current_info;
@@ -1135,9 +1079,6 @@ force_timestamp_update (GnomeRRScreen *screen)
 	timestamp_updated = TRUE;
 out:
     return timestamp_updated;
-#else
-    return FALSE;
-#endif
 }
 
 /**
@@ -1424,7 +1365,6 @@ get_property (Display *dpy,
 	      Atom atom,
 	      gsize *len)
 {
-#ifdef HAVE_RANDR
     unsigned char *prop;
     int actual_format;
     unsigned long nitems, bytes_after;
@@ -1451,9 +1391,6 @@ get_property (Display *dpy,
     XFree (prop);
     
     return result;
-#else
-    return NULL;
-#endif /* HAVE_RANDR */
 }
 
 static guint8 *
@@ -1487,7 +1424,6 @@ read_edid_data (GnomeRROutput *output, gsize *len)
 static char *
 get_connector_type_string (GnomeRROutput *output)
 {
-#ifdef HAVE_RANDR
     char *result;
     unsigned char *prop;
     int actual_format;
@@ -1521,15 +1457,11 @@ out:
     XFree (prop);
 
     return result;
-#else
-    return NULL;
-#endif
 }
 
 static void
 update_brightness_limits (GnomeRROutput *output)
 {
-#ifdef HAVE_RANDR
     gint rc;
     Atom atom;
     XRRPropertyInfo *info;
@@ -1563,10 +1495,8 @@ out:
     {
         XFree (info);
     }
-#endif
 }
 
-#ifdef HAVE_RANDR
 static gboolean
 output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **error)
 {
@@ -1646,7 +1576,6 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
 
     return TRUE;
 }
-#endif /* HAVE_RANDR */
 
 static GnomeRROutput*
 output_copy (const GnomeRROutput *from)
@@ -1758,7 +1687,6 @@ gint
 gnome_rr_output_get_backlight (GnomeRROutput *output, GError **error)
 {
     guint now = -1;
-#ifdef HAVE_RANDR
     unsigned long nitems;
     unsigned long bytes_after;
     guint *prop;
@@ -1808,12 +1736,6 @@ gnome_rr_output_get_backlight (GnomeRROutput *output, GError **error)
     }
 out:
     XFree (prop);
-#else
-    g_set_error_literal (error,
-			 GNOME_RR_ERROR,
-			 GNOME_RR_ERROR_NO_RANDR_EXTENSION,
-			 "not compiled with RANDR support");
-#endif /* HAVE_RANDR */
     return now;
 }
 
@@ -1827,7 +1749,6 @@ gboolean
 gnome_rr_output_set_backlight (GnomeRROutput *output, gint value, GError **error)
 {
     gboolean ret = FALSE;
-#ifdef HAVE_RANDR
     Atom atom;
 
     g_return_val_if_fail (output != NULL, FALSE);
@@ -1862,12 +1783,6 @@ gnome_rr_output_set_backlight (GnomeRROutput *output, gint value, GError **error
 
     /* we assume this succeeded as there's no return value */
     ret = TRUE;
-#else
-    g_set_error_literal (error,
-			 GNOME_RR_ERROR,
-			 GNOME_RR_ERROR_NO_RANDR_EXTENSION,
-			 "not compiled with RANDR support");
-#endif /* HAVE_RANDR */
 out:
     return ret;
 }
@@ -2054,11 +1969,7 @@ gnome_rr_output_can_clone (GnomeRROutput *output,
 gboolean
 gnome_rr_output_get_is_primary (GnomeRROutput *output)
 {
-#ifdef HAVE_RANDR
     return output->info->primary == output->id;
-#else
-    return FALSE;
-#endif
 }
 
 void
@@ -2066,13 +1977,11 @@ gnome_rr_screen_set_primary_output (GnomeRRScreen *screen,
                                     GnomeRROutput *output)
 {
     GnomeRRScreenPrivate *priv;
+    RROutput id;
 
     g_return_if_fail (GNOME_IS_RR_SCREEN (screen));
 
     priv = screen->priv;
-
-#if RANDR_LIBRARY_IS_AT_LEAST_1_3
-    RROutput id;
 
     if (output)
         id = output->id;
@@ -2081,7 +1990,6 @@ gnome_rr_screen_set_primary_output (GnomeRRScreen *screen,
 
     if (SERVERS_RANDR_IS_AT_LEAST_1_3 (priv))
         XRRSetOutputPrimary (priv->xdisplay, priv->xroot, id);
-#endif
 }
 
 /* GnomeRRCrtc */
@@ -2142,7 +2050,6 @@ gnome_rr_crtc_set_config_with_time (GnomeRRCrtc      *crtc,
 				    int               n_outputs,
 				    GError          **error)
 {
-#ifdef HAVE_RANDR
     ScreenInfo *info;
     GArray *output_ids;
     Status status;
@@ -2205,9 +2112,6 @@ gnome_rr_crtc_set_config_with_time (GnomeRRCrtc      *crtc,
     }
     
     return result;
-#else
-    return FALSE;
-#endif /* HAVE_RANDR */
 }
 
 GnomeRRMode *
@@ -2326,7 +2230,6 @@ crtc_copy (const GnomeRRCrtc *from)
     return to;
 }
 
-#ifdef HAVE_RANDR
 static gboolean
 crtc_initialize (GnomeRRCrtc        *crtc,
 		 XRRScreenResources *res,
@@ -2395,7 +2298,6 @@ crtc_initialize (GnomeRRCrtc        *crtc,
 
     return TRUE;
 }
-#endif
 
 static void
 crtc_free (GnomeRRCrtc *crtc)
@@ -2445,7 +2347,6 @@ gnome_rr_mode_get_height (GnomeRRMode *mode)
     return mode->height;
 }
 
-#ifdef HAVE_RANDR
 static void
 mode_initialize (GnomeRRMode *mode, XRRModeInfo *info)
 {
@@ -2457,7 +2358,6 @@ mode_initialize (GnomeRRMode *mode, XRRModeInfo *info)
     mode->height = info->height;
     mode->freq = ((info->dotClock / (double)info->hTotal) / info->vTotal + 0.5) * 1000;
 }
-#endif /* HAVE_RANDR */
 
 static GnomeRRMode *
 mode_copy (const GnomeRRMode *from)
@@ -2487,7 +2387,6 @@ gnome_rr_crtc_set_gamma (GnomeRRCrtc *crtc, int size,
 			 unsigned short *green,
 			 unsigned short *blue)
 {
-#ifdef HAVE_RANDR
     int copy_size;
     XRRCrtcGamma *gamma;
 
@@ -2508,7 +2407,6 @@ gnome_rr_crtc_set_gamma (GnomeRRCrtc *crtc, int size,
 
     XRRSetCrtcGamma (DISPLAY (crtc), crtc->id, gamma);
     XRRFreeGamma (gamma);
-#endif /* HAVE_RANDR */
 }
 
 gboolean
@@ -2516,7 +2414,6 @@ gnome_rr_crtc_get_gamma (GnomeRRCrtc *crtc, int *size,
 			 unsigned short **red, unsigned short **green,
 			 unsigned short **blue)
 {
-#ifdef HAVE_RANDR
     int copy_size;
     unsigned short *r, *g, *b;
     XRRCrtcGamma *gamma;
@@ -2553,8 +2450,5 @@ gnome_rr_crtc_get_gamma (GnomeRRCrtc *crtc, int *size,
 	*size = crtc->gamma_size;
 
     return TRUE;
-#else
-    return FALSE;
-#endif /* HAVE_RANDR */
 }
 

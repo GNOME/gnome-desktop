@@ -3,9 +3,7 @@
 
 #include <X11/Xlib.h>
 
-#ifdef HAVE_RANDR
 #include <X11/extensions/Xrandr.h>
-#endif
 
 typedef struct ScreenInfo ScreenInfo;
 
@@ -16,9 +14,7 @@ struct ScreenInfo
     int			min_height;
     int			max_height;
 
-#ifdef HAVE_RANDR
     XRRScreenResources *resources;
-#endif
     
     GnomeRROutput **	outputs;
     GnomeRRCrtc **	crtcs;
@@ -28,9 +24,7 @@ struct ScreenInfo
 
     GnomeRRMode **	clone_modes;
 
-#ifdef HAVE_RANDR
     RROutput            primary;
-#endif
 };
 
 struct GnomeRRScreenPrivate

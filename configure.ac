@@ -113,7 +113,7 @@ dnl it too, or it will never make it into the spec file!
 GDK_PIXBUF_REQUIRED=2.21.3
 GTK_REQUIRED=3.0
 GLIB_REQUIRED=2.19.1
-XRANDR_REQUIRED=1.2
+XRANDR_REQUIRED=1.3
 GSETTINGS_DESKTOP_SCHEMAS_REQUIRED=0.1.4
 XEXT_REQUIRED=1.1
 
@@ -142,26 +142,9 @@ AC_SUBST(X11_PACKAGE)
 AC_SUBST(XLIB_CFLAGS)
 AC_SUBST(XLIB_LIBS)
 
-dnl Checks for X's RANDR extension
-
-AC_MSG_CHECKING(for xrandr)
-if $PKG_CONFIG --atleast-version $XRANDR_REQUIRED xrandr; then
-  AC_MSG_RESULT(yes)
-  AC_DEFINE(HAVE_RANDR, 1,
-            [Define if the xrandr-$XRANDR_REQUIRED library is present])
-  have_randr=yes
-  RANDR_PACKAGE=xrandr
-else
-  AC_MSG_RESULT(no)
-  have_randr=no
-  RANDR_PACKAGE=
-fi
-
-AC_SUBST(RANDR_PACKAGE)
-
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED $RANDR_PACKAGE xext >= $XEXT_REQUIRED)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED xrandr >= $XRANDR_REQUIRED xext >= $XEXT_REQUIRED)
 
 AC_CACHE_CHECK(for timerfd_create(2) system call,
     gnome_cv_timerfd,AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
@@ -241,7 +224,6 @@ echo "
         Build desktop-wide docs:      ${enable_desktop_docs}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
-        XRandr support:               ${have_randr}
         Build gtk-doc documentation:  ${enable_gtk_doc}
 
 "
