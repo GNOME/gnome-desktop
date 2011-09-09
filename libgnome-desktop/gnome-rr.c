@@ -2131,21 +2131,6 @@ xrotation_from_rotation (GnomeRRRotation r)
     return result;
 }
 
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
-gboolean
-gnome_rr_crtc_set_config (GnomeRRCrtc      *crtc,
-			  int               x,
-			  int               y,
-			  GnomeRRMode      *mode,
-			  GnomeRRRotation   rotation,
-			  GnomeRROutput   **outputs,
-			  int               n_outputs,
-			  GError          **error)
-{
-    return gnome_rr_crtc_set_config_with_time (crtc, GDK_CURRENT_TIME, x, y, mode, rotation, outputs, n_outputs, error);
-}
-#endif
-
 gboolean
 gnome_rr_crtc_set_config_with_time (GnomeRRCrtc      *crtc,
 				    guint32           timestamp,
