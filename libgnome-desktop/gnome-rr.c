@@ -1538,10 +1538,11 @@ update_brightness_limits (GnomeRROutput *output)
     atom = XInternAtom (DISPLAY (output), "BACKLIGHT", FALSE);
     info = XRRQueryOutputProperty (DISPLAY (output), output->id, atom);
     rc = gdk_error_trap_pop ();
-    if (rc != 0)
+    if (rc != Success)
     {
-        g_warning ("could not get output property for %s, rc: %i",
-		   output->name, rc);
+        if (rc != BadName)
+          g_warning ("could not get output property for %s, rc: %i",
+		     output->name, rc);
         goto out;
     }
     if (info == NULL)
