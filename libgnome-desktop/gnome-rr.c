@@ -1558,7 +1558,10 @@ update_brightness_limits (GnomeRROutput *output)
     output->backlight_min = info->values[0];
     output->backlight_max = info->values[1];
 out:
-    XFree (info);
+    if (info != NULL)
+    {
+        XFree (info);
+    }
 #endif
 }
 
