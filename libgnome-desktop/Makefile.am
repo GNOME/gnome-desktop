@@ -24,6 +24,7 @@ introspection_sources = 		\
 	gnome-rr-config.c		\
 	gnome-rr-output-info.c		\
 	gnome-rr-labeler.c		\
+	gnome-pnp-ids.c			\
 	gnome-wall-clock.c		\
 	edid-parse.c
 
@@ -57,6 +58,7 @@ libgnome_desktop_HEADERS = \
         gnome-rr.h                      \
         gnome-rr-config.h               \
         gnome-rr-labeler.h		\
+        gnome-pnp-ids.h			\
         gnome-wall-clock.h
 
 if USE_INTERNAL_PNP_IDS
