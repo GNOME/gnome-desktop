@@ -29,7 +29,6 @@ static void     gnome_pnp_ids_finalize     (GObject     *object);
 
 struct _GnomePnpIdsPrivate
 {
-        gchar                           *data_dir;
         gchar                           *table_data;
         GHashTable                      *pnp_table;
 };
@@ -313,7 +312,6 @@ gnome_pnp_ids_finalize (GObject *object)
         GnomePnpIds *pnp_ids = GNOME_PNP_IDS (object);
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
 
-        g_free (priv->data_dir);
         g_free (priv->table_data);
         g_hash_table_unref (priv->pnp_table);
 
