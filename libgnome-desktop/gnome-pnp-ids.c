@@ -196,17 +196,14 @@ static const struct Vendor vendors[] =
 static gboolean
 gnome_pnp_ids_load (GnomePnpIds *pnp_ids, GError **error)
 {
-        gboolean ret;
-        gchar *filename = NULL;
         gchar *retval = NULL;
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
         guint i;
 
         /* load the contents */
         g_debug ("loading: %s", PNP_IDS);
-        ret = g_file_get_contents (PNP_IDS, &priv->table_data, NULL, error);
-        if (!ret)
-                goto out;
+        if (g_file_get_contents (PNP_IDS, &priv->table_data, NULL, error) == FALSE)
+                return FALSE;
 
         /* parse into lines */
         retval = priv->table_data;
@@ -228,9 +225,8 @@ gnome_pnp_ids_load (GnomePnpIds *pnp_ids, GError **error)
                         retval = &priv->table_data[i+1];
                 }
         }
-out:
-        g_free (filename);
-        return ret;
+
+        return TRUE;
 }
 
 static const char *
