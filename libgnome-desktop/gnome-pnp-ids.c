@@ -221,11 +221,13 @@ gnome_pnp_ids_load (GnomePnpIds *pnp_ids, GError **error)
                 priv->table_data[i] = '\0';
 
                 /* the ID to text is a fixed offset */
-                retval[3] = '\0';
-                g_hash_table_insert (priv->pnp_table,
-                                     retval,
-                                     retval+4);
-                retval = &priv->table_data[i+1];
+                if (retval[0] && retval[1] && retval[2] && retval[3] == '\t' && retval[4]) {
+                        retval[3] = '\0';
+                        g_hash_table_insert (priv->pnp_table,
+                                             retval,
+                                             retval+4);
+                        retval = &priv->table_data[i+1];
+                }
         }
 out:
         g_free (filename);
