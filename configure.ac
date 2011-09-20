@@ -86,7 +86,7 @@ fi
 # Should we build shared desktop docs? Useful for people who
 # need to build two gnome-desktop using two different versions of GTK+
 AC_ARG_ENABLE([desktop-docs],
-	[AS_HELP_STRING([--disable-desktop-docs],[don't build desktop-wide help documents])],
+	[AS_HELP_STRING([--disable-desktop-docs],[do not build desktop-wide help documents])],
 	[],[enable_desktop_docs=yes])
 AM_CONDITIONAL(DESKTOP_DOCS_ENABLED, test "x$enable_desktop_docs" = "xyes")
 
