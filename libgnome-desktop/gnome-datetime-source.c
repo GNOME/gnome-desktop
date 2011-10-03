@@ -57,8 +57,10 @@ static gboolean
 g_datetime_source_is_expired (GDateTimeSource *datetime_source)
 {
 	gint64 real_now;
+	gint64 monotonic_now;
 
 	real_now = g_get_real_time ();
+	monotonic_now = g_source_get_time ((GSource*)datetime_source);
 
 	if (datetime_source->initially_expired)
 		return TRUE;
@@ -66,10 +68,11 @@ g_datetime_source_is_expired (GDateTimeSource *datetime_source)
 	if (datetime_source->real_expiration <= real_now)
 		return TRUE;
 
-	/* We can't really detect without system support when things change;
-	 * so just trigger every second.
+	/* We can't really detect without system support when things
+	 * change; so just trigger every second (i.e. our wakeup
+	 * expiration)
 	 */
-	if (datetime_source->cancel_on_set)
+	if (datetime_source->cancel_on_set && monotonic_now >= datetime_source->wakeup_expiration)
 		return TRUE;
 
 	return FALSE;
