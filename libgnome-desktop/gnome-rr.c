@@ -1176,6 +1176,8 @@ out:
 
 /**
  * gnome_rr_screen_set_dpms_mode:
+ *
+ * This method also disables the DPMS timeouts.
  **/
 gboolean
 gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
@@ -1227,6 +1229,21 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
                              "Could not change DPMS mode");
         goto out;
     }
+
+    gdk_error_trap_push ();
+    ret = DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
+    if (gdk_error_trap_pop ())
+        ret = FALSE;
+
+    if (!ret) {
+        ret = FALSE;
+        g_set_error_literal (error,
+                             GNOME_RR_ERROR,
+                             GNOME_RR_ERROR_UNKNOWN,
+                             "Could not set DPMS timeouts");
+        goto out;
+    }
+
 out:
     return ret;
 }
