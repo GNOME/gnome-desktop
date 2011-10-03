@@ -1186,6 +1186,7 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
 {
     CARD16 state = 0;
     gboolean ret;
+    gint rc;
     GnomeRRDpmsMode current_mode;
 
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -1216,12 +1217,11 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
     }
 
     gdk_error_trap_push ();
-    ret = DPMSForceLevel (screen->priv->xdisplay, state);
-    gdk_flush ();
+    rc = DPMSForceLevel (screen->priv->xdisplay, state);
     if (gdk_error_trap_pop ())
         ret = FALSE;
 
-    if (!ret) {
+    if (!ret || rc != Success) {
         ret = FALSE;
         g_set_error_literal (error,
                              GNOME_RR_ERROR,
@@ -1231,11 +1231,11 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
     }
 
     gdk_error_trap_push ();
-    ret = DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
+    rc = DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
     if (gdk_error_trap_pop ())
         ret = FALSE;
 
-    if (!ret) {
+    if (!ret || rc != Success) {
         ret = FALSE;
         g_set_error_literal (error,
                              GNOME_RR_ERROR,
