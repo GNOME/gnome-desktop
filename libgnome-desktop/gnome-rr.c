@@ -1240,24 +1240,17 @@ static gboolean
 gnome_rr_screen_clear_dpms_timeouts (GnomeRRScreen *screen,
                                      GError **error)
 {
-    gboolean ret = TRUE;
-    gint rc;
-
     gdk_error_trap_push ();
-    rc = DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
-    if (gdk_error_trap_pop ())
-        ret = FALSE;
-
-    if (!ret || rc != Success) {
-        ret = FALSE;
+    /* DPMSSetTimeouts() return value is often a lie, so ignore it */
+    DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
+    if (gdk_error_trap_pop ()) {
         g_set_error_literal (error,
                              GNOME_RR_ERROR,
                              GNOME_RR_ERROR_UNKNOWN,
                              "Could not set DPMS timeouts");
-        goto out;
+        return FALSE;
     }
-out:
-    return ret;
+    return TRUE;
 }
 
 /**
@@ -1272,7 +1265,6 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
 {
     CARD16 state = 0;
     gboolean ret;
-    gint rc;
     GnomeRRDpmsMode current_mode;
 
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -1305,30 +1297,14 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
     }
 
     gdk_error_trap_push ();
-    rc = DPMSForceLevel (screen->priv->xdisplay, state);
-    if (gdk_error_trap_pop ())
-        ret = FALSE;
-
-    if (!ret || rc != Success) {
+    /* DPMSForceLevel() return value is often a lie, so ignore it */
+    DPMSForceLevel (screen->priv->xdisplay, state);
+    if (gdk_error_trap_pop ()) {
         ret = FALSE;
         g_set_error_literal (error,
                              GNOME_RR_ERROR,
                              GNOME_RR_ERROR_UNKNOWN,
                              "Could not change DPMS mode");
-        goto out;
-    }
-
-    gdk_error_trap_push ();
-    rc = DPMSSetTimeouts (screen->priv->xdisplay, 0, 0, 0);
-    if (gdk_error_trap_pop ())
-        ret = FALSE;
-
-    if (!ret || rc != Success) {
-        ret = FALSE;
-        g_set_error_literal (error,
-                             GNOME_RR_ERROR,
-                             GNOME_RR_ERROR_UNKNOWN,
-                             "Could not set DPMS timeouts");
         goto out;
     }
 
