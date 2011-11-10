@@ -1330,20 +1330,15 @@ gnome_rr_config_apply_with_time (GnomeRRConfig *config,
  * @timestamp: X server timestamp from the event that causes the screen configuration to change (a user's button press, for example)
  * @error: Location to store error, or %NULL
  *
- * First, this function refreshes the @screen to match the current RANDR
- * configuration from the X server.  Then, it tries to load the file in
- * @filename and looks for suitable matching RANDR configurations in the file;
- * if one is found, that configuration will be applied to the current set of
- * RANDR outputs.
+ * Loads the file in @filename and looks for suitable matching RANDR
+ * configurations in the file; if one is found, that configuration will be
+ * applied to the current set of RANDR outputs.
  *
  * Typically, @filename is the result of gnome_rr_config_get_intended_filename() or
  * gnome_rr_config_get_backup_filename().
  *
  * Returns: TRUE if the RANDR configuration was loaded and applied from
- * $(XDG_CONFIG_HOME)/monitors.xml, or FALSE otherwise:
- *
- * If the current RANDR configuration could not be refreshed, the @error will
- * have a domain of #GNOME_RR_ERROR and a corresponding error code.
+ * the specified file, or FALSE otherwise:
  *
  * If the file in question is loaded successfully but the configuration cannot
  * be applied, the @error will have a domain of #GNOME_RR_ERROR.  Note that an
@@ -1360,21 +1355,10 @@ gboolean
 gnome_rr_config_apply_from_filename_with_time (GnomeRRScreen *screen, const char *filename, guint32 timestamp, GError **error)
 {
     GnomeRRConfig *stored;
-    GError *my_error;
 
     g_return_val_if_fail (GNOME_IS_RR_SCREEN (screen), FALSE);
     g_return_val_if_fail (filename != NULL, FALSE);
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-    my_error = NULL;
-    if (!gnome_rr_screen_refresh (screen, &my_error)) {
-	    if (my_error) {
-		    g_propagate_error (error, my_error);
-		    return FALSE; /* This is a genuine error */
-	    }
-
-	    /* This means the screen didn't change, so just proceed */
-    }
 
     stored = g_object_new (GNOME_TYPE_RR_CONFIG, "screen", screen, NULL);
 
