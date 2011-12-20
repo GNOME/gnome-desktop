@@ -12,7 +12,7 @@ AC_INIT([gnome-desktop], gnome_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop])
 AC_CONFIG_SRCDIR([libgnome-desktop])
 
-AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2 tar-ustar])
+AM_INIT_AUTOMAKE([1.11 foreign no-dist-gzip dist-xz tar-ustar])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 AC_CONFIG_HEADERS([config.h])
