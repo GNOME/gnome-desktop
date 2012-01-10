@@ -935,6 +935,15 @@ gnome_rr_screen_init (GnomeRRScreen *self)
     priv->rr_minor_version = 0;
 }
 
+/* Weak reference callback set in gnome_rr_screen_new(); we remove the GObject data from the GdkScreen. */
+static void
+rr_screen_weak_notify_cb (gpointer data, GObject *where_the_object_was)
+{
+    GdkScreen *screen = GDK_SCREEN (data);
+
+    g_object_set_data (G_OBJECT (screen), "GnomeRRScreen", NULL);
+}
+
 /**
  * gnome_rr_screen_new:
  * Creates a new #GnomeRRScreen instance
@@ -949,8 +958,25 @@ GnomeRRScreen *
 gnome_rr_screen_new (GdkScreen *screen,
 		     GError **error)
 {
-    _gnome_desktop_init_i18n ();
-    return g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-screen", screen, NULL);
+    GnomeRRScreen *rr_screen;
+
+    g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+    rr_screen = g_object_get_data (G_OBJECT (screen), "GnomeRRScreen");
+    if (rr_screen)
+	g_object_ref (rr_screen);
+    else {
+	_gnome_desktop_init_i18n ();
+
+	rr_screen = g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-screen", screen, NULL);
+	if (rr_screen) {
+	    g_object_set_data (G_OBJECT (screen), "GnomeRRScreen", rr_screen);
+	    g_object_weak_ref (G_OBJECT (rr_screen), rr_screen_weak_notify_cb, screen);
+	}
+    }
+
+    return rr_screen;
 }
 
 void
