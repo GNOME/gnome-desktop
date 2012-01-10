@@ -946,13 +946,14 @@ rr_screen_weak_notify_cb (gpointer data, GObject *where_the_object_was)
 
 /**
  * gnome_rr_screen_new:
- * Creates a new #GnomeRRScreen instance
+ * Creates a unique #GnomeRRScreen instance for the specified @screen.
  *
  * @screen: the #GdkScreen on which to operate
  * @error: will be set if XRandR is not supported
  *
- * Returns: a new #GnomeRRScreen instance or NULL if screen could not be created,
- * for instance if the driver does not support Xrandr 1.2
+ * Returns: a unique #GnomeRRScreen instance, specific to the @screen, or NULL
+ * if this could not be created, for instance if the driver does not support
+ * Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.
  */
 GnomeRRScreen *
 gnome_rr_screen_new (GdkScreen *screen,
