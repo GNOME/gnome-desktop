@@ -305,7 +305,7 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
 	/* Filename */
 	filename = NULL;
 	tmp = g_settings_get_string (settings, BG_KEY_PICTURE_URI);
-	if (*tmp != '\0') {
+	if (tmp && *tmp != '\0') {
 		filename = g_filename_from_uri (tmp, NULL, NULL);
 		if (filename != NULL && g_file_test (filename, G_FILE_TEST_EXISTS) == FALSE) {
 			g_free (filename);
