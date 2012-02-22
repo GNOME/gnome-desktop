@@ -44,4 +44,5 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/m4/gtk-doc.m4 \
 	$(srcdir)/m4/intltool.m4
 
+GITIGNOREFILES = $(PACKAGE)-\*.tar.{gz,bz2,xz}
 -include $(top_srcdir)/git.mk
