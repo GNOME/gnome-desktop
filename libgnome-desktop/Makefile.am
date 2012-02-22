@@ -39,7 +39,8 @@ libgnome_desktop_3_la_SOURCES = 	\
 libgnome_desktop_3_la_LIBADD =	\
 	$(XLIB_LIBS)		\
 	$(LIBM)			\
-	$(GNOME_DESKTOP_LIBS)
+	$(GNOME_DESKTOP_LIBS)	\
+	-lrt
 
 libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \
