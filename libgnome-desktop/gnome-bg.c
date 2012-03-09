@@ -127,6 +127,8 @@ enum {
 	N_SIGNALS
 };
 
+static const cairo_user_data_key_t average_color_key;
+
 static guint signals[N_SIGNALS] = { 0 };
 
 G_DEFINE_TYPE (GnomeBG, gnome_bg, G_TYPE_OBJECT)
@@ -1072,6 +1074,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 {
 	int pm_width, pm_height;
 	cairo_surface_t *surface;
+	GdkRGBA average;
 	cairo_t *cr;
 	
 	g_return_val_if_fail (bg != NULL, NULL);
@@ -1100,6 +1103,10 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	cr = cairo_create (surface);
 	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		gdk_cairo_set_source_color (cr, &(bg->primary));
+		average.red = bg->primary.red / 255.0;
+		average.green = bg->primary.green / 255.0;
+		average.blue = bg->primary.blue / 255.0;
+		average.alpha = 1.0;
 	}
 	else {
 		GdkPixbuf *pixbuf;
@@ -1108,12 +1115,17 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 					 width, height);
 		gnome_bg_draw (bg, pixbuf, gdk_window_get_screen (window), is_root);
 		gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+		pixbuf_average_value (pixbuf, &average);
 		g_object_unref (pixbuf);
 	}
 
 	cairo_paint (cr);
 	
 	cairo_destroy (cr);
+
+	cairo_surface_set_user_data (surface, &average_color_key,
+	                             gdk_rgba_copy (&average),
+	                             (cairo_destroy_func_t) gdk_rgba_free);
 
 	return surface;
 }
@@ -1439,6 +1451,7 @@ gnome_bg_set_root_pixmap_id (GdkScreen       *screen,
 	Atom     type;
 	Display *display;
 	int      screen_num;
+	GdkRGBA *average;
 
 	screen_num = gdk_screen_get_number (screen);
 	data_esetroot = NULL;
@@ -1474,6 +1487,33 @@ gnome_bg_set_root_pixmap_id (GdkScreen       *screen,
 			 gdk_x11_get_xatom_by_name ("_XROOTPMAP_ID"), XA_PIXMAP,
 			 32, PropModeReplace,
 			 (guchar *) &pixmap_id, 1);
+
+	average = cairo_surface_get_user_data (surface, &average_color_key);
+	if (average != NULL) {
+		gchar *string;
+
+		string = gdk_rgba_to_string (average);
+
+		/* X encodes string lists as one big string with a nul
+		 * terminator after each item in the list.  That's why
+		 * the strlen has to be given; scanning for nul would
+		 * only find the first item.
+		 *
+		 * For now, we only want to set a single string.
+		 * Fortunately, since this is C, it comes with its own
+		 * nul and we can just give strlen + 1 for the size of
+		 * our "list".
+		 */
+		XChangeProperty (display, RootWindow (display, screen_num),
+		                 gdk_x11_get_xatom_by_name ("_GNOME_BACKGROUND_REPRESENTATIVE_COLORS"),
+		                 XA_STRING, 8, PropModeReplace,
+		                 (guchar *) string, strlen (string) + 1);
+		g_free (string);
+	} else {
+		/* Could happen if we didn't create the surface... */
+		XDeleteProperty (display, RootWindow (display, screen_num),
+		                 gdk_x11_get_xatom_by_name ("_GNOME_BACKGROUND_REPRESENTATIVE_COLORS"));
+	}
 }
 
 /**
