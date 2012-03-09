@@ -136,7 +136,8 @@ static cairo_surface_t *make_root_pixmap     (GdkScreen  *screen,
                                               gint        height);
 
 /* Pixbuf utils */
-static guint32    pixbuf_average_value (GdkPixbuf  *pixbuf);
+static void       pixbuf_average_value (GdkPixbuf  *pixbuf,
+                                        GdkRGBA    *result);
 static GdkPixbuf *pixbuf_scale_to_fit  (GdkPixbuf  *src,
 					int         max_width,
 					int         max_height);
@@ -1141,11 +1142,13 @@ gnome_bg_is_dark (GnomeBG *bg,
 	}
 	pixbuf = get_pixbuf_for_size (bg, -1, width, height);
 	if (pixbuf) {
-		guint32 argb = pixbuf_average_value (pixbuf);
-		guchar a = (argb >> 24) & 0xff;
-		guchar r = (argb >> 16) & 0xff;
-		guchar g = (argb >>  8) & 0xff;
-		guchar b = (argb >>  0) & 0xff;
+		GdkRGBA argb;
+
+		pixbuf_average_value (pixbuf, &argb);
+		guchar a = argb.alpha * 0xff;
+		guchar r = argb.red * 0xff;
+		guchar g = argb.green * 0xff;
+		guchar b = argb.blue * 0xff;
 		
 		color.red = (color.red * (0xFF - a) + r * 0x101 * a) / 0xFF;
 		color.green = (color.green * (0xFF - a) + g * 0x101 * a) / 0xFF;
@@ -2318,8 +2321,9 @@ clear_cache (GnomeBG *bg)
 }
 
 /* Pixbuf utilities */
-static guint32
-pixbuf_average_value (GdkPixbuf *pixbuf)
+static void
+pixbuf_average_value (GdkPixbuf *pixbuf,
+                      GdkRGBA   *result)
 {
 	guint64 a_total, r_total, g_total, b_total;
 	guint row, column;
@@ -2328,6 +2332,7 @@ pixbuf_average_value (GdkPixbuf *pixbuf)
 	int r, g, b, a;
 	guint64 dividend;
 	guint width, height;
+	gdouble dd;
 	
 	width = gdk_pixbuf_get_width (pixbuf);
 	height = gdk_pixbuf_get_height (pixbuf);
@@ -2373,11 +2378,12 @@ pixbuf_average_value (GdkPixbuf *pixbuf)
 		dividend = height * width;
 		a_total = dividend * 0xFF;
 	}
-	
-	return ((a_total + dividend / 2) / dividend) << 24
-		| ((r_total + dividend / 2) / dividend) << 16
-		| ((g_total + dividend / 2) / dividend) << 8
-		| ((b_total + dividend / 2) / dividend);
+
+	dd = dividend * 0xFF;
+	result->alpha = a_total / dd;
+	result->red = r_total / dd;
+	result->green = g_total / dd;
+	result->blue = b_total / dd;
 }
 
 static GdkPixbuf *
