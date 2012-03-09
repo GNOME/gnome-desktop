@@ -52,6 +52,7 @@ typedef struct {
 
 typedef enum
 {
+    GNOME_RR_ROTATION_NEXT =	0,
     GNOME_RR_ROTATION_0 =	(1 << 0),
     GNOME_RR_ROTATION_90 =	(1 << 1),
     GNOME_RR_ROTATION_180 =	(1 << 2),
