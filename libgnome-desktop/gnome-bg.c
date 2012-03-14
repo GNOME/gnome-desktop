@@ -764,8 +764,7 @@ draw_color_area (GnomeBG *bg,
 
 static void
 draw_color (GnomeBG *bg,
-	    GdkPixbuf *dest,
-	    GdkScreen *screen)
+	    GdkPixbuf *dest)
 {
 	GdkRectangle rect;
 	rect.x = 0;
@@ -928,8 +927,7 @@ draw_image_for_thumb (GnomeBG       *bg,
 
 static void
 draw_once (GnomeBG   *bg,
-	   GdkPixbuf *dest,
-	   GdkScreen *screen)
+	   GdkPixbuf *dest)
 {
 	GdkRectangle rect;
 	GdkPixbuf   *pixbuf;
@@ -993,9 +991,9 @@ gnome_bg_draw (GnomeBG *bg,
 			draw_each_monitor (bg, dest, screen);
 		}
 	} else {
-		draw_color (bg, dest, screen);
+		draw_color (bg, dest);
 		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_once (bg, dest, screen);
+			draw_once (bg, dest);
 		}
 	}
 }
@@ -1323,7 +1321,7 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	
 	result = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, dest_width, dest_height);
 	
-	draw_color (bg, result, screen);
+	draw_color (bg, result);
 	
 	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
 		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
@@ -3123,7 +3121,7 @@ gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 
 	result = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, dest_width, dest_height);
 
-	draw_color (bg, result, screen);
+	draw_color (bg, result);
 
 	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
 		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
