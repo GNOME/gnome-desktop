@@ -106,4 +106,15 @@ EXTRA_DIST = \
 MAINTAINERCLEANFILES = \
 	pnp.ids
 
+libexec_PROGRAMS =		\
+	gnome-rr-debug
+
+gnome_rr_debug_SOURCES =	\
+	gnome-rr-debug.c
+
+gnome_rr_debug_LDADD =		\
+	$(GNOME_DESKTOP_LIBS)	\
+	$(lib_LTLIBRARIES)	\
+	$(XLIB_LIBS)
+
 -include $(top_srcdir)/git.mk
