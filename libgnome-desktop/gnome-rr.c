@@ -1907,7 +1907,8 @@ gnome_rr_output_is_laptop (GnomeRROutput *output)
 	    strstr (output->name, "Lvds") ||
 	    strstr (output->name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
 	    strstr (output->name, "eDP")  ||  /* eDP is for internal laptop panel connections */
-	    strstr (output->name, "DFP")))    /* DFP is also an internal laptop display */
+	    strstr (output->name, "DFP")  ||  /* DFP is also an internal laptop display */
+	    strstr (output->name, "default"))) /* Finally, NVidia and all others that don't bother to do RANDR properly */
 	return TRUE;
 
     return FALSE;
