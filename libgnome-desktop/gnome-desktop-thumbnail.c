@@ -841,8 +841,8 @@ gnome_desktop_thumbnail_factory_lookup (GnomeDesktopThumbnailFactory *factory,
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
   
-  path = g_build_filename (g_get_home_dir (),
-			   ".thumbnails",
+  path = g_build_filename (g_get_user_cache_dir (),
+			   "thumbnails",
 			   (priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			   file,
 			   NULL);
@@ -902,8 +902,8 @@ gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (GnomeDesktopThumbnai
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
 
-  path = g_build_filename (g_get_home_dir (),
-			   ".thumbnails/fail",
+  path = g_build_filename (g_get_user_cache_dir (),
+			   "thumbnails/fail",
 			   appname,
 			   file,
 			   NULL);
@@ -998,7 +998,7 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
   /* Don't thumbnail thumbnails */
   if (uri &&
       strncmp (uri, "file:/", 6) == 0 &&
-      strstr (uri, "/.thumbnails/") != NULL)
+      strstr (uri, "/thumbnails/") != NULL)
     return FALSE;
   
   if (!mime_type)
@@ -1244,8 +1244,8 @@ make_thumbnail_dirs (GnomeDesktopThumbnailFactory *factory)
 
   res = FALSE;
 
-  thumbnail_dir = g_build_filename (g_get_home_dir (),
-				    ".thumbnails",
+  thumbnail_dir = g_build_filename (g_get_user_cache_dir (),
+				    "thumbnails",
 				    NULL);
   if (!g_file_test (thumbnail_dir, G_FILE_TEST_IS_DIR))
     {
@@ -1278,8 +1278,8 @@ make_thumbnail_fail_dirs (GnomeDesktopThumbnailFactory *factory)
 
   res = FALSE;
 
-  thumbnail_dir = g_build_filename (g_get_home_dir (),
-				    ".thumbnails",
+  thumbnail_dir = g_build_filename (g_get_user_cache_dir (),
+				    "thumbnails",
 				    NULL);
   if (!g_file_test (thumbnail_dir, G_FILE_TEST_IS_DIR))
     {
@@ -1352,8 +1352,8 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
 
-  path = g_build_filename (g_get_home_dir (),
-			   ".thumbnails",
+  path = g_build_filename (g_get_user_cache_dir (),
+			   "thumbnails",
 			   (priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			   file,
 			   NULL);
@@ -1456,8 +1456,8 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
 
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
 
-  path = g_build_filename (g_get_home_dir (),
-			   ".thumbnails/fail",
+  path = g_build_filename (g_get_user_cache_dir (),
+			   "thumbnails/fail",
 			   appname,
 			   file,
 			   NULL);
@@ -1547,8 +1547,8 @@ gnome_desktop_thumbnail_path_for_uri (const char         *uri,
   file = g_strconcat (md5, ".png", NULL);
   g_free (md5);
   
-  path = g_build_filename (g_get_home_dir (),
-			   ".thumbnails",
+  path = g_build_filename (g_get_user_cache_dir (),
+			   "thumbnails",
 			   (size == GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			   file,
 			   NULL);
