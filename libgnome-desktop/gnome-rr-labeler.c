@@ -234,9 +234,10 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 	rgba = g_object_get_data (G_OBJECT (widget), "rgba");
 	gtk_widget_get_allocation (widget, &allocation);
 
-	/* edge outline */
+	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-	cairo_set_source_rgb (cr, 0, 0, 0);
+	/* edge outline */
+	cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
 	cairo_rectangle (cr,
 			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
 			 LABEL_WINDOW_EDGE_THICKNESS / 2.0,
@@ -246,7 +247,7 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 	cairo_stroke (cr);
 
 	/* fill */
-
+	rgba->alpha = 0.75;
 	gdk_cairo_set_source_rgba (cr, rgba);
 	cairo_rectangle (cr,
 			 LABEL_WINDOW_EDGE_THICKNESS,
@@ -298,9 +299,18 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA
 	const char *display_name;
 	GdkRGBA black = { 0, 0, 0, 1.0 };
 	int x, y;
+	GdkScreen *screen;
+	GdkVisual *visual;
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
+	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
 	gtk_widget_set_app_paintable (window, TRUE);
+	screen = gtk_widget_get_screen (window);
+	visual = gdk_screen_get_rgba_visual (screen);
+
+	if (visual != NULL)
+		gtk_widget_set_visual (window, visual);
 
 	gtk_container_set_border_width (GTK_CONTAINER (window), LABEL_WINDOW_PADDING + LABEL_WINDOW_EDGE_THICKNESS);
 
