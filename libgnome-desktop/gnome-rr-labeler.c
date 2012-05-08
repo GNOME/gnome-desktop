@@ -278,6 +278,17 @@ position_window (GnomeRRLabeler  *labeler,
 	gtk_window_move (GTK_WINDOW (window), workarea.x, workarea.y);
 }
 
+static void
+label_window_realize_cb (GtkWidget *widget)
+{
+	cairo_region_t *region;
+
+	/* make the whole window ignore events */
+	region = cairo_region_create ();
+	gtk_widget_input_shape_combine_region (widget, region);
+	cairo_region_destroy (region);
+}
+
 static GtkWidget *
 create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba)
 {
@@ -301,6 +312,8 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA
 
 	g_signal_connect (window, "draw",
 			  G_CALLBACK (label_window_draw_event_cb), labeler);
+	g_signal_connect (window, "realize",
+			  G_CALLBACK (label_window_realize_cb), labeler);
 
 	if (gnome_rr_config_get_clone (labeler->priv->config)) {
 		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
