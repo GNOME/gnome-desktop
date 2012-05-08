@@ -44,7 +44,7 @@ struct _GnomeRRLabelerPrivate {
 
 	int num_outputs;
 
-	GdkColor *palette;
+	GdkRGBA *palette;
 	GtkWidget **windows;
 
 	GdkScreen  *screen;
@@ -200,7 +200,7 @@ make_palette (GnomeRRLabeler *labeler)
 
 	g_assert (labeler->priv->num_outputs > 0);
 
-	labeler->priv->palette = g_new (GdkColor, labeler->priv->num_outputs);
+	labeler->priv->palette = g_new (GdkRGBA, labeler->priv->num_outputs);
 
 	start_hue = 0.0; /* red */
 	end_hue   = 2.0/3; /* blue */
@@ -215,9 +215,10 @@ make_palette (GnomeRRLabeler *labeler)
 
 		gtk_hsv_to_rgb (h, s, v, &r, &g, &b);
 
-		labeler->priv->palette[i].red   = (int) (65535 * r + 0.5);
-		labeler->priv->palette[i].green = (int) (65535 * g + 0.5);
-		labeler->priv->palette[i].blue  = (int) (65535 * b + 0.5);
+		labeler->priv->palette[i].red   = r;
+		labeler->priv->palette[i].green = g;
+		labeler->priv->palette[i].blue  = b;
+		labeler->priv->palette[i].alpha  = 1.0;
 	}
 }
 
@@ -227,10 +228,10 @@ make_palette (GnomeRRLabeler *labeler)
 static gboolean
 label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-	GdkColor *color;
+	GdkRGBA *rgba;
 	GtkAllocation allocation;
 
-	color = g_object_get_data (G_OBJECT (widget), "color");
+	rgba = g_object_get_data (G_OBJECT (widget), "rgba");
 	gtk_widget_get_allocation (widget, &allocation);
 
 	/* edge outline */
@@ -246,7 +247,7 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 
 	/* fill */
 
-	gdk_cairo_set_source_color (cr, color);
+	gdk_cairo_set_source_rgba (cr, rgba);
 	cairo_rectangle (cr,
 			 LABEL_WINDOW_EDGE_THICKNESS,
 			 LABEL_WINDOW_EDGE_THICKNESS,
@@ -278,14 +279,14 @@ position_window (GnomeRRLabeler  *labeler,
 }
 
 static GtkWidget *
-create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColor *color)
+create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba)
 {
 	GtkWidget *window;
 	GtkWidget *widget;
 	char *str;
 	const char *display_name;
-	GdkColor black = { 0, 0, 0, 0 };
-	int x,y;
+	GdkRGBA black = { 0, 0, 0, 1.0 };
+	int x, y;
 
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_set_app_paintable (window, TRUE);
@@ -296,7 +297,7 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColo
 	 * array.  Note that in gnome_rr_labeler_finalize(), we are careful to
 	 * free the palette only after we free the windows.
 	 */
-	g_object_set_data (G_OBJECT (window), "color", color);
+	g_object_set_data (G_OBJECT (window), "rgba", rgba);
 
 	g_signal_connect (window, "draw",
 			  G_CALLBACK (label_window_draw_event_cb), labeler);
@@ -322,7 +323,9 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColo
 	 * theme's colors, since the label is always shown against a light
 	 * pastel background.  See bgo#556050
 	 */
-	gtk_widget_modify_fg (widget, gtk_widget_get_state (widget), &black);
+	gtk_widget_override_color (widget,
+				   gtk_widget_get_state_flags (widget),
+				   &black);
 
 	gtk_container_add (GTK_CONTAINER (window), widget);
 
@@ -428,34 +431,35 @@ gnome_rr_labeler_hide (GnomeRRLabeler *labeler)
 }
 
 /**
- * gnome_rr_labeler_get_color_for_output:
+ * gnome_rr_labeler_get_rgba_for_output:
  * Get the color used for the label on a given output (monitor).
  *
  * @labeler: A #GnomeRRLabeler
  * @output: Output device (i.e. monitor) to query
- * @color_out: (out): Color of selected monitor.
+ * @rgba_out: (out): Color of selected monitor.
  */
 void
-gnome_rr_labeler_get_color_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColor *color_out)
+gnome_rr_labeler_get_rgba_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba_out)
 {
 	int i;
 	GnomeRROutputInfo **outputs;
 
 	g_return_if_fail (GNOME_IS_RR_LABELER (labeler));
 	g_return_if_fail (GNOME_IS_RR_OUTPUT_INFO (output));
-	g_return_if_fail (color_out != NULL);
+	g_return_if_fail (rgba_out != NULL);
 
 	outputs = gnome_rr_config_get_outputs (labeler->priv->config);
 
 	for (i = 0; i < labeler->priv->num_outputs; i++)
 		if (outputs[i] == output) {
-			*color_out = labeler->priv->palette[i];
+			*rgba_out = labeler->priv->palette[i];
 			return;
 		}
 
 	g_warning ("trying to get the color for unknown GnomeOutputInfo %p; returning magenta!", output);
 
-	color_out->red   = 0xffff;
-	color_out->green = 0;
-	color_out->blue  = 0xffff;
+	rgba_out->red   = 1.0;
+	rgba_out->green = 0;
+	rgba_out->blue  = 1.0;
+	rgba_out->alpha  = 1.0;
 }

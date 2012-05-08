@@ -62,6 +62,6 @@ void gnome_rr_labeler_show (GnomeRRLabeler *labeler);
 
 void gnome_rr_labeler_hide (GnomeRRLabeler *labeler);
 
-void gnome_rr_labeler_get_color_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkColor *color_out);
+void gnome_rr_labeler_get_rgba_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba_out);
 
 #endif
