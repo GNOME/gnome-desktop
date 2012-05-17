@@ -49,11 +49,35 @@ find_vendor (const char *code)
     return code;
 }
 
+static const double known_diagonals[] = {
+    12.1,
+    13.3,
+    15.6
+};
+
+static char *
+diagonal_to_str (double d)
+{
+    int i;
+
+    for (i = 0; i < G_N_ELEMENTS (known_diagonals); i++)
+    {
+        double delta;
+
+        delta = fabs(known_diagonals[i] - d);
+        if (delta < 0.1)
+            return g_strdup_printf ("%0.1lf\"", known_diagonals[i]);
+    }
+
+    return g_strdup_printf ("%d\"", (int) (d + 0.5));
+}
+
 char *
 make_display_name (const MonitorInfo *info)
 {
     const char *vendor;
-    int width_mm, height_mm, inches;
+    int width_mm, height_mm;
+    char *inches, *ret;
 
     if (info)
     {
@@ -87,15 +111,18 @@ make_display_name (const MonitorInfo *info)
     {
 	double d = sqrt (width_mm * width_mm + height_mm * height_mm);
 
-	inches = (int)(d / 25.4 + 0.5);
+	inches = diagonal_to_str (d / 25.4);
     }
     else
     {
-	inches = -1;
+	inches = NULL;
     }
 
-    if (inches > 0)
-	return g_strdup_printf ("%s %d\"", vendor, inches);
-    else
+    if (!inches)
 	return g_strdup (vendor);
+
+    ret = g_strdup_printf ("%s %s", vendor, inches);
+    g_free (inches);
+
+    return ret;
 }
