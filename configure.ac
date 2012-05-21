@@ -144,7 +144,18 @@ AC_SUBST(XLIB_LIBS)
 
 dnl pkg-config dependency checks
 
-PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED xrandr >= $XRANDR_REQUIRED xext >= $XEXT_REQUIRED)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
+                                 gtk+-3.0 >= $GTK_REQUIRED
+                                 glib-2.0 >= $GLIB_REQUIRED
+                                 gio-2.0 >= $GLIB_REQUIRED
+                                 gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
+                                 xrandr >= $XRANDR_REQUIRED
+                                 xext >= $XEXT_REQUIRED
+                                 xkeyboard-config
+                                 xkbfile)
+
+XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
+AC_SUBST(XKB_BASE)
 
 AC_CACHE_CHECK(for timerfd_create(2) system call,
     gnome_cv_timerfd,AC_COMPILE_IFELSE([AC_LANG_PROGRAM([

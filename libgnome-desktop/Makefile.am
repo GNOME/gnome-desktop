@@ -9,6 +9,7 @@ AM_CPPFLAGS =							\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""	\
 	-DPNP_IDS=\""$(PNP_IDS)"\"				\
+	-DXKB_BASE=\""$(XKB_BASE)"\"				\
 	$(DISABLE_DEPRECATED_CFLAGS)
 
 AM_CFLAGS = $(WARN_CFLAGS)
@@ -26,6 +27,7 @@ introspection_sources = 		\
 	gnome-rr-labeler.c		\
 	gnome-pnp-ids.c			\
 	gnome-wall-clock.c		\
+	gnome-xkb-info.c		\
 	edid-parse.c
 
 libgnome_desktop_3_la_SOURCES = 	\
@@ -60,7 +62,8 @@ libgnome_desktop_HEADERS = \
         gnome-rr-config.h               \
         gnome-rr-labeler.h		\
         gnome-pnp-ids.h			\
-        gnome-wall-clock.h
+        gnome-wall-clock.h		\
+	gnome-xkb-info.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
