@@ -1884,17 +1884,13 @@ gnome_rr_output_get_connector_type (GnomeRROutput *output)
 gboolean
 gnome_rr_output_is_laptop (GnomeRROutput *output)
 {
-    const char *connector_type;
-
     g_return_val_if_fail (output != NULL, FALSE);
 
     if (!output->connected)
 	return FALSE;
 
     /* The ConnectorType property is present in RANDR 1.3 and greater */
-
-    connector_type = gnome_rr_output_get_connector_type (output);
-    if (connector_type && strcmp (connector_type, GNOME_RR_CONNECTOR_TYPE_PANEL) == 0)
+    if (g_strcmp0 (output->connector_type, GNOME_RR_CONNECTOR_TYPE_PANEL) == 0)
 	return TRUE;
 
     /* Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
