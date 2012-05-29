@@ -1882,6 +1882,24 @@ gnome_rr_output_get_connector_type (GnomeRROutput *output)
 }
 
 gboolean
+_gnome_rr_output_name_is_laptop (const char *name)
+{
+    if (!name)
+        return FALSE;
+
+    if (strstr (name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
+	strstr (name, "LVDS") ||
+	strstr (name, "Lvds") ||
+	strstr (name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
+	strstr (name, "eDP")  ||  /* eDP is for internal laptop panel connections */
+	strstr (name, "DFP")  ||  /* DFP is also an internal laptop display */
+	strstr (name, "default")) /* Finally, NVidia and all others that don't bother to do RANDR properly */
+        return TRUE;
+
+    return FALSE;
+}
+
+gboolean
 gnome_rr_output_is_laptop (GnomeRROutput *output)
 {
     g_return_val_if_fail (output != NULL, FALSE);
@@ -1896,16 +1914,8 @@ gnome_rr_output_is_laptop (GnomeRROutput *output)
     /* Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
      * so drivers can use whatever they like.
      */
-
-    if (output->name
-	&& (strstr (output->name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
-	    strstr (output->name, "LVDS") ||
-	    strstr (output->name, "Lvds") ||
-	    strstr (output->name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
-	    strstr (output->name, "eDP")  ||  /* eDP is for internal laptop panel connections */
-	    strstr (output->name, "DFP")  ||  /* DFP is also an internal laptop display */
-	    strstr (output->name, "default"))) /* Finally, NVidia and all others that don't bother to do RANDR properly */
-	return TRUE;
+    if (_gnome_rr_output_name_is_laptop (output->name))
+        return TRUE;
 
     return FALSE;
 }

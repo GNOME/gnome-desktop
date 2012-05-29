@@ -1166,19 +1166,6 @@ gnome_rr_config_sanitize (GnomeRRConfig *config)
     }
 }
 
-static gboolean
-output_info_is_laptop (GnomeRROutputInfo *info)
-{
-        if (info->priv->name
-            && (strstr (info->priv->name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
-                strstr (info->priv->name, "LVDS") ||
-                strstr (info->priv->name, "Lvds") ||
-                strstr (info->priv->name, "LCD")))    /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
-                return TRUE;
-
-        return FALSE;
-}
-
 gboolean
 gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
 {
@@ -1218,7 +1205,7 @@ gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
                         top_left = info;
                 }
                 if (laptop == NULL
-                    && output_info_is_laptop (info)) {
+                    && _gnome_rr_output_name_is_laptop (info->priv->name)) {
                         /* shame we can't find the connector type
                            as with gnome_rr_output_is_laptop */
                         laptop = info;

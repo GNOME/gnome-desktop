@@ -74,4 +74,6 @@ struct GnomeRRConfigPrivate
   GnomeRROutputInfo **outputs;
 };
 
+gboolean _gnome_rr_output_name_is_laptop (const char *name);
+
 #endif
