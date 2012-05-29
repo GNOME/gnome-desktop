@@ -154,6 +154,10 @@ int             gnome_rr_output_get_width_mm       (GnomeRROutput         *outou
 int             gnome_rr_output_get_height_mm      (GnomeRROutput         *output);
 const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output,
                                                     gsize                 *size);
+gboolean        gnome_rr_output_get_ids_from_edid  (GnomeRROutput         *output,
+                                                    char                 **vendor,
+                                                    int                   *product,
+                                                    int                   *serial);
 
 gint            gnome_rr_output_get_backlight_min  (GnomeRROutput         *output);
 gint            gnome_rr_output_get_backlight_max  (GnomeRROutput         *output);

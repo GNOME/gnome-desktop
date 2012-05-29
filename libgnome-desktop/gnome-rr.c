@@ -41,6 +41,7 @@
 #include "gnome-rr-config.h"
 
 #include "private.h"
+#include "edid.h"
 #include "gnome-rr-private.h"
 
 #define DISPLAY(o) ((o)->info->screen->priv->xdisplay)
@@ -1704,6 +1705,34 @@ gnome_rr_output_get_edid_data (GnomeRROutput *output, gsize *size)
     if (size)
         *size = output->edid_size;
     return output->edid_data;
+}
+
+gboolean
+gnome_rr_output_get_ids_from_edid (GnomeRROutput         *output,
+                                   char                 **vendor,
+                                   int                   *product,
+                                   int                   *serial)
+{
+    MonitorInfo *info;
+
+    g_return_val_if_fail (output != NULL, FALSE);
+
+    if (!output->edid_data)
+        return FALSE;
+    info = decode_edid (output->edid_data);
+    if (!info)
+        return FALSE;
+    if (vendor)
+        *vendor = g_memdup (info->manufacturer_code, 4);
+    if (product)
+        *product = info->product_code;
+    if (serial)
+        *serial = info->serial_number;
+
+    g_free (info);
+
+    return TRUE;
+
 }
 
 /**
