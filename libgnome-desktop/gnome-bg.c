@@ -1101,9 +1101,9 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	cr = cairo_create (surface);
 	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		gdk_cairo_set_source_color (cr, &(bg->primary));
-		average.red = bg->primary.red / 255.0;
-		average.green = bg->primary.green / 255.0;
-		average.blue = bg->primary.blue / 255.0;
+		average.red = bg->primary.red / 65535.0;
+		average.green = bg->primary.green / 65535.0;
+		average.blue = bg->primary.blue / 65535.0;
 		average.alpha = 1.0;
 	}
 	else {
