@@ -44,6 +44,11 @@
 #define CONFIG_INTENDED_BASENAME "monitors.xml"
 #define CONFIG_BACKUP_BASENAME "monitors.xml.backup"
 
+/* Look for DPI_FALLBACK in:
+ * http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/xsettings/gsd-xsettings-manager.c
+ * for the reasoning */
+#define DPI_FALLBACK 96.0
+
 /* In version 0 of the config file format, we had several <configuration>
  * toplevel elements and no explicit version number.  So, the filed looked
  * like
@@ -1924,8 +1929,8 @@ crtc_assignment_apply (CrtcAssignment *assign, guint32 timestamp, GError **error
      *
      * Firefox and Evince apparently believe what X tells them.
      */
-    width_mm = (width / 96.0) * 25.4 + 0.5;
-    height_mm = (height / 96.0) * 25.4 + 0.5;
+    width_mm = (width / DPI_FALLBACK) * 25.4 + 0.5;
+    height_mm = (height / DPI_FALLBACK) * 25.4 + 0.5;
 
     if (success)
     {
