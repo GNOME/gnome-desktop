@@ -120,10 +120,12 @@ gnome_rr_debug_LDADD =		\
 	$(lib_LTLIBRARIES)	\
 	$(XLIB_LIBS)
 
-noinst_PROGRAMS = test-xkb-info
+noinst_PROGRAMS = test-xkb-info test-pnp-ids
 test_xkb_info_LDADD =		\
 	$(GNOME_DESKTOP_LIBS)	\
 	$(lib_LTLIBRARIES)	\
 	$(XLIB_LIBS)
+
+test_pnp_ids_LDADD = $(test_xkb_info_LDADD)
 
 -include $(top_srcdir)/git.mk
