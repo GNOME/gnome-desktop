@@ -34,6 +34,7 @@
 #define XKEYBOARD_CONFIG_(String) ((char *) g_dgettext ("xkeyboard-config", String))
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
+#include "gnome-languages.h"
 #include "gnome-xkb-info.h"
 
 #ifndef XKB_RULES_FILE
@@ -76,8 +77,8 @@ struct _XkbOptionGroup
 struct _GnomeXkbInfoPrivate
 {
   GHashTable *option_groups_table;
-  GHashTable *layouts_by_short_desc;
-  GHashTable *layouts_by_iso639;
+  GHashTable *layouts_by_country;
+  GHashTable *layouts_by_language;
   GHashTable *layouts_table;
 
   /* Only used while parsing */
@@ -86,6 +87,7 @@ struct _GnomeXkbInfoPrivate
   Layout *current_parser_layout;
   Layout *current_parser_variant;
   gchar  *current_parser_iso639Id;
+  gchar  *current_parser_iso3166Id;
   gchar **current_parser_text;
 };
 
@@ -268,6 +270,10 @@ parse_start_element (GMarkupParseContext  *context,
     {
       priv->current_parser_text = &priv->current_parser_iso639Id;
     }
+  else if (strcmp (element_name, "iso3166Id") == 0)
+    {
+      priv->current_parser_text = &priv->current_parser_iso3166Id;
+    }
   else if (strcmp (element_name, "layout") == 0)
     {
       if (priv->current_parser_layout)
@@ -341,25 +347,45 @@ parse_start_element (GMarkupParseContext  *context,
     }
 }
 
-static gboolean
-maybe_replace (GHashTable *table,
-               gchar      *key,
-               Layout     *new_layout)
+static void
+add_layout_to_table (GHashTable  *table,
+                     const gchar *key,
+                     Layout      *layout)
 {
-  /* There might be multiple layouts for the same language. In that
-   * case considering the "canonical" layout to be the one with the
-   * shorter description seems to be good enough. */
-  Layout *layout;
-  gboolean exists;
-  gboolean replace = TRUE;
+  GSequence *seq;
 
-  exists = g_hash_table_lookup_extended (table, key, NULL, (gpointer *)&layout);
-  if (exists)
-    replace = strlen (new_layout->description) < strlen (layout->description);
-  if (replace)
-    g_hash_table_replace (table, key, new_layout);
+  seq = g_hash_table_lookup (table, key);
+  if (!seq)
+    {
+      seq = g_sequence_new (NULL);
+      g_hash_table_replace (table, g_strdup (key), seq);
+    }
+  g_sequence_append (seq, layout);
+}
 
-  return replace;
+static gint
+layout_compare (Layout   *a,
+                Layout   *b,
+                gpointer  data)
+{
+  return g_strcmp0 (a->id, b->id);
+}
+
+static void
+sort_sequence (gpointer key,
+               gpointer value,
+               gpointer data)
+{
+  g_sequence_sort ((GSequence *) value, (GCompareDataFunc) layout_compare, NULL);
+}
+
+static void
+sort_sequences (GnomeXkbInfo *self)
+{
+  GnomeXkbInfoPrivate *priv = self->priv;
+
+  g_hash_table_foreach (priv->layouts_by_country, sort_sequence, NULL);
+  g_hash_table_foreach (priv->layouts_by_language, sort_sequence, NULL);
 }
 
 static void
@@ -381,10 +407,6 @@ parse_end_element (GMarkupParseContext  *context,
 
       priv->current_parser_layout->id = g_strdup (priv->current_parser_layout->xkb_name);
 
-      if (priv->current_parser_layout->short_desc)
-        maybe_replace (priv->layouts_by_short_desc,
-                       priv->current_parser_layout->short_desc, priv->current_parser_layout);
-
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_layout->id,
                             priv->current_parser_layout);
@@ -404,10 +426,6 @@ parse_end_element (GMarkupParseContext  *context,
                                                     priv->current_parser_variant->xkb_name,
                                                     NULL);
 
-      if (priv->current_parser_variant->short_desc)
-        maybe_replace (priv->layouts_by_short_desc,
-                       priv->current_parser_variant->short_desc, priv->current_parser_variant);
-
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_variant->id,
                             priv->current_parser_variant);
@@ -415,7 +433,7 @@ parse_end_element (GMarkupParseContext  *context,
     }
   else if (strcmp (element_name, "iso639Id") == 0)
     {
-      gboolean replaced = FALSE;
+      gchar *language;
 
       if (!priv->current_parser_iso639Id)
         {
@@ -424,17 +442,42 @@ parse_end_element (GMarkupParseContext  *context,
           return;
         }
 
-      if (priv->current_parser_layout)
-        replaced = maybe_replace (priv->layouts_by_iso639,
-                                  priv->current_parser_iso639Id, priv->current_parser_layout);
-      else if (priv->current_parser_variant)
-        replaced = maybe_replace (priv->layouts_by_iso639,
-                                  priv->current_parser_iso639Id, priv->current_parser_variant);
+      language = gnome_get_language_from_name (priv->current_parser_iso639Id, NULL);
+      if (language)
+        {
+          if (priv->current_parser_variant)
+            add_layout_to_table (priv->layouts_by_language, language, priv->current_parser_variant);
+          else if (priv->current_parser_layout)
+            add_layout_to_table (priv->layouts_by_language, language, priv->current_parser_layout);
 
-      if (!replaced)
-        g_free (priv->current_parser_iso639Id);
+          g_free (language);
+        }
 
-      priv->current_parser_iso639Id = NULL;
+      g_clear_pointer (&priv->current_parser_iso639Id, g_free);
+    }
+  else if (strcmp (element_name, "iso3166Id") == 0)
+    {
+      gchar *country;
+
+      if (!priv->current_parser_iso3166Id)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'iso3166Id' elements must enclose text");
+          return;
+        }
+
+      country = gnome_get_region_from_name (priv->current_parser_iso3166Id, NULL);
+      if (country)
+        {
+          if (priv->current_parser_variant)
+            add_layout_to_table (priv->layouts_by_country, country, priv->current_parser_variant);
+          else if (priv->current_parser_layout)
+            add_layout_to_table (priv->layouts_by_country, country, priv->current_parser_layout);
+
+          g_free (country);
+        }
+
+      g_clear_pointer (&priv->current_parser_iso3166Id, g_free);
     }
   else if (strcmp (element_name, "group") == 0)
     {
@@ -494,6 +537,7 @@ parse_error (GMarkupParseContext *context,
   free_layout (priv->current_parser_layout);
   free_layout (priv->current_parser_variant);
   g_free (priv->current_parser_iso639Id);
+  g_free (priv->current_parser_iso3166Id);
 }
 
 static const GMarkupParser markup_parser = {
@@ -542,8 +586,16 @@ parse_rules (GnomeXkbInfo *self)
      XkbOptionGroup structs. */
   priv->option_groups_table = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      NULL, free_option_group);
-  priv->layouts_by_short_desc = g_hash_table_new (g_str_hash, g_str_equal);
-  priv->layouts_by_iso639 = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  /* Maps country strings to a GSequence which is a set of Layout
+     struct pointers into the Layout structs stored in
+     layouts_table. */
+  priv->layouts_by_country = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                    g_free, (GDestroyNotify) g_sequence_free);
+  /* Maps language strings to a GSequence which is a set of Layout
+     struct pointers into the Layout structs stored in
+     layouts_table. */
+  priv->layouts_by_language = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                     g_free, (GDestroyNotify) g_sequence_free);
   /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
@@ -552,6 +604,8 @@ parse_rules (GnomeXkbInfo *self)
   if (error)
     goto cleanup;
   g_free (file_path);
+
+  sort_sequences (self);
 
   settings = g_settings_new ("org.gnome.desktop.input-sources");
   show_all_sources = g_settings_get_boolean (settings, "show-all-sources");
@@ -566,6 +620,8 @@ parse_rules (GnomeXkbInfo *self)
     goto cleanup;
   g_free (file_path);
 
+  sort_sequences (self);
+
   return;
 
  cleanup:
@@ -573,8 +629,8 @@ parse_rules (GnomeXkbInfo *self)
   g_clear_pointer (&error, g_error_free);
   g_clear_pointer (&file_path, g_free);
   g_clear_pointer (&priv->option_groups_table, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_short_desc, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_iso639, g_hash_table_destroy);
+  g_clear_pointer (&priv->layouts_by_country, g_hash_table_destroy);
+  g_clear_pointer (&priv->layouts_by_language, g_hash_table_destroy);
   g_clear_pointer (&priv->layouts_table, g_hash_table_destroy);
 }
 
@@ -602,10 +658,10 @@ gnome_xkb_info_finalize (GObject *self)
 
   if (priv->option_groups_table)
     g_hash_table_destroy (priv->option_groups_table);
-  if (priv->layouts_by_short_desc)
-    g_hash_table_destroy (priv->layouts_by_short_desc);
-  if (priv->layouts_by_iso639)
-    g_hash_table_destroy (priv->layouts_by_iso639);
+  if (priv->layouts_by_country)
+    g_hash_table_destroy (priv->layouts_by_country);
+  if (priv->layouts_by_language)
+    g_hash_table_destroy (priv->layouts_by_language);
   if (priv->layouts_table)
     g_hash_table_destroy (priv->layouts_table);
 
@@ -931,12 +987,7 @@ gnome_xkb_info_get_layout_info_for_language (GnomeXkbInfo *self,
   if (!ensure_rules_are_parsed (self))
     return FALSE;
 
-  /* First look in the proper language codes index, if we can't find
-   * it there try again on the (untranslated) short descriptions since
-   * sometimes those will give us a good match. */
-  if (!g_hash_table_lookup_extended (priv->layouts_by_iso639, language, NULL, (gpointer *)&layout))
-    if (!g_hash_table_lookup_extended (priv->layouts_by_short_desc, language, NULL, (gpointer *)&layout))
-      return FALSE;
+  return FALSE; /* FIXME */
 
   if (id)
     *id = layout->id;
