@@ -6,10 +6,13 @@ main (int argc, char **argv)
 {
 	GnomeXkbInfo *info;
 	GList *layouts, *l;
+	GList *option_groups, *g;
+	GList *options, *o;
 
 	gtk_init (&argc, &argv);
 
 	info = gnome_xkb_info_new ();
+
 	layouts = gnome_xkb_info_get_all_layouts (info);
 	for (l = layouts; l != NULL; l = l->next) {
 		const char *id = l->data;
@@ -33,6 +36,27 @@ main (int argc, char **argv)
 		}
 	}
 	g_list_free (layouts);
+
+	option_groups = gnome_xkb_info_get_all_option_groups (info);
+	for (g = option_groups; g != NULL; g = g->next) {
+		const char *group_id = g->data;
+
+		g_print ("\noption group: %s\n", group_id);
+
+		options = gnome_xkb_info_get_options_for_group (info, group_id);
+		for (o = options; o != NULL; o = o->next) {
+			const char *id = o->data;
+
+			g_print ("id: %s\n", id);
+			g_print ("\tdescription: %s\n",
+				 gnome_xkb_info_description_for_option (info,
+									group_id,
+									id));
+		}
+		g_list_free (options);
+	}
+	g_list_free (option_groups);
+
 	g_object_unref (info);
 
 	return 0;

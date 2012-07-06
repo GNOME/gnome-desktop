@@ -74,6 +74,12 @@ gboolean        gnome_xkb_info_get_layout_info_for_language     (GnomeXkbInfo *s
                                                                  const gchar **short_name,
                                                                  const gchar **xkb_layout,
                                                                  const gchar **xkb_variant);
+GList          *gnome_xkb_info_get_all_option_groups            (GnomeXkbInfo *self);
+GList          *gnome_xkb_info_get_options_for_group            (GnomeXkbInfo *self,
+                                                                 const gchar  *group_id);
+const gchar    *gnome_xkb_info_description_for_option           (GnomeXkbInfo *self,
+                                                                 const gchar  *group_id,
+                                                                 const gchar  *id);
 
 void            gnome_xkb_info_get_var_defs                     (gchar            **rules,
                                                                  XkbRF_VarDefsRec **var_defs);

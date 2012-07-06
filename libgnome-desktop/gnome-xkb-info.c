@@ -57,13 +57,32 @@ struct _Layout
   const Layout *main_layout;
 };
 
+typedef struct _XkbOption XkbOption;
+struct _XkbOption
+{
+  gchar *id;
+  gchar *description;
+};
+
+typedef struct _XkbOptionGroup XkbOptionGroup;
+struct _XkbOptionGroup
+{
+  gchar *id;
+  gchar *description;
+  gboolean allow_multiple_selection;
+  GHashTable *options_table;
+};
+
 struct _GnomeXkbInfoPrivate
 {
+  GHashTable *option_groups_table;
   GHashTable *layouts_by_short_desc;
   GHashTable *layouts_by_iso639;
   GHashTable *layouts_table;
 
   /* Only used while parsing */
+  XkbOptionGroup *current_parser_group;
+  XkbOption *current_parser_option;
   Layout *current_parser_layout;
   Layout *current_parser_variant;
   gchar  *current_parser_iso639Id;
@@ -84,6 +103,31 @@ free_layout (gpointer data)
   g_free (layout->short_desc);
   g_free (layout->description);
   g_free (layout);
+}
+
+static void
+free_option (gpointer data)
+{
+  XkbOption *option = data;
+
+  g_return_if_fail (option != NULL);
+
+  g_free (option->id);
+  g_free (option->description);
+  g_free (option);
+}
+
+static void
+free_option_group (gpointer data)
+{
+  XkbOptionGroup *group = data;
+
+  g_return_if_fail (group != NULL);
+
+  g_free (group->id);
+  g_free (group->description);
+  g_hash_table_destroy (group->options_table);
+  g_free (group);
 }
 
 /**
@@ -197,6 +241,10 @@ parse_start_element (GMarkupParseContext  *context,
         priv->current_parser_text = &priv->current_parser_variant->xkb_name;
       else if (priv->current_parser_layout)
         priv->current_parser_text = &priv->current_parser_layout->xkb_name;
+      else if (priv->current_parser_option)
+        priv->current_parser_text = &priv->current_parser_option->id;
+      else if (priv->current_parser_group)
+        priv->current_parser_text = &priv->current_parser_group->id;
     }
   else if (strcmp (element_name, "description") == 0)
     {
@@ -204,6 +252,10 @@ parse_start_element (GMarkupParseContext  *context,
         priv->current_parser_text = &priv->current_parser_variant->description;
       else if (priv->current_parser_layout)
         priv->current_parser_text = &priv->current_parser_layout->description;
+      else if (priv->current_parser_option)
+        priv->current_parser_text = &priv->current_parser_option->description;
+      else if (priv->current_parser_group)
+        priv->current_parser_text = &priv->current_parser_group->description;
     }
   else if (strcmp (element_name, "shortDescription") == 0)
     {
@@ -246,6 +298,46 @@ parse_start_element (GMarkupParseContext  *context,
       priv->current_parser_variant = g_new0 (Layout, 1);
       priv->current_parser_variant->is_variant = TRUE;
       priv->current_parser_variant->main_layout = priv->current_parser_layout;
+    }
+  else if (strcmp (element_name, "group") == 0)
+    {
+      if (priv->current_parser_group)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'group' elements can't be nested");
+          return;
+        }
+
+      priv->current_parser_group = g_new0 (XkbOptionGroup, 1);
+      /* Maps option ids to XkbOption structs. Owns the XkbOption structs. */
+      priv->current_parser_group->options_table = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                                         NULL, free_option);
+      g_markup_collect_attributes (element_name,
+                                   attribute_names,
+                                   attribute_values,
+                                   error,
+                                   G_MARKUP_COLLECT_BOOLEAN | G_MARKUP_COLLECT_OPTIONAL,
+                                   "allowMultipleSelection",
+                                   &priv->current_parser_group->allow_multiple_selection,
+                                   G_MARKUP_COLLECT_INVALID);
+    }
+  else if (strcmp (element_name, "option") == 0)
+    {
+      if (priv->current_parser_option)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'option' elements can't be nested");
+          return;
+        }
+
+      if (!priv->current_parser_group)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'option' elements must be inside 'group' elements");
+          return;
+        }
+
+      priv->current_parser_option = g_new0 (XkbOption, 1);
     }
 }
 
@@ -339,6 +431,34 @@ parse_end_element (GMarkupParseContext  *context,
 
       priv->current_parser_iso639Id = NULL;
     }
+  else if (strcmp (element_name, "group") == 0)
+    {
+      if (!priv->current_parser_group->description || !priv->current_parser_group->id)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'group' elements must enclose 'description' and 'name' elements");
+          return;
+        }
+
+      g_hash_table_replace (priv->option_groups_table,
+                            priv->current_parser_group->id,
+                            priv->current_parser_group);
+      priv->current_parser_group = NULL;
+    }
+  else if (strcmp (element_name, "option") == 0)
+    {
+      if (!priv->current_parser_option->description || !priv->current_parser_option->id)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'option' elements must enclose 'description' and 'name' elements");
+          return;
+        }
+
+      g_hash_table_replace (priv->current_parser_group->options_table,
+                            priv->current_parser_option->id,
+                            priv->current_parser_option);
+      priv->current_parser_option = NULL;
+    }
 }
 
 static void
@@ -364,6 +484,8 @@ parse_error (GMarkupParseContext *context,
 {
   GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (data)->priv;
 
+  free_option_group (priv->current_parser_group);
+  free_option (priv->current_parser_option);
   free_layout (priv->current_parser_layout);
   free_layout (priv->current_parser_variant);
   g_free (priv->current_parser_iso639Id);
@@ -396,9 +518,13 @@ parse_rules_file (GnomeXkbInfo *self)
       return;
     }
 
+  /* Maps option group ids to XkbOptionGroup structs. Owns the
+     XkbOptionGroup structs. */
+  priv->option_groups_table = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                     NULL, free_option_group);
   priv->layouts_by_short_desc = g_hash_table_new (g_str_hash, g_str_equal);
   priv->layouts_by_iso639 = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  /* This is the "master" table so it assumes memory "ownership". */
+  /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
   context = g_markup_parse_context_new (&markup_parser, 0, self, NULL);
@@ -409,6 +535,8 @@ parse_rules_file (GnomeXkbInfo *self)
     {
       g_warning ("Failed to parse XKB rules file: %s", error->message);
       g_error_free (error);
+      g_hash_table_destroy (priv->option_groups_table);
+      priv->option_groups_table = NULL;
       g_hash_table_destroy (priv->layouts_by_short_desc);
       priv->layouts_by_short_desc = NULL;
       g_hash_table_destroy (priv->layouts_by_iso639);
@@ -440,6 +568,8 @@ gnome_xkb_info_finalize (GObject *self)
 {
   GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (self)->priv;
 
+  if (priv->option_groups_table)
+    g_hash_table_destroy (priv->option_groups_table);
   if (priv->layouts_by_short_desc)
     g_hash_table_destroy (priv->layouts_by_short_desc);
   if (priv->layouts_by_iso639)
@@ -497,6 +627,107 @@ gnome_xkb_info_get_all_layouts (GnomeXkbInfo *self)
     return NULL;
 
   return g_hash_table_get_keys (priv->layouts_table);
+}
+
+/**
+ * gnome_xkb_info_get_all_option_groups:
+ * @self: a #GnomeXkbInfo
+ *
+ * Returns a list of all option group identifiers we know about.
+ *
+ * Return value: (transfer container) (element-type gchar): the list
+ * of option group ids. The caller takes ownership of the #GList but
+ * not of the strings themselves, those are internally allocated and
+ * must not be modified.
+ *
+ * Since: 3.6
+ */
+GList *
+gnome_xkb_info_get_all_option_groups (GnomeXkbInfo *self)
+{
+  GnomeXkbInfoPrivate *priv;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  return g_hash_table_get_keys (priv->option_groups_table);
+}
+
+/**
+ * gnome_xkb_info_get_options_for_group:
+ * @self: a #GnomeXkbInfo
+ * @group_id: group's identifier about which to retrieve the options
+ *
+ * Returns a list of all option identifiers we know about for group
+ * @group_id.
+ *
+ * Return value: (transfer container) (element-type gchar): the list
+ * of option ids. The caller takes ownership of the #GList but not of
+ * the strings themselves, those are internally allocated and must not
+ * be modified.
+ *
+ * Since: 3.6
+ */
+GList *
+gnome_xkb_info_get_options_for_group (GnomeXkbInfo *self,
+                                      const gchar  *group_id)
+{
+  GnomeXkbInfoPrivate *priv;
+  const XkbOptionGroup *group;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  group = g_hash_table_lookup (priv->option_groups_table, group_id);
+  if (!group)
+    return NULL;
+
+  return g_hash_table_get_keys (group->options_table);
+}
+
+/**
+ * gnome_xkb_info_description_for_option:
+ * @self: a #GnomeXkbInfo
+ * @group_id: identifier for group containing the option
+ * @id: option identifier
+ *
+ * Return value: the translated description for the option @id.
+ *
+ * Since: 3.6
+ */
+const gchar *
+gnome_xkb_info_description_for_option (GnomeXkbInfo *self,
+                                       const gchar  *group_id,
+                                       const gchar  *id)
+{
+  GnomeXkbInfoPrivate *priv;
+  const XkbOptionGroup *group;
+  const XkbOption *option;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  group = g_hash_table_lookup (priv->option_groups_table, group_id);
+  if (!group)
+    return NULL;
+
+  option = g_hash_table_lookup (group->options_table, id);
+  if (!option)
+    return NULL;
+
+  return XKEYBOARD_CONFIG_(option->description);
 }
 
 /**
