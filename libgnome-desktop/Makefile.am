@@ -10,6 +10,8 @@ AM_CPPFLAGS =							\
 	$(XLIB_CFLAGS)						\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""	\
+	-DISO_CODES_PREFIX=\""$(ISO_CODES_PREFIX)"\"		\
+	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"		\
 	-DPNP_IDS=\""$(PNP_IDS)"\"				\
 	-DXKB_BASE=\""$(XKB_BASE)"\"				\
 	$(DISABLE_DEPRECATED_CFLAGS)
@@ -35,6 +37,7 @@ introspection_sources = 		\
 	gnome-wall-clock.c		\
 	gnome-xkb-info.c		\
 	gnome-idle-monitor.c		\
+	gnome-languages.c		\
 	edid-parse.c
 
 libgnome_desktop_3_la_SOURCES = 	\
@@ -43,6 +46,7 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
 	edid.h				\
+	locarchive.h			\
 	private.h
 
 libgnome_desktop_3_la_LIBADD =	\
@@ -71,7 +75,8 @@ libgnome_desktop_HEADERS = \
         gnome-pnp-ids.h			\
         gnome-wall-clock.h		\
 	gnome-xkb-info.h		\
-	gnome-idle-monitor.h
+	gnome-idle-monitor.h		\
+	gnome-languages.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
@@ -131,7 +136,7 @@ gnome_rr_debug_LDADD =		\
 	$(lib_LTLIBRARIES)	\
 	$(XLIB_LIBS)
 
-noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail test-idle-monitor
+noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail test-idle-monitor test-languages
 test_xkb_info_LDADD =		\
 	$(GNOME_DESKTOP_LIBS)	\
 	$(lib_LTLIBRARIES)	\
@@ -144,5 +149,7 @@ test_wall_clock_LDADD = $(test_xkb_info_LDADD)
 test_desktop_thumbnail_LDADD = $(test_xkb_info_LDADD)
 
 test_idle_monitor_LDADD = $(test_xkb_info_LDADD)
+
+test_languages_LDADD = $(test_xkb_info_LDADD)
 
 -include $(top_srcdir)/git.mk
