@@ -84,7 +84,7 @@ main (int argc, char *argv[])
 	for (i = 0; outputs[i] != NULL; i++) {
 		g_print ("[%s]\n", gnome_rr_output_get_name (outputs[i]));
 		g_print ("\tconnected: %i\n", gnome_rr_output_is_connected (outputs[i]));
-		g_print ("\tlaptop: %i\n", gnome_rr_output_is_laptop (outputs[i]));
+		g_print ("\tbuilt-in: %i\n", gnome_rr_output_is_builtin_display (outputs[i]));
 		g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (outputs[i]));
 		g_print ("\tid: %i\n", gnome_rr_output_get_id (outputs[i]));
 

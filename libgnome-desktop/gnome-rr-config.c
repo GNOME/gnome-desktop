@@ -1170,14 +1170,14 @@ gboolean
 gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
 {
         int i;
-        GnomeRROutputInfo  *laptop;
+        GnomeRROutputInfo  *builtin_display;
         GnomeRROutputInfo  *top_left;
         gboolean found;
 	GnomeRRConfigPrivate *priv;
 
 	g_return_val_if_fail (GNOME_IS_RR_CONFIG (configuration), FALSE);
 
-        laptop = NULL;
+        builtin_display = NULL;
         top_left = NULL;
         found = FALSE;
 	priv = configuration->priv;
@@ -1204,17 +1204,17 @@ gnome_rr_config_ensure_primary (GnomeRRConfig *configuration)
                         && info->priv->y < top_left->priv->y)) {
                         top_left = info;
                 }
-                if (laptop == NULL
-                    && _gnome_rr_output_name_is_laptop (info->priv->name)) {
+                if (builtin_display == NULL
+                    && _gnome_rr_output_name_is_builtin_display (info->priv->name)) {
                         /* shame we can't find the connector type
-                           as with gnome_rr_output_is_laptop */
-                        laptop = info;
+                           as with gnome_rr_output_is_builtin_display */
+                        builtin_display = info;
                 }
         }
 
         if (!found) {
-                if (laptop != NULL) {
-                        laptop->priv->primary = TRUE;
+                if (builtin_display != NULL) {
+                        builtin_display->priv->primary = TRUE;
                 } else if (top_left != NULL) {
                         /* Note: top_left can be NULL if all outputs are off */
                         top_left->priv->primary = TRUE;

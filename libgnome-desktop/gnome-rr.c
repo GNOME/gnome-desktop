@@ -1761,7 +1761,7 @@ ensure_display_name (GnomeRROutput *output)
         return;
 
     if (gnome_rr_output_is_laptop (output))
-        output->display_name = g_strdup (_("Laptop"));
+        output->display_name = g_strdup (_("Built-in Display"));
 
     if (output->display_name == NULL
         && output->edid_data != NULL) {
@@ -1976,7 +1976,7 @@ gnome_rr_output_get_connector_type (GnomeRROutput *output)
 }
 
 gboolean
-_gnome_rr_output_name_is_laptop (const char *name)
+_gnome_rr_output_name_is_builtin_display (const char *name)
 {
     if (!name)
         return FALSE;
@@ -1985,7 +1985,7 @@ _gnome_rr_output_name_is_laptop (const char *name)
 	strstr (name, "LVDS") ||
 	strstr (name, "Lvds") ||
 	strstr (name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
-	strstr (name, "eDP")  ||  /* eDP is for internal laptop panel connections */
+	strstr (name, "eDP")  ||  /* eDP is for internal built-in panel connections */
 	strstr (name, "default")) /* Finally, NVidia and all others that don't bother to do RANDR properly */
         return TRUE;
 
@@ -1993,7 +1993,7 @@ _gnome_rr_output_name_is_laptop (const char *name)
 }
 
 gboolean
-gnome_rr_output_is_laptop (GnomeRROutput *output)
+gnome_rr_output_is_builtin_display (GnomeRROutput *output)
 {
     g_return_val_if_fail (output != NULL, FALSE);
 
@@ -2007,7 +2007,7 @@ gnome_rr_output_is_laptop (GnomeRROutput *output)
     /* Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
      * so drivers can use whatever they like.
      */
-    if (_gnome_rr_output_name_is_laptop (output->name))
+    if (_gnome_rr_output_name_is_builtin_display (output->name))
         return TRUE;
 
     return FALSE;

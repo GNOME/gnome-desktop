@@ -74,6 +74,6 @@ struct _GnomeRRConfigPrivate
   GnomeRROutputInfo **outputs;
 };
 
-gboolean _gnome_rr_output_name_is_laptop (const char *name);
+gboolean _gnome_rr_output_name_is_builtin_display (const char *name);
 
 #endif
