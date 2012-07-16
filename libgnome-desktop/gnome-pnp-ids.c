@@ -244,7 +244,6 @@ find_vendor (const char *pnp_id)
 
 /**
  * gnome_pnp_ids_get_pnp_id:
- *
  * @pnp_ids: a #GnomePnpIds object
  * @pnp_id: the PNP ID to look for
  *

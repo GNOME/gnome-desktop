@@ -947,10 +947,10 @@ rr_screen_weak_notify_cb (gpointer data, GObject *where_the_object_was)
 
 /**
  * gnome_rr_screen_new:
- * Creates a unique #GnomeRRScreen instance for the specified @screen.
- *
  * @screen: the #GdkScreen on which to operate
  * @error: will be set if XRandR is not supported
+ *
+ * Creates a unique #GnomeRRScreen instance for the specified @screen.
  *
  * Returns: a unique #GnomeRRScreen instance, specific to the @screen, or NULL
  * if this could not be created, for instance if the driver does not support
@@ -998,13 +998,13 @@ gnome_rr_screen_set_size (GnomeRRScreen *screen,
 
 /**
  * gnome_rr_screen_get_ranges:
- *
- * Get the ranges of the screen
  * @screen: a #GnomeRRScreen
  * @min_width: (out): the minimum width
  * @max_width: (out): the maximum width
  * @min_height: (out): the minimum height
  * @max_height: (out): the maximum height
+ *
+ * Get the ranges of the screen
  */
 void
 gnome_rr_screen_get_ranges (GnomeRRScreen *screen,
@@ -1869,7 +1869,7 @@ out:
 }
 
 /**
- * gnome_rr_screen_get_output_by_id:
+ * gnome_rr_screen_get_output_by_name:
  *
  * Returns: (transfer none): the output identified by @name
  */

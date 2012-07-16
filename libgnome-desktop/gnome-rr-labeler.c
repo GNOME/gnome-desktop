@@ -418,12 +418,12 @@ setup_from_config (GnomeRRLabeler *labeler)
 
 /**
  * gnome_rr_labeler_new:
+ * @config: Configuration of the screens to label
+ *
  * Create a GUI element that will display colored labels on each connected monitor.
  * This is useful when users are required to identify which monitor is which, e.g. for
  * for configuring multiple monitors.
  * The labels will be shown by default, use gnome_rr_labeler_hide to hide them.
- *
- * @config: Configuration of the screens to label
  *
  * Returns: A new #GnomeRRLabeler
  */
@@ -437,9 +437,9 @@ gnome_rr_labeler_new (GnomeRRConfig *config)
 
 /**
  * gnome_rr_labeler_show:
- * Show the labels.
- *
  * @labeler: A #GnomeRRLabeler
+ *
+ * Show the labels.
  */
 void
 gnome_rr_labeler_show (GnomeRRLabeler *labeler)
@@ -472,9 +472,9 @@ gnome_rr_labeler_show (GnomeRRLabeler *labeler)
 
 /**
  * gnome_rr_labeler_hide:
- * Hide ouput labels.
- *
  * @labeler: A #GnomeRRLabeler
+ *
+ * Hide ouput labels.
  */
 void
 gnome_rr_labeler_hide (GnomeRRLabeler *labeler)
@@ -500,11 +500,11 @@ gnome_rr_labeler_hide (GnomeRRLabeler *labeler)
 
 /**
  * gnome_rr_labeler_get_rgba_for_output:
- * Get the color used for the label on a given output (monitor).
- *
  * @labeler: A #GnomeRRLabeler
  * @output: Output device (i.e. monitor) to query
  * @rgba_out: (out): Color of selected monitor.
+ *
+ * Get the color used for the label on a given output (monitor).
  */
 void
 gnome_rr_labeler_get_rgba_for_output (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA *rgba_out)

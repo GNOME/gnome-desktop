@@ -96,7 +96,6 @@ void gnome_rr_output_info_set_active (GnomeRROutputInfo *self, gboolean active)
 
 /**
  * gnome_rr_output_info_get_geometry:
- *
  * @self: a #GnomeRROutputInfo
  * @x: (out) (allow-none):
  * @y: (out) (allow-none):
@@ -169,7 +168,6 @@ gboolean gnome_rr_output_info_is_connected (GnomeRROutputInfo *self)
 
 /**
  * gnome_rr_output_info_get_vendor:
- *
  * @self: a #GnomeRROutputInfo
  * @vendor: (out caller-allocates) (array fixed-size=4):
  */
