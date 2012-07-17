@@ -290,6 +290,33 @@ queue_transitioned (GnomeBG *bg)
 					     NULL);
 }
 
+static gboolean 
+bg_gsettings_mapping (GVariant *value,
+			gpointer *result,
+			gpointer user_data)
+{
+	const gchar *bg_key_value;
+	char *filename = NULL;
+
+	bg_key_value = g_variant_get_string (value, NULL);
+
+	if (bg_key_value && *bg_key_value != '\0') {
+		filename = g_filename_from_uri (bg_key_value, NULL, NULL);
+
+		if (filename != NULL && g_file_test (filename, G_FILE_TEST_EXISTS) == FALSE) {
+			g_free (filename);
+			return FALSE;
+		}
+
+		if (filename != NULL) {
+			*result = filename;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 void
 gnome_bg_load_from_preferences (GnomeBG   *bg,
 				GSettings *settings)
@@ -306,16 +333,7 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
 	bg->is_enabled = g_settings_get_boolean (settings, BG_KEY_DRAW_BACKGROUND);
 
 	/* Filename */
-	filename = NULL;
-	tmp = g_settings_get_string (settings, BG_KEY_PICTURE_URI);
-	if (tmp && *tmp != '\0') {
-		filename = g_filename_from_uri (tmp, NULL, NULL);
-		if (filename != NULL && g_file_test (filename, G_FILE_TEST_EXISTS) == FALSE) {
-			g_free (filename);
-			filename = NULL;
-		}
-	}
-	g_free (tmp);
+	filename = g_settings_get_mapped (settings, BG_KEY_PICTURE_URI, bg_gsettings_mapping, NULL);
 
 	/* Colors */
 	tmp = g_settings_get_string (settings, BG_KEY_PRIMARY_COLOR);
