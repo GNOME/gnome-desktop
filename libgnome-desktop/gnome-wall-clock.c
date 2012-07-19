@@ -38,11 +38,14 @@ struct _GnomeWallClockPrivate {
 	
 	GFileMonitor *tz_monitor;
 	GSettings    *desktop_settings;
+
+	gboolean time_only;
 };
 
 enum {
 	PROP_0,
-	PROP_CLOCK
+	PROP_CLOCK,
+	PROP_TIME_ONLY,
 };
 
 G_DEFINE_TYPE (GnomeWallClock, gnome_wall_clock, G_TYPE_OBJECT);
@@ -122,6 +125,9 @@ gnome_wall_clock_get_property (GObject    *gobject,
 
 	switch (prop_id)
 	{
+	case PROP_TIME_ONLY:
+		g_value_set_boolean (value, self->priv->time_only);
+		break;
 	case PROP_CLOCK:
 		g_value_set_string (value, self->priv->clock_string);
 		break;
@@ -132,11 +138,33 @@ gnome_wall_clock_get_property (GObject    *gobject,
 }
 
 static void
+gnome_wall_clock_set_property (GObject      *gobject,
+			       guint         prop_id,
+			       const GValue *value,
+			       GParamSpec   *pspec)
+{
+	GnomeWallClock *self = GNOME_WALL_CLOCK (gobject);
+
+	switch (prop_id)
+	{
+	case PROP_TIME_ONLY:
+		self->priv->time_only = g_value_get_boolean (value);
+		update_clock (self);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, prop_id, pspec);
+		break;
+	}
+}
+
+
+static void
 gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 {
 	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
 	gobject_class->get_property = gnome_wall_clock_get_property;
+	gobject_class->set_property = gnome_wall_clock_set_property;
 	gobject_class->dispose = gnome_wall_clock_dispose;
 	gobject_class->finalize = gnome_wall_clock_finalize;
 
@@ -153,6 +181,19 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 							      NULL,
 							      G_PARAM_READABLE));
 
+	/**
+	 * GnomeWallClock:time-only:
+	 *
+	 * If %TRUE, the formatted clock will never include a date or the
+	 * day of the week, irrespective of configuration.
+	 */
+	g_object_class_install_property (gobject_class,
+					 PROP_TIME_ONLY,
+					 g_param_spec_boolean ("time-only",
+							       "",
+							       "",
+							       FALSE,
+							       G_PARAM_READABLE | G_PARAM_WRITABLE));
 
 	g_type_class_add_private (gobject_class, sizeof (GnomeWallClockPrivate));
 }
@@ -163,14 +204,16 @@ update_clock (gpointer data)
 	GnomeWallClock   *self = data;
 	GDesktopClockFormat clock_format;
 	const char *format_string;
-	gboolean show_date;
+	gboolean show_full_date;
+	gboolean show_weekday;
 	gboolean show_seconds;
 	GSource *source;
 	GDateTime *now;
 	GDateTime *expiry;
 
 	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
-	show_date = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
+	show_weekday = !self->priv->time_only;
+	show_full_date = show_weekday && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
 	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
 
 	now = g_date_time_new_now_local ();
@@ -189,27 +232,38 @@ update_clock (gpointer data)
 	g_source_unref (source);
 
 	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H) {
-		if (show_date)
-			/* Translators: This is the time format with date used
+		if (show_full_date) {
+			/* Translators: This is the time format with full date used
 			   in 24-hour mode. */
 			format_string = show_seconds ? _("%a %b %e, %R:%S")
 				: _("%a %b %e, %R");
-		else
-			/* Translators: This is the time format without date used
+		} else if (show_weekday) {
+			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
 			format_string = show_seconds ? _("%a %R:%S")
 				: _("%a %R");
+		} else {
+			/* Translators: This is the time format without date used
+			   in 24-hour mode. */
+			format_string = show_seconds ? _("%R:%S") : _("%R");
+		}
 	} else {
-		if (show_date)
-			/* Translators: This is a time format with date used
+		if (show_full_date) {
+			/* Translators: This is a time format with full date used
 			   for AM/PM. */
 			format_string = show_seconds ? _("%a %b %e, %l:%M:%S %p")
 				: _("%a %b %e, %l:%M %p");
-		else
-			/* Translators: This is a time format without date used
+		} else if (show_weekday) {
+			/* Translators: This is a time format with day used
 			   for AM/PM. */
 			format_string = show_seconds ? _("%a %l:%M:%S %p")
 				: _("%a %l:%M %p");
+		} else {
+			/* Translators: This is a time format without date used
+			   for AM/PM. */
+			format_string = show_seconds ? _("%l:%M:%S %p")
+				: _("%l:%M %p");
+		}
 	}
 
 	g_free (self->priv->clock_string);
