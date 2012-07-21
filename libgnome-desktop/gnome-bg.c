@@ -1080,6 +1080,8 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
  * TRUE, the surface created will be created by a temporary X server connection
  * so that if someone calls XKillClient on it, it won't affect the application
  * who created it.
+ *
+ * Returns: %NULL on error (e.g. out of X connections)
  **/
 cairo_surface_t *
 gnome_bg_create_surface (GnomeBG	    *bg,
@@ -1115,7 +1117,10 @@ gnome_bg_create_surface (GnomeBG	    *bg,
                                                              CAIRO_CONTENT_COLOR,
                                                              pm_width, pm_height);
 	}
-	
+
+	if (surface == NULL)
+		return NULL;
+
 	cr = cairo_create (surface);
 	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		gdk_cairo_set_source_color (cr, &(bg->primary));
@@ -1553,6 +1558,7 @@ gnome_bg_set_surface_as_root (GdkScreen *screen, cairo_surface_t *surface)
 	int      screen_num;
 
 	g_return_if_fail (screen != NULL);
+	g_return_if_fail (surface != NULL);
 	g_return_if_fail (cairo_surface_get_type (surface) == CAIRO_SURFACE_TYPE_XLIB);
 
 	screen_num = gdk_screen_get_number (screen);
