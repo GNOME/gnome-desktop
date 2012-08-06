@@ -1,10 +1,9 @@
-include $(top_srcdir)/gnome-doc-utils.make
-dist-hook: doc-dist-hook
+@YELP_HELP_RULES@
 
-DOC_MODULE = gpl
-DOC_ENTITIES = 
-DOC_INCLUDES = 
+HELP_ID = gpl
+HELP_FILES = index.docbook
+HELP_MEDIA =
 
-DOC_LINGUAS = ar ca cs el es eu fi fr hu ko nds oc pa sl sr sr@latin uk vi zh_CN sv de
+HELP_LINGUAS = ar ca cs el es eu fi fr hu ko nds oc pa sl sr sr@latin uk vi zh_CN sv de
 
 -include $(top_srcdir)/git.mk

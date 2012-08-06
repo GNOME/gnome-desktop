@@ -173,9 +173,9 @@ if test x"$gnome_cv_timerfd" = x"yes"; then
   AC_DEFINE(HAVE_TIMERFD, 1, [we have the timerfd_create(2) system call])
 fi
 
-dnl gnome-doc-utils stuff
+dnl Documentation support
 
-GNOME_DOC_INIT
+YELP_HELP_INIT
 
 dnl Language Support
 

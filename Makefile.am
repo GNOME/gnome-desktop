@@ -18,8 +18,7 @@ EXTRA_DIST =			\
 	HACKING			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
-	gnome-version.xml.in.in \
-	gnome-doc-utils.make
+	gnome-version.xml.in.in
 
 CLEANFILES = \
 	$(version_DATA)
