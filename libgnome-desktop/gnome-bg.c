@@ -1171,12 +1171,13 @@ gnome_bg_is_dark (GnomeBG *bg,
 	pixbuf = get_pixbuf_for_size (bg, -1, width, height);
 	if (pixbuf) {
 		GdkRGBA argb;
+		guchar a, r, g, b;
 
 		pixbuf_average_value (pixbuf, &argb);
-		guchar a = argb.alpha * 0xff;
-		guchar r = argb.red * 0xff;
-		guchar g = argb.green * 0xff;
-		guchar b = argb.blue * 0xff;
+		a = argb.alpha * 0xff;
+		r = argb.red * 0xff;
+		g = argb.green * 0xff;
+		b = argb.blue * 0xff;
 		
 		color.red = (color.red * (0xFF - a) + r * 0x101 * a) / 0xFF;
 		color.green = (color.green * (0xFF - a) + g * 0x101 * a) / 0xFF;
