@@ -27,4 +27,11 @@ if test ! -f libgnome-desktop/pnp.ids; then
 	touch libgnome-desktop/pnp.ids
 fi
 
+# Fetch submodules if needed
+if test ! -f libgnome-desktop/libgsystem/README; then
+  echo "+ Setting up submodules"
+  git submodule init
+  git submodule update
+fi
+
 . gnome-autogen.sh
