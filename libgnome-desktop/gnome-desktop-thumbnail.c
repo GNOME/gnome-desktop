@@ -1414,6 +1414,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
     {
       g_warning ("Failed to create thumbnail %s: %s", tmp_path, error->message);
       gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, original_mtime);
+      g_unlink (tmp_path);
       g_clear_error (&error);
     }
 
