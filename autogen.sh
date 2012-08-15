@@ -31,7 +31,7 @@ fi
 if test ! -f libgnome-desktop/libgsystem/README; then
   echo "+ Setting up submodules"
   git submodule init
-  git submodule update
 fi
+git submodule update
 
 . gnome-autogen.sh
