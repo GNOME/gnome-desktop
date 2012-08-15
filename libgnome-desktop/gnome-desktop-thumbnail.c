@@ -1163,7 +1163,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 	    }
 
 	  g_free (expanded_script);
-	  g_unlink(tmpname);
+	  g_unlink (tmpname);
 	  g_free (tmpname);
 	}
 
@@ -1340,6 +1340,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   GChecksum *checksum;
   guint8 digest[16];
   gsize digest_len = sizeof (digest);
+  GError *error;
 
   checksum = g_checksum_new (G_CHECKSUM_MD5);
   g_checksum_update (checksum, (const guchar *) uri, strlen (uri));
@@ -1383,10 +1384,11 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   width = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Width");
   height = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Height");
 
+  error = NULL;
   if (width != NULL && height != NULL) 
     saved_ok  = gdk_pixbuf_save (thumbnail,
 				 tmp_path,
-				 "png", NULL,
+				 "png", &error,
 				 "tEXt::Thumb::Image::Width", width,
 				 "tEXt::Thumb::Image::Height", height,
 				 "tEXt::Thumb::URI", uri,
@@ -1396,7 +1398,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   else
     saved_ok  = gdk_pixbuf_save (thumbnail,
 				 tmp_path,
-				 "png", NULL,
+				 "png", &error,
 				 "tEXt::Thumb::URI", uri,
 				 "tEXt::Thumb::MTime", mtime_str,
 				 "tEXt::Software", "GNOME::ThumbnailFactory",
@@ -1406,11 +1408,13 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   if (saved_ok)
     {
       g_chmod (tmp_path, 0600);
-      g_rename(tmp_path, path);
+      g_rename (tmp_path, path);
     }
   else
     {
+      g_warning ("Failed to create thumbnail %s: %s", tmp_path, error->message);
       gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, original_mtime);
+      g_clear_error (&error);
     }
 
   g_free (path);

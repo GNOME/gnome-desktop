@@ -2631,7 +2631,6 @@ pixbuf_tile (GdkPixbuf *src, GdkPixbuf *dest)
 	int tile_width, tile_height;
 	int dest_width = gdk_pixbuf_get_width (dest);
 	int dest_height = gdk_pixbuf_get_height (dest);
-	
 	tile_width = gdk_pixbuf_get_width (src);
 	tile_height = gdk_pixbuf_get_height (src);
 	
