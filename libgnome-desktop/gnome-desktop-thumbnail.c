@@ -298,6 +298,39 @@ size_prepared_cb (GdkPixbufLoader *loader,
   gdk_pixbuf_loader_set_size (loader, width, height);
 }
 
+static GdkPixbufLoader *
+create_loader (GFile        *file,
+               const guchar *data,
+               gsize         size)
+{
+  GdkPixbufLoader *loader;
+  GError *error = NULL;
+  char *mime_type;
+  char *filename;
+
+  loader = NULL;
+
+  /* need to specify the type here because the gdk_pixbuf_loader_write
+     doesn't have access to the filename in order to correct detect
+     the image type. */
+  filename = g_file_get_basename (file);
+  mime_type = g_content_type_guess (filename, data, size, NULL);
+  g_free (filename);
+
+  if (mime_type != NULL) {
+    loader = gdk_pixbuf_loader_new_with_mime_type (mime_type, &error);
+  }
+
+  if (loader == NULL) {
+    g_warning ("Unable to create loader for mime type %s: %s", mime_type, error->message);
+    g_clear_error (&error);
+    loader = gdk_pixbuf_loader_new ();
+  }
+  g_free (mime_type);
+
+  return loader;
+}
+
 static GdkPixbuf *
 _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 				   gint        width,
@@ -305,9 +338,9 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 				   gboolean    preserve_aspect_ratio)
 {
     gboolean result;
-    char buffer[LOAD_BUFFER_SIZE];
+    guchar buffer[LOAD_BUFFER_SIZE];
     gsize bytes_read;
-    GdkPixbufLoader *loader;
+    GdkPixbufLoader *loader = NULL;
     GdkPixbuf *pixbuf;	
     GdkPixbufAnimation *animation;
     GdkPixbufAnimationIter *iter;
@@ -316,6 +349,7 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     GFile *file;
     GFileInfo *file_info;
     GInputStream *input_stream;
+    GError *error = NULL;
 
     g_return_val_if_fail (uri != NULL, NULL);
 
@@ -345,20 +379,15 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     }
 
     if (input_stream == NULL) {
-        input_stream = gs_file_read_noatime (file, NULL, NULL);
+        input_stream = gs_file_read_noatime (file, NULL, &error);
         if (input_stream == NULL) {
+            if (error != NULL) {
+                g_warning ("Unable to create an input stream for %s: %s", uri, error->message);
+                g_clear_error (&error);
+            }
 	    g_object_unref (file);
             return NULL;
         }
-    }
-
-    loader = gdk_pixbuf_loader_new ();
-    if (1 <= width || 1 <= height) {
-        info.width = width;
-        info.height = height;
-	info.input_width = info.input_height = 0;
-        info.preserve_aspect_ratio = preserve_aspect_ratio;        
-        g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
     }
 
     has_frame = FALSE;
@@ -370,7 +399,11 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 					  buffer,
 					  sizeof (buffer),
 					  NULL,
-					  NULL);
+					  &error);
+        if (error != NULL) {
+            g_warning ("Error reading from %s: %s", uri, error->message);
+            g_clear_error (&error);
+        }
 	if (bytes_read == -1) {
 	    break;
 	}
@@ -379,10 +412,24 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 	    break;
 	}
 
+        if (loader == NULL) {
+            loader = create_loader (file, buffer, bytes_read);
+            if (1 <= width || 1 <= height) {
+              info.width = width;
+              info.height = height;
+              info.input_width = info.input_height = 0;
+              info.preserve_aspect_ratio = preserve_aspect_ratio;
+              g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
+            }
+            g_assert (loader != NULL);
+        }
+
 	if (!gdk_pixbuf_loader_write (loader,
 				      (unsigned char *)buffer,
 				      bytes_read,
-				      NULL)) {
+				      &error)) {
+            g_warning ("Error creating thumbnail for %s: %s", uri, error->message);
+            g_clear_error (&error);
 	    result = FALSE;
 	    break;
 	}
