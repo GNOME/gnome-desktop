@@ -102,7 +102,7 @@ free_layout (gpointer data)
   g_free (layout->xkb_name);
   g_free (layout->short_desc);
   g_free (layout->description);
-  g_free (layout);
+  g_slice_free (Layout, layout);
 }
 
 static void
@@ -114,7 +114,7 @@ free_option (gpointer data)
 
   g_free (option->id);
   g_free (option->description);
-  g_free (option);
+  g_slice_free (XkbOption, option);
 }
 
 static void
@@ -127,7 +127,7 @@ free_option_group (gpointer data)
   g_free (group->id);
   g_free (group->description);
   g_hash_table_destroy (group->options_table);
-  g_free (group);
+  g_slice_free (XkbOptionGroup, group);
 }
 
 /**
@@ -277,7 +277,7 @@ parse_start_element (GMarkupParseContext  *context,
           return;
         }
 
-      priv->current_parser_layout = g_new0 (Layout, 1);
+      priv->current_parser_layout = g_slice_new0 (Layout);
     }
   else if (strcmp (element_name, "variant") == 0)
     {
@@ -295,7 +295,7 @@ parse_start_element (GMarkupParseContext  *context,
           return;
         }
 
-      priv->current_parser_variant = g_new0 (Layout, 1);
+      priv->current_parser_variant = g_slice_new0 (Layout);
       priv->current_parser_variant->is_variant = TRUE;
       priv->current_parser_variant->main_layout = priv->current_parser_layout;
     }
@@ -308,7 +308,7 @@ parse_start_element (GMarkupParseContext  *context,
           return;
         }
 
-      priv->current_parser_group = g_new0 (XkbOptionGroup, 1);
+      priv->current_parser_group = g_slice_new0 (XkbOptionGroup);
       /* Maps option ids to XkbOption structs. Owns the XkbOption structs. */
       priv->current_parser_group->options_table = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                                          NULL, free_option);
@@ -337,7 +337,7 @@ parse_start_element (GMarkupParseContext  *context,
           return;
         }
 
-      priv->current_parser_option = g_new0 (XkbOption, 1);
+      priv->current_parser_option = g_slice_new0 (XkbOption);
     }
 }
 
