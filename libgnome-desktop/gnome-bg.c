@@ -299,6 +299,12 @@ bg_gsettings_mapping (GVariant *value,
 	const gchar *bg_key_value;
 	char *filename = NULL;
 
+	/* The final fallback if nothing matches is with a NULL value. */
+	if (value == NULL) {
+		*result = NULL;
+		return TRUE;
+	}
+
 	bg_key_value = g_variant_get_string (value, NULL);
 
 	if (bg_key_value && *bg_key_value != '\0') {
