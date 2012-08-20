@@ -35,6 +35,7 @@ introspection_sources = 		\
 	gnome-pnp-ids.c			\
 	gnome-wall-clock.c		\
 	gnome-xkb-info.c		\
+	gnome-idle-monitor.c		\
 	edid-parse.c
 
 libgnome_desktop_3_la_SOURCES = 	\
@@ -71,7 +72,8 @@ libgnome_desktop_HEADERS = \
         gnome-rr-labeler.h		\
         gnome-pnp-ids.h			\
         gnome-wall-clock.h		\
-	gnome-xkb-info.h
+	gnome-xkb-info.h		\
+	gnome-idle-monitor.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
