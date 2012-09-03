@@ -373,12 +373,12 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA
 	if (gnome_rr_config_get_clone (labeler->priv->config)) {
 		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
 
-		/* Translators:  this is the feature where what you see on your laptop's
-		 * screen is the same as your external monitor.  Here, "Mirror" is being
-		 * used as an adjective, not as a verb.  For example, the Spanish
-		 * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+		/* Translators:  this is the feature where what you see on your
+		 * laptop's screen is the same as your external projector.
+		 * Here, "Mirrored" is being used as an adjective.  For example,
+		 * the Spanish translation could be "Pantallas en Espejo".
 		 */
-		display_name = _("Mirror Screens");
+		display_name = _("Mirrored Displays");
 	} else
 		display_name = gnome_rr_output_info_get_display_name (output);
 
