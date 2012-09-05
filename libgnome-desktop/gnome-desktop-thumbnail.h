@@ -105,6 +105,11 @@ GdkPixbuf *gnome_desktop_thumbnail_scale_down_pixbuf (GdkPixbuf          *pixbuf
 						      int                 dest_width,
 						      int                 dest_height);
 
+char * gnome_desktop_thumbnail_factory_give_me_a_thumbnail (GnomeDesktopThumbnailFactory *factory,
+                                                            char                         *uri,
+                                                            char                         *mime_type,
+                                                            time_t                        mtime);
+
 G_END_DECLS
 
 #endif /* GNOME_DESKTOP_THUMBNAIL_H */

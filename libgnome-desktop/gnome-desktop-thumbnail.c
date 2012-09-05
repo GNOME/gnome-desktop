@@ -1540,3 +1540,69 @@ gnome_desktop_thumbnail_is_valid (GdkPixbuf          *pixbuf,
   
   return TRUE;
 }
+
+/**
+ * gnome_desktop_thumbnail_give_me_a_thumbnail:
+ * @factory: A #GnomeDesktopThumbnailFactory
+ * @uri: The URI to thumbnail
+ * @mime_type: The MIME type of the file
+ * @mtime: The mtime of the file
+ *
+ * Give me a thumbnail for @uri. If the file is newer than
+ * @mtime, this function may generate a new thumbnail. This
+ * function may cache the generated thumbnail, or it may
+ * return a cached thumbnail. This function should always
+ * return a valid path.
+ *
+ * Returns: (transfer full): a valid path to a thumbnail.
+ */
+char *
+gnome_desktop_thumbnail_factory_give_me_a_thumbnail (GnomeDesktopThumbnailFactory *factory,
+                                                     char                         *uri,
+                                                     char                         *mime_type,
+                                                     time_t                        mtime)
+{
+  GnomeDesktopThumbnailFactoryPrivate *priv = factory->priv;
+  GdkPixbuf *pixbuf;
+  char *good_path, *failed_path;
+
+  good_path = lookup_thumbnail_path (uri, mtime, priv->size, FALSE);
+  failed_path = lookup_thumbnail_path (uri, mtime, priv->size, TRUE);
+
+  /* Check for a good thumbnail first. */
+  if (good_path != NULL)
+    {
+      g_free (failed_path);
+      return good_path;
+    }
+
+  /* Otherwise, check for a failed thumbnail. */
+  if (failed_path != NULL)
+    {
+      g_free (good_path);
+      return failed_path;
+    }
+
+  /* OK, fallback case: generate a new thumbnail. */
+  pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, mime_type);
+  if (save_thumbnail (pixbuf, good_path, uri, mtime))
+    {
+      g_clear_object (&pixbuf);
+      g_free (failed_path);
+      return good_path;
+    }
+
+  g_clear_object (&pixbuf);
+
+  /* If we don't have that, generate a failed thumbnail. */
+  pixbuf = make_failed_thumbnail ();
+  if (save_thumbnail (pixbuf, failed_path, uri, mtime))
+    {
+      g_clear_object (&pixbuf);
+      g_free (good_path);
+      return failed_path;
+    }
+
+  g_warning ("Could save thumbnails to thumbnail directory.");
+  return "";
+}
