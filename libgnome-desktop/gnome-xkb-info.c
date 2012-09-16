@@ -341,7 +341,7 @@ parse_start_element (GMarkupParseContext  *context,
     }
 }
 
-static void
+static gboolean
 maybe_replace (GHashTable *table,
                gchar      *key,
                Layout     *new_layout)
@@ -358,6 +358,8 @@ maybe_replace (GHashTable *table,
     replace = strlen (new_layout->description) < strlen (layout->description);
   if (replace)
     g_hash_table_replace (table, key, new_layout);
+
+  return replace;
 }
 
 static void
@@ -413,6 +415,8 @@ parse_end_element (GMarkupParseContext  *context,
     }
   else if (strcmp (element_name, "iso639Id") == 0)
     {
+      gboolean replaced = FALSE;
+
       if (!priv->current_parser_iso639Id)
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
@@ -421,12 +425,13 @@ parse_end_element (GMarkupParseContext  *context,
         }
 
       if (priv->current_parser_layout)
-        maybe_replace (priv->layouts_by_iso639,
-                       priv->current_parser_iso639Id, priv->current_parser_layout);
+        replaced = maybe_replace (priv->layouts_by_iso639,
+                                  priv->current_parser_iso639Id, priv->current_parser_layout);
       else if (priv->current_parser_variant)
-        maybe_replace (priv->layouts_by_iso639,
-                       priv->current_parser_iso639Id, priv->current_parser_variant);
-      else
+        replaced = maybe_replace (priv->layouts_by_iso639,
+                                  priv->current_parser_iso639Id, priv->current_parser_variant);
+
+      if (!replaced)
         g_free (priv->current_parser_iso639Id);
 
       priv->current_parser_iso639Id = NULL;
