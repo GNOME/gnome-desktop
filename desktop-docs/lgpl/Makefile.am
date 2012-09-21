@@ -5,6 +5,6 @@ DOC_MODULE = lgpl
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = ar de el es eu fi fr hu ko oc pa sv uk vi zh_CN
+DOC_LINGUAS = ar de el es eu fi fr hu ko oc pa sl sv uk vi zh_CN
 
 -include $(top_srcdir)/git.mk
