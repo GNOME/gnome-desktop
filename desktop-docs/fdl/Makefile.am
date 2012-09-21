@@ -5,6 +5,6 @@ DOC_MODULE = fdl
 DOC_ENTITIES = 
 DOC_INCLUDES = 
 
-DOC_LINGUAS = ar ca el es eu fr hu ko oc pl sv uk vi de
+DOC_LINGUAS = ar ca el es eu fr hu ko oc pl sl sv uk vi de
 
 -include $(top_srcdir)/git.mk
