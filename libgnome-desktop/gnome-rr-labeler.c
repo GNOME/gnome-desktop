@@ -268,23 +268,25 @@ rounded_rectangle (cairo_t *cr,
  * to match the corner radius */
 #define LABEL_CORNER_RADIUS 6 + LABEL_WINDOW_EDGE_THICKNESS
 
-static gboolean
-label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
+static void
+label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_shape)
 {
+	GdkRGBA shape_color = { 0, 0, 0, 1 };
 	GdkRGBA *rgba;
 	GtkAllocation allocation;
 
 	rgba = g_object_get_data (G_OBJECT (widget), "rgba");
 	gtk_widget_get_allocation (widget, &allocation);
 
+	cairo_save (cr);
 	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-	/* clear any content */
-	cairo_set_source_rgba (cr, 0, 0, 0, 0);
-	cairo_paint (cr);
-
 	/* edge outline */
-	cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
+	if (for_shape)
+		gdk_cairo_set_source_rgba (cr, &shape_color);
+	else
+		cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
+
 	rounded_rectangle (cr,
 	                   LABEL_WINDOW_EDGE_THICKNESS / 2.0,
 	                   LABEL_WINDOW_EDGE_THICKNESS / 2.0,
@@ -295,8 +297,13 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 	cairo_stroke (cr);
 
 	/* fill */
-	rgba->alpha = 0.75;
-	gdk_cairo_set_source_rgba (cr, rgba);
+	if (for_shape) {
+		gdk_cairo_set_source_rgba (cr, &shape_color);
+	} else {
+		rgba->alpha = 0.75;
+		gdk_cairo_set_source_rgba (cr, rgba);
+	}
+
 	rounded_rectangle (cr,
 	                   LABEL_WINDOW_EDGE_THICKNESS,
 	                   LABEL_WINDOW_EDGE_THICKNESS,
@@ -304,6 +311,53 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 	                   allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2,
 	                   LABEL_CORNER_RADIUS, LABEL_CORNER_RADIUS);
 	cairo_fill (cr);
+
+	cairo_restore (cr);
+}
+
+static void
+maybe_update_shape (GtkWidget *widget)
+{
+	cairo_t *cr;
+	cairo_surface_t *surface;
+	cairo_region_t *region;
+
+	/* fallback to XShape only for non-composited clients */
+	if (gtk_widget_is_composited (widget)) {
+		gtk_widget_shape_combine_region (widget, NULL);
+		return;
+	}
+
+	surface = gdk_window_create_similar_surface (gtk_widget_get_window (widget),
+						     CAIRO_CONTENT_COLOR_ALPHA,
+						     gtk_widget_get_allocated_width (widget),
+						     gtk_widget_get_allocated_height (widget));
+
+	cr = cairo_create (surface);
+	label_draw_background_and_frame (widget, cr, TRUE);
+	cairo_destroy (cr);
+
+	region = gdk_cairo_region_create_from_surface (surface);
+	gtk_widget_shape_combine_region (widget, region);
+
+	cairo_surface_destroy (surface);
+	cairo_region_destroy (region);
+}
+
+static gboolean
+label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
+{
+	if (gtk_widget_is_composited (widget)) {
+		/* clear any content */
+		cairo_save (cr);
+		cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+		cairo_set_source_rgba (cr, 0, 0, 0, 0);
+		cairo_paint (cr);
+		cairo_restore (cr);
+	}
+
+	maybe_update_shape (widget);
+	label_draw_background_and_frame (widget, cr, FALSE);
 
 	return FALSE;
 }
@@ -337,6 +391,15 @@ label_window_realize_cb (GtkWidget *widget)
 	region = cairo_region_create ();
 	gtk_widget_input_shape_combine_region (widget, region);
 	cairo_region_destroy (region);
+
+	maybe_update_shape (widget);
+}
+
+static void
+label_window_composited_changed_cb (GtkWidget *widget, GnomeRRLabeler *labeler)
+{
+	if (gtk_widget_get_realized (widget))
+		maybe_update_shape (widget);
 }
 
 static GtkWidget *
@@ -373,6 +436,8 @@ create_label_window (GnomeRRLabeler *labeler, GnomeRROutputInfo *output, GdkRGBA
 			  G_CALLBACK (label_window_draw_event_cb), labeler);
 	g_signal_connect (window, "realize",
 			  G_CALLBACK (label_window_realize_cb), labeler);
+	g_signal_connect (window, "composited-changed",
+			  G_CALLBACK (label_window_composited_changed_cb), labeler);
 
 	if (gnome_rr_config_get_clone (labeler->priv->config)) {
 		/* Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name() */
