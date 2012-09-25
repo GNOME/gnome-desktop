@@ -690,6 +690,36 @@ gnome_xkb_info_get_all_option_groups (GnomeXkbInfo *self)
 }
 
 /**
+ * gnome_xkb_info_description_for_group:
+ * @self: a #GnomeXkbInfo
+ * @group_id: identifier for group
+ *
+ * Return value: the translated description for the group @group_id.
+ *
+ * Since: 3.8
+ */
+const gchar *
+gnome_xkb_info_description_for_group (GnomeXkbInfo *self,
+                                      const gchar  *group_id)
+{
+  GnomeXkbInfoPrivate *priv;
+  const XkbOptionGroup *group;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  group = g_hash_table_lookup (priv->option_groups_table, group_id);
+  if (!group)
+    return NULL;
+
+  return XKEYBOARD_CONFIG_(group->description);
+}
+
+/**
  * gnome_xkb_info_get_options_for_group:
  * @self: a #GnomeXkbInfo
  * @group_id: group's identifier about which to retrieve the options
