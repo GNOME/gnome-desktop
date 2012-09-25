@@ -279,6 +279,10 @@ label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 
 	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
+	/* clear any content */
+	cairo_set_source_rgba (cr, 0, 0, 0, 0);
+	cairo_paint (cr);
+
 	/* edge outline */
 	cairo_set_source_rgba (cr, 0, 0, 0, 0.5);
 	rounded_rectangle (cr,
