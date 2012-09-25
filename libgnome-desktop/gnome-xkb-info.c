@@ -639,7 +639,7 @@ gnome_xkb_info_new (void)
  *
  * Returns a list of all layout identifiers we know about.
  *
- * Return value: (transfer container) (element-type gchar): the list
+ * Return value: (transfer container) (element-type utf8): the list
  * of layout names. The caller takes ownership of the #GList but not
  * of the strings themselves, those are internally allocated and must
  * not be modified.
@@ -667,7 +667,7 @@ gnome_xkb_info_get_all_layouts (GnomeXkbInfo *self)
  *
  * Returns a list of all option group identifiers we know about.
  *
- * Return value: (transfer container) (element-type gchar): the list
+ * Return value: (transfer container) (element-type utf8): the list
  * of option group ids. The caller takes ownership of the #GList but
  * not of the strings themselves, those are internally allocated and
  * must not be modified.
@@ -697,7 +697,7 @@ gnome_xkb_info_get_all_option_groups (GnomeXkbInfo *self)
  * Returns a list of all option identifiers we know about for group
  * @group_id.
  *
- * Return value: (transfer container) (element-type gchar): the list
+ * Return value: (transfer container) (element-type utf8): the list
  * of option ids. The caller takes ownership of the #GList but not of
  * the strings themselves, those are internally allocated and must not
  * be modified.
