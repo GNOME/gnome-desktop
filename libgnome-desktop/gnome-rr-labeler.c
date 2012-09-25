@@ -309,7 +309,8 @@ label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_sh
 	                   LABEL_WINDOW_EDGE_THICKNESS,
 	                   allocation.width - LABEL_WINDOW_EDGE_THICKNESS * 2,
 	                   allocation.height - LABEL_WINDOW_EDGE_THICKNESS * 2,
-	                   LABEL_CORNER_RADIUS, LABEL_CORNER_RADIUS);
+	                   LABEL_CORNER_RADIUS - LABEL_WINDOW_EDGE_THICKNESS / 2.0,
+			   LABEL_CORNER_RADIUS - LABEL_WINDOW_EDGE_THICKNESS / 2.0);
 	cairo_fill (cr);
 
 	cairo_restore (cr);
