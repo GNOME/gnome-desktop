@@ -282,6 +282,7 @@ on_schema_change (GSettings *schema,
                   const char *key,
                   gpointer user_data)
 {
+	g_debug ("Updating clock because schema changed");
 	update_clock (user_data);
 }
 
@@ -292,6 +293,7 @@ on_tz_changed (GFileMonitor      *monitor,
                GFileMonitorEvent *event,
                gpointer           user_data)
 {
+	g_debug ("Updating clock because timezone changed");
 	update_clock (user_data);
 }
 
