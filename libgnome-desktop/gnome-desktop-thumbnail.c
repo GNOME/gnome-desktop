@@ -1161,6 +1161,7 @@ run_script (char *script, const char *uri, int size)
   int exit_status;
   char *expanded_script;
   char *tmpname;
+  char **argv = NULL;
   GdkPixbuf *pixbuf = NULL;
 
   fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
@@ -1174,7 +1175,12 @@ run_script (char *script, const char *uri, int size)
   if (expanded_script == NULL)
     goto out;
 
-  if (!g_spawn_command_line_sync (expanded_script, NULL, NULL, &exit_status, NULL))
+  if (!g_shell_parse_argv (expanded_script, NULL, &argv, NULL))
+    goto out;
+
+  if (!g_spawn_sync (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
+                     NULL, NULL, NULL, NULL,
+                     &exit_status, NULL))
     goto out;
 
   if (exit_status != 0)
@@ -1186,6 +1192,7 @@ run_script (char *script, const char *uri, int size)
   g_free (expanded_script);
   g_unlink (tmpname);
   g_free (tmpname);
+  g_strfreev (argv);
 
   return pixbuf;
 }
