@@ -45,6 +45,8 @@
 #include <glib/gstdio.h>
 #include <libgsystem.h>
 
+#include <sys/resource.h>
+
 #define SECONDS_BETWEEN_STATS 10
 
 struct _GnomeDesktopThumbnailFactoryPrivate {
@@ -1154,6 +1156,23 @@ expand_thumbnailing_script (const char *script,
   return NULL;
 }
 
+#define MAX_HELPER_MEMORY (256 * 1024 * 1024)	/* 256 MB */
+#define MAX_HELPER_SECONDS (2)			/* 2 seconds */
+
+static void
+set_resource_limits (gpointer user_data)
+{
+  struct rlimit limit;
+
+  limit.rlim_cur = MAX_HELPER_MEMORY;
+  limit.rlim_max = MAX_HELPER_MEMORY;
+  setrlimit (RLIMIT_AS, &limit);
+
+  limit.rlim_cur = MAX_HELPER_SECONDS;
+  limit.rlim_max = MAX_HELPER_SECONDS;
+  setrlimit (RLIMIT_CPU, &limit);
+}
+
 static GdkPixbuf *
 run_script (char *script, const char *uri, int size)
 {
@@ -1179,7 +1198,7 @@ run_script (char *script, const char *uri, int size)
     goto out;
 
   if (!g_spawn_sync (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
-                     NULL, NULL, NULL, NULL,
+                     set_resource_limits, NULL, NULL, NULL,
                      &exit_status, NULL))
     goto out;
 
