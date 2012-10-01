@@ -1154,6 +1154,42 @@ expand_thumbnailing_script (const char *script,
   return NULL;
 }
 
+static GdkPixbuf *
+run_script (char *script, const char *uri, int size)
+{
+  int fd;
+  int exit_status;
+  char *expanded_script;
+  char *tmpname;
+  GdkPixbuf *pixbuf = NULL;
+
+  fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
+
+  if (fd == -1)
+    return NULL;
+
+  close (fd);
+  expanded_script = expand_thumbnailing_script (script, size, uri, tmpname);
+
+  if (expanded_script == NULL)
+    goto out;
+
+  if (!g_spawn_command_line_sync (expanded_script, NULL, NULL, &exit_status, NULL))
+    goto out;
+
+  if (exit_status != 0)
+    goto out;
+
+  pixbuf = gdk_pixbuf_new_from_file (tmpname, NULL);
+
+ out:
+  g_free (expanded_script);
+  g_unlink (tmpname);
+  g_free (tmpname);
+
+  return pixbuf;
+}
+
 /**
  * gnome_desktop_thumbnail_factory_generate_thumbnail:
  * @factory: a #GnomeDesktopThumbnailFactory
@@ -1175,14 +1211,12 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 						    const char            *mime_type)
 {
   GdkPixbuf *pixbuf, *scaled, *tmp_pixbuf;
-  char *script, *expanded_script;
+  char *script;
   int width, height, size;
   int original_width = 0;
   int original_height = 0;
   char dimension[12];
   double scale;
-  int exit_status;
-  char *tmpname;
 
   g_return_val_if_fail (uri != NULL, NULL);
   g_return_val_if_fail (mime_type != NULL, NULL);
@@ -1209,28 +1243,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   
   if (script)
     {
-      int fd;
-
-      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
-
-      if (fd != -1)
-	{
-	  close (fd);
-
-	  expanded_script = expand_thumbnailing_script (script, size, uri, tmpname);
-	  if (expanded_script != NULL &&
-	      g_spawn_command_line_sync (expanded_script,
-					 NULL, NULL, &exit_status, NULL) &&
-	      exit_status == 0)
-	    {
-	      pixbuf = gdk_pixbuf_new_from_file (tmpname, NULL);
-	    }
-
-	  g_free (expanded_script);
-	  g_unlink (tmpname);
-	  g_free (tmpname);
-	}
-
+      pixbuf = run_script (script, uri, size);
       g_free (script);
     }
 
