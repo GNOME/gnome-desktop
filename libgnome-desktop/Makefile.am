@@ -81,6 +81,9 @@ pnpdata_DATA = pnp.ids
 endif
 pnpdata_DATA_dist = pnp.ids
 
+update-pnp-ids:
+	wget -O $(top_srcdir)/libgnome-desktop/pnp.ids "http://git.fedorahosted.org/git/?p=hwdata.git;a=blob_plain;f=pnp.ids;hb=HEAD"
+
 check:
 	test -s $(top_srcdir)/libgnome-desktop/pnp.ids
 

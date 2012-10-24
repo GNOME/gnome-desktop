@@ -20,13 +20,6 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-if test "`which gvfs-copy`" != ""; then
-	gvfs-copy "http://git.fedorahosted.org/git/?p=hwdata.git;a=blob_plain;f=pnp.ids;hb=HEAD" libgnome-desktop/pnp.ids
-fi
-if test ! -f libgnome-desktop/pnp.ids; then
-	touch libgnome-desktop/pnp.ids
-fi
-
 # Fetch submodules if needed
 if test ! -f libgnome-desktop/libgsystem/README; then
   echo "+ Setting up submodules"
