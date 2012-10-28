@@ -22,8 +22,6 @@ main (int    argc,
   GnomeWallClock *clock;
   GMainLoop *loop;
 
-  g_type_init ();
-  
   loop = g_main_loop_new (NULL, TRUE);
   
   clock = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
