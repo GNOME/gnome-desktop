@@ -181,16 +181,18 @@ find_idletime_counter (Display *display)
 	int		    i;
 	int		    ncounters;
 	XSyncSystemCounter *counters;
+	XSyncCounter        counter = None;
 
 	counters = XSyncListSystemCounters (display, &ncounters);
 	for (i = 0; i < ncounters; i++) {
 		if (counters[i].name != NULL && strcmp (counters[i].name, "IDLETIME") == 0) {
-			return counters[i].counter;
+			counter = counters[i].counter;
+			break;
 		}
 	}
 	XSyncFreeSystemCounterList (counters);
 
-	return None;
+	return counter;
 }
 
 static guint32
