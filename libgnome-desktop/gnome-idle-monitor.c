@@ -276,27 +276,9 @@ gnome_idle_monitor_dispose (GObject *object)
 		monitor->priv->watches = NULL;
 	}
 
+	gdk_window_remove_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
+
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
-}
-
-static GObject *
-gnome_idle_monitor_constructor (GType                  type,
-                                guint                  n_construct_properties,
-                                GObjectConstructParam *construct_properties)
-{
-	static GnomeIdleMonitor *global_monitor = NULL;
-
-	if (g_once_init_enter (&global_monitor)) {
-		GnomeIdleMonitor *monitor;
-
-		monitor = GNOME_IDLE_MONITOR (G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->constructor (type,
-													     n_construct_properties,
-													     construct_properties));
-
-		g_once_init_leave (&global_monitor, monitor);
-	}
-
-	return g_object_ref (global_monitor);
 }
 
 static void
@@ -305,7 +287,6 @@ gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gnome_idle_monitor_dispose;
-	object_class->constructor = gnome_idle_monitor_constructor;
 
         signals[BECAME_ACTIVE] =
                 g_signal_new ("became-active",
