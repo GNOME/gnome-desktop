@@ -45,6 +45,8 @@ struct GnomeIdleMonitorPrivate
 	XSyncCounter counter;
 
 	XSyncAlarm   xalarm_reset;
+
+	GdkDevice   *device;
 };
 
 typedef struct
@@ -56,6 +58,15 @@ typedef struct
 	GDestroyNotify		  notify;
 	XSyncAlarm		  xalarm;
 } GnomeIdleMonitorWatch;
+
+enum
+{
+	PROP_0,
+	PROP_DEVICE,
+	PROP_LAST,
+};
+
+static GParamSpec *obj_props[PROP_LAST];
 
 enum
 {
@@ -167,22 +178,37 @@ xevent_filter (GdkXEvent	*xevent,
 	return GDK_FILTER_CONTINUE;
 }
 
+static char *
+counter_name_for_device (GdkDevice *device)
+{
+	if (device) {
+		gint device_id = gdk_x11_device_get_id (device);
+		if (device_id > 0)
+			return g_strdup_printf ("DEVICEIDLETIME %d", device_id);
+	}
+
+	return g_strdup ("IDLETIME");
+}
+
 static XSyncCounter
-find_idletime_counter (Display *display)
+find_idletime_counter (GnomeIdleMonitor *monitor)
 {
 	int		    i;
 	int		    ncounters;
 	XSyncSystemCounter *counters;
 	XSyncCounter        counter = None;
+	char               *counter_name;
 
-	counters = XSyncListSystemCounters (display, &ncounters);
+	counter_name = counter_name_for_device (monitor->priv->device);
+	counters = XSyncListSystemCounters (monitor->priv->display, &ncounters);
 	for (i = 0; i < ncounters; i++) {
-		if (counters[i].name != NULL && strcmp (counters[i].name, "IDLETIME") == 0) {
+		if (counters[i].name != NULL && strcmp (counters[i].name, counter_name) == 0) {
 			counter = counters[i].counter;
 			break;
 		}
 	}
 	XSyncFreeSystemCounterList (counters);
+	g_free (counter_name);
 
 	return counter;
 }
@@ -246,7 +272,7 @@ init_xsync (GnomeIdleMonitor *monitor)
 		return;
 	}
 
-	monitor->priv->counter = find_idletime_counter (monitor->priv->display);
+	monitor->priv->counter = find_idletime_counter (monitor);
 	if (monitor->priv->counter == None) {
 		g_warning ("GnomeIdleMonitor: IDLETIME counter not found");
 		return;
@@ -270,7 +296,54 @@ gnome_idle_monitor_dispose (GObject *object)
 
 	gdk_window_remove_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
 
+	g_clear_object (&monitor->priv->device);
+
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
+}
+
+static void
+gnome_idle_monitor_get_property (GObject    *object,
+				 guint       prop_id,
+				 GValue     *value,
+				 GParamSpec *pspec)
+{
+	GnomeIdleMonitor *monitor = GNOME_IDLE_MONITOR (object);
+	switch (prop_id)
+	{
+	case PROP_DEVICE:
+		g_value_set_object (value, monitor->priv->device);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+gnome_idle_monitor_set_property (GObject      *object,
+				 guint         prop_id,
+				 const GValue *value,
+				 GParamSpec   *pspec)
+{
+	GnomeIdleMonitor *monitor = GNOME_IDLE_MONITOR (object);
+	switch (prop_id)
+	{
+	case PROP_DEVICE:
+		monitor->priv->device = g_value_dup_object (value);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+gnome_idle_monitor_constructed (GObject *object)
+{
+	GnomeIdleMonitor *monitor = GNOME_IDLE_MONITOR (object);
+
+	monitor->priv->display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	init_xsync (monitor);
 }
 
 static void
@@ -279,6 +352,22 @@ gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gnome_idle_monitor_dispose;
+	object_class->constructed = gnome_idle_monitor_constructed;
+	object_class->get_property = gnome_idle_monitor_get_property;
+	object_class->set_property = gnome_idle_monitor_set_property;
+
+	/**
+	 * GnomeIdleMonitor:device:
+	 *
+	 * The device to listen to idletime on.
+	 */
+	obj_props[PROP_DEVICE] =
+		g_param_spec_object ("device",
+				     "Device",
+				     "The device to listen to idletime on",
+				     GDK_TYPE_DEVICE,
+				     G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+	g_object_class_install_property (object_class, PROP_DEVICE, obj_props[PROP_DEVICE]);
 
         signals[BECAME_ACTIVE] =
                 g_signal_new ("became-active",
@@ -307,16 +396,34 @@ gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
 							NULL,
 							NULL,
 							(GDestroyNotify)idle_monitor_watch_free);
-	monitor->priv->counter = None;
-
-	monitor->priv->display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-	init_xsync (monitor);
 }
 
+/**
+ * gnome_idle_monitor_new:
+ *
+ * Returns: a new #GnomeIdleMonitor that tracks the server-global
+ * idletime for all devices. To track device-specific idletime,
+ * use gnome_idle_monitor_new_for_device().
+ */
 GnomeIdleMonitor *
 gnome_idle_monitor_new (void)
 {
 	return GNOME_IDLE_MONITOR (g_object_new (GNOME_TYPE_IDLE_MONITOR, NULL));
+}
+
+/**
+ * gnome_idle_monitor_new_for_device:
+ * @device: A #GdkDevice to get the idle time for.
+ *
+ * Returns: a new #GnomeIdleMonitor that tracks the device-specific
+ * idletime for @device. To track server-global idletime for all
+ * devices, use gnome_idle_monitor_new().
+ */
+GnomeIdleMonitor *
+gnome_idle_monitor_new_for_device (GdkDevice *device)
+{
+	return GNOME_IDLE_MONITOR (g_object_new (GNOME_TYPE_IDLE_MONITOR,
+						 "device", device, NULL));
 }
 
 /**
@@ -392,7 +499,7 @@ gnome_idle_monitor_remove_watch (GnomeIdleMonitor *monitor,
  * gnome_idle_monitor_get_idletime:
  * @monitor: A #GnomeIdleMonitor
  *
- * Returns: The user's current idle time, in milliseconds.
+ * Returns: The current idle time, in milliseconds.
  */
 gint64
 gnome_idle_monitor_get_idletime (GnomeIdleMonitor *monitor)

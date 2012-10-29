@@ -59,6 +59,7 @@ typedef void (*GnomeIdleMonitorWatchFunc) (GnomeIdleMonitor      *monitor,
 GType              gnome_idle_monitor_get_type     (void);
 
 GnomeIdleMonitor * gnome_idle_monitor_new          (void);
+GnomeIdleMonitor * gnome_idle_monitor_new_for_device (GdkDevice *device);
 
 void               gnome_idle_monitor_add_watch    (GnomeIdleMonitor         *monitor,
                                                     guint                     interval,
