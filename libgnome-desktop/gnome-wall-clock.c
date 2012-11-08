@@ -25,6 +25,7 @@
 #include "config.h"
 
 #include <glib/gi18n-lib.h>
+#include <langinfo.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-wall-clock.h"
@@ -40,6 +41,7 @@ struct _GnomeWallClockPrivate {
 	GSettings    *desktop_settings;
 
 	gboolean time_only;
+	gboolean ampm_available;
 };
 
 enum {
@@ -65,6 +67,7 @@ static void
 gnome_wall_clock_init (GnomeWallClock *self)
 {
 	GFile *tz;
+	const char *ampm;
 
 	self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_WALL_CLOCK, GnomeWallClockPrivate);
 	
@@ -78,6 +81,10 @@ gnome_wall_clock_init (GnomeWallClock *self)
 	
 	self->priv->desktop_settings = g_settings_new ("org.gnome.desktop.interface");
 	g_signal_connect (self->priv->desktop_settings, "changed", G_CALLBACK (on_schema_change), self);
+
+	ampm = nl_langinfo (AM_STR);
+	if (ampm != NULL && *ampm != '\0')
+		self->priv->ampm_available = FALSE;
 
 	update_clock (self);
 }
@@ -231,7 +238,8 @@ update_clock (gpointer data)
 	self->priv->clock_update_id = g_source_attach (source, NULL);
 	g_source_unref (source);
 
-	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H) {
+	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H ||
+	    self->priv->ampm_available == FALSE) {
 		if (show_full_date) {
 			/* Translators: This is the time format with full date used
 			   in 24-hour mode. */
