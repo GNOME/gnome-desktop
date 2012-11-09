@@ -1463,6 +1463,13 @@ read_edid_data (GnomeRROutput *output, gsize *len)
 			       output->id, edid_atom, len);
     }
 
+    if (!result)
+    {
+	edid_atom = XInternAtom (DISPLAY (output), "XFree86_DDC_EDID1_RAWDATA", FALSE);
+	result = get_property (DISPLAY (output),
+			       output->id, edid_atom, len);
+    }
+
     if (result)
     {
 	if (*len % 128 == 0)
