@@ -445,8 +445,8 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  *
  * If you need to check for more than one interval of
  * idle time, it may be more convenient to connect to the
- * #GnomeIdleMonitor:::triggered-idle signal, and switch on the
- * watch ID that is passed to the signal.
+ * #GnomeIdleMonitor:::triggered-idle signal, and filter on the
+ * watch ID received in the signal handler.
  *
  * Also note that this function will only care about positive transitions
  * (user's idle time exceeding a certain time). If you want to know about
