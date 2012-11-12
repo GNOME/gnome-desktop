@@ -133,7 +133,7 @@ gnome_rr_debug_LDADD =		\
 	$(lib_LTLIBRARIES)	\
 	$(XLIB_LIBS)
 
-noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail
+noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail test-idle-monitor
 test_xkb_info_LDADD =		\
 	$(GNOME_DESKTOP_LIBS)	\
 	$(lib_LTLIBRARIES)	\
@@ -144,5 +144,7 @@ test_pnp_ids_LDADD = $(test_xkb_info_LDADD)
 test_wall_clock_LDADD = $(test_xkb_info_LDADD)
 
 test_desktop_thumbnail_LDADD = $(test_xkb_info_LDADD)
+
+test_idle_monitor_LDADD = $(test_xkb_info_LDADD)
 
 -include $(top_srcdir)/git.mk
