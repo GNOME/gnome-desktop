@@ -76,15 +76,7 @@ _xsyncvalue_to_int64 (XSyncValue value)
 		| (guint64) XSyncValueLow32 (value);
 }
 
-static XSyncValue
-_int64_to_xsyncvalue (gint64 value)
-{
-	XSyncValue ret;
-
-	XSyncIntsToValue (&ret, value, ((guint64)value) >> 32);
-
-	return ret;
-}
+#define GINT64_TO_XSYNCVALUE(value, ret) XSyncIntsToValue (ret, value, ((guint64)value) >> 32)
 
 static gboolean
 _find_alarm (gpointer		    key,
@@ -112,7 +104,7 @@ _xsync_alarm_set (GnomeIdleMonitor	*monitor,
 	attr.delta = delta;
 	attr.events = TRUE;
 
-	attr.trigger.wait_value = _int64_to_xsyncvalue (interval);
+	GINT64_TO_XSYNCVALUE (interval, &attr.trigger.wait_value);
 	attr.trigger.test_type = test_type;
 	return XSyncCreateAlarm (monitor->priv->display, flags, &attr);
 }
