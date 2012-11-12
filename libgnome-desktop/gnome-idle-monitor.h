@@ -61,12 +61,11 @@ GType              gnome_idle_monitor_get_type     (void);
 GnomeIdleMonitor * gnome_idle_monitor_new          (void);
 GnomeIdleMonitor * gnome_idle_monitor_new_for_device (GdkDevice *device);
 
-void               gnome_idle_monitor_add_watch    (GnomeIdleMonitor         *monitor,
+guint              gnome_idle_monitor_add_watch    (GnomeIdleMonitor         *monitor,
                                                     guint                     interval_msec,
                                                     GnomeIdleMonitorWatchFunc callback,
                                                     gpointer                  user_data,
-                                                    GDestroyNotify            notify,
-	                                            guint                    *watch_id);
+                                                    GDestroyNotify            notify);
 
 void               gnome_idle_monitor_remove_watch (GnomeIdleMonitor         *monitor,
                                                     guint                     id);

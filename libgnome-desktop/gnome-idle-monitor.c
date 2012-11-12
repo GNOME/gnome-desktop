@@ -434,7 +434,8 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  *     accumulated @interval seconds of idle time.
  * @user_data: (allow-none): The user data to pass to the callback
  * @notify: A #GDestroyNotify
- * @watch_id: (out): The watch ID
+ *
+ * Returns: a watch id
  *
  * Adds a watch for a specific idle time. The callback will be called
  * when the user has accumlated @interval_msec milliseconds of idle time.
@@ -452,17 +453,16 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  * negative transitions, connect to the #GnomeIdleMonitor:::became-active
  * signal.
  */
-void
+guint
 gnome_idle_monitor_add_watch (GnomeIdleMonitor	       *monitor,
 			      guint			interval_msec,
 			      GnomeIdleMonitorWatchFunc callback,
 			      gpointer			user_data,
-			      GDestroyNotify		notify,
-			      guint                    *watch_id)
+			      GDestroyNotify		notify)
 {
 	GnomeIdleMonitorWatch *watch;
 
-	g_return_if_fail (GNOME_IS_IDLE_MONITOR (monitor));
+	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
 	watch = idle_monitor_watch_new ();
 	watch->display = monitor->priv->display;
@@ -474,7 +474,7 @@ gnome_idle_monitor_add_watch (GnomeIdleMonitor	       *monitor,
 	g_hash_table_insert (monitor->priv->watches,
 			     GUINT_TO_POINTER (watch->id),
 			     watch);
-	*watch_id = watch->id;
+	return watch->id;
 }
 
 /**
