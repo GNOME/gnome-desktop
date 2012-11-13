@@ -438,7 +438,7 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  * Returns: a watch id
  *
  * Adds a watch for a specific idle time. The callback will be called
- * when the user has accumlated @interval_msec milliseconds of idle time.
+ * when the user has accumulated @interval_msec milliseconds of idle time.
  * This function will return an ID in @watch_id that can either be passed
  * to gnome_idle_monitor_remove_watch(), or can be used to tell idle time
  * watches apart if you have more than one.
