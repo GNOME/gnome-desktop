@@ -143,11 +143,12 @@ handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 	if (alarm_event->alarm == monitor->priv->xalarm_reset) {
 		g_signal_emit (monitor, signals[BECAME_ACTIVE], 0);
 	} else {
-		GnomeIdleMonitorWatch *watch = find_watch_for_alarm (monitor, alarm_event->alarm);
+		GnomeIdleMonitorWatch *watch;
+		XSyncAlarmAttributes attr;
 
-		if (watch == NULL) {
+		watch = find_watch_for_alarm (monitor, alarm_event->alarm);
+		if (watch == NULL)
 			return;
-		}
 
 		g_signal_emit (monitor, signals[TRIGGERED_IDLE], 0, watch->id);
 
@@ -156,6 +157,10 @@ handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 					 watch->id,
 					 watch->user_data);
 		}
+
+		/* Reset the alarm so it can be triggered again */
+		attr.events = TRUE;
+		XSyncChangeAlarm (watch->display, watch->xalarm, XSyncCAEvents, &attr);
 	}
 }
 
