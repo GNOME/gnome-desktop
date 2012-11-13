@@ -3,6 +3,8 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "libgnome-desktop/gnome-idle-monitor.h"
 
+#define IDLE_TIME 60 * 1000 /* 1 minute */
+
 GHashTable *monitors = NULL; /* key = device id, value = GnomeIdleMonitor */
 
 static void
@@ -34,7 +36,7 @@ device_added_cb (GdkDeviceManager *manager,
 	device_id = gdk_x11_device_get_id (device);
 	monitor = gnome_idle_monitor_new_for_device (device);
 	watch_id = gnome_idle_monitor_add_watch (monitor,
-						 10,
+						 IDLE_TIME,
 						 watch_func,
 						 NULL,
 						 NULL);
