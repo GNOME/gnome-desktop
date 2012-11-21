@@ -31,7 +31,6 @@ introspection_sources = 		\
 	gnome-rr.c			\
 	gnome-rr-config.c		\
 	gnome-rr-output-info.c		\
-	gnome-rr-labeler.c		\
 	gnome-pnp-ids.c			\
 	gnome-wall-clock.c		\
 	gnome-xkb-info.c		\
@@ -69,7 +68,6 @@ libgnome_desktop_HEADERS = \
         gnome-desktop-thumbnail.h       \
         gnome-rr.h                      \
         gnome-rr-config.h               \
-        gnome-rr-labeler.h		\
         gnome-pnp-ids.h			\
         gnome-wall-clock.h		\
 	gnome-xkb-info.h		\
