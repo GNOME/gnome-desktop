@@ -31,11 +31,7 @@
 #error    gnome-desktop-utils is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-desktop-utils.h
 #endif
 
-#include <glib.h>
 #include <glib-object.h>
-
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

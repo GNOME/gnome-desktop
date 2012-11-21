@@ -26,6 +26,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
