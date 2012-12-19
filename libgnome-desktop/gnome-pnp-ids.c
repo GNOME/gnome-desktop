@@ -226,6 +226,8 @@ gnome_pnp_ids_load (GnomePnpIds *pnp_ids, GError **error)
                 }
         }
 
+        g_debug ("Added %i items to the vendor hashtable", i);
+
         return TRUE;
 }
 
@@ -257,6 +259,7 @@ gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
 {
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
         const char *found;
+        GError *error = NULL;
         guint size;
 
         g_return_val_if_fail (GNOME_IS_PNP_IDS (pnp_ids), NULL);
@@ -265,8 +268,11 @@ gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
         /* if table is empty, try to load it */
         size = g_hash_table_size (priv->pnp_table);
         if (size == 0) {
-                if (gnome_pnp_ids_load (pnp_ids, NULL) == FALSE)
+                if (gnome_pnp_ids_load (pnp_ids, &error) == FALSE) {
+                        g_warning ("Failed to load PNP ids: %s", error->message);
+                        g_error_free (error);
                         return NULL;
+                }
         }
 
         /* look this up in the table */
