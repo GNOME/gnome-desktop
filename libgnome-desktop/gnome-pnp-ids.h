@@ -24,12 +24,12 @@
 
 G_BEGIN_DECLS
 
-#define GNOME_TYPE_PNP_IDSS                (gnome_pnp_ids_get_type ())
-#define GNOME_PNP_IDS(o)                   (G_TYPE_CHECK_INSTANCE_CAST ((o), GNOME_TYPE_PNP_IDSS, GnomePnpIds))
-#define GNOME_PNP_IDS_CLASS(k)             (G_TYPE_CHECK_CLASS_CAST((k), GNOME_TYPE_PNP_IDSS, GnomePnpIdsClass))
-#define GNOME_IS_PNP_IDSS(o)               (G_TYPE_CHECK_INSTANCE_TYPE ((o), GNOME_TYPE_PNP_IDSS))
-#define GNOME_IS_PNP_IDSS_CLASS(k)         (G_TYPE_CHECK_CLASS_TYPE ((k), GNOME_TYPE_PNP_IDSS))
-#define GNOME_PNP_IDS_GET_CLASS(o)         (G_TYPE_INSTANCE_GET_CLASS ((o), GNOME_TYPE_PNP_IDSS, GnomePnpIdsClass))
+#define GNOME_TYPE_PNP_IDS                 (gnome_pnp_ids_get_type ())
+#define GNOME_PNP_IDS(o)                   (G_TYPE_CHECK_INSTANCE_CAST ((o), GNOME_TYPE_PNP_IDS, GnomePnpIds))
+#define GNOME_PNP_IDS_CLASS(k)             (G_TYPE_CHECK_CLASS_CAST((k), GNOME_TYPE_PNP_IDS, GnomePnpIdsClass))
+#define GNOME_IS_PNP_IDS(o)                (G_TYPE_CHECK_INSTANCE_TYPE ((o), GNOME_TYPE_PNP_IDS))
+#define GNOME_IS_PNP_IDS_CLASS(k)          (G_TYPE_CHECK_CLASS_TYPE ((k), GNOME_TYPE_PNP_IDS))
+#define GNOME_PNP_IDS_GET_CLASS(o)         (G_TYPE_INSTANCE_GET_CLASS ((o), GNOME_TYPE_PNP_IDS, GnomePnpIdsClass))
 #define GNOME_PNP_IDS_ERROR                (gnome_pnp_ids_error_quark ())
 
 typedef struct _GnomePnpIdsPrivate        GnomePnpIdsPrivate;

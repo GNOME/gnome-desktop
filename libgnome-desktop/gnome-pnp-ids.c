@@ -25,7 +25,7 @@
 
 static void     gnome_pnp_ids_finalize     (GObject     *object);
 
-#define GNOME_PNP_IDS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_PNP_IDSS, GnomePnpIdsPrivate))
+#define GNOME_PNP_IDS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_PNP_IDS, GnomePnpIdsPrivate))
 
 struct _GnomePnpIdsPrivate
 {
@@ -259,7 +259,7 @@ gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
         const char *found;
         guint size;
 
-        g_return_val_if_fail (GNOME_IS_PNP_IDSS (pnp_ids), NULL);
+        g_return_val_if_fail (GNOME_IS_PNP_IDS (pnp_ids), NULL);
         g_return_val_if_fail (pnp_id != NULL, NULL);
 
         /* if table is empty, try to load it */
@@ -327,7 +327,7 @@ gnome_pnp_ids_new (void)
         if (gnome_pnp_ids_object != NULL) {
                 g_object_ref (gnome_pnp_ids_object);
         } else {
-                gnome_pnp_ids_object = g_object_new (GNOME_TYPE_PNP_IDSS, NULL);
+                gnome_pnp_ids_object = g_object_new (GNOME_TYPE_PNP_IDS, NULL);
                 g_object_add_weak_pointer (gnome_pnp_ids_object, &gnome_pnp_ids_object);
         }
         return GNOME_PNP_IDS (gnome_pnp_ids_object);
