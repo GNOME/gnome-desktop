@@ -21,7 +21,7 @@
 
 #include <glib-object.h>
 
-#include "gnome-pnp-ids.h"
+#include <libgnome-desktop/gnome-pnp-ids.h>
 
 static void     gnome_pnp_ids_finalize     (GObject     *object);
 
