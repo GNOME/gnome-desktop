@@ -1,3 +1,4 @@
+#include <locale.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-wall-clock.h>
 
@@ -16,6 +17,8 @@ int main (int argc, char **argv)
 {
 	GMainLoop *loop;
 	GnomeWallClock *clock;
+
+        setlocale (LC_ALL, "");
 
 	g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
