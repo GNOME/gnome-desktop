@@ -84,7 +84,7 @@ gnome_wall_clock_init (GnomeWallClock *self)
 
 	ampm = nl_langinfo (AM_STR);
 	if (ampm != NULL && *ampm != '\0')
-		self->priv->ampm_available = FALSE;
+		self->priv->ampm_available = TRUE;
 
 	update_clock (self);
 }
