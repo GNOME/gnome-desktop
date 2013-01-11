@@ -504,7 +504,7 @@ gnome_idle_monitor_remove_watch (GnomeIdleMonitor *monitor,
  * gnome_idle_monitor_get_idletime:
  * @monitor: A #GnomeIdleMonitor
  *
- * Returns: The current idle time, in milliseconds.
+ * Returns: The current idle time, in milliseconds, or -1 for not supported
  */
 gint64
 gnome_idle_monitor_get_idletime (GnomeIdleMonitor *monitor)
@@ -512,7 +512,7 @@ gnome_idle_monitor_get_idletime (GnomeIdleMonitor *monitor)
 	XSyncValue value;
 
 	if (!XSyncQueryCounter (monitor->priv->display, monitor->priv->counter, &value))
-		return FALSE;
+		return -1;
 
 	return _xsyncvalue_to_int64 (value);
 }
