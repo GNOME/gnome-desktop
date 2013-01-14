@@ -1268,6 +1268,7 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen *screen,
     gdk_error_trap_push ();
     /* DPMSForceLevel() return value is often a lie, so ignore it */
     DPMSForceLevel (screen->priv->xdisplay, state);
+    XSync (screen->priv->xdisplay, False);
     if (gdk_error_trap_pop ()) {
         ret = FALSE;
         g_set_error_literal (error,
