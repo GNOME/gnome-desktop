@@ -36,6 +36,8 @@
 
 #define GNOME_IDLE_MONITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_IDLE_MONITOR, GnomeIdleMonitorPrivate))
 
+#define USER_ACTIVE_WATCH_ID 1
+
 struct _GnomeIdleMonitorPrivate
 {
 	Display	    *display;
@@ -44,7 +46,7 @@ struct _GnomeIdleMonitorPrivate
 	int	     sync_event_base;
 	XSyncCounter counter;
 
-	XSyncAlarm   xalarm_reset;
+	XSyncAlarm   user_active_alarm;
 
 	GdkDevice   *device;
 };
@@ -68,16 +70,6 @@ enum
 
 static GParamSpec *obj_props[PROP_LAST];
 
-enum
-{
-	BECAME_ACTIVE,
-	TRIGGERED_IDLE,
-
-	LAST_SIGNAL,
-};
-
-static guint signals[LAST_SIGNAL] = { 0 };
-
 G_DEFINE_TYPE (GnomeIdleMonitor, gnome_idle_monitor, G_TYPE_OBJECT)
 
 static gint64
@@ -100,7 +92,8 @@ _find_alarm (gpointer		    key,
 static XSyncAlarm
 _xsync_alarm_set (GnomeIdleMonitor	*monitor,
 		  XSyncTestType          test_type,
-		  guint64                interval)
+		  guint64                interval,
+		  gboolean               want_events)
 {
 	XSyncAlarmAttributes attr;
 	XSyncValue	     delta;
@@ -113,7 +106,7 @@ _xsync_alarm_set (GnomeIdleMonitor	*monitor,
 	attr.trigger.counter = monitor->priv->counter;
 	attr.trigger.value_type = XSyncAbsolute;
 	attr.delta = delta;
-	attr.events = TRUE;
+	attr.events = want_events;
 
 	GINT64_TO_XSYNCVALUE (interval, &attr.trigger.wait_value);
 	attr.trigger.test_type = test_type;
@@ -132,6 +125,16 @@ ensure_alarm_rescheduled (Display    *dpy,
 	XSyncChangeAlarm (dpy, alarm, 0, &attr);
 }
 
+static void
+set_alarm_enabled (Display    *dpy,
+		   XSyncAlarm  alarm,
+		   gboolean    enabled)
+{
+	XSyncAlarmAttributes attr;
+	attr.events = enabled;
+	XSyncChangeAlarm (dpy, alarm, XSyncCAEvents, &attr);
+}
+
 static GnomeIdleMonitorWatch *
 find_watch_for_alarm (GnomeIdleMonitor *monitor,
 		      XSyncAlarm	alarm)
@@ -148,29 +151,29 @@ static void
 handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 			   XSyncAlarmNotifyEvent    *alarm_event)
 {
+	GnomeIdleMonitorWatch *watch;
+
 	if (alarm_event->state != XSyncAlarmActive) {
 		return;
 	}
 
-	if (alarm_event->alarm == monitor->priv->xalarm_reset) {
-		g_signal_emit (monitor, signals[BECAME_ACTIVE], 0);
+	watch = find_watch_for_alarm (monitor, alarm_event->alarm);
+	if (watch == NULL)
+		return;
+
+	if (watch->id == USER_ACTIVE_WATCH_ID) {
+		set_alarm_enabled (monitor->priv->display,
+				   watch->xalarm,
+				   FALSE);
 	} else {
-		GnomeIdleMonitorWatch *watch;
-
-		watch = find_watch_for_alarm (monitor, alarm_event->alarm);
-		if (watch == NULL)
-			return;
-
-		g_signal_emit (monitor, signals[TRIGGERED_IDLE], 0, watch->id);
-
-		if (watch->callback != NULL) {
-			watch->callback (monitor,
-					 watch->id,
-					 watch->user_data);
-		}
-
 		ensure_alarm_rescheduled (monitor->priv->display,
 					  watch->xalarm);
+	}
+
+	if (watch->callback != NULL) {
+		watch->callback (monitor,
+				 watch->id,
+				 watch->user_data);
 	}
 }
 
@@ -231,21 +234,9 @@ find_idletime_counter (GnomeIdleMonitor *monitor)
 static guint32
 get_next_watch_serial (void)
 {
-	static guint32 serial = 1;
+	static guint32 serial = USER_ACTIVE_WATCH_ID;
 	g_atomic_int_inc (&serial);
 	return serial;
-}
-
-static GnomeIdleMonitorWatch *
-idle_monitor_watch_new (void)
-{
-	GnomeIdleMonitorWatch *watch;
-
-	watch = g_slice_new0 (GnomeIdleMonitorWatch);
-	watch->id = get_next_watch_serial ();
-	watch->xalarm = None;
-
-	return watch;
 }
 
 static void
@@ -259,7 +250,7 @@ idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 	    watch->notify (watch->user_data);
 	}
 
-	if (watch->xalarm != None) {
+	if (watch->id != USER_ACTIVE_WATCH_ID) {
 		XSyncDestroyAlarm (watch->display, watch->xalarm);
 	}
 	g_slice_free (GnomeIdleMonitorWatch, watch);
@@ -293,7 +284,7 @@ init_xsync (GnomeIdleMonitor *monitor)
 		return;
 	}
 
-	monitor->priv->xalarm_reset = _xsync_alarm_set (monitor, XSyncNegativeTransition, 1);
+	monitor->priv->user_active_alarm = _xsync_alarm_set (monitor, XSyncNegativeTransition, 1, FALSE);
 
 	gdk_window_add_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
 }
@@ -384,21 +375,6 @@ gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 				     G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 	g_object_class_install_property (object_class, PROP_DEVICE, obj_props[PROP_DEVICE]);
 
-        signals[BECAME_ACTIVE] =
-                g_signal_new ("became-active",
-                              G_TYPE_FROM_CLASS (klass),
-                              G_SIGNAL_RUN_LAST,
-                              0,
-			      NULL, NULL, NULL,
-                              G_TYPE_NONE, 0);
-        signals[TRIGGERED_IDLE] =
-                g_signal_new ("triggered-idle",
-                              G_TYPE_FROM_CLASS (klass),
-                              G_SIGNAL_RUN_LAST,
-                              0,
-			      NULL, NULL, NULL,
-                              G_TYPE_NONE, 1, G_TYPE_UINT);
-
 	g_type_class_add_private (klass, sizeof (GnomeIdleMonitorPrivate));
 }
 
@@ -442,7 +418,7 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
 }
 
 /**
- * gnome_idle_monitor_add_watch:
+ * gnome_idle_monitor_add_idle_watch:
  * @monitor: A #GnomeIdleMonitor
  * @interval_msec: The idletime interval, in milliseconds
  * @callback: (allow-none): The callback to call when the user has
@@ -458,37 +434,78 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  * gnome_idle_monitor_remove_watch(), or can be used to tell idle time
  * watches apart if you have more than one.
  *
- * If you need to check for more than one interval of
- * idle time, it may be more convenient to connect to the
- * #GnomeIdleMonitor::triggered-idle signal, and filter on the
- * watch ID received in the signal handler.
- *
  * Also note that this function will only care about positive transitions
  * (user's idle time exceeding a certain time). If you want to know about
- * negative transitions, connect to the #GnomeIdleMonitor::became-active
- * signal.
+ * when the user has become active, use
+ * gnome_idle_monitor_add_user_active_watch().
  */
 guint
-gnome_idle_monitor_add_watch (GnomeIdleMonitor	       *monitor,
-			      guint64			interval_msec,
-			      GnomeIdleMonitorWatchFunc callback,
-			      gpointer			user_data,
-			      GDestroyNotify		notify)
+gnome_idle_monitor_add_idle_watch (GnomeIdleMonitor	       *monitor,
+				   guint64	                interval_msec,
+				   GnomeIdleMonitorWatchFunc    callback,
+				   gpointer			user_data,
+				   GDestroyNotify		notify)
 {
 	GnomeIdleMonitorWatch *watch;
 
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
-	watch = idle_monitor_watch_new ();
+	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->id = get_next_watch_serial ();
 	watch->display = monitor->priv->display;
 	watch->callback = callback;
 	watch->user_data = user_data;
 	watch->notify = notify;
-	watch->xalarm = _xsync_alarm_set (monitor, XSyncPositiveTransition, interval_msec);
+	watch->xalarm = _xsync_alarm_set (monitor, XSyncPositiveTransition, interval_msec, TRUE);
 
 	g_hash_table_insert (monitor->priv->watches,
 			     GUINT_TO_POINTER (watch->id),
 			     watch);
+	return watch->id;
+}
+
+/**
+ * gnome_idle_monitor_add_user_active_watch:
+ * @monitor: A #GnomeIdleMonitor
+ * @callback: (allow-none): The callback to call when the user is
+ *     active again.
+ * @user_data: (allow-none): The user data to pass to the callback
+ * @notify: A #GDestroyNotify
+ *
+ * Returns: a watch id
+ *
+ * Add a one-time watch to know when the user is active again.
+ * Note that this watch is one-time and will de-activate after the
+ * function is called, for efficiency purposes. It's most convenient
+ * to call this when an idle watch, as added by
+ * gnome_idle_monitor_add_idle_watch(), has triggered.
+ */
+guint
+gnome_idle_monitor_add_user_active_watch (GnomeIdleMonitor          *monitor,
+					  GnomeIdleMonitorWatchFunc  callback,
+					  gpointer		     user_data,
+					  GDestroyNotify	     notify)
+{
+	GnomeIdleMonitorWatch *watch;
+
+	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
+
+	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->id = USER_ACTIVE_WATCH_ID;
+	watch->display = monitor->priv->display;
+	watch->callback = callback;
+	watch->user_data = user_data;
+	watch->notify = notify;
+	watch->xalarm = monitor->priv->user_active_alarm;
+
+	set_alarm_enabled (monitor->priv->display,
+			   monitor->priv->user_active_alarm,
+			   TRUE);
+
+	g_hash_table_insert (monitor->priv->watches,
+			     GUINT_TO_POINTER (watch->id),
+			     watch);
+
 	return watch->id;
 }
 
@@ -498,7 +515,8 @@ gnome_idle_monitor_add_watch (GnomeIdleMonitor	       *monitor,
  * @id: A watch ID
  *
  * Removes an idle time watcher, previously added by
- * gnome_idle_monitor_add_watch().
+ * gnome_idle_monitor_add_idle_watch() or
+ * gnome_idle_monitor_add_user_active_watch().
  */
 void
 gnome_idle_monitor_remove_watch (GnomeIdleMonitor *monitor,

@@ -3,44 +3,13 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "libgnome-desktop/gnome-idle-monitor.h"
 
-#define IDLE_TIME 60 * 1000 /* 1 minute */
+#define IDLE_TIME 1000 /* 1 second */
 
 GHashTable *monitors = NULL; /* key = device id, value = GnomeIdleMonitor */
 
 static void
-watch_func (GnomeIdleMonitor      *monitor,
-	    guint                  id,
-	    gpointer               user_data)
-{
-	GdkDevice *device;
-	int device_id;
-
-	g_object_get (monitor, "device", &device, NULL);
-	device_id = gdk_x11_device_get_id (device);
-	g_message ("Watch func called for device %s (id: %d, watch id %d)",
-		   gdk_device_get_name (device),
-		   device_id,
-		   id);
-	g_object_unref (device);
-}
-
-static void
-became_active_cb (GnomeIdleMonitor *monitor,
-		  gpointer          user_data)
-{
-	GdkDevice *device;
-	int device_id;
-
-	g_object_get (monitor, "device", &device, NULL);
-	device_id = gdk_x11_device_get_id (device);
-	g_message ("Device '%s' (%d) became active",
-		   gdk_device_get_name (device), device_id);
-	g_object_unref (device);
-}
-
-static void
-triggered_idle_cb (GnomeIdleMonitor *monitor,
-		   guint             watch_id,
+active_watch_func (GnomeIdleMonitor *monitor,
+		   guint             id,
 		   gpointer          user_data)
 {
 	GdkDevice *device;
@@ -48,9 +17,49 @@ triggered_idle_cb (GnomeIdleMonitor *monitor,
 
 	g_object_get (monitor, "device", &device, NULL);
 	device_id = gdk_x11_device_get_id (device);
-	g_message ("Device '%s' (%d) triggered idle on watch %d",
-		   gdk_device_get_name (device), device_id, watch_id);
+	g_message ("Active watch func called for device %s (id: %d, watch id %d)",
+		   gdk_device_get_name (device),
+		   device_id,
+		   id);
 	g_object_unref (device);
+}
+
+static void
+ensure_active_watch (GnomeIdleMonitor *monitor)
+{
+	GdkDevice *device;
+	guint watch_id;
+	int device_id;
+
+	g_object_get (monitor, "device", &device, NULL);
+	device_id = gdk_x11_device_get_id (device);
+	watch_id = gnome_idle_monitor_add_user_active_watch (monitor,
+							     active_watch_func,
+							     NULL,
+							     NULL);
+	g_message ("Added active watch ID %d for device %s (%d)",
+		   watch_id,
+		   gdk_device_get_name (device),
+		   device_id);
+}
+
+static void
+idle_watch_func (GnomeIdleMonitor      *monitor,
+		 guint                  id,
+		 gpointer               user_data)
+{
+	GdkDevice *device;
+	int device_id;
+
+	g_object_get (monitor, "device", &device, NULL);
+	device_id = gdk_x11_device_get_id (device);
+	g_message ("Idle watch func called for device %s (id: %d, watch id %d)",
+		   gdk_device_get_name (device),
+		   device_id,
+		   id);
+	g_object_unref (device);
+
+	ensure_active_watch (monitor);
 }
 
 static void
@@ -64,19 +73,19 @@ device_added_cb (GdkDeviceManager *manager,
 
 	device_id = gdk_x11_device_get_id (device);
 	monitor = gnome_idle_monitor_new_for_device (device);
-	g_signal_connect (G_OBJECT (monitor), "became-active",
-			  G_CALLBACK (became_active_cb), NULL);
-	g_signal_connect (G_OBJECT (monitor), "triggered-idle",
-			  G_CALLBACK (triggered_idle_cb), NULL);
-	watch_id = gnome_idle_monitor_add_watch (monitor,
-						 IDLE_TIME,
-						 watch_func,
-						 NULL,
-						 NULL);
-	g_message ("Added watch ID %d for device %s (%d)",
+
+	watch_id = gnome_idle_monitor_add_idle_watch (monitor,
+						      IDLE_TIME,
+						      idle_watch_func,
+						      NULL,
+						      NULL);
+	g_message ("Added idle watch ID %d for device %s (%d)",
 		   watch_id,
 		   gdk_device_get_name (device),
 		   device_id);
+
+	ensure_active_watch (monitor);
+
 	g_hash_table_insert (monitors,
 			     GINT_TO_POINTER (device_id),
 			     monitor);
