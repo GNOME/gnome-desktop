@@ -999,7 +999,6 @@ languages_variant_init (const char *variant)
                                    filename,
                                    error->message);
                         g_error_free (error);
-                        g_free (filename);
                 }
 
                 g_markup_parse_context_free (ctx);
@@ -1010,6 +1009,8 @@ languages_variant_init (const char *variant)
                            error->message);
                 g_error_free (error);
         }
+
+        g_free (filename);
 }
 
 static void
