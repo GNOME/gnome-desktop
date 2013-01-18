@@ -120,6 +120,18 @@ _xsync_alarm_set (GnomeIdleMonitor	*monitor,
 	return XSyncCreateAlarm (monitor->priv->display, flags, &attr);
 }
 
+static void
+ensure_alarm_rescheduled (Display    *dpy,
+			  XSyncAlarm  alarm)
+{
+	XSyncAlarmAttributes attr;
+
+	/* Some versions of Xorg have an issue where alarms aren't
+	 * always rescheduled. Calling XSyncChangeAlarm, even
+	 * without any attributes, will reschedule the alarm. */
+	XSyncChangeAlarm (dpy, alarm, 0, &attr);
+}
+
 static GnomeIdleMonitorWatch *
 find_watch_for_alarm (GnomeIdleMonitor *monitor,
 		      XSyncAlarm	alarm)
@@ -144,7 +156,6 @@ handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 		g_signal_emit (monitor, signals[BECAME_ACTIVE], 0);
 	} else {
 		GnomeIdleMonitorWatch *watch;
-		XSyncAlarmAttributes attr;
 
 		watch = find_watch_for_alarm (monitor, alarm_event->alarm);
 		if (watch == NULL)
@@ -158,9 +169,8 @@ handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 					 watch->user_data);
 		}
 
-		/* Reset the alarm so it can be triggered again */
-		attr.events = TRUE;
-		XSyncChangeAlarm (watch->display, watch->xalarm, XSyncCAEvents, &attr);
+		ensure_alarm_rescheduled (monitor->priv->display,
+					  watch->xalarm);
 	}
 }
 
