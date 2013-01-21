@@ -287,6 +287,8 @@ parse_start_element (GMarkupParseContext  *context,
     }
   else if (strcmp (element_name, "variant") == 0)
     {
+      Layout *layout;
+
       if (priv->current_parser_variant)
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
@@ -301,9 +303,20 @@ parse_start_element (GMarkupParseContext  *context,
           return;
         }
 
+      if (!priv->current_parser_layout->xkb_name)
+        {
+          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
+                       "'variant' elements must be inside named 'layout' elements");
+          return;
+        }
+
+      layout = g_hash_table_lookup (priv->layouts_table, priv->current_parser_layout->xkb_name);
+      if (!layout)
+        layout = priv->current_parser_layout;
+
       priv->current_parser_variant = g_slice_new0 (Layout);
       priv->current_parser_variant->is_variant = TRUE;
-      priv->current_parser_variant->main_layout = priv->current_parser_layout;
+      priv->current_parser_variant->main_layout = layout;
     }
   else if (strcmp (element_name, "group") == 0)
     {
@@ -406,6 +419,12 @@ parse_end_element (GMarkupParseContext  *context,
         }
 
       priv->current_parser_layout->id = g_strdup (priv->current_parser_layout->xkb_name);
+
+      if (g_hash_table_contains (priv->layouts_table, priv->current_parser_layout->id))
+        {
+          g_clear_pointer (&priv->current_parser_layout, free_layout);
+          return;
+        }
 
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_layout->id,
