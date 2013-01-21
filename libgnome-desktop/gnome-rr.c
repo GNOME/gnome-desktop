@@ -1142,6 +1142,7 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
 
 /**
  * gnome_rr_screen_get_dpms_mode:
+ * @mode: (out): The current #GnomeRRDpmsMode of this screen
  **/
 gboolean
 gnome_rr_screen_get_dpms_mode (GnomeRRScreen *screen,
