@@ -446,7 +446,7 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
  * @monitor: A #GnomeIdleMonitor
  * @interval_msec: The idletime interval, in milliseconds
  * @callback: (allow-none): The callback to call when the user has
- *     accumulated @interval seconds of idle time.
+ *     accumulated @interval_msec milliseconds of idle time.
  * @user_data: (allow-none): The user data to pass to the callback
  * @notify: A #GDestroyNotify
  *
