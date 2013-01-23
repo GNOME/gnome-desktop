@@ -24,7 +24,6 @@ libgsystem_libs = $(GNOME_DESKTOP_LIBS)
 include libgsystem/Makefile-libgsystem.am
 
 introspection_sources = 		\
-	gnome-desktop-utils.c		\
 	gnome-desktop-thumbnail.c 	\
 	gnome-thumbnail-pixbuf-utils.c 	\
 	gnome-bg.c			\
@@ -46,8 +45,7 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
 	edid.h				\
-	locarchive.h			\
-	private.h
+	locarchive.h
 
 libgnome_desktop_3_la_LIBADD =	\
 	$(XLIB_LIBS)		\
@@ -68,7 +66,6 @@ libgnome_desktopdir = $(includedir)/gnome-desktop-3.0/libgnome-desktop
 libgnome_desktop_HEADERS = \
         gnome-bg.h                      \
         gnome-bg-crossfade.h            \
-        gnome-desktop-utils.h           \
         gnome-desktop-thumbnail.h       \
         gnome-rr.h                      \
         gnome-rr-config.h               \
