@@ -65,7 +65,7 @@ GnomeIdleMonitor * gnome_idle_monitor_new          (void);
 GnomeIdleMonitor * gnome_idle_monitor_new_for_device (GdkDevice *device);
 
 guint              gnome_idle_monitor_add_watch    (GnomeIdleMonitor         *monitor,
-                                                    guint                     interval_msec,
+                                                    guint64                   interval_msec,
                                                     GnomeIdleMonitorWatchFunc callback,
                                                     gpointer                  user_data,
                                                     GDestroyNotify            notify);
