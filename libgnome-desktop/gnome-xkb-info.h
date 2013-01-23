@@ -67,8 +67,8 @@ gboolean        gnome_xkb_info_get_layout_info                  (GnomeXkbInfo *s
                                                                  const gchar **short_name,
                                                                  const gchar **xkb_layout,
                                                                  const gchar **xkb_variant);
-gboolean        gnome_xkb_info_get_layout_info_for_language     (GnomeXkbInfo *self,
-                                                                 const gchar  *language,
+gboolean        gnome_xkb_info_get_layout_info_for_locale       (GnomeXkbInfo *self,
+                                                                 const gchar  *locale,
                                                                  const gchar **id,
                                                                  const gchar **display_name,
                                                                  const gchar **short_name,

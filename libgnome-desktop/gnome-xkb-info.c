@@ -932,10 +932,81 @@ gnome_xkb_info_get_layout_info (GnomeXkbInfo *self,
   return TRUE;
 }
 
+static Layout *
+find_first_layout_in_both (GSequence *seq_a,
+                           GSequence *seq_b)
+{
+  Layout *layout;
+  GSequenceIter *iter_a, *iter_b;
+
+  layout = NULL;
+
+  iter_a = g_sequence_get_begin_iter (seq_a);
+  while (!g_sequence_iter_is_end (iter_a))
+    {
+      iter_b = g_sequence_lookup (seq_b, g_sequence_get (iter_a),
+                                  (GCompareDataFunc) layout_compare, NULL);
+      if (!g_sequence_iter_is_end (iter_b))
+        {
+          layout = g_sequence_get (iter_b);
+          break;
+        }
+
+      iter_a = g_sequence_iter_next (iter_a);
+    }
+
+  return layout;
+}
+
+static gboolean
+find_best_layout_for_locale (GnomeXkbInfo  *self,
+                             const gchar   *locale,
+                             Layout       **layout)
+{
+  GnomeXkbInfoPrivate *priv = self->priv;
+  gchar *language, *l_code;
+  gchar *country, *c_code;
+  GSequence *layouts_for_language;
+  GSequence *layouts_for_country;
+
+  if (!gnome_parse_language_name (locale, &l_code, &c_code, NULL, NULL))
+    return FALSE;
+
+  language = gnome_get_language_from_name (l_code, NULL);
+  country = gnome_get_region_from_name (c_code, NULL);
+
+  g_free (l_code);
+  g_free (c_code);
+
+  if (country)
+    layouts_for_country = g_hash_table_lookup (priv->layouts_by_country, country);
+  else
+    layouts_for_country = NULL;
+
+  if (language)
+    layouts_for_language = g_hash_table_lookup (priv->layouts_by_language, language);
+  else
+    layouts_for_language = NULL;
+
+  g_free (country);
+  g_free (language);
+
+  *layout = NULL;
+
+  if (layouts_for_country && layouts_for_language)
+    *layout = find_first_layout_in_both (layouts_for_country, layouts_for_language);
+  else if (layouts_for_country)
+    *layout = g_sequence_get (g_sequence_get_begin_iter (layouts_for_country));
+  else if (layouts_for_language)
+    *layout = g_sequence_get (g_sequence_get_begin_iter (layouts_for_language));
+
+  return *layout != NULL;
+}
+
 /**
- * gnome_xkb_info_get_layout_info_for_language:
+ * gnome_xkb_info_get_layout_info_for_locale:
  * @self: a #GnomeXkbInfo
- * @language: an ISO 639 code
+ * @locale: a locale string
  * @id: (out) (allow-none) (transfer none): location to store the
  * layout's indentifier, or %NULL
  * @display_name: (out) (allow-none) (transfer none): location to store
@@ -947,7 +1018,7 @@ gnome_xkb_info_get_layout_info (GnomeXkbInfo *self,
  * @xkb_variant: (out) (allow-none) (transfer none): location to store
  * the layout's XKB variant, or %NULL
  *
- * Retrieves the layout that better fits @language. It also fetches
+ * Retrieves the layout that better fits @locale. It also fetches
  * information about that layout like gnome_xkb_info_get_layout_info().
  *
  * If a layout can't be found the return value is %FALSE and all the
@@ -955,19 +1026,18 @@ gnome_xkb_info_get_layout_info (GnomeXkbInfo *self,
  *
  * Return value: %TRUE if a layout exists or %FALSE otherwise.
  *
- * Since: 3.6
+ * Since: 3.8
  */
 gboolean
-gnome_xkb_info_get_layout_info_for_language (GnomeXkbInfo *self,
-                                             const gchar  *language,
-                                             const gchar **id,
-                                             const gchar **display_name,
-                                             const gchar **short_name,
-                                             const gchar **xkb_layout,
-                                             const gchar **xkb_variant)
+gnome_xkb_info_get_layout_info_for_locale (GnomeXkbInfo *self,
+                                           const gchar  *locale,
+                                           const gchar **id,
+                                           const gchar **display_name,
+                                           const gchar **short_name,
+                                           const gchar **xkb_layout,
+                                           const gchar **xkb_variant)
 {
-  GnomeXkbInfoPrivate *priv;
-  const Layout *layout;
+  Layout *layout;
 
   if (id)
     *id = NULL;
@@ -982,12 +1052,11 @@ gnome_xkb_info_get_layout_info_for_language (GnomeXkbInfo *self,
 
   g_return_val_if_fail (GNOME_IS_XKB_INFO (self), FALSE);
 
-  priv = self->priv;
-
   if (!ensure_rules_are_parsed (self))
     return FALSE;
 
-  return FALSE; /* FIXME */
+  if (!find_best_layout_for_locale (self, locale, &layout))
+    return FALSE;
 
   if (id)
     *id = layout->id;
