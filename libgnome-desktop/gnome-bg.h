@@ -34,6 +34,7 @@
 #include <gdesktop-enums.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <libgnome-desktop/gnome-bg-crossfade.h>
+#include <gdesktop-enums.h>
 
 G_BEGIN_DECLS
 
