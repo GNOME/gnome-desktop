@@ -40,7 +40,6 @@
 #include "gnome-rr.h"
 #include "gnome-rr-config.h"
 
-#include "private.h"
 #include "edid.h"
 #include "gnome-rr-private.h"
 
@@ -836,6 +835,9 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
     GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
     g_type_class_add_private (klass, sizeof (GnomeRRScreenPrivate));
 
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
     gobject_class->set_property = gnome_rr_screen_set_property;
     gobject_class->get_property = gnome_rr_screen_get_property;
     gobject_class->finalize = gnome_rr_screen_finalize;
@@ -970,8 +972,6 @@ gnome_rr_screen_new (GdkScreen *screen,
     if (rr_screen)
 	g_object_ref (rr_screen);
     else {
-	_gnome_desktop_init_i18n ();
-
 	rr_screen = g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-screen", screen, NULL);
 	if (rr_screen) {
 	    g_object_set_data (G_OBJECT (screen), "GnomeRRScreen", rr_screen);
