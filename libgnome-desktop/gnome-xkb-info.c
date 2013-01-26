@@ -442,7 +442,7 @@ parse_end_element (GMarkupParseContext  *context,
           return;
         }
 
-      language = gnome_get_language_from_name (priv->current_parser_iso639Id, NULL);
+      language = gnome_get_language_from_code (priv->current_parser_iso639Id, NULL);
       if (language)
         {
           if (priv->current_parser_variant)
@@ -466,7 +466,7 @@ parse_end_element (GMarkupParseContext  *context,
           return;
         }
 
-      country = gnome_get_region_from_name (priv->current_parser_iso3166Id, NULL);
+      country = gnome_get_country_from_code (priv->current_parser_iso3166Id, NULL);
       if (country)
         {
           if (priv->current_parser_variant)
