@@ -1051,6 +1051,9 @@ languages_variant_init (const char *variant)
 static void
 languages_init (void)
 {
+        if (gnome_languages_map)
+                return;
+
         gnome_languages_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         languages_variant_init ("iso_639");
@@ -1064,6 +1067,9 @@ territories_init (void)
         gboolean res;
         char    *buf;
         gsize    buf_len;
+
+        if (gnome_territories_map)
+                return;
 
         bindtextdomain ("iso_3166", ISO_CODES_LOCALESDIR);
         bind_textdomain_codeset ("iso_3166", "UTF-8");
@@ -1123,13 +1129,8 @@ gnome_get_language_from_name (const char *name,
 
         full_language = g_string_new (NULL);
 
-        if (gnome_languages_map == NULL) {
-                languages_init ();
-        }
-
-        if (gnome_territories_map == NULL) {
-                territories_init ();
-        }
+        languages_init ();
+        territories_init ();
 
         language_code = NULL;
         territory_code = NULL;
@@ -1215,13 +1216,8 @@ gnome_get_region_from_name (const char *name,
 
         full_name = g_string_new (NULL);
 
-        if (gnome_languages_map == NULL) {
-                languages_init ();
-        }
-
-        if (gnome_territories_map == NULL) {
-                territories_init ();
-        }
+        languages_init ();
+        territories_init ();
 
         language_code = NULL;
         territory_code = NULL;
@@ -1304,4 +1300,52 @@ gnome_get_all_language_names (void)
         g_ptr_array_add (array, NULL);
 
         return (char **) g_ptr_array_free (array, FALSE);
+}
+
+/**
+ * gnome_get_language_from_code:
+ * @code: an ISO 639 code string
+ * @locale: (allow-none): a locale string
+ *
+ * Gets the language name for @code. If @locale is provided the
+ * returned string is translated accordingly.
+ *
+ * Return value: (transfer full): the language name. Caller takes
+ * ownership.
+ *
+ * Since: 3.8
+ */
+char *
+gnome_get_language_from_code (const char *code,
+                              const char *locale)
+{
+        g_return_val_if_fail (code != NULL, NULL);
+
+        languages_init ();
+
+        return get_translated_language (code, locale);
+}
+
+/**
+ * gnome_get_country_from_code:
+ * @code: an ISO 3166 code string
+ * @locale: (allow-none): a locale string
+ *
+ * Gets the country name for @code. If @locale is provided the
+ * returned string is translated accordingly.
+ *
+ * Return value: (transfer full): the country name. Caller takes
+ * ownership.
+ *
+ * Since: 3.8
+ */
+char *
+gnome_get_country_from_code (const char *code,
+                             const char *locale)
+{
+        g_return_val_if_fail (code != NULL, NULL);
+
+        territories_init ();
+
+        return get_translated_territory (code, locale);
 }
