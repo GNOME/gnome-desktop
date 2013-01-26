@@ -42,6 +42,10 @@ gboolean      gnome_parse_language_name     (const char *name,
                                              char      **modifierp);
 char *        gnome_normalize_language_name (const char *name);
 gboolean      gnome_language_has_translations (const char *language_name);
+char *        gnome_get_language_from_code  (const char *code,
+                                             const char *locale);
+char *        gnome_get_country_from_code   (const char *code,
+                                             const char *locale);
 
 G_END_DECLS
 
