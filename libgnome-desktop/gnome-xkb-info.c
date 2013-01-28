@@ -365,40 +365,15 @@ add_layout_to_table (GHashTable  *table,
                      const gchar *key,
                      Layout      *layout)
 {
-  GSequence *seq;
+  GHashTable *set;
 
-  seq = g_hash_table_lookup (table, key);
-  if (!seq)
+  set = g_hash_table_lookup (table, key);
+  if (!set)
     {
-      seq = g_sequence_new (NULL);
-      g_hash_table_replace (table, g_strdup (key), seq);
+      set = g_hash_table_new (NULL, NULL);
+      g_hash_table_replace (table, g_strdup (key), set);
     }
-  g_sequence_append (seq, layout);
-}
-
-static gint
-layout_compare (Layout   *a,
-                Layout   *b,
-                gpointer  data)
-{
-  return g_strcmp0 (a->id, b->id);
-}
-
-static void
-sort_sequence (gpointer key,
-               gpointer value,
-               gpointer data)
-{
-  g_sequence_sort ((GSequence *) value, (GCompareDataFunc) layout_compare, NULL);
-}
-
-static void
-sort_sequences (GnomeXkbInfo *self)
-{
-  GnomeXkbInfoPrivate *priv = self->priv;
-
-  g_hash_table_foreach (priv->layouts_by_country, sort_sequence, NULL);
-  g_hash_table_foreach (priv->layouts_by_language, sort_sequence, NULL);
+  g_hash_table_add (set, layout);
 }
 
 static void
@@ -422,6 +397,8 @@ parse_end_element (GMarkupParseContext  *context,
 
       if (g_hash_table_contains (priv->layouts_table, priv->current_parser_layout->id))
         {
+          g_hash_table_remove (priv->layouts_by_country, priv->current_parser_layout);
+          g_hash_table_remove (priv->layouts_by_language, priv->current_parser_layout);
           g_clear_pointer (&priv->current_parser_layout, free_layout);
           return;
         }
@@ -605,16 +582,16 @@ parse_rules (GnomeXkbInfo *self)
      XkbOptionGroup structs. */
   priv->option_groups_table = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      NULL, free_option_group);
-  /* Maps country strings to a GSequence which is a set of Layout
+  /* Maps country strings to a GHashTable which is a set of Layout
      struct pointers into the Layout structs stored in
      layouts_table. */
   priv->layouts_by_country = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                    g_free, (GDestroyNotify) g_sequence_free);
-  /* Maps language strings to a GSequence which is a set of Layout
+                                                    g_free, (GDestroyNotify) g_hash_table_destroy);
+  /* Maps language strings to a GHashTable which is a set of Layout
      struct pointers into the Layout structs stored in
      layouts_table. */
   priv->layouts_by_language = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free, (GDestroyNotify) g_sequence_free);
+                                                     g_free, (GDestroyNotify) g_hash_table_destroy);
   /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
@@ -623,8 +600,6 @@ parse_rules (GnomeXkbInfo *self)
   if (error)
     goto cleanup;
   g_free (file_path);
-
-  sort_sequences (self);
 
   settings = g_settings_new ("org.gnome.desktop.input-sources");
   show_all_sources = g_settings_get_boolean (settings, "show-all-sources");
@@ -638,8 +613,6 @@ parse_rules (GnomeXkbInfo *self)
   if (error)
     goto cleanup;
   g_free (file_path);
-
-  sort_sequences (self);
 
   return;
 
@@ -925,160 +898,6 @@ gnome_xkb_info_get_layout_info (GnomeXkbInfo *self,
   if (!g_hash_table_lookup_extended (priv->layouts_table, id, NULL, (gpointer *)&layout))
     return FALSE;
 
-  if (display_name)
-    *display_name = XKEYBOARD_CONFIG_(layout->description);
-
-  if (!layout->is_variant)
-    {
-      if (short_name)
-        *short_name = XKEYBOARD_CONFIG_(layout->short_desc ? layout->short_desc : "");
-      if (xkb_layout)
-        *xkb_layout = layout->xkb_name;
-      if (xkb_variant)
-        *xkb_variant = "";
-    }
-  else
-    {
-      if (short_name)
-        *short_name = XKEYBOARD_CONFIG_(layout->short_desc ? layout->short_desc :
-                        layout->main_layout->short_desc ? layout->main_layout->short_desc : "");
-      if (xkb_layout)
-        *xkb_layout = layout->main_layout->xkb_name;
-      if (xkb_variant)
-        *xkb_variant = layout->xkb_name;
-    }
-
-  return TRUE;
-}
-
-static Layout *
-find_first_layout_in_both (GSequence *seq_a,
-                           GSequence *seq_b)
-{
-  Layout *layout;
-  GSequenceIter *iter_a, *iter_b;
-
-  layout = NULL;
-
-  iter_a = g_sequence_get_begin_iter (seq_a);
-  while (!g_sequence_iter_is_end (iter_a))
-    {
-      iter_b = g_sequence_lookup (seq_b, g_sequence_get (iter_a),
-                                  (GCompareDataFunc) layout_compare, NULL);
-      if (!g_sequence_iter_is_end (iter_b))
-        {
-          layout = g_sequence_get (iter_b);
-          break;
-        }
-
-      iter_a = g_sequence_iter_next (iter_a);
-    }
-
-  return layout;
-}
-
-static gboolean
-find_best_layout_for_locale (GnomeXkbInfo  *self,
-                             const gchar   *locale,
-                             Layout       **layout)
-{
-  GnomeXkbInfoPrivate *priv = self->priv;
-  gchar *language, *l_code;
-  gchar *country, *c_code;
-  GSequence *layouts_for_language;
-  GSequence *layouts_for_country;
-
-  if (!gnome_parse_language_name (locale, &l_code, &c_code, NULL, NULL))
-    return FALSE;
-
-  language = gnome_get_language_from_name (l_code, NULL);
-  country = gnome_get_region_from_name (c_code, NULL);
-
-  g_free (l_code);
-  g_free (c_code);
-
-  if (country)
-    layouts_for_country = g_hash_table_lookup (priv->layouts_by_country, country);
-  else
-    layouts_for_country = NULL;
-
-  if (language)
-    layouts_for_language = g_hash_table_lookup (priv->layouts_by_language, language);
-  else
-    layouts_for_language = NULL;
-
-  g_free (country);
-  g_free (language);
-
-  *layout = NULL;
-
-  if (layouts_for_country && layouts_for_language)
-    *layout = find_first_layout_in_both (layouts_for_country, layouts_for_language);
-  else if (layouts_for_country)
-    *layout = g_sequence_get (g_sequence_get_begin_iter (layouts_for_country));
-  else if (layouts_for_language)
-    *layout = g_sequence_get (g_sequence_get_begin_iter (layouts_for_language));
-
-  return *layout != NULL;
-}
-
-/**
- * gnome_xkb_info_get_layout_info_for_locale:
- * @self: a #GnomeXkbInfo
- * @locale: a locale string
- * @id: (out) (allow-none) (transfer none): location to store the
- * layout's indentifier, or %NULL
- * @display_name: (out) (allow-none) (transfer none): location to store
- * the layout's display name, or %NULL
- * @short_name: (out) (allow-none) (transfer none): location to store
- * the layout's short name, or %NULL
- * @xkb_layout: (out) (allow-none) (transfer none): location to store
- * the layout's XKB name, or %NULL
- * @xkb_variant: (out) (allow-none) (transfer none): location to store
- * the layout's XKB variant, or %NULL
- *
- * Retrieves the layout that better fits @locale. It also fetches
- * information about that layout like gnome_xkb_info_get_layout_info().
- *
- * If a layout can't be found the return value is %FALSE and all the
- * (out) parameters are set to %NULL.
- *
- * Return value: %TRUE if a layout exists or %FALSE otherwise.
- *
- * Since: 3.8
- */
-gboolean
-gnome_xkb_info_get_layout_info_for_locale (GnomeXkbInfo *self,
-                                           const gchar  *locale,
-                                           const gchar **id,
-                                           const gchar **display_name,
-                                           const gchar **short_name,
-                                           const gchar **xkb_layout,
-                                           const gchar **xkb_variant)
-{
-  Layout *layout;
-
-  if (id)
-    *id = NULL;
-  if (display_name)
-    *display_name = NULL;
-  if (short_name)
-    *short_name = NULL;
-  if (xkb_layout)
-    *xkb_layout = NULL;
-  if (xkb_variant)
-    *xkb_variant = NULL;
-
-  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), FALSE);
-
-  if (!ensure_rules_are_parsed (self))
-    return FALSE;
-
-  if (!find_best_layout_for_locale (self, locale, &layout))
-    return FALSE;
-
-  if (id)
-    *id = layout->id;
   if (display_name)
     *display_name = XKEYBOARD_CONFIG_(layout->description);
 
