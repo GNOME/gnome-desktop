@@ -67,13 +67,6 @@ gboolean        gnome_xkb_info_get_layout_info                  (GnomeXkbInfo *s
                                                                  const gchar **short_name,
                                                                  const gchar **xkb_layout,
                                                                  const gchar **xkb_variant);
-gboolean        gnome_xkb_info_get_layout_info_for_locale       (GnomeXkbInfo *self,
-                                                                 const gchar  *locale,
-                                                                 const gchar **id,
-                                                                 const gchar **display_name,
-                                                                 const gchar **short_name,
-                                                                 const gchar **xkb_layout,
-                                                                 const gchar **xkb_variant);
 GList          *gnome_xkb_info_get_all_option_groups            (GnomeXkbInfo *self);
 const gchar    *gnome_xkb_info_description_for_group            (GnomeXkbInfo *self,
                                                                  const gchar  *group_id);
