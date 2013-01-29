@@ -453,32 +453,53 @@ struct nameent
 };
 
 static gboolean
-collect_locales_from_archive (void)
+mapped_file_new_allow_noent (const char   *path,
+                             GMappedFile **out_mfile,
+                             GError      **error)
 {
+        gboolean ret = FALSE;
+        GError *tmp_error = NULL;
+        GMappedFile *mfile = NULL;
+
+        mfile = g_mapped_file_new (path, FALSE, &tmp_error);
+        if (mfile == NULL) {
+                if (!g_error_matches (tmp_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
+                        g_propagate_error (error, tmp_error);
+                        goto out;
+                }
+                g_clear_error (&tmp_error);
+        }
+
+        ret = TRUE;
+ out:
+        *out_mfile = mfile;
+        return ret;
+}
+
+static gboolean
+collect_locales_from_archive (gboolean  *out_found_locales,
+                              GError   **error)
+{
+        gboolean            ret = FALSE;
         GMappedFile        *mapped;
-        GError             *error;
         char               *addr;
         struct locarhead   *head;
         struct namehashent *namehashtab;
-        struct nameent     *names;
+        struct nameent     *names = NULL;
         uint32_t            used;
         uint32_t            cnt;
         gsize               len;
-        gboolean            locales_collected;
+        gboolean            locales_collected = FALSE;
 
-        error = NULL;
-        mapped = g_mapped_file_new (ARCHIVE_FILE, FALSE, &error);
-        if (mapped == NULL) {
-                mapped = g_mapped_file_new (SYSTEM_ARCHIVE_FILE, FALSE, NULL);
-                if (mapped == NULL) {
-                        g_warning ("Mapping failed for %s: %s", ARCHIVE_FILE, error->message);
-                        g_error_free (error);
-                        return FALSE;
-                }
-                g_error_free (error);
+        if (!mapped_file_new_allow_noent (ARCHIVE_FILE, &mapped, error))
+                goto out;
+        if (!mapped) {
+                if (!mapped_file_new_allow_noent (SYSTEM_ARCHIVE_FILE, &mapped, error))
+                        goto out;
         }
-
-        locales_collected = FALSE;
+        if (!mapped) {
+                goto out_success;
+        }
 
         addr = g_mapped_file_get_contents (mapped);
         len = g_mapped_file_get_length (mapped);
@@ -502,16 +523,18 @@ collect_locales_from_archive (void)
         }
 
         for (cnt = 0; cnt < used; ++cnt) {
-                add_locale (names[cnt].name, TRUE);
+                if (add_locale (names[cnt].name, TRUE))
+                        locales_collected = TRUE;
         }
 
-        g_free (names);
 
-        locales_collected = TRUE;
+ out_success:
+        ret = TRUE;
+        *out_found_locales = locales_collected;
  out:
-
-        g_mapped_file_unref (mapped);
-        return locales_collected;
+        g_free (names);
+        g_clear_pointer (&mapped, g_mapped_file_unref);
+        return ret;
 }
 
 static int
@@ -544,9 +567,10 @@ select_dirs (const struct dirent *dirent)
         return result;
 }
 
-static void
+static gboolean
 collect_locales_from_directory (void)
 {
+        gboolean found_locales = FALSE;
         struct dirent **dirents;
         int             ndirents;
         int             cnt;
@@ -554,12 +578,14 @@ collect_locales_from_directory (void)
         ndirents = scandir (LIBLOCALEDIR, &dirents, select_dirs, alphasort);
 
         for (cnt = 0; cnt < ndirents; ++cnt) {
-                add_locale (dirents[cnt]->d_name, TRUE);
+                if (add_locale (dirents[cnt]->d_name, TRUE))
+                        found_locales = TRUE;
         }
 
         if (ndirents > 0) {
                 free (dirents);
         }
+        return found_locales;
 }
 
 static void
@@ -598,20 +624,29 @@ count_languages_and_territories (void)
 static void
 collect_locales (void)
 {
+        gboolean found_archive_locales = FALSE;
+        gboolean found_dir_locales = FALSE;
+        GError *error = NULL;
 
         if (gnome_available_locales_map == NULL) {
                 gnome_available_locales_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) gnome_locale_free);
         }
 
-        if (!collect_locales_from_archive ()) {
+
+        if (!collect_locales_from_archive (&found_archive_locales, &error)) {
+                g_warning ("Failed to load locales from archive: %s", error->message);
+                g_clear_error (&error);
+        }
+
+        found_dir_locales = collect_locales_from_directory ();
+
+        if (!(found_archive_locales || found_dir_locales)) {
 #ifndef WITH_INCOMPLETE_LOCALES
                 g_warning ("Could not read list of available locales from libc, "
                            "guessing possible locales from available translations, "
                            "but list may be incomplete!");
 #endif
         }
-
-        collect_locales_from_directory ();
 
 	count_languages_and_territories ();
 }
