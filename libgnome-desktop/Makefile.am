@@ -44,6 +44,7 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-datetime-source.h		\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
+	default-input-sources.h		\
 	edid.h				\
 	locarchive.h
 
