@@ -51,6 +51,8 @@
 #define ISO_CODES_DATADIR ISO_CODES_PREFIX "/share/xml/iso-codes"
 #define ISO_CODES_LOCALESDIR ISO_CODES_PREFIX "/share/locale"
 
+#include "default-input-sources.h"
+
 typedef struct _GnomeLocale {
         char *id;
         char *name;
@@ -1348,4 +1350,60 @@ gnome_get_country_from_code (const char *code,
         territories_init ();
 
         return get_translated_territory (code, locale);
+}
+
+/**
+ * gnome_get_input_source_from_locale:
+ * @locale: a locale string
+ * @type: (out) (transfer none): location to store the input source
+ * type
+ * @id: (out) (transfer none): location to store the input source
+ * identifier
+ *
+ * Gets the default input source's type and identifier for a given
+ * locale.
+ *
+ * Return value: %TRUE if a input source exists or %FALSE otherwise.
+ *
+ * Since: 3.8
+ */
+gboolean
+gnome_get_input_source_from_locale (const char  *locale,
+                                    const char **type,
+                                    const char **id)
+{
+        static GHashTable *table = NULL;
+        DefaultInputSource *dis;
+        gchar *l_code, *c_code;
+        gchar *key;
+        gint i;
+
+        g_return_val_if_fail (locale != NULL, FALSE);
+        g_return_val_if_fail (type != NULL, FALSE);
+        g_return_val_if_fail (id != NULL, FALSE);
+
+        if (!table) {
+                table = g_hash_table_new (g_str_hash, g_str_equal);
+                for (i = 0; default_input_sources[i].id; ++i) {
+                        dis = &default_input_sources[i];
+                        g_hash_table_insert (table, (gpointer) dis->locale, dis);
+                }
+        }
+
+        if (!gnome_parse_language_name (locale, &l_code, &c_code, NULL, NULL))
+                return FALSE;
+
+        key = g_strconcat (l_code, "_", c_code, NULL);
+
+        dis = g_hash_table_lookup (table, key);
+        if (dis) {
+                *type = dis->type;
+                *id = dis->id;
+        }
+
+        g_free (l_code);
+        g_free (c_code);
+        g_free (key);
+
+        return dis != NULL;
 }
