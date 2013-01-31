@@ -9,7 +9,7 @@
 
 int main (int argc, char **argv)
 {
-        char **langs;
+        char **locales;
         guint i;
 
         setlocale (LC_ALL, NULL);
@@ -18,30 +18,34 @@ int main (int argc, char **argv)
         if (argc > 1) {
                 guint i;
                 for (i = 1; i < argc; i++) {
-                        char *lang, *norm;
-                        norm = gnome_normalize_language_name (argv[i]);
-                        lang = gnome_get_language_from_name (norm, NULL);
-                        g_print ("%s (norm: %s) == %s\n", argv[i], norm, lang);
+                        char *lang, *country, *norm;
+                        norm = gnome_normalize_locale (argv[i]);
+                        lang = gnome_get_language_from_locale (norm, NULL);
+                        country = gnome_get_country_from_locale (norm, NULL);
+                        g_print ("%s (norm: %s) == %s -- %s\n", argv[i], norm, lang, country);
                         g_free (norm);
                         g_free (lang);
+                        g_free (country);
                 }
                 return 0;
         }
 
-        langs = gnome_get_all_language_names ();
-        if (langs == NULL) {
-                g_warning ("No languages found");
+        locales = gnome_get_all_locales ();
+        if (locales == NULL) {
+                g_warning ("No locales found");
                 return 1;
         }
 
-        for (i = 0; langs[i] != NULL; i++) {
-                char *lang;
-                lang = gnome_get_language_from_name (langs[i], NULL);
-                g_print ("%s == %s\n", langs[i], lang);
+        for (i = 0; locales[i] != NULL; i++) {
+                char *lang, *country;
+                lang = gnome_get_language_from_locale (locales[i], NULL);
+                country = gnome_get_country_from_locale (locales[i], NULL);
+                g_print ("%s == %s -- %s\n", locales[i], lang, country);
                 g_free (lang);
+                g_free (country);
         }
 
-        g_strfreev (langs);
+        g_strfreev (locales);
 
         return 0;
 }
