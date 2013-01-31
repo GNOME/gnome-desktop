@@ -142,10 +142,9 @@ gnome_parse_locale (const char *locale,
                     char      **codesetp,
                     char      **modifierp)
 {
-        GRegex     *re;
+        static GRegex *re = NULL;
         GMatchInfo *match_info;
         gboolean    res;
-        GError     *error;
         gchar      *normalized_codeset = NULL;
         gchar      *normalized_name = NULL;
         gboolean    retval;
@@ -153,15 +152,18 @@ gnome_parse_locale (const char *locale,
         match_info = NULL;
         retval = FALSE;
 
-        error = NULL;
-        re = g_regex_new ("^(?P<language>[^_.@[:space:]]+)"
-                          "(_(?P<territory>[[:upper:]]+))?"
-                          "(\\.(?P<codeset>[-_0-9a-zA-Z]+))?"
-                          "(@(?P<modifier>[[:ascii:]]+))?$",
-                          0, 0, &error);
         if (re == NULL) {
-                g_warning ("%s", error->message);
-                goto out;
+                GError *error = NULL;
+                re = g_regex_new ("^(?P<language>[^_.@[:space:]]+)"
+                                  "(_(?P<territory>[[:upper:]]+))?"
+                                  "(\\.(?P<codeset>[-_0-9a-zA-Z]+))?"
+                                  "(@(?P<modifier>[[:ascii:]]+))?$",
+                                  0, 0, &error);
+                if (re == NULL) {
+                        g_warning ("%s", error->message);
+                        g_error_free (error);
+                        goto out;
+                }
         }
 
         if (!g_regex_match (re, locale, 0, &match_info) ||
@@ -230,7 +232,6 @@ gnome_parse_locale (const char *locale,
 
  out:
         g_match_info_free (match_info);
-        g_regex_unref (re);
 
         return retval;
 }
