@@ -115,10 +115,25 @@ normalize_codeset (const char *codeset)
         return normalized_codeset;
 }
 
-/*
- * According to http://en.wikipedia.org/wiki/Locale
- * locale names are of the form:
- * [language[_territory][.codeset][@modifier]]
+/**
+ * gnome_parse_locale:
+ * @locale: a locale string
+ * @language_codep: (out) (allow-none) (transfer full): location to
+ * store the language code, or %NULL
+ * @country_codep: (out) (allow-none) (transfer full): location to
+ * store the country code, or %NULL
+ * @codesetp: (out) (allow-none) (transfer full): location to
+ * store the codeset, or %NULL
+ * @modifierp: (out) (allow-none) (transfer full): location to
+ * store the modifier, or %NULL
+ *
+ * Extracts the various components of a locale string of the form
+ * [language[_country][.codeset][@modifier]]. See
+ * http://en.wikipedia.org/wiki/Locale.
+ *
+ * Return value: %TRUE if parsing was successful.
+ *
+ * Since: 3.8
  */
 gboolean
 gnome_parse_locale (const char *locale,
@@ -245,6 +260,18 @@ construct_language_name (const char *language,
         return name;
 }
 
+/**
+ * gnome_normalize_locale:
+ * @locale: a locale string
+ *
+ * Gets the normalized locale string in the form
+ * [language[_country][.codeset][@modifier]] for @name.
+ *
+ * Return value: (transfer full): normalized locale string. Caller
+ * takes ownership.
+ *
+ * Since: 3.8
+ */
 char *
 gnome_normalize_locale (const char *locale)
 {
@@ -328,6 +355,16 @@ language_name_get_codeset_details (const char  *language_name,
         g_free (old_locale);
 }
 
+/**
+ * gnome_language_has_translations:
+ * @code: an ISO 639 code string
+ *
+ * Returns %TRUE if there are translations for language @code.
+ *
+ * Return value: %TRUE if there are translations for language @code.
+ *
+ * Since: 3.8
+ */
 gboolean
 gnome_language_has_translations (const char *code)
 {
@@ -1112,6 +1149,19 @@ territories_init (void)
         }
 }
 
+/**
+ * gnome_get_language_from_locale:
+ * @locale: a locale string
+ * @translation: (allow-none): a locale string
+ *
+ * Gets the language description for @locale. If @translation is
+ * provided the returned string is translated accordingly.
+ *
+ * Return value: (transfer full): the language description. Caller
+ * takes ownership.
+ *
+ * Since: 3.8
+ */
 char *
 gnome_get_language_from_locale (const char *locale,
                                 const char *translation)
@@ -1199,6 +1249,19 @@ gnome_get_language_from_locale (const char *locale,
         return g_string_free (full_language, FALSE);
 }
 
+/**
+ * gnome_get_country_from_locale:
+ * @locale: a locale string
+ * @translation: (allow-none): a locale string
+ *
+ * Gets the country description for @locale. If @translation is
+ * provided the returned string is translated accordingly.
+ *
+ * Return value: (transfer full): the country description. Caller
+ * takes ownership.
+ *
+ * Since: 3.8
+ */
 char *
 gnome_get_country_from_locale (const char *locale,
                                const char *translation)
@@ -1282,6 +1345,17 @@ gnome_get_country_from_locale (const char *locale,
         return g_string_free (full_name, FALSE);
 }
 
+/**
+ * gnome_get_all_locales:
+ *
+ * Gets all locales.
+ *
+ * Return value: (array zero-terminated=1) (element-type utf8) (transfer full):
+ *   a newly allocated %NULL-terminated string array containing the
+ *   all locales. Free with g_strfreev().
+ *
+ * Since: 3.8
+ */
 char **
 gnome_get_all_locales (void)
 {
