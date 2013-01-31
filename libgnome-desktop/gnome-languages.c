@@ -121,11 +121,11 @@ normalize_codeset (const char *codeset)
  * [language[_territory][.codeset][@modifier]]
  */
 gboolean
-gnome_parse_language_name (const char *name,
-                           char      **language_codep,
-                           char      **territory_codep,
-                           char      **codesetp,
-                           char      **modifierp)
+gnome_parse_locale (const char *locale,
+                    char      **language_codep,
+                    char      **country_codep,
+                    char      **codesetp,
+                    char      **modifierp)
 {
         GRegex     *re;
         GMatchInfo *match_info;
@@ -149,15 +149,15 @@ gnome_parse_language_name (const char *name,
                 goto out;
         }
 
-        if (!g_regex_match (re, name, 0, &match_info) ||
+        if (!g_regex_match (re, locale, 0, &match_info) ||
             g_match_info_is_partial_match (match_info)) {
-                g_warning ("locale '%s' isn't valid\n", name);
+                g_warning ("locale '%s' isn't valid\n", locale);
                 goto out;
         }
 
         res = g_match_info_matches (match_info);
         if (! res) {
-                g_warning ("Unable to parse locale: %s", name);
+                g_warning ("Unable to parse locale: %s", locale);
                 goto out;
         }
 
@@ -167,13 +167,13 @@ gnome_parse_language_name (const char *name,
                 *language_codep = g_match_info_fetch_named (match_info, "language");
         }
 
-        if (territory_codep != NULL) {
-                *territory_codep = g_match_info_fetch_named (match_info, "territory");
+        if (country_codep != NULL) {
+                *country_codep = g_match_info_fetch_named (match_info, "territory");
 
-                if (*territory_codep != NULL &&
-                    *territory_codep[0] == '\0') {
-                        g_free (*territory_codep);
-                        *territory_codep = NULL;
+                if (*country_codep != NULL &&
+                    *country_codep[0] == '\0') {
+                        g_free (*country_codep);
+                        *country_codep = NULL;
                 }
         }
 
@@ -200,7 +200,7 @@ gnome_parse_language_name (const char *name,
         if (codesetp != NULL && *codesetp != NULL) {
                 normalized_codeset = normalize_codeset (*codesetp);
                 normalized_name = construct_language_name (language_codep ? *language_codep : NULL,
-                                                           territory_codep ? *territory_codep : NULL,
+                                                           country_codep ? *country_codep : NULL,
                                                            normalized_codeset,
                                                            modifierp ? *modifierp : NULL);
 
@@ -246,7 +246,7 @@ construct_language_name (const char *language,
 }
 
 char *
-gnome_normalize_language_name (const char *name)
+gnome_normalize_locale (const char *locale)
 {
         char *normalized_name;
         char *language_code;
@@ -255,14 +255,14 @@ gnome_normalize_language_name (const char *name)
         char *modifier;
         gboolean valid;
 
-        if (name[0] == '\0') {
+        if (locale[0] == '\0') {
                 return NULL;
         }
 
-        valid = gnome_parse_language_name (name,
-                                           &language_code,
-                                           &territory_code,
-                                           &codeset, &modifier);
+        valid = gnome_parse_locale (locale,
+                                    &language_code,
+                                    &territory_code,
+                                    &codeset, &modifier);
         if (!valid)
                 return NULL;
 
@@ -329,14 +329,14 @@ language_name_get_codeset_details (const char  *language_name,
 }
 
 gboolean
-gnome_language_has_translations (const char *language_name)
+gnome_language_has_translations (const char *code)
 {
         GDir        *dir;
         char        *path;
         const char  *name;
         gboolean     has_translations;
 
-        path = g_build_filename (GNOMELOCALEDIR, language_name, "LC_MESSAGES", NULL);
+        path = g_build_filename (GNOMELOCALEDIR, code, "LC_MESSAGES", NULL);
 
         has_translations = FALSE;
         dir = g_dir_open (path, 0, NULL);
@@ -399,11 +399,11 @@ add_locale (const char *language_name,
         }
 
         locale = g_new0 (GnomeLocale, 1);
-        gnome_parse_language_name (name,
-                                   &locale->language_code,
-                                   &locale->territory_code,
-                                   &locale->codeset,
-                                   &locale->modifier);
+        gnome_parse_locale (name,
+                            &locale->language_code,
+                            &locale->territory_code,
+                            &locale->codeset,
+                            &locale->modifier);
         g_free (name);
         name = NULL;
 
@@ -1113,8 +1113,8 @@ territories_init (void)
 }
 
 char *
-gnome_get_language_from_name (const char *name,
-                              const char *locale)
+gnome_get_language_from_locale (const char *locale,
+                                const char *translation)
 {
         GString *full_language;
         char *language_code;
@@ -1125,8 +1125,8 @@ gnome_get_language_from_name (const char *name,
         char *translated_territory;
         gboolean is_utf8 = TRUE;
 
-        g_return_val_if_fail (name != NULL, NULL);
-        g_return_val_if_fail (*name != '\0', NULL);
+        g_return_val_if_fail (locale != NULL, NULL);
+        g_return_val_if_fail (*locale != '\0', NULL);
 
         translated_territory = NULL;
         translated_language = NULL;
@@ -1141,17 +1141,17 @@ gnome_get_language_from_name (const char *name,
         territory_code = NULL;
         codeset_code = NULL;
 
-        gnome_parse_language_name (name,
-                                   &language_code,
-                                   &territory_code,
-                                   &codeset_code,
-                                   NULL);
+        gnome_parse_locale (locale,
+                            &language_code,
+                            &territory_code,
+                            &codeset_code,
+                            NULL);
 
         if (language_code == NULL) {
                 goto out;
         }
 
-        translated_language = get_translated_language (language_code, locale);
+        translated_language = get_translated_language (language_code, translation);
         if (translated_language == NULL) {
                 goto out;
         }
@@ -1163,7 +1163,7 @@ gnome_get_language_from_name (const char *name,
 	}
 
         if (territory_code != NULL) {
-                translated_territory = get_translated_territory (territory_code, locale);
+                translated_territory = get_translated_territory (territory_code, translation);
         }
         if (translated_territory != NULL) {
                 g_string_append_printf (full_language,
@@ -1171,7 +1171,7 @@ gnome_get_language_from_name (const char *name,
                                         translated_territory);
         }
 
-        language_name_get_codeset_details (name, &langinfo_codeset, &is_utf8);
+        language_name_get_codeset_details (locale, &langinfo_codeset, &is_utf8);
 
         if (codeset_code == NULL && langinfo_codeset != NULL) {
                 codeset_code = g_strdup (langinfo_codeset);
@@ -1200,8 +1200,8 @@ gnome_get_language_from_name (const char *name,
 }
 
 char *
-gnome_get_region_from_name (const char *name,
-                            const char *locale)
+gnome_get_country_from_locale (const char *locale,
+                               const char *translation)
 {
         GString *full_name;
         char *language_code;
@@ -1212,8 +1212,8 @@ gnome_get_region_from_name (const char *name,
         char *translated_territory;
         gboolean is_utf8 = TRUE;
 
-        g_return_val_if_fail (name != NULL, NULL);
-        g_return_val_if_fail (*name != '\0', NULL);
+        g_return_val_if_fail (locale != NULL, NULL);
+        g_return_val_if_fail (*locale != '\0', NULL);
 
         translated_territory = NULL;
         translated_language = NULL;
@@ -1228,17 +1228,17 @@ gnome_get_region_from_name (const char *name,
         territory_code = NULL;
         codeset_code = NULL;
 
-        gnome_parse_language_name (name,
-                                   &language_code,
-                                   &territory_code,
-                                   &codeset_code,
-                                   NULL);
+        gnome_parse_locale (locale,
+                            &language_code,
+                            &territory_code,
+                            &codeset_code,
+                            NULL);
 
         if (territory_code == NULL) {
                 goto out;
         }
 
-        translated_territory = get_translated_territory (territory_code, locale);
+        translated_territory = get_translated_territory (territory_code, translation);
         g_string_append (full_name, translated_territory);
 
 	if (is_unique_territory (territory_code)) {
@@ -1246,7 +1246,7 @@ gnome_get_region_from_name (const char *name,
 	}
 
         if (language_code != NULL) {
-                translated_language = get_translated_language (language_code, locale);
+                translated_language = get_translated_language (language_code, translation);
         }
         if (translated_language != NULL) {
                 g_string_append_printf (full_name,
@@ -1254,7 +1254,7 @@ gnome_get_region_from_name (const char *name,
                                         translated_language);
         }
 
-        language_name_get_codeset_details (name, &langinfo_codeset, &is_utf8);
+        language_name_get_codeset_details (translation, &langinfo_codeset, &is_utf8);
 
         if (codeset_code == NULL && langinfo_codeset != NULL) {
                 codeset_code = g_strdup (langinfo_codeset);
@@ -1283,7 +1283,7 @@ gnome_get_region_from_name (const char *name,
 }
 
 char **
-gnome_get_all_language_names (void)
+gnome_get_all_locales (void)
 {
         GHashTableIter iter;
         gpointer key, value;
@@ -1310,7 +1310,7 @@ gnome_get_all_language_names (void)
 /**
  * gnome_get_language_from_code:
  * @code: an ISO 639 code string
- * @locale: (allow-none): a locale string
+ * @translation: (allow-none): a locale string
  *
  * Gets the language name for @code. If @locale is provided the
  * returned string is translated accordingly.
@@ -1322,19 +1322,19 @@ gnome_get_all_language_names (void)
  */
 char *
 gnome_get_language_from_code (const char *code,
-                              const char *locale)
+                              const char *translation)
 {
         g_return_val_if_fail (code != NULL, NULL);
 
         languages_init ();
 
-        return get_translated_language (code, locale);
+        return get_translated_language (code, translation);
 }
 
 /**
  * gnome_get_country_from_code:
  * @code: an ISO 3166 code string
- * @locale: (allow-none): a locale string
+ * @translation: (allow-none): a locale string
  *
  * Gets the country name for @code. If @locale is provided the
  * returned string is translated accordingly.
@@ -1346,13 +1346,13 @@ gnome_get_language_from_code (const char *code,
  */
 char *
 gnome_get_country_from_code (const char *code,
-                             const char *locale)
+                             const char *translation)
 {
         g_return_val_if_fail (code != NULL, NULL);
 
         territories_init ();
 
-        return get_translated_territory (code, locale);
+        return get_translated_territory (code, translation);
 }
 
 /**
@@ -1393,7 +1393,7 @@ gnome_get_input_source_from_locale (const char  *locale,
                 }
         }
 
-        if (!gnome_parse_language_name (locale, &l_code, &c_code, NULL, NULL))
+        if (!gnome_parse_locale (locale, &l_code, &c_code, NULL, NULL))
                 return FALSE;
 
         key = g_strconcat (l_code, "_", c_code, NULL);

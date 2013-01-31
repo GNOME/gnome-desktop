@@ -30,22 +30,22 @@
 
 G_BEGIN_DECLS
 
-char *        gnome_get_language_from_name  (const char *name,
-                                             const char *locale);
-char *        gnome_get_region_from_name    (const char *name,
-                                             const char *locale);
-char **       gnome_get_all_language_names  (void);
-gboolean      gnome_parse_language_name     (const char *name,
-                                             char      **language_codep,
-                                             char      **territory_codep,
-                                             char      **codesetp,
-                                             char      **modifierp);
-char *        gnome_normalize_language_name (const char *name);
-gboolean      gnome_language_has_translations (const char *language_name);
-char *        gnome_get_language_from_code  (const char *code,
-                                             const char *locale);
-char *        gnome_get_country_from_code   (const char *code,
-                                             const char *locale);
+char *        gnome_get_language_from_locale    (const char *locale,
+                                                 const char *translation);
+char *        gnome_get_country_from_locale     (const char *locale,
+                                                 const char *translation);
+char **       gnome_get_all_locales             (void);
+gboolean      gnome_parse_locale                (const char *locale,
+                                                 char      **language_codep,
+                                                 char      **country_codep,
+                                                 char      **codesetp,
+                                                 char      **modifierp);
+char *        gnome_normalize_locale            (const char *locale);
+gboolean      gnome_language_has_translations   (const char *code);
+char *        gnome_get_language_from_code      (const char *code,
+                                                 const char *translation);
+char *        gnome_get_country_from_code       (const char *code,
+                                                 const char *translation);
 gboolean      gnome_get_input_source_from_locale (const char  *locale,
                                                   const char **type,
                                                   const char **id);
