@@ -253,15 +253,18 @@ gnome_normalize_language_name (const char *name)
         char *territory_code;
         char *codeset;
         char *modifier;
+        gboolean valid;
 
         if (name[0] == '\0') {
                 return NULL;
         }
 
-        gnome_parse_language_name (name,
-                                   &language_code,
-                                   &territory_code,
-                                   &codeset, &modifier);
+        valid = gnome_parse_language_name (name,
+                                           &language_code,
+                                           &territory_code,
+                                           &codeset, &modifier);
+        if (!valid)
+                return NULL;
 
         normalized_name = construct_language_name (language_code,
                                                    territory_code,
