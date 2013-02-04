@@ -12,7 +12,7 @@ int main (int argc, char **argv)
         char **locales;
         guint i;
 
-        setlocale (LC_ALL, NULL);
+        setlocale (LC_ALL, "");
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
         if (argc > 1) {
