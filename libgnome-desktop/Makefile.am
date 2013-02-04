@@ -104,7 +104,7 @@ GnomeDesktop_3_0_gir_EXPORT_PACKAGES = gnome-desktop-3.0
 GnomeDesktop_3_0_gir_CFLAGS = -DGNOME_DESKTOP_USE_UNSTABLE_API -I$(top_srcdir)
 GnomeDesktop_3_0_gir_LIBS = libgnome-desktop-3.la
 GnomeDesktop_3_0_gir_FILES = $(introspection_sources) $(libgnome_desktop_HEADERS)
-GnomeDesktop_3_0_gir_SCANNERFLAGS = --identifier-prefix=Gnome --symbol-prefix=gnome_
+GnomeDesktop_3_0_gir_SCANNERFLAGS = --identifier-prefix=Gnome --symbol-prefix=gnome
 INTROSPECTION_SCANNER_ARGS += $(patsubst %,--c-include='libgnome-desktop/%',$(libgnome_desktop_HEADERS))
 INTROSPECTION_GIRS += GnomeDesktop-3.0.gir
 
