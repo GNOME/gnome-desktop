@@ -75,6 +75,10 @@ GList          *gnome_xkb_info_get_options_for_group            (GnomeXkbInfo *s
 const gchar    *gnome_xkb_info_description_for_option           (GnomeXkbInfo *self,
                                                                  const gchar  *group_id,
                                                                  const gchar  *id);
+GList          *gnome_xkb_info_get_layouts_for_language         (GnomeXkbInfo *self,
+                                                                 const gchar  *language_code);
+GList          *gnome_xkb_info_get_layouts_for_country          (GnomeXkbInfo *self,
+                                                                 const gchar  *country_code);
 
 void            gnome_xkb_info_get_var_defs                     (gchar            **rules,
                                                                  XkbRF_VarDefsRec **var_defs);
