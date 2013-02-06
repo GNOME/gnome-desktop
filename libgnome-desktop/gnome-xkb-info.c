@@ -923,3 +923,100 @@ gnome_xkb_info_get_layout_info (GnomeXkbInfo *self,
 
   return TRUE;
 }
+
+static void
+collect_layout_ids (gpointer key,
+                    gpointer value,
+                    gpointer data)
+{
+  Layout *layout = value;
+  GList **list = data;
+
+  *list = g_list_prepend (*list, layout->id);
+}
+
+/**
+ * gnome_xkb_info_get_layouts_for_language:
+ * @self: a #GnomeXkbInfo
+ * @language_code: an ISO 639 code string
+ *
+ * Returns a list of all layout identifiers we know about for
+ * @language_code.
+ *
+ * Return value: (transfer container) (element-type utf8): the list
+ * of layout ids. The caller takes ownership of the #GList but not of
+ * the strings themselves, those are internally allocated and must not
+ * be modified.
+ *
+ * Since: 3.8
+ */
+GList *
+gnome_xkb_info_get_layouts_for_language (GnomeXkbInfo *self,
+                                         const gchar  *language_code)
+{
+  GnomeXkbInfoPrivate *priv;
+  GHashTable *layouts_for_language;
+  gchar *language;
+  GList *list;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  language = gnome_get_language_from_code (language_code, NULL);
+
+  layouts_for_language = g_hash_table_lookup (priv->layouts_by_language, language);
+  if (!layouts_for_language)
+    return NULL;
+
+  list = NULL;
+  g_hash_table_foreach (layouts_for_language, collect_layout_ids, &list);
+
+  return list;
+}
+
+/**
+ * gnome_xkb_info_get_layouts_for_country:
+ * @self: a #GnomeXkbInfo
+ * @country_code: an ISO 3166 code string
+ *
+ * Returns a list of all layout identifiers we know about for
+ * @country_code.
+ *
+ * Return value: (transfer container) (element-type utf8): the list
+ * of layout ids. The caller takes ownership of the #GList but not of
+ * the strings themselves, those are internally allocated and must not
+ * be modified.
+ *
+ * Since: 3.8
+ */
+GList *
+gnome_xkb_info_get_layouts_for_country (GnomeXkbInfo *self,
+                                        const gchar  *country_code)
+{
+  GnomeXkbInfoPrivate *priv;
+  GHashTable *layouts_for_country;
+  gchar *country;
+  GList *list;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  country = gnome_get_country_from_code (country_code, NULL);
+
+  layouts_for_country = g_hash_table_lookup (priv->layouts_by_country, country);
+  if (!layouts_for_country)
+    return NULL;
+
+  list = NULL;
+  g_hash_table_foreach (layouts_for_country, collect_layout_ids, &list);
+
+  return list;
+}
