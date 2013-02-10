@@ -4,21 +4,21 @@
 #
 # Amanpreet Singh Alam <amanliunx@netscapet.net>, 2004.
 # A S Alam <aalam@users.sf.net>, 2005,2006, 2007,2008, 2009, 2010.
-# Amanpreet Singh Alam <aalam@users.sf.net>, 2009, 2012.
+# Amanpreet Singh Alam <aalam@users.sf.net>, 2009, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-03 19:06+0000\n"
-"PO-Revision-Date: 2012-09-12 07:21+0530\n"
+"POT-Creation-Date: 2013-01-25 18:35+0000\n"
+"PO-Revision-Date: 2013-02-10 23:40+0000\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
@@ -30,10 +30,14 @@ msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
-#: ../libgnome-desktop/gnome-desktop-utils.c:134
+#: ../libgnome-desktop/gnome-desktop-utils.c:135
 msgid "Cannot find a terminal, using xterm, even if it may not work"
 msgstr ""
 "ਟਰਮੀਨਲ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਦਾ, xtrerm ਦੀ ਵਰਤੋਂ, ਭਾਵੇਂ ਇਹ ਵੀ ਸ਼ਾਇਦ ਹੀ ਕੰਮ ਕਰੇ"
+
+#: ../libgnome-desktop/gnome-languages.c:726
+msgid "Unspecified"
+msgstr "ਦਿੱਤਾ ਨਹੀਂ"
 
 #. Translators: a CRTC is a CRT Controller (this is X terminology).
 #: ../libgnome-desktop/gnome-rr.c:452
@@ -56,7 +60,7 @@ msgstr "ਸਕਰੀਨ ਅਕਾਰ ਦੀ ਸੀਮਾ ਨਹੀਂ ਲਈ ਜ
 msgid "RANDR extension is not present"
 msgstr "RANDR ਸਹਿਯੋਗੀ ਮੌਜੂਦ ਨਹੀਂ"
 
-#: ../libgnome-desktop/gnome-rr.c:1570
+#: ../libgnome-desktop/gnome-rr.c:1579
 #, c-format
 msgid "could not get information about output %d"
 msgstr "ਆਉਟਪੁੱਟ %d ਬਾਰੇ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲਈ ਜਾ ਸਕੀ"
@@ -64,7 +68,7 @@ msgstr "ਆਉਟਪੁੱਟ %d ਬਾਰੇ ਜਾਣਕਾਰੀ ਨਹੀਂ
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2163
+#: ../libgnome-desktop/gnome-rr.c:2172
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position="
@@ -74,12 +78,12 @@ msgstr ""
 "d, "
 "%d), ਵੱਧੋ-ਵੱਧ=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:2199
+#: ../libgnome-desktop/gnome-rr.c:2208
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "CRTC %d ਲਈ ਸੰਰਚਨਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
 
-#: ../libgnome-desktop/gnome-rr.c:2344
+#: ../libgnome-desktop/gnome-rr.c:2353
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "CRTC %d ਬਾਰੇ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲਈ ਜਾ ਸਕੀ"
@@ -169,75 +173,92 @@ msgstr ""
 "d), ਵੱਧੋ-ਵੱਧ="
 "(%d, %d)"
 
-#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
-#. Translators:  this is the feature where what you see on your
-#. * laptop's screen is the same as your external projector.
-#. * Here, "Mirrored" is being used as an adjective.  For example,
-#. * the Spanish translation could be "Pantallas en Espejo".
-#.
-#: ../libgnome-desktop/gnome-rr-labeler.c:381
-msgid "Mirrored Displays"
-msgstr "ਮਿਰਰ ਕੀਤੇ ਡਿਸਪਲੇਅ"
-
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:238
-msgid "%a %b %e, %R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:247
+#| msgid "%a %b %e, %R:%S"
+msgid "%a %b %e, %R∶%S"
 msgstr "%a, %e %b %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:239
+#: ../libgnome-desktop/gnome-wall-clock.c:248
 msgid "%a %b %e, %R"
 msgstr "%a %e %b, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:243
-msgid "%a %R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:253
+#| msgid "%a %R:%S"
+msgid "%a %R∶%S"
 msgstr "%a %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:244
+#: ../libgnome-desktop/gnome-wall-clock.c:254
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:248
-msgid "%R:%S"
-msgstr "%R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:259
+msgid "%R∶%S"
+msgstr "%R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:248
+#: ../libgnome-desktop/gnome-wall-clock.c:259
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:254
-msgid "%a %b %e, %l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:267
+#| msgid "%a %b %e, %l:%M:%S %p"
+msgid "%a %b %e, %l∶%M∶%S %p"
 msgstr "%a %e %b, %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:255
-msgid "%a %b %e, %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:268
+#| msgid "%a %b %e, %l:%M %p"
+msgid "%a %b %e, %l∶%M %p"
 msgstr "%a %e %b, %l:%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:259
-msgid "%a %l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:274
+#| msgid "%a %l:%M:%S %p"
+msgid "%a %l∶%M∶%S %p"
 msgstr "%a %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:260
-msgid "%a %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:275
+#| msgid "%a %l:%M %p"
+msgid "%a %l∶%M %p"
 msgstr "%a %l:%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:264
-msgid "%l:%M:%S %p"
-msgstr "%l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:281
+msgid "%l∶%M∶%S %p"
+msgstr "%l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:265
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:282
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#~ msgid "Mirrored Displays"
+#~ msgstr "ਮਿਰਰ ਕੀਤੇ ਡਿਸਪਲੇਅ"
+
+#~ msgid "%R:%S"
+#~ msgstr "%R:%S"
+
+#~ msgid "%l:%M:%S %p"
+#~ msgstr "%l:%M:%S %p"
+
+#~ msgid "%l:%M %p"
+#~ msgstr "%l:%M %p"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "ਮਿੱਰਰ ਸਕਰੀਨਾਂ"
