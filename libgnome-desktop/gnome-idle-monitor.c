@@ -36,7 +36,7 @@
 
 #define GNOME_IDLE_MONITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_IDLE_MONITOR, GnomeIdleMonitorPrivate))
 
-struct GnomeIdleMonitorPrivate
+struct _GnomeIdleMonitorPrivate
 {
 	Display	    *display;
 

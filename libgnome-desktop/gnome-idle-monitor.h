@@ -40,18 +40,20 @@ G_BEGIN_DECLS
 #define GNOME_IS_IDLE_MONITOR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GNOME_TYPE_IDLE_MONITOR))
 #define GNOME_IDLE_MONITOR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GNOME_TYPE_IDLE_MONITOR, GnomeIdleMonitorClass))
 
-typedef struct GnomeIdleMonitorPrivate GnomeIdleMonitorPrivate;
+typedef struct _GnomeIdleMonitor GnomeIdleMonitor;
+typedef struct _GnomeIdleMonitorClass GnomeIdleMonitorClass;
+typedef struct _GnomeIdleMonitorPrivate GnomeIdleMonitorPrivate;
 
-typedef struct
+struct _GnomeIdleMonitor
 {
         GObject                  parent;
         GnomeIdleMonitorPrivate *priv;
-} GnomeIdleMonitor;
+};
 
-typedef struct
+struct _GnomeIdleMonitorClass
 {
         GObjectClass          parent_class;
-} GnomeIdleMonitorClass;
+};
 
 typedef void (*GnomeIdleMonitorWatchFunc) (GnomeIdleMonitor      *monitor,
                                            guint                  id,
