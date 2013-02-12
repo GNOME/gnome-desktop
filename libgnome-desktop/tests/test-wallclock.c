@@ -23,8 +23,8 @@ main (int    argc,
   GMainLoop *loop;
 
   loop = g_main_loop_new (NULL, TRUE);
-  
-  clock = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
+
+  clock = gnome_wall_clock_new ();
   g_signal_connect (clock, "notify::clock", G_CALLBACK (on_clock_changed), NULL);
   update_clock (clock);
 

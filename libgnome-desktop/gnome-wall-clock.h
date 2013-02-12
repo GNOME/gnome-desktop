@@ -59,6 +59,8 @@ struct _GnomeWallClockClass
 
 GType             gnome_wall_clock_get_type      (void);
 
+GnomeWallClock *  gnome_wall_clock_new           (void);
+
 const char *      gnome_wall_clock_get_clock     (GnomeWallClock *clock);
 
 GTimeZone *       gnome_wall_clock_get_timezone  (GnomeWallClock *clock);

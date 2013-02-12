@@ -349,6 +349,19 @@ on_tz_changed (GFileMonitor      *monitor,
 }
 
 /**
+ * gnome_wall_clock_new:
+ *
+ * Creates a new #GnomeWallClock
+ *
+ * Return value: the new clock
+ **/
+GnomeWallClock *
+gnome_wall_clock_new (void)
+{
+	return (GnomeWallClock *) g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
+}
+
+/**
  * gnome_wall_clock_get_clock:
  * @clock: a #GnomeWallClock
  *
