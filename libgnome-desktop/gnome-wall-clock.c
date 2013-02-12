@@ -348,6 +348,17 @@ on_tz_changed (GFileMonitor      *monitor,
 	update_timezone (user_data);
 }
 
+/**
+ * gnome_wall_clock_get_clock:
+ * @clock: a #GnomeWallClock
+ *
+ * Returns the string representing the current time of this clock
+ * according to the user settings.
+ *
+ * Return value: the time of the clock as a string.
+ *      This string points to internally allocated storage and
+ *      must not be freed, modified or stored.
+ */
 const char *
 gnome_wall_clock_get_clock (GnomeWallClock *clock)
 {
