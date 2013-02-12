@@ -34,7 +34,9 @@
 
 struct _GnomeWallClockPrivate {
 	guint clock_update_id;
-	
+
+	GTimeZone *timezone;
+
 	char *clock_string;
 	
 	GFileMonitor *tz_monitor;
@@ -47,6 +49,7 @@ struct _GnomeWallClockPrivate {
 enum {
 	PROP_0,
 	PROP_CLOCK,
+	PROP_TIMEZONE,
 	PROP_TIME_ONLY,
 };
 
@@ -70,7 +73,9 @@ gnome_wall_clock_init (GnomeWallClock *self)
 	const char *ampm;
 
 	self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_WALL_CLOCK, GnomeWallClockPrivate);
-	
+
+	self->priv->timezone = g_time_zone_new_local ();
+
 	self->priv->clock_string = NULL;
 	
 	tz = g_file_new_for_path ("/etc/localtime");
@@ -117,6 +122,7 @@ gnome_wall_clock_finalize (GObject *object)
 {
 	GnomeWallClock *self = GNOME_WALL_CLOCK (object);
 
+	g_time_zone_unref (self->priv->timezone);
 	g_free (self->priv->clock_string);
 
 	G_OBJECT_CLASS (gnome_wall_clock_parent_class)->finalize (object);
@@ -134,6 +140,9 @@ gnome_wall_clock_get_property (GObject    *gobject,
 	{
 	case PROP_TIME_ONLY:
 		g_value_set_boolean (value, self->priv->time_only);
+		break;
+	case PROP_TIMEZONE:
+		g_value_set_boxed (value, self->priv->timezone);
 		break;
 	case PROP_CLOCK:
 		g_value_set_string (value, self->priv->clock_string);
@@ -164,7 +173,6 @@ gnome_wall_clock_set_property (GObject      *gobject,
 	}
 }
 
-
 static void
 gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 {
@@ -187,6 +195,19 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 							      "",
 							      NULL,
 							      G_PARAM_READABLE));
+
+	/**
+	 * GnomeWallClock:timezone:
+	 *
+	 * The timezone used for this clock
+	 */
+	g_object_class_install_property (gobject_class,
+					 PROP_TIMEZONE,
+					 g_param_spec_boxed ("timezone",
+							     "",
+							     "",
+							     G_TYPE_TIME_ZONE,
+							     G_PARAM_READABLE));
 
 	/**
 	 * GnomeWallClock:time-only:
@@ -223,7 +244,7 @@ update_clock (gpointer data)
 	show_full_date = show_weekday && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
 	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
 
-	now = g_date_time_new_now_local ();
+	now = g_date_time_new_now (self->priv->timezone);
 	if (show_seconds)
 		expiry = g_date_time_add_seconds (now, 1);
 	else
@@ -231,7 +252,7 @@ update_clock (gpointer data)
   
 	if (self->priv->clock_update_id)
 		g_source_remove (self->priv->clock_update_id);
-  
+
 	source = _gnome_datetime_source_new (now, expiry, TRUE);
 	g_source_set_priority (source, G_PRIORITY_HIGH);
 	g_source_set_callback (source, update_clock, self, NULL);
@@ -294,6 +315,19 @@ update_clock (gpointer data)
 	return FALSE;
 }
 
+static gboolean
+update_timezone (gpointer data)
+{
+	GnomeWallClock *self = data;
+
+	if (self->priv->timezone != NULL)
+		g_time_zone_unref (self->priv->timezone);
+	self->priv->timezone = g_time_zone_new_local ();
+	g_object_notify ((GObject*)self, "timezone");
+
+	return update_clock (data);
+}
+
 static void
 on_schema_change (GSettings *schema,
                   const char *key,
@@ -311,11 +345,25 @@ on_tz_changed (GFileMonitor      *monitor,
                gpointer           user_data)
 {
 	g_debug ("Updating clock because timezone changed");
-	update_clock (user_data);
+	update_timezone (user_data);
 }
 
 const char *
 gnome_wall_clock_get_clock (GnomeWallClock *clock)
 {
 	return clock->priv->clock_string;
+}
+
+/**
+ * gnome_wall_clock_get_timezone:
+ * @clock: a #GnomeWallClock
+ *
+ * Returns the current local time zone used by this clock.
+ *
+ * Return value: (transfer none): the #GTimeZone of the clock.
+ */
+GTimeZone *
+gnome_wall_clock_get_timezone (GnomeWallClock *clock)
+{
+	return clock->priv->timezone;
 }

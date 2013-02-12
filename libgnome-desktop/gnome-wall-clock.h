@@ -61,6 +61,8 @@ GType             gnome_wall_clock_get_type      (void);
 
 const char *      gnome_wall_clock_get_clock     (GnomeWallClock *clock);
 
+GTimeZone *       gnome_wall_clock_get_timezone  (GnomeWallClock *clock);
+
 G_END_DECLS
 
 #endif
