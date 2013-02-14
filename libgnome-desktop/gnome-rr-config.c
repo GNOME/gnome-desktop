@@ -521,6 +521,7 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 
 	output->priv->name = g_strdup (gnome_rr_output_get_name (rr_output));
 	output->priv->connected = gnome_rr_output_is_connected (rr_output);
+	output->priv->display_name = g_strdup (gnome_rr_output_get_display_name (rr_output));
 
 	if (!output->priv->connected)
 	{
@@ -553,12 +554,6 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 		output->priv->product = 0;
 		output->priv->serial = 0;
 	    }
-
-	    if (gnome_rr_output_is_laptop (rr_output))
-		output->priv->display_name = g_strdup (_("Laptop"));
-	    else
-		output->priv->display_name = make_display_name (info);
-		
 	    g_free (info);
 		
 	    crtc = gnome_rr_output_get_crtc (rr_output);
