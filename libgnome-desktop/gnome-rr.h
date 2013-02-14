@@ -148,6 +148,7 @@ gboolean        gnome_rr_screen_set_dpms_mode      (GnomeRRScreen         *scree
 /* GnomeRROutput */
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_name           (GnomeRROutput         *output);
+const char *    gnome_rr_output_get_display_name   (GnomeRROutput         *output);
 gboolean        gnome_rr_output_is_connected       (GnomeRROutput         *output);
 int             gnome_rr_output_get_size_inches    (GnomeRROutput         *output);
 int             gnome_rr_output_get_width_mm       (GnomeRROutput         *outout);

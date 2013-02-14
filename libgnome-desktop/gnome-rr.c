@@ -69,6 +69,7 @@ struct GnomeRROutput
     RROutput		id;
     
     char *		name;
+    char *		display_name;
     GnomeRRCrtc *	current_crtc;
     gboolean		connected;
     gulong		width_mm;
@@ -1582,6 +1583,7 @@ output_initialize (GnomeRROutput *output, XRRScreenResources *res, GError **erro
     }
     
     output->name = g_strdup (info->name); /* FIXME: what is nameLen used for? */
+    output->display_name = NULL; /* set first time the getter is used */
     output->current_crtc = crtc_by_id (output->info, info->crtc);
     output->width_mm = info->mm_width;
     output->height_mm = info->mm_height;
@@ -1695,6 +1697,7 @@ output_free (GnomeRROutput *output)
     g_free (output->possible_crtcs);
     g_free (output->edid_data);
     g_free (output->name);
+    g_free (output->display_name);
     g_free (output->connector_type);
     g_slice_free (GnomeRROutput, output);
 }
@@ -1742,6 +1745,52 @@ gnome_rr_output_get_ids_from_edid (GnomeRROutput         *output,
 
     return TRUE;
 
+}
+
+static void
+ensure_display_name (GnomeRROutput *output)
+{
+    if (output->display_name != NULL)
+        return;
+
+    if (gnome_rr_output_is_laptop (output))
+        output->display_name = g_strdup (_("Laptop"));
+
+    if (output->display_name == NULL
+        && output->edid_data != NULL) {
+        MonitorInfo *info;
+
+        info = decode_edid (output->edid_data);
+        if (info != NULL)
+            output->display_name = make_display_name (info);
+
+        g_free (info);
+    }
+
+    if (output->display_name == NULL) {
+        char *inches;
+        inches = make_display_size_string (output->width_mm, output->height_mm);
+        if (inches != NULL) {
+            /* Translators: %s is the size of the monitor in inches */
+            output->display_name = g_strdup_printf (_("%s Display"), inches);
+        }
+        g_free (inches);
+    }
+
+    /* last chance on the stairway */
+    if (output->display_name == NULL) {
+      output->display_name = g_strdup (_("Unknown Display"));
+    }
+}
+
+const char *
+gnome_rr_output_get_display_name (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, NULL);
+
+    ensure_display_name (output);
+
+    return output->display_name;
 }
 
 /**

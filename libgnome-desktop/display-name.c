@@ -73,6 +73,22 @@ diagonal_to_str (double d)
 }
 
 char *
+make_display_size_string (int width_mm,
+                          int height_mm)
+{
+  char *inches = NULL;
+
+  if (width_mm > 0 && height_mm > 0)
+    {
+      double d = sqrt (width_mm * width_mm + height_mm * height_mm);
+
+      inches = diagonal_to_str (d / 25.4);
+    }
+
+  return inches;
+}
+
+char *
 make_display_name (const MonitorInfo *info)
 {
     const char *vendor;
