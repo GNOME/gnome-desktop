@@ -1719,6 +1719,13 @@ gnome_rr_output_get_edid_data (GnomeRROutput *output, gsize *size)
     return output->edid_data;
 }
 
+/**
+ * gnome_rr_output_get_ids_from_edid:
+ * @output: a #GnomeRROutput
+ * @vendor: (out) (allow-none):
+ * @product: (out) (allow-none):
+ * @serial: (out) (allow-none):
+ */
 gboolean
 gnome_rr_output_get_ids_from_edid (GnomeRROutput         *output,
                                    char                 **vendor,
@@ -2019,6 +2026,12 @@ gnome_rr_output_get_current_mode (GnomeRROutput *output)
     return NULL;
 }
 
+/**
+ * gnome_rr_output_get_position:
+ * @output: a #GnomeRROutput
+ * @x: (out) (allow-none):
+ * @y: (out) (allow-none):
+ */
 void
 gnome_rr_output_get_position (GnomeRROutput   *output,
 			      int             *x,
@@ -2296,6 +2309,12 @@ gnome_rr_crtc_can_drive_output (GnomeRRCrtc   *crtc,
 }
 
 /* FIXME: merge with get_mode()? */
+/**
+ * gnome_rr_crtc_get_position:
+ * @crtc: a #GnomeRRCrtc
+ * @x: (out) (allow-none):
+ * @y: (out) (allow-none):
+ */
 void
 gnome_rr_crtc_get_position (GnomeRRCrtc *crtc,
 			    int         *x,
