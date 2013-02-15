@@ -34,20 +34,22 @@
 #include <glib-object.h>
 #include <libgnome-desktop/gnome-rr.h>
 
-typedef struct GnomeRROutputInfoPrivate GnomeRROutputInfoPrivate;
+typedef struct _GnomeRROutputInfo GnomeRROutputInfo;
+typedef struct _GnomeRROutputInfoClass GnomeRROutputInfoClass;
+typedef struct _GnomeRROutputInfoPrivate GnomeRROutputInfoPrivate;
 
-typedef struct
+struct _GnomeRROutputInfo
 {
     GObject parent;
 
     /*< private >*/
     GnomeRROutputInfoPrivate *priv;
-} GnomeRROutputInfo;
+};
 
-typedef struct
+struct _GnomeRROutputInfoClass
 {
     GObjectClass parent_class;
-} GnomeRROutputInfoClass;
+};
 
 #define GNOME_TYPE_RR_OUTPUT_INFO                  (gnome_rr_output_info_get_type())
 #define GNOME_RR_OUTPUT_INFO(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_RR_OUTPUT_INFO, GnomeRROutputInfo))

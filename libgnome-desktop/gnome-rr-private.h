@@ -44,7 +44,7 @@ struct GnomeRRScreenPrivate
     gboolean                    dpms_capable;
 };
 
-struct GnomeRROutputInfoPrivate
+struct _GnomeRROutputInfoPrivate
 {
     char *		name;
 
