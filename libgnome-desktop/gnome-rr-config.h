@@ -35,7 +35,6 @@
 #include <libgnome-desktop/gnome-rr.h>
 
 typedef struct GnomeRROutputInfoPrivate GnomeRROutputInfoPrivate;
-typedef struct GnomeRRConfigPrivate GnomeRRConfigPrivate;
 
 typedef struct
 {
@@ -86,18 +85,22 @@ void     gnome_rr_output_info_set_primary (GnomeRROutputInfo *self, gboolean pri
 int gnome_rr_output_info_get_preferred_width  (GnomeRROutputInfo *self);
 int gnome_rr_output_info_get_preferred_height (GnomeRROutputInfo *self);
 
-typedef struct
+typedef struct _GnomeRRConfig GnomeRRConfig;
+typedef struct _GnomeRRConfigClass GnomeRRConfigClass;
+typedef struct _GnomeRRConfigPrivate GnomeRRConfigPrivate;
+
+struct _GnomeRRConfig
 {
     GObject parent;
 
     /*< private >*/
     GnomeRRConfigPrivate *priv;
-} GnomeRRConfig;
+};
 
-typedef struct
+struct _GnomeRRConfigClass
 {
     GObjectClass parent_class;
-} GnomeRRConfigClass;
+};
 
 #define GNOME_TYPE_RR_CONFIG                  (gnome_rr_config_get_type())
 #define GNOME_RR_CONFIG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_RR_CONFIG, GnomeRRConfig))
