@@ -417,20 +417,6 @@ gnome_idle_monitor_new_for_device (GdkDevice *device)
 						 "device", device, NULL));
 }
 
-
-/*
- * Temporary compat function to keep things building until g-s-d is updated
- */
-guint
-gnome_idle_monitor_add_watch (GnomeIdleMonitor	       *monitor,
-			      guint64	                interval_msec,
-			      GnomeIdleMonitorWatchFunc callback,
-			      gpointer			user_data,
-			      GDestroyNotify		notify)
-{
-    return gnome_idle_monitor_add_idle_watch (monitor, interval_msec, callback, user_data, notify);
-}
-
 /**
  * gnome_idle_monitor_add_idle_watch:
  * @monitor: A #GnomeIdleMonitor
