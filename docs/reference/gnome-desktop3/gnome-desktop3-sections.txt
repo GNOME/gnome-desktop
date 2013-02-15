@@ -173,8 +173,29 @@ gnome_parse_language_name
 
 <SECTION>
 <FILE>gnome-rr-config</FILE>
-GnomeOutputInfo
+GnomeRROutputInfo
+GnomeRROutputInfoClass
+gnome_rr_output_info_get_aspect_ratio
+gnome_rr_output_info_get_display_name
+gnome_rr_output_info_get_geometry
+gnome_rr_output_info_get_name
+gnome_rr_output_info_get_preferred_height
+gnome_rr_output_info_get_preferred_width
+gnome_rr_output_info_get_primary
+gnome_rr_output_info_get_product
+gnome_rr_output_info_get_refresh_rate
+gnome_rr_output_info_get_rotation
+gnome_rr_output_info_get_serial
+gnome_rr_output_info_get_vendor
+gnome_rr_output_info_is_active
+gnome_rr_output_info_is_connected
+gnome_rr_output_info_set_active
+gnome_rr_output_info_set_geometry
+gnome_rr_output_info_set_primary
+gnome_rr_output_info_set_refresh_rate
+gnome_rr_output_info_set_rotation
 GnomeRRConfig
+GnomeRRConfigClass
 gnome_rr_config_new_current
 gnome_rr_config_new_stored
 gnome_rr_config_match
@@ -186,7 +207,6 @@ gnome_rr_config_apply_from_filename_with_time
 gnome_rr_config_applicable
 gnome_rr_config_get_backup_filename
 gnome_rr_config_get_intended_filename
-gnome_rr_create_clone_modes
 gnome_rr_config_ensure_primary
 gnome_rr_config_get_clone
 gnome_rr_config_get_outputs
@@ -200,26 +220,33 @@ GNOME_TYPE_RR_CONFIG
 GNOME_RR_CONFIG_CLASS
 GNOME_IS_RR_CONFIG_CLASS
 GNOME_RR_CONFIG_GET_CLASS
+GNOME_RR_OUTPUT_INFO
+GNOME_IS_RR_OUTPUT_INFO
+GNOME_TYPE_RR_OUTPUT_INFO
+GNOME_RR_OUTPUT_INFO_CLASS
+GNOME_IS_RR_OUTPUT_INFO_CLASS
+GNOME_RR_OUTPUT_INFO_GET_CLASS
 <SUBSECTION Private>
 GnomeRRConfigPrivate
 gnome_rr_config_get_type
+GnomeRROutputInfoPrivate
+gnome_rr_output_info_get_type
 </SECTION>
 
 
 <SECTION>
 <FILE>gnome-rr</FILE>
 GnomeRRScreen
+GnomeRRScreenClass
 GnomeRROutput
 GnomeRRCrtc
 GnomeRRMode
-GnomeRRScreenChanged
 GnomeRRRotation
 GNOME_RR_ERROR
 gnome_rr_error_quark
 GnomeRRError
 GNOME_RR_CONNECTOR_TYPE_PANEL
 gnome_rr_screen_new
-gnome_rr_screen_destroy
 gnome_rr_screen_list_outputs
 gnome_rr_screen_list_crtcs
 gnome_rr_screen_list_modes
@@ -232,6 +259,9 @@ gnome_rr_screen_get_output_by_name
 gnome_rr_screen_get_ranges
 gnome_rr_screen_get_timestamps
 gnome_rr_screen_set_primary_output
+gnome_rr_screen_create_clone_modes
+gnome_rr_screen_get_dpms_mode
+gnome_rr_screen_set_dpms_mode
 gnome_rr_output_get_id
 gnome_rr_output_get_name
 gnome_rr_output_is_connected
@@ -250,12 +280,17 @@ gnome_rr_output_list_modes
 gnome_rr_output_get_preferred_mode
 gnome_rr_output_supports_mode
 gnome_rr_output_get_is_primary
+gnome_rr_output_get_backlight
+gnome_rr_output_set_backlight
+gnome_rr_output_get_backlight_max
+gnome_rr_output_get_backlight_min
+gnome_rr_output_get_display_name
+gnome_rr_output_get_ids_from_edid
 gnome_rr_mode_get_id
 gnome_rr_mode_get_width
 gnome_rr_mode_get_height
 gnome_rr_mode_get_freq
 gnome_rr_crtc_get_id
-gnome_rr_crtc_set_config
 gnome_rr_crtc_set_config_with_time
 gnome_rr_crtc_can_drive_output
 gnome_rr_crtc_get_current_mode
@@ -265,6 +300,22 @@ gnome_rr_crtc_get_rotations
 gnome_rr_crtc_supports_rotation
 gnome_rr_crtc_get_gamma
 gnome_rr_crtc_set_gamma
+<SUBSECTION Standard>
+GNOME_RR_SCREEN
+GNOME_IS_RR_SCREEN
+GNOME_TYPE_RR_SCREEN
+GNOME_RR_SCREEN_CLASS
+GNOME_IS_RR_SCREEN_CLASS
+GNOME_RR_SCREEN_GET_CLASS
+GNOME_TYPE_RR_CRTC
+GNOME_TYPE_RR_MODE
+GNOME_TYPE_RR_OUTPUT
+<SUBSECTION Private>
+GnomeRRScreenPrivate
+gnome_rr_crtc_get_type
+gnome_rr_mode_get_type
+gnome_rr_screen_get_type
+gnome_rr_output_get_type
 </SECTION>
 
 <SECTION>
