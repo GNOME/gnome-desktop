@@ -60,6 +60,11 @@ GType             gnome_bg_slide_show_get_type (void);
 GnomeBGSlideShow *gnome_bg_slide_show_new (const char *filename);
 gboolean          gnome_bg_slide_show_load (GnomeBGSlideShow  *self,
                                             GError           **error);
+
+void              gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
+                                                  GCancellable        *cancellable,
+                                                  GAsyncReadyCallback  callback,
+                                                  gpointer             user_data);
 gboolean          gnome_bg_slide_show_get_slide (GnomeBGSlideShow *self,
                                                  int               frame_number,
                                                  int               width,

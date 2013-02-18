@@ -496,11 +496,11 @@ now (void)
  * @self: a #GnomeBGSlideShow
  * @width: monitor width
  * @height: monitor height
- * @progress: slide progress
- * @duration: slide duration
- * @is_fixed: if slide is fixed
- * @file1: (transfer none): first file in slide
- * @file2: (transfer none): second file in slide
+ * @progress: (out) (allow-none): slide progress
+ * @duration: (out) (allow-none): slide duration
+ * @is_fixed: (out) (allow-none): if slide is fixed
+ * @file1: (out) (allow-none) (transfer none): first file in slide
+ * @file2: (out) (allow-none) (transfer none): second file in slide
  *
  * Returns the current slides progress
  *
@@ -563,10 +563,10 @@ gnome_bg_slide_show_get_current_slide (GnomeBGSlideShow  *self,
  * @frame_number: frame number
  * @width: monitor width
  * @height: monitor height
- * @duration: slide duration
- * @is_fixed: if slide is fixed
- * @file1: (transfer none): first file in slide
- * @file2: (transfer none): second file in slide
+ * @duration: (out) (allow-none): slide duration
+ * @is_fixed: (out) (allow-none): if slide is fixed
+ * @file1: (out) (allow-none) (transfer none): first file in slide
+ * @file2: (out) (allow-none) (transfer none): second file in slide
  *
  * Retrieves slide by frame number
  *
@@ -639,18 +639,11 @@ gnome_bg_slide_show_get_slide (GnomeBGSlideShow  *self,
         return TRUE;
 }
 
-/**
- * gnome_bg_slide_show_load:
- * @self: a #GnomeBGSlideShow
- * @error: a #GError
- *
- * Tries to load the slide show.
- *
- * Return value: %TRUE if successful
- **/
-gboolean
-gnome_bg_slide_show_load (GnomeBGSlideShow  *self,
-                          GError           **error)
+static gboolean
+parse_file_contents (GnomeBGSlideShow  *self,
+                     const char        *contents,
+                     gsize              len,
+                     GError           **error)
 {
         GMarkupParser parser = {
                 handle_start_element,
@@ -660,18 +653,9 @@ gnome_bg_slide_show_load (GnomeBGSlideShow  *self,
                 NULL, /* error */
         };
 
-        GFile *file;
-        char *contents = NULL;
-        gsize len;
         GMarkupParseContext *context = NULL;
         time_t t;
         gboolean failed = FALSE;
-
-        file = g_file_new_for_path (self->priv->filename);
-        if (!g_file_load_contents (file, NULL, &contents, &len, NULL, NULL)) {
-                return FALSE;
-        }
-        g_object_unref (file);
 
         threadsafe_localtime ((time_t)0, &self->priv->start_tm);
 
@@ -706,9 +690,88 @@ gnome_bg_slide_show_load (GnomeBGSlideShow  *self,
                 }
         }
 
+        return !failed;
+}
+
+/**
+ * gnome_bg_slide_show_load:
+ * @self: a #GnomeBGSlideShow
+ * @error: a #GError
+ *
+ * Tries to load the slide show.
+ *
+ * Return value: %TRUE if successful
+ **/
+gboolean
+gnome_bg_slide_show_load (GnomeBGSlideShow  *self,
+                          GError           **error)
+{
+        GFile *file;
+        char  *contents;
+        gsize  length;
+        gboolean parsed;
+
+        file = g_file_new_for_path (self->priv->filename);
+        if (!g_file_load_contents (file, NULL, &contents, &length, NULL, NULL)) {
+                return FALSE;
+        }
+        g_object_unref (file);
+
+        parsed = parse_file_contents (self, contents, length, error);
         g_free (contents);
 
-        return !failed;
+        return parsed;
+}
+
+static void
+on_file_loaded (GFile        *file,
+                GAsyncResult *result,
+                GTask        *task)
+{
+    gboolean  loaded;
+    char     *contents;
+    gsize    length;
+    GError   *error = NULL;
+
+    loaded = g_file_load_contents_finish (file, result, &contents, &length, NULL, &error);
+
+    if (!loaded) {
+            g_task_return_error (task, error);
+            return;
+    }
+
+    if (!parse_file_contents (g_task_get_source_object (task), contents, length, &error)) {
+            g_task_return_error (task, error);
+            g_free (contents);
+            return;
+    }
+    g_free (contents);
+
+    g_task_return_boolean (task, TRUE);
+}
+
+/**
+ * gnome_bg_slide_show_load_async:
+ * @self: a #GnomeBGSlideShow
+ * @cancellable: a #GCancellable
+ * @callback: the callback
+ * @user_data: user data
+ *
+ * Tries to load the slide show asynchronously.
+ **/
+void
+gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
+                                GCancellable        *cancellable,
+                                GAsyncReadyCallback  callback,
+                                gpointer             user_data)
+{
+    GTask *task;
+    GFile *file;
+
+    task = g_task_new (self, cancellable, callback, user_data);
+
+    file = g_file_new_for_path (self->priv->filename);
+    g_file_load_contents_async (file, cancellable, (GAsyncReadyCallback) on_file_loaded, task);
 }
 
 /**
