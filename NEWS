@@ -1,3 +1,40 @@
+==============
+Version 3.7.90
+==============
+
+- Fix introspection generation for Vala
+- Fix introspectability of GnomeBg
+
+* GnomeIdleMonitor:
+- Break ABI and API to fix reliance of the API on an Xorg bug
+- use standard GObject boilerplate
+- generate gtk-doc documentation
+
+* GnomeWallClock:
+- generate gtk-doc documentation
+- add timezone property which can be monitored
+- Add conventional gnome_wall_clock_new()
+
+* GnomeXkbInfo:
+- generate gtk-doc documentation
+- Use the correct methods to get language/country
+- Handle duplicated layouts
+- Add API to get layouts for language and country
+
+* gnome-languages:
+- generate gtk-doc documentation
+- Add methods to get language/country from ISO codes
+- Add default input sources per locale
+
+* GnomeRR:
+- Make GnomeRRConfig use the detected display name
+- use standard GObject boilerplate
+- Improve gtk-doc documentation
+
+* GnomeBg:
+- Split slide show API to be usable from gnome-shell
+- Add asynchronous version of slideshow loading
+
 =============
 Version 3.7.5
 =============
