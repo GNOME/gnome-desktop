@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-25 18:35+0000\n"
-"PO-Revision-Date: 2013-02-10 23:40+0000\n"
+"POT-Creation-Date: 2013-02-15 15:29+0000\n"
+"PO-Revision-Date: 2013-02-22 01:53+0000\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -25,17 +25,12 @@ msgstr ""
 #. Translators: "Unknown" here is used to identify a monitor for which
 #. * we don't know the vendor. When a vendor is known, the name of the
 #. * vendor is used.
-#: ../libgnome-desktop/display-name.c:91
+#: ../libgnome-desktop/display-name.c:107
 msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
-#: ../libgnome-desktop/gnome-desktop-utils.c:135
-msgid "Cannot find a terminal, using xterm, even if it may not work"
-msgstr ""
-"ਟਰਮੀਨਲ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਦਾ, xtrerm ਦੀ ਵਰਤੋਂ, ਭਾਵੇਂ ਇਹ ਵੀ ਸ਼ਾਇਦ ਹੀ ਕੰਮ ਕਰੇ"
-
-#: ../libgnome-desktop/gnome-languages.c:726
+#: ../libgnome-desktop/gnome-languages.c:761
 msgid "Unspecified"
 msgstr "ਦਿੱਤਾ ਨਹੀਂ"
 
@@ -60,15 +55,31 @@ msgstr "ਸਕਰੀਨ ਅਕਾਰ ਦੀ ਸੀਮਾ ਨਹੀਂ ਲਈ ਜ
 msgid "RANDR extension is not present"
 msgstr "RANDR ਸਹਿਯੋਗੀ ਮੌਜੂਦ ਨਹੀਂ"
 
-#: ../libgnome-desktop/gnome-rr.c:1579
+#: ../libgnome-desktop/gnome-rr.c:1580
 #, c-format
 msgid "could not get information about output %d"
 msgstr "ਆਉਟਪੁੱਟ %d ਬਾਰੇ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲਈ ਜਾ ਸਕੀ"
 
+#: ../libgnome-desktop/gnome-rr.c:1764
+msgid "Laptop"
+msgstr "ਲੈਪਟਾਪ"
+
+#. Translators: %s is the size of the monitor in inches
+#: ../libgnome-desktop/gnome-rr.c:1782
+#, c-format
+msgid "%s Display"
+msgstr "%s ਡਿਸਪਲੇਅ"
+
+#: ../libgnome-desktop/gnome-rr.c:1789
+#| msgctxt "Monitor vendor"
+#| msgid "Unknown"
+msgid "Unknown Display"
+msgstr "ਅਣਜਾਣ ਡਿਸਪਲੇਅ"
+
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2172
+#: ../libgnome-desktop/gnome-rr.c:2234
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position="
@@ -78,42 +89,38 @@ msgstr ""
 "d, "
 "%d), ਵੱਧੋ-ਵੱਧ=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:2208
+#: ../libgnome-desktop/gnome-rr.c:2270
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "CRTC %d ਲਈ ਸੰਰਚਨਾ ਸੈੱਟ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"
 
-#: ../libgnome-desktop/gnome-rr.c:2353
+#: ../libgnome-desktop/gnome-rr.c:2421
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "CRTC %d ਬਾਰੇ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲਈ ਜਾ ਸਕੀ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:558
-msgid "Laptop"
-msgstr "ਲੈਪਟਾਪ"
-
-#: ../libgnome-desktop/gnome-rr-config.c:713
+#: ../libgnome-desktop/gnome-rr-config.c:708
 #, c-format
 msgid ""
 "none of the saved display configurations matched the active configuration"
 msgstr "ਕੋਈ ਵੀ ਸੰਭਾਲੀ ਵੇਖਣ ਸੰਰਚਨਾ ਚਾਲੂ ਸੰਰਚਨਾ ਨਾਲ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1469
+#: ../libgnome-desktop/gnome-rr-config.c:1464
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d ਆਉਟਪੁੱਟ %s ਡਰਾਇਵ ਨਹੀਂ ਕਰ ਸਕਦਾ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1476
+#: ../libgnome-desktop/gnome-rr-config.c:1471
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "ਆਉਟਪੁੱਟ %s %dx%d@%dHz ਮੋਡ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1487
+#: ../libgnome-desktop/gnome-rr-config.c:1482
 #, c-format
 msgid "CRTC %d does not support rotation=%s"
 msgstr "CRTC %d ਘੁੰਮਾਉਣ=%s ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1501
+#: ../libgnome-desktop/gnome-rr-config.c:1496
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -126,23 +133,23 @@ msgstr ""
 "ਮੌਜੂਦਾ ਕੋਆਰਡੀਨੇਟ = (%d, %d), ਨਵੇਂ ਕੋਆਰਡੀਨੇਟ = (%d, %d)\n"
 "ਮੌਜੂਦਾ ਘੁੰਮਾਉਣ ਦਿਸ਼ਾ= %s, ਨਵੀਂ ਘੁੰਮਾਉਣ ਦਿਸ਼ਾ = %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1516
+#: ../libgnome-desktop/gnome-rr-config.c:1511
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "%s ਆਉਟਪੁੱਟ ਕਲੋਨ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1685
+#: ../libgnome-desktop/gnome-rr-config.c:1680
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "CRTC %d ਲਈ ਮੋਡ ਨਾਲ ਕੋਸ਼ਿਸ਼ ਜਾਰੀ\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1709
+#: ../libgnome-desktop/gnome-rr-config.c:1704
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC %d: %dx%d@%dHz ਮੋਡ ਨਾਲ %dx%d@%dHz ਉੱਤੇ ਆਉਟਪੁੱਟ ਨਾਲ ਕੋਸ਼ਿਸ਼(ਪਾਸ %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1756
+#: ../libgnome-desktop/gnome-rr-config.c:1751
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -151,7 +158,7 @@ msgstr ""
 "CRTCs ਆਉਟਪੁੱਟ ਨੂੰ ਦਿੱਤਾ ਨਹੀਂ ਜਾ ਸਕਿਆ:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1760
+#: ../libgnome-desktop/gnome-rr-config.c:1755
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -163,7 +170,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1838
+#: ../libgnome-desktop/gnome-rr-config.c:1833
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -176,35 +183,33 @@ msgstr ""
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:247
-#| msgid "%a %b %e, %R:%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:268
 msgid "%a %b %e, %R∶%S"
 msgstr "%a, %e %b %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:248
+#: ../libgnome-desktop/gnome-wall-clock.c:269
 msgid "%a %b %e, %R"
 msgstr "%a %e %b, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:253
-#| msgid "%a %R:%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:274
 msgid "%a %R∶%S"
 msgstr "%a %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:254
+#: ../libgnome-desktop/gnome-wall-clock.c:275
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:259
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R∶%S"
 msgstr "%R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:259
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
@@ -212,13 +217,11 @@ msgstr "%R"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:267
-#| msgid "%a %b %e, %l:%M:%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:288
 msgid "%a %b %e, %l∶%M∶%S %p"
 msgstr "%a %e %b, %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:268
-#| msgid "%a %b %e, %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:289
 msgid "%a %b %e, %l∶%M %p"
 msgstr "%a %e %b, %l:%M %p"
 
@@ -226,13 +229,11 @@ msgstr "%a %e %b, %l:%M %p"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:274
-#| msgid "%a %l:%M:%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:295
 msgid "%a %l∶%M∶%S %p"
 msgstr "%a %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:275
-#| msgid "%a %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:296
 msgid "%a %l∶%M %p"
 msgstr "%a %l:%M %p"
 
@@ -240,13 +241,16 @@ msgstr "%a %l:%M %p"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:281
+#: ../libgnome-desktop/gnome-wall-clock.c:302
 msgid "%l∶%M∶%S %p"
 msgstr "%l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:282
+#: ../libgnome-desktop/gnome-wall-clock.c:303
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
+
+#~ msgid "Cannot find a terminal, using xterm, even if it may not work"
+#~ msgstr "ਟਰਮੀਨਲ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਦਾ, xtrerm ਦੀ ਵਰਤੋਂ, ਭਾਵੇਂ ਇਹ ਵੀ ਸ਼ਾਇਦ ਹੀ ਕੰਮ ਕਰੇ"
 
 #~ msgid "Mirrored Displays"
 #~ msgstr "ਮਿਰਰ ਕੀਤੇ ਡਿਸਪਲੇਅ"
