@@ -6,9 +6,7 @@ gnome_bg_save_to_preferences
 gnome_bg_set_filename
 gnome_bg_set_placement
 gnome_bg_set_color
-gnome_bg_set_draw_background
 gnome_bg_get_placement
-gnome_bg_get_draw_background
 gnome_bg_get_color
 gnome_bg_get_filename
 gnome_bg_draw
@@ -85,6 +83,32 @@ GNOME_BG_CROSSFADE_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>gnome-bg-slide-show</FILE>
+<TITLE>GnomeBGSlideShow</TITLE>
+GnomeBGSlideShow
+GnomeBGSlideShowClass
+gnome_bg_slide_show_new
+gnome_bg_slide_show_load
+gnome_bg_slide_show_load_async
+gnome_bg_slide_show_get_current_slide
+gnome_bg_slide_show_get_has_multiple_sizes
+gnome_bg_slide_show_get_num_slides
+gnome_bg_slide_show_get_slide
+gnome_bg_slide_show_get_start_time
+gnome_bg_slide_show_get_total_duration
+<SUBSECTION Standard>
+GNOME_BG_SLIDE_SHOW
+GNOME_BG_IS_SLIDE_SHOW
+GNOME_BG_TYPE_SLIDE_SHOW
+GNOME_BG_SLIDE_SHOW_CLASS
+GNOME_BG_IS_SLIDE_SHOW_CLASS
+GNOME_BG_SLIDE_SHOW_GET_CLASS
+<SUBSECTION Private>
+GnomeBGSlideShowPrivate
+gnome_bg_slide_show_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gnome-idle-monitor</FILE>
 <TITLE>GnomeIdleMonitor</TITLE>
 GnomeIdleMonitor
@@ -135,8 +159,9 @@ GnomeXkbInfo
 GnomeXkbInfoClass
 gnome_xkb_info_new
 gnome_xkb_info_get_all_layouts
+gnome_xkb_info_get_layouts_for_country
+gnome_xkb_info_get_layouts_for_language
 gnome_xkb_info_get_layout_info
-gnome_xkb_info_get_layout_info_for_locale
 gnome_xkb_info_get_all_option_groups
 gnome_xkb_info_description_for_group
 gnome_xkb_info_get_options_for_group
@@ -158,12 +183,15 @@ gnome_xkb_info_get_type
 <SECTION>
 <FILE>gnome-languages</FILE>
 <TITLE>Language Utilities</TITLE>
-gnome_get_all_language_names
-gnome_get_language_from_name
-gnome_get_region_from_name
+gnome_get_all_locales
+gnome_get_country_from_code
+gnome_get_country_from_locale
+gnome_get_input_source_from_locale
+gnome_get_language_from_code
+gnome_get_language_from_locale
+gnome_normalize_locale
+gnome_parse_locale
 gnome_language_has_translations
-gnome_normalize_language_name
-gnome_parse_language_name
 </SECTION>
 
 <SECTION>
