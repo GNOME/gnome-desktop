@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-03 15:53+0000\n"
-"PO-Revision-Date: 2013-02-03 23:14+0100\n"
+"POT-Creation-Date: 2013-02-25 16:21+0000\n"
+"PO-Revision-Date: 2013-02-25 19:35+0100\n"
 "Last-Translator: Ján Kyselica <kyselica.jan@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -23,19 +23,13 @@ msgstr ""
 #. Translators: "Unknown" here is used to identify a monitor for which
 #. * we don't know the vendor. When a vendor is known, the name of the
 #. * vendor is used.
-#: ../libgnome-desktop/display-name.c:91
+#: ../libgnome-desktop/display-name.c:107
 msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: ../libgnome-desktop/gnome-desktop-utils.c:135
-msgid "Cannot find a terminal, using xterm, even if it may not work"
-msgstr ""
-"Nepodarilo sa nájsť terminál. Použije sa xterm, aj napriek tomu, že nemusí "
-"fungovať"
-
 # JK: týka sa jazyka (language)
-#: ../libgnome-desktop/gnome-languages.c:761
+#: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Nešpecifikovaný"
 
@@ -62,15 +56,29 @@ msgstr "nepodarilo sa získať rozsah veľkostí obrazovky"
 msgid "RANDR extension is not present"
 msgstr "rozšírenie RANDR nie je prítomné"
 
-#: ../libgnome-desktop/gnome-rr.c:1579
+#: ../libgnome-desktop/gnome-rr.c:1580
 #, c-format
 msgid "could not get information about output %d"
 msgstr "nepodarilo sa získať informácie o výstupe %d"
 
+#: ../libgnome-desktop/gnome-rr.c:1764
+msgid "Laptop"
+msgstr "Prenosný počítač"
+
+#. Translators: %s is the size of the monitor in inches
+#: ../libgnome-desktop/gnome-rr.c:1782
+#, c-format
+msgid "%s Display"
+msgstr "%s displej"
+
+#: ../libgnome-desktop/gnome-rr.c:1789
+msgid "Unknown Display"
+msgstr "Neznámy displej"
+
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2172
+#: ../libgnome-desktop/gnome-rr.c:2234
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position="
@@ -79,43 +87,39 @@ msgstr ""
 "vyžiadaná poloha/veľkosť pre CRTC %d je mimo povolenú hranicu: poloha=(%d, "
 "%d), veľkosť=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:2208
+#: ../libgnome-desktop/gnome-rr.c:2270
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "nepodarilo sa nastaviť konfiguráciu pre CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr.c:2353
+#: ../libgnome-desktop/gnome-rr.c:2421
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "nepodarilo sa získať informáciu o CRTC %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:558
-msgid "Laptop"
-msgstr "Prenosný počítač"
-
-#: ../libgnome-desktop/gnome-rr-config.c:713
+#: ../libgnome-desktop/gnome-rr-config.c:708
 #, c-format
 msgid ""
 "none of the saved display configurations matched the active configuration"
 msgstr ""
 "žiadna z uložených konfigurácií displeja nezodpovedá aktívnej konfigurácii"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1469
+#: ../libgnome-desktop/gnome-rr-config.c:1464
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d nemôže obsluhovať výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1476
+#: ../libgnome-desktop/gnome-rr-config.c:1471
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "výstup %s nepodporuje režim %dx%d@%dHz"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1487
+#: ../libgnome-desktop/gnome-rr-config.c:1482
 #, c-format
 msgid "CRTC %d does not support rotation=%s"
 msgstr "CRTC %d nepodporuje otočenie=%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1501
+#: ../libgnome-desktop/gnome-rr-config.c:1496
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -128,17 +132,17 @@ msgstr ""
 "existujúce súradnice = (%d, %d), nové súradnice = (%d, %d)\n"
 "existujúca otočenie = %s, nové otočenie = %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1516
+#: ../libgnome-desktop/gnome-rr-config.c:1511
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "nepodarilo sa klonovať na výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1685
+#: ../libgnome-desktop/gnome-rr-config.c:1680
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Skúšanie režimov pre CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1709
+#: ../libgnome-desktop/gnome-rr-config.c:1704
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
@@ -146,7 +150,7 @@ msgstr ""
 
 # PM: podľa významu skratky CRTC by som skôr volil predložku "k";  Rozmýšlam tiež či by sme tomu veľmi ublížili keby sme použili "ovládač(e) CRTC" alebo "ovládač(e) CRT"
 # JK: CRTC je HW časť, ovládač (driver) je SW - z tohto dôvodu by som to nepoužil
-#: ../libgnome-desktop/gnome-rr-config.c:1756
+#: ../libgnome-desktop/gnome-rr-config.c:1751
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -155,7 +159,7 @@ msgstr ""
 "nepodarilo sa priradiť CRTC k výstupom:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1760
+#: ../libgnome-desktop/gnome-rr-config.c:1755
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -167,7 +171,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1838
+#: ../libgnome-desktop/gnome-rr-config.c:1833
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -179,33 +183,33 @@ msgstr ""
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:247
+#: ../libgnome-desktop/gnome-wall-clock.c:268
 msgid "%a %b %e, %R∶%S"
 msgstr "%A %e. %B, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:248
+#: ../libgnome-desktop/gnome-wall-clock.c:269
 msgid "%a %b %e, %R"
 msgstr "%A %e. %B, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:253
+#: ../libgnome-desktop/gnome-wall-clock.c:274
 msgid "%a %R∶%S"
 msgstr "%A, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:254
+#: ../libgnome-desktop/gnome-wall-clock.c:275
 msgid "%a %R"
 msgstr "%A, %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
 #. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:259
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R∶%S"
 msgstr "%R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:259
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
@@ -226,11 +230,11 @@ msgstr "%R"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:267
+#: ../libgnome-desktop/gnome-wall-clock.c:288
 msgid "%a %b %e, %l∶%M∶%S %p"
 msgstr "%A, %e. %B, %k:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:268
+#: ../libgnome-desktop/gnome-wall-clock.c:289
 msgid "%a %b %e, %l∶%M %p"
 msgstr "%A, %e. %B, %k:%M"
 
@@ -238,11 +242,11 @@ msgstr "%A, %e. %B, %k:%M"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:274
+#: ../libgnome-desktop/gnome-wall-clock.c:295
 msgid "%a %l∶%M∶%S %p"
 msgstr "%A, %k:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:275
+#: ../libgnome-desktop/gnome-wall-clock.c:296
 msgid "%a %l∶%M %p"
 msgstr "%A, %k:%M"
 
@@ -250,13 +254,18 @@ msgstr "%A, %k:%M"
 #. for AM/PM.
 #. The Unicode characters are U+2236 RATIO and
 #. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:281
+#: ../libgnome-desktop/gnome-wall-clock.c:302
 msgid "%l∶%M∶%S %p"
 msgstr "%k∶%M∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:282
+#: ../libgnome-desktop/gnome-wall-clock.c:303
 msgid "%l∶%M %p"
 msgstr "%k∶%M"
+
+#~ msgid "Cannot find a terminal, using xterm, even if it may not work"
+#~ msgstr ""
+#~ "Nepodarilo sa nájsť terminál. Použije sa xterm, aj napriek tomu, že "
+#~ "nemusí fungovať"
 
 #~ msgid "About GNOME"
 #~ msgstr "O GNOME"
