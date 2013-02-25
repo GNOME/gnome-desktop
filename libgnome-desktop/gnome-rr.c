@@ -1761,7 +1761,7 @@ ensure_display_name (GnomeRROutput *output)
         return;
 
     if (gnome_rr_output_is_laptop (output))
-        output->display_name = g_strdup (_("Laptop"));
+        output->display_name = g_strdup (_("Built-in Display"));
 
     if (output->display_name == NULL
         && output->edid_data != NULL) {
