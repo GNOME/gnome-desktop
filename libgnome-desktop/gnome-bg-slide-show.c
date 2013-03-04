@@ -772,6 +772,7 @@ gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
 
     file = g_file_new_for_path (self->priv->filename);
     g_file_load_contents_async (file, cancellable, (GAsyncReadyCallback) on_file_loaded, task);
+    g_object_unref (file);
 }
 
 /**
