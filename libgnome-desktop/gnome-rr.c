@@ -1760,7 +1760,7 @@ ensure_display_name (GnomeRROutput *output)
     if (output->display_name != NULL)
         return;
 
-    if (gnome_rr_output_is_laptop (output))
+    if (gnome_rr_output_is_builtin_display (output))
         output->display_name = g_strdup (_("Built-in Display"));
 
     if (output->display_name == NULL
