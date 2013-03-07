@@ -367,13 +367,21 @@ add_layout_to_table (GHashTable  *table,
 {
   GHashTable *set;
 
+  if (!layout->xkb_name)
+    return;
+
   set = g_hash_table_lookup (table, key);
   if (!set)
     {
-      set = g_hash_table_new (NULL, NULL);
+      set = g_hash_table_new (g_str_hash, g_str_equal);
       g_hash_table_replace (table, g_strdup (key), set);
     }
-  g_hash_table_add (set, layout);
+  else
+    {
+      if (g_hash_table_contains (set, layout->xkb_name))
+        return;
+    }
+  g_hash_table_replace (set, layout->xkb_name, layout);
 }
 
 static void
@@ -397,8 +405,6 @@ parse_end_element (GMarkupParseContext  *context,
 
       if (g_hash_table_contains (priv->layouts_table, priv->current_parser_layout->id))
         {
-          g_hash_table_remove (priv->layouts_by_country, priv->current_parser_layout);
-          g_hash_table_remove (priv->layouts_by_language, priv->current_parser_layout);
           g_clear_pointer (&priv->current_parser_layout, free_layout);
           return;
         }
