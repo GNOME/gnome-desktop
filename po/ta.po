@@ -12,15 +12,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop.master.ta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-02 16:21+0530\n"
-"PO-Revision-Date: 2013-03-22 15:27+0530\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gnome-desktop&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-03-22 09:59+0000\n"
+"PO-Revision-Date: 2013-03-22 15:35+0530\n"
 "Last-Translator: Shantha kumar <shkumar@redhat.com>\n"
 "Language-Team: American English <>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_US\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\\n"
 "\n"
@@ -31,14 +32,14 @@ msgstr ""
 #. Translators: "Unknown" here is used to identify a monitor for which
 #. * we don't know the vendor. When a vendor is known, the name of the
 #. * vendor is used.
-#: ../libgnome-desktop/display-name.c:91
+#: ../libgnome-desktop/display-name.c:107
 msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "தெரியாத"
 
-#: ../libgnome-desktop/gnome-desktop-utils.c:135
-msgid "Cannot find a terminal, using xterm, even if it may not work"
-msgstr "வேலை செய்யவில்லை என்றாலும் xtermஐ பயன்படுத்தி ஒரு முனையத்தை தேட முடியவில்லை"
+#: ../libgnome-desktop/gnome-languages.c:804
+msgid "Unspecified"
+msgstr "குறிப்பிடப்படாத"
 
 #. Translators: a CRTC is a CRT Controller (this is X terminology).
 #: ../libgnome-desktop/gnome-rr.c:452
@@ -61,58 +62,72 @@ msgstr "திரை அளவுகளின் வரம்பை பெற �
 msgid "RANDR extension is not present"
 msgstr "RANDR விரிவாக்கம் இல்லை"
 
-#: ../libgnome-desktop/gnome-rr.c:1577
+#: ../libgnome-desktop/gnome-rr.c:1580
 #, c-format
 msgid "could not get information about output %d"
 msgstr "வெளிப்பாடு %d பற்றிய தகவலை பெற முடியவில்லை"
 
+#: ../libgnome-desktop/gnome-rr.c:1764
+msgid "Built-in Display"
+msgstr "உள்ளமைந்த காட்சி"
+
+#. Translators: %s is the size of the monitor in inches
+#: ../libgnome-desktop/gnome-rr.c:1782
+#, c-format
+#| msgctxt "Monitor vendor"
+#| msgid "Unknown"
+msgid "%s Display"
+msgstr "%s காட்சி"
+
+#: ../libgnome-desktop/gnome-rr.c:1789
+#| msgctxt "Monitor vendor"
+#| msgid "Unknown"
+msgid "Unknown Display"
+msgstr "தெரியாத காட்சி"
+
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2170
+#: ../libgnome-desktop/gnome-rr.c:2234
 #, c-format
 msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: position=(%"
-"d, %d), size=(%d, %d), maximum=(%d, %d)"
+"requested position/size for CRTC %d is outside the allowed limit: position="
+"(%d, %d), size=(%d, %d), maximum=(%d, %d)"
 msgstr ""
-"கோரப்பட்ட நிலை/அளவு CRTC %dக்கு வெளியேயுள்ள அனுமதிக்கபட்ட வரம்பாகும்: position=(%d, %"
-"d), size=(%d, %d), maximum=(%d, %d)"
+"கோரப்பட்ட நிலை/அளவு CRTC %dக்கு வெளியேயுள்ள அனுமதிக்கபட்ட வரம்பாகும்: position=(%d, "
+"%d), size=(%d, %d), maximum=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:2206
+#: ../libgnome-desktop/gnome-rr.c:2270
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "CRTC %dக்கு கட்டமைப்பை அமைக்க முடியவில்லை"
 
-#: ../libgnome-desktop/gnome-rr.c:2351
+#: ../libgnome-desktop/gnome-rr.c:2421
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "CRTC %d பற்றிய தகவலைப் பெற முடியவில்லை"
 
-#: ../libgnome-desktop/gnome-rr-config.c:558
-msgid "Laptop"
-msgstr "மடிக்கணினி"
-
-#: ../libgnome-desktop/gnome-rr-config.c:713
+#: ../libgnome-desktop/gnome-rr-config.c:708
 #, c-format
 msgid "none of the saved display configurations matched the active configuration"
 msgstr "செயலிலுள்ள கட்டமைப்புடன் சேமிக்கப்பட்ட காட்சி கட்டமைப்புகள் ஒன்றும் பொருந்தவில்லை"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1469
+#: ../libgnome-desktop/gnome-rr-config.c:1464
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d, வெளியீடு  %s ஐ இயக்க முடியவில்லை"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1476
+#: ../libgnome-desktop/gnome-rr-config.c:1471
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "வெளியீடு %s,  %dx%d@%dHz பாங்கை ஆதரிக்கவில்லை"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1487
+#: ../libgnome-desktop/gnome-rr-config.c:1482
 #, c-format
 msgid "CRTC %d does not support rotation=%s"
 msgstr "CRTC %d சுழற்சியை ஆதரிக்கவில்லை=%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1501
+#: ../libgnome-desktop/gnome-rr-config.c:1496
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -125,23 +140,23 @@ msgstr ""
 "தற்போதைய ஆயத்தொலைவுகள் = (%d, %d), புதிய ஆயத்தொலைவுகள் = (%d, %d)\n"
 "தற்போதைய சுழற்சி = %s, புதிய சுழற்சி = %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1516
+#: ../libgnome-desktop/gnome-rr-config.c:1511
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "வெளியீடு %s ஐ நகலாக்க முடியவில்லை"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1685
+#: ../libgnome-desktop/gnome-rr-config.c:1680
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "CRTC %d க்கு பாங்குகளை முயற்சிக்கிறது\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1709
+#: ../libgnome-desktop/gnome-rr-config.c:1704
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC %d: %dx%d@%dHz பாங்கை வெளியீட்டுடன் %dx%d@%dHz இல் முயற்சிக்கிறது (pass %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1756
+#: ../libgnome-desktop/gnome-rr-config.c:1751
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -150,7 +165,7 @@ msgstr ""
 "வெளியீடுகளுக்கு எந்த சிஆர்டிசி க்களையும் பொறுப்பாக்க முடியவில்லை:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1760
+#: ../libgnome-desktop/gnome-rr-config.c:1755
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -162,7 +177,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1838
+#: ../libgnome-desktop/gnome-rr-config.c:1833
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -173,63 +188,110 @@ msgstr ""
 
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:246
-msgid "%a %b %e, %R:%S"
-msgstr "%a %b %e, %R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:268
+#| msgid "%a %b %e, %R:%S"
+msgid "%a %b %e, %R∶%S"
+msgstr "%a %b %e, %R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:247
+#: ../libgnome-desktop/gnome-wall-clock.c:269
 msgid "%a %b %e, %R"
 msgstr "%a %b %e, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:251
-msgid "%a %R:%S"
-msgstr "%a %R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:274
+#| msgid "%a %R:%S"
+msgid "%a %R∶%S"
+msgstr "%a %R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:252
+#: ../libgnome-desktop/gnome-wall-clock.c:275
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:256
-msgid "%R:%S"
-msgstr "%R:%S"
+#. The character between %R and %S is U+2236 RATIO
+#: ../libgnome-desktop/gnome-wall-clock.c:280
+msgid "%R∶%S"
+msgstr "%R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:256
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:262
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%a %b %e, %l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:288
+#| msgid "%a %l:%M:%S %p"
+msgid "%a %b %e, %l∶%M∶%S %p"
+msgstr "%a %b %e, %l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:263
-msgid "%a %b %e, %l:%M %p"
-msgstr "%a %b %e, %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:289
+#| msgid "%a %l:%M %p"
+msgid "%a %b %e, %l∶%M %p"
+msgstr "%a %b %e, %l∶%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:267
-msgid "%a %l:%M:%S %p"
-msgstr "%a %l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:295
+#| msgid "%a %l:%M:%S %p"
+msgid "%a %l∶%M∶%S %p"
+msgstr "%a %l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:268
-msgid "%a %l:%M %p"
-msgstr "%a %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:296
+#| msgid "%a %l:%M %p"
+msgid "%a %l∶%M %p"
+msgstr "%a %l∶%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:272
-msgid "%l:%M:%S %p"
-msgstr "%l:%M:%S %p"
+#. The Unicode characters are U+2236 RATIO and
+#. U+2009 THIN SPACE
+#: ../libgnome-desktop/gnome-wall-clock.c:302
+#| msgid "%a %l:%M:%S %p"
+msgid "%l∶%M∶%S %p"
+msgstr "%l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:273
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:303
+#| msgid "%a %l:%M %p"
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#~ msgid "Cannot find a terminal, using xterm, even if it may not work"
+#~ msgstr "வேலை செய்யவில்லை என்றாலும் xtermஐ பயன்படுத்தி ஒரு முனையத்தை தேட முடியவில்லை"
+
+#~ msgid "Laptop"
+#~ msgstr "மடிக்கணினி"
+
+#~ msgid "%a %b %e, %R:%S"
+#~ msgstr "%a %b %e, %R:%S"
+
+#~ msgid "%R:%S"
+#~ msgstr "%R:%S"
+
+#~ msgid "%a %b %e, %l:%M:%S %p"
+#~ msgstr "%a %b %e, %l:%M:%S %p"
+
+#~ msgid "%a %b %e, %l:%M %p"
+#~ msgstr "%a %b %e, %l:%M %p"
+
+#~ msgid "%a %l:%M:%S %p"
+#~ msgstr "%a %l:%M:%S %p"
+
+#~ msgid "%a %l:%M %p"
+#~ msgstr "%a %l:%M %p"
+
+#~ msgid "%l:%M:%S %p"
+#~ msgstr "%l:%M:%S %p"
+
+#~ msgid "%l:%M %p"
+#~ msgstr "%l:%M %p"
 
 #~ msgid "Mirror Screens"
 #~ msgstr "பிரதிபலிப்பு திரைகள்"
@@ -384,24 +446,3 @@ msgstr "%l:%M %p"
 
 #~ msgid "could not find a suitable configuration of screens"
 #~ msgstr "திரைகளின் சரியான கட்டமைப்பை தேட முடியவில்லை"
-
-#, fuzzy
-#~| msgctxt "Monitor vendor"
-#~| msgid "Unknown"
-#~ msgid "Unknown Display"
-#~ msgstr "தெரியாத"
-
-#, fuzzy
-#~| msgid "%a %b %e, %R:%S"
-#~ msgid "%a %b %e, %R∶%S"
-#~ msgstr "%a %b %e, %R:%S"
-
-#, fuzzy
-#~| msgid "%a %l:%M:%S %p"
-#~ msgid "%a %l∶%M∶%S %p"
-#~ msgstr "%a %l:%M:%S %p"
-
-#, fuzzy
-#~| msgid "%a %l:%M %p"
-#~ msgid "%a %l∶%M %p"
-#~ msgstr "%a %l:%M %p"
