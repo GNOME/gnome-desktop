@@ -70,9 +70,15 @@ device_added_cb (GdkDeviceManager *manager,
 	GnomeIdleMonitor *monitor;
 	guint watch_id;
 	int device_id;
+	GError *error = NULL;
 
 	device_id = gdk_x11_device_get_id (device);
-	monitor = gnome_idle_monitor_new_for_device (device);
+	monitor = gnome_idle_monitor_new_for_device (device, &error);
+	if (!monitor) {
+		g_warning ("Per-device idletime monitor not available: %s", error->message);
+		g_error_free (error);
+		return;
+	}
 
 	watch_id = gnome_idle_monitor_add_idle_watch (monitor,
 						      IDLE_TIME,
