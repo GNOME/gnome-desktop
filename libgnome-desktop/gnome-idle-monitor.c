@@ -38,11 +38,14 @@
 
 #define USER_ACTIVE_WATCH_ID 1
 
+G_STATIC_ASSERT(sizeof(unsigned long) == sizeof(gpointer));
+
 struct _GnomeIdleMonitorPrivate
 {
 	Display	    *display;
 
 	GHashTable  *watches;
+	GHashTable  *alarms;
 	int	     sync_event_base;
 	XSyncCounter counter;
 
@@ -84,14 +87,6 @@ _xsyncvalue_to_int64 (XSyncValue value)
 }
 
 #define GINT64_TO_XSYNCVALUE(value, ret) XSyncIntsToValue (ret, value, ((guint64)value) >> 32)
-
-static gboolean
-_find_alarm (gpointer		    key,
-	     GnomeIdleMonitorWatch *watch,
-	     XSyncAlarm		   *alarm)
-{
-	return watch->xalarm == *alarm;
-}
 
 static XSyncAlarm
 _xsync_alarm_set (GnomeIdleMonitor	*monitor,
@@ -139,45 +134,59 @@ set_alarm_enabled (Display    *dpy,
 	XSyncChangeAlarm (dpy, alarm, XSyncCAEvents, &attr);
 }
 
-static GnomeIdleMonitorWatch *
-find_watch_for_alarm (GnomeIdleMonitor *monitor,
-		      XSyncAlarm	alarm)
+static void
+fire_watch (gpointer data,
+	    gpointer user_data)
 {
-	GnomeIdleMonitorWatch *watch;
+	GnomeIdleMonitorWatch *watch = data;
+	XSyncAlarm alarm = (XSyncAlarm) user_data;
 
-	watch = g_hash_table_find (monitor->priv->watches,
-				   (GHRFunc)_find_alarm,
-				   &alarm);
-	return watch;
+	if (watch->xalarm != alarm) {
+		return;
+	}
+
+	if (watch->callback) {
+		watch->callback (watch->monitor,
+				 watch->id,
+				 watch->user_data);
+	}
 }
 
 static void
 handle_alarm_notify_event (GnomeIdleMonitor	    *monitor,
 			   XSyncAlarmNotifyEvent    *alarm_event)
 {
-	GnomeIdleMonitorWatch *watch;
+	XSyncAlarm alarm;
+	GList *watches;
+	gboolean has_alarm;
 
 	if (alarm_event->state != XSyncAlarmActive) {
 		return;
 	}
 
-	watch = find_watch_for_alarm (monitor, alarm_event->alarm);
-	if (watch == NULL)
-		return;
+	alarm = alarm_event->alarm;
 
-	if (watch->id == USER_ACTIVE_WATCH_ID) {
+	has_alarm = FALSE;
+
+	if (alarm == monitor->priv->user_active_alarm) {
 		set_alarm_enabled (monitor->priv->display,
-				   watch->xalarm,
+				   alarm,
 				   FALSE);
-	} else {
+		has_alarm = TRUE;
+	} else if (g_hash_table_contains (monitor->priv->alarms, (gpointer) alarm)) {
 		ensure_alarm_rescheduled (monitor->priv->display,
-					  watch->xalarm);
+					  alarm);
+		has_alarm = TRUE;
 	}
 
-	if (watch->callback != NULL) {
-		watch->callback (monitor,
-				 watch->id,
-				 watch->user_data);
+	if (has_alarm) {
+		watches = g_hash_table_get_values (monitor->priv->watches);
+
+		g_list_foreach (watches,
+				fire_watch,
+				(gpointer) alarm);
+
+		g_list_free (watches);
 	}
 }
 
@@ -256,7 +265,9 @@ idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 
 	if (watch->id != USER_ACTIVE_WATCH_ID) {
 		XSyncDestroyAlarm (watch->monitor->priv->display, watch->xalarm);
+		g_hash_table_remove (watch->monitor->priv->alarms, (gpointer) watch->xalarm);
 	}
+
 	g_slice_free (GnomeIdleMonitorWatch, watch);
 }
 
@@ -300,6 +311,7 @@ gnome_idle_monitor_dispose (GObject *object)
 	monitor = GNOME_IDLE_MONITOR (object);
 
 	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
+	g_clear_pointer (&monitor->priv->alarms, g_hash_table_destroy);
 	g_clear_object (&monitor->priv->device);
 
 	gdk_window_remove_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
@@ -411,6 +423,8 @@ gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
 							NULL,
 							NULL,
 							(GDestroyNotify)idle_monitor_watch_free);
+
+	monitor->priv->alarms = g_hash_table_new (NULL, NULL);
 }
 
 /**
@@ -484,6 +498,9 @@ gnome_idle_monitor_add_idle_watch (GnomeIdleMonitor	       *monitor,
 	watch->user_data = user_data;
 	watch->notify = notify;
 	watch->xalarm = _xsync_alarm_set (monitor, XSyncPositiveTransition, interval_msec, TRUE);
+
+	g_hash_table_add (monitor->priv->alarms,
+			  (gpointer) watch->xalarm);
 
 	g_hash_table_insert (monitor->priv->watches,
 			     GUINT_TO_POINTER (watch->id),
