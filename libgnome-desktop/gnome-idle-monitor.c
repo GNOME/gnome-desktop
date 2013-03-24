@@ -36,8 +36,6 @@
 
 #define GNOME_IDLE_MONITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_IDLE_MONITOR, GnomeIdleMonitorPrivate))
 
-#define USER_ACTIVE_WATCH_ID 1
-
 G_STATIC_ASSERT(sizeof(unsigned long) == sizeof(gpointer));
 
 struct _GnomeIdleMonitorPrivate
@@ -150,6 +148,10 @@ fire_watch (gpointer data,
 				 watch->id,
 				 watch->user_data);
 	}
+
+	if (watch->xalarm == watch->monitor->priv->user_active_alarm) {
+		gnome_idle_monitor_remove_watch (watch->monitor, watch->id);
+	}
 }
 
 static void
@@ -247,7 +249,7 @@ find_idletime_counter (GnomeIdleMonitor *monitor)
 static guint32
 get_next_watch_serial (void)
 {
-	static guint32 serial = USER_ACTIVE_WATCH_ID;
+	static guint32 serial = 0;
 	g_atomic_int_inc (&serial);
 	return serial;
 }
@@ -255,17 +257,21 @@ get_next_watch_serial (void)
 static void
 idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 {
+	GnomeIdleMonitor *monitor;
+
 	if (watch == NULL) {
 		return;
 	}
+
+	monitor = watch->monitor;
 
 	if (watch->notify != NULL) {
 		watch->notify (watch->user_data);
 	}
 
-	if (watch->id != USER_ACTIVE_WATCH_ID) {
-		XSyncDestroyAlarm (watch->monitor->priv->display, watch->xalarm);
-		g_hash_table_remove (watch->monitor->priv->alarms, (gpointer) watch->xalarm);
+	if (watch->xalarm != monitor->priv->user_active_alarm) {
+		XSyncDestroyAlarm (monitor->priv->display, watch->xalarm);
+		g_hash_table_remove (monitor->priv->alarms, (gpointer) watch->xalarm);
 	}
 
 	g_slice_free (GnomeIdleMonitorWatch, watch);
@@ -534,7 +540,7 @@ gnome_idle_monitor_add_user_active_watch (GnomeIdleMonitor          *monitor,
 
 	watch = g_slice_new0 (GnomeIdleMonitorWatch);
 	watch->monitor = monitor;
-	watch->id = USER_ACTIVE_WATCH_ID;
+	watch->id = get_next_watch_serial ();
 	watch->callback = callback;
 	watch->user_data = user_data;
 	watch->notify = notify;
