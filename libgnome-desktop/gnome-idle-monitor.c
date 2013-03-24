@@ -251,7 +251,7 @@ idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 	}
 
 	if (watch->notify != NULL) {
-	    watch->notify (watch->user_data);
+		watch->notify (watch->user_data);
 	}
 
 	if (watch->id != USER_ACTIVE_WATCH_ID) {
