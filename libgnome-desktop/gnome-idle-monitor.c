@@ -467,6 +467,29 @@ gnome_idle_monitor_new_for_device (GdkDevice  *device)
 						   "device", device, NULL));
 }
 
+static GnomeIdleMonitorWatch *
+make_watch (GnomeIdleMonitor          *monitor,
+	    XSyncAlarm                 xalarm,
+	    GnomeIdleMonitorWatchFunc  callback,
+	    gpointer                   user_data,
+	    GDestroyNotify             notify)
+{
+	GnomeIdleMonitorWatch *watch;
+
+	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->monitor = monitor;
+	watch->id = get_next_watch_serial ();
+	watch->callback = callback;
+	watch->user_data = user_data;
+	watch->notify = notify;
+	watch->xalarm = xalarm;
+
+	g_hash_table_insert (monitor->priv->watches,
+			     GUINT_TO_POINTER (watch->id),
+			     watch);
+	return watch;
+}
+
 /**
  * gnome_idle_monitor_add_idle_watch:
  * @monitor: A #GnomeIdleMonitor
@@ -500,20 +523,15 @@ gnome_idle_monitor_add_idle_watch (GnomeIdleMonitor	       *monitor,
 
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
-	watch = g_slice_new0 (GnomeIdleMonitorWatch);
-	watch->monitor = monitor;
-	watch->id = get_next_watch_serial ();
-	watch->callback = callback;
-	watch->user_data = user_data;
-	watch->notify = notify;
-	watch->xalarm = _xsync_alarm_set (monitor, XSyncPositiveTransition, interval_msec, TRUE);
+	watch = make_watch (monitor,
+			    _xsync_alarm_set (monitor, XSyncPositiveTransition, interval_msec, TRUE),
+			    callback,
+			    user_data,
+			    notify);
 
 	g_hash_table_add (monitor->priv->alarms,
 			  (gpointer) watch->xalarm);
 
-	g_hash_table_insert (monitor->priv->watches,
-			     GUINT_TO_POINTER (watch->id),
-			     watch);
 	return watch->id;
 }
 
@@ -543,21 +561,15 @@ gnome_idle_monitor_add_user_active_watch (GnomeIdleMonitor          *monitor,
 
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
-	watch = g_slice_new0 (GnomeIdleMonitorWatch);
-	watch->monitor = monitor;
-	watch->id = get_next_watch_serial ();
-	watch->callback = callback;
-	watch->user_data = user_data;
-	watch->notify = notify;
-	watch->xalarm = monitor->priv->user_active_alarm;
-
 	set_alarm_enabled (monitor->priv->display,
 			   monitor->priv->user_active_alarm,
 			   TRUE);
 
-	g_hash_table_insert (monitor->priv->watches,
-			     GUINT_TO_POINTER (watch->id),
-			     watch);
+	watch = make_watch (monitor,
+			    monitor->priv->user_active_alarm,
+			    callback,
+			    user_data,
+			    notify);
 
 	return watch->id;
 }
