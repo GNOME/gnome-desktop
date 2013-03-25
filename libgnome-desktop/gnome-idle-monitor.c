@@ -70,7 +70,11 @@ enum
 
 static GParamSpec *obj_props[PROP_LAST];
 
-G_DEFINE_TYPE (GnomeIdleMonitor, gnome_idle_monitor, G_TYPE_OBJECT)
+static void gnome_idle_monitor_initable_iface_init (GInitableIface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (GnomeIdleMonitor, gnome_idle_monitor, G_TYPE_OBJECT,
+			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
+						gnome_idle_monitor_initable_iface_init))
 
 static gint64
 _xsyncvalue_to_int64 (XSyncValue value)
@@ -279,10 +283,9 @@ init_xsync (GnomeIdleMonitor *monitor)
 	}
 
 	monitor->priv->counter = find_idletime_counter (monitor);
-	if (monitor->priv->counter == None) {
-		g_warning ("GnomeIdleMonitor: IDLETIME counter not found");
+	/* IDLETIME counter not found? */
+	if (monitor->priv->counter == None)
 		return;
-	}
 
 	monitor->priv->user_active_alarm = _xsync_alarm_set (monitor, XSyncNegativeTransition, 1, FALSE);
 
@@ -352,6 +355,30 @@ gnome_idle_monitor_constructed (GObject *object)
 	init_xsync (monitor);
 }
 
+static gboolean
+gnome_idle_monitor_initable_init (GInitable     *initable,
+				  GCancellable  *cancellable,
+				  GError       **error)
+{
+	GnomeIdleMonitor *monitor;
+
+	monitor = GNOME_IDLE_MONITOR (initable);
+
+	if (monitor->priv->counter == None) {
+		g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+				     "Per-device idletime is not supported");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static void
+gnome_idle_monitor_initable_iface_init (GInitableIface *iface)
+{
+	iface->init = gnome_idle_monitor_initable_init;
+}
+
 static void
 gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 {
@@ -399,7 +426,7 @@ gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
 GnomeIdleMonitor *
 gnome_idle_monitor_new (void)
 {
-	return GNOME_IDLE_MONITOR (g_object_new (GNOME_TYPE_IDLE_MONITOR, NULL));
+	return GNOME_IDLE_MONITOR (g_initable_new (GNOME_TYPE_IDLE_MONITOR, NULL, NULL, NULL));
 }
 
 /**
@@ -407,14 +434,15 @@ gnome_idle_monitor_new (void)
  * @device: A #GdkDevice to get the idle time for.
  *
  * Returns: a new #GnomeIdleMonitor that tracks the device-specific
- * idletime for @device. To track server-global idletime for all
- * devices, use gnome_idle_monitor_new().
+ * idletime for @device. If device-specific idletime is not available,
+ * %NULL is returned, and @error is set. To track server-global
+ * idletime for all devices, use gnome_idle_monitor_new().
  */
 GnomeIdleMonitor *
-gnome_idle_monitor_new_for_device (GdkDevice *device)
+gnome_idle_monitor_new_for_device (GdkDevice  *device)
 {
-	return GNOME_IDLE_MONITOR (g_object_new (GNOME_TYPE_IDLE_MONITOR,
-						 "device", device, NULL));
+	return GNOME_IDLE_MONITOR (g_initable_new (GNOME_TYPE_IDLE_MONITOR, NULL, NULL,
+						   "device", device, NULL));
 }
 
 /**
