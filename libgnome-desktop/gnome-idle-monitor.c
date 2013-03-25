@@ -53,7 +53,7 @@ struct _GnomeIdleMonitorPrivate
 
 typedef struct
 {
-	Display			 *display;
+	GnomeIdleMonitor         *monitor;
 	guint			  id;
 	GnomeIdleMonitorWatchFunc callback;
 	gpointer		  user_data;
@@ -255,7 +255,7 @@ idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 	}
 
 	if (watch->id != USER_ACTIVE_WATCH_ID) {
-		XSyncDestroyAlarm (watch->display, watch->xalarm);
+		XSyncDestroyAlarm (watch->monitor->priv->display, watch->xalarm);
 	}
 	g_slice_free (GnomeIdleMonitorWatch, watch);
 }
@@ -479,8 +479,8 @@ gnome_idle_monitor_add_idle_watch (GnomeIdleMonitor	       *monitor,
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
 	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->monitor = monitor;
 	watch->id = get_next_watch_serial ();
-	watch->display = monitor->priv->display;
 	watch->callback = callback;
 	watch->user_data = user_data;
 	watch->notify = notify;
@@ -519,8 +519,8 @@ gnome_idle_monitor_add_user_active_watch (GnomeIdleMonitor          *monitor,
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
 
 	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->monitor = monitor;
 	watch->id = USER_ACTIVE_WATCH_ID;
-	watch->display = monitor->priv->display;
 	watch->callback = callback;
 	watch->user_data = user_data;
 	watch->notify = notify;
