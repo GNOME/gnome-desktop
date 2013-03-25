@@ -264,20 +264,20 @@ update_clock (gpointer data)
 		if (show_full_date) {
 			/* Translators: This is the time format with full date used
 			   in 24-hour mode.
-                           The character between %H, %M, and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%a %b %e, %H∶%M∶%S")
-				: _("%a %b %e, %H∶%M");
+                           The character between %R and %S is U+2236 RATIO */
+			format_string = show_seconds ? _("%a %b %e, %R∶%S")
+				: _("%a %b %e, %R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode.
-                           The character between %H, %M, and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%a %H∶%M∶%S")
-				: _("%a %H∶%M");
+                           The character between %R and %S is U+2236 RATIO */
+			format_string = show_seconds ? _("%a %R∶%S")
+				: _("%a %R");
 		} else {
 			/* Translators: This is the time format without date used
 			   in 24-hour mode.
-                           The character between %H, %M, and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%H∶%M∶%S") : _("%H∶%M");
+                           The character between %R and %S is U+2236 RATIO */
+			format_string = show_seconds ? _("%R∶%S") : _("%R");
 		}
 	} else {
 		if (show_full_date) {
