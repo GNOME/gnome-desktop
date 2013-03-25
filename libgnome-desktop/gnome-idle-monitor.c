@@ -320,6 +320,11 @@ gnome_idle_monitor_dispose (GObject *object)
 	g_clear_pointer (&monitor->priv->alarms, g_hash_table_destroy);
 	g_clear_object (&monitor->priv->device);
 
+	if (monitor->priv->user_active_alarm != None) {
+		XSyncDestroyAlarm (monitor->priv->display, monitor->priv->user_active_alarm);
+		monitor->priv->user_active_alarm = None;
+	}
+
 	gdk_window_remove_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
 
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
