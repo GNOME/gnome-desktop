@@ -263,44 +263,35 @@ update_clock (gpointer data)
 	    self->priv->ampm_available == FALSE) {
 		if (show_full_date) {
 			/* Translators: This is the time format with full date used
-			   in 24-hour mode.
-                           The character between %R and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%a %b %e, %R∶%S")
+			   in 24-hour mode. */
+			format_string = show_seconds ? _("%a %b %e, %R:%S")
 				: _("%a %b %e, %R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
-			   in 24-hour mode.
-                           The character between %R and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%a %R∶%S")
+			   in 24-hour mode. */
+			format_string = show_seconds ? _("%a %R:%S")
 				: _("%a %R");
 		} else {
 			/* Translators: This is the time format without date used
-			   in 24-hour mode.
-                           The character between %R and %S is U+2236 RATIO */
-			format_string = show_seconds ? _("%R∶%S") : _("%R");
+			   in 24-hour mode. */
+			format_string = show_seconds ? _("%R:%S") : _("%R");
 		}
 	} else {
 		if (show_full_date) {
 			/* Translators: This is a time format with full date used
-			   for AM/PM.
-                           The Unicode characters are U+2236 RATIO and
-                           U+2009 THIN SPACE */
-			format_string = show_seconds ? _("%a %b %e, %l∶%M∶%S %p")
-				: _("%a %b %e, %l∶%M %p");
+			   for AM/PM. */
+			format_string = show_seconds ? _("%a %b %e, %l:%M:%S %p")
+				: _("%a %b %e, %l:%M %p");
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
-			   for AM/PM.
-                           The Unicode characters are U+2236 RATIO and
-                           U+2009 THIN SPACE */
-			format_string = show_seconds ? _("%a %l∶%M∶%S %p")
-				: _("%a %l∶%M %p");
+			   for AM/PM. */
+			format_string = show_seconds ? _("%a %l:%M:%S %p")
+				: _("%a %l:%M %p");
 		} else {
 			/* Translators: This is a time format without date used
-			   for AM/PM.
-                           The Unicode characters are U+2236 RATIO and
-                           U+2009 THIN SPACE */
-			format_string = show_seconds ? _("%l∶%M∶%S %p")
-				: _("%l∶%M %p");
+			   for AM/PM. */
+			format_string = show_seconds ? _("%l:%M:%S %p")
+				: _("%l:%M %p");
 		}
 	}
 
