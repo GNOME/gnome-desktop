@@ -143,6 +143,8 @@ fire_watch (gpointer data,
 		return;
 	}
 
+	g_object_ref (watch->monitor);
+
 	if (watch->callback) {
 		watch->callback (watch->monitor,
 				 watch->id,
@@ -152,6 +154,8 @@ fire_watch (gpointer data,
 	if (watch->xalarm == watch->monitor->priv->user_active_alarm) {
 		gnome_idle_monitor_remove_watch (watch->monitor, watch->id);
 	}
+
+	g_object_unref (watch->monitor);
 }
 
 static void
