@@ -298,14 +298,11 @@ gnome_idle_monitor_dispose (GObject *object)
 	GnomeIdleMonitor *monitor;
 
 	monitor = GNOME_IDLE_MONITOR (object);
-	if (monitor->priv->watches != NULL) {
-		g_hash_table_destroy (monitor->priv->watches);
-		monitor->priv->watches = NULL;
-	}
+
+	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
+	g_clear_object (&monitor->priv->device);
 
 	gdk_window_remove_filter (NULL, (GdkFilterFunc)xevent_filter, monitor);
-
-	g_clear_object (&monitor->priv->device);
 
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
 }
