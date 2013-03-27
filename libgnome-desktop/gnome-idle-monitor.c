@@ -138,12 +138,14 @@ fire_watch (gpointer data,
 {
 	GnomeIdleMonitorWatch *watch = data;
 	XSyncAlarm alarm = (XSyncAlarm) user_data;
+	GnomeIdleMonitor *monitor;
 
 	if (watch->xalarm != alarm) {
 		return;
 	}
 
-	g_object_ref (watch->monitor);
+	monitor = watch->monitor;
+	g_object_ref (monitor);
 
 	if (watch->callback) {
 		watch->callback (watch->monitor,
@@ -151,11 +153,11 @@ fire_watch (gpointer data,
 				 watch->user_data);
 	}
 
-	if (watch->xalarm == watch->monitor->priv->user_active_alarm) {
-		gnome_idle_monitor_remove_watch (watch->monitor, watch->id);
+	if (watch->xalarm == monitor->priv->user_active_alarm) {
+		gnome_idle_monitor_remove_watch (monitor, watch->id);
 	}
 
-	g_object_unref (watch->monitor);
+	g_object_unref (monitor);
 }
 
 static void
