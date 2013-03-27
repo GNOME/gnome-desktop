@@ -38,8 +38,7 @@ introspection_sources = 		\
 	gnome-xkb-info.c		\
 	gnome-idle-monitor.c		\
 	gnome-languages.c		\
-	edid-parse.c			\
-	gnome-keyboard-drawing.c
+	edid-parse.c
 
 libgnome_desktop_3_la_SOURCES = 	\
 	$(introspection_sources)	\
@@ -77,8 +76,7 @@ libgnome_desktop_HEADERS = \
         gnome-wall-clock.h		\
 	gnome-xkb-info.h		\
 	gnome-idle-monitor.h		\
-	gnome-languages.h		\
-	gnome-keyboard-drawing.h
+	gnome-languages.h
 
 if USE_INTERNAL_PNP_IDS
 pnpdatadir = $(datadir)/libgnome-desktop-3.0
