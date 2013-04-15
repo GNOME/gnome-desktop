@@ -2640,7 +2640,6 @@ gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 	GnomeBGSlideShow *show;
 	GdkPixbuf *result;
 	GdkPixbuf *thumb;
-        GList *l;
         int skipped;
         gboolean is_fixed;
 
