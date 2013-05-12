@@ -178,6 +178,9 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 {
 	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
 	gobject_class->get_property = gnome_wall_clock_get_property;
 	gobject_class->set_property = gnome_wall_clock_set_property;
 	gobject_class->dispose = gnome_wall_clock_dispose;
