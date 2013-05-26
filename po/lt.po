@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-14 16:31+0000\n"
-"PO-Revision-Date: 2013-02-14 23:25+0200\n"
+"POT-Creation-Date: 2013-05-24 09:23+0000\n"
+"PO-Revision-Date: 2013-05-26 21:59+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -31,31 +31,27 @@ msgctxt "Monitor vendor"
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: ../libgnome-desktop/gnome-desktop-utils.c:135
-msgid "Cannot find a terminal, using xterm, even if it may not work"
-msgstr "Nepavyko rasti terminalo, naudojamas xterm, nors jis gali neveikti"
-
-#: ../libgnome-desktop/gnome-languages.c:761
+#: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Nenurodyta"
 
 #. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:453
+#: ../libgnome-desktop/gnome-rr.c:452
 #, c-format
 msgid "could not get the screen resources (CRTCs, outputs, modes)"
 msgstr "nepavyko gauti ekrano resursų (CRTC, išvedimų, veiksenų)"
 
-#: ../libgnome-desktop/gnome-rr.c:473
+#: ../libgnome-desktop/gnome-rr.c:472
 #, c-format
 msgid "unhandled X error while getting the range of screen sizes"
 msgstr "neapdorota X klaida gaunant ekrano dydžių ruožą"
 
-#: ../libgnome-desktop/gnome-rr.c:479
+#: ../libgnome-desktop/gnome-rr.c:478
 #, c-format
 msgid "could not get the range of screen sizes"
 msgstr "nepavyko gauti ekrano dydžių ruožo"
 
-#: ../libgnome-desktop/gnome-rr.c:770
+#: ../libgnome-desktop/gnome-rr.c:769
 #, c-format
 msgid "RANDR extension is not present"
 msgstr "nėra RANDR plėtinio"
@@ -65,26 +61,25 @@ msgstr "nėra RANDR plėtinio"
 msgid "could not get information about output %d"
 msgstr "nepavyko gauti informacijos apie išvestį %d"
 
-#: ../libgnome-desktop/gnome-rr.c:1757
-msgid "Laptop"
-msgstr "Nešiojamasis kompiuteris"
+#: ../libgnome-desktop/gnome-rr.c:1764
+#| msgid "%s Display"
+msgid "Built-in Display"
+msgstr "Integruotas vaizduoklis"
 
 #. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1775
+#: ../libgnome-desktop/gnome-rr.c:1782
 #, c-format
 msgid "%s Display"
 msgstr "%s vaizduoklis"
 
-#: ../libgnome-desktop/gnome-rr.c:1782
-#| msgctxt "Monitor vendor"
-#| msgid "Unknown"
+#: ../libgnome-desktop/gnome-rr.c:1789
 msgid "Unknown Display"
 msgstr "Nežinomas vaizduoklis"
 
 #. Translators: the "position", "size", and "maximum"
 #. * words here are not keywords; please translate them
 #. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2221
+#: ../libgnome-desktop/gnome-rr.c:2234
 #, c-format
 msgid ""
 "requested position/size for CRTC %d is outside the allowed limit: position="
@@ -93,12 +88,12 @@ msgstr ""
 "prašoma pozicija/dydis CRTC %d už leistinos ribos: pozicija=(%d, %d), dydis="
 "(%d, %d), maksimumas=(%d, %d)"
 
-#: ../libgnome-desktop/gnome-rr.c:2257
+#: ../libgnome-desktop/gnome-rr.c:2270
 #, c-format
 msgid "could not set the configuration for CRTC %d"
 msgstr "nepavyko nustatyti CRTC %d konfigūracijos"
 
-#: ../libgnome-desktop/gnome-rr.c:2402
+#: ../libgnome-desktop/gnome-rr.c:2421
 #, c-format
 msgid "could not get information about CRTC %d"
 msgstr "nepavyko gauti informacijos apie CRTC %d"
@@ -187,69 +182,67 @@ msgstr ""
 
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:268
-msgid "%a %b %e, %R∶%S"
-msgstr "%a %b %e, %R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:267
+#| msgid "%a %b %e, %R"
+msgid "%a %b %e, %R:%S"
+msgstr "%a %b %e d., %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:269
+#: ../libgnome-desktop/gnome-wall-clock.c:268
 msgid "%a %b %e, %R"
-msgstr "%a %b %e, %R"
+msgstr "%a %b %e d., %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:274
-msgid "%a %R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:272
+#| msgid "%a %R∶%S"
+msgid "%a %R:%S"
 msgstr "%a %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:275
+#: ../libgnome-desktop/gnome-wall-clock.c:273
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:280
-msgid "%R∶%S"
-msgstr "%R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:277
+msgid "%R:%S"
+msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: ../libgnome-desktop/gnome-wall-clock.c:277
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:288
-msgid "%a %b %e, %l∶%M∶%S %p"
-msgstr "%a %b %e, %l:%M:%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:283
+#| msgid "%a %b %e, %l∶%M∶%S %p"
+msgid "%a %b %e, %l:%M:%S %p"
+msgstr "%a %b %e d., %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:289
-msgid "%a %b %e, %l∶%M %p"
-msgstr "%a %b %e, %l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:284
+#| msgid "%a %b %e, %l∶%M %p"
+msgid "%a %b %e, %l:%M %p"
+msgstr "%a %b %e d., %l:%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:295
-msgid "%a %l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:288
+#| msgid "%a %l∶%M∶%S %p"
+msgid "%a %l:%M:%S %p"
 msgstr "%a %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:296
-msgid "%a %l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:289
+#| msgid "%a %l∶%M %p"
+msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:302
-msgid "%l∶%M∶%S %p"
-msgstr "%l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:293
+msgid "%l:%M:%S %p"
+msgstr "%l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:303
-msgid "%l∶%M %p"
-msgstr "%l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:294
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
