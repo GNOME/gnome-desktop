@@ -975,6 +975,8 @@ gnome_xkb_info_get_layouts_for_language (GnomeXkbInfo *self,
   language = gnome_get_language_from_code (language_code, NULL);
 
   layouts_for_language = g_hash_table_lookup (priv->layouts_by_language, language);
+  g_free (language);
+
   if (!layouts_for_language)
     return NULL;
 
