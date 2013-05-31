@@ -1018,6 +1018,8 @@ gnome_xkb_info_get_layouts_for_country (GnomeXkbInfo *self,
   country = gnome_get_country_from_code (country_code, NULL);
 
   layouts_for_country = g_hash_table_lookup (priv->layouts_by_country, country);
+  g_free (country);
+
   if (!layouts_for_country)
     return NULL;
 
