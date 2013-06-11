@@ -2612,6 +2612,9 @@ gnome_bg_changes_with_time (GnomeBG *bg)
 
 	g_return_val_if_fail (bg != NULL, FALSE);
 
+	if (!bg->filename)
+		return FALSE;
+
 	show = get_as_slideshow (bg, bg->filename);
 	if (show)
 		return gnome_bg_slide_show_get_num_slides (show) > 1;
