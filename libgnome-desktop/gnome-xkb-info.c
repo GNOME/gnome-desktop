@@ -584,6 +584,10 @@ parse_rules (GnomeXkbInfo *self)
   gchar *file_path;
   GError *error = NULL;
 
+  /* Make sure the translated strings we get from XKEYBOARD_CONFIG() are
+   * in UTF-8 and not in the current locale */
+  bind_textdomain_codeset ("xkeyboard-config", "UTF-8");
+
   /* Maps option group ids to XkbOptionGroup structs. Owns the
      XkbOptionGroup structs. */
   priv->option_groups_table = g_hash_table_new_full (g_str_hash, g_str_equal,
