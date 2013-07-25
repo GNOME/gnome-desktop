@@ -28,6 +28,8 @@ int main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (clock), "notify::clock",
 			  G_CALLBACK (clock_changed), NULL);
 
+	clock_changed (clock, NULL, NULL);
+
 	g_main_loop_run (loop);
 
 	return 0;
