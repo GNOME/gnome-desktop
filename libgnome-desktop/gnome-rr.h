@@ -111,11 +111,6 @@ GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *scree
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_modes         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_clone_modes   (GnomeRRScreen	  *screen);
-void            gnome_rr_screen_set_size           (GnomeRRScreen         *screen,
-						    int                    width,
-						    int                    height,
-						    int                    mm_width,
-						    int                    mm_height);
 GnomeRRCrtc *   gnome_rr_screen_get_crtc_by_id     (GnomeRRScreen         *screen,
 						    guint32                id);
 gboolean        gnome_rr_screen_refresh            (GnomeRRScreen         *screen,
@@ -129,12 +124,6 @@ void            gnome_rr_screen_get_ranges         (GnomeRRScreen         *scree
 						    int                   *max_width,
 						    int                   *min_height,
 						    int                   *max_height);
-void            gnome_rr_screen_get_timestamps     (GnomeRRScreen         *screen,
-						    guint32               *change_timestamp_ret,
-						    guint32               *config_timestamp_ret);
-
-void            gnome_rr_screen_set_primary_output (GnomeRRScreen         *screen,
-                                                    GnomeRROutput         *output);
 
 GnomeRRMode   **gnome_rr_screen_create_clone_modes (GnomeRRScreen *screen);
 
@@ -149,21 +138,12 @@ gboolean        gnome_rr_screen_set_dpms_mode      (GnomeRRScreen         *scree
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_name           (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_display_name   (GnomeRROutput         *output);
-gboolean        gnome_rr_output_is_connected       (GnomeRROutput         *output);
-int             gnome_rr_output_get_size_inches    (GnomeRROutput         *output);
-int             gnome_rr_output_get_width_mm       (GnomeRROutput         *outout);
-int             gnome_rr_output_get_height_mm      (GnomeRROutput         *output);
-const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output,
-                                                    gsize                 *size);
-gboolean        gnome_rr_output_get_ids_from_edid  (GnomeRROutput         *output,
+void            gnome_rr_output_get_ids_from_edid  (GnomeRROutput         *output,
                                                     char                 **vendor,
-                                                    int                   *product,
-                                                    int                   *serial);
+                                                    char                 **product,
+                                                    char                 **serial);
 
-gint            gnome_rr_output_get_backlight_min  (GnomeRROutput         *output);
-gint            gnome_rr_output_get_backlight_max  (GnomeRROutput         *output);
-gint            gnome_rr_output_get_backlight      (GnomeRROutput         *output,
-                                                    GError                **error);
+gint            gnome_rr_output_get_backlight      (GnomeRROutput         *output);
 gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,
                                                     gint                   value,
                                                     GError                **error);
@@ -171,7 +151,6 @@ gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *outpu
 GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
 GnomeRRCrtc *   gnome_rr_output_get_crtc           (GnomeRROutput         *output);
-const char *    gnome_rr_output_get_connector_type (GnomeRROutput         *output);
 gboolean        gnome_rr_output_is_builtin_display (GnomeRROutput         *output);
 void            gnome_rr_output_get_position       (GnomeRROutput         *output,
 						    int                   *x,
@@ -193,15 +172,6 @@ int             gnome_rr_mode_get_freq             (GnomeRRMode           *mode)
 /* GnomeRRCrtc */
 guint32         gnome_rr_crtc_get_id               (GnomeRRCrtc           *crtc);
 
-gboolean        gnome_rr_crtc_set_config_with_time (GnomeRRCrtc           *crtc,
-						    guint32                timestamp,
-						    int                    x,
-						    int                    y,
-						    GnomeRRMode           *mode,
-						    GnomeRRRotation        rotation,
-						    GnomeRROutput        **outputs,
-						    int                    n_outputs,
-						    GError               **error);
 gboolean        gnome_rr_crtc_can_drive_output     (GnomeRRCrtc           *crtc,
 						    GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_crtc_get_current_mode     (GnomeRRCrtc           *crtc);
@@ -213,6 +183,7 @@ GnomeRRRotation gnome_rr_crtc_get_rotations        (GnomeRRCrtc           *crtc)
 gboolean        gnome_rr_crtc_supports_rotation    (GnomeRRCrtc           *crtc,
 						    GnomeRRRotation        rotation);
 
+#if 0 /* gamma support */
 gboolean        gnome_rr_crtc_get_gamma            (GnomeRRCrtc           *crtc,
 						    int                   *size,
 						    unsigned short       **red,
@@ -223,4 +194,6 @@ void            gnome_rr_crtc_set_gamma            (GnomeRRCrtc           *crtc,
 						    unsigned short        *red,
 						    unsigned short        *green,
 						    unsigned short        *blue);
+#endif
+
 #endif /* GNOME_RR_H */
