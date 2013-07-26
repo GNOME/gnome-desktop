@@ -1680,3 +1680,93 @@ _gnome_rr_screen_apply_configuration (GnomeRRScreen  *screen,
 								 crtcs, outputs,
 								 NULL, error);
 }
+
+gboolean
+gnome_rr_crtc_set_gamma (GnomeRRCrtc    *crtc,
+			 int             size,
+			 unsigned short *red,
+			 unsigned short *green,
+			 unsigned short *blue)
+{
+  GBytes *red_bytes, *green_bytes, *blue_bytes;
+  GVariant *red_v, *green_v, *blue_v;
+  gboolean ok;
+
+  red_bytes = g_bytes_new (red, size * sizeof (unsigned short));
+  green_bytes = g_bytes_new (green, size * sizeof (unsigned short));
+  blue_bytes = g_bytes_new (blue, size * sizeof (unsigned short));
+
+  red_v = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+				    red_bytes, TRUE);
+  green_v = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+				      green_bytes, TRUE);
+  blue_v = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+				     blue_bytes, TRUE);
+
+  ok = meta_dbus_display_config_call_set_crtc_gamma_sync (crtc->info->screen->priv->proxy,
+							  crtc->info->serial,
+							  crtc->id,
+							  red_v,
+							  green_v,
+							  blue_v,
+							  NULL, NULL);
+
+  g_bytes_unref (red_bytes);
+  g_bytes_unref (green_bytes);
+  g_bytes_unref (blue_bytes);
+  /* The variant above are floating, no need to free them */
+
+  return ok;
+}
+
+gboolean
+gnome_rr_crtc_get_gamma (GnomeRRCrtc     *crtc,
+			 int             *size,
+			 unsigned short **red,
+			 unsigned short **green,
+			 unsigned short **blue)
+{
+  GBytes *red_bytes, *green_bytes, *blue_bytes;
+  GVariant *red_v, *green_v, *blue_v;
+  gboolean ok;
+  gsize dummy;
+
+  ok = meta_dbus_display_config_call_get_crtc_gamma_sync (crtc->info->screen->priv->proxy,
+							  crtc->info->serial,
+							  crtc->id,
+							  &red_v,
+							  &green_v,
+							  &blue_v,
+							  NULL, NULL);
+  if (!ok)
+    return FALSE;
+
+  red_bytes = g_variant_get_data_as_bytes (red_v);
+  green_bytes = g_variant_get_data_as_bytes (green_v);
+  blue_bytes = g_variant_get_data_as_bytes (blue_v);
+
+  /* Unref the variant early so that the bytes hold the only reference to
+     the data and we don't need to copy
+  */
+  g_variant_unref (red_v);
+  g_variant_unref (green_v);
+  g_variant_unref (blue_v);
+
+  if (size)
+    *size = g_bytes_get_size (red_bytes) / sizeof (unsigned short);
+
+  if (red)
+    *red = g_bytes_unref_to_data (red_bytes, &dummy);
+  else
+    g_bytes_unref (red_bytes);
+  if (green)
+    *green = g_bytes_unref_to_data (green_bytes, &dummy);
+  else
+    g_bytes_unref (green_bytes);
+  if (blue)
+    *blue = g_bytes_unref_to_data (blue_bytes, &dummy);
+  else
+    g_bytes_unref (blue_bytes);
+
+  return TRUE;
+}
