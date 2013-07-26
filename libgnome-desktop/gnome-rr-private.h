@@ -1,9 +1,23 @@
 #ifndef GNOME_RR_PRIVATE_H
 #define GNOME_RR_PRIVATE_H
 
-#include <X11/Xlib.h>
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/gdkwayland.h>
+#else
+enum wl_output_transform {
+  WL_OUTPUT_TRANSFORM_NORMAL,
+  WL_OUTPUT_TRANSFORM_90,
+  WL_OUTPUT_TRANSFORM_180,
+  WL_OUTPUT_TRANSFORM_270,
+  WL_OUTPUT_TRANSFORM_FLIPPED,
+  WL_OUTPUT_TRANSFORM_FLIPPED_90,
+  WL_OUTPUT_TRANSFORM_FLIPPED_180,
+  WL_OUTPUT_TRANSFORM_FLIPPED_270
+};
+#endif
 
-#include <X11/extensions/Xrandr.h>
+#include "meta-xrandr-shared.h"
+#include "meta-dbus-xrandr.h"
 
 typedef struct ScreenInfo ScreenInfo;
 
@@ -14,7 +28,7 @@ struct ScreenInfo
     int			min_height;
     int			max_height;
 
-    XRRScreenResources *resources;
+    guint               serial;
     
     GnomeRROutput **	outputs;
     GnomeRRCrtc **	crtcs;
@@ -24,24 +38,16 @@ struct ScreenInfo
 
     GnomeRRMode **	clone_modes;
 
-    RROutput            primary;
+    GnomeRROutput *     primary;
 };
 
 struct GnomeRRScreenPrivate
 {
     GdkScreen *			gdk_screen;
     GdkWindow *			gdk_root;
-    Display *			xdisplay;
-    Screen *			xscreen;
-    Window			xroot;
     ScreenInfo *		info;
-    
-    int				randr_event_base;
-    int				rr_major_version;
-    int				rr_minor_version;
-    
-    Atom                        connector_type_atom;
-    gboolean                    dpms_capable;
+
+    MetaDBusDisplayConfig      *proxy;
 };
 
 struct _GnomeRROutputInfoPrivate
@@ -57,9 +63,9 @@ struct _GnomeRROutputInfoPrivate
     GnomeRRRotation	rotation;
 
     gboolean		connected;
-    gchar		vendor[4];
-    guint		product;
-    guint		serial;
+    char *		vendor;
+    char *		product;
+    char *		serial;
     double		aspect;
     int			pref_width;
     int			pref_height;
@@ -75,5 +81,11 @@ struct _GnomeRRConfigPrivate
 };
 
 gboolean _gnome_rr_output_name_is_builtin_display (const char *name);
+
+gboolean _gnome_rr_screen_apply_configuration (GnomeRRScreen  *screen,
+					       gboolean        persistent,
+					       GVariant       *crtcs,
+					       GVariant       *outputs,
+					       GError        **error);
 
 #endif

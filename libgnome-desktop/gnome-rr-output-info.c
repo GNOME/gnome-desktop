@@ -169,29 +169,27 @@ gboolean gnome_rr_output_info_is_connected (GnomeRROutputInfo *self)
 /**
  * gnome_rr_output_info_get_vendor:
  * @self: a #GnomeRROutputInfo
- * @vendor: (out caller-allocates) (array fixed-size=4):
  */
-void gnome_rr_output_info_get_vendor (GnomeRROutputInfo *self, gchar* vendor)
+const char *
+gnome_rr_output_info_get_vendor (GnomeRROutputInfo *self)
 {
-    g_return_if_fail (GNOME_IS_RR_OUTPUT_INFO (self));
-    g_return_if_fail (vendor != NULL);
+    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), NULL);
 
-    vendor[0] = self->priv->vendor[0];
-    vendor[1] = self->priv->vendor[1];
-    vendor[2] = self->priv->vendor[2];
-    vendor[3] = self->priv->vendor[3];
+    return self->priv->vendor;
 }
 
-guint gnome_rr_output_info_get_product (GnomeRROutputInfo *self)
+const char *
+gnome_rr_output_info_get_product (GnomeRROutputInfo *self)
 {
-    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), 0);
+    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), NULL);
 
     return self->priv->product;
 }
 
-guint gnome_rr_output_info_get_serial (GnomeRROutputInfo *self)
+const char *
+gnome_rr_output_info_get_serial (GnomeRROutputInfo *self)
 {
-    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), 0);
+    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), NULL);
 
     return self->priv->serial;
 }
