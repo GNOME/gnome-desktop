@@ -1475,7 +1475,7 @@ read_edid_data (GnomeRROutput *output, gsize *len)
 
     if (result)
     {
-	if (*len % 128 == 0)
+	if (*len > 0 && *len % 128 == 0)
 	    return result;
 	else
 	    g_free (result);
