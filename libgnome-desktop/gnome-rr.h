@@ -138,6 +138,8 @@ gboolean        gnome_rr_screen_set_dpms_mode      (GnomeRRScreen         *scree
 guint32         gnome_rr_output_get_id             (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_name           (GnomeRROutput         *output);
 const char *    gnome_rr_output_get_display_name   (GnomeRROutput         *output);
+const guint8 *  gnome_rr_output_get_edid_data      (GnomeRROutput         *output,
+						    gsize                 *size);
 void            gnome_rr_output_get_ids_from_edid  (GnomeRROutput         *output,
                                                     char                 **vendor,
                                                     char                 **product,

@@ -71,6 +71,8 @@ struct GnomeRROutput
     char *              vendor;
     char *              product;
     char *              serial;
+    GBytes *            edid;
+    char *              edid_file;
 
     int                 backlight;
 
@@ -1060,7 +1062,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 {
     GPtrArray *a;
     GVariantIter *crtcs, *clones, *modes;
-    GVariant *properties;
+    GVariant *properties, *edid;
     int current_crtc_id;
     guint id;
 
@@ -1127,6 +1129,14 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
     g_variant_lookup (properties, "presentation", "b", &output->is_presentation);
 
+    if ((edid = g_variant_lookup_value (properties, "edid", G_VARIANT_TYPE ("ay"))))
+      {
+	output->edid = g_variant_get_data_as_bytes (edid);
+	g_variant_unref (edid);
+      }
+    else
+      g_variant_lookup (properties, "edid-file", "s", &output->edid_file);
+
     if (output->is_primary)
 	output->info->primary = output;
 }
@@ -1148,6 +1158,9 @@ output_copy (const GnomeRROutput *from)
     output->serial = g_strdup (from->serial);
     output->current_crtc = from->current_crtc;
     output->backlight = from->backlight;
+    if (from->edid)
+      output->edid = g_bytes_ref (from->edid);
+    output->edid_file = g_strdup (from->edid_file);
 
     output->is_primary = from->is_primary;
     output->is_presentation = from->is_presentation;
@@ -1187,6 +1200,9 @@ output_free (GnomeRROutput *output)
     g_free (output->product);
     g_free (output->serial);
     g_free (output->display_name);
+    g_free (output->edid_file);
+    if (output->edid)
+      g_bytes_unref (output->edid);
     g_slice_free (GnomeRROutput, output);
 }
 
@@ -1196,6 +1212,32 @@ gnome_rr_output_get_id (GnomeRROutput *output)
     g_assert(output != NULL);
     
     return output->id;
+}
+
+const guint8 *
+gnome_rr_output_get_edid_data (GnomeRROutput *output,
+			       gsize         *size)
+{
+  if (output->edid)
+    return g_bytes_get_data (output->edid, size);
+
+  if (output->edid_file)
+    {
+      GMappedFile *mmap;
+
+      mmap = g_mapped_file_new (output->edid_file, FALSE, NULL);
+
+      if (mmap)
+	{
+	  output->edid = g_mapped_file_get_bytes (mmap);
+
+	  g_mapped_file_unref (mmap);
+
+	  return g_bytes_get_data (output->edid, size);
+	}
+    }
+
+  return NULL;
 }
 
 /**
