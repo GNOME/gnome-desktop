@@ -973,6 +973,8 @@ gnome_xkb_info_get_layouts_for_language (GnomeXkbInfo *self,
     return NULL;
 
   language = gnome_get_language_from_code (language_code, NULL);
+  if (!language)
+    return NULL;
 
   layouts_for_language = g_hash_table_lookup (priv->layouts_by_language, language);
   g_free (language);
@@ -1018,6 +1020,8 @@ gnome_xkb_info_get_layouts_for_country (GnomeXkbInfo *self,
     return NULL;
 
   country = gnome_get_country_from_code (country_code, NULL);
+  if (!country)
+    return NULL;
 
   layouts_for_country = g_hash_table_lookup (priv->layouts_by_country, country);
   g_free (country);
