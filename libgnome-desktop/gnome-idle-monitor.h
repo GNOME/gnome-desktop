@@ -79,7 +79,7 @@ guint              gnome_idle_monitor_add_user_active_watch (GnomeIdleMonitor   
 void               gnome_idle_monitor_remove_watch (GnomeIdleMonitor         *monitor,
                                                     guint                     id);
 
-gint64             gnome_idle_monitor_get_idletime (GnomeIdleMonitor         *monitor);
+guint64            gnome_idle_monitor_get_idletime (GnomeIdleMonitor         *monitor);
 
 G_END_DECLS
 

@@ -42,6 +42,7 @@ introspection_sources = 		\
 libgnome_desktop_3_la_SOURCES = 	\
 	$(introspection_sources)	\
 	$(dbus_xrandr_built_sources)	\
+	$(dbus_idle_built_sources)	\
 	gnome-datetime-source.h		\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
@@ -59,7 +60,17 @@ $(dbus_xrandr_built_sources) : Makefile.am xrandr.xml
 		--generate-c-code meta-dbus-xrandr					\
 		$(srcdir)/xrandr.xml
 
-BUILT_SOURCES = $(dbus_xrandr_built_sources)
+dbus_idle_built_sources = meta-dbus-idle-monitor.c meta-dbus-idle-monitor.h
+
+$(dbus_idle_built_sources) : Makefile.am idle-monitor.xml
+	$(AM_V_GEN)gdbus-codegen							\
+		--interface-prefix org.gnome.Mutter					\
+		--c-namespace MetaDBus							\
+		--generate-c-code meta-dbus-idle-monitor				\
+		--c-generate-object-manager						\
+		$(srcdir)/idle-monitor.xml
+
+BUILT_SOURCES = $(dbus_xrandr_built_sources) $(dbus_idle_built_sources)
 
 libgnome_desktop_3_la_LIBADD =	\
 	$(XLIB_LIBS)		\
