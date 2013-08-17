@@ -141,8 +141,10 @@ static void gnome_rr_screen_set_property (GObject*, guint, const GValue*, GParam
 static void gnome_rr_screen_get_property (GObject*, guint, GValue*, GParamSpec*);
 static gboolean gnome_rr_screen_initable_init (GInitable*, GCancellable*, GError**);
 static void gnome_rr_screen_initable_iface_init (GInitableIface *iface);
+static void gnome_rr_screen_async_initable_init (GAsyncInitableIface *iface);
 G_DEFINE_TYPE_WITH_CODE (GnomeRRScreen, gnome_rr_screen, G_TYPE_OBJECT,
-        G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_screen_initable_iface_init))
+                         G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_screen_initable_iface_init)
+                         G_IMPLEMENT_INTERFACE (G_TYPE_ASYNC_INITABLE, gnome_rr_screen_async_initable_init))
 
 G_DEFINE_BOXED_TYPE (GnomeRRCrtc, gnome_rr_crtc, crtc_copy, crtc_free)
 G_DEFINE_BOXED_TYPE (GnomeRROutput, gnome_rr_output, output_copy, output_free)
@@ -570,10 +572,93 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
     return TRUE;
 }
 
-void
+static void
+on_proxy_acquired (GObject      *object,
+                   GAsyncResult *result,
+                   gpointer      user_data)
+{
+    GTask *task = user_data;
+    GnomeRRScreen *self = g_task_get_source_object (task);
+    GnomeRRScreenPrivate *priv = self->priv;
+    MetaDBusDisplayConfig *proxy;
+    GError *error;
+
+    error = NULL;
+    proxy = meta_dbus_display_config_proxy_new_for_bus_finish (result, &error);
+    if (!proxy)
+	return g_task_return_error (task, error);
+
+    priv->proxy = META_DBUS_DISPLAY_CONFIG (proxy);
+
+    priv->info = screen_info_new (self, &error);
+    if (!priv->info)
+	return g_task_return_error (task, error);
+
+    g_signal_connect_object (priv->gdk_screen, "monitors-changed",
+			     G_CALLBACK (screen_on_monitors_changed), self, 0);
+    g_task_return_boolean (task, TRUE);
+}
+
+static void
+on_name_appeared (GDBusConnection *connection,
+                  const char      *name,
+                  const char      *name_owner,
+                  gpointer         user_data)
+{
+    GTask *task = user_data;
+    GnomeRRScreen *self = g_task_get_source_object (task);
+    GnomeRRScreenPrivate *priv = self->priv;
+
+    meta_dbus_display_config_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                                G_DBUS_PROXY_FLAGS_NONE,
+                                                "org.gnome.Mutter.DisplayConfig",
+                                                "/org/gnome/Mutter/DisplayConfig",
+                                                g_task_get_cancellable (task),
+                                                on_proxy_acquired, g_object_ref (task));
+
+    g_bus_unwatch_name (priv->init_name_watch_id);
+}
+
+static void
+gnome_rr_screen_async_initable_init_async (GAsyncInitable      *initable,
+                                           int                  io_priority,
+                                           GCancellable        *canc,
+                                           GAsyncReadyCallback  callback,
+                                           gpointer             user_data)
+{
+    GnomeRRScreen *self = GNOME_RR_SCREEN (initable);
+    GnomeRRScreenPrivate *priv = self->priv;
+    GTask *task;
+
+    task = g_task_new (self, canc, callback, user_data);
+
+    priv->init_name_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
+                                                 "org.gnome.Mutter.DisplayConfig",
+                                                 G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                                 on_name_appeared,
+                                                 NULL,
+                                                 task, g_object_unref);
+}
+
+static gboolean
+gnome_rr_screen_async_initable_init_finish (GAsyncInitable    *initable,
+                                            GAsyncResult      *result,
+                                            GError           **error)
+{
+    return g_task_propagate_boolean (G_TASK (result), error);
+}
+
+static void
 gnome_rr_screen_initable_iface_init (GInitableIface *iface)
 {
     iface->init = gnome_rr_screen_initable_init;
+}
+
+static void
+gnome_rr_screen_async_initable_init (GAsyncInitableIface *iface)
+{
+    iface->init_async = gnome_rr_screen_async_initable_init_async;
+    iface->init_finish = gnome_rr_screen_async_initable_init_finish;
 }
 
 void
@@ -765,6 +850,32 @@ gnome_rr_screen_new (GdkScreen *screen,
     }
 
     return rr_screen;
+}
+
+void
+gnome_rr_screen_new_async (GdkScreen           *screen,
+                           GAsyncReadyCallback  callback,
+                           gpointer             user_data)
+{
+    g_return_if_fail (GDK_IS_SCREEN (screen));
+
+    g_async_initable_new_async (GNOME_TYPE_RR_SCREEN, G_PRIORITY_DEFAULT,
+                                NULL, callback, user_data,
+                                "gdk-screen", screen, NULL);
+}
+
+GnomeRRScreen *
+gnome_rr_screen_new_finish (GAsyncResult  *result,
+                            GError       **error)
+{
+    GObject *source_object;
+    GnomeRRScreen *screen;
+
+    source_object = g_async_result_get_source_object (result);
+    screen = GNOME_RR_SCREEN (g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), result, error));
+
+    g_object_unref (source_object);
+    return screen;
 }
 
 /**

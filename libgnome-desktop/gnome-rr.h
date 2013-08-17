@@ -107,6 +107,11 @@ GType gnome_rr_mode_get_type (void);
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
 						    GError               **error);
+void            gnome_rr_screen_new_async          (GdkScreen             *screen,
+                                                    GAsyncReadyCallback    callback,
+                                                    gpointer               user_data);
+GnomeRRScreen * gnome_rr_screen_new_finish         (GAsyncResult          *result,
+                                                    GError               **error);
 GnomeRROutput **gnome_rr_screen_list_outputs       (GnomeRRScreen         *screen);
 GnomeRRCrtc **  gnome_rr_screen_list_crtcs         (GnomeRRScreen         *screen);
 GnomeRRMode **  gnome_rr_screen_list_modes         (GnomeRRScreen         *screen);
