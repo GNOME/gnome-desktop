@@ -633,7 +633,30 @@ gnome_rr_config_apply (GnomeRRConfig *config,
 		       GnomeRRScreen *screen,
 		       GError       **error)
 {
-    return gnome_rr_config_apply_helper (config, screen, FALSE, error);
+    gboolean ok;
+    GError *local_error;
+
+    local_error = NULL;
+    ok = gnome_rr_config_apply_helper (config, screen, FALSE, &local_error);
+    if (!ok)
+    {
+        if (g_error_matches (local_error, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED))
+        {
+            /* Stale configuration, refresh and try again */
+            g_error_free (local_error);
+
+            if (!gnome_rr_screen_refresh (screen, error))
+                return FALSE;
+
+            return gnome_rr_config_apply_helper (config, screen, FALSE, error);
+        }
+        else
+        {
+            g_propagate_error (error, local_error);
+        }
+    }
+
+    return ok;
 }
 
 gboolean
@@ -641,7 +664,30 @@ gnome_rr_config_apply_persistent (GnomeRRConfig *config,
 				  GnomeRRScreen *screen,
 				  GError       **error)
 {
-    return gnome_rr_config_apply_helper (config, screen, TRUE, error);
+    gboolean ok;
+    GError *local_error;
+
+    local_error = NULL;
+    ok = gnome_rr_config_apply_helper (config, screen, TRUE, &local_error);
+    if (!ok)
+    {
+        if (g_error_matches (local_error, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED))
+        {
+            /* Stale configuration, refresh and try again */
+            g_error_free (local_error);
+
+            if (!gnome_rr_screen_refresh (screen, error))
+                return FALSE;
+
+            return gnome_rr_config_apply_helper (config, screen, TRUE, error);
+        }
+        else
+        {
+            g_propagate_error (error, local_error);
+        }
+    }
+
+    return ok;
 }
 
 /**
