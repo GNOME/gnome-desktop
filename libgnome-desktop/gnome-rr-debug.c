@@ -24,52 +24,15 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <libgnome-desktop/gnome-rr.h>
-#include <X11/extensions/Xrandr.h>
-#include <X11/Xatom.h>
 
-/**
- * get_property:
- **/
-static guint8 *
-get_property (Display *dpy,
-	      RROutput output,
-	      Atom atom,
-	      gsize *len)
-{
-	unsigned char *prop;
-	int actual_format;
-	unsigned long nitems, bytes_after;
-	Atom actual_type;
-	guint8 *result = NULL;
-
-	XRRGetOutputProperty (dpy, output, atom,
-			      0, 100, False, False,
-			      AnyPropertyType,
-			      &actual_type, &actual_format,
-			      &nitems, &bytes_after, &prop);
-
-	if (actual_type == XA_INTEGER && actual_format == 8) {
-		result = g_memdup (prop, nitems);
-		if (len)
-			*len = nitems;
-	}
-	XFree (prop);
-	return result;
-}
-
-/**
- * main:
- **/
 int
 main (int argc, char *argv[])
 {
-	Atom edid_atom;
-	Display *display;
 	GError *error = NULL;
 	GnomeRROutput **outputs;
 	GnomeRRScreen *screen;
 	gsize len = 0;
-	guint8 *result = NULL;
+	const guint8 *result = NULL;
 	guint i;
 
 	gtk_init (&argc, &argv);
@@ -79,7 +42,6 @@ main (int argc, char *argv[])
 		g_error_free (error);
 		goto out;
 	}
-	display = GDK_SCREEN_XDISPLAY (gdk_screen_get_default ());
 	outputs = gnome_rr_screen_list_outputs (screen);
 	for (i = 0; outputs[i] != NULL; i++) {
 		g_print ("[%s]\n", gnome_rr_output_get_name (outputs[i]));
@@ -89,29 +51,11 @@ main (int argc, char *argv[])
 		g_print ("\tid: %i\n", gnome_rr_output_get_id (outputs[i]));
 
 		/* get EDID (first try) */
-		edid_atom = XInternAtom (display, "EDID", FALSE);
-		result = get_property (display,
-				       gnome_rr_output_get_id (outputs[i]),
-				       edid_atom,
-				       &len);
+                result = gnome_rr_output_get_edid_data (outputs[i], &len);
 		if (result != NULL) {
 			g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
 				 len, result[0], result[1],
 				 result[2], result[3]);
-			g_free (result);
-		}
-
-		/* get EDID (second try) */
-		edid_atom = XInternAtom (display, "EDID_DATA", FALSE);
-		result = get_property (display,
-				       gnome_rr_output_get_id (outputs[i]),
-				       edid_atom,
-				       &len);
-		if (result != NULL) {
-			g_print ("\tedid2: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
-				 len, result[0], result[1],
-				 result[2], result[3]);
-			g_free (result);
 		}
 	}
 out:
