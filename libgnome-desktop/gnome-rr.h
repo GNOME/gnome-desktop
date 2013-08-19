@@ -149,6 +149,9 @@ void            gnome_rr_output_get_ids_from_edid  (GnomeRROutput         *outpu
                                                     char                 **vendor,
                                                     char                 **product,
                                                     char                 **serial);
+void            gnome_rr_output_get_physical_size  (GnomeRROutput         *output,
+                                                    int                   *width_mm,
+                                                    int                   *height_mm);
 
 gint            gnome_rr_output_get_backlight      (GnomeRROutput         *output);
 gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,

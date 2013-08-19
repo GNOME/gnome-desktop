@@ -71,6 +71,8 @@ struct GnomeRROutput
     char *              vendor;
     char *              product;
     char *              serial;
+    int                 width_mm;
+    int                 height_mm;
     GBytes *            edid;
     char *              edid_file;
 
@@ -1235,6 +1237,8 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "vendor", "s", &output->vendor);
     g_variant_lookup (properties, "product", "s", &output->product);
     g_variant_lookup (properties, "serial", "s", &output->serial);
+    g_variant_lookup (properties, "width-mm", "i", &output->width_mm);
+    g_variant_lookup (properties, "height-mm", "i", &output->height_mm);
     g_variant_lookup (properties, "display-name", "s", &output->display_name);
     g_variant_lookup (properties, "backlight", "i", &output->backlight);
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
@@ -1369,6 +1373,25 @@ gnome_rr_output_get_ids_from_edid (GnomeRROutput         *output,
     *vendor = g_strdup (output->vendor);
     *product = g_strdup (output->product);
     *serial = g_strdup (output->serial);
+}
+
+/**
+ * gnome_rr_output_get_physical_size:
+ * @output: a #GnomeRROutput
+ * @width_mm: (out) (allow-none):
+ * @height_mm: (out) (allow-none):
+ */
+void
+gnome_rr_output_get_physical_size (GnomeRROutput *output,
+				   int           *width_mm,
+				   int           *height_mm)
+{
+    g_return_if_fail (output != NULL);
+
+    if (width_mm)
+	*width_mm = output->width_mm;
+    if (height_mm)
+	*height_mm = output->height_mm;
 }
 
 const char *
