@@ -130,6 +130,7 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 endif
 
 EXTRA_DIST = \
+	xrandr.xml				\
 	gnome-desktop-3.0.pc.in			\
 	gnome-desktop-3.0-uninstalled.pc.in	\
 	$(pnpdata_DATA_dist)
