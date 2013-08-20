@@ -149,11 +149,9 @@
 
 	@serial must match the serial from the last GetResources() call,
 	or org.freedesktop.DBus.AccessDenied will be generated.
-	(XXX: a better error maybe?)
 
 	If @persistent is true, mutter will attempt to replicate this
 	configuration the next time this HW layout appears.
-	(XXX: or is this gnome-settings-daemon role?)
 
 	@crtcs represents the new logical configuration, as a list
 	of structures containing:
@@ -279,5 +277,14 @@
 	XRandR interface directly).
     -->
     <property name="PowerSaveMode" type="i" access="readwrite" />
+
+    <!--
+        MonitorsChanged:
+
+	The signal is emitted every time the screen configuration
+	changes.
+	The client should then call GetResources() to read the new layout.
+    -->
+    <signal name="MonitorsChanged" />
   </interface>
 </node>

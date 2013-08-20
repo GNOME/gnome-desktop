@@ -540,7 +540,7 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
 }
 
 static void
-screen_on_monitors_changed (GdkScreen *gdk_screen,
+screen_on_monitors_changed (MetaDBusDisplayConfig *proxy,
 			    gpointer data)
 {
     GnomeRRScreen *screen = data;
@@ -569,7 +569,7 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
     if (!priv->info)
 	return FALSE;
 
-    g_signal_connect_object (priv->gdk_screen, "monitors-changed",
+    g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
     return TRUE;
 }
@@ -596,7 +596,7 @@ on_proxy_acquired (GObject      *object,
     if (!priv->info)
 	return g_task_return_error (task, error);
 
-    g_signal_connect_object (priv->gdk_screen, "monitors-changed",
+    g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
     g_task_return_boolean (task, TRUE);
 }
