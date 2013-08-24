@@ -440,7 +440,11 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 	}
     }
 
-    gdk_pixbuf_loader_close (loader, NULL);
+    if (gdk_pixbuf_loader_close (loader, &error) == FALSE) {
+        g_warning ("Error creating thumbnail for %s: %s", uri, error->message);
+        g_clear_error (&error);
+        result = FALSE;
+    }
 
     if (!result) {
 	g_object_unref (G_OBJECT (loader));
