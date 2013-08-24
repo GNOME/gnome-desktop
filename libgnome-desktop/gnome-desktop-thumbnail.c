@@ -398,13 +398,11 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 					  sizeof (buffer),
 					  NULL,
 					  &error);
-        if (error != NULL) {
+        if (bytes_read == -1) {
             g_warning ("Error reading from %s: %s", uri, error->message);
             g_clear_error (&error);
+            break;
         }
-	if (bytes_read == -1) {
-	    break;
-	}
 	result = TRUE;
 	if (bytes_read == 0) {
 	    break;
