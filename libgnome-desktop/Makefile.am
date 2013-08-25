@@ -141,6 +141,7 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 endif
 
 EXTRA_DIST = \
+	idle-monitor.xml			\
 	xrandr.xml				\
 	gnome-desktop-3.0.pc.in			\
 	gnome-desktop-3.0-uninstalled.pc.in	\
