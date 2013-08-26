@@ -1429,6 +1429,7 @@ gnome_rr_output_set_backlight (GnomeRROutput *output, gint value, GError **error
     return meta_dbus_display_config_call_change_backlight_sync (output->info->screen->priv->proxy,
 								output->info->serial,
 								output->id, value,
+								&output->backlight,
 								NULL, error);
 }
 
