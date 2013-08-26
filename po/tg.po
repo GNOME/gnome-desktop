@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-23 17:00+0000\n"
-"PO-Revision-Date: 2013-07-30 18:23-0000\n"
+"POT-Creation-Date: 2013-08-19 17:24+0000\n"
+"PO-Revision-Date: 2013-08-26 11:44+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "Language: tg\n"
@@ -18,134 +18,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#. Translators: "Unknown" here is used to identify a monitor for which
-#. * we don't know the vendor. When a vendor is known, the name of the
-#. * vendor is used.
-#: ../libgnome-desktop/display-name.c:107
-msgctxt "Monitor vendor"
-msgid "Unknown"
-msgstr "Номаълум"
-
 #: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Номуайян"
 
-#. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:452
-#, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr "Манобеи экран (назоратчии CRT, хуруҷиҳо, ҳолатҳо) дарёфт нашуд"
-
-#: ../libgnome-desktop/gnome-rr.c:472
-#, c-format
-msgid "unhandled X error while getting the range of screen sizes"
-msgstr "Хатои X-и идоранашванда ҳангоми дарёфти маҳдудаи андозаҳои экран"
-
-#: ../libgnome-desktop/gnome-rr.c:478
-#, c-format
-msgid "could not get the range of screen sizes"
-msgstr "маҳдудаи андозаҳои экран дарёфт нашуд"
-
-#: ../libgnome-desktop/gnome-rr.c:769
-#, c-format
-msgid "RANDR extension is not present"
-msgstr "Густариши RANDR вуҷуд надорад"
-
-#: ../libgnome-desktop/gnome-rr.c:1580
-#, c-format
-msgid "could not get information about output %d"
-msgstr "Иттилоот дар бораи хуруҷии %d дарёфт нашуд"
-
-#: ../libgnome-desktop/gnome-rr.c:1764
-msgid "Built-in Display"
-msgstr "Дисплейи дарунсохт"
-
-#. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1782
-#, c-format
-msgid "%s Display"
-msgstr "Дисплейи %s"
-
-#: ../libgnome-desktop/gnome-rr.c:1789
-msgid "Unknown Display"
-msgstr "Дисплейи номаълум"
-
-#. Translators: the "position", "size", and "maximum"
-#. * words here are not keywords; please translate them
-#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2234
-#, c-format
-msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: position="
-"(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-msgstr ""
-"мавқеият/андоза барои CRTC %d брун аз меъёри иҷозатшуда аст: мавқеият=(%d, "
-"%d), андоза=(%d, %d), ҳадди аксар=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr.c:2268
-#, c-format
-msgid "could not set the configuration for CRTC %d"
-msgstr "конфигуратсия барои CRTC %d танзим нашуд"
-
-#: ../libgnome-desktop/gnome-rr.c:2422
-#, c-format
-msgid "could not get information about CRTC %d"
-msgstr "иттилоот дар бораи CRTC %d-ро дарёфт карда натавонист"
-
-#: ../libgnome-desktop/gnome-rr-config.c:708
-#, c-format
-msgid ""
-"none of the saved display configurations matched the active configuration"
-msgstr ""
-"ҳеҷ кадоми конфигуратсияҳои дисплейҳои захирашуда бо конфигуратсияи фаъол "
-"мутобиқат накард"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1464
+#: ../libgnome-desktop/gnome-rr-config.c:789
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d хуруҷии %s-ро  ронда наметавонад"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1471
+#: ../libgnome-desktop/gnome-rr-config.c:796
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "хуруҷии %s ҳолати %dx%d@%dHz-ро дастгирӣ карда наметавонад"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1482
+#: ../libgnome-desktop/gnome-rr-config.c:807
 #, c-format
-msgid "CRTC %d does not support rotation=%s"
-msgstr "CRTC %d чархиши=%s-ро дастгирь карда наметавонад"
+#| msgid "CRTC %d does not support rotation=%s"
+msgid "CRTC %d does not support rotation=%d"
+msgstr "CRTC %d чархиши=%d -ро дастгирӣ карда наметавонад"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1496
+#: ../libgnome-desktop/gnome-rr-config.c:820
 #, c-format
+#| msgid ""
+#| "output %s does not have the same parameters as another cloned output:\n"
+#| "existing mode = %d, new mode = %d\n"
+#| "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+#| "existing rotation = %s, new rotation = %s"
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
-"existing rotation = %s, new rotation = %s"
+"existing rotation = %d, new rotation = %d"
 msgstr ""
-"хуруҷии %s бо хуруҷии клоншудаи дигар параметри якхела надорад:\n"
+"хуруҷии %s бо хуруҷии такроршудаи дигар параметри якхела надорад:\n"
 "ҳолати мавҷудбуда = %d, ҳолати нав = %d\n"
 "координатҳои мавҷудбуда = (%d, %d), координатҳои нав = (%d, %d)\n"
-"чархиши мавҷудбуда = %s, чархиши нав = %s"
+"чархиши мавҷудбуда = %d, чархиши нав = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1511
+#: ../libgnome-desktop/gnome-rr-config.c:835
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "ба хуруҷии %s клон намешавад"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1680
+#: ../libgnome-desktop/gnome-rr-config.c:961
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Кӯшиши ҳолатҳо барои CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1704
+#: ../libgnome-desktop/gnome-rr-config.c:985
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC %d: ҳолати %dx%d@%dHz-ро бо хуруҷӣ дар %dx%d@%dHz (pass %d) кӯшиш "
 "мекунад\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1751
+#: ../libgnome-desktop/gnome-rr-config.c:1032
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -154,7 +82,7 @@ msgstr ""
 "CRTC­-ро барои хуруҷиҳо муайян карда наметавонад:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1755
+#: ../libgnome-desktop/gnome-rr-config.c:1036
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -166,7 +94,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1833
+#: ../libgnome-desktop/gnome-rr-config.c:1117
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -234,3 +162,50 @@ msgstr "%l:%M:%S %p"
 #: ../libgnome-desktop/gnome-wall-clock.c:297
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
+
+#~ msgctxt "Monitor vendor"
+#~ msgid "Unknown"
+#~ msgstr "Номаълум"
+
+#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
+#~ msgstr "Манобеи экран (назоратчии CRT, хуруҷиҳо, ҳолатҳо) дарёфт нашуд"
+
+#~ msgid "unhandled X error while getting the range of screen sizes"
+#~ msgstr "Хатои X-и идоранашванда ҳангоми дарёфти маҳдудаи андозаҳои экран"
+
+#~ msgid "could not get the range of screen sizes"
+#~ msgstr "маҳдудаи андозаҳои экран дарёфт нашуд"
+
+#~ msgid "RANDR extension is not present"
+#~ msgstr "Густариши RANDR вуҷуд надорад"
+
+#~ msgid "could not get information about output %d"
+#~ msgstr "Иттилоот дар бораи хуруҷии %d дарёфт нашуд"
+
+#~ msgid "Built-in Display"
+#~ msgstr "Дисплейи дарунсохт"
+
+#~ msgid "%s Display"
+#~ msgstr "Дисплейи %s"
+
+#~ msgid "Unknown Display"
+#~ msgstr "Дисплейи номаълум"
+
+#~ msgid ""
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+#~ msgstr ""
+#~ "мавқеият/андоза барои CRTC %d брун аз меъёри иҷозатшуда аст: мавқеият="
+#~ "(%d, %d), андоза=(%d, %d), ҳадди аксар=(%d, %d)"
+
+#~ msgid "could not set the configuration for CRTC %d"
+#~ msgstr "конфигуратсия барои CRTC %d танзим нашуд"
+
+#~ msgid "could not get information about CRTC %d"
+#~ msgstr "иттилоот дар бораи CRTC %d-ро дарёфт карда натавонист"
+
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
+#~ msgstr ""
+#~ "ҳеҷ кадоми конфигуратсияҳои дисплейҳои захирашуда бо конфигуратсияи фаъол "
+#~ "мутобиқат накард"
