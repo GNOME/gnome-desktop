@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-25 10:30+0000\n"
-"PO-Revision-Date: 2013-06-22 14:15+0600\n"
+"POT-Creation-Date: 2013-08-27 10:49+0000\n"
+"PO-Revision-Date: 2013-08-31 15:59+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -20,134 +20,60 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#. Translators: "Unknown" here is used to identify a monitor for which
-#. * we don't know the vendor. When a vendor is known, the name of the
-#. * vendor is used.
-#: ../libgnome-desktop/display-name.c:107
-msgctxt "Monitor vendor"
-msgid "Unknown"
-msgstr "Белгісіз"
-
 #: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Анықталмаған"
 
-#. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:452
-#, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr "экран ресурстарына қатынау мүмкін емес (CRTC, шығыстар, режимдер)"
-
-#: ../libgnome-desktop/gnome-rr.c:472
-#, c-format
-msgid "unhandled X error while getting the range of screen sizes"
-msgstr "экранның мүмкін өлшемдер шегін алу кезінде қате орын алды"
-
-#: ../libgnome-desktop/gnome-rr.c:478
-#, c-format
-msgid "could not get the range of screen sizes"
-msgstr "экран шеттерінің шегін анықтау мүмкін емес"
-
-#: ../libgnome-desktop/gnome-rr.c:769
-#, c-format
-msgid "RANDR extension is not present"
-msgstr "RANDR кеңейтілуі жоқ"
-
-#: ../libgnome-desktop/gnome-rr.c:1580
-#, c-format
-msgid "could not get information about output %d"
-msgstr "%d шығысы жөнінде ақпаратты алу мүмкін емес"
-
-#: ../libgnome-desktop/gnome-rr.c:1764
-msgid "Built-in Display"
-msgstr "Құрамындағы дисплей"
-
-#. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1782
-#, c-format
-msgid "%s Display"
-msgstr "%s дисплейі"
-
-#: ../libgnome-desktop/gnome-rr.c:1789
-#| msgctxt "Monitor vendor"
-#| msgid "Unknown"
-msgid "Unknown Display"
-msgstr "Белгісіз дисплей"
-
-#. Translators: the "position", "size", and "maximum"
-#. * words here are not keywords; please translate them
-#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2234
-#, c-format
-msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: "
-"position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-msgstr ""
-"CRTC %d үшін сұралған орналасуы не өлшемі рұқсат етілген шегінен асып тұр: "
-"орналасуы=(%d, %d), өлшемі=(%d, %d), максимум=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr.c:2270
-#, c-format
-msgid "could not set the configuration for CRTC %d"
-msgstr "CRT %d контроллері жөнінде ақпаратты орнату мүмкін емес"
-
-#: ../libgnome-desktop/gnome-rr.c:2421
-#, c-format
-msgid "could not get information about CRTC %d"
-msgstr "CRT %d контроллері жөнінде ақпаратты алу мүмкін емес"
-
-#: ../libgnome-desktop/gnome-rr-config.c:708
-#, c-format
-msgid ""
-"none of the saved display configurations matched the active configuration"
-msgstr ""
-"сақталып тұрған экран баптауларының ешқайсысы да белсенді болып тұрған "
-"баптауға сәйкес емес"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1464
+#: ../libgnome-desktop/gnome-rr-config.c:743
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRT %d контроллері %s шығысын басқара алмайды"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1471
+#: ../libgnome-desktop/gnome-rr-config.c:750
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "%s шығысы %dx%d@%dГц режимін қолдамайды"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1482
+#: ../libgnome-desktop/gnome-rr-config.c:761
 #, c-format
-msgid "CRTC %d does not support rotation=%s"
-msgstr "CRT %d контроллері айналдыру=%s қолдамайды"
+#| msgid "CRTC %d does not support rotation=%s"
+msgid "CRTC %d does not support rotation=%d"
+msgstr "CRT %d rotation=%d қолдамайды"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1496
+#: ../libgnome-desktop/gnome-rr-config.c:774
 #, c-format
+#| msgid ""
+#| "output %s does not have the same parameters as another cloned output:\n"
+#| "existing mode = %d, new mode = %d\n"
+#| "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+#| "existing rotation = %s, new rotation = %s"
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
-"existing rotation = %s, new rotation = %s"
+"existing rotation = %d, new rotation = %d"
 msgstr ""
 "%s шығысының баптаулары басқа клондалған баптауларынан өзгеше:\n"
-"режим = %d, жаңа режим = %d\n"
-"координаттар = (%d, %d), жаңа координаттар = (%d, %d)\n"
-"айналдыру = %s, жаңа айналдыру = %s"
+"бар режимі = %d, жаңа режим = %d\n"
+"бар координаттар = (%d, %d), жаңа координаттар = (%d, %d)\n"
+"бар айналдыру = %d, жаңа айналдыру = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1511
+#: ../libgnome-desktop/gnome-rr-config.c:789
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "%s шығысына клондау мүмкін емес"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1680
+#: ../libgnome-desktop/gnome-rr-config.c:915
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "CRT %d контроллері үшін режимдерді тексеру\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1704
+#: ../libgnome-desktop/gnome-rr-config.c:939
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr "CRTC %d: %dx%d@%dГц режимін көру, %dx%d@%dГц шығысымен (%d-талабы)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1751
+#: ../libgnome-desktop/gnome-rr-config.c:986
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -156,7 +82,7 @@ msgstr ""
 "шығыстар үшін CRT контроллерларын орнату сәтсіз:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1755
+#: ../libgnome-desktop/gnome-rr-config.c:990
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -168,7 +94,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1833
+#: ../libgnome-desktop/gnome-rr-config.c:1071
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -179,176 +105,85 @@ msgstr ""
 
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:267
+#: ../libgnome-desktop/gnome-wall-clock.c:270
 msgid "%a %b %e, %R:%S"
 msgstr "%a %b %e, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:268
+#: ../libgnome-desktop/gnome-wall-clock.c:271
 msgid "%a %b %e, %R"
 msgstr "%a %b %e, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:272
+#: ../libgnome-desktop/gnome-wall-clock.c:275
 msgid "%a %R:%S"
 msgstr "%a %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:273
+#: ../libgnome-desktop/gnome-wall-clock.c:276
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:277
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:277
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:283
+#: ../libgnome-desktop/gnome-wall-clock.c:286
 msgid "%a %b %e, %l:%M:%S %p"
 msgstr "%a %b %e, %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:284
+#: ../libgnome-desktop/gnome-wall-clock.c:287
 msgid "%a %b %e, %l:%M %p"
 msgstr "%a %b %e, %l:%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:288
+#: ../libgnome-desktop/gnome-wall-clock.c:291
 msgid "%a %l:%M:%S %p"
 msgstr "%a %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:289
+#: ../libgnome-desktop/gnome-wall-clock.c:292
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:293
+#: ../libgnome-desktop/gnome-wall-clock.c:296
 msgid "%l:%M:%S %p"
 msgstr "%l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:294
+#: ../libgnome-desktop/gnome-wall-clock.c:297
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#~ msgid "About GNOME"
-#~ msgstr "GNOME туралы"
+#~ msgctxt "Monitor vendor"
+#~ msgid "Unknown"
+#~ msgstr "Белгісіз"
 
-#~ msgid "Learn more about GNOME"
-#~ msgstr "GNOME туралы көбірек біліңіз"
+#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
+#~ msgstr "экран ресурстарына қатынау мүмкін емес (CRTC, шығыстар, режимдер)"
 
-#~ msgid "News"
-#~ msgstr "Жаңалықтар"
+#~ msgid "unhandled X error while getting the range of screen sizes"
+#~ msgstr "экранның мүмкін өлшемдер шегін алу кезінде қате орын алды"
 
-#~ msgid "GNOME Library"
-#~ msgstr "GNOME кітапханасы"
+#~ msgid "could not get the range of screen sizes"
+#~ msgstr "экран шеттерінің шегін анықтау мүмкін емес"
 
-#~ msgid "Friends of GNOME"
-#~ msgstr "GNOME достары"
+#~ msgid "RANDR extension is not present"
+#~ msgstr "RANDR кеңейтілуі жоқ"
 
-#~ msgid "Contact"
-#~ msgstr "Контакт"
+#~ msgid "could not get information about output %d"
+#~ msgstr "%d шығысы жөнінде ақпаратты алу мүмкін емес"
 
-#~ msgid "The Mysterious GEGL"
-#~ msgstr "Құпия GEGL"
+#~ msgid "Built-in Display"
+#~ msgstr "Құрамындағы дисплей"
 
-#~ msgid "The Squeaky Rubber GNOME"
-#~ msgstr "Шиқылдайтын резеңке GNOME"
-
-#~ msgid "Wanda The GNOME Fish"
-#~ msgstr "Wanda - GNOME балығы"
-
-#~ msgid "_Open URL"
-#~ msgstr "Сілтемені _ашу"
-
-#~ msgid "_Copy URL"
-#~ msgstr "Сілтемені _көшіру"
-
-#~ msgid "About the GNOME Desktop"
-#~ msgstr "GNOME ортасы туралы"
-
-#~ msgid "%(name)s: %(value)s"
-#~ msgstr "%(name)s: %(value)s"
-
-#~ msgid "Welcome to the GNOME Desktop"
-#~ msgstr "GNOME ортасына қош келдіңіз"
-
-#~ msgid "Brought to you by:"
-#~ msgstr "Осыны қолжетерлік қылған:"
-
-#~ msgid "<b>%(name)s:</b> %(value)s"
-#~ msgstr "<b>%(name)s:</b> %(value)s"
-
-#~ msgid "Version"
-#~ msgstr "Нұсқасы"
-
-#~ msgid "Distributor"
-#~ msgstr "Таратушы"
-
-#~ msgid "Build Date"
-#~ msgstr "Құрастыру уақыты"
-
-#~ msgid "Display information on this GNOME version"
-#~ msgstr "GNOME нұсқасына байланысты ақпаратты көрсету"
-
-#~ msgid ""
-#~ "GNOME also includes a complete development platform for applications "
-#~ "programmers, allowing the creation of powerful and complex applications."
-#~ msgstr ""
-#~ "GNOME құрамында бағдарламаларды жасаушылар үшін дайын кешен бар, оның "
-#~ "көмегімен мүмкіндіктері көп бағдарламаларды жасауға болады."
-
-#~ msgid ""
-#~ "GNOME includes most of what you see on your computer, including the file "
-#~ "manager, web browser, menus, and many applications."
-#~ msgstr ""
-#~ "GNOME ортасының құрамында файлдар басқарушысын, веб-беттерді ашатын "
-#~ "браузерді, мәзір панелін және т.б. қолданбаларды кездестіре аласыз."
-
-#~ msgid ""
-#~ "GNOME is a Free, usable, stable, accessible desktop environment for the "
-#~ "Unix-like family of operating systems."
-#~ msgstr ""
-#~ "GNOME - UNIX-тәріздес операциялық жүйелер үшін еркін, тұрақты, қолдануға "
-#~ "қолайлы жұмыс үстелінің ортасы."
-
-#~ msgid ""
-#~ "GNOME's focus on usability and accessibility, regular release cycle, and "
-#~ "strong corporate backing make it unique among Free Software desktops."
-#~ msgstr ""
-#~ "GNOME қолайлы меңгерілуіне (шектеулі мүмкіндіктері бар адамдарға да) және "
-#~ "тұрақты шығару мерзіміне аса үлкен көңіл бөледі."
-
-#~ msgid ""
-#~ "GNOME's greatest strength is our strong community. Virtually anyone, with "
-#~ "or without coding skills, can contribute to making GNOME better."
-#~ msgstr ""
-#~ "GNOME күші - оның қоғамдастықта. GNOME жобасы ерекшеліктерінен бірі - "
-#~ "бағдарлама құра алмайтын адам да оны көркейтуде өз үлесін қоса алады."
-
-#~ msgid ""
-#~ "Hundreds of people have contributed code to GNOME since it was started in "
-#~ "1997; many more have contributed in other important ways, including "
-#~ "translations, documentation, and quality assurance."
-#~ msgstr ""
-#~ "GNOME жобасы 1997 жылда басталғаннан бері бастапқы кодты жазуға жүздеген "
-#~ "адам өз үлестерін қосқан, бірақ оны аудару мен көркейтуде одан да көп "
-#~ "адам атсалысты."
-
-#~ msgid "Error reading file '%s': %s"
-#~ msgstr "'%s' файлын оқу қатесі: %s"
-
-#~ msgid "Error rewinding file '%s': %s"
-#~ msgstr "'%s' файлын айналдыру қатесі: %s"
-
-#~ msgid "No name"
-#~ msgstr "Аты жоқ"
-
-#~ msgid "File '%s' is not a regular file or directory."
-#~ msgstr "'%s' файлы қалыпты файл не бума емес"
+#~ msgid "%s Display"
+#~ msgstr "%s дисплейі"
