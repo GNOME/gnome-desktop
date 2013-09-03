@@ -48,6 +48,8 @@ struct _GnomeIdleMonitorPrivate
 
 typedef struct
 {
+	int                       ref_count;
+	gboolean                  dead;
 	GnomeIdleMonitor         *monitor;
 	guint			  id;
 	guint                     upstream_id;
@@ -111,8 +113,12 @@ get_next_watch_serial (void)
 }
 
 static void
-idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
+idle_monitor_watch_unref (GnomeIdleMonitorWatch *watch)
 {
+	watch->ref_count--;
+	if (watch->ref_count)
+		return;
+
 	if (watch->notify != NULL)
 		watch->notify (watch->user_data);
 
@@ -122,6 +128,22 @@ idle_monitor_watch_free (GnomeIdleMonitorWatch *watch)
 				     GINT_TO_POINTER (watch->upstream_id));
 
 	g_slice_free (GnomeIdleMonitorWatch, watch);
+}
+
+static GnomeIdleMonitorWatch *
+idle_monitor_watch_ref (GnomeIdleMonitorWatch *watch)
+{
+	g_assert (watch->ref_count > 0);
+
+	watch->ref_count++;
+	return watch;
+}
+
+static void
+idle_monitor_watch_destroy (GnomeIdleMonitorWatch *watch)
+{
+	watch->dead = TRUE;
+	idle_monitor_watch_unref (watch);
 }
 
 static void
@@ -343,7 +365,7 @@ gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
 	monitor->priv->watches = g_hash_table_new_full (NULL,
 							NULL,
 							NULL,
-							(GDestroyNotify)idle_monitor_watch_free);
+							(GDestroyNotify)idle_monitor_watch_destroy);
 	monitor->priv->watches_by_upstream_id = g_hash_table_new (NULL, NULL);
 
 	monitor->priv->cancellable = g_cancellable_new ();
@@ -390,6 +412,7 @@ make_watch (GnomeIdleMonitor          *monitor,
 	GnomeIdleMonitorWatch *watch;
 
 	watch = g_slice_new0 (GnomeIdleMonitorWatch);
+	watch->ref_count = 1;
 	watch->id = get_next_watch_serial ();
 	watch->monitor = monitor;
 	watch->callback = callback;
@@ -415,11 +438,18 @@ on_watch_added (GObject      *object,
 	if (!res) {
 		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 			g_error_free (error);
+			idle_monitor_watch_unref (watch);
 			return;
 		}
 
 		g_warning ("Failed to acquire idle monitor proxy: %s", error->message);
 		g_error_free (error);
+		idle_monitor_watch_unref (watch);
+		return;
+	}
+
+	if (watch->dead) {
+		idle_monitor_watch_unref (watch);
 		return;
 	}
 
@@ -429,6 +459,7 @@ on_watch_added (GObject      *object,
 
 	g_hash_table_insert (monitor->priv->watches_by_upstream_id,
 			     GINT_TO_POINTER (watch->upstream_id), watch);
+	idle_monitor_watch_unref (watch);
 }
 
 static void
@@ -438,7 +469,7 @@ add_idle_watch (GnomeIdleMonitor      *monitor,
 	meta_dbus_idle_monitor_call_add_idle_watch (monitor->priv->proxy,
 						    watch->timeout_msec,
 						    monitor->priv->cancellable,
-						    on_watch_added, watch);
+						    on_watch_added, idle_monitor_watch_ref (watch));
 }
 
 static void
@@ -447,7 +478,7 @@ add_active_watch (GnomeIdleMonitor      *monitor,
 {
 	meta_dbus_idle_monitor_call_add_user_active_watch (monitor->priv->proxy,
 							   monitor->priv->cancellable,
-							   on_watch_added, watch);
+							   on_watch_added, idle_monitor_watch_ref (watch));
 }
 
 /**
