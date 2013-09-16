@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-28 14:43+0000\n"
-"PO-Revision-Date: 2013-07-21 03:01+0100\n"
+"POT-Creation-Date: 2013-09-11 19:11+0000\n"
+"PO-Revision-Date: 2013-09-16 18:44+0100\n"
 "Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -33,135 +33,63 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#. Translators: "Unknown" here is used to identify a monitor for which
-#. * we don't know the vendor. When a vendor is known, the name of the
-#. * vendor is used.
-#: ../libgnome-desktop/display-name.c:107
-msgctxt "Monitor vendor"
-msgid "Unknown"
-msgstr "Unbekannt"
-
 #: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Nicht angegeben"
 
-#. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:452
-#, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr ""
-"Es konnten keine Informationen über den Bildschirm gesammelt werden (CRTCs, "
-"Ausgaben, Auflösungen)"
-
-#: ../libgnome-desktop/gnome-rr.c:472
-#, c-format
-msgid "unhandled X error while getting the range of screen sizes"
-msgstr "Unbehandelter X-Fehler beim Abfragen der Bildschirmgrößen"
-
-#: ../libgnome-desktop/gnome-rr.c:478
-#, c-format
-msgid "could not get the range of screen sizes"
-msgstr "Mögliche Bildschirmgrößen konnten nicht abgefragt werden"
-
-#: ../libgnome-desktop/gnome-rr.c:769
-#, c-format
-msgid "RANDR extension is not present"
-msgstr "Die RANDR-Erweiterung ist nicht vorhanden"
-
-#: ../libgnome-desktop/gnome-rr.c:1580
-#, c-format
-msgid "could not get information about output %d"
-msgstr "Es konnten keine Informationen über die Ausgabe »%d« erfragt werden"
-
-#: ../libgnome-desktop/gnome-rr.c:1764
-msgid "Built-in Display"
-msgstr "Eingebaute Anzeige"
-
-#. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1782
-#, c-format
-msgid "%s Display"
-msgstr "Anzeige %s"
-
-#: ../libgnome-desktop/gnome-rr.c:1789
-msgid "Unknown Display"
-msgstr "Unbekannte Anzeige"
-
-#. Translators: the "position", "size", and "maximum"
-#. * words here are not keywords; please translate them
-#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2234
-#, c-format
-msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: position="
-"(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-msgstr ""
-"Gewählte Position/Größe für CRTC »%d« ist über dem erlaubten Limit: Position="
-"(%d, %d), Größe=(%d, %d), Maximum=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr.c:2268
-#, c-format
-msgid "could not set the configuration for CRTC %d"
-msgstr "Konfiguration für CRTC »%d« konnte nicht angewendet werden"
-
-#: ../libgnome-desktop/gnome-rr.c:2422
-#, c-format
-msgid "could not get information about CRTC %d"
-msgstr "Informationen über CRTC »%d« konnten nicht erfragt werden"
-
-#: ../libgnome-desktop/gnome-rr-config.c:708
-#, c-format
-msgid ""
-"none of the saved display configurations matched the active configuration"
-msgstr "Keine der gespeicherten Bildschirmkonfigurationen gleichen der Aktiven"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1464
+#: ../libgnome-desktop/gnome-rr-config.c:743
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC »%d« unterstützt die Ausgabe »%s« nicht"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1471
+#: ../libgnome-desktop/gnome-rr-config.c:750
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "Ausgabe »%s« unterstützt den Modus »%dx%d@%dHz« nicht"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1482
+#: ../libgnome-desktop/gnome-rr-config.c:761
 #, c-format
-msgid "CRTC %d does not support rotation=%s"
-msgstr "CRTC »%d« unterstützt Drehung um %s nicht"
+#| msgid "CRTC %d does not support rotation=%s"
+msgid "CRTC %d does not support rotation=%d"
+msgstr "CRTC »%d« unterstützt Drehung=%d nicht"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1496
+#: ../libgnome-desktop/gnome-rr-config.c:774
 #, c-format
+#| msgid ""
+#| "output %s does not have the same parameters as another cloned output:\n"
+#| "existing mode = %d, new mode = %d\n"
+#| "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+#| "existing rotation = %s, new rotation = %s"
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
-"existing rotation = %s, new rotation = %s"
+"existing rotation = %d, new rotation = %d"
 msgstr ""
 "Ausgabe »%s« hat nicht die gleichen Parameter wie eine andere duplizierte "
 "Ausgabe:\n"
 "bestehender Modus = %d, neuer Modus = %d\n"
 "bestehende Koordinaten = (%d, %d), neue Koordinaten = (%d, %d)\n"
-"bestehende Drehung = %s, neue Drehung = %s"
+"bestehende Drehung = %d, neue Drehung = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1511
+#: ../libgnome-desktop/gnome-rr-config.c:789
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "Auf Ausgabe »%s« kann nicht dupliziert werden"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1680
+#: ../libgnome-desktop/gnome-rr-config.c:915
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Teste Modi für CRTC »%d«\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1704
+#: ../libgnome-desktop/gnome-rr-config.c:939
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC »%d«: Teste Modus »%dx%d@%dHz« mit Ausgabe bei »%dx%d@%dHz« (Durchlauf "
 "%d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1751
+#: ../libgnome-desktop/gnome-rr-config.c:986
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -170,7 +98,7 @@ msgstr ""
 "CRTCs konnten nicht als Ausgaben festgelegt werden:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1755
+#: ../libgnome-desktop/gnome-rr-config.c:990
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -182,7 +110,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1833
+#: ../libgnome-desktop/gnome-rr-config.c:1071
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -250,6 +178,54 @@ msgstr "%H:%M:%S"
 #: ../libgnome-desktop/gnome-wall-clock.c:297
 msgid "%l:%M %p"
 msgstr "%H:%M"
+
+#~ msgctxt "Monitor vendor"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
+#~ msgstr ""
+#~ "Es konnten keine Informationen über den Bildschirm gesammelt werden "
+#~ "(CRTCs, Ausgaben, Auflösungen)"
+
+#~ msgid "unhandled X error while getting the range of screen sizes"
+#~ msgstr "Unbehandelter X-Fehler beim Abfragen der Bildschirmgrößen"
+
+#~ msgid "could not get the range of screen sizes"
+#~ msgstr "Mögliche Bildschirmgrößen konnten nicht abgefragt werden"
+
+#~ msgid "RANDR extension is not present"
+#~ msgstr "Die RANDR-Erweiterung ist nicht vorhanden"
+
+#~ msgid "could not get information about output %d"
+#~ msgstr "Es konnten keine Informationen über die Ausgabe »%d« erfragt werden"
+
+#~ msgid "Built-in Display"
+#~ msgstr "Eingebaute Anzeige"
+
+#~ msgid "%s Display"
+#~ msgstr "Anzeige %s"
+
+#~ msgid "Unknown Display"
+#~ msgstr "Unbekannte Anzeige"
+
+#~ msgid ""
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+#~ msgstr ""
+#~ "Gewählte Position/Größe für CRTC »%d« ist über dem erlaubten Limit: "
+#~ "Position=(%d, %d), Größe=(%d, %d), Maximum=(%d, %d)"
+
+#~ msgid "could not set the configuration for CRTC %d"
+#~ msgstr "Konfiguration für CRTC »%d« konnte nicht angewendet werden"
+
+#~ msgid "could not get information about CRTC %d"
+#~ msgstr "Informationen über CRTC »%d« konnten nicht erfragt werden"
+
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
+#~ msgstr ""
+#~ "Keine der gespeicherten Bildschirmkonfigurationen gleichen der Aktiven"
 
 #~ msgid "%a %b %e, %R∶%S"
 #~ msgstr "%a, %e. %b, %R:%S"
