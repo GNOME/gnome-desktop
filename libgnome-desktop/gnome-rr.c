@@ -511,8 +511,14 @@ diff_outputs_and_emit_signals (ScreenInfo *old, ScreenInfo *new)
     }
 }
 
+typedef enum {
+    REFRESH_NONE = 0,
+    REFRESH_IGNORE_SERIAL = 1,
+    REFRESH_FORCE_CALLBACK = 2
+} RefreshFlags;
+
 static gboolean
-screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
+screen_update (GnomeRRScreen *screen, RefreshFlags flags, GError **error)
 {
     ScreenInfo *info;
     gboolean changed = FALSE;
@@ -523,17 +529,16 @@ screen_update (GnomeRRScreen *screen, gboolean force_callback, GError **error)
     if (!info)
 	    return FALSE;
 
-    if (info->serial != screen->priv->info->serial)
+    if ((flags & REFRESH_IGNORE_SERIAL) || info->serial != screen->priv->info->serial)
 	    changed = TRUE;
 
     /* work out if any outputs have changed connected state */
     diff_outputs_and_emit_signals (screen->priv->info, info);
 
     screen_info_free (screen->priv->info);
-	
     screen->priv->info = info;
 
-    if (changed || force_callback)
+    if (changed || (flags & REFRESH_FORCE_CALLBACK))
         g_signal_emit (G_OBJECT (screen), screen_signals[SCREEN_CHANGED], 0);
     
     return changed;
@@ -545,7 +550,28 @@ screen_on_monitors_changed (MetaDBusDisplayConfig *proxy,
 {
     GnomeRRScreen *screen = data;
 
-    screen_update (screen, TRUE, NULL);
+    screen_update (screen, REFRESH_FORCE_CALLBACK, NULL);
+}
+
+static void
+name_owner_changed (GObject       *object,
+		    GParamSpec    *pspec,
+		    GnomeRRScreen *self)
+{
+    GError *error;
+    char *new_name_owner;
+
+    new_name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (object));
+    if (new_name_owner == NULL)
+	return;
+
+    error = NULL;
+    if (!screen_update (self, REFRESH_IGNORE_SERIAL | REFRESH_FORCE_CALLBACK, &error))
+	g_warning ("Failed to refresh screen configuration after mutter was restarted: %s",
+		   error->message);
+
+    g_clear_error (&error);
+    g_free (new_name_owner);
 }
 
 static gboolean
@@ -569,6 +595,8 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
     if (!priv->info)
 	return FALSE;
 
+    g_signal_connect_object (priv->proxy, "notify::g-name-owner",
+			     G_CALLBACK (name_owner_changed), self, 0);
     g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
     return TRUE;
@@ -596,6 +624,8 @@ on_proxy_acquired (GObject      *object,
     if (!priv->info)
 	return g_task_return_error (task, error);
 
+    g_signal_connect_object (priv->proxy, "notify::g-name-owner",
+			     G_CALLBACK (name_owner_changed), self, 0);
     g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
     g_task_return_boolean (task, TRUE);
@@ -935,7 +965,7 @@ gnome_rr_screen_refresh (GnomeRRScreen *screen,
 {
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-    return screen_update (screen, FALSE, error);
+    return screen_update (screen, REFRESH_NONE, error);
 }
 
 /**
