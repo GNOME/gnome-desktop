@@ -1,5 +1,6 @@
 CLEANFILES =
 
+EXTRA_DIST =
 noinst_LTLIBRARIES =
 lib_LTLIBRARIES = libgnome-desktop-3.la
 
@@ -22,6 +23,8 @@ libgsystem_srcpath := libgsystem
 libgsystem_cflags = $(GNOME_DESKTOP_CFLAGS)
 libgsystem_libs = $(GNOME_DESKTOP_LIBS)
 include libgsystem/Makefile-libgsystem.am
+
+noinst_LTLIBRARIES += libgsystem.la
 
 introspection_sources = 		\
 	gnome-desktop-thumbnail.c 	\
