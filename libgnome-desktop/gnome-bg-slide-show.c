@@ -682,6 +682,10 @@ parse_file_contents (GnomeBGSlideShow  *self,
 
                 /* no slides, that's not a slideshow */
                 if (len == 0) {
+                        g_set_error_literal (error,
+                                             G_MARKUP_ERROR,
+                                             G_MARKUP_ERROR_INVALID_CONTENT,
+                                             "file is not a slide show since it has no slides");
                         failed = TRUE;
                 /* one slide, there's no transition */
                 } else if (len == 1) {
