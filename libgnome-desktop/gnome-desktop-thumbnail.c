@@ -379,7 +379,10 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     }
 
     if (input_stream == NULL) {
-        input_stream = gs_file_read_noatime (file, NULL, &error);
+        if (g_file_is_native (file))
+            input_stream = gs_file_read_noatime (file, NULL, &error);
+        else
+            input_stream = G_INPUT_STREAM (g_file_read (file, NULL, &error));
         if (input_stream == NULL) {
             g_warning ("Unable to create an input stream for %s: %s", uri, error->message);
             g_clear_error (&error);
