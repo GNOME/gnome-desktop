@@ -4,18 +4,18 @@
 # Fatih Demir <kabalak@kabalak.net>, 2000.
 # Görkem Çetin <gorkem@gelecek.com.tr>, 2002/2003.
 # Baris Cicek <baris@teamforce.name.tr>, 2004, 2008, 2009.
-# Muhammet Kara <muhammet.k@gmail.com>, 2011.
 # Osman Karagöz <osmank3@gmail.com>, 2013.
 # Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2013.
+# Muhammet Kara <muhammetk@gmail.com>, 2011, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-20 06:24+0000\n"
-"PO-Revision-Date: 2013-09-29 19:10+0300\n"
-"Last-Translator: Gökhan Gurbetoğlu <ggurbet@gmail.com>\n"
+"POT-Creation-Date: 2013-09-29 17:15+0000\n"
+"PO-Revision-Date: 2013-09-29 20:20+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -24,132 +24,61 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#. Translators: "Unknown" here is used to identify a monitor for which
-#. * we don't know the vendor. When a vendor is known, the name of the
-#. * vendor is used.
-#: ../libgnome-desktop/display-name.c:107
-msgctxt "Monitor vendor"
-msgid "Unknown"
-msgstr "Bilinmeyen"
-
 #: ../libgnome-desktop/gnome-languages.c:804
 msgid "Unspecified"
 msgstr "Belirtilmemiş"
 
-#. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:452
-#, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr "Ekran kaynakları alınamadı(CRTC'ler, çıkışlar, kipler)"
-
-#: ../libgnome-desktop/gnome-rr.c:472
-#, c-format
-msgid "unhandled X error while getting the range of screen sizes"
-msgstr ""
-"Ekran boyutlarının aralığı alınırken idare edilemeyen bir X hatası oluştu"
-
-#: ../libgnome-desktop/gnome-rr.c:478
-#, c-format
-msgid "could not get the range of screen sizes"
-msgstr "Ekran boyutlarının aralığı alınamadı"
-
-#: ../libgnome-desktop/gnome-rr.c:769
-#, c-format
-msgid "RANDR extension is not present"
-msgstr "RANDR uzantısı mevcut değil"
-
-#: ../libgnome-desktop/gnome-rr.c:1580
-#, c-format
-msgid "could not get information about output %d"
-msgstr "Çıktı hakkında bilgi alınamadı %d"
-
-#: ../libgnome-desktop/gnome-rr.c:1764
-msgid "Built-in Display"
-msgstr "Dahili Ekran"
-
-#. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1782
-#, c-format
-msgid "%s Display"
-msgstr "%s Ekran"
-
-#: ../libgnome-desktop/gnome-rr.c:1789
-msgid "Unknown Display"
-msgstr "Bilinmeyen Ekran"
-
-#. Translators: the "position", "size", and "maximum"
-#. * words here are not keywords; please translate them
-#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2234
-#, c-format
-msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: "
-"position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-msgstr ""
-"CRTC %d için istenilen konum/boyut izin verilen limitlerin dışında: "
-"pozisyon=(%d, %d), boyut=(%d, %d), en fazla=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr.c:2268
-#, c-format
-msgid "could not set the configuration for CRTC %d"
-msgstr "CRTC %d için yapılandırma ayarları tanımlanamadı"
-
-#: ../libgnome-desktop/gnome-rr.c:2422
-#, c-format
-msgid "could not get information about CRTC %d"
-msgstr "CRTC %d hakkında bilgi alınamadı"
-
-#: ../libgnome-desktop/gnome-rr-config.c:708
-#, c-format
-msgid ""
-"none of the saved display configurations matched the active configuration"
-msgstr "Hiçbir kayıtlı ekran yapılandırması aktif yapılandırma ile eşleşmiyor"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1464
+#: ../libgnome-desktop/gnome-rr-config.c:743
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d, %s çıktısını kullanamıyor"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1471
+#: ../libgnome-desktop/gnome-rr-config.c:750
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "%s çıktısı, %dx%d@%dHz kipini desteklemiyor"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1482
+#: ../libgnome-desktop/gnome-rr-config.c:761
 #, c-format
-msgid "CRTC %d does not support rotation=%s"
-msgstr "CRTC %d, rotasyon=%s özelliğini desteklemiyor"
+#| msgid "CRTC %d does not support rotation=%s"
+msgid "CRTC %d does not support rotation=%d"
+msgstr "CRTC %d, rotasyon=%d özelliğini desteklemiyor"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1496
+#: ../libgnome-desktop/gnome-rr-config.c:774
 #, c-format
+#| msgid ""
+#| "output %s does not have the same parameters as another cloned output:\n"
+#| "existing mode = %d, new mode = %d\n"
+#| "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
+#| "existing rotation = %s, new rotation = %s"
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
-"existing rotation = %s, new rotation = %s"
+"existing rotation = %d, new rotation = %d"
 msgstr ""
-"%s çıktısı, birebir kopyalanmış başka bir çıktıyla aynı parametrelere sahip "
+"%s çıktısı, birebir kopyalanmış başka bir çıktıyla aynı değiştirgelere sahip "
 "değil:\n"
 "geçerli kip = %d, yeni kip = %d\n"
 "geçerli koordinatlar = (%d, %d), yeni koordinatlar = (%d, %d)\n"
-"geçerli rotasyon = %s, yeni rotasyon = %s"
+"geçerli rotasyon = %d, yeni rotasyon = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1511
+#: ../libgnome-desktop/gnome-rr-config.c:789
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "%s çıktısına birebir kopyalama yapılamıyor"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1680
+#: ../libgnome-desktop/gnome-rr-config.c:915
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "CRTC %d kipleri deneniyor\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1704
+#: ../libgnome-desktop/gnome-rr-config.c:939
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr "CRTC %d: %dx%d@%dHz kipi, %dx%d@%dHz çıkışıyla (pass %d) deneniyor\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1751
+#: ../libgnome-desktop/gnome-rr-config.c:986
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -158,7 +87,7 @@ msgstr ""
 "CRTC'ler çıktılara atanamadı:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1755
+#: ../libgnome-desktop/gnome-rr-config.c:990
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -170,7 +99,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1833
+#: ../libgnome-desktop/gnome-rr-config.c:1071
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -181,72 +110,128 @@ msgstr ""
 
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:271
-msgid "%a %b %e, %R∶%S"
-msgstr "%e %b %a, %R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:270
+#| msgid "%a %b %e, %R"
+msgid "%a %b %e, %R:%S"
+msgstr "%e %b %a, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:272
+#: ../libgnome-desktop/gnome-wall-clock.c:271
 msgid "%a %b %e, %R"
 msgstr "%e %b %a, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:277
-msgid "%a %R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:275
+#| msgid "%a %R∶%S"
+msgid "%a %R:%S"
 msgstr "%a %R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:278
+#: ../libgnome-desktop/gnome-wall-clock.c:276
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#. The character between %R and %S is U+2236 RATIO
-#: ../libgnome-desktop/gnome-wall-clock.c:283
-msgid "%R∶%S"
-msgstr "%R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:280
+msgid "%R:%S"
+msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:283
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:291
-msgid "%a %b %e, %l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:286
+#| msgid "%a %b %e, %l∶%M∶%S %p"
+msgid "%a %b %e, %l:%M:%S %p"
 msgstr "%e %b %a, %l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:292
-msgid "%a %b %e, %l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:287
+#| msgid "%a %b %e, %l∶%M %p"
+msgid "%a %b %e, %l:%M %p"
 msgstr "%e %b %a, %l∶%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:298
-msgid "%a %l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:291
+#| msgid "%a %l∶%M∶%S %p"
+msgid "%a %l:%M:%S %p"
 msgstr "%a %l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:299
-msgid "%a %l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:292
+#| msgid "%a %l∶%M %p"
+msgid "%a %l:%M %p"
 msgstr "%a %l∶%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#. The Unicode characters are U+2236 RATIO and
-#. U+2009 THIN SPACE
-#: ../libgnome-desktop/gnome-wall-clock.c:305
-msgid "%l∶%M∶%S %p"
-msgstr "%l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:296
+msgid "%l:%M:%S %p"
+msgstr "%l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:306
-msgid "%l∶%M %p"
-msgstr "%l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:297
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#~ msgctxt "Monitor vendor"
+#~ msgid "Unknown"
+#~ msgstr "Bilinmeyen"
+
+#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
+#~ msgstr "Ekran kaynakları alınamadı(CRTC'ler, çıkışlar, kipler)"
+
+#~ msgid "unhandled X error while getting the range of screen sizes"
+#~ msgstr ""
+#~ "Ekran boyutlarının aralığı alınırken idare edilemeyen bir X hatası oluştu"
+
+#~ msgid "could not get the range of screen sizes"
+#~ msgstr "Ekran boyutlarının aralığı alınamadı"
+
+#~ msgid "RANDR extension is not present"
+#~ msgstr "RANDR uzantısı mevcut değil"
+
+#~ msgid "could not get information about output %d"
+#~ msgstr "Çıktı hakkında bilgi alınamadı %d"
+
+#~ msgid "Built-in Display"
+#~ msgstr "Dahili Ekran"
+
+#~ msgid "%s Display"
+#~ msgstr "%s Ekran"
+
+#~ msgid "Unknown Display"
+#~ msgstr "Bilinmeyen Ekran"
+
+#~ msgid ""
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+#~ msgstr ""
+#~ "CRTC %d için istenilen konum/boyut izin verilen limitlerin dışında: "
+#~ "pozisyon=(%d, %d), boyut=(%d, %d), en fazla=(%d, %d)"
+
+#~ msgid "could not set the configuration for CRTC %d"
+#~ msgstr "CRTC %d için yapılandırma ayarları tanımlanamadı"
+
+#~ msgid "could not get information about CRTC %d"
+#~ msgstr "CRTC %d hakkında bilgi alınamadı"
+
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
+#~ msgstr ""
+#~ "Hiçbir kayıtlı ekran yapılandırması aktif yapılandırma ile eşleşmiyor"
+
+#~ msgid "%a %b %e, %R∶%S"
+#~ msgstr "%e %b %a, %R∶%S"
+
+#~ msgid "%R∶%S"
+#~ msgstr "%R∶%S"
+
+#~ msgid "%l∶%M∶%S %p"
+#~ msgstr "%l∶%M∶%S %p"
+
+#~ msgid "%l∶%M %p"
+#~ msgstr "%l∶%M %p"
 
 #~ msgid "Cannot find a terminal, using xterm, even if it may not work"
 #~ msgstr "Terminal bulunamadı.Çalışmıyor olsa bile xterm kullanılıyor."
