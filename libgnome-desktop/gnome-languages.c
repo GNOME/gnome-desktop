@@ -550,10 +550,10 @@ collect_locales_from_localebin (void)
                                 found_locales = TRUE;
                         linep++;
                 }
-                g_strfreev(lines);
+                g_strfreev (lines);
         }
 
-        g_free(output);
+        g_free (output);
 
         return found_locales;
 }
