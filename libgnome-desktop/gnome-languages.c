@@ -470,12 +470,6 @@ add_locale (const char *language_name,
         return TRUE;
 }
 
-struct nameent
-{
-        char    *name;
-        guint32 locrec_offset;
-};
-
 static int
 select_dirs (const struct dirent *dirent)
 {
