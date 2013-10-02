@@ -1227,6 +1227,8 @@ get_filename_for_size (GnomeBG *bg, gint best_width, gint best_height)
 	}
 
         gnome_bg_slide_show_get_current_slide (show, best_width, best_height, NULL, NULL, NULL, &file, NULL);
+        g_object_unref (show);
+
         return file;
 }
 
@@ -2609,6 +2611,7 @@ gboolean
 gnome_bg_changes_with_time (GnomeBG *bg)
 {
 	GnomeBGSlideShow *show;
+	gboolean ret = FALSE;
 
 	g_return_val_if_fail (bg != NULL, FALSE);
 
@@ -2616,10 +2619,12 @@ gnome_bg_changes_with_time (GnomeBG *bg)
 		return FALSE;
 
 	show = get_as_slideshow (bg, bg->filename);
-	if (show)
-		return gnome_bg_slide_show_get_num_slides (show) > 1;
+	if (show) {
+		ret = gnome_bg_slide_show_get_num_slides (show) > 1;
+		g_object_unref (show);
+	}
 
-	return FALSE;
+	return ret;
 }
 
 /**
