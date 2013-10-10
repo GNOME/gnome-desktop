@@ -64,9 +64,6 @@ struct _GnomeDesktopThumbnailFactoryPrivate {
 
 static const char *appname = "gnome-thumbnail-factory";
 
-static void gnome_desktop_thumbnail_factory_init          (GnomeDesktopThumbnailFactory      *factory);
-static void gnome_desktop_thumbnail_factory_class_init    (GnomeDesktopThumbnailFactoryClass *class);
-
 G_DEFINE_TYPE (GnomeDesktopThumbnailFactory,
 	       gnome_desktop_thumbnail_factory,
 	       G_TYPE_OBJECT)
