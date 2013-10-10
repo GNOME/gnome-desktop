@@ -336,7 +336,7 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 {
     gboolean result;
     guchar buffer[LOAD_BUFFER_SIZE];
-    gsize bytes_read;
+    gssize bytes_read;
     GdkPixbufLoader *loader = NULL;
     GdkPixbuf *pixbuf;	
     GdkPixbufAnimation *animation;
