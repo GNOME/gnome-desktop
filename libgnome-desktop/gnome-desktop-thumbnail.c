@@ -440,14 +440,18 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 	}
     }
 
-    if (gdk_pixbuf_loader_close (loader, &error) == FALSE) {
+    if (loader == NULL) {
+        /* This can happen if the above loop was exited due to the
+         * g_input_stream_read() call failing. */
+        result = FALSE;
+    } else if (gdk_pixbuf_loader_close (loader, &error) == FALSE) {
         g_warning ("Error creating thumbnail for %s: %s", uri, error->message);
         g_clear_error (&error);
         result = FALSE;
     }
 
     if (!result) {
-	g_object_unref (G_OBJECT (loader));
+        g_clear_object (&loader);
 	g_input_stream_close (input_stream, NULL, NULL);
 	g_object_unref (input_stream);
 	g_object_unref (file);
