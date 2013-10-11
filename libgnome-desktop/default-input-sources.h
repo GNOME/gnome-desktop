@@ -12,6 +12,7 @@ static DefaultInputSource default_input_sources[] =
   { "ast_ES",   "xkb",          "es+ast" },
   { "az_AZ",    "xkb",          "az" },
   { "be_BY",    "xkb",          "by" },
+  { "bg_BG",    "xkb",          "bg+phonetic" },
   { "bn_IN",    "ibus",         "m17n:bn:inscript" },
   { "cat_ES",   "xkb",          "es+cat" },
   { "cs_CZ",    "xkb",          "cz" },
