@@ -154,6 +154,7 @@ void            gnome_rr_output_get_physical_size  (GnomeRROutput         *outpu
                                                     int                   *height_mm);
 
 gint            gnome_rr_output_get_backlight      (GnomeRROutput         *output);
+gint            gnome_rr_output_get_min_backlight_step(GnomeRROutput      *output);
 gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,
                                                     gint                   value,
                                                     GError                **error);

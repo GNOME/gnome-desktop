@@ -77,6 +77,7 @@ struct GnomeRROutput
     char *              edid_file;
 
     int                 backlight;
+    int                 min_backlight_step;
 
     gboolean            is_primary;
     gboolean            is_presentation;
@@ -1271,6 +1272,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "height-mm", "i", &output->height_mm);
     g_variant_lookup (properties, "display-name", "s", &output->display_name);
     g_variant_lookup (properties, "backlight", "i", &output->backlight);
+    g_variant_lookup (properties, "min-backlight-step", "i", &output->min_backlight_step);
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
     g_variant_lookup (properties, "presentation", "b", &output->is_presentation);
 
@@ -1443,6 +1445,19 @@ gnome_rr_output_get_backlight (GnomeRROutput *output)
     g_return_val_if_fail (output != NULL, -1);
 
     return output->backlight;
+}
+
+/**
+ * gnome_rr_output_get_min_backlight_step:
+ *
+ * Returns: The minimum backlight step available in percent
+ */
+int
+gnome_rr_output_get_min_backlight_step (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, -1);
+
+    return output->min_backlight_step;
 }
 
 /**
