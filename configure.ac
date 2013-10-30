@@ -1,5 +1,5 @@
 m4_define(gnome_platform, 3)
-m4_define(gnome_minor, 10)
+m4_define(gnome_minor, 11)
 m4_define(gnome_micro, 1)
 dnl gnome_sub is an optional sub-version which will not be advertised to the user
 dnl It allows to release a 2.30.1.1 which is just a better 2.30.1
@@ -28,7 +28,7 @@ AC_CONFIG_MACRO_DIR([m4])
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
 
-LT_VERSION=8:0:0
+LT_VERSION=9:0:1
 AC_SUBST(LT_VERSION)
 
 LT_PREREQ([2.2.6])
