@@ -30,13 +30,14 @@
 # kostas: 12Nov2003, fixes
 # Μάριος Ζηντίλης <m.zindilis@dmajor.org>, 2010.
 # Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2012, 2013.
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-04-19 20:35+0000\n"
-"PO-Revision-Date: 2013-04-24 17:54+0300\n"
+"POT-Creation-Date: 2013-10-21 21:26+0000\n"
+"PO-Revision-Date: 2013-11-06 08:17+0300\n"
 "Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
 "Language-Team: team@gnome.gr\n"
 "Language: el\n"
@@ -47,137 +48,57 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#. Translators: "Unknown" here is used to identify a monitor for which
-#. * we don't know the vendor. When a vendor is known, the name of the
-#. * vendor is used.
-#: ../libgnome-desktop/display-name.c:107
-msgctxt "Monitor vendor"
-msgid "Unknown"
-msgstr "Άγνωστος"
-
-#: ../libgnome-desktop/gnome-languages.c:804
+#: ../libgnome-desktop/gnome-languages.c:718
 msgid "Unspecified"
 msgstr "Ακαθόριστο"
 
-#. Translators: a CRTC is a CRT Controller (this is X terminology).
-#: ../libgnome-desktop/gnome-rr.c:452
-#, c-format
-msgid "could not get the screen resources (CRTCs, outputs, modes)"
-msgstr "αδυναμία λήψης των πηγών οθόνης (CRTCs, έξοδοι, λειτουργίες)"
-
-#: ../libgnome-desktop/gnome-rr.c:472
-#, c-format
-msgid "unhandled X error while getting the range of screen sizes"
-msgstr "Απρόσμενο σφάλμα X κατά τη λήψη του εύρους των μεγεθών οθόνης"
-
-#: ../libgnome-desktop/gnome-rr.c:478
-#, c-format
-msgid "could not get the range of screen sizes"
-msgstr "αδύνατη η λήψη του εύρους των μεγεθών οθόνης"
-
-#: ../libgnome-desktop/gnome-rr.c:769
-#, c-format
-msgid "RANDR extension is not present"
-msgstr "Δεν υπάρχει η επέκταση RANDR"
-
-#: ../libgnome-desktop/gnome-rr.c:1580
-#, c-format
-msgid "could not get information about output %d"
-msgstr "Αδυναμία εύρεσης πληροφοριών για την έξοδο %d"
-
-#: ../libgnome-desktop/gnome-rr.c:1764
-msgid "Built-in Display"
-msgstr "Ενσωματωμένη οθόνη"
-
-#. Translators: %s is the size of the monitor in inches
-#: ../libgnome-desktop/gnome-rr.c:1782
-#, c-format
-msgid "%s Display"
-msgstr "%s οθόνη"
-
-#: ../libgnome-desktop/gnome-rr.c:1789
-#| msgctxt "Monitor vendor"
-#| msgid "Unknown"
-msgid "Unknown Display"
-msgstr "Άγνωστη οθόνη"
-
-#. Translators: the "position", "size", and "maximum"
-#. * words here are not keywords; please translate them
-#. * as usual.  A CRTC is a CRT Controller (this is X terminology)
-#: ../libgnome-desktop/gnome-rr.c:2234
-#, c-format
-msgid ""
-"requested position/size for CRTC %d is outside the allowed limit: position="
-"(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-msgstr ""
-"η ζητούμενη θέση/μέγεθος για το CRTC %d είναι έξω από το επιτρεπτό όριο. "
-"θέση=(%d, %d), μέγεθος=(%d, %d), μέγιστο=(%d, %d)"
-
-#: ../libgnome-desktop/gnome-rr.c:2270
-#, c-format
-msgid "could not set the configuration for CRTC %d"
-msgstr "αδυναμία ορισμού της ρύθμισης για το CRTC %d"
-
-#: ../libgnome-desktop/gnome-rr.c:2421
-#, c-format
-msgid "could not get information about CRTC %d"
-msgstr "αδυναμία εύρεσης πληροφοριών για το CRTC %d"
-
-#: ../libgnome-desktop/gnome-rr-config.c:708
-#, c-format
-msgid ""
-"none of the saved display configurations matched the active configuration"
-msgstr ""
-"καμία από τις αποθηκευμένες ρυθμίσεις οθόνης δεν ταίριαζε με την ενεργή "
-"ρύθμιση"
-
-#: ../libgnome-desktop/gnome-rr-config.c:1464
+#: ../libgnome-desktop/gnome-rr-config.c:743
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "Το CRTC %d δεν μπορεί να οδηγήσει την έξοδο %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1471
+#: ../libgnome-desktop/gnome-rr-config.c:750
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "η έξοδος %s δεν υποστηρίζει την κατάσταση λειτουργίας %dx%d@%dHz"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1482
+#: ../libgnome-desktop/gnome-rr-config.c:761
 #, c-format
-msgid "CRTC %d does not support rotation=%s"
-msgstr "Το CRTC %d δεν υποστηρίζει περιστροφή=%s"
+msgid "CRTC %d does not support rotation=%d"
+msgstr "Το CRTC %d δεν υποστηρίζει περιστροφή=%d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1496
+#: ../libgnome-desktop/gnome-rr-config.c:774
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
 "existing mode = %d, new mode = %d\n"
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
-"existing rotation = %s, new rotation = %s"
+"existing rotation = %d, new rotation = %d"
 msgstr ""
 "η έξοδος %s δεν έχει τις ίδιες παραμέτρους όπως μια άλλη κλωνοποιημένη "
 "έξοδος:\n"
 "υπάρχουσα κατάσταση = %d, νέα κατάσταση = %d\n"
 "υπάρχουσες συντεταγμένες =  (%d, %d), νέες συντεταγμένες = (%d, %d)\n"
-"υπάρχουσα περιστροφή = %s, νέα περιστροφή = %s"
+"υπάρχουσα περιστροφή = %d, νέα περιστροφή = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1511
+#: ../libgnome-desktop/gnome-rr-config.c:789
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "αδυναμία κλωνοποίησης στην έξοδο %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1680
+#: ../libgnome-desktop/gnome-rr-config.c:915
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Δοκιμή καταστάσεων λειτουργίας για το CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1704
+#: ../libgnome-desktop/gnome-rr-config.c:939
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "Το CRTC %d: δοκιμάζει την κατάσταση λειτουργίας %dx%d@%dHz με την έξοδο στα "
 "%dx%d@%dHz (επιτυχής %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1751
+#: ../libgnome-desktop/gnome-rr-config.c:986
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -186,7 +107,7 @@ msgstr ""
 "αδύνατη η αντιστοίχιση CRTC σε εξόδους\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1755
+#: ../libgnome-desktop/gnome-rr-config.c:990
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -199,7 +120,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1833
+#: ../libgnome-desktop/gnome-rr-config.c:1071
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -210,69 +131,112 @@ msgstr ""
 
 #. Translators: This is the time format with full date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:267
-#| msgid "%a %b %e, %R"
+#: ../libgnome-desktop/gnome-wall-clock.c:270
 msgid "%a %b %e, %R:%S"
 msgstr "%a %e %b, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:268
+#: ../libgnome-desktop/gnome-wall-clock.c:271
 msgid "%a %b %e, %R"
 msgstr "%a %e %b, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:272
-#| msgid "%a %R∶%S"
+#: ../libgnome-desktop/gnome-wall-clock.c:275
 msgid "%a %R:%S"
 msgstr "%a %R∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:273
+#: ../libgnome-desktop/gnome-wall-clock.c:276
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:277
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:277
+#: ../libgnome-desktop/gnome-wall-clock.c:280
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:283
-#| msgid "%a %b %e, %l∶%M∶%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:286
 msgid "%a %b %e, %l:%M:%S %p"
 msgstr "%a %e %b, %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:284
-#| msgid "%a %b %e, %l∶%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:287
 msgid "%a %b %e, %l:%M %p"
 msgstr "%a %e %b, %l:%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:288
-#| msgid "%l:%M:%S %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:291
 msgid "%a %l:%M:%S %p"
 msgstr "%a %l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:289
-#| msgid "%l:%M %p"
+#: ../libgnome-desktop/gnome-wall-clock.c:292
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:293
+#: ../libgnome-desktop/gnome-wall-clock.c:296
 msgid "%l:%M:%S %p"
 msgstr "%l:%M:%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:294
+#: ../libgnome-desktop/gnome-wall-clock.c:297
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
+
+#~ msgctxt "Monitor vendor"
+#~ msgid "Unknown"
+#~ msgstr "Άγνωστος"
+
+#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
+#~ msgstr "αδυναμία λήψης των πηγών οθόνης (CRTCs, έξοδοι, λειτουργίες)"
+
+#~ msgid "unhandled X error while getting the range of screen sizes"
+#~ msgstr "Απρόσμενο σφάλμα X κατά τη λήψη του εύρους των μεγεθών οθόνης"
+
+#~ msgid "could not get the range of screen sizes"
+#~ msgstr "αδύνατη η λήψη του εύρους των μεγεθών οθόνης"
+
+#~ msgid "RANDR extension is not present"
+#~ msgstr "Δεν υπάρχει η επέκταση RANDR"
+
+#~ msgid "could not get information about output %d"
+#~ msgstr "Αδυναμία εύρεσης πληροφοριών για την έξοδο %d"
+
+#~ msgid "Built-in Display"
+#~ msgstr "Ενσωματωμένη οθόνη"
+
+#~ msgid "%s Display"
+#~ msgstr "%s οθόνη"
+
+#~| msgctxt "Monitor vendor"
+#~| msgid "Unknown"
+#~ msgid "Unknown Display"
+#~ msgstr "Άγνωστη οθόνη"
+
+#~ msgid ""
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+#~ msgstr ""
+#~ "η ζητούμενη θέση/μέγεθος για το CRTC %d είναι έξω από το επιτρεπτό όριο. "
+#~ "θέση=(%d, %d), μέγεθος=(%d, %d), μέγιστο=(%d, %d)"
+
+#~ msgid "could not set the configuration for CRTC %d"
+#~ msgstr "αδυναμία ορισμού της ρύθμισης για το CRTC %d"
+
+#~ msgid "could not get information about CRTC %d"
+#~ msgstr "αδυναμία εύρεσης πληροφοριών για το CRTC %d"
+
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
+#~ msgstr ""
+#~ "καμία από τις αποθηκευμένες ρυθμίσεις οθόνης δεν ταίριαζε με την ενεργή "
+#~ "ρύθμιση"
 
 #~ msgid "Cannot find a terminal, using xterm, even if it may not work"
 #~ msgstr ""
