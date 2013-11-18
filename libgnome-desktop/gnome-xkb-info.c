@@ -47,6 +47,8 @@ struct _Layout
   gchar *description;
   gboolean is_variant;
   const Layout *main_layout;
+  GSList *iso639Ids;
+  GSList *iso3166Ids;
 };
 
 typedef struct _XkbOption XkbOption;
@@ -95,6 +97,8 @@ free_layout (gpointer data)
   g_free (layout->xkb_name);
   g_free (layout->short_desc);
   g_free (layout->description);
+  g_slist_free_full (layout->iso639Ids, g_free);
+  g_slist_free_full (layout->iso3166Ids, g_free);
   g_slice_free (Layout, layout);
 }
 
@@ -301,6 +305,60 @@ add_layout_to_table (GHashTable  *table,
 }
 
 static void
+add_layout_to_locale_tables (Layout     *layout,
+                             GHashTable *layouts_by_language,
+                             GHashTable *layouts_by_country)
+{
+  GSList *l, *lang_codes, *country_codes;
+  gchar *language, *country;
+
+  lang_codes = layout->iso639Ids;
+  country_codes = layout->iso3166Ids;
+
+  if (layout->is_variant)
+    {
+      if (!lang_codes)
+        lang_codes = layout->main_layout->iso639Ids;
+      if (!country_codes)
+        country_codes = layout->main_layout->iso3166Ids;
+    }
+
+  for (l = lang_codes; l; l = l->next)
+    {
+      language = gnome_get_language_from_code ((gchar *) l->data, NULL);
+      if (language)
+        {
+          add_layout_to_table (layouts_by_language, language, layout);
+          g_free (language);
+        }
+    }
+
+  for (l = country_codes; l; l = l->next)
+    {
+      country = gnome_get_country_from_code ((gchar *) l->data, NULL);
+      if (country)
+        {
+          add_layout_to_table (layouts_by_country, country, layout);
+          g_free (country);
+        }
+    }
+}
+
+static void
+add_iso639 (Layout *layout,
+            gchar  *id)
+{
+  layout->iso639Ids = g_slist_prepend (layout->iso639Ids, id);
+}
+
+static void
+add_iso3166 (Layout *layout,
+             gchar  *id)
+{
+  layout->iso3166Ids = g_slist_prepend (layout->iso3166Ids, id);
+}
+
+static void
 parse_end_element (GMarkupParseContext  *context,
                    const gchar          *element_name,
                    gpointer              data,
@@ -328,6 +386,9 @@ parse_end_element (GMarkupParseContext  *context,
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_layout->id,
                             priv->current_parser_layout);
+      add_layout_to_locale_tables (priv->current_parser_layout,
+                                   priv->layouts_by_language,
+                                   priv->layouts_by_country);
       priv->current_parser_layout = NULL;
     }
   else if (strcmp (element_name, "variant") == 0)
@@ -347,12 +408,13 @@ parse_end_element (GMarkupParseContext  *context,
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_variant->id,
                             priv->current_parser_variant);
+      add_layout_to_locale_tables (priv->current_parser_variant,
+                                   priv->layouts_by_language,
+                                   priv->layouts_by_country);
       priv->current_parser_variant = NULL;
     }
   else if (strcmp (element_name, "iso639Id") == 0)
     {
-      gchar *language;
-
       if (!priv->current_parser_iso639Id)
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
@@ -360,23 +422,15 @@ parse_end_element (GMarkupParseContext  *context,
           return;
         }
 
-      language = gnome_get_language_from_code (priv->current_parser_iso639Id, NULL);
-      if (language)
-        {
-          if (priv->current_parser_variant)
-            add_layout_to_table (priv->layouts_by_language, language, priv->current_parser_variant);
-          else if (priv->current_parser_layout)
-            add_layout_to_table (priv->layouts_by_language, language, priv->current_parser_layout);
+      if (priv->current_parser_variant)
+        add_iso639 (priv->current_parser_variant, priv->current_parser_iso639Id);
+      else if (priv->current_parser_layout)
+        add_iso639 (priv->current_parser_layout, priv->current_parser_iso639Id);
 
-          g_free (language);
-        }
-
-      g_clear_pointer (&priv->current_parser_iso639Id, g_free);
+      priv->current_parser_iso639Id = NULL;
     }
   else if (strcmp (element_name, "iso3166Id") == 0)
     {
-      gchar *country;
-
       if (!priv->current_parser_iso3166Id)
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
@@ -384,18 +438,12 @@ parse_end_element (GMarkupParseContext  *context,
           return;
         }
 
-      country = gnome_get_country_from_code (priv->current_parser_iso3166Id, NULL);
-      if (country)
-        {
-          if (priv->current_parser_variant)
-            add_layout_to_table (priv->layouts_by_country, country, priv->current_parser_variant);
-          else if (priv->current_parser_layout)
-            add_layout_to_table (priv->layouts_by_country, country, priv->current_parser_layout);
+      if (priv->current_parser_variant)
+        add_iso3166 (priv->current_parser_variant, priv->current_parser_iso3166Id);
+      else if (priv->current_parser_layout)
+        add_iso3166 (priv->current_parser_layout, priv->current_parser_iso3166Id);
 
-          g_free (country);
-        }
-
-      g_clear_pointer (&priv->current_parser_iso3166Id, g_free);
+      priv->current_parser_iso3166Id = NULL;
     }
   else if (strcmp (element_name, "group") == 0)
     {
