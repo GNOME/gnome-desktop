@@ -44,11 +44,15 @@ main (int argc, char *argv[])
 	}
 	outputs = gnome_rr_screen_list_outputs (screen);
 	for (i = 0; outputs[i] != NULL; i++) {
+		int width_mm, height_mm;
+
 		g_print ("[%s]\n", gnome_rr_output_get_name (outputs[i]));
 		g_print ("\tconnected: %i\n", 1);
 		g_print ("\tbuilt-in: %i\n", gnome_rr_output_is_builtin_display (outputs[i]));
 		g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (outputs[i]));
 		g_print ("\tid: %i\n", gnome_rr_output_get_id (outputs[i]));
+		gnome_rr_output_get_physical_size (outputs[i], &width_mm, &height_mm);
+		g_print ("\tdimensions: %ix%i", width_mm, height_mm);
 
 		/* get EDID (first try) */
                 result = gnome_rr_output_get_edid_data (outputs[i], &len);
