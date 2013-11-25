@@ -40,10 +40,12 @@ struct _GnomeIdleMonitorPrivate
 {
 	GCancellable        *cancellable;
 	MetaDBusIdleMonitor *proxy;
+	MetaDBusObjectManagerClient *om;
 	int                  name_watch_id;
 	GHashTable          *watches;
 	GHashTable          *watches_by_upstream_id;
 	GdkDevice           *device;
+	gchar               *path;
 };
 
 typedef struct
@@ -163,8 +165,10 @@ gnome_idle_monitor_dispose (GObject *object)
 	}
 
 	g_clear_object (&monitor->priv->proxy);
+	g_clear_object (&monitor->priv->om);
 	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
 	g_clear_object (&monitor->priv->device);
+	g_clear_pointer (&monitor->priv->path, g_free);
 
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
 }
@@ -198,6 +202,15 @@ gnome_idle_monitor_set_property (GObject      *object,
 	{
 	case PROP_DEVICE:
 		monitor->priv->device = g_value_dup_object (value);
+
+		g_free (monitor->priv->path);
+		if (monitor->priv->device) {
+			monitor->priv->path = g_strdup_printf ("/org/gnome/Mutter/IdleMonitor/Device%d",
+							       gdk_x11_device_get_id (monitor->priv->device));
+		} else {
+			monitor->priv->path = g_strdup ("/org/gnome/Mutter/IdleMonitor/Core");
+		}
+
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -220,57 +233,74 @@ add_known_watch (gpointer key,
 }
 
 static void
-on_proxy_acquired (GObject      *object,
-		   GAsyncResult *result,
-		   gpointer      user_data)
+connect_proxy (GDBusObject	*object,
+	       GnomeIdleMonitor	*monitor)
 {
-	GnomeIdleMonitor *monitor = user_data;
-	GError *error;
 	MetaDBusIdleMonitor *proxy;
 
-	error = NULL;
-	proxy = meta_dbus_idle_monitor_proxy_new_finish (result, &error);
+	proxy = meta_dbus_object_get_idle_monitor (META_DBUS_OBJECT (object));
 	if (!proxy) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-
-		g_warning ("Failed to acquire idle monitor proxy: %s", error->message);
-		g_error_free (error);
+		g_critical ("Unable to get idle monitor from object at %s",
+			    g_dbus_object_get_object_path (object));
 		return;
 	}
 
 	monitor->priv->proxy = proxy;
-
 	g_signal_connect_object (proxy, "watch-fired", G_CALLBACK (on_watch_fired), monitor, 0);
 	g_hash_table_foreach (monitor->priv->watches, add_known_watch, monitor);
 }
 
 static void
-connect_proxy (GnomeIdleMonitor *monitor,
-	       GDBusConnection  *connection,
-	       const char       *unique_name)
+on_object_added (GDBusObjectManager	*manager,
+		 GDBusObject		*object,
+		 gpointer		 user_data)
 {
-	char *path;
-	int device_id;
+	GnomeIdleMonitor *monitor = user_data;
 
-	if (monitor->priv->device) {
-		/* FIXME! Gdk! WTF? */
-		device_id = gdk_x11_device_get_id (monitor->priv->device);
-	path = g_strdup_printf ("/org/gnome/Mutter/IdleMonitor/Device%d", device_id);
-	} else {
-		path = g_strdup ("/org/gnome/Mutter/IdleMonitor/Core");
+	if (!g_str_equal (monitor->priv->path, g_dbus_object_get_object_path (object)))
+		return;
+
+	connect_proxy (object, monitor);
+
+	g_signal_handlers_disconnect_by_func (manager, on_object_added, user_data);
+}
+
+static void
+get_proxy (GnomeIdleMonitor *monitor)
+{
+	GDBusObject *object;
+
+	object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (monitor->priv->om),
+						   monitor->priv->path);
+	if (object) {
+		connect_proxy (object, monitor);
+		g_object_unref (object);
+		return;
 	}
 
-	meta_dbus_idle_monitor_proxy_new (connection,
-					  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
-					  unique_name, path,
-					  monitor->priv->cancellable,
-					  on_proxy_acquired,
-					  monitor);
+	g_signal_connect_object (monitor->priv->om, "object-added",
+				 G_CALLBACK (on_object_added), monitor, 0);
+}
 
-	g_free (path);
+static void
+on_object_manager_ready (GObject	*source,
+			 GAsyncResult	*res,
+			 gpointer	 user_data)
+{
+	GnomeIdleMonitor *monitor = user_data;
+	GDBusObjectManager *om;
+	GError *error = NULL;
+
+	om = meta_dbus_object_manager_client_new_finish (res, &error);
+	if (!om) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			g_warning ("Failed to acquire idle monitor object manager: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	monitor->priv->om = META_DBUS_OBJECT_MANAGER_CLIENT (om);
+	get_proxy (monitor);
 }
 
 static void
@@ -281,7 +311,13 @@ on_name_appeared (GDBusConnection *connection,
 {
 	GnomeIdleMonitor *monitor = user_data;
 
-	connect_proxy (monitor, connection, name_owner);
+	meta_dbus_object_manager_client_new (connection,
+					     G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
+					     name_owner,
+					     "/org/gnome/Mutter/IdleMonitor",
+					     monitor->priv->cancellable,
+					     on_object_manager_ready,
+					     monitor);
 }
 
 static void
@@ -305,6 +341,7 @@ on_name_vanished (GDBusConnection *connection,
 
 	g_hash_table_foreach (monitor->priv->watches, clear_watch, monitor);
 	g_clear_object (&monitor->priv->proxy);
+	g_clear_object (&monitor->priv->om);
 }
 
 static gboolean
