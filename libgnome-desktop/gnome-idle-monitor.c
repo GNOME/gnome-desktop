@@ -167,6 +167,7 @@ gnome_idle_monitor_dispose (GObject *object)
 	g_clear_object (&monitor->priv->proxy);
 	g_clear_object (&monitor->priv->om);
 	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
+	g_clear_pointer (&monitor->priv->watches_by_upstream_id, g_hash_table_destroy);
 	g_clear_object (&monitor->priv->device);
 	g_clear_pointer (&monitor->priv->path, g_free);
 
