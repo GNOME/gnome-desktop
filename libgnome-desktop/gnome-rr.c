@@ -2148,8 +2148,11 @@ gnome_rr_screen_set_primary_output (GnomeRRScreen *screen,
     else
         id = None;
 
-    if (SERVERS_RANDR_IS_AT_LEAST_1_3 (priv))
+    if (SERVERS_RANDR_IS_AT_LEAST_1_3 (priv)) {
+        gdk_error_trap_push ();
         XRRSetOutputPrimary (priv->xdisplay, priv->xroot, id);
+        gdk_error_trap_pop_ignored ();
+    }
 }
 
 /* GnomeRRCrtc */
