@@ -51,7 +51,6 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-rr-private.h		\
 	default-input-sources.h		\
 	edid.h				\
-	locarchive.h			\
 	meta-xrandr-shared.h
 
 dbus_xrandr_built_sources = meta-dbus-xrandr.c meta-dbus-xrandr.h
