@@ -73,6 +73,7 @@ void gnome_rr_output_info_set_refresh_rate (GnomeRROutputInfo *self, int rate);
 
 GnomeRRRotation gnome_rr_output_info_get_rotation (GnomeRROutputInfo *self);
 void            gnome_rr_output_info_set_rotation (GnomeRROutputInfo *self, GnomeRRRotation rotation);
+gboolean        gnome_rr_output_info_supports_rotation (GnomeRROutputInfo *self, GnomeRRRotation rotation);
 
 gboolean gnome_rr_output_info_is_connected     (GnomeRROutputInfo *self);
 const char *gnome_rr_output_info_get_vendor    (GnomeRROutputInfo *self);

@@ -154,6 +154,13 @@ void gnome_rr_output_info_set_rotation (GnomeRROutputInfo *self, GnomeRRRotation
     self->priv->rotation = rotation;
 }
 
+gboolean gnome_rr_output_info_supports_rotation (GnomeRROutputInfo *self, GnomeRRRotation rotation)
+{
+    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), FALSE);
+
+    return (self->priv->available_rotations & rotation);
+}
+
 /**
  * gnome_rr_output_info_is_connected:
  *

@@ -62,6 +62,7 @@ struct _GnomeRROutputInfoPrivate
     int			x;
     int			y;
     GnomeRRRotation	rotation;
+    GnomeRRRotation	available_rotations;
 
     gboolean		connected;
     char *		vendor;

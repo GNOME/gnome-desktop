@@ -193,6 +193,7 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 		output->priv->height = gnome_rr_mode_get_height (mode);
 		output->priv->rate = gnome_rr_mode_get_freq (mode);
 		output->priv->rotation = gnome_rr_crtc_get_current_rotation (crtc);
+                output->priv->available_rotations = gnome_rr_crtc_get_rotations (crtc);
 
 		if (output->priv->x == 0 && output->priv->y == 0) {
 		    if (clone_width == -1) {
