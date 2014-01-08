@@ -1300,6 +1300,7 @@ output_copy (const GnomeRROutput *from)
     output->id = from->id;
     output->info = from->info;
     output->name = g_strdup (from->name);
+    output->display_name = g_strdup (from->display_name);
     output->vendor = g_strdup (from->vendor);
     output->product = g_strdup (from->product);
     output->serial = g_strdup (from->serial);
