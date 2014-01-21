@@ -229,12 +229,32 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 	g_type_class_add_private (gobject_class, sizeof (GnomeWallClockPrivate));
 }
 
+/* Some of our translations use the ratio symbol which isn't
+ * convertible to non-UTF-8 locale encodings.
+ */
+static char *
+filter_ratio_for_locale (const char *input)
+{
+	char **pieces = NULL;
+	char *output = NULL;
+
+	if (g_get_charset (NULL)) /* UTF-8 is ok */
+		return g_strdup (input);
+
+	/* else, we'll replace ratio with a plain colon */
+	pieces = g_strsplit (input, "∶", -1);
+	output = g_strjoinv (":", pieces);
+	g_strfreev (pieces);
+	return output;
+}
+
 static gboolean
 update_clock (gpointer data)
 {
 	GnomeWallClock   *self = data;
 	GDesktopClockFormat clock_format;
 	const char *format_string;
+	char *safe_format_string;
 	gboolean show_full_date;
 	gboolean show_weekday;
 	gboolean show_seconds;
@@ -298,12 +318,15 @@ update_clock (gpointer data)
 		}
 	}
 
+	safe_format_string = filter_ratio_for_locale (format_string);
+
 	g_free (self->priv->clock_string);
-	self->priv->clock_string = g_date_time_format (now, format_string);
+	self->priv->clock_string = g_date_time_format (now, safe_format_string);
 
 	g_date_time_unref (now);
 	g_date_time_unref (expiry);
-      
+	g_free (safe_format_string);
+
 	g_object_notify ((GObject*)self, "clock");
 
 	return FALSE;
