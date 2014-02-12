@@ -30,9 +30,6 @@
 
 #include <glib-object.h>
 
-#include <X11/XKBlib.h>
-#include <X11/extensions/XKBrules.h>
-
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_XKB_INFO            (gnome_xkb_info_get_type ())
@@ -79,10 +76,6 @@ GList          *gnome_xkb_info_get_layouts_for_language         (GnomeXkbInfo *s
                                                                  const gchar  *language_code);
 GList          *gnome_xkb_info_get_layouts_for_country          (GnomeXkbInfo *self,
                                                                  const gchar  *country_code);
-
-void            gnome_xkb_info_get_var_defs                     (gchar            **rules,
-                                                                 XkbRF_VarDefsRec **var_defs);
-void            gnome_xkb_info_free_var_defs                    (XkbRF_VarDefsRec  *var_defs);
 
 G_END_DECLS
 

@@ -166,8 +166,7 @@ gnome_rr_debug_LDADD =		\
 noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail test-idle-monitor test-languages
 test_xkb_info_LDADD =		\
 	$(GNOME_DESKTOP_LIBS)	\
-	$(lib_LTLIBRARIES)	\
-	$(XLIB_LIBS)
+	$(lib_LTLIBRARIES)
 
 test_pnp_ids_LDADD = $(test_xkb_info_LDADD)
 

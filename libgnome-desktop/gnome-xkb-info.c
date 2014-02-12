@@ -25,9 +25,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <X11/XKBlib.h>
-#include <X11/extensions/XKBrules.h>
-
 #include <gdk/gdkx.h>
 
 #include <glib/gi18n-lib.h>
@@ -39,12 +36,6 @@
 
 #ifndef XKB_RULES_FILE
 #define XKB_RULES_FILE "evdev"
-#endif
-#ifndef XKB_LAYOUT
-#define XKB_LAYOUT "us"
-#endif
-#ifndef XKB_MODEL
-#define XKB_MODEL "pc105+inet"
 #endif
 
 typedef struct _Layout Layout;
@@ -132,88 +123,13 @@ free_option_group (gpointer data)
   g_slice_free (XkbOptionGroup, group);
 }
 
-/**
- * gnome_xkb_info_get_var_defs: (skip)
- * @rules: (out) (transfer full): location to store the rules file
- * path. Use g_free() when it's no longer needed
- * @var_defs: (out) (transfer full): location to store a
- * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
- * free it
- *
- * Gets both the XKB rules file path and the current XKB parameters in
- * use by the X server.
- *
- * Since: 3.6
- */
-void
-gnome_xkb_info_get_var_defs (gchar            **rules,
-                             XkbRF_VarDefsRec **var_defs)
-{
-  Display *display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-  char *tmp;
-
-  g_return_if_fail (rules != NULL);
-  g_return_if_fail (var_defs != NULL);
-
-  *rules = NULL;
-  *var_defs = g_new0 (XkbRF_VarDefsRec, 1);
-
-  gdk_error_trap_push ();
-
-  /* Get it from the X property or fallback on defaults */
-  if (!XkbRF_GetNamesProp (display, rules, *var_defs) || !*rules)
-    {
-      *rules = strdup (XKB_RULES_FILE);
-      (*var_defs)->model = strdup (XKB_MODEL);
-      (*var_defs)->layout = strdup (XKB_LAYOUT);
-      (*var_defs)->variant = NULL;
-      (*var_defs)->options = NULL;
-    }
-
-  gdk_error_trap_pop_ignored ();
-
-  tmp = *rules;
-
-  if (*rules[0] == '/')
-    *rules = g_strdup (*rules);
-  else
-    *rules = g_build_filename (XKB_BASE, "rules", *rules, NULL);
-
-  free (tmp);
-}
-
-/**
- * gnome_xkb_info_free_var_defs: (skip)
- * @var_defs: #XkbRF_VarDefsRec instance to free
- *
- * Frees an #XkbRF_VarDefsRec instance allocated by
- * gnome_xkb_info_get_var_defs().
- *
- * Since: 3.6
- */
-void
-gnome_xkb_info_free_var_defs (XkbRF_VarDefsRec *var_defs)
-{
-  g_return_if_fail (var_defs != NULL);
-
-  free (var_defs->model);
-  free (var_defs->layout);
-  free (var_defs->variant);
-  free (var_defs->options);
-
-  g_free (var_defs);
-}
-
 static gchar *
 get_xml_rules_file_path (const gchar *suffix)
 {
-  XkbRF_VarDefsRec *xkb_var_defs;
   gchar *rules_file;
   gchar *xml_rules_file;
 
-  gnome_xkb_info_get_var_defs (&rules_file, &xkb_var_defs);
-  gnome_xkb_info_free_var_defs (xkb_var_defs);
-
+  rules_file = g_build_filename (XKB_BASE, "rules", XKB_RULES_FILE, NULL);
   xml_rules_file = g_strdup_printf ("%s%s", rules_file, suffix);
   g_free (rules_file);
 

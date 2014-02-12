@@ -153,7 +153,6 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  xrandr >= $XRANDR_REQUIRED
                                  xext >= $XEXT_REQUIRED
                                  xkeyboard-config
-                                 xkbfile
                                  iso-codes)
 
 XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
