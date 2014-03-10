@@ -1030,13 +1030,6 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen    *screen,
 
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-    /* set, if the new mode is different */
-    ret = gnome_rr_screen_get_dpms_mode (screen, &current_mode, error);
-    if (!ret)
-	return FALSE;
-    if (current_mode == mode)
-	return TRUE;
-
     switch (mode) {
     case GNOME_RR_DPMS_ON:
         power_save = META_POWER_SAVE_ON;
