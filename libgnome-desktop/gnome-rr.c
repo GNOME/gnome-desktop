@@ -1025,8 +1025,6 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen    *screen,
                                GError          **error)
 {
     MetaPowerSave power_save;
-    gboolean ret;
-    GnomeRRDpmsMode current_mode;
 
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
