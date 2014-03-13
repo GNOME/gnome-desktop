@@ -229,23 +229,50 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 	g_type_class_add_private (gobject_class, sizeof (GnomeWallClockPrivate));
 }
 
-/* Some of our translations use the ratio symbol which isn't
- * convertible to non-UTF-8 locale encodings.
- */
+/* Replace 'target' with 'replacement' in the input string. */
 static char *
-filter_ratio_for_locale (const char *input)
+string_replace (const char *input,
+                const char *target,
+                const char *replacement)
 {
 	char **pieces = NULL;
 	char *output = NULL;
 
-	if (g_get_charset (NULL)) /* UTF-8 is ok */
-		return g_strdup (input);
-
-	/* else, we'll replace ratio with a plain colon */
-	pieces = g_strsplit (input, "∶", -1);
-	output = g_strjoinv (":", pieces);
+	pieces = g_strsplit (input, target, -1);
+	output = g_strjoinv (replacement, pieces);
 	g_strfreev (pieces);
 	return output;
+}
+
+/* This function wraps g_date_time_format, replacing colon with the ratio
+ * character as it looks visually better in time strings.
+ */
+static char *
+date_time_format (GDateTime *datetime,
+                  const char *format)
+{
+	char *format_with_colon;
+	char *ret;
+	char *tmp;
+	gboolean is_utf8;
+
+	is_utf8 = g_get_charset (NULL);
+
+	/* First, replace ratio with plain colon before passing it to
+	 * g_date_time_format.  */
+	tmp = string_replace (format, "∶", ":");
+	format_with_colon = g_date_time_format (datetime, tmp);
+	g_free (tmp);
+
+	/* Then, after formatting, replace the plain colon with ratio, and
+	 * prepend it with an LTR marker to force direction. */
+	if (is_utf8)
+		ret = string_replace (format_with_colon, ":", "\xE2\x80\x8E∶");
+	else
+		ret = g_strdup (format_with_colon);
+
+	g_free (format_with_colon);
+	return ret;
 }
 
 static gboolean
@@ -254,7 +281,6 @@ update_clock (gpointer data)
 	GnomeWallClock   *self = data;
 	GDesktopClockFormat clock_format;
 	const char *format_string;
-	char *safe_format_string;
 	gboolean show_full_date;
 	gboolean show_weekday;
 	gboolean show_seconds;
@@ -318,14 +344,11 @@ update_clock (gpointer data)
 		}
 	}
 
-	safe_format_string = filter_ratio_for_locale (format_string);
-
 	g_free (self->priv->clock_string);
-	self->priv->clock_string = g_date_time_format (now, safe_format_string);
+	self->priv->clock_string = date_time_format (now, format_string);
 
 	g_date_time_unref (now);
 	g_date_time_unref (expiry);
-	g_free (safe_format_string);
 
 	g_object_notify ((GObject*)self, "clock");
 
