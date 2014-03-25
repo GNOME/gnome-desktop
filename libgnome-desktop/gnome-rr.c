@@ -1503,6 +1503,14 @@ gnome_rr_output_get_crtc (GnomeRROutput *output)
     return output->current_crtc;
 }
 
+GnomeRRCrtc **
+gnome_rr_output_get_possible_crtcs (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, NULL);
+
+    return output->possible_crtcs;
+}
+
 gboolean
 _gnome_rr_output_name_is_builtin_display (const char *name)
 {
