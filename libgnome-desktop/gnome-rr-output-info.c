@@ -39,6 +39,7 @@ gnome_rr_output_info_init (GnomeRROutputInfo *self)
 
     self->priv->name = NULL;
     self->priv->on = FALSE;
+    self->priv->rotation = GNOME_RR_ROTATION_0;
     self->priv->display_name = NULL;
 }
 

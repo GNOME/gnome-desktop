@@ -172,7 +172,6 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 	    output->priv->width = -1;
 	    output->priv->height = -1;
 	    output->priv->rate = -1;
-	    output->priv->rotation = GNOME_RR_ROTATION_0;
 	}
 	else
 	{
