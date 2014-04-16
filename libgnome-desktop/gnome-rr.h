@@ -171,6 +171,7 @@ GnomeRRMode *   gnome_rr_output_get_preferred_mode (GnomeRROutput         *outpu
 gboolean        gnome_rr_output_supports_mode      (GnomeRROutput         *output,
 						    GnomeRRMode           *mode);
 gboolean        gnome_rr_output_get_is_primary     (GnomeRROutput         *output);
+gboolean        gnome_rr_output_get_is_underscanning (GnomeRROutput       *output);
 
 /* GnomeRRMode */
 guint32         gnome_rr_mode_get_id               (GnomeRRMode           *mode);

@@ -73,6 +73,7 @@ struct _GnomeRROutputInfoPrivate
     int			pref_height;
     char *		display_name;
     gboolean            primary;
+    gboolean            underscanning;
 };
 
 struct _GnomeRRConfigPrivate

@@ -80,6 +80,7 @@ struct GnomeRROutput
 
     gboolean            is_primary;
     gboolean            is_presentation;
+    gboolean            is_underscanning;
 };
 
 struct GnomeRRCrtc
@@ -1265,6 +1266,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "min-backlight-step", "i", &output->min_backlight_step);
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
     g_variant_lookup (properties, "presentation", "b", &output->is_presentation);
+    g_variant_lookup (properties, "underscanning", "b", &output->is_underscanning);
 
     if ((edid = g_variant_lookup_value (properties, "edid", G_VARIANT_TYPE ("ay"))))
       {
@@ -2030,4 +2032,11 @@ gnome_rr_crtc_get_gamma (GnomeRRCrtc     *crtc,
     g_bytes_unref (blue_bytes);
 
   return TRUE;
+}
+
+gboolean
+gnome_rr_output_get_is_underscanning (GnomeRROutput *output)
+{
+    g_assert(output != NULL);
+    return output->is_underscanning;
 }

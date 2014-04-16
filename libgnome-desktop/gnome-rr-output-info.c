@@ -251,3 +251,18 @@ int gnome_rr_output_info_get_preferred_height (GnomeRROutputInfo *self)
 
     return self->priv->pref_height;
 }
+
+gboolean gnome_rr_output_info_get_underscanning (GnomeRROutputInfo *self)
+{
+    g_return_val_if_fail (GNOME_IS_RR_OUTPUT_INFO (self), FALSE);
+
+    return self->priv->underscanning;
+}
+
+void gnome_rr_output_info_set_underscanning (GnomeRROutputInfo *self,
+                                             gboolean underscanning)
+{
+    g_return_if_fail (GNOME_IS_RR_OUTPUT_INFO (self));
+
+    self->priv->underscanning = underscanning;
+}

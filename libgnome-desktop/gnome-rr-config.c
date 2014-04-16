@@ -217,7 +217,8 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 	}
 
         output->priv->primary = gnome_rr_output_get_is_primary (rr_output);
- 
+        output->priv->underscanning = gnome_rr_output_get_is_underscanning (rr_output);
+
 	g_ptr_array_add (a, output);
     }
 
@@ -338,6 +339,9 @@ output_equal (GnomeRROutputInfo *output1, GnomeRROutputInfo *output2)
 	    return FALSE;
 	
 	if (output1->priv->rotation != output2->priv->rotation)
+	    return FALSE;
+
+	if (output1->priv->underscanning != output2->priv->underscanning)
 	    return FALSE;
     }
 
@@ -1171,9 +1175,11 @@ crtc_assignment_apply (CrtcAssignment *assign, gboolean persistent, GError **err
 	g_variant_builder_add (&output_builder, "(u@a{sv})",
 			       gnome_rr_output_get_id (gnome_rr_output),
 			       g_variant_new_parsed ("{ 'primary': <%b>,"
-						     "  'presentation': <%b> }",
+						     "  'presentation': <%b>,"
+						     "  'underscanning': <%b> }",
 						     output->priv->primary,
-						     FALSE));
+						     FALSE,
+						     output->priv->underscanning));
     }
 
     return _gnome_rr_screen_apply_configuration (assign->screen,
