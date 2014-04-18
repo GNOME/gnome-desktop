@@ -1,4 +1,5 @@
 CLEANFILES =
+NULL =
 
 EXTRA_DIST =
 noinst_LTLIBRARIES =
@@ -79,7 +80,8 @@ libgnome_desktop_3_la_LIBADD =	\
 	$(LIBM)			\
 	$(GNOME_DESKTOP_LIBS)	\
 	libgsystem.la           \
-	-lrt
+	$(LIBRT)		\
+	$(NULL)
 
 libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \

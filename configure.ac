@@ -127,6 +127,9 @@ AC_SUBST(XEXT_REQUIRED)
 AC_CHECK_LIBM
 AC_SUBST(LIBM)
 
+AC_CHECK_LIB([rt], [clock_gettime], [LIBRT="-lrt"], [LIBRT=""])
+AC_SUBST(LIBRT)
+
 dnl we need x11 for GnomeBG
 
 PKG_CHECK_MODULES(XLIB, x11,
