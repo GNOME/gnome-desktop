@@ -57,19 +57,79 @@ get_property (Display *dpy,
 	return result;
 }
 
+static void
+print_output (GnomeRROutput *output, const char *message)
+{
+	Atom edid_atom;
+	Display *display;
+	gsize len = 0;
+	guint8 *result = NULL;
+
+	display = GDK_SCREEN_XDISPLAY (gdk_screen_get_default ());
+
+	g_print ("[%s]", gnome_rr_output_get_name (output));
+	if (message)
+		g_print (" (%s)", message);
+	g_print ("\n");
+	g_print ("\tconnected: %i\n", gnome_rr_output_is_connected (output));
+	g_print ("\tlaptop: %i\n", gnome_rr_output_is_laptop (output));
+	g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (output));
+	g_print ("\tid: %i\n", gnome_rr_output_get_id (output));
+
+	/* get EDID (first try) */
+	edid_atom = XInternAtom (display, "EDID", FALSE);
+	result = get_property (display,
+			       gnome_rr_output_get_id (output),
+			       edid_atom,
+			       &len);
+	if (result != NULL) {
+		g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
+			 len, result[0], result[1],
+			 result[2], result[3]);
+		g_free (result);
+	}
+
+	/* get EDID (second try) */
+	edid_atom = XInternAtom (display, "EDID_DATA", FALSE);
+	result = get_property (display,
+			       gnome_rr_output_get_id (output),
+			       edid_atom,
+			       &len);
+	if (result != NULL) {
+		g_print ("\tedid2: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
+			 len, result[0], result[1],
+			 result[2], result[3]);
+		g_free (result);
+	}
+}
+
+static void
+screen_changed (GnomeRRScreen *screen, gpointer user_data)
+{
+	g_print ("Screen changed\n");
+}
+
+static void
+output_disconnected (GnomeRRScreen *screen, GnomeRROutput *output, gpointer user_data)
+{
+	print_output (output, "disconnected");
+}
+
+static void
+output_connected (GnomeRRScreen *screen, GnomeRROutput *output, gpointer user_data)
+{
+	print_output (output, "connected");
+}
+
 /**
  * main:
  **/
 int
 main (int argc, char *argv[])
 {
-	Atom edid_atom;
-	Display *display;
 	GError *error = NULL;
 	GnomeRROutput **outputs;
 	GnomeRRScreen *screen;
-	gsize len = 0;
-	guint8 *result = NULL;
 	guint i;
 
 	gtk_init (&argc, &argv);
@@ -79,41 +139,16 @@ main (int argc, char *argv[])
 		g_error_free (error);
 		goto out;
 	}
-	display = GDK_SCREEN_XDISPLAY (gdk_screen_get_default ());
 	outputs = gnome_rr_screen_list_outputs (screen);
-	for (i = 0; outputs[i] != NULL; i++) {
-		g_print ("[%s]\n", gnome_rr_output_get_name (outputs[i]));
-		g_print ("\tconnected: %i\n", gnome_rr_output_is_connected (outputs[i]));
-		g_print ("\tlaptop: %i\n", gnome_rr_output_is_laptop (outputs[i]));
-		g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (outputs[i]));
-		g_print ("\tid: %i\n", gnome_rr_output_get_id (outputs[i]));
+	for (i = 0; outputs[i] != NULL; i++)
+		print_output (outputs[i], NULL);
 
-		/* get EDID (first try) */
-		edid_atom = XInternAtom (display, "EDID", FALSE);
-		result = get_property (display,
-				       gnome_rr_output_get_id (outputs[i]),
-				       edid_atom,
-				       &len);
-		if (result != NULL) {
-			g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
-				 len, result[0], result[1],
-				 result[2], result[3]);
-			g_free (result);
-		}
+	g_signal_connect (screen, "changed", G_CALLBACK (screen_changed), NULL);
+	g_signal_connect (screen, "output-disconnected", G_CALLBACK (output_disconnected), NULL);
+	g_signal_connect (screen, "output-connected", G_CALLBACK (output_connected), NULL);
 
-		/* get EDID (second try) */
-		edid_atom = XInternAtom (display, "EDID_DATA", FALSE);
-		result = get_property (display,
-				       gnome_rr_output_get_id (outputs[i]),
-				       edid_atom,
-				       &len);
-		if (result != NULL) {
-			g_print ("\tedid2: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
-				 len, result[0], result[1],
-				 result[2], result[3]);
-			g_free (result);
-		}
-	}
+	gtk_main ();
+
 out:
 	g_object_unref (screen);
 	return 0;
