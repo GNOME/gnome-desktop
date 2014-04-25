@@ -25,14 +25,60 @@
 #include <gtk/gtk.h>
 #include <libgnome-desktop/gnome-rr.h>
 
+static void
+print_output (GnomeRROutput *output, const char *message)
+{
+	gsize len = 0;
+	const guint8 *result = NULL;
+	int width_mm, height_mm;
+
+	g_print ("[%s]", gnome_rr_output_get_name (output));
+	if (message)
+		g_print (" (%s)", message);
+	g_print ("\n");
+	g_print ("\tconnected: %i\n", 1);
+	g_print ("\tbuiltin (laptop): %i\n", gnome_rr_output_is_builtin_display (output));
+	g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (output));
+	g_print ("\tid: %i\n", gnome_rr_output_get_id (output));
+	gnome_rr_output_get_physical_size (output, &width_mm, &height_mm);
+	g_print ("\tdimensions: %ix%i", width_mm, height_mm);
+
+	/* get EDID */
+        result = gnome_rr_output_get_edid_data (output, &len);
+	if (result != NULL) {
+		g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
+			 len, result[0], result[1],
+			 result[2], result[3]);
+	}
+}
+
+static void
+screen_changed (GnomeRRScreen *screen, gpointer user_data)
+{
+	g_print ("Screen changed\n");
+}
+
+static void
+output_disconnected (GnomeRRScreen *screen, GnomeRROutput *output, gpointer user_data)
+{
+	print_output (output, "disconnected");
+}
+
+static void
+output_connected (GnomeRRScreen *screen, GnomeRROutput *output, gpointer user_data)
+{
+	print_output (output, "connected");
+}
+
+/**
+ * main:
+ **/
 int
 main (int argc, char *argv[])
 {
 	GError *error = NULL;
 	GnomeRROutput **outputs;
 	GnomeRRScreen *screen;
-	gsize len = 0;
-	const guint8 *result = NULL;
 	guint i;
 
 	gtk_init (&argc, &argv);
@@ -43,21 +89,15 @@ main (int argc, char *argv[])
 		goto out;
 	}
 	outputs = gnome_rr_screen_list_outputs (screen);
-	for (i = 0; outputs[i] != NULL; i++) {
-		g_print ("[%s]\n", gnome_rr_output_get_name (outputs[i]));
-		g_print ("\tconnected: %i\n", 1);
-		g_print ("\tbuilt-in: %i\n", gnome_rr_output_is_builtin_display (outputs[i]));
-		g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (outputs[i]));
-		g_print ("\tid: %i\n", gnome_rr_output_get_id (outputs[i]));
+	for (i = 0; outputs[i] != NULL; i++)
+		print_output (outputs[i], NULL);
 
-		/* get EDID (first try) */
-                result = gnome_rr_output_get_edid_data (outputs[i], &len);
-		if (result != NULL) {
-			g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
-				 len, result[0], result[1],
-				 result[2], result[3]);
-		}
-	}
+	g_signal_connect (screen, "changed", G_CALLBACK (screen_changed), NULL);
+	g_signal_connect (screen, "output-disconnected", G_CALLBACK (output_disconnected), NULL);
+	g_signal_connect (screen, "output-connected", G_CALLBACK (output_connected), NULL);
+
+	gtk_main ();
+
 out:
 	g_object_unref (screen);
 	return 0;
