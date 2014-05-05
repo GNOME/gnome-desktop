@@ -1659,7 +1659,6 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
   char *tmp_path;
   int tmp_fd;
   char mtime_str[21];
-  gboolean saved_ok;
   GdkPixbuf *pixbuf;
   GChecksum *checksum;
   guint8 digest[16];
@@ -1703,19 +1702,17 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
   
   g_snprintf (mtime_str, 21, "%" G_GUINT64_FORMAT, (guint64) mtime);
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
-  saved_ok  = gdk_pixbuf_save (pixbuf,
-			       tmp_path,
-			       "png", NULL, 
-			       "tEXt::Thumb::URI", uri,
-			       "tEXt::Thumb::MTime", mtime_str,
-			       "tEXt::Software", "GNOME::ThumbnailFactory",
-			       NULL);
+  gdk_pixbuf_save (pixbuf,
+		   tmp_path,
+		   "png", NULL,
+		   "tEXt::Thumb::URI", uri,
+		   "tEXt::Thumb::MTime", mtime_str,
+		   "tEXt::Software", "GNOME::ThumbnailFactory",
+		   NULL);
   g_object_unref (pixbuf);
-  if (saved_ok)
-    {
-      g_chmod (tmp_path, 0600);
-      g_rename(tmp_path, path);
-    }
+
+  g_chmod (tmp_path, 0600);
+  g_rename (tmp_path, path);
 
   g_free (path);
   g_free (tmp_path);
