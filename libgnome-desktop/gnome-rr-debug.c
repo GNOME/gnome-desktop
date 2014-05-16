@@ -50,9 +50,17 @@ print_output (GnomeRROutput *output, const char *message)
 	/* get EDID */
         result = gnome_rr_output_get_edid_data (output, &len);
 	if (result != NULL) {
+		char *vendor, *product, *serial;
+
 		g_print ("\tedid: %" G_GSIZE_FORMAT " bytes [%i:%i:%i:%i]\n",
 			 len, result[0], result[1],
 			 result[2], result[3]);
+		gnome_rr_output_get_ids_from_edid (output, &vendor, &product, &serial);
+		g_print ("\tvendor: '%s' product: '%s' serial: '%s'\n",
+			 vendor, product, serial);
+		g_free (vendor);
+		g_free (product);
+		g_free (serial);
 	}
 
 	g_print ("\n");
