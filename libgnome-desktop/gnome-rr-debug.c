@@ -41,7 +41,11 @@ print_output (GnomeRROutput *output, const char *message)
 	g_print ("\tprimary: %i\n", gnome_rr_output_get_is_primary (output));
 	g_print ("\tid: %i\n", gnome_rr_output_get_id (output));
 	gnome_rr_output_get_physical_size (output, &width_mm, &height_mm);
-	g_print ("\tdimensions: %ix%i", width_mm, height_mm);
+	g_print ("\tdimensions: %ix%i\n", width_mm, height_mm);
+	g_print ("\tbacklight: %i (min step: %i)\n",
+		 gnome_rr_output_get_backlight (output),
+		 gnome_rr_output_get_min_backlight_step (output));
+
 
 	/* get EDID */
         result = gnome_rr_output_get_edid_data (output, &len);
@@ -50,6 +54,8 @@ print_output (GnomeRROutput *output, const char *message)
 			 len, result[0], result[1],
 			 result[2], result[3]);
 	}
+
+	g_print ("\n");
 }
 
 static void
