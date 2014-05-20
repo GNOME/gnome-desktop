@@ -108,12 +108,14 @@ else
         EXTERNAL_PNP_IDS="$with_pnp_ids_path"
 fi
 
+GLIB_TESTS
+
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
 GDK_PIXBUF_REQUIRED=2.21.3
 GTK_REQUIRED=3.3.6
-GLIB_REQUIRED=2.35.0
+GLIB_REQUIRED=2.38.0
 XRANDR_REQUIRED=1.3
 GSETTINGS_DESKTOP_SCHEMAS_REQUIRED=3.5.91
 XEXT_REQUIRED=1.1
@@ -212,6 +214,7 @@ desktop-docs/Makefile
 desktop-docs/fdl/Makefile
 desktop-docs/gpl/Makefile
 desktop-docs/lgpl/Makefile
+tests/Makefile
 ])
 
 AC_OUTPUT

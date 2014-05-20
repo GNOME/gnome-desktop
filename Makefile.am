@@ -1,4 +1,4 @@
-SUBDIRS = libgnome-desktop docs po
+SUBDIRS = libgnome-desktop docs po tests
 
 if DESKTOP_DOCS_ENABLED
 SUBDIRS += desktop-docs
@@ -18,7 +18,10 @@ EXTRA_DIST =			\
 	HACKING			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
-	gnome-version.xml.in.in
+	glib-tap.mk		\
+	gnome-version.xml.in.in	\
+	tap-driver.sh		\
+	tap-test
 
 CLEANFILES = \
 	$(version_DATA)
