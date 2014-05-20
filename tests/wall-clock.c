@@ -101,6 +101,50 @@ test_clock_format_setting (void)
 	setlocale (LC_ALL, save_locale);
 }
 
+static gboolean
+on_notify_clock_timeout (gpointer user_data)
+{
+	g_error ("Timeout waiting for notify::clock");
+	g_assert_not_reached ();
+	return FALSE;
+}
+
+static void
+on_clock_changed (GnomeWallClock *clock,
+                  GParamSpec     *pspec,
+                  gpointer        user_data)
+{
+	GMainLoop *main_loop = user_data;
+
+	/* Nothing much to do here; the test was just to ensure we get the callback */
+
+	g_main_loop_quit (main_loop);
+}
+
+static void
+test_notify_clock (void)
+{
+	GMainLoop *main_loop;
+	GnomeWallClock *clock;
+	GSettings *settings;
+
+	main_loop = g_main_loop_new (NULL, FALSE);
+	settings = g_settings_new ("org.gnome.desktop.interface");
+
+	/* Show seconds so we don't have to wait too long for the callback */
+	g_settings_set_boolean (settings, "clock-show-seconds", TRUE);
+
+	clock = gnome_wall_clock_new ();
+	g_signal_connect (clock, "notify::clock", G_CALLBACK (on_clock_changed), main_loop);
+	g_timeout_add_seconds (5, on_notify_clock_timeout, NULL);
+
+	g_main_loop_run (main_loop);
+
+	g_main_loop_unref (main_loop);
+	g_object_unref (clock);
+	g_object_unref (settings);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -111,6 +155,7 @@ main (int   argc,
 
 	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
+	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);
 
 	return g_test_run ();
 }
