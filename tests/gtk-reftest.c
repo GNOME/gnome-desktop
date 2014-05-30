@@ -35,58 +35,11 @@ typedef enum {
 /* This is exactly the style information you've been looking for */
 #define GTK_STYLE_PROVIDER_PRIORITY_FORCE G_MAXUINT
 
-static char *arg_output_dir = NULL;
-static char *arg_base_dir = NULL;
-static char *arg_direction = NULL;
-
-static const GOptionEntry test_args[] = {
-  { "output",         'o', 0, G_OPTION_ARG_FILENAME, &arg_output_dir,
-    "Directory to save image files to", "DIR" },
-  { "directory",        'd', 0, G_OPTION_ARG_FILENAME, &arg_base_dir,
-    "Directory to run tests from", "DIR" },
-  { "direction",       0, 0, G_OPTION_ARG_STRING, &arg_direction,
-    "Set text direction", "DIRECTION" },
-  { NULL }
-};
-
-static const char *
-get_output_dir (void)
-{
-  static const char *output_dir = NULL;
-  GError *error = NULL;
-
-  if (output_dir)
-    return output_dir;
-
-  if (arg_output_dir)
-    {
-      GFile *file = g_file_new_for_commandline_arg (arg_output_dir);
-      output_dir = g_file_get_path (file);
-      g_object_unref (file);
-    }
-  else
-    {
-      output_dir = g_get_tmp_dir ();
-    }
-
-  if (!g_file_test (output_dir, G_FILE_TEST_EXISTS))
-    {
-      GFile *file;
-
-      file = g_file_new_for_path (output_dir);
-      g_assert (g_file_make_directory_with_parents (file, NULL, &error));
-      g_assert_no_error (error);
-      g_object_unref (file);
-    }
-
-  return output_dir;
-}
-
 static char *
 get_output_file (const char *test_file,
                  const char *extension)
 {
-  const char *output_dir = get_output_dir ();
+  const char *output_dir = g_get_tmp_dir ();
   char *result, *base;
 
   base = g_path_get_basename (test_file);
