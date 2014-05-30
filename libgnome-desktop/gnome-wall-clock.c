@@ -275,38 +275,21 @@ date_time_format (GDateTime *datetime,
 	return ret;
 }
 
-static gboolean
-update_clock (gpointer data)
+/**
+ * gnome_wall_clock_string_for_datetime:
+ *
+ * Returns: (skip): a newly allocated string representing the date & time
+ * passed, with the options applied.
+ */
+char *
+gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
+				      GDateTime           *now,
+				      GDesktopClockFormat  clock_format,
+				      gboolean             show_weekday,
+				      gboolean             show_full_date,
+				      gboolean             show_seconds)
 {
-	GnomeWallClock   *self = data;
-	GDesktopClockFormat clock_format;
 	const char *format_string;
-	gboolean show_full_date;
-	gboolean show_weekday;
-	gboolean show_seconds;
-	GSource *source;
-	GDateTime *now;
-	GDateTime *expiry;
-
-	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
-	show_weekday = !self->priv->time_only;
-	show_full_date = show_weekday && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
-	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
-
-	now = g_date_time_new_now (self->priv->timezone);
-	if (show_seconds)
-		expiry = g_date_time_add_seconds (now, 1);
-	else
-		expiry = g_date_time_add_seconds (now, 60 - g_date_time_get_second (now));
-  
-	if (self->priv->clock_update_id)
-		g_source_remove (self->priv->clock_update_id);
-
-	source = _gnome_datetime_source_new (now, expiry, TRUE);
-	g_source_set_priority (source, G_PRIORITY_HIGH);
-	g_source_set_callback (source, update_clock, self, NULL);
-	self->priv->clock_update_id = g_source_attach (source, NULL);
-	g_source_unref (source);
 
 	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H ||
 	    self->priv->ampm_available == FALSE) {
@@ -344,8 +327,48 @@ update_clock (gpointer data)
 		}
 	}
 
+	return date_time_format (now, format_string);
+}
+
+static gboolean
+update_clock (gpointer data)
+{
+	GnomeWallClock   *self = data;
+	GDesktopClockFormat clock_format;
+	gboolean show_full_date;
+	gboolean show_weekday;
+	gboolean show_seconds;
+	GSource *source;
+	GDateTime *now;
+	GDateTime *expiry;
+
+	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
+	show_weekday = !self->priv->time_only;
+	show_full_date = show_weekday && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
+	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
+
+	now = g_date_time_new_now (self->priv->timezone);
+	if (show_seconds)
+		expiry = g_date_time_add_seconds (now, 1);
+	else
+		expiry = g_date_time_add_seconds (now, 60 - g_date_time_get_second (now));
+
+	if (self->priv->clock_update_id)
+		g_source_remove (self->priv->clock_update_id);
+
+	source = _gnome_datetime_source_new (now, expiry, TRUE);
+	g_source_set_priority (source, G_PRIORITY_HIGH);
+	g_source_set_callback (source, update_clock, self, NULL);
+	self->priv->clock_update_id = g_source_attach (source, NULL);
+	g_source_unref (source);
+
 	g_free (self->priv->clock_string);
-	self->priv->clock_string = date_time_format (now, format_string);
+	self->priv->clock_string = gnome_wall_clock_string_for_datetime (self,
+									 now,
+									 clock_format,
+									 show_weekday,
+									 show_full_date,
+									 show_seconds);
 
 	g_date_time_unref (now);
 	g_date_time_unref (expiry);
