@@ -15,4 +15,12 @@ test_programs =			\
 	gtk-reftest		\
 	$(NULL)
 
+EXTRA_DIST =			\
+	C.ref.ui		\
+	C.ui			\
+	en_US.utf-8.ref.ui	\
+	en_US.utf-8.ui		\
+	he_IL.utf8.ref.ui	\
+	he_IL.utf8.ui
+
 -include $(top_srcdir)/git.mk
