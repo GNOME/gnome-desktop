@@ -12,6 +12,7 @@ AM_CFLAGS = -g $(WARN_CFLAGS)
 
 test_programs =			\
 	wall-clock		\
+	gtk-reftest		\
 	$(NULL)
 
 -include $(top_srcdir)/git.mk
