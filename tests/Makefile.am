@@ -10,6 +10,8 @@ AM_CPPFLAGS =							\
 
 AM_CFLAGS = -g $(WARN_CFLAGS)
 
+TESTS_ENVIRONMENT = G_ENABLE_DIAGNOSTIC=0
+
 test_programs =			\
 	wall-clock		\
 	gtk-reftest		\
