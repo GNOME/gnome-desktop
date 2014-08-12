@@ -130,8 +130,6 @@ void            gnome_rr_screen_get_ranges         (GnomeRRScreen         *scree
 						    int                   *min_height,
 						    int                   *max_height);
 
-GnomeRRMode   **gnome_rr_screen_create_clone_modes (GnomeRRScreen *screen);
-
 gboolean        gnome_rr_screen_get_dpms_mode      (GnomeRRScreen        *screen,
                                                     GnomeRRDpmsMode       *mode,
                                                     GError               **error);
