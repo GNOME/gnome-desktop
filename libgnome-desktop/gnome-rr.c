@@ -1495,6 +1495,11 @@ gnome_rr_screen_get_output_by_name (GnomeRRScreen *screen,
     return NULL;
 }
 
+/**
+ * gnome_rr_output_get_crtc:
+ * @output: a #GnomeRROutput
+ * Returns: (transfer none):
+ */
 GnomeRRCrtc *
 gnome_rr_output_get_crtc (GnomeRROutput *output)
 {
@@ -1503,6 +1508,11 @@ gnome_rr_output_get_crtc (GnomeRROutput *output)
     return output->current_crtc;
 }
 
+/**
+ * gnome_rr_output_get_possible_crtcs:
+ * @output: a #GnomeRROutput
+ * Returns: (array zero-terminated=1) (transfer none):
+ */
 GnomeRRCrtc **
 gnome_rr_output_get_possible_crtcs (GnomeRROutput *output)
 {
@@ -1535,6 +1545,11 @@ gnome_rr_output_is_builtin_display (GnomeRROutput *output)
     return _gnome_rr_output_name_is_builtin_display (output->name);
 }
 
+/**
+ * gnome_rr_output_get_current_mode:
+ * @output: a #GnomeRROutput
+ * Returns: (transfer none): the current mode of this output
+ */
 GnomeRRMode *
 gnome_rr_output_get_current_mode (GnomeRROutput *output)
 {
@@ -1574,6 +1589,11 @@ gnome_rr_output_get_name (GnomeRROutput *output)
     return output->name;
 }
 
+/**
+ * gnome_rr_output_get_preferred_mode:
+ * @output: a #GnomeRROutput
+ * Returns: (transfer none):
+ */
 GnomeRRMode *
 gnome_rr_output_get_preferred_mode (GnomeRROutput *output)
 {
@@ -1581,6 +1601,11 @@ gnome_rr_output_get_preferred_mode (GnomeRROutput *output)
     return output->modes[0];
 }
 
+/**
+ * gnome_rr_output_list_modes:
+ * @output: a #GnomeRROutput
+ * Returns: (array zero-terminated=1) (transfer none):
+ */
 GnomeRRMode **
 gnome_rr_output_list_modes (GnomeRROutput *output)
 {
@@ -1649,6 +1674,11 @@ gnome_rr_rotation_from_transform (enum wl_output_transform transform)
     return rotation_map[transform];
 }
 
+/**
+ * gnome_rr_crtc_get_current_mode:
+ * @crtc: a #GnomeRRCrtc
+ * Returns: (transfer none): the current mode of this crtc
+ */
 GnomeRRMode *
 gnome_rr_crtc_get_current_mode (GnomeRRCrtc *crtc)
 {
@@ -1940,6 +1970,16 @@ gnome_rr_crtc_set_gamma (GnomeRRCrtc    *crtc,
   return ok;
 }
 
+/**
+ * gnome_rr_crtc_get_gamma:
+ * @crtc: a #GnomeRRCrtc
+ * @size:
+ * @red: (out): the minimum width
+ * @green: (out): the maximum width
+ * @blue: (out): the minimum height
+ *
+ * Returns: %TRUE for success
+ */
 gboolean
 gnome_rr_crtc_get_gamma (GnomeRRCrtc     *crtc,
 			 int             *size,
