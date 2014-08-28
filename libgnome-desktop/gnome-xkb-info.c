@@ -287,7 +287,7 @@ add_layout_to_table (GHashTable  *table,
 {
   GHashTable *set;
 
-  if (!layout->xkb_name)
+  if (!layout->id)
     return;
 
   set = g_hash_table_lookup (table, key);
@@ -298,10 +298,10 @@ add_layout_to_table (GHashTable  *table,
     }
   else
     {
-      if (g_hash_table_contains (set, layout->xkb_name))
+      if (g_hash_table_contains (set, layout->id))
         return;
     }
-  g_hash_table_replace (set, layout->xkb_name, layout);
+  g_hash_table_replace (set, layout->id, layout);
 }
 
 static void
