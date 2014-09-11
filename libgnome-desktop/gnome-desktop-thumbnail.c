@@ -496,7 +496,7 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
         if (input_stream == NULL) {
             g_warning ("Unable to create an input stream for %s: %s", uri, error->message);
             g_clear_error (&error);
-	    g_object_unref (file);
+            g_object_unref (file);
             return NULL;
         }
     }
