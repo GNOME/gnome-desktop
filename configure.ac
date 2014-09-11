@@ -132,6 +132,9 @@ AC_SUBST(LIBM)
 AC_CHECK_LIB([rt], [clock_gettime], [LIBRT="-lrt"], [LIBRT=""])
 AC_SUBST(LIBRT)
 
+AC_CHECK_FUNCS([openat])
+AM_CONDITIONAL([USE_LIBGSYSTEM], [test x$ac_cv_func_openat = xyes])
+
 dnl we need x11 for GnomeBG
 
 PKG_CHECK_MODULES(XLIB, x11,

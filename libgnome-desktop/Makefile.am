@@ -20,12 +20,14 @@ AM_CPPFLAGS =							\
 
 AM_CFLAGS = $(WARN_CFLAGS)
 
+if USE_LIBGSYSTEM
 libgsystem_srcpath := libgsystem
 libgsystem_cflags = $(GNOME_DESKTOP_CFLAGS)
 libgsystem_libs = $(GNOME_DESKTOP_LIBS)
 include libgsystem/Makefile-libgsystem.am
 
 noinst_LTLIBRARIES += libgsystem.la
+endif
 
 introspection_sources = 		\
 	gnome-desktop-thumbnail.c 	\
@@ -79,9 +81,12 @@ libgnome_desktop_3_la_LIBADD =	\
 	$(XLIB_LIBS)		\
 	$(LIBM)			\
 	$(GNOME_DESKTOP_LIBS)	\
-	libgsystem.la           \
 	$(LIBRT)		\
 	$(NULL)
+
+if USE_LIBGSYSTEM
+libgnome_desktop_3_la_LIBADD += libgsystem.la
+endif
 
 libgnome_desktop_3_la_LDFLAGS = \
 	-version-info $(LT_VERSION) \
