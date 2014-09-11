@@ -144,7 +144,7 @@ typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 CLEANFILES += $(gir_DATA) $(typelib_DATA)
 endif
 
-EXTRA_DIST = \
+EXTRA_DIST += \
 	idle-monitor.xml			\
 	xrandr.xml				\
 	gnome-desktop-3.0.pc.in			\

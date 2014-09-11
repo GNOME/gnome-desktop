@@ -10,14 +10,14 @@ AM_CPPFLAGS =							\
 
 AM_CFLAGS = -g $(WARN_CFLAGS)
 
-TESTS_ENVIRONMENT = G_ENABLE_DIAGNOSTIC=0
+TESTS_ENVIRONMENT += G_ENABLE_DIAGNOSTIC=0
 
 test_programs =			\
 	wall-clock		\
 	gtk-reftest		\
 	$(NULL)
 
-EXTRA_DIST =			\
+EXTRA_DIST +=			\
 	C.ref.ui		\
 	C.ui			\
 	en_US.utf-8.ref.ui	\
