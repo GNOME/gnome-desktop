@@ -487,8 +487,7 @@ test_ui_file (GFile *file)
 					      datetime,
 					      G_DESKTOP_CLOCK_FORMAT_24H,
 					      TRUE, TRUE, TRUE);
-  /* If you need to copy/paste to a .ref.ui file, uncomment here
-   * g_message ("str: %s", str); */
+  g_test_message ("Date string is: '%s'", str);
   g_date_time_unref (datetime);
   g_object_unref (clock);
 
