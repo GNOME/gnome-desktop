@@ -51,6 +51,20 @@ struct GnomeRRScreenPrivate
     MetaDBusDisplayConfig      *proxy;
 };
 
+#define UNDEFINED_GROUP_ID 0
+struct GnomeRRTile {
+  guint group_id;
+  guint flags;
+  guint max_horiz_tiles;
+  guint max_vert_tiles;
+  guint loc_horiz;
+  guint loc_vert;
+  guint width;
+  guint height;
+};
+
+typedef struct GnomeRRTile GnomeRRTile;
+
 struct _GnomeRROutputInfoPrivate
 {
     char *		name;
@@ -74,6 +88,14 @@ struct _GnomeRROutputInfoPrivate
     char *		display_name;
     gboolean            primary;
     gboolean            underscanning;
+
+    gboolean            is_tiled;
+    GnomeRRTile         tile;
+
+    int                 total_tiled_width;
+    int                 total_tiled_height;
+    /* ptr back to info */
+    GnomeRRConfig       *config;
 };
 
 struct _GnomeRRConfigPrivate
@@ -90,5 +112,12 @@ gboolean _gnome_rr_screen_apply_configuration (GnomeRRScreen  *screen,
 					       GVariant       *crtcs,
 					       GVariant       *outputs,
 					       GError        **error);
+
+
+gboolean    _gnome_rr_output_get_tile_info      (GnomeRROutput         *output,
+						GnomeRRTile *tile);
+gboolean    _gnome_rr_output_get_tiled_display_size (GnomeRROutput *output,
+						     int *tile_w, int *tile_h,
+						     int *width, int *height);
 
 #endif

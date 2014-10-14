@@ -31,7 +31,8 @@ print_output (GnomeRROutput *output, const char *message)
 	gsize len = 0;
 	const guint8 *result = NULL;
 	int width_mm, height_mm;
-
+	GnomeRRMode **modes;
+	int i;
 	g_print ("[%s]", gnome_rr_output_get_name (output));
 	if (message)
 		g_print (" (%s)", message);
@@ -63,6 +64,13 @@ print_output (GnomeRROutput *output, const char *message)
 		g_free (serial);
 	}
 
+	modes = gnome_rr_output_list_modes (output);
+	for (i = 0; modes[i] != NULL; ++i) {
+		g_print ("\t mode: %dx%d%s\n",
+			 gnome_rr_mode_get_width (modes[i]),
+			 gnome_rr_mode_get_height (modes[i]),
+			 gnome_rr_mode_get_is_tiled (modes[i]) ? " (tiled)" : "");
+	}
 	g_print ("\n");
 }
 

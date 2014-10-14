@@ -81,6 +81,7 @@ struct GnomeRROutput
     gboolean            is_primary;
     gboolean            is_presentation;
     gboolean            is_underscanning;
+    GnomeRRTile         tile_info;
 };
 
 struct GnomeRRCrtc
@@ -100,6 +101,7 @@ struct GnomeRRCrtc
     int			gamma_size;
 };
 
+#define UNDEFINED_MODE_ID 0
 struct GnomeRRMode
 {
     ScreenInfo *	info;
@@ -108,6 +110,7 @@ struct GnomeRRMode
     int			width;
     int			height;
     int			freq;		/* in mHz */
+    gboolean		tiled;
 };
 
 /* GnomeRRCrtc */
@@ -280,6 +283,98 @@ has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
     return FALSE;
 }
 
+gboolean
+_gnome_rr_output_get_tiled_display_size (GnomeRROutput *output,
+					 int *tile_w, int *tile_h,
+					 int *total_width, int *total_height)
+{
+    GnomeRRTile tile;
+    int ht, vt, i;
+    int total_h = 0, total_w = 0;
+
+    if (!_gnome_rr_output_get_tile_info (output, &tile))
+	return FALSE;
+
+    if (tile.loc_horiz != 0 ||
+	tile.loc_vert != 0)
+	return FALSE;
+
+    if (tile_w)
+	*tile_w = tile.width;
+    if (tile_h)
+	*tile_h = tile.height;
+
+    for (ht = 0; ht < tile.max_horiz_tiles; ht++)
+    {
+	for (vt = 0; vt < tile.max_vert_tiles; vt++)
+	{
+	    for (i = 0; output->info->outputs[i]; i++)
+	    {
+		GnomeRRTile this_tile;
+
+		if (!_gnome_rr_output_get_tile_info (output->info->outputs[i], &this_tile))
+		    continue;
+
+		if (this_tile.group_id != tile.group_id)
+		    continue;
+
+		if (this_tile.loc_horiz != ht ||
+		    this_tile.loc_vert != vt)
+		    continue;
+
+		if (this_tile.loc_horiz == 0)
+		    total_h += this_tile.height;
+
+		if (this_tile.loc_vert == 0)
+		    total_w += this_tile.width;
+	    }
+	}
+    }
+
+    *total_width = total_w;
+    *total_height = total_h;
+    return TRUE;
+}
+
+static void
+gather_tile_modes_output (ScreenInfo *info, GnomeRROutput *output)
+{
+    GPtrArray *a;
+    GnomeRRMode *mode;
+    int width, height;
+    int tile_w, tile_h;
+    int i;
+
+    if (!_gnome_rr_output_get_tiled_display_size (output, &tile_w, &tile_h,
+						  &width, &height))
+	return;
+
+    /* now stick the mode into the modelist */
+    a = g_ptr_array_new ();
+    mode = mode_new (info, UNDEFINED_MODE_ID);
+    mode->winsys_id = 0;
+    mode->width = width;
+    mode->height = height;
+    mode->freq = 0;
+    mode->tiled = TRUE;
+
+    g_ptr_array_add (a, mode);
+    for (i = 0; output->modes[i]; i++)
+	g_ptr_array_add (a, output->modes[i]);
+
+    g_ptr_array_add (a, NULL);
+    output->modes = (GnomeRRMode **)g_ptr_array_free (a, FALSE);
+}
+
+static void
+gather_tile_modes (ScreenInfo *info)
+{
+    int i;
+
+    for (i = 0; info->outputs[i]; i++)
+	gather_tile_modes_output (info, info->outputs[i]);
+}
+
 static void
 gather_clone_modes (ScreenInfo *info)
 {
@@ -410,6 +505,8 @@ fill_screen_info_from_resources (ScreenInfo *info,
     }
 
     gather_clone_modes (info);
+
+    gather_tile_modes (info);
 }
 
 static gboolean
@@ -1197,7 +1294,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 {
     GPtrArray *a;
     GVariantIter *crtcs, *clones, *modes;
-    GVariant *properties, *edid;
+    GVariant *properties, *edid, *tile;
     int current_crtc_id;
     guint id;
 
@@ -1275,6 +1372,18 @@ output_initialize (GnomeRROutput *output, GVariant *info)
       }
     else
       g_variant_lookup (properties, "edid-file", "s", &output->edid_file);
+
+    if ((tile = g_variant_lookup_value (properties, "tile", G_VARIANT_TYPE ("(uuuuuuuu)"))))
+      {
+	g_variant_get (tile, "(uuuuuuuu)",
+		       &output->tile_info.group_id, &output->tile_info.flags,
+		       &output->tile_info.max_horiz_tiles, &output->tile_info.max_vert_tiles,
+		       &output->tile_info.loc_horiz, &output->tile_info.loc_vert,
+		       &output->tile_info.width, &output->tile_info.height);
+	g_variant_unref (tile);
+      }
+    else
+      memset(&output->tile_info, 0, sizeof(output->tile_info));
 
     if (output->is_primary)
 	output->info->primary = output;
@@ -1556,12 +1665,24 @@ GnomeRRMode *
 gnome_rr_output_get_current_mode (GnomeRROutput *output)
 {
     GnomeRRCrtc *crtc;
-    
+    GnomeRRMode *mode;
     g_return_val_if_fail (output != NULL, NULL);
     
     if ((crtc = gnome_rr_output_get_crtc (output)))
+    {
+	int total_w, total_h, tile_w, tile_h;
+	mode = gnome_rr_crtc_get_current_mode (crtc);
+
+	if (_gnome_rr_output_get_tiled_display_size (output, &tile_w, &tile_h, &total_w, &total_h))
+	{
+	    if (mode->width == tile_w &&
+		mode->height == tile_h) {
+		if (output->modes[0]->tiled)
+		    return output->modes[0];
+	    }
+	}
 	return gnome_rr_crtc_get_current_mode (crtc);
-    
+    }
     return NULL;
 }
 
@@ -1887,6 +2008,20 @@ gnome_rr_mode_get_height (GnomeRRMode *mode)
     return mode->height;
 }
 
+/**
+ * gnome_rr_mode_get_is_tiled:
+ * @mode: a #GnomeRRMode
+ *
+ * Returns TRUE if this mode is a tiled
+ * mode created for span a tiled monitor.
+ */
+gboolean
+gnome_rr_mode_get_is_tiled (GnomeRRMode *mode)
+{
+    g_return_val_if_fail (mode != NULL, FALSE);
+    return mode->tiled;
+}
+
 static void
 mode_initialize (GnomeRRMode *mode, GVariant *info)
 {
@@ -2039,4 +2174,18 @@ gnome_rr_output_get_is_underscanning (GnomeRROutput *output)
 {
     g_assert(output != NULL);
     return output->is_underscanning;
+}
+
+gboolean
+_gnome_rr_output_get_tile_info (GnomeRROutput *output,
+				GnomeRRTile *tile)
+{
+    if (output->tile_info.group_id == UNDEFINED_GROUP_ID)
+        return FALSE;
+
+    if (!tile)
+        return FALSE;
+
+    *tile = output->tile_info;
+    return TRUE;
 }

@@ -91,6 +91,8 @@ int gnome_rr_output_info_get_preferred_height (GnomeRROutputInfo *self);
 gboolean gnome_rr_output_info_get_underscanning (GnomeRROutputInfo *self);
 void     gnome_rr_output_info_set_underscanning (GnomeRROutputInfo *self, gboolean underscanning);
 
+gboolean gnome_rr_output_info_is_primary_tile (GnomeRROutputInfo *self);
+
 typedef struct _GnomeRRConfig GnomeRRConfig;
 typedef struct _GnomeRRConfigClass GnomeRRConfigClass;
 typedef struct _GnomeRRConfigPrivate GnomeRRConfigPrivate;

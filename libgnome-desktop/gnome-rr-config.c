@@ -164,6 +164,15 @@ gnome_rr_config_load_current (GnomeRRConfig *config, GError **error)
 	output->priv->name = g_strdup (gnome_rr_output_get_name (rr_output));
 	output->priv->connected = TRUE;
 	output->priv->display_name = g_strdup (gnome_rr_output_get_display_name (rr_output));
+	output->priv->config = config;
+	output->priv->is_tiled = _gnome_rr_output_get_tile_info (rr_output,
+								 &output->priv->tile);
+	if (output->priv->is_tiled)
+	{
+	    _gnome_rr_output_get_tiled_display_size (rr_output, NULL, NULL,
+						     &output->priv->total_tiled_width,
+						     &output->priv->total_tiled_height);
+	}
 
 	if (!output->priv->connected)
 	{
