@@ -30,7 +30,6 @@
 #include <string.h>
 
 #include <gtk/gtk.h>
-#include <gdk/gdkx.h>
 
 #undef GNOME_DISABLE_DEPRECATED
 #include "gnome-rr.h"
