@@ -32,7 +32,9 @@ endif
 introspection_sources = 		\
 	gnome-desktop-thumbnail.c 	\
 	gnome-thumbnail-pixbuf-utils.c 	\
+	gnome-bg.c			\
 	gnome-bg-slide-show.c		\
+	gnome-bg-crossfade.c		\
 	gnome-rr.c			\
 	gnome-rr-config.c		\
 	gnome-rr-output-info.c		\
@@ -96,6 +98,8 @@ pkgconfig_DATA = gnome-desktop-3.0.pc
 
 libgnome_desktopdir = $(includedir)/gnome-desktop-3.0/libgnome-desktop
 libgnome_desktop_HEADERS = \
+        gnome-bg.h                      \
+        gnome-bg-crossfade.h            \
 	gnome-bg-slide-show.h		\
         gnome-desktop-thumbnail.h       \
         gnome-rr.h                      \
