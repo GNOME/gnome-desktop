@@ -1,6 +1,6 @@
 include $(top_srcdir)/glib-tap.mk
 
-LDADD = $(top_builddir)/libgnome-desktop/libgnome-desktop-3.la $(JSON_LIBS)
+LDADD = $(top_builddir)/libgnome-desktop/libgnome-desktop-3.la
 
 AM_CPPFLAGS =							\
 	-I$(top_srcdir)						\
