@@ -565,6 +565,7 @@ gnome_bg_slide_show_get_current_slide (GnomeBGSlideShow  *self,
  * @frame_number: frame number
  * @width: monitor width
  * @height: monitor height
+ * @progress: (out) (allow-none): slide progress
  * @duration: (out) (allow-none): slide duration
  * @is_fixed: (out) (allow-none): if slide is fixed
  * @file1: (out) (allow-none) (transfer none): first file in slide
