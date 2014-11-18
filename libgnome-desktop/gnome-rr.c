@@ -1531,7 +1531,8 @@ _gnome_rr_output_name_is_builtin_display (const char *name)
 	strstr (name, "LVDS") ||
 	strstr (name, "Lvds") ||
 	strstr (name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
-	strstr (name, "eDP"))     /* eDP is for internal built-in panel connections */
+	strstr (name, "eDP")  ||    /* eDP is for internal built-in panel connections */
+	strstr (name, "DSI"))
         return TRUE;
 
     return FALSE;
