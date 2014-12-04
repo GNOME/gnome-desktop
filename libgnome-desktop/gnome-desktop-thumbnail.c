@@ -1049,6 +1049,7 @@ thumbnail_path (const char                *uri,
   path = g_build_filename (g_get_user_cache_dir (),
                            "thumbnails",
                            size == GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE ? "large" : "normal",
+                           file,
                            NULL);
   g_free (file);
   return path;
