@@ -1500,7 +1500,7 @@ save_thumbnail (GdkPixbuf  *pixbuf,
 
   dirname = g_path_get_dirname (path);
 
-  if (!g_mkdir_with_parents (dirname, 0700))
+  if (g_mkdir_with_parents (dirname, 0700) != 0)
     goto out;
 
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
