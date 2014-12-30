@@ -82,6 +82,8 @@ gnome_locale_free (GnomeLocale *locale)
         g_free (locale->name);
         g_free (locale->codeset);
         g_free (locale->modifier);
+        g_free (locale->language_code);
+        g_free (locale->territory_code);
         g_free (locale);
 }
 
