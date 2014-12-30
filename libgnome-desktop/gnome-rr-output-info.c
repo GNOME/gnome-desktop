@@ -50,6 +50,9 @@ gnome_rr_output_info_finalize (GObject *gobject)
 
     g_free (self->priv->name);
     g_free (self->priv->display_name);
+    g_free (self->priv->product);
+    g_free (self->priv->serial);
+    g_free (self->priv->vendor);
 
     G_OBJECT_CLASS (gnome_rr_output_info_parent_class)->finalize (gobject);
 }
