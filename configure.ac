@@ -201,7 +201,7 @@ AM_GLIB_GNU_GETTEXT
 GOBJECT_INTROSPECTION_CHECK([0.9.7])
 
 # check for gtk-doc
-GTK_DOC_CHECK([1.4])
+GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
 
 AC_CONFIG_FILES([
 Makefile
