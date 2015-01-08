@@ -427,6 +427,12 @@ make_outputs (GnomeRRConfig *config)
 	    new->priv->name = g_strdup (old->priv->name);
 	if (old->priv->display_name)
 	    new->priv->display_name = g_strdup (old->priv->display_name);
+        if (old->priv->vendor)
+            new->priv->vendor = g_strdup (old->priv->vendor);
+        if (old->priv->product)
+            new->priv->product = g_strdup (old->priv->product);
+        if (old->priv->serial)
+            new->priv->serial = g_strdup (old->priv->serial);
 
 	if (old->priv->on && !first_on)
 	    first_on = old;
