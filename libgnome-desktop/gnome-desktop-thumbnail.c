@@ -145,9 +145,6 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-desktop-thumbnail.h"
 #include <glib/gstdio.h>
-#ifdef HAVE_OPENAT
-#include <libgsystem.h>
-#endif
 
 #define SECONDS_BETWEEN_STATS 10
 
@@ -487,18 +484,13 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     }
 
     if (input_stream == NULL) {
-#ifdef HAVE_OPENAT
-        if (g_file_is_native (file))
-            input_stream = gs_file_read_noatime (file, NULL, &error);
-        else
-#endif
-            input_stream = G_INPUT_STREAM (g_file_read (file, NULL, &error));
-        if (input_stream == NULL) {
-            g_warning ("Unable to create an input stream for %s: %s", uri, error->message);
-            g_clear_error (&error);
-            g_object_unref (file);
-            return NULL;
-        }
+	    input_stream = G_INPUT_STREAM (g_file_read (file, NULL, &error));
+	    if (input_stream == NULL) {
+		    g_warning ("Unable to create an input stream for %s: %s", uri, error->message);
+		    g_clear_error (&error);
+		    g_object_unref (file);
+		    return NULL;
+	    }
     }
 
     has_frame = FALSE;

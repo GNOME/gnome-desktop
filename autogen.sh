@@ -20,11 +20,4 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-# Fetch submodules if needed
-if test ! -f libgnome-desktop/libgsystem/README; then
-  echo "+ Setting up submodules"
-  git submodule init
-fi
-git submodule update
-
 . gnome-autogen.sh
