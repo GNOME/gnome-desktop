@@ -744,7 +744,8 @@ draw_color (GnomeBG *bg,
 static void
 draw_color_each_monitor (GnomeBG *bg,
 			 GdkPixbuf *dest,
-			 GdkScreen *screen)
+			 GdkScreen *screen,
+			 gint scale)
 {
 	GdkRectangle rect;
 	gint num_monitors;
@@ -753,6 +754,10 @@ draw_color_each_monitor (GnomeBG *bg,
 	num_monitors = gdk_screen_get_n_monitors (screen);
 	for (monitor = 0; monitor < num_monitors; monitor++) {
 		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+		rect.x *= scale;
+		rect.y *= scale;
+		rect.width *= scale;
+		rect.height *= scale;
 		draw_color_area (bg, dest, &rect);
 	}
 }
@@ -936,7 +941,8 @@ draw_once (GnomeBG   *bg,
 static void
 draw_each_monitor (GnomeBG   *bg,
 		   GdkPixbuf *dest,
-		   GdkScreen *screen)
+		   GdkScreen *screen,
+		   gint       scale)
 {
 	GdkRectangle rect;
 	gint num_monitors;
@@ -946,6 +952,10 @@ draw_each_monitor (GnomeBG   *bg,
 	for (monitor = 0; monitor < num_monitors; monitor++) {
 		GdkPixbuf *pixbuf;
 		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+		rect.x *= scale;
+		rect.y *= scale;
+		rect.width *= scale;
+		rect.height *= scale;
 		pixbuf = get_pixbuf_for_size (bg, monitor, rect.width, rect.height);
 		if (pixbuf) {
 			draw_image_area (bg,
@@ -967,9 +977,29 @@ gnome_bg_draw (GnomeBG *bg,
 		return;
 
 	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
-		draw_color_each_monitor (bg, dest, screen);
+		draw_color_each_monitor (bg, dest, screen, 1);
 		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_each_monitor (bg, dest, screen);
+			draw_each_monitor (bg, dest, screen, 1);
+		}
+	} else {
+		draw_color (bg, dest);
+		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+			draw_once (bg, dest);
+		}
+	}
+}
+
+static void
+gnome_bg_draw_at_scale (GnomeBG   *bg,
+			GdkPixbuf *dest,
+			gint       scale,
+			GdkScreen *screen,
+			gboolean   is_root)
+{
+	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
+		draw_color_each_monitor (bg, dest, screen, scale);
+		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+			draw_each_monitor (bg, dest, screen, scale);
 		}
 	} else {
 		draw_color (bg, dest);
@@ -1054,6 +1084,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 			 int	     height,
 			 gboolean     root)
 {
+	gint scale;
 	int pm_width, pm_height;
 	cairo_surface_t *surface;
 	GdkRGBA average;
@@ -1061,6 +1092,8 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	
 	g_return_val_if_fail (bg != NULL, NULL);
 	g_return_val_if_fail (window != NULL, NULL);
+
+	scale = gdk_window_get_scale_factor (window);
 
         if (bg->pixbuf_cache &&
             gdk_pixbuf_get_width (bg->pixbuf_cache) != width &&
@@ -1074,7 +1107,8 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	
 	if (root) {
 		surface = make_root_pixmap (gdk_window_get_screen (window),
-					   pm_width, pm_height);
+					    scale * pm_width,  scale * pm_height);
+		cairo_surface_set_device_scale (surface, scale, scale);
 	}
 	else {
 		surface = gdk_window_create_similar_surface (window,
@@ -1092,12 +1126,17 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	}
 	else {
 		GdkPixbuf *pixbuf;
+		cairo_surface_t *pixbuf_surface;
 		
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
-					 width, height);
-		gnome_bg_draw (bg, pixbuf, gdk_window_get_screen (window), root);
-		gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+					 scale * width, scale * height);
+		gnome_bg_draw_at_scale (bg, pixbuf, scale, gdk_window_get_screen (window), root);
 		pixbuf_average_value (pixbuf, &average);
+
+		pixbuf_surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, 0, window);
+		cairo_set_source_surface (cr, pixbuf_surface, 0, 0);
+
+		cairo_surface_destroy (pixbuf_surface);
 		g_object_unref (pixbuf);
 	}
 
