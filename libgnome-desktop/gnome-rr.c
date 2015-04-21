@@ -37,6 +37,8 @@
 
 #include "gnome-rr-private.h"
 
+/* From xf86drmMode.h: it's ABI so it won't change */
+#define DRM_MODE_FLAG_INTERLACE			(1<<4)
 
 enum {
     SCREEN_PROP_0,
@@ -113,6 +115,7 @@ struct GnomeRRMode
     int			height;
     int			freq;		/* in mHz */
     gboolean		tiled;
+    guint32             flags;
 };
 
 /* GnomeRRCrtc */
@@ -482,7 +485,7 @@ fill_screen_info_from_resources (ScreenInfo *info,
 	GnomeRRMode *mode;
 
 	g_variant_get_child (modes, i, META_MONITOR_MODE_STRUCT, &id,
-			     NULL, NULL, NULL, NULL);
+			     NULL, NULL, NULL, NULL, NULL);
 	mode = mode_new (info, id);
 
 	g_ptr_array_add (a, mode);
@@ -2068,15 +2071,22 @@ gnome_rr_mode_get_is_tiled (GnomeRRMode *mode)
     return mode->tiled;
 }
 
+gboolean
+gnome_rr_mode_get_is_interlaced (GnomeRRMode *mode)
+{
+    g_return_val_if_fail (mode != NULL, 0);
+    return (mode->flags & DRM_MODE_FLAG_INTERLACE) != 0;
+}
+
 static void
 mode_initialize (GnomeRRMode *mode, GVariant *info)
 {
     gdouble frequency;
 
-    g_variant_get (info, "(uxuud)",
+    g_variant_get (info, META_MONITOR_MODE_STRUCT,
 		   &mode->id, &mode->winsys_id,
 		   &mode->width, &mode->height,
-		   &frequency);
+		   &frequency, &mode->flags);
     
     mode->freq = frequency * 1000;
 }

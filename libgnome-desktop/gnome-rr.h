@@ -184,6 +184,7 @@ guint           gnome_rr_mode_get_height           (GnomeRRMode           *mode)
 int             gnome_rr_mode_get_freq             (GnomeRRMode           *mode);
 double          gnome_rr_mode_get_freq_f           (GnomeRRMode           *mode);
 gboolean        gnome_rr_mode_get_is_tiled         (GnomeRRMode           *mode);
+gboolean        gnome_rr_mode_get_is_interlaced    (GnomeRRMode           *mode);
 
 /* GnomeRRCrtc */
 guint32         gnome_rr_crtc_get_id               (GnomeRRCrtc           *crtc);
