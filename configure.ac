@@ -98,23 +98,6 @@ AC_ARG_ENABLE([debug-tools],
         [],[enable_debug_tools=yes])
 AM_CONDITIONAL(DEBUG_TOOLS_ENABLED, test "x$enable_debug_tools" = "xyes")
 
-# Path to the pnp.ids file -- to know if we use one shipped with another
-# package, or an internal file
-
-AC_ARG_WITH(pnp-ids-path,
-              [AC_HELP_STRING([--with-pnp-ids-path],
-                              [Specify the path to pnp.ids @<:@default=(internal)@:>@])],,
-                              [with_pnp_ids_path="\${pnpdatadir}/pnp.ids"])
-
-AM_CONDITIONAL(USE_INTERNAL_PNP_IDS, test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids")
-PNP_IDS=$with_pnp_ids_path
-AC_SUBST(PNP_IDS)
-if test "x$with_pnp_ids_path" = "x\${pnpdatadir}/pnp.ids"; then
-        EXTERNAL_PNP_IDS="no (internal)"
-else
-        EXTERNAL_PNP_IDS="$with_pnp_ids_path"
-fi
-
 GLIB_TESTS
 
 dnl If you add a version number here, you *must* add an AC_SUBST line for
@@ -167,7 +150,8 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  xrandr >= $XRANDR_REQUIRED
                                  xext >= $XEXT_REQUIRED
                                  xkeyboard-config
-                                 iso-codes)
+                                 iso-codes
+                                 libudev)
 
 XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
 AC_SUBST(XKB_BASE)
@@ -254,7 +238,6 @@ echo "
         Build desktop-wide docs:      ${enable_desktop_docs}
         Build debug tools:            ${enable_debug_tools}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
-        Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
         Build gtk-doc documentation:  ${enable_gtk_doc}
 
 "

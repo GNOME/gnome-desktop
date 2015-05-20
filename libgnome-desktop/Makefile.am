@@ -94,18 +94,6 @@ libgnome_desktop_HEADERS = \
 	gnome-idle-monitor.h		\
 	gnome-languages.h
 
-if USE_INTERNAL_PNP_IDS
-pnpdatadir = $(datadir)/libgnome-desktop-3.0
-pnpdata_DATA = pnp.ids
-endif
-pnpdata_DATA_dist = pnp.ids
-
-update-pnp-ids:
-	wget -O $(top_srcdir)/libgnome-desktop/pnp.ids "http://git.fedorahosted.org/git/?p=hwdata.git;a=blob_plain;f=pnp.ids;hb=HEAD"
-
-check:
-	test -s $(top_srcdir)/libgnome-desktop/pnp.ids
-
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =
 INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
@@ -137,11 +125,7 @@ EXTRA_DIST += \
 	idle-monitor.xml			\
 	xrandr.xml				\
 	gnome-desktop-3.0.pc.in			\
-	gnome-desktop-3.0-uninstalled.pc.in	\
-	$(pnpdata_DATA_dist)
-
-MAINTAINERCLEANFILES = \
-	pnp.ids
+	gnome-desktop-3.0-uninstalled.pc.in
 
 gnome_rr_debug_SOURCES =	\
 	gnome-rr-debug.c
