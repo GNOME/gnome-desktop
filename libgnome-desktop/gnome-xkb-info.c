@@ -1002,3 +1002,54 @@ gnome_xkb_info_get_layouts_for_country (GnomeXkbInfo *self,
 
   return list;
 }
+
+static void
+collect_languages (gpointer value,
+                   gpointer data)
+{
+  gchar *language = value;
+  GList **list = data;
+
+  *list = g_list_append (*list, language);
+}
+
+/**
+ * gnome_xkb_info_get_languages_for_layout:
+ * @self: a #GnomeXkbInfo
+ * @layout_id: a layout identifier
+ *
+ * Returns a list of all languages supported by a layout, given by
+ * @layout_id.
+ *
+ * Return value: (transfer container) (element-type utf8): the list of
+ * ISO 639 code strings. The caller takes ownership of the #GList but
+ * not of the strings themselves, those are internally allocated and
+ * must not be modified.
+ *
+ * Since: 3.18
+ */
+GList *
+gnome_xkb_info_get_languages_for_layout (GnomeXkbInfo *self,
+                                         const gchar  *layout_id)
+{
+  GnomeXkbInfoPrivate *priv;
+  Layout *layout;
+  GList *list;
+
+  g_return_val_if_fail (GNOME_IS_XKB_INFO (self), NULL);
+
+  priv = self->priv;
+
+  if (!ensure_rules_are_parsed (self))
+    return NULL;
+
+  layout = g_hash_table_lookup (priv->layouts_table, layout_id);
+
+  if (!layout)
+    return NULL;
+
+  list = NULL;
+  g_slist_foreach (layout->iso639Ids, collect_languages, &list);
+
+  return list;
+}

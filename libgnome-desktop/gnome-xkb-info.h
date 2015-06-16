@@ -76,6 +76,8 @@ GList          *gnome_xkb_info_get_layouts_for_language         (GnomeXkbInfo *s
                                                                  const gchar  *language_code);
 GList          *gnome_xkb_info_get_layouts_for_country          (GnomeXkbInfo *self,
                                                                  const gchar  *country_code);
+GList          *gnome_xkb_info_get_languages_for_layout         (GnomeXkbInfo *self,
+                                                                 const gchar  *layout_id);
 
 G_END_DECLS
 
