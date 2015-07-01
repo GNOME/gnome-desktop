@@ -42,6 +42,7 @@
 enum {
     SCREEN_PROP_0,
     SCREEN_PROP_GDK_SCREEN,
+    SCREEN_PROP_DPMS_MODE,
     SCREEN_PROP_LAST,
 };
 
@@ -672,6 +673,14 @@ name_owner_changed (GObject       *object,
     g_free (new_name_owner);
 }
 
+static void
+power_save_mode_changed (GObject       *object,
+                         GParamSpec    *pspec,
+                         GnomeRRScreen *self)
+{
+        g_object_notify (G_OBJECT (self), "dpms-mode");
+}
+
 static gboolean
 gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError **error)
 {
@@ -697,6 +706,8 @@ gnome_rr_screen_initable_init (GInitable *initable, GCancellable *canc, GError *
 			     G_CALLBACK (name_owner_changed), self, 0);
     g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
+    g_signal_connect_object (priv->proxy, "notify::power-save-mode",
+                             G_CALLBACK (power_save_mode_changed), self, 0);
     return TRUE;
 }
 
@@ -726,6 +737,8 @@ on_proxy_acquired (GObject      *object,
 			     G_CALLBACK (name_owner_changed), self, 0);
     g_signal_connect_object (priv->proxy, "monitors-changed",
 			     G_CALLBACK (screen_on_monitors_changed), self, 0);
+    g_signal_connect_object (priv->proxy, "notify::power-save-mode",
+                             G_CALLBACK (power_save_mode_changed), self, 0);
     g_task_return_boolean (task, TRUE);
 }
 
@@ -815,6 +828,9 @@ gnome_rr_screen_set_property (GObject *gobject, guint property_id, const GValue 
     case SCREEN_PROP_GDK_SCREEN:
         priv->gdk_screen = g_value_get_object (value);
         return;
+    case SCREEN_PROP_DPMS_MODE:
+        gnome_rr_screen_set_dpms_mode (self, g_value_get_enum (value), NULL);
+        return;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, property);
         return;
@@ -831,6 +847,14 @@ gnome_rr_screen_get_property (GObject *gobject, guint property_id, GValue *value
     {
     case SCREEN_PROP_GDK_SCREEN:
         g_value_set_object (value, priv->gdk_screen);
+        return;
+    case SCREEN_PROP_DPMS_MODE: {
+        GnomeRRDpmsMode mode;
+        if (gnome_rr_screen_get_dpms_mode (self, &mode, NULL))
+                g_value_set_enum (value, mode);
+        else
+                g_value_set_enum (value, GNOME_RR_DPMS_UNKNOWN);
+        }
         return;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, property_id, property);
@@ -862,6 +886,19 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
                     G_PARAM_READWRITE |
 		    G_PARAM_CONSTRUCT_ONLY |
 		    G_PARAM_STATIC_STRINGS)
+            );
+
+    g_object_class_install_property(
+            gobject_class,
+            SCREEN_PROP_DPMS_MODE,
+            g_param_spec_enum (
+                    "dpms-mode",
+                    "DPMS Mode",
+                    "The DPMS mode for this GnomeRRScreen",
+                    GNOME_TYPE_RR_DPMS_MODE,
+                    GNOME_RR_DPMS_UNKNOWN,
+                    G_PARAM_READWRITE |
+                    G_PARAM_STATIC_STRINGS)
             );
 
     screen_signals[SCREEN_CHANGED] = g_signal_new("changed",
@@ -2188,4 +2225,22 @@ _gnome_rr_output_get_tile_info (GnomeRROutput *output,
 
     *tile = output->tile_info;
     return TRUE;
+}
+
+GType
+gnome_rr_dpms_mode_get_type (void)
+{
+  static GType etype = 0;
+  if (etype == 0) {
+    static const GEnumValue values[] = {
+      { GNOME_RR_DPMS_ON, "GNOME_RR_DPMS_ON", "on" },
+      { GNOME_RR_DPMS_STANDBY, "GNOME_RR_DPMS_STANDBY", "standby" },
+      { GNOME_RR_DPMS_SUSPEND, "GNOME_RR_DPMS_SUSPEND", "suspend" },
+      { GNOME_RR_DPMS_OFF, "GNOME_RR_DPMS_OFF", "off" },
+      { GNOME_RR_DPMS_UNKNOWN, "GNOME_RR_DPMS_UNKNOWN", "unknown" },
+      { 0, NULL, NULL }
+    };
+    etype = g_enum_register_static ("GnomeRRDpmsModeType", values);
+  }
+  return etype;
 }

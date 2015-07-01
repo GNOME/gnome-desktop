@@ -97,11 +97,13 @@ typedef enum {
 #define GNOME_TYPE_RR_OUTPUT (gnome_rr_output_get_type())
 #define GNOME_TYPE_RR_CRTC   (gnome_rr_crtc_get_type())
 #define GNOME_TYPE_RR_MODE   (gnome_rr_mode_get_type())
+#define GNOME_TYPE_RR_DPMS_MODE (gnome_rr_dpms_mode_get_type())
 
 GType gnome_rr_screen_get_type (void);
 GType gnome_rr_output_get_type (void);
 GType gnome_rr_crtc_get_type (void);
 GType gnome_rr_mode_get_type (void);
+GType gnome_rr_dpms_mode_get_type (void);
 
 /* GnomeRRScreen */
 GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
