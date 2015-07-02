@@ -25,6 +25,25 @@
 #include <gtk/gtk.h>
 #include <libgnome-desktop/gnome-rr.h>
 
+static const char *
+dpms_mode_to_str (GnomeRRDpmsMode mode)
+{
+	switch (mode) {
+	case GNOME_RR_DPMS_ON:
+		return "on";
+	case GNOME_RR_DPMS_STANDBY:
+		return "standby";
+	case GNOME_RR_DPMS_SUSPEND:
+		return "suspend";
+	case GNOME_RR_DPMS_OFF:
+		return "off";
+	case GNOME_RR_DPMS_UNKNOWN:
+		return "unknown";
+	default:
+		g_assert_not_reached ();
+	}
+}
+
 static void
 print_output (GnomeRROutput *output, const char *message)
 {
@@ -92,6 +111,16 @@ output_connected (GnomeRRScreen *screen, GnomeRROutput *output, gpointer user_da
 	print_output (output, "connected");
 }
 
+static void
+dpms_mode_changed (GnomeRRScreen *screen, GParamSpec *pspec, gpointer user_data)
+{
+	GnomeRRDpmsMode mode;
+
+	gnome_rr_screen_get_dpms_mode (screen, &mode, NULL);
+	g_print ("DPMS mode changed to: %s\n", dpms_mode_to_str (mode));
+	g_print ("\n");
+}
+
 /**
  * main:
  **/
@@ -117,6 +146,7 @@ main (int argc, char *argv[])
 	g_signal_connect (screen, "changed", G_CALLBACK (screen_changed), NULL);
 	g_signal_connect (screen, "output-disconnected", G_CALLBACK (output_disconnected), NULL);
 	g_signal_connect (screen, "output-connected", G_CALLBACK (output_connected), NULL);
+	g_signal_connect (screen, "notify::dpms-mode", G_CALLBACK (dpms_mode_changed), NULL);
 
 	gtk_main ();
 
