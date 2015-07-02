@@ -82,6 +82,8 @@ struct GnomeRROutput
     gboolean            is_primary;
     gboolean            is_presentation;
     gboolean            is_underscanning;
+    gboolean            supports_underscanning;
+
     GnomeRRTile         tile_info;
 };
 
@@ -1401,6 +1403,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
     g_variant_lookup (properties, "presentation", "b", &output->is_presentation);
     g_variant_lookup (properties, "underscanning", "b", &output->is_underscanning);
+    g_variant_lookup (properties, "supports-underscanning", "b", &output->supports_underscanning);
 
     if ((edid = g_variant_lookup_value (properties, "edid", G_VARIANT_TYPE ("ay"))))
       {
@@ -2211,6 +2214,13 @@ gnome_rr_output_get_is_underscanning (GnomeRROutput *output)
 {
     g_assert(output != NULL);
     return output->is_underscanning;
+}
+
+gboolean
+gnome_rr_output_supports_underscanning (GnomeRROutput *output)
+{
+    g_assert (output != NULL);
+    return output->supports_underscanning;
 }
 
 gboolean
