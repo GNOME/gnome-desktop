@@ -140,6 +140,7 @@ GnomeWallClockClass
 gnome_wall_clock_new
 gnome_wall_clock_get_clock
 gnome_wall_clock_get_timezone
+gnome_wall_clock_string_for_datetime
 <SUBSECTION Standard>
 GNOME_WALL_CLOCK
 GNOME_IS_WALL_CLOCK
@@ -159,6 +160,7 @@ GnomeXkbInfo
 GnomeXkbInfoClass
 gnome_xkb_info_new
 gnome_xkb_info_get_all_layouts
+gnome_xkb_info_get_languages_for_layout
 gnome_xkb_info_get_layouts_for_country
 gnome_xkb_info_get_layouts_for_language
 gnome_xkb_info_get_layout_info
@@ -213,6 +215,7 @@ gnome_rr_output_info_get_underscanning
 gnome_rr_output_info_get_vendor
 gnome_rr_output_info_is_active
 gnome_rr_output_info_is_connected
+gnome_rr_output_info_is_primary_tile
 gnome_rr_output_info_set_active
 gnome_rr_output_info_set_geometry
 gnome_rr_output_info_set_primary
@@ -304,6 +307,7 @@ gnome_rr_output_get_ids_from_edid
 gnome_rr_output_get_min_backlight_step
 gnome_rr_output_get_physical_size
 gnome_rr_mode_get_id
+gnome_rr_mode_get_is_tiled
 gnome_rr_mode_get_width
 gnome_rr_mode_get_height
 gnome_rr_mode_get_freq
@@ -324,11 +328,13 @@ GNOME_RR_SCREEN_CLASS
 GNOME_IS_RR_SCREEN_CLASS
 GNOME_RR_SCREEN_GET_CLASS
 GNOME_TYPE_RR_CRTC
+GNOME_TYPE_RR_DPMS_MODE
 GNOME_TYPE_RR_MODE
 GNOME_TYPE_RR_OUTPUT
 <SUBSECTION Private>
 GnomeRRScreenPrivate
 gnome_rr_crtc_get_type
+gnome_rr_dpms_mode_get_type
 gnome_rr_mode_get_type
 gnome_rr_screen_get_type
 gnome_rr_output_get_type
