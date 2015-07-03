@@ -703,7 +703,7 @@ get_translated_language (const char *code,
         name = NULL;
         if (language != NULL) {
                 const char  *translated_name;
-                char        *old_locale;
+                char        *old_locale = NULL;
 
                 if (locale != NULL) {
                         old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
