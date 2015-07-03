@@ -48,6 +48,8 @@ CFILE_GLOB=$(top_srcdir)/libgnome-desktop/*.c
 # Header files to ignore when scanning.
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
 IGNORE_HFILES= \
+	gnome-rr-private.h \
+	libgsystem \
 	meta-dbus-idle-monitor.h \
 	meta-dbus-xrandr.h \
 	meta-xrandr-shared.h
