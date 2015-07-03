@@ -32,8 +32,7 @@ introspection_sources = 		\
 	gnome-wall-clock.c		\
 	gnome-xkb-info.c		\
 	gnome-idle-monitor.c		\
-	gnome-languages.c		\
-	edid-parse.c
+	gnome-languages.c
 
 libgnome_desktop_3_la_SOURCES = 	\
 	$(introspection_sources)	\
@@ -43,7 +42,6 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
 	default-input-sources.h		\
-	edid.h				\
 	meta-xrandr-shared.h
 
 dbus_xrandr_built_sources = meta-dbus-xrandr.c meta-dbus-xrandr.h

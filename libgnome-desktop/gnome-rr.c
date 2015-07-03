@@ -35,7 +35,6 @@
 #include "gnome-rr.h"
 #include "gnome-rr-config.h"
 
-#include "edid.h"
 #include "gnome-rr-private.h"
 
 

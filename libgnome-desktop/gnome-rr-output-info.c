@@ -27,7 +27,6 @@
 
 #include "gnome-rr-config.h"
 
-#include "edid.h"
 #include "gnome-rr-private.h"
 
 G_DEFINE_TYPE (GnomeRROutputInfo, gnome_rr_output_info, G_TYPE_OBJECT)

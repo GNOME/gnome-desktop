@@ -38,7 +38,6 @@
 
 #include "gnome-rr-config.h"
 
-#include "edid.h"
 #include "gnome-rr-private.h"
 
 #define CONFIG_INTENDED_BASENAME "monitors.xml"
