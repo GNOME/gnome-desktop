@@ -58,6 +58,8 @@ struct _GnomeBGCrossfadeClass
 	void (* finished) (GnomeBGCrossfade *fade, GdkWindow *window);
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeBGCrossfade, g_object_unref)
+
 GType             gnome_bg_crossfade_get_type              (void);
 GnomeBGCrossfade *gnome_bg_crossfade_new (int width, int height);
 gboolean          gnome_bg_crossfade_set_start_surface (GnomeBGCrossfade *fade,

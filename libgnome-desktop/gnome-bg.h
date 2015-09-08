@@ -48,6 +48,8 @@ G_BEGIN_DECLS
 typedef struct _GnomeBG GnomeBG;
 typedef struct _GnomeBGClass GnomeBGClass;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeBG, g_object_unref)
+
 GType            gnome_bg_get_type              (void);
 GnomeBG *        gnome_bg_new                   (void);
 void             gnome_bg_load_from_preferences (GnomeBG               *bg,

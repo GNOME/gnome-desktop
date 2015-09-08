@@ -58,6 +58,8 @@ struct _GnomeWallClockClass
 	GObjectClass parent_class;
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeWallClock, g_object_unref)
+
 GType             gnome_wall_clock_get_type      (void);
 
 GnomeWallClock *  gnome_wall_clock_new           (void);

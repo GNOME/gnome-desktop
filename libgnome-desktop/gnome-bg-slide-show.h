@@ -56,6 +56,8 @@ struct _GnomeBGSlideShowClass
 	GObjectClass parent_class;
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeBGSlideShow, g_object_unref)
+
 GType             gnome_bg_slide_show_get_type (void);
 GnomeBGSlideShow *gnome_bg_slide_show_new (const char *filename);
 gboolean          gnome_bg_slide_show_load (GnomeBGSlideShow  *self,

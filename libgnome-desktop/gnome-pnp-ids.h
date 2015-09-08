@@ -47,6 +47,8 @@ struct _GnomePnpIdsClass
         GObjectClass    parent_class;
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomePnpIds, g_object_unref)
+
 GType            gnome_pnp_ids_get_type                    (void);
 GnomePnpIds     *gnome_pnp_ids_new                         (void);
 gchar           *gnome_pnp_ids_get_pnp_id                  (GnomePnpIds            *pnp_ids,

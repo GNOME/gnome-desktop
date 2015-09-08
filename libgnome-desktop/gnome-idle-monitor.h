@@ -54,6 +54,8 @@ struct _GnomeIdleMonitorClass
         GObjectClass          parent_class;
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeIdleMonitor, g_object_unref)
+
 typedef void (*GnomeIdleMonitorWatchFunc) (GnomeIdleMonitor      *monitor,
                                            guint                  id,
                                            gpointer               user_data);

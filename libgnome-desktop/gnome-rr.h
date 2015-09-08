@@ -99,6 +99,8 @@ typedef enum {
 #define GNOME_TYPE_RR_MODE   (gnome_rr_mode_get_type())
 #define GNOME_TYPE_RR_DPMS_MODE (gnome_rr_dpms_mode_get_type())
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeRRScreen, g_object_unref)
+
 GType gnome_rr_screen_get_type (void);
 GType gnome_rr_output_get_type (void);
 GType gnome_rr_crtc_get_type (void);

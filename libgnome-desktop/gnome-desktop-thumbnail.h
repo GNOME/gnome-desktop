@@ -62,6 +62,8 @@ struct _GnomeDesktopThumbnailFactoryClass {
 	GObjectClass parent;
 };
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeDesktopThumbnailFactory, g_object_unref)
+
 GType                  gnome_desktop_thumbnail_factory_get_type (void);
 GnomeDesktopThumbnailFactory *gnome_desktop_thumbnail_factory_new      (GnomeDesktopThumbnailSize     size);
 

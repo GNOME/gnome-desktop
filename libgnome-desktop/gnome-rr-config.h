@@ -58,6 +58,8 @@ struct _GnomeRROutputInfoClass
 #define GNOME_IS_RR_OUTPUT_INFO_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RR_OUTPUT_INFO))
 #define GNOME_RR_OUTPUT_INFO_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_RR_OUTPUT_INFO, GnomeRROutputInfoClass))
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeRROutputInfo, g_object_unref)
+
 GType gnome_rr_output_info_get_type (void);
 
 char *gnome_rr_output_info_get_name (GnomeRROutputInfo *self);
@@ -116,6 +118,8 @@ struct _GnomeRRConfigClass
 #define GNOME_RR_CONFIG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_RR_CONFIG, GnomeRRConfigClass))
 #define GNOME_IS_RR_CONFIG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RR_CONFIG))
 #define GNOME_RR_CONFIG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_RR_CONFIG, GnomeRRConfigClass))
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GnomeRRConfig, g_object_unref)
 
 GType               gnome_rr_config_get_type     (void);
 
