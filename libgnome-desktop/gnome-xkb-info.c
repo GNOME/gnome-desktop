@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <gdk/gdkx.h>
+#include <gio/gio.h>
 
 #include <glib/gi18n-lib.h>
 #define XKEYBOARD_CONFIG_(String) ((char *) g_dgettext ("xkeyboard-config", String))
