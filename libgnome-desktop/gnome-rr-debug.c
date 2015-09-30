@@ -20,7 +20,6 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 
-#include <gdk/gdkx.h>
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <libgnome-desktop/gnome-rr.h>
