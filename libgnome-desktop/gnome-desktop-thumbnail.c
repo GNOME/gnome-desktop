@@ -549,12 +549,11 @@ _gdk_pixbuf_new_from_uri_at_scale (const char *uri,
         /* This can happen if the above loop was exited due to the
          * g_input_stream_read() call failing. */
         result = FALSE;
-    } else if (gdk_pixbuf_loader_close (loader, &error) == FALSE &&
-               !g_error_matches (error, GDK_PIXBUF_ERROR, GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION)) {
+    } else if (gdk_pixbuf_loader_close (loader, &error) == FALSE) {
         g_warning ("Error creating thumbnail for %s: %s", uri, error->message);
+        g_clear_error (&error);
         result = FALSE;
     }
-    g_clear_error (&error);
 
     if (!result) {
         g_clear_object (&loader);
