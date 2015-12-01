@@ -244,10 +244,12 @@ static void gnome_rr_output_info_set_tiled_geometry (GnomeRROutputInfo *self, in
                 /* for primary tile only configs turn off non-primary
                    tiles - turn them on for tiled ones */
                 if (ht != 0 || vt != 0)
+                {
                     if (self->priv->on == FALSE)
                         outputs[i]->priv->on = FALSE;
                     else
                         outputs[i]->priv->on = !primary_tile_only;
+                }
 
                 if (primary_tile_only)
                 {
