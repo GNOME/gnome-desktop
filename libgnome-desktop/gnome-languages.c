@@ -391,6 +391,7 @@ add_locale (const char *language_name,
         GnomeLocale *old_locale;
         char      *name;
         gboolean   is_utf8 = FALSE;
+        gboolean   valid = FALSE;
 
         g_return_val_if_fail (language_name != NULL, FALSE);
         g_return_val_if_fail (*language_name != '\0', FALSE);
@@ -426,13 +427,16 @@ add_locale (const char *language_name,
         }
 
         locale = g_new0 (GnomeLocale, 1);
-        gnome_parse_locale (name,
-                            &locale->language_code,
-                            &locale->territory_code,
-                            &locale->codeset,
-                            &locale->modifier);
+        valid = gnome_parse_locale (name,
+                                    &locale->language_code,
+                                    &locale->territory_code,
+                                    &locale->codeset,
+                                    &locale->modifier);
         g_free (name);
-        name = NULL;
+        if (!valid) {
+                gnome_locale_free (locale);
+                return FALSE;
+        }
 
         locale->id = construct_language_name (locale->language_code, locale->territory_code,
                                               NULL, locale->modifier);
