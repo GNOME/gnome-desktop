@@ -229,7 +229,7 @@ construct_language_name (const char *language,
 {
         char *name;
 
-        g_assert (language[0] != 0);
+        g_assert (language != NULL && language[0] != 0);
         g_assert (territory == NULL || territory[0] != 0);
         g_assert (codeset == NULL || codeset[0] != 0);
         g_assert (modifier == NULL || modifier[0] != 0);
