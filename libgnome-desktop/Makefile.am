@@ -143,16 +143,16 @@ EXTRA_DIST += \
 MAINTAINERCLEANFILES = \
 	pnp.ids
 
-libexec_PROGRAMS =		\
-	gnome-rr-debug
-
 gnome_rr_debug_SOURCES =	\
 	gnome-rr-debug.c
-
 gnome_rr_debug_LDADD =		\
 	$(GNOME_DESKTOP_LIBS)	\
 	$(lib_LTLIBRARIES)	\
 	$(XLIB_LIBS)
+
+if DEBUG_TOOLS_ENABLED
+libexec_PROGRAMS = gnome-rr-debug
+endif
 
 noinst_PROGRAMS = test-xkb-info test-pnp-ids test-wall-clock test-desktop-thumbnail test-idle-monitor test-languages
 test_xkb_info_LDADD =		\

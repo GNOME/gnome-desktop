@@ -91,6 +91,13 @@ AC_ARG_ENABLE([desktop-docs],
 	[],[enable_desktop_docs=yes])
 AM_CONDITIONAL(DESKTOP_DOCS_ENABLED, test "x$enable_desktop_docs" = "xyes")
 
+# Should we build debug tools? Useful to bundle the gnome-desktop library
+# e.g. with a xdg-app runtime
+AC_ARG_ENABLE([debug-tools],
+        [AS_HELP_STRING([--disable-debug-tools],[do not build debug tools])],
+        [],[enable_debug_tools=yes])
+AM_CONDITIONAL(DEBUG_TOOLS_ENABLED, test "x$enable_debug_tools" = "xyes")
+
 # Path to the pnp.ids file -- to know if we use one shipped with another
 # package, or an internal file
 
@@ -245,6 +252,7 @@ echo "
 
         GNOME Distributor:            ${GNOME_DISTRIBUTOR}
         Build desktop-wide docs:      ${enable_desktop_docs}
+        Build debug tools:            ${enable_debug_tools}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Use external pnp.ids:         ${EXTERNAL_PNP_IDS}
         Build gtk-doc documentation:  ${enable_gtk_doc}
