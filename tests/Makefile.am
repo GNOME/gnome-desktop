@@ -15,7 +15,7 @@ TESTS_ENVIRONMENT += G_ENABLE_DIAGNOSTIC=0
 
 installed_test_programs =	\
 	wall-clock		\
-	gtk-reftest		\
+	wallclock-reftest	\
 	$(NULL)
 
 dist_installed_test_data =	\
