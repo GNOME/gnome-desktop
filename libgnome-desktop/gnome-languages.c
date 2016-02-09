@@ -678,6 +678,19 @@ get_first_item_in_semicolon_list (const char *list)
 }
 
 static char *
+capitalize_utf8_string (const char *str)
+{
+        char first[8] = { 0 };
+
+        if (!str)
+                return NULL;
+
+        g_unichar_to_utf8 (g_unichar_totitle (g_utf8_get_char (str)), first);
+
+        return g_strconcat (first, g_utf8_offset_to_pointer (str, 1), NULL);
+}
+
+static char *
 get_translated_language (const char *code,
                          const char *locale)
 {
@@ -699,8 +712,10 @@ get_translated_language (const char *code,
                 if (is_fallback_language (code)) {
                         name = g_strdup (_("Unspecified"));
                 } else {
+                        g_autofree char *tmp = NULL;
                         translated_name = dgettext ("iso_639", language);
-                        name = get_first_item_in_semicolon_list (translated_name);
+                        tmp = get_first_item_in_semicolon_list (translated_name);
+                        name = capitalize_utf8_string (tmp);
                 }
 
                 if (locale != NULL) {
@@ -742,6 +757,7 @@ get_translated_territory (const char *code,
         if (territory != NULL) {
                 const char *translated_territory;
                 g_autofree char *old_locale = NULL;
+                g_autofree char *tmp = NULL;
 
                 if (locale != NULL) {
                         old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
@@ -749,7 +765,8 @@ get_translated_territory (const char *code,
                 }
 
                 translated_territory = dgettext ("iso_3166", territory);
-                name = get_first_item_in_semicolon_list (translated_territory);
+                tmp = get_first_item_in_semicolon_list (translated_territory);
+                name = capitalize_utf8_string (tmp);
 
                 if (locale != NULL) {
                         setlocale (LC_MESSAGES, old_locale);
