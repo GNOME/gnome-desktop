@@ -2040,6 +2040,13 @@ gnome_rr_mode_get_freq (GnomeRRMode *mode)
     return (mode->freq) / 1000;
 }
 
+double
+gnome_rr_mode_get_freq_f (GnomeRRMode *mode)
+{
+    g_return_val_if_fail (mode != NULL, 0.0);
+    return (mode->freq) / 1000.0;
+}
+
 guint
 gnome_rr_mode_get_height (GnomeRRMode *mode)
 {
