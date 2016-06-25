@@ -21,7 +21,9 @@
 
 #include <glib-object.h>
 #include <libgnome-desktop/gnome-pnp-ids.h>
+#ifdef HAVE_UDEV
 #include <libudev.h>
+#endif
 
 static void     gnome_pnp_ids_finalize     (GObject     *object);
 
@@ -29,8 +31,12 @@ static void     gnome_pnp_ids_finalize     (GObject     *object);
 
 struct _GnomePnpIdsPrivate
 {
+#ifdef HAVE_UDEV
         struct udev *udev;
         struct udev_hwdb *hwdb;
+#else
+        char *placeholder;
+#endif /* HAVE_UDEV */
 };
 
 G_DEFINE_TYPE (GnomePnpIds, gnome_pnp_ids, G_TYPE_OBJECT)
@@ -48,6 +54,7 @@ G_DEFINE_TYPE (GnomePnpIds, gnome_pnp_ids, G_TYPE_OBJECT)
 gchar *
 gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
 {
+#ifdef HAVE_UDEV
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
         struct udev_list_entry *list_entry, *l;
         char *modalias;
@@ -70,6 +77,9 @@ gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
         ret = g_strdup (udev_list_entry_get_value (l));
 
         return ret;
+#else
+        return "Undefined";
+#endif
 }
 
 static void
@@ -84,8 +94,10 @@ static void
 gnome_pnp_ids_init (GnomePnpIds *pnp_ids)
 {
         pnp_ids->priv = GNOME_PNP_IDS_GET_PRIVATE (pnp_ids);
+#ifdef HAVE_UDEV
         pnp_ids->priv->udev = udev_new();
         pnp_ids->priv->hwdb = udev_hwdb_new (pnp_ids->priv->udev);
+#endif
 }
 
 static void
@@ -94,8 +106,10 @@ gnome_pnp_ids_finalize (GObject *object)
         GnomePnpIds *pnp_ids = GNOME_PNP_IDS (object);
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
 
+#ifdef HAVE_UDEV
         g_clear_pointer (&priv->udev, udev_unref);
         g_clear_pointer (&priv->hwdb, udev_hwdb_unref);
+#endif
 
         G_OBJECT_CLASS (gnome_pnp_ids_parent_class)->finalize (object);
 }

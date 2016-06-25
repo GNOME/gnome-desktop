@@ -140,6 +140,25 @@ AC_SUBST(X11_PACKAGE)
 AC_SUBST(XLIB_CFLAGS)
 AC_SUBST(XLIB_LIBS)
 
+dnl ---------------------------------------------------------------------------
+dnl - hwdb for pnp IDs (default enabled)
+dnl ---------------------------------------------------------------------------
+UDEV_PKG=""
+AC_ARG_ENABLE(udev, AS_HELP_STRING([--disable-udev],[Disable udev support]), enable_udev=$enableval)
+if test x$enable_udev != xno; then
+	PKG_CHECK_MODULES(UDEV, libudev, have_udev="yes", have_udev="no")
+	if test "x$have_udev" = "xyes"; then
+		AC_DEFINE(HAVE_UDEV, 1, [define if udev is available])
+		UDEV_PKG="libudev"
+	else
+		if test x$enable_udev = xyes; then
+			AC_MSG_ERROR([udev enabled but not found])
+		fi
+	fi
+else
+	have_udev=no
+fi
+
 dnl pkg-config dependency checks
 
 PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
@@ -149,7 +168,7 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
                                  xkeyboard-config
                                  iso-codes
-                                 libudev)
+                                 $UDEV_PKG)
 
 XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
 AC_SUBST(XKB_BASE)
@@ -237,5 +256,6 @@ echo "
         Build debug tools:            ${enable_debug_tools}
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Build gtk-doc documentation:  ${enable_gtk_doc}
+        Build with udev support:      ${enable_udev}
 
 "
