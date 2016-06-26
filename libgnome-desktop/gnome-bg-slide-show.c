@@ -504,9 +504,7 @@ now (void)
  * @file1: (out) (allow-none) (transfer none): first file in slide
  * @file2: (out) (allow-none) (transfer none): second file in slide
  *
- * Returns the current slides progress
- *
- * Return value: %TRUE if successful
+ * Returns the current slides progress.
  **/
 void
 gnome_bg_slide_show_get_current_slide (GnomeBGSlideShow  *self,
