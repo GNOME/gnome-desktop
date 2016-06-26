@@ -103,7 +103,7 @@ GLIB_TESTS
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
-GDK_PIXBUF_REQUIRED=2.33.0
+GDK_PIXBUF_REQUIRED=2.36.1
 GTK_REQUIRED=3.3.6
 GLIB_REQUIRED=2.44.0
 XRANDR_REQUIRED=1.3
