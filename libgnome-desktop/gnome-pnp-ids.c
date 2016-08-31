@@ -78,7 +78,7 @@ gnome_pnp_ids_get_pnp_id (GnomePnpIds *pnp_ids, const gchar *pnp_id)
 
         return ret;
 #else
-        return "Undefined";
+        return g_strdup ("Undefined");
 #endif
 }
 
