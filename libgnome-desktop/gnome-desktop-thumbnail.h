@@ -103,6 +103,13 @@ char *     gnome_desktop_thumbnail_path_for_uri      (const char         *uri,
 
 /* Pixbuf utils */
 
+#ifndef __GTK_DOC_IGNORE__
+#define GNOME_DESKTOP_DEPRECATED_IN_3_24_FOR(f) G_DEPRECATED_FOR(f) extern
+#else
+#define GNOME_DESKTOP_DEPRECATED_IN_3_24_FOR(f) extern
+#endif
+
+GNOME_DESKTOP_DEPRECATED_IN_3_24_FOR(gdk_pixbuf_scale_simple)
 GdkPixbuf *gnome_desktop_thumbnail_scale_down_pixbuf (GdkPixbuf          *pixbuf,
 						      int                 dest_width,
 						      int                 dest_height);
