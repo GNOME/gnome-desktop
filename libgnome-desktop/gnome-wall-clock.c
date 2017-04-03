@@ -104,15 +104,8 @@ gnome_wall_clock_dispose (GObject *object)
 		self->priv->clock_update_id = 0;
 	}
 
-	if (self->priv->tz_monitor != NULL) {
-		g_object_unref (self->priv->tz_monitor);
-		self->priv->tz_monitor = NULL;
-	}
-
-	if (self->priv->desktop_settings != NULL) {
-		g_object_unref (self->priv->desktop_settings);
-		self->priv->desktop_settings = NULL;
-	}
+	g_clear_object (&self->priv->tz_monitor);
+	g_clear_object (&self->priv->desktop_settings);
 
 	G_OBJECT_CLASS (gnome_wall_clock_parent_class)->dispose (object);
 }
