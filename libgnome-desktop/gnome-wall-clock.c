@@ -381,6 +381,12 @@ on_schema_change (GSettings *schema,
                   const char *key,
                   gpointer user_data)
 {
+	if (g_strcmp0 (key, "clock-format") != 0 &&
+	    g_strcmp0 (key, "clock-show-seconds") != 0 &&
+	    g_strcmp0 (key, "clock-show-date") != 0) {
+		return;
+	}
+
 	g_debug ("Updating clock because schema changed");
 	update_clock (user_data);
 }
