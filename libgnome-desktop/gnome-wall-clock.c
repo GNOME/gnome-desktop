@@ -88,7 +88,7 @@ gnome_wall_clock_init (GnomeWallClock *self)
 }
 
 static void
-gnome_wall_clock_dispose (GObject *object)
+gnome_wall_clock_finalize (GObject *object)
 {
 	GnomeWallClock *self = GNOME_WALL_CLOCK (object);
 
@@ -99,15 +99,6 @@ gnome_wall_clock_dispose (GObject *object)
 
 	g_clear_object (&self->priv->tz_monitor);
 	g_clear_object (&self->priv->desktop_settings);
-
-	G_OBJECT_CLASS (gnome_wall_clock_parent_class)->dispose (object);
-}
-
-static void
-gnome_wall_clock_finalize (GObject *object)
-{
-	GnomeWallClock *self = GNOME_WALL_CLOCK (object);
-
 	g_time_zone_unref (self->priv->timezone);
 	g_free (self->priv->clock_string);
 
@@ -169,7 +160,6 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 
 	gobject_class->get_property = gnome_wall_clock_get_property;
 	gobject_class->set_property = gnome_wall_clock_set_property;
-	gobject_class->dispose = gnome_wall_clock_dispose;
 	gobject_class->finalize = gnome_wall_clock_finalize;
 
 	/**
