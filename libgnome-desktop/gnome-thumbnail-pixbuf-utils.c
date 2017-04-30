@@ -41,7 +41,7 @@
  * Scales the pixbuf to the desired size. This function
  * used to be a lot faster than gdk-pixbuf when scaling
  * down by large amounts. This is not true anymore since
- * gdk-pixbuf UNRELEASED. You should use
+ * gdk-pixbuf 2.36.5. You should use
  * gdk_pixbuf_scale_simple() instead, which this function
  * now does internally.
  *
