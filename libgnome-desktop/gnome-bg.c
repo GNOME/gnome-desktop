@@ -910,6 +910,14 @@ draw_once (GnomeBG   *bg,
 
 	pixbuf = get_pixbuf_for_size (bg, num_monitor, rect.width, rect.height);
 	if (pixbuf) {
+		GdkPixbuf *rotated;
+
+		rotated = gdk_pixbuf_apply_embedded_orientation (pixbuf);
+		if (rotated != NULL) {
+			g_object_unref (pixbuf);
+			pixbuf = rotated;
+		}
+
 		draw_image_area (bg,
 				 num_monitor,
 				 pixbuf,
@@ -2554,8 +2562,17 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 	else {
 		orig = gdk_pixbuf_new_from_file (filename, NULL);
 		if (orig) {
-			int orig_width = gdk_pixbuf_get_width (orig);
-			int orig_height = gdk_pixbuf_get_height (orig);
+			int orig_width, orig_height;
+			GdkPixbuf *rotated;
+
+			rotated = gdk_pixbuf_apply_embedded_orientation (orig);
+			if (rotated != NULL) {
+				g_object_unref (orig);
+				orig = rotated;
+			}
+
+			orig_width = gdk_pixbuf_get_width (orig);
+			orig_height = gdk_pixbuf_get_height (orig);
 			
 			result = pixbuf_scale_to_fit (orig, THUMBNAIL_SIZE, THUMBNAIL_SIZE);
 			
