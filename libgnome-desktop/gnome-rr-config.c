@@ -495,6 +495,8 @@ gnome_rr_config_applicable (GnomeRRConfig  *configuration,
 	 g_object_unref (outputs[i]);
     }
 
+    g_free (outputs);
+
     return result;
 }
 
