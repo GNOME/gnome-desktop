@@ -21,7 +21,6 @@ AM_CFLAGS = $(WARN_CFLAGS)
 
 introspection_sources = 		\
 	gnome-desktop-thumbnail.c 	\
-	gnome-thumbnail-pixbuf-utils.c 	\
 	gnome-bg.c			\
 	gnome-bg-slide-show.c		\
 	gnome-bg-crossfade.c		\
