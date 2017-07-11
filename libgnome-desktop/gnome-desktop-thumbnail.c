@@ -145,8 +145,6 @@
 #include "gnome-desktop-thumbnail.h"
 #include <glib/gstdio.h>
 
-#define SECONDS_BETWEEN_STATS 10
-
 static void
 thumbnailers_directory_changed (GFileMonitor                 *monitor,
                                 GFile                        *file,
