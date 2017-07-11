@@ -667,18 +667,18 @@ static void
 gnome_desktop_thumbnail_factory_init (GnomeDesktopThumbnailFactory *factory)
 {
   GnomeDesktopThumbnailFactoryPrivate *priv;
-  
+
   factory->priv = GNOME_DESKTOP_THUMBNAIL_FACTORY_GET_PRIVATE (factory);
 
   priv = factory->priv;
 
   priv->size = GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL;
-  
+
   priv->mime_types_map = g_hash_table_new_full (g_str_hash,
                                                 g_str_equal,
                                                 (GDestroyNotify)g_free,
                                                 (GDestroyNotify)thumbnailer_unref);
-  
+
   g_mutex_init (&priv->lock);
 
   priv->settings = g_settings_new ("org.gnome.desktop.thumbnailers");
@@ -701,7 +701,7 @@ gnome_desktop_thumbnail_factory_finalize (GObject *object)
 {
   GnomeDesktopThumbnailFactory *factory;
   GnomeDesktopThumbnailFactoryPrivate *priv;
-  
+
   factory = GNOME_DESKTOP_THUMBNAIL_FACTORY (object);
 
   priv = factory->priv;
@@ -745,7 +745,7 @@ gnome_desktop_thumbnail_factory_class_init (GnomeDesktopThumbnailFactoryClass *c
   GObjectClass *gobject_class;
 
   gobject_class = G_OBJECT_CLASS (class);
-	
+
   gobject_class->finalize = gnome_desktop_thumbnail_factory_finalize;
 
   g_type_class_add_private (class, sizeof (GnomeDesktopThumbnailFactoryPrivate));
@@ -758,7 +758,7 @@ gnome_desktop_thumbnail_factory_class_init (GnomeDesktopThumbnailFactoryClass *c
  * Creates a new #GnomeDesktopThumbnailFactory.
  *
  * This function must be called on the main thread.
- * 
+ *
  * Return value: a new #GnomeDesktopThumbnailFactory
  *
  * Since: 2.2
@@ -767,11 +767,11 @@ GnomeDesktopThumbnailFactory *
 gnome_desktop_thumbnail_factory_new (GnomeDesktopThumbnailSize size)
 {
   GnomeDesktopThumbnailFactory *factory;
-  
+
   factory = g_object_new (GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY, NULL);
-  
+
   factory->priv->size = size;
-  
+
   return factory;
 }
 
@@ -956,7 +956,7 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
       strncmp (uri, "file:/", 6) == 0 &&
       strstr (uri, "/thumbnails/") != NULL)
     return FALSE;
-  
+
   if (!mime_type)
     return FALSE;
 
@@ -976,13 +976,13 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
                                                                           uri,
                                                                           mtime);
     }
-  
+
   return FALSE;
 }
 
 static char *
 expand_thumbnailing_script (const char *script,
-			    const int   size, 
+			    const int   size,
 			    const char *inuri,
 			    const char *outfile)
 {
@@ -992,7 +992,7 @@ expand_thumbnailing_script (const char *script,
   gboolean got_in;
 
   str = g_string_new (NULL);
-  
+
   got_in = FALSE;
   last = script;
   while ((p = strchr (last, '%')) != NULL)
@@ -1135,7 +1135,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   g_return_val_if_fail (mime_type != NULL, NULL);
 
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
-  
+
   size = 128;
   if (factory->priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE)
     size = 256;
@@ -1157,7 +1157,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
         script = g_strdup (thumb->command);
     }
   g_mutex_unlock (&factory->priv->lock);
-  
+
   if (script)
     {
       int fd;
@@ -1386,7 +1386,7 @@ gnome_desktop_thumbnail_has_uri (GdkPixbuf          *pixbuf,
 				 const char         *uri)
 {
   const char *thumb_uri;
-  
+
   thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
   if (!thumb_uri)
     return FALSE;
@@ -1414,19 +1414,19 @@ gnome_desktop_thumbnail_is_valid (GdkPixbuf          *pixbuf,
 {
   const char *thumb_uri, *thumb_mtime_str;
   time_t thumb_mtime;
-  
+
   thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
   if (!thumb_uri)
     return FALSE;
   if (strcmp (uri, thumb_uri) != 0)
     return FALSE;
-  
+
   thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
   if (!thumb_mtime_str)
     return FALSE;
   thumb_mtime = atol (thumb_mtime_str);
   if (mtime != thumb_mtime)
     return FALSE;
-  
+
   return TRUE;
 }

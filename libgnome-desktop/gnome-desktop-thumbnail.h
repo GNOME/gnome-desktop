@@ -54,7 +54,7 @@ typedef struct _GnomeDesktopThumbnailFactoryPrivate GnomeDesktopThumbnailFactory
 
 struct _GnomeDesktopThumbnailFactory {
 	GObject parent;
-	
+
 	GnomeDesktopThumbnailFactoryPrivate *priv;
 };
 
