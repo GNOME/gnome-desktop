@@ -96,7 +96,6 @@ gboolean   gnome_desktop_thumbnail_has_uri           (GdkPixbuf          *pixbuf
 gboolean   gnome_desktop_thumbnail_is_valid          (GdkPixbuf          *pixbuf,
 						      const char         *uri,
 						      time_t              mtime);
-char *     gnome_desktop_thumbnail_md5               (const char         *uri);
 char *     gnome_desktop_thumbnail_path_for_uri      (const char         *uri,
 						      GnomeDesktopThumbnailSize  size);
 
