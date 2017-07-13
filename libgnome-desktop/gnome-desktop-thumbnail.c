@@ -1262,7 +1262,11 @@ save_thumbnail (GdkPixbuf  *pixbuf,
 static GdkPixbuf *
 make_failed_thumbnail (void)
 {
-  return gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
+  GdkPixbuf *pixbuf;
+
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
+  gdk_pixbuf_fill (pixbuf, 0x00000000);
+  return pixbuf;
 }
 
 /**
