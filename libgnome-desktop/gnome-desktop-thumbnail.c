@@ -55,18 +55,12 @@
  * Each is in a simple key-file format:
  * <informalexample><programlisting>
  * [Thumbnailer Entry]
- * TryExec=evince-thumbnailer
  * Exec=evince-thumbnailer -s %s %u %o
  * MimeType=application/pdf;application/x-bzpdf;application/x-gzpdf;
  * </programlisting></informalexample>
  *
  * The <filename>.thumbnailer</filename> format supports three keys:
  * <variablelist>
- * <varlistentry><term><code>TryExec</code></term><listitem><para>
- * Optional. The name of the the thumbnailer program in the current
- * <envar>$PATH</envar>. This allows the calling code to quickly check whether
- * the thumbnailer exists before trying to execute it.
- * </para></listitem></varlistentry>
  * <varlistentry><term><code>Exec</code></term><listitem><para>
  * Required. The command to execute the thumbnailer. It supports a few different
  * parameters which are replaced before calling the thumbnailer:
@@ -177,7 +171,6 @@ typedef struct {
 
     gchar *path;
 
-    gchar  *try_exec;
     gchar  *command;
     gchar **mime_types;
 } Thumbnailer;
@@ -201,7 +194,6 @@ thumbnailer_unref (Thumbnailer *thumb)
   if (g_atomic_int_dec_and_test (&thumb->ref_count))
     {
       g_free (thumb->path);
-      g_free (thumb->try_exec);
       g_free (thumb->command);
       g_strfreev (thumb->mime_types);
 
@@ -255,8 +247,6 @@ thumbnailer_load (Thumbnailer *thumb)
       return NULL;
     }
 
-  thumb->try_exec = g_key_file_get_string (key_file, THUMBNAILER_ENTRY_GROUP, "TryExec", NULL);
-
   g_key_file_free (key_file);
 
   return thumb;
@@ -271,8 +261,6 @@ thumbnailer_reload (Thumbnailer *thumb)
   thumb->command = NULL;
   g_strfreev (thumb->mime_types);
   thumb->mime_types = NULL;
-  g_free (thumb->try_exec);
-  thumb->try_exec = NULL;
 
   return thumbnailer_load (thumb);
 }
@@ -287,28 +275,6 @@ thumbnailer_new (const gchar *path)
   thumb->path = g_strdup (path);
 
   return thumbnailer_load (thumb);
-}
-
-static gboolean
-thumbnailer_try_exec (Thumbnailer *thumb)
-{
-  gchar *path;
-  gboolean retval;
-
-  if (G_UNLIKELY (!thumb))
-    return FALSE;
-
-  /* TryExec is optional, but Exec isn't, so we assume
-   * the thumbnailer can be run when TryExec is not present
-   */
-  if (!thumb->try_exec)
-    return TRUE;
-
-  path = g_find_program_in_path (thumb->try_exec);
-  retval = path != NULL;
-  g_free (path);
-
-  return retval;
 }
 
 static gpointer
@@ -950,12 +916,7 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
 
   g_mutex_lock (&factory->priv->lock);
   if (!gnome_desktop_thumbnail_factory_is_disabled (factory, mime_type))
-    {
-      Thumbnailer *thumb;
-
-      thumb = g_hash_table_lookup (factory->priv->mime_types_map, mime_type);
-      have_script = thumbnailer_try_exec (thumb);
-    }
+    have_script = TRUE;
   g_mutex_unlock (&factory->priv->lock);
 
   if (have_script)
