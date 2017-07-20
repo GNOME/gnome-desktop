@@ -131,7 +131,7 @@ PKG_CHECK_MODULES(XLIB, x11,
     [X11_PACKAGE=
      AC_PATH_XTRA
      if test "x$no_x" = xyes; then
-       AC_MSG_ERROR("no (requires X development libraries)")
+       AC_MSG_ERROR(["no (requires X development libraries)"])
      else
        XLIB_LIBS="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
        XLIB_CFLAGS=$X_CFLAGS
