@@ -42,7 +42,9 @@ libgnome_desktop_3_la_SOURCES = 	\
 	gnome-datetime-source.c		\
 	gnome-rr-private.h		\
 	default-input-sources.h		\
-	meta-xrandr-shared.h
+	meta-xrandr-shared.h		\
+	gnome-desktop-thumbnail-script.c\
+	gnome-desktop-thumbnail-script.h
 
 dbus_xrandr_built_sources = meta-dbus-xrandr.c meta-dbus-xrandr.h
 

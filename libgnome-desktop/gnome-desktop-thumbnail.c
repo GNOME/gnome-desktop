@@ -127,9 +127,12 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-desktop-thumbnail.h"
+#include "gnome-desktop-thumbnail-script.h"
 
 static void
 thumbnailers_directory_changed (GFileMonitor                 *monitor,
@@ -929,120 +932,6 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
   return FALSE;
 }
 
-static char *
-expand_thumbnailing_elem (const char *elem,
-			  const int   size,
-			  const char *inuri,
-			  const char *outfile,
-			  gboolean   *got_input,
-			  gboolean   *got_output)
-{
-  GString *str;
-  const char *p, *last;
-  char *localfile;
-
-  str = g_string_new (NULL);
-
-  last = elem;
-  while ((p = strchr (last, '%')) != NULL)
-    {
-      g_string_append_len (str, last, p - last);
-      p++;
-
-      switch (*p) {
-      case 'u':
-	g_string_append (str, inuri);
-	*got_input = TRUE;
-	p++;
-	break;
-      case 'i':
-	localfile = g_filename_from_uri (inuri, NULL, NULL);
-	if (localfile)
-	  {
-	    g_string_append (str, localfile);
-	    *got_input = TRUE;
-	    g_free (localfile);
-	  }
-	p++;
-	break;
-      case 'o':
-	g_string_append (str, outfile);
-	*got_output = TRUE;
-	p++;
-	break;
-      case 's':
-	g_string_append_printf (str, "%d", size);
-	p++;
-	break;
-      case '%':
-	g_string_append_c (str, '%');
-	p++;
-	break;
-      case 0:
-      default:
-	break;
-      }
-      last = p;
-    }
-  g_string_append (str, last);
-
-  return g_string_free (str, FALSE);
-}
-
-static char **
-expand_thumbnailing_script (const char  *script,
-			    const int    size,
-			    const char  *inuri,
-			    const char  *outfile,
-			    GError     **error)
-{
-  GPtrArray *array;
-  char **script_elems;
-  guint i;
-  gboolean got_in, got_out;
-
-  if (!g_shell_parse_argv (script, NULL, &script_elems, error))
-    return NULL;
-
-  array = g_ptr_array_new_with_free_func (g_free);
-
-  got_in = got_out = FALSE;
-  for (i = 0; script_elems[i] != NULL; i++)
-    {
-      char *expanded;
-
-      expanded = expand_thumbnailing_elem (script_elems[i],
-					   size,
-					   inuri,
-					   outfile,
-					   &got_in,
-					   &got_out);
-
-      g_ptr_array_add (array, expanded);
-    }
-
-  if (!got_in)
-    {
-      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-			   "Input file could not be set");
-      goto bail;
-    }
-  else if (!got_out)
-    {
-      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-			   "Output file could not be set");
-      goto bail;
-    }
-
-  g_ptr_array_add (array, NULL);
-
-  return (char **) g_ptr_array_free (array, FALSE);
-
-bail:
-  g_ptr_array_free (array, TRUE);
-  return NULL;
-}
-
 static GdkPixbuf *
 get_preview_thumbnail (const char *uri,
                        int         size)
@@ -1099,6 +988,30 @@ get_preview_thumbnail (const char *uri,
     return pixbuf;
 }
 
+static GdkPixbuf *
+pixbuf_new_from_bytes (GBytes  *bytes,
+		       GError **error)
+{
+  g_autoptr(GdkPixbufLoader) loader = NULL;
+
+  loader = gdk_pixbuf_loader_new_with_mime_type ("image/png", error);
+  if (!loader)
+    return NULL;
+
+  if (!gdk_pixbuf_loader_write (loader,
+				g_bytes_get_data (bytes, NULL),
+				g_bytes_get_size (bytes),
+				error))
+    {
+      return NULL;
+    }
+
+  if (!gdk_pixbuf_loader_close (loader, error))
+    return NULL;
+
+  return g_object_ref (gdk_pixbuf_loader_get_pixbuf (loader));
+}
+
 /**
  * gnome_desktop_thumbnail_factory_generate_thumbnail:
  * @factory: a #GnomeDesktopThumbnailFactory
@@ -1122,8 +1035,6 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   GdkPixbuf *pixbuf;
   char *script;
   int size;
-  int exit_status;
-  char *tmpname;
 
   g_return_val_if_fail (uri != NULL, NULL);
   g_return_val_if_fail (mime_type != NULL, NULL);
@@ -1154,41 +1065,17 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 
   if (script)
     {
-      int fd;
+      GBytes *data;
 
-      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
-
-      if (fd != -1)
-	{
-	  char **expanded_script;
-	  GError *error = NULL;
-
-	  close (fd);
-
-	  expanded_script = expand_thumbnailing_script (script, size, uri, tmpname, &error);
-	  if (expanded_script == NULL)
-	    {
-	      g_warning ("Failed to expand script '%s': %s", script, error->message);
-	      g_error_free (error);
-	    }
-	  else
-	    {
-	      gboolean ret;
-
-	      ret = g_spawn_sync (NULL, expanded_script, NULL, G_SPAWN_SEARCH_PATH,
-				  NULL, NULL, NULL, NULL, &exit_status, NULL);
-	      if (ret && exit_status == 0)
-	        pixbuf = gdk_pixbuf_new_from_file (tmpname, NULL);
-
-	      g_strfreev (expanded_script);
-	    }
-
-	  g_unlink (tmpname);
-	  g_free (tmpname);
-	}
-
-      g_free (script);
+      data = gnome_desktop_thumbnail_script_exec (script, size, uri, NULL);
+      if (data)
+        {
+          pixbuf = pixbuf_new_from_bytes (data, NULL);
+          g_bytes_unref (data);
+        }
     }
+
+  g_free (script);
 
   return pixbuf;
 }
