@@ -159,6 +159,14 @@ else
 	have_udev=no
 fi
 
+dnl Check for bubblewrap compatible platform
+case $host_os in
+  linux*)
+    AC_DEFINE_UNQUOTED(HAVE_BWRAP, 1, [Define to 1 if Bubblewrap support is available])
+    AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "$prefix", [Path to library install prefix])
+    ;;
+esac
+
 dnl pkg-config dependency checks
 
 PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED

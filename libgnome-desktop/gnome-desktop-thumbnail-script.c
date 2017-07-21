@@ -36,8 +36,15 @@
 #include "gnome-desktop-thumbnail-script.h"
 
 typedef struct {
+  gboolean sandbox;
+  GArray *fd_array;
+  /* Input/output file paths outside the sandbox */
   char *infile;
   char *outfile;
+  char *outdir; /* outdir is outfile's parent dir, if it needs to be deleted */
+  /* I/O file paths inside the sandbox */
+  char *s_infile;
+  char *s_outfile;
 } ScriptExec;
 
 static char *
@@ -100,11 +107,99 @@ expand_thumbnailing_elem (const char *elem,
   return g_string_free (str, FALSE);
 }
 
+/* From https://github.com/flatpak/flatpak/blob/master/common/flatpak-run.c */
+G_GNUC_NULL_TERMINATED
+static void
+add_args (GPtrArray *argv_array, ...)
+{
+  va_list args;
+  const gchar *arg;
+
+  va_start (args, argv_array);
+  while ((arg = va_arg (args, const gchar *)))
+    g_ptr_array_add (argv_array, g_strdup (arg));
+  va_end (args);
+}
+
+static char *
+get_extension (const char *path)
+{
+  g_autofree char *basename = NULL;
+  char *p;
+
+  basename = g_path_get_basename (path);
+  p = strrchr (basename, '.');
+  if (p == NULL)
+    return NULL;
+  return g_strdup (p + 1);
+}
+
+#ifdef HAVE_BWRAP
+static gboolean
+add_bwrap (GPtrArray   *array,
+	   ScriptExec  *script)
+{
+  char *fd_str;
+  int fd;
+
+  g_return_val_if_fail (script->outdir != NULL, FALSE);
+  g_return_val_if_fail (script->s_infile != NULL, FALSE);
+
+  add_args (array,
+	    "bwrap",
+	    "--ro-bind", "/usr", "/usr",
+	    "--proc", "/proc",
+	    "--dev", "/dev",
+	    "--symlink", "usr/lib", "/lib",
+	    "--symlink", "usr/lib64", "/lib64",
+	    "--symlink", "usr/bin", "/bin",
+	    "--symlink", "usr/sbin", "/sbin",
+	    "--chdir", "/",
+	    "--unshare-all",
+	    "--die-with-parent",
+	    NULL);
+
+  /* Add gnome-desktop's install prefix if needed */
+  if (g_strcmp0 (INSTALL_PREFIX, "") != 0 &&
+      g_strcmp0 (INSTALL_PREFIX, "/usr") != 0 &&
+      g_strcmp0 (INSTALL_PREFIX, "/usr/") != 0)
+    {
+      add_args (array,
+                "--ro-bind", INSTALL_PREFIX, INSTALL_PREFIX,
+                NULL);
+    }
+
+  g_ptr_array_add (array, g_strdup ("--bind"));
+  g_ptr_array_add (array, g_strdup (script->outdir));
+  g_ptr_array_add (array, g_strdup ("/tmp"));
+
+  /* Open the infile so we can pass the fd through bwrap,
+   * we make sure to also re-use the original file's original
+   * extension in case it's useful for the thumbnailer to
+   * identify the file type */
+  fd = open (script->infile, O_RDONLY | O_CLOEXEC);
+  if (fd == -1)
+    goto bail;
+  fd_str = g_strdup_printf ("%d", fd);
+  g_ptr_array_add (array, g_strdup ("--file"));
+  g_ptr_array_add (array, fd_str);
+  g_ptr_array_add (array, g_strdup (script->s_infile));
+
+  g_array_append_val (script->fd_array, fd);
+
+  return TRUE;
+
+bail:
+  g_ptr_array_set_size (array, 0);
+  return FALSE;
+}
+#endif /* HAVE_BWRAP */
+
 static char **
-expand_thumbnailing_script (const char  *cmd,
-			    ScriptExec  *script,
-			    int          size,
-			    GError     **error)
+expand_thumbnailing_cmd (const char  *cmd,
+			 ScriptExec  *script,
+			 int          size,
+			 GError     **error)
 {
   GPtrArray *array;
   g_auto(GStrv) cmd_elems = NULL;
@@ -117,6 +212,18 @@ expand_thumbnailing_script (const char  *cmd,
 
   array = g_ptr_array_new_with_free_func (g_free);
 
+#ifdef HAVE_BWRAP
+  if (script->sandbox)
+    {
+      if (!add_bwrap (array, script))
+        {
+          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+			       "Bubblewrap setup failed");
+	  goto bail;
+	}
+    }
+#endif
+
   got_in = got_out = FALSE;
   for (i = 0; cmd_elems[i] != NULL; i++)
     {
@@ -124,8 +231,8 @@ expand_thumbnailing_script (const char  *cmd,
 
       expanded = expand_thumbnailing_elem (cmd_elems[i],
 					   size,
-					   script->infile,
-					   script->outfile,
+					   script->s_infile ? script->s_infile : script->infile,
+					   script->s_outfile ? script->s_outfile : script->outfile,
 					   &got_in,
 					   &got_out);
 
@@ -155,6 +262,21 @@ bail:
 }
 
 static void
+child_setup (gpointer user_data)
+{
+  GArray *fd_array = user_data;
+  int i;
+
+  /* If no fd_array was specified, don't care. */
+  if (fd_array == NULL)
+    return;
+
+  /* Otherwise, mark not - close-on-exec all the fds in the array */
+  for (i = 0; i < fd_array->len; i++)
+    fcntl (g_array_index (fd_array, int, i), F_SETFD, 0);
+}
+
+static void
 script_exec_free (ScriptExec *exec)
 {
   g_free (exec->infile);
@@ -163,7 +285,24 @@ script_exec_free (ScriptExec *exec)
       g_unlink (exec->outfile);
       g_free (exec->outfile);
     }
+  if (exec->outdir)
+    {
+      g_rmdir (exec->outdir);
+      g_free (exec->outdir);
+    }
+  g_free (exec->s_infile);
+  g_free (exec->s_outfile);
+  if (exec->fd_array)
+    g_array_free (exec->fd_array, TRUE);
   g_free (exec);
+}
+
+static void
+clear_fd (gpointer data)
+{
+  int *fd_p = data;
+  if (fd_p != NULL && *fd_p != -1)
+    close (*fd_p);
 }
 
 static ScriptExec *
@@ -171,21 +310,53 @@ script_exec_new (const char *uri)
 {
   ScriptExec *exec;
   g_autoptr(GFile) file = NULL;
-  int fd;
-  g_autofree char *tmpname = NULL;
 
   exec = g_new0 (ScriptExec, 1);
+#ifdef HAVE_BWRAP
+  /* Bubblewrap is not used if the application is already sandboxed in
+   * Flatpak as all privileges to create a new namespace are dropped when
+   * the initial one is created. */
+  if (!g_file_test ("/.flatpak-info", G_FILE_TEST_IS_REGULAR))
+    exec->sandbox = TRUE;
+#endif
+
   file = g_file_new_for_uri (uri);
 
   exec->infile = g_file_get_path (file);
   if (!exec->infile)
     goto bail;
 
-  fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
-  if (fd == -1)
-    goto bail;
-  close (fd);
-  exec->outfile = g_steal_pointer (&tmpname);
+#ifdef HAVE_BWRAP
+  if (exec->sandbox)
+    {
+      char *tmpl;
+      g_autofree char *ext = NULL;
+
+      exec->fd_array = g_array_new (FALSE, TRUE, sizeof (int));
+      g_array_set_clear_func (exec->fd_array, clear_fd);
+
+      tmpl = g_strdup ("/tmp/gnome-desktop-thumbnailer-XXXXXX");
+      exec->outdir = g_mkdtemp (tmpl);
+      if (!exec->outdir)
+        goto bail;
+      exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
+
+      ext = get_extension (exec->infile);
+      exec->s_infile = g_strdup_printf ("/tmp/gnome-desktop-file-to-thumbnail.%s", ext);
+      exec->s_outfile = g_strdup ("/tmp/gnome-desktop-thumbnailer.png");
+    }
+  else
+#endif
+    {
+      int fd;
+      g_autofree char *tmpname = NULL;
+
+      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
+      if (fd == -1)
+        goto bail;
+      close (fd);
+      exec->outfile = g_steal_pointer (&tmpname);
+    }
 
   return exec;
 
@@ -208,7 +379,7 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   ScriptExec *exec;
 
   exec = script_exec_new (uri);
-  expanded_script = expand_thumbnailing_script (cmd, exec, size, error);
+  expanded_script = expand_thumbnailing_cmd (cmd, exec, size, error);
   if (expanded_script == NULL)
     goto out;
 
@@ -222,7 +393,7 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
 #endif
 
   ret = g_spawn_sync (NULL, expanded_script, NULL, G_SPAWN_SEARCH_PATH,
-		      NULL, NULL, NULL, &error_out,
+		      child_setup, exec->fd_array, NULL, &error_out,
 		      &exit_status, error);
   if (ret && g_spawn_check_exit_status (exit_status, error))
     {
