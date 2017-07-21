@@ -159,10 +159,15 @@ else
 	have_udev=no
 fi
 
+SECCOMP_PKG=""
 dnl Check for bubblewrap compatible platform
 case $host_os in
   linux*)
+    PKG_CHECK_MODULES(LIBSECCOMP, [libseccomp])
+    SECCOMP_PKG="libseccomp"
+    AC_DEFINE_UNQUOTED(_GNU_SOURCE, 1, [Define to include GNU extensions])
     AC_DEFINE_UNQUOTED(HAVE_BWRAP, 1, [Define to 1 if Bubblewrap support is available])
+    AC_DEFINE([ENABLE_SECCOMP], [1], [Define if using seccomp])
     AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "$prefix", [Path to library install prefix])
     ;;
 esac
@@ -176,7 +181,7 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
                                  xkeyboard-config
                                  iso-codes
-                                 $UDEV_PKG)
+                                 $UDEV_PKG $SECCOMP_PKG)
 
 XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
 AC_SUBST(XKB_BASE)
