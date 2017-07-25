@@ -405,6 +405,12 @@ parse_end_element (GMarkupParseContext  *context,
                                                     priv->current_parser_variant->xkb_name,
                                                     NULL);
 
+      if (g_hash_table_contains (priv->layouts_table, priv->current_parser_variant->id))
+        {
+          g_clear_pointer (&priv->current_parser_variant, free_layout);
+          return;
+        }
+
       g_hash_table_replace (priv->layouts_table,
                             priv->current_parser_variant->id,
                             priv->current_parser_variant);
