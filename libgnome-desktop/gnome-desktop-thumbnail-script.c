@@ -584,18 +584,21 @@ expand_thumbnailing_cmd (const char  *cmd,
 #endif
 
 #ifdef ENABLE_SECCOMP
-  const char *arch;
-
-  arch = flatpak_get_arch ();
-  g_assert (arch);
-  if (!setup_seccomp (array,
-                      script->fd_array,
-                      arch,
-                      FALSE,
-                      FALSE,
-                      error))
+  if (script->sandbox)
     {
-      goto bail;
+      const char *arch;
+
+      arch = flatpak_get_arch ();
+      g_assert (arch);
+      if (!setup_seccomp (array,
+                          script->fd_array,
+                          arch,
+                          FALSE,
+                          FALSE,
+                          error))
+        {
+          goto bail;
+        }
     }
 #endif
 
