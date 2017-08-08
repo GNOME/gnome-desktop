@@ -1066,12 +1066,19 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   if (script)
     {
       GBytes *data;
+      GError *error = NULL;
 
-      data = gnome_desktop_thumbnail_script_exec (script, size, uri, NULL);
+      data = gnome_desktop_thumbnail_script_exec (script, size, uri, &error);
       if (data)
         {
           pixbuf = pixbuf_new_from_bytes (data, NULL);
           g_bytes_unref (data);
+        }
+      else
+        {
+          g_debug ("Thumbnail script ('%s') failed for '%s': %s",
+                   script, uri, error ? error->message : "no details");
+          g_clear_error (&error);
         }
     }
 
