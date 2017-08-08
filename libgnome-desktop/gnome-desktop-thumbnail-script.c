@@ -687,7 +687,8 @@ clear_fd (gpointer data)
 }
 
 static ScriptExec *
-script_exec_new (const char *uri)
+script_exec_new (const char  *uri,
+		 GError     **error)
 {
   ScriptExec *exec;
   g_autoptr(GFile) file = NULL;
@@ -705,7 +706,11 @@ script_exec_new (const char *uri)
 
   exec->infile = g_file_get_path (file);
   if (!exec->infile)
-    goto bail;
+    {
+      g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND,
+                   "Could not get path for URI '%s'", uri);
+      goto bail;
+    }
 
 #ifdef HAVE_BWRAP
   if (exec->sandbox)
@@ -719,7 +724,11 @@ script_exec_new (const char *uri)
       tmpl = g_strdup ("/tmp/gnome-desktop-thumbnailer-XXXXXX");
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
-        goto bail;
+        {
+          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                               "Could not create temporary sandbox directory");
+          goto bail;
+        }
       exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
 
       ext = get_extension (exec->infile);
@@ -732,7 +741,7 @@ script_exec_new (const char *uri)
       int fd;
       g_autofree char *tmpname = NULL;
 
-      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, NULL);
+      fd = g_file_open_tmp (".gnome_desktop_thumbnail.XXXXXX", &tmpname, error);
       if (fd == -1)
         goto bail;
       close (fd);
@@ -759,7 +768,7 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   GBytes *image = NULL;
   ScriptExec *exec;
 
-  exec = script_exec_new (uri);
+  exec = script_exec_new (uri, error);
   if (!exec)
     goto out;
   expanded_script = expand_thumbnailing_cmd (cmd, exec, size, error);
