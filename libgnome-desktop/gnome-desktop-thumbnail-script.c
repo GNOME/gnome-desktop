@@ -657,6 +657,9 @@ child_setup (gpointer user_data)
 static void
 script_exec_free (ScriptExec *exec)
 {
+  if (exec == NULL)
+    return;
+
   g_free (exec->infile);
   if (exec->outfile)
     {
@@ -757,6 +760,8 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   ScriptExec *exec;
 
   exec = script_exec_new (uri);
+  if (!exec)
+    goto out;
   expanded_script = expand_thumbnailing_cmd (cmd, exec, size, error);
   if (expanded_script == NULL)
     goto out;
