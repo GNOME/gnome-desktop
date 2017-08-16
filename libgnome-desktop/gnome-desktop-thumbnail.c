@@ -1116,7 +1116,7 @@ save_thumbnail (GdkPixbuf  *pixbuf,
     goto out;
   close (tmp_fd);
 
-  g_snprintf (mtime_str, 21, "%ld",  mtime);
+  g_snprintf (mtime_str, 21, "%" G_GINT64_FORMAT, (gint64) mtime);
   width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
   height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
 
