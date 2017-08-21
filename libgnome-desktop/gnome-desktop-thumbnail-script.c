@@ -48,6 +48,7 @@ typedef struct {
   GArray *fd_array;
   /* Input/output file paths outside the sandbox */
   char *infile;
+  char *infile_tmp; /* the host version of /tmp/gnome-desktop-file-to-thumbnail.* */
   char *outfile;
   char *outdir; /* outdir is outfile's parent dir, if it needs to be deleted */
   /* I/O file paths inside the sandbox */
@@ -647,6 +648,11 @@ script_exec_free (ScriptExec *exec)
     return;
 
   g_free (exec->infile);
+  if (exec->infile_tmp)
+    {
+      g_unlink (exec->infile_tmp);
+      g_free (exec->infile_tmp);
+    }
   if (exec->outfile)
     {
       g_unlink (exec->outfile);
@@ -703,6 +709,7 @@ script_exec_new (const char  *uri,
     {
       char *tmpl;
       g_autofree char *ext = NULL;
+      g_autofree char *infile = NULL;
 
       exec->fd_array = g_array_new (FALSE, TRUE, sizeof (int));
       g_array_set_clear_func (exec->fd_array, clear_fd);
@@ -716,10 +723,12 @@ script_exec_new (const char  *uri,
           goto bail;
         }
       exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
-
       ext = get_extension (exec->infile);
-      exec->s_infile = g_strdup_printf ("/tmp/gnome-desktop-file-to-thumbnail.%s", ext);
-      exec->s_outfile = g_strdup ("/tmp/gnome-desktop-thumbnailer.png");
+      infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail.%s", ext);
+      exec->infile_tmp = g_build_filename (exec->outdir, infile, NULL);
+
+      exec->s_infile = g_build_filename ("/tmp/", infile, NULL);
+      exec->s_outfile = g_build_filename ("/tmp/", "gnome-desktop-thumbnailer.png", NULL);
     }
   else
 #endif
