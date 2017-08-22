@@ -498,9 +498,6 @@ static gboolean
 add_bwrap (GPtrArray   *array,
 	   ScriptExec  *script)
 {
-  char *fd_str;
-  int fd;
-
   g_return_val_if_fail (script->outdir != NULL, FALSE);
   g_return_val_if_fail (script->s_infile != NULL, FALSE);
 
@@ -532,25 +529,14 @@ add_bwrap (GPtrArray   *array,
   g_ptr_array_add (array, g_strdup (script->outdir));
   g_ptr_array_add (array, g_strdup ("/tmp"));
 
-  /* Open the infile so we can pass the fd through bwrap,
-   * we make sure to also re-use the original file's original
+  /* We make sure to also re-use the original file's original
    * extension in case it's useful for the thumbnailer to
    * identify the file type */
-  fd = open (script->infile, O_RDONLY | O_CLOEXEC);
-  if (fd == -1)
-    goto bail;
-  fd_str = g_strdup_printf ("%d", fd);
-  g_ptr_array_add (array, g_strdup ("--file"));
-  g_ptr_array_add (array, fd_str);
+  g_ptr_array_add (array, g_strdup ("--ro-bind"));
+  g_ptr_array_add (array, g_strdup (script->infile));
   g_ptr_array_add (array, g_strdup (script->s_infile));
 
-  g_array_append_val (script->fd_array, fd);
-
   return TRUE;
-
-bail:
-  g_ptr_array_set_size (array, 0);
-  return FALSE;
 }
 #endif /* HAVE_BWRAP */
 
