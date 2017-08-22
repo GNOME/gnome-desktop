@@ -45,6 +45,7 @@
 
 typedef struct {
   gboolean sandbox;
+  char *thumbnailer_name;
   GArray *fd_array;
   /* Input/output file paths outside the sandbox */
   char *infile;
@@ -556,6 +557,8 @@ expand_thumbnailing_cmd (const char  *cmd,
   if (!g_shell_parse_argv (cmd, NULL, &cmd_elems, error))
     return NULL;
 
+  script->thumbnailer_name = g_strdup (cmd_elems[0]);
+
   array = g_ptr_array_new_with_free_func (g_free);
 
 #ifdef HAVE_BWRAP
@@ -647,6 +650,7 @@ script_exec_free (ScriptExec *exec)
   if (exec == NULL)
     return;
 
+  g_free (exec->thumbnailer_name);
   g_free (exec->infile);
   if (exec->infile_tmp)
     {
@@ -660,7 +664,11 @@ script_exec_free (ScriptExec *exec)
     }
   if (exec->outdir)
     {
-      g_rmdir (exec->outdir);
+      if (g_rmdir (exec->outdir) < 0)
+        {
+          g_warning ("Could not remove %s, thumbnailer %s left files in directory",
+                     exec->outdir, exec->thumbnailer_name);
+        }
       g_free (exec->outdir);
     }
   g_free (exec->s_infile);
