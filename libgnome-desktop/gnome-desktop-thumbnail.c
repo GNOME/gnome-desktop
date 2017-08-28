@@ -1045,8 +1045,6 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   if (factory->priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE)
     size = 256;
 
-  pixbuf = NULL;
-
   pixbuf = get_preview_thumbnail (uri, size);
   if (pixbuf != NULL)
     return pixbuf;
