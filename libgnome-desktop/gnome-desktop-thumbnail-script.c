@@ -518,6 +518,12 @@ add_bwrap (GPtrArray   *array,
 	    "--die-with-parent",
 	    NULL);
 
+#if 0
+  add_args (array,
+            "--setenv", "G_MESSAGES_DEBUG", "all",
+            NULL);
+#endif
+
   /* Add gnome-desktop's install prefix if needed */
   if (g_strcmp0 (INSTALL_PREFIX, "") != 0 &&
       g_strcmp0 (INSTALL_PREFIX, "/usr") != 0 &&
