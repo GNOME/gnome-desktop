@@ -513,6 +513,7 @@ add_bwrap (GPtrArray   *array,
 	    "--symlink", "usr/bin", "/bin",
 	    "--symlink", "usr/sbin", "/sbin",
 	    "--chdir", "/",
+	    "--setenv", "GIO_USE_VFS", "local",
 	    "--unshare-all",
 	    "--die-with-parent",
 	    NULL);
