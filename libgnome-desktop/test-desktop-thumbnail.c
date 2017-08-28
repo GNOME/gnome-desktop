@@ -23,25 +23,33 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
-#include <gtk/gtk.h>
 
 int main (int argc, char **argv)
 {
 	GdkPixbuf *pixbuf;
 	GnomeDesktopThumbnailFactory *factory;
-	GtkWidget *window, *image;
 	char *content_type;
+	g_autoptr(GFile) file = NULL;
+	g_autofree char *path = NULL;
+	g_autofree char *uri = NULL;
 
-	gtk_init (&argc, &argv);
-
-	if (argc < 2) {
-		g_print ("Usage: %s FILE...\n", argv[0]);
+	if (argc != 3) {
+		g_print ("Usage: %s [INPUT FILE] [OUTPUT FILE]\n", argv[0]);
 		return 1;
 	}
 
-	content_type = g_content_type_guess (argv[1], NULL, 0, NULL);
+	file = g_file_new_for_commandline_arg (argv[1]);
+	path = g_file_get_path (file);
+	if (!path) {
+		g_warning ("Could not get path for %s", argv[1]);
+		return 1;
+	}
+
+	content_type = g_content_type_guess (path, NULL, 0, NULL);
+	g_message ("content type %s", content_type);
 	factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, argv[1], content_type);
+	uri = g_file_get_uri (file);
+	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type);
 	g_free (content_type);
 
 	if (pixbuf == NULL) {
@@ -49,12 +57,10 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	image = gtk_image_new_from_pixbuf (pixbuf);
-	gtk_container_add (GTK_CONTAINER (window), image);
-	gtk_widget_show_all (window);
-
-	gtk_main ();
+	if (!gdk_pixbuf_save (pixbuf, argv[2], "png", NULL, NULL)) {
+		g_warning ("gdk_pixbuf_save failed for %s", argv[1]);
+		return 1;
+	}
 
 	return 0;
 }
