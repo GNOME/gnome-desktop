@@ -46,7 +46,6 @@ int main (int argc, char **argv)
 	}
 
 	content_type = g_content_type_guess (path, NULL, 0, NULL);
-	g_message ("content type %s", content_type);
 	factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 	uri = g_file_get_uri (file);
 	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type);
