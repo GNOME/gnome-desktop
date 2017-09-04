@@ -919,7 +919,12 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
 
   g_mutex_lock (&factory->priv->lock);
   if (!gnome_desktop_thumbnail_factory_is_disabled (factory, mime_type))
-    have_script = TRUE;
+    {
+      Thumbnailer *thumb;
+
+      thumb = g_hash_table_lookup (factory->priv->mime_types_map, mime_type);
+      have_script = (thumb != NULL);
+    }
   g_mutex_unlock (&factory->priv->lock);
 
   if (have_script)
