@@ -1074,7 +1074,12 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
       data = gnome_desktop_thumbnail_script_exec (script, size, uri, &error);
       if (data)
         {
-          pixbuf = pixbuf_new_from_bytes (data, NULL);
+          pixbuf = pixbuf_new_from_bytes (data, &error);
+          if (!pixbuf)
+            {
+              g_debug ("Could not load thumbnail pixbuf: %s", error->message);
+              g_error_free (error);
+            }
           g_bytes_unref (data);
         }
       else
