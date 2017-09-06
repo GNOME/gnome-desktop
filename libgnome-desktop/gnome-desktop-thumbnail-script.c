@@ -60,14 +60,14 @@ typedef struct {
 static char *
 expand_thumbnailing_elem (const char *elem,
 			  const int   size,
-			  const char *inuri,
+			  const char *infile,
 			  const char *outfile,
 			  gboolean   *got_input,
 			  gboolean   *got_output)
 {
   GString *str;
   const char *p, *last;
-  char *localfile;
+  char *inuri;
 
   str = g_string_new (NULL);
 
@@ -79,18 +79,18 @@ expand_thumbnailing_elem (const char *elem,
 
       switch (*p) {
       case 'u':
-	g_string_append (str, inuri);
-	*got_input = TRUE;
+        inuri = g_filename_to_uri (infile, NULL, NULL);
+        if (inuri)
+	  {
+	    g_string_append (str, inuri);
+	    *got_input = TRUE;
+	    g_free (inuri);
+	  }
 	p++;
 	break;
       case 'i':
-	localfile = g_filename_from_uri (inuri, NULL, NULL);
-	if (localfile)
-	  {
-	    g_string_append (str, localfile);
-	    *got_input = TRUE;
-	    g_free (localfile);
-	  }
+	g_string_append (str, infile);
+	*got_input = TRUE;
 	p++;
 	break;
       case 'o':
