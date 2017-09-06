@@ -145,6 +145,55 @@ test_notify_clock (void)
 	g_object_unref (settings);
 }
 
+static void
+test_weekday_setting (void)
+{
+	GnomeWallClock *clock;
+	GSettings *settings;
+	const char *save_locale;
+	const char *str, *ptr, *s;
+
+	/* Save current locale */
+	save_locale = setlocale (LC_ALL, NULL);
+
+	setlocale (LC_ALL, "C");
+	settings = g_settings_new ("org.gnome.desktop.interface");
+
+	/* Set 24h format, so that the only alphabetical part will be the weekday */
+	g_settings_set_enum (settings, "clock-format", G_DESKTOP_CLOCK_FORMAT_24H);
+
+	g_settings_set_boolean (settings, "clock-show-weekday", FALSE);
+	clock = gnome_wall_clock_new ();
+	str = gnome_wall_clock_get_clock (clock);
+
+	/* Verify that no character is alphabetical */
+	for (s = str; *s != '\0'; s++)
+		g_assert (!g_ascii_isalpha (*s));
+
+	g_object_unref (clock);
+
+	g_settings_set_boolean (settings, "clock-show-weekday", TRUE);
+	clock = gnome_wall_clock_new ();
+	str = gnome_wall_clock_get_clock (clock);
+
+	/* Verify that every character before the first space is alphabetical */
+	ptr = strchr (str, ' ');
+	g_assert (ptr != NULL);
+
+	for (s = str; s != ptr; s++)
+		g_assert (g_ascii_isalpha (*s));
+
+	for (s = ptr; *s != '\0'; s++)
+		g_assert (!g_ascii_isalpha (*s));
+
+	g_object_unref (clock);
+
+	g_object_unref (settings);
+
+	/* Restore previous locale */
+	setlocale (LC_ALL, save_locale);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -156,6 +205,7 @@ main (int   argc,
 	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
 	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);
+	g_test_add_func ("/wall-clock/weekday-setting", test_weekday_setting);
 
 	return g_test_run ();
 }

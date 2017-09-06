@@ -318,8 +318,8 @@ update_clock (gpointer data)
 	GDateTime *expiry;
 
 	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
-	show_weekday = !self->priv->time_only;
-	show_full_date = show_weekday && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
+	show_weekday = !self->priv->time_only && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-weekday");
+	show_full_date = !self->priv->time_only && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
 	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
 
 	now = g_date_time_new_now (self->priv->timezone);
