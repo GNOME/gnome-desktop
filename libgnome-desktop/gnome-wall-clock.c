@@ -24,6 +24,7 @@
 
 #include "config.h"
 
+#include <locale.h>
 #include <glib/gi18n-lib.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -265,6 +266,37 @@ date_time_format (GDateTime *datetime,
 	return ret;
 }
 
+/*
+ * Translate @str according to the locale defined by LC_TIME; unlike
+ * dcgettext(), the translation is still taken from the LC_MESSAGES
+ * catalogue and not the LC_TIME one.
+ */
+static const char *
+translate_time_format_string (const char *str)
+{
+  const char *locale = g_getenv ("LC_TIME");
+  const char *res;
+  char *sep;
+  locale_t old_loc, loc = (locale_t)0;
+
+  if (locale)
+    loc = newlocale (LC_MESSAGES_MASK, locale, (locale_t)0);
+
+  old_loc = uselocale (loc);
+
+  sep = strchr (str, '\004');
+  res = g_dpgettext (GETTEXT_PACKAGE, str, sep ? sep - str + 1 : 0);
+
+  uselocale (old_loc);
+
+  if (loc != (locale_t)0)
+    freelocale (loc);
+
+  return res;
+}
+
+#define T_(string) translate_time_format_string (string)
+
 /**
  * gnome_wall_clock_string_for_datetime:
  *
@@ -287,23 +319,24 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				/* Translators: This is the time format with full date
 				   plus day used in 24-hour mode. Please keep the under-
 				   score to separate the date from the time. */
-				format_string = show_seconds ? _("%a %b %-e_%R:%S")
-					: _("%a %b %-e_%R");
+				format_string = show_seconds ? T_(N_("%a %b %-e_%R:%S"))
+					: T_(N_("%a %b %-e_%R"));
 			else
 				/* Translators: This is the time format with full date
 				   used in 24-hour mode. Please keep the underscore to
 				   separate the date from the time. */
-				format_string = show_seconds ? _("%b %-e_%R:%S")
-					: _("%b %-e_%R");
+				format_string = show_seconds ? T_(N_("%b %-e_%R:%S"))
+					: T_(N_("%b %-e_%R"));
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
-			format_string = show_seconds ? _("%a %R:%S")
-				: _("%a %R");
+			format_string = show_seconds ? T_(N_("%a %R:%S"))
+				: T_(N_("%a %R"));
 		} else {
 			/* Translators: This is the time format without date used
 			   in 24-hour mode. */
-			format_string = show_seconds ? _("%R:%S") : _("%R");
+			format_string = show_seconds ? T_(N_("%R:%S"))
+                                : T_(N_("%R"));
 		}
 	} else {
 		if (show_full_date) {
@@ -311,29 +344,31 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				/* Translators: This is a time format with full date
 				   plus day used for AM/PM. Please keep the under-
 				   score to separate the date from the time. */
-				format_string = show_seconds ? _("%a %b %-e_%l:%M:%S %p")
-					: _("%a %b %-e_%l:%M %p");
+				format_string = show_seconds ? T_(N_("%a %b %-e_%l:%M:%S %p"))
+					: T_(N_("%a %b %-e_%l:%M %p"));
 			else
 				/* Translators: This is a time format with full date
 				   used for AM/PM. Please keep the underscore to
 				   separate the date from the time. */
-				format_string = show_seconds ? _("%b %-e_%l:%M:%S %p")
-					: _("%b %-e_%l:%M %p");
+				format_string = show_seconds ? T_(N_("%b %-e_%l:%M:%S %p"))
+					: T_(N_("%b %-e_%l:%M %p"));
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
 			   for AM/PM. */
-			format_string = show_seconds ? _("%a %l:%M:%S %p")
-				: _("%a %l:%M %p");
+			format_string = show_seconds ? T_(N_("%a %l:%M:%S %p"))
+				: T_(N_("%a %l:%M %p"));
 		} else {
 			/* Translators: This is a time format without date used
 			   for AM/PM. */
-			format_string = show_seconds ? _("%l:%M:%S %p")
-				: _("%l:%M %p");
+			format_string = show_seconds ? T_(N_("%l:%M:%S %p"))
+				: T_(N_("%l:%M %p"));
 		}
 	}
 
 	return date_time_format (now, format_string);
 }
+
+#undef T_
 
 static gboolean
 update_clock (gpointer data)
