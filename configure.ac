@@ -75,7 +75,7 @@ AC_SUBST(GNOME_DATE_COMMENT_END)
 AX_COMPILER_FLAGS([WARN_CFLAGS],[WARN_LDFLAGS])
 
 AC_ARG_ENABLE(deprecation_flags,
-              [AC_HELP_STRING([--enable-deprecation-flags],
+              [AS_HELP_STRING([--enable-deprecation-flags],
                               [use *_DISABLE_DEPRECATED flags @<:@default=no@:>@])],,
               [enable_deprecation_flags=no])
 
@@ -116,7 +116,7 @@ AC_SUBST(GDK_PIXBUF_REQUIRED)
 AC_SUBST(XRANDR_REQUIRED)
 AC_SUBST(XEXT_REQUIRED)
 
-AC_CHECK_LIBM
+LT_LIB_M
 AC_SUBST(LIBM)
 
 AC_CHECK_LIB([rt], [clock_gettime], [LIBRT="-lrt"], [LIBRT=""])
