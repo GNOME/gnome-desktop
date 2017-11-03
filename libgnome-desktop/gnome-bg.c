@@ -76,8 +76,8 @@ struct _GnomeBG
 	char *			filename;
 	GDesktopBackgroundStyle	placement;
 	GDesktopBackgroundShading	color_type;
-	GdkColor		primary;
-	GdkColor		secondary;
+	GdkRGBA			primary;
+	GdkRGBA			secondary;
 
 	GFileMonitor *		file_monitor;
 
@@ -126,8 +126,8 @@ static GdkPixbuf *pixbuf_scale_to_min  (GdkPixbuf  *src,
 					int         min_height);
 static void       pixbuf_draw_gradient (GdkPixbuf    *pixbuf,
 					gboolean      horizontal,
-					GdkColor     *c1,
-					GdkColor     *c2,
+					GdkRGBA      *c1,
+					GdkRGBA      *c2,
 					GdkRectangle *rect);
 static void       pixbuf_tile          (GdkPixbuf  *src,
 					GdkPixbuf  *dest);
@@ -170,24 +170,24 @@ static GnomeBGSlideShow *read_slideshow_file (const char *filename,
 
 static void
 color_from_string (const char *string,
-		   GdkColor   *colorp)
+		   GdkRGBA   *colorp)
 {
 	/* If all else fails use black */
-	gdk_color_parse ("black", colorp);
+	gdk_rgba_parse (colorp, "black");
 
 	if (!string)
 		return;
 
-	gdk_color_parse (string, colorp);
+	gdk_rgba_parse (colorp, string);
 }
 
 static char *
-color_to_string (const GdkColor *color)
+color_to_string (const GdkRGBA *color)
 {
 	return g_strdup_printf ("#%02x%02x%02x",
-				color->red >> 8,
-				color->green >> 8,
-				color->blue >> 8);
+				(int) (0.5 + color->red * 255),
+				(int) (0.5 + color->green * 255),
+				(int) (0.5 + color->blue * 255));
 }
 
 static gboolean
@@ -298,7 +298,7 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
 	char    *tmp;
 	char    *filename;
 	GDesktopBackgroundShading ctype;
-	GdkColor c1, c2;
+	GdkRGBA c1, c2;
 	GDesktopBackgroundStyle placement;
 
 	g_return_if_fail (GNOME_IS_BG (bg));
@@ -322,7 +322,7 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
 	/* Placement */
 	placement = g_settings_get_enum (settings, BG_KEY_PICTURE_PLACEMENT);
 
-	gnome_bg_set_color (bg, ctype, &c1, &c2);
+	gnome_bg_set_rgba (bg, ctype, &c1, &c2);
 	gnome_bg_set_placement (bg, placement);
 	gnome_bg_set_filename (bg, filename);
 
@@ -443,17 +443,17 @@ gnome_bg_new (void)
 }
 
 void
-gnome_bg_set_color (GnomeBG *bg,
-		    GDesktopBackgroundShading type,
-		    GdkColor *primary,
-		    GdkColor *secondary)
+gnome_bg_set_rgba (GnomeBG *bg,
+		   GDesktopBackgroundShading type,
+		   GdkRGBA *primary,
+		   GdkRGBA *secondary)
 {
 	g_return_if_fail (bg != NULL);
 	g_return_if_fail (primary != NULL);
 
 	if (bg->color_type != type			||
-	    !gdk_color_equal (&bg->primary, primary)			||
-	    (secondary && !gdk_color_equal (&bg->secondary, secondary))) {
+	    !gdk_rgba_equal (&bg->primary, primary)			||
+	    (secondary && !gdk_rgba_equal (&bg->secondary, secondary))) {
 
 		bg->color_type = type;
 		bg->primary = *primary;
@@ -487,10 +487,10 @@ gnome_bg_get_placement (GnomeBG *bg)
 }
 
 void
-gnome_bg_get_color (GnomeBG                   *bg,
-		    GDesktopBackgroundShading *type,
-		    GdkColor                  *primary,
-		    GdkColor                  *secondary)
+gnome_bg_get_rgba (GnomeBG                   *bg,
+		   GDesktopBackgroundShading *type,
+		   GdkRGBA                   *primary,
+		   GdkRGBA                   *secondary)
 {
 	g_return_if_fail (bg != NULL);
 
@@ -708,9 +708,9 @@ draw_color_area (GnomeBG *bg,
 	switch (bg->color_type) {
 	case G_DESKTOP_BACKGROUND_SHADING_SOLID:
 		/* not really a big deal to ignore the area of interest */
-		pixel = ((bg->primary.red >> 8) << 24)      |
-			((bg->primary.green >> 8) << 16)    |
-			((bg->primary.blue >> 8) << 8)      |
+		pixel = ((int) (0.5 + bg->primary.red * 255) << 24)      |
+			((int) (0.5 + bg->primary.green * 255) << 16)    |
+			((int) (0.5 + bg->primary.blue * 255) << 8)      |
 			(0xff);
 		
 		gdk_pixbuf_fill (dest, pixel);
@@ -1080,11 +1080,8 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 
 	cr = cairo_create (surface);
 	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
-		gdk_cairo_set_source_color (cr, &(bg->primary));
-		average.red = bg->primary.red / 65535.0;
-		average.green = bg->primary.green / 65535.0;
-		average.blue = bg->primary.blue / 65535.0;
-		average.alpha = 1.0;
+		gdk_cairo_set_source_rgba (cr, &(bg->primary));
+		average = bg->primary;
 	}
 	else {
 		GdkPixbuf *pixbuf;
@@ -1117,8 +1114,8 @@ gnome_bg_is_dark (GnomeBG *bg,
 		  int      width,
 		  int      height)
 {
-	GdkColor color;
-	int intensity;
+	GdkRGBA color;
+	gdouble intensity;
 	GdkPixbuf *pixbuf;
 	
 	g_return_val_if_fail (bg != NULL, FALSE);
@@ -1132,24 +1129,19 @@ gnome_bg_is_dark (GnomeBG *bg,
 	}
 	pixbuf = get_pixbuf_for_size (bg, -1, width, height);
 	if (pixbuf) {
-		GdkRGBA argb;
-		guchar a, r, g, b;
+		GdkRGBA average;
 
-		pixbuf_average_value (pixbuf, &argb);
-		a = argb.alpha * 0xff;
-		r = argb.red * 0xff;
-		g = argb.green * 0xff;
-		b = argb.blue * 0xff;
+		pixbuf_average_value (pixbuf, &average);
 		
-		color.red = (color.red * (0xFF - a) + r * 0x101 * a) / 0xFF;
-		color.green = (color.green * (0xFF - a) + g * 0x101 * a) / 0xFF;
-		color.blue = (color.blue * (0xFF - a) + b * 0x101 * a) / 0xFF;
+		color.red = color.red * (1.0 - average.alpha) + average.red * average.alpha;
+		color.green = color.green * (1.0 - average.alpha) + average.green * average.alpha;
+		color.blue = color.blue * (1.0 - average.alpha) + average.blue * average.alpha;
 		g_object_unref (pixbuf);
 	}
 	
-	intensity = (color.red * 77 +
-		     color.green * 150 +
-		     color.blue * 28) >> 16;
+	intensity = color.red * 77 +
+		    color.green * 150 +
+		    color.blue * 28;
 	
 	return intensity < 160; /* biased slightly to be dark */
 }
@@ -2384,9 +2376,9 @@ pixbuf_scale_to_min (GdkPixbuf *src, int min_width, int min_height)
 }
 
 static guchar *
-create_gradient (const GdkColor *primary,
-		 const GdkColor *secondary,
-		 int	         n_pixels)
+create_gradient (const GdkRGBA *primary,
+		 const GdkRGBA *secondary,
+		 int	        n_pixels)
 {
 	guchar *result = g_malloc (n_pixels * 3);
 	int i;
@@ -2394,9 +2386,9 @@ create_gradient (const GdkColor *primary,
 	for (i = 0; i < n_pixels; ++i) {
 		double ratio = (i + 0.5) / n_pixels;
 		
-		result[3 * i + 0] = ((guint16) (primary->red * (1 - ratio) + secondary->red * ratio)) >> 8;
-		result[3 * i + 1] = ((guint16) (primary->green * (1 - ratio) + secondary->green * ratio)) >> 8;
-		result[3 * i + 2] = ((guint16) (primary->blue * (1 - ratio) + secondary->blue * ratio)) >> 8;
+		result[3 * i + 0] = (int) (0.5 + (primary->red * (1 - ratio) + secondary->red * ratio) * 255);
+		result[3 * i + 1] = (int) (0.5 + (primary->green * (1 - ratio) + secondary->green * ratio) * 255);
+		result[3 * i + 2] = (int) (0.5 + (primary->blue * (1 - ratio) + secondary->blue * ratio) * 255);
 	}
 	
 	return result;
@@ -2405,8 +2397,8 @@ create_gradient (const GdkColor *primary,
 static void
 pixbuf_draw_gradient (GdkPixbuf    *pixbuf,
 		      gboolean      horizontal,
-		      GdkColor     *primary,
-		      GdkColor     *secondary,
+		      GdkRGBA      *primary,
+		      GdkRGBA      *secondary,
 		      GdkRectangle *rect)
 {
 	int width;

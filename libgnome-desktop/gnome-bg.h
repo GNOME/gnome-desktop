@@ -61,17 +61,17 @@ void             gnome_bg_set_filename          (GnomeBG               *bg,
 						 const char            *filename);
 void             gnome_bg_set_placement         (GnomeBG               *bg,
 						 GDesktopBackgroundStyle placement);
-void             gnome_bg_set_color             (GnomeBG               *bg,
+void             gnome_bg_set_rgba              (GnomeBG               *bg,
 						 GDesktopBackgroundShading type,
-						 GdkColor              *primary,
-						 GdkColor              *secondary);
+						 GdkRGBA               *primary,
+						 GdkRGBA               *secondary);
 
 /* Getters */
 GDesktopBackgroundStyle gnome_bg_get_placement  (GnomeBG               *bg);
-void		 gnome_bg_get_color             (GnomeBG               *bg,
+void		 gnome_bg_get_rgba              (GnomeBG               *bg,
 						 GDesktopBackgroundShading *type,
-						 GdkColor              *primary,
-						 GdkColor              *secondary);
+						 GdkRGBA               *primary,
+						 GdkRGBA               *secondary);
 const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 
 /* Drawing and thumbnailing */
