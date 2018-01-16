@@ -640,7 +640,7 @@ static void
 child_setup (gpointer user_data)
 {
   GArray *fd_array = user_data;
-  int i;
+  guint i;
 
   /* If no fd_array was specified, don't care. */
   if (fd_array == NULL)
