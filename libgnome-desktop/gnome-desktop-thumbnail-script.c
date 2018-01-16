@@ -765,6 +765,22 @@ bail:
   return NULL;
 }
 
+static void
+print_script_debug (GStrv expanded_script)
+{
+  GString *out;
+  guint i;
+
+  out = g_string_new (NULL);
+
+  for (i = 0; expanded_script[i]; i++)
+    g_string_append_printf (out, "%s ", expanded_script[i]);
+  g_string_append_printf (out, "\n");
+
+  g_debug ("About to launch script: %s", out->str);
+  g_string_free (out, TRUE);
+}
+
 GBytes *
 gnome_desktop_thumbnail_script_exec (const char  *cmd,
 				     int          size,
@@ -785,14 +801,7 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   if (expanded_script == NULL)
     goto out;
 
-#if 0
-  guint i;
-
-  g_print ("About to launch script: ");
-  for (i = 0; expanded_script[i]; i++)
-    g_print ("%s ", expanded_script[i]);
-  g_print ("\n");
-#endif
+  print_script_debug (expanded_script);
 
   ret = g_spawn_sync (NULL, expanded_script, NULL, G_SPAWN_SEARCH_PATH,
 		      child_setup, exec->fd_array, NULL, &error_out,
