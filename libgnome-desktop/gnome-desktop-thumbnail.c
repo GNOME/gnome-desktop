@@ -1089,6 +1089,11 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
           g_clear_error (&error);
         }
     }
+  else
+    {
+      g_debug ("Could not find thumbnailer for mime-type '%s'",
+               mime_type);
+    }
 
   g_free (script);
 
