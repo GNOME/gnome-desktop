@@ -414,7 +414,6 @@ setup_seccomp (GPtrArray  *argv_array,
 
           if (multiarch && extra_arches != NULL)
             {
-              unsigned i;
               for (i = 0; extra_arches[i] != 0; i++)
                 {
                   r = seccomp_arch_add (seccomp, extra_arches[i]);
