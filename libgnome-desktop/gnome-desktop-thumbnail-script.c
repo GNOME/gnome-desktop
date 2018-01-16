@@ -131,6 +131,16 @@ add_args (GPtrArray *argv_array, ...)
   va_end (args);
 }
 
+static void
+add_env (GPtrArray  *array,
+         const char *envvar)
+{
+  if (g_getenv (envvar) != NULL)
+    add_args (array,
+              "--setenv", envvar, g_getenv (envvar),
+              NULL);
+}
+
 static char *
 get_extension (const char *path)
 {
@@ -518,11 +528,8 @@ add_bwrap (GPtrArray   *array,
 	    "--die-with-parent",
 	    NULL);
 
-#if 0
-  add_args (array,
-            "--setenv", "G_MESSAGES_DEBUG", "all",
-            NULL);
-#endif
+  add_env (array, "G_MESSAGES_DEBUG");
+  add_env (array, "G_MESSAGES_PREFIXED");
 
   /* Add gnome-desktop's install prefix if needed */
   if (g_strcmp0 (INSTALL_PREFIX, "") != 0 &&
