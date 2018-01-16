@@ -363,7 +363,8 @@ setup_seccomp (GPtrArray  *argv_array,
     AF_KEY,
     AF_NETLINK + 1, /* Last gets CMP_GE, so order is important */
   };
-  int i, r;
+  guint i;
+  int r;
   int fd = -1;
   g_autofree char *fd_str = NULL;
   g_autofree char *path = NULL;
