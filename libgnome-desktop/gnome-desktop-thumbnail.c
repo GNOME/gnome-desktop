@@ -1262,29 +1262,6 @@ gnome_desktop_thumbnail_path_for_uri (const char         *uri,
 }
 
 /**
- * gnome_desktop_thumbnail_has_uri:
- * @pixbuf: an loaded thumbnail pixbuf
- * @uri: a uri
- *
- * Returns whether the thumbnail has the correct uri embedded in the
- * Thumb::URI option in the png.
- *
- * Return value: TRUE if the thumbnail is for @uri
- *
- * Since: 2.2
- **/
-gboolean
-gnome_desktop_thumbnail_has_uri (GdkPixbuf          *pixbuf,
-				 const char         *uri)
-{
-  const char *thumb_uri;
-
-  thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
-
-  return (g_strcmp0 (uri, thumb_uri) == 0);
-}
-
-/**
  * gnome_desktop_thumbnail_is_valid:
  * @pixbuf: an loaded thumbnail #GdkPixbuf
  * @uri: a uri
