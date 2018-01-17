@@ -714,7 +714,7 @@ gnome_desktop_thumbnail_factory_class_init (GnomeDesktopThumbnailFactoryClass *c
  *
  * Creates a new #GnomeDesktopThumbnailFactory.
  *
- * This function must be called on the main thread.
+ * This function must be called on the main thread and is non-blocking.
  *
  * Return value: a new #GnomeDesktopThumbnailFactory
  *
@@ -832,7 +832,7 @@ lookup_failed_thumbnail_path (const char                *uri,
  *
  * Tries to locate an existing thumbnail for the file specified.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Return value: The absolute path of the thumbnail, or %NULL if none exist.
  *
@@ -860,7 +860,7 @@ gnome_desktop_thumbnail_factory_lookup (GnomeDesktopThumbnailFactory *factory,
  * and looking for failed thumbnails is important to avoid to try to
  * thumbnail e.g. broken images several times.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Return value: TRUE if there is a failed thumbnail for the file.
  *
@@ -894,7 +894,7 @@ gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (GnomeDesktopThumbnai
  * Returns TRUE if this GnomeDesktopThumbnailFactory can (at least try) to thumbnail
  * this file. Thumbnails or files with failed thumbnails won't be thumbnailed.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Return value: TRUE if the file can be thumbnailed.
  *
@@ -1026,7 +1026,7 @@ pixbuf_new_from_bytes (GBytes  *bytes,
  * Tries to generate a thumbnail for the specified file. If it succeeds
  * it returns a pixbuf that can be used as a thumbnail.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
  *
@@ -1191,7 +1191,7 @@ make_failed_thumbnail (void)
  * Saves @thumbnail at the right place. If the save fails a
  * failed thumbnail is written.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Since: 2.2
  **/
@@ -1224,7 +1224,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
  * Creates a failed thumbnail for the file so that we don't try
  * to re-thumbnail the file later.
  *
- * Usage of this function is threadsafe.
+ * Usage of this function is threadsafe and does blocking I/O.
  *
  * Since: 2.2
  **/
@@ -1249,6 +1249,7 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
  * @size: a thumbnail size
  *
  * Returns the filename that a thumbnail of size @size for @uri would have.
+ * This function is threadsafe and does no blocking I/O.
  *
  * Return value: an absolute filename
  *
@@ -1268,7 +1269,7 @@ gnome_desktop_thumbnail_path_for_uri (const char         *uri,
  * @mtime: the mtime
  *
  * Returns whether the thumbnail has the correct uri and mtime embedded in the
- * png options.
+ * png options. This function is threadsafe and does no blocking I/O.
  *
  * Return value: TRUE if the thumbnail has the right @uri and @mtime
  *
