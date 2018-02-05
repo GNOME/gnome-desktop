@@ -160,14 +160,24 @@ else
 fi
 
 SECCOMP_PKG=""
+enable_seccomp="no"
 dnl Check for bubblewrap compatible platform
 case $host_os in
   linux*)
-    PKG_CHECK_MODULES(LIBSECCOMP, [libseccomp])
-    SECCOMP_PKG="libseccomp"
+    case $host_cpu in
+      alpha|ia64|m68k|sh4|sparc64)
+        enable_seccomp="no (not available on this architecture)"
+        AC_MSG_WARN("seccomp not available on this architecture")
+        ;;
+      *)
+        PKG_CHECK_MODULES(LIBSECCOMP, [libseccomp])
+        SECCOMP_PKG="libseccomp"
+        AC_DEFINE([ENABLE_SECCOMP], [1], [Define if using seccomp])
+        enable_seccomp="yes"
+        ;;
+    esac
     AC_DEFINE_UNQUOTED(_GNU_SOURCE, 1, [Define to include GNU extensions])
     AC_DEFINE_UNQUOTED(HAVE_BWRAP, 1, [Define to 1 if Bubblewrap support is available])
-    AC_DEFINE([ENABLE_SECCOMP], [1], [Define if using seccomp])
     AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "$prefix", [Path to library install prefix])
     ;;
 esac
@@ -270,5 +280,6 @@ echo "
         Date in gnome-version.xml:    ${enable_date_in_gnome_version}
         Build gtk-doc documentation:  ${enable_gtk_doc}
         Build with udev support:      ${enable_udev}
+        Build with seccomp support:   ${enable_seccomp}
 
 "
