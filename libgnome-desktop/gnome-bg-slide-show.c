@@ -673,7 +673,7 @@ parse_file_contents (GnomeBGSlideShow  *self,
         g_markup_parse_context_free (context);
 
         if (!failed) {
-                int len;
+                guint len;
 
                 t = mktime (&self->priv->start_tm);
 

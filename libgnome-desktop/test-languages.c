@@ -10,13 +10,12 @@
 int main (int argc, char **argv)
 {
         char **locales;
-        guint i;
+        int i;
 
         setlocale (LC_ALL, "");
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
         if (argc > 1) {
-                guint i;
                 for (i = 1; i < argc; i++) {
                         char *lang, *country, *norm;
                         norm = gnome_normalize_locale (argv[i]);

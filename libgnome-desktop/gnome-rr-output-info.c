@@ -106,7 +106,7 @@ static void gnome_rr_output_info_get_tiled_geometry (GnomeRROutputInfo *self,
     GnomeRROutputInfo **outputs;
     gboolean active;
     int i;
-    int ht, vt;
+    guint ht, vt;
     int total_w = 0, total_h = 0;
 
     outputs = gnome_rr_config_get_outputs (self->priv->config);
@@ -198,8 +198,8 @@ static void gnome_rr_output_info_set_tiled_geometry (GnomeRROutputInfo *self, in
 {
     GnomeRROutputInfo **outputs;
     gboolean primary_tile_only = FALSE;
-    int ht, vt, i;
-    int x_off;
+    guint ht, vt;
+    int i, x_off;
 
     primary_tile_only = TRUE;
 
@@ -331,7 +331,7 @@ static void gnome_rr_output_info_set_tiled_rotation (GnomeRROutputInfo *self, Gn
     GnomeRROutputInfo **outputs;
     int x_off;
     int base_x = 0, base_y = 0;
-    int ht, vt;
+    guint ht, vt;
     int i;
 
     outputs = gnome_rr_config_get_outputs (self->priv->config);

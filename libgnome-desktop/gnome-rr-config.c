@@ -722,7 +722,7 @@ static gboolean
 can_clone (CrtcInfo *info,
 	   GnomeRROutput *output)
 {
-    int i;
+    guint i;
 
     for (i = 0; i < info->outputs->len; ++i)
     {

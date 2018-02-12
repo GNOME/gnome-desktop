@@ -37,7 +37,7 @@ int
 main (int argc, char *argv[])
 {
 	GnomePnpIds *ids;
-	guint i;
+	int i;
 
 	ids = gnome_pnp_ids_new ();
 

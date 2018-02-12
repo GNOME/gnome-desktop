@@ -271,8 +271,8 @@ has_similar_mode (GnomeRROutput *output, GnomeRRMode *mode)
 {
     int i;
     GnomeRRMode **modes = gnome_rr_output_list_modes (output);
-    int width = gnome_rr_mode_get_width (mode);
-    int height = gnome_rr_mode_get_height (mode);
+    guint width = gnome_rr_mode_get_width (mode);
+    guint height = gnome_rr_mode_get_height (mode);
 
     for (i = 0; modes[i] != NULL; ++i)
     {
@@ -294,8 +294,8 @@ _gnome_rr_output_get_tiled_display_size (GnomeRROutput *output,
 					 int *total_width, int *total_height)
 {
     GnomeRRTile tile;
-    int ht, vt, i;
-    int total_h = 0, total_w = 0;
+    guint ht, vt;
+    int i, total_h = 0, total_w = 0;
 
     if (!_gnome_rr_output_get_tile_info (output, &tile))
 	return FALSE;
@@ -430,7 +430,7 @@ fill_screen_info_from_resources (ScreenInfo *info,
 				 int         max_width,
 				 int         max_height)
 {
-    int i;
+    guint i;
     GPtrArray *a;
     GnomeRRCrtc **crtc;
     GnomeRROutput **output;
@@ -1336,8 +1336,8 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     GPtrArray *a;
     GVariantIter *crtcs, *clones, *modes;
     GVariant *properties, *edid, *tile;
-    int current_crtc_id;
-    guint id;
+    gint32 current_crtc_id;
+    guint32 id;
 
     g_variant_get (info, META_OUTPUT_STRUCT,
 		   &output->id, &output->winsys_id,
@@ -1356,7 +1356,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 
 	g_ptr_array_add (a, crtc);
 
-	if (crtc->id == current_crtc_id)
+	if (current_crtc_id != -1 && crtc->id == (guint32) current_crtc_id)
 	{
 	    output->current_crtc = crtc;
 	    append_output_array (&crtc->current_outputs, output);
