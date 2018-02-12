@@ -509,12 +509,12 @@ static gboolean
 collect_locales_from_localebin (void)
 {
         gboolean found_locales = FALSE;
-        gchar    *argv[] = { "locale", "-a", NULL };
-        gchar    **linep;
+        const gchar *argv[] = { "locale", "-a", NULL };
+        gchar **linep;
         g_auto (GStrv) lines = NULL;
         g_autofree gchar *output = NULL;
 
-        if (g_spawn_sync (NULL, argv, NULL,
+        if (g_spawn_sync (NULL, (gchar **) argv, NULL,
                           G_SPAWN_SEARCH_PATH|G_SPAWN_STDERR_TO_DEV_NULL,
                           NULL, NULL, &output, NULL, NULL, NULL) == FALSE)
                 return FALSE;
