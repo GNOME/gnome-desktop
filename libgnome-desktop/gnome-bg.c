@@ -1332,7 +1332,7 @@ gnome_bg_get_surface_from_root (GdkScreen *screen)
 	gint format;
 	gulong nitems;
 	gulong bytes_after;
-	guchar *data;
+	gpointer data;
 	Atom type;
 	Display *display;
 	int screen_num;
@@ -1349,7 +1349,7 @@ gnome_bg_get_surface_from_root (GdkScreen *screen)
 				     gdk_x11_get_xatom_by_name ("_XROOTPMAP_ID"),
 				     0L, 1L, False, XA_PIXMAP,
 				     &type, &format, &nitems, &bytes_after,
-				     &data);
+				     (guchar **) &data);
 	surface = NULL;
 	source_pixmap = NULL;
 
@@ -1422,7 +1422,7 @@ gnome_bg_set_root_pixmap_id (GdkScreen       *screen,
 	gint     format;
 	gulong   nitems;
 	gulong   bytes_after;
-	guchar  *data_esetroot;
+	gpointer data_esetroot;
 	Pixmap   pixmap_id;
 	Atom     type;
 	Display *display;
@@ -1440,7 +1440,7 @@ gnome_bg_set_root_pixmap_id (GdkScreen       *screen,
 				     0L, 1L, False, XA_PIXMAP,
 				     &type, &format, &nitems,
 				     &bytes_after,
-				     &data_esetroot);
+				     (guchar **) &data_esetroot);
 
 	if (data_esetroot != NULL) {
 		if (result == Success && type == XA_PIXMAP &&
