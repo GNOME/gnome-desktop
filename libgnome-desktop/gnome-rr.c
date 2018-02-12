@@ -454,13 +454,10 @@ fill_screen_info_from_resources (ScreenInfo *info,
     a = g_ptr_array_new ();
     for (i = 0; i < ncrtc; ++i)
     {
-	GnomeRRCrtc *crtc;
-
 	g_variant_get_child (crtcs, i, META_CRTC_STRUCT, &id,
 			     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	crtc = crtc_new (info, id);
 
-	g_ptr_array_add (a, crtc);
+	g_ptr_array_add (a, crtc_new (info, id));
     }
     g_ptr_array_add (a, NULL);
     info->crtcs = (GnomeRRCrtc **)g_ptr_array_free (a, FALSE);
@@ -468,13 +465,10 @@ fill_screen_info_from_resources (ScreenInfo *info,
     a = g_ptr_array_new ();
     for (i = 0; i < noutput; ++i)
     {
-	GnomeRROutput *output;
- 
 	g_variant_get_child (outputs, i, META_OUTPUT_STRUCT, &id,
 			     NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	output = output_new (info, id);
 
-	g_ptr_array_add (a, output);
+	g_ptr_array_add (a, output_new (info, id));
     }
     g_ptr_array_add (a, NULL);
     info->outputs = (GnomeRROutput **)g_ptr_array_free (a, FALSE);
@@ -482,13 +476,10 @@ fill_screen_info_from_resources (ScreenInfo *info,
     a = g_ptr_array_new ();
     for (i = 0;  i < nmode; ++i)
     {
-	GnomeRRMode *mode;
-
 	g_variant_get_child (modes, i, META_MONITOR_MODE_STRUCT, &id,
 			     NULL, NULL, NULL, NULL, NULL);
-	mode = mode_new (info, id);
 
-	g_ptr_array_add (a, mode);
+	g_ptr_array_add (a, mode_new (info, id));
     }
     g_ptr_array_add (a, NULL);
     info->modes = (GnomeRRMode **)g_ptr_array_free (a, FALSE);
