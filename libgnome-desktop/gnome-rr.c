@@ -1113,16 +1113,13 @@ gnome_rr_screen_get_dpms_mode (GnomeRRScreen    *screen,
     g_return_val_if_fail (mode != NULL, FALSE);
 
     power_save = meta_dbus_display_config_get_power_save_mode (screen->priv->proxy);
-
-    if (power_save == META_POWER_SAVE_UNKNOWN) {
+    switch (power_save) {
+    case META_POWER_SAVE_UNKNOWN:
         g_set_error_literal (error,
                              GNOME_RR_ERROR,
                              GNOME_RR_ERROR_NO_DPMS_EXTENSION,
                              "Display is not DPMS capable");
-	return FALSE;
-    }
-
-    switch (power_save) {
+        return FALSE;
     case META_POWER_SAVE_ON:
         *mode = GNOME_RR_DPMS_ON;
         break;
@@ -1158,6 +1155,9 @@ gnome_rr_screen_set_dpms_mode (GnomeRRScreen    *screen,
     g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
     switch (mode) {
+    case GNOME_RR_DPMS_UNKNOWN:
+        power_save = META_POWER_SAVE_UNKNOWN;
+        break;
     case GNOME_RR_DPMS_ON:
         power_save = META_POWER_SAVE_ON;
         break;

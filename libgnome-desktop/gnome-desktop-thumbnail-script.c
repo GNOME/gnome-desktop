@@ -566,7 +566,6 @@ expand_thumbnailing_cmd (const char  *cmd,
   g_auto(GStrv) cmd_elems = NULL;
   guint i;
   gboolean got_in, got_out;
-  g_autofree char *sandboxed_path = NULL;
 
   if (!g_shell_parse_argv (cmd, NULL, &cmd_elems, error))
     return NULL;

@@ -103,10 +103,10 @@ gnome_pnp_ids_init (GnomePnpIds *pnp_ids)
 static void
 gnome_pnp_ids_finalize (GObject *object)
 {
+#ifdef HAVE_UDEV
         GnomePnpIds *pnp_ids = GNOME_PNP_IDS (object);
         GnomePnpIdsPrivate *priv = pnp_ids->priv;
 
-#ifdef HAVE_UDEV
         g_clear_pointer (&priv->udev, udev_unref);
         g_clear_pointer (&priv->hwdb, udev_hwdb_unref);
 #endif

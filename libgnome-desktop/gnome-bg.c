@@ -822,6 +822,11 @@ get_scaled_pixbuf (GDesktopBackgroundStyle placement,
 		new = pixbuf_scale_to_fit (pixbuf, width, height);
 		break;
 		
+	case G_DESKTOP_BACKGROUND_STYLE_NONE:
+		/* This shouldn’t be true, but if it is, assert and
+		 * fall through, in case assertions are disabled.
+		 */
+		g_assert_not_reached ();
 	case G_DESKTOP_BACKGROUND_STYLE_CENTERED:
 	case G_DESKTOP_BACKGROUND_STYLE_WALLPAPER:
 	default:
@@ -867,6 +872,7 @@ draw_image_area (GnomeBG         *bg,
 	case G_DESKTOP_BACKGROUND_STYLE_SPANNED:
 		pixbuf_blend (scaled, dest, 0, 0, w, h, x, y, 1.0);
 		break;
+	case G_DESKTOP_BACKGROUND_STYLE_NONE:
 	default:
 		g_assert_not_reached ();
 		break;
