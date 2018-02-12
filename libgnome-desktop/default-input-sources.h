@@ -1,8 +1,8 @@
 typedef struct
 {
-  const gchar const *locale;
-  const gchar const *type;
-  const gchar const *id;
+  const gchar *const locale;
+  const gchar *const type;
+  const gchar *const id;
 } DefaultInputSource;
 
 static DefaultInputSource default_input_sources[] =
