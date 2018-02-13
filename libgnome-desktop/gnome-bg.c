@@ -1024,6 +1024,7 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
 			
 		case G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL:
 		case G_DESKTOP_BACKGROUND_SHADING_VERTICAL:
+		default:
 			break;
 		}
 		
@@ -1652,6 +1653,8 @@ file_cache_entry_delete (FileCacheEntry *ent)
 		break;
 	case THUMBNAIL:
 		g_object_unref (ent->u.thumbnail);
+		break;
+	default:
 		break;
 	}
 
