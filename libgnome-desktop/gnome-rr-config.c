@@ -1168,7 +1168,7 @@ crtc_assignment_apply (CrtcAssignment *assign, gboolean persistent, GError **err
 	g_variant_builder_add (&crtc_builder, "(uiiiuaua{sv})",
 			       gnome_rr_crtc_get_id (crtc),
 			       info->mode ?
-			       gnome_rr_mode_get_id (info->mode) : -1,
+			       gnome_rr_mode_get_id (info->mode) : (guint32) -1,
 			       info->x,
 			       info->y,
 			       rotation_to_transform (info->rotation),
