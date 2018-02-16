@@ -6,6 +6,8 @@ AM_CPPFLAGS =							\
 	-I$(top_srcdir)						\
 	$(GNOME_DESKTOP_CFLAGS)					\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
+	-DGDK_DISABLE_DEPRECATION_WARNINGS			\
+	-DGTK_DISABLE_DEPRECATION_WARNINGS			\
 	-DINSTALLED_TEST_DIR=\"$(installed_testdir)\"		\
 	$(NULL)
 
