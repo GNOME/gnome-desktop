@@ -325,7 +325,7 @@ buffer_diff_core (const guchar *buf_a,
   int x, y;
   guchar *buf_diff = NULL;
   int stride_diff = 0;
-  cairo_surface_t *diff = NULL;
+  cairo_surface_t *diff_surface = NULL;
 
   for (y = 0; y < height; y++)
     {
@@ -342,14 +342,14 @@ buffer_diff_core (const guchar *buf_a,
           if (row_a[x] == row_b[x])
             continue;
         
-          if (diff == NULL)
+          if (diff_surface == NULL)
             {
-              diff = cairo_image_surface_create (CAIRO_FORMAT_RGB24,
-                                                 width,
-                                                 height);
-              g_assert (cairo_surface_status (diff) == CAIRO_STATUS_SUCCESS);
-              buf_diff = cairo_image_surface_get_data (diff);
-              stride_diff = cairo_image_surface_get_stride (diff);
+              diff_surface = cairo_image_surface_create (CAIRO_FORMAT_RGB24,
+                                                         width,
+                                                         height);
+              g_assert (cairo_surface_status (diff_surface) == CAIRO_STATUS_SUCCESS);
+              buf_diff = cairo_image_surface_get_data (diff_surface);
+              stride_diff = cairo_image_surface_get_stride (diff_surface);
               row = (guint32 *) (buf_diff + y * stride_diff);
             }
 
@@ -380,7 +380,7 @@ buffer_diff_core (const guchar *buf_a,
       }
   }
 
-  return diff;
+  return diff_surface;
 }
 
 static cairo_surface_t *
