@@ -164,8 +164,7 @@ gnome_bg_slide_show_finalize (GObject *object)
 
         g_queue_free (self->priv->slides);
 
-        g_list_foreach (self->priv->stack->head, (GFunc) g_free, NULL);
-        g_queue_free (self->priv->stack);
+        g_queue_free_full (self->priv->stack, g_free);
 
         g_free (self->priv->filename);
 }

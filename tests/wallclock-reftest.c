@@ -141,12 +141,19 @@ quit_when_idle (gpointer loop)
 }
 
 static void
+event_handler_func (GdkEvent *event,
+                    gpointer  data)
+{
+    gtk_main_do_event (event);
+}
+
+static void
 check_for_draw (GdkEvent *event, gpointer loop)
 {
   if (event->type == GDK_EXPOSE)
     {
       g_idle_add (quit_when_idle, loop);
-      gdk_event_handler_set ((GdkEventFunc) gtk_main_do_event, NULL, NULL);
+      gdk_event_handler_set ((GdkEventFunc) event_handler_func, NULL, NULL);
     }
 
   gtk_main_do_event (event);
@@ -419,7 +426,8 @@ get_locale_for_file (const char *ui_file)
 }
 
 static void
-test_ui_file (GFile *file)
+test_ui_file (GFile         *file,
+              gconstpointer  user_data)
 {
   char *ui_file, *reference_file, *locale;
   cairo_surface_t *ui_image, *reference_image, *diff_image;
@@ -493,7 +501,15 @@ compare_files (gconstpointer a, gconstpointer b)
 }
 
 static void
-add_test_for_file (GFile *file)
+fixture_teardown_func (gpointer      fixture,
+                       gconstpointer user_data)
+{
+    g_object_unref (fixture);
+}
+
+static void
+add_test_for_file (GFile    *file,
+                   gpointer  user_data)
 {
   GFileEnumerator *enumerator;
   GFileInfo *info;
@@ -508,7 +524,7 @@ add_test_for_file (GFile *file)
                          g_object_ref (file),
                          NULL,
                          (GTestFixtureFunc) test_ui_file,
-                         (GTestFixtureFunc) g_object_unref);
+                         (GTestFixtureFunc) fixture_teardown_func);
       return;
     }
 
@@ -561,7 +577,7 @@ main (int argc, char **argv)
 
   basedir = INSTALLED_TEST_DIR;
   file = g_file_new_for_commandline_arg (basedir);
-  add_test_for_file (file);
+  add_test_for_file (file, NULL);
   g_object_unref (file);
 
   /* We need to ensure the process' current working directory
