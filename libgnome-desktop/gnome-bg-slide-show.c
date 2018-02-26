@@ -741,17 +741,20 @@ on_file_loaded (GFile        *file,
 
     if (!loaded) {
             g_task_return_error (task, error);
+            g_object_unref (task);
             return;
     }
 
     if (!parse_file_contents (g_task_get_source_object (task), contents, length, &error)) {
             g_task_return_error (task, error);
+            g_object_unref (task);
             g_free (contents);
             return;
     }
     g_free (contents);
 
     g_task_return_boolean (task, TRUE);
+    g_object_unref (task);
 }
 
 /**
