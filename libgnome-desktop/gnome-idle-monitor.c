@@ -534,7 +534,8 @@ add_active_watch (GnomeIdleMonitor      *monitor,
 /**
  * gnome_idle_monitor_add_idle_watch:
  * @monitor: A #GnomeIdleMonitor
- * @interval_msec: The idletime interval, in milliseconds
+ * @interval_msec: The idletime interval, in milliseconds. It must be
+ *     a strictly positive value (> 0).
  * @callback: (allow-none): The callback to call when the user has
  *     accumulated @interval_msec milliseconds of idle time.
  * @user_data: (allow-none): The user data to pass to the callback
@@ -563,6 +564,7 @@ gnome_idle_monitor_add_idle_watch (GnomeIdleMonitor	       *monitor,
 	GnomeIdleMonitorWatch *watch;
 
 	g_return_val_if_fail (GNOME_IS_IDLE_MONITOR (monitor), 0);
+	g_return_val_if_fail (interval_msec > 0, 0);
 
 	watch = make_watch (monitor,
 			    interval_msec,
