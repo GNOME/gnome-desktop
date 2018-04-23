@@ -271,8 +271,8 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		if (show_full_date) {
 			/* Translators: This is the time format with full date used
 			   in 24-hour mode. */
-			format_string = show_seconds ? _("%a %b %e, %R:%S")
-				: _("%a %b %e, %R");
+			format_string = show_seconds ? _("%a %b %e\u2003%R:%S")
+				: _("%a %b %e\u2003%R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
@@ -287,8 +287,8 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		if (show_full_date) {
 			/* Translators: This is a time format with full date used
 			   for AM/PM. */
-			format_string = show_seconds ? _("%a %b %e, %l:%M:%S %p")
-				: _("%a %b %e, %l:%M %p");
+			format_string = show_seconds ? _("%a %b %e\u2003%l:%M:%S %p")
+				: _("%a %b %e\u2003%l:%M %p");
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
 			   for AM/PM. */
