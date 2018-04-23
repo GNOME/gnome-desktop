@@ -221,33 +221,47 @@ string_replace (const char *input,
 }
 
 /* This function wraps g_date_time_format, replacing colon with the ratio
- * character as it looks visually better in time strings.
+ * character and underscores with em-space as it looks visually better
+ * in time strings.
  */
 static char *
 date_time_format (GDateTime *datetime,
                   const char *format)
 {
-	char *format_with_colon;
+	char *replaced_format;
 	char *ret;
-	char *tmp;
+	char *no_ratio, *no_emspace;
 	gboolean is_utf8;
 
 	is_utf8 = g_get_charset (NULL);
 
-	/* First, replace ratio with plain colon before passing it to
+	/* First, replace ratio with plain colon */
+	no_ratio = string_replace (format, "∶", ":");
+	/* Then do the same with em-space and underscore before passing it to
 	 * g_date_time_format.  */
-	tmp = string_replace (format, "∶", ":");
-	format_with_colon = g_date_time_format (datetime, tmp);
-	g_free (tmp);
+	no_emspace = string_replace (no_ratio, " ", "_");
+	replaced_format = g_date_time_format (datetime, no_emspace);
 
-	/* Then, after formatting, replace the plain colon with ratio, and
-	 * prepend it with an LTR marker to force direction. */
-	if (is_utf8)
-		ret = string_replace (format_with_colon, ":", "\xE2\x80\x8E∶");
-	else
-		ret = g_strdup (format_with_colon);
+	g_free (no_ratio);
+	g_free (no_emspace);
 
-	g_free (format_with_colon);
+	if (is_utf8) {
+		char *tmp;
+		/* Then, after formatting, replace the plain colon with ratio,
+		 * and prepend it with an LTR marker to force direction. */
+		tmp = string_replace (replaced_format, ":", "\xE2\x80\x8E∶");
+
+		/* Finally, replace double spaces with a single em-space.*/
+		ret = string_replace (tmp, "_", " ");
+
+		g_free (tmp);
+	} else {
+		/* Colon instead of ratio is already fine, but replace the
+		 * underscore with double spaces instead of em-space */
+		ret = string_replace (replaced_format, "_", "  ");
+	}
+
+	g_free (replaced_format);
 	return ret;
 }
 
@@ -271,14 +285,16 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		if (show_full_date) {
 			if (show_weekday)
 				/* Translators: This is the time format with full date
-				   plus day used in 24-hour mode. */
-				format_string = show_seconds ? _("%a %b %e, %R:%S")
-					: _("%a %b %e, %R");
+				   plus day used in 24-hour mode. Please keep the under-
+				   score to separate the date from the time. */
+				format_string = show_seconds ? _("%a %b %e_%R:%S")
+					: _("%a %b %e_%R");
 			else
 				/* Translators: This is the time format with full date
-				   used in 24-hour mode. */
+				   used in 24-hour mode. Please keep the underscore to
+				   separate the date from the time. */
 				format_string = show_seconds ? _("%b %e, %R:%S")
-					: _("%b %e, %R");
+					: _("%b %e_%R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
@@ -293,14 +309,16 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		if (show_full_date) {
 			if (show_weekday)
 				/* Translators: This is a time format with full date
-				   plus day used for AM/PM. */
-				format_string = show_seconds ? _("%a %b %e, %l:%M:%S %p")
-					: _("%a %b %e, %l:%M %p");
+				   plus day used for AM/PM. Please keep the under-
+				   score to separate the date from the time. */
+				format_string = show_seconds ? _("%a %b %e_%l:%M:%S %p")
+					: _("%a %b %e_%l:%M %p");
 			else
 				/* Translators: This is a time format with full date
-				   used for AM/PM. */
-				format_string = show_seconds ? _("%b %e, %l:%M:%S %p")
-					: _("%b %e, %l:%M %p");
+				   used for AM/PM. Please keep the underscore to
+				   separate the date from the time. */
+				format_string = show_seconds ? _("%b %e_%l:%M:%S %p")
+					: _("%b %e_%l:%M %p");
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
 			   for AM/PM. */
