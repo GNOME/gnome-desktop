@@ -10,7 +10,7 @@ m4_define(gnome_version, [gnome_platform.gnome_minor.gnome_micro]m4_ifval(gnome_
 
 AC_INIT([gnome-desktop], gnome_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop])
-AX_IS_RELEASE([git-directory])
+AX_IS_RELEASE([always])
 AC_CONFIG_SRCDIR([libgnome-desktop])
 
 AM_INIT_AUTOMAKE([1.11.2 foreign no-dist-gzip dist-xz tar-ustar])
