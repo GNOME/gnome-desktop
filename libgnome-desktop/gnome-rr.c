@@ -1996,6 +1996,7 @@ crtc_initialize (GnomeRRCrtc *crtc, GVariant *info)
     
     while (g_variant_iter_loop (all_transforms, "u", &transform))
 	crtc->all_transforms |= 1 << transform;
+    g_variant_iter_free (all_transforms);
 }
 
 static void
