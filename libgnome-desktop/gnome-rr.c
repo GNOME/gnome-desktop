@@ -531,6 +531,11 @@ fill_out_screen_info (ScreenInfo  *info,
 
     fill_screen_info_from_resources (info, serial, crtcs, outputs,
 				     modes, max_width, max_height);
+
+    g_variant_unref (crtcs);
+    g_variant_unref (outputs);
+    g_variant_unref (modes);
+
     return TRUE;
 }
 
