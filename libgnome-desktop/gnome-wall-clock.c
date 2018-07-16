@@ -373,6 +373,7 @@ on_schema_change (GSettings *schema,
 {
 	if (g_strcmp0 (key, "clock-format") != 0 &&
 	    g_strcmp0 (key, "clock-show-seconds") != 0 &&
+	    g_strcmp0 (key, "clock-show-weekday") != 0 &&
 	    g_strcmp0 (key, "clock-show-date") != 0) {
 		return;
 	}
