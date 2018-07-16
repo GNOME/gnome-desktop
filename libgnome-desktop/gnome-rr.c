@@ -487,17 +487,23 @@ fill_screen_info_from_resources (ScreenInfo *info,
     /* Initialize */
     for (i = 0, crtc = info->crtcs; *crtc; ++i, ++crtc)
     {
-	crtc_initialize (*crtc, g_variant_get_child_value (crtcs, i));
+	GVariant *child = g_variant_get_child_value (crtcs, i);
+	crtc_initialize (*crtc, child);
+	g_variant_unref (child);
     }
 
     for (i = 0, output = info->outputs; *output; ++i, ++output)
     {
-	output_initialize (*output, g_variant_get_child_value (outputs, i));
+	GVariant *child = g_variant_get_child_value (outputs, i);
+	output_initialize (*output, child);
+	g_variant_unref (child);
     }
 
     for (i = 0, mode = info->modes; *mode; ++i, ++mode)
     {
-	mode_initialize (*mode, g_variant_get_child_value (modes, i));
+	GVariant *child = g_variant_get_child_value (modes, i);
+	mode_initialize (*mode, child);
+	g_variant_unref (child);
     }
 
     gather_clone_modes (info);
@@ -1340,7 +1346,6 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 		   &current_crtc_id, &crtcs,
 		   &output->name,
 		   &modes, &clones, &properties);
-    g_variant_unref (info);
 
     /* Possible crtcs */
     a = g_ptr_array_new ();
@@ -1991,7 +1996,6 @@ crtc_initialize (GnomeRRCrtc *crtc, GVariant *info)
 		   &current_mode_id,
 		   &crtc->transform, &all_transforms,
 		   NULL);
-    g_variant_unref (info);
 
     if (current_mode_id >= 0)
       crtc->current_mode = mode_by_id (crtc->info, current_mode_id);
@@ -2086,7 +2090,6 @@ mode_initialize (GnomeRRMode *mode, GVariant *info)
 		   &mode->id, &mode->winsys_id,
 		   &mode->width, &mode->height,
 		   &frequency, &mode->flags);
-    g_variant_unref (info);
     
     mode->freq = frequency * 1000;
 }
