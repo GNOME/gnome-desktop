@@ -269,10 +269,16 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 
 	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H) {
 		if (show_full_date) {
-			/* Translators: This is the time format with full date used
-			   in 24-hour mode. */
-			format_string = show_seconds ? _("%a %b %e\u2003%R:%S")
-				: _("%a %b %e\u2003%R");
+			if (show_weekday)
+				/* Translators: This is the time format with full date plus
+				 * day used in 24-hour mode. */
+				format_string = show_seconds ? _("%a %b %e\u2003%R:%S")
+					: _("%a %b %e\u2003%R");
+			else
+				/* Translators: This is the time format with full date used
+				 * in 24-hour mode. */
+				format_string = show_seconds ? _("%b %e\u2003%R:%S")
+					: _("%b %e\u2003%R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
@@ -285,10 +291,16 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		}
 	} else {
 		if (show_full_date) {
-			/* Translators: This is a time format with full date used
-			   for AM/PM. */
-			format_string = show_seconds ? _("%a %b %e\u2003%l:%M:%S %p")
-				: _("%a %b %e\u2003%l:%M %p");
+			if (show_weekday)
+				/* Translators: This is a time format with full date plus
+				 * day used for AM/PM. */
+				format_string = show_seconds ? _("%a %b %e\u2003%l:%M:%S %p")
+					: _("%a %b %e\u2003%l:%M %p");
+			else
+				/* Translators: This is a time format with full date used
+				 * for AM/PM. */
+				format_string = show_seconds ? _("%b %e\u2003%l:%M:%S %p")
+					: _("%b %e\u2003%l:%M %p");
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
 			   for AM/PM. */
