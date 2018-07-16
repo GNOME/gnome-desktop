@@ -1340,6 +1340,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 		   &current_crtc_id, &crtcs,
 		   &output->name,
 		   &modes, &clones, &properties);
+    g_variant_unref (info);
 
     /* Possible crtcs */
     a = g_ptr_array_new ();
@@ -1990,6 +1991,7 @@ crtc_initialize (GnomeRRCrtc *crtc, GVariant *info)
 		   &current_mode_id,
 		   &crtc->transform, &all_transforms,
 		   NULL);
+    g_variant_unref (info);
 
     if (current_mode_id >= 0)
       crtc->current_mode = mode_by_id (crtc->info, current_mode_id);
@@ -2084,6 +2086,7 @@ mode_initialize (GnomeRRMode *mode, GVariant *info)
 		   &mode->id, &mode->winsys_id,
 		   &mode->width, &mode->height,
 		   &frequency, &mode->flags);
+    g_variant_unref (info);
     
     mode->freq = frequency * 1000;
 }
