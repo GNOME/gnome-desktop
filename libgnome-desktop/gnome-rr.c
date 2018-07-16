@@ -1431,6 +1431,8 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 
     if (output->is_primary)
 	output->info->primary = output;
+
+    g_variant_unref (properties);
 }
 
 static GnomeRROutput*
