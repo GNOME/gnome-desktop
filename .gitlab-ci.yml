@@ -1,0 +1,22 @@
+image: fedora:rawhide
+
+variables:
+  DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext
+                gtk-doc xkeyboard-config-devel intltool itstool
+                gobject-introspection-devel systemd-devel iso-codes-devel
+                libseccomp-devel gcc gcc-c++ glibc-devel gnome-common
+                make
+
+build_stable:
+  before_script:
+    # Work-around https://bugzilla.redhat.com/show_bug.cgi?id=1607172#c4
+    - echo "update dnf gdbm" >> translist.txt
+    - echo "remove python3-modulemd" >> translist.txt
+    - dnf shell -y --nogpgcheck translist.txt
+    - dnf update -y --nogpgcheck
+    - dnf install -y --nogpgcheck $DEPENDENCIES
+  script:
+    - ./autogen.sh --disable-dependency-tracking
+    - make
+    - make install
+    - make check
