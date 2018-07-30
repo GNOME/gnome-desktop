@@ -27,8 +27,12 @@
 #define COLON ":"
 #define RATIO "∶"
 
+#define SPACE "  "
+#define EM_SPACE " "
+
 static void
-test_colon_vs_ratio (void)
+test_utf8_character (const char *utf8_char,
+                     const char *non_utf8_fallback)
 {
 	GnomeWallClock *clock;
 	const char *save_locale;
@@ -42,16 +46,16 @@ test_colon_vs_ratio (void)
 	setlocale (LC_ALL, "C");
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) != NULL);
-	g_assert (strstr (str, RATIO) == NULL);
+	g_assert (strstr (str, non_utf8_fallback) != NULL);
+	g_assert (strstr (str, utf8_char) == NULL);
 	g_object_unref (clock);
 
 	/* In a UTF8 locale, we want ratio characters and no colons */
 	setlocale (LC_ALL, "en_US.utf8");
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) == NULL);
-	g_assert (strstr (str, RATIO) != NULL);
+	g_assert (strstr (str, non_utf8_fallback) == NULL);
+	g_assert (strstr (str, utf8_char) != NULL);
 	g_object_unref (clock);
 
 	/* ... and same thing with an RTL locale: should be formatted with
@@ -59,12 +63,24 @@ test_colon_vs_ratio (void)
 	setlocale (LC_ALL, "he_IL.utf8");
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) == NULL);
-	g_assert (strstr (str, RATIO) != NULL);
+	g_assert (strstr (str, non_utf8_fallback) == NULL);
+	g_assert (strstr (str, utf8_char) != NULL);
 	g_object_unref (clock);
 
 	/* Restore previous locale */
 	setlocale (LC_ALL, save_locale);
+}
+
+static void
+test_colon_vs_ratio (void)
+{
+	test_utf8_character (RATIO, COLON);
+}
+
+static void
+test_space_vs_em_space (void)
+{
+	test_utf8_character (EM_SPACE, SPACE);
 }
 
 static void
@@ -203,6 +219,7 @@ main (int   argc,
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
+	g_test_add_func ("/wall-clock/space-vs-em-space", test_space_vs_em_space);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
 	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);
 	g_test_add_func ("/wall-clock/weekday-setting", test_weekday_setting);
