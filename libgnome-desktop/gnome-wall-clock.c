@@ -221,7 +221,7 @@ string_replace (const char *input,
 }
 
 /* This function wraps g_date_time_format, replacing colon with the ratio
- * character and underscores with em-space as it looks visually better
+ * character and underscores with en-space as it looks visually better
  * in time strings.
  */
 static char *
@@ -230,20 +230,20 @@ date_time_format (GDateTime *datetime,
 {
 	char *replaced_format;
 	char *ret;
-	char *no_ratio, *no_emspace;
+	char *no_ratio, *no_enspace;
 	gboolean is_utf8;
 
 	is_utf8 = g_get_charset (NULL);
 
 	/* First, replace ratio with plain colon */
 	no_ratio = string_replace (format, "∶", ":");
-	/* Then do the same with em-space and underscore before passing it to
+	/* Then do the same with en-space and underscore before passing it to
 	 * g_date_time_format.  */
-	no_emspace = string_replace (no_ratio, " ", "_");
-	replaced_format = g_date_time_format (datetime, no_emspace);
+	no_enspace = string_replace (no_ratio, " ", "_");
+	replaced_format = g_date_time_format (datetime, no_enspace);
 
 	g_free (no_ratio);
-	g_free (no_emspace);
+	g_free (no_enspace);
 
 	if (is_utf8) {
 		char *tmp;
@@ -251,13 +251,13 @@ date_time_format (GDateTime *datetime,
 		 * and prepend it with an LTR marker to force direction. */
 		tmp = string_replace (replaced_format, ":", "\xE2\x80\x8E∶");
 
-		/* Finally, replace double spaces with a single em-space.*/
-		ret = string_replace (tmp, "_", " ");
+		/* Finally, replace double spaces with a single en-space.*/
+		ret = string_replace (tmp, "_", " ");
 
 		g_free (tmp);
 	} else {
 		/* Colon instead of ratio is already fine, but replace the
-		 * underscore with double spaces instead of em-space */
+		 * underscore with double spaces instead of en-space */
 		ret = string_replace (replaced_format, "_", "  ");
 	}
 
