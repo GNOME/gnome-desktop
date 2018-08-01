@@ -92,7 +92,7 @@ test_clock_format_setting (void)
 	g_settings_set_enum (settings, "clock-format", G_DESKTOP_CLOCK_FORMAT_24H);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_get_clock (clock);
-	g_assert (!g_str_has_suffix (str, "AM") && !g_str_has_suffix (str, "PM"));
+	g_assert (g_str_has_suffix (str, "AM") && g_str_has_suffix (str, "PM"));
 	g_object_unref (clock);
 
 	g_object_unref (settings);
