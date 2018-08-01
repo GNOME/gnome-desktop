@@ -293,7 +293,7 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				/* Translators: This is the time format with full date
 				   used in 24-hour mode. Please keep the underscore to
 				   separate the date from the time. */
-				format_string = show_seconds ? _("%b %e, %R:%S")
+				format_string = show_seconds ? _("%b %e_%R:%S")
 					: _("%b %e_%R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
