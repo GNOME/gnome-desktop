@@ -28,7 +28,7 @@
 #define RATIO "∶"
 
 #define SPACE "  "
-#define EM_SPACE " "
+#define EN_SPACE " "
 
 static void
 test_utf8_character (const char *utf8_char,
@@ -95,9 +95,9 @@ test_colon_vs_ratio (void)
 }
 
 static void
-test_space_vs_em_space (void)
+test_space_vs_en_space (void)
 {
-	test_utf8_character (EM_SPACE, SPACE);
+	test_utf8_character (EN_SPACE, SPACE);
 }
 
 static void
@@ -236,7 +236,7 @@ main (int   argc,
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
-	g_test_add_func ("/wall-clock/space-vs-em-space", test_space_vs_em_space);
+	g_test_add_func ("/wall-clock/space-vs-en-space", test_space_vs_en_space);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
 	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);
 	g_test_add_func ("/wall-clock/weekday-setting", test_weekday_setting);
