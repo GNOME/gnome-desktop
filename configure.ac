@@ -35,8 +35,6 @@ AC_SUBST(LT_VERSION)
 LT_PREREQ([2.2.6])
 LT_INIT([dlopen win32-dll disable-static])
 
-IT_PROG_INTLTOOL([0.40.6])
-
 AC_PROG_CC
 PKG_PROG_PKG_CONFIG
 
@@ -210,13 +208,13 @@ dnl Documentation support
 YELP_HELP_INIT
 
 dnl Language Support
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.19.8])
 
 GETTEXT_PACKAGE=gnome-desktop-3.0
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 		   [The gettext translation domain])
 AC_SUBST(GETTEXT_PACKAGE)
-
-AM_GLIB_GNU_GETTEXT
 
 GOBJECT_INTROSPECTION_CHECK([0.9.7])
 
@@ -231,7 +229,7 @@ libgnome-desktop/gnome-desktop-3.0-uninstalled.pc
 docs/Makefile
 docs/reference/Makefile
 docs/reference/gnome-desktop3/Makefile
-gnome-version.xml.in
+gnome-version.xml
 po/Makefile.in
 desktop-docs/Makefile
 desktop-docs/fdl/Makefile

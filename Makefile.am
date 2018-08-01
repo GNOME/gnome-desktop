@@ -11,15 +11,13 @@ AM_DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 versiondir = $(datadir)/gnome
 version_DATA = gnome-version.xml
 
-@INTLTOOL_XML_RULE@
-
 EXTRA_DIST =			\
 	COPYING-DOCS		\
 	HACKING			\
 	MAINTAINERS		\
 	ChangeLog.pre-git	\
 	glib-tap.mk		\
-	gnome-version.xml.in.in	\
+	gnome-version.xml.in	\
 	tap-driver.sh		\
 	tap-test
 
@@ -43,8 +41,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/configure \
 	$(srcdir)/gtk-doc.make \
 	$(srcdir)/m4/gnome-doc-utils.m4 \
-	$(srcdir)/m4/gtk-doc.m4 \
-	$(srcdir)/m4/intltool.m4
+	$(srcdir)/m4/gtk-doc.m4
 
 CHANGELOG_GIT_RANGE = GNOME_DESKTOP_2_26_1..
 dist-hook:

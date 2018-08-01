@@ -125,6 +125,7 @@ $(srcdir)/.gitignore: Makefile.am $(top_srcdir)/git.mk
 		fi; \
 		if test -f $(srcdir)/po/Makefile.in.in; then \
 			for x in \
+				ABOUT-NLS \
 				po/Makefile.in.in \
 				po/Makefile.in \
 				po/Makefile \
@@ -144,6 +145,7 @@ $(srcdir)/.gitignore: Makefile.am $(top_srcdir)/git.mk
 				autom4te.cache \
 				configure \
 				config.h \
+				config.rpath \
 				stamp-h1 \
 				libtool \
 				config.lt \
