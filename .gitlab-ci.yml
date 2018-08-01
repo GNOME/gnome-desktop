@@ -27,4 +27,8 @@ build_stable:
     - make install
     - make check
     - xvfb-run -a -s "-screen 0 1024x768x24"
-                     gnome-desktop-testing-runner gnome-desktop
+                     gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
+  artifacts:
+    paths:
+      - tests-results
+    when: on_failure
