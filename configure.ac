@@ -1,7 +1,7 @@
 m4_define(gnome_platform, 3)
 m4_define(gnome_minor, 29)
 m4_define(gnome_micro, 90)
-m4_define(gnome_sub,)
+m4_define(gnome_sub,1)
 dnl gnome_sub is an optional sub-version which will not be advertised to the user
 dnl It allows to release a 2.30.1.1 which is just a better 2.30.1
 dnl Leave empty if not needed
@@ -176,6 +176,7 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  gtk+-3.0 >= $GTK_REQUIRED
                                  glib-2.0 >= $GLIB_REQUIRED
                                  gio-2.0 >= $GLIB_REQUIRED
+                                 gio-unix-2.0 >= $GLIB_REQUIRED
                                  gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
                                  xkeyboard-config
                                  iso-codes
