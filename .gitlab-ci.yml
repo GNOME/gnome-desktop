@@ -18,7 +18,9 @@ build_stable:
     # Work-around itstool crasher: https://github.com/itstool/itstool/commit/9b84c007a73e8275ca45762f1bfa3ab7c3a852e2
     - rpm -Uvh https://kojipkgs.fedoraproject.org//work/tasks/3068/28763068/itstool-2.0.4-4.fc29.noarch.rpm
   script:
-    - ./autogen.sh --disable-dependency-tracking
+    - mkdir build
+    - cd build
+    - ../autogen.sh --disable-dependency-tracking
     - make
     - make install
     - make check
