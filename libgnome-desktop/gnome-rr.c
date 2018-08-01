@@ -487,17 +487,23 @@ fill_screen_info_from_resources (ScreenInfo *info,
     /* Initialize */
     for (i = 0, crtc = info->crtcs; *crtc; ++i, ++crtc)
     {
-	crtc_initialize (*crtc, g_variant_get_child_value (crtcs, i));
+	GVariant *child = g_variant_get_child_value (crtcs, i);
+	crtc_initialize (*crtc, child);
+	g_variant_unref (child);
     }
 
     for (i = 0, output = info->outputs; *output; ++i, ++output)
     {
-	output_initialize (*output, g_variant_get_child_value (outputs, i));
+	GVariant *child = g_variant_get_child_value (outputs, i);
+	output_initialize (*output, child);
+	g_variant_unref (child);
     }
 
     for (i = 0, mode = info->modes; *mode; ++i, ++mode)
     {
-	mode_initialize (*mode, g_variant_get_child_value (modes, i));
+	GVariant *child = g_variant_get_child_value (modes, i);
+	mode_initialize (*mode, child);
+	g_variant_unref (child);
     }
 
     gather_clone_modes (info);
@@ -531,6 +537,11 @@ fill_out_screen_info (ScreenInfo  *info,
 
     fill_screen_info_from_resources (info, serial, crtcs, outputs,
 				     modes, max_width, max_height);
+
+    g_variant_unref (crtcs);
+    g_variant_unref (outputs);
+    g_variant_unref (modes);
+
     return TRUE;
 }
 
@@ -1420,6 +1431,8 @@ output_initialize (GnomeRROutput *output, GVariant *info)
 
     if (output->is_primary)
 	output->info->primary = output;
+
+    g_variant_unref (properties);
 }
 
 static GnomeRROutput*
@@ -1991,6 +2004,7 @@ crtc_initialize (GnomeRRCrtc *crtc, GVariant *info)
     
     while (g_variant_iter_loop (all_transforms, "u", &transform))
 	crtc->all_transforms |= 1 << transform;
+    g_variant_iter_free (all_transforms);
 }
 
 static void
