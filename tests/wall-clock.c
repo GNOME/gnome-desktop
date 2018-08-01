@@ -27,12 +27,22 @@
 #define COLON ":"
 #define RATIO "∶"
 
+#define SPACE "  "
+#define EN_SPACE " "
+
 static void
-test_colon_vs_ratio (void)
+test_utf8_character (const char *utf8_char,
+                     const char *non_utf8_fallback)
 {
+	GDateTime  *datetime;
 	GnomeWallClock *clock;
 	const char *save_locale;
 	const char *str;
+
+	/* When testing that UTF8 locales don't use double spaces
+	   to separate date and time, make sure the date itself
+	   doesn't contain double spaces ("Aug  1") */
+	datetime = g_date_time_new_local (2014, 5, 28, 23, 59, 59);
 
 	/* Save current locale */
 	save_locale = setlocale (LC_ALL, NULL);
@@ -41,30 +51,53 @@ test_colon_vs_ratio (void)
          * colons */
 	setlocale (LC_ALL, "C");
 	clock = gnome_wall_clock_new ();
-	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) != NULL);
-	g_assert (strstr (str, RATIO) == NULL);
+	str = gnome_wall_clock_string_for_datetime (clock,
+	                                            datetime,
+	                                            G_DESKTOP_CLOCK_FORMAT_24H,
+	                                            TRUE, TRUE, TRUE);
+	g_assert (strstr (str, non_utf8_fallback) != NULL);
+	g_assert (strstr (str, utf8_char) == NULL);
 	g_object_unref (clock);
 
 	/* In a UTF8 locale, we want ratio characters and no colons */
 	setlocale (LC_ALL, "en_US.utf8");
 	clock = gnome_wall_clock_new ();
-	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) == NULL);
-	g_assert (strstr (str, RATIO) != NULL);
+	str = gnome_wall_clock_string_for_datetime (clock,
+	                                            datetime,
+	                                            G_DESKTOP_CLOCK_FORMAT_24H,
+	                                            TRUE, TRUE, TRUE);
+	g_assert (strstr (str, non_utf8_fallback) == NULL);
+	g_assert (strstr (str, utf8_char) != NULL);
 	g_object_unref (clock);
 
 	/* ... and same thing with an RTL locale: should be formatted with
          * ratio characters */
 	setlocale (LC_ALL, "he_IL.utf8");
 	clock = gnome_wall_clock_new ();
-	str = gnome_wall_clock_get_clock (clock);
-	g_assert (strstr (str, COLON) == NULL);
-	g_assert (strstr (str, RATIO) != NULL);
+	str = gnome_wall_clock_string_for_datetime (clock,
+	                                            datetime,
+	                                            G_DESKTOP_CLOCK_FORMAT_24H,
+	                                            TRUE, TRUE, TRUE);
+	g_assert (strstr (str, non_utf8_fallback) == NULL);
+	g_assert (strstr (str, utf8_char) != NULL);
 	g_object_unref (clock);
+
+	g_date_time_unref (datetime);
 
 	/* Restore previous locale */
 	setlocale (LC_ALL, save_locale);
+}
+
+static void
+test_colon_vs_ratio (void)
+{
+	test_utf8_character (RATIO, COLON);
+}
+
+static void
+test_space_vs_en_space (void)
+{
+	test_utf8_character (EN_SPACE, SPACE);
 }
 
 static void
@@ -203,6 +236,7 @@ main (int   argc,
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
+	g_test_add_func ("/wall-clock/space-vs-en-space", test_space_vs_en_space);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
 	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);
 	g_test_add_func ("/wall-clock/weekday-setting", test_weekday_setting);
