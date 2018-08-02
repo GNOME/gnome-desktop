@@ -5,7 +5,7 @@ variables:
                 gtk-doc xkeyboard-config-devel intltool itstool
                 gobject-introspection-devel systemd-devel iso-codes-devel
                 libseccomp-devel gcc gcc-c++ glibc-devel gnome-common
-                make redhat-rpm-config
+                meson redhat-rpm-config
   TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-he
 
 build_stable:
@@ -18,12 +18,11 @@ build_stable:
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
-    - mkdir build
+    - meson --prefix=/usr -Dinstalled_tests=true build
     - cd build
-    - ../autogen.sh --disable-dependency-tracking --enable-installed-tests --prefix=/usr
-    - make
-    - make install
-    - make check
+    - ninja
+    - ninja install
+    - xvfb-run -a -s "-screen 0 1024x768x24" ninja test
     - xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
   artifacts:
