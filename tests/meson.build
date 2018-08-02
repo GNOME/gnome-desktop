@@ -5,6 +5,12 @@ test_args = [
   '-DINSTALLED_TEST_DIR="@0@"'.format(test_execdir)
 ]
 
+test_env = [
+  'G_TEST_SRCDIR=@0@'.format(meson.current_source_dir()),
+  'G_TEST_BUILDDIR=@0@'.format(meson.current_build_dir()),
+  'G_ENABLE_DIAGNOSTICS=0'
+]
+
 test_programs = [
   'wall-clock',
  'wallclock-reftest'
@@ -16,6 +22,11 @@ foreach program: test_programs
     c_args: test_args,
     install_dir: test_execdir,
     install: get_option('installed_tests')
+  )
+
+  test(program,
+    exe,
+    env: test_env
   )
 endforeach
 
