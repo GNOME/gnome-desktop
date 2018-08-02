@@ -575,7 +575,10 @@ main (int argc, char **argv)
   g_test_init (&argc, &argv, NULL);
   gtk_init (&argc, &argv);
 
-  basedir = INSTALLED_TEST_DIR;
+  basedir = g_getenv ("G_TEST_SRCDIR");
+  if (basedir == NULL)
+    basedir = INSTALLED_TEST_DIR;
+
   file = g_file_new_for_commandline_arg (basedir);
   add_test_for_file (file, NULL);
   g_object_unref (file);
