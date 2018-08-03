@@ -287,14 +287,14 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				/* Translators: This is the time format with full date
 				   plus day used in 24-hour mode. Please keep the under-
 				   score to separate the date from the time. */
-				format_string = show_seconds ? _("%a %b %e_%R:%S")
-					: _("%a %b %e_%R");
+				format_string = show_seconds ? _("%a %b %-e_%R:%S")
+					: _("%a %b %-e_%R");
 			else
 				/* Translators: This is the time format with full date
 				   used in 24-hour mode. Please keep the underscore to
 				   separate the date from the time. */
-				format_string = show_seconds ? _("%b %e_%R:%S")
-					: _("%b %e_%R");
+				format_string = show_seconds ? _("%b %-e_%R:%S")
+					: _("%b %-e_%R");
 		} else if (show_weekday) {
 			/* Translators: This is the time format with day used
 			   in 24-hour mode. */
@@ -311,14 +311,14 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				/* Translators: This is a time format with full date
 				   plus day used for AM/PM. Please keep the under-
 				   score to separate the date from the time. */
-				format_string = show_seconds ? _("%a %b %e_%l:%M:%S %p")
-					: _("%a %b %e_%l:%M %p");
+				format_string = show_seconds ? _("%a %b %-e_%l:%M:%S %p")
+					: _("%a %b %-e_%l:%M %p");
 			else
 				/* Translators: This is a time format with full date
 				   used for AM/PM. Please keep the underscore to
 				   separate the date from the time. */
-				format_string = show_seconds ? _("%b %e_%l:%M:%S %p")
-					: _("%b %e_%l:%M %p");
+				format_string = show_seconds ? _("%b %-e_%l:%M:%S %p")
+					: _("%b %-e_%l:%M %p");
 		} else if (show_weekday) {
 			/* Translators: This is a time format with day used
 			   for AM/PM. */
