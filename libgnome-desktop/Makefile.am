@@ -11,7 +11,7 @@ AM_CPPFLAGS =							\
 	$(XLIB_CFLAGS)						\
 	-DG_LOG_DOMAIN=\"GnomeDesktop\"				\
 	-DGDK_DISABLE_DEPRECATION_WARNINGS			\
-	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale\""	\
+	-DGNOMELOCALEDIR=\""$(localedir)"\"			\
 	-DGTK_DISABLE_DEPRECATION_WARNINGS			\
 	-DISO_CODES_PREFIX=\""$(ISO_CODES_PREFIX)"\"		\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"		\
