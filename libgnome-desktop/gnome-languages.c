@@ -305,7 +305,7 @@ language_name_get_codeset_details (const char  *language_name,
                                    gboolean    *is_utf8)
 {
         g_autofree char *old_locale = NULL;
-        g_autofree char *codeset = NULL;
+        const char *codeset = NULL;
 
         old_locale = g_strdup (setlocale (LC_CTYPE, NULL));
 
@@ -319,9 +319,9 @@ language_name_get_codeset_details (const char  *language_name,
         }
 
         if (is_utf8 != NULL) {
-                codeset = normalize_codeset (codeset);
+                g_autofree char *normalized_codeset = normalize_codeset (codeset);
 
-                *is_utf8 = strcmp (codeset, "UTF-8") == 0;
+                *is_utf8 = strcmp (normalized_codeset, "UTF-8") == 0;
         }
 
         setlocale (LC_CTYPE, old_locale);
