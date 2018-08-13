@@ -27,6 +27,8 @@
 #error    This is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-languages.h
 #endif
 
+#include <glib.h>
+
 G_BEGIN_DECLS
 
 char *        gnome_get_language_from_locale    (const char *locale,
