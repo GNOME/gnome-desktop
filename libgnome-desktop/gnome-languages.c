@@ -130,8 +130,6 @@ gnome_parse_locale (const char *locale,
         static GRegex *re = NULL;
         GMatchInfo *match_info;
         gboolean    res;
-        gchar      *normalized_codeset = NULL;
-        gchar      *normalized_name = NULL;
         gboolean    retval;
 
         match_info = NULL;
@@ -200,6 +198,9 @@ gnome_parse_locale (const char *locale,
         }
 
         if (codesetp != NULL && *codesetp != NULL) {
+                g_autofree gchar *normalized_codeset = NULL;
+                g_autofree gchar *normalized_name = NULL;
+
                 normalized_codeset = normalize_codeset (*codesetp);
                 normalized_name = construct_language_name (language_codep ? *language_codep : NULL,
                                                            country_codep ? *country_codep : NULL,
@@ -208,11 +209,8 @@ gnome_parse_locale (const char *locale,
 
                 if (language_name_is_valid (normalized_name)) {
                         g_free (*codesetp);
-                        *codesetp = normalized_codeset;
-                } else {
-                        g_free (normalized_codeset);
+                        *codesetp = g_steal_pointer (&normalized_codeset);
                 }
-                g_free (normalized_name);
         }
 
  out:
