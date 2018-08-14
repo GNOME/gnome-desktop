@@ -1254,7 +1254,7 @@ gnome_get_all_locales (void)
  * @code: an ISO 639 code string
  * @translation: (allow-none): a locale string
  *
- * Gets the language name for @code. If @locale is provided the
+ * Gets the language name for @code. If @translation is provided the
  * returned string is translated accordingly.
  *
  * Return value: (transfer full): the language name. Caller takes
@@ -1278,7 +1278,7 @@ gnome_get_language_from_code (const char *code,
  * @code: an ISO 3166 code string
  * @translation: (allow-none): a locale string
  *
- * Gets the country name for @code. If @locale is provided the
+ * Gets the country name for @code. If @translation is provided the
  * returned string is translated accordingly.
  *
  * Return value: (transfer full): the country name. Caller takes
