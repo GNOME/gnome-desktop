@@ -701,9 +701,12 @@ get_translated_language (const char *code,
         if (language != NULL) {
                 const char  *translated_name;
                 g_autofree char *old_locale = NULL;
+                g_autofree char *old_language = NULL;
 
                 if (locale != NULL) {
                         old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
+                        old_language = g_strdup (g_getenv ("LANGUAGE"));
+                        g_unsetenv ("LANGUAGE");
                         setlocale (LC_MESSAGES, locale);
                 }
 
@@ -718,6 +721,8 @@ get_translated_language (const char *code,
 
                 if (locale != NULL) {
                         setlocale (LC_MESSAGES, old_locale);
+                        if (old_language != NULL)
+                                g_setenv ("LANGUAGE", old_language, TRUE);
                 }
         }
 
@@ -756,10 +761,13 @@ get_translated_territory (const char *code,
                 const char *translated_territory;
                 g_autofree char *old_locale = NULL;
                 g_autofree char *tmp = NULL;
+                g_autofree char *old_language = NULL;
 
                 if (locale != NULL) {
                         old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
                         setlocale (LC_MESSAGES, locale);
+                        old_language = g_strdup (g_getenv ("LANGUAGE"));
+                        g_unsetenv ("LANGUAGE");
                 }
 
                 translated_territory = dgettext ("iso_3166", territory);
@@ -768,6 +776,8 @@ get_translated_territory (const char *code,
 
                 if (locale != NULL) {
                         setlocale (LC_MESSAGES, old_locale);
+                        if (old_language != NULL)
+                                g_setenv ("LANGUAGE", old_language, TRUE);
                 }
         }
 
