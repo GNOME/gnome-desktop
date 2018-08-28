@@ -1,18 +1,17 @@
 # Italian translation for gnome-desktop
 # This file is distributed under the same license as gnome-desktop package
-# Copyright (C) 1997-2011, 2012, 2013, 2017 Free Software Foundation, Inc.
+# Copyright (C) 1997-2011, 2012, 2013, 2017, 2018 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@pluto.linux.it>, 1997, 1998, 1999, 2000, 2001, 2002.
 # Alessio Frusciante <algol@firenze.linux.it>, 2003.
-# Milo Casagrande <milo@ubuntu.com>, 2010, 2012, 2013, 2017.
+# Milo Casagrande <milo@ubuntu.com>, 2010, 2012, 2013, 2017, 2018.
 # Luca Ferretti <lferrett@gnome.org>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2011, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-06-28 17:28+0000\n"
-"PO-Revision-Date: 2017-10-13 15:38+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
+"POT-Creation-Date: 2018-08-13 03:09+0000\n"
+"PO-Revision-Date: 2018-08-27 14:49+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italiano <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -20,28 +19,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: ../libgnome-desktop/gnome-languages.c:713
+#: libgnome-desktop/gnome-languages.c:713
 msgid "Unspecified"
 msgstr "Non specificato"
 
-#: ../libgnome-desktop/gnome-rr-config.c:757
+#: libgnome-desktop/gnome-rr-config.c:759
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "il CRTC %d non può gestire l'uscita %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:764
+#: libgnome-desktop/gnome-rr-config.c:766
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "l'uscita %s non supporta la modalità %d×%d@%dHz"
 
-#: ../libgnome-desktop/gnome-rr-config.c:775
+#: libgnome-desktop/gnome-rr-config.c:777
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "il CRTC %d non supporta rotation=%d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:788
+#: libgnome-desktop/gnome-rr-config.c:790
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -54,23 +53,23 @@ msgstr ""
 "coordinate esistenti: (%d, %d); nuove coordinate: (%d, %d)\n"
 "rotazione esistente: %d; nuova rotazione: %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:803
+#: libgnome-desktop/gnome-rr-config.c:805
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "impossibile duplicare sull'uscita %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:929
+#: libgnome-desktop/gnome-rr-config.c:931
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Prova delle modalità per il CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:953
+#: libgnome-desktop/gnome-rr-config.c:955
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC %d: prova modalità %d×%d@%dHz con uscita a %d×%d@%dHz (passaggio %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1000
+#: libgnome-desktop/gnome-rr-config.c:1002
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -79,7 +78,7 @@ msgstr ""
 "impossibile assegnare i CRTC alle uscite:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1004
+#: libgnome-desktop/gnome-rr-config.c:1006
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -92,7 +91,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1085
+#: libgnome-desktop/gnome-rr-config.c:1087
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -101,63 +100,87 @@ msgstr ""
 "la dimensione virtuale richiesta non è adatta per la dimensione disponibile: "
 "richiesta=(%d, %d), minima=(%d, %d), massima=(%d, %d)"
 
-#. Translators: This is the time format with full date used
-#. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:274
-msgid "%a %b %e, %R:%S"
-msgstr "%a %e %b, %R:%S"
+#. Translators: This is the time format with full date
+#. plus day used in 24-hour mode. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:290
+msgid "%a %b %-e_%R:%S"
+msgstr "%a %-e %b_%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:275
-msgid "%a %b %e, %R"
-msgstr "%a %e %b, %R"
+#: libgnome-desktop/gnome-wall-clock.c:291
+msgid "%a %b %-e_%R"
+msgstr "%a %-e %b_%R"
+
+#. Translators: This is the time format with full date
+#. used in 24-hour mode. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:296
+msgid "%b %-e_%R:%S"
+msgstr "%a %-e %b_%R:%S"
+
+#: libgnome-desktop/gnome-wall-clock.c:297
+msgid "%b %-e_%R"
+msgstr "%a %-e %b_%R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:279
+#: libgnome-desktop/gnome-wall-clock.c:301
 msgid "%a %R:%S"
 msgstr "%a %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:302
 msgid "%a %R"
 msgstr "%a %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:284
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:284
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R"
 msgstr "%R"
 
-#. Translators: This is a time format with full date used
-#. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:290
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%a %e %b, %l:%M:%S %P"
+#. Translators: This is a time format with full date
+#. plus day used for AM/PM. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:314
+msgid "%a %b %-e_%l:%M:%S %p"
+msgstr "%a %-e %b_%l:%M:%S %P"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:291
-msgid "%a %b %e, %l:%M %p"
-msgstr "%a %e %b, %l:%M %P"
+#: libgnome-desktop/gnome-wall-clock.c:315
+msgid "%a %b %-e_%l:%M %p"
+msgstr "%a %-e %b_%l:%M %P"
+
+#. Translators: This is a time format with full date
+#. used for AM/PM. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:320
+msgid "%b %-e_%l:%M:%S %p"
+msgstr "%a %-e %b_%l:%M:%S %P"
+
+#: libgnome-desktop/gnome-wall-clock.c:321
+msgid "%b %-e_%l:%M %p"
+msgstr "%a %-e %b_%l:%M %P"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:295
+#: libgnome-desktop/gnome-wall-clock.c:325
 msgid "%a %l:%M:%S %p"
 msgstr "%a %l:%M:%S %P"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:326
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %P"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:300
+#: libgnome-desktop/gnome-wall-clock.c:330
 msgid "%l:%M:%S %p"
 msgstr "%l:%M:%S %P"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:301
+#: libgnome-desktop/gnome-wall-clock.c:331
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
