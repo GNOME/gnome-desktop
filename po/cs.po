@@ -12,15 +12,14 @@
 # Jakub Friedl <jfriedl@suse.cz>, 2006, 2007.
 # Petr Tomeš <ptomes@gmail.com>, 2006.
 # Petr Kovar <pknbe@volny.cz>, 2007, 2008, 2009, 2010, 2013.
-# Marek Černocký <marek@manet.cz>, 2012, 2013.
+# Marek Černocký <marek@manet.cz>, 2012, 2013, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-19 17:24+0000\n"
-"PO-Revision-Date: 2013-08-20 08:47+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
+"POT-Creation-Date: 2018-08-04 21:21+0000\n"
+"PO-Revision-Date: 2018-09-04 11:00+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -31,26 +30,26 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 "X-Project-Style: gnome\n"
 
-#: ../libgnome-desktop/gnome-languages.c:804
+#: libgnome-desktop/gnome-languages.c:713
 msgid "Unspecified"
 msgstr "Neurčeno"
 
-#: ../libgnome-desktop/gnome-rr-config.c:789
+#: libgnome-desktop/gnome-rr-config.c:759
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d nemůže řídit výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:796
+#: libgnome-desktop/gnome-rr-config.c:766
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "výstup %s nepodporuje režim %dx%d@%dHz"
 
-#: ../libgnome-desktop/gnome-rr-config.c:807
+#: libgnome-desktop/gnome-rr-config.c:777
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "CRTC %d nepodporuje otočení = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:820
+#: libgnome-desktop/gnome-rr-config.c:790
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -63,23 +62,23 @@ msgstr ""
 "stávající souřadnice = (%d, %d), nové souřadnice = (%d, %d)\n"
 "stávající otočení = %d, nové otočení = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:835
+#: libgnome-desktop/gnome-rr-config.c:805
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "nelze klonovat na výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:961
+#: libgnome-desktop/gnome-rr-config.c:931
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Zkouší se režimy CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:985
+#: libgnome-desktop/gnome-rr-config.c:955
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC %d: zkouší se režim %d×%d@%dHz s výstupem na %d×%d@%dHz (průchod %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1032
+#: libgnome-desktop/gnome-rr-config.c:1002
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -88,7 +87,7 @@ msgstr ""
 "k výstupům nelze přiřadit CRTC:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1036
+#: libgnome-desktop/gnome-rr-config.c:1006
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -100,7 +99,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1117
+#: libgnome-desktop/gnome-rr-config.c:1087
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -110,72 +109,100 @@ msgstr ""
 "%d), minimum=(%d, %d), maximum=(%d, %d)"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#. Translators: This is the time format with full date used
-#. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:270
-msgid "%a %b %e, %R:%S"
-msgstr "%A, %e. %B, %k∶%M∶%S"
+#. Translators: This is the time format with full date
+#. plus day used in 24-hour mode. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:290
+msgid "%a %b %-e_%R:%S"
+msgstr "%A, %-e. %B_%k∶%M∶%S"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#: ../libgnome-desktop/gnome-wall-clock.c:271
-msgid "%a %b %e, %R"
-msgstr "%A, %e. %B, %k∶%M"
+#: libgnome-desktop/gnome-wall-clock.c:291
+msgid "%a %b %-e_%R"
+msgstr "%A, %-e. %B_%k∶%M"
+
+# Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
+#. Translators: This is the time format with full date
+#. used in 24-hour mode. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:296
+msgid "%b %-e_%R:%S"
+msgstr "%-e. %B_%k∶%M∶%S"
+
+# Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
+#: libgnome-desktop/gnome-wall-clock.c:297
+msgid "%b %-e_%R"
+msgstr "%e. %B_%k∶%M"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:275
+#: libgnome-desktop/gnome-wall-clock.c:301
 msgid "%a %R:%S"
 msgstr "%A, %k∶%M∶%S"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#: ../libgnome-desktop/gnome-wall-clock.c:276
+#: libgnome-desktop/gnome-wall-clock.c:302
 msgid "%a %R"
 msgstr "%A, %k∶%M"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R:%S"
 msgstr "%k∶%M∶%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R"
 msgstr "%k∶%M"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#. Translators: This is a time format with full date used
-#. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:286
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%A, %e. %B, %l∶%M∶%S %p"
+#. Translators: This is a time format with full date
+#. plus day used for AM/PM. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:314
+msgid "%a %b %-e_%l:%M:%S %p"
+msgstr "%A, %-e. %B_%l∶%M∶%S %p"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#: ../libgnome-desktop/gnome-wall-clock.c:287
-msgid "%a %b %e, %l:%M %p"
-msgstr "%A, %e. %B, %l∶%M %p"
+#: libgnome-desktop/gnome-wall-clock.c:315
+msgid "%a %b %-e_%l:%M %p"
+msgstr "%A, %-e. %B_%l∶%M %p"
+
+# Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
+#. Translators: This is a time format with full date
+#. used for AM/PM. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:320
+msgid "%b %-e_%l:%M:%S %p"
+msgstr "%-e. %B_%l∶%M∶%S %p"
+
+# Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
+#: libgnome-desktop/gnome-wall-clock.c:321
+msgid "%b %-e_%l:%M %p"
+msgstr "%-e. %B_%l∶%M %p"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:291
+#: libgnome-desktop/gnome-wall-clock.c:325
 msgid "%a %l:%M:%S %p"
 msgstr "%A %l∶%M∶%S %p"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#: ../libgnome-desktop/gnome-wall-clock.c:292
+#: libgnome-desktop/gnome-wall-clock.c:326
 msgid "%a %l:%M %p"
 msgstr "%A, %l∶%M %p"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:330
 msgid "%l:%M:%S %p"
 msgstr "%l∶%M∶%S %p"
 
 # Not sure whether we've enough space for it, but anyway, looks more aesthetically with "%A".
-#: ../libgnome-desktop/gnome-wall-clock.c:297
+#: libgnome-desktop/gnome-wall-clock.c:331
 msgid "%l:%M %p"
 msgstr "%l∶%M %p"
