@@ -196,6 +196,7 @@ test_weekday_setting (void)
 	g_settings_set_enum (settings, "clock-format", G_DESKTOP_CLOCK_FORMAT_24H);
 
 	g_settings_set_boolean (settings, "clock-show-weekday", FALSE);
+	g_settings_set_boolean (settings, "clock-show-date", FALSE);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_get_clock (clock);
 
