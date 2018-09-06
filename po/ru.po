@@ -16,10 +16,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2018-04-17 09:36+0000\n"
-"PO-Revision-Date: 2018-04-19 23:54+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
+"POT-Creation-Date: 2018-08-13 03:09+0000\n"
+"PO-Revision-Date: 2018-09-06 23:17+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -28,28 +27,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: ../libgnome-desktop/gnome-languages.c:713
+#: libgnome-desktop/gnome-languages.c:713
 msgid "Unspecified"
 msgstr "Неопределённый"
 
-#: ../libgnome-desktop/gnome-rr-config.c:759
+#: libgnome-desktop/gnome-rr-config.c:759
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "ЭЛТ %d не может управлять выходом %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:766
+#: libgnome-desktop/gnome-rr-config.c:766
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "выход %s не поддерживает режим %dx%d@%dГц"
 
-#: ../libgnome-desktop/gnome-rr-config.c:777
+#: libgnome-desktop/gnome-rr-config.c:777
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "ЭЛТ %d не поддерживает вращение=%d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:790
+#: libgnome-desktop/gnome-rr-config.c:790
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -57,28 +56,29 @@ msgid ""
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
 "existing rotation = %d, new rotation = %d"
 msgstr ""
-"параметры выхода %s отличаются от параметров другого клонированного выхода:\n"
+"параметры выхода %s отличаются от параметров другого клонированного "
+"выхода:\n"
 "существующий режим = %d, новый режим = %d\n"
 "существующие координаты = (%d, %d), новые координаты = (%d, %d)\n"
 "существующее вращение = %d, новое вращение = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:805
+#: libgnome-desktop/gnome-rr-config.c:805
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "не удалось клонировать в выход %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:931
+#: libgnome-desktop/gnome-rr-config.c:931
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Проверка режимов контроллера ЭЛТ %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:955
+#: libgnome-desktop/gnome-rr-config.c:955
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "ЭЛТ %d: проверка режима %dx%d@%dГц с выходом на %dx%d@%dГц (попытка %d)\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1002
+#: libgnome-desktop/gnome-rr-config.c:1002
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -87,7 +87,7 @@ msgstr ""
 "не удалось назначить контроллеры ЭЛТ для выходов:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:1006
+#: libgnome-desktop/gnome-rr-config.c:1006
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -99,7 +99,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1087
+#: libgnome-desktop/gnome-rr-config.c:1087
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -109,68 +109,96 @@ msgstr ""
 "требуется=(%d, %d), минимум=(%d, %d), максимум=(%d, %d)"
 
 # заменил на полное название месяца
-#. Translators: This is the time format with full date used
-#. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:274
-msgid "%a %b %e, %R:%S"
-msgstr "%a, %-d %B, %R:%S"
+#. Translators: This is the time format with full date
+#. plus day used in 24-hour mode. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:290
+msgid "%a %b %-e_%R:%S"
+msgstr "%a, %-e %B_%R:%S"
 
 # заменил на полное название месяца
-#: ../libgnome-desktop/gnome-wall-clock.c:275
-msgid "%a %b %e, %R"
-msgstr "%a, %-d %B, %R"
+#: libgnome-desktop/gnome-wall-clock.c:291
+msgid "%a %b %-e_%R"
+msgstr "%a, %-e %B_%R"
+
+# заменил на полное название месяца
+#. Translators: This is the time format with full date
+#. used in 24-hour mode. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:296
+msgid "%b %-e_%R:%S"
+msgstr "%a, %-e %B_%R:%S"
+
+# заменил на полное название месяца
+#: libgnome-desktop/gnome-wall-clock.c:297
+msgid "%b %-e_%R"
+msgstr "%a, %-e %B_%R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:279
+#: libgnome-desktop/gnome-wall-clock.c:301
 msgid "%a %R:%S"
 msgstr "%a, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:302
 msgid "%a %R"
 msgstr "%a, %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:284
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:284
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R"
 msgstr "%R"
 
 # заменил на полное название месяца
-#. Translators: This is a time format with full date used
-#. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:290
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%a, %-d %B, %-l∶%M∶%S %p"
+#. Translators: This is a time format with full date
+#. plus day used for AM/PM. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:314
+msgid "%a %b %-e_%l:%M:%S %p"
+msgstr "%a, %-e %B,_%l∶%M∶%S %p"
 
 # заменил на полное название месяца
-#: ../libgnome-desktop/gnome-wall-clock.c:291
-msgid "%a %b %e, %l:%M %p"
-msgstr "%a, %-d %B, %-l∶%M %p"
+#: libgnome-desktop/gnome-wall-clock.c:315
+msgid "%a %b %-e_%l:%M %p"
+msgstr "%a, %-e %B_%l∶%M %p"
+
+# заменил на полное название месяца
+#. Translators: This is a time format with full date
+#. used for AM/PM. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:320
+msgid "%b %-e_%l:%M:%S %p"
+msgstr "%a, %-e %B_%l∶%M∶%S %p"
+
+# заменил на полное название месяца
+#: libgnome-desktop/gnome-wall-clock.c:321
+msgid "%b %-e_%l:%M %p"
+msgstr "%a, %-e %B_%l∶%M %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:295
+#: libgnome-desktop/gnome-wall-clock.c:325
 msgid "%a %l:%M:%S %p"
-msgstr "%a, %-l∶%M∶%S %p"
+msgstr "%a, %l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:326
 msgid "%a %l:%M %p"
-msgstr "%a, %-l∶%M %p"
+msgstr "%a, %l∶%M %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:300
+#: libgnome-desktop/gnome-wall-clock.c:330
 msgid "%l:%M:%S %p"
-msgstr "%-l∶%M∶%S %p"
+msgstr "%l∶%M∶%S %p"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:301
+#: libgnome-desktop/gnome-wall-clock.c:331
 msgid "%l:%M %p"
-msgstr "%-l∶%M %p"
+msgstr "%l∶%M %p"
 
 #~ msgctxt "Monitor vendor"
 #~ msgid "Unknown"
