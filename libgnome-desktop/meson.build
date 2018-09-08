@@ -85,6 +85,7 @@ libgnome_desktop = library('gnome-desktop-3',
   libgnome_desktop_sources,
   dependencies: [gnome_desktop_deps, m_dep, rt_dep, x_dep],
   soversion: soversion,
+  version: libversion,
   c_args: libargs,
   install: true
 )

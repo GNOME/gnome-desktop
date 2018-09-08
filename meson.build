@@ -4,15 +4,17 @@ project('gnome-desktop', 'c',
   license: ['GPL2+', 'LGPL2+']
 )
 
-# Before making a release, the soversion string should be modified.
-# The string is of the form C.A.R.
+# Before making a release, the libversion string should be modified.
+# The string follows the libtool versioning scheme, and it is of the
+# form `C.A.R`.
 # - If interfaces have been changed or added, but binary compatibility has
 #   been preserved, change to C+1.A+1.0
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1.0.0
 # - If the interface is the same as the previous version, change to C.A.R+1
 
-soversion = '17.0.2'
+libversion = '17.0.2'
+soversion = libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
 gtk_req = '>= 3.3.6'
