@@ -78,14 +78,14 @@ conf = configuration_data()
 conf.set_quoted('GETTEXT_PACKAGE', '@0@-3.0'.format(meson.project_name()))
 conf.set_quoted('INSTALL_PREFIX', prefix)
 
-conf.set10('ENABLE_SECCOMP', seccomp_dep.found())
-conf.set10('HAVE_BWRAP', seccomp_dep.found())
-conf.set10('_GNU_SOURCE', seccomp_dep.found())
+conf.set('ENABLE_SECCOMP', seccomp_dep.found())
+conf.set('HAVE_BWRAP', seccomp_dep.found())
+conf.set('_GNU_SOURCE', seccomp_dep.found())
 
-conf.set10('HAVE_UDEV', udev_dep.found())
+conf.set('HAVE_UDEV', udev_dep.found())
 
-conf.set10('HAVE_TIMERFD', cc.has_function('timerfd_create'))
-conf.set10('HAVE_OPENAT', cc.has_function('openat'))
+conf.set('HAVE_TIMERFD', cc.has_function('timerfd_create'))
+conf.set('HAVE_OPENAT', cc.has_function('openat'))
 
 config_h = declare_dependency(
   sources: configure_file(
