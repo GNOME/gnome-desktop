@@ -9,39 +9,38 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-20 08:16+0000\n"
-"PO-Revision-Date: 2013-08-20 12:44+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
+"POT-Creation-Date: 2018-09-07 17:29+0000\n"
+"PO-Revision-Date: 2018-10-27 21:10+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.2\n"
 
 # JK: týka sa jazyka (language)
-#: ../libgnome-desktop/gnome-languages.c:804
+#: libgnome-desktop/gnome-languages.c:711
 msgid "Unspecified"
 msgstr "Nešpecifikovaný"
 
-#: ../libgnome-desktop/gnome-rr-config.c:743
+#: libgnome-desktop/gnome-rr-config.c:759
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d nemôže obsluhovať výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:750
+#: libgnome-desktop/gnome-rr-config.c:766
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "výstup %s nepodporuje režim %dx%d@%dHz"
 
-#: ../libgnome-desktop/gnome-rr-config.c:761
+#: libgnome-desktop/gnome-rr-config.c:777
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "CRTC %d nepodporuje otočenie=%d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:774
+#: libgnome-desktop/gnome-rr-config.c:790
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -54,17 +53,17 @@ msgstr ""
 "existujúce súradnice = (%d, %d), nové súradnice = (%d, %d)\n"
 "existujúce otočenie = %d, nové otočenie = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:789
+#: libgnome-desktop/gnome-rr-config.c:805
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "nepodarilo sa klonovať na výstup %s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:915
+#: libgnome-desktop/gnome-rr-config.c:931
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Skúšanie režimov pre CRTC %d\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:939
+#: libgnome-desktop/gnome-rr-config.c:955
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
@@ -72,7 +71,7 @@ msgstr ""
 
 # PM: podľa významu skratky CRTC by som skôr volil predložku "k";  Rozmýšlam tiež či by sme tomu veľmi ublížili keby sme použili "ovládač(e) CRTC" alebo "ovládač(e) CRT"
 # JK: CRTC je HW časť, ovládač (driver) je SW - z tohto dôvodu by som to nepoužil
-#: ../libgnome-desktop/gnome-rr-config.c:986
+#: libgnome-desktop/gnome-rr-config.c:1002
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -81,7 +80,7 @@ msgstr ""
 "nepodarilo sa priradiť CRTC k výstupom:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:990
+#: libgnome-desktop/gnome-rr-config.c:1006
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -93,7 +92,7 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1071
+#: libgnome-desktop/gnome-rr-config.c:1087
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -102,33 +101,45 @@ msgstr ""
 "vyžadovaná virtuálna veľkosť nezodpovedá dostupnej veľkosti: vyžadované=(%d, "
 "%d), minimum=(%d, %d), maximum=(%d, %d)"
 
-#. Translators: This is the time format with full date used
-#. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:270
-msgid "%a %b %e, %R:%S"
+#. Translators: This is the time format with full date
+#. plus day used in 24-hour mode. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:290
+msgid "%a %b %-e_%R:%S"
 msgstr "%A %e. %B, %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:271
-msgid "%a %b %e, %R"
+#: libgnome-desktop/gnome-wall-clock.c:291
+msgid "%a %b %-e_%R"
 msgstr "%A %e. %B, %R"
+
+#. Translators: This is the time format with full date
+#. used in 24-hour mode. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:296
+msgid "%b %-e_%R:%S"
+msgstr "%A %e. %B_%R:%S"
+
+#: libgnome-desktop/gnome-wall-clock.c:297
+msgid "%b %-e_%R"
+msgstr "%A %e. %B_%R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:275
+#: libgnome-desktop/gnome-wall-clock.c:301
 msgid "%a %R:%S"
 msgstr "%A %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:276
+#: libgnome-desktop/gnome-wall-clock.c:302
 msgid "%a %R"
 msgstr "%A %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:306
 msgid "%R"
 msgstr "%R"
 
@@ -145,33 +156,58 @@ msgstr "%R"
 # JK: %P - značka pm alebo am
 # MČ: Prudko doporučujem vyhnúť sa použitiu %p(%P), pretože v slovenskom locale sa to nahradí prázdnym reťazcom. Teda pokiaľ nejde o aktuálny čas v časovom pásme používateľa. V tom prípade to asi každý ľahko odhadne, či ide o dopoludnie, alebo nie. Ak ide o informácie o čase, ktorý už nastal, alebo má nastať, tak by som použil 24 hodinový formát natvrdo, lebo používateľ následne nerozozná, či bolo myslené dopoludnie, alebo nie.
 # JK: Ostatné sú dostupné na adrese: http://developer.gnome.org/glib/2.30/glib-GDateTime.html#g-date-time-format
-#. Translators: This is a time format with full date used
-#. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:286
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%A %e. %B, %k:%M:%S"
+#. Translators: This is a time format with full date
+#. plus day used for AM/PM. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:314
+msgid "%a %b %-e_%l:%M:%S %p"
+msgstr "%A %e. %B_%k:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:287
-msgid "%a %b %e, %l:%M %p"
-msgstr "%A %e. %B, %k:%M"
+#: libgnome-desktop/gnome-wall-clock.c:315
+msgid "%a %b %-e_%l:%M %p"
+msgstr "%A %e. %B_%k:%M"
+
+# JK: Formátovacie značky:
+# JK: %a - skrátený názov dňa, %A - celý názov dňa
+# JK: %b - skrátený názov mesiaca, %B - celý názov mesiaca
+# JK: %e - deň v mesiaci vyjadrený číslom (1 až 31)
+# JK: %l - hodina v 12-hodinovom formáte (1 až 12)
+# JK: %k - hodina v 24-hodinovom formáte (0 až 23)
+# JK: %m - mesiac vyjadrený číslom
+# JK: %M - minúta (00 až 59)
+# JK: %S - sekunda (00 až 59)
+# JK: %p - značka PM alebo AM
+# JK: %P - značka pm alebo am
+# MČ: Prudko doporučujem vyhnúť sa použitiu %p(%P), pretože v slovenskom locale sa to nahradí prázdnym reťazcom. Teda pokiaľ nejde o aktuálny čas v časovom pásme používateľa. V tom prípade to asi každý ľahko odhadne, či ide o dopoludnie, alebo nie. Ak ide o informácie o čase, ktorý už nastal, alebo má nastať, tak by som použil 24 hodinový formát natvrdo, lebo používateľ následne nerozozná, či bolo myslené dopoludnie, alebo nie.
+# JK: Ostatné sú dostupné na adrese: http://developer.gnome.org/glib/2.30/glib-GDateTime.html#g-date-time-format
+#. Translators: This is a time format with full date
+#. used for AM/PM. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:320
+msgid "%b %-e_%l:%M:%S %p"
+msgstr "%A %e. %B_%k:%M:%S"
+
+#: libgnome-desktop/gnome-wall-clock.c:321
+msgid "%b %-e_%l:%M %p"
+msgstr "%e. %B_%k:%M"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:291
+#: libgnome-desktop/gnome-wall-clock.c:325
 msgid "%a %l:%M:%S %p"
 msgstr "%A %k:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:292
+#: libgnome-desktop/gnome-wall-clock.c:326
 msgid "%a %l:%M %p"
 msgstr "%A %k:%M"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:330
 msgid "%l:%M:%S %p"
 msgstr "%k:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:297
+#: libgnome-desktop/gnome-wall-clock.c:331
 msgid "%l:%M %p"
 msgstr "%k:%M"
 
