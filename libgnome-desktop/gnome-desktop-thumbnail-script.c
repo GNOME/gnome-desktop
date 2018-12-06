@@ -507,26 +507,66 @@ setup_seccomp (GPtrArray  *argv_array,
 
 #ifdef HAVE_BWRAP
 static gboolean
+is_usrmerged (const gchar *dir)
+{
+  /* does dir point to /usr/dir? */
+  g_autofree gchar *target = NULL;
+  GStatBuf stat_buf_src, stat_buf_target;
+
+  if (g_stat (dir, &stat_buf_src) < 0)
+    return FALSE;
+
+  target = g_strdup_printf ("/usr%s", dir);
+
+  if (g_stat (target, &stat_buf_target) < 0)
+    return FALSE;
+
+  return (stat_buf_src.st_dev == stat_buf_target.st_dev) &&
+         (stat_buf_src.st_ino == stat_buf_target.st_ino);
+}
+
+static gboolean
 add_bwrap (GPtrArray   *array,
 	   ScriptExec  *script)
 {
   g_return_val_if_fail (script->outdir != NULL, FALSE);
   g_return_val_if_fail (script->s_infile != NULL, FALSE);
 
+  /* on some systems these could be symlinks to /usr/$dir */
+  const gchar * const usrmerged_dirs[] = { "/bin", "/lib64", "/lib", "/sbin" };
+
   add_args (array,
 	    "bwrap",
 	    "--ro-bind", "/usr", "/usr",
-	    "--ro-bind", "/lib", "/lib",
-	    "--ro-bind", "/lib64", "/lib64",
 	    "--proc", "/proc",
 	    "--dev", "/dev",
-	    "--symlink", "usr/bin", "/bin",
-	    "--symlink", "usr/sbin", "/sbin",
 	    "--chdir", "/",
 	    "--setenv", "GIO_USE_VFS", "local",
 	    "--unshare-all",
 	    "--die-with-parent",
 	    NULL);
+
+  /* These directories might be symlinks into /usr/... */
+  for (int i = 0; i < G_N_ELEMENTS (usrmerged_dirs); i++)
+    {
+      if (!g_file_test (usrmerged_dirs[i], G_FILE_TEST_EXISTS))
+        continue;
+
+      if (is_usrmerged (usrmerged_dirs[i]))
+        {
+          g_autofree gchar *dir = g_strdup_printf ("usr%s", usrmerged_dirs[i]);
+
+          add_args (array,
+                    "--symlink", dir, usrmerged_dirs[i],
+                    NULL);
+        }
+      else
+        {
+          add_args (array,
+                    "--ro-bind", usrmerged_dirs[i], usrmerged_dirs[i],
+                    NULL);
+        }
+    }
 
   add_env (array, "G_MESSAGES_DEBUG");
   add_env (array, "G_MESSAGES_PREFIXED");
