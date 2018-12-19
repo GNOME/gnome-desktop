@@ -85,8 +85,6 @@ typedef enum {
     GNOME_RR_ERROR_NO_DPMS_EXTENSION,	/* DPMS extension is not present */
 } GnomeRRError;
 
-#define GNOME_RR_CONNECTOR_TYPE_PANEL "Panel"  /* This is a built-in LCD */
-
 #define GNOME_TYPE_RR_SCREEN                  (gnome_rr_screen_get_type())
 #define GNOME_RR_SCREEN(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_RR_SCREEN, GnomeRRScreen))
 #define GNOME_IS_RR_SCREEN(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_RR_SCREEN))
