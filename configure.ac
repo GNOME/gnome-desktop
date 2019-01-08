@@ -182,6 +182,10 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED
                                  iso-codes
                                  $UDEV_PKG $SECCOMP_PKG)
 
+PKG_CHECK_MODULES(FONTCONFIG, fontconfig)
+FONTCONFIG_CACHE_PATH=$($PKG_CONFIG --variable cachedir fontconfig)
+AC_SUBST(FONTCONFIG_CACHE_PATH)
+
 XKB_BASE=$($PKG_CONFIG --variable xkb_base xkeyboard-config)
 AC_SUBST(XKB_BASE)
 

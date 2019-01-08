@@ -14,6 +14,7 @@ AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR=\""$(localedir)"\"			\
 	-DGTK_DISABLE_DEPRECATION_WARNINGS			\
 	-DISO_CODES_PREFIX=\""$(ISO_CODES_PREFIX)"\"		\
+	-DFONTCONFIG_CACHE_PATH=\""$(FONTCONFIG_CACHE_PATH)"\"	\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"		\
 	-DPNP_IDS=\""$(PNP_IDS)"\"				\
 	-DXKB_BASE=\""$(XKB_BASE)"\"
