@@ -27,6 +27,8 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API 1
 #include <libgnome-desktop/gnome-wall-clock.h>
 
+static const char *output_dir = NULL;
+
 typedef enum {
   SNAPSHOT_WINDOW,
   SNAPSHOT_DRAW
@@ -39,7 +41,6 @@ static char *
 get_output_file (const char *test_file,
                  const char *extension)
 {
-  const char *output_dir = g_get_tmp_dir ();
   char *result, *base;
 
   base = g_path_get_basename (test_file);
@@ -578,6 +579,9 @@ main (int argc, char **argv)
   basedir = g_getenv ("G_TEST_SRCDIR");
   if (basedir == NULL)
     basedir = INSTALLED_TEST_DIR;
+  output_dir = g_getenv ("G_TEST_BUILDDIR");
+  if (output_dir == NULL)
+    output_dir = g_get_tmp_dir ();
 
   file = g_file_new_for_commandline_arg (basedir);
   add_test_for_file (file, NULL);
