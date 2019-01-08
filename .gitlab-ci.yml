@@ -30,5 +30,6 @@ build_stable:
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
   artifacts:
     paths:
-      - build/test-results
+      - build/meson-logs/
+      - build/test-results/
     when: on_failure
