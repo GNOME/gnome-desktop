@@ -565,6 +565,10 @@ add_bwrap (GPtrArray   *array,
         }
     }
 
+  /* fontconfig cache if necessary */
+  if (strncmp (FONTCONFIG_CACHE_PATH, "/usr/", strlen("/usr/")) != 0)
+    add_args (array, "--ro-bind", FONTCONFIG_CACHE_PATH, FONTCONFIG_CACHE_PATH, NULL);
+
   add_args (array,
 	    "--proc", "/proc",
 	    "--dev", "/dev",
