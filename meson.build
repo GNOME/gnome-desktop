@@ -42,6 +42,7 @@ glib_dep = dependency('glib-2.0', version: glib_req)
 gio_dep = dependency('gio-2.0', version: glib_req)
 gio_unix_dep = dependency('gio-unix-2.0', version: glib_req)
 schemas_dep = dependency('gsettings-desktop-schemas', version: schemas_req)
+fontconfig_dep = dependency('fontconfig')
 xkb_config_dep = dependency('xkeyboard-config')
 iso_codes_dep = dependency('iso-codes')
 x_dep = dependency('x11')
@@ -58,6 +59,7 @@ if supported_os.contains(host_os) and not unsupported_cpus.contains(host_cpu)
 else
   seccomp_dep = dependency('', required: false)
 endif
+fontconfig_cache_path = fontconfig_dep.get_pkgconfig_variable('cachedir')
 
 xkb_base = xkb_config_dep.get_pkgconfig_variable('xkb_base')
 iso_codes_prefix = iso_codes_dep.get_pkgconfig_variable('prefix')
