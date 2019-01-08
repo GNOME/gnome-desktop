@@ -5,6 +5,7 @@ libargs = [
   '-DGNOMELOCALEDIR="@0@"'.format(localedir),
   '-DLIBLOCALEDIR="@0@"'.format(liblocaledir),
   '-DISO_CODES_PREFIX="@0@"'.format(iso_codes_prefix),
+  '-DFONTCONFIG_CACHE_PATH="@0@"'.format(fontconfig_cache_path),
   '-DXKB_BASE="@0@"'.format(xkb_base)
 ]
 
