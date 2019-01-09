@@ -47,7 +47,10 @@ get_output_file (const char *test_file,
   if (g_str_has_suffix (base, ".ui"))
     base[strlen (base) - strlen (".ui")] = '\0';
 
-  result = g_strconcat (output_dir, G_DIR_SEPARATOR_S, "..", G_DIR_SEPARATOR_S, "meson-logs", G_DIR_SEPARATOR_S, base, extension, NULL);
+  if (output_dir)
+    result = g_strconcat (output_dir, G_DIR_SEPARATOR_S, "..", G_DIR_SEPARATOR_S, "meson-logs", G_DIR_SEPARATOR_S, base, extension, NULL);
+  else
+    result = g_strconcat (g_get_tmp_dir (), G_DIR_SEPARATOR_S, base, extension, NULL);
   g_free (base);
 
   return result;
@@ -580,8 +583,6 @@ main (int argc, char **argv)
   if (basedir == NULL)
     basedir = INSTALLED_TEST_DIR;
   output_dir = g_getenv ("G_TEST_BUILDDIR");
-  if (output_dir == NULL)
-    output_dir = g_get_tmp_dir ();
 
   file = g_file_new_for_commandline_arg (basedir);
   add_test_for_file (file, NULL);
