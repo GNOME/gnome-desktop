@@ -576,7 +576,10 @@ main (int argc, char **argv)
   g_setenv ("GDK_RENDERING", "image", FALSE);
 
   setlocale (LC_ALL, "");
-  g_test_init (&argc, &argv, NULL);
+
+  int _argc = 2;
+  char **_argv = g_strsplit ("prrrt --verbose", " ", -1);
+  g_test_init (&_argc, &_argv, NULL);
   gtk_init (&argc, &argv);
 
   basedir = g_getenv ("G_TEST_SRCDIR");
