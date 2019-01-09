@@ -13,14 +13,15 @@
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
 # Yoji TOYODA <bsyamato@sea.plala.or.jp>, 2012.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2013.
+# Kento TSUJI <tuziemon@pclives.org>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-desktop&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-18 15:52+0000\n"
-"PO-Revision-Date: 2013-03-24 22:43+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
+"POT-Creation-Date: 2018-11-15 15:47+0000\n"
+"PO-Revision-Date: 2019-01-09 19:49+0900\n"
+"Last-Translator: Kento TSUJI <tuziemon@pclives.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -28,26 +29,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../libgnome-desktop/gnome-languages.c:804
+#: libgnome-desktop/gnome-languages.c:711
 msgid "Unspecified"
 msgstr "指定なし"
 
-#: ../libgnome-desktop/gnome-rr-config.c:743
+#: libgnome-desktop/gnome-rr-config.c:759
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC %d は出力 %s をドライブできません"
 
-#: ../libgnome-desktop/gnome-rr-config.c:750
+#: libgnome-desktop/gnome-rr-config.c:766
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "出力 %s は %dx%d@%dHz のモードをサポートしていません"
 
-#: ../libgnome-desktop/gnome-rr-config.c:761
+#: libgnome-desktop/gnome-rr-config.c:777
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "CRTC %d は rotation=%d をサポートしていません"
 
-#: ../libgnome-desktop/gnome-rr-config.c:774
+#: libgnome-desktop/gnome-rr-config.c:790
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -60,22 +61,22 @@ msgstr ""
 "現在 coordinates = (%d, %d), 新 coordinates = (%d, %d)\n"
 "現在 rotation = %d, 新 rotation = %d"
 
-#: ../libgnome-desktop/gnome-rr-config.c:789
+#: libgnome-desktop/gnome-rr-config.c:805
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "出力 %s をクローンできません"
 
-#: ../libgnome-desktop/gnome-rr-config.c:915
+#: libgnome-desktop/gnome-rr-config.c:931
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "CRTC %d のモードを試します\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:939
+#: libgnome-desktop/gnome-rr-config.c:955
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr "CRTC %d: %dx%d@%dHz のモードを %dx%d@%dHz (%d パス) の出力で試します\n"
 
-#: ../libgnome-desktop/gnome-rr-config.c:986
+#: libgnome-desktop/gnome-rr-config.c:1002
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -84,7 +85,7 @@ msgstr ""
 "CRTC を出力に割り当てできませんでした:\n"
 "%s"
 
-#: ../libgnome-desktop/gnome-rr-config.c:990
+#: libgnome-desktop/gnome-rr-config.c:1006
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -96,68 +97,96 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: ../libgnome-desktop/gnome-rr-config.c:1071
+#: libgnome-desktop/gnome-rr-config.c:1087
 #, c-format
-msgid "required virtual size does not fit available size: requested=(%d, %d), minimum=(%d, %d), maximum=(%d, %d)"
-msgstr "要求した仮想サイズと実際のサイズがマッチしません: 要求したサイズ (%d, %d) / 最小サイズ (%d, %d)、最大サイズ (%d, %d)"
+msgid ""
+"required virtual size does not fit available size: requested=(%d, %d), "
+"minimum=(%d, %d), maximum=(%d, %d)"
+msgstr ""
+"要求した仮想サイズと実際のサイズがマッチしません: 要求したサイズ (%d, %d) / "
+"最小サイズ (%d, %d)、最大サイズ (%d, %d)"
 
-#. Translators: This is the time format with full date used
-#. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:270
-msgid "%a %b %e, %R:%S"
-msgstr "%B%e日 (%a) %R:%S"
+#. Translators: This is the time format with full date
+#. plus day used in 24-hour mode. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:323
+msgid "%a %b %-e_%R:%S"
+msgstr "%B%-e日 (%a)_%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:271
-msgid "%a %b %e, %R"
-msgstr "%B%e日 (%a) %R"
+#: libgnome-desktop/gnome-wall-clock.c:324
+msgid "%a %b %-e_%R"
+msgstr "%B%-e日 (%a)_%R"
+
+#. Translators: This is the time format with full date
+#. used in 24-hour mode. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:329
+msgid "%b %-e_%R:%S"
+msgstr "%B%-e日_%R:%S"
+
+#: libgnome-desktop/gnome-wall-clock.c:330
+msgid "%b %-e_%R"
+msgstr "%B%-e日_%R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:275
+#: libgnome-desktop/gnome-wall-clock.c:334
 msgid "%a %R:%S"
 msgstr "%A %R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:276
+#: libgnome-desktop/gnome-wall-clock.c:335
 msgid "%a %R"
 msgstr "%A %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:339
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:280
+#: libgnome-desktop/gnome-wall-clock.c:340
 msgid "%R"
 msgstr "%R"
 
-#. Translators: This is a time format with full date used
-#. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:286
-msgid "%a %b %e, %l:%M:%S %p"
-msgstr "%B%e日 (%a) %p%I:%M:%S"
+#. Translators: This is a time format with full date
+#. plus day used for AM/PM. Please keep the under-
+#. score to separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:348
+msgid "%a %b %-e_%l:%M:%S %p"
+msgstr "%B%-e日 (%a)_%p %I:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:287
-msgid "%a %b %e, %l:%M %p"
-msgstr "%B%e日 (%a) %p%I:%M"
+#: libgnome-desktop/gnome-wall-clock.c:349
+msgid "%a %b %-e_%l:%M %p"
+msgstr "%B%-e日 (%a)_%p %I:%M"
+
+#. Translators: This is a time format with full date
+#. used for AM/PM. Please keep the underscore to
+#. separate the date from the time.
+#: libgnome-desktop/gnome-wall-clock.c:354
+msgid "%b %-e_%l:%M:%S %p"
+msgstr "%B%-e日_%p %I:%M:%S"
+
+#: libgnome-desktop/gnome-wall-clock.c:355
+msgid "%b %-e_%l:%M %p"
+msgstr "%B%-e日_%p %I:%M"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:291
+#: libgnome-desktop/gnome-wall-clock.c:359
 msgid "%a %l:%M:%S %p"
 msgstr "%A %p%I:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:292
+#: libgnome-desktop/gnome-wall-clock.c:360
 msgid "%a %l:%M %p"
 msgstr "%A %p%I:%M"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: ../libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:364
 msgid "%l:%M:%S %p"
 msgstr "%p %l:%M:%S"
 
-#: ../libgnome-desktop/gnome-wall-clock.c:297
+#: libgnome-desktop/gnome-wall-clock.c:365
 msgid "%l:%M %p"
 msgstr "%p %l:%M"
 
@@ -166,7 +195,8 @@ msgstr "%p %l:%M"
 #~ msgstr "不明"
 
 #~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
-#~ msgstr "画面のリソース (いろいろな CRTC、出力、モード等) を取得できませんでした"
+#~ msgstr ""
+#~ "画面のリソース (いろいろな CRTC、出力、モード等) を取得できませんでした"
 
 # 'X' という1文字は固有名詞なので大文字にすること
 #~ msgid "unhandled X error while getting the range of screen sizes"
@@ -190,8 +220,12 @@ msgstr "%p %l:%M"
 #~ msgid "Unknown Display"
 #~ msgstr "不明なディスプレイ"
 
-#~ msgid "requested position/size for CRTC %d is outside the allowed limit: position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-#~ msgstr "要求した CRTC %d の位置やサイズが許容範囲を超えました: 位置 (%d, %d)、サイズ (%d, %d) / 許容範囲 (%d, %d)"
+#~ msgid ""
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
+#~ msgstr ""
+#~ "要求した CRTC %d の位置やサイズが許容範囲を超えました: 位置 (%d, %d)、サイ"
+#~ "ズ (%d, %d) / 許容範囲 (%d, %d)"
 
 #~ msgid "could not set the configuration for CRTC %d"
 #~ msgstr "CRTC %d の設定をセットできませんでした"
@@ -199,7 +233,8 @@ msgstr "%p %l:%M"
 #~ msgid "could not get information about CRTC %d"
 #~ msgstr "CRTC %d に関する情報を取得できませんでした"
 
-#~ msgid "none of the saved display configurations matched the active configuration"
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
 #~ msgstr "保存したディスプレイの設定に一致する現在の設定はありません"
 
 #~ msgid "%a %b %e, %R∶%S"
@@ -221,7 +256,9 @@ msgstr "%p %l:%M"
 #~ msgstr "%p%I∶%M"
 
 #~ msgid "Cannot find a terminal, using xterm, even if it may not work"
-#~ msgstr "端末が見つからなかったので強制的に xterm を使用します (正しく動作しないかもしれません)"
+#~ msgstr ""
+#~ "端末が見つからなかったので強制的に xterm を使用します (正しく動作しないか"
+#~ "もしれません)"
 
 #~ msgid "Laptop"
 #~ msgstr "ラップトップ"
@@ -292,23 +329,52 @@ msgstr "%p %l:%M"
 #~ msgid "Display information on this GNOME version"
 #~ msgstr "お使いの GNOME のバージョン情報を表示します"
 
-#~ msgid "GNOME also includes a complete development platform for applications programmers, allowing the creation of powerful and complex applications."
-#~ msgstr "さらに GNOME はアプリケーション開発者のために完成した開発用プラットフォームを提供し、強力で複雑なアプリケーションを開発することができます。"
+#~ msgid ""
+#~ "GNOME also includes a complete development platform for applications "
+#~ "programmers, allowing the creation of powerful and complex applications."
+#~ msgstr ""
+#~ "さらに GNOME はアプリケーション開発者のために完成した開発用プラットフォー"
+#~ "ムを提供し、強力で複雑なアプリケーションを開発することができます。"
 
-#~ msgid "GNOME includes most of what you see on your computer, including the file manager, web browser, menus, and many applications."
-#~ msgstr "GNOME ではお使いのコンピューターで目に見えるもののほとんどを提供し、ファイルマネージャー、ウェブブラウザー、メニュー、そしてたくさんのアプリケーションがあります。"
+#~ msgid ""
+#~ "GNOME includes most of what you see on your computer, including the file "
+#~ "manager, web browser, menus, and many applications."
+#~ msgstr ""
+#~ "GNOME ではお使いのコンピューターで目に見えるもののほとんどを提供し、ファイ"
+#~ "ルマネージャー、ウェブブラウザー、メニュー、そしてたくさんのアプリケーショ"
+#~ "ンがあります。"
 
-#~ msgid "GNOME is a Free, usable, stable, accessible desktop environment for the Unix-like family of operating systems."
-#~ msgstr "GNOME は、UNIX ライクなオペレーティングシステム向けのフリーで使い勝手の良い、安定した、分かりやすいデスクトップ環境です。"
+#~ msgid ""
+#~ "GNOME is a Free, usable, stable, accessible desktop environment for the "
+#~ "Unix-like family of operating systems."
+#~ msgstr ""
+#~ "GNOME は、UNIX ライクなオペレーティングシステム向けのフリーで使い勝手の良"
+#~ "い、安定した、分かりやすいデスクトップ環境です。"
 
-#~ msgid "GNOME's focus on usability and accessibility, regular release cycle, and strong corporate backing make it unique among Free Software desktops."
-#~ msgstr "GNOME の焦点は使い勝手の良さと分かりやすさ、定期的なリリースサイクルにあり、企業がフリーでユニークなデスクトップをいろいろ提供しています。"
+#~ msgid ""
+#~ "GNOME's focus on usability and accessibility, regular release cycle, and "
+#~ "strong corporate backing make it unique among Free Software desktops."
+#~ msgstr ""
+#~ "GNOME の焦点は使い勝手の良さと分かりやすさ、定期的なリリースサイクルにあ"
+#~ "り、企業がフリーでユニークなデスクトップをいろいろ提供しています。"
 
-#~ msgid "GNOME's greatest strength is our strong community. Virtually anyone, with or without coding skills, can contribute to making GNOME better."
-#~ msgstr "GNOME の最も偉大な強みは力強いコミュニティにあります。実際のところ、プログラムを作成する能力のありなしに関わらず、誰もが GNOME をより素晴らしいものにするよう貢献できるようになっています。"
+#~ msgid ""
+#~ "GNOME's greatest strength is our strong community. Virtually anyone, with "
+#~ "or without coding skills, can contribute to making GNOME better."
+#~ msgstr ""
+#~ "GNOME の最も偉大な強みは力強いコミュニティにあります。実際のところ、プログ"
+#~ "ラムを作成する能力のありなしに関わらず、誰もが GNOME をより素晴らしいもの"
+#~ "にするよう貢献できるようになっています。"
 
-#~ msgid "Hundreds of people have contributed code to GNOME since it was started in 1997; many more have contributed in other important ways, including translations, documentation, and quality assurance."
-#~ msgstr "GNOME プロジェクトが立ち上がった 1997 年以来、プログラム開発に貢献してくれた人達は 数百人にものぼります。その多くの人達は、メッセージ翻訳、ドキュメント作成、品質向上のためのバグ報告といったプログラム開発以外の重要な部分で貢献してくれました。"
+#~ msgid ""
+#~ "Hundreds of people have contributed code to GNOME since it was started in "
+#~ "1997; many more have contributed in other important ways, including "
+#~ "translations, documentation, and quality assurance."
+#~ msgstr ""
+#~ "GNOME プロジェクトが立ち上がった 1997 年以来、プログラム開発に貢献してくれ"
+#~ "た人達は 数百人にものぼります。その多くの人達は、メッセージ翻訳、ドキュメ"
+#~ "ント作成、品質向上のためのバグ報告といったプログラム開発以外の重要な部分で"
+#~ "貢献してくれました。"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "'%s' を読み込む際にエラーが発生しました: %s"
