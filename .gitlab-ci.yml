@@ -25,6 +25,8 @@ build_stable:
     - locale
     - locale -a
     - export
+    - date -d "05/28/2001 23:59:59" "+%a %b %-e_%R:%S"
+    - LC_ALL=he_IL.utf8 date -d "05/28/2001 23:59:59" "+%a %b %-e_%R:%S"
     - xvfb-run -a -s "-screen 0 1024x768x24" ninja test
     - xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop

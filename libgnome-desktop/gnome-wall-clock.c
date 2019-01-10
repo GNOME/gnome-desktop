@@ -366,6 +366,8 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 		}
 	}
 
+	g_message ("%s", format_string);
+
 	return date_time_format (now, format_string);
 }
 
