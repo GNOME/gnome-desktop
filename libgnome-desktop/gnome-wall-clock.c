@@ -314,6 +314,11 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 {
 	const char *format_string;
 
+	g_debug ("clock_format: %s", clock_format == G_DESKTOP_CLOCK_FORMAT_24H ? "24h" : "12h");
+	g_debug ("show_weekday: %s", show_weekday ? "TRUE" : "FALSE");
+	g_debug ("show_full_date: %s", show_full_date ? "TRUE" : "FALSE");
+	g_debug ("show_seconds: %s", show_seconds ? "TRUE" : "FALSE");
+
 	if (clock_format == G_DESKTOP_CLOCK_FORMAT_24H) {
 		if (show_full_date) {
 			if (show_weekday)
@@ -365,6 +370,8 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 				: T_(N_("%l:%M %p"));
 		}
 	}
+
+	g_debug ("format_string: %s", format_string);
 
 	return date_time_format (now, format_string);
 }
