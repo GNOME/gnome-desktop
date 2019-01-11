@@ -22,8 +22,8 @@ build_stable:
     - cd build
     - ninja
     - ninja install
-    - xvfb-run -a -s "-screen 0 1024x768x24" ninja test
-    - xvfb-run -a -s "-screen 0 1024x768x24"
+    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
+    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
   artifacts:
     paths:
