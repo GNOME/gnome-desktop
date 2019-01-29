@@ -1,5 +1,6 @@
 test_args = [
   '-DG_LOG_DOMAIN="GnomeDesktop"',
+  '-DGNOMELOCALEDIR="@0@"'.format(localedir),
   '-DGDK_DISABLE_DEPRECATED_WARNINGS',
   '-DGTK_DISABLE_DEPRECATED_WARNINGS',
   '-DINSTALLED_TEST_DIR="@0@"'.format(test_execdir)

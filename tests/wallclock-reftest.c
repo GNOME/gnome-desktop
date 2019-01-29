@@ -20,6 +20,7 @@
 
 #include "config.h"
 
+#include <libintl.h>
 #include <string.h>
 #include <glib/gstdio.h>
 #include <locale.h>
@@ -581,6 +582,10 @@ main (int argc, char **argv)
   g_setenv ("GDK_RENDERING", "image", FALSE);
 
   setlocale (LC_ALL, "");
+  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
   g_test_init (&argc, &argv, NULL);
   gtk_init (&argc, &argv);
 
