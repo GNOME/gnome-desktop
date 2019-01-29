@@ -24,8 +24,8 @@ build_stable:
     - ninja
     - ninja install
     - LC_ALL=he_IL.UTF-8 locale -c LC_TIME
-    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
-    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
+    - LC_ALL=he_IL.UTF-8 G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
+    - LC_ALL=he_IL.UTF-8 G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
   artifacts:
     paths:
