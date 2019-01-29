@@ -45,10 +45,6 @@ endforeach
 
 if get_option('installed_tests')
   test_data = files(
-    'C.ref.ui',
-    'C.ui',
-    'en_US.utf-8.ref.ui',
-    'en_US.utf-8.ui',
     'he_IL.utf8.ref.ui',
     'he_IL.utf8.ui'
   )
