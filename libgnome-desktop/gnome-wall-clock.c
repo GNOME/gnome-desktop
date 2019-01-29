@@ -241,7 +241,9 @@ date_time_format (GDateTime *datetime,
 	/* Then do the same with en-space and underscore before passing it to
 	 * g_date_time_format.  */
 	no_enspace = string_replace (no_ratio, " ", "_");
+	g_debug ("no_enspace: %s", no_enspace);
 	replaced_format = g_date_time_format (datetime, no_enspace);
+	g_debug ("replaced_format: %s", replaced_format);
 
 	g_free (no_ratio);
 	g_free (no_enspace);
@@ -263,6 +265,8 @@ date_time_format (GDateTime *datetime,
 	}
 
 	g_free (replaced_format);
+	g_debug ("is_utf8: %s", is_utf8 ? "TRUE" : "FALSE");
+	g_debug ("ret: %s", ret);
 	return ret;
 }
 
