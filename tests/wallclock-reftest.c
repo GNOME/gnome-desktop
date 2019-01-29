@@ -438,13 +438,18 @@ test_ui_file (GFile         *file,
   GtkStyleProvider *provider;
   GnomeWallClock *clock;
   GDateTime *datetime;
-  char *str;
+  char *str, *set_locale;
 
   ui_file = g_file_get_path (file);
 
   locale = get_locale_for_file (ui_file);
   g_assert (locale);
-  setlocale (LC_ALL, locale);
+  set_locale = setlocale (LC_ALL, locale);
+  g_assert_cmpstr (set_locale, ==, locale);
+//  set_locale = setlocale (LC_TIME, locale);
+//  g_assert_cmpstr (set_locale, ==, locale);
+//  set_locale = setlocale (LC_MESSAGES, locale);
+//  g_assert_cmpstr (set_locale, ==, locale);
 
   clock = gnome_wall_clock_new();
   datetime = g_date_time_new_local (2014, 5, 28, 23, 59, 59);
