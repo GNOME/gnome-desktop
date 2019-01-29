@@ -1,4 +1,4 @@
-image: fedora:rawhide
+image: fedora:29
 
 variables:
   DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext
@@ -17,7 +17,6 @@ build_stable:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
-    - rpm -Fvh https://kojipkgs.fedoraproject.org//packages/glib2/2.59.1/1.fc30/x86_64/glib2-2.59.1-1.fc30.x86_64.rpm https://kojipkgs.fedoraproject.org//packages/glib2/2.59.1/1.fc30/x86_64/glib2-devel-2.59.1-1.fc30.x86_64.rpm
   script:
     - meson --prefix=/usr -Dinstalled_tests=true build
     - cd build
