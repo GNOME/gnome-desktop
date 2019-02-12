@@ -569,6 +569,12 @@ main (int argc, char **argv)
   const char *basedir;
   GFile *file;
 
+  /* unset environment variables that can interfere with our tests */
+  unsetenv("LANG");
+  unsetenv("LANGUAGE");
+  unsetenv("LC_ALL");
+  unsetenv("LC_TIME");
+
   /* I don't want to fight fuzzy scaling algorithms in GPUs,
    * so unless you explicitly set it to something else, we
    * will use Cairo's image surface.
