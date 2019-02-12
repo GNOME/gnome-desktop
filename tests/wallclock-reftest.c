@@ -442,9 +442,13 @@ test_ui_file (GFile         *file,
 
   ui_file = g_file_get_path (file);
 
+  unsetenv("LANG");
+  unsetenv("LANGUAGE");
+
   locale = get_locale_for_file (ui_file);
   g_assert (locale);
   set_locale = setlocale (LC_ALL, locale);
+  set_locale = setlocale (LC_TIME, locale);
   g_assert_cmpstr (set_locale, ==, locale);
 
   clock = gnome_wall_clock_new();
