@@ -82,12 +82,19 @@ gnome_desktop_deps = [
   seccomp_dep
 ]
 
+ldflags = []
+symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'symbol.map')
+if cc.has_link_argument(symbol_map)
+  ldflags += symbol_map
+endif
+
 libgnome_desktop = library('gnome-desktop-3',
   libgnome_desktop_sources,
   dependencies: [gnome_desktop_deps, m_dep, rt_dep, x_dep],
   soversion: soversion,
   version: libversion,
   c_args: libargs,
+  link_args: ldflags,
   install: true
 )
 
