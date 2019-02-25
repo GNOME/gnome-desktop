@@ -566,7 +566,8 @@ add_bwrap (GPtrArray   *array,
     }
 
   /* fontconfig cache if necessary */
-  if (!g_str_has_prefix (FONTCONFIG_CACHE_PATH, "/usr/"))
+  if (!g_str_has_prefix (FONTCONFIG_CACHE_PATH, "/usr/") &&
+      g_file_test (FONTCONFIG_CACHE_PATH, G_FILE_TEST_EXISTS))
     add_args (array, "--ro-bind", FONTCONFIG_CACHE_PATH, FONTCONFIG_CACHE_PATH, NULL);
 
   add_args (array,
