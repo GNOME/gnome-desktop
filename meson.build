@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.47.0',
-  version: '3.32.0',
+  version: '3.32.1',
   license: ['GPL2+', 'LGPL2+']
 )
 
@@ -11,7 +11,7 @@ project('gnome-desktop', 'c',
 #  * Bump the third component otherwise.
 #
 # A lot easier than libtool, right?
-libversion = '17.0.5'
+libversion = '17.0.6'
 soversion = libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
