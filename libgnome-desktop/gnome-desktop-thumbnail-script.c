@@ -149,8 +149,9 @@ get_extension (const char *path)
 
   basename = g_path_get_basename (path);
   p = strrchr (basename, '.');
-  if (p == NULL)
-    return NULL;
+  // Leading periods on the basename are ignored.
+  if (g_file_test (path, G_FILE_TEST_IS_DIR) || !p || p == basename)
+    return g_strdup ("");
   return g_strdup (p + 1);
 }
 
