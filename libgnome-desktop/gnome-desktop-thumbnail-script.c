@@ -718,7 +718,11 @@ script_exec_free (ScriptExec *exec)
   g_free (exec->infile);
   if (exec->infile_tmp)
     {
-      g_unlink (exec->infile_tmp);
+      if (g_file_test (exec->infile_tmp, G_FILE_TEST_IS_DIR)) {
+        g_rmdir (exec->infile_tmp);
+      } else {
+        g_unlink (exec->infile_tmp);
+      }
       g_free (exec->infile_tmp);
     }
   if (exec->outfile)
@@ -796,7 +800,13 @@ script_exec_new (const char  *uri,
         }
       exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
       ext = get_extension (exec->infile);
-      infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail.%s", ext);
+
+      if (strcmp(ext, "") != 0) {
+        infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail.%s", ext);
+      } else {
+        infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail");
+      }
+
       exec->infile_tmp = g_build_filename (exec->outdir, infile, NULL);
 
       exec->s_infile = g_build_filename ("/tmp/", infile, NULL);
@@ -880,4 +890,3 @@ out:
   script_exec_free (exec);
   return image;
 }
-
