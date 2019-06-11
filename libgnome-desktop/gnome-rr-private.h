@@ -86,6 +86,7 @@ struct _GnomeRROutputInfoPrivate
     int			pref_width;
     int			pref_height;
     char *		display_name;
+    char *		connector_type;
     gboolean            primary;
     gboolean            underscanning;
 
@@ -105,7 +106,7 @@ struct _GnomeRRConfigPrivate
   GnomeRROutputInfo **outputs;
 };
 
-gboolean _gnome_rr_output_name_is_builtin_display (const char *name);
+gboolean _gnome_rr_output_connector_type_is_builtin_display (const char *connector_type);
 
 gboolean _gnome_rr_screen_apply_configuration (GnomeRRScreen  *screen,
 					       gboolean        persistent,
@@ -113,7 +114,7 @@ gboolean _gnome_rr_screen_apply_configuration (GnomeRRScreen  *screen,
 					       GVariant       *outputs,
 					       GError        **error);
 
-
+const char * _gnome_rr_output_get_connector_type  (GnomeRROutput         *output);
 gboolean    _gnome_rr_output_get_tile_info      (GnomeRROutput         *output,
 						GnomeRRTile *tile);
 gboolean    _gnome_rr_output_get_tiled_display_size (GnomeRROutput *output,
