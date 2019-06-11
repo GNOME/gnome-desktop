@@ -64,7 +64,7 @@ struct GnomeRROutput
     
     char *		name;
     char *		display_name;
-    char *      connector_type;
+    char *		connector_type;
     GnomeRRCrtc *	current_crtc;
     GnomeRRCrtc **	possible_crtcs;
     GnomeRROutput **	clones;
