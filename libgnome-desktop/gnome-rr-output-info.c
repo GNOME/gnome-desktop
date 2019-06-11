@@ -40,6 +40,7 @@ gnome_rr_output_info_init (GnomeRROutputInfo *self)
     self->priv->on = FALSE;
     self->priv->rotation = GNOME_RR_ROTATION_0;
     self->priv->display_name = NULL;
+    self->priv->connector_type = NULL;
 }
 
 static void
@@ -49,6 +50,7 @@ gnome_rr_output_info_finalize (GObject *gobject)
 
     g_free (self->priv->name);
     g_free (self->priv->display_name);
+    g_free (self->priv->connector_type);
     g_free (self->priv->product);
     g_free (self->priv->serial);
     g_free (self->priv->vendor);

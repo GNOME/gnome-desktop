@@ -64,6 +64,7 @@ struct GnomeRROutput
     
     char *		name;
     char *		display_name;
+    char *      connector_type;
     GnomeRRCrtc *	current_crtc;
     GnomeRRCrtc **	possible_crtcs;
     GnomeRROutput **	clones;
@@ -1402,6 +1403,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "width-mm", "i", &output->width_mm);
     g_variant_lookup (properties, "height-mm", "i", &output->height_mm);
     g_variant_lookup (properties, "display-name", "s", &output->display_name);
+    g_variant_lookup (properties, "connector-type", "s", &output->connector_type);
     g_variant_lookup (properties, "backlight", "i", &output->backlight);
     g_variant_lookup (properties, "min-backlight-step", "i", &output->min_backlight_step);
     g_variant_lookup (properties, "primary", "b", &output->is_primary);
@@ -1448,6 +1450,7 @@ output_copy (const GnomeRROutput *from)
     output->info = from->info;
     output->name = g_strdup (from->name);
     output->display_name = g_strdup (from->display_name);
+    output->connector_type = g_strdup (from->connector_type);
     output->vendor = g_strdup (from->vendor);
     output->product = g_strdup (from->product);
     output->serial = g_strdup (from->serial);
@@ -1495,6 +1498,7 @@ output_free (GnomeRROutput *output)
     g_free (output->product);
     g_free (output->serial);
     g_free (output->display_name);
+    g_free (output->connector_type);
     g_free (output->edid_file);
     if (output->edid)
       g_bytes_unref (output->edid);
@@ -1678,17 +1682,14 @@ gnome_rr_output_get_possible_crtcs (GnomeRROutput *output)
 }
 
 gboolean
-_gnome_rr_output_name_is_builtin_display (const char *name)
+_gnome_rr_output_connector_type_is_builtin_display (const char *connector_type)
 {
-    if (!name)
+    if (!connector_type)
         return FALSE;
 
-    if (strstr (name, "lvds") ||  /* Most drivers use an "LVDS" prefix... */
-	strstr (name, "LVDS") ||
-	strstr (name, "Lvds") ||
-	strstr (name, "LCD")  ||  /* ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye. */
-	strstr (name, "eDP")  ||    /* eDP is for internal built-in panel connections */
-	strstr (name, "DSI"))
+    if (strcmp (connector_type, "LVDS") == 0 ||
+	strcmp (connector_type, "eDP") == 0  ||
+	strcmp (connector_type, "DSI") == 0)
         return TRUE;
 
     return FALSE;
@@ -1699,7 +1700,7 @@ gnome_rr_output_is_builtin_display (GnomeRROutput *output)
 {
     g_return_val_if_fail (output != NULL, FALSE);
 
-    return _gnome_rr_output_name_is_builtin_display (output->name);
+    return _gnome_rr_output_connector_type_is_builtin_display (output->connector_type);
 }
 
 /**
@@ -2242,6 +2243,14 @@ gnome_rr_output_supports_underscanning (GnomeRROutput *output)
 {
     g_assert (output != NULL);
     return output->supports_underscanning;
+}
+
+const char *
+_gnome_rr_output_get_connector_type (GnomeRROutput *output)
+{
+    g_return_val_if_fail (output != NULL, NULL);
+
+    return output->connector_type;
 }
 
 gboolean
