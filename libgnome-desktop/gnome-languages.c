@@ -797,6 +797,7 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
         const char *ccode_longT;
         const char *ccode;
         const char *ccode_id;
+        const char *lang_common_name;
         const char *lang_name;
 
         if (! (g_str_equal (element_name, "iso_639_entry") || g_str_equal (element_name, "iso_639_3_entry"))
@@ -808,6 +809,7 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
         ccode_longB = NULL;
         ccode_longT = NULL;
         ccode_id = NULL;
+        lang_common_name = NULL;
         lang_name = NULL;
 
         while (*attr_names && *attr_values) {
@@ -844,12 +846,21 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
                                 }
                                 ccode_id = *attr_values;
                         }
+                } else if (g_str_equal (*attr_names, "common_name")) {
+                        /* skip if empty */
+                        if (**attr_values) {
+                                lang_common_name = *attr_values;
+                        }
                 } else if (g_str_equal (*attr_names, "name")) {
                         lang_name = *attr_values;
                 }
 
                 ++attr_names;
                 ++attr_values;
+        }
+
+        if (lang_common_name != NULL) {
+                lang_name = lang_common_name;
         }
 
         if (lang_name == NULL) {
