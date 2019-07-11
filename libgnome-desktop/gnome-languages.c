@@ -799,7 +799,6 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
         const char *ccode_id;
         const char *lang_common_name;
         const char *lang_name;
-        const char *lang_name_insert;
 
         if (! (g_str_equal (element_name, "iso_639_entry") || g_str_equal (element_name, "iso_639_3_entry"))
             || attr_names == NULL || attr_values == NULL) {
@@ -812,7 +811,6 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
         ccode_id = NULL;
         lang_common_name = NULL;
         lang_name = NULL;
-        lang_name_insert = NULL;
 
         while (*attr_names && *attr_values) {
                 if (g_str_equal (*attr_names, "iso_639_1_code")) {
@@ -861,32 +859,33 @@ languages_parse_start_tag (GMarkupParseContext      *ctx,
                 ++attr_values;
         }
 
-        if (lang_common_name != NULL)
-                lang_name_insert = lang_common_name;
-        else if (lang_name != NULL)
-                lang_name_insert = lang_name;
-        else
+        if (lang_common_name != NULL) {
+                lang_name = lang_common_name;
+        }
+
+        if (lang_name == NULL) {
                 return;
+        }
 
         if (ccode != NULL) {
                 g_hash_table_insert (gnome_languages_map,
                                      g_strdup (ccode),
-                                     g_strdup (lang_name_insert));
+                                     g_strdup (lang_name));
         }
         if (ccode_longB != NULL) {
                 g_hash_table_insert (gnome_languages_map,
                                      g_strdup (ccode_longB),
-                                     g_strdup (lang_name_insert));
+                                     g_strdup (lang_name));
         }
         if (ccode_longT != NULL) {
                 g_hash_table_insert (gnome_languages_map,
                                      g_strdup (ccode_longT),
-                                     g_strdup (lang_name_insert));
+                                     g_strdup (lang_name));
         }
         if (ccode_id != NULL) {
                 g_hash_table_insert (gnome_languages_map,
                                      g_strdup (ccode_id),
-                                     g_strdup (lang_name_insert));
+                                     g_strdup (lang_name));
         }
 }
 
