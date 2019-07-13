@@ -47,6 +47,8 @@ char *        gnome_get_language_from_code      (const char *code,
                                                  const char *translation);
 char *        gnome_get_country_from_code       (const char *code,
                                                  const char *translation);
+char *        gnome_get_translated_modifier     (const char *modifier,
+                                                 const char *translation);
 gboolean      gnome_get_input_source_from_locale (const char  *locale,
                                                   const char **type,
                                                   const char **id);

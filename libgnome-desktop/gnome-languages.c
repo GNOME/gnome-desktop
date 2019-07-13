@@ -1093,6 +1093,8 @@ gnome_get_language_from_locale (const char *locale,
         g_autofree char *langinfo_codeset = NULL;
         g_autofree char *translated_language = NULL;
         g_autofree char *translated_territory = NULL;
+        g_autofree char *modifier = NULL;
+        g_autofree char *translated_modifier = NULL;
         gboolean is_utf8 = TRUE;
 
         g_return_val_if_fail (locale != NULL, NULL);
@@ -1107,7 +1109,7 @@ gnome_get_language_from_locale (const char *locale,
                             &language_code,
                             &territory_code,
                             &codeset_code,
-                            NULL);
+                            &modifier);
 
         if (language_code == NULL) {
                 goto out;
@@ -1145,6 +1147,13 @@ gnome_get_language_from_locale (const char *locale,
                                         codeset_code);
         }
 
+        if (modifier != NULL) {
+                translated_modifier = gnome_get_translated_modifier (modifier, translation);
+        }
+        if (translated_modifier != NULL) {
+                g_string_append_printf (full_language, " - %s", translated_modifier);
+        }
+
  out:
         if (full_language->len == 0) {
                 g_string_free (full_language, TRUE);
@@ -1178,6 +1187,8 @@ gnome_get_country_from_locale (const char *locale,
         g_autofree char *langinfo_codeset = NULL;
         g_autofree char *translated_language = NULL;
         g_autofree char *translated_territory = NULL;
+        g_autofree char *modifier = NULL;
+        g_autofree char *translated_modifier = NULL;
         gboolean is_utf8 = TRUE;
 
         g_return_val_if_fail (locale != NULL, NULL);
@@ -1192,7 +1203,7 @@ gnome_get_country_from_locale (const char *locale,
                             &language_code,
                             &territory_code,
                             &codeset_code,
-                            NULL);
+                            &modifier);
 
         if (territory_code == NULL) {
                 goto out;
@@ -1204,6 +1215,13 @@ gnome_get_country_from_locale (const char *locale,
 	if (is_unique_territory (territory_code)) {
 		goto out;
 	}
+
+        if (modifier != NULL) {
+                translated_modifier = gnome_get_translated_modifier (modifier, translation);
+        }
+        if (translated_modifier != NULL) {
+                g_string_append_printf (full_name, " - %s", translated_modifier);
+        }
 
         if (language_code != NULL) {
                 translated_language = get_translated_language (language_code, translation);
@@ -1317,6 +1335,64 @@ gnome_get_country_from_code (const char *code,
         territories_init ();
 
         return get_translated_territory (code, translation);
+}
+
+/**
+ * gnome_get_translated_modifier:
+ * @modifier: the modifier part of a locale name
+ * @translation: (allow-none): a locale string
+ *
+ * Gets a translation of the raw @modifier string. If @translation
+ * is provided the returned string is translated accordingly.
+ *
+ * Return value: (transfer full): the translated modifier string.
+ * Caller takes ownership.
+ *
+ * Since: 3.34
+ */
+char *
+gnome_get_translated_modifier (const char *modifier,
+                               const char *translation)
+{
+        g_return_val_if_fail (modifier != NULL, NULL);
+
+        const char *retval;
+        GHashTable *modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
+
+        g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
+        g_hash_table_insert (modifiers_map, g_strdup ("cyrillic"), g_strdup (_("Cyrillic")));
+        g_hash_table_insert (modifiers_map, g_strdup ("devanagari"), g_strdup (_("Devanagari")));
+        g_hash_table_insert (modifiers_map, g_strdup ("iqtelif"), g_strdup (_("IQTElif")));
+        g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
+        g_hash_table_insert (modifiers_map, g_strdup ("saaho"), g_strdup (_("Saho")));
+        g_hash_table_insert (modifiers_map, g_strdup ("valencia"), g_strdup (_("Valencia")));
+
+        if (g_hash_table_contains (modifiers_map, modifier)) {
+                locale_t loc;
+                locale_t old_locale;
+
+                if (translation != NULL) {
+                        loc = newlocale (LC_MESSAGES_MASK, translation, (locale_t) 0);
+                        if (loc == (locale_t) 0) {
+                                g_hash_table_destroy (modifiers_map);
+                                return NULL;
+                        }
+                        old_locale = uselocale (loc);
+                }
+
+                retval = dgettext ("gnome-desktop-3.0", g_hash_table_lookup (modifiers_map, modifier));
+
+                if (translation != NULL) {
+                        uselocale (old_locale);
+                        freelocale (loc);
+                }
+        } else {
+                retval = modifier;
+        }
+
+        g_hash_table_destroy (modifiers_map);
+
+        return g_strdup (retval);
 }
 
 /**
