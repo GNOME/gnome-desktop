@@ -1376,6 +1376,7 @@ gnome_get_translated_modifier (const char *modifier,
         /* TRANSLATORS: Used to distinguish the label representing the tt_RU
            locale from tt_RU@iqtelif. It's a special alphabet for Tatar. */
         g_hash_table_insert (modifiers_map, g_strdup ("iqtelif"), g_strdup (_("IQTElif")));
+        /* TRANSLATORS: The alphabet/script, not the language. */
         g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
         /* TRANSLATORS: "Saho" is a variant of the Afar language. Used to
            distinguish the label representing the aa_ER locale from aa_ER@saaho. */
