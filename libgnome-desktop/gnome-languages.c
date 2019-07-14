@@ -1151,7 +1151,7 @@ gnome_get_language_from_locale (const char *locale,
                 translated_modifier = gnome_get_translated_modifier (modifier, translation);
         }
         if (translated_modifier != NULL) {
-                g_string_append_printf (full_language, " - %s", translated_modifier);
+                g_string_append_printf (full_language, " — %s", translated_modifier);
         }
 
  out:
@@ -1220,7 +1220,7 @@ gnome_get_country_from_locale (const char *locale,
                 translated_modifier = gnome_get_translated_modifier (modifier, translation);
         }
         if (translated_modifier != NULL) {
-                g_string_append_printf (full_name, " - %s", translated_modifier);
+                g_string_append_printf (full_name, " — %s", translated_modifier);
         }
 
         if (language_code != NULL) {
@@ -1354,10 +1354,19 @@ char *
 gnome_get_translated_modifier (const char *modifier,
                                const char *translation)
 {
+        const char *retval;
+        GHashTable *modifiers_map;
+
         g_return_val_if_fail (modifier != NULL, NULL);
 
-        const char *retval;
-        GHashTable *modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
+        modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
+
+        /* TRANSLATORS: "Abegede" as well as the six subsequent strings represent
+           locale modifiers, and are shown in the UI for selecting language or
+           format to help the user pick the correct locale. The Serbian language,
+           for instance, has two variants:
+           * Serbian (Serbia)
+           * Serbian — Latin (Serbia) */
 
         g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
         g_hash_table_insert (modifiers_map, g_strdup ("cyrillic"), g_strdup (_("Cyrillic")));
@@ -1366,6 +1375,10 @@ gnome_get_translated_modifier (const char *modifier,
         g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
         g_hash_table_insert (modifiers_map, g_strdup ("saaho"), g_strdup (_("Saho")));
         g_hash_table_insert (modifiers_map, g_strdup ("valencia"), g_strdup (_("Valencia")));
+
+        /* The modifiers above are the ones present in glibc's SUPPORTED file
+         * (except for @euro, which would be superfluous in this context).
+         */
 
         if (g_hash_table_contains (modifiers_map, modifier)) {
                 locale_t loc;
