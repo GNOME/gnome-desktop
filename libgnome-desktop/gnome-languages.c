@@ -1366,14 +1366,23 @@ gnome_get_translated_modifier (const char *modifier,
            format to help the user pick the correct locale. The Serbian language,
            for instance, has two variants:
            * Serbian (Serbia)
-           * Serbian — Latin (Serbia) */
-
+           * Serbian — Latin (Serbia)
+           So "Abegede" is used to distinguish the labels representing the gez_ER
+           and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
+           difference is related to collation. */
         g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
         g_hash_table_insert (modifiers_map, g_strdup ("cyrillic"), g_strdup (_("Cyrillic")));
         g_hash_table_insert (modifiers_map, g_strdup ("devanagari"), g_strdup (_("Devanagari")));
+        /* TRANSLATORS: Used to distinguish the label representing the tt_RU
+           locale from tt_RU@iqtelif. It's a special alphabet for Tatar. */
         g_hash_table_insert (modifiers_map, g_strdup ("iqtelif"), g_strdup (_("IQTElif")));
         g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
+        /* TRANSLATORS: "Saho" is a variant of the Afar language. Used to
+           distinguish the label representing the aa_ER locale from aa_ER@saaho. */
         g_hash_table_insert (modifiers_map, g_strdup ("saaho"), g_strdup (_("Saho")));
+        /* TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
+           in Valencia. Used to distinguish the label representing the ca_ES
+           locale from ca_ES@valencia. */
         g_hash_table_insert (modifiers_map, g_strdup ("valencia"), g_strdup (_("Valencia")));
 
         /* The modifiers above are the ones present in glibc's SUPPORTED file
