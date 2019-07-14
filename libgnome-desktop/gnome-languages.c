@@ -1354,7 +1354,7 @@ char *
 gnome_get_translated_modifier (const char *modifier,
                                const char *translation)
 {
-        const char *retval;
+        char *retval;
         GHashTable *modifiers_map;
         locale_t loc;
         locale_t old_locale;
@@ -1369,7 +1369,7 @@ gnome_get_translated_modifier (const char *modifier,
                 old_locale = uselocale (loc);
         }
 
-        modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
+        modifiers_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         /* TRANSLATORS: Used to distinguish the labels representing the gez_ER
            and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
@@ -1395,9 +1395,9 @@ gnome_get_translated_modifier (const char *modifier,
          */
 
         if (g_hash_table_contains (modifiers_map, modifier))
-                retval = g_hash_table_lookup (modifiers_map, modifier);
+                retval = g_strdup (g_hash_table_lookup (modifiers_map, modifier));
         else
-                retval = modifier;
+                retval = g_strdup (modifier);
 
         g_hash_table_destroy (modifiers_map);
 
@@ -1406,7 +1406,7 @@ gnome_get_translated_modifier (const char *modifier,
                 freelocale (loc);
         }
 
-        return g_strdup (retval);
+        return retval;
 }
 
 /**
