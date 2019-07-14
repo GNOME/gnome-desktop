@@ -33,7 +33,7 @@
 #include <sys/stat.h>
 
 #include <glib.h>
-#include <glib/gi18n.h>
+#include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -1356,18 +1356,22 @@ gnome_get_translated_modifier (const char *modifier,
 {
         const char *retval;
         GHashTable *modifiers_map;
+        locale_t loc;
+        locale_t old_locale;
 
         g_return_val_if_fail (modifier != NULL, NULL);
 
+        if (translation != NULL) {
+                loc = newlocale (LC_MESSAGES_MASK, translation, (locale_t) 0);
+                if (loc == (locale_t) 0) {
+                        return NULL;
+                }
+                old_locale = uselocale (loc);
+        }
+
         modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
 
-        /* TRANSLATORS: "Abegede" as well as the six subsequent strings represent
-           locale modifiers, and are shown in the UI for selecting language or
-           format to help the user pick the correct locale. The Serbian language,
-           for instance, has two variants:
-           * Serbian (Serbia)
-           * Serbian — Latin (Serbia)
-           So "Abegede" is used to distinguish the labels representing the gez_ER
+        /* TRANSLATORS: Used to distinguish the labels representing the gez_ER
            and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
            difference is related to collation. */
         g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
@@ -1390,30 +1394,17 @@ gnome_get_translated_modifier (const char *modifier,
          * (except for @euro, which would be superfluous in this context).
          */
 
-        if (g_hash_table_contains (modifiers_map, modifier)) {
-                locale_t loc;
-                locale_t old_locale;
-
-                if (translation != NULL) {
-                        loc = newlocale (LC_MESSAGES_MASK, translation, (locale_t) 0);
-                        if (loc == (locale_t) 0) {
-                                g_hash_table_destroy (modifiers_map);
-                                return NULL;
-                        }
-                        old_locale = uselocale (loc);
-                }
-
-                retval = dgettext ("gnome-desktop-3.0", g_hash_table_lookup (modifiers_map, modifier));
-
-                if (translation != NULL) {
-                        uselocale (old_locale);
-                        freelocale (loc);
-                }
-        } else {
+        if (g_hash_table_contains (modifiers_map, modifier))
+                retval = g_hash_table_lookup (modifiers_map, modifier);
+        else
                 retval = modifier;
-        }
 
         g_hash_table_destroy (modifiers_map);
+
+        if (translation != NULL) {
+                uselocale (old_locale);
+                freelocale (loc);
+        }
 
         return g_strdup (retval);
 }
