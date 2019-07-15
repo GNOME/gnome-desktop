@@ -1375,12 +1375,17 @@ gnome_get_translated_modifier (const char *modifier,
            and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
            difference is related to collation. */
         g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
+        /* TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants. */
         g_hash_table_insert (modifiers_map, g_strdup ("cyrillic"), g_strdup (_("Cyrillic")));
+        /* TRANSLATORS: Also known as "Nagari", a written variant for many languages
+         * of the Indian subcontinent. See:
+         * https://en.wikipedia.org/wiki/Devanagari */
         g_hash_table_insert (modifiers_map, g_strdup ("devanagari"), g_strdup (_("Devanagari")));
         /* TRANSLATORS: Used to distinguish the label representing the tt_RU
            locale from tt_RU@iqtelif. It's a special alphabet for Tatar. */
         g_hash_table_insert (modifiers_map, g_strdup ("iqtelif"), g_strdup (_("IQTElif")));
-        /* TRANSLATORS: The alphabet/script, not the language. */
+        /* TRANSLATORS: The alphabet/script, not the language. Used to distinguish
+         * Latin from Cyrillic written language variants. */
         g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
         /* TRANSLATORS: "Saho" is a variant of the Afar language. Used to
            distinguish the label representing the aa_ER locale from aa_ER@saaho. */
