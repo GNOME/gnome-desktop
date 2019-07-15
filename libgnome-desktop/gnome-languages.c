@@ -1216,21 +1216,22 @@ gnome_get_country_from_locale (const char *locale,
 		goto out;
 	}
 
-        if (modifier != NULL) {
-                translated_modifier = gnome_get_translated_modifier (modifier, translation);
-        }
-        if (translated_modifier != NULL) {
-                g_string_append_printf (full_name, " — %s", translated_modifier);
-        }
-
         if (language_code != NULL) {
                 translated_language = get_translated_language (language_code, translation);
         }
         if (translated_language != NULL) {
                 g_string_append_printf (full_name,
-                                        " (%s)",
+                                        " (%s",
                                         translated_language);
         }
+
+        if (modifier != NULL)
+                translated_modifier = gnome_get_translated_modifier (modifier, translation);
+        if (translated_modifier != NULL)
+                g_string_append_printf (full_name, " — %s", translated_modifier);
+
+        if (translated_language != NULL)
+                g_string_append_printf (full_name, ")");
 
         language_name_get_codeset_details (translation, &langinfo_codeset, &is_utf8);
 
