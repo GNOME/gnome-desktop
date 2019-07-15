@@ -1372,31 +1372,31 @@ gnome_get_translated_modifier (const char *modifier,
         /* Modifiers as listed in glibc's SUPPORTED file:
          * https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED;hb=HEAD
          * (except for @euro, which would be superfluous in this context). */
-        modifiers_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+        modifiers_map = g_hash_table_new (g_str_hash, g_str_equal);
 
         /* TRANSLATORS: Used to distinguish the labels representing the gez_ER
            and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
            difference is related to collation. */
-        g_hash_table_insert (modifiers_map, g_strdup ("abegede"), g_strdup (_("Abegede")));
+        g_hash_table_insert (modifiers_map, "abegede", _("Abegede"));
         /* TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants. */
-        g_hash_table_insert (modifiers_map, g_strdup ("cyrillic"), g_strdup (_("Cyrillic")));
+        g_hash_table_insert (modifiers_map, "cyrillic", _("Cyrillic"));
         /* TRANSLATORS: Also known as "Nagari", a written variant for many languages
            of the Indian subcontinent. See:
            https://en.wikipedia.org/wiki/Devanagari */
-        g_hash_table_insert (modifiers_map, g_strdup ("devanagari"), g_strdup (_("Devanagari")));
+        g_hash_table_insert (modifiers_map, "devanagari", _("Devanagari"));
         /* TRANSLATORS: Used to distinguish the label representing the tt_RU
            locale from tt_RU@iqtelif. It's a special alphabet for Tatar. */
-        g_hash_table_insert (modifiers_map, g_strdup ("iqtelif"), g_strdup (_("IQTElif")));
+        g_hash_table_insert (modifiers_map, "iqtelif", _("IQTElif"));
         /* TRANSLATORS: The alphabet/script, not the language. Used to distinguish
            Latin from Cyrillic written language variants. */
-        g_hash_table_insert (modifiers_map, g_strdup ("latin"), g_strdup (_("Latin")));
+        g_hash_table_insert (modifiers_map, "latin", _("Latin"));
         /* TRANSLATORS: "Saho" is a variant of the Afar language. Used to
            distinguish the label representing the aa_ER locale from aa_ER@saaho. */
-        g_hash_table_insert (modifiers_map, g_strdup ("saaho"), g_strdup (_("Saho")));
+        g_hash_table_insert (modifiers_map, "saaho", _("Saho"));
         /* TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
            in Valencia. Used to distinguish the label representing the ca_ES
            locale from ca_ES@valencia. */
-        g_hash_table_insert (modifiers_map, g_strdup ("valencia"), g_strdup (_("Valencia")));
+        g_hash_table_insert (modifiers_map, "valencia", _("Valencia"));
 
         if (g_hash_table_contains (modifiers_map, modifier))
                 retval = g_strdup (g_hash_table_lookup (modifiers_map, modifier));
