@@ -703,8 +703,8 @@ get_translated_language (const char *code,
         name = NULL;
         if (language != NULL) {
                 const char *translated_name;
-                locale_t loc;
-                locale_t old_locale;
+                locale_t loc = 0;
+                locale_t old_locale = 0;
 
                 if (locale != NULL) {
                         loc = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
