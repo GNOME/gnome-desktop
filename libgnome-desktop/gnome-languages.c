@@ -1369,6 +1369,9 @@ gnome_get_translated_modifier (const char *modifier,
                 old_locale = uselocale (loc);
         }
 
+        /* Modifiers as listed in glibc's SUPPORTED file:
+         * https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED;hb=HEAD
+         * (except for @euro, which would be superfluous in this context). */
         modifiers_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         /* TRANSLATORS: Used to distinguish the labels representing the gez_ER
@@ -1394,10 +1397,6 @@ gnome_get_translated_modifier (const char *modifier,
            in Valencia. Used to distinguish the label representing the ca_ES
            locale from ca_ES@valencia. */
         g_hash_table_insert (modifiers_map, g_strdup ("valencia"), g_strdup (_("Valencia")));
-
-        /* The modifiers above are the ones present in glibc's SUPPORTED file
-         * (except for @euro, which would be superfluous in this context).
-         */
 
         if (g_hash_table_contains (modifiers_map, modifier))
                 retval = g_strdup (g_hash_table_lookup (modifiers_map, modifier));
