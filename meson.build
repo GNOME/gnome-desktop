@@ -11,7 +11,7 @@ project('gnome-desktop', 'c',
 #  * Bump the third component otherwise.
 #
 # A lot easier than libtool, right?
-libversion = '17.0.7'
+libversion = '17.1.7'
 soversion = libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
