@@ -115,6 +115,9 @@ gnome_bg_slide_show_get_property (GObject     *object,
 
         switch (property_id)
         {
+        case PROP_FILENAME:
+                g_value_set_string (value, self->priv->filename);
+                break;
         case PROP_START_TIME:
                 g_value_set_int (value, self->priv->start_time);
                 break;
