@@ -211,7 +211,9 @@ gnome_bg_slide_show_class_init (GnomeBGSlideShowClass *self_class)
                                                               "Filename",
                                                               "Filename",
                                                               NULL,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+                                                              G_PARAM_READWRITE |
+                                                              G_PARAM_CONSTRUCT_ONLY |
+                                                              G_PARAM_DEPRECATED));
 
         g_object_class_install_property (gobject_class,
                                          PROP_START_TIME,
@@ -261,9 +263,9 @@ gnome_bg_slide_show_init (GnomeBGSlideShow *self)
 GnomeBGSlideShow *
 gnome_bg_slide_show_new (const char *filename)
 {
-        return GNOME_BG_SLIDE_SHOW (g_object_new (GNOME_BG_TYPE_SLIDE_SHOW,
-                                                  "filename", filename,
-                                                  NULL));
+        g_autoptr (GFile) *file = g_file_new_for_path (filename);
+
+        return gnome_bg_slide_show_new_for_file (file);
 }
 
 /**
