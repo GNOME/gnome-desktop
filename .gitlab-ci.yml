@@ -1,12 +1,13 @@
 image: fedora:rawhide
 
 variables:
+  LAST_ABI_BREAK: 02f772f9bcf11f1120a48e8428a48ace989af439
   DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext
                 gtk-doc xkeyboard-config-devel itstool
                 gobject-introspection-devel systemd-devel iso-codes-devel
                 libseccomp-devel gcc gcc-c++ glibc-devel
                 meson redhat-rpm-config
-  TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-he abattis-cantarell-fonts
+  TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-he abattis-cantarell-fonts libabigail git
 
 build_stable:
   before_script:
@@ -22,12 +23,14 @@ build_stable:
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
     - meson --prefix=/usr -Dinstalled_tests=true build
-    - cd build
+    - pushd build
     - ninja
     - ninja install
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
+    - popd
+    - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     paths:
       - build/meson-logs/
