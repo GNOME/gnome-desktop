@@ -229,7 +229,7 @@ gnome_bg_slide_show_init (GnomeBGSlideShow *self)
 
 /**
  * gnome_bg_slide_show_new:
- * @file: The #GFile of the slide show
+ * @filename: The filename of the slide show
  *
  * Creates a new object to manage a slide show.
  * window background between two #cairo_surface_ts.
@@ -237,11 +237,19 @@ gnome_bg_slide_show_init (GnomeBGSlideShow *self)
  * Return value: the new #GnomeBGSlideShow
  **/
 GnomeBGSlideShow *
-gnome_bg_slide_show_new (GFile *file)
+gnome_bg_slide_show_new (const char *filename)
 {
-        return GNOME_BG_SLIDE_SHOW (g_object_new (GNOME_BG_TYPE_SLIDE_SHOW,
+	GFile *file;
+	GnomeBGSlideShow *self;
+
+	file = g_file_new_for_path (filename);
+
+        self = GNOME_BG_SLIDE_SHOW (g_object_new (GNOME_BG_TYPE_SLIDE_SHOW,
                                                   "file", file,
                                                   NULL));
+	g_object_unref (file);
+
+	return self;
 }
 
 static void
