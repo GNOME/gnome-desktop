@@ -1126,6 +1126,11 @@ gnome_get_language_from_locale (const char *locale,
 		goto out;
 	}
 
+        if (modifier != NULL)
+                translated_modifier = gnome_get_translated_modifier (modifier, translation);
+        if (translated_modifier != NULL)
+                g_string_append_printf (full_language, " — %s", translated_modifier);
+
         if (territory_code != NULL) {
                 translated_territory = get_translated_territory (territory_code, translation);
         }
@@ -1145,13 +1150,6 @@ gnome_get_language_from_locale (const char *locale,
                 g_string_append_printf (full_language,
                                         " [%s]",
                                         codeset_code);
-        }
-
-        if (modifier != NULL) {
-                translated_modifier = gnome_get_translated_modifier (modifier, translation);
-        }
-        if (translated_modifier != NULL) {
-                g_string_append_printf (full_language, " — %s", translated_modifier);
         }
 
  out:
