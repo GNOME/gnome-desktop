@@ -155,6 +155,7 @@ static gboolean gnome_rr_screen_initable_init (GInitable*, GCancellable*, GError
 static void gnome_rr_screen_initable_iface_init (GInitableIface *iface);
 static void gnome_rr_screen_async_initable_init (GAsyncInitableIface *iface);
 G_DEFINE_TYPE_WITH_CODE (GnomeRRScreen, gnome_rr_screen, G_TYPE_OBJECT,
+                         G_ADD_PRIVATE (GnomeRRScreen)
                          G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, gnome_rr_screen_initable_iface_init)
                          G_IMPLEMENT_INTERFACE (G_TYPE_ASYNC_INITABLE, gnome_rr_screen_async_initable_init))
 
@@ -873,7 +874,6 @@ void
 gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-    g_type_class_add_private (klass, sizeof (GnomeRRScreenPrivate));
 
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -979,8 +979,7 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
 void
 gnome_rr_screen_init (GnomeRRScreen *self)
 {
-    GnomeRRScreenPrivate *priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_RR_SCREEN, GnomeRRScreenPrivate);
-    self->priv = priv;
+    self->priv = gnome_rr_screen_get_instance_private (self);
 }
 
 /* Weak reference callback set in gnome_rr_screen_new(); we remove the GObject data from the GdkScreen. */
