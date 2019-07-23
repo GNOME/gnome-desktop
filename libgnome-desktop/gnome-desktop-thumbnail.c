@@ -158,13 +158,11 @@ struct _GnomeDesktopThumbnailFactoryPrivate {
 
 static const char *appname = "gnome-thumbnail-factory";
 
-G_DEFINE_TYPE (GnomeDesktopThumbnailFactory,
+G_DEFINE_TYPE_WITH_CODE (GnomeDesktopThumbnailFactory,
 	       gnome_desktop_thumbnail_factory,
-	       G_TYPE_OBJECT)
+	       G_TYPE_OBJECT,
+	       G_ADD_PRIVATE (GnomeDesktopThumbnailFactory))
 #define parent_class gnome_desktop_thumbnail_factory_parent_class
-
-#define GNOME_DESKTOP_THUMBNAIL_FACTORY_GET_PRIVATE(object) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((object), GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY, GnomeDesktopThumbnailFactoryPrivate))
 
 #define THUMBNAILER_ENTRY_GROUP "Thumbnailer Entry"
 #define THUMBNAILER_EXTENSION   ".thumbnailer"
@@ -628,7 +626,7 @@ gnome_desktop_thumbnail_factory_init (GnomeDesktopThumbnailFactory *factory)
 {
   GnomeDesktopThumbnailFactoryPrivate *priv;
 
-  factory->priv = GNOME_DESKTOP_THUMBNAIL_FACTORY_GET_PRIVATE (factory);
+  factory->priv = gnome_desktop_thumbnail_factory_get_instance_private (factory);
 
   priv = factory->priv;
 
@@ -707,8 +705,6 @@ gnome_desktop_thumbnail_factory_class_init (GnomeDesktopThumbnailFactoryClass *c
   gobject_class = G_OBJECT_CLASS (class);
 
   gobject_class->finalize = gnome_desktop_thumbnail_factory_finalize;
-
-  g_type_class_add_private (class, sizeof (GnomeDesktopThumbnailFactoryPrivate));
 }
 
 /**

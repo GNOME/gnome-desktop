@@ -27,8 +27,6 @@
 
 static void     gnome_pnp_ids_finalize     (GObject     *object);
 
-#define GNOME_PNP_IDS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_PNP_IDS, GnomePnpIdsPrivate))
-
 struct _GnomePnpIdsPrivate
 {
 #ifdef HAVE_UDEV
@@ -39,7 +37,7 @@ struct _GnomePnpIdsPrivate
 #endif /* HAVE_UDEV */
 };
 
-G_DEFINE_TYPE (GnomePnpIds, gnome_pnp_ids, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (GnomePnpIds, gnome_pnp_ids, G_TYPE_OBJECT)
 
 /**
  * gnome_pnp_ids_get_pnp_id:
@@ -87,13 +85,12 @@ gnome_pnp_ids_class_init (GnomePnpIdsClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         object_class->finalize = gnome_pnp_ids_finalize;
-        g_type_class_add_private (klass, sizeof (GnomePnpIdsPrivate));
 }
 
 static void
 gnome_pnp_ids_init (GnomePnpIds *pnp_ids)
 {
-        pnp_ids->priv = GNOME_PNP_IDS_GET_PRIVATE (pnp_ids);
+        pnp_ids->priv = gnome_pnp_ids_get_instance_private (pnp_ids);
 #ifdef HAVE_UDEV
         pnp_ids->priv->udev = udev_new();
         pnp_ids->priv->hwdb = udev_hwdb_new (pnp_ids->priv->udev);
