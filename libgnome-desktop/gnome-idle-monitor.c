@@ -35,8 +35,6 @@
 #include "gnome-idle-monitor.h"
 #include "meta-dbus-idle-monitor.h"
 
-#define GNOME_IDLE_MONITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_IDLE_MONITOR, GnomeIdleMonitorPrivate))
-
 G_STATIC_ASSERT(sizeof(unsigned long) == sizeof(gpointer));
 
 struct _GnomeIdleMonitorPrivate
@@ -81,6 +79,7 @@ static void add_idle_watch (GnomeIdleMonitor *, GnomeIdleMonitorWatch *);
 static void add_active_watch (GnomeIdleMonitor *, GnomeIdleMonitorWatch *);
 
 G_DEFINE_TYPE_WITH_CODE (GnomeIdleMonitor, gnome_idle_monitor, G_TYPE_OBJECT,
+			 G_ADD_PRIVATE (GnomeIdleMonitor)
 			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
 						gnome_idle_monitor_initable_iface_init))
 
@@ -394,14 +393,12 @@ gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 				     GDK_TYPE_DEVICE,
 				     G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 	g_object_class_install_property (object_class, PROP_DEVICE, obj_props[PROP_DEVICE]);
-
-	g_type_class_add_private (klass, sizeof (GnomeIdleMonitorPrivate));
 }
 
 static void
 gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
 {
-	monitor->priv = GNOME_IDLE_MONITOR_GET_PRIVATE (monitor);
+	monitor->priv = gnome_idle_monitor_get_instance_private (monitor);
 
 	monitor->priv->watches = g_hash_table_new_full (NULL,
 							NULL,

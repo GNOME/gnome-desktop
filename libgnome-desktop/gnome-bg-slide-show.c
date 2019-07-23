@@ -73,10 +73,7 @@ enum {
         PROP_HAS_MULTIPLE_SIZES,
 };
 
-G_DEFINE_TYPE (GnomeBGSlideShow, gnome_bg_slide_show, G_TYPE_OBJECT)
-#define GNOME_BG_SLIDE_SHOW_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o),\
-                                            GNOME_BG_TYPE_SLIDE_SHOW,\
-                                            GnomeBGSlideShowPrivate))
+G_DEFINE_TYPE_WITH_PRIVATE (GnomeBGSlideShow, gnome_bg_slide_show, G_TYPE_OBJECT)
 
 static void
 gnome_bg_slide_show_set_property (GObject       *object,
@@ -214,14 +211,12 @@ gnome_bg_slide_show_class_init (GnomeBGSlideShowClass *self_class)
                                                                "Has multiple sizes",
                                                                FALSE,
                                                                G_PARAM_READABLE));
-
-        g_type_class_add_private (gobject_class, sizeof (GnomeBGSlideShowPrivate));
 }
 
 static void
 gnome_bg_slide_show_init (GnomeBGSlideShow *self)
 {
-        self->priv = GNOME_BG_SLIDE_SHOW_GET_PRIVATE (self);
+        self->priv = gnome_bg_slide_show_get_instance_private (self);
 
         self->priv->stack = g_queue_new ();
         self->priv->slides = g_queue_new ();

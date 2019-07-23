@@ -52,7 +52,7 @@ enum {
 	PROP_TIME_ONLY,
 };
 
-G_DEFINE_TYPE (GnomeWallClock, gnome_wall_clock, G_TYPE_OBJECT);
+G_DEFINE_TYPE_WITH_PRIVATE (GnomeWallClock, gnome_wall_clock, G_TYPE_OBJECT);
 
 static gboolean update_clock (gpointer data);
 static void on_schema_change (GSettings *schema,
@@ -70,7 +70,7 @@ gnome_wall_clock_init (GnomeWallClock *self)
 {
 	GFile *tz;
 
-	self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, GNOME_TYPE_WALL_CLOCK, GnomeWallClockPrivate);
+	self->priv = gnome_wall_clock_get_instance_private (self);
 
 	self->priv->timezone = g_time_zone_new_local ();
 
@@ -202,8 +202,6 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 							       "",
 							       FALSE,
 							       G_PARAM_READABLE | G_PARAM_WRITABLE));
-
-	g_type_class_add_private (gobject_class, sizeof (GnomeWallClockPrivate));
 }
 
 /* Replace 'target' with 'replacement' in the input string. */
