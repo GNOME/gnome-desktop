@@ -48,6 +48,7 @@ test_utf8_character (const char *utf8_char,
 	/* In the C locale, make sure the time string is formatted with regular
          * colons */
 	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+	g_assert_true (locale != (locale_t)0);
 	save_locale = uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
@@ -60,6 +61,10 @@ test_utf8_character (const char *utf8_char,
 
 	/* In a UTF8 locale, we want ratio characters and no colons. */
 	locale = newlocale (LC_ALL_MASK, "en_US.utf8", locale);
+	if (locale == (locale_t)0) {
+		g_test_skip("en_US.utf8 locale not found, skipping");
+		return;
+	}
 	uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
@@ -73,6 +78,10 @@ test_utf8_character (const char *utf8_char,
 	/* ... and same thing with an RTL locale: should be formatted with
          * ratio characters */
 	locale = newlocale (LC_ALL_MASK, "he_IL.utf8", locale);
+	if (locale == (locale_t)0) {
+		g_test_skip("he_IL.utf8 locale not found, skipping");
+		return;
+	}
 	uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
@@ -112,6 +121,10 @@ test_clock_format_setting (void)
 	const char *str;
 
 	locale = newlocale (LC_ALL_MASK, "en_US.utf8", (locale_t) 0);
+	if (locale == (locale_t)0) {
+		g_test_skip("en_US.utf8 locale not found, skipping");
+		return;
+	}
 	save_locale = uselocale (locale);
 
 	settings = g_settings_new ("org.gnome.desktop.interface");
@@ -192,6 +205,7 @@ test_weekday_setting (void)
 
 	/* Save current locale */
 	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+	g_assert_true (locale != (locale_t)0);
 	save_locale = uselocale (locale);
 	settings = g_settings_new ("org.gnome.desktop.interface");
 
