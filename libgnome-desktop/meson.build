@@ -125,17 +125,19 @@ if get_option('build_gtk4')
     ],
   )
 
-  libgnome_desktop_base_gir = gnome.generate_gir(libgnome_desktop_base,
-    sources: [libgnome_desktop_base_headers, libgnome_desktop_base_sources],
-    export_packages: 'gnome-desktop-4',
-    namespace: 'GnomeDesktop',
-    nsversion: '4.0',
-    includes: ['GObject-2.0', 'Gio-2.0', 'GDesktopEnums-3.0', 'GdkPixbuf-2.0'],
-    extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
-    identifier_prefix: 'Gnome',
-    symbol_prefix: 'gnome',
-    install: true,
-  )
+  if get_option('introspection')
+    libgnome_desktop_base_gir = gnome.generate_gir(libgnome_desktop_base,
+      sources: [libgnome_desktop_base_headers, libgnome_desktop_base_sources],
+      export_packages: 'gnome-desktop-4',
+      namespace: 'GnomeDesktop',
+      nsversion: '4.0',
+      includes: ['GObject-2.0', 'Gio-2.0', 'GDesktopEnums-3.0', 'GdkPixbuf-2.0'],
+      extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+      identifier_prefix: 'Gnome',
+      symbol_prefix: 'gnome',
+      install: true,
+    )
+  endif
 
   pkg.generate(
     libgnome_desktop_base,
@@ -255,17 +257,19 @@ if get_option('legacy_library')
     ],
   )
 
-  gnome.generate_gir(libgnome_desktop,
-    sources: introspection_sources + libgnome_desktop_headers,
-    export_packages: 'gnome-desktop-3.0',
-    namespace: 'GnomeDesktop',
-    nsversion: '3.0',
-    includes: ['GObject-2.0', 'Gtk-3.0', 'GDesktopEnums-3.0'],
-    extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
-    identifier_prefix: 'Gnome',
-    symbol_prefix: 'gnome',
-    install: true
-  )
+  if get_option('introspection')
+    gnome.generate_gir(libgnome_desktop,
+      sources: introspection_sources + libgnome_desktop_headers,
+      export_packages: 'gnome-desktop-3.0',
+      namespace: 'GnomeDesktop',
+      nsversion: '3.0',
+      includes: ['GObject-2.0', 'Gtk-3.0', 'GDesktopEnums-3.0'],
+      extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+      identifier_prefix: 'Gnome',
+      symbol_prefix: 'gnome',
+      install: true
+    )
+  endif
 
   pkg.generate(
     libraries: libgnome_desktop,
