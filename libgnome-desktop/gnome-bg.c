@@ -967,34 +967,12 @@ draw_each_monitor (GnomeBG   *bg,
 	}
 }
 
-void
-gnome_bg_draw (GnomeBG *bg,
-	       GdkPixbuf *dest,
-	       GdkScreen *screen,
-	       gboolean is_root)
-{
-	if (!bg)
-		return;
-
-	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
-		draw_color_each_monitor (bg, dest, screen, 1);
-		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_each_monitor (bg, dest, screen, 1);
-		}
-	} else {
-		draw_color (bg, dest);
-		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_once (bg, dest);
-		}
-	}
-}
-
 static void
 gnome_bg_draw_at_scale (GnomeBG   *bg,
-			GdkPixbuf *dest,
-			gint       scale,
-			GdkScreen *screen,
-			gboolean   is_root)
+                        GdkPixbuf *dest,
+                        gint       scale,
+                        GdkScreen *screen,
+                        gboolean   is_root)
 {
 	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
 		draw_color_each_monitor (bg, dest, screen, scale);
@@ -1007,6 +985,18 @@ gnome_bg_draw_at_scale (GnomeBG   *bg,
 			draw_once (bg, dest);
 		}
 	}
+}
+
+void
+gnome_bg_draw (GnomeBG *bg,
+	       GdkPixbuf *dest,
+	       GdkScreen *screen,
+	       gboolean is_root)
+{
+	if (!bg)
+		return;
+
+	gnome_bg_draw_at_scale (bg, dest, 1, screen, is_root);
 }
 
 gboolean
