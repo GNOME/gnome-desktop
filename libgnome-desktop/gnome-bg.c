@@ -100,8 +100,6 @@ enum {
 	N_SIGNALS
 };
 
-static const cairo_user_data_key_t average_color_key;
-
 static guint signals[N_SIGNALS] = { 0 };
 
 G_DEFINE_TYPE (GnomeBG, gnome_bg, G_TYPE_OBJECT)
@@ -1068,7 +1066,6 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	gint scale;
 	int pm_width, pm_height;
 	cairo_surface_t *surface;
-	GdkRGBA average;
 	cairo_t *cr;
 	
 	g_return_val_if_fail (bg != NULL, NULL);
@@ -1098,7 +1095,6 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	cr = cairo_create (surface);
 	if (!bg->filename && bg->color_type == G_DESKTOP_BACKGROUND_SHADING_SOLID) {
 		gdk_cairo_set_source_rgba (cr, &(bg->primary));
-		average = bg->primary;
 	}
 	else {
 		GdkPixbuf *pixbuf;
@@ -1107,7 +1103,6 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 scale * width, scale * height);
 		gnome_bg_draw_at_scale (bg, pixbuf, scale, gdk_window_get_screen (window), root);
-		pixbuf_average_value (pixbuf, &average);
 
 		pixbuf_surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, 0, window);
 		cairo_set_source_surface (cr, pixbuf_surface, 0, 0);
@@ -1119,10 +1114,6 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	cairo_paint (cr);
 	
 	cairo_destroy (cr);
-
-	cairo_surface_set_user_data (surface, &average_color_key,
-	                             gdk_rgba_copy (&average),
-	                             (cairo_destroy_func_t) gdk_rgba_free);
 
 	return surface;
 }
