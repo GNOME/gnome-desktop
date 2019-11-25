@@ -33,9 +33,6 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 
-#include <X11/Xlib.h>
-#include <gdk/gdkx.h>
-
 #include "gnome-rr-config.h"
 
 #include "gnome-rr-private.h"
