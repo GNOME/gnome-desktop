@@ -76,14 +76,11 @@ const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 
 /* Drawing and thumbnailing */
 void             gnome_bg_draw                  (GnomeBG               *bg,
-						 GdkPixbuf             *dest,
-						 GdkScreen	       *screen,
-                                                 gboolean               is_root);
+						 GdkPixbuf             *dest);
 cairo_surface_t *gnome_bg_create_surface        (GnomeBG               *bg,
 						 GdkWindow             *window,
 						 int                    width,
-						 int                    height,
-						 gboolean               root);
+						 int                    height);
 gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
 						 GnomeDesktopThumbnailFactory *factory,
                                                  int                    best_width,
@@ -106,17 +103,6 @@ GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
 						 int                    dest_width,
 						 int                    dest_height,
 						 int                    frame_num);
-
-/* Set a surface as root - not a GnomeBG method. At some point
- * if we decide to stabilize the API then we may want to make
- * these object methods, drop gnome_bg_create_surface, etc.
- */
-void             gnome_bg_set_surface_as_root   (GdkScreen             *screen,
-						 cairo_surface_t       *surface);
-
-GnomeBGCrossfade *gnome_bg_set_surface_as_root_with_crossfade (GdkScreen *screen,
-                                                              cairo_surface_t *surface);
-cairo_surface_t *gnome_bg_get_surface_from_root (GdkScreen *screen);
 
 G_END_DECLS
 

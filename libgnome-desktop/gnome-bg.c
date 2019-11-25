@@ -730,27 +730,6 @@ draw_color (GnomeBG *bg,
 	draw_color_area (bg, dest, &rect);
 }
 
-static void
-draw_color_each_monitor (GnomeBG *bg,
-			 GdkPixbuf *dest,
-			 GdkScreen *screen,
-			 gint scale)
-{
-	GdkRectangle rect;
-	gint num_monitors;
-	int monitor;
-
-	num_monitors = gdk_screen_get_n_monitors (screen);
-	for (monitor = 0; monitor < num_monitors; monitor++) {
-		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-		rect.x *= scale;
-		rect.y *= scale;
-		rect.width *= scale;
-		rect.height *= scale;
-		draw_color_area (bg, dest, &rect);
-	}
-}
-
 static GdkPixbuf *
 pixbuf_clip_to_fit (GdkPixbuf *src,
 		    int        max_width,
@@ -927,65 +906,14 @@ draw_once (GnomeBG   *bg,
 	}
 }
 
-static void
-draw_each_monitor (GnomeBG   *bg,
-		   GdkPixbuf *dest,
-		   GdkScreen *screen,
-		   gint       scale)
-{
-	GdkRectangle rect;
-	gint num_monitors;
-	int monitor;
-
-	num_monitors = gdk_screen_get_n_monitors (screen);
-	for (monitor = 0; monitor < num_monitors; monitor++) {
-		GdkPixbuf *pixbuf;
-		gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-		rect.x *= scale;
-		rect.y *= scale;
-		rect.width *= scale;
-		rect.height *= scale;
-		pixbuf = get_pixbuf_for_size (bg, monitor, rect.width, rect.height);
-		if (pixbuf) {
-			draw_image_area (bg,
-					 monitor,
-					 pixbuf,
-					 dest, &rect);
-			g_object_unref (pixbuf);
-		}
-	}
-}
-
-static void
-gnome_bg_draw_at_scale (GnomeBG   *bg,
-                        GdkPixbuf *dest,
-                        gint       scale,
-                        GdkScreen *screen,
-                        gboolean   is_root)
-{
-	if (is_root && (bg->placement != G_DESKTOP_BACKGROUND_STYLE_SPANNED)) {
-		draw_color_each_monitor (bg, dest, screen, scale);
-		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_each_monitor (bg, dest, screen, scale);
-		}
-	} else {
-		draw_color (bg, dest);
-		if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-			draw_once (bg, dest);
-		}
-	}
-}
-
 void
-gnome_bg_draw (GnomeBG *bg,
-	       GdkPixbuf *dest,
-	       GdkScreen *screen,
-	       gboolean is_root)
+gnome_bg_draw (GnomeBG   *bg,
+               GdkPixbuf *dest)
 {
-	if (!bg)
-		return;
-
-	gnome_bg_draw_at_scale (bg, dest, 1, screen, is_root);
+	draw_color (bg, dest);
+	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
+		draw_once (bg, dest);
+	}
 }
 
 gboolean
@@ -1047,12 +975,8 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
  * @window: 
  * @width: 
  * @height:
- * @root:
  *
- * Create a surface that can be set as background for @window. If @is_root is
- * TRUE, the surface created will be created by a temporary X server connection
- * so that if someone calls XKillClient on it, it won't affect the application
- * who created it.
+ * Create a surface that can be set as background for @window.
  *
  * Returns: %NULL on error (e.g. out of X connections)
  **/
@@ -1060,8 +984,7 @@ cairo_surface_t *
 gnome_bg_create_surface (GnomeBG	    *bg,
 		 	 GdkWindow   *window,
 			 int	     width,
-			 int	     height,
-			 gboolean     root)
+			 int	     height)
 {
 	gint scale;
 	int pm_width, pm_height;
@@ -1070,9 +993,6 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	
 	g_return_val_if_fail (bg != NULL, NULL);
 	g_return_val_if_fail (window != NULL, NULL);
-
-	if (root)
-		return NULL;
 
 	scale = gdk_window_get_scale_factor (window);
 
@@ -1102,7 +1022,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 		
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 scale * width, scale * height);
-		gnome_bg_draw_at_scale (bg, pixbuf, scale, gdk_window_get_screen (window), root);
+		gnome_bg_draw (bg, pixbuf);
 
 		pixbuf_surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, 0, window);
 		cairo_set_source_surface (cr, pixbuf_surface, 0, 0);
@@ -1267,61 +1187,6 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	}
 	
 	return result;
-}
-
-/**
- * gnome_bg_get_surface_from_root:
- * @screen: a #GdkScreen
- *
- * This function queries the _XROOTPMAP_ID property from
- * the root window associated with @screen to determine
- * the current root window background pixmap and returns
- * a copy of it. If the _XROOTPMAP_ID is not set, then
- * a black surface is returned.
- *
- * Return value: a #cairo_surface_t if successful or %NULL
- **/
-cairo_surface_t *
-gnome_bg_get_surface_from_root (GdkScreen *screen)
-{
-	return NULL;
-}
-
-/**
- * gnome_bg_set_surface_as_root:
- * @screen: the #GdkScreen to change root background on
- * @surface: the #cairo_surface_t to set root background from.
- *   Must be an xlib surface backing a pixmap.
- *
- * Set the root pixmap, and properties pointing to it. We
- * do this atomically with a server grab to make sure that
- * we won't leak the pixmap if somebody else it setting
- * it at the same time. (This assumes that they follow the
- * same conventions we do).  @surface should come from a call
- * to gnome_bg_create_surface().
- **/
-void
-gnome_bg_set_surface_as_root (GdkScreen *screen, cairo_surface_t *surface)
-{
-}
-
-/**
- * gnome_bg_set_surface_as_root_with_crossfade:
- * @screen: the #GdkScreen to change root background on
- * @surface: the cairo xlib surface to set root background from
- *
- * Set the root pixmap, and properties pointing to it.
- * This function differs from gnome_bg_set_surface_as_root()
- * in that it adds a subtle crossfade animation from the
- * current root pixmap to the new one.
- *
- * Return value: (transfer full): a #GnomeBGCrossfade object
- **/
-GnomeBGCrossfade *
-gnome_bg_set_surface_as_root_with_crossfade (GdkScreen       *screen,
-		 			     cairo_surface_t *surface)
-{
-	return NULL;
 }
 
 /* Implementation of the pixbuf cache */
