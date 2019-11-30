@@ -50,6 +50,8 @@ xkb_config_dep = dependency('xkeyboard-config')
 iso_codes_dep = dependency('iso-codes')
 x_dep = dependency('x11')
 
+libsystemd_dep = dependency('libsystemd', required: get_option('systemd'))
+
 udev_dep = dependency('libudev', required: get_option('udev'))
 
 # Check for bubblewrap compatible platform
@@ -85,6 +87,7 @@ conf.set('ENABLE_SECCOMP', seccomp_dep.found())
 conf.set('HAVE_BWRAP', seccomp_dep.found())
 conf.set('_GNU_SOURCE', seccomp_dep.found())
 
+conf.set('HAVE_SYSTEMD', libsystemd_dep.found())
 conf.set('HAVE_UDEV', udev_dep.found())
 
 conf.set('HAVE_TIMERFD', cc.has_function('timerfd_create'))
