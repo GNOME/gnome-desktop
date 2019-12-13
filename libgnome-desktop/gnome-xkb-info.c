@@ -131,10 +131,15 @@ free_option_group (gpointer data)
 static gchar *
 get_xml_rules_file_path (const gchar *suffix)
 {
+  const gchar *base_path;
   gchar *rules_file;
   gchar *xml_rules_file;
 
-  rules_file = g_build_filename (XKB_BASE, "rules", XKB_RULES_FILE, NULL);
+  base_path = g_getenv ("XKB_CONFIG_ROOT");
+  if (!base_path)
+    base_path = XKB_BASE;
+
+  rules_file = g_build_filename (base_path, "rules", XKB_RULES_FILE, NULL);
   xml_rules_file = g_strdup_printf ("%s%s", rules_file, suffix);
   g_free (rules_file);
 
