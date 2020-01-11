@@ -45,7 +45,6 @@ struct _GnomeIdleMonitorPrivate
 	int                  name_watch_id;
 	GHashTable          *watches;
 	GHashTable          *watches_by_upstream_id;
-	GdkDevice           *device;
 	gchar               *path;
 };
 
@@ -61,15 +60,6 @@ typedef struct
 	GDestroyNotify		  notify;
 	guint64                   timeout_msec;
 } GnomeIdleMonitorWatch;
-
-enum
-{
-	PROP_0,
-	PROP_DEVICE,
-	PROP_LAST,
-};
-
-static GParamSpec *obj_props[PROP_LAST];
 
 static void gnome_idle_monitor_initable_iface_init (GInitableIface *iface);
 static void gnome_idle_monitor_remove_watch_internal (GnomeIdleMonitor *monitor,
@@ -170,55 +160,9 @@ gnome_idle_monitor_dispose (GObject *object)
 	g_clear_object (&monitor->priv->om);
 	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
 	g_clear_pointer (&monitor->priv->watches_by_upstream_id, g_hash_table_destroy);
-	g_clear_object (&monitor->priv->device);
 	g_clear_pointer (&monitor->priv->path, g_free);
 
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
-}
-
-static void
-gnome_idle_monitor_get_property (GObject    *object,
-				 guint       prop_id,
-				 GValue     *value,
-				 GParamSpec *pspec)
-{
-	GnomeIdleMonitor *monitor = GNOME_IDLE_MONITOR (object);
-	switch (prop_id)
-	{
-	case PROP_DEVICE:
-		g_value_set_object (value, monitor->priv->device);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break;
-	}
-}
-
-static void
-gnome_idle_monitor_set_property (GObject      *object,
-				 guint         prop_id,
-				 const GValue *value,
-				 GParamSpec   *pspec)
-{
-	GnomeIdleMonitor *monitor = GNOME_IDLE_MONITOR (object);
-	switch (prop_id)
-	{
-	case PROP_DEVICE:
-		monitor->priv->device = g_value_dup_object (value);
-
-		g_free (monitor->priv->path);
-		if (monitor->priv->device) {
-			monitor->priv->path = g_strdup_printf ("/org/gnome/Mutter/IdleMonitor/Device%d",
-							       gdk_x11_device_get_id (monitor->priv->device));
-		} else {
-			monitor->priv->path = g_strdup ("/org/gnome/Mutter/IdleMonitor/Core");
-		}
-
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break;
-	}
 }
 
 static void
@@ -378,21 +322,6 @@ gnome_idle_monitor_class_init (GnomeIdleMonitorClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gnome_idle_monitor_dispose;
-	object_class->get_property = gnome_idle_monitor_get_property;
-	object_class->set_property = gnome_idle_monitor_set_property;
-
-	/**
-	 * GnomeIdleMonitor:device:
-	 *
-	 * The device to listen to idletime on.
-	 */
-	obj_props[PROP_DEVICE] =
-		g_param_spec_object ("device",
-				     "Device",
-				     "The device to listen to idletime on",
-				     GDK_TYPE_DEVICE,
-				     G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-	g_object_class_install_property (object_class, PROP_DEVICE, obj_props[PROP_DEVICE]);
 }
 
 static void
@@ -413,40 +342,12 @@ gnome_idle_monitor_init (GnomeIdleMonitor *monitor)
  * gnome_idle_monitor_new:
  *
  * Returns: a new #GnomeIdleMonitor that tracks the server-global
- * idletime for all devices. To track device-specific idletime,
- * use gnome_idle_monitor_new_for_device().
+ * idletime for all devices.
  */
 GnomeIdleMonitor *
 gnome_idle_monitor_new (void)
 {
 	return GNOME_IDLE_MONITOR (g_initable_new (GNOME_TYPE_IDLE_MONITOR, NULL, NULL, NULL));
-}
-
-/**
- * gnome_idle_monitor_new_for_device:
- * @device: A #GdkDevice to get the idle time for.
- * @error: A pointer to a #GError or %NULL.
- *
- * Returns: a new #GnomeIdleMonitor that tracks the device-specific
- * idletime for @device. If device-specific idletime is not available,
- * %NULL is returned, and @error is set. To track server-global
- * idletime for all devices, use gnome_idle_monitor_new(). This function
- * only works under X11, not under Wayland and will return an error.
- */
-GnomeIdleMonitor *
-gnome_idle_monitor_new_for_device (GdkDevice  *device,
-				   GError    **error)
-{
-#if defined(GDK_WINDOWING_WAYLAND)
-	if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ())) {
-		g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-				     "Per-device idle monitors not supported under Wayland");
-		return NULL;
-	}
-#endif
-
-	return GNOME_IDLE_MONITOR (g_initable_new (GNOME_TYPE_IDLE_MONITOR, NULL, error,
-						   "device", device, NULL));
 }
 
 static GnomeIdleMonitorWatch *
