@@ -45,7 +45,6 @@ struct _GnomeIdleMonitorPrivate
 	int                  name_watch_id;
 	GHashTable          *watches;
 	GHashTable          *watches_by_upstream_id;
-	gchar               *path;
 };
 
 typedef struct
@@ -72,6 +71,8 @@ G_DEFINE_TYPE_WITH_CODE (GnomeIdleMonitor, gnome_idle_monitor, G_TYPE_OBJECT,
 			 G_ADD_PRIVATE (GnomeIdleMonitor)
 			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
 						gnome_idle_monitor_initable_iface_init))
+
+#define IDLE_MONITOR_PATH "/org/gnome/Mutter/IdleMonitor/Core"
 
 static void
 on_watch_fired (MetaDBusIdleMonitor *proxy,
@@ -160,7 +161,6 @@ gnome_idle_monitor_dispose (GObject *object)
 	g_clear_object (&monitor->priv->om);
 	g_clear_pointer (&monitor->priv->watches, g_hash_table_destroy);
 	g_clear_pointer (&monitor->priv->watches_by_upstream_id, g_hash_table_destroy);
-	g_clear_pointer (&monitor->priv->path, g_free);
 
 	G_OBJECT_CLASS (gnome_idle_monitor_parent_class)->dispose (object);
 }
@@ -204,7 +204,7 @@ on_object_added (GDBusObjectManager	*manager,
 {
 	GnomeIdleMonitor *monitor = user_data;
 
-	if (!g_str_equal (monitor->priv->path, g_dbus_object_get_object_path (object)))
+	if (!g_str_equal (IDLE_MONITOR_PATH, g_dbus_object_get_object_path (object)))
 		return;
 
 	connect_proxy (object, monitor);
@@ -218,7 +218,7 @@ get_proxy (GnomeIdleMonitor *monitor)
 	GDBusObject *object;
 
 	object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (monitor->priv->om),
-						   monitor->priv->path);
+						   IDLE_MONITOR_PATH);
 	if (object) {
 		connect_proxy (object, monitor);
 		g_object_unref (object);
