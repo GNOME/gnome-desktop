@@ -85,6 +85,7 @@ struct GnomeRROutput
     gboolean            is_presentation;
     gboolean            is_underscanning;
     gboolean            supports_underscanning;
+    gboolean            supports_color_transform;
 
     GnomeRRTile         tile_info;
 };
@@ -1409,6 +1410,7 @@ output_initialize (GnomeRROutput *output, GVariant *info)
     g_variant_lookup (properties, "presentation", "b", &output->is_presentation);
     g_variant_lookup (properties, "underscanning", "b", &output->is_underscanning);
     g_variant_lookup (properties, "supports-underscanning", "b", &output->supports_underscanning);
+    g_variant_lookup (properties, "supports-color-transform", "b", &output->supports_color_transform);
 
     if ((edid = g_variant_lookup_value (properties, "edid", G_VARIANT_TYPE ("ay"))))
       {
@@ -1627,6 +1629,28 @@ gnome_rr_output_set_backlight (GnomeRROutput *output, gint value, GError **error
 								output->id, value,
 								&output->backlight,
 								NULL, error);
+}
+
+gboolean
+gnome_rr_output_set_color_transform (GnomeRROutput *output, GnomeRRCTM ctm,
+                                     GError **error)
+{
+    GVariant *ctm_var;
+    GVariant *values[9];
+    int i;
+
+    g_return_val_if_fail (output != NULL, FALSE);
+
+    for (i = 0; i < 9; i++)
+        values[i] = g_variant_new_uint64 (ctm.matrix[i]);
+
+    ctm_var = g_variant_new_tuple (values, 9);
+
+    return meta_dbus_display_config_call_set_output_ctm_sync (output->info->screen->priv->proxy,
+                                                              output->info->serial,
+                                                              output->id,
+                                                              ctm_var,
+                                                              NULL, error);
 }
 
 /**
@@ -2242,6 +2266,13 @@ gnome_rr_output_supports_underscanning (GnomeRROutput *output)
 {
     g_assert (output != NULL);
     return output->supports_underscanning;
+}
+
+gboolean
+gnome_rr_output_supports_color_transform (const GnomeRROutput *output)
+{
+    g_assert (output != NULL);
+    return output->supports_color_transform;
 }
 
 const char *

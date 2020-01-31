@@ -69,6 +69,15 @@ typedef enum {
 	GNOME_RR_DPMS_UNKNOWN
 } GnomeRRDpmsMode;
 
+/* Identical to drm_color_ctm from <drm_mode.h> */
+typedef struct {
+    /*
+     * Conversion matrix in S31.32 sign-magnitude (not two's complement!)
+     * format.
+     */
+    uint64_t matrix[9];
+} GnomeRRCTM;
+
 /* Error codes */
 
 #define GNOME_RR_ERROR (gnome_rr_error_quark ())
@@ -159,6 +168,9 @@ gint            gnome_rr_output_get_min_backlight_step(GnomeRROutput      *outpu
 gboolean        gnome_rr_output_set_backlight      (GnomeRROutput         *output,
                                                     gint                   value,
                                                     GError                **error);
+gboolean        gnome_rr_output_set_color_transform(GnomeRROutput         *output,
+                                                    GnomeRRCTM             value,
+                                                    GError                **error);
 
 GnomeRRCrtc **  gnome_rr_output_get_possible_crtcs (GnomeRROutput         *output);
 GnomeRRMode *   gnome_rr_output_get_current_mode   (GnomeRROutput         *output);
@@ -176,6 +188,7 @@ gboolean        gnome_rr_output_supports_mode      (GnomeRROutput         *outpu
 gboolean        gnome_rr_output_get_is_primary     (GnomeRROutput         *output);
 gboolean        gnome_rr_output_get_is_underscanning (GnomeRROutput       *output);
 gboolean        gnome_rr_output_supports_underscanning (GnomeRROutput       *output);
+gboolean        gnome_rr_output_supports_color_transform (const GnomeRROutput *output);
 
 /* GnomeRRMode */
 guint32         gnome_rr_mode_get_id               (GnomeRRMode           *mode);

@@ -101,6 +101,11 @@
 			                     or not
 			    - "presentation" (b): whether this output is
 			                          for presentation only
+			    - "supports-color-transform" (b): (readonly) whether
+			                                      this output
+			                                      supports the CTM
+			                                      (color transform
+			                                      matrix) property
 			    Note: properties might be ignored if not consistenly
 			    applied to all outputs in the same clone group. In
 			    general, it's expected that presentation or primary
@@ -290,5 +295,19 @@
 	The client should then call GetResources() to read the new layout.
     -->
     <signal name="MonitorsChanged" />
+
+    <!--
+        SetOutputCTM:
+        @serial: configuration serial
+        @output: API id of the output
+        @ctm: 3x3 matrix in fixed-point sign-magnitude S31.32
+
+        Changes the color transform matrix of @output
+    -->
+    <method name="SetOutputCTM">
+      <arg name="serial" direction="in" type="u" />
+      <arg name="output" direction="in" type="u" />
+      <arg name="ctm" direction="in" type="(ttttttttt)" />
+    </method>
   </interface>
 </node>
