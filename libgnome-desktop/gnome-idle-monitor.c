@@ -25,7 +25,6 @@
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
-#include <gdk/gdkx.h>
 #include <gdk/gdk.h>
 #if defined(GDK_WINDOWING_WAYLAND)
 #include <gdk/gdkwayland.h>
