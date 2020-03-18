@@ -48,7 +48,6 @@ schemas_dep = dependency('gsettings-desktop-schemas', version: schemas_req)
 fontconfig_dep = dependency('fontconfig')
 xkb_config_dep = dependency('xkeyboard-config')
 iso_codes_dep = dependency('iso-codes')
-x_dep = dependency('x11')
 
 libsystemd_dep = dependency('libsystemd', required: get_option('systemd'))
 
