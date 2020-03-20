@@ -248,9 +248,19 @@ date_time_format (GDateTime *datetime,
 
 	if (is_utf8) {
 		char *tmp;
+		g_autofree char *replacement = NULL;
+
+		/* Translators: In some languages, the width of the ratio character
+		 * being ambiguous can cause problems, and the plain colon should be
+		 * used instead of ratio.
+		 * Translate this only if that's the case for your language. */
+		replacement = g_strconcat ("\xE2\x80\x8E",
+					   C_("time separator", "∶"),
+					   NULL);
+
 		/* Then, after formatting, replace the plain colon with ratio,
 		 * and prepend it with an LTR marker to force direction. */
-		tmp = string_replace (replaced_format, ":", "\xE2\x80\x8E∶");
+		tmp = string_replace (replaced_format, ":", replacement);
 
 		/* Finally, replace double spaces with a single en-space.*/
 		ret = string_replace (tmp, "_", " ");
