@@ -50,7 +50,9 @@ if get_option('installed_tests')
     'en_US.utf-8.ref.ui',
     'en_US.utf-8.ui',
     'he_IL.utf8.ref.ui',
-    'he_IL.utf8.ui'
+    'he_IL.utf8.ui',
+    'ja_JP.utf8.ref.ui',
+    'ja_JP.utf8.ui'
   )
   install_data(test_data + test_metas, install_dir: test_metadir)
 endif
