@@ -11,9 +11,6 @@ libargs = [
 
 introspection_sources = [
   'gnome-desktop-thumbnail.c',
-  'gnome-bg.c',
-  'gnome-bg-slide-show.c',
-  'gnome-bg-crossfade.c',
   'gnome-rr.c',
   'gnome-rr-config.c',
   'gnome-rr-output-info.c',
@@ -52,9 +49,6 @@ libgnome_desktop_sources = [
 ]
 
 libgnome_desktop_headers = [
-  'gnome-bg.h',
-  'gnome-bg-crossfade.h',
-  'gnome-bg-slide-show.h',
   'gnome-desktop-thumbnail.h',
   'gnome-rr.h',
   'gnome-rr-config.h',
