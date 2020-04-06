@@ -448,7 +448,8 @@ test_ui_file (GFile         *file,
   loc = newlocale (LC_ALL_MASK, locale, (locale_t) 0);
   if (loc == (locale_t)0)
     {
-      g_test_skip("locale not found, skipping");
+      g_test_message ("locale '%s' not found", locale);
+      g_test_fail();
       return;
     }
   previous_locale = uselocale (loc);

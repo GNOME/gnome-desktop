@@ -62,7 +62,8 @@ test_utf8_character (const char *utf8_char,
 	/* In a UTF8 locale, we want ratio characters and no colons. */
 	locale = newlocale (LC_ALL_MASK, "en_US.utf8", locale);
 	if (locale == (locale_t)0) {
-		g_test_skip("en_US.utf8 locale not found, skipping");
+		g_test_message ("en_US.utf8 locale not found");
+		g_test_fail ();
 		return;
 	}
 	uselocale (locale);
@@ -79,7 +80,8 @@ test_utf8_character (const char *utf8_char,
          * ratio characters */
 	locale = newlocale (LC_ALL_MASK, "he_IL.utf8", locale);
 	if (locale == (locale_t)0) {
-		g_test_skip("he_IL.utf8 locale not found, skipping");
+		g_test_message ("he_IL.utf8 locale not found");
+		g_test_fail ();
 		return;
 	}
 	uselocale (locale);
@@ -122,7 +124,8 @@ test_clock_format_setting (void)
 
 	locale = newlocale (LC_ALL_MASK, "en_US.utf8", (locale_t) 0);
 	if (locale == (locale_t)0) {
-		g_test_skip("en_US.utf8 locale not found, skipping");
+		g_test_message ("en_US.utf8 locale not found");
+		g_test_fail ();
 		return;
 	}
 	save_locale = uselocale (locale);
