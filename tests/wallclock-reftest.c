@@ -586,6 +586,9 @@ main (int argc, char **argv)
   unsetenv("LC_ALL");
   unsetenv("LC_TIME");
 
+  /* gdk_cairo_set_source_window() doesn't work with anything but X11 */
+  gdk_set_allowed_backends ("x11");
+
   /* I don't want to fight fuzzy scaling algorithms in GPUs,
    * so unless you explicitly set it to something else, we
    * will use Cairo's image surface.
