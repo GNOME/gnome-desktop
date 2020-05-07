@@ -762,7 +762,7 @@ get_translated_territory (const char *code,
         if (territory != NULL) {
                 const char *translated_territory;
                 locale_t loc;
-                locale_t old_locale;
+                locale_t old_locale = 0;
                 g_autofree char *tmp = NULL;
 
                 if (locale != NULL) {
