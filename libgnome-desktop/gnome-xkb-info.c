@@ -21,6 +21,8 @@
 
 #include <config.h>
 
+#include <xkbcommon/xkbregistry.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -73,15 +75,6 @@ struct _GnomeXkbInfoPrivate
   GHashTable *layouts_by_country;
   GHashTable *layouts_by_language;
   GHashTable *layouts_table;
-
-  /* Only used while parsing */
-  XkbOptionGroup *current_parser_group;
-  XkbOption *current_parser_option;
-  Layout *current_parser_layout;
-  Layout *current_parser_variant;
-  gchar  *current_parser_iso639Id;
-  gchar  *current_parser_iso3166Id;
-  gchar **current_parser_text;
 };
 
 G_DEFINE_TYPE_WITH_CODE (GnomeXkbInfo, gnome_xkb_info, G_TYPE_OBJECT,
@@ -126,164 +119,6 @@ free_option_group (gpointer data)
   g_free (group->description);
   g_hash_table_destroy (group->options_table);
   g_slice_free (XkbOptionGroup, group);
-}
-
-static gchar *
-get_xml_rules_file_path (const gchar *suffix)
-{
-  const gchar *base_path;
-  gchar *rules_file;
-  gchar *xml_rules_file;
-
-  base_path = g_getenv ("XKB_CONFIG_ROOT");
-  if (!base_path)
-    base_path = XKB_BASE;
-
-  rules_file = g_build_filename (base_path, "rules", XKB_RULES_FILE, NULL);
-  xml_rules_file = g_strdup_printf ("%s%s", rules_file, suffix);
-  g_free (rules_file);
-
-  return xml_rules_file;
-}
-
-static void
-parse_start_element (GMarkupParseContext  *context,
-                     const gchar          *element_name,
-                     const gchar         **attribute_names,
-                     const gchar         **attribute_values,
-                     gpointer              data,
-                     GError              **error)
-{
-  GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (data)->priv;
-
-  if (priv->current_parser_text)
-    {
-      g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                   "Expected character data but got element '%s'", element_name);
-      return;
-    }
-
-  if (strcmp (element_name, "name") == 0)
-    {
-      if (priv->current_parser_variant)
-        priv->current_parser_text = &priv->current_parser_variant->xkb_name;
-      else if (priv->current_parser_layout)
-        priv->current_parser_text = &priv->current_parser_layout->xkb_name;
-      else if (priv->current_parser_option)
-        priv->current_parser_text = &priv->current_parser_option->id;
-      else if (priv->current_parser_group)
-        priv->current_parser_text = &priv->current_parser_group->id;
-    }
-  else if (strcmp (element_name, "description") == 0)
-    {
-      if (priv->current_parser_variant)
-        priv->current_parser_text = &priv->current_parser_variant->description;
-      else if (priv->current_parser_layout)
-        priv->current_parser_text = &priv->current_parser_layout->description;
-      else if (priv->current_parser_option)
-        priv->current_parser_text = &priv->current_parser_option->description;
-      else if (priv->current_parser_group)
-        priv->current_parser_text = &priv->current_parser_group->description;
-    }
-  else if (strcmp (element_name, "shortDescription") == 0)
-    {
-      if (priv->current_parser_variant)
-        priv->current_parser_text = &priv->current_parser_variant->short_desc;
-      else if (priv->current_parser_layout)
-        priv->current_parser_text = &priv->current_parser_layout->short_desc;
-    }
-  else if (strcmp (element_name, "iso639Id") == 0)
-    {
-      priv->current_parser_text = &priv->current_parser_iso639Id;
-    }
-  else if (strcmp (element_name, "iso3166Id") == 0)
-    {
-      priv->current_parser_text = &priv->current_parser_iso3166Id;
-    }
-  else if (strcmp (element_name, "layout") == 0)
-    {
-      if (priv->current_parser_layout)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'layout' elements can't be nested");
-          return;
-        }
-
-      priv->current_parser_layout = g_slice_new0 (Layout);
-    }
-  else if (strcmp (element_name, "variant") == 0)
-    {
-      Layout *layout;
-
-      if (priv->current_parser_variant)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'variant' elements can't be nested");
-          return;
-        }
-
-      if (!priv->current_parser_layout)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'variant' elements must be inside 'layout' elements");
-          return;
-        }
-
-      if (!priv->current_parser_layout->xkb_name)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'variant' elements must be inside named 'layout' elements");
-          return;
-        }
-
-      layout = g_hash_table_lookup (priv->layouts_table, priv->current_parser_layout->xkb_name);
-      if (!layout)
-        layout = priv->current_parser_layout;
-
-      priv->current_parser_variant = g_slice_new0 (Layout);
-      priv->current_parser_variant->is_variant = TRUE;
-      priv->current_parser_variant->main_layout = layout;
-    }
-  else if (strcmp (element_name, "group") == 0)
-    {
-      if (priv->current_parser_group)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'group' elements can't be nested");
-          return;
-        }
-
-      priv->current_parser_group = g_slice_new0 (XkbOptionGroup);
-      /* Maps option ids to XkbOption structs. Owns the XkbOption structs. */
-      priv->current_parser_group->options_table = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                                         NULL, free_option);
-      g_markup_collect_attributes (element_name,
-                                   attribute_names,
-                                   attribute_values,
-                                   error,
-                                   G_MARKUP_COLLECT_BOOLEAN | G_MARKUP_COLLECT_OPTIONAL,
-                                   "allowMultipleSelection",
-                                   &priv->current_parser_group->allow_multiple_selection,
-                                   G_MARKUP_COLLECT_INVALID);
-    }
-  else if (strcmp (element_name, "option") == 0)
-    {
-      if (priv->current_parser_option)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'option' elements can't be nested");
-          return;
-        }
-
-      if (!priv->current_parser_group)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'option' elements must be inside 'group' elements");
-          return;
-        }
-
-      priv->current_parser_option = g_slice_new0 (XkbOption);
-    }
 }
 
 static void
@@ -350,205 +185,136 @@ add_layout_to_locale_tables (Layout     *layout,
     }
 }
 
-static void
-add_iso639 (Layout *layout,
-            gchar  *id)
-{
-  layout->iso639Ids = g_slist_prepend (layout->iso639Ids, id);
-}
-
-static void
-add_iso3166 (Layout *layout,
-             gchar  *id)
-{
-  layout->iso3166Ids = g_slist_prepend (layout->iso3166Ids, id);
-}
-
-static void
-parse_end_element (GMarkupParseContext  *context,
-                   const gchar          *element_name,
-                   gpointer              data,
-                   GError              **error)
-{
-  GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (data)->priv;
-
-  if (strcmp (element_name, "layout") == 0)
-    {
-      if (!priv->current_parser_layout->description || !priv->current_parser_layout->xkb_name)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'layout' elements must enclose 'description' and 'name' elements");
-          return;
-        }
-
-      priv->current_parser_layout->id = g_strdup (priv->current_parser_layout->xkb_name);
-
-      if (g_hash_table_contains (priv->layouts_table, priv->current_parser_layout->id))
-        {
-          g_clear_pointer (&priv->current_parser_layout, free_layout);
-          return;
-        }
-
-      g_hash_table_replace (priv->layouts_table,
-                            priv->current_parser_layout->id,
-                            priv->current_parser_layout);
-      add_layout_to_locale_tables (priv->current_parser_layout,
-                                   priv->layouts_by_language,
-                                   priv->layouts_by_country);
-      priv->current_parser_layout = NULL;
-    }
-  else if (strcmp (element_name, "variant") == 0)
-    {
-      if (!priv->current_parser_variant->description || !priv->current_parser_variant->xkb_name)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'variant' elements must enclose 'description' and 'name' elements");
-          return;
-        }
-
-      priv->current_parser_variant->id = g_strjoin ("+",
-                                                    priv->current_parser_layout->xkb_name,
-                                                    priv->current_parser_variant->xkb_name,
-                                                    NULL);
-
-      if (g_hash_table_contains (priv->layouts_table, priv->current_parser_variant->id))
-        {
-          g_clear_pointer (&priv->current_parser_variant, free_layout);
-          return;
-        }
-
-      g_hash_table_replace (priv->layouts_table,
-                            priv->current_parser_variant->id,
-                            priv->current_parser_variant);
-      add_layout_to_locale_tables (priv->current_parser_variant,
-                                   priv->layouts_by_language,
-                                   priv->layouts_by_country);
-      priv->current_parser_variant = NULL;
-    }
-  else if (strcmp (element_name, "iso639Id") == 0)
-    {
-      if (!priv->current_parser_iso639Id)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'iso639Id' elements must enclose text");
-          return;
-        }
-
-      if (priv->current_parser_variant)
-        add_iso639 (priv->current_parser_variant, priv->current_parser_iso639Id);
-      else if (priv->current_parser_layout)
-        add_iso639 (priv->current_parser_layout, priv->current_parser_iso639Id);
-
-      priv->current_parser_iso639Id = NULL;
-    }
-  else if (strcmp (element_name, "iso3166Id") == 0)
-    {
-      if (!priv->current_parser_iso3166Id)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'iso3166Id' elements must enclose text");
-          return;
-        }
-
-      if (priv->current_parser_variant)
-        add_iso3166 (priv->current_parser_variant, priv->current_parser_iso3166Id);
-      else if (priv->current_parser_layout)
-        add_iso3166 (priv->current_parser_layout, priv->current_parser_iso3166Id);
-
-      priv->current_parser_iso3166Id = NULL;
-    }
-  else if (strcmp (element_name, "group") == 0)
-    {
-      if (!priv->current_parser_group->description || !priv->current_parser_group->id)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'group' elements must enclose 'description' and 'name' elements");
-          return;
-        }
-
-      g_hash_table_replace (priv->option_groups_table,
-                            priv->current_parser_group->id,
-                            priv->current_parser_group);
-      priv->current_parser_group = NULL;
-    }
-  else if (strcmp (element_name, "option") == 0)
-    {
-      if (!priv->current_parser_option->description || !priv->current_parser_option->id)
-        {
-          g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       "'option' elements must enclose 'description' and 'name' elements");
-          return;
-        }
-
-      g_hash_table_replace (priv->current_parser_group->options_table,
-                            priv->current_parser_option->id,
-                            priv->current_parser_option);
-      priv->current_parser_option = NULL;
-    }
-}
-
-static void
-parse_text (GMarkupParseContext  *context,
-            const gchar          *text,
-            gsize                 text_len,
-            gpointer              data,
-            GError              **error)
-{
-  GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (data)->priv;
-
-  if (priv->current_parser_text)
-    {
-      *priv->current_parser_text = g_strndup (text, text_len);
-      priv->current_parser_text = NULL;
-    }
-}
-
-static void
-parse_error (GMarkupParseContext *context,
-             GError              *error,
-             gpointer             data)
-{
-  GnomeXkbInfoPrivate *priv = GNOME_XKB_INFO (data)->priv;
-
-  free_option_group (priv->current_parser_group);
-  free_option (priv->current_parser_option);
-  free_layout (priv->current_parser_layout);
-  free_layout (priv->current_parser_variant);
-  g_free (priv->current_parser_iso639Id);
-  g_free (priv->current_parser_iso3166Id);
-}
-
-static const GMarkupParser markup_parser = {
-  parse_start_element,
-  parse_end_element,
-  parse_text,
-  NULL,
-  parse_error
+enum layout_subsets {
+    ONLY_MAIN_LAYOUTS,
+    ONLY_VARIANTS,
 };
 
 static void
-parse_rules_file (GnomeXkbInfo  *self,
-                  const gchar   *path,
-                  GError       **error)
+add_layouts (GnomeXkbInfo  *self, struct rxkb_context *ctx,
+	     enum layout_subsets which)
 {
-  gchar *buffer;
-  gsize length;
-  GMarkupParseContext *context;
-  GError *sub_error = NULL;
+  GnomeXkbInfoPrivate *priv = self->priv;
+  struct rxkb_layout *layout;
 
-  g_file_get_contents (path, &buffer, &length, &sub_error);
-  if (sub_error)
+  for (layout = rxkb_layout_first (ctx);
+       layout;
+       layout = rxkb_layout_next (layout))
     {
-      g_propagate_error (error, sub_error);
-      return;
+      struct rxkb_iso639_code *iso639;
+      struct rxkb_iso3166_code *iso3166;
+      const char *name, *variant;
+      Layout *l;
+
+      name = rxkb_layout_get_name (layout);
+      variant = rxkb_layout_get_variant (layout);
+
+      if ((which == ONLY_VARIANTS && variant == NULL) ||
+          (which == ONLY_MAIN_LAYOUTS && variant != NULL))
+          continue;
+
+      l = g_slice_new0 (Layout);
+      if (variant)
+        {
+          /* This relies on the main layouts being added first */
+          l->main_layout = g_hash_table_lookup (priv->layouts_table, name);
+          if (l->main_layout == NULL)
+           {
+               /* This is a bug in libxkbregistry */
+               g_warning ("Ignoring variant '%s(%s)' without a main layout",
+                          name, variant);
+               g_free (l);
+               continue;
+           }
+
+          l->xkb_name = g_strdup (variant);
+          l->is_variant = TRUE;
+          l->id = g_strjoin ("+", name, variant, NULL);
+        }
+      else
+        {
+          l->xkb_name = g_strdup (name);
+          l->id = g_strdup (name);
+        }
+      l->description = g_strdup (rxkb_layout_get_description (layout));
+      l->short_desc = g_strdup (rxkb_layout_get_brief (layout));
+      for (iso639 = rxkb_layout_get_iso639_first (layout);
+           iso639;
+           iso639 = rxkb_iso639_code_next (iso639))
+        {
+          char *id = g_strdup (rxkb_iso639_code_get_code (iso639));
+          l->iso3166Ids = g_slist_prepend (l->iso3166Ids, id);
+        }
+      for (iso3166 = rxkb_layout_get_iso3166_first (layout);
+           iso3166;
+           iso3166 = rxkb_iso3166_code_next (iso3166))
+        {
+          char *id = g_strdup (rxkb_iso3166_code_get_code (iso3166));
+          l->iso3166Ids = g_slist_prepend (l->iso3166Ids, id);
+        }
+
+      g_hash_table_replace (priv->layouts_table, l->id, l);
+      add_layout_to_locale_tables (l,
+                                   priv->layouts_by_language,
+                                   priv->layouts_by_country);
+
+   }
+}
+static bool
+parse_rules_file (GnomeXkbInfo  *self, const char *ruleset,
+                  bool include_extras)
+{
+  GnomeXkbInfoPrivate *priv = self->priv;
+  struct rxkb_context *ctx;
+  struct rxkb_option_group *group;
+  enum rxkb_context_flags flags = RXKB_CONTEXT_NO_FLAGS;
+
+  if (include_extras)
+      flags |= RXKB_CONTEXT_LOAD_EXOTIC_RULES;
+
+  ctx = rxkb_context_new (flags);
+  if (!rxkb_context_parse (ctx, ruleset)) {
+      rxkb_context_unref (ctx);
+      return FALSE;
+  }
+
+  /* libxkbregistry doesn't guarantee a sorting order of the layouts but we
+   * want to reference the main layout from the variants. So populate with
+   * the main layouts first, then add the variants */
+  add_layouts (self, ctx, ONLY_MAIN_LAYOUTS);
+  add_layouts (self, ctx, ONLY_VARIANTS);
+
+  for (group = rxkb_option_group_first (ctx);
+       group;
+       group = rxkb_option_group_next (group))
+    {
+        XkbOptionGroup *g;
+        struct rxkb_option *option;
+
+        g = g_slice_new (XkbOptionGroup);
+        g->id = g_strdup (rxkb_option_group_get_name (group));
+        g->description = g_strdup (rxkb_option_group_get_description (group));
+        g->options_table = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                  NULL, free_option);
+        g->allow_multiple_selection = rxkb_option_group_allows_multiple (group);
+        g_hash_table_replace (priv->option_groups_table, g->id, g);
+
+        for (option = rxkb_option_first (group);
+             option;
+             option = rxkb_option_next (option))
+          {
+            XkbOption *o;
+
+            o = g_slice_new (XkbOption);
+            o->id = g_strdup (rxkb_option_get_name (option));
+            o->description = g_strdup(rxkb_option_get_description (option));
+            g_hash_table_replace (g->options_table, o->id, o);
+          }
     }
 
-  context = g_markup_parse_context_new (&markup_parser, 0, self, NULL);
-  g_markup_parse_context_parse (context, buffer, length, &sub_error);
-  g_markup_parse_context_free (context);
-  g_free (buffer);
-  if (sub_error)
-    g_propagate_error (error, sub_error);
+  rxkb_context_unref (ctx);
+
+  return TRUE;
 }
 
 static void
@@ -557,8 +323,6 @@ parse_rules (GnomeXkbInfo *self)
   GnomeXkbInfoPrivate *priv = self->priv;
   GSettings *settings;
   gboolean show_all_sources;
-  gchar *file_path;
-  GError *error = NULL;
 
   /* Make sure the translated strings we get from XKEYBOARD_CONFIG() are
    * in UTF-8 and not in the current locale */
@@ -581,35 +345,18 @@ parse_rules (GnomeXkbInfo *self)
   /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
-  file_path = get_xml_rules_file_path (".xml");
-  parse_rules_file (self, file_path, &error);
-  if (error)
-    goto cleanup;
-  g_free (file_path);
-
   settings = g_settings_new ("org.gnome.desktop.input-sources");
   show_all_sources = g_settings_get_boolean (settings, "show-all-sources");
   g_object_unref (settings);
 
-  if (!show_all_sources)
-    return;
-
-  file_path = get_xml_rules_file_path (".extras.xml");
-  parse_rules_file (self, file_path, &error);
-  if (error)
-    goto cleanup;
-  g_free (file_path);
-
-  return;
-
- cleanup:
-  g_warning ("Failed to load XKB rules file %s: %s", file_path, error->message);
-  g_clear_pointer (&error, g_error_free);
-  g_clear_pointer (&file_path, g_free);
-  g_clear_pointer (&priv->option_groups_table, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_country, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_language, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_table, g_hash_table_destroy);
+  if (!parse_rules_file (self, XKB_RULES_FILE, show_all_sources))
+    {
+      g_warning ("Failed to load '%s' XKB layouts", XKB_RULES_FILE);
+      g_clear_pointer (&priv->option_groups_table, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_by_country, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_by_language, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_table, g_hash_table_destroy);
+    }
 }
 
 static gboolean
