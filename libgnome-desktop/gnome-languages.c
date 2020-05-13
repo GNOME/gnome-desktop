@@ -1021,6 +1021,9 @@ languages_init (void)
         if (gnome_languages_map)
                 return;
 
+        bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
         gnome_languages_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         languages_variant_init ("iso_639");
