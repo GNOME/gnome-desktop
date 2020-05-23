@@ -141,21 +141,6 @@ add_env (GPtrArray  *array,
               NULL);
 }
 
-static char *
-get_extension (const char *path)
-{
-  g_autofree char *basename = NULL;
-  char *p;
-
-  basename = g_path_get_basename (path);
-  p = strrchr (basename, '.');
-  if (g_file_test (path, G_FILE_TEST_IS_DIR) ||
-      !p ||
-      p == basename) /* Leading periods on the basename are ignored. */
-    return NULL;
-  return g_strdup (p + 1);
-}
-
 #ifdef ENABLE_SECCOMP
 static gboolean
 flatpak_fail (GError     **error,
@@ -784,8 +769,8 @@ script_exec_new (const char  *uri,
   if (exec->sandbox)
     {
       char *tmpl;
-      g_autofree char *ext = NULL;
-      g_autofree char *infile = NULL;
+      const char *infile;
+      g_autofree char *basename = NULL;
 
       exec->fd_array = g_array_new (FALSE, TRUE, sizeof (int));
       g_array_set_clear_func (exec->fd_array, clear_fd);
@@ -799,12 +784,12 @@ script_exec_new (const char  *uri,
           goto bail;
         }
       exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
-      ext = get_extension (exec->infile);
+      basename = g_file_get_basename (file);
 
-      if (ext)
-        infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail.%s", ext);
+      if (basename)
+        infile = basename;
       else
-        infile = g_strdup_printf ("gnome-desktop-file-to-thumbnail");
+        infile = "gnome-desktop-file-to-thumbnail";
 
       exec->infile_tmp = g_build_filename (exec->outdir, infile, NULL);
 
