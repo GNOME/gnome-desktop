@@ -37,10 +37,9 @@ foreach program: test_programs
     )
   endif
 
-  test(program,
-    exe,
-    env: test_env
-  )
+  # Don't run these tests at build-time with test(): currently both tests
+  # rely on our locales having been installed, and at build-time that
+  # hasn't happened yet.
 endforeach
 
 if get_option('installed_tests')
