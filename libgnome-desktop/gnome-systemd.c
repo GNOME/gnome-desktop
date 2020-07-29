@@ -95,6 +95,12 @@ start_systemd_scope (GDBusConnection *connection, GTask *task)
                          "(sv)",
                          "PIDs",
                           g_variant_new_fixed_array (G_VARIANT_TYPE_UINT32, &task_data->pid, 1, 4));
+
+  /* Default to let systemd garbage collect failed applications we launched. */
+  g_variant_builder_add (&builder,
+                         "(sv)",
+                         "CollectMode",
+                          g_variant_new_string ("inactive-or-failed"));
   g_variant_builder_close (&builder);
 
   g_variant_builder_open (&builder, G_VARIANT_TYPE ("a(sa(sv))"));
