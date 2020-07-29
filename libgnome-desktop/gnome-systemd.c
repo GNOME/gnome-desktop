@@ -78,7 +78,7 @@ start_systemd_scope (GDBusConnection *connection, GTask *task)
   g_assert (task_data != NULL);
 
   /* This needs to be unique, hopefully the pid will be enough. */
-  unit_name = g_strdup_printf ("gnome-launched-%s-%d.scope", task_data->name, task_data->pid);
+  unit_name = g_strdup_printf ("app-gnome-%s-%d.scope", task_data->name, task_data->pid);
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("(ssa(sv)a(sa(sv)))"));
   g_variant_builder_add (&builder, "s", unit_name);
@@ -137,6 +137,22 @@ on_bus_gotten_cb (GObject      *source,
 }
 #endif
 
+static gchar *
+systemd_unit_name_escape (const gchar *in)
+{
+  /* Adapted from systemd source */
+  GString * const str = g_string_sized_new (strlen (in));
+
+  for (; *in; in++)
+    {
+      if (g_ascii_isalnum (*in) || *in == ':' || *in == '_' || *in == '.')
+        g_string_append_c (str, *in);
+      else
+        g_string_append_printf (str, "\\x%02x", *in);
+    }
+  return g_string_free (str, FALSE);
+}
+
 /**
  * gnome_start_systemd_scope:
  * @name: Name for the application
@@ -149,8 +165,9 @@ on_bus_gotten_cb (GObject      *source,
  *
  * If the current process is running inside a user systemd instance, then move
  * the launched PID into a transient scope. The given @name will be used to
- * create a unit name. It should be the application ID for desktop files or
- * the executable in all other cases.
+ * create a unit name. It should be the application ID or the executable in all
+ * other cases. If a desktop-id is passed then the .desktop suffix will be
+ * stripped.
  *
  * It is advisable to use this function every time where the started application
  * can be considered reasonably independent of the launching application. Placing
@@ -181,10 +198,7 @@ gnome_start_systemd_scope (const char           *name,
 
 #ifdef HAVE_SYSTEMD
   g_autofree char *own_unit = NULL;
-  const char *valid_chars =
-    "-._1234567890"
-    "abcdefghijklmnopqrstuvwxyz"
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  g_autofree char *name_tmp = NULL;
   StartSystemdScopeData *task_data;
   gint res;
 
@@ -193,16 +207,24 @@ gnome_start_systemd_scope (const char           *name,
 
   task_data->pid = pid;
 
-  /* Create a nice and (mangled) name to embed into the unit */
+  /* Fall back to a "well-known" name, that is unlikely to be used. */
   if (name == NULL)
-    name = "anonymous";
+    name = "org.freedesktop.Unknown";
 
+  /* Consider the following cases:
+   *  1. If we get a path, use the binary name only
+   *  2. If the ID ends in .desktop, remove .desktop to get an application ID
+   *  3. Use the name as-is
+   */
   if (name[0] == '/')
-    name++;
+    name_tmp = g_path_get_basename (name);
+  else if (g_str_has_suffix (name, ".desktop"))
+    name_tmp = g_strndup (name, strlen (name) - 8);
+  else
+    name_tmp = g_strdup (name);
 
-  task_data->name = g_str_to_ascii (name, "C");
-  g_strdelimit (task_data->name, "/", '-');
-  g_strcanon (task_data->name, valid_chars, '_');
+  /* Escape the above, so that it can be extracted from the unit name. */
+  task_data->name = systemd_unit_name_escape (name_tmp);
 
   task_data->description = g_strdup (description);
   if (task_data->description == NULL)
