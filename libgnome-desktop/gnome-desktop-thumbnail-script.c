@@ -556,6 +556,18 @@ add_bwrap (GPtrArray   *array,
   if (!g_str_has_prefix (FONTCONFIG_CACHE_PATH, "/usr/"))
     add_args (array, "--ro-bind-try", FONTCONFIG_CACHE_PATH, FONTCONFIG_CACHE_PATH, NULL);
 
+  /*
+   * Used in various distributions. On those distributions, /usr is not
+   * complete without it: some files in /usr might be a symbolic link
+   * like /usr/bin/composite -> /etc/alternatives/composite ->
+   * /usr/bin/composite-im6.q16.
+   *
+   * https://manpages.debian.org/stable/dpkg/update-alternatives.1.en.html
+   * https://docs.fedoraproject.org/en-US/packaging-guidelines/Alternatives/
+   * https://en.opensuse.org/openSUSE:Packaging_Multiple_Version_guidelines
+   */
+  add_args (array, "--ro-bind-try", "/etc/alternatives", "/etc/alternatives", NULL);
+
   add_args (array,
 	    "--proc", "/proc",
 	    "--dev", "/dev",
