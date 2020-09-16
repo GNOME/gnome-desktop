@@ -543,7 +543,7 @@ gnome_bg_slide_show_get_current_slide (GnomeBGSlideShow  *self,
                         if (is_fixed)
                             *is_fixed = slide->fixed;
 
-                        if (file1)
+                        if (file1 && slide->file1)
                             *file1 = find_best_size (slide->file1, width, height);
 
                         if (file2 && slide->file2)
