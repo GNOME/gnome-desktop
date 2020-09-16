@@ -238,10 +238,10 @@ flatpak_get_arch (void)
 }
 
 /* From https://github.com/flatpak/flatpak/blob/master/common/flatpak-run.c */
-static const uint32_t seccomp_x86_64_extra_arches[] = { SCMP_ARCH_X86, 0, };
+static const guint32 seccomp_x86_64_extra_arches[] = { SCMP_ARCH_X86, 0, };
 
 #ifdef SCMP_ARCH_AARCH64
-static const uint32_t seccomp_aarch64_extra_arches[] = { SCMP_ARCH_ARM, 0 };
+static const guint32 seccomp_aarch64_extra_arches[] = { SCMP_ARCH_ARM, 0 };
 #endif
 
 static inline void
@@ -379,8 +379,8 @@ setup_seccomp (GPtrArray  *argv_array,
 
   if (arch != NULL)
     {
-      uint32_t arch_id = 0;
-      const uint32_t *extra_arches = NULL;
+      guint32 arch_id = 0;
+      const guint32 *extra_arches = NULL;
 
       if (strcmp (arch, "i386") == 0)
         {

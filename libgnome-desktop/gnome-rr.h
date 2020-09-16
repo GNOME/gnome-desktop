@@ -75,7 +75,7 @@ typedef struct {
      * Conversion matrix in S31.32 sign-magnitude (not two's complement!)
      * format.
      */
-    uint64_t matrix[9];
+    guint64 matrix[9];
 } GnomeRRCTM;
 
 /* Error codes */
