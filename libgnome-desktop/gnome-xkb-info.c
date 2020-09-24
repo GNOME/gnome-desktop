@@ -193,7 +193,8 @@ add_layout_to_locale_tables (Layout     *layout,
 }
 
 static gchar *
-get_xml_rules_file_path (const gchar *suffix)
+get_xml_rules_file_path (const gchar    *ruleset,
+                         const gchar    *suffix)
 {
   const gchar *base_path;
   gchar *rules_file;
@@ -203,7 +204,7 @@ get_xml_rules_file_path (const gchar *suffix)
   if (!base_path)
     base_path = XKB_BASE;
 
-  rules_file = g_build_filename (base_path, "rules", XKB_RULES_FILE, NULL);
+  rules_file = g_build_filename (base_path, "rules", ruleset, NULL);
   xml_rules_file = g_strdup_printf ("%s%s", rules_file, suffix);
   g_free (rules_file);
 
@@ -527,9 +528,9 @@ static const GMarkupParser markup_parser = {
 };
 
 static void
-parse_rules_file (GnomeXkbInfo  *self,
-                  const gchar   *path,
-                  GError       **error)
+parse_rules_xml (GnomeXkbInfo  *self,
+                 const gchar   *path,
+                 GError       **error)
 {
   gchar *buffer;
   gsize length;
@@ -551,14 +552,45 @@ parse_rules_file (GnomeXkbInfo  *self,
     g_propagate_error (error, sub_error);
 }
 
+static gboolean
+parse_rules_file (GnomeXkbInfo  *self,
+                  const gchar   *ruleset,
+                  gboolean       include_extras)
+{
+  gchar *file_path;
+  GError *error = NULL;
+
+  file_path = get_xml_rules_file_path (ruleset, ".xml");
+  parse_rules_xml (self, file_path, &error);
+  if (error)
+    goto cleanup;
+  g_free (file_path);
+
+  if (!include_extras)
+    return TRUE;
+
+  file_path = get_xml_rules_file_path (ruleset, ".extras.xml");
+  parse_rules_xml (self, file_path, &error);
+  if (error)
+    goto cleanup;
+  g_free (file_path);
+
+  return TRUE;
+
+ cleanup:
+  g_warning ("Failed to load XKB rules file %s: %s", file_path, error->message);
+  g_clear_pointer (&file_path, g_free);
+  g_clear_pointer (&error, g_error_free);
+
+  return FALSE;
+}
+
 static void
 parse_rules (GnomeXkbInfo *self)
 {
   GnomeXkbInfoPrivate *priv = self->priv;
   GSettings *settings;
   gboolean show_all_sources;
-  gchar *file_path;
-  GError *error = NULL;
 
   /* Make sure the translated strings we get from XKEYBOARD_CONFIG() are
    * in UTF-8 and not in the current locale */
@@ -581,35 +613,18 @@ parse_rules (GnomeXkbInfo *self)
   /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
-  file_path = get_xml_rules_file_path (".xml");
-  parse_rules_file (self, file_path, &error);
-  if (error)
-    goto cleanup;
-  g_free (file_path);
-
   settings = g_settings_new ("org.gnome.desktop.input-sources");
   show_all_sources = g_settings_get_boolean (settings, "show-all-sources");
   g_object_unref (settings);
 
-  if (!show_all_sources)
-    return;
-
-  file_path = get_xml_rules_file_path (".extras.xml");
-  parse_rules_file (self, file_path, &error);
-  if (error)
-    goto cleanup;
-  g_free (file_path);
-
-  return;
-
- cleanup:
-  g_warning ("Failed to load XKB rules file %s: %s", file_path, error->message);
-  g_clear_pointer (&error, g_error_free);
-  g_clear_pointer (&file_path, g_free);
-  g_clear_pointer (&priv->option_groups_table, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_country, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_by_language, g_hash_table_destroy);
-  g_clear_pointer (&priv->layouts_table, g_hash_table_destroy);
+  if (!parse_rules_file (self, XKB_RULES_FILE, show_all_sources))
+    {
+      g_warning ("Failed to load '%s' XKB layouts", XKB_RULES_FILE);
+      g_clear_pointer (&priv->option_groups_table, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_by_country, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_by_language, g_hash_table_destroy);
+      g_clear_pointer (&priv->layouts_table, g_hash_table_destroy);
+    }
 }
 
 static gboolean
