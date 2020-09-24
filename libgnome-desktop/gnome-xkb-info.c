@@ -128,6 +128,70 @@ free_option_group (gpointer data)
   g_slice_free (XkbOptionGroup, group);
 }
 
+static void
+add_layout_to_table (GHashTable  *table,
+                     const gchar *key,
+                     Layout      *layout)
+{
+  GHashTable *set;
+
+  if (!layout->id)
+    return;
+
+  set = g_hash_table_lookup (table, key);
+  if (!set)
+    {
+      set = g_hash_table_new (g_str_hash, g_str_equal);
+      g_hash_table_replace (table, g_strdup (key), set);
+    }
+  else
+    {
+      if (g_hash_table_contains (set, layout->id))
+        return;
+    }
+  g_hash_table_replace (set, layout->id, layout);
+}
+
+static void
+add_layout_to_locale_tables (Layout     *layout,
+                             GHashTable *layouts_by_language,
+                             GHashTable *layouts_by_country)
+{
+  GSList *l, *lang_codes, *country_codes;
+  gchar *language, *country;
+
+  lang_codes = layout->iso639Ids;
+  country_codes = layout->iso3166Ids;
+
+  if (layout->is_variant)
+    {
+      if (!lang_codes)
+        lang_codes = layout->main_layout->iso639Ids;
+      if (!country_codes)
+        country_codes = layout->main_layout->iso3166Ids;
+    }
+
+  for (l = lang_codes; l; l = l->next)
+    {
+      language = gnome_get_language_from_code ((gchar *) l->data, NULL);
+      if (language)
+        {
+          add_layout_to_table (layouts_by_language, language, layout);
+          g_free (language);
+        }
+    }
+
+  for (l = country_codes; l; l = l->next)
+    {
+      country = gnome_get_country_from_code ((gchar *) l->data, NULL);
+      if (country)
+        {
+          add_layout_to_table (layouts_by_country, country, layout);
+          g_free (country);
+        }
+    }
+}
+
 static gchar *
 get_xml_rules_file_path (const gchar *suffix)
 {
@@ -283,70 +347,6 @@ parse_start_element (GMarkupParseContext  *context,
         }
 
       priv->current_parser_option = g_slice_new0 (XkbOption);
-    }
-}
-
-static void
-add_layout_to_table (GHashTable  *table,
-                     const gchar *key,
-                     Layout      *layout)
-{
-  GHashTable *set;
-
-  if (!layout->id)
-    return;
-
-  set = g_hash_table_lookup (table, key);
-  if (!set)
-    {
-      set = g_hash_table_new (g_str_hash, g_str_equal);
-      g_hash_table_replace (table, g_strdup (key), set);
-    }
-  else
-    {
-      if (g_hash_table_contains (set, layout->id))
-        return;
-    }
-  g_hash_table_replace (set, layout->id, layout);
-}
-
-static void
-add_layout_to_locale_tables (Layout     *layout,
-                             GHashTable *layouts_by_language,
-                             GHashTable *layouts_by_country)
-{
-  GSList *l, *lang_codes, *country_codes;
-  gchar *language, *country;
-
-  lang_codes = layout->iso639Ids;
-  country_codes = layout->iso3166Ids;
-
-  if (layout->is_variant)
-    {
-      if (!lang_codes)
-        lang_codes = layout->main_layout->iso639Ids;
-      if (!country_codes)
-        country_codes = layout->main_layout->iso3166Ids;
-    }
-
-  for (l = lang_codes; l; l = l->next)
-    {
-      language = gnome_get_language_from_code ((gchar *) l->data, NULL);
-      if (language)
-        {
-          add_layout_to_table (layouts_by_language, language, layout);
-          g_free (language);
-        }
-    }
-
-  for (l = country_codes; l; l = l->next)
-    {
-      country = gnome_get_country_from_code ((gchar *) l->data, NULL);
-      if (country)
-        {
-          add_layout_to_table (layouts_by_country, country, layout);
-          g_free (country);
-        }
     }
 }
 
