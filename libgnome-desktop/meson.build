@@ -80,7 +80,6 @@ gnome_desktop_deps = [
   libsystemd_dep,
   schemas_dep,
   xkb_config_dep,
-  xkbregistry_dep,
   iso_codes_dep,
   udev_dep,
   seccomp_dep

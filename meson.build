@@ -47,7 +47,6 @@ gio_unix_dep = dependency('gio-unix-2.0', version: glib_req)
 schemas_dep = dependency('gsettings-desktop-schemas', version: schemas_req)
 fontconfig_dep = dependency('fontconfig')
 xkb_config_dep = dependency('xkeyboard-config')
-xkbregistry_dep = dependency('xkbregistry')
 iso_codes_dep = dependency('iso-codes')
 
 libsystemd_dep = dependency('libsystemd', required: get_option('systemd'))
