@@ -10,6 +10,7 @@ main (int argc, char **argv)
 
 	info = gnome_xkb_info_new ();
 
+	g_print ("layouts:\n");
 	layouts = gnome_xkb_info_get_all_layouts (info);
 	for (l = layouts; l != NULL; l = l->next) {
 		const char *id = l->data;
@@ -25,30 +26,33 @@ main (int argc, char **argv)
 						    &xkb_variant) == FALSE) {
 			g_warning ("Failed to get info for layout '%s'", id);
 		} else {
-			g_print ("id: %s\n", id);
-			g_print ("\tdisplay name: %s\n", display_name);
-			g_print ("\tshort name: %s\n", short_name);
-			g_print ("\txkb layout: %s\n", xkb_layout);
-			g_print ("\txkb variant: %s\n", xkb_variant);
+			g_print ("  %s:\n", id);
+			g_print ("    display name: \"%s\"\n",
+				 g_uri_escape_string (display_name, " (),<>+;:", TRUE));
+			g_print ("    short name: %s\n", short_name);
+			g_print ("    xkb layout: %s\n", xkb_layout);
+			g_print ("    xkb variant: %s\n", xkb_variant);
 		}
 	}
 	g_list_free (layouts);
 
+	g_print ("\noption groups:\n");
 	option_groups = gnome_xkb_info_get_all_option_groups (info);
 	for (g = option_groups; g != NULL; g = g->next) {
 		const char *group_id = g->data;
 
-		g_print ("\noption group: %s\n", group_id);
+		g_print ("  %s:\n", group_id);
 
 		options = gnome_xkb_info_get_options_for_group (info, group_id);
 		for (o = options; o != NULL; o = o->next) {
 			const char *id = o->data;
+			const char *description = gnome_xkb_info_description_for_option (info,
+											 group_id,
+											 id);
 
-			g_print ("id: %s\n", id);
-			g_print ("\tdescription: %s\n",
-				 gnome_xkb_info_description_for_option (info,
-									group_id,
-									id));
+			g_print ("    %s:\n", id);
+			g_print ("      description: \"%s\"\n",
+				 g_uri_escape_string (description, " (),<>+;:", TRUE));
 		}
 		g_list_free (options);
 	}
