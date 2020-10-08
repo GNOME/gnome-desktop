@@ -43,8 +43,13 @@
 
 #include "gnome-desktop-thumbnail-script.h"
 
+typedef enum {
+  SANDBOX_TYPE_NONE,
+  SANDBOX_TYPE_BWRAP
+} SandboxType;
+
 typedef struct {
-  gboolean sandbox;
+  SandboxType sandbox;
   char *thumbnailer_name;
   GArray *fd_array;
   /* Input/output file paths outside the sandbox */
@@ -631,7 +636,7 @@ expand_thumbnailing_cmd (const char  *cmd,
   array = g_ptr_array_new_with_free_func (g_free);
 
 #ifdef HAVE_BWRAP
-  if (script->sandbox)
+  if (script->sandbox == SANDBOX_TYPE_BWRAP)
     {
       if (!add_bwrap (array, script))
         {
@@ -643,7 +648,7 @@ expand_thumbnailing_cmd (const char  *cmd,
 #endif
 
 #ifdef ENABLE_SECCOMP
-  if (script->sandbox)
+  if (script->sandbox == SANDBOX_TYPE_BWRAP)
     {
       const char *arch;
 
@@ -771,7 +776,7 @@ script_exec_new (const char  *uri,
    * Flatpak as all privileges to create a new namespace are dropped when
    * the initial one is created. */
   if (!g_file_test ("/.flatpak-info", G_FILE_TEST_IS_REGULAR))
-    exec->sandbox = TRUE;
+    exec->sandbox = SANDBOX_TYPE_BWRAP;
 #endif
 
   file = g_file_new_for_uri (uri);
@@ -785,7 +790,7 @@ script_exec_new (const char  *uri,
     }
 
 #ifdef HAVE_BWRAP
-  if (exec->sandbox)
+  if (exec->sandbox == SANDBOX_TYPE_BWRAP)
     {
       char *tmpl;
       const char *infile;
