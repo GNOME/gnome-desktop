@@ -25,6 +25,10 @@ bwrap binary, is a non-optional dependency on platforms where it is
 supported and thumbnailing will silently fail when it is not installed
 at runtime.
 
+[flatpak-xdg-utils](https://github.com/flatpak/flatpak-xdg-utils/)'s `flatpak-spawn`
+helper is a non-optional dependency for using gnome-desktop's thumbnailer
+when the app is being run within Flatpak >= 1.5.1.
+
 How to report bugs
 ==================
 

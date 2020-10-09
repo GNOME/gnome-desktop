@@ -45,7 +45,8 @@
 
 typedef enum {
   SANDBOX_TYPE_NONE,
-  SANDBOX_TYPE_BWRAP
+  SANDBOX_TYPE_BWRAP,
+  SANDBOX_TYPE_FLATPAK
 } SandboxType;
 
 typedef struct {
@@ -618,6 +619,55 @@ add_bwrap (GPtrArray   *array,
 }
 #endif /* HAVE_BWRAP */
 
+static void
+add_flatpak_env (GPtrArray  *array,
+                 const char *envvar)
+{
+  if (g_getenv (envvar) != NULL)
+    {
+      g_autofree char *option = NULL;
+
+      option = g_strdup_printf ("--env=%s=%s",
+                                envvar,
+                                g_getenv (envvar));
+      add_args (array, option, NULL);
+    }
+}
+
+static gboolean
+add_flatpak (GPtrArray   *array,
+             ScriptExec  *script)
+{
+  g_autofree char *inpath = NULL;
+  g_autofree char *outpath = NULL;
+
+  g_return_val_if_fail (script->outdir != NULL, FALSE);
+  g_return_val_if_fail (script->infile != NULL, FALSE);
+
+  add_args (array,
+            "flatpak-spawn",
+            "--clear-env",
+            "--env=GIO_USE_VFS=local",
+            NULL);
+
+  add_flatpak_env (array, "G_MESSAGES_DEBUG");
+  add_flatpak_env (array, "G_MESSAGES_PREFIXED");
+  add_flatpak_env (array, "GST_DEBUG");
+
+  outpath = g_strdup_printf ("--sandbox-expose-path=%s", script->outdir);
+  inpath = g_strdup_printf ("--sandbox-expose-path-ro=%s", script->infile);
+
+  add_args (array,
+            "--watch-bus",
+            "--sandbox",
+            "--no-network",
+            outpath,
+            inpath,
+            NULL);
+
+  return TRUE;
+}
+
 static char **
 expand_thumbnailing_cmd (const char  *cmd,
 			 ScriptExec  *script,
@@ -666,6 +716,16 @@ expand_thumbnailing_cmd (const char  *cmd,
         }
     }
 #endif
+
+  if (script->sandbox == SANDBOX_TYPE_FLATPAK)
+    {
+      if (!add_flatpak (array, script))
+        {
+          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                               "Flatpak-spawn setup failed");
+          goto bail;
+        }
+    }
 
   got_in = got_out = FALSE;
   for (i = 0; cmd_elems[i] != NULL; i++)
@@ -764,6 +824,47 @@ clear_fd (gpointer data)
     close (*fd_p);
 }
 
+static guint32
+get_portal_version (void)
+{
+  static guint32 version = G_MAXUINT32;
+
+  if (version == G_MAXUINT32)
+    {
+      g_autoptr(GError) error = NULL;
+      g_autoptr(GDBusConnection) session_bus =
+        g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+      g_autoptr(GVariant) reply = NULL;
+
+      if (session_bus)
+        reply = g_dbus_connection_call_sync (session_bus,
+                                             "org.freedesktop.portal.Flatpak",
+                                             "/org/freedesktop/portal/Flatpak",
+                                             "org.freedesktop.DBus.Properties",
+                                             "Get",
+                                             g_variant_new ("(ss)", "org.freedesktop.portal.Flatpak", "version"),
+                                             G_VARIANT_TYPE ("(v)"),
+                                             G_DBUS_CALL_FLAGS_NONE,
+                                             -1,
+                                             NULL, &error);
+
+      if (reply == NULL)
+        {
+          g_debug ("Failed to get Flatpak portal version: %s", error->message);
+          /* Don't try again if we failed once */
+          version = 0;
+        }
+      else
+        {
+          g_autoptr(GVariant) v = g_variant_get_child_value (reply, 0);
+          g_autoptr(GVariant) v2 = g_variant_get_variant (v);
+          version = g_variant_get_uint32 (v2);
+        }
+    }
+
+  return version;
+}
+
 static ScriptExec *
 script_exec_new (const char  *uri,
 		 GError     **error)
@@ -776,7 +877,14 @@ script_exec_new (const char  *uri,
   /* Bubblewrap is not used if the application is already sandboxed in
    * Flatpak as all privileges to create a new namespace are dropped when
    * the initial one is created. */
-  if (!g_file_test ("/.flatpak-info", G_FILE_TEST_IS_REGULAR))
+  if (g_file_test ("/.flatpak-info", G_FILE_TEST_IS_REGULAR))
+    {
+      if (get_portal_version () >= 3)
+        exec->sandbox = SANDBOX_TYPE_FLATPAK;
+      else
+        exec->sandbox = SANDBOX_TYPE_NONE;
+    }
+  else
     exec->sandbox = SANDBOX_TYPE_BWRAP;
 #endif
 
@@ -823,6 +931,31 @@ script_exec_new (const char  *uri,
     }
   else
 #endif
+  if (exec->sandbox == SANDBOX_TYPE_FLATPAK)
+    {
+      char *tmpl;
+      const char *sandbox_dir;
+
+      sandbox_dir = g_getenv ("FLATPAK_SANDBOX_DIR");
+      if (!sandbox_dir || *sandbox_dir != '/')
+        {
+          g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                       "Incorrect sandbox directory: '%s'", sandbox_dir ? sandbox_dir : "(null)");
+          goto bail;
+        }
+
+      tmpl = g_build_filename (sandbox_dir, "gnome-desktop-thumbnailer-XXXXXX", NULL);
+      exec->outdir = g_mkdtemp (tmpl);
+      if (!exec->outdir)
+        {
+          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                               "Could not create temporary sandbox directory");
+          goto bail;
+        }
+
+      exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
+    }
+  else if (exec->sandbox == SANDBOX_TYPE_NONE)
     {
       int fd;
       g_autofree char *tmpname = NULL;
@@ -833,6 +966,8 @@ script_exec_new (const char  *uri,
       close (fd);
       exec->outfile = g_steal_pointer (&tmpname);
     }
+  else
+    g_assert_not_reached ();
 
   return exec;
 
