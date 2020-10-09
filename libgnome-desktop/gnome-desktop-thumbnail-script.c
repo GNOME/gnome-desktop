@@ -591,6 +591,7 @@ add_bwrap (GPtrArray   *array,
 
   add_bwrap_env (array, "G_MESSAGES_DEBUG");
   add_bwrap_env (array, "G_MESSAGES_PREFIXED");
+  add_bwrap_env (array, "GST_DEBUG");
 
   /* Add gnome-desktop's install prefix if needed */
   if (g_strcmp0 (INSTALL_PREFIX, "") != 0 &&
