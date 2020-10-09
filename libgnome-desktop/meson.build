@@ -129,16 +129,8 @@ desktop_pc = pkg.generate(
   subdirs: 'gnome-desktop-3.0'
 )
 
-if get_option('debug_tools')
-  executable('gnome-rr-debug',
-    sources: 'gnome-rr-debug.c',
-    dependencies: libgnome_desktop_dep,
-    install_dir: libexecdir,
-    install: true
-  )
-endif
-
 test_programs = [
+  'gnome-rr-debug',
   'test-xkb-info',
   'test-pnp-ids',
   'test-wall-clock',
@@ -149,6 +141,8 @@ test_programs = [
 
 foreach program : test_programs
   executable(program, program + '.c',
-    dependencies: libgnome_desktop_dep
+    dependencies: libgnome_desktop_dep,
+    install: get_option('debug_tools'),
+    install_dir: libexecdir / 'gnome-desktop-debug',
   )
 endforeach
