@@ -49,6 +49,8 @@ typedef enum {
   SANDBOX_TYPE_FLATPAK
 } SandboxType;
 
+#define GST_REGISTRY_FILENAME "gstreamer-1.0.registry"
+
 typedef struct {
   SandboxType sandbox;
   char *thumbnailer_name;
@@ -61,6 +63,8 @@ typedef struct {
   /* I/O file paths inside the sandbox */
   char *s_infile;
   char *s_outfile;
+  /* Whether a GStreamer cache dir was setup */
+  gboolean has_gst_registry;
 } ScriptExec;
 
 static char *
@@ -135,6 +139,20 @@ add_args (GPtrArray *argv_array, ...)
   while ((arg = va_arg (args, const gchar *)))
     g_ptr_array_add (argv_array, g_strdup (arg));
   va_end (args);
+}
+
+static char *
+create_gst_cache_dir (void)
+{
+  char *out;
+
+  out = g_build_filename (g_get_user_cache_dir (),
+                          "gnome-desktop-thumbnailer",
+                          "gstreamer-1.0",
+                          NULL);
+  if (g_mkdir_with_parents (out, 0700) < 0)
+    g_clear_pointer (&out, g_free);
+  return out;
 }
 
 #ifdef ENABLE_SECCOMP
@@ -531,6 +549,7 @@ add_bwrap (GPtrArray   *array,
 {
   const char * const usrmerged_dirs[] = { "bin", "lib64", "lib", "sbin" };
   int i;
+  g_autofree char *gst_cache_dir = NULL;
 
   g_return_val_if_fail (script->outdir != NULL, FALSE);
   g_return_val_if_fail (script->s_infile != NULL, FALSE);
@@ -568,6 +587,19 @@ add_bwrap (GPtrArray   *array,
   /* fontconfig cache if necessary */
   if (!g_str_has_prefix (FONTCONFIG_CACHE_PATH, "/usr/"))
     add_args (array, "--ro-bind-try", FONTCONFIG_CACHE_PATH, FONTCONFIG_CACHE_PATH, NULL);
+
+  /* GStreamer plugin cache if possible */
+  gst_cache_dir = create_gst_cache_dir ();
+  if (gst_cache_dir)
+    {
+      g_autofree char *registry = NULL;
+      script->has_gst_registry = TRUE;
+      registry = g_build_filename (gst_cache_dir, GST_REGISTRY_FILENAME, NULL);
+      add_args (array,
+                "--setenv", "GST_REGISTRY_1_0", registry,
+                "--bind", gst_cache_dir, gst_cache_dir,
+                NULL);
+    }
 
   /*
    * Used in various distributions. On those distributions, /usr is not
@@ -640,6 +672,7 @@ add_flatpak (GPtrArray   *array,
 {
   g_autofree char *inpath = NULL;
   g_autofree char *outpath = NULL;
+  g_autofree char *gst_cache_dir = NULL;
 
   g_return_val_if_fail (script->outdir != NULL, FALSE);
   g_return_val_if_fail (script->infile != NULL, FALSE);
@@ -653,6 +686,21 @@ add_flatpak (GPtrArray   *array,
   add_flatpak_env (array, "G_MESSAGES_DEBUG");
   add_flatpak_env (array, "G_MESSAGES_PREFIXED");
   add_flatpak_env (array, "GST_DEBUG");
+
+  /* GStreamer plugin cache if possible */
+  gst_cache_dir = create_gst_cache_dir ();
+  if (gst_cache_dir)
+    {
+      g_autofree char *registry_path = NULL;
+      g_autofree char *env_option = NULL;
+      g_autofree char *expose_path_option = NULL;
+
+      script->has_gst_registry = TRUE;
+      registry_path = g_build_filename (gst_cache_dir, GST_REGISTRY_FILENAME, NULL);
+      expose_path_option = g_strdup_printf ("--sandbox-expose-path=%s", gst_cache_dir);
+      env_option = g_strdup_printf ("--env=GST_REGISTRY_1_0=%s", registry_path);
+      add_args (array, expose_path_option, env_option, NULL);
+    }
 
   outpath = g_strdup_printf ("--sandbox-expose-path=%s", script->outdir);
   inpath = g_strdup_printf ("--sandbox-expose-path-ro=%s", script->infile);
@@ -977,6 +1025,44 @@ bail:
 }
 
 static void
+clean_gst_registry_dir (ScriptExec *exec)
+{
+  g_autoptr(GDir) dir = NULL;
+  g_autofree char *gst_cache_dir = NULL;
+  g_autoptr(GError) error = NULL;
+  const char *name = NULL;
+
+  if (!exec->has_gst_registry)
+    return;
+
+  gst_cache_dir = create_gst_cache_dir ();
+  dir = g_dir_open (gst_cache_dir, 0, &error);
+  if (!dir) {
+    g_debug ("Failed to open GStreamer registry dir %s: %s",
+             gst_cache_dir,
+             error->message);
+    return;
+  }
+
+  while ((name = g_dir_read_name (dir)) != NULL)
+    {
+      g_autofree char *fullpath = NULL;
+
+      if (g_strcmp0 (name, ".") == 0 ||
+          g_strcmp0 (name, "..") == 0 ||
+          g_strcmp0 (name, GST_REGISTRY_FILENAME) == 0)
+        continue;
+
+      fullpath = g_build_filename (gst_cache_dir, name, NULL);
+      if (g_remove (fullpath) < 0)
+        g_warning ("Failed to delete left-over thumbnailing '%s'", fullpath);
+      else
+        g_warning ("Left-over file '%s' in '%s', deleting",
+                   name, gst_cache_dir);
+    }
+}
+
+static void
 print_script_debug (GStrv expanded_script)
 {
   GString *out;
@@ -1031,6 +1117,8 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
     {
       g_debug ("Failed to launch script: %s", !ret ? (*error)->message : error_out);
     }
+
+  clean_gst_registry_dir (exec);
 
 out:
   script_exec_free (exec);
