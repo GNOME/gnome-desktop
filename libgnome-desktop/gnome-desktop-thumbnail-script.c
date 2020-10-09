@@ -136,16 +136,6 @@ add_args (GPtrArray *argv_array, ...)
   va_end (args);
 }
 
-static void
-add_env (GPtrArray  *array,
-         const char *envvar)
-{
-  if (g_getenv (envvar) != NULL)
-    add_args (array,
-              "--setenv", envvar, g_getenv (envvar),
-              NULL);
-}
-
 #ifdef ENABLE_SECCOMP
 static gboolean
 flatpak_fail (GError     **error,
@@ -524,6 +514,16 @@ path_is_usrmerged (const char *dir)
          (stat_buf_src.st_ino == stat_buf_target.st_ino);
 }
 
+static void
+add_bwrap_env (GPtrArray  *array,
+               const char *envvar)
+{
+  if (g_getenv (envvar) != NULL)
+    add_args (array,
+              "--setenv", envvar, g_getenv (envvar),
+              NULL);
+}
+
 static gboolean
 add_bwrap (GPtrArray   *array,
 	   ScriptExec  *script)
@@ -589,8 +589,8 @@ add_bwrap (GPtrArray   *array,
 	    "--die-with-parent",
 	    NULL);
 
-  add_env (array, "G_MESSAGES_DEBUG");
-  add_env (array, "G_MESSAGES_PREFIXED");
+  add_bwrap_env (array, "G_MESSAGES_DEBUG");
+  add_bwrap_env (array, "G_MESSAGES_PREFIXED");
 
   /* Add gnome-desktop's install prefix if needed */
   if (g_strcmp0 (INSTALL_PREFIX, "") != 0 &&
