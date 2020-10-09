@@ -878,6 +878,8 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
 
   print_script_debug (expanded_script);
 
+  /* NOTE: Replace the error_out argument with NULL, if you want to see
+   * the output of the spawned command and its children */
   ret = g_spawn_sync (NULL, expanded_script, NULL, G_SPAWN_SEARCH_PATH,
 		      child_setup, exec->fd_array, NULL, &error_out,
 		      &exit_status, error);
