@@ -24,42 +24,54 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
-int main (int argc, char **argv)
+static gboolean
+thumbnail_file (GnomeDesktopThumbnailFactory *factory,
+		const char *in_path,
+		const char *out_path)
 {
 	GdkPixbuf *pixbuf;
-	GnomeDesktopThumbnailFactory *factory;
 	char *content_type;
 	g_autoptr(GFile) file = NULL;
 	g_autofree char *path = NULL;
 	g_autofree char *uri = NULL;
+
+	file = g_file_new_for_commandline_arg (in_path);
+	path = g_file_get_path (file);
+	if (!path) {
+		g_warning ("Could not get path for %s", in_path);
+		return FALSE;
+	}
+
+	content_type = g_content_type_guess (path, NULL, 0, NULL);
+	uri = g_file_get_uri (file);
+	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type);
+	g_free (content_type);
+
+	if (pixbuf == NULL) {
+		g_warning ("gnome_desktop_thumbnail_factory_generate_thumbnail() failed to generate a thumbnail for %s", in_path);
+		return FALSE;
+	}
+
+	if (!gdk_pixbuf_save (pixbuf, out_path, "png", NULL, NULL)) {
+		g_warning ("gdk_pixbuf_save failed for %s", in_path);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+int main (int argc, char **argv)
+{
+	GnomeDesktopThumbnailFactory *factory;
 
 	if (argc != 3) {
 		g_print ("Usage: %s [INPUT FILE] [OUTPUT FILE]\n", argv[0]);
 		return 1;
 	}
 
-	file = g_file_new_for_commandline_arg (argv[1]);
-	path = g_file_get_path (file);
-	if (!path) {
-		g_warning ("Could not get path for %s", argv[1]);
-		return 1;
-	}
-
-	content_type = g_content_type_guess (path, NULL, 0, NULL);
 	factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-	uri = g_file_get_uri (file);
-	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type);
-	g_free (content_type);
-
-	if (pixbuf == NULL) {
-		g_warning ("gnome_desktop_thumbnail_factory_generate_thumbnail() failed to generate a thumbnail for %s", argv[1]);
+	if (!thumbnail_file (factory, argv[1], argv[2]))
 		return 1;
-	}
-
-	if (!gdk_pixbuf_save (pixbuf, argv[2], "png", NULL, NULL)) {
-		g_warning ("gdk_pixbuf_save failed for %s", argv[1]);
-		return 1;
-	}
 
 	return 0;
 }
