@@ -64,8 +64,10 @@ thumbnail_file (GnomeDesktopThumbnailFactory *factory,
 int main (int argc, char **argv)
 {
 	g_autoptr(GnomeDesktopThumbnailFactory) factory = NULL;
+	g_autoptr(GTimer) timer = NULL;
 	gint num_iterations = 1;
 	gboolean shared_factory = FALSE;
+	gboolean show_timer = FALSE;
 	char **filenames = NULL;
 	int ret = 0;
 	g_autoptr(GOptionContext) option_context = NULL;
@@ -73,10 +75,13 @@ int main (int argc, char **argv)
 	const GOptionEntry options[] = {
 		{ "shared-factory", 's', 0, G_OPTION_ARG_NONE, &shared_factory, "Whether to share the Thumbnail Factory (default: off)", NULL },
 		{ "num-iterations", 'n', 0, G_OPTION_ARG_INT, &num_iterations, "Number of times to run thumbnail operation (default: 1)", NULL },
+		{ "show-timer", 't', 0, G_OPTION_ARG_NONE, &show_timer, "Whether to show time statistics for operations", NULL },
 		{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &filenames, "[INPUT FILE] [OUTPUT FILE]", NULL },
 		{ NULL}
 	};
 	int i;
+	gdouble first_iter_elapsed = 0.0;
+	gdouble following_elapsed = 0.0;
 
 	setlocale (LC_ALL, "");
 	option_context = g_option_context_new ("");
@@ -97,15 +102,39 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
+	timer = g_timer_new ();
+
 	for (i = 0; i < num_iterations; i++) {
+		g_timer_start (timer);
+
 		if (factory == NULL)
 			factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
 		if (!thumbnail_file (factory, filenames[0], filenames[1]))
 			return 1;
 
+		if (i == 0)
+			first_iter_elapsed = g_timer_elapsed (timer, NULL);
+		else
+			following_elapsed += g_timer_elapsed (timer, NULL);
+
 		if (!shared_factory)
 			g_clear_object (&factory);
+	}
+
+	if (show_timer) {
+		if (num_iterations == 1) {
+			g_print ("Elapsed time: %d msec\n",
+				 (int) (first_iter_elapsed * 1000));
+		} else if (num_iterations > 1) {
+			g_print ("First iteration: %d msec\n",
+				 (int) (first_iter_elapsed * 1000));
+			g_print ("Average time: %d msec (%d iterations)\n",
+				 (int) (following_elapsed * 1000 / (num_iterations - 1)),
+				 num_iterations - 1);
+		} else {
+			g_assert_not_reached ();
+		}
 	}
 
 	return 0;
