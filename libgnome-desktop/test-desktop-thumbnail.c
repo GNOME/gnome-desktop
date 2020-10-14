@@ -64,14 +64,19 @@ thumbnail_file (GnomeDesktopThumbnailFactory *factory,
 int main (int argc, char **argv)
 {
 	g_autoptr(GnomeDesktopThumbnailFactory) factory = NULL;
+	gint num_iterations = 1;
+	gboolean shared_factory = FALSE;
 	char **filenames = NULL;
 	int ret = 0;
 	g_autoptr(GOptionContext) option_context = NULL;
 	g_autoptr(GError) error = NULL;
 	const GOptionEntry options[] = {
+		{ "shared-factory", 's', 0, G_OPTION_ARG_NONE, &shared_factory, "Whether to share the Thumbnail Factory (default: off)", NULL },
+		{ "num-iterations", 'n', 0, G_OPTION_ARG_INT, &num_iterations, "Number of times to run thumbnail operation (default: 1)", NULL },
 		{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &filenames, "[INPUT FILE] [OUTPUT FILE]", NULL },
 		{ NULL}
 	};
+	int i;
 
 	setlocale (LC_ALL, "");
 	option_context = g_option_context_new ("");
@@ -84,16 +89,24 @@ int main (int argc, char **argv)
 	}
 
 	if (filenames == NULL ||
-	    g_strv_length (filenames) != 2) {
+	    g_strv_length (filenames) != 2 ||
+	    num_iterations < 1) {
 		g_autofree char *help = NULL;
 		help = g_option_context_get_help (option_context, TRUE, NULL);
 		g_print ("%s", help);
 		return 1;
 	}
 
-	factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-	if (!thumbnail_file (factory, filenames[0], filenames[1]))
-		return 1;
+	for (i = 0; i < num_iterations; i++) {
+		if (factory == NULL)
+			factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
+
+		if (!thumbnail_file (factory, filenames[0], filenames[1]))
+			return 1;
+
+		if (!shared_factory)
+			g_clear_object (&factory);
+	}
 
 	return 0;
 }
