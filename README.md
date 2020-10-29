@@ -33,9 +33,10 @@ How to report bugs
 ==================
 
 Bugs should be reported to the [Issues section of gnome-desktop repository](https://gitlab.gnome.org/GNOME/gnome-desktop/-/issues).
-
-Please read the HACKING file for information on where to send changes or
-bugfixes for this package.
+Due to very high numbers of misdirected gnome-shell bugs, the issue tracker has
+unfortunately been restricted to GNOME developers only. If you have found a bug in
+this library, feel free to contact any GNOME developer and ask for your report to be
+forwarded here.
 
 Thumbnailing sandboxing
 =======================
