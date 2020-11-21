@@ -1,6 +1,7 @@
 /* gnome-rr.c
  *
  * Copyright 2007, 2008, 2013 Red Hat, Inc.
+ * Copyright 2020 NVIDIA CORPORATION
  * 
  * This file is part of the Gnome Library.
  * 
