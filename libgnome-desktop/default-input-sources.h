@@ -35,7 +35,7 @@ static DefaultInputSource default_input_sources[] =
   { "hi_IN",    "ibus",         "m17n:hi:inscript" },
   { "id_ID",    "xkb",          "us" },
   { "it_IT",    "xkb",          "it" },
-  { "ja_JP",    "ibus",         "kkc" },
+  { "ja_JP",    "ibus",         "anthy" },
   { "kn_IN",    "ibus",         "m17n:kn:kgp" },
   { "ko_KR",    "ibus",         "hangul" },
   { "mai_IN",   "ibus",         "m17n:mai:inscript" },
