@@ -303,6 +303,32 @@ get_thumbnailers_dirs (void)
   return g_once (&once_init, init_thumbnailers_dirs, NULL);
 }
 
+static const char *
+gnome_desktop_thumbnail_size_to_dirname (GnomeDesktopThumbnailSize size)
+{
+  switch (size) {
+  case GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL:
+    return "normal";
+  case GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE:
+    return "large";
+  default:
+    g_assert_not_reached ();
+  }
+}
+
+static guint
+gnome_desktop_thumbnail_size_to_size (GnomeDesktopThumbnailSize size)
+{
+  switch (size) {
+  case GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL:
+    return 128;
+  case GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE:
+    return 256;
+  default:
+    g_assert_not_reached ();
+  }
+}
+
 /* These should be called with the lock held */
 static void
 gnome_desktop_thumbnail_factory_register_mime_types (GnomeDesktopThumbnailFactory *factory,
@@ -761,7 +787,7 @@ thumbnail_path (const char                *uri,
   file = thumbnail_filename (uri);
   path = g_build_filename (g_get_user_cache_dir (),
                            "thumbnails",
-                           size == GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE ? "large" : "normal",
+                           gnome_desktop_thumbnail_size_to_dirname (size),
                            file,
                            NULL);
   g_free (file);
@@ -1047,10 +1073,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
 
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
 
-  size = 128;
-  if (factory->priv->size == GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE)
-    size = 256;
-
+  size = gnome_desktop_thumbnail_size_to_size (factory->priv->size);
   pixbuf = get_preview_thumbnail (uri, size);
   if (pixbuf != NULL)
     return pixbuf;
