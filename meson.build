@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.49.0',
-  version: '3.38.0',
+  version: '40.alpha',
   license: ['GPL2+', 'LGPL2+']
 )
 
@@ -14,11 +14,11 @@ project('gnome-desktop', 'c',
 # to 0. When bumping the second version, set the third one to zero.
 #
 # A lot easier than libtool, right?
-libversion = '19.0.8'
+libversion = '20.0.0'
 soversion = libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
-gtk_req = '>= 3.3.6'
+gtk_req = '>= 4.0.0'
 glib_req = '>= 2.53.0'
 xrandr_req = '>= 1.3'
 schemas_req = '>= 3.27.0'
@@ -40,7 +40,7 @@ test_execdir = join_paths(libexecdir, 'installed-tests', meson.project_name())
 versiondir = join_paths(datadir, 'gnome')
 
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: gdk_pixbuf_req)
-gtk_dep = dependency('gtk+-3.0', version: gtk_req)
+gtk_dep = dependency('gtk4', version: gtk_req)
 glib_dep = dependency('glib-2.0', version: glib_req)
 gio_dep = dependency('gio-2.0', version: glib_req)
 gio_unix_dep = dependency('gio-unix-2.0', version: glib_req)
@@ -81,7 +81,7 @@ endif
 
 conf = configuration_data()
 
-conf.set_quoted('GETTEXT_PACKAGE', '@0@-3.0'.format(meson.project_name()))
+conf.set_quoted('GETTEXT_PACKAGE', '@0@-4.0'.format(meson.project_name()))
 conf.set_quoted('INSTALL_PREFIX', prefix)
 
 conf.set('ENABLE_SECCOMP', seccomp_dep.found())
@@ -109,7 +109,7 @@ version_conf = configuration_data()
 
 version_conf.set('GNOME_PLATFORM', version_array[0])
 version_conf.set('GNOME_MINOR', version_array[1])
-version_conf.set('GNOME_MICRO', version_array[2])
+version_conf.set('GNOME_MICRO', 0)
 version_conf.set('GNOME_DISTRIBUTOR', get_option('gnome_distributor'))
 
 if get_option('date_in_gnome_version')
@@ -141,5 +141,5 @@ if get_option('desktop_docs')
 endif
 
 if get_option('gtk_doc')
-  subdir('docs/reference/gnome-desktop3')
+  subdir('docs/reference/gnome-desktop4')
 endif

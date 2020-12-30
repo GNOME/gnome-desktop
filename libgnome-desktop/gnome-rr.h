@@ -117,9 +117,9 @@ GType gnome_rr_mode_get_type (void);
 GType gnome_rr_dpms_mode_get_type (void);
 
 /* GnomeRRScreen */
-GnomeRRScreen * gnome_rr_screen_new                (GdkScreen             *screen,
+GnomeRRScreen * gnome_rr_screen_new                (GdkDisplay             *screen,
 						    GError               **error);
-void            gnome_rr_screen_new_async          (GdkScreen             *screen,
+void            gnome_rr_screen_new_async          (GdkDisplay             *screen,
                                                     GAsyncReadyCallback    callback,
                                                     gpointer               user_data);
 GnomeRRScreen * gnome_rr_screen_new_finish         (GAsyncResult          *result,

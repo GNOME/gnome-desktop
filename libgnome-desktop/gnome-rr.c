@@ -42,7 +42,7 @@
 
 enum {
     SCREEN_PROP_0,
-    SCREEN_PROP_GDK_SCREEN,
+    SCREEN_PROP_GDK_DISPLAY,
     SCREEN_PROP_DPMS_MODE,
     SCREEN_PROP_LAST,
 };
@@ -834,7 +834,7 @@ gnome_rr_screen_set_property (GObject *gobject, guint property_id, const GValue 
 
     switch (property_id)
     {
-    case SCREEN_PROP_GDK_SCREEN:
+    case SCREEN_PROP_GDK_DISPLAY:
         priv->gdk_screen = g_value_get_object (value);
         return;
     case SCREEN_PROP_DPMS_MODE:
@@ -854,7 +854,7 @@ gnome_rr_screen_get_property (GObject *gobject, guint property_id, GValue *value
 
     switch (property_id)
     {
-    case SCREEN_PROP_GDK_SCREEN:
+    case SCREEN_PROP_GDK_DISPLAY:
         g_value_set_object (value, priv->gdk_screen);
         return;
     case SCREEN_PROP_DPMS_MODE: {
@@ -885,12 +885,12 @@ gnome_rr_screen_class_init (GnomeRRScreenClass *klass)
 
     g_object_class_install_property(
             gobject_class,
-            SCREEN_PROP_GDK_SCREEN,
+            SCREEN_PROP_GDK_DISPLAY,
             g_param_spec_object (
-                    "gdk-screen",
-                    "GDK Screen",
-                    "The GDK Screen represented by this GnomeRRScreen",
-                    GDK_TYPE_SCREEN,
+                    "gdk-display",
+                    "GDK Display",
+                    "The GDK Display represented by this GnomeRRScreen",
+                    GDK_TYPE_DISPLAY,
                     G_PARAM_READWRITE |
 		    G_PARAM_CONSTRUCT_ONLY |
 		    G_PARAM_STATIC_STRINGS)
@@ -983,43 +983,43 @@ gnome_rr_screen_init (GnomeRRScreen *self)
     self->priv = gnome_rr_screen_get_instance_private (self);
 }
 
-/* Weak reference callback set in gnome_rr_screen_new(); we remove the GObject data from the GdkScreen. */
+/* Weak reference callback set in gnome_rr_screen_new(); we remove the GObject data from the GdkDisplay. */
 static void
 rr_screen_weak_notify_cb (gpointer data, GObject *where_the_object_was)
 {
-    GdkScreen *screen = GDK_SCREEN (data);
+    GdkDisplay *display = GDK_DISPLAY (data);
 
-    g_object_set_data (G_OBJECT (screen), "GnomeRRScreen", NULL);
+    g_object_set_data (G_OBJECT (display), "GnomeRRScreen", NULL);
 }
 
 /**
  * gnome_rr_screen_new:
- * @screen: the #GdkScreen on which to operate
+ * @screen: the #GdkDisplay on which to operate
  * @error: will be set if XRandR is not supported
  *
  * Creates a unique #GnomeRRScreen instance for the specified @screen.
  *
  * Returns: a unique #GnomeRRScreen instance, specific to the @screen, or NULL
  * if this could not be created, for instance if the driver does not support
- * Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.
+ * Xrandr 1.2.  Each #GdkDisplay thus has a single instance of #GnomeRRScreen.
  */
 GnomeRRScreen *
-gnome_rr_screen_new (GdkScreen *screen,
+gnome_rr_screen_new (GdkDisplay *display,
 		     GError **error)
 {
     GnomeRRScreen *rr_screen;
 
-    g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
+    g_return_val_if_fail (GDK_IS_DISPLAY (display), NULL);
     g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-    rr_screen = g_object_get_data (G_OBJECT (screen), "GnomeRRScreen");
+    rr_screen = g_object_get_data (G_OBJECT (display), "GnomeRRScreen");
     if (rr_screen)
 	g_object_ref (rr_screen);
     else {
-	rr_screen = g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-screen", screen, NULL);
+	rr_screen = g_initable_new (GNOME_TYPE_RR_SCREEN, NULL, error, "gdk-display", display, NULL);
 	if (rr_screen) {
-	    g_object_set_data (G_OBJECT (screen), "GnomeRRScreen", rr_screen);
-	    g_object_weak_ref (G_OBJECT (rr_screen), rr_screen_weak_notify_cb, screen);
+	    g_object_set_data (G_OBJECT (display), "GnomeRRScreen", rr_screen);
+	    g_object_weak_ref (G_OBJECT (rr_screen), rr_screen_weak_notify_cb, display);
 	}
     }
 
@@ -1027,15 +1027,15 @@ gnome_rr_screen_new (GdkScreen *screen,
 }
 
 void
-gnome_rr_screen_new_async (GdkScreen           *screen,
+gnome_rr_screen_new_async (GdkDisplay           *display,
                            GAsyncReadyCallback  callback,
                            gpointer             user_data)
 {
-    g_return_if_fail (GDK_IS_SCREEN (screen));
+    g_return_if_fail (GDK_IS_DISPLAY (display));
 
     g_async_initable_new_async (GNOME_TYPE_RR_SCREEN, G_PRIORITY_DEFAULT,
                                 NULL, callback, user_data,
-                                "gdk-screen", screen, NULL);
+                                "gdk-display", display, NULL);
 }
 
 GnomeRRScreen *

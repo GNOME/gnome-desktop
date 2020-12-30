@@ -13,7 +13,6 @@ introspection_sources = [
   'gnome-desktop-thumbnail.c',
   'gnome-bg.c',
   'gnome-bg-slide-show.c',
-  'gnome-bg-crossfade.c',
   'gnome-rr.c',
   'gnome-rr-config.c',
   'gnome-rr-output-info.c',
@@ -53,7 +52,6 @@ libgnome_desktop_sources = [
 
 libgnome_desktop_headers = [
   'gnome-bg.h',
-  'gnome-bg-crossfade.h',
   'gnome-bg-slide-show.h',
   'gnome-desktop-thumbnail.h',
   'gnome-rr.h',
@@ -67,7 +65,7 @@ libgnome_desktop_headers = [
 ]
 
 install_headers(libgnome_desktop_headers,
-  subdir: 'gnome-desktop-3.0/libgnome-desktop'
+  subdir: 'gnome-desktop-4.0/libgnome-desktop'
 )
 
 gnome_desktop_deps = [
@@ -109,10 +107,10 @@ libgnome_desktop_dep = declare_dependency(
 
 gnome.generate_gir(libgnome_desktop,
   sources: introspection_sources + libgnome_desktop_headers,
-  export_packages: 'gnome-desktop-3.0',
+  export_packages: 'gnome-desktop-4.0',
   namespace: 'GnomeDesktop',
-  nsversion: '3.0',
-  includes: ['GObject-2.0', 'Gtk-3.0', 'GDesktopEnums-3.0'],
+  nsversion: '4.0',
+  includes: ['GObject-2.0', 'Gtk-4.0', 'GDesktopEnums-3.0'],
   extra_args: '-DGNOME_DESKTOP_USE_UNSTABLE_API',
   identifier_prefix: 'Gnome',
   symbol_prefix: 'gnome',
@@ -121,12 +119,12 @@ gnome.generate_gir(libgnome_desktop,
 
 desktop_pc = pkg.generate(
   libraries: libgnome_desktop,
-  requires: ['gtk+-3.0', 'gsettings-desktop-schemas'],
+  requires: ['gtk4', 'gsettings-desktop-schemas'],
   version: meson.project_version(),
-  name: 'gnome-desktop-3.0',
-  filebase: 'gnome-desktop-3.0',
+  name: 'gnome-desktop-4.0',
+  filebase: 'gnome-desktop-4.0',
   description: 'Utility library for loading .desktop files',
-  subdirs: 'gnome-desktop-3.0'
+  subdirs: 'gnome-desktop-4.0'
 )
 
 test_programs = [

@@ -33,7 +33,6 @@
 #include <gio/gio.h>
 #include <gdesktop-enums.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
-#include <libgnome-desktop/gnome-bg-crossfade.h>
 #include <gdesktop-enums.h>
 
 G_BEGIN_DECLS
@@ -78,7 +77,7 @@ const gchar *    gnome_bg_get_filename          (GnomeBG               *bg);
 void             gnome_bg_draw                  (GnomeBG               *bg,
 						 GdkPixbuf             *dest);
 cairo_surface_t *gnome_bg_create_surface        (GnomeBG               *bg,
-						 GdkWindow             *window,
+						 GdkSurface             *surface,
 						 int                    width,
 						 int                    height);
 gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
@@ -89,7 +88,7 @@ gboolean         gnome_bg_get_image_size        (GnomeBG               *bg,
 						 int                   *height);
 GdkPixbuf *      gnome_bg_create_thumbnail      (GnomeBG               *bg,
 						 GnomeDesktopThumbnailFactory *factory,
-						 GdkScreen             *screen,
+						 GdkDisplay             *screen,
 						 int                    dest_width,
 						 int                    dest_height);
 gboolean         gnome_bg_is_dark               (GnomeBG               *bg,
@@ -99,7 +98,7 @@ gboolean         gnome_bg_has_multiple_sizes    (GnomeBG               *bg);
 gboolean         gnome_bg_changes_with_time     (GnomeBG               *bg);
 GdkPixbuf *      gnome_bg_create_frame_thumbnail (GnomeBG              *bg,
 						 GnomeDesktopThumbnailFactory *factory,
-						 GdkScreen             *screen,
+						 GdkDisplay             *screen,
 						 int                    dest_width,
 						 int                    dest_height,
 						 int                    frame_num);

@@ -40,7 +40,6 @@ Author: Soren Sandmann <sandmann@redhat.com>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-bg.h"
 #include "gnome-bg-slide-show.h"
-#include "gnome-bg-crossfade.h"
 
 #define BG_KEY_PRIMARY_COLOR      "primary-color"
 #define BG_KEY_SECONDARY_COLOR    "secondary-color"
@@ -148,7 +147,7 @@ static gboolean   is_different         (GnomeBG               *bg,
 static time_t     get_mtime            (const char            *filename);
 static GdkPixbuf *create_img_thumbnail (GnomeBG               *bg,
 					GnomeDesktopThumbnailFactory *factory,
-					GdkScreen             *screen,
+					GdkDisplay             *display,
 					int                    dest_width,
 					int                    dest_height,
 					int		       frame_num);
@@ -879,7 +878,7 @@ draw_once (GnomeBG   *bg,
 	GdkPixbuf   *pixbuf;
 	gint         num_monitor;
 
-	/* we just draw on the whole screen */
+	/* we just draw on the whole display */
 	num_monitor = 0;
 
 	rect.x = 0;
@@ -972,17 +971,17 @@ gnome_bg_get_pixmap_size (GnomeBG   *bg,
 /**
  * gnome_bg_create_surface:
  * @bg: GnomeBG 
- * @window: 
+ * @surface: 
  * @width: 
  * @height:
  *
- * Create a surface that can be set as background for @window.
+ * Create a surface that can be set as background for @surface.
  *
  * Returns: %NULL on error (e.g. out of X connections)
  **/
 cairo_surface_t *
 gnome_bg_create_surface (GnomeBG	    *bg,
-		 	 GdkWindow   *window,
+		 	 GdkSurface   *gdk_surface,
 			 int	     width,
 			 int	     height)
 {
@@ -992,9 +991,9 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	cairo_t *cr;
 	
 	g_return_val_if_fail (bg != NULL, NULL);
-	g_return_val_if_fail (window != NULL, NULL);
+	g_return_val_if_fail (surface != NULL, NULL);
 
-	scale = gdk_window_get_scale_factor (window);
+	scale = gdk_monitor_get_scale_factor (gdk_surface);
 
         if (bg->pixbuf_cache &&
             gdk_pixbuf_get_width (bg->pixbuf_cache) != width &&
@@ -1005,7 +1004,7 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 
 	/* has the side effect of loading and caching pixbuf only when in tile mode */
 	gnome_bg_get_pixmap_size (bg, width, height, &pm_width, &pm_height);
-	surface = gdk_window_create_similar_surface (window,
+	surface = gdk_surface_create_similar_surface (gdk_surface,
                                                      CAIRO_CONTENT_COLOR,
                                                      pm_width, pm_height);
 
@@ -1018,16 +1017,16 @@ gnome_bg_create_surface (GnomeBG	    *bg,
 	}
 	else {
 		GdkPixbuf *pixbuf;
-		cairo_surface_t *pixbuf_surface;
+		// cairo_surface_t *pixbuf_surface;
 		
 		pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 					 scale * width, scale * height);
 		gnome_bg_draw (bg, pixbuf);
 
-		pixbuf_surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, 0, window);
-		cairo_set_source_surface (cr, pixbuf_surface, 0, 0);
+	    // pixbuf_surface = gdk_cairo_region_create_from_surface (surface);
+		gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
 
-		cairo_surface_destroy (pixbuf_surface);
+	    // cairo_surface_destroy (pixbuf_surface);
 		g_object_unref (pixbuf);
 	}
 
@@ -1164,7 +1163,7 @@ fit_factor (int from_width, int from_height,
 GdkPixbuf *
 gnome_bg_create_thumbnail (GnomeBG               *bg,
 		           GnomeDesktopThumbnailFactory *factory,
-			   GdkScreen             *screen,
+			   GdkDisplay             *display,
 			   int                    dest_width,
 			   int                    dest_height)
 {
@@ -1178,7 +1177,7 @@ gnome_bg_create_thumbnail (GnomeBG               *bg,
 	draw_color (bg, result);
 	
 	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, -1);
+		thumb = create_img_thumbnail (bg, factory, display, dest_width, dest_height, -1);
 		
 		if (thumb) {
 			draw_image_for_thumb (bg, thumb, result);
@@ -1566,7 +1565,7 @@ static GdkPixbuf *
 scale_thumbnail (GDesktopBackgroundStyle placement,
 		 const char *filename,
 		 GdkPixbuf *thumb,
-		 GdkScreen *screen,
+		 GdkDisplay *display,
 		 int	    dest_width,
 		 int	    dest_height)
 {
@@ -1584,9 +1583,21 @@ scale_thumbnail (GDesktopBackgroundStyle placement,
 	
 	if (get_thumb_annotations (thumb, &o_width, &o_height)		||
 	    (filename && get_original_size (filename, &o_width, &o_height))) {
-		
-		int scr_height = gdk_screen_get_height (screen);
-		int scr_width = gdk_screen_get_width (screen);
+
+		GListModel* monitors = gdk_display_get_monitors (display);
+		GdkMonitor *monitor;
+		GdkRectangle scr_rect = { 0, };
+		int i = 0;
+		for (i = 1; i < g_list_model_get_n_items (monitors); i++) {
+    		GdkRectangle rect;
+    		monitor = g_list_model_get_item (monitors, i);
+    		gdk_monitor_get_geometry (monitor, &rect);
+    		gdk_rectangle_union (&scr_rect, &rect, &scr_rect);
+    		g_object_unref (monitor);
+  		}
+		int scr_height = scr_rect.height;
+		int scr_width = scr_rect.width;
+
 		int thumb_width = gdk_pixbuf_get_width (thumb);
 		int thumb_height = gdk_pixbuf_get_height (thumb);
 		double screen_to_dest = fit_factor (scr_width, scr_height,
@@ -1630,7 +1641,7 @@ scale_thumbnail (GDesktopBackgroundStyle placement,
 static GdkPixbuf *
 create_img_thumbnail (GnomeBG                      *bg,
 		      GnomeDesktopThumbnailFactory *factory,
-		      GdkScreen                    *screen,
+		      GdkDisplay                    *display,
 		      int                           dest_width,
 		      int                           dest_height,
 		      int                           frame_num)
@@ -1645,7 +1656,7 @@ create_img_thumbnail (GnomeBG                      *bg,
 			result = scale_thumbnail (bg->placement,
 						  bg->filename,
 						  thumb,
-						  screen,
+						  display,
 						  dest_width,
 						  dest_height);
 			g_object_unref (thumb);
@@ -1688,7 +1699,7 @@ create_img_thumbnail (GnomeBG                      *bg,
 						thumb = scale_thumbnail (bg->placement,
 									 file1,
 									 tmp,
-									 screen,
+									 display,
 									 dest_width,
 									 dest_height);
 						g_object_unref (tmp);
@@ -1705,14 +1716,14 @@ create_img_thumbnail (GnomeBG                      *bg,
 						thumb1 = scale_thumbnail (bg->placement,
 									  file1,
 									  p1,
-									  screen,
+									  display,
 									  dest_width,
 									  dest_height);
 
 						thumb2 = scale_thumbnail (bg->placement,
 									  file2,
 									  p2,
-									  screen,
+									  display,
 									  dest_width,
 									  dest_height);
 
@@ -2268,7 +2279,7 @@ gnome_bg_changes_with_time (GnomeBG *bg)
 GdkPixbuf *
 gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 				 GnomeDesktopThumbnailFactory	*factory,
-				 GdkScreen			*screen,
+				 GdkDisplay			*display,
 				 int				 dest_width,
 				 int				 dest_height,
 				 int				 frame_num)
@@ -2304,7 +2315,7 @@ gnome_bg_create_frame_thumbnail (GnomeBG			*bg,
 	draw_color (bg, result);
 
 	if (bg->placement != G_DESKTOP_BACKGROUND_STYLE_NONE) {
-		thumb = create_img_thumbnail (bg, factory, screen, dest_width, dest_height, frame_num + skipped);
+		thumb = create_img_thumbnail (bg, factory, display, dest_width, dest_height, frame_num + skipped);
 
 		if (thumb) {
 			draw_image_for_thumb (bg, thumb, result);

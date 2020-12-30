@@ -93,9 +93,8 @@ add_extra_css (const char *testname,
 
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
   gtk_css_provider_load_from_path (GTK_CSS_PROVIDER (provider),
-                                   css_file,
-                                   NULL);
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                   css_file);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                              provider,
                                              GTK_STYLE_PROVIDER_PRIORITY_FORCE);
 
@@ -110,7 +109,7 @@ remove_extra_css (GtkStyleProvider *provider)
   if (provider == NULL)
     return;
 
-  gtk_style_context_remove_provider_for_screen (gdk_screen_get_default (),
+  gtk_style_context_remove_provider_for_display (gdk_display_get_default (),
                                                 provider);
 }
 
@@ -144,30 +143,26 @@ quit_when_idle (gpointer loop)
   return G_SOURCE_REMOVE;
 }
 
-static void
-event_handler_func (GdkEvent *event,
-                    gpointer  data)
+static gboolean
+check_for_draw (GdkSurface  *surface,
+               cairo_region_t *region,
+               gpointer    user_data)
 {
-    gtk_main_do_event (event);
-}
+  GdkEvent *event = (GdkEvent*)event;
+  GMainLoop *loop = (GMainLoop*)user_data;
 
-static void
-check_for_draw (GdkEvent *event, gpointer loop)
-{
-  if (event->type == GDK_EXPOSE)
-    {
-      g_idle_add (quit_when_idle, loop);
-      gdk_event_handler_set ((GdkEventFunc) event_handler_func, NULL, NULL);
-    }
+  g_idle_add (quit_when_idle, loop);
+  
+  g_object_disconnect(surface, "render", check_for_draw, loop, NULL);
 
-  gtk_main_do_event (event);
+  return FALSE;
 }
 
 static cairo_surface_t *
 snapshot_widget (GtkWidget *widget, SnapshotMode mode)
 {
   cairo_surface_t *surface;
-  cairo_pattern_t *bg;
+  // cairo_pattern_t *bg;
   GMainLoop *loop;
   cairo_t *cr;
 
@@ -179,43 +174,50 @@ snapshot_widget (GtkWidget *widget, SnapshotMode mode)
    * happen if the window is fully obscured by windowed child widgets.
    * Alternatively, we could wait for an expose event on widget's window.
    * Both of these are rather hairy, not sure what's best. */
-  gdk_event_handler_set (check_for_draw, loop, NULL);
-  g_main_loop_run (loop);
-
-  surface = gdk_window_create_similar_surface (gtk_widget_get_window (widget),
+  
+  GtkNative* native = gtk_widget_get_native(widget);
+  GdkSurface* gdk_surface = gtk_native_get_surface(native);
+  surface = gdk_surface_create_similar_surface (gdk_surface,
                                                CAIRO_CONTENT_COLOR,
                                                gtk_widget_get_allocated_width (widget),
                                                gtk_widget_get_allocated_height (widget));
 
+  g_object_connect(surface, "render", check_for_draw, loop, NULL);
+  g_main_loop_run (loop);
+  
   cr = cairo_create (surface);
 
   switch (mode)
     {
     case SNAPSHOT_WINDOW:
       {
-        GdkWindow *window = gtk_widget_get_window (widget);
-        if (gdk_window_get_window_type (window) == GDK_WINDOW_TOPLEVEL ||
-            gdk_window_get_window_type (window) == GDK_WINDOW_FOREIGN)
+        GtkNative *native = gtk_widget_get_native (widget);
+        // TODO: native can be NULL?
+        GdkSurface *surface= gtk_native_get_surface (native);
+        cairo_surface_t* cairo_surface = gdk_surface_create_similar_surface(surface, CAIRO_CONTENT_COLOR, gtk_widget_get_allocated_width(widget), gtk_widget_get_allocated_height(widget));
+        if (GTK_IS_ROOT(surface) || GTK_IS_NATIVE(surface))
           {
             /* give the WM/server some time to sync. They need it.
              * Also, do use popups instead of toplevls in your tests
              * whenever you can. */
-            gdk_display_sync (gdk_window_get_display (window));
+            gdk_display_sync (gdk_surface_get_display (surface));
             g_timeout_add (500, quit_when_idle, loop);
             g_main_loop_run (loop);
           }
-        gdk_cairo_set_source_window (cr, window, 0, 0);
+        GdkPixbuf* pixbuf = gdk_pixbuf_get_from_surface(cairo_surface, 0, 0, gtk_widget_get_allocated_width(widget), gtk_widget_get_allocated_height(widget));
+        gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
         cairo_paint (cr);
       }
       break;
     case SNAPSHOT_DRAW:
-      bg = gdk_window_get_background_pattern (gtk_widget_get_window (widget));
-      if (bg)
-        {
-          cairo_set_source (cr, bg);
-          cairo_paint (cr);
-        }
-      gtk_widget_draw (widget, cr);
+      // TODO:
+      // bg = gdk_window_get_background_pattern (gtk_widget_get_window (widget));
+      // if (bg)
+      //   {
+      //     cairo_set_source (cr, bg);
+      //     cairo_paint (cr);
+      //   }
+      // gtk_widget_draw (widget, cr);
       break;
     default:
       g_assert_not_reached();
@@ -224,7 +226,7 @@ snapshot_widget (GtkWidget *widget, SnapshotMode mode)
 
   cairo_destroy (cr);
   g_main_loop_unref (loop);
-  gtk_widget_destroy (widget);
+  g_object_unref (widget);
 
   return surface;
 }
@@ -269,6 +271,34 @@ save_image (cairo_surface_t *surface,
   g_free (filename);
 }
 
+// TODO: Removed from GDK
+gboolean
+__gdk_cairo_get_clip_rectangle (cairo_t      *cr,
+                              GdkRectangle *rect)
+{
+  double x1, y1, x2, y2;
+  gboolean clip_exists;
+
+  cairo_clip_extents (cr, &x1, &y1, &x2, &y2);
+
+  clip_exists = x1 < x2 && y1 < y2;
+
+  if (rect)
+    {
+      x1 = floor (x1);
+      y1 = floor (y1);
+      x2 = ceil (x2);
+      y2 = ceil (y2);
+
+      rect->x      = CLAMP (x1,      G_MININT, G_MAXINT);
+      rect->y      = CLAMP (y1,      G_MININT, G_MAXINT);
+      rect->width  = CLAMP (x2 - x1, G_MININT, G_MAXINT);
+      rect->height = CLAMP (y2 - y1, G_MININT, G_MAXINT);
+    }
+
+  return clip_exists;
+}
+
 static void
 get_surface_size (cairo_surface_t *surface,
                   int             *width,
@@ -278,7 +308,7 @@ get_surface_size (cairo_surface_t *surface,
   cairo_t *cr;
 
   cr = cairo_create (surface);
-  if (!gdk_cairo_get_clip_rectangle (cr, &area))
+  if (!__gdk_cairo_get_clip_rectangle (cr, &area))
     {
       g_assert_not_reached ();
     }
@@ -597,7 +627,7 @@ main (int argc, char **argv)
   g_setenv ("GDK_RENDERING", "image", FALSE);
 
   g_test_init (&argc, &argv, NULL);
-  gtk_init (&argc, &argv);
+  gtk_init ();
 
   basedir = g_getenv ("G_TEST_SRCDIR");
   if (basedir == NULL)

@@ -1,1 +1,1 @@
-i18n.gettext('gnome-desktop-3.0', preset: 'glib')
+i18n.gettext('gnome-desktop-4.0', preset: 'glib')

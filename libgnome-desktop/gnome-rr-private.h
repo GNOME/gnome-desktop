@@ -1,20 +1,7 @@
 #ifndef GNOME_RR_PRIVATE_H
 #define GNOME_RR_PRIVATE_H
 
-#ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
-#else
-enum wl_output_transform {
-  WL_OUTPUT_TRANSFORM_NORMAL,
-  WL_OUTPUT_TRANSFORM_90,
-  WL_OUTPUT_TRANSFORM_180,
-  WL_OUTPUT_TRANSFORM_270,
-  WL_OUTPUT_TRANSFORM_FLIPPED,
-  WL_OUTPUT_TRANSFORM_FLIPPED_90,
-  WL_OUTPUT_TRANSFORM_FLIPPED_180,
-  WL_OUTPUT_TRANSFORM_FLIPPED_270
-};
-#endif
+#include <gdk/wayland/gdkwayland.h>
 
 #include "meta-xrandr-shared.h"
 #include "meta-dbus-xrandr.h"
@@ -43,8 +30,8 @@ struct ScreenInfo
 
 struct GnomeRRScreenPrivate
 {
-    GdkScreen *			gdk_screen;
-    GdkWindow *			gdk_root;
+    GdkDisplay *			gdk_screen;
+    GdkSurface *			gdk_root;
     ScreenInfo *		info;
 
     int                         init_name_watch_id;

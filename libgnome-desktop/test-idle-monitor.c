@@ -38,7 +38,7 @@ int main (int argc, char **argv)
 	GnomeIdleMonitor *monitor;
 	guint watch_id;
 
-	gtk_init (&argc, &argv);
+	gtk_init ();
 
 	monitor = gnome_idle_monitor_new ();
 	watch_id = gnome_idle_monitor_add_idle_watch (monitor,
@@ -51,7 +51,8 @@ int main (int argc, char **argv)
 
 	ensure_active_watch (monitor);
 
-	gtk_main ();
+	GMainLoop *loop = g_main_loop_new (NULL, FALSE);
+	g_main_loop_run(loop);
 
 	return 0;
 }

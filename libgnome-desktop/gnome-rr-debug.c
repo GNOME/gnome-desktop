@@ -148,8 +148,8 @@ main (int argc, char *argv[])
 	GnomeRRScreen *screen;
 	guint i;
 
-	gtk_init (&argc, &argv);
-	screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	gtk_init ();
+	screen = gnome_rr_screen_new (gdk_display_get_default (), &error);
 	if (screen == NULL) {
 		g_warning ("failed to get screen: %s", error->message);
 		g_error_free (error);
@@ -164,7 +164,8 @@ main (int argc, char *argv[])
 	g_signal_connect (screen, "output-connected", G_CALLBACK (output_connected), NULL);
 	g_signal_connect (screen, "notify::dpms-mode", G_CALLBACK (dpms_mode_changed), NULL);
 
-	gtk_main ();
+	GMainLoop *loop = g_main_loop_new (NULL, FALSE);
+	g_main_loop_run(loop);
 
 out:
 	g_object_unref (screen);
