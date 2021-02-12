@@ -258,7 +258,7 @@ add_layouts (GnomeXkbInfo        *self,
            iso639 = rxkb_iso639_code_next (iso639))
         {
           char *id = g_strdup (rxkb_iso639_code_get_code (iso639));
-          l->iso3166Ids = g_slist_prepend (l->iso3166Ids, id);
+          l->iso639Ids = g_slist_prepend (l->iso639Ids, id);
         }
       for (iso3166 = rxkb_layout_get_iso3166_first (layout);
            iso3166;
