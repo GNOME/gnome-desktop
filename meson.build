@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.49.0',
-  version: '40.alpha.0',
+  version: '40.beta',
   license: ['GPL2+', 'LGPL2+']
 )
 
@@ -14,7 +14,7 @@ project('gnome-desktop', 'c',
 # to 0. When bumping the second version, set the third one to zero.
 #
 # A lot easier than libtool, right?
-libversion = '19.1.0'
+libversion = '19.1.1'
 soversion = libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
@@ -109,7 +109,7 @@ version_conf = configuration_data()
 
 version_conf.set('GNOME_PLATFORM', version_array[0])
 version_conf.set('GNOME_MINOR', version_array[1])
-version_conf.set('GNOME_MICRO', version_array[2])
+version_conf.set('GNOME_MICRO', 0)
 version_conf.set('GNOME_DISTRIBUTOR', get_option('gnome_distributor'))
 
 if get_option('date_in_gnome_version')
