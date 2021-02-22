@@ -992,6 +992,7 @@ script_exec_new (const char  *uri,
           goto bail;
         }
 
+      g_mkdir_with_parents (sandbox_dir, 0700);
       tmpl = g_build_filename (sandbox_dir, "gnome-desktop-thumbnailer-XXXXXX", NULL);
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
