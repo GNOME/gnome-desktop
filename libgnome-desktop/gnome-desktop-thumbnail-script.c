@@ -681,6 +681,7 @@ add_flatpak (GPtrArray   *array,
             "flatpak-spawn",
             "--clear-env",
             "--env=GIO_USE_VFS=local",
+            "--env=LC_ALL=C.UTF-8",
             NULL);
 
   add_flatpak_env (array, "G_MESSAGES_DEBUG");
