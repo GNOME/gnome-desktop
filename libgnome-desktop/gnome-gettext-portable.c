@@ -20,6 +20,9 @@
 #include "config.h"
 
 #include <locale.h>
+#ifdef HAVE_XLOCALE
+#include <xlocale.h>
+#endif
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>

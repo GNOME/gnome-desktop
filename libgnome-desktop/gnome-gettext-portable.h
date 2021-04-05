@@ -23,6 +23,10 @@
 #include <locale.h>
 #include <string.h>
 
+#ifdef HAVE_XLOCALE
+#include <xlocale.h>
+#endif
+
 const char * 
 dgettext_l (locale_t    locale,
             const char *domain,
