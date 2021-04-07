@@ -12,6 +12,7 @@ test_env = [
 ]
 
 test_programs = [
+  'bg-slide-show',
   'wall-clock',
   'wallclock-reftest',
   'languages'
@@ -52,7 +53,8 @@ if get_option('installed_tests')
     'he_IL.utf8.ref.ui',
     'he_IL.utf8.ui',
     'ja_JP.utf8.ref.ui',
-    'ja_JP.utf8.ui'
+    'ja_JP.utf8.ui',
+    'starttime.xml'
   )
   install_data(test_data, install_dir: test_execdir)
   install_data(test_metas, install_dir: test_metadir)

@@ -384,7 +384,7 @@ handle_text (GMarkupParseContext *context,
                 self->priv->start_tm.tm_mday = parse_int (text);
         }
         else if (stack_is (self, "hour", "starttime", "background", NULL)) {
-                self->priv->start_tm.tm_hour = parse_int (text) - 1;
+                self->priv->start_tm.tm_hour = parse_int (text);
         }
         else if (stack_is (self, "minute", "starttime", "background", NULL)) {
                 self->priv->start_tm.tm_min = parse_int (text);
@@ -680,6 +680,9 @@ parse_file_contents (GnomeBGSlideShow  *self,
         if (!failed) {
                 guint queue_length;
 
+                /* Per the API of mktime, use a negative value on tm_isdst, in order to
+                 * use the system databases to get the active timezone DST status.  */
+                self->priv->start_tm.tm_isdst = -1;
                 t = mktime (&self->priv->start_tm);
 
                 self->priv->start_time = (double)t;
