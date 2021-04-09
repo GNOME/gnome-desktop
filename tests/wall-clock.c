@@ -36,7 +36,8 @@ test_utf8_character (const char *utf8_char,
 {
 	GDateTime  *datetime;
 	GnomeWallClock *clock;
-	const char *save_locale;
+	locale_t locale;
+	locale_t save_locale;
 	const char *str;
 
 	/* When testing that UTF8 locales don't use double spaces
@@ -46,7 +47,9 @@ test_utf8_character (const char *utf8_char,
 
 	/* In the C locale, make sure the time string is formatted with regular
          * colons */
-	save_locale = setlocale (LC_ALL, NULL);
+	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+	g_assert_true (locale != (locale_t)0);
+	save_locale = uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
 	                                            datetime,
@@ -57,7 +60,13 @@ test_utf8_character (const char *utf8_char,
 	g_object_unref (clock);
 
 	/* In a UTF8 locale, we want ratio characters and no colons. */
-	setlocale (LC_ALL, "en_US.utf8");
+	locale = newlocale (LC_ALL_MASK, "en_US.utf8", locale);
+	if (locale == (locale_t)0) {
+		g_test_message ("en_US.utf8 locale not found");
+		g_test_fail ();
+		return;
+	}
+	uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
 	                                            datetime,
@@ -69,7 +78,13 @@ test_utf8_character (const char *utf8_char,
 
 	/* ... and same thing with an RTL locale: should be formatted with
          * ratio characters */
-	setlocale (LC_ALL, "he_IL.utf8");
+	locale = newlocale (LC_ALL_MASK, "he_IL.utf8", locale);
+	if (locale == (locale_t)0) {
+		g_test_message ("he_IL.utf8 locale not found");
+		g_test_fail ();
+		return;
+	}
+	uselocale (locale);
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
 	                                            datetime,
@@ -82,7 +97,8 @@ test_utf8_character (const char *utf8_char,
 	g_date_time_unref (datetime);
 
 	/* Restore previous locale */
-	setlocale (LC_ALL, save_locale);
+	uselocale (save_locale);
+	freelocale (locale);
 }
 
 static void
@@ -102,11 +118,17 @@ test_clock_format_setting (void)
 {
 	GnomeWallClock *clock;
 	GSettings *settings;
-	const char *save_locale;
+	locale_t locale;
+	locale_t save_locale;
 	const char *str;
 
-	save_locale = setlocale (LC_ALL, NULL);
-	setlocale (LC_ALL, "en_US.utf8");
+	locale = newlocale (LC_ALL_MASK, "en_US.utf8", (locale_t) 0);
+	if (locale == (locale_t)0) {
+		g_test_message ("en_US.utf8 locale not found");
+		g_test_fail ();
+		return;
+	}
+	save_locale = uselocale (locale);
 
 	settings = g_settings_new ("org.gnome.desktop.interface");
 
@@ -127,7 +149,8 @@ test_clock_format_setting (void)
 	g_object_unref (settings);
 
 	/* Restore previous locale */
-	setlocale (LC_ALL, save_locale);
+	uselocale (save_locale);
+	freelocale (locale);
 }
 
 static gboolean
@@ -179,12 +202,14 @@ test_weekday_setting (void)
 {
 	GnomeWallClock *clock;
 	GSettings *settings;
-	const char *save_locale;
+	locale_t locale;
+	locale_t save_locale;
 	const char *str, *ptr, *s;
 
 	/* Save current locale */
-	save_locale = setlocale (LC_ALL, NULL);
-	setlocale (LC_ALL, "C");
+	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+	g_assert_true (locale != (locale_t)0);
+	save_locale = uselocale (locale);
 	settings = g_settings_new ("org.gnome.desktop.interface");
 
 	/* Set 24h format, so that the only alphabetical part will be the weekday */
@@ -220,7 +245,8 @@ test_weekday_setting (void)
 	g_object_unref (settings);
 
 	/* Restore previous locale */
-	setlocale (LC_ALL, save_locale);
+	uselocale (save_locale);
+	freelocale (locale);
 }
 
 int

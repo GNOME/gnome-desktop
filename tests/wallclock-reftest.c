@@ -439,15 +439,21 @@ test_ui_file (GFile         *file,
   GnomeWallClock *clock;
   GDateTime *datetime;
   char *str;
-  const char *previous_locale;
+  locale_t loc, previous_locale;
 
   ui_file = g_file_get_path (file);
 
   locale = get_locale_for_file (ui_file);
   g_assert (locale);
-  previous_locale = setlocale (LC_ALL, NULL);
-  setlocale (LC_ALL, locale);
-  g_assert_true (previous_locale != NULL);
+  loc = newlocale (LC_ALL_MASK, locale, (locale_t) 0);
+  if (loc == (locale_t)0)
+    {
+      g_test_message ("locale '%s' not found", locale);
+      g_test_fail();
+      return;
+    }
+  previous_locale = uselocale (loc);
+  g_assert_true (previous_locale != (locale_t) 0);
 
   clock = gnome_wall_clock_new ();
   datetime = g_date_time_new_local (2014, 5, 28, 23, 59, 59);
@@ -459,7 +465,8 @@ test_ui_file (GFile         *file,
   g_date_time_unref (datetime);
   g_object_unref (clock);
 
-  setlocale (LC_ALL, previous_locale);
+  uselocale (previous_locale);
+  freelocale (loc);
 
   provider = add_extra_css (ui_file, ".css");
 
