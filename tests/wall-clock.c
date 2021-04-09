@@ -57,7 +57,7 @@ test_utf8_character (const char *utf8_char,
 	g_object_unref (clock);
 
 	/* In a UTF8 locale, we want ratio characters and no colons. */
-	setlocale (LC_ALL, "en_US.UTF-8");
+	setlocale (LC_ALL, "en_US.utf8");
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
 	                                            datetime,
@@ -69,7 +69,7 @@ test_utf8_character (const char *utf8_char,
 
 	/* ... and same thing with an RTL locale: should be formatted with
          * ratio characters */
-	setlocale (LC_ALL, "he_IL.UTF-8");
+	setlocale (LC_ALL, "he_IL.utf8");
 	clock = gnome_wall_clock_new ();
 	str = gnome_wall_clock_string_for_datetime (clock,
 	                                            datetime,
@@ -106,7 +106,7 @@ test_clock_format_setting (void)
 	const char *str;
 
 	save_locale = setlocale (LC_ALL, NULL);
-	setlocale (LC_ALL, "en_US.UTF-8");
+	setlocale (LC_ALL, "en_US.utf8");
 
 	settings = g_settings_new ("org.gnome.desktop.interface");
 
