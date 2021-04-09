@@ -95,7 +95,6 @@ conf.set('HAVE_XKBREGISTRY', xkbregistry_dep.found())
 conf.set('HAVE_TIMERFD', cc.has_function('timerfd_create'))
 conf.set('HAVE_OPENAT', cc.has_function('openat'))
 conf.set('HAVE_USELOCALE', cc.has_function('uselocale'))
-conf.set('HAVE_XLOCALE', cc.has_header('xlocale.h'))
 
 config_h = declare_dependency(
   sources: configure_file(
