@@ -13,7 +13,8 @@ test_env = [
 
 test_programs = [
   'wall-clock',
- 'wallclock-reftest'
+  'wallclock-reftest',
+  'languages'
 ]
 
 test_metas = []

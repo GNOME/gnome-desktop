@@ -24,8 +24,8 @@
 
 #include "config.h"
 
-#include <locale.h>
 #include <glib/gi18n-lib.h>
+#include "gnome-gettext-portable.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-wall-clock.h"
@@ -289,18 +289,13 @@ translate_time_format_string (const char *str)
   const char *locale = g_getenv ("LC_TIME");
   const char *res;
   char *sep;
-  locale_t old_loc;
   locale_t loc = (locale_t)0;
 
   if (locale)
     loc = newlocale (LC_MESSAGES_MASK, locale, (locale_t)0);
 
-  old_loc = uselocale (loc);
-
   sep = strchr (str, '\004');
-  res = g_dpgettext (GETTEXT_PACKAGE, str, sep ? sep - str + 1 : 0);
-
-  uselocale (old_loc);
+  res = g_dpgettext_l (loc, GETTEXT_PACKAGE, str, sep ? sep - str + 1 : 0);
 
   if (loc != (locale_t)0)
     freelocale (loc);

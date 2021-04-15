@@ -48,7 +48,8 @@ libgnome_desktop_sources = [
   'default-input-sources.h',
   'meta-xrandr-shared.h',
   'gnome-desktop-thumbnail-script.c',
-  'gnome-desktop-thumbnail-script.h'
+  'gnome-desktop-thumbnail-script.h',
+  'gnome-gettext-portable.c'
 ]
 
 libgnome_desktop_headers = [
