@@ -268,6 +268,12 @@ add_layouts (GnomeXkbInfo        *self,
           l->iso3166Ids = g_slist_prepend (l->iso3166Ids, id);
         }
 
+      if (g_hash_table_contains (priv->layouts_table, l->id))
+        {
+          g_clear_pointer (&l, free_layout);
+          return;
+        }
+
       g_hash_table_replace (priv->layouts_table, l->id, l);
       add_layout_to_locale_tables (l,
                                    priv->layouts_by_language,
