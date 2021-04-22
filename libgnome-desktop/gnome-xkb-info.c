@@ -271,7 +271,7 @@ add_layouts (GnomeXkbInfo        *self,
       if (g_hash_table_contains (priv->layouts_table, l->id))
         {
           g_clear_pointer (&l, free_layout);
-          return;
+          continue;
         }
 
       g_hash_table_replace (priv->layouts_table, l->id, l);
