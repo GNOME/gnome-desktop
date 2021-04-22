@@ -26,12 +26,16 @@ main (int argc, char **argv)
 						    &xkb_variant) == FALSE) {
 			g_warning ("Failed to get info for layout '%s'", id);
 		} else {
+			char *name = g_uri_escape_string (display_name,
+							  " (),<>+;:",
+							  TRUE);
 			g_print ("  %s:\n", id);
-			g_print ("    display name: \"%s\"\n",
-				 g_uri_escape_string (display_name, " (),<>+;:", TRUE));
+			g_print ("    display name: \"%s\"\n", name);
 			g_print ("    short name: %s\n", short_name);
 			g_print ("    xkb layout: %s\n", xkb_layout);
 			g_print ("    xkb variant: %s\n", xkb_variant);
+
+			g_free (name);
 		}
 	}
 	g_list_free (layouts);
@@ -49,10 +53,14 @@ main (int argc, char **argv)
 			const char *description = gnome_xkb_info_description_for_option (info,
 											 group_id,
 											 id);
+			char *desc = g_uri_escape_string (description,
+							  " (),<>+;:",
+							  TRUE);
 
 			g_print ("    %s:\n", id);
-			g_print ("      description: \"%s\"\n",
-				 g_uri_escape_string (description, " (),<>+;:", TRUE));
+			g_print ("      description: \"%s\"\n", desc);
+			g_free (desc);
+
 		}
 		g_list_free (options);
 	}
