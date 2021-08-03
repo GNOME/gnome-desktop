@@ -77,6 +77,7 @@ struct _GnomeXkbInfoPrivate
   GHashTable *layouts_by_country;
   GHashTable *layouts_by_language;
   GHashTable *layouts_table;
+  GSettings *settings;
 
 #ifndef HAVE_XKBREGISTRY
   /* Only used while parsing */
@@ -89,6 +90,8 @@ struct _GnomeXkbInfoPrivate
   gchar **current_parser_text;
 #endif
 };
+
+static guint layouts_changed_signal;
 
 G_DEFINE_TYPE_WITH_CODE (GnomeXkbInfo, gnome_xkb_info, G_TYPE_OBJECT,
                          G_ADD_PRIVATE (GnomeXkbInfo));
@@ -740,7 +743,6 @@ static void
 parse_rules (GnomeXkbInfo *self)
 {
   GnomeXkbInfoPrivate *priv = self->priv;
-  GSettings *settings;
   gboolean show_all_sources;
 
   /* Make sure the translated strings we get from XKEYBOARD_CONFIG() are
@@ -764,9 +766,7 @@ parse_rules (GnomeXkbInfo *self)
   /* Maps layout ids to Layout structs. Owns the Layout structs. */
   priv->layouts_table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_layout);
 
-  settings = g_settings_new ("org.gnome.desktop.input-sources");
-  show_all_sources = g_settings_get_boolean (settings, "show-all-sources");
-  g_object_unref (settings);
+  show_all_sources = g_settings_get_boolean (priv->settings, "show-all-sources");
 
   if (!parse_rules_file (self, XKB_RULES_FILE, show_all_sources))
     {
@@ -790,9 +790,19 @@ ensure_rules_are_parsed (GnomeXkbInfo *self)
 }
 
 static void
+show_all_sources_changed (GnomeXkbInfo *self)
+{
+  g_clear_pointer (&self->priv->layouts_table, g_hash_table_unref);
+  g_signal_emit (self, layouts_changed_signal, 0);
+}
+
+static void
 gnome_xkb_info_init (GnomeXkbInfo *self)
 {
   self->priv = gnome_xkb_info_get_instance_private (self);
+  self->priv->settings = g_settings_new ("org.gnome.desktop.input-sources");
+  g_signal_connect_swapped (self->priv->settings, "changed::show-all-sources",
+                            G_CALLBACK (show_all_sources_changed), self);
 }
 
 static void
@@ -808,6 +818,7 @@ gnome_xkb_info_finalize (GObject *self)
     g_hash_table_destroy (priv->layouts_by_language);
   if (priv->layouts_table)
     g_hash_table_destroy (priv->layouts_table);
+  g_clear_object (&priv->settings);
 
   G_OBJECT_CLASS (gnome_xkb_info_parent_class)->finalize (self);
 }
@@ -818,6 +829,15 @@ gnome_xkb_info_class_init (GnomeXkbInfoClass *klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
   gobject_class->finalize = gnome_xkb_info_finalize;
+
+  layouts_changed_signal =
+    g_signal_new ("layouts-changed",
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_FIRST,
+                  0,
+                  NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE, 0);
 }
 
 /**
