@@ -34,7 +34,9 @@ build_stable:
     - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     paths:
-      - build/meson-dist/
       - build/meson-logs/
       - build/test-results/
     when: on_failure
+    paths:
+      - build/meson-dist/
+    when: on_success
