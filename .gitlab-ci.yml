@@ -26,6 +26,7 @@ build_stable:
     - pushd build
     - ninja
     - ninja install
+    - ninja dist
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
@@ -33,6 +34,7 @@ build_stable:
     - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     paths:
+      - build/meson-dist/
       - build/meson-logs/
       - build/test-results/
     when: on_failure
