@@ -1,42 +1,45 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 image: fedora:34
-
 variables:
   LAST_ABI_BREAK: 9d01763ba2a3f71b7c0aade04d2ffa6a883e308d
-  DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext
-                gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
-                gobject-introspection-devel systemd-devel iso-codes-devel
-                libseccomp-devel gcc gcc-c++ glibc-devel
-                meson redhat-rpm-config
-  TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-en glibc-langpack-he glibc-langpack-ja abattis-cantarell-fonts libabigail git
-
+  DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext gtk-doc libxkbcommon-devel
+    xkeyboard-config-devel itstool gobject-introspection-devel systemd-devel iso-codes-devel
+    libseccomp-devel gcc gcc-c++ glibc-devel meson redhat-rpm-config
+  TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-en
+    glibc-langpack-he glibc-langpack-ja abattis-cantarell-fonts libabigail git
 build_stable:
   before_script:
-    # Undo delangification present in the Fedora Docker images
-    - rm -f /etc/rpm/macros.image-language-conf
-    - echo "reinstall glib2" >> translist.txt
-    # Work-around https://bugzilla.redhat.com/show_bug.cgi?id=1607172#c4
-    - echo "update dnf gdbm" >> translist.txt
-    - echo "remove python3-modulemd" >> translist.txt
-    - dnf shell -y --nogpgcheck translist.txt
-    - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck $DEPENDENCIES
-    - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
+  - rm -f /etc/rpm/macros.image-language-conf
+  - echo "reinstall glib2" >> translist.txt
+  - echo "update dnf gdbm" >> translist.txt
+  - echo "remove python3-modulemd" >> translist.txt
+  - dnf shell -y --nogpgcheck translist.txt
+  - dnf update -y --nogpgcheck
+  - dnf install -y --nogpgcheck $DEPENDENCIES
+  - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
-    - meson --prefix=/usr -Dinstalled_tests=true build
-    - pushd build
-    - ninja
-    - ninja install
-    - ninja dist
-    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
-    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
-                     gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
-    - popd
-    - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+  - meson --prefix=/usr -Dinstalled_tests=true build
+  - pushd build
+  - ninja
+  - ninja install
+  - ninja dist
+  - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
+  - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" gnome-desktop-testing-runner
+    --report-directory=test-results gnome-desktop
+  - popd
+  - ".ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)"
   artifacts:
     paths:
-      - build/meson-logs/
-      - build/test-results/
-    when: on_failure
-    paths:
-      - build/meson-dist/
+    - build/meson-dist/
     when: on_success
+stages:
+- test
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
