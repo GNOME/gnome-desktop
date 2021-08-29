@@ -50,3 +50,14 @@ build_stable:
     paths:
       - build/meson-dist/
     when: on_success
+
+do_gitlab_release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo 'Running release_job'
+  release:
+    tag_name: '$CI_COMMIT_TAG'
+    description: 'See NEWS file'
