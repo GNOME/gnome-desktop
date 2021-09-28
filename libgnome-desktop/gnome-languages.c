@@ -104,13 +104,13 @@ normalize_codeset (const char *codeset)
 /**
  * gnome_parse_locale:
  * @locale: a locale string
- * @language_codep: (out) (allow-none) (transfer full): location to
+ * @language_codep: (out) (optional) (transfer full): location to
  * store the language code, or %NULL
- * @country_codep: (out) (allow-none) (transfer full): location to
+ * @country_codep: (out) (optional) (nullable) (transfer full): location to
  * store the country code, or %NULL
- * @codesetp: (out) (allow-none) (transfer full): location to
+ * @codesetp: (out) (optional) (nullable) (transfer full): location to
  * store the codeset, or %NULL
- * @modifierp: (out) (allow-none) (transfer full): location to
+ * @modifierp: (out) (optional) (nullable) (transfer full): location to
  * store the modifier, or %NULL
  *
  * Extracts the various components of a locale string of the form
@@ -1065,7 +1065,7 @@ territories_init (void)
 /**
  * gnome_get_language_from_locale:
  * @locale: a locale string
- * @translation: (allow-none): a locale string
+ * @translation: (nullable): a locale string
  *
  * Gets the language description for @locale. If @translation is
  * provided the returned string is translated accordingly.
@@ -1157,7 +1157,7 @@ gnome_get_language_from_locale (const char *locale,
 /**
  * gnome_get_country_from_locale:
  * @locale: a locale string
- * @translation: (allow-none): a locale string
+ * @translation: (nullable): a locale string
  *
  * Gets the country description for @locale. If @translation is
  * provided the returned string is translated accordingly.
@@ -1284,7 +1284,7 @@ gnome_get_all_locales (void)
 /**
  * gnome_get_language_from_code:
  * @code: an ISO 639 code string
- * @translation: (allow-none): a locale string
+ * @translation: (nullable): a locale string
  *
  * Gets the language name for @code. If @translation is provided the
  * returned string is translated accordingly.
@@ -1308,7 +1308,7 @@ gnome_get_language_from_code (const char *code,
 /**
  * gnome_get_country_from_code:
  * @code: an ISO 3166 code string
- * @translation: (allow-none): a locale string
+ * @translation: (nullable): a locale string
  *
  * Gets the country name for @code. If @translation is provided the
  * returned string is translated accordingly.
@@ -1332,7 +1332,7 @@ gnome_get_country_from_code (const char *code,
 /**
  * gnome_get_translated_modifier:
  * @modifier: the modifier part of a locale name
- * @translation: (allow-none): a locale string
+ * @translation: (nullable): a locale string
  *
  * Gets a translation of the raw @modifier string. If @translation
  * is provided the returned string is translated accordingly.

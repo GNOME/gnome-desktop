@@ -1014,13 +1014,13 @@ gnome_xkb_info_description_for_option (GnomeXkbInfo *self,
  * gnome_xkb_info_get_layout_info:
  * @self: a #GnomeXkbInfo
  * @id: layout's identifier about which to retrieve the info
- * @display_name: (out) (allow-none) (transfer none): location to store
+ * @display_name: (out) (optional) (nullable) (transfer none): location to store
  * the layout's display name, or %NULL
- * @short_name: (out) (allow-none) (transfer none): location to store
+ * @short_name: (out) (optional) (nullable) (transfer none): location to store
  * the layout's short name, or %NULL
- * @xkb_layout: (out) (allow-none) (transfer none): location to store
+ * @xkb_layout: (out) (optional) (nullable) (transfer none): location to store
  * the layout's XKB name, or %NULL
- * @xkb_variant: (out) (allow-none) (transfer none): location to store
+ * @xkb_variant: (out) (optional) (nullable) (transfer none): location to store
  * the layout's XKB variant, or %NULL
  *
  * Retrieves information about a layout. Both @display_name and
