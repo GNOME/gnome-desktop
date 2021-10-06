@@ -289,6 +289,9 @@ language_name_is_valid (const char *language_name)
 {
         locale_t locale;
 
+        if (language_name == NULL)
+                return FALSE;
+
         locale = newlocale (LC_MESSAGES_MASK, language_name, (locale_t) 0);
         if (locale != (locale_t) 0) {
                 freelocale (locale);
@@ -306,6 +309,9 @@ language_name_get_codeset_details (const char  *language_name,
         locale_t locale;
         const char *codeset = NULL;
 
+        if (language_name == NULL) {
+                language_name = setlocale (LC_MESSAGES, NULL);
+        }
         locale = newlocale (LC_CTYPE_MASK, language_name, (locale_t) 0);
         if (locale == (locale_t) 0)
                 return;
