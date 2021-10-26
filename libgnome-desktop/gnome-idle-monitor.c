@@ -25,10 +25,6 @@
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
-#include <gdk/gdk.h>
-#if defined(GDK_WINDOWING_WAYLAND)
-#include <gdk/gdkwayland.h>
-#endif
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-idle-monitor.h"

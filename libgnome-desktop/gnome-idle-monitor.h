@@ -28,7 +28,6 @@
 #endif
 
 #include <glib-object.h>
-#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
