@@ -1,7 +1,7 @@
 project('gnome-desktop', 'c',
-  meson_version: '>= 0.49.0',
+  meson_version: '>= 0.56.2',
   version: '41.1',
-  license: ['GPL2+', 'LGPL2+']
+  license: ['GPL-2.0-or-later', 'LGPL-2.1-or-later'],
 )
 
 # Before making a release, the libversion string should be modified.
