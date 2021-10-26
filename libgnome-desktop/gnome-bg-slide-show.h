@@ -29,7 +29,7 @@
 #error    GnomeBGSlideShow is unstable API. You must define GNOME_DESKTOP_USE_UNSTABLE_API before including gnome-bg-slide_show.h
 #endif
 
-#include <gdk/gdk.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
