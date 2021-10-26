@@ -65,10 +65,10 @@ if supported_os.contains(host_os) and not unsupported_cpus.contains(host_cpu)
 else
   seccomp_dep = dependency('', required: false)
 endif
-fontconfig_cache_path = fontconfig_dep.get_pkgconfig_variable('cachedir')
 
-xkb_base = xkb_config_dep.get_pkgconfig_variable('xkb_base')
-iso_codes_prefix = iso_codes_dep.get_pkgconfig_variable('prefix')
+fontconfig_cache_path = fontconfig_dep.get_variable(pkgconfig: 'cachedir')
+xkb_base = xkb_config_dep.get_variable(pkgconfig: 'xkb_base')
+iso_codes_prefix = iso_codes_dep.get_variable(pkgconfig: 'prefix')
 
 cc = meson.get_compiler('c')
 
