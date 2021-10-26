@@ -2,6 +2,9 @@ project('gnome-desktop', 'c',
   meson_version: '>= 0.56.2',
   version: '41.1',
   license: ['GPL-2.0-or-later', 'LGPL-2.1-or-later'],
+  default_options: [
+    'c_std=gnu99',
+  ],
 )
 
 # Before making a release, the libversion string should be modified.
@@ -30,14 +33,14 @@ pkg = import('pkgconfig')
 
 prefix = get_option('prefix')
 
-datadir = join_paths(prefix, get_option('datadir'))
-libexecdir = join_paths(prefix, get_option('libexecdir'))
+datadir = prefix / get_option('datadir')
+libexecdir = prefix / get_option('libexecdir')
 
-liblocaledir = join_paths(get_option('prefix'), 'lib', 'locale')
-localedir = join_paths(datadir, 'locale')
-test_metadir = join_paths(datadir, 'installed-tests', meson.project_name())
-test_execdir = join_paths(libexecdir, 'installed-tests', meson.project_name())
-versiondir = join_paths(datadir, 'gnome')
+liblocaledir = get_option('prefix') / 'lib/locale'
+localedir = datadir / 'locale'
+test_metadir = datadir / 'installed-tests' / meson.project_name()
+test_execdir = libexecdir / 'installed-tests' / meson.project_name()
+versiondir = datadir / 'gnome'
 
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: gdk_pixbuf_req)
 gtk_dep = dependency('gtk+-3.0', version: gtk_req)
@@ -48,11 +51,8 @@ schemas_dep = dependency('gsettings-desktop-schemas', version: schemas_req)
 fontconfig_dep = dependency('fontconfig')
 xkb_config_dep = dependency('xkeyboard-config')
 xkbregistry_dep = dependency('xkbregistry', required: false)
-
 iso_codes_dep = dependency('iso-codes')
-
 libsystemd_dep = dependency('libsystemd', required: get_option('systemd'))
-
 udev_dep = dependency('libudev', required: get_option('udev'))
 
 # Check for bubblewrap compatible platform
@@ -100,7 +100,6 @@ conf.set('HAVE_XLOCALE', cc.has_header('xlocale.h'))
 config_h = declare_dependency(
   sources: configure_file(
     configuration: conf,
-    input: 'config.h.meson',
     output: 'config.h'
   ),
   include_directories: include_directories('.')
@@ -128,9 +127,10 @@ endif
 version_xml = configure_file(
   configuration: version_conf,
   input: 'gnome-version.xml.in',
-  output: 'gnome-version.xml'
+  output: 'gnome-version.xml',
+  install: true,
+  install_dir: versiondir,
 )
-install_data(version_xml, install_dir: versiondir)
 
 subdir('libgnome-desktop')
 subdir('po')

@@ -42,13 +42,8 @@ libgnome_desktop_sources = [
   introspection_sources,
   dbus_xrandr_built_sources,
   dbus_idle_built_sources,
-  'gnome-datetime-source.h',
   'gnome-datetime-source.c',
-  'gnome-rr-private.h',
-  'default-input-sources.h',
-  'meta-xrandr-shared.h',
   'gnome-desktop-thumbnail-script.c',
-  'gnome-desktop-thumbnail-script.h',
   'gnome-gettext-portable.c'
 ]
 
@@ -140,7 +135,7 @@ test_programs = [
   'test-languages'
 ]
 
-foreach program : test_programs
+foreach program: test_programs
   executable(program, program + '.c',
     dependencies: libgnome_desktop_dep,
     install: get_option('debug_tools'),
