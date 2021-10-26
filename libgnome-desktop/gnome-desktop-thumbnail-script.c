@@ -1080,6 +1080,11 @@ print_script_debug (GStrv expanded_script)
   g_string_free (out, TRUE);
 }
 
+/* Compatibility shim for older versions of GLib */
+#if !GLIB_CHECK_VERSION (2, 70, 0)
+#define g_spawn_check_wait_status(status,error) g_spawn_check_exit_status (status, error)
+#endif
+
 GBytes *
 gnome_desktop_thumbnail_script_exec (const char  *cmd,
 				     int          size,
@@ -1107,7 +1112,7 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   ret = g_spawn_sync (NULL, expanded_script, NULL, G_SPAWN_SEARCH_PATH,
 		      child_setup, exec->fd_array, NULL, &error_out,
 		      &exit_status, error);
-  if (ret && g_spawn_check_exit_status (exit_status, error))
+  if (ret && g_spawn_check_wait_status (exit_status, error))
     {
       char *contents;
       gsize length;
