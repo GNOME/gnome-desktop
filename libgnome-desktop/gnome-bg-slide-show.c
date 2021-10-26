@@ -491,11 +491,7 @@ find_best_size (GSList *sizes, gint width, gint height)
 static double
 now (void)
 {
-	GTimeVal tv;
-
-	g_get_current_time (&tv);
-
-	return (double)tv.tv_sec + (tv.tv_usec / 1000000.0);
+        return (double) g_get_real_time () / 1000000.0;
 }
 
 /**
@@ -521,7 +517,7 @@ gnome_bg_slide_show_get_current_slide (GnomeBGSlideShow  *self,
                                        const char       **file1,
                                        const char       **file2)
 {
-	double delta = fmod (now() - self->priv->start_time, self->priv->total_duration);
+	double delta = fmod (now () - self->priv->start_time, self->priv->total_duration);
 	GList *list;
 	double elapsed;
 	int i;
@@ -589,7 +585,7 @@ gnome_bg_slide_show_get_slide (GnomeBGSlideShow  *self,
                                const char       **file1,
                                const char       **file2)
 {
-	double delta = fmod (now() - self->priv->start_time, self->priv->total_duration);
+	double delta = fmod (now () - self->priv->start_time, self->priv->total_duration);
         GList *l;
         int i, skipped;
         gboolean found;
