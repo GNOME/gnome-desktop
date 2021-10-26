@@ -209,6 +209,7 @@ snapshot_widget (GtkWidget *widget, SnapshotMode mode)
       }
       break;
     case SNAPSHOT_DRAW:
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       bg = gdk_window_get_background_pattern (gtk_widget_get_window (widget));
       if (bg)
         {
@@ -216,6 +217,7 @@ snapshot_widget (GtkWidget *widget, SnapshotMode mode)
           cairo_paint (cr);
         }
       gtk_widget_draw (widget, cr);
+G_GNUC_END_IGNORE_DEPRECATIONS
       break;
     default:
       g_assert_not_reached();
