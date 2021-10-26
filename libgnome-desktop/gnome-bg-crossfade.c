@@ -298,16 +298,7 @@ gnome_bg_crossfade_set_start_surface (GnomeBGCrossfade *fade,
 static gdouble
 get_current_time (void)
 {
-	const double microseconds_per_second = (double) G_USEC_PER_SEC;
-	double timestamp;
-	GTimeVal now;
-
-	g_get_current_time (&now);
-
-	timestamp = ((microseconds_per_second * now.tv_sec) + now.tv_usec) /
-	            microseconds_per_second;
-
-	return timestamp;
+        return (double) g_get_real_time () / 1000000.0;
 }
 
 /**
