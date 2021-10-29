@@ -17,8 +17,12 @@ project('gnome-desktop', 'c',
 # to 0. When bumping the second version, set the third one to zero.
 #
 # A lot easier than libtool, right?
-libversion = '19.1.7'
+libversion = '1.0.0'
 soversion = libversion.split('.')[0]
+
+# Compatibility versions for libgnome-desktop-3
+compat_libversion = '19.1.7'
+compat_soversion = compat_libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
 gtk_req = '>= 3.3.6'
@@ -78,32 +82,6 @@ rt_dep = cc.find_library('rt', required: false)
 if not cc.has_function('clock_gettime', dependencies: rt_dep)
   rt_dep = dependency('', required: false)
 endif
-
-conf = configuration_data()
-
-conf.set_quoted('GETTEXT_PACKAGE', '@0@-3.0'.format(meson.project_name()))
-conf.set_quoted('INSTALL_PREFIX', prefix)
-
-conf.set('ENABLE_SECCOMP', seccomp_dep.found())
-conf.set('HAVE_BWRAP', seccomp_dep.found())
-conf.set('_GNU_SOURCE', seccomp_dep.found())
-
-conf.set('HAVE_SYSTEMD', libsystemd_dep.found())
-conf.set('HAVE_UDEV', udev_dep.found())
-conf.set('HAVE_XKBREGISTRY', xkbregistry_dep.found())
-
-conf.set('HAVE_TIMERFD', cc.has_function('timerfd_create'))
-conf.set('HAVE_OPENAT', cc.has_function('openat'))
-conf.set('HAVE_USELOCALE', cc.has_function('uselocale'))
-conf.set('HAVE_XLOCALE', cc.has_header('xlocale.h'))
-
-config_h = declare_dependency(
-  sources: configure_file(
-    configuration: conf,
-    output: 'config.h'
-  ),
-  include_directories: include_directories('.')
-)
 
 version_array = meson.project_version().split('.')
 version_conf = configuration_data()
