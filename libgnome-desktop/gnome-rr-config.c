@@ -658,7 +658,7 @@ gnome_rr_config_apply_persistent (GnomeRRConfig *config,
 /**
  * gnome_rr_config_get_outputs:
  *
- * Returns: (array zero-terminated=1) (element-type GnomeDesktop.RROutputInfo) (transfer none): the output configuration for this #GnomeRRConfig
+ * Returns: (array zero-terminated=1) (element-type GnomeRROutputInfo) (transfer none): the output configuration for this #GnomeRRConfig
  */
 GnomeRROutputInfo **
 gnome_rr_config_get_outputs (GnomeRRConfig *self)
