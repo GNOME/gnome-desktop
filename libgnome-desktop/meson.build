@@ -198,7 +198,7 @@ install_headers(libgnome_desktop_headers,
 
 gnome_desktop_deps = [
   gdk_pixbuf_dep,
-  gtk_dep,
+  gtk3_dep,
   glib_dep,
   gio_dep,
   gio_unix_dep,
