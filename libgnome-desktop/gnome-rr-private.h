@@ -44,7 +44,6 @@ struct ScreenInfo
 struct GnomeRRScreenPrivate
 {
     GdkScreen *			gdk_screen;
-    GdkWindow *			gdk_root;
     ScreenInfo *		info;
 
     int                         init_name_watch_id;
