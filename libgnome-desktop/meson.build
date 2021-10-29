@@ -150,6 +150,90 @@ libgnome_desktop_base_dep = declare_dependency(
   ],
 )
 
+### gnome-desktop-ui
+ui_ldflags = []
+ui_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'ui-symbol.map')
+if cc.has_link_argument(ui_symbol_map)
+  ui_ldflags += ui_symbol_map
+endif
+
+libgnome_desktop_ui_sources = [
+  'gnome-bg.c',
+  'gnome-bg-slide-show.c',
+  'gnome-bg-crossfade.c',
+  'gnome-rr.c',
+  'gnome-rr-config.c',
+  'gnome-rr-output-info.c',
+]
+
+libgnome_desktop_ui_headers = [
+  'gnome-bg.h',
+  'gnome-bg-crossfade.h',
+  'gnome-bg-slide-show.h',
+  'gnome-rr.h',
+  'gnome-rr-config.h',
+]
+
+install_headers(libgnome_desktop_ui_headers,
+  subdir: 'gnome-desktop-4.0/libgnome-desktop-ui'
+)
+
+ui_deps = [
+  libgnome_desktop_base_dep,
+  gtk3_dep,
+]
+
+libgnome_desktop_ui = library('gnome-desktop-ui-4',
+  sources: [
+    libgnome_desktop_ui_sources,
+    dbus_xrandr_built_sources,
+  ],
+  dependencies: ui_deps,
+  soversion: 0,
+  version: libversion,
+  c_args: libargs,
+  link_args: ui_ldflags,
+  install: true,
+  include_directories: [
+    include_directories('.'),
+    include_directories('..'),
+  ],
+)
+
+libgnome_desktop_ui_gir = gnome.generate_gir(libgnome_desktop_ui,
+  sources: [libgnome_desktop_ui_headers, libgnome_desktop_ui_sources],
+  export_packages: 'gnome-desktop-ui-4',
+  namespace: 'GnomeDesktopUI',
+  nsversion: '4.0',
+  includes: [libgnome_desktop_base_gir[0], 'Gtk-3.0'],
+  extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+  identifier_prefix: 'Gnome',
+  symbol_prefix: 'gnome',
+  install: true,
+)
+
+libgnome_desktop_ui_dep = declare_dependency(
+  sources: [
+    libgnome_desktop_ui_gir,
+  ],
+  dependencies: ui_deps,
+  link_with: libgnome_desktop_ui,
+  include_directories: [
+    include_directories('.'),
+    include_directories('..'),
+  ],
+)
+
+pkg.generate(
+  libgnome_desktop_ui,
+  requires: ['gsettings-desktop-schemas'],
+  version: meson.project_version(),
+  name: 'gnome-desktop-ui-4',
+  filebase: 'gnome-desktop-ui-4',
+  description: 'GUI utility library for GNOME desktop components',
+  subdirs: 'gnome-desktop-4.0',
+)
+
 ### Legacy ###
 
 introspection_sources = [
