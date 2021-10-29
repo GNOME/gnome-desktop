@@ -28,7 +28,8 @@
 #include <glib/gi18n-lib.h>
 
 #ifndef HAVE_USELOCALE
-/**
+
+/*
  * FIXME: This function does nothing if there's no thread-safe
  * alternative to uselocale on some systems (NetBSD). Replace it
  * when an implementation becomes available.
