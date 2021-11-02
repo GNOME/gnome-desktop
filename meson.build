@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.49.0',
-  version: '40.4',
+  version: '40.5',
   license: ['GPL2+', 'LGPL2+']
 )
 
