@@ -45,13 +45,19 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
   object_manager: true
 )
 
-### gnome-desktop-base
 base_ldflags = []
 base_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'base-symbol.map')
 if cc.has_link_argument(base_symbol_map)
   base_ldflags += base_symbol_map
 endif
 
+ui_ldflags = []
+ui_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'ui-symbol.map')
+if cc.has_link_argument(ui_symbol_map)
+  ui_ldflags += ui_symbol_map
+endif
+
+### gnome-desktop-base
 libgnome_desktop_base_sources = [
   'gnome-desktop-thumbnail.c',
   'gnome-idle-monitor.c',
@@ -150,45 +156,32 @@ libgnome_desktop_base_dep = declare_dependency(
   ],
 )
 
-### gnome-desktop-ui
-ui_ldflags = []
-ui_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'ui-symbol.map')
-if cc.has_link_argument(ui_symbol_map)
-  ui_ldflags += ui_symbol_map
-endif
+### gnome-bg
 
-libgnome_desktop_ui_sources = [
+libgnome_bg_sources = [
   'gnome-bg.c',
   'gnome-bg-slide-show.c',
   'gnome-bg-crossfade.c',
-  'gnome-rr.c',
-  'gnome-rr-config.c',
-  'gnome-rr-output-info.c',
 ]
 
-libgnome_desktop_ui_headers = [
+libgnome_bg_headers = [
   'gnome-bg.h',
   'gnome-bg-crossfade.h',
   'gnome-bg-slide-show.h',
-  'gnome-rr.h',
-  'gnome-rr-config.h',
 ]
 
-install_headers(libgnome_desktop_ui_headers,
-  subdir: 'gnome-desktop-4.0/libgnome-desktop-ui'
+install_headers(libgnome_bg_headers,
+  subdir: 'gnome-desktop-4.0/gnome-bg'
 )
 
-ui_deps = [
+libgnome_bg_deps = [
   libgnome_desktop_base_dep,
   gtk3_dep,
 ]
 
-libgnome_desktop_ui = library('gnome-desktop-ui-4',
-  sources: [
-    libgnome_desktop_ui_sources,
-    dbus_xrandr_built_sources,
-  ],
-  dependencies: ui_deps,
+libgnome_bg = library('gnome-bg-4',
+  sources: libgnome_bg_sources,
+  dependencies: libgnome_bg_deps,
   soversion: 0,
   version: libversion,
   c_args: libargs,
@@ -200,10 +193,82 @@ libgnome_desktop_ui = library('gnome-desktop-ui-4',
   ],
 )
 
-libgnome_desktop_ui_gir = gnome.generate_gir(libgnome_desktop_ui,
-  sources: [libgnome_desktop_ui_headers, libgnome_desktop_ui_sources],
-  export_packages: 'gnome-desktop-ui-4',
-  namespace: 'GnomeDesktopUI',
+libgnome_bg_gir = gnome.generate_gir(libgnome_bg,
+  sources: [libgnome_bg_headers, libgnome_bg_sources],
+  export_packages: 'gnome-bg-4',
+  namespace: 'GnomeBG',
+  nsversion: '4.0',
+  includes: [libgnome_desktop_base_gir[0], 'Gdk-3.0'],
+  extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+  identifier_prefix: 'Gnome',
+  symbol_prefix: 'gnome',
+  install: true,
+)
+
+libgnome_bg_dep = declare_dependency(
+  sources: [
+    libgnome_bg_gir,
+  ],
+  dependencies: libgnome_bg_deps,
+  link_with: libgnome_bg,
+  include_directories: [
+    include_directories('.'),
+    include_directories('..'),
+  ],
+)
+
+pkg.generate(
+  libgnome_bg,
+  requires: ['gsettings-desktop-schemas'],
+  version: meson.project_version(),
+  name: 'gnome-bg-4',
+  filebase: 'gnome-bg-4',
+  description: 'Background image utility library for GNOME components',
+  subdirs: 'gnome-desktop-4.0',
+)
+
+### gnome-rr
+libgnome_rr_deps = [
+  libgnome_desktop_base_dep,
+  gtk3_dep,
+]
+
+libgnome_rr_sources = [
+  'gnome-rr.c',
+  'gnome-rr-config.c',
+  'gnome-rr-output-info.c',
+]
+
+libgnome_rr_headers = [
+  'gnome-rr.h',
+  'gnome-rr-config.h',
+]
+
+install_headers(libgnome_bg_headers,
+  subdir: 'gnome-desktop-4.0/libgnome-rr'
+)
+
+libgnome_rr = library('gnome-rr-4',
+  sources: [
+    libgnome_rr_sources,
+    dbus_xrandr_built_sources,
+  ],
+  dependencies: libgnome_rr_deps,
+  soversion: 0,
+  version: libversion,
+  c_args: libargs,
+  link_args: ui_ldflags,
+  install: true,
+  include_directories: [
+    include_directories('.'),
+    include_directories('..'),
+  ],
+)
+
+libgnome_rr_gir = gnome.generate_gir(libgnome_rr,
+  sources: [libgnome_rr_headers, libgnome_rr_sources],
+  export_packages: 'gnome-rr-4',
+  namespace: 'GnomeRR',
   nsversion: '4.0',
   includes: [libgnome_desktop_base_gir[0], 'Gtk-3.0'],
   extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
@@ -212,12 +277,12 @@ libgnome_desktop_ui_gir = gnome.generate_gir(libgnome_desktop_ui,
   install: true,
 )
 
-libgnome_desktop_ui_dep = declare_dependency(
+libgnome_rr_dep = declare_dependency(
   sources: [
-    libgnome_desktop_ui_gir,
+    libgnome_rr_gir,
   ],
-  dependencies: ui_deps,
-  link_with: libgnome_desktop_ui,
+  dependencies: libgnome_rr_deps,
+  link_with: libgnome_rr,
   include_directories: [
     include_directories('.'),
     include_directories('..'),
@@ -225,17 +290,16 @@ libgnome_desktop_ui_dep = declare_dependency(
 )
 
 pkg.generate(
-  libgnome_desktop_ui,
+  libgnome_rr,
   requires: ['gsettings-desktop-schemas'],
   version: meson.project_version(),
-  name: 'gnome-desktop-ui-4',
-  filebase: 'gnome-desktop-ui-4',
-  description: 'GUI utility library for GNOME desktop components',
+  name: 'gnome-rr-4',
+  filebase: 'gnome-rr-4',
+  description: 'Display information utility library for GNOME desktop components',
   subdirs: 'gnome-desktop-4.0',
 )
 
 ### Legacy ###
-
 introspection_sources = [
   'gnome-desktop-thumbnail.c',
   'gnome-bg.c',
