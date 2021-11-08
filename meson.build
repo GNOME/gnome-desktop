@@ -25,7 +25,8 @@ compat_libversion = '19.1.7'
 compat_soversion = compat_libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
-gtk_req = '>= 3.3.6'
+gtk3_req = '>= 3.3.6'
+gtk4_req = '>= 4.4.0'
 glib_req = '>= 2.53.0'
 xrandr_req = '>= 1.3'
 schemas_req = '>= 3.27.0'
@@ -47,7 +48,8 @@ test_execdir = libexecdir / 'installed-tests' / meson.project_name()
 versiondir = datadir / 'gnome'
 
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: gdk_pixbuf_req)
-gtk3_dep = dependency('gtk+-3.0', version: gtk_req)
+gtk3_dep = dependency('gtk+-3.0', version: gtk3_req)
+gtk4_dep = dependency('gtk4', version: gtk4_req)
 glib_dep = dependency('glib-2.0', version: glib_req)
 gio_dep = dependency('gio-2.0', version: glib_req)
 gio_unix_dep = dependency('gio-unix-2.0', version: glib_req)
