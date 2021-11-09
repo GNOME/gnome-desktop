@@ -11,14 +11,20 @@ test_env = [
   'G_ENABLE_DIAGNOSTICS=0'
 ]
 
-test_programs = [
-  'bg-slide-show',
-  'wall-clock',
-  'wallclock-reftest',
-  'languages'
-]
-
+test_programs = []
 test_metas = []
+
+# XXX: The current batch of tests relies on the legacy library
+if get_option('legacy_library')
+  test_programs += [
+    'bg-slide-show',
+    'wall-clock',
+    'wallclock-reftest',
+    'languages'
+  ]
+
+  test_metas += []
+endif
 
 foreach program: test_programs
   exe = executable(program, program + '.c',

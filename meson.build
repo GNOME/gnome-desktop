@@ -48,7 +48,7 @@ test_execdir = libexecdir / 'installed-tests' / meson.project_name()
 versiondir = datadir / 'gnome'
 
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: gdk_pixbuf_req)
-gtk3_dep = dependency('gtk+-3.0', version: gtk3_req)
+gtk3_dep = dependency('gtk+-3.0', version: gtk3_req, required: get_option('legacy_library'))
 gtk4_dep = dependency('gtk4', version: gtk4_req, required: get_option('build_gtk4'))
 glib_dep = dependency('glib-2.0', version: glib_req)
 gio_dep = dependency('gio-2.0', version: glib_req)
