@@ -32,7 +32,7 @@ build_stable:
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
-    - meson --prefix=/usr -Dinstalled_tests=true build
+    - meson --prefix=/usr -Dinstalled_tests=true -Dbuild_gtk4=false build
     - pushd build
     - ninja
     - ninja install
