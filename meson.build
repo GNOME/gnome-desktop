@@ -125,3 +125,29 @@ endif
 if get_option('gtk_doc')
   subdir('docs/reference/gnome-desktop3')
 endif
+
+summary({
+    'prefix': get_option('prefix'),
+    'datadir': datadir,
+    'libexecdir': libexecdir,
+    'localedir': localedir,
+    'versiondir': versiondir,
+  },
+  section: 'Directories',
+)
+
+summary({
+    'Use systemd': get_option('systemd').enabled() or get_option('systemd').auto(),
+    'Use udev': get_option('udev').enabled() or get_option('udev').auto(),
+    'Build GTK4 libraries': get_option('build_gtk4'),
+    'Build legacy libgnome-desktop': get_option('legacy_library'),
+    'Desktop documentation': get_option('desktop_docs'),
+    'API documentation': get_option('gtk_doc'),
+    'Date in gnome-version.xml': get_option('date_in_gnome_version'),
+    'GNOME distributor': get_option('gnome_distributor'),
+    'Debug tools': get_option('debug_tools'),
+    'Installed tests': get_option('installed_tests'),
+  },
+  section: 'Build options',
+  bool_yn: true,
+)
