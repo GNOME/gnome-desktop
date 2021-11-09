@@ -150,8 +150,10 @@ libgnome_desktop_base_dep = declare_dependency(
   ],
 )
 
-subdir('gnome-bg')
-subdir('gnome-rr')
+if gtk4_dep.found()
+  subdir('gnome-bg')
+  subdir('gnome-rr')
+endif
 
 ### Legacy ###
 introspection_sources = [
