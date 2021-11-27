@@ -35,6 +35,10 @@
 #include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 
+#ifdef HAVE_XLOCALE
+#include <xlocale.h>
+#endif
+
 #include "gnome-gettext-portable.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -1378,26 +1382,26 @@ gnome_get_translated_modifier (const char *modifier,
         /* TRANSLATORS: Used to distinguish the labels representing the gez_ER
            and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
            difference is related to collation. */
-        g_hash_table_insert (modifiers_map, "abegede", _l(loc, "Abegede"));
+        g_hash_table_insert (modifiers_map, "abegede", L_(loc, "Abegede"));
         /* TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants. */
-        g_hash_table_insert (modifiers_map, "cyrillic", _l(loc, "Cyrillic"));
+        g_hash_table_insert (modifiers_map, "cyrillic", L_(loc, "Cyrillic"));
         /* TRANSLATORS: Also known as "Nagari", a written variant for many languages
            of the Indian subcontinent. See:
            https://en.wikipedia.org/wiki/Devanagari */
-        g_hash_table_insert (modifiers_map, "devanagari", _l(loc, "Devanagari"));
+        g_hash_table_insert (modifiers_map, "devanagari", L_(loc, "Devanagari"));
         /* TRANSLATORS: Used to distinguish the label representing the tt_RU
            locale from tt_RU@iqtelif. It's a special alphabet for Tatar. */
-        g_hash_table_insert (modifiers_map, "iqtelif", _l(loc, "IQTElif"));
+        g_hash_table_insert (modifiers_map, "iqtelif", L_(loc, "IQTElif"));
         /* TRANSLATORS: The alphabet/script, not the language. Used to distinguish
            Latin from Cyrillic written language variants. */
-        g_hash_table_insert (modifiers_map, "latin", _l(loc, "Latin"));
+        g_hash_table_insert (modifiers_map, "latin", L_(loc, "Latin"));
         /* TRANSLATORS: "Saho" is a variant of the Afar language. Used to
            distinguish the label representing the aa_ER locale from aa_ER@saaho. */
-        g_hash_table_insert (modifiers_map, "saaho", _l(loc, "Saho"));
+        g_hash_table_insert (modifiers_map, "saaho", L_(loc, "Saho"));
         /* TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
            in Valencia. Used to distinguish the label representing the ca_ES
            locale from ca_ES@valencia. */
-        g_hash_table_insert (modifiers_map, "valencia", _l(loc, "Valencia"));
+        g_hash_table_insert (modifiers_map, "valencia", L_(loc, "Valencia"));
 
         if (g_hash_table_contains (modifiers_map, modifier))
                 retval = g_strdup (g_hash_table_lookup (modifiers_map, modifier));

@@ -18,14 +18,16 @@
  *
  */
 
-#include "config.h"
+#include <glib.h>
 
 #include <locale.h>
 #include <string.h>
 
-#ifdef HAVE_XLOCALE
-#include <xlocale.h>
+#ifndef GETTEXT_PACKAGE
+#error "You must define GETTEXT_PACKAGE before including gnome-gettext-portable.h; did you forget to include config.h?"
 #endif
+
+G_BEGIN_DECLS
 
 const char * 
 dgettext_l (locale_t    locale,
@@ -33,14 +35,16 @@ dgettext_l (locale_t    locale,
             const char *msgid);
 
 const gchar *
-g_dgettext_l (locale_t     locale,
-              const gchar *domain,
-              const gchar *msgid);
+g_dgettext_l (locale_t    locale,
+              const char *domain,
+              const char *msgid);
 
 const gchar *
-g_dpgettext_l (locale_t     locale,
-               const gchar *domain,
-               const gchar *msgctxtid,
-               gsize        msgidoffset);
+g_dpgettext_l (locale_t    locale,
+               const char *domain,
+               const char *msgctxtid,
+               gsize       msgidoffset);
 
-#define  _l(locale_t,String) ((char *) g_dgettext_l (locale_t, GETTEXT_PACKAGE, String))
+#define L_(Locale,String) ((char *) g_dgettext_l (Locale, GETTEXT_PACKAGE, String))
+
+G_END_DECLS
