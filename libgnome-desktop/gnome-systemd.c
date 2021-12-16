@@ -143,6 +143,7 @@ on_bus_gotten_cb (GObject      *source,
 }
 #endif
 
+#ifdef HAVE_SYSTEMD
 static gchar *
 systemd_unit_name_escape (const gchar *in)
 {
@@ -158,6 +159,7 @@ systemd_unit_name_escape (const gchar *in)
     }
   return g_string_free (str, FALSE);
 }
+#endif
 
 /**
  * gnome_start_systemd_scope:
