@@ -8,11 +8,11 @@ include:
 - template: Security/SAST.gitlab-ci.yml
 - template: Security/Secret-Detection.gitlab-ci.yml
 
-image: fedora:34
+image: fedora:35
 
 variables:
   LAST_ABI_BREAK: 9d01763ba2a3f71b7c0aade04d2ffa6a883e308d
-  DEPENDENCIES: gtk3-devel gsettings-desktop-schemas-devel gettext
+  DEPENDENCIES: gtk3-devel gtk4-devel gsettings-desktop-schemas-devel gettext
                 gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
                 gobject-introspection-devel systemd-devel iso-codes-devel
                 libseccomp-devel gcc gcc-c++ glibc-devel
@@ -32,7 +32,7 @@ build_stable:
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
-    - meson --prefix=/usr -Dinstalled_tests=true -Dbuild_gtk4=false build
+    - meson --prefix=/usr -Dinstalled_tests=true build
     - pushd build
     - ninja
     - ninja install
