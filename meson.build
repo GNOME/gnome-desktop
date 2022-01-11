@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.56.2',
-  version: '41.1',
+  version: '42.alpha',
   license: ['GPL-2.0-or-later', 'LGPL-2.1-or-later'],
   default_options: [
     'c_std=gnu99',
@@ -21,7 +21,7 @@ libversion = '1.0.0'
 soversion = libversion.split('.')[0]
 
 # Compatibility versions for libgnome-desktop-3
-compat_libversion = '19.1.7'
+compat_libversion = '19.2.0'
 compat_soversion = compat_libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
