@@ -29,7 +29,7 @@ endif
 libgnome_bg = library('gnome-bg-4',
   sources: libgnome_bg_sources,
   dependencies: libgnome_bg_deps,
-  soversion: 0,
+  soversion: soversion,
   version: libversion,
   c_args: libargs,
   link_args: libgnome_bg_ldflags,
