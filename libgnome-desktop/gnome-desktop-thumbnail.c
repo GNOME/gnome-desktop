@@ -1132,6 +1132,100 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   return pixbuf;
 }
 
+typedef struct {
+  char *uri;
+  char *mime_type;
+  GdkPixbuf *thumbnail;
+  time_t time;
+} ThumbnailFactoryAsyncData;
+
+static void
+thumbnail_factory_async_data_free (ThumbnailFactoryAsyncData *thumbnail_factory_data)
+{
+  g_free (thumbnail_factory_data->uri);
+  g_free (thumbnail_factory_data->mime_type);
+  if (thumbnail_factory_data->thumbnail)
+    g_object_unref (thumbnail_factory_data->thumbnail);
+  g_slice_free (ThumbnailFactoryAsyncData, thumbnail_factory_data);
+}
+
+static void
+thumbnail_factory_thread (GTask         *task,
+                          gpointer       source_object,
+                          gpointer       task_data,
+                          GCancellable  *cancellable)
+{
+  GnomeDesktopThumbnailFactory *self = source_object;
+  ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
+  GdkPixbuf *thumbnail;
+
+  thumbnail = gnome_desktop_thumbnail_factory_generate_thumbnail (self,
+                                                                  thumbnail_factory_data->uri,
+                                                                  thumbnail_factory_data->mime_type);
+  if (thumbnail)
+    g_task_return_pointer (task, thumbnail, g_object_unref);
+  else
+    g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED, "Failed to generate the thumbnail.");
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_generate_thumbnail_async:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @uri: the URI of a file
+ * @mime_type: the MIME type of the file
+ * @cancellable: a Cancellable object
+ * @callback: a function that will be called when the task has ended
+ * @user_data: user data
+ *
+ * Asynchronous version of gnome_desktop_thumbnail_factory_generate_thumbnail()
+ *
+ * Since 42.0
+ *
+ **/
+
+void
+gnome_desktop_thumbnail_factory_generate_thumbnail_async (GnomeDesktopThumbnailFactory *factory,
+                                                          const char                   *uri,
+                                                          const char                   *mime_type,
+                                                          GCancellable                 *cancellable,
+                                                          GAsyncReadyCallback           callback,
+                                                          gpointer                      user_data)
+{
+  ThumbnailFactoryAsyncData *thumbnail_factory_data;
+  GTask *task;
+
+  thumbnail_factory_data = g_slice_new (ThumbnailFactoryAsyncData);
+  thumbnail_factory_data->uri = g_strdup (uri);
+  thumbnail_factory_data->mime_type = g_strdup (mime_type);
+  thumbnail_factory_data->thumbnail = NULL;
+  task = g_task_new (factory, cancellable, callback, user_data);
+  g_task_set_task_data (task, thumbnail_factory_data, (GDestroyNotify) thumbnail_factory_async_data_free);
+  g_task_run_in_thread (task, thumbnail_factory_thread);
+  g_object_unref (task);
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_generate_thumbnail_finish:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @result: the result of the operation
+ * @error: a pointer where a GError object is returned if the task failed
+ *
+ * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
+ *
+ * Since 42.0
+ *
+ **/
+
+GdkPixbuf *
+gnome_desktop_thumbnail_factory_generate_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
+                                                           GAsyncResult                 *result,
+                                                           GError                      **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, factory), NULL);
+
+  return g_task_propagate_pointer (G_TASK (result), error);
+}
+
 static gboolean
 save_thumbnail (GdkPixbuf  *pixbuf,
                 char       *path,
@@ -1247,6 +1341,82 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *fa
   g_free (path);
 }
 
+static void
+thumbnail_factory_save_thread (GTask         *task,
+                               gpointer       source_object,
+                               gpointer       task_data,
+                               GCancellable  *cancellable)
+{
+  GnomeDesktopThumbnailFactory *self = source_object;
+  ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
+
+  gnome_desktop_thumbnail_factory_save_thumbnail (self,
+                                                  thumbnail_factory_data->thumbnail,
+                                                  thumbnail_factory_data->uri,
+                                                  thumbnail_factory_data->time);
+  g_task_return_boolean (task, FALSE);
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_save_thumbnail_async:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @thumbnail: the thumbnail as a pixbuf
+ * @uri: the uri of a file
+ * @original_mtime: the modification time of the original file
+ * @cancellable: a Cancellable object
+ * @callback: a function that will be called when the task has ended
+ * @user_data: user data
+ *
+ * Asynchronous version of gnome_desktop_thumbnail_factory_save_thumbnail()
+ *
+ * Since 42.0
+ *
+ **/
+
+void
+gnome_desktop_thumbnail_factory_save_thumbnail_async (GnomeDesktopThumbnailFactory *factory,
+                                                      GdkPixbuf                    *thumbnail,
+                                                      const char                   *uri,
+                                                      time_t                        original_mtime,
+                                                      GCancellable                 *cancellable,
+                                                      GAsyncReadyCallback           callback,
+                                                      gpointer                      user_data)
+{
+  ThumbnailFactoryAsyncData *thumbnail_factory_data;
+  GTask *task;
+
+  thumbnail_factory_data = g_slice_new (ThumbnailFactoryAsyncData);
+  thumbnail_factory_data->uri = g_strdup (uri);
+  thumbnail_factory_data->mime_type = NULL;
+  thumbnail_factory_data->thumbnail = g_object_ref(thumbnail);
+  thumbnail_factory_data->time = original_mtime;
+  task = g_task_new (factory, cancellable, callback, user_data);
+  g_task_set_task_data (task, thumbnail_factory_data, (GDestroyNotify) thumbnail_factory_async_data_free);
+  g_task_run_in_thread (task, thumbnail_factory_save_thread);
+  g_object_unref (task);
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_save_thumbnail_finish:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @result: the result of the operation
+ * @error: a pointer where a GError object is returned if the task failed
+ *
+ * Since 42.0
+ *
+ **/
+
+void
+gnome_desktop_thumbnail_factory_save_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
+                                                       GAsyncResult                 *result,
+                                                       GError                      **error)
+{
+  g_return_if_fail (g_task_is_valid (result, factory));
+
+  g_task_propagate_boolean (G_TASK (result), error);
+}
+
+
 /**
  * gnome_desktop_thumbnail_factory_create_failed_thumbnail:
  * @factory: a #GnomeDesktopThumbnailFactory
@@ -1273,6 +1443,78 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFa
   save_thumbnail (pixbuf, path, uri, mtime);
   g_free (path);
   g_object_unref (pixbuf);
+}
+
+static void
+thumbnail_factory_create_failed_thread (GTask         *task,
+                                        gpointer       source_object,
+                                        gpointer       task_data,
+                                        GCancellable  *cancellable)
+{
+  GnomeDesktopThumbnailFactory *self = source_object;
+  ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
+
+  gnome_desktop_thumbnail_factory_create_failed_thumbnail (self,
+                                                           thumbnail_factory_data->uri,
+                                                           thumbnail_factory_data->time);
+  g_task_return_boolean (task, FALSE);
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_create_failed_thumbnail_async:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @uri: the uri of a file
+ * @original_mtime: the modification time of the original file
+ * @cancellable: a Cancellable object
+ * @callback: a function that will be called when the task has ended
+ * @user_data: user data
+ *
+ * Asynchronous version of gnome_desktop_thumbnail_factory_create_failed_thumbnail()
+ *
+ * Since 42.0
+ *
+ **/
+
+void
+gnome_desktop_thumbnail_factory_create_failed_thumbnail_async (GnomeDesktopThumbnailFactory *factory,
+                                                               const char                   *uri,
+                                                               time_t                        original_mtime,
+                                                               GCancellable                 *cancellable,
+                                                               GAsyncReadyCallback           callback,
+                                                               gpointer                      user_data)
+{
+  ThumbnailFactoryAsyncData *thumbnail_factory_data;
+  GTask *task;
+
+  thumbnail_factory_data = g_slice_new (ThumbnailFactoryAsyncData);
+  thumbnail_factory_data->uri = g_strdup (uri);
+  thumbnail_factory_data->mime_type = NULL;
+  thumbnail_factory_data->thumbnail = NULL;
+  thumbnail_factory_data->time = original_mtime;
+  task = g_task_new (factory, cancellable, callback, user_data);
+  g_task_set_task_data (task, thumbnail_factory_data, (GDestroyNotify) thumbnail_factory_async_data_free);
+  g_task_run_in_thread (task, thumbnail_factory_create_failed_thread);
+  g_object_unref (task);
+}
+
+/**
+ * gnome_desktop_thumbnail_factory_create_failed_thumbnail_finish:
+ * @factory: a #GnomeDesktopThumbnailFactory
+ * @result: the result of the operation
+ * @error: a pointer where a GError object is returned if the task failed
+ *
+ * Since 42.0
+ *
+ **/
+
+void
+gnome_desktop_thumbnail_factory_create_failed_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
+                                                                GAsyncResult                 *result,
+                                                                GError                      **error)
+{
+  g_return_if_fail (g_task_is_valid (result, factory));
+
+  g_task_propagate_boolean (G_TASK (result), error);
 }
 
 /**
