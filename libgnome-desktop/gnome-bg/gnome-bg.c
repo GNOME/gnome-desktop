@@ -2237,6 +2237,7 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 	time_t mtime;
 	GdkPixbuf *orig, *result = NULL;
 	char *uri;
+	GError *error = NULL;
 	
 	mtime = get_mtime (filename);
 	
@@ -2278,10 +2279,18 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 			
 			g_object_unref (orig);
 			
-			gnome_desktop_thumbnail_factory_save_thumbnail (factory, result, uri, mtime);
+			gnome_desktop_thumbnail_factory_save_thumbnail (factory, result, uri, mtime, NULL, &error);
+			if (error) {
+				g_warning ("Error while saving thumbnail: %s", error->message);
+				g_error_free (error);
+			}
 		}
 		else {
-			gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, mtime);
+			gnome_desktop_thumbnail_factory_create_failed_thumbnail (factory, uri, mtime, NULL, &error);
+			if (error) {
+				g_warning ("Error while creating failed thumbnail: %s", error->message);
+				g_error_free (error);
+			}
 		}
 	}
 

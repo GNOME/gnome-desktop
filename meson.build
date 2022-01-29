@@ -17,11 +17,11 @@ project('gnome-desktop', 'c',
 # to 0. When bumping the second version, set the third one to zero.
 #
 # A lot easier than libtool, right?
-libversion = '1.3.0'
+libversion = '2.0.0'
 soversion = libversion.split('.')[0]
 
 # Compatibility versions for libgnome-desktop-3
-compat_libversion = '19.4.0'
+compat_libversion = '20.0.0'
 compat_soversion = compat_libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'

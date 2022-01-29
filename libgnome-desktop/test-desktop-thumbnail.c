@@ -36,6 +36,7 @@ thumbnail_file (GnomeDesktopThumbnailFactory *factory,
 	g_autoptr(GFile) file = NULL;
 	g_autofree char *path = NULL;
 	g_autofree char *uri = NULL;
+	g_autoptr(GError) error = NULL;
 
 	file = g_file_new_for_commandline_arg (in_path);
 	path = g_file_get_path (file);
@@ -46,10 +47,10 @@ thumbnail_file (GnomeDesktopThumbnailFactory *factory,
 
 	content_type = g_content_type_guess (path, NULL, 0, NULL);
 	uri = g_file_get_uri (file);
-	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type);
+	pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (factory, uri, content_type, NULL, &error);
 
-	if (pixbuf == NULL) {
-		g_warning ("gnome_desktop_thumbnail_factory_generate_thumbnail() failed to generate a thumbnail for %s", in_path);
+	if (error) {
+		g_warning ("gnome_desktop_thumbnail_factory_generate_thumbnail() failed to generate a thumbnail for %s: %s", in_path, error->message);
 		return FALSE;
 	}
 

@@ -81,16 +81,22 @@ gboolean               gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDeskt
 								      const char            *uri,
 								      const char            *mime_type,
 								      time_t                 mtime);
-GdkPixbuf *            gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory *factory,
-									   const char            *uri,
-									   const char            *mime_type);
-void                   gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *factory,
-								       GdkPixbuf             *thumbnail,
-								       const char            *uri,
-								       time_t                 original_mtime);
-void                   gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFactory *factory,
-										const char            *uri,
-										time_t                 mtime);
+GdkPixbuf * gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory *factory,
+                                                                const char                   *uri,
+                                                                const char                   *mime_type,
+                                                                GCancellable                 *cancellable,
+                                                                GError                      **error);
+gboolean               gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *factory,
+                                                                       GdkPixbuf                    *thumbnail,
+                                                                       const char                   *uri,
+                                                                       time_t                        original_mtime,
+                                                                       GCancellable                 *cancellable,
+                                                                       GError                      **error);
+gboolean               gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFactory *factory,
+                                                                                const char                   *uri,
+                                                                                time_t                        mtime,
+                                                                                GCancellable                 *cancellable,
+                                                                                GError                      **error);
 
 void                   gnome_desktop_thumbnail_factory_generate_thumbnail_async (GnomeDesktopThumbnailFactory *factory,
                                                                                  const char                   *uri,
@@ -111,7 +117,7 @@ void                   gnome_desktop_thumbnail_factory_save_thumbnail_async (Gno
                                                                              GAsyncReadyCallback           callback,
                                                                              gpointer                      user_data);
 
-void                   gnome_desktop_thumbnail_factory_save_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
+gboolean               gnome_desktop_thumbnail_factory_save_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
                                                                               GAsyncResult                 *result,
                                                                               GError                      **error);
 
@@ -122,7 +128,7 @@ void                   gnome_desktop_thumbnail_factory_create_failed_thumbnail_a
                                                                                       GAsyncReadyCallback           callback,
                                                                                       gpointer                      user_data);
 
-void                   gnome_desktop_thumbnail_factory_create_failed_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
+gboolean               gnome_desktop_thumbnail_factory_create_failed_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
                                                                                        GAsyncResult                 *result,
                                                                                        GError                      **error);
 

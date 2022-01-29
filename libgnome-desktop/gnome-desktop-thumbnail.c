@@ -123,6 +123,7 @@
 #include <config.h>
 
 #include <glib.h>
+#include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <string.h>
@@ -971,10 +972,12 @@ gnome_desktop_thumbnail_factory_can_thumbnail (GnomeDesktopThumbnailFactory *fac
 }
 
 static GdkPixbuf *
-get_preview_thumbnail (const char *uri,
-                       int         size)
+get_preview_thumbnail (const char    *uri,
+                       int            size,
+                       GCancellable  *cancellable,
+                       GError       **error)
 {
-    GdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf = NULL;
     GFile *file;
     GFileInfo *file_info;
     GInputStream *input_stream;
@@ -990,39 +993,55 @@ get_preview_thumbnail (const char *uri,
     file_info = g_file_query_info (file,
                                    G_FILE_ATTRIBUTE_PREVIEW_ICON,
                                    G_FILE_QUERY_INFO_NONE,
-                                   NULL,  /* GCancellable */
-                                   NULL); /* return location for GError */
+                                   cancellable,
+                                   error);
     g_object_unref (file);
 
-    if (file_info == NULL)
+    if (!file_info)
       return NULL;
 
     object = g_file_info_get_attribute_object (file_info,
                                                G_FILE_ATTRIBUTE_PREVIEW_ICON);
     if (object)
-        g_object_ref (object);
+      g_object_ref (object);
     g_object_unref (file_info);
 
     if (!object)
-      return NULL;
-    if (!G_IS_LOADABLE_ICON (object)) {
-      g_object_unref (object);
-      return NULL;
-    }
+      {
+        g_set_error (error,
+                     G_IO_ERROR,
+                     G_IO_ERROR_FAILED,
+                     _("File %s does not have a preview icon attribute"),
+                     uri);
+        return NULL;
+      }
+    if (!G_IS_LOADABLE_ICON (object))
+      {
+        g_object_unref (object);
+        g_set_error (error,
+                     G_IO_ERROR,
+                     G_IO_ERROR_FAILED,
+                     _("No loadable icon for %s"),
+                     uri);
+        return NULL;
+      }
 
     input_stream = g_loadable_icon_load (G_LOADABLE_ICON (object),
-                                         0,     /* size */
-                                         NULL,  /* return location for type */
-                                         NULL,  /* GCancellable */
-                                         NULL); /* return location for GError */
+                                         0,            /* size */
+                                         NULL,         /* return location for type */
+                                         cancellable,  /* GCancellable */
+                                         error);       /* return location for GError */
     g_object_unref (object);
 
     if (!input_stream)
       return NULL;
 
     pixbuf = gdk_pixbuf_new_from_stream_at_scale (input_stream,
-                                                  size, size,
-                                                  TRUE, NULL, NULL);
+                                                  size,
+                                                  size,
+                                                  TRUE,
+                                                  cancellable,
+                                                  error);
     g_object_unref (input_stream);
 
     return pixbuf;
@@ -1030,7 +1049,7 @@ get_preview_thumbnail (const char *uri,
 
 static GdkPixbuf *
 pixbuf_new_from_bytes (GBytes  *bytes,
-		       GError **error)
+                       GError **error)
 {
   g_autoptr(GdkPixbufLoader) loader = NULL;
 
@@ -1039,9 +1058,9 @@ pixbuf_new_from_bytes (GBytes  *bytes,
     return NULL;
 
   if (!gdk_pixbuf_loader_write (loader,
-				g_bytes_get_data (bytes, NULL),
-				g_bytes_get_size (bytes),
-				error))
+                                g_bytes_get_data (bytes, NULL),
+                                g_bytes_get_size (bytes),
+                                error))
     {
       return NULL;
     }
@@ -1057,34 +1076,48 @@ pixbuf_new_from_bytes (GBytes  *bytes,
  * @factory: a #GnomeDesktopThumbnailFactory
  * @uri: the uri of a file
  * @mime_type: the mime type of the file
+ * @cancellable: a #GCancellable object or NULL
+ * @error: a pointer to a GError object or NULL
  *
  * Tries to generate a thumbnail for the specified file. If it succeeds
  * it returns a pixbuf that can be used as a thumbnail.
  *
  * Usage of this function is threadsafe and does blocking I/O.
  *
- * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
+ * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise and error will be set
  *
- * Since: 2.2
+ * Since: 42.0
  **/
 GdkPixbuf *
-gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory *factory,
-						    const char            *uri,
-						    const char            *mime_type)
+gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory  *factory,
+                                                    const char                    *uri,
+                                                    const char                    *mime_type,
+                                                    GCancellable                  *cancellable,
+                                                    GError                       **error)
 {
   GdkPixbuf *pixbuf;
   char *script;
   int size;
+  GError *inner_error = NULL;
 
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
   g_return_val_if_fail (uri != NULL, NULL);
   g_return_val_if_fail (mime_type != NULL, NULL);
 
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
 
   size = gnome_desktop_thumbnail_size_to_size (factory->priv->size);
-  pixbuf = get_preview_thumbnail (uri, size);
+  pixbuf = get_preview_thumbnail (uri, size, cancellable, &inner_error);
+
   if (pixbuf != NULL)
     return pixbuf;
+
+  if (g_error_matches (inner_error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+    {
+      g_propagate_error (error, inner_error);
+      return NULL;
+    }
+  g_error_free (inner_error);
 
   script = NULL;
   g_mutex_lock (&factory->priv->lock);
@@ -1101,35 +1134,26 @@ gnome_desktop_thumbnail_factory_generate_thumbnail (GnomeDesktopThumbnailFactory
   if (script)
     {
       GBytes *data;
-      GError *error = NULL;
 
-      data = gnome_desktop_thumbnail_script_exec (script, size, uri, &error);
+      data = gnome_desktop_thumbnail_script_exec (script, size, uri, error);
       if (data)
         {
-          pixbuf = pixbuf_new_from_bytes (data, &error);
-          if (!pixbuf)
-            {
-              g_debug ("Could not load thumbnail pixbuf: %s", error->message);
-              g_error_free (error);
-            }
+          pixbuf = pixbuf_new_from_bytes (data, error);
           g_bytes_unref (data);
         }
-      else
-        {
-          g_debug ("Thumbnail script ('%s') failed for '%s': %s",
-                   script, uri, error ? error->message : "no details");
-          g_clear_error (&error);
-        }
+      g_free (script);
+
+      return pixbuf;
     }
   else
     {
-      g_debug ("Could not find thumbnailer for mime-type '%s'",
-               mime_type);
+      g_set_error (error,
+                   G_IO_ERROR,
+                   G_IO_ERROR_NOT_FOUND,
+                   _("Could not find thumbnailer for mime-type '%s'"),
+                   mime_type);
+      return NULL;
     }
-
-  g_free (script);
-
-  return pixbuf;
 }
 
 typedef struct {
@@ -1158,14 +1182,17 @@ thumbnail_factory_thread (GTask         *task,
   GnomeDesktopThumbnailFactory *self = source_object;
   ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
   GdkPixbuf *thumbnail;
+  GError *error = NULL;
 
   thumbnail = gnome_desktop_thumbnail_factory_generate_thumbnail (self,
                                                                   thumbnail_factory_data->uri,
-                                                                  thumbnail_factory_data->mime_type);
+                                                                  thumbnail_factory_data->mime_type,
+                                                                  cancellable,
+                                                                  &error);
   if (thumbnail)
     g_task_return_pointer (task, thumbnail, g_object_unref);
   else
-    g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED, "Failed to generate the thumbnail.");
+    g_task_return_error (task, error);
 }
 
 /**
@@ -1179,7 +1206,7 @@ thumbnail_factory_thread (GTask         *task,
  *
  * Asynchronous version of gnome_desktop_thumbnail_factory_generate_thumbnail()
  *
- * Since 42.0
+ * Since 43.0
  *
  **/
 
@@ -1212,7 +1239,7 @@ gnome_desktop_thumbnail_factory_generate_thumbnail_async (GnomeDesktopThumbnailF
  *
  * Return value: (transfer full): thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
  *
- * Since 42.0
+ * Since 43.0
  *
  **/
 
@@ -1227,18 +1254,21 @@ gnome_desktop_thumbnail_factory_generate_thumbnail_finish (GnomeDesktopThumbnail
 }
 
 static gboolean
-save_thumbnail (GdkPixbuf  *pixbuf,
-                char       *path,
-                const char *uri,
-                time_t      mtime)
+save_thumbnail (GdkPixbuf     *pixbuf,
+                char          *path,
+                const char    *uri,
+                time_t         mtime,
+                GCancellable  *cancellable,
+                GError       **error)
 {
   char *dirname;
   char *tmp_path = NULL;
   int tmp_fd;
   char mtime_str[21];
   gboolean ret = FALSE;
-  GError *error = NULL;
   const char *width, *height;
+
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   if (pixbuf == NULL)
     return FALSE;
@@ -1246,38 +1276,53 @@ save_thumbnail (GdkPixbuf  *pixbuf,
   dirname = g_path_get_dirname (path);
 
   if (g_mkdir_with_parents (dirname, 0700) != 0)
-    goto out;
+    {
+      g_set_error (error,
+                   G_IO_ERROR,
+                   G_IO_ERROR_FAILED,
+                   _("Failed to create folder '%s'"),
+                   dirname);
+      goto out;
+    }
 
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
   tmp_fd = g_mkstemp (tmp_path);
 
   if (tmp_fd == -1)
-    goto out;
+    {
+      g_set_error (error,
+                   G_IO_ERROR,
+                   G_IO_ERROR_FAILED,
+                   _("The output folder '%s' is not writable"),
+                   path);
+      goto out;
+    }
   close (tmp_fd);
 
   g_snprintf (mtime_str, 21, "%" G_GINT64_FORMAT, (gint64) mtime);
   width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
   height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
 
-  error = NULL;
   if (width != NULL && height != NULL)
     ret = gdk_pixbuf_save (pixbuf,
-			   tmp_path,
-			   "png", &error,
-			   "tEXt::Thumb::Image::Width", width,
-			   "tEXt::Thumb::Image::Height", height,
-			   "tEXt::Thumb::URI", uri,
-			   "tEXt::Thumb::MTime", mtime_str,
-			   "tEXt::Software", "GNOME::ThumbnailFactory",
-			   NULL);
+                           tmp_path,
+                           "png",
+                           error,
+                           "tEXt::Thumb::Image::Width", width,
+                           "tEXt::Thumb::Image::Height", height,
+                           "tEXt::Thumb::URI", uri,
+                           "tEXt::Thumb::MTime", mtime_str,
+                           "tEXt::Software", "GNOME::ThumbnailFactory",
+                           NULL);
   else
     ret = gdk_pixbuf_save (pixbuf,
-			   tmp_path,
-			   "png", &error,
-			   "tEXt::Thumb::URI", uri,
-			   "tEXt::Thumb::MTime", mtime_str,
-			   "tEXt::Software", "GNOME::ThumbnailFactory",
-			   NULL);
+                           tmp_path,
+                           "png",
+                           error,
+                           "tEXt::Thumb::URI", uri,
+                           "tEXt::Thumb::MTime", mtime_str,
+                           "tEXt::Software", "GNOME::ThumbnailFactory",
+                           NULL);
 
   if (!ret)
     goto out;
@@ -1285,12 +1330,13 @@ save_thumbnail (GdkPixbuf  *pixbuf,
   g_chmod (tmp_path, 0600);
   g_rename (tmp_path, path);
 
- out:
-  if (error != NULL)
+  if (g_cancellable_is_cancelled (cancellable))
     {
-      g_warning ("Failed to create thumbnail %s: %s", tmp_path, error->message);
-      g_error_free (error);
+      g_cancellable_set_error_if_cancelled (cancellable, error);
+      ret = FALSE;
     }
+
+ out:
   g_unlink (tmp_path);
   g_free (tmp_path);
   g_free (dirname);
@@ -1313,32 +1359,46 @@ make_failed_thumbnail (void)
  * @thumbnail: the thumbnail as a pixbuf
  * @uri: the uri of a file
  * @original_mtime: the modification time of the original file
+ * @cancellable: a GCancellable object, or NULL
+ * @error: where to store the exit error, or NULL
  *
  * Saves @thumbnail at the right place. If the save fails a
  * failed thumbnail is written.
  *
  * Usage of this function is threadsafe and does blocking I/O.
  *
+ * Return value: TRUE if everything went fine; FALSE if there was an error.
+ *
  * Since: 2.2
  **/
-void
-gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory *factory,
-						GdkPixbuf             *thumbnail,
-						const char            *uri,
-						time_t                 original_mtime)
+gboolean
+gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory  *factory,
+                                                GdkPixbuf                     *thumbnail,
+                                                const char                    *uri,
+                                                time_t                         original_mtime,
+                                                GCancellable                  *cancellable,
+                                                GError                       **error)
 {
   char *path;
+  gboolean ret;
+  GError *inner_error = NULL;
+
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   path = thumbnail_path (uri, factory->priv->size);
-  if (!save_thumbnail (thumbnail, path, uri, original_mtime))
+  ret = save_thumbnail (thumbnail, path, uri, original_mtime, cancellable, &inner_error);
+  if (!ret && !g_error_matches (inner_error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
       thumbnail = make_failed_thumbnail ();
       g_free (path);
       path = thumbnail_failed_path (uri);
-      save_thumbnail (thumbnail, path, uri, original_mtime);
+      save_thumbnail (thumbnail, path, uri, original_mtime, cancellable, NULL);
       g_object_unref (thumbnail);
     }
+  if (!ret)
+    g_propagate_error (error, inner_error);
   g_free (path);
+  return ret;
 }
 
 static void
@@ -1349,12 +1409,20 @@ thumbnail_factory_save_thread (GTask         *task,
 {
   GnomeDesktopThumbnailFactory *self = source_object;
   ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
+  GError *error = NULL;
+  gboolean ret;
 
-  gnome_desktop_thumbnail_factory_save_thumbnail (self,
-                                                  thumbnail_factory_data->thumbnail,
-                                                  thumbnail_factory_data->uri,
-                                                  thumbnail_factory_data->time);
-  g_task_return_boolean (task, FALSE);
+  ret = gnome_desktop_thumbnail_factory_save_thumbnail (self,
+                                                        thumbnail_factory_data->thumbnail,
+                                                        thumbnail_factory_data->uri,
+                                                        thumbnail_factory_data->time,
+                                                        cancellable,
+                                                        &error);
+
+  if (ret)
+    g_task_return_boolean (task, ret);
+  else
+    g_task_return_error (task, error);
 }
 
 /**
@@ -1369,7 +1437,7 @@ thumbnail_factory_save_thread (GTask         *task,
  *
  * Asynchronous version of gnome_desktop_thumbnail_factory_save_thumbnail()
  *
- * Since 42.0
+ * Since 43.0
  *
  **/
 
@@ -1388,7 +1456,7 @@ gnome_desktop_thumbnail_factory_save_thumbnail_async (GnomeDesktopThumbnailFacto
   thumbnail_factory_data = g_slice_new (ThumbnailFactoryAsyncData);
   thumbnail_factory_data->uri = g_strdup (uri);
   thumbnail_factory_data->mime_type = NULL;
-  thumbnail_factory_data->thumbnail = g_object_ref(thumbnail);
+  thumbnail_factory_data->thumbnail = g_object_ref (thumbnail);
   thumbnail_factory_data->time = original_mtime;
   task = g_task_new (factory, cancellable, callback, user_data);
   g_task_set_task_data (task, thumbnail_factory_data, (GDestroyNotify) thumbnail_factory_async_data_free);
@@ -1402,18 +1470,20 @@ gnome_desktop_thumbnail_factory_save_thumbnail_async (GnomeDesktopThumbnailFacto
  * @result: the result of the operation
  * @error: a pointer where a GError object is returned if the task failed
  *
- * Since 42.0
+ * Return value: TRUE if the operation was correct; FALSE if there was an error
+ *
+ * Since 43.0
  *
  **/
 
-void
+gboolean
 gnome_desktop_thumbnail_factory_save_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
                                                        GAsyncResult                 *result,
                                                        GError                      **error)
 {
-  g_return_if_fail (g_task_is_valid (result, factory));
+  g_return_val_if_fail (g_task_is_valid (result, factory), FALSE);
 
-  g_task_propagate_boolean (G_TASK (result), error);
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 
@@ -1422,27 +1492,37 @@ gnome_desktop_thumbnail_factory_save_thumbnail_finish (GnomeDesktopThumbnailFact
  * @factory: a #GnomeDesktopThumbnailFactory
  * @uri: the uri of a file
  * @mtime: the modification time of the file
+ * @cancellable: a GCancellable object, or NULL
+ * @error: where to store the exit error, or NULL
  *
  * Creates a failed thumbnail for the file so that we don't try
  * to re-thumbnail the file later.
  *
  * Usage of this function is threadsafe and does blocking I/O.
  *
+ * Return value: TRUE if everything went fine; FALSE if there was an error.
+ *
  * Since: 2.2
  **/
-void
-gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFactory *factory,
-							 const char            *uri,
-							 time_t                 mtime)
+gboolean
+gnome_desktop_thumbnail_factory_create_failed_thumbnail (GnomeDesktopThumbnailFactory  *factory,
+                                                         const char                    *uri,
+                                                         time_t                         mtime,
+                                                         GCancellable                  *cancellable,
+                                                         GError                       **error)
 {
   char *path;
   GdkPixbuf *pixbuf;
+  gboolean ret;
+
+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   path = thumbnail_failed_path (uri);
   pixbuf = make_failed_thumbnail ();
-  save_thumbnail (pixbuf, path, uri, mtime);
+  ret = save_thumbnail (pixbuf, path, uri, mtime, cancellable, error);
   g_free (path);
   g_object_unref (pixbuf);
+  return ret;
 }
 
 static void
@@ -1453,11 +1533,18 @@ thumbnail_factory_create_failed_thread (GTask         *task,
 {
   GnomeDesktopThumbnailFactory *self = source_object;
   ThumbnailFactoryAsyncData *thumbnail_factory_data = task_data;
+  GError *error = NULL;
+  gboolean ret;
 
-  gnome_desktop_thumbnail_factory_create_failed_thumbnail (self,
-                                                           thumbnail_factory_data->uri,
-                                                           thumbnail_factory_data->time);
-  g_task_return_boolean (task, FALSE);
+  ret = gnome_desktop_thumbnail_factory_create_failed_thumbnail (self,
+                                                                 thumbnail_factory_data->uri,
+                                                                 thumbnail_factory_data->time,
+                                                                 cancellable,
+                                                                 &error);
+  if (ret)
+    g_task_return_boolean (task, ret);
+  else
+    g_task_return_error (task, error);
 }
 
 /**
@@ -1471,7 +1558,7 @@ thumbnail_factory_create_failed_thread (GTask         *task,
  *
  * Asynchronous version of gnome_desktop_thumbnail_factory_create_failed_thumbnail()
  *
- * Since 42.0
+ * Since 43.0
  *
  **/
 
@@ -1503,18 +1590,20 @@ gnome_desktop_thumbnail_factory_create_failed_thumbnail_async (GnomeDesktopThumb
  * @result: the result of the operation
  * @error: a pointer where a GError object is returned if the task failed
  *
- * Since 42.0
+ * Return value: TRUE if the operation was correct; FALSE if there was an error
+ *
+ * Since 43.0
  *
  **/
 
-void
+gboolean
 gnome_desktop_thumbnail_factory_create_failed_thumbnail_finish (GnomeDesktopThumbnailFactory *factory,
                                                                 GAsyncResult                 *result,
                                                                 GError                      **error)
 {
-  g_return_if_fail (g_task_is_valid (result, factory));
+  g_return_val_if_fail (g_task_is_valid (result, factory), FALSE);
 
-  g_task_propagate_boolean (G_TASK (result), error);
+  return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 /**
