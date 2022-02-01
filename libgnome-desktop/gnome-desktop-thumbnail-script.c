@@ -984,6 +984,20 @@ script_exec_new (const char  *uri,
     {
       char *tmpl;
       const char *sandbox_dir;
+      g_autofree char *resolved_infile = NULL;
+
+      /* Make sure any symlinks in the path are resolved, because the resolved
+       * path is what's exposed by Flatpak into the sandbox */
+      resolved_infile = realpath (exec->infile, NULL);
+      if (!resolved_infile)
+        {
+          g_set_error (error, G_IO_ERROR, g_io_error_from_errno (errno),
+                       "Failed to resolve '%s': '%s'", exec->infile, g_strerror (errno));
+          goto bail;
+        }
+
+      g_free (exec->infile);
+      exec->infile = g_steal_pointer (&resolved_infile);
 
       sandbox_dir = g_getenv ("FLATPAK_SANDBOX_DIR");
       if (!sandbox_dir || *sandbox_dir != '/')
