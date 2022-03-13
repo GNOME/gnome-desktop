@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
-"POT-Creation-Date: 2021-05-10 19:31+0000\n"
-"PO-Revision-Date: 2021-10-15 14:14+0330\n"
+"POT-Creation-Date: 2022-01-11 16:46+0000\n"
+"PO-Revision-Date: 2022-03-13 11:58+0330\n"
 "Last-Translator: eshagh <eshagh094@gmail.com>\n"
 "Language-Team: Persian <>\n"
 "Language: fa\n"
@@ -25,26 +25,74 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: libgnome-desktop/gnome-languages.c:714
+#: libgnome-desktop/gnome-languages.c:724
 msgid "Unspecified"
 msgstr "نامشخّص"
 
+#. TRANSLATORS: Used to distinguish the labels representing the gez_ER
+#. and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
+#. difference is related to collation.
+#: libgnome-desktop/gnome-languages.c:1385
+msgid "Abegede"
+msgstr "ابجد"
+
+#. TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants.
+#: libgnome-desktop/gnome-languages.c:1387
+msgid "Cyrillic"
+msgstr "سیریلیک"
+
+#. TRANSLATORS: Also known as "Nagari", a written variant for many languages
+#. of the Indian subcontinent. See:
+#. https://en.wikipedia.org/wiki/Devanagari
+#: libgnome-desktop/gnome-languages.c:1391
+msgid "Devanagari"
+msgstr "دوانگاری"
+
+#. TRANSLATORS: Used to distinguish the label representing the tt_RU
+#. locale from tt_RU@iqtelif. It's a special alphabet for Tatar.
+#: libgnome-desktop/gnome-languages.c:1394
+msgid "IQTElif"
+msgstr "تاتار"
+
+#. TRANSLATORS: The alphabet/script, not the language. Used to distinguish
+#. Latin from Cyrillic written language variants.
+#: libgnome-desktop/gnome-languages.c:1397
+msgid "Latin"
+msgstr "لاتین"
+
+#. TRANSLATORS: "Saho" is a variant of the Afar language. Used to
+#. distinguish the label representing the aa_ER locale from aa_ER@saaho.
+#: libgnome-desktop/gnome-languages.c:1400
+msgid "Saho"
+msgstr "شائو"
+
+#. TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
+#. in Valencia. Used to distinguish the label representing the ca_ES
+#. locale from ca_ES@valencia.
+#: libgnome-desktop/gnome-languages.c:1404
+msgid "Valencia"
+msgstr "والنسیا"
+
 #: libgnome-desktop/gnome-rr-config.c:754
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:712
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "کنترلر سی‌آر‌تی %Id نمی‌تواند خروجی %s را بگرداند"
 
 #: libgnome-desktop/gnome-rr-config.c:761
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:719
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "خروجی %s از حالت %Id×%Id در%Id هرتز پشتیبانی نمی‌کند"
 
 #: libgnome-desktop/gnome-rr-config.c:772
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:730
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "کنترلر سی‌آر‌تی %Id از چرخاندن=%Id پشتیبانی نمی‌کند"
 
 #: libgnome-desktop/gnome-rr-config.c:785
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:743
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -52,29 +100,33 @@ msgid ""
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
 "existing rotation = %d, new rotation = %d"
 msgstr ""
-"خروجی %s دارای پارامتر‌های همانند با خروجی دیگری (که کپی‌برابر است) نیست:\n"
-"حالت موجود = %Id ، حالت جدید= %Id\n"
-"مختصات موجود = (%Id, %Id), مختصات جدید = (%Id, %Id)\n"
-"چرخش موجود =  %Id, چرخش جدید = %Id"
+"خروجی %s دارای پارامتر‌های همانند با خروجی دیگر شبیه‌سازی شده نیست:\n"
+"حالت موجود = %Id، حالت جدید= %Id\n"
+"مختصات موجود = (%Id, %Id)، مختصات جدید = (%Id, %Id)\n"
+"چرخش موجود = %Id، چرخش جدید = %Id"
 
 #: libgnome-desktop/gnome-rr-config.c:800
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:758
 #, c-format
 msgid "cannot clone to output %s"
-msgstr "نمی‌توان به خروجی %s کپی کرد"
+msgstr "نمی‌توان به خروجی %s شبیه‌سازی کرد"
 
 #: libgnome-desktop/gnome-rr-config.c:926
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:883
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "در حال آزمودن حالت‌ها برای کنترلر سی‌آر‌تی %Id\n"
 
 #: libgnome-desktop/gnome-rr-config.c:950
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:907
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
-"کنترلر سی‌آر‌تی %Id: در حال امتحان کردن حالت %Idx%Id در %Id هرتز با خروجی در %Idx%Id در %Id "
-"هرتز (گذر %Id )\n"
+"کنترلر سی‌آر‌تی %Id: در حال امتحان کردن حالت %Idx%Id در %Id هرتز با خروجی در %Idx"
+"%Id در %Id هرتز (گذر %Id )\n"
 
 #: libgnome-desktop/gnome-rr-config.c:997
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:954
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -84,25 +136,27 @@ msgstr ""
 "%s"
 
 #: libgnome-desktop/gnome-rr-config.c:1001
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:958
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
 "%s"
 msgstr ""
-"هیچ‌کدام از حالت‌های گزیده با حالت‌های ممکن، سازگار نبودند: \n"
+"هیچ‌کدام از حالت‌های گزیده با حالت‌های ممکن، سازگار نبودند:\n"
 "%s"
 
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
 #: libgnome-desktop/gnome-rr-config.c:1082
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:1039
 #, c-format
 msgid ""
-"required virtual size does not fit available size: requested=(%d, %d), minimum=(%d, %d), "
-"maximum=(%d, %d)"
+"required virtual size does not fit available size: requested=(%d, %d), "
+"minimum=(%d, %d), maximum=(%d, %d)"
 msgstr ""
-"اندازهٔ مجازی مورد نیاز با اندازهٔ در دسترس جور نمی‌شود: درخواست شده=(%Id, %Id)، کمینه=(%Id, "
-"%Id)، بیشینه=(%Id, %Id)"
+"اندازهٔ مجازی مورد نیاز با اندازهٔ در دسترس جور نمی‌شود: درخواست شده=(%Id, %Id)، "
+"کمینه=(%Id, %Id)، بیشینه=(%Id, %Id)"
 
 #: libgnome-desktop/gnome-wall-clock.c:258
 msgctxt "time separator"
@@ -207,28 +261,7 @@ msgstr "⁦%OI:%OM:%OS⁩ %p"
 # در این ترجمه از نویسه‌های ایزوله چپ‌به‌راست و RLM استفاده شده است
 #: libgnome-desktop/gnome-wall-clock.c:377
 msgid "%l:%M %p"
-msgstr "‏⁦%OI:%OM⁩ %p"
-
-#~ msgid "Abegede"
-#~ msgstr "ابجد"
-
-#~ msgid "Cyrillic"
-#~ msgstr "سیریلیک"
-
-#~ msgid "Devanagari"
-#~ msgstr "دوانگاری"
-
-#~ msgid "IQTElif"
-#~ msgstr "تاتار"
-
-#~ msgid "Latin"
-#~ msgstr "لاتین"
-
-#~ msgid "Saho"
-#~ msgstr "شائو"
-
-#~ msgid "Valencia"
-#~ msgstr "والنسیا"
+msgstr "⁦%OI:%OM⁩ %p"
 
 #~ msgctxt "Monitor vendor"
 #~ msgid "Unknown"
@@ -261,11 +294,11 @@ msgstr "‏⁦%OI:%OM⁩ %p"
 #~ msgstr "نمایشگر ناشناس"
 
 #~ msgid ""
-#~ "requested position/size for CRTC %d is outside the allowed limit: position=(%d, %d), "
-#~ "size=(%d, %d), maximum=(%d, %d)"
+#~ "requested position/size for CRTC %d is outside the allowed limit: "
+#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
 #~ msgstr ""
-#~ "موقعیت/اندازه‌ی درخواست شده برای کنترل‌کننده‌ی سی‌آر‌تی %d در خارج از حد مجاز است: موقعیت=(%d, "
-#~ "%d) ، , اندازه=(%d, %d), بیشینه=(%d, %d)"
+#~ "موقعیت/اندازه‌ی درخواست شده برای کنترل‌کننده‌ی سی‌آر‌تی %d در خارج از حد مجاز است: "
+#~ "موقعیت=(%d, %d) ، , اندازه=(%d, %d), بیشینه=(%d, %d)"
 
 #~ msgid "could not set the configuration for CRTC %d"
 #~ msgstr "پیکر‌بندی برای کنترلر سی‌آر‌تی %d تنظیم نشد"
@@ -273,9 +306,11 @@ msgstr "‏⁦%OI:%OM⁩ %p"
 #~ msgid "could not get information about CRTC %d"
 #~ msgstr "اطلاعات درباره‌ی کنترلر سی‌آر‌تی %d گرفته نشد"
 
-#~ msgid "none of the saved display configurations matched the active configuration"
+#~ msgid ""
+#~ "none of the saved display configurations matched the active configuration"
 #~ msgstr ""
-#~ "هیچ‌کدام از پیکربندی‌های ذخیره شده برای صفحهٔ نمایش با پیکربندی فعال فعلی مطابقت نیافت."
+#~ "هیچ‌کدام از پیکربندی‌های ذخیره شده برای صفحهٔ نمایش با پیکربندی فعال فعلی مطابقت "
+#~ "نیافت."
 
 #~| msgid "%a %b %e, %R:%S"
 #~ msgid "%a %b %e, %R∶%S"
@@ -289,8 +324,8 @@ msgstr "‏⁦%OI:%OM⁩ %p"
 
 #~ msgid "Cannot find a terminal, using xterm, even if it may not work"
 #~ msgstr ""
-#~ "پایانه‌ای یافت نمی‌شود، با استفاده از مقلد پایانه در سیستم پنجرهٔ ایکس، حتی اگر ممکن است کار "
-#~ "نکند"
+#~ "پایانه‌ای یافت نمی‌شود، با استفاده از مقلد پایانه در سیستم پنجرهٔ ایکس، حتی اگر "
+#~ "ممکن است کار نکند"
 
 #~ msgid "Laptop"
 #~ msgstr "لپ‌تاپ"
