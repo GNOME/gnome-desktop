@@ -28,6 +28,7 @@
 #endif
 
 #include <glib-object.h>
+#include <libgnome-desktop/gnome-desktop-version.h>
 
 G_BEGIN_DECLS
 

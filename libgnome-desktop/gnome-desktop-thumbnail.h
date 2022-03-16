@@ -34,6 +34,7 @@
 #include <glib-object.h>
 #include <time.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <libgnome-desktop/gnome-desktop-version.h>
 
 G_BEGIN_DECLS
 

@@ -26,6 +26,7 @@
 #endif
 
 #include <gio/gio.h>
+#include <libgnome-desktop/gnome-desktop-version.h>
 
 void gnome_start_systemd_scope (const char           *name,
                                 gint32                pid,

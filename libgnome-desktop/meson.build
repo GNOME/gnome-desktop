@@ -27,6 +27,12 @@ conf.set('HAVE_OPENAT', cc.has_function('openat'))
 conf.set('HAVE_USELOCALE', cc.has_function('uselocale'))
 conf.set('HAVE_XLOCALE', cc.has_header('xlocale.h'))
 
+gnome_desktop_header_file = configure_file(
+  input: 'gnome-desktop-version.h.in',
+  output: 'gnome-desktop-version.h',
+  configuration: version_conf,
+)
+
 configure_file(
   output: 'config.h',
   configuration: conf,
@@ -53,6 +59,7 @@ endif
 
 ### gnome-desktop-base
 libgnome_desktop_base_sources = [
+  'gnome-desktop-version.c',
   'gnome-desktop-thumbnail.c',
   'gnome-idle-monitor.c',
   'gnome-languages.c',
@@ -69,6 +76,7 @@ libgnome_desktop_base_private_sources = [
 ]
 
 libgnome_desktop_base_headers = [
+  gnome_desktop_header_file,
   'gnome-desktop-thumbnail.h',
   'gnome-idle-monitor.h',
   'gnome-languages.h',
@@ -158,6 +166,7 @@ endif
 ### Legacy ###
 if get_option('legacy_library')
   introspection_sources = [
+    'gnome-desktop-version.c',
     'gnome-desktop-thumbnail.c',
     'gnome-bg.c',
     'gnome-bg-slide-show.c',
@@ -183,6 +192,7 @@ if get_option('legacy_library')
   ]
 
   libgnome_desktop_headers = [
+    gnome_desktop_header_file,
     'gnome-bg.h',
     'gnome-bg-crossfade.h',
     'gnome-bg-slide-show.h',

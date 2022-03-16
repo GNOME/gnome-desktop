@@ -31,6 +31,7 @@
 
 #include <glib.h>
 #include <gdk/gdk.h>
+#include <libgnome-desktop/gnome-desktop-version.h>
 
 typedef struct GnomeRRScreenPrivate GnomeRRScreenPrivate;
 typedef struct GnomeRROutput GnomeRROutput;
