@@ -78,79 +78,79 @@ libgnome_desktop_base_headers = [
   'gnome-xkb-info.h',
 ]
 
-install_headers(libgnome_desktop_base_headers,
-  subdir: 'gnome-desktop-4.0/libgnome-desktop'
-)
+if get_option('build_gtk4')
+  install_headers(libgnome_desktop_base_headers,
+    subdir: 'gnome-desktop-4.0/libgnome-desktop'
+  )
 
-base_deps = [
-  gdk_pixbuf_dep,
-  glib_dep,
-  gio_dep,
-  gio_unix_dep,
-  libsystemd_dep,
-  schemas_dep,
-  xkb_config_dep,
-  xkbregistry_dep,
-  iso_codes_dep,
-  udev_dep,
-  seccomp_dep,
-  m_dep,
-  rt_dep,
-]
+  base_deps = [
+    gdk_pixbuf_dep,
+    glib_dep,
+    gio_dep,
+    gio_unix_dep,
+    libsystemd_dep,
+    schemas_dep,
+    xkb_config_dep,
+    xkbregistry_dep,
+    iso_codes_dep,
+    udev_dep,
+    seccomp_dep,
+    m_dep,
+    rt_dep,
+  ]
 
-libgnome_desktop_base = library('gnome-desktop-4',
-  sources: [
-    libgnome_desktop_base_sources,
-    libgnome_desktop_base_private_sources,
-    dbus_idle_built_sources,
-  ],
-  dependencies: base_deps,
-  soversion: soversion,
-  version: libversion,
-  c_args: libargs,
-  link_args: base_ldflags,
-  install: true,
-  include_directories: [
-    include_directories('.'),
-    include_directories('..'),
-  ],
-)
+  libgnome_desktop_base = library('gnome-desktop-4',
+    sources: [
+      libgnome_desktop_base_sources,
+      libgnome_desktop_base_private_sources,
+      dbus_idle_built_sources,
+    ],
+    dependencies: base_deps,
+    soversion: soversion,
+    version: libversion,
+    c_args: libargs,
+    link_args: base_ldflags,
+    install: true,
+    include_directories: [
+      include_directories('.'),
+      include_directories('..'),
+    ],
+  )
 
-libgnome_desktop_base_gir = gnome.generate_gir(libgnome_desktop_base,
-  sources: [libgnome_desktop_base_headers, libgnome_desktop_base_sources],
-  export_packages: 'gnome-desktop-4',
-  namespace: 'GnomeDesktop',
-  nsversion: '4.0',
-  includes: ['GObject-2.0', 'Gio-2.0', 'GDesktopEnums-3.0', 'GdkPixbuf-2.0'],
-  extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
-  identifier_prefix: 'Gnome',
-  symbol_prefix: 'gnome',
-  install: true,
-)
+  libgnome_desktop_base_gir = gnome.generate_gir(libgnome_desktop_base,
+    sources: [libgnome_desktop_base_headers, libgnome_desktop_base_sources],
+    export_packages: 'gnome-desktop-4',
+    namespace: 'GnomeDesktop',
+    nsversion: '4.0',
+    includes: ['GObject-2.0', 'Gio-2.0', 'GDesktopEnums-3.0', 'GdkPixbuf-2.0'],
+    extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+    identifier_prefix: 'Gnome',
+    symbol_prefix: 'gnome',
+    install: true,
+  )
 
-pkg.generate(
-  libgnome_desktop_base,
-  requires: ['gsettings-desktop-schemas'],
-  version: meson.project_version(),
-  name: 'gnome-desktop-4',
-  filebase: 'gnome-desktop-4',
-  description: 'Utility library for GNOME desktop components',
-  subdirs: 'gnome-desktop-4.0',
-)
+  pkg.generate(
+    libgnome_desktop_base,
+    requires: ['gsettings-desktop-schemas'],
+    version: meson.project_version(),
+    name: 'gnome-desktop-4',
+    filebase: 'gnome-desktop-4',
+    description: 'Utility library for GNOME desktop components',
+    subdirs: 'gnome-desktop-4.0',
+  )
 
-libgnome_desktop_base_dep = declare_dependency(
-  sources: [
-    libgnome_desktop_base_gir,
-  ],
-  dependencies: base_deps,
-  link_with: libgnome_desktop_base,
-  include_directories: [
-    include_directories('.'),
-    include_directories('..'),
-  ],
-)
+  libgnome_desktop_base_dep = declare_dependency(
+    sources: [
+      libgnome_desktop_base_gir,
+    ],
+    dependencies: base_deps,
+    link_with: libgnome_desktop_base,
+    include_directories: [
+      include_directories('.'),
+      include_directories('..'),
+    ],
+  )
 
-if gtk4_dep.found()
   subdir('gnome-bg')
   subdir('gnome-rr')
 endif
