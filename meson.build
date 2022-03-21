@@ -7,11 +7,17 @@ project('gnome-desktop', 'c',
   ],
 )
 
-# Before making a release, the libversion string should be modified.
+# Before making a release that changes the source code, the libversion and
+# compat_libversion strings should be modified. (No need to touch these for
+# releases with no code changes.)
 #
 #  * Bump the first component if binary compatibility has been broken; or
 #  * Bump the second component if new APIs are added; or
 #  * Bump the third component otherwise.
+#
+# After creating a new stable branch, the next release on the main branch should
+# bump the second component to ensure we don't wind up with the same libversion
+# for different releases on different branches.
 #
 # When bumping the first component version, set the second and third components
 # to 0. When bumping the second version, set the third one to zero.
