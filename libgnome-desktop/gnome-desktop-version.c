@@ -37,5 +37,5 @@
 int
 gnome_get_platform_version (void)
 {
-  return GNOME_DESKTOP_PLATFORM_VERSION;
+  return GNOME_DESKTOP_MAJOR_VERSION;
 }

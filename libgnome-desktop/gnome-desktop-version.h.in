@@ -1,6 +1,7 @@
 /* gnome-desktop-version.h
  *
  * Copyright (C) 2022 Sergio Costas
+ * Copyright (C) 2022 Red Hat Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public License
@@ -22,8 +23,17 @@
 #ifndef __GNOME_DESKTOP_VERSION_H__
 #define __GNOME_DESKTOP_VERSION_H__
 
-#define GNOME_DESKTOP_PLATFORM_VERSION @GNOME_PLATFORM@
+#define GNOME_DESKTOP_MAJOR_VERSION @GNOME_PLATFORM@
+#define GNOME_DESKTOP_MINOR_VERSION @GNOME_MINOR@
+#define GNOME_DESKTOP_MICRO_VERSION @GNOME_MICRO@
+
+#define GNOME_DESKTOP_CHECK_VERSION(major,minor,micro)    \
+    (GNOME_DESKTOP_MAJOR_VERSION > (major) || \
+     (GNOME_DESKTOP_MAJOR_VERSION == (major) && GNOME_DESKTOP_MINOR_VERSION > (minor)) || \
+     (GNOME_DESKTOP_MAJOR_VERSION == (major) && GNOME_DESKTOP_MINOR_VERSION == (minor) && \
+      GNOME_DESKTOP_MICRO_VERSION >= (micro)))
 
 int gnome_get_platform_version (void);
+
 #endif
 
