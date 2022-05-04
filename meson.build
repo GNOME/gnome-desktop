@@ -85,33 +85,6 @@ if not cc.has_function('clock_gettime', dependencies: rt_dep)
   rt_dep = dependency('', required: false)
 endif
 
-version_array = meson.project_version().split('.')
-version_conf = configuration_data()
-
-version_conf.set('GNOME_PLATFORM', version_array[0])
-version_conf.set('GNOME_MINOR', version_array[1])
-version_conf.set('GNOME_MICRO', 0)
-version_conf.set('GNOME_DISTRIBUTOR', get_option('gnome_distributor'))
-
-if get_option('date_in_gnome_version')
-  date = run_command(['date', '+%Y-%m-%d'])
-  version_conf.set('GNOME_DATE', date.stdout().strip())
-  version_conf.set('GNOME_DATE_COMMENT_START', '')
-  version_conf.set('GNOME_DATE_COMMENT_END', '')
-else
-  version_conf.set('GNOME_DATE', '')
-  version_conf.set('GNOME_DATE_COMMENT_START', '<!--')
-  version_conf.set('GNOME_DATE_COMMENT_END', '-->')
-endif
-
-version_xml = configure_file(
-  configuration: version_conf,
-  input: 'gnome-version.xml.in',
-  output: 'gnome-version.xml',
-  install: true,
-  install_dir: versiondir,
-)
-
 subdir('libgnome-desktop')
 subdir('po')
 subdir('tests')
@@ -143,8 +116,6 @@ summary({
     'Build legacy libgnome-desktop': get_option('legacy_library'),
     'Desktop documentation': get_option('desktop_docs'),
     'API documentation': get_option('gtk_doc'),
-    'Date in gnome-version.xml': get_option('date_in_gnome_version'),
-    'GNOME distributor': get_option('gnome_distributor'),
     'Debug tools': get_option('debug_tools'),
     'Installed tests': get_option('installed_tests'),
   },

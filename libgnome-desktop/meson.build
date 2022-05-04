@@ -27,15 +27,19 @@ conf.set('HAVE_OPENAT', cc.has_function('openat'))
 conf.set('HAVE_USELOCALE', cc.has_function('uselocale'))
 conf.set('HAVE_XLOCALE', cc.has_header('xlocale.h'))
 
+configure_file(
+  output: 'config.h',
+  configuration: conf,
+)
+
+version_conf = configuration_data()
+version_array = meson.project_version().split('.')
+version_conf.set('GNOME_PLATFORM', version_array[0])
+
 gnome_desktop_header_file = configure_file(
   input: 'gnome-desktop-version.h.in',
   output: 'gnome-desktop-version.h',
   configuration: version_conf,
-)
-
-configure_file(
-  output: 'config.h',
-  configuration: conf,
 )
 
 dbus_xrandr_built_sources = gnome.gdbus_codegen('meta-dbus-xrandr',
