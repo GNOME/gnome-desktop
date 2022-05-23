@@ -948,6 +948,9 @@ script_exec_new (const char  *uri,
       else
         exec->sandbox = SANDBOX_TYPE_NONE;
     }
+  /* Similarly for snaps */
+  else if (g_getenv ("SNAP_NAME") != NULL)
+    exec->sandbox = SANDBOX_TYPE_NONE;
   else
     exec->sandbox = SANDBOX_TYPE_BWRAP;
 #endif
