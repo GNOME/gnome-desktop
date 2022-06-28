@@ -43,6 +43,7 @@ struct _GnomeWallClockPrivate {
 	GSettings    *desktop_settings;
 
 	gboolean time_only;
+	gboolean force_seconds;
 };
 
 enum {
@@ -50,6 +51,7 @@ enum {
 	PROP_CLOCK,
 	PROP_TIMEZONE,
 	PROP_TIME_ONLY,
+	PROP_FORCE_SECONDS,
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GnomeWallClock, gnome_wall_clock, G_TYPE_OBJECT);
@@ -125,6 +127,9 @@ gnome_wall_clock_get_property (GObject    *gobject,
 	case PROP_CLOCK:
 		g_value_set_string (value, self->priv->clock_string);
 		break;
+	case PROP_FORCE_SECONDS:
+		g_value_set_boolean (value, self->priv->force_seconds);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, prop_id, pspec);
 		break;
@@ -143,6 +148,10 @@ gnome_wall_clock_set_property (GObject      *gobject,
 	{
 	case PROP_TIME_ONLY:
 		self->priv->time_only = g_value_get_boolean (value);
+		update_clock (self);
+		break;
+	case PROP_FORCE_SECONDS:
+		self->priv->force_seconds = g_value_get_boolean (value);
 		update_clock (self);
 		break;
 	default:
@@ -198,6 +207,21 @@ gnome_wall_clock_class_init (GnomeWallClockClass *klass)
 	g_object_class_install_property (gobject_class,
 					 PROP_TIME_ONLY,
 					 g_param_spec_boolean ("time-only",
+							       "",
+							       "",
+							       FALSE,
+							       G_PARAM_READABLE | G_PARAM_WRITABLE));
+
+	/**
+	 * GnomeWallClock:force-seconds:
+	 *
+	 * If %TRUE, the formatted clock will always have seconds precision and the
+	 * 'clock' property will always be updated every second, irrespective of
+	 * system configuration.
+	 */
+	g_object_class_install_property (gobject_class,
+					 PROP_FORCE_SECONDS,
+					 g_param_spec_boolean ("force-seconds",
 							       "",
 							       "",
 							       FALSE,
@@ -385,6 +409,16 @@ gnome_wall_clock_string_for_datetime (GnomeWallClock      *self,
 
 #undef T_
 
+gboolean
+has_seconds (GnomeWallClock* self)
+{
+	if (self->priv->force_seconds) {
+		return TRUE;
+	}
+
+	return g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
+}
+
 static gboolean
 update_clock (gpointer data)
 {
@@ -400,7 +434,7 @@ update_clock (gpointer data)
 	clock_format = g_settings_get_enum (self->priv->desktop_settings, "clock-format");
 	show_weekday = !self->priv->time_only && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-weekday");
 	show_full_date = !self->priv->time_only && g_settings_get_boolean (self->priv->desktop_settings, "clock-show-date");
-	show_seconds = g_settings_get_boolean (self->priv->desktop_settings, "clock-show-seconds");
+	show_seconds = has_seconds (self);
 
 	now = g_date_time_new_now (self->priv->timezone);
 	if (show_seconds)
