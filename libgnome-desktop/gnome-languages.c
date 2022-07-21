@@ -105,6 +105,23 @@ normalize_codeset (const char *codeset)
         return g_strdup (codeset);
 }
 
+/* Returns TRUE if value was non-empty */
+
+static gboolean
+match_info_fetch_named_non_empty (GMatchInfo  *match_info,
+                                  const char  *match_name,
+                                  char       **variable)
+{
+        g_autofree char *value = NULL;
+
+        value = g_match_info_fetch_named (match_info, match_name);
+        if (!value || *value == '\0')
+                return FALSE;
+        if (variable)
+                *variable = g_steal_pointer (&value);
+        return TRUE;
+}
+
 /**
  * gnome_parse_locale:
  * @locale: a locale string
@@ -117,8 +134,8 @@ normalize_codeset (const char *codeset)
  * @modifierp: (out) (optional) (nullable) (transfer full): location to
  * store the modifier, or %NULL
  *
- * Extracts the various components of a locale string of the form
- * [language[_country][.codeset][@modifier]]. See
+ * Extracts the various components of a locale string in XPG format.
+ * ([language[_country][.codeset][@modifier]]). See
  * http://en.wikipedia.org/wiki/Locale.
  *
  * Return value: %TRUE if parsing was successful.
@@ -132,96 +149,30 @@ gnome_parse_locale (const char *locale,
                     char      **codesetp,
                     char      **modifierp)
 {
-        static GRegex *re = NULL;
-        GMatchInfo *match_info;
-        gboolean    res;
-        gboolean    retval;
+        g_autoptr(GRegex) regex = NULL;
+        g_autoptr(GMatchInfo) match_info = NULL;
+        gboolean ret = FALSE;
 
-        match_info = NULL;
-        retval = FALSE;
+        if (locale == NULL)
+                return ret;
 
-        if (re == NULL) {
-                GError *error = NULL;
-                re = g_regex_new ("^(?P<language>[^_.@[:space:]]+)"
-                                  "(_(?P<territory>[[:upper:]]+))?"
-                                  "(\\.(?P<codeset>[-_0-9a-zA-Z]+))?"
-                                  "(@(?P<modifier>[[:ascii:]]+))?$",
-                                  0, 0, &error);
-                if (re == NULL) {
-                        g_warning ("%s", error->message);
-                        g_error_free (error);
-                        goto out;
-                }
-        }
+        regex = g_regex_new ("^(?P<language>[a-z][a-z][a-z]?)"
+                             "(_(?P<territory>[A-Z][A-Z]))?"
+                             "(\\.(?P<codeset>[A-Za-z0-9][A-Za-z-0-9]*))?"
+                             "(@(?P<modifier>[a-z]*))?$",
+                             0, 0, NULL);
+        g_assert (regex);
 
-        if (!g_regex_match (re, locale, 0, &match_info) ||
-            g_match_info_is_partial_match (match_info)) {
-                g_warning ("locale '%s' isn't valid\n", locale);
-                goto out;
-        }
+        if (!g_regex_match (regex, locale, 0, &match_info))
+                return ret;
 
-        res = g_match_info_matches (match_info);
-        if (! res) {
-                g_warning ("Unable to parse locale: %s", locale);
-                goto out;
-        }
+        if (match_info_fetch_named_non_empty (match_info, "language", language_codep))
+                ret = TRUE;
+        match_info_fetch_named_non_empty (match_info, "territory", country_codep);
+        match_info_fetch_named_non_empty (match_info, "codeset", codesetp);
+        match_info_fetch_named_non_empty (match_info, "modifier", modifierp);
 
-        retval = TRUE;
-
-        if (language_codep != NULL) {
-                *language_codep = g_match_info_fetch_named (match_info, "language");
-        }
-
-        if (country_codep != NULL) {
-                *country_codep = g_match_info_fetch_named (match_info, "territory");
-
-                if (*country_codep != NULL &&
-                    *country_codep[0] == '\0') {
-                        g_free (*country_codep);
-                        *country_codep = NULL;
-                }
-        }
-
-        if (codesetp != NULL) {
-                *codesetp = g_match_info_fetch_named (match_info, "codeset");
-
-                if (*codesetp != NULL &&
-                    *codesetp[0] == '\0') {
-                        g_free (*codesetp);
-                        *codesetp = NULL;
-                }
-        }
-
-        if (modifierp != NULL) {
-                *modifierp = g_match_info_fetch_named (match_info, "modifier");
-
-                if (*modifierp != NULL &&
-                    *modifierp[0] == '\0') {
-                        g_free (*modifierp);
-                        *modifierp = NULL;
-                }
-        }
-
-        if (codesetp != NULL && *codesetp != NULL) {
-                g_autofree gchar *normalized_codeset = NULL;
-                g_autofree gchar *normalized_name = NULL;
-
-                normalized_codeset = normalize_codeset (*codesetp);
-                normalized_name = construct_language_name (language_codep ? *language_codep : NULL,
-                                                           country_codep ? *country_codep : NULL,
-                                                           normalized_codeset,
-                                                           modifierp ? *modifierp : NULL);
-
-                if (language_name_is_valid (normalized_name)) {
-                        g_free (*codesetp);
-                        *codesetp = g_steal_pointer (&normalized_codeset);
-                }
-        }
-
- out:
-        g_match_info_free (match_info);
-
-        return retval;
+        return ret;
 }
 
 static char *
