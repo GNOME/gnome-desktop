@@ -156,7 +156,7 @@ gnome_parse_locale (const char *locale,
         if (locale == NULL)
                 return ret;
 
-        regex = g_regex_new ("^(?P<language>[a-z][a-z][a-z]?)"
+        regex = g_regex_new ("^(?P<language>[A-Za-z][a-z]?[a-z]?)"
                              "(_(?P<territory>[A-Z][A-Z]))?"
                              "(\\.(?P<codeset>[A-Za-z0-9][A-Za-z-0-9]*))?"
                              "(@(?P<modifier>[a-z]*))?$",
