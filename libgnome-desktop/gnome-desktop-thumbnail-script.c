@@ -301,8 +301,8 @@ setup_seccomp (GPtrArray  *argv_array,
    * can do, and we should support code portability between different
    * container tools.
    *
-   * This syscall blacklist is copied from linux-user-chroot, which was in turn
-   * clearly influenced by the Sandstorm.io blacklist.
+   * This syscall blocklist is copied from linux-user-chroot, which was in turn
+   * clearly influenced by the Sandstorm.io blocklist.
    *
    * If you make any changes here, I suggest sending the changes along
    * to other sandbox maintainers.  Using the libseccomp list is also
@@ -310,7 +310,7 @@ setup_seccomp (GPtrArray  *argv_array,
    * https://groups.google.com/forum/#!topic/libseccomp
    *
    * A non-exhaustive list of links to container tooling that might
-   * want to share this blacklist:
+   * want to share this blocklist:
    *
    *  https://github.com/sandstorm-io/sandstorm
    *    in src/sandstorm/supervisor.c++
@@ -325,7 +325,7 @@ setup_seccomp (GPtrArray  *argv_array,
   {
     int                  scall;
     struct scmp_arg_cmp *arg;
-  } syscall_blacklist[] = {
+  } syscall_blocklist[] = {
     /* Block dmesg */
     {SCMP_SYS (syslog)},
     /* Useless old syscall */
@@ -373,15 +373,15 @@ setup_seccomp (GPtrArray  *argv_array,
   {
     int                  scall;
     struct scmp_arg_cmp *arg;
-  } syscall_nondevel_blacklist[] = {
+  } syscall_nondevel_blocklist[] = {
     /* Profiling operations; we expect these to be done by tools from outside
      * the sandbox.  In particular perf has been the source of many CVEs.
      */
     {SCMP_SYS (perf_event_open)},
     {SCMP_SYS (ptrace)}
   };
-  /* Blacklist all but unix, inet, inet6 and netlink */
-  int socket_family_blacklist[] = {
+  /* blocklist all but unix, inet, inet6 and netlink */
+  int socket_family_blocklist[] = {
     AF_AX25,
     AF_IPX,
     AF_APPLETALK,
@@ -462,11 +462,11 @@ setup_seccomp (GPtrArray  *argv_array,
    * leak system stuff or secrets from other apps.
    */
 
-  for (i = 0; i < G_N_ELEMENTS (syscall_blacklist); i++)
+  for (i = 0; i < G_N_ELEMENTS (syscall_blocklist); i++)
     {
-      int scall = syscall_blacklist[i].scall;
-      if (syscall_blacklist[i].arg)
-        r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 1, *syscall_blacklist[i].arg);
+      int scall = syscall_blocklist[i].scall;
+      if (syscall_blocklist[i].arg)
+        r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 1, *syscall_blocklist[i].arg);
       else
         r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 0);
       if (r < 0 && r == -EFAULT /* unknown syscall */)
@@ -475,11 +475,11 @@ setup_seccomp (GPtrArray  *argv_array,
 
   if (!devel)
     {
-      for (i = 0; i < G_N_ELEMENTS (syscall_nondevel_blacklist); i++)
+      for (i = 0; i < G_N_ELEMENTS (syscall_nondevel_blocklist); i++)
         {
-          int scall = syscall_nondevel_blacklist[i].scall;
-          if (syscall_nondevel_blacklist[i].arg)
-            r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 1, *syscall_nondevel_blacklist[i].arg);
+          int scall = syscall_nondevel_blocklist[i].scall;
+          if (syscall_nondevel_blocklist[i].arg)
+            r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 1, *syscall_nondevel_blocklist[i].arg);
           else
             r = seccomp_rule_add (seccomp, SCMP_ACT_ERRNO (EPERM), scall, 0);
 
@@ -491,10 +491,10 @@ setup_seccomp (GPtrArray  *argv_array,
   /* Socket filtering doesn't work on e.g. i386, so ignore failures here
    * However, we need to user seccomp_rule_add_exact to avoid libseccomp doing
    * something else: https://github.com/seccomp/libseccomp/issues/8 */
-  for (i = 0; i < G_N_ELEMENTS (socket_family_blacklist); i++)
+  for (i = 0; i < G_N_ELEMENTS (socket_family_blocklist); i++)
     {
-      int family = socket_family_blacklist[i];
-      if (i == G_N_ELEMENTS (socket_family_blacklist) - 1)
+      int family = socket_family_blocklist[i];
+      if (i == G_N_ELEMENTS (socket_family_blocklist) - 1)
         seccomp_rule_add_exact (seccomp, SCMP_ACT_ERRNO (EAFNOSUPPORT), SCMP_SYS (socket), 1, SCMP_A0 (SCMP_CMP_GE, family));
       else
         seccomp_rule_add_exact (seccomp, SCMP_ACT_ERRNO (EAFNOSUPPORT), SCMP_SYS (socket), 1, SCMP_A0 (SCMP_CMP_EQ, family));
