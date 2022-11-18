@@ -26,6 +26,7 @@ static DefaultInputSource default_input_sources[] =
   { "es_ES",    "xkb",          "es" },
   { "es_GT",    "xkb",          "latam" },
   { "es_MX",    "xkb",          "latam" },
+  { "es_US",    "xkb",          "us+intl" },
   { "fr_BE",    "xkb",          "be" },
   { "fr_CH",    "xkb",          "ch+fr" },
   { "fr_FR",    "xkb",          "fr+oss" },
