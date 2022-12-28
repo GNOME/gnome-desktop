@@ -1395,6 +1395,13 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory  *f
 
       save_thumbnail (failed_thumbnail, failed_path, uri, original_mtime, cancellable, NULL);
     }
+  else if (ret)
+    {
+      g_autoptr (GFile) failed_file = g_file_new_for_path (failed_path);
+
+      g_file_delete (failed_file, cancellable, NULL);
+    }
+
   if (!ret)
     g_propagate_error (error, inner_error);
 
