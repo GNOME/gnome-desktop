@@ -1182,6 +1182,10 @@ gnome_get_country_from_locale (const char *locale,
         }
 
         translated_territory = get_translated_territory (territory_code, translation);
+        if (translated_territory == NULL) {
+                goto out;
+        }
+
         g_string_append (full_name, translated_territory);
 
 	if (is_unique_territory (territory_code)) {
