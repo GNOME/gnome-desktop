@@ -1379,25 +1379,25 @@ gnome_desktop_thumbnail_factory_save_thumbnail (GnomeDesktopThumbnailFactory  *f
                                                 GCancellable                  *cancellable,
                                                 GError                       **error)
 {
-  char *path;
+  g_autofree char *path = NULL;
+  g_autofree char *failed_path = NULL;
   gboolean ret;
   GError *inner_error = NULL;
 
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   path = thumbnail_path (uri, factory->priv->size);
+  failed_path = thumbnail_failed_path (uri);
   ret = save_thumbnail (thumbnail, path, uri, original_mtime, cancellable, &inner_error);
   if (!ret && !g_error_matches (inner_error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-      thumbnail = make_failed_thumbnail ();
-      g_free (path);
-      path = thumbnail_failed_path (uri);
-      save_thumbnail (thumbnail, path, uri, original_mtime, cancellable, NULL);
-      g_object_unref (thumbnail);
+      g_autoptr (GdkPixbuf) failed_thumbnail = make_failed_thumbnail ();
+
+      save_thumbnail (failed_thumbnail, failed_path, uri, original_mtime, cancellable, NULL);
     }
   if (!ret)
     g_propagate_error (error, inner_error);
-  g_free (path);
+
   return ret;
 }
 
