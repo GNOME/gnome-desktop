@@ -2176,6 +2176,7 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 		if (orig) {
 			int orig_width, orig_height;
 			GdkPixbuf *rotated;
+			gchar *orig_height_str, *orig_width_str;
 
 			rotated = gdk_pixbuf_apply_embedded_orientation (orig);
 			if (rotated != NULL) {
@@ -2185,14 +2186,20 @@ create_thumbnail_for_filename (GnomeDesktopThumbnailFactory *factory,
 
 			orig_width = gdk_pixbuf_get_width (orig);
 			orig_height = gdk_pixbuf_get_height (orig);
-			
+
 			result = pixbuf_scale_to_fit (orig, THUMBNAIL_SIZE, THUMBNAIL_SIZE);
-			
-			g_object_set_data_full (G_OBJECT (result), "gnome-thumbnail-height",
-						g_strdup_printf ("%d", orig_height), g_free);
-			g_object_set_data_full (G_OBJECT (result), "gnome-thumbnail-width",
-						g_strdup_printf ("%d", orig_width), g_free);
-			
+
+			orig_height_str = g_strdup_printf ("%d", orig_height);
+			orig_width_str = g_strdup_printf ("%d", orig_width);
+
+			gdk_pixbuf_set_option (result, "tEXt::Thumb::Image::Height", orig_height_str);
+			gdk_pixbuf_set_option (result, "tEXt::Thumb::Image::Width", orig_width_str);
+
+			g_object_set_data_full (G_OBJECT (result), "gnome-thumbnail-height", 
+			                        g_steal_pointer (&orig_height_str), g_free);
+			g_object_set_data_full (G_OBJECT (result), "gnome-thumbnail-width", 
+	                                        g_steal_pointer (&orig_width_str), g_free);
+
 			g_object_unref (orig);
 			
 			gnome_desktop_thumbnail_factory_save_thumbnail (factory, result, uri, mtime, NULL, &error);
