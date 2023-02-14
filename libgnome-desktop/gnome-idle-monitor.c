@@ -375,6 +375,7 @@ on_watch_added (GObject      *object,
 	GnomeIdleMonitor *monitor;
 	GError *error;
 	GVariant *res;
+	guint upstream_id;
 
 	error = NULL;
 	res = g_dbus_proxy_call_finish (G_DBUS_PROXY (object), result, &error);
@@ -391,15 +392,22 @@ on_watch_added (GObject      *object,
 		return;
 	}
 
+	g_variant_get (res, "(u)", &upstream_id);
+	g_variant_unref (res);
+
 	if (watch->dead) {
+		if (upstream_id) {
+			meta_dbus_idle_monitor_call_remove_watch (watch->monitor->priv->proxy,
+								  upstream_id,
+								  NULL, NULL, NULL);
+		}
 		idle_monitor_watch_unref (watch);
 		return;
 	}
 
 	monitor = watch->monitor;
-	g_variant_get (res, "(u)", &watch->upstream_id);
-	g_variant_unref (res);
 
+	watch->upstream_id = upstream_id;
 	g_hash_table_insert (monitor->priv->watches_by_upstream_id,
 			     GINT_TO_POINTER (watch->upstream_id), watch);
 	idle_monitor_watch_unref (watch);
