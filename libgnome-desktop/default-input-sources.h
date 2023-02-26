@@ -53,6 +53,7 @@ static DefaultInputSource default_input_sources[] =
   { "sk_SK",    "xkb",          "sk" },
   { "ta_IN",    "ibus",         "m17n:ta:tamil99" },
   { "te_IN",    "ibus",         "m17n:te:inscript" },
+  { "tr_TR",    "xkb",          "tr" },
   { "ur_IN",    "ibus",         "m17n:ur:phonetic" },
   { "zh_CN",    "ibus",         "libpinyin" },
   { "zh_HK",    "ibus",         "table:cangjie5" },
