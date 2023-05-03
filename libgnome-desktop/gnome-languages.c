@@ -364,7 +364,14 @@ add_locale (const char *language_name,
         language_name_get_codeset_details (language_name, NULL, &is_utf8);
 
         if (is_utf8) {
-                name = g_strdup (language_name);
+                /* If the locale is UTF-8, but it's not explicit in the name,
+                 * append it to avoid compatibility issues, e.g: muslc
+                 * defaults to UTF-8 when missing, while glibc defaults to ISO
+                 */
+                if (strchr (language_name, '.') == NULL)
+                        name = g_strdup_printf ("%s.UTF-8", language_name);
+                else
+                        name = g_strdup (language_name);
         } else if (utf8_only) {
 
                 if (strchr (language_name, '.'))
