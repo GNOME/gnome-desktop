@@ -71,11 +71,12 @@ typedef struct {
 
 static char *
 expand_thumbnailing_elem (const char *elem,
-			  const int   size,
-			  const char *infile,
-			  const char *outfile,
-			  gboolean   *got_input,
-			  gboolean   *got_output)
+                          const int   size,
+                          const char *mime_type,
+                          const char *infile,
+                          const char *outfile,
+                          gboolean   *got_input,
+                          gboolean   *got_output)
 {
   GString *str;
   const char *p, *last;
@@ -114,6 +115,10 @@ expand_thumbnailing_elem (const char *elem,
 	g_string_append_printf (str, "%d", size);
 	p++;
 	break;
+      case 'm':
+        g_string_append (str, mime_type);
+        p++;
+        break;
       case '%':
 	g_string_append_c (str, '%');
 	p++;
@@ -843,9 +848,10 @@ add_flatpak (GPtrArray   *array,
 
 static char **
 expand_thumbnailing_cmd (const char  *cmd,
-			 ScriptExec  *script,
-			 int          size,
-			 GError     **error)
+                         ScriptExec  *script,
+                         int          size,
+                         const char  *mime_type,
+                         GError     **error)
 {
   GPtrArray *array;
   g_auto(GStrv) cmd_elems = NULL;
@@ -907,11 +913,12 @@ expand_thumbnailing_cmd (const char  *cmd,
       char *expanded;
 
       expanded = expand_thumbnailing_elem (cmd_elems[i],
-					   size,
-					   script->s_infile ? script->s_infile : script->infile,
-					   script->s_outfile ? script->s_outfile : script->outfile,
-					   &got_in,
-					   &got_out);
+                                           size,
+                                           mime_type,
+                                           script->s_infile ? script->s_infile : script->infile,
+                                           script->s_outfile ? script->s_outfile : script->outfile,
+                                           &got_in,
+                                           &got_out);
 
       g_ptr_array_add (array, expanded);
     }
@@ -1237,9 +1244,10 @@ print_script_debug (GStrv expanded_script)
 
 GBytes *
 gnome_desktop_thumbnail_script_exec (const char  *cmd,
-				     int          size,
-				     const char  *uri,
-				     GError     **error)
+                                     int          size,
+                                     const char  *uri,
+                                     const char  *mime_type,
+                                     GError     **error)
 {
   g_autofree char *error_out = NULL;
   g_auto(GStrv) expanded_script = NULL;
@@ -1251,7 +1259,11 @@ gnome_desktop_thumbnail_script_exec (const char  *cmd,
   exec = script_exec_new (uri, error);
   if (!exec)
     goto out;
-  expanded_script = expand_thumbnailing_cmd (cmd, exec, size, error);
+  expanded_script = expand_thumbnailing_cmd (cmd,
+                                             exec,
+                                             size,
+                                             mime_type,
+                                             error);
   if (expanded_script == NULL)
     goto out;
 

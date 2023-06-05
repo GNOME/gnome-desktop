@@ -31,8 +31,9 @@
 
 GBytes *
 gnome_desktop_thumbnail_script_exec (const char  *cmd,
-				     int          size,
-				     const char  *uri,
-				     GError     **error);
+                                     int          size,
+                                     const char  *uri,
+                                     const char  *mime_type,
+                                     GError     **error);
 
 #endif /* GNOME_DESKTOP_THUMBNAIL_SCRIPT_H */
