@@ -55,6 +55,12 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
   object_manager: true
 )
 
+dbus_localed_built_sources = gnome.gdbus_codegen('sd-locale1',
+  'org.freedesktop.locale1.xml',
+  namespace: 'SdDBus',
+  interface_prefix: 'org.freedesktop',
+)
+
 non_latin_input_sources = custom_target('generate_non_latin_input_sources_header',
     output : 'non-latin-input-sources.h',
     command : [python3, files ('generate-non-latin-input-sources.py')]
@@ -122,6 +128,7 @@ if get_option('build_gtk4')
       libgnome_desktop_base_sources,
       libgnome_desktop_base_private_sources,
       dbus_idle_built_sources,
+      dbus_localed_built_sources,
     ],
     dependencies: base_deps,
     soversion: soversion,
@@ -199,6 +206,7 @@ if get_option('legacy_library')
     introspection_sources,
     dbus_xrandr_built_sources,
     dbus_idle_built_sources,
+    dbus_localed_built_sources,
     'gnome-datetime-source.c',
     'gnome-desktop-thumbnail-script.c',
     'gnome-gettext-portable.c',
