@@ -64,4 +64,21 @@ static DefaultInputSource default_input_sources[] =
   { NULL,       NULL,           NULL }
 };
 
-const char * const non_latin_input_sources[] = { "xkb+bg", "xkb+by", "xkb+cz", "xkb+gr", "xkb+kz", "xkb+mk", "xkb+ru", "xkb+ua", NULL };
+typedef struct
+{
+  char *type;
+  char *id;
+} InputSource;
+
+static InputSource non_latin_input_sources[] =
+{
+  { "xkb", "bg" },
+  { "xkb", "by" },
+  { "xkb", "cz" },
+  { "xkb", "gr" },
+  { "xkb", "kz" },
+  { "xkb", "mk" },
+  { "xkb", "ru" },
+  { "xkb", "ua" },
+  { NULL, NULL }
+};
