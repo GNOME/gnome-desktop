@@ -43,6 +43,9 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include "gnome-languages.h"
+#include "gnome-xkb-info.h"
+
+#include "sd-locale1.h"
 
 #include <langinfo.h>
 #ifndef __LC_LAST
@@ -63,6 +66,12 @@ typedef struct _GnomeLocale {
         char *codeset;
         char *modifier;
 } GnomeLocale;
+
+typedef struct _GnomeInputSourceDefaults {
+        InputSource **input_sources;
+        char **options;
+        char *model;
+} GnomeInputSourceDefaults;
 
 static GHashTable *gnome_languages_map;
 static GHashTable *gnome_territories_map;
@@ -1473,4 +1482,345 @@ gnome_input_source_is_non_latin (const char *type,
                 return TRUE;
         }
         return FALSE;
+}
+
+static void
+on_got_localed_proxy (GObject      *object,
+                      GAsyncResult *result,
+                      GTask        *sub_task)
+{
+        g_autoptr(SdDBusLocale1) proxy = NULL;
+        g_autoptr(GError) error = NULL;
+
+        proxy = sd_dbus_locale1_proxy_new_finish (result, &error);
+
+        if (error != NULL) {
+                g_task_return_error (sub_task, g_steal_pointer (&error));
+        } else {
+                g_task_return_pointer (sub_task, g_steal_pointer (&proxy), (GDestroyNotify) g_object_unref);
+        }
+}
+
+static void
+get_localed_proxy (GCancellable         *cancellable,
+                   GAsyncReadyCallback   callback,
+                   GTask                *main_task)
+{
+        g_autoptr(GTask) sub_task = NULL;
+
+        sub_task = g_task_new (NULL,
+                               cancellable,
+                               callback,
+                               main_task);
+
+        sd_dbus_locale1_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                           G_DBUS_PROXY_FLAGS_NONE,
+                                           "org.freedesktop.locale1",
+                                           "/org/freedesktop/locale1",
+                                           cancellable,
+                                           (GAsyncReadyCallback)
+                                           on_got_localed_proxy,
+                                           sub_task);
+
+        g_object_set_data_full (G_OBJECT (main_task),
+                                "gnome-desktop-get-localed-proxy",
+                                g_steal_pointer (&sub_task),
+                                g_object_unref);
+}
+
+static gboolean
+input_source_equal (const InputSource *a,
+                    const InputSource *b)
+{
+        return g_str_equal (a->type, b->type) && g_str_equal (a->id, b->id);
+}
+
+static void
+gnome_input_source_defaults_free (GnomeInputSourceDefaults *defaults)
+{
+        size_t i;
+
+        for (i = 0; defaults->input_sources[i] != NULL; i++) {
+                g_free (defaults->input_sources[i]->type);
+                g_free (defaults->input_sources[i]->id);
+                g_free (defaults->input_sources[i]);
+        }
+        g_free (defaults->input_sources);
+        g_strfreev (defaults->options);
+        g_free (defaults->model);
+        g_free (defaults);
+}
+
+static int
+sort_input_sources (InputSource *a,
+                    InputSource *b)
+{
+        gboolean a_is_input_method, b_is_input_method;
+        gboolean a_is_latin, b_is_latin;
+
+        /* Make sure NULL gets put at the end */
+        if (a == NULL) {
+                return 1;
+        }
+
+        if (b == NULL) {
+                return -1;
+        }
+
+        /* Make sure latin get put at the front */
+        a_is_input_method = g_str_equal (a->type, "ibus");
+        b_is_input_method = g_str_equal (b->type, "ibus");
+        a_is_latin = !gnome_input_source_is_non_latin (a->type, a->id);
+        b_is_latin = !gnome_input_source_is_non_latin (b->type, b->id);
+
+        if (a_is_latin && !b_is_latin) {
+                return -1;
+        }
+
+        if (b_is_latin && !a_is_latin) {
+                return 1;
+        }
+
+        /* and input methods get put before raw keyboard layouts */
+        if (a_is_input_method && !b_is_input_method) {
+                return -1;
+        }
+
+        if (b_is_input_method && !a_is_input_method) {
+                return 1;
+        }
+
+        return 0;
+}
+
+static void
+on_got_localed_proxy_for_getting_default_input_sources (GObject      *object,
+                                                        GAsyncResult *result,
+                                                        GTask        *main_task)
+{
+        g_autoptr(SdDBusLocale1) proxy = NULL;
+        g_autoptr(GError) error = NULL;
+        g_autoptr(GPtrArray) input_sources = NULL;
+        g_autofree InputSource *locale_input_source = NULL;
+        g_autofree char *input_method_language = NULL;
+        const char * const *locale_data;
+        g_autofree char *system_locale = NULL;
+        g_autofree char *layouts_string = NULL;
+        g_autofree char *variants_string = NULL;
+        g_autofree char *options_string = NULL;
+        g_autofree char *model = NULL;
+        g_auto(GStrv) layouts = NULL;
+        size_t number_of_layouts = 0;
+        g_auto(GStrv) variants = NULL;
+        size_t number_of_variants = 0;
+        g_auto(GStrv) options = NULL;
+        const char *type = NULL, *id = NULL;
+        size_t i;
+        GnomeInputSourceDefaults *defaults;
+
+        proxy = g_task_propagate_pointer (G_TASK (result), &error);
+
+        if (proxy == NULL) {
+                g_task_return_error (main_task, g_steal_pointer (&error));
+                return;
+        }
+
+        input_sources = g_ptr_array_new ();
+
+        locale_data = sd_dbus_locale1_get_locale (proxy);
+        for (i = 0; locale_data[i] != NULL; i++) {
+                if (g_str_has_prefix (locale_data[i], "LANG=")) {
+                        system_locale = g_strdup (locale_data[i] + strlen("LANG="));
+                        break;
+                }
+        }
+
+        if (gnome_get_input_source_from_locale (system_locale, &type, &id)) {
+                locale_input_source = g_new0 (InputSource, 1);
+                locale_input_source->type = g_strdup (type);
+                locale_input_source->id = g_strdup (id);
+
+                /* We add locale derived input source first if it's an input method
+                 * and last if it's xkb based.
+                 */
+                if (g_strcmp0 (type, "ibus") == 0) {
+                        g_ptr_array_add (input_sources, g_steal_pointer (&locale_input_source));
+                        input_method_language = gnome_get_language_from_locale (system_locale, NULL);
+                }
+        }
+
+        layouts_string = sd_dbus_locale1_dup_x11_layout (proxy);
+        variants_string = sd_dbus_locale1_dup_x11_variant (proxy);
+        options_string = sd_dbus_locale1_dup_x11_options (proxy);
+        model = sd_dbus_locale1_dup_x11_model (proxy);
+
+        layouts = g_strsplit (layouts_string, ",", -1);
+
+        if (variants_string[0] != '\0') {
+                variants = g_strsplit (variants_string, ",", -1);
+        } else {
+                variants = g_strdupv ((char *[]) { "", NULL });
+        }
+
+        options = g_strsplit (options_string, ",", -1);
+
+        number_of_layouts = g_strv_length (layouts);
+        number_of_variants = g_strv_length (variants);
+
+        if (number_of_layouts == number_of_variants) {
+                g_autoptr(GnomeXkbInfo) xkb_info = gnome_xkb_info_new ();
+                g_autofree char *system_language = NULL;
+
+                gnome_parse_locale (system_locale, &system_language, NULL, NULL, NULL);
+
+                for (i = 0; layouts[i] != NULL; i++) {
+                        g_autofree InputSource *input_source = g_new0 (InputSource, 1);
+
+                        input_source->type = g_strdup ("xkb");
+                        input_source->id = g_strdup_printf ("%s%s%s",
+                                                            layouts[i],
+                                                            variants[i][0] != '\0'? "+" : "",
+                                                            variants[i]);
+
+                        if (g_ptr_array_find_with_equal_func (input_sources, input_source, (GEqualFunc) input_source_equal, NULL))
+                                continue;
+
+                        if (input_method_language != NULL) {
+                                const char *layout_language = NULL;
+
+                                gnome_xkb_info_get_layout_info (xkb_info, input_source->id, &layout_language, NULL, NULL, NULL);
+
+                                if (g_strcmp0 (input_method_language, layout_language) == 0)
+                                        continue;
+                        } else if (system_language != NULL) {
+                                GList *languages = NULL, *node = NULL;
+                                const char *system_language_name = get_language (system_language);
+
+                                languages = gnome_xkb_info_get_languages_for_layout (xkb_info, layouts[i]);
+                                for (node = languages; node != NULL; node = node->next) {
+                                        const char *language_name = get_language (node->data);
+
+                                        if (g_strcmp0 (system_language_name, language_name) == 0) {
+                                                g_clear_pointer (&locale_input_source, g_free);
+                                                break;
+                                        }
+                                }
+                                g_list_free (languages);
+                        }
+
+                        g_ptr_array_add (input_sources, g_steal_pointer (&input_source));
+                }
+        }
+
+        if (locale_input_source != NULL) {
+                if (!g_ptr_array_find_with_equal_func (input_sources, locale_input_source, (GEqualFunc) input_source_equal, NULL)) {
+                        g_ptr_array_add (input_sources, g_steal_pointer (&locale_input_source));
+                }
+        }
+
+        if (input_sources->len == 0) {
+                InputSource *input_source = g_new0 (InputSource, 1);
+                input_source->type = g_strdup ("xkb");
+                input_source->id = g_strdup ("us");
+                g_ptr_array_add (input_sources, g_steal_pointer (&input_source));
+        }
+        g_ptr_array_add (input_sources, NULL);
+
+        g_ptr_array_sort_values (input_sources, (GCompareFunc) sort_input_sources);
+
+        defaults = g_new0 (GnomeInputSourceDefaults, 1);
+        defaults->input_sources = (InputSource **) g_ptr_array_steal (input_sources, NULL);
+        defaults->options = g_steal_pointer (&options);
+        defaults->model = g_steal_pointer (&model);
+
+        g_task_return_pointer (main_task, defaults, (GDestroyNotify) gnome_input_source_defaults_free);
+}
+
+/**
+ * gnome_get_default_input_sources:
+ * @cancellable: a #GCancellable
+ * @callback: a #GAsyncReadyCallback
+ * @user_data: user data for @callback
+ *
+ * Asynchronously fetches a list of of default input sources based on locale and system
+ * configuration. This is for when a user has no input sources configured
+ * in GSettings.
+ *
+ * Since: 46
+ */
+void
+gnome_get_default_input_sources (GCancellable        *cancellable,
+                                 GAsyncReadyCallback  callback,
+                                 gpointer             user_data)
+{
+        GTask *task;
+
+        languages_init ();
+
+        task = g_task_new (NULL,
+                           cancellable,
+                           callback,
+                           user_data);
+
+        get_localed_proxy (cancellable,
+                           (GAsyncReadyCallback)
+                           on_got_localed_proxy_for_getting_default_input_sources,
+                           task);
+}
+
+/**
+ * gnome_get_default_input_sources_finish:
+ * @ids: (out) (transfer full): an array of input sources (eg. "us+dvorak" or "anthy")
+ * @types: (out) (transfer full): an array of types (either "xkb" or "ibus")
+ * @options: (out) (transfer full): an options string to use with all input sources
+ * @error: a #GError
+ *
+ * Returns a whether or not a list of default input sources based on locale and system
+ * configuration could be retrieved. This is for when a user has no input sources configured
+ * in GSettings.
+ *
+ * Since: 46
+ */
+gboolean
+gnome_get_default_input_sources_finish (GAsyncResult   *result,
+                                        GStrv          *ids,
+                                        GStrv          *types,
+                                        GStrv          *options,
+                                        char          **model,
+                                        GError        **error)
+{
+        GnomeInputSourceDefaults *defaults = NULL;
+        size_t i;
+        g_autoptr (GStrvBuilder) ids_builder = NULL;
+        g_autoptr (GStrvBuilder) types_builder = NULL;
+
+        defaults = g_task_propagate_pointer (G_TASK (result), error);
+
+        if (defaults == NULL) {
+                return FALSE;
+        }
+
+        ids_builder = g_strv_builder_new ();
+        types_builder = g_strv_builder_new ();
+
+        for (i = 0; defaults->input_sources[i] != NULL; i++) {
+              g_strv_builder_add (ids_builder, defaults->input_sources[i]->id);
+              g_strv_builder_add (types_builder, defaults->input_sources[i]->type);
+        }
+
+        if (ids != NULL)
+                *ids = g_strv_builder_end (ids_builder);
+
+        if (types != NULL)
+                *types = g_strv_builder_end (types_builder);
+
+        if (options != NULL)
+                *options = g_steal_pointer (&defaults->options);
+
+        if (model != NULL)
+                *model = g_steal_pointer (&defaults->model);
+
+        gnome_input_source_defaults_free (defaults);
+
+        return TRUE;
 }

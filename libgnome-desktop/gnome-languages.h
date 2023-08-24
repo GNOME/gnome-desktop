@@ -28,6 +28,7 @@
 #endif
 
 #include <glib.h>
+#include <gio/gio.h>
 #include <libgnome-desktop/gnome-desktop-version.h>
 
 G_BEGIN_DECLS
@@ -56,6 +57,17 @@ gboolean      gnome_get_input_source_from_locale (const char  *locale,
 
 gboolean      gnome_input_source_is_non_latin   (const char *type,
                                                  const char *id);
+
+void          gnome_get_default_input_sources (GCancellable        *cancellable,
+                                               GAsyncReadyCallback  callback,
+                                               gpointer             user_data);
+
+gboolean      gnome_get_default_input_sources_finish (GAsyncResult   *result,
+                                                      GStrv          *ids,
+                                                      GStrv          *types,
+                                                      GStrv          *options,
+                                                      char          **model,
+                                                      GError        **error);
 G_END_DECLS
 
 #endif /* __GNOME_LANGUAGES_H */
