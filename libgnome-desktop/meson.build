@@ -55,6 +55,11 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
   object_manager: true
 )
 
+non_latin_input_sources = custom_target('generate_non_latin_input_sources_header',
+    output : 'non-latin-input-sources.h',
+    command : [python3, files ('generate-non-latin-input-sources.py')]
+)
+
 base_ldflags = []
 base_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'base-symbol.map')
 if cc.has_link_argument(base_symbol_map)
@@ -113,6 +118,7 @@ if get_option('build_gtk4')
 
   libgnome_desktop_base = library('gnome-desktop-4',
     sources: [
+      non_latin_input_sources,
       libgnome_desktop_base_sources,
       libgnome_desktop_base_private_sources,
       dbus_idle_built_sources,
@@ -189,6 +195,7 @@ if get_option('legacy_library')
   ]
 
   libgnome_desktop_sources = [
+    non_latin_input_sources,
     introspection_sources,
     dbus_xrandr_built_sources,
     dbus_idle_built_sources,

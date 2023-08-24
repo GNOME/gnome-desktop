@@ -53,6 +53,7 @@
 #define ISO_CODES_LOCALESDIR ISO_CODES_PREFIX "/share/locale"
 
 #include "default-input-sources.h"
+#include "non-latin-input-sources.h"
 
 typedef struct _GnomeLocale {
         char *id;
@@ -1443,4 +1444,33 @@ gnome_get_input_source_from_locale (const char  *locale,
                 *id = dis->id;
         }
         return dis != NULL;
+}
+
+/**
+ * gnome_input_source_is_non_latin:
+ * @type: an input source type (e.g., "xkb" or "ibus")
+ * @id: an input source id (e.g., "us+dvorak" or "anthy")
+ *
+ * Returns whether or not the input source has the ability to enter latin characters.
+ *
+ * Return value: %TRUE if it can't enter latin characters
+ *
+ * Since: 46
+ */
+gboolean
+gnome_input_source_is_non_latin (const char *type,
+                                 const char *id)
+{
+        size_t i;
+
+        for (i = 0; non_latin_input_sources[i].type != NULL; i++) {
+                if (g_strcmp0 (type, non_latin_input_sources[i].type) != 0)
+                        continue;
+
+                if (g_strcmp0 (id, non_latin_input_sources[i].id) != 0)
+                        continue;
+
+                return TRUE;
+        }
+        return FALSE;
 }
