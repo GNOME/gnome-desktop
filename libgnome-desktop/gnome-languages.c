@@ -1437,3 +1437,25 @@ gnome_get_input_source_from_locale (const char  *locale,
         }
         return dis != NULL;
 }
+
+/**
+ * gnome_input_source_is_non_latin:
+ * @input_source: an input source (e.g., "xkb+us" or "ibus+anthy")
+ *
+ * Returns whether or not the input source has the ability to enter latin characters.
+ *
+ * Return value: %TRUE if it can't enter latin characters
+ *
+ * Since: 46
+ */
+gboolean
+gnome_input_source_is_non_latin (const char *input_source)
+{
+        size_t i;
+
+        for (i = 0; non_latin_input_sources[i] != NULL; i++) {
+                if (g_strcmp0 (input_source, non_latin_input_sources) == 0)
+                        return TRUE;
+        }
+        return FALSE;
+}
