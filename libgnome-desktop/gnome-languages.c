@@ -1454,7 +1454,7 @@ gnome_input_source_is_non_latin (const char *input_source)
         size_t i;
 
         for (i = 0; non_latin_input_sources[i] != NULL; i++) {
-                if (g_strcmp0 (input_source, non_latin_input_sources[i]) == 0)
+                if (g_strcmp0 (input_source, non_latin_input_sources) == 0)
                         return TRUE;
         }
         return FALSE;
