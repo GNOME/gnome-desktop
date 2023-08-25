@@ -36,6 +36,9 @@ gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
 
+python = import('python')
+python3 = python.find_installation('python3', modules : ['langtable'])
+
 prefix = get_option('prefix')
 
 datadir = prefix / get_option('datadir')
