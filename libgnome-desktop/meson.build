@@ -55,12 +55,6 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
   object_manager: true
 )
 
-dbus_localed_built_sources = gnome.gdbus_codegen('sd-locale1',
-  'org.freedesktop.locale1.xml',
-  namespace: 'SdDBus',
-  interface_prefix: 'org.freedesktop.locale1',
-)
-
 base_ldflags = []
 base_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'base-symbol.map')
 if cc.has_link_argument(base_symbol_map)
@@ -122,7 +116,6 @@ if get_option('build_gtk4')
       libgnome_desktop_base_sources,
       libgnome_desktop_base_private_sources,
       dbus_idle_built_sources,
-      dbus_localed_built_sources,
     ],
     dependencies: base_deps,
     soversion: soversion,
@@ -199,7 +192,6 @@ if get_option('legacy_library')
     introspection_sources,
     dbus_xrandr_built_sources,
     dbus_idle_built_sources,
-    dbus_localed_built_sources,
     'gnome-datetime-source.c',
     'gnome-desktop-thumbnail-script.c',
     'gnome-gettext-portable.c',
