@@ -1449,19 +1449,13 @@ gnome_get_input_source_from_locale (const char  *locale,
  * Since: 46
  */
 gboolean
-gnome_input_source_is_non_latin (const char *type,
-                                 const char *id)
+gnome_input_source_is_non_latin (const char *input_source)
 {
         size_t i;
 
-        for (i = 0; non_latin_input_sources[i].type != NULL; i++) {
-                if (g_strcmp0 (type, non_latin_input_sources[i].type) != 0)
-                        continue;
-
-                if (g_strcmp0 (id, non_latin_input_sources[i].id) != 0)
-                        continue;
-
-                return TRUE;
+        for (i = 0; non_latin_input_sources[i] != NULL; i++) {
+                if (g_strcmp0 (input_source, non_latin_input_sources[i]) == 0)
+                        return TRUE;
         }
         return FALSE;
 }
