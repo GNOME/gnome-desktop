@@ -54,7 +54,6 @@ gboolean      gnome_get_input_source_from_locale (const char  *locale,
                                                   const char **type,
                                                   const char **id);
 
-gboolean      gnome_input_source_is_non_latin   (const char *input_source);
 G_END_DECLS
 
 #endif /* __GNOME_LANGUAGES_H */
