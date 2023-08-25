@@ -58,7 +58,7 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
 dbus_localed_built_sources = gnome.gdbus_codegen('sd-locale1',
   'org.freedesktop.locale1.xml',
   namespace: 'SdDBus',
-  interface_prefix: 'org.freedesktop',
+  interface_prefix: 'org.freedesktop.locale1',
 )
 
 base_ldflags = []
