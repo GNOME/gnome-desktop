@@ -1,49 +1,115 @@
-# translation of gnome-desktop.gnome-3-28.ar.po to Arabic
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
-# Sayed Jaffer Al-Mosawi <mosawi@arabeyes.org>, 2002.
-# Djihed Afifi <djihed@gmail.com>, 2006.
-# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007, 2008, 2009, 2010, 2012, 2013.
-# Anas Husseini <linux.anas@gmail.com>, 2007.
-# Khalid Abu Shawarib <khalid.shawarib@gmail.com>, 2018.
-# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2018.
+#
+# Khalid Abu Shawarib <khalid.shawarib@gmail.com>, 2024.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-desktop.HEAD.ar\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues\n"
-"POT-Creation-Date: 2018-09-07 17:29+0000\n"
-"PO-Revision-Date: 2018-08-19 12:37+0300\n"
-"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Project-Id-Version: Uig\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues/\n"
+"POT-Creation-Date: 2024-03-29 09:49+0000\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 ? "
-"3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 2.0\n"
-"X-Project-Style: gnome\n"
+"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=6; plural= n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Last-Translator: Khalid Abu Shawarib <khalid.shawarib@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2024-07-12 18:56+0300\n"
 
-#: libgnome-desktop/gnome-languages.c:711
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1014
+#, c-format
+msgid "File %s does not have a preview icon attribute"
+msgstr "لا يحتوي الملف %s على سمة لأيقونة المعاينة"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1024
+#, c-format
+msgid "No loadable icon for %s"
+msgstr "لا يوجد أيقونة قابلة للتحميل لـ %s"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1153
+#, c-format
+msgid "Could not find thumbnailer for mime-type '%s'"
+msgstr "تعذَّر العثور على مصغر صور لنوع mime ‏«%s»"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1283
+#, c-format
+msgid "Failed to create folder '%s'"
+msgstr "فشل إنشاء المجلد «%s»"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1296
+#, c-format
+msgid "The output folder '%s' is not writable"
+msgstr "مجلد الإخراج «%s» لا يمكن الكتابة فيه"
+
+#: libgnome-desktop/gnome-languages.c:698
 msgid "Unspecified"
 msgstr "غير محددة"
 
-#: libgnome-desktop/gnome-rr-config.c:759
+#. TRANSLATORS: Used to distinguish the labels representing the gez_ER
+#. and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
+#. difference is related to collation.
+#: libgnome-desktop/gnome-languages.c:1363
+msgid "Abegede"
+msgstr "أبيجيدي"
+
+#. TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants.
+#: libgnome-desktop/gnome-languages.c:1365
+msgid "Cyrillic"
+msgstr "السيريلية"
+
+#. TRANSLATORS: Also known as "Nagari", a written variant for many languages
+#. of the Indian subcontinent. See:
+#. https://en.wikipedia.org/wiki/Devanagari
+#: libgnome-desktop/gnome-languages.c:1369
+msgid "Devanagari"
+msgstr "الديفاناغارية"
+
+#. TRANSLATORS: Used to distinguish the label representing the tt_RU
+#. locale from tt_RU@iqtelif. It's a special alphabet for Tatar.
+#: libgnome-desktop/gnome-languages.c:1372
+msgid "IQTElif"
+msgstr "ایدیل-اورال"
+
+#. TRANSLATORS: The alphabet/script, not the language. Used to distinguish
+#. Latin from Cyrillic written language variants.
+#: libgnome-desktop/gnome-languages.c:1375
+msgid "Latin"
+msgstr "اللاتينية"
+
+#. TRANSLATORS: "Saho" is a variant of the Afar language. Used to
+#. distinguish the label representing the aa_ER locale from aa_ER@saaho.
+#: libgnome-desktop/gnome-languages.c:1378
+msgid "Saho"
+msgstr "ساهو"
+
+#. TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
+#. in Valencia. Used to distinguish the label representing the ca_ES
+#. locale from ca_ES@valencia.
+#: libgnome-desktop/gnome-languages.c:1382
+msgid "Valencia"
+msgstr "بلنسية"
+
+#: libgnome-desktop/gnome-rr-config.c:754
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:712
 #, c-format
 msgid "CRTC %d cannot drive output %s"
-msgstr "تعذّر على CRTC %d تحريك الخرج %s"
+msgstr "تعذَّر على CRTC %Id تحريك الخرج %s"
 
-#: libgnome-desktop/gnome-rr-config.c:766
+#: libgnome-desktop/gnome-rr-config.c:761
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:719
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "لا يدعم الخرج %s وضع %Idx%Id@%Idهرتز"
 
-#: libgnome-desktop/gnome-rr-config.c:777
+#: libgnome-desktop/gnome-rr-config.c:772
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:730
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
-msgstr "لا يدعم CRTC %d الدوران=%Id"
+msgstr "لا يدعم CRTC %Id دوران=%Id"
 
-#: libgnome-desktop/gnome-rr-config.c:790
+#: libgnome-desktop/gnome-rr-config.c:785
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:743
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -51,37 +117,42 @@ msgid ""
 "existing coordinates = (%d, %d), new coordinates = (%d, %d)\n"
 "existing rotation = %d, new rotation = %d"
 msgstr ""
-"ليس للخرج %s نفس المعاملات التي لخرج آخر مستنسخ:\n"
+"ليس للخرج %s نفس المعاملات لخرج آخر مستنسخ:\n"
 "الوضع الموجود = %Id، الوضع الجديد = %Id\n"
 "الإحداثيات الموجودة = (%Id، ‏%Id)، الإحداثيات الجديدة = (%Id، ‏%Id)\n"
 "الدوران الموجود = %Id، الدوران الجديد = %Id"
 
-#: libgnome-desktop/gnome-rr-config.c:805
+#: libgnome-desktop/gnome-rr-config.c:800
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:758
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "تعذر نسخ الخرج %s"
 
-#: libgnome-desktop/gnome-rr-config.c:931
+#: libgnome-desktop/gnome-rr-config.c:926
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:883
 #, c-format
 msgid "Trying modes for CRTC %d\n"
-msgstr "يجرّب أوضاع من أجل CRTC%d\n"
+msgstr "تُجرَّب أوضاع لـ CRTC %Id\n"
 
-#: libgnome-desktop/gnome-rr-config.c:955
+#: libgnome-desktop/gnome-rr-config.c:950
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:907
 #, c-format
 msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
-"‏CRTC %d: يجرّب وضع %Idx%Id@%Idهرتز مع خرج وضعه %Idx%Id@%Idهرتز (مرور %Id)\n"
+"‏CRTC %Id: يجرّب وضع %Idx%Id@%Idهرتز مع خرج وضعه %Idx%Id@%Idهرتز (المرة %Id)\n"
 
-#: libgnome-desktop/gnome-rr-config.c:1002
+#: libgnome-desktop/gnome-rr-config.c:997
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:954
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
 "%s"
 msgstr ""
-"تعذّر إسناد CRTCs إلى المخرجات: \n"
+"تعذَّر إسناد CRTC إلى المخرجات: \n"
 "%s"
 
-#: libgnome-desktop/gnome-rr-config.c:1006
+#: libgnome-desktop/gnome-rr-config.c:1001
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:958
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -93,7 +164,8 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: libgnome-desktop/gnome-rr-config.c:1087
+#: libgnome-desktop/gnome-rr-config.c:1082
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:1039
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -102,161 +174,91 @@ msgstr ""
 "المقاس المبدئي المطلوب لا يُطابق المقاس المتاح: المطلوب=(%Id، ‏%Id)، "
 "الأدنى=(%Id، ‏%Id)، الأقصى=(%Id، ‏%Id)"
 
+#: libgnome-desktop/gnome-wall-clock.c:282
+msgctxt "time separator"
+msgid "∶"
+msgstr "∶"
+
 #. Translators: This is the time format with full date
 #. plus day used in 24-hour mode. Please keep the under-
 #. score to separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:290
+#: libgnome-desktop/gnome-wall-clock.c:359
 msgid "%a %b %-e_%R:%S"
-msgstr "%A %-Oe %B_%OR:%OS"
+msgstr "%A %-Oe %B_%OH:%OM:%OS"
 
-#: libgnome-desktop/gnome-wall-clock.c:291
+#: libgnome-desktop/gnome-wall-clock.c:360
 msgid "%a %b %-e_%R"
-msgstr "%A %-Oe %B_%OR"
+msgstr "%A %-Oe %B_%OH:%OM"
 
 #. Translators: This is the time format with full date
 #. used in 24-hour mode. Please keep the underscore to
 #. separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:296
+#: libgnome-desktop/gnome-wall-clock.c:365
 msgid "%b %-e_%R:%S"
-msgstr "%-Oe %B_%OR:%OS"
+msgstr "%-Oe %B_%OH:%OM:%OS"
 
-#: libgnome-desktop/gnome-wall-clock.c:297
+#: libgnome-desktop/gnome-wall-clock.c:366
 msgid "%b %-e_%R"
-msgstr "%-Oe %B_%OR"
+msgstr "%-Oe %B_%OH:%OM"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: libgnome-desktop/gnome-wall-clock.c:301
+#: libgnome-desktop/gnome-wall-clock.c:370
 msgid "%a %R:%S"
-msgstr "%A %OR:%OS"
+msgstr "%A %OH:%OM:%OS"
 
-#: libgnome-desktop/gnome-wall-clock.c:302
+#: libgnome-desktop/gnome-wall-clock.c:371
 msgid "%a %R"
-msgstr "%A %OR"
+msgstr "%A %OH:%OM"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: libgnome-desktop/gnome-wall-clock.c:306
+#: libgnome-desktop/gnome-wall-clock.c:375
 msgid "%R:%S"
-msgstr "%OR:%OS"
+msgstr "%OH:%OM:%OS"
 
-#: libgnome-desktop/gnome-wall-clock.c:306
+#: libgnome-desktop/gnome-wall-clock.c:376
 msgid "%R"
-msgstr "%OR"
+msgstr "%OH:%OM"
 
 #. Translators: This is a time format with full date
 #. plus day used for AM/PM. Please keep the under-
 #. score to separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:314
+#: libgnome-desktop/gnome-wall-clock.c:384
 msgid "%a %b %-e_%l:%M:%S %p"
 msgstr "%A %-Oe %B_%Ol:%OM:%OS %p"
 
-#: libgnome-desktop/gnome-wall-clock.c:315
+#: libgnome-desktop/gnome-wall-clock.c:385
 msgid "%a %b %-e_%l:%M %p"
 msgstr "%A %-Oe %B_%Ol:%OM %p"
 
 #. Translators: This is a time format with full date
 #. used for AM/PM. Please keep the underscore to
 #. separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:320
+#: libgnome-desktop/gnome-wall-clock.c:390
 msgid "%b %-e_%l:%M:%S %p"
 msgstr "%-Oe %B_%Ol:%OM:%OS %p"
 
-#: libgnome-desktop/gnome-wall-clock.c:321
+#: libgnome-desktop/gnome-wall-clock.c:391
 msgid "%b %-e_%l:%M %p"
 msgstr "%-Oe %B_%Ol:%OM %p"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: libgnome-desktop/gnome-wall-clock.c:325
+#: libgnome-desktop/gnome-wall-clock.c:395
 msgid "%a %l:%M:%S %p"
 msgstr "%A %Ol:%OM:%OS %p"
 
-#: libgnome-desktop/gnome-wall-clock.c:326
+#: libgnome-desktop/gnome-wall-clock.c:396
 msgid "%a %l:%M %p"
 msgstr "%A %Ol:%OM %p"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: libgnome-desktop/gnome-wall-clock.c:330
+#: libgnome-desktop/gnome-wall-clock.c:400
 msgid "%l:%M:%S %p"
 msgstr "%Ol:%OM:%OS %p"
 
-#: libgnome-desktop/gnome-wall-clock.c:331
+#: libgnome-desktop/gnome-wall-clock.c:401
 msgid "%l:%M %p"
 msgstr "%Ol:%OM %p"
-
-#~ msgctxt "Monitor vendor"
-#~ msgid "Unknown"
-#~ msgstr "مجهول"
-
-#~ msgid "could not get the screen resources (CRTCs, outputs, modes)"
-#~ msgstr "تعذّرت معرفة موارد الشاشة (CRTC، الخرج، الأوضاع)"
-
-#~ msgid "unhandled X error while getting the range of screen sizes"
-#~ msgstr "حدث خطأ X غير معروف أثناء جلب مدى أحجام الشاشة"
-
-#~ msgid "could not get the range of screen sizes"
-#~ msgstr "تعذّر جلب مدى أحجام الشاشة"
-
-#~ msgid "RANDR extension is not present"
-#~ msgstr "امتداد RANDR غير موجود"
-
-#~ msgid "could not get information about output %d"
-#~ msgstr "تعذّر جلب معلومات عن الخرْج %d"
-
-#~ msgid "Built-in Display"
-#~ msgstr "شاشة مدمجة"
-
-#~ msgid "%s Display"
-#~ msgstr "شاشة %s"
-
-#~ msgid "Unknown Display"
-#~ msgstr "شاشة غير معروفة"
-
-#~ msgid ""
-#~ "requested position/size for CRTC %d is outside the allowed limit: "
-#~ "position=(%d, %d), size=(%d, %d), maximum=(%d, %d)"
-#~ msgstr ""
-#~ "الموضع\\الحجم المطلوب ل‍ CRTC %d خارج المدى المسموح: الموضع=(%d، %d)، "
-#~ "الحجم=(%d، %d)، الأقصي=(%d، %d)"
-
-#~ msgid "could not set the configuration for CRTC %d"
-#~ msgstr "تعذّر ضبط إعدادات CRTC %d"
-
-#~ msgid "could not get information about CRTC %d"
-#~ msgstr "تعذّر جلب معلومات عن CRTC %d"
-
-#~ msgid ""
-#~ "none of the saved display configurations matched the active configuration"
-#~ msgstr "لم يطابق أي من تضبيطات العرض المحفوظة التضبيط النشط"
-
-#~ msgid "%a %b %e, %R∶%S"
-#~ msgstr "%A %e %B، %R:%S"
-
-#~ msgid "%R∶%S"
-#~ msgstr "%R:%S"
-
-#~ msgid "%a %l∶%M∶%S %p"
-#~ msgstr "%A %l:%M:%S %p"
-
-#~ msgid "%a %l∶%M %p"
-#~ msgstr "%A %Ol:%OM %p"
-
-#~ msgid "%l∶%M∶%S %p"
-#~ msgstr "%l:%M:%S %p"
-
-#~ msgid "%l∶%M %p"
-#~ msgstr "%l:%M %p"
-
-#~ msgid "Cannot find a terminal, using xterm, even if it may not work"
-#~ msgstr "تعذّر العثور على طرفية، سأستعمل xterm، حتى وإن كان قد لا يعمل"
-
-#~ msgid "Laptop"
-#~ msgstr "حاسوب محمول"
-
-#~ msgid "Mirrored Displays"
-#~ msgstr "شاشات متطابقة"
-
-#~ msgid "Mirror Screens"
-#~ msgstr "شاشات متطابقة"
