@@ -2218,6 +2218,18 @@ read_slideshow_file (const char *filename,
 {
         GnomeBGSlideShow *show;
 
+        /* Ignore anything not an XML file because we don't want to waste
+         * time reading that file into memory only to try to parse it with
+         * GMarkup.
+         */
+        if (!g_str_has_suffix (filename, ".xml")) {
+                g_set_error_literal (err,
+                                     G_IO_ERROR,
+                                     G_IO_ERROR_NOT_SUPPORTED,
+                                     "Not a slideshow file");
+                return NULL;
+        }
+
         show = gnome_bg_slide_show_new (filename);
 
         if (!gnome_bg_slide_show_load (show, err)) {
