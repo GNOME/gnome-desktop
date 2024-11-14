@@ -56,7 +56,7 @@ static DefaultInputSource default_input_sources[] =
   { "tr_TR",    "xkb",          "tr" },
   { "ur_IN",    "ibus",         "m17n:ur:phonetic" },
   { "zh_CN",    "ibus",         "libpinyin" },
-  { "zh_HK",    "ibus",         "table:cangjie5" },
+  { "zh_HK",    "ibus",         "cangjie" },
   { "zh_TW",    "ibus",         "chewing" },
   { NULL,       NULL,           NULL }
 };
