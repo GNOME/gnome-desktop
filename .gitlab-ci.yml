@@ -11,6 +11,9 @@ include:
   inputs:
     dist-job-name: "build_stable"
     tarball-artifact-path: "${TARBALL_ARTIFACT_PATH}"
+- component: gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master
+  inputs:
+    job-stage: "test"
 
 variables:
   _BUILDDIR: "_builddir"
