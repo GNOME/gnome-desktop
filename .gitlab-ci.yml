@@ -7,6 +7,8 @@
 include:
 - template: Security/SAST.gitlab-ci.yml
 - template: Security/Secret-Detection.gitlab-ci.yml
+- project: "GNOME/citemplates"
+  file: "templates/default-rules.yml"
 - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
   inputs:
     dist-job-name: "build_stable"
