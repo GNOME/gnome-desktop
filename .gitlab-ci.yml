@@ -54,3 +54,5 @@ build_stable:
       - "${_BUILDDIR}/meson-dist/"
       - "${_BUILDDIR}/test-results/"
     when: "always"
+    reports:
+      junit: "${_BUILDDIR}/meson-logs/testlog.junit.xml"
