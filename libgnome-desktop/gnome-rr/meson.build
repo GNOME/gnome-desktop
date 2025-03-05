@@ -44,17 +44,22 @@ libgnome_rr = library('gnome-rr-4',
   ],
 )
 
-libgnome_rr_gir = gnome.generate_gir(libgnome_rr,
-  sources: [libgnome_rr_headers, libgnome_rr_sources],
-  export_packages: 'gnome-rr-4',
-  namespace: 'GnomeRR',
-  nsversion: '4.0',
-  includes: [libgnome_desktop_base_gir[0], 'Gdk-4.0'],
-  extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
-  identifier_prefix: 'GnomeRR',
-  symbol_prefix: 'gnome_rr',
-  install: true,
-)
+if get_option('introspection') 
+  libgnome_rr_gir = gnome.generate_gir(libgnome_rr,
+    sources: [libgnome_rr_headers, libgnome_rr_sources],
+    export_packages: 'gnome-rr-4',
+    namespace: 'GnomeRR',
+    nsversion: '4.0',
+    includes: [libgnome_desktop_base_gir[0], 'Gdk-4.0'],
+    extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+    identifier_prefix: 'GnomeRR',
+    symbol_prefix: 'gnome_rr',
+    install: true,
+  )
+else
+  libgnome_rr_gir = ''
+endif
+
 
 libgnome_rr_dep = declare_dependency(
   sources: [
