@@ -35,11 +35,7 @@ build_stable:
   before_script:
     # Undo delangification present in the Fedora Docker images
     - rm -f /etc/rpm/macros.image-language-conf
-    - echo "reinstall glib2" >> translist.txt
-    # Work-around https://bugzilla.redhat.com/show_bug.cgi?id=1607172#c4
-    - echo "update dnf gdbm" >> translist.txt
-    - echo "remove python3-modulemd" >> translist.txt
-    - dnf shell -y --nogpgcheck translist.txt
+    - dnf reinstall -y glib2
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
