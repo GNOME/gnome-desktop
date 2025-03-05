@@ -141,6 +141,8 @@ if get_option('build_gtk4')
       symbol_prefix: 'gnome',
       install: true,
     )
+  else
+    libgnome_desktop_base_gir = ''
   endif
 
   pkg.generate(

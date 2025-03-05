@@ -40,18 +40,21 @@ libgnome_bg = library('gnome-bg-4',
   ],
 )
 
-libgnome_bg_gir = gnome.generate_gir(libgnome_bg,
-  sources: [libgnome_bg_headers, libgnome_bg_sources],
-  export_packages: 'gnome-bg-4',
-  namespace: 'GnomeBG',
-  nsversion: '4.0',
-  includes: [libgnome_desktop_base_gir[0], 'GdkPixbuf-2.0', 'Gdk-4.0'],
-  extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
-  identifier_prefix: 'Gnome',
-  symbol_prefix: 'gnome',
-  install: true,
-)
-
+if get_option('introspection')
+  libgnome_bg_gir = gnome.generate_gir(libgnome_bg,
+    sources: [libgnome_bg_headers, libgnome_bg_sources],
+    export_packages: 'gnome-bg-4',
+    namespace: 'GnomeBG',
+    nsversion: '4.0',
+    includes: [libgnome_desktop_base_gir[0], 'GdkPixbuf-2.0', 'Gdk-4.0'],
+    extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
+    identifier_prefix: 'Gnome',
+    symbol_prefix: 'gnome',
+    install: true,
+  )
+else
+  libgnome_bg_gir = ''
+endif
 libgnome_bg_dep = declare_dependency(
   sources: [
     libgnome_bg_gir,
