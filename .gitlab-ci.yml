@@ -44,10 +44,8 @@ build_stable:
     paths:
       - build/meson-logs/
       - build/test-results/
-    when: on_failure
-    paths:
       - build/meson-dist/
-    when: on_success
+    when: "always"
 
 do_gitlab_release:
   stage: deploy
