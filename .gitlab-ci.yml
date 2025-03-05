@@ -8,18 +8,16 @@ include:
 - template: Security/SAST.gitlab-ci.yml
 - template: Security/Secret-Detection.gitlab-ci.yml
 
-image: fedora:latest
-
-variables:
-  LAST_ABI_BREAK: 0da1fcac914ad4c67f016bda7864c4b153cbfbaa
-  DEPENDENCIES: gtk3-devel gtk4-devel gsettings-desktop-schemas-devel gettext
-                gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
-                gobject-introspection-devel systemd-devel iso-codes-devel
-                libseccomp-devel gcc gcc-c++ glibc-devel
-                meson redhat-rpm-config
-  TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-en glibc-langpack-he glibc-langpack-ja abattis-cantarell-fonts libabigail git
-
 build_stable:
+  image: fedora:latest
+  variables:
+    LAST_ABI_BREAK: 0da1fcac914ad4c67f016bda7864c4b153cbfbaa
+    DEPENDENCIES: gtk3-devel gtk4-devel gsettings-desktop-schemas-devel gettext
+                  gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
+                  gobject-introspection-devel systemd-devel iso-codes-devel
+                  libseccomp-devel gcc gcc-c++ glibc-devel
+                  meson redhat-rpm-config
+    TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-en glibc-langpack-he glibc-langpack-ja abattis-cantarell-fonts libabigail git
   before_script:
     # Undo delangification present in the Fedora Docker images
     - rm -f /etc/rpm/macros.image-language-conf
