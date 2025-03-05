@@ -7,6 +7,14 @@
 include:
 - template: Security/SAST.gitlab-ci.yml
 - template: Security/Secret-Detection.gitlab-ci.yml
+- component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
+  inputs:
+    dist-job-name: "build_stable"
+    tarball-artifact-path: "${TARBALL_ARTIFACT_PATH}"
+
+variables:
+  _BUILDDIR: "_builddir"
+  TARBALL_ARTIFACT_PATH: "${_BUILDDIR}/meson-dist/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz"
 
 build_stable:
   image: fedora:latest
@@ -30,8 +38,8 @@ build_stable:
     - dnf install -y --nogpgcheck $DEPENDENCIES
     - dnf install -y --nogpgcheck $TEST_DEPENDENCIES
   script:
-    - meson --prefix=/usr -Dinstalled_tests=true build
-    - pushd build
+    - meson --prefix=/usr -Dinstalled_tests=true ${_BUILDDIR}
+    - pushd ${_BUILDDIR}
     - ninja
     - ninja install
     - ninja dist
@@ -42,18 +50,7 @@ build_stable:
     - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     paths:
-      - build/meson-logs/
-      - build/test-results/
-      - build/meson-dist/
+      - "${_BUILDDIR}/meson-logs/"
+      - "${_BUILDDIR}/meson-dist/"
+      - "${_BUILDDIR}/test-results/"
     when: "always"
-
-do_gitlab_release:
-  stage: deploy
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - echo 'Running release_job'
-  release:
-    tag_name: '$CI_COMMIT_TAG'
-    description: 'See NEWS file'
