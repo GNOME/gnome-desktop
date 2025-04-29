@@ -11,6 +11,6 @@ gnome.gtkdoc('gnome-desktop3',
   ignore_headers: ignored_headers,
   scan_args: '--deprecated-guards="GNOME_DISABLE_DEPRECATED"',
   mkdb_args: ['--sgml-mode', '--output-format=xml'],
-  src_dir: join_paths(meson.source_root(), 'libgnome-desktop'),
+  src_dir: join_paths(meson.project_source_root(), 'libgnome-desktop'),
   install: true
 )
