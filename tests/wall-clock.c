@@ -26,9 +26,6 @@
 #include <locale.h>
 #include <string.h>
 
-#define COLON ":"
-#define RATIO "∶"
-
 #define SPACE "  "
 #define EN_SPACE " "
 
@@ -85,12 +82,6 @@ test_utf8_character (const char *utf8_char,
 
 	/* Restore previous locale */
 	setlocale (LC_ALL, save_locale);
-}
-
-static void
-test_colon_vs_ratio (void)
-{
-	test_utf8_character (RATIO, COLON);
 }
 
 static void
@@ -233,7 +224,6 @@ main (int   argc,
 
 	g_test_init (&argc, &argv, NULL);
 
-	g_test_add_func ("/wall-clock/colon-vs-ratio", test_colon_vs_ratio);
 	g_test_add_func ("/wall-clock/space-vs-en-space", test_space_vs_en_space);
 	g_test_add_func ("/wall-clock/24h-clock-format", test_clock_format_setting);
 	g_test_add_func ("/wall-clock/notify-clock", test_notify_clock);

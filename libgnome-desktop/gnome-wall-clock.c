@@ -243,9 +243,8 @@ string_replace (const char *input,
 	return output;
 }
 
-/* This function wraps g_date_time_format, replacing colon with the ratio
- * character and underscores with en-space as it looks visually better
- * in time strings.
+/* This function wraps g_date_time_format, replacing underscores with en-space
+ * as it looks visually better in time strings.
  */
 static char *
 date_time_format (GDateTime *datetime,
@@ -253,46 +252,25 @@ date_time_format (GDateTime *datetime,
 {
 	char *replaced_format;
 	char *ret;
-	char *no_ratio, *no_enspace;
+	char *no_enspace;
 	gboolean is_utf8;
 
 	is_utf8 = g_get_charset (NULL);
 
-	/* First, replace ratio with plain colon */
-	no_ratio = string_replace (format, "∶", ":");
-	/* Then do the same with en-space and underscore before passing it to
+	/* Replace en-space with underscore before passing it to
 	 * g_date_time_format.  */
-	no_enspace = string_replace (no_ratio, " ", "_");
+	no_enspace = string_replace (format, " ", "_");
 	g_debug ("no_enspace: %s", no_enspace);
 	replaced_format = g_date_time_format (datetime, no_enspace);
 	g_debug ("replaced_format: %s", replaced_format);
 
-	g_free (no_ratio);
 	g_free (no_enspace);
 
 	if (is_utf8) {
-		char *tmp;
-		g_autofree char *replacement = NULL;
-
-		/* Translators: In some languages, the width of the ratio character
-		 * being ambiguous can cause problems, and the plain colon should be
-		 * used instead of ratio.
-		 * Translate this only if that's the case for your language. */
-		replacement = g_strconcat ("\xE2\x80\x8E",
-					   C_("time separator", "∶"),
-					   NULL);
-
-		/* Then, after formatting, replace the plain colon with ratio,
-		 * and prepend it with an LTR marker to force direction. */
-		tmp = string_replace (replaced_format, ":", replacement);
-
-		/* Finally, replace double spaces with a single en-space.*/
-		ret = string_replace (tmp, "_", " ");
-
-		g_free (tmp);
+		/* Replace underscores with en-space */
+		ret = string_replace (replaced_format, "_", " ");
 	} else {
-		/* Colon instead of ratio is already fine, but replace the
-		 * underscore with double spaces instead of en-space */
+		/* Replace the underscore with double spaces instead of en-space */
 		ret = string_replace (replaced_format, "_", "  ");
 	}
 
