@@ -12,19 +12,15 @@ include:
 - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
   inputs:
     dist-job-name: "build_stable"
-    tarball-artifact-path: "${TARBALL_ARTIFACT_PATH}"
 - component: gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master
   inputs:
     job-stage: "test"
-
-variables:
-  _BUILDDIR: "_builddir"
-  TARBALL_ARTIFACT_PATH: "${_BUILDDIR}/meson-dist/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz"
 
 build_stable:
   image: fedora:latest
   needs: []
   variables:
+    _BUILDDIR: "_builddir"
     LAST_ABI_BREAK: 0da1fcac914ad4c67f016bda7864c4b153cbfbaa
     DEPENDENCIES: gtk3-devel gtk4-devel gsettings-desktop-schemas-devel gettext
                   gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
@@ -50,11 +46,15 @@ build_stable:
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
     - popd
     - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+
+    - mkdir -p public-dist
+    - cp -r "${_BUILDDIR}/meson-dist/" "${CI_PROJECT_DIR}/public-dist/"
   artifacts:
     paths:
       - "${_BUILDDIR}/meson-logs/"
       - "${_BUILDDIR}/meson-dist/"
       - "${_BUILDDIR}/test-results/"
+      - "public-dist"
     when: "always"
     reports:
       junit: "${_BUILDDIR}/meson-logs/testlog.junit.xml"
