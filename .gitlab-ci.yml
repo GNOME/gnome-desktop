@@ -49,7 +49,6 @@ build_stable:
     - popd
     - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
 
-    - mkdir -p public-dist
     - cp -r "${_BUILDDIR}/meson-dist/" "${CI_PROJECT_DIR}/public-dist/"
   artifacts:
     paths:
