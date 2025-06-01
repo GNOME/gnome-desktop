@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 0.56.2',
-  version: '44.3',
+  version: '44.4',
   license: ['GPL-2.0-or-later', 'LGPL-2.1-or-later'],
   default_options: [
     'c_std=gnu99',
@@ -23,7 +23,7 @@ project('gnome-desktop', 'c',
 # to 0. When bumping the second version, set the third one to zero.
 #
 # A lot easier than libtool, right?
-libversion = '2.1.3'
+libversion = '2.1.4'
 soversion = libversion.split('.')[0]
 
 # Compatibility versions for libgnome-desktop-3
