@@ -834,18 +834,16 @@ validate_thumbnail_path (char                      *path,
                          time_t                     mtime,
                          GnomeDesktopThumbnailSize  size)
 {
-  GdkPixbuf *pixbuf;
+  g_autofree gchar *thumbnail_path = g_steal_pointer (&path);
+  g_autoptr (GdkPixbuf) pixbuf = gdk_pixbuf_new_from_file (thumbnail_path, NULL);
 
-  pixbuf = gdk_pixbuf_new_from_file (path, NULL);
   if (pixbuf == NULL ||
-      !gnome_desktop_thumbnail_is_valid (pixbuf, uri, mtime)) {
-      g_free (path);
+      !gnome_desktop_thumbnail_is_valid (pixbuf, uri, mtime))
+    {
       return NULL;
-  }
+    }
 
-  g_clear_object (&pixbuf);
-
-  return path;
+  return g_steal_pointer (&thumbnail_path);
 }
 
 static char *
