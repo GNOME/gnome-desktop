@@ -206,18 +206,16 @@ thumbnailer_unref (Thumbnailer *thumb)
 static Thumbnailer *
 thumbnailer_load (Thumbnailer *thumb)
 {
-  GKeyFile *key_file;
+  g_autofree GKeyFile *key_file = NULL;
   g_autofree gchar *try_exec = NULL;
   g_autofree gchar *exec_path = NULL;
-  GError *error = NULL;
+  g_autofree GError *error = NULL;
 
   key_file = g_key_file_new ();
   if (!g_key_file_load_from_file (key_file, thumb->path, 0, &error))
     {
       g_warning ("Failed to load thumbnailer from \"%s\": %s\n", thumb->path, error->message);
-      g_error_free (error);
       thumbnailer_unref (thumb);
-      g_key_file_free (key_file);
 
       return NULL;
     }
@@ -226,7 +224,6 @@ thumbnailer_load (Thumbnailer *thumb)
     {
       g_warning ("Invalid thumbnailer: missing group \"%s\"\n", THUMBNAILER_ENTRY_GROUP);
       thumbnailer_unref (thumb);
-      g_key_file_free (key_file);
 
       return NULL;
     }
@@ -236,7 +233,6 @@ thumbnailer_load (Thumbnailer *thumb)
     {
       g_warning ("Invalid thumbnailer: missing Exec key\n");
       thumbnailer_unref (thumb);
-      g_key_file_free (key_file);
 
       return NULL;
     }
@@ -246,7 +242,6 @@ thumbnailer_load (Thumbnailer *thumb)
     {
       g_warning ("Invalid thumbnailer: missing MimeType key\n");
       thumbnailer_unref (thumb);
-      g_key_file_free (key_file);
 
       return NULL;
     }
@@ -259,13 +254,10 @@ thumbnailer_load (Thumbnailer *thumb)
         {
           g_info ("Skipping thumbnailer: Program not found in PATH for TryExec=%s in \"%s\"", try_exec, thumb->path);
           thumbnailer_unref (thumb);
-          g_key_file_free (key_file);
 
           return NULL;
         }
     }
-
-  g_key_file_free (key_file);
 
   return thumb;
 }
