@@ -207,6 +207,8 @@ static Thumbnailer *
 thumbnailer_load (Thumbnailer *thumb)
 {
   GKeyFile *key_file;
+  g_autofree gchar *try_exec = NULL;
+  g_autofree gchar *exec_path = NULL;
   GError *error = NULL;
 
   key_file = g_key_file_new ();
@@ -247,6 +249,20 @@ thumbnailer_load (Thumbnailer *thumb)
       g_key_file_free (key_file);
 
       return NULL;
+    }
+
+  try_exec = g_key_file_get_string (key_file, THUMBNAILER_ENTRY_GROUP, "TryExec", NULL);
+  if (try_exec)
+    {
+      exec_path = g_find_program_in_path (try_exec);
+      if (!exec_path)
+        {
+          g_info ("Skipping thumbnailer: Program not found in PATH for TryExec=%s in \"%s\"", try_exec, thumb->path);
+          thumbnailer_unref (thumb);
+          g_key_file_free (key_file);
+
+          return NULL;
+        }
     }
 
   g_key_file_free (key_file);
