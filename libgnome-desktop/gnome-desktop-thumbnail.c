@@ -214,7 +214,7 @@ thumbnailer_load (Thumbnailer *thumb)
   key_file = g_key_file_new ();
   if (!g_key_file_load_from_file (key_file, thumb->path, 0, &error))
     {
-      g_warning ("Failed to load thumbnailer from \"%s\": %s\n", thumb->path, error->message);
+      g_warning ("Failed to load thumbnailer from \"%s\": %s", thumb->path, error->message);
       thumbnailer_unref (thumb);
 
       return NULL;
@@ -222,7 +222,7 @@ thumbnailer_load (Thumbnailer *thumb)
 
   if (!g_key_file_has_group (key_file, THUMBNAILER_ENTRY_GROUP))
     {
-      g_warning ("Invalid thumbnailer: missing group \"%s\"\n", THUMBNAILER_ENTRY_GROUP);
+      g_warning ("Invalid thumbnailer: missing group \"%s\" in \"%s\"", THUMBNAILER_ENTRY_GROUP, thumb->path);
       thumbnailer_unref (thumb);
 
       return NULL;
@@ -231,7 +231,7 @@ thumbnailer_load (Thumbnailer *thumb)
   thumb->command = g_key_file_get_string (key_file, THUMBNAILER_ENTRY_GROUP, "Exec", NULL);
   if (!thumb->command)
     {
-      g_warning ("Invalid thumbnailer: missing Exec key\n");
+      g_warning ("Invalid thumbnailer: missing Exec key in \"%s\"", thumb->path);
       thumbnailer_unref (thumb);
 
       return NULL;
@@ -240,7 +240,7 @@ thumbnailer_load (Thumbnailer *thumb)
   thumb->mime_types = g_key_file_get_string_list (key_file, THUMBNAILER_ENTRY_GROUP, "MimeType", NULL, NULL);
   if (!thumb->mime_types)
     {
-      g_warning ("Invalid thumbnailer: missing MimeType key\n");
+      g_warning ("Invalid thumbnailer: missing MimeType key in \"%s\"", thumb->path);
       thumbnailer_unref (thumb);
 
       return NULL;
