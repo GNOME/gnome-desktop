@@ -206,10 +206,10 @@ thumbnailer_unref (Thumbnailer *thumb)
 static Thumbnailer *
 thumbnailer_load (Thumbnailer *thumb)
 {
-  g_autofree GKeyFile *key_file = NULL;
-  g_autofree gchar *try_exec = NULL;
-  g_autofree gchar *exec_path = NULL;
-  g_autofree GError *error = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GKeyFile) key_file = NULL;
+  g_autofree char *try_exec = NULL;
+  g_autofree char *exec_path = NULL;
 
   key_file = g_key_file_new ();
   if (!g_key_file_load_from_file (key_file, thumb->path, 0, &error))
