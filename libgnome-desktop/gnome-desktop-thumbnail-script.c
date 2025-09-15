@@ -33,6 +33,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#ifdef HAVE_BWRAP
+#include <sys/mman.h>
+#endif
+
 #ifdef ENABLE_SECCOMP
 #include <errno.h>
 #include <sys/socket.h>
@@ -565,6 +569,7 @@ add_bwrap (GPtrArray   *array,
   const char * const usrmerged_dirs[] = { "bin", "lib64", "lib", "sbin" };
   int i;
   g_autofree char *gst_cache_dir = NULL;
+  int sandbox_indicator_memfd;
 
   g_return_val_if_fail (script->outdir != NULL, FALSE);
   g_return_val_if_fail (script->s_infile != NULL, FALSE);
@@ -636,6 +641,16 @@ add_bwrap (GPtrArray   *array,
 	    "--unshare-all",
 	    "--die-with-parent",
 	    NULL);
+
+  /*
+   * Create an empty file for /.sandbox
+   * This indicates to other sandbox mechanisms to not use their own sandbox
+   */
+  sandbox_indicator_memfd = memfd_create("sandbox-indicator", 0);
+  g_array_append_val (script->fd_array, sandbox_indicator_memfd);
+  g_ptr_array_add (array, g_strdup ("--ro-bind-data"));
+  g_ptr_array_add (array, g_strdup_printf("%d", sandbox_indicator_memfd));
+  g_ptr_array_add (array, g_strdup ("/.sandbox"));
 
   add_bwrap_env (array, "G_MESSAGES_DEBUG");
   add_bwrap_env (array, "G_MESSAGES_PREFIXED");
