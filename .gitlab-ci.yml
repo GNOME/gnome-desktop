@@ -17,6 +17,8 @@ include:
     job-stage: "test"
     # We don't have any meson tests defined atm
     run-tests: "no"
+    meson-options: "-Dgtk_doc=true"
+- component: "gitlab.gnome.org/GNOME/citemplates/basic-deploy-docs@master"
 
 build_stable:
   image: fedora:latest
