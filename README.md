@@ -15,6 +15,12 @@ You may download updates to the package from [download.gnome.org](https://downlo
 To discuss gnome-desktop, you may use the Platform group of [GNOME's
 Discourse instance](https://discourse.gnome.org/c/platform/5).
 
+
+API Reference
+============
+
+You can find the API reference for gnome-desktop3 (GTK 3) [here](https://gnome.pages.gitlab.gnome.org/gnome-desktop/html/gnome-desktop3/index.html)
+
 Installation
 ============
 
