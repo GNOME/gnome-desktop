@@ -4,44 +4,118 @@
 # Maintainer: Danilo Šegan <dsegan@gmx.net>
 # Miloš Popović <gpopac@gmail.com>, 2010.
 # Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011, 2012, 2013.
+# Marko M. Kostić <marko.m.kostic@gmail.com>, 2020.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-desktop\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/"
-"issues\n"
-"POT-Creation-Date: 2019-04-23 20:16+0000\n"
-"PO-Revision-Date: 2019-04-29 17:30+0200\n"
-"Last-Translator: Марко М. Костић <marko.m.kostic@gmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-desktop/issues/\n"
+"POT-Creation-Date: 2025-10-29 18:21+0000\n"
+"PO-Revision-Date: 2022-08-06 16:23+0200\n"
+"Last-Translator: Marko M. Kostić <marko.m.kostic@gmail.com>\n"
+"Language-Team: Serbian <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: libgnome-desktop/gnome-languages.c:711
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1022
+#, c-format
+msgid "File %s does not have a preview icon attribute"
+msgstr "Datoteka %s nema osobinu za ikonicu pretpregleda"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1032
+#, c-format
+msgid "No loadable icon for %s"
+msgstr "Nema učitljive ikonice za %s"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1161
+#, c-format
+msgid "Could not find thumbnailer for mime-type '%s'"
+msgstr "Nisam mogao naći stvaraoca minijature za MIME vrstu „%s“"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1291
+#, c-format
+msgid "Failed to create folder '%s'"
+msgstr "Nisam uspeo napraviti fasciklu „%s“"
+
+#: libgnome-desktop/gnome-desktop-thumbnail.c:1304
+#, c-format
+msgid "The output folder '%s' is not writable"
+msgstr "Izlazna fascikla „%s“ nije upisiva"
+
+#: libgnome-desktop/gnome-languages.c:698
 msgid "Unspecified"
 msgstr "Neodređeno"
 
-#: libgnome-desktop/gnome-rr-config.c:759
+#. TRANSLATORS: Used to distinguish the labels representing the gez_ER
+#. and gez_ET locales from gez_ER@abegede respective gez_ET@abegede. The
+#. difference is related to collation.
+#: libgnome-desktop/gnome-languages.c:1364
+msgid "Abegede"
+msgstr "Abegede"
+
+#. TRANSLATORS: Used to distinguish Cyrillic from Latin written language variants.
+#: libgnome-desktop/gnome-languages.c:1366
+msgid "Cyrillic"
+msgstr "Ćirilica"
+
+#. TRANSLATORS: Also known as "Nagari", a written variant for many languages
+#. of the Indian subcontinent. See:
+#. https://en.wikipedia.org/wiki/Devanagari
+#: libgnome-desktop/gnome-languages.c:1370
+msgid "Devanagari"
+msgstr "Devangari"
+
+#. TRANSLATORS: Used to distinguish the label representing the tt_RU
+#. locale from tt_RU@iqtelif. It's a special alphabet for Tatar.
+#: libgnome-desktop/gnome-languages.c:1373
+msgid "IQTElif"
+msgstr "Ikutelif (IQTElif)"
+
+#. TRANSLATORS: The alphabet/script, not the language. Used to distinguish
+#. Latin from Cyrillic written language variants.
+#: libgnome-desktop/gnome-languages.c:1376
+msgid "Latin"
+msgstr "Latinica"
+
+#. TRANSLATORS: "Saho" is a variant of the Afar language. Used to
+#. distinguish the label representing the aa_ER locale from aa_ER@saaho.
+#: libgnome-desktop/gnome-languages.c:1379
+msgid "Saho"
+msgstr "Saho"
+
+#. TRANSLATORS: "Valencia" is a dialect of the Catalan language spoken
+#. in Valencia. Used to distinguish the label representing the ca_ES
+#. locale from ca_ES@valencia.
+#: libgnome-desktop/gnome-languages.c:1383
+msgid "Valencia"
+msgstr "Valensija"
+
+#: libgnome-desktop/gnome-rr-config.c:754
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:712
 #, c-format
 msgid "CRTC %d cannot drive output %s"
 msgstr "CRTC „%d“ ne može dobije izlaz „%s“"
 
-#: libgnome-desktop/gnome-rr-config.c:766
+#: libgnome-desktop/gnome-rr-config.c:761
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:719
 #, c-format
 msgid "output %s does not support mode %dx%d@%dHz"
 msgstr "izlaz „%s“ ne podržava režim %dx%d@%dHz"
 
-#: libgnome-desktop/gnome-rr-config.c:777
+#: libgnome-desktop/gnome-rr-config.c:772
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:730
 #, c-format
 msgid "CRTC %d does not support rotation=%d"
 msgstr "CRTC „%d“ ne podržava rotaciju =%d"
 
-#: libgnome-desktop/gnome-rr-config.c:790
+#: libgnome-desktop/gnome-rr-config.c:785
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:743
 #, c-format
 msgid ""
 "output %s does not have the same parameters as another cloned output:\n"
@@ -54,25 +128,28 @@ msgstr ""
 "postojeće koordinate = (%d, %d), nove koordinate = (%d, %d)\n"
 "postojeća rotacija = %d, nova rotacija = %d"
 
-#: libgnome-desktop/gnome-rr-config.c:805
+#: libgnome-desktop/gnome-rr-config.c:800
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:758
 #, c-format
 msgid "cannot clone to output %s"
 msgstr "ne mogu da kloniram u izlaz „%s“"
 
-#: libgnome-desktop/gnome-rr-config.c:931
+#: libgnome-desktop/gnome-rr-config.c:926
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:883
 #, c-format
 msgid "Trying modes for CRTC %d\n"
 msgstr "Isprobavam režime za CRTC „%d“\n"
 
-#: libgnome-desktop/gnome-rr-config.c:955
+#: libgnome-desktop/gnome-rr-config.c:950
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:907
 #, c-format
-msgid ""
-"CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
+msgid "CRTC %d: trying mode %dx%d@%dHz with output at %dx%d@%dHz (pass %d)\n"
 msgstr ""
 "CRTC „%d“: isprobavam režim %dx%d@%dHz bez izlaza na %dx%d@%dHz (%d. "
 "pokušaj)\n"
 
-#: libgnome-desktop/gnome-rr-config.c:1002
+#: libgnome-desktop/gnome-rr-config.c:997
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:954
 #, c-format
 msgid ""
 "could not assign CRTCs to outputs:\n"
@@ -81,7 +158,8 @@ msgstr ""
 "ne mogu da pridružim CRTC-e izlazima:\n"
 "%s"
 
-#: libgnome-desktop/gnome-rr-config.c:1006
+#: libgnome-desktop/gnome-rr-config.c:1001
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:958
 #, c-format
 msgid ""
 "none of the selected modes were compatible with the possible modes:\n"
@@ -93,7 +171,8 @@ msgstr ""
 #. Translators: the "requested", "minimum", and
 #. * "maximum" words here are not keywords; please
 #. * translate them as usual.
-#: libgnome-desktop/gnome-rr-config.c:1087
+#: libgnome-desktop/gnome-rr-config.c:1082
+#: libgnome-desktop/gnome-rr/gnome-rr-config.c:1039
 #, c-format
 msgid ""
 "required virtual size does not fit available size: requested=(%d, %d), "
@@ -105,83 +184,87 @@ msgstr ""
 #. Translators: This is the time format with full date
 #. plus day used in 24-hour mode. Please keep the under-
 #. score to separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:332
+#: libgnome-desktop/gnome-wall-clock.c:337
 msgid "%a %b %-e_%R:%S"
 msgstr "%A, %e. %b, %R:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:333
+#: libgnome-desktop/gnome-wall-clock.c:338
 msgid "%a %b %-e_%R"
 msgstr "%A, %e. %b, %R"
 
 #. Translators: This is the time format with full date
 #. used in 24-hour mode. Please keep the underscore to
 #. separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:338
+#: libgnome-desktop/gnome-wall-clock.c:343
 msgid "%b %-e_%R:%S"
 msgstr "%A, %e. %b, %R:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:339
+#: libgnome-desktop/gnome-wall-clock.c:344
 msgid "%b %-e_%R"
 msgstr "%A, %e. %b, %R"
 
 #. Translators: This is the time format with day used
 #. in 24-hour mode.
-#: libgnome-desktop/gnome-wall-clock.c:343
+#: libgnome-desktop/gnome-wall-clock.c:348
 msgid "%a %R:%S"
 msgstr "%A, %R:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:344
+#: libgnome-desktop/gnome-wall-clock.c:349
 msgid "%a %R"
 msgstr "%A, %R"
 
 #. Translators: This is the time format without date used
 #. in 24-hour mode.
-#: libgnome-desktop/gnome-wall-clock.c:348
+#: libgnome-desktop/gnome-wall-clock.c:353
 msgid "%R:%S"
 msgstr "%R:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:349
+#: libgnome-desktop/gnome-wall-clock.c:354
 msgid "%R"
 msgstr "%R"
 
 #. Translators: This is a time format with full date
 #. plus day used for AM/PM. Please keep the under-
 #. score to separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:357
+#: libgnome-desktop/gnome-wall-clock.c:362
 msgid "%a %b %-e_%l:%M:%S %p"
 msgstr "%A, %e. %b, %l:%M:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:358
+#: libgnome-desktop/gnome-wall-clock.c:363
 msgid "%a %b %-e_%l:%M %p"
 msgstr "%A, %e. %b, %l:%M"
 
 #. Translators: This is a time format with full date
 #. used for AM/PM. Please keep the underscore to
 #. separate the date from the time.
-#: libgnome-desktop/gnome-wall-clock.c:363
+#: libgnome-desktop/gnome-wall-clock.c:368
 msgid "%b %-e_%l:%M:%S %p"
 msgstr "%A, %e. %b, %l:%M:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:364
+#: libgnome-desktop/gnome-wall-clock.c:369
 msgid "%b %-e_%l:%M %p"
 msgstr "%A, %e. %b, %l:%M"
 
 #. Translators: This is a time format with day used
 #. for AM/PM.
-#: libgnome-desktop/gnome-wall-clock.c:368
+#: libgnome-desktop/gnome-wall-clock.c:373
 msgid "%a %l:%M:%S %p"
 msgstr "%A, %l:%M:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:369
+#: libgnome-desktop/gnome-wall-clock.c:374
 msgid "%a %l:%M %p"
 msgstr "%A, %l:%M"
 
 #. Translators: This is a time format without date used
 #. for AM/PM.
-#: libgnome-desktop/gnome-wall-clock.c:373
+#: libgnome-desktop/gnome-wall-clock.c:378
 msgid "%l:%M:%S %p"
 msgstr "%l:%M:%S"
 
-#: libgnome-desktop/gnome-wall-clock.c:374
+#: libgnome-desktop/gnome-wall-clock.c:379
 msgid "%l:%M %p"
 msgstr "%l:%M"
+
+#~ msgctxt "time separator"
+#~ msgid "∶"
+#~ msgstr "∶"
