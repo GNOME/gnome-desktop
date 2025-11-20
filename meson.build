@@ -30,6 +30,10 @@ soversion = libversion.split('.')[0]
 bg_libversion = '2.1.4'
 bg_soversion = bg_libversion.split('.')[0]
 
+# Compatibilty versions for libgnome-qr
+qr_libversion = '0.0.1'
+qr_soversion = qr_libversion.split('.')[0]
+
 # Compatibility versions for libgnome-desktop-3
 compat_libversion = '21.0.0'
 compat_soversion = compat_libversion.split('.')[0]
