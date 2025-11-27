@@ -1,5 +1,4 @@
 ignored_headers = [
-  'gnome-rr-private.h',
   'libgsystem',
   'meta-dbus-idle-monitor.h',
   'meta-dbus-xrandr.h',
