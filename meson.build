@@ -95,6 +95,9 @@ if not cc.has_function('clock_gettime', dependencies: rt_dep)
   rt_dep = dependency('', required: false)
 endif
 
+qrcodegen = subproject('qrcodegen')
+qrcodegen_dep = qrcodegen.get_variable('qrcodegen_dep')
+
 subdir('libgnome-desktop')
 subdir('po')
 subdir('tests')
