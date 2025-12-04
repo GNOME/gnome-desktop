@@ -828,22 +828,21 @@ thumbnail_failed_path (const char *uri)
   return path;
 }
 
-static char *
-validate_thumbnail_path (char                      *path,
+static gboolean
+validate_thumbnail_path (const char                *path,
                          const char                *uri,
                          time_t                     mtime,
                          GnomeDesktopThumbnailSize  size)
 {
-  g_autofree gchar *thumbnail_path = g_steal_pointer (&path);
-  g_autoptr (GdkPixbuf) pixbuf = gdk_pixbuf_new_from_file (thumbnail_path, NULL);
+  g_autoptr (GdkPixbuf) pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 
   if (pixbuf == NULL ||
       !gnome_desktop_thumbnail_is_valid (pixbuf, uri, mtime))
     {
-      return NULL;
+      return FALSE;
     }
 
-  return g_steal_pointer (&thumbnail_path);
+  return TRUE;
 }
 
 static char *
@@ -851,8 +850,12 @@ lookup_thumbnail_path (const char                *uri,
                        time_t                     mtime,
                        GnomeDesktopThumbnailSize  size)
 {
-  char *path = thumbnail_path (uri, size);
-  return validate_thumbnail_path (path, uri, mtime, size);
+  g_autofree char *path = thumbnail_path (uri, size);
+
+  if (!validate_thumbnail_path (path, uri, mtime, size))
+    return NULL;
+
+  return g_steal_pointer (&path);
 }
 
 static char *
@@ -860,8 +863,12 @@ lookup_failed_thumbnail_path (const char                *uri,
                               time_t                     mtime,
                               GnomeDesktopThumbnailSize  size)
 {
-  char *path = thumbnail_failed_path (uri);
-  return validate_thumbnail_path (path, uri, mtime, size);
+  g_autofree char *path = thumbnail_failed_path (uri);
+
+  if (!validate_thumbnail_path (path, uri, mtime, size))
+    return NULL;
+
+  return g_steal_pointer (&path);
 }
 
 /**
