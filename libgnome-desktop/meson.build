@@ -250,6 +250,8 @@ if get_option('legacy_library')
     version: compat_libversion,
     c_args: libargs,
     link_args: compat_ldflags,
+    link_args: base_ldflags,
+    link_depends: base_symbol_map_file,
     install: true,
     include_directories: [
       include_directories('.'),
