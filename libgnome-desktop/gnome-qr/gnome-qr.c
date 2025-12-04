@@ -93,7 +93,8 @@ fill_pixel (GByteArray         *array,
  *   or %NULL to use default (black)
  * @format: The pixel format for the output image data
  * @ecc: The error correction level
- * @out_size: (out) (nullable): location to store the actual output size in pixels (width and height) of the square QR code, or %NULL
+ * @out_size: (out) (optional): location to store the actual output size
+ *   in pixels (width and height) of the square QR code, or %NULL
  * @cancellable: (nullable): A #GCancellable to cancel the operation
  * @error: #GError for error reporting
  *
@@ -273,7 +274,8 @@ gnome_qr_generate_qr_code_async (const char          *text,
 /**
  * gnome_qr_generate_qr_code_finish:
  * @result: the #GAsyncResult that was provided to the callback
- * @out_size: (out) (nullable): location to store the actual output size in pixels (width and height) of the square QR code, or %NULL
+ * @out_size: (out) (optional): location to store the actual output size
+ *   in pixels (width and height) of the square QR code, or %NULL
  * @error: #GError for error reporting
  *
  * Finish the asynchronous operation started by
