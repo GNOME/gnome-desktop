@@ -65,10 +65,10 @@
  * recovery at the cost of requiring bigger dimensions.
  */
 typedef enum {
-	GNOME_QR_ECC_LEVEL_LOW,
-	GNOME_QR_ECC_LEVEL_MEDIUM,
-	GNOME_QR_ECC_LEVEL_QUARTILE,
-	GNOME_QR_ECC_LEVEL_HIGH,
+        GNOME_QR_ECC_LEVEL_LOW,
+        GNOME_QR_ECC_LEVEL_MEDIUM,
+        GNOME_QR_ECC_LEVEL_QUARTILE,
+        GNOME_QR_ECC_LEVEL_HIGH,
 } GnomeQrEccLevel;
 
 /**
