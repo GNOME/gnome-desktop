@@ -56,7 +56,9 @@ dbus_idle_built_sources = gnome.gdbus_codegen('meta-dbus-idle-monitor',
 )
 
 base_ldflags = []
-base_symbol_map = '-Wl,--version-script=@0@'.format(meson.current_source_dir() / 'base-symbol.map')
+base_symbol_map_file = 'base-symbol.map'
+base_symbol_map = '-Wl,--version-script=@0@'.format(
+  meson.current_source_dir() / base_symbol_map_file)
 if cc.has_link_argument(base_symbol_map)
   base_ldflags += base_symbol_map
 endif
@@ -122,6 +124,7 @@ if get_option('build_gtk4')
     version: libversion,
     c_args: libargs,
     link_args: base_ldflags,
+    link_depends: base_symbol_map_file,
     install: true,
     include_directories: [
       include_directories('.'),
