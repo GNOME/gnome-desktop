@@ -282,9 +282,9 @@ gnome_qr_generate_qr_code_async (const char          *text,
  * Returns: (transfer full): The pixel data or %NULL on error
  */
 GBytes *
-gnome_qr_generate_qr_code_finish (GAsyncResult        *result,
-                                  size_t              *out_size,
-                                  GError             **error)
+gnome_qr_generate_qr_code_finish (GAsyncResult  *result,
+                                  size_t        *pixel_size_out,
+                                  GError       **error)
 {
         GnomeQrCodeData *data;
         g_autoptr (GBytes) pixel_data = NULL;
