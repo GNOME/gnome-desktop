@@ -101,17 +101,17 @@ typedef struct {
 } GnomeQrColor;
 
 GBytes *    gnome_qr_generate_qr_code_sync         (const char          *text,
-                                                    size_t               size,
+                                                    size_t               requested_size,
                                                     const GnomeQrColor  *bg_color,
                                                     const GnomeQrColor  *fg_color,
                                                     GnomeQrPixelFormat   format,
                                                     GnomeQrEccLevel      ecc,
-                                                    size_t              *out_size,
+                                                    size_t              *pixel_size_out,
                                                     GCancellable        *cancellable,
                                                     GError             **error);
 
 void        gnome_qr_generate_qr_code_async        (const char          *text,
-                                                    size_t               size,
+                                                    size_t               requested_size,
                                                     const GnomeQrColor  *bg_color,
                                                     const GnomeQrColor  *fg_color,
                                                     GnomeQrPixelFormat   format,
@@ -121,5 +121,5 @@ void        gnome_qr_generate_qr_code_async        (const char          *text,
                                                     gpointer             user_data);
 
 GBytes *    gnome_qr_generate_qr_code_finish       (GAsyncResult        *result,
-                                                    size_t              *out_size,
+                                                    size_t              *pixel_size_out,
                                                     GError             **error);
