@@ -32,8 +32,8 @@
 typedef struct
 {
         char *text;
-        size_t size;
-        size_t out_size;
+        size_t requested_size;
+        size_t pixel_size;
         GnomeQrColor *bg_color;
         GnomeQrColor *fg_color;
         GnomeQrPixelFormat format;
@@ -66,14 +66,14 @@ gnome_qr_ecc_level_to_qrcodegen_ecc (GnomeQrEccLevel ecc)
 }
 
 static void
-fill_pixel (GByteArray         *array,
+fill_block (GByteArray         *array,
             const GnomeQrColor *color,
             GnomeQrPixelFormat  format,
-            int                 pixel_size)
+            int                 block_size)
 {
         guint i;
 
-        for (i = 0; i < pixel_size; i++) {
+        for (i = 0; i < block_size; i++) {
                 g_byte_array_append (array, &color->red, 1);
                 g_byte_array_append (array, &color->green, 1);
                 g_byte_array_append (array, &color->blue, 1);
@@ -86,15 +86,17 @@ fill_pixel (GByteArray         *array,
 /**
  * gnome_qr_generate_qr_code_sync:
  * @text: the text of which generate the qr code
- * @size: The requested size in pixels (width and height) for the square QR code
+ * @requested_size: The requested size (width and height) in pixels of the QR code.
+ *   Only square QR codes are supported.
  * @bg_color: (nullable): The background color of the code
  *   or %NULL to use default (white)
  * @fg_color: (nullable): The foreground color of the code
  *   or %NULL to use default (black)
  * @format: The pixel format for the output image data
  * @ecc: The error correction level
- * @out_size: (out) (optional): location to store the actual output size
- *   in pixels (width and height) of the square QR code, or %NULL
+ * @pixel_size_out: (out) (optional): The square QR code size
+ *   (width and height) in pixels, or %NULL.
+ *   Note that it may not match @requested_size.
  * @cancellable: (nullable): A #GCancellable to cancel the operation
  * @error: #GError for error reporting
  *
@@ -104,23 +106,23 @@ fill_pixel (GByteArray         *array,
  */
 GBytes *
 gnome_qr_generate_qr_code_sync (const char          *text,
-                                size_t               size,
+                                size_t               requested_size,
                                 const GnomeQrColor  *bg_color,
                                 const GnomeQrColor  *fg_color,
                                 GnomeQrPixelFormat   format,
                                 GnomeQrEccLevel      ecc,
-                                size_t              *out_size,
+                                size_t              *pixel_size_out,
                                 GCancellable        *cancellable,
                                 GError             **error)
 {
         g_autoptr (GByteArray) qr_matrix = NULL;
         uint8_t qr_code[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
         uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
-        gint pixel_size, qr_size, total_size;
+        gint qr_size, block_size, total_size;
         gint column, row, i;
 
         g_return_val_if_fail (text != NULL, NULL);
-        g_return_val_if_fail (size > 0, NULL);
+        g_return_val_if_fail (requested_size > 0, NULL);
 
         if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
                 g_return_val_if_fail (!bg_color || bg_color->alpha == 255, NULL);
@@ -156,19 +158,19 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                 fg_color = &GNOME_QR_COLOR_BLACK;
 
         qr_size = qrcodegen_getSize (qr_code);
-        pixel_size = MAX (1, size / qr_size);
-        total_size = qr_size * pixel_size;
+        block_size = MAX (1, requested_size / qr_size);
+        total_size = qr_size * block_size;
 
-        qr_matrix = g_byte_array_sized_new (total_size * total_size * pixel_size *
+        qr_matrix = g_byte_array_sized_new (total_size * total_size * block_size *
                                             GNOME_QR_BYTES_PER_FORMAT (format));
 
         for (column = 0; column < total_size; ++column) {
-                for (i = 0; i < pixel_size; ++i) {
+                for (i = 0; i < block_size; ++i) {
                         for (row = 0; row < qr_size; ++row) {
                                 if (qrcodegen_getModule (qr_code, column, row))
-                                        fill_pixel (qr_matrix, fg_color, format, pixel_size);
+                                        fill_block (qr_matrix, fg_color, format, block_size);
                                 else
-                                        fill_pixel (qr_matrix, bg_color, format, pixel_size);
+                                        fill_block (qr_matrix, bg_color, format, block_size);
                         }
                 }
 
@@ -176,8 +178,8 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                         return NULL;
         }
 
-        if (out_size)
-                *out_size = total_size;
+        if (pixel_size_out)
+                *pixel_size_out = total_size;
 
         return g_byte_array_free_to_bytes (g_steal_pointer (&qr_matrix));
 }
@@ -194,12 +196,12 @@ generate_qr_code_in_thread (GTask        *task,
         g_autoptr (GBytes) icon = NULL;
 
         icon = gnome_qr_generate_qr_code_sync (data->text,
-                                               data->size,
+                                               data->requested_size,
                                                data->bg_color,
                                                data->fg_color,
                                                data->format,
                                                data->ecc,
-                                               &data->out_size,
+                                               &data->pixel_size,
                                                cancellable,
                                                &error);
         if (!icon) {
@@ -213,7 +215,8 @@ generate_qr_code_in_thread (GTask        *task,
 /**
  * gnome_qr_generate_qr_code_async:
  * @text: the text of which generate the qr code
- * @size: The requested size in pixels (width and height) for the square QR code
+ * @requested_size: The requested size (width and height) in pixels of the QR code.
+ *   Only square QR codes are supported.
  * @bg_color: (nullable): The background color of the code
  *   or %NULL to use default (white)
  * @fg_color: (nullable): The foreground color of the code
@@ -231,7 +234,7 @@ generate_qr_code_in_thread (GTask        *task,
  */
 void
 gnome_qr_generate_qr_code_async (const char          *text,
-                                 size_t               size,
+                                 size_t               requested_size,
                                  const GnomeQrColor  *bg_color,
                                  const GnomeQrColor  *fg_color,
                                  GnomeQrPixelFormat   format,
@@ -257,7 +260,7 @@ gnome_qr_generate_qr_code_async (const char          *text,
 
         data = g_new0 (GnomeQrCodeData, 1);
         data->text = g_strdup (text);
-        data->size = size;
+        data->requested_size = requested_size;
         data->bg_color = g_memdup2 (bg_color, sizeof (GnomeQrColor));
         data->fg_color = g_memdup2 (fg_color, sizeof (GnomeQrColor));
         data->format = format;
@@ -274,8 +277,10 @@ gnome_qr_generate_qr_code_async (const char          *text,
 /**
  * gnome_qr_generate_qr_code_finish:
  * @result: the #GAsyncResult that was provided to the callback
- * @out_size: (out) (optional): location to store the actual output size
- *   in pixels (width and height) of the square QR code, or %NULL
+ * @pixel_size_out: (out) (optional): The square QR code size
+ *   (width and height) in pixels, or %NULL.
+ *   Note that it may not match the @requested_size in
+ *   gnome_qr_generate_qr_code_async().
  * @error: #GError for error reporting
  *
  * Finish the asynchronous operation started by
@@ -301,8 +306,8 @@ gnome_qr_generate_qr_code_finish (GAsyncResult  *result,
                 return NULL;
 
         data = g_task_get_task_data (G_TASK (result));
-        if (out_size)
-                *out_size = data->out_size;
+        if (pixel_size_out)
+                *pixel_size_out = data->pixel_size;
 
         return g_steal_pointer (&pixel_data);
 }
