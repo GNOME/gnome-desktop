@@ -41,6 +41,22 @@ libgnome_qr = library('gnome-qr',
   ],
 )
 
+libgnome_qr_gir = []
+if get_option('introspection')
+  libgnome_qr_gir += gnome.generate_gir(libgnome_qr,
+    sources: [libgnome_qr_headers, libgnome_qr_sources],
+    export_packages: 'gnome-qr-4',
+    namespace: 'GnomeQR',
+    nsversion: '4.0',
+    identifier_prefix: 'GnomeQr',
+    symbol_prefix: 'gnome_qr',
+    includes: ['Gio-2.0', 'GLib-2.0'],
+    extra_args: ['--quiet', '--warn-all'],
+    fatal_warnings: true,
+    install: true,
+  )
+endif
+
 pkg.generate(
   libgnome_qr,
   requires: ['gio-2.0'],
@@ -53,6 +69,9 @@ pkg.generate(
 
 gnome_qr_dep = declare_dependency(
   dependencies: libgnome_qr_deps,
+  sources: [
+    libgnome_qr_gir,
+  ],
   include_directories: [
     include_directories('..'),
   ],
