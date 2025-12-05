@@ -92,7 +92,7 @@ iso_codes_prefix = iso_codes_dep.get_variable(pkgconfig: 'prefix')
 
 cc = meson.get_compiler('c')
 
-m_dep = cc.find_library('m', required: false)
+m_dep = cc.find_library('m', required: true)
 rt_dep = cc.find_library('rt', required: false)
 
 if not cc.has_function('clock_gettime', dependencies: rt_dep)

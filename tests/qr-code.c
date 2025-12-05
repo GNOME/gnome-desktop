@@ -142,6 +142,7 @@ test_gnome_qr_async_generate_simple_rgb_888 (void)
 
   g_assert_nonnull (data.qr_code);
   g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >, 0);
 
   assert_qr_matches_reference (data.qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -172,6 +173,7 @@ test_gnome_qr_async_generate_simple_rgba_8888 (void)
 
   g_assert_nonnull (data.qr_code);
   g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >, 0);
 
   assert_qr_matches_reference (data.qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -200,6 +202,7 @@ test_gnome_qr_sync_generate_custom_colors_fedora (void)
                                             NULL, &error);
   g_assert_nonnull (qr_code);
   g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >=, 256);
 
   assert_qr_matches_reference (qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -226,6 +229,7 @@ test_gnome_qr_sync_generate_custom_colors_ubuntu (void)
                                             NULL, &error);
   g_assert_nonnull (qr_code);
   g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >=, 256);
 
   assert_qr_matches_reference (qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -257,6 +261,7 @@ test_gnome_qr_async_generate_custom_colors_fedora (void)
 
   g_assert_nonnull (data.qr_code);
   g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >=, 256);
 
   assert_qr_matches_reference (data.qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -290,6 +295,7 @@ test_gnome_qr_async_generate_custom_colors_ubuntu (void)
 
   g_assert_nonnull (data.qr_code);
   g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >=, 256);
 
   assert_qr_matches_reference (data.qr_code,
                                g_test_get_filename (G_TEST_DIST,
