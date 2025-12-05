@@ -27,6 +27,7 @@
 
 #include "gnome-qr.h"
 
+#include <math.h>
 #include <qrcodegen.h>
 
 typedef struct
@@ -162,7 +163,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
         qr_size = qrcodegen_getSize (qr_code);
         g_assert (qr_size > 0);
 
-        block_size = MAX (1, requested_size / qr_size);
+        block_size = MAX (1, ceil ((double) requested_size / qr_size));
         total_size = qr_size * block_size;
 
         qr_matrix = g_byte_array_sized_new (total_size * total_size *
