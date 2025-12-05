@@ -159,15 +159,17 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                 fg_color = &GNOME_QR_COLOR_BLACK;
 
         qr_size = qrcodegen_getSize (qr_code);
+        g_assert (qr_size > 0);
+
         block_size = MAX (1, requested_size / qr_size);
         total_size = qr_size * block_size;
 
-        qr_matrix = g_byte_array_sized_new (total_size * total_size * block_size *
+        qr_matrix = g_byte_array_sized_new (total_size * total_size *
                                             GNOME_QR_BYTES_PER_FORMAT (format));
 
-        for (column = 0; column < total_size; ++column) {
+        for (row = 0; row < qr_size; ++row) {
                 for (i = 0; i < block_size; ++i) {
-                        for (row = 0; row < qr_size; ++row) {
+                        for (column = 0; column < qr_size; ++column) {
                                 if (qrcodegen_getModule (qr_code, column, row))
                                         fill_block (qr_matrix, fg_color, format, block_size);
                                 else
