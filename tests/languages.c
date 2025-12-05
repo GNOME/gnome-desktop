@@ -29,9 +29,9 @@
 static void
 test_using_null_locale (void)
 {
-	const char *translated_territory;
-	const char *translated_language;
-	const char *translated_modifier;
+	g_autofree char *translated_territory = NULL;
+	g_autofree char *translated_language = NULL;
+	g_autofree char *translated_modifier = NULL;
 
 	translated_territory = gnome_get_country_from_code("US", NULL);
 	g_assert (translated_territory != NULL);
