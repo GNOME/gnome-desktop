@@ -122,6 +122,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
         gint column, row, i;
 
         g_return_val_if_fail (text != NULL, NULL);
+        g_return_val_if_fail (*text != '\0', NULL);
         g_return_val_if_fail (requested_size > 0, NULL);
 
         if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
@@ -143,7 +144,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                 g_set_error (error,
                              G_IO_ERROR,
                              G_IO_ERROR_FAILED,
-                             "QRCode generation failed for content %s",
+                             "QRCode generation failed for content '%s'",
                              text);
                 return NULL;
         }
@@ -246,16 +247,13 @@ gnome_qr_generate_qr_code_async (const char          *text,
         g_autoptr (GTask) task = NULL;
         GnomeQrCodeData *data;
 
-        if (!text || *text == '\0') {
-                if (callback)
-                        g_task_report_new_error (NULL,
-                                                 callback,
-                                                 user_data,
-                                                 gnome_qr_generate_qr_code_async,
-                                                 G_IO_ERROR,
-                                                 G_IO_ERROR_INVALID_DATA,
-                                                 "No valid QR code text is provided");
-                return;
+        g_return_if_fail (text != NULL);
+        g_return_if_fail (*text != '\0');
+        g_return_if_fail (requested_size > 0);
+
+        if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
+                g_return_if_fail (!bg_color || bg_color->alpha == 255);
+                g_return_if_fail (!fg_color || fg_color->alpha == 255);
         }
 
         data = g_new0 (GnomeQrCodeData, 1);
