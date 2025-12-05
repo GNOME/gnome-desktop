@@ -2,6 +2,7 @@ libgnome_qr_deps = [
   glib_dep,
   gio_dep,
   qrcodegen_dep,
+  m_dep,
 ]
 
 libgnome_qr_sources = files([
