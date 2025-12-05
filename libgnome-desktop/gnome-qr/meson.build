@@ -49,3 +49,11 @@ pkg.generate(
   description: 'QR code utility library for GNOME desktop components',
   subdirs: 'gnome-desktop-4.0',
 )
+
+gnome_qr_dep = declare_dependency(
+  dependencies: libgnome_qr_deps,
+  include_directories: [
+    include_directories('..'),
+  ],
+  link_with: libgnome_qr,
+)
