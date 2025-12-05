@@ -18,6 +18,7 @@ test_metas = []
 if get_option('build_gtk4')
   test_programs += {
     'bg-slide-show': {'dependencies': [libgnome_bg_dep]},
+    'qr-code': { 'dependencies': [gnome_qr_dep]},
   }
 endif
 
@@ -67,4 +68,5 @@ if get_option('installed_tests')
   )
   install_data(test_data, install_dir: test_execdir)
   install_data(test_metas, install_dir: test_metadir)
+  install_subdir('data', install_dir: test_execdir)
 endif
