@@ -480,6 +480,8 @@ collect_locales_from_directory (void)
         for (cnt = 0; cnt < ndirents; ++cnt) {
                 if (add_locale (dirents[cnt]->d_name, TRUE))
                         found_locales = TRUE;
+
+                free (dirents[cnt]);
         }
 
         if (ndirents > 0) {
