@@ -85,7 +85,7 @@ fill_block (GByteArray         *array,
 
 /**
  * gnome_qr_generate_qr_code_sync:
- * @text: the text of which generate the qr code
+ * @text: the text of which generate the QR code
  * @requested_size: The requested size (width and height) in pixels of the QR code.
  *   Only square QR codes are supported.
  * @bg_color: (nullable): The background color of the code
@@ -214,7 +214,7 @@ generate_qr_code_in_thread (GTask        *task,
 
 /**
  * gnome_qr_generate_qr_code_async:
- * @text: the text of which generate the qr code
+ * @text: The text of which generate the QR code
  * @requested_size: The requested size (width and height) in pixels of the QR code.
  *   Only square QR codes are supported.
  * @bg_color: (nullable): The background color of the code

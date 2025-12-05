@@ -46,6 +46,6 @@ pkg.generate(
   version: meson.project_version(),
   name: 'gnome-qr-4',
   filebase: 'gnome-qr-4',
-  description: 'Qr code utility library for GNOME desktop components',
+  description: 'QR code utility library for GNOME desktop components',
   subdirs: 'gnome-desktop-4.0',
 )
