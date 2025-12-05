@@ -118,6 +118,8 @@ gnome_qr_generate_qr_code_sync (const char          *text,
         g_autoptr (GByteArray) qr_matrix = NULL;
         uint8_t qr_code[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
         uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
+        static const GnomeQrColor default_bg_color = GNOME_QR_COLOR_WHITE;
+        static const GnomeQrColor default_fg_color = GNOME_QR_COLOR_BLACK;
         gint qr_size, block_size, total_size;
         gint column, row, i;
 
@@ -153,10 +155,10 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                 return NULL;
 
         if (!bg_color)
-                bg_color = &GNOME_QR_COLOR_WHITE;
+                bg_color = &default_bg_color;
 
         if (!fg_color)
-                fg_color = &GNOME_QR_COLOR_BLACK;
+                fg_color = &default_fg_color;
 
         qr_size = qrcodegen_getSize (qr_code);
         g_assert (qr_size > 0);
