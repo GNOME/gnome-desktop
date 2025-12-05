@@ -125,7 +125,6 @@ gnome_qr_generate_qr_code_sync (const char          *text,
 
         g_return_val_if_fail (text != NULL, NULL);
         g_return_val_if_fail (*text != '\0', NULL);
-        g_return_val_if_fail (requested_size > 0, NULL);
 
         if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
                 g_return_val_if_fail (!bg_color || bg_color->alpha == 255, NULL);
@@ -253,7 +252,6 @@ gnome_qr_generate_qr_code_async (const char          *text,
 
         g_return_if_fail (text != NULL);
         g_return_if_fail (*text != '\0');
-        g_return_if_fail (requested_size > 0);
 
         if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
                 g_return_if_fail (!bg_color || bg_color->alpha == 255);
