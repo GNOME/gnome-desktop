@@ -90,16 +90,17 @@ fill_block (GByteArray         *array,
  * gnome_qr_generate_qr_code_sync:
  * @text: the text of which generate the QR code
  * @requested_size: The requested size (width and height) in pixels of the QR code.
- *   Only square QR codes are supported.
+ *   Only square QR codes are supported. If the requested size is smaller than
+ *   the minimum required size for the QR code, it will be generated with 1 pixel
+ *   per block.
  * @bg_color: (nullable): The background color of the code
  *   or %NULL to use default (white)
  * @fg_color: (nullable): The foreground color of the code
  *   or %NULL to use default (black)
  * @format: The pixel format for the output image data
  * @ecc: The error correction level
- * @pixel_size_out: (out) (optional): The square QR code size
- *   (width and height) in pixels, or %NULL.
- *   Note that it may not match @requested_size.
+ * @pixel_size_out: (out): The actual square QR code size (width and height)
+ *   in pixels. Note that it may not match @requested_size.
  * @cancellable: (nullable): A #GCancellable to cancel the operation
  * @error: #GError for error reporting
  *
@@ -128,6 +129,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
 
         g_return_val_if_fail (text != NULL, NULL);
         g_return_val_if_fail (*text != '\0', NULL);
+        g_return_val_if_fail (pixel_size_out != NULL, NULL);
 
         if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
                 g_return_val_if_fail (!bg_color || bg_color->alpha == 255, NULL);
@@ -185,8 +187,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
                         return NULL;
         }
 
-        if (pixel_size_out)
-                *pixel_size_out = total_size;
+        *pixel_size_out = total_size;
 
         return g_byte_array_free_to_bytes (g_steal_pointer (&qr_matrix));
 }
@@ -280,9 +281,8 @@ gnome_qr_generate_qr_code_async (const char          *text,
 /**
  * gnome_qr_generate_qr_code_finish:
  * @result: the #GAsyncResult that was provided to the callback
- * @pixel_size_out: (out) (optional): The square QR code size
- *   (width and height) in pixels, or %NULL.
- *   Note that it may not match the @requested_size in
+ * @pixel_size_out: (out): The actual square QR code size (width and height)
+ *   in pixels. Note that it may not match the @requested_size in
  *   gnome_qr_generate_qr_code_async().
  * @error: #GError for error reporting
  *
@@ -303,14 +303,14 @@ gnome_qr_generate_qr_code_finish (GAsyncResult  *result,
         g_return_val_if_fail (g_async_result_is_tagged (result,
                                                         gnome_qr_generate_qr_code_async),
                               NULL);
+        g_return_val_if_fail (pixel_size_out != NULL, NULL);
 
         pixel_data = g_task_propagate_pointer (G_TASK (result), error);
         if (!pixel_data)
                 return NULL;
 
         data = g_task_get_task_data (G_TASK (result));
-        if (pixel_size_out)
-                *pixel_size_out = data->pixel_size;
+        *pixel_size_out = data->pixel_size;
 
         return g_steal_pointer (&pixel_data);
 }
