@@ -26,7 +26,7 @@ if cc.has_link_argument(gnome_qr_symbol_map_arg)
   gnome_qr_ld_flags += gnome_qr_symbol_map_arg
 endif
 
-libgnome_qr = library('gnome-qr',
+libgnome_qr = library('gnome-qr-4',
   sources: libgnome_qr_sources,
   dependencies: libgnome_qr_deps,
   soversion: qr_soversion,
