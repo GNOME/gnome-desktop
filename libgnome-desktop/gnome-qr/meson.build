@@ -18,7 +18,7 @@ install_headers(libgnome_qr_headers,
   subdir: 'gnome-desktop-4.0/gnome-qr'
 )
 
-libgnome_qr = library('gnome-qr',
+libgnome_qr = library('gnome-qr-4',
   sources: libgnome_qr_sources,
   dependencies: libgnome_qr_deps,
   soversion: soversion,
