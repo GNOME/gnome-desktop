@@ -70,6 +70,7 @@ test_gnome_qr_sync_generate_simple_rgb_888 (void)
                                             NULL, &error);
   g_assert_nonnull (qr_code);
   g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >, 0);
 
   assert_qr_matches_reference (qr_code,
                                g_test_get_filename (G_TEST_DIST,
@@ -94,6 +95,7 @@ test_gnome_qr_sync_generate_simple_rgba_8888 (void)
                                             NULL, &error);
   g_assert_nonnull (qr_code);
   g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >, 0);
 
   assert_qr_matches_reference (qr_code,
                                g_test_get_filename (G_TEST_DIST,
