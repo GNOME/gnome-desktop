@@ -52,7 +52,7 @@ build_stable:
     - pushd ${_BUILDDIR}
     - meson compile
     - meson install
-    - meson dist
+    - meson dist --include-subprojects
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" meson test
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
