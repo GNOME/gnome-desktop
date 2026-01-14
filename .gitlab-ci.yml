@@ -40,10 +40,10 @@ build_stable:
   script:
     - meson --prefix=/usr -Dinstalled_tests=true ${_BUILDDIR}
     - pushd ${_BUILDDIR}
-    - ninja
-    - ninja install
-    - ninja dist
-    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" ninja test
+    - meson compile
+    - meson install
+    - meson dist
+    - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24" meson test
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
     - popd
