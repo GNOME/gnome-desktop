@@ -71,8 +71,8 @@ def build_install(revision):
                                '-Ddebug_tools=false',
                                '-Dudev=disabled',
                                ])
-        subprocess.check_call(['ninja', '-v', '-C', build_dir])
-        subprocess.check_call(['ninja', '-v', '-C', build_dir, 'install'],
+        subprocess.check_call(['meson', 'compile', '-C', build_dir, '-v'])
+        subprocess.check_call(['meson', 'install', '-C', build_dir],
                               env={'DESTDIR': dest_dir})
 
     return dest_dir
