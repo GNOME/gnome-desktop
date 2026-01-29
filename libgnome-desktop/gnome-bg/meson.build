@@ -40,6 +40,8 @@ libgnome_bg = library('gnome-bg-4',
   ],
 )
 
+libgnome_bg_gir = []
+
 if get_option('introspection')
   libgnome_bg_gir = gnome.generate_gir(libgnome_bg,
     sources: [libgnome_bg_headers, libgnome_bg_sources],
@@ -52,9 +54,8 @@ if get_option('introspection')
     symbol_prefix: 'gnome',
     install: true,
   )
-else
-  libgnome_bg_gir = ''
 endif
+
 libgnome_bg_dep = declare_dependency(
   sources: [
     libgnome_bg_gir,
