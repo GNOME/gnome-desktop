@@ -129,6 +129,8 @@ if get_option('build_gtk4')
     ],
   )
 
+  libgnome_desktop_base_gir = []
+
   if get_option('introspection')
     libgnome_desktop_base_gir = gnome.generate_gir(libgnome_desktop_base,
       sources: [libgnome_desktop_base_headers, libgnome_desktop_base_sources],
@@ -141,8 +143,6 @@ if get_option('build_gtk4')
       symbol_prefix: 'gnome',
       install: true,
     )
-  else
-    libgnome_desktop_base_gir = ''
   endif
 
   pkg.generate(
