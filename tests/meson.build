@@ -17,7 +17,7 @@ test_metas = []
 # XXX: The current batch of tests relies on the legacy library
 if get_option('legacy_library')
   test_programs += {
-    'bg-slide-show': {'local-test': false},
+    'bg-slide-show': {},
     'wall-clock': {},
     'languages': {},
   }
