@@ -1089,6 +1089,7 @@ script_exec_new (const char  *uri,
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
         {
+          g_clear_pointer (&tmpl, g_free);
           g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
                                "Could not create temporary sandbox directory");
           goto bail;
@@ -1140,6 +1141,7 @@ script_exec_new (const char  *uri,
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
         {
+          g_clear_pointer (&tmpl, g_free);
           g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
                                "Could not create temporary sandbox directory");
           goto bail;
