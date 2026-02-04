@@ -134,6 +134,8 @@ gnome_bg_crossfade_finalize (GObject *object)
 		g_object_unref (fade->priv->end_surface);
 		fade->priv->end_surface = NULL;
 	}
+
+	G_OBJECT_CLASS (gnome_bg_crossfade_parent_class)->finalize (object);
 }
 
 static void
