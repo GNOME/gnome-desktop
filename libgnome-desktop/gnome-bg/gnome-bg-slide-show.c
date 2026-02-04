@@ -167,6 +167,8 @@ gnome_bg_slide_show_finalize (GObject *object)
         g_queue_free_full (self->priv->stack, g_free);
 
         g_object_unref (self->priv->file);
+
+        G_OBJECT_CLASS (gnome_bg_slide_show_parent_class)->finalize (object);
 }
 
 static void
