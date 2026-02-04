@@ -1089,9 +1089,12 @@ script_exec_new (const char  *uri,
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
         {
+          int errsv = errno;
+
           g_clear_pointer (&tmpl, g_free);
-          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                               "Could not create temporary sandbox directory");
+          g_set_error (error, G_IO_ERROR, g_io_error_from_errno (errsv),
+                       "Could not create temporary sandbox directory: %s",
+                       g_strerror (errsv));
           goto bail;
         }
       exec->outfile = g_build_filename (exec->outdir, "gnome-desktop-thumbnailer.png", NULL);
@@ -1141,9 +1144,12 @@ script_exec_new (const char  *uri,
       exec->outdir = g_mkdtemp (tmpl);
       if (!exec->outdir)
         {
+          int errsv = errno;
+
           g_clear_pointer (&tmpl, g_free);
-          g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                               "Could not create temporary sandbox directory");
+          g_set_error (error, G_IO_ERROR, g_io_error_from_errno (errsv),
+                       "Could not create temporary sandbox directory: %s",
+                       g_strerror (errsv));
           goto bail;
         }
 
