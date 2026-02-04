@@ -68,6 +68,10 @@ void              gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
                                                   GCancellable        *cancellable,
                                                   GAsyncReadyCallback  callback,
                                                   gpointer             user_data);
+gboolean          gnome_bg_slide_show_load_finish (GnomeBGSlideShow  *self,
+                                                   GAsyncResult      *res,
+                                                   GError           **error);
+
 gboolean          gnome_bg_slide_show_get_slide (GnomeBGSlideShow *self,
                                                  int               frame_number,
                                                  int               width,

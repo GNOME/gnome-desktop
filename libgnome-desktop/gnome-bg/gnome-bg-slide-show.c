@@ -770,6 +770,8 @@ on_file_loaded (GFile        *file,
  * @user_data: user data
  *
  * Tries to load the slide show asynchronously.
+ *
+ * Use gnome_bg_slide_show_load_finish() to get the result.
  **/
 void
 gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
@@ -779,10 +781,37 @@ gnome_bg_slide_show_load_async (GnomeBGSlideShow    *self,
 {
     GTask *task;
 
+    g_return_if_fail (GNOME_BG_IS_SLIDE_SHOW (self));
+
     task = g_task_new (self, cancellable, callback, user_data);
+    g_task_set_source_tag (task, gnome_bg_slide_show_load_async);
 
     g_file_load_contents_async (self->priv->file, cancellable,
                                 (GAsyncReadyCallback) on_file_loaded, task);
+}
+
+/**
+ * gnome_bg_slide_show_load_finish:
+ * @self: a #GnomeBGSlideShow
+ * @res: A #GAsyncResult
+ * @error: Return location for errors, or %NULL to ignore
+ *
+ * Finish an asynchronous operation to load the slide show that was
+ * started with gnome_bg_slide_show_load_async().
+ *
+ * Returns: %FALSE on error, %TRUE otherwise
+ * Since: 50.alpha
+ */
+gboolean
+gnome_bg_slide_show_load_finish (GnomeBGSlideShow  *self,
+                                 GAsyncResult      *res,
+                                 GError           **error)
+{
+    g_return_val_if_fail (GNOME_BG_IS_SLIDE_SHOW (self), FALSE);
+    g_return_val_if_fail (g_task_is_valid (res, self), FALSE);
+    g_return_val_if_fail (g_async_result_is_tagged (res, gnome_bg_slide_show_load_async), FALSE);
+
+    return g_task_propagate_boolean (G_TASK (res), error);
 }
 
 /**
