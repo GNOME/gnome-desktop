@@ -185,14 +185,16 @@ gnome_qr_widget_snapshot (GtkWidget   *widget,
 
   gtk_widget_get_color (widget, &fg);
 
-  /* We assume that the texture foreground color is black with full opacity */
+  /* We assume that the texture foreground color is black and bg color is white */
   graphene_matrix_init_from_float (&matrix, (float[16]) {
+    /* solid white to transparent */
+    0, 0, 0, -1.0,
+    /* solid black to fg color */
     -fg.red, -fg.green, -fg.blue, 0,
     0, 0, 0, 0,
     0, 0, 0, 0,
-    0, 0, 0, fg.alpha,
   });
-  graphene_vec4_init (&offset, fg.red, fg.green, fg.blue, 0);
+  graphene_vec4_init (&offset, fg.red, fg.green, fg.blue, fg.alpha);
 
   gtk_snapshot_push_color_matrix (snapshot, &matrix, &offset);
 
@@ -330,10 +332,10 @@ on_qr_code_generated (GObject      *source,
   g_clear_object (&self->texture);
   self->texture = gdk_memory_texture_new (pixel_size,
                                           pixel_size,
-                                          GDK_MEMORY_R8G8B8A8,
+                                          GDK_MEMORY_R8G8B8,
                                           qr_data,
                                           pixel_size *
-                                          GNOME_QR_BYTES_PER_FORMAT (GNOME_QR_PIXEL_FORMAT_RGBA_8888));
+                                          GNOME_QR_BYTES_PER_FORMAT (GNOME_QR_PIXEL_FORMAT_RGB_888));
 
   gtk_widget_queue_resize (GTK_WIDGET (self));
 
@@ -356,17 +358,11 @@ gnome_qr_widget_update (GnomeQrWidget *self)
 
   self->cancellable = g_cancellable_new ();
 
-  /* We use a fully transparent BG color here.
-   * So it can be changed via CSS properties without having to
-   * regenerate the QR code.
-   */
-  GnomeQrColor bg_color = { 0 };
-
   gnome_qr_generate_qr_code_async (self->text,
                                    0,
-                                   &bg_color,
                                    NULL,
-                                   GNOME_QR_PIXEL_FORMAT_RGBA_8888,
+                                   NULL,
+                                   GNOME_QR_PIXEL_FORMAT_RGB_888,
                                    self->ecc_level,
                                    self->cancellable,
                                    on_qr_code_generated,
