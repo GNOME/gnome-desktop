@@ -22,7 +22,6 @@
 
 #include <gnome-qr/gnome-qr.h>
 
-
 /* FIXME: Ideally we want to check against visible PNGs so that we can verify
  * the actual rendering, but for now we just compare the raw data because
  * GNOME OS image in CI does not seem to provide a proper png decoder.
@@ -53,6 +52,56 @@ assert_qr_matches_reference (GBytes             *qr_code,
                    g_bytes_get_size (qr_code),
                    data,
                    size);
+}
+
+static void
+test_gnome_qr_sync_generate_simple_a_8 (void)
+{
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) qr_code = NULL;
+  size_t pixel_size;
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, NULL, NULL,
+                                            GNOME_QR_PIXEL_FORMAT_A_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, &error);
+  g_assert_nonnull (qr_code);
+  g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >, 0);
+
+  assert_qr_matches_reference (qr_code,
+                               g_test_get_filename (G_TEST_DIST,
+                                                    "data",
+                                                    "qr-gnome.org-0-a8.data",
+                                                    NULL),
+                               GNOME_QR_PIXEL_FORMAT_A_8);
+}
+
+static void
+test_gnome_qr_sync_generate_simple_g_8 (void)
+{
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) qr_code = NULL;
+  size_t pixel_size;
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, NULL, NULL,
+                                            GNOME_QR_PIXEL_FORMAT_G_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, &error);
+  g_assert_nonnull (qr_code);
+  g_assert_no_error (error);
+  g_assert_cmpuint (pixel_size, >, 0);
+
+  assert_qr_matches_reference (qr_code,
+                               g_test_get_filename (G_TEST_DIST,
+                                                    "data",
+                                                    "qr-gnome.org-0-g8.data",
+                                                    NULL),
+                               GNOME_QR_PIXEL_FORMAT_G_8);
 }
 
 static void
@@ -123,6 +172,68 @@ on_qr_code_generated (GObject      *source,
                                                     &data->pixel_size,
                                                     &data->error);
   g_main_loop_quit (data->loop);
+}
+
+static void
+test_gnome_qr_async_generate_simple_a_8 (void)
+{
+  AsyncData data = { 0 };
+  data.loop = g_main_loop_new (NULL, FALSE);
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, NULL, NULL,
+                                   GNOME_QR_PIXEL_FORMAT_A_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   on_qr_code_generated,
+                                   &data);
+
+  g_main_loop_run (data.loop);
+  g_main_loop_unref (data.loop);
+
+  g_assert_nonnull (data.qr_code);
+  g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >, 0);
+
+  assert_qr_matches_reference (data.qr_code,
+                               g_test_get_filename (G_TEST_DIST,
+                                                    "data",
+                                                    "qr-gnome.org-0-a8.data",
+                                                    NULL),
+                               GNOME_QR_PIXEL_FORMAT_A_8);
+
+  g_bytes_unref (data.qr_code);
+}
+
+static void
+test_gnome_qr_async_generate_simple_g_8 (void)
+{
+  AsyncData data = { 0 };
+  data.loop = g_main_loop_new (NULL, FALSE);
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, NULL, NULL,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   on_qr_code_generated,
+                                   &data);
+
+  g_main_loop_run (data.loop);
+  g_main_loop_unref (data.loop);
+
+  g_assert_nonnull (data.qr_code);
+  g_assert_no_error (data.error);
+  g_assert_cmpuint (data.pixel_size, >, 0);
+
+  assert_qr_matches_reference (data.qr_code,
+                               g_test_get_filename (G_TEST_DIST,
+                                                    "data",
+                                                    "qr-gnome.org-0-g8.data",
+                                                    NULL),
+                               GNOME_QR_PIXEL_FORMAT_G_8);
+
+  g_bytes_unref (data.qr_code);
 }
 
 static void
@@ -446,6 +557,98 @@ test_gnome_qr_sync_generate_rgb_with_transparent_fg (void)
 }
 
 static void
+test_gnome_qr_sync_generate_g8_with_transparent_bg (void)
+{
+  g_autoptr (GBytes) qr_code = NULL;
+  GnomeQrColor bg_color = { 255, 255, 255, 200 }; /* transparent white */
+  size_t pixel_size;
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, &bg_color, NULL,
+                                            GNOME_QR_PIXEL_FORMAT_G_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, NULL);
+
+  g_test_assert_expected_messages ();
+  g_assert_null (qr_code);
+}
+
+static void
+test_gnome_qr_sync_generate_g8_with_transparent_fg (void)
+{
+  g_autoptr (GBytes) qr_code = NULL;
+  GnomeQrColor fg_color = { 0, 0, 0, 200 }; /* transparent black */
+  size_t pixel_size;
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, NULL, &fg_color,
+                                            GNOME_QR_PIXEL_FORMAT_G_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, NULL);
+
+  g_test_assert_expected_messages ();
+  g_assert_null (qr_code);
+}
+
+static void
+test_gnome_qr_sync_generate_g8_with_non_gray_bg (void)
+{
+  g_autoptr (GBytes) qr_code = NULL;
+  GnomeQrColor bg_color = { 255, 0, 0, 255 }; /* red */
+  size_t pixel_size;
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->red == color->green && color->red == color->blue*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, &bg_color, NULL,
+                                            GNOME_QR_PIXEL_FORMAT_G_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, NULL);
+
+  g_test_assert_expected_messages ();
+  g_assert_null (qr_code);
+}
+
+static void
+test_gnome_qr_sync_generate_g8_with_non_gray_fg (void)
+{
+  g_autoptr (GBytes) qr_code = NULL;
+  GnomeQrColor fg_color = { 255, 255, 0, 255 }; /* brown */
+  size_t pixel_size;
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->red == color->green && color->red == color->blue*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
+
+  qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
+                                            0, NULL, &fg_color,
+                                            GNOME_QR_PIXEL_FORMAT_G_8,
+                                            GNOME_QR_ECC_LEVEL_HIGH,
+                                            &pixel_size,
+                                            NULL, NULL);
+
+  g_test_assert_expected_messages ();
+  g_assert_null (qr_code);
+}
+
+static void
 test_gnome_qr_async_generate_null_text (void)
 {
   g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
@@ -522,6 +725,90 @@ test_gnome_qr_async_generate_rgb_with_transparent_fg (void)
 }
 
 static void
+test_gnome_qr_async_generate_g8_with_transparent_bg (void)
+{
+  GnomeQrColor bg_color = { 125, 125, 125, 200 }; /* transparent gray */
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, &bg_color, NULL,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   NULL,
+                                   NULL);
+
+  g_test_assert_expected_messages ();
+}
+
+static void
+test_gnome_qr_async_generate_g8_with_transparent_fg (void)
+{
+  GnomeQrColor fg_color = { 125, 125, 125, 200 }; /* transparent gray */
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, NULL, &fg_color,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   NULL,
+                                   NULL);
+
+  g_test_assert_expected_messages ();
+}
+
+static void
+test_gnome_qr_async_generate_g8_with_non_gray_bg (void)
+{
+  GnomeQrColor bg_color = { 255, 0, 0, 255 }; /* red */
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->red == color->green && color->red == color->blue*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, &bg_color, NULL,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   NULL,
+                                   NULL);
+
+  g_test_assert_expected_messages ();
+}
+
+static void
+test_gnome_qr_async_generate_g8_with_non_gray_fg (void)
+{
+  GnomeQrColor fg_color = { 255, 255, 0, 255 }; /* brown */
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*color->red == color->green && color->red == color->blue*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
+
+  gnome_qr_generate_qr_code_async ("https://gnome.org",
+                                   0, NULL, &fg_color,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
+                                   GNOME_QR_ECC_LEVEL_HIGH,
+                                   NULL,
+                                   NULL,
+                                   NULL);
+
+  g_test_assert_expected_messages ();
+}
+
+static void
 test_gnome_qr_sync_generate_null_pixel_size_out (void)
 {
   g_autoptr (GBytes) qr_code = NULL;
@@ -584,6 +871,8 @@ main (int   argc,
   g_setenv ("LC_ALL", "C", TRUE);
   g_test_init (&argc, &argv, G_TEST_OPTION_ISOLATE_DIRS, NULL);
 
+  g_test_add_func ("/gnome-qr/sync/generate-simple-a-8", test_gnome_qr_sync_generate_simple_a_8);
+  g_test_add_func ("/gnome-qr/sync/generate-simple-g-8", test_gnome_qr_sync_generate_simple_g_8);
   g_test_add_func ("/gnome-qr/sync/generate-simple-rgb-888", test_gnome_qr_sync_generate_simple_rgb_888);
   g_test_add_func ("/gnome-qr/sync/generate-simple-rgba-8888", test_gnome_qr_sync_generate_simple_rgba_8888);
   g_test_add_func ("/gnome-qr/sync/generate-custom-colors-fedora", test_gnome_qr_sync_generate_custom_colors_fedora);
@@ -593,7 +882,13 @@ main (int   argc,
   g_test_add_func ("/gnome-qr/sync/generate-empty-text", test_gnome_qr_sync_generate_empty_text);
   g_test_add_func ("/gnome-qr/sync/generate-rgb-with-transparent-bg", test_gnome_qr_sync_generate_rgb_with_transparent_bg);
   g_test_add_func ("/gnome-qr/sync/generate-rgb-with-transparent-fg", test_gnome_qr_sync_generate_rgb_with_transparent_fg);
+  g_test_add_func ("/gnome-qr/sync/generate-g8-with-transparent-bg", test_gnome_qr_sync_generate_g8_with_transparent_bg);
+  g_test_add_func ("/gnome-qr/sync/generate-g8-with-transparent-fg", test_gnome_qr_sync_generate_g8_with_transparent_fg);
+  g_test_add_func ("/gnome-qr/sync/generate-g8-with-non-gray-bg", test_gnome_qr_sync_generate_g8_with_non_gray_bg);
+  g_test_add_func ("/gnome-qr/sync/generate-g8-with-non-gray-fg", test_gnome_qr_sync_generate_g8_with_non_gray_fg);
   g_test_add_func ("/gnome-qr/sync/generate-null-pixel-size-out", test_gnome_qr_sync_generate_null_pixel_size_out);
+  g_test_add_func ("/gnome-qr/async/generate-simple-a-8", test_gnome_qr_async_generate_simple_a_8);
+  g_test_add_func ("/gnome-qr/async/generate-simple-g-8", test_gnome_qr_async_generate_simple_g_8);
   g_test_add_func ("/gnome-qr/async/generate-simple-rgb-888", test_gnome_qr_async_generate_simple_rgb_888);
   g_test_add_func ("/gnome-qr/async/generate-simple-rgba-8888", test_gnome_qr_async_generate_simple_rgba_8888);
   g_test_add_func ("/gnome-qr/async/generate-custom-colors-fedora", test_gnome_qr_async_generate_custom_colors_fedora);
@@ -603,6 +898,10 @@ main (int   argc,
   g_test_add_func ("/gnome-qr/async/generate-empty-text", test_gnome_qr_async_generate_empty_text);
   g_test_add_func ("/gnome-qr/async/generate-rgb-with-transparent-bg", test_gnome_qr_async_generate_rgb_with_transparent_bg);
   g_test_add_func ("/gnome-qr/async/generate-rgb-with-transparent-fg", test_gnome_qr_async_generate_rgb_with_transparent_fg);
+  g_test_add_func ("/gnome-qr/async/generate-g8-with-transparent-bg", test_gnome_qr_async_generate_g8_with_transparent_bg);
+  g_test_add_func ("/gnome-qr/async/generate-g8-with-transparent-fg", test_gnome_qr_async_generate_g8_with_transparent_fg);
+  g_test_add_func ("/gnome-qr/async/generate-g8-with-non-gray-bg", test_gnome_qr_async_generate_g8_with_non_gray_bg);
+  g_test_add_func ("/gnome-qr/async/generate-g8-with-non-gray-fg", test_gnome_qr_async_generate_g8_with_non_gray_fg);
   g_test_add_func ("/gnome-qr/finish/generate-null-pixel-size-out", test_gnome_qr_finish_generate_null_pixel_size_out);
 
   return g_test_run ();

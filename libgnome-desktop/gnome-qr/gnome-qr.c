@@ -39,6 +39,8 @@ G_DEFINE_ENUM_TYPE (GnomeQrEccLevel, gnome_qr_ecc_level,
   G_DEFINE_ENUM_VALUE (GNOME_QR_ECC_LEVEL_HIGH, "high"))
 
 G_DEFINE_ENUM_TYPE (GnomeQrPixelFormat, gnome_qr_pixel_format,
+  G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_A_8, "a-8"),
+  G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_G_8, "g-8"),
   G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_RGB_888, "rgb-888"),
   G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_RGBA_8888, "rgba-8888"))
 
@@ -87,12 +89,29 @@ fill_block (GByteArray         *array,
         guint i;
 
         for (i = 0; i < block_size; i++) {
-                g_byte_array_append (array, &color->red, 1);
-                g_byte_array_append (array, &color->green, 1);
-                g_byte_array_append (array, &color->blue, 1);
-
-                if (format == GNOME_QR_PIXEL_FORMAT_RGBA_8888)
+                switch (format) {
+                case GNOME_QR_PIXEL_FORMAT_A_8:
                         g_byte_array_append (array, &color->alpha, 1);
+                        break;
+
+                case GNOME_QR_PIXEL_FORMAT_G_8:
+                        /* Use the red channel, as we assert that all the
+                         * values must be equal */
+                        g_byte_array_append (array, &color->red, 1);
+                        break;
+
+                case GNOME_QR_PIXEL_FORMAT_RGB_888:
+                case GNOME_QR_PIXEL_FORMAT_RGBA_8888:
+                        g_byte_array_append (array, &color->red, 1);
+                        g_byte_array_append (array, &color->green, 1);
+                        g_byte_array_append (array, &color->blue, 1);
+
+                        if (format == GNOME_QR_PIXEL_FORMAT_RGBA_8888)
+                                g_byte_array_append (array, &color->alpha, 1);
+                        break;
+                default:
+                        g_assert_not_reached ();
+                }
         }
 }
 
@@ -103,8 +122,21 @@ check_color_validity (const GnomeQrColor *color,
         if (!color)
                 return TRUE;
 
-        if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
+        switch (format) {
+        case GNOME_QR_PIXEL_FORMAT_A_8:
+        case GNOME_QR_PIXEL_FORMAT_RGBA_8888:
+                break;
+
+        case GNOME_QR_PIXEL_FORMAT_G_8:
+                g_return_val_if_fail (color->red == color->green &&
+                                      color->red == color->blue, FALSE);
+                /* fallthrough */
+        case GNOME_QR_PIXEL_FORMAT_RGB_888:
                 g_return_val_if_fail (color->alpha == 255, FALSE);
+                break;
+
+        default:
+                g_assert_not_reached ();
         }
 
         return TRUE;
@@ -148,6 +180,7 @@ gnome_qr_generate_qr_code_sync (const char          *text,
         uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
         static const GnomeQrColor default_bg_color = GNOME_QR_COLOR_WHITE;
         static const GnomeQrColor default_fg_color = GNOME_QR_COLOR_BLACK;
+        static const GnomeQrColor transparent = GNOME_QR_COLOR_TRANSPARENT;
         gint qr_size, block_size, total_size;
         gint column, row, i;
 
@@ -178,6 +211,10 @@ gnome_qr_generate_qr_code_sync (const char          *text,
 
         if (g_cancellable_set_error_if_cancelled (cancellable, error))
                 return NULL;
+
+        if (format == GNOME_QR_PIXEL_FORMAT_A_8 && !bg_color) {
+                bg_color = &transparent;
+        }
 
         if (!bg_color)
                 bg_color = &default_bg_color;
