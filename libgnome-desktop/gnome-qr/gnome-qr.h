@@ -43,6 +43,13 @@
         ((format) == GNOME_QR_PIXEL_FORMAT_RGB_888 ? 3 : 4)
 
 /**
+ * GNOME_QR_COLOR_TRANSPARENT:
+ *
+ * Predefined transparent color (0, 0, 0, 0).
+ */
+#define GNOME_QR_COLOR_TRANSPARENT ((GnomeQrColor) { 0, 0, 0, 0 })
+
+/**
  * GNOME_QR_COLOR_WHITE:
  *
  * Predefined white color (255, 255, 255, 255).
