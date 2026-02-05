@@ -234,7 +234,9 @@ generate_qr_code_in_thread (GTask        *task,
  * gnome_qr_generate_qr_code_async:
  * @text: The text of which generate the QR code
  * @requested_size: The requested size (width and height) in pixels of the QR code.
- *   Only square QR codes are supported.
+ *   Only square QR codes are supported. If the requested size is smaller than
+ *   the minimum required size for the QR code, it will be generated with 1 pixel
+ *   per block.
  * @bg_color: (nullable): The background color of the code
  *   or %NULL to use default (white)
  * @fg_color: (nullable): The foreground color of the code
