@@ -97,6 +97,7 @@ qrcodegen_dep = qrcodegen.get_variable('qrcodegen_dep')
 subdir('libgnome-desktop')
 subdir('po')
 subdir('tests')
+subdir('examples')
 
 if get_option('desktop_docs')
   subdir('desktop-docs/fdl')
