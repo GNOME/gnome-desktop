@@ -332,10 +332,10 @@ on_qr_code_generated (GObject      *source,
   g_clear_object (&self->texture);
   self->texture = gdk_memory_texture_new (pixel_size,
                                           pixel_size,
-                                          GDK_MEMORY_R8G8B8,
+                                          GDK_MEMORY_G8,
                                           qr_data,
                                           pixel_size *
-                                          GNOME_QR_BYTES_PER_FORMAT (GNOME_QR_PIXEL_FORMAT_RGB_888));
+                                          GNOME_QR_BYTES_PER_FORMAT (GNOME_QR_PIXEL_FORMAT_G_8));
 
   gtk_widget_queue_resize (GTK_WIDGET (self));
 
@@ -362,7 +362,7 @@ gnome_qr_widget_update (GnomeQrWidget *self)
                                    0,
                                    NULL,
                                    NULL,
-                                   GNOME_QR_PIXEL_FORMAT_RGB_888,
+                                   GNOME_QR_PIXEL_FORMAT_G_8,
                                    self->ecc_level,
                                    self->cancellable,
                                    on_qr_code_generated,
