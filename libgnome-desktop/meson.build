@@ -267,6 +267,7 @@ if get_option('legacy_library')
       extra_args: ['-DGNOME_DESKTOP_USE_UNSTABLE_API', '--quiet', '--warn-all'],
       identifier_prefix: 'Gnome',
       symbol_prefix: 'gnome',
+      fatal_warnings: true,
       install: true
     )
   endif
