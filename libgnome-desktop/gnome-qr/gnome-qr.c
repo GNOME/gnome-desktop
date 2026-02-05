@@ -96,6 +96,20 @@ fill_block (GByteArray         *array,
         }
 }
 
+G_ALWAYS_INLINE static inline gboolean
+check_color_validity (const GnomeQrColor *color,
+                      GnomeQrPixelFormat  format)
+{
+        if (!color)
+                return TRUE;
+
+        if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
+                g_return_val_if_fail (color->alpha == 255, FALSE);
+        }
+
+        return TRUE;
+}
+
 /**
  * gnome_qr_generate_qr_code_sync:
  * @text: the text of which generate the QR code
@@ -140,11 +154,8 @@ gnome_qr_generate_qr_code_sync (const char          *text,
         g_return_val_if_fail (text != NULL, NULL);
         g_return_val_if_fail (*text != '\0', NULL);
         g_return_val_if_fail (pixel_size_out != NULL, NULL);
-
-        if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
-                g_return_val_if_fail (!bg_color || bg_color->alpha == 255, NULL);
-                g_return_val_if_fail (!fg_color || fg_color->alpha == 255, NULL);
-        }
+        g_return_val_if_fail (check_color_validity (bg_color, format), NULL);
+        g_return_val_if_fail (check_color_validity (fg_color, format), NULL);
 
         if (g_cancellable_set_error_if_cancelled (cancellable, error))
                 return NULL;
@@ -268,11 +279,8 @@ gnome_qr_generate_qr_code_async (const char          *text,
 
         g_return_if_fail (text != NULL);
         g_return_if_fail (*text != '\0');
-
-        if (format == GNOME_QR_PIXEL_FORMAT_RGB_888) {
-                g_return_if_fail (!bg_color || bg_color->alpha == 255);
-                g_return_if_fail (!fg_color || fg_color->alpha == 255);
-        }
+        g_return_if_fail (check_color_validity (bg_color, format));
+        g_return_if_fail (check_color_validity (fg_color, format));
 
         data = g_new0 (GnomeQrCodeData, 1);
         data->text = g_strdup (text);

@@ -407,7 +407,9 @@ test_gnome_qr_sync_generate_rgb_with_transparent_bg (void)
   size_t pixel_size;
 
   g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                         "*!bg_color || bg_color->alpha == 255*");
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
 
   qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
                                             0, &bg_color, NULL,
@@ -428,7 +430,9 @@ test_gnome_qr_sync_generate_rgb_with_transparent_fg (void)
   size_t pixel_size;
 
   g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                         "*!fg_color || fg_color->alpha == 255*");
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
 
   qr_code = gnome_qr_generate_qr_code_sync ("https://gnome.org",
                                             0, NULL, &fg_color,
@@ -481,7 +485,9 @@ test_gnome_qr_async_generate_rgb_with_transparent_bg (void)
   GnomeQrColor bg_color = { 255, 255, 255, 200 }; /* transparent white */
 
   g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                         "*!bg_color || bg_color->alpha == 255*");
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (bg_color, format)*");
 
   gnome_qr_generate_qr_code_async ("https://gnome.org",
                                    0, &bg_color, NULL,
@@ -500,7 +506,9 @@ test_gnome_qr_async_generate_rgb_with_transparent_fg (void)
   GnomeQrColor fg_color = { 0, 0, 0, 200 }; /* transparent black */
 
   g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                         "*!fg_color || fg_color->alpha == 255*");
+                         "*color->alpha == 255*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*check_color_validity (fg_color, format)*");
 
   gnome_qr_generate_qr_code_async ("https://gnome.org",
                                    0, NULL, &fg_color,
