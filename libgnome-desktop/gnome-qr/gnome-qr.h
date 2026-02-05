@@ -40,7 +40,9 @@
  * Returns: the number of bytes
  */
 #define GNOME_QR_BYTES_PER_FORMAT(format) \
-        ((format) == GNOME_QR_PIXEL_FORMAT_RGB_888 ? 3 : 4)
+        ((format) == GNOME_QR_PIXEL_FORMAT_A_8 ? 1 : \
+         ((format) == GNOME_QR_PIXEL_FORMAT_G_8 ? 1 : \
+          (format) == GNOME_QR_PIXEL_FORMAT_RGB_888 ? 3 : 4))
 
 /**
  * GNOME_QR_COLOR_TRANSPARENT:
@@ -88,6 +90,8 @@ typedef enum {
  * Pixel formats for the generated QR code image data.
  */
 typedef enum {
+        GNOME_QR_PIXEL_FORMAT_A_8,
+        GNOME_QR_PIXEL_FORMAT_G_8,
         GNOME_QR_PIXEL_FORMAT_RGB_888,
         GNOME_QR_PIXEL_FORMAT_RGBA_8888,
 } GnomeQrPixelFormat;
