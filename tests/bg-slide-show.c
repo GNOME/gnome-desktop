@@ -81,6 +81,7 @@ main (int   argc,
       char *argv[])
 {
 	const char *basedir;
+	int ret;
 
 	g_test_init (&argc, &argv, NULL);
 
@@ -92,7 +93,8 @@ main (int   argc,
 	 * is the same as the test data in order to load the test
 	 * slide show easily.
 	 */
-	chdir (basedir);
+	ret = chdir (basedir);
+	g_assert_cmpint (ret, ==, 0);
 
 	g_test_add_func ("/bg-slide-show/starttime-no-dst", test_starttime_no_dst);
 	g_test_add_func ("/bg-slide-show/starttime-dst", test_starttime_dst);
