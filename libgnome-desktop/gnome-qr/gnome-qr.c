@@ -32,6 +32,16 @@
 #include <math.h>
 #include <qrcodegen.h>
 
+G_DEFINE_ENUM_TYPE (GnomeQrEccLevel, gnome_qr_ecc_level,
+  G_DEFINE_ENUM_VALUE (GNOME_QR_ECC_LEVEL_LOW, "low"),
+  G_DEFINE_ENUM_VALUE (GNOME_QR_ECC_LEVEL_MEDIUM, "medium"),
+  G_DEFINE_ENUM_VALUE (GNOME_QR_ECC_LEVEL_QUARTILE, "quartile"),
+  G_DEFINE_ENUM_VALUE (GNOME_QR_ECC_LEVEL_HIGH, "high"))
+
+G_DEFINE_ENUM_TYPE (GnomeQrPixelFormat, gnome_qr_pixel_format,
+  G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_RGB_888, "rgb-888"),
+  G_DEFINE_ENUM_VALUE (GNOME_QR_PIXEL_FORMAT_RGBA_8888, "rgba-8888"))
+
 typedef struct
 {
         char *text;

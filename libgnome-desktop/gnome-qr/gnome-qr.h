@@ -102,6 +102,10 @@ typedef struct {
         guint8 alpha;
 } GnomeQrColor;
 
+GType       gnome_qr_ecc_level_get_type            (void);
+
+GType       gnome_qr_pixel_format_get_type         (void);
+
 GBytes *    gnome_qr_generate_qr_code_sync         (const char          *text,
                                                     size_t               requested_size,
                                                     const GnomeQrColor  *bg_color,
