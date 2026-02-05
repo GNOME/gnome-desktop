@@ -34,6 +34,10 @@ bg_soversion = bg_libversion.split('.')[0]
 qr_libversion = '0.0.1'
 qr_soversion = qr_libversion.split('.')[0]
 
+# Compatibilty versions for libgnome-qr
+qr_gtk_libversion = '0.0.1'
+qr_gtk_soversion = qr_gtk_libversion.split('.')[0]
+
 # Compatibility versions for libgnome-desktop-3
 compat_libversion = '21.0.0'
 compat_soversion = compat_libversion.split('.')[0]
@@ -105,6 +109,7 @@ qrcodegen_dep = qrcodegen.get_variable('qrcodegen_dep')
 subdir('libgnome-desktop')
 subdir('po')
 subdir('tests')
+subdir('examples')
 
 if get_option('desktop_docs')
   subdir('desktop-docs/fdl')
