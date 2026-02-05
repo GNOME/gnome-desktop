@@ -51,7 +51,6 @@ struct _GnomeQrWidget
   char *alternative_text;
   size_t size;
   GnomeQrEccLevel ecc_level;
-  GdkRGBA fg_color;
 
   GdkTexture *texture;
   GCancellable *cancellable;
@@ -168,6 +167,9 @@ gnome_qr_widget_snapshot (GtkWidget   *widget,
                           GtkSnapshot *snapshot)
 {
   GnomeQrWidget *self = GNOME_QR_WIDGET (widget);
+  graphene_matrix_t matrix;
+  graphene_vec4_t offset;
+  GdkRGBA fg;
   int width, height, size;
   int x, y;
 
@@ -181,10 +183,25 @@ gnome_qr_widget_snapshot (GtkWidget   *widget,
   x = (width - size) / 2;
   y = (height - size) / 2;
 
+  gtk_widget_get_color (widget, &fg);
+
+  /* We assume that the texture foreground color is black with full opacity */
+  graphene_matrix_init_from_float (&matrix, (float[16]) {
+    -fg.red, -fg.green, -fg.blue, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, fg.alpha,
+  });
+  graphene_vec4_init (&offset, fg.red, fg.green, fg.blue, 0);
+
+  gtk_snapshot_push_color_matrix (snapshot, &matrix, &offset);
+
   gtk_snapshot_append_scaled_texture (snapshot,
                                       self->texture,
                                       GSK_SCALING_FILTER_NEAREST,
                                       &GRAPHENE_RECT_INIT (x, y, size, size));
+
+  gtk_snapshot_pop (snapshot);
 }
 
 static void
@@ -206,24 +223,6 @@ gnome_qr_widget_measure (GtkWidget      *widget,
 }
 
 static void
-gnome_qr_widget_css_changed (GtkWidget         *widget,
-                             GtkCssStyleChange *change)
-{
-  GnomeQrWidget *self = GNOME_QR_WIDGET (widget);
-  GdkRGBA fg_color;
-
-  gtk_widget_get_color (widget, &fg_color);
-
-  if (!gdk_rgba_equal (&fg_color, &self->fg_color))
-    {
-      self->fg_color = fg_color;
-      gnome_qr_widget_update (GNOME_QR_WIDGET (widget));
-    }
-
-  GTK_WIDGET_CLASS (gnome_qr_widget_parent_class)->css_changed (widget, change);
-}
-
-static void
 gnome_qr_widget_class_init (GnomeQrWidgetClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -236,7 +235,6 @@ gnome_qr_widget_class_init (GnomeQrWidgetClass *klass)
 
   widget_class->snapshot = gnome_qr_widget_snapshot;
   widget_class->measure = gnome_qr_widget_measure;
-  widget_class->css_changed = gnome_qr_widget_css_changed;
 
   /**
    * GnomeQrWidget::changed:
@@ -363,17 +361,11 @@ gnome_qr_widget_update (GnomeQrWidget *self)
    * regenerate the QR code.
    */
   GnomeQrColor bg_color = { 0 };
-  GnomeQrColor fg_color = { 0, 0, 0, 255 };
-
-  fg_color.red = (guint8) (self->fg_color.red * 255);
-  fg_color.green = (guint8) (self->fg_color.green * 255);
-  fg_color.blue = (guint8) (self->fg_color.blue * 255);
-  fg_color.alpha = (guint8) (self->fg_color.alpha * 255);
 
   gnome_qr_generate_qr_code_async (self->text,
                                    0,
                                    &bg_color,
-                                   &fg_color,
+                                   NULL,
                                    GNOME_QR_PIXEL_FORMAT_RGBA_8888,
                                    self->ecc_level,
                                    self->cancellable,
