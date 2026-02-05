@@ -44,7 +44,7 @@ compat_soversion = compat_libversion.split('.')[0]
 
 gdk_pixbuf_req = '>= 2.36.5'
 gtk3_req = '>= 3.3.6'
-gtk4_req = '>= 4.4.0'
+gtk4_req = '>= 4.10.0'
 glib_req = '>= 2.53.0'
 xrandr_req = '>= 1.3'
 schemas_req = '>= 3.27.0'
