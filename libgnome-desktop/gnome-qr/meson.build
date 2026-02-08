@@ -17,12 +17,22 @@ install_headers(libgnome_qr_headers,
   subdir: 'gnome-desktop-4.0/gnome-qr'
 )
 
+gnome_qr_ld_flags = []
+gnome_qr_symbol_map = 'gnome-qr-symbols.map'
+gnome_qr_symbol_map_arg = '-Wl,--version-script=@0@'.format(
+  meson.current_source_dir() / gnome_qr_symbol_map)
+if cc.has_link_argument(gnome_qr_symbol_map_arg)
+  gnome_qr_ld_flags += gnome_qr_symbol_map_arg
+endif
+
 libgnome_qr = library('gnome-qr',
   sources: libgnome_qr_sources,
   dependencies: libgnome_qr_deps,
   soversion: qr_soversion,
   version: qr_libversion,
   c_args: libargs,
+  link_args: gnome_qr_ld_flags,
+  link_depends: files(gnome_qr_symbol_map),
   install: true,
   include_directories: [
     include_directories('.'),
