@@ -65,12 +65,19 @@ def build_install(revision):
         rm_rf(build_dir)
         rm_rf(revision)
 
+        introspection_arg = []
+        if subprocess.call(['git', 'merge-base',
+                            '--is-ancestor',
+                            '94b253000f081423a3c813d340ed486fc170768d',
+                            revision]) == 0:
+            introspection_arg = ['-Dintrospection=true']
+
         subprocess.check_call(['meson', 'setup', build_dir,
                                '--prefix=/usr', '--libdir=lib',
                                '-Ddesktop_docs=false',
                                '-Ddebug_tools=false',
                                '-Dudev=disabled',
-                               ])
+                               ] + introspection_arg)
         subprocess.check_call(['meson', 'compile', '-C', build_dir, '-v'])
         subprocess.check_call(['meson', 'install', '-C', build_dir],
                               env={'DESTDIR': dest_dir})
@@ -97,25 +104,36 @@ def compare(old_tree, new_tree, sublib, libversion):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('old', help='the previous revision, considered the reference')
+    parser.add_argument('--old-desktop', help='the previous revision of desktop library, considered the reference',
+                        required=True)
+    parser.add_argument('--old-desktop-legacy', help='the previous revision of desktop library, considered the reference',
+                        required=True)
+    parser.add_argument('--old-bg', help='the previous revision of the background library, considered the reference',
+                        required=True)
     parser.add_argument('new', help='the new revision, to compare to the reference')
 
     args = parser.parse_args()
 
-    if args.old == args.new:
+    if (args.old_desktop == args.new and
+        args.old_desktop_legacy == args.new and
+        args.old_bg == args.new):
         print("Let's not waste time comparing something to itself")
         sys.exit(0)
 
-    old_tree = build_install(args.old)
+    old_desktop_legacy_tree = build_install(args.old_desktop_legacy)
+    old_desktop_tree = build_install(args.old_desktop)
+    old_bg_tree = build_install(args.old_bg)
     new_tree = build_install(args.new)
 
     try:
-        compare(old_tree, new_tree, 'desktop', 3)
-        compare(old_tree, new_tree, 'desktop', 4)
-        compare(old_tree, new_tree, 'bg', 4)
+        compare(old_desktop_legacy_tree, new_tree, 'desktop', 3)
+        print(f'Hurray! Desktop3 {args.old_desktop_legacy} and {args.new} are ABI-compatible!')
+
+        compare(old_desktop_tree, new_tree, 'desktop', 4)
+        print(f'Hurray! Desktop4 {args.old_desktop} and {args.new} are ABI-compatible!')
+
+        compare(old_bg_tree, new_tree, 'bg', 4)
+        print(f'Hurray! BG {args.old_bg} and {args.new} are ABI-compatible!')
 
     except Exception:
         sys.exit(1)
-
-    print(f'Hurray! {args.old} and {args.new} are ABI-compatible!')
-
