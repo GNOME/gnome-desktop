@@ -42,6 +42,7 @@ build_stable:
     LAST_DESKTOP_LEGACY_ABI_BREAK: ddaa0e8b1868495f0e3ca5e28f2242bdf2a88161
     LAST_BG_ABI_BREAK: 0da1fcac914ad4c67f016bda7864c4b153cbfbaa
     LAST_QR_ABI_BREAK: 25f3e91eadd74273210941943336c8f073cf1267
+    LAST_QR_GTK_ABI_BREAK: e2b9fbcd35da95f60296b6b4e43f6926ca9f1019
 
   before_script:
     # Undo delangification present in the Fedora Docker images
@@ -65,6 +66,7 @@ build_stable:
        --old-desktop=${LAST_DESKTOP_ABI_BREAK}
        --old-bg=${LAST_BG_ABI_BREAK}
        --old-qr=${LAST_QR_ABI_BREAK}
+       --old-qr-gtk=${LAST_QR_GTK_ABI_BREAK}
        $(git rev-parse HEAD)
 
     - cp -r "${_BUILDDIR}/meson-dist/" "${CI_PROJECT_DIR}/public-dist/"
