@@ -78,16 +78,16 @@ def build_install(revision):
     return dest_dir
 
 
-def compare(old_tree, new_tree, libversion):
+def compare(old_tree, new_tree, sublib, libversion):
     print(format_title(f'# Comparing the two ABIs'), end='\n\n', flush=True)
 
     old_headers = os.path.join(old_tree, 'usr', 'include')
     old_lib = os.path.join(old_tree, 'usr', 'lib',
-                           f'libgnome-desktop-{libversion}.so')
+                           f'libgnome-{sublib}-{libversion}.so')
 
     new_headers = os.path.join(new_tree, 'usr', 'include')
     new_lib = os.path.join(new_tree, 'usr', 'lib',
-                           f'libgnome-desktop-{libversion}.so')
+                           f'libgnome-{sublib}-{libversion}.so')
 
     subprocess.check_call([
         'abidiff', '--headers-dir1', old_headers, '--headers-dir2', new_headers,
@@ -110,8 +110,9 @@ if __name__ == '__main__':
     new_tree = build_install(args.new)
 
     try:
-        compare(old_tree, new_tree, 3)
-        compare(old_tree, new_tree, 4)
+        compare(old_tree, new_tree, 'desktop', 3)
+        compare(old_tree, new_tree, 'desktop', 4)
+        compare(old_tree, new_tree, 'bg', 4)
 
     except Exception:
         sys.exit(1)
