@@ -110,19 +110,23 @@ if __name__ == '__main__':
                         required=True)
     parser.add_argument('--old-bg', help='the previous revision of the background library, considered the reference',
                         required=True)
+    parser.add_argument('--old-qr', help='the previous revision of the QR library, considered the reference',
+                        required=True)
     parser.add_argument('new', help='the new revision, to compare to the reference')
 
     args = parser.parse_args()
 
     if (args.old_desktop == args.new and
         args.old_desktop_legacy == args.new and
-        args.old_bg == args.new):
+        args.old_bg == args.new and
+        args.old_qr == args.new):
         print("Let's not waste time comparing something to itself")
         sys.exit(0)
 
     old_desktop_legacy_tree = build_install(args.old_desktop_legacy)
     old_desktop_tree = build_install(args.old_desktop)
     old_bg_tree = build_install(args.old_bg)
+    old_qr_tree = build_install(args.old_qr)
     new_tree = build_install(args.new)
 
     try:
@@ -134,6 +138,9 @@ if __name__ == '__main__':
 
         compare(old_bg_tree, new_tree, 'bg', 4)
         print(f'Hurray! BG {args.old_bg} and {args.new} are ABI-compatible!')
+
+        compare(old_qr_tree, new_tree, 'qr', 4)
+        print(f'Hurray! QR {args.old_qr} and {args.new} are ABI-compatible!')
 
     except Exception:
         sys.exit(1)
