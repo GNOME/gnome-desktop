@@ -23,13 +23,23 @@ build_stable:
   needs: []
   variables:
     _BUILDDIR: "_builddir"
-    LAST_ABI_BREAK: d720a52c259692f57bc098c7f1f16080aea52f86
+    LAST_DESKTOP_ABI_BREAK: 65687d8a80809db7153e358152320bc508fcc276
+    LAST_DESKTOP_LEGACY_ABI_BREAK: acb3a40014c8586c427b339b98ca178abdb5626b
+    LAST_BG_ABI_BREAK: c2c7414c17533f190cd33f710a70d41680cb8406
     DEPENDENCIES: gtk3-devel gtk4-devel gsettings-desktop-schemas-devel gettext
                   gtk-doc libxkbcommon-devel xkeyboard-config-devel itstool
                   gobject-introspection-devel systemd-devel iso-codes-devel
                   libseccomp-devel gcc gcc-c++ glibc-devel
                   meson redhat-rpm-config
-    TEST_DEPENDENCIES: gnome-desktop-testing xorg-x11-server-Xvfb glibc-langpack-en glibc-langpack-he glibc-langpack-ja abattis-cantarell-fonts libabigail git
+    TEST_DEPENDENCIES: ccache
+                       gnome-desktop-testing
+                       xorg-x11-server-Xvfb
+                       glibc-langpack-en
+                       glibc-langpack-he
+                       glibc-langpack-ja
+                       abattis-cantarell-fonts
+                       libabigail
+                       git
   before_script:
     # Undo delangification present in the Fedora Docker images
     - rm -f /etc/rpm/macros.image-language-conf
@@ -47,7 +57,13 @@ build_stable:
     - G_MESSAGES_DEBUG=all xvfb-run -a -s "-screen 0 1024x768x24"
                      gnome-desktop-testing-runner --report-directory=test-results gnome-desktop
     - popd
-    - .ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+    - .ci/check-abi
+       --old-desktop-legacy=${LAST_DESKTOP_LEGACY_ABI_BREAK}
+       --old-desktop=${LAST_DESKTOP_ABI_BREAK}
+       --old-bg=${LAST_BG_ABI_BREAK}
+       --old-qr=${LAST_QR_ABI_BREAK}
+       --old-qr-gtk=${LAST_QR_GTK_ABI_BREAK}
+       $(git rev-parse HEAD)
 
     - cp -r "${_BUILDDIR}/meson-dist/" "${CI_PROJECT_DIR}/public-dist/"
   artifacts:
