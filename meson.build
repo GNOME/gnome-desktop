@@ -26,6 +26,10 @@ project('gnome-desktop', 'c',
 libversion = '2.1.4'
 soversion = libversion.split('.')[0]
 
+# Compatibilty versions for libgnome-bg
+bg_libversion = '2.1.4'
+bg_soversion = bg_libversion.split('.')[0]
+
 # Compatibility versions for libgnome-desktop-3
 compat_libversion = '21.0.0'
 compat_soversion = compat_libversion.split('.')[0]
