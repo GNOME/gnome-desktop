@@ -18,6 +18,11 @@ test_metas = []
 if get_option('build_gtk4')
   test_programs += {
     'bg-slide-show': {'dependencies': [libgnome_bg_dep]},
+  }
+endif
+
+if use_qr_feature
+  test_programs += {
     'qr-code': { 'dependencies': [gnome_qr_dep]},
   }
 endif

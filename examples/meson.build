@@ -1,6 +1,6 @@
 examples = {}
 
-if get_option('build_gtk4')
+if use_qr_feature
   examples += {
     'qr-widget-example': {
       'dependencies': gnome_qr_gtk_dep,

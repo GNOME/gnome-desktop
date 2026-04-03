@@ -171,8 +171,10 @@ if get_option('build_gtk4')
   )
 
   subdir('gnome-bg')
-  subdir('gnome-qr')
-  subdir('gnome-qr-gtk')
+  if use_qr_feature
+    subdir('gnome-qr')
+    subdir('gnome-qr-gtk')
+  endif
 endif
 
 ### Legacy ###
