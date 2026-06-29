@@ -1,6 +1,6 @@
 project('gnome-desktop', 'c',
   meson_version: '>= 1.1.0',
-  version: '44.4',
+  version: '51.alpha',
   license: ['GPL-2.0-or-later', 'LGPL-2.1-or-later'],
   default_options: [
     'c_std=gnu99',
