@@ -31,12 +31,12 @@
 #include <glib/gstdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <sys/personality.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #ifdef ENABLE_SECCOMP
 #include <errno.h>
+#include <sys/personality.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <sys/utsname.h>
