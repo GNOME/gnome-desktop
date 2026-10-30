@@ -992,10 +992,8 @@ thumbnail_file_metadata_is_valid (const char *path,
 static gboolean
 validate_thumbnail_path (const char                *path,
                          const char                *uri,
-                         time_t                     mtime,
-                         GnomeDesktopThumbnailSize  size)
+                         time_t                     mtime)
 {
-  /* size is intentionally ignored */
   return thumbnail_file_metadata_is_valid (path, uri, mtime);
 }
 
@@ -1006,7 +1004,7 @@ lookup_thumbnail_path (const char                *uri,
 {
   g_autofree char *path = thumbnail_path (uri, size);
 
-  if (!validate_thumbnail_path (path, uri, mtime, size))
+  if (!validate_thumbnail_path (path, uri, mtime))
     return NULL;
 
   return g_steal_pointer (&path);
@@ -1014,12 +1012,11 @@ lookup_thumbnail_path (const char                *uri,
 
 static char *
 lookup_failed_thumbnail_path (const char                *uri,
-                              time_t                     mtime,
-                              GnomeDesktopThumbnailSize  size)
+                              time_t                     mtime)
 {
   g_autofree char *path = thumbnail_failed_path (uri);
 
-  if (!validate_thumbnail_path (path, uri, mtime, size))
+  if (!validate_thumbnail_path (path, uri, mtime))
     return NULL;
 
   return g_steal_pointer (&path);
@@ -1076,7 +1073,7 @@ gnome_desktop_thumbnail_factory_has_valid_failed_thumbnail (GnomeDesktopThumbnai
 
   g_return_val_if_fail (uri != NULL, FALSE);
 
-  path = lookup_failed_thumbnail_path (uri, mtime, factory->priv->size);
+  path = lookup_failed_thumbnail_path (uri, mtime);
   if (path == NULL)
     return FALSE;
 
