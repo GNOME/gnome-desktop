@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2002 Red Hat, Inc.
  * Copyright (C) 2010 Carlos Garcia Campos <carlosgc@gnome.org>
+ * Copyright (C) 2013 Canonical Limited
  *
  * This file is part of the Gnome Library.
  *
@@ -22,6 +23,7 @@
  * Boston, MA 02110-1301, USA.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
+ * Author: Ryan Lortie <desrt@desrt.ca>
  */
 
 /**
@@ -828,21 +830,173 @@ thumbnail_failed_path (const char *uri)
   return path;
 }
 
+/* The following PNG tEXt chunk parser is adapted from gio/thumbnail-verify.c
+ * in GLib */
+
+typedef struct {
+  gboolean    has_uri;
+  gboolean    has_mtime;
+  const char *uri;
+  gsize       uri_len;
+  const char *mtime;
+  gsize       mtime_len;
+} ThumbnailTextInfo;
+
+static gboolean
+thumbnail_metadata_is_valid (const char *uri,
+                             const char *thumb_uri,
+                             const char *thumb_mtime_str,
+                             time_t      mtime)
+{
+  time_t thumb_mtime;
+
+  if (g_strcmp0 (uri, thumb_uri) != 0)
+    return FALSE;
+
+  if (!thumb_mtime_str)
+    return FALSE;
+
+  thumb_mtime = atol (thumb_mtime_str);
+  if (mtime != thumb_mtime)
+    return FALSE;
+
+  return TRUE;
+}
+
+static gsize
+thumbnail_strnlen (const char *str,
+                   gsize       max_len)
+{
+  const char *nul = memchr (str, '\0', max_len);
+
+  return nul != NULL ? (gsize) (nul - str) : max_len;
+}
+
+/* gdk-pixbuf exposes tEXt values as UTF-8, converting them from ISO-8859-1
+ * when needed.  Match that here so that URIs with non-ASCII characters keep
+ * working the same way as before. */
+static char *
+thumbnail_text_to_utf8 (const char *value,
+                        gsize       value_len)
+{
+  gsize i;
+
+  for (i = 0; i < value_len; i++)
+    {
+      if ((guchar) value[i] & 0x80)
+        return g_convert (value, value_len, "UTF-8", "ISO-8859-1",
+                          NULL, NULL, NULL);
+    }
+
+  return g_strndup (value, value_len);
+}
+
+static void
+thumbnail_parse_text_chunk (ThumbnailTextInfo *info,
+                            const guint8      *data,
+                            guint32            chunk_size)
+{
+  const char *key = (const char *) data;
+  const char *nul;
+  gsize key_len, value_len;
+
+  /* A tEXt chunk is a keyword, a NUL separator and the text. */
+  nul = memchr (data, '\0', chunk_size);
+  if (nul == NULL)
+    return;
+
+  key_len = (gsize) (nul - key);
+  value_len = thumbnail_strnlen (nul + 1, chunk_size - key_len - 1);
+
+  if (key_len == 10 && memcmp (key, "Thumb::URI", 10) == 0)
+    {
+      info->uri = nul + 1;
+      info->uri_len = value_len;
+      info->has_uri = TRUE;
+    }
+  else if (key_len == 12 && memcmp (key, "Thumb::MTime", 12) == 0)
+    {
+      info->mtime = nul + 1;
+      info->mtime_len = value_len;
+      info->has_mtime = TRUE;
+    }
+}
+
+static gboolean
+thumbnail_file_metadata_is_valid (const char *path,
+                                  const char *uri,
+                                  time_t      mtime)
+{
+  ThumbnailTextInfo info = { 0 };
+  const guint8 *contents;
+  const guint8 *p;
+  gsize size, remaining;
+  g_autoptr (GMappedFile) file = g_mapped_file_new (path, FALSE, NULL);
+  g_autofree char *thumb_uri = NULL;
+  g_autofree char *thumb_mtime = NULL;
+
+  if (file == NULL)
+    return FALSE;
+
+  contents = (const guint8 *) g_mapped_file_get_contents (file);
+  size = g_mapped_file_get_length (file);
+
+  if (size < 8 || memcmp (contents, "\x89PNG\r\n\x1a\n", 8) != 0)
+    return FALSE;
+
+  p = contents + 8;
+  remaining = size - 8;
+
+  /* We need at least 12 bytes to have a chunk: length, type and CRC. */
+  while (remaining >= 12)
+    {
+      guint32 chunk_size_be;
+      guint32 chunk_size;
+
+      memcpy (&chunk_size_be, p, 4);
+      chunk_size = GUINT32_FROM_BE (chunk_size_be);
+
+      p += 4;
+      remaining -= 4;
+
+      /* After the size, we need room for the type, data and CRC.  Check
+       * for overflow before adding to chunk_size. */
+      if (G_MAXUINT32 - chunk_size < 8 ||
+          remaining < (gsize) chunk_size + 8)
+        break;
+
+      if (memcmp (p, "tEXt", 4) == 0)
+        thumbnail_parse_text_chunk (&info, p + 4, chunk_size);
+      else if (info.has_uri && info.has_mtime)
+        /* Assume tEXt chunks are grouped together; this avoids scanning
+         * the image data of large thumbnails. */
+        break;
+
+      p += 4;                            /* chunk type */
+      p += chunk_size;                   /* chunk data */
+      p += 4;                            /* CRC */
+      remaining -= (gsize) chunk_size + 8;
+    }
+
+  if (!info.has_uri || !info.has_mtime)
+    return FALSE;
+
+  thumb_uri = thumbnail_text_to_utf8 (info.uri, info.uri_len);
+  if (thumb_uri == NULL)
+    return FALSE;
+
+  thumb_mtime = thumbnail_text_to_utf8 (info.mtime, info.mtime_len);
+  return thumbnail_metadata_is_valid (uri, thumb_uri, thumb_mtime, mtime);
+}
+
 static gboolean
 validate_thumbnail_path (const char                *path,
                          const char                *uri,
                          time_t                     mtime,
                          GnomeDesktopThumbnailSize  size)
 {
-  g_autoptr (GdkPixbuf) pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-
-  if (pixbuf == NULL ||
-      !gnome_desktop_thumbnail_is_valid (pixbuf, uri, mtime))
-    {
-      return FALSE;
-    }
-
-  return TRUE;
+  /* size is intentionally ignored */
+  return thumbnail_file_metadata_is_valid (path, uri, mtime);
 }
 
 static char *
